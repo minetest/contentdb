@@ -1,5 +1,5 @@
 from flask import Flask, url_for
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from app import app
 from datetime import datetime
 from sqlalchemy.orm import validates
@@ -22,6 +22,10 @@ class User(db.Model, UserMixin):
 	password = db.Column(db.String(255), nullable=False, server_default='')
 	reset_password_token = db.Column(db.String(100), nullable=False, server_default='')
 
+	# Account linking
+	github_username = db.Column(db.String(50), nullable=True, unique=True)
+	forums_username = db.Column(db.String(50), nullable=True, unique=True)
+
 	# User email information
 	email = db.Column(db.String(255), nullable=True, unique=True)
 	confirmed_at = db.Column(db.DateTime())
@@ -38,6 +42,7 @@ class User(db.Model, UserMixin):
 
 		self.username = username
 		self.confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
+		self.display_name = username
 
 	def isClaimed(self):
 		return self.password is not None and self.password != ""

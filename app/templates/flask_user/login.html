@@ -68,8 +68,15 @@ Sign in
 			<h2>New here?</h2>
 
 			{% if user_manager.enable_register and not user_manager.require_invitation %}
-				<a href="">{%trans%}Create an account{%endtrans%}</a>
+				<a href="{{ url_for('github_signin_page') }}">{%trans%}Create an account{%endtrans%}</a>
 			{% endif %}
+		</aside>
+
+
+		<aside class="box box_grey">
+			<h2>OAUTH</h2>
+
+			<a href="{{ url_for('github_signin_page') }}">GitHub</a>
 		</aside>
 	</div>
 </div>
