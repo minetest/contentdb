@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
+	<link rel="stylesheet" type="text/css" href="/static/style.css">
+</head>
+
+<body>
+	<nav>
+		<ul class="nav navbar-nav">
+			<li><a href="/">{{ config.USER_APP_NAME }}</a></li>
+			{% for item in current_menu.children recursive %}
+				<li{% if item.children %} class="dropdown"{% endif %}>
+					<a href="{{ item.url }}"
+							{% if item.children %}
+								class="dropdown-toggle"
+								data-toggle="dropdown"
+								role="button"
+								aria-expanded="false"
+							{% endif %}>
+						{{ item.text }}
+						{% if item.children %}
+							<span class="caret"></span>
+						{% endif %}
+					</a>
+					{% if item.children %}
+					<ul class="dropdown-menu" role="menu">
+						{{ loop(item.children) }}
+					</ul>
+					{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+		<ul class="nav navbar-nav navbar-right">
+			{% if current_user.is_authenticated %}
+				<li><a href="{{ url_for('user_profile_page') }}">{{ current_user.first_name or current_user.username }}</a></li>
+				<li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
+			{% else %}
+				<li><a href="{{ url_for('user.login') }}">Sign in</a></li>
+			{% endif %}
+		</ul>
+		<div style="clear:both;"></div>
+	</nav>
+
+
+	{% block flash_messages %}
+		{%- with messages = get_flashed_messages(with_categories=true) -%}
+			{% if messages %}
+				<ul id="alerts">
+					{% for category, message in messages %}
+						<li class="box box_grey alert alert-{{category}}">
+							<span class="icon_message"></span>
+
+							{{ message|safe }}
+
+							<div style="clear: both;"></div>
+						</li>
+					{% endfor %}
+				</ul>
+			{% endif %}
+		{%- endwith %}
+	{% endblock %}
+
+	{% block container %}
+	<main>
+		{% block content %}
+		{% endblock %}
+	</main>
+	{% endblock %}
+</html>

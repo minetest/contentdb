@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+Dashboard
+{% endblock %}
+
+{% block content %}
+	<div class="box box_grey">
+		<h2>{{ self.title() }}</h2>
+
+		{% if current_user.is_authenticated %}
+			<p>
+				Hello user!
+			</p>
+		{% else %}
+			<p>
+				Please login!
+			</p>
+		{% endif %}
+	</div>
+
+	<div class="2box">
+		<div class="box box_grey">
+			<h2>Top Mods</h2>
+		</div>
+		<div class="box box_grey">
+			<h2>Statistics</h2>
+			<ul>
+				<li>Total mods: 543</li>
+				<li>Missing mods: 1020</li>
+				<li>Downloads/day: 200</li>
+			</ul>
+		</div>
+	</div>
+{% endblock %}
