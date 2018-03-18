@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ user.username }}
+{% endblock %}
+
+{% block content %}
+
+<div class="box box_grey">
+	<h2>{{ user.username }}</h2>
+
+	<table>
+		<tr>
+			<td>Accounts:</td>
+			<td>
+				{% if user.forums_username %}
+					<a href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
+						Minetest Forum
+					</a>
+				{% elif user == current_user %}
+					<a href="">Link Forums Account</a>
+				{% endif %}
+				|
+				{% if user.github_username %}
+					<a href="https://github.com/{{ user.github_username }}">GitHub</a>
+				{% elif user == current_user %}
+					<a href="{{ url_for('github_signin_page') }}">Link Github</a>
+				{% endif %}
+
+				{% if user == current_user %}
+					&#x1f30e;
+				{% endif %}
+			</td>
+		</tr>
+		{% if user == current_user %}
+			<tr>
+				<td>Email:</td>
+				<td>
+					{{ user.email }} |
+					<a href="">{% if user.email %}change{% else %}add{% endif %}</a>
+					&#x1f512;
+				</td>
+			</tr>
+			<tr>
+				<td>Password:</td>
+				<td>
+					<a href="{{ url_for('user.change_password') }}">
+						{% if user.password %}Change password{% else %}Add password{% endif %}
+					</a> &#x1f512;
+				</td>
+			</tr>
+		{% endif %}
+	</table>
+</div>
+
+{% if form %}
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form class="box box_grey" action="" method="POST" class="form" role="form">
+		<h2>Edit Details</h2>
+
+		<div class="row">
+			<div class="col-sm-6 col-md-5 col-lg-4">
+				{{ form.hidden_tag() }}
+
+				{{ render_field(form.display_name, tabindex=240) }}
+
+				{{ render_submit_field(form.submit, tabindex=280) }}
+			</div>
+		</div>
+	</form>
+{% endif %}
+{% endblock %}

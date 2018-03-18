@@ -13,17 +13,11 @@ from flask_user.forms import RegisterForm
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators
 class MyRegisterForm(RegisterForm):
-	first_name = StringField('First name', validators=[
-		validators.DataRequired('First name is required')])
-	last_name = StringField('Last name', validators=[
-		validators.DataRequired('Last name is required')])
+	display_name = StringField("Diplay name")
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
-	first_name = StringField('First name', validators=[
-		validators.DataRequired('First name is required')])
-	last_name = StringField('Last name', validators=[
-		validators.DataRequired('Last name is required')])
+	display_name = StringField("Diplay name")
 	submit = SubmitField('Save')
 
 @app.route('/user/', methods=['GET', 'POST'])
@@ -42,7 +36,7 @@ def user_profile_page(username=None):
 
 	if user == current_user:
 		# Initialize form
-		form = UserProfileForm(request.form, current_user)
+		form = UserProfileForm(formdata=request.form, obj=current_user)
 
 		# Process valid POST
 		if request.method=='POST' and form.validate():
