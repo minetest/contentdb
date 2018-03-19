@@ -20,7 +20,11 @@
 				{% elif user == current_user %}
 					<a href="">Link Forums Account</a>
 				{% endif %}
-				|
+
+				{% if (user.forums_username and user.github_username) or user == current_user %}
+					|
+				{% endif %}
+
 				{% if user.github_username %}
 					<a href="https://github.com/{{ user.github_username }}">GitHub</a>
 				{% elif user == current_user %}

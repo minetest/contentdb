@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ package.title }}
+{% endblock %}
+
+{% block content %}
+	{{ package.title }}
+	{{ package.author.display_name }}
+	{{ package.name }}
+	{{ package.desc }}
+	<a href="{{ package.repo }}">VCS Repo</a>
+	<a href="{{ package.issueTracker }}">Report Issue</a>
+{% endblock %}

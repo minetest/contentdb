@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+	<ul>
+		{% for p in packages %}
+			<li><a href="{{ url_for('package_page', type='mod', author=p.author.username, name=p.name) }}">
+				{{ p.title }} by {{ p.author.display_name }}
+			</a></li>
+		{% else %}
+			<li><i>No packages available</i></ul>
+		{% endfor %}
+	</ul>
+{% endblock %}

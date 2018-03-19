@@ -14,7 +14,7 @@ cache = SimpleCache()
 def send_static(path):
 	return send_from_directory('static', path)
 
-import users, githublogin
+import users, githublogin, mods
 
 @app.route('/')
 @menu.register_menu(app, '.', 'Home')
