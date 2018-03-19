@@ -35,7 +35,7 @@ class User(db.Model, UserMixin):
 	display_name = db.Column(db.String(100), nullable=False, server_default='')
 
 	# Content
-	mods = db.relationship('Mod', backref='author', lazy='dynamic')
+	packages = db.relationship('Package', backref='author', lazy='dynamic')
 
 	def __init__(self, username):
 		import datetime
@@ -57,7 +57,7 @@ class UserRoles(db.Model):
 	user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
 	role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 
-class Mod(db.Model):
+class Package(db.Model):
 	id      = db.Column(db.Integer, primary_key=True)
 
 	# Basic details

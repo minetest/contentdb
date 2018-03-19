@@ -1,6 +1,6 @@
-import os, datetime
+import os, sys, datetime
 
-delete_db = False
+delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"
 
 if delete_db and os.path.isfile("db.sqlite"):
 	os.remove("db.sqlite")
@@ -16,7 +16,7 @@ if not os.path.isfile("db.sqlite"):
 	ruben.github_username = "rubenwardy"
 	db.session.add(ruben)
 
-	mod1 = Mod()
+	mod1 = Package()
 	mod1.name = "awards"
 	mod1.title = "Awards"
 	mod1.author = ruben
