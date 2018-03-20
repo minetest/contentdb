@@ -108,7 +108,8 @@ class Package(db.Model):
 	forums       = db.Column(db.String(200), nullable=False)
 
 	# Releases
-	releases = db.relationship('PackageRelease', backref='package', lazy='dynamic')
+	releases = db.relationship('PackageRelease', backref='package',
+			lazy='dynamic', order_by=db.desc("package_release_releaseDate"))
 
 	def getDetailsURL(self):
 		return url_for("package_page",
@@ -160,7 +161,7 @@ class PackageRelease(db.Model):
 
 	package_id   = db.Column(db.Integer, db.ForeignKey('package.id'))
 	title        = db.Column(db.String(100), nullable=False)
-	releaseDate  = db.Column(db.Date,        nullable=False)
+	releaseDate  = db.Column(db.DateTime,        nullable=False)
 	url          = db.Column(db.String(100), nullable=False)
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 
