@@ -20,20 +20,18 @@ class UserProfileForm(FlaskForm):
 	display_name = StringField("Display name")
 	submit = SubmitField('Save')
 
-@app.route('/user/', methods=['GET', 'POST'])
-@app.route('/user/<username>/', methods=['GET'])
-def user_profile_page(username=None):
-	user = None
-	form = None
-	if username is None:
-		if not current_user.is_authenticated:
-			return current_app.login_manager.unauthorized()
-		user = current_user
-	else:
-		user = User.query.filter_by(username=username).first()
-		if not user:
-			abort(404)
+@app.route('/user/', methods=['GET'])
+@login_required
+def self_user_profile_page():
+	return redirect(url_for("user_profile_page", username=current_user.username))
 
+@app.route('/user/<username>/', methods=['GET', 'POST'])
+def user_profile_page(username):
+	user = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	form = None
 	if user == current_user:
 		# Initialize form
 		form = UserProfileForm(formdata=request.form, obj=current_user)
