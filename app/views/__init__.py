@@ -7,7 +7,12 @@ import flask_menu as menu
 from flask.ext import markdown
 from sqlalchemy import func
 from werkzeug.contrib.cache import SimpleCache
+from urllib.parse import urlparse
 cache = SimpleCache()
+
+@app.template_filter()
+def domain(url):
+    return urlparse(url).netloc
 
 # TODO: remove on production!
 @app.route('/static/<path:path>')

@@ -80,7 +80,6 @@ a:hover {
 	text-align: center;
 	color: #ddd;
 	text-decoration: none;
-	margin: 5px 0 !important;
 }
 
 .buttonset li a:hover {
@@ -94,6 +93,24 @@ a:hover {
 
 .btn_green:hover {
 	background: #474 !important;
+}
+
+.linedbuttonset a {
+	border: 1px solid #eee;
+	border-radius: 3px;
+	padding: 4px 10px;
+	margin: 0;
+	display: block;
+}
+
+.linedbuttonset {
+	display: block;
+	margin: 0;
+}
+
+.linedbuttonset li {
+	display: inline-block;
+	margin: 10px 10px 0 0;
 }
 
 /* Alerts */
@@ -196,6 +213,12 @@ footer a {
 	color: #666;
 }
 
+.asideright {
+	float: right;
+	margin: 0 0 0 15px;
+	max-width: 300px;
+}
+
 
 /* Mod */
 
@@ -242,4 +265,8 @@ footer a {
 
 .sidebar_container .right > *:first-child, .sidebar_container .left > *:first-child {
 	margin-top: 0;
+}
+
+.package-short-large {
+	font-size: 120%;
 }

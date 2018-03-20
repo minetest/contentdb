@@ -1,14 +1,33 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ package.title }}
+	{{ package.title }}
 {% endblock %}
 
 {% block content %}
-	{{ package.title }}
-	{{ package.author.display_name }}
-	{{ package.name }}
-	{{ package.desc }}
-	<a href="{{ package.repo }}">VCS Repo</a>
-	<a href="{{ package.issueTracker }}">Report Issue</a>
+	<h1>{{ package.title }} by {{ package.author.display_name }}</h1>
+
+	<aside class="asideright box box_grey">
+		<table>
+			<tr>
+				<td>Name</td>
+				<td>{{ package.name }}</td>
+			</tr>
+			<tr>
+				<td>Type</td>
+				<td>{{ package.type.getTitle() }}</td>
+			</tr>
+		</table>
+
+		<ul class="buttonset linedbuttonset">
+			{% if package.repo %}<li><a href="{{ package.repo }}">View Source</a></li>{% endif %}
+			{% if package.forums %}<li><a href="{{ package.forums }}">Forums</a></li>{% endif %}
+			{% if package.issueTracker %}<li><a href="{{ package.issueTracker }}">Issue Tracker</a></li>{% endif %}
+			{% if package.website %}<li><a href="{{ package.website }}">Website</a></li>{% endif %}
+		</ul>
+	</aside>
+
+	<p class="package-short-large">{{ package.shortDesc }}</p>
+
+	{{ package.desc | markdown }}
 {% endblock %}

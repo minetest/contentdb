@@ -89,6 +89,7 @@ class Package(db.Model):
 	author_id    = db.Column(db.Integer, db.ForeignKey('user.id'))
 	name         = db.Column(db.String(100), nullable=False)
 	title        = db.Column(db.String(100), nullable=False)
+	shortDesc    = db.Column(db.Text, nullable=True)
 	desc         = db.Column(db.Text, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
 
