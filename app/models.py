@@ -58,6 +58,12 @@ class UserRoles(db.Model):
 	user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
 	role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 
+class Permission(enum.Enum):
+	EDIT_PACKAGE   = "EDIT_PACKAGE"
+	APPROVE        = "APPROVE"
+	DELETE_PACKAGE = "DELETE_PACKAGE"
+	CHANGE_AUTHOR  = "CHANGE_AUTHOR"
+
 class PackageType(enum.Enum):
 	MOD  = "Mod"
 	GAME = "Game"
@@ -82,6 +88,23 @@ class PackageType(enum.Enum):
 		else:
 			return None
 
+	@classmethod
+	def choices(cls):
+		return [(choice, choice.value) for choice in cls]
+
+	@classmethod
+	def coerce(cls, item):
+		"""item will be both type(enum) AND type(unicode).
+		"""
+		if item == 'PackageType.MOD' or item == PackageType.MOD:
+			return PackageType.MOD
+		elif item == 'PackageType.GAME' or item == PackageType.GAME:
+			return PackageType.GAME
+		elif item == 'PackageType.TXP' or item == PackageType.TXP:
+			return PackageType.TXP
+		else:
+			print("Can't coerce", item, type(item))
+
 class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 
@@ -98,6 +121,19 @@ class Package(db.Model):
 	website      = db.Column(db.String(200), nullable=True)
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.String(200), nullable=False)
+
+	def getDetailsURL(self):
+		return url_for("package_page",
+				type=self.type.getTitle().lower(),
+				author=self.author.username, name=self.name)
+
+	def getEditURL(self):
+		return url_for("edit_package_page",
+				type=self.type.getTitle().lower(),
+				author=self.author.username, name=self.name)
+
+	def checkPerm(self, user, perm):
+		return user == self.author
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model

@@ -20,6 +20,7 @@
 		</table>
 
 		<ul class="buttonset linedbuttonset">
+			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}<li><a href="{{ package.getEditURL() }}">Edit</a></li>{% endif %}
 			{% if package.repo %}<li><a href="{{ package.repo }}">View Source</a></li>{% endif %}
 			{% if package.forums %}<li><a href="{{ package.forums }}">Forums</a></li>{% endif %}
 			{% if package.issueTracker %}<li><a href="{{ package.issueTracker }}">Issue Tracker</a></li>{% endif %}

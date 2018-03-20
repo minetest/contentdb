@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ package.title }}
+{% endblock %}
+
+{% block content %}
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.name) }}
+		{{ render_field(form.title) }}
+		{{ render_field(form.shortDesc) }}
+		{{ render_field(form.desc) }}
+		{{ render_field(form.type) }}
+		{{ render_field(form.repo) }}
+		{{ render_field(form.website) }}
+		{{ render_field(form.issueTracker) }}
+		{{ render_field(form.forums) }}
+		{{ render_submit_field(form.submit) }}
+		<input type="submit" value="Go">
+	</form>
+{% endblock %}
