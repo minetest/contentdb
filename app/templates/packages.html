@@ -7,7 +7,7 @@
 {% block content %}
 	<ul>
 		{% for p in packages %}
-			<li><a href="{{ url_for('package_page', type=p.type.getTitle()|lower, author=p.author.username, name=p.name) }}">
+			<li><a href="{{ p.getDetailsURL() }}">
 				{{ p.title }} by {{ p.author.display_name }}
 			</a></li>
 		{% else %}

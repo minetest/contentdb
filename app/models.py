@@ -15,6 +15,15 @@ def title_to_url(title):
 def url_to_title(url):
 	return url.replace("_", " ")
 
+class UserRank(enum.Enum):
+	NEW_MEMBER = 0
+	MEMBER     = 1
+	EDITOR     = 2
+	ADMIN      = 3
+
+	def atLeast(self, min):
+		return self.value >= min.value
+
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 
@@ -22,6 +31,8 @@ class User(db.Model, UserMixin):
 	username = db.Column(db.String(50), nullable=False, unique=True)
 	password = db.Column(db.String(255), nullable=False, server_default='')
 	reset_password_token = db.Column(db.String(100), nullable=False, server_default='')
+
+	rank = db.Column(db.Enum(UserRank))
 
 	# Account linking
 	github_username = db.Column(db.String(50), nullable=True, unique=True)
@@ -44,19 +55,10 @@ class User(db.Model, UserMixin):
 		self.username = username
 		self.confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
+		self.rank = UserRank.MEMBER
 
 	def isClaimed(self):
 		return self.password is not None and self.password != ""
-
-class Role(db.Model):
-	id          = db.Column(db.Integer(), primary_key=True)
-	name        = db.Column(db.String(50), unique=True)
-	description = db.Column(db.String(255))
-
-class UserRoles(db.Model):
-	id      = db.Column(db.Integer(), primary_key=True)
-	user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
-	role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 
 class Permission(enum.Enum):
 	EDIT_PACKAGE   = "EDIT_PACKAGE"
@@ -68,14 +70,6 @@ class PackageType(enum.Enum):
 	MOD  = "Mod"
 	GAME = "Game"
 	TXP  = "Texture Pack"
-
-	def getTitle(self):
-		if self == PackageType.MOD:
-			return "Mod"
-		elif self == PackageType.GAME:
-			return "Game"
-		else:
-			return "TXP"
 
 	@staticmethod
 	def fromName(name):
@@ -124,16 +118,25 @@ class Package(db.Model):
 
 	def getDetailsURL(self):
 		return url_for("package_page",
-				type=self.type.getTitle().lower(),
+				type=self.type.value.lower(),
 				author=self.author.username, name=self.name)
 
 	def getEditURL(self):
 		return url_for("edit_package_page",
-				type=self.type.getTitle().lower(),
+				type=self.type.value.lower(),
 				author=self.author.username, name=self.name)
 
 	def checkPerm(self, user, perm):
-		return user == self.author
+		if type(perm) == str:
+			perm = Permission[perm]
+
+		isOwner = user == self.author
+		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE:
+			return user.rank.atLeast(UserRank.MEMBER if isOwner else UserRank.EDITOR)
+		elif perm == Permission.DELETE_PACKAGE or perm == Permission.CHANGE_AUTHOR:
+			return user.rank.atLeast(UserRank.EDITOR)
+		else:
+			return False
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
