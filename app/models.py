@@ -9,11 +9,6 @@ import enum
 # Initialise database
 db = SQLAlchemy(app)
 
-def title_to_url(title):
-	return title.lower().replace(" ", "_")
-
-def url_to_title(url):
-	return url.replace("_", " ")
 
 class UserRank(enum.Enum):
 	NOT_JOINED = 0
@@ -28,6 +23,16 @@ class UserRank(enum.Enum):
 
 	def getTitle(self):
 		return self.name.replace("_", " ").title()
+
+
+class Permission(enum.Enum):
+	EDIT_PACKAGE    = "EDIT_PACKAGE"
+	APPROVE_CHANGES = "APPROVE_CHANGES"
+	DELETE_PACKAGE  = "DELETE_PACKAGE"
+	CHANGE_AUTHOR   = "CHANGE_AUTHOR"
+	APPROVE_RELEASE = "APPROVE_RELEASE"
+	APPROVE_NEW     = "APPROVE_NEW"
+
 
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
@@ -65,32 +70,16 @@ class User(db.Model, UserMixin):
 	def isClaimed(self):
 		return self.password is not None and self.password != ""
 
-class Permission(enum.Enum):
-	EDIT_PACKAGE    = "EDIT_PACKAGE"
-	APPROVE_CHANGES = "APPROVE_CHANGES"
-	DELETE_PACKAGE  = "DELETE_PACKAGE"
-	CHANGE_AUTHOR   = "CHANGE_AUTHOR"
-	APPROVE_RELEASE = "APPROVE_RELEASE"
-	APPROVE_NEW     = "APPROVE_NEW"
-
 class PackageType(enum.Enum):
 	MOD  = "Mod"
 	GAME = "Game"
 	TXP  = "Texture Pack"
 
 	def toName(self):
-		return self.value.lower().replace(" ", "")
+		return self.name.lower()
 
-	@staticmethod
-	def fromName(name):
-		if name == "mod":
-			return PackageType.MOD
-		elif name == "game":
-			return PackageType.GAME
-		elif name == "texturepack":
-			return PackageType.TXP
-		else:
-			return None
+	def __str__(self):
+		return self.name
 
 	@classmethod
 	def choices(cls):
@@ -98,16 +87,7 @@ class PackageType(enum.Enum):
 
 	@classmethod
 	def coerce(cls, item):
-		"""item will be both type(enum) AND type(unicode).
-		"""
-		if item == 'PackageType.MOD' or item == PackageType.MOD:
-			return PackageType.MOD
-		elif item == 'PackageType.GAME' or item == PackageType.GAME:
-			return PackageType.GAME
-		elif item == 'PackageType.TXP' or item == PackageType.TXP:
-			return PackageType.TXP
-		else:
-			print("Can't coerce", item, type(item))
+		return item if type(item) == PackageType else PackageType[item]
 
 class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

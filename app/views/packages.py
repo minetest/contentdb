@@ -36,7 +36,7 @@ def getPageByInfo(type, author, name):
 		abort(404)
 
 	package = Package.query.filter_by(name=name, author_id=user.id,
-			type=PackageType.fromName(type)).first()
+			type=PackageType[type.upper()]).first()
 	if package is None:
 		abort(404)
 
