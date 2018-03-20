@@ -24,7 +24,12 @@ def txp_page():
 
 @app.route("/<type>s/<author>/<name>/")
 def package_page(type, author, name):
-	package = Package.query.filter_by(name=name).first()
+	user = User.query.filter_by(username=author).first()
+	if user is None:
+		abort(404)
+
+	package = Package.query.filter_by(name=name, author_id=user.id,
+			type=PackageType.fromName(type)).first()
 	if package is None:
 		abort(404)
 

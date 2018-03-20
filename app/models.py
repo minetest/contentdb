@@ -71,6 +71,17 @@ class PackageType(enum.Enum):
 		else:
 			return "TXP"
 
+	@staticmethod
+	def fromName(name):
+		if name == "mod":
+			return PackageType.MOD
+		elif name == "game":
+			return PackageType.GAME
+		elif name == "texturepacks":
+			return PackageType.TXP
+		else:
+			return None
+
 class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 
