@@ -14,6 +14,14 @@
 				<td>{{ package.name }}</td>
 			</tr>
 			<tr>
+				<td>Author</td>
+				<td>
+					<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
+						{{ package.author.display_name }}
+					</a>
+				</td>
+			</tr>
+			<tr>
 				<td>Type</td>
 				<td>{{ package.type.value }}</td>
 			</tr>

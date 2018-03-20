@@ -14,6 +14,7 @@ if not os.path.isfile("db.sqlite"):
 
 	ruben = User("rubenwardy")
 	ruben.github_username = "rubenwardy"
+	ruben.rank = UserRank.MEMBER
 	db.session.add(ruben)
 
 	jeija = User("Jeija")

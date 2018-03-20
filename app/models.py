@@ -16,11 +16,12 @@ def url_to_title(url):
 	return url.replace("_", " ")
 
 class UserRank(enum.Enum):
-	NEW_MEMBER = 0
-	MEMBER     = 1
-	EDITOR     = 2
-	MODERATOR  = 3
-	ADMIN      = 4
+	NOT_JOINED = 0
+	NEW_MEMBER = 1
+	MEMBER     = 2
+	EDITOR     = 3
+	MODERATOR  = 4
+	ADMIN      = 5
 
 	def atLeast(self, min):
 		return self.value >= min.value
@@ -59,7 +60,7 @@ class User(db.Model, UserMixin):
 		self.username = username
 		self.confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
-		self.rank = UserRank.MEMBER
+		self.rank = UserRank.NOT_JOINED
 
 	def isClaimed(self):
 		return self.password is not None and self.password != ""
