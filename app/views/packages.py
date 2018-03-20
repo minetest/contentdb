@@ -4,23 +4,29 @@ from flask.ext import menu
 from app import app
 from app.models import *
 
+
+# TODO: the following could be made into one route, except I'm not sure how
+# to do the menu
+
 @app.route('/mods/')
-@menu.register_menu(app, '.mods', 'Mods')
+@menu.register_menu(app, '.mods', 'Mods', order=10)
 def mods_page():
 	packages = Package.query.filter_by(type=PackageType.MOD).all()
 	return render_template('packages.html', title="Mods", packages=packages)
 
 @app.route('/games/')
-@menu.register_menu(app, '.games', 'Games')
+@menu.register_menu(app, '.games', 'Games', order=11)
 def games_page():
 	packages = Package.query.filter_by(type=PackageType.GAME).all()
 	return render_template('packages.html', title="Games", packages=packages)
 
 @app.route('/texturepacks/')
-@menu.register_menu(app, '.txp', 'Texture Packs')
+@menu.register_menu(app, '.txp', 'Texture Packs', order=12)
 def txp_page():
 	packages = Package.query.filter_by(type=PackageType.TXP).all()
 	return render_template('packages.html', title="Texture Packs", packages=packages)
+
+
 
 @app.route("/<type>s/<author>/<name>/")
 def package_page(type, author, name):
