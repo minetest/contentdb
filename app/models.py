@@ -30,6 +30,7 @@ class Permission(enum.Enum):
 	APPROVE_CHANGES = "APPROVE_CHANGES"
 	DELETE_PACKAGE  = "DELETE_PACKAGE"
 	CHANGE_AUTHOR   = "CHANGE_AUTHOR"
+	MAKE_RELEASE    = "MAKE_RELEASE"
 	APPROVE_RELEASE = "APPROVE_RELEASE"
 	APPROVE_NEW     = "APPROVE_NEW"
 
@@ -106,6 +107,9 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.String(200), nullable=False)
 
+	# Releases
+	releases = db.relationship('PackageRelease', backref='package', lazy='dynamic')
+
 	def getDetailsURL(self):
 		return url_for("package_page",
 				type=self.type.toName(),
@@ -128,6 +132,9 @@ class Package(db.Model):
 		isOwner = user == self.author
 
 		# Members can edit their own packages, and editors can edit any packages
+		if perm == Permission.MAKE_RELEASE:
+			return isOwner or user.rank.atLeast(UserRank.EDITOR)
+
 		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES:
 			return user.rank.atLeast(UserRank.MEMBER if isOwner else UserRank.EDITOR)
 
@@ -142,6 +149,18 @@ class Package(db.Model):
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
+
+class PackageRelease(db.Model):
+	id           = db.Column(db.Integer, primary_key=True)
+
+	package_id   = db.Column(db.Integer, db.ForeignKey('package.id'))
+	title        = db.Column(db.String(100), nullable=False)
+	releaseDate  = db.Column(db.Date,        nullable=False)
+	url          = db.Column(db.String(100), nullable=False)
+	approved     = db.Column(db.Boolean, nullable=False, default=False)
+
+	def __init__(self):
+		self.releaseDate = datetime.now()
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model

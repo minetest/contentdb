@@ -14,7 +14,7 @@ if not os.path.isfile("db.sqlite"):
 
 	ruben = User("rubenwardy")
 	ruben.github_username = "rubenwardy"
-	ruben.rank = UserRank.MEMBER
+	ruben.rank = UserRank.EDITOR
 	db.session.add(ruben)
 
 	jeija = User("Jeija")
@@ -45,6 +45,12 @@ awards.register_achievement("award_mesefind",{
 })
 ```
 """
+
+	rel = PackageRelease()
+	rel.package = mod1
+	rel.title = "v1.0.0"
+	rel.url = "https://github.com/rubenwardy/awards/archive/master.zip"
+	db.session.add(rel)
 
 	mod2 = Package()
 	mod2.name = "mesecons"

@@ -43,4 +43,27 @@
 	<p class="package-short-large">{{ package.shortDesc }}</p>
 
 	{{ package.desc | markdown }}
+
+	<h3>Releases</h3>
+
+	<ul>
+		{% for rel in releases %}
+			<li>
+				{% if not rel.approved %}<i>{% endif %}
+
+				<a href="{{ rel.url }}">{{ rel.title }}</a>,
+				created {{ rel.releaseDate }}.
+				{% if not rel.approved %}
+					Waiting for approval.
+					{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
+						<a href="">Approve</a>
+					{% endif %}
+				{% endif %}
+
+				{% if not rel.approved %}</i>{% endif %}
+			</li>
+		{% else %}
+			<li>No releases available.</li>
+		{% endfor %}
+	</ul>
 {% endblock %}

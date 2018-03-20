@@ -42,11 +42,19 @@ def getPageByInfo(type, author, name):
 
 	return package
 
+def getReleases(package):
+	if package.checkPerm(current_user, Permission.MAKE_RELEASE):
+		return package.releases
+	else:
+		return [rel for rel in package.releases if rel.approved]
+
 
 @app.route("/<type>s/<author>/<name>/")
 def package_page(type, author, name):
 	package = getPageByInfo(type, author, name)
-	return render_template('package_details.html', package=package)
+	releases = getReleases(package)
+
+	return render_template('package_details.html', package=package, releases=releases)
 
 
 class PackageForm(FlaskForm):
