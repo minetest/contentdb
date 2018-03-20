@@ -19,7 +19,8 @@ class UserRank(enum.Enum):
 	NEW_MEMBER = 0
 	MEMBER     = 1
 	EDITOR     = 2
-	ADMIN      = 3
+	MODERATOR  = 3
+	ADMIN      = 4
 
 	def atLeast(self, min):
 		return self.value >= min.value
@@ -64,10 +65,12 @@ class User(db.Model, UserMixin):
 		return self.password is not None and self.password != ""
 
 class Permission(enum.Enum):
-	EDIT_PACKAGE   = "EDIT_PACKAGE"
-	APPROVE        = "APPROVE"
-	DELETE_PACKAGE = "DELETE_PACKAGE"
-	CHANGE_AUTHOR  = "CHANGE_AUTHOR"
+	EDIT_PACKAGE    = "EDIT_PACKAGE"
+	APPROVE_CHANGES = "APPROVE_CHANGES"
+	DELETE_PACKAGE  = "DELETE_PACKAGE"
+	CHANGE_AUTHOR   = "CHANGE_AUTHOR"
+	APPROVE_RELEASE = "APPROVE_RELEASE"
+	APPROVE_NEW     = "APPROVE_NEW"
 
 class PackageType(enum.Enum):
 	MOD  = "Mod"
@@ -133,14 +136,27 @@ class Package(db.Model):
 				author=self.author.username, name=self.name)
 
 	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return False
+
 		if type(perm) == str:
 			perm = Permission[perm]
 
 		isOwner = user == self.author
-		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE:
+
+		# Members can edit their own packages, and editors can edit any packages
+		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES:
 			return user.rank.atLeast(UserRank.MEMBER if isOwner else UserRank.EDITOR)
-		elif perm == Permission.DELETE_PACKAGE or perm == Permission.CHANGE_AUTHOR:
+
+		# Editors can change authors, approve new packages, and approve releases
+		elif perm == Permission.CHANGE_AUTHOR or perm == Permission.APPROVE_NEW \
+				or perm == Permission.APPROVE_RELEASE:
 			return user.rank.atLeast(UserRank.EDITOR)
+
+		# Moderators can delete packages
+		elif perm == Permission.DELETE_PACKAGE:
+			return user.rank.atLeast(UserRank.MODERATOR)
+
 		else:
 			return False
 
