@@ -120,6 +120,11 @@ class Package(db.Model):
 				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 
+	def getCreateReleaseURL(self):
+		return url_for("create_release_page",
+				type=self.type.toName(),
+				author=self.author.username, name=self.name)
+
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
 			return False

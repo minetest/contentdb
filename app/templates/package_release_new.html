@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Create a release | {{ package.title }}
+{% endblock %}
+
+{% block content %}
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.title) }}
+		{{ render_field(form.uploadOpt) }}
+		{{ render_field(form.vcsLabel) }}
+		{{ render_field(form.fileUpload) }}
+		{{ render_submit_field(form.submit) }}
+		<input type="submit" value="Go">
+	</form>
+{% endblock %}

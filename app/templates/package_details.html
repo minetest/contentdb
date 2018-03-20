@@ -37,6 +37,9 @@
 			{% elif current_user.is_authenticated %}
 				<li><a href="">Suggest Change</a></li>
 			{% endif %}
+			{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+				<li><a href="{{ package.getCreateReleaseURL() }}">Create Release</a></li>
+			{% endif %}
 		</ul>
 	</aside>
 

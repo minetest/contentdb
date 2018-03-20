@@ -85,3 +85,35 @@ def edit_package_page(type, author, name):
 		return redirect(package.getDetailsURL()) # redirect
 
 	return render_template('package_edit.html', package=package, form=form)
+
+
+class PackageReleaseForm(FlaskForm):
+	name         = StringField("Name")
+	title        = StringField("Title")
+	uploadOpt    = RadioField ("File", choices=[("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")])
+	vcsLabel     = StringField("VCS Commit or Branch", default="master")
+	fileUpload   = FileField("File Upload")
+	submit       = SubmitField('Save')
+
+@app.route("/<type>s/<author>/<name>/releases/new/", methods=['GET', 'POST'])
+@login_required
+def create_release_page(type, author, name):
+	package = getPageByInfo(type, author, name)
+	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+		return redirect(package.getDetailsURL())
+
+	# Initial form class from post data and default data
+	form = PackageReleaseForm(formdata=request.form)
+	if request.method == "POST" and form.validate():
+		if form["uploadOpt"].data == "vcs":
+			rel = PackageRelease()
+			rel.package = package
+			rel.title = form["title"].data
+			rel.url = form["vcsLabel"].data
+			# TODO: get URL to commit from branch name
+			db.session.commit()
+			return redirect(package.getDetailsURL()) # redirect
+		else:
+			raise Exception("Unimplemented option = file upload")
+
+	return render_template('package_release_new.html', package=package, form=form)
