@@ -11,4 +11,5 @@ menu.Menu(app=app)
 markdown.Markdown(app, extensions=['fenced_code'])
 github = GitHub(app)
 
-import models, views
+from . import models
+from .views import *

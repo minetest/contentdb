@@ -4,6 +4,7 @@ from app import app
 from datetime import datetime
 from sqlalchemy.orm import validates
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+import enum
 
 # Initialise database
 db = SQLAlchemy(app)
@@ -57,20 +58,34 @@ class UserRoles(db.Model):
 	user_id = db.Column(db.Integer(), db.ForeignKey('user.id', ondelete='CASCADE'))
 	role_id = db.Column(db.Integer(), db.ForeignKey('role.id', ondelete='CASCADE'))
 
+class PackageType(enum.Enum):
+	MOD  = "Mod"
+	GAME = "Game"
+	TXP  = "Texture Pack"
+
+	def getTitle(self):
+		if self == PackageType.MOD:
+			return "Mod"
+		elif self == PackageType.GAME:
+			return "Game"
+		else:
+			return "TXP"
+
 class Package(db.Model):
-	id      = db.Column(db.Integer, primary_key=True)
+	id           = db.Column(db.Integer, primary_key=True)
 
 	# Basic details
-	author_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-	name = db.Column(db.String(100), nullable=False)
-	title = db.Column(db.String(100), nullable=False)
-	desc = db.Column(db.Text, nullable=True)
+	author_id    = db.Column(db.Integer, db.ForeignKey('user.id'))
+	name         = db.Column(db.String(100), nullable=False)
+	title        = db.Column(db.String(100), nullable=False)
+	desc         = db.Column(db.Text, nullable=True)
+	type         = db.Column(db.Enum(PackageType))
 
 	# Downloads
-	repo = db.Column(db.String(200), nullable=True)
-	website = db.Column(db.String(200), nullable=True)
+	repo         = db.Column(db.String(200), nullable=True)
+	website      = db.Column(db.String(200), nullable=True)
 	issueTracker = db.Column(db.String(200), nullable=True)
-	forums = db.Column(db.String(200), nullable=False)
+	forums       = db.Column(db.String(200), nullable=False)
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model

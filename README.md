@@ -9,7 +9,7 @@ First create a Python virtual env:
 
 then use pip:
 
-	pip install -r requirements.txt
+	pip3 install -r requirements.txt
 
 ## Running
 
@@ -20,11 +20,11 @@ the current session:
 
 Reset the database like so:
 
-	python setup.py -d
+	python3 setup.py -d
 
 Then run the server:
 
-	python rundebug.py
+	python3 rundebug.py
 
 Then view in your web browser:
 

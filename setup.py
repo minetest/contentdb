@@ -19,6 +19,7 @@ if not os.path.isfile("db.sqlite"):
 	mod1 = Package()
 	mod1.name = "awards"
 	mod1.title = "Awards"
+	mod1.type = PackageType.MOD
 	mod1.author = ruben
 	mod1.description = "Adds achievements and an API to register new ones."
 	mod1.repo = "https://github.com/rubenwardy/awards"
