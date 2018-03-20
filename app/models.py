@@ -141,6 +141,8 @@ class Package(db.Model):
 
 		if type(perm) == str:
 			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to Package.checkPerm()")
 
 		isOwner = user == self.author
 
@@ -158,7 +160,7 @@ class Package(db.Model):
 			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:
-			return False
+			raise Exception("Permission {} is not related to packages".format(perm.name))
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
