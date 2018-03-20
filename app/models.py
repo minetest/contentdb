@@ -24,6 +24,9 @@ class UserRank(enum.Enum):
 	def atLeast(self, min):
 		return self.value >= min.value
 
+	def getTitle(self):
+		return self.name.replace("_", " ").title()
+
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 
@@ -71,13 +74,16 @@ class PackageType(enum.Enum):
 	GAME = "Game"
 	TXP  = "Texture Pack"
 
+	def toName(self):
+		return self.value.lower().replace(" ", "")
+
 	@staticmethod
 	def fromName(name):
 		if name == "mod":
 			return PackageType.MOD
 		elif name == "game":
 			return PackageType.GAME
-		elif name == "texturepacks":
+		elif name == "texturepack":
 			return PackageType.TXP
 		else:
 			return None
@@ -118,12 +124,12 @@ class Package(db.Model):
 
 	def getDetailsURL(self):
 		return url_for("package_page",
-				type=self.type.value.lower(),
+				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 
 	def getEditURL(self):
 		return url_for("edit_package_page",
-				type=self.type.value.lower(),
+				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 
 	def checkPerm(self, user, perm):
