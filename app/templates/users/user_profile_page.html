@@ -11,6 +11,12 @@
 
 	<table>
 		<tr>
+			<td>Rank:</td>
+			<td>
+				{{ user.rank.getTitle() }}
+			</td>
+		</tr>
+		<tr>
 			<td>Accounts:</td>
 			<td>
 				{% if user.forums_username %}

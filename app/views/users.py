@@ -13,11 +13,11 @@ from flask_user.forms import RegisterForm
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, validators
 class MyRegisterForm(RegisterForm):
-	display_name = StringField("Diplay name")
+	display_name = StringField("Display name")
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
-	display_name = StringField("Diplay name")
+	display_name = StringField("Display name")
 	submit = SubmitField('Save')
 
 @app.route('/user/', methods=['GET', 'POST'])
