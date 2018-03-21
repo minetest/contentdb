@@ -5,6 +5,17 @@
 {% endblock %}
 
 {% block content %}
+	{% if not package.approved %}
+		<div class="box box_grey alert alert-warning">
+			<span class="icon_message"></span>
+			This package needs to be approved before it can be found.
+			{% if package.checkPerm(current_user, "APPROVE_NEW") %}
+				<a href="{{ package.getApproveURL() }}">Approve</a>
+			{% endif %}
+			<div style="clear: both;"></div>
+		</div>
+	{% endif %}
+
 	<h1>{{ package.title }} by {{ package.author.display_name }}</h1>
 
 	<aside class="asideright box box_grey">

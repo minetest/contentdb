@@ -15,19 +15,19 @@ from wtforms.validators import *
 @app.route('/mods/')
 @menu.register_menu(app, '.mods', 'Mods', order=10)
 def mods_page():
-	packages = Package.query.filter_by(type=PackageType.MOD).all()
+	packages = Package.query.filter_by(type=PackageType.MOD, approved=True).all()
 	return render_template('packages.html', title="Mods", packages=packages)
 
 @app.route('/games/')
 @menu.register_menu(app, '.games', 'Games', order=11)
 def games_page():
-	packages = Package.query.filter_by(type=PackageType.GAME).all()
+	packages = Package.query.filter_by(type=PackageType.GAME, approved=True).all()
 	return render_template('packages.html', title="Games", packages=packages)
 
 @app.route('/texturepacks/')
 @menu.register_menu(app, '.txp', 'Texture Packs', order=12)
 def txp_page():
-	packages = Package.query.filter_by(type=PackageType.TXP).all()
+	packages = Package.query.filter_by(type=PackageType.TXP, approved=True).all()
 	return render_template('packages.html', title="Texture Packs", packages=packages)
 
 
@@ -92,6 +92,7 @@ def create_edit_package_page(type=None, author=None, name=None):
 		if not package:
 			package = Package()
 			package.author = current_user
+			# package.approved = package.checkPerm(current_user, Permission.APPROVE_NEW)
 
 		form.populate_obj(package) # copy to row
 		db.session.commit() # save
@@ -99,6 +100,23 @@ def create_edit_package_page(type=None, author=None, name=None):
 
 	return render_template('package_create_edit.html', package=package, form=form)
 
+@app.route("/<type>s/<author>/<name>/approve/")
+@login_required
+def approve_package_page(type=None, author=None, name=None):
+	package = getPageByInfo(type, author, name)
+
+	if not package.checkPerm(current_user, Permission.APPROVE_NEW):
+		flash("You don't have permission to do that.", "error")
+
+	elif package.approved:
+		flash("Package has already been approved", "error")
+
+	else:
+		package.approved = True
+		db.session.commit()
+
+
+	return redirect(package.getDetailsURL())
 
 class CreatePackageReleaseForm(FlaskForm):
 	name         = StringField("Name")

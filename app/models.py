@@ -35,6 +35,12 @@ class Permission(enum.Enum):
 	APPROVE_NEW        = "APPROVE_NEW"
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
 
+	def check(self, user):
+		if self == Permission.APPROVE_NEW:
+			return user.rank.atLeast(UserRank.EDITOR)
+		else:
+			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
+
 
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
@@ -102,6 +108,8 @@ class Package(db.Model):
 	desc         = db.Column(db.Text, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
 
+	approved     = db.Column(db.Boolean, nullable=False, default=False)
+
 	# Downloads
 	repo         = db.Column(db.String(200), nullable=True)
 	website      = db.Column(db.String(200), nullable=True)
@@ -119,6 +127,11 @@ class Package(db.Model):
 
 	def getEditURL(self):
 		return url_for("create_edit_package_page",
+				type=self.type.toName(),
+				author=self.author.username, name=self.name)
+
+	def getApproveURL(self):
+		return url_for("approve_package_page",
 				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 

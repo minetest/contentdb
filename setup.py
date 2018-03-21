@@ -22,6 +22,7 @@ if not os.path.isfile("db.sqlite"):
 	db.session.add(jeija)
 
 	mod1 = Package()
+	mod1.approved = True
 	mod1.name = "awards"
 	mod1.title = "Awards"
 	mod1.type = PackageType.MOD
@@ -53,6 +54,7 @@ awards.register_achievement("award_mesefind",{
 	db.session.add(rel)
 
 	mod2 = Package()
+	mod2.approved = True
 	mod2.name = "mesecons"
 	mod2.title = "Mesecons"
 	mod2.type = PackageType.MOD
@@ -149,6 +151,7 @@ No warranty is provided, express or implied, for any part of the project.
 
 
 	game1 = Package()
+	game1.approved = True
 	game1.name = "capturetheflag"
 	game1.title = "Capture The Flag"
 	game1.type = PackageType.GAME
