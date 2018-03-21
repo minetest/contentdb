@@ -63,6 +63,19 @@
 	</table>
 </div>
 
+<div class="box box_grey">
+	<h2>Packages</h2>
+	<ul>
+		{% for p in user.packages %}
+			<li><a href="{{ p.getDetailsURL() }}">
+				{{ p.title }} by {{ p.author.display_name }}
+			</a></li>
+		{% else %}
+			<li><i>No packages available</i></ul>
+		{% endfor %}
+	</ul>
+</div>
+
 {% if form %}
 	{% from "macros/forms.html" import render_field, render_submit_field %}
 	<form class="box box_grey" action="" method="POST" class="form" role="form">
