@@ -5,6 +5,11 @@
 {% endblock %}
 
 {% block content %}
+	<form method="get" action="">
+		<input type="text" name="q" value="{{ query or ''}}" />
+		<input type="submit" value="Search" />
+	</form>
+
 	<ul>
 		{% for p in packages %}
 			<li><a href="{{ p.getDetailsURL() }}">

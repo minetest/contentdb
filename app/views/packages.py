@@ -12,23 +12,29 @@ from wtforms.validators import *
 # TODO: the following could be made into one route, except I'm not sure how
 # to do the menu
 
+def doPackageList(type):
+	packagesQ = Package.query.filter_by(type=type, approved=True)
+
+	query = request.args.get("q")
+	if query is not None:
+		packagesQ = packagesQ.filter(Package.title.contains(query))
+
+	return render_template('packages.html', title=type.value + "s", packages=packagesQ.all(), query=query)
+
 @app.route('/mods/')
 @menu.register_menu(app, '.mods', 'Mods', order=10)
 def mods_page():
-	packages = Package.query.filter_by(type=PackageType.MOD, approved=True).all()
-	return render_template('packages.html', title="Mods", packages=packages)
+	return doPackageList(PackageType.MOD)
 
 @app.route('/games/')
 @menu.register_menu(app, '.games', 'Games', order=11)
 def games_page():
-	packages = Package.query.filter_by(type=PackageType.GAME, approved=True).all()
-	return render_template('packages.html', title="Games", packages=packages)
+	return doPackageList(PackageType.GAME)
 
 @app.route('/texturepacks/')
 @menu.register_menu(app, '.txp', 'Texture Packs', order=12)
 def txp_page():
-	packages = Package.query.filter_by(type=PackageType.TXP, approved=True).all()
-	return render_template('packages.html', title="Texture Packs", packages=packages)
+	return doPackageList(PackageType.TXP)
 
 def canSeeWorkQueue():
 	return Permission.APPROVE_NEW.check(current_user) or \
