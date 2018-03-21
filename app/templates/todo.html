@@ -12,7 +12,7 @@
 				{{ p.title }} by {{ p.author.display_name }}
 			</a></li>
 		{% else %}
-			<li><i>No packages available</i></ul>
+			<li><i>No packages need reviewing.</i></ul>
 		{% endfor %}
 	</ul>
 
@@ -27,7 +27,7 @@
 				</a>
 			</li>
 		{% else %}
-			<li><i>No packages available</i></ul>
+			<li><i>No releases need reviewing.</i></ul>
 		{% endfor %}
 	</ul>
 {% endblock %}
