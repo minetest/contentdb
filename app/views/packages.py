@@ -50,7 +50,7 @@ def canSeeWorkQueue():
 		Permission.APPROVE_RELEASE.check(current_user) or \
 			Permission.APPROVE_CHANGES.check(current_user)
 
-@menu.register_menu(app, '.todo', "Work Queue", order=20, visible_when=lambda: canSeeWorkQueue)
+@menu.register_menu(app, '.todo', "Work Queue", order=20, visible_when=canSeeWorkQueue)
 @app.route("/todo/")
 @login_required
 def todo_page():
