@@ -36,6 +36,9 @@ class Permission(enum.Enum):
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
 
 	def check(self, user):
+		if not user.is_authenticated:
+			return False
+
 		if self == Permission.APPROVE_NEW:
 			return user.rank.atLeast(UserRank.EDITOR)
 		else:

@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ title }}
+{% endblock %}
+
+{% block content %}
+	<h2>Packages Awaiting Approval</h2>
+	<ul>
+		{% for p in approve_new %}
+			<li><a href="{{ p.getDetailsURL() }}">
+				{{ p.title }} by {{ p.author.display_name }}
+			</a></li>
+		{% else %}
+			<li><i>No packages available</i></ul>
+		{% endfor %}
+	</ul>
+
+	<h2>Releases Awaiting Approval</h2>
+	<ul>
+		{% for r in releases %}
+			<li>
+				<a href="{{ r.getEditURL() }}">{{ r.title }}</a>
+				on
+				<a href="{{ r.package.getDetailsURL() }}">
+					{{ r.package.title }} by {{ r.package.author.display_name }}
+				</a>
+			</li>
+		{% else %}
+			<li><i>No packages available</i></ul>
+		{% endfor %}
+	</ul>
+{% endblock %}

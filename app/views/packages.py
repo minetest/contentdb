@@ -30,6 +30,17 @@ def txp_page():
 	packages = Package.query.filter_by(type=PackageType.TXP, approved=True).all()
 	return render_template('packages.html', title="Texture Packs", packages=packages)
 
+def canSeeWorkQueue():
+	return Permission.APPROVE_NEW.check(current_user)
+
+@menu.register_menu(app, '.todo', "Work Queue", order=20, visible_when=lambda: canSeeWorkQueue)
+@app.route("/todo/")
+@login_required
+def todo_page():
+	packages = Package.query.filter_by(approved=False).all()
+	releases = PackageRelease.query.filter_by(approved=False).all()
+	return render_template('todo.html', title="Reports and Work Queue", approve_new=packages, releases=releases)
+
 
 def getPageByInfo(type, author, name):
 	user = User.query.filter_by(username=author).first()
@@ -70,7 +81,7 @@ class PackageForm(FlaskForm):
 	forums       = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
 	submit       = SubmitField('Save')
 
-@menu.register_menu(app, '.new', 'Create', order=20)
+@menu.register_menu(app, '.new', 'Create', order=21, visible_when=lambda: current_user.is_authenticated)
 @app.route("/new/", methods=['GET', 'POST'])
 @app.route("/<type>s/<author>/<name>/edit/", methods=['GET', 'POST'])
 @login_required
