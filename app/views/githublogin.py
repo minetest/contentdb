@@ -9,7 +9,7 @@ from app.models import *
 
 @app.route("/user/github/start/")
 def github_signin_page():
-	return github.authorize("public_repo,repo")
+	return github.authorize("")
 
 
 def _do_login_user(user, remember_me=False):
