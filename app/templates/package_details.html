@@ -29,7 +29,7 @@
 
 		<ul class="buttonset linedbuttonset">
 			{% if package.repo %}<li><a href="{{ package.repo }}">View Source</a></li>{% endif %}
-			{% if package.forums %}<li><a href="{{ package.forums }}">Forums</a></li>{% endif %}
+			{% if package.forums %}<li><a href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a></li>{% endif %}
 			{% if package.issueTracker %}<li><a href="{{ package.issueTracker }}">Issue Tracker</a></li>{% endif %}
 			{% if package.website %}<li><a href="{{ package.website }}">Website</a></li>{% endif %}
 			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}

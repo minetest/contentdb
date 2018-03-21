@@ -98,7 +98,7 @@ class Package(db.Model):
 	author_id    = db.Column(db.Integer, db.ForeignKey('user.id'))
 	name         = db.Column(db.String(100), nullable=False)
 	title        = db.Column(db.String(100), nullable=False)
-	shortDesc    = db.Column(db.Text, nullable=True)
+	shortDesc    = db.Column(db.String(200), nullable=False)
 	desc         = db.Column(db.Text, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
 
@@ -106,7 +106,7 @@ class Package(db.Model):
 	repo         = db.Column(db.String(200), nullable=True)
 	website      = db.Column(db.String(200), nullable=True)
 	issueTracker = db.Column(db.String(200), nullable=True)
-	forums       = db.Column(db.String(200), nullable=False)
+	forums       = db.Column(db.Integer,     nullable=False)
 
 	# Releases
 	releases = db.relationship('PackageRelease', backref='package',

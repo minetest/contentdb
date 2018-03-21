@@ -6,6 +6,7 @@ from app.models import *
 
 from flask_wtf import FlaskForm
 from wtforms import *
+from wtforms.validators import *
 
 
 # TODO: the following could be made into one route, except I'm not sure how
@@ -58,15 +59,15 @@ def package_page(type, author, name):
 
 
 class PackageForm(FlaskForm):
-	name         = StringField("Name")
-	title        = StringField("Title")
-	shortDesc    = StringField("Short Description")
-	desc         = StringField("Long Description")
-	type         = SelectField("Type", choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
-	repo         = StringField("Repo URL")
-	website      = StringField("Website URL")
-	issueTracker = StringField("Issue Tracker URL")
-	forums       = StringField("Forum Topic ID")
+	name         = StringField("Name", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	title        = StringField("Title", [InputRequired(), Length(3, 50)])
+	shortDesc    = StringField("Short Description", [InputRequired(), Length(1,200)])
+	desc         = TextAreaField("Long Description", [Optional(), Length(0,10000)])
+	type         = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
+	repo         = StringField("Repo URL", [Optional(), URL()])
+	website      = StringField("Website URL", [Optional(), URL()])
+	issueTracker = StringField("Issue Tracker URL", [Optional(), URL()])
+	forums       = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
 	submit       = SubmitField('Save')
 
 @menu.register_menu(app, '.new', 'Create', order=20)
@@ -110,7 +111,7 @@ class CreatePackageReleaseForm(FlaskForm):
 class EditPackageReleaseForm(FlaskForm):
 	name         = StringField("Name")
 	title        = StringField("Title")
-	url          = StringField("URL")
+	url          = StringField("URL", [URL])
 	approved     = BooleanField("Is Approved")
 	submit       = SubmitField('Save')
 

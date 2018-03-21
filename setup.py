@@ -28,7 +28,7 @@ if not os.path.isfile("db.sqlite"):
 	mod1.author = ruben
 	mod1.repo = "https://github.com/rubenwardy/awards"
 	mod1.issueTracker = "https://github.com/rubenwardy/awards/issues"
-	mod1.forums = "https://forum.minetest.net/viewtopic.php?t=4870"
+	mod1.forums = 4870
 	mod1.shortDesc = "Adds achievements and an API to register new ones."
 	mod1.desc = """
 Majority of awards are back ported from Calinou's old fork in Carbone, under same license.
@@ -59,7 +59,7 @@ awards.register_achievement("award_mesefind",{
 	mod2.author = jeija
 	mod2.repo = "https://github.com/minetest-mods/mesecons/"
 	mod2.issueTracker = "https://github.com/minetest-mods/mesecons/issues"
-	mod2.forums = "https://forum.minetest.net/viewtopic.php?t=628"
+	mod2.forums = 628
 	mod2.shortDesc = "Mesecons adds everything digital, from all kinds of sensors, switches, solar panels, detectors, pistons, lamps, sound blocks to advanced digital circuitry like logic gates and programmable blocks."
 	mod2.desc = """
     ########################################################################
@@ -155,7 +155,7 @@ No warranty is provided, express or implied, for any part of the project.
 	game1.author = ruben
 	game1.repo = "https://github.com/rubenwardy/capturetheflag"
 	game1.issueTracker = "https://github.com/rubenwardy/capturetheflag/issues"
-	game1.forums = "https://forum.minetest.net/viewtopic.php?t=12835"
+	game1.forums = 12835
 	game1.shortDesc = "Two teams battle to snatch and return the enemy's flag, before the enemy takes their own!"
 	game1.desc = """
 As seen on the Capture the Flag server (minetest.rubenwardy.com:30000)
