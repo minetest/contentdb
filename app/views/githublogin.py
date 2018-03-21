@@ -7,7 +7,7 @@ from app import app, github
 from app.models import *
 
 
-@app.route('/user/github/start/')
+@app.route("/user/github/start/")
 def github_signin_page():
 	return github.authorize("public_repo,repo")
 
@@ -28,7 +28,7 @@ def _do_login_user(user, remember_me=False):
 
 	# Check if user account has been disabled
 	if not _call_or_get(user.is_active):
-		flash('Your account has not been enabled.', 'error')
+		flash("Your account has not been enabled.", "error")
 		return False
 
 	# Check if user has a confirmed email address
@@ -36,15 +36,15 @@ def _do_login_user(user, remember_me=False):
 	if user_manager.enable_email and user_manager.enable_confirm_email \
 			and not current_app.user_manager.enable_login_without_confirm_email \
 			and not user.has_confirmed_email():
-		url = url_for('user.resend_confirm_email')
-		flash("Your email address has not yet been confirmed", 'error')
+		url = url_for("user.resend_confirm_email")
+		flash("Your email address has not yet been confirmed", "error")
 		return False
 
 	# Use Flask-Login to sign in user
 	login_user(user, remember=remember_me)
 	signals.user_logged_in.send(current_app._get_current_object(), user=user)
 
-	flash('You have signed in successfully.', 'success')
+	flash("You have signed in successfully.", "success")
 
 	return True
 
@@ -59,10 +59,10 @@ def _login_user(user):
 
 
 
-@app.route('/user/github/callback/')
+@app.route("/user/github/callback/")
 @github.authorized_handler
 def github_authorized(oauth_token):
-	next_url = request.args.get('next')
+	next_url = request.args.get("next")
 	if oauth_token is None:
 		flash("Authorization failed [err=gh-oauth-login-failed]", "danger")
 		return redirect(url_for("user.login"))

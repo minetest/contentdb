@@ -24,24 +24,24 @@ def doPackageList(type):
 	if search is not None:
 		query = query.filter(Package.title.contains(search))
 
-	return render_template('packages.html', title=title, packages=query.all(), query=search)
+	return render_template("packages.html", title=title, packages=query.all(), query=search)
 
-@app.route('/packages/')
+@app.route("/packages/")
 def packages_page():
 	return doPackageList(None)
 
-@app.route('/mods/')
-@menu.register_menu(app, '.mods', 'Mods', order=11)
+@app.route("/mods/")
+@menu.register_menu(app, ".mods", "Mods", order=11)
 def mods_page():
 	return doPackageList(PackageType.MOD)
 
-@app.route('/games/')
-@menu.register_menu(app, '.games', 'Games', order=12)
+@app.route("/games/")
+@menu.register_menu(app, ".games", "Games", order=12)
 def games_page():
 	return doPackageList(PackageType.GAME)
 
-@app.route('/texturepacks/')
-@menu.register_menu(app, '.txp', 'Texture Packs', order=13)
+@app.route("/texturepacks/")
+@menu.register_menu(app, ".txp", "Texture Packs", order=13)
 def txp_page():
 	return doPackageList(PackageType.TXP)
 
@@ -50,7 +50,7 @@ def canSeeWorkQueue():
 		Permission.APPROVE_RELEASE.check(current_user) or \
 			Permission.APPROVE_CHANGES.check(current_user)
 
-@menu.register_menu(app, '.todo', "Work Queue", order=20, visible_when=canSeeWorkQueue)
+@menu.register_menu(app, ".todo", "Work Queue", order=20, visible_when=canSeeWorkQueue)
 @app.route("/todo/")
 @login_required
 def todo_page():
@@ -65,7 +65,7 @@ def todo_page():
 	if canApproveRel:
 		releases = PackageRelease.query.filter_by(approved=False).all()
 
-	return render_template('todo.html', title="Reports and Work Queue",
+	return render_template("todo.html", title="Reports and Work Queue",
 		approve_new=packages, releases=releases,
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel)
 
@@ -94,7 +94,7 @@ def package_page(type, author, name):
 	package = getPageByInfo(type, author, name)
 	releases = getReleases(package)
 
-	return render_template('package_details.html', package=package, releases=releases)
+	return render_template("package_details.html", package=package, releases=releases)
 
 
 class PackageForm(FlaskForm):
@@ -107,11 +107,11 @@ class PackageForm(FlaskForm):
 	website      = StringField("Website URL", [Optional(), URL()])
 	issueTracker = StringField("Issue Tracker URL", [Optional(), URL()])
 	forums       = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
-	submit       = SubmitField('Save')
+	submit       = SubmitField("Save")
 
-@menu.register_menu(app, '.new', 'Create', order=21, visible_when=lambda: current_user.is_authenticated)
-@app.route("/new/", methods=['GET', 'POST'])
-@app.route("/<type>s/<author>/<name>/edit/", methods=['GET', 'POST'])
+@menu.register_menu(app, ".new", "Create", order=21, visible_when=lambda: current_user.is_authenticated)
+@app.route("/new/", methods=["GET", "POST"])
+@app.route("/<type>s/<author>/<name>/edit/", methods=["GET", "POST"])
 @login_required
 def create_edit_package_page(type=None, author=None, name=None):
 	package = None
@@ -137,7 +137,7 @@ def create_edit_package_page(type=None, author=None, name=None):
 		db.session.commit() # save
 		return redirect(package.getDetailsURL()) # redirect
 
-	return render_template('package_create_edit.html', package=package, form=form)
+	return render_template("package_create_edit.html", package=package, form=form)
 
 @app.route("/<type>s/<author>/<name>/approve/")
 @login_required
@@ -163,16 +163,16 @@ class CreatePackageReleaseForm(FlaskForm):
 	uploadOpt    = RadioField ("File", choices=[("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")])
 	vcsLabel     = StringField("VCS Commit or Branch", default="master")
 	fileUpload   = FileField("File Upload")
-	submit       = SubmitField('Save')
+	submit       = SubmitField("Save")
 
 class EditPackageReleaseForm(FlaskForm):
 	name         = StringField("Name")
 	title        = StringField("Title")
 	url          = StringField("URL", [URL])
 	approved     = BooleanField("Is Approved")
-	submit       = SubmitField('Save')
+	submit       = SubmitField("Save")
 
-@app.route("/<type>s/<author>/<name>/releases/new/", methods=['GET', 'POST'])
+@app.route("/<type>s/<author>/<name>/releases/new/", methods=["GET", "POST"])
 @login_required
 def create_release_page(type, author, name):
 	package = getPageByInfo(type, author, name)
@@ -193,9 +193,9 @@ def create_release_page(type, author, name):
 		else:
 			raise Exception("Unimplemented option = file upload")
 
-	return render_template('package_release_new.html', package=package, form=form)
+	return render_template("package_release_new.html", package=package, form=form)
 
-@app.route("/<type>s/<author>/<name>/releases/<id>/", methods=['GET', 'POST'])
+@app.route("/<type>s/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
 @login_required
 def edit_release_page(type, author, name, id):
 	user = User.query.filter_by(username=author).first()
@@ -233,4 +233,4 @@ def edit_release_page(type, author, name, id):
 		db.session.commit()
 		return redirect(package.getDetailsURL())
 
-	return render_template('package_release_edit.html', package=package, release=release, form=form)
+	return render_template("package_release_edit.html", package=package, release=release, form=form)

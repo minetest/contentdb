@@ -54,8 +54,8 @@ class User(db.Model, UserMixin):
 
 	# User authentication information
 	username = db.Column(db.String(50), nullable=False, unique=True)
-	password = db.Column(db.String(255), nullable=False, server_default='')
-	reset_password_token = db.Column(db.String(100), nullable=False, server_default='')
+	password = db.Column(db.String(255), nullable=False, server_default="")
+	reset_password_token = db.Column(db.String(100), nullable=False, server_default="")
 
 	rank = db.Column(db.Enum(UserRank))
 
@@ -68,11 +68,11 @@ class User(db.Model, UserMixin):
 	confirmed_at = db.Column(db.DateTime())
 
 	# User information
-	active = db.Column('is_active', db.Boolean, nullable=False, server_default='0')
-	display_name = db.Column(db.String(100), nullable=False, server_default='')
+	active = db.Column("is_active", db.Boolean, nullable=False, server_default="0")
+	display_name = db.Column(db.String(100), nullable=False, server_default="")
 
 	# Content
-	packages = db.relationship('Package', backref='author', lazy='dynamic')
+	packages = db.relationship("Package", backref="author", lazy="dynamic")
 
 	def __init__(self, username):
 		import datetime
@@ -108,7 +108,7 @@ class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 
 	# Basic details
-	author_id    = db.Column(db.Integer, db.ForeignKey('user.id'))
+	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"))
 	name         = db.Column(db.String(100), nullable=False)
 	title        = db.Column(db.String(100), nullable=False)
 	shortDesc    = db.Column(db.String(200), nullable=False)
@@ -124,8 +124,8 @@ class Package(db.Model):
 	forums       = db.Column(db.Integer,     nullable=False)
 
 	# Releases
-	releases = db.relationship('PackageRelease', backref='package',
-			lazy='dynamic', order_by=db.desc("package_release_releaseDate"))
+	releases = db.relationship("PackageRelease", backref="package",
+			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
 
 	def getDetailsURL(self):
 		return url_for("package_page",
@@ -180,7 +180,7 @@ class Package(db.Model):
 class PackageRelease(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 
-	package_id   = db.Column(db.Integer, db.ForeignKey('package.id'))
+	package_id   = db.Column(db.Integer, db.ForeignKey("package.id"))
 	title        = db.Column(db.String(100), nullable=False)
 	releaseDate  = db.Column(db.DateTime,        nullable=False)
 	url          = db.Column(db.String(100), nullable=False)

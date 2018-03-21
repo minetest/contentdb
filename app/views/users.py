@@ -18,14 +18,14 @@ class MyRegisterForm(RegisterForm):
 # Define the User profile form
 class UserProfileForm(FlaskForm):
 	display_name = StringField("Display name")
-	submit = SubmitField('Save')
+	submit = SubmitField("Save")
 
-@app.route('/user/', methods=['GET'])
+@app.route("/user/", methods=["GET"])
 @login_required
 def self_user_profile_page():
 	return redirect(url_for("user_profile_page", username=current_user.username))
 
-@app.route('/user/<username>/', methods=['GET', 'POST'])
+@app.route("/user/<username>/", methods=["GET", "POST"])
 def user_profile_page(username):
 	user = User.query.filter_by(username=username).first()
 	if not user:
@@ -37,7 +37,7 @@ def user_profile_page(username):
 		form = UserProfileForm(formdata=request.form, obj=current_user)
 
 		# Process valid POST
-		if request.method=='POST' and form.validate():
+		if request.method=="POST" and form.validate():
 			# Copy form fields to user_profile fields
 			form.populate_obj(current_user)
 
@@ -45,8 +45,8 @@ def user_profile_page(username):
 			db.session.commit()
 
 			# Redirect to home page
-			return redirect(url_for('home_page'))
+			return redirect(url_for("home_page"))
 
 	# Process GET or invalid POST
-	return render_template('users/user_profile_page.html',
+	return render_template("users/user_profile_page.html",
 			user=user, form=form)

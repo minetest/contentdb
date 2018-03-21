@@ -15,13 +15,13 @@ def domain(url):
     return urlparse(url).netloc
 
 # TODO: remove on production!
-@app.route('/static/<path:path>')
+@app.route("/static/<path:path>")
 def send_static(path):
-	return send_from_directory('static', path)
+	return send_from_directory("static", path)
 
-@app.route('/')
-@menu.register_menu(app, '.', 'Home')
+@app.route("/")
+@menu.register_menu(app, ".", "Home")
 def home_page():
-	return render_template('index.html')
+	return render_template("index.html")
 
 from . import users, githublogin, packages
