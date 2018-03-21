@@ -31,15 +31,28 @@ def txp_page():
 	return render_template('packages.html', title="Texture Packs", packages=packages)
 
 def canSeeWorkQueue():
-	return Permission.APPROVE_NEW.check(current_user)
+	return Permission.APPROVE_NEW.check(current_user) or \
+		Permission.APPROVE_RELEASE.check(current_user) or \
+			Permission.APPROVE_CHANGES.check(current_user)
 
 @menu.register_menu(app, '.todo', "Work Queue", order=20, visible_when=lambda: canSeeWorkQueue)
 @app.route("/todo/")
 @login_required
 def todo_page():
-	packages = Package.query.filter_by(approved=False).all()
-	releases = PackageRelease.query.filter_by(approved=False).all()
-	return render_template('todo.html', title="Reports and Work Queue", approve_new=packages, releases=releases)
+	canApproveNew = Permission.APPROVE_NEW.check(current_user)
+	canApproveRel = Permission.APPROVE_RELEASE.check(current_user)
+
+	packages = None
+	if canApproveNew:
+		packages = Package.query.filter_by(approved=False).all()
+
+	releases = None
+	if canApproveRel:
+		releases = PackageRelease.query.filter_by(approved=False).all()
+
+	return render_template('todo.html', title="Reports and Work Queue",
+		approve_new=packages, releases=releases,
+		canApproveNew=canApproveNew, canApproveRel=canApproveRel)
 
 
 def getPageByInfo(type, author, name):

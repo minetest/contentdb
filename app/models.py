@@ -35,11 +35,15 @@ class Permission(enum.Enum):
 	APPROVE_NEW        = "APPROVE_NEW"
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
 
+	# Only return true if the permission is valid for *all* contexts
+	# See Package.checkPerm for package-specific contexts
 	def check(self, user):
 		if not user.is_authenticated:
 			return False
 
-		if self == Permission.APPROVE_NEW:
+		if self == Permission.APPROVE_NEW or \
+				self == Permission.APPROVE_CHANGES or \
+				self == Permission.APPROVE_RELEASE:
 			return user.rank.atLeast(UserRank.EDITOR)
 		else:
 			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
