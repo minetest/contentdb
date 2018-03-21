@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-	{{ package.title }}
+	{{ package.title or "Create Package" }}
 {% endblock %}
 
 {% block content %}

@@ -118,7 +118,7 @@ class Package(db.Model):
 				author=self.author.username, name=self.name)
 
 	def getEditURL(self):
-		return url_for("edit_package_page",
+		return url_for("create_edit_package_page",
 				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 

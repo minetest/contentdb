@@ -62,29 +62,41 @@ class PackageForm(FlaskForm):
 	title        = StringField("Title")
 	shortDesc    = StringField("Short Description")
 	desc         = StringField("Long Description")
-	type         = SelectField("Type", choices=PackageType.choices(), coerce=PackageType.coerce)
+	type         = SelectField("Type", choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
 	repo         = StringField("Repo URL")
 	website      = StringField("Website URL")
 	issueTracker = StringField("Issue Tracker URL")
 	forums       = StringField("Forum Topic ID")
 	submit       = SubmitField('Save')
 
+@menu.register_menu(app, '.new', 'Create', order=20)
+@app.route("/new/", methods=['GET', 'POST'])
 @app.route("/<type>s/<author>/<name>/edit/", methods=['GET', 'POST'])
 @login_required
-def edit_package_page(type, author, name):
-	package = getPageByInfo(type, author, name)
-	if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
-		return redirect(package.getDetailsURL())
+def create_edit_package_page(type=None, author=None, name=None):
+	package = None
+	form = None
+	if type is None:
+		form = PackageForm(formdata=request.form)
+	else:
+		package = getPageByInfo(type, author, name)
+		if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
+			return redirect(package.getDetailsURL())
+
+		form = PackageForm(formdata=request.form, obj=package)
 
 	# Initial form class from post data and default data
-	form = PackageForm(formdata=request.form, obj=package)
 	if request.method == "POST" and form.validate():
 		# Successfully submitted!
+		if not package:
+			package = Package()
+			package.author = current_user
+
 		form.populate_obj(package) # copy to row
 		db.session.commit() # save
 		return redirect(package.getDetailsURL()) # redirect
 
-	return render_template('package_edit.html', package=package, form=form)
+	return render_template('package_create_edit.html', package=package, form=form)
 
 
 class CreatePackageReleaseForm(FlaskForm):
