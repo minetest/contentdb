@@ -26,6 +26,4 @@ Then run the server:
 
 	python3 rundebug.py
 
-Then view in your web browser:
-
-	http://localhost:5000/
+Then view in your web browser: http://localhost:5000/
