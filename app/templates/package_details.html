@@ -58,9 +58,14 @@
 				created {{ rel.releaseDate }}.
 				{% if not rel.approved %}
 					Waiting for approval.
-					{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
-						<a href="">Approve</a>
+				{% endif %}
+
+				{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
+					<a href="{{ rel.getEditURL() }}">Edit
+					{% if not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
+						/ Approve
 					{% endif %}
+					</a>
 				{% endif %}
 
 				{% if not rel.approved %}</i>{% endif %}

@@ -87,12 +87,19 @@ def edit_package_page(type, author, name):
 	return render_template('package_edit.html', package=package, form=form)
 
 
-class PackageReleaseForm(FlaskForm):
+class CreatePackageReleaseForm(FlaskForm):
 	name         = StringField("Name")
 	title        = StringField("Title")
 	uploadOpt    = RadioField ("File", choices=[("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")])
 	vcsLabel     = StringField("VCS Commit or Branch", default="master")
 	fileUpload   = FileField("File Upload")
+	submit       = SubmitField('Save')
+
+class EditPackageReleaseForm(FlaskForm):
+	name         = StringField("Name")
+	title        = StringField("Title")
+	url          = StringField("URL")
+	approved     = BooleanField("Is Approved")
 	submit       = SubmitField('Save')
 
 @app.route("/<type>s/<author>/<name>/releases/new/", methods=['GET', 'POST'])
@@ -103,7 +110,7 @@ def create_release_page(type, author, name):
 		return redirect(package.getDetailsURL())
 
 	# Initial form class from post data and default data
-	form = PackageReleaseForm(formdata=request.form)
+	form = CreatePackageReleaseForm(formdata=request.form)
 	if request.method == "POST" and form.validate():
 		if form["uploadOpt"].data == "vcs":
 			rel = PackageRelease()
@@ -117,3 +124,43 @@ def create_release_page(type, author, name):
 			raise Exception("Unimplemented option = file upload")
 
 	return render_template('package_release_new.html', package=package, form=form)
+
+@app.route("/<type>s/<author>/<name>/releases/<id>/", methods=['GET', 'POST'])
+@login_required
+def edit_release_page(type, author, name, id):
+	user = User.query.filter_by(username=author).first()
+	if user is None:
+		abort(404)
+
+	release = PackageRelease.query.filter_by(id=id).first()
+	if release is None:
+		abort(404)
+
+	package = release.package
+	if package.name != name or package.type != PackageType[type.upper()]:
+		abort(404)
+
+	canEdit    = package.checkPerm(current_user, Permission.MAKE_RELEASE)
+	canApprove = package.checkPerm(current_user, Permission.APPROVE_RELEASE)
+	if not (canEdit or canApprove):
+		return redirect(package.getDetailsURL())
+
+	# Initial form class from post data and default data
+	form = EditPackageReleaseForm(formdata=request.form, obj=release)
+	if request.method == "POST" and form.validate():
+		wasApproved = release.approved
+		if canEdit:
+			release.title = form["title"].data
+
+		if package.checkPerm(current_user, Permission.CHANGE_RELEASE_URL):
+			release.url = form["url"].data
+
+		if canApprove:
+			release.approved = form["approved"].data
+		else:
+			release.approved = wasApproved
+
+		db.session.commit()
+		return redirect(package.getDetailsURL())
+
+	return render_template('package_release_edit.html', package=package, form=form)

@@ -26,13 +26,14 @@ class UserRank(enum.Enum):
 
 
 class Permission(enum.Enum):
-	EDIT_PACKAGE    = "EDIT_PACKAGE"
-	APPROVE_CHANGES = "APPROVE_CHANGES"
-	DELETE_PACKAGE  = "DELETE_PACKAGE"
-	CHANGE_AUTHOR   = "CHANGE_AUTHOR"
-	MAKE_RELEASE    = "MAKE_RELEASE"
-	APPROVE_RELEASE = "APPROVE_RELEASE"
-	APPROVE_NEW     = "APPROVE_NEW"
+	EDIT_PACKAGE       = "EDIT_PACKAGE"
+	APPROVE_CHANGES    = "APPROVE_CHANGES"
+	DELETE_PACKAGE     = "DELETE_PACKAGE"
+	CHANGE_AUTHOR      = "CHANGE_AUTHOR"
+	MAKE_RELEASE       = "MAKE_RELEASE"
+	APPROVE_RELEASE    = "APPROVE_RELEASE"
+	APPROVE_NEW        = "APPROVE_NEW"
+	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
 
 
 class User(db.Model, UserMixin):
@@ -150,7 +151,7 @@ class Package(db.Model):
 			return user.rank.atLeast(UserRank.EDITOR)
 
 		# Moderators can delete packages
-		elif perm == Permission.DELETE_PACKAGE:
+		elif perm == Permission.DELETE_PACKAGE or perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:
@@ -164,6 +165,14 @@ class PackageRelease(db.Model):
 	releaseDate  = db.Column(db.DateTime,        nullable=False)
 	url          = db.Column(db.String(100), nullable=False)
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
+
+
+	def getEditURL(self):
+		return url_for("edit_release_page",
+				type=self.package.type.toName(),
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
 
 	def __init__(self):
 		self.releaseDate = datetime.now()

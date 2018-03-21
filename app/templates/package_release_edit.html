@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Create a release | {{ package.title }}
+{% endblock %}
+
+{% block content %}
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+
+		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+			{{ render_field(form.title) }}
+		{% endif %}
+
+		{% if package.checkPerm(current_user, "CHANGE_RELEASE_URL") %}
+			{{ render_field(form.url) }}
+		{% endif %}
+
+		{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
+			{{ render_field(form.approved) }}
+		{% endif %}
+
+		{{ render_submit_field(form.submit) }}
+		<input type="submit" value="Go">
+	</form>
+{% endblock %}
