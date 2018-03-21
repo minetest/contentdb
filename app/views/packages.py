@@ -13,26 +13,35 @@ from wtforms.validators import *
 # to do the menu
 
 def doPackageList(type):
-	packagesQ = Package.query.filter_by(type=type, approved=True)
+	title = "Packages"
+	query = Package.query
 
-	query = request.args.get("q")
-	if query is not None:
-		packagesQ = packagesQ.filter(Package.title.contains(query))
+	if type is not None:
+		title = type.value + "s"
+		query = query.filter_by(type=type, approved=True)
 
-	return render_template('packages.html', title=type.value + "s", packages=packagesQ.all(), query=query)
+	search = request.args.get("q")
+	if search is not None:
+		query = query.filter(Package.title.contains(search))
+
+	return render_template('packages.html', title=title, packages=query.all(), query=search)
+
+@app.route('/packages/')
+def packages_page():
+	return doPackageList(None)
 
 @app.route('/mods/')
-@menu.register_menu(app, '.mods', 'Mods', order=10)
+@menu.register_menu(app, '.mods', 'Mods', order=11)
 def mods_page():
 	return doPackageList(PackageType.MOD)
 
 @app.route('/games/')
-@menu.register_menu(app, '.games', 'Games', order=11)
+@menu.register_menu(app, '.games', 'Games', order=12)
 def games_page():
 	return doPackageList(PackageType.GAME)
 
 @app.route('/texturepacks/')
-@menu.register_menu(app, '.txp', 'Texture Packs', order=12)
+@menu.register_menu(app, '.txp', 'Texture Packs', order=13)
 def txp_page():
 	return doPackageList(PackageType.TXP)
 

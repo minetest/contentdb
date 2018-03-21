@@ -5,6 +5,12 @@ Dashboard
 {% endblock %}
 
 {% block content %}
+
+	<form method="get" action="/packages/">
+		<input type="text" name="q" value="{{ query or ''}}" />
+		<input type="submit" value="Search" />
+	</form>
+
 	<div class="box box_grey">
 		<h2>{{ self.title() }}</h2>
 
