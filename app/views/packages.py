@@ -205,4 +205,4 @@ def edit_release_page(type, author, name, id):
 		db.session.commit()
 		return redirect(package.getDetailsURL())
 
-	return render_template('package_release_edit.html', package=package, form=form)
+	return render_template('package_release_edit.html', package=package, release=release, form=form)

@@ -11,17 +11,42 @@
 
 		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 			{{ render_field(form.title) }}
+		{% else %}
+			Title: {{ release.title }}
 		{% endif %}
 
 		{% if package.checkPerm(current_user, "CHANGE_RELEASE_URL") %}
 			{{ render_field(form.url) }}
+		{% else %}
+			Url: <a href="{{ release.url }}">{{ release.url }}</a><br />
 		{% endif %}
 
 		{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
 			{{ render_field(form.approved) }}
+		{% else %}
+			Approved: {{ release.approved }}
 		{% endif %}
 
 		{{ render_submit_field(form.submit) }}
 		<input type="submit" value="Go">
 	</form>
+
+	{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
+		<div class="box box_grey">
+			<h2>Approval Checklist</h2>
+			<ul>
+				<li>Link leads to a valid download, ie: is a zip file which
+					has either init.lua or modpack.txt if a mod, mods/ if a game, or textures if a texture pack.
+					It's okay if they're inside an immediate folder, like so:
+
+<pre>
+example.zip/
+└── example
+    └── init.lua
+</pre>
+				</li>
+				<li>There's no obfuscated code.</li>
+			</ul>
+		</div>
+	{% endif %}
 {% endblock %}
