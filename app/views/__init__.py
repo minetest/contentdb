@@ -12,12 +12,17 @@ cache = SimpleCache()
 
 @app.template_filter()
 def domain(url):
-    return urlparse(url).netloc
+	return urlparse(url).netloc
 
-# TODO: remove on production!
+# Use nginx to serve files on production instead
 @app.route("/static/<path:path>")
 def send_static(path):
 	return send_from_directory("static", path)
+
+@app.route("/uploads/<path:path>")
+def send_upload(path):
+	import os
+	return send_from_directory(os.path.abspath(app.config["UPLOAD_FOLDER"]), path)
 
 @app.route("/")
 @menu.register_menu(app, ".", "Home")

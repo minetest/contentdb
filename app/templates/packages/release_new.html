@@ -6,7 +6,7 @@
 
 {% block content %}
 	{% from "macros/forms.html" import render_field, render_submit_field %}
-	<form method="POST" action="">
+	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.title) }}

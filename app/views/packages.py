@@ -8,8 +8,12 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 
+def isFilenameAllowed(filename, exts):
+	return "." in filename and \
+		   filename.rsplit(".", 1)[1].lower() in exts
 
-# TODO: the following could be made into one route, except I'm not sure how
+
+# TODO: the following could be made into one route, except I"m not sure how
 # to do the menu
 
 def doPackageList(type):
@@ -115,16 +119,16 @@ def package_download_page(type, author, name):
 
 
 class PackageForm(FlaskForm):
-	name         = StringField("Name", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	title        = StringField("Title", [InputRequired(), Length(3, 50)])
-	shortDesc    = StringField("Short Description", [InputRequired(), Length(1,200)])
-	desc         = TextAreaField("Long Description", [Optional(), Length(0,10000)])
-	type         = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
-	repo         = StringField("Repo URL", [Optional(), URL()])
-	website      = StringField("Website URL", [Optional(), URL()])
+	name		 = StringField("Name", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	title		= StringField("Title", [InputRequired(), Length(3, 50)])
+	shortDesc	= StringField("Short Description", [InputRequired(), Length(1,200)])
+	desc		 = TextAreaField("Long Description", [Optional(), Length(0,10000)])
+	type		 = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
+	repo		 = StringField("Repo URL", [Optional(), URL()])
+	website	  = StringField("Website URL", [Optional(), URL()])
 	issueTracker = StringField("Issue Tracker URL", [Optional(), URL()])
-	forums       = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
-	submit       = SubmitField("Save")
+	forums	   = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
+	submit	   = SubmitField("Save")
 
 @menu.register_menu(app, ".new", "Create", order=21, visible_when=lambda: current_user.is_authenticated)
 @app.route("/new/", methods=["GET", "POST"])
@@ -175,19 +179,19 @@ def approve_package_page(type=None, author=None, name=None):
 	return redirect(package.getDetailsURL())
 
 class CreatePackageReleaseForm(FlaskForm):
-	name         = StringField("Name")
-	title        = StringField("Title")
-	uploadOpt    = RadioField ("File", choices=[("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")])
-	vcsLabel     = StringField("VCS Commit or Branch", default="master")
+	name		 = StringField("Name")
+	title		= StringField("Title")
+	uploadOpt	= RadioField ("File", choices=[("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")])
+	vcsLabel	 = StringField("VCS Commit or Branch", default="master")
 	fileUpload   = FileField("File Upload")
-	submit       = SubmitField("Save")
+	submit	   = SubmitField("Save")
 
 class EditPackageReleaseForm(FlaskForm):
-	name         = StringField("Name")
-	title        = StringField("Title")
-	url          = StringField("URL", [URL])
-	approved     = BooleanField("Is Approved")
-	submit       = SubmitField("Save")
+	name		 = StringField("Name")
+	title		= StringField("Title")
+	url		  = StringField("URL", [URL])
+	approved	 = BooleanField("Is Approved")
+	submit	   = SubmitField("Save")
 
 @app.route("/<type>s/<author>/<name>/releases/new/", methods=["GET", "POST"])
 @login_required
@@ -197,8 +201,10 @@ def create_release_page(type, author, name):
 		return redirect(package.getDetailsURL())
 
 	# Initial form class from post data and default data
-	form = CreatePackageReleaseForm(formdata=request.form)
+	form = CreatePackageReleaseForm()
 	if request.method == "POST" and form.validate():
+		for key, value in request.files.items() :
+			print (key, value)
 		if form["uploadOpt"].data == "vcs":
 			rel = PackageRelease()
 			rel.package = package
@@ -206,9 +212,24 @@ def create_release_page(type, author, name):
 			rel.url = form["vcsLabel"].data
 			# TODO: get URL to commit from branch name
 			db.session.commit()
-			return redirect(package.getDetailsURL()) # redirect
+			return redirect(package.getDetailsURL())
 		else:
-			raise Exception("Unimplemented option = file upload")
+			file = form.fileUpload.data
+			if not file or file.filename == "":
+				flash("No selected file", "error")
+			elif not isFilenameAllowed(file.filename, ["zip"]):
+				flash("Please select a zip file", "error")
+			else:
+				import random, string, os
+				filename = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(10)) + ".zip"
+				file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+
+				rel = PackageRelease()
+				rel.package = package
+				rel.title = form["title"].data
+				rel.url = "/uploads/" + filename
+				db.session.commit()
+				return redirect(package.getDetailsURL())
 
 	return render_template("packages/release_new.html", package=package, form=form)
 
@@ -227,7 +248,7 @@ def edit_release_page(type, author, name, id):
 	if package.name != name or package.type != PackageType[type.upper()]:
 		abort(404)
 
-	canEdit    = package.checkPerm(current_user, Permission.MAKE_RELEASE)
+	canEdit	= package.checkPerm(current_user, Permission.MAKE_RELEASE)
 	canApprove = package.checkPerm(current_user, Permission.APPROVE_RELEASE)
 	if not (canEdit or canApprove):
 		return redirect(package.getDetailsURL())
