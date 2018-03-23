@@ -147,6 +147,18 @@ class Package(db.Model):
 				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 
+	def getDownloadURL(self):
+		return url_for("package_download_page",
+				type=self.type.toName(),
+				author=self.author.username, name=self.name)
+
+	def getDownloadRelease(self):
+		for rel in self.releases:
+			if rel.approved:
+				return rel
+
+		return None
+
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
 			return False

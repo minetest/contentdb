@@ -96,6 +96,23 @@ def package_page(type, author, name):
 
 	return render_template("packages/view.html", package=package, releases=releases)
 
+@app.route("/<type>s/<author>/<name>/download/")
+def package_download_page(type, author, name):
+	package = getPageByInfo(type, author, name)
+	release = package.getDownloadRelease()
+
+	if release is None:
+		wantsJson = "application/zip" in request.accept_mimetypes and \
+				not "text/html" in request.accept_mimetypes
+
+		if wantsJson:
+			return "", 204
+		else:
+			flash("No download available.", "error")
+			return redirect(package.getDetailsURL())
+	else:
+		return redirect(release.url, code=302)
+
 
 class PackageForm(FlaskForm):
 	name         = StringField("Name", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
