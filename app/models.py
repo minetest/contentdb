@@ -152,6 +152,9 @@ class Package(db.Model):
 				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 
+	def getMainScreenshotURL(self):
+		return "/static/screenshot.png"
+
 	def getDownloadRelease(self):
 		for rel in self.releases:
 			if rel.approved:
