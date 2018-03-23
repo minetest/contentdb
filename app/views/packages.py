@@ -24,7 +24,7 @@ def doPackageList(type):
 	if search is not None:
 		query = query.filter(Package.title.contains(search))
 
-	return render_template("packages.html", title=title, packages=query.all(), query=search)
+	return render_template("packages/list.html", title=title, packages=query.all(), query=search)
 
 @app.route("/packages/")
 def packages_page():
@@ -94,7 +94,7 @@ def package_page(type, author, name):
 	package = getPageByInfo(type, author, name)
 	releases = getReleases(package)
 
-	return render_template("package_details.html", package=package, releases=releases)
+	return render_template("packages/view.html", package=package, releases=releases)
 
 
 class PackageForm(FlaskForm):
@@ -137,7 +137,7 @@ def create_edit_package_page(type=None, author=None, name=None):
 		db.session.commit() # save
 		return redirect(package.getDetailsURL()) # redirect
 
-	return render_template("package_create_edit.html", package=package, form=form)
+	return render_template("packages/create_edit.html", package=package, form=form)
 
 @app.route("/<type>s/<author>/<name>/approve/")
 @login_required
@@ -193,7 +193,7 @@ def create_release_page(type, author, name):
 		else:
 			raise Exception("Unimplemented option = file upload")
 
-	return render_template("package_release_new.html", package=package, form=form)
+	return render_template("packages/release_new.html", package=package, form=form)
 
 @app.route("/<type>s/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
 @login_required
@@ -233,4 +233,4 @@ def edit_release_page(type, author, name, id):
 		db.session.commit()
 		return redirect(package.getDetailsURL())
 
-	return render_template("package_release_edit.html", package=package, release=release, form=form)
+	return render_template("packages/release_edit.html", package=package, release=release, form=form)
