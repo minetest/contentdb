@@ -86,4 +86,20 @@
 			<li>No releases available.</li>
 		{% endfor %}
 	</ul>
+
+	{% if current_user.is_authenticated or package.requests %}
+		<h3>Edit Requests</h3>
+
+		<ul>
+			{% for r in package.requests %}
+				<li>
+					<a href="{{ r.getURL() }}">{{ r.title }}</a>
+					by
+					<a href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>
+				</li>
+			{% else %}
+				<li>No edit requests have been made.</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
 {% endblock %}

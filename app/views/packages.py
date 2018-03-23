@@ -198,7 +198,7 @@ class UnresolvedPackage(Package):
 
 @app.route("/<ptype>s/<author>/<name>/requests/new/", methods=["GET","POST"])
 @login_required
-def create_editrequest_page(ptype=None, author=None, name=None):
+def create_editrequest_page(ptype, author, name):
 	package = getPageByInfo(ptype, author, name)
 
 	form = EditRequestForm(request.form, obj=package)
@@ -243,7 +243,18 @@ def create_editrequest_page(ptype=None, author=None, name=None):
 		else:
 			flash("No changes detected", "warning")
 
-	return render_template("packages/create_editrequest.html", package=package, form=form)
+	return render_template("packages/editrequest_create.html", package=package, form=form)
+
+
+@app.route("/<ptype>s/<author>/<name>/requests/<id>/")
+def view_editrequest_page(ptype, author, name, id):
+	package = getPageByInfo(ptype, author, name)
+
+	erequest = EditRequest.query.filter_by(id=id).first()
+	if erequest is None:
+		abort(404)
+
+	return render_template("packages/editrequest_view.html", package=package, request=erequest)
 
 
 class CreatePackageReleaseForm(FlaskForm):

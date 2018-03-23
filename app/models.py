@@ -107,15 +107,15 @@ class PackageType(enum.Enum):
 
 
 class PackagePropertyKey(enum.Enum):
-	name  = "name"
-	title = "title"
-	shortDesc = "shortDesc"
-	desc = "desc"
-	type = "type"
-	repo = "repo"
-	website = "website"
-	issueTracker = "issueTracker"
-	forums = "forums"
+	name         = "Name"
+	title        = "Title"
+	shortDesc    = "Short Description"
+	desc         = "Description"
+	type         = "Type"
+	repo         = "Repository"
+	website      = "Website"
+	issueTracker = "Issue Tracker"
+	forums       = "Forum Topic ID"
 
 
 class Package(db.Model):
@@ -248,16 +248,25 @@ class EditRequest(db.Model):
 	package_id   = db.Column(db.Integer, db.ForeignKey("package.id"))
 	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"))
 
-	title      = db.Column(db.String(100), nullable=False)
+	title        = db.Column(db.String(100), nullable=False)
 	desc         = db.Column(db.String(1000), nullable=True)
 
 
 	changes = db.relationship("EditRequestChange", backref="request",
 			lazy="dynamic")
 
+	def getURL(self):
+		return url_for("view_editrequest_page",
+				ptype=self.package.type.toName(),
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
+
 	def applyAll(self, package):
 		for change in self.changes:
 			change.apply(package)
+
+
 
 class EditRequestChange(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

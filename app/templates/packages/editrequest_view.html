@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ request.title }} - {{ package.title }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ request.title }} by {{ request.author.display_name }}</h1>
+	<p>
+		Package: <a href="{{ package.getDetailsURL() }}">{{ package.title }}</a>
+	</p>
+	<p>
+		{% if request.desc %}
+			{{ request.desc }}
+		{% else %}
+			<i>No description given</i>
+		{% endif %}
+	</p>
+
+	<table>
+		<tr>
+			<th>Property</th>
+			<th>Old</th>
+			<th>New</th>
+		</tr>
+
+		{% for change in request.changes %}
+			<tr>
+				<td>{{ change.key.value }}</td>
+				<td>{{ change.oldValue }}</td>
+				<td>{{ change.newValue }}</td>
+			</tr>
+		{% endfor %}
+{% endblock %}
