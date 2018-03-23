@@ -127,16 +127,16 @@ def package_download_page(type, author, name):
 
 
 class PackageForm(FlaskForm):
-	name		 = StringField("Name", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	title		= StringField("Title", [InputRequired(), Length(3, 50)])
-	shortDesc	= StringField("Short Description", [InputRequired(), Length(1,200)])
-	desc		 = TextAreaField("Long Description", [Optional(), Length(0,10000)])
-	type		 = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
-	repo		 = StringField("Repo URL", [Optional(), URL()])
-	website	  = StringField("Website URL", [Optional(), URL()])
+	name         = StringField("Name", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	title        = StringField("Title", [InputRequired(), Length(3, 50)])
+	shortDesc    = StringField("Short Description", [InputRequired(), Length(1,200)])
+	desc         = TextAreaField("Long Description", [Optional(), Length(0,10000)])
+	type         = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
+	repo         = StringField("Repo URL", [Optional(), URL()])
+	website      = StringField("Website URL", [Optional(), URL()])
 	issueTracker = StringField("Issue Tracker URL", [Optional(), URL()])
-	forums	   = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
-	submit	   = SubmitField("Save")
+	forums	     = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
+	submit	     = SubmitField("Save")
 
 @menu.register_menu(app, ".new", "Create", order=21, visible_when=lambda: current_user.is_authenticated)
 @app.route("/new/", methods=["GET", "POST"])
@@ -186,20 +186,80 @@ def approve_package_page(type=None, author=None, name=None):
 
 	return redirect(package.getDetailsURL())
 
+
+class EditRequestForm(PackageForm):
+	edit_title = StringField("Edit Title", [InputRequired(), Length(1, 100)])
+	edit_desc  = TextField("Edit Description", [Optional()])
+
+class UnresolvedPackage(Package):
+	edit_title = ""
+	edit_desc  = ""
+
+
+@app.route("/<ptype>s/<author>/<name>/requests/new/", methods=["GET","POST"])
+@login_required
+def create_editrequest_page(ptype=None, author=None, name=None):
+	package = getPageByInfo(ptype, author, name)
+
+	form = EditRequestForm(request.form, obj=package)
+	if request.method == "POST" and form.validate():
+		editedPackage = UnresolvedPackage()
+		form.populate_obj(editedPackage)
+
+		erequest = EditRequest()
+		erequest.package = package
+		erequest.author  = current_user
+		erequest.title   = editedPackage.edit_title
+		erequest.desc    = editedPackage.edit_desc
+		db.session.add(erequest)
+
+		wasChangeMade = False
+		for e in PackagePropertyKey:
+			newValue = getattr(editedPackage, e.name)
+
+			oldValue = getattr(package, e.name)
+			if newValue == "":
+				newValue = None
+
+			newValueComp = newValue
+			oldValueComp = oldValue
+			if type(newValue) is str:
+				newValue = newValue.replace("\r\n", "\n")
+				newValueComp = newValue.strip()
+				oldValueComp = oldValue.strip()
+
+			if newValueComp != oldValueComp:
+				change = EditRequestChange()
+				change.request = erequest
+				change.key = e
+				change.oldValue = oldValue
+				change.newValue = newValue
+				db.session.add(change)
+				wasChangeMade = True
+
+		if wasChangeMade:
+			db.session.commit()
+			return redirect(package.getDetailsURL())
+		else:
+			flash("No changes detected", "warning")
+
+	return render_template("packages/create_editrequest.html", package=package, form=form)
+
+
 class CreatePackageReleaseForm(FlaskForm):
-	name		 = StringField("Name")
-	title		= StringField("Title")
-	uploadOpt	= RadioField ("File", choices=[("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")])
-	vcsLabel	 = StringField("VCS Commit or Branch", default="master")
-	fileUpload   = FileField("File Upload")
+	name	   = StringField("Name")
+	title	   = StringField("Title")
+	uploadOpt  = RadioField ("File", choices=[("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")])
+	vcsLabel   = StringField("VCS Commit or Branch", default="master")
+	fileUpload = FileField("File Upload")
 	submit	   = SubmitField("Save")
 
 class EditPackageReleaseForm(FlaskForm):
-	name		 = StringField("Name")
-	title		= StringField("Title")
-	url		  = StringField("URL", [URL])
-	approved	 = BooleanField("Is Approved")
-	submit	   = SubmitField("Save")
+	name     = StringField("Name")
+	title    = StringField("Title")
+	url      = StringField("URL", [URL])
+	approved = BooleanField("Is Approved")
+	submit   = SubmitField("Save")
 
 @app.route("/<type>s/<author>/<name>/releases/new/", methods=["GET", "POST"])
 @login_required

@@ -73,6 +73,7 @@ class User(db.Model, UserMixin):
 
 	# Content
 	packages = db.relationship("Package", backref="author", lazy="dynamic")
+	requests = db.relationship("EditRequest", backref="author", lazy="dynamic")
 
 	def __init__(self, username):
 		import datetime
@@ -104,6 +105,19 @@ class PackageType(enum.Enum):
 	def coerce(cls, item):
 		return item if type(item) == PackageType else PackageType[item]
 
+
+class PackagePropertyKey(enum.Enum):
+	name  = "name"
+	title = "title"
+	shortDesc = "shortDesc"
+	desc = "desc"
+	type = "type"
+	repo = "repo"
+	website = "website"
+	issueTracker = "issueTracker"
+	forums = "forums"
+
+
 class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 
@@ -126,6 +140,10 @@ class Package(db.Model):
 	# Releases
 	releases = db.relationship("PackageRelease", backref="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
+
+
+	requests = db.relationship("EditRequest", backref="package",
+			lazy="dynamic")
 
 	def getAsDictionary(self, base_url):
 		return {
@@ -223,6 +241,37 @@ class PackageRelease(db.Model):
 
 	def __init__(self):
 		self.releaseDate = datetime.now()
+
+class EditRequest(db.Model):
+	id           = db.Column(db.Integer, primary_key=True)
+
+	package_id   = db.Column(db.Integer, db.ForeignKey("package.id"))
+	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"))
+
+	title      = db.Column(db.String(100), nullable=False)
+	desc         = db.Column(db.String(1000), nullable=True)
+
+
+	changes = db.relationship("EditRequestChange", backref="request",
+			lazy="dynamic")
+
+	def applyAll(self, package):
+		for change in self.changes:
+			change.apply(package)
+
+class EditRequestChange(db.Model):
+	id           = db.Column(db.Integer, primary_key=True)
+
+	request_id   = db.Column(db.Integer, db.ForeignKey("edit_request.id"))
+	key          = db.Column(db.Enum(PackagePropertyKey), nullable=False)
+
+	# TODO: make diff instead
+	oldValue     = db.Column(db.Text, nullable=False)
+	newValue     = db.Column(db.Text, nullable=False)
+
+	def apply(self, package):
+		prop = PackagePropertyKey[self.key]
+
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
