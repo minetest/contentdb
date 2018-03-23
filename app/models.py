@@ -127,6 +127,18 @@ class Package(db.Model):
 	releases = db.relationship("PackageRelease", backref="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
 
+	def getAsDictionary(self, base_url):
+		return {
+			"name": self.name,
+			"title": self.title,
+			"author": self.author.display_name,
+			"shortDesc": self.shortDesc,
+			"type": self.type.toName(),
+			"repo": self.repo,
+			"url": base_url + self.getDownloadURL(),
+			"screenshots": [ base_url + self.getMainScreenshotURL() ]
+		}
+
 	def getDetailsURL(self):
 		return url_for("package_page",
 				type=self.type.toName(),

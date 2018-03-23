@@ -4,13 +4,11 @@ from flask.ext import menu
 from app import app
 from app.models import *
 
+from .utils import *
+
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-
-def isFilenameAllowed(filename, exts):
-	return "." in filename and \
-		   filename.rsplit(".", 1)[1].lower() in exts
 
 
 # TODO: the following could be made into one route, except I"m not sure how
@@ -28,11 +26,19 @@ def doPackageList(type):
 	if search is not None:
 		query = query.filter(Package.title.contains(search))
 
-	return render_template("packages/list.html", title=title, packages=query.all(), query=search)
+	if shouldReturnJson():
+		return jsonify([package.getAsDictionary(request.url_root) for package in query.all()])
+	else:
+		return render_template("packages/list.html", title=title, packages=query.all(), query=search)
+
 
 @app.route("/packages/")
 def packages_page():
-	return doPackageList(None)
+	type = None
+	typeStr = request.args.get("type")
+	if typeStr is not None:
+		type = PackageType[typeStr.upper()]
+	return doPackageList(type)
 
 @app.route("/mods/")
 @menu.register_menu(app, ".mods", "Mods", order=11)
@@ -96,9 +102,13 @@ def getReleases(package):
 @app.route("/<type>s/<author>/<name>/")
 def package_page(type, author, name):
 	package = getPageByInfo(type, author, name)
-	releases = getReleases(package)
 
-	return render_template("packages/view.html", package=package, releases=releases)
+	if shouldReturnJson():
+		return jsonify(package.getAsDictionary(request.url_root))
+	else:
+		releases = getReleases(package)
+		return render_template("packages/view.html", package=package, releases=releases)
+
 
 @app.route("/<type>s/<author>/<name>/download/")
 def package_download_page(type, author, name):
@@ -106,10 +116,8 @@ def package_download_page(type, author, name):
 	release = package.getDownloadRelease()
 
 	if release is None:
-		wantsJson = "application/zip" in request.accept_mimetypes and \
-				not "text/html" in request.accept_mimetypes
-
-		if wantsJson:
+		if "application/zip" in request.accept_mimetypes and \
+				not "text/html" in request.accept_mimetypes:
 			return "", 204
 		else:
 			flash("No download available.", "error")
