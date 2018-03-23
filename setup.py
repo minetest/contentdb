@@ -25,6 +25,11 @@ if not os.path.isfile("db.sqlite"):
 	jeija = User("Jeija")
 	jeija.github_username = "Jeija"
 	db.session.add(jeija)
+        
+	sam = User("fillthisinlater")
+	sam.github_username = "fillthisinlater"
+	sam.rank = UserRank.EDITOR
+	db.session.add(sam)
 
 	mod1 = Package()
 	mod1.approved = True
