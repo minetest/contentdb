@@ -107,7 +107,8 @@ def package_page(type, author, name):
 		return jsonify(package.getAsDictionary(request.url_root))
 	else:
 		releases = getReleases(package)
-		return render_template("packages/view.html", package=package, releases=releases)
+		requests = [r for r in package.requests if r.status == 0]
+		return render_template("packages/view.html", package=package, releases=releases, requests=requests)
 
 
 @app.route("/<type>s/<author>/<name>/download/")
@@ -216,30 +217,27 @@ def create_editrequest_page(ptype, author, name):
 		wasChangeMade = False
 		for e in PackagePropertyKey:
 			newValue = getattr(editedPackage, e.name)
-
 			oldValue = getattr(package, e.name)
-			if newValue == "":
-				newValue = None
 
 			newValueComp = newValue
 			oldValueComp = oldValue
 			if type(newValue) is str:
 				newValue = newValue.replace("\r\n", "\n")
 				newValueComp = newValue.strip()
-				oldValueComp = oldValue.strip()
+				oldValueComp = "" if oldValue is None else oldValue.strip()
 
 			if newValueComp != oldValueComp:
 				change = EditRequestChange()
 				change.request = erequest
 				change.key = e
-				change.oldValue = oldValue
-				change.newValue = newValue
+				change.oldValue = str(oldValue)
+				change.newValue = str(newValue)
 				db.session.add(change)
 				wasChangeMade = True
 
 		if wasChangeMade:
 			db.session.commit()
-			return redirect(package.getDetailsURL())
+			return redirect(erequest.getURL())
 		else:
 			flash("No changes detected", "warning")
 
@@ -255,6 +253,48 @@ def view_editrequest_page(ptype, author, name, id):
 		abort(404)
 
 	return render_template("packages/editrequest_view.html", package=package, request=erequest)
+
+
+@app.route("/<ptype>s/<author>/<name>/requests/<id>/approve/")
+def approve_editrequest_page(ptype, author, name, id):
+	package = getPageByInfo(ptype, author, name)
+	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
+		flash("You don't have permission to do that.", "error")
+		return redirect(package.getDetailsURL())
+
+	erequest = EditRequest.query.filter_by(id=id).first()
+	if erequest is None:
+		abort(404)
+
+	if erequest.status != 0:
+		flash("Edit request has already been resolved", "error")
+
+	else:
+		erequest.status = 1
+		erequest.applyAll(package)
+		db.session.commit()
+
+	return redirect(package.getDetailsURL())
+
+@app.route("/<ptype>s/<author>/<name>/requests/<id>/reject/")
+def reject_editrequest_page(ptype, author, name, id):
+	package = getPageByInfo(ptype, author, name)
+	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
+		flash("You don't have permission to do that.", "error")
+		return redirect(package.getDetailsURL())
+
+	erequest = EditRequest.query.filter_by(id=id).first()
+	if erequest is None:
+		abort(404)
+
+	if erequest.status != 0:
+		flash("Edit request has already been resolved", "error")
+
+	else:
+		erequest.status = 2
+		db.session.commit()
+
+	return redirect(package.getDetailsURL())
 
 
 class CreatePackageReleaseForm(FlaskForm):

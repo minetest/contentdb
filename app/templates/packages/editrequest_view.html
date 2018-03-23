@@ -16,6 +16,21 @@
 			<i>No description given</i>
 		{% endif %}
 	</p>
+	{% if request.status == 1 %}
+		<div class="box box_grey alert alert-success">
+			This edit request was merged.
+		</div>
+	{% elif request.status == 2 %}
+		<div class="box  box_grey alert alert-error">
+			This edit request was rejected.
+		</div>
+	{% elif package.checkPerm(current_user, "APPROVE_CHANGES") %}
+		<div class="box box_grey">
+			To resolve this request, either
+			<a href="{{ request.getApproveURL() }}">Approve and Apply</a> or
+			<a href="{{ request.getRejectURL() }}">Reject</a> it.
+		</div>
+	{% endif %}
 
 	<table>
 		<tr>

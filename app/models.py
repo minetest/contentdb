@@ -251,12 +251,27 @@ class EditRequest(db.Model):
 	title        = db.Column(db.String(100), nullable=False)
 	desc         = db.Column(db.String(1000), nullable=True)
 
+	status       = db.Column(db.Integer, nullable=False, default=0)
 
 	changes = db.relationship("EditRequestChange", backref="request",
 			lazy="dynamic")
 
 	def getURL(self):
 		return url_for("view_editrequest_page",
+				ptype=self.package.type.toName(),
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
+
+	def getApproveURL(self):
+		return url_for("approve_editrequest_page",
+				ptype=self.package.type.toName(),
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
+
+	def getRejectURL(self):
+		return url_for("reject_editrequest_page",
 				ptype=self.package.type.toName(),
 				author=self.package.author.username,
 				name=self.package.name,
@@ -275,12 +290,11 @@ class EditRequestChange(db.Model):
 	key          = db.Column(db.Enum(PackagePropertyKey), nullable=False)
 
 	# TODO: make diff instead
-	oldValue     = db.Column(db.Text, nullable=False)
-	newValue     = db.Column(db.Text, nullable=False)
+	oldValue     = db.Column(db.Text, nullable=True)
+	newValue     = db.Column(db.Text, nullable=True)
 
 	def apply(self, package):
-		prop = PackagePropertyKey[self.key]
-
+		setattr(package, self.key.name, self.newValue)
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
