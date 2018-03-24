@@ -67,6 +67,10 @@ Sign in
 		<aside class="box box_grey">
 			<h2>New here?</h2>
 
+			<div class="box box_grey alert alert-error">
+				Please use Github login instead!
+			</div>
+
 			{% if user_manager.enable_register and not user_manager.require_invitation %}
 				<a href="{{ url_for('github_signin_page') }}">{%trans%}Create an account{%endtrans%}</a>
 			{% endif %}

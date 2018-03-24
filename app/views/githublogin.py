@@ -24,6 +24,9 @@ def _do_login_user(user, remember_me=False):
 		return False
 
 	user.active = True
+	if not user.rank.atLeast(UserRank.NEW_MEMBER):
+		user.rank = UserRank.NEW_MEMBER
+
 	db.session.commit()
 
 	# Check if user account has been disabled
@@ -91,8 +94,16 @@ def github_authorized(oauth_token):
 	# If not logged in, log in
 	else:
 		if userByGithub is None:
-			flash("Authorization failed [err=gh-no-such-account]", "danger")
-			return redirect(url_for("user.login"))
+			newUser = User(username)
+			newUser.github_username = username
+			db.session.add(newUser)
+			db.session.commit()
+
+			if not _login_user(newUser):
+				raise Exception("Unable to login as user we just created")
+
+			flash("Created an account", "success")
+			return redirect(url_for("user_profile_page", username=username))
 		elif _login_user(userByGithub):
 			return redirect(next_url or url_for("home_page"))
 		else:
