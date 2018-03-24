@@ -9,7 +9,7 @@ app = Flask(__name__)
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
 
 menu.Menu(app=app)
-markdown.Markdown(app, extensions=["fenced_code"])
+markdown.Markdown(app, extensions=["fenced_code"], safe_mode=True, output_format="html5")
 github = GitHub(app)
 
 from . import models
