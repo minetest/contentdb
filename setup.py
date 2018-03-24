@@ -1,5 +1,8 @@
 import os, sys, datetime
 
+if not "FLASK_CONFIG" in os.environ:
+	os.environ["FLASK_CONFIG"] = "../config.cfg"
+
 delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"
 
 if delete_db and os.path.isfile("db.sqlite"):

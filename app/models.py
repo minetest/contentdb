@@ -177,6 +177,11 @@ class Package(db.Model):
 				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 
+	def getCreateEditRequestURL(self):
+		return url_for("create_editrequest_page",
+				ptype=self.type.toName(),
+				author=self.author.username, name=self.name)
+
 	def getDownloadURL(self):
 		return url_for("package_download_page",
 				type=self.type.toName(),
