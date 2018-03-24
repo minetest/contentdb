@@ -24,6 +24,20 @@ class UserRank(enum.Enum):
 	def getTitle(self):
 		return self.name.replace("_", " ").title()
 
+	def toName(self):
+		return self.name.lower()
+
+	def __str__(self):
+		return self.name
+
+	@classmethod
+	def choices(cls):
+		return [(choice, choice.getTitle()) for choice in cls]
+
+	@classmethod
+	def coerce(cls, item):
+		return item if type(item) == UserRank else UserRank[item]
+
 
 class Permission(enum.Enum):
 	EDIT_PACKAGE       = "EDIT_PACKAGE"
@@ -34,6 +48,7 @@ class Permission(enum.Enum):
 	APPROVE_RELEASE    = "APPROVE_RELEASE"
 	APPROVE_NEW        = "APPROVE_NEW"
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
+	CHANGE_RANK        = "CHANGE_RANK"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -85,6 +100,21 @@ class User(db.Model, UserMixin):
 
 	def isClaimed(self):
 		return self.password is not None and self.password != ""
+
+	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return False
+
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to User.checkPerm()")
+
+		# Members can edit their own packages, and editors can edit any packages
+		if perm == Permission.CHANGE_RANK:
+			return user.rank.atLeast(UserRank.MODERATOR)
+		else:
+			raise Exception("Permission {} is not related to users".format(perm.name))
 
 class PackageType(enum.Enum):
 	MOD  = "Mod"

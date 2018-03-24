@@ -87,6 +87,10 @@
 
 				{{ render_field(form.display_name, tabindex=240) }}
 
+				{% if user.checkPerm(current_user, "CHANGE_RANK") %}
+					{{ render_field(form.rank, tabindex=240) }}
+				{% endif %}
+
 				{{ render_submit_field(form.submit, tabindex=280) }}
 			</div>
 		</div>
