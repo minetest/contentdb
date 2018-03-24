@@ -27,7 +27,7 @@ def doPackageList(type):
 		query = query.filter(Package.title.contains(search))
 
 	if shouldReturnJson():
-		return jsonify([package.getAsDictionary(request.url_root) for package in query.all()])
+		return jsonify([package.getAsDictionary(app.config["BASE_URL"]) for package in query.all()])
 	else:
 		return render_template("packages/list.html", title=title, packages=query.all(), query=search)
 
@@ -104,7 +104,7 @@ def package_page(type, author, name):
 	package = getPageByInfo(type, author, name)
 
 	if shouldReturnJson():
-		return jsonify(package.getAsDictionary(request.url_root))
+		return jsonify(package.getAsDictionary(app.config["BASE_URL"]))
 	else:
 		releases = getReleases(package)
 		requests = [r for r in package.requests if r.status == 0]
