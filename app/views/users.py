@@ -20,12 +20,13 @@ class UserProfileForm(FlaskForm):
 	display_name = StringField("Display name")
 	submit = SubmitField("Save")
 
-@app.route("/user/", methods=["GET"])
-@login_required
-def self_user_profile_page():
-	return redirect(url_for("user_profile_page", username=current_user.username))
+@app.route("/users/", methods=["GET"])
+def user_list_page():
+	users = User.query.all()
+	return render_template("users/list.html", users=users)
 
-@app.route("/user/<username>/", methods=["GET", "POST"])
+
+@app.route("/users/<username>/", methods=["GET", "POST"])
 def user_profile_page(username):
 	user = User.query.filter_by(username=username).first()
 	if not user:
