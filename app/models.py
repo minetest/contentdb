@@ -147,6 +147,10 @@ class PackagePropertyKey(enum.Enum):
 	issueTracker = "Issue Tracker"
 	forums       = "Forum Topic ID"
 
+tags = db.Table('tags',
+    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True),
+    db.Column('package_id', db.Integer, db.ForeignKey('package.id'), primary_key=True)
+)
 
 class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
@@ -167,7 +171,10 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=False)
 
-	# Releases
+
+	tags = db.relationship('Tag', secondary=tags, lazy='subquery',
+			backref=db.backref('packages', lazy=True))
+
 	releases = db.relationship("PackageRelease", backref="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
 
@@ -265,6 +272,22 @@ class Package(db.Model):
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
+
+class Tag(db.Model):
+	id              = db.Column(db.Integer,    primary_key=True)
+	title           = db.Column(db.String(100), nullable=False)
+	backgroundColor = db.Column(db.String(6),   nullable=False)
+	textColor       = db.Column(db.String(6),   nullable=False)
+
+	def __init__(self, title, backgroundColor="000000", textColor="ffffff"):
+		self.title           = title
+		self.backgroundColor = backgroundColor
+		self.textColor       = textColor
+
+	def getName(self):
+		import re
+		regex = re.compile('[^a-z_]')
+		return regex.sub("", self.title.lower().replace(" ", "_"))
 
 class PackageRelease(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

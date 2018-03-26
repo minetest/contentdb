@@ -19,4 +19,18 @@
 			<li><i>No packages available</i></ul>
 		{% endfor %}
 	</ul>
+
+	<h3>Tags</h3>
+	<div class="box box_grey alert alert-warning">
+		Filtering by tag doesn't actually work yet!
+	</div>
+	<ul>
+		{% for t in tags %}
+			<li><a href="{{ url_for('packages_page', q=(query or '')+' tag:'+t.getName()) }}">
+				{{ t.title }}
+			</a></li>
+		{% else %}
+			<li><i>No tags available</i></ul>
+		{% endfor %}
+	</ul>
 {% endblock %}

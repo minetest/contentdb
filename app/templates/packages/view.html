@@ -98,6 +98,15 @@
 		{% endfor %}
 	</ul>
 
+	<h3>Tags</h3>
+	<ul>
+		{% for t in package.tags %}
+			<li>{{ t.title }}</li>
+		{% else %}
+			<li>No tags.</li>
+		{% endfor %}
+	</ul>
+
 	{% if current_user.is_authenticated or requests %}
 		<h3>Edit Requests</h3>
 

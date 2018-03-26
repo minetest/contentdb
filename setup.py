@@ -34,12 +34,23 @@ if not os.path.isfile("db.sqlite"):
 	sam.rank = UserRank.EDITOR
 	db.session.add(sam)
 
+	tags = {}
+	for tag in ["Inventory", "Mapgen", "Building", \
+			"Animals, monsters and NPCs", "Tools", "Player effects", \
+			"Environment", "Transport", "Maintenance", "Plants and farming", \
+			"Player vs Player", "Survival", "Creative", "Puzzle", "Multiplayer focused"]:
+		row = Tag(tag)
+		tags[row.getName()] = row
+		db.session.add(row)
+
+
 	mod1 = Package()
 	mod1.approved = True
 	mod1.name = "awards"
 	mod1.title = "Awards"
 	mod1.type = PackageType.MOD
 	mod1.author = ruben
+	mod1.tags.append(tags["player_effects"])
 	mod1.repo = "https://github.com/rubenwardy/awards"
 	mod1.issueTracker = "https://github.com/rubenwardy/awards/issues"
 	mod1.forums = 4870
@@ -70,6 +81,7 @@ awards.register_achievement("award_mesefind",{
 	mod2.approved = True
 	mod2.name = "mesecons"
 	mod2.title = "Mesecons"
+	mod2.tags.append(tags["tools"])
 	mod2.type = PackageType.MOD
 	mod2.author = jeija
 	mod2.repo = "https://github.com/minetest-mods/mesecons/"
@@ -169,6 +181,9 @@ No warranty is provided, express or implied, for any part of the project.
 	game1.title = "Capture The Flag"
 	game1.type = PackageType.GAME
 	game1.author = ruben
+	game1.tags.append(tags["player_vs_player"])
+	game1.tags.append(tags["survival"])
+	game1.tags.append(tags["multiplayer_focused"])
 	game1.repo = "https://github.com/rubenwardy/capturetheflag"
 	game1.issueTracker = "https://github.com/rubenwardy/capturetheflag/issues"
 	game1.forums = 12835
@@ -180,7 +195,6 @@ Uses the CTF PvP Engine.
 """
 
 	db.session.add(game1)
-
 
 
 	db.session.commit()
