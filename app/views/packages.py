@@ -31,7 +31,7 @@ def doPackageList(type):
 		return jsonify([package.getAsDictionary(app.config["BASE_URL"]) for package in query.all()])
 	else:
 		tags = Tag.query.all()
-		return render_template("packages/list.html", title=title, packages=query.all(), query=search, tags=tags)
+		return render_template("packages/list.html", title=title, packages=query.all(), query=search, tags=tags, type=None if type is None else type.toName())
 
 
 @app.route("/packages/")

@@ -6,6 +6,7 @@
 
 {% block content %}
 	<form method="get" action="">
+		{% if type %}<input type="hidden" name="type" value="{{ type }}" />{% endif %}
 		<input type="text" name="q" value="{{ query or ''}}" />
 		<input type="submit" value="Search" />
 	</form>
@@ -26,7 +27,7 @@
 	</div>
 	<ul>
 		{% for t in tags %}
-			<li><a href="{{ url_for('packages_page', q=(query or '')+' tag:'+t.name) }}">
+			<li><a href="{{ url_for('packages_page', q=(query or '')+' tag:'+t.name, type=type) }}">
 				{{ t.title }}
 			</a></li>
 		{% else %}
