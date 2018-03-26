@@ -283,7 +283,7 @@ def create_editrequest_page(ptype, author, name):
 def view_editrequest_page(ptype, author, name, id):
 	package = getPageByInfo(ptype, author, name)
 
-	erequest = EditRequest.query.filter_by(id=id).first()
+	erequest = EditRequest.query.get(id)
 	if erequest is None:
 		abort(404)
 
@@ -297,7 +297,7 @@ def approve_editrequest_page(ptype, author, name, id):
 		flash("You don't have permission to do that.", "error")
 		return redirect(package.getDetailsURL())
 
-	erequest = EditRequest.query.filter_by(id=id).first()
+	erequest = EditRequest.query.get(id)
 	if erequest is None:
 		abort(404)
 
@@ -318,7 +318,7 @@ def reject_editrequest_page(ptype, author, name, id):
 		flash("You don't have permission to do that.", "error")
 		return redirect(package.getDetailsURL())
 
-	erequest = EditRequest.query.filter_by(id=id).first()
+	erequest = EditRequest.query.get(id)
 	if erequest is None:
 		abort(404)
 
@@ -387,7 +387,7 @@ def edit_release_page(type, author, name, id):
 	if user is None:
 		abort(404)
 
-	release = PackageRelease.query.filter_by(id=id).first()
+	release = PackageRelease.query.get(id)
 	if release is None:
 		abort(404)
 
