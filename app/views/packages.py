@@ -187,6 +187,34 @@ def approve_package_page(type=None, author=None, name=None):
 
 	return redirect(package.getDetailsURL())
 
+class CreateScreenshotForm(FlaskForm):
+	title	   = StringField("Title/Caption", [Optional()])
+	fileUpload = FileField("File Upload", [InputRequired()])
+	submit	   = SubmitField("Save")
+
+@app.route("/<type>s/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
+@login_required
+def create_screenshot_page(type, author, name):
+	package = getPageByInfo(type, author, name)
+	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+		return redirect(package.getDetailsURL())
+
+	# Initial form class from post data and default data
+	form = CreateScreenshotForm()
+	if request.method == "POST" and form.validate():
+		uploadedPath = doFileUpload(form.fileUpload.data, ["png", "jpg", "jpeg"],
+				"a PNG or JPG image file")
+		if uploadedPath is not None:
+			ss = PackageScreenshot()
+			ss.package = package
+			ss.title   = form["title"].data
+			ss.url     = uploadedPath
+			db.session.add(ss)
+			db.session.commit()
+			return redirect(package.getDetailsURL())
+
+	return render_template("packages/screenshot_new.html", package=package, form=form)
+
 
 class EditRequestForm(PackageForm):
 	edit_title = StringField("Edit Title", [InputRequired(), Length(1, 100)])
@@ -333,20 +361,13 @@ def create_release_page(type, author, name):
 			db.session.commit()
 			return redirect(package.getDetailsURL())
 		else:
-			file = form.fileUpload.data
-			if not file or file.filename == "":
-				flash("No selected file", "error")
-			elif not isFilenameAllowed(file.filename, ["zip"]):
-				flash("Please select a zip file", "error")
-			else:
-				import random, string, os
-				filename = ''.join(random.choice(string.ascii_lowercase + string.ascii_uppercase + string.digits) for _ in range(10)) + ".zip"
-				file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
-
+			uploadedPath = doFileUpload(form.fileUpload.data, ["zip"], "a zip file")
+			if uploadedPath is not None:
 				rel = PackageRelease()
 				rel.package = package
 				rel.title = form["title"].data
-				rel.url = "/uploads/" + filename
+				rel.url = uploadedPath
+				db.session.add(rel)
 				db.session.commit()
 				return redirect(package.getDetailsURL())
 

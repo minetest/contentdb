@@ -171,6 +171,8 @@ class Package(db.Model):
 	releases = db.relationship("PackageRelease", backref="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
 
+	screenshots = db.relationship("PackageScreenshot", backref="package",
+			lazy="dynamic")
 
 	requests = db.relationship("EditRequest", backref="package",
 			lazy="dynamic")
@@ -184,7 +186,7 @@ class Package(db.Model):
 			"type": self.type.toName(),
 			"repo": self.repo,
 			"url": base_url + self.getDownloadURL(),
-			"screenshots": [ base_url + self.getMainScreenshotURL() ]
+			"screenshots": [base_url + ss.url for ss in self.screenshots]
 		}
 
 	def getDetailsURL(self):
@@ -199,6 +201,13 @@ class Package(db.Model):
 
 	def getApproveURL(self):
 		return url_for("approve_package_page",
+				type=self.type.toName(),
+				author=self.author.username, name=self.name)
+
+
+
+	def getNewScreenshotURL(self):
+		return url_for("create_screenshot_page",
 				type=self.type.toName(),
 				author=self.author.username, name=self.name)
 
@@ -218,7 +227,7 @@ class Package(db.Model):
 				author=self.author.username, name=self.name)
 
 	def getMainScreenshotURL(self):
-		return "/static/screenshot.png"
+		return self.screenshots[0].url if len(self.screenshots) > 0 else None
 
 	def getDownloadRelease(self):
 		for rel in self.releases:
@@ -276,6 +285,15 @@ class PackageRelease(db.Model):
 
 	def __init__(self):
 		self.releaseDate = datetime.now()
+
+class PackageScreenshot(db.Model):
+	id         = db.Column(db.Integer, primary_key=True)
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
+	title      = db.Column(db.String(100), nullable=False)
+	url        = db.Column(db.String(100), nullable=False)
+
+	def getThumbnailURL(self):
+		return self.url  # TODO
 
 class EditRequest(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

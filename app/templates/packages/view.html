@@ -18,6 +18,16 @@
 
 	<h1>{{ package.title }} by {{ package.author.display_name }}</h1>
 
+	<ul class="screenshot_list">
+		{% for ss in package.screenshots %}
+			<li>
+				<a href="{{ ss.url }}">
+					<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+				</a>
+			</li>
+		{% endfor %}
+	</ul>
+
 	<aside class="asideright box box_grey">
 		<table>
 			<tr>
@@ -46,6 +56,7 @@
 			{% if package.website %}<li><a href="{{ package.website }}">Website</a></li>{% endif %}
 			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
 				<li><a href="{{ package.getEditURL() }}">Edit</a></li>
+				<li><a href="{{ package.getNewScreenshotURL() }}">Add screenshot</a></li>
 			{% elif current_user.is_authenticated %}
 				<li><a href="{{ package.getCreateEditRequestURL() }}">Suggest Change</a></li>
 			{% endif %}
