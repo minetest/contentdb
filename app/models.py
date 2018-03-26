@@ -142,10 +142,17 @@ class PackagePropertyKey(enum.Enum):
 	shortDesc    = "Short Description"
 	desc         = "Description"
 	type         = "Type"
+	tags         = "Tags"
 	repo         = "Repository"
 	website      = "Website"
 	issueTracker = "Issue Tracker"
 	forums       = "Forum Topic ID"
+
+	def convert(self, value):
+		if self == PackagePropertyKey.tags:
+			return ','.join([t.title for t in value])
+		else:
+			return str(value)
 
 tags = db.Table('tags',
     db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True),
@@ -370,7 +377,13 @@ class EditRequestChange(db.Model):
 	newValue     = db.Column(db.Text, nullable=True)
 
 	def apply(self, package):
-		setattr(package, self.key.name, self.newValue)
+		if self.key == PackagePropertyKey.tags:
+			package.tags.clear()
+			for tagTitle in self.newValue.split(","):
+				tag = Tag.query.filter_by(title=tagTitle.strip()).first()
+				package.tags.append(tag)
+		else:
+			setattr(package, self.key.name, self.newValue)
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model

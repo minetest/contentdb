@@ -265,8 +265,8 @@ def create_editrequest_page(ptype, author, name):
 				change = EditRequestChange()
 				change.request = erequest
 				change.key = e
-				change.oldValue = str(oldValue)
-				change.newValue = str(newValue)
+				change.oldValue = e.convert(oldValue)
+				change.newValue = e.convert(newValue)
 				db.session.add(change)
 				wasChangeMade = True
 
