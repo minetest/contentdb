@@ -36,9 +36,9 @@ if not os.path.isfile("db.sqlite"):
 
 	tags = {}
 	for tag in ["Inventory", "Mapgen", "Building", \
-			"Animals, monsters and NPCs", "Tools", "Player effects", \
+			"Mobs and NPCs", "Tools", "Player effects", \
 			"Environment", "Transport", "Maintenance", "Plants and farming", \
-			"Player vs Player", "Survival", "Creative", "Puzzle", "Multiplayer focused"]:
+			"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
 		row = Tag(tag)
 		tags[row.getName()] = row
 		db.session.add(row)
@@ -181,9 +181,9 @@ No warranty is provided, express or implied, for any part of the project.
 	game1.title = "Capture The Flag"
 	game1.type = PackageType.GAME
 	game1.author = ruben
-	game1.tags.append(tags["player_vs_player"])
+	game1.tags.append(tags["pvp"])
 	game1.tags.append(tags["survival"])
-	game1.tags.append(tags["multiplayer_focused"])
+	game1.tags.append(tags["multiplayer"])
 	game1.repo = "https://github.com/rubenwardy/capturetheflag"
 	game1.issueTracker = "https://github.com/rubenwardy/capturetheflag/issues"
 	game1.forums = 12835
