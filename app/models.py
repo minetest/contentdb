@@ -275,6 +275,7 @@ class Package(db.Model):
 
 class Tag(db.Model):
 	id              = db.Column(db.Integer,    primary_key=True)
+	name            = db.Column(db.String(100), unique=True, nullable=False)
 	title           = db.Column(db.String(100), nullable=False)
 	backgroundColor = db.Column(db.String(6),   nullable=False)
 	textColor       = db.Column(db.String(6),   nullable=False)
@@ -284,10 +285,9 @@ class Tag(db.Model):
 		self.backgroundColor = backgroundColor
 		self.textColor       = textColor
 
-	def getName(self):
 		import re
 		regex = re.compile('[^a-z_]')
-		return regex.sub("", self.title.lower().replace(" ", "_"))
+		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
 
 class PackageRelease(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

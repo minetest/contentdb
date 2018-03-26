@@ -40,7 +40,7 @@ if not os.path.isfile("db.sqlite"):
 			"Environment", "Transport", "Maintenance", "Plants and farming", \
 			"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
 		row = Tag(tag)
-		tags[row.getName()] = row
+		tags[row.name] = row
 		db.session.add(row)
 
 
