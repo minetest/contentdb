@@ -152,10 +152,25 @@ def create_edit_package_page(type=None, author=None, name=None):
 	form = None
 	if type is None:
 		form = PackageForm(formdata=request.form)
+		author = request.args.get("author")
+		if author is None or author == current_user.username:
+			author = current_user
+		else:
+			author = User.query.filter_by(username=author).first()
+			if author is None:
+				flash("Unable to find that user", "error")
+				return redirect(url_for("create_edit_package_page"))
+
+			if not author.checkPerm(current_user, Permission.CHANGE_AUTHOR):
+				flash("Permission denied", "error")
+				return redirect(url_for("create_edit_package_page"))
+
 	else:
 		package = getPageByInfo(type, author, name)
 		if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
 			return redirect(package.getDetailsURL())
+
+		author = package.author
 
 		form = PackageForm(formdata=request.form, obj=package)
 
@@ -164,18 +179,19 @@ def create_edit_package_page(type=None, author=None, name=None):
 		# Successfully submitted!
 		if not package:
 			package = Package()
-			package.author = current_user
+			package.author = author
 			# package.approved = package.checkPerm(current_user, Permission.APPROVE_NEW)
+
+		form.populate_obj(package) # copy to row
 
 		package.tags.clear()
 		for tag in form.tags.raw_data:
 			package.tags.append(Tag.query.get(tag))
 
-		form.populate_obj(package) # copy to row
 		db.session.commit() # save
 		return redirect(package.getDetailsURL()) # redirect
 
-	return render_template("packages/create_edit.html", package=package, form=form)
+	return render_template("packages/create_edit.html", package=package, form=form, author=author)
 
 @app.route("/<type>s/<author>/<name>/approve/")
 @login_required

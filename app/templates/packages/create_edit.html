@@ -2,6 +2,9 @@
 
 {% block title %}
 	{{ package.title or "Create Package" }}
+	{% if not package and author != current_user %}
+		for {{ author.display_name }}
+	{% endif %}
 {% endblock %}
 
 {% block content %}

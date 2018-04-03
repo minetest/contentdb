@@ -99,7 +99,7 @@ class User(db.Model, UserMixin):
 		self.rank = UserRank.NOT_JOINED
 
 	def isClaimed(self):
-		return self.password is not None and self.password != ""
+		return self.rank.atLeast(UserRank.NEW_MEMBER)
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
@@ -111,7 +111,9 @@ class User(db.Model, UserMixin):
 			raise Exception("Unknown permission given to User.checkPerm()")
 
 		# Members can edit their own packages, and editors can edit any packages
-		if perm == Permission.CHANGE_RANK:
+		if perm == Permission.CHANGE_AUTHOR:
+			return user.rank.atLeast(UserRank.EDITOR)
+		elif perm == Permission.CHANGE_RANK:
 			return user.rank.atLeast(UserRank.MODERATOR)
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))

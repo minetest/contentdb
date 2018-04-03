@@ -74,6 +74,11 @@
 			<li><i>No packages available</i></ul>
 		{% endfor %}
 	</ul>
+	{% if user == current_user or user.checkPerm(current_user, "CHANGE_AUTHOR") %}
+		<a href="{{ url_for('create_edit_package_page', author=user.username) }}">
+			Create
+		</a>
+	{% endif %}
 </div>
 
 {% if form %}
