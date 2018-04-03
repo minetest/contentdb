@@ -9,7 +9,7 @@ from .utils import *
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from wtforms.ext.sqlalchemy.fields import QuerySelectMultipleField
+from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 
 
 # TODO: the following could be made into one route, except I"m not sure how
@@ -135,6 +135,7 @@ class PackageForm(FlaskForm):
 	shortDesc    = StringField("Short Description", [InputRequired(), Length(1,200)])
 	desc         = TextAreaField("Long Description", [Optional(), Length(0,10000)])
 	type         = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
+	license      = QuerySelectField("License", [InputRequired()], query_factory=lambda: License.query, get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	tags         = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query, get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	repo         = StringField("Repo URL", [Optional(), URL()])
 	website      = StringField("Website URL", [Optional(), URL()])
@@ -227,11 +228,6 @@ class EditRequestForm(PackageForm):
 	edit_title = StringField("Edit Title", [InputRequired(), Length(1, 100)])
 	edit_desc  = TextField("Edit Description", [Optional()])
 
-class UnresolvedPackage(Package):
-	edit_title = ""
-	edit_desc  = ""
-
-
 @app.route("/<ptype>s/<author>/<name>/requests/new/", methods=["GET","POST"])
 @login_required
 def create_editrequest_page(ptype, author, name):
@@ -239,19 +235,16 @@ def create_editrequest_page(ptype, author, name):
 
 	form = EditRequestForm(request.form, obj=package)
 	if request.method == "POST" and form.validate():
-		editedPackage = UnresolvedPackage()
-		form.populate_obj(editedPackage)
-
 		erequest = EditRequest()
 		erequest.package = package
 		erequest.author  = current_user
-		erequest.title   = editedPackage.edit_title
-		erequest.desc    = editedPackage.edit_desc
+		erequest.title   = form["edit_title"].data
+		erequest.desc    = form["edit_desc"].data
 		db.session.add(erequest)
 
 		wasChangeMade = False
 		for e in PackagePropertyKey:
-			newValue = getattr(editedPackage, e.name)
+			newValue = form[e.name].data
 			oldValue = getattr(package, e.name)
 
 			newValueComp = newValue

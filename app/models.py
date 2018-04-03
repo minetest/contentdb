@@ -116,6 +116,18 @@ class User(db.Model, UserMixin):
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
+class License(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(50), nullable=False, unique=True)
+	packages = db.relationship("Package", backref="license", lazy="dynamic")
+
+	def __init__(self, v):
+		self.name = v
+
+	def __str__(self):
+		return self.name
+
+
 class PackageType(enum.Enum):
 	MOD  = "Mod"
 	GAME = "Game"
@@ -142,6 +154,7 @@ class PackagePropertyKey(enum.Enum):
 	shortDesc    = "Short Description"
 	desc         = "Description"
 	type         = "Type"
+	license      = "License"
 	tags         = "Tags"
 	repo         = "Repository"
 	website      = "Website"
@@ -169,6 +182,8 @@ class Package(db.Model):
 	shortDesc    = db.Column(db.String(200), nullable=False)
 	desc         = db.Column(db.Text, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
+
+	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"))
 
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 
@@ -198,6 +213,7 @@ class Package(db.Model):
 			"author": self.author.display_name,
 			"shortDesc": self.shortDesc,
 			"type": self.type.toName(),
+			"license": self.license.name,
 			"repo": self.repo,
 			"url": base_url + self.getDownloadURL(),
 			"screenshots": [base_url + ss.url for ss in self.screenshots]

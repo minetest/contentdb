@@ -44,10 +44,19 @@ if not os.path.isfile("db.sqlite"):
 		db.session.add(row)
 
 
+
+	licenses = {}
+	for license in ["LGPLv2.1", "LGPLv3", "GPLv2.1", "GPLv3", "AGPLv2.1", "AGPLv3",
+					"MIT", "Apache", "BSD", "ZLib", "CC0", "CC-BY-SA", "CC-BY", "CC-BY-NC-SA"]:
+		row = License(license)
+		licenses[row.name] = row
+		db.session.add(row)
+
 	mod1 = Package()
 	mod1.approved = True
 	mod1.name = "awards"
 	mod1.title = "Awards"
+	mod1.license = licenses["LGPLv2.1"]
 	mod1.type = PackageType.MOD
 	mod1.author = ruben
 	mod1.tags.append(tags["player_effects"])
@@ -83,6 +92,7 @@ awards.register_achievement("award_mesefind",{
 	mod2.title = "Mesecons"
 	mod2.tags.append(tags["tools"])
 	mod2.type = PackageType.MOD
+	mod2.license = licenses["LGPLv3"]
 	mod2.author = jeija
 	mod2.repo = "https://github.com/minetest-mods/mesecons/"
 	mod2.issueTracker = "https://github.com/minetest-mods/mesecons/issues"
@@ -180,6 +190,7 @@ No warranty is provided, express or implied, for any part of the project.
 	game1.name = "capturetheflag"
 	game1.title = "Capture The Flag"
 	game1.type = PackageType.GAME
+	game1.license = licenses["LGPLv2.1"]
 	game1.author = ruben
 	game1.tags.append(tags["pvp"])
 	game1.tags.append(tags["survival"])
