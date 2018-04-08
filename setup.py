@@ -275,6 +275,12 @@ Uses the CTF PvP Engine.
 
 	db.session.add(game1)
 
+	rel = PackageRelease()
+	rel.package = game1
+	rel.title = "v1.0.0"
+	rel.url = "https://github.com/rubenwardy/capturetheflag/archive/master.zip"
+	rel.approved = True
+	db.session.add(rel)
 
 	db.session.commit()
 else:
