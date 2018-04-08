@@ -84,6 +84,7 @@ awards.register_achievement("award_mesefind",{
 	rel.package = mod1
 	rel.title = "v1.0.0"
 	rel.url = "https://github.com/rubenwardy/awards/archive/master.zip"
+	rel.approved = True
 	db.session.add(rel)
 
 	mod2 = Package()
@@ -198,6 +199,13 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.shortDesc = "Adds hand holds and climbing thingies"
 	mod.desc = "This is the long desc"
 	db.session.add(mod)
+
+	rel = PackageRelease()
+	rel.package = mod
+	rel.title = "v1.0.0"
+	rel.url = "https://github.com/ezhh/handholds/archive/master.zip"
+	rel.approved = True
+	db.session.add(rel)
 
 	mod = Package()
 	mod.approved = True
