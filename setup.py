@@ -184,6 +184,66 @@ No warranty is provided, express or implied, for any part of the project.
 	db.session.add(mod1)
 	db.session.add(mod2)
 
+	mod = Package()
+	mod.approved = True
+	mod.name = "handholds"
+	mod.title = "Mountain Climbing"
+	mod.license = licenses["MIT"]
+	mod.type = PackageType.MOD
+	mod.author = ez
+	mod.tags.append(tags["player_effects"])
+	mod.repo = "https://github.com/ezhh/handholds"
+	mod.issueTracker = "https://github.com/ezhh/handholds/issues"
+	mod.forums = 17069
+	mod.shortDesc = "Adds hand holds and climbing thingies"
+	mod.desc = "This is the long desc"
+	db.session.add(mod)
+
+	mod = Package()
+	mod.approved = True
+	mod.name = "other_worlds"
+	mod.title = "Other Worlds"
+	mod.license = licenses["MIT"]
+	mod.type = PackageType.MOD
+	mod.author = ez
+	mod.tags.append(tags["mapgen"])
+	mod.tags.append(tags["environment"])
+	mod.repo = "https://github.com/ezhh/other_worlds"
+	mod.issueTracker = "https://github.com/ezhh/other_worlds/issues"
+	mod.forums = 16015
+	mod.shortDesc = "Adds space with asteroids and comets"
+	mod.desc = "This is the long desc"
+	db.session.add(mod)
+
+	mod = Package()
+	mod.approved = True
+	mod.name = "food"
+	mod.title = "Food"
+	mod.license = licenses["LGPLv2.1"]
+	mod.type = PackageType.MOD
+	mod.author = ruben
+	mod.tags.append(tags["player_effects"])
+	mod.repo = "https://github.com/rubenwardy/food/"
+	mod.issueTracker = "https://github.com/rubenwardy/food/issues/"
+	mod.forums = 2960
+	mod.shortDesc = "Adds lots of food and an API to manage ingredients"
+	mod.desc = "This is the long desc"
+	db.session.add(mod)
+
+	mod = Package()
+	mod.approved = True
+	mod.name = "food_sweet"
+	mod.title = "Sweet Foods"
+	mod.license = licenses["CC0"]
+	mod.type = PackageType.MOD
+	mod.author = ruben
+	mod.tags.append(tags["player_effects"])
+	mod.repo = "https://github.com/rubenwardy/food_sweet/"
+	mod.issueTracker = "https://github.com/rubenwardy/food_sweet/issues/"
+	mod.forums = 9039
+	mod.shortDesc = "Adds sweet food"
+	mod.desc = "This is the long desc"
+	db.session.add(mod)
 
 	game1 = Package()
 	game1.approved = True
