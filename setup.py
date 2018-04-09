@@ -282,6 +282,26 @@ Uses the CTF PvP Engine.
 	rel.approved = True
 	db.session.add(rel)
 
+
+	mod = Package()
+	mod.approved = True
+	mod.name = "pixelbox"
+	mod.title = "PixelBOX Reloaded"
+	mod.license = licenses["CC0"]
+	mod.type = PackageType.TXP
+	mod.author = ruben
+	mod.forums = 14132
+	mod.shortDesc = "This is an update of the original PixelBOX texture pack by the brillant artist Gambit"
+	mod.desc = "This is the long desc"
+	db.session.add(mod)
+
+	rel = PackageRelease()
+	rel.package = mod
+	rel.title = "v1.0.0"
+	rel.url = "http://mamadou3.free.fr/Minetest/PixelBOX.zip"
+	rel.approved = True
+	db.session.add(rel)
+
 	db.session.commit()
 else:
 	print("Database already exists")
