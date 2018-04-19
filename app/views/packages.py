@@ -33,7 +33,8 @@ def doPackageList(type):
 		return jsonify(pkgs)
 	else:
 		tags = Tag.query.all()
-		return render_template("packages/list.html", title=title, packages=query.all(), query=search, tags=tags, type=None if type is None else type.toName())
+		return render_template("packages/list.html", title=title, packages=query.all(), \
+				query=search, tags=tags, type=None if type is None else type.toName())
 
 
 @app.route("/packages/")

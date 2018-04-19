@@ -218,6 +218,7 @@ class Package(db.Model):
 			"license": self.license.name,
 			"repo": self.repo,
 			"url": base_url + self.getDownloadURL(),
+			"release": self.getDownloadRelease().id if self.getDownloadRelease() is not None else None,
 			"screenshots": [base_url + ss.url for ss in self.screenshots]
 		}
 
@@ -235,8 +236,6 @@ class Package(db.Model):
 		return url_for("approve_package_page",
 				type=self.type.toName(),
 				author=self.author.username, name=self.name)
-
-
 
 	def getNewScreenshotURL(self):
 		return url_for("create_screenshot_page",

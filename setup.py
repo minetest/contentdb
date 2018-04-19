@@ -52,6 +52,29 @@ if not os.path.isfile("db.sqlite"):
 		licenses[row.name] = row
 		db.session.add(row)
 
+	mod = Package()
+	mod.approved = True
+	mod.name = "alpha"
+	mod.title = "Alpha Test"
+	mod.license = licenses["MIT"]
+	mod.type = PackageType.MOD
+	mod.author = ruben
+	mod.tags.append(tags["mapgen"])
+	mod.tags.append(tags["environment"])
+	mod.repo = "https://github.com/ezhh/other_worlds"
+	mod.issueTracker = "https://github.com/ezhh/other_worlds/issues"
+	mod.forums = 16015
+	mod.shortDesc = "The content library should not be used yet as it is still in alpha"
+	mod.desc = "This is the long desc"
+	db.session.add(mod)
+
+	rel = PackageRelease()
+	rel.package = mod
+	rel.title = "v1.0.0"
+	rel.url = "https://github.com/ezhh/handholds/archive/master.zip"
+	rel.approved = True
+	db.session.add(rel)
+
 	mod1 = Package()
 	mod1.approved = True
 	mod1.name = "awards"
