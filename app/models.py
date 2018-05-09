@@ -258,7 +258,8 @@ class Package(db.Model):
 				author=self.author.username, name=self.name)
 
 	def getMainScreenshotURL(self):
-		return self.screenshots[0].url if len(self.screenshots) > 0 else None
+		screenshot = self.screenshots.first()
+		return screenshot.url if screenshot is not None else None
 
 	def getDownloadRelease(self):
 		for rel in self.releases:

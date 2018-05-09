@@ -27,6 +27,7 @@ def send_upload(path):
 @app.route("/")
 @menu.register_menu(app, ".", "Home")
 def home_page():
-	return render_template("index.html")
+	packages = Package.query.filter_by(approved=True).all()
+	return render_template("index.html", packages=packages)
 
-from . import users, githublogin, packages
+from . import users, githublogin, packages, sass

@@ -1,0 +1,35 @@
+.packagegrid {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.packagegrid li {
+	list-style: none;
+	display: inline-block;
+	padding: 0;
+	margin: 8px;
+}
+
+.packagegrid a {
+	display: block;
+	width: 246px;
+	height: 164px;
+	border-radius: 7px;
+	position: relative;
+	overflow: hidden;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+
+.packagegrid a span {
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	padding: 5px;
+	background: rgba(255, 255, 255, 0.3);
+	color: black;
+}

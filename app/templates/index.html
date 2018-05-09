@@ -5,37 +5,34 @@ Dashboard
 {% endblock %}
 
 {% block content %}
+	<header>
+		<h1>Content DB</h1>
 
-	<form method="get" action="/packages/">
-		<input type="text" name="q" value="{{ query or ''}}" />
-		<input type="submit" value="Search" />
-	</form>
+		<p>Minetest's official content repository</p>
 
-	<div class="box box_grey">
-		<h2>{{ self.title() }}</h2>
+		<form method="get" action="/packages/">
+			<input type="text" name="q" value="{{ query or ''}}" />
+			<input type="submit" value="Search" />
+		</form>
 
+		<p>
 		{% if current_user.is_authenticated %}
-			<p>
-				Hello user!
-			</p>
+			<a href="{{ url_for('user_profile_page', username=current_user.username) }}"
+					class="button button-primary">My Packages</a>
 		{% else %}
-			<p>
-				Please login!
-			</p>
+			<a href="{{ url_for('user.login') }}" class="button button-primary">Join</a>
 		{% endif %}
-	</div>
+		</p>
+	</header>
 
-	<div class="2box">
-		<div class="box box_grey">
-			<h2>Top Mods</h2>
-		</div>
-		<div class="box box_grey">
-			<h2>Statistics</h2>
-			<ul>
-				<li>Total mods: 543</li>
-				<li>Missing mods: 1020</li>
-				<li>Downloads/day: 200</li>
-			</ul>
-		</div>
-	</div>
+	<ul class="packagegrid">
+		{% for p in packages %}
+			<li><a href="{{ p.getDetailsURL() }}"
+				style="background-image: url({{ p.getMainScreenshotURL() or '/static/screenshot.png' }});">
+				<span>{{ p.title }} by {{ p.author.display_name }}</span>
+			</a></li>
+		{% else %}
+			<li><i>No packages available</i></ul>
+		{% endfor %}
+	</ul>
 {% endblock %}

@@ -1,0 +1,75 @@
+
+.screenshot_list, .screenshot_list li, .screenshot_list li a {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.screenshot_list li {
+	display: inline-block;
+	margin: 5px;
+	padding: 0;
+}
+
+.screenshot_list li a {
+	display: block;
+}
+
+.screenshot_list img {
+	width: 164px;
+	height: 164px;
+	object-fit: cover;
+}
+
+.box_img {
+	position: relative;
+	background-position: center;
+	background-size: cover;
+	background-image: url("screenshot.png");
+	min-height: 220px;
+	border-radius: 5px;
+	padding: 0;
+}
+
+.box_img > h2 {
+	display: inline-block;
+	position: absolute;
+	bottom: 15px;
+	left: 15px;
+}
+
+.sidebar_container {
+	display: block;
+	position: relative;
+	padding: 0;
+	margin: 0;
+}
+
+.sidebar_container .right, .sidebar_container .left{
+	position: absolute;
+	display: block;
+	top: 10px;
+	margin-top: 0;
+}
+
+.sidebar_container .right {
+	right: 0;
+	width: 280px;
+}
+
+.sidebar_container .left {
+	right: 295px;
+	left: 0;
+}
+
+.sidebar_container .right > *:first-child, .sidebar_container .left > *:first-child {
+	margin-top: 0;
+}
+
+.package-short-large {
+	font-size: 120%;
+}
+
+.pkg_wiz_1, .pkg_wiz_2 {
+	display: none;
+}
