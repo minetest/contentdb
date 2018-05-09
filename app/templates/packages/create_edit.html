@@ -12,18 +12,55 @@
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.name) }}
-		{{ render_field(form.title) }}
-		{{ render_field(form.shortDesc) }}
-		{{ render_field(form.desc) }}
-		{{ render_field(form.type) }}
-		{{ render_field(form.license) }}
-		{{ render_field(form.tags) }}
-		{{ render_field(form.repo) }}
-		{{ render_field(form.website) }}
-		{{ render_field(form.issueTracker) }}
-		{{ render_field(form.forums) }}
-		{{ render_submit_field(form.submit) }}
-		<input type="submit" value="Go">
+		<div class="pkg_meta">
+			{{ render_field(form.name) }}
+			{{ render_field(form.title) }}
+			{{ render_field(form.shortDesc) }}
+			{{ render_field(form.desc) }}
+			{{ render_field(form.type) }}
+			{{ render_field(form.license) }}
+			{{ render_field(form.tags) }}
+		</div>
+
+		<div class="pkg_wiz_1">
+			<h2>Import Package</h2>
+
+			<p>Enter the repo URL for the package.
+			If it's hosted on Github then metadata will automatically be imported.</p>
+
+			<p>Leave blank if you don't have a repo.</p>
+		</div>
+
+		<div class="pkg_repo">
+			{{ render_field(form.repo) }}
+		</div>
+
+		<div class="pkg_wiz_1">
+			<a id="pkg_wiz_1_next" class="button button-primary">Next</a>
+		</div>
+
+		<div class="pkg_wiz_2">
+			Importing...
+		</div>
+
+		<div class="pkg_meta">
+			{{ render_field(form.website) }}
+			{{ render_field(form.issueTracker) }}
+			{{ render_field(form.forums) }}
+			{{ render_submit_field(form.submit) }}
+			<input type="submit" value="Go">
+		</div>
 	</form>
+
+	{% if not package.title %}
+		<script src="/static/jquery.min.js"></script>
+		<script src="/static/url.min.js"></script>
+		<script src="/static/package_create.js"></script>
+		<noscript>
+			<div class="box box_grey alert alert-warning">
+				<span class="icon_message"></span>
+				Javascript is needed to automatically import metadata from VCS.
+			</div>
+		</noscript>
+	{% endif %}
 {% endblock %}
