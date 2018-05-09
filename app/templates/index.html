@@ -8,21 +8,17 @@ Dashboard
 	<header>
 		<h1>Content DB</h1>
 
-		<p>Minetest's official content repository</p>
+		<p>
+			Minetest's official content repository.
+			Browse {{ packages | length }} packages,
+			all available under a free and open source
+			license.
+		</p>
 
 		<form method="get" action="/packages/">
 			<input type="text" name="q" value="{{ query or ''}}" />
 			<input type="submit" value="Search" />
 		</form>
-
-		<p>
-		{% if current_user.is_authenticated %}
-			<a href="{{ url_for('user_profile_page', username=current_user.username) }}"
-					class="button button-primary">My Packages</a>
-		{% else %}
-			<a href="{{ url_for('user.login') }}" class="button button-primary">Join</a>
-		{% endif %}
-		</p>
 	</header>
 
 	<ul class="packagegrid">
