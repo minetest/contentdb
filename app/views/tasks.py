@@ -10,7 +10,8 @@ from .utils import shouldReturnJson
 
 from .utils import *
 
-@app.route("/tasks/getmeta/new/")
+@app.route("/tasks/getmeta/new/", methods=["POST"])
+@login_required
 def new_getmeta_page():
 	aresult = getMeta.delay(request.args.get("url"))
 	return jsonify({
@@ -18,6 +19,7 @@ def new_getmeta_page():
 	})
 
 @app.route("/tasks/<id>/")
+@login_required
 def check_task(id):
 	result = celery.AsyncResult(id)
 	status = result.status

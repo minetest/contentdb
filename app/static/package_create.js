@@ -6,9 +6,15 @@ $(function() {
 		$(".pkg_meta").show()
 	}
 
-	function getJSON(url) {
+	function getJSON(url, method) {
 		return new Promise(function(resolve, reject) {
-			fetch(url).then(function(response) {
+			fetch(new Request(url, {
+				method: method || "get",
+				credentials: "same-origin",
+				headers: {
+					"Accept": "application/json",
+				},
+			})).then(function(response) {
 				response.text().then(function(txt) {
 					resolve(JSON.parse(txt))
 				}).catch(reject)
@@ -18,7 +24,7 @@ $(function() {
 
 	function performTask(url) {
 		return new Promise(function(resolve, reject) {
-			getJSON(url).then(function(startResult) {
+			getJSON(url, "post").then(function(startResult) {
 				console.log(startResult)
 				if (typeof startResult.poll_url == "string") {
 					var tries = 0;
