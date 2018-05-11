@@ -4,12 +4,6 @@
 Working
 {% endblock %}
 
-{% block headextra %}
-	{% if not "error" in info %}
-		<meta http-equiv="refresh" content="1;URL=">
-	{% endif %}
-{% endblock %}
-
 {% block content %}
 	{% if "error" in info %}
 		<h1>Task Failed</h1>
@@ -17,5 +11,15 @@ Working
 		<p>{{ info. error }}</p>
 	{% else %}
 		<h1>Working…</h1>
+
+		<script src="/static/polltask.js"></script>
+		<script>
+			pollTask("{{ url_for('check_task', id=info.id) }}", true)
+					.then(function() { location.reload() })
+					.catch(function() { location.reload() })
+		</script>
+		<noscript>
+			Reload the page to check for updates.
+		</noscript>
 	{% endif %}
 {% endblock %}

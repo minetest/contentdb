@@ -29,11 +29,13 @@ def check_task(id):
 	info = None
 	if isinstance(result, Exception):
 		info = {
+				'id': id,
 				'status': status,
 				'error': str(result),
 			}
 	else:
 		info = {
+				'id': id,
 				'status': status,
 				'result': result,
 			}
