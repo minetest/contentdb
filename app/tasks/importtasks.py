@@ -1,11 +1,17 @@
-import flask
+import flask, json
 from flask.ext.sqlalchemy import SQLAlchemy
 import urllib.request
-from urllib.parse import urlparse
-
+from urllib.parse import urlparse, quote_plus
 from app import app
 from app.models import *
 from app.tasks import celery
+
+class TaskError(Exception):
+	def __init__(self, value):
+		self.value = value
+	def __str__(self):
+		return repr(self.value)
+
 
 class GithubURLMaker:
 	def __init__(self, url):
@@ -18,6 +24,8 @@ class GithubURLMaker:
 		user = m.group(1)
 		repo = m.group(2)
 		self.baseUrl = "https://raw.githubusercontent.com/" + user + "/" + repo.replace(".git", "") + "/master"
+		self.user = user
+		self.repo = repo
 
 	def isValid(self):
 		return self.baseUrl is not None
@@ -30,6 +38,13 @@ class GithubURLMaker:
 
 	def getScreenshotURL(self):
 		return self.baseUrl + "/screenshot.png"
+
+	def getCommitsURL(self, branch):
+		return "https://api.github.com/repos/" + self.user + "/" + self.repo + "/commits?sha" + urllib.parse.quote_plus(branch)
+
+	def getCommitDownload(self, commit):
+		return "https://github.com/" + self.user + "/" + self.repo + "/archive/" + commit + ".zip"
+
 
 def parseConf(string):
 	retval = {}
@@ -49,10 +64,11 @@ def getMeta(urlstr):
 	urlmaker = None
 	if url.netloc == "github.com":
 		urlmaker = GithubURLMaker(url)
+	else:
+		raise TaskError("Unsupported repo")
 
 	if not urlmaker.isValid():
-		print("Error! Url maker not valid")
-		return
+		raise TaskError("Error! Url maker not valid")
 
 	print(urlmaker.getModConfURL())
 
@@ -79,3 +95,35 @@ def getMeta(urlstr):
 			print("description.txt does not exist!")
 
 	return result
+
+@celery.task()
+def makeVCSRelease(id, branch):
+	release = PackageRelease.query.get(id)
+	if release is None:
+		raise TaskError("No such release!")
+
+	if release.package is None:
+		raise TaskError("No package attached to release")
+
+	url = urlparse(release.package.repo)
+
+	urlmaker = None
+	if url.netloc == "github.com":
+		urlmaker = GithubURLMaker(url)
+	else:
+		raise TaskError("Unsupported repo")
+
+	if not urlmaker.isValid():
+		raise TaskError("Invalid github repo URL")
+
+	contents = urllib.request.urlopen(urlmaker.getCommitsURL(branch)).read().decode("utf-8")
+	commits = json.loads(contents)
+
+	if len(commits) == 0:
+		raise TaskError("No commits found")
+
+	release.url = urlmaker.getCommitDownload(commits[0]["sha"])
+	release.task_id = None
+	db.session.commit()
+
+	return release.url

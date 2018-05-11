@@ -3,6 +3,7 @@ from flask_user import *
 from flask.ext import menu
 from app import app
 from app.models import *
+from app.tasks.importtasks import makeVCSRelease
 
 from .utils import *
 
@@ -369,16 +370,17 @@ def create_release_page(type, author, name):
 	# Initial form class from post data and default data
 	form = CreatePackageReleaseForm()
 	if request.method == "POST" and form.validate():
-		for key, value in request.files.items() :
-			print (key, value)
 		if form["uploadOpt"].data == "vcs":
 			rel = PackageRelease()
 			rel.package = package
-			rel.title = form["title"].data
-			rel.url = form["vcsLabel"].data
-			# TODO: get URL to commit from branch name
+			rel.title   = form["title"].data
+			rel.url     = ""
 			db.session.commit()
-			return redirect(package.getDetailsURL())
+
+			rel.task_id = makeVCSRelease.delay(rel.id, form["vcsLabel"].data).id
+			db.session.commit()
+
+			return redirect(url_for("check_task", id=rel.task_id, r=package.getDetailsURL()))
 		else:
 			uploadedPath = doFileUpload(form.fileUpload.data, ["zip"], "a zip file")
 			if uploadedPath is not None:
@@ -411,6 +413,9 @@ def edit_release_page(type, author, name, id):
 	canApprove = package.checkPerm(current_user, Permission.APPROVE_RELEASE)
 	if not (canEdit or canApprove):
 		return redirect(package.getDetailsURL())
+
+	if release.task_id is not None:
+		return redirect(url_for("check_task", id=release.task_id, r=release.getEditURL()))
 
 	# Initial form class from post data and default data
 	form = EditPackageReleaseForm(formdata=request.form, obj=release)

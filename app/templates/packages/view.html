@@ -78,25 +78,29 @@
 
 	<ul>
 		{% for rel in releases %}
-			<li>
-				{% if not rel.approved %}<i>{% endif %}
+			{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
+				<li>
+					{% if not rel.approved %}<i>{% endif %}
 
-				<a href="{{ rel.url }}">{{ rel.title }}</a>,
-				created {{ rel.releaseDate }}.
-				{% if not rel.approved %}
-					Waiting for approval.
-				{% endif %}
-
-				{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
-					<a href="{{ rel.getEditURL() }}">Edit
-					{% if not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
-						/ Approve
+					<a href="{{ rel.url }}">{{ rel.title }}</a>,
+					created {{ rel.releaseDate }}.
+					{% if rel.task_id %}
+						<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing</a>
+					{% elif not rel.approved %}
+						Waiting for approval.
 					{% endif %}
-					</a>
-				{% endif %}
 
-				{% if not rel.approved %}</i>{% endif %}
-			</li>
+					{% if not rel.task_id and (package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE"))  %}
+						<a href="{{ rel.getEditURL() }}">Edit
+						{% if not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
+							/ Approve
+						{% endif %}
+						</a>
+					{% endif %}
+
+					{% if not rel.approved %}</i>{% endif %}
+				</li>
+			{% endif %}
 		{% else %}
 			<li>No releases available.</li>
 		{% endfor %}

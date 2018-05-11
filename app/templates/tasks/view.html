@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+Working
+{% endblock %}
+
+{% block headextra %}
+	{% if not "error" in info %}
+		<meta http-equiv="refresh" content="1;URL=">
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	{% if "error" in info %}
+		<h1>Task Failed</h1>
+
+		<p>{{ info. error }}</p>
+	{% else %}
+		<h1>Working…</h1>
+	{% endif %}
+{% endblock %}
