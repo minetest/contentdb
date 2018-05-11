@@ -1,26 +1,32 @@
 .packagegrid {
-	list-style: none;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: row;
+	flex-grow: 1;
+	flex-shrink: 1;
+	
 	padding: 0;
 	margin: 0;
 }
 
 .packagegrid li {
-	list-style: none;
-	display: inline-block;
-	padding: 0;
-	margin: 8px;
+	flex: 1;
+	display: block;	
+	min-width: 246px;
+	min-height: 164px;
+	padding: 1;
+	margin: 5px;	
 }
 
 .packagegrid a {
 	display: block;
-	width: 246px;
-	height: 164px;
+	padding-bottom: 66.66%;
 	border-radius: 7px;
 	position: relative;
 	overflow: hidden;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    	background-size: cover;
+	background-repeat: no-repeat;
+    	background-position: center;
 }
 
 
