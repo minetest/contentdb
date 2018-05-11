@@ -25,6 +25,12 @@ class GithubURLMaker:
 	def getModConfURL(self):
 		return self.baseUrl + "/mod.conf"
 
+	def getDescURL(self):
+		return self.baseUrl + "/description.txt"
+
+	def getScreenshotURL(self):
+		return self.baseUrl + "/screenshot.png"
+
 def parseConf(string):
 	retval = {}
 	for line in string.split("\n"):
@@ -55,7 +61,7 @@ def getMeta(urlstr):
 	try:
 		contents = urllib.request.urlopen(urlmaker.getModConfURL()).read().decode("utf-8")
 		conf = parseConf(contents)
-		for key in ["name", "description"]:
+		for key in ["name", "description", "title"]:
 			try:
 				result[key] = conf[key]
 			except KeyError:
@@ -64,5 +70,12 @@ def getMeta(urlstr):
 		print(conf)
 	except OSError:
 		print("mod.conf does not exist")
+
+	if not "description" in result:
+		try:
+			contents = urllib.request.urlopen(urlmaker.getDescURL()).read().decode("utf-8")
+			result["description"] = contents.strip()
+		except OSError:
+			print("description.txt does not exist!")
 
 	return result

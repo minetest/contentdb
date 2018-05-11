@@ -68,7 +68,8 @@ $(function() {
 
 			performTask("/tasks/getmeta/new/?url=" + encodeURI(repoURL)).then(function(result) {
 				console.log(result)
-				$("#name").val(result.name)
+				$("#name").val(result.name || "")
+				$("#title").val(result.title || "")
 				const desc = result.description || ""
 				if (desc.length > 0) {
 					const idx = desc.indexOf(".")
