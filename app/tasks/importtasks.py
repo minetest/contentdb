@@ -30,6 +30,12 @@ class GithubURLMaker:
 	def isValid(self):
 		return self.baseUrl is not None
 
+	def getRepoURL(self):
+		return "https://github.com/" + self.user + "/" + self.repo + ".git"
+
+	def getIssueTrackerURL(self):
+		return "https://github.com/" + self.user + "/" + self.repo + "/issues/"
+
 	def getModConfURL(self):
 		return self.baseUrl + "/mod.conf"
 
@@ -70,9 +76,10 @@ def getMeta(urlstr):
 	if not urlmaker.isValid():
 		raise TaskError("Error! Url maker not valid")
 
-	print(urlmaker.getModConfURL())
-
 	result = {}
+
+	result["repo"] = urlmaker.getRepoURL()
+	result["issueTracker"] = urlmaker.getIssueTrackerURL()
 
 	try:
 		contents = urllib.request.urlopen(urlmaker.getModConfURL()).read().decode("utf-8")
@@ -82,10 +89,11 @@ def getMeta(urlstr):
 				result[key] = conf[key]
 			except KeyError:
 				pass
-
-		print(conf)
 	except OSError:
 		print("mod.conf does not exist")
+
+	if "name" in result:
+		result["title"] = result["name"].replace("_", " ").title()
 
 	if not "description" in result:
 		try:
@@ -93,6 +101,12 @@ def getMeta(urlstr):
 			result["description"] = contents.strip()
 		except OSError:
 			print("description.txt does not exist!")
+
+	if "description" in result:
+		desc = result["description"]
+		idx = desc.find(".") + 1
+		cutIdx = min(len(desc), 200 if idx < 5 else idx)
+		result["short_description"] = desc[:cutIdx]
 
 	return result
 

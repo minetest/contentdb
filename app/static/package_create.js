@@ -27,12 +27,10 @@ $(function() {
 				console.log(result)
 				$("#name").val(result.name || "")
 				$("#title").val(result.title || "")
-				const desc = result.description || ""
-				if (desc.length > 0) {
-					const idx = desc.indexOf(".")
-					$("#shortDesc").val((idx < 5 || idx > 100) ? desc.substring(0, Math.min(desc.length, 100)) : desc.substring(0, idx))
-					$("#desc").val(desc)
-				}
+				$("#repo").val(result.repo || repoURL)
+				$("#issueTracker").val(result.issueTracker || "")
+				$("#desc").val(result.description || "")
+				$("#shortDesc").val(result.short_description || "")
 				finish()
 			}).catch(function(e) {
 				alert(e)
