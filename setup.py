@@ -17,11 +17,13 @@ if not os.path.isfile("db.sqlite"):
 
 	ruben = User("rubenwardy")
 	ruben.github_username = "rubenwardy"
+	ruben.forums_username = "rubenwardy"
 	ruben.rank = UserRank.ADMIN
 	db.session.add(ruben)
 
 	ez = User("Shara")
 	ez.github_username = "Ezhh"
+	ez.forums_username = "Shara"
 	ez.rank = UserRank.EDITOR
 	db.session.add(ez)
 
@@ -44,13 +46,14 @@ if not os.path.isfile("db.sqlite"):
 		db.session.add(row)
 
 
-
 	licenses = {}
-	for license in ["LGPLv2.1", "LGPLv3", "GPLv2.1", "GPLv3", "AGPLv2.1", "AGPLv3",
-					"MIT", "Apache", "BSD", "ZLib", "CC0", "CC-BY-SA", "CC-BY", "CC-BY-NC-SA"]:
+	for license in ["GPLv2.1", "GPLv3", "LGPLv2.1", "LGPLv3", "AGPLv2.1", "AGPLv3",
+					"Apache", "BSD 3-Clause", "BSD 2-Clause", "CC0", "CC-BY-SA",
+					"CC-BY", "CC-BY-NC-SA", "MIT", "ZLib"]:
 		row = License(license)
 		licenses[row.name] = row
 		db.session.add(row)
+
 
 	mod = Package()
 	mod.approved = True
