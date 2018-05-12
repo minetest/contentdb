@@ -28,7 +28,6 @@
 		{% endif %}
 
 		{{ render_submit_field(form.submit) }}
-		<input type="submit" value="Go">
 	</form>
 
 	{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
