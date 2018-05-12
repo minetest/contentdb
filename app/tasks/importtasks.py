@@ -23,7 +23,8 @@ class GithubURLMaker:
 
 		user = m.group(1)
 		repo = m.group(2)
-		self.baseUrl = "https://raw.githubusercontent.com/" + user + "/" + repo.replace(".git", "") + "/master"
+		self.baseUrl = "https://raw.githubusercontent.com/{}/{}/master" \
+				.format(user, repo.replace(".git", ""))
 		self.user = user
 		self.repo = repo
 
@@ -31,10 +32,10 @@ class GithubURLMaker:
 		return self.baseUrl is not None
 
 	def getRepoURL(self):
-		return "https://github.com/" + self.user + "/" + self.repo + ".git"
+		return "https://github.com/{}/{}".format(self.user, self.repo)
 
 	def getIssueTrackerURL(self):
-		return "https://github.com/" + self.user + "/" + self.repo + "/issues/"
+		return "https://github.com/{}/{}/issues/".format(self.user, self.repo)
 
 	def getModConfURL(self):
 		return self.baseUrl + "/mod.conf"
@@ -46,10 +47,12 @@ class GithubURLMaker:
 		return self.baseUrl + "/screenshot.png"
 
 	def getCommitsURL(self, branch):
-		return "https://api.github.com/repos/" + self.user + "/" + self.repo + "/commits?sha" + urllib.parse.quote_plus(branch)
+		return "https://api.github.com/repos/{}/{}/commits?sha={}" \
+				.format(self.user, self.repo, urllib.parse.quote_plus(branch))
 
 	def getCommitDownload(self, commit):
-		return "https://github.com/" + self.user + "/" + self.repo + "/archive/" + commit + ".zip"
+		return "https://github.com/{}/{}/archive/{}.zip" \
+				.format(self.user, self.repo, commit)
 
 
 krock_list_cache = None
