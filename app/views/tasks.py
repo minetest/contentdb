@@ -13,7 +13,9 @@ from .utils import *
 @app.route("/tasks/getmeta/new/", methods=["POST"])
 @login_required
 def new_getmeta_page():
-	aresult = getMeta.delay(request.args.get("url"))
+	author = request.args.get("author")
+	author = current_user.forums_username if author is None else author
+	aresult = getMeta.delay(request.args.get("url"), author)
 	return jsonify({
 		"poll_url": url_for("check_task", id=aresult.id),
 	})

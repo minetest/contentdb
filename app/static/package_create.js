@@ -24,13 +24,15 @@ $(function() {
 			$(".pkg_repo").hide()
 
 			performTask("/tasks/getmeta/new/?url=" + encodeURI(repoURL)).then(function(result) {
-				console.log(result)
 				$("#name").val(result.name || "")
 				$("#title").val(result.title || "")
 				$("#repo").val(result.repo || repoURL)
 				$("#issueTracker").val(result.issueTracker || "")
 				$("#desc").val(result.description || "")
 				$("#shortDesc").val(result.short_description || "")
+				if (result.forumId) {
+					$("#forums").val(result.forumId)
+				}
 				finish()
 			}).catch(function(e) {
 				alert(e)

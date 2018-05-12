@@ -52,6 +52,62 @@ class GithubURLMaker:
 		return "https://github.com/" + self.user + "/" + self.repo + "/archive/" + commit + ".zip"
 
 
+krock_list_cache = None
+krock_list_cache_by_name = None
+def getKrockList():
+	global krock_list_cache
+	global krock_list_cache_by_name
+
+	if krock_list_cache is None:
+		contents = urllib.request.urlopen("http://krock-works.16mb.com/MTstuff/modList.php").read().decode("utf-8")
+		list = json.loads(contents)
+
+		def h(x):
+			if not ("title"   in x and "author" in x and \
+					"topicId" in x and "link"   in x and x["link"] != ""):
+				return False
+
+			import re
+			m = re.search("\[([A-Za-z0-9_]+)\]", x["title"])
+			if m is None:
+				return False
+
+			x["name"] = m.group(1)
+			return True
+
+		def g(x):
+			return {
+				"title":   x["title"],
+				"author":  x["author"],
+				"name":    x["name"],
+				"topicId": x["topicId"],
+				"link":    x["link"],
+			}
+
+		krock_list_cache = [g(x) for x in list if h(x)]
+		krock_list_cache_by_name = {}
+		for x in krock_list_cache:
+			if not x["name"] in krock_list_cache_by_name:
+				krock_list_cache_by_name[x["name"]] = []
+
+			krock_list_cache_by_name[x["name"]].append(x)
+
+	return krock_list_cache, krock_list_cache_by_name
+
+def findModInfo(author, name, link):
+	_, lookup = getKrockList()
+
+	if name in lookup:
+		if len(lookup[name]) == 1:
+			return lookup[name][0]
+
+		for x in lookup[name]:
+			if x["author"] == author:
+				return x
+
+	return None
+
+
 def parseConf(string):
 	retval = {}
 	for line in string.split("\n"):
@@ -63,8 +119,9 @@ def parseConf(string):
 
 	return retval
 
+
 @celery.task()
-def getMeta(urlstr):
+def getMeta(urlstr, author):
 	url = urlparse(urlstr)
 
 	urlmaker = None
@@ -107,6 +164,10 @@ def getMeta(urlstr):
 		idx = desc.find(".") + 1
 		cutIdx = min(len(desc), 200 if idx < 5 else idx)
 		result["short_description"] = desc[:cutIdx]
+
+	info = findModInfo(author, result["name"], result["repo"])
+	if info is not None:
+		result["forumId"] = info["topicId"]
 
 	return result
 
