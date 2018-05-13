@@ -423,16 +423,8 @@ def create_release_page(package):
 @login_required
 @is_package_page
 def edit_release_page(package, id):
-	user = User.query.filter_by(username=author).first()
-	if user is None:
-		abort(404)
-
 	release = PackageRelease.query.get(id)
-	if release is None:
-		abort(404)
-
-	package = release.package
-	if package.name != name or package.author.username != author:
+	if release is None or release.package != package:
 		abort(404)
 
 	clearNotifications(release.getEditURL())
