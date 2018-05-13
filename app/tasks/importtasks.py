@@ -44,7 +44,7 @@ class GithubURLMaker:
 		return self.baseUrl + "/description.txt"
 
 	def getScreenshotURL(self):
-		return self.baseUrl + "/screenshot.png"
+		return self.baseUrl + "/placeholder.png"
 
 	def getCommitsURL(self, branch):
 		return "https://api.github.com/repos/{}/{}/commits?sha={}" \

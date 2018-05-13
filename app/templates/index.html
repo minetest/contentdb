@@ -24,7 +24,7 @@ Dashboard
 	<ul class="packagegrid">
 		{% for p in packages %}
 			<li><a href="{{ p.getDetailsURL() }}"
-				style="background-image: url({{ p.getMainScreenshotURL() or '/static/screenshot.png' }});">
+				style="background-image: url({{ p.getMainScreenshotURL() or '/static/placeholder.png' }});">
 				<span>{{ p.title }} by {{ p.author.display_name }}</span>
 			</a></li>
 		{% else %}
