@@ -249,18 +249,42 @@ class EditRequestForm(PackageForm):
 	edit_desc  = TextField("Edit Description", [Optional()])
 
 @app.route("/<ptype>s/<author>/<name>/requests/new/", methods=["GET","POST"])
+@app.route("/<ptype>s/<author>/<name>/requests/<id>/edit/", methods=["GET","POST"])
 @login_required
-def create_editrequest_page(ptype, author, name):
+def create_edit_editrequest_page(ptype, author, name, id=None):
 	package = getPageByInfo(ptype, author, name)
+	edited_package = package
 
-	form = EditRequestForm(request.form, obj=package)
+	erequest = None
+	if id is not None:
+		erequest = EditRequest.query.get(id)
+		if erequest.package != package:
+			abort(404)
+
+		from copy import copy
+		edited_package = copy(package)
+		erequest.applyAll(edited_package)
+
+		if not erequest.checkPerm(current_user, Permission.EDIT_EDITREQUEST):
+			abort(403)
+
+		if erequest.status != 0:
+			flash("Can't edit EditRequest, it has already been merged or rejected", "error")
+			return redirect(erequest.getURL())
+
+
+	form = EditRequestForm(request.form, obj=edited_package)
 	if request.method == "POST" and form.validate():
-		erequest = EditRequest()
-		erequest.package = package
-		erequest.author  = current_user
+		if erequest is None:
+			erequest = EditRequest()
+			erequest.package = package
+			erequest.author  = current_user
+
 		erequest.title   = form["edit_title"].data
 		erequest.desc    = form["edit_desc"].data
 		db.session.add(erequest)
+
+		EditRequestChange.query.filter_by(request=erequest).delete()
 
 		wasChangeMade = False
 		for e in PackagePropertyKey:
@@ -288,8 +312,11 @@ def create_editrequest_page(ptype, author, name):
 			return redirect(erequest.getURL())
 		else:
 			flash("No changes detected", "warning")
+	elif erequest is not None:
+		form["edit_title"].data = erequest.title
+		form["edit_desc"].data  = erequest.desc
 
-	return render_template("packages/editrequest_create.html", package=package, form=form)
+	return render_template("packages/editrequest_create_edit.html", package=package, form=form)
 
 
 @app.route("/<ptype>s/<author>/<name>/requests/<id>/")

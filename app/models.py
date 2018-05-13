@@ -49,6 +49,7 @@ class Permission(enum.Enum):
 	APPROVE_NEW        = "APPROVE_NEW"
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
 	CHANGE_RANK        = "CHANGE_RANK"
+	EDIT_EDITREQUEST   = "EDIT_EDITREQUEST"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -248,7 +249,7 @@ class Package(db.Model):
 				author=self.author.username, name=self.name)
 
 	def getCreateEditRequestURL(self):
-		return url_for("create_editrequest_page",
+		return url_for("create_edit_editrequest_page",
 				ptype=self.type.toName(),
 				author=self.author.username, name=self.name)
 
@@ -353,6 +354,9 @@ class EditRequest(db.Model):
 	title        = db.Column(db.String(100), nullable=False)
 	desc         = db.Column(db.String(1000), nullable=True)
 
+	# 0 - open
+	# 1 - merged
+	# 2 - rejected
 	status       = db.Column(db.Integer, nullable=False, default=0)
 
 	changes = db.relationship("EditRequestChange", backref="request",
@@ -379,9 +383,36 @@ class EditRequest(db.Model):
 				name=self.package.name,
 				id=self.id)
 
+	def getEditURL(self):
+		return url_for("create_edit_editrequest_page",
+				ptype=self.package.type.toName(),
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
+
 	def applyAll(self, package):
 		for change in self.changes:
 			change.apply(package)
+
+
+	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return False
+
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to EditRequest.checkPerm()")
+
+		isOwner = user == self.author
+
+		# Members can edit their own packages, and editors can edit any packages
+		if perm == Permission.EDIT_EDITREQUEST:
+			return isOwner or user.rank.atLeast(UserRank.EDITOR)
+
+		else:
+			raise Exception("Permission {} is not related to packages".format(perm.name))
+
 
 
 

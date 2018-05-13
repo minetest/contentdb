@@ -7,6 +7,9 @@
 {% block content %}
 	<h1>{{ request.title }} by {{ request.author.display_name }}</h1>
 	<p>
+		{% if request.status != 1 and request.status != 2 and request.checkPerm(current_user, 'EDIT_EDITREQUEST') %}
+			<a href="{{ request.getEditURL() }}">Edit</a> |
+		{% endif %}
 		Package: <a href="{{ package.getDetailsURL() }}">{{ package.title }}</a>
 	</p>
 	<p>
