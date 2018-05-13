@@ -6,6 +6,7 @@
 
 {% block content %}
 	<ul>
-		<a href="{{ url_for('switch_user_page') }}">Sign in as another user</a>
+		<li><a href="{{ url_for('user_list_page') }}">User list</a></li>
+		<li><a href="{{ url_for('switch_user_page') }}">Sign in as another user</a></li>
 	</ul>
 {% endblock %}

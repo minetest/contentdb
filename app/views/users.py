@@ -8,6 +8,7 @@ from flask_wtf import FlaskForm
 from flask_user.forms import RegisterForm
 from wtforms import *
 from wtforms.validators import *
+from .utils import rank_required
 
 class MyRegisterForm(RegisterForm):
 	display_name = StringField("Display name")
@@ -19,6 +20,7 @@ class UserProfileForm(FlaskForm):
 	submit = SubmitField("Save")
 
 @app.route("/users/", methods=["GET"])
+@rank_required(UserRank.MODERATOR)
 def user_list_page():
 	users = User.query.all()
 	return render_template("users/list.html", users=users)
