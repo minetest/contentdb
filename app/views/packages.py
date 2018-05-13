@@ -70,18 +70,6 @@ def todo_page():
 		approve_new=packages, releases=releases,
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel)
 
-
-def getPageByInfo(author, name):
-	user = User.query.filter_by(username=author).first()
-	if user is None:
-		abort(404)
-
-	package = Package.query.filter_by(name=name, author_id=user.id).first()
-	if package is None:
-		abort(404)
-
-	return package
-
 def getReleases(package):
 	if package.checkPerm(current_user, Permission.MAKE_RELEASE):
 		return package.releases
@@ -90,9 +78,8 @@ def getReleases(package):
 
 
 @app.route("/packages/<author>/<name>/")
-def package_page(author, name):
-	package = getPageByInfo(author, name)
-
+@is_package_page
+def package_page(package):
 	if shouldReturnJson():
 		return jsonify(package.getAsDictionary(app.config["BASE_URL"]))
 	else:
@@ -104,8 +91,8 @@ def package_page(author, name):
 
 
 @app.route("/packages/<author>/<name>/download/")
-def package_download_page(author, name):
-	package = getPageByInfo(author, name)
+@is_package_page
+def package_download_page(package):
 	release = package.getDownloadRelease()
 
 	if release is None:
@@ -156,7 +143,7 @@ def create_edit_package_page(author=None, name=None):
 				return redirect(url_for("create_edit_package_page"))
 
 	else:
-		package = getPageByInfo(author, name)
+		package = getPackageByInfo(author, name)
 		if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
 			return redirect(package.getDetailsURL())
 
@@ -187,9 +174,8 @@ def create_edit_package_page(author=None, name=None):
 
 @app.route("/packages/<author>/<name>/approve/")
 @login_required
-def approve_package_page(author=None, name=None):
-	package = getPageByInfo(author, name)
-
+@is_package_page
+def approve_package_page(package):
 	if not package.checkPerm(current_user, Permission.APPROVE_NEW):
 		flash("You don't have permission to do that.", "error")
 
@@ -212,8 +198,8 @@ class CreateScreenshotForm(FlaskForm):
 
 @app.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
 @login_required
-def create_screenshot_page(author, name):
-	package = getPageByInfo(author, name)
+@is_package_page
+def create_screenshot_page(package):
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
 		return redirect(package.getDetailsURL())
 
@@ -245,8 +231,8 @@ class EditRequestForm(PackageForm):
 @app.route("/packages/<author>/<name>/requests/new/", methods=["GET","POST"])
 @app.route("/packages/<author>/<name>/requests/<id>/edit/", methods=["GET","POST"])
 @login_required
-def create_edit_editrequest_page(pauthor, name, id=None):
-	package = getPageByInfo(pauthor, name)
+@is_package_page
+def create_edit_editrequest_page(package, id=None):
 	edited_package = package
 
 	erequest = None
@@ -318,11 +304,10 @@ def create_edit_editrequest_page(pauthor, name, id=None):
 
 
 @app.route("/packages/<author>/<name>/requests/<id>/")
-def view_editrequest_page(pauthor, name, id):
-	package = getPageByInfo(pauthor, name)
-
+@is_package_page
+def view_editrequest_page(package, id):
 	erequest = EditRequest.query.get(id)
-	if erequest is None:
+	if erequest is None or erequest.package != package:
 		abort(404)
 
 	clearNotifications(erequest.getURL())
@@ -330,14 +315,14 @@ def view_editrequest_page(pauthor, name, id):
 
 
 @app.route("/packages/<author>/<name>/requests/<id>/approve/")
-def approve_editrequest_page(pauthor, name, id):
-	package = getPageByInfo(pauthor, name)
+@is_package_page
+def approve_editrequest_page(package, id):
 	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
 		flash("You don't have permission to do that.", "error")
 		return redirect(package.getDetailsURL())
 
 	erequest = EditRequest.query.get(id)
-	if erequest is None:
+	if erequest is None or erequest.package != package:
 		abort(404)
 
 	if erequest.status != 0:
@@ -355,14 +340,14 @@ def approve_editrequest_page(pauthor, name, id):
 	return redirect(package.getDetailsURL())
 
 @app.route("/packages/<author>/<name>/requests/<id>/reject/")
-def reject_editrequest_page(pauthor, name, id):
-	package = getPageByInfo(pauthor, name)
+@is_package_page
+def reject_editrequest_page(package, id):
 	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
 		flash("You don't have permission to do that.", "error")
 		return redirect(package.getDetailsURL())
 
 	erequest = EditRequest.query.get(id)
-	if erequest is None:
+	if erequest is None or erequest.package != package:
 		abort(404)
 
 	if erequest.status != 0:
@@ -396,8 +381,8 @@ class EditPackageReleaseForm(FlaskForm):
 
 @app.route("/packages/<author>/<name>/releases/new/", methods=["GET", "POST"])
 @login_required
-def create_release_page(author, name):
-	package = getPageByInfo(author, name)
+@is_package_page
+def create_release_page(package):
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
 		return redirect(package.getDetailsURL())
 
@@ -436,7 +421,8 @@ def create_release_page(author, name):
 
 @app.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
 @login_required
-def edit_release_page(author, name, id):
+@is_package_page
+def edit_release_page(package, id):
 	user = User.query.filter_by(username=author).first()
 	if user is None:
 		abort(404)

@@ -92,6 +92,32 @@ def rank_required(rank):
 		return decorated_function
 	return decorator
 
+def getPackageByInfo(author, name):
+	user = User.query.filter_by(username=author).first()
+	if user is None:
+		abort(404)
+
+	package = Package.query.filter_by(name=name, author_id=user.id).first()
+	if package is None:
+		abort(404)
+
+	return package
+
+def is_package_page(f):
+	@wraps(f)
+	def decorated_function(*args, **kwargs):
+		if not ("author" in kwargs and "name" in kwargs):
+			abort(400)
+
+		package = getPackageByInfo(kwargs["author"], kwargs["name"])
+
+		del kwargs["author"]
+		del kwargs["name"]
+
+		return f(package=package, *args, **kwargs)
+
+	return decorated_function
+
 def triggerNotif(owner, causer, title, url):
 	if owner.rank.atLeast(UserRank.NEW_MEMBER) and owner != causer:
 		Notification.query.filter_by(user=owner, url=url).delete()
