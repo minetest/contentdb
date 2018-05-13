@@ -16,7 +16,15 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleF
 # TODO: the following could be made into one route, except I"m not sure how
 # to do the menu
 
-def doPackageList(type):
+@menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
+@menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
+@menu.register_menu(app, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
+@app.route("/packages/")
+def packages_page():
+	type = request.args.get("type")
+	if type is not None:
+		type = PackageType[type.upper()]
+
 	title = "Packages"
 	query = Package.query
 
@@ -37,17 +45,6 @@ def doPackageList(type):
 		return render_template("packages/list.html", title=title, packages=query.all(), \
 				query=search, tags=tags, type=None if type is None else type.toName())
 
-
-@menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
-@menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
-@menu.register_menu(app, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
-@app.route("/packages/")
-def packages_page():
-	type = None
-	typeStr = request.args.get("type")
-	if typeStr is not None:
-		type = PackageType[typeStr.upper()]
-	return doPackageList(type)
 
 def canSeeWorkQueue():
 	return Permission.APPROVE_NEW.check(current_user) or \
