@@ -11,9 +11,6 @@ from wtforms.validators import *
 from .utils import rank_required, randomString
 from app.tasks.forumtasks import checkForumAccount
 
-class MyRegisterForm(RegisterForm):
-	display_name = StringField("Display name")
-
 # Define the User profile form
 class UserProfileForm(FlaskForm):
 	display_name = StringField("Display name")
