@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Switch User
+{% endblock %}
+
+{% block content %}
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.username) }}
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}

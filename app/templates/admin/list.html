@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Admin Tools
+{% endblock %}
+
+{% block content %}
+	<ul>
+		<a href="{{ url_for('switch_user_page') }}">Sign in as another user</a>
+	</ul>
+{% endblock %}
