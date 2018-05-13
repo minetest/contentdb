@@ -42,24 +42,6 @@
 				{% endif %}
 			</td>
 		</tr>
-		{% if user == current_user %}
-			<tr>
-				<td>Email:</td>
-				<td>
-					{{ user.email }} |
-					<a href="">{% if user.email %}change{% else %}add{% endif %}</a>
-					&#x1f512;
-				</td>
-			</tr>
-			<tr>
-				<td>Password:</td>
-				<td>
-					<a href="{{ url_for('user.change_password') }}">
-						{% if user.password %}Change password{% else %}Add password{% endif %}
-					</a> &#x1f512;
-				</td>
-			</tr>
-		{% endif %}
 	</table>
 </div>
 
@@ -90,10 +72,14 @@
 			<div class="col-sm-6 col-md-5 col-lg-4">
 				{{ form.hidden_tag() }}
 
-				{{ render_field(form.display_name, tabindex=240) }}
+				{{ render_field(form.display_name, tabindex=230) }}
+
+				{% if user.checkPerm(current_user, "CHANGE_EMAIL") %}
+					{{ render_field(form.email, tabindex=240) }}
+				{% endif %}
 
 				{% if user.checkPerm(current_user, "CHANGE_RANK") %}
-					{{ render_field(form.rank, tabindex=240) }}
+					{{ render_field(form.rank, tabindex=250) }}
 				{% endif %}
 
 				{{ render_submit_field(form.submit, tabindex=280) }}

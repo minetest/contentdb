@@ -10,10 +10,12 @@ from wtforms import *
 from wtforms.validators import *
 from .utils import rank_required, randomString
 from app.tasks.forumtasks import checkForumAccount
+from app.tasks.emails import sendVerifyEmail
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
-	display_name = StringField("Display name")
+	display_name = StringField("Display name", [InputRequired(), Length(2, 20)])
+	email = StringField("Email")
 	rank = SelectField("Rank", [InputRequired()], choices=UserRank.choices(), coerce=UserRank.coerce, default=UserRank.NEW_MEMBER)
 	submit = SubmitField("Save")
 
@@ -47,6 +49,21 @@ def user_profile_page(username):
 					user.rank = form["rank"].data
 				else:
 					flash("Can't promote a user to a rank higher than yourself!", "error")
+
+			if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+				newEmail = form["email"].data
+				if newEmail != user.email:
+					token = randomString(32)
+
+					ver = UserEmailVerification()
+					ver.user = user
+					ver.token = token
+					ver.email = newEmail
+					db.session.add(ver)
+					db.session.commit()
+
+					task = sendVerifyEmail.delay(newEmail, token)
+					return redirect(url_for("check_task", id=task.id, r=url_for("user_profile_page", username=username)))
 
 			# Save user_profile
 			db.session.commit()
@@ -96,3 +113,19 @@ def user_claim_page():
 			flash("Unknown claim type", "error")
 
 	return render_template("users/claim.html", username=username, key=randomString(32))
+
+@app.route("/users/verify/")
+def verify_email_page():
+	token = request.args.get("token")
+	ver = UserEmailVerification.query.filter_by(token=token).first()
+	if ver is None:
+		flash("Unknown verification token!", "error")
+	else:
+		ver.user.email = ver.email
+		db.session.delete(ver)
+		db.session.commit()
+
+	if current_user.is_authenticated:
+		return redirect(url_for("user_profile_page", username=current_user.username))
+	else:
+		return redirect(url_for("home_page"))

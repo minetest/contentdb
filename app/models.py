@@ -49,6 +49,7 @@ class Permission(enum.Enum):
 	APPROVE_NEW        = "APPROVE_NEW"
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
 	CHANGE_RANK        = "CHANGE_RANK"
+	CHANGE_EMAIL       = "CHANGE_EMAIL"
 	EDIT_EDITREQUEST   = "EDIT_EDITREQUEST"
 
 	# Only return true if the permission is valid for *all* contexts
@@ -119,9 +120,17 @@ class User(db.Model, UserMixin):
 			return user.rank.atLeast(UserRank.EDITOR)
 		elif perm == Permission.CHANGE_RANK:
 			return user.rank.atLeast(UserRank.MODERATOR)
+		elif perm == Permission.CHANGE_EMAIL:
+			return user == self or user.rank.atLeast(UserRank.MODERATOR)
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
+class UserEmailVerification(db.Model):
+	id      = db.Column(db.Integer, primary_key=True)
+	user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+	email   = db.Column(db.String(100))
+	token   = db.Column(db.String(32))
+	user    = db.relationship("User", foreign_keys=[user_id])
 
 class Notification(db.Model):
 	id        = db.Column(db.Integer, primary_key=True)
