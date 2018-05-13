@@ -21,11 +21,15 @@ if not os.path.isfile("db.sqlite"):
 	ruben.rank = UserRank.ADMIN
 	db.session.add(ruben)
 
+
 	ez = User("Shara")
 	ez.github_username = "Ezhh"
 	ez.forums_username = "Shara"
 	ez.rank = UserRank.EDITOR
 	db.session.add(ez)
+
+	not1 = Notification(ruben, ez, "Awards approved", "/packages/rubenwardy/awards/")
+	db.session.add(not1)
 
 	jeija = User("Jeija")
 	jeija.github_username = "Jeija"

@@ -88,8 +88,11 @@ class User(db.Model, UserMixin):
 	display_name = db.Column(db.String(100), nullable=False, server_default="")
 
 	# Content
-	packages = db.relationship("Package", backref="author", lazy="dynamic")
-	requests = db.relationship("EditRequest", backref="author", lazy="dynamic")
+	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id")
+
+	# causednotifs  = db.relationship("Notification", backref="causer", lazy="dynamic")
+	packages      = db.relationship("Package", backref="author", lazy="dynamic")
+	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
 
 	def __init__(self, username):
 		import datetime
@@ -118,6 +121,24 @@ class User(db.Model, UserMixin):
 			return user.rank.atLeast(UserRank.MODERATOR)
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))
+
+
+class Notification(db.Model):
+	id        = db.Column(db.Integer, primary_key=True)
+	user_id   = db.Column(db.Integer, db.ForeignKey("user.id"))
+	causer_id = db.Column(db.Integer, db.ForeignKey("user.id"))
+	user      = db.relationship("User", foreign_keys=[user_id])
+	causer    = db.relationship("User", foreign_keys=[causer_id])
+
+	title     = db.Column(db.String(100), nullable=False)
+	url       = db.Column(db.String(200), nullable=True)
+
+	def __init__(self, us, cau, titl, ur):
+		self.user   = us
+		self.causer = cau
+		self.title  = titl
+		self.url    = ur
+
 
 class License(db.Model):
 	id = db.Column(db.Integer, primary_key=True)

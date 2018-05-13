@@ -30,4 +30,4 @@ def home_page():
 	packages = Package.query.filter_by(approved=True).all()
 	return render_template("index.html", packages=packages)
 
-from . import users, githublogin, packages, sass, tasks, admin
+from . import users, githublogin, packages, sass, tasks, admin, notifications

@@ -96,6 +96,8 @@ def package_page(author, name):
 	if shouldReturnJson():
 		return jsonify(package.getAsDictionary(app.config["BASE_URL"]))
 	else:
+		clearNotifications(package.getDetailsURL())
+
 		releases = getReleases(package)
 		requests = [r for r in package.requests if r.status == 0]
 		return render_template("packages/view.html", package=package, releases=releases, requests=requests)
@@ -168,7 +170,9 @@ def create_edit_package_page(author=None, name=None):
 		if not package:
 			package = Package()
 			package.author = author
-			# package.approved = package.checkPerm(current_user, Permission.APPROVE_NEW)
+		else:
+			triggerNotif(package.author, current_user,
+					"{} edited".format(package.title), package.getDetailsURL())
 
 		form.populate_obj(package) # copy to row
 
@@ -194,8 +198,10 @@ def approve_package_page(author=None, name=None):
 
 	else:
 		package.approved = True
-		db.session.commit()
 
+		triggerNotif(package.author, current_user,
+				"{} approved".format(package.title), package.getDetailsURL())
+		db.session.commit()
 
 	return redirect(package.getDetailsURL())
 
@@ -222,6 +228,10 @@ def create_screenshot_page(author, name):
 			ss.title   = form["title"].data
 			ss.url     = uploadedPath
 			db.session.add(ss)
+
+			msg = "{}: Screenshot added {}" \
+					.format(package.title, ss.title)
+			triggerNotif(package.author, current_user, msg, erequest.getURL())
 			db.session.commit()
 			return redirect(package.getDetailsURL())
 
@@ -292,6 +302,10 @@ def create_edit_editrequest_page(pauthor, name, id=None):
 				wasChangeMade = True
 
 		if wasChangeMade:
+			msg = "{}: Edit request #{} {}" \
+					.format(package.title, erequest.id, "created" if id is None else "edited")
+			triggerNotif(package.author, current_user, msg, erequest.getURL())
+			triggerNotif(erequest.author, current_user, msg, erequest.getURL())
 			db.session.commit()
 			return redirect(erequest.getURL())
 		else:
@@ -311,6 +325,7 @@ def view_editrequest_page(pauthor, name, id):
 	if erequest is None:
 		abort(404)
 
+	clearNotifications(erequest.getURL())
 	return render_template("packages/editrequest_view.html", package=package, request=erequest)
 
 
@@ -331,6 +346,10 @@ def approve_editrequest_page(pauthor, name, id):
 	else:
 		erequest.status = 1
 		erequest.applyAll(package)
+
+		msg = "{}: Edit request #{} merged".format(package.title, erequest.id)
+		triggerNotif(erequest.author, current_user, msg, erequest.getURL())
+		triggerNotif(package.author, current_user, msg, erequest.getURL())
 		db.session.commit()
 
 	return redirect(package.getDetailsURL())
@@ -351,6 +370,10 @@ def reject_editrequest_page(pauthor, name, id):
 
 	else:
 		erequest.status = 2
+
+		msg = "{}: Edit request #{} rejected".format(package.title, erequest.id)
+		triggerNotif(erequest.author, current_user, msg, erequest.getURL())
+		triggerNotif(package.author, current_user, msg, erequest.getURL())
 		db.session.commit()
 
 	return redirect(package.getDetailsURL())
@@ -389,6 +412,9 @@ def create_release_page(author, name):
 			db.session.commit()
 
 			rel.task_id = makeVCSRelease.delay(rel.id, form["vcsLabel"].data).id
+
+			msg = "{}: Release {} created".format(package.title, rel.title)
+			triggerNotif(package.author, current_user, msg, rel.getEditURL())
 			db.session.commit()
 
 			return redirect(url_for("check_task", id=rel.task_id, r=package.getDetailsURL()))
@@ -400,6 +426,9 @@ def create_release_page(author, name):
 				rel.title = form["title"].data
 				rel.url = uploadedPath
 				db.session.add(rel)
+
+				msg = "{}: Release {} created".format(package.title, rel.title)
+				triggerNotif(package.author, current_user, msg, erequest.getURL())
 				db.session.commit()
 				return redirect(package.getDetailsURL())
 
@@ -419,6 +448,8 @@ def edit_release_page(author, name, id):
 	package = release.package
 	if package.name != name or package.author.username != author:
 		abort(404)
+
+	clearNotifications(release.getEditURL())
 
 	canEdit	= package.checkPerm(current_user, Permission.MAKE_RELEASE)
 	canApprove = package.checkPerm(current_user, Permission.APPROVE_RELEASE)

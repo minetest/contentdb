@@ -91,3 +91,14 @@ def rank_required(rank):
 
 		return decorated_function
 	return decorator
+
+def triggerNotif(owner, causer, title, url):
+	if owner.rank.atLeast(UserRank.NEW_MEMBER) and owner != causer:
+		Notification.query.filter_by(user=owner, url=url).delete()
+		notif = Notification(owner, causer, title, url)
+		db.session.add(notif)
+
+def clearNotifications(url):
+	if current_user.is_authenticated:
+		Notification.query.filter_by(user=current_user, url=url).delete()
+		db.session.commit()

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block title %}
+Notifications
+{% endblock %}
+
+{% block content %}
+	<ul>
+		{% for n in current_user.notifications %}
+			<li><a href="{{ n.url }}">
+				{{ n.title}} [{{ n.causer.display_name }}]
+			</a></li>
+		{% else %}
+			<li><i>No notifications</i></ul>
+		{% endfor %}
+	</ul>
+{% endblock %}
