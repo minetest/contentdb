@@ -22,7 +22,6 @@ def new_getmeta_page():
 	})
 
 @app.route("/tasks/<id>/")
-@login_required
 def check_task(id):
 	result = celery.AsyncResult(id)
 	status = result.status
@@ -51,7 +50,6 @@ def check_task(id):
 			abort(422)
 
 		if status == "SUCCESS":
-			flash("Task complete!", "success")
 			return redirect(r)
 		else:
 			return render_template("tasks/view.html", info=info)

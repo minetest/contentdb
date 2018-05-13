@@ -41,4 +41,4 @@ def make_celery(app):
 
 celery = make_celery(app)
 
-from . import importtasks
+from . import importtasks, forumtasks

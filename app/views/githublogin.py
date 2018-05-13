@@ -43,16 +43,8 @@ def github_authorized(oauth_token):
 	# If not logged in, log in
 	else:
 		if userByGithub is None:
-			newUser = User(username)
-			newUser.github_username = username
-			db.session.add(newUser)
-			db.session.commit()
-
-			if not loginUser(newUser):
-				raise Exception("Unable to login as user we just created")
-
-			flash("Created an account", "success")
-			return redirect(url_for("user_profile_page", username=username))
+			flash("Unable to find an account for that Github user", "error")
+			return redirect(url_for("user_claim_page"))
 		elif loginUser(userByGithub):
 			return redirect(next_url or url_for("home_page"))
 		else:

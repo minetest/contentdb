@@ -8,7 +8,8 @@ from flask_wtf import FlaskForm
 from flask_user.forms import RegisterForm
 from wtforms import *
 from wtforms.validators import *
-from .utils import rank_required
+from .utils import rank_required, randomString
+from app.tasks.forumtasks import checkForumAccount
 
 class MyRegisterForm(RegisterForm):
 	display_name = StringField("Display name")
@@ -59,3 +60,42 @@ def user_profile_page(username):
 	# Process GET or invalid POST
 	return render_template("users/user_profile_page.html",
 			user=user, form=form)
+
+
+@app.route("/users/claim/", methods=["GET", "POST"])
+def user_claim_page():
+	username = request.args.get("username")
+	if username is None:
+		username = ""
+	else:
+		method = request.args.get("method")
+		user = User.query.filter_by(forums_username=username).first()
+		if user and user.rank.atLeast(UserRank.NEW_MEMBER):
+			flash("User has already been claimed", "error")
+			return redirect(url_for("user_claim_page"))
+		elif user is None and method == "github":
+			flash("Unable to get Github username for user", "error")
+			return redirect(url_for("user_claim_page"))
+		elif user is None:
+			flash("Unable to find that user", "error")
+			return redirect(url_for("user_claim_page"))
+
+		if user is not None and method == "github":
+			return redirect(url_for("github_signin_page"))
+
+	if request.method == "POST":
+		ctype    = request.form.get("claim_type")
+		username = request.form.get("username")
+
+		if username is None or len(username.strip()) < 2:
+			flash("Invalid username", "error")
+		elif ctype == "github":
+			task = checkForumAccount.delay(username)
+			return redirect(url_for("check_task", id=task.id, r=url_for("user_claim_page", username=username, method="github")))
+		elif ctype == "forum":
+			token = request.form.get("token")
+			flash("Unimplemented", "error")
+		else:
+			flash("Unknown claim type", "error")
+
+	return render_template("users/claim.html", username=username, key=randomString(32))

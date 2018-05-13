@@ -1,0 +1,98 @@
+{% extends "base.html" %}
+
+{% block title %}
+Verify forum account
+{% endblock %}
+
+{% block content %}
+	<div class="box box_grey">
+		<h2>{{ self.title() }}</h2>
+
+		<p>
+			Create an account by linking it to your forum account and optionally
+			your github account.
+		</p>
+
+		{% if current_user.is_authenticated %}
+			<p>
+				Please log out to continue.
+			</p>
+			<p>
+				<a href="{{ url_for('user.logout', next=url_for('user_claim_page')) }}" class="button">Logout</a>
+			</p>
+		{% else %}
+			<p>
+				<b>Don't have a forum account?</b>
+				Unfortunately, you need a forum account to register.
+				This is because you also need to create forum topics for any packages
+				you may upload.
+			</p>
+
+			<a href="https://forum.minetest.net/ucp.php?mode=register">
+				Create a Forum Account
+			</a>
+		{% endif %}
+	</div>
+
+	{% if not current_user.is_authenticated %}
+		<div class="box box_grey">
+			<h2>Option 1 - Use GitHub field in forum profile</h2>
+
+			<form method="post" action="{{ url_for('user_claim_page') }}">
+				<input type="hidden" name="claim_type" value="github">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+				<p>
+					Enter your forum username here:
+				</p>
+
+				<input type="text" name="username" value="{{ username }}" required placeholder="Forum username">
+
+				<p>
+					You'll need to have the GitHub field in your forum profile
+					filled out. Log into the forum and
+					<a href="https://forum.minetest.net/ucp.php?i=173">
+						do that here</a>.
+				</p>
+
+				<input type="submit" value="Next: log in with GitHub">
+			</form>
+		</div>
+
+		<!--<div class="box box_grey">
+			<h2>Option 2 - Paste verification token into signature</h2>
+
+			<form method="post" action="{{ url_for('user_claim_page') }}">
+				<input type="hidden" name="claim_type" value="forum">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+				<p>
+					Enter your forum username here:
+				</p>
+
+				<input type="text" name="username" value="{{ username }}" required placeholder="Forum username">
+
+				<p>
+					Go to
+					<a href="https://forum.minetest.net/ucp.php?i=profile&mode=signature">
+						User Control Panel > Profile > Edit signature
+					</a>
+				</p>
+				<p>
+					Paste this into your signature:
+				</p>
+
+				<input type="text" value="{{ key }}" readonly size=32>
+
+				<p>
+					Click next so we can check it.
+				</p>
+				<p>
+					Don't worry, you can remove it after this is done.
+				</p>
+
+				<input type="submit" value="Next">
+			</form>
+		</div>-->
+	{% endif %}
+{% endblock %}

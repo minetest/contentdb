@@ -61,26 +61,17 @@ Sign in
 				{# Submit button #}
 				{{ render_submit_field(form.submit, tabindex=180) }}
 			</form>
+
+			<a href="{{ url_for('github_signin_page') }}">GitHub</a>
 	</div>
 
 	<div class="right">
 		<aside class="box box_grey">
 			<h2>New here?</h2>
 
-			<div class="box box_grey alert alert-error">
-				Please use Github login instead!
-			</div>
+			<p>Create an account using your forum account.</p>
 
-			{% if user_manager.enable_register and not user_manager.require_invitation %}
-				<a href="{{ url_for('github_signin_page') }}">{%trans%}Create an account{%endtrans%}</a>
-			{% endif %}
-		</aside>
-
-
-		<aside class="box box_grey">
-			<h2>OAUTH</h2>
-
-			<a href="{{ url_for('github_signin_page') }}">GitHub</a>
+			<a href="{{ url_for('user_claim_page') }}" class="button">{%trans%}Claim your account{%endtrans%}</a>
 		</aside>
 	</div>
 </div>
