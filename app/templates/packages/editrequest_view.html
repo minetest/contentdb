@@ -29,9 +29,14 @@
 		</div>
 	{% elif package.checkPerm(current_user, "APPROVE_CHANGES") %}
 		<div class="box box_grey">
-			To resolve this request, either
-			<a href="{{ request.getApproveURL() }}">Approve and Apply</a> or
-			<a href="{{ request.getRejectURL() }}">Reject</a> it.
+			<form method="post" action="{{ request.getApproveURL() }}">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<input type="submit" value="Approve and Apply" />
+			</form>
+			<form method="post" action="{{ request.getRejectURL() }}">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<input type="submit" value="Reject" />
+			</form>
 		</div>
 	{% endif %}
 

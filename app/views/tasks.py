@@ -1,7 +1,7 @@
 from flask import *
 from flask_user import *
 from flask.ext import menu
-from app import app
+from app import app, csrf
 from app.models import *
 from app.tasks import celery
 from app.tasks.importtasks import getMeta
@@ -10,6 +10,7 @@ from .utils import shouldReturnJson
 
 from .utils import *
 
+@csrf.exempt
 @app.route("/tasks/getmeta/new/", methods=["POST"])
 @login_required
 def new_getmeta_page():

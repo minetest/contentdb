@@ -172,7 +172,7 @@ def create_edit_package_page(author=None, name=None):
 
 	return render_template("packages/create_edit.html", package=package, form=form, author=author)
 
-@app.route("/packages/<author>/<name>/approve/")
+@app.route("/packages/<author>/<name>/approve/", methods=["POST"])
 @login_required
 @is_package_page
 def approve_package_page(package):
@@ -314,7 +314,7 @@ def view_editrequest_page(package, id):
 	return render_template("packages/editrequest_view.html", package=package, request=erequest)
 
 
-@app.route("/packages/<author>/<name>/requests/<id>/approve/")
+@app.route("/packages/<author>/<name>/requests/<id>/approve/", methods=["POST"])
 @is_package_page
 def approve_editrequest_page(package, id):
 	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
@@ -339,7 +339,7 @@ def approve_editrequest_page(package, id):
 
 	return redirect(package.getDetailsURL())
 
-@app.route("/packages/<author>/<name>/requests/<id>/reject/")
+@app.route("/packages/<author>/<name>/requests/<id>/reject/", methods=["POST"])
 @is_package_page
 def reject_editrequest_page(package, id):
 	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
