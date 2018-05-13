@@ -38,6 +38,9 @@ def doPackageList(type):
 				query=search, tags=tags, type=None if type is None else type.toName())
 
 
+@menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
+@menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
+@menu.register_menu(app, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
 @app.route("/packages/")
 def packages_page():
 	type = None
@@ -45,21 +48,6 @@ def packages_page():
 	if typeStr is not None:
 		type = PackageType[typeStr.upper()]
 	return doPackageList(type)
-
-@app.route("/mods/")
-@menu.register_menu(app, ".mods", "Mods", order=11)
-def mods_page():
-	return doPackageList(PackageType.MOD)
-
-@app.route("/games/")
-@menu.register_menu(app, ".games", "Games", order=12)
-def games_page():
-	return doPackageList(PackageType.GAME)
-
-@app.route("/texturepacks/")
-@menu.register_menu(app, ".txp", "Texture Packs", order=13)
-def txp_page():
-	return doPackageList(PackageType.TXP)
 
 def canSeeWorkQueue():
 	return Permission.APPROVE_NEW.check(current_user) or \
@@ -86,13 +74,12 @@ def todo_page():
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel)
 
 
-def getPageByInfo(type, author, name):
+def getPageByInfo(author, name):
 	user = User.query.filter_by(username=author).first()
 	if user is None:
 		abort(404)
 
-	package = Package.query.filter_by(name=name, author_id=user.id,
-			type=PackageType[type.upper()]).first()
+	package = Package.query.filter_by(name=name, author_id=user.id).first()
 	if package is None:
 		abort(404)
 
@@ -105,9 +92,9 @@ def getReleases(package):
 		return [rel for rel in package.releases if rel.approved]
 
 
-@app.route("/<type>s/<author>/<name>/")
-def package_page(type, author, name):
-	package = getPageByInfo(type, author, name)
+@app.route("/packages/<author>/<name>/")
+def package_page(author, name):
+	package = getPageByInfo(author, name)
 
 	if shouldReturnJson():
 		return jsonify(package.getAsDictionary(app.config["BASE_URL"]))
@@ -117,9 +104,9 @@ def package_page(type, author, name):
 		return render_template("packages/view.html", package=package, releases=releases, requests=requests)
 
 
-@app.route("/<type>s/<author>/<name>/download/")
-def package_download_page(type, author, name):
-	package = getPageByInfo(type, author, name)
+@app.route("/packages/<author>/<name>/download/")
+def package_download_page(author, name):
+	package = getPageByInfo(author, name)
 	release = package.getDownloadRelease()
 
 	if release is None:
@@ -149,12 +136,12 @@ class PackageForm(FlaskForm):
 
 @menu.register_menu(app, ".new", "Create", order=21, visible_when=lambda: current_user.is_authenticated)
 @app.route("/new/", methods=["GET", "POST"])
-@app.route("/<type>s/<author>/<name>/edit/", methods=["GET", "POST"])
+@app.route("/packages/<author>/<name>/edit/", methods=["GET", "POST"])
 @login_required
-def create_edit_package_page(type=None, author=None, name=None):
+def create_edit_package_page(author=None, name=None):
 	package = None
 	form = None
-	if type is None:
+	if author is None:
 		form = PackageForm(formdata=request.form)
 		author = request.args.get("author")
 		if author is None or author == current_user.username:
@@ -170,7 +157,7 @@ def create_edit_package_page(type=None, author=None, name=None):
 				return redirect(url_for("create_edit_package_page"))
 
 	else:
-		package = getPageByInfo(type, author, name)
+		package = getPageByInfo(author, name)
 		if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
 			return redirect(package.getDetailsURL())
 
@@ -197,10 +184,10 @@ def create_edit_package_page(type=None, author=None, name=None):
 
 	return render_template("packages/create_edit.html", package=package, form=form, author=author)
 
-@app.route("/<type>s/<author>/<name>/approve/")
+@app.route("/packages/<author>/<name>/approve/")
 @login_required
-def approve_package_page(type=None, author=None, name=None):
-	package = getPageByInfo(type, author, name)
+def approve_package_page(author=None, name=None):
+	package = getPageByInfo(author, name)
 
 	if not package.checkPerm(current_user, Permission.APPROVE_NEW):
 		flash("You don't have permission to do that.", "error")
@@ -220,10 +207,10 @@ class CreateScreenshotForm(FlaskForm):
 	fileUpload = FileField("File Upload", [InputRequired()])
 	submit	   = SubmitField("Save")
 
-@app.route("/<type>s/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
+@app.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
 @login_required
-def create_screenshot_page(type, author, name):
-	package = getPageByInfo(type, author, name)
+def create_screenshot_page(author, name):
+	package = getPageByInfo(author, name)
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
 		return redirect(package.getDetailsURL())
 
@@ -248,11 +235,11 @@ class EditRequestForm(PackageForm):
 	edit_title = StringField("Edit Title", [InputRequired(), Length(1, 100)])
 	edit_desc  = TextField("Edit Description", [Optional()])
 
-@app.route("/<ptype>s/<author>/<name>/requests/new/", methods=["GET","POST"])
-@app.route("/<ptype>s/<author>/<name>/requests/<id>/edit/", methods=["GET","POST"])
+@app.route("/packages/<author>/<name>/requests/new/", methods=["GET","POST"])
+@app.route("/packages/<author>/<name>/requests/<id>/edit/", methods=["GET","POST"])
 @login_required
-def create_edit_editrequest_page(ptype, author, name, id=None):
-	package = getPageByInfo(ptype, author, name)
+def create_edit_editrequest_page(pauthor, name, id=None):
+	package = getPageByInfo(pauthor, name)
 	edited_package = package
 
 	erequest = None
@@ -319,9 +306,9 @@ def create_edit_editrequest_page(ptype, author, name, id=None):
 	return render_template("packages/editrequest_create_edit.html", package=package, form=form)
 
 
-@app.route("/<ptype>s/<author>/<name>/requests/<id>/")
-def view_editrequest_page(ptype, author, name, id):
-	package = getPageByInfo(ptype, author, name)
+@app.route("/packages/<author>/<name>/requests/<id>/")
+def view_editrequest_page(pauthor, name, id):
+	package = getPageByInfo(pauthor, name)
 
 	erequest = EditRequest.query.get(id)
 	if erequest is None:
@@ -330,9 +317,9 @@ def view_editrequest_page(ptype, author, name, id):
 	return render_template("packages/editrequest_view.html", package=package, request=erequest)
 
 
-@app.route("/<ptype>s/<author>/<name>/requests/<id>/approve/")
-def approve_editrequest_page(ptype, author, name, id):
-	package = getPageByInfo(ptype, author, name)
+@app.route("/packages/<author>/<name>/requests/<id>/approve/")
+def approve_editrequest_page(pauthor, name, id):
+	package = getPageByInfo(pauthor, name)
 	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
 		flash("You don't have permission to do that.", "error")
 		return redirect(package.getDetailsURL())
@@ -351,9 +338,9 @@ def approve_editrequest_page(ptype, author, name, id):
 
 	return redirect(package.getDetailsURL())
 
-@app.route("/<ptype>s/<author>/<name>/requests/<id>/reject/")
-def reject_editrequest_page(ptype, author, name, id):
-	package = getPageByInfo(ptype, author, name)
+@app.route("/packages/<author>/<name>/requests/<id>/reject/")
+def reject_editrequest_page(pauthor, name, id):
+	package = getPageByInfo(pauthor, name)
 	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
 		flash("You don't have permission to do that.", "error")
 		return redirect(package.getDetailsURL())
@@ -387,10 +374,10 @@ class EditPackageReleaseForm(FlaskForm):
 	approved = BooleanField("Is Approved")
 	submit   = SubmitField("Save")
 
-@app.route("/<type>s/<author>/<name>/releases/new/", methods=["GET", "POST"])
+@app.route("/packages/<author>/<name>/releases/new/", methods=["GET", "POST"])
 @login_required
-def create_release_page(type, author, name):
-	package = getPageByInfo(type, author, name)
+def create_release_page(author, name):
+	package = getPageByInfo(author, name)
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
 		return redirect(package.getDetailsURL())
 
@@ -421,9 +408,9 @@ def create_release_page(type, author, name):
 
 	return render_template("packages/release_new.html", package=package, form=form)
 
-@app.route("/<type>s/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
+@app.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
 @login_required
-def edit_release_page(type, author, name, id):
+def edit_release_page(author, name, id):
 	user = User.query.filter_by(username=author).first()
 	if user is None:
 		abort(404)
@@ -433,7 +420,7 @@ def edit_release_page(type, author, name, id):
 		abort(404)
 
 	package = release.package
-	if package.name != name or package.type != PackageType[type.upper()]:
+	if package.name != name or package.author.username != author:
 		abort(404)
 
 	canEdit	= package.checkPerm(current_user, Permission.MAKE_RELEASE)
