@@ -217,7 +217,7 @@ def create_screenshot_page(package):
 
 			msg = "{}: Screenshot added {}" \
 					.format(package.title, ss.title)
-			triggerNotif(package.author, current_user, msg, erequest.getURL())
+			triggerNotif(package.author, current_user, msg, package.getDetailsURL())
 			db.session.commit()
 			return redirect(package.getDetailsURL())
 
@@ -413,7 +413,7 @@ def create_release_page(package):
 				db.session.add(rel)
 
 				msg = "{}: Release {} created".format(package.title, rel.title)
-				triggerNotif(package.author, current_user, msg, erequest.getURL())
+				triggerNotif(package.author, current_user, msg, rel.getEditURL())
 				db.session.commit()
 				return redirect(package.getDetailsURL())
 
