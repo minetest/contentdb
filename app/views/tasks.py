@@ -52,10 +52,7 @@ def check_task(id):
 		return jsonify(info)
 	else:
 		r = request.args.get("r")
-		if r is None:
-			abort(422)
-
-		if status == "SUCCESS":
+		if r is not None and status == "SUCCESS":
 			return redirect(r)
 		else:
 			return render_template("tasks/view.html", info=info)
