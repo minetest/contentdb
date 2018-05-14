@@ -1,4 +1,4 @@
-from flask import request, flash, abort
+from flask import request, flash, abort, redirect
 from flask_user import *
 from flask_login import login_user, logout_user
 from app.models import *
@@ -84,6 +84,8 @@ def rank_required(rank):
 	def decorator(f):
 		@wraps(f)
 		def decorated_function(*args, **kwargs):
+			if not current_user.is_authenticated:
+				return redirect(url_for("user.login"))
 			if not current_user.rank.atLeast(rank):
 				abort(403)
 
