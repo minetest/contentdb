@@ -160,8 +160,8 @@ title: Ranks and Permissions
 			<th></th>
 			<th></th> <!-- editor -->
 			<th></th>
-			<th>✓</th> <!-- moderator -->
-			<th>✓</th>
+			<th>✓<sup>3</sup></th> <!-- moderator -->
+			<th>✓<sup>2</sup><sup>3</sup></th>
 			<th>✓</th> <!-- admin -->
 			<th>✓</th>
 		</tr>
@@ -171,3 +171,4 @@ title: Ranks and Permissions
 
 1. User must be the author of the EditRequest.
 2. Target user cannot be an admin.
+3. Cannot set user to a higher rank than themselves.
