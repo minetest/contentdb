@@ -33,7 +33,7 @@ function pollTask(poll_url, disableTimeout) {
 					console.log("Got result")
 					resolve(res.result)
 				} else if (res.status == "FAILURE" || res.status == "REVOKED") {
-					reject()
+					reject(res.error || "Unknown server error")
 				} else {
 					retry()
 				}
