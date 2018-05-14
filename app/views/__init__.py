@@ -1,4 +1,4 @@
-from app import app
+from app import app, pages
 from flask import *
 from flask_user import *
 from flask_login import login_user, logout_user
@@ -31,3 +31,10 @@ def home_page():
 	return render_template("index.html", packages=packages)
 
 from . import users, githublogin, packages, sass, tasks, admin, notifications
+
+@menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { 'path': 'help' })
+@app.route('/<path:path>/')
+def flatpage(path):
+    page = pages.get_or_404(path)
+    template = page.meta.get('template', 'flatpage.html')
+    return render_template(template, page=page)
