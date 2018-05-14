@@ -91,14 +91,19 @@ def getKrockList():
 	return krock_list_cache, krock_list_cache_by_name
 
 def findModInfo(author, name, link):
-	_, lookup = getKrockList()
+	list, lookup = getKrockList()
 
-	if name in lookup:
+	if name is not None and name in lookup:
 		if len(lookup[name]) == 1:
 			return lookup[name][0]
 
 		for x in lookup[name]:
 			if x["author"] == author:
+				return x
+
+	if link is not None and len(link) > 15:
+		for x in list:
+			if link in x["link"]:
 				return x
 
 	return None
@@ -161,9 +166,9 @@ def getMeta(urlstr, author):
 		cutIdx = min(len(desc), 200 if idx < 5 else idx)
 		result["short_description"] = desc[:cutIdx]
 
-	info = findModInfo(author, result["name"], result["repo"])
+	info = findModInfo(author, result.get("name"), result["repo"])
 	if info is not None:
-		result["forumId"] = info["topicId"]
+		result["forumId"] = info.get("topicId")
 
 	return result
 
