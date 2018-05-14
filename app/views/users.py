@@ -52,7 +52,7 @@ def user_profile_page(username):
 
 			if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
 				newEmail = form["email"].data
-				if newEmail != user.email:
+				if newEmail != user.email and newEmail.strip() != "":
 					token = randomString(32)
 
 					ver = UserEmailVerification()
