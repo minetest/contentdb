@@ -121,7 +121,7 @@ class User(db.Model, UserMixin):
 		elif perm == Permission.CHANGE_RANK:
 			return user.rank.atLeast(UserRank.MODERATOR)
 		elif perm == Permission.CHANGE_EMAIL:
-			return user == self or user.rank.atLeast(UserRank.MODERATOR)
+			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank))
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
