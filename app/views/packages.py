@@ -121,7 +121,7 @@ class PackageForm(FlaskForm):
 	submit	     = SubmitField("Save")
 
 @menu.register_menu(app, ".new", "Create", order=21, visible_when=lambda: current_user.is_authenticated)
-@app.route("/new/", methods=["GET", "POST"])
+@app.route("/packages/new/", methods=["GET", "POST"])
 @app.route("/packages/<author>/<name>/edit/", methods=["GET", "POST"])
 @login_required
 def create_edit_package_page(author=None, name=None):
