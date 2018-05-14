@@ -4,6 +4,12 @@ from celery import Celery
 from app import app
 from app.models import *
 
+class TaskError(Exception):
+	def __init__(self, value):
+		self.value = value
+	def __str__(self):
+		return repr("TaskError: " + self.value)
+
 class FlaskCelery(Celery):
 	def __init__(self, *args, **kwargs):
 		super(FlaskCelery, self).__init__(*args, **kwargs)

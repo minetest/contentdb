@@ -3,7 +3,7 @@ from flask_user import *
 from flask.ext import menu
 from app import app, csrf
 from app.models import *
-from app.tasks import celery
+from app.tasks import celery, TaskError
 from app.tasks.importtasks import getMeta
 from .utils import shouldReturnJson
 # from celery.result import AsyncResult
@@ -33,8 +33,14 @@ def check_task(id):
 		info = {
 				'id': id,
 				'status': status,
-				'error': str(result),
 			}
+
+		if current_user.is_authenticated and current_user.rank.atLeast(UserRank.ADMIN):
+			info["error"] = str(traceback)
+		elif str(result)[1:12] == "TaskError: ":
+			info["error"] = str(result)[12:-1]
+		else:
+			info["error"] = "Unknown server error"
 	else:
 		info = {
 				'id': id,

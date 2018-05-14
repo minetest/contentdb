@@ -32,6 +32,8 @@ function pollTask(poll_url, disableTimeout) {
 				if (res.status == "SUCCESS") {
 					console.log("Got result")
 					resolve(res.result)
+				} else if (res.status == "FAILURE" || res.status == "REVOKED") {
+					reject()
 				} else {
 					retry()
 				}

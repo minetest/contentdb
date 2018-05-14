@@ -4,14 +4,7 @@ import urllib.request
 from urllib.parse import urlparse, quote_plus
 from app import app
 from app.models import *
-from app.tasks import celery
-
-class TaskError(Exception):
-	def __init__(self, value):
-		self.value = value
-	def __str__(self):
-		return repr(self.value)
-
+from app.tasks import celery, TaskError
 
 class GithubURLMaker:
 	def __init__(self, url):
@@ -177,6 +170,7 @@ def getMeta(urlstr, author):
 @celery.task()
 def makeVCSRelease(id, branch):
 	release = PackageRelease.query.get(id)
+
 	if release is None:
 		raise TaskError("No such release!")
 

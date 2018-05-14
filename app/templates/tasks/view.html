@@ -5,10 +5,10 @@ Working
 {% endblock %}
 
 {% block content %}
-	{% if "error" in info %}
+	{% if "error" in info or info.status == "FAILURE" or info.status == "REVOKED" %}
 		<h1>Task Failed</h1>
 
-		<p>{{ info. error }}</p>
+		<pre>{{ info.error }}</pre>
 	{% else %}
 		<h1>Working…</h1>
 
