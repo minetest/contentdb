@@ -8,7 +8,7 @@ from flask_wtf import FlaskForm
 from flask_user.forms import RegisterForm
 from wtforms import *
 from wtforms.validators import *
-from .utils import rank_required, randomString
+from app.utils import rank_required, randomString
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.emails import sendVerifyEmail
 

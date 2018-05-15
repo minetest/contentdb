@@ -1,10 +1,12 @@
-import flask, json
+import flask, json, os
 from flask.ext.sqlalchemy import SQLAlchemy
+from urllib.error import HTTPError
 import urllib.request
 from urllib.parse import urlparse, quote_plus
 from app import app
 from app.models import *
 from app.tasks import celery, TaskError
+from app.utils import randomString
 
 class GithubURLMaker:
 	def __init__(self, url):
@@ -37,7 +39,7 @@ class GithubURLMaker:
 		return self.baseUrl + "/description.txt"
 
 	def getScreenshotURL(self):
-		return self.baseUrl + "/placeholder.png"
+		return self.baseUrl + "/screenshot.png"
 
 	def getCommitsURL(self, branch):
 		return "https://api.github.com/repos/{}/{}/commits?sha={}" \
@@ -147,7 +149,7 @@ def getMeta(urlstr, author):
 				result[key] = conf[key]
 			except KeyError:
 				pass
-	except OSError:
+	except HTTPError:
 		print("mod.conf does not exist")
 
 	if "name" in result:
@@ -157,7 +159,7 @@ def getMeta(urlstr, author):
 		try:
 			contents = urllib.request.urlopen(urlmaker.getDescURL()).read().decode("utf-8")
 			result["description"] = contents.strip()
-		except OSError:
+		except HTTPError:
 			print("description.txt does not exist!")
 
 	if "description" in result:
@@ -171,6 +173,7 @@ def getMeta(urlstr, author):
 		result["forumId"] = info.get("topicId")
 
 	return result
+
 
 @celery.task()
 def makeVCSRelease(id, branch):
@@ -204,3 +207,40 @@ def makeVCSRelease(id, branch):
 	db.session.commit()
 
 	return release.url
+
+
+@celery.task()
+def importRepoScreenshot(id):
+	package = Package.query.get(id)
+	if package is None:
+		raise Exception("Unexpected none package")
+
+	# Get URL Maker
+	url = urlparse(package.repo)
+	urlmaker = None
+	if url.netloc == "github.com":
+		urlmaker = GithubURLMaker(url)
+	else:
+		raise TaskError("Unsupported repo")
+
+	if not urlmaker.isValid():
+		raise TaskError("Error! Url maker not valid")
+
+	try:
+		filename = randomString(10) + ".png"
+		imagePath = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+		print(imagePath)
+		urllib.request.urlretrieve(urlmaker.getScreenshotURL(), imagePath)
+
+		ss = PackageScreenshot()
+		ss.package = package
+		ss.title   = "screenshot.png"
+		ss.url     = "/uploads/" + filename
+		db.session.add(ss)
+		db.session.commit()
+
+		return "/uploads/" + filename
+	except HTTPError:
+		print("screenshot.png does not exist")
+
+	return None

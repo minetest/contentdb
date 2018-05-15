@@ -5,7 +5,7 @@ import flask_menu as menu
 from flask_github import GitHub
 from app import app, github
 from app.models import *
-from .utils import loginUser
+from app.utils import loginUser
 
 @app.route("/user/github/start/")
 def github_signin_page():

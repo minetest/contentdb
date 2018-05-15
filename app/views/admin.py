@@ -6,7 +6,7 @@ from app.models import *
 from app.tasks.forumtasks import importUsersFromModList
 from flask_wtf import FlaskForm
 from wtforms import *
-from .utils import loginUser, rank_required
+from app.utils import loginUser, rank_required
 
 @menu.register_menu(app, ".admin", "Admin", order=30,
 		visible_when=lambda: current_user.rank.atLeast(UserRank.ADMIN))

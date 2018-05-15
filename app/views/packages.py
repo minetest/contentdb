@@ -3,10 +3,11 @@ from flask_user import *
 from flask.ext import menu
 from app import app
 from app.models import *
-from app.tasks.importtasks import makeVCSRelease
+from app.tasks.importtasks import importRepoScreenshot, makeVCSRelease
 
-from .utils import *
+from app.utils import *
 
+from urllib.parse import urlparse
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
@@ -153,10 +154,11 @@ def create_edit_package_page(author=None, name=None):
 
 	# Initial form class from post data and default data
 	if request.method == "POST" and form.validate():
-		# Successfully submitted!
+		wasNew = False
 		if not package:
 			package = Package()
 			package.author = author
+			wasNew = True
 		else:
 			triggerNotif(package.author, current_user,
 					"{} edited".format(package.title), package.getDetailsURL())
@@ -168,7 +170,14 @@ def create_edit_package_page(author=None, name=None):
 			package.tags.append(Tag.query.get(tag))
 
 		db.session.commit() # save
-		return redirect(package.getDetailsURL()) # redirect
+
+		if wasNew:
+			url = urlparse(package.repo)
+			if url.netloc == "github.com":
+				task = importRepoScreenshot.delay(package.id)
+				return redirect(url_for("check_task", id=task.id, r=package.getDetailsURL()))
+
+		return redirect(package.getDetailsURL())
 
 	return render_template("packages/create_edit.html", package=package, form=form, author=author)
 

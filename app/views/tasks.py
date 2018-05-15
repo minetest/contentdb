@@ -5,10 +5,10 @@ from app import app, csrf
 from app.models import *
 from app.tasks import celery, TaskError
 from app.tasks.importtasks import getMeta
-from .utils import shouldReturnJson
+from app.utils import shouldReturnJson
 # from celery.result import AsyncResult
 
-from .utils import *
+from app.utils import *
 
 @csrf.exempt
 @app.route("/tasks/getmeta/new/", methods=["POST"])
