@@ -3,7 +3,10 @@ from bs4 import *
 from urllib.parse import urljoin
 import urllib.request
 import os.path
-import time
+import time, re
+
+def urlEncodeNonAscii(b):
+	return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b)
 
 class Profile:
 	def __init__(self, username):
@@ -58,7 +61,7 @@ def __extract_signature(soup):
 		return res[0]
 
 def getProfile(url, username):
-	url = url + "/memberlist.php?mode=viewprofile&un=" + username
+	url = url + "/memberlist.php?mode=viewprofile&un=" + urlEncodeNonAscii(username)
 
 	contents = urllib.request.urlopen(url).read().decode("utf-8")
 	soup = BeautifulSoup(contents, "lxml")

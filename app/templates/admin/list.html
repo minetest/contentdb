@@ -9,4 +9,16 @@
 		<li><a href="{{ url_for('user_list_page') }}">User list</a></li>
 		<li><a href="{{ url_for('switch_user_page') }}">Sign in as another user</a></li>
 	</ul>
+
+	<div class="box box_grey">
+		<h2>Do action</h2>
+
+		<form method="post" action="">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<select name="action">
+				<option value="importusers" selected>Create users from mod list</option>
+			</select>
+			<input type="submit" value="Start" />
+		</form>
+	</div>
 {% endblock %}
