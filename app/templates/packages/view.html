@@ -39,7 +39,7 @@
 			</tr>
 			<tr>
 				<td>Author</td>
-				<td>
+				<td class="{{ package.author.rank }}">
 					<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
 						{{ package.author.display_name }}
 					</a>

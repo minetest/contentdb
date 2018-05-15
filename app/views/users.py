@@ -22,7 +22,7 @@ class UserProfileForm(FlaskForm):
 @app.route("/users/", methods=["GET"])
 @rank_required(UserRank.MODERATOR)
 def user_list_page():
-	users = User.query.all()
+	users = User.query.order_by(db.asc(User.rank), db.asc(User.display_name)).all()
 	return render_template("users/list.html", users=users)
 
 

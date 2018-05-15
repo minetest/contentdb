@@ -5,9 +5,9 @@
 {% endblock %}
 
 {% block content %}
-<ul>
+<ul class="userlist">
 	{% for user in users %}
-		<li>
+		<li class="{{ user.rank }}">
 			<a href="{{ url_for('user_profile_page', username=user.username) }}">
 				{{ user.display_name }}
 			</a> -
