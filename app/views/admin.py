@@ -3,7 +3,8 @@ from flask_user import *
 from flask.ext import menu
 from app import app
 from app.models import *
-from app.tasks.forumtasks import importUsersFromModList
+from app.tasks.importtasks import importRepoScreenshot
+from app.tasks.forumtasks  import importUsersFromModList
 from flask_wtf import FlaskForm
 from wtforms import *
 from app.utils import loginUser, rank_required
@@ -18,6 +19,14 @@ def admin_page():
 		if action == "importusers":
 			task = importUsersFromModList.delay()
 			return redirect(url_for("check_task", id=task.id, r=url_for("user_list_page")))
+		elif action == "importscreenshots":
+			packages = Package.query \
+				.outerjoin(PackageScreenshot, Package.id==PackageScreenshot.package_id) \
+				.filter(PackageScreenshot.id==None).all()
+			for package in packages:
+				importRepoScreenshot.delay(package.id)
+
+			return redirect(url_for("admin_page"))
 		else:
 			flash("Unknown action: " + action, "error")
 
