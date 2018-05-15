@@ -10,7 +10,7 @@ title: Ranks and Permissions
 
 ## Breakdown
 
-<table>
+<table class="fancyTable">
 	<thead>
 		<tr>
 			<th>Rank</th>

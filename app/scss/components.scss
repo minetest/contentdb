@@ -151,7 +151,7 @@ a:hover {
 	border: 1px solid #393;
 }
 
-table {
+table.fancyTable {
 	font-family: "Arial Black", Gadget, sans-serif;
 	border: 2px solid #000000;
 	background-color: #4A4A4A;
@@ -159,33 +159,33 @@ table {
 	text-align: center;
 	border-collapse: collapse;
 }
-table td, table th {
+table.fancyTable td, table.fancyTable th {
 	border: 1px solid #4A4A4A;
 	padding: 3px 2px;
 }
-table tbody td {
+table.fancyTable tbody td {
 	font-size: 13px;
 	color: #E6E6E6;
 }
-table tr:nth-child(even) {
+table.fancyTable tr:nth-child(even) {
 	background: #888888;
 }
-table thead {
+table.fancyTable thead {
 	background: #000000;
 	border-bottom: 3px solid #000000;
 }
-table thead th {
+table.fancyTable thead th {
 	font-size: 15px;
 	font-weight: bold;
 	color: #E6E6E6;
 	text-align: center;
 	border-left: 2px solid #4A4A4A;
 }
-table thead th:first-child {
+table.fancyTable thead th:first-child {
 	border-left: none;
 }
 
-table tfoot {
+table.fancyTable tfoot {
 	font-size: 12px;
 	font-weight: bold;
 	color: #E6E6E6;
@@ -195,7 +195,7 @@ table tfoot {
 	background: linear-gradient(to bottom, #404040 0%, #191919 66%, #000000 100%);
 	border-top: 1px solid #4A4A4A;
 }
-table tfoot td {
+table.fancyTable tfoot td {
 	font-size: 12px;
 }
 
