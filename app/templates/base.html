@@ -41,8 +41,24 @@
 		<ul class="nav navbar-nav navbar-right">
 			{% if current_user.is_authenticated %}
 				<li><a href="{{ url_for('notifications_page') }}">({{ current_user.notifications | length }})</a></li>
-				<li><a href="{{ url_for('user_profile_page', username=current_user.username) }}">{{ current_user.display_name }}</a></li>
-				<li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
+				<li class="dropdown">
+					<a href="{{ url_for('user_profile_page', username=current_user.username) }}"
+						class="dropdown-toggle"
+						data-toggle="dropdown"
+						role="button"
+						aria-expanded="false">{{ current_user.display_name }}
+							<span class="caret"></span></a>
+
+					<ul class="dropdown-menu" role="menu">
+						<li>
+							<a href="{{ url_for('user_profile_page', username=current_user.username) }}">Profile</a>
+						</li>
+						{% if current_user.rank == current_user.rank.ADMIN %}
+							<li><a href="{{ url_for('admin_page') }}">Admin</a></li>
+						{% endif %}
+						<li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
+					</ul>
+				</li>
 			{% else %}
 				<li><a href="{{ url_for('user.login') }}">Sign in</a></li>
 			{% endif %}

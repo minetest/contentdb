@@ -26,8 +26,6 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from app.utils import loginUser, rank_required
 
-@menu.register_menu(app, ".admin", "Admin", order=30,
-		visible_when=lambda: current_user.rank.atLeast(UserRank.ADMIN))
 @app.route("/admin/", methods=["GET", "POST"])
 @rank_required(UserRank.ADMIN)
 def admin_page():
