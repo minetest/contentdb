@@ -1,3 +1,7 @@
+# Copyright (c) 2016  Andrew "rubenwardy" Ward
+# License: MIT
+# Source: https://github.com/rubenwardy/python_phpbb_parser
+
 import urllib, socket
 from bs4 import *
 from urllib.parse import urljoin

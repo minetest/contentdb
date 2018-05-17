@@ -14,6 +14,8 @@ Working
 
 		<script src="/static/polltask.js"></script>
 		<script>
+			// @author rubenwardy
+			// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
 			pollTask("{{ url_for('check_task', id=info.id) }}", true)
 					.then(function() { location.reload() })
 					.catch(function() { location.reload() })
