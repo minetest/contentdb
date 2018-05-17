@@ -4,18 +4,17 @@
 	flex-direction: row;
 	flex-grow: 1;
 	flex-shrink: 1;
-	
 	padding: 0;
 	margin: 0;
 }
 
 .packagegrid li {
 	flex: 1;
-	display: block;	
-	min-width: 246px;
-	min-height: 164px;
+	display: block;
+	min-width: 300px;
+	min-height: 200px;
 	padding: 1;
-	margin: 5px;	
+	margin: 7px;
 }
 
 .packagegrid a {
@@ -24,18 +23,52 @@
 	border-radius: 7px;
 	position: relative;
 	overflow: hidden;
-    	background-size: cover;
+	background-size: cover;
 	background-repeat: no-repeat;
-    	background-position: center;
+	background-position: center;
 }
 
+.packagegrid a:hover {
+	// box-shadow: 0px 0px 16px 6px rgba(0,0,0,0.4);
+}
 
-.packagegrid a span {
+.packagegridscrub {
 	position: absolute;
-	left: 0;
+	top: 50%;
 	right: 0;
 	bottom: 0;
+	left: 0;
 	padding: 5px;
-	background: rgba(255, 255, 255, 0.3);
-	color: black;
+	background: linear-gradient(rgba(0,0,0,0), rgba(0,0,0,0.5));
+}
+
+.packagegridinfo {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	padding: 1em;
+}
+
+.packagegridinfo h3 {
+	color: white;
+}
+
+.packagegridinfo p {
+	display: none;
+	color: #ddd;
+	font-weight: normal;
+}
+
+.packagegrid a:hover .packagegridinfo {
+	top: 0;
+}
+
+.packagegrid a:hover p {
+	display: block;
+}
+
+.packagegrid a:hover .packagegridscrub {
+	top: 0;
+	background: rgba(0,0,0,0.8);
 }

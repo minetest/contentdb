@@ -4,8 +4,9 @@
 Dashboard
 {% endblock %}
 
-{% block content %}
-	<header>
+{% block container %}
+<header>
+	<div class="container">
 		<h1>Content DB</h1>
 
 		<p>
@@ -19,16 +20,26 @@ Dashboard
 			<input type="text" name="q" value="{{ query or ''}}" />
 			<input type="submit" value="Search" />
 		</form>
-	</header>
+	</div>
+</header>
 
+<main>
 	<ul class="packagegrid">
 		{% for p in packages %}
 			<li><a href="{{ p.getDetailsURL() }}"
 				style="background-image: url({{ p.getMainScreenshotURL() or '/static/placeholder.png' }});">
-				<span>{{ p.title }} by {{ p.author.display_name }}</span>
+				<div class="packagegridscrub"></div>
+				<div class="packagegridinfo">
+					<h3>{{ p.title }} by {{ p.author.display_name }}</h3>
+
+					<p>
+						{{ p.shortDesc }}
+					</p>
+				</div>
 			</a></li>
 		{% else %}
 			<li><i>No packages available</i></ul>
 		{% endfor %}
 	</ul>
+</main>
 {% endblock %}

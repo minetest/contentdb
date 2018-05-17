@@ -12,64 +12,65 @@
 
 <body>
 	<nav>
-		<ul class="nav navbar-nav navbar-left">
-			<li><a href="/"><img src="/static/logo_dark.svg" /></a></li>
-			{% for item in current_menu.children recursive %}
-				{% if item.visible %}
-					<li{% if item.children %} class="dropdown"{% endif %}>
-						<a href="{{ item.url }}"
+		<div class="container">
+			<ul class="nav navbar-nav navbar-left">
+				<li><a href="/"><img src="/static/logo_dark.svg" /></a></li>
+				{% for item in current_menu.children recursive %}
+					{% if item.visible %}
+						<li{% if item.children %} class="dropdown"{% endif %}>
+							<a href="{{ item.url }}"
+									{% if item.children %}
+										class="dropdown-toggle"
+										data-toggle="dropdown"
+										role="button"
+										aria-expanded="false"
+									{% endif %}>
+								{{ item.text }}
 								{% if item.children %}
-									class="dropdown-toggle"
-									data-toggle="dropdown"
-									role="button"
-									aria-expanded="false"
-								{% endif %}>
-							{{ item.text }}
+									<span class="caret"></span>
+								{% endif %}
+							</a>
 							{% if item.children %}
-								<span class="caret"></span>
+							<ul class="dropdown-menu" role="menu">
+								{{ loop(item.children) }}
+							</ul>
 							{% endif %}
-						</a>
-						{% if item.children %}
-						<ul class="dropdown-menu" role="menu">
-							{{ loop(item.children) }}
-						</ul>
-						{% endif %}
-					</li>
-				{% endif %}
-			{% endfor %}
-		</ul>
-		<ul class="nav navbar-nav navbar-right">
-			{% if current_user.is_authenticated %}
-				<li><a href="{{ url_for('notifications_page') }}">({{ current_user.notifications | length }})</a></li>
-				<li><a href="{{ url_for('create_edit_package_page') }}">+</a></li>
-				<li class="dropdown">
-					<a href="{{ url_for('user_profile_page', username=current_user.username) }}"
-						class="dropdown-toggle"
-						data-toggle="dropdown"
-						role="button"
-						aria-expanded="false">{{ current_user.display_name }}
-							<span class="caret"></span></a>
-
-					<ul class="dropdown-menu" role="menu">
-						<li>
-							<a href="{{ url_for('user_profile_page', username=current_user.username) }}">Profile</a>
 						</li>
-						{% if current_user.canAccessTodoList() %}
-							<li><a href="{{ url_for('todo_page') }}">Work Queue</a></li>
-						{% endif %}
-						{% if current_user.rank == current_user.rank.ADMIN %}
-							<li><a href="{{ url_for('admin_page') }}">Admin</a></li>
-						{% endif %}
-						<li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
-					</ul>
-				</li>
-			{% else %}
-				<li><a href="{{ url_for('user.login') }}">Sign in</a></li>
-			{% endif %}
-		</ul>
-		<div style="clear:both;"></div>
-	</nav>
+					{% endif %}
+				{% endfor %}
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				{% if current_user.is_authenticated %}
+					<li><a href="{{ url_for('notifications_page') }}">({{ current_user.notifications | length }})</a></li>
+					<li><a href="{{ url_for('create_edit_package_page') }}">+</a></li>
+					<li class="dropdown">
+						<a href="{{ url_for('user_profile_page', username=current_user.username) }}"
+							class="dropdown-toggle"
+							data-toggle="dropdown"
+							role="button"
+							aria-expanded="false">{{ current_user.display_name }}
+								<span class="caret"></span></a>
 
+						<ul class="dropdown-menu" role="menu">
+							<li>
+								<a href="{{ url_for('user_profile_page', username=current_user.username) }}">Profile</a>
+							</li>
+							{% if current_user.canAccessTodoList() %}
+								<li><a href="{{ url_for('todo_page') }}">Work Queue</a></li>
+							{% endif %}
+							{% if current_user.rank == current_user.rank.ADMIN %}
+								<li><a href="{{ url_for('admin_page') }}">Admin</a></li>
+							{% endif %}
+							<li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
+						</ul>
+					</li>
+				{% else %}
+					<li><a href="{{ url_for('user.login') }}">Sign in</a></li>
+				{% endif %}
+			</ul>
+			<div style="clear:both;"></div>
+		</div>
+	</nav>
 
 	{% block flash_messages %}
 		{%- with messages = get_flashed_messages(with_categories=true) -%}

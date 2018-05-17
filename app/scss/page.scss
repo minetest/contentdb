@@ -6,31 +6,30 @@ html, body {
 	margin: 0;
 }
 
-nav, main, #alerts {
+.container, main, #alerts, footer {
 	width: 90%;
-	max-width: 960px;
+	max-width: 1024px;
 	margin: auto;
 	padding: 0;
 	display: block;
 }
 
+main {
+	padding: 7px 0;
+}
+
+header h1, header p, header form {
+	padding: 0 10px;
+	margin-left: 0;
+}
+
 header {
-	padding: 20px;
+	padding: 30px;
 	background: #258;
 }
 
 header p {
 	max-width: 400px;
-}
-
-
-/* Footer */
-
-footer {
-	width: 80%;
-	max-width: 860px;
-	margin: auto;
-	padding: 50px 0 20px 0;
 }
 
 footer a {

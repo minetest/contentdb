@@ -37,6 +37,10 @@ nav li a {
 	border-left: 1px solid #444;
 }
 
+nav ul li:last-child a {
+	border-right: 1px solid #444;
+}
+
 nav a:hover {
 	color: #eee;
 	background: #444;
@@ -61,8 +65,7 @@ li.dropdown {
 	background: #333;
 	z-index: 1;
 	right: 0;
-    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
-	// display: none;
+	box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
 }
 
 .dropdown:hover ul {
