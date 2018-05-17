@@ -41,7 +41,9 @@
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
 				{% if current_user.is_authenticated %}
-					<li><a href="{{ url_for('notifications_page') }}">({{ current_user.notifications | length }})</a></li>
+					<li><a href="{{ url_for('notifications_page') }}">
+						<img src="/static/notification{% if current_user.notifications %}_alert{% endif %}.svg" />
+					</a></li>
 					<li><a href="{{ url_for('create_edit_package_page') }}">+</a></li>
 					<li class="dropdown">
 						<a href="{{ url_for('user_profile_page', username=current_user.username) }}"
