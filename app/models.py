@@ -120,6 +120,11 @@ class User(db.Model, UserMixin):
 		self.display_name = username
 		self.rank = UserRank.NOT_JOINED
 
+	def canAccessTodoList(self):
+		return Permission.APPROVE_NEW.check(self) or \
+				Permission.APPROVE_RELEASE.check(self) or \
+				Permission.APPROVE_CHANGES.check(self)
+
 	def isClaimed(self):
 		return self.rank.atLeast(UserRank.NEW_MEMBER)
 

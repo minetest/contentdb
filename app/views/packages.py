@@ -63,13 +63,6 @@ def packages_page():
 		return render_template("packages/list.html", title=title, packages=query.all(), \
 				query=search, tags=tags, type=None if type is None else type.toName())
 
-
-def canSeeWorkQueue():
-	return Permission.APPROVE_NEW.check(current_user) or \
-		Permission.APPROVE_RELEASE.check(current_user) or \
-			Permission.APPROVE_CHANGES.check(current_user)
-
-@menu.register_menu(app, ".todo", "Work Queue", order=20, visible_when=canSeeWorkQueue)
 @app.route("/todo/")
 @login_required
 def todo_page():
@@ -138,7 +131,6 @@ class PackageForm(FlaskForm):
 	forums	     = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
 	submit	     = SubmitField("Save")
 
-@menu.register_menu(app, ".new", "Create", order=21, visible_when=lambda: current_user.is_authenticated)
 @app.route("/packages/new/", methods=["GET", "POST"])
 @app.route("/packages/<author>/<name>/edit/", methods=["GET", "POST"])
 @login_required

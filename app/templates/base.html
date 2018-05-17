@@ -41,6 +41,7 @@
 		<ul class="nav navbar-nav navbar-right">
 			{% if current_user.is_authenticated %}
 				<li><a href="{{ url_for('notifications_page') }}">({{ current_user.notifications | length }})</a></li>
+				<li><a href="{{ url_for('create_edit_package_page') }}">+</a></li>
 				<li class="dropdown">
 					<a href="{{ url_for('user_profile_page', username=current_user.username) }}"
 						class="dropdown-toggle"
@@ -53,6 +54,9 @@
 						<li>
 							<a href="{{ url_for('user_profile_page', username=current_user.username) }}">Profile</a>
 						</li>
+						{% if current_user.canAccessTodoList() %}
+							<li><a href="{{ url_for('todo_page') }}">Work Queue</a></li>
+						{% endif %}
 						{% if current_user.rank == current_user.rank.ADMIN %}
 							<li><a href="{{ url_for('admin_page') }}">Admin</a></li>
 						{% endif %}
