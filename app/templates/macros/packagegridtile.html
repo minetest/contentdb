@@ -1,0 +1,23 @@
+{% macro render_pkgtile(package) -%}
+	<li><a href="{{ package.getDetailsURL() }}"
+		style="background-image: url({{ package.getMainScreenshotURL() or '/static/placeholder.png' }});">
+		<div class="packagegridscrub"></div>
+		<div class="packagegridinfo">
+			<h3>{{ package.title }} by {{ package.author.display_name }}</h3>
+
+			<p>
+				{{ package.shortDesc }}
+			</p>
+		</div>
+	</a></li>
+{% endmacro %}
+
+{% macro render_pkggrid(packages) -%}
+	<ul class="packagegrid">
+		{% for p in packages %}
+			{{ render_pkgtile(p) }}
+		{% else %}
+			<li><i>No packages available</i></ul>
+		{% endfor %}
+	</ul>
+{% endmacro %}
