@@ -82,6 +82,10 @@ a:hover {
 	margin: 15px 0;
 }
 
+.button, .buttonset li a, input[type=submit] {
+	cursor: pointer;
+}
+
 .button, .buttonset li a, input[type=submit], input[type=text],
 		input[type=password], textarea, select {
 	text-align: center;
@@ -137,6 +141,7 @@ select:not([multiple]) {
 	border: 1px solid rgba(255,255,255,0.17);
 	border: 1px solid #555;
 	text-decoration: none;
+	color: #ddd;
 }
 
 .btn_green {
