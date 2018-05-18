@@ -10,7 +10,10 @@ Sign in
 		{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 		<h2>{%trans%}Sign in{%endtrans%}</h2>
 
-		<form action="" method="POST" class="form" role="form">
+		<form action="" method="POST" class="form" role="form" class="box-body">
+			<a href="{{ url_for('github_signin_page') }}">GitHub</a>
+
+
 			{{ form.hidden_tag() }}
 
 			{# Username or Email field #}
@@ -62,16 +65,17 @@ Sign in
 				{{ render_submit_field(form.submit, tabindex=180) }}
 			</form>
 
-			<a href="{{ url_for('github_signin_page') }}">GitHub</a>
 	</div>
 
 	<div class="right">
 		<aside class="box box_grey">
 			<h2>New here?</h2>
 
-			<p>Create an account using your forum account.</p>
+			<div class="box-body">
+				<p>Create an account using your forum account.</p>
 
-			<a href="{{ url_for('user_claim_page') }}" class="button">{%trans%}Claim your account{%endtrans%}</a>
+				<a href="{{ url_for('user_claim_page') }}" class="button">{%trans%}Claim your account{%endtrans%}</a>
+			</div>
 		</aside>
 	</div>
 </div>

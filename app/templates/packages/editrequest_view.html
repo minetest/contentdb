@@ -28,30 +28,38 @@
 			This edit request was rejected.
 		</div>
 	{% elif package.checkPerm(current_user, "APPROVE_CHANGES") %}
-		<div class="box box_grey">
-			<form method="post" action="{{ request.getApproveURL() }}">
-				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<input type="submit" value="Approve and Apply" />
-			</form>
-			<form method="post" action="{{ request.getRejectURL() }}">
-				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<input type="submit" value="Reject" />
-			</form>
+		<div class="box box_grey alert">
+			Request can be merged.
+
+			<div class="alert_right">
+				<form method="post" action="{{ request.getApproveURL() }}">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="submit" value="Approve and Apply" />
+				</form>
+				<form method="post" action="{{ request.getRejectURL() }}">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="submit" value="Reject" />
+				</form>
+			</div>
 		</div>
 	{% endif %}
 
-	<table>
-		<tr>
-			<th>Property</th>
-			<th>Old</th>
-			<th>New</th>
-		</tr>
-
-		{% for change in request.changes %}
+	<table class="fancyTable t-mll">
+		<thead>
 			<tr>
-				<td>{{ change.key.value }}</td>
-				<td>{{ change.oldValue }}</td>
-				<td>{{ change.newValue }}</td>
+				<th>Property</th>
+				<th>Old</th>
+				<th>New</th>
 			</tr>
-		{% endfor %}
+		</thead>
+		<tbody>
+			{% for change in request.changes %}
+				<tr>
+					<td>{{ change.key.value }}</td>
+					<td>{{ change.oldValue }}</td>
+					<td>{{ change.newValue }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
 {% endblock %}

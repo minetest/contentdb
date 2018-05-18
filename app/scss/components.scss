@@ -31,8 +31,8 @@ a:hover {
 	border-bottom: 1px solid #444;
 }
 
-.box > p, .box > table, .box > .buttonset, .box > form {
-	margin: 1em;
+.box .box-body {
+	padding: 1em;
 }
 
 // .box form {
@@ -139,7 +139,6 @@ select:not([multiple]) {
 .button:hover, .buttonset li a:hover, input[type=submit]:hover {
 	background: rgba(255,255,255,0.13);
 	border: 1px solid rgba(255,255,255,0.17);
-	border: 1px solid #555;
 	text-decoration: none;
 	color: #ddd;
 }
@@ -172,6 +171,45 @@ select:not([multiple]) {
 }
 
 /* Alerts */
+
+.alert {
+	padding: 10px;
+	position: relative;
+}
+
+.alert .alert_right, .alert > form {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+}
+
+.alert .alert_right form {
+	height: 100%;
+}
+
+.alert form {
+	display: inline-block;
+	margin: 0;
+	padding: 0;
+}
+
+.alert input {
+	margin: 0;
+	height: 100%;
+	background: 0;
+	border: 0;
+	border-left: 1px solid rgba(255,255,255,0.12);
+	border-radius: 0;
+}
+
+.alert input:hover {
+	border: 0;
+	border-left: 1px solid rgba(255,255,255,0.2);
+}
 
 #alerts {
 	list-style: none;
@@ -256,6 +294,10 @@ table.fancyTable tfoot {
 }
 table.fancyTable tfoot td {
 	font-size: 12px;
+}
+
+.t-mll tr td:not(:first-child) {
+	text-align: left;
 }
 
 .userlist li.NOT_JOINED {
