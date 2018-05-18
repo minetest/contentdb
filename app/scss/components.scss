@@ -25,15 +25,19 @@ a:hover {
 	padding: 0;
 }
 
-.box h3 {
+.box h2, .box h3 {
 	margin: 0;
-	padding: 1em 0.5em 0.5em 15px;
+	padding: 0.5em 0.5em 0.5em 15px;
 	border-bottom: 1px solid #444;
 }
 
-.box p, .box table {
+.box > p, .box > table, .box > .buttonset, .box > form {
 	margin: 1em;
 }
+
+// .box form {
+// 	padding: 1em;
+// }
 
 .box_grey {
 	background: #333;
@@ -62,6 +66,7 @@ a:hover {
 	background: #3a3a3a;
 }
 
+
 /*
 	buttonset
 */
@@ -77,19 +82,59 @@ a:hover {
 	margin: 15px 0;
 }
 
-.button, .buttonset li a {
+.button, .buttonset li a, input[type=submit], input[type=text],
+		input[type=password], textarea, select {
 	text-align: center;
 	display: inline-block;
-	padding: 0.5em 0.7em;
-	background: #333;
-	border: 1px solid #444;
+	padding: 0.4em 1em;
+	background: rgba(255,255,255,0.07);
+	border: 1px solid rgba(255,255,255,0.1);
 	color: #ddd;
 	border-radius: 5px;
 	text-decoration: none;
+	font-size: 100%;
 }
 
-.button:hover, .buttonset li a:hover {
-	background: #444;
+input[type=text], input[type=password], textarea, select {
+	text-align: left;
+}
+
+select {
+	min-width: 200px;
+}
+
+select:not([multiple]) {
+	background: linear-gradient(#444, #333);
+}
+
+.form-group {
+	padding: 8px 0;
+}
+
+.form-group label {
+	display: block;
+	vertical-align: top;
+	padding: 0 8px 8px 0;
+}
+
+.form-group input, .form-group textarea {
+	display: block;
+	min-width: 100%;
+	max-width: 100%;
+}
+
+.box .form-group input, .box .form-group textarea {
+	min-width: 95%;
+	max-width: 95%;
+}
+
+.form-group textarea {
+	min-height: 200px;
+}
+
+.button:hover, .buttonset li a:hover, input[type=submit]:hover {
+	background: rgba(255,255,255,0.13);
+	border: 1px solid rgba(255,255,255,0.17);
 	border: 1px solid #555;
 	text-decoration: none;
 }

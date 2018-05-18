@@ -57,34 +57,36 @@
 		{% endfor %}
 	</ul>
 	{% if user == current_user or user.checkPerm(current_user, "CHANGE_AUTHOR") %}
-		<a href="{{ url_for('create_edit_package_page', author=user.username) }}">
+		<p><a class="button" href="{{ url_for('create_edit_package_page', author=user.username) }}">
 			Create
-		</a>
+		</a></p>
 	{% endif %}
 </div>
 
 {% if form %}
 	{% from "macros/forms.html" import render_field, render_submit_field %}
-	<form class="box box_grey" action="" method="POST" class="form" role="form">
+	<div class="box box_grey">
 		<h2>Edit Details</h2>
 
-		<div class="row">
-			<div class="col-sm-6 col-md-5 col-lg-4">
-				{{ form.hidden_tag() }}
+		<form action="" method="POST" class="form" role="form">
+			<div class="row">
+				<div class="col-sm-6 col-md-5 col-lg-4">
+					{{ form.hidden_tag() }}
 
-				{{ render_field(form.display_name, tabindex=230) }}
+					{{ render_field(form.display_name, tabindex=230) }}
 
-				{% if user.checkPerm(current_user, "CHANGE_EMAIL") %}
-					{{ render_field(form.email, tabindex=240) }}
-				{% endif %}
+					{% if user.checkPerm(current_user, "CHANGE_EMAIL") %}
+						{{ render_field(form.email, tabindex=240) }}
+					{% endif %}
 
-				{% if user.checkPerm(current_user, "CHANGE_RANK") %}
-					{{ render_field(form.rank, tabindex=250) }}
-				{% endif %}
+					{% if user.checkPerm(current_user, "CHANGE_RANK") %}
+						{{ render_field(form.rank, tabindex=250) }}
+					{% endif %}
 
-				{{ render_submit_field(form.submit, tabindex=280) }}
+					{{ render_submit_field(form.submit, tabindex=280) }}
+				</div>
 			</div>
-		</div>
-	</form>
+		</form>
+	</div>
 {% endif %}
 {% endblock %}

@@ -8,32 +8,28 @@
 {% endblock %}
 
 {% block content %}
+	<h2>Create Package</h2>
+
 	{% from "macros/forms.html" import render_field, render_submit_field %}
-	<form method="POST" action="">
+	<form method="POST" action="" class="tableform">
 		{{ form.hidden_tag() }}
 
-		<div class="pkg_meta">
-			{{ render_field(form.name) }}
-			{{ render_field(form.title) }}
-			{{ render_field(form.shortDesc) }}
-			{{ render_field(form.desc) }}
-			{{ render_field(form.type) }}
-			{{ render_field(form.license) }}
-			{{ render_field(form.tags) }}
-		</div>
+		{{ render_field(form.name, class_="pkg_meta") }}
+		{{ render_field(form.title, class_="pkg_meta") }}
+		{{ render_field(form.shortDesc, class_="pkg_meta") }}
+		{{ render_field(form.desc, class_="pkg_meta") }}
+		{{ render_field(form.type, class_="pkg_meta") }}
+		{{ render_field(form.license, class_="pkg_meta") }}
+		{{ render_field(form.tags, class_="pkg_meta") }}
 
 		<div class="pkg_wiz_1">
-			<h2>Import Package</h2>
-
 			<p>Enter the repo URL for the package.
 			If it's hosted on Github then metadata will automatically be imported.</p>
 
 			<p>Leave blank if you don't have a repo.</p>
 		</div>
 
-		<div class="pkg_repo">
-			{{ render_field(form.repo) }}
-		</div>
+		{{ render_field(form.repo, class_="pkg_repo") }}
 
 		<div class="pkg_wiz_1">
 			<a id="pkg_wiz_1_next" class="button button-primary">Next</a>
@@ -43,12 +39,10 @@
 			Importing...
 		</div>
 
-		<div class="pkg_meta">
-			{{ render_field(form.website) }}
-			{{ render_field(form.issueTracker) }}
-			{{ render_field(form.forums) }}
-			{{ render_submit_field(form.submit) }}
-		</div>
+		{{ render_field(form.website, class_="pkg_meta") }}
+		{{ render_field(form.issueTracker, class_="pkg_meta") }}
+		{{ render_field(form.forums, class_="pkg_meta") }}
+		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
 	</form>
 
 	{% if not package.title %}
