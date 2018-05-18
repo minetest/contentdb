@@ -11,27 +11,20 @@
 		<input type="submit" value="Search" />
 	</form>
 
-	<ul>
-		{% for p in packages %}
-			<li><a href="{{ p.getDetailsURL() }}">
-				{{ p.title }} by {{ p.author.display_name }}
-			</a></li>
-		{% else %}
-			<li><i>No packages available</i></ul>
-		{% endfor %}
-	</ul>
+	<aside class="box box_grey outsidecontainer">
+		<h3>Tags</h3>
 
-	<h3>Tags</h3>
-	<div class="box box_grey alert alert-warning">
-		Filtering by tag doesn't actually work yet!
-	</div>
-	<ul>
-		{% for t in tags %}
-			<li><a href="{{ url_for('packages_page', q=(query or '')+' tag:'+t.name, type=type) }}">
-				{{ t.title }}
-			</a></li>
-		{% else %}
-			<li><i>No tags available</i></ul>
-		{% endfor %}
-	</ul>
+		<ul class="flatlist">
+			{% for t in tags %}
+				<li><a href="{{ url_for('packages_page', q=(query or '')+' tag:'+t.name, type=type) }}">
+					{{ t.title }}
+				</a></li>
+			{% else %}
+				<li><i>No tags available</i></ul>
+			{% endfor %}
+		</ul>
+	</aside>
+
+	{% from "macros/packagegridtile.html" import render_pkggrid %}
+	{{ render_pkggrid(packages) }}
 {% endblock %}

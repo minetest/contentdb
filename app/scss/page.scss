@@ -16,6 +16,8 @@ html, body {
 
 main {
 	padding: 7px 0;
+	position: relative;
+	box-sizing: border-box;
 }
 
 header h1, header p, header form {
@@ -43,10 +45,4 @@ footer a {
 
 footer a:hover {
 	color: #bbb;
-}
-
-.asideright {
-	float: right;
-	margin: 0 0 0 15px;
-	max-width: 300px;
 }

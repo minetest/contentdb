@@ -22,10 +22,20 @@ a:hover {
 .box {
 	border-radius: 5px;
 	margin: 15px 0;
+	padding: 0;
+}
+
+.box h3 {
+	margin: 0;
+	padding: 1em 0.5em 0.5em 15px;
+	border-bottom: 1px solid #444;
+}
+
+.box p, .box table {
+	margin: 1em;
 }
 
 .box_grey {
-	padding: 10px;
 	background: #333;
 	border: 1px solid #444;
 }
@@ -216,4 +226,51 @@ table.fancyTable tfoot td {
 
 .EDITOR a, a.EDITOR {
 	color: #b6f;
+}
+
+/*
+	Aside
+*/
+
+.asideright {
+	float: right;
+	margin: 0 0 0 15px;
+	max-width: 300px;
+}
+
+.outsidecontainer {
+	position: absolute;
+	right: 102%;
+	top: 0;
+	width: intrinsic;           /* Safari/WebKit uses a non-standard name */
+	width: -moz-max-content;    /* Firefox/Gecko */
+	width: -webkit-max-content; /* Chrome */
+}
+
+@media (max-width: 1490px) {
+	.outsidecontainer {
+		display: none;
+	}
+}
+
+.flatlist, .flatlist li {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.flatlist li {
+	display: block;
+}
+
+.flatlist a {
+	display: block;
+	padding: 0.5em 20px;
+	color: #ddd;
+	font-weight: normal;
+}
+
+.flatlist a:hover {
+	background: #444;
+	text-decoration: none;
 }
