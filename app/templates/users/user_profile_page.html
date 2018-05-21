@@ -9,7 +9,7 @@
 <div class="box box_grey">
 	<h2>{{ user.display_name }}</h2>
 
-	<table>
+	<table class="box-body">
 		<tr>
 			<td>Rank:</td>
 			<td>
@@ -47,20 +47,22 @@
 
 <div class="box box_grey">
 	<h2>Packages</h2>
-	<ul>
-		{% for p in user.packages %}
-			<li><a href="{{ p.getDetailsURL() }}">
-				{{ p.title }} by {{ p.author.display_name }}
-			</a></li>
-		{% else %}
-			<li><i>No packages available</i></ul>
-		{% endfor %}
-	</ul>
-	{% if user == current_user or user.checkPerm(current_user, "CHANGE_AUTHOR") %}
-		<p><a class="button" href="{{ url_for('create_edit_package_page', author=user.username) }}">
-			Create
-		</a></p>
-	{% endif %}
+	<div class="box-body">
+		<ul>
+			{% for p in user.packages %}
+				<li><a href="{{ p.getDetailsURL() }}">
+					{{ p.title }} by {{ p.author.display_name }}
+				</a></li>
+			{% else %}
+				<li><i>No packages available</i></ul>
+			{% endfor %}
+		</ul>
+		{% if user == current_user or user.checkPerm(current_user, "CHANGE_AUTHOR") %}
+			<p><a class="button" href="{{ url_for('create_edit_package_page', author=user.username) }}">
+				Create
+			</a></p>
+		{% endif %}
+	</div>
 </div>
 
 {% if form %}
@@ -68,7 +70,7 @@
 	<div class="box box_grey">
 		<h2>Edit Details</h2>
 
-		<form action="" method="POST" class="form" role="form">
+		<form action="" method="POST" class="form box-body" role="form">
 			<div class="row">
 				<div class="col-sm-6 col-md-5 col-lg-4">
 					{{ form.hidden_tag() }}

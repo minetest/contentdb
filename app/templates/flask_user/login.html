@@ -10,7 +10,7 @@ Sign in
 		{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 		<h2>{%trans%}Sign in{%endtrans%}</h2>
 
-		<form action="" method="POST" class="form" role="form" class="box-body">
+		<form action="" method="POST" class="form box-body" role="form">
 			<a href="{{ url_for('github_signin_page') }}">GitHub</a>
 
 
@@ -46,25 +46,24 @@ Sign in
 						<a href="{{ url_for('user.forgot_password') }}" tabindex='195'>
 							{%trans%}Forgot your Password?{%endtrans%}</a>
 							{% endif %}
-						</div>
 					</div>
-					{{ field(class_='form-control', tabindex=120) }}
-					{% if field.errors %}
-					{% for e in field.errors %}
-					<p class="help-block">{{ e }}</p>
-					{% endfor %}
-					{% endif %}
 				</div>
-
-				{# Remember me #}
-				{% if user_manager.enable_remember_me %}
-				{{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
+				{{ field(class_='form-control', tabindex=120) }}
+				{% if field.errors %}
+				{% for e in field.errors %}
+				<p class="help-block">{{ e }}</p>
+				{% endfor %}
 				{% endif %}
+			</div>
 
-				{# Submit button #}
-				{{ render_submit_field(form.submit, tabindex=180) }}
-			</form>
+			{# Remember me #}
+			{% if user_manager.enable_remember_me %}
+			{{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
+			{% endif %}
 
+			{# Submit button #}
+			{{ render_submit_field(form.submit, tabindex=180) }}
+		</form>
 	</div>
 
 	<div class="right">

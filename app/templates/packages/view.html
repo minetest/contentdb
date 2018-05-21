@@ -40,45 +40,48 @@
 	</ul>
 
 	<aside class="asideright box box_grey">
-		<table>
-			<tr>
-				<td>Name</td>
-				<td>{{ package.name }}</td>
-			</tr>
-			<tr>
-				<td>Author</td>
-				<td class="{{ package.author.rank }}">
-					<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
-						{{ package.author.display_name }}
-					</a>
-				</td>
-			</tr>
-			<tr>
-				<td>Type</td>
-				<td>{{ package.type.value }}</td>
-			</tr>
-			<tr>
-				<td>License</td>
-				<td>{{ package.license.name }}</td>
-			</tr>
-		</table>
+		<h3>Details</h3>
+		<div class="box-body">
+			<table>
+				<tr>
+					<td>Name</td>
+					<td>{{ package.name }}</td>
+				</tr>
+				<tr>
+					<td>Author</td>
+					<td class="{{ package.author.rank }}">
+						<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
+							{{ package.author.display_name }}
+						</a>
+					</td>
+				</tr>
+				<tr>
+					<td>Type</td>
+					<td>{{ package.type.value }}</td>
+				</tr>
+				<tr>
+					<td>License</td>
+					<td>{{ package.license.name }}</td>
+				</tr>
+			</table>
 
-		<ul class="buttonset linedbuttonset">
-			{% if package.getDownloadRelease() %}<li><a href="{{ package.getDownloadURL() }}">Download</a></li>{% endif %}
-			{% if package.repo %}<li><a href="{{ package.repo }}">View Source</a></li>{% endif %}
-			{% if package.forums %}<li><a href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a></li>{% endif %}
-			{% if package.issueTracker %}<li><a href="{{ package.issueTracker }}">Issue Tracker</a></li>{% endif %}
-			{% if package.website %}<li><a href="{{ package.website }}">Website</a></li>{% endif %}
-			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-				<li><a href="{{ package.getEditURL() }}">Edit</a></li>
-				<li><a href="{{ package.getNewScreenshotURL() }}">Add screenshot</a></li>
-			{% elif current_user.is_authenticated %}
-				<li><a href="{{ package.getCreateEditRequestURL() }}">Suggest Change</a></li>
-			{% endif %}
-			{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-				<li><a href="{{ package.getCreateReleaseURL() }}">Create Release</a></li>
-			{% endif %}
-		</ul>
+			<ul class="buttonset linedbuttonset">
+				{% if package.getDownloadRelease() %}<li><a href="{{ package.getDownloadURL() }}">Download</a></li>{% endif %}
+				{% if package.repo %}<li><a href="{{ package.repo }}">View Source</a></li>{% endif %}
+				{% if package.forums %}<li><a href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a></li>{% endif %}
+				{% if package.issueTracker %}<li><a href="{{ package.issueTracker }}">Issue Tracker</a></li>{% endif %}
+				{% if package.website %}<li><a href="{{ package.website }}">Website</a></li>{% endif %}
+				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+					<li><a href="{{ package.getEditURL() }}">Edit</a></li>
+					<li><a href="{{ package.getNewScreenshotURL() }}">Add screenshot</a></li>
+				{% elif current_user.is_authenticated %}
+					<li><a href="{{ package.getCreateEditRequestURL() }}">Suggest Change</a></li>
+				{% endif %}
+				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+					<li><a href="{{ package.getCreateReleaseURL() }}">Create Release</a></li>
+				{% endif %}
+			</ul>
+		</div>
 	</aside>
 
 	<p class="package-short-large">{{ package.shortDesc }}</p>
