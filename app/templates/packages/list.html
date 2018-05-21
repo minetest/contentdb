@@ -5,10 +5,14 @@
 {% endblock %}
 
 {% block content %}
-	<form method="get" action="">
+	<form method="get" action="" class="plsearchform">
 		{% if type %}<input type="hidden" name="type" value="{{ type }}" />{% endif %}
 		<input type="text" name="q" value="{{ query or ''}}" />
 		<input type="submit" value="Search" />
+
+		<p>
+			Found {{ packages | count }} packages.
+		</p>
 	</form>
 
 	<aside class="box box_grey outsidecontainer">
