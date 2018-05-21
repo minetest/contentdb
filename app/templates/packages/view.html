@@ -8,12 +8,20 @@
 	{% if not package.approved %}
 		<div class="box box_grey alert alert-warning">
 			<span class="icon_message"></span>
-			This package needs to be approved before it can be found.
-			{% if package.checkPerm(current_user, "APPROVE_NEW") %}
-				<form method="post" action="{{ package.getApproveURL() }}">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="submit" value="Approve" />
-				</form>
+			{% if package.releases.count() == 0 %}
+				You need to create a release before this package can be approved.
+			{% elif not package.getDownloadRelease() %}
+				Please wait for the release to be approved.
+			{% else %}
+				{% if package.checkPerm(current_user, "APPROVE_NEW") %}
+					You can now approve this package if you're ready.
+					<form method="post" action="{{ package.getApproveURL() }}">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+						<input type="submit" value="Approve" />
+					</form>
+				{% else %}
+					This package needs to be approved before it can be found.
+				{% endif %}
 			{% endif %}
 			<div style="clear: both;"></div>
 		</div>
