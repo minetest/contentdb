@@ -52,11 +52,6 @@ if not os.path.isfile("db.sqlite"):
 	jeija.github_username = "Jeija"
 	db.session.add(jeija)
 
-	sam = User("fillthisinlater")
-	sam.github_username = "fillthisinlater"
-	sam.rank = UserRank.EDITOR
-	db.session.add(sam)
-
 	tags = {}
 	for tag in ["Inventory", "Mapgen", "Building", \
 			"Mobs and NPCs", "Tools", "Player effects", \
@@ -235,7 +230,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod = Package()
 	mod.approved = True
 	mod.name = "handholds"
-	mod.title = "Mountain Climbing"
+	mod.title = "Handholds"
 	mod.license = licenses["MIT"]
 	mod.type = PackageType.MOD
 	mod.author = ez
@@ -283,6 +278,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.forums = 2960
 	mod.shortDesc = "Adds lots of food and an API to manage ingredients"
 	mod.desc = "This is the long desc"
+	food = mod
 	db.session.add(mod)
 
 	mod = Package()
@@ -291,6 +287,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.title = "Sweet Foods"
 	mod.license = licenses["CC0"]
 	mod.type = PackageType.MOD
+	mod.harddeps.append(food)
 	mod.author = ruben
 	mod.tags.append(tags["player_effects"])
 	mod.repo = "https://github.com/rubenwardy/food_sweet/"

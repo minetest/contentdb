@@ -218,13 +218,23 @@ class PackagePropertyKey(enum.Enum):
 
 	def convert(self, value):
 		if self == PackagePropertyKey.tags:
-			return ','.join([t.title for t in value])
+			return ",".join([t.title for t in value])
 		else:
 			return str(value)
 
-tags = db.Table('tags',
-    db.Column('tag_id', db.Integer, db.ForeignKey('tag.id'), primary_key=True),
-    db.Column('package_id', db.Integer, db.ForeignKey('package.id'), primary_key=True)
+tags = db.Table("tags",
+    db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
+    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+)
+
+harddeps = db.Table("harddeps",
+	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
+    db.Column("dependency_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+)
+
+softdeps = db.Table("softdeps",
+	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
+    db.Column("dependency_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
 class Package(db.Model):
@@ -248,9 +258,20 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=False)
 
+	tags = db.relationship("Tag", secondary=tags, lazy="subquery",
+			backref=db.backref("packages", lazy=True))
 
-	tags = db.relationship('Tag', secondary=tags, lazy='subquery',
-			backref=db.backref('packages', lazy=True))
+	harddeps = db.relationship("Package",
+				secondary=harddeps,
+				primaryjoin=id==harddeps.c.package_id,
+				secondaryjoin=id==harddeps.c.dependency_id,
+				backref="dependents")
+
+	softdeps = db.relationship("Package",
+				secondary=softdeps,
+				primaryjoin=id==softdeps.c.package_id,
+				secondaryjoin=id==softdeps.c.dependency_id,
+				backref="softdependents")
 
 	releases = db.relationship("PackageRelease", backref="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
@@ -357,7 +378,7 @@ class Tag(db.Model):
 		self.textColor       = textColor
 
 		import re
-		regex = re.compile('[^a-z_]')
+		regex = re.compile("[^a-z_]")
 		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
 
 class PackageRelease(db.Model):

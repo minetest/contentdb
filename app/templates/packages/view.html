@@ -118,6 +118,41 @@
 		{% endfor %}
 	</ul>
 
+	<table class="table-topalign">
+		<tr>
+			<td>
+				<h3>Dependencies</h3>
+				<ul>
+					{% for p in package.harddeps %}
+						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }}</li>
+					{% else %}
+						{% if not package.softdeps %}
+						<li>No dependencies.</li>
+						{% endif %}
+					{% endfor %}
+					{% for p in package.softdeps %}
+						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }} [optional]</li>
+					{% endfor %}
+				</ul>
+			</td>
+			<td>
+				<h3>Required by</h3>
+				<ul>
+					{% for p in package.dependents %}
+						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }}</li>
+					{% else %}
+						{% if not package.softdependents %}
+						<li>No dependents.</li>
+						{% endif %}
+					{% endfor %}
+					{% for p in package.softdependents %}
+						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }} [optional]</li>
+					{% endfor %}
+				</ul>
+			</td>
+		</tr>
+	</table>
+
 	{% if current_user.is_authenticated or requests %}
 		<h3>Edit Requests</h3>
 
