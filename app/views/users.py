@@ -50,14 +50,16 @@ def user_profile_page(username):
 		abort(404)
 
 	form = None
-	if user == current_user or user.checkPerm(current_user, Permission.CHANGE_RANK):
+	if user.checkPerm(current_user, Permission.CHANGE_DNAME) or \
+			user.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
+			user.checkPerm(current_user, Permission.CHANGE_RANK):
 		# Initialize form
 		form = UserProfileForm(formdata=request.form, obj=user)
 
 		# Process valid POST
 		if request.method=="POST" and form.validate():
 			# Copy form fields to user_profile fields
-			if user == current_user:
+			if user.checkPerm(current_user, Permission.CHANGE_DNAME):
 				user.display_name = form["display_name"].data
 
 			if user.checkPerm(current_user, Permission.CHANGE_RANK):

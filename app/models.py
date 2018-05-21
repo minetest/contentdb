@@ -65,6 +65,7 @@ class Permission(enum.Enum):
 	APPROVE_RELEASE    = "APPROVE_RELEASE"
 	APPROVE_NEW        = "APPROVE_NEW"
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
+	CHANGE_DNAME       = "CHANGE_DNAME"
 	CHANGE_RANK        = "CHANGE_RANK"
 	CHANGE_EMAIL       = "CHANGE_EMAIL"
 	EDIT_EDITREQUEST   = "EDIT_EDITREQUEST"
@@ -140,7 +141,7 @@ class User(db.Model, UserMixin):
 		# Members can edit their own packages, and editors can edit any packages
 		if perm == Permission.CHANGE_AUTHOR:
 			return user.rank.atLeast(UserRank.EDITOR)
-		elif perm == Permission.CHANGE_RANK:
+		elif perm == Permission.CHANGE_RANK or perm == Permission.CHANGE_DNAME:
 			return user.rank.atLeast(UserRank.MODERATOR)
 		elif perm == Permission.CHANGE_EMAIL:
 			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank))
