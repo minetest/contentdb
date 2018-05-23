@@ -9,7 +9,17 @@
 		<div class="box box_grey alert alert-warning">
 			<span class="icon_message"></span>
 			{% if package.releases.count() == 0 %}
-				You need to create a release before this package can be approved.
+				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+					You need to create a release before this package can be approved.
+					<p>
+						A release is a single downloadable version of your {{ package.type.value | lower }}.
+						You need to create releases even if you use a rolling release development cycle,
+						as Minetest needs them to check for updates.
+					</p>
+					<a class="button" href="{{ package.getCreateReleaseURL() }}">Create Release</a>
+				{% else %}
+					A release is required before this package can be approved.
+				{% endif %}
 			{% elif not package.getDownloadRelease() %}
 				Please wait for the release to be approved.
 			{% else %}
