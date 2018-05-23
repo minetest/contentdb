@@ -392,7 +392,7 @@ class PackageRelease(db.Model):
 	releaseDate  = db.Column(db.DateTime,        nullable=False)
 	url          = db.Column(db.String(100), nullable=False)
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
-	task_id      = db.Column(db.String(32), nullable=True)
+	task_id      = db.Column(db.String(37), nullable=True)
 
 
 	def getEditURL(self):
