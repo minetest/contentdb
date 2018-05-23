@@ -59,6 +59,7 @@
 							</li>
 							{% if current_user.canAccessTodoList() %}
 								<li><a href="{{ url_for('todo_page') }}">Work Queue</a></li>
+								<li><a href="{{ url_for('user_list_page') }}">User list</a></li>
 							{% endif %}
 							{% if current_user.rank == current_user.rank.ADMIN %}
 								<li><a href="{{ url_for('admin_page') }}">Admin</a></li>

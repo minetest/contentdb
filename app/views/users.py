@@ -37,7 +37,7 @@ class UserProfileForm(FlaskForm):
 	submit = SubmitField("Save")
 
 @app.route("/users/", methods=["GET"])
-@rank_required(UserRank.MODERATOR)
+@login_required
 def user_list_page():
 	users = User.query.order_by(db.asc(User.rank), db.asc(User.display_name)).all()
 	return render_template("users/list.html", users=users)
