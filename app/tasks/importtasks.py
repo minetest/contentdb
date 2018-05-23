@@ -34,9 +34,9 @@ class GithubURLMaker:
 			return
 
 		user = m.group(1)
-		repo = m.group(2)
+		repo = m.group(2).replace(".git", "")
 		self.baseUrl = "https://raw.githubusercontent.com/{}/{}/master" \
-				.format(user, repo.replace(".git", ""))
+				.format(user, repo)
 		self.user = user
 		self.repo = repo
 
@@ -213,13 +213,15 @@ def makeVCSRelease(id, branch):
 	if not urlmaker.isValid():
 		raise TaskError("Invalid github repo URL")
 
-	contents = urllib.request.urlopen(urlmaker.getCommitsURL(branch)).read().decode("utf-8")
+	commitsURL = urlmaker.getCommitsURL(branch)
+	contents = urllib.request.urlopen(commitsURL).read().decode("utf-8")
 	commits = json.loads(contents)
 
-	if len(commits) == 0:
+	if len(commits) == 0 or not "sha" in commits[0]:
 		raise TaskError("No commits found")
 
 	release.url = urlmaker.getCommitDownload(commits[0]["sha"])
+	print(release.url)
 	release.task_id = None
 	db.session.commit()
 
