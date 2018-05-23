@@ -74,8 +74,9 @@
 				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
 					<li><a href="{{ package.getEditURL() }}">Edit</a></li>
 					<li><a href="{{ package.getNewScreenshotURL() }}">Add screenshot</a></li>
-				{% elif current_user.is_authenticated %}
-					<li><a href="{{ package.getCreateEditRequestURL() }}">Suggest Change</a></li>
+				{% endif %}
+				{% if current_user.is_authenticated %}
+					<!-- <li><a href="{{ package.getCreateEditRequestURL() }}">Suggest Change</a></li> -->
 				{% endif %}
 				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 					<li><a href="{{ package.getCreateReleaseURL() }}">Create Release</a></li>

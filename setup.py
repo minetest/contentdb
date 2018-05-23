@@ -20,25 +20,11 @@ import os, sys, datetime
 if not "FLASK_CONFIG" in os.environ:
 	os.environ["FLASK_CONFIG"] = "../config.cfg"
 
-delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"
+test_data = len(sys.argv) >= 2 and sys.argv[1].strip() == "-t"
 
-if delete_db and os.path.isfile("db.sqlite"):
-	os.remove("db.sqlite")
+from app.models import *
 
-if not os.path.isfile("db.sqlite"):
-	from app.models import *
-
-	print("Creating database tables...")
-	db.create_all()
-	print("Filling database...")
-
-	ruben = User("rubenwardy")
-	ruben.github_username = "rubenwardy"
-	ruben.forums_username = "rubenwardy"
-	ruben.rank = UserRank.ADMIN
-	db.session.add(ruben)
-
-
+def defineDummyData(licenses, tags, ruben):
 	ez = User("Shara")
 	ez.github_username = "Ezhh"
 	ez.forums_username = "Shara"
@@ -51,24 +37,6 @@ if not os.path.isfile("db.sqlite"):
 	jeija = User("Jeija")
 	jeija.github_username = "Jeija"
 	db.session.add(jeija)
-
-	tags = {}
-	for tag in ["Inventory", "Mapgen", "Building", \
-			"Mobs and NPCs", "Tools", "Player effects", \
-			"Environment", "Transport", "Maintenance", "Plants and farming", \
-			"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
-		row = Tag(tag)
-		tags[row.name] = row
-		db.session.add(row)
-
-
-	licenses = {}
-	for license in ["GPLv2.1", "GPLv3", "LGPLv2.1", "LGPLv3", "AGPLv2.1", "AGPLv3",
-					"Apache", "BSD 3-Clause", "BSD 2-Clause", "CC0", "CC-BY-SA",
-					"CC-BY", "CC-BY-NC-SA", "MIT", "ZLib"]:
-		row = License(license)
-		licenses[row.name] = row
-		db.session.add(row)
 
 
 	mod = Package()
@@ -346,6 +314,39 @@ Uses the CTF PvP Engine.
 	rel.approved = True
 	db.session.add(rel)
 
-	db.session.commit()
-else:
-	print("Database already exists")
+
+delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"
+if delete_db and os.path.isfile("db.sqlite"):
+	os.remove("db.sqlite")
+
+print("Creating database tables...")
+db.create_all()
+print("Filling database...")
+
+ruben = User("rubenwardy")
+ruben.github_username = "rubenwardy"
+ruben.forums_username = "rubenwardy"
+ruben.rank = UserRank.ADMIN
+db.session.add(ruben)
+
+tags = {}
+for tag in ["Inventory", "Mapgen", "Building", \
+		"Mobs and NPCs", "Tools", "Player effects", \
+		"Environment", "Transport", "Maintenance", "Plants and farming", \
+		"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
+	row = Tag(tag)
+	tags[row.name] = row
+	db.session.add(row)
+
+licenses = {}
+for license in ["GPLv2.1", "GPLv3", "LGPLv2.1", "LGPLv3", "AGPLv2.1", "AGPLv3",
+				"Apache", "BSD 3-Clause", "BSD 2-Clause", "CC0", "CC-BY-SA",
+				"CC-BY", "CC-BY-NC-SA", "MIT", "ZLib"]:
+	row = License(license)
+	licenses[row.name] = row
+	db.session.add(row)
+
+if test_data:
+	defineDummyData(licenses, tags, ruben)
+
+db.session.commit()
