@@ -17,6 +17,7 @@
 
 from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from app import app
 from datetime import datetime
 from sqlalchemy.orm import validates
@@ -25,6 +26,7 @@ import enum
 
 # Initialise database
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 
 class UserRank(enum.Enum):
