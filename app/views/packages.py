@@ -130,7 +130,7 @@ class PackageForm(FlaskForm):
 	repo          = StringField("Repo URL", [Optional(), URL()])
 	website       = StringField("Website URL", [Optional(), URL()])
 	issueTracker  = StringField("Issue Tracker URL", [Optional(), URL()])
-	forums	      = IntegerField("Forum Topic ID", [InputRequired(), NumberRange(0,999999)])
+	forums	      = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
 	submit	      = SubmitField("Save")
 
 @app.route("/packages/new/", methods=["GET", "POST"])

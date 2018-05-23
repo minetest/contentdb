@@ -259,7 +259,7 @@ class Package(db.Model):
 	repo         = db.Column(db.String(200), nullable=True)
 	website      = db.Column(db.String(200), nullable=True)
 	issueTracker = db.Column(db.String(200), nullable=True)
-	forums       = db.Column(db.Integer,     nullable=False)
+	forums       = db.Column(db.Integer,     nullable=True)
 
 	tags = db.relationship("Tag", secondary=tags, lazy="subquery",
 			backref=db.backref("packages", lazy=True))
