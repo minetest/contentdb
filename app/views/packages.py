@@ -24,6 +24,7 @@ from app.tasks.importtasks import importRepoScreenshot, makeVCSRelease
 
 from app.utils import *
 
+from celery import uuid
 from urllib.parse import urlparse
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -415,9 +416,10 @@ def create_release_page(package):
 			rel.package = package
 			rel.title   = form["title"].data
 			rel.url     = ""
+			rel.task_id = uuid()
 			db.session.commit()
 
-			rel.task_id = makeVCSRelease.delay(rel.id, form["vcsLabel"].data).id
+			makeVCSRelease.apply_async((rel.id, form["vcsLabel"].data), task_id=rel.task_id)
 
 			msg = "{}: Release {} created".format(package.title, rel.title)
 			triggerNotif(package.author, current_user, msg, rel.getEditURL())
