@@ -250,6 +250,7 @@ class Package(db.Model):
 	shortDesc    = db.Column(db.String(200), nullable=False)
 	desc         = db.Column(db.Text, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
+	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"))
 
