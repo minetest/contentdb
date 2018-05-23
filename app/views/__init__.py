@@ -34,12 +34,11 @@ def domain(url):
 # Use nginx to serve files on production instead
 @app.route("/static/<path:path>")
 def send_static(path):
-	return send_from_directory("static", path)
+	return send_from_directory("public/static", path)
 
 @app.route("/uploads/<path:path>")
 def send_upload(path):
-	import os
-	return send_from_directory(os.path.abspath(app.config["UPLOAD_FOLDER"]), path)
+	return send_from_directory("public/uploads", path)
 
 @app.route("/")
 @menu.register_menu(app, ".", "Home")
