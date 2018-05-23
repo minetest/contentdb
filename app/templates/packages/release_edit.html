@@ -28,12 +28,12 @@
 			{% endif %}
 
 			<br />
-		{% endif %}
-
-		{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
-			{{ render_field(form.approved) }}
 		{% else %}
-			Approved: {{ release.approved }}
+			{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
+				{{ render_field(form.approved) }}
+			{% else %}
+				Approved: {{ release.approved }}
+			{% endif %}
 		{% endif %}
 
 		{{ render_submit_field(form.submit) }}
