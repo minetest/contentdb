@@ -100,14 +100,14 @@
 					<a href="{{ rel.url }}">{{ rel.title }}</a>,
 					created {{ rel.releaseDate }}.
 					{% if rel.task_id %}
-						<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing</a>
+						<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
 					{% elif not rel.approved %}
 						Waiting for approval.
 					{% endif %}
 
-					{% if not rel.task_id and (package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE"))  %}
+					{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
 						<a href="{{ rel.getEditURL() }}">Edit
-						{% if not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
+						{% if not rel.task_id and not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
 							/ Approve
 						{% endif %}
 						</a>
