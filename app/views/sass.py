@@ -45,7 +45,7 @@ def _getDirPath(originalPath, create=False):
 
 	return path
 
-def sass(app, inputDir='scss', outputPath='static', force=False, cacheDir=None):
+def sass(app, inputDir='scss', outputPath='static', force=False, cacheDir="public/static"):
 	static_url_path = app.static_url_path
 	inputDir = _getDirPath(inputDir)
 	cacheDir = _getDirPath(cacheDir or outputPath, True)

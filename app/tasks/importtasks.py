@@ -247,7 +247,7 @@ def importRepoScreenshot(id):
 
 	try:
 		filename = randomString(10) + ".png"
-		imagePath = os.path.join("public/uploads", filename)
+		imagePath = os.path.join("app/public/uploads", filename)
 		print(imagePath)
 		urllib.request.urlretrieve(urlmaker.getScreenshotURL(), imagePath)
 

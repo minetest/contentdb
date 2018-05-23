@@ -47,7 +47,7 @@ def doFileUpload(file, allowedExtensions, fileTypeName):
 		return None
 
 	filename = randomString(10) + "." + ext
-	file.save(os.path.join("public/uploads", filename))
+	file.save(os.path.join("app/public/uploads", filename))
 	return "/uploads/" + filename
 
 
