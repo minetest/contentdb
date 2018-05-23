@@ -396,6 +396,7 @@ class EditPackageReleaseForm(FlaskForm):
 	name     = StringField("Name")
 	title    = StringField("Title")
 	url      = StringField("URL", [URL])
+	task_id  = StringField("Task ID")
 	approved = BooleanField("Is Approved")
 	submit   = SubmitField("Save")
 
@@ -422,7 +423,7 @@ def create_release_page(package):
 			triggerNotif(package.author, current_user, msg, rel.getEditURL())
 			db.session.commit()
 
-			return redirect(url_for("check_task", id=rel.task_id, r=package.getDetailsURL()))
+			return redirect(url_for("check_task", id=rel.task_id, r=rel.getEditURL()))
 		else:
 			uploadedPath = doFileUpload(form.fileUpload.data, ["zip"], "a zip file")
 			if uploadedPath is not None:
@@ -454,9 +455,6 @@ def edit_release_page(package, id):
 	if not (canEdit or canApprove):
 		return redirect(package.getDetailsURL())
 
-	if release.task_id is not None:
-		return redirect(url_for("check_task", id=release.task_id, r=release.getEditURL()))
-
 	# Initial form class from post data and default data
 	form = EditPackageReleaseForm(formdata=request.form, obj=release)
 	if request.method == "POST" and form.validate():
@@ -466,6 +464,9 @@ def edit_release_page(package, id):
 
 		if package.checkPerm(current_user, Permission.CHANGE_RELEASE_URL):
 			release.url = form["url"].data
+			release.task_id = form["task_id"].data
+			if release.task_id.strip() == "":
+				release.task_id = None
 
 		if canApprove:
 			release.approved = form["approved"].data
