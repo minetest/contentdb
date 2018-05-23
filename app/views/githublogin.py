@@ -18,6 +18,7 @@
 from flask import *
 from flask_user import *
 from flask_login import login_user, logout_user
+from sqlalchemy import func
 import flask_menu as menu
 from flask_github import GitHub
 from app import app, github
@@ -44,7 +45,7 @@ def github_authorized(oauth_token):
 	username = r.json()["login"]
 
 	# Get user by github username
-	userByGithub = User.query.filter_by(github_username=username).first()
+	userByGithub = User.query.filter(func.lower(User.github_username) == func.lower(username)).first()
 
 	# If logged in, connect
 	if current_user and current_user.is_authenticated:
