@@ -11,7 +11,9 @@
 
 		{{ render_field(form.title) }}
 		{{ render_field(form.uploadOpt) }}
-		{{ render_field(form.vcsLabel) }}
+		{% if package.canMakeReleaseFromVCS() %}
+			{{ render_field(form.vcsLabel) }}
+		{% endif %}
 		{{ render_field(form.fileUpload) }}
 		{{ render_submit_field(form.submit) }}
 	</form>

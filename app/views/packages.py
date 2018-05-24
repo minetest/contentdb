@@ -25,7 +25,6 @@ from app.tasks.importtasks import importRepoScreenshot, makeVCSRelease
 from app.utils import *
 
 from celery import uuid
-from urllib.parse import urlparse
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
@@ -188,11 +187,9 @@ def create_edit_package_page(author=None, name=None):
 
 		db.session.commit() # save
 
-		if wasNew:
-			url = urlparse(package.repo)
-			if url.netloc == "github.com":
-				task = importRepoScreenshot.delay(package.id)
-				return redirect(url_for("check_task", id=task.id, r=package.getDetailsURL()))
+		if wasNew and package.canImportScreenshot():
+			task = importRepoScreenshot.delay(package.id)
+			return redirect(url_for("check_task", id=task.id, r=package.getDetailsURL()))
 
 		return redirect(package.getDetailsURL())
 
@@ -395,7 +392,7 @@ def reject_editrequest_page(package, id):
 class CreatePackageReleaseForm(FlaskForm):
 	name	   = StringField("Name")
 	title	   = StringField("Title")
-	uploadOpt  = RadioField ("File", choices=[("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")])
+	uploadOpt  = RadioField ("Method", choices=[("upload", "File Upload")], default="upload")
 	vcsLabel   = StringField("VCS Commit or Branch", default="master")
 	fileUpload = FileField("File Upload")
 	submit	   = SubmitField("Save")
@@ -417,6 +414,11 @@ def create_release_page(package):
 
 	# Initial form class from post data and default data
 	form = CreatePackageReleaseForm()
+	if package.canMakeReleaseFromVCS():
+		form["uploadOpt"].choices = [("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")]
+		if request.method != "POST":
+			form["uploadOpt"].data = "vcs"
+
 	if request.method == "POST" and form.validate():
 		if form["uploadOpt"].data == "vcs":
 			rel = PackageRelease()

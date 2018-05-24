@@ -18,6 +18,7 @@
 from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+from urllib.parse import urlparse
 from app import app
 from datetime import datetime
 from sqlalchemy.orm import validates
@@ -338,6 +339,26 @@ class Package(db.Model):
 				return rel
 
 		return None
+
+	def canImportScreenshot(self):
+		if self.repo is None:
+			return False
+
+		url = urlparse(self.repo)
+		if url.netloc == "github.com":
+			return True
+
+		return False
+
+	def canMakeReleaseFromVCS(self):
+		if self.repo is None:
+			return False
+
+		url = urlparse(self.repo)
+		if url.netloc == "github.com":
+			return True
+
+		return False
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
