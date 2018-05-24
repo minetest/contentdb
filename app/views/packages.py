@@ -191,7 +191,9 @@ def create_edit_package_page(author=None, name=None):
 
 		return redirect(package.getDetailsURL())
 
-	return render_template("packages/create_edit.html", package=package, form=form, author=author)
+	enableWizard = name is None and request.method != "POST"
+	return render_template("packages/create_edit.html", package=package, \
+			form=form, author=author, enable_wizard=enableWizard)
 
 @app.route("/packages/<author>/<name>/approve/", methods=["POST"])
 @login_required

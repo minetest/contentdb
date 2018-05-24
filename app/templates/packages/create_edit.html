@@ -47,7 +47,7 @@
 		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
 	</form>
 
-	{% if not package.title %}
+	{% if enable_wizard %}
 		<script src="/static/jquery.min.js"></script>
 		<script src="/static/url.min.js"></script>
 		<script src="/static/polltask.js"></script>
