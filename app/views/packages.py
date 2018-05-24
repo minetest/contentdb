@@ -426,6 +426,7 @@ def create_release_page(package):
 			rel.title   = form["title"].data
 			rel.url     = ""
 			rel.task_id = uuid()
+			db.session.add(rel)
 			db.session.commit()
 
 			makeVCSRelease.apply_async((rel.id, form["vcsLabel"].data), task_id=rel.task_id)
@@ -443,6 +444,7 @@ def create_release_page(package):
 				rel.title = form["title"].data
 				rel.url = uploadedPath
 				db.session.add(rel)
+				db.session.commit()
 
 				msg = "{}: Release {} created".format(package.title, rel.title)
 				triggerNotif(package.author, current_user, msg, rel.getEditURL())
