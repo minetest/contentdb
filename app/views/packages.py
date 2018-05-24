@@ -168,7 +168,7 @@ def create_edit_package_page(author=None, name=None):
 	if request.method == "POST" and form.validate():
 		wasNew = False
 		if not package:
-			package = getPackageByInfo(author.username, form["name"].data)
+			package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
 			if package is not None:
 				flash("Package already exists!", "error")
 				return redirect(url_for("create_edit_package_page"))
