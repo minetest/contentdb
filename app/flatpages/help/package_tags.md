@@ -23,3 +23,5 @@ They are only beneficial when applied correctly, so please use the following gui
 * **PvP** - For games designed to be played competitively against other players.
 * **PvE** - For games designed for one or multiple players which focus on combat against mobs or NPCs.
 * **Puzzle** - For games with a focus on puzzle solving instead of combat.
+* **Multiplayer** - For games that can be played with other players.
+* **Singleplayer** - For games that can be played alone.
