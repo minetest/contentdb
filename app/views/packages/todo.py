@@ -26,6 +26,7 @@ from app.models import *
 def todo_page():
 	canApproveNew = Permission.APPROVE_NEW.check(current_user)
 	canApproveRel = Permission.APPROVE_RELEASE.check(current_user)
+	canApproveScn = Permission.APPROVE_SCREENSHOT.check(current_user)
 
 	packages = None
 	if canApproveNew:
@@ -35,6 +36,10 @@ def todo_page():
 	if canApproveRel:
 		releases = PackageRelease.query.filter_by(approved=False).all()
 
+	screenshots = None
+	if canApproveScn:
+		screenshots = PackageScreenshot.query.filter_by(approved=False).all()
+
 	return render_template("todo.html", title="Reports and Work Queue",
-		approve_new=packages, releases=releases,
-		canApproveNew=canApproveNew, canApproveRel=canApproveRel)
+		packages=packages, releases=releases, screenshots=screenshots,
+		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn)

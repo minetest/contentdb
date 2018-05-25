@@ -5,6 +5,8 @@
 {% endblock %}
 
 {% block content %}
+	<img src="{{ screenshot.getThumbnailURL() }}" alt="{{ screenshot.title }}" />
+
 	{% from "macros/forms.html" import render_field, render_submit_field %}
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}

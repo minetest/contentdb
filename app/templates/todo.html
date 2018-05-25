@@ -8,12 +8,29 @@
 	{% if canApproveNew %}
 		<h2>Packages Awaiting Approval</h2>
 		<ul>
-			{% for p in approve_new %}
+			{% for p in packages %}
 				<li><a href="{{ p.getDetailsURL() }}">
 					{{ p.title }} by {{ p.author.display_name }}
 				</a></li>
 			{% else %}
 				<li><i>No packages need reviewing.</i></ul>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+	{% if canApproveScn %}
+		<h2>Screenshots Awaiting Approval</h2>
+		<ul>
+			{% for s in screenshots %}
+				<li>
+					<a href="{{ s.getEditURL() }}">{{ s.title }}</a>
+					on
+					<a href="{{ s.package.getDetailsURL() }}">
+						{{ s.package.title }} by {{ s.package.author.display_name }}
+					</a>
+				</li>
+			{% else %}
+				<li><i>No screenshots need reviewing.</i></ul>
 			{% endfor %}
 		</ul>
 	{% endif %}

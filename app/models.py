@@ -83,7 +83,8 @@ class Permission(enum.Enum):
 
 		if self == Permission.APPROVE_NEW or \
 				self == Permission.APPROVE_CHANGES or \
-				self == Permission.APPROVE_RELEASE:
+				self == Permission.APPROVE_RELEASE or \
+				self == Permission.APPROVE_SCREENSHOT:
 			return user.rank.atLeast(UserRank.EDITOR)
 		else:
 			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
@@ -353,7 +354,7 @@ class Package(db.Model):
 				author=self.author.username, name=self.name)
 
 	def getMainScreenshotURL(self):
-		screenshot = self.screenshots.first()
+		screenshot = self.screenshots.filter_by(approved=True).first()
 		return screenshot.url if screenshot is not None else None
 
 	def getDownloadRelease(self):
