@@ -43,7 +43,7 @@ def packages_page():
 		type = PackageType[type.upper()]
 
 	title = "Packages"
-	query = Package.query
+	query = Package.query.filter_by(soft_deleted=False)
 
 	if type is not None:
 		title = type.value + "s"
@@ -107,8 +107,8 @@ class PackageForm(FlaskForm):
 	type          = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
 	license       = QuerySelectField("License", [InputRequired()], query_factory=lambda: License.query, get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
-	harddeps      = QuerySelectMultipleField('Dependencies', query_factory=lambda: Package.query.join(User).order_by(db.asc(Package.title), db.asc(User.display_name)), get_pk=lambda a: a.id, get_label=lambda a: a.title + " by " + a.author.display_name)
-	softdeps      = QuerySelectMultipleField('Soft Dependencies', query_factory=lambda: Package.query.join(User).order_by(db.asc(Package.title), db.asc(User.display_name)), get_pk=lambda a: a.id, get_label=lambda a: a.title + " by " + a.author.display_name)
+	harddeps      = QuerySelectMultipleField('Dependencies', query_factory=lambda: Package.query.join(User).filter_by(soft_deleted=False,approved=True).order_by(db.asc(Package.title), db.asc(User.display_name)), get_pk=lambda a: a.id, get_label=lambda a: a.title + " by " + a.author.display_name)
+	softdeps      = QuerySelectMultipleField('Soft Dependencies', query_factory=lambda: Package.query.join(User).filter_by(soft_deleted=False,approved=True).order_by(db.asc(Package.title), db.asc(User.display_name)), get_pk=lambda a: a.id, get_label=lambda a: a.title + " by " + a.author.display_name)
 	repo          = StringField("Repo URL", [Optional(), URL()])
 	website       = StringField("Website URL", [Optional(), URL()])
 	issueTracker  = StringField("Issue Tracker URL", [Optional(), URL()])
@@ -151,8 +151,11 @@ def create_edit_package_page(author=None, name=None):
 		if not package:
 			package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
 			if package is not None:
-				flash("Package already exists!", "error")
-				return redirect(url_for("create_edit_package_page"))
+				if package.soft_deleted:
+					package.delete()
+				else:
+					flash("Package already exists!", "error")
+					return redirect(url_for("create_edit_package_page"))
 
 			package = Package()
 			package.author = author
@@ -197,5 +200,27 @@ def approve_package_page(package):
 		db.session.commit()
 
 	return redirect(package.getDetailsURL())
+
+
+@app.route("/packages/<author>/<name>/delete/", methods=["GET", "POST"])
+@login_required
+@is_package_page
+def delete_package_page(package):
+	if request.method == "GET":
+		return render_template("packages/delete.html", package=package)
+
+	if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
+		flash("You don't have permission to do that.", "error")
+
+	package.soft_deleted = True
+
+	url = url_for("user_profile_page", username=package.author.username)
+	triggerNotif(package.author, current_user,
+			"{} deleted".format(package.title), url)
+	db.session.commit()
+
+	flash("Deleted package", "success")
+
+	return redirect(url)
 
 from . import todo, screenshots, editrequests, releases

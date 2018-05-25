@@ -261,6 +261,7 @@ class Package(db.Model):
 	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"))
 
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
+	soft_deleted = db.Column(db.Boolean, nullable=False, default=False)
 
 	# Downloads
 	repo         = db.Column(db.String(200), nullable=True)
@@ -327,6 +328,10 @@ class Package(db.Model):
 
 	def getApproveURL(self):
 		return url_for("approve_package_page",
+				author=self.author.username, name=self.name)
+
+	def getDeleteURL(self):
+		return url_for("delete_package_page",
 				author=self.author.username, name=self.name)
 
 	def getNewScreenshotURL(self):
@@ -546,7 +551,7 @@ class EditRequestChange(db.Model):
 				if user is None:
 					continue
 
-				dep = Package.query.filter_by(author=user, name=value).first()
+				dep = Package.query.filter_by(author=user, name=value, soft_deleted=False).first()
 				if dep is None:
 					continue
 

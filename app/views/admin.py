@@ -37,15 +37,25 @@ def admin_page():
 		elif action == "importscreenshots":
 			packages = Package.query \
 				.outerjoin(PackageScreenshot, Package.id==PackageScreenshot.package_id) \
-				.filter(PackageScreenshot.id==None).all()
+				.filter(PackageScreenshot.id==None) \
+				.filter_by(soft_deleted=False).all()
 			for package in packages:
 				importRepoScreenshot.delay(package.id)
 
 			return redirect(url_for("admin_page"))
+		elif action == "restore":
+			package = Package.query.get(request.form["package"])
+			if package is None:
+				flash("Unknown package", "error")
+			else:
+				package.soft_deleted = False
+				db.session.commit()
+				return redirect(url_for("admin_page"))
 		else:
 			flash("Unknown action: " + action, "error")
 
-	return render_template("admin/list.html")
+	deleted_packages = Package.query.filter_by(soft_deleted=True).all()
+	return render_template("admin/list.html", deleted_packages=deleted_packages)
 
 class SwitchUserForm(FlaskForm):
 	username = StringField("Username")

@@ -29,7 +29,7 @@ def todo_page():
 
 	packages = None
 	if canApproveNew:
-		packages = Package.query.filter_by(approved=False).all()
+		packages = Package.query.filter_by(approved=False, soft_deleted=False).all()
 
 	releases = None
 	if canApproveRel:

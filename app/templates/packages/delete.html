@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Delete | {{ package.title }}
+{% endblock %}
+
+{% block content %}
+	<form method="POST" action="" class="box box_grey ">
+		<h3>Delete Package</h3>
+
+		<div class="box-body">
+			<p>This action can be undone by the admin, but he'll be very annoyed!</p>
+
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input type="submit" value="Delete" class="button-danger" />
+		</div>
+	</form>
+{% endblock %}

@@ -91,6 +91,9 @@
 				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 					<li><a href="{{ package.getCreateReleaseURL() }}">Create Release</a></li>
 				{% endif %}
+				{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
+					<li><a href="{{ package.getDeleteURL() }}">Delete</a></li>
+				{% endif %}
 			</ul>
 		</div>
 	</aside>

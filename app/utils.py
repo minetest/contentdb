@@ -116,7 +116,7 @@ def getPackageByInfo(author, name):
 	if user is None:
 		abort(404)
 
-	package = Package.query.filter_by(name=name, author_id=user.id).first()
+	package = Package.query.filter_by(name=name, author_id=user.id, soft_deleted=False).first()
 	if package is None:
 		abort(404)
 
