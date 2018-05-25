@@ -266,16 +266,15 @@ def create_edit_editrequest_page(package, id=None):
 		if erequest.package != package:
 			abort(404)
 
-		from copy import copy
-		edited_package = copy(package)
-		erequest.applyAll(edited_package)
-
 		if not erequest.checkPerm(current_user, Permission.EDIT_EDITREQUEST):
 			abort(403)
 
 		if erequest.status != 0:
 			flash("Can't edit EditRequest, it has already been merged or rejected", "error")
 			return redirect(erequest.getURL())
+
+		edited_package = Package(package)
+		erequest.applyAll(edited_package)
 
 
 	form = EditRequestForm(request.form, obj=edited_package)

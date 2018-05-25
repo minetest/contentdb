@@ -215,6 +215,8 @@ class PackagePropertyKey(enum.Enum):
 	type         = "Type"
 	license      = "License"
 	tags         = "Tags"
+	harddeps     = "Hard Dependencies"
+	softdeps     = "Soft Dependencies"
 	repo         = "Repository"
 	website      = "Website"
 	issueTracker = "Issue Tracker"
@@ -286,6 +288,17 @@ class Package(db.Model):
 
 	requests = db.relationship("EditRequest", backref="package",
 			lazy="dynamic")
+
+	def __init__(self, package=None):
+		if package is None:
+			return
+
+		self.author_id = package.author_id
+		self.created_at = package.created_at
+		self.approved = package.approved
+
+		for e in PackagePropertyKey:
+			setattr(self, e.name, getattr(package, e.name))
 
 	def getAsDictionary(self, base_url):
 		return {
