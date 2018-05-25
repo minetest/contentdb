@@ -10,7 +10,9 @@
 {% block content %}
 	<h2>Create Package</h2>
 
-	{% from "macros/forms.html" import render_field, render_submit_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field %}
+	{{ form_includes() }}
+
 	<form method="POST" action="" class="tableform">
 		{{ form.hidden_tag() }}
 
@@ -20,9 +22,9 @@
 		{{ render_field(form.desc, class_="pkg_meta") }}
 		{{ render_field(form.type, class_="pkg_meta") }}
 		{{ render_field(form.license, class_="pkg_meta") }}
-		{{ render_field(form.tags, class_="pkg_meta") }}
-		{{ render_field(form.harddeps, class_="pkg_meta") }}
-		{{ render_field(form.softdeps, class_="pkg_meta") }}
+		{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
+		{{ render_multiselect_field(form.harddeps, class_="pkg_meta") }}
+		{{ render_multiselect_field(form.softdeps, class_="pkg_meta") }}
 
 		<div class="pkg_wiz_1">
 			<p>Enter the repo URL for the package.
@@ -48,7 +50,6 @@
 	</form>
 
 	{% if enable_wizard %}
-		<script src="/static/jquery.min.js"></script>
 		<script src="/static/url.min.js"></script>
 		<script src="/static/polltask.js"></script>
 		<script src="/static/package_create.js"></script>

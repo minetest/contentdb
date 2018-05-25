@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-	{% from "macros/forms.html" import render_field, render_submit_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field %}
+	{{ form_includes() }}
+
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 
@@ -15,7 +17,7 @@
 		{{ render_field(form.desc) }}
 		{{ render_field(form.type) }}
 		{{ render_field(form.license) }}
-		{{ render_field(form.tags) }}
+		{{ render_multiselect_field(form.tags) }}
 		{{ render_field(form.repo) }}
 		{{ render_field(form.website) }}
 		{{ render_field(form.issueTracker) }}

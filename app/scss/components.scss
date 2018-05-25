@@ -87,7 +87,7 @@ a:hover {
 }
 
 .button, .buttonset li a, input[type=submit], input[type=text],
-		input[type=password], textarea, select {
+		input[type=password], textarea, select, .multichoice_selector {
 	text-align: center;
 	display: inline-block;
 	padding: 0.4em 1em;
@@ -101,14 +101,37 @@ a:hover {
 
 header {
 	.button, .buttonset li a, input[type=submit], input[type=text],
-			input[type=password], textarea, select {
+			input[type=password], textarea, select, .multichoice_selector {
 		background: rgba(255,255,255,0.1);
 		border: 1px solid rgba(255,255,255,0.2);
 	}
 }
 
-input[type=text], input[type=password], textarea, select {
+input[type=text], input[type=password], textarea, select, .multichoice_selector {
 	text-align: left;
+}
+
+.ui-autocomplete, ui-front {
+	position:absolute;
+	cursor:default;
+	z-index:1001 !important
+}
+
+.ui-autocomplete {
+	background: #333 !important;
+	border: 1px solid #444 !important;
+
+	li {
+		display: block !important;
+		margin: 0 !important;
+		padding: 0 !important;
+	}
+
+	a {
+		display: block;
+		padding: 0.3em 0.5em !important;
+		margin: 0 !important;
+	}
 }
 
 select {
@@ -129,13 +152,13 @@ select:not([multiple]) {
 	padding: 0 8px 8px 0;
 }
 
-.form-group input, .form-group textarea {
+.form-group input, .form-group textarea, .form-group .multichoice_selector {
 	display: block;
 	min-width: 100%;
 	max-width: 100%;
 }
 
-.box .form-group input, .box .form-group textarea {
+.box .form-group input, .box .form-group textarea, .form-group .multichoice_selector {
 	min-width: 95%;
 	max-width: 95%;
 }
@@ -177,6 +200,43 @@ select:not([multiple]) {
 	display: inline-block;
 	margin: 10px 10px 0 0;
 }
+
+
+.multichoice_selector input {
+	border: none;
+	border-radius: 0;
+    -moz-border-radius: 0;
+	box-shadow: none;
+	-moz-box-shadow: none;
+	-webkit-box-shadow: none;
+	width: auto;
+	min-width: 50px;
+	float: left;
+    padding: 4px 0;
+	white-space: nowrap;
+	background: transparent;
+}
+.multichoice_selector .tag {
+	background: #375D81;
+	border-radius: 3px;
+    -moz-border-radius: 3px;
+	color: #FFF;
+	float: left;
+	height: 15px;
+	padding: 0.1em 0.4em 0.5em;
+	margin-right: 0.3em;
+	margin-bottom: 0.3em;
+    vertical-align: baseline;
+}
+.multichoice_selector .tag a {
+	color: #FFF;
+	cursor: pointer;
+}
+.multichoice_selector .tag a:hover {
+	color: #0099CC;
+	text-decoration: none;
+}
+
 
 /* Alerts */
 
