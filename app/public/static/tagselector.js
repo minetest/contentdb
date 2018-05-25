@@ -54,6 +54,13 @@
 							input.val("");
 							return false;
 						}
+					}).focus(function() {
+						// The following works only once.
+						// $(this).trigger('keydown.autocomplete');
+						// As suggested by digitalPBK, works multiple times
+						// $(this).data("autocomplete").search($(this).val());
+						// As noted by Jonny in his answer, with newer versions use uiAutocomplete
+						$(this).data("ui-autocomplete").search($(this).val());
 					});
 
 				input.data('ui-autocomplete')._renderItem = function(ul, item) {
