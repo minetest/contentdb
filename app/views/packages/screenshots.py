@@ -32,11 +32,18 @@ class CreateScreenshotForm(FlaskForm):
 	fileUpload = FileField("File Upload", [InputRequired()])
 	submit	   = SubmitField("Save")
 
+
+class EditScreenshotForm(FlaskForm):
+	title	 = StringField("Title/Caption", [Optional()])
+	approved = BooleanField("Is Approved")
+	delete   = BooleanField("Delete")
+	submit   = SubmitField("Save")
+
 @app.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def create_screenshot_page(package):
-	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+def create_screenshot_page(package, id=None):
+	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
 		return redirect(package.getDetailsURL())
 
 	# Initial form class from post data and default data
@@ -58,3 +65,40 @@ def create_screenshot_page(package):
 			return redirect(package.getDetailsURL())
 
 	return render_template("packages/screenshot_new.html", package=package, form=form)
+
+@app.route("/packages/<author>/<name>/screenshots/<id>/edit/", methods=["GET", "POST"])
+@login_required
+@is_package_page
+def edit_screenshot_page(package, id):
+	screenshot = PackageScreenshot.query.get(id)
+	if screenshot is None or screenshot.package != package:
+		abort(404)
+
+	canEdit	= package.checkPerm(current_user, Permission.ADD_SCREENSHOTS)
+	canApprove = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
+	if not (canEdit or canApprove):
+		return redirect(package.getDetailsURL())
+
+	clearNotifications(screenshot.getEditURL())
+
+	# Initial form class from post data and default data
+	form = EditScreenshotForm(formdata=request.form, obj=screenshot)
+	if request.method == "POST" and form.validate():
+		if canEdit and form["delete"].data:
+			PackageScreenshot.query.filter_by(id=id).delete()
+
+		else:
+			wasApproved = screenshot.approved
+
+			if canEdit:
+				screenshot.title = form["title"].data
+
+			if canApprove:
+				screenshot.approved = form["approved"].data
+			else:
+				screenshot.approved = wasApproved
+
+		db.session.commit()
+		return redirect(package.getDetailsURL())
+
+	return render_template("packages/screenshot_edit.html", package=package, screenshot=screenshot, form=form)

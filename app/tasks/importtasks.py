@@ -252,6 +252,7 @@ def importRepoScreenshot(id):
 		urllib.request.urlretrieve(urlmaker.getScreenshotURL(), imagePath)
 
 		ss = PackageScreenshot()
+		ss.approved = True
 		ss.package = package
 		ss.title   = "screenshot.png"
 		ss.url     = "/uploads/" + filename

@@ -42,7 +42,7 @@
 	<ul class="screenshot_list">
 		{% for ss in package.screenshots %}
 			<li>
-				<a href="{{ ss.url }}">
+				<a href="{% if package.checkPerm(current_user, 'ADD_SCREENSHOTS') %}{{ ss.getEditURL() }}{% else %}{{ ss.url }}{% endif %}">
 					<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
 				</a>
 			</li>

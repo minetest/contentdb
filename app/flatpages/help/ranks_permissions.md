@@ -75,6 +75,32 @@ title: Ranks and Permissions
 			<th>✓</th>
 		</tr>
 		<tr>
+			<td>Add/Delete Screenshot</td>
+			<th>✓</th> <!-- new -->
+			<th></th>
+			<th>✓</th> <!-- member -->
+			<th></th>
+			<th>✓</th> <!-- editor -->
+			<th>✓</th>
+			<th>✓</th> <!-- moderator -->
+			<th>✓</th>
+			<th>✓</th> <!-- admin -->
+			<th>✓</th>
+		</tr>
+		<tr>
+			<td>Approve Screenshot</td>
+			<th></th> <!-- new -->
+			<th></th>
+			<th>✓</th> <!-- member -->
+			<th></th>
+			<th>✓</th> <!-- editor -->
+			<th>✓</th>
+			<th>✓</th> <!-- moderator -->
+			<th>✓</th>
+			<th>✓</th> <!-- admin -->
+			<th>✓</th>
+		</tr>
+		<tr>
 			<td>Approve EditRequest</td>
 			<th></th> <!-- new -->
 			<th></th>

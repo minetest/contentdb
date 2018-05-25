@@ -36,9 +36,10 @@ def admin_page():
 			return redirect(url_for("check_task", id=task.id, r=url_for("user_list_page")))
 		elif action == "importscreenshots":
 			packages = Package.query \
+				.filter_by(soft_deleted=False) \
 				.outerjoin(PackageScreenshot, Package.id==PackageScreenshot.package_id) \
 				.filter(PackageScreenshot.id==None) \
-				.filter_by(soft_deleted=False).all()
+				.all()
 			for package in packages:
 				importRepoScreenshot.delay(package.id)
 

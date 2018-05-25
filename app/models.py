@@ -65,6 +65,8 @@ class Permission(enum.Enum):
 	DELETE_PACKAGE     = "DELETE_PACKAGE"
 	CHANGE_AUTHOR      = "CHANGE_AUTHOR"
 	MAKE_RELEASE       = "MAKE_RELEASE"
+	ADD_SCREENSHOTS    = "ADD_SCREENSHOTS"
+	APPROVE_SCREENSHOT = "APPROVE_SCREENSHOT"
 	APPROVE_RELEASE    = "APPROVE_RELEASE"
 	APPROVE_NEW        = "APPROVE_NEW"
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
@@ -393,7 +395,7 @@ class Package(db.Model):
 		isOwner = user == self.author
 
 		# Members can edit their own packages, and editors can edit any packages
-		if perm == Permission.MAKE_RELEASE:
+		if perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
 			return isOwner or user.rank.atLeast(UserRank.EDITOR)
 
 		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES:
@@ -401,7 +403,7 @@ class Package(db.Model):
 
 		# Editors can change authors, approve new packages, and approve releases
 		elif perm == Permission.CHANGE_AUTHOR or perm == Permission.APPROVE_NEW \
-				or perm == Permission.APPROVE_RELEASE:
+				or perm == Permission.APPROVE_RELEASE or perm == Permission.APPROVE_SCREENSHOT:
 			return user.rank.atLeast(UserRank.EDITOR)
 
 		# Moderators can delete packages
@@ -452,6 +454,14 @@ class PackageScreenshot(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
 	title      = db.Column(db.String(100), nullable=False)
 	url        = db.Column(db.String(100), nullable=False)
+	approved   = db.Column(db.Boolean, nullable=False, default=False)
+
+
+	def getEditURL(self):
+		return url_for("edit_screenshot_page",
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
 
 	def getThumbnailURL(self):
 		return self.url  # TODO
