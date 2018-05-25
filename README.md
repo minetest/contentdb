@@ -40,3 +40,19 @@ Then run the server:
 	./rundebug.py
 
 Then view in your web browser: http://localhost:5000/
+
+## How-tos
+
+### Create migration
+
+```sh
+# if sqlite
+python setup.py -t
+rm db.sqlite && python setup.py -t && FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db stamp head
+
+# Create migration
+FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db migrate
+
+# Run migration
+FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db migrate
+```

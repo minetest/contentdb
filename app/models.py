@@ -225,6 +225,9 @@ class PackagePropertyKey(enum.Enum):
 	def convert(self, value):
 		if self == PackagePropertyKey.tags:
 			return ",".join([t.title for t in value])
+		elif self == PackagePropertyKey.harddeps or self == PackagePropertyKey.softdeps:
+			return ",".join([t.author.username + "/" + t.name for t in value])
+
 		else:
 			return str(value)
 
@@ -531,6 +534,43 @@ class EditRequestChange(db.Model):
 			for tagTitle in self.newValue.split(","):
 				tag = Tag.query.filter_by(title=tagTitle.strip()).first()
 				package.tags.append(tag)
+
+		elif self.key == PackagePropertyKey.harddeps:
+			package.harddeps.clear()
+			for pair in self.newValue.split(","):
+				key, value = pair.split("/")
+				if key is None or value is None:
+					continue
+
+				user = User.query.filter_by(username=key).first()
+				if user is None:
+					continue
+
+				dep = Package.query.filter_by(author=user, name=value).first()
+				if dep is None:
+					continue
+
+				package.harddeps.append(dep)
+
+		elif self.key == PackagePropertyKey.softdeps:
+			package.softdeps.clear()
+			for pair in self.newValue.split(","):
+				key, value = pair.split("/")
+				if key is None or value is None:
+					continue
+
+				user = User.query.filter_by(username=key).first()
+				if user is None:
+					raise Exception("No such user!")
+					continue
+
+				dep = Package.query.filter_by(author=user, name=value).first()
+				if dep is None:
+					raise Exception("No such package!")
+					continue
+
+				package.softdeps.append(dep)
+
 		else:
 			setattr(package, self.key.name, self.newValue)
 
