@@ -31,11 +31,6 @@ cache = SimpleCache()
 def domain(url):
 	return urlparse(url).netloc
 
-# Use nginx to serve files on production instead
-@app.route("/static/<path:path>")
-def send_static(path):
-	return send_from_directory("public/static", path)
-
 @app.route("/uploads/<path:path>")
 def send_upload(path):
 	return send_from_directory("public/uploads", path)

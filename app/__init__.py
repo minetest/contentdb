@@ -25,7 +25,7 @@ from flask_wtf.csrf import CsrfProtect
 from flask_flatpages import FlatPages
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder="public/static")
 app.config["FLATPAGES_ROOT"] = "flatpages"
 app.config["FLATPAGES_EXTENSION"] = ".md"
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
