@@ -62,6 +62,10 @@ def _do_login_user(user, remember_me=False):
 	if not user:
 		return False
 
+	if user.rank == UserRank.BANNED:
+		flash("You have been banned.", "error")
+		return False
+
 	user.active = True
 	if not user.rank.atLeast(UserRank.NEW_MEMBER):
 		user.rank = UserRank.NEW_MEMBER

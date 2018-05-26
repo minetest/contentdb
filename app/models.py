@@ -31,12 +31,13 @@ migrate = Migrate(app, db)
 
 
 class UserRank(enum.Enum):
-	NOT_JOINED = 0
-	NEW_MEMBER = 1
-	MEMBER     = 2
-	EDITOR     = 3
-	MODERATOR  = 4
-	ADMIN      = 5
+	BANNED     = 0
+	NOT_JOINED = 1
+	NEW_MEMBER = 2
+	MEMBER     = 3
+	EDITOR     = 4
+	MODERATOR  = 5
+	ADMIN      = 6
 
 	def atLeast(self, min):
 		return self.value >= min.value

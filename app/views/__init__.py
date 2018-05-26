@@ -51,3 +51,10 @@ def flatpage(path):
     page = pages.get_or_404(path)
     template = page.meta.get('template', 'flatpage.html')
     return render_template(template, page=page)
+
+@app.before_request
+def do_something_whenever_a_request_comes_in():
+	if current_user.is_authenticated and current_user.rank == UserRank.BANNED:
+		flash("You have been banned.", "error")
+		logout_user()
+		return redirect(url_for('user.login'))
