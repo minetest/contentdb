@@ -37,6 +37,10 @@ nav li a {
 	border-left: 1px solid #444;
 }
 
+nav li a:not([href]) {
+	cursor: default;
+}
+
 nav ul li:last-child a {
 	border-right: 1px solid #444;
 }
