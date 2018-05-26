@@ -14,7 +14,7 @@
 	<nav>
 		<div class="container">
 			<ul class="nav navbar-nav navbar-left">
-				<li><a href="/"><img src="/static/logo_dark.svg" /></a></li>
+				<li><a href="/">{{ config.USER_APP_NAME }}</a></li>
 				{% for item in current_menu.children recursive %}
 					{% if item.visible %}
 						<li{% if item.children %} class="dropdown"{% endif %}>
