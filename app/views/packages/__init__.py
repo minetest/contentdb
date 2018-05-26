@@ -197,7 +197,7 @@ def approve_package_page(package):
 
 		screenshots = PackageScreenshot.query.filter_by(package=package, approved=False).all()
 		for s in screenshots:
-			screenshots.approved = True
+			s.approved = True
 
 		triggerNotif(package.author, current_user,
 				"{} approved".format(package.title), package.getDetailsURL())
