@@ -51,7 +51,7 @@ def packages_page():
 
 	search = request.args.get("q")
 	if search is not None:
-		query = query.filter(Package.title.contains(search))
+		query = query.filter(Package.title.ilike('%' + search + '%'))
 
 	if shouldReturnJson():
 		pkgs = [package.getAsDictionary(app.config["BASE_URL"]) \
