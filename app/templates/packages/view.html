@@ -162,27 +162,33 @@
 		{% endfor %}
 	</ul>
 
-	<!-- <table class="table-topalign">
+	<table class="table-topalign">
 		<tr>
 			<td>
 				<h3>Dependencies</h3>
 				<ul>
-					{% for p in package.harddeps %}
-						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }}</li>
+					{% for dep in package.dependencies %}
+						<li>
+							{%- if dep.package %}
+								<a href="{{ dep.package.getDetailsURL() }}">{{ dep.package.title }}</a> by {{ dep.package.author.display_name }}
+							{% elif dep.meta_package %}
+								<a href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">{{ dep.meta_package.name }}</a>
+							{% else %}
+								{{ "Excepted package or meta_package in dep!" | throw }}
+							{% endif %}
+							{% if dep.optional %}
+								[optional]
+							{% endif %}
+						</li>
 					{% else %}
-						{% if not package.softdeps %}
-						<li>No dependencies.</li>
-						{% endif %}
-					{% endfor %}
-					{% for p in package.softdeps %}
-						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }} [optional]</li>
+						<li><i>No dependencies</i></li>
 					{% endfor %}
 				</ul>
 			</td>
 			<td>
 				<h3>Required by</h3>
 				<ul>
-					{% for p in package.dependents %}
+					<!-- {% for p in package.dependents %}
 						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }}</li>
 					{% else %}
 						{% if not package.softdependents %}
@@ -191,11 +197,11 @@
 					{% endfor %}
 					{% for p in package.softdependents %}
 						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }} [optional]</li>
-					{% endfor %}
+					{% endfor %} -->
 				</ul>
 			</td>
 		</tr>
-	</table> -->
+	</table>
 
 	{% if current_user.is_authenticated or requests %}
 		<h3>Edit Requests</h3>

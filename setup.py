@@ -262,6 +262,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.forums = 9039
 	mod.shortDesc = "Adds sweet food"
 	mod.desc = "This is the long desc"
+	food_sweet = mod
 	db.session.add(mod)
 
 	game1 = Package()
@@ -325,6 +326,10 @@ Uses the CTF PvP Engine.
 			db.session.add(meta)
 			metas[package.name] = meta
 		package.provides.append(meta)
+
+	dep = Dependency(food_sweet, meta=metas["food"])
+	db.session.add(dep)
+
 
 
 delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"

@@ -21,9 +21,20 @@
 				},
 			{% endfor %}
 		]
+
+		all_packages = meta_packages.slice();
+
+		{% for p in packages %}
+			{# This is safe as name can only contain `[a-z0-9_]` #}
+			all_packages.push({
+				id: "{{ p.author.username }}/{{ p.name }}",
+				value: {{ p.title | tojson }} + " by " + {{ p.author.display_name | tojson }},
+				toString: function() { return  {{ p.title | tojson }} + " by " + {{ p.author.display_name | tojson }} + " only"; },
+			});
+		{% endfor %}
 	</script>
 
-	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field, render_mpackage_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field, render_mpackage_field, render_deps_field %}
 	{{ form_includes() }}
 
 	<form method="POST" action="" class="tableform">
@@ -36,6 +47,8 @@
 		{{ render_field(form.type, class_="pkg_meta") }}
 		{{ render_field(form.license, class_="pkg_meta") }}
 		{{ render_mpackage_field(form.provides_str, class_="pkg_meta", placeholder="Comma separated list") }}
+		{{ render_deps_field(form.harddep_str, class_="pkg_meta", placeholder="Comma separated list") }}
+		{{ render_deps_field(form.softdep_str, class_="pkg_meta", placeholder="Comma separated list") }}
 		{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
 
 		<div class="pkg_wiz_1">

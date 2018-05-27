@@ -108,6 +108,8 @@ class PackageForm(FlaskForm):
 	license       = QuerySelectField("License", [InputRequired()], query_factory=lambda: License.query, get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	provides_str  = StringField("Provides", [Optional(), Length(0,1000)])
 	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
+	harddep_str   = StringField("Hard Dependencies", [Optional(), Length(0,1000)])
+	softdep_str   = StringField("Soft Dependencies", [Optional(), Length(0,1000)])
 	repo          = StringField("Repo URL", [Optional(), URL()])
 	website       = StringField("Website URL", [Optional(), URL()])
 	issueTracker  = StringField("Issue Tracker URL", [Optional(), URL()])
@@ -146,6 +148,9 @@ def create_edit_package_page(author=None, name=None):
 
 	# Initial form class from post data and default data
 	if request.method == "GET" and package is not None:
+		deps = package.dependencies
+		form.harddep_str.data  = ",".join([str(x) for x in deps if not x.optional])
+		form.softdep_str.data  = ",".join([str(x) for x in deps if     x.optional])
 		form.provides_str.data = MetaPackage.ListToSpec(package.provides)
 
 	if request.method == "POST" and form.validate():
@@ -174,10 +179,20 @@ def create_edit_package_page(author=None, name=None):
 		for m in mpackages:
 			package.provides.append(m)
 
+		Dependency.query.filter_by(depender=package).delete()
+		deps = Dependency.SpecToList(package, form.harddep_str.data, mpackage_cache)
+		for dep in deps:
+			dep.optional = False
+			db.session.add(dep)
+
+		deps = Dependency.SpecToList(package, form.softdep_str.data, mpackage_cache)
+		for dep in deps:
+			dep.optional = True
+			db.session.add(dep)
+
 		if wasNew and package.type == PackageType.MOD and not package.name in mpackage_cache:
 			m = MetaPackage.GetOrCreate(package.name, mpackage_cache)
 			package.provides.append(m)
-
 
 		package.tags.clear()
 		for tag in form.tags.raw_data:
@@ -191,9 +206,14 @@ def create_edit_package_page(author=None, name=None):
 
 		return redirect(package.getDetailsURL())
 
+	package_query = Package.query.filter_by(approved=True, soft_deleted=False)
+	if package is not None:
+		package_query = package_query.filter(Package.id != package.id)
+
 	enableWizard = name is None and request.method != "POST"
 	return render_template("packages/create_edit.html", package=package, \
 			form=form, author=author, enable_wizard=enableWizard, \
+			packages=package_query.all(), \
 			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all())
 
 @app.route("/packages/<author>/<name>/approve/", methods=["POST"])

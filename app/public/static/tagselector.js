@@ -86,6 +86,18 @@
 					input = $('input[type=text]', this);
 
 				var selected = [];
+				var lookup = {};
+				for (var i = 0; i < source.length; i++) {
+					lookup[source[i].id] = source[i];
+				}
+
+				var selected_raw = result.val().split(",");
+				for (var i = 0; i < selected_raw.length; i++) {
+					var raw = selected_raw[i].trim();
+					if (lookup[raw]) {
+						selected.push(raw);
+					}
+				}
 
 				selector.click(function() { input.focus(); })
 					.delegate('.tag a', 'click', function() {
@@ -122,8 +134,8 @@
 				function recreate() {
 					selector.find("span").remove();
 					for (var i = 0; i < selected.length; i++) {
-						var value = source[selected[i]] || selected[i];
-						addTag(selected[i], value);
+						var value = lookup[selected[i]] || { value: selected[i] };
+						addTag(selected[i], value.value);
 					}
 					result.val(selected.join(","))
 				}
@@ -134,7 +146,9 @@
 							e.preventDefault();
 						else if (e.keyCode === $.ui.keyCode.COMMA) {
 							var item = input.val();
-							if (item.match(/^([a-z0-9_]+)$/)) {
+							if (item.length == 0) {
+								input.data("ui-autocomplete").search("");
+							} else if (item.match(/^([a-z0-9_]+)$/)) {
 								selectItem(item);
 								recreate();
 								input.val("");
@@ -148,7 +162,8 @@
 								var item = selected[selected.length - 1];
 								selected.splice(selected.length - 1, 1);
 								recreate();
-								input.val(item);
+								if (!(item.indexOf("/") > 0))
+									input.val(item);
 								e.preventDefault();
 								return true;
 							}
@@ -207,6 +222,12 @@
 			var input = $(this).parent().children("input[type='text']");
 			input.hide();
 			$(this).csvSelector(meta_packages, input.attr("name"), input);
-		})
+		});
+
+		$(".deps_selector").each(function() {
+			var input = $(this).parent().children("input[type='text']");
+			input.hide();
+			$(this).csvSelector(all_packages, input.attr("name"), input);
+		});
 	});
 })(jQuery);

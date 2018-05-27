@@ -28,6 +28,10 @@ from urllib.parse import urlparse
 cache = SimpleCache()
 
 @app.template_filter()
+def throw(err):
+	raise Exception(err)
+
+@app.template_filter()
 def domain(url):
 	return urlparse(url).netloc
 

@@ -233,7 +233,6 @@ class PackagePropertyKey(enum.Enum):
 		else:
 			return str(value)
 
-
 provides = db.Table("provides",
 	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
     db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
@@ -243,6 +242,74 @@ tags = db.Table("tags",
     db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
     db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
+
+class Dependency(db.Model):
+	id              = db.Column(db.Integer, primary_key=True)
+	depender_id     = db.Column(db.Integer, db.ForeignKey("package.id"),     nullable=True)
+	package_id      = db.Column(db.Integer, db.ForeignKey("package.id"),     nullable=True)
+	package         = db.relationship("Package", foreign_keys=[package_id])
+	meta_package_id = db.Column(db.Integer, db.ForeignKey("meta_package.id"), nullable=True)
+	optional        = db.Column(db.Boolean, nullable=False, default=False)
+	__table_args__  = (db.UniqueConstraint('depender_id', 'package_id', 'meta_package_id', name='_dependency_uc'), )
+
+	def __init__(self, depender=None, package=None, meta=None):
+		if depender is None:
+			return
+
+		self.depender = depender
+
+		packageProvided = package is not None
+		metaProvided = meta is not None
+
+		if packageProvided and not metaProvided:
+			self.package = package
+		elif metaProvided and not packageProvided:
+			self.meta_package = meta
+		else:
+			raise Exception("Either meta or package must be given, but not both!")
+
+	def __str__(self):
+		if self.package is not None:
+			return self.package.author.username + "/" + self.package.name
+		elif self.meta_package is not None:
+			return self.meta_package.name
+		else:
+			raise Exception("Meta and package are both none!")
+
+	@staticmethod
+	def SpecToList(depender, spec, cache={}):
+		retval = []
+		arr = spec.split(",")
+
+		import re
+		pattern1 = re.compile("^([a-z0-9_]+)$")
+		pattern2 = re.compile("^([A-Za-z0-9_]+)/([a-z0-9_]+)$")
+
+		for x in arr:
+			x = x.strip()
+			if x == "":
+				continue
+
+			if pattern1.match(x):
+				meta = MetaPackage.GetOrCreate(x, cache)
+				retval.append(Dependency(depender, meta=meta))
+			else:
+				m = pattern2.match(x)
+				username = m.group(1)
+				name     = m.group(2)
+				user = User.query.filter_by(username=username).first()
+				if user is None:
+					raise Exception("Unable to find user " + username)
+
+				package = Package.query.filter_by(author=user, name=name).first()
+				if package is None:
+					raise Exception("Unable to find package " + name + " by " + username)
+
+				retval.append(Dependency(depender, package=package))
+
+		return retval
+
+
 
 class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
@@ -269,6 +336,8 @@ class Package(db.Model):
 
 	provides = db.relationship("MetaPackage", secondary=provides, lazy="subquery",
 			backref=db.backref("packages", lazy=True))
+
+	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
 	tags = db.relationship("Tag", secondary=tags, lazy="subquery",
 			backref=db.backref("packages", lazy=True))
@@ -403,6 +472,7 @@ class Package(db.Model):
 class MetaPackage(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 	name         = db.Column(db.String(100), unique=True, nullable=False)
+	dependencies = db.relationship("Dependency", backref="meta_package", lazy="dynamic")
 
 	def __init__(self, name=None):
 		self.name = name
