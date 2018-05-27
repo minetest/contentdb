@@ -31,13 +31,14 @@ migrate = Migrate(app, db)
 
 
 class UserRank(enum.Enum):
-	BANNED     = 0
-	NOT_JOINED = 1
-	NEW_MEMBER = 2
-	MEMBER     = 3
-	EDITOR     = 4
-	MODERATOR  = 5
-	ADMIN      = 6
+	BANNED         = 0
+	NOT_JOINED     = 1
+	NEW_MEMBER     = 2
+	MEMBER         = 3
+	TRUSTED_MEMBER = 4
+	EDITOR         = 5
+	MODERATOR      = 6
+	ADMIN          = 7
 
 	def atLeast(self, min):
 		return self.value >= min.value
@@ -460,10 +461,13 @@ class Package(db.Model):
 			else:
 				return user.rank.atLeast(UserRank.EDITOR)
 
-		# Editors can change authors, approve new packages, and approve releases
-		elif perm == Permission.CHANGE_AUTHOR or perm == Permission.APPROVE_NEW \
-				or perm == Permission.APPROVE_RELEASE or perm == Permission.APPROVE_SCREENSHOT:
+		# Editors can change authors
+		elif perm == Permission.CHANGE_AUTHOR:
 			return user.rank.atLeast(UserRank.EDITOR)
+
+		elif perm == Permission.APPROVE_NEW or perm == Permission.APPROVE_RELEASE \
+				or perm == Permission.APPROVE_SCREENSHOT:
+			return user.rank.atLeast(UserRank.TRUSTED_MEMBER if isOwner else UserRank.EDITOR)
 
 		# Moderators can delete packages
 		elif perm == Permission.DELETE_PACKAGE or perm == Permission.CHANGE_RELEASE_URL:

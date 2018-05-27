@@ -4,6 +4,7 @@ title: Ranks and Permissions
 
 * **New Members** - mostly untrusted, cannot change package meta data or publish releases without approval.
 * **Members** - Trusted to change the meta data of their own packages', but cannot publish releases.
+* **Trusted Members** - Same as above, but can approve their own releases and packages.
 * **Editors** - Trusted to change the meta data of any package, and also make and publish releases.
 * **Moderators** - Same as above, but can manage users.
 * **Admins** - Full access.
@@ -16,6 +17,7 @@ title: Ranks and Permissions
 			<th>Rank</th>
 			<th colspan=2>New Member</th>
 			<th colspan=2>Member</th>
+			<th colspan=2>Trusted Member</th>
 			<th colspan=2>Editor</th>
 			<th colspan=2>Moderator</th>
 			<th colspan=2>Admin</th>
@@ -41,6 +43,8 @@ title: Ranks and Permissions
 			<th></th>
 			<th>✓</th> <!-- member -->
 			<th></th>
+			<th>✓</th> <!-- trusted member -->
+			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
 			<th>✓</th> <!-- moderator -->
@@ -53,6 +57,8 @@ title: Ranks and Permissions
 			<th></th> <!-- new -->
 			<th></th>
 			<th></th> <!-- member -->
+			<th></th>
+			<th>✓</th> <!-- trusted member -->
 			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
@@ -67,6 +73,8 @@ title: Ranks and Permissions
 			<th></th>
 			<th>✓</th> <!-- member -->
 			<th></th>
+			<th>✓</th> <!-- trusted member -->
+			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
 			<th>✓</th> <!-- moderator -->
@@ -79,6 +87,8 @@ title: Ranks and Permissions
 			<th>✓</th> <!-- new -->
 			<th></th>
 			<th>✓</th> <!-- member -->
+			<th></th>
+			<th>✓</th> <!-- trusted member -->
 			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
@@ -93,6 +103,8 @@ title: Ranks and Permissions
 			<th></th>
 			<th>✓</th> <!-- member -->
 			<th></th>
+			<th>✓</th> <!-- trusted member -->
+			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
 			<th>✓</th> <!-- moderator -->
@@ -105,6 +117,8 @@ title: Ranks and Permissions
 			<th></th> <!-- new -->
 			<th></th>
 			<th>✓</th> <!-- member -->
+			<th></th>
+			<th>✓</th> <!-- trusted member -->
 			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
@@ -119,6 +133,8 @@ title: Ranks and Permissions
 			<th></th>
 			<th>✓</th> <!-- member -->
 			<th></th>
+			<th>✓</th> <!-- trusted member -->
+			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
 			<th>✓</th> <!-- moderator -->
@@ -131,6 +147,8 @@ title: Ranks and Permissions
 			<th>✓</th> <!-- new -->
 			<th></th>
 			<th>✓</th> <!-- member -->
+			<th></th>
+			<th>✓</th> <!-- trusted member -->
 			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
@@ -145,6 +163,8 @@ title: Ranks and Permissions
 			<th></th>
 			<th></th> <!-- member -->
 			<th></th>
+			<th>✓</th> <!-- trusted member -->
+			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
 			<th>✓</th> <!-- moderator -->
@@ -157,6 +177,8 @@ title: Ranks and Permissions
 			<th></th> <!-- new -->
 			<th></th>
 			<th></th> <!-- member -->
+			<th></th>
+			<th></th> <!-- trusted member -->
 			<th></th>
 			<th></th> <!-- editor -->
 			<th></th>
@@ -171,6 +193,8 @@ title: Ranks and Permissions
 			<th></th>
 			<th>✓</th> <!-- member -->
 			<th></th>
+			<th></th> <!-- trusted member -->
+			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th></th>
 			<th>✓</th> <!-- moderator -->
@@ -183,6 +207,8 @@ title: Ranks and Permissions
 			<th></th> <!-- new -->
 			<th></th>
 			<th></th> <!-- member -->
+			<th></th>
+			<th></th> <!-- trusted member -->
 			<th></th>
 			<th></th> <!-- editor -->
 			<th></th>
