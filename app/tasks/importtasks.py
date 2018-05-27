@@ -215,7 +215,6 @@ def getMeta(urlstr, author):
 	if info is not None:
 		result["forumId"] = info.get("topicId")
 
-	print(result)
 	return result
 
 
@@ -291,3 +290,94 @@ def importRepoScreenshot(id):
 		print("screenshot.png does not exist")
 
 	return None
+
+
+
+def getDepends(package):
+	url = urlparse(package.repo)
+	urlmaker = None
+	if url.netloc == "github.com":
+		urlmaker = GithubURLMaker(url)
+	else:
+		raise TaskError("Unsupported repo")
+
+	result = {}
+	if urlmaker.isValid():
+		#
+		# Try getting depends on mod.conf
+		#
+		try:
+			contents = urllib.request.urlopen(urlmaker.getModConfURL()).read().decode("utf-8")
+			conf = parseConf(contents)
+			for key in ["depends", "optional_depends"]:
+				try:
+					result[key] = conf[key]
+				except KeyError:
+					pass
+
+		except HTTPError:
+			print("mod.conf does not exist")
+
+		if "depends" in result or "optional_depends" in result:
+			return result
+
+
+		#
+		# Try depends.txt
+		#
+		import re
+		pattern = re.compile("^([a-z0-9_]+)\??$")
+		try:
+			contents = urllib.request.urlopen(urlmaker.getDependsURL()).read().decode("utf-8")
+			soft = []
+			hard = []
+			for line in contents.split("\n"):
+				line = line.strip()
+				if pattern.match(line):
+					if line[len(line) - 1] == "?":
+						soft.append( line[:-1])
+					else:
+						hard.append(line)
+
+			result["depends"] = ",".join(hard)
+			result["optional_depends"] = ",".join(soft)
+		except HTTPError:
+			print("depends.txt does not exist")
+
+		return result
+
+	else:
+		print(TaskError("non-github depends detector not implemented yet!"))
+		return {}
+
+
+def importDependencies(package, mpackage_cache):
+	if Dependency.query.filter_by(depender=package).count() != 0:
+		return
+
+	result = getDepends(package)
+
+	if "depends" in result:
+		deps = Dependency.SpecToList(package, result["depends"], mpackage_cache)
+		print("{} hard: {}".format(len(deps), result["depends"]))
+		for dep in deps:
+			dep.optional = False
+			db.session.add(dep)
+
+	if "optional_depends" in result:
+		deps = Dependency.SpecToList(package, result["optional_depends"], mpackage_cache)
+		print("{} soft: {}".format(len(deps), result["optional_depends"]))
+		for dep in deps:
+			dep.optional = True
+			db.session.add(dep)
+
+@celery.task()
+def importAllDependencies():
+	Dependency.query.delete()
+	mpackage_cache = {}
+	packages = Package.query.filter_by(type=PackageType.MOD).all()
+	for i, p in enumerate(packages):
+		print("============= {} ({}/{}) =============".format(p.name, i, len(packages)))
+		importDependencies(p, mpackage_cache)
+
+	db.session.commit()

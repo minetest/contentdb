@@ -17,8 +17,9 @@
 		<form method="post" action="" class="box-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<select name="action">
-				<option value="importusers" selected>Create users from mod list</option>
+				<option value="importusers">Create users from mod list</option>
 				<option value="importscreenshots">Import screenshots from VCS</option>
+				<option value="importdepends" selected>Import dependencies from downloads</option>
 			</select>
 			<input type="submit" value="Perform" />
 		</form>

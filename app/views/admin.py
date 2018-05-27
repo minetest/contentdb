@@ -20,7 +20,7 @@ from flask_user import *
 from flask.ext import menu
 from app import app
 from app.models import *
-from app.tasks.importtasks import importRepoScreenshot
+from app.tasks.importtasks import importRepoScreenshot, importAllDependencies
 from app.tasks.forumtasks  import importUsersFromModList
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -52,6 +52,9 @@ def admin_page():
 				package.soft_deleted = False
 				db.session.commit()
 				return redirect(url_for("admin_page"))
+		elif action == "importdepends":
+			task = importAllDependencies.delay()
+			return redirect(url_for("check_task", id=task.id, r=url_for("admin_page")))
 		else:
 			flash("Unknown action: " + action, "error")
 
