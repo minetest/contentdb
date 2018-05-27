@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-	<h2>Create Package</h2>
+	<h1>Create Package</h1>
 
 	<script>
 		meta_packages = [
@@ -48,16 +48,25 @@
 	<form method="POST" action="" class="tableform">
 		{{ form.hidden_tag() }}
 
+		<h2 class="pkg_meta">Package</h2>
+
 		{{ render_field(form.name, class_="pkg_meta") }}
 		{{ render_field(form.title, class_="pkg_meta") }}
 		{{ render_field(form.shortDesc, class_="pkg_meta") }}
 		{{ render_field(form.desc, class_="pkg_meta") }}
 		{{ render_field(form.type, class_="pkg_meta") }}
 		{{ render_field(form.license, class_="pkg_meta") }}
-		{{ render_mpackage_field(form.provides_str, class_="pkg_meta", placeholder="Comma separated list") }}
-		{{ render_deps_field(form.harddep_str, class_="pkg_meta", placeholder="Comma separated list") }}
-		{{ render_deps_field(form.softdep_str, class_="pkg_meta", placeholder="Comma separated list") }}
 		{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
+
+		<div class="pkg_meta">
+			<h2 class="not_txp">Dependency Info</h2>
+		</div>
+
+		{{ render_mpackage_field(form.provides_str, class_="pkg_meta not_txp", placeholder="Comma separated list") }}
+		{{ render_deps_field(form.harddep_str, class_="pkg_meta not_txp not_game", placeholder="Comma separated list") }}
+		{{ render_deps_field(form.softdep_str, class_="pkg_meta not_txp not_game", placeholder="Comma separated list") }}
+
+		<h2 class="pkg_meta">Repository and Links</h2>
 
 		<div class="pkg_wiz_1">
 			<p>Enter the repo URL for the package.
@@ -93,4 +102,5 @@
 			</div>
 		</noscript>
 	{% endif %}
+	<script src="/static/package_edit.js"></script>
 {% endblock %}
