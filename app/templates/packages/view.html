@@ -68,6 +68,10 @@
 					<td>{{ package.name }}</td>
 				</tr>
 				<tr>
+					<td>Provides</td>
+					<td>{{ package.provides | join(', ') }}</td>
+				</tr>
+				<tr>
 					<td>Author</td>
 					<td class="{{ package.author.rank }}">
 						<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
@@ -153,7 +157,7 @@
 		{% endfor %}
 	</ul>
 
-	<table class="table-topalign">
+	<!-- <table class="table-topalign">
 		<tr>
 			<td>
 				<h3>Dependencies</h3>
@@ -186,7 +190,7 @@
 				</ul>
 			</td>
 		</tr>
-	</table>
+	</table> -->
 
 	{% if current_user.is_authenticated or requests %}
 		<h3>Edit Requests</h3>

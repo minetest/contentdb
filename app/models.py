@@ -219,8 +219,7 @@ class PackagePropertyKey(enum.Enum):
 	type         = "Type"
 	license      = "License"
 	tags         = "Tags"
-	harddeps     = "Hard Dependencies"
-	softdeps     = "Soft Dependencies"
+	provides     = "Provides"
 	repo         = "Repository"
 	website      = "Website"
 	issueTracker = "Issue Tracker"
@@ -229,25 +228,20 @@ class PackagePropertyKey(enum.Enum):
 	def convert(self, value):
 		if self == PackagePropertyKey.tags:
 			return ",".join([t.title for t in value])
-		elif self == PackagePropertyKey.harddeps or self == PackagePropertyKey.softdeps:
-			return ",".join([t.author.username + "/" + t.name for t in value])
-
+		elif self == PackagePropertyKey.provides:
+			return ",".join([t.name for t in value])
 		else:
 			return str(value)
+
+
+provides = db.Table("provides",
+	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
+    db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
+)
 
 tags = db.Table("tags",
     db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
     db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
-)
-
-harddeps = db.Table("harddeps",
-	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
-    db.Column("dependency_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
-)
-
-softdeps = db.Table("softdeps",
-	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
-    db.Column("dependency_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
 class Package(db.Model):
@@ -273,20 +267,11 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=True)
 
-	tags = db.relationship("Tag", secondary=tags, lazy="subquery",
+	provides = db.relationship("MetaPackage", secondary=provides, lazy="subquery",
 			backref=db.backref("packages", lazy=True))
 
-	harddeps = db.relationship("Package",
-				secondary=harddeps,
-				primaryjoin=id==harddeps.c.package_id,
-				secondaryjoin=id==harddeps.c.dependency_id,
-				backref="dependents")
-
-	softdeps = db.relationship("Package",
-				secondary=softdeps,
-				primaryjoin=id==softdeps.c.package_id,
-				secondaryjoin=id==softdeps.c.dependency_id,
-				backref="softdependents")
+	tags = db.relationship("Tag", secondary=tags, lazy="subquery",
+			backref=db.backref("packages", lazy=True))
 
 	releases = db.relationship("PackageRelease", backref="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
@@ -414,6 +399,16 @@ class Package(db.Model):
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
+
+class MetaPackage(db.Model):
+	id           = db.Column(db.Integer, primary_key=True)
+	name         = db.Column(db.String(100), unique=True, nullable=False)
+
+	def __init__(self, name=None):
+		self.name = name
+
+	def __str__(self):
+		return self.name
 
 class Tag(db.Model):
 	id              = db.Column(db.Integer,    primary_key=True)
@@ -551,42 +546,6 @@ class EditRequestChange(db.Model):
 			for tagTitle in self.newValue.split(","):
 				tag = Tag.query.filter_by(title=tagTitle.strip()).first()
 				package.tags.append(tag)
-
-		elif self.key == PackagePropertyKey.harddeps:
-			package.harddeps.clear()
-			for pair in self.newValue.split(","):
-				key, value = pair.split("/")
-				if key is None or value is None:
-					continue
-
-				user = User.query.filter_by(username=key).first()
-				if user is None:
-					continue
-
-				dep = Package.query.filter_by(author=user, name=value, soft_deleted=False).first()
-				if dep is None:
-					continue
-
-				package.harddeps.append(dep)
-
-		elif self.key == PackagePropertyKey.softdeps:
-			package.softdeps.clear()
-			for pair in self.newValue.split(","):
-				key, value = pair.split("/")
-				if key is None or value is None:
-					continue
-
-				user = User.query.filter_by(username=key).first()
-				if user is None:
-					raise Exception("No such user!")
-					continue
-
-				dep = Package.query.filter_by(author=user, name=value).first()
-				if dep is None:
-					raise Exception("No such package!")
-					continue
-
-				package.softdeps.append(dep)
 
 		else:
 			setattr(package, self.key.name, self.newValue)
