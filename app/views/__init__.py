@@ -35,6 +35,10 @@ def throw(err):
 def domain(url):
 	return urlparse(url).netloc
 
+@app.template_filter()
+def datetime(value):
+    return value.strftime("%Y-%m-%d %H:%M") + " UTC"
+
 @app.route("/uploads/<path:path>")
 def send_upload(path):
 	return send_from_directory("public/uploads", path)

@@ -67,6 +67,7 @@
 					<td>Name</td>
 					<td>{{ package.name }}</td>
 				</tr>
+				{% if package.provides %}
 				<tr>
 					<td>Provides</td>
 					<td>{% for meta in package.provides %}
@@ -76,6 +77,7 @@
 						{% endif %}
 					{% endfor %}</td>
 				</tr>
+				{% endif %}
 				<tr>
 					<td>Author</td>
 					<td class="{{ package.author.rank }}">
@@ -91,6 +93,10 @@
 				<tr>
 					<td>License</td>
 					<td>{{ package.license.name }}</td>
+				</tr>
+				<tr>
+					<td>Added</td>
+					<td>{{ package.created_at | datetime }}</td>
 				</tr>
 			</table>
 
@@ -130,7 +136,7 @@
 					{% if not rel.approved %}<i>{% endif %}
 
 					<a href="{{ rel.url }}">{{ rel.title }}</a>,
-					created {{ rel.releaseDate }}.
+					created {{ rel.releaseDate | datetime }}.
 					{% if rel.task_id %}
 						<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
 					{% elif not rel.approved %}
