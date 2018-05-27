@@ -91,14 +91,6 @@
 					lookup[source[i].id] = source[i];
 				}
 
-				var selected_raw = result.val().split(",");
-				for (var i = 0; i < selected_raw.length; i++) {
-					var raw = selected_raw[i].trim();
-					if (lookup[raw]) {
-						selected.push(raw);
-					}
-				}
-
 				selector.click(function() { input.focus(); })
 					.delegate('.tag a', 'click', function() {
 						var id = $(this).parent().data("id");
@@ -109,7 +101,6 @@
 						}
 						recreate();
 					});
-
 
 				function selectItem(id) {
 					for (var i = 0; i < selected.length; i++) {
@@ -139,7 +130,22 @@
 					}
 					result.val(selected.join(","))
 				}
-				recreate();
+
+				function readFromResult() {
+					selected = [];
+					var selected_raw = result.val().split(",");
+					for (var i = 0; i < selected_raw.length; i++) {
+						var raw = selected_raw[i].trim();
+						if (lookup[raw] || raw.match(/^([a-z0-9_]+)$/)) {
+							selected.push(raw);
+						}
+					}
+
+					recreate();
+				}
+				readFromResult();
+
+				result.change(readFromResult);
 
 				input.keydown(function(e) {
 						if (e.keyCode === $.ui.keyCode.TAB && $(this).data('ui-autocomplete').menu.active)

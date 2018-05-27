@@ -55,6 +55,9 @@ class GithubURLMaker:
 	def getDescURL(self):
 		return self.baseUrl + "/description.txt"
 
+	def getDependsURL(self):
+		return self.baseUrl + "/depends.txt"
+
 	def getScreenshotURL(self):
 		return self.baseUrl + "/screenshot.png"
 
@@ -161,7 +164,7 @@ def getMeta(urlstr, author):
 	try:
 		contents = urllib.request.urlopen(urlmaker.getModConfURL()).read().decode("utf-8")
 		conf = parseConf(contents)
-		for key in ["name", "description", "title"]:
+		for key in ["name", "description", "title", "depends", "optional_depends"]:
 			try:
 				result[key] = conf[key]
 			except KeyError:
@@ -179,16 +182,40 @@ def getMeta(urlstr, author):
 		except HTTPError:
 			print("description.txt does not exist!")
 
+	import re
+	pattern = re.compile("^([a-z0-9_]+)\??$")
+	if not "depends" in result and not "optional_depends" in result:
+		try:
+			contents = urllib.request.urlopen(urlmaker.getDependsURL()).read().decode("utf-8")
+			soft = []
+			hard = []
+			for line in contents.split("\n"):
+				line = line.strip()
+				if pattern.match(line):
+					if line[len(line) - 1] == "?":
+						soft.append( line[:-1])
+					else:
+						hard.append(line)
+
+			result["depends"] = ",".join(hard)
+			result["optional_depends"] = ",".join(soft)
+
+
+		except HTTPError:
+			print("depends.txt does not exist!")
+
 	if "description" in result:
 		desc = result["description"]
 		idx = desc.find(".") + 1
 		cutIdx = min(len(desc), 200 if idx < 5 else idx)
 		result["short_description"] = desc[:cutIdx]
 
+
 	info = findModInfo(author, result.get("name"), result["repo"])
 	if info is not None:
 		result["forumId"] = info.get("topicId")
 
+	print(result)
 	return result
 
 
