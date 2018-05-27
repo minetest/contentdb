@@ -50,21 +50,21 @@
 
 		<h2 class="pkg_meta">Package</h2>
 
+		{{ render_field(form.type, class_="pkg_meta") }}
 		{{ render_field(form.name, class_="pkg_meta") }}
 		{{ render_field(form.title, class_="pkg_meta") }}
 		{{ render_field(form.shortDesc, class_="pkg_meta") }}
 		{{ render_field(form.desc, class_="pkg_meta") }}
-		{{ render_field(form.type, class_="pkg_meta") }}
-		{{ render_field(form.license, class_="pkg_meta") }}
 		{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
+		{{ render_field(form.license, class_="pkg_meta") }}
 
 		<div class="pkg_meta">
 			<h2 class="not_txp">Dependency Info</h2>
-		</div>
 
-		{{ render_mpackage_field(form.provides_str, class_="pkg_meta not_txp", placeholder="Comma separated list") }}
-		{{ render_deps_field(form.harddep_str, class_="pkg_meta not_txp not_game", placeholder="Comma separated list") }}
-		{{ render_deps_field(form.softdep_str, class_="pkg_meta not_txp not_game", placeholder="Comma separated list") }}
+			{{ render_mpackage_field(form.provides_str, class_="not_txp", placeholder="Comma separated list") }}
+			{{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
+			{{ render_deps_field(form.softdep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
+		</div>
 
 		<h2 class="pkg_meta">Repository and Links</h2>
 
