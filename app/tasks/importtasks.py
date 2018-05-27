@@ -299,56 +299,54 @@ def getDepends(package):
 	if url.netloc == "github.com":
 		urlmaker = GithubURLMaker(url)
 	else:
-		raise TaskError("Unsupported repo")
+		return {}
 
 	result = {}
-	if urlmaker.isValid():
-		#
-		# Try getting depends on mod.conf
-		#
-		try:
-			contents = urllib.request.urlopen(urlmaker.getModConfURL()).read().decode("utf-8")
-			conf = parseConf(contents)
-			for key in ["depends", "optional_depends"]:
-				try:
-					result[key] = conf[key]
-				except KeyError:
-					pass
+	if not urlmaker.isValid():
+		return {}
 
-		except HTTPError:
-			print("mod.conf does not exist")
+	#
+	# Try getting depends on mod.conf
+	#
+	try:
+		contents = urllib.request.urlopen(urlmaker.getModConfURL()).read().decode("utf-8")
+		conf = parseConf(contents)
+		for key in ["depends", "optional_depends"]:
+			try:
+				result[key] = conf[key]
+			except KeyError:
+				pass
 
-		if "depends" in result or "optional_depends" in result:
-			return result
+	except HTTPError:
+		print("mod.conf does not exist")
 
-
-		#
-		# Try depends.txt
-		#
-		import re
-		pattern = re.compile("^([a-z0-9_]+)\??$")
-		try:
-			contents = urllib.request.urlopen(urlmaker.getDependsURL()).read().decode("utf-8")
-			soft = []
-			hard = []
-			for line in contents.split("\n"):
-				line = line.strip()
-				if pattern.match(line):
-					if line[len(line) - 1] == "?":
-						soft.append( line[:-1])
-					else:
-						hard.append(line)
-
-			result["depends"] = ",".join(hard)
-			result["optional_depends"] = ",".join(soft)
-		except HTTPError:
-			print("depends.txt does not exist")
-
+	if "depends" in result or "optional_depends" in result:
 		return result
 
-	else:
-		print(TaskError("non-github depends detector not implemented yet!"))
-		return {}
+
+	#
+	# Try depends.txt
+	#
+	import re
+	pattern = re.compile("^([a-z0-9_]+)\??$")
+	try:
+		contents = urllib.request.urlopen(urlmaker.getDependsURL()).read().decode("utf-8")
+		soft = []
+		hard = []
+		for line in contents.split("\n"):
+			line = line.strip()
+			if pattern.match(line):
+				if line[len(line) - 1] == "?":
+					soft.append( line[:-1])
+				else:
+					hard.append(line)
+
+		result["depends"] = ",".join(hard)
+		result["optional_depends"] = ",".join(soft)
+	except HTTPError:
+		print("depends.txt does not exist")
+
+	return result
 
 
 def importDependencies(package, mpackage_cache):
