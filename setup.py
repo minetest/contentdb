@@ -255,7 +255,6 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.title = "Sweet Foods"
 	mod.license = licenses["CC0"]
 	mod.type = PackageType.MOD
-	mod.harddeps.append(food)
 	mod.author = ruben
 	mod.tags.append(tags["player_effects"])
 	mod.repo = "https://github.com/rubenwardy/food_sweet/"
@@ -263,6 +262,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.forums = 9039
 	mod.shortDesc = "Adds sweet food"
 	mod.desc = "This is the long desc"
+	food_sweet = mod
 	db.session.add(mod)
 
 	game1 = Package()
@@ -313,6 +313,23 @@ Uses the CTF PvP Engine.
 	rel.url = "http://mamadou3.free.fr/Minetest/PixelBOX.zip"
 	rel.approved = True
 	db.session.add(rel)
+
+	db.session.commit()
+
+	metas = {}
+	for package in Package.query.filter_by(type=PackageType.MOD).all():
+		meta = None
+		try:
+			meta = metas[package.name]
+		except KeyError:
+			meta = MetaPackage(package.name)
+			db.session.add(meta)
+			metas[package.name] = meta
+		package.provides.append(meta)
+
+	dep = Dependency(food_sweet, meta=metas["food"])
+	db.session.add(dep)
+
 
 
 delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"

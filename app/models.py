@@ -219,8 +219,7 @@ class PackagePropertyKey(enum.Enum):
 	type         = "Type"
 	license      = "License"
 	tags         = "Tags"
-	harddeps     = "Hard Dependencies"
-	softdeps     = "Soft Dependencies"
+	provides     = "Provides"
 	repo         = "Repository"
 	website      = "Website"
 	issueTracker = "Issue Tracker"
@@ -229,26 +228,88 @@ class PackagePropertyKey(enum.Enum):
 	def convert(self, value):
 		if self == PackagePropertyKey.tags:
 			return ",".join([t.title for t in value])
-		elif self == PackagePropertyKey.harddeps or self == PackagePropertyKey.softdeps:
-			return ",".join([t.author.username + "/" + t.name for t in value])
-
+		elif self == PackagePropertyKey.provides:
+			return ",".join([t.name for t in value])
 		else:
 			return str(value)
+
+provides = db.Table("provides",
+	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
+    db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
+)
 
 tags = db.Table("tags",
     db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
     db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
-harddeps = db.Table("harddeps",
-	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
-    db.Column("dependency_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
-)
+class Dependency(db.Model):
+	id              = db.Column(db.Integer, primary_key=True)
+	depender_id     = db.Column(db.Integer, db.ForeignKey("package.id"),     nullable=True)
+	package_id      = db.Column(db.Integer, db.ForeignKey("package.id"),     nullable=True)
+	package         = db.relationship("Package", foreign_keys=[package_id])
+	meta_package_id = db.Column(db.Integer, db.ForeignKey("meta_package.id"), nullable=True)
+	optional        = db.Column(db.Boolean, nullable=False, default=False)
+	__table_args__  = (db.UniqueConstraint('depender_id', 'package_id', 'meta_package_id', name='_dependency_uc'), )
 
-softdeps = db.Table("softdeps",
-	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
-    db.Column("dependency_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
-)
+	def __init__(self, depender=None, package=None, meta=None):
+		if depender is None:
+			return
+
+		self.depender = depender
+
+		packageProvided = package is not None
+		metaProvided = meta is not None
+
+		if packageProvided and not metaProvided:
+			self.package = package
+		elif metaProvided and not packageProvided:
+			self.meta_package = meta
+		else:
+			raise Exception("Either meta or package must be given, but not both!")
+
+	def __str__(self):
+		if self.package is not None:
+			return self.package.author.username + "/" + self.package.name
+		elif self.meta_package is not None:
+			return self.meta_package.name
+		else:
+			raise Exception("Meta and package are both none!")
+
+	@staticmethod
+	def SpecToList(depender, spec, cache={}):
+		retval = []
+		arr = spec.split(",")
+
+		import re
+		pattern1 = re.compile("^([a-z0-9_]+)$")
+		pattern2 = re.compile("^([A-Za-z0-9_]+)/([a-z0-9_]+)$")
+
+		for x in arr:
+			x = x.strip()
+			if x == "":
+				continue
+
+			if pattern1.match(x):
+				meta = MetaPackage.GetOrCreate(x, cache)
+				retval.append(Dependency(depender, meta=meta))
+			else:
+				m = pattern2.match(x)
+				username = m.group(1)
+				name     = m.group(2)
+				user = User.query.filter_by(username=username).first()
+				if user is None:
+					raise Exception("Unable to find user " + username)
+
+				package = Package.query.filter_by(author=user, name=name).first()
+				if package is None:
+					raise Exception("Unable to find package " + name + " by " + username)
+
+				retval.append(Dependency(depender, package=package))
+
+		return retval
+
+
 
 class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
@@ -273,20 +334,13 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=True)
 
-	tags = db.relationship("Tag", secondary=tags, lazy="subquery",
+	provides = db.relationship("MetaPackage", secondary=provides, lazy="subquery",
 			backref=db.backref("packages", lazy=True))
 
-	harddeps = db.relationship("Package",
-				secondary=harddeps,
-				primaryjoin=id==harddeps.c.package_id,
-				secondaryjoin=id==harddeps.c.dependency_id,
-				backref="dependents")
+	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
-	softdeps = db.relationship("Package",
-				secondary=softdeps,
-				primaryjoin=id==softdeps.c.package_id,
-				secondaryjoin=id==softdeps.c.dependency_id,
-				backref="softdependents")
+	tags = db.relationship("Tag", secondary=tags, lazy="subquery",
+			backref=db.backref("packages", lazy=True))
 
 	releases = db.relationship("PackageRelease", backref="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
@@ -417,6 +471,54 @@ class Package(db.Model):
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
+
+class MetaPackage(db.Model):
+	id           = db.Column(db.Integer, primary_key=True)
+	name         = db.Column(db.String(100), unique=True, nullable=False)
+	dependencies = db.relationship("Dependency", backref="meta_package", lazy="dynamic")
+
+	def __init__(self, name=None):
+		self.name = name
+
+	def __str__(self):
+		return self.name
+
+	@staticmethod
+	def ListToSpec(list):
+		return ",".join([str(x) for x in list])
+
+	@staticmethod
+	def GetOrCreate(name, cache={}):
+		mp = cache.get(name)
+		if mp is None:
+			mp = MetaPackage.query.filter_by(name=name).first()
+
+		if mp is None:
+			mp = MetaPackage(name)
+			db.session.add(mp)
+
+		cache[name] = mp
+		return mp
+
+	@staticmethod
+	def SpecToList(spec, cache={}):
+		retval = []
+		arr = spec.split(",")
+
+		import re
+		pattern = re.compile("^([a-z0-9_]+)$")
+
+		for x in arr:
+			x = x.strip()
+			if x == "":
+				continue
+
+			if not pattern.match(x):
+				continue
+
+			retval.append(MetaPackage.GetOrCreate(x, cache))
+
+		return retval
 
 class Tag(db.Model):
 	id              = db.Column(db.Integer,    primary_key=True)
@@ -554,42 +656,6 @@ class EditRequestChange(db.Model):
 			for tagTitle in self.newValue.split(","):
 				tag = Tag.query.filter_by(title=tagTitle.strip()).first()
 				package.tags.append(tag)
-
-		elif self.key == PackagePropertyKey.harddeps:
-			package.harddeps.clear()
-			for pair in self.newValue.split(","):
-				key, value = pair.split("/")
-				if key is None or value is None:
-					continue
-
-				user = User.query.filter_by(username=key).first()
-				if user is None:
-					continue
-
-				dep = Package.query.filter_by(author=user, name=value, soft_deleted=False).first()
-				if dep is None:
-					continue
-
-				package.harddeps.append(dep)
-
-		elif self.key == PackagePropertyKey.softdeps:
-			package.softdeps.clear()
-			for pair in self.newValue.split(","):
-				key, value = pair.split("/")
-				if key is None or value is None:
-					continue
-
-				user = User.query.filter_by(username=key).first()
-				if user is None:
-					raise Exception("No such user!")
-					continue
-
-				dep = Package.query.filter_by(author=user, name=value).first()
-				if dep is None:
-					raise Exception("No such package!")
-					continue
-
-				package.softdeps.append(dep)
 
 		else:
 			setattr(package, self.key.name, self.newValue)

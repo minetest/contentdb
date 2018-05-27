@@ -68,6 +68,15 @@
 					<td>{{ package.name }}</td>
 				</tr>
 				<tr>
+					<td>Provides</td>
+					<td>{% for meta in package.provides %}
+						<a href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a>
+						{%- if not loop.last %}
+						,
+						{% endif %}
+					{% endfor %}</td>
+				</tr>
+				<tr>
 					<td>Author</td>
 					<td class="{{ package.author.rank }}">
 						<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
@@ -153,23 +162,29 @@
 		{% endfor %}
 	</ul>
 
-	<table class="table-topalign">
+	<!-- <table class="table-topalign">
 		<tr>
-			<td>
+			<td> -->
 				<h3>Dependencies</h3>
 				<ul>
-					{% for p in package.harddeps %}
-						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }}</li>
+					{% for dep in package.dependencies %}
+						<li>
+							{%- if dep.package %}
+								<a href="{{ dep.package.getDetailsURL() }}">{{ dep.package.title }}</a> by {{ dep.package.author.display_name }}
+							{% elif dep.meta_package %}
+								<a href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">{{ dep.meta_package.name }}</a>
+							{% else %}
+								{{ "Excepted package or meta_package in dep!" | throw }}
+							{% endif %}
+							{% if dep.optional %}
+								[optional]
+							{% endif %}
+						</li>
 					{% else %}
-						{% if not package.softdeps %}
-						<li>No dependencies.</li>
-						{% endif %}
-					{% endfor %}
-					{% for p in package.softdeps %}
-						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }} [optional]</li>
+						<li><i>No dependencies</i></li>
 					{% endfor %}
 				</ul>
-			</td>
+			<!-- </td>
 			<td>
 				<h3>Required by</h3>
 				<ul>
@@ -186,7 +201,7 @@
 				</ul>
 			</td>
 		</tr>
-	</table>
+	</table> -->
 
 	{% if current_user.is_authenticated or requests %}
 		<h3>Edit Requests</h3>

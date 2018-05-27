@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}
+Meta Packages
+{% endblock %}
+
+{% block content %}
+	<ul>
+		{% for meta in mpackages %}
+			<li><a href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a> ({{ meta.packages | count }} packages)</li>
+		{% else %}
+			<li><i>No meta packages found.</i></li>
+		{% endfor %}
+	</ul>
+{% endblock %}

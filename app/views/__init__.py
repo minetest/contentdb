@@ -28,6 +28,10 @@ from urllib.parse import urlparse
 cache = SimpleCache()
 
 @app.template_filter()
+def throw(err):
+	raise Exception(err)
+
+@app.template_filter()
 def domain(url):
 	return urlparse(url).netloc
 
@@ -43,7 +47,7 @@ def home_page():
 	packages = query.order_by(db.desc(Package.created_at)).limit(15).all()
 	return render_template("index.html", packages=packages, count=count)
 
-from . import users, githublogin, packages, sass, tasks, admin, notifications, tagseditor
+from . import users, githublogin, packages, sass, tasks, admin, notifications, tagseditor, meta
 
 @menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { 'path': 'help' })
 @app.route('/<path:path>/')

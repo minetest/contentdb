@@ -87,7 +87,7 @@ a:hover {
 }
 
 .button, .buttonset li a, input[type=submit], input[type=text],
-		input[type=password], textarea, select, .multichoice_selector {
+		input[type=password], textarea, select, .bulletselector {
 	text-align: center;
 	display: inline-block;
 	padding: 0.4em 1em;
@@ -99,7 +99,7 @@ a:hover {
 	font-size: 100%;
 }
 
-input[type=text], input[type=password], textarea, select, .multichoice_selector {
+input[type=text], input[type=password], textarea, select, .bulletselector {
 	text-align: left;
 }
 
@@ -147,13 +147,13 @@ select:not([multiple]) {
 	padding: 0 8px 8px 0;
 }
 
-.form-group input, .form-group textarea, .form-group .multichoice_selector {
+.form-group input, .form-group textarea, .form-group .bulletselector {
 	display: block;
 	min-width: 100%;
 	max-width: 100%;
 }
 
-.box .form-group input, .box .form-group textarea, .form-group .multichoice_selector {
+.box .form-group input, .box .form-group textarea, .form-group .bulletselector {
 	min-width: 95%;
 	max-width: 95%;
 }
@@ -197,7 +197,7 @@ select:not([multiple]) {
 }
 
 
-.multichoice_selector input {
+.bulletselector input {
 	border: none;
 	border-radius: 0;
     -moz-border-radius: 0;
@@ -211,7 +211,7 @@ select:not([multiple]) {
 	white-space: nowrap;
 	background: transparent;
 }
-.multichoice_selector .tag {
+.bulletselector .tag {
 	background: #375D81;
 	border-radius: 3px;
     -moz-border-radius: 3px;
@@ -223,11 +223,11 @@ select:not([multiple]) {
 	margin-bottom: 0.3em;
     vertical-align: baseline;
 }
-.multichoice_selector .tag a {
+.bulletselector .tag a {
 	color: #FFF;
 	cursor: pointer;
 }
-.multichoice_selector .tag a:hover {
+.bulletselector .tag a:hover {
 	color: #0099CC;
 	text-decoration: none;
 }

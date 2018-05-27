@@ -5,7 +5,7 @@
  * https://petprojects.googlecode.com/svn/trunk/GPL-LICENSE.txt
  */
 (function($) {
-	$.fn.tagSelector = function(source, name, select) {
+	$.fn.selectSelector = function(source, name, select) {
 		return this.each(function() {
 				var selector = $(this),
 					input = $('input[type=text]', this);
@@ -80,15 +80,136 @@
 			});
 	}
 
+	$.fn.csvSelector = function(source, name, result, allowSlash) {
+		return this.each(function() {
+				var selector = $(this),
+					input = $('input[type=text]', this);
+
+				var selected = [];
+				var lookup = {};
+				for (var i = 0; i < source.length; i++) {
+					lookup[source[i].id] = source[i];
+				}
+
+				selector.click(function() { input.focus(); })
+					.delegate('.tag a', 'click', function() {
+						var id = $(this).parent().data("id");
+						for (var i = 0; i < selected.length; i++) {
+							if (selected[i] == id) {
+								selected.splice(i, 1);
+							}
+						}
+						recreate();
+					});
+
+				function selectItem(id) {
+					for (var i = 0; i < selected.length; i++) {
+						if (selected[i] == id) {
+							return false;
+						}
+					}
+					selected.push(id);
+					return true;
+				}
+
+				function addTag(id, value) {
+					var tag = $('<span class="tag"/>')
+						.text(value)
+						.data("id", id)
+						.append(' <a>x</a>')
+						.insertBefore(input);
+
+					input.attr("placeholder", null);
+				}
+
+				function recreate() {
+					selector.find("span").remove();
+					for (var i = 0; i < selected.length; i++) {
+						var value = lookup[selected[i]] || { value: selected[i] };
+						addTag(selected[i], value.value);
+					}
+					result.val(selected.join(","))
+				}
+
+				function readFromResult() {
+					selected = [];
+					var selected_raw = result.val().split(",");
+					for (var i = 0; i < selected_raw.length; i++) {
+						var raw = selected_raw[i].trim();
+						if (lookup[raw] || raw.match(/^([a-z0-9_]+)$/)) {
+							selected.push(raw);
+						}
+					}
+
+					recreate();
+				}
+				readFromResult();
+
+				result.change(readFromResult);
+
+				input.keydown(function(e) {
+						if (e.keyCode === $.ui.keyCode.TAB && $(this).data('ui-autocomplete').menu.active)
+							e.preventDefault();
+						else if (e.keyCode === $.ui.keyCode.COMMA) {
+							var item = input.val();
+							if (item.length == 0) {
+								input.data("ui-autocomplete").search("");
+							} else if (item.match(/^([a-z0-9_]+)$/)) {
+								selectItem(item);
+								recreate();
+								input.val("");
+							} else {
+								alert("Only lowercase alphanumeric and number names allowed.");
+							}
+							e.preventDefault();
+							return true;
+						} else if (e.keyCode === $.ui.keyCode.BACKSPACE) {
+							if (input.val() == "") {
+								var item = selected[selected.length - 1];
+								selected.splice(selected.length - 1, 1);
+								recreate();
+								if (!(item.indexOf("/") > 0))
+									input.val(item);
+								e.preventDefault();
+								return true;
+							}
+						}
+					})
+					.autocomplete({
+						minLength: 0,
+						source: source,
+						select: function(event, ui) {
+							selectItem(ui.item.id);
+							recreate();
+							input.val("");
+							return false;
+						}
+					});
+
+				input.data('ui-autocomplete')._renderItem = function(ul, item) {
+						return $('<li/>')
+							.data('item.autocomplete', item)
+							.append($('<a/>').text(item.toString()))
+							.appendTo(ul);
+					};
+
+				input.data('ui-autocomplete')._resizeMenu = function(ul, item) {
+						var ul = this.menu.element;
+						ul.outerWidth(Math.max(
+							ul.width('').outerWidth(),
+							selector.outerWidth()
+						));
+					};
+			});
+	}
+
 	$(function() {
 		$(".multichoice_selector").each(function() {
 			var ele = $(this);
 			var sel = ele.parent().find("select");
-			console.log(sel.attr("name"));
-			sel.css("display", "none");
+			sel.hide();
 
 			var options = [];
-
 			sel.find("option").each(function() {
 				var text = $(this).text();
 				options.push({
@@ -100,7 +221,19 @@
 			});
 
 			console.log(options);
-			ele.tagSelector(options, sel.attr("name"), sel);
-		})
+			ele.selectSelector(options, sel.attr("name"), sel);
+		});
+
+		$(".metapackage_selector").each(function() {
+			var input = $(this).parent().children("input[type='text']");
+			input.hide();
+			$(this).csvSelector(meta_packages, input.attr("name"), input);
+		});
+
+		$(".deps_selector").each(function() {
+			var input = $(this).parent().children("input[type='text']");
+			input.hide();
+			$(this).csvSelector(all_packages, input.attr("name"), input);
+		});
 	});
 })(jQuery);
