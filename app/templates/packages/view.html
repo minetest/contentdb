@@ -162,9 +162,9 @@
 		{% endfor %}
 	</ul>
 
-	<table class="table-topalign">
+	<!-- <table class="table-topalign">
 		<tr>
-			<td>
+			<td> -->
 				<h3>Dependencies</h3>
 				<ul>
 					{% for dep in package.dependencies %}
@@ -184,11 +184,11 @@
 						<li><i>No dependencies</i></li>
 					{% endfor %}
 				</ul>
-			</td>
+			<!-- </td>
 			<td>
 				<h3>Required by</h3>
 				<ul>
-					<!-- {% for p in package.dependents %}
+					{% for p in package.dependents %}
 						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }}</li>
 					{% else %}
 						{% if not package.softdependents %}
@@ -197,11 +197,11 @@
 					{% endfor %}
 					{% for p in package.softdependents %}
 						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }} [optional]</li>
-					{% endfor %} -->
+					{% endfor %}
 				</ul>
 			</td>
 		</tr>
-	</table>
+	</table> -->
 
 	{% if current_user.is_authenticated or requests %}
 		<h3>Edit Requests</h3>
