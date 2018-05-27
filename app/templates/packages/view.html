@@ -69,7 +69,12 @@
 				</tr>
 				<tr>
 					<td>Provides</td>
-					<td>{{ package.provides | join(', ') }}</td>
+					<td>{% for meta in package.provides %}
+						<a href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a>
+						{%- if not loop.last %}
+						,
+						{% endif %}
+					{% endfor %}</td>
 				</tr>
 				<tr>
 					<td>Author</td>
