@@ -46,7 +46,7 @@
 			<label for="{{ field.id }}" class="control-label">{{ label|safe }}</label>
 		{% endif %}
 		<div class="metapackage_selector bulletselector">
-			<input type="text" placeholder="Start typing to see suggestions">
+			<input type="text" placeholder="Comma-seperated values">
 			<div class="clearboth"></div>
 		</div>
 		{{ field(class_='form-control', **kwargs) }}
@@ -65,7 +65,7 @@
 			<label for="{{ field.id }}" class="control-label">{{ label|safe }}</label>
 		{% endif %}
 		<div class="deps_selector bulletselector">
-			<input type="text" placeholder="Start typing to see suggestions">
+			<input type="text" placeholder="Comma-seperated values">
 			<div class="clearboth"></div>
 		</div>
 		{{ field(class_='form-control', **kwargs) }}
