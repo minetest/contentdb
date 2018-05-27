@@ -401,7 +401,10 @@ class Package(db.Model):
 			return isOwner or user.rank.atLeast(UserRank.EDITOR)
 
 		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES:
-			return user.rank.atLeast(UserRank.MEMBER if isOwner else UserRank.EDITOR)
+			if isOwner:
+				return user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
+			else:
+				return user.rank.atLeast(UserRank.EDITOR)
 
 		# Editors can change authors, approve new packages, and approve releases
 		elif perm == Permission.CHANGE_AUTHOR or perm == Permission.APPROVE_NEW \
