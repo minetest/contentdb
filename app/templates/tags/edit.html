@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{% if tag %}
+		Edit {{ tag.title }}
+	{% else %}
+		New tag
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<p>
+		<a href="{{ url_for('tag_list_page') }}">Back to list</a> |
+		<a href="{{ url_for('createedit_tag_page') }}">New Tag</a>
+	</p>
+
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.title) }}
+		{% if tag %}
+			{{ render_field(form.name) }}
+		{% endif %}
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}

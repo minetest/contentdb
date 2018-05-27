@@ -63,6 +63,9 @@
 							{% if current_user.rank == current_user.rank.ADMIN %}
 								<li><a href="{{ url_for('admin_page') }}">Admin</a></li>
 							{% endif %}
+							{% if current_user.rank == current_user.rank.MODERATOR %}
+								<li><a href="{{ url_for('tag_list_page') }}">Tag Editor</a></li>
+							{% endif %}
 							<li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
 						</ul>
 					</li>
