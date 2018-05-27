@@ -20,6 +20,10 @@
 				{% else %}
 					A release is required before this package can be approved.
 				{% endif %}
+
+			{% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
+				You need to add at least one screenshot.
+
 			{% else %}
 				{% if package.screenshots.count() == 0 %}
 					<b>You should add at least one screenshot, but this isn't required.</b><br />
