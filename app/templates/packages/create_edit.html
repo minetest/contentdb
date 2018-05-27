@@ -10,6 +10,19 @@
 {% block content %}
 	<h2>Create Package</h2>
 
+	<script>
+		meta_packages = [
+			{% for m in mpackages %}
+				{# This is safe as name can only contain `[a-z0-9_]` #}
+				{
+					id: "{{ m.name }}",
+					value: "{{ m.name }}",
+					toString: function() { return "{{ m.name }}"; },
+				},
+			{% endfor %}
+		]
+	</script>
+
 	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field, render_mpackage_field %}
 	{{ form_includes() }}
 

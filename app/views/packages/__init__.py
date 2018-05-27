@@ -106,7 +106,7 @@ class PackageForm(FlaskForm):
 	desc          = TextAreaField("Long Description", [Optional(), Length(0,10000)])
 	type          = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
 	license       = QuerySelectField("License", [InputRequired()], query_factory=lambda: License.query, get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	provides_str  = StringField("Provides", [InputRequired(), Length(1,1000)])
+	provides_str  = StringField("Provides", [Optional(), Length(0,1000)])
 	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	repo          = StringField("Repo URL", [Optional(), URL()])
 	website       = StringField("Website URL", [Optional(), URL()])
@@ -174,6 +174,11 @@ def create_edit_package_page(author=None, name=None):
 		for m in mpackages:
 			package.provides.append(m)
 
+		if wasNew and package.type == PackageType.MOD and not package.name in mpackage_cache:
+			m = MetaPackage.GetOrCreate(package.name, mpackage_cache)
+			package.provides.append(m)
+
+
 		package.tags.clear()
 		for tag in form.tags.raw_data:
 			package.tags.append(Tag.query.get(tag))
@@ -188,7 +193,8 @@ def create_edit_package_page(author=None, name=None):
 
 	enableWizard = name is None and request.method != "POST"
 	return render_template("packages/create_edit.html", package=package, \
-			form=form, author=author, enable_wizard=enableWizard)
+			form=form, author=author, enable_wizard=enableWizard, \
+			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all())
 
 @app.route("/packages/<author>/<name>/approve/", methods=["POST"])
 @login_required

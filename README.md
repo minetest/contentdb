@@ -33,7 +33,7 @@ the current session:
 
 If you need to, reset the db like so:
 
-	python3 setup.py -d
+	python3 setup.py -t
 
 Then run the server:
 
@@ -42,6 +42,12 @@ Then run the server:
 Then view in your web browser: http://localhost:5000/
 
 ## How-tos
+
+### Start celery worker
+
+```sh
+FLASK_CONFIG=../config.cfg celery -A app.tasks.celery worker
+```
 
 ### Create migration
 

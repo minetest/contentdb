@@ -415,6 +415,19 @@ class MetaPackage(db.Model):
 		return ",".join([str(x) for x in list])
 
 	@staticmethod
+	def GetOrCreate(name, cache={}):
+		mp = cache.get(name)
+		if mp is None:
+			mp = MetaPackage.query.filter_by(name=name).first()
+
+		if mp is None:
+			mp = MetaPackage(name)
+			db.session.add(mp)
+
+		cache[name] = mp
+		return mp
+
+	@staticmethod
 	def SpecToList(spec, cache={}):
 		retval = []
 		arr = spec.split(",")
@@ -430,16 +443,7 @@ class MetaPackage(db.Model):
 			if not pattern.match(x):
 				continue
 
-			mp = cache.get(x)
-			if mp is None:
-				mp = MetaPackage.query.filter_by(name=x).first()
-
-			if mp is None:
-				mp = MetaPackage(x)
-				db.session.add(mp)
-
-			cache[x] = mp
-			retval.append(mp)
+			retval.append(MetaPackage.GetOrCreate(x, cache))
 
 		return retval
 

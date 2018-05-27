@@ -26,7 +26,7 @@
 			{% if not label %}{% set label=field.label.text %}{% endif %}
 			<label for="{{ field.id }}" class="control-label">{{ label|safe }}</label>
 		{% endif %}
-		<div class="multichoice_selector">
+		<div class="multichoice_selector bulletselector">
 			<input type="text" placeholder="Start typing to see suggestions">
 			<div class="clearboth"></div>
 		</div>
@@ -45,7 +45,7 @@
 			{% if not label %}{% set label=field.label.text %}{% endif %}
 			<label for="{{ field.id }}" class="control-label">{{ label|safe }}</label>
 		{% endif %}
-		<div class="metapackage_selector">
+		<div class="metapackage_selector bulletselector">
 			<input type="text" placeholder="Start typing to see suggestions">
 			<div class="clearboth"></div>
 		</div>
