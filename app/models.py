@@ -410,6 +410,39 @@ class MetaPackage(db.Model):
 	def __str__(self):
 		return self.name
 
+	@staticmethod
+	def ListToSpec(list):
+		return ",".join([str(x) for x in list])
+
+	@staticmethod
+	def SpecToList(spec, cache={}):
+		retval = []
+		arr = spec.split(",")
+
+		import re
+		pattern = re.compile("^([a-z0-9_]+)$")
+
+		for x in arr:
+			x = x.strip()
+			if x == "":
+				continue
+
+			if not pattern.match(x):
+				continue
+
+			mp = cache.get(x)
+			if mp is None:
+				mp = MetaPackage.query.filter_by(name=x).first()
+
+			if mp is None:
+				mp = MetaPackage(x)
+				db.session.add(mp)
+
+			cache[x] = mp
+			retval.append(mp)
+
+		return retval
+
 class Tag(db.Model):
 	id              = db.Column(db.Integer,    primary_key=True)
 	name            = db.Column(db.String(100), unique=True, nullable=False)

@@ -106,6 +106,7 @@ class PackageForm(FlaskForm):
 	desc          = TextAreaField("Long Description", [Optional(), Length(0,10000)])
 	type          = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
 	license       = QuerySelectField("License", [InputRequired()], query_factory=lambda: License.query, get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	provides_str  = StringField("Provides", [InputRequired(), Length(1,1000)])
 	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	repo          = StringField("Repo URL", [Optional(), URL()])
 	website       = StringField("Website URL", [Optional(), URL()])
@@ -144,6 +145,9 @@ def create_edit_package_page(author=None, name=None):
 		form = PackageForm(formdata=request.form, obj=package)
 
 	# Initial form class from post data and default data
+	if request.method == "GET" and package is not None:
+		form.provides_str.data = MetaPackage.ListToSpec(package.provides)
+
 	if request.method == "POST" and form.validate():
 		wasNew = False
 		if not package:
@@ -163,6 +167,12 @@ def create_edit_package_page(author=None, name=None):
 					"{} edited".format(package.title), package.getDetailsURL())
 
 		form.populate_obj(package) # copy to row
+
+		mpackage_cache = {}
+		package.provides.clear()
+		mpackages = MetaPackage.SpecToList(form.provides_str.data, mpackage_cache)
+		for m in mpackages:
+			package.provides.append(m)
 
 		package.tags.clear()
 		for tag in form.tags.raw_data:

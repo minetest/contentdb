@@ -10,7 +10,7 @@
 {% block content %}
 	<h2>Create Package</h2>
 
-	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field, render_mpackage_field %}
 	{{ form_includes() }}
 
 	<form method="POST" action="" class="tableform">
@@ -22,6 +22,7 @@
 		{{ render_field(form.desc, class_="pkg_meta") }}
 		{{ render_field(form.type, class_="pkg_meta") }}
 		{{ render_field(form.license, class_="pkg_meta") }}
+		{{ render_mpackage_field(form.provides_str, class_="pkg_meta", placeholder="Comma separated list") }}
 		{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
 
 		<div class="pkg_wiz_1">
