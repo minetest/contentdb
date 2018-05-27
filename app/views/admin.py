@@ -55,6 +55,16 @@ def admin_page():
 		elif action == "importdepends":
 			task = importAllDependencies.delay()
 			return redirect(url_for("check_task", id=task.id, r=url_for("admin_page")))
+		elif action == "modprovides":
+			packages = Package.query.filter_by(type=PackageType.MOD).all()
+			mpackage_cache = {}
+			for p in packages:
+				if len(p.provides) == 0:
+					p.provides.append(MetaPackage.GetOrCreate(p.name, mpackage_cache))
+
+			db.session.commit()
+			return redirect(url_for("admin_page"))
+
 		else:
 			flash("Unknown action: " + action, "error")
 
