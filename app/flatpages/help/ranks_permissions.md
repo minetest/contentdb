@@ -193,7 +193,7 @@ title: Ranks and Permissions
 			<th></th>
 			<th>✓</th> <!-- member -->
 			<th></th>
-			<th></th> <!-- trusted member -->
+			<th>✓</th> <!-- trusted member -->
 			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th></th>
