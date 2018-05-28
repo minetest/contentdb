@@ -31,9 +31,9 @@ from app.tasks.emails import sendVerifyEmail
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
-	display_name = StringField("Display name", [InputRequired(), Length(2, 20)])
-	email = StringField("Email")
-	rank = SelectField("Rank", [InputRequired()], choices=UserRank.choices(), coerce=UserRank.coerce, default=UserRank.NEW_MEMBER)
+	display_name = StringField("Display name", [Optional(), Length(2, 20)])
+	email = StringField("Email", [Optional(), Email()])
+	rank = SelectField("Rank", [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce, default=UserRank.NEW_MEMBER)
 	submit = SubmitField("Save")
 
 @app.route("/users/", methods=["GET"])
