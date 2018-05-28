@@ -30,16 +30,14 @@ from wtforms import *
 from wtforms.validators import *
 
 class CreatePackageReleaseForm(FlaskForm):
-	name	   = StringField("Name")
-	title	   = StringField("Title")
+	title	   = StringField("Title", [InputRequired(), Length(1, 30)])
 	uploadOpt  = RadioField ("Method", choices=[("upload", "File Upload")], default="upload")
 	vcsLabel   = StringField("VCS Commit or Branch", default="master")
 	fileUpload = FileField("File Upload")
 	submit	   = SubmitField("Save")
 
 class EditPackageReleaseForm(FlaskForm):
-	name     = StringField("Name")
-	title    = StringField("Title")
+	title    = StringField("Title", [InputRequired(), Length(1, 30)])
 	url      = StringField("URL", [URL])
 	task_id  = StringField("Task ID")
 	approved = BooleanField("Is Approved")
