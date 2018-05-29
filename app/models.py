@@ -186,7 +186,6 @@ class Notification(db.Model):
 class License(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(50), nullable=False, unique=True)
-	packages = db.relationship("Package", backref="license", lazy="dynamic")
 
 	def __init__(self, v):
 		self.name = v
@@ -327,7 +326,10 @@ class Package(db.Model):
 	type         = db.Column(db.Enum(PackageType))
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
-	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"))
+	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
+	license      = db.relationship("License", foreign_keys=[license_id])
+	media_license_id = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
+	media_license    = db.relationship("License", foreign_keys=[media_license_id])
 
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	soft_deleted = db.Column(db.Boolean, nullable=False, default=False)

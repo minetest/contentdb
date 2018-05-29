@@ -92,7 +92,14 @@
 				</tr>
 				<tr>
 					<td>License</td>
-					<td>{{ package.license.name }}</td>
+					<td>
+						{% if package.license != package.media_license %}
+							{{ package.license.name }} for code,<br />
+							{{ package.media_license.name }} for media.
+						{% else %}
+							{{ package.license.name }}
+						{% endif %}
+					</td>
 				</tr>
 				<tr>
 					<td>Added</td>

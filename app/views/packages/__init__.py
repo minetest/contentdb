@@ -116,6 +116,7 @@ class PackageForm(FlaskForm):
 	desc          = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])
 	type          = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
 	license       = QuerySelectField("License", [InputRequired()], query_factory=lambda: License.query, get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	media_license = QuerySelectField("Media License", [InputRequired()], query_factory=lambda: License.query, get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	provides_str  = StringField("Provides (mods included in package)", [Optional(), Length(0,1000)])
 	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	harddep_str   = StringField("Hard Dependencies", [Optional(), Length(0,1000)])
