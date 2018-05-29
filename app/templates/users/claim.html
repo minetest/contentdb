@@ -1,44 +1,46 @@
 {% extends "base.html" %}
 
 {% block title %}
-Verify forum account
+Creating an Account
 {% endblock %}
 
 {% block content %}
 	<div class="box box_grey">
 		<h2>{{ self.title() }}</h2>
 
-		<p>
-			Create an account by linking it to your forum account and optionally
-			your github account.
-		</p>
-
-		{% if current_user.is_authenticated %}
+		<div class="box-body">
 			<p>
-				Please log out to continue.
-			</p>
-			<p>
-				<a href="{{ url_for('user.logout', next=url_for('user_claim_page')) }}" class="button">Logout</a>
-			</p>
-		{% else %}
-			<p>
-				<b>Don't have a forum account?</b>
-				Unfortunately, you need a forum account to register.
-				This is because you also need to create forum topics for any packages
-				you may upload.
+				If you have a forum account, you'll need to prove that you own it
+				to get an account on ContentDB. You don't need a forum account to sign
+				up however.
 			</p>
 
-			<a href="https://forum.minetest.net/ucp.php?mode=register">
-				Create a Forum Account
-			</a>
-		{% endif %}
+			{% if current_user.is_authenticated %}
+				<p>
+					Please log out to continue.
+				</p>
+				<p>
+					<a href="{{ url_for('user.logout', next=url_for('user_claim_page')) }}" class="button">Logout</a>
+				</p>
+			{% else %}
+				<p>
+					<b>Don't have a forum account?</b>
+					You don't need one, however it's recommended to make the most
+					out of the Minetest community.
+				</p>
+
+				<a href="https://forum.minetest.net/ucp.php?mode=register">
+					Create a Forum Account
+				</a>
+			{% endif %}
+		</div>
 	</div>
 
 	{% if not current_user.is_authenticated %}
 		<div class="box box_grey">
 			<h2>Option 1 - Use GitHub field in forum profile</h2>
 
-			<form method="post" action="{{ url_for('user_claim_page') }}">
+			<form method="post" class="box-body" action="{{ url_for('user_claim_page') }}">
 				<input type="hidden" name="claim_type" value="github">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
@@ -59,10 +61,10 @@ Verify forum account
 			</form>
 		</div>
 
-		<!--<div class="box box_grey">
+		<div class="box box_grey">
 			<h2>Option 2 - Paste verification token into signature</h2>
 
-			<form method="post" action="{{ url_for('user_claim_page') }}">
+			<form method="post" class="box-body" action="{{ url_for('user_claim_page') }}">
 				<input type="hidden" name="claim_type" value="forum">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
@@ -93,6 +95,6 @@ Verify forum account
 
 				<input type="submit" value="Next">
 			</form>
-		</div>-->
+		</div>
 	{% endif %}
 {% endblock %}

@@ -25,9 +25,12 @@ from flask_wtf import FlaskForm
 from flask_user.forms import RegisterForm
 from wtforms import *
 from wtforms.validators import *
-from app.utils import rank_required, randomString
+from app.utils import rank_required, randomString, loginUser
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.emails import sendVerifyEmail
+from app.tasks.phpbbparser import getProfile
+from werkzeug.contrib.cache import SimpleCache
+cache = SimpleCache()
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
@@ -120,6 +123,11 @@ def user_claim_page():
 		if user is not None and method == "github":
 			return redirect(url_for("github_signin_page"))
 
+	token = cache.get("forum_claim_key_" + request.remote_addr)
+	if token is None:
+		token = randomString(32)
+		cache.set("forum_claim_key_" + request.remote_addr, token, 5*60)
+
 	if request.method == "POST":
 		ctype    = request.form.get("claim_type")
 		username = request.form.get("username")
@@ -130,12 +138,41 @@ def user_claim_page():
 			task = checkForumAccount.delay(username)
 			return redirect(url_for("check_task", id=task.id, r=url_for("user_claim_page", username=username, method="github")))
 		elif ctype == "forum":
-			token = request.form.get("token")
-			flash("Unimplemented", "error")
+			user = User.query.filter_by(forums_username=username).first()
+			if user is not None and user.rank.atLeast(UserRank.NEW_MEMBER):
+				flash("That user has already been claimed!", "error")
+				return redirect(url_for("user_claim_page", username=username))
+
+			# Get signature
+			sig = None
+			try:
+				profile = getProfile("https://forum.minetest.net", username)
+				sig = profile.signature
+			except IOError:
+				flash("Unable to get forum signature - does the user exist?", "error")
+				return redirect(url_for("user_claim_page", username=username))
+
+			# Look for key
+			if token in sig:
+				if user is None:
+					user = User(username)
+					user.forums_username = username
+					db.session.add(user)
+					db.session.commit()
+
+				if loginUser(user):
+					return redirect(url_for("user_profile_page", username=username))
+				else:
+					flash("Unable to login as user", "error")
+					return redirect(url_for("user_claim_page", username=username))
+
+			else:
+				flash("Could not find the key in your signature!", "error")
+				return redirect(url_for("user_claim_page", username=username))
 		else:
 			flash("Unknown claim type", "error")
 
-	return render_template("users/claim.html", username=username, key=randomString(32))
+	return render_template("users/claim.html", username=username, key=token)
 
 @app.route("/users/verify/")
 def verify_email_page():
