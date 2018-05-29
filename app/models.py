@@ -336,7 +336,7 @@ class Package(db.Model):
 	forums       = db.Column(db.Integer,     nullable=True)
 
 	provides = db.relationship("MetaPackage", secondary=provides, lazy="subquery",
-			backref=db.backref("packages", lazy=True))
+			backref=db.backref("packages", lazy="dynamic"))
 
 	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 

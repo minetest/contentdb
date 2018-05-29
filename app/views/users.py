@@ -49,6 +49,10 @@ def user_profile_page(username):
 	if not user:
 		abort(404)
 
+	packages = user.packages.filter_by(soft_deleted=False)
+	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
+		packages = packages.filter_by(approved=True)
+
 	form = None
 	if user.checkPerm(current_user, Permission.CHANGE_DNAME) or \
 			user.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
@@ -92,7 +96,7 @@ def user_profile_page(username):
 
 	# Process GET or invalid POST
 	return render_template("users/user_profile_page.html",
-			user=user, form=form)
+			user=user, form=form, packages=packages)
 
 
 @app.route("/users/claim/", methods=["GET", "POST"])

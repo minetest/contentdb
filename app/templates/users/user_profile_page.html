@@ -49,7 +49,7 @@
 	<h2>Packages</h2>
 	<div class="box-body">
 		<ul>
-			{% for p in user.packages %}
+			{% for p in packages %}
 				<li><a href="{{ p.getDetailsURL() }}">
 					{{ p.title }} by {{ p.author.display_name }}
 				</a></li>

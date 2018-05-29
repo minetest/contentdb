@@ -8,5 +8,5 @@ Packages providing '{{ mpackage.name }}''
 	<h1>Packages providing '{{ mpackage.name }}''</h1>
 
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
-	{{ render_pkggrid(mpackage.packages) }}
+	{{ render_pkggrid(mpackage.packages.filter_by(approved=True, soft_deleted=False).all()) }}
 {% endblock %}
