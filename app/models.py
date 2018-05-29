@@ -215,18 +215,19 @@ class PackageType(enum.Enum):
 
 
 class PackagePropertyKey(enum.Enum):
-	name         = "Name"
-	title        = "Title"
-	shortDesc    = "Short Description"
-	desc         = "Description"
-	type         = "Type"
-	license      = "License"
-	tags         = "Tags"
-	provides     = "Provides"
-	repo         = "Repository"
-	website      = "Website"
-	issueTracker = "Issue Tracker"
-	forums       = "Forum Topic ID"
+	name          = "Name"
+	title         = "Title"
+	shortDesc     = "Short Description"
+	desc          = "Description"
+	type          = "Type"
+	license       = "License"
+	media_license = "Media License"
+	tags          = "Tags"
+	provides      = "Provides"
+	repo          = "Repository"
+	website       = "Website"
+	issueTracker  = "Issue Tracker"
+	forums        = "Forum Topic ID"
 
 	def convert(self, value):
 		if self == PackagePropertyKey.tags:

@@ -272,4 +272,4 @@ def delete_package_page(package):
 
 	return redirect(url)
 
-from . import todo, screenshots, editrequests, releases
+from . import todo, screenshots, releases

@@ -68,7 +68,7 @@ def _do_login_user(user, remember_me=False):
 
 	user.active = True
 	if not user.rank.atLeast(UserRank.NEW_MEMBER):
-		user.rank = UserRank.NEW_MEMBER
+		user.rank = UserRank.MEMBER
 
 	db.session.commit()
 

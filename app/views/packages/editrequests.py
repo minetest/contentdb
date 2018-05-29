@@ -58,8 +58,13 @@ def create_edit_editrequest_page(package, id=None):
 		edited_package = Package(package)
 		erequest.applyAll(edited_package)
 
-
 	form = EditRequestForm(request.form, obj=edited_package)
+	if request.method == "GET":
+		deps = edited_package.dependencies
+		form.harddep_str.data  = ",".join([str(x) for x in deps if not x.optional])
+		form.softdep_str.data  = ",".join([str(x) for x in deps if     x.optional])
+		form.provides_str.data = MetaPackage.ListToSpec(edited_package.provides)
+
 	if request.method == "POST" and form.validate():
 		if erequest is None:
 			erequest = EditRequest()

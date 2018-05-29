@@ -10,40 +10,10 @@
 {% block content %}
 	<h1>Create Package</h1>
 
-	<script>
-		meta_packages = [
-			{% for m in mpackages %}
-				{# This is safe as name can only contain `[a-z0-9_]` #}
-				{
-					id: "{{ m.name }}",
-					value: "{{ m.name }}",
-					toString: function() { return "{{ m.name }}"; },
-				},
-			{% endfor %}
-		]
 
-		function escape(unsafe) {
-			return unsafe
-				.replace(/&/g, "&amp;")
-				.replace(/</g, "&lt;")
-				.replace(/>/g, "&gt;")
-				.replace(/"/g, "&quot;")
-				.replace(/'/g, "&#039;");
-		}
-
-		all_packages = meta_packages.slice();
-
-		{% for p in packages %}
-			all_packages.push({
-				id: "{{ p.author.username }}/{{ p.name }}",
-				value: escape({{ p.title | tojson }} + " by " + {{ p.author.display_name | tojson }}),
-				toString: function() { return  escape({{ p.title | tojson }} + " by " + {{ p.author.display_name | tojson }} + " only"); },
-			});
-		{% endfor %}
-	</script>
-
-	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field, render_mpackage_field, render_deps_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field, render_mpackage_field, render_deps_field, package_lists %}
 	{{ form_includes() }}
+	{{ package_lists() }}
 
 	<form method="POST" action="" class="tableform">
 		{{ form.hidden_tag() }}

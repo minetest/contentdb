@@ -117,9 +117,9 @@
 					<li><a href="{{ package.getEditURL() }}">Edit</a></li>
 					<li><a href="{{ package.getNewScreenshotURL() }}">Add screenshot</a></li>
 				{% endif %}
-				{% if current_user.is_authenticated %}
+				{# {% if current_user.is_authenticated %}
 					<li><a href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a></li>
-				{% endif %}
+				{% endif %} #}
 				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 					<li><a href="{{ package.getCreateReleaseURL() }}">Create Release</a></li>
 				{% endif %}
@@ -216,19 +216,21 @@
 		</tr>
 	</table> -->
 
-	{% if current_user.is_authenticated or requests %}
-		<h3>Edit Requests</h3>
+	{#
+		{% if current_user.is_authenticated or requests %}
+			<h3>Edit Requests</h3>
 
-		<ul>
-			{% for r in requests %}
-				<li>
-					<a href="{{ r.getURL() }}">{{ r.title }}</a>
-					by
-					<a href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>
-				</li>
-			{% else %}
-				<li>No edit requests have been made.</li>
-			{% endfor %}
-		</ul>
-	{% endif %}
+			<ul>
+				{% for r in requests %}
+					<li>
+						<a href="{{ r.getURL() }}">{{ r.title }}</a>
+						by
+						<a href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>
+					</li>
+				{% else %}
+					<li>No edit requests have been made.</li>
+				{% endfor %}
+			</ul>
+		{% endif %}
+	#}
 {% endblock %}

@@ -20,6 +20,40 @@
 	<script src="/static/tagselector.js"></script>
 {% endmacro %}
 
+{% macro package_lists() -%}
+	<script>
+		meta_packages = [
+			{% for m in mpackages %}
+				{# This is safe as name can only contain `[a-z0-9_]` #}
+				{
+					id: "{{ m.name }}",
+					value: "{{ m.name }}",
+					toString: function() { return "{{ m.name }}"; },
+				},
+			{% endfor %}
+		]
+
+		function escape(unsafe) {
+			return unsafe
+				.replace(/&/g, "&amp;")
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;")
+				.replace(/"/g, "&quot;")
+				.replace(/'/g, "&#039;");
+		}
+
+		all_packages = meta_packages.slice();
+
+		{% for p in packages %}
+			all_packages.push({
+				id: "{{ p.author.username }}/{{ p.name }}",
+				value: escape({{ p.title | tojson }} + " by " + {{ p.author.display_name | tojson }}),
+				toString: function() { return  escape({{ p.title | tojson }} + " by " + {{ p.author.display_name | tojson }} + " only"); },
+			});
+		{% endfor %}
+	</script>
+{% endmacro %}
+
 {% macro render_multiselect_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
 	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
