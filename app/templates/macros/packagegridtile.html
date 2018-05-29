@@ -1,6 +1,6 @@
 {% macro render_pkgtile(package) -%}
 	<li><a href="{{ package.getDetailsURL() }}"
-		style="background-image: url({{ package.getMainScreenshotURL() or '/static/placeholder.png' }});">
+		style="background-image: url({{ package.getThumbnailURL() or '/static/placeholder.png' }});">
 		<div class="packagegridscrub"></div>
 		<div class="packagegridinfo">
 			<h3>{{ package.title }} by {{ package.author.display_name }}</h3>

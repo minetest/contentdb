@@ -374,8 +374,17 @@ class Package(db.Model):
 			"repo": self.repo,
 			"url": base_url + self.getDownloadURL(),
 			"release": self.getDownloadRelease().id if self.getDownloadRelease() is not None else None,
-			"screenshots": [base_url + ss.url for ss in self.screenshots]
+			"screenshots": [base_url + ss.url for ss in self.screenshots],
+			"thumbnail": base_url + self.getThumbnailURL()
 		}
+
+	def getThumbnailURL(self):
+		screenshot = self.screenshots.filter_by(approved=True).first()
+		return screenshot.getThumbnailURL() if screenshot is not None else None
+
+	def getMainScreenshotURL(self):
+		screenshot = self.screenshots.filter_by(approved=True).first()
+		return screenshot.url if screenshot is not None else None
 
 	def getDetailsURL(self):
 		return url_for("package_page",
@@ -408,10 +417,6 @@ class Package(db.Model):
 	def getDownloadURL(self):
 		return url_for("package_download_page",
 				author=self.author.username, name=self.name)
-
-	def getMainScreenshotURL(self):
-		screenshot = self.screenshots.filter_by(approved=True).first()
-		return screenshot.url if screenshot is not None else None
 
 	def getDownloadRelease(self):
 		for rel in self.releases:
@@ -575,7 +580,7 @@ class PackageScreenshot(db.Model):
 				id=self.id)
 
 	def getThumbnailURL(self):
-		return self.url  # TODO
+		return self.url.replace("/uploads/", "/thumbnails/332x221/")
 
 class EditRequest(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
