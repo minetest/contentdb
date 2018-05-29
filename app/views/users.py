@@ -29,8 +29,6 @@ from app.utils import rank_required, randomString, loginUser
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.emails import sendVerifyEmail
 from app.tasks.phpbbparser import getProfile
-from werkzeug.contrib.cache import SimpleCache
-cache = SimpleCache()
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
@@ -176,10 +174,12 @@ def user_claim_page():
 		if user is not None and method == "github":
 			return redirect(url_for("github_signin_page"))
 
-	token = cache.get("forum_claim_key_" + request.remote_addr)
-	if token is None:
+	token = None
+	if "forum_token" in session:
+		token = session["forum_token"]
+	else:
 		token = randomString(32)
-		cache.set("forum_claim_key_" + request.remote_addr, token, 5*60)
+		session["forum_token"] = token
 
 	if request.method == "POST":
 		ctype	= request.form.get("claim_type")
