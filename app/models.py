@@ -121,12 +121,15 @@ class User(db.Model, UserMixin):
 	packages      = db.relationship("Package", backref="author", lazy="dynamic")
 	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
 
-	def __init__(self, username):
+	def __init__(self, username, active=False, email=None, password=None):
 		import datetime
 
 		self.username = username
 		self.confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
+		self.active = active
+		self.email = email
+		self.password = password
 		self.rank = UserRank.NOT_JOINED
 
 	def canAccessTodoList(self):

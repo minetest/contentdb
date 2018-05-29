@@ -62,7 +62,11 @@ def flatpage(path):
 
 @app.before_request
 def do_something_whenever_a_request_comes_in():
-	if current_user.is_authenticated and current_user.rank == UserRank.BANNED:
-		flash("You have been banned.", "error")
-		logout_user()
-		return redirect(url_for('user.login'))
+	if current_user.is_authenticated:
+		if current_user.rank == UserRank.BANNED:
+			flash("You have been banned.", "error")
+			logout_user()
+			return redirect(url_for('user.login'))
+		elif current_user.rank == UserRank.NOT_JOINED:
+			current_user.rank = UserRank.MEMBER
+			db.session.commit()

@@ -95,5 +95,21 @@ Creating an Account
 				<input type="submit" value="Next">
 			</form>
 		</div>
+
+		<div class="box box_grey">
+			<h2>Option 3 - Email/password sign up</h2>
+
+			<div class="box-body">
+				<p>
+					<b>Only do this if you don't have a forum account!</b>
+				</p>
+				<p>
+					If you have a forum account, please use one of the other two
+					options.
+				</p>
+
+				<a class="button" href="{{ url_for('user.register') }}">Register</a>
+			</div>
+		</div>
 	{% endif %}
 {% endblock %}
