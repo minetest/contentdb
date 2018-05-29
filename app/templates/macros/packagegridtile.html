@@ -1,9 +1,15 @@
-{% macro render_pkgtile(package) -%}
+{% macro render_pkgtile(package, show_author) -%}
 	<li><a href="{{ package.getDetailsURL() }}"
 		style="background-image: url({{ package.getThumbnailURL() or '/static/placeholder.png' }});">
 		<div class="packagegridscrub"></div>
 		<div class="packagegridinfo">
-			<h3>{{ package.title }} by {{ package.author.display_name }}</h3>
+			<h3>
+				{{ package.title }}
+
+				{% if show_author %}
+					by {{ package.author.display_name }}
+				{% endif %}
+			</h3>
 
 			<p>
 				{{ package.shortDesc }}
@@ -27,10 +33,10 @@
 	</a></li>
 {% endmacro %}
 
-{% macro render_pkggrid(packages) -%}
+{% macro render_pkggrid(packages, show_author=True) -%}
 	<ul class="packagegrid">
 		{% for p in packages %}
-			{{ render_pkgtile(p) }}
+			{{ render_pkgtile(p, show_author) }}
 		{% else %}
 			<li><i>No packages available</i></ul>
 		{% endfor %}
