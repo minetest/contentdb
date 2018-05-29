@@ -36,6 +36,7 @@ def defineDummyData(licenses, tags, ruben):
 
 	jeija = User("Jeija")
 	jeija.github_username = "Jeija"
+	jeija.forums_username = "Jeija"
 	db.session.add(jeija)
 
 

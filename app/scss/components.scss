@@ -243,11 +243,14 @@ select:not([multiple]) {
 .alert .alert_right, .alert > form {
 	display: inline-block;
 	margin: 0;
-	padding: 0;
 	position: absolute;
 	top: 0;
 	right: 0;
 	bottom: 0;
+}
+
+.alert .alert_right:not(.button) {
+	padding: 0;
 }
 
 .alert .alert_right form {

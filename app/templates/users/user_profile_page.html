@@ -6,6 +6,14 @@
 
 {% block content %}
 
+{% if not current_user.is_authenticated and user.rank == user.rank.NOT_JOINED and user.forums_username %}
+<div class="box box_grey alert alert-info">
+	Is this you? Claim your account now!
+
+	<a class="alert_right button" href="{{ url_for('user_claim_page', username=user.forums_username) }}">Claim</a>
+</div>
+{% endif %}
+
 <div class="box box_grey">
 	<h2>{{ user.display_name }}</h2>
 

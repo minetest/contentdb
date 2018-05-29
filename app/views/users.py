@@ -194,7 +194,7 @@ def user_claim_page():
 			user = User.query.filter_by(forums_username=username).first()
 			if user is not None and user.rank.atLeast(UserRank.NEW_MEMBER):
 				flash("That user has already been claimed!", "error")
-				return redirect(url_for("user_claim_page", username=username))
+				return redirect(url_for("user_claim_page"))
 
 			# Get signature
 			sig = None
