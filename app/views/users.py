@@ -54,6 +54,8 @@ def user_profile_page(username):
 	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
 		packages = packages.filter_by(approved=True)
 
+	packages = packages.order_by(db.asc(Package.title))
+
 	form = None
 	if user.checkPerm(current_user, Permission.CHANGE_DNAME) or \
 			user.checkPerm(current_user, Permission.CHANGE_EMAIL) or \

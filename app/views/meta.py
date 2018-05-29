@@ -22,13 +22,13 @@ from app.models import *
 
 @app.route("/metapackages/")
 def meta_package_list_page():
-    mpackages = MetaPackage.query.order_by(db.desc(MetaPackage.name)).all()
-    return render_template("meta/list.html", mpackages=mpackages)
+	mpackages = MetaPackage.query.order_by(db.asc(MetaPackage.name)).all()
+	return render_template("meta/list.html", mpackages=mpackages)
 
 @app.route("/metapackages/<name>/")
 def meta_package_page(name):
-    mpackage = MetaPackage.query.filter_by(name=name).first()
-    if mpackage is None:
-        abort(404)
+	mpackage = MetaPackage.query.filter_by(name=name).first()
+	if mpackage is None:
+		abort(404)
 
-    return render_template("meta/view.html", mpackage=mpackage)
+	return render_template("meta/view.html", mpackage=mpackage)
