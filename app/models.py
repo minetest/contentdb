@@ -369,6 +369,7 @@ class Package(db.Model):
 			setattr(self, e.name, getattr(package, e.name))
 
 	def getAsDictionary(self, base_url):
+		tnurl = self.getThumbnailURL()
 		return {
 			"name": self.name,
 			"title": self.title,
@@ -380,7 +381,7 @@ class Package(db.Model):
 			"url": base_url + self.getDownloadURL(),
 			"release": self.getDownloadRelease().id if self.getDownloadRelease() is not None else None,
 			"screenshots": [base_url + ss.url for ss in self.screenshots],
-			"thumbnail": base_url + self.getThumbnailURL()
+			"thumbnail": (base_url + tnurl) if tnurl is not None else None
 		}
 
 	def getThumbnailURL(self):
