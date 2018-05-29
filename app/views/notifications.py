@@ -23,4 +23,11 @@ from app.models import *
 @app.route("/notifications/")
 @login_required
 def notifications_page():
-    return render_template("notifications/list.html")
+	return render_template("notifications/list.html")
+
+@app.route("/notifications/clear/", methods=["POST"])
+@login_required
+def clear_notifications_page():
+	current_user.notifications.clear()
+	db.session.commit()
+	return redirect(url_for("notifications_page"))

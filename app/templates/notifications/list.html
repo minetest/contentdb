@@ -5,6 +5,12 @@ Notifications
 {% endblock %}
 
 {% block content %}
+	{% if current_user.notifications %}
+		<form method="post" action="{{ url_for('clear_notifications_page') }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input type="submit" value="Clear All" />
+		</form>
+	{% endif %}
 	<ul>
 		{% for n in current_user.notifications %}
 			<li><a href="{{ n.url }}">
