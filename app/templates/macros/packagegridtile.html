@@ -8,6 +8,21 @@
 			<p>
 				{{ package.shortDesc }}
 			</p>
+
+
+			{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
+				<p style="color:#f33;">
+					<b>Warning:</b> Non-free code and media.
+				</p>
+			{% elif not package.license.is_foss and package.type != package.type.TXP %}
+				<p style="color:#f33;">
+					<b>Warning:</b> Non-free code.
+				</p>
+			{% elif not package.media_license.is_foss %}
+				<p style="color:#f33;">
+					<b>Warning:</b> Non-free media.
+				</p>
+			{% endif %}
 		</div>
 	</a></li>
 {% endmacro %}

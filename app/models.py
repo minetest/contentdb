@@ -184,11 +184,13 @@ class Notification(db.Model):
 
 
 class License(db.Model):
-	id = db.Column(db.Integer, primary_key=True)
-	name = db.Column(db.String(50), nullable=False, unique=True)
+	id      = db.Column(db.Integer, primary_key=True)
+	name    = db.Column(db.String(50), nullable=False, unique=True)
+	is_foss = db.Column(db.Boolean,    nullable=False, default=True)
 
-	def __init__(self, v):
+	def __init__(self, v, is_foss=True):
 		self.name = v
+		self.is_foss = is_foss
 
 	def __str__(self):
 		return self.name

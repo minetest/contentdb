@@ -359,8 +359,13 @@ for tag in ["Inventory", "Mapgen", "Building", \
 licenses = {}
 for license in ["GPLv2.1", "GPLv3", "LGPLv2.1", "LGPLv3", "AGPLv2.1", "AGPLv3",
 				"Apache", "BSD 3-Clause", "BSD 2-Clause", "CC0", "CC-BY-SA",
-				"CC-BY", "CC-BY-NC-SA", "MIT", "ZLib"]:
+				"CC-BY", "MIT", "ZLib"]:
 	row = License(license)
+	licenses[row.name] = row
+	db.session.add(row)
+
+for license in ["CC-BY-NC-SA"]:
+	row = License(license, False)
 	licenses[row.name] = row
 	db.session.add(row)
 
