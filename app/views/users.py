@@ -101,8 +101,61 @@ def user_profile_page(username):
 	return render_template("users/user_profile_page.html",
 			user=user, form=form, packages=packages)
 
+class SetPasswordForm(FlaskForm):
+	email = StringField("Email (Optional)", [Optional(), Email()])
+	password = PasswordField("New password", [InputRequired(), Length(2, 20)])
+	password2 = PasswordField("Verify password", [InputRequired(), Length(2, 20)])
+	submit = SubmitField("Save")
 
-@app.route("/users/claim/", methods=["GET", "POST"])
+@app.route("/user/set-password/", methods=["GET", "POST"])
+@login_required
+def set_password_page():
+	if current_user.password is not None:
+		return redirect(url_for("user.change_password"))
+
+	form = SetPasswordForm(request.form)
+	if request.method == "POST" and form.validate():
+		one = form.password.data
+		two = form.password2.data
+		if one == two:
+			# Hash password
+			hashed_password = user_manager.hash_password(form.password.data)
+
+			# Change password
+			user_manager.update_password(current_user, hashed_password)
+
+			# Send 'password_changed' email
+			if user_manager.enable_email and user_manager.send_password_changed_email and current_user.email:
+				emails.send_password_changed_email(current_user)
+
+			# Send password_changed signal
+			signals.user_changed_password.send(current_app._get_current_object(), user=current_user)
+
+			# Prepare one-time system message
+			flash('Your password has been changed successfully.', 'success')
+
+			newEmail = form["email"].data
+			if newEmail != current_user.email and newEmail.strip() != "":
+				token = randomString(32)
+
+				ver = UserEmailVerification()
+				ver.user = current_user
+				ver.token = token
+				ver.email = newEmail
+				db.session.add(ver)
+				db.session.commit()
+
+				task = sendVerifyEmail.delay(newEmail, token)
+				return redirect(url_for("check_task", id=task.id, r=url_for("user_profile_page", username=current_user.username)))
+			else:
+				return redirect(url_for("user_profile_page", username=current_user.username))
+		else:
+			flash("Passwords do not match", "error")
+
+	return render_template("users/set_password.html", form=form)
+
+
+@app.route("/user/claim/", methods=["GET", "POST"])
 def user_claim_page():
 	username = request.args.get("username")
 	if username is None:
@@ -129,7 +182,7 @@ def user_claim_page():
 		cache.set("forum_claim_key_" + request.remote_addr, token, 5*60)
 
 	if request.method == "POST":
-		ctype    = request.form.get("claim_type")
+		ctype	= request.form.get("claim_type")
 		username = request.form.get("username")
 
 		if username is None or len(username.strip()) < 2:
@@ -161,7 +214,7 @@ def user_claim_page():
 					db.session.commit()
 
 				if loginUser(user):
-					return redirect(url_for("user_profile_page", username=username))
+					return redirect(url_for("set_password_page"))
 				else:
 					flash("Unable to login as user", "error")
 					return redirect(url_for("user_claim_page", username=username))

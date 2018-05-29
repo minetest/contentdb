@@ -97,7 +97,7 @@ class User(db.Model, UserMixin):
 
 	# User authentication information
 	username = db.Column(db.String(50), nullable=False, unique=True)
-	password = db.Column(db.String(255), nullable=False, server_default="")
+	password = db.Column(db.String(255), nullable=True)
 	reset_password_token = db.Column(db.String(100), nullable=False, server_default="")
 
 	rank = db.Column(db.Enum(UserRank))

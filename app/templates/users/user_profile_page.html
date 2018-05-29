@@ -42,6 +42,18 @@
 				{% endif %}
 			</td>
 		</tr>
+		{% if user == current_user %}
+			<tr>
+				<td>Password:</td>
+				<td>
+					{% if user.password %}
+						Set | <a href="{{ url_for('user.change_password') }}">Change</a>
+					{% else %}
+						Not set | <a href="{{ url_for('set_password_page') }}">Set</a>
+					{% endif %}
+				</td>
+			</tr>
+		{% endif %}
 	</table>
 </div>
 
