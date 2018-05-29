@@ -11,9 +11,11 @@ Sign in
 		<h2>{%trans%}Sign in{%endtrans%}</h2>
 
 		<form action="" method="POST" class="form box-body" role="form">
-			<a href="{{ url_for('github_signin_page') }}">GitHub</a>
+			<h3>Sign in with Github</h3>
+			<p><a class="button" href="{{ url_for('github_signin_page') }}">GitHub</a></p>
 
 
+			<h3>Sign in with username/password</h3>
 			{{ form.hidden_tag() }}
 
 			{# Username or Email field #}
