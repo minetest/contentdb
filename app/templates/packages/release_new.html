@@ -9,7 +9,7 @@
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.title) }}
+		{{ render_field(form.title, placeholder="Human readable. Eg: 1.0.0 or 2018-05-28") }}
 		{{ render_field(form.uploadOpt) }}
 		{% if package.canMakeReleaseFromVCS() %}
 			{{ render_field(form.vcsLabel) }}
