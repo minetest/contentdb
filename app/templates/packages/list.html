@@ -11,7 +11,7 @@
 		<input type="submit" value="Search" />
 
 		<p>
-			Found {{ packages | count }} packages.
+			Found {{ packages_count }} packages.
 		</p>
 	</form>
 
@@ -31,4 +31,10 @@
 
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 	{{ render_pkggrid(packages) }}
+
+	<ul class="buttonset linedbuttonset">
+		{% if prev_url %}<li><a href="{{ prev_url }}">Previous</a></li>{% endif %}
+		<li>{{ page }} / {{ page_max }}</li>
+		{% if next_url %}<li><a href="{{ next_url }}">Next</a></li> {% endif %}
+	</ul>
 {% endblock %}

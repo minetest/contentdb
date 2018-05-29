@@ -58,9 +58,19 @@ def packages_page():
 				for package in query.all() if package.getDownloadRelease() is not None]
 		return jsonify(pkgs)
 	else:
+		page  = int(request.args.get("page") or 1)
+		num   = min(42, int(request.args.get("n") or 100))
+		query = query.paginate(page, num, True)
+
+		next_url = url_for("packages_page", type=type.toName(), q=search, page=query.next_num) \
+				if query.has_next else None
+		prev_url = url_for("packages_page", type=type.toName(), q=search, page=query.prev_num) \
+				if query.has_prev else None
+
 		tags = Tag.query.all()
-		return render_template("packages/list.html", title=title, packages=query.all(), \
-				query=search, tags=tags, type=None if type is None else type.toName())
+		return render_template("packages/list.html", title=title, packages=query.items, \
+				query=search, tags=tags, type=None if type is None else type.toName(), \
+				next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, packages_count=query.total)
 
 
 def getReleases(package):
