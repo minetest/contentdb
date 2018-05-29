@@ -580,7 +580,7 @@ class PackageScreenshot(db.Model):
 				id=self.id)
 
 	def getThumbnailURL(self):
-		return self.url.replace("/uploads/", "/thumbnails/332x221/")
+		return self.url.replace("/uploads/", "/thumbnails/350x233/")
 
 class EditRequest(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

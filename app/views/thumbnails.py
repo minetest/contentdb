@@ -21,20 +21,21 @@ from app import app
 import glob, os
 from PIL import Image
 
-ALLOWED_RESOLUTIONS=[(332,221)]
+ALLOWED_RESOLUTIONS=[(350,233)]
 
 def mkdir(path):
 	if not os.path.isdir(path):
 		os.mkdir(path)
 
+mkdir("app/public/thumbnails/")
+
 @app.route("/thumbnails/<img>")
 @app.route("/thumbnails/<int:w>x<int:h>/<img>")
-def make_thumbnail(img, w=332, h=221):
+def make_thumbnail(img, w=350, h=233):
 	if not (w, h) in ALLOWED_RESOLUTIONS:
 		abort(403)
 
-	mkdir("app/public/thumbnails/")
-	mkdir("app/public/thumbnails/332x221/")
+	mkdir("app/public/thumbnails/{}x{}/".format(w, h))
 
 	cache_filepath  = "public/thumbnails/{}x{}/{}".format(w, h, img)
 	source_filepath = "public/uploads/" + img
