@@ -10,6 +10,12 @@
 {% block content %}
 	<h1>Create Package</h1>
 
+	<div class="box box_grey alert alert-info">
+		Have you read the Package Inclusion Policy and Guidance yet?
+
+		<a class="alert_right button" href="{{ url_for('flatpage', path='policy_and_guidance') }}">View</a>
+	</div>
+
 
 	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field, render_mpackage_field, render_deps_field, package_lists %}
 	{{ form_includes() }}
