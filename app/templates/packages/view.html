@@ -249,4 +249,13 @@
 			</ul>
 		{% endif %}
 	#}
+
+	{% if alternatives %}
+		<h3>Alternatives</h3>
+		<ul>
+			{% for p in alternatives %}
+				<li><a href="{{ p.getDetailsURL() }}">{{ p.title }} by {{ p.author.display_name }}</a></li>
+			{% endfor %}
+		</ul>
+	{% endif %}
 {% endblock %}

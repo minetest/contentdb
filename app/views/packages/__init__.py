@@ -88,9 +88,19 @@ def package_page(package):
 	else:
 		clearNotifications(package.getDetailsURL())
 
+		alternatives = None
+		if package.type == PackageType.MOD:
+			alternatives = Package.query \
+					.filter_by(name=package.name, type=PackageType.MOD, soft_deleted=False) \
+					.filter(Package.id != package.id) \
+					.order_by(db.asc(Package.title)) \
+					.all()
+
 		releases = getReleases(package)
 		requests = [r for r in package.requests if r.status == 0]
-		return render_template("packages/view.html", package=package, releases=releases, requests=requests)
+		return render_template("packages/view.html", \
+				package=package, releases=releases, requests=requests, \
+				alternatives=alternatives)
 
 
 @app.route("/packages/<author>/<name>/download/")
