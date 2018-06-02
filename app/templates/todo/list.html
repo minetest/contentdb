@@ -5,8 +5,10 @@
 {% endblock %}
 
 {% block content %}
-	{% if canApproveNew %}
-		<h2>Packages Awaiting Approval</h2>
+	<h2>Awaiting Approval</h2>
+
+	{% if canApproveNew and packages %}
+		<h3>Packages</h3>
 		<ul>
 			{% for p in packages %}
 				<li><a href="{{ p.getDetailsURL() }}">
@@ -18,8 +20,8 @@
 		</ul>
 	{% endif %}
 
-	{% if canApproveScn %}
-		<h2>Screenshots Awaiting Approval</h2>
+	{% if canApproveScn and screenshots %}
+		<h3>Screenshots</h3>
 		<ul>
 			{% for s in screenshots %}
 				<li>
@@ -35,8 +37,8 @@
 		</ul>
 	{% endif %}
 
-	{% if canApproveRel %}
-		<h2>Releases Awaiting Approval</h2>
+	{% if canApproveRel and releases %}
+		<h3>Releases</h3>
 		<ul>
 			{% for r in releases %}
 				<li>
@@ -52,11 +54,17 @@
 		</ul>
 	{% endif %}
 
-	<h2>Forum Topics without a Package</h2>
+	{% if not (packages or screenshots or releases) %}
+		<p>
+			<i>All done!</i>
+		</p>
+	{% endif %}
+
+	<h2>Unadded Topic List</h2>
 
 	<p>
 		There are
 		<a href="{{ url_for('todo_topics_page') }}">{{ topics_to_add }} packages</a>
-		to be added to cdb.
+		to be added to cdb, based on forum topics picked up by Krock's mod search.
 	</p>
 {% endblock %}

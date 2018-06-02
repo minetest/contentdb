@@ -60,5 +60,5 @@ rm db.sqlite && python setup.py -t && FLASK_CONFIG=../config.cfg FLASK_APP=app/_
 FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db migrate
 
 # Run migration
-FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db migrate
+FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db upgrade
 ```

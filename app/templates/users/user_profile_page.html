@@ -100,24 +100,31 @@
 
 {% if topics_to_add %}
 	<div class="box box_grey">
-		<h2>Topics to Add</h2>
+		<h2>Unadded Packages</h2>
 
-		<table class="box-body">
-			<tr>
-				<th>Id</th>
-				<th>Title</th>
-				<th>Name</th>
-				<th>Link</th>
-			</tr>
-			{% for topic in topics_to_add %}
+		<div class="box-body">
+			<p>
+				List of your topics without a matching package.
+				Powered by Krock's Mod Search.
+			</p>
+
+			<table>
 				<tr>
-					<td>{{ topic.topic_id }}</td>
-					<td>[{{ topic.getType().value }}] <a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a></td>
-					<td>{{ topic.name or ""}}</td>
-					<td><a href="{{ topic.link }}">{{ topic.link | domain }}</a></td>
+					<th>Id</th>
+					<th>Title</th>
+					<th>Name</th>
+					<th>Link</th>
 				</tr>
-			{% endfor %}
-		</table>
+				{% for topic in topics_to_add %}
+					<tr>
+						<td>{{ topic.topic_id }}</td>
+						<td>[{{ topic.getType().value }}] <a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a></td>
+						<td>{{ topic.name or ""}}</td>
+						<td><a href="{{ topic.link }}">{{ topic.link | domain }}</a></td>
+					</tr>
+				{% endfor %}
+			</table>
+		</div>
 	</div>
 {% endif %}
 

@@ -58,6 +58,7 @@ def todo_topics_page():
 
 	topics = KrockForumTopic.query \
 			.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
+			.order_by(db.asc(KrockForumTopic.title)) \
 			.all()
 
 	return render_template("todo/topics.html", topics=topics, total=total)
