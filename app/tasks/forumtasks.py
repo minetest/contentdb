@@ -75,3 +75,47 @@ def importUsersFromModList():
 	db.session.commit()
 	for author in found:
 		checkForumAccount.delay(author, None)
+
+
+BANNED_NAMES = ["mod", "game", "old", "outdated", "wip", "api"]
+ALLOWED_TYPES = [1, 2, 6]
+
+@celery.task()
+def importKrocksModList():
+	contents = urllib.request.urlopen("http://krock-works.16mb.com/MTstuff/modList.php").read().decode("utf-8")
+	list = json.loads(contents)
+	username_to_user = {}
+
+	KrockForumTopic.query.delete()
+
+	for x in list:
+		type = int(x["type"])
+		if not type in ALLOWED_TYPES:
+			continue
+
+		username = x["author"]
+		user = username_to_user.get(username)
+		if user is None:
+			user = User.query.filter_by(forums_username=username).first()
+			assert(user is not None)
+			username_to_user[username] = user
+
+		import re
+		tags = re.findall("\[([a-z0-9_]+)\]", x["title"])
+		name = None
+		for tag in reversed(tags):
+			if len(tag) < 50 and not tag in BANNED_NAMES and \
+					not re.match("^([a-z][0-9]+)$", tag):
+				name = tag
+				break
+
+		topic = KrockForumTopic()
+		topic.topic_id  = x["topicId"]
+		topic.author_id = user.id
+		topic.ttype     = type
+		topic.title     = x["title"]
+		topic.name      = name
+		topic.link      = x.get("link")
+		db.session.add(topic)
+
+	db.session.commit()

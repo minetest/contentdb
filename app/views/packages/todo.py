@@ -40,6 +40,24 @@ def todo_page():
 	if canApproveScn:
 		screenshots = PackageScreenshot.query.filter_by(approved=False).all()
 
-	return render_template("todo.html", title="Reports and Work Queue",
+
+	topics_to_add = KrockForumTopic.query \
+			.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
+			.count()
+
+	return render_template("todo/list.html", title="Reports and Work Queue",
 		packages=packages, releases=releases, screenshots=screenshots,
-		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn)
+		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
+		topics_to_add=topics_to_add)
+
+
+@app.route("/todo/topics/")
+@login_required
+def todo_topics_page():
+	total = KrockForumTopic.query.count()
+
+	topics = KrockForumTopic.query \
+			.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
+			.all()
+
+	return render_template("todo/topics.html", topics=topics, total=total)

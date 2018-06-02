@@ -678,6 +678,25 @@ class EditRequestChange(db.Model):
 		else:
 			setattr(package, self.key.name, self.newValue)
 
+
+
+class KrockForumTopic(db.Model):
+	topic_id  = db.Column(db.Integer, primary_key=True, autoincrement=False)
+	author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	author    = db.relationship("User")
+
+	ttype     = db.Column(db.Integer, nullable=False)
+	title     = db.Column(db.String(200), nullable=False)
+	name      = db.Column(db.String(30), nullable=True)
+	link      = db.Column(db.String(50), nullable=True)
+
+	def getType(self):
+		if self.ttype == 1 or self.ttype == 2:
+			return PackageType.MOD
+		elif self.ttype == 6:
+			return PackageType.GAME
+
+
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
 user_manager = UserManager(db_adapter, app)     # Initialize Flask-User

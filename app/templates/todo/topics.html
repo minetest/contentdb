@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block title %}
+Topics to be Added
+{% endblock %}
+
+{% block content %}
+	<h1>Topics to be Added</h1>
+
+	<p>
+		{{ total - (topics | count) }} / {{ total }} packages have been added.
+		{{ topics | count }} remaining.
+	</p>
+
+	<table>
+		<tr>
+			<th>Id</th>
+			<th>Title</th>
+			<th>Author</th>
+			<th>Name</th>
+			<th>Link</th>
+		</tr>
+		{% for topic in topics %}
+			<tr>
+				<td>{{ topic.topic_id }}</td>
+				<td>[{{ topic.getType().value }}] <a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a></td>
+				<td><a href="{{ url_for('user_profile_page', username=topic.author.username) }}">{{ topic.author.display_name}}</a></td>
+				<td>{{ topic.name or ""}}</td>
+				<td><a href="{{ topic.link }}">{{ topic.link | domain }}</a></td>
+
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

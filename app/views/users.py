@@ -50,12 +50,6 @@ def user_profile_page(username):
 	if not user:
 		abort(404)
 
-	packages = user.packages.filter_by(soft_deleted=False)
-	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
-		packages = packages.filter_by(approved=True)
-
-	packages = packages.order_by(db.asc(Package.title))
-
 	form = None
 	if user.checkPerm(current_user, Permission.CHANGE_DNAME) or \
 			user.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
@@ -97,9 +91,21 @@ def user_profile_page(username):
 			# Redirect to home page
 			return redirect(url_for("user_profile_page", username=username))
 
+	packages = user.packages.filter_by(soft_deleted=False)
+	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
+		packages = packages.filter_by(approved=True)
+	packages = packages.order_by(db.asc(Package.title))
+
+	topics_to_add = None
+	if current_user == user or user.checkPerm(current_user, Permission.CHANGE_AUTHOR):
+		topics_to_add = KrockForumTopic.query \
+					.filter_by(author_id=user.id) \
+					.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
+					.all()
+
 	# Process GET or invalid POST
 	return render_template("users/user_profile_page.html",
-			user=user, form=form, packages=packages)
+			user=user, form=form, packages=packages, topics_to_add=topics_to_add)
 
 class SetPasswordForm(FlaskForm):
 	email = StringField("Email (Optional)", [Optional(), Email()])

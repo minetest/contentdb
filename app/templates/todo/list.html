@@ -51,4 +51,12 @@
 			{% endfor %}
 		</ul>
 	{% endif %}
+
+	<h2>Forum Topics without a Package</h2>
+
+	<p>
+		There are
+		<a href="{{ url_for('todo_topics_page') }}">{{ topics_to_add }} packages</a>
+		to be added to cdb.
+	</p>
 {% endblock %}
