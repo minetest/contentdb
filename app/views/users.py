@@ -101,7 +101,7 @@ def user_profile_page(username):
 		topics_to_add = KrockForumTopic.query \
 					.filter_by(author_id=user.id) \
 					.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
-					.order_by(db.asc(KrockForumTopic.title)) \
+					.order_by(db.asc(KrockForumTopic.name), db.asc(KrockForumTopic.title)) \
 					.all()
 
 	# Process GET or invalid POST
