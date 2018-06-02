@@ -104,7 +104,7 @@ def importKrocksModList():
 		tags = re.findall("\[([a-z0-9_]+)\]", x["title"])
 		name = None
 		for tag in reversed(tags):
-			if len(tag) < 50 and not tag in BANNED_NAMES and \
+			if len(tag) < 30 and not tag in BANNED_NAMES and \
 					not re.match("^([a-z][0-9]+)$", tag):
 				name = tag
 				break

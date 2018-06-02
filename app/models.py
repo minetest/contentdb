@@ -688,7 +688,7 @@ class KrockForumTopic(db.Model):
 	ttype     = db.Column(db.Integer, nullable=False)
 	title     = db.Column(db.String(200), nullable=False)
 	name      = db.Column(db.String(30), nullable=True)
-	link      = db.Column(db.String(50), nullable=True)
+	link      = db.Column(db.String(200), nullable=True)
 
 	def getType(self):
 		if self.ttype == 1 or self.ttype == 2:
