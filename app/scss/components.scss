@@ -235,10 +235,6 @@ select:not([multiple]) {
 
 /* Alerts */
 
-.alert {
-	padding: 10px;
-	position: relative;
-}
 
 .alert .alert_right, .alert > form {
 	display: inline-block;
@@ -249,36 +245,41 @@ select:not([multiple]) {
 	bottom: 0;
 }
 
-.alert .alert_right:not(.button) {
-	padding: 0;
-}
+.alert {
+	padding: 10px;
+	position: relative;
 
-.alert .alert_right form {
-	height: 100%;
-}
+	.alert_right:not(.button) {
+		padding: 0;
+	}
 
-.alert form {
-	display: inline-block;
-	margin: 0;
-	padding: 0;
-}
+	.alert_right form {
+		height: 100%;
+	}
 
-.alert input {
-	height: 100%;
-}
+	form {
+		display: inline-block;
+		margin: 0;
+		padding: 0;
+	}
 
-.alert input, .button {
-	margin: 0;
-	background: 0;
-	border: 0;
-	border-left: 1px solid rgba(255,255,255,0.12);
-	border-radius: 0;
-	vertical-align: middle;
-}
+	input {
+		height: 100%;
+	}
 
-.alert input:hover, .button:hover {
-	border: 0;
-	border-left: 1px solid rgba(255,255,255,0.2);
+	input, .button {
+		margin: 0;
+		background: 0;
+		border: 0;
+		border-left: 1px solid rgba(255,255,255,0.12);
+		border-radius: 0;
+		vertical-align: middle;
+	}
+
+	input:hover, .button:hover {
+		border: 0;
+		border-left: 1px solid rgba(255,255,255,0.2);
+	}
 }
 
 #alerts {
