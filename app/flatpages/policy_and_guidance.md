@@ -10,6 +10,11 @@ It is not permitted to submit abusive, obscene, vulgar, slanderous, hateful,
 threatening, sexually-orientated or any material that may violate any laws be
 it of your country, the country where "Content DB” is hosted or International Law.
 
+The ContentDB admin reserves the right to remove packages for any reason,
+including ones not covered by this document, and to ban users who abuse this service.
+
+Also see the [help page on tags](/help/package_tags/).
+
 
 ## 2. Technical Names
 
@@ -17,11 +22,15 @@ it of your country, the country where "Content DB” is hosted or International 
 
 The first package to use a name based on the creation of its forum topic or
 contentdb submission has the right to the technical name. The use of a package
-on a server or in private doesn't reserve its name.
+on a server or in private doesn't reserve its name. No other packages of the same
+type may use the same name, except for the exception given by 2.2.
 
 If it turns out that we made a mistake by approving a package and that the
 name should have been given to another package, then we *may* unapprove the
 package and give the name to the correct one.
+
+If you submit a package where you don't have the right to the name you will be asked
+to change the name of the package, or your package won't be accepted.
 
 ### 2.2 Mod Forks and Reimplementations
 
@@ -33,15 +42,17 @@ We reserve the right to decide whether a mod counts as a fork or
 reimplementation of the mod that owns the name.
 
 
-## 3. License
+## 3. Licenses
 
 ### 3.1 Allowed Licenses
 
 Please ensure that you correctly credit any resources (code, assets, or otherwise)
 that you have used in your package.
 
-The use of licenses which do not allow derivatives is not permitted.
-This includes CC-ND (No-Derivatives) and lots of closed source licenses.
+**The use of licenses which do not allow derivatives or redistribution is not
+permitted. This includes CC-ND (No-Derivatives) and lots of closed source licenses.**
+
+However, closed sourced licenses are allowed if they allow the above.
 
 If the license you use is not on the list then please choose the correct "Other"
 option.
@@ -61,6 +72,15 @@ and also includes swearing which dissuades teachers from using your content.
 Public domain is not a valid license in many countries, please use CC0 or MIT instead.
 
 
-## 4. Other
+## 4. Advertisements (inc. asking for donations)
 
-See the [help page on tags](/help/package_tags/).
+Any other information than the long description - including screenshots - must
+not contain any promotions or advertisements. This includes asking for donations
+or promoting online market stores.
+
+Paid promotions are not allowed at all, anywhere.
+
+
+## 5. Reporting Violations
+
+See the [Reporting Content](/help/reporting/) page.
