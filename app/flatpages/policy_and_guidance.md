@@ -16,13 +16,20 @@ including ones not covered by this document, and to ban users who abuse this ser
 Also see the [help page on tags](/help/package_tags/).
 
 
-## 2. State of Completion
+## 2. Accepted Content and State of Completion
+
+The submission of malware is strictly prohibited. This includes software which
+does not do as it advertises, for example if it posts telemetry without stating
+clearly that it does in the package meta.
 
 ContentDB should only currently contain playable content, ie: stuff that would
 be in Mod Releases and Game Releases. Please don't upload any Work In Progress (WIP)
-things.
+things. This will probably change in future if/when an "early access" feature is
+added.
 
-This will probably change in future.
+Adding non-player facing mods, such as libraries and server tools, is perfectly fine.
+ContentDB isn't just for player-facing things, and adding libraries allows them to be
+installed when a mod depends on it.
 
 
 ## 3. Technical Names
@@ -81,11 +88,14 @@ and also includes swearing which dissuades teachers from using your content.
 Public domain is not a valid license in many countries, please use CC0 or MIT instead.
 
 
-## 5. Advertisements (inc. asking for donations)
+## 5. Promotions and Advertisements (inc. asking for donations)
 
-Any other information than the long description - including screenshots - must
-not contain any promotions or advertisements. This includes asking for donations
-or promoting online market stores.
+Any information other than the long description - including screenshots - must
+not contain any promotions or advertisements. This includes asking for donations,
+promoting online shops, or linking to personal websites and social media.
+
+ContentDB is for the community. We may remove any promotions if we feel that
+they're inappropriate.
 
 Paid promotions are not allowed at all, anywhere.
 
