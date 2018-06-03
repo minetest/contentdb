@@ -96,15 +96,15 @@ class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 
 	# User authentication information
-	username = db.Column(db.String(50), nullable=False, unique=True)
+	username = db.Column(db.String(50, collation="NOCASE"), nullable=False, unique=True, index=True)
 	password = db.Column(db.String(255), nullable=True)
 	reset_password_token = db.Column(db.String(100), nullable=False, server_default="")
 
 	rank = db.Column(db.Enum(UserRank))
 
 	# Account linking
-	github_username = db.Column(db.String(50), nullable=True, unique=True)
-	forums_username = db.Column(db.String(50), nullable=True, unique=True)
+	github_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
+	forums_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
 
 	# User email information
 	email = db.Column(db.String(255), nullable=True, unique=True)
