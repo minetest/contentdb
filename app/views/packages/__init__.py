@@ -96,11 +96,22 @@ def package_page(package):
 					.order_by(db.asc(Package.title)) \
 					.all()
 
+		show_similar_topics = current_user == package.author or \
+				package.checkPerm(current_user, Permission.APPROVE_NEW)
+
+		similar_topics = None if not show_similar_topics else \
+				KrockForumTopic.query \
+					.filter_by(name=package.name) \
+					.filter(KrockForumTopic.topic_id != package.forums) \
+					.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
+					.order_by(db.asc(KrockForumTopic.name), db.asc(KrockForumTopic.title)) \
+					.all()
+
 		releases = getReleases(package)
 		requests = [r for r in package.requests if r.status == 0]
 		return render_template("packages/view.html", \
 				package=package, releases=releases, requests=requests, \
-				alternatives=alternatives)
+				alternatives=alternatives, similar_topics=similar_topics)
 
 
 @app.route("/packages/<author>/<name>/download/")

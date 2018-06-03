@@ -258,4 +258,27 @@
 			{% endfor %}
 		</ul>
 	{% endif %}
+
+	{% if similar_topics %}
+		<h3>Similar Forum Topics</h3>
+		{% if not package.approved and package.type == package.type.MOD %}
+			<div class="box box_grey alert alert-warning">
+				Please make sure that this package has the right to
+				the name '{{ package.name }}'.
+				See the
+				<a href="/policy_and_guidance/">Inclusion Policy</a>
+				for more info.
+			</div>
+		{% endif %}
+		<ul>
+			{% for t in similar_topics %}
+				<li>
+					[{{ t.getType().value }}]
+					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
+						{{ t.title }} by {{ t.author.display_name }}
+					</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
 {% endblock %}
