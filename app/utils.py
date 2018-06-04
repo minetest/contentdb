@@ -99,7 +99,7 @@ def loginUser(user):
 	if user_manager.enable_username:
 		user_mixin = user_manager.find_user_by_username(user.username)
 
-	return _do_login_user(user_mixin, False)
+	return _do_login_user(user_mixin, True)
 
 def rank_required(rank):
 	def decorator(f):
