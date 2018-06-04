@@ -109,7 +109,7 @@ def user_profile_page(username):
 			user=user, form=form, packages=packages, topics_to_add=topics_to_add)
 
 class SetPasswordForm(FlaskForm):
-	email = StringField("Email (Optional)", [Optional(), Email()])
+	email = StringField("Email", [Optional(), Email()])
 	password = PasswordField("New password", [InputRequired(), Length(2, 20)])
 	password2 = PasswordField("Verify password", [InputRequired(), Length(2, 20)])
 	submit = SubmitField("Save")
@@ -121,6 +121,9 @@ def set_password_page():
 		return redirect(url_for("user.change_password"))
 
 	form = SetPasswordForm(request.form)
+	if current_user.email == None:
+		form.email.validators = [InputRequired(), Email()]
+
 	if request.method == "POST" and form.validate():
 		one = form.password.data
 		two = form.password2.data
