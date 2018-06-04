@@ -10,11 +10,12 @@ $(function() {
 	}
 
 	function repoIsSupported(url) {
-		try {
-			return URI(url).hostname() == "github.com"
-		} catch(e) {
-			return false
-		}
+		// try {
+		// 	return URI(url).hostname() == "github.com"
+		// } catch(e) {
+		// 	return false
+		// }
+		return true
 	}
 
 	$(".pkg_meta").hide()
@@ -36,7 +37,7 @@ $(function() {
 
 			performTask("/tasks/getmeta/new/?url=" + encodeURI(repoURL)).then(function(result) {
 				$("#name").val(result.name || "")
-				setSpecial("#provides_str", result.name || "")
+				setSpecial("#provides_str", result.provides || "")
 				$("#title").val(result.title || "")
 				$("#repo").val(result.repo || repoURL)
 				$("#issueTracker").val(result.issueTracker || "")

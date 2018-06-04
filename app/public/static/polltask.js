@@ -22,7 +22,7 @@ function pollTask(poll_url, disableTimeout) {
 		var tries = 0;
 		function retry() {
 			tries++;
-			if (!disableTimeout && tries > 10) {
+			if (!disableTimeout && tries > 20) {
 				reject("timeout")
 			} else {
 				const interval = Math.min(tries*100, 1000)
