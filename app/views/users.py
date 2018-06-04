@@ -162,7 +162,7 @@ def set_password_page():
 		else:
 			flash("Passwords do not match", "error")
 
-	return render_template("users/set_password.html", form=form)
+	return render_template("users/set_password.html", form=form, optional=request.args.get("optional"))
 
 
 @app.route("/user/claim/", methods=["GET", "POST"])

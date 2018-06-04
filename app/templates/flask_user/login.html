@@ -11,10 +11,6 @@ Sign in
 		<h2>{%trans%}Sign in{%endtrans%}</h2>
 
 		<form action="" method="POST" class="form box-body" role="form">
-			<h3>Sign in with Github</h3>
-			<p><a class="button" href="{{ url_for('github_signin_page') }}">GitHub</a></p>
-
-
 			<h3>Sign in with username/password</h3>
 			{{ form.hidden_tag() }}
 
@@ -38,17 +34,13 @@ Sign in
 			{# Password field #}
 			{% set field = form.password %}
 			<div class="form-group {% if field.errors %}has-error{% endif %}">
-				{# Label on left, "Forgot your Password?" on right #}
 				<div class="row">
-					<div class="col-xs-6">
-						<label for="{{ field.id }}" class="control-label">{{ field.label.text }}</label>
-					</div>
-					<div class="col-xs-6 text-right">
-						{% if user_manager.enable_forgot_password %}
+					<label for="{{ field.id }}" class="control-label">{{ field.label.text }}
+					{% if user_manager.enable_forgot_password %}
 						<a href="{{ url_for('user.forgot_password') }}" tabindex='195'>
-							{%trans%}Forgot your Password?{%endtrans%}</a>
-							{% endif %}
-					</div>
+							[{%trans%}Forgot My Password{%endtrans%}]</a>
+					{% endif %}
+					</label>
 				</div>
 				{{ field(class_='form-control', tabindex=120) }}
 				{% if field.errors %}
@@ -64,7 +56,12 @@ Sign in
 			{% endif %}
 
 			{# Submit button #}
-			{{ render_submit_field(form.submit, tabindex=180) }}
+			<p>
+				{{ render_submit_field(form.submit, tabindex=180) }}
+			</p>
+
+			<h3>Sign in with Github</h3>
+			<p><a class="button" href="{{ url_for('github_signin_page') }}">GitHub</a></p>
 		</form>
 	</div>
 
