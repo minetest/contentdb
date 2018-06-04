@@ -38,9 +38,10 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleF
 @menu.register_menu(app, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
 @app.route("/packages/")
 def packages_page():
-	type = request.args.get("type")
-	if type is not None:
-		type = PackageType[type.upper()]
+	type_name = request.args.get("type")
+	type = None
+	if type_name is not None:
+		type = PackageType[type_name.upper()]
 
 	title = "Packages"
 	query = Package.query.filter_by(soft_deleted=False)
@@ -50,7 +51,7 @@ def packages_page():
 		query = query.filter_by(type=type, approved=True)
 
 	search = request.args.get("q")
-	if search is not None:
+	if search is not None and search.strip() != "":
 		query = query.filter(Package.title.ilike('%' + search + '%'))
 
 	if shouldReturnJson():
@@ -62,14 +63,14 @@ def packages_page():
 		num   = min(42, int(request.args.get("n") or 100))
 		query = query.paginate(page, num, True)
 
-		next_url = url_for("packages_page", type=type.toName(), q=search, page=query.next_num) \
+		next_url = url_for("packages_page", type=type_name, q=search, page=query.next_num) \
 				if query.has_next else None
-		prev_url = url_for("packages_page", type=type.toName(), q=search, page=query.prev_num) \
+		prev_url = url_for("packages_page", type=type_name, q=search, page=query.prev_num) \
 				if query.has_prev else None
 
 		tags = Tag.query.all()
 		return render_template("packages/list.html", title=title, packages=query.items, \
-				query=search, tags=tags, type=None if type is None else type.toName(), \
+				query=search, tags=tags, type=type_name, \
 				next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, packages_count=query.total)
 
 
