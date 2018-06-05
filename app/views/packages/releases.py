@@ -52,8 +52,8 @@ def create_release_page(package):
 
 	# Initial form class from post data and default data
 	form = CreatePackageReleaseForm()
-	if package.canMakeReleaseFromVCS():
-		form["uploadOpt"].choices = [("vcs", "From VCS Commit or Branch"), ("upload", "File Upload")]
+	if package.repo is not None:
+		form["uploadOpt"].choices = [("vcs", "From Git Commit or Branch"), ("upload", "File Upload")]
 		if request.method != "POST":
 			form["uploadOpt"].data = "vcs"
 

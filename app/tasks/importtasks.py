@@ -137,9 +137,9 @@ class PackageTreeNode:
 		print("Scanning " + baseDir)
 		self.baseDir  = baseDir
 		self.author   = author
-		self.name     = name
-		self.repo     = repo
-		self.meta     = None
+		self.name	 = name
+		self.repo	 = repo
+		self.meta	 = None
 		self.children = []
 
 		# Detect type
@@ -275,26 +275,30 @@ class PackageTreeNode:
 		return self.meta.get(key)
 
 
-def cloneRepo(urlstr):
+# Clones a repo from an unvalidated URL.
+# Returns a tuple of path and repo on sucess.
+# Throws `TaskError` on failure.
+# Caller is responsible for deleting returned directory.
+def cloneRepo(urlstr, ref=None, recursive=False):
 	gitDir = tempfile.gettempdir() + "/" + randomString(10)
 
 	err = None
 	try:
-		git.Repo.clone_from(urlstr, gitDir, progress=None, env=None, depth=1)
+		repo = git.Repo.clone_from(urlstr, gitDir, progress=None, env=None, depth=1, recursive=recursive)
+		if ref is not None:
+			repo.create_head("myhead", ref).checkout()
+		return gitDir, repo
 	except GitCommandError as e:
 		# This is needed to stop the backtrace being weird
 		err = e.stderr
 
-	if err is not None:
-		raise TaskError(err.replace("stderr: ", "") \
-				.replace("Cloning into '" + gitDir + "'...", "") \
-				.strip())
-
-	return gitDir
+	raise TaskError(err.replace("stderr: ", "") \
+			.replace("Cloning into '" + gitDir + "'...", "") \
+			.strip())
 
 @celery.task()
 def getMeta(urlstr, author):
-	gitDir = cloneRepo(urlstr)
+	gitDir, _ = cloneRepo(urlstr, recursive=True)
 	tree = PackageTreeNode(gitDir, author=author, repo=urlstr)
 	shutil.rmtree(gitDir)
 
@@ -320,24 +324,8 @@ def getMeta(urlstr, author):
 	return result
 
 
-@celery.task()
-def makeVCSRelease(id, branch):
-	release = PackageRelease.query.get(id)
-
-	if release is None:
-		raise TaskError("No such release!")
-
-	if release.package is None:
-		raise TaskError("No package attached to release")
-
-	url = urlparse(release.package.repo)
-
-	urlmaker = None
-	if url.netloc == "github.com":
-		urlmaker = GithubURLMaker(url)
-	else:
-		raise TaskError("Unsupported repo")
-
+def makeVCSReleaseFromGithub(id, branch, release, url):
+	urlmaker = GithubURLMaker(url)
 	if not urlmaker.isValid():
 		raise TaskError("Invalid github repo URL")
 
@@ -356,6 +344,37 @@ def makeVCSRelease(id, branch):
 	return release.url
 
 
+
+@celery.task()
+def makeVCSRelease(id, branch):
+	release = PackageRelease.query.get(id)
+	if release is None:
+		raise TaskError("No such release!")
+	elif release.package is None:
+		raise TaskError("No package attached to release")
+
+	urlmaker = None
+	url = urlparse(release.package.repo)
+	if url.netloc == "github.com":
+		return makeVCSReleaseFromGithub(id, branch, release, url)
+	else:
+		gitDir, repo = cloneRepo(release.package.repo, ref=branch, recursive=True)
+
+		try:
+			filename = randomString(10) + ".zip"
+			destPath = os.path.join("app/public/uploads", filename)
+			with open(destPath, "wb") as fp:
+				repo.archive(fp)
+
+			release.url = "/uploads/" + filename
+			print(release.url)
+			release.task_id = None
+			db.session.commit()
+
+			return release.url
+		finally:
+			shutil.rmtree(gitDir)
+
 @celery.task()
 def importRepoScreenshot(id):
 	package = Package.query.get(id)
@@ -363,7 +382,12 @@ def importRepoScreenshot(id):
 		raise Exception("Unexpected none package")
 
 	# Get URL Maker
-	gitDir = cloneRepo(package.repo)
+	try:
+		gitDir, _ = cloneRepo(package.repo)
+	except TaskError as e:
+		# ignore download errors
+		print(e)
+		return None
 
 	# Find and import screenshot
 	try:

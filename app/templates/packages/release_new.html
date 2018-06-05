@@ -11,7 +11,7 @@
 
 		{{ render_field(form.title, placeholder="Human readable. Eg: 1.0.0 or 2018-05-28") }}
 		{{ render_field(form.uploadOpt) }}
-		{% if package.canMakeReleaseFromVCS() %}
+		{% if package.repo %}
 			{{ render_field(form.vcsLabel) }}
 		{% endif %}
 		{{ render_field(form.fileUpload) }}
