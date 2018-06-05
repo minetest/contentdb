@@ -182,8 +182,9 @@ def create_edit_package_page(author=None, name=None):
 	# Initial form class from post data and default data
 	if request.method == "GET":
 		if package is None:
-			form.repo.data   = request.args.get("repo")
+			form.name.data   = request.args.get("bname")
 			form.title.data  = request.args.get("title")
+			form.repo.data   = request.args.get("repo")
 			form.forums.data = request.args.get("forums")
 		else:
 			deps = package.dependencies

@@ -18,7 +18,7 @@
 			<td>{{ topic.name or ""}}</td>
 			<td><a href="{{ topic.link }}">{{ topic.link | domain }}</a></td>
 			<td>
-				<a href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title) }}">Create</a>
+				<a href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">Create</a>
 			</td>
 		</tr>
 	{% endfor %}
