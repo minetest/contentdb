@@ -143,7 +143,7 @@ class PackageForm(FlaskForm):
 	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	harddep_str   = StringField("Hard Dependencies", [Optional(), Length(0,1000)])
 	softdep_str   = StringField("Soft Dependencies", [Optional(), Length(0,1000)])
-	repo          = StringField("Repo URL", [Optional(), URL()])
+	repo          = StringField("VCS Repository URL", [Optional(), URL()])
 	website       = StringField("Website URL", [Optional(), URL()])
 	issueTracker  = StringField("Issue Tracker URL", [Optional(), URL()])
 	forums	      = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
@@ -233,7 +233,7 @@ def create_edit_package_page(author=None, name=None):
 
 		db.session.commit() # save
 
-		if wasNew and package.canImportScreenshot():
+		if wasNew and package.repo is not None:
 			task = importRepoScreenshot.delay(package.id)
 			return redirect(url_for("check_task", id=task.id, r=package.getDetailsURL()))
 

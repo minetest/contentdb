@@ -434,16 +434,6 @@ class Package(db.Model):
 
 		return None
 
-	def canImportScreenshot(self):
-		if self.repo is None:
-			return False
-
-		url = urlparse(self.repo)
-		if url.netloc == "github.com":
-			return True
-
-		return False
-
 	def canMakeReleaseFromVCS(self):
 		if self.repo is None:
 			return False

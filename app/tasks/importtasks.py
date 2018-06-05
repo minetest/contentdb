@@ -275,17 +275,14 @@ class PackageTreeNode:
 		return self.meta.get(key)
 
 
-@celery.task()
-def getMeta(urlstr, author):
-	url = urlparse(urlstr)
-
+def cloneRepo(urlstr):
 	gitDir = tempfile.gettempdir() + "/" + randomString(10)
 
 	err = None
-
 	try:
 		git.Repo.clone_from(urlstr, gitDir, progress=None, env=None, depth=1)
 	except GitCommandError as e:
+		# This is needed to stop the backtrace being weird
 		err = e.stderr
 
 	if err is not None:
@@ -293,8 +290,12 @@ def getMeta(urlstr, author):
 				.replace("Cloning into '" + gitDir + "'...", "") \
 				.strip())
 
-	tree = PackageTreeNode(gitDir, author=author, repo=urlstr)
+	return gitDir
 
+@celery.task()
+def getMeta(urlstr, author):
+	gitDir = cloneRepo(urlstr)
+	tree = PackageTreeNode(gitDir, author=author, repo=urlstr)
 	shutil.rmtree(gitDir)
 
 	result = {}
@@ -362,34 +363,30 @@ def importRepoScreenshot(id):
 		raise Exception("Unexpected none package")
 
 	# Get URL Maker
-	url = urlparse(package.repo)
-	urlmaker = None
-	if url.netloc == "github.com":
-		urlmaker = GithubURLMaker(url)
-	else:
-		raise TaskError("Unsupported repo")
+	gitDir = cloneRepo(package.repo)
 
-	if not urlmaker.isValid():
-		raise TaskError("Error! Url maker not valid")
-
+	# Find and import screenshot
 	try:
-		filename = randomString(10) + ".png"
-		imagePath = os.path.join("app/public/uploads", filename)
-		print(imagePath)
-		urllib.request.urlretrieve(urlmaker.getScreenshotURL(), imagePath)
+		for ext in ["png", "jpg", "jpeg"]:
+			sourcePath = gitDir + "/screenshot." + ext
+			if os.path.isfile(sourcePath):
+				filename = randomString(10) + "." + ext
+				destPath = os.path.join("app/public/uploads", filename)
+				shutil.copyfile(sourcePath, destPath)
 
-		ss = PackageScreenshot()
-		ss.approved = True
-		ss.package = package
-		ss.title   = "screenshot.png"
-		ss.url	 = "/uploads/" + filename
-		db.session.add(ss)
-		db.session.commit()
+				ss = PackageScreenshot()
+				ss.approved = True
+				ss.package = package
+				ss.title   = "screenshot.png"
+				ss.url	 = "/uploads/" + filename
+				db.session.add(ss)
+				db.session.commit()
 
-		return "/uploads/" + filename
-	except HTTPError:
-		print("screenshot.png does not exist")
+				return "/uploads/" + filename
+	finally:
+		shutil.rmtree(gitDir)
 
+	print("screenshot.png does not exist")
 	return None
 
 
