@@ -15,7 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import flask, json, os, git, tempfile
+import flask, json, os, git, tempfile, shutil
+from git import GitCommandError
 from flask.ext.sqlalchemy import SQLAlchemy
 from urllib.error import HTTPError
 import urllib.request
@@ -246,9 +247,22 @@ def getMeta(urlstr, author):
 	url = urlparse(urlstr)
 
 	gitDir = tempfile.gettempdir() + "/" + randomString(10)
-	git.Repo.clone_from(urlstr, gitDir, progress=None, env=None, depth=1)
+
+	err = None
+
+	try:
+		git.Repo.clone_from(urlstr, gitDir, progress=None, env=None, depth=1)
+	except GitCommandError as e:
+		err = e.stderr
+
+	if err is not None:
+		raise TaskError(err.replace("stderr: ", "") \
+				.replace("Cloning into '" + gitDir + "'...", "") \
+				.strip())
 
 	tree = PackageTreeNode(gitDir, author=author, repo=urlstr)
+
+	shutil.rmtree(gitDir)
 
 	result = {}
 	result["name"] = tree.name
