@@ -659,6 +659,10 @@ class EditRequestChange(db.Model):
 			setattr(package, self.key.name, self.newValue)
 
 
+REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com", \
+		"minetest.net", "dropboxusercontent.com", "4shared.com", \
+		"digitalaudioconcepts.com", "hg.intevation.org", "www.wtfpl.net", \
+		"imageshack.com", "imgur.com"]
 
 class KrockForumTopic(db.Model):
 	topic_id  = db.Column(db.Integer, primary_key=True, autoincrement=False)
@@ -675,6 +679,13 @@ class KrockForumTopic(db.Model):
 			return PackageType.MOD
 		elif self.ttype == 6:
 			return PackageType.GAME
+
+	def getRepoURL(self):
+		for item in REPO_BLACKLIST:
+			if item in self.link:
+				return None
+
+		return self.link.replace("repo.or.cz/w/", "repo.or.cz/")
 
 
 # Setup Flask-User

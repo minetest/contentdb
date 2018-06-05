@@ -1,0 +1,26 @@
+{% macro render_topictable(topics, show_author=True) -%}
+<table>
+	<tr>
+		<th>Id</th>
+		<th>Title</th>
+		{% if show_author %}<th>Author</th>{% endif %}
+		<th>Name</th>
+		<th>Link</th>
+		<th>Actions</th>
+	</tr>
+	{% for topic in topics %}
+		<tr>
+			<td>{{ topic.topic_id }}</td>
+			<td>[{{ topic.getType().value }}] <a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a></td>
+			{% if show_author %}
+				<td><a href="{{ url_for('user_profile_page', username=topic.author.username) }}">{{ topic.author.display_name}}</a></td>
+			{% endif %}
+			<td>{{ topic.name or ""}}</td>
+			<td><a href="{{ topic.link }}">{{ topic.link | domain }}</a></td>
+			<td>
+				<a href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title) }}">Create</a>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+{% endmacro %}

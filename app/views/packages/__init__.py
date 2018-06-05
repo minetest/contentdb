@@ -180,11 +180,16 @@ def create_edit_package_page(author=None, name=None):
 		form = PackageForm(formdata=request.form, obj=package)
 
 	# Initial form class from post data and default data
-	if request.method == "GET" and package is not None:
-		deps = package.dependencies
-		form.harddep_str.data  = ",".join([str(x) for x in deps if not x.optional])
-		form.softdep_str.data  = ",".join([str(x) for x in deps if     x.optional])
-		form.provides_str.data = MetaPackage.ListToSpec(package.provides)
+	if request.method == "GET":
+		if package is None:
+			form.repo.data   = request.args.get("repo")
+			form.title.data  = request.args.get("title")
+			form.forums.data = request.args.get("forums")
+		else:
+			deps = package.dependencies
+			form.harddep_str.data  = ",".join([str(x) for x in deps if not x.optional])
+			form.softdep_str.data  = ",".join([str(x) for x in deps if     x.optional])
+			form.provides_str.data = MetaPackage.ListToSpec(package.provides)
 
 	if request.method == "POST" and form.validate():
 		wasNew = False
