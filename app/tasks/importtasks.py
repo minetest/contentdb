@@ -26,6 +26,39 @@ from app.models import *
 from app.tasks import celery, TaskError
 from app.utils import randomString
 
+
+class GithubURLMaker:
+	def __init__(self, url):
+		# Rewrite path
+		import re
+		m = re.search("^\/([^\/]+)\/([^\/]+)\/?$", url.path)
+		if m is None:
+			return
+
+		user = m.group(1)
+		repo = m.group(2).replace(".git", "")
+		self.baseUrl = "https://raw.githubusercontent.com/{}/{}/master" \
+				.format(user, repo)
+		self.user = user
+		self.repo = repo
+
+	def isValid(self):
+		return self.baseUrl is not None
+
+	def getRepoURL(self):
+		return "https://github.com/{}/{}".format(self.user, self.repo)
+
+	def getScreenshotURL(self):
+		return self.baseUrl + "/screenshot.png"
+
+	def getCommitsURL(self, branch):
+		return "https://api.github.com/repos/{}/{}/commits?sha={}" \
+				.format(self.user, self.repo, urllib.parse.quote_plus(branch))
+
+	def getCommitDownload(self, commit):
+		return "https://github.com/{}/{}/archive/{}.zip" \
+				.format(self.user, self.repo, commit)
+
 krock_list_cache = None
 krock_list_cache_by_name = None
 def getKrockList():
