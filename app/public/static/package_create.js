@@ -49,6 +49,11 @@ $(function() {
 				if (result.forumId) {
 					$("#forums").val(result.forumId)
 				}
+
+				if (result.type && result.type.length > 2) {
+					$("#type").val(result.type);
+				}
+
 				finish()
 			}).catch(function(e) {
 				alert(e)
