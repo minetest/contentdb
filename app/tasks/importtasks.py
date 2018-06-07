@@ -20,7 +20,7 @@ from git import GitCommandError
 from flask.ext.sqlalchemy import SQLAlchemy
 from urllib.error import HTTPError
 import urllib.request
-from urllib.parse import urlparse, quote_plus
+from urllib.parse import urlparse, quote_plus, urlsplit
 from app import app
 from app.models import *
 from app.tasks import celery, TaskError
@@ -274,6 +274,10 @@ class PackageTreeNode:
 	def get(self, key):
 		return self.meta.get(key)
 
+def generateGitURL(urlstr):
+	scheme, netloc, path, query, frag = urlsplit(urlstr)
+
+	return "http://:@" + netloc + path + query
 
 # Clones a repo from an unvalidated URL.
 # Returns a tuple of path and repo on sucess.
@@ -284,7 +288,11 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 
 	err = None
 	try:
-		repo = git.Repo.clone_from(urlstr, gitDir, progress=None, env=None, depth=1, recursive=recursive)
+		gitUrl = generateGitURL(urlstr)
+		print("Cloning from " + gitUrl)
+		repo = git.Repo.clone_from(gitUrl, gitDir, \
+				progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
+
 		if ref is not None:
 			repo.create_head("myhead", ref).checkout()
 		return gitDir, repo
