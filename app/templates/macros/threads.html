@@ -1,15 +1,18 @@
 {% macro render_thread(thread, current_user) -%}
-	<ul>
+	<ul class="comments">
 		{% for r in thread.replies %}
 			<li>
-				&lt;<a href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>&gt;
-				{{ r.comment }}
+				<a class="author {{ r.author.rank.name }}"
+					href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>
+				<div class="msg">
+					{{ r.comment }}
+				</div>
 			</li>
 		{% endfor %}
 	</ul>
 
 	{% if current_user.is_authenticated %}
-		<form method="post" action="{{ url_for('thread_page', id=thread.id)}}">
+		<form method="post" action="{{ url_for('thread_page', id=thread.id)}}" class="comment_form">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<textarea required maxlength=500 name="comment"></textarea><br />
 			<input type="submit" value="Comment" />
@@ -23,5 +26,4 @@
 			<li><a href="{{ url_for('thread_page', id=t.id) }}">{{ t.title }}</a> by {{ t.author.display_name }}</li>
 		{% endfor %}
 	</ul>
-
 {% endmacro %}
