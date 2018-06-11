@@ -43,6 +43,19 @@
 			{% endif %}
 			<div style="clear: both;"></div>
 		</div>
+
+		{% if package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW") %}
+			{% if review_thread %}
+				{% from "macros/threads.html" import render_thread %}
+				{{ render_thread(review_thread, current_user) }}
+			{% else %}
+				<div class="box box_grey alert alert-info">
+					Privately ask a question or give feedback
+
+					<a class="alert_right button" href="{{ url_for('new_thread_page', pid=package.id, title='Package approval comments') }}">Open Thread</a>
+				</div>
+			{% endif %}
+		{% endif %}
 	{% endif %}
 
 	<h1>{{ package.title }} by {{ package.author.display_name }}</h1>

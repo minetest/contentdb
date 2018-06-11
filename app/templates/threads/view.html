@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+Threads
+{% endblock %}
+
+{% block content %}
+	<h1>{% if thread.private %}&#x1f512; {% endif %}{{ thread.title }}</h1>
+
+	{% if thread.package %}
+		<p>
+			Package: <a href="{{ thread.package.getDetailsURL() }}">{{ thread.package.title }}</a>
+		</p>
+	{% endif %}
+
+	{% if thread.private %}
+		<i>
+			This thread is only visible to its creator, the package owner, and users of
+			Editor rank or above.
+		</i>
+	{% endif %}
+
+	{% from "macros/threads.html" import render_thread %}
+	{{ render_thread(thread, current_user) }}
+{% endblock %}

@@ -76,6 +76,7 @@ class Permission(enum.Enum):
 	CHANGE_RANK        = "CHANGE_RANK"
 	CHANGE_EMAIL       = "CHANGE_EMAIL"
 	EDIT_EDITREQUEST   = "EDIT_EDITREQUEST"
+	SEE_THREAD         = "SEE_THREAD"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -120,6 +121,8 @@ class User(db.Model, UserMixin):
 	# causednotifs  = db.relationship("Notification", backref="causer", lazy="dynamic")
 	packages      = db.relationship("Package", backref="author", lazy="dynamic")
 	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
+	threads       = db.relationship("Thread", backref="author", lazy="dynamic")
+	replies       = db.relationship("ThreadReply", backref="author", lazy="dynamic")
 
 	def __init__(self, username, active=False, email=None, password=None):
 		import datetime
@@ -336,6 +339,9 @@ class Package(db.Model):
 
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	soft_deleted = db.Column(db.Boolean, nullable=False, default=False)
+
+	review_thread_id = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=True, default=None)
+	review_thread    = db.relationship("Thread", foreign_keys=[review_thread_id])
 
 	# Downloads
 	repo         = db.Column(db.String(200), nullable=True)
@@ -657,6 +663,49 @@ class EditRequestChange(db.Model):
 
 		else:
 			setattr(package, self.key.name, self.newValue)
+
+
+class Thread(db.Model):
+	id         = db.Column(db.Integer, primary_key=True)
+
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
+	package    = db.relationship("Package", foreign_keys=[package_id])
+
+	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	title      = db.Column(db.String(100), nullable=False)
+	private    = db.Column(db.Boolean, server_default="0")
+
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic")
+
+	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return not self.private
+
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to Thread.checkPerm()")
+
+		isOwner = user == self.author
+
+		if perm == Permission.SEE_THREAD:
+			return not self.private or isOwner or user.rank.atLeast(UserRank.EDITOR)
+
+		else:
+			raise Exception("Permission {} is not related to threads".format(perm.name))
+
+class ThreadReply(db.Model):
+	id         = db.Column(db.Integer, primary_key=True)
+	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
+	comment    = db.Column(db.String(500), nullable=False)
+	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+
+
+
+
 
 
 REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com", \

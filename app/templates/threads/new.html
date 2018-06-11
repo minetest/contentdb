@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+	New Thread
+{% endblock %}
+
+{% block content %}
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.title) }}
+		{{ render_field(form.comment) }}
+		{{ render_field(form.private) }}
+		{{ render_submit_field(form.submit) }}
+
+		<p>Only the you, the package author, and users of Editor rank and above can read private threads.</p>
+	</form>
+{% endblock %}

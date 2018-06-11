@@ -51,7 +51,7 @@ def home_page():
 	packages = query.order_by(db.desc(Package.created_at)).limit(15).all()
 	return render_template("index.html", packages=packages, count=count)
 
-from . import users, githublogin, packages, sass, tasks, admin, notifications, tagseditor, meta, thumbnails
+from . import users, githublogin, packages, sass, tasks, admin, notifications, tagseditor, meta, thumbnails, threads
 
 @menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { 'path': 'help' })
 @app.route('/<path:path>/')

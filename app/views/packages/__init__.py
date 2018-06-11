@@ -110,9 +110,15 @@ def package_page(package):
 
 		releases = getReleases(package)
 		requests = [r for r in package.requests if r.status == 0]
+
+		review_thread = Thread.query.filter_by(package_id=package.id, private=True).first()
+		if review_thread is not None and not review_thread.checkPerm(current_user, Permission.SEE_THREAD):
+			review_thread = None
+
 		return render_template("packages/view.html", \
 				package=package, releases=releases, requests=requests, \
-				alternatives=alternatives, similar_topics=similar_topics)
+				alternatives=alternatives, similar_topics=similar_topics, \
+				review_thread=review_thread)
 
 
 @app.route("/packages/<author>/<name>/download/")

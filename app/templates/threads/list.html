@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+
+{% block title %}
+Threads
+{% endblock %}
+
+{% block content %}
+	<h1>Threads</h1>
+
+	{% from "macros/threads.html" import render_threadlist %}
+	{{ render_threadlist(threads) }}
+{% endblock %}
