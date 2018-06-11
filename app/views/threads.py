@@ -48,6 +48,20 @@ def thread_page(id):
 			db.session.add(reply)
 
 			thread.replies.append(reply)
+			if not current_user in thread.watchers:
+				thread.watchers.append(current_user)
+
+			msg = None
+			if thread.package is None:
+				msg = "New comment on '{}'".format(thread.title)
+			else:
+				msg = "New comment on '{}' on package {}".format(thread.title, thread.package.title)
+
+
+			for user in thread.watchers:
+				if user != current_user:
+					triggerNotif(user, current_user, msg, url_for("thread_page", id=thread.id))
+
 			db.session.commit()
 
 			return redirect(url_for("thread_page", id=id))
@@ -111,6 +125,10 @@ def new_thread_page():
 		thread.package = package
 		db.session.add(thread)
 
+		thread.watchers.append(current_user)
+		if package is not None and package.author != current_user:
+			thread.watchers.append(package.author)
+
 		reply = ThreadReply()
 		reply.thread  = thread
 		reply.author  = current_user
@@ -127,7 +145,6 @@ def new_thread_page():
 		if package is not None:
 			triggerNotif(package.author, current_user,
 					"New thread '{}' on package {}".format(thread.title, package.title), url_for("thread_page", id=thread.id))
-			db.session.commit()
 
 		db.session.commit()
 

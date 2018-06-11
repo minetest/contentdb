@@ -92,7 +92,6 @@ class Permission(enum.Enum):
 		else:
 			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
 
-
 class User(db.Model, UserMixin):
 	id = db.Column(db.Integer, primary_key=True)
 
@@ -665,6 +664,11 @@ class EditRequestChange(db.Model):
 			setattr(package, self.key.name, self.newValue)
 
 
+watchers = db.Table("watchers",
+    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+    db.Column("thread_id", db.Integer, db.ForeignKey("thread.id"), primary_key=True)
+)
+
 class Thread(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
@@ -678,6 +682,9 @@ class Thread(db.Model):
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic")
+
+	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", \
+						backref=db.backref("watching", lazy=True))
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
