@@ -46,6 +46,12 @@
 
 		{% if package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW") %}
 			{% if review_thread %}
+				<h2>&#x1f512; {{ review_thread.title }}</h2>
+				<p><i>
+					This thread is only visible to the package owner and users of
+					Editor rank or above.
+				</i></p>
+
 				{% from "macros/threads.html" import render_thread %}
 				{{ render_thread(review_thread, current_user) }}
 			{% else %}
