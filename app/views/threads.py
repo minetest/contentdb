@@ -75,7 +75,8 @@ def new_thread_page():
 		if package is None:
 			flash("Unable to find that package!", "error")
 
-	if package is None:
+	# Don't allow making threads on approved packages for now
+	if package is None or package.approved:
 		abort(403)
 
 	def_is_private   = request.args.get("private") or False
