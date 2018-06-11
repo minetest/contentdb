@@ -2,8 +2,13 @@
 	<ul class="comments">
 		{% for r in thread.replies %}
 			<li>
-				<a class="author {{ r.author.rank.name }}"
-					href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>
+				<div class="info_strip">
+					<a class="author {{ r.author.rank.name }}"
+							href="{{ url_for('user_profile_page', username=r.author.username) }}">
+						{{ r.author.display_name }}</a>
+					<span>{{ r.created_at | datetime }}</span>
+					<div class="clearboth"></div>
+				</div>
 				<div class="msg">
 					{{ r.comment }}
 				</div>

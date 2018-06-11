@@ -10,20 +10,31 @@
 	margin: 15px 0;
 	background: #333;
 
-	.author, .msg {
+	.info_strip, .msg {
 		display: block;
 		margin: 0;
 	}
 
-	.author {
-		font-weight: bold;
-		border-bottom: 1px solid #444;
+	.info_strip {
 		padding: 0.2em 1em;
+		border-bottom: 1px solid #444;
 	}
 
 	.msg {
 		padding: 1em;
 		background: #222;
+	}
+
+	.author {
+		font-weight: bold;
+		float: left;
+		display: inline-block;
+	}
+
+	.info_strip span {
+		float: right;
+		display: inline-block;
+		color: #bbb;
 	}
 }
 
