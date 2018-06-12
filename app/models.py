@@ -695,7 +695,7 @@ class Thread(db.Model):
 		elif type(perm) != Permission:
 			raise Exception("Unknown permission given to Thread.checkPerm()")
 
-		isOwner = user == self.author
+		isOwner = user == self.author or (self.package is not None and self.package.author == user)
 
 		if perm == Permission.SEE_THREAD:
 			return not self.private or isOwner or user.rank.atLeast(UserRank.EDITOR)
