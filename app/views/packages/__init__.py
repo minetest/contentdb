@@ -30,14 +30,7 @@ from wtforms import *
 from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 
-# TODO: the following could be made into one route, except I"m not sure how
-# to do the menu
-
-@menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
-@menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
-@menu.register_menu(app, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
-@app.route("/packages/")
-def packages_page():
+def build_packages_query():
 	type_name = request.args.get("type")
 	type = None
 	if type_name is not None:
@@ -54,24 +47,30 @@ def packages_page():
 	if search is not None and search.strip() != "":
 		query = query.filter(Package.title.ilike('%' + search + '%'))
 
+	return query
+
+@menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
+@menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
+@menu.register_menu(app, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
+@app.route("/packages/")
+def packages_page():
 	if shouldReturnJson():
-		pkgs = [package.getAsDictionary(app.config["BASE_URL"]) \
-				for package in query.all() if package.getDownloadRelease() is not None]
-		return jsonify(pkgs)
-	else:
-		page  = int(request.args.get("page") or 1)
-		num   = min(42, int(request.args.get("n") or 100))
-		query = query.paginate(page, num, True)
+		return redirect(url_for("api_packages_page"))
 
-		next_url = url_for("packages_page", type=type_name, q=search, page=query.next_num) \
-				if query.has_next else None
-		prev_url = url_for("packages_page", type=type_name, q=search, page=query.prev_num) \
-				if query.has_prev else None
+	query = build_packages_query()
+	page  = int(request.args.get("page") or 1)
+	num   = min(42, int(request.args.get("n") or 100))
+	query = query.paginate(page, num, True)
 
-		tags = Tag.query.all()
-		return render_template("packages/list.html", title=title, packages=query.items, \
-				query=search, tags=tags, type=type_name, \
-				next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, packages_count=query.total)
+	next_url = url_for("packages_page", type=type_name, q=search, page=query.next_num) \
+			if query.has_next else None
+	prev_url = url_for("packages_page", type=type_name, q=search, page=query.prev_num) \
+			if query.has_prev else None
+
+	tags = Tag.query.all()
+	return render_template("packages/list.html", title=title, packages=query.items, \
+			query=search, tags=tags, type=type_name, \
+			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, packages_count=query.total)
 
 
 def getReleases(package):
@@ -84,41 +83,38 @@ def getReleases(package):
 @app.route("/packages/<author>/<name>/")
 @is_package_page
 def package_page(package):
-	if shouldReturnJson():
-		return jsonify(package.getAsDictionary(app.config["BASE_URL"]))
-	else:
-		clearNotifications(package.getDetailsURL())
+	clearNotifications(package.getDetailsURL())
 
-		alternatives = None
-		if package.type == PackageType.MOD:
-			alternatives = Package.query \
-					.filter_by(name=package.name, type=PackageType.MOD, soft_deleted=False) \
-					.filter(Package.id != package.id) \
-					.order_by(db.asc(Package.title)) \
-					.all()
+	alternatives = None
+	if package.type == PackageType.MOD:
+		alternatives = Package.query \
+				.filter_by(name=package.name, type=PackageType.MOD, soft_deleted=False) \
+				.filter(Package.id != package.id) \
+				.order_by(db.asc(Package.title)) \
+				.all()
 
-		show_similar_topics = current_user == package.author or \
-				package.checkPerm(current_user, Permission.APPROVE_NEW)
+	show_similar_topics = current_user == package.author or \
+			package.checkPerm(current_user, Permission.APPROVE_NEW)
 
-		similar_topics = None if not show_similar_topics else \
-				KrockForumTopic.query \
-					.filter_by(name=package.name) \
-					.filter(KrockForumTopic.topic_id != package.forums) \
-					.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
-					.order_by(db.asc(KrockForumTopic.name), db.asc(KrockForumTopic.title)) \
-					.all()
+	similar_topics = None if not show_similar_topics else \
+			KrockForumTopic.query \
+				.filter_by(name=package.name) \
+				.filter(KrockForumTopic.topic_id != package.forums) \
+				.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
+				.order_by(db.asc(KrockForumTopic.name), db.asc(KrockForumTopic.title)) \
+				.all()
 
-		releases = getReleases(package)
-		requests = [r for r in package.requests if r.status == 0]
+	releases = getReleases(package)
+	requests = [r for r in package.requests if r.status == 0]
 
-		review_thread = Thread.query.filter_by(package_id=package.id, private=True).first()
-		if review_thread is not None and not review_thread.checkPerm(current_user, Permission.SEE_THREAD):
-			review_thread = None
+	review_thread = Thread.query.filter_by(package_id=package.id, private=True).first()
+	if review_thread is not None and not review_thread.checkPerm(current_user, Permission.SEE_THREAD):
+		review_thread = None
 
-		return render_template("packages/view.html", \
-				package=package, releases=releases, requests=requests, \
-				alternatives=alternatives, similar_topics=similar_topics, \
-				review_thread=review_thread)
+	return render_template("packages/view.html", \
+			package=package, releases=releases, requests=requests, \
+			alternatives=alternatives, similar_topics=similar_topics, \
+			review_thread=review_thread)
 
 
 @app.route("/packages/<author>/<name>/download/")

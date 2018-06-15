@@ -376,7 +376,7 @@ class Package(db.Model):
 		for e in PackagePropertyKey:
 			setattr(self, e.name, getattr(package, e.name))
 
-	def getAsDictionary(self, base_url):
+	def getAsDictionaryShort(self, base_url):
 		tnurl = self.getThumbnailURL()
 		return {
 			"name": self.name,
@@ -384,12 +384,35 @@ class Package(db.Model):
 			"author": self.author.display_name,
 			"shortDesc": self.shortDesc,
 			"type": self.type.toName(),
-			"license": self.license.name,
-			"repo": self.repo,
-			"url": base_url + self.getDownloadURL(),
 			"release": self.getDownloadRelease().id if self.getDownloadRelease() is not None else None,
-			"screenshots": [base_url + ss.url for ss in self.screenshots],
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None
+		}
+
+	def getAsDictionary(self, base_url):
+		tnurl = self.getThumbnailURL()
+		return {
+			"author": self.author.display_name,
+			"name": self.name,
+			"title": self.title,
+			"shortDesc": self.shortDesc,
+			"desc": self.desc,
+			"type": self.type.toName(),
+			"createdAt": self.created_at,
+
+			"license": self.license.name,
+			"mediaLicense": self.media_license.name,
+
+			"repo": self.repo,
+			"website": self.website,
+			"issueTracker": self.issueTracker,
+			"forums": self.forums,
+
+			"provides": [x.name for x in self.provides],
+			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
+			"screenshots": [base_url + ss.url for ss in self.screenshots],
+
+			"url": base_url + self.getDownloadURL(),
+			"release": self.getDownloadRelease().id if self.getDownloadRelease() is not None else None
 		}
 
 	def getThumbnailURL(self):
