@@ -47,7 +47,7 @@ def build_packages_query():
 	if search is not None and search.strip() != "":
 		query = query.filter(Package.title.ilike('%' + search + '%'))
 
-	return query
+	return query, title
 
 @menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
 @menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
@@ -57,10 +57,13 @@ def packages_page():
 	if shouldReturnJson():
 		return redirect(url_for("api_packages_page"))
 
-	query = build_packages_query()
+	query, title = build_packages_query()
 	page  = int(request.args.get("page") or 1)
 	num   = min(42, int(request.args.get("n") or 100))
 	query = query.paginate(page, num, True)
+
+	search = request.args.get("q")
+	type_name = request.args.get("type")
 
 	next_url = url_for("packages_page", type=type_name, q=search, page=query.next_num) \
 			if query.has_next else None

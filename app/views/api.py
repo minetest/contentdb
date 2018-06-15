@@ -24,7 +24,7 @@ from .packages import build_packages_query
 
 @app.route("/api/packages/")
 def api_packages_page():
-	query = build_packages_query()
+	query, _ = build_packages_query()
 	pkgs = [package.getAsDictionaryShort(app.config["BASE_URL"]) \
 			for package in query.all() if package.getDownloadRelease() is not None]
 	return jsonify(pkgs)
