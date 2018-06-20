@@ -39,7 +39,7 @@ installed when a mod depends on it.
 The first package to use a name based on the creation of its forum topic or
 contentdb submission has the right to the technical name. The use of a package
 on a server or in private doesn't reserve its name. No other packages of the same
-type may use the same name, except for the exception given by 2.2.
+type may use the same name, except for the exception given by 3.2.
 
 If it turns out that we made a mistake by approving a package and that the
 name should have been given to another package, then we *may* unapprove the
