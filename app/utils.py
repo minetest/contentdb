@@ -50,6 +50,25 @@ def doFileUpload(file, allowedExtensions, fileTypeName):
 	file.save(os.path.join("app/public/uploads", filename))
 	return "/uploads/" + filename
 
+def make_flask_user_password(plaintext_str):
+	# http://passlib.readthedocs.io/en/stable/modular_crypt_format.html
+	# http://passlib.readthedocs.io/en/stable/lib/passlib.hash.bcrypt.html#format-algorithm
+	# Flask_User stores passwords in the Modular Crypt Format.
+	# https://github.com/lingthio/Flask-User/blob/master/flask_user/user_manager__settings.py#L166
+	#   Note that Flask_User allows customizing password algorithms.
+	#   USER_PASSLIB_CRYPTCONTEXT_SCHEMES defaults to bcrypt but if
+	#   default changes or is customized, the code below needs adapting.
+	# Individual password values will look like:
+	#   $2b$12$.az4S999Ztvy/wa3UdQvMOpcki1Qn6VYPXmEFMIdWQyYs7ULnH.JW
+	#   $XX$RR$SSSSSSSSSSSSSSSSSSSSSSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
+	# $XX : Selects algorithm (2b is bcrypt).
+	# $RR : Selects bcrypt key expansion rounds (12 is 2**12 rounds).
+	# $SSS... : 22 chars of (random, per-password) salt
+	#  HHH... : 31 remaining chars of password hash (note no dollar sign)
+	import bcrypt
+	plaintext = plaintext_str.encode("UTF-8")
+	password = bcrypt.hashpw(plaintext, bcrypt.gensalt())
+	return password.decode("UTF-8")
 
 def _do_login_user(user, remember_me=False):
 	def _call_or_get(v):

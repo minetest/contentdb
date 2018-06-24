@@ -23,6 +23,7 @@ if not "FLASK_CONFIG" in os.environ:
 test_data = len(sys.argv) >= 2 and sys.argv[1].strip() == "-t"
 
 from app.models import *
+from app.utils import make_flask_user_password
 
 def defineDummyData(licenses, tags, ruben):
 	ez = User("Shara")
@@ -342,6 +343,8 @@ db.create_all()
 print("Filling database...")
 
 ruben = User("rubenwardy")
+ruben.active = True
+ruben.password = make_flask_user_password("tuckfrump")
 ruben.github_username = "rubenwardy"
 ruben.forums_username = "rubenwardy"
 ruben.rank = UserRank.ADMIN
