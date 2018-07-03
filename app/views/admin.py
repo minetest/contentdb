@@ -21,7 +21,7 @@ from flask.ext import menu
 from app import app
 from app.models import *
 from app.tasks.importtasks import importRepoScreenshot, importAllDependencies
-from app.tasks.forumtasks  import importUsersFromModList, importKrocksModList
+from app.tasks.forumtasks  import importTopicList
 from flask_wtf import FlaskForm
 from wtforms import *
 from app.utils import loginUser, rank_required
@@ -31,11 +31,8 @@ from app.utils import loginUser, rank_required
 def admin_page():
 	if request.method == "POST":
 		action = request.form["action"]
-		if action == "importusers":
-			task = importUsersFromModList.delay()
-			return redirect(url_for("check_task", id=task.id, r=url_for("user_list_page")))
-		elif action == "importmodlist":
-			task = importKrocksModList.delay()
+		if action == "importmodlist":
+			task = importTopicList.delay()
 			return redirect(url_for("check_task", id=task.id, r=url_for("todo_topics_page")))
 		elif action == "importscreenshots":
 			packages = Package.query \

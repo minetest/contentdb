@@ -100,11 +100,11 @@ def package_page(package):
 			package.checkPerm(current_user, Permission.APPROVE_NEW)
 
 	similar_topics = None if not show_similar_topics else \
-			KrockForumTopic.query \
+			ForumTopic.query \
 				.filter_by(name=package.name) \
-				.filter(KrockForumTopic.topic_id != package.forums) \
-				.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
-				.order_by(db.asc(KrockForumTopic.name), db.asc(KrockForumTopic.title)) \
+				.filter(ForumTopic.topic_id != package.forums) \
+				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
+				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 				.all()
 
 	releases = getReleases(package)

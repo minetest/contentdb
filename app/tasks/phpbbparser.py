@@ -5,6 +5,7 @@
 import urllib, socket
 from bs4 import *
 from urllib.parse import urljoin
+from datetime import datetime
 import urllib.request
 import os.path
 import time, re
@@ -77,3 +78,72 @@ def getProfile(url, username):
 		__extract_properties(profile, soup)
 
 		return profile
+
+
+regex_id = re.compile(r"^.*t=([0-9]+).*$")
+
+def parseForumListPage(id, page, out, extra=None):
+	num_per_page = 30
+	start = page*num_per_page+1
+	print(" - Fetching page {} (topics {}-{})".format(page, start, start+num_per_page))
+
+	url = "https://forum.minetest.net/viewforum.php?f=" + str(id) + "&start=" + str(start)
+	r = urllib.request.urlopen(url).read().decode("utf-8")
+	soup = BeautifulSoup(r, "html.parser")
+
+	for row in soup.find_all("li", class_="row"):
+		classes = row.get("class")
+		if "sticky" in classes or "announce" in classes or "global-announce" in classes:
+			continue
+
+		topic = row.find("dl")
+
+		# Link info
+		link   = topic.find(class_="topictitle")
+		id	   = regex_id.match(link.get("href")).group(1)
+		title  = link.find(text=True)
+
+		# Date
+		left   = topic.find("dt")
+		date   = left.get_text().split("»")[1].strip()
+		date   = datetime.strptime(date, "%a %b %d, %Y %H:%M")
+		author = left.find_all("a")[-1].get_text().strip()
+
+		# Get counts
+		posts  = topic.find(class_="posts").find(text=True)
+		views  = topic.find(class_="views").find(text=True)
+
+		if id in out:
+			print("   - got {} again, title: {}".format(id, title))
+			assert(title == out[id]['title'])
+			return False
+
+		row = {
+			"id"    : id,
+			"title" : title,
+			"author": author,
+			"posts" : posts,
+			"views" : views,
+			"date"  : date
+		}
+
+		if extra is not None:
+			for key, value in extra.items():
+				row[key] = value
+
+		out[id] = row
+
+	return True
+
+def getTopicsFromForum(id, out={}, extra=None):
+	print("Fetching all topics from forum {}".format(id))
+	page = 0
+	while parseForumListPage(id, page, out, extra):
+		page = page + 1
+
+	return out
+
+def dumpTitlesToFile(topics, path):
+	with open(path, "w") as out_file:
+		for topic in topics.values():
+			out_file.write(topic["title"] + "\n")

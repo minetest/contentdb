@@ -743,23 +743,25 @@ REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com", \
 		"digitalaudioconcepts.com", "hg.intevation.org", "www.wtfpl.net", \
 		"imageshack.com", "imgur.com"]
 
-class KrockForumTopic(db.Model):
+class ForumTopic(db.Model):
 	topic_id  = db.Column(db.Integer, primary_key=True, autoincrement=False)
 	author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author    = db.relationship("User")
 
-	ttype     = db.Column(db.Integer, nullable=False)
+	type      = db.Column(db.Enum(PackageType), nullable=False)
 	title     = db.Column(db.String(200), nullable=False)
 	name      = db.Column(db.String(30), nullable=True)
 	link      = db.Column(db.String(200), nullable=True)
 
-	def getType(self):
-		if self.ttype == 1 or self.ttype == 2:
-			return PackageType.MOD
-		elif self.ttype == 6:
-			return PackageType.GAME
+	posts     = db.Column(db.Integer, nullable=False)
+	views     = db.Column(db.Integer, nullable=False)
+
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
 
 	def getRepoURL(self):
+		if self.link is None:
+			return None
+
 		for item in REPO_BLACKLIST:
 			if item in self.link:
 				return None

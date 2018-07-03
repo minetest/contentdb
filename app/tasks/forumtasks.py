@@ -15,12 +15,12 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import flask, json
+import flask, json, re
 from flask.ext.sqlalchemy import SQLAlchemy
 from app import app
 from app.models import *
 from app.tasks import celery
-from .phpbbparser import getProfile
+from .phpbbparser import getProfile, getTopicsFromForum
 import urllib.request
 from urllib.parse import urlparse, quote_plus
 
@@ -51,71 +51,88 @@ def checkForumAccount(username, token=None):
 	if needsSaving:
 		db.session.commit()
 
-@celery.task()
-def importUsersFromModList():
+
+regex_tag    = re.compile(r"\[([a-z0-9_]+)\]")
+BANNED_NAMES = ["mod", "game", "old", "outdated", "wip", "api", "beta", "alpha", "git"]
+def getNameFromTaglist(taglist):
+	for tag in reversed(regex_tag.findall(taglist)):
+		if len(tag) < 30 and not tag in BANNED_NAMES and \
+				not re.match(r"^[a-z]?[0-9]+$", tag):
+			return tag
+
+	return None
+
+regex_title = re.compile(r"^((?:\[[^\]]+\] *)*)([^\[]+) *((?:\[[^\]]+\] *)*)[^\[]*$")
+def parseTitle(title):
+	m = regex_title.match(title)
+	if m is None:
+		print("Invalid title format: " + title)
+		return title, getNameFromTaglist(title)
+	else:
+		return m.group(2).strip(), getNameFromTaglist(m.group(3))
+
+def getLinksFromModSearch():
+	links = {}
+
 	contents = urllib.request.urlopen("http://krock-works.16mb.com/MTstuff/modList.php").read().decode("utf-8")
-	list = json.loads(contents)
-	found = {}
-	imported = []
+	for x in json.loads(contents):
+		link = x.get("link")
+		if link is not None:
+			links[int(x["topicId"])] = link
 
-	for user in User.query.all():
-		found[user.username] = True
-		if user.forums_username is not None:
-			found[user.forums_username] = True
-
-	for x in list:
-		author = x.get("author")
-		if author is not None and not author in found:
-			user = User(author)
-			user.forums_username = author
-			imported.append(author)
-			found[author] = True
-			db.session.add(user)
-
-	db.session.commit()
-	for author in found:
-		checkForumAccount.delay(author, None)
-
-
-BANNED_NAMES = ["mod", "game", "old", "outdated", "wip", "api"]
-ALLOWED_TYPES = [1, 2, 6]
+	return links
 
 @celery.task()
-def importKrocksModList():
-	contents = urllib.request.urlopen("http://krock-works.16mb.com/MTstuff/modList.php").read().decode("utf-8")
-	list = json.loads(contents)
+def importTopicList():
+	links_by_id = getLinksFromModSearch()
+
+	info_by_id = {}
+	getTopicsFromForum(11, out=info_by_id, extra={ 'type': PackageType.MOD })
+	getTopicsFromForum(15, out=info_by_id, extra={ 'type': PackageType.GAME })
+
+	# Caches
 	username_to_user = {}
+	topics_by_id     = {}
+	for topic in ForumTopic.query.all():
+		topics_by_id[topic.topic_id] = topic
 
-	KrockForumTopic.query.delete()
+	# Create or update
+	for info in info_by_id.values():
+		id = int(info["id"])
 
-	for x in list:
-		type = int(x["type"])
-		if not type in ALLOWED_TYPES:
-			continue
-
-		username = x["author"]
+		# Get author
+		username = info["author"]
 		user = username_to_user.get(username)
 		if user is None:
 			user = User.query.filter_by(forums_username=username).first()
-			assert(user is not None)
+			if user is None:
+				print(username + " not found!")
+				user = User(username)
+				user.forums_username = username
+				db.session.add(user)
 			username_to_user[username] = user
 
-		import re
-		tags = re.findall("\[([a-z0-9_]+)\]", x["title"])
-		name = None
-		for tag in reversed(tags):
-			if len(tag) < 30 and not tag in BANNED_NAMES and \
-					not re.match("^([a-z][0-9]+)$", tag):
-				name = tag
-				break
+		# Get / add row
+		topic = topics_by_id.get(id)
+		if topic is None:
+			topic = ForumTopic()
+			db.session.add(topic)
 
-		topic = KrockForumTopic()
-		topic.topic_id  = x["topicId"]
-		topic.author_id = user.id
-		topic.ttype     = type
-		topic.title     = x["title"]
-		topic.name      = name
-		topic.link      = x.get("link")
-		db.session.add(topic)
+		# Parse title
+		title, name = parseTitle(info["title"])
+
+		# Get link
+		link = links_by_id.get(id)
+
+		# Fill row
+		topic.topic_id   = id
+		topic.author     = user
+		topic.type       = info["type"]
+		topic.title      = title
+		topic.name       = name
+		topic.link       = link
+		topic.posts      = info["posts"]
+		topic.views      = info["views"]
+		topic.created_at = info["date"]
 
 	db.session.commit()

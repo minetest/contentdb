@@ -98,10 +98,10 @@ def user_profile_page(username):
 
 	topics_to_add = None
 	if current_user == user or user.checkPerm(current_user, Permission.CHANGE_AUTHOR):
-		topics_to_add = KrockForumTopic.query \
+		topics_to_add = ForumTopic.query \
 					.filter_by(author_id=user.id) \
-					.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
-					.order_by(db.asc(KrockForumTopic.name), db.asc(KrockForumTopic.title)) \
+					.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
+					.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 					.all()
 
 	# Process GET or invalid POST

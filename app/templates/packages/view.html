@@ -292,7 +292,7 @@
 		<ul>
 			{% for t in similar_topics %}
 				<li>
-					[{{ t.getType().value }}]
+					[{{ t.type.value }}]
 					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
 						{{ t.title }} by {{ t.author.display_name }}
 					</a>

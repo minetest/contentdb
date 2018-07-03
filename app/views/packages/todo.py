@@ -41,8 +41,8 @@ def todo_page():
 		screenshots = PackageScreenshot.query.filter_by(approved=False).all()
 
 
-	topics_to_add = KrockForumTopic.query \
-			.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
+	topics_to_add = ForumTopic.query \
+			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
 			.count()
 
 	return render_template("todo/list.html", title="Reports and Work Queue",
@@ -54,11 +54,11 @@ def todo_page():
 @app.route("/todo/topics/")
 @login_required
 def todo_topics_page():
-	total = KrockForumTopic.query.count()
+	total = ForumTopic.query.count()
 
-	topics = KrockForumTopic.query \
-			.filter(~ db.exists().where(Package.forums==KrockForumTopic.topic_id)) \
-			.order_by(db.asc(KrockForumTopic.name), db.asc(KrockForumTopic.title)) \
+	topics = ForumTopic.query \
+			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
+			.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 			.all()
 
 	return render_template("todo/topics.html", topics=topics, total=total)
