@@ -46,10 +46,10 @@ def send_upload(path):
 @app.route("/")
 @menu.register_menu(app, ".", "Home")
 def home_page():
-	query = Package.query.filter_by(approved=True, soft_deleted=False)
-	count = query.count()
-	new    = query.order_by(db.desc(Package.created_at)).limit(3).all()
-	popular = query.order_by(db.desc(Package.score)).limit(15).all()
+	query   = Package.query.filter_by(approved=True, soft_deleted=False)
+	count   = query.count()
+	new     = query.order_by(db.desc(Package.created_at)).limit(15).all()
+	popular = query.order_by(db.desc(Package.score)).limit(6).all()
 	return render_template("index.html", new=new, popular=popular, count=count)
 
 from . import users, githublogin, packages, meta, threads, api
