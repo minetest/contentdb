@@ -64,6 +64,12 @@ def admin_page():
 
 			db.session.commit()
 			return redirect(url_for("admin_page"))
+		elif action == "recalcscores":
+			for p in Package.query.all():
+				p.recalcScore()
+
+			db.session.commit()
+			return redirect(url_for("admin_page"))
 
 		else:
 			flash("Unknown action: " + action, "error")

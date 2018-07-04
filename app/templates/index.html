@@ -25,6 +25,10 @@ Welcome
 
 <main>
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
-	{{ render_pkggrid(packages) }}
+	<h2>Newly Added</h2>
+	{{ render_pkggrid(new) }}
+
+	<h2>Popular</h2>
+	{{ render_pkggrid(popular) }}
 </main>
 {% endblock %}

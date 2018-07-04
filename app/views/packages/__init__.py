@@ -47,6 +47,8 @@ def build_packages_query():
 	if search is not None and search.strip() != "":
 		query = query.filter(Package.title.ilike('%' + search + '%'))
 
+	query = query.order_by(db.desc(Package.score))
+
 	return query, title
 
 @menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })

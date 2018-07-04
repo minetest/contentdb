@@ -339,6 +339,8 @@ class Package(db.Model):
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	soft_deleted = db.Column(db.Boolean, nullable=False, default=False)
 
+	score        = db.Column(db.Float, nullable=False, default=0)
+
 	review_thread_id = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=True, default=None)
 	review_thread    = db.relationship("Thread", foreign_keys=[review_thread_id])
 
@@ -385,7 +387,8 @@ class Package(db.Model):
 			"shortDesc": self.shortDesc,
 			"type": self.type.toName(),
 			"release": self.getDownloadRelease().id if self.getDownloadRelease() is not None else None,
-			"thumbnail": (base_url + tnurl) if tnurl is not None else None
+			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
+			"score": round(self.score * 10) / 10
 		}
 
 	def getAsDictionary(self, base_url):
@@ -412,7 +415,9 @@ class Package(db.Model):
 			"screenshots": [base_url + ss.url for ss in self.screenshots],
 
 			"url": base_url + self.getDownloadURL(),
-			"release": self.getDownloadRelease().id if self.getDownloadRelease() is not None else None
+			"release": self.getDownloadRelease().id if self.getDownloadRelease() is not None else None,
+
+			"score": round(self.score * 10) / 10
 		}
 
 	def getThumbnailURL(self):
@@ -497,6 +502,21 @@ class Package(db.Model):
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
+
+	def recalcScore(self):
+		import datetime
+
+		self.score = 0
+
+		if self.forums is None:
+			return
+
+		topic = ForumTopic.query.get(self.forums)
+		if topic:
+			days   = (datetime.datetime.now() - topic.created_at).days
+			months = days / 30
+			years  = days / 365
+			self.score = topic.views / years + 80*min(6, months)
 
 class MetaPackage(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

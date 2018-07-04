@@ -48,8 +48,9 @@ def send_upload(path):
 def home_page():
 	query = Package.query.filter_by(approved=True, soft_deleted=False)
 	count = query.count()
-	packages = query.order_by(db.desc(Package.created_at)).limit(15).all()
-	return render_template("index.html", packages=packages, count=count)
+	new    = query.order_by(db.desc(Package.created_at)).limit(3).all()
+	popular = query.order_by(db.desc(Package.score)).limit(15).all()
+	return render_template("index.html", new=new, popular=popular, count=count)
 
 from . import users, githublogin, packages, meta, threads, api
 from . import sass, tasks, admin, notifications, tagseditor, thumbnails
