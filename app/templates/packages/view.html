@@ -296,6 +296,7 @@
 					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
 						{{ t.title }} by {{ t.author.display_name }}
 					</a>
+					{% if t.wip %}[WIP]{% endif %}
 				</li>
 			{% endfor %}
 		</ul>

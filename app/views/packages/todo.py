@@ -58,7 +58,7 @@ def todo_topics_page():
 
 	topics = ForumTopic.query \
 			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-			.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
+			.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 			.all()
 
 	return render_template("todo/topics.html", topics=topics, total=total)

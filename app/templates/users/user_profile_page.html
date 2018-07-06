@@ -104,11 +104,8 @@
 
 		<div class="box-body">
 			<p>
-				List of your topics without a matching package.
-				Powered by Krock's Mod Search.
+				List of your forum topics which do not have a matching package.
 			</p>
-
-			
 
 			{% from "macros/topictable.html" import render_topictable %}
 			{{ render_topictable(topics_to_add, show_author=False) }}

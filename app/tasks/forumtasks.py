@@ -87,8 +87,10 @@ def importTopicList():
 	links_by_id = getLinksFromModSearch()
 
 	info_by_id = {}
-	getTopicsFromForum(11, out=info_by_id, extra={ 'type': PackageType.MOD })
-	getTopicsFromForum(15, out=info_by_id, extra={ 'type': PackageType.GAME })
+	getTopicsFromForum(11, out=info_by_id, extra={ 'type': PackageType.MOD,  'wip': False })
+	getTopicsFromForum(9,  out=info_by_id, extra={ 'type': PackageType.MOD,  'wip': True  })
+	getTopicsFromForum(15, out=info_by_id, extra={ 'type': PackageType.GAME, 'wip': False })
+	getTopicsFromForum(50, out=info_by_id, extra={ 'type': PackageType.GAME, 'wip': True  })
 
 	# Caches
 	username_to_user = {}
@@ -131,6 +133,7 @@ def importTopicList():
 		topic.title      = title
 		topic.name       = name
 		topic.link       = link
+		topic.wip        = info["wip"]
 		topic.posts      = info["posts"]
 		topic.views      = info["views"]
 		topic.created_at = info["date"]
