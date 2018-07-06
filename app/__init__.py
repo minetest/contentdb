@@ -37,5 +37,9 @@ csrf = CsrfProtect(app)
 mail = Mail(app)
 pages = FlatPages(app)
 
+if not app.debug:
+	from .maillogger import register_mail_error_handler
+	register_mail_error_handler(app, mail)
+
 from . import models, tasks
 from .views import *

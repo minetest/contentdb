@@ -22,7 +22,17 @@ from app.tasks import celery
 
 @celery.task()
 def sendVerifyEmail(newEmail, token):
-    msg = Message("Verify email address", recipients=[newEmail])
-    msg.body = "This is a verification email!"
-    msg.html = render_template("emails/verify.html", token=token)
-    mail.send(msg)
+	msg = Message("Verify email address", recipients=[newEmail])
+	msg.body = "This is a verification email!"
+	msg.html = render_template("emails/verify.html", token=token)
+	mail.send(msg)
+
+@celery.task()
+def sendEmailRaw(to, subject, text, html):
+	from flask_mail import Message
+	msg = Message(subject, recipients=to)
+	if text:
+		msg.body = text
+	if html:
+		msg.html = html
+	mail.send(msg)
