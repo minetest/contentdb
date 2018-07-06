@@ -790,6 +790,20 @@ class ForumTopic(db.Model):
 
 		return self.link.replace("repo.or.cz/w/", "repo.or.cz/")
 
+	def getAsDictionary(self):
+		return {
+			"author": self.author.username,
+			"name":   self.name,
+			"type":   self.type.toName(),
+			"title":  self.title,
+			"id":     self.topic_id,
+			"link":   self.link,
+			"posts":  self.posts,
+			"views":  self.views,
+			"is_wip": self.wip,
+			"created_at": self.created_at.isoformat(),
+		}
+
 
 # Setup Flask-User
 db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model

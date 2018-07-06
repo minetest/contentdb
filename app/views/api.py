@@ -33,3 +33,11 @@ def api_packages_page():
 @is_package_page
 def api_package_page(package):
 	return jsonify(package.getAsDictionary(app.config["BASE_URL"]))
+
+
+@app.route("/api/topics/")
+def api_topics_page():
+	query = ForumTopic.query \
+			.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
+	pkgs = [t.getAsDictionary() for t in query.all()]
+	return jsonify(pkgs)
