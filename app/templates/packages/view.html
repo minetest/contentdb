@@ -24,6 +24,9 @@
 			{% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
 				You need to add at least one screenshot.
 
+			{% elif topic_error_lvl == "error" %}
+				Please fix the below topic issue(s).
+
 			{% else %}
 				{% if package.screenshots.count() == 0 %}
 					<b>You should add at least one screenshot, but this isn't required.</b><br />
@@ -43,6 +46,14 @@
 			{% endif %}
 			<div style="clear: both;"></div>
 		</div>
+
+		{% if topic_error %}
+			<div class="box box_grey alert alert-{{ topic_error_lvl }}">
+				<span class="icon_message"></span>
+				{{ topic_error | safe }}
+				<div style="clear: both;"></div>
+			</div>
+		{% endif %}
 
 		{% if package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW") %}
 			{% if review_thread %}

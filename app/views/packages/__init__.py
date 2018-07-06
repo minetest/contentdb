@@ -116,10 +116,31 @@ def package_page(package):
 	if review_thread is not None and not review_thread.checkPerm(current_user, Permission.SEE_THREAD):
 		review_thread = None
 
+	topic_error = None
+	topic_error_lvl = "warning"
+	if not package.approved and package.forums is not None:
+		errors = []
+		if Package.query.filter_by(forums=package.forums, soft_deleted=False).count() > 1:
+			errors.append("<b>Error: Another package already uses this forum topic!</b>")
+			topic_error_lvl = "error"
+
+		topic = ForumTopic.query.get(package.forums)
+		if topic is not None:
+			if topic.author != package.author:
+				errors.append("<b>Error: Forum topic author doesn't match package author.</b>")
+				topic_error_lvl = "error"
+
+			if topic.wip:
+				errors.append("Warning: Forum topic is in WIP section, make sure package meets playability standards.")
+		elif package.type != PackageType.TXP:
+			errors.append("Warning: Forum topic not found. This may happen if the topic has only just been created.")
+
+		topic_error = "<br />".join(errors)
+
 	return render_template("packages/view.html", \
 			package=package, releases=releases, requests=requests, \
 			alternatives=alternatives, similar_topics=similar_topics, \
-			review_thread=review_thread)
+			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl)
 
 
 @app.route("/packages/<author>/<name>/download/")
