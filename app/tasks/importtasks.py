@@ -372,7 +372,7 @@ def makeVCSRelease(id, branch):
 			filename = randomString(10) + ".zip"
 			destPath = os.path.join("app/public/uploads", filename)
 			with open(destPath, "wb") as fp:
-				repo.archive(fp)
+				repo.archive(fp, format="zip")
 
 			release.url = "/uploads/" + filename
 			print(release.url)
