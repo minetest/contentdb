@@ -20,11 +20,13 @@ from flask_user import *
 from flask.ext import menu
 from app import app
 from app.models import *
-from app.tasks.importtasks import importRepoScreenshot, importAllDependencies
+from celery import uuid
+from app.tasks.importtasks import importRepoScreenshot, importAllDependencies, makeVCSRelease
 from app.tasks.forumtasks  import importTopicList
 from flask_wtf import FlaskForm
 from wtforms import *
-from app.utils import loginUser, rank_required
+from app.utils import loginUser, rank_required, triggerNotif
+import datetime
 
 @app.route("/admin/", methods=["GET", "POST"])
 @rank_required(UserRank.ADMIN)
@@ -70,6 +72,25 @@ def admin_page():
 
 			db.session.commit()
 			return redirect(url_for("admin_page"))
+		elif action == "vcsrelease":
+			for package in Package.query.filter(Package.repo.isnot(None)).all():
+				if package.releases.count() != 0:
+					continue
+
+				rel = PackageRelease()
+				rel.package  = package
+				rel.title    = datetime.date.today().isoformat()
+				rel.url      = ""
+				rel.task_id  = uuid()
+				rel.approved = True
+				db.session.add(rel)
+				db.session.commit()
+
+				makeVCSRelease.apply_async((rel.id, "master"), task_id=rel.task_id)
+
+				msg = "{}: Release {} created".format(package.title, rel.title)
+				triggerNotif(package.author, current_user, msg, rel.getEditURL())
+				db.session.commit()
 
 		else:
 			flash("Unknown action: " + action, "error")
