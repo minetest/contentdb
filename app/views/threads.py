@@ -27,8 +27,10 @@ from wtforms.validators import *
 
 @app.route("/threads/")
 def threads_page():
-	threads = Thread.query.filter_by(private=False).all()
-	return render_template("threads/list.html", threads=threads)
+	query = Thread.query
+	if not Permission.SEE_THREAD.check(current_user):
+		query = query.filter_by(private=False)
+	return render_template("threads/list.html", threads=query.all())
 
 @app.route("/threads/<int:id>/", methods=["GET", "POST"])
 def thread_page(id):

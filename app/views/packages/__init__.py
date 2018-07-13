@@ -37,11 +37,11 @@ def build_packages_query():
 		type = PackageType[type_name.upper()]
 
 	title = "Packages"
-	query = Package.query.filter_by(soft_deleted=False)
+	query = Package.query.filter_by(soft_deleted=False, approved=True)
 
 	if type is not None:
 		title = type.value + "s"
-		query = query.filter_by(type=type, approved=True)
+		query = query.filter_by(type=type)
 
 	search = request.args.get("q")
 	if search is not None and search.strip() != "":

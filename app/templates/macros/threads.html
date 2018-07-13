@@ -29,6 +29,8 @@
 	<ul>
 		{% for t in threads %}
 			<li><a href="{{ url_for('thread_page', id=t.id) }}">{{ t.title }}</a> by {{ t.author.display_name }}</li>
+		{% else %}
+			<li><i>No threads found</i></li>
 		{% endfor %}
 	</ul>
 {% endmacro %}
