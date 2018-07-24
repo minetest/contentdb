@@ -133,7 +133,7 @@ def parseForumListPage(id, page, out, extra=None):
 
 		out[id] = row
 
-	return False
+	return True
 
 def getTopicsFromForum(id, out={}, extra=None):
 	print("Fetching all topics from forum {}".format(id))
