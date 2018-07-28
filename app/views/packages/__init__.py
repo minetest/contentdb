@@ -29,6 +29,7 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from sqlalchemy import or_
 
 def build_packages_query():
 	type_name = request.args.get("type")
@@ -112,7 +113,7 @@ def package_page(package):
 	releases = getReleases(package)
 	requests = [r for r in package.requests if r.status == 0]
 
-	review_thread = Thread.query.filter_by(package_id=package.id, private=True).first()
+	review_thread = package.review_thread
 	if review_thread is not None and not review_thread.checkPerm(current_user, Permission.SEE_THREAD):
 		review_thread = None
 
@@ -137,10 +138,19 @@ def package_page(package):
 
 		topic_error = "<br />".join(errors)
 
+
+	threads = Thread.query.filter_by(package_id=package.id)
+	if not current_user.is_authenticated:
+		threads = threads.filter_by(private=False)
+	elif not current_user.rank.atLeast(UserRank.EDITOR) and not current_user == package.author:
+		threads = threads.filter(or_(Thread.private == False, Thread.author == current_user))
+
+
 	return render_template("packages/view.html", \
 			package=package, releases=releases, requests=requests, \
 			alternatives=alternatives, similar_topics=similar_topics, \
-			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl)
+			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl, \
+			threads=threads.all())
 
 
 @app.route("/packages/<author>/<name>/download/")
