@@ -27,6 +27,9 @@
 			{% elif topic_error_lvl == "error" %}
 				Please fix the below topic issue(s).
 
+			{% elif "Other" in package.license.name or "Other" in package.media_license.name %}
+				Please wait for the license to be added to CDB.
+
 			{% else %}
 				{% if package.screenshots.count() == 0 %}
 					<b>You should add at least one screenshot, but this isn't required.</b><br />
@@ -106,11 +109,6 @@
 			{% elif not package.media_license.is_foss %}
 				<div class="box box_grey alert alert-error" style="margin-top: 0;">
 					<b>Warning:</b> Non-free media.
-				</div>
-			{% endif %}
-			{% if not package.approved and ("Other" in package.license.name or "Other" in package.media_license.name) %}
-				<div class="box box_grey alert alert-warning" style="margin-top: 0;">
-					Make sure to check the specific license used here
 				</div>
 			{% endif %}
 			<table>
