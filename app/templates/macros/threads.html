@@ -10,7 +10,7 @@
 					<div class="clearboth"></div>
 				</div>
 				<div class="msg">
-					{{ r.comment }}
+					{{ r.comment | markdown }}
 				</div>
 			</li>
 		{% endfor %}
@@ -19,7 +19,7 @@
 	{% if current_user.is_authenticated %}
 		<form method="post" action="{{ url_for('thread_page', id=thread.id)}}" class="comment_form">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<textarea required maxlength=500 name="comment"></textarea><br />
+			<textarea required maxlength=500 name="comment" placeholder="Markdown supported"></textarea><br />
 			<input type="submit" value="Comment" />
 		</form>
 	{% endif %}
