@@ -54,7 +54,7 @@ def create_screenshot_page(package, id=None):
 		if uploadedPath is not None:
 			ss = PackageScreenshot()
 			ss.package = package
-			ss.title   = form["title"].data
+			ss.title   = form["title"].data or "Untitled"
 			ss.url     = uploadedPath
 			db.session.add(ss)
 
@@ -91,7 +91,7 @@ def edit_screenshot_page(package, id):
 			wasApproved = screenshot.approved
 
 			if canEdit:
-				screenshot.title = form["title"].data
+				screenshot.title = form["title"].data or "Untitled"
 
 			if canApprove:
 				screenshot.approved = form["approved"].data
