@@ -32,6 +32,41 @@ def threads_page():
 		query = query.filter_by(private=False)
 	return render_template("threads/list.html", threads=query.all())
 
+
+@app.route("/threads/<int:id>/subscribe/", methods=["POST"])
+@login_required
+def thread_subscribe_page(id):
+	thread = Thread.query.get(id)
+	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
+		abort(404)
+
+	if current_user in thread.watchers:
+		flash("Already subscribed!", "success")
+	else:
+		flash("Subscribed to thread", "success")
+		thread.watchers.append(current_user)
+		db.session.commit()
+
+	return redirect(url_for("thread_page", id=id))
+
+
+@app.route("/threads/<int:id>/unsubscribe/", methods=["POST"])
+@login_required
+def thread_unsubscribe_page(id):
+	thread = Thread.query.get(id)
+	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
+		abort(404)
+
+	if current_user in thread.watchers:
+		flash("Unsubscribed!", "success")
+		thread.watchers.remove(current_user)
+		db.session.commit()
+	else:
+		flash("Not subscribed to thread", "success")
+
+	return redirect(url_for("thread_page", id=id))
+
+
 @app.route("/threads/<int:id>/", methods=["GET", "POST"])
 def thread_page(id):
 	clearNotifications(url_for("thread_page", id=id))

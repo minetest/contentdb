@@ -731,6 +731,15 @@ class Thread(db.Model):
 	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", \
 						backref=db.backref("watching", lazy=True))
 
+
+	def getSubscribeURL(self):
+		return url_for("thread_subscribe_page",
+				id=self.id)
+
+	def getUnsubscribeURL(self):
+		return url_for("thread_unsubscribe_page",
+				id=self.id)
+
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
 			return not self.private
