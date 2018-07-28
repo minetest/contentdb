@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block content %}
-	<img src="{{ screenshot.getThumbnailURL() }}" alt="{{ screenshot.title }}" />
+	<a href="{{ screenshot.url }}">
+		<img src="{{ screenshot.getThumbnailURL() }}" alt="{{ screenshot.title }}" />
+	</a>
 
 	{% from "macros/forms.html" import render_field, render_submit_field %}
 	<form method="POST" action="" enctype="multipart/form-data">

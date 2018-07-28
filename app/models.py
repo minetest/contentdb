@@ -604,6 +604,14 @@ class PackageRelease(db.Model):
 	def __init__(self):
 		self.releaseDate = datetime.now()
 
+
+class PackageReview(db.Model):
+	id         = db.Column(db.Integer, primary_key=True)
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
+	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
+	recommend  = db.Column(db.Boolean, nullable=False, default=True)
+
+
 class PackageScreenshot(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
@@ -763,10 +771,6 @@ class ThreadReply(db.Model):
 	comment    = db.Column(db.String(500), nullable=False)
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
-
-
-
-
 
 
 REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com", \
