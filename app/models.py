@@ -591,6 +591,7 @@ class PackageRelease(db.Model):
 	url          = db.Column(db.String(200), nullable=False)
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	task_id      = db.Column(db.String(37), nullable=True)
+	commit_hash  = db.Column(db.String(41), nullable=True, default=None)
 
 
 	def getEditURL(self):

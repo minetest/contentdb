@@ -344,9 +344,10 @@ def makeVCSReleaseFromGithub(id, branch, release, url):
 	if len(commits) == 0 or not "sha" in commits[0]:
 		raise TaskError("No commits found")
 
-	release.url = urlmaker.getCommitDownload(commits[0]["sha"])
+	release.url          = urlmaker.getCommitDownload(commits[0]["sha"])
+	release.task_id     = None
+	release.commit_hash = commits[0]["sha"]
 	print(release.url)
-	release.task_id = None
 	db.session.commit()
 
 	return release.url
@@ -374,9 +375,10 @@ def makeVCSRelease(id, branch):
 			with open(destPath, "wb") as fp:
 				repo.archive(fp, format="zip")
 
-			release.url = "/uploads/" + filename
+			release.url         = "/uploads/" + filename
+			release.task_id     = None
+			release.commit_hash = repo.head.object.hexsha
 			print(release.url)
-			release.task_id = None
 			db.session.commit()
 
 			return release.url

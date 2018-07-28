@@ -188,7 +188,8 @@
 				<li>
 					{% if not rel.approved %}<i>{% endif %}
 
-					<a href="{{ rel.url }}">{{ rel.title }}</a>,
+					<a href="{{ rel.url }}">{{ rel.title }}</a>{% if rel.commit_hash %}
+					[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %},
 					created {{ rel.releaseDate | datetime }}.
 					{% if rel.task_id %}
 						<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>

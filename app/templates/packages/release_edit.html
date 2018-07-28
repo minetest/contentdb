@@ -21,6 +21,10 @@
 			Url: <a href="{{ release.url }}">{{ release.url }}</a><br />
 		{% endif %}
 
+		{% if release.commit_hash %}
+			Commit Hash: {{ release.commit_hash }}<br />
+		{% endif %}
+
 		{% if release.task_id %}
 			Importing... <a href="{ url_for('check_task', id=release.task_id, r=release.getEditURL()) }}">view task</a><br />
 			{% if package.checkPerm(current_user, "CHANGE_RELEASE_URL") %}
