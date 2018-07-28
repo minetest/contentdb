@@ -4,6 +4,20 @@ title: Package Inclusion Policy and Guidance
 	<b>Note:</b> This is a draft
 </div>
 
+## 0. Overview
+
+ContentDB is for the community, and as such listings should be useful to the
+community. To help with this, there are a few rules to improve the quality of
+the listings and to combat abuse.
+
+* No inappropriate content.
+* Content must be playable/useful, but not necessarily finished.
+* Don't use the name of another mod unless your mod is a fork or reimplementation.
+* Licenses must allow derivatives, redistribution, and must not discriminate.
+* Don't put promotions are advertisements in package listings, except for
+  donation and personal website links which are permitted in the long description.
+
+
 ## 1. General
 
 It is not permitted to submit abusive, obscene, vulgar, slanderous, hateful,
@@ -22,14 +36,17 @@ The submission of malware is strictly prohibited. This includes software which
 does not do as it advertises, for example if it posts telemetry without stating
 clearly that it does in the package meta.
 
-ContentDB should only currently contain playable content, ie: stuff that would
-be in Mod Releases and Game Releases. Please don't upload any Work In Progress (WIP)
-things. This will probably change in future if/when an "early access" feature is
-added.
+ContentDB should only currently contain playable content - content which is
+sufficiently complete to be useful to end users. It's fine to add stuff which
+is still a work in progress (WIP) as long as it adds sufficient value -
+Mineclone 2 is a good example of a WIP package which may break between releases
+but still has value. Note that this doesn't mean that you should add a thing
+you started working on yesterday, it's worth adding all the basic stuff to
+make your package useful.
 
-Adding non-player facing mods, such as libraries and server tools, is perfectly fine.
-ContentDB isn't just for player-facing things, and adding libraries allows them to be
-installed when a mod depends on it.
+Adding non-player facing mods, such as libraries and server tools, is perfectly fine
+and encouraged. ContentDB isn't just for player-facing things, and adding
+libraries allows them to be installed when a mod depends on it.
 
 
 ## 3. Technical Names
@@ -47,6 +64,9 @@ package and give the name to the correct one.
 
 If you submit a package where you don't have the right to the name you will be asked
 to change the name of the package, or your package won't be accepted.
+
+We reserve the right to issue exceptions for this where we feel necessary, however
+this will be done rarely and usually only for packages created before CDB was created.
 
 ### 3.2 Mod Forks and Reimplementations
 
@@ -66,17 +86,23 @@ Please ensure that you correctly credit any resources (code, assets, or otherwis
 that you have used in your package.
 
 **The use of licenses which do not allow derivatives or redistribution is not
-permitted. This includes CC-ND (No-Derivatives) and lots of closed source licenses.**
+permitted. This includes CC-ND (No-Derivatives) and lots of closed source licenses.
+The use of licenses which discriminate between groups of people or forbid the use
+of the content on servers or singleplayer is also not permitted.**
 
 However, closed sourced licenses are allowed if they allow the above.
 
-If the license you use is not on the list then please choose the correct "Other"
-option.
+If the license you use is not on the list then please select "Other", and we'll
+get around to adding it.
 
 Please note that the definitions of "free" and "non-free" is the same as that
 of the [Free Software Foundation](https://www.gnu.org/philosophy/free-sw.en.html).
 
 ### 4.2 Recommended Licenses
+
+It is highly recommended that you use a free and open source software license.
+FOSS licenses result in a sharing community and will increase the number of potential users your package has.
+Using a closed source license will result in your package being massively penalised in the search results and package lists.
 
 It is recommended that you use a proper license for code with a warranty
 disclaimer, such as the (L)GPL or MIT. You should also use a proper media license
