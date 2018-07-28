@@ -57,6 +57,6 @@ def createedit_license_page(name=None):
 
 		form.populate_obj(license)
 		db.session.commit()
-		return redirect(url_for("createedit_license_page", name=license.name))
+		return redirect(url_for("license_list_page"))
 
 	return render_template("admin/licenses/edit.html", license=license, form=form)
