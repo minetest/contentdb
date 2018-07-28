@@ -92,7 +92,7 @@ def new_thread_page():
 			flash("Unable to find that package!", "error")
 
 	# Don't allow making threads on approved packages for now
-	if package is None or package.approved:
+	if package is None:
 		abort(403)
 
 	def_is_private   = request.args.get("private") or False
@@ -102,8 +102,7 @@ def new_thread_page():
 	is_review_thread = package is not None and not package.approved
 
 	# Check that user can make the thread
-	if is_review_thread and not (package.author == current_user or \
-			package.checkPerm(current_user, Permission.APPROVE_NEW)):
+	if not package.checkPerm(current_user, Permission.CREATE_THREAD):
 		flash("Unable to create thread!", "error")
 		return redirect(url_for("home_page"))
 

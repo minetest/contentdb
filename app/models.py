@@ -77,6 +77,7 @@ class Permission(enum.Enum):
 	CHANGE_EMAIL       = "CHANGE_EMAIL"
 	EDIT_EDITREQUEST   = "EDIT_EDITREQUEST"
 	SEE_THREAD         = "SEE_THREAD"
+	CREATE_THREAD      = "CREATE_THREAD"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -480,7 +481,7 @@ class Package(db.Model):
 		isOwner = user == self.author
 
 		# Members can edit their own packages, and editors can edit any packages
-		if perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
+		if perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS or perm == Permission.CREATE_THREAD:
 			return isOwner or user.rank.atLeast(UserRank.EDITOR)
 
 		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES:
