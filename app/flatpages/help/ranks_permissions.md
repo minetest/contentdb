@@ -34,6 +34,8 @@ title: Ranks and Permissions
 			<th>N</th>
 			<th>Y</th>
 			<th>N</th>
+			<th>Y</th>
+			<th>N</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -58,7 +60,7 @@ title: Ranks and Permissions
 			<th></th>
 			<th></th> <!-- member -->
 			<th></th>
-			<th>✓</th> <!-- trusted member -->
+			<th></th> <!-- trusted member -->
 			<th></th>
 			<th>✓</th> <!-- editor -->
 			<th>✓</th>
@@ -101,7 +103,7 @@ title: Ranks and Permissions
 			<td>Approve Screenshot</td>
 			<th></th> <!-- new -->
 			<th></th>
-			<th>✓</th> <!-- member -->
+			<th></th> <!-- member -->
 			<th></th>
 			<th>✓</th> <!-- trusted member -->
 			<th></th>
@@ -184,6 +186,21 @@ title: Ranks and Permissions
 			<th></th>
 			<th></th> <!-- moderator -->
 			<th></th>
+			<th>✓</th> <!-- admin -->
+			<th>✓</th>
+		</tr>
+		<tr>
+			<td>See Private Thread</td>
+			<th>✓</th> <!-- new -->
+			<th></th>
+			<th>✓</th> <!-- member -->
+			<th></th>
+			<th>✓</th> <!-- trusted member -->
+			<th></th>
+			<th>✓</th> <!-- editor -->
+			<th>✓</th>
+			<th>✓</th> <!-- moderator -->
+			<th>✓</th>
 			<th>✓</th> <!-- admin -->
 			<th>✓</th>
 		</tr>

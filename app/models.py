@@ -489,12 +489,11 @@ class Package(db.Model):
 			else:
 				return user.rank.atLeast(UserRank.EDITOR)
 
-		# Editors can change authors
-		elif perm == Permission.CHANGE_AUTHOR:
+		# Editors can change authors and approve new packages
+		elif perm == Permission.APPROVE_NEW or perm == Permission.CHANGE_AUTHOR:
 			return user.rank.atLeast(UserRank.EDITOR)
 
-		elif perm == Permission.APPROVE_NEW or perm == Permission.APPROVE_RELEASE \
-				or perm == Permission.APPROVE_SCREENSHOT:
+		elif perm == Permission.APPROVE_RELEASE or perm == Permission.APPROVE_SCREENSHOT:
 			return user.rank.atLeast(UserRank.TRUSTED_MEMBER if isOwner else UserRank.EDITOR)
 
 		# Moderators can delete packages
