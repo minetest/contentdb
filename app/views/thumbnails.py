@@ -18,7 +18,7 @@
 from flask import *
 from app import app
 
-import glob, os
+import os
 from PIL import Image
 
 ALLOWED_RESOLUTIONS=[(350,233)]
@@ -28,6 +28,33 @@ def mkdir(path):
 		os.mkdir(path)
 
 mkdir("app/public/thumbnails/")
+
+def resize_and_crop(img_path, modified_path, size):
+	img = Image.open(img_path)
+
+	# Get current and desired ratio for the images
+	img_ratio = img.size[0] / float(img.size[1])
+	ratio = size[0] / float(size[1])
+
+	# Is more portrait than target, scale and crop
+	if ratio > img_ratio:
+		img = img.resize((int(size[0]), int(size[0] * img.size[1] / img.size[0])),
+				Image.BICUBIC)
+		box = (0, (img.size[1] - size[1]) / 2, img.size[0], (img.size[1] + size[1]) / 2)
+		img = img.crop(box)
+
+	# Is more landscape than target, scale and crop
+	elif ratio < img_ratio:
+		img = img.resize((int(size[1] * img.size[0] / img.size[1]), int(size[1])),
+				Image.BICUBIC)
+		box = ((img.size[0] - size[0]) / 2, 0, (img.size[0] + size[0]) / 2, img.size[1])
+		img = img.crop(box)
+
+	# Is exactly the same ratio as target
+	else:
+		img = img.resize(size, Image.BICUBIC)
+
+	img.save(modified_path)
 
 @app.route("/thumbnails/<img>")
 @app.route("/thumbnails/<int:w>x<int:h>/<img>")
@@ -40,7 +67,5 @@ def make_thumbnail(img, w=350, h=233):
 	cache_filepath  = "public/thumbnails/{}x{}/{}".format(w, h, img)
 	source_filepath = "public/uploads/" + img
 
-	im = Image.open("app/" + source_filepath)
-	im.thumbnail((w, h), Image.ANTIALIAS)
-	im.save("app/" + cache_filepath, optimize=True)
+	resize_and_crop("app/" + source_filepath, "app/" + cache_filepath, (w, h))
 	return send_file(cache_filepath)
