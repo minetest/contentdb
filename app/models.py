@@ -212,6 +212,13 @@ class PackageType(enum.Enum):
 		return self.name
 
 	@classmethod
+	def get(cls, name):
+		try:
+			return PackageType[name.upper()]
+		except KeyError:
+			return None
+
+	@classmethod
 	def choices(cls):
 		return [(choice, choice.value) for choice in cls]
 

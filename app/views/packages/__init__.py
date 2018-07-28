@@ -29,20 +29,22 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
-from sqlalchemy import or_
+from sqlalchemy import or_, any_
 
 def build_packages_query():
-	type_name = request.args.get("type")
-	type = None
-	if type_name is not None:
-		type = PackageType[type_name.upper()]
-
 	title = "Packages"
+
 	query = Package.query.filter_by(soft_deleted=False, approved=True)
 
-	if type is not None:
-		title = type.value + "s"
-		query = query.filter_by(type=type)
+	# Filter by requested type(s)
+	types = request.args.getlist("type")
+	types = [PackageType.get(tname) for tname in types]
+	types = [type for type in types if type is not None]
+	if len(types) > 0:
+		title = ", ".join([type.value + "s" for type in types])
+
+		query = query.filter(Package.type.in_(types))
+
 
 	search = request.args.get("q")
 	if search is not None and search.strip() != "":
