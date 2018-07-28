@@ -196,7 +196,7 @@
 				<li>
 					{% if not rel.approved %}<i>{% endif %}
 
-					<a href="{{ rel.url }}">{{ rel.title }}</a>{% if rel.commit_hash %}
+					<a href="{{ rel.getDownloadURL() }}">{{ rel.title }}</a>{% if rel.commit_hash %}
 					[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %},
 					created {{ rel.releaseDate | datetime }}.
 					{% if rel.task_id %}

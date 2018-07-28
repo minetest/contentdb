@@ -91,6 +91,23 @@ def create_release_page(package):
 
 	return render_template("packages/release_new.html", package=package, form=form)
 
+@app.route("/packages/<author>/<name>/releases/<id>/download/")
+@is_package_page
+def download_release_page(package, id):
+	release = PackageRelease.query.get(id)
+	if release is None or release.package != package:
+		abort(404)
+
+	if release is None:
+		if "application/zip" in request.accept_mimetypes and \
+				not "text/html" in request.accept_mimetypes:
+			return "", 204
+		else:
+			flash("No download available.", "error")
+			return redirect(package.getDetailsURL())
+	else:
+		return redirect(release.url, code=300)
+
 @app.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
 @login_required
 @is_package_page

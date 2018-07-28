@@ -608,6 +608,13 @@ class PackageRelease(db.Model):
 				name=self.package.name,
 				id=self.id)
 
+	def getDownloadURL(self):
+		return url_for("download_release_page",
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
+
+
 	def __init__(self):
 		self.releaseDate = datetime.now()
 
