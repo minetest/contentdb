@@ -45,7 +45,7 @@ def createedit_license_page(name=None):
 			abort(404)
 
 	form = LicenseForm(formdata=request.form, obj=license)
-	if request.method == "GET":
+	if request.method == "GET" and license is None:
 		form.is_foss.data = True
 	elif request.method == "POST" and form.validate():
 		if license is None:
