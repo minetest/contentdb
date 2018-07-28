@@ -27,7 +27,7 @@ from app.utils import rank_required
 @app.route("/tags/")
 @rank_required(UserRank.MODERATOR)
 def tag_list_page():
-	return render_template("tags/list.html", tags=Tag.query.order_by(db.asc(Tag.title)).all())
+	return render_template("admin/tagslist.html", tags=Tag.query.order_by(db.asc(Tag.title)).all())
 
 class TagForm(FlaskForm):
 	title	 = StringField("Title", [InputRequired(), Length(3,100)])
@@ -54,4 +54,4 @@ def createedit_tag_page(name=None):
 		db.session.commit()
 		return redirect(url_for("createedit_tag_page", name=tag.name))
 
-	return render_template("tags/edit.html", tag=tag, form=form)
+	return render_template("admin/tags/edit.html", tag=tag, form=form)

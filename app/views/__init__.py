@@ -53,7 +53,8 @@ def home_page():
 	return render_template("index.html", new=new, popular=popular, count=count)
 
 from . import users, githublogin, packages, meta, threads, api
-from . import sass, tasks, admin, notifications, tagseditor, thumbnails
+from . import tasks, admin, notifications, tagseditor, licenseseditor
+from . import sass, thumbnails
 
 @menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { 'path': 'help' })
 @app.route('/<path:path>/')
