@@ -108,6 +108,11 @@
 					<b>Warning:</b> Non-free media.
 				</div>
 			{% endif %}
+			{% if not package.approved and ("Other" in package.license.name or "Other" in package.media_license.name) %}
+				<div class="box box_grey alert alert-warning" style="margin-top: 0;">
+					Make sure to check the specific license used here
+				</div>
+			{% endif %}
 			<table>
 				<tr>
 					<td>Name</td>
