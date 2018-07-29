@@ -36,7 +36,10 @@ class MyModelView(ModelView):
 
 	def inaccessible_callback(self, name, **kwargs):
 		# redirect to login page if user doesn't have access
-		return redirect(url_for('user.login', next=request.url))
+		if current_user.is_authenticated:
+			abort(403)
+		else:
+			return redirect(url_for('user.login', next=request.url))
 
 admin = Admin(app, name='ContentDB', template_mode='bootstrap3', url="/admin/db")
 admin.add_view(MyModelView(User, db.session))

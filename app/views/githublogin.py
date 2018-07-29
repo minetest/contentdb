@@ -51,9 +51,9 @@ def github_authorized(oauth_token):
 	if current_user and current_user.is_authenticated:
 		if userByGithub is None:
 			current_user.github_username = username
-			db.session.add(auth)
 			db.session.commit()
-			return redirect(url_for("gitAccount", id=auth.id))
+			flash("Linked github to account", "success")
+			return redirect(url_for("home_page"))
 		else:
 			flash("Github account is already associated with another user", "danger")
 			return redirect(url_for("home_page"))
