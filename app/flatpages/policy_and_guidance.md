@@ -65,8 +65,7 @@ package and give the name to the correct one.
 If you submit a package where you don't have the right to the name you will be asked
 to change the name of the package, or your package won't be accepted.
 
-We reserve the right to issue exceptions for this where we feel necessary, however
-this will be done rarely and usually only for packages created before CDB was created.
+We reserve the right to issue exceptions for this where we feel necessary.
 
 ### 3.2 Mod Forks and Reimplementations
 
