@@ -12,6 +12,6 @@ Topics to be Added
 		{{ topics | count }} remaining.
 	</p>
 
-	{% from "macros/topictable.html" import render_topictable %}
-	{{ render_topictable(topics) }}
+	{% from "macros/topics.html" import render_topics_table %}
+	{{ render_topics_table(topics) }}
 {% endblock %}

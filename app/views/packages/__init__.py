@@ -31,28 +31,39 @@ from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from sqlalchemy import or_, any_
 
-def build_packages_query():
-	title = "Packages"
 
-	query = Package.query.filter_by(soft_deleted=False, approved=True)
+class QueryBuilder:
+	title  = None
+	types  = None
+	search = None
 
-	# Filter by requested type(s)
-	types = request.args.getlist("type")
-	types = [PackageType.get(tname) for tname in types]
-	types = [type for type in types if type is not None]
-	if len(types) > 0:
-		title = ", ".join([type.value + "s" for type in types])
+	def __init__(self):
+		title = "Packages"
 
-		query = query.filter(Package.type.in_(types))
+		# Get request types
+		types = request.args.getlist("type")
+		types = [PackageType.get(tname) for tname in types]
+		types = [type for type in types if type is not None]
+		if len(types) > 0:
+			title = ", ".join([type.value + "s" for type in types])
+
+		self.title = title
+		self.types = types
+		self.search = request.args.get("q")
 
 
-	search = request.args.get("q")
-	if search is not None and search.strip() != "":
-		query = query.filter(Package.title.ilike('%' + search + '%'))
+	def buildPackageQuery(self):
+		query = Package.query.filter_by(soft_deleted=False, approved=True)
 
-	query = query.order_by(db.desc(Package.score))
+		if len(self.types) > 0:
+			query = query.filter(Package.type.in_(self.types))
 
-	return query, title
+		if self.search is not None and self.search.strip() != "":
+			query = query.filter(Package.title.ilike('%' + self.search + '%'))
+
+		query = query.order_by(db.desc(Package.score))
+
+		return query
 
 @menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
 @menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
@@ -62,7 +73,10 @@ def packages_page():
 	if shouldReturnJson():
 		return redirect(url_for("api_packages_page"))
 
-	query, title = build_packages_query()
+	qb    = QueryBuilder()
+	query = qb.buildPackageQuery()
+	title = qb.title
+
 	page  = int(request.args.get("page") or 1)
 	num   = min(42, int(request.args.get("n") or 100))
 	query = query.paginate(page, num, True)
@@ -75,8 +89,23 @@ def packages_page():
 	prev_url = url_for("packages_page", type=type_name, q=search, page=query.prev_num) \
 			if query.has_prev else None
 
+	topics = None
+
+	search = request.args.get("q")
+	if search and not query.has_next:
+		topics = ForumTopic.query \
+				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
+				.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
+				.filter(ForumTopic.title.ilike('%' + search + '%'))
+
+		if len(qb.types) > 0:
+			topics = topics.filter(ForumTopic.type.in_(qb.types))
+
+		topics = topics.all()
+
 	tags = Tag.query.all()
-	return render_template("packages/list.html", title=title, packages=query.items, \
+	return render_template("packages/list.html", \
+			title=title, packages=query.items, topics=topics, \
 			query=search, tags=tags, type=type_name, \
 			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, packages_count=query.total)
 

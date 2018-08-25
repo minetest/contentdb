@@ -1,4 +1,4 @@
-{% macro render_topictable(topics, show_author=True) -%}
+{% macro render_topics_table(topics, show_author=True) -%}
 <table>
 	<tr>
 		<th>Id</th>
@@ -30,4 +30,23 @@
 		</tr>
 	{% endfor %}
 </table>
+{% endmacro %}
+
+
+{% macro render_topics(topics, current_user, show_author=True) -%}
+<ul>
+	{% for topic in topics %}
+		<li{% if topic.wip %} class="wiptopic"{% endif %}>
+			<a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a>
+			{% if topic.wip %}[WIP]{% endif %}
+			{% if topic.name %}[{{ topic.name }}]{% endif %}
+			{% if show_author %}
+				by <a href="{{ url_for('user_profile_page', username=topic.author.username) }}">{{ topic.author.display_name }}</a>
+			{% endif %}
+			{% if not topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
+				<a href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">Create</a>
+			{% endif %}
+		</li>
+	{% endfor %}
+</ul>
 {% endmacro %}

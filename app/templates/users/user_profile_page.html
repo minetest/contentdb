@@ -107,8 +107,8 @@
 				List of your forum topics which do not have a matching package.
 			</p>
 
-			{% from "macros/topictable.html" import render_topictable %}
-			{{ render_topictable(topics_to_add, show_author=False) }}
+			{% from "macros/topics.html" import render_topics_table %}
+			{{ render_topics_table(topics_to_add, show_author=False) }}
 		</div>
 	</div>
 {% endif %}

@@ -20,11 +20,13 @@ from flask_user import *
 from app import app
 from app.models import *
 from app.utils import is_package_page
-from .packages import build_packages_query
+from .packages import QueryBuilder
 
 @app.route("/api/packages/")
 def api_packages_page():
-	query, _ = build_packages_query()
+	qb    = QueryBuilder()
+	query = qb.buildPackageQuery()
+
 	pkgs = [package.getAsDictionaryShort(app.config["BASE_URL"]) \
 			for package in query.all() if package.getDownloadRelease() is not None]
 	return jsonify(pkgs)

@@ -37,4 +37,12 @@
 		<li>{{ page }} / {{ page_max }}</li>
 		{% if next_url %}<li><a href="{{ next_url }}">Next</a></li> {% endif %}
 	</ul>
+
+	{% if topics %}
+		<h2 style="margin-top:2em;">More content from the forums</h2>
+
+		{% from "macros/topics.html" import render_topics %}
+		{{ render_topics(topics, current_user) }}
+	{% endif %}
+
 {% endblock %}
