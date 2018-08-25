@@ -43,8 +43,8 @@
 			{% if show_author %}
 				by <a href="{{ url_for('user_profile_page', username=topic.author.username) }}">{{ topic.author.display_name }}</a>
 			{% endif %}
-			{% if not topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
-				<a href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">Create</a>
+			{% if topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
+				| <a href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">Create</a>
 			{% endif %}
 		</li>
 	{% endfor %}
