@@ -47,10 +47,11 @@ class QueryBuilder:
 		if len(types) > 0:
 			title = ", ".join([type.value + "s" for type in types])
 
-		self.title = title
-		self.types = types
+		self.title  = title
+		self.types  = types
 		self.search = request.args.get("q")
-
+		self.lucky  = "lucky" in request.args
+		self.limit  = 1 if self.lucky else None
 
 	def buildPackageQuery(self):
 		query = Package.query.filter_by(soft_deleted=False, approved=True)
@@ -63,7 +64,24 @@ class QueryBuilder:
 
 		query = query.order_by(db.desc(Package.score))
 
+		if self.limit:
+			query = query.limit(self.limit)
+
 		return query
+
+	def buildTopicQuery(self):
+		topics = ForumTopic.query \
+				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
+				.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
+				.filter(ForumTopic.title.ilike('%' + self.search + '%'))
+
+		if len(self.types) > 0:
+			topics = topics.filter(ForumTopic.type.in_(self.types))
+
+		if self.limit:
+			topics = topics.limit(self.limit)
+
+		return topics
 
 @menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
 @menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
@@ -76,6 +94,15 @@ def packages_page():
 	qb    = QueryBuilder()
 	query = qb.buildPackageQuery()
 	title = qb.title
+
+	if qb.lucky:
+		package = query.first()
+		if package:
+			return redirect(package.getDetailsURL())
+
+		topic = qb.buildTopicQuery().first()
+		if topic:
+			return redirect("https://forum.minetest.net/viewtopic.php?t=" + str(topic.topic_id))
 
 	page  = int(request.args.get("page") or 1)
 	num   = min(42, int(request.args.get("n") or 100))
@@ -90,18 +117,8 @@ def packages_page():
 			if query.has_prev else None
 
 	topics = None
-
-	search = request.args.get("q")
-	if search and not query.has_next:
-		topics = ForumTopic.query \
-				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-				.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
-				.filter(ForumTopic.title.ilike('%' + search + '%'))
-
-		if len(qb.types) > 0:
-			topics = topics.filter(ForumTopic.type.in_(qb.types))
-
-		topics = topics.all()
+	if qb.search and not query.has_next:
+		topics = qb.buildTopicQuery().all()
 
 	tags = Tag.query.all()
 	return render_template("packages/list.html", \
