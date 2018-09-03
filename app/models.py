@@ -514,17 +514,21 @@ class Package(db.Model):
 	def recalcScore(self):
 		import datetime
 
-		self.score = 0
+		self.score = 10
 
-		if self.forums is None:
-			return
+		if self.forums is not None:
+			topic = ForumTopic.query.get(self.forums)
+			if topic:
+				days   = (datetime.datetime.now() - topic.created_at).days
+				months = days / 30
+				years  = days / 365
+				self.score = topic.views / max(years, 0.0416) + 80*min(max(months, 0.5), 6)
 
-		topic = ForumTopic.query.get(self.forums)
-		if topic:
-			days   = (datetime.datetime.now() - topic.created_at).days
-			months = days / 30
-			years  = days / 365
-			self.score = topic.views / years + 80*min(6, months)
+		if self.getMainScreenshotURL() is None:
+			self.score *= 0.8
+
+		if not self.license.is_foss or not self.media_license.is_foss:
+			self.score *= 0.1
 
 class MetaPackage(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
