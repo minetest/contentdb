@@ -107,8 +107,9 @@ It is recommended that you use a proper license for code with a warranty
 disclaimer, such as the (L)GPL or MIT. You should also use a proper media license
 for media, such as a Creative Commons license.
 
-The use of WTFPL is discouraged as it doesn't contain a valid warranty disclaimer,
-and also includes swearing which dissuades teachers from using your content.
+The use of WTFPL is discouraged as it doesn't contain a [valid warranty disclaimer](https://cubicspot.blogspot.com/2017/04/wtfpl-is-harmful-to-software-developers.html),
+and also includes swearing which prevents settings like schools from using your content.
+[Read more](/help/wtfpl/).
 
 Public domain is not a valid license in many countries, please use CC0 or MIT instead.
 

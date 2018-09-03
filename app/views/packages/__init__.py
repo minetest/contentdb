@@ -325,11 +325,15 @@ def create_edit_package_page(author=None, name=None):
 
 		db.session.commit() # save
 
+		next_url = package.getDetailsURL()
 		if wasNew and package.repo is not None:
 			task = importRepoScreenshot.delay(package.id)
-			return redirect(url_for("check_task", id=task.id, r=package.getDetailsURL()))
+			next_url = url_for("check_task", id=task.id, r=next_url)
 
-		return redirect(package.getDetailsURL())
+		if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
+			next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
+
+		return redirect(next_url)
 
 	package_query = Package.query.filter_by(approved=True, soft_deleted=False)
 	if package is not None:
