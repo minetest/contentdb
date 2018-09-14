@@ -70,6 +70,12 @@
 		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
 	</form>
 
+	<script src="/static/simplemde.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/simplemde.min.css">
+	<script>
+		var simplemde = new SimpleMDE({ element: $("#desc")[0] });
+	</script>
+
 	{% if enable_wizard %}
 		<script src="/static/url.min.js"></script>
 		<script src="/static/polltask.js"></script>
