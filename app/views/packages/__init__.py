@@ -51,6 +51,7 @@ class QueryBuilder:
 		self.types  = types
 		self.search = request.args.get("q")
 		self.lucky  = "lucky" in request.args
+		self.hide_nonfree = isNo(request.args.get("nonfree"))
 		self.limit  = 1 if self.lucky else None
 
 	def buildPackageQuery(self):
@@ -63,6 +64,10 @@ class QueryBuilder:
 			query = query.filter(Package.title.ilike('%' + self.search + '%'))
 
 		query = query.order_by(db.desc(Package.score))
+
+		if self.hide_nonfree:
+			query = query.filter(Package.license.has(License.is_foss == True))
+			query = query.filter(Package.media_license.has(License.is_foss == True))
 
 		if self.limit:
 			query = query.limit(self.limit)
@@ -77,6 +82,10 @@ class QueryBuilder:
 
 		if len(self.types) > 0:
 			topics = topics.filter(ForumTopic.type.in_(self.types))
+
+		if self.hide_nonfree:
+			query = query.filter(Package.license.has(License.is_foss == True))
+			query = query.filter(Package.media_license.has(License.is_foss == True))
 
 		if self.limit:
 			topics = topics.limit(self.limit)

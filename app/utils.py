@@ -170,3 +170,13 @@ def clearNotifications(url):
 	if current_user.is_authenticated:
 		Notification.query.filter_by(user=current_user, url=url).delete()
 		db.session.commit()
+
+
+YESES = ["yes", "true", "1", "on"]
+
+def isYes(val):
+	return val and val.lower() in YESES
+
+
+def isNo(val):
+	return val and not isYes(val)
