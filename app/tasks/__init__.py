@@ -18,6 +18,7 @@
 import flask
 from flask.ext.sqlalchemy import SQLAlchemy
 from celery import Celery
+from celery.schedules import crontab
 from app import app
 from app.models import *
 
@@ -63,5 +64,13 @@ def make_celery(app):
 	return celery
 
 celery = make_celery(app)
+
+CELERYBEAT_SCHEDULE = {
+	'topic_list_import': {
+		'task': 'app.tasks.forumtasks.importTopicList',
+		'schedule': crontab(minute=1, hour=1),
+	}
+}
+celery.conf.beat_schedule = CELERYBEAT_SCHEDULE
 
 from . import importtasks, forumtasks, emails

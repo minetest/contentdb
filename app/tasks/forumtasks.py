@@ -138,4 +138,7 @@ def importTopicList():
 		topic.views      = info["views"]
 		topic.created_at = info["date"]
 
+	for p in Package.query.all():
+		p.recalcScore()
+
 	db.session.commit()
