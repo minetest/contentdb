@@ -27,37 +27,6 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from app.utils import loginUser, rank_required, triggerNotif
 import datetime
-from flask_admin import Admin
-from flask_admin.contrib.sqla import ModelView
-
-class MyModelView(ModelView):
-	def is_accessible(self):
-		return current_user.is_authenticated and current_user.rank.atLeast(UserRank.ADMIN)
-
-	def inaccessible_callback(self, name, **kwargs):
-		# redirect to login page if user doesn't have access
-		if current_user.is_authenticated:
-			abort(403)
-		else:
-			return redirect(url_for('user.login', next=request.url))
-
-admin = Admin(app, name='ContentDB', template_mode='bootstrap3', url="/admin/db")
-admin.add_view(MyModelView(User, db.session))
-admin.add_view(MyModelView(Package, db.session))
-admin.add_view(MyModelView(Dependency, db.session))
-admin.add_view(MyModelView(EditRequest, db.session))
-admin.add_view(MyModelView(EditRequestChange, db.session))
-admin.add_view(MyModelView(ForumTopic, db.session))
-admin.add_view(MyModelView(License, db.session))
-admin.add_view(MyModelView(MetaPackage, db.session))
-admin.add_view(MyModelView(Notification, db.session))
-admin.add_view(MyModelView(PackageRelease, db.session))
-admin.add_view(MyModelView(PackageScreenshot, db.session))
-admin.add_view(MyModelView(Tag, db.session))
-admin.add_view(MyModelView(Thread, db.session))
-admin.add_view(MyModelView(ThreadReply, db.session))
-admin.add_view(MyModelView(UserEmailVerification, db.session))
-
 
 @app.route("/admin/", methods=["GET", "POST"])
 @rank_required(UserRank.ADMIN)
@@ -110,8 +79,8 @@ def admin_page():
 
 				rel = PackageRelease()
 				rel.package  = package
-				rel.title	= datetime.date.today().isoformat()
-				rel.url	  = ""
+				rel.title    = datetime.date.today().isoformat()
+				rel.url      = ""
 				rel.task_id  = uuid()
 				rel.approved = True
 				db.session.add(rel)
@@ -128,7 +97,6 @@ def admin_page():
 
 	deleted_packages = Package.query.filter_by(soft_deleted=True).all()
 	return render_template("admin/list.html", deleted_packages=deleted_packages)
-
 
 class SwitchUserForm(FlaskForm):
 	username = StringField("Username")

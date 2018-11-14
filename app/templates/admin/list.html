@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 
 {% block title %}
-Admin
+	Admin Tools
 {% endblock %}
 
 {% block content %}
 	<ul>
-		<li><a href="db/">Database</a></li>
 		<li><a href="{{ url_for('user_list_page') }}">User list</a></li>
 		<li><a href="{{ url_for('tag_list_page') }}">Tag Editor</a></li>
 		<li><a href="{{ url_for('license_list_page') }}">License Editor</a></li>
