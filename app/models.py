@@ -388,7 +388,7 @@ class Package(db.Model):
 			setattr(self, e.name, getattr(package, e.name))
 
 	def getAsDictionaryShort(self, base_url):
-		tnurl = self.getThumbnailURL()
+		tnurl = self.getThumbnailURL(1)
 		return {
 			"name": self.name,
 			"title": self.title,
@@ -401,7 +401,7 @@ class Package(db.Model):
 		}
 
 	def getAsDictionary(self, base_url):
-		tnurl = self.getThumbnailURL()
+		tnurl = self.getThumbnailURL(1)
 		return {
 			"author": self.author.display_name,
 			"name": self.name,
@@ -429,9 +429,9 @@ class Package(db.Model):
 			"score": round(self.score * 10) / 10
 		}
 
-	def getThumbnailURL(self):
+	def getThumbnailURL(self, level=2):
 		screenshot = self.screenshots.filter_by(approved=True).first()
-		return screenshot.getThumbnailURL() if screenshot is not None else None
+		return screenshot.getThumbnailURL(level) if screenshot is not None else None
 
 	def getMainScreenshotURL(self):
 		screenshot = self.screenshots.filter_by(approved=True).first()
@@ -644,8 +644,10 @@ class PackageScreenshot(db.Model):
 				name=self.package.name,
 				id=self.id)
 
-	def getThumbnailURL(self):
-		return self.url.replace("/uploads/", "/thumbnails/350x233/")
+	def getThumbnailURL(self, level=2):
+		return self.url.replace("/uploads/", ("/thumbnails/{:d}/").format(level))
+
+
 
 class EditRequest(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

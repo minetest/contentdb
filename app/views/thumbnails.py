@@ -21,7 +21,7 @@ from app import app
 import os
 from PIL import Image
 
-ALLOWED_RESOLUTIONS=[(350,233)]
+ALLOWED_RESOLUTIONS=[(100,67), (270,180), (350,233)]
 
 def mkdir(path):
 	if not os.path.isdir(path):
@@ -56,15 +56,17 @@ def resize_and_crop(img_path, modified_path, size):
 
 	img.save(modified_path)
 
-@app.route("/thumbnails/<img>")
-@app.route("/thumbnails/<int:w>x<int:h>/<img>")
-def make_thumbnail(img, w=350, h=233):
-	if not (w, h) in ALLOWED_RESOLUTIONS:
+
+@app.route("/thumbnails/<int:level>/<img>")
+def make_thumbnail(img, level):
+	if level > len(ALLOWED_RESOLUTIONS) or level <= 0:
 		abort(403)
 
-	mkdir("app/public/thumbnails/{}x{}/".format(w, h))
+	w, h = ALLOWED_RESOLUTIONS[level - 1]
 
-	cache_filepath  = "public/thumbnails/{}x{}/{}".format(w, h, img)
+	mkdir("app/public/thumbnails/{:d}/".format(level))
+
+	cache_filepath  = "public/thumbnails/{:d}/{}".format(level, img)
 	source_filepath = "public/uploads/" + img
 
 	resize_and_crop("app/" + source_filepath, "app/" + cache_filepath, (w, h))
