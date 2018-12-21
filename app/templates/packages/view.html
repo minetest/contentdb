@@ -119,8 +119,8 @@
 			</div>
 		</div>
 
-		<aside class="float-right">
-			<div class="card" style="width: 18rem;">
+		<aside class="float-right" style="width: 18rem;">
+			<div class="card">
 				<div class="card-header">
 					Details
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
@@ -198,6 +198,85 @@
 					</table>
 				</div>
 			</div>
+
+			<div class="card my-4">
+				<div class="card-header">Dependencies</div>
+				<ul class="list-group list-group-flush">
+					{% for dep in package.dependencies %}
+						<li class="list-group-item">
+							{%- if dep.package %}
+								<a href="{{ dep.package.getDetailsURL() }}">{{ dep.package.title }}</a> by {{ dep.package.author.display_name }}
+							{% elif dep.meta_package %}
+								<a href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">{{ dep.meta_package.name }}</a>
+							{% else %}
+								{{ "Excepted package or meta_package in dep!" | throw }}
+							{% endif %}
+							{% if dep.optional %}
+								[optional]
+							{% endif %}
+						</li>
+					{% else %}
+						<li class="list-group-item"><i>No dependencies</i></li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="card my-4">
+				<div class="card-header">
+					Releases
+					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+						<a class="btn btn-xs btn-primary float-right"
+						href="{{ package.getCreateReleaseURL() }}">+</a>
+					{% endif %}
+				</div>
+				<ul class="list-group list-group-flush">
+					{% for rel in releases %}
+						{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
+							<li class="list-group-item list-group-item-action"  href="{{ rel.getDownloadURL() }}">
+								{% if not rel.approved %}<i>{% endif %}
+
+								{{ rel.title }}{% if rel.commit_hash %}
+								[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %},
+								<small>created {{ rel.releaseDate | datetime }}.</small>
+								{% if rel.task_id %}
+									<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
+								{% elif not rel.approved %}
+									Waiting for approval.
+								{% endif %}
+
+								{% if not rel.approved %}</i>{% endif %}
+
+								{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
+									<a class="btn btn-sm btn-primary float-right" href="{{ rel.getEditURL() }}">Edit
+									{% if not rel.task_id and not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
+										/ Approve
+									{% endif %}
+									</a>
+								{% endif %}
+
+							</li>
+						{% endif %}
+					{% else %}
+						<li class="list-group-item">No releases available.</li>
+					{% endfor %}
+				</ul>
+			</div>
+
+			<div class="card my-4"">
+				<div class="card-header">
+					Threads
+				{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
+					<a class="btn btn-xs btn-primary float-right"
+							href="{{ url_for('new_thread_page', pid=package.id) }}">
+						+
+					</a>
+				{% endif %}
+				</div>
+				<ul class="list-group list-group-flush">
+					{% from "macros/threads.html" import render_threadlist %}
+					{{ render_threadlist(threads, list_group=True) }}
+				</ul>
+			</div>
 		</aside>
 
 		<ul class="screenshot_list">
@@ -215,96 +294,6 @@
 		{{ package.desc | markdown }}
 
 		<div style="clear: both;"></div>
-
-		<div class="row my-4">
-			<div class="col-sm-4">
-				<div class="card">
-					<div class="card-header">Dependencies</div>
-					<ul class="list-group list-group-flush">
-						{% for dep in package.dependencies %}
-							<li class="list-group-item">
-								{%- if dep.package %}
-									<a href="{{ dep.package.getDetailsURL() }}">{{ dep.package.title }}</a> by {{ dep.package.author.display_name }}
-								{% elif dep.meta_package %}
-									<a href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">{{ dep.meta_package.name }}</a>
-								{% else %}
-									{{ "Excepted package or meta_package in dep!" | throw }}
-								{% endif %}
-								{% if dep.optional %}
-									[optional]
-								{% endif %}
-							</li>
-						{% else %}
-							<li class="list-group-item"><i>No dependencies</i></li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-
-
-
-			<div class="col-sm-4">
-				<div class="card">
-					<div class="card-header">
-						Releases
-						{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-							<a class="btn btn-xs btn-primary float-right"
-							href="{{ package.getCreateReleaseURL() }}">+</a>
-						{% endif %}
-					</div>
-					<ul class="list-group list-group-flush">
-						{% for rel in releases %}
-							{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
-								<li class="list-group-item list-group-item-action"  href="{{ rel.getDownloadURL() }}">
-									{% if not rel.approved %}<i>{% endif %}
-
-									{{ rel.title }}{% if rel.commit_hash %}
-									[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %},
-									<small>created {{ rel.releaseDate | datetime }}.</small>
-									{% if rel.task_id %}
-										<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
-									{% elif not rel.approved %}
-										Waiting for approval.
-									{% endif %}
-
-									{% if not rel.approved %}</i>{% endif %}
-
-									{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
-										<a class="btn btn-sm btn-primary float-right" href="{{ rel.getEditURL() }}">Edit
-										{% if not rel.task_id and not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
-											/ Approve
-										{% endif %}
-										</a>
-									{% endif %}
-
-								</li>
-							{% endif %}
-						{% else %}
-							<li class="list-group-item">No releases available.</li>
-						{% endfor %}
-					</ul>
-				</div>
-			</div>
-
-			<div class="col-sm-4">
-				<div class="card">
-					<div class="card-header">
-						Threads
-					{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
-						<a class="btn btn-xs btn-primary float-right"
-								href="{{ url_for('new_thread_page', pid=package.id) }}">
-							+
-						</a>
-					{% endif %}
-					</div>
-					<ul class="list-group list-group-flush">
-						{% from "macros/threads.html" import render_threadlist %}
-						{{ render_threadlist(threads, list_group=True) }}
-					</ul>
-				</div>
-			</div>
-		</div>
-
 
 		{#
 			{% if current_user.is_authenticated or requests %}
