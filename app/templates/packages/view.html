@@ -1,3 +1,5 @@
+{% set query=package.name %}
+
 {% extends "base.html" %}
 
 {% block title %}
@@ -80,7 +82,7 @@
 		{% endif %}
 	{% endif %}
 
-	<header class="jumbotron mb-0">
+	<header class="jumbotron mb-0" style="background-image: url('{{ package.getMainScreenshotURL() }}')">
 		<div class="container">
 			<h1 class="display-3">{{ package.title }} by {{ package.author.display_name }}</h1>
 
@@ -91,7 +93,7 @@
 	</header>
 
 	<main class="container">
-		<div class="row mt-1 mb-4 ">
+		<div class="row mt-1 mb-4">
 			<div class="col">
 				{% if package.getDownloadRelease() %}
 					<a class="btn btn-success" href="{{ package.getDownloadURL() }}" class="btn_green">Download</a>
@@ -119,7 +121,7 @@
 			</div>
 		</div>
 
-		<aside class="float-right" style="width: 18rem;">
+		<aside class="float-right ml-4" style="width: 18rem;">
 			<div class="card">
 				<div class="card-header">
 					Details
@@ -150,7 +152,8 @@
 						<tr>
 							<td>Provides</td>
 							<td>{% for meta in package.provides %}
-								<a href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a>
+								<a class="badge badge-primary"
+								 href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a>
 								{%- if not loop.last %}
 								,
 								{% endif %}
