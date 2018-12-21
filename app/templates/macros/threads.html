@@ -25,12 +25,24 @@
 	{% endif %}
 {% endmacro %}
 
-{% macro render_threadlist(threads) -%}
-	<ul>
+{% macro render_threadlist(threads, list_group=False) -%}
+	{% if not list_group %}<ul>{% endif %}
+		<li {% if list_group %}class="list-group-item"{% endif %}>
 		{% for t in threads %}
-			<li>{% if t.private %}&#x1f512; {% endif %}<a href="{{ url_for('thread_page', id=t.id) }}">{{ t.title }}</a> by {{ t.author.display_name }}</li>
+			{% if list_group %}
+				<a href="{{ url_for('thread_page', id=t.id) }}">
+					{% if t.private %}&#x1f512; {% endif %}
+					{{ t.title }}
+					by {{ t.author.display_name }}
+				</a>
+			{% else %}
+				{% if t.private %}&#x1f512; {% endif %}
+				<a href="{{ url_for('thread_page', id=t.id) }}">{{ t.title }}</a>
+				by {{ t.author.display_name }}
+			{% endif %}
 		{% else %}
-			<li><i>No threads found</i></li>
+			<i>No threads found</i>
 		{% endfor %}
+		</li>
 	</ul>
 {% endmacro %}

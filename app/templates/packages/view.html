@@ -4,7 +4,7 @@
 	{{ package.title }}
 {% endblock %}
 
-{% block content %}
+{% block container %}
 	{% if not package.approved %}
 		<div class="box box_grey alert alert-warning">
 			<span class="icon_message"></span>
@@ -80,256 +80,279 @@
 		{% endif %}
 	{% endif %}
 
-	<h1>{{ package.title }} by {{ package.author.display_name }}</h1>
+	<header class="jumbotron mb-0">
+		<div class="container">
+			<h1 class="display-3">{{ package.title }} by {{ package.author.display_name }}</h1>
 
-	<ul class="screenshot_list">
-		{% for ss in package.screenshots %}
-			{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-				<li>
-					<a href="{% if package.checkPerm(current_user, 'ADD_SCREENSHOTS') %}{{ ss.getEditURL() }}{% else %}{{ ss.url }}{% endif %}">
-						<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
-					</a>
-				</li>
-			{% endif %}
-		{% endfor %}
-	</ul>
+			<p class="lead">
+				{{ package.shortDesc }}
+			</p>
+		</div>
+	</header>
 
-	<aside class="asideright box box_grey">
-		<h3>Details</h3>
-
-		<div class="box-body">
-			{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
-				<div class="box box_grey alert alert-error" style="margin-top: 0;">
-					<b>Warning:</b> Non-free code and media.
-				</div>
-			{% elif not package.license.is_foss and package.type != package.type.TXP %}
-				<div class="box box_grey alert alert-error" style="margin-top: 0;">
-					<b>Warning:</b> Non-free code.
-				</div>
-			{% elif not package.media_license.is_foss %}
-				<div class="box box_grey alert alert-error" style="margin-top: 0;">
-					<b>Warning:</b> Non-free media.
-				</div>
-			{% endif %}
-			<table>
-				<tr>
-					<td>Name</td>
-					<td>{{ package.name }}</td>
-				</tr>
-				{% if package.provides %}
-				<tr>
-					<td>Provides</td>
-					<td>{% for meta in package.provides %}
-						<a href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a>
-						{%- if not loop.last %}
-						,
-						{% endif %}
-					{% endfor %}</td>
-				</tr>
+	<main class="container">
+		<div class="row mt-1 mb-4 ">
+			<div class="col">
+				{% if package.getDownloadRelease() %}
+					<a class="btn btn-success" href="{{ package.getDownloadURL() }}" class="btn_green">Download</a>
+				{% else %}
+					No download available.
 				{% endif %}
-				<tr>
-					<td>Author</td>
-					<td class="{{ package.author.rank }}">
-						<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
-							{{ package.author.display_name }}
-						</a>
-					</td>
-				</tr>
-				<tr>
-					<td>Type</td>
-					<td>{{ package.type.value }}</td>
-				</tr>
-				<tr>
-					<td>License</td>
-					<td>
-						{% if package.license == package.media_license %}
-							{{ package.license.name }}
-						{% elif package.type == package.type.TXP %}
-							{{ package.media_license.name }}
-						{% else %}
-							{{ package.license.name }} for code,<br />
-							{{ package.media_license.name }} for media.
-						{% endif %}
-					</td>
-				</tr>
-				<tr>
-					<td>Added</td>
-					<td>{{ package.created_at | datetime }}</td>
-				</tr>
-			</table>
-
-			<ul class="btnset linedbuttonset">
-				{% if package.getDownloadRelease() %}<li><a href="{{ package.getDownloadURL() }}" class="btn_green">Download</a></li>{% endif %}
-				{% if package.repo %}<li><a href="{{ package.repo }}">View Source</a></li>{% endif %}
-				{% if package.forums %}<li><a href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a></li>{% endif %}
-				{% if package.issueTracker %}<li><a href="{{ package.issueTracker }}">Issue Tracker</a></li>{% endif %}
-				{% if package.website %}<li><a href="{{ package.website }}">Website</a></li>{% endif %}
+			</div>
+			<div class="btn-group-horizontal col-md-auto">
+				{% if package.repo %}<a class="btn btn-primary" href="{{ package.repo }}">View Source</a>{% endif %}
+				{% if package.forums %}<a class="btn btn-primary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
+				{% if package.issueTracker %}<a class="btn btn-primary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
+				{% if package.website %}<a class="btn btn-primary" href="{{ package.website }}">Website</a>{% endif %}
 				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-					<li><a href="{{ package.getEditURL() }}">Edit</a></li>
-					<li><a href="{{ package.getNewScreenshotURL() }}">Add screenshot</a></li>
+					<a class="btn btn-primary" href="{{ package.getNewScreenshotURL() }}">Add screenshot</a>
 				{% endif %}
 				{# {% if current_user.is_authenticated %}
-					<li><a href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a></li>
+					<a class="btn btn-primary" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
 				{% endif %} #}
 				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-					<li><a href="{{ package.getCreateReleaseURL() }}">Create Release</a></li>
-				{% endif %}
-				{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
-					<li><a href="{{ url_for('new_thread_page', pid=package.id) }}">Open Thread</a></li>
+					<a class="btn btn-primary" href="{{ package.getCreateReleaseURL() }}">Create Release</a>
 				{% endif %}
 				{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
-					<li><a href="{{ package.getDeleteURL() }}">Delete</a></li>
+					<a class="btn btn-danger" href="{{ package.getDeleteURL() }}">Delete</a>
 				{% endif %}
-			</ul>
+			</div>
 		</div>
-	</aside>
 
-	<p class="package-short-large">{{ package.shortDesc }}</p>
-
-	{{ package.desc | markdown }}
-
-	<h3>Releases</h3>
-
-	<ul>
-		{% for rel in releases %}
-			{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
-				<li>
-					{% if not rel.approved %}<i>{% endif %}
-
-					<a href="{{ rel.getDownloadURL() }}">{{ rel.title }}</a>{% if rel.commit_hash %}
-					[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %},
-					created {{ rel.releaseDate | datetime }}.
-					{% if rel.task_id %}
-						<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
-					{% elif not rel.approved %}
-						Waiting for approval.
+		<aside class="float-right">
+			<div class="card" style="width: 18rem;">
+				<div class="card-header">
+					Details
+					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+						<a class="btn btn-sm btn-xs btn-primary float-right" href="{{ package.getEditURL() }}">Edit</a>
 					{% endif %}
 
-					{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
-						<a href="{{ rel.getEditURL() }}">Edit
-						{% if not rel.task_id and not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
-							/ Approve
+				</div>
+				<div class="card-body">
+					{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
+						{% set package_warning="Non-free code and media." %}
+					{% elif not package.license.is_foss and package.type != package.type.TXP %}
+						{% set package_warning="Non-free code." %}
+					{% elif not package.media_license.is_foss %}
+						{% set package_warning="Non-free media." %}
+					{% endif %}
+					{% if package_warning %}
+						<div class="alert alert-danger">
+							<b>Warning:</b> {{ package_warning }}
+						</div>
+					{% endif %}
+					<table>
+						<tr>
+							<td>Name</td>
+							<td>{{ package.name }}</td>
+						</tr>
+						{% if package.provides %}
+						<tr>
+							<td>Provides</td>
+							<td>{% for meta in package.provides %}
+								<a href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a>
+								{%- if not loop.last %}
+								,
+								{% endif %}
+							{% endfor %}</td>
+						</tr>
 						{% endif %}
+						<tr>
+							<td>Author</td>
+							<td class="{{ package.author.rank }}">
+								<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
+									{{ package.author.display_name }}
+								</a>
+							</td>
+						</tr>
+						<tr>
+							<td>Type</td>
+							<td>{{ package.type.value }}</td>
+						</tr>
+						<tr>
+							<td>License</td>
+							<td>
+								{% if package.license == package.media_license %}
+									{{ package.license.name }}
+								{% elif package.type == package.type.TXP %}
+									{{ package.media_license.name }}
+								{% else %}
+									{{ package.license.name }} for code,<br />
+									{{ package.media_license.name }} for media.
+								{% endif %}
+							</td>
+						</tr>
+						<tr>
+							<td>Added</td>
+							<td>{{ package.created_at | datetime }}</td>
+						</tr>
+						<tr>
+							<td>Tags</td>
+							<td>
+								{% for t in package.tags %}
+									<span class="badge badge-primary">{{ t.title }}</span>
+								{% else %}
+									<i>No tags.</i>
+								{% endfor %}
+							</td>
+					</table>
+				</div>
+			</div>
+		</aside>
+
+		<ul class="screenshot_list">
+			{% for ss in package.screenshots %}
+				{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+					<li>
+						<a href="{% if package.checkPerm(current_user, 'ADD_SCREENSHOTS') %}{{ ss.getEditURL() }}{% else %}{{ ss.url }}{% endif %}">
+							<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+						</a>
+					</li>
+				{% endif %}
+			{% endfor %}
+		</ul>
+
+		{{ package.desc | markdown }}
+
+		<div style="clear: both;"></div>
+
+		<div class="row my-4">
+			<div class="col-sm-4">
+				<div class="card">
+					<div class="card-header">Dependencies</div>
+					<ul class="list-group list-group-flush">
+						{% for dep in package.dependencies %}
+							<li class="list-group-item">
+								{%- if dep.package %}
+									<a href="{{ dep.package.getDetailsURL() }}">{{ dep.package.title }}</a> by {{ dep.package.author.display_name }}
+								{% elif dep.meta_package %}
+									<a href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">{{ dep.meta_package.name }}</a>
+								{% else %}
+									{{ "Excepted package or meta_package in dep!" | throw }}
+								{% endif %}
+								{% if dep.optional %}
+									[optional]
+								{% endif %}
+							</li>
+						{% else %}
+							<li class="list-group-item"><i>No dependencies</i></li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+
+
+			<div class="col-sm-4">
+				<div class="card">
+					<div class="card-header">
+						Releases
+						{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+							<a class="btn btn-xs btn-primary float-right"
+							href="{{ package.getCreateReleaseURL() }}">+</a>
+						{% endif %}
+					</div>
+					<ul class="list-group list-group-flush">
+						{% for rel in releases %}
+							{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
+								<li class="list-group-item list-group-item-action"  href="{{ rel.getDownloadURL() }}">
+									{% if not rel.approved %}<i>{% endif %}
+
+									{{ rel.title }}{% if rel.commit_hash %}
+									[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %},
+									<small>created {{ rel.releaseDate | datetime }}.</small>
+									{% if rel.task_id %}
+										<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
+									{% elif not rel.approved %}
+										Waiting for approval.
+									{% endif %}
+
+									{% if not rel.approved %}</i>{% endif %}
+
+									{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
+										<a class="btn btn-sm btn-primary float-right" href="{{ rel.getEditURL() }}">Edit
+										{% if not rel.task_id and not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
+											/ Approve
+										{% endif %}
+										</a>
+									{% endif %}
+
+								</li>
+							{% endif %}
+						{% else %}
+							<li class="list-group-item">No releases available.</li>
+						{% endfor %}
+					</ul>
+				</div>
+			</div>
+
+			<div class="col-sm-4">
+				<div class="card">
+					<div class="card-header">
+						Threads
+					{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
+						<a class="btn btn-xs btn-primary float-right"
+								href="{{ url_for('new_thread_page', pid=package.id) }}">
+							+
 						</a>
 					{% endif %}
+					</div>
+					<ul class="list-group list-group-flush">
+						{% from "macros/threads.html" import render_threadlist %}
+						{{ render_threadlist(threads, list_group=True) }}
+					</ul>
+				</div>
+			</div>
+		</div>
 
-					{% if not rel.approved %}</i>{% endif %}
-				</li>
-			{% endif %}
-		{% else %}
-			<li>No releases available.</li>
-		{% endfor %}
-	</ul>
 
-	<h3>Tags</h3>
-	<ul>
-		{% for t in package.tags %}
-			<li>{{ t.title }}</li>
-		{% else %}
-			<li>No tags.</li>
-		{% endfor %}
-	</ul>
+		{#
+			{% if current_user.is_authenticated or requests %}
+				<h3>Edit Requests</h3>
 
-	<!-- <table class="table-topalign">
-		<tr>
-			<td> -->
-				<h3>Dependencies</h3>
 				<ul>
-					{% for dep in package.dependencies %}
+					{% for r in requests %}
 						<li>
-							{%- if dep.package %}
-								<a href="{{ dep.package.getDetailsURL() }}">{{ dep.package.title }}</a> by {{ dep.package.author.display_name }}
-							{% elif dep.meta_package %}
-								<a href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">{{ dep.meta_package.name }}</a>
-							{% else %}
-								{{ "Excepted package or meta_package in dep!" | throw }}
-							{% endif %}
-							{% if dep.optional %}
-								[optional]
-							{% endif %}
+							<a href="{{ r.getURL() }}">{{ r.title }}</a>
+							by
+							<a href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>
 						</li>
 					{% else %}
-						<li><i>No dependencies</i></li>
+						<li>No edit requests have been made.</li>
 					{% endfor %}
 				</ul>
-			<!-- </td>
-			<td>
-				<h3>Required by</h3>
-				<ul>
-					{% for p in package.dependents %}
-						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }}</li>
-					{% else %}
-						{% if not package.softdependents %}
-						<li>No dependents.</li>
-						{% endif %}
-					{% endfor %}
-					{% for p in package.softdependents %}
-						<li><a href="{{ p.getDetailsURL() }}">{{ p.title }}</a> by {{ p.author.display_name }} [optional]</li>
-					{% endfor %}
-				</ul>
-			</td>
-		</tr>
-	</table> -->
+			{% endif %}
+		#}
 
-	{#
-		{% if current_user.is_authenticated or requests %}
-			<h3>Edit Requests</h3>
+		{% if alternatives %}
+			<h3>Related</h3>
 
+			{% from "macros/packagegridtile.html" import render_pkggrid %}
+			{{ render_pkggrid(alternatives) }}
+		{% endif %}
+
+		{% if similar_topics %}
+			<h3>Similar Forum Topics</h3>
+			{% if not package.approved and package.type == package.type.MOD %}
+				<div class="box box_grey alert alert-warning">
+					Please make sure that this package has the right to
+					the name '{{ package.name }}'.
+					See the
+					<a href="/policy_and_guidance/">Inclusion Policy</a>
+					for more info.
+				</div>
+			{% endif %}
 			<ul>
-				{% for r in requests %}
+				{% for t in similar_topics %}
 					<li>
-						<a href="{{ r.getURL() }}">{{ r.title }}</a>
-						by
-						<a href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>
+						[{{ t.type.value }}]
+						<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
+							{{ t.title }} by {{ t.author.display_name }}
+						</a>
+						{% if t.wip %}[WIP]{% endif %}
 					</li>
-				{% else %}
-					<li>No edit requests have been made.</li>
 				{% endfor %}
 			</ul>
 		{% endif %}
-	#}
-
-	{% if alternatives %}
-		<h3>Alternatives</h3>
-		<ul>
-			{% for p in alternatives %}
-				<li><a href="{{ p.getDetailsURL() }}">{{ p.title }} by {{ p.author.display_name }}</a></li>
-			{% endfor %}
-		</ul>
-	{% endif %}
-
-	{% if similar_topics %}
-		<h3>Similar Forum Topics</h3>
-		{% if not package.approved and package.type == package.type.MOD %}
-			<div class="box box_grey alert alert-warning">
-				Please make sure that this package has the right to
-				the name '{{ package.name }}'.
-				See the
-				<a href="/policy_and_guidance/">Inclusion Policy</a>
-				for more info.
-			</div>
-		{% endif %}
-		<ul>
-			{% for t in similar_topics %}
-				<li>
-					[{{ t.type.value }}]
-					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
-						{{ t.title }} by {{ t.author.display_name }}
-					</a>
-					{% if t.wip %}[WIP]{% endif %}
-				</li>
-			{% endfor %}
-		</ul>
-	{% endif %}
-
-	{% if threads %}
-		<h3>Threads</h3>
-
-		{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
-			<p><a href="{{ url_for('new_thread_page', pid=package.id) }}">Open Thread</a></p>
-		{% endif %}
-
-		{% from "macros/threads.html" import render_threadlist %}
-		{{ render_threadlist(threads) }}
-	{% endif %}
+	</main>
 {% endblock %}

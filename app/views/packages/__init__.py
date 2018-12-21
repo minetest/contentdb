@@ -151,10 +151,11 @@ def package_page(package):
 	alternatives = None
 	if package.type == PackageType.MOD:
 		alternatives = Package.query \
-				.filter_by(name=package.name, type=PackageType.MOD, soft_deleted=False) \
-				.filter(Package.id != package.id) \
-				.order_by(db.asc(Package.title)) \
-				.all()
+			.filter_by(name=package.name, type=PackageType.MOD, soft_deleted=False) \
+			.filter(Package.id != package.id) \
+			.order_by(db.desc(Package.score)) \
+			.all()
+
 
 	show_similar_topics = current_user == package.author or \
 			package.checkPerm(current_user, Permission.APPROVE_NEW)
