@@ -51,13 +51,14 @@
 			<p>Enter the repo URL for the package.
 			If the repo uses git then the metadata will be automatically imported.</p>
 
-			<p>Leave blank if you don't have a repo.</p>
+			<p>Leave blank if you don't have a repo. Click skip if the import fails.</p>
 		</div>
 
 		{{ render_field(form.repo, class_="pkg_repo") }}
 
 		<div class="pkg_wiz_1">
-			<a id="pkg_wiz_1_next" class="button button-primary">Next</a>
+			<a id="pkg_wiz_1_next" class="button button-primary">Next (Autoimport)</a>
+			<a id="pkg_wiz_1_skip" class="button button-default">Skip Autoimport</a>
 		</div>
 
 		<div class="pkg_wiz_2">

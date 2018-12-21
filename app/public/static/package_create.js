@@ -11,6 +11,8 @@ $(function() {
 
 	$(".pkg_meta").hide()
 	$(".pkg_wiz_1").show()
+
+	$("#pkg_wiz_1_skip").click(finish)
 	$("#pkg_wiz_1_next").click(function() {
 		const repoURL = $("#repo").val();
 		if (repoURL.trim() != "") {
