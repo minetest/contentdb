@@ -21,11 +21,6 @@
 
 			<div class="row" style="margin-top: 4rem;">
 				<div class="col">
-					{% if package.getDownloadRelease() %}
-						<a class="btn btn-success" href="{{ package.getDownloadURL() }}" class="btn_green">Download</a>
-					{% else %}
-						No download available.
-					{% endif %}
 				</div>
 				<div class="btn-group-horizontal col-md-auto">
 					{% if package.repo %}<a class="btn btn-primary" href="{{ package.repo }}">View Source</a>{% endif %}
@@ -35,9 +30,6 @@
 					{# {% if current_user.is_authenticated %}
 						<a class="btn btn-primary" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
 					{% endif %} #}
-					{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
-						<a class="btn btn-danger" href="{{ package.getDeleteURL() }}">Delete</a>
-					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -132,12 +124,26 @@
 		{% endif %}
 
 		<aside class="float-right ml-4" style="width: 18rem;">
-			<div class="card">
+			{% if package.getDownloadRelease() %}
+				<a class="btn btn-success btn-lg btn-block"
+						href="{{ package.getDownloadURL() }}" class="btn_green">
+					Download
+				</a>
+			{% else %}
+				No download available.
+			{% endif %}
+
+			<div class="card my-4">
 				<div class="card-header">
 					Details
+					<div class="btn-group float-right">
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-						<a class="btn btn-sm btn-xs btn-primary float-right" href="{{ package.getEditURL() }}">Edit</a>
+						<a class="btn btn-primary btn-sm btn-xs mx-1" href="{{ package.getEditURL() }}">Edit</a>
 					{% endif %}
+					{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
+						<a class="btn btn-danger btn-sm btn-xs mx-1" href="{{ package.getDeleteURL() }}">Delete</a>
+					{% endif %}
+					</div>
 
 				</div>
 				<div class="card-body">
