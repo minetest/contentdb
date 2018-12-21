@@ -19,17 +19,14 @@
 				{{ package.shortDesc }}
 			</p>
 
-			<div class="row" style="margin-top: 4rem;">
+			<div class="row" style="margin-top: 2rem;">
 				<div class="col">
 				</div>
 				<div class="btn-group-horizontal col-md-auto">
-					{% if package.repo %}<a class="btn btn-primary" href="{{ package.repo }}">View Source</a>{% endif %}
-					{% if package.forums %}<a class="btn btn-primary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
-					{% if package.issueTracker %}<a class="btn btn-primary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
-					{% if package.website %}<a class="btn btn-primary" href="{{ package.website }}">Website</a>{% endif %}
-					{# {% if current_user.is_authenticated %}
-						<a class="btn btn-primary" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
-					{% endif %} #}
+					{% if package.repo %}<a class="btn btn-secondary" href="{{ package.repo }}">View Source</a>{% endif %}
+					{% if package.forums %}<a class="btn btn-secondary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
+					{% if package.issueTracker %}<a class="btn btn-secondary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
+					{% if package.website %}<a class="btn btn-secondary" href="{{ package.website }}">Website</a>{% endif %}
 				</div>
 			</div>
 		</div>
@@ -140,6 +137,9 @@
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
 						<a class="btn btn-primary btn-sm btn-xs mx-1" href="{{ package.getEditURL() }}">Edit</a>
 					{% endif %}
+					{# {% if current_user.is_authenticated %}
+						<a class="btn btn-primary btn-sm btn-xs mx-1" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
+					{% endif %} #}
 					{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
 						<a class="btn btn-danger btn-sm btn-xs mx-1" href="{{ package.getDeleteURL() }}">Delete</a>
 					{% endif %}
@@ -241,7 +241,7 @@
 								{{ "Excepted package or meta_package in dep!" | throw }}
 							{% endif %}</a>
 						{% else %}
-							<i class="list-group-item"><i>No dependencies</i></i>
+							<i>No dependencies</i>
 						{% endfor %}
 					</div>
 				</div>
