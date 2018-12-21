@@ -19,7 +19,7 @@ Creating an Account
 					Please log out to continue.
 				</p>
 				<p>
-					<a href="{{ url_for('user.logout', next=url_for('user_claim_page')) }}" class="button">Logout</a>
+					<a href="{{ url_for('user.logout', next=url_for('user_claim_page')) }}" class="btn">Logout</a>
 				</p>
 			{% else %}
 				<p>
@@ -108,7 +108,7 @@ Creating an Account
 					options.
 				</p>
 
-				<a class="button" href="{{ url_for('user.register') }}">Register</a>
+				<a class="btn" href="{{ url_for('user.register') }}">Register</a>
 			</div>
 		</div>
 	{% endif %}

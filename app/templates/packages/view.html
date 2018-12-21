@@ -16,7 +16,7 @@
 						You need to create releases even if you use a rolling release development cycle,
 						as Minetest needs them to check for updates.
 					</p>
-					<a class="button" href="{{ package.getCreateReleaseURL() }}">Create Release</a>
+					<a class="btn" href="{{ package.getCreateReleaseURL() }}">Create Release</a>
 				{% else %}
 					A release is required before this package can be approved.
 				{% endif %}
@@ -158,7 +158,7 @@
 				</tr>
 			</table>
 
-			<ul class="buttonset linedbuttonset">
+			<ul class="btnset linedbuttonset">
 				{% if package.getDownloadRelease() %}<li><a href="{{ package.getDownloadURL() }}" class="btn_green">Download</a></li>{% endif %}
 				{% if package.repo %}<li><a href="{{ package.repo }}">View Source</a></li>{% endif %}
 				{% if package.forums %}<li><a href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a></li>{% endif %}

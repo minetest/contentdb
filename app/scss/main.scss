@@ -1,6 +1,13 @@
-@import "page.scss";
+@import "bootstrap.scss";
 @import "components.scss";
-@import "nav.scss";
 @import "packages.scss";
 @import "packagegrid.scss";
 @import "comments.scss";
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+}
+
+.nav-link > img {
+	max-height: 1em;
+}
