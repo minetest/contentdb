@@ -406,7 +406,7 @@ class Package(db.Model):
 			"author": self.author.display_name,
 			"name": self.name,
 			"title": self.title,
-			"short_descriptionesc": self.shortDesc,
+			"short_description": self.shortDesc,
 			"desc": self.desc,
 			"type": self.type.toName(),
 			"created_at": self.created_at,

@@ -66,7 +66,7 @@ def getKrockList():
 	global krock_list_cache_by_name
 
 	if krock_list_cache is None:
-		contents = urllib.request.urlopen("http://krock-works.16mb.com/MTstuff/modList.php").read().decode("utf-8")
+		contents = urllib.request.urlopen("https://krock-works.uk.to/minetest/modList.php").read().decode("utf-8")
 		list = json.loads(contents)
 
 		def h(x):
@@ -149,7 +149,8 @@ class PackageTreeNode:
 			type = PackageType.GAME
 		elif os.path.isfile(baseDir + "/init.lua"):
 			type = PackageType.MOD
-		elif os.path.isfile(baseDir + "/modpack.txt"):
+		elif os.path.isfile(baseDir + "/modpack.txt") or \
+				os.path.isfile(baseDir + "/modpack.conf"):
 			type = PackageType.MOD
 			is_modpack = True
 		elif os.path.isdir(baseDir + "/mods"):

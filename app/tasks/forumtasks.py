@@ -74,7 +74,7 @@ def parseTitle(title):
 def getLinksFromModSearch():
 	links = {}
 
-	contents = urllib.request.urlopen("http://krock-works.16mb.com/MTstuff/modList.php").read().decode("utf-8")
+	contents = urllib.request.urlopen("https://krock-works.uk.to/minetest/modList.php").read().decode("utf-8")
 	for x in json.loads(contents):
 		link = x.get("link")
 		if link is not None:
@@ -127,15 +127,15 @@ def importTopicList():
 		link = links_by_id.get(id)
 
 		# Fill row
-		topic.topic_id   = id
+		topic.topic_id   = int(id)
 		topic.author     = user
 		topic.type       = info["type"]
 		topic.title      = title
 		topic.name       = name
 		topic.link       = link
 		topic.wip        = info["wip"]
-		topic.posts      = info["posts"]
-		topic.views      = info["views"]
+		topic.posts      = int(info["posts"])
+		topic.views      = int(info["views"])
 		topic.created_at = info["date"]
 
 	for p in Package.query.all():
