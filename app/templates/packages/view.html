@@ -7,81 +7,6 @@
 {% endblock %}
 
 {% block container %}
-	{% if not package.approved %}
-		<div class="box box_grey alert alert-warning">
-			<span class="icon_message"></span>
-			{% if package.releases.count() == 0 %}
-				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-					You need to create a release before this package can be approved.
-					<p>
-						A release is a single downloadable version of your {{ package.type.value | lower }}.
-						You need to create releases even if you use a rolling release development cycle,
-						as Minetest needs them to check for updates.
-					</p>
-					<a class="btn" href="{{ package.getCreateReleaseURL() }}">Create Release</a>
-				{% else %}
-					A release is required before this package can be approved.
-				{% endif %}
-
-			{% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
-				You need to add at least one screenshot.
-
-			{% elif topic_error_lvl == "error" %}
-				Please fix the below topic issue(s).
-
-			{% elif "Other" in package.license.name or "Other" in package.media_license.name %}
-				Please wait for the license to be added to CDB.
-
-			{% else %}
-				{% if package.screenshots.count() == 0 %}
-					<b>You should add at least one screenshot, but this isn't required.</b><br />
-				{% endif %}
-
-				{% if not package.getDownloadRelease() %}
-					Please wait for the release to be approved.
-				{% elif package.checkPerm(current_user, "APPROVE_NEW") %}
-					You can now approve this package if you're ready.
-					<form method="post" action="{{ package.getApproveURL() }}">
-						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-						<input type="submit" value="Approve" />
-					</form>
-				{% else %}
-					Please wait for the package to be approved.
-				{% endif %}
-			{% endif %}
-			<div style="clear: both;"></div>
-		</div>
-
-		{% if topic_error %}
-			<div class="box box_grey alert alert-{{ topic_error_lvl }}">
-				<span class="icon_message"></span>
-				{{ topic_error | safe }}
-				<div style="clear: both;"></div>
-			</div>
-		{% endif %}
-
-		{% if package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW") %}
-			{% if review_thread %}
-				<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
-				{% if review_thread.private %}
-					<p><i>
-						This thread is only visible to the package owner and users of
-						Editor rank or above.
-					</i></p>
-				{% endif %}
-
-				{% from "macros/threads.html" import render_thread %}
-				{{ render_thread(review_thread, current_user) }}
-			{% else %}
-				<div class="box box_grey alert alert-info">
-					Privately ask a question or give feedback
-
-					<a class="alert_right button" href="{{ url_for('new_thread_page', pid=package.id, title='Package approval comments') }}">Open Thread</a>
-				</div>
-			{% endif %}
-		{% endif %}
-	{% endif %}
-
 	<header class="jumbotron pb-3"
 		style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{{ package.getMainScreenshotURL() }}');
 		    background-size: cover;
@@ -119,6 +44,92 @@
 	</header>
 
 	<main class="container mt-4">
+		{% if not package.approved %}
+			<div class="alert alert-warning">
+				<span class="icon_message"></span>
+				{% if package.releases.count() == 0 %}
+					<h4 class="alert-heading">Release Required</h4>
+					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+						<p>You need to create a release before this package can be approved.</p>
+						<p>
+							A release is a single downloadable version of your {{ package.type.value | lower }}.
+							You need to create releases even if you use a rolling release development cycle,
+							as Minetest needs them to check for updates.
+						</p>
+						<a class="btn" href="{{ package.getCreateReleaseURL() }}">Create Release</a>
+					{% else %}
+						A release is required before this package can be approved.
+					{% endif %}
+
+				{% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
+					You need to add at least one screenshot.
+
+				{% elif topic_error_lvl == "error" %}
+					Please fix the below topic issue(s).
+
+				{% elif "Other" in package.license.name or "Other" in package.media_license.name %}
+					Please wait for the license to be added to CDB.
+
+				{% else %}
+					{% if package.screenshots.count() == 0 %}
+						<b>You should add at least one screenshot, but this isn't required.</b><br />
+					{% endif %}
+
+					{% if not package.getDownloadRelease() %}
+						Please wait for the release to be approved.
+					{% elif package.checkPerm(current_user, "APPROVE_NEW") %}
+						<form class="float-right"  method="post" action="{{ package.getApproveURL() }}">
+							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+							<input class="btn btn-sm btn-warning" type="submit" value="Approve" />
+						</form>
+						You can now approve this package if you're ready.
+					{% else %}
+						Please wait for the package to be approved.
+					{% endif %}
+				{% endif %}
+				<div style="clear: both;"></div>
+			</div>
+
+			{% if topic_error %}
+				<div class="alert alert-{{ topic_error_lvl }}">
+					<span class="icon_message"></span>
+					{{ topic_error | safe }}
+					<div style="clear: both;"></div>
+				</div>
+			{% endif %}
+
+			{% if similar_topics %}
+				<div class="alert alert-warning">
+					Please make sure that this package has the right to
+					the name '{{ package.name }}'.
+					See the
+					<a href="/policy_and_guidance/">Inclusion Policy</a>
+					for more info.
+				</div>
+			{% endif %}
+
+			{% if package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW") %}
+				{% if review_thread %}
+					<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
+					{% if review_thread.private %}
+						<p><i>
+							This thread is only visible to the package owner and users of
+							Editor rank or above.
+						</i></p>
+					{% endif %}
+
+					{% from "macros/threads.html" import render_thread %}
+					{{ render_thread(review_thread, current_user) }}
+				{% else %}
+					<div class="alert alert-info">
+						<a class="float-right btn btn-sm btn-info" href="{{ url_for('new_thread_page', pid=package.id, title='Package approval comments') }}">Open Thread</a>
+
+						Privately ask a question or give feedback
+						<div style="clear:both;"></div>
+					</div>
+				{% endif %}
+			{% endif %}
+		{% endif %}
 
 		<aside class="float-right ml-4" style="width: 18rem;">
 			<div class="card">
@@ -201,27 +212,34 @@
 				</div>
 			</div>
 
-			<div class="card my-4">
-				<div class="card-header">Dependencies</div>
-				<ul class="list-group list-group-flush">
-					{% for dep in package.dependencies %}
-						<li class="list-group-item">
+			{% if package.type == package.type.MOD %}
+				<div class="card my-4">
+					<div class="card-header">Dependencies</div>
+					<div class="card-body">
+						{% for dep in package.dependencies %}
+							{% if dep.optional %}
+								{% set color="secondary" %}
+							{% else %}
+								{% set color="primary" %}
+							{% endif %}
+
 							{%- if dep.package %}
-								<a href="{{ dep.package.getDetailsURL() }}">{{ dep.package.title }}</a> by {{ dep.package.author.display_name }}
+								<a class="badge badge-{{ color }}"
+										href="{{ dep.package.getDetailsURL() }}">
+									{{ dep.package.title }} by {{ dep.package.author.display_name }}
 							{% elif dep.meta_package %}
-								<a href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">{{ dep.meta_package.name }}</a>
+								<a class="badge badge-{{ color }}"
+										href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">
+									{{ dep.meta_package.name }}
 							{% else %}
 								{{ "Excepted package or meta_package in dep!" | throw }}
-							{% endif %}
-							{% if dep.optional %}
-								[optional]
-							{% endif %}
-						</li>
-					{% else %}
-						<li class="list-group-item"><i>No dependencies</i></li>
-					{% endfor %}
-				</ul>
-			</div>
+							{% endif %}</a>
+						{% else %}
+							<i class="list-group-item"><i>No dependencies</i></i>
+						{% endfor %}
+					</div>
+				</div>
+			{% endif %}
 
 			<div class="card my-4">
 				<div class="card-header">
@@ -328,15 +346,6 @@
 
 		{% if similar_topics %}
 			<h3>Similar Forum Topics</h3>
-			{% if not package.approved and package.type == package.type.MOD %}
-				<div class="box box_grey alert alert-warning">
-					Please make sure that this package has the right to
-					the name '{{ package.name }}'.
-					See the
-					<a href="/policy_and_guidance/">Inclusion Policy</a>
-					for more info.
-				</div>
-			{% endif %}
 			<ul>
 				{% for t in similar_topics %}
 					<li>
