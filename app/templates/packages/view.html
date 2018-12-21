@@ -82,44 +82,43 @@
 		{% endif %}
 	{% endif %}
 
-	<header class="jumbotron mb-0" style="background-image: url('{{ package.getMainScreenshotURL() }}')">
+	<header class="jumbotron pb-3"
+		style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{{ package.getMainScreenshotURL() }}');
+		    background-size: cover;
+		    background-repeat: no-repeat;
+		    background-position: center;">
 		<div class="container">
 			<h1 class="display-3">{{ package.title }} by {{ package.author.display_name }}</h1>
 
 			<p class="lead">
 				{{ package.shortDesc }}
 			</p>
+
+			<div class="row" style="margin-top: 4rem;">
+				<div class="col">
+					{% if package.getDownloadRelease() %}
+						<a class="btn btn-success" href="{{ package.getDownloadURL() }}" class="btn_green">Download</a>
+					{% else %}
+						No download available.
+					{% endif %}
+				</div>
+				<div class="btn-group-horizontal col-md-auto">
+					{% if package.repo %}<a class="btn btn-primary" href="{{ package.repo }}">View Source</a>{% endif %}
+					{% if package.forums %}<a class="btn btn-primary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
+					{% if package.issueTracker %}<a class="btn btn-primary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
+					{% if package.website %}<a class="btn btn-primary" href="{{ package.website }}">Website</a>{% endif %}
+					{# {% if current_user.is_authenticated %}
+						<a class="btn btn-primary" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
+					{% endif %} #}
+					{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
+						<a class="btn btn-danger" href="{{ package.getDeleteURL() }}">Delete</a>
+					{% endif %}
+				</div>
+			</div>
 		</div>
 	</header>
 
-	<main class="container">
-		<div class="row mt-1 mb-4">
-			<div class="col">
-				{% if package.getDownloadRelease() %}
-					<a class="btn btn-success" href="{{ package.getDownloadURL() }}" class="btn_green">Download</a>
-				{% else %}
-					No download available.
-				{% endif %}
-			</div>
-			<div class="btn-group-horizontal col-md-auto">
-				{% if package.repo %}<a class="btn btn-primary" href="{{ package.repo }}">View Source</a>{% endif %}
-				{% if package.forums %}<a class="btn btn-primary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
-				{% if package.issueTracker %}<a class="btn btn-primary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
-				{% if package.website %}<a class="btn btn-primary" href="{{ package.website }}">Website</a>{% endif %}
-				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-					<a class="btn btn-primary" href="{{ package.getNewScreenshotURL() }}">Add screenshot</a>
-				{% endif %}
-				{# {% if current_user.is_authenticated %}
-					<a class="btn btn-primary" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
-				{% endif %} #}
-				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-					<a class="btn btn-primary" href="{{ package.getCreateReleaseURL() }}">Create Release</a>
-				{% endif %}
-				{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
-					<a class="btn btn-danger" href="{{ package.getDeleteURL() }}">Delete</a>
-				{% endif %}
-			</div>
-		</div>
+	<main class="container mt-4">
 
 		<aside class="float-right ml-4" style="width: 18rem;">
 			<div class="card">
@@ -235,19 +234,7 @@
 				<ul class="list-group list-group-flush">
 					{% for rel in releases %}
 						{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
-							<li class="list-group-item list-group-item-action"  href="{{ rel.getDownloadURL() }}">
-								{% if not rel.approved %}<i>{% endif %}
-
-								{{ rel.title }}{% if rel.commit_hash %}
-								[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %},
-								<small>created {{ rel.releaseDate | datetime }}.</small>
-								{% if rel.task_id %}
-									<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
-								{% elif not rel.approved %}
-									Waiting for approval.
-								{% endif %}
-
-								{% if not rel.approved %}</i>{% endif %}
+							<li class="list-group-item list-group-item-action">
 
 								{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
 									<a class="btn btn-sm btn-primary float-right" href="{{ rel.getEditURL() }}">Edit
@@ -256,6 +243,19 @@
 									{% endif %}
 									</a>
 								{% endif %}
+
+								{% if not rel.approved %}<i>{% endif %}
+
+								<a href="{{ rel.getDownloadURL() }}">{{ rel.title }}</a>{% if rel.commit_hash %}
+								[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %}<br>
+								<small>created {{ rel.releaseDate | datetime }}.</small>
+								{% if rel.task_id %}
+									<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
+								{% elif not rel.approved %}
+									Waiting for approval.
+								{% endif %}
+
+								{% if not rel.approved %}</i>{% endif %}
 
 							</li>
 						{% endif %}
@@ -282,7 +282,10 @@
 			</div>
 		</aside>
 
-		<ul class="screenshot_list">
+		<ul class="screenshot_list mb-4">
+			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+			<a class="btn btn-primary float-right" href="{{ package.getNewScreenshotURL() }}">Add screenshot</a>
+			{% endif %}
 			{% for ss in package.screenshots %}
 				{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 					<li>
