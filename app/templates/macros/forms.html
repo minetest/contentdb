@@ -1,10 +1,10 @@
-{% macro render_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
+{% macro render_field(field, label=None, label_visible=true, right_url=None, right_label=None, fieldclass=None) -%}
 	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
-			{% if not label %}{% set label=field.label.text %}{% endif %}
-			<label for="{{ field.id }}">{{ label|safe }}</label>
+			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
+			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
 		{% endif %}
-		{{ field(class_='form-control', **kwargs) }}
+		{{ field(class_=fieldclass or 'form-control', **kwargs) }}
 		{% if field.errors %}
 			{% for e in field.errors %}
 				<p class="help-block">{{ e }}</p>
@@ -124,9 +124,9 @@
 
 {% macro render_radio_field(field) -%}
 	{% for value, label, checked in field.iter_choices() %}
-		<div class="radio">
-			<label>
-				<input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
+		<div class="form-check my-1">
+			<label class="form-check-label">
+				<input class="form-check-input" type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
 				{{ label }}
 			</label>
 		</div>

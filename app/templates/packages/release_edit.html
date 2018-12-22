@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	{% from "macros/forms.html" import render_field, render_submit_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 
@@ -34,7 +34,7 @@
 			<br />
 		{% else %}
 			{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
-				{{ render_field(form.approved) }}
+				{{ render_checkbox_field(form.approved, class_="my-3") }}
 			{% else %}
 				Approved: {{ release.approved }}
 			{% endif %}

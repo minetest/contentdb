@@ -5,15 +5,37 @@
 {% endblock %}
 
 {% block content %}
-	{% from "macros/forms.html" import render_field, render_submit_field %}
-	<form method="POST" action="" enctype="multipart/form-data">
-		{{ form.hidden_tag() }}
 
-		{{ render_field(form.title) }}
-		{{ render_field(form.comment) }}
-		{{ render_field(form.private) }}
-		{{ render_submit_field(form.submit) }}
+{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
+<form method="POST" action="" enctype="multipart/form-data">
+	{{ form.hidden_tag() }}
+	{{ render_field(form.title) }}
 
-		<p>Only the you, the package author, and users of Editor rank and above can read private threads.</p>
-	</form>
+	<div class="row mt-0 mb-4 comments mx-0">
+		<div class="col-md-1 p-1">
+			<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ (current_user.email or '') | gravatar }}">
+		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-header {{ current_user.rank.name }}">
+					{{ current_user.display_name }}
+					<a name="reply"></a>
+				</div>
+				<div class="card-body">
+					{{ render_field(form.comment, label="", class_="m-0") }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	{{ render_checkbox_field(form.private, class_="my-3") }}
+	<p>
+		Only the you, the package author, and users of Editor rank
+		and above can read private threads.
+	</p>
+
+	{{ render_submit_field(form.submit) }}
+</form>
+
+
 {% endblock %}

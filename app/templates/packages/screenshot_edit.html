@@ -9,15 +9,15 @@
 		<img src="{{ screenshot.getThumbnailURL() }}" alt="{{ screenshot.title }}" />
 	</a>
 
-	{% from "macros/forms.html" import render_field, render_submit_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.title) }}
-		{{ render_field(form.delete) }}
+		{{ render_checkbox_field(form.delete) }}
 
 		{% if package.checkPerm(current_user, "APPROVE_SCREENSHOT") %}
-			{{ render_field(form.approved) }}
+			{{ render_checkbox_field(form.approved) }}
 		{% else %}
 			<p>Approved: {{ screenshot.approved }}</p>
 		{% endif %}

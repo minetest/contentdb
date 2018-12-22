@@ -5,16 +5,19 @@
 {% endblock %}
 
 {% block content %}
-	{% from "macros/forms.html" import render_field, render_submit_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, render_radio_field %}
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.title, placeholder="Human readable. Eg: 1.0.0 or 2018-05-28") }}
-		{{ render_field(form.uploadOpt) }}
+		<p class="mb-0">Method</p>
+		{{ render_radio_field(form.uploadOpt) }}
+
 		{% if package.repo %}
-			{{ render_field(form.vcsLabel) }}
+			{{ render_field(form.vcsLabel, class_="mt-3") }}
 		{% endif %}
-		{{ render_field(form.fileUpload) }}
+
+		{{ render_field(form.fileUpload, fieldclass="form-control-file") }}
 		{{ render_submit_field(form.submit) }}
 	</form>
 {% endblock %}
