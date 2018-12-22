@@ -171,9 +171,6 @@
 						<td>{% for meta in package.provides %}
 							<a class="badge badge-primary"
 							 href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a>
-							{%- if not loop.last %}
-							,
-							{% endif %}
 						{% endfor %}</td>
 					</tr>
 					{% endif %}
@@ -258,7 +255,7 @@
 				<ul class="list-group list-group-flush">
 					{% for rel in releases %}
 						{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
-							<li class="list-group-item list-group-item-action">
+							<li class="list-group-item">
 
 								{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
 									<a class="btn btn-sm btn-primary float-right" href="{{ rel.getEditURL() }}">Edit
