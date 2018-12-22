@@ -35,10 +35,10 @@
 {% block content %}
 	<h1>Create Package</h1>
 
-	<div class="box box_grey alert alert-info">
-		Have you read the Package Inclusion Policy and Guidance yet?
+	<div class="alert alert-info">
+		<a class="float-right btn btn-sm btn-default" href="{{ url_for('flatpage', path='policy_and_guidance') }}">View</a>
 
-		<a class="alert_right button" href="{{ url_for('flatpage', path='policy_and_guidance') }}">View</a>
+		Have you read the Package Inclusion Policy and Guidance yet?
 	</div>
 
 
