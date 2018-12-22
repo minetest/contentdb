@@ -7,72 +7,74 @@
 {% block content %}
 
 {% if not current_user.is_authenticated and user.rank == user.rank.NOT_JOINED and user.forums_username %}
-<div class="box box_grey alert alert-info">
-	Is this you? Claim your account now!
+<div class="alert alert-info alert alert-info">
+	<a class="float-right btn btn-default btn-sm"
+		href="{{ url_for('user_claim_page', username=user.forums_username) }}">Claim</a>
 
-	<a class="alert_right button" href="{{ url_for('user_claim_page', username=user.forums_username) }}">Claim</a>
+	Is this you? Claim your account now!
 </div>
 {% endif %}
 
-<div class="box box_grey">
-	<h2>{{ user.display_name }}</h2>
+<div class="row mb-3">
+	<div class="col-sm-6">
+		<div class="card">
+			<h2 class="card-header">{{ user.display_name }}</h2>
+			<table class="table">
+				<tr>
+					<td>Rank:</td>
+					<td>
+						{{ user.rank.getTitle() }}
+					</td>
+				</tr>
+				<tr>
+					<td>Accounts:</td>
+					<td>
+						{% if user.forums_username %}
+							<a href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
+								Minetest Forum
+							</a>
+						{% elif user == current_user %}
+							No forum account
+						{% endif %}
 
-	<table class="box-body">
-		<tr>
-			<td>Rank:</td>
-			<td>
-				{{ user.rank.getTitle() }}
-			</td>
-		</tr>
-		<tr>
-			<td>Accounts:</td>
-			<td>
-				{% if user.forums_username %}
-					<a href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
-						Minetest Forum
-					</a>
-				{% elif user == current_user %}
-					No forum account
-				{% endif %}
+						{% if (user.forums_username and user.github_username) or user == current_user %}
+							|
+						{% endif %}
 
-				{% if (user.forums_username and user.github_username) or user == current_user %}
-					|
-				{% endif %}
+						{% if user.github_username %}
+							<a href="https://github.com/{{ user.github_username }}">GitHub</a>
+						{% elif user == current_user %}
+							<a href="{{ url_for('github_signin_page') }}">Link Github</a>
+						{% endif %}
 
-				{% if user.github_username %}
-					<a href="https://github.com/{{ user.github_username }}">GitHub</a>
-				{% elif user == current_user %}
-					<a href="{{ url_for('github_signin_page') }}">Link Github</a>
-				{% endif %}
-
+						{% if user == current_user %}
+							&#x1f30e;
+						{% endif %}
+					</td>
+				</tr>
 				{% if user == current_user %}
-					&#x1f30e;
+					<tr>
+						<td>Password:</td>
+						<td>
+							{% if user.password %}
+								Set | <a href="{{ url_for('user.change_password') }}">Change</a>
+							{% else %}
+								Not set | <a href="{{ url_for('set_password_page') }}">Set</a>
+							{% endif %}
+						</td>
+					</tr>
 				{% endif %}
-			</td>
-		</tr>
-		{% if user == current_user %}
-			<tr>
-				<td>Password:</td>
-				<td>
-					{% if user.password %}
-						Set | <a href="{{ url_for('user.change_password') }}">Change</a>
-					{% else %}
-						Not set | <a href="{{ url_for('set_password_page') }}">Set</a>
-					{% endif %}
-				</td>
-			</tr>
-		{% endif %}
-	</table>
-</div>
+			</table>
+		</div>
+	</div>
 
 {% if form %}
 	{% from "macros/forms.html" import render_field, render_submit_field %}
-	<div class="box box_grey">
-		<h2>Edit Details</h2>
-
-		<form action="" method="POST" class="form box-body" role="form">
-			<div class="row">
-				<div class="col-sm-6 col-md-5 col-lg-4">
+	<div class="col-sm-6">
+		<div class="card">
+			<h2 class="card-header">Edit Details</h2>
+			<div class="card-body">
+				<form action="" method="POST" class="form box-body" role="form">
 					{{ form.hidden_tag() }}
 
 					{% if user.checkPerm(current_user, "CHANGE_DNAME") %}
@@ -89,27 +91,26 @@
 					{% endif %}
 
 					{{ render_submit_field(form.submit, tabindex=280) }}
-				</div>
+				</form>
 			</div>
-		</form>
+		</div>
 	</div>
 {% endif %}
+</div>
 
 {% from "macros/packagegridtile.html" import render_pkggrid %}
 {{ render_pkggrid(packages, show_author=False) }}
 
 {% if topics_to_add %}
-	<div class="box box_grey">
-		<h2>Unadded Packages</h2>
+	<div class="card mt-3">
+		<h2 class="card-header">Unadded Packages</h2>
 
-		<div class="box-body">
-			<p>
-				List of your forum topics which do not have a matching package.
-			</p>
+		<p class="card-body">
+			List of your forum topics which do not have a matching package.
+		</p>
 
-			{% from "macros/topics.html" import render_topics_table %}
-			{{ render_topics_table(topics_to_add, show_author=False) }}
-		</div>
+		{% from "macros/topics.html" import render_topics_table %}
+		{{ render_topics_table(topics_to_add, show_author=False) }}
 	</div>
 {% endif %}
 
