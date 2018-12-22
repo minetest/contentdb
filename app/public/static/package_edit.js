@@ -8,4 +8,17 @@ $(function() {
 	})
 	$(".not_mod, .not_game, .not_txp").show()
 	$(".not_" + $("#type").val().toLowerCase()).hide()
+
+	$("#forums").on('paste', function(e) {
+		try {
+			var pasteData = e.originalEvent.clipboardData.getData('text')
+			var url = new URL(pasteData);
+			if (url.hostname == "forum.minetest.net") {
+				$(this).val(url.searchParams.get("t"));
+				e.preventDefault();
+			}
+		} catch (e) {
+			console.log("Not a URL");
+		}
+	});
 })
