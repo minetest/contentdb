@@ -29,14 +29,14 @@ Welcome
 	{{ render_pkggrid(new) }}
 
 
-	<a href="{{ url_for('packages_page') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages_page', sort='score', order='desc') }}" class="btn btn-secondary float-right">
 		See more
 	</a>
 	<h2 class="my-3">Popular</h2>
 	{{ render_pkggrid(popular) }}
 
 
-	<a href="{{ url_for('packages_page', type='txp') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages_page', type='txp', sort='score', order='desc') }}" class="btn btn-secondary float-right">
 		See more
 	</a>
 	<h2 class="my-3">Top Texture Packs</h2>

@@ -53,6 +53,8 @@ class QueryBuilder:
 		self.lucky  = "lucky" in request.args
 		self.hide_nonfree = isNo(request.args.get("nonfree"))
 		self.limit  = 1 if self.lucky else None
+		self.order_by  = request.args.get("sort") or "score"
+		self.order_dir = request.args.get("order") or "desc"
 
 	def buildPackageQuery(self):
 		query = Package.query.filter_by(soft_deleted=False, approved=True)
@@ -63,7 +65,22 @@ class QueryBuilder:
 		if self.search is not None and self.search.strip() != "":
 			query = query.filter(Package.title.ilike('%' + self.search + '%'))
 
-		query = query.order_by(db.desc(Package.score))
+		to_order = None
+		if self.order_by == "score":
+			to_order = Package.score
+		elif self.order_by == "created_at":
+			to_order = Package.created_at
+		else:
+			abort(400)
+
+		if self.order_dir == "asc":
+			to_order = db.asc(to_order)
+		elif self.order_dir == "desc":
+			to_order = db.desc(to_order)
+		else:
+			abort(400)
+
+		query = query.order_by(to_order)
 
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))
