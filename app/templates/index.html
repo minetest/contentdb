@@ -36,6 +36,13 @@ Welcome
 	{{ render_pkggrid(popular) }}
 
 
+	<a href="{{ url_for('packages_page', type='game', sort='score', order='desc') }}" class="btn btn-secondary float-right">
+		See more
+	</a>
+	<h2 class="my-3">Top Games</h2>
+	{{ render_pkggrid(pop_gam) }}
+
+
 	<a href="{{ url_for('packages_page', type='txp', sort='score', order='desc') }}" class="btn btn-secondary float-right">
 		See more
 	</a>
