@@ -4,8 +4,8 @@
 Welcome
 {% endblock %}
 
-{% block container %}
-<header class="jumbotron">
+{% block content %}
+<!-- <header class="jumbotron">
 	<div class="container">
 		<h1 class="display-3">{{ config.USER_APP_NAME }}</h1>
 
@@ -18,16 +18,29 @@ Welcome
 	</div>
 </header>
 
-<main class="container">
+<main class="container"> -->
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 
-	<h2>Popular</h2>
-	{{ render_pkggrid(popular) }}
 
-	<a href="{{ url_for('packages_page') }}" class="btn">Show More</a>
-
-	<h2 style="margin-top:2em;">Newly Added</h2>
+	<a href="{{ url_for('packages_page', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
+		See more
+	</a>
+	<h2 class="my-3">Newly Added</h2>
 	{{ render_pkggrid(new) }}
 
-</main>
+
+	<a href="{{ url_for('packages_page') }}" class="btn btn-secondary float-right">
+		See more
+	</a>
+	<h2 class="my-3">Popular</h2>
+	{{ render_pkggrid(popular) }}
+
+
+	<a href="{{ url_for('packages_page', type='txp') }}" class="btn btn-secondary float-right">
+		See more
+	</a>
+	<h2 class="my-3">Top Texture Packs</h2>
+	{{ render_pkggrid(pop_txp) }}
+
+<!-- </main> -->
 {% endblock %}

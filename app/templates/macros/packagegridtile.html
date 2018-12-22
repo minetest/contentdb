@@ -40,11 +40,7 @@
 		{% else %}
 			<li><i>No packages available</i></ul>
 		{% endfor %}
-		{% set amt=packages|length %}
-		{% if amt > 4 %}
-			{% set amt=4 %}
-		{% endif %}
-		{% for i in range(amt) %}
+		{% for i in range(4) %}
 			<li class="packagetile flex-fill"></li>
 		{% endfor %}
 	</ul>
