@@ -122,7 +122,7 @@
 
 		<aside class="float-right ml-4" style="width: 18rem;">
 			{% if package.getDownloadRelease() %}
-				<a class="btn btn-success btn-lg btn-block"
+				<a class="btn btn-download btn-lg btn-block"
 						href="{{ package.getDownloadURL() }}" class="btn_green">
 					Download
 				</a>
@@ -135,13 +135,13 @@
 					Details
 					<div class="btn-group float-right">
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-						<a class="btn btn-primary btn-sm btn-xs mx-1" href="{{ package.getEditURL() }}">Edit</a>
+						<a class="btn btn-default btn-sm mx-1" href="{{ package.getEditURL() }}">Edit</a>
 					{% endif %}
 					{# {% if current_user.is_authenticated %}
-						<a class="btn btn-primary btn-sm btn-xs mx-1" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
+						<a class="btn btn-default btn-sm mx-1" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
 					{% endif %} #}
 					{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
-						<a class="btn btn-danger btn-sm btn-xs mx-1" href="{{ package.getDeleteURL() }}">Delete</a>
+						<a class="btn btn-danger btn-sm mx-1" href="{{ package.getDeleteURL() }}">Delete</a>
 					{% endif %}
 					</div>
 
@@ -251,8 +251,8 @@
 				<div class="card-header">
 					Releases
 					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-						<a class="btn btn-xs btn-primary float-right"
-						href="{{ package.getCreateReleaseURL() }}">+</a>
+						<a class="float-right"
+							href="{{ package.getCreateReleaseURL() }}">+</a>
 					{% endif %}
 				</div>
 				<ul class="list-group list-group-flush">
@@ -291,13 +291,11 @@
 
 			<div class="card my-4"">
 				<div class="card-header">
-					Threads
 				{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
-					<a class="btn btn-xs btn-primary float-right"
-							href="{{ url_for('new_thread_page', pid=package.id) }}">
-						+
-					</a>
+					<a class="float-right"
+						href="{{ url_for('new_thread_page', pid=package.id) }}">+</a>
 				{% endif %}
+					Threads
 				</div>
 				<ul class="list-group list-group-flush">
 					{% from "macros/threads.html" import render_threadlist %}
