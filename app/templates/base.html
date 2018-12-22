@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
 	<link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/static/main.css">
+	<link rel="stylesheet" type="text/css" href="/static/custom.css">
 	{% block headextra %}{% endblock %}
 </head>
 
@@ -122,8 +122,9 @@
 		<a href="{{ url_for('flatpage', path='help/reporting') }}">Report / DMCA</a>
 	</footer>
 
-	<script src="static/jquery.min.js"></script>
-	<script src="static/popper.min.js"></script>
-	<script src="static/bootstrap.min.js"></script>
+	<script src="/static/jquery.min.js"></script>
+	<script src="/static/popper.min.js"></script>
+	<script src="/static/bootstrap.min.js"></script>
+	{% block scriptextra %}{% endblock %}
 </body>
 </html>

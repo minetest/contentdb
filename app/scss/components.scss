@@ -38,27 +38,15 @@
 	white-space: nowrap;
 	background: transparent;
 }
-.bulletselector .tag {
-	background: #375D81;
-	border-radius: 3px;
-    -moz-border-radius: 3px;
-	color: #FFF;
+.bulletselector .badge {
 	float: left;
-	height: 15px;
-	padding: 0.1em 0.4em 0.5em;
+	padding: 0.4em 0.8em;
 	margin-right: 0.3em;
-	margin-bottom: 0.3em;
-    vertical-align: baseline;
-}
-.bulletselector .tag a {
-	color: #FFF;
-	cursor: pointer;
-}
-.bulletselector .tag a:hover {
-	color: #0099CC;
-	text-decoration: none;
 }
 
+.invalid-remaining {
+	display: none;
+}
 
 .t-mll tr td:not(:first-child) {
 	text-align: left;

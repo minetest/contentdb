@@ -7,69 +7,10 @@
 	{% endif %}
 {% endblock %}
 
-{% block content %}
-	<h1>Create Package</h1>
+{% from "macros/forms.html" import render_field, render_submit_field, form_scripts, render_multiselect_field, render_mpackage_field, render_deps_field, package_lists %}
 
-	<div class="box box_grey alert alert-info">
-		Have you read the Package Inclusion Policy and Guidance yet?
-
-		<a class="alert_right button" href="{{ url_for('flatpage', path='policy_and_guidance') }}">View</a>
-	</div>
-
-
-	{% from "macros/forms.html" import render_field, render_submit_field, form_includes, render_multiselect_field, render_mpackage_field, render_deps_field, package_lists %}
-	{{ form_includes() }}
-	{{ package_lists() }}
-
-	<form method="POST" action="" class="tableform">
-		{{ form.hidden_tag() }}
-
-		<h2 class="pkg_meta">Package</h2>
-
-		{{ render_field(form.type, class_="pkg_meta") }}
-		{{ render_field(form.name, class_="pkg_meta") }}
-		{{ render_field(form.title, class_="pkg_meta") }}
-		{{ render_field(form.shortDesc, class_="pkg_meta") }}
-		{{ render_field(form.desc, class_="pkg_meta") }}
-		{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
-		<div class="pkg_meta">
-			{{ render_field(form.license, class_="not_txp") }}
-		</div>
-		{{ render_field(form.media_license, class_="pkg_meta") }}
-
-		<div class="pkg_meta">
-			<h2 class="not_txp">Dependency Info</h2>
-
-			{{ render_mpackage_field(form.provides_str, class_="not_txp", placeholder="Comma separated list") }}
-			{{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
-			{{ render_deps_field(form.softdep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
-		</div>
-
-		<h2 class="pkg_meta">Repository and Links</h2>
-
-		<div class="pkg_wiz_1">
-			<p>Enter the repo URL for the package.
-			If the repo uses git then the metadata will be automatically imported.</p>
-
-			<p>Leave blank if you don't have a repo. Click skip if the import fails.</p>
-		</div>
-
-		{{ render_field(form.repo, class_="pkg_repo") }}
-
-		<div class="pkg_wiz_1">
-			<a id="pkg_wiz_1_next" class="btn btn-primary">Next (Autoimport)</a>
-			<a id="pkg_wiz_1_skip" class="btn btn-default">Skip Autoimport</a>
-		</div>
-
-		<div class="pkg_wiz_2">
-			Importing... (This may take a while)
-		</div>
-
-		{{ render_field(form.website, class_="pkg_meta") }}
-		{{ render_field(form.issueTracker, class_="pkg_meta") }}
-		{{ render_field(form.forums, class_="pkg_meta") }}
-		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
-	</form>
+{% block scriptextra %}
+	{{ form_scripts() }}
 
 	<script src="/static/simplemde.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/static/simplemde.min.css">
@@ -89,4 +30,73 @@
 		</noscript>
 	{% endif %}
 	<script src="/static/package_edit.js"></script>
+{% endblock %}
+
+{% block content %}
+	<h1>Create Package</h1>
+
+	<div class="box box_grey alert alert-info">
+		Have you read the Package Inclusion Policy and Guidance yet?
+
+		<a class="alert_right button" href="{{ url_for('flatpage', path='policy_and_guidance') }}">View</a>
+	</div>
+
+
+	{{ package_lists() }}
+
+	<form method="POST" action="" class="tableform">
+		{{ form.hidden_tag() }}
+
+		<fieldset>
+			<legend>Package</legend>
+
+			{{ render_field(form.type, class_="pkg_meta") }}
+			{{ render_field(form.name, class_="pkg_meta") }}
+			{{ render_field(form.title, class_="pkg_meta") }}
+			{{ render_field(form.shortDesc, class_="pkg_meta") }}
+			{{ render_field(form.desc, class_="pkg_meta") }}
+			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
+			<div class="pkg_meta">
+				{{ render_field(form.license, class_="not_txp") }}
+			</div>
+			{{ render_field(form.media_license, class_="pkg_meta") }}
+		</fieldset>
+
+		<fieldset class="pkg_meta">
+			<legend class="not_txp">Package</legend>
+
+			{{ render_mpackage_field(form.provides_str, class_="not_txp", placeholder="Comma separated list") }}
+			{{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
+			{{ render_deps_field(form.softdep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
+		</fieldset>
+
+		<fieldset>
+			<legend class="pkg_meta">Repository and Links</legend>
+
+			<div class="pkg_wiz_1">
+				<p>Enter the repo URL for the package.
+				If the repo uses git then the metadata will be automatically imported.</p>
+
+				<p>Leave blank if you don't have a repo. Click skip if the import fails.</p>
+			</div>
+
+			{{ render_field(form.repo, class_="pkg_repo") }}
+
+
+			<div class="pkg_wiz_1">
+				<a id="pkg_wiz_1_next" class="btn btn-primary">Next (Autoimport)</a>
+				<a id="pkg_wiz_1_skip" class="btn btn-default">Skip Autoimport</a>
+			</div>
+
+			<div class="pkg_wiz_2">
+				Importing... (This may take a while)
+			</div>
+
+			{{ render_field(form.website, class_="pkg_meta") }}
+			{{ render_field(form.issueTracker, class_="pkg_meta") }}
+			{{ render_field(form.forums, class_="pkg_meta") }}
+		</fieldset>
+
+		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
+	</form>
 {% endblock %}

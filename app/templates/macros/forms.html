@@ -2,7 +2,7 @@
 	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label %}{% set label=field.label.text %}{% endif %}
-			<label for="{{ field.id }}" class="control-label">{{ label|safe }}</label>
+			<label for="{{ field.id }}">{{ label|safe }}</label>
 		{% endif %}
 		{{ field(class_='form-control', **kwargs) }}
 		{% if field.errors %}
@@ -13,9 +13,8 @@
 	</div>
 {%- endmacro %}
 
-{% macro form_includes() -%}
+{% macro form_scripts() -%}
 	<link href="/static/jquery-ui.min.css" rel="stylesheet" type="text/css">
-	<script src="/static/jquery.min.js"></script>
 	<script src="/static/jquery-ui.min.js"></script>
 	<script src="/static/tagselector.js"></script>
 {% endmacro %}
@@ -58,16 +57,17 @@
 	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label %}{% set label=field.label.text %}{% endif %}
-			<label for="{{ field.id }}" class="control-label">{{ label|safe }}</label>
+			<label for="{{ field.id }}">{{ label|safe }}</label>
 		{% endif %}
-		<div class="multichoice_selector bulletselector">
+		<div class="multichoice_selector bulletselector form-control">
 			<input type="text" placeholder="Start typing to see suggestions">
 			<div class="clearboth"></div>
 		</div>
+		<div class="invalid-remaining invalid-feedback"></div>
 		{{ field(class_='form-control', **kwargs) }}
 		{% if field.errors %}
 			{% for e in field.errors %}
-				<p class="help-block">{{ e }}</p>
+				<div class="invalid-feedback">{{ e }}</div>
 			{% endfor %}
 		{% endif %}
 	</div>
@@ -77,13 +77,14 @@
 	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label %}{% set label=field.label.text %}{% endif %}
-			<label for="{{ field.id }}" class="control-label">{{ label|safe }}</label>
+			<label for="{{ field.id }}">{{ label|safe }}</label>
 		{% endif %}
-		<div class="metapackage_selector bulletselector">
+		<div class="metapackage_selector bulletselector form-control">
 			<input type="text" placeholder="Comma-seperated values">
 			<div class="clearboth"></div>
 		</div>
 		{{ field(class_='form-control', **kwargs) }}
+		<div class="invalid-remaining invalid-feedback"></div>
 		{% if field.errors %}
 			{% for e in field.errors %}
 				<p class="help-block">{{ e }}</p>
@@ -96,13 +97,14 @@
 	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label %}{% set label=field.label.text %}{% endif %}
-			<label for="{{ field.id }}" class="control-label">{{ label|safe }}</label>
+			<label for="{{ field.id }}">{{ label|safe }}</label>
 		{% endif %}
-		<div class="deps_selector bulletselector">
+		<div class="deps_selector bulletselector form-control">
 			<input type="text" placeholder="Comma-seperated values">
 			<div class="clearboth"></div>
 		</div>
 		{{ field(class_='form-control', **kwargs) }}
+		<div class="invalid-remaining invalid-feedback"></div>
 		{% if field.errors %}
 			{% for e in field.errors %}
 				<p class="help-block">{{ e }}</p>
@@ -134,7 +136,7 @@
 {% macro render_submit_field(field, label=None, tabindex=None) -%}
 	{% if not label %}{% set label=field.label.text %}{% endif %}
 	{#<button type="submit" class="form-control btn btn-default btn-primary">{{label}}</button>#}
-	<input type="submit" value="{{label}}"
+	<input type="submit" value="{{label}}" class="btn btn-primary"
 		   {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
 		   >
 {%- endmacro %}
