@@ -17,6 +17,7 @@
 
 from flask import *
 from flask_user import *
+from flask_gravatar import Gravatar
 import flask_menu as menu
 from flask_mail import Mail
 from flask.ext import markdown
@@ -36,6 +37,14 @@ github = GitHub(app)
 csrf = CsrfProtect(app)
 mail = Mail(app)
 pages = FlatPages(app)
+gravatar = Gravatar(app,
+		size=58,
+		rating='g',
+		default='mp',
+		force_default=False,
+		force_lower=False,
+		use_ssl=True,
+		base_url=None)
 
 if not app.debug:
 	from .maillogger import register_mail_error_handler

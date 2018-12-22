@@ -66,13 +66,40 @@
 				{% endif %}
 			</table>
 		</div>
+
+		<div class="row mt-4">
+			<div class="col-md-2">
+				<img class="img-responsive user-photo img-thumbnail  img-thumbnail-1" src="{{ (user.email or '') | gravatar }}">
+			</div>
+			<div class="col">
+				<div class="card">
+					<div class="card-header">
+						Profile Picture
+					</div>
+					<div class="card-body">
+						<p>ContentDB uses Gravatar for profile pictures</p>
+						{% if user == current_user %}
+							{% if user.email %}
+								<a class="btn btn-primary" href="https://en.gravatar.com/">
+									Gravatar
+								</a>
+							{% else %}
+								<p>
+									Please add an email to your profile.
+								</p>
+							{% endif %}
+						{% endif %}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 
 {% if form %}
 	{% from "macros/forms.html" import render_field, render_submit_field %}
 	<div class="col-sm-6">
 		<div class="card">
-			<h2 class="card-header">Edit Details</h2>
+			<div class="card-header">Edit Details</div>
 			<div class="card-body">
 				<form action="" method="POST" class="form box-body" role="form">
 					{{ form.hidden_tag() }}

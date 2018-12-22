@@ -53,7 +53,7 @@
 				{% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
 					You need to add at least one screenshot.
 
-				{% elif topic_error_lvl == "error" %}
+				{% elif topic_error_lvl == "danger" %}
 					Please fix the below topic issue(s).
 
 				{% elif "Other" in package.license.name or "Other" in package.media_license.name %}
@@ -97,26 +97,13 @@
 				</div>
 			{% endif %}
 
-			{% if package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW") %}
-				{% if review_thread %}
-					<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
-					{% if review_thread.private %}
-						<p><i>
-							This thread is only visible to the package owner and users of
-							Editor rank or above.
-						</i></p>
-					{% endif %}
+			{% if not review_thread and (package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW")) %}
+				<div class="alert alert-info">
+					<a class="float-right btn btn-sm btn-info" href="{{ url_for('new_thread_page', pid=package.id, title='Package approval comments') }}">Open Thread</a>
 
-					{% from "macros/threads.html" import render_thread %}
-					{{ render_thread(review_thread, current_user) }}
-				{% else %}
-					<div class="alert alert-info">
-						<a class="float-right btn btn-sm btn-info" href="{{ url_for('new_thread_page', pid=package.id, title='Package approval comments') }}">Open Thread</a>
-
-						Privately ask a question or give feedback
-						<div style="clear:both;"></div>
-					</div>
-				{% endif %}
+					Privately ask a question or give feedback
+					<div style="clear:both;"></div>
+				</div>
 			{% endif %}
 		{% endif %}
 
@@ -300,6 +287,21 @@
 				</ul>
 			</div>
 		</aside>
+
+		{% if not package.approved and (package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW")) %}
+			{% if review_thread %}
+				<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
+				{% if review_thread.private %}
+					<p><i>
+						This thread is only visible to the package owner and users of
+						Editor rank or above.
+					</i></p>
+				{% endif %}
+
+				{% from "macros/threads.html" import render_thread %}
+				{{ render_thread(review_thread, current_user) }}
+			{% endif %}
+		{% endif %}
 
 		<ul class="screenshot_list mb-4">
 			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}

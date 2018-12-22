@@ -1,49 +1,28 @@
-.comments, .comments li {
-	list-style: none;
-	padding: 0;
-	margin: 0;
-	border: 1px solid #444;
+.img-thumbnail-1 {
+	padding: 0px;
+	// width: 100%;
 }
 
 .comments {
-	border-radius: 5px;
-	margin: 15px 0;
-	background: #333;
+	list-style: none;
+	padding: 0;
 
-	.info_strip, .msg {
-		display: block;
-		margin: 0;
+	.card {
+		position:relative;
+
+		.card-header:before {
+			position: absolute;
+			top: 11px;
+			right: 100%;
+			width: 0;
+			height: 0;
+			display: block;
+			content:" ";
+			border-color: transparent;
+			border-style: solid solid outset;
+			pointer-events:none;
+			border-right-color: #444;
+			border-width: 14px;
+		}
 	}
-
-	.info_strip {
-		padding: 0.2em 1em;
-		border-bottom: 1px solid #444;
-	}
-
-	.msg {
-		padding: 1em;
-		background: #222;
-	}
-
-	.author {
-		font-weight: bold;
-		float: left;
-		display: inline-block;
-	}
-
-	.info_strip span {
-		float: right;
-		display: inline-block;
-		color: #bbb;
-	}
-}
-
-.comment_form {
-	margin: 1em 0;
-}
-
-.comment_form textarea {
-	min-width: 60%;
-	max-width: 100%;
-	margin: 0 0 1em 0;
 }

@@ -181,13 +181,13 @@ def package_page(package):
 		errors = []
 		if Package.query.filter_by(forums=package.forums, soft_deleted=False).count() > 1:
 			errors.append("<b>Error: Another package already uses this forum topic!</b>")
-			topic_error_lvl = "error"
+			topic_error_lvl = "danger"
 
 		topic = ForumTopic.query.get(package.forums)
 		if topic is not None:
 			if topic.author != package.author:
 				errors.append("<b>Error: Forum topic author doesn't match package author.</b>")
-				topic_error_lvl = "error"
+				topic_error_lvl = "danger"
 
 			if topic.wip:
 				errors.append("Warning: Forum topic is in WIP section, make sure package meets playability standards.")

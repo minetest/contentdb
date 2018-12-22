@@ -5,24 +5,25 @@ Threads
 {% endblock %}
 
 {% block content %}
+	{% if current_user.is_authenticated %}
+		{% if current_user in thread.watchers %}
+			<form method="post" action="{{ thread.getUnsubscribeURL() }}" class="float-right">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<input type="submit" class="btn btn-primary" value="Unsubscribe" />
+			</form>
+		{% else %}
+			<form method="post" action="{{ thread.getSubscribeURL() }}" class="float-right">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<input type="submit" class="btn btn-primary" value="Subscribe" />
+			</form>
+		{% endif %}
+	{% endif %}
+
 	<h1>{% if thread.private %}&#x1f512; {% endif %}{{ thread.title }}</h1>
+
 	{% if thread.package or current_user.is_authenticated %}
 		{% if thread.package %}
 			<p>Package: <a href="{{ thread.package.getDetailsURL() }}">{{ thread.package.title }}</a></p>
-		{% endif %}
-
-		{% if current_user.is_authenticated %}
-			{% if current_user in thread.watchers %}
-				<form method="post" action="{{ thread.getUnsubscribeURL() }}">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="submit" value="Unsubscribe" />
-				</form>
-			{% else %}
-				<form method="post" action="{{ thread.getSubscribeURL() }}">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="submit" value="Subscribe" />
-				</form>
-			{% endif %}
 		{% endif %}
 	{% endif %}
 

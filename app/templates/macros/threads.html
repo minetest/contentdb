@@ -1,28 +1,56 @@
 {% macro render_thread(thread, current_user) -%}
-	<ul class="comments">
-		{% for r in thread.replies %}
-			<li>
-				<div class="info_strip">
+
+<ul class="comments mt-4 mb-0">
+	{% for r in thread.replies %}
+	<li class="row my-2 mx-0">
+		<div class="col-md-1 p-1">
+			<a href="{{ url_for('user_profile_page', username=r.author.username) }}">
+				<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ (r.author.email or '') | gravatar }}">
+			</a>
+		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-header">
 					<a class="author {{ r.author.rank.name }}"
 							href="{{ url_for('user_profile_page', username=r.author.username) }}">
-						{{ r.author.display_name }}</a>
-					<span>{{ r.created_at | datetime }}</span>
-					<div class="clearboth"></div>
+						{{ r.author.display_name }}
+					</a>
+					<a name="reply-{{ r.id }}" class="text-muted float-right"
+							href="{{ url_for('thread_page', id=thread.id) }}#reply-{{ r.id }}">
+						{{ r.created_at | datetime }}
+					</a>
 				</div>
-				<div class="msg">
+
+				<div class="card-body">
 					{{ r.comment | markdown }}
 				</div>
-			</li>
-		{% endfor %}
-	</ul>
+			</div>
+		</div>
+	</li>
+	{% endfor %}
+</ul>
 
-	{% if current_user.is_authenticated %}
-		<form method="post" action="{{ url_for('thread_page', id=thread.id)}}" class="comment_form">
-			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<textarea required maxlength=500 name="comment" placeholder="Markdown supported"></textarea><br />
-			<input type="submit" value="Comment" />
-		</form>
-	{% endif %}
+{% if current_user.is_authenticated %}
+<div class="row mt-0 mb-4 comments mx-0">
+	<div class="col-md-1 p-1">
+		<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ (current_user.email or '') | gravatar }}">
+	</div>
+	<div class="col">
+		<div class="card">
+			<div class="card-header {{ current_user.rank.name }}">
+				{{ current_user.display_name }}
+				<a name="reply"></a>
+			</div>
+
+			<form method="post" action="{{ url_for('thread_page', id=thread.id)}}" class="card-body">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<textarea class="form-control" required maxlength=500 name="comment" placeholder="Markdown supported"></textarea><br />
+				<input class="btn btn-primary" type="submit" value="Comment" />
+			</form>
+		</div>
+	</div>
+</div>
+{% endif %}
 {% endmacro %}
 
 {% macro render_threadlist(threads, list_group=False) -%}
