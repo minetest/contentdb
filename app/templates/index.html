@@ -25,15 +25,15 @@ Welcome
 	<a href="{{ url_for('packages_page', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
 		See more
 	</a>
-	<h2 class="my-3">Newly Added</h2>
+	<h2 class="my-3">Recently Added</h2>
 	{{ render_pkggrid(new) }}
 
 
-	<a href="{{ url_for('packages_page', sort='score', order='desc') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages_page', type='mod', sort='score', order='desc') }}" class="btn btn-secondary float-right">
 		See more
 	</a>
-	<h2 class="my-3">Popular</h2>
-	{{ render_pkggrid(popular) }}
+	<h2 class="my-3">Top Mods</h2>
+	{{ render_pkggrid(pop_mod) }}
 
 
 	<a href="{{ url_for('packages_page', type='game', sort='score', order='desc') }}" class="btn btn-secondary float-right">
