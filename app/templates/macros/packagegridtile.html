@@ -1,5 +1,5 @@
 {% macro render_pkgtile(package, show_author) -%}
-	<li><a href="{{ package.getDetailsURL() }}"
+	<li class="packagetile flex-fill"><a href="{{ package.getDetailsURL() }}"
 		style="background-image: url({{ package.getThumbnailURL() or '/static/placeholder.png' }});">
 		<div class="packagegridscrub"></div>
 		<div class="packagegridinfo">
@@ -34,11 +34,18 @@
 {% endmacro %}
 
 {% macro render_pkggrid(packages, show_author=True) -%}
-	<ul class="packagegrid">
+	<ul class="d-flex p-0 flex-row flex-wrap justify-content-start align-content-start ">
 		{% for p in packages %}
 			{{ render_pkgtile(p, show_author) }}
 		{% else %}
 			<li><i>No packages available</i></ul>
+		{% endfor %}
+		{% set amt=packages|length %}
+		{% if amt > 4 %}
+			{% set amt=4 %}
+		{% endif %}
+		{% for i in range(amt) %}
+			<li class="packagetile flex-fill"></li>
 		{% endfor %}
 	</ul>
 {% endmacro %}

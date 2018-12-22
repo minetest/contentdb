@@ -114,7 +114,7 @@ def packages_page():
 			return redirect("https://forum.minetest.net/viewtopic.php?t=" + str(topic.topic_id))
 
 	page  = int(request.args.get("page") or 1)
-	num   = min(42, int(request.args.get("n") or 100))
+	num   = min(40, int(request.args.get("n") or 100))
 	query = query.paginate(page, num, True)
 
 	search = request.args.get("q")
