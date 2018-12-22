@@ -1,0 +1,41 @@
+@import "components.scss";
+@import "packages.scss";
+@import "packagegrid.scss";
+@import "comments.scss";
+
+.dropdown-menu {
+    margin-top: 0;
+}
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+}
+
+.nav-link > img {
+	max-height: 1em;
+}
+
+.jumbotron {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.alert .btn {
+    text-decoration: none;
+}
+
+.card .table {
+    margin-bottom: 0;
+}
+
+.btn-download {
+    color: #fff;
+    background-color: #00b05c;
+    border-color: #00b05c;
+}
+
+.btn-download:focus, .btn-download.focus {
+    -webkit-box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.5);
+    box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.5);
+}

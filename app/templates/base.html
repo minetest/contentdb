@@ -6,75 +6,87 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
-	<link rel="stylesheet" type="text/css" href="/static/main.css">
+	<link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/static/custom.css">
 	{% block headextra %}{% endblock %}
 </head>
 
 <body>
-	<nav>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container">
-			<ul class="nav navbar-nav navbar-left">
-				<li><a href="/">{{ config.USER_APP_NAME }}</a></li>
-				{% for item in current_menu.children recursive %}
-					{% if item.visible %}
-						<li{% if item.children %} class="dropdown"{% endif %}>
-							<a href="{{ item.url }}"
-									{% if item.children %}
-										class="dropdown-toggle"
-										data-toggle="dropdown"
-										role="button"
-										aria-expanded="false"
-									{% endif %}>
-								{{ item.text }}
-								{% if item.children %}
-									<span class="caret"></span>
-								{% endif %}
-							</a>
-							{% if item.children %}
-							<ul class="dropdown-menu" role="menu">
-								{{ loop(item.children) }}
-							</ul>
-							{% endif %}
-						</li>
-					{% endif %}
-				{% endfor %}
-			</ul>
-			<ul class="nav navbar-nav navbar-right">
-				{% if current_user.is_authenticated %}
-					<li><a href="{{ url_for('notifications_page') }}">
-						<img src="/static/notification{% if current_user.notifications %}_alert{% endif %}.svg" />
-					</a></li>
-					<li><a href="{{ url_for('create_edit_package_page') }}">+</a></li>
-					<li class="dropdown">
-						<a class="dropdown-toggle"
-							data-toggle="dropdown"
-							role="button"
-							aria-expanded="false">{{ current_user.display_name }}
-								<span class="caret"></span></a>
+			<a class="navbar-brand" href="/">{{ config.USER_APP_NAME }}</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-						<ul class="dropdown-menu" role="menu">
-							<li>
-								<a href="{{ url_for('user_profile_page', username=current_user.username) }}">Profile</a>
+			<div class="collapse navbar-collapse" id="navbarColor01">
+				<ul class="navbar-nav mr-auto">
+					{% for item in current_menu.children recursive %}
+						{% if item.visible %}
+							<li class="nav-item {% if item.children %} dropdown{% endif %}">
+								<a class="nav-link" href="{{ item.url }}"
+										{% if item.children %}
+											class="dropdown-toggle"
+											data-toggle="dropdown"
+											role="button"
+											aria-expanded="false"
+										{% endif %}>
+									{{ item.text }}
+									{% if item.children %}
+										<span class="caret"></span>
+									{% endif %}
+								</a>
+								{% if item.children %}
+								<ul class="dropdown-menu" role="menu">
+									{{ loop(item.children) }}
+								</ul>
+								{% endif %}
 							</li>
-							{% if current_user.canAccessTodoList() %}
-								<li><a href="{{ url_for('todo_page') }}">Work Queue</a></li>
-								<li><a href="{{ url_for('user_list_page') }}">User list</a></li>
-							{% endif %}
-							{% if current_user.rank == current_user.rank.ADMIN %}
-								<li><a href="{{ url_for('admin_page') }}">Admin</a></li>
-							{% endif %}
-							{% if current_user.rank == current_user.rank.MODERATOR %}
-								<li><a href="{{ url_for('tag_list_page') }}">Tag Editor</a></li>
-								<li><a href="{{ url_for('license_list_page') }}">License Editor</a></li>
-							{% endif %}
-							<li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
-						</ul>
-					</li>
-				{% else %}
-					<li><a href="{{ url_for('user.login') }}">Sign in</a></li>
-				{% endif %}
-			</ul>
-			<div class="clearboth"></div>
+						{% endif %}
+					{% endfor %}
+				</ul>
+				<form class="form-inline my-2 my-lg-0" method="GET" action="/packages/">
+					{% if type %}<input type="hidden" name="type" value="{{ type }}" />{% endif %}
+					<input class="form-control mr-sm-2" name="q" type="text" placeholder="Search {{ title | lower or 'all packages' }}" value="{{ query or ''}}">
+					<input class="btn btn-secondary my-2 my-sm-0 mr-sm-2" type="submit" value="Search" />
+					<input class="btn btn-primary my-2 my-sm-0" type="submit" name="lucky" value="Lucky" />
+				</form>
+				<ul class="navbar-nav ml-auto">
+					{% if current_user.is_authenticated %}
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('notifications_page') }}">
+							<img src="/static/notification{% if current_user.notifications %}_alert{% endif %}.svg" />
+						</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('create_edit_package_page') }}">+</a></li>
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle"
+								data-toggle="dropdown"
+								role="button"
+								aria-expanded="false">{{ current_user.display_name }}
+									<span class="caret"></span></a>
+
+							<ul class="dropdown-menu" role="menu">
+								<li class="nav-item">
+									<a class="nav-link" href="{{ url_for('user_profile_page', username=current_user.username) }}">Profile</a>
+								</li class="nav-item">
+								{% if current_user.canAccessTodoList() %}
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('todo_page') }}">Work Queue</a></li>
+									<li class="nav-item"><a  class="nav-link" href="{{ url_for('user_list_page') }}">User list</a></li>
+								{% endif %}
+								{% if current_user.rank == current_user.rank.ADMIN %}
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin_page') }}">Admin</a></li>
+								{% endif %}
+								{% if current_user.rank == current_user.rank.MODERATOR %}
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('tag_list_page') }}">Tag Editor</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('license_list_page') }}">License Editor</a></li>
+								{% endif %}
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('user.logout') }}">Sign out</a></li>
+							</ul>
+						</li>
+					{% else %}
+						<li><a class="nav-link" href="{{ url_for('user.login') }}">Sign in</a></li>
+					{% endif %}
+				</ul>
+			</div>
 		</div>
 	</nav>
 
@@ -97,16 +109,22 @@
 	{% endblock %}
 
 	{% block container %}
-	<main>
+	<main class="container mt-4">
 		{% block content %}
 		{% endblock %}
 	</main>
 	{% endblock %}
 
-	<footer>
+	<footer class="container footer-copyright my-5 page-footer font-small text-center">
 		ContentDB &copy; 2018 to <a href="https://rubenwardy.com/">rubenwardy</a> |
 		<a href="https://github.com/minetest/contentdb">GitHub</a> |
 		<a href="{{ url_for('flatpage', path='help') }}">Help</a> |
 		<a href="{{ url_for('flatpage', path='help/reporting') }}">Report / DMCA</a>
 	</footer>
+
+	<script src="/static/jquery.min.js"></script>
+	<script src="/static/popper.min.js"></script>
+	<script src="/static/bootstrap.min.js"></script>
+	{% block scriptextra %}{% endblock %}
+</body>
 </html>

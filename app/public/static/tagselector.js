@@ -5,13 +5,25 @@
  * https://petprojects.googlecode.com/svn/trunk/GPL-LICENSE.txt
  */
 (function($) {
+	function hide_error(input) {
+		var err = input.parent().parent().find(".invalid-remaining");
+		err.hide();
+	}
+
+	function show_error(input, msg) {
+		var err = input.parent().parent().find(".invalid-remaining");
+		console.log(err.length);
+		err.text(msg);
+		err.show();
+	}
+
 	$.fn.selectSelector = function(source, name, select) {
 		return this.each(function() {
 				var selector = $(this),
 					input = $('input[type=text]', this);
 
 				selector.click(function() { input.focus(); })
-					.delegate('.tag a', 'click', function() {
+					.delegate('.badge a', 'click', function() {
 						var id = $(this).parent().data("id");
 						for (var i = 0; i < source.length; i++) {
 							if (source[i].id == id) {
@@ -23,13 +35,14 @@
 					});
 
 				function addTag(item) {
-					var tag = $('<span class="tag"/>')
+					var tag = $('<span class="badge badge-pill badge-primary"/>')
 						.text(item.toString() + ' ')
 						.data("id", item.id)
 						.append('<a>x</a>')
 						.insertBefore(input);
 					input.attr("placeholder", null);
 					select.find("option[value=" + item.id + "]").attr("selected", "selected")
+					hide_error(input);
 				}
 
 				function recreate() {
@@ -41,6 +54,13 @@
 					}
 				}
 				recreate();
+
+				input.focusout(function(e) {
+					var value = input.val().trim()
+					if (value != "") {
+						show_error(input, "Please select an existing tag, it;s not possible to add custom ones.");
+					}
+				})
 
 				input.keydown(function(e) {
 						if (e.keyCode === $.ui.keyCode.TAB && $(this).data('ui-autocomplete').menu.active)
@@ -92,7 +112,7 @@
 				}
 
 				selector.click(function() { input.focus(); })
-					.delegate('.tag a', 'click', function() {
+					.delegate('.badge a', 'click', function() {
 						var id = $(this).parent().data("id");
 						for (var i = 0; i < selected.length; i++) {
 							if (selected[i] == id) {
@@ -113,13 +133,14 @@
 				}
 
 				function addTag(id, value) {
-					var tag = $('<span class="tag"/>')
+					var tag = $('<span class="badge badge-pill badge-primary"/>')
 						.text(value)
 						.data("id", id)
 						.append(' <a>x</a>')
 						.insertBefore(input);
 
 					input.attr("placeholder", null);
+					hide_error(input);
 				}
 
 				function recreate() {
@@ -147,6 +168,18 @@
 
 				result.change(readFromResult);
 
+				input.focusout(function() {
+					var item = input.val();
+					if (item.length == 0) {
+						input.data("ui-autocomplete").search("");
+					} else if (item.match(/^([a-z0-9_]+)$/)) {
+						selectItem(item);
+						recreate();
+						input.val("");
+					}
+					return true;
+				});
+
 				input.keydown(function(e) {
 						if (e.keyCode === $.ui.keyCode.TAB && $(this).data('ui-autocomplete').menu.active)
 							e.preventDefault();
@@ -159,7 +192,7 @@
 								recreate();
 								input.val("");
 							} else {
-								alert("Only lowercase alphanumeric and number names allowed.");
+								show_error(input, "Only lowercase alphanumeric and number names allowed.");
 							}
 							e.preventDefault();
 							return true;

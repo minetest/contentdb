@@ -5,31 +5,26 @@ Welcome
 {% endblock %}
 
 {% block container %}
-<header>
+<header class="jumbotron">
 	<div class="container">
-		<h1>Content DB</h1>
+		<h1 class="display-3">{{ config.USER_APP_NAME }}</h1>
 
-		<p>
+		<p class="lead">
 			Minetest's official content repository.
 			Browse {{ count }} packages,
 			the majority of which are available under a free
 			and open source license.
 		</p>
-
-		<form method="get" action="/packages/">
-			<input type="text" name="q" value="{{ query or ''}}" />
-			<input type="submit" value="Search" />
-		</form>
 	</div>
 </header>
 
-<main>
+<main class="container">
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 
 	<h2>Popular</h2>
 	{{ render_pkggrid(popular) }}
 
-	<a href="{{ url_for('packages_page') }}" class="button">Show More</a>
+	<a href="{{ url_for('packages_page') }}" class="btn">Show More</a>
 
 	<h2 style="margin-top:2em;">Newly Added</h2>
 	{{ render_pkggrid(new) }}
