@@ -95,7 +95,7 @@
 			{% if messages %}
 				<ul id="alerts">
 					{% for category, message in messages %}
-						<li class="box box_grey alert alert-{{category}}">
+						<li class="alert alert-{{category}} container">
 							<span class="icon_message"></span>
 
 							{{ message|safe }}

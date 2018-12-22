@@ -2,9 +2,9 @@
 
 {% block container %}
 	<main>
-		<div class="box box_grey">
-			<!-- <h2>{{ self.title() }}</h2> -->
-			<div class="box-body">
+		<div class="card">
+			<h2 class="card-header">{{ self.title() }}</h2>
+			<div class="card-body">
 				{% block content %}
 				{% endblock %}
 			</div>

@@ -1,6 +1,6 @@
 title: Package Inclusion Policy and Guidance
 
-<div class="box box_grey alert alert-warning">
+<div class="alert alert-warning">
 	<b>Note:</b> This is a draft
 </div>
 

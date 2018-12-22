@@ -12,10 +12,10 @@
 		<li><a href="{{ url_for('switch_user_page') }}">Sign in as another user</a></li>
 	</ul>
 
-	<div class="box box_grey">
-		<h2>Do action</h2>
+	<div class="card my-4">
+		<h2 class="card-header">Do action</h2>
 
-		<form method="post" action="" class="box-body">
+		<form method="post" action="" class="card-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<select name="action">
 				<option value="importmodlist" selected>Import forum topics</option>
@@ -29,10 +29,10 @@
 		</form>
 	</div>
 
-	<div class="box box_grey">
-		<h2>Restore Package</h2>
+	<div class="card my-4">
+		<h2 class="card-header">Restore Package</h2>
 
-		<form method="post" action="" class="box-body">
+		<form method="post" action="" class="card-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input type="hidden" name="action" value="restore" />
 			<select name="package">

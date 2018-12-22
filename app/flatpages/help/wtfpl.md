@@ -1,7 +1,7 @@
 title: WTFPL is a terrible license
 no_h1: true
 
-<div id="warning" class="box box_grey alert alert-warning">
+<div id="warning" class="alert alert-warning">
 	<span class="icon_message"></span>
 
 	Please reconsider the choice of WTFPL as a license.

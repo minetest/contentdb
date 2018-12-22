@@ -24,7 +24,7 @@
 			This edit request was merged.
 		</div>
 	{% elif request.status == 2 %}
-		<div class="box  box_grey alert alert-error">
+		<div class="box  box_grey alert alert-danger">
 			This edit request was rejected.
 		</div>
 	{% elif package.checkPerm(current_user, "APPROVE_CHANGES") %}
