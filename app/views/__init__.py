@@ -18,11 +18,8 @@
 from app import app, pages
 from flask import *
 from flask_user import *
-from flask_login import login_user, logout_user
 from app.models import *
 import flask_menu as menu
-from flask.ext import markdown
-from sqlalchemy import func
 from werkzeug.contrib.cache import SimpleCache
 from urllib.parse import urlparse
 cache = SimpleCache()

@@ -18,14 +18,12 @@
 from flask import *
 from flask_user import *
 from flask_login import login_user, logout_user
-from flask.ext import menu
 from app import app
 from app.models import *
 from flask_wtf import FlaskForm
-from flask_user.forms import RegisterForm
 from wtforms import *
 from wtforms.validators import *
-from app.utils import rank_required, randomString, loginUser
+from app.utils import randomString, loginUser
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.emails import sendVerifyEmail
 from app.tasks.phpbbparser import getProfile

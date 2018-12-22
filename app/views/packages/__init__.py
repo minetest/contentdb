@@ -17,7 +17,7 @@
 
 from flask import *
 from flask_user import *
-from flask.ext import menu
+import flask_menu as menu
 from app import app
 from app.models import *
 from app.tasks.importtasks import importRepoScreenshot, makeVCSRelease

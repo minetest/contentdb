@@ -17,7 +17,6 @@
 
 from flask import *
 from flask_user import *
-from flask.ext import menu
 from app import app
 from app.models import *
 

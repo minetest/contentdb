@@ -20,7 +20,7 @@ from flask_user import *
 from flask_gravatar import Gravatar
 import flask_menu as menu
 from flask_mail import Mail
-from flask.ext import markdown
+from flaskext.markdown import Markdown
 from flask_github import GitHub
 from flask_wtf.csrf import CsrfProtect
 from flask_flatpages import FlatPages
@@ -32,7 +32,7 @@ app.config["FLATPAGES_EXTENSION"] = ".md"
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
 
 menu.Menu(app=app)
-markdown.Markdown(app, extensions=["fenced_code"], safe_mode=True, output_format="html5")
+Markdown(app, extensions=["fenced_code"], safe_mode=True, output_format="html5")
 github = GitHub(app)
 csrf = CsrfProtect(app)
 mail = Mail(app)

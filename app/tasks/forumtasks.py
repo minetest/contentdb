@@ -16,7 +16,7 @@
 
 
 import flask, json, re
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from app import app
 from app.models import *
 from app.tasks import celery

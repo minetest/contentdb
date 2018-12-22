@@ -17,7 +17,7 @@
 
 import flask, json, os, git, tempfile, shutil
 from git import GitCommandError
-from flask.ext.sqlalchemy import SQLAlchemy
+from flask_sqlalchemy import SQLAlchemy
 from urllib.error import HTTPError
 import urllib.request
 from urllib.parse import urlparse, quote_plus, urlsplit
