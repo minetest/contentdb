@@ -56,9 +56,24 @@ def todo_page():
 def todo_topics_page():
 	total = ForumTopic.query.count()
 
-	topics = ForumTopic.query \
+	query = ForumTopic.query \
 			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-			.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
-			.all()
+			.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
 
-	return render_template("todo/topics.html", topics=topics, total=total)
+	topic_count = query.count()
+
+	search = request.args.get("q")
+	if search is not None and search.strip() != "":
+		query = query.filter(ForumTopic.title.ilike('%' + search + '%'))
+
+	page  = int(request.args.get("page") or 1)
+	num   = min(100, int(request.args.get("n") or 100))
+	query = query.paginate(page, num, True)
+	next_url = url_for("todo_topics_page", page=query.next_num) \
+			if query.has_next else None
+	prev_url = url_for("todo_topics_page", page=query.prev_num) \
+			if query.has_prev else None
+
+	return render_template("todo/topics.html", topics=query.items, total=total, \
+			topic_count=topic_count, query=search, \
+			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages)

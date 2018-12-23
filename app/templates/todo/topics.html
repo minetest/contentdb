@@ -8,10 +8,32 @@ Topics to be Added
 	<h1>Topics to be Added</h1>
 
 	<p>
-		{{ total - (topics | count) }} / {{ total }} packages have been added.
+		{{ total - (topic_count) }} / {{ total }} packages have been added.
 		{{ topics | count }} remaining.
 	</p>
 
+	<form method="GET" action="{{ url_for('todo_topics_page') }}" class="my-4">
+		<input class="" name="q" type="text" placeholder="Search topics" value="{{ query or ''}}">
+		<input class="btn btn-secondary my-2 my-sm-0 mr-sm-2" type="submit" value="Search" />
+	</form>
+
 	{% from "macros/topics.html" import render_topics_table %}
 	{{ render_topics_table(topics) }}
+
+	<ul class="pagination mt-4">
+		<li class="page-item {% if not prev_url %}disabled{% endif %}">
+			<a class="page-link" {% if prev_url %}href="{{ prev_url }}"{% endif %}>&laquo;</a>
+		</li>
+		{% for n in range(1, page_max+1) %}
+			<li class="page-item {% if n == page %}active{% endif %}">
+				<a class="page-link"
+						href="{{ url_for('todo_topics_page', page=n) }}">
+					{{ n }}
+				</a>
+			</li>
+		{% endfor %}
+		<li class="page-item {% if not next_url %}disabled{% endif %}">
+			<a class="page-link" {% if next_url %}href="{{ next_url }}"{% endif %}>&raquo;</a>
+		</li>
+	</ul>
 {% endblock %}
