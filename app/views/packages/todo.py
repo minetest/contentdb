@@ -54,11 +54,16 @@ def todo_page():
 @app.route("/todo/topics/")
 @login_required
 def todo_topics_page():
-	total = ForumTopic.query.count()
+	query = ForumTopic.query
 
-	query = ForumTopic.query \
-			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-			.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
+	show_discarded = request.args.get("show_discarded") == "True"
+	if not show_discarded:
+		query = query.filter_by(discarded=False)
+
+	total = query.count()
+
+	query = query.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
+		.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
 
 	topic_count = query.count()
 
@@ -75,5 +80,5 @@ def todo_topics_page():
 			if query.has_prev else None
 
 	return render_template("todo/topics.html", topics=query.items, total=total, \
-			topic_count=topic_count, query=search, \
+			topic_count=topic_count, query=search, show_discarded=show_discarded, \
 			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages)

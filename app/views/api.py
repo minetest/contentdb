@@ -19,7 +19,7 @@ from flask import *
 from flask_user import *
 from app import app
 from app.models import *
-from app.utils import is_package_page
+from app.utils import is_package_page, rank_required
 from .packages import QueryBuilder
 
 @app.route("/api/packages/")
@@ -43,3 +43,18 @@ def api_topics_page():
 			.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
 	pkgs = [t.getAsDictionary() for t in query.all()]
 	return jsonify(pkgs)
+
+
+@app.route("/api/topic_discard/", methods=["POST"])
+@rank_required(UserRank.EDITOR)
+def topic_set_discard():
+	tid = request.args.get("tid")
+	discard = request.args.get("discard")
+	if tid is None or discard is None:
+		abort(400)
+
+	topic = ForumTopic.query.get(tid)
+	topic.discarded = discard == "true"
+	db.session.commit()
+
+	return jsonify(topic.getAsDictionary())

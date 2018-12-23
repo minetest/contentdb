@@ -804,6 +804,7 @@ class ForumTopic(db.Model):
 	author    = db.relationship("User")
 
 	wip       = db.Column(db.Boolean, server_default="0")
+	discarded = db.Column(db.Boolean, server_default="0")
 
 	type      = db.Column(db.Enum(PackageType), nullable=False)
 	title     = db.Column(db.String(200), nullable=False)
@@ -836,6 +837,7 @@ class ForumTopic(db.Model):
 			"posts":  self.posts,
 			"views":  self.views,
 			"is_wip": self.wip,
+			"discarded":  self.discarded,
 			"created_at": self.created_at.isoformat(),
 		}
 

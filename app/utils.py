@@ -68,7 +68,10 @@ def make_flask_user_password(plaintext_str):
 	import bcrypt
 	plaintext = plaintext_str.encode("UTF-8")
 	password = bcrypt.hashpw(plaintext, bcrypt.gensalt())
-	return password.decode("UTF-8")
+	if isinstance(password, str):
+		return password
+	else:
+		return password.decode("UTF-8")
 
 def _do_login_user(user, remember_me=False):
 	def _call_or_get(v):
