@@ -11,13 +11,6 @@
 
 {% block scriptextra %}
 	{{ form_scripts() }}
-
-	<script src="/static/simplemde.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/static/simplemde.min.css">
-	<script>
-		var simplemde = new SimpleMDE({ element: $("#desc")[0] });
-	</script>
-
 	{% if enable_wizard %}
 		<script src="/static/url.min.js"></script>
 		<script src="/static/polltask.js"></script>
@@ -54,7 +47,7 @@
 			{{ render_field(form.name, class_="pkg_meta") }}
 			{{ render_field(form.title, class_="pkg_meta") }}
 			{{ render_field(form.shortDesc, class_="pkg_meta") }}
-			{{ render_field(form.desc, class_="pkg_meta") }}
+			{{ render_field(form.desc, class_="pkg_meta", fieldclass="form-control markdown") }}
 			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
 			<div class="pkg_meta">
 				{{ render_field(form.license, class_="not_txp") }}

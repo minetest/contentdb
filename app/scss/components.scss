@@ -80,14 +80,32 @@
 	color: #7ac;
 }
 
-.editor-toolbar {
-	background-color: #333 !important;
+.editor-toolbar, .editor-toolbar.fullscreen {
+	margin-bottom: 0 !important;
+	background-color: #444 !important;
+	border: none !important;
+	border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0 !important;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.125) !important;
 }
 
-.CodeMirror {
-	background-color: #222 !important;
+.editor-toolbar button {
+	color: white;
 }
 
-.editor-preview-side {
+.editor-toolbar button.active, .editor-toolbar button:hover {
+	background: #375a7f !important;
+	color: white !important;
+}
+
+.editor-toolbar.fullscreen::before, .editor-toolbar.fullscreen::after {
+	display: none !important;
+}
+
+// .CodeMirror {
+// 	background-color: #222 !important;
+// }
+
+.editor-preview-side, .editor-preview {
 	background-color: #222 !important;
+	color: white !important;
 }

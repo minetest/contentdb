@@ -125,6 +125,13 @@
 	<script src="/static/jquery.min.js"></script>
 	<script src="/static/popper.min.js"></script>
 	<script src="/static/bootstrap.min.js"></script>
+	<script src="/static/easymde.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/easymde.min.css">
+	<script>
+		$("textarea.markdown").each(function() {
+			new EasyMDE({ element: this, hideIcons: ["image"] });
+		})
+	</script>
 	{% block scriptextra %}{% endblock %}
 </body>
 </html>
