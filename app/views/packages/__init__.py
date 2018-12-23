@@ -30,6 +30,7 @@ from wtforms import *
 from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from sqlalchemy import or_, any_
+from sqlalchemy.sql.expression import func
 
 
 class QueryBuilder:
@@ -50,7 +51,8 @@ class QueryBuilder:
 		self.title  = title
 		self.types  = types
 		self.search = request.args.get("q")
-		self.lucky  = "lucky" in request.args
+		self.random = "random" in request.args
+		self.lucky  = self.random or "lucky" in request.args
 		self.hide_nonfree = isNo(request.args.get("nonfree"))
 		self.limit  = 1 if self.lucky else None
 		self.order_by  = request.args.get("sort") or "score"
@@ -65,22 +67,25 @@ class QueryBuilder:
 		if self.search is not None and self.search.strip() != "":
 			query = query.filter(Package.title.ilike('%' + self.search + '%'))
 
-		to_order = None
-		if self.order_by == "score":
-			to_order = Package.score
-		elif self.order_by == "created_at":
-			to_order = Package.created_at
+		if self.random:
+			query = query.order_by(func.random())
 		else:
-			abort(400)
+			to_order = None
+			if self.order_by == "score":
+				to_order = Package.score
+			elif self.order_by == "created_at":
+				to_order = Package.created_at
+			else:
+				abort(400)
 
-		if self.order_dir == "asc":
-			to_order = db.asc(to_order)
-		elif self.order_dir == "desc":
-			to_order = db.desc(to_order)
-		else:
-			abort(400)
+			if self.order_dir == "asc":
+				to_order = db.asc(to_order)
+			elif self.order_dir == "desc":
+				to_order = db.desc(to_order)
+			else:
+				abort(400)
 
-		query = query.order_by(to_order)
+			query = query.order_by(to_order)
 
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))
@@ -112,6 +117,7 @@ class QueryBuilder:
 @menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
 @menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
 @menu.register_menu(app, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
+@menu.register_menu(app, ".random", "Random", order=14, endpoint_arguments_constructor=lambda: { 'random': '1' })
 @app.route("/packages/")
 def packages_page():
 	if shouldReturnJson():
@@ -127,7 +133,7 @@ def packages_page():
 			return redirect(package.getDetailsURL())
 
 		topic = qb.buildTopicQuery().first()
-		if topic:
+		if qb.search and topic:
 			return redirect("https://forum.minetest.net/viewtopic.php?t=" + str(topic.topic_id))
 
 	page  = int(request.args.get("page") or 1)
