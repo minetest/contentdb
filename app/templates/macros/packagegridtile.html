@@ -6,8 +6,8 @@
 			<h3>
 				{{ package.title }}
 
-				{% if show_author %}
-					by {{ package.author.display_name }}
+				{% if show_author %}<br />
+					<small>{{ package.author.display_name }}</small>
 				{% endif %}
 			</h3>
 

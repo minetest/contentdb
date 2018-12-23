@@ -13,7 +13,10 @@
 		    background-repeat: no-repeat;
 		    background-position: center;">
 		<div class="container">
-			<h1 class="display-3">{{ package.title }} by {{ package.author.display_name }}</h1>
+			<h1 class="display-3">
+				{{ package.title }}
+				<small>by {{ package.author.display_name }}</small>
+			</h1>
 
 			<p class="lead">
 				{{ package.shortDesc }}
