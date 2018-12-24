@@ -37,7 +37,7 @@
 					</a>
 				{% endif %}
 				{% if topic.link %}
-					<a class="btn btn-info" href="{{ topic.link }}">{{ topic.link | domain }}</a>
+					<a class="btn btn-info" href="{{ topic.link }}">{{ topic.link | domain | truncate(18) }}</a>
 				{% endif %}
 			</td>
 		</tr>
