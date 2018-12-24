@@ -76,13 +76,13 @@
 	color: #2c2;
 }
 
-.wiptopic a {
+.wiptopic a:not(.btn) {
 	color: #7ac;
 }
 
 .discardtopic {
 	text-decoration: line-through;
-	a {
+	a:not(.btn) {
 		color: #7ac;
 	}
 	filter: brightness(0.5);
