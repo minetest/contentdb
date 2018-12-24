@@ -5,7 +5,7 @@
 		<th>Title</th>
 		{% if show_author %}<th>Author</th>{% endif %}
 		<th>Name</th>
-		<th>Link</th>
+		<th>Date</th>
 		<th>Actions</th>
 	</tr>
 	{% for topic in topics %}
@@ -21,7 +21,7 @@
 				<td><a href="{{ url_for('user_profile_page', username=topic.author.username) }}">{{ topic.author.display_name}}</a></td>
 			{% endif %}
 			<td>{{ topic.name or ""}}</td>
-			<td>{% if topic.link %}<a href="{{ topic.link }}">{{ topic.link | domain }}</a>{% endif %}</td>
+			<td>{{ topic.created_at | date }}</td>
 			<td class="btn-group">
 				<a class="btn btn-primary"
 					href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
@@ -35,6 +35,9 @@
 							Discard
 						{% endif %}
 					</a>
+				{% endif %}
+				{% if topic.link %}
+					<a class="btn btn-info" href="{{ topic.link }}">{{ topic.link | domain }}</a>
 				{% endif %}
 			</td>
 		</tr>
