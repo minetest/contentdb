@@ -139,7 +139,7 @@
 {% from "macros/packagegridtile.html" import render_pkggrid %}
 {{ render_pkggrid(packages, show_author=False) }}
 
-{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(UserRank.EDITOR)) %}
+{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.EDITOR)) %}
 	<div class="card mt-3">
 		<a name="unadded-topics"></a>
 		<h2 class="card-header">Unadded topics</h2>
@@ -153,7 +153,7 @@
 			{% from "macros/topics.html" import render_topics_table %}
 			{{ render_topics_table(topics_to_add, show_author=False, show_discard=True, current_user=current_user) }}
 		{% else %}
-			<p>Congrats! You don't have any topics which aren't on CDB.</p>
+			<p class="card-body">Congrats! You don't have any topics which aren't on CDB.</p>
 		{% endif %}
 	</div>
 {% endif %}

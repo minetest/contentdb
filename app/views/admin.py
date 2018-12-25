@@ -22,7 +22,7 @@ from app import app
 from app.models import *
 from celery import uuid
 from app.tasks.importtasks import importRepoScreenshot, importAllDependencies, makeVCSRelease
-from app.tasks.forumtasks  import importTopicList
+from app.tasks.forumtasks  import importTopicList, checkAllForumAccounts
 from flask_wtf import FlaskForm
 from wtforms import *
 from app.utils import loginUser, rank_required, triggerNotif
@@ -36,6 +36,9 @@ def admin_page():
 		if action == "importmodlist":
 			task = importTopicList.delay()
 			return redirect(url_for("check_task", id=task.id, r=url_for("todo_topics_page")))
+		elif action == "checkusers":
+			task = checkAllForumAccounts.delay()
+			return redirect(url_for("check_task", id=task.id, r=url_for("admin_page")))
 		elif action == "importscreenshots":
 			packages = Package.query \
 				.filter_by(soft_deleted=False) \

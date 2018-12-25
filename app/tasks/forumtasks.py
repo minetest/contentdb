@@ -25,7 +25,8 @@ import urllib.request
 from urllib.parse import urlparse, quote_plus
 
 @celery.task()
-def checkForumAccount(username):
+def checkForumAccount(username, forceNoSave=False):
+	print("Checking " + username)
 	try:
 		profile = getProfile("https://forum.minetest.net", username)
 	except OSError:
@@ -52,8 +53,22 @@ def checkForumAccount(username):
 	user.profile_pic = pic
 
 	# Save
-	if needsSaving:
+	if needsSaving and not forceNoSave:
 		db.session.commit()
+
+	return needsSaving
+
+@celery.task()
+def checkAllForumAccounts(forceNoSave=False):
+	needsSaving = False
+	query = User.query.filter(User.forums_username.isnot(None))
+	for user in query.all():
+		needsSaving = checkForumAccount(user.username) or needsSaving
+
+	if needsSaving and not forceNoSave:
+		db.session.commit()
+
+	return needsSaving
 
 
 regex_tag    = re.compile(r"\[([a-z0-9_]+)\]")
