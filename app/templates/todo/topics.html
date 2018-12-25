@@ -9,17 +9,28 @@ Topics to be Added
 		{% if current_user.rank.atLeast(current_user.rank.EDITOR) %}
 			{% if n >= 10000 %}
 				<a class="btn btn-primary"
-						href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=100) }}">
+						href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=100, sort=sort_by) }}">
 					Paginiated List
 				</a>
 			{% else %}
 				<a class="btn btn-primary"
-						href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=10000) }}">
+						href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=10000, sort=sort_by) }}">
 					Unlimited List
 				</a>
 			{% endif %}
 		{% endif %}
-		<a class="btn btn-primary" href="{{ url_for('todo_topics_page', q=query, show_discarded=not show_discarded) }}">
+		{% if sort_by == "name" %}
+			<a class="btn btn-primary"
+					href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=n, sort='date') }}">
+				Sort by date
+			</a>
+		{% else %}
+			<a class="btn btn-primary"
+					href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=n, sort='name') }}">
+				Sort by name
+			</a>
+		{% endif %}
+		<a class="btn btn-primary" href="{{ url_for('todo_topics_page', q=query, show_discarded=not show_discarded, n=n, sort=sort_by) }}">
 			{% if not show_discarded %}
 				Show
 			{% else %}

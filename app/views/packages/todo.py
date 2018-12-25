@@ -63,7 +63,12 @@ def todo_topics_page():
 	total = query.count()
 
 	query = query.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-		.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
+
+	sort_by = request.args.get("sort")
+	if sort_by == "name":
+		query = query.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
+	elif sort_by is None or sort_by == "date":
+		query = query.order_by(db.asc(ForumTopic.created_at))
 
 	topic_count = query.count()
 
@@ -85,4 +90,4 @@ def todo_topics_page():
 	return render_template("todo/topics.html", topics=query.items, total=total, \
 			topic_count=topic_count, query=search, show_discarded=show_discarded, \
 			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, \
-			n=num)
+			n=num, sort_by=sort_by)
