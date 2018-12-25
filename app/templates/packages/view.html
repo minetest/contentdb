@@ -130,8 +130,8 @@
 					{# {% if current_user.is_authenticated %}
 						<a class="btn btn-default btn-sm mx-1" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
 					{% endif %} #}
-					{% if package.checkPerm(current_user, "DELETE_PACKAGE") %}
-						<a class="btn btn-danger btn-sm mx-1" href="{{ package.getDeleteURL() }}">Delete</a>
+					{% if package.checkPerm(current_user, "DELETE_PACKAGE") or package.checkPerm(current_user, "UNAPPROVE_PACKAGE") %}
+						<a class="btn btn-danger btn-sm mx-1" href="{{ package.getRemoveURL() }}">Remove</a>
 					{% endif %}
 					</div>
 

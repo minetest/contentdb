@@ -78,6 +78,7 @@ class Permission(enum.Enum):
 	EDIT_EDITREQUEST   = "EDIT_EDITREQUEST"
 	SEE_THREAD         = "SEE_THREAD"
 	CREATE_THREAD      = "CREATE_THREAD"
+	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -449,8 +450,8 @@ class Package(db.Model):
 		return url_for("approve_package_page",
 				author=self.author.username, name=self.name)
 
-	def getDeleteURL(self):
-		return url_for("delete_package_page",
+	def getRemoveURL(self):
+		return url_for("remove_package_page",
 				author=self.author.username, name=self.name)
 
 	def getNewScreenshotURL(self):
@@ -505,7 +506,8 @@ class Package(db.Model):
 			return user.rank.atLeast(UserRank.TRUSTED_MEMBER if isOwner else UserRank.EDITOR)
 
 		# Moderators can delete packages
-		elif perm == Permission.DELETE_PACKAGE or perm == Permission.CHANGE_RELEASE_URL:
+		elif perm == Permission.DELETE_PACKAGE or perm == Permission.UNAPPROVE_PACKAGE \
+				or perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:

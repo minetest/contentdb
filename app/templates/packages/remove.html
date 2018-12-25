@@ -6,13 +6,14 @@
 
 {% block content %}
 	<form method="POST" action="" class="box box_grey ">
-		<h3>Delete Package</h3>
+		<h3>Remove Package</h3>
 
 		<div class="box-body">
-			<p>This action can be undone by the admin, but he'll be very annoyed!</p>
+			<p>Deleting a package can be undone by the admin, but he'll be very annoyed!</p>
 
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<input type="submit" value="Delete" class="btn-danger" />
+			<input type="submit" name="delete" value="Delete" class="btn btn-danger" />
+			<input type="submit" name="unapprove" value="Unapprove" class="btn btn-warning" />
 		</div>
 	</form>
 {% endblock %}

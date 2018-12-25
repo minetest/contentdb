@@ -402,25 +402,44 @@ def approve_package_page(package):
 	return redirect(package.getDetailsURL())
 
 
-@app.route("/packages/<author>/<name>/delete/", methods=["GET", "POST"])
+@app.route("/packages/<author>/<name>/remove/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def delete_package_page(package):
+def remove_package_page(package):
 	if request.method == "GET":
-		return render_template("packages/delete.html", package=package)
+		return render_template("packages/remove.html", package=package)
 
-	if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
-		flash("You don't have permission to do that.", "error")
+	if "delete" in request.form:
+		if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
+			flash("You don't have permission to do that.", "error")
+			return redirect(package.getDetailsURL())
 
-	package.soft_deleted = True
+		package.soft_deleted = True
 
-	url = url_for("user_profile_page", username=package.author.username)
-	triggerNotif(package.author, current_user,
-			"{} deleted".format(package.title), url)
-	db.session.commit()
+		url = url_for("user_profile_page", username=package.author.username)
+		triggerNotif(package.author, current_user,
+				"{} deleted".format(package.title), url)
+		db.session.commit()
 
-	flash("Deleted package", "success")
+		flash("Deleted package", "success")
 
-	return redirect(url)
+		return redirect(url)
+	elif "unapprove" in request.form:
+		if not package.checkPerm(current_user, Permission.UNAPPROVE_PACKAGE):
+			flash("You don't have permission to do that.", "error")
+			return redirect(package.getDetailsURL())
+
+		package.approved = False
+
+		triggerNotif(package.author, current_user,
+				"{} deleted".format(package.title), package.getDetailsURL())
+		db.session.commit()
+
+		flash("Unapproved package", "success")
+
+		return redirect(package.getDetailsURL())
+	else:
+		abort(400)
+
 
 from . import todo, screenshots, releases
