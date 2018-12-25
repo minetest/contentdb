@@ -49,8 +49,9 @@ def checkForumAccount(username, forceNoSave=False):
 		needsSaving = True
 
 	pic = profile.avatar
-	needsSaving = needsSaving or pic != user.profile_pic
-	user.profile_pic = pic
+	if pic and not "http" in pic:
+		needsSaving = needsSaving or pic != user.profile_pic
+		user.profile_pic = "https://forum.minetest.net/" + pic
 
 	# Save
 	if needsSaving and not forceNoSave:
