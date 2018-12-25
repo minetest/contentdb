@@ -83,9 +83,11 @@ def todo_topics_page():
 		num = 100
 
 	query = query.paginate(page, num, True)
-	next_url = url_for("todo_topics_page", page=query.next_num) \
+	next_url = url_for("todo_topics_page", page=query.next_num, query=search, \
+	 	show_discarded=show_discarded, n=num, sort=sort_by) \
 			if query.has_next else None
-	prev_url = url_for("todo_topics_page", page=query.prev_num) \
+	prev_url = url_for("todo_topics_page", page=query.prev_num, query=search, \
+	 	show_discarded=show_discarded, n=num, sort=sort_by) \
 			if query.has_prev else None
 
 	return render_template("todo/topics.html", topics=query.items, total=total, \

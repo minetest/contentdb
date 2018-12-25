@@ -54,7 +54,10 @@ Topics to be Added
 	</div>
 
 	<form method="GET" action="{{ url_for('todo_topics_page') }}" class="my-4">
-		<input class="" name="q" type="text" placeholder="Search topics" value="{{ query or ''}}">
+		<input type="hidden" name="show_discarded" value={{ show_discarded and "True" or "False" }} />
+		<input type="hidden" name="n" value={{ n }} />
+		<input type="hidden" name="sort" value={{ sort_by or "date" }} />
+		<input name="q" type="text" placeholder="Search topics" value="{{ query or ''}}">
 		<input class="btn btn-secondary my-2 my-sm-0 mr-sm-2" type="submit" value="Search" />
 	</form>
 
@@ -65,11 +68,11 @@ Topics to be Added
 		<li class="page-item {% if not prev_url %}disabled{% endif %}">
 			<a class="page-link" {% if prev_url %}href="{{ prev_url }}"{% endif %}>&laquo;</a>
 		</li>
-		{% for n in range(1, page_max+1) %}
-			<li class="page-item {% if n == page %}active{% endif %}">
+		{% for i in range(1, page_max+1) %}
+			<li class="page-item {% if i == page %}active{% endif %}">
 				<a class="page-link"
-						href="{{ url_for('todo_topics_page', page=n) }}">
-					{{ n }}
+						href="{{ url_for('todo_topics_page', page=i, query=query, show_discarded=show_discarded, n=n, sort=sort_by) }}">
+					{{ i }}
 				</a>
 			</li>
 		{% endfor %}
