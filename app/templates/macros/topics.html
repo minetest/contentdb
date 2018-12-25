@@ -1,4 +1,4 @@
-{% macro render_topics_table(topics, show_author=True, show_discard=False) -%}
+{% macro render_topics_table(topics, show_author=True, show_discard=False, current_user=current_user) -%}
 <table class="table">
 	<tr>
 		<th></th>
@@ -27,7 +27,7 @@
 					href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
 					Create
 				</a>
-				{% if show_discard %}
+				{% if show_discard and current_user.is_authenticated and topic.checkPerm(current_user, "TOPIC_DISCARD") %}
 					<a class="btn btn-{% if topic.discarded %}success{% else %}danger{% endif %} topic-discard" data-tid={{ topic.topic_id }}>
 						{% if topic.discarded %}
 							Show

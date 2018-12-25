@@ -79,6 +79,7 @@ class Permission(enum.Enum):
 	SEE_THREAD         = "SEE_THREAD"
 	CREATE_THREAD      = "CREATE_THREAD"
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
+	TOPIC_DISCARD      = "TOPIC_DISCARD"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -842,6 +843,21 @@ class ForumTopic(db.Model):
 			"discarded":  self.discarded,
 			"created_at": self.created_at.isoformat(),
 		}
+
+	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return False
+
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to ForumTopic.checkPerm()")
+
+		if perm == Permission.TOPIC_DISCARD:
+			return self.author == user or user.rank.atLeast(UserRank.EDITOR)
+
+		else:
+			raise Exception("Permission {} is not related to topics".format(perm.name))
 
 
 # Setup Flask-User

@@ -46,7 +46,7 @@ def api_topics_page():
 
 
 @app.route("/api/topic_discard/", methods=["POST"])
-@rank_required(UserRank.EDITOR)
+@login_required
 def topic_set_discard():
 	tid = request.args.get("tid")
 	discard = request.args.get("discard")
@@ -54,6 +54,9 @@ def topic_set_discard():
 		abort(400)
 
 	topic = ForumTopic.query.get(tid)
+	if not topic.checkPerm(current_user, Permission.TOPIC_DISCARD):
+		abort(403)
+
 	topic.discarded = discard == "true"
 	db.session.commit()
 

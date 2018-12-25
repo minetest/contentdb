@@ -134,11 +134,20 @@
 
 		<p class="card-body">
 			List of your forum topics which do not have a matching package.
+			Topics with a strikethrough have beened marked as discarded.
 		</p>
 
 		{% from "macros/topics.html" import render_topics_table %}
-		{{ render_topics_table(topics_to_add, show_author=False) }}
+		{{ render_topics_table(topics_to_add, show_author=False, show_discard=True, current_user=current_user) }}
 	</div>
 {% endif %}
 
+{% endblock %}
+
+
+{% block scriptextra %}
+	<script>
+		var csrf_token = "{{ csrf_token() }}";
+	</script>
+	<script src="/static/topic_discard.js"></script>
 {% endblock %}
