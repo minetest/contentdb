@@ -5,7 +5,7 @@
 	<li class="row my-2 mx-0">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('user_profile_page', username=r.author.username) }}">
-				<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ (r.author.email or '') | gravatar }}">
+				<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
 			</a>
 		</div>
 		<div class="col">
@@ -33,7 +33,7 @@
 {% if current_user.is_authenticated %}
 <div class="row mt-0 mb-4 comments mx-0">
 	<div class="col-md-1 p-1">
-		<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ (current_user.email or '') | gravatar }}">
+		<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ current_user.getProfilePicURL() }}">
 	</div>
 	<div class="col">
 		<div class="card">
@@ -55,22 +55,22 @@
 
 {% macro render_threadlist(threads, list_group=False) -%}
 	{% if not list_group %}<ul>{% endif %}
-		<li {% if list_group %}class="list-group-item"{% endif %}>
 		{% for t in threads %}
-			{% if list_group %}
-				<a href="{{ url_for('thread_page', id=t.id) }}">
+			<li {% if list_group %}class="list-group-item"{% endif %}>
+				{% if list_group %}
+					<a href="{{ url_for('thread_page', id=t.id) }}">
+						{% if t.private %}&#x1f512; {% endif %}
+						{{ t.title }}
+						by {{ t.author.display_name }}
+					</a>
+				{% else %}
 					{% if t.private %}&#x1f512; {% endif %}
-					{{ t.title }}
+					<a href="{{ url_for('thread_page', id=t.id) }}">{{ t.title }}</a>
 					by {{ t.author.display_name }}
-				</a>
-			{% else %}
-				{% if t.private %}&#x1f512; {% endif %}
-				<a href="{{ url_for('thread_page', id=t.id) }}">{{ t.title }}</a>
-				by {{ t.author.display_name }}
-			{% endif %}
+				{% endif %}
+			</li>
 		{% else %}
-			<i>No threads found</i>
+			<li {% if list_group %}class="list-group-item"{% endif %}><i>No threads found</i></li>
 		{% endfor %}
-		</li>
-	</ul>
+	{% if not list_group %}</ul>{% endif %}
 {% endmacro %}
