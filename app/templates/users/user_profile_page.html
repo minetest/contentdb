@@ -128,18 +128,22 @@
 {% from "macros/packagegridtile.html" import render_pkggrid %}
 {{ render_pkggrid(packages, show_author=False) }}
 
-{% if topics_to_add %}
+{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(UserRank.EDITOR)) %}
 	<div class="card mt-3">
-		<a name="unadded-packages"></a>
-		<h2 class="card-header">Unadded Packages</h2>
+		<a name="unadded-topics"></a>
+		<h2 class="card-header">Unadded topics</h2>
 
-		<p class="card-body">
-			List of your forum topics which do not have a matching package.
-			Topics with a strikethrough have been marked as discarded.
-		</p>
+		{% if topics_to_add %}
+			<p class="card-body">
+				List of your forum topics which do not have a matching package.
+				Topics with a strikethrough have been marked as discarded.
+			</p>
 
-		{% from "macros/topics.html" import render_topics_table %}
-		{{ render_topics_table(topics_to_add, show_author=False, show_discard=True, current_user=current_user) }}
+			{% from "macros/topics.html" import render_topics_table %}
+			{{ render_topics_table(topics_to_add, show_author=False, show_discard=True, current_user=current_user) }}
+		{% else %}
+			<p>Congrats! You don't have any topics which aren't on CDB.</p>
+		{% endif %}
 	</div>
 {% endif %}
 
