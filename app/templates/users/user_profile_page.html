@@ -21,11 +21,13 @@
 			<h2 class="card-header">{{ user.display_name }}</h2>
 			<div class="card-body row">
 				<div class="col-md-2">
-					{% if user.email %}
+					{% if user.forums_username %}
+						<a href="https://forum.minetest.net/ucp.php?i=profile&mode=avatar">
+					{% elif user.email %}
 						<a href="https://en.gravatar.com/">
 					{% endif %}
-					<img class="img-responsive user-photo img-thumbnail  img-thumbnail-1" src="{{ (user.email or '') | gravatar }}">
-					{% if user.email %}
+					<img class="img-responsive user-photo img-thumbnail  img-thumbnail-1" src="{{ user.getProfilePicURL() }}">
+					{% if user.forums_username or user.email %}
 						</a>
 					{% endif %}
 				</div>
@@ -67,14 +69,23 @@
 							<tr>
 								<td>Profile Picture:</td>
 								<td>
+									{% if user.forums_username %}
+										<form method="post" action="{{ url_for('user_check', username=user.username) }}" class="" style="display:inline-block;">
+											<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+											<input type="submit" class="btn btn-primary" value="Sync with Forums" />
+										</form>
+									{% endif %}
 									{% if user.email %}
 										<a class="btn btn-primary" href="https://en.gravatar.com/">
 											Gravatar
 										</a>
 									{% else %}
-										<p>
-											Please add an email to your profile.
-										</p>
+										<a class="btn btn-primary disabled"
+												data-toggle="tooltip" data-placement="bottom"
+												title="Please add an email address to use Gravatar"
+												style="pointer-events: all;">
+											Gravatar
+										</a>
 									{% endif %}
 								</td>
 							</tr>

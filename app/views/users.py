@@ -106,6 +106,26 @@ def user_profile_page(username):
 	return render_template("users/user_profile_page.html",
 			user=user, form=form, packages=packages, topics_to_add=topics_to_add)
 
+
+@app.route("/users/<username>/check/", methods=["POST"])
+@login_required
+def user_check(username):
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		abort(404)
+
+	if current_user != user and not current_user.rank.atLeast(UserRank.MODERATOR):
+		abort(403)
+
+	if user.forums_username is None:
+		abort(404)
+
+	task = checkForumAccount.delay(user.forums_username)
+	next_url = url_for("user_profile_page", username=username)
+
+	return redirect(url_for("check_task", id=task.id, r=next_url))
+
+
 class SetPasswordForm(FlaskForm):
 	email = StringField("Email", [Optional(), Email()])
 	password = PasswordField("New password", [InputRequired(), Length(2, 20)])

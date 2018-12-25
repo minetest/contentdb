@@ -19,7 +19,7 @@ from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from urllib.parse import urlparse
-from app import app
+from app import app, gravatar
 from datetime import datetime
 from sqlalchemy.orm import validates
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
@@ -97,26 +97,27 @@ class Permission(enum.Enum):
 			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
 
 class User(db.Model, UserMixin):
-	id = db.Column(db.Integer, primary_key=True)
+	id           = db.Column(db.Integer, primary_key=True)
 
 	# User authentication information
-	username = db.Column(db.String(50, collation="NOCASE"), nullable=False, unique=True, index=True)
-	password = db.Column(db.String(255), nullable=True)
+	username     = db.Column(db.String(50, collation="NOCASE"), nullable=False, unique=True, index=True)
+	password     = db.Column(db.String(255), nullable=True)
 	reset_password_token = db.Column(db.String(100), nullable=False, server_default="")
 
-	rank = db.Column(db.Enum(UserRank))
+	rank         = db.Column(db.Enum(UserRank))
 
 	# Account linking
 	github_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
 	forums_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
 
 	# User email information
-	email = db.Column(db.String(255), nullable=True, unique=True)
-	confirmed_at = db.Column(db.DateTime())
+	email         = db.Column(db.String(255), nullable=True, unique=True)
+	confirmed_at  = db.Column(db.DateTime())
 
 	# User information
-	active = db.Column("is_active", db.Boolean, nullable=False, server_default="0")
-	display_name = db.Column(db.String(100), nullable=False, server_default="")
+	profile_pic   = db.Column(db.String(255), nullable=True, server_default=None)
+	active        = db.Column("is_active", db.Boolean, nullable=False, server_default="0")
+	display_name  = db.Column(db.String(100), nullable=False, server_default="")
 
 	# Content
 	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id")
@@ -145,6 +146,12 @@ class User(db.Model, UserMixin):
 
 	def isClaimed(self):
 		return self.rank.atLeast(UserRank.NEW_MEMBER)
+
+	def getProfilePicURL(self):
+		if self.profile_pic:
+			return self.profile_pic
+		else:
+			return gravatar(self.email or "")
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:

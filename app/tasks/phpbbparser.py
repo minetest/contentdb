@@ -15,8 +15,9 @@ def urlEncodeNonAscii(b):
 
 class Profile:
 	def __init__(self, username):
-		self.username = username
-		self.signature = ""
+		self.username   = username
+		self.signature  = ""
+		self.avatar     = None
 		self.properties = {}
 
 	def set(self, key, value):
@@ -32,6 +33,11 @@ def __extract_properties(profile, soup):
 	el = soup.find(id="viewprofile")
 	if el is None:
 		return None
+
+	res1 = el.find_all("dl")
+	imgs = res1[0].find_all("img")
+	if len(imgs) == 1:
+		profile.avatar = imgs[0]["src"]
 
 	res = el.find_all("dl", class_ = "left-box details")
 	if len(res) != 1:

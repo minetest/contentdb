@@ -25,7 +25,7 @@ import urllib.request
 from urllib.parse import urlparse, quote_plus
 
 @celery.task()
-def checkForumAccount(username, token=None):
+def checkForumAccount(username):
 	try:
 		profile = getProfile("https://forum.minetest.net", username)
 	except OSError:
@@ -46,6 +46,10 @@ def checkForumAccount(username, token=None):
 		print("Updated github username for " + user.display_name + " to " + github_username)
 		user.github_username = github_username
 		needsSaving = True
+
+	pic = profile.avatar
+	needsSaving = needsSaving or pic != user.profile_pic
+	user.profile_pic = pic
 
 	# Save
 	if needsSaving:
