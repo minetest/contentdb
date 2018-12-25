@@ -22,7 +22,7 @@
 			<div class="card-body row">
 				<div class="col-md-2">
 					{% if user.email %}
-						<a class="btn btn-primary" href="https://en.gravatar.com/">
+						<a href="https://en.gravatar.com/">
 					{% endif %}
 					<img class="img-responsive user-photo img-thumbnail  img-thumbnail-1" src="{{ (user.email or '') | gravatar }}">
 					{% if user.email %}
