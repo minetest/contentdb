@@ -23,7 +23,7 @@
 			<td>{{ topic.name or ""}}</td>
 			<td>{{ topic.created_at | date }}</td>
 			<td class="btn-group">
-				{% if topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
+				{% if current_user == topic.author or topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
 					<a class="btn btn-primary"
 							href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
 						Create
