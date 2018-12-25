@@ -72,7 +72,10 @@ def todo_topics_page():
 		query = query.filter(ForumTopic.title.ilike('%' + search + '%'))
 
 	page  = int(request.args.get("page") or 1)
-	num   = min(100, int(request.args.get("n") or 100))
+	num   = int(request.args.get("n") or 100)
+	if num > 100 and not current_user.rank.atLeast(UserRank.EDITOR):
+		num = 100
+
 	query = query.paginate(page, num, True)
 	next_url = url_for("todo_topics_page", page=query.next_num) \
 			if query.has_next else None
@@ -81,4 +84,5 @@ def todo_topics_page():
 
 	return render_template("todo/topics.html", topics=query.items, total=total, \
 			topic_count=topic_count, query=search, show_discarded=show_discarded, \
-			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages)
+			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, \
+			n=num)
