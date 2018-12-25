@@ -23,10 +23,12 @@
 			<td>{{ topic.name or ""}}</td>
 			<td>{{ topic.created_at | date }}</td>
 			<td class="btn-group">
-				<a class="btn btn-primary"
-					href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
-					Create
-				</a>
+				{% if topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
+					<a class="btn btn-primary"
+							href="{{ url_for('create_edit_package_page', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
+						Create
+					</a>
+				{% endif %}
 				{% if show_discard and current_user.is_authenticated and topic.checkPerm(current_user, "TOPIC_DISCARD") %}
 					<a class="btn btn-{% if topic.discarded %}success{% else %}danger{% endif %} topic-discard" data-tid={{ topic.topic_id }}>
 						{% if topic.discarded %}
