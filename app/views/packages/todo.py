@@ -43,6 +43,7 @@ def todo_page():
 
 	topics_to_add = ForumTopic.query \
 			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
+			.filter_by(discarded=False) \
 			.count()
 
 	return render_template("todo/list.html", title="Reports and Work Queue",
