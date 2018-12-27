@@ -70,17 +70,17 @@
 							<ul class="dropdown-menu" role="menu">
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('user_profile_page', username=current_user.username) }}">Profile</a>
-								</li class="nav-item">
+								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('user_profile_page', username=current_user.username) }}#unadded-topics">Your unadded topics</a>
-								</li class="nav-item">
+								</li>
 								{% if current_user.canAccessTodoList() %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('todo_page') }}">Work Queue</a></li>
 									<li class="nav-item"><a  class="nav-link" href="{{ url_for('user_list_page') }}">User list</a></li>
 								{% endif %}
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('todo_topics_page') }}">All unadded topics</a>
-								</li class="nav-item">
+								</li>
 								{% if current_user.rank == current_user.rank.ADMIN %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin_page') }}">Admin</a></li>
 								{% endif %}

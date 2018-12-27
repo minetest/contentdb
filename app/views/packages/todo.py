@@ -68,8 +68,11 @@ def todo_topics_page():
 	sort_by = request.args.get("sort")
 	if sort_by == "name":
 		query = query.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
+	elif sort_by == "views":
+		query = query.order_by(db.desc(ForumTopic.views))
 	elif sort_by is None or sort_by == "date":
 		query = query.order_by(db.asc(ForumTopic.created_at))
+		sort_by = "date"
 
 	topic_count = query.count()
 
