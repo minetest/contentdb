@@ -22,7 +22,7 @@
 			</div>
 		</noscript>
 	{% endif %}
-	<script src="/static/package_edit.js"></script>
+	<script src="/static/package_edit.js?v=2"></script>
 {% endblock %}
 
 {% block content %}
@@ -87,7 +87,7 @@
 
 			{{ render_field(form.website, class_="pkg_meta") }}
 			{{ render_field(form.issueTracker, class_="pkg_meta") }}
-			{{ render_field(form.forums, class_="pkg_meta") }}
+			{{ render_field(form.forums, class_="pkg_meta", placeholder="Tip: paste in a forum topic URL") }}
 		</fieldset>
 
 		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>

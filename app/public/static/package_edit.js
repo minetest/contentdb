@@ -21,4 +21,12 @@ $(function() {
 			console.log("Not a URL");
 		}
 	});
+
+	var btn = $("#forums").parent().find("label").append("<a class='ml-3 btn btn-sm btn-primary'>Open</a>");
+	btn.click(function() {
+		var id = $("#forums").val();
+		if (/^\d+$/.test(id)) {
+			window.open("https://forum.minetest.net/viewtopic.php?t=" + id, "_blank");
+		}
+	});
 })
