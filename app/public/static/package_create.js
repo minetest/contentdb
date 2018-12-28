@@ -20,41 +20,38 @@ $(function() {
 			$(".pkg_wiz_2").show()
 			$(".pkg_repo").hide()
 
-			function setSpecial(id, value) {
+			function setField(id, value) {
 				if (value != "") {
 					var ele = $(id);
 					ele.val(value);
-					ele.trigger("change")
+					ele.trigger("change");
 				}
 			}
 
 			performTask("/tasks/getmeta/new/?url=" + encodeURI(repoURL)).then(function(result) {
-				$("#name").val(result.name)
-				setSpecial("#provides_str", result.provides)
-				$("#title").val(result.title)
-				$("#repo").val(result.repo || repoURL)
-				$("#issueTracker").val(result.issueTracker)
-				$("#desc").val(result.description)
-				$("#shortDesc").val(result.short_description)
-				setSpecial("#harddep_str", result.depends)
-				setSpecial("#softdep_str", result.optional_depends)
-				$("#shortDesc").val(result.short_description)
-				if (result.forumId) {
-					$("#forums").val(result.forumId)
-				}
-
+				setField("#name", result.name);
+				setField("#provides_str", result.provides);
+				setField("#title", result.title);
+				setField("#repo", result.repo || repoURL);
+				setField("#issueTracker", result.issueTracker);
+				setField("#desc", result.description);
+				setField("#shortDesc", result.short_description);
+				setField("#harddep_str", result.depends);
+				setField("#softdep_str", result.optional_depends);
+				setField("#shortDesc", result.short_description);
+				setField("#forums", result.forumId);
 				if (result.type && result.type.length > 2) {
-					$("#type").val(result.type)
+					$("#type").val(result.type);
 				}
 
-				finish()
+				finish();
 			}).catch(function(e) {
-				alert(e)
-				$(".pkg_wiz_1").show()
-				$(".pkg_wiz_2").hide()
-				$(".pkg_repo").show()
+				alert(e);
+				$(".pkg_wiz_1").show();
+				$(".pkg_wiz_2").hide();
+				$(".pkg_repo").show();
 				// finish()
-			})
+			});
 		} else {
 			finish()
 		}
