@@ -14,13 +14,7 @@
 	{% if enable_wizard %}
 		<script src="/static/url.min.js"></script>
 		<script src="/static/polltask.js"></script>
-		<script src="/static/package_create.js?v=2"></script>
-		<noscript>
-			<div class="alert alert-warning">
-				<span class="icon_message"></span>
-				Javascript is needed to automatically import metadata from VCS.
-			</div>
-		</noscript>
+		<script src="/static/package_create.js?v=3"></script>
 	{% endif %}
 	<script src="/static/package_edit.js?v=3"></script>
 {% endblock %}
@@ -34,6 +28,13 @@
 		Have you read the Package Inclusion Policy and Guidance yet?
 	</div>
 
+	<noscript>
+		<div class="alert alert-warning">
+			Javascript is needed to improve the user interface, and is needed for features
+			such as finding metadata from git, and autocompletion.<br />
+			Whilst disabled Javascript may work, it is not officially supported.
+		</div>
+	</noscript>
 
 	{{ package_lists() }}
 

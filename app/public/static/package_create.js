@@ -21,7 +21,7 @@ $(function() {
 			$(".pkg_repo").hide()
 
 			function setField(id, value) {
-				if (value != "") {
+				if (value && value != "") {
 					var ele = $(id);
 					ele.val(value);
 					ele.trigger("change");
