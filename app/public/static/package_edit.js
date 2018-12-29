@@ -22,6 +22,38 @@ $(function() {
 		}
 	});
 
+	let hint = null;
+	function showHint(ele, text) {
+		if (hint) {
+			hint.remove();
+		}
+
+		hint = ele.parent()
+				.append(`<div class="alert alert-warning my-3">${text}</div>`)
+				.find(".alert");
+	}
+
+	let hint_mtmods = `Tip:
+		Don't include <i>Minetest</i>, <i>mod</i>, or <i>modpack</i> anywhere in the short description.
+		It is unnecessary and wastes characters.`;
+
+	let hint_thegame = `Tip:
+		It's obvious that this adds something to Minetest,
+		there's no need to use phrases such as \"adds X to the game\".`
+
+	$("#shortDesc").on("change paste keyup", function() {
+		var val = $(this).val().toLowerCase();
+		if (val.indexOf("minetest") >= 0 || val.indexOf("mod") >= 0 ||
+				val.indexOf("modpack") >= 0 || val.indexOf("mod pack") >= 0) {
+			showHint($(this), hint_mtmods);
+		} else if (val.indexOf("the game") >= 0) {
+			showHint($(this), hint_thegame);
+		} else if (hint) {
+			hint.remove();
+			hint = null;
+		}
+	})
+
 	var btn = $("#forums").parent().find("label").append("<a class='ml-3 btn btn-sm btn-primary'>Open</a>");
 	btn.click(function() {
 		var id = $("#forums").val();
