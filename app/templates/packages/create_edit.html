@@ -44,20 +44,22 @@
 		<fieldset>
 			<legend>Package</legend>
 
-			{{ render_field(form.type, class_="pkg_meta") }}
-			{{ render_field(form.name, class_="pkg_meta") }}
-			{{ render_field(form.title, class_="pkg_meta") }}
-			{{ render_field(form.shortDesc, class_="pkg_meta") }}
-			{{ render_field(form.desc, class_="pkg_meta", fieldclass="form-control markdown") }}
-			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
-			<div class="pkg_meta">
-				{{ render_field(form.license, class_="not_txp") }}
+			<div class="row">
+			{{ render_field(form.type, class_="pkg_meta col-sm-2") }}
+			{{ render_field(form.title, class_="pkg_meta col-sm-7") }}
+			{{ render_field(form.name, class_="pkg_meta col-sm-3") }}
 			</div>
-			{{ render_field(form.media_license, class_="pkg_meta") }}
+			{{ render_field(form.shortDesc, class_="pkg_meta") }}
+			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
+			<div class="pkg_meta row">
+				{{ render_field(form.license, class_="not_txp col-sm-6") }}
+				{{ render_field(form.media_license, class_="col-sm-6") }}
+			</div>
+			{{ render_field(form.desc, class_="pkg_meta", fieldclass="form-control markdown") }}
 		</fieldset>
 
 		<fieldset class="pkg_meta">
-			<legend class="not_txp">Package</legend>
+			<legend class="not_txp">Dependencies</legend>
 
 			{{ render_mpackage_field(form.provides_str, class_="not_txp", placeholder="Comma separated list") }}
 			{{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
