@@ -1,0 +1,64 @@
+<!doctype html>
+<html>
+<head>
+	<style>
+		.btn {
+			display: inline-block !important;
+			color: #fff !important;
+			font-weight: 400;
+			text-align: center;
+			vertical-align: middle;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+			user-select: none;
+			background-color: transparent;
+			border: 1px solid transparent;
+			border-top-color: transparent;
+			border-bottom-color: transparent;
+			border-left-color: transparent;
+			padding: 0.375rem 0.75rem;
+			font-size: 0.9375rem;
+			line-height: 1.5;
+			border-radius: 0.25rem;
+			-webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+			transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+			background-color: #2C3E50;
+			border-color: #2C3E50;
+			text-decoration: none;
+		}
+
+		.btn:hover {
+			color: #fff;
+			background-color: #1e2b37;
+			border-color: #1a252f;
+		}
+
+		.btn:focus {
+			-webkit-box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+			box-shadow: 0 0 0 0.2rem rgba(76, 91, 106, 0.5);
+			outline: 0;
+		}
+	</style>
+</head>
+<body>
+	<div style="font-family: 'Arial', 'sans-serif'; max-width: 700px; margin: auto; padding: 0;">
+		<div style="background: #2C3E50; padding: 1.2rem 1.2rem 1.2rem 2em; color: white;">
+			<h1 style="margin: 0; font-size: 120%; font-weight: normal;">ContentDB</h1>
+		</div>
+		<div style="padding: 2em; background: white;">
+			{% block content %}
+				<h2 style="margin-top: 0;">{{ subject }}</h2>
+
+				{{ content | safe }}
+			{% endblock %}
+
+			<div style="margin-top: 3em;font-size: 80%;color: #666;">
+				ContentDB &copy; rubenwardy
+			</div>
+		</div>
+	</div>
+</body>
+</html>

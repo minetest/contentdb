@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import *
+from flask import render_template
 from flask_mail import Message
 from app import mail
 from app.tasks import celery
@@ -32,8 +32,10 @@ def sendVerifyEmail(newEmail, token):
 def sendEmailRaw(to, subject, text, html):
 	from flask_mail import Message
 	msg = Message(subject, recipients=to)
+
 	if text:
 		msg.body = text
-	if html:
-		msg.html = html
+
+	html = html or text
+	msg.html = render_template("emails/base.html", subject=subject, content=html)
 	mail.send(msg)

@@ -1,4 +1,7 @@
-<h1>Hello!</h1>
+{% extends "emails/base.html" %}
+
+{% block content %}
+<h2 style="margin-top: 0;">Hello!</h2>
 
 <p>
 	This email has been sent to you because someone (hopefully you)
@@ -6,12 +9,19 @@
 </p>
 
 <p>
-	If this was you, then please click this link to verify the address:
-	<a href="{{ url_for('verify_email_page', token=token, _external=True) }}">
-		{{ url_for('verify_email_page', token=token, _external=True) }}
-	</a>
+	If it wasn't you, then just delete this email.
 </p>
 
 <p>
-	If it wasn't you, then just delete this email.
+	If this was you, then please click this link to verify the address:
 </p>
+
+<a class="btn" href="{{ url_for('verify_email_page', token=token, _external=True) }}">
+	Confirm Email Address
+</a>
+
+<p style="font-size: 80%;">
+	Or paste this into your browser: {{ url_for('verify_email_page', token=token, _external=True) }}
+<p>
+
+{% endblock %}
