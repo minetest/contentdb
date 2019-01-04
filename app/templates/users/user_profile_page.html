@@ -65,6 +65,25 @@
 								{% endif %}
 							</td>
 						</tr>
+						{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+						<tr>
+							<td>Admin</td>
+							<td>
+								{% if user.email %}
+									<a class="btn btn-primary" href="{{ url_for('send_email_page', username=user.username) }}">
+										Email
+									</a>
+								{% else %}
+									<a class="btn btn-primary disabled"
+											data-toggle="tooltip" data-placement="bottom"
+											title="No email address for user"
+											style="pointer-events: all;">
+										Email
+									</a>
+								{% endif %}
+							</td>
+						</tr>
+						{% endif %}
 						{% if user == current_user %}
 							<tr>
 								<td>Profile Picture:</td>

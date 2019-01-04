@@ -32,7 +32,7 @@ app.config["FLATPAGES_EXTENSION"] = ".md"
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
 
 menu.Menu(app=app)
-Markdown(app, extensions=["fenced_code"], safe_mode=True, output_format="html5")
+markdown = Markdown(app, extensions=["fenced_code"], safe_mode=True, output_format="html5")
 github = GitHub(app)
 csrf = CsrfProtect(app)
 mail = Mail(app)

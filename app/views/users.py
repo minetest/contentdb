@@ -18,14 +18,14 @@
 from flask import *
 from flask_user import *
 from flask_login import login_user, logout_user
-from app import app
+from app import app, markdown
 from app.models import *
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from app.utils import randomString, loginUser
+from app.utils import randomString, loginUser, rank_required
 from app.tasks.forumtasks import checkForumAccount
-from app.tasks.emails import sendVerifyEmail
+from app.tasks.emails import sendVerifyEmail, sendEmailRaw
 from app.tasks.phpbbparser import getProfile
 
 # Define the User profile form
@@ -124,6 +124,36 @@ def user_check(username):
 	next_url = url_for("user_profile_page", username=username)
 
 	return redirect(url_for("check_task", id=task.id, r=next_url))
+
+
+class SendEmailForm(FlaskForm):
+	subject = StringField("Subject", [InputRequired(), Length(1, 300)])
+	text    = TextAreaField("Message", [InputRequired()])
+	submit  = SubmitField("Send")
+
+
+@app.route("/users/<username>/email/", methods=["GET", "POST"])
+@rank_required(UserRank.MODERATOR)
+def send_email_page(username):
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		abort(404)
+
+	next_url = url_for("user_profile_page", username=user.username)
+
+	if user.email is None:
+		flash("User has no email address!", "error")
+		return redirect(next_url)
+
+	form = SendEmailForm(request.form)
+	if form.validate_on_submit():
+		text = form.text.data
+		html = markdown(text)
+		task = sendEmailRaw.delay([user.email], form.subject.data, text, html)
+		return redirect(url_for("check_task", id=task.id, r=next_url))
+
+	return render_template("users/send_email.html", form=form)
+
 
 
 class SetPasswordForm(FlaskForm):
