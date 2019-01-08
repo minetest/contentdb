@@ -380,7 +380,7 @@ class Package(db.Model):
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
 
 	screenshots = db.relationship("PackageScreenshot", backref="package",
-			lazy="dynamic")
+			lazy="dynamic", order_by=db.asc("package_screenshot_id"))
 
 	requests = db.relationship("EditRequest", backref="package",
 			lazy="dynamic")
@@ -439,11 +439,11 @@ class Package(db.Model):
 		}
 
 	def getThumbnailURL(self, level=2):
-		screenshot = self.screenshots.filter_by(approved=True).first()
+		screenshot = self.screenshots.filter_by(approved=True).order_by(db.asc(PackageScreenshot.id)).first()
 		return screenshot.getThumbnailURL(level) if screenshot is not None else None
 
 	def getMainScreenshotURL(self):
-		screenshot = self.screenshots.filter_by(approved=True).first()
+		screenshot = self.screenshots.filter_by(approved=True).order_by(db.asc(PackageScreenshot.id)).first()
 		return screenshot.url if screenshot is not None else None
 
 	def getDetailsURL(self):
