@@ -19,12 +19,12 @@ from flask import *
 from flask_user import *
 from app import app
 from app.models import *
-from app.utils import is_package_page, rank_required
-from .packages import QueryBuilder
+from app.utils import is_package_page
+from app.querybuilder import QueryBuilder
 
 @app.route("/api/packages/")
 def api_packages_page():
-	qb    = QueryBuilder()
+	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 
 	pkgs = [package.getAsDictionaryShort(app.config["BASE_URL"]) \
