@@ -28,13 +28,16 @@ class QueryBuilder:
 		self.order_by  = args.get("sort") or "score"
 		self.order_dir = args.get("order") or "desc"
 
+		if self.search is not None and self.search.strip() == "":
+			self.search = None
+
 	def buildPackageQuery(self):
 		query = Package.query.filter_by(soft_deleted=False, approved=True)
 
 		if len(self.types) > 0:
 			query = query.filter(Package.type.in_(self.types))
 
-		if self.search is not None and self.search.strip() != "":
+		if self.search:
 			query = query.filter(Package.title.ilike('%' + self.search + '%'))
 
 		if self.random:
@@ -69,16 +72,13 @@ class QueryBuilder:
 	def buildTopicQuery(self):
 		topics = ForumTopic.query \
 				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-				.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
-				.filter(ForumTopic.title.ilike('%' + self.search + '%'))
+				.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
+
+		if self.search:
+			topics = topics.filter(ForumTopic.title.ilike('%' + self.search + '%'))
 
 		if len(self.types) > 0:
 			topics = topics.filter(ForumTopic.type.in_(self.types))
-
-		if self.hide_nonfree:
-			topics = topics \
-                .filter(Package.license.has(License.is_foss == True)) \
-                .filter(Package.media_license.has(License.is_foss == True))
 
 		if self.limit:
 			topics = topics.limit(self.limit)
