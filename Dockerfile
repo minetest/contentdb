@@ -1,4 +1,4 @@
-FROM python:3.7
+FROM python:3.6
 
 WORKDIR /home/cdb
 
@@ -14,6 +14,3 @@ COPY setup.py ./setup.py
 COPY app app
 COPY migrations migrations
 COPY config.prod.cfg ./config.prod.cfg
-
-EXPOSE 5123
-ENTRYPOINT ["./runprodguni.sh"]

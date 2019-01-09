@@ -6,24 +6,31 @@ services:
     volumes:
       - "./data/db:/var/lib/postgresql/data"
     env_file:
-      - db.env
-    networks:
-      - db_nw
+      - config.env
+
+  redis:
+    image: 'redis:3.0-alpine'
+    command: redis-server
+    volumes:
+      - './data/redis:/data'
 
   app:
     build: .
+    command: ./runprodguni.sh
     ports:
       - 5123:5123
     volumes:
-      - "./data/uploads:/home/app/public/uploads"
-    networks:
-      - db_nw
-      - web_nw
+      - "./data/uploads:/home/cdb/app/public/uploads"
     depends_on:
       - db
+      - redis
 
-networks:
-  db_nw:
-    driver: bridge
-  web_nw:
-    driver: bridge
+  worker:
+    build: .
+    command: celery -A app.tasks.celery worker
+    env_file:
+      - config.env
+    volumes:
+      - "./data/uploads:/home/cdb/app/public/uploads"
+    depends_on:
+      - redis
