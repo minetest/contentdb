@@ -1,0 +1,29 @@
+version: '3'
+services:
+  db:
+    image: "postgres:9.6.5"
+    restart: always
+    volumes:
+      - "./data/db:/var/lib/postgresql/data"
+    env_file:
+      - db.env
+    networks:
+      - db_nw
+
+  app:
+    build: .
+    ports:
+      - 5123:5123
+    volumes:
+      - "./data/uploads:/home/app/public/uploads"
+    networks:
+      - db_nw
+      - web_nw
+    depends_on:
+      - db
+
+networks:
+  db_nw:
+    driver: bridge
+  web_nw:
+    driver: bridge

@@ -20,7 +20,9 @@ import os, sys, datetime
 if not "FLASK_CONFIG" in os.environ:
 	os.environ["FLASK_CONFIG"] = "../config.cfg"
 
-test_data = len(sys.argv) >= 2 and sys.argv[1].strip() == "-t"
+delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"
+create_db = not (len(sys.argv) >= 2 and sys.argv[1].strip() == "-o")
+test_data = len(sys.argv) >= 2 and sys.argv[1].strip() == "-t" or not create_db
 
 from app.models import *
 from app.utils import make_flask_user_password
@@ -333,13 +335,14 @@ Uses the CTF PvP Engine.
 	db.session.add(dep)
 
 
-
-delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"
 if delete_db and os.path.isfile("db.sqlite"):
 	os.remove("db.sqlite")
 
-print("Creating database tables...")
-db.create_all()
+
+if create_db:
+	print("Creating database tables...")
+	db.create_all()
+
 print("Filling database...")
 
 ruben = User("rubenwardy")
