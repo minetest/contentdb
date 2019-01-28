@@ -27,12 +27,18 @@ from celery import uuid
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
+
 
 class CreatePackageReleaseForm(FlaskForm):
 	title	   = StringField("Title", [InputRequired(), Length(1, 30)])
 	uploadOpt  = RadioField ("Method", choices=[("upload", "File Upload")], default="upload")
 	vcsLabel   = StringField("VCS Commit or Branch", default="master")
 	fileUpload = FileField("File Upload")
+	min_rel    = QuerySelectField("Minimum Minetest Version", [InputRequired()],
+			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	max_rel    = QuerySelectField("Maximum Minetest Version", [InputRequired()],
+			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit	   = SubmitField("Save")
 
 class EditPackageReleaseForm(FlaskForm):
@@ -40,6 +46,10 @@ class EditPackageReleaseForm(FlaskForm):
 	url      = StringField("URL", [URL])
 	task_id  = StringField("Task ID")
 	approved = BooleanField("Is Approved")
+	min_rel  = QuerySelectField("Minimum Minetest Version", [InputRequired()],
+			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	max_rel  = QuerySelectField("Maximum Minetest Version", [InputRequired()],
+			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit   = SubmitField("Save")
 
 @app.route("/packages/<author>/<name>/releases/new/", methods=["GET", "POST"])
@@ -63,6 +73,8 @@ def create_release_page(package):
 			rel.title   = form["title"].data
 			rel.url     = ""
 			rel.task_id = uuid()
+			rel.min_rel = form["min_rel"].data.getActual()
+			rel.max_rel = form["max_rel"].data.getActual()
 			db.session.add(rel)
 			db.session.commit()
 
@@ -80,6 +92,8 @@ def create_release_page(package):
 				rel.package = package
 				rel.title = form["title"].data
 				rel.url = uploadedPath
+				rel.min_rel = form["min_rel"].data.getActual()
+				rel.max_rel = form["max_rel"].data.getActual()
 				db.session.add(rel)
 				db.session.commit()
 
@@ -128,6 +142,8 @@ def edit_release_page(package, id):
 		wasApproved = release.approved
 		if canEdit:
 			release.title = form["title"].data
+			release.min_rel = form["min_rel"].data.getActual()
+			release.max_rel = form["max_rel"].data.getActual()
 
 		if package.checkPerm(current_user, Permission.CHANGE_RELEASE_URL):
 			release.url = form["url"].data

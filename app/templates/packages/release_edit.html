@@ -39,6 +39,11 @@
 				Approved: {{ release.approved }}
 			{% endif %}
 		{% endif %}
+		
+		<div class="row">
+			{{ render_field(form.min_rel, class_="col-sm-6") }}
+			{{ render_field(form.max_rel, class_="col-sm-6") }}
+		</div>
 
 		{{ render_submit_field(form.submit) }}
 	</form>

@@ -21,4 +21,7 @@ FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db migrate
 
 # Run migration
 FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db upgrade
+
+# Enter docker
+docker exec -it contentdb_app_1 bash
 ```

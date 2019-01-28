@@ -8,9 +8,10 @@ RUN pip install gunicorn
 RUN pip install psycopg2
 
 COPY runprodguni.sh ./
+COPY rundebug.sh ./
 RUN chmod +x runprodguni.sh
 
 COPY setup.py ./setup.py
 COPY app app
 COPY migrations migrations
-COPY config.prod.cfg ./config.prod.cfg
+COPY config.cfg ./config.cfg

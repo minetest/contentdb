@@ -15,12 +15,13 @@ services:
 
   app:
     build: .
-    command: ./runprodguni.sh
+    command: ./rundebug.sh
     ports:
       - 5123:5123
     volumes:
       - "./data/uploads:/home/cdb/app/public/uploads"
       - "./app:/home/cdb/app"
+      - "./migrations:/home/cdb/migrations"
     depends_on:
       - db
       - redis

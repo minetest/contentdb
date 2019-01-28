@@ -612,6 +612,18 @@ class Tag(db.Model):
 		regex = re.compile("[^a-z_]")
 		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
 
+
+class MinetestRelease(db.Model):
+	id              = db.Column(db.Integer,    primary_key=True)
+	name            = db.Column(db.String(100), unique=True, nullable=False)
+
+	def __init__(self, name=None):
+		self.name = name
+
+	def getActual(self):
+		return None if self.name == "None" else self
+
+
 class PackageRelease(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 
@@ -622,6 +634,12 @@ class PackageRelease(db.Model):
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	task_id      = db.Column(db.String(37), nullable=True)
 	commit_hash  = db.Column(db.String(41), nullable=True, default=None)
+
+	min_rel_id = db.Column(db.Integer, db.ForeignKey("minetest_release.id"), nullable=True, server_default=None)
+	min_rel    = db.relationship("MinetestRelease", foreign_keys=[min_rel_id])
+
+	max_rel_id = db.Column(db.Integer, db.ForeignKey("minetest_release.id"), nullable=True, server_default=None)
+	max_rel    = db.relationship("MinetestRelease", foreign_keys=[max_rel_id])
 
 
 	def getEditURL(self):
