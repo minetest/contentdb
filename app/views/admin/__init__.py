@@ -15,4 +15,4 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from . import admin, licenseseditor, tagseditor, todo
+from . import admin, licenseseditor, tagseditor, versioneditor, todo

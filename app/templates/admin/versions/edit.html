@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{% if version %}
+		Edit {{ version.name }}
+	{% else %}
+		New Minetest Version
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<p>
+		<a href="{{ url_for('version_list_page') }}">Back to list</a> |
+		<a href="{{ url_for('createedit_version_page') }}">New Version</a>
+	</p>
+
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.name) }}
+		{{ render_field(form.protocol) }}
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}

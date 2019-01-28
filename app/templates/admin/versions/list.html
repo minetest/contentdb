@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+Minetest Versions
+{% endblock %}
+
+{% block content %}
+	<p>
+		<a href="{{ url_for('createedit_version_page') }}">New Tag</a>
+	</p>
+	<ul>
+		{% for v in versions %}
+			<li><a href="{{ url_for('createedit_version_page', name=v.name) }}">{{ v.name }}</a></li>
+		{% endfor %}
+	</ul>
+{% endblock %}
