@@ -42,11 +42,18 @@
 				<a name="reply"></a>
 			</div>
 
-			<form method="post" action="{{ url_for('thread_page', id=thread.id)}}" class="card-body">
-				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<textarea class="form-control markdown" required maxlength=500 name="comment"></textarea><br />
-				<input class="btn btn-primary" type="submit" value="Comment" />
-			</form>
+			{% if current_user.canCommentRL() %}
+				<form method="post" action="{{ url_for('thread_page', id=thread.id)}}" class="card-body">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<textarea class="form-control markdown" required maxlength=500 name="comment"></textarea><br />
+					<input class="btn btn-primary" type="submit" value="Comment" />
+				</form>
+			{% else %}
+				<div class="card-body">
+					<textarea class="form-control" readonly disabled>Please wait before commenting again.</textarea><br />
+					<input class="btn btn-primary" type="submit" disabled value="Comment" />
+				</div>
+			{% endif %}
 		</div>
 	</div>
 </div>

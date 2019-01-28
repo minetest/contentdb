@@ -21,6 +21,8 @@ from app import app
 from app.models import *
 from app.utils import triggerNotif, clearNotifications
 
+import datetime
+
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
@@ -78,6 +80,13 @@ def thread_page(id):
 	if current_user.is_authenticated and request.method == "POST":
 		comment = request.form["comment"]
 
+		if not current_user.canCommentRL():
+			flash("Please wait before commenting again", "danger")
+			if package:
+				return redirect(package.getDetailsURL())
+			else:
+				return redirect(url_for("home_page"))
+
 		if len(comment) <= 500 and len(comment) > 3:
 			reply = ThreadReply()
 			reply.author = current_user
@@ -126,15 +135,15 @@ def new_thread_page():
 		if package is None:
 			flash("Unable to find that package!", "error")
 
-	# Don't allow making threads on approved packages for now
+	# Don't allow making orphan threads on approved packages for now
 	if package is None:
 		abort(403)
 
 	def_is_private   = request.args.get("private") or False
-	if not package.approved:
+	if package is None or not package.approved:
 		def_is_private = True
-	allow_change     = package.approved
-	is_review_thread = package is not None and not package.approved
+	allow_change     = package and package.approved
+	is_review_thread = package and not package.approved
 
 	# Check that user can make the thread
 	if not package.checkPerm(current_user, Permission.CREATE_THREAD):
@@ -144,8 +153,15 @@ def new_thread_page():
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
 		flash("A review thread already exists!", "error")
-		if request.method == "GET":
-			return redirect(url_for("thread_page", id=package.review_thread.id))
+		return redirect(url_for("thread_page", id=package.review_thread.id))
+
+	elif not current_user.canOpenThreadRL():
+		flash("Please wait before opening another thread", "danger")
+
+		if package:
+			return redirect(package.getDetailsURL())
+		else:
+			return redirect(url_for("home_page"))
 
 	# Set default values
 	elif request.method == "GET":
@@ -178,9 +194,15 @@ def new_thread_page():
 		if is_review_thread:
 			package.review_thread = thread
 
+		notif_msg = None
 		if package is not None:
-			triggerNotif(package.author, current_user,
-					"New thread '{}' on package {}".format(thread.title, package.title), url_for("thread_page", id=thread.id))
+			notif_msg = "New thread '{}' on package {}".format(thread.title, package.title)
+			triggerNotif(package.author, current_user, notif_msg, url_for("thread_page", id=thread.id))
+		else:
+			notif_msg = "New thread '{}'".format(thread.title)
+
+		for user in User.query.filter(User.rank >= UserRank.EDITOR).all():
+			triggerNotif(user, current_user, notif_msg, url_for("thread_page", id=thread.id))
 
 		db.session.commit()
 

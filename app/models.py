@@ -20,10 +20,9 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from urllib.parse import urlparse
 from app import app, gravatar
-from datetime import datetime
 from sqlalchemy.orm import validates
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
-import enum
+import enum, datetime
 
 # Initialise database
 db = SQLAlchemy(app)
@@ -129,8 +128,6 @@ class User(db.Model, UserMixin):
 	replies       = db.relationship("ThreadReply", backref="author", lazy="dynamic")
 
 	def __init__(self, username, active=False, email=None, password=None):
-		import datetime
-
 		self.username = username
 		self.confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
@@ -171,6 +168,16 @@ class User(db.Model, UserMixin):
 			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank))
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))
+
+	def canCommentRL(self):
+		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
+		return ThreadReply.query.filter_by(author=self) \
+			.filter(ThreadReply.created_at > hour_ago).count() < 4
+
+	def canOpenThreadRL(self):
+		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
+		return Thread.query.filter_by(author=self) \
+			.filter(Thread.created_at > hour_ago).count() < 2
 
 class UserEmailVerification(db.Model):
 	id      = db.Column(db.Integer, primary_key=True)
@@ -347,7 +354,7 @@ class Package(db.Model):
 	shortDesc    = db.Column(db.String(200), nullable=False)
 	desc         = db.Column(db.Text, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
-	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	license      = db.relationship("License", foreign_keys=[license_id])
@@ -496,8 +503,11 @@ class Package(db.Model):
 
 		isOwner = user == self.author
 
+		if perm == Permission.CREATE_THREAD:
+			return user.rank.atLeast(UserRank.MEMBER)
+
 		# Members can edit their own packages, and editors can edit any packages
-		if perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS or perm == Permission.CREATE_THREAD:
+		if perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
 			return isOwner or user.rank.atLeast(UserRank.EDITOR)
 
 		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES:
@@ -522,8 +532,6 @@ class Package(db.Model):
 			raise Exception("Permission {} is not related to packages".format(perm.name))
 
 	def recalcScore(self):
-		import datetime
-
 		self.score = 10
 
 		if self.forums is not None:
@@ -630,7 +638,7 @@ class PackageRelease(db.Model):
 
 
 	def __init__(self):
-		self.releaseDate = datetime.now()
+		self.releaseDate = datetime.datetime.now()
 
 
 class PackageReview(db.Model):
@@ -762,7 +770,7 @@ class Thread(db.Model):
 	title      = db.Column(db.String(100), nullable=False)
 	private    = db.Column(db.Boolean, server_default="0")
 
-	created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic")
 
@@ -800,7 +808,7 @@ class ThreadReply(db.Model):
 	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
 	comment    = db.Column(db.String(500), nullable=False)
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 
 REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com", \
@@ -824,7 +832,7 @@ class ForumTopic(db.Model):
 	posts     = db.Column(db.Integer, nullable=False)
 	views     = db.Column(db.Integer, nullable=False)
 
-	created_at = db.Column(db.DateTime, nullable=False, default=datetime.utcnow)
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	def getRepoURL(self):
 		if self.link is None:

@@ -2,7 +2,6 @@ version: '3'
 services:
   db:
     image: "postgres:9.6.5"
-    restart: always
     volumes:
       - "./data/db:/var/lib/postgresql/data"
     env_file:
@@ -21,6 +20,7 @@ services:
       - 5123:5123
     volumes:
       - "./data/uploads:/home/cdb/app/public/uploads"
+      - "./app:/home/cdb/app"
     depends_on:
       - db
       - redis
