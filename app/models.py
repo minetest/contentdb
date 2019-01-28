@@ -614,8 +614,9 @@ class Tag(db.Model):
 
 
 class MinetestRelease(db.Model):
-	id              = db.Column(db.Integer,    primary_key=True)
-	name            = db.Column(db.String(100), unique=True, nullable=False)
+	id       = db.Column(db.Integer, primary_key=True)
+	name     = db.Column(db.String(100), unique=True, nullable=False)
+	protocol = db.Column(db.Integer, nullable=False, default=0)
 
 	def __init__(self, name=None):
 		self.name = name
@@ -629,7 +630,7 @@ class PackageRelease(db.Model):
 
 	package_id   = db.Column(db.Integer, db.ForeignKey("package.id"))
 	title        = db.Column(db.String(100), nullable=False)
-	releaseDate  = db.Column(db.DateTime,        nullable=False)
+	releaseDate  = db.Column(db.DateTime,    nullable=False)
 	url          = db.Column(db.String(200), nullable=False)
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	task_id      = db.Column(db.String(37), nullable=True)

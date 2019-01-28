@@ -1,7 +1,8 @@
-from .models import db, PackageType, Package, ForumTopic, License
+from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease
 from .utils import isNo
 from sqlalchemy.sql.expression import func
 from flask import abort
+from sqlalchemy import or_
 
 class QueryBuilder:
 	title  = None
@@ -27,6 +28,7 @@ class QueryBuilder:
 		self.limit  = 1 if self.lucky else None
 		self.order_by  = args.get("sort") or "score"
 		self.order_dir = args.get("order") or "desc"
+		self.protocol_version = args.get("protocol_version")
 
 		if self.search is not None and self.search.strip() == "":
 			self.search = None
@@ -63,6 +65,18 @@ class QueryBuilder:
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))
 			query = query.filter(Package.media_license.has(License.is_foss == True))
+
+		if self.protocol_version:
+			self.protocol_version = int(self.protocol_version)
+			version = MinetestRelease.query.filter(MinetestRelease.protocol>=self.protocol_version).first()
+			if version is not None:
+				version = version.id
+			else:
+				version = 10000000
+
+			query = query.join(Package.releases) \
+				.filter(or_(PackageRelease.min_rel_id==None, PackageRelease.min_rel_id<=version)) \
+				.filter(or_(PackageRelease.max_rel_id==None, PackageRelease.max_rel_id>=version))
 
 		if self.limit:
 			query = query.limit(self.limit)

@@ -61,3 +61,9 @@ def topic_set_discard():
 	db.session.commit()
 
 	return jsonify(topic.getAsDictionary())
+
+
+@app.route("/api/minetest_versions/")
+def api_minetest_versions_page():
+	return jsonify([{ "name": rel.name, "protocol_version": rel.protocol }\
+			for rel in MinetestRelease.query.all() if rel.getActual() is not None])
