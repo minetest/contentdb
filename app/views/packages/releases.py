@@ -160,3 +160,38 @@ def edit_release_page(package, id):
 		return redirect(package.getDetailsURL())
 
 	return render_template("packages/release_edit.html", package=package, release=release, form=form)
+
+
+
+class BulkReleaseForm(FlaskForm):
+	set_min = BooleanField("Set Min")
+	min_rel  = QuerySelectField("Minimum Minetest Version", [InputRequired()],
+			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	set_max = BooleanField("Set Max")
+	max_rel  = QuerySelectField("Maximum Minetest Version", [InputRequired()],
+			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	submit   = SubmitField("Update")
+
+
+@app.route("/packages/<author>/<name>/releases/bulk_change/", methods=["GET", "POST"])
+@login_required
+@is_package_page
+def bulk_change_release_page(package):
+	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+		return redirect(package.getDetailsURL())
+
+	# Initial form class from post data and default data
+	form = BulkReleaseForm()
+
+	if request.method == "POST" and form.validate():
+		for release in package.releases.all():
+			if form["set_min"].data:
+				release.min_rel = form["min_rel"].data.getActual()
+			if form["set_max"].data:
+				release.max_rel = form["max_rel"].data.getActual()
+
+		db.session.commit()
+
+		return redirect(package.getDetailsURL())
+
+	return render_template("packages/release_bulk_change.html", package=package, form=form)

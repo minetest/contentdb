@@ -115,7 +115,7 @@
 
 {% macro render_checkbox_field(field, label=None) -%}
 	{% if not label %}{% set label=field.label.text %}{% endif %}
-	<div class="checkbox">
+	<div class="checkbox {{ kwargs.pop('class_', '') }}">
 		<label>
 			{{ field(type='checkbox', **kwargs) }} {{ label }}
 		</label>

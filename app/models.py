@@ -481,6 +481,10 @@ class Package(db.Model):
 		return url_for("create_edit_editrequest_page",
 				author=self.author.username, name=self.name)
 
+	def getBulkReleaseURL(self):
+		return url_for("bulk_change_release_page",
+			author=self.author.username, name=self.name)
+
 	def getDownloadURL(self):
 		return url_for("package_download_page",
 				author=self.author.username, name=self.name)
