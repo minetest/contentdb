@@ -289,6 +289,13 @@
 					{{ render_threadlist(threads, list_group=True) }}
 				</ul>
 			</div>
+
+			{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") and current_user != package.author and not current_user.rank.atLeast(current_user.rank.EDITOR) %}
+				<a class="float-right"
+					href="{{ url_for('new_thread_page', pid=package.id) }}">
+						Report a problem with this listing
+				</a>
+			{% endif %}
 		</aside>
 
 		{% if not package.approved and (package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW")) %}

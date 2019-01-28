@@ -209,4 +209,4 @@ def new_thread_page():
 		return redirect(url_for("thread_page", id=thread.id))
 
 
-	return render_template("threads/new.html", form=form, allow_private_change=allow_change)
+	return render_template("threads/new.html", form=form, allow_private_change=allow_change, package=package)

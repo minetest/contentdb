@@ -5,4 +5,4 @@ laws.
 
 We take copyright violation and other offenses very seriously.
 
-<a href="https://rubenwardy.com/contact/" class="button btn_green">Contact</a>
+<a href="https://rubenwardy.com/contact/" class="btn btn-success">Contact</a>
