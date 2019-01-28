@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Create a release | {{ package.title }}
+	Edit release | {{ package.title }}
 {% endblock %}
 
 {% block content %}
@@ -39,12 +39,27 @@
 				Approved: {{ release.approved }}
 			{% endif %}
 		{% endif %}
-		
+
 		<div class="row">
 			{{ render_field(form.min_rel, class_="col-sm-6") }}
 			{{ render_field(form.max_rel, class_="col-sm-6") }}
 		</div>
 
+		<p id="minmax_warning" style="color:#f00; display: none;">
+			Maximum must be greater than or equal to the minimum!
+		</p>
+
+		<p>
+			Note: Min and max versions will be used to hide the package on
+			platforms not within the range.
+			You cannot selected the oldest version for min or the newest version
+			for max as this does not make sense - you can't predict the future.
+		</p>
+
 		{{ render_submit_field(form.submit) }}
 	</form>
+{% endblock %}
+
+{% block scriptextra %}
+	<script src="/static/release_minmax.js?v=1"></script>
 {% endblock %}

@@ -30,15 +30,25 @@ from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
+def get_mt_releases(is_max):
+	query = MinetestRelease.query.order_by(db.asc(MinetestRelease.id))
+	if is_max:
+		query = query.limit(query.count() - 1)
+	else:
+		query = query.filter(MinetestRelease.name != "0.4.17")
+
+	return query
+
+
 class CreatePackageReleaseForm(FlaskForm):
 	title	   = StringField("Title", [InputRequired(), Length(1, 30)])
 	uploadOpt  = RadioField ("Method", choices=[("upload", "File Upload")], default="upload")
 	vcsLabel   = StringField("VCS Commit or Branch", default="master")
 	fileUpload = FileField("File Upload")
 	min_rel    = QuerySelectField("Minimum Minetest Version", [InputRequired()],
-			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	max_rel    = QuerySelectField("Maximum Minetest Version", [InputRequired()],
-			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit	   = SubmitField("Save")
 
 class EditPackageReleaseForm(FlaskForm):
@@ -47,9 +57,9 @@ class EditPackageReleaseForm(FlaskForm):
 	task_id  = StringField("Task ID")
 	approved = BooleanField("Is Approved")
 	min_rel  = QuerySelectField("Minimum Minetest Version", [InputRequired()],
-			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	max_rel  = QuerySelectField("Maximum Minetest Version", [InputRequired()],
-			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit   = SubmitField("Save")
 
 @app.route("/packages/<author>/<name>/releases/new/", methods=["GET", "POST"])
@@ -166,10 +176,10 @@ def edit_release_page(package, id):
 class BulkReleaseForm(FlaskForm):
 	set_min = BooleanField("Set Min")
 	min_rel  = QuerySelectField("Minimum Minetest Version", [InputRequired()],
-			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	set_max = BooleanField("Set Max")
 	max_rel  = QuerySelectField("Maximum Minetest Version", [InputRequired()],
-			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit   = SubmitField("Update")
 
 
