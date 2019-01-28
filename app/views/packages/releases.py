@@ -43,7 +43,7 @@ def get_mt_releases(is_max):
 class CreatePackageReleaseForm(FlaskForm):
 	title	   = StringField("Title", [InputRequired(), Length(1, 30)])
 	uploadOpt  = RadioField ("Method", choices=[("upload", "File Upload")], default="upload")
-	vcsLabel   = StringField("VCS Commit or Branch", default="master")
+	vcsLabel   = StringField("VCS Commit Hash, Branch, or Tag", default="master")
 	fileUpload = FileField("File Upload")
 	min_rel    = QuerySelectField("Minimum Minetest Version", [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)

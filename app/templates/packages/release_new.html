@@ -17,7 +17,7 @@
 			{{ render_field(form.vcsLabel, class_="mt-3") }}
 		{% endif %}
 
-		{{ render_field(form.fileUpload, fieldclass="form-control-file") }}
+		{{ render_field(form.fileUpload, fieldclass="form-control-file", class_="mt-3") }}
 
 		<div class="row">
 			{{ render_field(form.min_rel, class_="col-sm-6") }}
@@ -41,4 +41,17 @@
 
 {% block scriptextra %}
 	<script src="/static/release_minmax.js?v=1"></script>
+	<script>
+		function check_opt() {
+			if ($("input[name=uploadOpt]:checked").val() == "vcs") {
+				$("#fileUpload").parent().hide();
+				$("#vcsLabel").parent().show();
+			} else {
+				$("#fileUpload").parent().show();
+				$("#vcsLabel").parent().hide();
+			}
+		}
+		$("input[name=uploadOpt]").change(check_opt);
+		check_opt();
+	</script>
 {% endblock %}

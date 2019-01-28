@@ -240,6 +240,7 @@
 					<div class="float-right">
 						{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 							<a href="{{ package.getBulkReleaseURL() }}">bulk</a>
+							|
 							<a href="{{ package.getCreateReleaseURL() }}">+</a>
 						{% endif %}
 					</div>
