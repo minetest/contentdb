@@ -46,10 +46,10 @@
 			var toggle = $("#set_" + type);
 			function on_change() {
 				if (toggle.is(":checked")) {
-					$("#" + type + "_rel").removeAttr("disabled");
+					// $("#" + type + "_rel").removeAttr("disabled");
 					$("#" + type + "_rel").parent().css("opacity", "1");
 				} else {
-					$("#" + type + "_rel").attr("disabled", "disabled");
+					// $("#" + type + "_rel").attr("disabled", "disabled");
 					$("#" + type + "_rel").parent().css("opacity", "0.4");
 					$("#" + type + "_rel").val($("#" + type + "_rel option:first-child").attr("value"));
 					$("#" + type + "_rel").change();
