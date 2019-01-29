@@ -180,6 +180,7 @@ class BulkReleaseForm(FlaskForm):
 	set_max = BooleanField("Set Max")
 	max_rel  = QuerySelectField("Maximum Minetest Version", [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	only_change_none = BooleanField("Only change values previously set as none")
 	submit   = SubmitField("Update")
 
 
@@ -193,11 +194,15 @@ def bulk_change_release_page(package):
 	# Initial form class from post data and default data
 	form = BulkReleaseForm()
 
-	if request.method == "POST" and form.validate():
+	if request.method == "GET":
+		form.only_change_none.data = True
+	elif request.method == "POST" and form.validate():
+		only_change_none = form.only_change_none.data
+
 		for release in package.releases.all():
-			if form["set_min"].data:
+			if form["set_min"].data and (not only_change_none or release.min_rel is None):
 				release.min_rel = form["min_rel"].data.getActual()
-			if form["set_max"].data:
+			if form["set_max"].data and (not only_change_none or release.max_rel is None):
 				release.max_rel = form["max_rel"].data.getActual()
 
 		db.session.commit()

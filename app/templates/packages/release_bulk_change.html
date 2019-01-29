@@ -23,6 +23,7 @@
 			{{ render_checkbox_field(form.set_max, class_="col-sm-2") }}
 			{{ render_field(form.max_rel, class_="col-sm-10") }}
 		</div>
+		{{ render_checkbox_field(form.only_change_none) }}
 
 		<p id="minmax_warning" style="color:#f00; display: none;">
 			Maximum must be greater than or equal to the minimum!
