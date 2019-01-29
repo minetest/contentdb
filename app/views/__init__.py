@@ -22,6 +22,7 @@ from app.models import *
 import flask_menu as menu
 from werkzeug.contrib.cache import SimpleCache
 from urllib.parse import urlparse
+from sqlalchemy.sql.expression import func
 cache = SimpleCache()
 
 @app.template_filter()
@@ -53,7 +54,8 @@ def home_page():
 	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
 	pop_gam = query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(4).all()
 	pop_txp = query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score)).limit(4).all()
-	return render_template("index.html", count=count, \
+	downloads = db.session.query(func.sum(PackageRelease.downloads)).first()[0]
+	return render_template("index.html", count=count, downloads=downloads, \
 			new=new, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam)
 
 from . import users, packages, meta, threads, api
