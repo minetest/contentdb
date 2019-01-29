@@ -27,7 +27,7 @@ def api_packages_page():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 
-	pkgs = [package.getAsDictionaryShort(app.config["BASE_URL"]) \
+	pkgs = [package.getAsDictionaryShort(app.config["BASE_URL"], request.args.get("protocol_version")) \
 			for package in query.all() if package.getDownloadRelease() is not None]
 	return jsonify(pkgs)
 
