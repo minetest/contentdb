@@ -53,9 +53,10 @@ def create_screenshot_page(package, id=None):
 				"a PNG or JPG image file")
 		if uploadedPath is not None:
 			ss = PackageScreenshot()
-			ss.package = package
-			ss.title   = form["title"].data or "Untitled"
-			ss.url     = uploadedPath
+			ss.package  = package
+			ss.title    = form["title"].data or "Untitled"
+			ss.url      = uploadedPath
+			ss.approved = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
 			db.session.add(ss)
 
 			msg = "{}: Screenshot added {}" \
