@@ -160,6 +160,11 @@ def package_download_page(package):
 			flash("No download available.", "error")
 			return redirect(package.getDetailsURL())
 	else:
+		PackageRelease.query.filter_by(id=release.id).update({
+				"downloads": PackageRelease.downloads + 1
+			})
+		db.session.commit()
+
 		return redirect(release.url, code=302)
 
 

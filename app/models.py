@@ -496,6 +496,12 @@ class Package(db.Model):
 
 		return None
 
+	def getDownloadCount(self):
+		counter = 0
+		for release in self.releases:
+			counter += release.downloads
+		return counter
+
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
 			return False
@@ -639,6 +645,7 @@ class PackageRelease(db.Model):
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	task_id      = db.Column(db.String(37), nullable=True)
 	commit_hash  = db.Column(db.String(41), nullable=True, default=None)
+	downloads    = db.Column(db.Integer, nullable=False, default=0)
 
 	min_rel_id = db.Column(db.Integer, db.ForeignKey("minetest_release.id"), nullable=True, server_default=None)
 	min_rel    = db.relationship("MinetestRelease", foreign_keys=[min_rel_id])

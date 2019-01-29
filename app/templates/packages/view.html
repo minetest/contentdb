@@ -24,6 +24,7 @@
 
 			<div class="row" style="margin-top: 2rem;">
 				<div class="col">
+					{{ package.getDownloadCount() }} downloads
 				</div>
 				<div class="btn-group-horizontal col-md-auto">
 					{% if package.repo %}<a class="btn btn-secondary" href="{{ package.repo }}">View Source</a>{% endif %}
@@ -112,7 +113,7 @@
 
 		<aside class="float-right ml-4" style="width: 18rem;">
 			{% if package.getDownloadRelease() %}
-				<a class="btn btn-download btn-lg btn-block"
+				<a class="btn btn-download btn-lg btn-block" rel="nofollow"
 						href="{{ package.getDownloadURL() }}" class="btn_green">
 					Download
 				</a>
@@ -260,10 +261,10 @@
 
 								{% if not rel.approved %}<i>{% endif %}
 
-								<a href="{{ rel.getDownloadURL() }}">{{ rel.title }}</a>{% if rel.commit_hash %}
+								<a href="{{ rel.getDownloadURL() }}" rel="nofollow">{{ rel.title }}</a>{% if rel.commit_hash %}
 								[{{ rel.commit_hash | truncate(5, end='') }}]{% endif %}<br>
 								<small>created {{ rel.releaseDate | datetime }}.</small>
-								{% if rel.task_id %}
+								{% if (package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")) and rel.task_id %}
 									<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
 								{% elif not rel.approved %}
 									Waiting for approval.
