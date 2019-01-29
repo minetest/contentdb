@@ -15,18 +15,29 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import Flask, url_for
-from flask_sqlalchemy import SQLAlchemy
-from flask_migrate import Migrate
-from urllib.parse import urlparse
-from app import app, gravatar
-from sqlalchemy.orm import validates
-from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
 import enum, datetime
+
+from app import app, gravatar
+from urllib.parse import urlparse
+
+from flask import Flask, url_for
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
+from flask_migrate import Migrate
+from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+from sqlalchemy.orm import validates
+from sqlalchemy_searchable import SearchQueryMixin
+from sqlalchemy_utils.types import TSVectorType
+from sqlalchemy_searchable import make_searchable
+
 
 # Initialise database
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+make_searchable(db.metadata)
+
+
+class ArticleQuery(BaseQuery, SearchQueryMixin):
+    pass
 
 
 class UserRank(enum.Enum):
@@ -246,7 +257,7 @@ class PackageType(enum.Enum):
 class PackagePropertyKey(enum.Enum):
 	name          = "Name"
 	title         = "Title"
-	shortDesc     = "Short Description"
+	short_desc     = "Short Description"
 	desc          = "Description"
 	type          = "Type"
 	license       = "License"
@@ -343,18 +354,21 @@ class Dependency(db.Model):
 		return retval
 
 
-
 class Package(db.Model):
+	query_class  = ArticleQuery
+
 	id           = db.Column(db.Integer, primary_key=True)
 
 	# Basic details
 	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"))
 	name         = db.Column(db.String(100), nullable=False)
-	title        = db.Column(db.String(100), nullable=False)
-	shortDesc    = db.Column(db.String(200), nullable=False)
-	desc         = db.Column(db.Text, nullable=True)
+	title        = db.Column(db.Unicode(100), nullable=False)
+	short_desc   = db.Column(db.Unicode(200), nullable=False)
+	desc         = db.Column(db.UnicodeText, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+	search_vector = db.Column(TSVectorType("title", "short_desc", "desc"))
 
 	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	license      = db.relationship("License", foreign_keys=[license_id])
@@ -409,7 +423,7 @@ class Package(db.Model):
 			"name": self.name,
 			"title": self.title,
 			"author": self.author.display_name,
-			"short_description": self.shortDesc,
+			"short_description": self.short_desc,
 			"type": self.type.toName(),
 			"release": self.getDownloadRelease(protonum).id if self.getDownloadRelease(protonum) is not None else None,
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
@@ -422,7 +436,7 @@ class Package(db.Model):
 			"author": self.author.display_name,
 			"name": self.name,
 			"title": self.title,
-			"short_description": self.shortDesc,
+			"short_description": self.short_desc,
 			"desc": self.desc,
 			"type": self.type.toName(),
 			"created_at": self.created_at,

@@ -41,7 +41,7 @@ $(function() {
 		It's obvious that this adds something to Minetest,
 		there's no need to use phrases such as \"adds X to the game\".`
 
-	$("#shortDesc").on("change paste keyup", function() {
+	$("#short_desc").on("change paste keyup", function() {
 		var val = $(this).val().toLowerCase();
 		if (val.indexOf("minetest") >= 0 || val.indexOf("mod") >= 0 ||
 				val.indexOf("modpack") >= 0 || val.indexOf("mod pack") >= 0) {

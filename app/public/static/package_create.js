@@ -35,10 +35,10 @@ $(function() {
 				setField("#repo", result.repo || repoURL);
 				setField("#issueTracker", result.issueTracker);
 				setField("#desc", result.description);
-				setField("#shortDesc", result.short_description);
+				setField("#short_desc", result.short_description);
 				setField("#harddep_str", result.depends);
 				setField("#softdep_str", result.optional_depends);
-				setField("#shortDesc", result.short_description);
+				setField("#short_desc", result.short_description);
 				setField("#forums", result.forumId);
 				if (result.type && result.type.length > 2) {
 					$("#type").val(result.type);

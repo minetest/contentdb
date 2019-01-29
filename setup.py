@@ -55,7 +55,7 @@ def defineDummyData(licenses, tags, ruben):
 	mod.repo = "https://github.com/ezhh/other_worlds"
 	mod.issueTracker = "https://github.com/ezhh/other_worlds/issues"
 	mod.forums = 16015
-	mod.shortDesc = "The content library should not be used yet as it is still in alpha"
+	mod.short_desc = "The content library should not be used yet as it is still in alpha"
 	mod.desc = "This is the long desc"
 	db.session.add(mod)
 
@@ -77,7 +77,7 @@ def defineDummyData(licenses, tags, ruben):
 	mod1.repo = "https://github.com/rubenwardy/awards"
 	mod1.issueTracker = "https://github.com/rubenwardy/awards/issues"
 	mod1.forums = 4870
-	mod1.shortDesc = "Adds achievements and an API to register new ones."
+	mod1.short_desc = "Adds achievements and an API to register new ones."
 	mod1.desc = """
 Majority of awards are back ported from Calinou's old fork in Carbone, under same license.
 
@@ -112,7 +112,7 @@ awards.register_achievement("award_mesefind",{
 	mod2.repo = "https://github.com/minetest-mods/mesecons/"
 	mod2.issueTracker = "https://github.com/minetest-mods/mesecons/issues"
 	mod2.forums = 628
-	mod2.shortDesc = "Mesecons adds everything digital, from all kinds of sensors, switches, solar panels, detectors, pistons, lamps, sound blocks to advanced digital circuitry like logic gates and programmable blocks."
+	mod2.short_desc = "Mesecons adds everything digital, from all kinds of sensors, switches, solar panels, detectors, pistons, lamps, sound blocks to advanced digital circuitry like logic gates and programmable blocks."
 	mod2.desc = """
     ########################################################################
     ##  __    __   _____   _____   _____   _____   _____   _   _   _____  ##
@@ -210,7 +210,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.repo = "https://github.com/ezhh/handholds"
 	mod.issueTracker = "https://github.com/ezhh/handholds/issues"
 	mod.forums = 17069
-	mod.shortDesc = "Adds hand holds and climbing thingies"
+	mod.short_desc = "Adds hand holds and climbing thingies"
 	mod.desc = "This is the long desc"
 	db.session.add(mod)
 
@@ -233,7 +233,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.repo = "https://github.com/ezhh/other_worlds"
 	mod.issueTracker = "https://github.com/ezhh/other_worlds/issues"
 	mod.forums = 16015
-	mod.shortDesc = "Adds space with asteroids and comets"
+	mod.short_desc = "Adds space with asteroids and comets"
 	mod.desc = "This is the long desc"
 	db.session.add(mod)
 
@@ -248,7 +248,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.repo = "https://github.com/rubenwardy/food/"
 	mod.issueTracker = "https://github.com/rubenwardy/food/issues/"
 	mod.forums = 2960
-	mod.shortDesc = "Adds lots of food and an API to manage ingredients"
+	mod.short_desc = "Adds lots of food and an API to manage ingredients"
 	mod.desc = "This is the long desc"
 	food = mod
 	db.session.add(mod)
@@ -264,7 +264,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.repo = "https://github.com/rubenwardy/food_sweet/"
 	mod.issueTracker = "https://github.com/rubenwardy/food_sweet/issues/"
 	mod.forums = 9039
-	mod.shortDesc = "Adds sweet food"
+	mod.short_desc = "Adds sweet food"
 	mod.desc = "This is the long desc"
 	food_sweet = mod
 	db.session.add(mod)
@@ -282,7 +282,7 @@ No warranty is provided, express or implied, for any part of the project.
 	game1.repo = "https://github.com/rubenwardy/capturetheflag"
 	game1.issueTracker = "https://github.com/rubenwardy/capturetheflag/issues"
 	game1.forums = 12835
-	game1.shortDesc = "Two teams battle to snatch and return the enemy's flag, before the enemy takes their own!"
+	game1.short_desc = "Two teams battle to snatch and return the enemy's flag, before the enemy takes their own!"
 	game1.desc = """
 As seen on the Capture the Flag server (minetest.rubenwardy.com:30000)
 
@@ -307,7 +307,7 @@ Uses the CTF PvP Engine.
 	mod.type = PackageType.TXP
 	mod.author = ruben
 	mod.forums = 14132
-	mod.shortDesc = "This is an update of the original PixelBOX texture pack by the brillant artist Gambit"
+	mod.short_desc = "This is an update of the original PixelBOX texture pack by the brillant artist Gambit"
 	mod.desc = "This is the long desc"
 	db.session.add(mod)
 

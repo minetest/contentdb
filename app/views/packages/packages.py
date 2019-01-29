@@ -171,7 +171,7 @@ def package_download_page(package):
 class PackageForm(FlaskForm):
 	name          = StringField("Name (Technical)", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	title         = StringField("Title (Human-readable)", [InputRequired(), Length(3, 50)])
-	shortDesc     = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
+	short_desc     = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
 	desc          = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])
 	type          = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
 	license       = QuerySelectField("License", [InputRequired()], query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)

@@ -40,7 +40,7 @@ class QueryBuilder:
 			query = query.filter(Package.type.in_(self.types))
 
 		if self.search:
-			query = query.filter(Package.title.ilike('%' + self.search + '%'))
+			query = query.search(self.search)
 
 		if self.random:
 			query = query.order_by(func.random())
