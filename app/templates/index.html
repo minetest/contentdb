@@ -4,6 +4,21 @@
 Welcome
 {% endblock %}
 
+{% block scriptextra %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "url": "https://content.minetest.net/",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://content.minetest.net/packages?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+{% endblock %}
+
 {% block content %}
 <!-- <header class="jumbotron">
 	<div class="container">
