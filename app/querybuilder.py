@@ -19,12 +19,14 @@ class QueryBuilder:
 		if len(types) > 0:
 			title = ", ".join([type.value + "s" for type in types])
 
+		hide_flags = args.getlist("hide")
+
 		self.title  = title
 		self.types  = types
 		self.search = args.get("q")
 		self.random = "random" in args
 		self.lucky  = self.random or "lucky" in args
-		self.hide_nonfree = isNo(args.get("nonfree"))
+		self.hide_nonfree = "nonfree" in hide_flags
 		self.limit  = 1 if self.lucky else None
 		self.order_by  = args.get("sort") or "score"
 		self.order_dir = args.get("order") or "desc"
