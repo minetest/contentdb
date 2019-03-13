@@ -35,6 +35,17 @@ class QueryBuilder:
 		if self.search is not None and self.search.strip() == "":
 			self.search = None
 
+	def getMinetestVersion(self):
+		if not self.protocol_version:
+			return None
+
+		self.protocol_version = int(self.protocol_version)
+		version = MinetestRelease.query.filter(MinetestRelease.protocol>=self.protocol_version).first()
+		if version is not None:
+			return version.id
+		else:
+			return 10000000
+
 	def buildPackageQuery(self):
 		query = Package.query.filter_by(soft_deleted=False, approved=True)
 
@@ -69,14 +80,9 @@ class QueryBuilder:
 			query = query.filter(Package.media_license.has(License.is_foss == True))
 
 		if self.protocol_version:
-			self.protocol_version = int(self.protocol_version)
-			version = MinetestRelease.query.filter(MinetestRelease.protocol>=self.protocol_version).first()
-			if version is not None:
-				version = version.id
-			else:
-				version = 10000000
-
+			version = self.getMinetestVersion()
 			query = query.join(Package.releases) \
+				.filter(PackageRelease.approved==True) \
 				.filter(or_(PackageRelease.min_rel_id==None, PackageRelease.min_rel_id<=version)) \
 				.filter(or_(PackageRelease.max_rel_id==None, PackageRelease.max_rel_id>=version))
 

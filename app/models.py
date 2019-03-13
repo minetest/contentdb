@@ -37,7 +37,7 @@ make_searchable(db.metadata)
 
 
 class ArticleQuery(BaseQuery, SearchQueryMixin):
-    pass
+	pass
 
 
 class UserRank(enum.Enum):
@@ -417,21 +417,23 @@ class Package(db.Model):
 		for e in PackagePropertyKey:
 			setattr(self, e.name, getattr(package, e.name))
 
-	def getAsDictionaryShort(self, base_url, protonum=None):
+	def getAsDictionaryShort(self, base_url, version=None, protonum=None):
 		tnurl = self.getThumbnailURL(1)
+		release = self.getDownloadRelease(version=version, protonum=protonum)
 		return {
 			"name": self.name,
 			"title": self.title,
 			"author": self.author.display_name,
 			"short_description": self.short_desc,
 			"type": self.type.toName(),
-			"release": self.getDownloadRelease(protonum).id if self.getDownloadRelease(protonum) is not None else None,
+			"release": release and release.id,
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
 			"score": round(self.score * 10) / 10
 		}
 
-	def getAsDictionary(self, base_url, protonum=None):
+	def getAsDictionary(self, base_url, version=None, protonum=None):
 		tnurl = self.getThumbnailURL(1)
+		release = self.getDownloadRelease(version=version, protonum=protonum)
 		return {
 			"author": self.author.display_name,
 			"name": self.name,
@@ -454,7 +456,7 @@ class Package(db.Model):
 			"screenshots": [base_url + ss.url for ss in self.screenshots],
 
 			"url": base_url + self.getDownloadURL(),
-			"release": self.getDownloadRelease(protonum).id if self.getDownloadRelease(protonum) is not None else None,
+			"release": release and release.id,
 
 			"score": round(self.score * 10) / 10
 		}
@@ -503,9 +505,8 @@ class Package(db.Model):
 		return url_for("package_download_page",
 				author=self.author.username, name=self.name)
 
-	def getDownloadRelease(self, protonum=None):
-		version = None
-		if protonum is not None:
+	def getDownloadRelease(self, version=None, protonum=None):
+		if version is None and protonum is not None:
 			version = MinetestRelease.query.filter(MinetestRelease.protocol >= int(protonum)).first()
 			if version is not None:
 				version = version.id
@@ -514,7 +515,7 @@ class Package(db.Model):
 
 
 		for rel in self.releases:
-			if rel.approved and (protonum is None or
+			if rel.approved and (version is None or
 					((rel.min_rel is None or rel.min_rel_id <= version) and \
 					(rel.max_rel is None or rel.max_rel_id >= version))):
 				return rel

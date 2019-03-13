@@ -26,9 +26,10 @@ from app.querybuilder import QueryBuilder
 def api_packages_page():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
+	ver   = qb.getMinetestVersion()
 
-	pkgs = [package.getAsDictionaryShort(app.config["BASE_URL"], request.args.get("protocol_version")) \
-			for package in query.all() if package.getDownloadRelease() is not None]
+	pkgs = [package.getAsDictionaryShort(app.config["BASE_URL"], version=ver) \
+			for package in query.all()]
 	return jsonify(pkgs)
 
 @app.route("/api/packages/<author>/<name>/")
