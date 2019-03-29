@@ -74,9 +74,9 @@ def packages_page():
 
 def getReleases(package):
 	if package.checkPerm(current_user, Permission.MAKE_RELEASE):
-		return package.releases
+		return package.releases.limit(5)
 	else:
-		return [rel for rel in package.releases if rel.approved]
+		return package.releases.filter_by(approved=True).limit(5)
 
 
 @app.route("/packages/<author>/<name>/")
