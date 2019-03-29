@@ -22,7 +22,7 @@ from app import app
 from app.models import *
 from app.querybuilder import QueryBuilder
 
-@app.route("/todo/")
+@app.route("/todo/", methods=["GET", "POST"])
 @login_required
 def todo_page():
 	canApproveNew = Permission.APPROVE_NEW.check(current_user)
@@ -41,16 +41,32 @@ def todo_page():
 	if canApproveScn:
 		screenshots = PackageScreenshot.query.filter_by(approved=False).all()
 
+	if not canApproveNew and not canApproveRel and not canApproveScn:
+		abort(403)
 
-	topics_to_add = ForumTopic.query \
+	if request.method == "POST":
+		if request.form["action"] == "screenshots_approve_all":
+			if not canApproveScn:
+				abort(403)
+
+			PackageScreenshot.query.update({ "approved": True })
+			db.session.commit()
+			return redirect(url_for("todo_page"))
+		else:
+			abort(400)
+
+	topic_query = ForumTopic.query \
+			.filter_by(discarded=False)
+
+	total_topics = topic_query.count()
+	topics_to_add = topic_query \
 			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-			.filter_by(discarded=False) \
 			.count()
 
 	return render_template("todo/list.html", title="Reports and Work Queue",
 		packages=packages, releases=releases, screenshots=screenshots,
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
-		topics_to_add=topics_to_add)
+		topics_to_add=topics_to_add, total_topics=total_topics)
 
 
 @app.route("/todo/topics/")
@@ -62,7 +78,7 @@ def todo_topics_page():
 
 	tmp_q = ForumTopic.query
 	if not qb.show_discarded:
-		tmp_q = tmp_q.filter_by(discarded=qb.show_discarded)
+		tmp_q = tmp_q.filter_by(discarded=False)
 	total = tmp_q.count()
 	topic_count = query.count()
 

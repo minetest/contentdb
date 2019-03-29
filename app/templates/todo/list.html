@@ -5,53 +5,79 @@
 {% endblock %}
 
 {% block content %}
-	<h2>Awaiting Approval</h2>
+	<h2 class="mb-4">Approval Queue</h2>
 
-	{% if canApproveNew and packages %}
-		<h3>Packages</h3>
-		<ul>
-			{% for p in packages %}
-				<li><a href="{{ p.getDetailsURL() }}">
-					{{ p.title }} by {{ p.author.display_name }}
-				</a></li>
-			{% else %}
-				<li><i>No packages need reviewing.</i></ul>
-			{% endfor %}
-		</ul>
-	{% endif %}
+	<div class="row">
+		{% if canApproveNew and packages %}
+		<div class="col-sm-6">
+			<div class="card">
+				<h3 class="card-header">Packages</h3>
+				<div class="list-group list-group-flush">
+					{% for p in packages %}
+						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+							{{ p.title }} by {{ p.author.display_name }}
+						</a>
+					{% else %}
+						<li class="list-group-item"><i>No packages need reviewing.</i></li>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
+		{% if canApproveRel and releases %}
+		<div class="col-sm-6">
+			<div class="card">
+				<h3 class="card-header">Releases</h3>
+				<ul class="list-group list-group-flush">
+					{% for r in releases %}
+						<li class="list-group-item">
+							<a href="{{ r.getEditURL() }}">{{ r.title }}</a>
+							on
+							<a href="{{ r.package.getDetailsURL() }}">
+								{{ r.package.title }} by {{ r.package.author.display_name }}
+							</a>
+						</li>
+					{% else %}
+						<li class="list-group-item"><i>No releases need reviewing.</i></li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		{% endif %}
+	</div>
 
 	{% if canApproveScn and screenshots %}
-		<h3>Screenshots</h3>
-		<ul>
-			{% for s in screenshots %}
-				<li>
-					<a href="{{ s.getEditURL() }}">{{ s.title }}</a>
-					on
-					<a href="{{ s.package.getDetailsURL() }}">
-						{{ s.package.title }} by {{ s.package.author.display_name }}
-					</a>
-				</li>
-			{% else %}
-				<li><i>No screenshots need reviewing.</i></ul>
-			{% endfor %}
-		</ul>
-	{% endif %}
-
-	{% if canApproveRel and releases %}
-		<h3>Releases</h3>
-		<ul>
-			{% for r in releases %}
-				<li>
-					<a href="{{ r.getEditURL() }}">{{ r.title }}</a>
-					on
-					<a href="{{ r.package.getDetailsURL() }}">
-						{{ r.package.title }} by {{ r.package.author.display_name }}
-					</a>
-				</li>
-			{% else %}
-				<li><i>No releases need reviewing.</i></ul>
-			{% endfor %}
-		</ul>
+		<div class="card my-4">
+			<h3 class="card-header">Screenshots
+				<form class="float-right"  method="post" action="{{ url_for('todo_page') }}">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="hidden" name="action" value="screenshots_approve_all" />
+					<input class="btn btn-sm btn-primary" type="submit" value="Approve All" />
+				</form>
+			</h3>
+			<ul class="card-body d-flex p-0 flex-row flex-wrap justify-content-start align-content-start p-4">
+				{% for s in screenshots %}
+					<li class="packagetile flex-fill"><a href="{{ s.getEditURL() }}"
+						style="background-image: url({{ s.getThumbnailURL(3) or '/static/placeholder.png' }});">
+						<div class="packagegridscrub"></div>
+						<div class="packagegridinfo">
+							<h3>
+								{{ s.title }}
+								<br />
+								<small>{{ s.package.title }} by {{ s.package.author.display_name }}</small>
+							</h3>
+							<p></p>
+						</div>
+					</a></li>
+				{% else %}
+					<li><i>No screenshots need reviewing.</i></li>
+				{% endfor %}
+				{% for i in range(4) %}
+					<li class="packagetile flex-fill"></li>
+				{% endfor %}
+			</ul>
+		</div>
 	{% endif %}
 
 	{% if not (packages or screenshots or releases) %}
@@ -63,8 +89,16 @@
 	<h2>Unadded Topic List</h2>
 
 	<p>
-		There are
-		<a href="{{ url_for('todo_topics_page') }}">{{ topics_to_add }} packages</a>
-		to be added to cdb, based on cdb's forum parser.
+		{{ total_topics - topics_to_add }} / {{ total_topics }} packages have been been added to cdb,
+		based on cdb's forum parser. {{ topics_to_add }} remaining.
 	</p>
+
+	<div class="progress my-4">
+		{% set perc = 32 %}
+		<div class="progress-bar bg-success" role="progressbar"
+			style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+
+	<a class="btn btn-primary" href="{{ url_for('todo_topics_page') }}">View Unadded Topic List</a>
+
 {% endblock %}
