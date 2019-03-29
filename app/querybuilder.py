@@ -1,5 +1,5 @@
 from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease
-from .utils import isNo
+from .utils import isNo, isYes
 from sqlalchemy.sql.expression import func
 from flask import abort
 from sqlalchemy import or_
@@ -28,12 +28,21 @@ class QueryBuilder:
 		self.lucky  = self.random or "lucky" in args
 		self.hide_nonfree = "nonfree" in hide_flags
 		self.limit  = 1 if self.lucky else None
-		self.order_by  = args.get("sort") or "score"
+		self.order_by  = args.get("sort")
 		self.order_dir = args.get("order") or "desc"
 		self.protocol_version = args.get("protocol_version")
 
+		self.show_discarded = isYes(args.get("show_discarded"))
+		self.show_added = args.get("show_added")
+		if self.show_added is not None:
+			self.show_added = isYes(self.show_added)
+
 		if self.search is not None and self.search.strip() == "":
 			self.search = None
+
+	def setSortIfNone(self, name):
+		if self.order_by is None:
+			self.order_by = name
 
 	def getMinetestVersion(self):
 		if not self.protocol_version:
@@ -59,7 +68,7 @@ class QueryBuilder:
 			query = query.order_by(func.random())
 		else:
 			to_order = None
-			if self.order_by == "score":
+			if self.order_by is None or self.order_by == "score":
 				to_order = Package.score
 			elif self.order_by == "created_at":
 				to_order = Package.created_at
@@ -91,18 +100,31 @@ class QueryBuilder:
 
 		return query
 
-	def buildTopicQuery(self):
-		topics = ForumTopic.query \
-				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-				.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
+	def buildTopicQuery(self, show_added=False):
+		query = ForumTopic.query
+
+		if not self.show_discarded:
+			query = query.filter_by(discarded=False)
+
+		show_added = self.show_added == True or (self.show_added is None and show_added)
+		if not show_added:
+			query = query.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id))
+
+		if self.order_by is None or self.order_by == "name":
+			query = query.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
+		elif self.order_by == "views":
+			query = query.order_by(db.desc(ForumTopic.views))
+		elif self.order_by == "date":
+			query = query.order_by(db.asc(ForumTopic.created_at))
+			sort_by = "date"
 
 		if self.search:
-			topics = topics.filter(ForumTopic.title.ilike('%' + self.search + '%'))
+			query = query.filter(ForumTopic.title.ilike('%' + self.search + '%'))
 
 		if len(self.types) > 0:
-			topics = topics.filter(ForumTopic.type.in_(self.types))
+			query = query.filter(ForumTopic.type.in_(self.types))
 
 		if self.limit:
-			topics = topics.limit(self.limit)
+			query = query.limit(self.limit)
 
-		return topics
+		return query

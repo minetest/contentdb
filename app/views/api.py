@@ -40,10 +40,9 @@ def api_package_page(package):
 
 @app.route("/api/topics/")
 def api_topics_page():
-	query = ForumTopic.query \
-			.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
-	pkgs = [t.getAsDictionary() for t in query.all()]
-	return jsonify(pkgs)
+	qb     = QueryBuilder(request.args)
+	query  = qb.buildTopicQuery(show_added=True)
+	return jsonify([t.getAsDictionary() for t in query.all()])
 
 
 @app.route("/api/topic_discard/", methods=["POST"])

@@ -20,6 +20,7 @@ from flask_user import *
 import flask_menu as menu
 from app import app
 from app.models import *
+from app.querybuilder import QueryBuilder
 
 @app.route("/todo/")
 @login_required
@@ -55,30 +56,12 @@ def todo_page():
 @app.route("/todo/topics/")
 @login_required
 def todo_topics_page():
-	query = ForumTopic.query
+	qb    = QueryBuilder(request.args)
+	qb.setSortIfNone("date")
+	query = qb.buildTopicQuery()
 
-	show_discarded = request.args.get("show_discarded") == "True"
-	if not show_discarded:
-		query = query.filter_by(discarded=False)
-
-	total = query.count()
-
-	query = query.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-
-	sort_by = request.args.get("sort")
-	if sort_by == "name":
-		query = query.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
-	elif sort_by == "views":
-		query = query.order_by(db.desc(ForumTopic.views))
-	elif sort_by is None or sort_by == "date":
-		query = query.order_by(db.asc(ForumTopic.created_at))
-		sort_by = "date"
-
+	total = ForumTopic.query.count()
 	topic_count = query.count()
-
-	search = request.args.get("q")
-	if search is not None and search.strip() != "":
-		query = query.filter(ForumTopic.title.ilike('%' + search + '%'))
 
 	page  = int(request.args.get("page") or 1)
 	num   = int(request.args.get("n") or 100)
@@ -86,14 +69,14 @@ def todo_topics_page():
 		num = 100
 
 	query = query.paginate(page, num, True)
-	next_url = url_for("todo_topics_page", page=query.next_num, query=search, \
-	 	show_discarded=show_discarded, n=num, sort=sort_by) \
+	next_url = url_for("todo_topics_page", page=query.next_num, query=qb.search, \
+	 	show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_next else None
-	prev_url = url_for("todo_topics_page", page=query.prev_num, query=search, \
-	 	show_discarded=show_discarded, n=num, sort=sort_by) \
+	prev_url = url_for("todo_topics_page", page=query.prev_num, query=qb.search, \
+	 	show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_prev else None
 
 	return render_template("todo/topics.html", topics=query.items, total=total, \
-			topic_count=topic_count, query=search, show_discarded=show_discarded, \
+			topic_count=topic_count, query=qb.search, show_discarded=qb.show_discarded, \
 			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, \
-			n=num, sort_by=sort_by)
+			n=num, sort_by=qb.order_by)
