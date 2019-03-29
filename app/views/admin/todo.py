@@ -60,7 +60,10 @@ def todo_topics_page():
 	qb.setSortIfNone("date")
 	query = qb.buildTopicQuery()
 
-	total = ForumTopic.query.count()
+	tmp_q = ForumTopic.query
+	if not qb.show_discarded:
+		tmp_q = tmp_q.filter_by(discarded=qb.show_discarded)
+	total = tmp_q.count()
 	topic_count = query.count()
 
 	page  = int(request.args.get("page") or 1)
