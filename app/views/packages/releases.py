@@ -85,7 +85,6 @@ def create_release_page(package):
 			rel.task_id = uuid()
 			rel.min_rel = form["min_rel"].data.getActual()
 			rel.max_rel = form["max_rel"].data.getActual()
-			rel.approved = package.checkPerm(current_user, Permission.APPROVE_RELEASE)
 			db.session.add(rel)
 			db.session.commit()
 
@@ -105,7 +104,7 @@ def create_release_page(package):
 				rel.url = uploadedPath
 				rel.min_rel = form["min_rel"].data.getActual()
 				rel.max_rel = form["max_rel"].data.getActual()
-				rel.approved = package.checkPerm(current_user, Permission.APPROVE_RELEASE)
+				rel.approve(current_user)
 				db.session.add(rel)
 				db.session.commit()
 

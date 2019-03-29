@@ -348,6 +348,7 @@ def makeVCSReleaseFromGithub(id, branch, release, url):
 	release.url          = urlmaker.getCommitDownload(commits[0]["sha"])
 	release.task_id     = None
 	release.commit_hash = commits[0]["sha"]
+	release.approve(release.package.author)
 	print(release.url)
 	db.session.commit()
 
@@ -379,6 +380,7 @@ def makeVCSRelease(id, branch):
 			release.url         = "/uploads/" + filename
 			release.task_id     = None
 			release.commit_hash = repo.head.object.hexsha
+			release.approve(release.package.author)
 			print(release.url)
 			db.session.commit()
 

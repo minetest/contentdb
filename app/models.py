@@ -696,6 +696,15 @@ class PackageRelease(db.Model):
 	def __init__(self):
 		self.releaseDate = datetime.datetime.now()
 
+	def approve(self, user):
+		if not self.package.checkPerm(user, Permission.APPROVE_RELEASE):
+			return False
+
+		assert(self.task_id is None and self.url is not None and self.url != "")
+
+		self.approved = True
+		return True
+
 
 class PackageReview(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
