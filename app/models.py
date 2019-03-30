@@ -713,7 +713,8 @@ class PackageRelease(db.Model):
 		self.releaseDate = datetime.datetime.now()
 
 	def approve(self, user):
-		if not self.package.checkPerm(user, Permission.APPROVE_RELEASE):
+		if self.package.approved and \
+				not self.package.checkPerm(user, Permission.APPROVE_RELEASE):
 			return False
 
 		assert(self.task_id is None and self.url is not None and self.url != "")
