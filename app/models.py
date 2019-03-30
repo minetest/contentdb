@@ -417,6 +417,22 @@ class Package(db.Model):
 		for e in PackagePropertyKey:
 			setattr(self, e.name, getattr(package, e.name))
 
+	def getState(self):
+		if self.approved:
+			return "approved"
+		elif self.review_thread_id:
+			return "thread"
+		elif (self.type == PackageType.GAME or \
+					self.type == PackageType.TXP) and \
+				self.screenshots.count() == 0:
+			return "wip"
+		elif not self.getDownloadRelease():
+			return "wip"
+		elif "Other" in self.license.name or "Other" in self.media_license.name:
+			return "license"
+		else:
+			return "ready"
+
 	def getAsDictionaryShort(self, base_url, version=None, protonum=None):
 		tnurl = self.getThumbnailURL(1)
 		release = self.getDownloadRelease(version=version, protonum=protonum)

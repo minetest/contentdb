@@ -15,6 +15,16 @@
 				<div class="list-group list-group-flush">
 					{% for p in packages %}
 						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+							{% if p.getState() == "thread" %}
+								<span class="mr-2 badge badge-danger">Thread</span>
+							{% elif p.getState() == "ready" %}
+								<span class="mr-2 badge badge-success">Ready</span>
+							{% elif p.getState() == "wip" %}
+								<span class="mr-2 badge badge-warning">WIP</span>
+							{% elif p.getState() == "license" %}
+								<span class="mr-2 badge badge-info">WIP</span>
+							{% endif %}
+
 							{{ p.title }} by {{ p.author.display_name }}
 						</a>
 					{% else %}
