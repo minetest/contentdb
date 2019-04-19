@@ -126,7 +126,7 @@
 	{% endblock %}
 
 	<footer class="container footer-copyright my-5 page-footer font-small text-center">
-		ContentDB &copy; 2018 to <a href="https://rubenwardy.com/">rubenwardy</a> |
+		ContentDB &copy; <span class="footer-copyright-js"></span> to <a href="https://rubenwardy.com/">rubenwardy</a> |
 		<a href="https://github.com/minetest/contentdb">GitHub</a> |
 		<a href="{{ url_for('flatpage', path='help') }}">Help</a> |
 		<a href="{{ url_for('flatpage', path='help/reporting') }}">Report / DMCA</a>
@@ -141,7 +141,10 @@
 		$("textarea.markdown").each(function() {
 			new EasyMDE({ element: this, hideIcons: ["image"], forceSync: true });
 		})
-	</script>
+    
+    // Copyright Date
+    document.querySelector('.footer-copyright-js').innerHTML = new Date().getFullYear()
+    </script>
 	{% block scriptextra %}{% endblock %}
 </body>
 </html>
