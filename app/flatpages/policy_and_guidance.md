@@ -10,19 +10,19 @@ ContentDB is for the community, and as such listings should be useful to the
 community. To help with this, there are a few rules to improve the quality of
 the listings and to combat abuse.
 
-* No inappropriate content.
-* Content must be playable/useful, but not necessarily finished.
-* Don't use the name of another mod unless your mod is a fork or reimplementation.
-* Licenses must allow derivatives, redistribution, and must not discriminate.
-* Don't put promotions are advertisements in package listings, except for
-  donation and personal website links which are permitted in the long description.
+* No inappropriate content. <sup>2.1</sup>
+* Content must be playable/useful, but not necessarily finished. <sup>2.2</sup>
+* Don't use the name of another mod unless your mod is a fork or reimplementation. <sup>3</sup>
+* Licenses must allow derivatives, redistribution, and must not discriminate. <sup>4</sup>
+* Don't put promotions or advertisements in package listings, except for
+  donation and personal website links which are permitted in the
+  long description. <sup>5</sup>
+* The ContentDB admin reserves the right to remove packages for any reason,
+  including ones not covered by this document, and to ban users who abuse
+  this service. <sup>1</sup>
 
 
 ## 1. General
-
-It is not permitted to submit abusive, obscene, vulgar, slanderous, hateful,
-threatening, sexually-orientated or any material that may violate any laws be
-it of your country, the country where "Content DB” is hosted or International Law.
 
 The ContentDB admin reserves the right to remove packages for any reason,
 including ones not covered by this document, and to ban users who abuse this service.
@@ -30,16 +30,25 @@ including ones not covered by this document, and to ban users who abuse this ser
 Also see the [help page on tags](/help/package_tags/).
 
 
-## 2. Accepted Content and State of Completion
+## 2. Accepted Content
+
+### 2.1. Acceptable Content
+
+Sexually-orientated content is not permitted.
+
+Mature content, including that relating to drugs, excessive gore, violence, or
+horror, is not currently permitted - but will be in the future.
 
 The submission of malware is strictly prohibited. This includes software which
 does not do as it advertises, for example if it posts telemetry without stating
 clearly that it does in the package meta.
 
+### 2.2. State of Completion
+
 ContentDB should only currently contain playable content - content which is
 sufficiently complete to be useful to end users. It's fine to add stuff which
 is still a work in progress (WIP) as long as it adds sufficient value -
-Mineclone 2 is a good example of a WIP package which may break between releases
+MineClone 2 is a good example of a WIP package which may break between releases
 but still has value. Note that this doesn't mean that you should add a thing
 you started working on yesterday, it's worth adding all the basic stuff to
 make your package useful.
