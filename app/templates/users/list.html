@@ -11,8 +11,10 @@
 			<a href="{{ url_for('user_profile_page', username=user.username) }}">
 				{{ user.display_name }}
 			</a> -
-			{{ user.rank.getTitle() }} -
-			{{ user.packages.count() }} packages.
+			{{ user.rank.getTitle() }}
+			{% if current_user.is_authenticated %}
+				- {{ user.packages.count() }} packages.
+			{% endif %}
 	{% endfor %}
 </ul>
 {% endblock %}

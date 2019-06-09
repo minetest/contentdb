@@ -35,8 +35,8 @@ class UserProfileForm(FlaskForm):
 	rank = SelectField("Rank", [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce, default=UserRank.NEW_MEMBER)
 	submit = SubmitField("Save")
 
+
 @app.route("/users/", methods=["GET"])
-@login_required
 def user_list_page():
 	users = User.query.order_by(db.desc(User.rank), db.asc(User.display_name)).all()
 	return render_template("users/list.html", users=users)
