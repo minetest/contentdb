@@ -7,7 +7,7 @@
 {% block content %}
 
 {% if not current_user.is_authenticated and user.rank == user.rank.NOT_JOINED and user.forums_username %}
-<div class="alert alert-info alert alert-info">
+<div class="alert alert-info">
 	<a class="float-right btn btn-default btn-sm"
 		href="{{ url_for('user_claim_page', username=user.forums_username) }}">Claim</a>
 
@@ -40,7 +40,7 @@
 							</td>
 						</tr>
 						<tr>
-							<td>Accounts:</td>
+							<td>Links:</td>
 							<td>
 								{% if user.forums_username %}
 									<a href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
@@ -50,7 +50,7 @@
 									No forum account
 								{% endif %}
 
-								{% if (user.forums_username and user.github_username) or user == current_user %}
+								{% if user.github_username or user == current_user %}
 									|
 								{% endif %}
 
@@ -60,8 +60,16 @@
 									<a href="{{ url_for('github_signin_page') }}">Link Github</a>
 								{% endif %}
 
+								{% if user.website_url %}
+									| <a href="{{ user.website_url }}" rel="nofollow">Website</a>
+								{% endif %}
+
 								{% if user == current_user %}
-									&#x1f30e;
+									<br>
+									<small class="text-muted">
+										<span style="padding-right: 5px;">&#x1f30e;</span>
+										Visible to everyone
+									</small>
 								{% endif %}
 							</td>
 						</tr>
@@ -136,6 +144,8 @@
 
 					{% if user.checkPerm(current_user, "CHANGE_DNAME") %}
 						{{ render_field(form.display_name, tabindex=230) }}
+						{{ render_field(form.website_url, tabindex=232) }}
+						{{ render_field(form.donate_url, tabindex=233) }}
 					{% endif %}
 
 					{% if user.checkPerm(current_user, "CHANGE_EMAIL") %}
@@ -157,6 +167,13 @@
 
 {% from "macros/packagegridtile.html" import render_pkggrid %}
 {{ render_pkggrid(packages, show_author=False) }}
+
+{% if user.donate_url %}
+	<div class="alert alert-secondary">
+		Like {{ user.display_name }}'s work?
+		<a href="{{ user.donate_url }}" rel="nofollow">Donate now!</a>
+	</div>
+{% endif %}
 
 {% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.EDITOR)) %}
 	<div class="card mt-3">

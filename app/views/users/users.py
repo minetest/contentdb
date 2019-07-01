@@ -32,6 +32,8 @@ from app.tasks.phpbbparser import getProfile
 class UserProfileForm(FlaskForm):
 	display_name = StringField("Display name", [Optional(), Length(2, 20)])
 	email = StringField("Email", [Optional(), Email()])
+	website_url = StringField("Website URL", [Optional(), URL()])
+	donate_url = StringField("Donation URL", [Optional(), URL()])
 	rank = SelectField("Rank", [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce, default=UserRank.NEW_MEMBER)
 	submit = SubmitField("Save")
 
@@ -60,6 +62,8 @@ def user_profile_page(username):
 			# Copy form fields to user_profile fields
 			if user.checkPerm(current_user, Permission.CHANGE_DNAME):
 				user.display_name = form["display_name"].data
+				user.website_url  = form["website_url"].data
+				user.donate_url   = form["donate_url"].data
 
 			if user.checkPerm(current_user, Permission.CHANGE_RANK):
 				newRank = form["rank"].data
@@ -74,7 +78,7 @@ def user_profile_page(username):
 					token = randomString(32)
 
 					ver = UserEmailVerification()
-					ver.user = user
+					ver.user  = user
 					ver.token = token
 					ver.email = newEmail
 					db.session.add(ver)

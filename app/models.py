@@ -129,6 +129,10 @@ class User(db.Model, UserMixin):
 	active        = db.Column("is_active", db.Boolean, nullable=False, server_default="0")
 	display_name  = db.Column(db.String(100), nullable=False, server_default="")
 
+	# Links
+	website_url   = db.Column(db.String(255), nullable=True, default=None)
+	donate_url    = db.Column(db.String(255), nullable=True, default=None)
+
 	# Content
 	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id")
 

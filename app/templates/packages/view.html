@@ -217,6 +217,13 @@
 				</table>
 			</div>
 
+			{% if package.author.donate_url %}
+				<div class="alert alert-secondary">
+					Like {{ package.author.display_name }}'s work?
+					<a href="{{ package.author.donate_url }}" rel="nofollow">Donate now!</a>
+				</div>
+			{% endif %}
+
 			{% if package.type == package.type.MOD %}
 				<div class="card my-4">
 					<div class="card-header">Dependencies</div>

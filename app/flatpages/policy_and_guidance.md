@@ -125,14 +125,14 @@ Public domain is not a valid license in many countries, please use CC0 or MIT in
 
 ## 5. Promotions and Advertisements (inc. asking for donations)
 
-Any information other than the long description - including screenshots - must
-not contain any promotions or advertisements. This includes asking for donations,
-promoting online shops, or linking to personal websites and social media.
+You may note place any promotions or advertisements in any meta data including
+screensthos. This includes asking for donations, promoting online shops,
+or linking to personal websites and social media. Please instead use the
+fields provided on your user profile page to place links to websites and
+donation pages.
 
 ContentDB is for the community. We may remove any promotions if we feel that
 they're inappropriate.
-
-Paid promotions are not allowed at all, anywhere.
 
 
 ## 6. Reporting Violations
