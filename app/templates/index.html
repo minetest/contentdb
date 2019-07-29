@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Welcome
+{{ _("Welcome") }}
 {% endblock %}
 
 {% block scriptextra %}
@@ -38,35 +38,35 @@ Welcome
 
 
 	<a href="{{ url_for('packages_page', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
-		See more
+		{{ _("See more") }}
 	</a>
-	<h2 class="my-3">Recently Added</h2>
+	<h2 class="my-3">{{ _("Recently Added") }}</h2>
 	{{ render_pkggrid(new) }}
 
 
 	<a href="{{ url_for('packages_page', type='mod', sort='score', order='desc') }}" class="btn btn-secondary float-right">
-		See more
+		{{ _("See more") }}
 	</a>
-	<h2 class="my-3">Top Mods</h2>
+	<h2 class="my-3">{{ _("Top Mods") }}</h2>
 	{{ render_pkggrid(pop_mod) }}
 
 
 	<a href="{{ url_for('packages_page', type='game', sort='score', order='desc') }}" class="btn btn-secondary float-right">
-		See more
+		{{ _("See more") }}
 	</a>
-	<h2 class="my-3">Top Games</h2>
+	<h2 class="my-3">{{ _("Top Games") }}</h2>
 	{{ render_pkggrid(pop_gam) }}
 
 
 	<a href="{{ url_for('packages_page', type='txp', sort='score', order='desc') }}" class="btn btn-secondary float-right">
-		See more
+		{{ _("See more") }}
 	</a>
-	<h2 class="my-3">Top Texture Packs</h2>
+	<h2 class="my-3">{{ _("Top Texture Packs") }}</h2>
 	{{ render_pkggrid(pop_txp) }}
 
 	<div class="text-center">
 		<small>
-			CDB has {{ count }} packages, with a total of {{ downloads }} downloads.
+			{{ _("CDB has %(count)d packages, with a total of %(downloads)d downloads.", count=count, downloads=downloads) }}
 		</small>
 	</div>
 <!-- </main> -->

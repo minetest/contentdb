@@ -24,6 +24,7 @@ from flaskext.markdown import Markdown
 from flask_github import GitHub
 from flask_wtf.csrf import CsrfProtect
 from flask_flatpages import FlatPages
+from flask_babel import Babel
 import os
 
 app = Flask(__name__, static_folder="public/static")
@@ -37,6 +38,7 @@ github = GitHub(app)
 csrf = CsrfProtect(app)
 mail = Mail(app)
 pages = FlatPages(app)
+babel = Babel(app)
 gravatar = Gravatar(app,
 		size=58,
 		rating='g',
@@ -49,6 +51,12 @@ gravatar = Gravatar(app,
 if not app.debug:
 	from .maillogger import register_mail_error_handler
 	register_mail_error_handler(app, mail)
+
+
+@babel.localeselector
+def get_locale():
+    return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+
 
 from . import models, tasks
 from .views import *

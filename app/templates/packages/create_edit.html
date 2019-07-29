@@ -20,19 +20,19 @@
 {% endblock %}
 
 {% block content %}
-	<h1>Create Package</h1>
+	<h1>{{ _("Create Package") }}</h1>
 
 	<div class="alert alert-info">
-		<a class="float-right btn btn-sm btn-default" href="{{ url_for('flatpage', path='policy_and_guidance') }}">View</a>
+		<a class="float-right btn btn-sm btn-default" href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("View") }}</a>
 
-		Have you read the Package Inclusion Policy and Guidance yet?
+		{{ _("Have you read the Package Inclusion Policy and Guidance yet?") }}
 	</div>
 
 	<noscript>
 		<div class="alert alert-warning">
-			Javascript is needed to improve the user interface, and is needed for features
-			such as finding metadata from git, and autocompletion.<br />
-			Whilst disabled Javascript may work, it is not officially supported.
+			{{ _("Javascript is needed to improve the user interface, and is needed for features
+			such as finding metadata from git, and autocompletion.") }}<br />
+			{{ _("Whilst disabled Javascript may work, it is not officially supported.") }}
 		</div>
 	</noscript>
 
@@ -42,7 +42,7 @@
 		{{ form.hidden_tag() }}
 
 		<fieldset>
-			<legend>Package</legend>
+			<legend>{{ _("Package") }}</legend>
 
 			<div class="row">
 			{{ render_field(form.type, class_="pkg_meta col-sm-2") }}
@@ -63,7 +63,7 @@
 		</fieldset>
 
 		<fieldset class="pkg_meta">
-			<legend class="not_txp">Dependencies</legend>
+			<legend class="not_txp">{{ _("Dependencies") }}</legend>
 
 			{{ render_mpackage_field(form.provides_str, class_="not_txp", placeholder="Comma separated list") }}
 			{{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
@@ -71,30 +71,29 @@
 		</fieldset>
 
 		<fieldset>
-			<legend class="pkg_meta">Repository and Links</legend>
+			<legend class="pkg_meta">{{ _("Repository and Links") }}</legend>
 
 			<div class="pkg_wiz_1">
-				<p>Enter the repo URL for the package.
-				If the repo uses git then the metadata will be automatically imported.</p>
+				<p>{{ _("Enter the repo URL for the package.
+				If the repo uses git then the metadata will be automatically imported.") }}</p>
 
-				<p>Leave blank if you don't have a repo. Click skip if the import fails.</p>
+				<p>{{ _("Leave blank if you don't have a repo. Click skip if the import fails.") }}</p>
 			</div>
 
 			{{ render_field(form.repo, class_="pkg_repo") }}
 
-
 			<div class="pkg_wiz_1">
-				<a id="pkg_wiz_1_next" class="btn btn-primary">Next (Autoimport)</a>
-				<a id="pkg_wiz_1_skip" class="btn btn-default">Skip Autoimport</a>
+				<a id="pkg_wiz_1_next" class="btn btn-primary">{{ _("Next (Autoimport)") }}</a>
+				<a id="pkg_wiz_1_skip" class="btn btn-default">{{ _("Skip Autoimport") }}</a>
 			</div>
 
 			<div class="pkg_wiz_2">
-				Importing... (This may take a while)
+					{{ _("Importing... (This may take a while)") }}
 			</div>
 
 			{{ render_field(form.website, class_="pkg_meta") }}
 			{{ render_field(form.issueTracker, class_="pkg_meta") }}
-			{{ render_field(form.forums, class_="pkg_meta", placeholder="Tip: paste in a forum topic URL") }}
+			{{ render_field(form.forums, class_="pkg_meta", placeholder=_("Tip: paste in a forum topic URL")) }}
 		</fieldset>
 
 		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
