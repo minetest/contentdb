@@ -6,13 +6,11 @@
 
 {% block content %}
 
-{% if package and current_user != package.author and not current_user.rank.atLeast(current_user.rank.EDITOR) %}
-	{% if package.issueTracker %}
-		<div class="alert alert-warning">
-		Found a bug? Post on the <a href="{{ package.issue_tracker }}">issue tracker</a> instead.<br />
+{% if package and current_user != package.author and not current_user.rank.atLeast(current_user.rank.EDITOR) and package.issueTracker %}
+	<div class="alert alert-warning">
+		Found a bug? Post on the <a href="{{ package.issueTracker }}">issue tracker</a> instead.<br />
 		If the package shouldn't be on CDB - for example, if it doesn't work at all - then please let us know here.
-		</div>
-	{% endif %}
+	</div>
 {% endif %}
 
 {% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
