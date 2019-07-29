@@ -17,7 +17,7 @@
 			{{ render_field(form.vcsLabel, class_="mt-3") }}
 		{% endif %}
 
-		{{ render_field(form.fileUpload, fieldclass="form-control-file", class_="mt-3") }}
+		{{ render_field(form.fileUpload, fieldclass="form-control-file", class_="mt-3", accept=".zip") }}
 
 		<div class="row">
 			{{ render_field(form.min_rel, class_="col-sm-6") }}

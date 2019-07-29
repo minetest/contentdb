@@ -10,7 +10,7 @@
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.title) }}
-		{{ render_field(form.fileUpload, fieldclass="form-control-file") }}
+		{{ render_field(form.fileUpload, fieldclass="form-control-file", accept="image/png,image/jpeg") }}
 		{{ render_submit_field(form.submit) }}
 	</form>
 {% endblock %}
