@@ -47,7 +47,7 @@
 			<div class="row">
 			{{ render_field(form.type, class_="pkg_meta col-sm-2") }}
 			{{ render_field(form.title, class_="pkg_meta col-sm-7") }}
-			{{ render_field(form.name, class_="pkg_meta col-sm-3") }}
+			{{ render_field(form.name, class_="pkg_meta col-sm-3", readonly=package.approved and not package.checkPerm(current_user, "CHANGE_NAME")) }}
 			</div>
 			{{ render_field(form.short_desc, class_="pkg_meta") }}
 			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}

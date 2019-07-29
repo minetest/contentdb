@@ -243,6 +243,12 @@ def create_edit_package_page(author=None, name=None):
 			package = Package()
 			package.author = author
 			wasNew = True
+
+		elif package.approved and package.name != form.name.data and \
+				not package.checkPerm(current_user, Permission.CHANGE_NAME):
+			flash("Unable to change package name", "danger")
+			return redirect(url_for("create_edit_package_page", author=author, name=name))
+
 		else:
 			triggerNotif(package.author, current_user,
 					"{} edited".format(package.title), package.getDetailsURL())

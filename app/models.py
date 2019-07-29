@@ -76,6 +76,7 @@ class Permission(enum.Enum):
 	APPROVE_CHANGES    = "APPROVE_CHANGES"
 	DELETE_PACKAGE     = "DELETE_PACKAGE"
 	CHANGE_AUTHOR      = "CHANGE_AUTHOR"
+	CHANGE_NAME        = "CHANGE_NAME"
 	MAKE_RELEASE       = "MAKE_RELEASE"
 	ADD_SCREENSHOTS    = "ADD_SCREENSHOTS"
 	APPROVE_SCREENSHOT = "APPROVE_SCREENSHOT"
@@ -571,6 +572,10 @@ class Package(db.Model):
 				return user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 			else:
 				return user.rank.atLeast(UserRank.EDITOR)
+
+		# Anyone can change the package name when not approved, but only editors when approved
+		elif perm == Permission.CHANGE_NAME:
+			return not self.approved or user.rank.atLeast(UserRank.EDITOR)
 
 		# Editors can change authors and approve new packages
 		elif perm == Permission.APPROVE_NEW or perm == Permission.CHANGE_AUTHOR:
