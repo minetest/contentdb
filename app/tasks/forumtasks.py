@@ -99,11 +99,19 @@ def parseTitle(title):
 def getLinksFromModSearch():
 	links = {}
 
-	contents = urllib.request.urlopen("https://krock-works.uk.to/minetest/modList.php").read().decode("utf-8")
-	for x in json.loads(contents):
-		link = x.get("link")
-		if link is not None:
-			links[int(x["topicId"])] = link
+	try:
+		contents = urllib.request.urlopen("https://krock-works.uk.to/minetest/modList.php").read().decode("utf-8")
+		for x in json.loads(contents):
+			try:
+				link = x.get("link")
+				if link is not None:
+					links[int(x["topicId"])] = link
+			except ValueError:
+				pass
+
+	except urllib.error.URLError:
+		print("Unable to open krocks mod search!")
+		return links
 
 	return links
 
