@@ -49,7 +49,7 @@ def create_screenshot_page(package, id=None):
 	# Initial form class from post data and default data
 	form = CreateScreenshotForm()
 	if request.method == "POST" and form.validate():
-		uploadedPath = doFileUpload(form.fileUpload.data, ["png", "jpg", "jpeg"],
+		uploadedPath = doFileUpload(form.fileUpload.data, "image",
 				"a PNG or JPG image file")
 		if uploadedPath is not None:
 			ss = PackageScreenshot()

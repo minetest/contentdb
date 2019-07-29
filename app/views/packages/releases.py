@@ -96,7 +96,7 @@ def create_release_page(package):
 
 			return redirect(url_for("check_task", id=rel.task_id, r=rel.getEditURL()))
 		else:
-			uploadedPath = doFileUpload(form.fileUpload.data, ["zip"], "a zip file")
+			uploadedPath = doFileUpload(form.fileUpload.data, "zip", "a zip file")
 			if uploadedPath is not None:
 				rel = PackageRelease()
 				rel.package = package

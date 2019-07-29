@@ -20,13 +20,17 @@ from flask_user import *
 from flask_login import login_user, logout_user
 from app.models import *
 from app import app
-import random, string, os
+import random, string, os, imghdr
 
 def getExtension(filename):
 	return filename.rsplit(".", 1)[1].lower() if "." in filename else None
 
 def isFilenameAllowed(filename, exts):
 	return getExtension(filename) in exts
+
+ALLOWED_IMAGES = set(["jpeg", "png"])
+def isAllowedImage(data):
+	return imghdr.what(None, data) in ALLOWED_IMAGES
 
 def shouldReturnJson():
 	return "application/json" in request.accept_mimetypes and \
@@ -36,15 +40,31 @@ def randomString(n):
 	return ''.join(random.choice(string.ascii_lowercase + \
 			string.ascii_uppercase + string.digits) for _ in range(n))
 
-def doFileUpload(file, allowedExtensions, fileTypeName):
+def doFileUpload(file, fileType, fileTypeDesc):
 	if not file or file is None or file.filename == "":
 		flash("No selected file", "error")
 		return None
 
+	allowedExtensions = []
+	isImage = False
+	if fileType == "image":
+		allowedExtensions = ["jpg", "jpeg", "png"]
+		isImage = True
+	elif filetype == "zip":
+		allowedExtensions = ["zip"]
+	else:
+		raise Exception("Invalid fileType")
+
 	ext = getExtension(file.filename)
 	if ext is None or not ext in allowedExtensions:
-		flash("Please upload load " + fileTypeName, "error")
+		flash("Please upload load " + fileTypeDesc, "danger")
 		return None
+
+	if isImage and not isAllowedImage(file.stream.read()):
+		flash("Uploaded image isn't actually an image", "danger")
+		return None
+
+	file.stream.seek(0)
 
 	filename = randomString(10) + "." + ext
 	file.save(os.path.join("app/public/uploads", filename))
