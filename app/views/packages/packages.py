@@ -255,6 +255,9 @@ def create_edit_package_page(author=None, name=None):
 
 		form.populate_obj(package) # copy to row
 
+		if package.type== PackageType.TXP:
+			package.license = package.media_license
+
 		mpackage_cache = {}
 		package.provides.clear()
 		mpackages = MetaPackage.SpecToList(form.provides_str.data, mpackage_cache)
