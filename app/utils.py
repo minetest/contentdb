@@ -50,7 +50,7 @@ def doFileUpload(file, fileType, fileTypeDesc):
 	if fileType == "image":
 		allowedExtensions = ["jpg", "jpeg", "png"]
 		isImage = True
-	elif filetype == "zip":
+	elif fileType == "zip":
 		allowedExtensions = ["zip"]
 	else:
 		raise Exception("Invalid fileType")
