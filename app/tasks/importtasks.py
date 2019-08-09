@@ -29,6 +29,10 @@ from app.utils import randomString
 
 class GithubURLMaker:
 	def __init__(self, url):
+		self.baseUrl = None
+		self.user = None
+		self.repo = None
+
 		# Rewrite path
 		import re
 		m = re.search("^\/([^\/]+)\/([^\/]+)\/?$", url.path)
