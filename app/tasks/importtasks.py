@@ -343,8 +343,11 @@ def makeVCSReleaseFromGithub(id, branch, release, url):
 		raise TaskError("Invalid github repo URL")
 
 	commitsURL = urlmaker.getCommitsURL(branch)
-	contents = urllib.request.urlopen(commitsURL).read().decode("utf-8")
-	commits = json.loads(contents)
+	try:
+		contents = urllib.request.urlopen(commitsURL).read().decode("utf-8")
+		commits = json.loads(contents)
+	except urllib.error.HTTPError:
+		raise TaskError("Unable to get commits for Github repository. Either the repository or reference doesn't exist.")
 
 	if len(commits) == 0 or not "sha" in commits[0]:
 		raise TaskError("No commits found")
@@ -353,7 +356,6 @@ def makeVCSReleaseFromGithub(id, branch, release, url):
 	release.task_id     = None
 	release.commit_hash = commits[0]["sha"]
 	release.approve(release.package.author)
-	print(release.url)
 	db.session.commit()
 
 	return release.url
