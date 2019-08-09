@@ -55,6 +55,9 @@ class GithubURLMaker:
 	def getScreenshotURL(self):
 		return self.baseUrl + "/screenshot.png"
 
+	def getModConfURL(self):
+		return self.baseUrl + "/mod.conf"
+
 	def getCommitsURL(self, branch):
 		return "https://api.github.com/repos/{}/{}/commits?sha={}" \
 				.format(self.user, self.repo, urllib.parse.quote_plus(branch))
@@ -346,7 +349,7 @@ def makeVCSReleaseFromGithub(id, branch, release, url):
 	try:
 		contents = urllib.request.urlopen(commitsURL).read().decode("utf-8")
 		commits = json.loads(contents)
-	except urllib.error.HTTPError:
+	except HTTPError:
 		raise TaskError("Unable to get commits for Github repository. Either the repository or reference doesn't exist.")
 
 	if len(commits) == 0 or not "sha" in commits[0]:
