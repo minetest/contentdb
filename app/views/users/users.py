@@ -162,8 +162,8 @@ def send_email_page(username):
 
 class SetPasswordForm(FlaskForm):
 	email = StringField("Email", [Optional(), Email()])
-	password = PasswordField("New password", [InputRequired(), Length(2, 20)])
-	password2 = PasswordField("Verify password", [InputRequired(), Length(2, 20)])
+	password = PasswordField("New password", [InputRequired(), Length(2, 100)])
+	password2 = PasswordField("Verify password", [InputRequired(), Length(2, 100)])
 	submit = SubmitField("Save")
 
 @app.route("/user/set-password/", methods=["GET", "POST"])
