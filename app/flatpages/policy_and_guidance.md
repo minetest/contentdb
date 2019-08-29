@@ -37,7 +37,7 @@ Also see the [help page on tags](/help/package_tags/).
 Sexually-orientated content is not permitted.
 
 Mature content, including that relating to drugs, excessive gore, violence, or
-horror, is not currently permitted - but will be in the future.
+excessive horror, is not currently permitted - but will be in the future.
 
 The submission of malware is strictly prohibited. This includes software which
 does not do as it advertises, for example if it posts telemetry without stating
