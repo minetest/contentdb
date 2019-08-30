@@ -54,7 +54,7 @@ class CreatePackageReleaseForm(FlaskForm):
 class EditPackageReleaseForm(FlaskForm):
 	title    = StringField("Title", [InputRequired(), Length(1, 30)])
 	url      = StringField("URL", [URL])
-	task_id  = StringField("Task ID")
+	task_id  = StringField("Task ID", filters = [lambda x: x or None])
 	approved = BooleanField("Is Approved")
 	min_rel  = QuerySelectField("Minimum Minetest Version", [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)

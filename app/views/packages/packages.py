@@ -180,9 +180,9 @@ class PackageForm(FlaskForm):
 	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	harddep_str   = StringField("Hard Dependencies", [Optional()])
 	softdep_str   = StringField("Soft Dependencies", [Optional()])
-	repo          = StringField("VCS Repository URL", [Optional(), URL()])
-	website       = StringField("Website URL", [Optional(), URL()])
-	issueTracker  = StringField("Issue Tracker URL", [Optional(), URL()])
+	repo          = StringField("VCS Repository URL", [Optional(), URL()], filters = [lambda x: x or None])
+	website       = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
+	issueTracker  = StringField("Issue Tracker URL", [Optional(), URL()], filters = [lambda x: x or None])
 	forums	      = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
 	submit	      = SubmitField("Save")
 

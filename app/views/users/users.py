@@ -31,9 +31,9 @@ from app.tasks.phpbbparser import getProfile
 # Define the User profile form
 class UserProfileForm(FlaskForm):
 	display_name = StringField("Display name", [Optional(), Length(2, 20)])
-	email = StringField("Email", [Optional(), Email()])
-	website_url = StringField("Website URL", [Optional(), URL()])
-	donate_url = StringField("Donation URL", [Optional(), URL()])
+	email = StringField("Email", [Optional(), Email()], filters = [lambda x: x or None])
+	website_url = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
+	donate_url = StringField("Donation URL", [Optional(), URL()], filters = [lambda x: x or None])
 	rank = SelectField("Rank", [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce, default=UserRank.NEW_MEMBER)
 	submit = SubmitField("Save")
 
