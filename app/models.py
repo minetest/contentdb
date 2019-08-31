@@ -213,6 +213,9 @@ class Notification(db.Model):
 	url       = db.Column(db.String(200), nullable=True)
 
 	def __init__(self, us, cau, titl, ur):
+		if len(titl) > 100:
+			title = title[:99] + "…"
+
 		self.user   = us
 		self.causer = cau
 		self.title  = titl
