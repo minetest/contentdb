@@ -164,7 +164,7 @@ def edit_release_page(package, id):
 		if package.checkPerm(current_user, Permission.CHANGE_RELEASE_URL):
 			release.url = form["url"].data
 			release.task_id = form["task_id"].data
-			if release.task_id.strip() == "":
+			if release.task_id is not None:
 				release.task_id = None
 
 		if canApprove:
