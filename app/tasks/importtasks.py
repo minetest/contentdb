@@ -299,14 +299,16 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 		gitUrl = generateGitURL(urlstr)
 		print("Cloning from " + gitUrl)
 		repo = git.Repo.clone_from(gitUrl, gitDir, \
-				progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
+				progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15, b=ref)
 
-		if ref is not None:
-			repo.create_head("myhead", ref).checkout()
 		return gitDir, repo
+
 	except GitCommandError as e:
 		# This is needed to stop the backtrace being weird
 		err = e.stderr
+
+	except gitdb.exc.BadName as e:
+		err = "Unable to find the reference " + (ref or "?") + "\n" + e.stderr
 
 	raise TaskError(err.replace("stderr: ", "") \
 			.replace("Cloning into '" + gitDir + "'...", "") \
