@@ -398,7 +398,7 @@ class Package(db.Model):
 	forums       = db.Column(db.Integer,     nullable=True)
 
 	provides = db.relationship("MetaPackage", secondary=provides, lazy="subquery",
-			backref=db.backref("packages", lazy="dynamic"))
+			backref=db.backref("packages", lazy="dynamic", order_by=db.desc("score")))
 
 	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
@@ -440,6 +440,13 @@ class Package(db.Model):
 			return "license"
 		else:
 			return "ready"
+
+	def getAsDictionaryKey(self):
+		return {
+			"name": self.name,
+			"author": self.author.display_name,
+			"type": self.type.toName(),
+		}
 
 	def getAsDictionaryShort(self, base_url, version=None, protonum=None):
 		tnurl = self.getThumbnailURL(1)

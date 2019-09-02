@@ -33,5 +33,6 @@ services:
       - config.env
     volumes:
       - "./data/uploads:/home/cdb/app/public/uploads"
+      - "./app:/home/cdb/app"
     depends_on:
       - redis

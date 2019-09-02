@@ -32,10 +32,40 @@ def api_packages_page():
 			for package in query.all()]
 	return jsonify(pkgs)
 
+
 @app.route("/api/packages/<author>/<name>/")
 @is_package_page
 def api_package_page(package):
 	return jsonify(package.getAsDictionary(app.config["BASE_URL"]))
+
+
+@app.route("/api/packages/<author>/<name>/dependencies/")
+@is_package_page
+def api_package_deps_page(package):
+	ret = []
+
+	for dep in package.dependencies:
+		name = None
+		fulfilled_by = None
+
+		if dep.package:
+			name = dep.package.name
+			fulfilled_by = [ dep.package.getAsDictionaryKey() ]
+
+		elif dep.meta_package:
+			name = dep.meta_package.name
+			fulfilled_by = [ pkg.getAsDictionaryKey() for pkg in dep.meta_package.packages]
+
+		else:
+			raise "Malformed dependency"
+
+		ret.append({
+			"name": name,
+			"is_optional": dep.optional,
+			"packages": fulfilled_by
+		})
+
+	return jsonify(ret)
 
 
 @app.route("/api/topics/")
