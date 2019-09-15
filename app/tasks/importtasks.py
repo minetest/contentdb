@@ -298,8 +298,13 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 	try:
 		gitUrl = generateGitURL(urlstr)
 		print("Cloning from " + gitUrl)
-		repo = git.Repo.clone_from(gitUrl, gitDir, \
-				progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15, b=ref)
+
+		if ref is None:
+			repo = git.Repo.clone_from(gitUrl, gitDir, \
+					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
+		else:
+			repo = git.Repo.clone_from(gitUrl, gitDir, \
+					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15, b=ref)
 
 		return gitDir, repo
 
