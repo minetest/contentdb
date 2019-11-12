@@ -140,7 +140,7 @@ def new_thread_page():
 		abort(403)
 
 	def_is_private   = request.args.get("private") or False
-	if package is None or not package.approved:
+	if package is None:
 		def_is_private = True
 	allow_change     = package and package.approved
 	is_review_thread = package and not package.approved
