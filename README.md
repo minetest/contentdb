@@ -13,7 +13,7 @@ Note: you should first read one of the guides on the [Github repo wiki](https://
 FLASK_CONFIG=../config.cfg celery -A app.tasks.celery worker
 
 # if sqlite
-python setup.py -t
+python utils/setup.py -t
 rm db.sqlite && python setup.py -t && FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db stamp head
 
 # Create migration

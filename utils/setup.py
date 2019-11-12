@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import os, sys, datetime
+import os, sys, datetime, inspect
 
 if not "FLASK_CONFIG" in os.environ:
 	os.environ["FLASK_CONFIG"] = "../config.cfg"
@@ -23,6 +23,11 @@ if not "FLASK_CONFIG" in os.environ:
 delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"
 create_db = not (len(sys.argv) >= 2 and sys.argv[1].strip() == "-o")
 test_data = len(sys.argv) >= 2 and sys.argv[1].strip() == "-t" or not create_db
+
+# Allow finding the `app` module
+currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
+parentdir = os.path.dirname(currentdir)
+sys.path.insert(0,parentdir) 
 
 from app.models import *
 from app.utils import make_flask_user_password
