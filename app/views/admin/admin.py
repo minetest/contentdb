@@ -33,7 +33,11 @@ import datetime
 def admin_page():
 	if request.method == "POST":
 		action = request.form["action"]
-		if action == "importmodlist":
+		if action == "delstuckreleases":
+			PackageRelease.query.filter(PackageRelease.task_id != None).delete()
+			db.session.commit()
+			return redirect(url_for("admin_page"))
+		elif action == "importmodlist":
 			task = importTopicList.delay()
 			return redirect(url_for("check_task", id=task.id, r=url_for("todo_topics_page")))
 		elif action == "checkusers":

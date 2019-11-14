@@ -42,6 +42,9 @@
 				<ul class="list-group list-group-flush">
 					{% for r in releases %}
 						<li class="list-group-item">
+							{% if r.task_id %}
+								<span class="mr-2 badge badge-warning">Importing</span>
+							{% endif %}
 							<a href="{{ r.getEditURL() }}">{{ r.title }}</a>
 							on
 							<a href="{{ r.package.getDetailsURL() }}">
