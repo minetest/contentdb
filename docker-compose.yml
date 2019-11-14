@@ -30,9 +30,11 @@ services:
 
   worker:
     build: .
-    command: FLASK_CONFIG=../config.cfg celery -A app.tasks.celery worker
+    command: celery -A app.tasks.celery worker
     env_file:
       - config.env
+    environment:
+      - FLASK_CONFIG=../config.cfg
     volumes:
       - "./data/uploads:/home/cdb/app/public/uploads"
       - "./app:/home/cdb/app"
