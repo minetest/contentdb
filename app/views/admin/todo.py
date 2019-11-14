@@ -31,7 +31,7 @@ def todo_page():
 
 	packages = None
 	if canApproveNew:
-		packages = Package.query.filter_by(approved=False, soft_deleted=False).all()
+		packages = Package.query.filter_by(approved=False, soft_deleted=False).order_by(db.desc(Package.created_at)).all()
 
 	releases = None
 	if canApproveRel:
