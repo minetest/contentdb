@@ -25,6 +25,10 @@ from urllib.parse import urlparse
 from sqlalchemy.sql.expression import func
 cache = SimpleCache()
 
+@app.context_processor
+def inject_debug():
+    return dict(debug=app.debug)
+
 @app.template_filter()
 def throw(err):
 	raise Exception(err)

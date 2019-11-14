@@ -135,6 +135,12 @@
 		<a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a> |
 		<a href="{{ url_for('flatpage', path='help/reporting') }}">{{ _("Report / DMCA") }}</a> |
 		<a href="{{ url_for('user_list_page') }}">{{ _("User List") }}</a>
+
+		{% if debug %}
+			<p style="color: red">
+				DEBUG MODE ENABLED
+			</p>
+		{% endif %}
 	</footer>
 
 	<script src="/static/jquery.min.js"></script>
