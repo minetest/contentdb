@@ -22,7 +22,7 @@ services:
       - 5123:5123
     volumes:
       - "./data/uploads:/home/cdb/app/public/uploads"
-      - "./app:/home/cdb/app"
+      - "./app:/home/cdb/appsrc"
       - "./migrations:/home/cdb/migrations"
     depends_on:
       - db
@@ -37,6 +37,5 @@ services:
       - FLASK_CONFIG=../config.cfg
     volumes:
       - "./data/uploads:/home/cdb/app/public/uploads"
-      - "./app:/home/cdb/app"
     depends_on:
       - redis
