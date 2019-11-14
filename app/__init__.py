@@ -48,7 +48,7 @@ gravatar = Gravatar(app,
 		use_ssl=True,
 		base_url=None)
 
-if not app.debug:
+if not app.debug and app.config["MAIL_UTILS_ERROR_SEND_TO"]:
 	from .maillogger import register_mail_error_handler
 	register_mail_error_handler(app, mail)
 

@@ -15,7 +15,9 @@ services:
 
   app:
     build: .
-    command: ./rundebug.sh
+    command: ./utils/run.sh
+    env_file:
+      - config.env
     ports:
       - 5123:5123
     volumes:
@@ -28,7 +30,7 @@ services:
 
   worker:
     build: .
-    command: celery -A app.tasks.celery worker
+    command: FLASK_CONFIG=../config.cfg celery -A app.tasks.celery worker
     env_file:
       - config.env
     volumes:
