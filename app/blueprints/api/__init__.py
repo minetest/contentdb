@@ -17,31 +17,32 @@
 
 from flask import *
 from flask_user import *
-from app import app
 from app.models import *
 from app.utils import is_package_page
 from app.querybuilder import QueryBuilder
 
-@app.route("/api/packages/")
-def api_packages_page():
+bp = Blueprint("api", __name__)
+
+@bp.route("/api/packages/")
+def packages():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 	ver   = qb.getMinetestVersion()
 
-	pkgs = [package.getAsDictionaryShort(app.config["BASE_URL"], version=ver) \
+	pkgs = [package.getAsDictionaryShort(current_app.config["BASE_URL"], version=ver) \
 			for package in query.all()]
 	return jsonify(pkgs)
 
 
-@app.route("/api/packages/<author>/<name>/")
+@bp.route("/api/packages/<author>/<name>/")
 @is_package_page
-def api_package_page(package):
-	return jsonify(package.getAsDictionary(app.config["BASE_URL"]))
+def package(package):
+	return jsonify(package.getAsDictionary(current_app.config["BASE_URL"]))
 
 
-@app.route("/api/packages/<author>/<name>/dependencies/")
+@bp.route("/api/packages/<author>/<name>/dependencies/")
 @is_package_page
-def api_package_deps_page(package):
+def package_dependencies(package):
 	ret = []
 
 	for dep in package.dependencies:
@@ -68,14 +69,14 @@ def api_package_deps_page(package):
 	return jsonify(ret)
 
 
-@app.route("/api/topics/")
-def api_topics_page():
+@bp.route("/api/topics/")
+def topics():
 	qb     = QueryBuilder(request.args)
 	query  = qb.buildTopicQuery(show_added=True)
 	return jsonify([t.getAsDictionary() for t in query.all()])
 
 
-@app.route("/api/topic_discard/", methods=["POST"])
+@bp.route("/api/topic_discard/", methods=["POST"])
 @login_required
 def topic_set_discard():
 	tid = request.args.get("tid")
@@ -93,7 +94,7 @@ def topic_set_discard():
 	return jsonify(topic.getAsDictionary())
 
 
-@app.route("/api/minetest_versions/")
-def api_minetest_versions_page():
+@bp.route("/api/minetest_versions/")
+def versions():
 	return jsonify([{ "name": rel.name, "protocol_version": rel.protocol }\
 			for rel in MinetestRelease.query.all() if rel.getActual() is not None])

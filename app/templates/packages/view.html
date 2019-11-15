@@ -103,7 +103,7 @@
 
 			{% if not review_thread and (package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW")) %}
 				<div class="alert alert-info">
-					<a class="float-right btn btn-sm btn-info" href="{{ url_for('new_thread_page', pid=package.id, title='Package approval comments') }}">Open Thread</a>
+					<a class="float-right btn btn-sm btn-info" href="{{ url_for('threads.new', pid=package.id, title='Package approval comments') }}">Open Thread</a>
 
 					Privately ask a question or give feedback
 					<div style="clear:both;"></div>
@@ -172,14 +172,14 @@
 						<td>Provides</td>
 						<td>{% for meta in package.provides %}
 							<a class="badge badge-primary"
-							 href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a>
+							 href="{{ url_for('metapackages.view', name=meta.name) }}">{{ meta.name }}</a>
 						{% endfor %}</td>
 					</tr>
 					{% endif %}
 					<tr>
 						<td>Author</td>
 						<td class="{{ package.author.rank }}">
-							<a href="{{ url_for('user_profile_page', username=package.author.username) }}">
+							<a href="{{ url_for('users.profile', username=package.author.username) }}">
 								{{ package.author.display_name }}
 							</a>
 						</td>
@@ -241,7 +241,7 @@
 									{{ dep.package.title }} by {{ dep.package.author.display_name }}
 							{% elif dep.meta_package %}
 								<a class="badge badge-{{ color }}"
-										href="{{ url_for('meta_package_page', name=dep.meta_package.name) }}">
+										href="{{ url_for('metapackages.view', name=dep.meta_package.name) }}">
 									{{ dep.meta_package.name }}
 							{% else %}
 								{{ "Excepted package or meta_package in dep!" | throw }}
@@ -301,7 +301,7 @@
 									created {{ rel.releaseDate | date }}.
 								</small>
 								{% if (package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")) and rel.task_id %}
-									<a href="{{ url_for('check_task', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
+									<a href="{{ url_for('tasks.check', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
 								{% elif not rel.approved %}
 									Waiting for approval.
 								{% endif %}
@@ -320,7 +320,7 @@
 				<div class="card-header">
 				{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
 					<a class="float-right"
-						href="{{ url_for('new_thread_page', pid=package.id) }}">+</a>
+						href="{{ url_for('threads.new', pid=package.id) }}">+</a>
 				{% endif %}
 					Threads
 				</div>
@@ -332,7 +332,7 @@
 
 			{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") and current_user != package.author and not current_user.rank.atLeast(current_user.rank.EDITOR) %}
 				<a class="float-right"
-					href="{{ url_for('new_thread_page', pid=package.id) }}">
+					href="{{ url_for('threads.new', pid=package.id) }}">
 						Report a problem with this listing
 				</a>
 			{% endif %}
@@ -381,7 +381,7 @@
 						<li>
 							<a href="{{ r.getURL() }}">{{ r.title }}</a>
 							by
-							<a href="{{ url_for('user_profile_page', username=r.author.username) }}">{{ r.author.display_name }}</a>
+							<a href="{{ url_for('users.profile', username=r.author.username) }}">{{ r.author.display_name }}</a>
 						</li>
 					{% else %}
 						<li>No edit requests have been made.</li>

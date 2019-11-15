@@ -501,27 +501,27 @@ class Package(db.Model):
 		return screenshot.url if screenshot is not None else None
 
 	def getDetailsURL(self):
-		return url_for("package_page",
+		return url_for("packages.view",
 				author=self.author.username, name=self.name)
 
 	def getEditURL(self):
-		return url_for("create_edit_package_page",
+		return url_for("packages.create_edit",
 				author=self.author.username, name=self.name)
 
 	def getApproveURL(self):
-		return url_for("approve_package_page",
+		return url_for("packages.approve",
 				author=self.author.username, name=self.name)
 
 	def getRemoveURL(self):
-		return url_for("remove_package_page",
+		return url_for("packages.remove",
 				author=self.author.username, name=self.name)
 
 	def getNewScreenshotURL(self):
-		return url_for("create_screenshot_page",
+		return url_for("packages.create_screenshot",
 				author=self.author.username, name=self.name)
 
 	def getCreateReleaseURL(self):
-		return url_for("create_release_page",
+		return url_for("packages.create_release",
 				author=self.author.username, name=self.name)
 
 	def getCreateEditRequestURL(self):
@@ -529,11 +529,11 @@ class Package(db.Model):
 				author=self.author.username, name=self.name)
 
 	def getBulkReleaseURL(self):
-		return url_for("bulk_change_release_page",
+		return url_for("packages.bulk_change_release",
 			author=self.author.username, name=self.name)
 
 	def getDownloadURL(self):
-		return url_for("package_download_page",
+		return url_for("packages.download",
 				author=self.author.username, name=self.name)
 
 	def getDownloadRelease(self, version=None, protonum=None):
@@ -716,13 +716,13 @@ class PackageRelease(db.Model):
 
 
 	def getEditURL(self):
-		return url_for("edit_release_page",
+		return url_for("packages.edit_release",
 				author=self.package.author.username,
 				name=self.package.name,
 				id=self.id)
 
 	def getDownloadURL(self):
-		return url_for("download_release_page",
+		return url_for("packages.download_release",
 				author=self.package.author.username,
 				name=self.package.name,
 				id=self.id)
@@ -758,7 +758,7 @@ class PackageScreenshot(db.Model):
 
 
 	def getEditURL(self):
-		return url_for("edit_screenshot_page",
+		return url_for("packages.edit_screenshot",
 				author=self.package.author.username,
 				name=self.package.name,
 				id=self.id)
@@ -880,11 +880,11 @@ class Thread(db.Model):
 
 
 	def getSubscribeURL(self):
-		return url_for("thread_subscribe_page",
+		return url_for("threads.subscribe",
 				id=self.id)
 
 	def getUnsubscribeURL(self):
-		return url_for("thread_unsubscribe_page",
+		return url_for("threads.unsubscribe",
 				id=self.id)
 
 	def checkPerm(self, user, perm):

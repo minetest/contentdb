@@ -60,7 +60,7 @@ Sign in
 			{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 			<h2 class="card-header">{%trans%}Sign in with Github{%endtrans%}</h2>
 			<div class="card-body">
-				<a class="btn btn-primary" href="{{ url_for('github_signin_page') }}">GitHub</a>
+				<a class="btn btn-primary" href="{{ url_for('users.github_signin') }}">GitHub</a>
 			</div>
 		</div>
 	</div>
@@ -72,7 +72,7 @@ Sign in
 			<div class="card-body">
 				<p>Create an account using your forum account or email.</p>
 
-				<a href="{{ url_for('user_claim_page') }}" class="btn btn-primary">{%trans%}Claim your account{%endtrans%}</a>
+				<a href="{{ url_for('users.claim') }}" class="btn btn-primary">{%trans%}Claim your account{%endtrans%}</a>
 			</div>
 		</div>
 	</aside>

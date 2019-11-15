@@ -10,10 +10,10 @@ RUN pip install -r ./requirements.txt
 RUN pip install gunicorn
 
 COPY utils utils
-COPY app app
-COPY migrations migrations
 COPY config.cfg ./config.cfg
+COPY migrations migrations
+COPY app app
 
+RUN mkdir /home/cdb/app/public/uploads/
 RUN chown cdb:cdb /home/cdb -R
-
 USER cdb

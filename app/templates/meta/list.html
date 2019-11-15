@@ -7,7 +7,7 @@ Meta Packages
 {% block content %}
 	<ul>
 		{% for meta in mpackages %}
-			<li><a href="{{ url_for('meta_package_page', name=meta.name) }}">{{ meta.name }}</a> ({{ meta.packages.filter_by(soft_deleted=False, approved=True).all() | count }} packages)</li>
+			<li><a href="{{ url_for('metapackages.view', name=meta.name) }}">{{ meta.name }}</a> ({{ meta.packages.filter_by(soft_deleted=False, approved=True).all() | count }} packages)</li>
 		{% else %}
 			<li><i>No meta packages found.</i></li>
 		{% endfor %}

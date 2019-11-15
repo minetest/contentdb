@@ -16,7 +16,8 @@
 
 
 from flask import *
-from app import app
+
+bp = Blueprint("thumbnails", __name__)
 
 import os
 from PIL import Image
@@ -57,7 +58,7 @@ def resize_and_crop(img_path, modified_path, size):
 	img.save(modified_path)
 
 
-@app.route("/thumbnails/<int:level>/<img>")
+@bp.route("/thumbnails/<int:level>/<img>")
 def make_thumbnail(img, level):
 	if level > len(ALLOWED_RESOLUTIONS) or level <= 0:
 		abort(403)

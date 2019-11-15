@@ -18,7 +18,7 @@
 from flask import *
 from flask_user import *
 import flask_menu as menu
-from app import app
+from . import bp
 from app.models import *
 from celery import uuid
 from app.tasks.importtasks import importRepoScreenshot, importAllDependencies, makeVCSRelease
@@ -28,7 +28,7 @@ from wtforms import *
 from app.utils import loginUser, rank_required, triggerNotif
 import datetime
 
-@app.route("/admin/", methods=["GET", "POST"])
+@bp.route("/admin/", methods=["GET", "POST"])
 @rank_required(UserRank.ADMIN)
 def admin_page():
 	if request.method == "POST":
@@ -36,13 +36,13 @@ def admin_page():
 		if action == "delstuckreleases":
 			PackageRelease.query.filter(PackageRelease.task_id != None).delete()
 			db.session.commit()
-			return redirect(url_for("admin_page"))
+			return redirect(url_for("admin.admin_page"))
 		elif action == "importmodlist":
 			task = importTopicList.delay()
-			return redirect(url_for("check_task", id=task.id, r=url_for("todo_topics_page")))
+			return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
 		elif action == "checkusers":
 			task = checkAllForumAccounts.delay()
-			return redirect(url_for("check_task", id=task.id, r=url_for("admin_page")))
+			return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 		elif action == "importscreenshots":
 			packages = Package.query \
 				.filter_by(soft_deleted=False) \
@@ -52,7 +52,7 @@ def admin_page():
 			for package in packages:
 				importRepoScreenshot.delay(package.id)
 
-			return redirect(url_for("admin_page"))
+			return redirect(url_for("admin.admin_page"))
 		elif action == "restore":
 			package = Package.query.get(request.form["package"])
 			if package is None:
@@ -60,10 +60,10 @@ def admin_page():
 			else:
 				package.soft_deleted = False
 				db.session.commit()
-				return redirect(url_for("admin_page"))
+				return redirect(url_for("admin.admin_page"))
 		elif action == "importdepends":
 			task = importAllDependencies.delay()
-			return redirect(url_for("check_task", id=task.id, r=url_for("admin_page")))
+			return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 		elif action == "modprovides":
 			packages = Package.query.filter_by(type=PackageType.MOD).all()
 			mpackage_cache = {}
@@ -72,13 +72,13 @@ def admin_page():
 					p.provides.append(MetaPackage.GetOrCreate(p.name, mpackage_cache))
 
 			db.session.commit()
-			return redirect(url_for("admin_page"))
+			return redirect(url_for("admin.admin_page"))
 		elif action == "recalcscores":
 			for p in Package.query.all():
 				p.recalcScore()
 
 			db.session.commit()
-			return redirect(url_for("admin_page"))
+			return redirect(url_for("admin.admin_page"))
 		elif action == "vcsrelease":
 			for package in Package.query.filter(Package.repo.isnot(None)).all():
 				if package.releases.count() != 0:
@@ -110,19 +110,19 @@ class SwitchUserForm(FlaskForm):
 	submit = SubmitField("Switch")
 
 
-@app.route("/admin/switchuser/", methods=["GET", "POST"])
+@bp.route("/admin/switchuser/", methods=["GET", "POST"])
 @rank_required(UserRank.ADMIN)
-def switch_user_page():
+def switch_user():
 	form = SwitchUserForm(formdata=request.form)
 	if request.method == "POST" and form.validate():
 		user = User.query.filter_by(username=form["username"].data).first()
 		if user is None:
 			flash("Unable to find user", "error")
 		elif loginUser(user):
-			return redirect(url_for("user_profile_page", username=current_user.username))
+			return redirect(url_for("users.profile", username=current_user.username))
 		else:
 			flash("Unable to login as user", "error")
 
 
 	# Process GET or invalid POST
-	return render_template("admin/switch_user_page.html", form=form)
+	return render_template("admin/switch_user.html", form=form)

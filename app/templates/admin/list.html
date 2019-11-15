@@ -6,11 +6,11 @@
 
 {% block content %}
 	<ul>
-		<li><a href="{{ url_for('user_list_page') }}">User list</a></li>
-		<li><a href="{{ url_for('tag_list_page') }}">Tag Editor</a></li>
-		<li><a href="{{ url_for('license_list_page') }}">License Editor</a></li>
-		<li><a href="{{ url_for('version_list_page') }}">Version Editor</a></li>
-		<li><a href="{{ url_for('switch_user_page') }}">Sign in as another user</a></li>
+		<li><a href="{{ url_for('users.list_all') }}">User list</a></li>
+		<li><a href="{{ url_for('admin.tag_list') }}">Tag Editor</a></li>
+		<li><a href="{{ url_for('admin.license_list') }}">License Editor</a></li>
+		<li><a href="{{ url_for('admin.version_list') }}">Version Editor</a></li>
+		<li><a href="{{ url_for('admin.switch_user') }}">Sign in as another user</a></li>
 	</ul>
 
 	<div class="card my-4">

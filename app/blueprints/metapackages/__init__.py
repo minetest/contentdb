@@ -15,4 +15,22 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from . import packages, screenshots, releases
+from flask import *
+
+bp = Blueprint("metapackages", __name__)
+
+from flask_user import *
+from app.models import *
+
+@bp.route("/metapackages/")
+def list_all():
+	mpackages = MetaPackage.query.order_by(db.asc(MetaPackage.name)).all()
+	return render_template("meta/list.html", mpackages=mpackages)
+
+@bp.route("/metapackages/<name>/")
+def view(name):
+	mpackage = MetaPackage.query.filter_by(name=name).first()
+	if mpackage is None:
+		abort(404)
+
+	return render_template("meta/view.html", mpackage=mpackage)

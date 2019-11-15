@@ -15,4 +15,20 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from . import admin, licenseseditor, tagseditor, versioneditor, todo
+from flask import Blueprint
+from flask_user import current_user, login_required
+from app.models import db
+
+bp = Blueprint("notifications", __name__)
+
+@bp.route("/notifications/")
+@login_required
+def list_all():
+	return render_template("notifications/list.html")
+
+@bp.route("/notifications/clear/", methods=["POST"])
+@login_required
+def clear():
+	current_user.notifications.clear()
+	db.session.commit()
+	return redirect(url_for("notifications.list_all"))

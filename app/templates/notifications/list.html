@@ -6,7 +6,7 @@ Notifications
 
 {% block content %}
 	{% if current_user.notifications %}
-		<form method="post" action="{{ url_for('clear_notifications_page') }}">
+		<form method="post" action="{{ url_for('notifications.clear') }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input type="submit" value="Clear All" />
 		</form>

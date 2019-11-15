@@ -18,11 +18,14 @@
 from flask import render_template, abort, request, redirect, url_for, flash
 from flask_user import current_user
 import flask_menu as menu
-from app import app
+
+from . import bp
+
 from app.models import *
 from app.querybuilder import QueryBuilder
 from app.tasks.importtasks import importRepoScreenshot
 from app.utils import *
+
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
@@ -30,12 +33,12 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleF
 from sqlalchemy import or_
 
 
-@menu.register_menu(app, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
-@menu.register_menu(app, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
-@menu.register_menu(app, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
-@menu.register_menu(app, ".random", "Random", order=14, endpoint_arguments_constructor=lambda: { 'random': '1' })
-@app.route("/packages/")
-def packages_page():
+@menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
+@menu.register_menu(bp, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
+@menu.register_menu(bp, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
+@menu.register_menu(bp, ".random", "Random", order=14, endpoint_arguments_constructor=lambda: { 'random': '1' })
+@bp.route("/packages/")
+def list_all():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 	title = qb.title
@@ -56,9 +59,9 @@ def packages_page():
 	search = request.args.get("q")
 	type_name = request.args.get("type")
 
-	next_url = url_for("packages_page", type=type_name, q=search, page=query.next_num) \
+	next_url = url_for("packages.list_all", type=type_name, q=search, page=query.next_num) \
 			if query.has_next else None
-	prev_url = url_for("packages_page", type=type_name, q=search, page=query.prev_num) \
+	prev_url = url_for("packages.list_all", type=type_name, q=search, page=query.prev_num) \
 			if query.has_prev else None
 
 	topics = None
@@ -79,9 +82,9 @@ def getReleases(package):
 		return package.releases.filter_by(approved=True).limit(5)
 
 
-@app.route("/packages/<author>/<name>/")
+@bp.route("/packages/<author>/<name>/")
 @is_package_page
-def package_page(package):
+def view(package):
 	clearNotifications(package.getDetailsURL())
 
 	alternatives = None
@@ -147,9 +150,9 @@ def package_page(package):
 			threads=threads.all())
 
 
-@app.route("/packages/<author>/<name>/download/")
+@bp.route("/packages/<author>/<name>/download/")
 @is_package_page
-def package_download_page(package):
+def download(package):
 	release = package.getDownloadRelease()
 
 	if release is None:
@@ -186,10 +189,10 @@ class PackageForm(FlaskForm):
 	forums	      = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
 	submit	      = SubmitField("Save")
 
-@app.route("/packages/new/", methods=["GET", "POST"])
-@app.route("/packages/<author>/<name>/edit/", methods=["GET", "POST"])
+@bp.route("/packages/new/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/edit/", methods=["GET", "POST"])
 @login_required
-def create_edit_package_page(author=None, name=None):
+def create_edit(author=None, name=None):
 	package = None
 	form = None
 	if author is None:
@@ -201,11 +204,11 @@ def create_edit_package_page(author=None, name=None):
 			author = User.query.filter_by(username=author).first()
 			if author is None:
 				flash("Unable to find that user", "error")
-				return redirect(url_for("create_edit_package_page"))
+				return redirect(url_for("packages.create_edit"))
 
 			if not author.checkPerm(current_user, Permission.CHANGE_AUTHOR):
 				flash("Permission denied", "error")
-				return redirect(url_for("create_edit_package_page"))
+				return redirect(url_for("packages.create_edit"))
 
 	else:
 		package = getPackageByInfo(author, name)
@@ -238,7 +241,7 @@ def create_edit_package_page(author=None, name=None):
 					Package.query.filter_by(name=form["name"].data, author_id=author.id).delete()
 				else:
 					flash("Package already exists!", "error")
-					return redirect(url_for("create_edit_package_page"))
+					return redirect(url_for("packages.create_edit"))
 
 			package = Package()
 			package.author = author
@@ -247,7 +250,7 @@ def create_edit_package_page(author=None, name=None):
 		elif package.approved and package.name != form.name.data and \
 				not package.checkPerm(current_user, Permission.CHANGE_NAME):
 			flash("Unable to change package name", "danger")
-			return redirect(url_for("create_edit_package_page", author=author, name=name))
+			return redirect(url_for("packages.create_edit", author=author, name=name))
 
 		else:
 			triggerNotif(package.author, current_user,
@@ -288,7 +291,7 @@ def create_edit_package_page(author=None, name=None):
 		next_url = package.getDetailsURL()
 		if wasNew and package.repo is not None:
 			task = importRepoScreenshot.delay(package.id)
-			next_url = url_for("check_task", id=task.id, r=next_url)
+			next_url = url_for("tasks.check", id=task.id, r=next_url)
 
 		if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
 			next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
@@ -305,10 +308,10 @@ def create_edit_package_page(author=None, name=None):
 			packages=package_query.all(), \
 			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all())
 
-@app.route("/packages/<author>/<name>/approve/", methods=["POST"])
+@bp.route("/packages/<author>/<name>/approve/", methods=["POST"])
 @login_required
 @is_package_page
-def approve_package_page(package):
+def approve(package):
 	if not package.checkPerm(current_user, Permission.APPROVE_NEW):
 		flash("You don't have permission to do that.", "error")
 
@@ -329,10 +332,10 @@ def approve_package_page(package):
 	return redirect(package.getDetailsURL())
 
 
-@app.route("/packages/<author>/<name>/remove/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/remove/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def remove_package_page(package):
+def remove(package):
 	if request.method == "GET":
 		return render_template("packages/remove.html", package=package)
 
@@ -343,7 +346,7 @@ def remove_package_page(package):
 
 		package.soft_deleted = True
 
-		url = url_for("user_profile_page", username=package.author.username)
+		url = url_for("users.profile", username=package.author.username)
 		triggerNotif(package.author, current_user,
 				"{} deleted".format(package.title), url)
 		db.session.commit()

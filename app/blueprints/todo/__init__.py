@@ -14,17 +14,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 from flask import *
 from flask_user import *
 import flask_menu as menu
-from app import app
 from app.models import *
 from app.querybuilder import QueryBuilder
 
-@app.route("/todo/", methods=["GET", "POST"])
+bp = Blueprint("todo", __name__)
+
+@bp.route("/todo/", methods=["GET", "POST"])
 @login_required
-def todo_page():
+def view():
 	canApproveNew = Permission.APPROVE_NEW.check(current_user)
 	canApproveRel = Permission.APPROVE_RELEASE.check(current_user)
 	canApproveScn = Permission.APPROVE_SCREENSHOT.check(current_user)
@@ -51,7 +51,7 @@ def todo_page():
 
 			PackageScreenshot.query.update({ "approved": True })
 			db.session.commit()
-			return redirect(url_for("todo_page"))
+			return redirect(url_for("todo.view"))
 		else:
 			abort(400)
 
@@ -69,9 +69,9 @@ def todo_page():
 		topics_to_add=topics_to_add, total_topics=total_topics)
 
 
-@app.route("/todo/topics/")
+@bp.route("/todo/topics/")
 @login_required
-def todo_topics_page():
+def topics():
 	qb    = QueryBuilder(request.args)
 	qb.setSortIfNone("date")
 	query = qb.buildTopicQuery()
@@ -88,10 +88,10 @@ def todo_topics_page():
 		num = 100
 
 	query = query.paginate(page, num, True)
-	next_url = url_for("todo_topics_page", page=query.next_num, query=qb.search, \
+	next_url = url_for("todo.topics", page=query.next_num, query=qb.search, \
 	 	show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_next else None
-	prev_url = url_for("todo_topics_page", page=query.prev_num, query=qb.search, \
+	prev_url = url_for("todo.topics", page=query.prev_num, query=qb.search, \
 	 	show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_prev else None
 

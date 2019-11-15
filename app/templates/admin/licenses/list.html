@@ -6,11 +6,11 @@ Licenses
 
 {% block content %}
 	<p>
-		<a href="{{ url_for('createedit_license_page') }}">New License</a>
+		<a href="{{ url_for('admin.create_edit_license') }}">New License</a>
 	</p>
 	<ul>
 		{% for l in licenses %}
-			<li><a href="{{ url_for('createedit_license_page', name=l.name) }}">{{ l.name }}</a> [{{ l.is_foss and "Free" or "Non-free"}}]</li>
+			<li><a href="{{ url_for('admin.create_edit_license', name=l.name) }}">{{ l.name }}</a> [{{ l.is_foss and "Free" or "Non-free"}}]</li>
 		{% endfor %}
 	</ul>
 {% endblock %}

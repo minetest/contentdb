@@ -26,7 +26,7 @@
 		{% endif %}
 
 		{% if release.task_id %}
-			Importing... <a href="{{ url_for('check_task', id=release.task_id, r=release.getEditURL()) }}">view task</a><br />
+			Importing... <a href="{{ url_for('tasks.check', id=release.task_id, r=release.getEditURL()) }}">view task</a><br />
 			{% if package.checkPerm(current_user, "CHANGE_RELEASE_URL") %}
 				{{ render_field(form.task_id) }}
 			{% endif %}

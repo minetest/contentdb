@@ -15,7 +15,7 @@
 		{% for n in range(1, page_max+1) %}
 			<li class="page-item {% if n == page %}active{% endif %}">
 				<a class="page-link"
-						href="{{ url_for('packages_page', type=type, q=query, page=n) }}">
+						href="{{ url_for('packages.list_all', type=type, q=query, page=n) }}">
 					{{ n }}
 				</a>
 			</li>

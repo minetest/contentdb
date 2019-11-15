@@ -37,28 +37,28 @@
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 
 
-	<a href="{{ url_for('packages_page', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Recently Added") }}</h2>
 	{{ render_pkggrid(new) }}
 
 
-	<a href="{{ url_for('packages_page', type='mod', sort='score', order='desc') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', type='mod', sort='score', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Top Mods") }}</h2>
 	{{ render_pkggrid(pop_mod) }}
 
 
-	<a href="{{ url_for('packages_page', type='game', sort='score', order='desc') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', type='game', sort='score', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Top Games") }}</h2>
 	{{ render_pkggrid(pop_gam) }}
 
 
-	<a href="{{ url_for('packages_page', type='txp', sort='score', order='desc') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', type='txp', sort='score', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Top Texture Packs") }}</h2>

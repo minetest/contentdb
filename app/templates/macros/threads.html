@@ -4,7 +4,7 @@
 	{% for r in thread.replies %}
 	<li class="row my-2 mx-0">
 		<div class="col-md-1 p-1">
-			<a href="{{ url_for('user_profile_page', username=r.author.username) }}">
+			<a href="{{ url_for('users.profile', username=r.author.username) }}">
 				<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
 			</a>
 		</div>
@@ -12,11 +12,11 @@
 			<div class="card">
 				<div class="card-header">
 					<a class="author {{ r.author.rank.name }}"
-							href="{{ url_for('user_profile_page', username=r.author.username) }}">
+							href="{{ url_for('users.profile', username=r.author.username) }}">
 						{{ r.author.display_name }}
 					</a>
 					<a name="reply-{{ r.id }}" class="text-muted float-right"
-							href="{{ url_for('thread_page', id=thread.id) }}#reply-{{ r.id }}">
+							href="{{ url_for('threads.view', id=thread.id) }}#reply-{{ r.id }}">
 						{{ r.created_at | datetime }}
 					</a>
 				</div>
@@ -43,7 +43,7 @@
 			</div>
 
 			{% if current_user.canCommentRL() %}
-				<form method="post" action="{{ url_for('thread_page', id=thread.id)}}" class="card-body">
+				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<textarea class="form-control markdown" required maxlength=500 name="comment"></textarea><br />
 					<input class="btn btn-primary" type="submit" value="Comment" />
@@ -65,14 +65,14 @@
 		{% for t in threads %}
 			<li {% if list_group %}class="list-group-item"{% endif %}>
 				{% if list_group %}
-					<a href="{{ url_for('thread_page', id=t.id) }}">
+					<a href="{{ url_for('threads.view', id=t.id) }}">
 						{% if t.private %}&#x1f512; {% endif %}
 						{{ t.title }}
 						by {{ t.author.display_name }}
 					</a>
 				{% else %}
 					{% if t.private %}&#x1f512; {% endif %}
-					<a href="{{ url_for('thread_page', id=t.id) }}">{{ t.title }}</a>
+					<a href="{{ url_for('threads.view', id=t.id) }}">{{ t.title }}</a>
 					by {{ t.author.display_name }}
 				{% endif %}
 			</li>

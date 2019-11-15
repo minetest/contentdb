@@ -17,10 +17,11 @@
 
 from flask import *
 from flask_user import *
-from app import app
+
+from . import bp
+
 from app.models import *
 from app.tasks.importtasks import makeVCSRelease
-
 from app.utils import *
 
 from celery import uuid
@@ -62,10 +63,10 @@ class EditPackageReleaseForm(FlaskForm):
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit   = SubmitField("Save")
 
-@app.route("/packages/<author>/<name>/releases/new/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/releases/new/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def create_release_page(package):
+def create_release(package):
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
 		return redirect(package.getDetailsURL())
 
@@ -94,7 +95,7 @@ def create_release_page(package):
 			triggerNotif(package.author, current_user, msg, rel.getEditURL())
 			db.session.commit()
 
-			return redirect(url_for("check_task", id=rel.task_id, r=rel.getEditURL()))
+			return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))
 		else:
 			uploadedPath = doFileUpload(form.fileUpload.data, "zip", "a zip file")
 			if uploadedPath is not None:
@@ -115,9 +116,9 @@ def create_release_page(package):
 
 	return render_template("packages/release_new.html", package=package, form=form)
 
-@app.route("/packages/<author>/<name>/releases/<id>/download/")
+@bp.route("/packages/<author>/<name>/releases/<id>/download/")
 @is_package_page
-def download_release_page(package, id):
+def download_release(package, id):
 	release = PackageRelease.query.get(id)
 	if release is None or release.package != package:
 		abort(404)
@@ -137,10 +138,10 @@ def download_release_page(package, id):
 
 		return redirect(release.url, code=300)
 
-@app.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def edit_release_page(package, id):
+def edit_release(package, id):
 	release = PackageRelease.query.get(id)
 	if release is None or release.package != package:
 		abort(404)
@@ -190,10 +191,10 @@ class BulkReleaseForm(FlaskForm):
 	submit   = SubmitField("Update")
 
 
-@app.route("/packages/<author>/<name>/releases/bulk_change/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/releases/bulk_change/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def bulk_change_release_page(package):
+def bulk_change_release(package):
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
 		return redirect(package.getDetailsURL())
 

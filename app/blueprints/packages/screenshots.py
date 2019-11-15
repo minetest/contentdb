@@ -17,9 +17,10 @@
 
 from flask import *
 from flask_user import *
-from app import app
-from app.models import *
 
+from . import bp
+
+from app.models import *
 from app.utils import *
 
 from flask_wtf import FlaskForm
@@ -39,10 +40,10 @@ class EditScreenshotForm(FlaskForm):
 	delete   = BooleanField("Delete")
 	submit   = SubmitField("Save")
 
-@app.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def create_screenshot_page(package, id=None):
+def create_screenshot(package, id=None):
 	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
 		return redirect(package.getDetailsURL())
 
@@ -67,10 +68,10 @@ def create_screenshot_page(package, id=None):
 
 	return render_template("packages/screenshot_new.html", package=package, form=form)
 
-@app.route("/packages/<author>/<name>/screenshots/<id>/edit/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/screenshots/<id>/edit/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def edit_screenshot_page(package, id):
+def edit_screenshot(package, id):
 	screenshot = PackageScreenshot.query.get(id)
 	if screenshot is None or screenshot.package != package:
 		abort(404)

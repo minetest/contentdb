@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import flask, json, os, git, tempfile, shutil
+import flask, json, os, git, tempfile, shutil, gitdb
 from git import GitCommandError
 from flask_sqlalchemy import SQLAlchemy
 from urllib.error import HTTPError

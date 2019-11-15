@@ -9,7 +9,7 @@
 {% if not current_user.is_authenticated and user.rank == user.rank.NOT_JOINED and user.forums_username %}
 <div class="alert alert-info">
 	<a class="float-right btn btn-default btn-sm"
-		href="{{ url_for('user_claim_page', username=user.forums_username) }}">Claim</a>
+		href="{{ url_for('users.claim', username=user.forums_username) }}">Claim</a>
 
 	Is this you? Claim your account now!
 </div>
@@ -57,7 +57,7 @@
 								{% if user.github_username %}
 									<a href="https://github.com/{{ user.github_username }}">GitHub</a>
 								{% elif user == current_user %}
-									<a href="{{ url_for('github_signin_page') }}">Link Github</a>
+									<a href="{{ url_for('users.github_signin') }}">Link Github</a>
 								{% endif %}
 
 								{% if user.website_url %}
@@ -78,7 +78,7 @@
 							<td>Admin</td>
 							<td>
 								{% if user.email %}
-									<a class="btn btn-primary" href="{{ url_for('send_email_page', username=user.username) }}">
+									<a class="btn btn-primary" href="{{ url_for('users.send_email', username=user.username) }}">
 										Email
 									</a>
 								{% else %}
@@ -97,7 +97,7 @@
 								<td>Profile Picture:</td>
 								<td>
 									{% if user.forums_username %}
-										<form method="post" action="{{ url_for('user_check', username=user.username) }}" class="" style="display:inline-block;">
+										<form method="post" action="{{ url_for('users.user_check', username=user.username) }}" class="" style="display:inline-block;">
 											<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 											<input type="submit" class="btn btn-primary" value="Sync with Forums" />
 										</form>
@@ -122,7 +122,7 @@
 									{% if user.password %}
 										Set | <a href="{{ url_for('user.change_password') }}">Change</a>
 									{% else %}
-										Not set | <a href="{{ url_for('set_password_page') }}">Set</a>
+										Not set | <a href="{{ url_for('users.set_password') }}">Set</a>
 									{% endif %}
 								</td>
 							</tr>

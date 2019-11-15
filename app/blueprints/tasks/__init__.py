@@ -18,28 +18,28 @@
 from flask import *
 from flask_user import *
 import flask_menu as menu
-from app import app, csrf
+from app import csrf
 from app.models import *
 from app.tasks import celery, TaskError
 from app.tasks.importtasks import getMeta
 from app.utils import shouldReturnJson
-# from celery.result import AsyncResult
-
 from app.utils import *
 
+bp = Blueprint("tasks", __name__)
+
 @csrf.exempt
-@app.route("/tasks/getmeta/new/", methods=["POST"])
+@bp.route("/tasks/getmeta/new/", methods=["POST"])
 @login_required
-def new_getmeta_page():
+def start_getmeta():
 	author = request.args.get("author")
 	author = current_user.forums_username if author is None else author
 	aresult = getMeta.delay(request.args.get("url"), author)
 	return jsonify({
-		"poll_url": url_for("check_task", id=aresult.id),
+		"poll_url": url_for("tasks.check", id=aresult.id),
 	})
 
-@app.route("/tasks/<id>/")
-def check_task(id):
+@bp.route("/tasks/<id>/")
+def check(id):
 	result = celery.AsyncResult(id)
 	status = result.status
 	traceback = result.traceback

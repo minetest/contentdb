@@ -19,7 +19,7 @@ Creating an Account
 					Please log out to continue.
 				</p>
 				<p>
-					<a href="{{ url_for('user.logout', next=url_for('user_claim_page')) }}" class="btn">Logout</a>
+					<a href="{{ url_for('user.logout', next=url_for('users.claim')) }}" class="btn">Logout</a>
 				</p>
 			{% else %}
 				<p>
@@ -44,7 +44,7 @@ Creating an Account
 				Use GitHub field in forum profile
 			</div>
 
-			<form method="post" class="card-body" action="{{ url_for('user_claim_page') }}">
+			<form method="post" class="card-body" action="{{ url_for('users.claim') }}">
 				<input class="form-control" type="hidden" name="claim_type" value="github">
 				<input class="form-control" type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
@@ -73,7 +73,7 @@ Creating an Account
 				Verification token
 			</div>
 
-			<form method="post" class="card-body" action="{{ url_for('user_claim_page') }}">
+			<form method="post" class="card-body" action="{{ url_for('users.claim') }}">
 				<input type="hidden" name="claim_type" value="forum">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 

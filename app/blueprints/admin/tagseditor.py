@@ -17,44 +17,41 @@
 
 from flask import *
 from flask_user import *
-from app import app
+from . import bp
 from app.models import *
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from app.utils import rank_required
 
-@app.route("/versions/")
+@bp.route("/tags/")
 @rank_required(UserRank.MODERATOR)
-def version_list_page():
-	return render_template("admin/versions/list.html", versions=MinetestRelease.query.order_by(db.asc(MinetestRelease.id)).all())
+def tag_list():
+	return render_template("admin/tags/list.html", tags=Tag.query.order_by(db.asc(Tag.title)).all())
 
-class VersionForm(FlaskForm):
-	name	 = StringField("Name", [InputRequired(), Length(3,100)])
-	protocol = IntegerField("Protocol")
+class TagForm(FlaskForm):
+	title	 = StringField("Title", [InputRequired(), Length(3,100)])
+	name     = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	submit   = SubmitField("Save")
 
-@app.route("/versions/new/", methods=["GET", "POST"])
-@app.route("/versions/<name>/edit/", methods=["GET", "POST"])
+@bp.route("/tags/new/", methods=["GET", "POST"])
+@bp.route("/tags/<name>/edit/", methods=["GET", "POST"])
 @rank_required(UserRank.MODERATOR)
-def createedit_version_page(name=None):
-	version = None
+def create_edit_tag(name=None):
+	tag = None
 	if name is not None:
-		version = MinetestRelease.query.filter_by(name=name).first()
-		if version is None:
+		tag = Tag.query.filter_by(name=name).first()
+		if tag is None:
 			abort(404)
 
-	form = VersionForm(formdata=request.form, obj=version)
+	form = TagForm(formdata=request.form, obj=tag)
 	if request.method == "POST" and form.validate():
-		if version is None:
-			version = MinetestRelease(form.name.data)
-			db.session.add(version)
-			flash("Created version " + form.name.data, "success")
+		if tag is None:
+			tag = Tag(form.title.data)
+			db.session.add(tag)
 		else:
-			flash("Updated version " + form.name.data, "success")
-
-		form.populate_obj(version)
+			form.populate_obj(tag)
 		db.session.commit()
-		return redirect(url_for("version_list_page"))
+		return redirect(url_for("admin.create_edit_tag", name=tag.name))
 
-	return render_template("admin/versions/edit.html", version=version, form=form)
+	return render_template("admin/tags/edit.html", tag=tag, form=form)

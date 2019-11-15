@@ -15,19 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import *
-from flask_user import current_user, login_required
-from app import app
-from app.models import *
+from flask import Blueprint
 
-@app.route("/notifications/")
-@login_required
-def notifications_page():
-	return render_template("notifications/list.html")
+bp = Blueprint("admin", __name__)
 
-@app.route("/notifications/clear/", methods=["POST"])
-@login_required
-def clear_notifications_page():
-	current_user.notifications.clear()
-	db.session.commit()
-	return redirect(url_for("notifications_page"))
+from . import admin, licenseseditor, tagseditor, versioneditor

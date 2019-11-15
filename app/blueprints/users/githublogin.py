@@ -21,15 +21,16 @@ from flask_login import login_user, logout_user
 from sqlalchemy import func
 import flask_menu as menu
 from flask_github import GitHub
-from app import app, github
+from . import bp
+from app import github
 from app.models import *
 from app.utils import loginUser
 
-@app.route("/user/github/start/")
-def github_signin_page():
+@bp.route("/user/github/start/")
+def github_signin():
 	return github.authorize("")
 
-@app.route("/user/github/callback/")
+@bp.route("/user/github/callback/")
 @github.authorized_handler
 def github_authorized(oauth_token):
 	next_url = request.args.get("next")
@@ -62,10 +63,10 @@ def github_authorized(oauth_token):
 	else:
 		if userByGithub is None:
 			flash("Unable to find an account for that Github user", "error")
-			return redirect(url_for("user_claim_page"))
+			return redirect(url_for("users.claim"))
 		elif loginUser(userByGithub):
 			if current_user.password is None:
-				return redirect(next_url or url_for("set_password_page", optional=True))
+				return redirect(next_url or url_for("users.set_password", optional=True))
 			else:
 				return redirect(next_url or url_for("home_page"))
 		else:

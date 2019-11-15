@@ -63,7 +63,7 @@
 	{% if canApproveScn and screenshots %}
 		<div class="card my-4">
 			<h3 class="card-header">Screenshots
-				<form class="float-right"  method="post" action="{{ url_for('todo_page') }}">
+				<form class="float-right"  method="post" action="{{ url_for('todo.view') }}">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" name="action" value="screenshots_approve_all" />
 					<input class="btn btn-sm btn-primary" type="submit" value="Approve All" />
@@ -112,6 +112,6 @@
 			style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
 
-	<a class="btn btn-primary" href="{{ url_for('todo_topics_page') }}">View Unadded Topic List</a>
+	<a class="btn btn-primary" href="{{ url_for('todo.topics') }}">View Unadded Topic List</a>
 
 {% endblock %}

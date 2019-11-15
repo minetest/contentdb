@@ -34,7 +34,7 @@ def sendVerifyEmail(newEmail, token):
 			If this was you, then please click this link to verify the address:
 
 			{}
-		""".format(url_for('verify_email_page', token=token, _external=True))
+		""".format(url_for('users.verify_email', token=token, _external=True))
 
 	msg.html = render_template("emails/verify.html", token=token)
 	mail.send(msg)

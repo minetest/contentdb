@@ -14,5 +14,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from flask import Blueprint
 
-from . import users, githublogin, notifications
+bp = Blueprint("packages", __name__)
+
+from . import packages, screenshots, releases

@@ -6,11 +6,11 @@ Tags
 
 {% block content %}
 	<p>
-		<a href="{{ url_for('createedit_tag_page') }}">New Tag</a>
+		<a href="{{ url_for('admin.create_edit_tag') }}">New Tag</a>
 	</p>
 	<ul>
 		{% for t in tags %}
-			<li><a href="{{ url_for('createedit_tag_page', name=t.name) }}">{{ t.title }}</a> [{{ t.packages | count }} packages]</li>
+			<li><a href="{{ url_for('admin.create_edit_tag', name=t.name) }}">{{ t.title }}</a> [{{ t.packages | count }} packages]</li>
 		{% endfor %}
 	</ul>
 {% endblock %}

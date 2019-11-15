@@ -16,8 +16,10 @@
 
 
 from flask import *
+
+bp = Blueprint("threads", __name__)
+
 from flask_user import *
-from app import app
 from app.models import *
 from app.utils import triggerNotif, clearNotifications
 
@@ -27,17 +29,17 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 
-@app.route("/threads/")
-def threads_page():
+@bp.route("/threads/")
+def list_all():
 	query = Thread.query
 	if not Permission.SEE_THREAD.check(current_user):
 		query = query.filter_by(private=False)
 	return render_template("threads/list.html", threads=query.all())
 
 
-@app.route("/threads/<int:id>/subscribe/", methods=["POST"])
+@bp.route("/threads/<int:id>/subscribe/", methods=["POST"])
 @login_required
-def thread_subscribe_page(id):
+def subscribe(id):
 	thread = Thread.query.get(id)
 	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
 		abort(404)
@@ -49,12 +51,12 @@ def thread_subscribe_page(id):
 		thread.watchers.append(current_user)
 		db.session.commit()
 
-	return redirect(url_for("thread_page", id=id))
+	return redirect(url_for("threads.view", id=id))
 
 
-@app.route("/threads/<int:id>/unsubscribe/", methods=["POST"])
+@bp.route("/threads/<int:id>/unsubscribe/", methods=["POST"])
 @login_required
-def thread_unsubscribe_page(id):
+def unsubscribe(id):
 	thread = Thread.query.get(id)
 	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
 		abort(404)
@@ -66,12 +68,12 @@ def thread_unsubscribe_page(id):
 	else:
 		flash("Not subscribed to thread", "success")
 
-	return redirect(url_for("thread_page", id=id))
+	return redirect(url_for("threads.view", id=id))
 
 
-@app.route("/threads/<int:id>/", methods=["GET", "POST"])
-def thread_page(id):
-	clearNotifications(url_for("thread_page", id=id))
+@bp.route("/threads/<int:id>/", methods=["GET", "POST"])
+def view(id):
+	clearNotifications(url_for("threads.view", id=id))
 
 	thread = Thread.query.get(id)
 	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
@@ -106,11 +108,11 @@ def thread_page(id):
 
 			for user in thread.watchers:
 				if user != current_user:
-					triggerNotif(user, current_user, msg, url_for("thread_page", id=thread.id))
+					triggerNotif(user, current_user, msg, url_for("threads.view", id=thread.id))
 
 			db.session.commit()
 
-			return redirect(url_for("thread_page", id=id))
+			return redirect(url_for("threads.view", id=id))
 
 		else:
 			flash("Comment needs to be between 3 and 500 characters.")
@@ -124,9 +126,9 @@ class ThreadForm(FlaskForm):
 	private = BooleanField("Private")
 	submit  = SubmitField("Open Thread")
 
-@app.route("/threads/new/", methods=["GET", "POST"])
+@bp.route("/threads/new/", methods=["GET", "POST"])
 @login_required
-def new_thread_page():
+def new():
 	form = ThreadForm(formdata=request.form)
 
 	package = None
@@ -153,7 +155,7 @@ def new_thread_page():
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
 		flash("A review thread already exists!", "error")
-		return redirect(url_for("thread_page", id=package.review_thread.id))
+		return redirect(url_for("threads.view", id=package.review_thread.id))
 
 	elif not current_user.canOpenThreadRL():
 		flash("Please wait before opening another thread", "danger")
@@ -197,16 +199,16 @@ def new_thread_page():
 		notif_msg = None
 		if package is not None:
 			notif_msg = "New thread '{}' on package {}".format(thread.title, package.title)
-			triggerNotif(package.author, current_user, notif_msg, url_for("thread_page", id=thread.id))
+			triggerNotif(package.author, current_user, notif_msg, url_for("threads.view", id=thread.id))
 		else:
 			notif_msg = "New thread '{}'".format(thread.title)
 
 		for user in User.query.filter(User.rank >= UserRank.EDITOR).all():
-			triggerNotif(user, current_user, notif_msg, url_for("thread_page", id=thread.id))
+			triggerNotif(user, current_user, notif_msg, url_for("threads.view", id=thread.id))
 
 		db.session.commit()
 
-		return redirect(url_for("thread_page", id=thread.id))
+		return redirect(url_for("threads.view", id=thread.id))
 
 
 	return render_template("threads/new.html", form=form, allow_private_change=allow_change, package=package)

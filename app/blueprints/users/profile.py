@@ -18,7 +18,8 @@
 from flask import *
 from flask_user import *
 from flask_login import login_user, logout_user
-from app import app, markdown
+from app import markdown
+from . import bp
 from app.models import *
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -38,14 +39,14 @@ class UserProfileForm(FlaskForm):
 	submit = SubmitField("Save")
 
 
-@app.route("/users/", methods=["GET"])
-def user_list_page():
+@bp.route("/users/", methods=["GET"])
+def list_all():
 	users = User.query.order_by(db.desc(User.rank), db.asc(User.display_name)).all()
 	return render_template("users/list.html", users=users)
 
 
-@app.route("/users/<username>/", methods=["GET", "POST"])
-def user_profile_page(username):
+@bp.route("/users/<username>/", methods=["GET", "POST"])
+def profile(username):
 	user = User.query.filter_by(username=username).first()
 	if not user:
 		abort(404)
@@ -85,13 +86,13 @@ def user_profile_page(username):
 					db.session.commit()
 
 					task = sendVerifyEmail.delay(newEmail, token)
-					return redirect(url_for("check_task", id=task.id, r=url_for("user_profile_page", username=username)))
+					return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=username)))
 
 			# Save user_profile
 			db.session.commit()
 
 			# Redirect to home page
-			return redirect(url_for("user_profile_page", username=username))
+			return redirect(url_for("users.profile", username=username))
 
 	packages = user.packages.filter_by(soft_deleted=False)
 	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
@@ -107,11 +108,11 @@ def user_profile_page(username):
 					.all()
 
 	# Process GET or invalid POST
-	return render_template("users/user_profile_page.html",
+	return render_template("users/users.profile.html",
 			user=user, form=form, packages=packages, topics_to_add=topics_to_add)
 
 
-@app.route("/users/<username>/check/", methods=["POST"])
+@bp.route("/users/<username>/check/", methods=["POST"])
 @login_required
 def user_check(username):
 	user = User.query.filter_by(username=username).first()
@@ -125,9 +126,9 @@ def user_check(username):
 		abort(404)
 
 	task = checkForumAccount.delay(user.forums_username)
-	next_url = url_for("user_profile_page", username=username)
+	next_url = url_for("users.profile", username=username)
 
-	return redirect(url_for("check_task", id=task.id, r=next_url))
+	return redirect(url_for("tasks.check", id=task.id, r=next_url))
 
 
 class SendEmailForm(FlaskForm):
@@ -136,14 +137,14 @@ class SendEmailForm(FlaskForm):
 	submit  = SubmitField("Send")
 
 
-@app.route("/users/<username>/email/", methods=["GET", "POST"])
+@bp.route("/users/<username>/email/", methods=["GET", "POST"])
 @rank_required(UserRank.MODERATOR)
-def send_email_page(username):
+def send_email(username):
 	user = User.query.filter_by(username=username).first()
 	if user is None:
 		abort(404)
 
-	next_url = url_for("user_profile_page", username=user.username)
+	next_url = url_for("users.profile", username=user.username)
 
 	if user.email is None:
 		flash("User has no email address!", "error")
@@ -154,7 +155,7 @@ def send_email_page(username):
 		text = form.text.data
 		html = markdown(text)
 		task = sendEmailRaw.delay([user.email], form.subject.data, text, html)
-		return redirect(url_for("check_task", id=task.id, r=next_url))
+		return redirect(url_for("tasks.check", id=task.id, r=next_url))
 
 	return render_template("users/send_email.html", form=form)
 
@@ -166,9 +167,9 @@ class SetPasswordForm(FlaskForm):
 	password2 = PasswordField("Verify password", [InputRequired(), Length(2, 100)])
 	submit = SubmitField("Save")
 
-@app.route("/user/set-password/", methods=["GET", "POST"])
+@bp.route("/user/set-password/", methods=["GET", "POST"])
 @login_required
-def set_password_page():
+def set_password():
 	if current_user.password is not None:
 		return redirect(url_for("user.change_password"))
 
@@ -208,17 +209,17 @@ def set_password_page():
 				db.session.commit()
 
 				task = sendVerifyEmail.delay(newEmail, token)
-				return redirect(url_for("check_task", id=task.id, r=url_for("user_profile_page", username=current_user.username)))
+				return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=current_user.username)))
 			else:
-				return redirect(url_for("user_profile_page", username=current_user.username))
+				return redirect(url_for("users.profile", username=current_user.username))
 		else:
 			flash("Passwords do not match", "error")
 
 	return render_template("users/set_password.html", form=form, optional=request.args.get("optional"))
 
 
-@app.route("/user/claim/", methods=["GET", "POST"])
-def user_claim_page():
+@bp.route("/user/claim/", methods=["GET", "POST"])
+def claim():
 	username = request.args.get("username")
 	if username is None:
 		username = ""
@@ -227,16 +228,16 @@ def user_claim_page():
 		user = User.query.filter_by(forums_username=username).first()
 		if user and user.rank.atLeast(UserRank.NEW_MEMBER):
 			flash("User has already been claimed", "error")
-			return redirect(url_for("user_claim_page"))
+			return redirect(url_for("users.claim"))
 		elif user is None and method == "github":
 			flash("Unable to get Github username for user", "error")
-			return redirect(url_for("user_claim_page"))
+			return redirect(url_for("users.claim"))
 		elif user is None:
 			flash("Unable to find that user", "error")
-			return redirect(url_for("user_claim_page"))
+			return redirect(url_for("users.claim"))
 
 		if user is not None and method == "github":
-			return redirect(url_for("github_signin_page"))
+			return redirect(url_for("users.github_signin"))
 
 	token = None
 	if "forum_token" in session:
@@ -253,12 +254,12 @@ def user_claim_page():
 			flash("Invalid username", "error")
 		elif ctype == "github":
 			task = checkForumAccount.delay(username)
-			return redirect(url_for("check_task", id=task.id, r=url_for("user_claim_page", username=username, method="github")))
+			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.claim", username=username, method="github")))
 		elif ctype == "forum":
 			user = User.query.filter_by(forums_username=username).first()
 			if user is not None and user.rank.atLeast(UserRank.NEW_MEMBER):
 				flash("That user has already been claimed!", "error")
-				return redirect(url_for("user_claim_page"))
+				return redirect(url_for("users.claim"))
 
 			# Get signature
 			sig = None
@@ -267,7 +268,7 @@ def user_claim_page():
 				sig = profile.signature
 			except IOError:
 				flash("Unable to get forum signature - does the user exist?", "error")
-				return redirect(url_for("user_claim_page", username=username))
+				return redirect(url_for("users.claim", username=username))
 
 			# Look for key
 			if token in sig:
@@ -278,21 +279,21 @@ def user_claim_page():
 					db.session.commit()
 
 				if loginUser(user):
-					return redirect(url_for("set_password_page"))
+					return redirect(url_for("users.set_password"))
 				else:
 					flash("Unable to login as user", "error")
-					return redirect(url_for("user_claim_page", username=username))
+					return redirect(url_for("users.claim", username=username))
 
 			else:
 				flash("Could not find the key in your signature!", "error")
-				return redirect(url_for("user_claim_page", username=username))
+				return redirect(url_for("users.claim", username=username))
 		else:
 			flash("Unknown claim type", "error")
 
 	return render_template("users/claim.html", username=username, key=token)
 
-@app.route("/users/verify/")
-def verify_email_page():
+@bp.route("/users/verify/")
+def verify_email():
 	token = request.args.get("token")
 	ver = UserEmailVerification.query.filter_by(token=token).first()
 	if ver is None:
@@ -303,6 +304,6 @@ def verify_email_page():
 		db.session.commit()
 
 	if current_user.is_authenticated:
-		return redirect(url_for("user_profile_page", username=current_user.username))
+		return redirect(url_for("users.profile", username=current_user.username))
 	else:
 		return redirect(url_for("home_page"))

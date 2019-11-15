@@ -8,7 +8,7 @@
 <ul class="userlist">
 	{% for user in users %}
 		<li class="{{ user.rank }}">
-			<a href="{{ url_for('user_profile_page', username=user.username) }}">
+			<a href="{{ url_for('users.profile', username=user.username) }}">
 				{{ user.display_name }}
 			</a> -
 			{{ user.rank.getTitle() }}

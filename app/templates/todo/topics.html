@@ -8,15 +8,15 @@ Topics to be Added
 	<div class="float-right">
 		<div class="btn-group">
 			<a class="btn btn-primary {% if sort_by=='date' %}active{% endif %}"
-					href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=n, sort='date') }}">
+					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='date') }}">
 				Sort by date
 			</a>
 			<a class="btn btn-primary {% if sort_by=='name' %}active{% endif %}"
-					href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=n, sort='name') }}">
+					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='name') }}">
 				Sort by name
 			</a>
 			<a class="btn btn-primary {% if sort_by=='views' %}active{% endif %}"
-					href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=n, sort='views') }}">
+					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='views') }}">
 				Sort by views
 			</a>
 		</div>
@@ -26,18 +26,18 @@ Topics to be Added
 			{% if current_user.rank.atLeast(current_user.rank.EDITOR) %}
 				{% if n >= 10000 %}
 					<a class="btn btn-primary"
-							href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=100, sort=sort_by) }}">
+							href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=100, sort=sort_by) }}">
 						Paginated list
 					</a>
 				{% else %}
 					<a class="btn btn-primary"
-							href="{{ url_for('todo_topics_page', q=query, show_discarded=show_discarded, n=10000, sort=sort_by) }}">
+							href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=10000, sort=sort_by) }}">
 						Unlimited list
 					</a>
 				{% endif %}
 			{% endif %}
 
-			<a class="btn btn-primary" href="{{ url_for('todo_topics_page', q=query, show_discarded=not show_discarded, n=n, sort=sort_by) }}">
+			<a class="btn btn-primary" href="{{ url_for('todo.topics', q=query, show_discarded=not show_discarded, n=n, sort=sort_by) }}">
 				{% if not show_discarded %}
 					Show
 				{% else %}
@@ -61,7 +61,7 @@ Topics to be Added
 			style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
 	</div>
 
-	<form method="GET" action="{{ url_for('todo_topics_page') }}" class="my-4">
+	<form method="GET" action="{{ url_for('todo.topics') }}" class="my-4">
 		<input type="hidden" name="show_discarded" value={{ show_discarded and "True" or "False" }} />
 		<input type="hidden" name="n" value={{ n }} />
 		<input type="hidden" name="sort" value={{ sort_by or "date" }} />
@@ -79,7 +79,7 @@ Topics to be Added
 		{% for i in range(1, page_max+1) %}
 			<li class="page-item {% if i == page %}active{% endif %}">
 				<a class="page-link"
-						href="{{ url_for('todo_topics_page', page=i, query=query, show_discarded=show_discarded, n=n, sort=sort_by) }}">
+						href="{{ url_for('todo.topics', page=i, query=query, show_discarded=show_discarded, n=n, sort=sort_by) }}">
 					{{ i }}
 				</a>
 			</li>

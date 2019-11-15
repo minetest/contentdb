@@ -15,8 +15,6 @@ import codecs
 from flask import *
 from scss import Scss
 
-from app import app
-
 def _convert(dir, src, dst):
 	original_wd = os.getcwd()
 	os.chdir(dir)
@@ -31,7 +29,7 @@ def _convert(dir, src, dst):
 	outfile.write(output)
 	outfile.close()
 
-def _getDirPath(originalPath, create=False):
+def _getDirPath(app, originalPath, create=False):
 	path = originalPath
 
 	if not os.path.isdir(path):
@@ -47,8 +45,8 @@ def _getDirPath(originalPath, create=False):
 
 def sass(app, inputDir='scss', outputPath='static', force=False, cacheDir="public/static"):
 	static_url_path = app.static_url_path
-	inputDir = _getDirPath(inputDir)
-	cacheDir = _getDirPath(cacheDir or outputPath, True)
+	inputDir = _getDirPath(app, inputDir)
+	cacheDir = _getDirPath(app, cacheDir or outputPath, True)
 
 	def _sass(filepath):
 		sassfile = "%s/%s.scss" % (inputDir, filepath)
@@ -63,5 +61,3 @@ def sass(app, inputDir='scss', outputPath='static', force=False, cacheDir="publi
 		return send_from_directory(cacheDir, filepath + ".css")
 
 	app.add_url_rule("/%s/<path:filepath>.css" % (outputPath), 'sass', _sass)
-
-sass(app)
