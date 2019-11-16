@@ -51,15 +51,21 @@ Topics to be Added
 
 	<h1>Topics to be Added</h1>
 
-	<p>
-		{{ total - topic_count }} / {{ total }} topics have been added as packages to CDB.
-		{{ topic_count }} remaining.
-	</p>
-	<div class="progress">
-		{% set perc = 100 * (total - topic_count) /  total %}
-		<div class="progress-bar bg-success" role="progressbar"
-			style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
-	</div>
+	{% if topic_count > 0 %}
+		<p>
+			{{ total - topic_count }} / {{ total }} topics have been added as packages to CDB.
+			{{ topic_count }} remaining.
+		</p>
+		<div class="progress">
+			{% set perc = 100 * (total - topic_count) /  total %}
+			<div class="progress-bar bg-success" role="progressbar"
+				style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>	
+	{% else %}
+		<p>
+			The forum topic crawler needs to run at least once for this section to work.
+		</p>
+	{% endif %}
 
 	<form method="GET" action="{{ url_for('todo.topics') }}" class="my-4">
 		<input type="hidden" name="show_discarded" value={{ show_discarded and "True" or "False" }} />

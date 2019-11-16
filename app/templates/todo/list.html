@@ -101,17 +101,23 @@
 
 	<h2 class="mt-4">Unadded Topic List</h2>
 
-	<p>
-		{{ total_topics - topics_to_add }} / {{ total_topics }} packages have been been added to cdb,
-		based on cdb's forum parser. {{ topics_to_add }} remaining.
-	</p>
+	{% if total_topics > 0 %}
+		<p>
+			{{ total_topics - topics_to_add }} / {{ total_topics }} packages have been been added to cdb,
+			based on cdb's forum parser. {{ topics_to_add }} remaining.
+		</p>
 
-	<div class="progress my-4">
-		{% set perc = 32 %}
-		<div class="progress-bar bg-success" role="progressbar"
-			style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
-	</div>
+		<div class="progress my-4">
+			{% set perc = 100 * (total_topics - topics_to_add) / total_topics %}
+			<div class="progress-bar bg-success" role="progressbar"
+				style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
 
-	<a class="btn btn-primary" href="{{ url_for('todo.topics') }}">View Unadded Topic List</a>
+		<a class="btn btn-primary" href="{{ url_for('todo.topics') }}">View Unadded Topic List</a>
+	{% else %}
+		<p>
+			The forum topic crawler needs to run at least once for this section to work.
+		</p>
+	{% endif %}
 
 {% endblock %}
