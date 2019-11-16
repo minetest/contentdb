@@ -108,7 +108,7 @@ def profile(username):
 					.all()
 
 	# Process GET or invalid POST
-	return render_template("users/users.profile.html",
+	return render_template("users/profile.html",
 			user=user, form=form, packages=packages, topics_to_add=topics_to_add)
 
 
