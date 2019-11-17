@@ -19,6 +19,7 @@ from flask_user import *
 import flask_menu as menu
 from app.models import *
 from app.querybuilder import QueryBuilder
+from app.utils import get_int_or_abort
 
 bp = Blueprint("todo", __name__)
 
@@ -82,8 +83,8 @@ def topics():
 	total = tmp_q.count()
 	topic_count = query.count()
 
-	page  = int(request.args.get("page") or 1)
-	num   = int(request.args.get("n") or 100)
+	page  = get_int_or_abort(request.args.get("page"), 1)
+	num   = get_int_or_abort(request.args.get("n"), 100)
 	if num > 100 and not current_user.rank.atLeast(UserRank.EDITOR):
 		num = 100
 

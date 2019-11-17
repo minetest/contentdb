@@ -52,8 +52,8 @@ def list_all():
 		if qb.search and topic:
 			return redirect("https://forum.minetest.net/viewtopic.php?t=" + str(topic.topic_id))
 
-	page  = int(request.args.get("page") or 1)
-	num   = min(40, int(request.args.get("n") or 100))
+	page  = get_int_or_abort(request.args.get("page"), 1)
+	num   = min(40, get_int_or_abort(request.args.get("n"), 100))
 	query = query.paginate(page, num, True)
 
 	search = request.args.get("q")

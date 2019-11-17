@@ -22,6 +22,12 @@ from app.models import *
 from app import app
 import random, string, os, imghdr
 
+def get_int_or_abort(v, default):
+	try:
+		return int(v or default)
+	except ValueError:
+		abort(400)
+
 def getExtension(filename):
 	return filename.rsplit(".", 1)[1].lower() if "." in filename else None
 
