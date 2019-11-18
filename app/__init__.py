@@ -25,12 +25,14 @@ from flask_github import GitHub
 from flask_wtf.csrf import CsrfProtect
 from flask_flatpages import FlatPages
 from flask_babel import Babel
-import os
+import os, redis
 
 app = Flask(__name__, static_folder="public/static")
 app.config["FLATPAGES_ROOT"] = "flatpages"
 app.config["FLATPAGES_EXTENSION"] = ".md"
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
+
+r = redis.Redis.from_url(app.config["REDIS_URL"])
 
 menu.Menu(app=app)
 markdown = Markdown(app, extensions=["fenced_code"], safe_mode=True, output_format="html5")

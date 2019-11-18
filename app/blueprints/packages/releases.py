@@ -20,6 +20,7 @@ from flask_user import *
 
 from . import bp
 
+from app.rediscache import has_key, set_key, make_download_key
 from app.models import *
 from app.tasks.importtasks import makeVCSRelease
 from app.utils import *
@@ -123,20 +124,18 @@ def download_release(package, id):
 	if release is None or release.package != package:
 		abort(404)
 
-	if release is None:
-		if "application/zip" in request.accept_mimetypes and \
-				not "text/html" in request.accept_mimetypes:
-			return "", 204
-		else:
-			flash("No download available.", "error")
-			return redirect(package.getDetailsURL())
-	else:
-		PackageRelease.query.filter_by(id=release.id).update({
-				"downloads": PackageRelease.downloads + 1
-			})
-		db.session.commit()
+	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
+	if ip is not None:
+		key = make_download_key(ip, release.package)
+		if not has_key(key):
+			set_key(key, "true")
 
-		return redirect(release.url, code=300)
+			PackageRelease.query.filter_by(id=release.id).update({
+					"downloads": PackageRelease.downloads + 1
+				})
+			db.session.commit()
+
+	return redirect(release.url, code=300)
 
 @bp.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
 @login_required
