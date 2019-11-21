@@ -24,6 +24,7 @@ from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from flask_migrate import Migrate
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+from sqlalchemy import func
 from sqlalchemy.orm import validates
 from sqlalchemy_searchable import SearchQueryMixin
 from sqlalchemy_utils.types import TSVectorType
@@ -425,6 +426,9 @@ class Package(db.Model):
 		for e in PackagePropertyKey:
 			setattr(self, e.name, getattr(package, e.name))
 
+	def getIsFOSS(self):
+		return self.license.is_foss and self.media_license.is_foss
+
 	def getState(self):
 		if self.approved:
 			return "approved"
@@ -602,22 +606,27 @@ class Package(db.Model):
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
 
-	def recalcScore(self):
-		self.score = 10
+	def setStartScore(self):
+		downloads = db.session.query(func.sum(PackageRelease.downloads)). \
+				filter(PackageRelease.package_id == self.id).scalar() or 0
 
-		if self.forums is not None:
-			topic = ForumTopic.query.get(self.forums)
-			if topic:
-				days   = (datetime.datetime.now() - topic.created_at).days
-				months = days / 30
-				years  = days / 365
-				self.score = topic.views / max(years, 0.0416) + 80*min(max(months, 0.5), 6)
+		forum_score = 0
+		forum_bonus = 0
+		topic = self.forums and ForumTopic.query.get(self.forums)
+		if topic:
+			months = (datetime.datetime.now() - topic.created_at).days / 30
+			years  = months / 12
+			forum_score = topic.views / max(years, 0.0416) + 80*min(max(months, 0.5), 6)
+			forum_bonus = topic.views + topic.posts
+
+		self.score = max(downloads, forum_score * 0.6) + forum_bonus
 
 		if self.getMainScreenshotURL() is None:
 			self.score *= 0.8
 
 		if not self.license.is_foss or not self.media_license.is_foss:
 			self.score *= 0.1
+
 
 class MetaPackage(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
