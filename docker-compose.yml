@@ -15,7 +15,7 @@ services:
 
   app:
     build: .
-    command: ./utils/run.sh
+    command: ./utils/entrypoint.sh
     env_file:
       - config.env
     ports:
