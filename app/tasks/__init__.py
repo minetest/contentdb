@@ -69,6 +69,10 @@ CELERYBEAT_SCHEDULE = {
 	'topic_list_import': {
 		'task': 'app.tasks.forumtasks.importTopicList',
 		'schedule': crontab(minute=1, hour=1),
+	},
+	'package_score_update': {
+		'task': 'app.tasks.pkgtasks.updatePackageScores',
+		'schedule': crontab(minute=10, hour=1),
 	}
 }
 celery.conf.beat_schedule = CELERYBEAT_SCHEDULE

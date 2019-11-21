@@ -130,9 +130,18 @@ def download_release(package, id):
 		if not has_key(key):
 			set_key(key, "true")
 
+			bonus = 1
+			if not package.getIsFOSS():
+				bonus *= 0.1
+
 			PackageRelease.query.filter_by(id=release.id).update({
 					"downloads": PackageRelease.downloads + 1
 				})
+
+			Package.query.filter_by(id=package.id).update({
+					"score": Package.score + bonus
+				})
+
 			db.session.commit()
 
 	return redirect(release.url, code=300)
