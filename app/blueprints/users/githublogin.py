@@ -54,10 +54,10 @@ def github_authorized(oauth_token):
 			current_user.github_username = username
 			db.session.commit()
 			flash("Linked github to account", "success")
-			return redirect(url_for("home_page"))
+			return redirect(url_for("homepage.home"))
 		else:
 			flash("Github account is already associated with another user", "danger")
-			return redirect(url_for("home_page"))
+			return redirect(url_for("homepage.home"))
 
 	# If not logged in, log in
 	else:
@@ -68,7 +68,7 @@ def github_authorized(oauth_token):
 			if current_user.password is None:
 				return redirect(next_url or url_for("users.set_password", optional=True))
 			else:
-				return redirect(next_url or url_for("home_page"))
+				return redirect(next_url or url_for("homepage.home"))
 		else:
 			flash("Authorization failed [err=gh-login-failed]", "danger")
 			return redirect(url_for("user.login"))

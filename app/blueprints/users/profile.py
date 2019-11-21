@@ -306,4 +306,4 @@ def verify_email():
 	if current_user.is_authenticated:
 		return redirect(url_for("users.profile", username=current_user.username))
 	else:
-		return redirect(url_for("home_page"))
+		return redirect(url_for("homepage.home"))

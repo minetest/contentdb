@@ -87,7 +87,7 @@ def view(id):
 			if package:
 				return redirect(package.getDetailsURL())
 			else:
-				return redirect(url_for("home_page"))
+				return redirect(url_for("homepage.home"))
 
 		if len(comment) <= 500 and len(comment) > 3:
 			reply = ThreadReply()
@@ -150,7 +150,7 @@ def new():
 	# Check that user can make the thread
 	if not package.checkPerm(current_user, Permission.CREATE_THREAD):
 		flash("Unable to create thread!", "error")
-		return redirect(url_for("home_page"))
+		return redirect(url_for("homepage.home"))
 
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
@@ -163,7 +163,7 @@ def new():
 		if package:
 			return redirect(package.getDetailsURL())
 		else:
-			return redirect(url_for("home_page"))
+			return redirect(url_for("homepage.home"))
 
 	# Set default values
 	elif request.method == "GET":

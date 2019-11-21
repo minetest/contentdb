@@ -8,7 +8,7 @@ from sqlalchemy.sql.expression import func
 
 @bp.route("/")
 @menu.register_menu(bp, ".", "Home")
-def home_page():
+def home():
 	query   = Package.query.filter_by(approved=True, soft_deleted=False)
 	count   = query.count()
 	new     = query.order_by(db.desc(Package.created_at)).limit(8).all()
