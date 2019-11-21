@@ -36,7 +36,7 @@ from sqlalchemy import or_
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
 @menu.register_menu(bp, ".games", "Games", order=12, endpoint_arguments_constructor=lambda: { 'type': 'game' })
 @menu.register_menu(bp, ".txp", "Texture Packs", order=13, endpoint_arguments_constructor=lambda: { 'type': 'txp' })
-@menu.register_menu(bp, ".random", "Random", order=14, endpoint_arguments_constructor=lambda: { 'random': '1' })
+@menu.register_menu(bp, ".random", "Random", order=14, endpoint_arguments_constructor=lambda: { 'random': '1', 'lucky': '1' })
 @bp.route("/packages/")
 def list_all():
 	qb    = QueryBuilder(request.args)

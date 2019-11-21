@@ -25,7 +25,7 @@ class QueryBuilder:
 		self.types  = types
 		self.search = args.get("q")
 		self.random = "random" in args
-		self.lucky  = self.random or "lucky" in args
+		self.lucky  = "lucky" in args
 		self.hide_nonfree = "nonfree" in hide_flags
 		self.limit  = 1 if self.lucky else None
 		self.order_by  = args.get("sort")
