@@ -1,5 +1,5 @@
 # Content DB
-# Copyright (C) 2018  rubenwardy
+# Copyright (C) 2019  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -14,8 +14,29 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import Blueprint
+from flask import request, make_response, jsonify, abort
+from app.models import APIToken
+from functools import wraps
 
-bp = Blueprint("api", __name__)
+def is_api_authd(f):
+	@wraps(f)
+	def decorated_function(*args, **kwargs):
+		token = None
 
-from . import tokens, endpoints
+		value = request.headers.get("authorization")
+		if value is None:
+			pass
+		elif value[0:7].lower() == "bearer ":
+			access_token = value[7:]
+			if len(access_token) < 10:
+				abort(400)
+
+			token = APIToken.query.filter_by(access_token=access_token).first()
+			if token is None:
+				abort(403)
+		else:
+			abort(403)
+
+		return f(token=token, *args, **kwargs)
+
+	return decorated_function

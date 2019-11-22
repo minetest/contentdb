@@ -127,6 +127,15 @@
 								</td>
 							</tr>
 						{% endif %}
+						{% if user.checkPerm(current_user, "CREATE_TOKEN") %}
+						<tr>
+							<td>API Tokens:</td>
+							<td>
+								<a href="{{ url_for('api.list_tokens', username=user.username) }}">Manage</a>
+								<span class="badge badge-primary">{{ user.tokens.count() }}</span>
+							</td>
+						</tr>
+						{% endif %}
 					</table>
 				</div>
 			</div>

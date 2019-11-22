@@ -220,6 +220,21 @@ title: Ranks and Permissions
 			<th>✓</th>
 		</tr>
 		<tr>
+			<td>Create Token</td>
+			<th></th> <!-- new -->
+			<th></th>
+			<th>✓</th> <!-- member -->
+			<th></th>
+			<th>✓</th> <!-- trusted member -->
+			<th></th>
+			<th>✓</th> <!-- editor -->
+			<th></th>
+			<th>✓</th> <!-- moderator -->
+			<th>✓<sup>2</sup></th>
+			<th>✓</th> <!-- admin -->
+			<th>✓</th>
+		</tr>
+		<tr>
 			<td>Set Rank</td>
 			<th></th> <!-- new -->
 			<th></th>

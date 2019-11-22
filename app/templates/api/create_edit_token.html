@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{% if token %}
+		{{ _("Edit - %(name)s", name=token.name) }}
+	{% else %}
+		{{ _("Create API Token") }}
+	{% endif %}
+{% endblock %}
+
+{% from "macros/forms.html" import render_field, render_submit_field, render_radio_field %}
+
+{% block content %}
+	{% if token %}
+		<form class="float-right" method="POST" action="{{ url_for('api.delete_token', username=token.owner.username, id=token.id) }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+			<input class="btn btn-danger" type="submit" value="Delete">
+		</form>
+	{% endif %}
+
+	<h1 class="mt-0">{{ self.title() }}</h1>
+
+	<div class="alert alert-warning">
+		{{ _("Use carefully, as you may be held responsible for any damage caused by rogue scripts") }}
+	</div>
+
+	{% if token %}
+		<div class="card mb-3">
+			<div class="card-header">{{ _("Access Token") }}</div>
+			<div class="card-body">
+				<p>
+					For security reasons, access tokens will only be shown once.
+					Reset the token if it is lost.
+				</p>
+				{% if access_token %}
+					<input class="form-control my-3" type="text" readonly value="{{ access_token }}" class="form-control">
+				{% endif %}
+				<form method="POST" action="{{ url_for('api.reset_token', username=token.owner.username, id=token.id) }}">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+					<input class="btn btn-primary" type="submit" value="Reset">
+				</form>
+			</div>
+		</div>
+	{% endif %}
+
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.name, placeholder="Human readable") }}
+
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}

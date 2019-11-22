@@ -92,6 +92,7 @@ class Permission(enum.Enum):
 	CREATE_THREAD      = "CREATE_THREAD"
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
 	TOPIC_DISCARD      = "TOPIC_DISCARD"
+	CREATE_TOKEN       = "CREATE_TOKEN"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -142,6 +143,7 @@ class User(db.Model, UserMixin):
 	packages      = db.relationship("Package", backref="author", lazy="dynamic")
 	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
 	threads       = db.relationship("Thread", backref="author", lazy="dynamic")
+	tokens        = db.relationship("APIToken", backref="owner", lazy="dynamic")
 	replies       = db.relationship("ThreadReply", backref="author", lazy="dynamic")
 
 	def __init__(self, username, active=False, email=None, password=None):
@@ -183,6 +185,11 @@ class User(db.Model, UserMixin):
 			return user.rank.atLeast(UserRank.MODERATOR)
 		elif perm == Permission.CHANGE_EMAIL:
 			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank))
+		elif perm == Permission.CREATE_TOKEN:
+			if user == self:
+				return user.rank.atLeast(UserRank.MEMBER)
+			else:
+				return user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank)
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
@@ -775,6 +782,16 @@ class PackageScreenshot(db.Model):
 	def getThumbnailURL(self, level=2):
 		return self.url.replace("/uploads/", ("/thumbnails/{:d}/").format(level))
 
+
+class APIToken(db.Model):
+	id           = db.Column(db.Integer, primary_key=True)
+	access_token = db.Column(db.String(34), unique=True)
+	name         = db.Column(db.String(100), nullable=False)
+	owner_id     = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+	def canOperateOnPackage(self, package):
+		return packages.count() == 0 or package in packages
 
 
 class EditRequest(db.Model):

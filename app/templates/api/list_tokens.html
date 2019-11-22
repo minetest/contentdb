@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("List tokens for %(username)s", username=user.username) }}
+{% endblock %}
+
+
+{% block content %}
+	<a class="btn btn-primary float-right" href="{{ url_for('api.create_edit_token', username=user.username) }}">Create</a>
+	<h1 class="mt-0">{{ self.title() }}</h1>
+
+	<ul>
+		{% for token in user.tokens %}
+			<li>
+				<a href="{{ url_for('api.create_edit_token', username=user.username, id=token.id) }}">{{ token.name }}</a>
+			</li>
+		{% else %}
+			<li>
+				<i>No tokens created</i>
+			</li>
+		{% endfor %}
+	</ul>
+{% endblock %}
