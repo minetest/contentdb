@@ -18,10 +18,40 @@ rm db.sqlite && python setup.py -t && FLASK_CONFIG=../config.cfg FLASK_APP=app/_
 
 # Create migration
 FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db migrate
-
 # Run migration
 FLASK_CONFIG=../config.cfg FLASK_APP=app/__init__.py flask db upgrade
 
 # Enter docker
 docker exec -it contentdb_app_1 bash
+```
+
+## Database
+
+
+```mermaid
+classDiagram
+
+User "1" --> "*" Package
+User --> UserEmailVerification
+User "1" --> "*" Notification
+Package "1" --> "*" Release
+Package "1" --> "*" Dependency
+Package "1" --> "*" Tag
+Package "1" --> "*" MetaPackage : provides
+Release --> MinetestVersion
+Package --> License
+Dependency --> Package
+Dependency --> MetaPackage
+MetaPackage "1" --> "*" Package
+Package "1" --> "*" Screenshot
+Package "1" --> "*" Thread
+Thread "1" --> "*" Reply
+Thread "1" --> "*" User : watchers
+User "1" --> "*" Thread
+User "1" --> "*" Reply
+User "1" --> "*" ForumTopic
+
+User --> "0..1" EmailPreferences
+User "1" --> "*" APIToken
+APIToken --> Package
 ```
