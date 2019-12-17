@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import Blueprint, render_template, redirect
+from flask import Blueprint, render_template, redirect, url_for
 from flask_user import current_user, login_required
 from app.models import db
 
