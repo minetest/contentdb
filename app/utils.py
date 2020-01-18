@@ -46,12 +46,12 @@ def randomString(n):
 	return ''.join(random.choice(string.ascii_lowercase + \
 			string.ascii_uppercase + string.digits) for _ in range(n))
 
-assert(os.path.isdir(app.config["UPLOAD_DIR"]), "UPLOAD_DIR must exist")
-
 def doFileUpload(file, fileType, fileTypeDesc):
 	if not file or file is None or file.filename == "":
 		flash("No selected file", "error")
 		return None
+
+	assert os.path.isdir(app.config["UPLOAD_DIR"]), "UPLOAD_DIR must exist"
 
 	allowedExtensions = []
 	isImage = False

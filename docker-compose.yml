@@ -22,6 +22,8 @@ services:
       - 5123:5123
     volumes:
       - "./data/uploads:/var/cdb/uploads"
+      - "./app:/source/app"
+      - "./migrations:/source/migrations"
     depends_on:
       - db
       - redis
@@ -35,6 +37,7 @@ services:
       - FLASK_CONFIG=../config.cfg
     volumes:
       - "./data/uploads:/var/cdb/uploads"
+      - "./app:/home/cdb/app"
     depends_on:
       - redis
 

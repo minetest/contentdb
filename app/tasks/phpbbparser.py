@@ -121,7 +121,7 @@ def parseForumListPage(id, page, out, extra=None):
 
 		if id in out:
 			print("   - got {} again, title: {}".format(id, title))
-			assert(title == out[id]['title'])
+			assert title == out[id]['title']
 			return False
 
 		row = {

@@ -25,7 +25,7 @@ from PIL import Image
 ALLOWED_RESOLUTIONS=[(100,67), (270,180), (350,233)]
 
 def mkdir(path):
-	assert(path != "" and path is not None)
+	assert path != "" and path is not None
 	if not os.path.isdir(path):
 		os.mkdir(path)
 
