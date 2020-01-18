@@ -62,7 +62,7 @@ class QueryBuilder:
 			query = query.filter(Package.type.in_(self.types))
 
 		if self.search:
-			query = query.search(self.search)
+			query = query.search(self.search, sort=True)
 
 		if self.random:
 			query = query.order_by(func.random())

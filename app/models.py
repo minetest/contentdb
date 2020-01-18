@@ -24,8 +24,7 @@ from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from flask_migrate import Migrate
 from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
-from sqlalchemy import func
-from sqlalchemy.orm import validates
+from sqlalchemy import func, CheckConstraint
 from sqlalchemy_searchable import SearchQueryMixin
 from sqlalchemy_utils.types import TSVectorType
 from sqlalchemy_searchable import make_searchable
@@ -310,7 +309,7 @@ class Dependency(db.Model):
 	package         = db.relationship("Package", foreign_keys=[package_id])
 	meta_package_id = db.Column(db.Integer, db.ForeignKey("meta_package.id"), nullable=True)
 	optional        = db.Column(db.Boolean, nullable=False, default=False)
-	__table_args__  = (db.UniqueConstraint('depender_id', 'package_id', 'meta_package_id', name='_dependency_uc'), )
+	__table_args__  = (db.UniqueConstraint("depender_id", "package_id", "meta_package_id", name="_dependency_uc"), )
 
 	def __init__(self, depender=None, package=None, meta=None):
 		if depender is None:
@@ -377,14 +376,17 @@ class Package(db.Model):
 
 	# Basic details
 	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"))
-	name         = db.Column(db.String(100), nullable=False)
+	name         = db.Column(db.Unicode(100), nullable=False)
 	title        = db.Column(db.Unicode(100), nullable=False)
 	short_desc   = db.Column(db.Unicode(200), nullable=False)
 	desc         = db.Column(db.UnicodeText, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
-	search_vector = db.Column(TSVectorType("title", "short_desc", "desc"))
+	name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
+
+	search_vector = db.Column(TSVectorType("title", "short_desc", "desc", \
+			weights={ "title": "A", "short_desc": "B", "desc": "C" }))
 
 	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	license      = db.relationship("License", foreign_keys=[license_id])
