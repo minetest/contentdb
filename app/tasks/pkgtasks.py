@@ -15,9 +15,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from app.models import Package, PackageRelease
+from app.models import Package
 from app.tasks import celery
 
 @celery.task()
 def updatePackageScores():
-	Package.query.update({ "score": PackageRelease.score * 0.8 })
+	Package.query.update({ "score": Package.score * 0.8 })
