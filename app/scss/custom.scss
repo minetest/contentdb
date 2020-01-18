@@ -4,7 +4,7 @@
 @import "comments.scss";
 
 .dropdown-menu {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .dropdown:hover .dropdown-menu {
@@ -16,42 +16,48 @@
 }
 
 #alerts {
-    display: block;
-    list-style: none;
-    position: fixed;
-    bottom: 0;
-    left:0;
-    right:0;
-    margin: 0;
-    padding:0;
-    z-index: 1000;
+	display: block;
+	list-style: none;
+	position: fixed;
+	bottom: 0;
+	left:0;
+	right:0;
+	margin: 0;
+	padding:0;
+	z-index: 1000;
 }
 
 #alerts li {
-    list-style: none;
+	list-style: none;
 }
 
 .jumbotron {
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	.btn-outline-secondary {
+		color: #eee;
+		border-color: #666;
+		background: rgba(102, 102, 102, 0.3);
+	}
 }
 
 .alert .btn {
-    text-decoration: none;
+	text-decoration: none;
 }
 
 .card .table {
-    margin-bottom: 0;
+	margin-bottom: 0;
 }
 
 .btn-download {
-    color: #fff;
-    background-color: #00b05c;
-    border-color: #00b05c;
+	color: #fff;
+	background-color: #00b05c;
+	border-color: #00b05c;
 }
 
 .btn-download:focus, .btn-download.focus {
-    -webkit-box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.5);
-    box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.5);
+	-webkit-box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.5);
+	box-shadow: 0 0 0 0.2rem rgba(231, 76, 60, 0.5);
 }

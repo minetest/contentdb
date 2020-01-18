@@ -23,14 +23,14 @@
 			</p>
 
 			<div class="row" style="margin-top: 2rem;">
-				<div class="col">
+				<div class="col text-secondary">
 					{{ package.getDownloadCount() }} downloads
 				</div>
 				<div class="btn-group-horizontal col-md-auto">
-					{% if package.repo %}<a class="btn btn-secondary" href="{{ package.repo }}">View Source</a>{% endif %}
-					{% if package.forums %}<a class="btn btn-secondary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
-					{% if package.issueTracker %}<a class="btn btn-secondary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
-					{% if package.website %}<a class="btn btn-secondary" href="{{ package.website }}">Website</a>{% endif %}
+					{% if package.repo %}<a class="btn btn-outline-secondary" href="{{ package.repo }}">View Source</a>{% endif %}
+					{% if package.forums %}<a class="btn btn-outline-secondary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
+					{% if package.issueTracker %}<a class="btn btn-outline-secondary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
+					{% if package.website %}<a class="btn btn-outline-secondary" href="{{ package.website }}">Website</a>{% endif %}
 				</div>
 			</div>
 		</div>
