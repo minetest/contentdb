@@ -25,10 +25,10 @@ from PIL import Image
 ALLOWED_RESOLUTIONS=[(100,67), (270,180), (350,233)]
 
 def mkdir(path):
+	assert(path != "" and path is not None)
 	if not os.path.isdir(path):
 		os.mkdir(path)
 
-mkdir("app/public/thumbnails/")
 
 def resize_and_crop(img_path, modified_path, size):
 	img = Image.open(img_path)
@@ -65,10 +65,15 @@ def make_thumbnail(img, level):
 
 	w, h = ALLOWED_RESOLUTIONS[level - 1]
 
-	mkdir("app/public/thumbnails/{:d}/".format(level))
+	upload_dir = current_app.config["UPLOAD_DIR"]
+	thumbnail_dir = current_app.config["THUMBNAIL_DIR"]
+	mkdir(thumbnail_dir)
 
-	cache_filepath  = "public/thumbnails/{:d}/{}".format(level, img)
-	source_filepath = "public/uploads/" + img
+	output_dir = os.path.join(thumbnail_dir, str(level))
+	mkdir(output_dir)
 
-	resize_and_crop("app/" + source_filepath, "app/" + cache_filepath, (w, h))
+	cache_filepath  = os.path.join(output_dir, img)
+	source_filepath = os.path.join(upload_dir, img)
+
+	resize_and_crop(source_filepath, cache_filepath, (w, h))
 	return send_file(cache_filepath)

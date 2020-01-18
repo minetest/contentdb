@@ -389,7 +389,7 @@ def makeVCSRelease(id, branch):
 
 		try:
 			filename = randomString(10) + ".zip"
-			destPath = os.path.join("app/public/uploads", filename)
+			destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
 			with open(destPath, "wb") as fp:
 				repo.archive(fp, format="zip")
 
@@ -424,7 +424,7 @@ def importRepoScreenshot(id):
 			sourcePath = gitDir + "/screenshot." + ext
 			if os.path.isfile(sourcePath):
 				filename = randomString(10) + "." + ext
-				destPath = os.path.join("app/public/uploads", filename)
+				destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
 				shutil.copyfile(sourcePath, destPath)
 
 				ss = PackageScreenshot()

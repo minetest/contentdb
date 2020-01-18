@@ -5,15 +5,18 @@ RUN groupadd -g 5123 cdb && \
 
 WORKDIR /home/cdb
 
+RUN mkdir /var/cdb
+RUN chown -R cdb:cdb /var/cdb
+
 COPY requirements.txt requirements.txt
-RUN pip install -r ./requirements.txt
+RUN pip install -r requirements.txt
 RUN pip install gunicorn
 
 COPY utils utils
-COPY config.cfg ./config.cfg
+COPY config.cfg config.cfg
 COPY migrations migrations
 COPY app app
 
-RUN mkdir /home/cdb/app/public/uploads/
-RUN chown cdb:cdb /home/cdb -R
+RUN chown -R cdb:cdb /home/cdb
+
 USER cdb

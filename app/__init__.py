@@ -72,7 +72,7 @@ from flask_login import logout_user
 
 @app.route("/uploads/<path:path>")
 def send_upload(path):
-	return send_from_directory("public/uploads", path)
+	return send_from_directory(app.config['UPLOAD_DIR'], path)
 
 @menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { 'path': 'help' })
 @app.route('/<path:path>/')

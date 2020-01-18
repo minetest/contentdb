@@ -46,6 +46,8 @@ def randomString(n):
 	return ''.join(random.choice(string.ascii_lowercase + \
 			string.ascii_uppercase + string.digits) for _ in range(n))
 
+assert(os.path.isdir(app.config["UPLOAD_DIR"]), "UPLOAD_DIR must exist")
+
 def doFileUpload(file, fileType, fileTypeDesc):
 	if not file or file is None or file.filename == "":
 		flash("No selected file", "error")
@@ -73,7 +75,7 @@ def doFileUpload(file, fileType, fileTypeDesc):
 	file.stream.seek(0)
 
 	filename = randomString(10) + "." + ext
-	file.save(os.path.join("app/public/uploads", filename))
+	file.save(os.path.join(app.config["UPLOAD_DIR"], filename))
 	return "/uploads/" + filename
 
 def make_flask_user_password(plaintext_str):
