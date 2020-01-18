@@ -732,6 +732,8 @@ class PackageRelease(db.Model):
 	max_rel_id = db.Column(db.Integer, db.ForeignKey("minetest_release.id"), nullable=True, server_default=None)
 	max_rel    = db.relationship("MinetestRelease", foreign_keys=[max_rel_id])
 
+	# If the release is approved, then the task_id must be null and the url must be present
+	CK_approval_valid = db.CheckConstraint("not approved OR (task_id IS NULL AND (url = '') IS NOT FALSE)")
 
 	def getEditURL(self):
 		return url_for("packages.edit_release",
