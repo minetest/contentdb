@@ -2,6 +2,7 @@
 
 #
 # Call from a docker host to rebuild and update running instances of CDB.
+#    This is for production use. See reload.sh for debug mode hot/live reloading.
 #
 
 sudo docker-compose build app
