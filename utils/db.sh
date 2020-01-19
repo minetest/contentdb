@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Open SQL console for the database
 

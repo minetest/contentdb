@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # Open SSH to app instance
 

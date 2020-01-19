@@ -1,0 +1,22 @@
+image: docker/compose
+services:
+  - docker:dind
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - /var/lib/docker
+
+# build:
+#   stage: build
+#   script:
+#     - cp utils/gitlabci/* .
+#     - docker-compose build
+
+UI_Test:
+  stage: test
+  script:
+    - cp utils/gitlabci/* .
+    - docker-compose up -d
+    - ./utils/run_migrations.sh
+    - ./utils/tests.sh
+    - docker-compose down

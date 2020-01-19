@@ -16,6 +16,7 @@ def recreate_db():
 	populate(db.session)
 	db.session.commit()
 
+
 @pytest.fixture
 def client():
 	app.config["TESTING"] = True
