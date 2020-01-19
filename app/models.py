@@ -23,7 +23,7 @@ from urllib.parse import urlparse
 from flask import Flask, url_for
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from flask_migrate import Migrate
-from flask_user import login_required, UserManager, UserMixin, SQLAlchemyAdapter
+from flask_user import login_required, UserManager, UserMixin
 from sqlalchemy import func, CheckConstraint
 from sqlalchemy_searchable import SearchQueryMixin
 from sqlalchemy_utils.types import TSVectorType
@@ -125,7 +125,7 @@ class User(db.Model, UserMixin):
 
 	# User email information
 	email         = db.Column(db.String(255), nullable=True, unique=True)
-	confirmed_at  = db.Column(db.DateTime())
+	email_confirmed_at  = db.Column(db.DateTime())
 
 	# User information
 	profile_pic   = db.Column(db.String(255), nullable=True, server_default=None)
@@ -148,7 +148,7 @@ class User(db.Model, UserMixin):
 
 	def __init__(self, username, active=False, email=None, password=None):
 		self.username = username
-		self.confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
+		self.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
 		self.active = active
 		self.email = email
@@ -1044,5 +1044,4 @@ class ForumTopic(db.Model):
 
 
 # Setup Flask-User
-db_adapter = SQLAlchemyAdapter(db, User)        # Register the User model
-user_manager = UserManager(db_adapter, app)     # Initialize Flask-User
+user_manager = UserManager(app, db, User)

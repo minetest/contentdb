@@ -102,7 +102,7 @@ def make_flask_user_password(plaintext_str):
 	else:
 		return password.decode("UTF-8")
 
-def _do_login_user(user, remember_me=False):
+def loginUser(user):
 	def _call_or_get(v):
 		if callable(v):
 			return v()
@@ -128,29 +128,14 @@ def _do_login_user(user, remember_me=False):
 		flash("Your account has not been enabled.", "error")
 		return False
 
-	# Check if user has a confirmed email address
-	user_manager = current_app.user_manager
-	if user_manager.enable_email and user_manager.enable_confirm_email \
-			and not current_app.user_manager.enable_login_without_confirm_email \
-			and not user.has_confirmed_email():
-		url = url_for("user.resend_confirm_email")
-		flash("Your email address has not yet been confirmed", "error")
-		return False
-
 	# Use Flask-Login to sign in user
-	login_user(user, remember=remember_me)
+	login_user(user, remember=True)
 	signals.user_logged_in.send(current_app._get_current_object(), user=user)
 
 	flash("You have signed in successfully.", "success")
 
 	return True
 
-def loginUser(user):
-	user_mixin = None
-	if user_manager.enable_username:
-		user_mixin = user_manager.find_user_by_username(user.username)
-
-	return _do_login_user(user_mixin, True)
 
 def rank_required(rank):
 	def decorator(f):
