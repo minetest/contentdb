@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+	<h2>{{ _("Edit Release") }}</h2>
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
@@ -59,6 +60,20 @@
 
 		{{ render_submit_field(form.submit) }}
 	</form>
+
+	<h2 class="mt-5">{{ _("Delete Release") }}</h2>
+
+	{% if release.checkPerm(current_user, "DELETE_RELEASE") %}
+		<form method="POST" action="{{ release.getDeleteURL() }}" class="mb-5">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<p>This is permanent.</p>
+			<input class="btn btn-danger" type="submit" value="Delete">
+		</form>
+	{% else %}
+		<div class="alert alert-secondary mb-5">
+			{{ _("You cannot delete the latest release; please create a newer one first.") }}
+		</div>
+	{% endif %}
 {% endblock %}
 
 {% block scriptextra %}

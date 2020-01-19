@@ -78,6 +78,7 @@ class Permission(enum.Enum):
 	CHANGE_AUTHOR      = "CHANGE_AUTHOR"
 	CHANGE_NAME        = "CHANGE_NAME"
 	MAKE_RELEASE       = "MAKE_RELEASE"
+	DELETE_RELEASE     = "DELETE_RELEASE"
 	ADD_SCREENSHOTS    = "ADD_SCREENSHOTS"
 	APPROVE_SCREENSHOT = "APPROVE_SCREENSHOT"
 	APPROVE_RELEASE    = "APPROVE_RELEASE"
@@ -741,6 +742,12 @@ class PackageRelease(db.Model):
 				name=self.package.name,
 				id=self.id)
 
+	def getDeleteURL(self):
+		return url_for("packages.delete_release",
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
+
 	def getDownloadURL(self):
 		return url_for("packages.download_release",
 				author=self.package.author.username,
@@ -760,6 +767,36 @@ class PackageRelease(db.Model):
 
 		self.approved = True
 		return True
+
+	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return False
+
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to PackageRelease.checkPerm()")
+
+		isOwner = user == self.package.author
+
+		if perm == Permission.DELETE_RELEASE:
+			if user.rank.atLeast(UserRank.ADMIN):
+				return True
+
+			if not (isOwner or user.rank.atLeast(UserRank.EDITOR)):
+				return False
+
+			if not self.package.approved:
+				return True
+
+			count = PackageRelease.query \
+					.filter_by(package_id=self.package_id) \
+					.filter(PackageRelease.id > self.id) \
+					.count()
+
+			return count > 0
+		else:
+			raise Exception("Permission {} is not related to releases".format(perm.name))
 
 
 class PackageReview(db.Model):

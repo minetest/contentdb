@@ -225,3 +225,20 @@ def bulk_change_release(package):
 		return redirect(package.getDetailsURL())
 
 	return render_template("packages/release_bulk_change.html", package=package, form=form)
+
+
+@bp.route("/packages/<author>/<name>/releases/<id>/delete/", methods=["POST"])
+@login_required
+@is_package_page
+def delete_release(package, id):
+	release = PackageRelease.query.get(id)
+	if release is None or release.package != package:
+		abort(404)
+
+	if not release.checkPerm(current_user, Permission.DELETE_RELEASE):
+		return redirect(release.getEditURL())
+
+	db.session.delete(release)
+	db.session.commit()
+
+	return redirect(package.getDetailsURL())
