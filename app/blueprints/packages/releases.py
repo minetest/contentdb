@@ -22,7 +22,7 @@ from . import bp
 
 from app.rediscache import has_key, set_key, make_download_key
 from app.models import *
-from app.tasks.importtasks import makeVCSRelease
+from app.tasks.importtasks import makeVCSRelease, checkZIPRelease
 from app.utils import *
 
 from celery import uuid
@@ -98,22 +98,25 @@ def create_release(package):
 
 			return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))
 		else:
-			uploadedPath = doFileUpload(form.fileUpload.data, "zip", "a zip file")
-			if uploadedPath is not None:
+			uploadedUrl, uploadedPath = doFileUpload(form.fileUpload.data, "zip", "a zip file")
+			if uploadedUrl is not None:
 				rel = PackageRelease()
 				rel.package = package
 				rel.title = form["title"].data
-				rel.url = uploadedPath
+				rel.url = uploadedUrl
+				rel.task_id = uuid()
 				rel.min_rel = form["min_rel"].data.getActual()
 				rel.max_rel = form["max_rel"].data.getActual()
-				rel.approve(current_user)
 				db.session.add(rel)
 				db.session.commit()
+
+				checkZIPRelease.apply_async((rel.id, uploadedPath), task_id=rel.task_id)
 
 				msg = "{}: Release {} created".format(package.title, rel.title)
 				triggerNotif(package.author, current_user, msg, rel.getEditURL())
 				db.session.commit()
-				return redirect(package.getDetailsURL())
+
+				return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))
 
 	return render_template("packages/release_new.html", package=package, form=form)
 

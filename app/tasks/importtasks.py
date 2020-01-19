@@ -22,6 +22,8 @@ from flask_sqlalchemy import SQLAlchemy
 from urllib.error import HTTPError
 import urllib.request
 from urllib.parse import urlparse, quote_plus, urlsplit
+from zipfile import ZipFile
+
 from app import app
 from app.models import *
 from app.tasks import celery, TaskError
@@ -133,12 +135,17 @@ def generateGitURL(urlstr):
 
 	return "http://:@" + netloc + path + query
 
+
+def getTempDir():
+	return os.path.join(tempfile.gettempdir(), randomString(10))
+
+
 # Clones a repo from an unvalidated URL.
 # Returns a tuple of path and repo on sucess.
 # Throws `TaskError` on failure.
 # Caller is responsible for deleting returned directory.
 def cloneRepo(urlstr, ref=None, recursive=False):
-	gitDir = tempfile.gettempdir() + "/" + randomString(10)
+	gitDir = getTempDir()
 
 	err = None
 	try:
@@ -221,6 +228,32 @@ def makeVCSReleaseFromGithub(id, branch, release, url):
 
 	return release.url
 
+
+@celery.task()
+def checkZIPRelease(id, path):
+	release = PackageRelease.query.get(id)
+	if release is None:
+		raise TaskError("No such release!")
+	elif release.package is None:
+		raise TaskError("No package attached to release")
+
+	temp = getTempDir()
+	try:
+		with ZipFile(path, 'r') as zip_ref:
+			zip_ref.extractall(temp)
+
+		try:
+			tree = build_tree(temp, expected_type=ContentType[release.package.type.name], \
+				author=release.package.author.username, name=release.package.name)
+		except MinetestCheckError as err:
+			raise TaskError(str(err))
+
+		release.task_id = None
+		release.approve(release.package.author)
+		db.session.commit()
+
+	finally:
+		shutil.rmtree(temp)
 
 
 @celery.task()

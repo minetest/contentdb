@@ -49,7 +49,7 @@ def randomString(n):
 def doFileUpload(file, fileType, fileTypeDesc):
 	if not file or file is None or file.filename == "":
 		flash("No selected file", "error")
-		return None
+		return None, None
 
 	assert os.path.isdir(app.config["UPLOAD_DIR"]), "UPLOAD_DIR must exist"
 
@@ -66,17 +66,18 @@ def doFileUpload(file, fileType, fileTypeDesc):
 	ext = getExtension(file.filename)
 	if ext is None or not ext in allowedExtensions:
 		flash("Please upload load " + fileTypeDesc, "danger")
-		return None
+		return None, None
 
 	if isImage and not isAllowedImage(file.stream.read()):
 		flash("Uploaded image isn't actually an image", "danger")
-		return None
+		return None, None
 
 	file.stream.seek(0)
 
 	filename = randomString(10) + "." + ext
-	file.save(os.path.join(app.config["UPLOAD_DIR"], filename))
-	return "/uploads/" + filename
+	filepath = os.path.join(app.config["UPLOAD_DIR"], filename)
+	file.save(filepath)
+	return "/uploads/" + filename, filepath
 
 def make_flask_user_password(plaintext_str):
 	# http://passlib.readthedocs.io/en/stable/modular_crypt_format.html

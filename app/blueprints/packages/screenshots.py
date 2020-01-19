@@ -50,13 +50,13 @@ def create_screenshot(package, id=None):
 	# Initial form class from post data and default data
 	form = CreateScreenshotForm()
 	if request.method == "POST" and form.validate():
-		uploadedPath = doFileUpload(form.fileUpload.data, "image",
+		uploadedUrl, uploadedPath = doFileUpload(form.fileUpload.data, "image",
 				"a PNG or JPG image file")
-		if uploadedPath is not None:
+		if uploadedUrl is not None:
 			ss = PackageScreenshot()
 			ss.package  = package
 			ss.title    = form["title"].data or "Untitled"
-			ss.url      = uploadedPath
+			ss.url      = uploadedUrl
 			ss.approved = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
 			db.session.add(ss)
 
