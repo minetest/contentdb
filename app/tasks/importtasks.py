@@ -17,6 +17,7 @@
 
 import flask, json, os, git, tempfile, shutil, gitdb
 from git import GitCommandError
+from git_archive_all import GitArchiver
 from flask_sqlalchemy import SQLAlchemy
 from urllib.error import HTTPError
 import urllib.request
@@ -380,29 +381,31 @@ def makeVCSRelease(id, branch):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	urlmaker = None
-	url = urlparse(release.package.repo)
-	if url.netloc == "github.com":
-		return makeVCSReleaseFromGithub(id, branch, release, url)
-	else:
-		gitDir, repo = cloneRepo(release.package.repo, ref=branch, recursive=True)
+	# url = urlparse(release.package.repo)
+	# if url.netloc == "github.com":
+	# 	return makeVCSReleaseFromGithub(id, branch, release, url)
 
-		try:
-			filename = randomString(10) + ".zip"
-			destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
-			with open(destPath, "wb") as fp:
-				repo.archive(fp, format="zip")
+	gitDir, repo = cloneRepo(release.package.repo, ref=branch, recursive=True)
 
-			release.url         = "/uploads/" + filename
-			release.task_id     = None
-			release.commit_hash = repo.head.object.hexsha
-			release.approve(release.package.author)
-			print(release.url)
-			db.session.commit()
+	try:
+		filename = randomString(10) + ".zip"
+		destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
 
-			return release.url
-		finally:
-			shutil.rmtree(gitDir)
+		assert(not os.path.isfile(destPath))
+		archiver = GitArchiver(force_sub=True, main_repo_abspath=gitDir)
+		archiver.create(destPath)
+		assert(os.path.isfile(destPath))
+
+		release.url         = "/uploads/" + filename
+		release.task_id     = None
+		release.commit_hash = repo.head.object.hexsha
+		release.approve(release.package.author)
+		print(release.url)
+		db.session.commit()
+
+		return release.url
+	finally:
+		shutil.rmtree(gitDir)
 
 @celery.task()
 def importRepoScreenshot(id):
