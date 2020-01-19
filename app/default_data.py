@@ -3,13 +3,13 @@ from .utils import make_flask_user_password
 
 
 def populate(session):
-	ruben = User("rubenwardy")
-	ruben.active = True
-	ruben.password = make_flask_user_password("tuckfrump")
-	ruben.github_username = "rubenwardy"
-	ruben.forums_username = "rubenwardy"
-	ruben.rank = UserRank.ADMIN
-	session.add(ruben)
+	admin_user = User("rubenwardy")
+	admin_user.active = True
+	admin_user.password = make_flask_user_password("tuckfrump")
+	admin_user.github_username = "rubenwardy"
+	admin_user.forums_username = "rubenwardy"
+	admin_user.rank = UserRank.ADMIN
+	session.add(admin_user)
 
 	tags = {}
 	for tag in ["Inventory", "Mapgen", "Building", \
@@ -41,7 +41,7 @@ def populate_test_data(session, licenses, tags, admin_user):
 	ez.rank = UserRank.EDITOR
 	session.add(ez)
 
-	not1 = Notification(ruben, ez, "Awards approved", "/packages/rubenwardy/awards/")
+	not1 = Notification(admin_user, ez, "Awards approved", "/packages/rubenwardy/awards/")
 	session.add(not1)
 
 	jeija = User("Jeija")
@@ -55,8 +55,9 @@ def populate_test_data(session, licenses, tags, admin_user):
 	mod.name = "alpha"
 	mod.title = "Alpha Test"
 	mod.license = licenses["MIT"]
+	mod.media_license = licenses["MIT"]
 	mod.type = PackageType.MOD
-	mod.author = ruben
+	mod.author = admin_user
 	mod.tags.append(tags["mapgen"])
 	mod.tags.append(tags["environment"])
 	mod.repo = "https://github.com/ezhh/other_worlds"
@@ -78,8 +79,9 @@ def populate_test_data(session, licenses, tags, admin_user):
 	mod1.name = "awards"
 	mod1.title = "Awards"
 	mod1.license = licenses["LGPLv2.1"]
+	mod1.media_license = licenses["MIT"]
 	mod1.type = PackageType.MOD
-	mod1.author = ruben
+	mod1.author = admin_user
 	mod1.tags.append(tags["player_effects"])
 	mod1.repo = "https://github.com/rubenwardy/awards"
 	mod1.issueTracker = "https://github.com/rubenwardy/awards/issues"
@@ -115,6 +117,7 @@ awards.register_achievement("award_mesefind",{
 	mod2.tags.append(tags["tools"])
 	mod2.type = PackageType.MOD
 	mod2.license = licenses["LGPLv3"]
+	mod2.media_license = licenses["MIT"]
 	mod2.author = jeija
 	mod2.repo = "https://github.com/minetest-mods/mesecons/"
 	mod2.issueTracker = "https://github.com/minetest-mods/mesecons/issues"
@@ -201,6 +204,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.name = "handholds"
 	mod.title = "Handholds"
 	mod.license = licenses["MIT"]
+	mod.media_license = licenses["MIT"]
 	mod.type = PackageType.MOD
 	mod.author = ez
 	mod.tags.append(tags["player_effects"])
@@ -223,6 +227,7 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.name = "other_worlds"
 	mod.title = "Other Worlds"
 	mod.license = licenses["MIT"]
+	mod.media_license = licenses["MIT"]
 	mod.type = PackageType.MOD
 	mod.author = ez
 	mod.tags.append(tags["mapgen"])
@@ -239,15 +244,15 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.name = "food"
 	mod.title = "Food"
 	mod.license = licenses["LGPLv2.1"]
+	mod.media_license = licenses["MIT"]
 	mod.type = PackageType.MOD
-	mod.author = ruben
+	mod.author = admin_user
 	mod.tags.append(tags["player_effects"])
 	mod.repo = "https://github.com/rubenwardy/food/"
 	mod.issueTracker = "https://github.com/rubenwardy/food/issues/"
 	mod.forums = 2960
 	mod.short_desc = "Adds lots of food and an API to manage ingredients"
 	mod.desc = "This is the long desc"
-	food = mod
 	session.add(mod)
 
 	mod = Package()
@@ -255,8 +260,9 @@ No warranty is provided, express or implied, for any part of the project.
 	mod.name = "food_sweet"
 	mod.title = "Sweet Foods"
 	mod.license = licenses["CC0"]
+	mod.media_license = licenses["MIT"]
 	mod.type = PackageType.MOD
-	mod.author = ruben
+	mod.author = admin_user
 	mod.tags.append(tags["player_effects"])
 	mod.repo = "https://github.com/rubenwardy/food_sweet/"
 	mod.issueTracker = "https://github.com/rubenwardy/food_sweet/issues/"
@@ -272,7 +278,8 @@ No warranty is provided, express or implied, for any part of the project.
 	game1.title = "Capture The Flag"
 	game1.type = PackageType.GAME
 	game1.license = licenses["LGPLv2.1"]
-	game1.author = ruben
+	game1.media_license = licenses["MIT"]
+	game1.author = admin_user
 	game1.tags.append(tags["pvp"])
 	game1.tags.append(tags["survival"])
 	game1.tags.append(tags["multiplayer"])
@@ -301,8 +308,9 @@ Uses the CTF PvP Engine.
 	mod.name = "pixelbox"
 	mod.title = "PixelBOX Reloaded"
 	mod.license = licenses["CC0"]
+	mod.media_license = licenses["MIT"]
 	mod.type = PackageType.TXP
-	mod.author = ruben
+	mod.author = admin_user
 	mod.forums = 14132
 	mod.short_desc = "This is an update of the original PixelBOX texture pack by the brillant artist Gambit"
 	mod.desc = "This is the long desc"
@@ -314,6 +322,8 @@ Uses the CTF PvP Engine.
 	rel.url = "http://mamadou3.free.fr/Minetest/PixelBOX.zip"
 	rel.approved = True
 	session.add(rel)
+
+	session.commit()
 
 	metas = {}
 	for package in Package.query.filter_by(type=PackageType.MOD).all():

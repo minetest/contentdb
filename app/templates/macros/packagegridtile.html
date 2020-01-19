@@ -40,8 +40,10 @@
 		{% else %}
 			<li><i>No packages available</i></ul>
 		{% endfor %}
-		{% for i in range(4) %}
-			<li class="packagetile flex-fill"></li>
-		{% endfor %}
+		{% if packages %}
+			{% for i in range(4) %}
+				<li class="packagetile flex-fill"></li>
+			{% endfor %}
+		{% endif %}
 	</ul>
 {% endmacro %}
