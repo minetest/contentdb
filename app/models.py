@@ -114,7 +114,7 @@ class User(db.Model, UserMixin):
 
 	# User authentication information
 	username     = db.Column(db.String(50, collation="NOCASE"), nullable=False, unique=True, index=True)
-	password     = db.Column(db.String(255), nullable=True)
+	password     = db.Column(db.String(255), nullable=False, server_default="")
 	reset_password_token = db.Column(db.String(100), nullable=False, server_default="")
 
 	rank         = db.Column(db.Enum(UserRank))
@@ -799,11 +799,11 @@ class PackageRelease(db.Model):
 			raise Exception("Permission {} is not related to releases".format(perm.name))
 
 
-class PackageReview(db.Model):
-	id         = db.Column(db.Integer, primary_key=True)
-	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
-	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
-	recommend  = db.Column(db.Boolean, nullable=False, default=True)
+# class PackageReview(db.Model):
+# 	id         = db.Column(db.Integer, primary_key=True)
+# 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
+# 	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
+# 	recommend  = db.Column(db.Boolean, nullable=False, default=True)
 
 
 class PackageScreenshot(db.Model):

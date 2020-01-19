@@ -15,6 +15,7 @@ def home():
 	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
 	pop_gam = query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(4).all()
 	pop_txp = query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score)).limit(4).all()
-	downloads = db.session.query(func.sum(PackageRelease.downloads)).first()[0]
+	downloads_result = db.session.query(func.sum(PackageRelease.downloads)).one_or_none()
+	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 	return render_template("index.html", count=count, downloads=downloads, \
 			new=new, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam)
