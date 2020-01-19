@@ -170,7 +170,7 @@ class SetPasswordForm(FlaskForm):
 @bp.route("/user/set-password/", methods=["GET", "POST"])
 @login_required
 def set_password():
-	if current_user.password is not None:
+	if current_user.hasPassword():
 		return redirect(url_for("user.change_password"))
 
 	form = SetPasswordForm(request.form)
@@ -185,10 +185,11 @@ def set_password():
 			hashed_password = user_manager.hash_password(form.password.data)
 
 			# Change password
-			user_manager.update_password(current_user, hashed_password)
+			current_user.password = hashed_password
+			db.session.commit()
 
 			# Send 'password_changed' email
-			if user_manager.enable_email and user_manager.send_password_changed_email and current_user.email:
+			if user_manager.USER_ENABLE_EMAIL and current_user.email:
 				emails.send_password_changed_email(current_user)
 
 			# Send password_changed signal
@@ -211,7 +212,7 @@ def set_password():
 				task = sendVerifyEmail.delay(newEmail, token)
 				return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=current_user.username)))
 			else:
-				return redirect(url_for("users.profile", username=current_user.username))
+				return redirect(url_for("user.login"))
 		else:
 			flash("Passwords do not match", "error")
 

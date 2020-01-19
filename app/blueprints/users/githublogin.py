@@ -65,7 +65,7 @@ def github_authorized(oauth_token):
 			flash("Unable to find an account for that Github user", "error")
 			return redirect(url_for("users.claim"))
 		elif loginUser(userByGithub):
-			if current_user.password is None:
+			if not current_user.hasPassword():
 				return redirect(next_url or url_for("users.set_password", optional=True))
 			else:
 				return redirect(next_url or url_for("homepage.home"))

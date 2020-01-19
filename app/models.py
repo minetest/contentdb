@@ -146,7 +146,7 @@ class User(db.Model, UserMixin):
 	tokens        = db.relationship("APIToken", backref="owner", lazy="dynamic")
 	replies       = db.relationship("ThreadReply", backref="author", lazy="dynamic")
 
-	def __init__(self, username, active=False, email=None, password=None):
+	def __init__(self, username, active=False, email=None, password=""):
 		self.username = username
 		self.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
@@ -154,6 +154,9 @@ class User(db.Model, UserMixin):
 		self.email = email
 		self.password = password
 		self.rank = UserRank.NOT_JOINED
+
+	def hasPassword(self):
+		return self.password != ""
 
 	def canAccessTodoList(self):
 		return Permission.APPROVE_NEW.check(self) or \
@@ -202,6 +205,13 @@ class User(db.Model, UserMixin):
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		return Thread.query.filter_by(author=self) \
 			.filter(Thread.created_at > hour_ago).count() < 2
+
+	def __eq__(self, other):
+		if not self.is_authenticated or not other.is_authenticated:
+			return False
+
+		assert self.id > 0
+		return self.id == other.id
 
 class UserEmailVerification(db.Model):
 	id      = db.Column(db.Integer, primary_key=True)
