@@ -40,6 +40,9 @@ if create_db:
 	db.create_all()
 
 print("Filling database...")
+
 populate(db.session)
 if test_data:
-	populate_test_data(licenses, tags, User.filter_by(rank=UserRank.ADMIN).first())
+	populate_test_data(db.session)
+
+db.session.commit()

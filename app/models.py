@@ -472,8 +472,7 @@ class Package(db.Model):
 			"short_description": self.short_desc,
 			"type": self.type.toName(),
 			"release": release and release.id,
-			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
-			"score": round(self.score * 10) / 10
+			"thumbnail": (base_url + tnurl) if tnurl is not None else None
 		}
 
 	def getAsDictionary(self, base_url, version=None, protonum=None):
@@ -708,8 +707,9 @@ class MinetestRelease(db.Model):
 	name     = db.Column(db.String(100), unique=True, nullable=False)
 	protocol = db.Column(db.Integer, nullable=False, default=0)
 
-	def __init__(self, name=None):
+	def __init__(self, name=None, protocol=0):
 		self.name = name
+		self.protocol = protocol
 
 	def getActual(self):
 		return None if self.name == "None" else self

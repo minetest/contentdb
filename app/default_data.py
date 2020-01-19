@@ -11,6 +11,11 @@ def populate(session):
 	admin_user.rank = UserRank.ADMIN
 	session.add(admin_user)
 
+	session.add(MinetestRelease("None", 0))
+	session.add(MinetestRelease("0.4.16/17", 32))
+	session.add(MinetestRelease("5.0", 37))
+	session.add(MinetestRelease("5.1", 38))
+
 	tags = {}
 	for tag in ["Inventory", "Mapgen", "Building", \
 			"Mobs and NPCs", "Tools", "Player effects", \
@@ -34,7 +39,14 @@ def populate(session):
 		session.add(row)
 
 
-def populate_test_data(session, licenses, tags, admin_user):
+def populate_test_data(session):
+	licenses = { x.name : x for x in License.query.all() }
+	tags = { x.name : x for x in Tag.query.all() }
+	admin_user = User.query.filter_by(rank=UserRank.ADMIN).first()
+	v4 = MinetestRelease.query.filter_by(protocol=32).first()
+	v50 = MinetestRelease.query.filter_by(protocol=37).first()
+	v51 = MinetestRelease.query.filter_by(protocol=38).first()
+
 	ez = User("Shara")
 	ez.github_username = "Ezhh"
 	ez.forums_username = "Shara"
@@ -105,6 +117,7 @@ awards.register_achievement("award_mesefind",{
 
 	rel = PackageRelease()
 	rel.package = mod1
+	rel.min_rel = v51
 	rel.title = "v1.0.0"
 	rel.url = "https://github.com/rubenwardy/awards/archive/master.zip"
 	rel.approved = True
@@ -218,6 +231,7 @@ No warranty is provided, express or implied, for any part of the project.
 	rel = PackageRelease()
 	rel.package = mod
 	rel.title = "v1.0.0"
+	rel.max_rel = v4
 	rel.url = "https://github.com/ezhh/handholds/archive/master.zip"
 	rel.approved = True
 	session.add(rel)

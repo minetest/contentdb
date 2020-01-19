@@ -1,4 +1,4 @@
-import pytest
+import pytest, json
 from app import app
 from app.models import db, User
 from app.default_data import populate
@@ -15,6 +15,21 @@ def recreate_db():
 	clear_data(db.session)
 	populate(db.session)
 	db.session.commit()
+
+def parse_json(b):
+	return json.loads(b.decode("utf8"))
+
+def is_type(t, v):
+	return v and isinstance(v, t)
+
+def is_optional(t, v):
+	return not v or isinstance(v, t)
+
+def is_str(v):
+	return is_type(str, v)
+
+def is_int(v):
+	return is_type(int, v)
 
 
 @pytest.fixture

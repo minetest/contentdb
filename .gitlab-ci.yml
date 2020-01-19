@@ -18,5 +18,5 @@ UI_Test:
     - cp utils/gitlabci/* .
     - docker-compose up -d
     - ./utils/run_migrations.sh
-    - ./utils/tests.sh
+    - ./utils/tests_cov.sh
     - docker-compose down
