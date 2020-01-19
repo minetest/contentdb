@@ -229,8 +229,8 @@ def makeVCSReleaseFromGithub(id, branch, release, url):
 	return release.url
 
 
-@celery.task()
-def checkZIPRelease(id, path):
+@celery.task(bind=True)
+def checkZipRelease(self, id, path):
 	release = PackageRelease.query.get(id)
 	if release is None:
 		raise TaskError("No such release!")
@@ -246,6 +246,13 @@ def checkZIPRelease(id, path):
 			tree = build_tree(temp, expected_type=ContentType[release.package.type.name], \
 				author=release.package.author.username, name=release.package.name)
 		except MinetestCheckError as err:
+			if "Fails validation" not in release.title:
+				release.title += " (Fails validation)"
+
+			release.task_id = self.request.id
+			release.approved = False
+			db.session.commit()
+
 			raise TaskError(str(err))
 
 		release.task_id = None

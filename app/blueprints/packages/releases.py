@@ -22,7 +22,7 @@ from . import bp
 
 from app.rediscache import has_key, set_key, make_download_key
 from app.models import *
-from app.tasks.importtasks import makeVCSRelease, checkZIPRelease
+from app.tasks.importtasks import makeVCSRelease, checkZipRelease
 from app.utils import *
 
 from celery import uuid
@@ -110,7 +110,7 @@ def create_release(package):
 				db.session.add(rel)
 				db.session.commit()
 
-				checkZIPRelease.apply_async((rel.id, uploadedPath), task_id=rel.task_id)
+				checkZipRelease.apply_async((rel.id, uploadedPath), task_id=rel.task_id)
 
 				msg = "{}: Release {} created".format(package.title, rel.title)
 				triggerNotif(package.author, current_user, msg, rel.getEditURL())

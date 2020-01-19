@@ -20,8 +20,8 @@ from flask_user import *
 import flask_menu as menu
 from . import bp
 from app.models import *
-from celery import uuid
-from app.tasks.importtasks import importRepoScreenshot, importAllDependencies, makeVCSRelease
+from celery import uuid, group
+from app.tasks.importtasks import importRepoScreenshot, importAllDependencies, makeVCSRelease, checkZipRelease
 from app.tasks.forumtasks  import importTopicList, checkAllForumAccounts
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -37,6 +37,21 @@ def admin_page():
 			PackageRelease.query.filter(PackageRelease.task_id != None).delete()
 			db.session.commit()
 			return redirect(url_for("admin.admin_page"))
+		elif action == "checkreleases":
+			releases = PackageRelease.query.filter(PackageRelease.url.like("/uploads/%")).all()
+
+			tasks = []
+			for release in releases:
+				zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
+				tasks.append(checkZipRelease.s(release.id, zippath))
+
+			result = group(tasks).apply_async()
+
+			while not result.ready():
+				import time
+				time.sleep(0.1)
+
+			return redirect(url_for("todo.view"))
 		elif action == "importmodlist":
 			task = importTopicList.delay()
 			return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
