@@ -786,7 +786,7 @@ class PackageRelease(db.Model):
 			if not (isOwner or user.rank.atLeast(UserRank.EDITOR)):
 				return False
 
-			if not self.package.approved:
+			if not self.package.approved or self.task_id is not None:
 				return True
 
 			count = PackageRelease.query \
