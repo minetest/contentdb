@@ -64,10 +64,12 @@
 	<h2 class="mt-5">{{ _("Delete Release") }}</h2>
 
 	{% if release.checkPerm(current_user, "DELETE_RELEASE") %}
-		<form method="POST" action="{{ release.getDeleteURL() }}" class="mb-5">
+		<form method="POST" action="{{ release.getDeleteURL() }}" class="alert alert-secondary mb-5">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<p>This is permanent.</p>
-			<input class="btn btn-danger" type="submit" value="Delete">
+			<input class="btn btn-sm btn-danger float-right" type="submit" value="{{ _('Delete') }}">
+			<b>{{ _("This is permanent.") }}</b>
+			{{ _("Any associated uploads will not be deleted immediately, but the release will no longer be listed.") }}
+			<div style="clear:both;"></div>
 		</form>
 	{% else %}
 		<div class="alert alert-secondary mb-5">
