@@ -37,9 +37,19 @@
 	background-position: center;
 
 	.btn-outline-secondary {
-		color: #eee;
-		border-color: #666;
-		background: rgba(102, 102, 102, 0.3);
+		color: rgba(255, 255, 255, 0.8);
+		border-color: rgba(0, 0, 0, 0.6);
+		background: rgba(0, 0, 0, 0.3);
+	}
+
+	.btn-outline-secondary:hover {
+		color: #fff;
+		border-color: rgba(0, 0, 0, 0.8);
+		background: rgba(0, 0, 0, 0.6);
+	}
+
+	.text-secondary {
+		color: rgba(255, 255, 255, 0.8) !important;
 	}
 }
 
