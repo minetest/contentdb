@@ -8,10 +8,11 @@
 
 {% block container %}
 	<header class="jumbotron pb-3"
-		style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{{ package.getMainScreenshotURL() }}');
+		style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('{{ package.getMainScreenshotURL() }}');
 		    background-size: cover;
 		    background-repeat: no-repeat;
-		    background-position: center;">
+			background-position: center;
+			position: relative;">
 		<div class="container">
 			<h1 class="display-3">
 				{{ package.title }}
@@ -23,19 +24,45 @@
 
 			<div class="info-row row" style="margin-top: 2rem;">
 				{% set release = package.getDownloadRelease() %}
-				<a class="text-secondary col-md-auto" href="{{ url_for('users.profile', username=package.author.username) }}">
-					<i class="fas fa-user"></i>
-					<span class="count">{{ package.author.display_name }}</span>
-				</a>
-				<div class="text-secondary col-md-auto">
-					<i class="fas fa-download"></i>
-					<span class="count">{{ package.getDownloadCount() }}</span>
+				<div class="btn-group-horizontal col">
+					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}">
+						<i class="fas fa-user"></i>
+						<span class="count">{{ package.author.display_name }}</span>
+					</a>
+					<div class="btn text-secondary">
+						<i class="fas fa-download"></i>
+						<span class="count">{{ package.getDownloadCount() }}</span>
+					</div>
+					<div class="btn text-secondary">
+						<i class="fas fa-comment-alt"></i>
+						<span class="count">{{ threads | length }}</span>
+					</div>
+					{% if package.repo %}
+						<a class="btn" href="{{ package.repo }}">
+							<i class="fas fa-code"></i>
+							<span class="count">{{ _("Source") }}</span>
+						</a>
+					{% endif %}
+					{% if package.forums %}
+						<a class="btn" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">
+							<i class="fas fa-comments"></i>
+							<span class="count">{{ _("Forums") }}</span>
+						</a>
+					{% endif %}
+					{% if package.issueTracker %}
+						<a class="btn" href="{{ package.issueTracker }}">
+							<i class="fas fa-bug"></i>
+							<span class="count">{{ _("Issue Tracker") }}</span>
+						</a>
+					{% endif %}
+					{% if package.website %}
+						<a class="btn" href="{{ package.website }}">
+							<i class="fas fa-globe-europe"></i>
+							<span class="count">{{ _("Website") }}</span>
+						</a>
+					{% endif %}
 				</div>
 				<div class="text-secondary col-md-auto">
-					<i class="fas fa-comment-alt"></i>
-					<span class="count">{{ threads | length }}</span>
-				</div>
-				<div class="text-secondary col">
 					<img src="https://www.minetest.net/media/icon.svg" style="max-height: 1.2em;">
 					<span class="count">
 						{% if release.min_rel and release.max_rel %}
@@ -50,10 +77,6 @@
 					</span>
 				</div>
 				<div class="btn-group-horizontal col-md-auto">
-					{% if package.repo %}<a class="btn btn-outline-secondary" href="{{ package.repo }}">View Source</a>{% endif %}
-					{% if package.forums %}<a class="btn btn-outline-secondary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
-					{% if package.issueTracker %}<a class="btn btn-outline-secondary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
-					{% if package.website %}<a class="btn btn-outline-secondary" href="{{ package.website }}">Website</a>{% endif %}
 					{% if release %}
 						<a class="btn btn-download btn_green" rel="nofollow"
 								href="{{ package.getDownloadURL() }}">

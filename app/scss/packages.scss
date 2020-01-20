@@ -45,11 +45,15 @@
 		margin-left: 0.3em;
 	}
 
-	.col > img {
+	img {
 		filter: grayscale(100%);
 	}
 
-	& > a:hover {
+	a {
+		color: rgba(255, 255, 255, 0.8) !important;
+	}
+
+	a:hover {
 		color: #fff !important;
 		text-decoration: none;
 	}
