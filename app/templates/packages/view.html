@@ -15,22 +15,56 @@
 		<div class="container">
 			<h1 class="display-3">
 				{{ package.title }}
-				<small>by {{ package.author.display_name }}</small>
 			</h1>
 
 			<p class="lead">
 				{{ package.short_desc }}
 			</p>
 
-			<div class="row" style="margin-top: 2rem;">
-				<div class="col text-secondary">
-					{{ package.getDownloadCount() }} downloads
+			<div class="info-row row" style="margin-top: 2rem;">
+				{% set release = package.getDownloadRelease() %}
+				<a class="text-secondary col-md-auto" href="{{ url_for('users.profile', username=package.author.username) }}">
+					<i class="fas fa-user"></i>
+					<span class="count">{{ package.author.display_name }}</span>
+				</a>
+				<div class="text-secondary col-md-auto">
+					<i class="fas fa-download"></i>
+					<span class="count">{{ package.getDownloadCount() }}</span>
+				</div>
+				<div class="text-secondary col-md-auto">
+					<i class="fas fa-comment-alt"></i>
+					<span class="count">{{ threads | length }}</span>
+				</div>
+				<div class="text-secondary col">
+					<img src="https://www.minetest.net/media/icon.svg" style="max-height: 1.2em;">
+					<span class="count">
+						{% if release.min_rel and release.max_rel %}
+							{{ _("%(min)s - %(max)s", min=release.min_rel.name, max=release.max_rel.name) }}
+						{% elif release.min_rel %}
+							{{ _("%(min)s and above", min=release.min_rel.name) }}
+						{% elif release.max_rel %}
+							{{ _("%(max)s and below", max=release.max_rel.name) }}
+						{% else %}
+							{{ _("Any") }}
+						{% endif %}
+					</span>
 				</div>
 				<div class="btn-group-horizontal col-md-auto">
 					{% if package.repo %}<a class="btn btn-outline-secondary" href="{{ package.repo }}">View Source</a>{% endif %}
 					{% if package.forums %}<a class="btn btn-outline-secondary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
 					{% if package.issueTracker %}<a class="btn btn-outline-secondary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
 					{% if package.website %}<a class="btn btn-outline-secondary" href="{{ package.website }}">Website</a>{% endif %}
+					{% if release %}
+						<a class="btn btn-download btn_green" rel="nofollow"
+								href="{{ package.getDownloadURL() }}">
+							{{ _("Download") }}
+						</a>
+					{% else %}
+						<a class="btn btn-download disabled" rel="nofollow"
+								title="No downloads available">
+							{{ _("Download") }}
+						</a>
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -112,26 +146,6 @@
 		{% endif %}
 
 		<aside class="float-right ml-4" style="width: 18rem;">
-			{% set release = package.getDownloadRelease() %}
-			{% if release %}
-				<a class="btn btn-download btn-lg btn-block" rel="nofollow"
-						href="{{ package.getDownloadURL() }}" class="btn_green">
-					Download
-				</a>
-
-				<p class="text-center m-2" style="font-size: 80%;">
-					{% if release.min_rel and release.max_rel %}
-						Minetest {{ release.min_rel.name }} - {{ release.max_rel.name }}
-					{% elif release.min_rel %}
-						Supports Minetest {{ release.min_rel.name }} and above.
-					{% elif release.max_rel %}
-						Supports Minetest {{ release.max_rel.name }} and below.
-					{% endif %}
-				</p>
-			{% else %}
-				No download available.
-			{% endif %}
-
 			<div class="card my-4">
 				<div class="card-header">
 					Details
@@ -354,9 +368,6 @@
 		{% endif %}
 
 		<ul class="screenshot_list mb-4">
-			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-			<a class="btn btn-primary float-right" href="{{ package.getNewScreenshotURL() }}">Add screenshot</a>
-			{% endif %}
 			{% for ss in package.screenshots %}
 				{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 					<li>
@@ -366,6 +377,14 @@
 					</li>
 				{% endif %}
 			{% endfor %}
+			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+				<li>
+					<a href="{{ package.getNewScreenshotURL() }}">
+						<!-- <img src="http://localhost:5123/thumbnails/2/70ls61mXho.jpg" alt="Add screenshot" /> -->
+						<div class="fas fa-plus screenshot-add"></div>
+					</a>
+				</li>
+			{% endif %}
 		</ul>
 
 		{{ package.desc | markdown }}
