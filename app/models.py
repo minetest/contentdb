@@ -338,6 +338,14 @@ class Dependency(db.Model):
 		else:
 			raise Exception("Either meta or package must be given, but not both!")
 
+	def getName(self):
+		if self.meta_package:
+			return self.meta_package.name
+		elif self.package:
+			return self.package.name
+		else:
+			assert False
+
 	def __str__(self):
 		if self.package is not None:
 			return self.package.author.username + "/" + self.package.name
@@ -449,6 +457,21 @@ class Package(db.Model):
 
 	def getIsFOSS(self):
 		return self.license.is_foss and self.media_license.is_foss
+
+	def getSortedDependencies(self, is_hard=None):
+		query = self.dependencies
+		if is_hard is not None:
+			query = query.filter_by(optional=not is_hard)
+
+		deps = query.all()
+		deps.sort(key = lambda x: x.getName())
+		return deps
+
+	def getSortedHardDependencies(self):
+		return self.getSortedDependencies(True)
+
+	def getSortedOptionalDependencies(self):
+		return self.getSortedDependencies(False)
 
 	def getState(self):
 		if self.approved:

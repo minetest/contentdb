@@ -261,27 +261,40 @@
 				<div class="card my-4">
 					<div class="card-header">Dependencies</div>
 					<div class="card-body">
-						{% for dep in package.dependencies %}
-							{% if dep.optional %}
-								{% set color="secondary" %}
-							{% else %}
-								{% set color="primary" %}
-							{% endif %}
-
+						<div class="card-subtitle mb-2 text-muted">{{ _("Required") }}</div>
+						{% for dep in package.getSortedHardDependencies() %}
 							{%- if dep.package %}
-								<a class="badge badge-{{ color }}"
+								<div					</div class="badge badge-primary"
 										href="{{ dep.package.getDetailsURL() }}">
 									{{ dep.package.title }} by {{ dep.package.author.display_name }}
 							{% elif dep.meta_package %}
-								<a class="badge badge-{{ color }}"
+								<a class="badge badge-primary"
 										href="{{ url_for('metapackages.view', name=dep.meta_package.name) }}">
 									{{ dep.meta_package.name }}
 							{% else %}
 								{{ "Excepted package or meta_package in dep!" | throw }}
 							{% endif %}</a>
 						{% else %}
-							<i>No dependencies</i>
+							<i>No required dependencies</i>
 						{% endfor %}
+
+						{% set optional_deps=package.getSortedOptionalDependencies() %}
+						{% if optional_deps %}
+    						<div class="card-subtitle my-2 text-muted">{{ _("Optional") }}</div>
+							{% for dep in optional_deps %}
+								{%- if dep.package %}
+									<a class="badge badge-secondary"
+											href="{{ dep.package.getDetailsURL() }}">
+										{{ dep.package.title }} by {{ dep.package.author.display_name }}
+								{% elif dep.meta_package %}
+									<a class="badge badge-secondary"
+											href="{{ url_for('metapackages.view', name=dep.meta_package.name) }}">
+										{{ dep.meta_package.name }}
+								{% else %}
+									{{ "Excepted package or meta_package in dep!" | throw }}
+								{% endif %}</a>
+							{% endfor %}
+						{% endif %}
 					</div>
 				</div>
 			{% endif %}
