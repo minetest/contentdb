@@ -418,7 +418,8 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=True)
 
-	provides = db.relationship("MetaPackage", secondary=provides, lazy="subquery",
+	provides = db.relationship("MetaPackage", \
+			secondary=provides, lazy="subquery", order_by=db.asc("name"), \
 			backref=db.backref("packages", lazy="dynamic", order_by=db.desc("score")))
 
 	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
