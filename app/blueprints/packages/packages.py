@@ -227,9 +227,8 @@ def create_edit(author=None, name=None):
 			form.repo.data   = request.args.get("repo")
 			form.forums.data = request.args.get("forums")
 		else:
-			deps = package.dependencies
-			form.harddep_str.data  = ",".join([str(x) for x in deps if not x.optional])
-			form.softdep_str.data  = ",".join([str(x) for x in deps if     x.optional])
+			form.harddep_str.data  = ",".join([str(x) for x in package.getSortedHardDependencies() ])
+			form.softdep_str.data  = ",".join([str(x) for x in package.getSortedOptionalDependencies() ])
 			form.provides_str.data = MetaPackage.ListToSpec(package.provides)
 
 	if request.method == "POST" and form.validate():
