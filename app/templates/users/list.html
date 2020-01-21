@@ -7,8 +7,8 @@
 {% block content %}
 <ul class="userlist">
 	{% for user in users %}
-		<li class="{{ user.rank }}">
-			<a href="{{ url_for('users.profile', username=user.username) }}">
+		<li>
+			<a href="{{ url_for('users.profile', username=user.username) }}" class="{{ user.rank }}">
 				{{ user.display_name }}
 			</a> -
 			{{ user.rank.getTitle() }}

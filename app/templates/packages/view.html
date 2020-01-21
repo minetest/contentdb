@@ -7,30 +7,107 @@
 {% endblock %}
 
 {% block container %}
+	{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
+		{% set package_warning="Non-free code and media" %}
+	{% elif not package.license.is_foss and package.type != package.type.TXP %}
+		{% set package_warning="Non-free code" %}
+	{% elif not package.media_license.is_foss %}
+		{% set package_warning="Non-free media" %}
+	{% endif %}
+	{% set release = package.getDownloadRelease() %}
+
 	<header class="jumbotron pb-3"
-		style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('{{ package.getMainScreenshotURL() }}');
-		    background-size: cover;
-		    background-repeat: no-repeat;
-		    background-position: center;">
+		style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ package.getMainScreenshotURL() }}');
+			background-size: cover;
+			background-repeat: no-repeat;
+			background-position: center;">
 		<div class="container">
 			<h1 class="display-3">
 				{{ package.title }}
-				<small>by {{ package.author.display_name }}</small>
 			</h1>
 
 			<p class="lead">
 				{{ package.short_desc }}
 			</p>
 
-			<div class="row" style="margin-top: 2rem;">
-				<div class="col text-secondary">
-					{{ package.getDownloadCount() }} downloads
+			<p>
+				{% if package_warning %}
+					<span class="badge badge-danger">
+						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
+						{{ package_warning }}
+					</span>
+				{% endif %}
+				{% for t in package.tags %}
+					<span class="badge badge-primary">{{ t.title }}</span>
+				{% endfor %}
+			</p>
+
+			<div class="info-row row" style="margin-top: 2rem;">
+				<div class="btn-group-horizontal col">
+					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}">
+						<i class="fas fa-user"></i>
+						<span class="count">
+							{{ package.author.display_name }}
+						</span>
+					</a>
+					<a class="btn" rel="nofollow" href="{{ package.getDownloadURL() }}">
+						<i class="fas fa-download"></i>
+						<span class="count">{{ package.getDownloadCount() }}</span>
+					</a>
+					<a class="btn" href="{{ url_for('threads.list_all', pid=package.id) }}">
+						<i class="fas fa-comment-alt"></i>
+						<span class="count">{{ threads | length }}</span>
+					</a>
+					{% if package.website %}
+						<a class="btn" href="{{ package.website }}">
+							<i class="fas fa-globe-europe"></i>
+							<span class="count">{{ _("Website") }}</span>
+						</a>
+					{% endif %}
+					{% if package.repo %}
+						<a class="btn" href="{{ package.repo }}">
+							<i class="fas fa-code"></i>
+							<span class="count">{{ _("Source") }}</span>
+						</a>
+					{% endif %}
+					{% if package.forums %}
+						<a class="btn" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">
+							<i class="fas fa-comments"></i>
+							<span class="count">{{ _("Forums") }}</span>
+						</a>
+					{% endif %}
+					{% if package.issueTracker %}
+						<a class="btn" href="{{ package.issueTracker }}">
+							<i class="fas fa-bug"></i>
+							<span class="count">{{ _("Issue Tracker") }}</span>
+						</a>
+					{% endif %}
 				</div>
+				{% if release and (release.min_rel or release.max_rel) %}
+					<div class="text-secondary col-md-auto">
+						<img src="https://www.minetest.net/media/icon.svg" style="max-height: 1.2em;">
+						<span class="count">
+							{% if release.min_rel and release.max_rel %}
+								{{ _("%(min)s - %(max)s", min=release.min_rel.name, max=release.max_rel.name) }}
+							{% elif release.min_rel %}
+								{{ _("%(min)s and above", min=release.min_rel.name) }}
+							{% elif release.max_rel %}
+								{{ _("%(max)s and below", max=release.max_rel.name) }}
+							{% endif %}
+						</span>
+					</div>
+				{% endif %}
 				<div class="btn-group-horizontal col-md-auto">
-					{% if package.repo %}<a class="btn btn-outline-secondary" href="{{ package.repo }}">View Source</a>{% endif %}
-					{% if package.forums %}<a class="btn btn-outline-secondary" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>{% endif %}
-					{% if package.issueTracker %}<a class="btn btn-outline-secondary" href="{{ package.issueTracker }}">Issue Tracker</a>{% endif %}
-					{% if package.website %}<a class="btn btn-outline-secondary" href="{{ package.website }}">Website</a>{% endif %}
+					{% if release %}
+						<a class="btn btn-download btn_green" rel="nofollow"
+								href="{{ package.getDownloadURL() }}">
+							{{ _("Download") }}
+						</a>
+					{% else %}
+						<i>
+							{{ _("No downloads available") }}
+						</i>
+					{% endif %}
 				</div>
 			</div>
 		</div>
@@ -112,49 +189,22 @@
 		{% endif %}
 
 		<aside class="float-right ml-4" style="width: 18rem;">
-			{% set release = package.getDownloadRelease() %}
-			{% if release %}
-				<a class="btn btn-download btn-lg btn-block" rel="nofollow"
-						href="{{ package.getDownloadURL() }}" class="btn_green">
-					Download
-				</a>
-
-				<p class="text-center m-2" style="font-size: 80%;">
-					{% if release.min_rel and release.max_rel %}
-						Minetest {{ release.min_rel.name }} - {{ release.max_rel.name }}
-					{% elif release.min_rel %}
-						Supports Minetest {{ release.min_rel.name }} and above.
-					{% elif release.max_rel %}
-						Supports Minetest {{ release.max_rel.name }} and below.
-					{% endif %}
-				</p>
-			{% else %}
-				No download available.
-			{% endif %}
-
-			<div class="card my-4">
+			<div class="card mb-4">
 				<div class="card-header">
 					Details
 					<div class="btn-group float-right">
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-						<a class="btn btn-default btn-sm mx-1" href="{{ package.getEditURL() }}">Edit</a>
+						<a class="btn btn-primary btn-sm ml-1" href="{{ package.getEditURL() }}"><i class="fas fa-edit"></i></a>
 					{% endif %}
 					{# {% if current_user.is_authenticated %}
-						<a class="btn btn-default btn-sm mx-1" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
+						<a class="btn btn-primary btn-sm ml-1" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
 					{% endif %} #}
 					{% if package.checkPerm(current_user, "DELETE_PACKAGE") or package.checkPerm(current_user, "UNAPPROVE_PACKAGE") %}
-						<a class="btn btn-danger btn-sm mx-1" href="{{ package.getRemoveURL() }}">Remove</a>
+						<a class="btn btn-danger btn-sm ml-1" href="{{ package.getRemoveURL() }}"><i class="fas fa-trash"></i></a>
 					{% endif %}
 					</div>
 
 				</div>
-				{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
-					{% set package_warning="Non-free code and media." %}
-				{% elif not package.license.is_foss and package.type != package.type.TXP %}
-					{% set package_warning="Non-free code." %}
-				{% elif not package.media_license.is_foss %}
-					{% set package_warning="Non-free media." %}
-				{% endif %}
 				{% if package_warning %}
 					<div class="card-body">
 						<div class="alert alert-danger">
@@ -163,6 +213,10 @@
 					</div>
 				{% endif %}
 				<table class="table">
+					<tr>
+						<td>Type</td>
+						<td>{{ package.type.value }}</td>
+					</tr>
 					<tr>
 						<td>Name</td>
 						<td>{{ package.name }}</td>
@@ -176,18 +230,6 @@
 						{% endfor %}</td>
 					</tr>
 					{% endif %}
-					<tr>
-						<td>Author</td>
-						<td class="{{ package.author.rank }}">
-							<a href="{{ url_for('users.profile', username=package.author.username) }}">
-								{{ package.author.display_name }}
-							</a>
-						</td>
-					</tr>
-					<tr>
-						<td>Type</td>
-						<td>{{ package.type.value }}</td>
-					</tr>
 					<tr>
 						<td>License</td>
 						<td>
@@ -205,15 +247,6 @@
 						<td>Added</td>
 						<td>{{ package.created_at | datetime }}</td>
 					</tr>
-					<tr>
-						<td>Tags</td>
-						<td>
-							{% for t in package.tags %}
-								<span class="badge badge-primary">{{ t.title }}</span>
-							{% else %}
-								<i>No tags.</i>
-							{% endfor %}
-						</td>
 				</table>
 			</div>
 
@@ -256,13 +289,15 @@
 			<div class="card my-4">
 				<div class="card-header">
 					Releases
-					<div class="float-right">
-						{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-							<a href="{{ package.getBulkReleaseURL() }}">bulk</a>
-							|
-							<a href="{{ package.getCreateReleaseURL() }}">+</a>
-						{% endif %}
-					</div>
+					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+						<div class="btn-group float-right">
+							<a class="btn btn-primary btn-sm ml-1" href="{{ package.getBulkReleaseURL() }}">
+								<i class="fas fa-wrench"></i>
+								{{ _("Bulk") }}
+							</a>
+							<a class="btn btn-primary btn-sm ml-1" href="{{ package.getCreateReleaseURL() }}"><i class="fas fa-plus"></i></a>
+						</div>
+					{% endif %}
 				</div>
 				<ul class="list-group list-group-flush">
 					{% for rel in releases %}
@@ -318,10 +353,11 @@
 
 			<div class="card my-4"">
 				<div class="card-header">
-				{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
-					<a class="float-right"
-						href="{{ url_for('threads.new', pid=package.id) }}">+</a>
-				{% endif %}
+					{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
+						<div class="btn-group float-right">
+							<a class="btn btn-primary btn-sm mx-1" href="{{ url_for('threads.new', pid=package.id) }}"><i class="fas fa-plus"></i></a>
+						</div>
+					{% endif %}
 					Threads
 				</div>
 				<ul class="list-group list-group-flush">
@@ -354,9 +390,6 @@
 		{% endif %}
 
 		<ul class="screenshot_list mb-4">
-			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-			<a class="btn btn-primary float-right" href="{{ package.getNewScreenshotURL() }}">Add screenshot</a>
-			{% endif %}
 			{% for ss in package.screenshots %}
 				{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 					<li>
@@ -366,6 +399,13 @@
 					</li>
 				{% endif %}
 			{% endfor %}
+			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+				<li>
+					<a href="{{ package.getNewScreenshotURL() }}">
+						<div class="fas fa-plus screenshot-add"></div>
+					</a>
+				</li>
+			{% endif %}
 		</ul>
 
 		{{ package.desc | markdown }}

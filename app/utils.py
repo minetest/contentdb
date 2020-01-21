@@ -22,7 +22,7 @@ from app.models import *
 from app import app
 import random, string, os, imghdr
 
-def get_int_or_abort(v, default):
+def get_int_or_abort(v, default=None):
 	try:
 		return int(v or default)
 	except ValueError:
