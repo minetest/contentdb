@@ -7,6 +7,15 @@
 {% endblock %}
 
 {% block container %}
+	{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
+		{% set package_warning="Non-free code and media" %}
+	{% elif not package.license.is_foss and package.type != package.type.TXP %}
+		{% set package_warning="Non-free code" %}
+	{% elif not package.media_license.is_foss %}
+		{% set package_warning="Non-free media" %}
+	{% endif %}
+	{% set release = package.getDownloadRelease() %}
+
 	<header class="jumbotron pb-3"
 		style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('{{ package.getMainScreenshotURL() }}');
 		    background-size: cover;
@@ -23,15 +32,18 @@
 			</p>
 
 			<p>
+				{% if package_warning %}
+					<span class="badge badge-danger">
+						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
+						{{ package_warning }}
+					</span>
+				{% endif %}
 				{% for t in package.tags %}
 					<span class="badge badge-primary">{{ t.title }}</span>
-				{% else %}
-					<i>No tags.</i>
 				{% endfor %}
 			</p>
 
 			<div class="info-row row" style="margin-top: 2rem;">
-				{% set release = package.getDownloadRelease() %}
 				<div class="btn-group-horizontal col">
 					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}">
 						<i class="fas fa-user"></i>
@@ -192,13 +204,6 @@
 					</div>
 
 				</div>
-				{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
-					{% set package_warning="Non-free code and media." %}
-				{% elif not package.license.is_foss and package.type != package.type.TXP %}
-					{% set package_warning="Non-free code." %}
-				{% elif not package.media_license.is_foss %}
-					{% set package_warning="Non-free media." %}
-				{% endif %}
 				{% if package_warning %}
 					<div class="card-body">
 						<div class="alert alert-danger">
