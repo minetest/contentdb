@@ -47,16 +47,24 @@
 				<div class="btn-group-horizontal col">
 					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}">
 						<i class="fas fa-user"></i>
-						<span class="count">{{ package.author.display_name }}</span>
+						<span class="count">
+							{{ package.author.display_name }}
+						</span>
 					</a>
 					<a class="btn" rel="nofollow" href="{{ package.getDownloadURL() }}">
 						<i class="fas fa-download"></i>
 						<span class="count">{{ package.getDownloadCount() }}</span>
 					</a>
-					<a class="btn text-secondary" href="{{ url_for('threads.list_all', pid=package.id) }}">
+					<a class="btn" href="{{ url_for('threads.list_all', pid=package.id) }}">
 						<i class="fas fa-comment-alt"></i>
 						<span class="count">{{ threads | length }}</span>
 					</a>
+					{% if package.website %}
+						<a class="btn" href="{{ package.website }}">
+							<i class="fas fa-globe-europe"></i>
+							<span class="count">{{ _("Website") }}</span>
+						</a>
+					{% endif %}
 					{% if package.repo %}
 						<a class="btn" href="{{ package.repo }}">
 							<i class="fas fa-code"></i>
@@ -73,12 +81,6 @@
 						<a class="btn" href="{{ package.issueTracker }}">
 							<i class="fas fa-bug"></i>
 							<span class="count">{{ _("Issue Tracker") }}</span>
-						</a>
-					{% endif %}
-					{% if package.website %}
-						<a class="btn" href="{{ package.website }}">
-							<i class="fas fa-globe-europe"></i>
-							<span class="count">{{ _("Website") }}</span>
 						</a>
 					{% endif %}
 				</div>
