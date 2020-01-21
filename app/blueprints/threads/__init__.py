@@ -28,12 +28,19 @@ import datetime
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
+from app.utils import get_int_or_abort
 
 @bp.route("/threads/")
 def list_all():
 	query = Thread.query
 	if not Permission.SEE_THREAD.check(current_user):
 		query = query.filter_by(private=False)
+
+	pid = request.args.get("pid")
+	if pid:
+		pid = get_int_or_abort(pid)
+		query = query.filter_by(package_id=pid)
+
 	return render_template("threads/list.html", threads=query.all())
 
 

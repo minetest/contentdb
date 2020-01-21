@@ -17,7 +17,7 @@
 	{% set release = package.getDownloadRelease() %}
 
 	<header class="jumbotron pb-3"
-		style="background: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.6)), url('{{ package.getMainScreenshotURL() }}');
+		style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ package.getMainScreenshotURL() }}');
 		    background-size: cover;
 		    background-repeat: no-repeat;
 			background-position: center;
@@ -53,10 +53,10 @@
 						<i class="fas fa-download"></i>
 						<span class="count">{{ package.getDownloadCount() }}</span>
 					</a>
-					<div class="btn text-secondary">
+					<a class="btn text-secondary" href="{{ url_for('threads.list_all', pid=package.id) }}">
 						<i class="fas fa-comment-alt"></i>
 						<span class="count">{{ threads | length }}</span>
-					</div>
+					</a>
 					{% if package.repo %}
 						<a class="btn" href="{{ package.repo }}">
 							<i class="fas fa-code"></i>
