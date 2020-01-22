@@ -19,8 +19,10 @@ from flask import *
 from flask_user import *
 from . import bp
 from .auth import is_api_authd
+from app import csrf
 from app.models import *
 from app.utils import is_package_page
+from app.markdown import render_markdown
 from app.querybuilder import QueryBuilder
 
 @bp.route("/api/packages/")
@@ -107,3 +109,9 @@ def whoami(token):
 		return jsonify({ "is_authenticated": False, "username": None })
 	else:
 		return jsonify({ "is_authenticated": True, "username": token.owner.username })
+
+
+@bp.route("/api/markdown/", methods=["POST"])
+@csrf.exempt
+def clean_markdown():
+	return render_markdown(request.data.decode("utf-8"))
