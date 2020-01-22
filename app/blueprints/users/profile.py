@@ -18,7 +18,7 @@
 from flask import *
 from flask_user import *
 from flask_login import login_user, logout_user
-from app import markdown
+from app.markdown import render_markdown
 from . import bp
 from app.models import *
 from flask_wtf import FlaskForm
@@ -153,7 +153,7 @@ def send_email(username):
 	form = SendEmailForm(request.form)
 	if form.validate_on_submit():
 		text = form.text.data
-		html = markdown(text)
+		html = render_markdown(text)
 		task = sendEmailRaw.delay([user.email], form.subject.data, text, html)
 		return redirect(url_for("tasks.check", id=task.id, r=next_url))
 
