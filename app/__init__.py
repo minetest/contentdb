@@ -61,9 +61,9 @@ from .markdown import init_app
 init_app(app)
 
 
-@babel.localeselector
-def get_locale():
-	return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+# @babel.localeselector
+# def get_locale():
+# 	return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
 from . import models, tasks, template_filters
 
