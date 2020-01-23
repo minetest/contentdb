@@ -21,7 +21,7 @@ from flask_gravatar import Gravatar
 import flask_menu as menu
 from flask_mail import Mail
 from flask_github import GitHub
-from flask_wtf.csrf import CsrfProtect
+from flask_wtf.csrf import CSRFProtect
 from flask_flatpages import FlatPages
 from flask_babel import Babel
 import os, redis
@@ -35,7 +35,7 @@ r = redis.Redis.from_url(app.config["REDIS_URL"])
 
 menu.Menu(app=app)
 github = GitHub(app)
-csrf = CsrfProtect(app)
+csrf = CSRFProtect(app)
 mail = Mail(app)
 pages = FlatPages(app)
 babel = Babel(app)
