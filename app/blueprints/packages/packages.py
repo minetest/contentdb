@@ -66,6 +66,7 @@ def list_all():
 
 	topics = None
 	if qb.search and not query.has_next:
+		qb.show_discarded = True
 		topics = qb.buildTopicQuery().all()
 
 	tags = Tag.query.all()
