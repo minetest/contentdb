@@ -173,7 +173,7 @@ def download(package):
 
 
 class PackageForm(FlaskForm):
-	name          = StringField("Name (Technical)", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	name          = StringField("Name (Technical)", [InputRequired(), Length(1, 20), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	title         = StringField("Title (Human-readable)", [InputRequired(), Length(3, 50)])
 	short_desc     = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
 	desc          = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])

@@ -54,6 +54,7 @@
 		<li{% if topic.wip %} class="wiptopic"{% endif %}>
 			<a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a>
 			{% if topic.wip %}[WIP]{% endif %}
+			{% if topic.discarded %}[Old]{% endif %}
 			{% if topic.name %}[{{ topic.name }}]{% endif %}
 			{% if show_author %}
 				by <a href="{{ url_for('users.profile', username=topic.author.username) }}">{{ topic.author.display_name }}</a>

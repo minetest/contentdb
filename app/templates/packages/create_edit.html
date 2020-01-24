@@ -50,7 +50,7 @@
 			{% if package and package.approved and not package.checkPerm(current_user, "CHANGE_NAME") %}
 				{{ render_field(form.name, class_="pkg_meta col-sm-3", readonly=True) }}
 			{% else %}
-				{{ render_field(form.name, class_="pkg_meta col-sm-3") }}
+				{{ render_field(form.name, class_="pkg_meta col-sm-3", pattern="[a-z0-9_]+", title=_("Lower case letters (a-z), digits (0-9), and underscores (_) only")) }}
 			{% endif %}
 			</div>
 			{{ render_field(form.short_desc, class_="pkg_meta") }}
