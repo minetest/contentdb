@@ -139,7 +139,7 @@ def create_release(token, package):
 			return error(400, option + " is required in the POST data")
 
 
-	if json["method"].lower() != "vcs":
-		return error(400, "Release-creation methods other than VCS are not supported")
+	if json["method"].lower() != "git":
+		return error(400, "Release-creation methods other than git are not supported")
 
 	return handleCreateRelease(token, package, json["title"], json["ref"])
