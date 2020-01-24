@@ -71,7 +71,7 @@ def profile(username):
 				if current_user.rank.atLeast(newRank):
 					user.rank = form["rank"].data
 				else:
-					flash("Can't promote a user to a rank higher than yourself!", "error")
+					flash("Can't promote a user to a rank higher than yourself!", "danger")
 
 			if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
 				newEmail = form["email"].data
@@ -147,7 +147,7 @@ def send_email(username):
 	next_url = url_for("users.profile", username=user.username)
 
 	if user.email is None:
-		flash("User has no email address!", "error")
+		flash("User has no email address!", "danger")
 		return redirect(next_url)
 
 	form = SendEmailForm(request.form)
@@ -214,91 +214,17 @@ def set_password():
 			else:
 				return redirect(url_for("user.login"))
 		else:
-			flash("Passwords do not match", "error")
+			flash("Passwords do not match", "danger")
 
 	return render_template("users/set_password.html", form=form, optional=request.args.get("optional"))
 
-
-@bp.route("/user/claim/", methods=["GET", "POST"])
-def claim():
-	username = request.args.get("username")
-	if username is None:
-		username = ""
-	else:
-		method = request.args.get("method")
-		user = User.query.filter_by(forums_username=username).first()
-		if user and user.rank.atLeast(UserRank.NEW_MEMBER):
-			flash("User has already been claimed", "error")
-			return redirect(url_for("users.claim"))
-		elif user is None and method == "github":
-			flash("Unable to get Github username for user", "error")
-			return redirect(url_for("users.claim"))
-		elif user is None:
-			flash("Unable to find that user", "error")
-			return redirect(url_for("users.claim"))
-
-		if user is not None and method == "github":
-			return redirect(url_for("users.github_signin"))
-
-	token = None
-	if "forum_token" in session:
-		token = session["forum_token"]
-	else:
-		token = randomString(32)
-		session["forum_token"] = token
-
-	if request.method == "POST":
-		ctype	= request.form.get("claim_type")
-		username = request.form.get("username")
-
-		if username is None or len(username.strip()) < 2:
-			flash("Invalid username", "error")
-		elif ctype == "github":
-			task = checkForumAccount.delay(username)
-			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.claim", username=username, method="github")))
-		elif ctype == "forum":
-			user = User.query.filter_by(forums_username=username).first()
-			if user is not None and user.rank.atLeast(UserRank.NEW_MEMBER):
-				flash("That user has already been claimed!", "error")
-				return redirect(url_for("users.claim"))
-
-			# Get signature
-			sig = None
-			try:
-				profile = getProfile("https://forum.minetest.net", username)
-				sig = profile.signature
-			except IOError:
-				flash("Unable to get forum signature - does the user exist?", "error")
-				return redirect(url_for("users.claim", username=username))
-
-			# Look for key
-			if token in sig:
-				if user is None:
-					user = User(username)
-					user.forums_username = username
-					db.session.add(user)
-					db.session.commit()
-
-				if loginUser(user):
-					return redirect(url_for("users.set_password"))
-				else:
-					flash("Unable to login as user", "error")
-					return redirect(url_for("users.claim", username=username))
-
-			else:
-				flash("Could not find the key in your signature!", "error")
-				return redirect(url_for("users.claim", username=username))
-		else:
-			flash("Unknown claim type", "error")
-
-	return render_template("users/claim.html", username=username, key=token)
 
 @bp.route("/users/verify/")
 def verify_email():
 	token = request.args.get("token")
 	ver = UserEmailVerification.query.filter_by(token=token).first()
 	if ver is None:
-		flash("Unknown verification token!", "error")
+		flash("Unknown verification token!", "danger")
 	else:
 		ver.user.email = ver.email
 		db.session.delete(ver)

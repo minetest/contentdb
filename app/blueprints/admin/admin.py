@@ -71,7 +71,7 @@ def admin_page():
 		elif action == "restore":
 			package = Package.query.get(request.form["package"])
 			if package is None:
-				flash("Unknown package", "error")
+				flash("Unknown package", "danger")
 			else:
 				package.soft_deleted = False
 				db.session.commit()
@@ -115,7 +115,7 @@ def admin_page():
 				db.session.commit()
 
 		else:
-			flash("Unknown action: " + action, "error")
+			flash("Unknown action: " + action, "danger")
 
 	deleted_packages = Package.query.filter_by(soft_deleted=True).all()
 	return render_template("admin/list.html", deleted_packages=deleted_packages)
@@ -132,11 +132,11 @@ def switch_user():
 	if request.method == "POST" and form.validate():
 		user = User.query.filter_by(username=form["username"].data).first()
 		if user is None:
-			flash("Unable to find user", "error")
+			flash("Unable to find user", "danger")
 		elif loginUser(user):
 			return redirect(url_for("users.profile", username=current_user.username))
 		else:
-			flash("Unable to login as user", "error")
+			flash("Unable to login as user", "danger")
 
 
 	# Process GET or invalid POST

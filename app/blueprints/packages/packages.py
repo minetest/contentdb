@@ -161,7 +161,7 @@ def download(package):
 				not "text/html" in request.accept_mimetypes:
 			return "", 204
 		else:
-			flash("No download available.", "error")
+			flash("No download available.", "danger")
 			return redirect(package.getDetailsURL())
 	else:
 		PackageRelease.query.filter_by(id=release.id).update({
@@ -204,11 +204,11 @@ def create_edit(author=None, name=None):
 		else:
 			author = User.query.filter_by(username=author).first()
 			if author is None:
-				flash("Unable to find that user", "error")
+				flash("Unable to find that user", "danger")
 				return redirect(url_for("packages.create_edit"))
 
 			if not author.checkPerm(current_user, Permission.CHANGE_AUTHOR):
-				flash("Permission denied", "error")
+				flash("Permission denied", "danger")
 				return redirect(url_for("packages.create_edit"))
 
 	else:
@@ -240,7 +240,7 @@ def create_edit(author=None, name=None):
 				if package.soft_deleted:
 					Package.query.filter_by(name=form["name"].data, author_id=author.id).delete()
 				else:
-					flash("Package already exists!", "error")
+					flash("Package already exists!", "danger")
 					return redirect(url_for("packages.create_edit"))
 
 			package = Package()
@@ -313,10 +313,10 @@ def create_edit(author=None, name=None):
 @is_package_page
 def approve(package):
 	if not package.checkPerm(current_user, Permission.APPROVE_NEW):
-		flash("You don't have permission to do that.", "error")
+		flash("You don't have permission to do that.", "danger")
 
 	elif package.approved:
-		flash("Package has already been approved", "error")
+		flash("Package has already been approved", "danger")
 
 	else:
 		package.approved = True
@@ -341,7 +341,7 @@ def remove(package):
 
 	if "delete" in request.form:
 		if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
-			flash("You don't have permission to do that.", "error")
+			flash("You don't have permission to do that.", "danger")
 			return redirect(package.getDetailsURL())
 
 		package.soft_deleted = True
@@ -356,7 +356,7 @@ def remove(package):
 		return redirect(url)
 	elif "unapprove" in request.form:
 		if not package.checkPerm(current_user, Permission.UNAPPROVE_PACKAGE):
-			flash("You don't have permission to do that.", "error")
+			flash("You don't have permission to do that.", "danger")
 			return redirect(package.getDetailsURL())
 
 		package.approved = False

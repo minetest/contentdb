@@ -50,7 +50,7 @@ def create_edit_editrequest_page(package, id=None):
 			abort(403)
 
 		if erequest.status != 0:
-			flash("Can't edit EditRequest, it has already been merged or rejected", "error")
+			flash("Can't edit EditRequest, it has already been merged or rejected", "danger")
 			return redirect(erequest.getURL())
 
 		edited_package = Package(package)
@@ -127,7 +127,7 @@ def view_editrequest_page(package, id):
 @is_package_page
 def approve_editrequest_page(package, id):
 	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
-		flash("You don't have permission to do that.", "error")
+		flash("You don't have permission to do that.", "danger")
 		return redirect(package.getDetailsURL())
 
 	erequest = EditRequest.query.get(id)
@@ -135,7 +135,7 @@ def approve_editrequest_page(package, id):
 		abort(404)
 
 	if erequest.status != 0:
-		flash("Edit request has already been resolved", "error")
+		flash("Edit request has already been resolved", "danger")
 
 	else:
 		erequest.status = 1
@@ -152,7 +152,7 @@ def approve_editrequest_page(package, id):
 @is_package_page
 def reject_editrequest_page(package, id):
 	if not package.checkPerm(current_user, Permission.APPROVE_CHANGES):
-		flash("You don't have permission to do that.", "error")
+		flash("You don't have permission to do that.", "danger")
 		return redirect(package.getDetailsURL())
 
 	erequest = EditRequest.query.get(id)
@@ -160,7 +160,7 @@ def reject_editrequest_page(package, id):
 		abort(404)
 
 	if erequest.status != 0:
-		flash("Edit request has already been resolved", "error")
+		flash("Edit request has already been resolved", "danger")
 
 	else:
 		erequest.status = 2

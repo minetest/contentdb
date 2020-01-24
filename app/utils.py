@@ -48,7 +48,7 @@ def randomString(n):
 
 def doFileUpload(file, fileType, fileTypeDesc):
 	if not file or file is None or file.filename == "":
-		flash("No selected file", "error")
+		flash("No selected file", "danger")
 		return None, None
 
 	assert os.path.isdir(app.config["UPLOAD_DIR"]), "UPLOAD_DIR must exist"
@@ -114,7 +114,7 @@ def loginUser(user):
 		return False
 
 	if user.rank == UserRank.BANNED:
-		flash("You have been banned.", "error")
+		flash("You have been banned.", "danger")
 		return False
 
 	user.active = True
@@ -125,7 +125,7 @@ def loginUser(user):
 
 	# Check if user account has been disabled
 	if not _call_or_get(user.is_active):
-		flash("Your account has not been enabled.", "error")
+		flash("Your account has not been enabled.", "danger")
 		return False
 
 	# Use Flask-Login to sign in user

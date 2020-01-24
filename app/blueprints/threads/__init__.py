@@ -142,7 +142,7 @@ def new():
 	if "pid" in request.args:
 		package = Package.query.get(int(request.args.get("pid")))
 		if package is None:
-			flash("Unable to find that package!", "error")
+			flash("Unable to find that package!", "danger")
 
 	# Don't allow making orphan threads on approved packages for now
 	if package is None:
@@ -156,12 +156,12 @@ def new():
 
 	# Check that user can make the thread
 	if not package.checkPerm(current_user, Permission.CREATE_THREAD):
-		flash("Unable to create thread!", "error")
+		flash("Unable to create thread!", "danger")
 		return redirect(url_for("homepage.home"))
 
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
-		flash("A review thread already exists!", "error")
+		flash("A review thread already exists!", "danger")
 		return redirect(url_for("threads.view", id=package.review_thread.id))
 
 	elif not current_user.canOpenThreadRL():

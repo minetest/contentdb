@@ -14,25 +14,25 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from flask import Blueprint
 
-from flask import *
-from flask_user import *
-from flask_login import login_user, logout_user
+bp = Blueprint("github", __name__)
+
+from flask import redirect, url_for, request, flash
+from flask_user import current_user
 from sqlalchemy import func
-import flask_menu as menu
 from flask_github import GitHub
-from . import bp
 from app import github
-from app.models import *
+from app.models import db, User
 from app.utils import loginUser
 
-@bp.route("/user/github/start/")
-def github_signin():
+@bp.route("/github/start/")
+def start():
 	return github.authorize("")
 
 @bp.route("/user/github/callback/")
 @github.authorized_handler
-def github_authorized(oauth_token):
+def callback(oauth_token):
 	next_url = request.args.get("next")
 	if oauth_token is None:
 		flash("Authorization failed [err=gh-oauth-login-failed]", "danger")
@@ -62,7 +62,7 @@ def github_authorized(oauth_token):
 	# If not logged in, log in
 	else:
 		if userByGithub is None:
-			flash("Unable to find an account for that Github user", "error")
+			flash("Unable to find an account for that Github user", "danger")
 			return redirect(url_for("users.claim"))
 		elif loginUser(userByGithub):
 			if not current_user.hasPassword():

@@ -57,7 +57,7 @@
 								{% if user.github_username %}
 									<a href="https://github.com/{{ user.github_username }}">GitHub</a>
 								{% elif user == current_user %}
-									<a href="{{ url_for('users.github_signin') }}">Link Github</a>
+									<a href="{{ url_for('github.start') }}">Link Github</a>
 								{% endif %}
 
 								{% if user.website_url %}
