@@ -109,6 +109,9 @@ class Permission(enum.Enum):
 		else:
 			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
 
+def display_name_default(context):
+    return context.get_current_parameters()["username"]
+
 class User(db.Model, UserMixin):
 	id           = db.Column(db.Integer, primary_key=True)
 
@@ -130,7 +133,7 @@ class User(db.Model, UserMixin):
 	# User information
 	profile_pic   = db.Column(db.String(255), nullable=True, server_default=None)
 	active        = db.Column("is_active", db.Boolean, nullable=False, server_default="0")
-	display_name  = db.Column(db.String(100), nullable=False, server_default="")
+	display_name  = db.Column(db.String(100), nullable=False, default=display_name_default)
 
 	# Links
 	website_url   = db.Column(db.String(255), nullable=True, default=None)
@@ -146,7 +149,7 @@ class User(db.Model, UserMixin):
 	tokens        = db.relationship("APIToken", backref="owner", lazy="dynamic")
 	replies       = db.relationship("ThreadReply", backref="author", lazy="dynamic")
 
-	def __init__(self, username, active=False, email=None, password=""):
+	def __init__(self, username=None, active=False, email=None, password=""):
 		self.username = username
 		self.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
