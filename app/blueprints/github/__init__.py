@@ -18,19 +18,21 @@ from flask import Blueprint
 
 bp = Blueprint("github", __name__)
 
-from flask import redirect, url_for, request, flash
+from flask import redirect, url_for, request, flash, abort
 from flask_user import current_user
 from sqlalchemy import func
 from flask_github import GitHub
-from app import github
-from app.models import db, User
+from app import github, csrf
+from app.models import db, User, APIToken, Package
 from app.utils import loginUser
+from app.blueprints.api.support import error, handleCreateRelease
+import hmac
 
 @bp.route("/github/start/")
 def start():
 	return github.authorize("")
 
-@bp.route("/user/github/callback/")
+@bp.route("/github/callback/")
 @github.authorized_handler
 def callback(oauth_token):
 	next_url = request.args.get("next")
@@ -72,3 +74,58 @@ def callback(oauth_token):
 		else:
 			flash("Authorization failed [err=gh-login-failed]", "danger")
 			return redirect(url_for("user.login"))
+
+
+@bp.route("/github/webhook/", methods=["POST"])
+@csrf.exempt
+def webhook():
+	json = request.json
+
+	# Get package
+	github_url = "github.com/" + json["repository"]["full_name"]
+	package = Package.query.filter(Package.repo.like("%{}%".format(github_url))).first()
+	if package is None:
+		return error(400, "Unknown package")
+
+	# Get all tokens for package
+	possible_tokens = APIToken.query.filter_by(package=package).all()
+	actual_token = None
+
+	#
+	# Check signature
+	#
+
+	header_signature = request.headers.get('X-Hub-Signature')
+	if header_signature is None:
+		return error(403, "Expected payload signature")
+
+	sha_name, signature = header_signature.split('=')
+	if sha_name != 'sha1':
+		return error(403, "Expected SHA1 payload signature")
+
+	for token in possible_tokens:
+		mac = hmac.new(token.access_token.encode("utf-8"), msg=request.data, digestmod='sha1')
+
+		if hmac.compare_digest(str(mac.hexdigest()), signature):
+			actual_token = token
+			break
+
+	if actual_token is None:
+		return error(403, "Invalid authentication")
+
+	#
+	# Check event
+	#
+
+	event = request.headers.get("X-GitHub-Event")
+	if event == "push":
+		title = json["head_commit"]["message"].partition("\n")[0]
+		ref = json["after"]
+	else:
+		return error(400, "Unknown event, expected 'push'")
+
+	#
+	# Perform release
+	#
+
+	return handleCreateRelease(actual_token, package, title, ref)
