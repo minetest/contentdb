@@ -18,19 +18,22 @@ from flask import Blueprint
 
 bp = Blueprint("github", __name__)
 
-from flask import redirect, url_for, request, flash, abort
-from flask_user import current_user
+from flask import redirect, url_for, request, flash, abort, render_template, jsonify
+from flask_user import current_user, login_required
 from sqlalchemy import func
 from flask_github import GitHub
 from app import github, csrf
 from app.models import db, User, APIToken, Package
-from app.utils import loginUser
+from app.utils import loginUser, randomString
 from app.blueprints.api.support import error, handleCreateRelease
-import hmac
+import hmac, requests, json
+
+from flask_wtf import FlaskForm
+from wtforms import SelectField, SubmitField
 
 @bp.route("/github/start/")
 def start():
-	return github.authorize("")
+	return github.authorize("", redirect_uri=url_for("github.callback"))
 
 @bp.route("/github/callback/")
 @github.authorized_handler
@@ -39,8 +42,6 @@ def callback(oauth_token):
 	if oauth_token is None:
 		flash("Authorization failed [err=gh-oauth-login-failed]", "danger")
 		return redirect(url_for("user.login"))
-
-	import requests
 
 	# Get Github username
 	url = "https://api.github.com/user"
@@ -121,11 +122,100 @@ def webhook():
 	if event == "push":
 		title = json["head_commit"]["message"].partition("\n")[0]
 		ref = json["after"]
+	elif event == "ping":
+		return jsonify({ "success": True, "message": "Ping successful" })
 	else:
-		return error(400, "Unknown event, expected 'push'")
+		return error(400, "Unsupported event. Only 'push' and 'ping' are supported.")
 
 	#
 	# Perform release
 	#
 
 	return handleCreateRelease(actual_token, package, title, ref)
+
+
+class SetupWebhookForm(FlaskForm):
+	event   = SelectField("Event Type", choices=[('push', 'Push'), ('tag', 'New tag')])
+	submit  = SubmitField("Save")
+
+
+@bp.route("/github/callback/webhook/")
+@github.authorized_handler
+def callback_webhook(oauth_token=None):
+	pid = request.args.get("pid")
+	if pid is None:
+		abort(404)
+
+	current_user.github_access_token = oauth_token
+	db.session.commit()
+
+	return redirect(url_for("github.setup_webhook", pid=pid))
+
+
+@bp.route("/github/webhook/new/", methods=["GET", "POST"])
+@login_required
+def setup_webhook():
+	pid = request.args.get("pid")
+	if pid is None:
+		abort(404)
+
+	package = Package.query.get(pid)
+	if package is None:
+		abort(404)
+
+	gh_user, gh_repo = package.getGitHubFullName()
+	if gh_user is None or gh_repo is None:
+		flash("Unable to get Github full name from repo address", "danger")
+		return redirect(package.getDetailsURL())
+
+	if current_user.github_access_token is None:
+		return github.authorize("write:repo_hook", \
+			redirect_uri=url_for("github.callback_webhook", pid=pid, _external=True))
+
+	form = SetupWebhookForm(formdata=request.form)
+	if request.method == "POST" and form.validate():
+		token = APIToken()
+		token.name = "Github Webhook for " + package.title
+		token.owner = current_user
+		token.access_token = randomString(32)
+		token.package = package
+
+		event = form.event.data
+		if event != "push" and event != "tag":
+			abort(500)
+
+		# Create webhook
+		url = "https://api.github.com/repos/{}/{}/hooks".format(gh_user, gh_repo)
+		data = {
+			"name": "web",
+			"active": True,
+			"events": [event],
+			"config": {
+				"url": url_for("github.webhook", _external=True),
+				"content_type": "json",
+				"secret": token.access_token
+			},
+		}
+
+		headers = {
+			"Authorization": "token " + current_user.github_access_token
+		}
+
+		r = requests.post(url, headers=headers, data=json.dumps(data))
+		if r.status_code == 201:
+			db.session.add(token)
+			db.session.commit()
+
+			return redirect(package.getDetailsURL())
+		elif r.status_code == 403:
+			current_user.github_access_token = None
+			db.session.commit()
+
+			return github.authorize("write:repo_hook", \
+				redirect_uri=url_for("github.callback_webhook", pid=pid, _external=True))
+		else:
+			flash("Failed to create webhook, received response from Github: " +
+				str(r.json().get("message") or r.status_code), "danger")
+
+	return render_template("github/setup_webhook.html", \
+		form=form, package=package)

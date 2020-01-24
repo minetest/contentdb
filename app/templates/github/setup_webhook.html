@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Setup GitHub webhook") }}
+{% endblock %}
+
+{% from "macros/forms.html" import render_field, render_submit_field, render_radio_field %}
+
+{% block content %}
+	<h1 class="mt-0">{{ self.title() }}</h1>
+
+	<div class="alert alert-info">
+		{{ _("You can delete the webhook at any time by going into Settings > Webhooks on the repository.") }}
+	</div>
+
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.event) }}
+
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}

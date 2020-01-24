@@ -126,6 +126,9 @@ class User(db.Model, UserMixin):
 	github_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
 	forums_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
 
+	# Access token for webhook setup
+	github_access_token = db.Column(db.String(50), nullable=True, server_default=None)
+
 	# User email information
 	email         = db.Column(db.String(255), nullable=True, unique=True)
 	email_confirmed_at  = db.Column(db.DateTime())
@@ -460,6 +463,31 @@ class Package(db.Model):
 
 	def getIsFOSS(self):
 		return self.license.is_foss and self.media_license.is_foss
+
+	def getIsOnGitHub(self):
+		if self.repo is None:
+			return False
+
+		url = urlparse(self.repo)
+		return url.netloc == "github.com"
+
+	def getGitHubFullName(self):
+		if self.repo is None:
+			return None
+
+		url = urlparse(self.repo)
+		if url.netloc != "github.com":
+			return None
+
+		import re
+		m = re.search(r"^\/([^\/]+)\/([^\/]+)\/?$", url.path)
+		if m is None:
+			return
+
+		user = m.group(1)
+		repo = m.group(2).replace(".git", "")
+
+		return (user,repo)
 
 	def getSortedDependencies(self, is_hard=None):
 		query = self.dependencies
