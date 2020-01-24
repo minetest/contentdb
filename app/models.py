@@ -864,12 +864,21 @@ class PackageScreenshot(db.Model):
 class APIToken(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 	access_token = db.Column(db.String(34), unique=True)
+
 	name         = db.Column(db.String(100), nullable=False)
 	owner_id     = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	# owner is created using backref
+
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
+	package    = db.relationship("Package", foreign_keys=[package_id])
+
 	def canOperateOnPackage(self, package):
-		return packages.count() == 0 or package in packages
+		if self.package and self.package != None:
+			return False
+
+		return package.owner == self.owner
 
 
 class EditRequest(db.Model):

@@ -29,6 +29,8 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 class CreateAPIToken(FlaskForm):
 	name	     = StringField("Name", [InputRequired(), Length(1, 30)])
+	package      = QuerySelectField("Limit to package", allow_blank=True, \
+			get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	submit	     = SubmitField("Save")
 
 
@@ -70,6 +72,8 @@ def create_edit_token(username, id=None):
 		access_token = session.pop("token_" + str(id), None)
 
 	form = CreateAPIToken(formdata=request.form, obj=token)
+	form.package.query_factory = lambda: Package.query.filter_by(author=user).all()
+
 	if request.method == "POST" and form.validate():
 		if is_new:
 			token = APIToken()
