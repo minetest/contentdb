@@ -522,7 +522,7 @@ class Package(db.Model):
 			"short_description": self.short_desc,
 			"desc": self.desc,
 			"type": self.type.toName(),
-			"created_at": self.created_at,
+			"created_at": self.created_at.isoformat(),
 
 			"license": self.license.name,
 			"media_license": self.media_license.name,
@@ -773,6 +773,18 @@ class PackageRelease(db.Model):
 	# If the release is approved, then the task_id must be null and the url must be present
 	CK_approval_valid = db.CheckConstraint("not approved OR (task_id IS NULL AND (url = '') IS NOT FALSE)")
 
+	def getAsDictionary(self):
+		return {
+			"id": self.id,
+			"title": self.title,
+			"url": self.url if self.url != "" else None,
+			"release_date": self.releaseDate.isoformat(),
+			"commit": self.commit_hash,
+			"downloads": self.downloads,
+			"min_protocol": self.min_rel and self.min_rel.protocol,
+			"max_protocol": self.max_rel and self.max_rel.protocol
+		}
+
 	def getEditURL(self):
 		return url_for("packages.edit_release",
 				author=self.package.author.username,
@@ -875,10 +887,10 @@ class APIToken(db.Model):
 	package    = db.relationship("Package", foreign_keys=[package_id])
 
 	def canOperateOnPackage(self, package):
-		if self.package and self.package != None:
+		if self.package and self.package != package:
 			return False
 
-		return package.owner == self.owner
+		return package.author == self.owner
 
 
 class EditRequest(db.Model):

@@ -19,6 +19,7 @@ from flask import *
 from flask_user import *
 from . import bp
 from .auth import is_api_authd
+from .support import error, handleCreateRelease
 from app import csrf
 from app.models import *
 from app.utils import is_package_page
@@ -71,6 +72,13 @@ def package_dependencies(package):
 	return jsonify(ret)
 
 
+@bp.route("/api/packages/<author>/<name>/releases/")
+@is_package_page
+def list_releases(package):
+	releases = package.releases.filter_by(approved=True).all()
+	return jsonify([ rel.getAsDictionary() for rel in releases ])
+
+
 @bp.route("/api/topics/")
 def topics():
 	qb     = QueryBuilder(request.args)
@@ -113,5 +121,25 @@ def whoami(token):
 
 @bp.route("/api/markdown/", methods=["POST"])
 @csrf.exempt
-def clean_markdown():
+def markdown():
 	return render_markdown(request.data.decode("utf-8"))
+
+
+@bp.route("/api/packages/<author>/<name>/releases/new/", methods=["POST"])
+@csrf.exempt
+@is_package_page
+@is_api_authd
+def create_release(token, package):
+	json = request.json
+	if json is None:
+		return error(400, "JSON post data is required")
+
+	for option in ["method", "title", "ref"]:
+		if json.get(option) is None:
+			return error(400, option + " is required in the POST data")
+
+
+	if json["method"].lower() != "vcs":
+		return error(400, "Release-creation methods other than VCS are not supported")
+
+	return handleCreateRelease(token, package, json["title"], json["ref"])

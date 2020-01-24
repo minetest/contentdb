@@ -23,6 +23,19 @@ You can use the `/api/whoami` to check authentication.
 * GET `/api/packages/` - See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/`
 
+### Releases
+
+* GET `/api/packages/<username>/<name>/releases/`
+* POST `/api/packages/<username>/<name>/releases/`
+	* Requires authentication.
+	* `title`: human-readable name of the release.
+	* `method`: Must be `vcs`.
+	* `min_protocol`: minimum Minetest protocol version. See [Minetest](#minetest).
+	* `min_protocol`: maximum Minetest protocol version. See [Minetest](#minetest).
+	* If `vcs` release-creation method:
+		* `ref` - git reference.
+
+
 ### Topics
 
 * GET `/api/topics/` - Supports [Package Queries](#package-queries), and the following two options:
