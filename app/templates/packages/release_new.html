@@ -5,6 +5,24 @@
 {% endblock %}
 
 {% block content %}
+	<p class="alert alert-info mb-4">
+		<a class="float-right btn btn-sm btn-info" href="{{ url_for('flatpage', path='help/release_webhooks') }}">{{ _("Learn more") }}</a>
+		{% if package.author == current_user and package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
+			<a class="float-right btn btn-sm btn-info mr-2" href="{{ url_for('github.setup_webhook', pid=package.id) }}">{{ _("Setup webhook") }}</a>
+			<i class="fas fa-info mr-2"></i>
+
+			{{ _("Set up a webhook on GitHub to create releases automatically.") }}
+		{% elif package.repo %}
+			<i class="fas fa-info mr-2"></i>
+
+			{{ _("You can create releases automatically when you push commits or tags to your repository.") }}
+		{% else %}
+			<i class="fas fa-info mr-2"></i>
+
+			{{ _("Using git will allow you to create releases automatically when you push code or tags.") }}
+		{% endif %}
+	</p>
+
 	{% from "macros/forms.html" import render_field, render_submit_field, render_radio_field %}
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}

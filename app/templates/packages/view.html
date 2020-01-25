@@ -364,15 +364,6 @@
 				</ul>
 			</div>
 
-			{% if package.author == current_user and package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
-			<p class="small text-centered">
-				<a href="{{ url_for('github.setup_webhook', pid=package.id) }}">
-					Set up a webhook
-				</a>
-				to create releases automatically.
-			</p>
-			{% endif %}
-
 			<div class="card my-4">
 				<div class="card-header">
 					{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
