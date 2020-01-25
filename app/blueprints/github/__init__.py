@@ -23,7 +23,7 @@ from flask_user import current_user, login_required
 from sqlalchemy import func
 from flask_github import GitHub
 from app import github, csrf
-from app.models import db, User, APIToken, Package
+from app.models import db, User, APIToken, Package, Permission
 from app.utils import loginUser, randomString
 from app.blueprints.api.support import error, handleCreateRelease
 import hmac, requests, json
@@ -114,6 +114,9 @@ def webhook():
 	if actual_token is None:
 		return error(403, "Invalid authentication")
 
+	if not package.checkPerm(actual_token.owner, Permission.APPROVE_RELEASE):
+		return error(403, "Only trusted members can use webhooks")
+
 	#
 	# Check event
 	#
@@ -163,6 +166,10 @@ def setup_webhook():
 	if package is None:
 		abort(404)
 
+	if not package.checkPerm(current_user, Permission.APPROVE_RELEASE):
+		flash("Only trusted members can use webhooks", "danger")
+		return redirect(package.getDetailsURL())
+
 	gh_user, gh_repo = package.getGitHubFullName()
 	if gh_user is None or gh_repo is None:
 		flash("Unable to get Github full name from repo address", "danger")
@@ -207,15 +214,16 @@ def setup_webhook():
 			db.session.commit()
 
 			return redirect(package.getDetailsURL())
-		elif r.status_code == 403:
+		elif r.status_code == 401 or r.status_code == 403:
 			current_user.github_access_token = None
 			db.session.commit()
 
 			return github.authorize("write:repo_hook", \
 				redirect_uri=url_for("github.callback_webhook", pid=pid, _external=True))
 		else:
-			flash("Failed to create webhook, received response from Github: " +
-				str(r.json().get("message") or r.status_code), "danger")
+			flash("Failed to create webhook, received response from Github " +
+				str(r.status_code) + ": " +
+				str(r.json().get("message")), "danger")
 
 	return render_template("github/setup_webhook.html", \
 		form=form, package=package)

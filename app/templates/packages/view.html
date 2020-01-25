@@ -364,7 +364,7 @@
 				</ul>
 			</div>
 
-			{% if package.getIsOnGitHub() %}
+			{% if package.author == current_user and package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
 			<p class="small text-centered">
 				<a href="{{ url_for('github.setup_webhook', pid=package.id) }}">
 					Set up a webhook
