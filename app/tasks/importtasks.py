@@ -156,8 +156,14 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 			repo = git.Repo.clone_from(gitUrl, gitDir, \
 					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
 		else:
-			repo = git.Repo.clone_from(gitUrl, gitDir, \
-					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15, b=ref)
+			repo = git.Repo.init(gitDir)
+			origin = repo.create_remote("origin", url=gitUrl)
+			assert origin.exists()
+			origin.fetch()
+
+			new_head = repo.commit(ref) #repo.create_head("target", ref)
+			repo.head.reference = new_head
+			repo.head.reset(index=True, working_tree=True)
 
 		return gitDir, repo
 
