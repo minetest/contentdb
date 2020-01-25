@@ -80,13 +80,12 @@ def create_edit_token(username, id=None):
 			token.owner = user
 			token.access_token = randomString(32)
 
+			# Store token so it can be shown in the edit page
+			session["token_" + str(token.id)] = token.access_token
+
 		form.populate_obj(token)
 		db.session.add(token)
-
 		db.session.commit() # save
-
-		# Store token so it can be shown in the edit page
-		session["token_" + str(token.id)] = token.access_token
 
 		return redirect(url_for("api.create_edit_token", username=username, id=token.id))
 
