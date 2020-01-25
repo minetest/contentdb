@@ -123,12 +123,15 @@ def webhook():
 
 	event = request.headers.get("X-GitHub-Event")
 	if event == "push":
-		title = json["head_commit"]["message"].partition("\n")[0]
 		ref = json["after"]
+		title = json["head_commit"]["message"].partition("\n")[0]
+	elif event == "create" and json["ref_type"] == "tag":
+		ref = json["ref"]
+		title = ref
 	elif event == "ping":
 		return jsonify({ "success": True, "message": "Ping successful" })
 	else:
-		return error(400, "Unsupported event. Only 'push' and 'ping' are supported.")
+		return error(400, "Unsupported event. Only 'push', `create:tag`, and 'ping' are supported.")
 
 	#
 	# Perform release

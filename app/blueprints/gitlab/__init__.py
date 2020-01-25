@@ -54,8 +54,11 @@ def webhook():
 	if event == "push":
 		ref = json["after"]
 		title = ref[:5]
+	elif event == "tag_push":
+		ref = json["ref"]
+		title = ref.replace("refs/tags/", "")
 	else:
-		return error(400, "Unsupported event. Only 'push' is supported.")
+		return error(400, "Unsupported event. Only 'push' and 'tag_push' are supported.")
 
 	#
 	# Perform release
