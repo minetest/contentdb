@@ -141,7 +141,7 @@ def webhook():
 
 
 class SetupWebhookForm(FlaskForm):
-	event   = SelectField("Event Type", choices=[('create', 'New tag'), ('push', 'Push')])
+	event   = SelectField("Event Type", choices=[('create', 'New tag or GitHub release'), ('push', 'Push')])
 	submit  = SubmitField("Save")
 
 
@@ -185,7 +185,7 @@ def setup_webhook():
 	form = SetupWebhookForm(formdata=request.form)
 	if request.method == "POST" and form.validate():
 		token = APIToken()
-		token.name = "Github Webhook for " + package.title
+		token.name = "GitHub Webhook for " + package.title
 		token.owner = current_user
 		token.access_token = randomString(32)
 		token.package = package
@@ -196,6 +196,7 @@ def setup_webhook():
 
 		if handleMakeWebhook(gh_user, gh_repo, package, \
 				current_user.github_access_token, event, token):
+			flash("Successfully created webhook", "success")
 			return redirect(package.getDetailsURL())
 		else:
 			return redirect(url_for("github.setup_webhook", pid=package.id))
