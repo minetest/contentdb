@@ -141,7 +141,7 @@ def webhook():
 
 
 class SetupWebhookForm(FlaskForm):
-	event   = SelectField("Event Type", choices=[('push', 'Push'), ('tag', 'New tag')])
+	event   = SelectField("Event Type", choices=[('create', 'New tag'), ('push', 'Push')])
 	submit  = SubmitField("Save")
 
 
@@ -191,7 +191,7 @@ def setup_webhook():
 		token.package = package
 
 		event = form.event.data
-		if event != "push" and event != "tag":
+		if event != "push" and event != "create":
 			abort(500)
 
 		# Create webhook
