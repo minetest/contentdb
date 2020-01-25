@@ -194,39 +194,69 @@ def setup_webhook():
 		if event != "push" and event != "create":
 			abort(500)
 
-		# Create webhook
-		url = "https://api.github.com/repos/{}/{}/hooks".format(gh_user, gh_repo)
-		data = {
-			"name": "web",
-			"active": True,
-			"events": [event],
-			"config": {
-				"url": url_for("github.webhook", _external=True),
-				"content_type": "json",
-				"secret": token.access_token
-			},
-		}
-
-		headers = {
-			"Authorization": "token " + current_user.github_access_token
-		}
-
-		r = requests.post(url, headers=headers, data=json.dumps(data))
-		if r.status_code == 201:
-			db.session.add(token)
-			db.session.commit()
-
+		if handleMakeWebhook(gh_user, gh_repo, package, \
+				current_user.github_access_token, event, token):
 			return redirect(package.getDetailsURL())
-		elif r.status_code == 401 or r.status_code == 403:
-			current_user.github_access_token = None
-			db.session.commit()
-
-			return github.authorize("write:repo_hook", \
-				redirect_uri=url_for("github.callback_webhook", pid=pid, _external=True))
 		else:
-			flash("Failed to create webhook, received response from Github " +
-				str(r.status_code) + ": " +
-				str(r.json().get("message")), "danger")
+			return redirect(url_for("github.setup_webhook", pid=package.id))
 
 	return render_template("github/setup_webhook.html", \
 		form=form, package=package)
+
+
+def handleMakeWebhook(gh_user, gh_repo, package, oauth, event, token):
+	url = "https://api.github.com/repos/{}/{}/hooks".format(gh_user, gh_repo)
+	headers = {
+		"Authorization": "token " + oauth
+	}
+	data = {
+		"name": "web",
+		"active": True,
+		"events": [event],
+		"config": {
+			"url": url_for("github.webhook", _external=True),
+			"content_type": "json",
+			"secret": token.access_token
+		},
+	}
+
+	# First check that the webhook doesn't already exist
+	r = requests.get(url, headers=headers)
+
+	if r.status_code == 401 or r.status_code == 403:
+		current_user.github_access_token = None
+		db.session.commit()
+		return False
+
+	if r.status_code != 200:
+		flash("Failed to create webhook, received response from Github " +
+			str(r.status_code) + ": " +
+			str(r.json().get("message")), "danger")
+		return False
+
+	for hook in r.json():
+		if hook["config"]["url"] == data["config"]["url"]:
+			flash("Failed to create webhook, as it already exists", "danger")
+			return False
+
+
+	# Create it
+	r = requests.post(url, headers=headers, data=json.dumps(data))
+
+	if r.status_code == 201:
+		db.session.add(token)
+		db.session.commit()
+
+		return True
+
+	elif r.status_code == 401 or r.status_code == 403:
+		current_user.github_access_token = None
+		db.session.commit()
+
+		return False
+
+	else:
+		flash("Failed to create webhook, received response from Github " +
+			str(r.status_code) + ": " +
+			str(r.json().get("message")), "danger")
+		return False
