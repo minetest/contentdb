@@ -160,10 +160,7 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 			origin = repo.create_remote("origin", url=gitUrl)
 			assert origin.exists()
 			origin.fetch()
-
-			new_head = repo.commit(ref) #repo.create_head("target", ref)
-			repo.head.reference = new_head
-			repo.head.reset(index=True, working_tree=True)
+			origin.pull(ref)
 
 		return gitDir, repo
 
