@@ -235,7 +235,8 @@ def handleMakeWebhook(gh_user, gh_repo, package, oauth, event, token):
 		return False
 
 	for hook in r.json():
-		if hook["config"]["url"] == data["config"]["url"]:
+		if hook.get("config") and hook["config"].get("url") and \
+				hook["config"]["url"] == data["config"]["url"]:
 			flash("Failed to create webhook, as it already exists", "danger")
 			return False
 
