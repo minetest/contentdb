@@ -16,12 +16,12 @@
 	If this was you, then please click this link to verify the address:
 </p>
 
-<a class="btn" href="{{ url_for('users.verify_email', token=token, _external=True) }}">
+<a class="btn" href="{{ abs_url_for('users.verify_email', token=token) }}">
 	Confirm Email Address
 </a>
 
 <p style="font-size: 80%;">
-	Or paste this into your browser: {{ url_for('users.verify_email', token=token, _external=True) }}
+	Or paste this into your browser: {{ abs_url_for('users.verify_email', token=token) }}
 <p>
 
 {% endblock %}

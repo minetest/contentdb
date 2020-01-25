@@ -22,6 +22,12 @@ from app.models import *
 from app import app
 import random, string, os, imghdr
 
+
+@app.template_filter()
+def abs_url_for(path, **kwargs):
+	scheme = "https" if app.config["BASE_URL"][:5] == "https" else "http"
+	return url_for(path, _external=True, _scheme=scheme, **kwargs)
+
 def get_int_or_abort(v, default=None):
 	try:
 		return int(v or default)

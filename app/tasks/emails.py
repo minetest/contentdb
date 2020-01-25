@@ -19,6 +19,7 @@ from flask import render_template, url_for
 from flask_mail import Message
 from app import mail
 from app.tasks import celery
+from app.utils import abs_url_for
 
 @celery.task()
 def sendVerifyEmail(newEmail, token):
@@ -34,7 +35,7 @@ def sendVerifyEmail(newEmail, token):
 			If this was you, then please click this link to verify the address:
 
 			{}
-		""".format(url_for('users.verify_email', token=token, _external=True))
+		""".format(abs_url_for('users.verify_email', token=token))
 
 	msg.html = render_template("emails/verify.html", token=token)
 	mail.send(msg)

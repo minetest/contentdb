@@ -24,7 +24,7 @@ from sqlalchemy import func
 from flask_github import GitHub
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission
-from app.utils import loginUser, randomString
+from app.utils import loginUser, randomString, abs_url_for
 from app.blueprints.api.support import error, handleCreateRelease
 import hmac, requests, json
 
@@ -180,7 +180,7 @@ def setup_webhook():
 
 	if current_user.github_access_token is None:
 		return github.authorize("write:repo_hook", \
-			redirect_uri=url_for("github.callback_webhook", pid=pid, _external=True))
+			redirect_uri=abs_url_for("github.callback_webhook", pid=pid))
 
 	form = SetupWebhookForm(formdata=request.form)
 	if request.method == "POST" and form.validate():
@@ -214,7 +214,7 @@ def handleMakeWebhook(gh_user, gh_repo, package, oauth, event, token):
 		"active": True,
 		"events": [event],
 		"config": {
-			"url": url_for("github.webhook", _external=True),
+			"url": abs_url_for("github.webhook"),
 			"content_type": "json",
 			"secret": token.access_token
 		},
