@@ -33,7 +33,7 @@ from wtforms import SelectField, SubmitField
 
 @bp.route("/github/start/")
 def start():
-	return github.authorize("", redirect_uri=url_for("github.callback"))
+	return github.authorize("", redirect_uri=abs_url_for("github.callback"))
 
 @bp.route("/github/callback/")
 @github.authorized_handler
