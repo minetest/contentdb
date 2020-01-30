@@ -20,4 +20,10 @@
 
 		{{ render_submit_field(form.submit) }}
 	</form>
+
+	<p class="mt-4">
+		You will need admin access to the repository.
+		When setting up hooks on an organisation,
+		<a href="{{ url_for('github.view_permissions') }}">make sure that you have granted access</a>.
+	</p>
 {% endblock %}

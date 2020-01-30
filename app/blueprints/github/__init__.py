@@ -18,7 +18,7 @@ from flask import Blueprint
 
 bp = Blueprint("github", __name__)
 
-from flask import redirect, url_for, request, flash, abort, render_template, jsonify
+from flask import redirect, url_for, request, flash, abort, render_template, jsonify, current_app
 from flask_user import current_user, login_required
 from sqlalchemy import func
 from flask_github import GitHub
@@ -34,6 +34,12 @@ from wtforms import SelectField, SubmitField
 @bp.route("/github/start/")
 def start():
 	return github.authorize("", redirect_uri=abs_url_for("github.callback"))
+
+@bp.route("/github/view/")
+def view_permissions():
+	url = "https://github.com/settings/connections/applications/" + \
+			current_app.config["GITHUB_CLIENT_ID"]
+	return redirect(url)
 
 @bp.route("/github/callback/")
 @github.authorized_handler

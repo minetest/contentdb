@@ -64,6 +64,7 @@
 									| <a href="{{ user.website_url }}" rel="nofollow">Website</a>
 								{% endif %}
 
+
 								{% if user == current_user %}
 									<br>
 									<small class="text-muted">
@@ -73,6 +74,16 @@
 								{% endif %}
 							</td>
 						</tr>
+
+						{% if user == current_user and user.github_username %}
+							<tr>
+								<td>Privacy:</td>
+								<td>
+									<a href="{{ url_for('github.view_permissions') }}">View ContentDB's GitHub Permissions</a>
+								</td>
+							</tr>
+						{% endif %}
+
 						{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
 						<tr>
 							<td>Admin</td>
@@ -115,7 +126,7 @@
 										</a>
 									{% endif %}
 								</td>
-							</tr>
+						</tr>
 							<tr>
 								<td>Password:</td>
 								<td>

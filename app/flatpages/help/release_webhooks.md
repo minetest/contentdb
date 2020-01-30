@@ -23,19 +23,20 @@ The process is as follows:
 
 ## Setting up
 
-### Github (automatic)
+### GitHub (automatic)
 
-1. Go to your package page.
+1. Go to your package's page.
 2. Make sure that the repository URL is set to a Github repository.
    Only github.com is supported.
-3. Go to "Create a release", and click "Setup webhook" at the top of the page.
+3. Go to "Releases" > "+", and click "Setup webhook" at the top of the create release
+   page.
    If you do not see this, either the repository isn't using Github or you do
    not have permission to use webhook releases (ie: you're not a Trusted Member).
 4. Grant ContentDB the ability to manage Webhooks.
-5. Set the event to either "New tag" or "Push". New tag is highlight recommended.
+5. Set the event to either "New tag or Github Release" (highly recommended) or "Push".
 
    N.B.: GitHub uses tags to power GitHub Releases, meaning that creating a webhook
-   on "new tag" will sync GitHub and ContentDB releases.
+   on "New tag" will sync GitHub and ContentDB releases.
 
 ### GitHub (manual)
 
@@ -48,7 +49,7 @@ The process is as follows:
 7. Set the events
   * If you want a rolling release, choose "just the push event".
   * Or if you want a stable release cycle based on tags,
-   choose "Let me select" > Branch or tag creation.
+    choose "Let me select" > Branch or tag creation.
 
 ### GitLab (manual)
 
