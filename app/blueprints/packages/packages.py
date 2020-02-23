@@ -164,12 +164,7 @@ def download(package):
 			flash("No download available.", "danger")
 			return redirect(package.getDetailsURL())
 	else:
-		PackageRelease.query.filter_by(id=release.id).update({
-				"downloads": PackageRelease.downloads + 1
-			})
-		db.session.commit()
-
-		return redirect(release.url, code=302)
+		return redirect(release.getDownloadURL(), code=302)
 
 
 class PackageForm(FlaskForm):
