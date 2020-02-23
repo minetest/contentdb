@@ -173,8 +173,8 @@ class PackageForm(FlaskForm):
 	short_desc     = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
 	desc          = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])
 	type          = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
-	license       = QuerySelectField("License", [InputRequired()], query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	media_license = QuerySelectField("Media License", [InputRequired()], query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	license       = QuerySelectField("License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	media_license = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	provides_str  = StringField("Provides (mods included in package)", [Optional()])
 	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	harddep_str   = StringField("Hard Dependencies", [Optional()])
@@ -222,6 +222,8 @@ def create_edit(author=None, name=None):
 			form.title.data  = request.args.get("title")
 			form.repo.data   = request.args.get("repo")
 			form.forums.data = request.args.get("forums")
+			form.license.data = None
+			form.media_license.data = None
 		else:
 			form.harddep_str.data  = ",".join([str(x) for x in package.getSortedHardDependencies() ])
 			form.softdep_str.data  = ",".join([str(x) for x in package.getSortedOptionalDependencies() ])
