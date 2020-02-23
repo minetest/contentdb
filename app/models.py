@@ -93,6 +93,7 @@ class Permission(enum.Enum):
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
 	TOPIC_DISCARD      = "TOPIC_DISCARD"
 	CREATE_TOKEN       = "CREATE_TOKEN"
+	CHANGE_PROFILE_URLS = "CHANGE_PROFILE_URLS"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -192,7 +193,7 @@ class User(db.Model, UserMixin):
 			return user.rank.atLeast(UserRank.EDITOR)
 		elif perm == Permission.CHANGE_RANK or perm == Permission.CHANGE_DNAME:
 			return user.rank.atLeast(UserRank.MODERATOR)
-		elif perm == Permission.CHANGE_EMAIL:
+		elif perm == Permission.CHANGE_EMAIL or perm == Permission.CHANGE_PROFILE_URLS:
 			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank))
 		elif perm == Permission.CREATE_TOKEN:
 			if user == self:

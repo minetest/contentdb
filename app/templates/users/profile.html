@@ -164,6 +164,9 @@
 
 					{% if user.checkPerm(current_user, "CHANGE_DNAME") %}
 						{{ render_field(form.display_name, tabindex=230) }}
+					{% endif %}
+
+					{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}
 						{{ render_field(form.website_url, tabindex=232) }}
 						{{ render_field(form.donate_url, tabindex=233) }}
 					{% endif %}
@@ -177,7 +180,9 @@
 						{{ render_field(form.rank, tabindex=250) }}
 					{% endif %}
 
-					{{ render_submit_field(form.submit, tabindex=280) }}
+					<p>
+						{{ render_submit_field(form.submit, tabindex=280) }}
+					</p>
 				</form>
 			</div>
 		</div>

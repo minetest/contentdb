@@ -63,6 +63,8 @@ def profile(username):
 			# Copy form fields to user_profile fields
 			if user.checkPerm(current_user, Permission.CHANGE_DNAME):
 				user.display_name = form["display_name"].data
+
+			if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
 				user.website_url  = form["website_url"].data
 				user.donate_url   = form["donate_url"].data
 
