@@ -15,9 +15,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from app.models import Package
+from app.models import Package, db
 from app.tasks import celery
 
 @celery.task()
 def updatePackageScores():
-	Package.query.update({ "score": Package.score * 0.8 })
+	Package.query.update({ "score": Package.score * 0.95 })
+	db.session.commit()
