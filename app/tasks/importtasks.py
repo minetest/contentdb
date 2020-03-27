@@ -162,6 +162,9 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 			origin.fetch()
 			origin.pull(ref)
 
+			for submodule in repo.submodules:
+				submodule.update(init=True)
+
 		return gitDir, repo
 
 	except GitCommandError as e:
