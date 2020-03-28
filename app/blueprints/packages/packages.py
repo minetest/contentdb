@@ -70,7 +70,7 @@ def list_all():
 			.filter(or_(*[func.lower(User.username) == name.lower().strip() for name in search.split(" ")])) \
 			.all()
 
-		authors = [(author.username, search.lower().replace(author.username, "")) for author in authors]
+		authors = [(author.username, search.lower().replace(author.username.lower(), "")) for author in authors]
 
 	topics = None
 	if qb.search and not query.has_next:
