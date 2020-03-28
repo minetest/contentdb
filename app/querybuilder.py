@@ -1,4 +1,4 @@
-from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease
+from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User
 from .utils import isNo, isYes
 from sqlalchemy.sql.expression import func
 from flask import abort
@@ -23,14 +23,19 @@ class QueryBuilder:
 
 		self.title  = title
 		self.types  = types
-		self.search = args.get("q")
+
 		self.random = "random" in args
 		self.lucky  = "lucky" in args
 		self.hide_nonfree = "nonfree" in hide_flags
 		self.limit  = 1 if self.lucky else None
 		self.order_by  = args.get("sort")
 		self.order_dir = args.get("order") or "desc"
+
+		# Filters
+
+		self.search = args.get("q")
 		self.protocol_version = args.get("protocol_version")
+		self.author = args.get("author")
 
 		self.show_discarded = isYes(args.get("show_discarded"))
 		self.show_added = args.get("show_added")
@@ -83,6 +88,13 @@ class QueryBuilder:
 				abort(400)
 
 			query = query.order_by(to_order)
+
+		if self.author:
+			author = User.query.filter_by(username=self.author).first()
+			if not author:
+				abort(404)
+
+			query = query.filter_by(author=author)
 
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))

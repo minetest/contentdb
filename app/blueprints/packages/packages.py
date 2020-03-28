@@ -30,7 +30,7 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
-from sqlalchemy import or_
+from sqlalchemy import or_, func
 
 
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
@@ -64,6 +64,14 @@ def list_all():
 	prev_url = url_for("packages.list_all", type=type_name, q=search, page=query.prev_num) \
 			if query.has_prev else None
 
+	authors = []
+	if search:
+		authors = User.query \
+			.filter(or_(*[func.lower(User.username) == name.lower().strip() for name in search.split(" ")])) \
+			.all()
+
+		authors = [(author.username, search.lower().replace(author.username, "")) for author in authors]
+
 	topics = None
 	if qb.search and not query.has_next:
 		qb.show_discarded = True
@@ -73,6 +81,7 @@ def list_all():
 	return render_template("packages/list.html", \
 			title=title, packages=query.items, topics=topics, \
 			query=search, tags=tags, type=type_name, \
+			authors = authors, \
 			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, packages_count=query.total)
 
 

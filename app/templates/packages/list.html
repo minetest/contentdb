@@ -5,6 +5,21 @@
 {% endblock %}
 
 {% block content %}
+	{% if authors %}
+		<p class="alert alert-primary">
+			Did you mean to search for packages by
+
+			{% for author in authors %}
+				<a href="{{ url_for('packages.list_all', type=type, author=author[0], q=author[1]) }}">{{ author[0] }}</a>
+				{% if not loop.last %}
+    				,
+				{% endif %}
+			{% endfor %}
+			?
+		</p>
+	{% endif %}
+
+
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 	{{ render_pkggrid(packages) }}
 
