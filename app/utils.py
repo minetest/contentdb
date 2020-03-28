@@ -18,12 +18,10 @@
 from flask import request, flash, abort, redirect
 from flask_user import *
 from flask_login import login_user, logout_user
-from app.models import *
-from app import app
+from .models import *
+from . import app
 import random, string, os, imghdr
 
-
-@app.template_filter()
 def abs_url_for(path, **kwargs):
 	scheme = "https" if app.config["BASE_URL"][:5] == "https" else "http"
 	return url_for(path, _external=True, _scheme=scheme, **kwargs)

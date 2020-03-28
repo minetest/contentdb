@@ -60,7 +60,6 @@ if not app.debug and app.config["MAIL_UTILS_ERROR_SEND_TO"]:
 from .markdown import init_app
 init_app(app)
 
-
 # @babel.localeselector
 # def get_locale():
 # 	return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
