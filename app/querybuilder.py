@@ -1,4 +1,5 @@
-from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User
+from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag
+from .models import tags as Tags
 from .utils import isNo, isYes
 from sqlalchemy.sql.expression import func
 from flask import abort
@@ -19,10 +20,17 @@ class QueryBuilder:
 		if len(types) > 0:
 			title = ", ".join([type.value + "s" for type in types])
 
+		# Get tags types
+		tags = args.getlist("tag")
+		tags = [Tag.query.filter_by(name=tname).first() for tname in tags]
+		tags = [tag for tag in tags if tag is not None]
+
+		# Hid
 		hide_flags = args.getlist("hide")
 
 		self.title  = title
 		self.types  = types
+		self.tags   = tags
 
 		self.random = "random" in args
 		self.lucky  = "lucky" in args
@@ -95,6 +103,9 @@ class QueryBuilder:
 				abort(404)
 
 			query = query.filter_by(author=author)
+
+		for tag in self.tags:
+			query = query.filter(Package.tags.any(Tag.id == tag.id))
 
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))

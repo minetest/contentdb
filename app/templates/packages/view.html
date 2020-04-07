@@ -38,7 +38,8 @@
 					</span>
 				{% endif %}
 				{% for t in package.tags %}
-					<span class="badge badge-primary">{{ t.title }}</span>
+					<a class="badge badge-primary"
+						href="{{ url_for('packages.list_all', tag=t.name) }}">{{ t.title }}</a>
 				{% endfor %}
 			</p>
 
