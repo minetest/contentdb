@@ -69,7 +69,7 @@ def create_edit_token(username, id=None):
 		elif token.owner != user:
 			abort(403)
 
-		access_token = session.pop("token_" + str(id), None)
+		access_token = session.pop("token_" + str(token.id), None)
 
 	form = CreateAPIToken(formdata=request.form, obj=token)
 	form.package.query_factory = lambda: Package.query.filter_by(author=user).all()
@@ -80,12 +80,13 @@ def create_edit_token(username, id=None):
 			token.owner = user
 			token.access_token = randomString(32)
 
-			# Store token so it can be shown in the edit page
-			session["token_" + str(token.id)] = token.access_token
-
 		form.populate_obj(token)
 		db.session.add(token)
 		db.session.commit() # save
+
+		if is_new:
+			# Store token so it can be shown in the edit page
+			session["token_" + str(token.id)] = token.access_token
 
 		return redirect(url_for("api.create_edit_token", username=username, id=token.id))
 
@@ -101,8 +102,6 @@ def reset_token(username, id):
 
 	if not user.checkPerm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
-
-	is_new = id is None
 
 	token = APIToken.query.get(id)
 	if token is None:
