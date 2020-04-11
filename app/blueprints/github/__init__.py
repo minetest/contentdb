@@ -20,7 +20,7 @@ bp = Blueprint("github", __name__)
 
 from flask import redirect, url_for, request, flash, abort, render_template, jsonify, current_app
 from flask_user import current_user, login_required
-from sqlalchemy import func
+from sqlalchemy import func, or_, and_
 from flask_github import GitHub
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission
@@ -95,7 +95,10 @@ def webhook():
 		return error(400, "Could not find package, did you set the VCS repo in CDB correctly?")
 
 	# Get all tokens for package
-	possible_tokens = APIToken.query.filter_by(package=package).all()
+	tokens_query = APIToken.query.filter(or_(APIToken.package==package,
+			and_(APIToken.package==None, APIToken.owner==package.author)))
+
+	possible_tokens = tokens_query.all()
 	actual_token = None
 
 	#
@@ -118,7 +121,7 @@ def webhook():
 			break
 
 	if actual_token is None:
-		return error(403, "Invalid authentication, couldn't validate API token. Make sure to limit token to a package")
+		return error(403, "Invalid authentication, couldn't validate API token")
 
 	if not package.checkPerm(actual_token.owner, Permission.APPROVE_RELEASE):
 		return error(403, "Only trusted members can use webhooks")
