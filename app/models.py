@@ -214,6 +214,9 @@ class User(db.Model, UserMixin):
 			.filter(Thread.created_at > hour_ago).count() < 2
 
 	def __eq__(self, other):
+		if other is None:
+			return False
+
 		if not self.is_authenticated or not other.is_authenticated:
 			return False
 
