@@ -92,7 +92,7 @@ def webhook():
 	github_url = "github.com/" + json["repository"]["full_name"]
 	package = Package.query.filter(Package.repo.like("%{}%".format(github_url))).first()
 	if package is None:
-		return error(400, "Unknown package")
+		return error(400, "Could not find package, did you set the VCS repo in CDB correctly?")
 
 	# Get all tokens for package
 	possible_tokens = APIToken.query.filter_by(package=package).all()
@@ -118,7 +118,7 @@ def webhook():
 			break
 
 	if actual_token is None:
-		return error(403, "Invalid authentication")
+		return error(403, "Invalid authentication, couldn't validate API token. Make sure to limit token to a package")
 
 	if not package.checkPerm(actual_token.owner, Permission.APPROVE_RELEASE):
 		return error(403, "Only trusted members can use webhooks")
