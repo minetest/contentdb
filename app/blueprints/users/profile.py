@@ -16,7 +16,7 @@
 
 
 from flask import *
-from flask_user import *
+from flask_user import signals, current_user, user_manager
 from flask_login import login_user, logout_user
 from app.markdown import render_markdown
 from . import bp
@@ -192,7 +192,7 @@ def set_password():
 
 			# Send 'password_changed' email
 			if user_manager.USER_ENABLE_EMAIL and current_user.email:
-				emails.send_password_changed_email(current_user)
+				user_manager.email_manager.send_password_changed_email(current_user)
 
 			# Send password_changed signal
 			signals.user_changed_password.send(current_app._get_current_object(), user=current_user)

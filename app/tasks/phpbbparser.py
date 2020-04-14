@@ -74,7 +74,14 @@ def __extract_signature(soup):
 def getProfile(url, username):
 	url = url + "/memberlist.php?mode=viewprofile&un=" + urlEncodeNonAscii(username)
 
-	contents = urllib.request.urlopen(url).read().decode("utf-8")
+	req = urllib.request.urlopen(url, timeout=5)
+	if req.getcode() == 404:
+		return None
+
+	if req.getcode() != 200:
+		raise IOError(req.getcode())
+
+	contents = req.read().decode("utf-8")
 	soup = BeautifulSoup(contents, "lxml")
 	if soup is None:
 		return None

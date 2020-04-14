@@ -34,15 +34,16 @@ def claim():
 		if user and user.rank.atLeast(UserRank.NEW_MEMBER):
 			flash("User has already been claimed", "danger")
 			return redirect(url_for("users.claim"))
-		elif user is None and method == "github":
-			flash("Unable to get Github username for user", "danger")
-			return redirect(url_for("users.claim"))
-		elif user is None:
-			flash("Unable to find that user", "danger")
+		elif method == "github":
+			if user is None or user.github_username is None:
+				flash("Unable to get Github username for user", "danger")
+				return redirect(url_for("users.claim"))
+			else:
+				return redirect(url_for("github.start"))
+		elif user is None and request.method == "POST":
+			flash("Unable to find user", "danger")
 			return redirect(url_for("users.claim"))
 
-		if user is not None and method == "github":
-			return redirect(url_for("github.start"))
 
 	token = None
 	if "forum_token" in session:
@@ -70,8 +71,17 @@ def claim():
 			sig = None
 			try:
 				profile = getProfile("https://forum.minetest.net", username)
-				sig = profile.signature
-			except IOError:
+				sig = profile.signature if profile else None
+			except IOError as e:
+				if hasattr(e, 'message'):
+					message = e.message
+				else:
+					message = str(e)
+
+				flash("Error whilst attempting to access forums: " + message, "danger")
+				return redirect(url_for("users.claim", username=username))
+
+			if profile is None:
 				flash("Unable to get forum signature - does the user exist?", "danger")
 				return redirect(url_for("users.claim", username=username))
 
