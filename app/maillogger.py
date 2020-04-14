@@ -41,7 +41,7 @@ class FlaskMailHTMLFormatter(logging.Formatter):
 		formatted_exception = logging.Handler.formatException(self, exc_info)
 		return FlaskMailHTMLFormatter.pre_template % ("Exception information", formatted_exception)
 	def formatStack(self, stack_info):
-		return FlaskMailHTMLFormatter.pre_template % ("<h1>Stack information</h1><pre>%s</pre>", stack_info)
+		return FlaskMailHTMLFormatter.pre_template % ("<h1>Stack information</h1><pre><code>%s</code></pre>", stack_info)
 
 
 # see: https://github.com/python/cpython/blob/3.6/Lib/logging/__init__.py (class Handler)
@@ -100,7 +100,7 @@ Message:
 <tr>		<th>Time:</th><td>%(asctime)s</td></tr>
 </table>
 <h2>Message</h2>
-<pre>%(message)s</pre>"""
+<pre><code>%(message)s</code></pre>"""
 
 	import logging
 	mail_handler = FlaskMailHandler(mailer, subject_template)
