@@ -1,7 +1,7 @@
 # Content Database
+[![Build status](https://gitlab.com/minetest/contentdb/badges/master/pipeline.svg)](https://gitlab.com/minetest/contentdb/pipelines)
 
-Content database for Minetest mods, games, and more.
-
+Content database for Minetest mods, games, and more.\
 Developed by rubenwardy, license GPLv3.0+.
 
 ## How-tos
