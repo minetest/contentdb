@@ -76,7 +76,7 @@ to change the name of the package, or your package won't be accepted.
 
 We reserve the right to issue exceptions for this where we feel necessary.
 
-### 3.2 Mod Forks and Reimplementations
+### 3.2. Mod Forks and Reimplementations
 
 An exception to the above is that mods are allowed to have the same name as a
 mod if its a fork of that mod (or a close reimplementation). In real terms, it
@@ -88,7 +88,7 @@ reimplementation of the mod that owns the name.
 
 ## 4. Licenses
 
-### 4.1 Allowed Licenses
+### 4.1. Allowed Licenses
 
 Please ensure that you correctly credit any resources (code, assets, or otherwise)
 that you have used in your package.
@@ -106,7 +106,7 @@ get around to adding it.
 Please note that the definitions of "free" and "non-free" is the same as that
 of the [Free Software Foundation](https://www.gnu.org/philosophy/free-sw.en.html).
 
-### 4.2 Recommended Licenses
+### 4.2. Recommended Licenses
 
 It is highly recommended that you use a free and open source software license.
 FOSS licenses result in a sharing community and will increase the number of potential users your package has.

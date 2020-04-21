@@ -38,35 +38,43 @@ li.d-flex {
 	bottom: 0;
 	left: 0;
 	padding: 1em;
+
+	h3 {
+		color: white;
+		font-size: 120%;
+		font-weight: bold;
+		margin: 0;
+		padding: 0;
+	}
+
+	small {
+		color: #ddd;
+		font-size: 75%;
+		font-weight: bold;
+	}
+
+	p {
+		display: none;
+		color: #ddd;
+		font-weight: normal;
+	}
 }
 
-.packagegridinfo h3 {
-	color: white;
-	font-size: 120%;
-	font-weight: bold;
-}
+.packagetile a:hover  {
+	.packagegridinfo {
+		top: 0;
+	}
 
-.packagegridinfo small {
-	color: #ddd;
-	font-size: 75%;
-	font-weight: bold;
-}
+	h3 {
+		margin-bottom: 0.5em;
+	}
 
-.packagegridinfo p {
-	display: none;
-	color: #ddd;
-	font-weight: normal;
-}
+	p {
+		display: block;
+	}
 
-.packagetile a:hover .packagegridinfo {
-	top: 0;
-}
-
-.packagetile a:hover p {
-	display: block;
-}
-
-.packagetile a:hover .packagegridscrub {
-	top: 0;
-	background: rgba(0,0,0,0.8);
+	.packagegridscrub {
+		top: 0;
+		background: rgba(0,0,0,0.8);
+	}
 }

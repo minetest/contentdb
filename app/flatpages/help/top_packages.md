@@ -10,7 +10,7 @@ whereas a non-free package will only gain 0.1 score.
 A package currently only gains score through downloads.
 In the future, a package will also gain score through reviews.
 
-## Seed using a legacy heuristic
+## Seeded using a legacy heuristic
 
 The scoring system was seeded (ie: the scores were initially set to) 20% of an
 arbitrary legacy heuristic that was previously used to rank packages.
