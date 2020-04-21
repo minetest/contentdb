@@ -17,10 +17,6 @@ The process is as follows:
 3. The git host posts a webhook notification to ContentDB, using the API token assigned to it.
 4. ContentDB checks the API token and issues a new release.
 
-<p class="alert alert-info">
-	This feature is in beta, and is only available for Trusted Members.
-</p>
-
 ## Setting up
 
 ### GitHub (automatic)

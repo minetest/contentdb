@@ -44,7 +44,7 @@ def webhook():
 		return error(403, "Invalid authentication")
 
 	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
-		return error(403, "Only trusted members can use webhooks")
+		return error(403, "You do not have the permission to approve releases")
 
 	#
 	# Check event

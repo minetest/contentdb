@@ -140,6 +140,9 @@ def markdown():
 @is_package_page
 @is_api_authd
 def create_release(token, package):
+	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
+		return error(403, "You do not have the permission to approve releases")
+
 	json = request.json
 	if json is None:
 		return error(400, "JSON post data is required")
