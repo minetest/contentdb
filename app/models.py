@@ -659,7 +659,7 @@ class Package(db.Model):
 		if perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
 			return isOwner or user.rank.atLeast(UserRank.EDITOR)
 
-		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES:
+		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES or perm == Permission.APPROVE_RELEASE:
 			if isOwner:
 				return user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 			else:
@@ -673,7 +673,7 @@ class Package(db.Model):
 		elif perm == Permission.APPROVE_NEW or perm == Permission.CHANGE_AUTHOR:
 			return user.rank.atLeast(UserRank.EDITOR)
 
-		elif perm == Permission.APPROVE_RELEASE or perm == Permission.APPROVE_SCREENSHOT:
+		elif perm == Permission.APPROVE_SCREENSHOT:
 			return user.rank.atLeast(UserRank.TRUSTED_MEMBER if isOwner else UserRank.EDITOR)
 
 		# Moderators can delete packages
