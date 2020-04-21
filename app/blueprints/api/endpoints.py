@@ -37,6 +37,16 @@ def packages():
 	return jsonify(pkgs)
 
 
+@bp.route("/api/scores/")
+def package_scores():
+	qb    = QueryBuilder(request.args)
+	query = qb.buildPackageQuery()
+
+	pkgs = [{ "author": package.author.username, "name": package.name, "score": package.score } \
+			for package in query.all()]
+	return jsonify(pkgs)
+
+
 @bp.route("/api/packages/<author>/<name>/")
 @is_package_page
 def package(package):

@@ -21,6 +21,7 @@ You can use the `/api/whoami` to check authentication.
 ### Packages
 
 * GET `/api/packages/` - See [Package Queries](#package-queries)
+* GET `/api/scores/` - See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/`
 
 ### Releases
