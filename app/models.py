@@ -147,7 +147,7 @@ class User(db.Model, UserMixin):
 	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id")
 
 	# causednotifs  = db.relationship("Notification", backref="causer", lazy="dynamic")
-	packages      = db.relationship("Package", backref="author", lazy="dynamic")
+	packages      = db.relationship("Package", backref=db.backref("author", lazy="joined"), lazy="dynamic")
 	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
 	threads       = db.relationship("Thread", backref="author", lazy="dynamic")
 	tokens        = db.relationship("APIToken", backref="owner", lazy="dynamic")
@@ -437,12 +437,12 @@ class Package(db.Model):
 	forums       = db.Column(db.Integer,     nullable=True)
 
 	provides = db.relationship("MetaPackage", \
-			secondary=provides, lazy="subquery", order_by=db.asc("name"), \
+			secondary=provides, lazy="select", order_by=db.asc("name"), \
 			backref=db.backref("packages", lazy="dynamic", order_by=db.desc("score")))
 
 	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
-	tags = db.relationship("Tag", secondary=tags, lazy="subquery",
+	tags = db.relationship("Tag", secondary=tags, lazy="select",
 			backref=db.backref("packages", lazy=True))
 
 	releases = db.relationship("PackageRelease", backref="package",
@@ -1135,3 +1135,8 @@ class ForumTopic(db.Model):
 
 # Setup Flask-User
 user_manager = UserManager(app, db, User)
+
+if app.config.get("LOG_SQL"):
+	import logging
+	logging.basicConfig()
+	logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)

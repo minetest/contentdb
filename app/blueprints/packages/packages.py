@@ -31,6 +31,7 @@ from wtforms import *
 from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from sqlalchemy import or_, func
+from sqlalchemy.orm import joinedload, subqueryload
 
 
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
@@ -42,6 +43,11 @@ def list_all():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 	title = qb.title
+
+	query = query.options( \
+			joinedload(Package.license), \
+			joinedload(Package.media_license), \
+			subqueryload(Package.tags))
 
 	if qb.lucky:
 		package = query.first()

@@ -28,6 +28,9 @@ from app.querybuilder import QueryBuilder
 
 @bp.route("/api/packages/")
 def packages():
+	import sys
+	print("\n\n############", file=sys.stderr)
+
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 	ver   = qb.getMinetestVersion()
