@@ -578,13 +578,25 @@ class Package(db.Model):
 		screenshot = self.screenshots.filter_by(approved=True).order_by(db.asc(PackageScreenshot.id)).first()
 		return screenshot.getThumbnailURL(level) if screenshot is not None else None
 
-	def getMainScreenshotURL(self):
+	def getMainScreenshotURL(self, absolute=False):
 		screenshot = self.screenshots.filter_by(approved=True).order_by(db.asc(PackageScreenshot.id)).first()
-		return screenshot.url if screenshot is not None else None
+		if screenshot is None:
+			return None
 
-	def getDetailsURL(self):
-		return url_for("packages.view",
-				author=self.author.username, name=self.name)
+		if absolute:
+			from app.utils import abs_url
+			return abs_url(screenshot.url)
+		else:
+			return screenshot.url
+
+	def getDetailsURL(self, absolute=False):
+		if absolute:
+			from app.utils import abs_url_for
+			return abs_url_for("packages.view",
+					author=self.author.username, name=self.name)
+		else:
+			return url_for("packages.view",
+					author=self.author.username, name=self.name)
 
 	def getEditURL(self):
 		return url_for("packages.create_edit",

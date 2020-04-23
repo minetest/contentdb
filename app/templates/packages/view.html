@@ -10,9 +10,9 @@
 	<meta name="og:title" content="{{ package.title }}"/>
 	<meta name="og:description" content="{{ package.short_desc }}"/>
 	<meta name="description" content="{{ package.short_desc }}"/>
-	<meta name="og:url" content="{{ package.getDetailsURL() }}"/>
+	<meta name="og:url" content="{{ package.getDetailsURL(absolute=True) }}"/>
 	{% if package.getMainScreenshotURL() %}
-	<meta name="og:image" content="{{ package.getMainScreenshotURL() }}"/>
+	<meta name="og:image" content="{{ package.getMainScreenshotURL(absolute=True) }}"/>
 	{% endif %}
 {% endblock %}
 
