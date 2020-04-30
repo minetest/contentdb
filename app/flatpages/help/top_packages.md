@@ -1,14 +1,18 @@
 title: Top Packages Algorithm
 
-## Pseudo rolling average
+## Score
+
+A package's score is currently equal to a pseudo rolling average of downloads.
+In the future, a package will also gain score through reviews.
+
+## Pseudo rolling average of downloads
 
 Every package loses 5% of its score every day.
 
 An open source package will gain 1 score for each unique download,
 whereas a non-free package will only gain 0.1 score.
 
-A package currently only gains score through downloads.
-In the future, a package will also gain score through reviews.
+This metric aims to be roughly equivalent to the average downloads.
 
 ## Seeded using a legacy heuristic
 
@@ -32,8 +36,14 @@ As said, this legacy score is no longer used when ranking mods.
 It was only used to provide an initial score for the rolling average,
 which was 20% of the above value.
 
+## Manual adjustments
+
+The admin occasionally reduces all packages by a set percentage to speed up
+convergence. Convergence is when
+
 ## Transparency and Feedback
 
-You can see all scores using the [scores REST API](/api/scores/).
+You can see all scores using the [scores REST API](/api/scores/), or by
+using the [Prometheus metrics](/help/metrics/) endpoint.
 
 Consider [suggesting improvements](https://github.com/minetest/contentdb/issues/new?assignees=&labels=Policy&template=policy.md&title=).
