@@ -847,12 +847,11 @@ class PackageRelease(db.Model):
 				name=self.package.name,
 				id=self.id)
 
-
 	def __init__(self):
 		self.releaseDate = datetime.datetime.now()
 
 	def approve(self, user):
-		if self.package.approved and \
+		if self.package.approved or \
 				not self.package.checkPerm(user, Permission.APPROVE_RELEASE):
 			return False
 
