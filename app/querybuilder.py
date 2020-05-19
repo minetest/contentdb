@@ -1,6 +1,6 @@
 from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag
 from .models import tags as Tags
-from .utils import isNo, isYes
+from .utils import isNo, isYes, get_int_or_abort
 from sqlalchemy.sql.expression import func
 from flask import abort
 from sqlalchemy import or_
@@ -61,7 +61,7 @@ class QueryBuilder:
 		if not self.protocol_version:
 			return None
 
-		self.protocol_version = int(self.protocol_version)
+		self.protocol_version = get_int_or_abort(self.protocol_version)
 		version = MinetestRelease.query.filter(MinetestRelease.protocol>=self.protocol_version).first()
 		if version is not None:
 			return version.id
@@ -139,7 +139,6 @@ class QueryBuilder:
 			query = query.order_by(db.desc(ForumTopic.views))
 		elif self.order_by == "date":
 			query = query.order_by(db.asc(ForumTopic.created_at))
-			sort_by = "date"
 
 		if self.search:
 			query = query.filter(ForumTopic.title.ilike('%' + self.search + '%'))
