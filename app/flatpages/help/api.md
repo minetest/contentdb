@@ -9,6 +9,8 @@ Authentication is done using Bearer tokens:
 
 You can use the `/api/whoami` to check authentication.
 
+Tokens can be attained by visiting "API Tokens" on your profile page.
+
 ## Endpoints
 
 ### Misc
@@ -16,7 +18,7 @@ You can use the `/api/whoami` to check authentication.
 * GET `/api/whoami/` - Json dictionary with the following keys:
 	* `is_authenticated` - True on successful API authentication
 	* `username` - Username of the user authenticated as, null otherwise.
-	* 403 will be thrown on unsupported authentication type, invalid access token, or other errors.
+	* 4xx status codes will be thrown on unsupported authentication type, invalid access token, or other errors.
 
 ### Packages
 

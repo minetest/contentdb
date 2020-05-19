@@ -143,19 +143,21 @@ def markdown():
 @is_package_page
 @is_api_authd
 def create_release(token, package):
+	if not token:
+		error(401, "Authentication needed")
+
 	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
-		return error(403, "You do not have the permission to approve releases")
+		error(403, "You do not have the permission to approve releases")
 
 	json = request.json
 	if json is None:
-		return error(400, "JSON post data is required")
+		error(400, "JSON post data is required")
 
 	for option in ["method", "title", "ref"]:
 		if json.get(option) is None:
-			return error(400, option + " is required in the POST data")
-
+			error(400, option + " is required in the POST data")
 
 	if json["method"].lower() != "git":
-		return error(400, "Release-creation methods other than git are not supported")
+		error(400, "Release-creation methods other than git are not supported")
 
 	return handleCreateRelease(token, package, json["title"], json["ref"])

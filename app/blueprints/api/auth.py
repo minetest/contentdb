@@ -16,6 +16,7 @@
 
 from flask import request, make_response, jsonify, abort
 from app.models import APIToken
+from .support import error
 from functools import wraps
 
 def is_api_authd(f):
@@ -29,13 +30,13 @@ def is_api_authd(f):
 		elif value[0:7].lower() == "bearer ":
 			access_token = value[7:]
 			if len(access_token) < 10:
-				abort(400)
+				error(400, "API token is too short")
 
 			token = APIToken.query.filter_by(access_token=access_token).first()
 			if token is None:
-				abort(403)
+				error(403, "Unknown API token")
 		else:
-			abort(403)
+			abort(403, "Unsupported authentication method")
 
 		return f(token=token, *args, **kwargs)
 
