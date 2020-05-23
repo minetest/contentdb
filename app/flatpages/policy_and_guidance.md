@@ -126,7 +126,7 @@ Public domain is not a valid license in many countries, please use CC0 or MIT in
 ## 5. Promotions and Advertisements (inc. asking for donations)
 
 You may note place any promotions or advertisements in any meta data including
-screensthos. This includes asking for donations, promoting online shops,
+screenshots. This includes asking for donations, promoting online shops,
 or linking to personal websites and social media. Please instead use the
 fields provided on your user profile page to place links to websites and
 donation pages.
