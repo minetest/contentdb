@@ -537,7 +537,7 @@ class Package(db.Model):
 		return {
 			"name": self.name,
 			"title": self.title,
-			"author": self.author.display_name,
+			"author": self.author.username,
 			"short_description": self.short_desc,
 			"type": self.type.toName(),
 			"release": release and release.id,
@@ -548,7 +548,7 @@ class Package(db.Model):
 		tnurl = self.getThumbnailURL(1)
 		release = self.getDownloadRelease(version=version, protonum=protonum)
 		return {
-			"author": self.author.display_name,
+			"author": self.author.username,
 			"name": self.name,
 			"title": self.title,
 			"short_description": self.short_desc,
