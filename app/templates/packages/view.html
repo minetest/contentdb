@@ -42,10 +42,10 @@
 
 			<p>
 				{% if package_warning %}
-					<span class="badge badge-danger">
+					<a class="badge badge-danger" href="/help/non_free/">
 						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
 						{{ package_warning }}
-					</span>
+					</a>
 				{% endif %}
 				{% for t in package.tags %}
 					<a class="badge badge-primary"
@@ -214,11 +214,12 @@
 						<a class="btn btn-danger btn-sm ml-1" href="{{ package.getRemoveURL() }}"><i class="fas fa-trash"></i></a>
 					{% endif %}
 					</div>
-
 				</div>
+
 				{% if package_warning %}
 					<div class="card-body">
 						<div class="alert alert-danger">
+							<a href="/help/non_free/" class="float-right">Info</a>
 							<b>Warning:</b> {{ package_warning }}
 						</div>
 					</div>
