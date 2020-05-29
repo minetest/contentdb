@@ -10,6 +10,9 @@ and they will be subject to limited promotion.
 
 ## How does ContentDB deal with Non-Free Licenses?
 
+ContentDB does not allow certain non-free licenses, and will limit the promotion
+of packages with non-free licenses.
+
 Minetest is free and open source software, and is only as big as it is now
 because of this. It's pretty amazing you can take nearly any published mod and modify it
 to how you like - add some features, maybe fix some bugs - and then share those
@@ -23,7 +26,9 @@ source code to allow you to bug fix or extend as you need.
 
 Limiting the promotion of problematic licenses helps Minetest avoid ending up in
 such a state. Licenses that prohibit redistribution or modification are
-completely banned from ContentDB and the Minetest forums.
+completely banned from ContentDB and the Minetest forums. Other non-free licenses
+will be subject to limited promotion - they won't be shown by default in
+the client, and their [score](/help/top_packages/) will receive a 10x penalty.
 
 Not providing full promotion on ContentDB, or not allowing your package at all,
 doesn't mean you can't make such content - it just means we're not going to help
