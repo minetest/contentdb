@@ -36,11 +36,9 @@ Here's a quick summary related to Minetest content:
 
 1. They make your work incompatible with a growing body of free content, even if
    you do want to allow derivative works or combinations.
-
    This means that it can cause problems when another modder wishes to include your
    work in a modpack or game.
 2. They may rule out other basic and beneficial uses which you want to allow.
-
    For example, CC -NC will forbid showing your content in a monetised YouTube
    video.
 3. They are unlikely to increase the potential profit from your work, and a
