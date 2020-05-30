@@ -73,7 +73,7 @@ def doFileUpload(file, fileType, fileTypeDesc):
 
 	ext = getExtension(file.filename)
 	if ext is None or not ext in allowedExtensions:
-		flash("Please upload load " + fileTypeDesc, "danger")
+		flash("Please upload " + fileTypeDesc, "danger")
 		return None, None
 
 	if isImage and not isAllowedImage(file.stream.read()):

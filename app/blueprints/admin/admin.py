@@ -26,7 +26,7 @@ from app.tasks.forumtasks  import importTopicList, checkAllForumAccounts
 from flask_wtf import FlaskForm
 from wtforms import *
 from app.utils import loginUser, rank_required, triggerNotif
-import datetime
+import datetime, os
 
 @bp.route("/admin/", methods=["GET", "POST"])
 @rank_required(UserRank.ADMIN)
@@ -113,6 +113,35 @@ def admin_page():
 				msg = "{}: Release {} created".format(package.title, rel.title)
 				triggerNotif(package.author, current_user, msg, rel.getEditURL())
 				db.session.commit()
+
+		elif action == "cleanuploads":
+			upload_dir = app.config['UPLOAD_DIR']
+
+			(_, _, filenames) = next(os.walk(upload_dir))
+			existing_uploads = set(filenames)
+
+			if len(existing_uploads) != 0:
+				def getURLsFromDB(column):
+					results = db.session.query(column).filter(column != None, column != "").all()
+					return set([os.path.basename(x[0]) for x in results])
+
+				release_urls = getURLsFromDB(PackageRelease.url)
+				screenshot_urls = getURLsFromDB(PackageScreenshot.url)
+
+				db_urls = release_urls.union(screenshot_urls)
+				unreachable = existing_uploads.difference(db_urls)
+
+				import sys
+				print("On Disk: ", existing_uploads, file=sys.stderr)
+				print("In DB: ", db_urls, file=sys.stderr)
+				print("Unreachable: ", unreachable, file=sys.stderr)
+
+				for filename in unreachable:
+					os.remove(os.path.join(upload_dir, filename))
+
+				flash("Deleted " + str(len(unreachable)) + " unreachable uploads", "success")
+			else:
+				flash("No downloads to create", "danger")
 
 		else:
 			flash("Unknown action: " + action, "danger")
