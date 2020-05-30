@@ -134,8 +134,6 @@ def download_release(package, id):
 			set_key(key, "true")
 
 			bonus = 1
-			if not package.getIsFOSS():
-				bonus *= 0.1
 
 			PackageRelease.query.filter_by(id=release.id).update({
 					"downloads": PackageRelease.downloads + 1

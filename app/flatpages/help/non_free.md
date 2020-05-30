@@ -28,7 +28,7 @@ Limiting the promotion of problematic licenses helps Minetest avoid ending up in
 such a state. Licenses that prohibit redistribution or modification are
 completely banned from ContentDB and the Minetest forums. Other non-free licenses
 will be subject to limited promotion - they won't be shown by default in
-the client, and their [score](/help/top_packages/) will receive a 10x penalty.
+the client.
 
 Not providing full promotion on ContentDB, or not allowing your package at all,
 doesn't mean you can't make such content - it just means we're not going to help

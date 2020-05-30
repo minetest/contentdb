@@ -714,9 +714,6 @@ class Package(db.Model):
 		if self.getMainScreenshotURL() is None:
 			self.score *= 0.8
 
-		if not self.license.is_foss or not self.media_license.is_foss:
-			self.score *= 0.1
-
 
 class MetaPackage(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)

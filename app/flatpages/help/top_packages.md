@@ -7,10 +7,8 @@ In the future, a package will also gain score through reviews.
 
 ## Pseudo rolling average of downloads
 
-Every package loses 5% of its score every day.
-
-An open source package will gain 1 score for each unique download,
-whereas a non-free package will only gain 0.1 score.
+Every package loses 5% of its score every day, and will gain 1 score for each
+unique download.
 
 This metric aims to be roughly equivalent to the average downloads.
 
@@ -27,8 +25,6 @@ This legacy heuristic is as follows:
 	multiplier = 1
 	if no screenshot:
 		multiplier *= 0.8
-	if not foss:
-		multiplier *= 0.1
 
 	score = multiplier * (max(downloads, forum_score * 0.6) + forum_bonus)
 
