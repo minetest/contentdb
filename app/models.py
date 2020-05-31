@@ -686,7 +686,10 @@ class Package(db.Model):
 			return user.rank.atLeast(UserRank.EDITOR)
 
 		elif perm == Permission.APPROVE_SCREENSHOT:
-			return user.rank.atLeast(UserRank.TRUSTED_MEMBER if isOwner else UserRank.EDITOR)
+			if isOwner:
+				return user.rank.atLeast(UserRank.TRUSTED_MEMBER if self.approved else UserRank.NEW_MEMBER)
+			else:
+				return user.rank.atLeast(UserRank.EDITOR)
 
 		# Moderators can delete packages
 		elif perm == Permission.DELETE_PACKAGE or perm == Permission.UNAPPROVE_PACKAGE \
@@ -848,8 +851,7 @@ class PackageRelease(db.Model):
 		self.releaseDate = datetime.datetime.now()
 
 	def approve(self, user):
-		if self.package.approved or \
-				not self.package.checkPerm(user, Permission.APPROVE_RELEASE):
+		if not self.package.checkPerm(user, Permission.APPROVE_RELEASE):
 			return False
 
 		assert self.task_id is None and self.url is not None and self.url != ""
