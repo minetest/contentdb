@@ -61,7 +61,7 @@ Supported query parameters:
 * `type` - Package types (`mod`, `game`, `txp`).
 * `q` - Query string
 * `random` - When present, enable random ordering and ignore `sort`.
-* `hide` - Hide content based on [Content Flags](content_flags).
+* `hide` - Hide content based on [Content Flags](/help/content_flags/).
 * `sort` - Sort by (`name`, `views`, `date`, `score`).
 * `order` - Sort ascending (`Asc`) or descending (`desc`).
 * `protocol_version` - Only show packages supported by this Minetest protocol version.
