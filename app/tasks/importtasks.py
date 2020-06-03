@@ -236,10 +236,10 @@ def makeVCSRelease(id, branch):
 		release.task_id     = None
 		release.commit_hash = repo.head.object.hexsha
 
-		if tree.meta["min_minetest_version"]:
+		if tree.meta.get("min_minetest_version"):
 			release.min_rel = MinetestRelease.get(tree.meta["min_minetest_version"], None)
 
-		if tree.meta["max_minetest_version"]:
+		if tree.meta.get("max_minetest_version"):
 			release.max_rel = MinetestRelease.get(tree.meta["max_minetest_version"], None)
 
 		release.approve(release.package.author)
