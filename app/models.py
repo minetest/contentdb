@@ -531,9 +531,9 @@ class Package(db.Model):
 			"type": self.type.toName(),
 		}
 
-	def getAsDictionaryShort(self, base_url, version=None, protonum=None):
+	def getAsDictionaryShort(self, base_url, version=None):
 		tnurl = self.getThumbnailURL(1)
-		release = self.getDownloadRelease(version=version, protonum=protonum)
+		release = self.getDownloadRelease(version=version)
 		return {
 			"name": self.name,
 			"title": self.title,
@@ -544,9 +544,9 @@ class Package(db.Model):
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None
 		}
 
-	def getAsDictionary(self, base_url, version=None, protonum=None):
+	def getAsDictionary(self, base_url, version=None):
 		tnurl = self.getThumbnailURL(1)
-		release = self.getDownloadRelease(version=version, protonum=protonum)
+		release = self.getDownloadRelease(version=version)
 		return {
 			"author": self.author.username,
 			"name": self.name,
@@ -630,19 +630,11 @@ class Package(db.Model):
 		return url_for("packages.download",
 				author=self.author.username, name=self.name)
 
-	def getDownloadRelease(self, version=None, protonum=None):
-		if version is None and protonum is not None:
-			version = MinetestRelease.query.filter(MinetestRelease.protocol >= int(protonum)).first()
-			if version is not None:
-				version = version.id
-			else:
-				version = 10000000
-
-
+	def getDownloadRelease(self, version=None):
 		for rel in self.releases:
 			if rel.approved and (version is None or
-					((rel.min_rel is None or rel.min_rel_id <= version) and \
-					(rel.max_rel is None or rel.max_rel_id >= version))):
+					((rel.min_rel is None or rel.min_rel_id <= version.id) and \
+					(rel.max_rel is None or rel.max_rel_id >= version.id))):
 				return rel
 
 		return None
@@ -794,6 +786,28 @@ class MinetestRelease(db.Model):
 
 	def getActual(self):
 		return None if self.name == "None" else self
+
+	@classmethod
+	def get(cls, version, protocol_num):
+		import sys
+
+		if version:
+			parts = version.split(".")
+			if len(parts) >= 2:
+				major_minor = parts[0] + "." + parts[1]
+				query = MinetestRelease.query.filter(MinetestRelease.name.like("%{}%".format(major_minor)))
+				if protocol_num:
+					query = query.filter_by(protocol=protocol_num)
+
+				release = query.one_or_none()
+				if release:
+					return release
+
+		if protocol_num:
+			release = MinetestRelease.query.filter_by(protocol=protocol_num).one_or_none()
+			return release
+
+		return None
 
 
 class PackageRelease(db.Model):

@@ -31,6 +31,9 @@ def abs_url(path):
 	return urljoin(app.config["BASE_URL"], path)
 
 def get_int_or_abort(v, default=None):
+	if v is None:
+		return default
+
 	try:
 		return int(v or default)
 	except ValueError:

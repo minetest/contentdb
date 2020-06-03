@@ -42,7 +42,8 @@ class QueryBuilder:
 		# Filters
 
 		self.search = args.get("q")
-		self.protocol_version = args.get("protocol_version")
+		self.minetest_version = args.get("engine_version")
+		self.protocol_version = get_int_or_abort(args.get("protocol_version"))
 		self.author = args.get("author")
 
 		self.show_discarded = isYes(args.get("show_discarded"))
@@ -58,15 +59,10 @@ class QueryBuilder:
 			self.order_by = name
 
 	def getMinetestVersion(self):
-		if not self.protocol_version:
+		if not self.protocol_version and not self.minetest_version:
 			return None
 
-		self.protocol_version = get_int_or_abort(self.protocol_version)
-		version = MinetestRelease.query.filter(MinetestRelease.protocol>=self.protocol_version).first()
-		if version is not None:
-			return version.id
-		else:
-			return 10000000
+		return MinetestRelease.get(self.minetest_version, self.protocol_version)
 
 	def buildPackageQuery(self):
 		query = Package.query.filter_by(soft_deleted=False, approved=True)
@@ -111,12 +107,13 @@ class QueryBuilder:
 			query = query.filter(Package.license.has(License.is_foss == True))
 			query = query.filter(Package.media_license.has(License.is_foss == True))
 
-		if self.protocol_version:
+		if self.protocol_version or self.minetest_version:
 			version = self.getMinetestVersion()
-			query = query.join(Package.releases) \
-				.filter(PackageRelease.approved==True) \
-				.filter(or_(PackageRelease.min_rel_id==None, PackageRelease.min_rel_id<=version)) \
-				.filter(or_(PackageRelease.max_rel_id==None, PackageRelease.max_rel_id>=version))
+			if version:
+				query = query.join(Package.releases) \
+					.filter(PackageRelease.approved==True) \
+					.filter(or_(PackageRelease.min_rel_id==None, PackageRelease.min_rel_id<=version.id)) \
+					.filter(or_(PackageRelease.max_rel_id==None, PackageRelease.max_rel_id>=version.id))
 
 		if self.limit:
 			query = query.limit(self.limit)
