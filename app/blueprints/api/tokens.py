@@ -34,6 +34,12 @@ class CreateAPIToken(FlaskForm):
 	submit	     = SubmitField("Save")
 
 
+@bp.route("/user/tokens/")
+@login_required
+def list_tokens_redirect():
+	return redirect(url_for("api.list_tokens", username=current_user.username))
+
+
 @bp.route("/users/<username>/tokens/")
 @login_required
 def list_tokens(username):
