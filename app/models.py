@@ -789,10 +789,8 @@ class MinetestRelease(db.Model):
 
 	@classmethod
 	def get(cls, version, protocol_num):
-		import sys
-
 		if version:
-			parts = version.split(".")
+			parts = version.strip().split(".")
 			if len(parts) >= 2:
 				major_minor = parts[0] + "." + parts[1]
 				query = MinetestRelease.query.filter(MinetestRelease.name.like("%{}%".format(major_minor)))

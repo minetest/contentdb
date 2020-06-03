@@ -51,19 +51,31 @@ class PackageTreeNode:
 		elif self.type == ContentType.MODPACK:
 			self.add_children_from_mod_dir(baseDir)
 
+	def getMetaFilePath(self):
+		filename = None
+		if self.type == ContentType.GAME:
+			filename = "game.conf"
+		elif self.type == ContentType.MOD:
+			filename = "mod.conf"
+		elif self.type == ContentType.MODPACK:
+			filename = "modpack.conf"
+		elif self.type == ContentType.TXP:
+			filename = "texture_pack.conf"
+		else:
+			return None
+
+		return self.baseDir + "/" + filename
+
 
 	def read_meta(self):
 		result = {}
 
 		# .conf file
 		try:
-			with open(self.baseDir + "/mod.conf", "r") as myfile:
+			with open(self.getMetaFilePath(), "r") as myfile:
 				conf = parse_conf(myfile.read())
-				for key in ["name", "description", "title", "depends", "optional_depends"]:
-					try:
-						result[key] = conf[key]
-					except KeyError:
-						pass
+				for key, value in conf.items():
+					result[key] = value
 		except IOError:
 			pass
 
@@ -103,7 +115,6 @@ class PackageTreeNode:
 				result["depends"] = [x.strip() for x in result["depends"].split(",")]
 			if "optional_depends" in result:
 				result["optional_depends"] = [x.strip() for x in result["optional_depends"].split(",")]
-
 
 		# Calculate Title
 		if "name" in result and not "title" in result:

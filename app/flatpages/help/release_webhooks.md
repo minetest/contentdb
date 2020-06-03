@@ -65,15 +65,11 @@ The process is as follows:
 
 ### Setting minimum and maximum Minetest versions
 
-<p class="alert alert-info">
-	This feature is unimplemented.
-</p>
-
 1. Open up the conf file for the package.
    This will be `game.conf`, `mod.conf`, `modpack.conf`, or `texture_pack.conf`
    depending on the content type.
-2. Set `min_protocol` and `max_protocol` to the respective protocol numbers
-   of the Minetest versions.
-     * 0.4 = 32
-     * 5.0 = 37
-     * 5.1 = 38
+2. Set `min_minetest_version` and `max_minetest_version` to the respective Minetest versions.
+
+     Eg:
+
+         min_minetest_version = 5.0

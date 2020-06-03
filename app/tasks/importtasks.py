@@ -31,45 +31,6 @@ from app.utils import randomString
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from .minetestcheck.config import parse_conf
 
-class GithubURLMaker:
-	def __init__(self, url):
-		self.baseUrl = None
-		self.user = None
-		self.repo = None
-
-		# Rewrite path
-		import re
-		m = re.search("^\/([^\/]+)\/([^\/]+)\/?$", url.path)
-		if m is None:
-			return
-
-		user = m.group(1)
-		repo = m.group(2).replace(".git", "")
-		self.baseUrl = "https://raw.githubusercontent.com/{}/{}/master" \
-				.format(user, repo)
-		self.user = user
-		self.repo = repo
-
-	def isValid(self):
-		return self.baseUrl is not None
-
-	def getRepoURL(self):
-		return "https://github.com/{}/{}".format(self.user, self.repo)
-
-	def getScreenshotURL(self):
-		return self.baseUrl + "/screenshot.png"
-
-	def getModConfURL(self):
-		return self.baseUrl + "/mod.conf"
-
-	def getCommitsURL(self, branch):
-		return "https://api.github.com/repos/{}/{}/commits?sha={}" \
-				.format(self.user, self.repo, urllib.parse.quote_plus(branch))
-
-	def getCommitDownload(self, commit):
-		return "https://github.com/{}/{}/archive/{}.zip" \
-				.format(self.user, self.repo, commit)
-
 krock_list_cache = None
 krock_list_cache_by_name = None
 def getKrockList():
@@ -211,30 +172,6 @@ def getMeta(urlstr, author):
 	return result
 
 
-def makeVCSReleaseFromGithub(id, branch, release, url):
-	urlmaker = GithubURLMaker(url)
-	if not urlmaker.isValid():
-		raise TaskError("Invalid github repo URL")
-
-	commitsURL = urlmaker.getCommitsURL(branch)
-	try:
-		contents = urllib.request.urlopen(commitsURL).read().decode("utf-8")
-		commits = json.loads(contents)
-	except HTTPError:
-		raise TaskError("Unable to get commits for Github repository. Either the repository or reference doesn't exist.")
-
-	if len(commits) == 0 or not "sha" in commits[0]:
-		raise TaskError("No commits found")
-
-	release.url          = urlmaker.getCommitDownload(commits[0]["sha"])
-	release.task_id     = None
-	release.commit_hash = commits[0]["sha"]
-	release.approve(release.package.author)
-	db.session.commit()
-
-	return release.url
-
-
 @celery.task(bind=True)
 def checkZipRelease(self, id, path):
 	release = PackageRelease.query.get(id)
@@ -277,12 +214,9 @@ def makeVCSRelease(id, branch):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	# url = urlparse(release.package.repo)
-	# if url.netloc == "github.com":
-	# 	return makeVCSReleaseFromGithub(id, branch, release, url)
-
 	gitDir, repo = cloneRepo(release.package.repo, ref=branch, recursive=True)
 
+	tree = None
 	try:
 		tree = build_tree(gitDir, expected_type=ContentType[release.package.type.name], \
 			author=release.package.author.username, name=release.package.name)
@@ -301,8 +235,14 @@ def makeVCSRelease(id, branch):
 		release.url         = "/uploads/" + filename
 		release.task_id     = None
 		release.commit_hash = repo.head.object.hexsha
+
+		if tree.meta["min_minetest_version"]:
+			release.min_rel = MinetestRelease.get(tree.meta["min_minetest_version"], None)
+
+		if tree.meta["max_minetest_version"]:
+			release.max_rel = MinetestRelease.get(tree.meta["max_minetest_version"], None)
+
 		release.approve(release.package.author)
-		print(release.url)
 		db.session.commit()
 
 		return release.url
@@ -346,92 +286,3 @@ def importRepoScreenshot(id):
 
 	print("screenshot.png does not exist")
 	return None
-
-
-
-def getDepends(package):
-	url = urlparse(package.repo)
-	urlmaker = None
-	if url.netloc == "github.com":
-		urlmaker = GithubURLMaker(url)
-	else:
-		return {}
-
-	result = {}
-	if not urlmaker.isValid():
-		return {}
-
-	#
-	# Try getting depends on mod.conf
-	#
-	try:
-		contents = urllib.request.urlopen(urlmaker.getModConfURL()).read().decode("utf-8")
-		conf = parse_conf(contents)
-		for key in ["depends", "optional_depends"]:
-			try:
-				result[key] = conf[key]
-			except KeyError:
-				pass
-
-	except HTTPError:
-		print("mod.conf does not exist")
-
-	if "depends" in result or "optional_depends" in result:
-		return result
-
-
-	#
-	# Try depends.txt
-	#
-	import re
-	pattern = re.compile("^([a-z0-9_]+)\??$")
-	try:
-		contents = urllib.request.urlopen(urlmaker.getDependsURL()).read().decode("utf-8")
-		soft = []
-		hard = []
-		for line in contents.split("\n"):
-			line = line.strip()
-			if pattern.match(line):
-				if line[len(line) - 1] == "?":
-					soft.append( line[:-1])
-				else:
-					hard.append(line)
-
-		result["depends"] = ",".join(hard)
-		result["optional_depends"] = ",".join(soft)
-	except HTTPError:
-		print("depends.txt does not exist")
-
-	return result
-
-
-def importDependencies(package, mpackage_cache):
-	if Dependency.query.filter_by(depender=package).count() != 0:
-		return
-
-	result = getDepends(package)
-
-	if "depends" in result:
-		deps = Dependency.SpecToList(package, result["depends"], mpackage_cache)
-		print("{} hard: {}".format(len(deps), result["depends"]))
-		for dep in deps:
-			dep.optional = False
-			db.session.add(dep)
-
-	if "optional_depends" in result:
-		deps = Dependency.SpecToList(package, result["optional_depends"], mpackage_cache)
-		print("{} soft: {}".format(len(deps), result["optional_depends"]))
-		for dep in deps:
-			dep.optional = True
-			db.session.add(dep)
-
-@celery.task()
-def importAllDependencies():
-	Dependency.query.delete()
-	mpackage_cache = {}
-	packages = Package.query.filter_by(type=PackageType.MOD).all()
-	for i, p in enumerate(packages):
-		print("============= {} ({}/{}) =============".format(p.name, i, len(packages)))
-		importDependencies(p, mpackage_cache)
-
-	db.session.commit()
