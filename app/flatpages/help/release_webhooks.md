@@ -36,7 +36,7 @@ The process is as follows:
 
 ### GitHub (manual)
 
-1. Create a ContentDB API Token by visiting your profile and clicking "API Tokens: Manage".
+1. Create a ContentDB API Token at [Profile > API Tokens: Manage](/user/tokens/).
 2. Copy the access token that was generated.
 3. Go to the GitLab repository's settings > Webhooks > Add Webhook.
 4. Set the payload URL to `https://content.minetest.net/github/webhook/`
@@ -50,7 +50,7 @@ The process is as follows:
 
 ### GitLab (manual)
 
-1. Create a ContentDB API Token by visiting your profile and clicking "API Tokens: Manage".
+1. Create a ContentDB API Token at [Profile > API Tokens: Manage](/user/tokens/).
 2. Copy the access token that was generated.
 3. Go to the GitLab repository's settings > Webhooks.
 4. Set the URL to `https://content.minetest.net/gitlab/webhook/`

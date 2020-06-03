@@ -29,7 +29,7 @@ def webhook():
 	json = request.json
 
 	# Get package
-	gitlab_url = "gitlab.com/{}/{}".format(json["project"]["namespace"], json["project"]["name"])
+	gitlab_url = json["project"]["web_url"].replace("https://", "").replace("http://", "")
 	package = Package.query.filter(Package.repo.ilike("%{}%".format(gitlab_url))).first()
 	if package is None:
 		return error(400, "Could not find package, did you set the VCS repo in CDB correctly? Expected {}".format(gitlab_url))
