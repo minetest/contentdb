@@ -26,15 +26,20 @@ ContentDB understands the following information:
 
 * `description` - A short description to show in the client.
 * `depends` - Comma-separated hard dependencies.
-* `optional_depends` - Comma-separated hard dependencies.
+* `optional_depends` - Comma-separated soft dependencies.
 * `min_minetest_version` - The minimum Minetest version this runs on.
-* `min_minetest_version` - The minimum Minetest version this runs on.
+* `max_minetest_version` - The maximum Minetest version this runs on.
 
 and for mods only:
 
 * `name` - the mod technical name.
 
 ## Controlling Release Creation
+
+### Git Releases and Submodules
+
+ContentDB can automatically create releases from a git repository.
+It will include submodules in the resulting archive.
 
 ### Automatic Release Creation
 
@@ -52,7 +57,8 @@ This happens when you create a release via the ContentDB web interface, the
 
 ### Excluding files
 
-You can exclude files from a release by using [gitattributes](https://git-scm.com/docs/gitattributes):
+When using git to create releases,
+you can exclude files from a release by using [gitattributes](https://git-scm.com/docs/gitattributes):
 
 
 	.*		export-ignore

@@ -73,3 +73,5 @@ The process is as follows:
      Eg:
 
          min_minetest_version = 5.0
+
+Also see [Package Configuration and Releases Guide](/help/package_config/).
