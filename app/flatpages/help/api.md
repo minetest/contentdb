@@ -9,7 +9,7 @@ Authentication is done using Bearer tokens:
 
 You can use the `/api/whoami` to check authentication.
 
-Tokens can be attained by visiting "API Tokens" on your profile page.
+Tokens can be attained by visiting [Profile > "API Tokens"](/user/tokens/).
 
 ## Endpoints
 
@@ -33,16 +33,15 @@ Tokens can be attained by visiting "API Tokens" on your profile page.
 	* Requires authentication.
 	* `title`: human-readable name of the release.
 	* `method`: Release-creation method, only `git` is supported.
-	* `min_protocol`: (Optional) minimum Minetest protocol version. See [Minetest](#minetest).
-	* `min_protocol`: (Optional) maximum Minetest protocol version. See [Minetest](#minetest).
 	* If `git` release-creation method:
 		* `ref` - git reference, eg: `master`.
+	* You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
 
 
 ### Topics
 
 * GET `/api/topics/` - Supports [Package Queries](#package-queries), and the following two options:
-    * `show_added` - Show topics which exist as packages, default true.
+	* `show_added` - Show topics which exist as packages, default true.
 	* `show_discarded` - Show topics which have been marked as outdated, default false.
 
 ### Minetest

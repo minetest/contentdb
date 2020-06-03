@@ -1,8 +1,6 @@
 title: Help
 
-## Content
-
-Policies and user help.
+## For Everyone
 
 * [Content Ratings and Flags](content_flags)
 * [Non-free Licenses](non_free)
@@ -11,10 +9,12 @@ Policies and user help.
 * [Reporting Content](reporting)
 * [Top Packages Algorithm](top_packages)
 
-## Developers
+## For Content Creators / Modders
 
-Various APIs.
+* [Creating Releases using Webhooks](release_webhooks)
+* [Package Configuration and Releases Guide](package_config)
+
+## For Developers
 
 * [API](api)
 * [Metrics](metrics)
-* [Creating Releases using Webhooks](release_webhooks)
