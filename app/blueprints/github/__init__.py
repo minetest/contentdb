@@ -90,9 +90,9 @@ def webhook():
 
 	# Get package
 	github_url = "github.com/" + json["repository"]["full_name"]
-	package = Package.query.filter(Package.repo.like("%{}%".format(github_url))).first()
+	package = Package.query.filter(Package.repo.ilike("%{}%".format(github_url))).first()
 	if package is None:
-		return error(400, "Could not find package, did you set the VCS repo in CDB correctly?")
+		return error(400, "Could not find package, did you set the VCS repo in CDB correctly? Expected {}".format(github_url))
 
 	# Get all tokens for package
 	tokens_query = APIToken.query.filter(or_(APIToken.package==package,

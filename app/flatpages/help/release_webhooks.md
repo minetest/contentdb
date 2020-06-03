@@ -36,9 +36,9 @@ The process is as follows:
 
 ### GitHub (manual)
 
-1. Create an API Token by visiting your profile and clicking "API Tokens: Manage".
+1. Create a ContentDB API Token by visiting your profile and clicking "API Tokens: Manage".
 2. Copy the access token that was generated.
-3. Go to the repository's settings > Webhooks > Add Webhook.
+3. Go to the GitLab repository's settings > Webhooks > Add Webhook.
 4. Set the payload URL to `https://content.minetest.net/github/webhook/`
 5. Set the content type to JSON.
 6. Set the secret to the access token that you copied.
@@ -46,18 +46,20 @@ The process is as follows:
   * If you want a rolling release, choose "just the push event".
   * Or if you want a stable release cycle based on tags,
     choose "Let me select" > Branch or tag creation.
+8. Create.
 
 ### GitLab (manual)
 
-1. Create an API Token by visiting your profile and clicking "API Tokens: Manage".
+1. Create a ContentDB API Token by visiting your profile and clicking "API Tokens: Manage".
 2. Copy the access token that was generated.
-3. Go to the repository's settings > Integrations.
+3. Go to the GitLab repository's settings > Webhooks.
 4. Set the URL to `https://content.minetest.net/gitlab/webhook/`
-6. Set the secret token to the access token that you copied.
+6. Set the secret token to the ContentDB access token that you copied.
 7. Set the events
     * If you want a rolling release, choose "Push events".
     * Or if you want a stable release cycle based on tags,
       choose "Tag push events".
+8. Add webhook.
 
 ## Configuring
 
