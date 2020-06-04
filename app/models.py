@@ -793,7 +793,7 @@ class MinetestRelease(db.Model):
 			parts = version.strip().split(".")
 			if len(parts) >= 2:
 				major_minor = parts[0] + "." + parts[1]
-				query = MinetestRelease.query.filter(MinetestRelease.name.like("%{}%".format(major_minor)))
+				query = MinetestRelease.query.filter(MinetestRelease.name.like("{}%".format(major_minor)))
 				if protocol_num:
 					query = query.filter_by(protocol=protocol_num)
 
@@ -802,8 +802,7 @@ class MinetestRelease(db.Model):
 					return release
 
 		if protocol_num:
-			release = MinetestRelease.query.filter_by(protocol=protocol_num).one_or_none()
-			return release
+			return MinetestRelease.query.filter_by(protocol=protocol_num).first()
 
 		return None
 
