@@ -64,11 +64,11 @@ def package_dependencies(package):
 
 		if dep.package:
 			name = dep.package.name
-			fulfilled_by = [ dep.package.getAsDictionaryKey() ]
+			fulfilled_by = [ dep.package.getId() ]
 
 		elif dep.meta_package:
 			name = dep.meta_package.name
-			fulfilled_by = [ pkg.getAsDictionaryKey() for pkg in dep.meta_package.packages]
+			fulfilled_by = [ pkg.getId() for pkg in dep.meta_package.packages]
 
 		else:
 			raise "Malformed dependency"

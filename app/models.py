@@ -465,6 +465,9 @@ class Package(db.Model):
 		for e in PackagePropertyKey:
 			setattr(self, e.name, getattr(package, e.name))
 
+	def getId(self):
+		return "{}/{}".format(self.author.username, self.name)
+
 	def getIsFOSS(self):
 		return self.license.is_foss and self.media_license.is_foss
 
