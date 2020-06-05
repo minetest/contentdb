@@ -58,7 +58,7 @@ def package(package):
 def package_dependencies(package):
 	ret = []
 
-	only_hard = request.args.get("only_hard", True)
+	only_hard = request.args.get("only_hard")
 
 	for dep in package.dependencies:
 		if only_hard and dep.optional:
