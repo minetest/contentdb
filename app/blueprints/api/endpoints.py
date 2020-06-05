@@ -58,10 +58,10 @@ def package(package):
 def package_dependencies(package):
 	ret = []
 
-	include_optional = request.args.get("include_optional", True)
+	only_hard = request.args.get("only_hard", True)
 
 	for dep in package.dependencies:
-		if not include_optional and dep.option:
+		if only_hard and dep.optional:
 			continue
 
 		name = None

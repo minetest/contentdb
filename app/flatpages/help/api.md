@@ -25,6 +25,8 @@ Tokens can be attained by visiting [Profile > "API Tokens"](/user/tokens/).
 * GET `/api/packages/` - See [Package Queries](#package-queries)
 * GET `/api/scores/` - See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/`
+* GET `/api/packages/<username>/<name>/`
+    * If query argument `only_hard` is present, only hard deps will be returned.
 
 ### Releases
 
