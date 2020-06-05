@@ -53,12 +53,13 @@ def package(package):
 	return jsonify(package.getAsDictionary(current_app.config["BASE_URL"]))
 
 
-@bp.route("/api/packages/<author>/<name>/dependencies/")
-@is_package_page
-def package_dependencies(package):
-	ret = []
+def resolve_package_deps(out, package, only_hard):
+	id = package.getId()
+	if id in out:
+		return
 
-	only_hard = request.args.get("only_hard")
+	ret = []
+	out[id] = ret
 
 	for dep in package.dependencies:
 		if only_hard and dep.optional:
@@ -70,10 +71,12 @@ def package_dependencies(package):
 		if dep.package:
 			name = dep.package.name
 			fulfilled_by = [ dep.package.getId() ]
+			resolve_package_deps(out, dep.package, only_hard)
 
 		elif dep.meta_package:
 			name = dep.meta_package.name
 			fulfilled_by = [ pkg.getId() for pkg in dep.meta_package.packages]
+			# TODO: resolve most likely candidate
 
 		else:
 			raise "Malformed dependency"
@@ -84,7 +87,16 @@ def package_dependencies(package):
 			"packages": fulfilled_by
 		})
 
-	return jsonify(ret)
+
+@bp.route("/api/packages/<author>/<name>/dependencies/")
+@is_package_page
+def package_dependencies(package):
+	only_hard = request.args.get("only_hard")
+
+	out = {}
+	resolve_package_deps(out, package, only_hard)
+
+	return jsonify(out)
 
 
 @bp.route("/api/packages/<author>/<name>/releases/")
