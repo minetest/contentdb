@@ -58,7 +58,12 @@ def package(package):
 def package_dependencies(package):
 	ret = []
 
+	include_optional = request.args.get("include_optional", True)
+
 	for dep in package.dependencies:
+		if not include_optional and dep.option:
+			continue
+
 		name = None
 		fulfilled_by = None
 
