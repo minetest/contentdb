@@ -25,15 +25,27 @@ from app.models import *
 from app.utils import is_package_page
 from app.markdown import render_markdown
 from app.querybuilder import QueryBuilder
+from sqlalchemy.orm import joinedload
 
 @bp.route("/api/packages/")
 def packages():
 	qb    = QueryBuilder(request.args)
-	query = qb.buildPackageQuery()
-	ver   = qb.getMinetestVersion()
+	query = qb.buildPackageQuery(db.session.query(Package, PackageRelease))
 
-	pkgs = [package.getAsDictionaryShort(current_app.config["BASE_URL"], version=ver) \
-			for package in query.all()]
+	import sys
+	print(query, file=sys.stdout)
+
+	pkgs = [result[0].getAsDictionaryShort(current_app.config["BASE_URL"], release=result[1]) \
+			for result in query.all()]
+
+
+	# qb    = QueryBuilder(request.args)
+	# query = qb.buildPackageQuery()
+	# ver   = qb.getMinetestVersion()
+
+	# pkgs = [result.getAsDictionaryShort(current_app.config["BASE_URL"], version=ver) \
+	# 		for result in query.all()]
+
 	return jsonify(pkgs)
 
 

@@ -64,8 +64,11 @@ class QueryBuilder:
 
 		return MinetestRelease.get(self.minetest_version, self.protocol_version)
 
-	def buildPackageQuery(self):
-		query = Package.query.filter_by(soft_deleted=False, approved=True)
+	def buildPackageQuery(self, query=None):
+		if not query:
+			query = Package.query
+
+		query = query.filter(Package.soft_deleted==False, Package.approved==True)
 
 		if len(self.types) > 0:
 			query = query.filter(Package.type.in_(self.types))
@@ -110,10 +113,15 @@ class QueryBuilder:
 		if self.protocol_version or self.minetest_version:
 			version = self.getMinetestVersion()
 			if version:
-				query = query.join(Package.releases) \
+				subqry = db.session.query(PackageRelease.id).correlate(PackageRelease) \
+					.filter(PackageRelease.package_id==Package.id) \
 					.filter(PackageRelease.approved==True) \
 					.filter(or_(PackageRelease.min_rel_id==None, PackageRelease.min_rel_id<=version.id)) \
-					.filter(or_(PackageRelease.max_rel_id==None, PackageRelease.max_rel_id>=version.id))
+					.filter(or_(PackageRelease.max_rel_id==None, PackageRelease.max_rel_id>=version.id)) \
+					.order_by(db.desc(PackageRelease.id)) \
+					.limit(1).subquery()
+
+				query = query.filter(PackageRelease.id==subqry)
 
 		if self.limit:
 			query = query.limit(self.limit)

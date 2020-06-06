@@ -534,9 +534,9 @@ class Package(db.Model):
 			"type": self.type.toName(),
 		}
 
-	def getAsDictionaryShort(self, base_url, version=None):
+	def getAsDictionaryShort(self, base_url, version=None, release=None):
 		tnurl = self.getThumbnailURL(1)
-		release = self.getDownloadRelease(version=version)
+		release = release if release else self.getDownloadRelease(version=version)
 		return {
 			"name": self.name,
 			"title": self.title,
