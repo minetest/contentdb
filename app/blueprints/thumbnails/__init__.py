@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import *
+from flask import abort, send_file, Blueprint, current_app
 
 bp = Blueprint("thumbnails", __name__)
 
@@ -31,7 +31,10 @@ def mkdir(path):
 
 
 def resize_and_crop(img_path, modified_path, size):
-	img = Image.open(img_path)
+	try:
+		img = Image.open(img_path)
+	except FileNotFoundError:
+		abort(404)
 
 	# Get current and desired ratio for the images
 	img_ratio = img.size[0] / float(img.size[1])
