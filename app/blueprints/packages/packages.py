@@ -400,7 +400,7 @@ def edit_maintainers(package):
 
 	form = PackageMaintainersForm(formdata=request.form)
 	if request.method == "GET":
-		form.maintainers_str.data = ", ".join([ x.username for x in package.maintainers ])
+		form.maintainers_str.data = ", ".join([ x.username for x in package.maintainers if x != package.author ])
 
 	if request.method == "POST" and form.validate():
 		usernames = [x.strip().lower() for x in form.maintainers_str.data.split(",")]
@@ -412,7 +412,7 @@ def edit_maintainers(package):
 						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL())
 
 		for user in package.maintainers:
-			if not user in users:
+			if user != package.author and not user in users:
 				triggerNotif(user, current_user,
 						"Removed you as a maintainer of {}".format(package.title), package.getDetailsURL())
 
@@ -420,9 +420,8 @@ def edit_maintainers(package):
 		package.maintainers.extend(users)
 		package.maintainers.append(package.author)
 
-		if package.author != current_user:
-			triggerNotif(package.author, current_user,
-					"Edited {} maintainers".format(package.title), package.getDetailsURL())
+		triggerNotif(package.author, current_user,
+				"Edited {} maintainers".format(package.title), package.getDetailsURL())
 
 		db.session.commit()
 
@@ -448,7 +447,7 @@ def remove_self_maintainers(package):
 		package.maintainers.remove(current_user)
 
 		triggerNotif(package.author, current_user,
-					"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL())
+				"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL())
 
 		db.session.commit()
 
