@@ -645,6 +645,10 @@ class Package(db.Model):
 		return url_for("packages.edit_maintainers",
 				author=self.author.username, name=self.name)
 
+	def getRemoveSelfMaintainerURL(self):
+		return url_for("packages.remove_self_maintainers",
+				author=self.author.username, name=self.name)
+
 	def getDownloadRelease(self, version=None):
 		for rel in self.releases:
 			if rel.approved and (version is None or

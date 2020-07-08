@@ -409,12 +409,12 @@ def edit_maintainers(package):
 		for user in users:
 			if not user in package.maintainers:
 				triggerNotif(user, current_user,
-						"Added you as a maintainer to {}".format(package.title), package.getDetailsURL())
+						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL())
 
 		for user in package.maintainers:
 			if not user in users:
 				triggerNotif(user, current_user,
-						"Removed you as a maintainer to {}".format(package.title), package.getDetailsURL())
+						"Removed you as a maintainer of {}".format(package.title), package.getDetailsURL())
 
 		package.maintainers.clear()
 		package.maintainers.extend(users)
@@ -432,3 +432,24 @@ def edit_maintainers(package):
 
 	return render_template("packages/edit_maintainers.html", \
 			package=package, form=form, users=users)
+
+
+@bp.route("/packages/<author>/<name>/remove-self-maintainer/", methods=["POST"])
+@login_required
+@is_package_page
+def remove_self_maintainers(package):
+	if not current_user in package.maintainers:
+		flash("You are not a maintainer", "danger")
+
+	elif current_user == package.author:
+		flash("Package owners cannot remove themselves as maintainers", "danger")
+
+	else:
+		package.maintainers.remove(current_user)
+
+		triggerNotif(package.author, current_user,
+					"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL())
+
+		db.session.commit()
+
+	return redirect(package.getDetailsURL())

@@ -272,6 +272,13 @@
 									{{ user.display_name }}
 								</a>
 							{% endfor %}
+
+							{% if current_user in package.maintainers and not package.checkPerm(current_user, "EDIT_MAINTAINERS") %}
+								<form class="mt-2"  method="post" action="{{ package.getRemoveSelfMaintainerURL() }}">
+									<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+									<input class="btn btn-sm btn-link p-0" type="submit" value="{{ _("Remove myself") }}" />
+								</form>
+							{% endif %}
 						</td>
 					</tr>
 				</table>
