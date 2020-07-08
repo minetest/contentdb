@@ -268,7 +268,7 @@
 
 							{% for user in package.maintainers %}
 								<a class="badge badge-primary"
-									href="{{ url_for('users.profile', username=package.author.username) }}">
+									href="{{ url_for('users.profile', username=user.username) }}">
 									{{ user.display_name }}
 								</a>
 							{% endfor %}
