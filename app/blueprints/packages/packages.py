@@ -403,7 +403,7 @@ def edit_maintainers(package):
 		form.maintainers_str.data = ", ".join([ x.username for x in package.maintainers ])
 
 	if request.method == "POST" and form.validate():
-		usernames = [x.strip() for x in form.maintainers_str.data.split(",")]
+		usernames = [x.strip().lower() for x in form.maintainers_str.data.split(",")]
 		users = User.query.filter(func.lower(User.username).in_(usernames)).all()
 		package.maintainers.clear()
 		package.maintainers.extend(users)
