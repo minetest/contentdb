@@ -374,7 +374,7 @@ def remove(package):
 		package.approved = False
 
 		triggerNotif(package.author, current_user,
-				"{} deleted".format(package.title), package.getDetailsURL())
+				"{} unapproved".format(package.title), package.getDetailsURL())
 		db.session.commit()
 
 		flash("Unapproved package", "success")
@@ -405,9 +405,25 @@ def edit_maintainers(package):
 	if request.method == "POST" and form.validate():
 		usernames = [x.strip().lower() for x in form.maintainers_str.data.split(",")]
 		users = User.query.filter(func.lower(User.username).in_(usernames)).all()
+
+		for user in users:
+			if not user in package.maintainers:
+				triggerNotif(user, current_user,
+						"Added you as a maintainer to {}".format(package.title), package.getDetailsURL())
+
+		for user in package.maintainers:
+			if not user in users:
+				triggerNotif(user, current_user,
+						"Removed you as a maintainer to {}".format(package.title), package.getDetailsURL())
+
 		package.maintainers.clear()
 		package.maintainers.extend(users)
 		package.maintainers.append(package.author)
+
+		if package.author != current_user:
+			triggerNotif(package.author, current_user,
+					"Edited {} maintainers".format(package.title), package.getDetailsURL())
+
 		db.session.commit()
 
 		return redirect(package.getDetailsURL())
