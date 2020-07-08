@@ -9,6 +9,11 @@
 {% block content %}
 	<h1>{{ _("Edit Maintainers") }}</h1>
 
+	<p>
+		{{ _("Maintainers are given write access to the package.") }}
+		{{ _("Depending on their rank, they will be able to edit the package, create releases and screenshots, and read private threads.") }}
+	</p>
+
 	<form method="POST" action="" class="tableform">
 		{{ form.hidden_tag() }}
 
