@@ -382,3 +382,37 @@ def remove(package):
 		return redirect(package.getDetailsURL())
 	else:
 		abort(400)
+
+
+
+class PackageMaintainersForm(FlaskForm):
+	maintainers_str  = StringField("Maintainers (Comma-separated)", [Optional()])
+	submit	      = SubmitField("Save")
+
+
+@bp.route("/packages/<author>/<name>/edit-maintainers/", methods=["GET", "POST"])
+@login_required
+@is_package_page
+def edit_maintainers(package):
+	if not package.checkPerm(current_user, Permission.EDIT_MAINTAINERS):
+		flash("You do not have permission to edit maintainers", "danger")
+		return redirect(package.getDetailsURL())
+
+	form = PackageMaintainersForm(formdata=request.form)
+	if request.method == "GET":
+		form.maintainers_str.data = ", ".join([ x.username for x in package.maintainers ])
+
+	if request.method == "POST" and form.validate():
+		usernames = [x.strip() for x in form.maintainers_str.data.split(",")]
+		users = User.query.filter(func.lower(User.username).in_(usernames)).all()
+		package.maintainers.clear()
+		package.maintainers.extend(users)
+		package.maintainers.append(package.author)
+		db.session.commit()
+
+		return redirect(package.getDetailsURL())
+
+	users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).order_by(db.asc(User.username)).all()
+
+	return render_template("packages/edit_maintainers.html", \
+			package=package, form=form, users=users)

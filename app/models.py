@@ -93,6 +93,7 @@ class Permission(enum.Enum):
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
 	TOPIC_DISCARD      = "TOPIC_DISCARD"
 	CREATE_TOKEN       = "CREATE_TOKEN"
+	EDIT_MAINTAINERS   = "EDIT_MAINTAINERS"
 	CHANGE_PROFILE_URLS = "CHANGE_PROFILE_URLS"
 
 	# Only return true if the permission is valid for *all* contexts
@@ -323,6 +324,11 @@ tags = db.Table("tags",
     db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
+maintainers = db.Table("maintainers",
+    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+)
+
 class Dependency(db.Model):
 	id              = db.Column(db.Integer, primary_key=True)
 	depender_id     = db.Column(db.Integer, db.ForeignKey("package.id"),     nullable=True)
@@ -453,6 +459,8 @@ class Package(db.Model):
 
 	requests = db.relationship("EditRequest", backref="package",
 			lazy="dynamic")
+
+	maintainers = db.relationship("User", secondary=maintainers, lazy="subquery")
 
 	def __init__(self, package=None):
 		if package is None:
@@ -633,6 +641,10 @@ class Package(db.Model):
 		return url_for("packages.download",
 				author=self.author.username, name=self.name)
 
+	def getEditMaintainersURL(self):
+		return url_for("packages.edit_maintainers",
+				author=self.author.username, name=self.name)
+
 	def getDownloadRelease(self, version=None):
 		for rel in self.releases:
 			if rel.approved and (version is None or
@@ -658,19 +670,17 @@ class Package(db.Model):
 			raise Exception("Unknown permission given to Package.checkPerm()")
 
 		isOwner = user == self.author
+		isMaintainer = isOwner or user.rank.atLeast(UserRank.EDITOR) or user in self.maintainers
 
 		if perm == Permission.CREATE_THREAD:
 			return user.rank.atLeast(UserRank.MEMBER)
 
 		# Members can edit their own packages, and editors can edit any packages
-		if perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
-			return isOwner or user.rank.atLeast(UserRank.EDITOR)
+		elif perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
+			return isMaintainer
 
-		if perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES or perm == Permission.APPROVE_RELEASE:
-			if isOwner:
-				return user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
-			else:
-				return user.rank.atLeast(UserRank.EDITOR)
+		elif perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES or perm == Permission.APPROVE_RELEASE:
+			return isMaintainer and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
 		# Anyone can change the package name when not approved, but only editors when approved
 		elif perm == Permission.CHANGE_NAME:
@@ -681,10 +691,10 @@ class Package(db.Model):
 			return user.rank.atLeast(UserRank.EDITOR)
 
 		elif perm == Permission.APPROVE_SCREENSHOT:
-			if isOwner:
-				return user.rank.atLeast(UserRank.TRUSTED_MEMBER if self.approved else UserRank.NEW_MEMBER)
-			else:
-				return user.rank.atLeast(UserRank.EDITOR)
+			return isMaintainer and user.rank.atLeast(UserRank.TRUSTED_MEMBER if self.approved else UserRank.NEW_MEMBER)
+
+		elif perm == Permission.EDIT_MAINTAINERS:
+			return isOwner or user.rank.atLeast(UserRank.MODERATOR)
 
 		# Moderators can delete packages
 		elif perm == Permission.DELETE_PACKAGE or perm == Permission.UNAPPROVE_PACKAGE \
@@ -1077,10 +1087,12 @@ class Thread(db.Model):
 		elif type(perm) != Permission:
 			raise Exception("Unknown permission given to Thread.checkPerm()")
 
-		isOwner = user == self.author or (self.package is not None and self.package.author == user)
+		isMaintainer = user == self.author or (self.package is not None and self.package.author == user)
+		if self.package:
+			isMaintainer = isMaintainer or user in self.package.maintainers
 
 		if perm == Permission.SEE_THREAD:
-			return not self.private or isOwner or user.rank.atLeast(UserRank.EDITOR)
+			return not self.private or isMaintainer or user.rank.atLeast(UserRank.EDITOR)
 
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))

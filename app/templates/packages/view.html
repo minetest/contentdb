@@ -259,6 +259,21 @@
 						<td>Added</td>
 						<td>{{ package.created_at | datetime }}</td>
 					</tr>
+					<tr>
+						<td>Maintainers</td>
+						<td>
+							{% if package.checkPerm(current_user, "EDIT_MAINTAINERS") %}
+								<a class="btn btn-primary btn-sm ml-1 float-right" href="{{ package.getEditMaintainersURL() }}"><i class="fas fa-edit"></i></a>
+							{% endif %}
+
+							{% for user in package.maintainers %}
+								<a class="badge badge-primary"
+									href="{{ url_for('users.profile', username=package.author.username) }}">
+									{{ user.display_name }}
+								</a>
+							{% endfor %}
+						</td>
+					</tr>
 				</table>
 			</div>
 
