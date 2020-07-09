@@ -18,4 +18,4 @@ from flask import Blueprint
 
 bp = Blueprint("packages", __name__)
 
-from . import packages, screenshots, releases
+from . import packages, screenshots, releases, reviews

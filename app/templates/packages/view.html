@@ -459,6 +459,16 @@
 
 		<div style="clear: both;"></div>
 
+		<h3>Ratings and Reviews</h3>
+
+		{% from "macros/reviews.html" import render_reviews, render_review_form, render_review_preview %}
+		{% if current_user.is_authenticated %}
+			{{ render_review_form(package, current_user) }}
+		{% else %}
+			{{ render_review_preview(package) }}
+		{% endif %}
+		{{ render_reviews(package.reviews) }}
+
 		{#
 			{% if current_user.is_authenticated or requests %}
 				<h3>Edit Requests</h3>

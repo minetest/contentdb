@@ -206,7 +206,8 @@ def new():
 		notif_msg = None
 		if package is not None:
 			notif_msg = "New thread '{}' on package {}".format(thread.title, package.title)
-			triggerNotif(package.author, current_user, notif_msg, url_for("threads.view", id=thread.id))
+			for maintainer in package.maintainers:
+				triggerNotif(maintainer, current_user, notif_msg, url_for("threads.view", id=thread.id))
 		else:
 			notif_msg = "New thread '{}'".format(thread.title)
 

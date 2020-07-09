@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Review") }}
+{% endblock %}
+
+{% block content %}
+
+<h1>{{ _("Review") }}</h1>
+
+{% from "macros/forms.html" import render_field, render_submit_field, render_radio_field %}
+<form method="POST" action="" enctype="multipart/form-data">
+	{{ form.hidden_tag() }}
+	<div class="row mt-0 mb-4 comments mx-0">
+		<div class="col-md-1 p-1">
+			<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ current_user.getProfilePicURL() }}">
+		</div>
+		<div class="col">
+			<div class="card">
+				<div class="card-header {{ current_user.rank.name }}">
+					{{ current_user.display_name }}
+					<a name="reply"></a>
+				</div>
+				<div class="card-body">
+					<p>
+						{{ _("Do you recommend this %(type)s?", type=package.type.value | lower) }}
+					</p>
+					{{ render_radio_field(form.recommends) }}
+
+					<p class="mt-4 mb-3">
+						{{ _("Why or why not? Try to be constructive") }}
+					</p>
+
+					{{ render_field(form.title) }}
+					{{ render_field(form.comment, label="", class_="m-0", fieldclass="form-control markdown") }} <br />
+					{{ render_submit_field(form.submit) }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+</form>
+
+
+{% endblock %}

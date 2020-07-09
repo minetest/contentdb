@@ -205,9 +205,17 @@ class User(db.Model, UserMixin):
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
 	def canCommentRL(self):
+		one_min_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=1)
+		if ThreadReply.query.filter_by(author=self) \
+				.filter(ThreadReply.created_at > one_min_ago).count() >= 3:
+			return False
+
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
-		return ThreadReply.query.filter_by(author=self) \
-			.filter(ThreadReply.created_at > hour_ago).count() < 4
+		if ThreadReply.query.filter_by(author=self) \
+				.filter(ThreadReply.created_at > hour_ago).count() >= 20:
+			return False
+
+		return True
 
 	def canOpenThreadRL(self):
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
@@ -1063,6 +1071,9 @@ class Thread(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
 	package    = db.relationship("Package", foreign_keys=[package_id])
 
+	review_id = db.Column(db.Integer, db.ForeignKey("package_review.id"), nullable=True)
+	review    = db.relationship("PackageReview", foreign_keys=[review_id])
+
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	title      = db.Column(db.String(100), nullable=False)
 	private    = db.Column(db.Boolean, server_default="0")
@@ -1108,6 +1119,27 @@ class ThreadReply(db.Model):
 	comment    = db.Column(db.String(500), nullable=False)
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+
+class PackageReview(db.Model):
+	id         = db.Column(db.Integer, primary_key=True)
+
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
+	package    = db.relationship("Package", foreign_keys=[package_id], backref=db.backref("reviews", lazy=True))
+
+	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	author     = db.relationship("User", foreign_keys=[author_id], backref=db.backref("reviews", lazy=True))
+
+	recommends = db.Column(db.Boolean, nullable=False)
+
+	thread     = db.relationship("Thread", uselist=False, back_populates="review")
+
+	def getEditURL(self):
+		return url_for("packages.edit_review",
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
+
 
 
 REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com", \

@@ -19,12 +19,21 @@ Threads
 		{% endif %}
 	{% endif %}
 
-	<h1>{% if thread.private %}&#x1f512; {% endif %}{{ thread.title }}</h1>
-
-	{% if thread.package or current_user.is_authenticated %}
-		{% if thread.package %}
-			<p>Package: <a href="{{ thread.package.getDetailsURL() }}">{{ thread.package.title }}</a></p>
+	<h1>
+		{% if thread.review %}
+			{% if thread.review.recommends %}
+				<i class="fas fa-thumbs-up mr-2" style="color:#6f6;"></i>
+			{% else %}
+				<i class="fas fa-thumbs-down mr-2" style="color:#f66;"></i>
+			{% endif %}
 		{% endif %}
+		{% if thread.private %}&#x1f512; {% endif %}{{ thread.title }}
+	</h1>
+
+	{% if thread.package %}
+		<p>
+			Package: <a href="{{ thread.package.getDetailsURL() }}">{{ thread.package.title }}</a>
+		</p>
 	{% endif %}
 
 	{% if thread.private %}
