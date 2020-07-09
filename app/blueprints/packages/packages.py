@@ -265,7 +265,7 @@ def create_edit(author=None, name=None):
 			return redirect(url_for("packages.create_edit", author=author, name=name))
 
 		else:
-			triggerNotif(package.author, current_user,
+			addNotification(package.maintainers, current_user,
 					"{} edited".format(package.title), package.getDetailsURL())
 
 		form.populate_obj(package) # copy to row
@@ -337,7 +337,7 @@ def approve(package):
 		for s in screenshots:
 			s.approved = True
 
-		triggerNotif(package.author, current_user,
+		addNotification(package.maintainers, current_user,
 				"{} approved".format(package.title), package.getDetailsURL())
 		db.session.commit()
 
@@ -359,7 +359,7 @@ def remove(package):
 		package.soft_deleted = True
 
 		url = url_for("users.profile", username=package.author.username)
-		triggerNotif(package.author, current_user,
+		addNotification(package.maintainers, current_user,
 				"{} deleted".format(package.title), url)
 		db.session.commit()
 
@@ -373,7 +373,7 @@ def remove(package):
 
 		package.approved = False
 
-		triggerNotif(package.author, current_user,
+		addNotification(package.maintainers, current_user,
 				"{} unapproved".format(package.title), package.getDetailsURL())
 		db.session.commit()
 
@@ -408,19 +408,19 @@ def edit_maintainers(package):
 
 		for user in users:
 			if not user in package.maintainers:
-				triggerNotif(user, current_user,
+				addNotification(user, current_user,
 						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL())
 
 		for user in package.maintainers:
 			if user != package.author and not user in users:
-				triggerNotif(user, current_user,
+				addNotification(user, current_user,
 						"Removed you as a maintainer of {}".format(package.title), package.getDetailsURL())
 
 		package.maintainers.clear()
 		package.maintainers.extend(users)
 		package.maintainers.append(package.author)
 
-		triggerNotif(package.author, current_user,
+		addNotification(package.author, current_user,
 				"Edited {} maintainers".format(package.title), package.getDetailsURL())
 
 		db.session.commit()
@@ -446,7 +446,7 @@ def remove_self_maintainers(package):
 	else:
 		package.maintainers.remove(current_user)
 
-		triggerNotif(package.author, current_user,
+		addNotification(package.author, current_user,
 				"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL())
 
 		db.session.commit()

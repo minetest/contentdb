@@ -188,11 +188,18 @@ def is_package_page(f):
 
 	return decorated_function
 
-def triggerNotif(owner, causer, title, url):
-	if owner.rank.atLeast(UserRank.NEW_MEMBER) and owner != causer:
-		Notification.query.filter_by(user=owner, causer=causer, title=title, url=url).delete()
-		notif = Notification(owner, causer, title, url)
+
+def addNotification(target, causer, title, url):
+	if not isinstance(target, User):
+		for x in target:
+			addNotification(x, causer, title, url)
+		return
+
+	if target.rank.atLeast(UserRank.NEW_MEMBER) and target != causer:
+		Notification.query.filter_by(user=target, causer=causer, title=title, url=url).delete()
+		notif = Notification(target, causer, title, url)
 		db.session.add(notif)
+
 
 def clearNotifications(url):
 	if current_user.is_authenticated:

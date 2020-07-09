@@ -22,7 +22,7 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from app.models import db, PackageReview, Thread, ThreadReply
-from app.utils import is_package_page, triggerNotif
+from app.utils import is_package_page, addNotification
 
 class ReviewForm(FlaskForm):
 	title	= StringField("Title", [InputRequired(), Length(3,100)])
@@ -88,8 +88,7 @@ def review(package):
 		else:
 			notif_msg = "Updated review '{}' on package {}".format(form.title.data, package.title)
 
-		for maintainer in package.maintainers:
-			triggerNotif(maintainer, current_user, notif_msg, url_for("threads.view", id=thread.id))
+		addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id))
 
 		db.session.commit()
 

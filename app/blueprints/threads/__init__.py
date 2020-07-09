@@ -21,7 +21,7 @@ bp = Blueprint("threads", __name__)
 
 from flask_user import *
 from app.models import *
-from app.utils import triggerNotif, clearNotifications
+from app.utils import addNotification, clearNotifications
 
 import datetime
 
@@ -113,10 +113,7 @@ def view(id):
 				msg = "New comment on '{}' on package {}".format(thread.title, thread.package.title)
 
 
-			for user in thread.watchers:
-				if user != current_user:
-					triggerNotif(user, current_user, msg, url_for("threads.view", id=thread.id))
-
+			addNotification(thread.watchers, current_user, msg, url_for("threads.view", id=thread.id))
 			db.session.commit()
 
 			return redirect(url_for("threads.view", id=id))
@@ -206,13 +203,12 @@ def new():
 		notif_msg = None
 		if package is not None:
 			notif_msg = "New thread '{}' on package {}".format(thread.title, package.title)
-			for maintainer in package.maintainers:
-				triggerNotif(maintainer, current_user, notif_msg, url_for("threads.view", id=thread.id))
+			addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id))
 		else:
 			notif_msg = "New thread '{}'".format(thread.title)
 
-		for user in User.query.filter(User.rank >= UserRank.EDITOR).all():
-			triggerNotif(user, current_user, notif_msg, url_for("threads.view", id=thread.id))
+		editors = User.query.filter(User.rank >= UserRank.EDITOR).all()
+		addNotification(editors, current_user, notif_msg, url_for("threads.view", id=thread.id))
 
 		db.session.commit()
 

@@ -62,7 +62,7 @@ def create_screenshot(package, id=None):
 
 			msg = "{}: Screenshot added {}" \
 					.format(package.title, ss.title)
-			triggerNotif(package.author, current_user, msg, package.getDetailsURL())
+			addNotification(package.maintainers, current_user, msg, package.getDetailsURL())
 			db.session.commit()
 			return redirect(package.getDetailsURL())
 

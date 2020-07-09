@@ -25,7 +25,7 @@ from app.tasks.importtasks import importRepoScreenshot, makeVCSRelease, checkZip
 from app.tasks.forumtasks  import importTopicList, checkAllForumAccounts
 from flask_wtf import FlaskForm
 from wtforms import *
-from app.utils import loginUser, rank_required, triggerNotif
+from app.utils import loginUser, rank_required, addNotification
 import datetime, os
 
 @bp.route("/admin/", methods=["GET", "POST"])
@@ -108,7 +108,7 @@ def admin_page():
 				makeVCSRelease.apply_async((rel.id, "master"), task_id=rel.task_id)
 
 				msg = "{}: Release {} created".format(package.title, rel.title)
-				triggerNotif(package.author, current_user, msg, rel.getEditURL())
+				addNotification(package.maintainers, current_user, msg, rel.getEditURL())
 				db.session.commit()
 
 		elif action == "cleanuploads":

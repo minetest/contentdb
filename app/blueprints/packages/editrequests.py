@@ -99,8 +99,8 @@ def create_edit_editrequest_page(package, id=None):
 		if wasChangeMade:
 			msg = "{}: Edit request #{} {}" \
 					.format(package.title, erequest.id, "created" if id is None else "edited")
-			triggerNotif(package.author, current_user, msg, erequest.getURL())
-			triggerNotif(erequest.author, current_user, msg, erequest.getURL())
+			addNotification(package.maintainers, current_user, msg, erequest.getURL())
+			addNotification(erequest.author, current_user, msg, erequest.getURL())
 			db.session.commit()
 			return redirect(erequest.getURL())
 		else:
@@ -142,8 +142,8 @@ def approve_editrequest_page(package, id):
 		erequest.applyAll(package)
 
 		msg = "{}: Edit request #{} merged".format(package.title, erequest.id)
-		triggerNotif(erequest.author, current_user, msg, erequest.getURL())
-		triggerNotif(package.author, current_user, msg, erequest.getURL())
+		addNotification(erequest.author, current_user, msg, erequest.getURL())
+		addNotification(package.maintainers, current_user, msg, erequest.getURL())
 		db.session.commit()
 
 	return redirect(package.getDetailsURL())
@@ -166,8 +166,8 @@ def reject_editrequest_page(package, id):
 		erequest.status = 2
 
 		msg = "{}: Edit request #{} rejected".format(package.title, erequest.id)
-		triggerNotif(erequest.author, current_user, msg, erequest.getURL())
-		triggerNotif(package.author, current_user, msg, erequest.getURL())
+		addNotification(erequest.author, current_user, msg, erequest.getURL())
+		addNotification(package.maintainers, current_user, msg, erequest.getURL())
 		db.session.commit()
 
 	return redirect(package.getDetailsURL())
