@@ -22,7 +22,6 @@ from .models import *
 from . import app
 import random, string, os, imghdr
 from urllib.parse import urljoin
-from collections.abc import Iterable
 
 def abs_url_for(path, **kwargs):
 	scheme = "https" if app.config["BASE_URL"][:5] == "https" else "http"
@@ -191,10 +190,13 @@ def is_package_page(f):
 
 
 def addNotification(target, causer, title, url):
-	if isinstance(target, Iterable):
+	try:
+		iter(target)
 		for x in target:
 			addNotification(x, causer, title, url)
 		return
+	except TypeError:
+		pass
 
 	if target.rank.atLeast(UserRank.NEW_MEMBER) and target != causer:
 		Notification.query.filter_by(user=target, causer=causer, title=title, url=url).delete()
