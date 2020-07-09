@@ -22,6 +22,7 @@ from .models import *
 from . import app
 import random, string, os, imghdr
 from urllib.parse import urljoin
+from collections.abc import Iterable
 
 def abs_url_for(path, **kwargs):
 	scheme = "https" if app.config["BASE_URL"][:5] == "https" else "http"
