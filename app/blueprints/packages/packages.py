@@ -158,7 +158,7 @@ def view(package):
 	elif not current_user.rank.atLeast(UserRank.EDITOR) and not current_user == package.author:
 		threads = threads.filter(or_(Thread.private == False, Thread.author == current_user))
 
-	has_review = PackageReview.query.filter_by(package=package, author=current_user).count() > 0
+	has_review = current_user.is_authenticated and PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
 	return render_template("packages/view.html", \
 			package=package, releases=releases, requests=requests, \
