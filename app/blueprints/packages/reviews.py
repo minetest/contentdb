@@ -34,6 +34,10 @@ class ReviewForm(FlaskForm):
 @login_required
 @is_package_page
 def review(package):
+	if current_user in package.maintainers:
+		flash("You can't review your own package!", "danger")
+		return redirect(package.getDetailsURL())
+
 	review = PackageReview.query.filter_by(package=package, author=current_user).first()
 
 	form = ReviewForm(formdata=request.form, obj=review)
