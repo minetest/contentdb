@@ -158,12 +158,13 @@ def view(package):
 	elif not current_user.rank.atLeast(UserRank.EDITOR) and not current_user == package.author:
 		threads = threads.filter(or_(Thread.private == False, Thread.author == current_user))
 
+	has_review = PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
 	return render_template("packages/view.html", \
 			package=package, releases=releases, requests=requests, \
 			alternatives=alternatives, similar_topics=similar_topics, \
 			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl, \
-			threads=threads.all())
+			threads=threads.all(), has_review=has_review)
 
 
 @bp.route("/packages/<author>/<name>/download/")

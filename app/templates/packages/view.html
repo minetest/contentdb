@@ -463,7 +463,17 @@
 
 		{% from "macros/reviews.html" import render_reviews, render_review_form, render_review_preview %}
 		{% if current_user.is_authenticated %}
-			{{ render_review_form(package, current_user) }}
+			{% if has_review %}
+				<p>
+					<a
+							class="btn btn-primary"
+							href="{{ url_for('packages.review', author=package.author.username, name=package.name) }}">
+						{{ _("Edit Review") }}
+					</a>
+				</p>
+			{% else %}
+				{{ render_review_form(package, current_user) }}
+			{% endif %}
 		{% else %}
 			{{ render_review_preview(package) }}
 		{% endif %}
