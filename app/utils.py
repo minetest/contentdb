@@ -190,7 +190,7 @@ def is_package_page(f):
 
 
 def addNotification(target, causer, title, url):
-	if not isinstance(target, User):
+	if isinstance(target, Iterable):
 		for x in target:
 			addNotification(x, causer, title, url)
 		return
