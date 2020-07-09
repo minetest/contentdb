@@ -431,7 +431,8 @@ class Package(db.Model):
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	soft_deleted = db.Column(db.Boolean, nullable=False, default=False)
 
-	score         = db.Column(db.Float, nullable=False, default=0)
+	score        = db.Column(db.Float, nullable=False, default=0)
+	score_downloads = db.Column(db.Float, nullable=False, default=0)
 	downloads     = db.Column(db.Integer, nullable=False, default=0)
 
 	review_thread_id = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=True, default=None)
@@ -719,6 +720,12 @@ class Package(db.Model):
 
 		if self.getMainScreenshotURL() is None:
 			self.score *= 0.8
+
+		self.recalcScore()
+
+	def recalcScore(self):
+		self.score_downloads = self.score
+
 
 
 class MetaPackage(db.Model):
