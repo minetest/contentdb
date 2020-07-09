@@ -1,4 +1,4 @@
-{% macro render_reviews(reviews) -%}
+{% macro render_reviews(reviews, show_package_link=False) -%}
 <ul class="comments mt-4 mb-0">
 	{% for review in reviews %}
 		<li class="row my-2 mx-0">
@@ -37,10 +37,18 @@
 
 							{{ reply.comment | markdown }}
 
-							<a class="btn btn-primary" href="{{ url_for('threads.view', id=review.thread.id) }}">
-								<i class="fas fa-comments mr-2"></i>
-								{{ _("%(num)d comments", num=review.thread.replies.count() - 1) }}
-							</a>
+							<p class="mt-2 mb-0">
+								{% if show_package_link %}
+									<a class="btn btn-primary mr-1" href="{{ review.package.getDetailsURL() }}">
+										{{ _("View %(title)s by %(author)s", title=review.package.title, author=review.package.author.display_name) }}
+									</a>
+								{% endif %}
+
+								<a class="btn btn-primary" href="{{ url_for('threads.view', id=review.thread.id) }}">
+									<i class="fas fa-comments mr-2"></i>
+									{{ _("%(num)d comments", num=review.thread.replies.count() - 1) }}
+								</a>
+							</p>
 						</div>
 					</div>
 				</div>

@@ -1118,6 +1118,8 @@ class PackageReview(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
 	package    = db.relationship("Package", foreign_keys=[package_id], backref=db.backref("reviews", lazy=True))
 
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author     = db.relationship("User", foreign_keys=[author_id], backref=db.backref("reviews", lazy=True))
 

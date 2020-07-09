@@ -20,20 +20,6 @@
 {% endblock %}
 
 {% block content %}
-<!-- <header class="jumbotron">
-	<div class="container">
-		<h1 class="display-3">{{ config.USER_APP_NAME }}</h1>
-
-		<p class="lead">
-			Minetest's official content repository.
-			Browse {{ count }} packages,
-			the majority of which are available under a free
-			and open source license.
-		</p>
-	</div>
-</header>
-
-<main class="container"> -->
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 
 
@@ -63,6 +49,11 @@
 	</a>
 	<h2 class="my-3">{{ _("Top Texture Packs") }}</h2>
 	{{ render_pkggrid(pop_txp) }}
+
+
+	<h2 class="my-3">{{ _("Recent Positive Reviews") }}</h2>
+	{% from "macros/reviews.html" import render_reviews %}
+	{{ render_reviews(reviews, True) }}
 
 	<div class="text-center">
 		<small>
