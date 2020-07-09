@@ -87,7 +87,7 @@ def admin_page():
 			return redirect(url_for("admin.admin_page"))
 		elif action == "recalcscores":
 			for p in Package.query.all():
-				p.setStartScore()
+				p.recalcScore()
 
 			db.session.commit()
 			return redirect(url_for("admin.admin_page"))

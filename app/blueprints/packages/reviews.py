@@ -82,6 +82,8 @@ def review(package):
 
 		db.session.commit()
 
+		package.recalcScore()
+
 		notif_msg = None
 		if was_new:
 			notif_msg = "New review '{}' on package {}".format(form.title.data, package.title)

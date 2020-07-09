@@ -712,28 +712,19 @@ class Package(db.Model):
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
 
-	def setStartScore(self):
-		downloads = self.downloads
-
-		forum_score = 0
-		forum_bonus = 0
-		topic = self.forums and ForumTopic.query.get(self.forums)
-		if topic:
-			months = (datetime.datetime.now() - topic.created_at).days / 30
-			years  = months / 12
-			forum_score = topic.views / max(years, 0.0416) + 80*min(max(months, 0.5), 6)
-			forum_bonus = topic.views + topic.posts
-
-		self.score = max(downloads, forum_score * 0.6) + forum_bonus
-
-		if self.getMainScreenshotURL() is None:
-			self.score *= 0.8
-
-		self.recalcScore()
+	def getScoreDict(self):
+		return {
+			"author": self.author.username,
+			"name": self.name,
+			"score": self.score,
+			"score_downloads": self.score_downloads,
+			"score_reviews": self.score - self.score_downloads,
+			"downloads": self.downloads
+		}
 
 	def recalcScore(self):
-		self.score_downloads = self.score
-
+		review_scores = [ 100 * r.asSign() for r in self.reviews ]
+		self.score = self.score_downloads + sum(review_scores)
 
 
 class MetaPackage(db.Model):
@@ -1133,6 +1124,9 @@ class PackageReview(db.Model):
 	recommends = db.Column(db.Boolean, nullable=False)
 
 	thread     = db.relationship("Thread", uselist=False, back_populates="review")
+
+	def asSign(self):
+		return 1 if self.recommends else -1
 
 	def getEditURL(self):
 		return url_for("packages.edit_review",

@@ -2,8 +2,12 @@ title: Top Packages Algorithm
 
 ## Score
 
-A package's score is currently equal to a pseudo rolling average of downloads.
-In the future, a package will also gain score through reviews.
+A package's score is currently equal to a pseudo rolling average of downloads,
+plus the sum of review scores.
+
+A review score is 100 if positive, -100 if negative.
+
+	score  =  avg_downloads + Σ 100 * (positive ? 1 : -1)
 
 ## Pseudo rolling average of downloads
 
@@ -35,7 +39,8 @@ which was 20% of the above value.
 ## Manual adjustments
 
 The admin occasionally reduces all packages by a set percentage to speed up
-convergence. Convergence is when
+convergence. Convergence is when the pseudo-rolling average matches the actual
+rolling average - the effect of the legacy heuristic is gone.
 
 ## Transparency and Feedback
 

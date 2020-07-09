@@ -42,8 +42,7 @@ def package_scores():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 
-	pkgs = [{ "author": package.author.username, "name": package.name, "score": package.score } \
-			for package in query.all()]
+	pkgs = [package.getScoreDict() for package in query.all()]
 	return jsonify(pkgs)
 
 
