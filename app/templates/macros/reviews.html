@@ -44,7 +44,7 @@
 									</a>
 								{% endif %}
 
-								<a class="btn btn-primary" href="{{ url_for('threads.view', id=review.thread.id) }}">
+								<a class="btn btn-secondary" href="{{ url_for('threads.view', id=review.thread.id) }}">
 									<i class="fas fa-comments mr-2"></i>
 									{{ _("%(num)d comments", num=review.thread.replies.count() - 1) }}
 								</a>
