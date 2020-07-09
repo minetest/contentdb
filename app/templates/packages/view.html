@@ -63,7 +63,7 @@
 					</a>
 					<a class="btn" rel="nofollow" href="{{ package.getDownloadURL() }}">
 						<i class="fas fa-download"></i>
-						<span class="count">{{ package.getDownloadCount() }}</span>
+						<span class="count">{{ package.downloads }}</span>
 					</a>
 					<a class="btn" href="{{ url_for('threads.list_all', pid=package.id) }}">
 						<i class="fas fa-comment-alt"></i>

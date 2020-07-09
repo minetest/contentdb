@@ -431,7 +431,8 @@ class Package(db.Model):
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	soft_deleted = db.Column(db.Boolean, nullable=False, default=False)
 
-	score        = db.Column(db.Float, nullable=False, default=0)
+	score         = db.Column(db.Float, nullable=False, default=0)
+	downloads     = db.Column(db.Integer, nullable=False, default=0)
 
 	review_thread_id = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=True, default=None)
 	review_thread    = db.relationship("Thread", foreign_keys=[review_thread_id])
@@ -658,12 +659,6 @@ class Package(db.Model):
 
 		return None
 
-	def getDownloadCount(self):
-		counter = 0
-		for release in self.releases:
-			counter += release.downloads
-		return counter
-
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
 			return False
@@ -709,8 +704,7 @@ class Package(db.Model):
 			raise Exception("Permission {} is not related to packages".format(perm.name))
 
 	def setStartScore(self):
-		downloads = db.session.query(func.sum(PackageRelease.downloads)). \
-				filter(PackageRelease.package_id == self.id).scalar() or 0
+		downloads = self.downloads
 
 		forum_score = 0
 		forum_bonus = 0

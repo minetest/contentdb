@@ -140,6 +140,7 @@ def download_release(package, id):
 				})
 
 			Package.query.filter_by(id=package.id).update({
+					"downloads": Package.downloads + 1,
 					"score": Package.score + bonus
 				})
 

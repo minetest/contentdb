@@ -42,8 +42,7 @@ def generate_metrics(full=False):
 
 		return ret + "\n"
 
-
-	downloads_result = db.session.query(func.sum(PackageRelease.downloads)).one_or_none()
+	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 
 	packages = Package.query.filter_by(approved=True, soft_deleted=False).count()
