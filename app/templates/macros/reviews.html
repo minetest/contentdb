@@ -47,7 +47,9 @@
 							<p class="mt-2 mb-0">
 								{% if show_package_link %}
 									<a class="btn btn-primary mr-1" href="{{ review.package.getDetailsURL() }}">
-										{{ _("View %(title)s by %(author)s", title=review.package.title, author=review.package.author.display_name) }}
+										{{ _("%(title)s by %(author)s",
+												title="<b>" | safe + review.package.title + "</b>" | safe,
+												author=review.package.author.display_name) }}
 									</a>
 								{% endif %}
 
