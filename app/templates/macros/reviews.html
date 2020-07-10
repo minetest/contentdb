@@ -51,7 +51,8 @@
 									</a>
 								{% endif %}
 
-								<a class="btn btn-secondary" href="{{ url_for('threads.view', id=review.thread.id) }}">
+								<a class="btn {% if review.thread.replies.count() > 1 %} btn-primary {% else %} btn-secondary {% endif %}"
+										href="{{ url_for('threads.view', id=review.thread.id) }}">
 									<i class="fas fa-comments mr-2"></i>
 									{{ _("%(num)d comments", num=review.thread.replies.count() - 1) }}
 								</a>
