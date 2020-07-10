@@ -190,6 +190,9 @@
 {% endif %}
 </div>
 
+
+<h2 class="my-3">{{ _("Packages") }}</h2>
+
 {% from "macros/packagegridtile.html" import render_pkggrid %}
 {{ render_pkggrid(packages, show_author=False) }}
 
@@ -200,8 +203,14 @@
 	</div>
 {% endif %}
 
+
+<h2 class="my-3">{{ _("Reviews") }}</h2>
+{% from "macros/reviews.html" import render_reviews %}
+{{ render_reviews(user.reviews, current_user, True) }}
+
+
 {% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.EDITOR)) %}
-	<div class="card mt-3">
+	<div class="card mt-5">
 		<a name="unadded-topics"></a>
 		<h2 class="card-header">Unadded topics</h2>
 

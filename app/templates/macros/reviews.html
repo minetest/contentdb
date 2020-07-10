@@ -61,6 +61,10 @@
 				</div>
 			{% endif %}
 		</li>
+	{% else %}
+		<p>
+			<i>{{ _("No reviews, yet.") }}</i>
+		</p>
 	{% endfor %}
 </ul>
 {% endmacro %}
