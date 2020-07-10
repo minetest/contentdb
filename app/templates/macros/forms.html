@@ -133,6 +133,21 @@
 	{% endfor %}
 {%- endmacro %}
 
+{% macro render_toggle_field(field, icons=[]) -%}
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+	{% for value, label, checked in field.iter_choices() %}
+		<label class="btn btn-primary">
+			{% set icon = icons[value] %}
+			{% if icon %}
+				<i class="fas {{ icon }} mr-2"></i>
+			{% endif %}
+			<input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}" autocomplete="off" {% if checked %} checked{% endif %}>
+			{{ label }}
+		</label>
+	{% endfor %}
+	</div>
+{%- endmacro %}
+
 {% macro render_submit_field(field, label=None, tabindex=None) -%}
 	{% if not label %}{% set label=field.label.text %}{% endif %}
 	{#<button type="submit" class="form-control btn btn-default btn-primary">{{label}}</button>#}
