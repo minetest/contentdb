@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
 	<link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=11">
+	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=12">
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
 	<link rel="shortcut icon" href="/favicon-16.png" sizes="16x16">
 	<link rel="icon" href="/favicon-128.png" sizes="128x128">
@@ -60,8 +60,13 @@
 				</form>
 				<ul class="navbar-nav ml-auto">
 					{% if current_user.is_authenticated %}
-						<li class="nav-item"><a class="nav-link" href="{{ url_for('notifications.list_all') }}">
-							<i class="fas fa-bell" {% if current_user.notifications %} style="color: yellow;"{% endif %}></i>
+						<li class="nav-item"><a class="nav-link notification-icon" href="{{ url_for('notifications.list_all') }}">
+							{% if current_user.notifications %}
+								<i class="fas fa-bell"></i>
+								<span class="badge badge-pill badge-notify" style="font-size:10px;">{{ current_user.notifications | length }}</span>
+							{% else %}
+								<i class="fas fa-bell" ></i>
+							{% endif %}
 						</a></li>
 						<li class="nav-item"><a class="nav-link" href="{{ url_for('packages.create_edit') }}">
 							<i class="fas fa-plus"></i>
