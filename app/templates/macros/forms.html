@@ -136,7 +136,7 @@
 {% macro render_toggle_field(field, icons=[]) -%}
 <div class="btn-group btn-group-toggle" data-toggle="buttons">
 	{% for value, label, checked in field.iter_choices() %}
-		<label class="btn btn-primary">
+		<label class="btn btn-primary{% if checked %} active{% endif %}">
 			{% set icon = icons[value] %}
 			{% if icon %}
 				<i class="fas {{ icon }} mr-2"></i>
