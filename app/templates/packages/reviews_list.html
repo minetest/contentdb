@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Reviews") }}
+{% endblock %}
+
+{% block content %}
+	{% from "macros/reviews.html" import render_reviews %}
+	{{ render_reviews(reviews, current_user, True) }}
+{% endblock %}

@@ -24,6 +24,13 @@ from wtforms.validators import *
 from app.models import db, PackageReview, Thread, ThreadReply
 from app.utils import is_package_page, addNotification
 
+
+@bp.route("/reviews/")
+def list_reviews():
+	reviews = PackageReview.query.order_by(db.desc(PackageReview.created_at)).limit(5).all()
+	return render_template("packages/reviews_list.html", reviews=reviews)
+
+
 class ReviewForm(FlaskForm):
 	title	= StringField("Title", [InputRequired(), Length(3,100)])
 	comment = TextAreaField("Comment", [InputRequired(), Length(10, 500)])
