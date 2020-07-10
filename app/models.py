@@ -708,9 +708,10 @@ class Package(db.Model):
 		elif perm == Permission.EDIT_MAINTAINERS:
 			return isOwner or user.rank.atLeast(UserRank.MODERATOR)
 
-		# Moderators can delete packages
-		elif perm == Permission.DELETE_PACKAGE or perm == Permission.UNAPPROVE_PACKAGE \
-				or perm == Permission.CHANGE_RELEASE_URL:
+		elif perm == Permission.UNAPPROVE_PACKAGE or perm == Permission.DELETE_PACKAGE:
+			return user.rank.atLeast(UserRank.EDITOR)
+
+		elif perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:
