@@ -244,6 +244,7 @@ def create_edit(author=None, name=None):
 			form.harddep_str.data  = ",".join([str(x) for x in package.getSortedHardDependencies() ])
 			form.softdep_str.data  = ",".join([str(x) for x in package.getSortedOptionalDependencies() ])
 			form.provides_str.data = MetaPackage.ListToSpec(package.provides)
+			form.tags.data         = list(package.tags)
 
 	if request.method == "POST" and form.validate():
 		wasNew = False
