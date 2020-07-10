@@ -85,6 +85,11 @@ def edit_screenshot(package, id):
 
 	# Initial form class from post data and default data
 	form = EditScreenshotForm(formdata=request.form, obj=screenshot)
+
+	if request.method == "GET":
+		# HACK: fix bug in wtforms
+		form.approved.data = screenshot.approved
+
 	if request.method == "POST" and form.validate():
 		if canEdit and form["delete"].data:
 			PackageScreenshot.query.filter_by(id=id).delete()

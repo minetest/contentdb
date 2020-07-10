@@ -167,8 +167,8 @@ def edit_release(package, id):
 	# Initial form class from post data and default data
 	form = EditPackageReleaseForm(formdata=request.form, obj=release)
 
-	# HACK: fix bug in wtforms
 	if request.method == "GET":
+		# HACK: fix bug in wtforms
 		form.approved.data = release.approved
 
 	if request.method == "POST" and form.validate():
