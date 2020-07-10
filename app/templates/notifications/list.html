@@ -6,18 +6,33 @@ Notifications
 
 {% block content %}
 	{% if current_user.notifications %}
-		<form method="post" action="{{ url_for('notifications.clear') }}">
+		<form method="post" action="{{ url_for('notifications.clear') }}" class="float-right">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<input type="submit" value="Clear All" />
+			<input type="submit" class="btn btn-primary" value="Clear All" />
 		</form>
 	{% endif %}
-	<ul>
+
+	<h1>Notifications</h1>
+
+	<div class="list-group mt-3">
 		{% for n in current_user.notifications %}
-			<li><a href="{{ n.url }}">
-				{{ n.title}} [{{ n.causer.display_name }}]
-			</a></li>
+			<a class="list-group-item list-group-item-action" href="{{ n.url }}">
+				<div class="row">
+					<div class="col-sm-auto">
+						{{ n.title}}
+					</div>
+
+					<div class="col-sm text-muted text-right">
+						<img
+							class="img-responsive user-photo img-thumbnail img-thumbnail-1"
+							style="max-height: 22px;"
+							src="{{ n.causer.getProfilePicURL() }}" />
+						<span class="pl-1">{{ n.causer.display_name }}</span>
+					</div>
+				</div>
+			</a>
 		{% else %}
-			<li><i>No notifications</i></ul>
+			<p class="list-group-item"><i>No notifications</i></p>
 		{% endfor %}
 	</ul>
 {% endblock %}
