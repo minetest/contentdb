@@ -60,9 +60,29 @@ Example:
 Supported query parameters:
 
 * `type` - Package types (`mod`, `game`, `txp`).
-* `q` - Query string
+* `q` - Query string.
+* `author` - Filter by author.
+* `tag` - Filter by tags.
 * `random` - When present, enable random ordering and ignore `sort`.
+* `limit` - Return at most `limit` packages.
 * `hide` - Hide content based on [Content Flags](/help/content_flags/).
-* `sort` - Sort by (`name`, `views`, `date`, `score`).
-* `order` - Sort ascending (`Asc`) or descending (`desc`).
+* `sort` - Sort by (`name`, `title`, `score`, `downloads`, `created_at`).
+* `order` - Sort ascending (`asc`) or descending (`desc`).
 * `protocol_version` - Only show packages supported by this Minetest protocol version.
+* `engine_version` - Only show packages supported by this Minetest engine version, eg: `5.3.0`.
+
+
+## Topic Queries
+
+Example:
+
+	/api/topics/?q=mobs
+
+Supported query parameters:
+
+* `q` - Query string.
+* `sort` - Sort by (`name`, `views`, `date`).
+* `order` - Sort ascending (`asc`) or descending (`desc`).
+* `show_added` - Show topics that have an existing package.
+* `show_discarded` - Show topics marked as discarded.
+* `limit` - Return at most `limit` topics.

@@ -79,7 +79,13 @@ class QueryBuilder:
 			to_order = None
 			if self.order_by is None or self.order_by == "score":
 				to_order = Package.score
-			elif self.order_by == "created_at":
+			elif self.order_by == "name":
+				to_order = Package.name
+			elif self.order_by == "title":
+				to_order = Package.title
+			elif self.order_by == "downloads":
+				to_order = Package.downloads
+			elif self.order_by == "created_at" or self.order_by == "date":
 				to_order = Package.created_at
 			else:
 				abort(400)
@@ -134,7 +140,7 @@ class QueryBuilder:
 			query = query.order_by(db.asc(ForumTopic.wip), db.asc(ForumTopic.name), db.asc(ForumTopic.title))
 		elif self.order_by == "views":
 			query = query.order_by(db.desc(ForumTopic.views))
-		elif self.order_by == "date":
+		elif self.order_by == "created_at" or self.order_by == "date":
 			query = query.order_by(db.asc(ForumTopic.created_at))
 
 		if self.search:
