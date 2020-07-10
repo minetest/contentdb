@@ -65,11 +65,6 @@ def list_all():
 	search = request.args.get("q")
 	type_name = request.args.get("type")
 
-	next_url = url_for("packages.list_all", type=type_name, q=search, page=query.next_num) \
-			if query.has_next else None
-	prev_url = url_for("packages.list_all", type=type_name, q=search, page=query.prev_num) \
-			if query.has_prev else None
-
 	authors = []
 	if search:
 		authors = User.query \
@@ -83,12 +78,17 @@ def list_all():
 		qb.show_discarded = True
 		topics = qb.buildTopicQuery().all()
 
+	def url_builder(page):
+		args = dict(request.args)
+		args["page"] = page
+		return url_for("packages.list_all", **args)
+
 	tags = Tag.query.all()
 	return render_template("packages/list.html", \
 			title=title, packages=query.items, topics=topics, \
 			query=search, tags=tags, type=type_name, \
-			authors = authors, \
-			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, packages_count=query.total)
+			authors=authors, packages_count=query.total, \
+			pagination=query, url_builder=url_builder)
 
 
 def getReleases(package):

@@ -1,0 +1,29 @@
+{% macro render_pagination(pagination, url_builder) %}
+	<ul class="pagination mt-4">
+		{% set prev_url = url_builder(pagination.prev_num) if pagination.has_prev %}
+		{% set next_url = url_builder(pagination.next_num) if pagination.has_next %}
+
+		<li class="page-item {% if not prev_url %}disabled{% endif %}">
+			<a class="page-link" {% if prev_url %}href="{{ prev_url }}"{% endif %}>&laquo;</a>
+		</li>
+
+		{%- for page in pagination.iter_pages() %}
+			{% if page %}
+				<li class="page-item {% if page == pagination.page %}active{% endif %}">
+					<a class="page-link"
+							href="{{ url_builder(page) }}">
+						{{ page }}
+					</a>
+				</li>
+			{% else %}
+				<li class="page-item disabled">
+					&ellipsis;
+				</li>
+			{% endif %}
+		{%- endfor %}
+
+		<li class="page-item {% if not next_url %}disabled{% endif %}">
+			<a class="page-link" {% if next_url %}href="{{ next_url }}"{% endif %}>&raquo;</a>
+		</li>
+	</div>
+{% endmacro %}
