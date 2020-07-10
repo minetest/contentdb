@@ -24,14 +24,16 @@ from app.models import *
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from app.utils import randomString, loginUser, rank_required
+from app.utils import randomString, loginUser, rank_required, nonEmptyOrNone
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.emails import sendVerifyEmail, sendEmailRaw
 from app.tasks.phpbbparser import getProfile
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
-	display_name = StringField("Display name", [Optional(), Length(2, 20)])
+	display_name = StringField("Display name", [Optional(), Length(2, 100)])
+	forums_username = StringField("Forums Username", [Optional(), Length(2, 50)])
+	github_username = StringField("GitHub Username", [Optional(), Length(2, 50)])
 	email = StringField("Email", [Optional(), Email()], filters = [lambda x: x or None])
 	website_url = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
 	donate_url = StringField("Donation URL", [Optional(), URL()], filters = [lambda x: x or None])
@@ -52,7 +54,7 @@ def profile(username):
 		abort(404)
 
 	form = None
-	if user.checkPerm(current_user, Permission.CHANGE_DNAME) or \
+	if user.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
 			user.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
 			user.checkPerm(current_user, Permission.CHANGE_RANK):
 		# Initialize form
@@ -61,8 +63,10 @@ def profile(username):
 		# Process valid POST
 		if request.method=="POST" and form.validate():
 			# Copy form fields to user_profile fields
-			if user.checkPerm(current_user, Permission.CHANGE_DNAME):
-				user.display_name = form["display_name"].data
+			if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
+				user.display_name = form.display_name.data
+				user.forums_username = nonEmptyOrNone(form.forums_username.data)
+				user.github_username = nonEmptyOrNone(form.github_username.data)
 
 			if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
 				user.website_url  = form["website_url"].data

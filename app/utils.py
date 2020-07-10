@@ -218,3 +218,9 @@ def isYes(val):
 
 def isNo(val):
 	return val and not isYes(val)
+
+def nonEmptyOrNone(str):
+	if str is None or str == "":
+		return None
+
+	return str

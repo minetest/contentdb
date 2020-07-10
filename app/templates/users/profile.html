@@ -162,8 +162,10 @@
 				<form action="" method="POST" class="form box-body" role="form">
 					{{ form.hidden_tag() }}
 
-					{% if user.checkPerm(current_user, "CHANGE_DNAME") %}
+					{% if user.checkPerm(current_user, "CHANGE_USERNAMES") %}
 						{{ render_field(form.display_name, tabindex=230) }}
+						{{ render_field(form.forums_username, tabindex=230) }}
+						{{ render_field(form.github_username, tabindex=230) }}
 					{% endif %}
 
 					{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}
