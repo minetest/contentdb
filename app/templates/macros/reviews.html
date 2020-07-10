@@ -1,4 +1,4 @@
-{% macro render_reviews(reviews, show_package_link=False) -%}
+{% macro render_reviews(reviews, current_user, show_package_link=False) -%}
 <ul class="comments mt-4 mb-0">
 	{% for review in reviews %}
 		<li class="row my-2 mx-0">
@@ -31,6 +31,13 @@
 						</div>
 
 						<div class="card-body">
+							{% if current_user == review.author %}
+								<a class="btn btn-primary btn-sm ml-1 float-right"
+										href="{{ review.package.getReviewURL() }}">
+									<i class="fas fa-edit"></i>
+								</a>
+							{% endif %}
+
 							<p>
 								<strong>{{ review.thread.title }}</strong>
 							</p>
@@ -64,7 +71,7 @@
 		<div class="card-header">
 			{{ _("Review") }}
 		</div>
-		<form method="post" action="{{ url_for('packages.review', author=package.author.username, name=package.name) }}" class="card-body">
+		<form method="post" action="{{ package.getReviewURL() }}" class="card-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<p>
 				{{ _("Do you recommend this %(type)s?", type=package.type.value | lower) }}
@@ -108,14 +115,12 @@
 				{{ _("Do you recommend this %(type)s?", type=package.type.value | lower) }}
 			</p>
 
-			{% set review_url = url_for('packages.review', author=package.author.username, name=package.name) %}
-
 			<div class="btn-group">
-				<a class="btn btn-primary" href="{{ url_for('user.login', r=review_url) }}">
+				<a class="btn btn-primary" href="{{ url_for('user.login', r=package.getReviewURL()) }}">
 					<i class="fas fa-thumbs-up mr-2"></i>
 					{{ _("Yes") }}
 				</a>
-				<a class="btn btn-primary" href="{{ url_for('user.login', r=review_url) }}">
+				<a class="btn btn-primary" href="{{ url_for('user.login', r=package.getReviewURL()) }}">
 					<i class="fas fa-thumbs-down mr-2"></i>
 					{{ _("No") }}
 				</a>

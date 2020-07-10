@@ -19,6 +19,14 @@ Threads
 		{% endif %}
 	{% endif %}
 
+	{% if current_user == thread.author and thread.review %}
+		<a class="btn btn-primary ml-1 float-right mr-2"
+				href="{{ thread.review.package.getReviewURL() }}">
+			<i class="fas fa-edit"></i>
+			{{ _("Edit Review") }}
+		</a>
+	{% endif %}
+
 	<h1>
 		{% if thread.review %}
 			{% if thread.review.recommends %}

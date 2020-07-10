@@ -53,7 +53,7 @@
 
 	<h2 class="my-3">{{ _("Recent Positive Reviews") }}</h2>
 	{% from "macros/reviews.html" import render_reviews %}
-	{{ render_reviews(reviews, True) }}
+	{{ render_reviews(reviews, current_user, True) }}
 
 	<div class="text-center mt-5">
 		<small>

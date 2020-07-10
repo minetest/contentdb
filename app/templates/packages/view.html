@@ -465,9 +465,7 @@
 		{% if current_user.is_authenticated %}
 			{% if has_review %}
 				<p>
-					<a
-							class="btn btn-primary"
-							href="{{ url_for('packages.review', author=package.author.username, name=package.name) }}">
+					<a class="btn btn-primary" href="{{ package.getReviewURL() }}">
 						{{ _("Edit Review") }}
 					</a>
 				</p>
@@ -477,7 +475,7 @@
 		{% else %}
 			{{ render_review_preview(package) }}
 		{% endif %}
-		{{ render_reviews(package.reviews) }}
+		{{ render_reviews(package.reviews, current_user) }}
 
 		{#
 			{% if current_user.is_authenticated or requests %}
