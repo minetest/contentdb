@@ -61,9 +61,11 @@
 				<ul class="navbar-nav ml-auto">
 					{% if current_user.is_authenticated %}
 						<li class="nav-item"><a class="nav-link" href="{{ url_for('notifications.list_all') }}">
-							<img src="/static/notification{% if current_user.notifications %}_alert{% endif %}.svg" />
+							<i class="fas fa-bell" {% if current_user.notifications %} style="color: yellow;"{% endif %}></i>
 						</a></li>
-						<li class="nav-item"><a class="nav-link" href="{{ url_for('packages.create_edit') }}">+</a></li>
+						<li class="nav-item"><a class="nav-link" href="{{ url_for('packages.create_edit') }}">
+							<i class="fas fa-plus"></i>
+						</a></li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle"
 								data-toggle="dropdown"
