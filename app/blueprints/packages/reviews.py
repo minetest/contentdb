@@ -27,7 +27,7 @@ from app.utils import is_package_page, addNotification
 
 @bp.route("/reviews/")
 def list_reviews():
-	reviews = PackageReview.query.order_by(db.desc(PackageReview.created_at)).limit(5).all()
+	reviews = PackageReview.query.order_by(db.desc(PackageReview.created_at)).all()
 	return render_template("packages/reviews_list.html", reviews=reviews)
 
 
