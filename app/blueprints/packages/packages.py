@@ -152,7 +152,7 @@ def view(package):
 		topic_error = "<br />".join(errors)
 
 
-	threads = Thread.query.filter_by(package_id=package.id)
+	threads = Thread.query.filter_by(package_id=package.id, review_id=None)
 	if not current_user.is_authenticated:
 		threads = threads.filter_by(private=False)
 	elif not current_user.rank.atLeast(UserRank.EDITOR) and not current_user == package.author:
