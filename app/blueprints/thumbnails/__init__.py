@@ -26,8 +26,11 @@ ALLOWED_RESOLUTIONS=[(100,67), (270,180), (350,233)]
 
 def mkdir(path):
 	assert path != "" and path is not None
-	if not os.path.isdir(path):
-		os.mkdir(path)
+	try:
+		if not os.path.isdir(path):
+			os.mkdir(path)
+	except FileExistsError:
+		pass
 
 
 def resize_and_crop(img_path, modified_path, size):
