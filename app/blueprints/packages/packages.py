@@ -101,8 +101,6 @@ def getReleases(package):
 @bp.route("/packages/<author>/<name>/")
 @is_package_page
 def view(package):
-	clearNotifications(package.getDetailsURL())
-
 	alternatives = None
 	if package.type == PackageType.MOD:
 		alternatives = Package.query \

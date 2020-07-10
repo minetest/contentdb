@@ -119,7 +119,6 @@ def view_editrequest_page(package, id):
 	if erequest is None or erequest.package != package:
 		abort(404)
 
-	clearNotifications(erequest.getURL())
 	return render_template("packages/editrequest_view.html", package=package, request=erequest)
 
 

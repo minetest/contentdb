@@ -92,3 +92,10 @@ def check_for_ban():
 		elif current_user.rank == models.UserRank.NOT_JOINED:
 			current_user.rank = models.UserRank.MEMBER
 			models.db.session.commit()
+
+from .utils import clearNotifications
+
+@app.before_request
+def check_for_notifications():
+	if current_user.is_authenticated:
+		clearNotifications(request.path)

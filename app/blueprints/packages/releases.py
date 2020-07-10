@@ -157,8 +157,6 @@ def edit_release(package, id):
 	if release is None or release.package != package:
 		abort(404)
 
-	clearNotifications(release.getEditURL())
-
 	canEdit	= package.checkPerm(current_user, Permission.MAKE_RELEASE)
 	canApprove = package.checkPerm(current_user, Permission.APPROVE_RELEASE)
 	if not (canEdit or canApprove):

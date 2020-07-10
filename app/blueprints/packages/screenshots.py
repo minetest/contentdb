@@ -81,8 +81,6 @@ def edit_screenshot(package, id):
 	if not (canEdit or canApprove):
 		return redirect(package.getDetailsURL())
 
-	clearNotifications(screenshot.getEditURL())
-
 	# Initial form class from post data and default data
 	form = EditScreenshotForm(formdata=request.form, obj=screenshot)
 

@@ -82,8 +82,6 @@ def unsubscribe(id):
 
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
 def view(id):
-	clearNotifications(url_for("threads.view", id=id))
-
 	thread = Thread.query.get(id)
 	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
 		abort(404)
