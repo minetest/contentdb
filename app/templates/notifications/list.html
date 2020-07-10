@@ -18,16 +18,16 @@ Notifications
 		{% for n in current_user.notifications %}
 			<a class="list-group-item list-group-item-action" href="{{ n.url }}">
 				<div class="row">
-					<div class="col-sm-auto">
+					<div class="col-sm">
 						{{ n.title}}
 					</div>
 
-					<div class="col-sm text-muted text-right">
+					<div class="col-sm-auto text-muted text-right">
+						<span class="pr-1">{{ n.causer.display_name }}</span>
 						<img
 							class="img-responsive user-photo img-thumbnail img-thumbnail-1"
 							style="max-height: 22px;"
 							src="{{ n.causer.getProfilePicURL() }}" />
-						<span class="pl-1">{{ n.causer.display_name }}</span>
 					</div>
 				</div>
 			</a>
