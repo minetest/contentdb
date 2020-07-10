@@ -41,6 +41,8 @@ def list_all():
 		pid = get_int_or_abort(pid)
 		query = query.filter_by(package_id=pid)
 
+	query = query.order_by(db.desc(Thread.created_at))
+
 	return render_template("threads/list.html", threads=query.all())
 
 

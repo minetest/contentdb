@@ -60,24 +60,31 @@
 {% endif %}
 {% endmacro %}
 
-{% macro render_threadlist(threads, list_group=False) -%}
-	{% if not list_group %}<ul>{% endif %}
-		{% for t in threads %}
-			<li {% if list_group %}class="list-group-item"{% endif %}>
-				{% if list_group %}
-					<a href="{{ url_for('threads.view', id=t.id) }}">
-						{% if t.private %}&#x1f512; {% endif %}
-						{{ t.title }}
-						by {{ t.author.display_name }}
-					</a>
-				{% else %}
-					{% if t.private %}&#x1f512; {% endif %}
-					<a href="{{ url_for('threads.view', id=t.id) }}">{{ t.title }}</a>
-					by {{ t.author.display_name }}
-				{% endif %}
-			</li>
-		{% else %}
-			<li {% if list_group %}class="list-group-item"{% endif %}><i>No threads found</i></li>
-		{% endfor %}
-	{% if not list_group %}</ul>{% endif %}
+{% macro render_threadlist(threads, compact=False) -%}
+	{% for t in threads %}
+		<a class="list-group-item list-group-item-action"
+				href="{{ url_for('threads.view', id=t.id) }}">
+			{% if not compact %}
+				<span class="text-muted float-right">
+					{{ t.created_at | datetime }}
+				</span>
+
+				<span class="mr-2">
+					{% if not t.review %}
+						<i class="fas fa-comment-alt" style="color:#666;"></i>
+					{% elif t.review.recommends %}
+						<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
+					{% else %}
+						<i class="fas fa-thumbs-down" style="color:#f66;"></i>
+					{% endif %}
+				</span>
+			{% endif %}
+
+			{% if t.private %}&#x1f512; {% endif %}
+			<strong>{{ t.title }}</strong>
+			by {{ t.author.display_name }}
+		</a>
+	{% else %}
+		<p>{% if list_group %}class="list-group-item"{% endif %}><i>No threads found</i></p>
+	{% endfor %}
 {% endmacro %}
