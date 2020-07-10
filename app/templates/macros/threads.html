@@ -86,7 +86,7 @@
 						by {{ t.author.display_name }}
 					</div>
 
-					<div class="col-sm">
+					<div class="col-sm-auto">
 						{% if t.package %}
 							{{ _("%(title)s by %(author)s",
 									title="<b>" | safe + t.package.title + "</b>" | safe,
@@ -94,7 +94,7 @@
 						{% endif %}
 					</div>
 
-					<div class="col-sm text-muted text-right">
+					<div class="col-sm-auto text-muted text-right">
 						{{ t.created_at | datetime }}
 					</div>
 				</div>
