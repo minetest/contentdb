@@ -469,6 +469,10 @@
 						{{ _("Edit Review") }}
 					</a>
 				</p>
+			{% elif current_user in package.maintainers %}
+				<p>
+					{{ _("You can't review your own package.") }}
+				</p>
 			{% else %}
 				{{ render_review_form(package, current_user) }}
 			{% endif %}
