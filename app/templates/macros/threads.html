@@ -72,6 +72,8 @@
 				<div class="row">
 					<div class="col-sm">
 						<span class="mr-3">
+							{% if not t.review and t.private %}
+								<i class="fas fa-lock" style="color:#ffac33;"></i>
 							{% if not t.review %}
 								<i class="fas fa-comment-alt" style="color:#666;"></i>
 							{% elif t.review.recommends %}
@@ -81,12 +83,11 @@
 							{% endif %}
 						</span>
 
-						{% if t.private %}&#x1f512; {% endif %}
 						<strong>{{ t.title }}</strong>
 						by {{ t.author.display_name }}
 					</div>
 
-					<div class="col-sm-auto">
+					<div class="col-sm">
 						{% if t.package %}
 							{{ _("%(title)s by %(author)s",
 									title="<b>" | safe + t.package.title + "</b>" | safe,
