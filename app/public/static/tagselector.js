@@ -17,7 +17,7 @@
 		err.show();
 	}
 
-	$.fn.selectSelector = function(source, name, select) {
+	$.fn.selectSelector = function(source, select) {
 		return this.each(function() {
 				var selector = $(this),
 					input = $('input[type=text]', this);
@@ -25,33 +25,28 @@
 				selector.click(function() { input.focus(); })
 					.delegate('.badge a', 'click', function() {
 						var id = $(this).parent().data("id");
-						for (var i = 0; i < source.length; i++) {
-							if (source[i].id == id) {
-								source[i].selected = null;
-							}
-						}
-						select.find("option[value=" + id + "]").attr("selected", null)
+						select.find("option[value=" + id + "]").attr("selected", false)
 						recreate();
 					});
 
-				function addTag(item) {
-					var tag = $('<span class="badge badge-pill badge-primary"/>')
-						.text(item.toString() + ' ')
-						.data("id", item.id)
+				function addTag(id, text) {
+					$('<span class="badge badge-pill badge-primary"/>')
+						.text(text + ' ')
+						.data("id", id)
 						.append('<a>x</a>')
 						.insertBefore(input);
 					input.attr("placeholder", null);
-					select.find("option[value=" + item.id + "]").attr("selected", "selected")
+					select.find("option[value='" + id + "']").attr("selected", "selected")
 					hide_error(input);
 				}
 
 				function recreate() {
 					selector.find("span").remove();
-					for (var i = 0; i < source.length; i++) {
-						if (source[i].selected) {
-							addTag(source[i]);
+					select.find("option").each(function() {
+						if (this.hasAttribute("selected")) {
+							addTag(this.getAttribute("value"), this.innerText);
 						}
-					}
+					});
 				}
 				recreate();
 
@@ -70,7 +65,7 @@
 						minLength: 0,
 						source: source,
 						select: function(event, ui) {
-							addTag(ui.item);
+							addTag(ui.item.id, ui.item.toString());
 							input.val("");
 							return false;
 						}
@@ -253,8 +248,7 @@
 				});
 			});
 
-			console.log(options);
-			ele.selectSelector(options, sel.attr("name"), sel);
+			ele.selectSelector(options, sel);
 		});
 
 		$(".metapackage_selector").each(function() {
