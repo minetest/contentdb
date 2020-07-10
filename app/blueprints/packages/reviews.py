@@ -100,4 +100,32 @@ def review(package):
 
 		return redirect(package.getDetailsURL())
 
-	return render_template("packages/review_create_edit.html", form=form, package=package)
+	return render_template("packages/review_create_edit.html", \
+			form=form, package=package, review=review)
+
+
+@bp.route("/packages/<author>/<name>/review/delete/", methods=["POST"])
+@login_required
+@is_package_page
+def delete_review(package):
+	review = PackageReview.query.filter_by(package=package, author=current_user).first()
+	if review is None or review.package != package:
+		abort(404)
+
+	thread = review.thread
+
+	reply = ThreadReply()
+	reply.thread  = thread
+	reply.author  = current_user
+	reply.comment = "_converted review into a thread_"
+	db.session.add(reply)
+
+	thread.review = None
+
+	notif_msg = "Deleted review '{}' on package {}, comments were kept as a thread".format(thread.title, package.title)
+	addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id))
+
+	db.session.delete(review)
+	db.session.commit()
+
+	return redirect(thread.getViewURL())

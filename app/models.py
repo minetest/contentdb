@@ -1080,14 +1080,14 @@ class Thread(db.Model):
 	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", \
 						backref=db.backref("watching", lazy=True))
 
+	def getViewURL(self):
+		return url_for("threads.view", id=self.id)
 
 	def getSubscribeURL(self):
-		return url_for("threads.subscribe",
-				id=self.id)
+		return url_for("threads.subscribe", id=self.id)
 
 	def getUnsubscribeURL(self):
-		return url_for("threads.unsubscribe",
-				id=self.id)
+		return url_for("threads.unsubscribe", id=self.id)
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
@@ -1135,10 +1135,12 @@ class PackageReview(db.Model):
 		return 1 if self.recommends else -1
 
 	def getEditURL(self):
-		return url_for("packages.edit_review",
+		return self.package.getReviewURL()
+
+	def getDeleteURL(self):
+		return url_for("packages.delete_review",
 				author=self.package.author.username,
-				name=self.package.name,
-				id=self.id)
+				name=self.package.name)
 
 
 
