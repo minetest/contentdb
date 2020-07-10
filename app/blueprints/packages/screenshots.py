@@ -60,9 +60,9 @@ def create_screenshot(package, id=None):
 			ss.approved = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
 			db.session.add(ss)
 
-			msg = "{}: Screenshot added {}" \
-					.format(package.title, ss.title)
-			addNotification(package.maintainers, current_user, msg, package.getDetailsURL())
+			msg = "Screenshot added {}" \
+					.format(ss.title)
+			addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)
 			db.session.commit()
 			return redirect(package.getDetailsURL())
 

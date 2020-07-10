@@ -92,8 +92,8 @@ def create_release(package):
 
 			makeVCSRelease.apply_async((rel.id, form["vcsLabel"].data), task_id=rel.task_id)
 
-			msg = "{}: Release {} created".format(package.title, rel.title)
-			addNotification(package.maintainers, current_user, msg, rel.getEditURL())
+			msg = "Release {} created".format(rel.title)
+			addNotification(package.maintainers, current_user, msg, rel.getEditURL(), package)
 			db.session.commit()
 
 			return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))
@@ -112,8 +112,8 @@ def create_release(package):
 
 				checkZipRelease.apply_async((rel.id, uploadedPath), task_id=rel.task_id)
 
-				msg = "{}: Release {} created".format(package.title, rel.title)
-				addNotification(package.maintainers, current_user, msg, rel.getEditURL())
+				msg = "Release {} created".format(rel.title)
+				addNotification(package.maintainers, current_user, msg, rel.getEditURL(), package)
 				db.session.commit()
 
 				return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))

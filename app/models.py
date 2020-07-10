@@ -240,23 +240,31 @@ class UserEmailVerification(db.Model):
 	user    = db.relationship("User", foreign_keys=[user_id])
 
 class Notification(db.Model):
-	id        = db.Column(db.Integer, primary_key=True)
-	user_id   = db.Column(db.Integer, db.ForeignKey("user.id"))
-	causer_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-	user      = db.relationship("User", foreign_keys=[user_id])
-	causer    = db.relationship("User", foreign_keys=[causer_id])
+	id         = db.Column(db.Integer, primary_key=True)
 
-	title     = db.Column(db.String(100), nullable=False)
-	url       = db.Column(db.String(200), nullable=True)
+	user_id    = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	user       = db.relationship("User", foreign_keys=[user_id])
 
-	def __init__(self, us, cau, titl, ur):
-		if len(titl) > 100:
+	causer_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	causer     = db.relationship("User", foreign_keys=[causer_id])
+
+	title      = db.Column(db.String(100), nullable=False)
+	url        = db.Column(db.String(200), nullable=True)
+
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
+	package    = db.relationship("Package", foreign_keys=[package_id])
+
+	created_at = db.Column(db.DateTime, nullable=True, default=datetime.datetime.utcnow)
+
+	def __init__(self, user, causer, title, url, package=None):
+		if len(title) > 100:
 			title = title[:99] + "…"
 
-		self.user   = us
-		self.causer = cau
-		self.title  = titl
-		self.url    = ur
+		self.user    = user
+		self.causer  = causer
+		self.title   = title
+		self.url     = url
+		self.package = package
 
 
 class License(db.Model):

@@ -97,11 +97,11 @@ def review(package):
 
 		notif_msg = None
 		if was_new:
-			notif_msg = "New review '{}' on package {}".format(form.title.data, package.title)
+			notif_msg = "New review '{}'".format(form.title.data)
 		else:
-			notif_msg = "Updated review '{}' on package {}".format(form.title.data, package.title)
+			notif_msg = "Updated review '{}'".format(form.title.data)
 
-		addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id))
+		addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id), package)
 
 		db.session.commit()
 
@@ -129,8 +129,8 @@ def delete_review(package):
 
 	thread.review = None
 
-	notif_msg = "Deleted review '{}' on package {}, comments were kept as a thread".format(thread.title, package.title)
-	addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id))
+	notif_msg = "Deleted review '{}', comments were kept as a thread".format(thread.title)
+	addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id), package)
 
 	db.session.delete(review)
 	db.session.commit()

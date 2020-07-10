@@ -18,12 +18,26 @@ Notifications
 		{% for n in current_user.notifications %}
 			<a class="list-group-item list-group-item-action" href="{{ n.url }}">
 				<div class="row">
+					{% if n.package %}
+
+						<div class="col-sm-auto text-muted">
+							<img
+								class="img-responsive"
+								style="max-height: 22px; max-width: 22px;"
+								src="{{ n.package.getThumbnailURL(1) }}" />
+
+							<span class="pl-2">
+								{{ n.package.title }}
+							</span>
+						</div>
+					{% endif %}
+
 					<div class="col-sm">
 						{{ n.title}}
 					</div>
 
 					<div class="col-sm-auto text-muted text-right">
-						<span class="pr-1">{{ n.causer.display_name }}</span>
+						<span class="pr-2">{{ n.causer.display_name }}</span>
 						<img
 							class="img-responsive user-photo img-thumbnail img-thumbnail-1"
 							style="max-height: 22px;"

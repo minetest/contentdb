@@ -266,7 +266,7 @@ def create_edit(author=None, name=None):
 
 		else:
 			addNotification(package.maintainers, current_user,
-					"{} edited".format(package.title), package.getDetailsURL())
+					"Edited {}".format(package.title), package.getDetailsURL(), package)
 
 		form.populate_obj(package) # copy to row
 
@@ -338,7 +338,7 @@ def approve(package):
 			s.approved = True
 
 		addNotification(package.maintainers, current_user,
-				"{} approved".format(package.title), package.getDetailsURL())
+				"Approved {}".format(package.title), package.getDetailsURL(), package)
 		db.session.commit()
 
 	return redirect(package.getDetailsURL())
@@ -360,7 +360,7 @@ def remove(package):
 
 		url = url_for("users.profile", username=package.author.username)
 		addNotification(package.maintainers, current_user,
-				"{} deleted".format(package.title), url)
+				"Deleted {}".format(package.title), url, package)
 		db.session.commit()
 
 		flash("Deleted package", "success")
@@ -374,7 +374,7 @@ def remove(package):
 		package.approved = False
 
 		addNotification(package.maintainers, current_user,
-				"{} unapproved".format(package.title), package.getDetailsURL())
+				"Unapproved {}".format(package.title), package.getDetailsURL(), package)
 		db.session.commit()
 
 		flash("Unapproved package", "success")
@@ -409,19 +409,19 @@ def edit_maintainers(package):
 		for user in users:
 			if not user in package.maintainers:
 				addNotification(user, current_user,
-						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL())
+						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
 
 		for user in package.maintainers:
 			if user != package.author and not user in users:
 				addNotification(user, current_user,
-						"Removed you as a maintainer of {}".format(package.title), package.getDetailsURL())
+						"Removed you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
 
 		package.maintainers.clear()
 		package.maintainers.extend(users)
 		package.maintainers.append(package.author)
 
 		addNotification(package.author, current_user,
-				"Edited {} maintainers".format(package.title), package.getDetailsURL())
+				"Edited {} maintainers".format(package.title), package.getDetailsURL(), package)
 
 		db.session.commit()
 
@@ -447,7 +447,7 @@ def remove_self_maintainers(package):
 		package.maintainers.remove(current_user)
 
 		addNotification(package.author, current_user,
-				"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL())
+				"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
 
 		db.session.commit()
 

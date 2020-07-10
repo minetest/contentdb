@@ -189,18 +189,18 @@ def is_package_page(f):
 	return decorated_function
 
 
-def addNotification(target, causer, title, url):
+def addNotification(target, causer, title, url, package=None):
 	try:
 		iter(target)
 		for x in target:
-			addNotification(x, causer, title, url)
+			addNotification(x, causer, title, url, package)
 		return
 	except TypeError:
 		pass
 
 	if target.rank.atLeast(UserRank.NEW_MEMBER) and target != causer:
-		Notification.query.filter_by(user=target, causer=causer, title=title, url=url).delete()
-		notif = Notification(target, causer, title, url)
+		Notification.query.filter_by(user=target, causer=causer, title=title, url=url, package=package).delete()
+		notif = Notification(target, causer, title, url, package)
 		db.session.add(notif)
 
 

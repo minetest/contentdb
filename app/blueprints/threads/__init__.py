@@ -106,14 +106,8 @@ def view(id):
 			if not current_user in thread.watchers:
 				thread.watchers.append(current_user)
 
-			msg = None
-			if thread.package is None:
-				msg = "New comment on '{}'".format(thread.title)
-			else:
-				msg = "New comment on '{}' on package {}".format(thread.title, thread.package.title)
-
-
-			addNotification(thread.watchers, current_user, msg, url_for("threads.view", id=thread.id))
+			msg = "New comment on '{}'".format(thread.title)
+			addNotification(thread.watchers, current_user, msg, url_for("threads.view", id=thread.id), thread.package)
 			db.session.commit()
 
 			return redirect(url_for("threads.view", id=id))
@@ -200,15 +194,12 @@ def new():
 		if is_review_thread:
 			package.review_thread = thread
 
-		notif_msg = None
+		notif_msg = "New thread '{}'".format(thread.title)
 		if package is not None:
-			notif_msg = "New thread '{}' on package {}".format(thread.title, package.title)
-			addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id))
-		else:
-			notif_msg = "New thread '{}'".format(thread.title)
+			addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id), package)
 
 		editors = User.query.filter(User.rank >= UserRank.EDITOR).all()
-		addNotification(editors, current_user, notif_msg, url_for("threads.view", id=thread.id))
+		addNotification(editors, current_user, notif_msg, url_for("threads.view", id=thread.id), package)
 
 		db.session.commit()
 

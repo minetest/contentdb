@@ -107,8 +107,8 @@ def admin_page():
 
 				makeVCSRelease.apply_async((rel.id, "master"), task_id=rel.task_id)
 
-				msg = "{}: Release {} created".format(package.title, rel.title)
-				addNotification(package.maintainers, current_user, msg, rel.getEditURL())
+				msg = "Release {} created".format(rel.title)
+				addNotification(package.maintainers, current_user, msg, rel.getEditURL(), package)
 				db.session.commit()
 
 		elif action == "cleanuploads":
