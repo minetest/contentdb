@@ -30,6 +30,7 @@ def claim():
 		username = ""
 	else:
 		method = request.args.get("method")
+
 		user = User.query.filter_by(forums_username=username).first()
 		if user and user.rank.atLeast(UserRank.NEW_MEMBER):
 			flash("User has already been claimed", "danger")
@@ -37,7 +38,7 @@ def claim():
 		elif method == "github":
 			if user is None or user.github_username is None:
 				flash("Unable to get Github username for user", "danger")
-				return redirect(url_for("users.claim"))
+				return redirect(url_for("users.claim", username=username))
 			else:
 				return redirect(url_for("github.start"))
 		elif user is None and request.method == "POST":

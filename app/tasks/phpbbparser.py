@@ -21,10 +21,10 @@ class Profile:
 		self.properties = {}
 
 	def set(self, key, value):
-		self.properties[key] = value
+		self.properties[key.lower()] = value
 
 	def get(self, key):
-		return self.properties[key] if key in self.properties else None
+		return self.properties.get(key.lower())
 
 	def __str__(self):
 		return self.username + "\n" + str(self.signature) + "\n" + str(self.properties)
@@ -39,7 +39,7 @@ def __extract_properties(profile, soup):
 	if len(imgs) == 1:
 		profile.avatar = imgs[0]["src"]
 
-	res = el.find_all("dl", class_ = "left-box details")
+	res = el.select("dl.left-box.details")
 	if len(res) != 1:
 		return None
 
@@ -85,12 +85,12 @@ def getProfile(url, username):
 	soup = BeautifulSoup(contents, "lxml")
 	if soup is None:
 		return None
-	else:
-		profile = Profile(username)
-		profile.signature = __extract_signature(soup)
-		__extract_properties(profile, soup)
 
-		return profile
+	profile = Profile(username)
+	profile.signature = __extract_signature(soup)
+	__extract_properties(profile, soup)
+
+	return profile
 
 
 regex_id = re.compile(r"^.*t=([0-9]+).*$")
