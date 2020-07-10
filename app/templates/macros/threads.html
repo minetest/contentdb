@@ -74,7 +74,7 @@
 						<span class="mr-3">
 							{% if not t.review and t.private %}
 								<i class="fas fa-lock" style="color:#ffac33;"></i>
-							{% if not t.review %}
+							{% elif not t.review %}
 								<i class="fas fa-comment-alt" style="color:#666;"></i>
 							{% elif t.review.recommends %}
 								<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
