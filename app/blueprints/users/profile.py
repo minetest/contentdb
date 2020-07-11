@@ -24,7 +24,7 @@ from app.models import *
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from app.utils import randomString, loginUser, rank_required, nonEmptyOrNone
+from app.utils import randomString, loginUser, rank_required, nonEmptyOrNone, addAuditLog
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.emails import sendVerifyEmail, sendEmailRaw
 from app.tasks.phpbbparser import getProfile
@@ -62,6 +62,10 @@ def profile(username):
 
 		# Process valid POST
 		if request.method=="POST" and form.validate():
+			severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
+			addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
+					url_for("users.profile", username=username))
+
 			# Copy form fields to user_profile fields
 			if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
 				user.display_name = form.display_name.data
@@ -75,7 +79,10 @@ def profile(username):
 			if user.checkPerm(current_user, Permission.CHANGE_RANK):
 				newRank = form["rank"].data
 				if current_user.rank.atLeast(newRank):
-					user.rank = form["rank"].data
+					if newRank != user.rank:
+						user.rank = form["rank"].data
+						msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
+						addAuditLog(AuditSeverity.MODERATION, current_user, msg, url_for("users.profile", username=username))
 				else:
 					flash("Can't promote a user to a rank higher than yourself!", "danger")
 
@@ -83,6 +90,9 @@ def profile(username):
 				newEmail = form["email"].data
 				if newEmail != user.email and newEmail.strip() != "":
 					token = randomString(32)
+
+					msg = "Changed email of {}".format(user.display_name)
+					addAuditLog(severity, current_user, msg, url_for("users.profile", username=username))
 
 					ver = UserEmailVerification()
 					ver.user  = user
@@ -158,6 +168,9 @@ def send_email(username):
 
 	form = SendEmailForm(request.form)
 	if form.validate_on_submit():
+		addAuditLog(AuditSeverity.MODERATION, current_user,
+				"Sent email to {}".format(user.display_name), url_for("users.profile", username=username))
+
 		text = form.text.data
 		html = render_markdown(text)
 		task = sendEmailRaw.delay([user.email], form.subject.data, text, html)

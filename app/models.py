@@ -1164,6 +1164,55 @@ class PackageReview(db.Model):
 				name=self.package.name)
 
 
+class AuditSeverity(enum.Enum):
+	NORMAL = 0 # Normal user changes
+	EDITOR = 1 # Editor changes
+	MODERATION = 2 # Destructive / moderator changes
+
+	def __str__(self):
+		return self.name
+
+	def getTitle(self):
+		return self.name.replace("_", " ").title()
+
+	@classmethod
+	def choices(cls):
+		return [(choice, choice.getTitle()) for choice in cls]
+
+	@classmethod
+	def coerce(cls, item):
+		return item if type(item) == AuditSeverity else AuditSeverity[item]
+
+
+
+class AuditLogEntry(db.Model):
+	id         = db.Column(db.Integer, primary_key=True)
+
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+	causer_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	causer     = db.relationship("User", foreign_keys=[causer_id])
+
+	severity   = db.Column(db.Enum(AuditSeverity), nullable=False)
+
+	title      = db.Column(db.String(100), nullable=False)
+	url        = db.Column(db.String(200), nullable=True)
+
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
+	package    = db.relationship("Package", foreign_keys=[package_id])
+
+	def __init__(self, causer, severity, title, url, package=None):
+		if len(title) > 100:
+			title = title[:99] + "…"
+
+		self.causer   = causer
+		self.severity = severity
+		self.title    = title
+		self.url      = url
+		self.package  = package
+
+
+
 
 REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com", \
 		"minetest.net", "dropboxusercontent.com", "4shared.com", \

@@ -21,7 +21,7 @@ bp = Blueprint("threads", __name__)
 
 from flask_user import *
 from app.models import *
-from app.utils import addNotification, clearNotifications, isYes
+from app.utils import addNotification, clearNotifications, isYes, addAuditLog
 
 import datetime
 
@@ -91,12 +91,18 @@ def set_lock(id):
 	if thread.locked is None:
 		abort(400)
 
-	db.session.commit()
-
+	msg = None
 	if thread.locked:
+		msg = "Locked thread '{}'".format(thread.title)
 		flash("Locked thread", "success")
 	else:
+		msg = "Unlocked thread '{}'".format(thread.title)
 		flash("Unlocked thread", "success")
+
+	addNotification(thread.watchers, current_user, msg, thread.getViewURL(), thread.package)
+	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.getViewURL(), thread.package)
+
+	db.session.commit()
 
 	return redirect(thread.getViewURL())
 
@@ -129,10 +135,10 @@ def view(id):
 				thread.watchers.append(current_user)
 
 			msg = "New comment on '{}'".format(thread.title)
-			addNotification(thread.watchers, current_user, msg, url_for("threads.view", id=thread.id), thread.package)
+			addNotification(thread.watchers, current_user, msg, thread.getViewURL(), thread.package)
 			db.session.commit()
 
-			return redirect(url_for("threads.view", id=id))
+			return redirect(thread.getViewURL())
 
 		else:
 			flash("Comment needs to be between 3 and 500 characters.")
@@ -175,7 +181,7 @@ def new():
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
 		flash("A review thread already exists!", "danger")
-		return redirect(url_for("threads.view", id=package.review_thread.id))
+		return redirect(package.review_thread.getViewURL())
 
 	elif not current_user.canOpenThreadRL():
 		flash("Please wait before opening another thread", "danger")
@@ -218,14 +224,14 @@ def new():
 
 		notif_msg = "New thread '{}'".format(thread.title)
 		if package is not None:
-			addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id), package)
+			addNotification(package.maintainers, current_user, notif_msg, thread.getViewURL(), package)
 
 		editors = User.query.filter(User.rank >= UserRank.EDITOR).all()
-		addNotification(editors, current_user, notif_msg, url_for("threads.view", id=thread.id), package)
+		addNotification(editors, current_user, notif_msg, thread.getViewURL(), package)
 
 		db.session.commit()
 
-		return redirect(url_for("threads.view", id=thread.id))
+		return redirect(thread.getViewURL())
 
 
 	return render_template("threads/new.html", form=form, allow_private_change=allow_change, package=package)

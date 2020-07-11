@@ -1,5 +1,5 @@
-# Content DB
-# Copyright (C) 2018  rubenwardy
+# ContentDB
+# Copyright (C) 2020  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -15,8 +15,16 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import Blueprint
+from flask import Blueprint, render_template, redirect, url_for
+from flask_user import current_user, login_required
+from app.models import db, AuditLogEntry, UserRank
+from app.utils import rank_required
 
-bp = Blueprint("admin", __name__)
+from . import bp
 
-from . import admin, licenseseditor, tagseditor, versioneditor, audit
+@bp.route("/admin/audit/")
+@login_required
+@rank_required(UserRank.MODERATOR)
+def audit():
+	log = AuditLogEntry.query.order_by(db.desc(AuditLogEntry.created_at)).all()
+	return render_template("admin/audit.html", log=log)

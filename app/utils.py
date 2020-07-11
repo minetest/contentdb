@@ -204,6 +204,11 @@ def addNotification(target, causer, title, url, package=None):
 		db.session.add(notif)
 
 
+def addAuditLog(severity, causer, title, url, package=None):
+	entry = AuditLogEntry(causer, severity, title, url, package)
+	db.session.add(entry)
+
+
 def clearNotifications(url):
 	if current_user.is_authenticated:
 		Notification.query.filter_by(user=current_user, url=url).delete()

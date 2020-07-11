@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block title %}
+Audit Log
+{% endblock %}
+
+{% block content %}
+	<h1>Audit Log</h1>
+
+	<div class="list-group mt-3">
+		{% for entry in log %}
+			<a class="list-group-item list-group-item-action" href="{{ entry.url }}">
+				<div class="row {% if entry.severity == entry.severity.NORMAL %}text-muted{% endif %}">
+					<div class="col-sm-auto text-center" style="width: 50px;">
+						{% if entry.severity == entry.severity.MODERATION %}
+							<i class="fas fa-exclamation-triangle" style="color: yellow;"></i>
+						{% elif entry.severity == entry.severity.EDITOR %}
+							<i class="fas fa-users" style="color: #537eac;"></i>
+						{% endif %}
+					</div>
+
+					<div class="col-sm-2 text-muted">
+						<img
+							class="img-responsive user-photo img-thumbnail img-thumbnail-1"
+							style="max-height: 22px;"
+							src="{{ entry.causer.getProfilePicURL() }}" />
+
+						<span class="pl-2">{{ entry.causer.display_name }}</span>
+					</div>
+
+					<div class="col-sm">
+						{{ entry.title}}
+					</div>
+
+					{% if entry.package %}
+						<div class="col-sm-auto text-muted">
+							<span class="pr-2">
+								{{ entry.package.title }}
+							</span>
+
+							<img
+								class="img-responsive"
+								style="max-height: 22px; max-width: 22px;"
+								src="{{ entry.package.getThumbnailURL(1) }}" />
+						</div>
+					{% endif %}
+
+
+					<div class="col-sm-auto text-muted">
+						{{ entry.created_at | datetime }}
+					</div>
+				</div>
+			</a>
+		{% else %}
+			<p class="list-group-item"><i>No audit log entires.</i></p>
+		{% endfor %}
+	</ul>
+{% endblock %}

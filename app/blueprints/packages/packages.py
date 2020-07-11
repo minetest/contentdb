@@ -265,8 +265,13 @@ def create_edit(author=None, name=None):
 			return redirect(url_for("packages.create_edit", author=author, name=name))
 
 		else:
+			msg = "Edited {}".format(package.title)
+
 			addNotification(package.maintainers, current_user,
-					"Edited {}".format(package.title), package.getDetailsURL(), package)
+					msg, package.getDetailsURL(), package)
+
+			severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
+			addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
 
 		form.populate_obj(package) # copy to row
 
@@ -337,8 +342,10 @@ def approve(package):
 		for s in screenshots:
 			s.approved = True
 
-		addNotification(package.maintainers, current_user,
-				"Approved {}".format(package.title), package.getDetailsURL(), package)
+		msg = "Approved {}".format(package.title)
+		addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)
+		severity = AuditSeverity.NORMAL if current_user == package.author else AuditSeverity.EDITOR
+		addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
 		db.session.commit()
 
 	return redirect(package.getDetailsURL())
@@ -359,8 +366,9 @@ def remove(package):
 		package.soft_deleted = True
 
 		url = url_for("users.profile", username=package.author.username)
-		addNotification(package.maintainers, current_user,
-				"Deleted {}".format(package.title), url, package)
+		msg = "Deleted {}".format(package.title)
+		addNotification(package.maintainers, current_user, msg, url, package)
+		addAuditLog(AuditSeverity.EDITOR, current_user, msg, url)
 		db.session.commit()
 
 		flash("Deleted package", "success")
@@ -373,8 +381,10 @@ def remove(package):
 
 		package.approved = False
 
-		addNotification(package.maintainers, current_user,
-				"Unapproved {}".format(package.title), package.getDetailsURL(), package)
+		msg = "Unapproved {}".format(package.title)
+		addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)
+		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.getDetailsURL(), package)
+
 		db.session.commit()
 
 		flash("Unapproved package", "success")
@@ -420,8 +430,10 @@ def edit_maintainers(package):
 		package.maintainers.extend(users)
 		package.maintainers.append(package.author)
 
-		addNotification(package.author, current_user,
-				"Edited {} maintainers".format(package.title), package.getDetailsURL(), package)
+		msg = "Edited {} maintainers".format(package.title)
+		addNotification(package.author, current_user, msg, package.getDetailsURL(), package)
+		severity = AuditSeverity.NORMAL if current_user == package.author else AuditSeverity.MODERATION
+		addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
 
 		db.session.commit()
 
