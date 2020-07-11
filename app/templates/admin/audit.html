@@ -9,7 +9,13 @@ Audit Log
 
 	<div class="list-group mt-3">
 		{% for entry in log %}
-			<a class="list-group-item list-group-item-action" href="{{ entry.url }}">
+			<a class="list-group-item list-group-item-action"
+				{% if entry.description %}
+					href="{{ url_for('admin.audit_view', id=entry.id) }}">
+				{% else %}
+					href="{{ entry.url }}">
+				{% endif %}
+
 				<div class="row {% if entry.severity == entry.severity.NORMAL %}text-muted{% endif %}">
 					<div class="col-sm-auto text-center" style="width: 50px;">
 						{% if entry.severity == entry.severity.MODERATION %}
@@ -30,6 +36,10 @@ Audit Log
 
 					<div class="col-sm">
 						{{ entry.title}}
+
+						{% if entry.description %}
+							<i class="fas fa-paperclip ml-3"></i>
+						{% endif %}
 					</div>
 
 					{% if entry.package %}
@@ -54,5 +64,5 @@ Audit Log
 		{% else %}
 			<p class="list-group-item"><i>No audit log entires.</i></p>
 		{% endfor %}
-	</ul>
+	</div>
 {% endblock %}

@@ -16,15 +16,22 @@
 
 
 from flask import Blueprint, render_template, redirect, url_for
-from flask_user import current_user, login_required
+from flask_user import current_user
 from app.models import db, AuditLogEntry, UserRank
 from app.utils import rank_required
 
 from . import bp
 
+
 @bp.route("/admin/audit/")
-@login_required
 @rank_required(UserRank.MODERATOR)
 def audit():
 	log = AuditLogEntry.query.order_by(db.desc(AuditLogEntry.created_at)).all()
 	return render_template("admin/audit.html", log=log)
+
+
+@bp.route("/admin/audit/<int:id>/")
+@rank_required(UserRank.MODERATOR)
+def audit_view(id):
+	entry = AuditLogEntry.query.get(id)
+	return render_template("admin/audit_view.html", entry=entry)

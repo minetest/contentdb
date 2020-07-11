@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ entry.title }}
+{% endblock %}
+
+{% block content %}
+	{% if entry.url %}
+		<a class="float-right btn btn-primary" href="{{ entry.url }}">View</a>
+	{% endif %}
+
+	<h1>{{ entry.title }}</h1>
+	<p class="text-muted mb-4">
+		{{ _("Caused by %(author)s.", author=entry.causer.display_name) }}
+	</p>
+
+	<pre><code>{{ entry.description }}</code></pre>
+
+{% endblock %}

@@ -204,8 +204,8 @@ def addNotification(target, causer, title, url, package=None):
 		db.session.add(notif)
 
 
-def addAuditLog(severity, causer, title, url, package=None):
-	entry = AuditLogEntry(causer, severity, title, url, package)
+def addAuditLog(severity, causer, title, url, package=None, description=None):
+	entry = AuditLogEntry(causer, severity, title, url, package, description)
 	db.session.add(entry)
 
 

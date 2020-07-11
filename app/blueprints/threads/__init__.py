@@ -107,6 +107,40 @@ def set_lock(id):
 	return redirect(thread.getViewURL())
 
 
+@bp.route("/threads/<int:id>/delete/", methods=["GET", "POST"])
+@login_required
+def delete_reply(id):
+	thread = Thread.query.get(id)
+	if thread is None:
+		abort(404)
+
+	reply_id = request.args.get("reply")
+	if reply_id is None:
+		abort(404)
+
+	reply = ThreadReply.query.get(reply_id)
+	if reply is None or reply.thread != thread:
+		abort(404)
+
+	if thread.replies[0] == reply:
+		flash("Cannot delete thread opening post!", "danger")
+		return redirect(thread.getViewURL())
+
+	if not thread.checkPerm(current_user, Permission.DELETE_REPLY):
+		abort(403)
+
+	if request.method == "GET":
+		return render_template("threads/delete_reply.html", thread=thread, reply=reply)
+
+	msg = "Deleted reply by {}".format(reply.author.display_name)
+	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
+
+	db.session.delete(reply)
+	db.session.commit()
+
+	return redirect(thread.getViewURL())
+
+
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
 def view(id):
 	thread = Thread.query.get(id)
@@ -151,6 +185,7 @@ class ThreadForm(FlaskForm):
 	comment = TextAreaField("Comment", [InputRequired(), Length(10, 500)])
 	private = BooleanField("Private")
 	submit  = SubmitField("Open Thread")
+
 
 @bp.route("/threads/new/", methods=["GET", "POST"])
 @login_required

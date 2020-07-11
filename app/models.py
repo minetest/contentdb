@@ -92,6 +92,7 @@ class Permission(enum.Enum):
 	CREATE_THREAD      = "CREATE_THREAD"
 	COMMENT_THREAD     = "COMMENT_THREAD"
 	LOCK_THREAD        = "LOCK_THREAD"
+	DELETE_REPLY       = "DELETE_REPLY"
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
 	TOPIC_DISCARD      = "TOPIC_DISCARD"
 	CREATE_TOKEN       = "CREATE_TOKEN"
@@ -1123,7 +1124,7 @@ class Thread(db.Model):
 		elif perm == Permission.COMMENT_THREAD:
 			return canSee and (not self.locked or user.rank.atLeast(UserRank.MODERATOR))
 
-		elif perm == Permission.LOCK_THREAD:
+		elif perm == Permission.LOCK_THREAD or perm == Permission.DELETE_REPLY:
 			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:
@@ -1201,7 +1202,9 @@ class AuditLogEntry(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
 	package    = db.relationship("Package", foreign_keys=[package_id])
 
-	def __init__(self, causer, severity, title, url, package=None):
+	description = db.Column(db.Text, nullable=True, default=None)
+
+	def __init__(self, causer, severity, title, url, package=None, description=None):
 		if len(title) > 100:
 			title = title[:99] + "…"
 
@@ -1210,6 +1213,7 @@ class AuditLogEntry(db.Model):
 		self.title    = title
 		self.url      = url
 		self.package  = package
+		self.description = description
 
 
 
