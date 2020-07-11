@@ -206,7 +206,7 @@ title: Ranks and Permissions
 		</tr>
 		<tr>
 			<td>Edit Comments</td>
-			<th>✓</th> <!-- new -->
+			<th></th> <!-- new -->
 			<th></th>
 			<th>✓</th> <!-- member -->
 			<th></th>
@@ -217,7 +217,7 @@ title: Ranks and Permissions
 			<th>✓</th> <!-- moderator -->
 			<th></th>
 			<th>✓</th> <!-- admin -->
-			<th>✓</th>
+			<th></th>
 		</tr>
 		<tr>
 			<td>Set Email</td>
