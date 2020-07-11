@@ -22,6 +22,13 @@
 				</div>
 
 				<div class="card-body">
+					{% if r.checkPerm(current_user, "DELETE_REPLY") %}
+						<a class="float-right btn btn-secondary btn-sm ml-2"
+								href="{{ url_for('threads.delete_reply', id=thread.id, reply=r.id) }}">
+							<i class="fas fa-trash"></i>
+						</a>
+					{% endif %}
+
 					{% if current_user == thread.author and thread.review and thread.replies[0] == r %}
 						<a class="float-right btn btn-primary btn-sm ml-2"
 								href="{{ thread.review.package.getReviewURL() }}">
@@ -31,13 +38,6 @@
 						<a class="float-right btn btn-primary btn-sm ml-2"
 								href="{{ url_for('threads.edit_reply', id=thread.id, reply=r.id) }}">
 							<i class="fas fa-edit"></i>
-						</a>
-					{% endif %}
-
-					{% if r.checkPerm(current_user, "DELETE_REPLY") %}
-						<a class="float-right btn btn-secondary btn-sm ml-2"
-								href="{{ url_for('threads.delete_reply', id=thread.id, reply=r.id) }}">
-							<i class="fas fa-trash"></i>
 						</a>
 					{% endif %}
 
