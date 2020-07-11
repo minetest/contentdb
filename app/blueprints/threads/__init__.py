@@ -141,6 +141,50 @@ def delete_reply(id):
 	return redirect(thread.getViewURL())
 
 
+
+
+class CommentForm(FlaskForm):
+	comment = TextAreaField("Comment", [InputRequired(), Length(10, 500)])
+	submit  = SubmitField("Comment")
+
+
+
+@bp.route("/threads/<int:id>/edit/", methods=["GET", "POST"])
+@login_required
+def edit_reply(id):
+	thread = Thread.query.get(id)
+	if thread is None:
+		abort(404)
+
+	reply_id = request.args.get("reply")
+	if reply_id is None:
+		abort(404)
+
+	reply = ThreadReply.query.get(reply_id)
+	if reply is None or reply.thread != thread:
+		abort(404)
+
+	if not reply.checkPerm(current_user, Permission.EDIT_REPLY):
+		abort(403)
+
+	form = CommentForm(formdata=request.form, obj=reply)
+	if request.method == "POST" and form.validate():
+		comment = form.comment.data
+
+		msg = "Edited reply by {}".format(reply.author.display_name)
+		severity = AuditSeverity.NORMAL if current_user == reply.author else AuditSeverity.MODERATION
+		addNotification(reply.author, current_user, msg, thread.getViewURL(), thread.package)
+		addAuditLog(severity, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
+
+		reply.comment = comment
+
+		db.session.commit()
+
+		return redirect(thread.getViewURL())
+
+	return render_template("threads/edit_reply.html", thread=thread, reply=reply, form=form)
+
+
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
 def view(id):
 	thread = Thread.query.get(id)

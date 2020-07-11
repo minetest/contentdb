@@ -93,6 +93,7 @@ class Permission(enum.Enum):
 	COMMENT_THREAD     = "COMMENT_THREAD"
 	LOCK_THREAD        = "LOCK_THREAD"
 	DELETE_REPLY       = "DELETE_REPLY"
+	EDIT_REPLY         = "EDIT_REPLY"
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
 	TOPIC_DISCARD      = "TOPIC_DISCARD"
 	CREATE_TOKEN       = "CREATE_TOKEN"
@@ -1146,7 +1147,11 @@ class ThreadReply(db.Model):
 		elif type(perm) != Permission:
 			raise Exception("Unknown permission given to ThreadReply.checkPerm()")
 
-		if perm == Permission.DELETE_REPLY:
+		if perm == Permission.EDIT_REPLY:
+			return (user == self.author and user.rank.atLeast(UserRank.MEMBER) and not self.thread.locked) or \
+					user.rank.atLeast(UserRank.ADMIN)
+
+		elif perm == Permission.DELETE_REPLY:
 			return user.rank.atLeast(UserRank.MODERATOR) and self.thread.replies[0] != self
 
 		else:
