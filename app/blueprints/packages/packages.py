@@ -257,6 +257,7 @@ def create_edit(author=None, name=None):
 
 			package = Package()
 			package.author = author
+			package.maintainers.append(author)
 			wasNew = True
 
 		elif package.approved and package.name != form.name.data and \
@@ -428,7 +429,8 @@ def edit_maintainers(package):
 
 		package.maintainers.clear()
 		package.maintainers.extend(users)
-		package.maintainers.append(package.author)
+		if package.author not in package.maintainers:
+			package.maintainers.append(package.author)
 
 		msg = "Edited {} maintainers".format(package.title)
 		addNotification(package.author, current_user, msg, package.getDetailsURL(), package)

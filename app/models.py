@@ -492,6 +492,8 @@ class Package(db.Model):
 		self.created_at = package.created_at
 		self.approved = package.approved
 
+		self.maintainers.append(self.author)
+
 		for e in PackagePropertyKey:
 			setattr(self, e.name, getattr(package, e.name))
 
