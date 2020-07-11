@@ -117,21 +117,22 @@
 		<div class="card-header">
 			{{ _("Review") }}
 		</div>
-		<div class="card-body">
+		<form method="post" action="{{ package.getReviewURL() }}" class="card-body">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<p>
 				{{ _("Do you recommend this %(type)s?", type=package.type.value | lower) }}
 			</p>
 
 			<div class="btn-group">
-				<a class="btn btn-primary" href="{{ url_for('user.login', r=package.getReviewURL()) }}">
+				<button class="btn btn-primary" name="recommends" value="yes">
 					<i class="fas fa-thumbs-up mr-2"></i>
 					{{ _("Yes") }}
-				</a>
-				<a class="btn btn-primary" href="{{ url_for('user.login', r=package.getReviewURL()) }}">
+				</button>
+				<button class="btn btn-primary" name="recommends" value="no">
 					<i class="fas fa-thumbs-down mr-2"></i>
 					{{ _("No") }}
-				</a>
+				</button>
 			</div>
-		</div>
+		</form>
 	</div>
 {% endmacro %}

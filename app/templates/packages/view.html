@@ -474,7 +474,7 @@
 					{{ _("You can't review your own package.") }}
 				</p>
 			{% else %}
-				{{ render_review_form(package, current_user) }}
+				{{ render_review_preview(package) }}
 			{% endif %}
 		{% else %}
 			{{ render_review_preview(package) }}
