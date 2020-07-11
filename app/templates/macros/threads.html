@@ -22,7 +22,7 @@
 				</div>
 
 				<div class="card-body">
-					{% if r != thread.replies[0] and thread.checkPerm(current_user, "DELETE_REPLY") %}
+					{% if r.checkPerm(current_user, "DELETE_REPLY") %}
 						<a class="float-right btn btn-secondary btn-sm"
 								href="{{ url_for('threads.delete_reply', id=thread.id, reply=r.id) }}">
 							<i class="fas fa-trash"></i>

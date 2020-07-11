@@ -126,7 +126,7 @@ def delete_reply(id):
 		flash("Cannot delete thread opening post!", "danger")
 		return redirect(thread.getViewURL())
 
-	if not thread.checkPerm(current_user, Permission.DELETE_REPLY):
+	if not reply.checkPerm(current_user, Permission.DELETE_REPLY):
 		abort(403)
 
 	if request.method == "GET":

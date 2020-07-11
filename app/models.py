@@ -1105,7 +1105,7 @@ class Thread(db.Model):
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
-			return not self.private
+			return perm == Permission.SEE_THREAD and not self.private
 
 		if type(perm) == str:
 			perm = Permission[perm]
@@ -1124,7 +1124,7 @@ class Thread(db.Model):
 		elif perm == Permission.COMMENT_THREAD:
 			return canSee and (not self.locked or user.rank.atLeast(UserRank.MODERATOR))
 
-		elif perm == Permission.LOCK_THREAD or perm == Permission.DELETE_REPLY:
+		elif perm == Permission.LOCK_THREAD:
 			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:
@@ -1136,6 +1136,21 @@ class ThreadReply(db.Model):
 	comment    = db.Column(db.String(500), nullable=False)
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return False
+
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to ThreadReply.checkPerm()")
+
+		if perm == Permission.DELETE_REPLY:
+			return user.rank.atLeast(UserRank.MODERATOR) and self.thread.replies[0] != self
+
+		else:
+			raise Exception("Permission {} is not related to threads".format(perm.name))
 
 
 class PackageReview(db.Model):
