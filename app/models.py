@@ -90,6 +90,8 @@ class Permission(enum.Enum):
 	EDIT_EDITREQUEST   = "EDIT_EDITREQUEST"
 	SEE_THREAD         = "SEE_THREAD"
 	CREATE_THREAD      = "CREATE_THREAD"
+	COMMENT_THREAD     = "COMMENT_THREAD"
+	LOCK_THREAD        = "LOCK_THREAD"
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
 	TOPIC_DISCARD      = "TOPIC_DISCARD"
 	CREATE_TOKEN       = "CREATE_TOKEN"
@@ -1075,12 +1077,14 @@ class Thread(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
 	package    = db.relationship("Package", foreign_keys=[package_id])
 
-	review_id = db.Column(db.Integer, db.ForeignKey("package_review.id"), nullable=True)
-	review    = db.relationship("PackageReview", foreign_keys=[review_id])
+	review_id  = db.Column(db.Integer, db.ForeignKey("package_review.id"), nullable=True)
+	review     = db.relationship("PackageReview", foreign_keys=[review_id])
 
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	title      = db.Column(db.String(100), nullable=False)
-	private    = db.Column(db.Boolean, server_default="0")
+	private    = db.Column(db.Boolean, server_default="0", nullable=False)
+
+	locked     = db.Column(db.Boolean, server_default="0", nullable=False)
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
@@ -1111,8 +1115,16 @@ class Thread(db.Model):
 		if self.package:
 			isMaintainer = isMaintainer or user in self.package.maintainers
 
+		canSee = not self.private or isMaintainer or user.rank.atLeast(UserRank.EDITOR)
+
 		if perm == Permission.SEE_THREAD:
-			return not self.private or isMaintainer or user.rank.atLeast(UserRank.EDITOR)
+			return canSee
+
+		elif perm == Permission.COMMENT_THREAD:
+			return canSee and (not self.locked or user.rank.atLeast(UserRank.MODERATOR))
+
+		elif perm == Permission.LOCK_THREAD:
+			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))

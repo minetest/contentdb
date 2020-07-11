@@ -21,7 +21,7 @@ bp = Blueprint("threads", __name__)
 
 from flask_user import *
 from app.models import *
-from app.utils import addNotification, clearNotifications
+from app.utils import addNotification, clearNotifications, isYes
 
 import datetime
 
@@ -60,7 +60,7 @@ def subscribe(id):
 		thread.watchers.append(current_user)
 		db.session.commit()
 
-	return redirect(url_for("threads.view", id=id))
+	return redirect(thread.getViewURL())
 
 
 @bp.route("/threads/<int:id>/unsubscribe/", methods=["POST"])
@@ -75,9 +75,30 @@ def unsubscribe(id):
 		thread.watchers.remove(current_user)
 		db.session.commit()
 	else:
-		flash("Not subscribed to thread", "success")
+		flash("Already not subscribed!", "success")
 
-	return redirect(url_for("threads.view", id=id))
+	return redirect(thread.getViewURL())
+
+
+@bp.route("/threads/<int:id>/set-lock/", methods=["POST"])
+@login_required
+def set_lock(id):
+	thread = Thread.query.get(id)
+	if thread is None or not thread.checkPerm(current_user, Permission.LOCK_THREAD):
+		abort(404)
+
+	thread.locked = isYes(request.args.get("lock"))
+	if thread.locked is None:
+		abort(400)
+
+	db.session.commit()
+
+	if thread.locked:
+		flash("Locked thread", "success")
+	else:
+		flash("Unlocked thread", "success")
+
+	return redirect(thread.getViewURL())
 
 
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
@@ -89,12 +110,13 @@ def view(id):
 	if current_user.is_authenticated and request.method == "POST":
 		comment = request.form["comment"]
 
+		if not thread.checkPerm(current_user, Permission.COMMENT_THREAD):
+			flash("You cannot comment on this thread", "danger")
+			return redirect(thread.getViewURL())
+
 		if not current_user.canCommentRL():
 			flash("Please wait before commenting again", "danger")
-			if package:
-				return redirect(package.getDetailsURL())
-			else:
-				return redirect(url_for("homepage.home"))
+			return redirect(thread.getViewURL())
 
 		if len(comment) <= 500 and len(comment) > 3:
 			reply = ThreadReply()

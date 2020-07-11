@@ -8,7 +8,7 @@
 				<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
 			</a>
 		</div>
-		<div class="col">
+		<div class="col pr-0">
 			<div class="card">
 				<div class="card-header">
 					<a class="author {{ r.author.rank.name }}"
@@ -30,6 +30,13 @@
 	{% endfor %}
 </ul>
 
+{% if thread.locked %}
+	<p class="my-0 py-4 text-center">
+		<i class="fas fa-lock mr-3"></i>
+		{{ _("This thread has been locked by a moderator.") }}
+	</p>
+{% endif %}
+
 {% if current_user.is_authenticated %}
 <div class="row mt-0 mb-4 comments mx-0">
 	<div class="col-md-1 p-1">
@@ -42,17 +49,26 @@
 				<a name="reply"></a>
 			</div>
 
-			{% if current_user.canCommentRL() %}
+			{% if not current_user.canCommentRL() %}
+				<div class="card-body">
+					<textarea class="form-control" readonly disabled>{{ _("Please wait before commenting again.") }}</textarea><br />
+					<input class="btn btn-primary" type="submit" disabled value="Comment" />
+				</div>
+			{% elif not thread.checkPerm(current_user, "COMMENT_THREAD") %}
+				<div class="card-body">
+					{% if thread.locked %}
+						<textarea class="form-control" readonly disabled>{{ _("This thread has been locked.") }}</textarea><br />
+					{% else %}
+						<textarea class="form-control" readonly disabled>{{ _("You don't have permission to post.") }}</textarea><br />
+					{% endif %}
+					<input class="btn btn-primary" type="submit" disabled value="Comment" />
+				</div>
+			{% else %}
 				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<textarea class="form-control markdown" required maxlength=500 name="comment"></textarea><br />
 					<input class="btn btn-primary" type="submit" value="Comment" />
 				</form>
-			{% else %}
-				<div class="card-body">
-					<textarea class="form-control" readonly disabled>Please wait before commenting again.</textarea><br />
-					<input class="btn btn-primary" type="submit" disabled value="Comment" />
-				</div>
 			{% endif %}
 		</div>
 	</div>
