@@ -80,12 +80,15 @@ def list_all():
 		qb.show_discarded = True
 		topics = qb.buildTopicQuery().all()
 
-	tags = Tag.query.all()
+	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
+  		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title))
+
+	selected_tags = set(qb.tags)
+
 	return render_template("packages/list.html", \
-			title=title, packages=query.items, topics=topics, \
-			query=search, tags=tags, type=type_name, \
-			authors=authors, packages_count=query.total, \
-			pagination=query)
+			title=title, packages=query.items, pagination=query, \
+			query=search, tags=tags, selected_tags=selected_tags, type=type_name, \
+			authors=authors, packages_count=query.total, topics=topics)
 
 
 def getReleases(package):

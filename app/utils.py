@@ -22,6 +22,7 @@ from .models import *
 from . import app
 import random, string, os, imghdr
 from urllib.parse import urljoin
+from werkzeug.datastructures import MultiDict
 
 # These are given to Jinja in template_filters.py
 
@@ -33,9 +34,26 @@ def abs_url(path):
 	return urljoin(app.config["BASE_URL"], path)
 
 def url_set_query(**kwargs):
-	args = dict(request.args)
-	args.update(kwargs)
-	return url_for(request.endpoint, **args)
+	args = MultiDict(request.args)
+
+	for key, value in kwargs.items():
+		if key == "_add":
+			for key2, value_to_add in value.items():
+				values = set(args.getlist(key2))
+				values.add(value_to_add)
+				args.setlist(key2, list(values))
+		elif key == "_remove":
+			for key2, value_to_remove in value.items():
+				values = set(args.getlist(key2))
+				values.discard(value_to_remove)
+				args.setlist(key2, list(values))
+		else:
+			args.setlist(key, [ value ])
+
+
+	dargs = dict(args.lists())
+
+	return url_for(request.endpoint, **dargs)
 
 def get_int_or_abort(v, default=None):
 	if v is None:
