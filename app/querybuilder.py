@@ -70,7 +70,7 @@ class QueryBuilder:
 			query = query.filter(Package.type.in_(self.types))
 
 		if self.search:
-			query = query.search(self.search, sort=True)
+			query = query.search(self.search, sort=self.order_by is None)
 
 		if self.random:
 			query = query.order_by(func.random())
@@ -78,7 +78,7 @@ class QueryBuilder:
 			to_order = None
 			if self.order_by is None and self.search:
 				pass
-			if self.order_by is None or self.order_by == "score":
+			elif self.order_by is None or self.order_by == "score":
 				to_order = Package.score
 			elif self.order_by == "name":
 				to_order = Package.name
@@ -91,14 +91,15 @@ class QueryBuilder:
 			else:
 				abort(400)
 
-			if self.order_dir == "asc":
-				to_order = db.asc(to_order)
-			elif self.order_dir == "desc":
-				to_order = db.desc(to_order)
-			else:
-				abort(400)
+			if to_order:
+				if self.order_dir == "asc":
+					to_order = db.asc(to_order)
+				elif self.order_dir == "desc":
+					to_order = db.desc(to_order)
+				else:
+					abort(400)
 
-			query = query.order_by(to_order)
+				query = query.order_by(to_order)
 
 		if self.author:
 			author = User.query.filter_by(username=self.author).first()

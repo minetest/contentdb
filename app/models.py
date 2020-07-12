@@ -340,7 +340,7 @@ provides = db.Table("provides",
     db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
 )
 
-tags = db.Table("tags",
+Tags = db.Table("tags",
     db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
     db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
@@ -472,7 +472,7 @@ class Package(db.Model):
 
 	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
-	tags = db.relationship("Tag", secondary=tags, lazy="select",
+	tags = db.relationship("Tag", secondary=Tags, lazy="select",
 			backref=db.backref("packages", lazy=True))
 
 	releases = db.relationship("PackageRelease", backref="package",
