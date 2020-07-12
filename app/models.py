@@ -758,6 +758,8 @@ class MetaPackage(db.Model):
 	name         = db.Column(db.String(100), unique=True, nullable=False)
 	dependencies = db.relationship("Dependency", backref="meta_package", lazy="dynamic")
 
+	mp_name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
+
 	def __init__(self, name=None):
 		self.name = name
 
