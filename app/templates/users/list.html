@@ -1,20 +1,59 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Users
+	{{ _("Users") }}
 {% endblock %}
 
 {% block content %}
-<ul class="userlist">
-	{% for user in users %}
-		<li>
-			<a href="{{ url_for('users.profile', username=user.username) }}" class="{{ user.rank }}">
-				{{ user.display_name }}
-			</a> -
-			{{ user.rank.getTitle() }}
-			{% if current_user.is_authenticated %}
-				- {{ user.packages.count() }} packages.
-			{% endif %}
+<h1>{{ _("Users") }}</h1>
+
+<div class="userlist list-group">
+	<div class="list-group-item">
+		<div class="row text-muted">
+			<div class="col-sm-2">
+				{{ _("Rank") }}
+			</div>
+
+			<span class="col-sm">
+				{{ _("Username") }}
+			</span>
+
+			<div class="col-sm-1 text-center">
+				{{ _("Packages") }}
+			</div>
+		</div>
+	</div>
+
+	{% for pair in users %}
+		{% set user = pair[0] %}
+		{% set count_pkgs = pair[1] %}
+
+		<a class="list-group-item list-group-item-action" href="{{ url_for('users.profile', username=user.username) }}">
+			<div class="row">
+				<div class="col-sm-2 {{ user.rank }}"
+						title="{{ _('Rank: %(rank)s.', rank=user.rank.getTitle()) }}">
+					{% if user.rank == user.rank.ADMIN %}
+						<i class="fas fa-user-cog mr-2"></i>
+					{% elif user.rank == user.rank.MODERATOR %}
+						<i class="fas fa-user-shield mr-2"></i>
+					{% elif user.rank == user.rank.EDITOR %}
+						<i class="fas fa-user-edit mr-2"></i>
+					{% else %}
+						<i class="fas fa-user mr-2"></i>
+					{% endif %}
+
+					{{ user.rank.getTitle() }}
+				</div>
+
+				<span class="col-sm {{ user.rank }}">
+					{{ user.display_name }}
+				</span>
+
+				<div class="col-sm-1 text-center">
+					<b>{{ count_pkgs }}</b>
+				</div>
+			</div>
+		</a>
 	{% endfor %}
-</ul>
+</div>
 {% endblock %}

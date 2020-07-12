@@ -81,7 +81,7 @@ def list_all():
 		topics = qb.buildTopicQuery().all()
 
 	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
-  		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title))
+  		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
 
 	selected_tags = set(qb.tags)
 

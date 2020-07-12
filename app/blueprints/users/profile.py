@@ -28,6 +28,7 @@ from app.utils import randomString, loginUser, rank_required, nonEmptyOrNone, ad
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.emails import sendVerifyEmail, sendEmailRaw
 from app.tasks.phpbbparser import getProfile
+from sqlalchemy import func
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
@@ -43,7 +44,11 @@ class UserProfileForm(FlaskForm):
 
 @bp.route("/users/", methods=["GET"])
 def list_all():
-	users = User.query.order_by(db.desc(User.rank), db.asc(User.display_name)).all()
+	users = db.session.query(User, func.count(Package.id)) \
+			.select_from(User).outerjoin(Package) \
+			.order_by(db.desc(User.rank), db.asc(User.display_name)) \
+			.group_by(User.id).all()
+
 	return render_template("users/list.html", users=users)
 
 
