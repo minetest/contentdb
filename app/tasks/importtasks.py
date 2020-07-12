@@ -139,6 +139,60 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 			.replace("Cloning into '" + gitDir + "'...", "") \
 			.strip())
 
+
+@celery.task(bind=True)
+def updateMetaFromRelease(self, id, path):
+	release = PackageRelease.query.get(id)
+	if release is None:
+		raise TaskError("No such release!")
+	elif release.package is None:
+		raise TaskError("No package attached to release")
+
+	temp = getTempDir()
+	try:
+		with ZipFile(path, 'r') as zip_ref:
+			zip_ref.extractall(temp)
+
+		try:
+			tree = build_tree(temp, expected_type=ContentType[release.package.type.name], \
+				author=release.package.author.username, name=release.package.name)
+
+			cache = {}
+			def getMetaPackages(names):
+				return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
+
+			provides = getMetaPackages(tree.fold("name"))
+
+			package = release.package
+			package.provides.clear()
+			package.provides.extend(provides)
+
+			for dep in package.dependencies:
+				if dep.meta_package:
+					db.session.delete(dep)
+
+			for meta in getMetaPackages(tree.fold("meta", "depends")):
+				db.session.add(Dependency(package, meta=meta, optional=False))
+
+			for meta in getMetaPackages(tree.fold("meta", "optional_depends")):
+				db.session.add(Dependency(package, meta=meta, optional=True))
+
+			db.session.commit()
+
+		except MinetestCheckError as err:
+			if "Fails validation" not in release.title:
+				release.title += " (Fails validation)"
+
+			release.task_id = self.request.id
+			release.approved = False
+			db.session.commit()
+
+			raise TaskError(str(err))
+
+	finally:
+		shutil.rmtree(temp)
+
+
 @celery.task()
 def getMeta(urlstr, author):
 	gitDir, _ = cloneRepo(urlstr, recursive=True)
@@ -248,6 +302,7 @@ def makeVCSRelease(id, branch):
 		return release.url
 	finally:
 		shutil.rmtree(gitDir)
+
 
 @celery.task()
 def importRepoScreenshot(id):

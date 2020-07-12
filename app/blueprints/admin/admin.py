@@ -21,7 +21,7 @@ import flask_menu as menu
 from . import bp
 from app.models import *
 from celery import uuid, group
-from app.tasks.importtasks import importRepoScreenshot, makeVCSRelease, checkZipRelease
+from app.tasks.importtasks import importRepoScreenshot, makeVCSRelease, checkZipRelease, updateMetaFromRelease
 from app.tasks.forumtasks  import importTopicList, checkAllForumAccounts
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -44,6 +44,21 @@ def admin_page():
 			for release in releases:
 				zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
 				tasks.append(checkZipRelease.s(release.id, zippath))
+
+			result = group(tasks).apply_async()
+
+			while not result.ready():
+				import time
+				time.sleep(0.1)
+
+			return redirect(url_for("todo.view"))
+		elif action == "reimportpackages":
+			tasks = []
+			for package in Package.query.filter_by(approved=True, soft_deleted=False).all():
+				release = package.releases.first()
+				if release:
+					zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
+					tasks.append(updateMetaFromRelease.s(release.id, zippath))
 
 			result = group(tasks).apply_async()
 

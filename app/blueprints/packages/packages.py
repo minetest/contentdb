@@ -23,7 +23,7 @@ from . import bp
 
 from app.models import *
 from app.querybuilder import QueryBuilder
-from app.tasks.importtasks import importRepoScreenshot
+from app.tasks.importtasks import importRepoScreenshot, updateMetaFromRelease
 from app.utils import *
 
 from flask_wtf import FlaskForm
@@ -32,6 +32,8 @@ from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from sqlalchemy import or_, func
 from sqlalchemy.orm import joinedload, subqueryload
+
+from celery import uuid
 
 
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
@@ -466,3 +468,31 @@ def remove_self_maintainers(package):
 		db.session.commit()
 
 	return redirect(package.getDetailsURL())
+
+
+@bp.route("/packages/<author>/<name>/import-meta/", methods=["POST"])
+@login_required
+@is_package_page
+def update_from_release(package):
+	if not package.checkPerm(current_user, Permission.REIMPORT_META):
+		flash("You don't have permission to reimport meta", "danger")
+		return redirect(package.getDetailsURL())
+
+	release = package.releases.first()
+	if not release:
+		flash("Release needed", "danger")
+		return redirect(package.getDetailsURL())
+
+	msg = "Updated meta from latest release"
+	addNotification(package.maintainers, current_user,
+			msg, package.getDetailsURL(), package)
+	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
+	addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
+
+	db.session.commit()
+
+	task_id = uuid()
+	zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
+	updateMetaFromRelease.apply_async((release.id, zippath), task_id=task_id)
+
+	return redirect(url_for("tasks.check", id=task_id, r=package.getEditURL()))

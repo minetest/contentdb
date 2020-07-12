@@ -80,6 +80,7 @@ class Permission(enum.Enum):
 	MAKE_RELEASE       = "MAKE_RELEASE"
 	DELETE_RELEASE     = "DELETE_RELEASE"
 	ADD_SCREENSHOTS    = "ADD_SCREENSHOTS"
+	REIMPORT_META      = "REIMPORT_META"
 	APPROVE_SCREENSHOT = "APPROVE_SCREENSHOT"
 	APPROVE_RELEASE    = "APPROVE_RELEASE"
 	APPROVE_NEW        = "APPROVE_NEW"
@@ -358,11 +359,12 @@ class Dependency(db.Model):
 	optional        = db.Column(db.Boolean, nullable=False, default=False)
 	__table_args__  = (db.UniqueConstraint("depender_id", "package_id", "meta_package_id", name="_dependency_uc"), )
 
-	def __init__(self, depender=None, package=None, meta=None):
+	def __init__(self, depender=None, package=None, meta=None, optional=False):
 		if depender is None:
 			return
 
 		self.depender = depender
+		self.optional = optional
 
 		packageProvided = package is not None
 		metaProvided = meta is not None
@@ -673,6 +675,10 @@ class Package(db.Model):
 		return url_for("packages.remove_self_maintainers",
 				author=self.author.username, name=self.name)
 
+	def getUpdateFromReleaseURL(self):
+		return url_for("packages.update_from_release",
+				author=self.author.username, name=self.name)
+
 	def getReviewURL(self):
 		return url_for('packages.review',
 				author=self.author.username, name=self.name)
@@ -705,7 +711,8 @@ class Package(db.Model):
 		elif perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
 			return isMaintainer
 
-		elif perm == Permission.EDIT_PACKAGE or perm == Permission.APPROVE_CHANGES or perm == Permission.APPROVE_RELEASE:
+		elif perm == Permission.EDIT_PACKAGE or perm == Permission.REIMPORT_META or \
+				perm == Permission.APPROVE_CHANGES or perm == Permission.APPROVE_RELEASE:
 			return isMaintainer and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
 		# Anyone can change the package name when not approved, but only editors when approved
