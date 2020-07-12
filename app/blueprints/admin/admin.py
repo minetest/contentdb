@@ -33,10 +33,12 @@ import datetime, os
 def admin_page():
 	if request.method == "POST":
 		action = request.form["action"]
+
 		if action == "delstuckreleases":
 			PackageRelease.query.filter(PackageRelease.task_id != None).delete()
 			db.session.commit()
 			return redirect(url_for("admin.admin_page"))
+
 		elif action == "checkreleases":
 			releases = PackageRelease.query.filter(PackageRelease.url.like("/uploads/%")).all()
 
@@ -52,6 +54,7 @@ def admin_page():
 				time.sleep(0.1)
 
 			return redirect(url_for("todo.view"))
+
 		elif action == "reimportpackages":
 			tasks = []
 			for package in Package.query.filter_by(approved=True, soft_deleted=False).all():
@@ -67,12 +70,15 @@ def admin_page():
 				time.sleep(0.1)
 
 			return redirect(url_for("todo.view"))
+
 		elif action == "importmodlist":
 			task = importTopicList.delay()
 			return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
+
 		elif action == "checkusers":
 			task = checkAllForumAccounts.delay()
 			return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
+
 		elif action == "importscreenshots":
 			packages = Package.query \
 				.filter_by(soft_deleted=False) \
@@ -83,6 +89,7 @@ def admin_page():
 				importRepoScreenshot.delay(package.id)
 
 			return redirect(url_for("admin.admin_page"))
+
 		elif action == "restore":
 			package = Package.query.get(request.form["package"])
 			if package is None:
@@ -91,40 +98,13 @@ def admin_page():
 				package.soft_deleted = False
 				db.session.commit()
 				return redirect(url_for("admin.admin_page"))
-		elif action == "modprovides":
-			packages = Package.query.filter_by(type=PackageType.MOD).all()
-			mpackage_cache = {}
-			for p in packages:
-				if len(p.provides) == 0:
-					p.provides.append(MetaPackage.GetOrCreate(p.name, mpackage_cache))
 
-			db.session.commit()
-			return redirect(url_for("admin.admin_page"))
 		elif action == "recalcscores":
 			for p in Package.query.all():
 				p.recalcScore()
 
 			db.session.commit()
 			return redirect(url_for("admin.admin_page"))
-		elif action == "vcsrelease":
-			for package in Package.query.filter(Package.repo.isnot(None)).all():
-				if package.releases.count() != 0:
-					continue
-
-				rel = PackageRelease()
-				rel.package  = package
-				rel.title    = datetime.date.today().isoformat()
-				rel.url      = ""
-				rel.task_id  = uuid()
-				rel.approved = True
-				db.session.add(rel)
-				db.session.commit()
-
-				makeVCSRelease.apply_async((rel.id, "master"), task_id=rel.task_id)
-
-				msg = "Release {} created".format(rel.title)
-				addNotification(package.maintainers, current_user, msg, rel.getEditURL(), package)
-				db.session.commit()
 
 		elif action == "cleanuploads":
 			upload_dir = app.config['UPLOAD_DIR']
