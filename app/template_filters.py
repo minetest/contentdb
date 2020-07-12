@@ -1,15 +1,14 @@
 from . import app
-from .utils import abs_url_for
+from .utils import abs_url_for, url_set_query
 from urllib.parse import urlparse
 
 @app.context_processor
 def inject_debug():
     return dict(debug=app.debug)
 
-
 @app.context_processor
 def inject_functions():
-    return dict(abs_url_for=abs_url_for)
+    return dict(abs_url_for=abs_url_for, url_set_query=url_set_query)
 
 @app.template_filter()
 def throw(err):

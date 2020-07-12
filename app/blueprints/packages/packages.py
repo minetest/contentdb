@@ -80,17 +80,12 @@ def list_all():
 		qb.show_discarded = True
 		topics = qb.buildTopicQuery().all()
 
-	def url_builder(page):
-		args = dict(request.args)
-		args["page"] = page
-		return url_for("packages.list_all", **args)
-
 	tags = Tag.query.all()
 	return render_template("packages/list.html", \
 			title=title, packages=query.items, topics=topics, \
 			query=search, tags=tags, type=type_name, \
 			authors=authors, packages_count=query.total, \
-			pagination=query, url_builder=url_builder)
+			pagination=query)
 
 
 def getReleases(package):

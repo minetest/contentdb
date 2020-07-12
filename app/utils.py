@@ -23,12 +23,19 @@ from . import app
 import random, string, os, imghdr
 from urllib.parse import urljoin
 
+# These are given to Jinja in template_filters.py
+
 def abs_url_for(path, **kwargs):
 	scheme = "https" if app.config["BASE_URL"][:5] == "https" else "http"
 	return url_for(path, _external=True, _scheme=scheme, **kwargs)
 
 def abs_url(path):
 	return urljoin(app.config["BASE_URL"], path)
+
+def url_set_query(**kwargs):
+	args = dict(request.args)
+	args.update(kwargs)
+	return url_for(request.endpoint, **args)
 
 def get_int_or_abort(v, default=None):
 	if v is None:
