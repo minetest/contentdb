@@ -200,7 +200,7 @@ class User(db.Model, UserMixin):
 		elif perm == Permission.CHANGE_RANK or perm == Permission.CHANGE_USERNAMES:
 			return user.rank.atLeast(UserRank.MODERATOR)
 		elif perm == Permission.CHANGE_EMAIL or perm == Permission.CHANGE_PROFILE_URLS:
-			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank))
+			return user == self or user.rank.atLeast(UserRank.ADMIN)
 		elif perm == Permission.CREATE_TOKEN:
 			if user == self:
 				return user.rank.atLeast(UserRank.MEMBER)
