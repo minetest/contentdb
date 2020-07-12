@@ -144,26 +144,38 @@ class PackageTreeNode:
 
 				self.children.append(child)
 
+	def getModNames(self):
+		return self.fold("name", type=ContentType.MOD)
 
-	def fold(self, attr, key=None, acc=None):
-		if acc is None:
-			acc = set()
+	# attr: Attribute name
+	# key: Key in attribute
+	# retval: Accumulator
+	# type: Filter to type
+	def fold(self, attr, key=None, retval=None, type=None):
+		if retval is None:
+			retval = set()
 
-		if self.meta is None:
-			return acc
-
-		at = getattr(self, attr)
-		value = at if key is None else at.get(key)
-
-		if isinstance(value, list):
-			acc |= set(value)
-		elif value is not None:
-			acc.add(value)
-
+		# Iterate through children
 		for child in self.children:
-			child.fold(attr, key, acc)
+			child.fold(attr, key, retval, type)
 
-		return acc
+		# Filter on type
+		if type and type != self.type:
+			return retval
+
+		# Get attribute
+		at = getattr(self, attr)
+		if not at:
+			return retval
+
+		# Get value
+		value = at if key is None else at.get(key)
+		if isinstance(value, list):
+			retval |= set(value)
+		elif value:
+			retval.add(value)
+
+		return retval
 
 	def get(self, key):
 		return self.meta.get(key)

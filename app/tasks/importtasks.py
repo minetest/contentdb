@@ -161,7 +161,7 @@ def updateMetaFromRelease(self, id, path):
 			def getMetaPackages(names):
 				return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
 
-			provides = getMetaPackages(tree.fold("name"))
+			provides = getMetaPackages(tree.getModNames())
 
 			package = release.package
 			package.provides.clear()
@@ -206,7 +206,7 @@ def getMeta(urlstr, author):
 
 	result = {}
 	result["name"] = tree.name
-	result["provides"] = tree.fold("name")
+	result["provides"] = tree.getModNames()
 	result["type"] = tree.type.name
 
 	for key in ["depends", "optional_depends"]:
