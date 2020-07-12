@@ -19,48 +19,45 @@
 		</p>
 	{% endif %}
 
-	<div class="row">
-		<div class="col-md-9">
-			{% from "macros/packagegridtile.html" import render_pkggrid %}
-			{{ render_pkggrid(packages) }}
+	<aside class="mb-5">
+		<p class="text-muted">Filter by tags</p>
 
+		{% for pair in tags %}
+			{% set count = pair[0] %}
+			{% set tag = pair[1] %}
 
-			{% from "macros/pagination.html" import render_pagination %}
-			{{ render_pagination(pagination, url_set_query) }}
+			{% if tag in selected_tags %}
+				<a class="badge badge-primary"
+						href="{{ url_set_query(page=1, _remove={ 'tag': tag.name }) }}">
 
+					{{ tag.title }}
+					({{ count }})
+				</a>
+			{% else %}
+				<a class="badge badge-secondary"
+						href="{{ url_set_query(page=1, _add={ 'tag': tag.name }) }}">
 
-			{% if topics %}
-				<h2 style="margin-top:2em;">More content from the forums</h2>
-
-				{% from "macros/topics.html" import render_topics %}
-				{{ render_topics(topics, current_user) }}
+					{{ tag.title }}
+					({{ count }})
+				</a>
 			{% endif %}
-		</div>
+		{% endfor %}
+	</aside>
 
-		<aside class="col-md-3">
-			<p class="text-muted">Filter by tags</p>
+	{% from "macros/packagegridtile.html" import render_pkggrid %}
+	{{ render_pkggrid(packages) }}
 
-			{% for pair in tags %}
-				{% set count = pair[0] %}
-				{% set tag = pair[1] %}
 
-				{% if tag in selected_tags %}
-					<a class="badge badge-primary"
-							href="{{ url_set_query(page=1, _remove={ 'tag': tag.name }) }}">
+	{% from "macros/pagination.html" import render_pagination %}
+	{{ render_pagination(pagination, url_set_query) }}
 
-						{{ tag.title }}
-						({{ count }})
-					</a>
-				{% else %}
-					<a class="badge badge-secondary"
-							href="{{ url_set_query(page=1, _add={ 'tag': tag.name }) }}">
 
-						{{ tag.title }}
-						({{ count }})
-					</a>
-				{% endif %}
-			{% endfor %}
-		</aside>
-	</div>
+	{% if topics %}
+		<h2 style="margin-top:2em;">More content from the forums</h2>
+
+		{% from "macros/topics.html" import render_topics %}
+		{{ render_topics(topics, current_user) }}
+	{% endif %}
+
 
 {% endblock %}
