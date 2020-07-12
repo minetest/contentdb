@@ -17,7 +17,7 @@
 
 from flask import Blueprint, render_template, redirect, url_for
 from flask_user import current_user, login_required
-from app.models import db
+from app.models import db, Notification
 
 bp = Blueprint("notifications", __name__)
 
@@ -29,6 +29,6 @@ def list_all():
 @bp.route("/notifications/clear/", methods=["POST"])
 @login_required
 def clear():
-	current_user.notifications.clear()
+	Notification.query.filter_by(user=current_user).delete()
 	db.session.commit()
 	return redirect(url_for("notifications.list_all"))
