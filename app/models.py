@@ -1101,10 +1101,11 @@ class Thread(db.Model):
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
-	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic")
+	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic", \
+			order_by=db.asc("thread_reply_id"))
 
 	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", \
-						backref=db.backref("watching", lazy=True))
+			backref=db.backref("watching", lazy=True))
 
 	def getViewURL(self):
 		return url_for("threads.view", id=self.id)

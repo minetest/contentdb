@@ -19,14 +19,14 @@
 				<div class="col pr-0">
 					<div class="card">
 						<div class="card-header">
-							<a class="author {{ reply.author.rank.name }}"
-									href="{{ url_for('users.profile', username=reply.author.username) }}">
-								{{ reply.author.display_name }}
+							<a class="author {{ review.author.rank.name }}"
+									href="{{ url_for('users.profile', username=review.author.username) }}">
+								{{ review.author.display_name }}
 							</a>
 
 							<a name="reply-{{ reply.id }}" class="text-muted float-right"
 									href="{{ url_for('threads.view', id=review.thread.id) }}#reply-{{ reply.id }}">
-								{{ reply.created_at | datetime }}
+								{{ review.created_at | datetime }}
 							</a>
 						</div>
 
