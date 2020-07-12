@@ -1,5 +1,4 @@
-from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag
-from .models import tags as Tags
+from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, Tags
 from .utils import isNo, isYes, get_int_or_abort
 from sqlalchemy.sql.expression import func
 from flask import abort
@@ -77,6 +76,8 @@ class QueryBuilder:
 			query = query.order_by(func.random())
 		else:
 			to_order = None
+			if self.order_by is None and self.search:
+				pass
 			if self.order_by is None or self.order_by == "score":
 				to_order = Package.score
 			elif self.order_by == "name":
