@@ -34,7 +34,7 @@ def packages():
 
 	pkgs = [package.getAsDictionaryShort(current_app.config["BASE_URL"], version=ver) \
 			for package in query.all()]
-	return jsonify(pkgs)
+	return jsonify([package for package in pkgs if package.get("release")])
 
 
 @bp.route("/api/scores/")
