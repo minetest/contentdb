@@ -27,7 +27,7 @@ from zipfile import ZipFile
 from app import app
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString
+from app.utils import randomString, getExtension
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from .minetestcheck.config import parse_conf
 
@@ -341,3 +341,27 @@ def importRepoScreenshot(id):
 
 	print("screenshot.png does not exist")
 	return None
+
+
+@celery.task(bind=True)
+def importForeignDownloads(self, id):
+	release = PackageRelease.query.get(id)
+	if release is None:
+		raise TaskError("No such release!")
+	elif release.package is None:
+		raise TaskError("No package attached to release")
+	elif not release.url.startswith("http"):
+		return
+
+	try:
+		ext = getExtension(release.url)
+		filename = randomString(10) + "." + ext
+		filepath = os.path.join(app.config["UPLOAD_DIR"], filename)
+		urllib.request.urlretrieve(release.url, filepath)
+
+		release.url = "/uploads/" + filename
+		db.session.commit()
+	except urllib.error.URLError:
+		release.task_id = self.request.id
+		release.approved = False
+		db.session.commit()
