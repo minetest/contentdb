@@ -99,6 +99,22 @@
 		</p>
 	{% endif %}
 
+
+	<h2 class="mt-5">Tag Packages</h2>
+
+	<p>
+		{{ total_to_tag }} / {{ total_packages }} packages don't have any tags.
+	</p>
+
+	<div class="progress my-4">
+		{% set perc = 100 * (total_packages - total_to_tag) / total_packages %}
+		<div class="progress-bar bg-success" role="progressbar"
+			style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+
+	<a class="btn btn-primary" href="{{ url_for('todo.tags') }}">View Tags</a>
+
+
 	<h2 class="mt-5">Unadded Topic List</h2>
 
 	{% if total_topics > 0 %}
@@ -119,5 +135,4 @@
 			The forum topic crawler needs to run at least once for this section to work.
 		</p>
 	{% endif %}
-
 {% endblock %}

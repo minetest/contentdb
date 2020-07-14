@@ -64,10 +64,14 @@ def view():
 			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
 			.count()
 
+	total_packages = Package.query.filter_by(approved=True, soft_deleted=False).count()
+	total_to_tag = Package.query.filter_by(approved=True, soft_deleted=False, tags=None).count()
+
 	return render_template("todo/list.html", title="Reports and Work Queue",
 		packages=packages, releases=releases, screenshots=screenshots,
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
-		topics_to_add=topics_to_add, total_topics=total_topics)
+		topics_to_add=topics_to_add, total_topics=total_topics, \
+		total_packages=total_packages, total_to_tag=total_to_tag)
 
 
 @bp.route("/todo/topics/")
@@ -105,7 +109,10 @@ def topics():
 @bp.route("/todo/tags/")
 @login_required
 def tags():
-	packages = Package.query.filter_by(approved=True, soft_deleted=False).all()
+	qb    = QueryBuilder(request.args)
+	qb.setSortIfNone("score", "desc")
+	query = qb.buildPackageQuery()
+
 	tags = Tag.query.order_by(db.asc(Tag.title)).all()
 
-	return render_template("todo/tags.html", packages=packages, tags=tags)
+	return render_template("todo/tags.html", packages=query.all(), tags=tags)
