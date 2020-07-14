@@ -19,80 +19,80 @@
 
 	$.fn.selectSelector = function(source, select) {
 		return this.each(function() {
-				var selector = $(this),
-					input = $('input[type=text]', this);
+			var selector = $(this),
+				input = $('input[type=text]', this);
 
-				selector.click(function() { input.focus(); })
-					.delegate('.badge a', 'click', function() {
-						var id = $(this).parent().data("id");
-						select.find("option[value=" + id + "]").attr("selected", false)
-						recreate();
-					});
+			selector.click(function() { input.focus(); })
+				.delegate('.badge a', 'click', function() {
+					var id = $(this).parent().data("id");
+					select.find("option[value=" + id + "]").attr("selected", false)
+					recreate();
+				});
 
-				function addTag(id, text) {
-					$('<span class="badge badge-pill badge-primary"/>')
-						.text(text + ' ')
-						.data("id", id)
-						.append('<a>x</a>')
-						.insertBefore(input);
-					input.attr("placeholder", null);
-					select.find("option[value='" + id + "']").attr("selected", "selected")
-					hide_error(input);
-				}
+			function addTag(id, text) {
+				$('<span class="badge badge-pill badge-primary"/>')
+					.text(text + ' ')
+					.data("id", id)
+					.append('<a>x</a>')
+					.insertBefore(input);
+				input.attr("placeholder", null);
+				select.find("option[value='" + id + "']").attr("selected", "selected")
+				hide_error(input);
+			}
 
-				function recreate() {
-					selector.find("span").remove();
-					select.find("option").each(function() {
-						if (this.hasAttribute("selected")) {
-							addTag(this.getAttribute("value"), this.innerText);
-						}
-					});
-				}
-				recreate();
-
-				input.focusout(function(e) {
-					var value = input.val().trim()
-					if (value != "") {
-						show_error(input, "Please select an existing tag, it;s not possible to add custom ones.");
+			function recreate() {
+				selector.find("span").remove();
+				select.find("option").each(function() {
+					if (this.hasAttribute("selected")) {
+						addTag(this.getAttribute("value"), this.innerText);
 					}
+				});
+			}
+			recreate();
+
+			input.focusout(function(e) {
+				var value = input.val().trim()
+				if (value != "") {
+					show_error(input, "Please select an existing tag, it;s not possible to add custom ones.");
+				}
+			})
+
+			input.keydown(function(e) {
+					if (e.keyCode === $.ui.keyCode.TAB && $(this).data('ui-autocomplete').menu.active)
+						e.preventDefault();
 				})
+				.autocomplete({
+					minLength: 0,
+					source: source,
+					select: function(event, ui) {
+						addTag(ui.item.id, ui.item.toString());
+						input.val("");
+						return false;
+					}
+				}).focus(function() {
+					// The following works only once.
+					// $(this).trigger('keydown.autocomplete');
+					// As suggested by digitalPBK, works multiple times
+					// $(this).data("autocomplete").search($(this).val());
+					// As noted by Jonny in his answer, with newer versions use uiAutocomplete
+					$(this).data("ui-autocomplete").search($(this).val());
+				});
 
-				input.keydown(function(e) {
-						if (e.keyCode === $.ui.keyCode.TAB && $(this).data('ui-autocomplete').menu.active)
-							e.preventDefault();
-					})
-					.autocomplete({
-						minLength: 0,
-						source: source,
-						select: function(event, ui) {
-							addTag(ui.item.id, ui.item.toString());
-							input.val("");
-							return false;
-						}
-					}).focus(function() {
-						// The following works only once.
-						// $(this).trigger('keydown.autocomplete');
-						// As suggested by digitalPBK, works multiple times
-						// $(this).data("autocomplete").search($(this).val());
-						// As noted by Jonny in his answer, with newer versions use uiAutocomplete
-						$(this).data("ui-autocomplete").search($(this).val());
-					});
+			input.data('ui-autocomplete')._renderItem = function(ul, item) {
+					return $('<li/>')
+						.data('item.autocomplete', item)
+						.append($('<a/>').text(item.toString()))
+						.appendTo(ul);
+				};
 
-				input.data('ui-autocomplete')._renderItem = function(ul, item) {
-						return $('<li/>')
-							.data('item.autocomplete', item)
-							.append($('<a/>').text(item.toString()))
-							.appendTo(ul);
-					};
-
-				input.data('ui-autocomplete')._resizeMenu = function(ul, item) {
-						var ul = this.menu.element;
-						ul.outerWidth(Math.max(
-							ul.width('').outerWidth(),
-							selector.outerWidth()
-						));
-					};
-			});
+			input.data('ui-autocomplete')._resizeMenu = function(ul, item) {
+					var ul = this.menu.element;
+					ul.outerWidth(Math.max(
+						ul.width('').outerWidth(),
+						selector.outerWidth()
+					));
+				};
+		});
 	}
 
 	$.fn.csvSelector = function(source, name, result, allowSlash) {

@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Tags
+{% endblock %}
+
+{% block content %}
+
+<style>
+	table {
+		width:auto;
+	}
+	td {
+		white-space:nowrap;
+	}
+	table td:last-child {
+		width: 100%;
+	}
+</style>
+
+<table class="table">
+	<tr>
+		<th>Package</th>
+		<th>Tags</th>
+	</tr>
+	{% for package in packages %}
+		<tr>
+			<td>
+				<a href="{{ package.getDetailsURL() }}">
+					{{ package.title }}
+				</a>
+
+				by {{ package.author.display_name }}
+			</td>
+			<td class="tags">
+				{% for tag in package.tags %}
+					<span class="badge badge-primary mr-1">{{ tag.title }}</span>
+				{% endfor %}
+				<a class="badge badge-secondary add-btn px-2" href="#">
+					<i class="fas fa-plus"></i>
+				</a>
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+
+<div class="modal">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title">{{ _("Edit tags") }}</h5>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<span aria-hidden="true">&times;</span>
+				</button>
+			</div>
+			<div class="modal-body">
+				<select name="tags" multiple>
+					{% for tag in tags %}
+						<option value="{{ tag.name }}">{{ tag.title }}</option>
+					{% endfor %}
+				</select>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Update</button>
+			</div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
+{% from "macros/forms.html" import form_scripts %}
+
+{% block scriptextra %}
+{{ form_scripts() }}
+
+<script>
+	$(".add-btn").click(function() {
+		const row = $(this).parent().parent()
+
+		$(".modal select option").removeAttr("selected");
+		$(".multichoice_selector").remove();
+
+		$(".modal .modal-body").prepend(`
+			<div class="multichoice_selector bulletselector form-control">
+				<input type="text" placeholder="Start typing to see suggestions">
+				<div class="clearboth"></div>
+			</div>
+		`);
+
+		$(".modal").modal("show");
+		$(".modal input").focus();
+		$(".multichoice_selector").each(function() {
+			var ele = $(this);
+			var sel = ele.parent().find("select");
+			sel.hide();
+
+			var options = [];
+			sel.find("option").each(function() {
+				var text = $(this).text();
+				options.push({
+					id: $(this).attr("value"),
+					value: text,
+					toString: function() { return text; },
+				});
+			});
+
+			ele.selectSelector(options, sel);
+		});
+	});
+
+</script>
+{% endblock %}

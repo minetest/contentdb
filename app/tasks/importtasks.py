@@ -299,6 +299,8 @@ def makeVCSRelease(id, branch):
 		release.approve(release.package.author)
 		db.session.commit()
 
+		updateMetaFromRelease.delay(release.id, destPath)
+
 		return release.url
 	finally:
 		shutil.rmtree(gitDir)

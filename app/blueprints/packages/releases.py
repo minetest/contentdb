@@ -22,7 +22,7 @@ from . import bp
 
 from app.rediscache import has_key, set_key, make_download_key
 from app.models import *
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease
+from app.tasks.importtasks import makeVCSRelease, checkZipRelease, updateMetaFromRelease
 from app.utils import *
 
 from celery import uuid
@@ -111,6 +111,7 @@ def create_release(package):
 				db.session.commit()
 
 				checkZipRelease.apply_async((rel.id, uploadedPath), task_id=rel.task_id)
+				updateMetaFromRelease.delay(rel.id, uploadedPath)
 
 				msg = "Release {} created".format(rel.title)
 				addNotification(package.maintainers, current_user, msg, rel.getEditURL(), package)
@@ -119,6 +120,7 @@ def create_release(package):
 				return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))
 
 	return render_template("packages/release_new.html", package=package, form=form)
+
 
 @bp.route("/packages/<author>/<name>/releases/<id>/download/")
 @is_package_page
@@ -148,6 +150,7 @@ def download_release(package, id):
 			db.session.commit()
 
 	return redirect(release.url, code=300)
+
 
 @bp.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
 @login_required

@@ -100,3 +100,12 @@ def topics():
 			topic_count=topic_count, query=qb.search, show_discarded=qb.show_discarded, \
 			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, \
 			n=num, sort_by=qb.order_by)
+
+
+@bp.route("/todo/tags/")
+@login_required
+def tags():
+	packages = Package.query.filter_by(approved=True, soft_deleted=False).all()
+	tags = Tag.query.order_by(db.asc(Tag.title)).all()
+
+	return render_template("todo/tags.html", packages=packages, tags=tags)
