@@ -16,6 +16,7 @@
 {% endif %}
 
 <div class="row mb-3">
+
 	<div class="col-sm-6">
 		<div class="card">
 			<h2 class="card-header">{{ user.display_name }}</h2>
@@ -192,6 +193,12 @@
 {% endif %}
 </div>
 
+{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.EDITOR)) %}
+<a class="float-right btn btn-sm btn-primary"
+		href="{{ url_for('todo.tags', author=user.username) }}">
+	View list of tags
+</a>
+{% endif %}
 
 <h2 class="my-3">{{ _("Packages") }}</h2>
 

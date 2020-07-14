@@ -6,21 +6,10 @@
 
 {% block content %}
 
-<style>
-	table {
-		width:auto;
-	}
-	td {
-		white-space:nowrap;
-	}
-	table td:last-child {
-		width: 100%;
-	}
-</style>
-
 <table class="table">
 	<tr>
 		<th>Package</th>
+		<th></th>
 		<th>Tags</th>
 	</tr>
 	{% for package in packages %}
@@ -31,6 +20,13 @@
 				</a>
 
 				by {{ package.author.display_name }}
+			</td>
+			<td>
+				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+					<a class="btn btn-link btn-sm py-0" href="{{ package.getEditURL() }}">
+						<i class="fas fa-edit"></i>
+					</a>
+				{% endif %}
 			</td>
 			<td class="tags">
 				{% for tag in package.tags %}
