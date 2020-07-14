@@ -78,7 +78,7 @@
 								aria-expanded="false">{{ current_user.display_name }}
 									<span class="caret"></span></a>
 
-							<ul class="dropdown-menu" role="menu">
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}">Profile</a>
 								</li>
