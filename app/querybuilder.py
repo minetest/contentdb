@@ -36,7 +36,7 @@ class QueryBuilder:
 		self.hide_nonfree = "nonfree" in hide_flags
 		self.limit  = 1 if self.lucky else None
 		self.order_by  = args.get("sort")
-		self.order_dir = args.get("order") or "asc"
+		self.order_dir = args.get("order") or "desc"
 
 		# Filters
 
@@ -53,7 +53,7 @@ class QueryBuilder:
 		if self.search is not None and self.search.strip() == "":
 			self.search = None
 
-	def setSortIfNone(self, name, dir="asc"):
+	def setSortIfNone(self, name, dir="desc"):
 		if self.order_by is None:
 			self.order_by = name
 			self.order_dir = dir
