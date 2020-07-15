@@ -1146,7 +1146,7 @@ class Thread(db.Model):
 class ThreadReply(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
-	comment    = db.Column(db.String(500), nullable=False)
+	comment    = db.Column(db.String(2000), nullable=False)
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 

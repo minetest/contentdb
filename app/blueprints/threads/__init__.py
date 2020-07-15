@@ -141,12 +141,9 @@ def delete_reply(id):
 	return redirect(thread.getViewURL())
 
 
-
-
 class CommentForm(FlaskForm):
-	comment = TextAreaField("Comment", [InputRequired(), Length(10, 500)])
+	comment = TextAreaField("Comment", [InputRequired(), Length(10, 2000)])
 	submit  = SubmitField("Comment")
-
 
 
 @bp.route("/threads/<int:id>/edit/", methods=["GET", "POST"])
@@ -226,7 +223,7 @@ def view(id):
 
 class ThreadForm(FlaskForm):
 	title	= StringField("Title", [InputRequired(), Length(3,100)])
-	comment = TextAreaField("Comment", [InputRequired(), Length(10, 500)])
+	comment = TextAreaField("Comment", [InputRequired(), Length(10, 2000)])
 	private = BooleanField("Private")
 	submit  = SubmitField("Open Thread")
 
