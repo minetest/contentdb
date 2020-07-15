@@ -24,7 +24,7 @@ class QueryBuilder:
 		tags = [Tag.query.filter_by(name=tname).first() for tname in tags]
 		tags = [tag for tag in tags if tag is not None]
 
-		# Hid
+		# Hide
 		hide_flags = args.getlist("hide")
 
 		self.title  = title

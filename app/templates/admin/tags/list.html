@@ -14,13 +14,39 @@
 	</p>
 
 	<div class="list-group">
+
+		<div class="list-group-item">
+			<div class="row text-muted">
+				<div class="col-sm">
+					{{ _("Name") }}
+				</div>
+
+				<span class="col-sm-1 text-center">
+					{{ _("Views") }}
+				</span>
+
+				<div class="col-sm-1 text-center">
+					{{ _("Packages") }}
+				</div>
+			</div>
+		</div>
+
 		{% for t in tags %}
 			<a class="list-group-item list-group-item-action"
 					href="{{ url_for('admin.create_edit_tag', name=t.name) }}">
-				<span class="float-right badge badge-primary badge-pill">
-					{{ t.packages | count }}
-				</span>
-				{{ t.title }}
+				<div class="row">
+					<div class="col-sm">
+						{{ t.title }}
+					</div>
+
+					<div class="col-sm-1 text-center">
+						{{ t.views }}
+					</div>
+
+					<div class="col-sm-1 text-center">
+						{{ t.packages | count }}
+					</div>
+				</div>
 			</a>
 		{% endfor %}
 	</div>

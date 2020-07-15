@@ -24,6 +24,7 @@ from . import bp
 from app.models import *
 from app.querybuilder import QueryBuilder
 from app.tasks.importtasks import importRepoScreenshot, updateMetaFromRelease
+from app.rediscache import has_key, set_key
 from app.utils import *
 
 from flask_wtf import FlaskForm
@@ -50,6 +51,19 @@ def list_all():
 			joinedload(Package.license), \
 			joinedload(Package.media_license), \
 			subqueryload(Package.tags))
+
+	edited = False
+	for tag in qb.tags:
+		edited = True
+		key = "tag-" + tag.name
+		if not has_key(key):
+			set_key(key, "true")
+			Tag.query.filter_by(id=tag.id).update({
+					"views": Tag.views + 1
+				})
+
+	if edited:
+		db.session.commit()
 
 	if qb.lucky:
 		package = query.first()

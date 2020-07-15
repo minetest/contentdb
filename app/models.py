@@ -804,11 +804,12 @@ class MetaPackage(db.Model):
 		return retval
 
 class Tag(db.Model):
-	id              = db.Column(db.Integer,    primary_key=True)
+	id              = db.Column(db.Integer, primary_key=True)
 	name            = db.Column(db.String(100), unique=True, nullable=False)
 	title           = db.Column(db.String(100), nullable=False)
-	backgroundColor = db.Column(db.String(6),   nullable=False)
-	textColor       = db.Column(db.String(6),   nullable=False)
+	backgroundColor = db.Column(db.String(6), nullable=False)
+	textColor       = db.Column(db.String(6), nullable=False)
+	views           = db.Column(db.Integer, nullable=False, default=0)
 
 	def __init__(self, title, backgroundColor="000000", textColor="ffffff"):
 		self.title           = title
