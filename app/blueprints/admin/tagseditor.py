@@ -25,8 +25,11 @@ from wtforms.validators import *
 from app.utils import rank_required
 
 @bp.route("/tags/")
-@rank_required(UserRank.MODERATOR)
+@login_required
 def tag_list():
+	if not Permission.EDIT_TAGS.check(current_user):
+		abort(403)
+
 	return render_template("admin/tags/list.html", tags=Tag.query.order_by(db.asc(Tag.title)).all())
 
 class TagForm(FlaskForm):
@@ -36,13 +39,16 @@ class TagForm(FlaskForm):
 
 @bp.route("/tags/new/", methods=["GET", "POST"])
 @bp.route("/tags/<name>/edit/", methods=["GET", "POST"])
-@rank_required(UserRank.MODERATOR)
+@login_required
 def create_edit_tag(name=None):
 	tag = None
 	if name is not None:
 		tag = Tag.query.filter_by(name=name).first()
 		if tag is None:
 			abort(404)
+
+	if not Permission.checkPerm(current_user, Permission.EDIT_TAGS if tag else Permission.CREATE_TAG):
+		abort(403)
 
 	form = TagForm(formdata=request.form, obj=tag)
 	if request.method == "POST" and form.validate():
@@ -52,6 +58,10 @@ def create_edit_tag(name=None):
 		else:
 			form.populate_obj(tag)
 		db.session.commit()
-		return redirect(url_for("admin.create_edit_tag", name=tag.name))
+
+		if Permission.EDIT_TAGS.check(current_user):
+			return redirect(url_for("admin.create_edit_tag", name=tag.name))
+		else:
+			return redirect(url_for("homepage.home"))
 
 	return render_template("admin/tags/edit.html", tag=tag, form=form)

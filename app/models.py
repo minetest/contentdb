@@ -84,6 +84,8 @@ class Permission(enum.Enum):
 	APPROVE_SCREENSHOT = "APPROVE_SCREENSHOT"
 	APPROVE_RELEASE    = "APPROVE_RELEASE"
 	APPROVE_NEW        = "APPROVE_NEW"
+	EDIT_TAGS          = "EDIT_TAGS"
+	CREATE_TAG         = "CREATE_TAG"
 	CHANGE_RELEASE_URL = "CHANGE_RELEASE_URL"
 	CHANGE_USERNAMES   = "CHANGE_USERNAMES"
 	CHANGE_RANK        = "CHANGE_RANK"
@@ -111,10 +113,21 @@ class Permission(enum.Enum):
 				self == Permission.APPROVE_CHANGES    or \
 				self == Permission.APPROVE_RELEASE    or \
 				self == Permission.APPROVE_SCREENSHOT or \
+				self == Permission.EDIT_TAGS or \
+				self == Permission.CREATE_TAG or \
 				self == Permission.SEE_THREAD:
 			return user.rank.atLeast(UserRank.EDITOR)
 		else:
 			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
+
+	@staticmethod
+	def checkPerm(user, perm):
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to Permission.check")
+
+		return perm.check(user)
 
 def display_name_default(context):
     return context.get_current_parameters()["username"]
