@@ -48,7 +48,7 @@
 					</a>
 				{% endif %}
 				{% for t in package.tags %}
-					<a class="badge badge-primary"
+					<a class="badge badge-primary" rel="nofollow"
 						href="{{ url_for('packages.list_all', tag=t.name) }}">{{ t.title }}</a>
 				{% endfor %}
 			</p>

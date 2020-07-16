@@ -27,14 +27,14 @@
 			{% set tag = pair[1] %}
 
 			{% if tag in selected_tags %}
-				<a class="badge badge-primary"
+				<a class="badge badge-primary" rel="nofollow"
 						href="{{ url_set_query(page=1, _remove={ 'tag': tag.name }) }}">
 
 					{{ tag.title }}
 					({{ count }})
 				</a>
 			{% else %}
-				<a class="badge badge-secondary"
+				<a class="badge badge-secondary" rel="nofollow"
 						href="{{ url_set_query(page=1, _add={ 'tag': tag.name }) }}">
 
 					{{ tag.title }}
