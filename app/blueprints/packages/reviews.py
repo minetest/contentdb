@@ -33,7 +33,7 @@ def list_reviews():
 
 class ReviewForm(FlaskForm):
 	title	= StringField("Title", [InputRequired(), Length(3,100)])
-	comment = TextAreaField("Comment", [InputRequired(), Length(10, 500)])
+	comment = TextAreaField("Comment", [InputRequired(), Length(10, 2000)])
 	recommends = RadioField("Private", [InputRequired()], choices=[("yes", "Yes"), ("no", "No")])
 	submit  = SubmitField("Save")
 
