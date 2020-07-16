@@ -52,18 +52,20 @@ def list_all():
 			joinedload(Package.media_license), \
 			subqueryload(Package.tags))
 
-	edited = False
-	for tag in qb.tags:
-		edited = True
-		key = "tag-" + tag.name
-		if not has_key(key):
-			set_key(key, "true")
-			Tag.query.filter_by(id=tag.id).update({
-					"views": Tag.views + 1
-				})
+	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
+	if ip is not None:
+		edited = False
+		for tag in qb.tags:
+			edited = True
+			key = "tag/{}/{}".format(ip, tag.name)
+			if not has_key(key):
+				set_key(key, "true")
+				Tag.query.filter_by(id=tag.id).update({
+						"views": Tag.views + 1
+					})
 
-	if edited:
-		db.session.commit()
+		if edited:
+			db.session.commit()
 
 	if qb.lucky:
 		package = query.first()
