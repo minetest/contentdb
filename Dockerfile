@@ -8,8 +8,8 @@ WORKDIR /home/cdb
 RUN mkdir /var/cdb
 RUN chown -R cdb:cdb /var/cdb
 
-COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+COPY requirements.lock.txt requirements.lock.txt
+RUN pip install -r requirements.lock.txt
 RUN pip install gunicorn
 
 COPY utils utils
