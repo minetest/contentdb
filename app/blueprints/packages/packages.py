@@ -53,7 +53,7 @@ def list_all():
 			subqueryload(Package.tags))
 
 	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
-	if ip is not None:
+	if ip is not None and not is_user_bot():
 		edited = False
 		for tag in qb.tags:
 			edited = True

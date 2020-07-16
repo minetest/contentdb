@@ -20,7 +20,7 @@ from flask_user import *
 from flask_login import login_user, logout_user
 from .models import *
 from . import app
-import random, string, os, imghdr
+import random, string, os, imghdr, user_agents
 from urllib.parse import urljoin
 from werkzeug.datastructures import MultiDict
 
@@ -63,6 +63,10 @@ def get_int_or_abort(v, default=None):
 		return int(v or default)
 	except ValueError:
 		abort(400)
+
+def is_user_bot():
+	user_agent = user_agents.parse(request.headers.get('User-Agent'))
+	return user_agent.is_bot
 
 def getExtension(filename):
 	return filename.rsplit(".", 1)[1].lower() if "." in filename else None

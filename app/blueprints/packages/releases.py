@@ -130,7 +130,7 @@ def download_release(package, id):
 		abort(404)
 
 	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
-	if ip is not None:
+	if ip is not None and not is_user_bot():
 		key = make_download_key(ip, release.package)
 		if not has_key(key):
 			set_key(key, "true")
