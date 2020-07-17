@@ -197,6 +197,12 @@ def download(package):
 		return redirect(release.getDownloadURL(), code=302)
 
 
+def makeLabel(obj):
+	if obj.description:
+		return "{}: {}".format(obj.title, obj.description)
+	else:
+		return obj.title
+
 class PackageForm(FlaskForm):
 	name             = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	title            = StringField("Title (Human-readable)", [InputRequired(), Length(3, 100)])
@@ -206,8 +212,8 @@ class PackageForm(FlaskForm):
 	license          = QuerySelectField("License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	media_license    = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	provides_str     = StringField("Provides (mods included in package)", [Optional()])
-	tags             = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
-	content_warnings = QuerySelectMultipleField('Content Warnings', query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
+	tags             = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
+	content_warnings = QuerySelectMultipleField('Content Warnings', query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)
 	harddep_str      = StringField("Hard Dependencies", [Optional()])
 	softdep_str      = StringField("Soft Dependencies", [Optional()])
 	repo             = StringField("VCS Repository URL", [Optional(), URL()], filters = [lambda x: x or None])

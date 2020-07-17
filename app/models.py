@@ -840,11 +840,11 @@ class ContentWarning(db.Model):
 		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
 
 
-
 class Tag(db.Model):
 	id              = db.Column(db.Integer, primary_key=True)
 	name            = db.Column(db.String(100), unique=True, nullable=False)
 	title           = db.Column(db.String(100), nullable=False)
+	description     = db.Column(db.String(500), nullable=True, default=None)
 	backgroundColor = db.Column(db.String(6), nullable=False)
 	textColor       = db.Column(db.String(6), nullable=False)
 	views           = db.Column(db.Integer, nullable=False, default=0)

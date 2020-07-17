@@ -14,11 +14,14 @@
 	</p>
 
 	<div class="list-group">
-
 		<div class="list-group-item">
 			<div class="row text-muted">
-				<div class="col-sm">
+				<div class="col-sm-2">
 					{{ _("Name") }}
+				</div>
+
+				<div class="col-sm">
+					{{ _("Description") }}
 				</div>
 
 				<span class="col-sm-1 text-center">
@@ -35,8 +38,12 @@
 			<a class="list-group-item list-group-item-action"
 					href="{{ url_for('admin.create_edit_tag', name=t.name) }}">
 				<div class="row">
-					<div class="col-sm">
+					<div class="col-sm-2">
 						{{ t.title }}
+					</div>
+
+					<div class="col-sm">
+						{{ t.description or "" }}
 					</div>
 
 					<div class="col-sm-1 text-center">

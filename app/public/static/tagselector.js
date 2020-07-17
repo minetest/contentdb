@@ -30,6 +30,11 @@
 				});
 
 			function addTag(id, text) {
+				const idx = text.indexOf(':');
+				if (idx > 0) {
+					text = text.substr(0, idx);
+				}
+
 				$('<span class="badge badge-pill badge-primary"/>')
 					.text(text + ' ')
 					.data("id", id)

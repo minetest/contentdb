@@ -17,6 +17,7 @@
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.title) }}
+		{{ render_field(form.description) }}
 		{% if tag %}
 			{{ render_field(form.name) }}
 		{% endif %}

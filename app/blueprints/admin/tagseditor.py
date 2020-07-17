@@ -33,9 +33,10 @@ def tag_list():
 	return render_template("admin/tags/list.html", tags=Tag.query.order_by(db.asc(Tag.title)).all())
 
 class TagForm(FlaskForm):
-	title	 = StringField("Title", [InputRequired(), Length(3,100)])
-	name     = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	submit   = SubmitField("Save")
+	title	    = StringField("Title", [InputRequired(), Length(3,100)])
+	description = TextAreaField("Description", [InputRequired(), Length(0, 500)])
+	name        = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	submit      = SubmitField("Save")
 
 @bp.route("/tags/new/", methods=["GET", "POST"])
 @bp.route("/tags/<name>/edit/", methods=["GET", "POST"])
@@ -54,6 +55,7 @@ def create_edit_tag(name=None):
 	if request.method == "POST" and form.validate():
 		if tag is None:
 			tag = Tag(form.title.data)
+			tag.description = form.description.data
 			db.session.add(tag)
 		else:
 			form.populate_obj(tag)
