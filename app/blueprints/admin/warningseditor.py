@@ -31,8 +31,8 @@ def warning_list():
 
 class WarningForm(FlaskForm):
 	title	    = StringField("Title", [InputRequired(), Length(3,100)])
+	description = TextAreaField("Description", [Optional(), Length(0, 500)])
 	name        = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	description = TextAreaField("Description", [InputRequired(), Length(0, 500)])
 	submit      = SubmitField("Save")
 
 @bp.route("/admin/warnings/new/", methods=["GET", "POST"])
