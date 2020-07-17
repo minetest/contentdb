@@ -8,19 +8,18 @@ your client to use new flags.
 
 * `nonfree` - can be used to hide packages which do not qualify as
 	'free software', as defined by the Free Software Foundation.
-* A content rating, given below.
+* A content warning, given below.
+* `android_default` - meta-flag that filters out any content with a content warning.
+* `desktop_default` - meta-flag that doesn't filter anything out for now.
 
+## Warnings
 
-## Ratings
+Packages with mature content will be tagged with a content warning based
+on the content type.
 
-Content ratings aren't currently supported by ContentDB.
-Instead, mature content isn't allowed at all for now.
-
-In the future, more mature content will be allowed but labelled with
-content ratings which may contain the following:
-
-* android_default - meta-rating which includes gore and drugs.
-* desktop_default - meta-rating which won't include anything for now.
-* gore - more than just blood
-* drugs
-* swearing
+* `bad_language` - swearing.
+* `drugs` - drugs or alcohol.
+* `gambling`
+* `gore` - blood, etc.
+* `horror` - shocking and scary content.
+* `violence` - non-cartoon violence.

@@ -1,4 +1,4 @@
-from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, Tags
+from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, Tags, ContentWarning
 from .utils import isNo, isYes, get_int_or_abort
 from sqlalchemy.sql.expression import func
 from flask import abort
@@ -27,16 +27,20 @@ class QueryBuilder:
 		# Hide
 		hide_flags = args.getlist("hide")
 
+
 		self.title  = title
 		self.types  = types
 		self.tags   = tags
 
 		self.random = "random" in args
 		self.lucky  = "lucky" in args
-		self.hide_nonfree = "nonfree" in hide_flags
 		self.limit  = 1 if self.lucky else None
 		self.order_by  = args.get("sort")
 		self.order_dir = args.get("order") or "desc"
+
+		self.hide_nonfree = "nonfree" in hide_flags
+		self.hide_flags = set(hide_flags)
+		self.hide_flags.discard("nonfree")
 
 		# Filters
 
@@ -111,6 +115,14 @@ class QueryBuilder:
 
 		for tag in self.tags:
 			query = query.filter(Package.tags.any(Tag.id == tag.id))
+
+		if "android_default" in self.hide_flags:
+			query = query.filter(~ Package.content_warnings.any())
+		else:
+			for flag in self.hide_flags:
+				warning = ContentWarning.query.filter_by(name=flag).first()
+				if warning:
+					query = query.filter(~ Package.content_warnings.any(ContentWarning.id == warning.id))
 
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))
