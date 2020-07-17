@@ -30,7 +30,14 @@ def tag_list():
 	if not Permission.EDIT_TAGS.check(current_user):
 		abort(403)
 
-	return render_template("admin/tags/list.html", tags=Tag.query.order_by(db.asc(Tag.title)).all())
+	query = Tag.query
+
+	if request.args.get("sort") == "views":
+		query = query.order_by(db.desc(Tag.views))
+	else:
+		query = query.order_by(db.asc(Tag.title))
+
+	return render_template("admin/tags/list.html", tags=query.all())
 
 class TagForm(FlaskForm):
 	title	    = StringField("Title", [InputRequired(), Length(3,100)])

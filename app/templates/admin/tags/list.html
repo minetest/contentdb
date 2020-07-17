@@ -9,6 +9,12 @@
 
 	<h1>{{ _("Tags") }}</h1>
 
+	<p class="float-right">
+		Sort by:
+		<a href="{{ url_set_query(sort='name') }}">Name</a> |
+		<a href="{{ url_set_query(sort='views') }}">Views</a>
+	</p>
+
 	<p>
 		Also see <a href="/help/package_tags/">Package Tags</a>.
 	</p>
