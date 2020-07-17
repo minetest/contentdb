@@ -47,6 +47,13 @@
 						{{ package_warning }}
 					</a>
 				{% endif %}
+				{% for warning in package.content_warnings %}
+					<a class="badge badge-warning" rel="nofollow" href="/help/content_flags/"
+							title="{{ warning.description }}">
+						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
+						{{ warning.title }}
+					</a>
+				{% endfor %}
 				{% for t in package.tags %}
 					<a class="badge badge-primary" rel="nofollow"
 						href="{{ url_for('packages.list_all', tag=t.name) }}">{{ t.title }}</a>

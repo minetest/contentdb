@@ -66,6 +66,7 @@
 			</div>
 			{{ render_field(form.short_desc, class_="pkg_meta") }}
 			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
+			{{ render_multiselect_field(form.content_warnings, class_="pkg_meta") }}
 			<div class="pkg_meta row">
 				{{ render_field(form.license, class_="not_txp col-sm-6") }}
 				{{ render_field(form.media_license, class_="col-sm-6") }}

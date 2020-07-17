@@ -358,6 +358,11 @@ Tags = db.Table("tags",
     db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
+ContentWarnings = db.Table("content_warnings",
+    db.Column("content_warning_id", db.Integer, db.ForeignKey("content_warning.id"), primary_key=True),
+    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+)
+
 maintainers = db.Table("maintainers",
     db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
     db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
@@ -486,6 +491,9 @@ class Package(db.Model):
 	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
 	tags = db.relationship("Tag", secondary=Tags, lazy="select",
+			backref=db.backref("packages", lazy=True))
+
+	content_warnings = db.relationship("ContentWarning", secondary=ContentWarnings, lazy="select",
 			backref=db.backref("packages", lazy=True))
 
 	releases = db.relationship("PackageRelease", backref="package",
@@ -815,6 +823,23 @@ class MetaPackage(db.Model):
 			retval.append(MetaPackage.GetOrCreate(x, cache))
 
 		return retval
+
+
+class ContentWarning(db.Model):
+	id              = db.Column(db.Integer, primary_key=True)
+	name            = db.Column(db.String(100), unique=True, nullable=False)
+	title           = db.Column(db.String(100), nullable=False)
+	description     = db.Column(db.String(500), nullable=False)
+
+	def __init__(self, title, description=""):
+		self.title       = title
+		self.description = description
+
+		import re
+		regex = re.compile("[^a-z_]")
+		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
+
+
 
 class Tag(db.Model):
 	id              = db.Column(db.Integer, primary_key=True)
