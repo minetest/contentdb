@@ -23,6 +23,13 @@
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 
 
+	<a href="{{ url_for('packages.list_all', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Recently Added") }}</h2>
+	{{ render_pkggrid(new) }}
+
+
 	<a href="{{ url_for('packages.list_all', sort='last_release', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
@@ -51,19 +58,13 @@
 	{{ render_pkggrid(pop_txp) }}
 
 
-	<a href="{{ url_for('packages.list_all', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
-		{{ _("See more") }}
-	</a>
-	<h2 class="my-3">{{ _("Recently Added") }}</h2>
-	{{ render_pkggrid(new) }}
-
-
 	<a href="{{ url_for('packages.list_reviews') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Recent Positive Reviews") }}</h2>
 	{% from "macros/reviews.html" import render_reviews %}
 	{{ render_reviews(reviews, current_user, True) }}
+
 
 	<div class="text-center mt-5">
 		<small>

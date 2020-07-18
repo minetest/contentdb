@@ -26,8 +26,8 @@ def home():
 	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
 			.filter_by(soft_deleted=False, approved=True) \
 			.order_by(db.desc(PackageRelease.releaseDate)) \
-			.limit(8).all()
-	updated = updated[:4]
+			.limit(20).all()
+	updated = updated[:8]
 
 	reviews = PackageReview.query.filter_by(recommends=True).order_by(db.desc(PackageReview.created_at)).limit(5).all()
 
