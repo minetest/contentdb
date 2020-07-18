@@ -23,7 +23,7 @@
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 
 
-	<a href="{{ url_for('packages.list_all', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Recently Added") }}</h2>

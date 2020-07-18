@@ -367,7 +367,8 @@ def approve(package):
 
 	else:
 		package.approved = True
-		package.approved_at = datetime.datetime.now()
+		if not package.approved_at:
+			package.approved_at = datetime.datetime.now()
 
 		screenshots = PackageScreenshot.query.filter_by(package=package, approved=False).all()
 		for s in screenshots:

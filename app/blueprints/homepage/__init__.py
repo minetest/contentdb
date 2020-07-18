@@ -18,7 +18,7 @@ def home():
 	query   = Package.query.filter_by(approved=True, soft_deleted=False)
 	count   = query.count()
 
-	new     = join(query.order_by(db.desc(Package.created_at))).limit(8).all()
+	new     = join(query.order_by(db.desc(Package.approved_at))).limit(8).all()
 	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
 	pop_gam = join(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(4).all()
 	pop_txp = join(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(4).all()
