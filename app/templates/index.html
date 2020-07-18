@@ -64,6 +64,7 @@
 		{% set tag = pair[1] %}
 
 		<a class="btn btn-sm btn-secondary m-1" rel="nofollow"
+				title="{{ tag.description or '' }}"
 				href="{{ url_for('packages.list_all', tag=tag.name) }}">
 			{{ tag.title }}
 			<span class="badge badge-pill badge-light ml-1">{{ count }}</span>

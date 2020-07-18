@@ -56,7 +56,10 @@
 				{% endfor %}
 				{% for t in package.tags %}
 					<a class="badge badge-primary" rel="nofollow"
-						href="{{ url_for('packages.list_all', tag=t.name) }}">{{ t.title }}</a>
+							title="{{ t.description or '' }}"
+							href="{{ url_for('packages.list_all', tag=t.name) }}">
+						{{ t.title }}
+					</a>
 				{% endfor %}
 			</p>
 
