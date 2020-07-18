@@ -457,6 +457,7 @@ class Package(db.Model):
 	desc         = db.Column(db.UnicodeText, nullable=True)
 	type         = db.Column(db.Enum(PackageType))
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+	approved_at  = db.Column(db.DateTime, nullable=True, default=None)
 
 	name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
 

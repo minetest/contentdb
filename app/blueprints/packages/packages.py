@@ -301,7 +301,7 @@ def create_edit(author=None, name=None):
 
 		form.populate_obj(package) # copy to row
 
-		if package.type== PackageType.TXP:
+		if package.type == PackageType.TXP:
 			package.license = package.media_license
 
 		mpackage_cache = {}
@@ -367,6 +367,7 @@ def approve(package):
 
 	else:
 		package.approved = True
+		package.approved_at = datetime.datetime.now()
 
 		screenshots = PackageScreenshot.query.filter_by(package=package, approved=False).all()
 		for s in screenshots:

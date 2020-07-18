@@ -66,7 +66,7 @@ Supported query parameters:
 * `random` - When present, enable random ordering and ignore `sort`.
 * `limit` - Return at most `limit` packages.
 * `hide` - Hide content based on [Content Flags](/help/content_flags/).
-* `sort` - Sort by (`name`, `title`, `score`, `downloads`, `created_at`).
+* `sort` - Sort by (`name`, `title`, `score`, `downloads`, `created_at`, `last_release`).
 * `order` - Sort ascending (`asc`) or descending (`desc`).
 * `protocol_version` - Only show packages supported by this Minetest protocol version.
 * `engine_version` - Only show packages supported by this Minetest engine version, eg: `5.3.0`.

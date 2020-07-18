@@ -69,7 +69,12 @@ class QueryBuilder:
 		return MinetestRelease.get(self.minetest_version, self.protocol_version)
 
 	def buildPackageQuery(self):
-		query = Package.query.filter_by(soft_deleted=False, approved=True)
+		query = None
+		if self.order_by == "last_release":
+			query = db.session.query(Package).select_from(PackageRelease).join(Package) \
+				.filter_by(soft_deleted=False, approved=True)
+		else:
+			query = Package.query.filter_by(soft_deleted=False, approved=True)
 
 		if len(self.types) > 0:
 			query = query.filter(Package.type.in_(self.types))
@@ -93,6 +98,8 @@ class QueryBuilder:
 				to_order = Package.downloads
 			elif self.order_by == "created_at" or self.order_by == "date":
 				to_order = Package.created_at
+			elif self.order_by == "last_release":
+				to_order = PackageRelease.releaseDate
 			else:
 				abort(400)
 
