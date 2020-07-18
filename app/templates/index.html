@@ -58,6 +58,20 @@
 	{{ render_pkggrid(pop_txp) }}
 
 
+	<h2 class="my-3">{{ _("Search by Tags") }}</h2>
+	{% for pair in tags %}
+		{% set count = pair[0] %}
+		{% set tag = pair[1] %}
+
+		<a class="btn btn-sm btn-secondary m-1" rel="nofollow"
+				href="{{ url_for('packages.list_all', tag=tag.name) }}">
+			{{ tag.title }}
+			<span class="badge badge-pill badge-light ml-1">{{ count }}</span>
+		</a>
+	{% endfor %}
+	<div class="clearfix mb-4"></div>
+
+
 	<a href="{{ url_for('packages.list_reviews') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>

@@ -34,5 +34,8 @@ def home():
 	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 
-	return render_template("index.html", count=count, downloads=downloads, \
+	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
+		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
+
+	return render_template("index.html", count=count, downloads=downloads, tags=tags, \
 			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, reviews=reviews)
