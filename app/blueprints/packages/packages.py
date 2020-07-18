@@ -96,8 +96,9 @@ def list_all():
 		qb.show_discarded = True
 		topics = qb.buildTopicQuery().all()
 
-	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
-  		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
+	tags_query = db.session.query(func.count(Tags.c.tag_id), Tag) \
+  		.select_from(Tag).join(Tags).join(Package).group_by(Tag.id).order_by(db.asc(Tag.title))
+	tags = qb.filterPackageQuery(tags_query).all()
 
 	selected_tags = set(qb.tags)
 

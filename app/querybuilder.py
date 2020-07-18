@@ -76,44 +76,11 @@ class QueryBuilder:
 		else:
 			query = Package.query.filter_by(soft_deleted=False, approved=True)
 
+		return self.filterPackageQuery(self.orderPackageQuery(query))
+
+	def filterPackageQuery(self, query):
 		if len(self.types) > 0:
 			query = query.filter(Package.type.in_(self.types))
-
-		if self.search:
-			query = query.search(self.search, sort=self.order_by is None)
-
-		if self.random:
-			query = query.order_by(func.random())
-		else:
-			to_order = None
-			if self.order_by is None and self.search:
-				pass
-			elif self.order_by is None or self.order_by == "score":
-				to_order = Package.score
-			elif self.order_by == "name":
-				to_order = Package.name
-			elif self.order_by == "title":
-				to_order = Package.title
-			elif self.order_by == "downloads":
-				to_order = Package.downloads
-			elif self.order_by == "created_at" or self.order_by == "date":
-				to_order = Package.created_at
-			elif self.order_by == "approved_at" or self.order_by == "date":
-				to_order = Package.approved_at
-			elif self.order_by == "last_release":
-				to_order = PackageRelease.releaseDate
-			else:
-				abort(400)
-
-			if to_order:
-				if self.order_dir == "asc":
-					to_order = db.asc(to_order)
-				elif self.order_dir == "desc":
-					to_order = db.desc(to_order)
-				else:
-					abort(400)
-
-				query = query.order_by(to_order)
 
 		if self.author:
 			author = User.query.filter_by(username=self.author).first()
@@ -147,6 +114,46 @@ class QueryBuilder:
 
 		if self.limit:
 			query = query.limit(self.limit)
+
+		return query
+
+	def orderPackageQuery(self, query):
+		if self.search:
+			query = query.search(self.search, sort=self.order_by is None)
+
+		if self.random:
+			query = query.order_by(func.random())
+			return query
+
+		to_order = None
+		if self.order_by is None and self.search:
+			pass
+		elif self.order_by is None or self.order_by == "score":
+			to_order = Package.score
+		elif self.order_by == "name":
+			to_order = Package.name
+		elif self.order_by == "title":
+			to_order = Package.title
+		elif self.order_by == "downloads":
+			to_order = Package.downloads
+		elif self.order_by == "created_at" or self.order_by == "date":
+			to_order = Package.created_at
+		elif self.order_by == "approved_at" or self.order_by == "date":
+			to_order = Package.approved_at
+		elif self.order_by == "last_release":
+			to_order = PackageRelease.releaseDate
+		else:
+			abort(400)
+
+		if to_order:
+			if self.order_dir == "asc":
+				to_order = db.asc(to_order)
+			elif self.order_dir == "desc":
+				to_order = db.desc(to_order)
+			else:
+				abort(400)
+
+			query = query.order_by(to_order)
 
 		return query
 
