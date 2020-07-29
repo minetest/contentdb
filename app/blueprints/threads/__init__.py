@@ -199,7 +199,7 @@ def view(id):
 			flash("Please wait before commenting again", "danger")
 			return redirect(thread.getViewURL())
 
-		if len(comment) <= 500 and len(comment) > 3:
+		if len(comment) <= 2000 and len(comment) > 3:
 			reply = ThreadReply()
 			reply.author = current_user
 			reply.comment = comment
@@ -216,7 +216,7 @@ def view(id):
 			return redirect(thread.getViewURL())
 
 		else:
-			flash("Comment needs to be between 3 and 500 characters.")
+			flash("Comment needs to be between 3 and 2000 characters.")
 
 	return render_template("threads/view.html", thread=thread)
 

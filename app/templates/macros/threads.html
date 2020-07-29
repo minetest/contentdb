@@ -85,7 +85,7 @@
 			{% else %}
 				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<textarea class="form-control markdown" required maxlength=500 name="comment"></textarea><br />
+					<textarea class="form-control markdown" required maxlength=2000 name="comment"></textarea><br />
 					<input class="btn btn-primary" type="submit" value="Comment" />
 				</form>
 			{% endif %}
