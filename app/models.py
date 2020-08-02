@@ -658,6 +658,15 @@ class Package(db.Model):
 			return url_for("packages.view",
 					author=self.author.username, name=self.name)
 
+	def getShieldURL(self, type):
+		from app.utils import abs_url_for
+		return abs_url_for("packages.shield",
+				author=self.author.username, name=self.name, type=type)
+
+	def makeShield(self, type):
+		return "[![ContentDB]({})]({})" \
+			.format(self.getShieldURL(type), self.getDetailsURL(True))
+
 	def getEditURL(self):
 		return url_for("packages.create_edit",
 				author=self.author.username, name=self.name)

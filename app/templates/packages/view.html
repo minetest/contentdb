@@ -530,5 +530,25 @@
 				{% endfor %}
 			</ul>
 		{% endif %}
+
+		{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+			<h3>Badges</h3>
+
+			<p>
+				{{ package.makeShield("title") | markdown }}
+			</p>
+
+			<p>
+				<pre><code>{{ package.makeShield("title") }}</code></pre>
+			</p>
+
+			<p>
+				{{ package.makeShield("downloads") | markdown }}
+			</p>
+
+			<p>
+				<pre><code>{{ package.makeShield("downloads") }}</code></pre>
+			</p>
+		{% endif %}
 	</main>
 {% endblock %}

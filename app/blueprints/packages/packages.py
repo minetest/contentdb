@@ -33,6 +33,7 @@ from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from sqlalchemy import or_, func
 from sqlalchemy.orm import joinedload, subqueryload
+from urllib.parse import quote as urlescape
 
 from celery import uuid
 
@@ -180,6 +181,24 @@ def view(package):
 			alternatives=alternatives, similar_topics=similar_topics, \
 			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl, \
 			threads=threads.all(), has_review=has_review)
+
+
+@bp.route("/packages/<author>/<name>/shields/<type>/")
+@is_package_page
+def shield(package, type):
+	if type == "title":
+		url = "https://img.shields.io/badge/ContentDB-{}-{}" \
+			.format(urlescape(package.title), urlescape("#375a7f"))
+	elif type == "downloads":
+		#api_url = abs_url_for("api.package", author=package.author.username, name=package.name)
+		api_url = "https://content.minetest.net" + url_for("api.package", author=package.author.username, name=package.name)
+		url = "https://img.shields.io/badge/dynamic/json?color={}&label=ContentDB&query=downloads&suffix=+downloads&url={}" \
+			.format(urlescape("#375a7f"), urlescape(api_url))
+	else:
+		abort(404)
+
+	return redirect(url)
+
 
 
 @bp.route("/packages/<author>/<name>/download/")
