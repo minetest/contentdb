@@ -630,7 +630,8 @@ class Package(db.Model):
 			"url": base_url + self.getDownloadURL(),
 			"release": release and release.id,
 
-			"score": round(self.score * 10) / 10
+			"score": round(self.score * 10) / 10,
+			"downloads": self.downloads
 		}
 
 	def getThumbnailURL(self, level=2):
