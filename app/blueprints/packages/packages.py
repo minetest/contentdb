@@ -266,6 +266,8 @@ def create_edit(author=None, name=None):
 
 	else:
 		package = getPackageByInfo(author, name)
+		if package is None:
+			abort(404)
 		if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
 			return redirect(package.getDetailsURL())
 

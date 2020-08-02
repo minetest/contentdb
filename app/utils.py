@@ -194,11 +194,11 @@ def rank_required(rank):
 def getPackageByInfo(author, name):
 	user = User.query.filter_by(username=author).first()
 	if user is None:
-		abort(404)
+		return None
 
 	package = Package.query.filter_by(name=name, author_id=user.id, soft_deleted=False).first()
 	if package is None:
-		abort(404)
+		return None
 
 	return package
 
@@ -208,7 +208,18 @@ def is_package_page(f):
 		if not ("author" in kwargs and "name" in kwargs):
 			abort(400)
 
-		package = getPackageByInfo(kwargs["author"], kwargs["name"])
+		author = kwargs["author"]
+		name = kwargs["name"]
+
+		package = getPackageByInfo(author, name)
+		if package is None:
+			package = getPackageByInfo(author, name + "_game")
+			if package is None or package.type != PackageType.GAME:
+				abort(404)
+
+			args = dict(kwargs)
+			args["name"] = name + "_game"
+			return redirect(url_for(request.endpoint, **args))
 
 		del kwargs["author"]
 		del kwargs["name"]
