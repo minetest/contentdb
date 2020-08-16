@@ -65,7 +65,11 @@ def get_int_or_abort(v, default=None):
 		abort(400)
 
 def is_user_bot():
-	user_agent = user_agents.parse(request.headers.get('User-Agent'))
+	user_agent = request.headers.get('User-Agent')
+	if user_agent is None:
+		return True
+
+	user_agent = user_agents.parse(user_agent)
 	return user_agent.is_bot
 
 def getExtension(filename):
