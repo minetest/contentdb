@@ -148,6 +148,9 @@ def updateMetaFromRelease(self, id, path):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
+	print("updateMetaFromRelease: {} for {}/{}" \
+		.format(id, release.package.author.display_name, release.package.name))
+
 	temp = getTempDir()
 	try:
 		with ZipFile(path, 'r') as zip_ref:

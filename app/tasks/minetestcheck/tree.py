@@ -31,7 +31,6 @@ def detect_type(path):
 
 class PackageTreeNode:
 	def __init__(self, baseDir, relative, author=None, repo=None, name=None):
-		print(baseDir)
 		self.baseDir  = baseDir
 		self.relative = relative
 		self.author   = author
