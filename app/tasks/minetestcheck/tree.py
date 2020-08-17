@@ -72,7 +72,7 @@ class PackageTreeNode:
 
 		# .conf file
 		try:
-			with open(self.getMetaFilePath(), "r") as myfile:
+			with open(self.getMetaFilePath() or "", "r") as myfile:
 				conf = parse_conf(myfile.read())
 				for key, value in conf.items():
 					result[key] = value
@@ -115,6 +115,11 @@ class PackageTreeNode:
 				result["depends"] = [x.strip() for x in result["depends"].split(",")]
 			if "optional_depends" in result:
 				result["optional_depends"] = [x.strip() for x in result["optional_depends"].split(",")]
+
+		# Fix games using "name" as "title"
+		if self.type == ContentType.GAME:
+			result["title"] = result["name"]
+			del result["name"]
 
 		# Calculate Title
 		if "name" in result and not "title" in result:
