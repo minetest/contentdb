@@ -167,15 +167,26 @@ def updateMetaFromRelease(self, id, path):
 			package.provides.clear()
 			package.provides.extend(provides)
 
-			for dep in package.dependencies:
-				if dep.meta_package:
-					db.session.delete(dep)
+			# Delete all meta package dependencies
+			package.dependencies.filter(Dependency.meta_package != None).delete()
 
-			for meta in getMetaPackages(tree.fold("meta", "depends")):
+			# Get raw dependencies
+			depends = tree.fold("meta", "depends")
+			optional_depends = tree.fold("meta", "optional_depends")
+
+			# Filter out provides
+			for mod in provides:
+				depends.discard(mod)
+				optional_depends.discard(mod)
+
+			# Add dependencies
+
+			for meta in getMetaPackages(depends):
 				db.session.add(Dependency(package, meta=meta, optional=False))
 
-			for meta in getMetaPackages(tree.fold("meta", "optional_depends")):
+			for meta in getMetaPackages(optional_depends):
 				db.session.add(Dependency(package, meta=meta, optional=True))
+
 
 			db.session.commit()
 
