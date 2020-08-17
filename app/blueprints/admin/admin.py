@@ -57,7 +57,7 @@ def admin_page():
 
 		elif action == "reimportpackages":
 			tasks = []
-			for package in Package.query.filter_by(approved=True, soft_deleted=False).all():
+			for package in Package.query.filter_by(soft_deleted=False).all():
 				release = package.releases.first()
 				if release:
 					zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
