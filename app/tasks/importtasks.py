@@ -203,8 +203,12 @@ def postReleaseCheckUpdate(self, release, path):
 			depends.discard(mod)
 			optional_depends.discard(mod)
 
-		# Add dependencies
+		# Raise error on unresolved game dependencies
+		if package.type == PackageType.GAME and len(depends) > 0:
+			deps = ", ".join(depends)
+			raise TaskError("Game has unresolved hard dependencies: " + deps)
 
+		# Add dependencies
 		for meta in getMetaPackages(depends):
 			db.session.add(Dependency(package, meta=meta, optional=False))
 
