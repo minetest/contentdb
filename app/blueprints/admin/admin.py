@@ -150,6 +150,16 @@ def admin_page():
 			else:
 				flash("No downloads to create", "danger")
 
+			return redirect(url_for("admin.admin_page"))
+
+		elif action == "delmetapackages":
+			query = MetaPackage.query.filter(~MetaPackage.dependencies.any(), ~MetaPackage.packages.any())
+			count = query.count()
+			query.delete(synchronize_session=False)
+			db.session.commit()
+
+			flash("Deleted " + str(count) + " unused meta packages", "success")
+			return redirect(url_for("admin.admin_page"))
 		else:
 			flash("Unknown action: " + action, "danger")
 

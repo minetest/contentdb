@@ -24,7 +24,10 @@ from app.models import *
 
 @bp.route("/metapackages/")
 def list_all():
-	mpackages = MetaPackage.query.order_by(db.asc(MetaPackage.name)).all()
+	mpackages = db.session.query(MetaPackage, func.count(MetaPackage.id)) \
+			.select_from(MetaPackage).outerjoin(MetaPackage.packages) \
+			.order_by(db.asc(MetaPackage.name)) \
+			.group_by(MetaPackage.id).all()
 	return render_template("meta/list.html", mpackages=mpackages)
 
 @bp.route("/metapackages/<name>/")

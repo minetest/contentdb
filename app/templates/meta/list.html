@@ -5,11 +5,36 @@ Meta Packages
 {% endblock %}
 
 {% block content %}
-	<ul>
-		{% for meta in mpackages %}
-			<li><a href="{{ url_for('metapackages.view', name=meta.name) }}">{{ meta.name }}</a> ({{ meta.packages.filter_by(soft_deleted=False, approved=True).all() | count }} packages)</li>
+	<div class="list-group">
+		<div class="list-group-item">
+			<div class="row text-muted">
+				<div class="col-sm">
+					{{ _("Name") }}
+				</div>
+
+				<div class="col-sm-1 text-center">
+					{{ _("Packages") }}
+				</div>
+			</div>
+		</div>
+
+		{% for pair in mpackages %}
+			{% set meta = pair[0] %}
+			{% set count = pair[1] %}
+			<a class="list-group-item list-group-item-action"
+					href="{{ url_for('metapackages.view', name=meta.name) }}">
+				<div class="row">
+					<div class="col-sm">
+						{{ meta.name }}
+					</div>
+
+					<div class="col-sm-1 text-center">
+						{{ count }}
+					</div>
+				</div>
+			</a>
 		{% else %}
 			<li><i>No meta packages found.</i></li>
 		{% endfor %}
-	</ul>
+	</div>
 {% endblock %}
