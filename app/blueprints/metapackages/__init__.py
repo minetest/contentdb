@@ -41,6 +41,15 @@ def view(name):
 		.filter(MetaPackage.name==name) \
 		.join(MetaPackage.dependencies) \
 		.join(Dependency.depender) \
+		.filter(Package.approved==True, Package.soft_deleted==False) \
 		.all()
 
-	return render_template("metapackages/view.html", mpackage=mpackage, dependers=dependers)
+	similar_topics = None
+	if mpackage.packages.filter_by(approved=True, soft_deleted=False).count() == 0:
+		similar_topics = ForumTopic.query \
+				.filter_by(name=name) \
+				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
+				.all()
+
+	return render_template("metapackages/view.html", \
+		mpackage=mpackage, dependers=dependers, similar_topics=similar_topics)

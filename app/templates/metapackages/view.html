@@ -12,6 +12,21 @@
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 	{{ render_pkggrid(mpackage.packages.filter_by(approved=True, soft_deleted=False).all()) }}
 
+	{% if similar_topics %}
+		<p>Unforuntately, this isn't on ContentDB yet! Here's some forum topics:</p>
+		<ul>
+			{% for t in similar_topics %}
+				<li>
+					[{{ t.type.value }}]
+					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
+						{{ t.title }} by {{ t.author.display_name }}
+					</a>
+					{% if t.wip %}[WIP]{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
 	<h2>Required / Used by</h2>
 	{{ render_pkggrid(dependers) }}
 {% endblock %}
