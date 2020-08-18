@@ -164,11 +164,11 @@ def updateMetaFromRelease(self, id, path):
 			def getMetaPackages(names):
 				return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
 
-			provides = getMetaPackages(tree.getModNames())
+			provides = tree.getModNames()
 
 			package = release.package
 			package.provides.clear()
-			package.provides.extend(provides)
+			package.provides.extend(getMetaPackages(tree.getModNames()))
 
 			# Delete all meta package dependencies
 			package.dependencies.filter(Dependency.meta_package != None).delete()

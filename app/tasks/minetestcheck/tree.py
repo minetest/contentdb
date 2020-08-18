@@ -1,6 +1,8 @@
-import os
+import os, re
 from . import MinetestCheckError, ContentType
 from .config import parse_conf
+
+basenamePattern = re.compile("^([a-z0-9_]+)$")
 
 def get_base_dir(path):
 	if not os.path.isdir(path):
@@ -49,10 +51,15 @@ class PackageTreeNode:
 
 		if self.type == ContentType.GAME:
 			if not os.path.isdir(baseDir + "/mods"):
-				raise MinetestCheckError(("game at {} does not have a mods/ folder").format(self.relative))
+				raise MinetestCheckError(("Game at {} does not have a mods/ folder").format(self.relative))
 			self.add_children_from_mod_dir(baseDir + "/mods")
+		elif self.type == ContentType.MOD:
+			if self.name and not basenamePattern.match(self.name):
+				raise MinetestCheckError(("Invalid base name for mod {} at {}, names must only contain a-z0-9_.") \
+					.format(self.name, self.relative))
 		elif self.type == ContentType.MODPACK:
 			self.add_children_from_mod_dir(baseDir)
+
 
 	def getMetaFilePath(self):
 		filename = None
@@ -100,7 +107,6 @@ class PackageTreeNode:
 
 		else:
 			try:
-				import re
 				pattern = re.compile("^([a-z0-9_]+)\??$")
 
 				with open(self.baseDir + "/depends.txt", "r") as myfile:
@@ -152,6 +158,9 @@ class PackageTreeNode:
 				if not child.type.isModLike():
 					raise MinetestCheckError(("Expecting mod or modpack, found {} at {} inside {}") \
 							.format(child.type.value, child.relative, self.type.value))
+
+				if child.name is None:
+					raise MinetestCheckError(("Missing base name for mod at {}").format(self.relative))
 
 				self.children.append(child)
 
