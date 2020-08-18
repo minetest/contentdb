@@ -125,6 +125,7 @@ def tags():
 
 
 @bp.route("/todo/metapackages/")
+@login_required
 def metapackages():
 	mpackages = MetaPackage.query \
 			.filter(~ MetaPackage.packages.any(approved=True, soft_deleted=False)) \
