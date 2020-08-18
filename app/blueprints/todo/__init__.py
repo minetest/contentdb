@@ -67,11 +67,17 @@ def view():
 	total_packages = Package.query.filter_by(approved=True, soft_deleted=False).count()
 	total_to_tag = Package.query.filter_by(approved=True, soft_deleted=False, tags=None).count()
 
+	unfulfilled_meta_packages = MetaPackage.query \
+			.filter(~ MetaPackage.packages.any(approved=True, soft_deleted=False)) \
+			.filter(MetaPackage.dependencies.any(optional=False)) \
+			.order_by(db.asc(MetaPackage.name)).count()
+
 	return render_template("todo/list.html", title="Reports and Work Queue",
 		packages=packages, releases=releases, screenshots=screenshots,
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
 		topics_to_add=topics_to_add, total_topics=total_topics, \
-		total_packages=total_packages, total_to_tag=total_to_tag)
+		total_packages=total_packages, total_to_tag=total_to_tag, \
+		unfulfilled_meta_packages=unfulfilled_meta_packages)
 
 
 @bp.route("/todo/topics/")
@@ -116,3 +122,13 @@ def tags():
 	tags = Tag.query.order_by(db.asc(Tag.title)).all()
 
 	return render_template("todo/tags.html", packages=query.all(), tags=tags)
+
+
+@bp.route("/todo/metapackages/")
+def metapackages():
+	mpackages = MetaPackage.query \
+			.filter(~ MetaPackage.packages.any(approved=True, soft_deleted=False)) \
+			.filter(MetaPackage.dependencies.any(optional=False)) \
+			.order_by(db.asc(MetaPackage.name)).all()
+
+	return render_template("todo/metapackages.html", mpackages=mpackages)

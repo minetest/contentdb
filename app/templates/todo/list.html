@@ -115,6 +115,20 @@
 	<a class="btn btn-primary" href="{{ url_for('todo.tags') }}">View Tags</a>
 
 
+	{% if unfulfilled_meta_packages %}
+		<h2 class="mt-5">
+			<span class="fas fa-exclamation-triangle pr-2" style="color: orange;"></span>
+			{{ unfulfilled_meta_packages }} Unfulfilled Dependencies
+		</h2>
+
+		<p>
+			Meta packages that have hard dependers, but are not fulfilled.
+		</p>
+
+		<a class="btn btn-primary" href="{{ url_for('todo.metapackages') }}">View</a>
+	{% endif %}
+
+
 	<h2 class="mt-5">Unadded Topic List</h2>
 
 	{% if total_topics > 0 %}
