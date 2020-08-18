@@ -1,12 +1,17 @@
 {% extends "base.html" %}
 
 {% block title %}
-Packages providing '{{ mpackage.name }}''
+{{ mpackage.name }} - Meta Packages
 {% endblock %}
 
 {% block content %}
-	<h1>Packages providing '{{ mpackage.name }}'</h1>
+	<h1>Meta Package "{{ mpackage.name }}"</h1>
+
+	<h2>Provided by</h2>
 
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 	{{ render_pkggrid(mpackage.packages.filter_by(approved=True, soft_deleted=False).all()) }}
+
+	<h2>Required / Used by</h2>
+	{{ render_pkggrid(dependers) }}
 {% endblock %}

@@ -28,7 +28,7 @@ def list_all():
 			.select_from(MetaPackage).outerjoin(MetaPackage.packages) \
 			.order_by(db.asc(MetaPackage.name)) \
 			.group_by(MetaPackage.id).all()
-	return render_template("meta/list.html", mpackages=mpackages)
+	return render_template("metapackages/list.html", mpackages=mpackages)
 
 @bp.route("/metapackages/<name>/")
 def view(name):
@@ -36,4 +36,11 @@ def view(name):
 	if mpackage is None:
 		abort(404)
 
-	return render_template("meta/view.html", mpackage=mpackage)
+	dependers = db.session.query(Package) \
+		.select_from(MetaPackage) \
+		.filter(MetaPackage.name==name) \
+		.join(MetaPackage.dependencies) \
+		.join(Dependency.depender) \
+		.all()
+
+	return render_template("metapackages/view.html", mpackage=mpackage, dependers=dependers)

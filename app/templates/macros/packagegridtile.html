@@ -37,7 +37,7 @@
 		{% for p in packages %}
 			{{ render_pkgtile(p, show_author) }}
 		{% else %}
-			<li><i>No packages available</i></ul>
+			<li class="packagetile flex-fill"><i>No packages available</i></li>
 		{% endfor %}
 		{% if packages %}
 			{% for i in range(4) %}
