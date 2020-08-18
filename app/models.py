@@ -165,7 +165,6 @@ class User(db.Model, UserMixin):
 	# Content
 	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id")
 
-	# causednotifs  = db.relationship("Notification", backref="causer", lazy="dynamic")
 	packages      = db.relationship("Package", backref=db.backref("author", lazy="joined"), lazy="dynamic")
 	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
 	threads       = db.relationship("Thread", backref="author", lazy="dynamic")
@@ -743,7 +742,7 @@ class Package(db.Model):
 		elif perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
 			return isMaintainer
 
-		elif perm == Permission.EDIT_PACKAGE or perm == Permission.REIMPORT_META or \
+		elif perm == Permission.EDIT_PACKAGE or \
 				perm == Permission.APPROVE_CHANGES or perm == Permission.APPROVE_RELEASE:
 			return isMaintainer and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
@@ -766,6 +765,9 @@ class Package(db.Model):
 
 		elif perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
+
+		elif perm == Permission.REIMPORT_META:
+			return user.rank.atLeast(UserRank.ADMIN)
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))

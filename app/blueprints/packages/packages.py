@@ -231,11 +231,10 @@ class PackageForm(FlaskForm):
 	type             = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
 	license          = QuerySelectField("License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	media_license    = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	provides_str     = StringField("Provides (mods included in package)", [Optional()])
 	tags             = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
 	content_warnings = QuerySelectMultipleField('Content Warnings', query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)
-	harddep_str      = StringField("Hard Dependencies", [Optional()])
-	softdep_str      = StringField("Soft Dependencies", [Optional()])
+	# harddep_str      = StringField("Hard Dependencies", [Optional()])
+	# softdep_str      = StringField("Soft Dependencies", [Optional()])
 	repo             = StringField("VCS Repository URL", [Optional(), URL()], filters = [lambda x: x or None])
 	website          = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
 	issueTracker     = StringField("Issue Tracker URL", [Optional(), URL()], filters = [lambda x: x or None])
@@ -285,9 +284,8 @@ def create_edit(author=None, name=None):
 			form.license.data = None
 			form.media_license.data = None
 		else:
-			form.harddep_str.data  = ",".join([str(x) for x in package.getSortedHardDependencies() ])
-			form.softdep_str.data  = ",".join([str(x) for x in package.getSortedOptionalDependencies() ])
-			form.provides_str.data = MetaPackage.ListToSpec(package.provides)
+			# form.harddep_str.data  = ",".join([str(x) for x in package.getSortedHardDependencies() ])
+			# form.softdep_str.data  = ",".join([str(x) for x in package.getSortedOptionalDependencies() ])
 			form.tags.data         = list(package.tags)
 			form.content_warnings.data = list(package.content_warnings)
 
@@ -326,25 +324,19 @@ def create_edit(author=None, name=None):
 		if package.type == PackageType.TXP:
 			package.license = package.media_license
 
-		mpackage_cache = {}
-		package.provides.clear()
-		mpackages = MetaPackage.SpecToList(form.provides_str.data, mpackage_cache)
-		for m in mpackages:
-			package.provides.append(m)
+		# Dependency.query.filter_by(depender=package).delete()
+		# deps = Dependency.SpecToList(package, form.harddep_str.data, mpackage_cache)
+		# for dep in deps:
+		# 	dep.optional = False
+		# 	db.session.add(dep)
 
-		Dependency.query.filter_by(depender=package).delete()
-		deps = Dependency.SpecToList(package, form.harddep_str.data, mpackage_cache)
-		for dep in deps:
-			dep.optional = False
-			db.session.add(dep)
+		# deps = Dependency.SpecToList(package, form.softdep_str.data, mpackage_cache)
+		# for dep in deps:
+		# 	dep.optional = True
+		# 	db.session.add(dep)
 
-		deps = Dependency.SpecToList(package, form.softdep_str.data, mpackage_cache)
-		for dep in deps:
-			dep.optional = True
-			db.session.add(dep)
-
-		if wasNew and package.type == PackageType.MOD and not package.name in mpackage_cache:
-			m = MetaPackage.GetOrCreate(package.name, mpackage_cache)
+		if wasNew and package.type == PackageType.MOD:
+			m = MetaPackage.GetOrCreate(package.name, {})
 			package.provides.append(m)
 
 		package.tags.clear()

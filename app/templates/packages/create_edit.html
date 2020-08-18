@@ -14,7 +14,7 @@
 	{% if enable_wizard %}
 		<script src="/static/url.min.js"></script>
 		<script src="/static/polltask.js"></script>
-		<script src="/static/package_create.js?v=3"></script>
+		<script src="/static/package_create.js?v=4"></script>
 	{% endif %}
 	<script src="/static/package_edit.js?v=3"></script>
 {% endblock %}
@@ -81,12 +81,17 @@
 		<fieldset class="pkg_meta">
 			<legend class="not_txp">{{ _("Dependencies") }}</legend>
 
-			{{ render_mpackage_field(form.provides_str, class_="not_txp", placeholder="Comma separated list") }}
-			{{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
-			{{ render_deps_field(form.softdep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
+			<p class="alert alert-secondary not_txp">
+				<span class="fas fa-info pr-1"></span>
+
+				{{ _("Note: This information is now updated automatically when creating a release.") }}
+			</p>
+
+			{# {{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
+			{{ render_deps_field(form.softdep_str, class_="not_txp not_game", placeholder="Comma separated list") }} #}
 		</fieldset>
 
-		<fieldset>
+		<fieldset class="mt-4">
 			<legend class="pkg_meta">{{ _("Repository and Links") }}</legend>
 
 			<div class="pkg_wiz_1">
