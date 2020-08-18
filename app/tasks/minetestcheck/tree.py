@@ -128,17 +128,20 @@ class PackageTreeNode:
 			result["optional_depends"] = []
 
 
+		def checkDependencies(deps):
+			for dep in result["depends"]:
+				if not basenamePattern.match(dep):
+					if " " in dep:
+						raise MinetestCheckError(("Invalid dependency name '{}' for mod at {}, did you forget a comma?") \
+							.format(dep, self.relative))
+					else:
+						raise MinetestCheckError(("Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_.") \
+							.format(dep, self.relative))
+
+
 		# Check dependencies
-		for dep in result["depends"]:
-			if not basenamePattern.match(dep):
-				raise MinetestCheckError(("Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_.") \
-					.format(dep, self.relative))
-
-		for dep in result["optional_depends"]:
-			if not basenamePattern.match(dep):
-				raise MinetestCheckError(("Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_.") \
-					.format(dep, self.relative))
-
+		checkDependencies(result["depends"])
+		checkDependencies(result["optional_depends"])
 
 		# Fix games using "name" as "title"
 		if self.type == ContentType.GAME:

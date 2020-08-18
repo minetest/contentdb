@@ -222,22 +222,34 @@ class User(db.Model, UserMixin):
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
 	def canCommentRL(self):
+		factor = 1
+		if self.rank.atLeast(UserRank.ADMIN):
+			return True
+		elif self.rank.atLeast(UserRank.TRUSTED_MEMBER):
+			factor *= 2
+
 		one_min_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=1)
 		if ThreadReply.query.filter_by(author=self) \
-				.filter(ThreadReply.created_at > one_min_ago).count() >= 3:
+				.filter(ThreadReply.created_at > one_min_ago).count() >= 3 * factor:
 			return False
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		if ThreadReply.query.filter_by(author=self) \
-				.filter(ThreadReply.created_at > hour_ago).count() >= 20:
+				.filter(ThreadReply.created_at > hour_ago).count() >= 20 * factor:
 			return False
 
 		return True
 
 	def canOpenThreadRL(self):
+		factor = 1
+		if self.rank.atLeast(UserRank.ADMIN):
+			return True
+		elif self.rank.atLeast(UserRank.TRUSTED_MEMBER):
+			factor *= 5
+
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		return Thread.query.filter_by(author=self) \
-			.filter(Thread.created_at > hour_ago).count() < 2
+			.filter(Thread.created_at > hour_ago).count() < 2 * factor
 
 	def __eq__(self, other):
 		if other is None:
