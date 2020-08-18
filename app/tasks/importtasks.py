@@ -31,6 +31,7 @@ from app.utils import randomString, getExtension
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from .minetestcheck.config import parse_conf
 
+
 krock_list_cache = None
 krock_list_cache_by_name = None
 def getKrockList():
@@ -73,6 +74,7 @@ def getKrockList():
 
 	return krock_list_cache, krock_list_cache_by_name
 
+
 def findModInfo(author, name, link):
 	list, lookup = getKrockList()
 
@@ -90,6 +92,7 @@ def findModInfo(author, name, link):
 				return x
 
 	return None
+
 
 def generateGitURL(urlstr):
 	scheme, netloc, path, query, frag = urlsplit(urlstr)
@@ -140,73 +143,6 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 			.strip())
 
 
-@celery.task(bind=True)
-def updateMetaFromRelease(self, id, path):
-	release = PackageRelease.query.get(id)
-	if release is None:
-		raise TaskError("No such release!")
-	elif release.package is None:
-		raise TaskError("No package attached to release")
-
-	print("updateMetaFromRelease: {} for {}/{}" \
-		.format(id, release.package.author.display_name, release.package.name))
-
-	temp = getTempDir()
-	try:
-		with ZipFile(path, 'r') as zip_ref:
-			zip_ref.extractall(temp)
-
-		try:
-			tree = build_tree(temp, expected_type=ContentType[release.package.type.name], \
-				author=release.package.author.username, name=release.package.name)
-
-			cache = {}
-			def getMetaPackages(names):
-				return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
-
-			provides = tree.getModNames()
-
-			package = release.package
-			package.provides.clear()
-			package.provides.extend(getMetaPackages(tree.getModNames()))
-
-			# Delete all meta package dependencies
-			package.dependencies.filter(Dependency.meta_package != None).delete()
-
-			# Get raw dependencies
-			depends = tree.fold("meta", "depends")
-			optional_depends = tree.fold("meta", "optional_depends")
-
-			# Filter out provides
-			for mod in provides:
-				depends.discard(mod)
-				optional_depends.discard(mod)
-
-			# Add dependencies
-
-			for meta in getMetaPackages(depends):
-				db.session.add(Dependency(package, meta=meta, optional=False))
-
-			for meta in getMetaPackages(optional_depends):
-				db.session.add(Dependency(package, meta=meta, optional=True))
-
-
-			db.session.commit()
-
-		except MinetestCheckError as err:
-			if "Fails validation" not in release.title:
-				release.title += " (Fails validation)"
-
-			release.task_id = self.request.id
-			release.approved = False
-			db.session.commit()
-
-			raise TaskError(str(err))
-
-	finally:
-		shutil.rmtree(temp)
-
-
 @celery.task()
 def getMeta(urlstr, author):
 	gitDir, _ = cloneRepo(urlstr, recursive=True)
@@ -240,6 +176,86 @@ def getMeta(urlstr, author):
 	return result
 
 
+def postReleaseCheckUpdate(self, release, path):
+	try:
+		tree = build_tree(path, expected_type=ContentType[release.package.type.name], \
+			author=release.package.author.username, name=release.package.name)
+
+		cache = {}
+		def getMetaPackages(names):
+			return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
+
+		provides = tree.getModNames()
+
+		package = release.package
+		package.provides.clear()
+		package.provides.extend(getMetaPackages(tree.getModNames()))
+
+		# Delete all meta package dependencies
+		package.dependencies.filter(Dependency.meta_package != None).delete()
+
+		# Get raw dependencies
+		depends = tree.fold("meta", "depends")
+		optional_depends = tree.fold("meta", "optional_depends")
+
+		# Filter out provides
+		for mod in provides:
+			depends.discard(mod)
+			optional_depends.discard(mod)
+
+		# Add dependencies
+
+		for meta in getMetaPackages(depends):
+			db.session.add(Dependency(package, meta=meta, optional=False))
+
+		for meta in getMetaPackages(optional_depends):
+			db.session.add(Dependency(package, meta=meta, optional=True))
+
+		# Update min/max
+
+		if tree.meta.get("min_minetest_version"):
+			release.min_rel = MinetestRelease.get(tree.meta["min_minetest_version"], None)
+
+		if tree.meta.get("max_minetest_version"):
+			release.max_rel = MinetestRelease.get(tree.meta["max_minetest_version"], None)
+
+		return tree
+
+	except MinetestCheckError as err:
+		if "Fails validation" not in release.title:
+			release.title += " (Fails validation)"
+
+		db.session.rollback()
+		release.task_id = self.request.id
+		release.approved = False
+		db.session.commit()
+
+		raise TaskError(str(err))
+
+
+@celery.task(bind=True)
+def updateMetaFromRelease(self, id, path):
+	release = PackageRelease.query.get(id)
+	if release is None:
+		raise TaskError("No such release!")
+	elif release.package is None:
+		raise TaskError("No package attached to release")
+
+	print("updateMetaFromRelease: {} for {}/{}" \
+		.format(id, release.package.author.display_name, release.package.name))
+
+	temp = getTempDir()
+	try:
+		with ZipFile(path, 'r') as zip_ref:
+			zip_ref.extractall(temp)
+
+		postReleaseCheckUpdate(self, release, temp)
+		db.session.commit()
+
+	finally:
+		shutil.rmtree(temp)
+
+
 @celery.task(bind=True)
 def checkZipRelease(self, id, path):
 	release = PackageRelease.query.get(id)
@@ -253,18 +269,7 @@ def checkZipRelease(self, id, path):
 		with ZipFile(path, 'r') as zip_ref:
 			zip_ref.extractall(temp)
 
-		try:
-			tree = build_tree(temp, expected_type=ContentType[release.package.type.name], \
-				author=release.package.author.username, name=release.package.name)
-		except MinetestCheckError as err:
-			if "Fails validation" not in release.title:
-				release.title += " (Fails validation)"
-
-			release.task_id = self.request.id
-			release.approved = False
-			db.session.commit()
-
-			raise TaskError(str(err))
+		postReleaseCheckUpdate(self, release, temp)
 
 		release.task_id = None
 		release.approve(release.package.author)
@@ -274,8 +279,8 @@ def checkZipRelease(self, id, path):
 		shutil.rmtree(temp)
 
 
-@celery.task()
-def makeVCSRelease(id, branch):
+@celery.task(bind=True)
+def makeVCSRelease(self, id, branch):
 	release = PackageRelease.query.get(id)
 	if release is None:
 		raise TaskError("No such release!")
@@ -284,12 +289,7 @@ def makeVCSRelease(id, branch):
 
 	gitDir, repo = cloneRepo(release.package.repo, ref=branch, recursive=True)
 
-	tree = None
-	try:
-		tree = build_tree(gitDir, expected_type=ContentType[release.package.type.name], \
-			author=release.package.author.username, name=release.package.name)
-	except MinetestCheckError as err:
-		raise TaskError(str(err))
+	postReleaseCheckUpdate(self, release, gitDir)
 
 	try:
 		filename = randomString(10) + ".zip"
@@ -303,13 +303,6 @@ def makeVCSRelease(id, branch):
 		release.url         = "/uploads/" + filename
 		release.task_id     = None
 		release.commit_hash = repo.head.object.hexsha
-
-		if tree.meta.get("min_minetest_version"):
-			release.min_rel = MinetestRelease.get(tree.meta["min_minetest_version"], None)
-
-		if tree.meta.get("max_minetest_version"):
-			release.max_rel = MinetestRelease.get(tree.meta["max_minetest_version"], None)
-
 		release.approve(release.package.author)
 		db.session.commit()
 
@@ -377,7 +370,9 @@ def importForeignDownloads(self, id):
 
 		release.url = "/uploads/" + filename
 		db.session.commit()
+
 	except urllib.error.URLError:
+		db.session.rollback()
 		release.task_id = self.request.id
 		release.approved = False
 		db.session.commit()
