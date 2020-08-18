@@ -32,6 +32,9 @@ def detect_type(path):
 
 
 def get_csv_line(line):
+	if line is None:
+		return []
+
 	return [x.strip() for x in line.split(",") if x.strip() != ""]
 
 
@@ -52,13 +55,13 @@ class PackageTreeNode:
 		if self.type == ContentType.GAME:
 			if not os.path.isdir(baseDir + "/mods"):
 				raise MinetestCheckError(("Game at {} does not have a mods/ folder").format(self.relative))
-			self.add_children_from_mod_dir(baseDir + "/mods")
+			self.add_children_from_mod_dir("mods")
 		elif self.type == ContentType.MOD:
 			if self.name and not basenamePattern.match(self.name):
 				raise MinetestCheckError(("Invalid base name for mod {} at {}, names must only contain a-z0-9_.") \
 					.format(self.name, self.relative))
 		elif self.type == ContentType.MODPACK:
-			self.add_children_from_mod_dir(baseDir)
+			self.add_children_from_mod_dir(None)
 
 
 	def getMetaFilePath(self):
@@ -97,35 +100,44 @@ class PackageTreeNode:
 			except IOError:
 				pass
 
-		# depends.txt
+		# Read dependencies
 		if "depends" in result or "optional_depends" in result:
-			if "depends" in result:
-				result["depends"] = get_csv_line(result["depends"])
+			result["depends"] = get_csv_line(result.get("depends"))
+			result["optional_depends"] = get_csv_line(result.get("optional_depends"))
 
-			if "optional_depends" in result:
-				result["optional_depends"] = get_csv_line(result["optional_depends"])
+		elif os.path.isfile(self.baseDir + "/depends.txt"):
+			pattern = re.compile("^([a-z0-9_]+)\??$")
+
+			with open(self.baseDir + "/depends.txt", "r") as myfile:
+				contents = myfile.read()
+				soft = []
+				hard = []
+				for line in contents.split("\n"):
+					line = line.strip()
+					if pattern.match(line):
+						if line[len(line) - 1] == "?":
+							soft.append( line[:-1])
+						else:
+							hard.append(line)
+
+				result["depends"] = hard
+				result["optional_depends"] = soft
 
 		else:
-			try:
-				pattern = re.compile("^([a-z0-9_]+)\??$")
+			result["depends"] = []
+			result["optional_depends"] = []
 
-				with open(self.baseDir + "/depends.txt", "r") as myfile:
-					contents = myfile.read()
-					soft = []
-					hard = []
-					for line in contents.split("\n"):
-						line = line.strip()
-						if pattern.match(line):
-							if line[len(line) - 1] == "?":
-								soft.append( line[:-1])
-							else:
-								hard.append(line)
 
-					result["depends"] = hard
-					result["optional_depends"] = soft
+		# Check dependencies
+		for dep in result["depends"]:
+			if not basenamePattern.match(dep):
+				raise MinetestCheckError(("Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_.") \
+					.format(dep, self.relative))
 
-			except IOError:
-				pass
+		for dep in result["optional_depends"]:
+			if not basenamePattern.match(dep):
+				raise MinetestCheckError(("Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_.") \
+					.format(dep, self.relative))
 
 
 		# Fix games using "name" as "title"
@@ -150,11 +162,17 @@ class PackageTreeNode:
 
 		self.meta = result
 
-	def add_children_from_mod_dir(self, dir):
+	def add_children_from_mod_dir(self, subdir):
+		dir = self.baseDir
+		relative = self.relative
+		if subdir:
+			dir += "/" + subdir
+			relative += subdir + "/"
+
 		for entry in next(os.walk(dir))[1]:
 			path = os.path.join(dir, entry)
 			if not entry.startswith('.') and os.path.isdir(path):
-				child = PackageTreeNode(path, self.relative + entry + "/", name=entry)
+				child = PackageTreeNode(path, relative + entry + "/", name=entry)
 				if not child.type.isModLike():
 					raise MinetestCheckError(("Expecting mod or modpack, found {} at {} inside {}") \
 							.format(child.type.value, child.relative, self.type.value))
