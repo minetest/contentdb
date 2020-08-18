@@ -41,7 +41,15 @@ def view(name):
 		.filter(MetaPackage.name==name) \
 		.join(MetaPackage.dependencies) \
 		.join(Dependency.depender) \
-		.filter(Package.approved==True, Package.soft_deleted==False) \
+		.filter(Dependency.optional==False, Package.approved==True, Package.soft_deleted==False) \
+		.all()
+
+	optional_dependers = db.session.query(Package) \
+		.select_from(MetaPackage) \
+		.filter(MetaPackage.name==name) \
+		.join(MetaPackage.dependencies) \
+		.join(Dependency.depender) \
+		.filter(Dependency.optional==True, Package.approved==True, Package.soft_deleted==False) \
 		.all()
 
 	similar_topics = None
@@ -51,5 +59,6 @@ def view(name):
 				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 				.all()
 
-	return render_template("metapackages/view.html", \
-		mpackage=mpackage, dependers=dependers, similar_topics=similar_topics)
+	return render_template("metapackages/view.html", mpackage=mpackage, \
+		dependers=dependers, optional_dependers=optional_dependers, \
+		similar_topics=similar_topics)

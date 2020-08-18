@@ -7,7 +7,7 @@
 {% block content %}
 	<h1>Meta Package "{{ mpackage.name }}"</h1>
 
-	<h2>Provided by</h2>
+	<h2>Provided By</h2>
 
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 	{{ render_pkggrid(mpackage.packages.filter_by(approved=True, soft_deleted=False).all()) }}
@@ -27,6 +27,9 @@
 		</ul>
 	{% endif %}
 
-	<h2>Required / Used by</h2>
+	<h2>Required By</h2>
 	{{ render_pkggrid(dependers) }}
+
+	<h2>Optionally Used By</h2>
+	{{ render_pkggrid(optional_dependers) }}
 {% endblock %}
