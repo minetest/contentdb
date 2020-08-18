@@ -29,6 +29,10 @@ def detect_type(path):
 		return ContentType.UNKNOWN
 
 
+def get_csv_line(line):
+	return [x.strip() for x in line.split(",") if x.strip() != ""]
+
+
 class PackageTreeNode:
 	def __init__(self, baseDir, relative, author=None, repo=None, name=None):
 		self.baseDir  = baseDir
@@ -87,10 +91,18 @@ class PackageTreeNode:
 				pass
 
 		# depends.txt
-		import re
-		pattern = re.compile("^([a-z0-9_]+)\??$")
-		if not "depends" in result and not "optional_depends" in result:
+		if "depends" in result or "optional_depends" in result:
+			if "depends" in result:
+				result["depends"] = get_csv_line(result["depends"])
+
+			if "optional_depends" in result:
+				result["optional_depends"] = get_csv_line(result["optional_depends"])
+
+		else:
 			try:
+				import re
+				pattern = re.compile("^([a-z0-9_]+)\??$")
+
 				with open(self.baseDir + "/depends.txt", "r") as myfile:
 					contents = myfile.read()
 					soft = []
@@ -109,11 +121,6 @@ class PackageTreeNode:
 			except IOError:
 				pass
 
-		else:
-			if "depends" in result:
-				result["depends"] = [x.strip() for x in result["depends"].split(",")]
-			if "optional_depends" in result:
-				result["optional_depends"] = [x.strip() for x in result["optional_depends"].split(",")]
 
 		# Fix games using "name" as "title"
 		if self.type == ContentType.GAME:
