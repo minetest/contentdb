@@ -24,7 +24,7 @@ from app.models import *
 
 @bp.route("/metapackages/")
 def list_all():
-	mpackages = db.session.query(MetaPackage, func.count(MetaPackage.id)) \
+	mpackages = db.session.query(MetaPackage, func.count(Package.id)) \
 			.select_from(MetaPackage).outerjoin(MetaPackage.packages) \
 			.order_by(db.asc(MetaPackage.name)) \
 			.group_by(MetaPackage.id).all()
