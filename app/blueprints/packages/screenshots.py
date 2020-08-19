@@ -29,13 +29,13 @@ from wtforms.validators import *
 
 
 class CreateScreenshotForm(FlaskForm):
-	title	   = StringField("Title/Caption", [Optional()])
+	title	   = StringField("Title/Caption", [Optional(), Length(-1, 100)])
 	fileUpload = FileField("File Upload", [InputRequired()])
 	submit	   = SubmitField("Save")
 
 
 class EditScreenshotForm(FlaskForm):
-	title	 = StringField("Title/Caption", [Optional()])
+	title	 = StringField("Title/Caption", [Optional(), Length(-1, 100)])
 	approved = BooleanField("Is Approved")
 	delete   = BooleanField("Delete")
 	submit   = SubmitField("Save")

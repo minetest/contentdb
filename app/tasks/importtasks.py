@@ -226,10 +226,11 @@ def postReleaseCheckUpdate(self, release, path):
 		return tree
 
 	except MinetestCheckError as err:
+		db.session.rollback()
+
 		if "Fails validation" not in release.title:
 			release.title += " (Fails validation)"
 
-		db.session.rollback()
 		release.task_id = self.request.id
 		release.approved = False
 		db.session.commit()
