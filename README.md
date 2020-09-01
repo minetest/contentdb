@@ -15,6 +15,7 @@ Docker is the recommended way to develop and deploy ContentDB.
 2. Copy `config.example.cfg` to `config.cfg`.
 
 3. (Optional) Set up mail in config.cfg.
+   Make sure to set `USER_ENABLE_EMAIL` to True.
 
 4. (Optional) Set up GitHub integration
 	1. Make a Github OAuth Client at <https://github.com/settings/developers>:
@@ -29,19 +30,19 @@ Docker is the recommended way to develop and deploy ContentDB.
 		POSTGRES_DB=contentdb
 		FLASK_DEBUG=1
 
-5. Start docker images:
+6. Start docker images:
 
 		docker-compose up --build
 
-6. Setup database:
+7. Setup database:
 
 		./utils/run_migrations.sh
 
-8. (Recommended, optional) create initial data
+8. Create initial data
 	1. `./utils/bash.sh`
-	2. Either `python setup.py -o` or `python setup.py -t`
+	2. Either `python setup.py -t` or `python setup.py -o`:
 	  	1. `-o` creates just the admin, and static data like tags, and licenses.
-	  	2. `-t` will do `-o` and also create test pacakges. (Recommended)
+	  	2. `-t` will do `-o` and also create test packages. (Recommended)
 
 9. View at <http://localhost:5123>.
    The admin username is `rubenwardy` and the password is `tuckfrump`.
