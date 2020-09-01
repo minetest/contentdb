@@ -31,8 +31,7 @@ def upgrade():
 	bind = op.get_bind()
 	session = orm.Session(bind=bind)
 
-	for package in session.query(Package).all():
-		package.maintainers.append(package.author)
+	op.execute('INSERT INTO maintainers (package_id, user_id) SELECT id, author_id FROM package;')
 
 	session.commit()
 
