@@ -87,7 +87,7 @@ def claim():
 				return redirect(url_for("users.claim", username=username))
 
 			# Look for key
-			if token in sig:
+			if sig and token in sig:
 				if user is None:
 					user = User(username)
 					user.forums_username = username
