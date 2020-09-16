@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, make_response
-from app.models import Package, PackageRelease, db, User, UserRank
+from app.models import Package, PackageRelease, db, User, UserRank, PackageState
 from sqlalchemy.sql.expression import func
 
 bp = Blueprint("metrics", __name__)

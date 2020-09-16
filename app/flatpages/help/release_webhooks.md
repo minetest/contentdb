@@ -63,15 +63,7 @@ The process is as follows:
 
 ## Configuring
 
-### Setting minimum and maximum Minetest versions
-
-1. Open up the conf file for the package.
-   This will be `game.conf`, `mod.conf`, `modpack.conf`, or `texture_pack.conf`
-   depending on the content type.
-2. Set `min_minetest_version` and `max_minetest_version` to the respective Minetest versions.
-
-     Eg:
-
-         min_minetest_version = 5.0
-
-Also see [Package Configuration and Releases Guide](/help/package_config/).
+See the [Package Configuration and Releases Guide](/help/package_config/) for
+documentation on configuring the release creation.
+You can set the min/max Minetest version from the Git repository, and also
+configure what files are included.

@@ -1,20 +1,22 @@
 title: Help
 
-## For Everyone
+## General Help
 
 * [Content Ratings and Flags](content_flags)
 * [Non-free Licenses](non_free)
-* [Package Tags](package_tags)
+* [Why WTFPL is a terrible license](wtfpl)
 * [Ranks and Permissions](ranks_permissions)
 * [Reporting Content](reporting)
 * [Top Packages Algorithm](top_packages)
 
-## For Content Creators / Modders
+## Help for Package Authors
 
+* [Package Inclusion Policy and Guidance](/policy_and_guidance/)
+* [Package Tags](package_tags)
 * [Creating Releases using Webhooks](release_webhooks)
 * [Package Configuration and Releases Guide](package_config)
 
-## For Developers
+## APIs
 
 * [API](api)
-* [Metrics](metrics)
+* [Prometheus Metrics](metrics)
