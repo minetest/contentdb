@@ -24,7 +24,6 @@ def upgrade():
 	op.execute("UPDATE package SET state='APPROVED' WHERE approved=true")
 	op.execute("UPDATE package SET state='DELETED' WHERE soft_deleted=true")
 	op.drop_column('package', 'approved')
-	op.drop_column('package', 'updated_at')
 	op.drop_column('package', 'soft_deleted')
 	# ### end Alembic commands ###
 

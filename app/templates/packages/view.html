@@ -26,6 +26,7 @@
 	{% endif %}
 	{% set release = package.getDownloadRelease() %}
 
+<main>
 	<header class="jumbotron pb-3"
 		style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ package.getMainScreenshotURL() }}');
 			background-size: cover;
@@ -135,26 +136,28 @@
 	</header>
 
 	{% if not package.approved %}
-		<aside class="container mt-4">
-			{% from "macros/package_approval.html" import render_banners %}
-			{{ render_banners(package, current_user, topic_error, topic_error_lvl, similar_topics) }}
+		<section class="my-4 pb-3" style="border-bottom: 1px solid rgba(0,0,0,0.5);">
+			<div class="container">
+				{% from "macros/package_approval.html" import render_banners %}
+				{{ render_banners(package, current_user, topic_error, topic_error_lvl, similar_topics) }}
 
-			{% if review_thread and review_thread.checkPerm(current_user, "SEE_THREAD") %}
-				<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
-				{% if review_thread.private %}
-					<p><i>
-						This thread is only visible to the package owner and users of
-						Editor rank or above.
-					</i></p>
+				{% if review_thread and review_thread.checkPerm(current_user, "SEE_THREAD") %}
+					<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
+					{% if review_thread.private %}
+						<p><i>
+							This thread is only visible to the package owner and users of
+							Editor rank or above.
+						</i></p>
+					{% endif %}
+
+					{% from "macros/threads.html" import render_thread %}
+					{{ render_thread(review_thread, current_user) }}
 				{% endif %}
-
-				{% from "macros/threads.html" import render_thread %}
-				{{ render_thread(review_thread, current_user) }}
-			{% endif %}
-		</aside>
+			</div>
+		</section>
 	{% endif %}
 
-	<main class="container mt-4">
+	<section class="container mt-4">
 		<aside class="float-right ml-4" style="width: 18rem;">
 			<div class="card mb-4">
 				<div class="card-header">
@@ -481,5 +484,6 @@
 				<pre><code>{{ package.makeShield("downloads") }}</code></pre>
 			</p>
 		{% endif %}
-	</main>
+	</section>
+</main>
 {% endblock %}

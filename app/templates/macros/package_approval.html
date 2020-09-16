@@ -8,7 +8,7 @@
 	{% for state in package.getNextStates(current_user) %}
 		<form class="col-auto"  method="post" action="{{ package.getSetStateURL(state) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<input class="btn btn-sm btn-secondary" type="submit" value="{{ state.verb() }}" />
+			<input class="btn btn-sm btn-primary" type="submit" value="{{ state.verb() }}" />
 		</form>
 	{% endfor %}
 </div>
