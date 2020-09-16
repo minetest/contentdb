@@ -857,7 +857,8 @@ class Package(db.Model):
 			return self.checkPerm(user, Permission.APPROVE_NEW)
 
 		elif state == PackageState.WIP:
-			return self.checkPerm(user, Permission.EDIT_PACKAGE) and user in self.maintainers
+			return self.checkPerm(user, Permission.EDIT_PACKAGE) and \
+				(user in self.maintainers or user.rank.atLeast(UserRank.ADMIN))
 
 		return True
 
