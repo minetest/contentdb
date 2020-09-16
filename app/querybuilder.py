@@ -1,4 +1,4 @@
-from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, Tags, ContentWarning
+from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, Tags, ContentWarning, PackageState
 from .utils import isNo, isYes, get_int_or_abort
 from sqlalchemy.sql.expression import func
 from flask import abort
