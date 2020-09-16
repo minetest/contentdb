@@ -20,6 +20,7 @@ import flask_menu as menu
 from app.models import *
 from app.querybuilder import QueryBuilder
 from app.utils import get_int_or_abort
+from sqlalchemy import or_
 
 bp = Blueprint("todo", __name__)
 
@@ -35,7 +36,7 @@ def view():
 	if canApproveNew:
 		packages = Package.query.filter_by(state=PackageState.READY_FOR_REVIEW) \
 			.order_by(db.desc(Package.created_at)).all()
-		wip_packages = Package.query.filter(Package.state<PackageState.READY_FOR_REVIEW) \
+		wip_packages = Package.query.filter(or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)) \
 			.order_by(db.desc(Package.created_at)).all()
 
 	releases = None
