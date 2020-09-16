@@ -17,7 +17,7 @@ depends_on = None
 
 
 def upgrade():
-	status = postgresql.ENUM('WIP', 'READY_FOR_REVIEW', 'APPROVED', 'DELETED', name='packagestate')
+	status = postgresql.ENUM('WIP', 'CHANGES_NEEDED', 'READY_FOR_REVIEW', 'APPROVED', 'DELETED', name='packagestate')
 	status.create(op.get_bind())
 
 	op.add_column('package', sa.Column('state', sa.Enum('WIP', 'CHANGES_NEEDED', 'READY_FOR_REVIEW', 'APPROVED', 'DELETED', name='packagestate'), nullable=True))
