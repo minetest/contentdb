@@ -41,7 +41,7 @@ def view(name):
 		.filter(MetaPackage.name==name) \
 		.join(MetaPackage.dependencies) \
 		.join(Dependency.depender) \
-		.filter(Dependency.optional==False, Package.approved==True, Package.soft_deleted==False) \
+		.filter(Dependency.optional==False, Package.state==PackageState.APPROVED) \
 		.all()
 
 	optional_dependers = db.session.query(Package) \
@@ -49,11 +49,11 @@ def view(name):
 		.filter(MetaPackage.name==name) \
 		.join(MetaPackage.dependencies) \
 		.join(Dependency.depender) \
-		.filter(Dependency.optional==True, Package.approved==True, Package.soft_deleted==False) \
+		.filter(Dependency.optional==True, Package.state==PackageState.APPROVED) \
 		.all()
 
 	similar_topics = None
-	if mpackage.packages.filter_by(approved=True, soft_deleted=False).count() == 0:
+	if mpackage.packages.filter_by(state=PackageState.APPROVED).count() == 0:
 		similar_topics = ForumTopic.query \
 				.filter_by(name=name) \
 				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \

@@ -122,8 +122,8 @@ def view(package):
 	alternatives = None
 	if package.type == PackageType.MOD:
 		alternatives = Package.query \
-			.filter_by(name=package.name, type=PackageType.MOD, soft_deleted=False) \
-			.filter(Package.id != package.id) \
+			.filter_by(name=package.name, type=PackageType.MOD) \
+			.filter(Package.id != package.id, Package.state!=PackageState.DELETED) \
 			.order_by(db.desc(Package.score)) \
 			.all()
 
@@ -148,9 +148,9 @@ def view(package):
 
 	topic_error = None
 	topic_error_lvl = "warning"
-	if not package.approved and package.forums is not None:
+	if package.state != PackageState.APPROVED and package.forums is not None:
 		errors = []
-		if Package.query.filter_by(forums=package.forums, soft_deleted=False).count() > 1:
+		if Package.query.filter(Package.forums==package.forums, Package.state!=PackageState.DELETED).count() > 1:
 			errors.append("<b>Error: Another package already uses this forum topic!</b>")
 			topic_error_lvl = "danger"
 
@@ -294,7 +294,7 @@ def create_edit(author=None, name=None):
 		if not package:
 			package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
 			if package is not None:
-				if package.soft_deleted:
+				if package.state == PackageState.READY_FOR_REVIEW:
 					Package.query.filter_by(name=form["name"].data, author_id=author.id).delete()
 				else:
 					flash("Package already exists!", "danger")
@@ -305,8 +305,7 @@ def create_edit(author=None, name=None):
 			package.maintainers.append(author)
 			wasNew = True
 
-		elif package.approved and package.name != form.name.data and \
-				not package.checkPerm(current_user, Permission.CHANGE_NAME):
+		elif package.name != form.name.data and not package.checkPerm(current_user, Permission.CHANGE_NAME):
 			flash("Unable to change package name", "danger")
 			return redirect(url_for("packages.create_edit", author=author, name=name))
 
@@ -359,7 +358,7 @@ def create_edit(author=None, name=None):
 
 		return redirect(next_url)
 
-	package_query = Package.query.filter_by(approved=True, soft_deleted=False)
+	package_query = Package.query.filter_by(state=PackageState.APPROVED)
 	if package is not None:
 		package_query = package_query.filter(Package.id != package.id)
 
@@ -369,18 +368,23 @@ def create_edit(author=None, name=None):
 			packages=package_query.all(), \
 			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all())
 
-@bp.route("/packages/<author>/<name>/approve/", methods=["POST"])
+
+@bp.route("/packages/<author>/<name>/state/", methods=["POST"])
 @login_required
 @is_package_page
-def approve(package):
-	if not package.checkPerm(current_user, Permission.APPROVE_NEW):
-		flash("You don't have permission to do that.", "danger")
+def move_to_state(package):
+	state = PackageState.get(request.args.get("state"))
+	if state is None:
+		abort(400)
 
-	elif package.approved:
-		flash("Package has already been approved", "danger")
+	if not package.canMoveToState(current_user, state):
+		flash("You don't have permission to do that", "danger")
+		return redirect(package.getDetailsURL())
 
-	else:
-		package.approved = True
+	package.state = state
+	msg = "Marked {} as {}".format(package.title, state.value)
+
+	if state == PackageState.APPROVED:
 		if not package.approved_at:
 			package.approved_at = datetime.datetime.now()
 
@@ -389,10 +393,19 @@ def approve(package):
 			s.approved = True
 
 		msg = "Approved {}".format(package.title)
-		addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)
-		severity = AuditSeverity.NORMAL if current_user == package.author else AuditSeverity.EDITOR
-		addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
-		db.session.commit()
+
+	addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)
+	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
+	addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
+
+	db.session.commit()
+
+	if package.state == PackageState.CHANGES_NEEDED:
+		flash("Please comment what changes are needed in the review thread", "warning")
+		if package.review_thread:
+			return redirect(package.review_thread.getViewURL())
+		else:
+			return redirect(url_for('threads.new', pid=package.id, title='Package approval comments'))
 
 	return redirect(package.getDetailsURL())
 
@@ -409,7 +422,7 @@ def remove(package):
 			flash("You don't have permission to do that.", "danger")
 			return redirect(package.getDetailsURL())
 
-		package.soft_deleted = True
+		package.state = PackageState.DELETED
 
 		url = url_for("users.profile", username=package.author.username)
 		msg = "Deleted {}".format(package.title)
@@ -425,7 +438,7 @@ def remove(package):
 			flash("You don't have permission to do that.", "danger")
 			return redirect(package.getDetailsURL())
 
-		package.approved = False
+		package.state = PackageState.READY_FOR_REVIEW
 
 		msg = "Unapproved {}".format(package.title)
 		addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)

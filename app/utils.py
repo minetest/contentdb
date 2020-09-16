@@ -200,7 +200,8 @@ def getPackageByInfo(author, name):
 	if user is None:
 		return None
 
-	package = Package.query.filter_by(name=name, author_id=user.id, soft_deleted=False).first()
+	package = Package.query.filter_by(name=name, author_id=user.id) \
+		.filter(Package.state!=PackageState.DELETED).first()
 	if package is None:
 		return None
 

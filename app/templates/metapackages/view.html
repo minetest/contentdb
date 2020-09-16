@@ -10,7 +10,7 @@
 	<h2>Provided By</h2>
 
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
-	{{ render_pkggrid(mpackage.packages.filter_by(approved=True, soft_deleted=False).all()) }}
+	{{ render_pkggrid(mpackage.packages.filter_by(state="APPROVED").all()) }}
 
 	{% if similar_topics %}
 		<p>Unforuntately, this isn't on ContentDB yet! Here's some forum topics:</p>

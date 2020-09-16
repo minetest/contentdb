@@ -8,22 +8,33 @@
 	<h2 class="mb-4">Approval Queue</h2>
 
 	<div class="row">
-		{% if canApproveNew and packages %}
+		{% if canApproveNew and (packages or wip_packages) %}
 		<div class="col-sm-6">
 			<div class="card">
 				<h3 class="card-header">Packages</h3>
 				<div class="list-group list-group-flush">
 					{% for p in packages %}
 						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
-							{% if p.getState() == "thread" %}
-								<span class="mr-2 badge badge-danger">Thread</span>
-							{% elif p.getState() == "ready" %}
+							{% if "Other" in p.license.name or "Other" in p.media_license.name %}
+								<span class="mr-2 badge badge-info">License</span>
+							{% else %}
 								<span class="mr-2 badge badge-success">Ready</span>
-							{% elif p.getState() == "wip" %}
-								<span class="mr-2 badge badge-warning">WIP</span>
-							{% elif p.getState() == "license" %}
-								<span class="mr-2 badge badge-info">WIP</span>
 							{% endif %}
+
+							{{ p.title }} by {{ p.author.display_name }}
+						</a>
+					{% else %}
+						<li class="list-group-item"><i>No packages need reviewing.</i></li>
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="card mt-5">
+				<h3 class="card-header">WIP Packages</h3>
+				<div class="list-group list-group-flush">
+					{% for p in wip_packages %}
+						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+							<span class="mr-2 badge badge-warning">{{ p.state.value }}</span>
 
 							{{ p.title }} by {{ p.author.display_name }}
 						</a>

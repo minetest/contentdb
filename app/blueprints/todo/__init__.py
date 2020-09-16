@@ -31,8 +31,12 @@ def view():
 	canApproveScn = Permission.APPROVE_SCREENSHOT.check(current_user)
 
 	packages = None
+	wip_packages = None
 	if canApproveNew:
-		packages = Package.query.filter_by(approved=False, soft_deleted=False).order_by(db.desc(Package.created_at)).all()
+		packages = Package.query.filter_by(state=PackageState.READY_FOR_REVIEW) \
+			.order_by(db.desc(Package.created_at)).all()
+		wip_packages = Package.query.filter(Package.state<PackageState.READY_FOR_REVIEW) \
+			.order_by(db.desc(Package.created_at)).all()
 
 	releases = None
 	if canApproveRel:
@@ -64,16 +68,16 @@ def view():
 			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
 			.count()
 
-	total_packages = Package.query.filter_by(approved=True, soft_deleted=False).count()
-	total_to_tag = Package.query.filter_by(approved=True, soft_deleted=False, tags=None).count()
+	total_packages = Package.query.filter_by(state=PackageState.APPROVED).count()
+	total_to_tag = Package.query.filter_by(state=PackageState.APPROVED, tags=None).count()
 
 	unfulfilled_meta_packages = MetaPackage.query \
-			.filter(~ MetaPackage.packages.any(approved=True, soft_deleted=False)) \
+			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
 			.filter(MetaPackage.dependencies.any(optional=False)) \
 			.order_by(db.asc(MetaPackage.name)).count()
 
 	return render_template("todo/list.html", title="Reports and Work Queue",
-		packages=packages, releases=releases, screenshots=screenshots,
+		packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
 		topics_to_add=topics_to_add, total_topics=total_topics, \
 		total_packages=total_packages, total_to_tag=total_to_tag, \
@@ -128,7 +132,7 @@ def tags():
 @login_required
 def metapackages():
 	mpackages = MetaPackage.query \
-			.filter(~ MetaPackage.packages.any(approved=True, soft_deleted=False)) \
+			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
 			.filter(MetaPackage.dependencies.any(optional=False)) \
 			.order_by(db.asc(MetaPackage.name)).all()
 

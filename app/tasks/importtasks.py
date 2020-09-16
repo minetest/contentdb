@@ -321,7 +321,7 @@ def makeVCSRelease(self, id, branch):
 @celery.task()
 def importRepoScreenshot(id):
 	package = Package.query.get(id)
-	if package is None or package.soft_deleted:
+	if package is None or package.state == PackageState.DELETED:
 		raise Exception("Unexpected none package")
 
 	# Get URL Maker

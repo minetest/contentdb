@@ -57,7 +57,7 @@ def admin_page():
 
 		elif action == "reimportpackages":
 			tasks = []
-			for package in Package.query.filter_by(soft_deleted=False).all():
+			for package in Package.query.filter(Package.state!=PackageState.DELETED).all():
 				release = package.releases.first()
 				if release:
 					zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
@@ -96,7 +96,7 @@ def admin_page():
 
 		elif action == "importscreenshots":
 			packages = Package.query \
-				.filter_by(soft_deleted=False) \
+				.filter(Package.state!=PackageState.DELETED) \
 				.outerjoin(PackageScreenshot, Package.id==PackageScreenshot.package_id) \
 				.filter(PackageScreenshot.id==None) \
 				.all()
@@ -110,7 +110,7 @@ def admin_page():
 			if package is None:
 				flash("Unknown package", "danger")
 			else:
-				package.soft_deleted = False
+				package.state = PackageState.READY_FOR_REVIEW
 				db.session.commit()
 				return redirect(url_for("admin.admin_page"))
 
@@ -163,7 +163,7 @@ def admin_page():
 		else:
 			flash("Unknown action: " + action, "danger")
 
-	deleted_packages = Package.query.filter_by(soft_deleted=True).all()
+	deleted_packages = Package.query.filter(Package.state==PackageState.DELETED).all()
 	return render_template("admin/list.html", deleted_packages=deleted_packages)
 
 class SwitchUserForm(FlaskForm):

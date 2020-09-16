@@ -72,9 +72,9 @@ class QueryBuilder:
 		query = None
 		if self.order_by == "last_release":
 			query = db.session.query(Package).select_from(PackageRelease).join(Package) \
-				.filter_by(soft_deleted=False, approved=True)
+				.filter_by(state=PackageState.APPROVED)
 		else:
-			query = Package.query.filter_by(soft_deleted=False, approved=True)
+			query = Package.query.filter_by(state=PackageState.APPROVED)
 
 		return self.filterPackageQuery(self.orderPackageQuery(query))
 

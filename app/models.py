@@ -336,6 +336,54 @@ class PackageType(enum.Enum):
 		return item if type(item) == PackageType else PackageType[item]
 
 
+class PackageState(enum.Enum):
+	WIP = "Work in Progress"
+	CHANGES_NEEDED  = "Changes Needed"
+	READY_FOR_REVIEW = "Ready for Review"
+	APPROVED  = "Approved"
+	DELETED = "Deleted"
+
+	def toName(self):
+		return self.name.lower()
+
+	def verb(self):
+		if self == self.READY_FOR_REVIEW:
+			return "Submit for Review"
+		elif self == self.APPROVED:
+			return "Approve"
+		elif self == self.DELETED:
+			return "Delete"
+		else:
+			return self.value
+
+	def __str__(self):
+		return self.name
+
+	@classmethod
+	def get(cls, name):
+		try:
+			return PackageState[name.upper()]
+		except KeyError:
+			return None
+
+	@classmethod
+	def choices(cls):
+		return [(choice, choice.value) for choice in cls]
+
+	@classmethod
+	def coerce(cls, item):
+		return item if type(item) == PackageState else PackageState[item]
+
+
+PACKAGE_STATE_FLOW = {
+	PackageState.WIP: set([ PackageState.READY_FOR_REVIEW ]),
+	PackageState.CHANGES_NEEDED: set([ PackageState.READY_FOR_REVIEW ]),
+	PackageState.READY_FOR_REVIEW: set([ PackageState.WIP, PackageState.CHANGES_NEEDED, PackageState.APPROVED ]),
+	PackageState.APPROVED: set([ PackageState.CHANGES_NEEDED ]),
+	PackageState.DELETED: set([ PackageState.READY_FOR_REVIEW ]),
+}
+
+
 class PackagePropertyKey(enum.Enum):
 	name          = "Name"
 	title         = "Title"
@@ -480,8 +528,11 @@ class Package(db.Model):
 	media_license_id = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	media_license    = db.relationship("License", foreign_keys=[media_license_id])
 
-	approved     = db.Column(db.Boolean, nullable=False, default=False)
-	soft_deleted = db.Column(db.Boolean, nullable=False, default=False)
+	state         = db.Column(db.Enum(PackageState), default=PackageState.WIP)
+
+	@property
+	def approved(self):
+		return self.state == PackageState.APPROVED
 
 	score        = db.Column(db.Float, nullable=False, default=0)
 	score_downloads = db.Column(db.Float, nullable=False, default=0)
@@ -525,7 +576,7 @@ class Package(db.Model):
 
 		self.author_id = package.author_id
 		self.created_at = package.created_at
-		self.approved = package.approved
+		self.state = package.state
 
 		self.maintainers.append(self.author)
 
@@ -577,22 +628,6 @@ class Package(db.Model):
 
 	def getSortedOptionalDependencies(self):
 		return self.getSortedDependencies(False)
-
-	def getState(self):
-		if self.approved:
-			return "approved"
-		elif self.review_thread_id:
-			return "thread"
-		elif (self.type == PackageType.GAME or \
-					self.type == PackageType.TXP) and \
-				self.screenshots.count() == 0:
-			return "wip"
-		elif not self.getDownloadRelease():
-			return "wip"
-		elif "Other" in self.license.name or "Other" in self.media_license.name:
-			return "license"
-		else:
-			return "ready"
 
 	def getAsDictionaryKey(self):
 		return {
@@ -682,9 +717,14 @@ class Package(db.Model):
 		return url_for("packages.create_edit",
 				author=self.author.username, name=self.name)
 
-	def getApproveURL(self):
-		return url_for("packages.approve",
-				author=self.author.username, name=self.name)
+	def getSetStateURL(self, state):
+		if type(state) == str:
+			state = PackageState[perm]
+		elif type(state) != PackageState:
+			raise Exception("Unknown state given to Package.canMoveToState()")
+
+		return url_for("packages.move_to_state",
+				author=self.author.username, name=self.name, state=state.name.lower())
 
 	def getRemoveURL(self):
 		return url_for("packages.remove",
@@ -783,6 +823,53 @@ class Package(db.Model):
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
+
+
+	def canMoveToState(self, user, state):
+		if not user.is_authenticated:
+			return False
+
+		if type(state) == str:
+			state = PackageState[perm]
+		elif type(state) != PackageState:
+			raise Exception("Unknown state given to Package.canMoveToState()")
+
+		if state not in PACKAGE_STATE_FLOW[self.state]:
+			return False
+
+		if state == PackageState.READY_FOR_REVIEW or state == PackageState.APPROVED:
+			requiredPerm = Permission.APPROVE_NEW if state == PackageState.APPROVED else Permission.EDIT_PACKAGE
+
+			if not self.checkPerm(user, requiredPerm):
+				return False
+
+			if state == PackageState.APPROVED and \
+					("Other" in self.license.name or "Other" in self.media_license.name):
+				return False
+
+			needsScreenshot = \
+				(self.type == self.type.GAME or self.type == self.type.TXP) and \
+					self.screenshots.count() == 0
+			return self.releases.count() > 0 and not needsScreenshot
+
+		elif state == PackageState.CHANGES_NEEDED:
+			return self.checkPerm(user, Permission.APPROVE_NEW)
+
+		elif state == PackageState.WIP:
+			return self.checkPerm(user, Permission.EDIT_PACKAGE) and user in self.maintainers
+
+		return True
+
+
+	def getNextStates(self, user):
+		states = []
+
+		for state in PackageState:
+			if self.canMoveToState(user, state):
+				states.append(state)
+
+		return states
+
 
 	def getScoreDict(self):
 		return {

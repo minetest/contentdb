@@ -15,7 +15,7 @@ def home():
 			joinedload(Package.license), \
 			joinedload(Package.media_license))
 
-	query   = Package.query.filter_by(approved=True, soft_deleted=False)
+	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
 
 	new     = join(query.order_by(db.desc(Package.approved_at))).limit(8).all()
@@ -24,7 +24,7 @@ def home():
 	pop_txp = join(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(4).all()
 
 	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
-			.filter_by(soft_deleted=False, approved=True) \
+			.filter_by(state=PackageState.APPROVED) \
 			.order_by(db.desc(PackageRelease.releaseDate)) \
 			.limit(20).all()
 	updated = updated[:8]

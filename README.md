@@ -10,6 +10,8 @@ Docker is the recommended way to develop and deploy ContentDB.
 
 1. Install `docker` and `docker-compose`.
 
+	Debian/Ubuntu:
+
 		sudo apt install docker-ce docker-compose
 
 2. Copy `config.example.cfg` to `config.cfg`.
@@ -40,7 +42,7 @@ Docker is the recommended way to develop and deploy ContentDB.
 
 8. Create initial data
 	1. `./utils/bash.sh`
-	2. Either `python setup.py -t` or `python setup.py -o`:
+	2. Either `python utils/setup.py -t` or `python utils/setup.py -o`:
 	  	1. `-o` creates just the admin, and static data like tags, and licenses.
 	  	2. `-t` will do `-o` and also create test packages. (Recommended)
 

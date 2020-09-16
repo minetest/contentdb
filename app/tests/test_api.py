@@ -46,7 +46,7 @@ def test_packages_with_contents(client):
 	packages = parse_json(rv.data)
 
 	assert len(packages) > 0
-	assert len(packages) == Package.query.filter_by(approved=True).count()
+	assert len(packages) == Package.query.filter_by(state=PackageState.APPROVED).count()
 
 	validate_package_list(packages)
 

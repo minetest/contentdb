@@ -115,9 +115,9 @@ def profile(username):
 			# Redirect to home page
 			return redirect(url_for("users.profile", username=username))
 
-	packages = user.packages.filter_by(soft_deleted=False)
+	packages = user.packages.filter(Package.state!=PackageState.DELETED)
 	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
-		packages = packages.filter_by(approved=True)
+		packages = packages.filter_by(state=PackageState.APPROVED)
 	packages = packages.order_by(db.asc(Package.title))
 
 	topics_to_add = None

@@ -45,7 +45,7 @@ def generate_metrics(full=False):
 	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 
-	packages = Package.query.filter_by(approved=True, soft_deleted=False).count()
+	packages = Package.query.filter_by(state=PackageState.APPROVED).count()
 	users = User.query.filter(User.rank != UserRank.NOT_JOINED).count()
 
 	ret = ""
@@ -55,7 +55,7 @@ def generate_metrics(full=False):
 
 	if full:
 		scores = Package.query.join(User).with_entities(User.username, Package.name, Package.score) \
-			.filter(Package.approved==True, Package.soft_deleted==False).all()
+			.filter(Package.state==PackageState.APPROVED).all()
 
 		ret += write_array_stat("contentdb_package_score", "Package score", "gauge", \
 			[({ "author": score[0], "name": score[1] }, score[2])  for score in scores])
