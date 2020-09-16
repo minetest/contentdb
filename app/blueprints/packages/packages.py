@@ -438,7 +438,7 @@ def remove(package):
 			flash("You don't have permission to do that.", "danger")
 			return redirect(package.getDetailsURL())
 
-		package.state = PackageState.READY_FOR_REVIEW
+		package.state = PackageState.WIP
 
 		msg = "Unapproved {}".format(package.title)
 		addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)

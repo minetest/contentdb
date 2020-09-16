@@ -813,7 +813,7 @@ class Package(db.Model):
 			return isOwner or user.rank.atLeast(UserRank.MODERATOR)
 
 		elif perm == Permission.UNAPPROVE_PACKAGE or perm == Permission.DELETE_PACKAGE:
-			return user.rank.atLeast(UserRank.EDITOR)
+			return user.rank.atLeast(UserRank.MEMBER if isOwner else UserRank.EDITOR)
 
 		elif perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
