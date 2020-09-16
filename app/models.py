@@ -163,7 +163,8 @@ class User(db.Model, UserMixin):
 	donate_url    = db.Column(db.String(255), nullable=True, default=None)
 
 	# Content
-	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id")
+	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id", \
+			order_by="Notification.created_at")
 
 	packages      = db.relationship("Package", backref=db.backref("author", lazy="joined"), lazy="dynamic")
 	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
