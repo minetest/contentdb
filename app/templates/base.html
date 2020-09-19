@@ -60,17 +60,39 @@
 				</form>
 				<ul class="navbar-nav ml-auto">
 					{% if current_user.is_authenticated %}
-						<li class="nav-item"><a class="nav-link notification-icon" href="{{ url_for('notifications.list_all') }}">
-							{% if current_user.notifications %}
-								<i class="fas fa-bell"></i>
-								<span class="badge badge-pill badge-notify" style="font-size:10px;">{{ current_user.notifications | length }}</span>
-							{% else %}
-								<i class="fas fa-bell" ></i>
-							{% endif %}
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="{{ url_for('packages.create_edit') }}">
-							<i class="fas fa-plus"></i>
-						</a></li>
+						{% if todo_list_count is not none %}
+							<li class="nav-item">
+								<a class="nav-link notification-icon"
+											href="{{ url_for('todo.view') }}"
+											title="{{ _('Work Queue') }}">
+									{% if todo_list_count > 0 %}
+										<i class="fas fa-inbox"></i>
+										<span class="badge badge-pill badge-notify" style="font-size:10px;">{{ todo_list_count }}</span>
+									{% else %}
+										<i class="fas fa-inbox" ></i>
+									{% endif %}
+								</a>
+							</li>
+						{% endif %}
+						<li class="nav-item">
+							<a class="nav-link notification-icon"
+										href="{{ url_for('notifications.list_all') }}"
+										title="{{ _('Notifications') }}">
+								{% if current_user.notifications %}
+									<i class="fas fa-bell"></i>
+									<span class="badge badge-pill badge-notify" style="font-size:10px;">{{ current_user.notifications | length }}</span>
+								{% else %}
+									<i class="fas fa-bell" ></i>
+								{% endif %}
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link"
+									href="{{ url_for('packages.create_edit') }}"
+									title="{{ _('Add Package') }}">
+								<i class="fas fa-plus"></i>
+							</a>
+						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle"
 								data-toggle="dropdown"
@@ -87,8 +109,8 @@
 								</li>
 								{% if current_user.canAccessTodoList() %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('todo.view') }}">{{ _("Work Queue") }}</a></li>
-									<li class="nav-item"><a  class="nav-link" href="{{ url_for('users.list_all') }}">{{ _("User list") }}</a></li>
 								{% endif %}
+								<li class="nav-item"><a  class="nav-link" href="{{ url_for('users.list_all') }}">{{ _("User list") }}</a></li>
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('todo.topics') }}">{{ _("All unadded topics") }}</a>
 								</li>

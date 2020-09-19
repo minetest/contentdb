@@ -163,7 +163,7 @@ title: Ranks and Permissions
 			<td>Approve Release</td>
 			<td></td> <!-- new -->
 			<td></td>
-			<td></td> <!-- member -->
+			<td>✓</td> <!-- member -->
 			<td></td>
 			<td>✓</td> <!-- trusted member -->
 			<td></td>

@@ -1,6 +1,7 @@
 from . import app
-from .models import Permission
+from .models import Permission, Package, PackageState, PackageRelease
 from .utils import abs_url_for, url_set_query
+from flask_user import current_user
 from urllib.parse import urlparse
 
 @app.context_processor
@@ -11,6 +12,15 @@ def inject_debug():
 def inject_functions():
 	check_global_perm = Permission.checkPerm
 	return dict(abs_url_for=abs_url_for, url_set_query=url_set_query, check_global_perm=check_global_perm)
+
+@app.context_processor
+def inject_todo():
+	todo_list_count = None
+	if current_user.is_authenticated and current_user.canAccessTodoList():
+		todo_list_count = Package.query.filter_by(state=PackageState.READY_FOR_REVIEW).count()
+		todo_list_count += PackageRelease.query.filter_by(approved=False, task_id=None).count()
+
+	return dict(todo_list_count=todo_list_count)
 
 @app.template_filter()
 def throw(err):
