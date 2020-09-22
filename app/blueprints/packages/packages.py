@@ -289,6 +289,9 @@ def create_edit(author=None, name=None):
 			form.tags.data         = list(package.tags)
 			form.content_warnings.data = list(package.content_warnings)
 
+	if request.method == "POST" and form.type.data == PackageType.TXP:
+		form.license.data = form.media_license.data
+
 	if request.method == "POST" and form.validate():
 		wasNew = False
 		if not package:
