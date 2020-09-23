@@ -93,7 +93,8 @@
 	<div class="alert alert-secondary">
 		<a class="float-right btn btn-sm btn-secondary" href="{{ url_for('threads.new', pid=package.id, title='Package approval comments') }}">Open Thread</a>
 
-		Privately ask a question or give feedback
+		 {{ _("Package review thread") }}:
+		 {{ _("You can open a thread if you have a question for the reviewer or package author.") }}
 		<div style="clear:both;"></div>
 	</div>
 {% endif %}
