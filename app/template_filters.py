@@ -16,7 +16,7 @@ def inject_functions():
 @app.context_processor
 def inject_todo():
 	todo_list_count = None
-	if current_user.is_authenticated and current_user.canAccessTodoList():
+	if current_user and current_user.is_authenticated and current_user.canAccessTodoList():
 		todo_list_count = Package.query.filter_by(state=PackageState.READY_FOR_REVIEW).count()
 		todo_list_count += PackageRelease.query.filter_by(approved=False, task_id=None).count()
 
