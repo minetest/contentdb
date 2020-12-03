@@ -1,7 +1,7 @@
 import pytest
 from app import app
 from app.default_data import populate_test_data
-from app.models import db, License, Tag, User, UserRank, Package
+from app.models import db, License, Tag, User, UserRank, Package, PackageState
 from utils import client, recreate_db, parse_json
 from utils import is_str, is_int, is_optional
 
