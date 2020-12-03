@@ -7,6 +7,9 @@ Audit Log
 {% block content %}
 	<h1>Audit Log</h1>
 
+	{% from "macros/pagination.html" import render_pagination %}
+	{{ render_pagination(pagination, url_set_query) }}
+
 	<div class="list-group mt-3">
 		{% for entry in log %}
 			<a class="list-group-item list-group-item-action"
@@ -66,4 +69,7 @@ Audit Log
 			<p class="list-group-item"><i>No audit log entires.</i></p>
 		{% endfor %}
 	</div>
+
+	{% from "macros/pagination.html" import render_pagination %}
+	{{ render_pagination(pagination, url_set_query) }}
 {% endblock %}

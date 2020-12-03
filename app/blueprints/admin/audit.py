@@ -14,11 +14,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-from flask import Blueprint, render_template, redirect, url_for
-from flask_user import current_user
+from flask import render_template, request
 from app.models import db, AuditLogEntry, UserRank
-from app.utils import rank_required
+from app.utils import rank_required, get_int_or_abort
 
 from . import bp
 
@@ -26,8 +24,11 @@ from . import bp
 @bp.route("/admin/audit/")
 @rank_required(UserRank.MODERATOR)
 def audit():
-	log = AuditLogEntry.query.order_by(db.desc(AuditLogEntry.created_at)).all()
-	return render_template("admin/audit.html", log=log)
+	page = get_int_or_abort(request.args.get("page"), 1)
+	num = min(40, get_int_or_abort(request.args.get("n"), 100))
+
+	pagination = AuditLogEntry.query.order_by(db.desc(AuditLogEntry.created_at)).paginate(page, num, True)
+	return render_template("admin/audit.html", log=pagination.items, pagination=pagination)
 
 
 @bp.route("/admin/audit/<int:id>/")
