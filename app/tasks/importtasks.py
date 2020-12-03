@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import flask, json, os, git, tempfile, shutil, gitdb
+import flask, json, os, git, tempfile, shutil, gitdb, contextlib
 from git import GitCommandError
 from git_archive_all import GitArchiver
 from flask_sqlalchemy import SQLAlchemy
@@ -30,68 +30,7 @@ from app.tasks import celery, TaskError
 from app.utils import randomString, getExtension
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from .minetestcheck.config import parse_conf
-
-
-krock_list_cache = None
-krock_list_cache_by_name = None
-def getKrockList():
-	global krock_list_cache
-	global krock_list_cache_by_name
-
-	if krock_list_cache is None:
-		contents = urllib.request.urlopen("https://krock-works.uk.to/minetest/modList.php").read().decode("utf-8")
-		list = json.loads(contents)
-
-		def h(x):
-			if not ("title"   in x and "author" in x and \
-					"topicId" in x and "link"   in x and x["link"] != ""):
-				return False
-
-			import re
-			m = re.search("\[([A-Za-z0-9_]+)\]", x["title"])
-			if m is None:
-				return False
-
-			x["name"] = m.group(1)
-			return True
-
-		def g(x):
-			return {
-				"title":   x["title"],
-				"author":  x["author"],
-				"name":	x["name"],
-				"topicId": x["topicId"],
-				"link":	x["link"],
-			}
-
-		krock_list_cache = [g(x) for x in list if h(x)]
-		krock_list_cache_by_name = {}
-		for x in krock_list_cache:
-			if not x["name"] in krock_list_cache_by_name:
-				krock_list_cache_by_name[x["name"]] = []
-
-			krock_list_cache_by_name[x["name"]].append(x)
-
-	return krock_list_cache, krock_list_cache_by_name
-
-
-def findModInfo(author, name, link):
-	list, lookup = getKrockList()
-
-	if name is not None and name in lookup:
-		if len(lookup[name]) == 1:
-			return lookup[name][0]
-
-		for x in lookup[name]:
-			if x["author"] == author:
-				return x
-
-	if link is not None and len(link) > 15:
-		for x in list:
-			if link in x["link"]:
-				return x
-
-	return None
+from .krocklist import getKrockList, findModInfo
 
 
 def generateGitURL(urlstr):
@@ -100,16 +39,20 @@ def generateGitURL(urlstr):
 	return "http://:@" + netloc + path + query
 
 
+@contextlib.contextmanager
 def getTempDir():
-	return os.path.join(tempfile.gettempdir(), randomString(10))
+	temp = os.path.join(tempfile.gettempdir(), randomString(10))
+	yield temp
+	shutil.rmtree(temp)
 
 
 # Clones a repo from an unvalidated URL.
 # Returns a tuple of path and repo on sucess.
 # Throws `TaskError` on failure.
 # Caller is responsible for deleting returned directory.
+@contextlib.contextmanager
 def cloneRepo(urlstr, ref=None, recursive=False):
-	gitDir = getTempDir()
+	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
 
 	err = None
 	try:
@@ -129,7 +72,9 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 			for submodule in repo.submodules:
 				submodule.update(init=True)
 
-		return gitDir, repo
+		yield repo
+		shutil.rmtree(gitDir)
+		return
 
 	except GitCommandError as e:
 		# This is needed to stop the backtrace being weird
@@ -145,35 +90,32 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 
 @celery.task()
 def getMeta(urlstr, author):
-	gitDir, _ = cloneRepo(urlstr, recursive=True)
+	with cloneRepo(urlstr, recursive=True) as repo:
+		try:
+			tree = build_tree(repo.working_tree_dir, author=author, repo=urlstr)
+		except MinetestCheckError as err:
+			raise TaskError(str(err))
 
-	try:
-		tree = build_tree(gitDir, author=author, repo=urlstr)
-	except MinetestCheckError as err:
-		raise TaskError(str(err))
+		result = {}
+		result["name"] = tree.name
+		result["provides"] = tree.getModNames()
+		result["type"] = tree.type.name
 
-	shutil.rmtree(gitDir)
+		for key in ["depends", "optional_depends"]:
+			result[key] = tree.fold("meta", key)
 
-	result = {}
-	result["name"] = tree.name
-	result["provides"] = tree.getModNames()
-	result["type"] = tree.type.name
+		for key in ["title", "repo", "issueTracker", "forumId", "description", "short_description"]:
+			result[key] = tree.get(key)
 
-	for key in ["depends", "optional_depends"]:
-		result[key] = tree.fold("meta", key)
+		for mod in result["provides"]:
+			result["depends"].discard(mod)
+			result["optional_depends"].discard(mod)
 
-	for key in ["title", "repo", "issueTracker", "forumId", "description", "short_description"]:
-		result[key] = tree.get(key)
+		for key, value in result.items():
+			if isinstance(value, set):
+				result[key] = list(value)
 
-	for mod in result["provides"]:
-		result["depends"].discard(mod)
-		result["optional_depends"].discard(mod)
-
-	for key, value in result.items():
-		if isinstance(value, set):
-			result[key] = list(value)
-
-	return result
+		return result
 
 
 def postReleaseCheckUpdate(self, release, path):
@@ -249,16 +191,12 @@ def updateMetaFromRelease(self, id, path):
 	print("updateMetaFromRelease: {} for {}/{}" \
 		.format(id, release.package.author.display_name, release.package.name))
 
-	temp = getTempDir()
-	try:
+	with getTempDir() as temp:
 		with ZipFile(path, 'r') as zip_ref:
 			zip_ref.extractall(temp)
 
 		postReleaseCheckUpdate(self, release, temp)
 		db.session.commit()
-
-	finally:
-		shutil.rmtree(temp)
 
 
 @celery.task(bind=True)
@@ -269,8 +207,7 @@ def checkZipRelease(self, id, path):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	temp = getTempDir()
-	try:
+	with getTempDir() as temp:
 		with ZipFile(path, 'r') as zip_ref:
 			zip_ref.extractall(temp)
 
@@ -279,9 +216,6 @@ def checkZipRelease(self, id, path):
 		release.task_id = None
 		release.approve(release.package.author)
 		db.session.commit()
-
-	finally:
-		shutil.rmtree(temp)
 
 
 @celery.task(bind=True)
@@ -292,16 +226,14 @@ def makeVCSRelease(self, id, branch):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	gitDir, repo = cloneRepo(release.package.repo, ref=branch, recursive=True)
+	with cloneRepo(release.package.repo, ref=branch, recursive=True) as repo:
+		postReleaseCheckUpdate(self, release, repo.working_tree_dir)
 
-	postReleaseCheckUpdate(self, release, gitDir)
-
-	try:
 		filename = randomString(10) + ".zip"
 		destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
 
 		assert(not os.path.isfile(destPath))
-		archiver = GitArchiver(force_sub=True, main_repo_abspath=gitDir)
+		archiver = GitArchiver(force_sub=True, main_repo_abspath=repo.working_tree_dir)
 		archiver.create(destPath)
 		assert(os.path.isfile(destPath))
 
@@ -314,8 +246,6 @@ def makeVCSRelease(self, id, branch):
 		updateMetaFromRelease.delay(release.id, destPath)
 
 		return release.url
-	finally:
-		shutil.rmtree(gitDir)
 
 
 @celery.task()
@@ -324,34 +254,29 @@ def importRepoScreenshot(id):
 	if package is None or package.state == PackageState.DELETED:
 		raise Exception("Unexpected none package")
 
-	# Get URL Maker
 	try:
-		gitDir, _ = cloneRepo(package.repo)
+		with cloneRepo(package.repo) as repo:
+			for ext in ["png", "jpg", "jpeg"]:
+				sourcePath = repo.working_tree_dir + "/screenshot." + ext
+				if os.path.isfile(sourcePath):
+					filename = randomString(10) + "." + ext
+					destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
+					shutil.copyfile(sourcePath, destPath)
+
+					ss = PackageScreenshot()
+					ss.approved = True
+					ss.package = package
+					ss.title   = "screenshot.png"
+					ss.url	 = "/uploads/" + filename
+					db.session.add(ss)
+					db.session.commit()
+
+					return "/uploads/" + filename
+
 	except TaskError as e:
 		# ignore download errors
 		print(e)
-		return None
-
-	# Find and import screenshot
-	try:
-		for ext in ["png", "jpg", "jpeg"]:
-			sourcePath = gitDir + "/screenshot." + ext
-			if os.path.isfile(sourcePath):
-				filename = randomString(10) + "." + ext
-				destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
-				shutil.copyfile(sourcePath, destPath)
-
-				ss = PackageScreenshot()
-				ss.approved = True
-				ss.package = package
-				ss.title   = "screenshot.png"
-				ss.url	 = "/uploads/" + filename
-				db.session.add(ss)
-				db.session.commit()
-
-				return "/uploads/" + filename
-	finally:
-		shutil.rmtree(gitDir)
+		pass
 
 	print("screenshot.png does not exist")
 	return None
