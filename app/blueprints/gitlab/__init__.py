@@ -40,7 +40,7 @@ def webhook():
 		return error(403, "Token required")
 
 	token = APIToken.query.filter_by(access_token=secret).first()
-	if secret is None:
+	if token is None:
 		return error(403, "Invalid authentication")
 
 	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
