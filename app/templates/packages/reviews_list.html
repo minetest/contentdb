@@ -5,6 +5,12 @@
 {% endblock %}
 
 {% block content %}
+	{% from "macros/pagination.html" import render_pagination %}
+	{{ render_pagination(pagination, url_set_query) }}
+
 	{% from "macros/reviews.html" import render_reviews %}
 	{{ render_reviews(reviews, current_user, True) }}
+
+	{% from "macros/pagination.html" import render_pagination %}
+	{{ render_pagination(pagination, url_set_query) }}
 {% endblock %}

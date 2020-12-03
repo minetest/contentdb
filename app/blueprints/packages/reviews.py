@@ -22,13 +22,16 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from app.models import db, PackageReview, Thread, ThreadReply
-from app.utils import is_package_page, addNotification
+from app.utils import is_package_page, addNotification, get_int_or_abort
 
 
 @bp.route("/reviews/")
 def list_reviews():
-	reviews = PackageReview.query.order_by(db.desc(PackageReview.created_at)).all()
-	return render_template("packages/reviews_list.html", reviews=reviews)
+	page = get_int_or_abort(request.args.get("page"), 1)
+	num = min(40, get_int_or_abort(request.args.get("n"), 100))
+
+	pagination = PackageReview.query.order_by(db.desc(PackageReview.created_at)).paginate(page, num, True)
+	return render_template("packages/reviews_list.html", pagination=pagination, reviews=pagination.items)
 
 
 class ReviewForm(FlaskForm):
