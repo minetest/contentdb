@@ -52,7 +52,8 @@ Creating an Account
 					Enter your forum username here:
 				</p>
 
-				<input class="form-control my-4" type="text" name="username" value="{{ username }}" required placeholder="Forum username">
+				<input class="form-control my-4" type="text" name="username" value="{{ username }}"
+                       placeholder="Forum username" pattern="[a-zA-Z0-9._ -]+" title="Only a-zA-Z0-9._ allowed" required>
 
 				<p>
 					You'll need to have the GitHub field in your forum profile
@@ -81,7 +82,8 @@ Creating an Account
 					Enter your forum username here:
 				</p>
 
-				<input class="form-control my-3" type="text" name="username" value="{{ username }}" required placeholder="Forum username">
+				<input class="form-control my-3" type="text" name="username" value="{{ username }}"
+                       placeholder="Forum username" pattern="[a-zA-Z0-9._ -]+" title="Only a-zA-Z0-9._ allowed" required>
 
 				<p>
 					Go to
@@ -109,24 +111,24 @@ Creating an Account
 		</div>
 
 		<div class="col-sm-4">
-		<div class="card">
-			<div class="card-header">
-				<span class="badge badge-pill badge-dark mr-2">Option 3</span>
-				Email/password sign up
-			</div>
+            <div class="card">
+                <div class="card-header">
+                    <span class="badge badge-pill badge-dark mr-2">Option 3</span>
+                    Email/password sign up
+                </div>
 
-			<div class="card-body">
-				<p class="alert alert-danger">
-					<b>Only do this if you don't have a forum account!</b>
-				</p>
-				<p>
-					If you have a forum account, please use one of the other two
-					options.
-				</p>
+                <div class="card-body">
+                    <p class="alert alert-danger">
+                        <b>Only do this if you don't have a forum account!</b>
+                    </p>
+                    <p>
+                        If you have a forum account, please use one of the other two
+                        options.
+                    </p>
 
-				<a class="btn btn-primary" href="{{ url_for('user.register') }}">Register</a>
-			</div>
-		</div>
+                    <a class="btn btn-primary" href="{{ url_for('user.register') }}">Register</a>
+                </div>
+            </div>
 		</div>
 	</div>
 	{% endif %}

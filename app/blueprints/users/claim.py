@@ -17,11 +17,14 @@
 
 from . import bp
 from flask import redirect, render_template, session, request, flash, url_for
-from flask_user import current_user
 from app.models import db, User, UserRank
-from app.utils import randomString, loginUser, rank_required
+from app.utils import randomString, loginUser
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.phpbbparser import getProfile
+import re
+
+def check_username(username):
+	return username is not None and len(username) >= 2 and re.match("^[A-Za-z0-9._-]*$", username)
 
 @bp.route("/user/claim/", methods=["GET", "POST"])
 def claim():
@@ -30,6 +33,10 @@ def claim():
 		username = ""
 	else:
 		method = request.args.get("method")
+
+		if not check_username(username):
+			flash("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin", "danger")
+			return redirect(url_for("users.claim"))
 
 		user = User.query.filter_by(forums_username=username).first()
 		if user and user.rank.atLeast(UserRank.NEW_MEMBER):
@@ -45,7 +52,6 @@ def claim():
 			flash("Unable to find user", "danger")
 			return redirect(url_for("users.claim"))
 
-
 	token = None
 	if "forum_token" in session:
 		token = session["forum_token"]
@@ -57,8 +63,8 @@ def claim():
 		ctype	= request.form.get("claim_type")
 		username = request.form.get("username")
 
-		if username is None or len(username.strip()) < 2:
-			flash("Invalid username", "danger")
+		if not check_username(username):
+			flash("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin", "danger")
 		elif ctype == "github":
 			task = checkForumAccount.delay(username)
 			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.claim", username=username, method="github")))
@@ -88,6 +94,8 @@ def claim():
 
 			# Look for key
 			if sig and token in sig:
+				# Try getting again to fix crash
+				user = User.query.filter_by(forums_username=username).first()
 				if user is None:
 					user = User(username)
 					user.forums_username = username
@@ -106,4 +114,4 @@ def claim():
 		else:
 			flash("Unknown claim type", "danger")
 
-	return render_template("users/claim.html", username=username, key=token)
+	return render_template("users/claim.html", username=username, key="cdb_" + token)
