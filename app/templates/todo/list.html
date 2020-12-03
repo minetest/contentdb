@@ -6,6 +6,38 @@
 
 {% block content %}
 	<h2 class="mb-4">Approval Queue</h2>
+	{% if canApproveScn and screenshots %}
+		<div class="card my-4">
+			<h3 class="card-header">Screenshots
+				<form class="float-right"  method="post" action="{{ url_for('todo.view') }}">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="hidden" name="action" value="screenshots_approve_all" />
+					<input class="btn btn-sm btn-primary" type="submit" value="Approve All" />
+				</form>
+			</h3>
+			<ul class="card-body d-flex p-0 flex-row flex-wrap justify-content-start align-content-start p-4">
+				{% for s in screenshots %}
+					<li class="packagetile flex-fill"><a href="{{ s.getEditURL() }}"
+						style="background-image: url({{ s.getThumbnailURL(3) or '/static/placeholder.png' }});">
+						<div class="packagegridscrub"></div>
+						<div class="packagegridinfo">
+							<h3>
+								{{ s.title }}
+								<br />
+								<small>{{ s.package.title }} by {{ s.package.author.display_name }}</small>
+							</h3>
+							<p></p>
+						</div>
+					</a></li>
+				{% else %}
+					<li><i>No screenshots need reviewing.</i></li>
+				{% endfor %}
+				{% for i in range(4) %}
+					<li class="packagetile flex-fill"></li>
+				{% endfor %}
+			</ul>
+		</div>
+	{% endif %}
 
 	<div class="row">
 		{% if canApproveNew and (packages or wip_packages) %}
@@ -74,39 +106,6 @@
 		</div>
 		{% endif %}
 	</div>
-
-	{% if canApproveScn and screenshots %}
-		<div class="card my-4">
-			<h3 class="card-header">Screenshots
-				<form class="float-right"  method="post" action="{{ url_for('todo.view') }}">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="hidden" name="action" value="screenshots_approve_all" />
-					<input class="btn btn-sm btn-primary" type="submit" value="Approve All" />
-				</form>
-			</h3>
-			<ul class="card-body d-flex p-0 flex-row flex-wrap justify-content-start align-content-start p-4">
-				{% for s in screenshots %}
-					<li class="packagetile flex-fill"><a href="{{ s.getEditURL() }}"
-						style="background-image: url({{ s.getThumbnailURL(3) or '/static/placeholder.png' }});">
-						<div class="packagegridscrub"></div>
-						<div class="packagegridinfo">
-							<h3>
-								{{ s.title }}
-								<br />
-								<small>{{ s.package.title }} by {{ s.package.author.display_name }}</small>
-							</h3>
-							<p></p>
-						</div>
-					</a></li>
-				{% else %}
-					<li><i>No screenshots need reviewing.</i></li>
-				{% endfor %}
-				{% for i in range(4) %}
-					<li class="packagetile flex-fill"></li>
-				{% endfor %}
-			</ul>
-		</div>
-	{% endif %}
 
 	{% if not (packages or screenshots or releases) %}
 		<p>
