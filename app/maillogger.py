@@ -34,14 +34,13 @@ class FlaskMailSubjectFormatter(logging.Formatter):
 class FlaskMailTextFormatter(logging.Formatter):
 	pass
 
-# TODO: hier nog niet tevreden over (vooral logger.error(..., exc_info, stack_info))
 class FlaskMailHTMLFormatter(logging.Formatter):
 	pre_template = "<h1>%s</h1><pre>%s</pre>"
 	def formatException(self, exc_info):
 		formatted_exception = logging.Handler.formatException(self, exc_info)
 		return FlaskMailHTMLFormatter.pre_template % ("Exception information", formatted_exception)
 	def formatStack(self, stack_info):
-		return FlaskMailHTMLFormatter.pre_template % ("<h1>Stack information</h1><pre><code>%s</code></pre>", stack_info)
+		return "<pre>%s</pre>" % stack_info
 
 
 # see: https://github.com/python/cpython/blob/3.6/Lib/logging/__init__.py (class Handler)
@@ -76,13 +75,17 @@ class FlaskMailHandler(logging.Handler):
 		return subject
 
 	def emit(self, record):
+		record.stack_info = record.exc_text
+		record.exc_text = None
+		record.exc_info = None
+
 		text = self.format(record)				if self.formatter	  else None
 		html = self.html_formatter.format(record) if self.html_formatter else None
 		sendEmailRaw.delay(self.send_to, self.getSubject(record), text, html)
 
 
 def register_mail_error_handler(app, mailer):
-	subject_template = "ContentDB crashed (%(module)s > %(funcName)s)"
+	subject_template = "ContentDB %(message)s (%(module)s > %(funcName)s)"
 	text_template = """
 Message type: %(levelname)s
 Location:	 %(pathname)s:%(lineno)d
@@ -99,10 +102,8 @@ Message:
 <tr>	<th>Function:</th><td>%(funcName)s</td></tr>
 <tr>		<th>Time:</th><td>%(asctime)s</td></tr>
 </table>
-<h2>Message</h2>
-<pre><code>%(message)s</code></pre>"""
+<h2>%(message)s</h2>"""
 
-	import logging
 	mail_handler = FlaskMailHandler(mailer, subject_template)
 	mail_handler.setLevel(logging.ERROR)
 	mail_handler.setFormatter(text_template, html_template)
