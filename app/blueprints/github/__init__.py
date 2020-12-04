@@ -73,7 +73,7 @@ def callback(oauth_token):
 			flash("Unable to find an account for that Github user", "danger")
 			return redirect(url_for("users.claim"))
 		elif loginUser(userByGithub):
-			if not current_user.hasPassword():
+			if not current_user.password:
 				return redirect(next_url or url_for("users.set_password", optional=True))
 			else:
 				return redirect(next_url or url_for("homepage.home"))

@@ -134,7 +134,7 @@ class User(db.Model, UserMixin):
 
 	# User authentication information
 	username     = db.Column(db.String(50, collation="NOCASE"), nullable=False, unique=True, index=True)
-	password     = db.Column(db.String(255), nullable=False, server_default="")
+	password     = db.Column(db.String(255), nullable=True, server_default=None)
 	reset_password_token = db.Column(db.String(100), nullable=False, server_default="")
 
 	def get_id(self):
@@ -172,7 +172,7 @@ class User(db.Model, UserMixin):
 	tokens        = db.relationship("APIToken", backref="owner", lazy="dynamic")
 	replies       = db.relationship("ThreadReply", backref="author", lazy="dynamic")
 
-	def __init__(self, username=None, active=False, email=None, password=""):
+	def __init__(self, username=None, active=False, email=None, password=None):
 		self.username = username
 		self.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
@@ -180,9 +180,6 @@ class User(db.Model, UserMixin):
 		self.email = email
 		self.password = password
 		self.rank = UserRank.NOT_JOINED
-
-	def hasPassword(self):
-		return self.password != ""
 
 	def canAccessTodoList(self):
 		return Permission.APPROVE_NEW.check(self) or \
