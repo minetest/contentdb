@@ -134,8 +134,8 @@ def parseForumListPage(id, page, out, extra=None):
 		title  = link.find(text=True)
 
 		# Date
-		left   = topic.find("dt")
-		date   = left.get_text().split("»")[1].strip()
+		left   = topic.find(class_="topic-poster")
+		date   = left.find("time").get_text()
 		date   = datetime.strptime(date, "%a %b %d, %Y %H:%M")
 		author = left.find_all("a")[-1].get_text().strip()
 
