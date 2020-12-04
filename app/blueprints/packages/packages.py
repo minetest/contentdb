@@ -155,9 +155,6 @@ def view(package):
 			if topic.author != package.author:
 				errors.append("<b>Error: Forum topic author doesn't match package author.</b>")
 				topic_error_lvl = "danger"
-
-			if topic.wip:
-				errors.append("Warning: Forum topic is in WIP section, make sure package meets playability standards.")
 		elif package.type != PackageType.TXP:
 			errors.append("Warning: Forum topic not found. This may happen if the topic has only just been created.")
 
