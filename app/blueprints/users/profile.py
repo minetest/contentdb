@@ -93,7 +93,7 @@ def profile(username):
 
 			if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
 				newEmail = form["email"].data
-				if newEmail != user.email and newEmail.strip() != "":
+				if newEmail and newEmail != user.email and newEmail.strip() != "":
 					token = randomString(32)
 
 					msg = "Changed email of {}".format(user.display_name)

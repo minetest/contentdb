@@ -286,7 +286,7 @@ def create_edit(author=None, name=None):
 	if request.method == "POST" and form.type.data == PackageType.TXP:
 		form.license.data = form.media_license.data
 
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		wasNew = False
 		if not package:
 			package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
@@ -468,7 +468,7 @@ def edit_maintainers(package):
 	if request.method == "GET":
 		form.maintainers_str.data = ", ".join([ x.username for x in package.maintainers if x != package.author ])
 
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		usernames = [x.strip().lower() for x in form.maintainers_str.data.split(",")]
 		users = User.query.filter(func.lower(User.username).in_(usernames)).all()
 

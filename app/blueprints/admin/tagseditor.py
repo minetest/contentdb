@@ -60,7 +60,7 @@ def create_edit_tag(name=None):
 		abort(403)
 
 	form = TagForm(formdata=request.form, obj=tag)
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if tag is None:
 			tag = Tag(form.title.data)
 			tag.description = form.description.data

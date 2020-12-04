@@ -47,7 +47,7 @@ def create_edit_warning(name=None):
 			abort(404)
 
 	form = WarningForm(formdata=request.form, obj=warning)
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if warning is None:
 			warning = ContentWarning(form.title.data, form.description.data)
 			db.session.add(warning)

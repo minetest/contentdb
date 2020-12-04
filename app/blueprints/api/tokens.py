@@ -80,7 +80,7 @@ def create_edit_token(username, id=None):
 	form = CreateAPIToken(formdata=request.form, obj=token)
 	form.package.query_factory = lambda: Package.query.filter_by(author=user).all()
 
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if is_new:
 			token = APIToken()
 			token.owner = user

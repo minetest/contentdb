@@ -75,7 +75,7 @@ def create_release(package):
 		if request.method != "POST":
 			form["uploadOpt"].data = "vcs"
 
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if form["uploadOpt"].data == "vcs":
 			rel = PackageRelease()
 			rel.package = package
@@ -169,7 +169,7 @@ def edit_release(package, id):
 		# HACK: fix bug in wtforms
 		form.approved.data = release.approved
 
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		wasApproved = release.approved
 		if canEdit:
 			release.title = form["title"].data
@@ -217,7 +217,7 @@ def bulk_change_release(package):
 
 	if request.method == "GET":
 		form.only_change_none.data = True
-	elif request.method == "POST" and form.validate():
+	elif form.validate_on_submit():
 		only_change_none = form.only_change_none.data
 
 		for release in package.releases.all():
