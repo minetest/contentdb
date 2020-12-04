@@ -53,11 +53,11 @@ def sass(app, inputDir='scss', outputPath='static', force=False, cacheDir="publi
 		cacheFile = "%s/%s.css" % (cacheDir, filepath)
 
 		# Source file exists, and needs regenerating
-		if os.path.isfile(sassfile) and (force or not os.path.isfile(cacheFile) or \
-				os.path.getmtime(sassfile) > os.path.getmtime(cacheFile)):
+		if os.path.isfile(sassfile) and (force or not os.path.isfile(cacheFile) or
+										 os.path.getmtime(sassfile) > os.path.getmtime(cacheFile)):
 			_convert(inputDir, sassfile, cacheFile)
 			app.logger.debug('Compiled %s into %s' % (sassfile, cacheFile))
 
 		return send_from_directory(cacheDir, filepath + ".css")
 
-	app.add_url_rule("/%s/<path:filepath>.css" % (outputPath), 'sass', _sass)
+	app.add_url_rule("/%s/<path:filepath>.css" % outputPath, 'sass', _sass)

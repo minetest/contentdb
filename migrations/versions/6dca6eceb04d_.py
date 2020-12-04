@@ -6,8 +6,6 @@ Create Date: 2020-01-18 17:32:21.885068
 
 """
 from alembic import op
-import sqlalchemy as sa
-from sqlalchemy.dialects import postgresql
 from sqlalchemy_searchable import sync_trigger
 
 

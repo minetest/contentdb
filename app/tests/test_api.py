@@ -1,9 +1,7 @@
-import pytest
-from app import app
 from app.default_data import populate_test_data
-from app.models import db, License, Tag, User, UserRank, Package, PackageState
-from utils import client, recreate_db, parse_json
-from utils import is_str, is_int, is_optional
+from app.models import db, Package, PackageState
+from utils import parse_json, is_str, is_int, is_optional
+
 
 def validate_package_list(packages, strict=False):
 	valid_keys = {

@@ -16,19 +16,19 @@
 
 
 from flask import *
-from flask_user import signals, current_user, user_manager
-from flask_login import login_user, logout_user
-from app.markdown import render_markdown
-from . import bp
-from app.models import *
+from flask_user import signals, current_user, user_manager, login_required
 from flask_wtf import FlaskForm
+from sqlalchemy import func
 from wtforms import *
 from wtforms.validators import *
-from app.utils import randomString, loginUser, rank_required, nonEmptyOrNone, addAuditLog
-from app.tasks.forumtasks import checkForumAccount
+
+from app.markdown import render_markdown
+from app.models import *
 from app.tasks.emails import sendVerifyEmail, sendEmailRaw
-from app.tasks.phpbbparser import getProfile
-from sqlalchemy import func
+from app.tasks.forumtasks import checkForumAccount
+from app.utils import randomString, rank_required, nonEmptyOrNone, addAuditLog
+from . import bp
+
 
 # Define the User profile form
 class UserProfileForm(FlaskForm):
@@ -198,7 +198,7 @@ def set_password():
 		return redirect(url_for("user.change_password"))
 
 	form = SetPasswordForm(request.form)
-	if current_user.email == None:
+	if current_user.email is None:
 		form.email.validators = [InputRequired(), Email()]
 
 	if request.method == "POST" and form.validate():

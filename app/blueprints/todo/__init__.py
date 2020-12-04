@@ -16,11 +16,11 @@
 
 from flask import *
 from flask_user import *
-import flask_menu as menu
+from sqlalchemy import or_
+
 from app.models import *
 from app.querybuilder import QueryBuilder
 from app.utils import get_int_or_abort
-from sqlalchemy import or_
 
 bp = Blueprint("todo", __name__)
 
@@ -80,9 +80,9 @@ def view():
 	return render_template("todo/list.html", title="Reports and Work Queue",
 		packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
-		topics_to_add=topics_to_add, total_topics=total_topics, \
-		total_packages=total_packages, total_to_tag=total_to_tag, \
-		unfulfilled_meta_packages=unfulfilled_meta_packages)
+		topics_to_add=topics_to_add, total_topics=total_topics,
+			total_packages=total_packages, total_to_tag=total_to_tag,
+			unfulfilled_meta_packages=unfulfilled_meta_packages)
 
 
 @bp.route("/todo/topics/")
@@ -104,16 +104,16 @@ def topics():
 		num = 100
 
 	query = query.paginate(page, num, True)
-	next_url = url_for("todo.topics", page=query.next_num, query=qb.search, \
-	 	show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
+	next_url = url_for("todo.topics", page=query.next_num, query=qb.search,
+			show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_next else None
-	prev_url = url_for("todo.topics", page=query.prev_num, query=qb.search, \
-	 	show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
+	prev_url = url_for("todo.topics", page=query.prev_num, query=qb.search,
+			show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_prev else None
 
-	return render_template("todo/topics.html", topics=query.items, total=total, \
-			topic_count=topic_count, query=qb.search, show_discarded=qb.show_discarded, \
-			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, \
+	return render_template("todo/topics.html", topics=query.items, total=total,
+			topic_count=topic_count, query=qb.search, show_discarded=qb.show_discarded,
+			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages,
 			n=num, sort_by=qb.order_by)
 
 

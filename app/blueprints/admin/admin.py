@@ -15,18 +15,20 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+import os
+
+from celery import group
 from flask import *
 from flask_user import *
-import flask_menu as menu
-from . import bp
-from app.models import *
-from celery import uuid, group
-from app.tasks.importtasks import importRepoScreenshot, makeVCSRelease, checkZipRelease, updateMetaFromRelease, importForeignDownloads
-from app.tasks.forumtasks  import importTopicList, checkAllForumAccounts
 from flask_wtf import FlaskForm
 from wtforms import *
-from app.utils import loginUser, rank_required, addNotification
-import datetime, os
+
+from app.models import *
+from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
+from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, updateMetaFromRelease, importForeignDownloads
+from app.utils import loginUser, rank_required
+from . import bp
+
 
 @bp.route("/admin/", methods=["GET", "POST"])
 @rank_required(UserRank.ADMIN)

@@ -19,7 +19,6 @@ from flask import *
 
 bp = Blueprint("metapackages", __name__)
 
-from flask_user import *
 from app.models import *
 
 @bp.route("/metapackages/")
@@ -59,6 +58,6 @@ def view(name):
 				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 				.all()
 
-	return render_template("metapackages/view.html", mpackage=mpackage, \
-		dependers=dependers, optional_dependers=optional_dependers, \
-		similar_topics=similar_topics)
+	return render_template("metapackages/view.html", mpackage=mpackage,
+			dependers=dependers, optional_dependers=optional_dependers,
+			similar_topics=similar_topics)

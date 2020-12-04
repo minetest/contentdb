@@ -21,7 +21,6 @@ bp = Blueprint("github", __name__)
 from flask import redirect, url_for, request, flash, abort, render_template, jsonify, current_app
 from flask_user import current_user, login_required
 from sqlalchemy import func, or_, and_
-from flask_github import GitHub
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission
 from app.utils import loginUser, randomString, abs_url_for
@@ -188,8 +187,8 @@ def setup_webhook():
 		return redirect(package.getDetailsURL())
 
 	if current_user.github_access_token is None:
-		return github.authorize("write:repo_hook", \
-			redirect_uri=abs_url_for("github.callback_webhook", pid=pid))
+		return github.authorize("write:repo_hook",
+				redirect_uri=abs_url_for("github.callback_webhook", pid=pid))
 
 	form = SetupWebhookForm(formdata=request.form)
 	if request.method == "POST" and form.validate():
@@ -203,15 +202,15 @@ def setup_webhook():
 		if event != "push" and event != "create":
 			abort(500)
 
-		if handleMakeWebhook(gh_user, gh_repo, package, \
+		if handleMakeWebhook(gh_user, gh_repo, package,
 				current_user.github_access_token, event, token):
 			flash("Successfully created webhook", "success")
 			return redirect(package.getDetailsURL())
 		else:
 			return redirect(url_for("github.setup_webhook", pid=package.id))
 
-	return render_template("github/setup_webhook.html", \
-		form=form, package=package)
+	return render_template("github/setup_webhook.html",
+			form=form, package=package)
 
 
 def handleMakeWebhook(gh_user, gh_repo, package, oauth, event, token):

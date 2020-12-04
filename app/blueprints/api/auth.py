@@ -14,10 +14,13 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import request, make_response, jsonify, abort
+from functools import wraps
+
+from flask import request, abort
+
 from app.models import APIToken
 from .support import error
-from functools import wraps
+
 
 def is_api_authd(f):
 	@wraps(f)

@@ -17,19 +17,19 @@
 
 from flask import render_template, redirect, request, session, url_for, abort
 from flask_user import login_required, current_user
-from . import bp
-from app.models import db, User, APIToken, Package, Permission
-from app.utils import randomString
-from app.querybuilder import QueryBuilder
-
 from flask_wtf import FlaskForm
 from wtforms import *
-from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms.validators import *
+
+from app.models import db, User, APIToken, Package, Permission
+from app.utils import randomString
+from . import bp
+
 
 class CreateAPIToken(FlaskForm):
 	name	     = StringField("Name", [InputRequired(), Length(1, 30)])
-	package      = QuerySelectField("Limit to package", allow_blank=True, \
+	package      = QuerySelectField("Limit to package", allow_blank=True,
 			get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	submit	     = SubmitField("Save")
 

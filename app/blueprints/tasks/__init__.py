@@ -16,13 +16,10 @@
 
 
 from flask import *
-from flask_user import *
-import flask_menu as menu
+
 from app import csrf
-from app.models import *
-from app.tasks import celery, TaskError
+from app.tasks import celery
 from app.tasks.importtasks import getMeta
-from app.utils import shouldReturnJson
 from app.utils import *
 
 bp = Blueprint("tasks", __name__)
@@ -45,7 +42,7 @@ def check(id):
 	traceback = result.traceback
 	result = result.result
 
-	info = None
+	None
 	if isinstance(result, Exception):
 		info = {
 				'id': id,

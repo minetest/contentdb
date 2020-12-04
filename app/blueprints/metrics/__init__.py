@@ -15,8 +15,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, make_response
-from app.models import Package, PackageRelease, db, User, UserRank, PackageState
 from sqlalchemy.sql.expression import func
+
+from app.models import Package, db, User, UserRank, PackageState
 
 bp = Blueprint("metrics", __name__)
 
@@ -28,17 +29,17 @@ def generate_metrics(full=False):
 
 	def gen_labels(labels):
 		pieces = [key + "=" + str(val) for key, val in labels.items()]
-		return (",").join(pieces)
+		return ",".join(pieces)
 
 
 	def write_array_stat(name, help, type, data):
-		ret = ("# HELP {name} {help}\n# TYPE {name} {type}\n") \
-				.format(name=name, help=help, type=type)
+		ret = "# HELP {name} {help}\n# TYPE {name} {type}\n" \
+			.format(name=name, help=help, type=type)
 
 		for entry in data:
 			assert(len(entry) == 2)
-			ret += ("{name}{{{labels}}} {value}\n") \
-					.format(name=name, labels=gen_labels(entry[0]), value=entry[1])
+			ret += "{name}{{{labels}}} {value}\n" \
+				.format(name=name, labels=gen_labels(entry[0]), value=entry[1])
 
 		return ret + "\n"
 
@@ -57,8 +58,8 @@ def generate_metrics(full=False):
 		scores = Package.query.join(User).with_entities(User.username, Package.name, Package.score) \
 			.filter(Package.state==PackageState.APPROVED).all()
 
-		ret += write_array_stat("contentdb_package_score", "Package score", "gauge", \
-			[({ "author": score[0], "name": score[1] }, score[2])  for score in scores])
+		ret += write_array_stat("contentdb_package_score", "Package score", "gauge",
+				[({ "author": score[0], "name": score[1] }, score[2])  for score in scores])
 	else:
 		score_result = db.session.query(func.sum(Package.score)).one_or_none()
 		score = 0 if not score_result or not score_result[0] else score_result[0]
@@ -68,6 +69,6 @@ def generate_metrics(full=False):
 
 @bp.route("/metrics")
 def metrics():
-    response = make_response(generate_metrics(), 200)
-    response.mimetype = "text/plain"
-    return response
+	response = make_response(generate_metrics(), 200)
+	response.mimetype = "text/plain"
+	return response

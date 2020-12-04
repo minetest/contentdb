@@ -2,15 +2,14 @@
 # License: MIT
 # Source: https://github.com/rubenwardy/python_phpbb_parser
 
-import urllib, socket
-from bs4 import *
-from urllib.parse import urljoin
-from datetime import datetime
-import urllib.request
-import os.path
-import time, re
+import re
+import urllib
 import urllib.parse as urlparse
+import urllib.request
+from datetime import datetime
 from urllib.parse import urlencode
+from bs4 import *
+
 
 def urlEncodeNonAscii(b):
 	return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b)
@@ -68,7 +67,7 @@ def __extract_properties(profile, soup):
 
 def __extract_signature(soup):
 	res = soup.find_all("div", class_="signature")
-	if (len(res) != 1):
+	if len(res) != 1:
 		return None
 	else:
 		return res[0]
@@ -166,7 +165,7 @@ def parseForumListPage(id, page, out, extra=None):
 
 	return True
 
-def getTopicsFromForum(id, out={}, extra=None):
+def getTopicsFromForum(id, out, extra=None):
 	print("Fetching all topics from forum {}".format(id))
 	page = 0
 	while parseForumListPage(id, page, out, extra):

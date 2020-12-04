@@ -15,14 +15,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import flask, json, re
-from flask_sqlalchemy import SQLAlchemy
-from app import app
+import json, re
 from app.models import *
 from app.tasks import celery
 from .phpbbparser import getProfile, getTopicsFromForum
 import urllib.request
-from urllib.parse import urlparse, quote_plus
 
 @celery.task()
 def checkForumAccount(username, forceNoSave=False):

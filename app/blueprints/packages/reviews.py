@@ -110,7 +110,7 @@ def review(package):
 
 		return redirect(package.getDetailsURL())
 
-	return render_template("packages/review_create_edit.html", \
+	return render_template("packages/review_create_edit.html",
 			form=form, package=package, review=review)
 
 

@@ -21,9 +21,7 @@ bp = Blueprint("threads", __name__)
 
 from flask_user import *
 from app.models import *
-from app.utils import addNotification, clearNotifications, isYes, addAuditLog
-
-import datetime
+from app.utils import addNotification, isYes, addAuditLog
 
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -199,7 +197,7 @@ def view(id):
 			flash("Please wait before commenting again", "danger")
 			return redirect(thread.getViewURL())
 
-		if len(comment) <= 2000 and len(comment) > 3:
+		if 2000 >= len(comment) > 3:
 			reply = ThreadReply()
 			reply.author = current_user
 			reply.comment = comment

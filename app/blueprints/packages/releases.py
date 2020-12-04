@@ -15,21 +15,17 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import *
-from flask_user import *
-
-from . import bp
-
-from app.rediscache import has_key, set_key, make_download_key
-from app.models import *
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease, updateMetaFromRelease
-from app.utils import *
-
 from celery import uuid
+from flask import *
 from flask_wtf import FlaskForm
 from wtforms import *
-from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms.validators import *
+
+from app.rediscache import has_key, set_key, make_download_key
+from app.tasks.importtasks import makeVCSRelease, checkZipRelease, updateMetaFromRelease
+from app.utils import *
+from . import bp
 
 
 def get_mt_releases(is_max):

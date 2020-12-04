@@ -78,9 +78,9 @@ def send_upload(path):
 @menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { 'path': 'help' })
 @app.route('/<path:path>/')
 def flatpage(path):
-    page = pages.get_or_404(path)
-    template = page.meta.get('template', 'flatpage.html')
-    return render_template(template, page=page)
+	page = pages.get_or_404(path)
+	template = page.meta.get('template', 'flatpage.html')
+	return render_template(template, page=page)
 
 @app.before_request
 def check_for_ban():

@@ -16,16 +16,12 @@
 
 
 from flask import *
-from flask_user import *
-
-from . import bp
-
-from app.models import *
-from app.utils import *
-
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
+
+from app.utils import *
+from . import bp
 
 
 class CreateScreenshotForm(FlaskForm):
@@ -43,7 +39,7 @@ class EditScreenshotForm(FlaskForm):
 @bp.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
 @login_required
 @is_package_page
-def create_screenshot(package, id=None):
+def create_screenshot(package):
 	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
 		return redirect(package.getDetailsURL())
 

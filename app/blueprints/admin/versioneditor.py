@@ -16,13 +16,14 @@
 
 
 from flask import *
-from flask_user import *
-from . import bp
-from app.models import *
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
+
+from app.models import *
 from app.utils import rank_required
+from . import bp
+
 
 @bp.route("/versions/")
 @rank_required(UserRank.MODERATOR)

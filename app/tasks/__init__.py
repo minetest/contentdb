@@ -16,10 +16,8 @@
 
 
 import flask
-from flask_sqlalchemy import SQLAlchemy
 from celery import Celery
 from celery.schedules import crontab
-from app import app
 from app.models import *
 
 class TaskError(Exception):

@@ -15,14 +15,21 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import request, flash, abort, redirect
-from flask_user import *
-from flask_login import login_user, logout_user
-from .models import *
-from . import app
-import random, string, os, imghdr, user_agents
+import imghdr
+import os
+import random
+import string
+import user_agents
 from urllib.parse import urljoin
+
+from flask import request, flash, abort, redirect
+from flask_login import login_user
+from flask_user import *
 from werkzeug.datastructures import MultiDict
+
+from . import app
+from .models import *
+
 
 # These are given to Jinja in template_filters.py
 
@@ -78,7 +85,7 @@ def getExtension(filename):
 def isFilenameAllowed(filename, exts):
 	return getExtension(filename) in exts
 
-ALLOWED_IMAGES = set(["jpeg", "png"])
+ALLOWED_IMAGES = {"jpeg", "png"}
 def isAllowedImage(data):
 	return imghdr.what(None, data) in ALLOWED_IMAGES
 

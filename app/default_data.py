@@ -17,10 +17,10 @@ def populate(session):
 	session.add(MinetestRelease("5.1", 38))
 
 	tags = {}
-	for tag in ["Inventory", "Mapgen", "Building", \
-			"Mobs and NPCs", "Tools", "Player effects", \
-			"Environment", "Transport", "Maintenance", "Plants and farming", \
-			"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
+	for tag in ["Inventory", "Mapgen", "Building",
+		"Mobs and NPCs", "Tools", "Player effects",
+		"Environment", "Transport", "Maintenance", "Plants and farming",
+		"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
 		row = Tag(tag)
 		tags[row.name] = row
 		session.add(row)

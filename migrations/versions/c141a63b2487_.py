@@ -5,11 +5,8 @@ Revises: cb6ab141c522
 Create Date: 2020-07-09 00:05:39.845465
 
 """
-from alembic import op
 import sqlalchemy as sa
-from sqlalchemy import orm, func
-from app.models import Package, PackageRelease
-
+from alembic import op
 
 # revision identifiers, used by Alembic.
 revision = 'c141a63b2487'

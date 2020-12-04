@@ -11,9 +11,9 @@ from sqlalchemy.sql.expression import func
 @menu.register_menu(bp, ".", "Home")
 def home():
 	def join(query):
-		return query.options( \
-			joinedload(Package.license), \
-			joinedload(Package.media_license))
+		return query.options(
+				joinedload(Package.license),
+				joinedload(Package.media_license))
 
 	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
@@ -37,5 +37,5 @@ def home():
 	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
 		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
 
-	return render_template("index.html", count=count, downloads=downloads, tags=tags, \
+	return render_template("index.html", count=count, downloads=downloads, tags=tags,
 			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, reviews=reviews)

@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import render_template, url_for
+from flask import render_template
 from flask_mail import Message
 from app import mail
 from app.tasks import celery

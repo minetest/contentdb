@@ -78,7 +78,7 @@ def resolve_package_deps(out, package, only_hard):
 			# TODO: resolve most likely candidate
 
 		else:
-			raise "Malformed dependency"
+			raise Exception("Malformed dependency")
 
 		ret.append({
 			"name": name,

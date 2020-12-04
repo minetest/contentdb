@@ -15,20 +15,18 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import enum, datetime
-
-from app import app, gravatar
+import datetime
+import enum
 from urllib.parse import urlparse
 
-from flask import Flask, url_for
-from flask_sqlalchemy import SQLAlchemy, BaseQuery
+from flask import url_for
 from flask_migrate import Migrate
-from flask_user import login_required, UserManager, UserMixin
-from sqlalchemy import func, CheckConstraint
-from sqlalchemy_searchable import SearchQueryMixin
+from flask_sqlalchemy import SQLAlchemy, BaseQuery
+from flask_user import UserManager, UserMixin
+from sqlalchemy_searchable import SearchQueryMixin, make_searchable
 from sqlalchemy_utils.types import TSVectorType
-from sqlalchemy_searchable import make_searchable
 
+from app import app, gravatar
 
 # Initialise database
 db = SQLAlchemy(app)
@@ -130,7 +128,7 @@ class Permission(enum.Enum):
 		return perm.check(user)
 
 def display_name_default(context):
-    return context.get_current_parameters()["username"]
+	return context.get_current_parameters()["username"]
 
 class User(db.Model, UserMixin):
 	id           = db.Column(db.Integer, primary_key=True)
@@ -163,7 +161,7 @@ class User(db.Model, UserMixin):
 	donate_url    = db.Column(db.String(255), nullable=True, default=None)
 
 	# Content
-	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id", \
+	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id",
 			order_by="Notification.created_at")
 
 	packages      = db.relationship("Package", backref=db.backref("author", lazy="joined"), lazy="dynamic")
@@ -377,11 +375,11 @@ class PackageState(enum.Enum):
 
 
 PACKAGE_STATE_FLOW = {
-	PackageState.WIP: set([ PackageState.READY_FOR_REVIEW ]),
-	PackageState.CHANGES_NEEDED: set([ PackageState.READY_FOR_REVIEW ]),
-	PackageState.READY_FOR_REVIEW: set([ PackageState.WIP, PackageState.CHANGES_NEEDED, PackageState.APPROVED ]),
-	PackageState.APPROVED: set([ PackageState.CHANGES_NEEDED ]),
-	PackageState.DELETED: set([ PackageState.READY_FOR_REVIEW ]),
+	PackageState.WIP: {PackageState.READY_FOR_REVIEW},
+	PackageState.CHANGES_NEEDED: {PackageState.READY_FOR_REVIEW},
+	PackageState.READY_FOR_REVIEW: {PackageState.WIP, PackageState.CHANGES_NEEDED, PackageState.APPROVED},
+	PackageState.APPROVED: {PackageState.CHANGES_NEEDED},
+	PackageState.DELETED: {PackageState.READY_FOR_REVIEW},
 }
 
 
@@ -410,22 +408,22 @@ class PackagePropertyKey(enum.Enum):
 
 provides = db.Table("provides",
 	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
-    db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
+	db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
 )
 
 Tags = db.Table("tags",
-    db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
-    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+	db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
+	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
 ContentWarnings = db.Table("content_warnings",
-    db.Column("content_warning_id", db.Integer, db.ForeignKey("content_warning.id"), primary_key=True),
-    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+	db.Column("content_warning_id", db.Integer, db.ForeignKey("content_warning.id"), primary_key=True),
+	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
 maintainers = db.Table("maintainers",
-    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
-    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+	db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
 class Dependency(db.Model):
@@ -471,7 +469,7 @@ class Dependency(db.Model):
 			raise Exception("Meta and package are both none!")
 
 	@staticmethod
-	def SpecToList(depender, spec, cache={}):
+	def SpecToList(depender, spec, cache):
 		retval = []
 		arr = spec.split(",")
 
@@ -521,7 +519,7 @@ class Package(db.Model):
 
 	name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
 
-	search_vector = db.Column(TSVectorType("name", "title", "short_desc", "desc", \
+	search_vector = db.Column(TSVectorType("name", "title", "short_desc", "desc",
 			weights={ "name": "A", "title": "B", "short_desc": "C", "desc": "D" }))
 
 	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
@@ -548,8 +546,8 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=True)
 
-	provides = db.relationship("MetaPackage", \
-			secondary=provides, lazy="select", order_by=db.asc("name"), \
+	provides = db.relationship("MetaPackage",
+			secondary=provides, lazy="select", order_by=db.asc("name"),
 			backref=db.backref("packages", lazy="dynamic", order_by=db.desc("score")))
 
 	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
@@ -613,7 +611,7 @@ class Package(db.Model):
 		user = m.group(1)
 		repo = m.group(2).replace(".git", "")
 
-		return (user,repo)
+		return user, repo
 
 	def getSortedDependencies(self, is_hard=None):
 		query = self.dependencies
@@ -770,8 +768,8 @@ class Package(db.Model):
 	def getDownloadRelease(self, version=None):
 		for rel in self.releases:
 			if rel.approved and (version is None or
-					((rel.min_rel is None or rel.min_rel_id <= version.id) and \
-					(rel.max_rel is None or rel.max_rel_id >= version.id))):
+					((rel.min_rel is None or rel.min_rel_id <= version.id) and
+					 (rel.max_rel is None or rel.max_rel_id >= version.id))):
 				return rel
 
 		return None
@@ -916,7 +914,7 @@ class MetaPackage(db.Model):
 		return ",".join([str(x) for x in list])
 
 	@staticmethod
-	def GetOrCreate(name, cache={}):
+	def GetOrCreate(name, cache):
 		mp = cache.get(name)
 		if mp is None:
 			mp = MetaPackage.query.filter_by(name=name).first()
@@ -929,7 +927,7 @@ class MetaPackage(db.Model):
 		return mp
 
 	@staticmethod
-	def SpecToList(spec, cache={}):
+	def SpecToList(spec, cache):
 		retval = []
 		arr = spec.split(",")
 
@@ -1131,7 +1129,7 @@ class PackageScreenshot(db.Model):
 				id=self.id)
 
 	def getThumbnailURL(self, level=2):
-		return self.url.replace("/uploads/", ("/thumbnails/{:d}/").format(level))
+		return self.url.replace("/uploads/", "/thumbnails/{:d}/".format(level))
 
 
 class APIToken(db.Model):
@@ -1243,8 +1241,8 @@ class EditRequestChange(db.Model):
 
 
 watchers = db.Table("watchers",
-    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
-    db.Column("thread_id", db.Integer, db.ForeignKey("thread.id"), primary_key=True)
+	db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+	db.Column("thread_id", db.Integer, db.ForeignKey("thread.id"), primary_key=True)
 )
 
 class Thread(db.Model):
@@ -1264,10 +1262,10 @@ class Thread(db.Model):
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
-	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic", \
+	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic",
 			order_by=db.asc("thread_reply_id"))
 
-	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", \
+	watchers   = db.relationship("User", secondary=watchers, lazy="subquery",
 			backref=db.backref("watching", lazy=True))
 
 	def getViewURL(self):
@@ -1412,10 +1410,10 @@ class AuditLogEntry(db.Model):
 
 
 
-REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com", \
-		"minetest.net", "dropboxusercontent.com", "4shared.com", \
-		"digitalaudioconcepts.com", "hg.intevation.org", "www.wtfpl.net", \
-		"imageshack.com", "imgur.com"]
+REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com",
+	"minetest.net", "dropboxusercontent.com", "4shared.com",
+	"digitalaudioconcepts.com", "hg.intevation.org", "www.wtfpl.net",
+	"imageshack.com", "imgur.com"]
 
 class ForumTopic(db.Model):
 	topic_id  = db.Column(db.Integer, primary_key=True, autoincrement=False)

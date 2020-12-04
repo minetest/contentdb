@@ -54,12 +54,12 @@ class PackageTreeNode:
 
 		if self.type == ContentType.GAME:
 			if not os.path.isdir(baseDir + "/mods"):
-				raise MinetestCheckError(("Game at {} does not have a mods/ folder").format(self.relative))
+				raise MinetestCheckError("Game at {} does not have a mods/ folder".format(self.relative))
 			self.add_children_from_mod_dir("mods")
 		elif self.type == ContentType.MOD:
 			if self.name and not basenamePattern.match(self.name):
-				raise MinetestCheckError(("Invalid base name for mod {} at {}, names must only contain a-z0-9_.") \
-					.format(self.name, self.relative))
+				raise MinetestCheckError("Invalid base name for mod {} at {}, names must only contain a-z0-9_." \
+										 .format(self.name, self.relative))
 		elif self.type == ContentType.MODPACK:
 			self.add_children_from_mod_dir(None)
 
@@ -132,11 +132,12 @@ class PackageTreeNode:
 			for dep in result["depends"]:
 				if not basenamePattern.match(dep):
 					if " " in dep:
-						raise MinetestCheckError(("Invalid dependency name '{}' for mod at {}, did you forget a comma?") \
+						raise MinetestCheckError("Invalid dependency name '{}' for mod at {}, did you forget a comma?" \
 							.format(dep, self.relative))
 					else:
-						raise MinetestCheckError(("Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_.") \
-							.format(dep, self.relative))
+						raise MinetestCheckError(
+								"Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_." \
+									.format(dep, self.relative))
 
 
 		# Check dependencies
@@ -177,11 +178,11 @@ class PackageTreeNode:
 			if not entry.startswith('.') and os.path.isdir(path):
 				child = PackageTreeNode(path, relative + entry + "/", name=entry)
 				if not child.type.isModLike():
-					raise MinetestCheckError(("Expecting mod or modpack, found {} at {} inside {}") \
-							.format(child.type.value, child.relative, self.type.value))
+					raise MinetestCheckError("Expecting mod or modpack, found {} at {} inside {}" \
+						.format(child.type.value, child.relative, self.type.value))
 
 				if child.name is None:
-					raise MinetestCheckError(("Missing base name for mod at {}").format(self.relative))
+					raise MinetestCheckError("Missing base name for mod at {}".format(self.relative))
 
 				self.children.append(child)
 

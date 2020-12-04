@@ -15,22 +15,17 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import flask, json, os, git, tempfile, shutil, gitdb, contextlib
+import os, git, tempfile, shutil, gitdb, contextlib
 from git import GitCommandError
 from git_archive_all import GitArchiver
-from flask_sqlalchemy import SQLAlchemy
 from urllib.error import HTTPError
 import urllib.request
-from urllib.parse import urlparse, quote_plus, urlsplit
+from urllib.parse import urlsplit
 from zipfile import ZipFile
-
-from app import app
 from app.models import *
 from app.tasks import celery, TaskError
 from app.utils import randomString, getExtension
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
-from .minetestcheck.config import parse_conf
-from .krocklist import getKrockList, findModInfo
 
 
 def generateGitURL(urlstr):
@@ -60,7 +55,7 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 		print("Cloning from " + gitUrl)
 
 		if ref is None:
-			repo = git.Repo.clone_from(gitUrl, gitDir, \
+			repo = git.Repo.clone_from(gitUrl, gitDir,
 					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
 		else:
 			repo = git.Repo.init(gitDir)
@@ -96,10 +91,7 @@ def getMeta(urlstr, author):
 		except MinetestCheckError as err:
 			raise TaskError(str(err))
 
-		result = {}
-		result["name"] = tree.name
-		result["provides"] = tree.getModNames()
-		result["type"] = tree.type.name
+		result = {"name": tree.name, "provides": tree.getModNames(), "type": tree.type.name}
 
 		for key in ["depends", "optional_depends"]:
 			result[key] = tree.fold("meta", key)
@@ -120,8 +112,8 @@ def getMeta(urlstr, author):
 
 def postReleaseCheckUpdate(self, release, path):
 	try:
-		tree = build_tree(path, expected_type=ContentType[release.package.type.name], \
-			author=release.package.author.username, name=release.package.name)
+		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
+				author=release.package.author.username, name=release.package.name)
 
 		cache = {}
 		def getMetaPackages(names):

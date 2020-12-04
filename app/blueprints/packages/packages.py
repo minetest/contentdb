@@ -15,27 +15,23 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import render_template, abort, request, redirect, url_for, flash
-from flask_user import current_user
-import flask_menu as menu
-
-from . import bp
-
-from app.models import *
-from app.querybuilder import QueryBuilder
-from app.tasks.importtasks import importRepoScreenshot, updateMetaFromRelease
-from app.rediscache import has_key, set_key
-from app.utils import *
-
-from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
-from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
-from sqlalchemy import or_, func
-from sqlalchemy.orm import joinedload, subqueryload
 from urllib.parse import quote as urlescape
 
+import flask_menu as menu
 from celery import uuid
+from flask import render_template
+from flask_wtf import FlaskForm
+from sqlalchemy import or_, func
+from sqlalchemy.orm import joinedload, subqueryload
+from wtforms import *
+from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms.validators import *
+
+from app.querybuilder import QueryBuilder
+from app.rediscache import has_key, set_key
+from app.tasks.importtasks import importRepoScreenshot, updateMetaFromRelease
+from app.utils import *
+from . import bp
 
 
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
@@ -48,9 +44,9 @@ def list_all():
 	query = qb.buildPackageQuery()
 	title = qb.title
 
-	query = query.options( \
-			joinedload(Package.license), \
-			joinedload(Package.media_license), \
+	query = query.options(
+			joinedload(Package.license),
+			joinedload(Package.media_license),
 			subqueryload(Package.tags))
 
 	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
@@ -103,9 +99,9 @@ def list_all():
 
 	selected_tags = set(qb.tags)
 
-	return render_template("packages/list.html", \
-			title=title, packages=query.items, pagination=query, \
-			query=search, tags=tags, selected_tags=selected_tags, type=type_name, \
+	return render_template("packages/list.html",
+			title=title, packages=query.items, pagination=query,
+			query=search, tags=tags, selected_tags=selected_tags, type=type_name,
 			authors=authors, packages_count=query.total, topics=topics)
 
 
@@ -176,10 +172,10 @@ def view(package):
 
 	has_review = current_user.is_authenticated and PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
-	return render_template("packages/view.html", \
-			package=package, releases=releases, requests=requests, \
-			alternatives=alternatives, similar_topics=similar_topics, \
-			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl, \
+	return render_template("packages/view.html",
+			package=package, releases=releases, requests=requests,
+			alternatives=alternatives, similar_topics=similar_topics,
+			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
 			threads=threads.all(), has_review=has_review)
 
 
@@ -366,9 +362,9 @@ def create_edit(author=None, name=None):
 		package_query = package_query.filter(Package.id != package.id)
 
 	enableWizard = name is None and request.method != "POST"
-	return render_template("packages/create_edit.html", package=package, \
-			form=form, author=author, enable_wizard=enableWizard, \
-			packages=package_query.all(), \
+	return render_template("packages/create_edit.html", package=package,
+			form=form, author=author, enable_wizard=enableWizard,
+			packages=package_query.all(),
 			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all())
 
 
@@ -504,7 +500,7 @@ def edit_maintainers(package):
 
 	users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).order_by(db.asc(User.username)).all()
 
-	return render_template("packages/edit_maintainers.html", \
+	return render_template("packages/edit_maintainers.html",
 			package=package, form=form, users=users)
 
 

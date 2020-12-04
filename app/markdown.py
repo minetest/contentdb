@@ -53,9 +53,9 @@ ALLOWED_PROTOCOLS = ['http', 'https', 'mailto']
 md = Markdown(extensions=["fenced_code"], output_format="html5")
 
 def render_markdown(source):
-	return bleach.clean(md.convert(source), \
-		tags=ALLOWED_TAGS, attributes=ALLOWED_ATTRIBUTES, \
-		styles=[], protocols=ALLOWED_PROTOCOLS)
+	return bleach.clean(md.convert(source),
+			tags=ALLOWED_TAGS, attributes=ALLOWED_ATTRIBUTES,
+			styles=[], protocols=ALLOWED_PROTOCOLS)
 
 def init_app(app):
 	@app.template_filter()

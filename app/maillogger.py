@@ -1,6 +1,7 @@
 import logging
-from enum import Enum
+
 from app.tasks.emails import sendEmailRaw
+
 
 def _has_newline(line):
 	"""Used by has_bad_header to check for \\r or \\n"""
