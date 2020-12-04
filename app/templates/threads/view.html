@@ -17,19 +17,16 @@
 				<input type="submit" class="btn btn-primary" value="Subscribe" />
 			</form>
 		{% endif %}
-		{% if thread and thread.checkPerm(current_user, "DELETE_THREAD") %}
-			<a href="{{ url_for('threads.delete_thread', id=thread.id) }}" class="float-right mr-2 btn btn-danger">{{ _('Delete') }}</a>
-		{% endif %}
 		{% if thread and thread.checkPerm(current_user, "LOCK_THREAD") %}
 			{% if thread.locked %}
 				<form method="post" action="{{ url_for('threads.set_lock', id=thread.id, lock=0) }}" class="float-right mr-2">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="submit" class="btn btn-secondary" value="{{ _('Unlock') }}" />
+					<input type="submit" class="btn btn-secondary" value="{{ _('Unlock Thread') }}" />
 				</form>
 			{% else %}
 				<form method="post" action="{{ url_for('threads.set_lock', id=thread.id, lock=1) }}" class="float-right mr-2">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="submit" class="btn btn-secondary" value="{{ _('Lock') }}" />
+					<input type="submit" class="btn btn-secondary" value="{{ _('Lock Thread') }}" />
 				</form>
 			{% endif %}
 		{% endif %}

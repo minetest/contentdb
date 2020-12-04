@@ -95,7 +95,6 @@ class Permission(enum.Enum):
 	CREATE_THREAD      = "CREATE_THREAD"
 	COMMENT_THREAD     = "COMMENT_THREAD"
 	LOCK_THREAD        = "LOCK_THREAD"
-	DELETE_THREAD      = "DELETE_THREAD"
 	DELETE_REPLY       = "DELETE_REPLY"
 	EDIT_REPLY         = "EDIT_REPLY"
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
@@ -131,7 +130,7 @@ class Permission(enum.Enum):
 		return perm.check(user)
 
 def display_name_default(context):
-	return context.get_current_parameters()["username"]
+    return context.get_current_parameters()["username"]
 
 class User(db.Model, UserMixin):
 	id           = db.Column(db.Integer, primary_key=True)
@@ -411,22 +410,22 @@ class PackagePropertyKey(enum.Enum):
 
 provides = db.Table("provides",
 	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
-	db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
+    db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
 )
 
 Tags = db.Table("tags",
-	db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
-	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+    db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
+    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
 ContentWarnings = db.Table("content_warnings",
-	db.Column("content_warning_id", db.Integer, db.ForeignKey("content_warning.id"), primary_key=True),
-	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+    db.Column("content_warning_id", db.Integer, db.ForeignKey("content_warning.id"), primary_key=True),
+    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
 maintainers = db.Table("maintainers",
-	db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
-	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
+    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+    db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
 class Dependency(db.Model):
@@ -1244,8 +1243,8 @@ class EditRequestChange(db.Model):
 
 
 watchers = db.Table("watchers",
-	db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
-	db.Column("thread_id", db.Integer, db.ForeignKey("thread.id"), primary_key=True)
+    db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
+    db.Column("thread_id", db.Integer, db.ForeignKey("thread.id"), primary_key=True)
 )
 
 class Thread(db.Model):
@@ -1255,7 +1254,7 @@ class Thread(db.Model):
 	package    = db.relationship("Package", foreign_keys=[package_id])
 
 	review_id  = db.Column(db.Integer, db.ForeignKey("package_review.id"), nullable=True)
-	review     = db.relationship("PackageReview", foreign_keys=[review_id], cascade="all, delete")
+	review     = db.relationship("PackageReview", foreign_keys=[review_id])
 
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	title      = db.Column(db.String(100), nullable=False)
@@ -1266,7 +1265,7 @@ class Thread(db.Model):
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic", \
-			order_by=db.asc("thread_reply_id"), cascade="all, delete")
+			order_by=db.asc("thread_reply_id"))
 
 	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", \
 			backref=db.backref("watching", lazy=True))
@@ -1301,7 +1300,7 @@ class Thread(db.Model):
 		elif perm == Permission.COMMENT_THREAD:
 			return canSee and (not self.locked or user.rank.atLeast(UserRank.MODERATOR))
 
-		elif perm == Permission.LOCK_THREAD or perm == Permission.DELETE_THREAD:
+		elif perm == Permission.LOCK_THREAD:
 			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:
