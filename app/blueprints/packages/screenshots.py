@@ -46,7 +46,7 @@ def create_screenshot(package):
 
 	# Initial form class from post data and default data
 	form = CreateScreenshotForm()
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		uploadedUrl, uploadedPath = doFileUpload(form.fileUpload.data, "image",
 				"a PNG or JPG image file")
 		if uploadedUrl is not None:
@@ -85,7 +85,7 @@ def edit_screenshot(package, id):
 		# HACK: fix bug in wtforms
 		form.approved.data = screenshot.approved
 
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if canEdit and form["delete"].data:
 			PackageScreenshot.query.filter_by(id=id).delete()
 

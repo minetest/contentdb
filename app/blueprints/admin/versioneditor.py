@@ -46,7 +46,7 @@ def create_edit_version(name=None):
 			abort(404)
 
 	form = VersionForm(formdata=request.form, obj=version)
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if version is None:
 			version = MinetestRelease(form.name.data)
 			db.session.add(version)

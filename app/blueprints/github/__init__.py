@@ -191,7 +191,7 @@ def setup_webhook():
 				redirect_uri=abs_url_for("github.callback_webhook", pid=pid))
 
 	form = SetupWebhookForm(formdata=request.form)
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		token = APIToken()
 		token.name = "GitHub Webhook for " + package.title
 		token.owner = current_user

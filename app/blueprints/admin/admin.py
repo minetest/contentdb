@@ -177,7 +177,7 @@ class SwitchUserForm(FlaskForm):
 @rank_required(UserRank.ADMIN)
 def switch_user():
 	form = SwitchUserForm(formdata=request.form)
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		user = User.query.filter_by(username=form["username"].data).first()
 		if user is None:
 			flash("Unable to find user", "danger")

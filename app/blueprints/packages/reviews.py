@@ -59,7 +59,7 @@ def review(package):
 		form.comment.data = review.thread.replies[0].comment
 
 	# Validate and submit
-	elif request.method == "POST" and form.validate():
+	elif form.validate_on_submit():
 		was_new = False
 		if not review:
 			was_new = True

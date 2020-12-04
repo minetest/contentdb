@@ -163,7 +163,7 @@ def edit_reply(id):
 		abort(403)
 
 	form = CommentForm(formdata=request.form, obj=reply)
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		comment = form.comment.data
 
 		msg = "Edited reply by {}".format(reply.author.display_name)
@@ -271,7 +271,7 @@ def new():
 		form.title.data   = request.args.get("title") or ""
 
 	# Validate and submit
-	elif request.method == "POST" and form.validate():
+	elif form.validate_on_submit():
 		thread = Thread()
 		thread.author  = current_user
 		thread.title   = form.title.data
