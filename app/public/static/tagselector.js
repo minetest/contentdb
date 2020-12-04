@@ -6,12 +6,12 @@
  */
 (function($) {
 	function hide_error(input) {
-		var err = input.parent().parent().find(".invalid-remaining");
+		const err = input.parent().parent().find(".invalid-remaining");
 		err.hide();
 	}
 
 	function show_error(input, msg) {
-		var err = input.parent().parent().find(".invalid-remaining");
+		const err = input.parent().parent().find(".invalid-remaining");
 		console.log(err.length);
 		err.text(msg);
 		err.show();
@@ -19,12 +19,12 @@
 
 	$.fn.selectSelector = function(source, select) {
 		return this.each(function() {
-			var selector = $(this),
+			const selector = $(this),
 				input = $('input[type=text]', this);
 
 			selector.click(function() { input.focus(); })
 				.delegate('.badge a', 'click', function() {
-					var id = $(this).parent().data("id");
+					const id = $(this).parent().data("id");
 					select.find("option[value=" + id + "]").attr("selected", false)
 					recreate();
 				});
@@ -55,8 +55,8 @@
 			}
 			recreate();
 
-			input.focusout(function(e) {
-				var value = input.val().trim()
+			input.focusout(function() {
+				const value = input.val().trim();
 				if (value != "") {
 					show_error(input, "Please select an existing tag, it;s not possible to add custom ones.");
 				}
@@ -102,19 +102,19 @@
 
 	$.fn.csvSelector = function(source, name, result, allowSlash) {
 		return this.each(function() {
-				var selector = $(this),
-					input = $('input[type=text]', this);
+			const selector = $(this),
+				input = $('input[type=text]', this);
 
-				var selected = [];
-				var lookup = {};
-				for (var i = 0; i < source.length; i++) {
+			let selected = [];
+			const lookup = {};
+			for (var i = 0; i < source.length; i++) {
 					lookup[source[i].id] = source[i];
 				}
 
 				selector.click(function() { input.focus(); })
 					.delegate('.badge a', 'click', function() {
-						var id = $(this).parent().data("id");
-						for (var i = 0; i < selected.length; i++) {
+						const id = $(this).parent().data("id");
+						for (let i = 0; i < selected.length; i++) {
 							if (selected[i] == id) {
 								selected.splice(i, 1);
 							}
@@ -123,7 +123,7 @@
 					});
 
 				function selectItem(id) {
-					for (var i = 0; i < selected.length; i++) {
+					for (let i = 0; i < selected.length; i++) {
 						if (selected[i] == id) {
 							return false;
 						}
@@ -133,7 +133,7 @@
 				}
 
 				function addTag(id, value) {
-					var tag = $('<span class="badge badge-pill badge-primary"/>')
+					const tag = $('<span class="badge badge-pill badge-primary"/>')
 						.text(value)
 						.data("id", id)
 						.append(' <a>x</a>')
@@ -145,8 +145,8 @@
 
 				function recreate() {
 					selector.find("span").remove();
-					for (var i = 0; i < selected.length; i++) {
-						var value = lookup[selected[i]] || { value: selected[i] };
+					for (let i = 0; i < selected.length; i++) {
+						const value = lookup[selected[i]] || {value: selected[i]};
 						addTag(selected[i], value.value);
 					}
 					result.val(selected.join(","))
@@ -154,9 +154,9 @@
 
 				function readFromResult() {
 					selected = [];
-					var selected_raw = result.val().split(",");
-					for (var i = 0; i < selected_raw.length; i++) {
-						var raw = selected_raw[i].trim();
+					const selected_raw = result.val().split(",");
+					for (let i = 0; i < selected_raw.length; i++) {
+						const raw = selected_raw[i].trim();
 						if (lookup[raw] || raw.match(/^([a-z0-9_]+)$/)) {
 							selected.push(raw);
 						}
@@ -169,7 +169,7 @@
 				result.change(readFromResult);
 
 				input.focusout(function() {
-					var item = input.val();
+					const item = input.val();
 					if (item.length == 0) {
 						input.data("ui-autocomplete").search("");
 					} else if (item.match(/^([a-z0-9_]+)$/)) {
@@ -238,17 +238,17 @@
 
 	$(function() {
 		$(".multichoice_selector").each(function() {
-			var ele = $(this);
-			var sel = ele.parent().find("select");
+			const ele = $(this);
+			const sel = ele.parent().find("select");
 			sel.hide();
 
-			var options = [];
+			const options = [];
 			sel.find("option").each(function() {
-				var text = $(this).text();
+				const text = $(this).text();
 				options.push({
 					id: $(this).attr("value"),
 					value: text,
-					selected: $(this).attr("selected") ? true : false,
+					selected: !!$(this).attr("selected"),
 					toString: function() { return text; },
 				});
 			});
@@ -257,13 +257,13 @@
 		});
 
 		$(".metapackage_selector").each(function() {
-			var input = $(this).parent().children("input[type='text']");
+			const input = $(this).parent().children("input[type='text']");
 			input.hide();
 			$(this).csvSelector(meta_packages, input.attr("name"), input);
 		});
 
 		$(".deps_selector").each(function() {
-			var input = $(this).parent().children("input[type='text']");
+			const input = $(this).parent().children("input[type='text']");
 			input.hide();
 			$(this).csvSelector(all_packages, input.attr("name"), input);
 		});

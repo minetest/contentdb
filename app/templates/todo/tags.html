@@ -72,7 +72,7 @@
 
 <script>
 	$(".add-btn").click(function() {
-		const row = $(this).parent().parent()
+		$(this).parent().parent();
 
 		$(".modal select option").removeAttr("selected");
 		$(".multichoice_selector").remove();
@@ -87,13 +87,13 @@
 		$(".modal").modal("show");
 		$(".modal input").focus();
 		$(".multichoice_selector").each(function() {
-			var ele = $(this);
-			var sel = ele.parent().find("select");
+			const ele = $(this);
+			const sel = ele.parent().find("select");
 			sel.hide();
 
-			var options = [];
+			const options = [];
 			sel.find("option").each(function() {
-				var text = $(this).text();
+				const text = $(this).text();
 				options.push({
 					id: $(this).attr("value"),
 					value: text,

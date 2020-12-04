@@ -22,7 +22,7 @@ $(function() {
 
 			function setField(id, value) {
 				if (value && value != "") {
-					var ele = $(id);
+					const ele = $(id);
 					ele.val(value);
 					ele.trigger("change");
 				}

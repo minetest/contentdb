@@ -11,8 +11,8 @@ $(function() {
 
 	$("#forums").on('paste', function(e) {
 		try {
-			var pasteData = e.originalEvent.clipboardData.getData('text')
-			var url = new URL(pasteData);
+			const pasteData = e.originalEvent.clipboardData.getData('text');
+			const url = new URL(pasteData);
 			if (url.hostname == "forum.minetest.net") {
 				$(this).val(url.searchParams.get("t"));
 				e.preventDefault();
@@ -42,7 +42,7 @@ $(function() {
 		there's no need to use phrases such as \"adds X to the game\".`
 
 	$("#short_desc").on("change paste keyup", function() {
-		var val = $(this).val().toLowerCase();
+		const val = $(this).val().toLowerCase();
 		if (val.indexOf("minetest") >= 0 || val.indexOf("mod") >= 0 ||
 				val.indexOf("modpack") >= 0 || val.indexOf("mod pack") >= 0) {
 			showHint($(this), hint_mtmods);
@@ -54,9 +54,9 @@ $(function() {
 		}
 	})
 
-	var btn = $("#forums").parent().find("label").append("<a class='ml-3 btn btn-sm btn-primary'>Open</a>");
+	const btn = $("#forums").parent().find("label").append("<a class='ml-3 btn btn-sm btn-primary'>Open</a>");
 	btn.click(function() {
-		var id = $("#forums").val();
+		const id = $("#forums").val();
 		if (/^\d+$/.test(id)) {
 			window.open("https://forum.minetest.net/viewtopic.php?t=" + id, "_blank");
 		}
