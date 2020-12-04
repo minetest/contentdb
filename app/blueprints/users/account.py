@@ -143,7 +143,7 @@ def change_password():
 @bp.route("/user/set-password/", methods=["GET", "POST"])
 @login_required
 def set_password():
-	if current_user.hasPassword():
+	if current_user.password:
 		return redirect(url_for("users.change_password"))
 
 	form = SetPasswordForm(request.form)
