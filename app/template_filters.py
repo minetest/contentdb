@@ -2,6 +2,7 @@ from . import app
 from .models import Permission, Package, PackageState, PackageRelease
 from .utils import abs_url_for, url_set_query
 from flask_user import current_user
+from flask_babel import format_timedelta
 from urllib.parse import urlparse
 
 @app.context_processor
@@ -37,3 +38,7 @@ def date(value):
 @app.template_filter()
 def datetime(value):
 	return value.strftime("%Y-%m-%d %H:%M") + " UTC"
+
+@app.template_filter()
+def timedelta(value):
+	return format_timedelta(value)

@@ -47,6 +47,12 @@
 				<div class="list-group list-group-flush">
 					{% for p in packages %}
 						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+							<span class="float-right" title="Created {{ p.created_at | datetime }}">
+								<small>
+									{{ p.created_at | timedelta }} ago
+								</small>
+							</span>
+
 							{% if "Other" in p.license.name or "Other" in p.media_license.name %}
 								<span class="mr-2 badge badge-info">License</span>
 							{% else %}
@@ -54,6 +60,8 @@
 							{% endif %}
 
 							{{ p.title }} by {{ p.author.display_name }}
+
+
 						</a>
 					{% else %}
 						<li class="list-group-item"><i>No packages need reviewing.</i></li>
@@ -63,9 +71,15 @@
 
 			<div class="card mt-5">
 				<h3 class="card-header">WIP Packages</h3>
-				<div class="list-group list-group-flush">
+				<div class="list-group list-group-flush" style="max-height: 300px; overflow: hidden auto;">
 					{% for p in wip_packages %}
 						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+							<span class="float-right" title="Created {{ p.created_at | datetime }}">
+								<small>
+									{{ p.created_at | timedelta }} ago
+								</small>
+							</span>
+
 							{% if p.state == p.state.WIP %}
 								<span class="mr-2 badge badge-warning">WIP</span>
 							{% else %}
@@ -86,7 +100,7 @@
 		<div class="col-sm-6">
 			<div class="card">
 				<h3 class="card-header">Releases</h3>
-				<ul class="list-group list-group-flush">
+				<ul class="list-group list-group-flush" style="max-height: 500px; overflow: hidden auto;">
 					{% for r in releases %}
 						<li class="list-group-item">
 							{% if r.task_id %}
