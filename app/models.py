@@ -20,13 +20,12 @@ import enum
 from urllib.parse import urlparse
 
 from flask import url_for
+from flask_login import UserMixin
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from sqlalchemy_searchable import SearchQueryMixin, make_searchable
 from sqlalchemy_utils.types import TSVectorType
-
-from .usermgr import UserMixin, login_manager
-from . import app, gravatar
+from . import app, gravatar, login_manager
 
 # Initialise database
 db = SQLAlchemy(app)
@@ -1481,7 +1480,3 @@ if app.config.get("LOG_SQL"):
 	import logging
 	logging.basicConfig()
 	logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
-
-@login_manager.user_loader
-def load_user(user_id):
-	return User.query.filter_by(username=user_id).first()
