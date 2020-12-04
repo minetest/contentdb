@@ -23,7 +23,7 @@ from flask_github import GitHub
 from flask_wtf.csrf import CSRFProtect
 from flask_flatpages import FlatPages
 from flask_babel import Babel
-from flask_login import logout_user, current_user
+from flask_login import logout_user, current_user, LoginManager
 import os, redis
 
 app = Flask(__name__, static_folder="public/static")
@@ -48,6 +48,10 @@ gravatar = Gravatar(app,
 		use_ssl=True,
 		base_url=None)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "users.login"
+
 from .sass import sass
 sass(app)
 
@@ -64,7 +68,13 @@ init_app(app)
 # def get_locale():
 # 	return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
-from . import models, tasks, template_filters, usermgr
+from . import models, tasks, template_filters
+
+@login_manager.user_loader
+def load_user(user_id):
+	return models.User.query.filter_by(username=user_id).first()
+
+
 from .blueprints import create_blueprints
 create_blueprints(app)
 

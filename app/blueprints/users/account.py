@@ -36,16 +36,15 @@ class LoginForm(FlaskForm):
 
 
 def handle_login(form):
-	username = form.username.data.strip()
-	user = User.query.filter(or_(User.username == username, User.email == username)).first()
-
-
 	def show_safe_err(err):
 		if "@" in username:
 			flash("Incorrect email or password", "danger")
 		else:
-			flash(err, "error")
+			flash(err, "danger")
 
+
+	username = form.username.data.strip()
+	user = User.query.filter(or_(User.username == username, User.email == username)).first()
 	if user is None:
 		return show_safe_err("User {} does not exist".format(username))
 
@@ -65,7 +64,6 @@ def handle_login(form):
 		abort(400)
 
 	return redirect(next or url_for("homepage.home"))
-
 
 
 @bp.route("/user/login/", methods=["GET", "POST"])
@@ -117,8 +115,16 @@ def register():
 	return render_template("users/register.html", form=form)
 
 
+class ForgotPassword(FlaskForm):
+	email = StringField("Email", [InputRequired(), Email()])
+	submit = SubmitField("Reset Password")
+
 @bp.route("/user/forgot-password/", methods=["GET", "POST"])
 def forgot_password():
+	form = ForgotPassword(request.form)
+	if form.validate_on_submit():
+		pass
+
 	return "Forgot password page"
 
 
@@ -127,7 +133,6 @@ class SetPasswordForm(FlaskForm):
 	password = PasswordField("New password", [InputRequired(), Length(8, 100)])
 	password2 = PasswordField("Verify password", [InputRequired(), Length(8, 100)])
 	submit = SubmitField("Save")
-
 
 @bp.route("/user/change-password/", methods=["GET", "POST"])
 @login_required
@@ -180,7 +185,7 @@ def set_password():
 	return render_template("users/set_password.html", form=form, optional=request.args.get("optional"))
 
 
-@bp.route("/users/verify/")
+@bp.route("/user/verify/")
 def verify_email():
 	token = request.args.get("token")
 	ver = UserEmailVerification.query.filter_by(token=token).first()
