@@ -29,8 +29,13 @@
 			A release is required before this package can be approved.
 		{% endif %}
 	{% endset %}
+
 {% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
 	{% set message = "You need to add at least one screenshot." %}
+
+{% elif package.getMissingHardDependenciesQuery().count() > 0 %}
+	{% set deps = package.getMissingHardDependencies() | join(", ") %}
+	{% set message = "The following hard dependencies need to be added to ContentDB first: " + deps %}
 
 {% elif topic_error_lvl == "danger" %}
 {% elif package.state == package.state.READY_FOR_REVIEW and ("Other" in package.license.name or "Other" in package.media_license.name) %}

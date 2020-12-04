@@ -826,13 +826,21 @@ class Package(db.Model):
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
 
+	def getMissingHardDependenciesQuery(self):
+		return MetaPackage.query \
+			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
+			.filter(MetaPackage.dependencies.any(optional=False, depender=self)) \
+			.order_by(db.asc(MetaPackage.name))
+
+	def getMissingHardDependencies(self):
+		return [mp.name for mp in self.getMissingHardDependenciesQuery().all()]
 
 	def canMoveToState(self, user, state):
 		if not user.is_authenticated:
 			return False
 
 		if type(state) == str:
-			state = PackageState[perm]
+			state = PackageState[state]
 		elif type(state) != PackageState:
 			raise Exception("Unknown state given to Package.canMoveToState()")
 
@@ -845,8 +853,10 @@ class Package(db.Model):
 			if not self.checkPerm(user, requiredPerm):
 				return False
 
-			if state == PackageState.APPROVED and \
-					("Other" in self.license.name or "Other" in self.media_license.name):
+			if state == PackageState.APPROVED and  ("Other" in self.license.name or "Other" in self.media_license.name):
+				return False
+
+			if self.getMissingHardDependenciesQuery().count() > 0:
 				return False
 
 			needsScreenshot = \
