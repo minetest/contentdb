@@ -16,6 +16,8 @@ Docker is the recommended way to develop and deploy ContentDB.
 
 2. Copy `config.example.cfg` to `config.cfg`.
 
+	1. Set `SECRET_KEY` and `WTF_CSRF_SECRET_KEY` to different random values.
+
 3. (Optional) Set up mail in config.cfg.
    Make sure to set `USER_ENABLE_EMAIL` to True.
 
