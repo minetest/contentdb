@@ -35,34 +35,46 @@ class LoginForm(FlaskForm):
 	submit = SubmitField("Login")
 
 
+def handle_login(form):
+	username = form.username.data.strip()
+	user = User.query.filter(or_(User.username == username, User.email == username)).first()
+
+
+	def show_safe_err(err):
+		if "@" in username:
+			flash("Incorrect email or password", "danger")
+		else:
+			flash(err, "error")
+
+	if user is None:
+		return show_safe_err("User {} does not exist".format(username))
+
+	if not check_password_hash(user.password, form.password.data):
+		return show_safe_err("Incorrect password. Did you set one?")
+
+	if not user.is_active:
+		flash("You need to confirm the registration email", "danger")
+		return
+
+
+	login_user(user)
+	flash("Logged in successfully.", "success")
+
+	next = request.args.get("next")
+	if next and not is_safe_url(next):
+		abort(400)
+
+	return redirect(next or url_for("homepage.home"))
+
+
+
 @bp.route("/user/login/", methods=["GET", "POST"])
 def login():
 	form = LoginForm(request.form)
 	if form.validate_on_submit():
-		username = form.username.data.strip()
-		user = User.query.filter(or_(User.username==username, User.email==username)).first()
-		if user is None:
-			err = "User {} does not exist".format(username)
-
-		elif not check_password_hash(user.password, form.password.data):
-			err = "Incorrect password. Did you set one?"
-
-		else:
-			login_user(user)
-			flash("Logged in successfully.")
-
-			next = request.args.get("r")
-			if next and not is_safe_url(next):
-				abort(400)
-
-			return redirect(next or url_for("homepage.home"))
-
-		if err:
-			# The existence of a username is public, but emails are not
-			if "@" in username:
-				flash("Incorrect email or password", "danger")
-			else:
-				flash(err, "error")
+		ret = handle_login(form)
+		if ret:
+			return ret
 
 
 	return render_template("users/login.html", form=form)
@@ -84,6 +96,24 @@ class RegisterForm(FlaskForm):
 @bp.route("/user/register/", methods=["GET", "POST"])
 def register():
 	form = RegisterForm(request.form)
+	if form.validate_on_submit():
+		user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
+		db.session.add(user)
+
+		token = randomString(32)
+
+		ver = UserEmailVerification()
+		ver.user = user
+		ver.token = token
+		ver.email = form.email.data
+		db.session.add(ver)
+		db.session.commit()
+
+		sendVerifyEmail.delay(form.email.data, token)
+
+		flash("Check your email address to verify your account", "success")
+		return redirect(url_for("homepage.home"))
+
 	return render_template("users/register.html", form=form)
 
 
@@ -156,12 +186,18 @@ def verify_email():
 	ver = UserEmailVerification.query.filter_by(token=token).first()
 	if ver is None:
 		flash("Unknown verification token!", "danger")
-	else:
-		ver.user.email = ver.email
-		db.session.delete(ver)
-		db.session.commit()
+		return redirect(url_for("homepage.home"))
+
+	was_activating = not ver.user.is_active
+	ver.user.is_active = True
+	ver.user.email = ver.email
+	db.session.delete(ver)
+	db.session.commit()
 
 	if current_user.is_authenticated:
 		return redirect(url_for("users.profile", username=current_user.username))
+	elif was_activating:
+		flash("You may now log in", "success")
+		return redirect(url_for("users.login"))
 	else:
 		return redirect(url_for("homepage.home"))
