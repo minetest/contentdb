@@ -41,6 +41,8 @@
 			{% endif %}
 		{% endif %}
 
+		<h3 class="mt-5">Supported Minetest versions</h3>
+
 		<div class="row">
 			{{ render_field(form.min_rel, class_="col-sm-6") }}
 			{{ render_field(form.max_rel, class_="col-sm-6") }}
@@ -51,14 +53,19 @@
 		</p>
 
 		<p>
-			Note: Min and max versions will be used to hide the package on
-			platforms not within the range.
-			You cannot select the oldest version for min or the newest version
-			for max as this does not make sense - you can't predict the future.<br />
+			Set the minimum and maximum Minetest versions supported.
+			This release will be hidden to clients outside of that range.<br />
 			Leave both as None if in doubt.
+			You can <a href="/help/package_config/">set this automatically</a> in the .conf of your package.
+		</p>
+		<p>
+			You cannot select the oldest version for min or the newest version
+			for max as this does not make sense - you can't predict the future.
 		</p>
 
-		{{ render_submit_field(form.submit) }}
+		<p class="mt-5">
+			{{ render_submit_field(form.submit) }}
+		</p>
 	</form>
 
 	<h2 class="mt-5">{{ _("Delete Release") }}</h2>
