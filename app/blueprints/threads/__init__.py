@@ -19,7 +19,7 @@ from flask import *
 
 bp = Blueprint("threads", __name__)
 
-from flask_user import *
+from flask_login import current_user, login_required
 from app.models import *
 from app.utils import addNotification, isYes, addAuditLog
 

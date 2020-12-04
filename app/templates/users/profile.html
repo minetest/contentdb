@@ -132,7 +132,7 @@
 								<td>Password:</td>
 								<td>
 									{% if user.password %}
-										Set | <a href="{{ url_for('user.change_password') }}">Change</a>
+										Set | <a href="{{ url_for('users.change_password') }}">Change</a>
 									{% else %}
 										Not set | <a href="{{ url_for('users.set_password') }}">Set</a>
 									{% endif %}

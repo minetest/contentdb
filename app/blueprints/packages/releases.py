@@ -18,6 +18,7 @@
 from celery import uuid
 from flask import *
 from flask_wtf import FlaskForm
+from flask_login import login_required
 from wtforms import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *

@@ -16,10 +16,11 @@
 
 
 from flask import *
+from sqlalchemy import func
+from app.models import MetaPackage, Package, db, Dependency, PackageState, ForumTopic
 
 bp = Blueprint("metapackages", __name__)
 
-from app.models import *
 
 @bp.route("/metapackages/")
 def list_all():
@@ -28,6 +29,7 @@ def list_all():
 			.order_by(db.asc(MetaPackage.name)) \
 			.group_by(MetaPackage.id).all()
 	return render_template("metapackages/list.html", mpackages=mpackages)
+
 
 @bp.route("/metapackages/<name>/")
 def view(name):

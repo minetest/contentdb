@@ -1,11 +1,11 @@
 from .models import *
-from .utils import make_flask_user_password
+from .utils import make_flask_login_password
 
 
 def populate(session):
 	admin_user = User("rubenwardy")
-	admin_user.active = True
-	admin_user.password = make_flask_user_password("tuckfrump")
+	admin_user.is_active = True
+	admin_user.password = make_flask_login_password("tuckfrump")
 	admin_user.github_username = "rubenwardy"
 	admin_user.forums_username = "rubenwardy"
 	admin_user.rank = UserRank.ADMIN

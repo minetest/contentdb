@@ -16,7 +16,6 @@
 
 
 from flask import *
-from flask_user import *
 from flask_gravatar import Gravatar
 import flask_menu as menu
 from flask_mail import Mail
@@ -24,6 +23,7 @@ from flask_github import GitHub
 from flask_wtf.csrf import CSRFProtect
 from flask_flatpages import FlatPages
 from flask_babel import Babel
+from flask_login import logout_user, current_user
 import os, redis
 
 app = Flask(__name__, static_folder="public/static")
@@ -64,12 +64,9 @@ init_app(app)
 # def get_locale():
 # 	return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
-from . import models, tasks, template_filters
-
+from . import models, tasks, template_filters, usermgr
 from .blueprints import create_blueprints
 create_blueprints(app)
-
-from flask_login import logout_user
 
 @app.route("/uploads/<path:path>")
 def send_upload(path):
@@ -88,7 +85,7 @@ def check_for_ban():
 		if current_user.rank == models.UserRank.BANNED:
 			flash("You have been banned.", "danger")
 			logout_user()
-			return redirect(url_for('user.login'))
+			return redirect(url_for('users.login'))
 		elif current_user.rank == models.UserRank.NOT_JOINED:
 			current_user.rank = models.UserRank.MEMBER
 			models.db.session.commit()

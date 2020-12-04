@@ -16,7 +16,7 @@
 
 
 from flask import *
-from flask_user import signals, current_user, user_manager, login_required
+from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from sqlalchemy import func
 from wtforms import *
@@ -26,7 +26,7 @@ from app.markdown import render_markdown
 from app.models import *
 from app.tasks.emails import sendVerifyEmail, sendEmailRaw
 from app.tasks.forumtasks import checkForumAccount
-from app.utils import randomString, rank_required, nonEmptyOrNone, addAuditLog
+from app.utils import randomString, rank_required, nonEmptyOrNone, addAuditLog, make_flask_login_password
 from . import bp
 
 
@@ -182,79 +182,3 @@ def send_email(username):
 		return redirect(url_for("tasks.check", id=task.id, r=next_url))
 
 	return render_template("users/send_email.html", form=form)
-
-
-
-class SetPasswordForm(FlaskForm):
-	email = StringField("Email", [Optional(), Email()])
-	password = PasswordField("New password", [InputRequired(), Length(2, 100)])
-	password2 = PasswordField("Verify password", [InputRequired(), Length(2, 100)])
-	submit = SubmitField("Save")
-
-@bp.route("/user/set-password/", methods=["GET", "POST"])
-@login_required
-def set_password():
-	if current_user.hasPassword():
-		return redirect(url_for("user.change_password"))
-
-	form = SetPasswordForm(request.form)
-	if current_user.email is None:
-		form.email.validators = [InputRequired(), Email()]
-
-	if request.method == "POST" and form.validate():
-		one = form.password.data
-		two = form.password2.data
-		if one == two:
-			# Hash password
-			hashed_password = user_manager.hash_password(form.password.data)
-
-			# Change password
-			current_user.password = hashed_password
-			db.session.commit()
-
-			# Send 'password_changed' email
-			if user_manager.USER_ENABLE_EMAIL and current_user.email:
-				user_manager.email_manager.send_password_changed_email(current_user)
-
-			# Send password_changed signal
-			signals.user_changed_password.send(current_app._get_current_object(), user=current_user)
-
-			# Prepare one-time system message
-			flash('Your password has been changed successfully.', 'success')
-
-			newEmail = form["email"].data
-			if newEmail != current_user.email and newEmail.strip() != "":
-				token = randomString(32)
-
-				ver = UserEmailVerification()
-				ver.user = current_user
-				ver.token = token
-				ver.email = newEmail
-				db.session.add(ver)
-				db.session.commit()
-
-				task = sendVerifyEmail.delay(newEmail, token)
-				return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=current_user.username)))
-			else:
-				return redirect(url_for("user.login"))
-		else:
-			flash("Passwords do not match", "danger")
-
-	return render_template("users/set_password.html", form=form, optional=request.args.get("optional"))
-
-
-@bp.route("/users/verify/")
-def verify_email():
-	token = request.args.get("token")
-	ver = UserEmailVerification.query.filter_by(token=token).first()
-	if ver is None:
-		flash("Unknown verification token!", "danger")
-	else:
-		ver.user.email = ver.email
-		db.session.delete(ver)
-		db.session.commit()
-
-	if current_user.is_authenticated:
-		return redirect(url_for("users.profile", username=current_user.username))
-	else:
-		return redirect(url_for("homepage.home"))

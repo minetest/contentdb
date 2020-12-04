@@ -19,7 +19,7 @@ from flask import Blueprint
 bp = Blueprint("github", __name__)
 
 from flask import redirect, url_for, request, flash, abort, render_template, jsonify, current_app
-from flask_user import current_user, login_required
+from flask_login import current_user, login_required
 from sqlalchemy import func, or_, and_
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission
@@ -46,7 +46,7 @@ def callback(oauth_token):
 	next_url = request.args.get("next")
 	if oauth_token is None:
 		flash("Authorization failed [err=gh-oauth-login-failed]", "danger")
-		return redirect(url_for("user.login"))
+		return redirect(url_for("users.login"))
 
 	# Get Github username
 	url = "https://api.github.com/user"
@@ -79,7 +79,7 @@ def callback(oauth_token):
 				return redirect(next_url or url_for("homepage.home"))
 		else:
 			flash("Authorization failed [err=gh-login-failed]", "danger")
-			return redirect(url_for("user.login"))
+			return redirect(url_for("users.login"))
 
 
 @bp.route("/github/webhook/", methods=["POST"])

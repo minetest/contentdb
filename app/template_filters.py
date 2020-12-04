@@ -1,7 +1,7 @@
 from . import app
 from .models import Permission, Package, PackageState, PackageRelease
 from .utils import abs_url_for, url_set_query
-from flask_user import current_user
+from flask_login import current_user
 from flask_babel import format_timedelta
 from urllib.parse import urlparse
 

@@ -16,7 +16,7 @@
 
 
 from flask import *
-from flask_user import *
+from flask_login import current_user, login_required
 from . import bp
 from .auth import is_api_authd
 from .support import error, handleCreateRelease
