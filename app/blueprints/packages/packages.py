@@ -21,6 +21,7 @@ import flask_menu as menu
 from celery import uuid
 from flask import render_template
 from flask_wtf import FlaskForm
+from flask_login import login_required
 from sqlalchemy import or_, func
 from sqlalchemy.orm import joinedload, subqueryload
 from wtforms import *

@@ -16,6 +16,7 @@
 
 
 from flask import *
+from flask_login import login_required
 
 from app import csrf
 from app.tasks import celery

@@ -8,33 +8,21 @@ Sign in
 <div class="row">
 	<div class="col-sm-8">
 		<div class="card">
-			{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
+			{% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
 			<h2 class="card-header">{%trans%}Sign in{%endtrans%}</h2>
 
 			<form action="" method="POST" class="form card-body" role="form">
 				{{ form.hidden_tag() }}
 
 				{# Username or Email field #}
-				{% set field = form.username if user_manager.USER_ENABLE_USERNAME else form.email %}
-				<div class="form-group {% if field.errors %}has-error{% endif %}">
-					{# Label on left, "New here? Register." on right #}
-					<label for="{{ field.id }}" class="control-label">{{ field.label.text }}</label>
-					{{ field(class_='form-control', tabindex=110) }}
-					{% if field.errors %}
-					{% for e in field.errors %}
-					<p class="help-block">{{ e }}</p>
-					{% endfor %}
-					{% endif %}
-				</div>
+				{{ render_field(form.username) }}
 
 				{# Password field #}
 				{% set field = form.password %}
 				<div class="form-group {% if field.errors %}has-error{% endif %}">
 					<label for="{{ field.id }}" class="control-label">{{ field.label.text }}
-					{% if user_manager.USER_ENABLE_FORGOT_PASSWORD %}
-						<a href="{{ url_for('user.forgot_password') }}" tabindex='195'>
-							[{%trans%}Forgot My Password{%endtrans%}]</a>
-					{% endif %}
+						<a href="{{ url_for('users.forgot_password') }}" tabindex='195'>
+							[{%trans%}Forgot my password{%endtrans%}]</a>
 					</label>
 					{{ field(class_='form-control', tabindex=120) }}
 					{% if field.errors %}
@@ -45,9 +33,7 @@ Sign in
 				</div>
 
 				{# Remember me #}
-				{% if user_manager.USER_ENABLE_REMEMBER_ME %}
-				{{ render_checkbox_field(login_form.remember_me, tabindex=130) }}
-				{% endif %}
+				{{ render_checkbox_field(form.remember_me, tabindex=130) }}
 
 				{# Submit button #}
 				<p>
@@ -57,7 +43,6 @@ Sign in
 		</div>
 
 		<div class="card mt-4">
-			{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 			<h2 class="card-header">{%trans%}Sign in with Github{%endtrans%}</h2>
 			<div class="card-body">
 				<a class="btn btn-primary" href="{{ url_for('github.start') }}">GitHub</a>
@@ -67,7 +52,6 @@ Sign in
 
 	<aside class="col-sm-4">
 		<div class="card">
-			{% from "flask_user/_macros.html" import render_field, render_checkbox_field, render_submit_field %}
 			<h2 class="card-header">{%trans%}New here?{%endtrans%}</h2>
 			<div class="card-body">
 				<p>Create an account using your forum account or email.</p>

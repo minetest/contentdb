@@ -16,7 +16,7 @@
 
 
 from flask import render_template, redirect, request, session, url_for, abort
-from flask_user import login_required, current_user
+from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField

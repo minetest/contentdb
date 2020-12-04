@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import *
-from flask_user import *
+from flask_login import current_user, login_required
 from sqlalchemy import or_
 
 from app.models import *

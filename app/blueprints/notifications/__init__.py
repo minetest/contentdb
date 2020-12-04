@@ -16,7 +16,7 @@
 
 
 from flask import Blueprint, render_template, redirect, url_for
-from flask_user import current_user, login_required
+from flask_login import current_user, login_required
 from app.models import db, Notification
 
 bp = Blueprint("notifications", __name__)

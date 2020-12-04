@@ -19,16 +19,23 @@ import imghdr
 import os
 import random
 import string
-import user_agents
+from functools import wraps
 from urllib.parse import urljoin
 
+import user_agents
 from flask import request, flash, abort, redirect
-from flask_login import login_user
-from flask_user import *
+from flask_login import login_user, current_user
 from werkzeug.datastructures import MultiDict
+from passlib.hash import bcrypt
 
-from . import app
 from .models import *
+
+
+def is_safe_url(target):
+	ref_url = urlparse(request.host_url)
+	test_url = urlparse(urljoin(request.host_url, target))
+	return test_url.scheme in ('http', 'https') and \
+		   ref_url.netloc == test_url.netloc
 
 
 # These are given to Jinja in template_filters.py
@@ -130,28 +137,17 @@ def doFileUpload(file, fileType, fileTypeDesc):
 	file.save(filepath)
 	return "/uploads/" + filename, filepath
 
-def make_flask_user_password(plaintext_str):
-	# http://passlib.readthedocs.io/en/stable/modular_crypt_format.html
-	# http://passlib.readthedocs.io/en/stable/lib/passlib.hash.bcrypt.html#format-algorithm
-	# Flask_User stores passwords in the Modular Crypt Format.
-	# https://github.com/lingthio/Flask-User/blob/master/flask_user/user_manager__settings.py#L166
-	#   Note that Flask_User allows customizing password algorithms.
-	#   USER_PASSLIB_CRYPTCONTEXT_SCHEMES defaults to bcrypt but if
-	#   default changes or is customized, the code below needs adapting.
-	# Individual password values will look like:
-	#   $2b$12$.az4S999Ztvy/wa3UdQvMOpcki1Qn6VYPXmEFMIdWQyYs7ULnH.JW
-	#   $XX$RR$SSSSSSSSSSSSSSSSSSSSSSHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH
-	# $XX : Selects algorithm (2b is bcrypt).
-	# $RR : Selects bcrypt key expansion rounds (12 is 2**12 rounds).
-	# $SSS... : 22 chars of (random, per-password) salt
-	#  HHH... : 31 remaining chars of password hash (note no dollar sign)
-	import bcrypt
-	plaintext = plaintext_str.encode("UTF-8")
-	password = bcrypt.hashpw(plaintext, bcrypt.gensalt())
-	if isinstance(password, str):
-		return password
-	else:
-		return password.decode("UTF-8")
+
+def check_password_hash(stored, given):
+	if stored is None or stored == "":
+		return False
+
+	return bcrypt.verify(given.encode("UTF-8"), stored)
+
+
+def make_flask_login_password(plaintext):
+	return bcrypt.hash(plaintext.encode("UTF-8"))
+
 
 def loginUser(user):
 	def _call_or_get(v):
@@ -168,7 +164,7 @@ def loginUser(user):
 		flash("You have been banned.", "danger")
 		return False
 
-	user.active = True
+	user.is_active = True
 	if not user.rank.atLeast(UserRank.NEW_MEMBER):
 		user.rank = UserRank.MEMBER
 
@@ -179,9 +175,7 @@ def loginUser(user):
 		flash("Your account has not been enabled.", "danger")
 		return False
 
-	# Use Flask-Login to sign in user
 	login_user(user, remember=True)
-	signals.user_logged_in.send(current_app._get_current_object(), user=user)
 
 	flash("You have signed in successfully.", "success")
 
@@ -193,7 +187,7 @@ def rank_required(rank):
 		@wraps(f)
 		def decorated_function(*args, **kwargs):
 			if not current_user.is_authenticated:
-				return redirect(url_for("user.login"))
+				return redirect(url_for("users.login"))
 			if not current_user.rank.atLeast(rank):
 				abort(403)
 

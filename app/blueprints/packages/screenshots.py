@@ -17,6 +17,7 @@
 
 from flask import *
 from flask_wtf import FlaskForm
+from flask_login import login_required
 from wtforms import *
 from wtforms.validators import *
 

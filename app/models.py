@@ -22,11 +22,11 @@ from urllib.parse import urlparse
 from flask import url_for
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
-from flask_user import UserManager, UserMixin
 from sqlalchemy_searchable import SearchQueryMixin, make_searchable
 from sqlalchemy_utils.types import TSVectorType
 
-from app import app, gravatar
+from .usermgr import UserMixin, login_manager
+from . import app, gravatar
 
 # Initialise database
 db = SQLAlchemy(app)
@@ -138,6 +138,9 @@ class User(db.Model, UserMixin):
 	password     = db.Column(db.String(255), nullable=False, server_default="")
 	reset_password_token = db.Column(db.String(100), nullable=False, server_default="")
 
+	def get_id(self):
+		return self.username
+
 	rank         = db.Column(db.Enum(UserRank))
 
 	# Account linking
@@ -153,7 +156,7 @@ class User(db.Model, UserMixin):
 
 	# User information
 	profile_pic   = db.Column(db.String(255), nullable=True, server_default=None)
-	active        = db.Column("is_active", db.Boolean, nullable=False, server_default="0")
+	is_active     = db.Column("is_active", db.Boolean, nullable=False, server_default="0")
 	display_name  = db.Column(db.String(100), nullable=False, default=display_name_default)
 
 	# Links
@@ -174,7 +177,7 @@ class User(db.Model, UserMixin):
 		self.username = username
 		self.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
-		self.active = active
+		self.is_active = active
 		self.email = email
 		self.password = password
 		self.rank = UserRank.NOT_JOINED
@@ -718,7 +721,7 @@ class Package(db.Model):
 
 	def getSetStateURL(self, state):
 		if type(state) == str:
-			state = PackageState[perm]
+			state = PackageState[state]
 		elif type(state) != PackageState:
 			raise Exception("Unknown state given to Package.canMoveToState()")
 
@@ -1474,10 +1477,11 @@ class ForumTopic(db.Model):
 			raise Exception("Permission {} is not related to topics".format(perm.name))
 
 
-# Setup Flask-User
-user_manager = UserManager(app, db, User)
-
 if app.config.get("LOG_SQL"):
 	import logging
 	logging.basicConfig()
 	logging.getLogger('sqlalchemy.engine').setLevel(logging.INFO)
+
+@login_manager.user_loader
+def load_user(user_id):
+	return User.query.filter_by(username=user_id).first()

@@ -131,11 +131,11 @@
 										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.license_list') }}">{{ _("License Editor") }}</a></li>
 									{% endif %}
 								{% endif %}
-								<li class="nav-item"><a class="nav-link" href="{{ url_for('user.logout') }}">{{ _("Sign out") }}</a></li>
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('users.logout') }}">{{ _("Sign out") }}</a></li>
 							</ul>
 						</li>
 					{% else %}
-						<li><a class="nav-link" href="{{ url_for('user.login') }}">{{ _("Sign in") }}</a></li>
+						<li><a class="nav-link" href="{{ url_for('users.login') }}">{{ _("Sign in") }}</a></li>
 					{% endif %}
 				</ul>
 			</div>
