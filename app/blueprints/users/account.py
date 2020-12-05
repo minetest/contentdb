@@ -228,7 +228,8 @@ def change_password():
 		else:
 			flash("Old password is incorrect", "danger")
 
-	return render_template("users/change_set_password.html", form=form)
+	return render_template("users/change_set_password.html", form=form,
+			suggested_password=genphrase(entropy=52, wordset="bip39"))
 
 
 @bp.route("/user/set-password/", methods=["GET", "POST"])
@@ -246,7 +247,8 @@ def set_password():
 		if ret:
 			return ret
 
-	return render_template("users/change_set_password.html", form=form, optional=request.args.get("optional"))
+	return render_template("users/change_set_password.html", form=form, optional=request.args.get("optional"),
+			suggested_password=genphrase(entropy=52, wordset="bip39"))
 
 
 @bp.route("/user/verify/")
