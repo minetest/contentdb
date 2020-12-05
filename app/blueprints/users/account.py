@@ -106,7 +106,7 @@ def register():
 	if form.validate_on_submit():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user:
-			sendEmailRaw([form.email.data], "Email already in use",
+			sendEmailRaw.delay([form.email.data], "Email already in use",
 					"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(user.display_name))
 		else:
 			user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
@@ -129,17 +129,43 @@ def register():
 	return render_template("users/register.html", form=form, suggested_password=genphrase(entropy=52, wordset="bip39"))
 
 
-class ForgotPassword(FlaskForm):
+class ForgotPasswordForm(FlaskForm):
 	email = StringField("Email", [InputRequired(), Email()])
 	submit = SubmitField("Reset Password")
 
 @bp.route("/user/forgot-password/", methods=["GET", "POST"])
 def forgot_password():
-	form = ForgotPassword(request.form)
+	form = ForgotPasswordForm(request.form)
 	if form.validate_on_submit():
-		pass
+		email = form.email.data
+		user = User.query.filter_by(email=email).first()
+		if user:
+			token = randomString(32)
 
-	return "Forgot password page"
+			ver = UserEmailVerification()
+			ver.user = user
+			ver.token = token
+			ver.email = email
+			ver.is_password_reset = True
+			db.session.add(ver)
+			db.session.commit()
+
+			sendVerifyEmail.delay(form.email.data, token)
+		else:
+			sendEmailRaw.delay([email], "Unable to find account", """
+					<p>
+						We were unable to perform the password reset as we could not find an account
+						associated with this email.
+					</p>
+					<p>
+						If you weren't expecting to receive this email, then you can safely ignore it.
+					</p>
+			""")
+
+		flash("Check your email address to continue the reset", "success")
+		return redirect(url_for("homepage.home"))
+
+	return render_template("users/forgot_password.html", form=form)
 
 
 class SetPasswordForm(FlaskForm):
@@ -226,7 +252,7 @@ def set_password():
 @bp.route("/user/verify/")
 def verify_email():
 	token = request.args.get("token")
-	ver = UserEmailVerification.query.filter_by(token=token).first()
+	ver : UserEmailVerification = UserEmailVerification.query.filter_by(token=token).first()
 	if ver is None:
 		flash("Unknown verification token!", "danger")
 		return redirect(url_for("homepage.home"))
@@ -236,6 +262,13 @@ def verify_email():
 	ver.user.email = ver.email
 	db.session.delete(ver)
 	db.session.commit()
+
+	if ver.is_password_reset:
+		login_user(ver.user)
+		ver.user.password = None
+		db.session.commit()
+
+		return redirect(url_for("users.set_password"))
 
 	if current_user.is_authenticated:
 		return redirect(url_for("users.profile", username=current_user.username))

@@ -259,12 +259,15 @@ class User(db.Model, UserMixin):
 		assert self.id > 0
 		return self.id == other.id
 
+
 class UserEmailVerification(db.Model):
 	id      = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
 	email   = db.Column(db.String(100))
 	token   = db.Column(db.String(32))
 	user    = db.relationship("User", foreign_keys=[user_id])
+	is_password_reset = db.Column(db.Boolean, nullable=False, default=False)
+
 
 class Notification(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
