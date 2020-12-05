@@ -182,4 +182,4 @@ def email_notifications(username=None):
 
 	return render_template("users/settings_email.html",
 			form=form, user=user, types=types, is_new=is_new,
-			tabs=get_setting_tabs(current_user), current_tab="notifications")
+			tabs=get_setting_tabs(user), current_tab="notifications")
