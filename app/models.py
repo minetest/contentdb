@@ -274,6 +274,53 @@ class UserEmailVerification(db.Model):
 	is_password_reset = db.Column(db.Boolean, nullable=False, default=False)
 
 
+class NotificationType(enum.Enum):
+	# Any other
+	OTHER          = 0
+
+	# Package / release / etc
+	PACKAGE_EDIT   = 1
+
+	# Approval review actions
+	PACKAGE_APPROVAL = 2
+
+	# New thread
+	NEW_THREAD     = 3
+
+	# New Review
+	NEW_REVIEW     = 4
+
+	# Posted reply to subscribed thread
+	THREAD_REPLY   = 5
+
+	# Added / removed as maintainer
+	MAINTAINER     = 6
+
+	# Editor misc
+	EDITOR_ALERT   = 7
+
+	# Editor misc
+	EDITOR_MISC    = 8
+
+
+	def getTitle(self):
+		return self.name.replace("_", " ").title()
+
+	def toName(self):
+		return self.name.lower()
+
+	def __str__(self):
+		return self.name
+
+	@classmethod
+	def choices(cls):
+		return [(choice, choice.getTitle()) for choice in cls]
+
+	@classmethod
+	def coerce(cls, item):
+		return item if type(item) == NotificationType else NotificationType[item]
+
+
 class Notification(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
@@ -283,6 +330,10 @@ class Notification(db.Model):
 	causer_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	causer     = db.relationship("User", foreign_keys=[causer_id])
 
+	type       = db.Column(db.Enum(NotificationType), nullable=False, default=NotificationType.OTHER)
+
+	emailed    = db.Column(db.Boolean(), nullable=False, default=False)
+
 	title      = db.Column(db.String(100), nullable=False)
 	url        = db.Column(db.String(200), nullable=True)
 
@@ -291,12 +342,13 @@ class Notification(db.Model):
 
 	created_at = db.Column(db.DateTime, nullable=True, default=datetime.datetime.utcnow)
 
-	def __init__(self, user, causer, title, url, package=None):
+	def __init__(self, user, causer, type, title, url, package=None):
 		if len(title) > 100:
 			title = title[:99] + "…"
 
 		self.user    = user
 		self.causer  = causer
+		self.type    = type
 		self.title   = title
 		self.url     = url
 		self.package = package

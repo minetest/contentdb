@@ -309,7 +309,7 @@ def create_edit(author=None, name=None):
 		else:
 			msg = "Edited {}".format(package.title)
 
-			addNotification(package.maintainers, current_user,
+			addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT,
 					msg, package.getDetailsURL(), package)
 
 			severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
@@ -391,7 +391,7 @@ def move_to_state(package):
 
 		msg = "Approved {}".format(package.title)
 
-	addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)
+	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getDetailsURL(), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
 	addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
 
@@ -423,7 +423,7 @@ def remove(package):
 
 		url = url_for("users.profile", username=package.author.username)
 		msg = "Deleted {}".format(package.title)
-		addNotification(package.maintainers, current_user, msg, url, package)
+		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, url, package)
 		addAuditLog(AuditSeverity.EDITOR, current_user, msg, url)
 		db.session.commit()
 
@@ -438,7 +438,7 @@ def remove(package):
 		package.state = PackageState.WIP
 
 		msg = "Unapproved {}".format(package.title)
-		addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)
+		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getDetailsURL(), package)
 		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.getDetailsURL(), package)
 
 		db.session.commit()
@@ -474,12 +474,12 @@ def edit_maintainers(package):
 
 		for user in users:
 			if not user in package.maintainers:
-				addNotification(user, current_user,
+				addNotification(user, current_user, NotificationType.MAINTAINER,
 						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
 
 		for user in package.maintainers:
 			if user != package.author and not user in users:
-				addNotification(user, current_user,
+				addNotification(user, current_user, NotificationType.MAINTAINER,
 						"Removed you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
 
 		package.maintainers.clear()
@@ -488,7 +488,7 @@ def edit_maintainers(package):
 			package.maintainers.append(package.author)
 
 		msg = "Edited {} maintainers".format(package.title)
-		addNotification(package.author, current_user, msg, package.getDetailsURL(), package)
+		addNotification(package.author, current_user, NotificationType.MAINTAINER, msg, package.getDetailsURL(), package)
 		severity = AuditSeverity.NORMAL if current_user == package.author else AuditSeverity.MODERATION
 		addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
 
@@ -515,7 +515,7 @@ def remove_self_maintainers(package):
 	else:
 		package.maintainers.remove(current_user)
 
-		addNotification(package.author, current_user,
+		addNotification(package.author, current_user, NotificationType.MAINTAINER,
 				"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
 
 		db.session.commit()
@@ -537,7 +537,7 @@ def update_from_release(package):
 		return redirect(package.getDetailsURL())
 
 	msg = "Updated meta from latest release"
-	addNotification(package.maintainers, current_user,
+	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT,
 			msg, package.getDetailsURL(), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
 	addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)

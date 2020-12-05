@@ -59,7 +59,7 @@ def create_screenshot(package):
 
 			msg = "Screenshot added {}" \
 					.format(ss.title)
-			addNotification(package.maintainers, current_user, msg, package.getDetailsURL(), package)
+			addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, package.getDetailsURL(), package)
 			db.session.commit()
 			return redirect(package.getDetailsURL())
 

@@ -97,8 +97,8 @@ def set_lock(id):
 		msg = "Unlocked thread '{}'".format(thread.title)
 		flash("Unlocked thread", "success")
 
-	addNotification(thread.watchers, current_user, msg, thread.getViewURL(), thread.package)
-	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.getViewURL(), thread.package)
+	addNotification(thread.watchers, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
+	addAuditLog(AuditSeverity.MODERATION, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
 
 	db.session.commit()
 
@@ -168,7 +168,7 @@ def edit_reply(id):
 
 		msg = "Edited reply by {}".format(reply.author.display_name)
 		severity = AuditSeverity.NORMAL if current_user == reply.author else AuditSeverity.MODERATION
-		addNotification(reply.author, current_user, msg, thread.getViewURL(), thread.package)
+		addNotification(reply.author, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
 		addAuditLog(severity, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
 
 		reply.comment = comment
@@ -208,7 +208,7 @@ def view(id):
 				thread.watchers.append(current_user)
 
 			msg = "New comment on '{}'".format(thread.title)
-			addNotification(thread.watchers, current_user, msg, thread.getViewURL(), thread.package)
+			addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
 			db.session.commit()
 
 			return redirect(thread.getViewURL())
@@ -302,10 +302,10 @@ def new():
 
 		notif_msg = "New thread '{}'".format(thread.title)
 		if package is not None:
-			addNotification(package.maintainers, current_user, notif_msg, thread.getViewURL(), package)
+			addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
 
 		editors = User.query.filter(User.rank >= UserRank.EDITOR).all()
-		addNotification(editors, current_user, notif_msg, thread.getViewURL(), package)
+		addNotification(editors, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
 
 		db.session.commit()
 
