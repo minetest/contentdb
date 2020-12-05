@@ -1,0 +1,22 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+<h2 style="margin-top: 0;">Hello!</h2>
+
+<p>
+	We're sorry to see you go. You just need to do one more thing before your email is blacklisted.
+</p>
+
+<a class="btn" href="{{ abs_url_for('users.unsubscribe', token=sub.token) }}">
+	Unsubscribe
+</a>
+
+<p style="font-size: 80%;">
+	Or paste this into your browser: <code>{{ abs_url_for('users.unsubscribe', token=sub.token) }}</code>
+<p>
+
+{% endblock %}
+
+{% block footer %}
+	You are receiving this email because someone (hopefully you) entered your email address in the unsubscribe form.
+{% endblock %}

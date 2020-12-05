@@ -25,9 +25,11 @@ from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
 from sqlalchemy_searchable import SearchQueryMixin, make_searchable
 from sqlalchemy_utils.types import TSVectorType
-from . import app, gravatar, login_manager
+
+from . import app, gravatar
 
 # Initialise database
+
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 make_searchable(db.metadata)
@@ -276,6 +278,18 @@ class UserEmailVerification(db.Model):
 	is_password_reset = db.Column(db.Boolean, nullable=False, default=False)
 
 
+class EmailSubscription(db.Model):
+	id          = db.Column(db.Integer, primary_key=True)
+	email       = db.Column(db.String(100), nullable=False, unique=True)
+	blacklisted = db.Column(db.Boolean, nullable=False, default=False)
+	token       = db.Column(db.String(32), nullable=True, default=None)
+
+	def __init__(self, email):
+		self.email = email
+		self.blacklisted = False
+		self.token = None
+
+
 class NotificationType(enum.Enum):
 	# Package / release / etc
 	PACKAGE_EDIT   = 1
@@ -385,7 +399,7 @@ class Notification(db.Model):
 
 class UserNotificationPreferences(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
-	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	user = db.relationship("User", back_populates="notification_preferences")
 
 	# 2 = immediate emails
