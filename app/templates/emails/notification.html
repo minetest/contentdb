@@ -21,10 +21,11 @@
 	</a>
 </p>
 
-<p><small>
-	<a href="{{ abs_url_for('users.email_notifications', username=notification.user.username) }}">
-		{{ _("Edit notification settings") }}
-	</a>
-</small></p>
+{% endblock %}
 
+{% block footer %}
+	You are receiving this email because you are a registered user of ContentDB, and have email notifications enabled.<br>
+	<a href="{{ abs_url_for('users.email_notifications', username=notification.user.username) }}">
+		{{ _("Manage your preferences") }}
+	</a>
 {% endblock %}

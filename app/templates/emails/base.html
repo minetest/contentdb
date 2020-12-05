@@ -56,7 +56,14 @@
 			{% endblock %}
 
 			<div style="margin-top: 3em;font-size: 80%;color: #666;">
-				ContentDB &copy; rubenwardy
+				<p>
+					{% block footer %}
+						{{ reason }}
+					{% endblock %}
+				</p>
+				<p>
+					ContentDB &copy; rubenwardy
+				</p>
 			</div>
 		</div>
 	</div>

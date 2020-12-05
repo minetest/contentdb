@@ -1,6 +1,6 @@
 import logging
 
-from app.tasks.emails import sendEmailRaw
+from app.tasks.emails import send_user_email
 
 
 def _has_newline(line):
@@ -82,7 +82,7 @@ class FlaskMailHandler(logging.Handler):
 
 		text = self.format(record)				if self.formatter	  else None
 		html = self.html_formatter.format(record) if self.html_formatter else None
-		sendEmailRaw.delay(self.send_to, self.getSubject(record), text, html)
+		send_user_email.delay(self.send_to, self.getSubject(record), text, html)
 
 
 def register_mail_error_handler(app, mailer):
