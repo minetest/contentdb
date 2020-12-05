@@ -414,6 +414,13 @@ class UserNotificationPreferences(db.Model):
 		self.pref_editor_misc = 0
 		self.pref_other = 0
 
+	def get_can_email(self, type):
+		return getattr(self, "pref_" + type.toName()) == 2
+
+	def set_can_email(self, type, value):
+		value = 2 if value else 0
+		setattr(self, "pref_" + type.toName(), value)
+
 
 class License(db.Model):
 	id      = db.Column(db.Integer, primary_key=True)

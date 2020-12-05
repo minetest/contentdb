@@ -24,22 +24,10 @@ from wtforms.validators import *
 
 from app.markdown import render_markdown
 from app.models import *
-from app.tasks.emails import sendVerifyEmail, sendEmailRaw
+from app.tasks.emails import sendEmailRaw
 from app.tasks.forumtasks import checkForumAccount
-from app.utils import randomString, rank_required, nonEmptyOrNone, addAuditLog, make_flask_login_password
+from app.utils import rank_required, addAuditLog
 from . import bp
-
-
-# Define the User profile form
-class UserProfileForm(FlaskForm):
-	display_name = StringField("Display name", [Optional(), Length(2, 100)])
-	forums_username = StringField("Forums Username", [Optional(), Length(2, 50)])
-	github_username = StringField("GitHub Username", [Optional(), Length(2, 50)])
-	email = StringField("Email", [Optional(), Email()], filters = [lambda x: x or None])
-	website_url = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
-	donate_url = StringField("Donation URL", [Optional(), URL()], filters = [lambda x: x or None])
-	rank = SelectField("Rank", [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce, default=UserRank.NEW_MEMBER)
-	submit = SubmitField("Save")
 
 
 @bp.route("/users/", methods=["GET"])
@@ -76,93 +64,6 @@ def profile(username):
 			user=user, packages=packages, topics_to_add=topics_to_add)
 
 
-def get_setting_tabs(user):
-	return [
-		{
-			"id": "edit_profile",
-			"title": "Edit Profile",
-			"url": url_for("users.profile_edit", username=user.username)
-		},
-		{
-			"id": "notifications",
-			"title": "Emails and Notifications",
-			"url": url_for("notifications.settings")
-		},
-		{
-			"id": "api_tokens",
-			"title": "API Tokens",
-			"url": url_for("api.list_tokens", username=user.username)
-		},
-	]
-
-
-@bp.route("/users/<username>/edit/", methods=["GET", "POST"])
-@login_required
-def profile_edit(username):
-	user : User = User.query.filter_by(username=username).first()
-	if not user:
-		abort(404)
-
-	if not user.can_see_edit_profile(current_user):
-		flash("Permission denied", "danger")
-		return redirect(url_for("users.profile", username=username))
-
-
-	form = UserProfileForm(formdata=request.form, obj=user)
-
-	# Process valid POST
-	if request.method=="POST" and form.validate():
-		severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
-		addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
-				url_for("users.profile", username=username))
-
-		# Copy form fields to user_profile fields
-		if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
-			user.display_name = form.display_name.data
-			user.forums_username = nonEmptyOrNone(form.forums_username.data)
-			user.github_username = nonEmptyOrNone(form.github_username.data)
-
-		if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
-			user.website_url  = form["website_url"].data
-			user.donate_url   = form["donate_url"].data
-
-		if user.checkPerm(current_user, Permission.CHANGE_RANK):
-			newRank = form["rank"].data
-			if current_user.rank.atLeast(newRank):
-				if newRank != user.rank:
-					user.rank = form["rank"].data
-					msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
-					addAuditLog(AuditSeverity.MODERATION, current_user, msg, url_for("users.profile", username=username))
-			else:
-				flash("Can't promote a user to a rank higher than yourself!", "danger")
-
-		if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
-			newEmail = form["email"].data
-			if newEmail and newEmail != user.email and newEmail.strip() != "":
-				token = randomString(32)
-
-				msg = "Changed email of {}".format(user.display_name)
-				addAuditLog(severity, current_user, msg, url_for("users.profile", username=username))
-
-				ver = UserEmailVerification()
-				ver.user  = user
-				ver.token = token
-				ver.email = newEmail
-				db.session.add(ver)
-				db.session.commit()
-
-				task = sendVerifyEmail.delay(newEmail, token)
-				return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=username)))
-
-		# Save user_profile
-		db.session.commit()
-
-		return redirect(url_for("users.profile", username=username))
-
-	# Process GET or invalid POST
-	return render_template("users/profile_edit.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="edit_profile")
-
-
 @bp.route("/users/<username>/check/", methods=["POST"])
 @login_required
 def user_check(username):
@@ -188,7 +89,7 @@ class SendEmailForm(FlaskForm):
 	submit  = SubmitField("Send")
 
 
-@bp.route("/users/<username>/email/", methods=["GET", "POST"])
+@bp.route("/users/<username>/send-email/", methods=["GET", "POST"])
 @rank_required(UserRank.MODERATOR)
 def send_email(username):
 	user = User.query.filter_by(username=username).first()
