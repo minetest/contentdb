@@ -145,11 +145,13 @@ def handle_email_notifications(user, prefs, is_new, form):
 	return redirect(url_for("users.email_notifications", username=user.username))
 
 
-
-
+@bp.route("/user/settings/email/")
 @bp.route("/users/<username>/settings/email/", methods=["GET", "POST"])
 @login_required
-def email_notifications(username):
+def email_notifications(username=None):
+	if username is None:
+		return redirect(url_for("users.email_notifications", username=current_user.username))
+
 	user: User = User.query.filter_by(username=username).first()
 	if not user:
 		abort(404)
