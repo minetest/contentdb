@@ -76,17 +76,17 @@ def profile(username):
 			user=user, packages=packages, topics_to_add=topics_to_add)
 
 
-def get_setting_tabs():
+def get_setting_tabs(user):
 	return [
 		{
 			"id": "edit_profile",
 			"title": "Edit Profile",
-			"url": url_for("users.profile_edit", username=current_user.username)
+			"url": url_for("users.profile_edit", username=user.username)
 		},
 		{
 			"id": "api_tokens",
 			"title": "API Tokens",
-			"url": url_for("api.list_tokens", username=current_user.username)
+			"url": url_for("api.list_tokens", username=user.username)
 		},
 	]
 
@@ -155,7 +155,7 @@ def profile_edit(username):
 		return redirect(url_for("users.profile", username=username))
 
 	# Process GET or invalid POST
-	return render_template("users/profile_edit.html", user=user, form=form, tabs=get_setting_tabs(), current_tab="edit_profile")
+	return render_template("users/profile_edit.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="edit_profile")
 
 
 @bp.route("/users/<username>/check/", methods=["POST"])

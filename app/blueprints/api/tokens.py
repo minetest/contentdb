@@ -51,7 +51,7 @@ def list_tokens(username):
 	if not user.checkPerm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
 
-	return render_template("api/list_tokens.html", user=user, tabs=get_setting_tabs(), current_tab="api_tokens")
+	return render_template("api/list_tokens.html", user=user, tabs=get_setting_tabs(user), current_tab="api_tokens")
 
 
 @bp.route("/users/<username>/tokens/new/", methods=["GET", "POST"])
