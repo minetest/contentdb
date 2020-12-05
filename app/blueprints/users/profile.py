@@ -92,6 +92,7 @@ def get_setting_tabs():
 
 
 @bp.route("/users/<username>/edit/", methods=["GET", "POST"])
+@login_required
 def profile_edit(username):
 	user : User = User.query.filter_by(username=username).first()
 	if not user:
