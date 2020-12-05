@@ -159,6 +159,9 @@ def email_notifications(username=None):
 	if not user:
 		abort(404)
 
+	if not user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+		abort(403)
+
 	is_new = False
 	prefs = user.notification_preferences
 	if prefs is None:
