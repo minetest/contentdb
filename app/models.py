@@ -166,6 +166,8 @@ class User(db.Model, UserMixin):
 	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id",
 			order_by="Notification.created_at")
 
+	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user")
+
 	packages      = db.relationship("Package", backref=db.backref("author", lazy="joined"), lazy="dynamic")
 	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
 	threads       = db.relationship("Thread", backref="author", lazy="dynamic")
@@ -275,9 +277,6 @@ class UserEmailVerification(db.Model):
 
 
 class NotificationType(enum.Enum):
-	# Any other
-	OTHER          = 0
-
 	# Package / release / etc
 	PACKAGE_EDIT   = 1
 
@@ -302,12 +301,38 @@ class NotificationType(enum.Enum):
 	# Editor misc
 	EDITOR_MISC    = 8
 
+	# Any other
+	OTHER          = 0
+
 
 	def getTitle(self):
 		return self.name.replace("_", " ").title()
 
 	def toName(self):
 		return self.name.lower()
+
+	def get_description(self):
+		if self == NotificationType.OTHER:
+			return "Minor notifications not important enough for a dedicated category."
+		elif self == NotificationType.PACKAGE_EDIT:
+			return "When another user edits your packages, releases, etc."
+		elif self == NotificationType.PACKAGE_APPROVAL:
+			return "Notifications from editors related to the package approval process."
+		elif self == NotificationType.NEW_THREAD:
+			return "When a thread is created on your package."
+		elif self == NotificationType.NEW_REVIEW:
+			return "When a user posts a review."
+		elif self == NotificationType.THREAD_REPLY:
+			return "When someone replies to a thread you're watching."
+		elif self == NotificationType.MAINTAINER:
+			return "When your package's maintainers change."
+		elif self == NotificationType.EDITOR_ALERT:
+			return "Important editor alerts."
+		elif self == NotificationType.EDITOR_MISC:
+			return "Miscellaneous editor alerts."
+		else:
+			return ""
+
 
 	def __str__(self):
 		return self.name
@@ -352,6 +377,42 @@ class Notification(db.Model):
 		self.title   = title
 		self.url     = url
 		self.package = package
+
+	def can_send_email(self):
+		prefs = self.user.notification_preferences
+		return prefs and getattr(prefs, "pref_" + self.type.toName()) == 2
+
+
+class UserNotificationPreferences(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+	user = db.relationship("User", back_populates="notification_preferences")
+
+	# 2 = immediate emails
+	# 1 = daily digest emails
+	# 0 = no emails
+
+	pref_package_edit     = db.Column(db.Integer, nullable=False)
+	pref_package_approval = db.Column(db.Integer, nullable=False)
+	pref_new_thread       = db.Column(db.Integer, nullable=False)
+	pref_new_review       = db.Column(db.Integer, nullable=False)
+	pref_thread_reply     = db.Column(db.Integer, nullable=False)
+	pref_maintainer       = db.Column(db.Integer, nullable=False)
+	pref_editor_alert     = db.Column(db.Integer, nullable=False)
+	pref_editor_misc      = db.Column(db.Integer, nullable=False)
+	pref_other            = db.Column(db.Integer, nullable=False)
+
+	def __init__(self, user):
+		self.user = user
+		self.pref_package_edit = 1
+		self.pref_package_approval = 2
+		self.pref_new_thread = 2
+		self.pref_new_review = 1
+		self.pref_thread_reply = 2
+		self.pref_maintainer = 2
+		self.pref_editor_alert = 2
+		self.pref_editor_misc = 0
+		self.pref_other = 0
 
 
 class License(db.Model):
