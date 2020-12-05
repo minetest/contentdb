@@ -17,7 +17,7 @@
 
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user, login_required
-from sqlalchemy import or_
+from sqlalchemy import or_, desc
 
 from app.models import db, Notification, NotificationType
 
@@ -28,10 +28,14 @@ bp = Blueprint("notifications", __name__)
 @login_required
 def list_all():
 	notifications = Notification.query.filter(Notification.user == current_user,
-			Notification.type != NotificationType.EDITOR_ALERT, Notification.type != NotificationType.EDITOR_MISC).all()
+			Notification.type != NotificationType.EDITOR_ALERT, Notification.type != NotificationType.EDITOR_MISC) \
+			.order_by(desc(Notification.created_at)) \
+			.all()
 
 	editor_notifications = Notification.query.filter(Notification.user == current_user,
-			or_(Notification.type == NotificationType.EDITOR_ALERT, Notification.type == NotificationType.EDITOR_MISC)).all()
+			or_(Notification.type == NotificationType.EDITOR_ALERT, Notification.type == NotificationType.EDITOR_MISC)) \
+			.order_by(desc(Notification.created_at)) \
+			.all()
 
 	return render_template("notifications/list.html",
 			notifications=notifications, editor_notifications=editor_notifications)
