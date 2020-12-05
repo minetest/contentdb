@@ -104,7 +104,7 @@
 			<td>Admin</td>
 			<td>
 				{% if user.email %}
-					<a class="btn btn-primary" href="{{ url_for('users.send_email', username=user.username) }}">
+					<a class="btn btn-primary" href="{{ url_for('admin.send_single_email', username=user.username) }}">
 						Email
 					</a>
 				{% else %}

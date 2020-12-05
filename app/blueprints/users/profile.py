@@ -22,11 +22,8 @@ from sqlalchemy import func
 from wtforms import *
 from wtforms.validators import *
 
-from app.markdown import render_markdown
 from app.models import *
-from app.tasks.emails import sendEmailRaw
 from app.tasks.forumtasks import checkForumAccount
-from app.utils import rank_required, addAuditLog
 from . import bp
 
 
@@ -81,35 +78,3 @@ def user_check(username):
 	next_url = url_for("users.profile", username=username)
 
 	return redirect(url_for("tasks.check", id=task.id, r=next_url))
-
-
-class SendEmailForm(FlaskForm):
-	subject = StringField("Subject", [InputRequired(), Length(1, 300)])
-	text    = TextAreaField("Message", [InputRequired()])
-	submit  = SubmitField("Send")
-
-
-@bp.route("/users/<username>/send-email/", methods=["GET", "POST"])
-@rank_required(UserRank.MODERATOR)
-def send_email(username):
-	user = User.query.filter_by(username=username).first()
-	if user is None:
-		abort(404)
-
-	next_url = url_for("users.profile", username=user.username)
-
-	if user.email is None:
-		flash("User has no email address!", "danger")
-		return redirect(next_url)
-
-	form = SendEmailForm(request.form)
-	if form.validate_on_submit():
-		addAuditLog(AuditSeverity.MODERATION, current_user,
-				"Sent email to {}".format(user.display_name), url_for("users.profile", username=username))
-
-		text = form.text.data
-		html = render_markdown(text)
-		task = sendEmailRaw.delay([user.email], form.subject.data, text, html)
-		return redirect(url_for("tasks.check", id=task.id, r=next_url))
-
-	return render_template("users/send_email.html", form=form)
