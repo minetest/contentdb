@@ -22,11 +22,12 @@ from flask import *
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import *
+from wtforms.validators import InputRequired, Length
 
 from app.models import *
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, updateMetaFromRelease, importForeignDownloads
-from app.utils import loginUser, rank_required
+from app.utils import loginUser, rank_required, addAuditLog, addNotification
 from . import bp
 
 
@@ -189,3 +190,26 @@ def switch_user():
 
 	# Process GET or invalid POST
 	return render_template("admin/switch_user.html", form=form)
+
+
+class SendNotificationForm(FlaskForm):
+	title  = StringField("Title", [InputRequired(), Length(1, 300)])
+	url    = StringField("URL", [InputRequired(), Length(1, 100)], default="/")
+	submit = SubmitField("Send")
+
+
+@bp.route("/admin/send-notification/", methods=["GET", "POST"])
+@rank_required(UserRank.ADMIN)
+def send_bulk_notification():
+	form = SendNotificationForm(request.form)
+	if form.validate_on_submit():
+		addAuditLog(AuditSeverity.MODERATION, current_user,
+				"Sent bulk notification", None, None, form.title.data)
+
+		users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).all()
+		addNotification(users, current_user, NotificationType.OTHER, form.title.data, form.url.data, None)
+		db.session.commit()
+
+		return redirect(url_for("admin.admin_page"))
+
+	return render_template("admin/send_bulk_notification.html", form=form)
