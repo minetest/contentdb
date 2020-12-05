@@ -110,6 +110,7 @@ def register():
 					"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(user.display_name))
 		else:
 			user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
+			user.notification_preferences = UserNotificationPreferences(user)
 			db.session.add(user)
 
 			addAuditLog(AuditSeverity.USER, user, "Registered",
@@ -267,18 +268,23 @@ def verify_email():
 		flash("Unknown verification token!", "danger")
 		return redirect(url_for("homepage.home"))
 
-	addAuditLog(AuditSeverity.USER, ver.user, "Confirmed their email",
-			url_for("users.profile", username=ver.user.username))
+	user = ver.user
 
-	was_activating = not ver.user.is_active
-	ver.user.is_active = True
-	ver.user.email = ver.email
+	addAuditLog(AuditSeverity.USER, user, "Confirmed their email",
+			url_for("users.profile", username=user.username))
+
+	was_activating = not user.is_active
+
+	user.is_active = True
+	user.notification_preferences = user.notification_preferences or UserNotificationPreferences(user)
+	user.email = ver.email
+
 	db.session.delete(ver)
 	db.session.commit()
 
 	if ver.is_password_reset:
-		login_user(ver.user)
-		ver.user.password = None
+		login_user(user)
+		user.password = None
 		db.session.commit()
 
 		return redirect(url_for("users.set_password"))
