@@ -23,8 +23,7 @@ from app.utils import abs_url_for
 
 @celery.task()
 def sendVerifyEmail(newEmail, token):
-	print("Sending verify email!")
-	msg = Message("Verify email address", recipients=[newEmail])
+	msg = Message("Confirm email address", recipients=[newEmail])
 
 	msg.body = """
 			This email has been sent to you because someone (hopefully you)
@@ -32,7 +31,7 @@ def sendVerifyEmail(newEmail, token):
 
 			If it wasn't you, then just delete this email.
 
-			If this was you, then please click this link to verify the address:
+			If this was you, then please click this link to confirm the address:
 
 			{}
 		""".format(abs_url_for('users.verify_email', token=token))
