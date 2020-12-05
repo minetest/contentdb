@@ -380,7 +380,7 @@ class Notification(db.Model):
 
 	def can_send_email(self):
 		prefs = self.user.notification_preferences
-		return prefs and getattr(prefs, "pref_" + self.type.toName()) == 2
+		return prefs and self.user.email and prefs.get_can_email(self.type)
 
 
 class UserNotificationPreferences(db.Model):
@@ -407,7 +407,7 @@ class UserNotificationPreferences(db.Model):
 		self.pref_package_edit = 1
 		self.pref_package_approval = 2
 		self.pref_new_thread = 2
-		self.pref_new_review = 1
+		self.pref_new_review = 2
 		self.pref_thread_reply = 2
 		self.pref_maintainer = 2
 		self.pref_editor_alert = 2

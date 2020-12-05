@@ -1,4 +1,4 @@
-from . import app
+from . import app, utils
 from .models import Permission, Package, PackageState, PackageRelease
 from .utils import abs_url_for, url_set_query
 from flask_login import current_user
@@ -42,3 +42,7 @@ def datetime(value):
 @app.template_filter()
 def timedelta(value):
 	return format_timedelta(value)
+
+@app.template_filter()
+def abs_url(url):
+	return utils.abs_url(url)
