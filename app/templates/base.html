@@ -110,18 +110,14 @@
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}#unadded-topics">Your unadded topics</a>
 								</li>
-								{% if current_user.canAccessTodoList() %}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('todo.view') }}">{{ _("Work Queue") }}</a></li>
-								{% endif %}
+							  	<div class="dropdown-divider"></div>
 								<li class="nav-item"><a  class="nav-link" href="{{ url_for('users.list_all') }}">{{ _("User list") }}</a></li>
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('todo.topics') }}">{{ _("All unadded topics") }}</a>
 								</li>
-
 								{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.audit') }}">{{ _("Audit Log") }}</a></li>
 								{% endif %}
-
 								{% if current_user.rank == current_user.rank.ADMIN %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.admin_page') }}">{{ _("Admin") }}</a></li>
 								{% else %}
@@ -134,6 +130,7 @@
 										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.license_list') }}">{{ _("License Editor") }}</a></li>
 									{% endif %}
 								{% endif %}
+								  <div class="dropdown-divider"></div>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('users.logout') }}">{{ _("Sign out") }}</a></li>
 							</ul>
 						</li>
