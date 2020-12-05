@@ -41,11 +41,11 @@ def sendVerifyEmail(newEmail, token):
 	mail.send(msg)
 
 @celery.task()
-def sendEmailRaw(to, subject, text, html):
+def sendEmailRaw(to, subject, text, html=None):
 	from flask_mail import Message
 	msg = Message(subject, recipients=to)
 
-	msg.body = text or html
+	msg.body = text
 	html = html or text
 	msg.html = render_template("emails/base.html", subject=subject, content=html)
 	mail.send(msg)
