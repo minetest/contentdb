@@ -7,6 +7,12 @@
 {% block pane %}
 	<h2 class="mt-0">{{ _("Email and Notifications") }}</h2>
 
+	{% if is_new %}
+		<p class="alert alert-info">
+			{{ _("Email notifications are currently turned off. Click 'Save' to apply recommended settings.") }}
+		</p>
+	{% endif %}
+
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 	<form action="" method="POST" class="form" role="form">
 		{{ form.hidden_tag() }}

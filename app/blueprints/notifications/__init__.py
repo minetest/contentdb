@@ -77,5 +77,5 @@ def settings():
 		return redirect(url_for("notifications.settings"))
 
 	return render_template("notifications/settings.html",
-			form=form, user=current_user, types=types,
+			form=form, user=current_user, types=types, is_new=is_new,
 			tabs=get_setting_tabs(current_user), current_tab="notifications")
