@@ -70,7 +70,7 @@ def __extract_signature(soup):
 	if len(res) != 1:
 		return None
 	else:
-		return res[0]
+		return str(res[0])
 
 
 def getProfileURL(url, username):
