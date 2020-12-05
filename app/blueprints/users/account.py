@@ -340,6 +340,9 @@ def unsubscribe_manage(sub: EmailSubscription):
 	user = User.query.filter_by(email=sub.email).first()
 
 	if request.method == "POST":
+		if user:
+			user.email = None
+
 		sub.blacklisted = True
 		db.session.commit()
 
