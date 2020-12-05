@@ -25,6 +25,7 @@ from wtforms.validators import *
 from app.models import db, User, APIToken, Package, Permission
 from app.utils import randomString
 from . import bp
+from ..users.profile import get_setting_tabs
 
 
 class CreateAPIToken(FlaskForm):
@@ -50,7 +51,7 @@ def list_tokens(username):
 	if not user.checkPerm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
 
-	return render_template("api/list_tokens.html", user=user)
+	return render_template("api/list_tokens.html", user=user, tabs=get_setting_tabs(), current_tab="api_tokens")
 
 
 @bp.route("/users/<username>/tokens/new/", methods=["GET", "POST"])

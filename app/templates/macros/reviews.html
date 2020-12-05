@@ -4,7 +4,7 @@
 		<li class="row my-2 mx-0">
 			<div class="col-md-1 p-1">
 				<a href="{{ url_for('users.profile', username=review.author.username) }}">
-					<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ review.author.getProfilePicURL() }}">
+					<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ review.author.getProfilePicURL() }}">
 				</a>
 			</div>
 			<div class="col-md-auto pl-1 pr-3 pt-2 text-center" style=" font-size: 200%;">
