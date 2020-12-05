@@ -14,6 +14,12 @@ Notifications
 
 	<h1>Notifications</h1>
 
+	{% if current_user.notifications %}
+	<p>
+		Newest first.
+	</p>
+	{% endif %}
+
 	<div class="list-group mt-3">
 		{% for n in current_user.notifications %}
 			<a class="list-group-item list-group-item-action" href="{{ n.url }}">

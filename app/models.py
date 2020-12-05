@@ -23,6 +23,7 @@ from flask import url_for
 from flask_login import UserMixin
 from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy, BaseQuery
+from sqlalchemy import desc, text
 from sqlalchemy_searchable import SearchQueryMixin, make_searchable
 from sqlalchemy_utils.types import TSVectorType
 
@@ -166,7 +167,7 @@ class User(db.Model, UserMixin):
 
 	# Content
 	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id",
-			order_by="Notification.created_at")
+			order_by=desc(text("Notification.created_at")))
 
 	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user")
 
