@@ -24,8 +24,14 @@
 {% endblock %}
 
 {% block footer %}
-	You are receiving this email because you are a registered user of ContentDB, and have email notifications enabled.<br>
+	You are receiving this email because you are a registered user of ContentDB,
+	and have email notifications enabled. <br>
+
 	<a href="{{ abs_url_for('users.email_notifications', username=notification.user.username) }}">
 		{{ _("Manage your preferences") }}
+	</a>
+	|
+	<a href="{{ abs_url_for('users.unsubscribe', token=sub.token) }}">
+		{{ _("Unsubscribe") }}
 	</a>
 {% endblock %}

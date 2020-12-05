@@ -23,7 +23,7 @@ from wtforms import *
 from wtforms.validators import *
 
 from app.models import *
-from app.tasks.emails import sendVerifyEmail, send_anon_email
+from app.tasks.emails import sendVerifyEmail, send_anon_email, sendUnsubscribeVerifyEmail
 from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog
 from passlib.pwd import genphrase
 
@@ -106,7 +106,7 @@ def register():
 	if form.validate_on_submit():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user:
-			send_anon_email.delay([form.email.data], "Email already in use",
+			send_anon_email.delay(form.email.data, "Email already in use",
 					"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(user.display_name))
 		else:
 			user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
@@ -159,7 +159,7 @@ def forgot_password():
 
 			sendVerifyEmail.delay(form.email.data, token)
 		else:
-			send_anon_email.delay([email], "Unable to find account", """
+			send_anon_email.delay(email, "Unable to find account", """
 					<p>
 						We were unable to perform the password reset as we could not find an account
 						associated with this email.
@@ -296,3 +296,51 @@ def verify_email():
 		return redirect(url_for("users.login"))
 	else:
 		return redirect(url_for("homepage.home"))
+
+
+class UnsubscribeForm(FlaskForm):
+	email = StringField("Email", [InputRequired(), Email()])
+	submit = SubmitField("Send")
+
+
+def unsubscribe_verify():
+	form = UnsubscribeForm(request.form)
+	if form.validate_on_submit():
+		email = form.email.data
+		sub = EmailSubscription.query.filter_by(email=email).first()
+		if not sub:
+			sub = EmailSubscription(email)
+			db.session.add(sub)
+
+		sub.token = randomString(32)
+		db.session.commit()
+		sendUnsubscribeVerifyEmail.delay(form.email.data)
+
+		flash("Check your email address to continue the unsubscribe", "success")
+		return redirect(url_for("homepage.home"))
+
+	return render_template("users/unsubscribe.html", form=form)
+
+
+def unsubscribe_manage(sub: EmailSubscription):
+	user = User.query.filter_by(email=sub.email).first()
+
+	if request.method == "POST":
+		sub.blacklisted = True
+		db.session.commit()
+
+		flash("That email is now blacklisted. Please contact an admin if you wish to undo this.", "success")
+		return redirect(url_for("homepage.home"))
+
+	return render_template("users/unsubscribe.html", user=user)
+
+
+@bp.route("/unsubscribe/", methods=["GET", "POST"])
+def unsubscribe():
+	token = request.args.get("token")
+	if token:
+		sub = EmailSubscription.query.filter_by(token=token).first()
+		if sub:
+			return unsubscribe_manage(sub)
+
+	return unsubscribe_verify()

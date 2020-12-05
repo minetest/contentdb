@@ -82,7 +82,8 @@ class FlaskMailHandler(logging.Handler):
 
 		text = self.format(record)				if self.formatter	  else None
 		html = self.html_formatter.format(record) if self.html_formatter else None
-		send_user_email.delay(self.send_to, self.getSubject(record), text, html)
+		for email in self.send_to:
+			send_user_email.delay(email, self.getSubject(record), text, html)
 
 
 def register_mail_error_handler(app, mailer):

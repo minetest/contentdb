@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Unsubscribe") }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ self.title() }}</h1>
+
+<p>
+	{{  _("This will blacklist an email address, preventing ContentDB from ever sending emails to it - including password resets.") }}
+</p>
+
+{% if form %}
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form action="" method="POST" class="form" role="form">
+		{{ form.hidden_tag() }}
+
+		<p>
+			{{  _("Please enter the email address you wish to blacklist.") }}
+			{{  _("You will then need to confirm the email") }}
+		</p>
+
+		{{ render_field(form.email, tabindex=220) }}
+
+		{{ render_submit_field(form.submit, tabindex=280) }}
+	</form>
+{% else %}
+	<form action="" method="POST" class="form" role="form">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+		<p>
+			{{ _("You may now unsubscribe.") }}
+		</p>
+
+		{% if user %}
+			<div class="alert alert-danger">
+				<p>
+					<strong>Unsubscribing may prevent you from being able to sign into the
+					account '{{ user.display_name }}'</strong>.
+				</p>
+				<p class="mb-0">
+					ContentDB will no longer be able to send "forget password" and other essential system emails.
+					Consider editing your email notification preferences instead.
+				</p>
+			</div>
+		{% else %}
+			<p class="alert alert-warning">
+				You won't be able to use this email with ContentDB anymore.
+			</p>
+		{% endif %}
+
+		<div class="button-group mt-4">
+			{% if user %}
+				<a class="btn btn-primary mr-3" href="{{ url_for('users.email_notifications', username=user.username) }}">
+					Edit Notification Preferences
+				</a>
+			{% endif %}
+
+			<input class="btn btn-danger" type="submit" value="Unsubscribe">
+		</div>
+	</form>
+{% endif %}
+
+{% endblock %}

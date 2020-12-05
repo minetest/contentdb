@@ -18,14 +18,30 @@
 from flask import render_template
 from flask_mail import Message
 from app import mail
-from app.models import Notification, db
+from app.models import Notification, db, EmailSubscription
 from app.tasks import celery
-from app.utils import abs_url_for, abs_url
+from app.utils import abs_url_for, abs_url, randomString
+
+
+def get_email_subscription(email):
+	assert type(email) == str
+	ret = EmailSubscription.query.filter_by(email=email).first()
+	if not ret:
+		ret = EmailSubscription(email)
+		ret.token = randomString(32)
+		db.session.add(ret)
+		db.session.commit()
+
+	return ret
 
 
 @celery.task()
-def sendVerifyEmail(newEmail, token):
-	msg = Message("Confirm email address", recipients=[newEmail])
+def sendVerifyEmail(email, token):
+	sub = get_email_subscription(email)
+	if sub.blacklisted:
+		return
+
+	msg = Message("Confirm email address", recipients=[email])
 
 	msg.body = """
 			This email has been sent to you because someone (hopefully you)
@@ -38,34 +54,60 @@ def sendVerifyEmail(newEmail, token):
 			{}
 		""".format(abs_url_for('users.verify_email', token=token))
 
-	msg.html = render_template("emails/verify.html", token=token)
+	msg.html = render_template("emails/verify.html", token=token, sub=sub)
 	mail.send(msg)
 
 
 @celery.task()
-def send_email_with_reason(to, subject, text, html, reason):
+def sendUnsubscribeVerifyEmail(email):
+	sub = get_email_subscription(email)
+	if sub.blacklisted:
+		return
+
+	msg = Message("Confirm unsubscribe", recipients=[email])
+
+	msg.body = """
+				We're sorry to see you go. You just need to do one more thing before your email is blacklisted.
+				
+				Click this link to blacklist email: {} 
+			""".format(abs_url_for('users.unsubscribe', token=sub.token))
+
+	msg.html = render_template("emails/verify_unsubscribe.html", sub=sub)
+	mail.send(msg)
+
+
+@celery.task()
+def send_email_with_reason(email, subject, text, html, reason):
+	sub = get_email_subscription(email)
+	if sub.blacklisted:
+		return
+
 	from flask_mail import Message
-	msg = Message(subject, recipients=to)
+	msg = Message(subject, recipients=[email])
 
 	msg.body = text
 	html = html or text
-	msg.html = render_template("emails/base.html", subject=subject, content=html, reason=reason)
+	msg.html = render_template("emails/base.html", subject=subject, content=html, reason=reason, sub=sub)
 	mail.send(msg)
 
 
 @celery.task()
-def send_user_email(to, subject, text, html=None):
-	return send_email_with_reason(to, subject, text, html,
+def send_user_email(email: str, subject: str, text: str, html=None):
+	return send_email_with_reason(email, subject, text, html,
 			"You are receiving this email because you are a registered user of ContentDB.")
 
 
 @celery.task()
-def send_anon_email(to, subject, text, html=None):
-	return send_email_with_reason(to, subject, text, html,
+def send_anon_email(email: str, subject: str, text: str, html=None):
+	return send_email_with_reason(email, subject, text, html,
 			"You are receiving this email because someone (hopefully you) entered your email address as a user's email.")
 
 
 def sendNotificationEmail(notification):
+	sub = get_email_subscription(notification.user.email)
+	if sub.blacklisted:
+		return
+
 	msg = Message(notification.title, recipients=[notification.user.email])
 
 	msg.body = """
@@ -74,10 +116,12 @@ def sendNotificationEmail(notification):
 			View: {}
 			
 			Manage email settings: {}
+			Unsubscribe: {}
 		""".format(notification.title, abs_url(notification.url),
-					abs_url_for("users.email_notifications", username=notification.user.username))
+					abs_url_for("users.email_notifications", username=notification.user.username),
+					abs_url_for("users.unsubscribe", token=sub.token))
 
-	msg.html = render_template("emails/notification.html", notification=notification)
+	msg.html = render_template("emails/notification.html", notification=notification, sub=sub)
 	mail.send(msg)
 
 
