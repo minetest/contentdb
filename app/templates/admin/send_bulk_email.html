@@ -1,11 +1,16 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Send Email
+	{{  _("Send bulk email") }}
 {% endblock %}
 
 {% block content %}
-<h1>Send Email</h1>
+<h1>{{ self.title() }}</h1>
+
+<p class="alert alert-danger">
+	<b>BE VERY CAREFUL.</b>
+	This will send an email to all users with email addresses.
+</p>
 
 {% from "macros/forms.html" import render_field, render_submit_field %}
 <form action="" method="POST" class="form" role="form">
