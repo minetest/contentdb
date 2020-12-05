@@ -23,7 +23,7 @@ from wtforms import *
 from wtforms.validators import *
 
 from app.models import *
-from app.tasks.emails import sendVerifyEmail, send_anon_email, sendUnsubscribeVerifyEmail
+from app.tasks.emails import sendVerifyEmail, send_anon_email, sendUnsubscribeVerifyEmail, send_user_email
 from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog
 from passlib.pwd import genphrase
 
@@ -284,10 +284,17 @@ def verify_email():
 
 	was_activating = not user.is_active
 
-	if user.email != ver.email and ver.email:
+	if ver.email and user.email != ver.email:
 		if User.query.filter_by(email=ver.email).count() > 0:
 			flash("Another user is already using that email", "danger")
 			return redirect(url_for("homepage.home"))
+
+		flash("Confirmed email change", "success")
+
+		if user.email:
+			send_user_email.delay(user.email,
+					"Email address changed",
+					"Your email address has changed. If you didn't request this, please contact an administrator.")
 
 	user.is_active = True
 	user.notification_preferences = user.notification_preferences or UserNotificationPreferences(user)

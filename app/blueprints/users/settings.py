@@ -136,8 +136,10 @@ def handle_email_notifications(user, prefs, is_new, form):
 			db.session.add(ver)
 			db.session.commit()
 
-			task = sendVerifyEmail.delay(newEmail, token)
-			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=user.username)))
+			flash("Check your email to confirm it", "success")
+
+			sendVerifyEmail.delay(newEmail, token)
+			return redirect(url_for("homepage.home"))
 
 	db.session.commit()
 	return redirect(url_for("users.email_notifications", username=user.username))
