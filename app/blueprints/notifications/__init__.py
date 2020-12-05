@@ -17,7 +17,9 @@
 
 from flask import Blueprint, render_template, redirect, url_for
 from flask_login import current_user, login_required
-from app.models import db, Notification
+from sqlalchemy import or_
+
+from app.models import db, Notification, NotificationType
 
 bp = Blueprint("notifications", __name__)
 
@@ -25,7 +27,14 @@ bp = Blueprint("notifications", __name__)
 @bp.route("/notifications/")
 @login_required
 def list_all():
-	return render_template("notifications/list.html")
+	notifications = Notification.query.filter(Notification.user == current_user,
+			Notification.type != NotificationType.EDITOR_ALERT, Notification.type != NotificationType.EDITOR_MISC).all()
+
+	editor_notifications = Notification.query.filter(Notification.user == current_user,
+			or_(Notification.type == NotificationType.EDITOR_ALERT, Notification.type == NotificationType.EDITOR_MISC)).all()
+
+	return render_template("notifications/list.html",
+			notifications=notifications, editor_notifications=editor_notifications)
 
 
 @bp.route("/notifications/clear/", methods=["POST"])
