@@ -52,70 +52,13 @@ def list_all():
 	return render_template("users/list.html", users=users)
 
 
-@bp.route("/users/<username>/", methods=["GET", "POST"])
+@bp.route("/users/<username>/")
 def profile(username):
 	user = User.query.filter_by(username=username).first()
 	if not user:
 		abort(404)
 
-	form = None
-	if user.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
-			user.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
-			user.checkPerm(current_user, Permission.CHANGE_RANK):
-		# Initialize form
-		form = UserProfileForm(formdata=request.form, obj=user)
-
-		# Process valid POST
-		if request.method=="POST" and form.validate():
-			severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
-			addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
-					url_for("users.profile", username=username))
-
-			# Copy form fields to user_profile fields
-			if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
-				user.display_name = form.display_name.data
-				user.forums_username = nonEmptyOrNone(form.forums_username.data)
-				user.github_username = nonEmptyOrNone(form.github_username.data)
-
-			if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
-				user.website_url  = form["website_url"].data
-				user.donate_url   = form["donate_url"].data
-
-			if user.checkPerm(current_user, Permission.CHANGE_RANK):
-				newRank = form["rank"].data
-				if current_user.rank.atLeast(newRank):
-					if newRank != user.rank:
-						user.rank = form["rank"].data
-						msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
-						addAuditLog(AuditSeverity.MODERATION, current_user, msg, url_for("users.profile", username=username))
-				else:
-					flash("Can't promote a user to a rank higher than yourself!", "danger")
-
-			if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
-				newEmail = form["email"].data
-				if newEmail and newEmail != user.email and newEmail.strip() != "":
-					token = randomString(32)
-
-					msg = "Changed email of {}".format(user.display_name)
-					addAuditLog(severity, current_user, msg, url_for("users.profile", username=username))
-
-					ver = UserEmailVerification()
-					ver.user  = user
-					ver.token = token
-					ver.email = newEmail
-					db.session.add(ver)
-					db.session.commit()
-
-					task = sendVerifyEmail.delay(newEmail, token)
-					return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=username)))
-
-			# Save user_profile
-			db.session.commit()
-
-			# Redirect to home page
-			return redirect(url_for("users.profile", username=username))
-
-	packages = user.packages.filter(Package.state!=PackageState.DELETED)
+	packages = user.packages.filter(Package.state != PackageState.DELETED)
 	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
 		packages = packages.filter_by(state=PackageState.APPROVED)
 	packages = packages.order_by(db.asc(Package.title))
@@ -123,14 +66,80 @@ def profile(username):
 	topics_to_add = None
 	if current_user == user or user.checkPerm(current_user, Permission.CHANGE_AUTHOR):
 		topics_to_add = ForumTopic.query \
-					.filter_by(author_id=user.id) \
-					.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-					.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
-					.all()
+			.filter_by(author_id=user.id) \
+			.filter(~ db.exists().where(Package.forums == ForumTopic.topic_id)) \
+			.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
+			.all()
 
 	# Process GET or invalid POST
 	return render_template("users/profile.html",
-			user=user, form=form, packages=packages, topics_to_add=topics_to_add)
+			user=user, packages=packages, topics_to_add=topics_to_add)
+
+
+@bp.route("/users/<username>/edit/", methods=["GET", "POST"])
+def profile_edit(username):
+	user : User = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	if not user.can_see_edit_profile(current_user):
+		flash("Permission denied", "danger")
+		return redirect(url_for("users.profile", username=username))
+
+
+	form = UserProfileForm(formdata=request.form, obj=user)
+
+	# Process valid POST
+	if request.method=="POST" and form.validate():
+		severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
+		addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
+				url_for("users.profile", username=username))
+
+		# Copy form fields to user_profile fields
+		if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
+			user.display_name = form.display_name.data
+			user.forums_username = nonEmptyOrNone(form.forums_username.data)
+			user.github_username = nonEmptyOrNone(form.github_username.data)
+
+		if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
+			user.website_url  = form["website_url"].data
+			user.donate_url   = form["donate_url"].data
+
+		if user.checkPerm(current_user, Permission.CHANGE_RANK):
+			newRank = form["rank"].data
+			if current_user.rank.atLeast(newRank):
+				if newRank != user.rank:
+					user.rank = form["rank"].data
+					msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
+					addAuditLog(AuditSeverity.MODERATION, current_user, msg, url_for("users.profile", username=username))
+			else:
+				flash("Can't promote a user to a rank higher than yourself!", "danger")
+
+		if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+			newEmail = form["email"].data
+			if newEmail and newEmail != user.email and newEmail.strip() != "":
+				token = randomString(32)
+
+				msg = "Changed email of {}".format(user.display_name)
+				addAuditLog(severity, current_user, msg, url_for("users.profile", username=username))
+
+				ver = UserEmailVerification()
+				ver.user  = user
+				ver.token = token
+				ver.email = newEmail
+				db.session.add(ver)
+				db.session.commit()
+
+				task = sendVerifyEmail.delay(newEmail, token)
+				return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=username)))
+
+		# Save user_profile
+		db.session.commit()
+
+		return redirect(url_for("users.profile", username=username))
+
+	# Process GET or invalid POST
+	return render_template("users/profile_edit.html", user=user, form=form)
 
 
 @bp.route("/users/<username>/check/", methods=["POST"])

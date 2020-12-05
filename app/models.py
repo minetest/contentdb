@@ -259,6 +259,11 @@ class User(db.Model, UserMixin):
 		assert self.id > 0
 		return self.id == other.id
 
+	def can_see_edit_profile(self, current_user):
+		return self.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
+			self.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
+			self.checkPerm(current_user, Permission.CHANGE_RANK)
+
 
 class UserEmailVerification(db.Model):
 	id      = db.Column(db.Integer, primary_key=True)
