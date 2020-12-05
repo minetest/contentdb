@@ -1,0 +1,176 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Edit Profile | {{ user.username }}
+{% endblock %}
+
+{% block content %}
+
+<h1 class="mb-5">
+	Editing <a href="{{ url_for('users.profile', username=user.username)  }}">{{  user.display_name }}</a>'s profile
+</h1>
+
+<div class="row mb-3">
+	<div class="col-sm-6">
+		<div class="card">
+			<h2 class="card-header">{{ _("Profile Picture") }}</h2>
+			<div class="card-body row">
+				<div class="col-md-2">
+					{% if user.forums_username %}
+						<a href="https://forum.minetest.net/ucp.php?i=profile&mode=avatar">
+					{% elif user.email %}
+						<a href="https://en.gravatar.com/">
+					{% endif %}
+					<img class="img-responsive user-photo img-thumbnail  img-thumbnail-1" src="{{ user.getProfilePicURL() }}">
+					{% if user.forums_username or user.email %}
+						</a>
+					{% endif %}
+				</div>
+				<div class="col">
+					{% if user.forums_username %}
+						<form method="post" action="{{ url_for('users.user_check', username=user.username) }}" class="" style="display:inline-block;">
+							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+							<input type="submit" class="btn btn-primary" value="Sync with Forums" />
+						</form>
+					{% endif %}
+					{% if user.email %}
+						<a class="btn btn-primary" href="https://en.gravatar.com/">
+							Gravatar
+						</a>
+					{% else %}
+						<a class="btn btn-primary disabled"
+								data-toggle="tooltip" data-placement="bottom"
+								title="Please add an email address to use Gravatar"
+								style="pointer-events: all;">
+							Gravatar
+						</a>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+
+		<div class="card my-4">
+			<h2 class="card-header">{{ _("Passwords and Security") }}</h2>
+			<table class="table">
+				{% if user == current_user %}
+					<tr>
+						<td>Password:</td>
+						<td>
+							{% if user.password %}
+								Set | <a href="{{ url_for('users.change_password') }}">Change</a>
+							{% else %}
+								Not set | <a href="{{ url_for('users.set_password') }}">Set</a>
+							{% endif %}
+						</td>
+					</tr>
+				{% endif %}
+				{% if user.checkPerm(current_user, "CREATE_TOKEN") %}
+					<tr>
+						<td>API Tokens:</td>
+						<td>
+							<a href="{{ url_for('api.list_tokens', username=user.username) }}">Manage</a>
+							<span class="badge badge-primary">{{ user.tokens.count() }}</span>
+						</td>
+					</tr>
+				{% endif %}
+			</table>
+		</div>
+
+		<div class="card my-4">
+			<h2 class="card-header">{{ _("Linked Accounts") }}</h2>
+			<table class="table">
+				<tr>
+					<td>Forums</td>
+					<td>
+						{% if user.forums_username %}
+							<a href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
+								Connected
+							</a>
+						{% elif user == current_user %}
+							None
+						{% endif %}
+					</td>
+				</tr>
+				<tr>
+					<td>GitHub</td>
+					<td>
+						{% if user.github_username %}
+							<p>
+								<a href="https://github.com/{{ user.github_username }}">Connected</a>
+							</p>
+
+							{% if user == current_user %}
+								<p class="mb-0">
+									<a href="{{ url_for('github.view_permissions') }}">View ContentDB's GitHub Permissions</a>
+								</p>
+							{% endif %}
+						{% elif user == current_user %}
+							<a href="{{ url_for('github.start') }}">Link Github</a>
+						{% else %}
+							None
+						{% endif %}
+					</td>
+				</tr>
+
+
+				{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+				<tr>
+					<td>Admin</td>
+					<td>
+						{% if user.email %}
+							<a class="btn btn-primary" href="{{ url_for('users.send_email', username=user.username) }}">
+								Email
+							</a>
+						{% else %}
+							<a class="btn btn-primary disabled"
+									data-toggle="tooltip" data-placement="bottom"
+									title="No email address for user"
+									style="pointer-events: all;">
+								Email
+							</a>
+						{% endif %}
+					</td>
+				</tr>
+				{% endif %}
+			</table>
+		</div>
+	</div>
+
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<div class="col-sm-6">
+		<div class="card">
+			<div class="card-header">Edit Details</div>
+			<div class="card-body">
+				<form action="" method="POST" class="form box-body" role="form">
+					{{ form.hidden_tag() }}
+
+					{% if user.checkPerm(current_user, "CHANGE_USERNAMES") %}
+						{{ render_field(form.display_name, tabindex=230) }}
+						{{ render_field(form.forums_username, tabindex=230) }}
+						{{ render_field(form.github_username, tabindex=230) }}
+					{% endif %}
+
+					{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}
+						{{ render_field(form.website_url, tabindex=232) }}
+						{{ render_field(form.donate_url, tabindex=233) }}
+					{% endif %}
+
+					{% if user.checkPerm(current_user, "CHANGE_EMAIL") %}
+						{{ render_field(form.email, tabindex=240) }}
+						<i>We'll send you an email to verify it if changed.</i>
+					{% endif %}
+
+					{% if user.checkPerm(current_user, "CHANGE_RANK") %}
+						{{ render_field(form.rank, tabindex=250) }}
+					{% endif %}
+
+					<p>
+						{{ render_submit_field(form.submit, tabindex=280) }}
+					</p>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+{% endblock %}
