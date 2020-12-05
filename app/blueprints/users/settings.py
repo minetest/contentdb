@@ -107,6 +107,44 @@ def make_settings_form():
 SettingsForm = make_settings_form()
 
 
+def handle_email_notifications(user, prefs, is_new, form):
+	for notificationType in NotificationType:
+		field = getattr(form, "pref_" + notificationType.toName())
+		prefs.set_can_email(notificationType, field.data)
+
+	if is_new:
+		db.session.add(prefs)
+
+	if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+		newEmail = form.email.data
+		if newEmail and newEmail != user.email and newEmail.strip() != "":
+			if EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
+				flash("That email address has been unsubscribed/blacklisted, and cannot be used", "danger")
+				return
+
+			token = randomString(32)
+
+			severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
+
+			msg = "Changed email of {}".format(user.display_name)
+			addAuditLog(severity, current_user, msg, url_for("users.profile", username=user.username))
+
+			ver = UserEmailVerification()
+			ver.user = user
+			ver.token = token
+			ver.email = newEmail
+			db.session.add(ver)
+			db.session.commit()
+
+			task = sendVerifyEmail.delay(newEmail, token)
+			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=user.username)))
+
+	db.session.commit()
+	return redirect(url_for("users.email_notifications", username=user.username))
+
+
+
+
 @bp.route("/users/<username>/settings/email/", methods=["GET", "POST"])
 @login_required
 def email_notifications(username):
@@ -130,35 +168,9 @@ def email_notifications(username):
 
 	form = SettingsForm(data=data)
 	if form.validate_on_submit():
-		for notificationType in NotificationType:
-			field = getattr(form, "pref_" + notificationType.toName())
-			prefs.set_can_email(notificationType, field.data)
-
-		if is_new:
-			db.session.add(prefs)
-
-		if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
-			newEmail = form.email.data
-			if newEmail and newEmail != user.email and newEmail.strip() != "":
-				token = randomString(32)
-
-				severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
-
-				msg = "Changed email of {}".format(user.display_name)
-				addAuditLog(severity, current_user, msg, url_for("users.profile", username=username))
-
-				ver = UserEmailVerification()
-				ver.user = user
-				ver.token = token
-				ver.email = newEmail
-				db.session.add(ver)
-				db.session.commit()
-
-				task = sendVerifyEmail.delay(newEmail, token)
-				return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=username)))
-
-		db.session.commit()
-		return redirect(url_for("users.email_notifications", username=username))
+		ret = handle_email_notifications(user, prefs, is_new, form)
+		if ret:
+			return ret
 
 	return render_template("users/settings_email.html",
 			form=form, user=user, types=types, is_new=is_new,

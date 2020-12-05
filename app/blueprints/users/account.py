@@ -100,35 +100,46 @@ class RegisterForm(FlaskForm):
 	submit = SubmitField("Register")
 
 
+def handle_register(form):
+	user = User.query.filter_by(email=form.email.data).first()
+	if user:
+		send_anon_email.delay(form.email.data, "Email already in use",
+				"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(
+						user.display_name))
+	elif EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
+		flash("That email address has been unsubscribed/blacklisted, and cannot be used", "danger")
+		return
+	else:
+		user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
+		user.notification_preferences = UserNotificationPreferences(user)
+		db.session.add(user)
+
+		addAuditLog(AuditSeverity.USER, user, "Registered",
+				url_for("users.profile", username=user.username))
+
+		token = randomString(32)
+
+		ver = UserEmailVerification()
+		ver.user = user
+		ver.token = token
+		ver.email = form.email.data
+		db.session.add(ver)
+		db.session.commit()
+
+		sendVerifyEmail.delay(form.email.data, token)
+
+	flash("Check your email address to verify your account", "success")
+	return redirect(url_for("homepage.home"))
+
+
 @bp.route("/user/register/", methods=["GET", "POST"])
 def register():
 	form = RegisterForm(request.form)
 	if form.validate_on_submit():
-		user = User.query.filter_by(email=form.email.data).first()
-		if user:
-			send_anon_email.delay(form.email.data, "Email already in use",
-					"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(user.display_name))
-		else:
-			user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
-			user.notification_preferences = UserNotificationPreferences(user)
-			db.session.add(user)
+		ret = handle_register(form)
+		if ret:
+			return ret
 
-			addAuditLog(AuditSeverity.USER, user, "Registered",
-					url_for("users.profile", username=user.username))
-
-			token = randomString(32)
-
-			ver = UserEmailVerification()
-			ver.user = user
-			ver.token = token
-			ver.email = form.email.data
-			db.session.add(ver)
-			db.session.commit()
-
-			sendVerifyEmail.delay(form.email.data, token)
-
-		flash("Check your email address to verify your account", "success")
-		return redirect(url_for("homepage.home"))
 
 	return render_template("users/register.html", form=form, suggested_password=genphrase(entropy=52, wordset="bip39"))
 
@@ -198,13 +209,14 @@ def handle_set_password(form):
 	addAuditLog(AuditSeverity.USER, current_user, "Changed their password", url_for("users.profile", username=current_user.username))
 
 	current_user.password = make_flask_login_password(form.password.data)
-	db.session.commit()
-
-	flash("Your password has been changed successfully.", "success")
 
 	if hasattr(form, "email"):
 		newEmail = form.email.data
 		if newEmail != current_user.email and newEmail.strip() != "":
+			if EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
+				flash("That email address has been unsubscribed/blacklisted, and cannot be used", "danger")
+				return
+
 			token = randomString(32)
 
 			ver = UserEmailVerification()
@@ -212,12 +224,9 @@ def handle_set_password(form):
 			ver.token = token
 			ver.email = newEmail
 			db.session.add(ver)
-			db.session.commit()
 
-			task = sendVerifyEmail.delay(newEmail, token)
-			return redirect(
-					url_for("tasks.check", id=task.id, r=url_for("users.profile", username=current_user.username)))
-
+	db.session.commit()
+	flash("Your password has been changed successfully.", "success")
 	return redirect(url_for("homepage.home"))
 
 
@@ -274,6 +283,11 @@ def verify_email():
 			url_for("users.profile", username=user.username))
 
 	was_activating = not user.is_active
+
+	if user.email != ver.email and ver.email:
+		if User.query.filter_by(email=ver.email).count() > 0:
+			flash("Another user is already using that email", "danger")
+			return redirect(url_for("homepage.home"))
 
 	user.is_active = True
 	user.notification_preferences = user.notification_preferences or UserNotificationPreferences(user)
