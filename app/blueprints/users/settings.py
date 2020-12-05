@@ -158,7 +158,7 @@ def email_notifications(username):
 				return redirect(url_for("tasks.check", id=task.id, r=url_for("users.profile", username=username)))
 
 		db.session.commit()
-		return redirect(url_for("notifications.settings"))
+		return redirect(url_for("users.email_notifications", username=username))
 
 	return render_template("users/settings_email.html",
 			form=form, user=user, types=types, is_new=is_new,

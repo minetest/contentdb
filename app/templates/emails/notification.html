@@ -1,0 +1,30 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+<h2 style="margin-top: 0;">
+	{% if notification.package %}
+		{{ _("New notification on package %(package)s", package=notification.package.title) }}
+	{% else %}
+		{{ _("New notification") }}
+	{% endif %}
+</h2>
+
+<p><small>{{ _("Triggered by %(username)s", username=notification.causer.display_name) }}</small></p>
+
+<p>
+	{{ notification.title }}
+</p>
+
+<p>
+	<a class="btn" href="{{ notification.url | abs_url }}">
+		View Notification
+	</a>
+</p>
+
+<p><small>
+	<a href="{{ abs_url_for('users.email_notifications', username=notification.user.username) }}">
+		{{ _("Edit notification settings") }}
+	</a>
+</small></p>
+
+{% endblock %}

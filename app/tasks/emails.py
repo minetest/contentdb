@@ -18,8 +18,10 @@
 from flask import render_template
 from flask_mail import Message
 from app import mail
+from app.models import Notification, db
 from app.tasks import celery
-from app.utils import abs_url_for
+from app.utils import abs_url_for, abs_url
+
 
 @celery.task()
 def sendVerifyEmail(newEmail, token):
@@ -48,3 +50,29 @@ def sendEmailRaw(to, subject, text, html=None):
 	html = html or text
 	msg.html = render_template("emails/base.html", subject=subject, content=html)
 	mail.send(msg)
+
+
+def sendNotificationEmail(notification):
+	msg = Message(notification.title, recipients=[notification.user.email])
+
+	msg.body = """
+			New notification: {}
+			
+			View: {}
+			
+			Manage email settings: {}
+		""".format(notification.title, abs_url(notification.url),
+					abs_url_for("users.email_notifications", username=notification.user.username))
+
+	msg.html = render_template("emails/notification.html", notification=notification)
+	mail.send(msg)
+
+
+@celery.task()
+def sendPendingNotifications():
+	for notification in Notification.query.filter_by(emailed=False).all():
+		if notification.can_send_email():
+			sendNotificationEmail(notification)
+
+		notification.emailed = True
+		db.session.commit()
