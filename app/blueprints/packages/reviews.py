@@ -21,7 +21,7 @@ from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from app.models import db, PackageReview, Thread, ThreadReply
+from app.models import db, PackageReview, Thread, ThreadReply, NotificationType
 from app.utils import is_package_page, addNotification, get_int_or_abort
 
 
@@ -98,13 +98,15 @@ def review(package):
 
 		package.recalcScore()
 
-		notif_msg = None
 		if was_new:
 			notif_msg = "New review '{}'".format(form.title.data)
+			type = NotificationType.NEW_REVIEW
 		else:
 			notif_msg = "Updated review '{}'".format(form.title.data)
+			type = NotificationType.OTHER
 
-		addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id), package)
+		addNotification(package.maintainers, current_user, type, notif_msg,
+				url_for("threads.view", id=thread.id), package)
 
 		db.session.commit()
 
@@ -133,7 +135,7 @@ def delete_review(package):
 	thread.review = None
 
 	notif_msg = "Deleted review '{}', comments were kept as a thread".format(thread.title)
-	addNotification(package.maintainers, current_user, notif_msg, url_for("threads.view", id=thread.id), package)
+	addNotification(package.maintainers, current_user, NotificationType.OTHER, notif_msg, url_for("threads.view", id=thread.id), package)
 
 	db.session.delete(review)
 	db.session.commit()
