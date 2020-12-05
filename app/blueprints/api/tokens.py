@@ -25,7 +25,7 @@ from wtforms.validators import *
 from app.models import db, User, APIToken, Package, Permission
 from app.utils import randomString
 from . import bp
-from ..users.profile import get_setting_tabs
+from ..users.settings import get_setting_tabs
 
 
 class CreateAPIToken(FlaskForm):

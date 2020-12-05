@@ -7,15 +7,28 @@
 {% block pane %}
 	<h2 class="mt-0">{{ _("Email and Notifications") }}</h2>
 
-	{% if is_new %}
-		<p class="alert alert-info">
-			{{ _("Email notifications are currently turned off. Click 'Save' to apply recommended settings.") }}
-		</p>
-	{% endif %}
-
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 	<form action="" method="POST" class="form" role="form">
 		{{ form.hidden_tag() }}
+
+		<h3>Email Address</h3>
+
+		{{ render_field(form.email, tabindex=100) }}
+
+		<p>
+			Your email is needed to recover your account if you forget your
+			password, and to optionally send notifications.
+			Your email will never be shared to a third-party.
+		</p>
+
+
+		<h3>Notification Settings</h3>
+
+		{% if is_new %}
+			<p class="alert alert-info">
+				{{ _("Email notifications are currently turned off. Click 'Save' to apply recommended settings.") }}
+			</p>
+		{% endif %}
 
 		<table class="table">
 			<tr>
@@ -32,7 +45,8 @@
 			{% endfor %}
 		</table>
 
-
-		{{ render_submit_field(form.submit, tabindex=280) }}
+		<p class="mt-5">
+			{{ render_submit_field(form.submit, tabindex=280) }}
+		</p>
 	</form>
 {% endblock %}

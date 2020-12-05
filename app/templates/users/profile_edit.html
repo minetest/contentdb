@@ -139,11 +139,6 @@
 				{{ render_field(form.donate_url, tabindex=233) }}
 			{% endif %}
 
-			{% if user.checkPerm(current_user, "CHANGE_EMAIL") %}
-				{{ render_field(form.email, tabindex=240) }}
-				<i>We'll send you an email to verify it if changed.</i>
-			{% endif %}
-
 			{% if user.checkPerm(current_user, "CHANGE_RANK") %}
 				{{ render_field(form.rank, tabindex=250) }}
 			{% endif %}
