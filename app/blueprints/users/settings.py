@@ -101,16 +101,19 @@ def make_settings_form():
 	for notificationType in NotificationType:
 		key = "pref_" + notificationType.toName()
 		attrs[key] = BooleanField("")
+		attrs[key + "_digest"] = BooleanField("")
 
 	return type("SettingsForm", (FlaskForm,), attrs)
 
 SettingsForm = make_settings_form()
 
 
-def handle_email_notifications(user, prefs, is_new, form):
+def handle_email_notifications(user, prefs: UserNotificationPreferences, is_new, form):
 	for notificationType in NotificationType:
-		field = getattr(form, "pref_" + notificationType.toName())
-		prefs.set_can_email(notificationType, field.data)
+		field_email = getattr(form, "pref_" + notificationType.toName()).data
+		field_digest = getattr(form, "pref_" + notificationType.toName() + "_digest").data or field_email
+		prefs.set_can_email(notificationType, field_email)
+		prefs.set_can_digest(notificationType, field_digest)
 
 	if is_new:
 		db.session.add(prefs)
@@ -167,6 +170,7 @@ def email_notifications(username=None):
 	for notificationType in NotificationType:
 		types.append(notificationType)
 		data["pref_" + notificationType.toName()] = prefs.get_can_email(notificationType)
+		data["pref_" + notificationType.toName() + "_digest"] = prefs.get_can_digest(notificationType)
 
 	data["email"] = user.email
 

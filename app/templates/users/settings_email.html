@@ -26,21 +26,32 @@
 
 		{% if is_new %}
 			<p class="alert alert-info">
-				{{ _("Email notifications are currently turned off. Click 'Save' to apply recommended settings.") }}
+				{{ _("Email notifications are currently turned off. Click 'save' to enable.") }}
 			</p>
 		{% endif %}
+
+		<p>
+			Configure whether certain types of notifications are sent immediately, or as part of a daily digest. <br>
+			<i>Note: daily digests aren't implemented yet.</i>
+		</p>
 
 		<table class="table">
 			<tr>
 				<th>Event</th>
 				<th>Description</th>
-				<td>Emails?</td>
+				<td>Immediately</td>
+				<td>In digest</td>
 			</tr>
 			{% for type in types %}
 				<tr>
 					<td>{{ type.getTitle() }}</td>
 					<td>{{ type.get_description() }}</td>
-					<td>{{ render_checkbox_field(form["pref_" + type.toName()]) }}</td>
+					<td style="text-align: center;">
+						{{ render_checkbox_field(form["pref_" + type.toName()]) }}
+					</td>
+					<td style="text-align: center;">
+						{{ render_checkbox_field(form["pref_" + type.toName() + "_digest"]) }}
+					</td>
 				</tr>
 			{% endfor %}
 		</table>
