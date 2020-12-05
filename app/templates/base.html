@@ -105,9 +105,6 @@
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}">Profile</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="{{ url_for('users.profile_edit', username=current_user.username) }}">Settings</a>
-								</li>
-								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}#unadded-topics">Your unadded topics</a>
 								</li>
 							  	<div class="dropdown-divider"></div>
@@ -130,7 +127,10 @@
 										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.license_list') }}">{{ _("License Editor") }}</a></li>
 									{% endif %}
 								{% endif %}
-								  <div class="dropdown-divider"></div>
+								<div class="dropdown-divider"></div>
+								<li class="nav-item">
+									<a class="nav-link" href="{{ url_for('users.profile_edit', username=current_user.username) }}">Settings</a>
+								</li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('users.logout') }}">{{ _("Sign out") }}</a></li>
 							</ul>
 						</li>
