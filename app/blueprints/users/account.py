@@ -23,8 +23,10 @@ from wtforms import *
 from wtforms.validators import *
 
 from app.models import *
-from app.tasks.emails import sendVerifyEmail
+from app.tasks.emails import sendVerifyEmail, sendEmailRaw
 from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash
+from passlib.pwd import genphrase
+
 from . import bp
 
 
@@ -102,24 +104,29 @@ class RegisterForm(FlaskForm):
 def register():
 	form = RegisterForm(request.form)
 	if form.validate_on_submit():
-		user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
-		db.session.add(user)
+		user = User.query.filter_by(email=form.email.data).first()
+		if user:
+			sendEmailRaw([form.email.data], "Email already in use",
+					"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(user.display_name))
+		else:
+			user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
+			db.session.add(user)
 
-		token = randomString(32)
+			token = randomString(32)
 
-		ver = UserEmailVerification()
-		ver.user = user
-		ver.token = token
-		ver.email = form.email.data
-		db.session.add(ver)
-		db.session.commit()
+			ver = UserEmailVerification()
+			ver.user = user
+			ver.token = token
+			ver.email = form.email.data
+			db.session.add(ver)
+			db.session.commit()
 
-		sendVerifyEmail.delay(form.email.data, token)
+			sendVerifyEmail.delay(form.email.data, token)
 
 		flash("Check your email address to verify your account", "success")
 		return redirect(url_for("homepage.home"))
 
-	return render_template("users/register.html", form=form)
+	return render_template("users/register.html", form=form, suggested_password=genphrase(entropy=52, wordset="bip39"))
 
 
 class ForgotPassword(FlaskForm):
