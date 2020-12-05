@@ -26,6 +26,10 @@ Register
 			<code>{{ suggested_password }}</code>
 		</p>
 
+		<p>
+			Please read the <a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a>.
+		</p>
+
 		{# Submit button #}
 		<p>
 			{{ render_submit_field(form.submit, tabindex=180) }}
