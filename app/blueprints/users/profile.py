@@ -84,6 +84,11 @@ def get_setting_tabs(user):
 			"url": url_for("users.profile_edit", username=user.username)
 		},
 		{
+			"id": "notifications",
+			"title": "Emails and Notifications",
+			"url": url_for("notifications.settings")
+		},
+		{
 			"id": "api_tokens",
 			"title": "API Tokens",
 			"url": url_for("api.list_tokens", username=user.username)
