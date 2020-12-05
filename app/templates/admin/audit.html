@@ -26,6 +26,8 @@ Audit Log
 							<i class="fas fa-exclamation-triangle" style="color: yellow;"></i>
 						{% elif entry.severity == entry.severity.EDITOR %}
 							<i class="fas fa-users" style="color: #537eac;"></i>
+						{% elif entry.severity == entry.severity.USER %}
+							<i class="fas fa-user"></i>
 						{% endif %}
 					</div>
 

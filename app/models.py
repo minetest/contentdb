@@ -1366,8 +1366,9 @@ class PackageReview(db.Model):
 
 class AuditSeverity(enum.Enum):
 	NORMAL = 0 # Normal user changes
-	EDITOR = 1 # Editor changes
-	MODERATION = 2 # Destructive / moderator changes
+	USER   = 1 # Security user changes
+	EDITOR = 2 # Editor changes
+	MODERATION = 3 # Destructive / moderator changes
 
 	def __str__(self):
 		return self.name

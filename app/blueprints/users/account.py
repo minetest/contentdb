@@ -24,7 +24,7 @@ from wtforms.validators import *
 
 from app.models import *
 from app.tasks.emails import sendVerifyEmail, sendEmailRaw
-from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash
+from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog
 from passlib.pwd import genphrase
 
 from . import bp
@@ -112,6 +112,9 @@ def register():
 			user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
 			db.session.add(user)
 
+			addAuditLog(AuditSeverity.USER, user, "Registered",
+					url_for("users.profile", username=user.username))
+
 			token = randomString(32)
 
 			ver = UserEmailVerification()
@@ -141,6 +144,9 @@ def forgot_password():
 		user = User.query.filter_by(email=email).first()
 		if user:
 			token = randomString(32)
+
+			addAuditLog(AuditSeverity.USER, user, "(Anonymous) requested a password reset",
+					url_for("users.profile", username=user.username), None)
 
 			ver = UserEmailVerification()
 			ver.user = user
@@ -187,6 +193,8 @@ def handle_set_password(form):
 	if one != two:
 		flash("Passwords do not much", "danger")
 		return
+
+	addAuditLog(AuditSeverity.USER, current_user, "Changed their password", url_for("users.profile", username=current_user.username))
 
 	current_user.password = make_flask_login_password(form.password.data)
 	db.session.commit()
@@ -258,6 +266,9 @@ def verify_email():
 	if ver is None:
 		flash("Unknown verification token!", "danger")
 		return redirect(url_for("homepage.home"))
+
+	addAuditLog(AuditSeverity.USER, ver.user, "Confirmed their email",
+			url_for("users.profile", username=ver.user.username))
 
 	was_activating = not ver.user.is_active
 	ver.user.is_active = True
