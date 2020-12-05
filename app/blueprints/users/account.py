@@ -23,7 +23,7 @@ from wtforms import *
 from wtforms.validators import *
 
 from app.models import *
-from app.tasks.emails import sendVerifyEmail, sendEmailRaw
+from app.tasks.emails import sendVerifyEmail, send_anon_email
 from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog
 from passlib.pwd import genphrase
 
@@ -106,7 +106,7 @@ def register():
 	if form.validate_on_submit():
 		user = User.query.filter_by(email=form.email.data).first()
 		if user:
-			sendEmailRaw.delay([form.email.data], "Email already in use",
+			send_anon_email.delay([form.email.data], "Email already in use",
 					"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(user.display_name))
 		else:
 			user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
@@ -159,7 +159,7 @@ def forgot_password():
 
 			sendVerifyEmail.delay(form.email.data, token)
 		else:
-			sendEmailRaw.delay([email], "Unable to find account", """
+			send_anon_email.delay([email], "Unable to find account", """
 					<p>
 						We were unable to perform the password reset as we could not find an account
 						associated with this email.

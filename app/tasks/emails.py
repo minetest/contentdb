@@ -41,15 +41,28 @@ def sendVerifyEmail(newEmail, token):
 	msg.html = render_template("emails/verify.html", token=token)
 	mail.send(msg)
 
+
 @celery.task()
-def sendEmailRaw(to, subject, text, html=None):
+def send_email_with_reason(to, subject, text, html, reason):
 	from flask_mail import Message
 	msg = Message(subject, recipients=to)
 
 	msg.body = text
 	html = html or text
-	msg.html = render_template("emails/base.html", subject=subject, content=html)
+	msg.html = render_template("emails/base.html", subject=subject, content=html, reason=reason)
 	mail.send(msg)
+
+
+@celery.task()
+def send_user_email(to, subject, text, html=None):
+	return send_email_with_reason(to, subject, text, html,
+			"You are receiving this email because you are a registered user of ContentDB.")
+
+
+@celery.task()
+def send_anon_email(to, subject, text, html=None):
+	return send_email_with_reason(to, subject, text, html,
+			"You are receiving this email because someone (hopefully you) entered your email address as a user's email.")
 
 
 def sendNotificationEmail(notification):
