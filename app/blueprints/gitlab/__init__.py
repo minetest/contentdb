@@ -23,16 +23,15 @@ from app.models import Package, APIToken, Permission
 from app.blueprints.api.support import error, handleCreateRelease
 
 
-@bp.route("/gitlab/webhook/", methods=["POST"])
-@csrf.exempt
-def webhook():
+def webhook_impl():
 	json = request.json
 
 	# Get package
 	gitlab_url = json["project"]["web_url"].replace("https://", "").replace("http://", "")
 	package = Package.query.filter(Package.repo.ilike("%{}%".format(gitlab_url))).first()
 	if package is None:
-		return error(400, "Could not find package, did you set the VCS repo in CDB correctly? Expected {}".format(gitlab_url))
+		return error(400,
+				"Could not find package, did you set the VCS repo in CDB correctly? Expected {}".format(gitlab_url))
 
 	# Get all tokens for package
 	secret = request.headers.get("X-Gitlab-Token")
@@ -65,3 +64,12 @@ def webhook():
 	#
 
 	return handleCreateRelease(token, package, title, ref)
+
+
+@bp.route("/gitlab/webhook/", methods=["POST"])
+@csrf.exempt
+def webhook():
+	try:
+		return webhook_impl()
+	except KeyError as err:
+		return error(400, "Missing field: {}".format(err.args[0]))
