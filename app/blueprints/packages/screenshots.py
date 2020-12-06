@@ -34,7 +34,6 @@ class CreateScreenshotForm(FlaskForm):
 class EditScreenshotForm(FlaskForm):
 	title	 = StringField("Title/Caption", [Optional(), Length(-1, 100)])
 	approved = BooleanField("Is Approved")
-	delete   = BooleanField("Delete")
 	submit   = SubmitField("Save")
 
 
@@ -114,28 +113,37 @@ def edit_screenshot(package, id):
 		return redirect(package.getEditScreenshotsURL())
 
 	# Initial form class from post data and default data
-	form = EditScreenshotForm(formdata=request.form, obj=screenshot)
-
-	if request.method == "GET":
-		# HACK: fix bug in wtforms
-		form.approved.data = screenshot.approved
-
+	form = EditScreenshotForm(obj=screenshot)
 	if form.validate_on_submit():
-		if canEdit and form["delete"].data:
-			PackageScreenshot.query.filter_by(id=id).delete()
+		wasApproved = screenshot.approved
 
+		if canEdit:
+			screenshot.title = form["title"].data or "Untitled"
+
+		if canApprove:
+			screenshot.approved = form["approved"].data
 		else:
-			wasApproved = screenshot.approved
-
-			if canEdit:
-				screenshot.title = form["title"].data or "Untitled"
-
-			if canApprove:
-				screenshot.approved = form["approved"].data
-			else:
-				screenshot.approved = wasApproved
+			screenshot.approved = wasApproved
 
 		db.session.commit()
 		return redirect(package.getEditScreenshotsURL())
 
 	return render_template("packages/screenshot_edit.html", package=package, screenshot=screenshot, form=form)
+
+
+@bp.route("/packages/<author>/<name>/screenshots/<id>/delete/", methods=["POST"])
+@login_required
+@is_package_page
+def delete_screenshot(package, id):
+	screenshot = PackageScreenshot.query.get(id)
+	if screenshot is None or screenshot.package != package:
+		abort(404)
+
+	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
+		flash("Permission denied", "danger")
+		return redirect(url_for("homepage.home"))
+
+	db.session.delete(screenshot)
+	db.session.commit()
+
+	return redirect(package.getEditScreenshotsURL())

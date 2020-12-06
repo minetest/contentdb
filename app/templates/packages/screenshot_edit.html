@@ -13,7 +13,6 @@
 			{{ form.hidden_tag() }}
 
 			{{ render_field(form.title) }}
-			{{ render_checkbox_field(form.delete) }}
 
 			{% if package.checkPerm(current_user, "APPROVE_SCREENSHOT") %}
 				{{ render_checkbox_field(form.approved) }}

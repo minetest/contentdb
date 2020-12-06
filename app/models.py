@@ -1271,9 +1271,14 @@ class PackageScreenshot(db.Model):
 	url        = db.Column(db.String(100), nullable=False)
 	approved   = db.Column(db.Boolean, nullable=False, default=False)
 
-
 	def getEditURL(self):
 		return url_for("packages.edit_screenshot",
+				author=self.package.author.username,
+				name=self.package.name,
+				id=self.id)
+
+	def getDeleteURL(self):
+		return url_for("packages.delete_screenshot",
 				author=self.package.author.username,
 				name=self.package.name,
 				id=self.id)
