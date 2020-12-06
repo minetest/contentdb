@@ -14,6 +14,10 @@
 	{% endif %}
 	<h2 class="mt-0">Screenshots</h2>
 
+	<p class="mb-4">
+		{{ _("Topmost screenshot will be used as the package thumbnail.") }}
+	</p>
+
 	<ul class="list-group sortable">
 		{% for ss in package.screenshots %}
 			{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
