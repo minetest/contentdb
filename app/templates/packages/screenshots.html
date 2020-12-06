@@ -37,13 +37,17 @@
 					</div>
 				</li>
 			{% endif %}
+		{% else %}
+			<li class="list-group-item">
+				<i>No screenshots.</i>
+			</li>
 		{% endfor %}
 	</ul>
 
 	<form action="" method="POST" class="form mt-4" role="form">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 		<input type="hidden" name="order" value="" />
-		<input type="submit" value="{{ _("Update Order") }}" class="btn btn-primary">
+		<input type="submit" value="{{ _("Save Order") }}" class="btn btn-primary">
 	</form>
 
 	<noscript>

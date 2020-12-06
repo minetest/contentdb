@@ -45,6 +45,9 @@ def screenshots(package):
 	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
 		return redirect(package.getDetailsURL())
 
+	if package.screenshots.count() == 0:
+		return redirect(package.getNewScreenshotURL())
+
 	if request.method == "POST":
 		order = request.form.get("order")
 		if order:
@@ -76,11 +79,17 @@ def create_screenshot(package):
 		uploadedUrl, uploadedPath = doFileUpload(form.fileUpload.data, "image",
 				"a PNG or JPG image file")
 		if uploadedUrl is not None:
+			counter = 1
+			for screenshot in package.screenshots:
+				screenshot.order = counter
+				counter += 1
+
 			ss = PackageScreenshot()
 			ss.package  = package
 			ss.title    = form["title"].data or "Untitled"
 			ss.url      = uploadedUrl
 			ss.approved = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
+			ss.order    = counter
 			db.session.add(ss)
 
 			msg = "Screenshot added {}" \

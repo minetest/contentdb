@@ -28,10 +28,10 @@
 
 <main>
 	<header class="jumbotron pb-3"
-		style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ package.getMainScreenshotURL() }}');
-			background-size: cover;
-			background-repeat: no-repeat;
-			background-position: center;">
+			style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ package.getMainScreenshotURL() }}');
+				background-size: cover;
+				background-repeat: no-repeat;
+				background-position: center;">
 		<div class="container">
 			<h1 class="display-3">
 				{{ package.title }}
@@ -382,7 +382,7 @@
 
 		{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 			<a href="{{ package.getEditScreenshotsURL() }}" class="btn btn-primary float-right">
-				<i class="fas fa-edit"></i>
+				<i class="fas fa-images mr-1"></i>
 				Edit
 			</a>
 		{% endif %}
