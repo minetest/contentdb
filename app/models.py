@@ -348,9 +348,11 @@ class NotificationType(enum.Enum):
 		else:
 			return ""
 
-
 	def __str__(self):
 		return self.name
+
+	def __lt__(self, other):
+		return self.value < other.value
 
 	@classmethod
 	def choices(cls):
@@ -396,6 +398,10 @@ class Notification(db.Model):
 	def can_send_email(self):
 		prefs = self.user.notification_preferences
 		return prefs and self.user.email and prefs.get_can_email(self.type)
+
+	def can_send_digest(self):
+		prefs = self.user.notification_preferences
+		return prefs and self.user.email and prefs.get_can_digest(self.type)
 
 
 class UserNotificationPreferences(db.Model):

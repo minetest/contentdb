@@ -23,7 +23,7 @@ from wtforms import *
 from wtforms.validators import *
 
 from app.models import *
-from app.tasks.emails import sendVerifyEmail, send_anon_email, sendUnsubscribeVerifyEmail, send_user_email
+from app.tasks.emails import send_verify_email, send_anon_email, send_unsubscribe_verify, send_user_email
 from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog
 from passlib.pwd import genphrase
 
@@ -126,7 +126,7 @@ def handle_register(form):
 		db.session.add(ver)
 		db.session.commit()
 
-		sendVerifyEmail.delay(form.email.data, token)
+		send_verify_email.delay(form.email.data, token)
 
 	flash("Check your email address to verify your account", "success")
 	return redirect(url_for("homepage.home"))
@@ -168,7 +168,7 @@ def forgot_password():
 			db.session.add(ver)
 			db.session.commit()
 
-			sendVerifyEmail.delay(form.email.data, token)
+			send_verify_email.delay(form.email.data, token)
 		else:
 			send_anon_email.delay(email, "Unable to find account", """
 					<p>
@@ -335,7 +335,7 @@ def unsubscribe_verify():
 
 		sub.token = randomString(32)
 		db.session.commit()
-		sendUnsubscribeVerifyEmail.delay(form.email.data)
+		send_unsubscribe_verify.delay(form.email.data)
 
 		flash("Check your email address to continue the unsubscribe", "success")
 		return redirect(url_for("homepage.home"))

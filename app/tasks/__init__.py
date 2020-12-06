@@ -73,8 +73,12 @@ CELERYBEAT_SCHEDULE = {
 		'schedule': crontab(minute=10, hour=1),
 	},
 	'send_pending_notifications': {
-		'task': 'app.tasks.emails.sendPendingNotifications',
+		'task': 'app.tasks.emails.send_pending_notifications',
 		'schedule': crontab(minute='*/5'),
+	},
+	'send_notification_digests': {
+		'task': 'app.tasks.emails.send_pending_digests',
+		'schedule': crontab(minute=0, hour=14),
 	}
 }
 celery.conf.beat_schedule = CELERYBEAT_SCHEDULE

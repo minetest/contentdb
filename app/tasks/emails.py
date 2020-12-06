@@ -18,7 +18,7 @@
 from flask import render_template
 from flask_mail import Message
 from app import mail
-from app.models import Notification, db, EmailSubscription
+from app.models import Notification, db, EmailSubscription, User
 from app.tasks import celery
 from app.utils import abs_url_for, abs_url, randomString
 
@@ -36,7 +36,7 @@ def get_email_subscription(email):
 
 
 @celery.task()
-def sendVerifyEmail(email, token):
+def send_verify_email(email, token):
 	sub = get_email_subscription(email)
 	if sub.blacklisted:
 		return
@@ -59,7 +59,7 @@ def sendVerifyEmail(email, token):
 
 
 @celery.task()
-def sendUnsubscribeVerifyEmail(email):
+def send_unsubscribe_verify(email):
 	sub = get_email_subscription(email)
 	if sub.blacklisted:
 		return
@@ -103,7 +103,7 @@ def send_anon_email(email: str, subject: str, text: str, html=None):
 			"You are receiving this email because someone (hopefully you) entered your email address as a user's email.")
 
 
-def sendNotificationEmail(notification):
+def send_single_email(notification):
 	sub = get_email_subscription(notification.user.email)
 	if sub.blacklisted:
 		return
@@ -125,11 +125,55 @@ def sendNotificationEmail(notification):
 	mail.send(msg)
 
 
-@celery.task()
-def sendPendingNotifications():
-	for notification in Notification.query.filter_by(emailed=False).all():
-		if notification.can_send_email():
-			sendNotificationEmail(notification)
+def send_notification_digest(notifications: [Notification]):
+	user = notifications[0].user
 
-		notification.emailed = True
+	sub = get_email_subscription(user.email)
+	if sub.blacklisted:
+		return
+
+	msg = Message("{} new notifications".format(len(notifications)), recipients=[user.email])
+
+	msg.body = "".join(["<{}> {}\nView: {}\n\n".format(notification.causer.display_name, notification.title, abs_url(notification.url)) for notification in notifications])
+
+	msg.body += "Manage email settings: {}\nUnsubscribe: {}".format(
+			abs_url_for("users.email_notifications", username=user.username),
+			abs_url_for("users.unsubscribe", token=sub.token))
+
+	msg.html = render_template("emails/notification_digest.html", notifications=notifications, user=user, sub=sub)
+	mail.send(msg)
+
+
+@celery.task()
+def send_pending_digests():
+	for user in User.query.filter(User.notifications.any(emailed=False)).all():
+		to_send = []
+		for notification in user.notifications:
+			if not notification.emailed and notification.can_send_digest():
+				to_send.append(notification)
+				notification.emailed = True
+
+		if len(to_send) > 0:
+			send_notification_digest(to_send)
+
 		db.session.commit()
+
+
+@celery.task()
+def send_pending_notifications():
+	for user in User.query.filter(User.notifications.any(emailed=False)).all():
+		to_send = []
+		for notification in user.notifications:
+			if not notification.emailed:
+				if notification.can_send_email():
+					to_send.append(notification)
+					notification.emailed = True
+				elif not notification.can_send_digest():
+					notification.emailed = True
+
+		db.session.commit()
+
+		if len(to_send) > 1:
+			send_notification_digest(to_send)
+		elif len(to_send) > 0:
+			send_single_email(to_send[0])

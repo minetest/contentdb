@@ -6,7 +6,7 @@ from wtforms.validators import *
 
 from app.models import *
 from app.utils import nonEmptyOrNone, addAuditLog, randomString
-from app.tasks.emails import sendVerifyEmail
+from app.tasks.emails import send_verify_email
 from . import bp
 
 
@@ -141,7 +141,7 @@ def handle_email_notifications(user, prefs: UserNotificationPreferences, is_new,
 
 			flash("Check your email to confirm it", "success")
 
-			sendVerifyEmail.delay(newEmail, token)
+			send_verify_email.delay(newEmail, token)
 			return redirect(url_for("homepage.home"))
 
 	db.session.commit()
