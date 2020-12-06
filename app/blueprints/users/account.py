@@ -297,7 +297,6 @@ def verify_email():
 					"Your email address has changed. If you didn't request this, please contact an administrator.")
 
 	user.is_active = True
-	user.notification_preferences = user.notification_preferences or UserNotificationPreferences(user)
 	user.email = ver.email
 
 	db.session.delete(ver)

@@ -426,12 +426,12 @@ class UserNotificationPreferences(db.Model):
 	def __init__(self, user):
 		self.user = user
 		self.pref_package_edit = 1
-		self.pref_package_approval = 2
-		self.pref_new_thread = 2
+		self.pref_package_approval = 1
+		self.pref_new_thread = 1
 		self.pref_new_review = 1
 		self.pref_thread_reply = 2
-		self.pref_maintainer = 2
-		self.pref_editor_alert = 2
+		self.pref_maintainer = 1
+		self.pref_editor_alert = 1
 		self.pref_editor_misc = 0
 		self.pref_other = 0
 
