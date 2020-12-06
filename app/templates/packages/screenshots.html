@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Screenshots | {{ package.title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5"><a href="{{ package.getDetailsURL() }}">{{ package.title }}</a></h1>
+
+	{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+		<a href="{{ package.getNewScreenshotURL() }}" class="btn btn-primary float-right">
+			{{ _("Add Image") }}
+		</a>
+	{% endif %}
+	<h2 class="mt-0">Screenshots</h2>
+
+	<ul class="list-group sortable">
+		{% for ss in package.screenshots %}
+			{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+				<li class="list-group-item" data-id="{{ ss.id }}">
+					<div class="row">
+						<div class="col-auto text-muted pr-2">
+							<i class="fas fa-bars"></i>
+						</div>
+						<div class="col-auto">
+							<img class="img-fluid" style="max-height: 64px;"
+									src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+						</div>
+						<span class="col">
+							{{ ss.title }}
+						</span>
+						<div class="col-auto text-right">
+							<a class="btn btn-sm btn-primary" href="{{ ss.getEditURL() }}">
+								<i class="fas fa-edit"></i>
+							</a>
+						</div>
+					</div>
+				</li>
+			{% endif %}
+		{% endfor %}
+	</ul>
+
+	<form action="" method="POST" class="form mt-4" role="form">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		<input type="hidden" name="order" value="" />
+		<input type="submit" value="{{ _("Update Order") }}" class="btn btn-primary">
+	</form>
+
+	<noscript>
+		<p class="alert alert-warning mt-5">
+			{{ _("Reordering requires JavaScript.") }}
+		</p>
+	</noscript>
+{% endblock %}
+
+{% block scriptextra %}
+	<script src="/static/jquery-ui.min.js"></script>
+	<script>
+		function update() {
+			const elements = Array.from(document.getElementsByClassName("sortable")[0].children);
+			const ids = elements.map(x => x.dataset.id).filter(x => x);
+			$("input[name='order']").val(ids.join(","))
+		}
+
+		update();
+
+		$(function() {
+			$(".sortable").sortable({
+				update: update
+			});
+		});
+	</script>
+{% endblock %}

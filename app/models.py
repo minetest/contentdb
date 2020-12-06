@@ -714,7 +714,7 @@ class Package(db.Model):
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
 
 	screenshots = db.relationship("PackageScreenshot", backref="package",
-			lazy="dynamic", order_by=db.asc("package_screenshot_id"))
+			lazy="dynamic", order_by=db.asc("package_screenshot_order"))
 
 	requests = db.relationship("EditRequest", backref="package",
 			lazy="dynamic")
@@ -883,6 +883,10 @@ class Package(db.Model):
 
 	def getNewScreenshotURL(self):
 		return url_for("packages.create_screenshot",
+				author=self.author.username, name=self.name)
+
+	def getEditScreenshotsURL(self):
+		return url_for("packages.screenshots",
 				author=self.author.username, name=self.name)
 
 	def getCreateReleaseURL(self):
@@ -1259,16 +1263,10 @@ class PackageRelease(db.Model):
 			raise Exception("Permission {} is not related to releases".format(perm.name))
 
 
-# class PackageReview(db.Model):
-# 	id         = db.Column(db.Integer, primary_key=True)
-# 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
-# 	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
-# 	recommend  = db.Column(db.Boolean, nullable=False, default=True)
-
-
 class PackageScreenshot(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
+	order      = db.Column(db.Integer, nullable=False, default=0)
 	title      = db.Column(db.String(100), nullable=False)
 	url        = db.Column(db.String(100), nullable=False)
 	approved   = db.Column(db.Boolean, nullable=False, default=False)

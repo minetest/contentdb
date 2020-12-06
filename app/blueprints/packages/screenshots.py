@@ -37,6 +37,32 @@ class EditScreenshotForm(FlaskForm):
 	delete   = BooleanField("Delete")
 	submit   = SubmitField("Save")
 
+
+@bp.route("/packages/<author>/<name>/screenshots/", methods=["GET", "POST"])
+@login_required
+@is_package_page
+def screenshots(package):
+	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
+		return redirect(package.getDetailsURL())
+
+	if request.method == "POST":
+		order = request.form.get("order")
+		if order:
+			lookup = {}
+			for screenshot in package.screenshots:
+				lookup[str(screenshot.id)] = screenshot
+
+			counter = 1
+			for id in order.split(","):
+				lookup[id].order = counter
+				counter += 1
+
+			db.session.commit()
+			return redirect(package.getDetailsURL())
+
+	return render_template("packages/screenshots.html", package=package)
+
+
 @bp.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
 @login_required
 @is_package_page
@@ -61,7 +87,7 @@ def create_screenshot(package):
 					.format(ss.title)
 			addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, package.getDetailsURL(), package)
 			db.session.commit()
-			return redirect(package.getDetailsURL())
+			return redirect(package.getEditScreenshotsURL())
 
 	return render_template("packages/screenshot_new.html", package=package, form=form)
 
@@ -76,7 +102,7 @@ def edit_screenshot(package, id):
 	canEdit	= package.checkPerm(current_user, Permission.ADD_SCREENSHOTS)
 	canApprove = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
 	if not (canEdit or canApprove):
-		return redirect(package.getDetailsURL())
+		return redirect(package.getEditScreenshotsURL())
 
 	# Initial form class from post data and default data
 	form = EditScreenshotForm(formdata=request.form, obj=screenshot)
@@ -101,6 +127,6 @@ def edit_screenshot(package, id):
 				screenshot.approved = wasApproved
 
 		db.session.commit()
-		return redirect(package.getDetailsURL())
+		return redirect(package.getEditScreenshotsURL())
 
 	return render_template("packages/screenshot_edit.html", package=package, screenshot=screenshot, form=form)
