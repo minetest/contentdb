@@ -2,17 +2,18 @@
 
 {% block content %}
 <h2 style="margin-top: 0;">
-	{% if notification.package %}
-		{{ _("New notification on package %(package)s", package=notification.package.title) }}
-	{% else %}
-		{{ _("New notification") }}
-	{% endif %}
+	{{ notification.title }}
 </h2>
 
-<p><small>{{ _("Triggered by %(username)s", username=notification.causer.display_name) }}</small></p>
+
 
 <p>
-	{{ notification.title }}
+	{% if notification.package %}
+		{{ _("From %(username)s and on package %(package)s.",
+				username=notification.causer.display_name, package=notification.package.title) }}
+	{% else %}
+		{{ _("From %(username)s.", username=notification.causer.display_name) }}
+	{% endif %}
 </p>
 
 <p>
@@ -33,5 +34,7 @@
 	|
 	<a href="{{ abs_url_for('users.unsubscribe', token=sub.token) }}">
 		{{ _("Unsubscribe") }}
-	</a>
+	</a> <br>
+
+	{{ _("This is a '%(type)s' notification.", type=notification.type.getTitle()) }}
 {% endblock %}

@@ -327,24 +327,24 @@ class NotificationType(enum.Enum):
 		return self.name.lower()
 
 	def get_description(self):
-		if self == NotificationType.OTHER:
-			return "Minor notifications not important enough for a dedicated category."
-		elif self == NotificationType.PACKAGE_EDIT:
+		if self == NotificationType.PACKAGE_EDIT:
 			return "When another user edits your packages, releases, etc."
 		elif self == NotificationType.PACKAGE_APPROVAL:
 			return "Notifications from editors related to the package approval process."
 		elif self == NotificationType.NEW_THREAD:
 			return "When a thread is created on your package."
 		elif self == NotificationType.NEW_REVIEW:
-			return "When a user posts a review."
+			return "When a user posts a review on your package."
 		elif self == NotificationType.THREAD_REPLY:
 			return "When someone replies to a thread you're watching."
 		elif self == NotificationType.MAINTAINER:
 			return "When your package's maintainers change."
 		elif self == NotificationType.EDITOR_ALERT:
-			return "Important editor alerts."
+			return "For editors: Important alerts."
 		elif self == NotificationType.EDITOR_MISC:
-			return "Miscellaneous editor alerts."
+			return "For editors: Minor notifications, including new threads."
+		elif self == NotificationType.OTHER:
+			return "Minor notifications not important enough for a dedicated category."
 		else:
 			return ""
 
