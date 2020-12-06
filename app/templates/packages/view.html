@@ -396,6 +396,14 @@
 						</a>
 					</li>
 				{% endif %}
+			{% else %}
+				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+					<li>
+						<a href="{{ package.getNewScreenshotURL() }}">
+							<i class="fas fa-plus screenshot-add"></i>
+						</a>
+					</li>
+				{% endif %}
 			{% endfor %}
 		</ul>
 
