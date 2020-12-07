@@ -17,10 +17,7 @@
 
 from flask import *
 from flask_login import current_user, login_required
-from flask_wtf import FlaskForm
 from sqlalchemy import func
-from wtforms import *
-from wtforms.validators import *
 
 from app.models import *
 from app.tasks.forumtasks import checkForumAccount
@@ -35,6 +32,15 @@ def list_all():
 			.group_by(User.id).all()
 
 	return render_template("users/list.html", users=users)
+
+
+@bp.route("/user/forum/<username>/")
+def by_forums_username(username):
+	user = User.query.filter_by(forums_username=username).first()
+	if user:
+		return redirect(url_for("users.profile", username=user.username))
+
+	return render_template("users/forums_no_such_user.html", username=username)
 
 
 @bp.route("/users/<username>/")
