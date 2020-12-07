@@ -57,8 +57,8 @@ sass(app)
 
 
 if not app.debug and app.config["MAIL_UTILS_ERROR_SEND_TO"]:
-	from .maillogger import register_mail_error_handler
-	register_mail_error_handler(app, mail)
+	from .maillogger import build_handler
+	app.logger.addHandler(build_handler(app))
 
 
 from .markdown import init_app
@@ -68,7 +68,7 @@ init_app(app)
 # def get_locale():
 # 	return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
-from . import models, tasks, template_filters
+from . import models, template_filters
 
 @login_manager.user_loader
 def load_user(user_id):

@@ -13,12 +13,13 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+from logging import Filter
 
 import flask
-from celery import Celery
+from celery import Celery, signals
 from celery.schedules import crontab
-from app.models import *
+from app import app
+
 
 class TaskError(Exception):
 	def __init__(self, value):
@@ -35,18 +36,18 @@ class FlaskCelery(Celery):
 			self.init_app(kwargs['app'])
 
 	def patch_task(self):
-		TaskBase = self.Task
+		BaseTask : celery.Task = self.Task
 		_celery = self
 
-		class ContextTask(TaskBase):
+		class ContextTask(BaseTask):
 			abstract = True
 
 			def __call__(self, *args, **kwargs):
 				if flask.has_app_context():
-					return TaskBase.__call__(self, *args, **kwargs)
+					return super(BaseTask, self).__call__(*args, **kwargs)
 				else:
 					with _celery.app.app_context():
-						return TaskBase.__call__(self, *args, **kwargs)
+						return super(BaseTask, self).__call__(*args, **kwargs)
 
 		self.Task = ContextTask
 
@@ -83,4 +84,24 @@ CELERYBEAT_SCHEDULE = {
 }
 celery.conf.beat_schedule = CELERYBEAT_SCHEDULE
 
-from . import importtasks, forumtasks, emails, pkgtasks
+from . import importtasks, forumtasks, emails, pkgtasks, celery
+
+
+# noinspection PyUnusedLocal
+@signals.after_setup_logger.connect
+def on_after_setup_logger(**kwargs):
+	from app.maillogger import build_handler
+
+	class ExceptionFilter(Filter):
+		def filter(self, record):
+			if record.exc_info:
+				exc, _, _ = record.exc_info
+				if exc == TaskError:
+					return False
+
+			return True
+
+	logger = celery.log.get_default_logger()
+	handler = build_handler(app)
+	handler.addFilter(ExceptionFilter())
+	logger.addHandler(handler)

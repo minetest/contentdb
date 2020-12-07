@@ -36,10 +36,9 @@ class FlaskMailTextFormatter(logging.Formatter):
 	pass
 
 class FlaskMailHTMLFormatter(logging.Formatter):
-	pre_template = "<h1>%s</h1><pre>%s</pre>"
 	def formatException(self, exc_info):
 		formatted_exception = logging.Handler.formatException(self, exc_info)
-		return FlaskMailHTMLFormatter.pre_template % ("Exception information", formatted_exception)
+		return "<pre>%s</pre>" % formatted_exception
 	def formatStack(self, stack_info):
 		return "<pre>%s</pre>" % stack_info
 
@@ -47,66 +46,46 @@ class FlaskMailHTMLFormatter(logging.Formatter):
 # see: https://github.com/python/cpython/blob/3.6/Lib/logging/__init__.py (class Handler)
 
 class FlaskMailHandler(logging.Handler):
-	def __init__(self, mailer, subject_template, level=logging.NOTSET):
+	def __init__(self, send_to, subject_template, level=logging.NOTSET):
 		logging.Handler.__init__(self, level)
-		self.mailer = mailer
-		self.send_to = mailer.app.config["MAIL_UTILS_ERROR_SEND_TO"]
+		self.send_to = send_to
 		self.subject_template = subject_template
-		self.html_formatter = None
 
-	def setFormatter(self, text_fmt, html_fmt=None):
+	def setFormatter(self, text_fmt):
 		"""
 		Set the formatters for this handler. Provide at least one formatter.
 		When no text_fmt is provided, no text-part is created for the email body.
 		"""
-		assert (text_fmt, html_fmt) != (None, None), "At least one formatter should be provided"
+		assert text_fmt != None, "At least one formatter should be provided"
 		if type(text_fmt)==str:
 			text_fmt = FlaskMailTextFormatter(text_fmt)
 		self.formatter = text_fmt
-		if type(html_fmt)==str:
-			html_fmt = FlaskMailHTMLFormatter(html_fmt)
-		self.html_formatter = html_fmt
 
 	def getSubject(self, record):
 		fmt = FlaskMailSubjectFormatter(self.subject_template)
 		subject = fmt.format(record)
-		#Since templates can cause header problems, and we rather have a incomplete email then an error, we fix this
+		# Since templates can cause header problems, and we rather have a incomplete email then an error, we fix this
 		if _is_bad_subject(subject):
-			subject="FlaskMailHandler log-entry from %s [original subject is replaced, because it would result in a bad header]" % self.mailer.app.name
+			subject="FlaskMailHandler log-entry from ContentDB [original subject is replaced, because it would result in a bad header]"
 		return subject
 
 	def emit(self, record):
-		record.stack_info = record.exc_text
-		record.exc_text = None
-		record.exc_info = None
-
 		text = self.format(record)				if self.formatter	  else None
-		html = self.html_formatter.format(record) if self.html_formatter else None
+		html = "<pre>{}</pre>".format(text)
 		for email in self.send_to:
 			send_user_email.delay(email, self.getSubject(record), text, html)
 
 
-def register_mail_error_handler(app, mailer):
+def build_handler(app):
 	subject_template = "ContentDB %(message)s (%(module)s > %(funcName)s)"
-	text_template = """
-Message type: %(levelname)s
-Location:	 %(pathname)s:%(lineno)d
-Module:	   %(module)s
-Function:	 %(funcName)s
-Time:		 %(asctime)s
-Message:
-%(message)s"""
-	html_template = """
-<style>th { text-align: right}</style><table>
-<tr><th>Message type:</th><td>%(levelname)s</td></tr>
-<tr>	<th>Location:</th><td>%(pathname)s:%(lineno)d</td></tr>
-<tr>	  <th>Module:</th><td>%(module)s</td></tr>
-<tr>	<th>Function:</th><td>%(funcName)s</td></tr>
-<tr>		<th>Time:</th><td>%(asctime)s</td></tr>
-</table>
-<h2>%(message)s</h2>"""
+	text_template = ("Message type: %(levelname)s\n"
+		"Location: %(pathname)s:%(lineno)d\n"
+		"Module:   %(module)s\n"
+		"Function: %(funcName)s\n"
+		"Time:     %(asctime)s\n"
+		"Message: %(message)s\n\n")
 
-	mail_handler = FlaskMailHandler(mailer, subject_template)
+	mail_handler = FlaskMailHandler(app.config["MAIL_UTILS_ERROR_SEND_TO"], subject_template)
 	mail_handler.setLevel(logging.ERROR)
-	mail_handler.setFormatter(text_template, html_template)
-	app.logger.addHandler(mail_handler)
+	mail_handler.setFormatter(text_template)
+	return mail_handler
