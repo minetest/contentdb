@@ -57,6 +57,9 @@ def handle_login(form):
 		flash("You need to confirm the registration email", "danger")
 		return
 
+	addAuditLog(AuditSeverity.USER, user, "Logged in using password",
+			url_for("users.profile", username=user.username))
+	db.session.commit()
 
 	login_user(user)
 	flash("Logged in successfully.", "success")
@@ -139,7 +142,6 @@ def register():
 		ret = handle_register(form)
 		if ret:
 			return ret
-
 
 	return render_template("users/register.html", form=form, suggested_password=genphrase(entropy=52, wordset="bip39"))
 
