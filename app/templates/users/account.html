@@ -59,6 +59,10 @@
 	</tr>
 </table>
 
+{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+	<a class="btn btn-secondary float-right" href="{{ url_for('admin.audit', username=user.username) }}">View All</a>
+{% endif %}
+
 <h3>{{ _("Recent Account Actions") }}</h3>
 
 {% from "macros/audit_log.html" import render_audit_log %}
