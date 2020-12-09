@@ -28,8 +28,8 @@
 		<td>Forums</td>
 		<td>
 			{% if user.forums_username %}
-				<a href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
-					Connected
+				<a class="btn btn-secondary" href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
+					Connected [{{ user.forums_username }}]
 				</a>
 			{% else %}
 				Please <a href="https://forum.minetest.net/ucp.php?i=pm&mode=compose&u=2051">PM rubenwardy</a>
@@ -41,17 +41,15 @@
 		<td>GitHub</td>
 		<td>
 			{% if user.github_username %}
-				<p>
-					<a href="https://github.com/{{ user.github_username }}">Connected</a>
-				</p>
+				<a class="btn btn-secondary" href="https://github.com/{{ user.github_username }}">
+					Connected [{{ user.github_username }}]
+				</a>
 
 				{% if user == current_user %}
-					<p class="mb-0">
-						<a href="{{ url_for('github.view_permissions') }}">View ContentDB's GitHub Permissions</a>
-					</p>
+					<a class="btn btn-secondary ml-2" href="{{ url_for('github.view_permissions') }}">View ContentDB's GitHub Permissions</a>
 				{% endif %}
 			{% elif user == current_user %}
-				<a href="{{ url_for('github.start') }}">Link Github</a>
+				<a class="btn btn-secondary" href="{{ url_for('github.start') }}">Link Github</a>
 			{% else %}
 				None
 			{% endif %}
