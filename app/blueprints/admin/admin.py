@@ -19,7 +19,7 @@ import os
 
 from celery import group
 from flask import *
-from flask_login import current_user
+from flask_login import current_user, login_user
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import InputRequired, Length
@@ -27,7 +27,7 @@ from wtforms.validators import InputRequired, Length
 from app.models import *
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, updateMetaFromRelease, importForeignDownloads
-from app.utils import loginUser, rank_required, addAuditLog, addNotification
+from app.utils import rank_required, addAuditLog, addNotification
 from . import bp
 
 
@@ -182,7 +182,7 @@ def switch_user():
 		user = User.query.filter_by(username=form["username"].data).first()
 		if user is None:
 			flash("Unable to find user", "danger")
-		elif loginUser(user):
+		elif login_user(user):
 			return redirect(url_for("users.profile", username=current_user.username))
 		else:
 			flash("Unable to login as user", "danger")

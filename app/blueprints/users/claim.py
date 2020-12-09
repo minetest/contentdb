@@ -14,11 +14,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+from flask_login import login_user
 from . import bp
 from flask import redirect, render_template, session, request, flash, url_for
 from app.models import db, User, UserRank
-from app.utils import randomString, loginUser
+from app.utils import randomString
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.phpbbparser import getProfile
 import re
@@ -102,7 +102,7 @@ def claim():
 					db.session.add(user)
 					db.session.commit()
 
-				if loginUser(user):
+				if login_user(user, remember=True):
 					return redirect(url_for("users.set_password"))
 				else:
 					flash("Unable to login as user", "danger")

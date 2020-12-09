@@ -1,8 +1,8 @@
-{% macro render_audit_log(log, show_view=False) -%}
+{% macro render_audit_log(log) -%}
 	<div class="list-group mt-3">
 		{% for entry in log %}
 			<a class="list-group-item list-group-item-action"
-				{% if entry.description and show_view %}
+				{% if entry.description %}
 					href="{{ url_for('admin.audit_view', id=entry.id) }}">
 				{% else %}
 					href="{{ entry.url }}">

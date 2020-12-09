@@ -149,39 +149,6 @@ def make_flask_login_password(plaintext):
 	return bcrypt.hash(plaintext.encode("UTF-8"))
 
 
-def loginUser(user):
-	def _call_or_get(v):
-		if callable(v):
-			return v()
-		else:
-			return v
-
-	# User must have been authenticated
-	if not user:
-		return False
-
-	if user.rank == UserRank.BANNED:
-		flash("You have been banned.", "danger")
-		return False
-
-	user.is_active = True
-	if not user.rank.atLeast(UserRank.NEW_MEMBER):
-		user.rank = UserRank.MEMBER
-
-	db.session.commit()
-
-	# Check if user account has been disabled
-	if not _call_or_get(user.is_active):
-		flash("Your account has not been enabled.", "danger")
-		return False
-
-	login_user(user, remember=True)
-
-	flash("You have signed in successfully.", "success")
-
-	return True
-
-
 def rank_required(rank):
 	def decorator(f):
 		@wraps(f)
