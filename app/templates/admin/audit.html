@@ -32,12 +32,16 @@ Audit Log
 					</div>
 
 					<div class="col-sm-2 text-muted">
-						<img
-							class="img-fluid user-photo img-thumbnail img-thumbnail-1"
-							style="max-height: 22px;"
-							src="{{ entry.causer.getProfilePicURL() }}" />
+						{% if entry.causer %}
+							<img
+								class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+								style="max-height: 22px;"
+								src="{{ entry.causer.getProfilePicURL() }}" />
 
-						<span class="pl-2">{{ entry.causer.display_name }}</span>
+							<span class="pl-2">{{ entry.causer.display_name }}</span>
+						{% else %}
+							<i>Deleted User</i>
+						{% endif %}
 					</div>
 
 					<div class="col-sm">

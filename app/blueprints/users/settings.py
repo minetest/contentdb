@@ -1,11 +1,11 @@
 from flask import *
-from flask_login import current_user, login_required
+from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 
 from app.models import *
-from app.utils import nonEmptyOrNone, addAuditLog, randomString
+from app.utils import nonEmptyOrNone, addAuditLog, randomString, rank_required
 from app.tasks.emails import send_verify_email
 from . import bp
 
@@ -186,3 +186,38 @@ def email_notifications(username=None):
 	return render_template("users/settings_email.html",
 			form=form, user=user, types=types, is_new=is_new,
 			tabs=get_setting_tabs(user), current_tab="notifications")
+
+
+@bp.route("/users/<username>/delete/", methods=["GET", "POST"])
+@rank_required(UserRank.ADMIN)
+def delete(username):
+	user: User = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	if request.method == "GET":
+		return render_template("users/delete.html", user=user, can_delete=user.can_delete())
+
+	if user.can_delete():
+		msg = "Deleted user {}".format(user.username)
+		flash(msg, "success")
+		addAuditLog(AuditSeverity.MODERATION, current_user, msg, None)
+
+		db.session.delete(user)
+	else:
+		user.replies.delete()
+		for thread in user.threads.all():
+			db.session.delete(thread)
+		user.email = None
+		user.rank = UserRank.NOT_JOINED
+
+		msg = "Deactivated user {}".format(user.username)
+		flash(msg, "success")
+		addAuditLog(AuditSeverity.MODERATION, current_user, msg, None)
+
+	db.session.commit()
+
+	if user == current_user:
+		logout_user()
+
+	return redirect(url_for("homepage.home"))

@@ -166,16 +166,20 @@ class User(db.Model, UserMixin):
 	donate_url    = db.Column(db.String(255), nullable=True, default=None)
 
 	# Content
-	notifications = db.relationship("Notification", primaryjoin="User.id==Notification.user_id",
-			order_by=desc(text("Notification.created_at")))
+	notifications = db.relationship("Notification", foreign_keys="Notification.user_id",
+			order_by=desc(text("Notification.created_at")), back_populates="user",  cascade="all, delete, delete-orphan")
+	caused_notifications = db.relationship("Notification", foreign_keys="Notification.causer_id",
+			back_populates="causer", cascade="all, delete, delete-orphan")
+	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user",
+			cascade="all, delete, delete-orphan")
 
-	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user")
+	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.causer_id", back_populates="causer")
 
 	packages      = db.relationship("Package", back_populates="author", lazy="dynamic")
-	reviews       = db.relationship("PackageReview", back_populates="author", order_by=db.desc("review_created_at"))
-	tokens        = db.relationship("APIToken", back_populates="owner", lazy="dynamic")
-	threads       = db.relationship("Thread", back_populates="author", lazy="dynamic")
-	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic")
+	reviews       = db.relationship("PackageReview", back_populates="author", order_by=db.desc("package_review_created_at"), cascade="all, delete, delete-orphan")
+	tokens        = db.relationship("APIToken", back_populates="owner", lazy="dynamic", cascade="all, delete, delete-orphan")
+	threads       = db.relationship("Thread", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
+	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
 
 	def __init__(self, username=None, active=False, email=None, password=None):
 		self.username = username
@@ -268,6 +272,9 @@ class User(db.Model, UserMixin):
 		return self.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
 			self.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
 			self.checkPerm(current_user, Permission.CHANGE_RANK)
+
+	def can_delete(self):
+		return self.packages.count() == 0 and ForumTopic.query.filter_by(author=self).count() == 0
 
 
 class UserEmailVerification(db.Model):
@@ -367,10 +374,10 @@ class Notification(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
 	user_id    = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	user       = db.relationship("User", foreign_keys=[user_id])
+	user       = db.relationship("User", foreign_keys=[user_id], back_populates="notifications")
 
 	causer_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	causer     = db.relationship("User", foreign_keys=[causer_id])
+	causer     = db.relationship("User", foreign_keys=[causer_id], back_populates="caused_notifications")
 
 	type       = db.Column(db.Enum(NotificationType), nullable=False, default=NotificationType.OTHER)
 
@@ -705,7 +712,7 @@ class Package(db.Model):
 	downloads     = db.Column(db.Integer, nullable=False, default=0)
 
 	review_thread_id = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=True, default=None)
-	review_thread    = db.relationship("Thread", foreign_keys=[review_thread_id])
+	review_thread    = db.relationship("Thread", foreign_keys=[review_thread_id], back_populates="is_review_thread")
 
 	# Downloads
 	repo         = db.Column(db.String(200), nullable=True)
@@ -734,7 +741,7 @@ class Package(db.Model):
 	maintainers = db.relationship("User", secondary=maintainers, lazy="subquery")
 
 	threads = db.relationship("Thread", back_populates="package", order_by=db.desc("thread_created_at"), foreign_keys="Thread.package_id")
-	reviews = db.relationship("PackageReview", back_populates="package", order_by=db.desc("review_created_at"))
+	reviews = db.relationship("PackageReview", back_populates="package", order_by=db.desc("package_review_created_at"))
 
 	def __init__(self, package=None):
 		if package is None:
@@ -1337,10 +1344,12 @@ class Thread(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
-	package    = db.relationship("Package", foreign_keys=[package_id])
+	package    = db.relationship("Package", foreign_keys=[package_id], back_populates="threads")
+
+	is_review_thread = db.relationship("Package", foreign_keys=[Package.review_thread_id], back_populates="review_thread")
 
 	review_id  = db.Column(db.Integer, db.ForeignKey("package_review.id"), nullable=True)
-	review     = db.relationship("PackageReview", foreign_keys=[review_id])
+	review     = db.relationship("PackageReview", foreign_keys=[review_id], cascade="all, delete")
 
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author     = db.relationship("User", back_populates="threads", foreign_keys=[author_id])
@@ -1438,7 +1447,7 @@ class PackageReview(db.Model):
 
 	recommends = db.Column(db.Boolean, nullable=False)
 
-	thread     = db.relationship("Thread", uselist=False, back_populates="review")
+	thread     = db.relationship("Thread", uselist=False, back_populates="review", cascade="all, delete")
 
 	def asSign(self):
 		return 1 if self.recommends else -1
@@ -1473,14 +1482,13 @@ class AuditSeverity(enum.Enum):
 		return item if type(item) == AuditSeverity else AuditSeverity[item]
 
 
-
 class AuditLogEntry(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
-	causer_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	causer     = db.relationship("User", foreign_keys=[causer_id])
+	causer_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
+	causer     = db.relationship("User", back_populates="", foreign_keys=[causer_id])
 
 	severity   = db.Column(db.Enum(AuditSeverity), nullable=False)
 
