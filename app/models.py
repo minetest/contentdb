@@ -169,11 +169,12 @@ class User(db.Model, UserMixin):
 	notifications = db.relationship("Notification", foreign_keys="Notification.user_id",
 			order_by=desc(text("Notification.created_at")), back_populates="user",  cascade="all, delete, delete-orphan")
 	caused_notifications = db.relationship("Notification", foreign_keys="Notification.causer_id",
-			back_populates="causer", cascade="all, delete, delete-orphan")
+			back_populates="causer", cascade="all, delete, delete-orphan", lazy="dynamic")
 	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user",
 			cascade="all, delete, delete-orphan")
 
-	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.causer_id", back_populates="causer")
+	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.causer_id", back_populates="causer",
+			order_by=desc("audit_log_entry_created_at"), lazy="dynamic")
 
 	packages      = db.relationship("Package", back_populates="author", lazy="dynamic")
 	reviews       = db.relationship("PackageReview", back_populates="author", order_by=db.desc("package_review_created_at"), cascade="all, delete, delete-orphan")
