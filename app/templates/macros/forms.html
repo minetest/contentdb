@@ -13,6 +13,53 @@
 	</div>
 {%- endmacro %}
 
+{% macro render_field_prefix(field, label=None, prefix="@", label_visible=true, right_url=None, right_label=None, fieldclass=None) -%}
+	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+		{% if field.type != 'HiddenField' and label_visible %}
+			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
+			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
+		{% endif %}
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">{{ prefix }}</span>
+			</div>
+			{{ field(class_=fieldclass or 'form-control', **kwargs) }}
+		</div>
+
+		{% if field.errors %}
+			{% for e in field.errors %}
+				<p class="help-block">{{ e }}</p>
+			{% endfor %}
+		{% endif %}
+	</div>
+{%- endmacro %}
+
+{% macro render_field_prefix_button(field, label=None, prefix="@", label_visible=true, right_url=None, right_label=None, fieldclass=None) -%}
+	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+		{% if field.type != 'HiddenField' and label_visible %}
+			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
+			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
+		{% endif %}
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">{{ prefix }}</span>
+			</div>
+			{{ field(class_=fieldclass or 'form-control', **kwargs) }}
+			<a class="btn btn-secondary" id="{{ field.name }}-button">
+				View
+			</a>
+		</div>
+
+		{% if field.errors %}
+			{% for e in field.errors %}
+				<p class="help-block">{{ e }}</p>
+			{% endfor %}
+		{% endif %}
+	</div>
+{%- endmacro %}
+
 {% macro form_scripts() -%}
 	<link href="/static/jquery-ui.min.css?v=2" rel="stylesheet" type="text/css">
 	<script src="/static/jquery-ui.min.js?v=2"></script>

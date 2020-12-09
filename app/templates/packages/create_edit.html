@@ -7,7 +7,8 @@
 	{% endif %}
 {% endblock %}
 
-{% from "macros/forms.html" import render_field, render_submit_field, form_scripts, render_multiselect_field, render_mpackage_field, render_deps_field, package_lists %}
+{% from "macros/forms.html" import render_field, render_field_prefix_button, render_submit_field, form_scripts,
+		render_multiselect_field, render_mpackage_field, render_deps_field, package_lists %}
 
 {% block scriptextra %}
 	{{ form_scripts() }}
@@ -16,7 +17,7 @@
 		<script src="/static/polltask.js"></script>
 		<script src="/static/package_create.js?v=4"></script>
 	{% endif %}
-	<script src="/static/package_edit.js?v=3"></script>
+	<script src="/static/package_edit.js?v=4"></script>
 {% endblock %}
 
 {% block content %}
@@ -114,9 +115,12 @@
 
 			{{ render_field(form.website, class_="pkg_meta") }}
 			{{ render_field(form.issueTracker, class_="pkg_meta") }}
-			{{ render_field(form.forums, class_="pkg_meta", placeholder=_("Tip: paste in a forum topic URL")) }}
+			{{ render_field_prefix_button(form.forums, class_="pkg_meta",
+				pattern="[0-9]+",
+				prefix=_("forum.minetest.net/viewtopic.php?t="),
+				placeholder=_("Tip: paste in a forum topic URL")) }}
 		</fieldset>
 
-		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
+		<div class="pkg_meta mt-5">{{ render_submit_field(form.submit) }}</div>
 	</form>
 {% endblock %}
