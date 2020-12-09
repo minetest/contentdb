@@ -25,7 +25,7 @@
 				</p>
 			{% endif %}
 
-			<a class="btn btn-secondary mr-3" href="{{ url_for('users.profile_edit', username=user.username) }}">Cancel</a>
+			<a class="btn btn-secondary mr-3" href="{{ url_for('users.account', username=user.username) }}">Cancel</a>
 			<input type="submit" value="{% if can_delete %}Delete{% else %}Deactivate{% endif %}" class="btn btn-danger" />
 		</div>
 	</form>
