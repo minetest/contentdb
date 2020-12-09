@@ -6,17 +6,23 @@
 
 {% block content %}
 
-{% if user.can_see_edit_profile(current_user) %}
-	<a class="btn btn-primary float-right" href="{{ url_for('users.profile_edit', username=user.username) }}">
-		Edit Profile
-	</a>
-{%  endif %}
-
 <article class="row mb-5">
 	<div class="col-auto image mx-0">
-		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ user.getProfilePicURL() }}">
+		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ user.getProfilePicURL() }}" alt="Profile picture">
 	</div>
 	<div class="col">
+		{% if user.can_see_edit_profile(current_user) %}
+			<a class="btn btn-primary float-right" href="{{ url_for('users.profile_edit', username=user.username) }}">
+				{{ _("Edit Profile") }}
+			</a>
+		{%  endif %}
+
+		{% if current_user.rank.atLeast(current_user.rank.MODERATOR) and  user.email %}
+			<a class="btn btn-secondary float-right mr-3" href="{{ url_for('admin.send_single_email', username=user.username) }}">
+				{{  _("Send Email") }}
+			</a>
+		{% endif %}
+
 		<h1 class="ml-3 my-0">
 			{{ user.display_name }}
 		</h1>
