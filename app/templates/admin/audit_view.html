@@ -10,9 +10,16 @@
 	{% endif %}
 
 	<h1>{{ entry.title }}</h1>
-	<p class="text-muted mb-4">
-		{{ _("Caused by %(author)s.", author=entry.causer.display_name) }}
-	</p>
+
+	{% if entry.causer %}
+		<p class="text-muted mb-4">
+			{{ _("Caused by %(author)s.", author=entry.causer.display_name) }}
+		</p>
+	{%  else %}
+		<p class="text-muted mb-4">
+			{{ _("Caused by a deleted user.", author=entry.causer.display_name) }}
+		</p>
+	{%  endif %}
 
 	<pre><code>{{ entry.description }}</code></pre>
 

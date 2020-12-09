@@ -137,7 +137,6 @@ def view(package):
 				.all()
 
 	releases = getReleases(package)
-	requests = [r for r in package.requests if r.status == 0]
 
 	review_thread = package.review_thread
 	if review_thread is not None and not review_thread.checkPerm(current_user, Permission.SEE_THREAD):
@@ -171,7 +170,7 @@ def view(package):
 	has_review = current_user.is_authenticated and PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
 	return render_template("packages/view.html",
-			package=package, releases=releases, requests=requests,
+			package=package, releases=releases,
 			alternatives=alternatives, similar_topics=similar_topics,
 			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
 			threads=threads.all(), has_review=has_review)
