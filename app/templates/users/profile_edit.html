@@ -44,14 +44,14 @@
 
 <h3>{{ _("Profile Information") }}</h3>
 
-{% from "macros/forms.html" import render_field, render_submit_field %}
+{% from "macros/forms.html" import render_field, render_field_prefix, render_submit_field %}
 <form action="" method="POST" class="form" role="form">
 	{{ form.hidden_tag() }}
 
 	{% if user.checkPerm(current_user, "CHANGE_USERNAMES") %}
 		{{ render_field(form.display_name, tabindex=230) }}
 		{{ render_field(form.forums_username, tabindex=230) }}
-		{{ render_field(form.github_username, tabindex=230) }}
+		{{ render_field_prefix(form.github_username, tabindex=230) }}
 	{% endif %}
 
 	{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}

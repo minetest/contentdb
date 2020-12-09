@@ -22,6 +22,10 @@ $(function() {
 		}
 	});
 
+	$("#forums-button").click(function(e) {
+		window.open("https://forum.minetest.net/viewtopic.php?t=" + $("#forums").val(), "_blank");
+	});
+
 	let hint = null;
 	function showHint(ele, text) {
 		if (hint) {
