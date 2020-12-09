@@ -268,6 +268,5 @@ title: Ranks and Permissions
 </table>
 
 
-1. User must be the author of the EditRequest.
 2. Target user cannot be an admin.
 3. Cannot set user to a higher rank than themselves.
