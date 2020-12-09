@@ -166,9 +166,6 @@
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
 						<a class="btn btn-primary btn-sm ml-1" href="{{ package.getEditURL() }}"><i class="fas fa-edit"></i></a>
 					{% endif %}
-					{# {% if current_user.is_authenticated %}
-						<a class="btn btn-primary btn-sm ml-1" href="{{ package.getCreateEditRequestURL() }}">Suggest Changes</a>
-					{% endif %} #}
 					{% if package.checkPerm(current_user, "DELETE_PACKAGE") or package.checkPerm(current_user, "UNAPPROVE_PACKAGE") %}
 						<a class="btn btn-danger btn-sm ml-1" href="{{ package.getRemoveURL() }}"><i class="fas fa-trash"></i></a>
 					{% endif %}
@@ -432,24 +429,6 @@
 			{{ render_review_preview(package) }}
 		{% endif %}
 		{{ render_reviews(package.reviews, current_user) }}
-
-		{#
-			{% if current_user.is_authenticated or requests %}
-				<h3>Edit Requests</h3>
-
-				<ul>
-					{% for r in requests %}
-						<li>
-							<a href="{{ r.getURL() }}">{{ r.title }}</a>
-							by
-							<a href="{{ url_for('users.profile', username=r.author.username) }}">{{ r.author.display_name }}</a>
-						</li>
-					{% else %}
-						<li>No edit requests have been made.</li>
-					{% endfor %}
-				</ul>
-			{% endif %}
-		#}
 
 		{% if alternatives %}
 			<h3>Related</h3>

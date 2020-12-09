@@ -36,7 +36,7 @@ migrate = Migrate(app, db)
 make_searchable(db.metadata)
 
 
-class ArticleQuery(BaseQuery, SearchQueryMixin):
+class PackageQuery(BaseQuery, SearchQueryMixin):
 	pass
 
 
@@ -90,7 +90,6 @@ class Permission(enum.Enum):
 	CHANGE_USERNAMES   = "CHANGE_USERNAMES"
 	CHANGE_RANK        = "CHANGE_RANK"
 	CHANGE_EMAIL       = "CHANGE_EMAIL"
-	EDIT_EDITREQUEST   = "EDIT_EDITREQUEST"
 	SEE_THREAD         = "SEE_THREAD"
 	CREATE_THREAD      = "CREATE_THREAD"
 	COMMENT_THREAD     = "COMMENT_THREAD"
@@ -171,11 +170,11 @@ class User(db.Model, UserMixin):
 
 	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user")
 
-	packages      = db.relationship("Package", backref=db.backref("author", lazy="joined"), lazy="dynamic")
-	requests      = db.relationship("EditRequest", backref="author", lazy="dynamic")
-	threads       = db.relationship("Thread", backref="author", lazy="dynamic")
-	tokens        = db.relationship("APIToken", backref="owner", lazy="dynamic")
-	replies       = db.relationship("ThreadReply", backref="author", lazy="dynamic")
+	packages      = db.relationship("Package", back_populates="author", lazy="dynamic")
+	reviews       = db.relationship("PackageReview", back_populates="author", order_by=db.desc("review_created_at"))
+	tokens        = db.relationship("APIToken", back_populates="owner", lazy="dynamic")
+	threads       = db.relationship("Thread", back_populates="author", lazy="dynamic")
+	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic")
 
 	def __init__(self, username=None, active=False, email=None, password=None):
 		self.username = username
@@ -586,11 +585,18 @@ maintainers = db.Table("maintainers",
 
 class Dependency(db.Model):
 	id              = db.Column(db.Integer, primary_key=True)
+
 	depender_id     = db.Column(db.Integer, db.ForeignKey("package.id"),     nullable=True)
+	depender        = db.relationship("Package", foreign_keys=[depender_id])
+
 	package_id      = db.Column(db.Integer, db.ForeignKey("package.id"),     nullable=True)
 	package         = db.relationship("Package", foreign_keys=[package_id])
+
 	meta_package_id = db.Column(db.Integer, db.ForeignKey("meta_package.id"), nullable=True)
+	meta_package = db.relationship("MetaPackage", foreign_keys=[meta_package_id])
+
 	optional        = db.Column(db.Boolean, nullable=False, default=False)
+
 	__table_args__  = (db.UniqueConstraint("depender_id", "package_id", "meta_package_id", name="_dependency_uc"), )
 
 	def __init__(self, depender=None, package=None, meta=None, optional=False):
@@ -661,12 +667,14 @@ class Dependency(db.Model):
 
 
 class Package(db.Model):
-	query_class  = ArticleQuery
+	query_class  = PackageQuery
 
 	id           = db.Column(db.Integer, primary_key=True)
 
 	# Basic details
 	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"))
+	author       = db.relationship("User", back_populates="packages", foreign_keys=[author_id])
+
 	name         = db.Column(db.Unicode(100), nullable=False)
 	title        = db.Column(db.Unicode(100), nullable=False)
 	short_desc   = db.Column(db.Unicode(200), nullable=False)
@@ -706,26 +714,26 @@ class Package(db.Model):
 
 	provides = db.relationship("MetaPackage",
 			secondary=provides, lazy="select", order_by=db.asc("name"),
-			backref=db.backref("packages", lazy="dynamic", order_by=db.desc("score")))
+			back_populates="packages")
 
-	dependencies = db.relationship("Dependency", backref="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
+	dependencies = db.relationship("Dependency", back_populates="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
 	tags = db.relationship("Tag", secondary=Tags, lazy="select",
-			backref=db.backref("packages", lazy=True))
+			back_populates="packages")
 
 	content_warnings = db.relationship("ContentWarning", secondary=ContentWarnings, lazy="select",
-			backref=db.backref("packages", lazy=True))
+			back_populates="packages")
 
-	releases = db.relationship("PackageRelease", backref="package",
+	releases = db.relationship("PackageRelease", back_populates="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
 
-	screenshots = db.relationship("PackageScreenshot", backref="package",
+	screenshots = db.relationship("PackageScreenshot", back_populates="package",
 			lazy="dynamic", order_by=db.asc("package_screenshot_order"))
 
-	requests = db.relationship("EditRequest", backref="package",
-			lazy="dynamic")
-
 	maintainers = db.relationship("User", secondary=maintainers, lazy="subquery")
+
+	threads = db.relationship("Thread", back_populates="package", order_by=db.desc("thread_created_at"), foreign_keys="Thread.package_id")
+	reviews = db.relationship("PackageReview", back_populates="package", order_by=db.desc("review_created_at"))
 
 	def __init__(self, package=None):
 		if package is None:
@@ -899,10 +907,6 @@ class Package(db.Model):
 		return url_for("packages.create_release",
 				author=self.author.username, name=self.name)
 
-	def getCreateEditRequestURL(self):
-		return url_for("create_edit_editrequest_page",
-				author=self.author.username, name=self.name)
-
 	def getBulkReleaseURL(self):
 		return url_for("packages.bulk_change_release",
 			author=self.author.username, name=self.name)
@@ -1061,7 +1065,8 @@ class Package(db.Model):
 class MetaPackage(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 	name         = db.Column(db.String(100), unique=True, nullable=False)
-	dependencies = db.relationship("Dependency", backref="meta_package", lazy="dynamic")
+	dependencies = db.relationship("Dependency", back_populates="meta_package", lazy="dynamic")
+	packages     = db.relationship("Package", back_populates="provides", secondary=provides)
 
 	mp_name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
 
@@ -1115,6 +1120,8 @@ class ContentWarning(db.Model):
 	title           = db.Column(db.String(100), nullable=False)
 	description     = db.Column(db.String(500), nullable=False)
 
+	packages        = db.relationship("Package", back_populates="content_warnings", secondary=ContentWarnings)
+
 	def __init__(self, title, description=""):
 		self.title       = title
 		self.description = description
@@ -1132,6 +1139,8 @@ class Tag(db.Model):
 	backgroundColor = db.Column(db.String(6), nullable=False)
 	textColor       = db.Column(db.String(6), nullable=False)
 	views           = db.Column(db.Integer, nullable=False, default=0)
+
+	packages        = db.relationship("Package", back_populates="tags", secondary=Tags)
 
 	def __init__(self, title, backgroundColor="000000", textColor="ffffff"):
 		self.title           = title
@@ -1179,6 +1188,8 @@ class PackageRelease(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 
 	package_id   = db.Column(db.Integer, db.ForeignKey("package.id"))
+	package      = db.relationship("Package", back_populates="releases", foreign_keys=[package_id])
+
 	title        = db.Column(db.String(100), nullable=False)
 	releaseDate  = db.Column(db.DateTime,    nullable=False)
 	url          = db.Column(db.String(200), nullable=False)
@@ -1271,7 +1282,10 @@ class PackageRelease(db.Model):
 
 class PackageScreenshot(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
+
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
+	package    = db.relationship("Package", back_populates="screenshots", foreign_keys=[package_id])
+
 	order      = db.Column(db.Integer, nullable=False, default=0)
 	title      = db.Column(db.String(100), nullable=False)
 	url        = db.Column(db.String(100), nullable=False)
@@ -1299,7 +1313,7 @@ class APIToken(db.Model):
 
 	name         = db.Column(db.String(100), nullable=False)
 	owner_id     = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	# owner is created using backref
+	owner        = db.relationship("User", back_populates="tokens", foreign_keys=[owner_id])
 
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
@@ -1311,94 +1325,6 @@ class APIToken(db.Model):
 			return False
 
 		return package.author == self.owner
-
-
-class EditRequest(db.Model):
-	id           = db.Column(db.Integer, primary_key=True)
-
-	package_id   = db.Column(db.Integer, db.ForeignKey("package.id"))
-	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"))
-
-	title        = db.Column(db.String(100), nullable=False)
-	desc         = db.Column(db.String(1000), nullable=True)
-
-	# 0 - open
-	# 1 - merged
-	# 2 - rejected
-	status       = db.Column(db.Integer, nullable=False, default=0)
-
-	changes = db.relationship("EditRequestChange", backref="request",
-			lazy="dynamic")
-
-	def getURL(self):
-		return url_for("view_editrequest_page",
-				author=self.package.author.username,
-				name=self.package.name,
-				id=self.id)
-
-	def getApproveURL(self):
-		return url_for("approve_editrequest_page",
-				author=self.package.author.username,
-				name=self.package.name,
-				id=self.id)
-
-	def getRejectURL(self):
-		return url_for("reject_editrequest_page",
-				author=self.package.author.username,
-				name=self.package.name,
-				id=self.id)
-
-	def getEditURL(self):
-		return url_for("create_edit_editrequest_page",
-				author=self.package.author.username,
-				name=self.package.name,
-				id=self.id)
-
-	def applyAll(self, package):
-		for change in self.changes:
-			change.apply(package)
-
-
-	def checkPerm(self, user, perm):
-		if not user.is_authenticated:
-			return False
-
-		if type(perm) == str:
-			perm = Permission[perm]
-		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to EditRequest.checkPerm()")
-
-		isOwner = user == self.author
-
-		# Members can edit their own packages, and editors can edit any packages
-		if perm == Permission.EDIT_EDITREQUEST:
-			return isOwner or user.rank.atLeast(UserRank.EDITOR)
-
-		else:
-			raise Exception("Permission {} is not related to packages".format(perm.name))
-
-
-
-
-class EditRequestChange(db.Model):
-	id           = db.Column(db.Integer, primary_key=True)
-
-	request_id   = db.Column(db.Integer, db.ForeignKey("edit_request.id"))
-	key          = db.Column(db.Enum(PackagePropertyKey), nullable=False)
-
-	# TODO: make diff instead
-	oldValue     = db.Column(db.Text, nullable=True)
-	newValue     = db.Column(db.Text, nullable=True)
-
-	def apply(self, package):
-		if self.key == PackagePropertyKey.tags:
-			package.tags.clear()
-			for tagTitle in self.newValue.split(","):
-				tag = Tag.query.filter_by(title=tagTitle.strip()).first()
-				package.tags.append(tag)
-
-		else:
-			setattr(package, self.key.name, self.newValue)
 
 
 watchers = db.Table("watchers",
@@ -1416,6 +1342,8 @@ class Thread(db.Model):
 	review     = db.relationship("PackageReview", foreign_keys=[review_id])
 
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	author     = db.relationship("User", back_populates="threads", foreign_keys=[author_id])
+
 	title      = db.Column(db.String(100), nullable=False)
 	private    = db.Column(db.Boolean, server_default="0", nullable=False)
 
@@ -1423,11 +1351,10 @@ class Thread(db.Model):
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
-	replies    = db.relationship("ThreadReply", backref="thread", lazy="dynamic",
+	replies    = db.relationship("ThreadReply", back_populates="thread", lazy="dynamic",
 			order_by=db.asc("thread_reply_id"))
 
-	watchers   = db.relationship("User", secondary=watchers, lazy="subquery",
-			backref=db.backref("watching", lazy=True))
+	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", backref="watching")
 
 	def getViewURL(self):
 		return url_for("threads.view", id=self.id)
@@ -1467,9 +1394,15 @@ class Thread(db.Model):
 
 class ThreadReply(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
+
 	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
+	thread = db.relationship("Thread", back_populates="replies", foreign_keys=[thread_id])
+
 	comment    = db.Column(db.String(2000), nullable=False)
+
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	author     = db.relationship("User", back_populates="replies", foreign_keys=[author_id])
+
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	def checkPerm(self, user, perm):
@@ -1495,12 +1428,12 @@ class PackageReview(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
-	package    = db.relationship("Package", foreign_keys=[package_id], backref=db.backref("reviews", lazy=True))
+	package    = db.relationship("Package", foreign_keys=[package_id], back_populates="reviews")
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	author     = db.relationship("User", foreign_keys=[author_id], backref=db.backref("reviews", lazy=True))
+	author     = db.relationship("User", foreign_keys=[author_id], back_populates="reviews")
 
 	recommends = db.Column(db.Boolean, nullable=False)
 
