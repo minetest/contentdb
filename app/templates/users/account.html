@@ -59,6 +59,11 @@
 	</tr>
 </table>
 
+<h3>{{ _("Recent Account Actions") }}</h3>
+
+{% from "macros/audit_log.html" import render_audit_log %}
+{{ render_audit_log(user.audit_log_entries.limit(10).all(), show_view=True) }}
+
 <h3>{{ _("Account Deletion and Deactivation") }}</h3>
 
 {% if current_user.rank.atLeast(current_user.rank.ADMIN) %}
