@@ -18,6 +18,11 @@ def get_setting_tabs(user):
 			"url": url_for("users.profile_edit", username=user.username)
 		},
 		{
+			"id": "account",
+			"title": "Account and Security",
+			"url": url_for("users.account", username=user.username)
+		},
+		{
 			"id": "notifications",
 			"title": "Email and Notifications",
 			"url": url_for("users.email_notifications", username=user.username)
@@ -186,6 +191,20 @@ def email_notifications(username=None):
 	return render_template("users/settings_email.html",
 			form=form, user=user, types=types, is_new=is_new,
 			tabs=get_setting_tabs(user), current_tab="notifications")
+
+
+@bp.route("/users/<username>/settings/account/")
+@login_required
+def account(username):
+	user : User = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	if not user.can_see_edit_profile(current_user):
+		flash("Permission denied", "danger")
+		return redirect(url_for("users.profile", username=username))
+
+	return render_template("users/account.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="account")
 
 
 @bp.route("/users/<username>/delete/", methods=["GET", "POST"])
