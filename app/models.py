@@ -94,6 +94,7 @@ class Permission(enum.Enum):
 	CREATE_THREAD      = "CREATE_THREAD"
 	COMMENT_THREAD     = "COMMENT_THREAD"
 	LOCK_THREAD        = "LOCK_THREAD"
+	DELETE_THREAD      = "DELETE_THREAD"
 	DELETE_REPLY       = "DELETE_REPLY"
 	EDIT_REPLY         = "EDIT_REPLY"
 	UNAPPROVE_PACKAGE  = "UNAPPROVE_PACKAGE"
@@ -1352,7 +1353,7 @@ class Thread(db.Model):
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	replies    = db.relationship("ThreadReply", back_populates="thread", lazy="dynamic",
-			order_by=db.asc("thread_reply_id"))
+			order_by=db.asc("thread_reply_id"), cascade="all, delete, delete-orphan")
 
 	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", backref="watching")
 
@@ -1386,7 +1387,7 @@ class Thread(db.Model):
 		elif perm == Permission.COMMENT_THREAD:
 			return canSee and (not self.locked or user.rank.atLeast(UserRank.MODERATOR))
 
-		elif perm == Permission.LOCK_THREAD:
+		elif perm == Permission.LOCK_THREAD or perm == Permission.DELETE_THREAD:
 			return user.rank.atLeast(UserRank.MODERATOR)
 
 		else:

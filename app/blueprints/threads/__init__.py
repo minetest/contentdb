@@ -22,11 +22,11 @@ bp = Blueprint("threads", __name__)
 from flask_login import current_user, login_required
 from app.models import *
 from app.utils import addNotification, isYes, addAuditLog
-
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from app.utils import get_int_or_abort
+
 
 @bp.route("/threads/")
 def list_all():
@@ -106,6 +106,29 @@ def set_lock(id):
 
 
 @bp.route("/threads/<int:id>/delete/", methods=["GET", "POST"])
+@login_required
+def delete_thread(id):
+	thread = Thread.query.get(id)
+	if thread is None or not thread.checkPerm(current_user, Permission.DELETE_THREAD):
+		abort(404)
+
+	if request.method == "GET":
+		return render_template("threads/delete_thread.html", thread=thread)
+
+	summary = "\n\n".join([("<{}> {}".format(reply.author.display_name, reply.comment)) for reply in thread.replies])
+
+	msg = "Deleted thread {} by {}".format(thread.title, thread.author.display_name)
+
+	db.session.delete(thread)
+
+	addAuditLog(AuditSeverity.MODERATION, current_user, msg, None, thread.package, summary)
+
+	db.session.commit()
+
+	return redirect(url_for("homepage.home"))
+
+
+@bp.route("/threads/<int:id>/delete-reply/", methods=["GET", "POST"])
 @login_required
 def delete_reply(id):
 	thread = Thread.query.get(id)
