@@ -11,6 +11,6 @@ Audit Log
 	{% from "macros/audit_log.html" import render_audit_log %}
 
 	{{ render_pagination(pagination, url_set_query) }}
-	{{ render_audit_log(log) }}
+	{{ render_audit_log(log, current_user) }}
 	{{ render_pagination(pagination, url_set_query) }}
 {% endblock %}

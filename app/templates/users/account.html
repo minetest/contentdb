@@ -66,7 +66,7 @@
 <h3>{{ _("Recent Account Actions") }}</h3>
 
 {% from "macros/audit_log.html" import render_audit_log %}
-{{ render_audit_log(user.audit_log_entries.limit(10).all()) }}
+{{ render_audit_log(user.audit_log_entries.limit(10).all(), current_user) }}
 
 <h3>{{ _("Account Deletion and Deactivation") }}</h3>
 
