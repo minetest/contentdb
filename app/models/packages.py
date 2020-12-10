@@ -297,17 +297,13 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=True)
 
-	provides = db.relationship("MetaPackage",
-			secondary=provides, lazy="select", order_by=db.asc("name"),
-			back_populates="packages")
+	provides = db.relationship("MetaPackage", secondary=provides, order_by=db.asc("name"), back_populates="packages")
 
 	dependencies = db.relationship("Dependency", back_populates="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
-	tags = db.relationship("Tag", secondary=Tags, lazy="select",
-			back_populates="packages")
+	tags = db.relationship("Tag", secondary=Tags, back_populates="packages")
 
-	content_warnings = db.relationship("ContentWarning", secondary=ContentWarnings, lazy="select",
-			back_populates="packages")
+	content_warnings = db.relationship("ContentWarning", secondary=ContentWarnings, back_populates="packages")
 
 	releases = db.relationship("PackageRelease", back_populates="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"), cascade="all, delete, delete-orphan")
@@ -315,7 +311,7 @@ class Package(db.Model):
 	screenshots = db.relationship("PackageScreenshot", back_populates="package",
 			lazy="dynamic", order_by=db.asc("package_screenshot_order"), cascade="all, delete, delete-orphan")
 
-	maintainers = db.relationship("User", secondary=maintainers, lazy="subquery")
+	maintainers = db.relationship("User", secondary=maintainers)
 
 	threads = db.relationship("Thread", back_populates="package", order_by=db.desc("thread_created_at"),
 			foreign_keys="Thread.package_id", cascade="all, delete, delete-orphan")
@@ -324,13 +320,13 @@ class Package(db.Model):
 			cascade="all, delete, delete-orphan")
 
 	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.package_id", back_populates="package",
-			order_by=db.desc("audit_log_entry_created_at"), lazy="dynamic")
+			order_by=db.desc("audit_log_entry_created_at"))
 
 	notifications = db.relationship("Notification", foreign_keys="Notification.package_id",
 			back_populates="package", cascade="all, delete, delete-orphan")
 
 	tokens = db.relationship("APIToken", foreign_keys="APIToken.package_id", back_populates="package",
-			lazy="dynamic", cascade="all, delete, delete-orphan")
+			cascade="all, delete, delete-orphan")
 
 	def __init__(self, package=None):
 		if package is None:
@@ -398,9 +394,9 @@ class Package(db.Model):
 			"type": self.type.toName(),
 		}
 
-	def getAsDictionaryShort(self, base_url, version=None):
+	def getAsDictionaryShort(self, base_url, version=None, release=None):
 		tnurl = self.getThumbnailURL(1)
-		release = self.getDownloadRelease(version=version)
+		release = release if release else self.getDownloadRelease(version=version)
 		return {
 			"name": self.name,
 			"title": self.title,

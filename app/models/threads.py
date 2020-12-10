@@ -53,7 +53,7 @@ class Thread(db.Model):
 	replies    = db.relationship("ThreadReply", back_populates="thread", lazy="dynamic",
 			order_by=db.asc("thread_reply_id"), cascade="all, delete, delete-orphan")
 
-	watchers   = db.relationship("User", secondary=watchers, lazy="subquery", backref="watching")
+	watchers   = db.relationship("User", secondary=watchers, backref="watching")
 
 	def getViewURL(self):
 		return url_for("threads.view", id=self.id)
