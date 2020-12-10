@@ -167,7 +167,7 @@ class User(db.Model, UserMixin):
 
 	# Content
 	notifications = db.relationship("Notification", foreign_keys="Notification.user_id",
-			order_by=desc(text("Notification.created_at")), back_populates="user",  cascade="all, delete, delete-orphan")
+			order_by=desc(text("Notification.created_at")), back_populates="user", cascade="all, delete, delete-orphan")
 	caused_notifications = db.relationship("Notification", foreign_keys="Notification.causer_id",
 			back_populates="causer", cascade="all, delete, delete-orphan", lazy="dynamic")
 	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user",
@@ -734,15 +734,24 @@ class Package(db.Model):
 			back_populates="packages")
 
 	releases = db.relationship("PackageRelease", back_populates="package",
-			lazy="dynamic", order_by=db.desc("package_release_releaseDate"))
+			lazy="dynamic", order_by=db.desc("package_release_releaseDate"), cascade="all, delete, delete-orphan")
 
 	screenshots = db.relationship("PackageScreenshot", back_populates="package",
-			lazy="dynamic", order_by=db.asc("package_screenshot_order"))
+			lazy="dynamic", order_by=db.asc("package_screenshot_order"), cascade="all, delete, delete-orphan")
 
 	maintainers = db.relationship("User", secondary=maintainers, lazy="subquery")
 
-	threads = db.relationship("Thread", back_populates="package", order_by=db.desc("thread_created_at"), foreign_keys="Thread.package_id")
-	reviews = db.relationship("PackageReview", back_populates="package", order_by=db.desc("package_review_created_at"))
+	threads = db.relationship("Thread", back_populates="package", order_by=db.desc("thread_created_at"),
+			foreign_keys="Thread.package_id", cascade="all, delete, delete-orphan")
+
+	reviews = db.relationship("PackageReview", back_populates="package", order_by=db.desc("package_review_created_at"),
+			cascade="all, delete, delete-orphan")
+
+	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.package_id", back_populates="package",
+			order_by=db.desc("audit_log_entry_created_at"), lazy="dynamic")
+
+	tokens = db.relationship("APIToken", foreign_keys="APIToken.package_id", back_populates="package",
+			lazy="dynamic", cascade="all, delete, delete-orphan")
 
 	def __init__(self, package=None):
 		if package is None:

@@ -59,6 +59,17 @@
 						<input type="submit" value="Restore" class="col-sm-auto btn btn-primary ml-2" />
 					</div>
 				</form>
+
+				<form method="post" action="" class="card-body">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="hidden" name="action" value="delremovedpackages" />
+
+					<p>
+						{{ _("Deletion is permanent.") }}
+					</p>
+
+					<input type="submit" value="Delete Removed Packages" class="btn btn-danger" />
+				</form>
 			</div>
 		</div>
 	</div>

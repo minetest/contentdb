@@ -163,6 +163,18 @@ def admin_page():
 
 			flash("Deleted " + str(count) + " unused meta packages", "success")
 			return redirect(url_for("admin.admin_page"))
+
+		elif action == "delremovedpackages":
+			query = Package.query.filter_by(state=PackageState.DELETED)
+			count = query.count()
+			for pkg in query.all():
+				pkg.review_thread = None
+				db.session.delete(pkg)
+			db.session.commit()
+
+			flash("Deleted {} soft deleted packages packages".format(count), "success")
+			return redirect(url_for("admin.admin_page"))
+
 		else:
 			flash("Unknown action: " + action, "danger")
 
