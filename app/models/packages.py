@@ -660,7 +660,7 @@ class MetaPackage(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 	name         = db.Column(db.String(100), unique=True, nullable=False)
 	dependencies = db.relationship("Dependency", back_populates="meta_package", lazy="dynamic")
-	packages     = db.relationship("Package", back_populates="provides", secondary=provides)
+	packages     = db.relationship("Package", lazy="dynamic", back_populates="provides", secondary=provides)
 
 	mp_name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
 
