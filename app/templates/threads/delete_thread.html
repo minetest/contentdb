@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Delete thread in {{ thread.title }}
+	{{ _('Delete "%(title)s" by %(author)s', title=thread.title, author=thread.author.display_name) }}
 {% endblock %}
 
 {% block content %}
 	<form method="POST" action="" class="card box_grey">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-		<h3 class="card-header">Delete {{ thread.title }} by {{ thread.author.display_name }}</h3>
+		<h3 class="card-header">{{ self.title() }}</h3>
 		<div class="card-body">
 			{{ thread.replies[0].comment | markdown }}
 		</div>

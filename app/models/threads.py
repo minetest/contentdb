@@ -22,10 +22,12 @@ from . import db
 from .users import Permission, UserRank
 from .packages import Package
 
+
 watchers = db.Table("watchers",
 	db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
 	db.Column("thread_id", db.Integer, db.ForeignKey("thread.id"), primary_key=True)
 )
+
 
 class Thread(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
@@ -89,6 +91,7 @@ class Thread(db.Model):
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))
 
+
 class ThreadReply(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
@@ -134,7 +137,7 @@ class PackageReview(db.Model):
 
 	recommends = db.Column(db.Boolean, nullable=False)
 
-	thread     = db.relationship("Thread", uselist=False, back_populates="review", cascade="all, delete")
+	thread     = db.relationship("Thread", uselist=False, back_populates="review")
 
 	def asSign(self):
 		return 1 if self.recommends else -1

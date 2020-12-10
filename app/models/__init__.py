@@ -35,16 +35,17 @@ from .threads import *
 
 class APIToken(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
-	access_token = db.Column(db.String(34), unique=True)
+	access_token = db.Column(db.String(34), unique=True, nullable=False)
 
 	name         = db.Column(db.String(100), nullable=False)
+
 	owner_id     = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	owner        = db.relationship("User", back_populates="tokens", foreign_keys=[owner_id])
+	owner        = db.relationship("User", foreign_keys=[owner_id], back_populates="tokens")
 
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
-	package    = db.relationship("Package", foreign_keys=[package_id])
+	package    = db.relationship("Package", foreign_keys=[package_id], back_populates="tokens")
 
 	def canOperateOnPackage(self, package):
 		if self.package and self.package != package:
@@ -80,7 +81,7 @@ class AuditLogEntry(db.Model):
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	causer_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=True)
-	causer     = db.relationship("User", back_populates="", foreign_keys=[causer_id])
+	causer     = db.relationship("User", foreign_keys=[causer_id], back_populates="audit_log_entries")
 
 	severity   = db.Column(db.Enum(AuditSeverity), nullable=False)
 
@@ -88,7 +89,7 @@ class AuditLogEntry(db.Model):
 	url        = db.Column(db.String(200), nullable=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
-	package    = db.relationship("Package", foreign_keys=[package_id])
+	package    = db.relationship("Package", foreign_keys=[package_id], back_populates="audit_log_entries")
 
 	description = db.Column(db.Text, nullable=True, default=None)
 
@@ -104,15 +105,15 @@ class AuditLogEntry(db.Model):
 		self.description = description
 
 
-
-
 REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com",
 	"minetest.net", "dropboxusercontent.com", "4shared.com",
 	"digitalaudioconcepts.com", "hg.intevation.org", "www.wtfpl.net",
 	"imageshack.com", "imgur.com"]
 
+
 class ForumTopic(db.Model):
 	topic_id  = db.Column(db.Integer, primary_key=True, autoincrement=False)
+
 	author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author    = db.relationship("User")
 

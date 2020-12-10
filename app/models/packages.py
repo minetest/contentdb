@@ -143,25 +143,30 @@ class PackagePropertyKey(enum.Enum):
 		else:
 			return str(value)
 
+
 provides = db.Table("provides",
 	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
 	db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
 )
+
 
 Tags = db.Table("tags",
 	db.Column("tag_id", db.Integer, db.ForeignKey("tag.id"), primary_key=True),
 	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
+
 ContentWarnings = db.Table("content_warnings",
 	db.Column("content_warning_id", db.Integer, db.ForeignKey("content_warning.id"), primary_key=True),
 	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
 
+
 maintainers = db.Table("maintainers",
 	db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
 	db.Column("package_id", db.Integer, db.ForeignKey("package.id"), primary_key=True)
 )
+
 
 class Dependency(db.Model):
 	id              = db.Column(db.Integer, primary_key=True)
@@ -252,14 +257,14 @@ class Package(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 
 	# Basic details
-	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"))
+	author_id    = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author       = db.relationship("User", back_populates="packages", foreign_keys=[author_id])
 
 	name         = db.Column(db.Unicode(100), nullable=False)
 	title        = db.Column(db.Unicode(100), nullable=False)
 	short_desc   = db.Column(db.Unicode(200), nullable=False)
 	desc         = db.Column(db.UnicodeText, nullable=True)
-	type         = db.Column(db.Enum(PackageType))
+	type         = db.Column(db.Enum(PackageType), nullable=False)
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 	approved_at  = db.Column(db.DateTime, nullable=True, default=None)
 
@@ -273,7 +278,7 @@ class Package(db.Model):
 	media_license_id = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	media_license    = db.relationship("License", foreign_keys=[media_license_id])
 
-	state         = db.Column(db.Enum(PackageState), default=PackageState.WIP)
+	state         = db.Column(db.Enum(PackageState), nullable=False, default=PackageState.WIP)
 
 	@property
 	def approved(self):
@@ -284,7 +289,7 @@ class Package(db.Model):
 	downloads     = db.Column(db.Integer, nullable=False, default=0)
 
 	review_thread_id = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=True, default=None)
-	review_thread    = db.relationship("Thread", foreign_keys=[review_thread_id], back_populates="is_review_thread")
+	review_thread    = db.relationship("Thread", uselist=False, foreign_keys=[review_thread_id], back_populates="is_review_thread")
 
 	# Downloads
 	repo         = db.Column(db.String(200), nullable=True)
@@ -320,6 +325,9 @@ class Package(db.Model):
 
 	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.package_id", back_populates="package",
 			order_by=db.desc("audit_log_entry_created_at"), lazy="dynamic")
+
+	notifications = db.relationship("Notification", foreign_keys="Notification.package_id",
+			back_populates="package", cascade="all, delete, delete-orphan")
 
 	tokens = db.relationship("APIToken", foreign_keys="APIToken.package_id", back_populates="package",
 			lazy="dynamic", cascade="all, delete, delete-orphan")
@@ -625,7 +633,6 @@ class Package(db.Model):
 
 		return True
 
-
 	def getNextStates(self, user):
 		states = []
 
@@ -634,7 +641,6 @@ class Package(db.Model):
 				states.append(state)
 
 		return states
-
 
 	def getScoreDict(self):
 		return {
@@ -872,7 +878,7 @@ class PackageRelease(db.Model):
 class PackageScreenshot(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
-	package_id = db.Column(db.Integer, db.ForeignKey("package.id"))
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=False)
 	package    = db.relationship("Package", back_populates="screenshots", foreign_keys=[package_id])
 
 	order      = db.Column(db.Integer, nullable=False, default=0)
