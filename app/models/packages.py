@@ -308,8 +308,11 @@ class Package(db.Model):
 	releases = db.relationship("PackageRelease", back_populates="package",
 			lazy="dynamic", order_by=db.desc("package_release_releaseDate"), cascade="all, delete, delete-orphan")
 
-	screenshots = db.relationship("PackageScreenshot", back_populates="package",
+	screenshots = db.relationship("PackageScreenshot", back_populates="package", foreign_keys="PackageScreenshot.package_id",
 			lazy="dynamic", order_by=db.asc("package_screenshot_order"), cascade="all, delete, delete-orphan")
+
+	cover_image_id = db.Column(db.Integer, db.ForeignKey("package_screenshot.id"), nullable=True, default=None)
+	cover_image = db.relationship("PackageScreenshot", uselist=False, foreign_keys=[cover_image_id])
 
 	maintainers = db.relationship("User", secondary=maintainers)
 

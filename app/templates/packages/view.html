@@ -27,8 +27,9 @@
 	{% set release = package.getDownloadRelease() %}
 
 <main>
+	{% set cover_image = package.cover_image.url or package.getMainScreenshotURL() %}
 	<header class="jumbotron pb-3"
-			style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ package.getMainScreenshotURL() }}');
+			style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ cover_image }}');
 				background-size: cover;
 				background-repeat: no-repeat;
 				background-position: center;">

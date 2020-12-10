@@ -63,6 +63,17 @@
 			{{ _("Reordering requires JavaScript.") }}
 		</p>
 	</noscript>
+
+	<h2>{{ _("Cover Image") }}</h2>
+
+	{% from "macros/forms.html" import render_submit_field, render_field %}
+	<form action="" method="POST" class="form" role="form">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.cover_image, tabindex=220) }}
+
+		{{ render_submit_field(form.submit, tabindex=280) }}
+	</form>
 {% endblock %}
 
 {% block scriptextra %}

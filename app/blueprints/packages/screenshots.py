@@ -19,6 +19,7 @@ from flask import *
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from wtforms import *
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
 from app.utils import *
@@ -37,6 +38,11 @@ class EditScreenshotForm(FlaskForm):
 	submit   = SubmitField("Save")
 
 
+class EditPackageScreenshotsForm(FlaskForm):
+	cover_image      = QuerySelectField("Cover Image", [DataRequired()], allow_blank=True, get_pk=lambda a: a.id, get_label=lambda a: a.title)
+	submit	         = SubmitField("Save")
+
+
 @bp.route("/packages/<author>/<name>/screenshots/", methods=["GET", "POST"])
 @login_required
 @is_package_page
@@ -46,6 +52,9 @@ def screenshots(package):
 
 	if package.screenshots.count() == 0:
 		return redirect(package.getNewScreenshotURL())
+
+	form = EditPackageScreenshotsForm(obj=package)
+	form.cover_image.query = package.screenshots
 
 	if request.method == "POST":
 		order = request.form.get("order")
@@ -62,7 +71,11 @@ def screenshots(package):
 			db.session.commit()
 			return redirect(package.getDetailsURL())
 
-	return render_template("packages/screenshots.html", package=package)
+		if form.validate_on_submit():
+			form.populate_obj(package)
+			db.session.commit()
+
+	return render_template("packages/screenshots.html", package=package, form=form)
 
 
 @bp.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])
@@ -98,6 +111,7 @@ def create_screenshot(package):
 			return redirect(package.getEditScreenshotsURL())
 
 	return render_template("packages/screenshot_new.html", package=package, form=form)
+
 
 @bp.route("/packages/<author>/<name>/screenshots/<id>/edit/", methods=["GET", "POST"])
 @login_required
