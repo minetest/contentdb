@@ -217,6 +217,8 @@ class User(db.Model, UserMixin):
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
 	def canCommentRL(self):
+		from app.models import ThreadReply
+
 		factor = 1
 		if self.rank.atLeast(UserRank.ADMIN):
 			return True
@@ -236,6 +238,8 @@ class User(db.Model, UserMixin):
 		return True
 
 	def canOpenThreadRL(self):
+		from app.models import Thread
+
 		factor = 1
 		if self.rank.atLeast(UserRank.ADMIN):
 			return True
@@ -262,6 +266,7 @@ class User(db.Model, UserMixin):
 			self.checkPerm(current_user, Permission.CHANGE_RANK)
 
 	def can_delete(self):
+		from app.models import ForumTopic
 		return self.packages.count() == 0 and ForumTopic.query.filter_by(author=self).count() == 0
 
 
