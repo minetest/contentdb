@@ -61,7 +61,7 @@ def handle_login(form):
 			url_for("users.profile", username=user.username))
 	db.session.commit()
 
-	login_user(user)
+	login_user(user, remember=form.remember_me.data)
 	flash("Logged in successfully.", "success")
 
 	next = request.args.get("next")
