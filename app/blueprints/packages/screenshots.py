@@ -157,6 +157,10 @@ def delete_screenshot(package, id):
 		flash("Permission denied", "danger")
 		return redirect(url_for("homepage.home"))
 
+	if package.cover_image == screenshot:
+		package.cover_image = None
+		db.session.merge(package)
+
 	db.session.delete(screenshot)
 	db.session.commit()
 
