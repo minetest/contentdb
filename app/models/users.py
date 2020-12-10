@@ -114,8 +114,10 @@ class Permission(enum.Enum):
 
 		return perm.check(user)
 
+
 def display_name_default(context):
 	return context.get_current_parameters()["username"]
+
 
 class User(db.Model, UserMixin):
 	id           = db.Column(db.Integer, primary_key=True)
@@ -128,7 +130,7 @@ class User(db.Model, UserMixin):
 	def get_id(self):
 		return self.username
 
-	rank         = db.Column(db.Enum(UserRank))
+	rank         = db.Column(db.Enum(UserRank), nullable=False)
 
 	# Account linking
 	github_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
@@ -139,7 +141,7 @@ class User(db.Model, UserMixin):
 
 	# User email information
 	email         = db.Column(db.String(255), nullable=True, unique=True)
-	email_confirmed_at  = db.Column(db.DateTime())
+	email_confirmed_at  = db.Column(db.DateTime(), nullable=True)
 
 	# User information
 	profile_pic   = db.Column(db.String(255), nullable=True, server_default=None)
@@ -265,9 +267,9 @@ class User(db.Model, UserMixin):
 
 class UserEmailVerification(db.Model):
 	id      = db.Column(db.Integer, primary_key=True)
-	user_id = db.Column(db.Integer, db.ForeignKey("user.id"))
-	email   = db.Column(db.String(100))
-	token   = db.Column(db.String(32))
+	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
+	email   = db.Column(db.String(100), nullable=False)
+	token   = db.Column(db.String(32), nullable=True)
 	user    = db.relationship("User", foreign_keys=[user_id])
 	is_password_reset = db.Column(db.Boolean, nullable=False, default=False)
 
@@ -373,9 +375,9 @@ class Notification(db.Model):
 	url        = db.Column(db.String(200), nullable=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
-	package    = db.relationship("Package", foreign_keys=[package_id])
+	package    = db.relationship("Package", foreign_keys=[package_id], back_populates="notifications")
 
-	created_at = db.Column(db.DateTime, nullable=True, default=datetime.datetime.utcnow)
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	def __init__(self, user, causer, type, title, url, package=None):
 		if len(title) > 100:
