@@ -71,7 +71,6 @@ class QueryBuilder:
 		return MinetestRelease.get(self.minetest_version, self.protocol_version)
 
 	def buildPackageQuery(self):
-		query = None
 		if self.order_by == "last_release":
 			query = db.session.query(Package).select_from(PackageRelease).join(Package) \
 				.filter_by(state=PackageState.APPROVED)
