@@ -15,7 +15,7 @@ Sign in
 				{{ form.hidden_tag() }}
 
 				{# Username or Email field #}
-				{{ render_field(form.username) }}
+				{{ render_field(form.username, tabindex=110) }}
 
 				{# Password field #}
 				{% set field = form.password %}

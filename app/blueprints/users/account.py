@@ -104,32 +104,47 @@ class RegisterForm(FlaskForm):
 
 
 def handle_register(form):
-	user = User.query.filter_by(email=form.email.data).first()
-	if user:
+	user_by_name = User.query.filter(or_(
+			User.username == form.username.data,
+			User.forums_username == form.username.data,
+			User.github_username == form.username.data)).first()
+	if user_by_name:
+		if user_by_name.rank == UserRank.NOT_JOINED and user_by_name.forums_username:
+			flash("An account already exists for that username but hasn't been claimed yet.", "danger")
+			return redirect(url_for("users.claim", username=user_by_name.forums_username))
+		else:
+			flash("That username is already in use, please choose another.", "danger")
+			return
+
+
+	user_by_email = User.query.filter_by(email=form.email.data).first()
+	if user_by_email:
 		send_anon_email.delay(form.email.data, "Email already in use",
 				"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(
-						user.display_name))
+						user_by_email.display_name))
+		flash("Check your email address to verify your account", "success")
+		return redirect(url_for("homepage.home"))
 	elif EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
 		flash("That email address has been unsubscribed/blacklisted, and cannot be used", "danger")
 		return
-	else:
-		user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
-		user.notification_preferences = UserNotificationPreferences(user)
-		db.session.add(user)
 
-		addAuditLog(AuditSeverity.USER, user, "Registered",
-				url_for("users.profile", username=user.username))
+	user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
+	user.notification_preferences = UserNotificationPreferences(user)
+	db.session.add(user)
 
-		token = randomString(32)
+	addAuditLog(AuditSeverity.USER, user, "Registered with email",
+			url_for("users.profile", username=user.username))
 
-		ver = UserEmailVerification()
-		ver.user = user
-		ver.token = token
-		ver.email = form.email.data
-		db.session.add(ver)
-		db.session.commit()
+	token = randomString(32)
 
-		send_verify_email.delay(form.email.data, token)
+	ver = UserEmailVerification()
+	ver.user = user
+	ver.token = token
+	ver.email = form.email.data
+	db.session.add(ver)
+	db.session.commit()
+
+	send_verify_email.delay(form.email.data, token)
 
 	flash("Check your email address to verify your account", "success")
 	return redirect(url_for("homepage.home"))
