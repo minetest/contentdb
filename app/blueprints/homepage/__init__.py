@@ -18,10 +18,10 @@ def home():
 	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
 
-	new     = join(query.order_by(db.desc(Package.approved_at))).limit(8).all()
+	new     = join(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
-	pop_gam = join(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(4).all()
-	pop_txp = join(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(4).all()
+	pop_gam = join(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(8).all()
+	pop_txp = join(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(8).all()
 	high_reviewed = join(query.order_by(db.desc(Package.score - Package.score_downloads))) \
 			.filter(Package.reviews.any()).limit(4).all()
 
