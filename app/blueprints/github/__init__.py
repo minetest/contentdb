@@ -22,7 +22,7 @@ from flask import redirect, url_for, request, flash, abort, render_template, jso
 from flask_login import current_user, login_required, login_user
 from sqlalchemy import func, or_, and_
 from app import github, csrf
-from app.models import db, User, APIToken, Package, Permission, AuditSeverity
+from app.models import db, User, APIToken, Package, Permission, AuditSeverity, UserRank
 from app.utils import randomString, abs_url_for, addAuditLog
 from app.blueprints.api.support import error, handleCreateRelease
 import hmac, requests, json
@@ -270,7 +270,9 @@ def handleMakeWebhook(gh_user, gh_repo, package, oauth, event, token):
 		return False
 
 	else:
-		flash("Failed to create webhook, received response from Github " +
-			str(r.status_code) + ": " +
-			str(r.json().get("message")), "danger")
+		import sys
+		print(r.text, file=sys.stderr)
+
+		message = str(r.status_code) + ": " + str(r.json().get("message"))
+		flash("Failed to create webhook, Github says: " + message, "danger")
 		return False

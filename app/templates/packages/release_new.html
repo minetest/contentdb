@@ -7,7 +7,7 @@
 {% block content %}
 	<p class="alert alert-info mb-4">
 		<a class="float-right btn btn-sm btn-info" href="{{ url_for('flatpage', path='help/release_webhooks') }}">{{ _("Learn more") }}</a>
-		{% if package.author == current_user and package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
+		{% if package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
 			<a class="float-right btn btn-sm btn-info mr-2" href="{{ url_for('github.setup_webhook', pid=package.id) }}">{{ _("Setup webhook") }}</a>
 			<i class="fas fa-info mr-2"></i>
 
