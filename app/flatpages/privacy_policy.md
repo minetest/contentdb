@@ -16,6 +16,7 @@ title: Privacy Policy
 * Passwords (hashed and salted using BCrypt)
 * Profile information, such as website URLs and donation URLs
 * Comments and threads
+* Audit log actions (such as edits and logins) and their time stamps
 
 ContentDB collects usernames of content creators from the forums,
 as this is required to index forum topics.
@@ -32,28 +33,39 @@ Please avoid giving other personal information as we do not want it.
     * Provide essential system messages, such as password resets.
     * Send notifications - the user may configure this to their needs, including opting out.
 * Passwords are used to authenticate the user.
+* The audit log is used to record actions that may be harmful
 * Other information is displayed as part of ContentDB's service.
 
 ## Who has access
 
 * Only the admin has access to the HTTP requests.
   The logs may be shared with others to aid in debugging, but care will be taken to remove any personal information.
+* Encrypted backups are shared with Minetest staff members.
+  The keys and the backups themselves are given to different people,
+  requiring at least two staff members to read a backup.
 * Emails are visible to moderators and the admin.
   They have access to assist users, and they are not permitted to share email addresses.
-* Hashing protects passwords from being read whilst stored.
-  Only the admin has access to the ContentDB server.
+* Hashing protects passwords from being read whilst stored in the database or in backups.
 * Profile information is public, including URLs and linked accounts.
 * The visibility of comments depends on the visibility of threads.
   They are either public, or visible only to the package author and editors.
+* The complete audit log is visible to moderators.
+  Users may see their own audit log actions on their account settings page.
+  Owners, maintainers, and editors may be able to see the actions on a package in the future.
 * We may be required to share information with law enforcement.
+
+## Location
+
+The ContentDB production server is currently located in Canada.
+Backups are stored in the UK.
+Encrypted backups may be stored in other countries, such as the US or EU.
+
+By using this service, you give permission for the data to be moved as needed.
 
 ## Period of Retention
 
 The server uses log rotation, meaning that any logged HTTP requests will be
 forgotten within a few weeks.
-
-Users may remove their packages, which makes them invisible to all users, but
-they will remain in the database until deleted by the admin.
 
 Usernames may be kept indefinitely, but other user information will be deleted if
 requested. See below.
@@ -72,7 +84,6 @@ If we are unable to remove your account for one of the above reasons, your user
 account will instead be wiped and deactivated, ending up exactly like an author
 who has not yet joined ContentDB. All personal information will be removed from the profile,
 and any comments or threads will be deleted.
-
 
 ## Future Changes to Privacy Policy
 
