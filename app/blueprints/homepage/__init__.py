@@ -22,12 +22,14 @@ def home():
 	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
 	pop_gam = join(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(4).all()
 	pop_txp = join(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(4).all()
+	high_reviewed = join(query.order_by(db.desc(Package.score - Package.score_downloads))) \
+			.filter(Package.reviews.any()).limit(4).all()
 
 	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
 			.filter_by(state=PackageState.APPROVED) \
 			.order_by(db.desc(PackageRelease.releaseDate)) \
 			.limit(20).all()
-	updated = updated[:8]
+	updated = updated[:4]
 
 	reviews = PackageReview.query.filter_by(recommends=True).order_by(db.desc(PackageReview.created_at)).limit(5).all()
 
@@ -38,4 +40,4 @@ def home():
 		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
 
 	return render_template("index.html", count=count, downloads=downloads, tags=tags,
-			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, reviews=reviews)
+			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, high_reviewed=high_reviewed, reviews=reviews)

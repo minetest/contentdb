@@ -131,6 +131,9 @@ class QueryBuilder:
 			pass
 		elif self.order_by is None or self.order_by == "score":
 			to_order = Package.score
+		elif self.order_by == "reviews":
+			query = query.filter(Package.reviews.any())
+			to_order = (Package.score - Package.score_downloads)
 		elif self.order_by == "name":
 			to_order = Package.name
 		elif self.order_by == "title":
@@ -146,7 +149,7 @@ class QueryBuilder:
 		else:
 			abort(400)
 
-		if to_order:
+		if to_order is not None:
 			if self.order_dir == "asc":
 				to_order = db.asc(to_order)
 			elif self.order_dir == "desc":

@@ -73,6 +73,13 @@
 	<div class="clearfix mb-4"></div>
 
 
+	<a href="{{ url_for('packages.list_all', sort='reviews', order='desc') }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Top Reviewed") }}</h2>
+	{{ render_pkggrid(high_reviewed) }}
+
+
 	<a href="{{ url_for('packages.list_reviews') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
