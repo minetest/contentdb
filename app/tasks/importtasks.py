@@ -35,7 +35,7 @@ def generateGitURL(urlstr):
 
 
 @contextlib.contextmanager
-def getTempDir():
+def get_temp_dir():
 	temp = os.path.join(tempfile.gettempdir(), randomString(10))
 	yield temp
 	shutil.rmtree(temp)
@@ -46,7 +46,7 @@ def getTempDir():
 # Throws `TaskError` on failure.
 # Caller is responsible for deleting returned directory.
 @contextlib.contextmanager
-def cloneRepo(urlstr, ref=None, recursive=False):
+def clone_repo(urlstr, ref=None, recursive=False):
 	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
 
 	err = None
@@ -58,11 +58,13 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 			repo = git.Repo.clone_from(gitUrl, gitDir,
 					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
 		else:
+			assert ref != ""
+
 			repo = git.Repo.init(gitDir)
 			origin = repo.create_remote("origin", url=gitUrl)
 			assert origin.exists()
 			origin.fetch()
-			origin.pull(ref)
+			repo.git.checkout(ref)
 
 			for submodule in repo.submodules:
 				submodule.update(init=True)
@@ -85,7 +87,7 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 
 @celery.task()
 def getMeta(urlstr, author):
-	with cloneRepo(urlstr, recursive=True) as repo:
+	with clone_repo(urlstr, recursive=True) as repo:
 		try:
 			tree = build_tree(repo.working_tree_dir, author=author, repo=urlstr)
 		except MinetestCheckError as err:
@@ -178,7 +180,7 @@ def updateMetaFromRelease(self, id, path):
 	print("updateMetaFromRelease: {} for {}/{}" \
 		.format(id, release.package.author.display_name, release.package.name))
 
-	with getTempDir() as temp:
+	with get_temp_dir() as temp:
 		with ZipFile(path, 'r') as zip_ref:
 			zip_ref.extractall(temp)
 
@@ -194,7 +196,7 @@ def checkZipRelease(self, id, path):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	with getTempDir() as temp:
+	with get_temp_dir() as temp:
 		with ZipFile(path, 'r') as zip_ref:
 			zip_ref.extractall(temp)
 
@@ -213,7 +215,7 @@ def makeVCSRelease(self, id, branch):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	with cloneRepo(release.package.repo, ref=branch, recursive=True) as repo:
+	with clone_repo(release.package.repo, ref=branch, recursive=True) as repo:
 		postReleaseCheckUpdate(self, release, repo.working_tree_dir)
 
 		filename = randomString(10) + ".zip"
@@ -242,7 +244,7 @@ def importRepoScreenshot(id):
 		raise Exception("Unexpected none package")
 
 	try:
-		with cloneRepo(package.repo) as repo:
+		with clone_repo(package.repo) as repo:
 			for ext in ["png", "jpg", "jpeg"]:
 				sourcePath = repo.working_tree_dir + "/screenshot." + ext
 				if os.path.isfile(sourcePath):

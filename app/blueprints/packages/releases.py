@@ -87,7 +87,7 @@ def create_release(package):
 			db.session.add(rel)
 			db.session.commit()
 
-			makeVCSRelease.apply_async((rel.id, form["vcsLabel"].data), task_id=rel.task_id)
+			makeVCSRelease.apply_async((rel.id, nonEmptyOrNone(form.vcsLabel.data)), task_id=rel.task_id)
 
 			msg = "Release {} created".format(rel.title)
 			addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, rel.getEditURL(), package)
