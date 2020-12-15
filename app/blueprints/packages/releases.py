@@ -252,6 +252,7 @@ def delete_release(package, id):
 class PackageUpdateConfigFrom(FlaskForm):
 	trigger = SelectField("Trigger", [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
 			default=PackageUpdateTrigger.COMMIT)
+	ref     = StringField("Branch name", [Optional()], default=None)
 	action  = SelectField("Action", [InputRequired()], choices=[("notification", "Notification"), ("make_release", "Create Release")], default="make_release")
 	submit  = SubmitField("Save Settings")
 	disable = SubmitField("Disable")
@@ -283,6 +284,7 @@ def update_config(package):
 				db.session.add(package.update_config)
 
 			form.populate_obj(package.update_config)
+			package.update_config.ref = nonEmptyOrNone(form.ref.data)
 			package.update_config.make_release = form.action.data == "make_release"
 
 			check_for_updates.delay()

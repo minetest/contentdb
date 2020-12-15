@@ -322,9 +322,8 @@ def check_update_config(package_id):
 		raise TaskError("No update config attached to package")
 
 	config = package.update_config
-	ref = None
 
-	hash = get_commit_hash(package.repo, ref)
+	hash = get_commit_hash(package.repo, package.update_config.ref)
 	if config.last_commit == hash:
 		return
 
@@ -342,7 +341,7 @@ def check_update_config(package_id):
 		db.session.add(rel)
 		db.session.commit()
 
-		makeVCSRelease.apply_async((rel.id, ref), task_id=rel.task_id)
+		makeVCSRelease.apply_async((rel.id, package.update_config.ref), task_id=rel.task_id)
 
 	elif not config.outdated:
 		config.outdated = True
