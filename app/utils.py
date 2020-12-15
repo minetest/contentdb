@@ -253,3 +253,30 @@ def nonEmptyOrNone(str):
 		return None
 
 	return str
+
+
+def post_system_thread(package: Package, title: str, message: str):
+	system_user = User.query.filter_by(username="ContentDB").first()
+	assert system_user
+
+	thread = package.threads.filter_by(author=system_user).first()
+	if not thread:
+		thread = Thread()
+		thread.package = package
+		thread.title = "System Notifications"
+		thread.author = system_user
+		thread.private = True
+		thread.watchers.append(package.author)
+		db.session.add(thread)
+		db.session.flush()
+
+	reply = ThreadReply()
+	reply.thread  = thread
+	reply.author  = system_user
+	reply.comment = "# {}\n\n{}".format(title, message)
+	db.session.add(reply)
+
+	addNotification(thread.watchers, system_user, NotificationType.THREAD_REPLY,
+			title, thread.getViewURL(), thread.package)
+
+	thread.replies.append(reply)

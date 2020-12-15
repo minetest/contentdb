@@ -56,7 +56,7 @@ class Thread(db.Model):
 	watchers   = db.relationship("User", secondary=watchers, backref="watching")
 
 	def getViewURL(self):
-		return url_for("threads.view", id=self.id)
+		return url_for("threads.view", id=self.id, _external=False)
 
 	def getSubscribeURL(self):
 		return url_for("threads.subscribe", id=self.id)

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Configure Update Detection | {{ package.title }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ _("Configure Update Detection") }}</h1>
+
+	<p>
+		{{ _("ContentDB will poll your Git repository at 2am UTC every day.") }}
+		{{ _("You should consider using webhooks or the API for faster rollouts.") }}
+	</p>
+
+	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
+	<form method="POST" action="">
+		{{ form.hidden_tag() }}
+
+		<h3>Triggers</h3>
+		{{ render_field(form.trigger) }}
+
+		<h3 class="mt-5">Actions</h3>
+		{{ render_checkbox_field(form.make_release) }}
+
+		<p class="mt-5">
+			{{ render_submit_field(form.submit) }}
+		</p>
+	</form>
+{% endblock %}

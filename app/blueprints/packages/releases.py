@@ -24,7 +24,7 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
 from app.rediscache import has_key, set_key, make_download_key
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease
+from app.tasks.importtasks import makeVCSRelease, checkZipRelease, updateMetaFromRelease, check_for_updates
 from app.utils import *
 from . import bp
 
@@ -247,3 +247,34 @@ def delete_release(package, id):
 	db.session.commit()
 
 	return redirect(package.getDetailsURL())
+
+
+class PackageUpdateConfigFrom(FlaskForm):
+	trigger = SelectField("Trigger", [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
+			default=PackageUpdateTrigger.COMMIT)
+	make_release = BooleanField("Create Release")
+	submit	   = SubmitField("Save")
+
+
+@bp.route("/packages/<author>/<name>/update-config/", methods=["GET", "POST"])
+@login_required
+@is_package_page
+def update_config(package):
+	package.update_config = package.update_config or PackageUpdateConfig()
+
+	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+		return redirect(package.getDetailsURL())
+
+	form = PackageUpdateConfigFrom(obj=package.update_config)
+	if form.validate_on_submit():
+		flash("Changed update configuration", "success")
+		form.populate_obj(package.update_config)
+		db.session.add(package.update_config)
+
+		check_for_updates.delay()
+
+		db.session.commit()
+
+		return redirect(package.getDetailsURL())
+
+	return render_template("packages/update_config.html", package=package, form=form)

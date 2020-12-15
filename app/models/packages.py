@@ -317,7 +317,7 @@ class Package(db.Model):
 	maintainers = db.relationship("User", secondary=maintainers)
 
 	threads = db.relationship("Thread", back_populates="package", order_by=db.desc("thread_created_at"),
-			foreign_keys="Thread.package_id", cascade="all, delete, delete-orphan")
+			foreign_keys="Thread.package_id", cascade="all, delete, delete-orphan", lazy="dynamic")
 
 	reviews = db.relationship("PackageReview", back_populates="package", order_by=db.desc("package_review_created_at"),
 			cascade="all, delete, delete-orphan")
@@ -329,6 +329,9 @@ class Package(db.Model):
 			back_populates="package", cascade="all, delete, delete-orphan")
 
 	tokens = db.relationship("APIToken", foreign_keys="APIToken.package_id", back_populates="package",
+			cascade="all, delete, delete-orphan")
+
+	update_config = db.relationship("PackageUpdateConfig", uselist=False, back_populates="package",
 			cascade="all, delete, delete-orphan")
 
 	def __init__(self, package=None):
@@ -505,6 +508,10 @@ class Package(db.Model):
 
 	def getBulkReleaseURL(self):
 		return url_for("packages.bulk_change_release",
+			author=self.author.username, name=self.name)
+
+	def getUpdateConfigURL(self):
+		return url_for("packages.update_config",
 			author=self.author.username, name=self.name)
 
 	def getDownloadURL(self):
@@ -790,7 +797,7 @@ class PackageRelease(db.Model):
 
 	title        = db.Column(db.String(100), nullable=False)
 	releaseDate  = db.Column(db.DateTime,    nullable=False)
-	url          = db.Column(db.String(200), nullable=False)
+	url          = db.Column(db.String(200), nullable=False, default="")
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	task_id      = db.Column(db.String(37), nullable=True)
 	commit_hash  = db.Column(db.String(41), nullable=True, default=None)
@@ -903,3 +910,39 @@ class PackageScreenshot(db.Model):
 
 	def getThumbnailURL(self, level=2):
 		return self.url.replace("/uploads/", "/thumbnails/{:d}/".format(level))
+
+
+class PackageUpdateTrigger(enum.Enum):
+	COMMIT = "New Commit"
+	TAG = "New Tag"
+
+	def toName(self):
+		return self.name.lower()
+
+	def __str__(self):
+		return self.name
+
+	@classmethod
+	def get(cls, name):
+		try:
+			return PackageUpdateTrigger[name.upper()]
+		except KeyError:
+			return None
+
+	@classmethod
+	def choices(cls):
+		return [(choice, choice.value) for choice in cls]
+
+	@classmethod
+	def coerce(cls, item):
+		return item if type(item) == PackageUpdateTrigger else PackageUpdateTrigger[item]
+
+
+class PackageUpdateConfig(db.Model):
+	package_id  = db.Column(db.Integer, db.ForeignKey("package.id"), primary_key=True)
+	package     = db.relationship("Package", back_populates="update_config", foreign_keys=[package_id])
+
+	last_commit = db.Column(db.String(41), nullable=True, default=None)
+
+	trigger     = db.Column(db.Enum(PackageUpdateTrigger), nullable=False, default=PackageUpdateTrigger.COMMIT)
+	make_release = db.Column(db.Boolean, nullable=False, default=False)

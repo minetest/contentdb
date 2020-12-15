@@ -32,8 +32,9 @@ class UserRank(enum.Enum):
 	MEMBER         = 3
 	TRUSTED_MEMBER = 4
 	EDITOR         = 5
-	MODERATOR      = 6
-	ADMIN          = 7
+	BOT            = 6
+	MODERATOR      = 7
+	ADMIN          = 8
 
 	def atLeast(self, min):
 		return self.value >= min.value
@@ -192,6 +193,8 @@ class User(db.Model, UserMixin):
 	def getProfilePicURL(self):
 		if self.profile_pic:
 			return self.profile_pic
+		elif self.rank == UserRank.BOT:
+			return "/static/bot_avatar.png"
 		else:
 			return gravatar(self.email or "")
 

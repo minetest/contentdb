@@ -11,10 +11,22 @@
 		<div class="col pr-0">
 			<div class="card">
 				<div class="card-header">
-					<a class="author {{ r.author.rank.name }}"
+					<a class="author {{ r.author.rank.name }} mr-3"
 							href="{{ url_for('users.profile', username=r.author.username) }}">
 						{{ r.author.display_name }}
 					</a>
+
+					{% if r.author in thread.package.maintainers %}
+						<span class="badge badge-dark">
+							{{ _("Maintainer") }}
+						</span>
+					{% endif %}
+					{% if r.author.rank == r.author.rank.BOT %}
+						<span class="badge badge-dark">
+							{{ r.author.rank.getTitle() }}
+						</span>
+					{% endif %}
+
 					<a name="reply-{{ r.id }}" class="text-muted float-right"
 							href="{{ url_for('threads.view', id=thread.id) }}#reply-{{ r.id }}">
 						{{ r.created_at | datetime }}

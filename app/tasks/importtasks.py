@@ -22,9 +22,12 @@ from urllib.error import HTTPError
 import urllib.request
 from urllib.parse import urlsplit
 from zipfile import ZipFile
+
+from kombu import uuid
+
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString, getExtension
+from app.utils import randomString, getExtension, post_system_thread
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 
 
@@ -83,6 +86,40 @@ def clone_repo(urlstr, ref=None, recursive=False):
 	raise TaskError(err.replace("stderr: ", "") \
 			.replace("Cloning into '" + gitDir + "'...", "") \
 			.strip())
+
+
+def get_commit_hash(urlstr, ref=None):
+	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
+
+	err = None
+	try:
+		gitUrl = generateGitURL(urlstr)
+		print("Cloning from " + gitUrl)
+
+		assert ref != ""
+
+		repo = git.Repo.init(gitDir)
+		origin: git.Remote = repo.create_remote("origin", url=gitUrl)
+		assert origin.exists()
+		origin.fetch()
+
+		if ref:
+			ref: git.Reference = origin.refs[ref]
+		else:
+			ref: git.Reference = origin.refs[0]
+
+		return ref.commit.hexsha
+
+	except GitCommandError as e:
+		# This is needed to stop the backtrace being weird
+		err = e.stderr
+
+	except gitdb.exc.BadName as e:
+		err = "Unable to find the reference " + (ref or "?") + "\n" + e.stderr
+
+	raise TaskError(err.replace("stderr: ", "") \
+		.replace("Cloning into '" + gitDir + "'...", "") \
+		.strip())
 
 
 @celery.task()
@@ -274,3 +311,50 @@ def importForeignDownloads(self, id):
 		release.task_id = self.request.id
 		release.approved = False
 		db.session.commit()
+
+
+@celery.task
+def check_update_config(package_id):
+	package: Package = Package.query.get(package_id)
+	if package is None:
+		raise TaskError("No such package!")
+	elif package.update_config is None:
+		raise TaskError("No update config attached to package")
+
+	config = package.update_config
+	ref = None
+	hash = get_commit_hash(package.repo, ref)
+
+	if config.last_commit != hash:
+		if config.make_release:
+			rel = PackageRelease()
+			rel.package = package
+			rel.title = hash[0:5]
+			rel.url = ""
+			rel.task_id = uuid()
+			db.session.add(rel)
+			db.session.commit()
+
+			makeVCSRelease.apply_async((rel.id, ref), task_id=rel.task_id)
+
+		else:
+			post_system_thread(package, "New commit detected, package outdated?",
+					"Commit {} was detected on the Git repository.\n\n[Change update configuration]({})" \
+						.format(hash[0:5], package.getUpdateConfigURL()))
+
+	config.last_commit = hash
+	db.session.commit()
+
+
+@celery.task
+def check_for_updates():
+	for update_config in PackageUpdateConfig.query.all():
+		update_config: PackageUpdateConfig
+
+		if update_config.package.repo is None:
+			db.session.delete(update_config)
+			continue
+
+		check_update_config.delay(update_config.package_id)
+
+	db.session.commit()
