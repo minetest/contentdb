@@ -206,13 +206,13 @@ def forgot_password():
 class SetPasswordForm(FlaskForm):
 	email = StringField("Email", [Optional(), Email()])
 	password = PasswordField("New password", [InputRequired(), Length(8, 100)])
-	password2 = PasswordField("Verify password", [InputRequired(), Length(8, 100)])
+	password2 = PasswordField("Verify password", [InputRequired(), Length(8, 100), validators.EqualTo('password', message='Passwords must match')])
 	submit = SubmitField("Save")
 
 class ChangePasswordForm(FlaskForm):
 	old_password = PasswordField("Old password", [InputRequired(), Length(8, 100)])
 	password = PasswordField("New password", [InputRequired(), Length(8, 100)])
-	password2 = PasswordField("Verify password", [InputRequired(), Length(8, 100)])
+	password2 = PasswordField("Verify password", [InputRequired(), Length(8, 100), validators.EqualTo('password', message='Passwords must match')])
 	submit = SubmitField("Save")
 
 
@@ -251,9 +251,6 @@ def handle_set_password(form):
 @login_required
 def change_password():
 	form = ChangePasswordForm(request.form)
-
-	if current_user.email is None:
-		form.email.validators = [InputRequired(), Email()]
 
 	if form.validate_on_submit():
 		if check_password_hash(current_user.password, form.old_password.data):
