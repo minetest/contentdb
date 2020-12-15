@@ -323,24 +323,33 @@ def check_update_config(package_id):
 
 	config = package.update_config
 	ref = None
+
 	hash = get_commit_hash(package.repo, ref)
+	if config.last_commit == hash:
+		return
 
-	if config.last_commit != hash:
-		if config.make_release:
-			rel = PackageRelease()
-			rel.package = package
-			rel.title = hash[0:5]
-			rel.url = ""
-			rel.task_id = uuid()
-			db.session.add(rel)
-			db.session.commit()
+	if not config.last_commit:
+		config.last_commit = hash
+		db.session.commit()
+		return
 
-			makeVCSRelease.apply_async((rel.id, ref), task_id=rel.task_id)
+	if config.make_release:
+		rel = PackageRelease()
+		rel.package = package
+		rel.title = hash[0:5]
+		rel.url = ""
+		rel.task_id = uuid()
+		db.session.add(rel)
+		db.session.commit()
 
-		else:
-			post_system_thread(package, "New commit detected, package outdated?",
-					"Commit {} was detected on the Git repository.\n\n[Change update configuration]({})" \
-						.format(hash[0:5], package.getUpdateConfigURL()))
+		makeVCSRelease.apply_async((rel.id, ref), task_id=rel.task_id)
+
+	elif not config.outdated:
+		config.outdated = True
+
+		post_system_thread(package, "New commit detected, package outdated?",
+				"Commit {} was detected on the Git repository.\n\n[Change update configuration]({})" \
+					.format(hash[0:5], package.getUpdateConfigURL()))
 
 	config.last_commit = hash
 	db.session.commit()

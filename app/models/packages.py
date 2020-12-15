@@ -856,6 +856,10 @@ class PackageRelease(db.Model):
 		assert self.task_id is None and self.url is not None and self.url != ""
 
 		self.approved = True
+
+		if self.package.update_config:
+			self.package.update_config.outdated = False
+
 		return True
 
 	def checkPerm(self, user, perm):
@@ -947,6 +951,9 @@ class PackageUpdateConfig(db.Model):
 	package     = db.relationship("Package", back_populates="update_config", foreign_keys=[package_id])
 
 	last_commit = db.Column(db.String(41), nullable=True, default=None)
+
+	# Set to true when an outdated notification is sent. Set to false when a release is created
+	outdated    = db.Column(db.Boolean, nullable=False, default=False)
 
 	trigger     = db.Column(db.Enum(PackageUpdateTrigger), nullable=False, default=PackageUpdateTrigger.COMMIT)
 	make_release = db.Column(db.Boolean, nullable=False, default=False)
