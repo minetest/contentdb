@@ -956,4 +956,6 @@ class PackageUpdateConfig(db.Model):
 	outdated    = db.Column(db.Boolean, nullable=False, default=False)
 
 	trigger     = db.Column(db.Enum(PackageUpdateTrigger), nullable=False, default=PackageUpdateTrigger.COMMIT)
+	ref         = db.Column(db.String(41), nullable=True, default=None)
+
 	make_release = db.Column(db.Boolean, nullable=False, default=False)

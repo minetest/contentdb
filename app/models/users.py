@@ -313,14 +313,17 @@ class NotificationType(enum.Enum):
 	# Posted reply to subscribed thread
 	THREAD_REPLY   = 5
 
+	# A bot notification
+	BOT            = 6
+
 	# Added / removed as maintainer
-	MAINTAINER     = 6
+	MAINTAINER     = 7
 
 	# Editor misc
-	EDITOR_ALERT   = 7
+	EDITOR_ALERT   = 8
 
 	# Editor misc
-	EDITOR_MISC    = 8
+	EDITOR_MISC    = 9
 
 	# Any other
 	OTHER          = 0
@@ -343,6 +346,8 @@ class NotificationType(enum.Enum):
 			return "When a user posts a review on your package."
 		elif self == NotificationType.THREAD_REPLY:
 			return "When someone replies to a thread you're watching."
+		elif self == NotificationType.BOT:
+			return "From a bot - for example, update notifications."
 		elif self == NotificationType.MAINTAINER:
 			return "When your package's maintainers change."
 		elif self == NotificationType.EDITOR_ALERT:
@@ -424,6 +429,7 @@ class UserNotificationPreferences(db.Model):
 	pref_new_thread       = db.Column(db.Integer, nullable=False)
 	pref_new_review       = db.Column(db.Integer, nullable=False)
 	pref_thread_reply     = db.Column(db.Integer, nullable=False)
+	pref_bot              = db.Column(db.Integer, nullable=False)
 	pref_maintainer       = db.Column(db.Integer, nullable=False)
 	pref_editor_alert     = db.Column(db.Integer, nullable=False)
 	pref_editor_misc      = db.Column(db.Integer, nullable=False)
@@ -436,6 +442,7 @@ class UserNotificationPreferences(db.Model):
 		self.pref_new_thread = 1
 		self.pref_new_review = 1
 		self.pref_thread_reply = 2
+		self.pref_bot = 1
 		self.pref_maintainer = 1
 		self.pref_editor_alert = 1
 		self.pref_editor_misc = 0

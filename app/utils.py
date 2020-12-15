@@ -276,7 +276,7 @@ def post_system_thread(package: Package, title: str, message: str):
 	reply.comment = "# {}\n\n{}".format(title, message)
 	db.session.add(reply)
 
-	addNotification(thread.watchers, system_user, NotificationType.THREAD_REPLY,
+	addNotification(thread.watchers, system_user, NotificationType.BOT,
 			title, thread.getViewURL(), thread.package)
 
 	thread.replies.append(reply)
