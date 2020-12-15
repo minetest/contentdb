@@ -149,6 +149,15 @@ def make_flask_login_password(plaintext):
 	return bcrypt.hash(plaintext.encode("UTF-8"))
 
 
+def login_user_set_active(user: User, *args, **kwargs):
+	if user.rank == UserRank.NOT_JOINED and user.email is None:
+		user.rank = UserRank.MEMBER
+		user.is_active = True
+		db.session.commit()
+
+	return login_user(user, *args, **kwargs)
+
+
 def rank_required(rank):
 	def decorator(f):
 		@wraps(f)
@@ -162,6 +171,7 @@ def rank_required(rank):
 
 		return decorated_function
 	return decorator
+
 
 def getPackageByInfo(author, name):
 	user = User.query.filter_by(username=author).first()

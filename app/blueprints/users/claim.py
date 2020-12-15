@@ -14,17 +14,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask_login import login_user
 from . import bp
 from flask import redirect, render_template, session, request, flash, url_for
 from app.models import db, User, UserRank
-from app.utils import randomString
+from app.utils import randomString, login_user_set_active
 from app.tasks.forumtasks import checkForumAccount
 from app.tasks.phpbbparser import getProfile
 import re
 
+
 def check_username(username):
 	return username is not None and len(username) >= 2 and re.match("^[A-Za-z0-9._-]*$", username)
+
 
 @bp.route("/user/claim/", methods=["GET", "POST"])
 def claim():
@@ -52,7 +53,6 @@ def claim():
 			flash("Unable to find user", "danger")
 			return redirect(url_for("users.claim"))
 
-	token = None
 	if "forum_token" in session:
 		token = session["forum_token"]
 	else:
@@ -102,7 +102,7 @@ def claim():
 					db.session.add(user)
 					db.session.commit()
 
-				if login_user(user, remember=True):
+				if login_user_set_active(user, remember=True):
 					return redirect(url_for("users.set_password"))
 				else:
 					flash("Unable to login as user", "danger")

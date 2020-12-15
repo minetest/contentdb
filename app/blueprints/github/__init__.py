@@ -19,11 +19,11 @@ from flask import Blueprint
 bp = Blueprint("github", __name__)
 
 from flask import redirect, url_for, request, flash, abort, render_template, jsonify, current_app
-from flask_login import current_user, login_required, login_user
+from flask_login import current_user, login_required
 from sqlalchemy import func, or_, and_
 from app import github, csrf
-from app.models import db, User, APIToken, Package, Permission, AuditSeverity, UserRank
-from app.utils import randomString, abs_url_for, addAuditLog
+from app.models import db, User, APIToken, Package, Permission, AuditSeverity
+from app.utils import randomString, abs_url_for, addAuditLog, login_user_set_active
 from app.blueprints.api.support import error, handleCreateRelease
 import hmac, requests, json
 
@@ -72,7 +72,7 @@ def callback(oauth_token):
 		if userByGithub is None:
 			flash("Unable to find an account for that Github user", "danger")
 			return redirect(url_for("users.claim"))
-		elif login_user(userByGithub, remember=True):
+		elif login_user_set_active(userByGithub, remember=True):
 			addAuditLog(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",
 					url_for("users.profile", username=userByGithub.username))
 			db.session.commit()
