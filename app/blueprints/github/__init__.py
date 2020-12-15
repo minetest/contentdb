@@ -145,6 +145,9 @@ def webhook():
 	else:
 		return error(400, "Unsupported event. Only 'push', `create:tag`, and 'ping' are supported.")
 
+	# Disable update config if webhooks are used
+	package.update_config = None
+
 	#
 	# Perform release
 	#
@@ -217,7 +220,7 @@ def setup_webhook():
 			form=form, package=package)
 
 
-def handleMakeWebhook(gh_user, gh_repo, package, oauth, event, token):
+def handleMakeWebhook(gh_user: str, gh_repo: str, package: Package, oauth: str, event: str, token: APIToken):
 	url = "https://api.github.com/repos/{}/{}/hooks".format(gh_user, gh_repo)
 	headers = {
 		"Authorization": "token " + oauth
@@ -258,6 +261,7 @@ def handleMakeWebhook(gh_user, gh_repo, package, oauth, event, token):
 	r = requests.post(url, headers=headers, data=json.dumps(data))
 
 	if r.status_code == 201:
+		package.update_config = None
 		db.session.add(token)
 		db.session.commit()
 
