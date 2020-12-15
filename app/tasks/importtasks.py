@@ -371,6 +371,9 @@ def check_for_updates():
 	for update_config in PackageUpdateConfig.query.all():
 		update_config: PackageUpdateConfig
 
+		if not update_config.package.approved:
+			continue
+
 		if update_config.package.repo is None:
 			db.session.delete(update_config)
 			continue
