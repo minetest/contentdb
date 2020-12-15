@@ -12,8 +12,8 @@
 	</p>
 
 	<p>
-		{{ _("ContentDB will poll your Git repository at 2am UTC every day.") }}
-		{{ _("You should consider using webhooks or the API for faster rollouts.") }}
+		{{ _("ContentDB will poll your Git repository at 2am UTC every day, if your package is approved.") }}
+		{{ _("You should consider using webhooks or the API for faster releases.") }}
 	</p>
 
 	{% if package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
@@ -22,7 +22,7 @@
 			<a class="float-right btn btn-sm btn-info mr-2" href="{{ url_for('github.setup_webhook', pid=package.id) }}">{{ _("Setup webhook") }}</a>
 			<i class="fas fa-info mr-2"></i>
 
-			{{ _("Create releases faster by using a webhook.") }}
+			{{ _("You can create releases faster by using a webhook.") }}
 		</p>
 	{% endif %}
 
@@ -36,6 +36,7 @@
 			<span class="fas fa-exclamation-triangle mr-2"></span>
 
 			{{ _("The new tag trigger isn't supported yet.") }}
+			{{ _("In the meantime, you can use webhooks to create releases on tag events.") }}
 		</p>
 
 
