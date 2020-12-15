@@ -152,6 +152,7 @@ def make_flask_login_password(plaintext):
 def login_user_set_active(user: User, *args, **kwargs):
 	if user.rank == UserRank.NOT_JOINED and user.email is None:
 		user.rank = UserRank.MEMBER
+		user.notification_preferences = UserNotificationPreferences(user)
 		user.is_active = True
 		db.session.commit()
 

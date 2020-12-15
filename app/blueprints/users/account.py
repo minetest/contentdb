@@ -24,7 +24,7 @@ from wtforms.validators import *
 
 from app.models import *
 from app.tasks.emails import send_verify_email, send_anon_email, send_unsubscribe_verify, send_user_email
-from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog
+from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog, nonEmptyOrNone
 from passlib.pwd import genphrase
 
 from . import bp
@@ -228,8 +228,8 @@ def handle_set_password(form):
 	current_user.password = make_flask_login_password(form.password.data)
 
 	if hasattr(form, "email"):
-		newEmail = form.email.data
-		if newEmail != current_user.email and newEmail.strip() != "":
+		newEmail = nonEmptyOrNone(form.email.data)
+		if newEmail and newEmail != current_user.email:
 			if EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
 				flash("That email address has been unsubscribed/blacklisted, and cannot be used", "danger")
 				return
