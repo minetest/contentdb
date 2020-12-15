@@ -7,7 +7,12 @@
 {% block content %}
 	<h1>{{ _("Create a release") }}</h1>
 
-	{% if not (package.repo and package.update_config) %}
+	{% if package.update_config %}
+		<p class="alert alert-secondary mb-4">
+			<a class="float-right btn btn-sm btn-secondary" href="{{ package.getUpdateConfigURL() }}">{{ _("Settings") }}</a>
+			{{ _("You have automatic releases enabled") }}
+		</p>
+	{% else %}
 		<p class="alert alert-info mb-4">
 			{% if package.repo %}
 				<a class="float-right btn btn-sm btn-info" href="{{ package.getSetupReleasesURL() }}">{{ _("Set up") }}</a>
