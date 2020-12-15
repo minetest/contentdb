@@ -323,9 +323,10 @@ def check_update_config(self, package_id):
 			.replace("Cloning into '/tmp/", "Cloning into '") \
 			.strip()
 
-		post_system_thread(package, "Failed to check git repository",
-			"Error: {}.\n\nTask ID: {}" \
-				.format(err, self.request.id))
+		msg = "Error: {}.\n\nTask ID: {}\n\n[Change update configuration]({})" \
+				.format(err, self.request.id, package.getUpdateConfigURL())
+
+		post_system_thread(package, "Failed to check git repository", msg)
 
 		db.session.commit()
 		return
@@ -352,9 +353,14 @@ def check_update_config(self, package_id):
 	elif not config.outdated:
 		config.outdated = True
 
-		post_system_thread(package, "New commit detected, package outdated?",
-				"Commit {} was detected on the Git repository.\n\n[Change update configuration]({})" \
-					.format(hash[0:5], package.getUpdateConfigURL()))
+		msg_last = ""
+		if config.last_commit:
+			msg_last = " The last commit was {}".format(config.last_commit[0:5])
+
+		msg = "New commit {} was found on the Git repository.{}\n\n[Change update configuration]({})" \
+			.format(hash[0:5], msg_last, package.getUpdateConfigURL())
+
+		post_system_thread(package, "New commit detected, package may be outdated", msg)
 
 	config.last_commit = hash
 	db.session.commit()

@@ -859,6 +859,7 @@ class PackageRelease(db.Model):
 
 		if self.package.update_config:
 			self.package.update_config.outdated = False
+			self.package.update_config.last_commit = self.commit_hash
 
 		return True
 

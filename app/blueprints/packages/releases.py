@@ -17,14 +17,14 @@
 
 from celery import uuid
 from flask import *
-from flask_wtf import FlaskForm
 from flask_login import login_required
+from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
 from app.rediscache import has_key, set_key, make_download_key
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease, updateMetaFromRelease, check_for_updates
+from app.tasks.importtasks import makeVCSRelease, checkZipRelease
 from app.utils import *
 from . import bp
 
@@ -286,8 +286,6 @@ def update_config(package):
 			form.populate_obj(package.update_config)
 			package.update_config.ref = nonEmptyOrNone(form.ref.data)
 			package.update_config.make_release = form.action.data == "make_release"
-
-			check_for_updates.delay()
 
 		db.session.commit()
 

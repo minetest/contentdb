@@ -26,7 +26,7 @@ from wtforms.validators import InputRequired, Length
 
 from app.models import *
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
-from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, importForeignDownloads
+from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, importForeignDownloads, check_for_updates
 from app.utils import rank_required, addAuditLog, addNotification
 from . import bp
 
@@ -173,6 +173,27 @@ def admin_page():
 			db.session.commit()
 
 			flash("Deleted {} soft deleted packages packages".format(count), "success")
+			return redirect(url_for("admin.admin_page"))
+
+		elif action == "addupdateconfig":
+			for pkg in Package.query.filter(Package.repo != None, Package.releases.any(), Package.update_config == None).all():
+				pkg.update_config = PackageUpdateConfig()
+
+				release: PackageRelease = pkg.releases.first()
+				if release and release.commit_hash:
+					pkg.update_config.last_commit = release.commit_hash
+
+				db.session.add(pkg.update_config)
+
+			db.session.commit()
+
+			flash("Added update configs to packages", "success")
+			return redirect(url_for("admin.admin_page"))
+
+		elif action == "runupdateconfig":
+			check_for_updates.delay()
+
+			flash("Started update configs", "success")
 			return redirect(url_for("admin.admin_page"))
 
 		else:
