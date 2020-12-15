@@ -27,7 +27,7 @@ from kombu import uuid
 
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString, getExtension, post_system_thread
+from app.utils import randomString, getExtension, post_bot_message
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 
 
@@ -329,7 +329,7 @@ def check_update_config(self, package_id):
 		msg = "Error: {}.\n\nTask ID: {}\n\n[Change update configuration]({})" \
 				.format(err, self.request.id, package.getUpdateConfigURL())
 
-		post_system_thread(package, "Failed to check git repository", msg)
+		post_bot_message(package, "Failed to check git repository", msg)
 
 		db.session.commit()
 		return
@@ -363,7 +363,7 @@ def check_update_config(self, package_id):
 		msg = "New commit {} was found on the Git repository.{}\n\n[Change update configuration]({})" \
 			.format(hash[0:5], msg_last, package.getUpdateConfigURL())
 
-		post_system_thread(package, "New commit detected, package may be outdated", msg)
+		post_bot_message(package, "New commit detected, package may be outdated", msg)
 
 	config.last_commit = hash
 	db.session.commit()

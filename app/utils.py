@@ -255,7 +255,7 @@ def nonEmptyOrNone(str):
 	return str
 
 
-def post_system_thread(package: Package, title: str, message: str):
+def post_bot_message(package: Package, title: str, message: str):
 	system_user = User.query.filter_by(username="ContentDB").first()
 	assert system_user
 
@@ -263,7 +263,7 @@ def post_system_thread(package: Package, title: str, message: str):
 	if not thread:
 		thread = Thread()
 		thread.package = package
-		thread.title = "System Notifications"
+		thread.title = "Bot messages for {}".format(package.title)
 		thread.author = system_user
 		thread.private = True
 		thread.watchers.append(package.author)
