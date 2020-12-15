@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("How do you want to create releases?") }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ self.title() }}</h1>
+
+	<p>
+		{{  _("A release is a single downloadable version of your %(title)s.", title=package.type.value.lower()) }}
+		{{  _("You need to create releases even if you use a rolling release development cycle, as Minetest needs them to check for updates.") }}
+	</p>
+
+	{% if package.repo %}
+		<p>
+			{{ _("When you push a commit or tag to your Git repository, ContentDB can create a new release automatically.") }}
+			{{ _("ContentDB will check your Git repository at 2am UTC every day, but you can use webhooks or the API for faster updates.") }}
+		</p>
+
+		<p>
+			{{ _("This can be changed later.") }}
+		</p>
+
+		<p class="mt-5">
+			<a class="btn btn-primary" href="{{ package.getUpdateConfigURL() }}">Set up automatic releases</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getCreateReleaseURL() }}">Create releases manually</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getDetailsURL() }}">Later</a>
+		</p>
+	{% else %}
+		<p>
+			{{ _("Using Git would allow you to create releases automatically when you push code or tags.") }}
+			{{ _("Unfortunately, you will otherwise need to create a release manually.") }}
+		</p>
+
+		<p>
+			{{ _("This can be changed later.") }}
+		</p>
+
+		<p class="mt-5">
+			<a class="btn btn-primary" href="{{ package.getEditURL() }}">Add Git repo</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getCreateReleaseURL() }}">Create releases manually</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getDetailsURL() }}">Later</a>
+		</p>
+	{% endif %}
+{% endblock %}

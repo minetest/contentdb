@@ -1,27 +1,27 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Create a release | {{ package.title }}
+	{{ _("Create a release") }} - {{ package.title }}
 {% endblock %}
 
 {% block content %}
-	<p class="alert alert-info mb-4">
-		<a class="float-right btn btn-sm btn-info" href="{{ url_for('flatpage', path='help/release_webhooks') }}">{{ _("Learn more") }}</a>
-		{% if package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
-			<a class="float-right btn btn-sm btn-info mr-2" href="{{ url_for('github.setup_webhook', pid=package.id) }}">{{ _("Setup webhook") }}</a>
-			<i class="fas fa-info mr-2"></i>
+	<h1>{{ _("Create a release") }}</h1>
 
-			{{ _("Create releases automatically when you push commits or tags to GitHub, using a webhook or the API.") }}
-		{% elif package.repo %}
-			<i class="fas fa-info mr-2"></i>
+	{% if not (package.repo and package.update_config) %}
+		<p class="alert alert-info mb-4">
+			{% if package.repo %}
+				<a class="float-right btn btn-sm btn-info" href="{{ package.getSetupReleasesURL() }}">{{ _("Set up") }}</a>
+				<i class="fas fa-info mr-2"></i>
 
-			{{ _("You can create releases automatically when you push commits or tags to your repository, using a webhook or the API.") }}
-		{% else %}
-			<i class="fas fa-info mr-2"></i>
+				{{ _("You can create releases automatically when you push commits or tags to your repository.") }}
+			{% else %}
+				<a class="float-right btn btn-sm btn-info" href="{{ package.getEditURL() }}">{{ _("Add Git repo") }}</a>
+				<i class="fas fa-info mr-2"></i>
 
-			{{ _("Using git will allow you to create releases automatically when you push code or tags.") }}
-		{% endif %}
-	</p>
+				{{ _("Using Git would allow you to create releases automatically when you push code or tags.") }}
+			{% endif %}
+		</p>
+	{% endif %}
 
 	{% from "macros/forms.html" import render_field, render_submit_field, render_radio_field %}
 	<form method="POST" action="" enctype="multipart/form-data">

@@ -319,17 +319,6 @@ def create_edit(author=None, name=None):
 		if package.type == PackageType.TXP:
 			package.license = package.media_license
 
-		# Dependency.query.filter_by(depender=package).delete()
-		# deps = Dependency.SpecToList(package, form.harddep_str.data, mpackage_cache)
-		# for dep in deps:
-		# 	dep.optional = False
-		# 	db.session.add(dep)
-
-		# deps = Dependency.SpecToList(package, form.softdep_str.data, mpackage_cache)
-		# for dep in deps:
-		# 	dep.optional = True
-		# 	db.session.add(dep)
-
 		if wasNew and package.type == PackageType.MOD:
 			m = MetaPackage.GetOrCreate(package.name, {})
 			package.provides.append(m)
@@ -344,13 +333,14 @@ def create_edit(author=None, name=None):
 
 		db.session.commit() # save
 
-		next_url = package.getDetailsURL()
 		if wasNew and package.repo is not None:
-			task = importRepoScreenshot.delay(package.id)
-			next_url = url_for("tasks.check", id=task.id, r=next_url)
+			importRepoScreenshot.delay(package.id)
 
+		next_url = package.getDetailsURL()
 		if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
 			next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
+		elif wasNew:
+			next_url = package.getSetupReleasesURL()
 
 		return redirect(next_url)
 

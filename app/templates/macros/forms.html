@@ -177,10 +177,9 @@
 	</div>
 {%- endmacro %}
 
-{% macro render_submit_field(field, label=None, tabindex=None) -%}
+{% macro render_submit_field(field, label=None, tabindex=None, class_=None) -%}
 	{% if not label %}{% set label=field.label.text %}{% endif %}
 	{#<button type="submit" class="form-control btn btn-default btn-primary">{{label}}</button>#}
-	<input type="submit" value="{{label}}" class="btn btn-primary"
-		   {% if tabindex %}tabindex="{{ tabindex }}"{% endif %}
-		   >
+	<input type="submit" name="{{ field.name }}" value="{{ label }}" class="{{ class_ or 'btn btn-primary' }}"
+			{% if tabindex %}tabindex="{{ tabindex }}"{% endif %}>
 {%- endmacro %}

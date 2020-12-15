@@ -514,6 +514,10 @@ class Package(db.Model):
 		return url_for("packages.update_config",
 			author=self.author.username, name=self.name)
 
+	def getSetupReleasesURL(self):
+		return url_for("packages.setup_releases",
+			author=self.author.username, name=self.name)
+
 	def getDownloadURL(self):
 		return url_for("packages.download",
 				author=self.author.username, name=self.name)

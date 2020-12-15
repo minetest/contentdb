@@ -16,17 +16,15 @@
 {% set level = "warning" %}
 {% if package.releases.count() == 0 %}
 	{% set message %}
-		<h4 class="alert-heading">Release Required</h4>
 		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-			<p>You need to create a release before this package can be approved.</p>
-			<p>
-				A release is a single downloadable version of your {{ package.type.value | lower }}.
-				You need to create releases even if you use a rolling release development cycle,
-				as Minetest needs them to check for updates.
-			</p>
-			<a class="btn" href="{{ package.getCreateReleaseURL() }}">Create Release</a>
+			{% if package.update_config %}
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.getCreateReleaseURL() }}">Create first release</a>
+			{% else %}
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.getSetupReleasesURL() }}">Set up releases</a>
+			{% endif %}
+			{{ _("You need to create a release before this package can be approved.") }}
 		{% else %}
-			A release is required before this package can be approved.
+			{{ _("A release is required before this package can be approved.") }}
 		{% endif %}
 	{% endset %}
 

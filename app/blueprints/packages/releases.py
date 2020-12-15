@@ -252,29 +252,60 @@ def delete_release(package, id):
 class PackageUpdateConfigFrom(FlaskForm):
 	trigger = SelectField("Trigger", [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
 			default=PackageUpdateTrigger.COMMIT)
-	make_release = BooleanField("Create Release")
-	submit	   = SubmitField("Save")
+	action  = SelectField("Action", [InputRequired()], choices=[("notification", "Notification"), ("make_release", "Create Release")], default="make_release")
+	submit  = SubmitField("Save Settings")
+	disable = SubmitField("Disable")
 
 
 @bp.route("/packages/<author>/<name>/update-config/", methods=["GET", "POST"])
 @login_required
 @is_package_page
 def update_config(package):
-	package.update_config = package.update_config or PackageUpdateConfig()
-
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
-		return redirect(package.getDetailsURL())
+		abort(403)
+
+	if not package.repo:
+		flash("Please add a Git repository URL in order to set up automatic releases", "danger")
+		return redirect(package.getEditURL())
 
 	form = PackageUpdateConfigFrom(obj=package.update_config)
-	if form.validate_on_submit():
-		flash("Changed update configuration", "success")
-		form.populate_obj(package.update_config)
-		db.session.add(package.update_config)
+	if request.method == "GET" and package.update_config:
+		form.action.data = "make_release" if package.update_config.make_release else "notification"
 
-		check_for_updates.delay()
+	if form.validate_on_submit():
+		if form.disable.data:
+			flash("Deleted update configuration", "success")
+			if package.update_config:
+				db.session.delete(package.update_config)
+		else:
+			if package.update_config is None:
+				package.update_config = PackageUpdateConfig()
+				db.session.add(package.update_config)
+
+			form.populate_obj(package.update_config)
+			package.update_config.make_release = form.action.data == "make_release"
+
+			check_for_updates.delay()
 
 		db.session.commit()
+
+		if not form.disable.data and package.releases.count() == 0:
+			flash("Now, please create an initial release", "success")
+			return redirect(package.getCreateReleaseURL())
 
 		return redirect(package.getDetailsURL())
 
 	return render_template("packages/update_config.html", package=package, form=form)
+
+
+@bp.route("/packages/<author>/<name>/setup-releases/")
+@login_required
+@is_package_page
+def setup_releases(package):
+	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+		abort(403)
+
+	if package.update_config:
+		return redirect(package.getUpdateConfigURL())
+
+	return render_template("packages/release_wizard.html", package=package)
