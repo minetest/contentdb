@@ -31,6 +31,14 @@
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.trigger, class_="mt-5") }}
+
+		<p class="text-warning mb-4">
+			<span class="fas fa-exclamation-triangle mr-2"></span>
+
+			{{ _("The new tag trigger isn't supported yet.") }}
+		</p>
+
+
 		{{ render_field(form.ref, placeholder="Leave blank to use default branch",
 				pattern="[A-Za-z0-9/._-]+") }}
 		{{ render_field(form.action) }}

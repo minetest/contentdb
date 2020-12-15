@@ -307,6 +307,9 @@ def check_update_config(self, package_id):
 
 	config = package.update_config
 
+	if config.trigger != PackageUpdateTrigger.COMMIT:
+		return
+
 	err = None
 	try:
 		hash = get_commit_hash(package.repo, package.update_config.ref)

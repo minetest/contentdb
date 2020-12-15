@@ -255,7 +255,7 @@ class PackageUpdateConfigFrom(FlaskForm):
 	ref     = StringField("Branch name", [Optional()], default=None)
 	action  = SelectField("Action", [InputRequired()], choices=[("notification", "Notification"), ("make_release", "Create Release")], default="make_release")
 	submit  = SubmitField("Save Settings")
-	disable = SubmitField("Disable")
+	disable = SubmitField("Disable Automation")
 
 
 @bp.route("/packages/<author>/<name>/update-config/", methods=["GET", "POST"])
