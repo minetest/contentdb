@@ -88,38 +88,22 @@ def clone_repo(urlstr, ref=None, recursive=False):
 			.strip())
 
 
-def get_commit_hash(urlstr, ref=None):
+def get_commit_hash(urlstr, ref_name=None):
 	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
+	gitUrl = generateGitURL(urlstr)
+	assert ref_name != ""
 
-	err = None
-	try:
-		gitUrl = generateGitURL(urlstr)
-		print("Cloning from " + gitUrl)
+	repo = git.Repo.init(gitDir)
+	origin: git.Remote = repo.create_remote("origin", url=gitUrl)
+	assert origin.exists()
+	origin.fetch()
 
-		assert ref != ""
+	if ref_name:
+		ref: git.Reference = origin.refs[ref_name]
+	else:
+		ref: git.Reference = origin.refs[0]
 
-		repo = git.Repo.init(gitDir)
-		origin: git.Remote = repo.create_remote("origin", url=gitUrl)
-		assert origin.exists()
-		origin.fetch()
-
-		if ref:
-			ref: git.Reference = origin.refs[ref]
-		else:
-			ref: git.Reference = origin.refs[0]
-
-		return ref.commit.hexsha
-
-	except GitCommandError as e:
-		# This is needed to stop the backtrace being weird
-		err = e.stderr
-
-	except gitdb.exc.BadName as e:
-		err = "Unable to find the reference " + (ref or "?") + "\n" + e.stderr
-
-	raise TaskError(err.replace("stderr: ", "") \
-		.replace("Cloning into '" + gitDir + "'...", "") \
-		.strip())
+	return ref.commit.hexsha
 
 
 @celery.task()
@@ -313,8 +297,8 @@ def importForeignDownloads(self, id):
 		db.session.commit()
 
 
-@celery.task
-def check_update_config(package_id):
+@celery.task(bind=True)
+def check_update_config(self, package_id):
 	package: Package = Package.query.get(package_id)
 	if package is None:
 		raise TaskError("No such package!")
@@ -323,7 +307,29 @@ def check_update_config(package_id):
 
 	config = package.update_config
 
-	hash = get_commit_hash(package.repo, package.update_config.ref)
+	err = None
+	try:
+		hash = get_commit_hash(package.repo, package.update_config.ref)
+	except IndexError as e:
+		err = "Unable to find the reference.\n" + str(e)
+	except GitCommandError as e:
+		# This is needed to stop the backtrace being weird
+		err = e.stderr
+	except gitdb.exc.BadName as e:
+		err = "Unable to find the reference " + (package.update_config.ref or "?") + "\n" + e.stderr
+
+	if err:
+		err = err.replace("stderr: ", "") \
+			.replace("Cloning into '/tmp/", "Cloning into '") \
+			.strip()
+
+		post_system_thread(package, "Failed to check git repository",
+			"Error: {}.\n\nTask ID: {}" \
+				.format(err, self.request.id))
+
+		db.session.commit()
+		return
+
 	if config.last_commit == hash:
 		return
 
