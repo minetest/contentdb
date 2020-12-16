@@ -14,8 +14,8 @@
 
 	{% if package.repo %}
 		<p>
-			{{ _("When you push a commit or tag to your Git repository, ContentDB can create a new release automatically.") }}
-			{{ _("ContentDB will check your Git repository at 2am UTC every day, but you can use webhooks or the API for faster updates.") }}
+			{{ _("When you push a change to your Git repository, ContentDB can create a new release automatically or send you a reminder.") }}
+			{{ _("ContentDB will check your Git repository every day, but you can use webhooks or the API for faster updates.") }}
 		</p>
 
 		<p>
@@ -23,8 +23,9 @@
 		</p>
 
 		<p class="mt-5">
-			<a class="btn btn-primary" href="{{ package.getUpdateConfigURL() }}">Set up automatic releases</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.getCreateReleaseURL() }}">Create releases manually</a>
+			<a class="btn btn-primary" href="{{ package.getUpdateConfigURL() }}">Automatically</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getUpdateConfigURL() }}">Manually, enable reminders</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getCreateReleaseURL() }}">Manually, no reminders</a>
 			<a class="btn btn-secondary ml-2" href="{{ package.getDetailsURL() }}">Later</a>
 		</p>
 	{% else %}

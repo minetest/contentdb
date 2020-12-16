@@ -1,18 +1,18 @@
 {% extends "base.html" %}
 
 {% block title %}
-	{{ _("Configure Automatic Releases") }} - {{ package.title }}
+	{{ _("Configure Git Update Detection") }} - {{ package.title }}
 {% endblock %}
 
 {% block content %}
-	<h1>{{ _("Configure Automatic Releases") }}</h1>
+	<h1>{{ _("Configure Git Update Detection") }}</h1>
 
 	<p>
-		{{ _("When you push a change to your Git repository, ContentDB can create a new release automatically.") }}
+		{{ _("When you push a change to your Git repository, ContentDB can create a new release automatically or send you a reminder.") }}
 	</p>
 
 	<p>
-		{{ _("ContentDB will poll your Git repository at 2am UTC every day, if your package is approved.") }}
+		{{ _("ContentDB will poll your Git repository every day, if your package is approved.") }}
 		{{ _("You should consider using webhooks or the API for faster releases.") }}
 	</p>
 
@@ -33,10 +33,13 @@
 		{{ render_field(form.trigger, class_="mt-5") }}
 
 		<p class="text-warning mb-4">
-			<span class="fas fa-exclamation-triangle mr-2"></span>
+			<small>
+				<span class="fas fa-exclamation-triangle mr-2"></span>
 
-			{{ _("The new tag trigger isn't supported yet.") }}
-			{{ _("In the meantime, you can use webhooks to create releases on tag events.") }}
+				{{ _("The new tag trigger isn't supported yet.") }}
+				{{ _("If you choose it, it won't trigger until it is supported.") }}
+				{{ _("In the meantime, you can use webhooks to create releases on tag events.") }}
+			</small>
 		</p>
 
 

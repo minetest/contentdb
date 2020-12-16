@@ -176,6 +176,7 @@ def admin_page():
 			return redirect(url_for("admin.admin_page"))
 
 		elif action == "addupdateconfig":
+			added = 0
 			for pkg in Package.query.filter(Package.repo != None, Package.releases.any(), Package.update_config == None).all():
 				pkg.update_config = PackageUpdateConfig()
 
@@ -184,10 +185,11 @@ def admin_page():
 					pkg.update_config.last_commit = release.commit_hash
 
 				db.session.add(pkg.update_config)
+				added += 1
 
 			db.session.commit()
 
-			flash("Added update configs to packages", "success")
+			flash("Added {} update configs".format(added), "success")
 			return redirect(url_for("admin.admin_page"))
 
 		elif action == "runupdateconfig":
