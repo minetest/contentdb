@@ -126,3 +126,12 @@
 .sortable {
 	user-select: none;
 }
+
+blockquote {
+	padding: 0.5em 1em;
+	border-left: 3px solid rgba(255, 255, 255, 0.25);
+
+	& > *:last-child {
+		margin-bottom: 0;
+	}
+}
