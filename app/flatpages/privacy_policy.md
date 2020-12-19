@@ -40,7 +40,7 @@ Please avoid giving other personal information as we do not want it.
 
 * Only the admin has access to the HTTP requests.
   The logs may be shared with others to aid in debugging, but care will be taken to remove any personal information.
-* Encrypted backups are shared with Minetest staff members.
+* Encrypted backups may be shared with select Minetest staff members (moderators + core devs).
   The keys and the backups themselves are given to different people,
   requiring at least two staff members to read a backup.
 * Emails are visible to moderators and the admin.
