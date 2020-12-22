@@ -91,6 +91,9 @@ class Thread(db.Model):
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))
 
+	def get_latest_reply(self):
+		return ThreadReply.query.filter_by(thread_id=self.id).order_by(db.desc(ThreadReply.id)).first()
+
 
 class ThreadReply(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)

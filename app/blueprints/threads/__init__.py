@@ -39,9 +39,16 @@ def list_all():
 		pid = get_int_or_abort(pid)
 		query = query.filter_by(package_id=pid)
 
+	query = query.filter_by(review_id=None)
+
 	query = query.order_by(db.desc(Thread.created_at))
 
-	return render_template("threads/list.html", threads=query.all())
+	page = get_int_or_abort(request.args.get("page"), 1)
+	num = min(40, get_int_or_abort(request.args.get("n"), 100))
+
+	pagination = query.paginate(page, num, True)
+
+	return render_template("threads/list.html", pagination=pagination, threads=pagination.items)
 
 
 @bp.route("/threads/<int:id>/subscribe/", methods=["POST"])

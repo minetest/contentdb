@@ -4,6 +4,7 @@ from .utils import abs_url_for, url_set_query
 from flask_login import current_user
 from flask_babel import format_timedelta
 from urllib.parse import urlparse
+from datetime import datetime as dt
 
 @app.context_processor
 def inject_debug():
@@ -37,7 +38,11 @@ def date(value):
 
 @app.template_filter()
 def datetime(value):
-	return value.strftime("%Y-%m-%d %H:%M") + " UTC"
+	delta = dt.utcnow() - value
+	if delta.days == 0:
+		return format_timedelta(value)
+	else:
+		return value.strftime("%Y-%m-%d %H:%M") + " UTC"
 
 @app.template_filter()
 def timedelta(value):

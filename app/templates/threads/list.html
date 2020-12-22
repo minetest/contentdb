@@ -7,8 +7,14 @@ Threads
 {% block content %}
 	<h1>Threads</h1>
 
+	{% from "macros/pagination.html" import render_pagination %}
 	{% from "macros/threads.html" import render_threadlist %}
+	{{ render_pagination(pagination, url_set_query) }}
+
 	<div class="list-group">
 		{{ render_threadlist(threads) }}
 	</div>
+
+	{{ render_pagination(pagination, url_set_query) }}
+
 {% endblock %}

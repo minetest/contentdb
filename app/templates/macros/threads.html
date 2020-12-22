@@ -95,46 +95,90 @@
 {% endif %}
 {% endmacro %}
 
-{% macro render_threadlist(threads, compact=False) -%}
+{% macro render_compact_threadlist(threads) -%}
 	{% for t in threads %}
 		<a class="list-group-item list-group-item-action"
 				href="{{ url_for('threads.view', id=t.id) }}">
-			{% if compact %}
-				{% if t.private %}&#x1f512; {% endif %}
-				<strong>{{ t.title }}</strong>
-				by {{ t.author.display_name }}
-			{% else %}
-				<div class="row">
-					<div class="col-sm">
-						<span class="mr-3">
-							{% if not t.review and t.private %}
-								<i class="fas fa-lock" style="color:#ffac33;"></i>
-							{% elif not t.review %}
-								<i class="fas fa-comment-alt" style="color:#666;"></i>
-							{% elif t.review.recommends %}
-								<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
-							{% else %}
-								<i class="fas fa-thumbs-down" style="color:#f66;"></i>
-							{% endif %}
-						</span>
+			{% if t.private %}&#x1f512; {% endif %}
+			<strong>{{ t.title }}</strong>
+			by {{ t.author.display_name }}
+		</a>
+	{% else %}
+		<p class="list-group-item"><i>No threads found</i></p>
+	{% endfor %}
+{% endmacro %}
 
-						<strong>{{ t.title }}</strong>
-						by {{ t.author.display_name }}
-					</div>
+{% macro render_threadlist(threads) -%}
+	<div class="list-group-item">
+		<div class="row text-muted">
+			<span class="col-md">
+				{{ _("Thread") }}
+			</span>
 
-					<div class="col-sm">
-						{% if t.package %}
-							{{ _("%(title)s by %(author)s",
-									title="<b>" | safe + t.package.title + "</b>" | safe,
-									author=t.package.author.display_name) }}
-						{% endif %}
-					</div>
+			<span class="col-md">
+				{{ _("Last Reply") }}
+			</span>
 
-					<div class="col-sm-auto text-muted text-right">
+			<span class="col-md-2"></span>
+		</div>
+	</div>
+
+	{% for t in threads %}
+		{% set replies = t.replies.count() - 1 %}
+
+		<a class="list-group-item list-group-item-action"
+				href="{{ url_for('threads.view', id=t.id) }}">
+			<div class="row">
+				<div class="col-md">
+					{% if not t.review and t.private %}
+						<i class="fas fa-lock" style="color:#ffac33;"></i>
+					{% elif not t.review %}
+						<i class="fas fa-comment-alt" style="color:#666;"></i>
+					{% elif t.review.recommends %}
+						<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
+					{% else %}
+						<i class="fas fa-thumbs-down" style="color:#f66;"></i>
+					{% endif %}
+					<strong class="ml-1">
+						{{ t.title }}
+					</strong><br />
+					<span>
+						{{ t.author.display_name }}
+					</span>
+					<span class="text-muted ml-3">
 						{{ t.created_at | datetime }}
-					</div>
+					</span>
+					<span class="text-muted ml-3">
+						{{ replies }}
+						<i class="fas fa-comment ml-1"></i>
+					</span>
 				</div>
-			{% endif %}
+
+				<div class="col-md">
+					{% if replies > 0 %}
+						{% set latest = t.get_latest_reply() %}
+						<span>
+							{{ latest.author.display_name }}
+						</span><br />
+						<span class="text-muted">
+							{{ latest.created_at | datetime }}
+						</span>
+					{% endif %}
+				</div>
+
+				{% if t.package %}
+					<div class="col-md-2 text-muted text-right">
+						<img
+							class="img-fluid"
+							style="max-height: 22px; max-width: 22px;"
+							src="{{ t.package.getThumbnailURL(1) }}" /><br />
+
+						<span class="pl-2">
+							{{ t.package.title }}
+						</span>
+					</div>
+				{% endif %}
+			</div>
 		</a>
 	{% else %}
 		<p class="list-group-item"><i>No threads found</i></p>
