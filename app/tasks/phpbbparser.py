@@ -91,12 +91,13 @@ def getProfileURL(url, username):
 def getProfile(url, username):
 	url = getProfileURL(url, username)
 
-	req = urllib.request.urlopen(url, timeout=5)
-	if req.getcode() == 404:
-		return None
+	try:
+		req = urllib.request.urlopen(url, timeout=5)
+	except urllib.error.HTTPError as e:
+		if e.code == 404:
+			return None
 
-	if req.getcode() != 200:
-		raise IOError(req.getcode())
+		raise IOError(e)
 
 	contents = req.read().decode("utf-8")
 	soup = BeautifulSoup(contents, "lxml")

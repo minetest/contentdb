@@ -1,0 +1,113 @@
+{% extends "base.html" %}
+
+{% block title %}
+Create Account from Forums User
+{% endblock %}
+
+{% block content %}
+	<h1>{{ self.title() }}</h1>
+
+	<h2>{{ _("Confirm Your Account") }}</h2>
+
+	<p>
+		You'll need to use prove that you have access to your forum account using one of the options below.<br>
+		This is so ContentDB can link your account to your forum account.
+	</p>
+
+	<p>
+		Don't have a forums account?
+		You can still <a href="{{ url_for('users.register') }}">sign up without one</a>.
+	</p>
+
+	<div class="row mt-5">
+		<div class="col-sm-6">
+		<div class="card">
+			<div class="card-header">
+				<span class="badge badge-pill badge-dark mr-2">Option 1</span>
+				Use GitHub field in forum profile
+			</div>
+
+			<form method="post" class="card-body" action="">
+				<input class="form-control" type="hidden" name="claim_type" value="github">
+				<input class="form-control" type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+				<p>
+					Enter your forum username here:
+				</p>
+
+				<input class="form-control my-4" type="text" name="username" value="{{ username }}"
+					   placeholder="Forum username" pattern="[a-zA-Z0-9._ -]+" title="Only a-zA-Z0-9._ allowed" required>
+
+				<p>
+					You'll need to have the GitHub field in your forum profile
+					filled out. Log into the forum and
+					<a href="https://forum.minetest.net/ucp.php?i=173">
+						do that here</a>.
+				</p>
+
+				<input class="btn btn-primary" type="submit" value="Next: log in with GitHub">
+			</form>
+		</div>
+		</div>
+
+		<div class="col-sm-6">
+		<div class="card">
+			<div class="card-header">
+				<span class="badge badge-pill badge-dark mr-2">Option 2</span>
+				Verification token
+			</div>
+
+			<form method="post" class="card-body" action="">
+				<input type="hidden" name="claim_type" value="forum">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+				<p>
+					Enter your forum username here:
+				</p>
+
+				<input class="form-control my-3" type="text" name="username" value="{{ username }}"
+					   placeholder="Forum username" pattern="[a-zA-Z0-9._ -]+" title="Only a-zA-Z0-9._ allowed" required>
+
+				<p>
+					Go to
+					<a href="https://forum.minetest.net/ucp.php?i=profile&mode=signature">
+						User Control Panel > Profile > Edit signature
+					</a>
+				</p>
+
+				<p>
+					Paste this into your signature:
+				</p>
+
+				<input class="form-control my-3" type="text" value="{{ key }}" readonly size=32>
+
+				<p>
+					Click next so we can check it.
+				</p>
+				<p>
+					Don't worry, you can remove it after this is done.
+				</p>
+
+				<input class="btn btn-primary" type="submit" value="Next">
+			</form>
+		</div>
+		</div>
+
+{#		<div class="col-sm-4">#}
+{#			<div class="card">#}
+{#				<div class="card-header">#}
+{#					Email/password sign up#}
+{#				</div>#}
+{##}
+{#				<div class="card-body">#}
+{#					<p>#}
+{#						If you have a forum account, please use one of the other two#}
+{#						options.#}
+{#					</p>#}
+{##}
+{#					<a class="btn btn-primary" href="{{ url_for('users.register') }}">Register</a>#}
+{#				</div>#}
+{#			</div>#}
+{#		</div>#}
+	</div>
+{% endblock %}

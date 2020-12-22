@@ -71,7 +71,7 @@ def callback(oauth_token):
 	else:
 		if userByGithub is None:
 			flash("Unable to find an account for that Github user", "danger")
-			return redirect(url_for("users.claim"))
+			return redirect(url_for("users.claim_forums"))
 		elif login_user_set_active(userByGithub, remember=True):
 			addAuditLog(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",
 					url_for("users.profile", username=userByGithub.username))

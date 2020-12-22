@@ -1,135 +1,26 @@
 {% extends "base.html" %}
 
 {% block title %}
-Creating an Account
+{{ _("Create Account") }}
 {% endblock %}
 
 {% block content %}
-	<div class="card">
-		<h2 class="card-header">{{ self.title() }}</h2>
+	<h1>{{ self.title() }}</h1>
 
-		<div class="card-body">
-			<p>
-				If you have a forum account, you'll need to prove that you own it
-				to get an account on ContentDB.
-			</p>
+	<h2>{{ _("Do you have an account on the Minetest Forums?") }}</h2>
 
-			{% if current_user.is_authenticated %}
-				<p>
-					Please log out to continue.
-				</p>
-				<p>
-					<a href="{{ url_for('users.logout', next=url_for('users.claim')) }}" class="btn">Logout</a>
-				</p>
-			{% else %}
-				<p>
-					<b>Don't have a forum account?</b>
-					You don't need one, however it's recommended to make the most
-					out of the Minetest community.
-				</p>
+	<p>
+		ContentDB will link your account to your forum account.
+	</p>
 
-				<a class="btn btn-primary" href="https://forum.minetest.net/ucp.php?mode=register">
-					Create a Forum Account
-				</a>
-			{% endif %}
-		</div>
-	</div>
+	<p>
+		You don't need a forum account, however, it's recommended to make the most
+		out of the Minetest community.
+	</p>
 
-	{% if not current_user.is_authenticated %}
-	<div class="row mt-4">
-		<div class="col-sm-4">
-		<div class="card">
-			<div class="card-header">
-				<span class="badge badge-pill badge-dark mr-2">Option 1</span>
-				Use GitHub field in forum profile
-			</div>
-
-			<form method="post" class="card-body" action="{{ url_for('users.claim') }}">
-				<input class="form-control" type="hidden" name="claim_type" value="github">
-				<input class="form-control" type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-
-				<p>
-					Enter your forum username here:
-				</p>
-
-				<input class="form-control my-4" type="text" name="username" value="{{ username }}"
-                       placeholder="Forum username" pattern="[a-zA-Z0-9._ -]+" title="Only a-zA-Z0-9._ allowed" required>
-
-				<p>
-					You'll need to have the GitHub field in your forum profile
-					filled out. Log into the forum and
-					<a href="https://forum.minetest.net/ucp.php?i=173">
-						do that here</a>.
-				</p>
-
-				<input class="btn btn-primary" type="submit" value="Next: log in with GitHub">
-			</form>
-		</div>
-		</div>
-
-		<div class="col-sm-4">
-		<div class="card">
-			<div class="card-header">
-				<span class="badge badge-pill badge-dark mr-2">Option 2</span>
-				Verification token
-			</div>
-
-			<form method="post" class="card-body" action="{{ url_for('users.claim') }}">
-				<input type="hidden" name="claim_type" value="forum">
-				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-
-				<p>
-					Enter your forum username here:
-				</p>
-
-				<input class="form-control my-3" type="text" name="username" value="{{ username }}"
-                       placeholder="Forum username" pattern="[a-zA-Z0-9._ -]+" title="Only a-zA-Z0-9._ allowed" required>
-
-				<p>
-					Go to
-					<a href="https://forum.minetest.net/ucp.php?i=profile&mode=signature">
-						User Control Panel > Profile > Edit signature
-					</a>
-				</p>
-
-				<p>
-					Paste this into your signature:
-				</p>
-
-				<input class="form-control my-3" type="text" value="{{ key }}" readonly size=32>
-
-				<p>
-					Click next so we can check it.
-				</p>
-				<p>
-					Don't worry, you can remove it after this is done.
-				</p>
-
-				<input class="btn btn-primary" type="submit" value="Next">
-			</form>
-		</div>
-		</div>
-
-		<div class="col-sm-4">
-            <div class="card">
-                <div class="card-header">
-                    <span class="badge badge-pill badge-dark mr-2">Option 3</span>
-                    Email/password sign up
-                </div>
-
-                <div class="card-body">
-                    <p class="alert alert-danger">
-                        <b>Only do this if you don't have a forum account!</b>
-                    </p>
-                    <p>
-                        If you have a forum account, please use one of the other two
-                        options.
-                    </p>
-
-                    <a class="btn btn-primary" href="{{ url_for('users.register') }}">Register</a>
-                </div>
-            </div>
-		</div>
-	</div>
-	{% endif %}
+	<p class="mt-5">
+		<a class="btn btn-primary mr-3" href="{{ url_for('users.claim_forums') }}"><b>Yes</b>, I have a forums account</a>
+		<a class="btn btn-primary mr-3" href="{{ url_for('users.register') }}"><b>No</b>, I don't have one</a>
+		<a class="btn btn-secondary" href="https://forum.minetest.net/ucp.php?mode=register">Create forum account</a>
+	</p>
 {% endblock %}

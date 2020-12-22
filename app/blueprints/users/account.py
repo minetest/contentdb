@@ -111,7 +111,7 @@ def handle_register(form):
 	if user_by_name:
 		if user_by_name.rank == UserRank.NOT_JOINED and user_by_name.forums_username:
 			flash("An account already exists for that username but hasn't been claimed yet.", "danger")
-			return redirect(url_for("users.claim", username=user_by_name.forums_username))
+			return redirect(url_for("users.claim_forums", username=user_by_name.forums_username))
 		else:
 			flash("That username is already in use, please choose another.", "danger")
 			return

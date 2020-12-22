@@ -104,7 +104,7 @@
 {% if not current_user.is_authenticated and user.rank == user.rank.NOT_JOINED and user.forums_username %}
 	<div class="alert alert-secondary mb-5">
 		<a class="float-right btn btn-default btn-sm"
-			href="{{ url_for('users.claim', username=user.forums_username) }}">Claim</a>
+			href="{{ url_for('users.claim_forums', username=user.forums_username) }}">Claim</a>
 
 		Is this you? Claim your account now!
 	</div>
