@@ -107,12 +107,8 @@
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}#unadded-topics">Your unadded topics</a>
 								</li>
-								<div class="dropdown-divider"></div>
-								<li class="nav-item"><a  class="nav-link" href="{{ url_for('users.list_all') }}">{{ _("User list") }}</a></li>
-								<li class="nav-item">
-									<a class="nav-link" href="{{ url_for('todo.topics') }}">{{ _("All unadded topics") }}</a>
-								</li>
 								{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+									<div class="dropdown-divider"></div>
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.audit') }}">{{ _("Audit Log") }}</a></li>
 								{% endif %}
 								{% if current_user.rank == current_user.rank.ADMIN %}
