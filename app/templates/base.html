@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
 	<link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=17">
+	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=18">
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
 	<link rel="shortcut icon" href="/favicon-16.png" sizes="16x16">
 	<link rel="icon" href="/favicon-128.png" sizes="128x128">
@@ -107,7 +107,7 @@
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}#unadded-topics">Your unadded topics</a>
 								</li>
-							  	<div class="dropdown-divider"></div>
+								<div class="dropdown-divider"></div>
 								<li class="nav-item"><a  class="nav-link" href="{{ url_for('users.list_all') }}">{{ _("User list") }}</a></li>
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('todo.topics') }}">{{ _("All unadded topics") }}</a>
@@ -167,14 +167,19 @@
 	</main>
 	{% endblock %}
 
-	<footer class="container footer-copyright my-5 page-footer font-small text-center">
-		ContentDB &copy; 2018-20 to <a href="https://rubenwardy.com/">rubenwardy</a> |
-		<a href="https://github.com/minetest/contentdb">GitHub</a> |
-		<a href="{{ url_for('flatpage', path='help') }}">{{ _("Help") }}</a> |
-		<a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a> |
-		<a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a> |
-		<a href="{{ url_for('flatpage', path='help/reporting') }}">{{ _("Report / DMCA") }}</a> |
-		<a href="{{ url_for('users.list_all') }}">{{ _("User List") }}</a>
+	<footer class="my-5">
+		<p class="pt-5 mb-1">
+			ContentDB &copy; 2018-20 to <a href="https://rubenwardy.com/">rubenwardy</a>
+		</p>
+
+		<ul class="list-inline my-1">
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help') }}">{{ _("Help") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help/reporting') }}">{{ _("Report / DMCA") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('users.list_all') }}">{{ _("User List") }}</a></li>
+			<li class="list-inline-item"><a href="https://github.com/minetest/contentdb">{{ _("Source Code") }}</a></li>
+		</ul>
 
 		{% if debug %}
 			<p style="color: red">
