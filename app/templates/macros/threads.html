@@ -115,7 +115,7 @@
 				{{ _("Thread") }}
 			</span>
 
-			<span class="col-md">
+			<span class="col-md-3">
 				{{ _("Last Reply") }}
 			</span>
 
@@ -148,13 +148,16 @@
 					<span class="text-muted ml-3">
 						{{ t.created_at | datetime }}
 					</span>
-					<span class="text-muted ml-3">
+				</div>
+
+				{% if replies > 0 %}
+					<span class="col-md-auto text-muted">
 						{{ replies }}
 						<i class="fas fa-comment ml-1"></i>
 					</span>
-				</div>
+				{% endif %}
 
-				<div class="col-md">
+				<div class="col-md-3">
 					{% if replies > 0 %}
 						{% set latest = t.get_latest_reply() %}
 						<span>
