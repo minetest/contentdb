@@ -222,7 +222,7 @@ def makeVCSRelease(self, id, branch):
 		destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
 
 		assert(not os.path.isfile(destPath))
-		archiver = GitArchiver(force_sub=True, main_repo_abspath=repo.working_tree_dir)
+		archiver = GitArchiver(prefix=release.package.name, force_sub=True, main_repo_abspath=repo.working_tree_dir)
 		archiver.create(destPath)
 		assert(os.path.isfile(destPath))
 
