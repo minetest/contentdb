@@ -1,0 +1,138 @@
+{% macro render_reviews(reviews, current_user, show_package_link=False) -%}
+<ul class="comments mt-4 mb-0">
+	{% for review in reviews %}
+		<li class="row my-2 mx-0">
+			<div class="col-md-1 p-1">
+				<a href="{{ url_for('users.profile', username=review.author.username) }}">
+					<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ review.author.getProfilePicURL() }}">
+				</a>
+			</div>
+			<div class="col-md-auto pl-1 pr-3 pt-2 text-center" style=" font-size: 200%;">
+				{% if review.recommends %}
+					<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
+				{% else %}
+					<i class="fas fa-thumbs-down" style="color:#f66;"></i>
+				{% endif %}
+			</div>
+			{% if review.thread %}
+				{% set reply = review.thread.replies[0] %}
+				<div class="col pr-0">
+					<div class="card">
+						<div class="card-header">
+							<a class="author {{ review.author.rank.name }}"
+									href="{{ url_for('users.profile', username=review.author.username) }}">
+								{{ review.author.display_name }}
+							</a>
+
+							<a name="reply-{{ reply.id }}" class="text-muted float-right"
+									href="{{ url_for('threads.view', id=review.thread.id) }}#reply-{{ reply.id }}">
+								{{ review.created_at | datetime }}
+							</a>
+						</div>
+
+						<div class="card-body">
+							{% if current_user == review.author %}
+								<a class="btn btn-primary btn-sm ml-1 float-right"
+										href="{{ review.package.getReviewURL() }}">
+									<i class="fas fa-edit"></i>
+								</a>
+							{% endif %}
+
+							<p>
+								<strong>{{ review.thread.title }}</strong>
+							</p>
+
+							{{ reply.comment | markdown }}
+
+							<p class="mt-2 mb-0">
+								{% if show_package_link %}
+									<a class="btn btn-primary mr-1" href="{{ review.package.getDetailsURL() }}">
+										{{ _("%(title)s by %(author)s",
+												title="<b>" | safe + review.package.title + "</b>" | safe,
+												author=review.package.author.display_name) }}
+									</a>
+								{% endif %}
+
+								<a class="btn {% if review.thread.replies.count() > 1 %} btn-primary {% else %} btn-secondary {% endif %}"
+										href="{{ url_for('threads.view', id=review.thread.id) }}">
+									<i class="fas fa-comments mr-2"></i>
+									{{ _("%(num)d comments", num=review.thread.replies.count() - 1) }}
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			{% endif %}
+		</li>
+	{% else %}
+		<p>
+			<i>{{ _("No reviews, yet.") }}</i>
+		</p>
+	{% endfor %}
+</ul>
+{% endmacro %}
+
+
+{% macro render_review_form(package, current_user) -%}
+	<div class="card mt-0 mb-4 ">
+		<div class="card-header">
+			{{ _("Review") }}
+		</div>
+		<form method="post" action="{{ package.getReviewURL() }}" class="card-body">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<p>
+				{{ _("Do you recommend this %(type)s?", type=package.type.value | lower) }}
+			</p>
+
+			<div class="btn-group btn-group-toggle" data-toggle="buttons">
+				<label class="btn btn-primary">
+					<i class="fas fa-thumbs-up mr-2"></i>
+					<input type="radio" name="recommends" value="yes" autocomplete="off"> {{ _("Yes") }}
+				</label>
+				<label class="btn btn-primary">
+					<i class="fas fa-thumbs-down mr-2"></i>
+					<input type="radio" name="recommends" value="no" autocomplete="off"> {{ _("No") }}
+				</label>
+			</div>
+
+			<p class="mt-4 mb-3">
+				{{ _("Why or why not? Try to be constructive") }}
+			</p>
+
+			<div class="form-group">
+				<label for="title">{{ _("Title") }}</label>
+				<input class="form-control" id="title" name="title" required="" type="text">
+			</div>
+
+			<textarea class="form-control markdown" required maxlength=2000 name="comment"></textarea><br />
+			<input class="btn btn-primary" type="submit" value="{{ _('Post Review') }}" />
+		</form>
+	</div>
+{% endmacro %}
+
+
+{% macro render_review_preview(package, current_user) -%}
+	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+	<div class="card mt-0 mb-4 ">
+		<div class="card-header">
+			{{ _("Review") }}
+		</div>
+		<form method="post" action="{{ package.getReviewURL() }}" class="card-body">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<p>
+				{{ _("Do you recommend this %(type)s?", type=package.type.value | lower) }}
+			</p>
+
+			<div class="btn-group">
+				<button class="btn btn-primary" name="recommends" value="yes">
+					<i class="fas fa-thumbs-up mr-2"></i>
+					{{ _("Yes") }}
+				</button>
+				<button class="btn btn-primary" name="recommends" value="no">
+					<i class="fas fa-thumbs-down mr-2"></i>
+					{{ _("No") }}
+				</button>
+			</div>
+		</form>
+	</div>
+{% endmacro %}

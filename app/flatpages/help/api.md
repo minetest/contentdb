@@ -9,6 +9,8 @@ Authentication is done using Bearer tokens:
 
 You can use the `/api/whoami` to check authentication.
 
+Tokens can be attained by visiting [Profile > "API Tokens"](/user/tokens/).
+
 ## Endpoints
 
 ### Misc
@@ -16,12 +18,15 @@ You can use the `/api/whoami` to check authentication.
 * GET `/api/whoami/` - Json dictionary with the following keys:
 	* `is_authenticated` - True on successful API authentication
 	* `username` - Username of the user authenticated as, null otherwise.
-	* 403 will be thrown on unsupported authentication type, invalid access token, or other errors.
+	* 4xx status codes will be thrown on unsupported authentication type, invalid access token, or other errors.
 
 ### Packages
 
 * GET `/api/packages/` - See [Package Queries](#package-queries)
+* GET `/api/scores/` - See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/`
+* GET `/api/packages/<username>/<name>/dependencies/`
+    * If query argument `only_hard` is present, only hard deps will be returned.
 
 ### Releases
 
@@ -30,16 +35,15 @@ You can use the `/api/whoami` to check authentication.
 	* Requires authentication.
 	* `title`: human-readable name of the release.
 	* `method`: Release-creation method, only `git` is supported.
-	* `min_protocol`: (Optional) minimum Minetest protocol version. See [Minetest](#minetest).
-	* `min_protocol`: (Optional) maximum Minetest protocol version. See [Minetest](#minetest).
 	* If `git` release-creation method:
 		* `ref` - git reference, eg: `master`.
+	* You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
 
 
 ### Topics
 
 * GET `/api/topics/` - Supports [Package Queries](#package-queries), and the following two options:
-    * `show_added` - Show topics which exist as packages, default true.
+	* `show_added` - Show topics which exist as packages, default true.
 	* `show_discarded` - Show topics which have been marked as outdated, default false.
 
 ### Minetest
@@ -56,9 +60,29 @@ Example:
 Supported query parameters:
 
 * `type` - Package types (`mod`, `game`, `txp`).
-* `q` - Query string
+* `q` - Query string.
+* `author` - Filter by author.
+* `tag` - Filter by tags.
 * `random` - When present, enable random ordering and ignore `sort`.
-* `hide` - Hide content based on [Content Flags](content_flags).
-* `sort` - Sort by (`name`, `views`, `date`, `score`).
-* `order` - Sort ascending (`Asc`) or descending (`desc`).
+* `limit` - Return at most `limit` packages.
+* `hide` - Hide content based on [Content Flags](/help/content_flags/).
+* `sort` - Sort by (`name`, `title`, `score`, `reviews`, `downloads`, `created_at`, `approved_at`, `last_release`).
+* `order` - Sort ascending (`asc`) or descending (`desc`).
 * `protocol_version` - Only show packages supported by this Minetest protocol version.
+* `engine_version` - Only show packages supported by this Minetest engine version, eg: `5.3.0`.
+
+
+## Topic Queries
+
+Example:
+
+	/api/topics/?q=mobs
+
+Supported query parameters:
+
+* `q` - Query string.
+* `sort` - Sort by (`name`, `views`, `date`).
+* `order` - Sort ascending (`asc`) or descending (`desc`).
+* `show_added` - Show topics that have an existing package.
+* `show_discarded` - Show topics marked as discarded.
+* `limit` - Return at most `limit` topics.

@@ -5,46 +5,72 @@
 {% endblock %}
 
 {% block content %}
-	<ul>
-		<li><a href="{{ url_for('users.list_all') }}">User list</a></li>
-		<li><a href="{{ url_for('admin.tag_list') }}">Tag Editor</a></li>
-		<li><a href="{{ url_for('admin.license_list') }}">License Editor</a></li>
-		<li><a href="{{ url_for('admin.version_list') }}">Version Editor</a></li>
-		<li><a href="{{ url_for('admin.switch_user') }}">Sign in as another user</a></li>
-	</ul>
+	<div class="row">
+		<div class="col-md-6">
+			<div class="list-group">
+				<a class="list-group-item list-group-item-action" href="{{ url_for('users.list_all') }}">User list</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.tag_list') }}">Tag Editor</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.license_list') }}">License Editor</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.version_list') }}">Version Editor</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.warning_list') }}">Warning Editor</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.send_bulk_email') }}">Send bulk email</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.send_bulk_notification') }}">Send bulk notification</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.switch_user') }}">Sign in as another user</a>
+			</div>
+		</div>
 
-	<div class="card my-4">
-		<h2 class="card-header">Do action</h2>
+		<div class="col-md-6">
+			<div class="card mb-4">
+				<h2 class="card-header">Do action</h2>
 
-		<form method="post" action="" class="card-body">
-			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<select name="action">
-				<option value="delstuckreleases" selected>Delete stuck releases</option>
-				<option value="checkreleases">Validate all Zip releases</option>
-				<option value="importmodlist">Import forum topics</option>
-				<option value="recalcscores">Recalculate package scores</option>
-				<option value="checkusers">Check forum users</option>
-				<option value="importscreenshots">Import screenshots from VCS</option>
-				<!-- <option value="importdepends">Import dependencies from downloads</option> -->
-				<!-- <option value="modprovides">Set provides to mod name</option> -->
-				<!-- <option value="vcsrelease">Create VCS releases</option> -->
-			</select>
-			<input type="submit" value="Perform" />
-		</form>
-	</div>
+				<form method="post" action="" class="card-body">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<div class="row px-3">
+						<select name="action" class="custom-select col">
+							<option value="cleanuploads" selected>Delete unreachable uploads</option>
+							<option value="delmetapackages">Delete unused meta packages</option>
+							<option value="delstuckreleases">Delete stuck releases</option>
+							<option value="reimportpackages">Reimport meta</option>
+							<option value="recalcscores">Recalculate package scores</option>
+							<option value="div">------</option>
+							<option value="checkreleases">Validate all Zip releases</option>
+							<option value="importmodlist">Import forum topics</option>
+							<option value="importforeign">Import foreign release downloads</option>
+							<option value="checkusers">Check forum users</option>
+							<option value="importscreenshots">Import screenshots from VCS</option>
+						</select>
+						<input type="submit" value="Perform" class="col-sm-auto btn btn-primary ml-2" />
+					</div>
+				</form>
+			</div>
 
-	<div class="card my-4">
-		<h2 class="card-header">Restore Package</h2>
+			<div class="card">
+				<h2 class="card-header">Restore Package</h2>
 
-		<form method="post" action="" class="card-body">
-			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<input type="hidden" name="action" value="restore" />
-			<select name="package">
-				{% for p in deleted_packages %}
-					<option value={{ p.id }}>{{ p.id}}) {{ p.title }} by {{ p.author.display_name }}</option>
-				{% endfor %}
-			</select>
-			<input type="submit" value="Restore" />
-		</form>
+				<form method="post" action="" class="card-body">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="hidden" name="action" value="restore" />
+					<div class="row px-3">
+						<select name="package" class="custom-select col">
+							{% for p in deleted_packages %}
+								<option value={{ p.id }}>{{ p.id}}) {{ p.title }} by {{ p.author.display_name }}</option>
+							{% endfor %}
+						</select>
+						<input type="submit" value="Restore" class="col-sm-auto btn btn-primary ml-2" />
+					</div>
+				</form>
+
+				<form method="post" action="" class="card-body">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="hidden" name="action" value="delremovedpackages" />
+
+					<p>
+						{{ _("Deletion is permanent.") }}
+					</p>
+
+					<input type="submit" value="Delete Removed Packages" class="btn btn-danger" />
+				</form>
+			</div>
+		</div>
 	</div>
 {% endblock %}

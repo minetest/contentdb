@@ -1,16 +1,66 @@
 {% extends "base.html" %}
 
 {% block title %}
-Tags
+{{ _("Tags") }}
 {% endblock %}
 
 {% block content %}
-	<p>
-		<a href="{{ url_for('admin.create_edit_tag') }}">New Tag</a>
+	<a class="btn btn-primary float-right" href="{{ url_for('admin.create_edit_tag') }}">{{ _("New Tag") }}</a>
+
+	<h1>{{ _("Tags") }}</h1>
+
+	<p class="float-right">
+		Sort by:
+		<a href="{{ url_set_query(sort='name') }}">Name</a> |
+		<a href="{{ url_set_query(sort='views') }}">Views</a>
 	</p>
-	<ul>
+
+	<p>
+		Also see <a href="/help/package_tags/">Package Tags</a>.
+	</p>
+
+	<div class="list-group">
+		<div class="list-group-item">
+			<div class="row text-muted">
+				<div class="col-sm-2">
+					{{ _("Name") }}
+				</div>
+
+				<div class="col-sm">
+					{{ _("Description") }}
+				</div>
+
+				<span class="col-sm-1 text-center">
+					{{ _("Views") }}
+				</span>
+
+				<div class="col-sm-1 text-center">
+					{{ _("Packages") }}
+				</div>
+			</div>
+		</div>
+
 		{% for t in tags %}
-			<li><a href="{{ url_for('admin.create_edit_tag', name=t.name) }}">{{ t.title }}</a> [{{ t.packages | count }} packages]</li>
+			<a class="list-group-item list-group-item-action"
+					href="{{ url_for('admin.create_edit_tag', name=t.name) }}">
+				<div class="row">
+					<div class="col-sm-2">
+						{{ t.title }}
+					</div>
+
+					<div class="col-sm">
+						{{ t.description or "" }}
+					</div>
+
+					<div class="col-sm-1 text-center">
+						{{ t.views }}
+					</div>
+
+					<div class="col-sm-1 text-center">
+						{{ t.packages | count }}
+					</div>
+				</div>
+			</a>
 		{% endfor %}
-	</ul>
+	</div>
 {% endblock %}

@@ -2,13 +2,14 @@
 # License: MIT
 # Source: https://github.com/rubenwardy/python_phpbb_parser
 
-import urllib, socket
-from bs4 import *
-from urllib.parse import urljoin
-from datetime import datetime
+import re
+import urllib
+import urllib.parse as urlparse
 import urllib.request
-import os.path
-import time, re
+from datetime import datetime
+from urllib.parse import urlencode
+from bs4 import *
+
 
 def urlEncodeNonAscii(b):
 	return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b)
@@ -21,10 +22,10 @@ class Profile:
 		self.properties = {}
 
 	def set(self, key, value):
-		self.properties[key] = value
+		self.properties[key.lower()] = value
 
 	def get(self, key):
-		return self.properties[key] if key in self.properties else None
+		return self.properties.get(key.lower())
 
 	def __str__(self):
 		return self.username + "\n" + str(self.signature) + "\n" + str(self.properties)
@@ -39,7 +40,7 @@ def __extract_properties(profile, soup):
 	if len(imgs) == 1:
 		profile.avatar = imgs[0]["src"]
 
-	res = el.find_all("dl", class_ = "left-box details")
+	res = el.select("dl.left-box.details")
 	if len(res) != 1:
 		return None
 
@@ -66,31 +67,48 @@ def __extract_properties(profile, soup):
 
 def __extract_signature(soup):
 	res = soup.find_all("div", class_="signature")
-	if (len(res) != 1):
+	if len(res) != 1:
 		return None
 	else:
-		return res[0]
+		return str(res[0])
+
+
+def getProfileURL(url, username):
+	url = urlparse.urlparse(url)
+
+	# Update path
+	url = url._replace(path="/memberlist.php")
+
+	# Set query args
+	query = dict(urlparse.parse_qsl(url.query))
+	query.update({ "un": username, "mode": "viewprofile" })
+	query_encoded = urlencode(query)
+	url = url._replace(query=query_encoded)
+
+	return urlparse.urlunparse(url)
+
 
 def getProfile(url, username):
-	url = url + "/memberlist.php?mode=viewprofile&un=" + urlEncodeNonAscii(username)
+	url = getProfileURL(url, username)
 
-	req = urllib.request.urlopen(url, timeout=5)
-	if req.getcode() == 404:
-		return None
+	try:
+		req = urllib.request.urlopen(url, timeout=5)
+	except urllib.error.HTTPError as e:
+		if e.code == 404:
+			return None
 
-	if req.getcode() != 200:
-		raise IOError(req.getcode())
+		raise IOError(e)
 
 	contents = req.read().decode("utf-8")
 	soup = BeautifulSoup(contents, "lxml")
 	if soup is None:
 		return None
-	else:
-		profile = Profile(username)
-		profile.signature = __extract_signature(soup)
-		__extract_properties(profile, soup)
 
-		return profile
+	profile = Profile(username)
+	profile.signature = __extract_signature(soup)
+	__extract_properties(profile, soup)
+
+	return profile
 
 
 regex_id = re.compile(r"^.*t=([0-9]+).*$")
@@ -117,8 +135,8 @@ def parseForumListPage(id, page, out, extra=None):
 		title  = link.find(text=True)
 
 		# Date
-		left   = topic.find("dt")
-		date   = left.get_text().split("»")[1].strip()
+		left   = topic.find(class_="topic-poster")
+		date   = left.find("time").get_text()
 		date   = datetime.strptime(date, "%a %b %d, %Y %H:%M")
 		author = left.find_all("a")[-1].get_text().strip()
 
@@ -148,7 +166,7 @@ def parseForumListPage(id, page, out, extra=None):
 
 	return True
 
-def getTopicsFromForum(id, out={}, extra=None):
+def getTopicsFromForum(id, out, extra=None):
 	print("Fetching all topics from forum {}".format(id))
 	page = 0
 	while parseForumListPage(id, page, out, extra):

@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block content %}
+{% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
+
+<div class="card">
+	<h2 class="card-header">{{ _("Register") }}</h2>
+
+	<form action="" method="POST" class="form card-body" role="form">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.username) }}
+		{{ render_field(form.email) }}
+		{{ render_field(form.password) }}
+
+		<p>
+			Must be at least 8 characters long.
+		</p>
+		<p>
+			Password suggestion
+			(<a href="https://xkcd.com/936/">Why?</a>):
+			<code>{{ suggested_password }}</code>
+		</p>
+
+		<p>
+			Please read the <a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a>.
+		</p>
+
+		{# Submit button #}
+		<p>
+			{{ render_submit_field(form.submit, tabindex=180) }}
+		</p>
+	</form>
+</div>
+
+{% endblock %}

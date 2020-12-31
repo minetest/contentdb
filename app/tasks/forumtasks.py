@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,14 +15,11 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import flask, json, re
-from flask_sqlalchemy import SQLAlchemy
-from app import app
+import json, re, sys
 from app.models import *
 from app.tasks import celery
 from .phpbbparser import getProfile, getTopicsFromForum
 import urllib.request
-from urllib.parse import urlparse, quote_plus
 
 @celery.task()
 def checkForumAccount(username, forceNoSave=False):
@@ -63,6 +60,7 @@ def checkForumAccount(username, forceNoSave=False):
 		db.session.commit()
 
 	return needsSaving
+
 
 @celery.task()
 def checkAllForumAccounts(forceNoSave=False):
@@ -131,21 +129,34 @@ def importTopicList():
 	for topic in ForumTopic.query.all():
 		topics_by_id[topic.topic_id] = topic
 
+	def get_or_create_user(username):
+		user = username_to_user.get(username)
+		if user:
+			return user
+
+		user = User.query.filter_by(forums_username=username).first()
+		if user is None:
+			user = User.query.filter_by(username=username).first()
+			if user:
+				return None
+
+			user = User(username)
+			user.forums_username = username
+			db.session.add(user)
+
+		username_to_user[username] = user
+		return user
+
 	# Create or update
 	for info in info_by_id.values():
 		id = int(info["id"])
 
 		# Get author
 		username = info["author"]
-		user = username_to_user.get(username)
+		user = get_or_create_user(username)
 		if user is None:
-			user = User.query.filter_by(forums_username=username).first()
-			if user is None:
-				print(username + " not found!")
-				user = User(username)
-				user.forums_username = username
-				db.session.add(user)
-			username_to_user[username] = user
+			print("Error! Unable to create user {}".format(username), file=sys.stderr)
+			continue
 
 		# Get / add row
 		topic = topics_by_id.get(id)

@@ -19,7 +19,8 @@ function getJSON(url, method) {
 
 function pollTask(poll_url, disableTimeout) {
 	return new Promise(function(resolve, reject) {
-		var tries = 0;
+		let tries = 0;
+
 		function retry() {
 			tries++;
 			if (!disableTimeout && tries > 30) {

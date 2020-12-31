@@ -1,0 +1,80 @@
+{% extends "users/settings_base.html" %}
+
+{% block title %}
+	{{ _("Account and Security | %(username)s", username=user.username) }}
+{% endblock %}
+
+{% block pane %}
+<h2 class="mt-0">{{ _("Account and Security") }}</h2>
+
+<h3>{{ _("Password") }}</h3>
+{% if user == current_user %}
+	{% if user.password %}
+		<a class="btn btn-primary" href="{{ url_for('users.change_password') }}">Change Password</a>
+	{% else %}
+		<a class="btn btn-primary" href="{{ url_for('users.set_password') }}">Set Password</a>
+	{% endif %}
+{% else %}
+	{% if user.password %}
+		<p>{{ _("Has password") }}</p>
+	{% else %}
+		<p class="text-danger">{{ _("Doesn't have password") }}</p>
+	{% endif %}
+{% endif %}
+
+<h3>{{ _("Linked Accounts") }}</h3>
+<table class="table">
+	<tr>
+		<td>Forums</td>
+		<td>
+			{% if user.forums_username %}
+				<a class="btn btn-secondary" href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
+					Connected [{{ user.forums_username }}]
+				</a>
+			{% else %}
+				Please <a href="https://forum.minetest.net/ucp.php?i=pm&mode=compose&u=2051">PM rubenwardy</a>
+				on the forums to link your account.
+			{% endif %}
+		</td>
+	</tr>
+	<tr>
+		<td>GitHub</td>
+		<td>
+			{% if user.github_username %}
+				<a class="btn btn-secondary" href="https://github.com/{{ user.github_username }}">
+					Connected [{{ user.github_username }}]
+				</a>
+
+				{% if user == current_user %}
+					<a class="btn btn-secondary ml-2" href="{{ url_for('github.view_permissions') }}">View ContentDB's GitHub Permissions</a>
+				{% endif %}
+			{% elif user == current_user %}
+				<a class="btn btn-secondary" href="{{ url_for('github.start') }}">Link Github</a>
+			{% else %}
+				None
+			{% endif %}
+		</td>
+	</tr>
+</table>
+
+{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+	<a class="btn btn-secondary float-right" href="{{ url_for('admin.audit', username=user.username) }}">View All</a>
+{% endif %}
+
+<h3>{{ _("Recent Account Actions") }}</h3>
+
+{% from "macros/audit_log.html" import render_audit_log %}
+{{ render_audit_log(user.audit_log_entries.limit(10).all(), current_user) }}
+
+<h3>{{ _("Account Deletion and Deactivation") }}</h3>
+
+{% if current_user.rank.atLeast(current_user.rank.ADMIN) %}
+	<a class="btn btn-danger" href="{{ url_for('users.delete', username=user.username) }}">Delete or Deactivate</a>
+{% else %}
+	<p>
+		{{ _("Account Deletion and Deactivation isn't available to users yet.") }}
+		{{ _("Please contact the admin.") }}
+	</p>
+{% endif %}
+
+{% endblock %}

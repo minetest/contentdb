@@ -1,11 +1,11 @@
 from .models import *
-from .utils import make_flask_user_password
+from .utils import make_flask_login_password
 
 
 def populate(session):
 	admin_user = User("rubenwardy")
-	admin_user.active = True
-	admin_user.password = make_flask_user_password("tuckfrump")
+	admin_user.is_active = True
+	admin_user.password = make_flask_login_password("tuckfrump")
 	admin_user.github_username = "rubenwardy"
 	admin_user.forums_username = "rubenwardy"
 	admin_user.rank = UserRank.ADMIN
@@ -17,10 +17,10 @@ def populate(session):
 	session.add(MinetestRelease("5.1", 38))
 
 	tags = {}
-	for tag in ["Inventory", "Mapgen", "Building", \
-			"Mobs and NPCs", "Tools", "Player effects", \
-			"Environment", "Transport", "Maintenance", "Plants and farming", \
-			"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
+	for tag in ["Inventory", "Mapgen", "Building",
+		"Mobs and NPCs", "Tools", "Player effects",
+		"Environment", "Transport", "Maintenance", "Plants and farming",
+		"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
 		row = Tag(tag)
 		tags[row.name] = row
 		session.add(row)
@@ -63,7 +63,7 @@ def populate_test_data(session):
 
 
 	mod = Package()
-	mod.approved = True
+	mod.state = PackageState.APPROVED
 	mod.name = "alpha"
 	mod.title = "Alpha Test"
 	mod.license = licenses["MIT"]
@@ -87,7 +87,7 @@ def populate_test_data(session):
 	session.add(rel)
 
 	mod1 = Package()
-	mod1.approved = True
+	mod1.state = PackageState.APPROVED
 	mod1.name = "awards"
 	mod1.title = "Awards"
 	mod1.license = licenses["LGPLv2.1"]
@@ -124,7 +124,7 @@ awards.register_achievement("award_mesefind",{
 	session.add(rel)
 
 	mod2 = Package()
-	mod2.approved = True
+	mod2.state = PackageState.APPROVED
 	mod2.name = "mesecons"
 	mod2.title = "Mesecons"
 	mod2.tags.append(tags["tools"])
@@ -213,7 +213,7 @@ No warranty is provided, express or implied, for any part of the project.
 	session.add(mod2)
 
 	mod = Package()
-	mod.approved = True
+	mod.state = PackageState.APPROVED
 	mod.name = "handholds"
 	mod.title = "Handholds"
 	mod.license = licenses["MIT"]
@@ -237,7 +237,7 @@ No warranty is provided, express or implied, for any part of the project.
 	session.add(rel)
 
 	mod = Package()
-	mod.approved = True
+	mod.state = PackageState.APPROVED
 	mod.name = "other_worlds"
 	mod.title = "Other Worlds"
 	mod.license = licenses["MIT"]
@@ -254,7 +254,7 @@ No warranty is provided, express or implied, for any part of the project.
 	session.add(mod)
 
 	mod = Package()
-	mod.approved = True
+	mod.state = PackageState.APPROVED
 	mod.name = "food"
 	mod.title = "Food"
 	mod.license = licenses["LGPLv2.1"]
@@ -270,7 +270,7 @@ No warranty is provided, express or implied, for any part of the project.
 	session.add(mod)
 
 	mod = Package()
-	mod.approved = True
+	mod.state = PackageState.APPROVED
 	mod.name = "food_sweet"
 	mod.title = "Sweet Foods"
 	mod.license = licenses["CC0"]
@@ -287,7 +287,7 @@ No warranty is provided, express or implied, for any part of the project.
 	session.add(mod)
 
 	game1 = Package()
-	game1.approved = True
+	game1.state = PackageState.APPROVED
 	game1.name = "capturetheflag"
 	game1.title = "Capture The Flag"
 	game1.type = PackageType.GAME
@@ -350,7 +350,7 @@ Uses the CTF PvP Engine.
 
 
 	mod = Package()
-	mod.approved = True
+	mod.state = PackageState.APPROVED
 	mod.name = "pixelbox"
 	mod.title = "PixelBOX Reloaded"
 	mod.license = licenses["CC0"]

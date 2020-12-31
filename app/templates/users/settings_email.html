@@ -1,0 +1,62 @@
+{% extends "users/settings_base.html" %}
+
+{% block title %}
+	{{ _("Email and Notifications | %(username)s", username=user.username) }}
+{% endblock %}
+
+{% block pane %}
+	<h2 class="mt-0">{{ _("Email and Notifications") }}</h2>
+
+	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
+	<form action="" method="POST" class="form" role="form">
+		{{ form.hidden_tag() }}
+
+		<h3>Email Address</h3>
+
+		{{ render_field(form.email, tabindex=100) }}
+
+		<p>
+			Your email is needed to recover your account if you forget your
+			password, and to send (configurable) notifications.
+			Your email will never be shared with a third-party.
+		</p>
+
+
+		<h3>Notification Settings</h3>
+
+		{% if is_new %}
+			<p class="alert alert-info">
+				{{ _("Email notifications are currently turned off. Click 'save' to enable.") }}
+			</p>
+		{% endif %}
+
+		<p>
+			Configure whether certain types of notifications are sent immediately, or as part of a daily digest. <br>
+		</p>
+
+		<table class="table">
+			<tr>
+				<th>Event</th>
+				<th>Description</th>
+				<td>Immediately</td>
+				<td>In digest</td>
+			</tr>
+			{% for type in types %}
+				<tr>
+					<td>{{ type.getTitle() }}</td>
+					<td>{{ type.get_description() }}</td>
+					<td style="text-align: center;">
+						{{ render_checkbox_field(form["pref_" + type.toName()]) }}
+					</td>
+					<td style="text-align: center;">
+						{{ render_checkbox_field(form["pref_" + type.toName() + "_digest"]) }}
+					</td>
+				</tr>
+			{% endfor %}
+		</table>
+
+		<p class="mt-5">
+			{{ render_submit_field(form.submit, tabindex=280) }}
+		</p>
+	</form>
+{% endblock %}

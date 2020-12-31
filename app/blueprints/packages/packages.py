@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,22 +15,24 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import render_template, abort, request, redirect, url_for, flash
-from flask_user import current_user
+from urllib.parse import quote as urlescape
+
 import flask_menu as menu
-
-from . import bp
-
-from app.models import *
-from app.querybuilder import QueryBuilder
-from app.tasks.importtasks import importRepoScreenshot
-from app.utils import *
-
+from celery import uuid
+from flask import render_template
 from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
-from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from flask_login import login_required
 from sqlalchemy import or_, func
+from sqlalchemy.orm import joinedload, subqueryload
+from wtforms import *
+from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms.validators import *
+
+from app.querybuilder import QueryBuilder
+from app.rediscache import has_key, set_key
+from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
+from app.utils import *
+from . import bp
 
 
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
@@ -42,6 +44,26 @@ def list_all():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 	title = qb.title
+
+	query = query.options(
+			joinedload(Package.license),
+			joinedload(Package.media_license),
+			subqueryload(Package.tags))
+
+	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
+	if ip is not None and not is_user_bot():
+		edited = False
+		for tag in qb.tags:
+			edited = True
+			key = "tag/{}/{}".format(ip, tag.name)
+			if not has_key(key):
+				set_key(key, "true")
+				Tag.query.filter_by(id=tag.id).update({
+						"views": Tag.views + 1
+					})
+
+		if edited:
+			db.session.commit()
 
 	if qb.lucky:
 		package = query.first()
@@ -59,11 +81,6 @@ def list_all():
 	search = request.args.get("q")
 	type_name = request.args.get("type")
 
-	next_url = url_for("packages.list_all", type=type_name, q=search, page=query.next_num) \
-			if query.has_next else None
-	prev_url = url_for("packages.list_all", type=type_name, q=search, page=query.prev_num) \
-			if query.has_prev else None
-
 	authors = []
 	if search:
 		authors = User.query \
@@ -77,12 +94,16 @@ def list_all():
 		qb.show_discarded = True
 		topics = qb.buildTopicQuery().all()
 
-	tags = Tag.query.all()
-	return render_template("packages/list.html", \
-			title=title, packages=query.items, topics=topics, \
-			query=search, tags=tags, type=type_name, \
-			authors = authors, \
-			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, packages_count=query.total)
+	tags_query = db.session.query(func.count(Tags.c.tag_id), Tag) \
+  		.select_from(Tag).join(Tags).join(Package).group_by(Tag.id).order_by(db.asc(Tag.title))
+	tags = qb.filterPackageQuery(tags_query).all()
+
+	selected_tags = set(qb.tags)
+
+	return render_template("packages/list.html",
+			title=title, packages=query.items, pagination=query,
+			query=search, tags=tags, selected_tags=selected_tags, type=type_name,
+			authors=authors, packages_count=query.total, topics=topics)
 
 
 def getReleases(package):
@@ -95,13 +116,11 @@ def getReleases(package):
 @bp.route("/packages/<author>/<name>/")
 @is_package_page
 def view(package):
-	clearNotifications(package.getDetailsURL())
-
 	alternatives = None
 	if package.type == PackageType.MOD:
 		alternatives = Package.query \
-			.filter_by(name=package.name, type=PackageType.MOD, soft_deleted=False) \
-			.filter(Package.id != package.id) \
+			.filter_by(name=package.name, type=PackageType.MOD) \
+			.filter(Package.id != package.id, Package.state!=PackageState.DELETED) \
 			.order_by(db.desc(Package.score)) \
 			.all()
 
@@ -118,7 +137,6 @@ def view(package):
 				.all()
 
 	releases = getReleases(package)
-	requests = [r for r in package.requests if r.status == 0]
 
 	review_thread = package.review_thread
 	if review_thread is not None and not review_thread.checkPerm(current_user, Permission.SEE_THREAD):
@@ -126,9 +144,9 @@ def view(package):
 
 	topic_error = None
 	topic_error_lvl = "warning"
-	if not package.approved and package.forums is not None:
+	if package.state != PackageState.APPROVED and package.forums is not None:
 		errors = []
-		if Package.query.filter_by(forums=package.forums, soft_deleted=False).count() > 1:
+		if Package.query.filter(Package.forums==package.forums, Package.state!=PackageState.DELETED).count() > 1:
 			errors.append("<b>Error: Another package already uses this forum topic!</b>")
 			topic_error_lvl = "danger"
 
@@ -137,27 +155,43 @@ def view(package):
 			if topic.author != package.author:
 				errors.append("<b>Error: Forum topic author doesn't match package author.</b>")
 				topic_error_lvl = "danger"
-
-			if topic.wip:
-				errors.append("Warning: Forum topic is in WIP section, make sure package meets playability standards.")
 		elif package.type != PackageType.TXP:
 			errors.append("Warning: Forum topic not found. This may happen if the topic has only just been created.")
 
 		topic_error = "<br />".join(errors)
 
 
-	threads = Thread.query.filter_by(package_id=package.id)
+	threads = Thread.query.filter_by(package_id=package.id, review_id=None)
 	if not current_user.is_authenticated:
 		threads = threads.filter_by(private=False)
 	elif not current_user.rank.atLeast(UserRank.EDITOR) and not current_user == package.author:
 		threads = threads.filter(or_(Thread.private == False, Thread.author == current_user))
 
+	has_review = current_user.is_authenticated and PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
-	return render_template("packages/view.html", \
-			package=package, releases=releases, requests=requests, \
-			alternatives=alternatives, similar_topics=similar_topics, \
-			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl, \
-			threads=threads.all())
+	return render_template("packages/view.html",
+			package=package, releases=releases,
+			alternatives=alternatives, similar_topics=similar_topics,
+			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
+			threads=threads.all(), has_review=has_review)
+
+
+@bp.route("/packages/<author>/<name>/shields/<type>/")
+@is_package_page
+def shield(package, type):
+	if type == "title":
+		url = "https://img.shields.io/badge/ContentDB-{}-{}" \
+			.format(urlescape(package.title), urlescape("#375a7f"))
+	elif type == "downloads":
+		#api_url = abs_url_for("api.package", author=package.author.username, name=package.name)
+		api_url = "https://content.minetest.net" + url_for("api.package", author=package.author.username, name=package.name)
+		url = "https://img.shields.io/badge/dynamic/json?color={}&label=ContentDB&query=downloads&suffix=+downloads&url={}" \
+			.format(urlescape("#375a7f"), urlescape(api_url))
+	else:
+		abort(404)
+
+	return redirect(url)
+
 
 
 @bp.route("/packages/<author>/<name>/download/")
@@ -176,23 +210,30 @@ def download(package):
 		return redirect(release.getDownloadURL(), code=302)
 
 
+def makeLabel(obj):
+	if obj.description:
+		return "{}: {}".format(obj.title, obj.description)
+	else:
+		return obj.title
+
 class PackageForm(FlaskForm):
-	name          = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	title         = StringField("Title (Human-readable)", [InputRequired(), Length(3, 100)])
-	short_desc     = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
-	desc          = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])
-	type          = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
-	license       = QuerySelectField("License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	media_license = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	provides_str  = StringField("Provides (mods included in package)", [Optional()])
-	tags          = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=lambda a: a.title)
-	harddep_str   = StringField("Hard Dependencies", [Optional()])
-	softdep_str   = StringField("Soft Dependencies", [Optional()])
-	repo          = StringField("VCS Repository URL", [Optional(), URL()], filters = [lambda x: x or None])
-	website       = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
-	issueTracker  = StringField("Issue Tracker URL", [Optional(), URL()], filters = [lambda x: x or None])
-	forums	      = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
-	submit	      = SubmitField("Save")
+	name             = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	title            = StringField("Title (Human-readable)", [InputRequired(), Length(3, 100)])
+	short_desc       = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
+	desc             = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])
+	type             = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
+	license          = QuerySelectField("License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	media_license    = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	tags             = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
+	content_warnings = QuerySelectMultipleField('Content Warnings', query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)
+	# harddep_str      = StringField("Hard Dependencies", [Optional()])
+	# softdep_str      = StringField("Soft Dependencies", [Optional()])
+	repo             = StringField("VCS Repository URL", [Optional(), URL()], filters = [lambda x: x or None])
+	website          = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
+	issueTracker     = StringField("Issue Tracker URL", [Optional(), URL()], filters = [lambda x: x or None])
+	forums	         = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
+	submit	         = SubmitField("Save")
+
 
 @bp.route("/packages/new/", methods=["GET", "POST"])
 @bp.route("/packages/<author>/<name>/edit/", methods=["GET", "POST"])
@@ -217,6 +258,8 @@ def create_edit(author=None, name=None):
 
 	else:
 		package = getPackageByInfo(author, name)
+		if package is None:
+			abort(404)
 		if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
 			return redirect(package.getDetailsURL())
 
@@ -234,16 +277,20 @@ def create_edit(author=None, name=None):
 			form.license.data = None
 			form.media_license.data = None
 		else:
-			form.harddep_str.data  = ",".join([str(x) for x in package.getSortedHardDependencies() ])
-			form.softdep_str.data  = ",".join([str(x) for x in package.getSortedOptionalDependencies() ])
-			form.provides_str.data = MetaPackage.ListToSpec(package.provides)
+			# form.harddep_str.data  = ",".join([str(x) for x in package.getSortedHardDependencies() ])
+			# form.softdep_str.data  = ",".join([str(x) for x in package.getSortedOptionalDependencies() ])
+			form.tags.data         = list(package.tags)
+			form.content_warnings.data = list(package.content_warnings)
 
-	if request.method == "POST" and form.validate():
+	if request.method == "POST" and form.type.data == PackageType.TXP:
+		form.license.data = form.media_license.data
+
+	if form.validate_on_submit():
 		wasNew = False
 		if not package:
 			package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
 			if package is not None:
-				if package.soft_deleted:
+				if package.state == PackageState.READY_FOR_REVIEW:
 					Package.query.filter_by(name=form["name"].data, author_id=author.id).delete()
 				else:
 					flash("Package already exists!", "danger")
@@ -251,46 +298,49 @@ def create_edit(author=None, name=None):
 
 			package = Package()
 			package.author = author
+			package.maintainers.append(author)
 			wasNew = True
 
-		elif package.approved and package.name != form.name.data and \
-				not package.checkPerm(current_user, Permission.CHANGE_NAME):
+		elif package.name != form.name.data and not package.checkPerm(current_user, Permission.CHANGE_NAME):
 			flash("Unable to change package name", "danger")
 			return redirect(url_for("packages.create_edit", author=author, name=name))
 
 		else:
-			triggerNotif(package.author, current_user,
-					"{} edited".format(package.title), package.getDetailsURL())
+			msg = "Edited {}".format(package.title)
+
+			addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT,
+					msg, package.getDetailsURL(), package)
+
+			severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
+			addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
 
 		form.populate_obj(package) # copy to row
 
-		if package.type== PackageType.TXP:
+		if package.type == PackageType.TXP:
 			package.license = package.media_license
 
-		mpackage_cache = {}
-		package.provides.clear()
-		mpackages = MetaPackage.SpecToList(form.provides_str.data, mpackage_cache)
-		for m in mpackages:
-			package.provides.append(m)
+		# Dependency.query.filter_by(depender=package).delete()
+		# deps = Dependency.SpecToList(package, form.harddep_str.data, mpackage_cache)
+		# for dep in deps:
+		# 	dep.optional = False
+		# 	db.session.add(dep)
 
-		Dependency.query.filter_by(depender=package).delete()
-		deps = Dependency.SpecToList(package, form.harddep_str.data, mpackage_cache)
-		for dep in deps:
-			dep.optional = False
-			db.session.add(dep)
+		# deps = Dependency.SpecToList(package, form.softdep_str.data, mpackage_cache)
+		# for dep in deps:
+		# 	dep.optional = True
+		# 	db.session.add(dep)
 
-		deps = Dependency.SpecToList(package, form.softdep_str.data, mpackage_cache)
-		for dep in deps:
-			dep.optional = True
-			db.session.add(dep)
-
-		if wasNew and package.type == PackageType.MOD and not package.name in mpackage_cache:
-			m = MetaPackage.GetOrCreate(package.name, mpackage_cache)
+		if wasNew and package.type == PackageType.MOD:
+			m = MetaPackage.GetOrCreate(package.name, {})
 			package.provides.append(m)
 
 		package.tags.clear()
 		for tag in form.tags.raw_data:
 			package.tags.append(Tag.query.get(tag))
+
+		package.content_warnings.clear()
+		for warning in form.content_warnings.raw_data:
+			package.content_warnings.append(ContentWarning.query.get(warning))
 
 		db.session.commit() # save
 
@@ -304,36 +354,54 @@ def create_edit(author=None, name=None):
 
 		return redirect(next_url)
 
-	package_query = Package.query.filter_by(approved=True, soft_deleted=False)
+	package_query = Package.query.filter_by(state=PackageState.APPROVED)
 	if package is not None:
 		package_query = package_query.filter(Package.id != package.id)
 
 	enableWizard = name is None and request.method != "POST"
-	return render_template("packages/create_edit.html", package=package, \
-			form=form, author=author, enable_wizard=enableWizard, \
-			packages=package_query.all(), \
+	return render_template("packages/create_edit.html", package=package,
+			form=form, author=author, enable_wizard=enableWizard,
+			packages=package_query.all(),
 			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all())
 
-@bp.route("/packages/<author>/<name>/approve/", methods=["POST"])
+
+@bp.route("/packages/<author>/<name>/state/", methods=["POST"])
 @login_required
 @is_package_page
-def approve(package):
-	if not package.checkPerm(current_user, Permission.APPROVE_NEW):
-		flash("You don't have permission to do that.", "danger")
+def move_to_state(package):
+	state = PackageState.get(request.args.get("state"))
+	if state is None:
+		abort(400)
 
-	elif package.approved:
-		flash("Package has already been approved", "danger")
+	if not package.canMoveToState(current_user, state):
+		flash("You don't have permission to do that", "danger")
+		return redirect(package.getDetailsURL())
 
-	else:
-		package.approved = True
+	package.state = state
+	msg = "Marked {} as {}".format(package.title, state.value)
+
+	if state == PackageState.APPROVED:
+		if not package.approved_at:
+			package.approved_at = datetime.datetime.now()
 
 		screenshots = PackageScreenshot.query.filter_by(package=package, approved=False).all()
 		for s in screenshots:
 			s.approved = True
 
-		triggerNotif(package.author, current_user,
-				"{} approved".format(package.title), package.getDetailsURL())
-		db.session.commit()
+		msg = "Approved {}".format(package.title)
+
+	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getDetailsURL(), package)
+	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
+	addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
+
+	db.session.commit()
+
+	if package.state == PackageState.CHANGES_NEEDED:
+		flash("Please comment what changes are needed in the review thread", "warning")
+		if package.review_thread:
+			return redirect(package.review_thread.getViewURL())
+		else:
+			return redirect(url_for('threads.new', pid=package.id, title='Package approval comments'))
 
 	return redirect(package.getDetailsURL())
 
@@ -350,11 +418,12 @@ def remove(package):
 			flash("You don't have permission to do that.", "danger")
 			return redirect(package.getDetailsURL())
 
-		package.soft_deleted = True
+		package.state = PackageState.DELETED
 
 		url = url_for("users.profile", username=package.author.username)
-		triggerNotif(package.author, current_user,
-				"{} deleted".format(package.title), url)
+		msg = "Deleted {}".format(package.title)
+		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, url, package)
+		addAuditLog(AuditSeverity.EDITOR, current_user, msg, url)
 		db.session.commit()
 
 		flash("Deleted package", "success")
@@ -365,10 +434,12 @@ def remove(package):
 			flash("You don't have permission to do that.", "danger")
 			return redirect(package.getDetailsURL())
 
-		package.approved = False
+		package.state = PackageState.WIP
 
-		triggerNotif(package.author, current_user,
-				"{} deleted".format(package.title), package.getDetailsURL())
+		msg = "Unapproved {}".format(package.title)
+		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getDetailsURL(), package)
+		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.getDetailsURL(), package)
+
 		db.session.commit()
 
 		flash("Unapproved package", "success")
@@ -376,3 +447,104 @@ def remove(package):
 		return redirect(package.getDetailsURL())
 	else:
 		abort(400)
+
+
+
+class PackageMaintainersForm(FlaskForm):
+	maintainers_str  = StringField("Maintainers (Comma-separated)", [Optional()])
+	submit	      = SubmitField("Save")
+
+
+@bp.route("/packages/<author>/<name>/edit-maintainers/", methods=["GET", "POST"])
+@login_required
+@is_package_page
+def edit_maintainers(package):
+	if not package.checkPerm(current_user, Permission.EDIT_MAINTAINERS):
+		flash("You do not have permission to edit maintainers", "danger")
+		return redirect(package.getDetailsURL())
+
+	form = PackageMaintainersForm(formdata=request.form)
+	if request.method == "GET":
+		form.maintainers_str.data = ", ".join([ x.username for x in package.maintainers if x != package.author ])
+
+	if form.validate_on_submit():
+		usernames = [x.strip().lower() for x in form.maintainers_str.data.split(",")]
+		users = User.query.filter(func.lower(User.username).in_(usernames)).all()
+
+		for user in users:
+			if not user in package.maintainers:
+				addNotification(user, current_user, NotificationType.MAINTAINER,
+						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
+
+		for user in package.maintainers:
+			if user != package.author and not user in users:
+				addNotification(user, current_user, NotificationType.MAINTAINER,
+						"Removed you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
+
+		package.maintainers.clear()
+		package.maintainers.extend(users)
+		if package.author not in package.maintainers:
+			package.maintainers.append(package.author)
+
+		msg = "Edited {} maintainers".format(package.title)
+		addNotification(package.author, current_user, NotificationType.MAINTAINER, msg, package.getDetailsURL(), package)
+		severity = AuditSeverity.NORMAL if current_user == package.author else AuditSeverity.MODERATION
+		addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
+
+		db.session.commit()
+
+		return redirect(package.getDetailsURL())
+
+	users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).order_by(db.asc(User.username)).all()
+
+	return render_template("packages/edit_maintainers.html",
+			package=package, form=form, users=users)
+
+
+@bp.route("/packages/<author>/<name>/remove-self-maintainer/", methods=["POST"])
+@login_required
+@is_package_page
+def remove_self_maintainers(package):
+	if not current_user in package.maintainers:
+		flash("You are not a maintainer", "danger")
+
+	elif current_user == package.author:
+		flash("Package owners cannot remove themselves as maintainers", "danger")
+
+	else:
+		package.maintainers.remove(current_user)
+
+		addNotification(package.author, current_user, NotificationType.MAINTAINER,
+				"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
+
+		db.session.commit()
+
+	return redirect(package.getDetailsURL())
+
+
+@bp.route("/packages/<author>/<name>/import-meta/", methods=["POST"])
+@login_required
+@is_package_page
+def update_from_release(package):
+	if not package.checkPerm(current_user, Permission.REIMPORT_META):
+		flash("You don't have permission to reimport meta", "danger")
+		return redirect(package.getDetailsURL())
+
+	release = package.releases.first()
+	if not release:
+		flash("Release needed", "danger")
+		return redirect(package.getDetailsURL())
+
+	msg = "Updated meta from latest release"
+	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT,
+			msg, package.getDetailsURL(), package)
+	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
+	addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
+
+	db.session.commit()
+
+	task_id = uuid()
+	zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
+	checkZipRelease.apply_async((release.id, zippath), task_id=task_id)
+
+	return redirect(url_for("tasks.check", id=task_id, r=package.getEditURL()))

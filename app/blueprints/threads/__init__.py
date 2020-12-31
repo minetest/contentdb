@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -13,23 +13,20 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
 from flask import *
 
 bp = Blueprint("threads", __name__)
 
-from flask_user import *
+from flask_login import current_user, login_required
+from app import menu
 from app.models import *
-from app.utils import triggerNotif, clearNotifications
-
-import datetime
-
+from app.utils import addNotification, isYes, addAuditLog
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from app.utils import get_int_or_abort
 
+@menu.register_menu(bp, ".threads", "Threads", order=20)
 @bp.route("/threads/")
 def list_all():
 	query = Thread.query
@@ -41,7 +38,16 @@ def list_all():
 		pid = get_int_or_abort(pid)
 		query = query.filter_by(package_id=pid)
 
-	return render_template("threads/list.html", threads=query.all())
+	query = query.filter_by(review_id=None)
+
+	query = query.order_by(db.desc(Thread.created_at))
+
+	page = get_int_or_abort(request.args.get("page"), 1)
+	num = min(40, get_int_or_abort(request.args.get("n"), 100))
+
+	pagination = query.paginate(page, num, True)
+
+	return render_template("threads/list.html", pagination=pagination, threads=pagination.items)
 
 
 @bp.route("/threads/<int:id>/subscribe/", methods=["POST"])
@@ -58,7 +64,7 @@ def subscribe(id):
 		thread.watchers.append(current_user)
 		db.session.commit()
 
-	return redirect(url_for("threads.view", id=id))
+	return redirect(thread.getViewURL())
 
 
 @bp.route("/threads/<int:id>/unsubscribe/", methods=["POST"])
@@ -73,15 +79,138 @@ def unsubscribe(id):
 		thread.watchers.remove(current_user)
 		db.session.commit()
 	else:
-		flash("Not subscribed to thread", "success")
+		flash("Already not subscribed!", "success")
 
-	return redirect(url_for("threads.view", id=id))
+	return redirect(thread.getViewURL())
+
+
+@bp.route("/threads/<int:id>/set-lock/", methods=["POST"])
+@login_required
+def set_lock(id):
+	thread = Thread.query.get(id)
+	if thread is None or not thread.checkPerm(current_user, Permission.LOCK_THREAD):
+		abort(404)
+
+	thread.locked = isYes(request.args.get("lock"))
+	if thread.locked is None:
+		abort(400)
+
+	msg = None
+	if thread.locked:
+		msg = "Locked thread '{}'".format(thread.title)
+		flash("Locked thread", "success")
+	else:
+		msg = "Unlocked thread '{}'".format(thread.title)
+		flash("Unlocked thread", "success")
+
+	addNotification(thread.watchers, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
+	addAuditLog(AuditSeverity.MODERATION, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
+
+	db.session.commit()
+
+	return redirect(thread.getViewURL())
+
+
+@bp.route("/threads/<int:id>/delete/", methods=["GET", "POST"])
+@login_required
+def delete_thread(id):
+	thread = Thread.query.get(id)
+	if thread is None or not thread.checkPerm(current_user, Permission.DELETE_THREAD):
+		abort(404)
+
+	if request.method == "GET":
+		return render_template("threads/delete_thread.html", thread=thread)
+
+	summary = "\n\n".join([("<{}> {}".format(reply.author.display_name, reply.comment)) for reply in thread.replies])
+
+	msg = "Deleted thread {} by {}".format(thread.title, thread.author.display_name)
+
+	db.session.delete(thread)
+
+	addAuditLog(AuditSeverity.MODERATION, current_user, msg, None, thread.package, summary)
+
+	db.session.commit()
+
+	return redirect(url_for("homepage.home"))
+
+
+@bp.route("/threads/<int:id>/delete-reply/", methods=["GET", "POST"])
+@login_required
+def delete_reply(id):
+	thread = Thread.query.get(id)
+	if thread is None:
+		abort(404)
+
+	reply_id = request.args.get("reply")
+	if reply_id is None:
+		abort(404)
+
+	reply = ThreadReply.query.get(reply_id)
+	if reply is None or reply.thread != thread:
+		abort(404)
+
+	if thread.replies[0] == reply:
+		flash("Cannot delete thread opening post!", "danger")
+		return redirect(thread.getViewURL())
+
+	if not reply.checkPerm(current_user, Permission.DELETE_REPLY):
+		abort(403)
+
+	if request.method == "GET":
+		return render_template("threads/delete_reply.html", thread=thread, reply=reply)
+
+	msg = "Deleted reply by {}".format(reply.author.display_name)
+	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
+
+	db.session.delete(reply)
+	db.session.commit()
+
+	return redirect(thread.getViewURL())
+
+
+class CommentForm(FlaskForm):
+	comment = TextAreaField("Comment", [InputRequired(), Length(10, 2000)])
+	submit  = SubmitField("Comment")
+
+
+@bp.route("/threads/<int:id>/edit/", methods=["GET", "POST"])
+@login_required
+def edit_reply(id):
+	thread = Thread.query.get(id)
+	if thread is None:
+		abort(404)
+
+	reply_id = request.args.get("reply")
+	if reply_id is None:
+		abort(404)
+
+	reply = ThreadReply.query.get(reply_id)
+	if reply is None or reply.thread != thread:
+		abort(404)
+
+	if not reply.checkPerm(current_user, Permission.EDIT_REPLY):
+		abort(403)
+
+	form = CommentForm(formdata=request.form, obj=reply)
+	if form.validate_on_submit():
+		comment = form.comment.data
+
+		msg = "Edited reply by {}".format(reply.author.display_name)
+		severity = AuditSeverity.NORMAL if current_user == reply.author else AuditSeverity.MODERATION
+		addNotification(reply.author, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
+		addAuditLog(severity, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
+
+		reply.comment = comment
+
+		db.session.commit()
+
+		return redirect(thread.getViewURL())
+
+	return render_template("threads/edit_reply.html", thread=thread, reply=reply, form=form)
 
 
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
 def view(id):
-	clearNotifications(url_for("threads.view", id=id))
-
 	thread = Thread.query.get(id)
 	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
 		abort(404)
@@ -89,14 +218,15 @@ def view(id):
 	if current_user.is_authenticated and request.method == "POST":
 		comment = request.form["comment"]
 
+		if not thread.checkPerm(current_user, Permission.COMMENT_THREAD):
+			flash("You cannot comment on this thread", "danger")
+			return redirect(thread.getViewURL())
+
 		if not current_user.canCommentRL():
 			flash("Please wait before commenting again", "danger")
-			if package:
-				return redirect(package.getDetailsURL())
-			else:
-				return redirect(url_for("homepage.home"))
+			return redirect(thread.getViewURL())
 
-		if len(comment) <= 500 and len(comment) > 3:
+		if 2000 >= len(comment) > 3:
 			reply = ThreadReply()
 			reply.author = current_user
 			reply.comment = comment
@@ -106,32 +236,24 @@ def view(id):
 			if not current_user in thread.watchers:
 				thread.watchers.append(current_user)
 
-			msg = None
-			if thread.package is None:
-				msg = "New comment on '{}'".format(thread.title)
-			else:
-				msg = "New comment on '{}' on package {}".format(thread.title, thread.package.title)
-
-
-			for user in thread.watchers:
-				if user != current_user:
-					triggerNotif(user, current_user, msg, url_for("threads.view", id=thread.id))
-
+			msg = "New comment on '{}'".format(thread.title)
+			addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
 			db.session.commit()
 
-			return redirect(url_for("threads.view", id=id))
+			return redirect(thread.getViewURL())
 
 		else:
-			flash("Comment needs to be between 3 and 500 characters.")
+			flash("Comment needs to be between 3 and 2000 characters.")
 
 	return render_template("threads/view.html", thread=thread)
 
 
 class ThreadForm(FlaskForm):
 	title	= StringField("Title", [InputRequired(), Length(3,100)])
-	comment = TextAreaField("Comment", [InputRequired(), Length(10, 500)])
+	comment = TextAreaField("Comment", [InputRequired(), Length(10, 2000)])
 	private = BooleanField("Private")
 	submit  = SubmitField("Open Thread")
+
 
 @bp.route("/threads/new/", methods=["GET", "POST"])
 @login_required
@@ -162,7 +284,7 @@ def new():
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
 		flash("A review thread already exists!", "danger")
-		return redirect(url_for("threads.view", id=package.review_thread.id))
+		return redirect(package.review_thread.getViewURL())
 
 	elif not current_user.canOpenThreadRL():
 		flash("Please wait before opening another thread", "danger")
@@ -178,7 +300,7 @@ def new():
 		form.title.data   = request.args.get("title") or ""
 
 	# Validate and submit
-	elif request.method == "POST" and form.validate():
+	elif form.validate_on_submit():
 		thread = Thread()
 		thread.author  = current_user
 		thread.title   = form.title.data
@@ -203,19 +325,20 @@ def new():
 		if is_review_thread:
 			package.review_thread = thread
 
-		notif_msg = None
-		if package is not None:
-			notif_msg = "New thread '{}' on package {}".format(thread.title, package.title)
-			triggerNotif(package.author, current_user, notif_msg, url_for("threads.view", id=thread.id))
-		else:
-			notif_msg = "New thread '{}'".format(thread.title)
+			if package.state == PackageState.READY_FOR_REVIEW and current_user not in package.maintainers:
+				package.state = PackageState.CHANGES_NEEDED
 
-		for user in User.query.filter(User.rank >= UserRank.EDITOR).all():
-			triggerNotif(user, current_user, notif_msg, url_for("threads.view", id=thread.id))
+
+		notif_msg = "New thread '{}'".format(thread.title)
+		if package is not None:
+			addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
+
+		editors = User.query.filter(User.rank >= UserRank.EDITOR).all()
+		addNotification(editors, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
 
 		db.session.commit()
 
-		return redirect(url_for("threads.view", id=thread.id))
+		return redirect(thread.getViewURL())
 
 
 	return render_template("threads/new.html", form=form, allow_private_change=allow_change, package=package)

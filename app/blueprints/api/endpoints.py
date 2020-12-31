@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 
 
 from flask import *
-from flask_user import *
+from flask_login import current_user, login_required
 from . import bp
 from .auth import is_api_authd
 from .support import error, handleCreateRelease
@@ -34,6 +34,15 @@ def packages():
 
 	pkgs = [package.getAsDictionaryShort(current_app.config["BASE_URL"], version=ver) \
 			for package in query.all()]
+	return jsonify([package for package in pkgs if package.get("release")])
+
+
+@bp.route("/api/scores/")
+def package_scores():
+	qb    = QueryBuilder(request.args)
+	query = qb.buildPackageQuery()
+
+	pkgs = [package.getScoreDict() for package in query.all()]
 	return jsonify(pkgs)
 
 
@@ -43,25 +52,33 @@ def package(package):
 	return jsonify(package.getAsDictionary(current_app.config["BASE_URL"]))
 
 
-@bp.route("/api/packages/<author>/<name>/dependencies/")
-@is_package_page
-def package_dependencies(package):
+def resolve_package_deps(out, package, only_hard):
+	id = package.getId()
+	if id in out:
+		return
+
 	ret = []
+	out[id] = ret
 
 	for dep in package.dependencies:
+		if only_hard and dep.optional:
+			continue
+
 		name = None
 		fulfilled_by = None
 
 		if dep.package:
 			name = dep.package.name
-			fulfilled_by = [ dep.package.getAsDictionaryKey() ]
+			fulfilled_by = [ dep.package.getId() ]
+			resolve_package_deps(out, dep.package, only_hard)
 
 		elif dep.meta_package:
 			name = dep.meta_package.name
-			fulfilled_by = [ pkg.getAsDictionaryKey() for pkg in dep.meta_package.packages]
+			fulfilled_by = [ pkg.getId() for pkg in dep.meta_package.packages]
+			# TODO: resolve most likely candidate
 
 		else:
-			raise "Malformed dependency"
+			raise Exception("Malformed dependency")
 
 		ret.append({
 			"name": name,
@@ -69,7 +86,16 @@ def package_dependencies(package):
 			"packages": fulfilled_by
 		})
 
-	return jsonify(ret)
+
+@bp.route("/api/packages/<author>/<name>/dependencies/")
+@is_package_page
+def package_dependencies(package):
+	only_hard = request.args.get("only_hard")
+
+	out = {}
+	resolve_package_deps(out, package, only_hard)
+
+	return jsonify(out)
 
 
 @bp.route("/api/packages/<author>/<name>/releases/")
@@ -130,16 +156,21 @@ def markdown():
 @is_package_page
 @is_api_authd
 def create_release(token, package):
+	if not token:
+		error(401, "Authentication needed")
+
+	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
+		error(403, "You do not have the permission to approve releases")
+
 	json = request.json
 	if json is None:
-		return error(400, "JSON post data is required")
+		error(400, "JSON post data is required")
 
 	for option in ["method", "title", "ref"]:
 		if json.get(option) is None:
-			return error(400, option + " is required in the POST data")
-
+			error(400, option + " is required in the POST data")
 
 	if json["method"].lower() != "git":
-		return error(400, "Release-creation methods other than git are not supported")
+		error(400, "Release-creation methods other than git are not supported")
 
 	return handleCreateRelease(token, package, json["title"], json["ref"])

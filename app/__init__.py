@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,6 @@
 
 
 from flask import *
-from flask_user import *
 from flask_gravatar import Gravatar
 import flask_menu as menu
 from flask_mail import Mail
@@ -24,6 +23,7 @@ from flask_github import GitHub
 from flask_wtf.csrf import CSRFProtect
 from flask_flatpages import FlatPages
 from flask_babel import Babel
+from flask_login import logout_user, current_user, LoginManager
 import os, redis
 
 app = Flask(__name__, static_folder="public/static")
@@ -48,13 +48,17 @@ gravatar = Gravatar(app,
 		use_ssl=True,
 		base_url=None)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = "users.login"
+
 from .sass import sass
 sass(app)
 
 
 if not app.debug and app.config["MAIL_UTILS_ERROR_SEND_TO"]:
-	from .maillogger import register_mail_error_handler
-	register_mail_error_handler(app, mail)
+	from .maillogger import build_handler
+	app.logger.addHandler(build_handler(app))
 
 
 from .markdown import init_app
@@ -64,12 +68,15 @@ init_app(app)
 # def get_locale():
 # 	return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
-from . import models, tasks, template_filters
+from . import models, template_filters
+
+@login_manager.user_loader
+def load_user(user_id):
+	return models.User.query.filter_by(username=user_id).first()
+
 
 from .blueprints import create_blueprints
 create_blueprints(app)
-
-from flask_login import logout_user
 
 @app.route("/uploads/<path:path>")
 def send_upload(path):
@@ -78,9 +85,9 @@ def send_upload(path):
 @menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { 'path': 'help' })
 @app.route('/<path:path>/')
 def flatpage(path):
-    page = pages.get_or_404(path)
-    template = page.meta.get('template', 'flatpage.html')
-    return render_template(template, page=page)
+	page = pages.get_or_404(path)
+	template = page.meta.get('template', 'flatpage.html')
+	return render_template(template, page=page)
 
 @app.before_request
 def check_for_ban():
@@ -88,7 +95,14 @@ def check_for_ban():
 		if current_user.rank == models.UserRank.BANNED:
 			flash("You have been banned.", "danger")
 			logout_user()
-			return redirect(url_for('user.login'))
+			return redirect(url_for('users.login'))
 		elif current_user.rank == models.UserRank.NOT_JOINED:
 			current_user.rank = models.UserRank.MEMBER
 			models.db.session.commit()
+
+from .utils import clearNotifications
+
+@app.before_request
+def check_for_notifications():
+	if current_user.is_authenticated:
+		clearNotifications(request.path)

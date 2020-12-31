@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,27 +16,39 @@
 
 
 from flask import *
-from flask_user import *
-from . import bp
-from app.models import *
+from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from app.utils import rank_required
+
+from app.models import *
+from . import bp
+
 
 @bp.route("/tags/")
-@rank_required(UserRank.MODERATOR)
+@login_required
 def tag_list():
-	return render_template("admin/tags/list.html", tags=Tag.query.order_by(db.asc(Tag.title)).all())
+	if not Permission.EDIT_TAGS.check(current_user):
+		abort(403)
+
+	query = Tag.query
+
+	if request.args.get("sort") == "views":
+		query = query.order_by(db.desc(Tag.views))
+	else:
+		query = query.order_by(db.asc(Tag.title))
+
+	return render_template("admin/tags/list.html", tags=query.all())
 
 class TagForm(FlaskForm):
-	title	 = StringField("Title", [InputRequired(), Length(3,100)])
-	name     = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	submit   = SubmitField("Save")
+	title	    = StringField("Title", [InputRequired(), Length(3,100)])
+	description = TextAreaField("Description", [Optional(), Length(0, 500)])
+	name        = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	submit      = SubmitField("Save")
 
 @bp.route("/tags/new/", methods=["GET", "POST"])
 @bp.route("/tags/<name>/edit/", methods=["GET", "POST"])
-@rank_required(UserRank.MODERATOR)
+@login_required
 def create_edit_tag(name=None):
 	tag = None
 	if name is not None:
@@ -44,14 +56,22 @@ def create_edit_tag(name=None):
 		if tag is None:
 			abort(404)
 
+	if not Permission.checkPerm(current_user, Permission.EDIT_TAGS if tag else Permission.CREATE_TAG):
+		abort(403)
+
 	form = TagForm(formdata=request.form, obj=tag)
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if tag is None:
 			tag = Tag(form.title.data)
+			tag.description = form.description.data
 			db.session.add(tag)
 		else:
 			form.populate_obj(tag)
 		db.session.commit()
-		return redirect(url_for("admin.create_edit_tag", name=tag.name))
+
+		if Permission.EDIT_TAGS.check(current_user):
+			return redirect(url_for("admin.create_edit_tag", name=tag.name))
+		else:
+			return redirect(url_for("homepage.home"))
 
 	return render_template("admin/tags/edit.html", tag=tag, form=form)

@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,120 +15,18 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import flask, json, os, git, tempfile, shutil, gitdb
+import os, git, tempfile, shutil, gitdb, contextlib
 from git import GitCommandError
 from git_archive_all import GitArchiver
-from flask_sqlalchemy import SQLAlchemy
 from urllib.error import HTTPError
 import urllib.request
-from urllib.parse import urlparse, quote_plus, urlsplit
+from urllib.parse import urlsplit
 from zipfile import ZipFile
-
-from app import app
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString
+from app.utils import randomString, getExtension
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
-from .minetestcheck.config import parse_conf
 
-class GithubURLMaker:
-	def __init__(self, url):
-		self.baseUrl = None
-		self.user = None
-		self.repo = None
-
-		# Rewrite path
-		import re
-		m = re.search("^\/([^\/]+)\/([^\/]+)\/?$", url.path)
-		if m is None:
-			return
-
-		user = m.group(1)
-		repo = m.group(2).replace(".git", "")
-		self.baseUrl = "https://raw.githubusercontent.com/{}/{}/master" \
-				.format(user, repo)
-		self.user = user
-		self.repo = repo
-
-	def isValid(self):
-		return self.baseUrl is not None
-
-	def getRepoURL(self):
-		return "https://github.com/{}/{}".format(self.user, self.repo)
-
-	def getScreenshotURL(self):
-		return self.baseUrl + "/screenshot.png"
-
-	def getModConfURL(self):
-		return self.baseUrl + "/mod.conf"
-
-	def getCommitsURL(self, branch):
-		return "https://api.github.com/repos/{}/{}/commits?sha={}" \
-				.format(self.user, self.repo, urllib.parse.quote_plus(branch))
-
-	def getCommitDownload(self, commit):
-		return "https://github.com/{}/{}/archive/{}.zip" \
-				.format(self.user, self.repo, commit)
-
-krock_list_cache = None
-krock_list_cache_by_name = None
-def getKrockList():
-	global krock_list_cache
-	global krock_list_cache_by_name
-
-	if krock_list_cache is None:
-		contents = urllib.request.urlopen("https://krock-works.uk.to/minetest/modList.php").read().decode("utf-8")
-		list = json.loads(contents)
-
-		def h(x):
-			if not ("title"   in x and "author" in x and \
-					"topicId" in x and "link"   in x and x["link"] != ""):
-				return False
-
-			import re
-			m = re.search("\[([A-Za-z0-9_]+)\]", x["title"])
-			if m is None:
-				return False
-
-			x["name"] = m.group(1)
-			return True
-
-		def g(x):
-			return {
-				"title":   x["title"],
-				"author":  x["author"],
-				"name":	x["name"],
-				"topicId": x["topicId"],
-				"link":	x["link"],
-			}
-
-		krock_list_cache = [g(x) for x in list if h(x)]
-		krock_list_cache_by_name = {}
-		for x in krock_list_cache:
-			if not x["name"] in krock_list_cache_by_name:
-				krock_list_cache_by_name[x["name"]] = []
-
-			krock_list_cache_by_name[x["name"]].append(x)
-
-	return krock_list_cache, krock_list_cache_by_name
-
-def findModInfo(author, name, link):
-	list, lookup = getKrockList()
-
-	if name is not None and name in lookup:
-		if len(lookup[name]) == 1:
-			return lookup[name][0]
-
-		for x in lookup[name]:
-			if x["author"] == author:
-				return x
-
-	if link is not None and len(link) > 15:
-		for x in list:
-			if link in x["link"]:
-				return x
-
-	return None
 
 def generateGitURL(urlstr):
 	scheme, netloc, path, query, frag = urlsplit(urlstr)
@@ -136,16 +34,20 @@ def generateGitURL(urlstr):
 	return "http://:@" + netloc + path + query
 
 
-def getTempDir():
-	return os.path.join(tempfile.gettempdir(), randomString(10))
+@contextlib.contextmanager
+def get_temp_dir():
+	temp = os.path.join(tempfile.gettempdir(), randomString(10))
+	yield temp
+	shutil.rmtree(temp)
 
 
 # Clones a repo from an unvalidated URL.
 # Returns a tuple of path and repo on sucess.
 # Throws `TaskError` on failure.
 # Caller is responsible for deleting returned directory.
-def cloneRepo(urlstr, ref=None, recursive=False):
-	gitDir = getTempDir()
+@contextlib.contextmanager
+def clone_repo(urlstr, ref=None, recursive=False):
+	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
 
 	err = None
 	try:
@@ -153,19 +55,23 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 		print("Cloning from " + gitUrl)
 
 		if ref is None:
-			repo = git.Repo.clone_from(gitUrl, gitDir, \
+			repo = git.Repo.clone_from(gitUrl, gitDir,
 					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
 		else:
+			assert ref != ""
+
 			repo = git.Repo.init(gitDir)
 			origin = repo.create_remote("origin", url=gitUrl)
 			assert origin.exists()
 			origin.fetch()
-			origin.pull(ref)
+			repo.git.checkout(ref)
 
 			for submodule in repo.submodules:
 				submodule.update(init=True)
 
-		return gitDir, repo
+		yield repo
+		shutil.rmtree(gitDir)
+		return
 
 	except GitCommandError as e:
 		# This is needed to stop the backtrace being weird
@@ -178,61 +84,89 @@ def cloneRepo(urlstr, ref=None, recursive=False):
 			.replace("Cloning into '" + gitDir + "'...", "") \
 			.strip())
 
+
 @celery.task()
 def getMeta(urlstr, author):
-	gitDir, _ = cloneRepo(urlstr, recursive=True)
+	with clone_repo(urlstr, recursive=True) as repo:
+		try:
+			tree = build_tree(repo.working_tree_dir, author=author, repo=urlstr)
+		except MinetestCheckError as err:
+			raise TaskError(str(err))
 
+		result = {"name": tree.name, "provides": tree.getModNames(), "type": tree.type.name}
+
+		for key in ["depends", "optional_depends"]:
+			result[key] = tree.fold("meta", key)
+
+		for key in ["title", "repo", "issueTracker", "forumId", "description", "short_description"]:
+			result[key] = tree.get(key)
+
+		for mod in result["provides"]:
+			result["depends"].discard(mod)
+			result["optional_depends"].discard(mod)
+
+		for key, value in result.items():
+			if isinstance(value, set):
+				result[key] = list(value)
+
+		return result
+
+
+def postReleaseCheckUpdate(self, release, path):
 	try:
-		tree = build_tree(gitDir, author=author, repo=urlstr)
+		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
+				author=release.package.author.username, name=release.package.name)
+
+		cache = {}
+		def getMetaPackages(names):
+			return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
+
+		provides = tree.getModNames()
+
+		package = release.package
+		package.provides.clear()
+		package.provides.extend(getMetaPackages(tree.getModNames()))
+
+		# Delete all meta package dependencies
+		package.dependencies.filter(Dependency.meta_package != None).delete()
+
+		# Get raw dependencies
+		depends = tree.fold("meta", "depends")
+		optional_depends = tree.fold("meta", "optional_depends")
+
+		# Filter out provides
+		for mod in provides:
+			depends.discard(mod)
+			optional_depends.discard(mod)
+
+		# Add dependencies
+		for meta in getMetaPackages(depends):
+			db.session.add(Dependency(package, meta=meta, optional=False))
+
+		for meta in getMetaPackages(optional_depends):
+			db.session.add(Dependency(package, meta=meta, optional=True))
+
+		# Update min/max
+
+		if tree.meta.get("min_minetest_version"):
+			release.min_rel = MinetestRelease.get(tree.meta["min_minetest_version"], None)
+
+		if tree.meta.get("max_minetest_version"):
+			release.max_rel = MinetestRelease.get(tree.meta["max_minetest_version"], None)
+
+		return tree
+
 	except MinetestCheckError as err:
+		db.session.rollback()
+
+		if "Fails validation" not in release.title:
+			release.title += " (Fails validation)"
+
+		release.task_id = self.request.id
+		release.approved = False
+		db.session.commit()
+
 		raise TaskError(str(err))
-
-	shutil.rmtree(gitDir)
-
-	result = {}
-	result["name"] = tree.name
-	result["provides"] = tree.fold("name")
-	result["type"] = tree.type.name
-
-	for key in ["depends", "optional_depends"]:
-		result[key] = tree.fold("meta", key)
-
-	for key in ["title", "repo", "issueTracker", "forumId", "description", "short_description"]:
-		result[key] = tree.get(key)
-
-	for mod in result["provides"]:
-		result["depends"].discard(mod)
-		result["optional_depends"].discard(mod)
-
-	for key, value in result.items():
-		if isinstance(value, set):
-			result[key] = list(value)
-
-	return result
-
-
-def makeVCSReleaseFromGithub(id, branch, release, url):
-	urlmaker = GithubURLMaker(url)
-	if not urlmaker.isValid():
-		raise TaskError("Invalid github repo URL")
-
-	commitsURL = urlmaker.getCommitsURL(branch)
-	try:
-		contents = urllib.request.urlopen(commitsURL).read().decode("utf-8")
-		commits = json.loads(contents)
-	except HTTPError:
-		raise TaskError("Unable to get commits for Github repository. Either the repository or reference doesn't exist.")
-
-	if len(commits) == 0 or not "sha" in commits[0]:
-		raise TaskError("No commits found")
-
-	release.url          = urlmaker.getCommitDownload(commits[0]["sha"])
-	release.task_id     = None
-	release.commit_hash = commits[0]["sha"]
-	release.approve(release.package.author)
-	db.session.commit()
-
-	return release.url
 
 
 @celery.task(bind=True)
@@ -243,58 +177,33 @@ def checkZipRelease(self, id, path):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	temp = getTempDir()
-	try:
+	with get_temp_dir() as temp:
 		with ZipFile(path, 'r') as zip_ref:
 			zip_ref.extractall(temp)
 
-		try:
-			tree = build_tree(temp, expected_type=ContentType[release.package.type.name], \
-				author=release.package.author.username, name=release.package.name)
-		except MinetestCheckError as err:
-			if "Fails validation" not in release.title:
-				release.title += " (Fails validation)"
-
-			release.task_id = self.request.id
-			release.approved = False
-			db.session.commit()
-
-			raise TaskError(str(err))
+		postReleaseCheckUpdate(self, release, temp)
 
 		release.task_id = None
 		release.approve(release.package.author)
 		db.session.commit()
 
-	finally:
-		shutil.rmtree(temp)
 
-
-@celery.task()
-def makeVCSRelease(id, branch):
+@celery.task(bind=True)
+def makeVCSRelease(self, id, branch):
 	release = PackageRelease.query.get(id)
 	if release is None:
 		raise TaskError("No such release!")
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	# url = urlparse(release.package.repo)
-	# if url.netloc == "github.com":
-	# 	return makeVCSReleaseFromGithub(id, branch, release, url)
+	with clone_repo(release.package.repo, ref=branch, recursive=True) as repo:
+		postReleaseCheckUpdate(self, release, repo.working_tree_dir)
 
-	gitDir, repo = cloneRepo(release.package.repo, ref=branch, recursive=True)
-
-	try:
-		tree = build_tree(gitDir, expected_type=ContentType[release.package.type.name], \
-			author=release.package.author.username, name=release.package.name)
-	except MinetestCheckError as err:
-		raise TaskError(str(err))
-
-	try:
 		filename = randomString(10) + ".zip"
 		destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
 
 		assert(not os.path.isfile(destPath))
-		archiver = GitArchiver(force_sub=True, main_repo_abspath=gitDir)
+		archiver = GitArchiver(prefix=release.package.name, force_sub=True, main_repo_abspath=repo.working_tree_dir)
 		archiver.create(destPath)
 		assert(os.path.isfile(destPath))
 
@@ -302,136 +211,66 @@ def makeVCSRelease(id, branch):
 		release.task_id     = None
 		release.commit_hash = repo.head.object.hexsha
 		release.approve(release.package.author)
-		print(release.url)
 		db.session.commit()
 
 		return release.url
-	finally:
-		shutil.rmtree(gitDir)
+
 
 @celery.task()
 def importRepoScreenshot(id):
 	package = Package.query.get(id)
-	if package is None or package.soft_deleted:
+	if package is None or package.state == PackageState.DELETED:
 		raise Exception("Unexpected none package")
 
-	# Get URL Maker
 	try:
-		gitDir, _ = cloneRepo(package.repo)
+		with clone_repo(package.repo) as repo:
+			for ext in ["png", "jpg", "jpeg"]:
+				sourcePath = repo.working_tree_dir + "/screenshot." + ext
+				if os.path.isfile(sourcePath):
+					filename = randomString(10) + "." + ext
+					destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
+					shutil.copyfile(sourcePath, destPath)
+
+					ss = PackageScreenshot()
+					ss.approved = True
+					ss.package = package
+					ss.title   = "screenshot.png"
+					ss.url	 = "/uploads/" + filename
+					db.session.add(ss)
+					db.session.commit()
+
+					return "/uploads/" + filename
+
 	except TaskError as e:
 		# ignore download errors
 		print(e)
-		return None
-
-	# Find and import screenshot
-	try:
-		for ext in ["png", "jpg", "jpeg"]:
-			sourcePath = gitDir + "/screenshot." + ext
-			if os.path.isfile(sourcePath):
-				filename = randomString(10) + "." + ext
-				destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
-				shutil.copyfile(sourcePath, destPath)
-
-				ss = PackageScreenshot()
-				ss.approved = True
-				ss.package = package
-				ss.title   = "screenshot.png"
-				ss.url	 = "/uploads/" + filename
-				db.session.add(ss)
-				db.session.commit()
-
-				return "/uploads/" + filename
-	finally:
-		shutil.rmtree(gitDir)
+		pass
 
 	print("screenshot.png does not exist")
 	return None
 
 
-
-def getDepends(package):
-	url = urlparse(package.repo)
-	urlmaker = None
-	if url.netloc == "github.com":
-		urlmaker = GithubURLMaker(url)
-	else:
-		return {}
-
-	result = {}
-	if not urlmaker.isValid():
-		return {}
-
-	#
-	# Try getting depends on mod.conf
-	#
-	try:
-		contents = urllib.request.urlopen(urlmaker.getModConfURL()).read().decode("utf-8")
-		conf = parse_conf(contents)
-		for key in ["depends", "optional_depends"]:
-			try:
-				result[key] = conf[key]
-			except KeyError:
-				pass
-
-	except HTTPError:
-		print("mod.conf does not exist")
-
-	if "depends" in result or "optional_depends" in result:
-		return result
-
-
-	#
-	# Try depends.txt
-	#
-	import re
-	pattern = re.compile("^([a-z0-9_]+)\??$")
-	try:
-		contents = urllib.request.urlopen(urlmaker.getDependsURL()).read().decode("utf-8")
-		soft = []
-		hard = []
-		for line in contents.split("\n"):
-			line = line.strip()
-			if pattern.match(line):
-				if line[len(line) - 1] == "?":
-					soft.append( line[:-1])
-				else:
-					hard.append(line)
-
-		result["depends"] = ",".join(hard)
-		result["optional_depends"] = ",".join(soft)
-	except HTTPError:
-		print("depends.txt does not exist")
-
-	return result
-
-
-def importDependencies(package, mpackage_cache):
-	if Dependency.query.filter_by(depender=package).count() != 0:
+@celery.task(bind=True)
+def importForeignDownloads(self, id):
+	release = PackageRelease.query.get(id)
+	if release is None:
+		raise TaskError("No such release!")
+	elif release.package is None:
+		raise TaskError("No package attached to release")
+	elif not release.url.startswith("http"):
 		return
 
-	result = getDepends(package)
+	try:
+		ext = getExtension(release.url)
+		filename = randomString(10) + "." + ext
+		filepath = os.path.join(app.config["UPLOAD_DIR"], filename)
+		urllib.request.urlretrieve(release.url, filepath)
 
-	if "depends" in result:
-		deps = Dependency.SpecToList(package, result["depends"], mpackage_cache)
-		print("{} hard: {}".format(len(deps), result["depends"]))
-		for dep in deps:
-			dep.optional = False
-			db.session.add(dep)
+		release.url = "/uploads/" + filename
+		db.session.commit()
 
-	if "optional_depends" in result:
-		deps = Dependency.SpecToList(package, result["optional_depends"], mpackage_cache)
-		print("{} soft: {}".format(len(deps), result["optional_depends"]))
-		for dep in deps:
-			dep.optional = True
-			db.session.add(dep)
-
-@celery.task()
-def importAllDependencies():
-	Dependency.query.delete()
-	mpackage_cache = {}
-	packages = Package.query.filter_by(type=PackageType.MOD).all()
-	for i, p in enumerate(packages):
-		print("============= {} ({}/{}) =============".format(p.name, i, len(packages)))
-		importDependencies(p, mpackage_cache)
-
-	db.session.commit()
+	except urllib.error.URLError:
+		db.session.rollback()
+		release.task_id = self.request.id
+		release.approved = False
+		db.session.commit()

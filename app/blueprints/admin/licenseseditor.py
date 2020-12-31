@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,13 +16,14 @@
 
 
 from flask import *
-from flask_user import *
-from . import bp
-from app.models import *
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
+
+from app.models import *
 from app.utils import rank_required
+from . import bp
+
 
 @bp.route("/licenses/")
 @rank_required(UserRank.MODERATOR)
@@ -47,7 +48,7 @@ def create_edit_license(name=None):
 	form = LicenseForm(formdata=request.form, obj=license)
 	if request.method == "GET" and license is None:
 		form.is_foss.data = True
-	elif request.method == "POST" and form.validate():
+	elif form.validate_on_submit():
 		if license is None:
 			license = License(form.name.data)
 			db.session.add(license)

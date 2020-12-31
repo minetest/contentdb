@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ username }}
+{% endblock %}
+
+{% block content %}
+<article>
+	<h1>
+		{{ username }}
+	</h1>
+
+	<p>
+		{{ _("Unfortunately, %(username)s doesn't have an account on ContentDB yet.", username=username) }}
+	</p>
+
+	{% if not current_user.is_authenticated %}
+		<a class="btn btn-primary" href="{{ url_for('users.claim_forums', username=username) }}">Claim Account</a>
+	{% endif %}
+</article>
+{% endblock %}

@@ -1,22 +1,63 @@
+{% macro render_errors(field) %}
+	{% for e in field.errors %}
+		<p class="invalid-feedback" style="display: block;">{{ e }}</p>
+	{% endfor %}
+{% endmacro %}
+
 {% macro render_field(field, label=None, label_visible=true, right_url=None, right_label=None, fieldclass=None) -%}
-	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
 			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
 		{% endif %}
 		{{ field(class_=fieldclass or 'form-control', **kwargs) }}
-		{% if field.errors %}
-			{% for e in field.errors %}
-				<p class="help-block">{{ e }}</p>
-			{% endfor %}
+		{{ render_errors(field) }}
+	</div>
+{%- endmacro %}
+
+{% macro render_field_prefix(field, label=None, prefix="@", label_visible=true, right_url=None, right_label=None, fieldclass=None) -%}
+	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
+		{% if field.type != 'HiddenField' and label_visible %}
+			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
+			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
 		{% endif %}
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">{{ prefix }}</span>
+			</div>
+			{{ field(class_=fieldclass or 'form-control', **kwargs) }}
+		</div>
+
+		{{ render_errors(field) }}
+	</div>
+{%- endmacro %}
+
+{% macro render_field_prefix_button(field, label=None, prefix="@", label_visible=true, right_url=None, right_label=None, fieldclass=None) -%}
+	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
+		{% if field.type != 'HiddenField' and label_visible %}
+			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
+			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
+		{% endif %}
+
+		<div class="input-group mb-3">
+			<div class="input-group-prepend">
+				<span class="input-group-text" id="basic-addon1">{{ prefix }}</span>
+			</div>
+			{{ field(class_=fieldclass or 'form-control', **kwargs) }}
+			<a class="btn btn-secondary" id="{{ field.name }}-button">
+				View
+			</a>
+		</div>
+
+		{{ render_errors(field) }}
 	</div>
 {%- endmacro %}
 
 {% macro form_scripts() -%}
-	<link href="/static/jquery-ui.min.css" rel="stylesheet" type="text/css">
-	<script src="/static/jquery-ui.min.js"></script>
-	<script src="/static/tagselector.js"></script>
+	<link href="/static/jquery-ui.min.css?v=2" rel="stylesheet" type="text/css">
+	<script src="/static/jquery-ui.min.js?v=2"></script>
+	<script src="/static/tagselector.js?v=3"></script>
 {% endmacro %}
 
 {% macro package_lists() -%}
@@ -54,7 +95,7 @@
 {% endmacro %}
 
 {% macro render_multiselect_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
-	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label %}{% set label=field.label.text %}{% endif %}
 			<label for="{{ field.id }}">{{ label|safe }}</label>
@@ -65,16 +106,12 @@
 		</div>
 		<div class="invalid-remaining invalid-feedback"></div>
 		{{ field(class_='form-control', **kwargs) }}
-		{% if field.errors %}
-			{% for e in field.errors %}
-				<div class="invalid-feedback">{{ e }}</div>
-			{% endfor %}
-		{% endif %}
+		{{ render_errors(field) }}
 	</div>
 {% endmacro %}
 
 {% macro render_mpackage_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
-	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label %}{% set label=field.label.text %}{% endif %}
 			<label for="{{ field.id }}">{{ label|safe }}</label>
@@ -85,16 +122,12 @@
 		</div>
 		{{ field(class_='form-control', **kwargs) }}
 		<div class="invalid-remaining invalid-feedback"></div>
-		{% if field.errors %}
-			{% for e in field.errors %}
-				<p class="help-block">{{ e }}</p>
-			{% endfor %}
-		{% endif %}
+		{{ render_errors(field) }}
 	</div>
 {% endmacro %}
 
 {% macro render_deps_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
-	<div class="form-group {% if field.errors %}has-error{% endif %} {{ kwargs.pop('class_', '') }}">
+	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label %}{% set label=field.label.text %}{% endif %}
 			<label for="{{ field.id }}">{{ label|safe }}</label>
@@ -105,11 +138,7 @@
 		</div>
 		{{ field(class_='form-control', **kwargs) }}
 		<div class="invalid-remaining invalid-feedback"></div>
-		{% if field.errors %}
-			{% for e in field.errors %}
-				<p class="help-block">{{ e }}</p>
-			{% endfor %}
-		{% endif %}
+		{{ render_errors(field) }}
 	</div>
 {% endmacro %}
 
@@ -131,6 +160,21 @@
 			</label>
 		</div>
 	{% endfor %}
+{%- endmacro %}
+
+{% macro render_toggle_field(field, icons=[]) -%}
+<div class="btn-group btn-group-toggle" data-toggle="buttons">
+	{% for value, label, checked in field.iter_choices() %}
+		<label class="btn btn-primary{% if checked %} active{% endif %}">
+			{% set icon = icons[value] %}
+			{% if icon %}
+				<i class="fas {{ icon }} mr-2"></i>
+			{% endif %}
+			<input type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}" autocomplete="off" {% if checked %} checked{% endif %}>
+			{{ label }}
+		</label>
+	{% endfor %}
+	</div>
 {%- endmacro %}
 
 {% macro render_submit_field(field, label=None, tabindex=None) -%}

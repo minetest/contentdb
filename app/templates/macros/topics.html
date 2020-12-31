@@ -9,7 +9,7 @@
 		<th>Actions</th>
 	</tr>
 	{% for topic in topics %}
-		<tr class="{% if topic.wip %}wiptopic{% endif %}{% if topic.discarded %}discardtopic{% endif %}">
+		<tr class="{% if topic.wip %}wiptopic{% endif %} {% if topic.discarded %}discardtopic{% endif %}">
 			<td>
 				[{{ topic.type.value }}]
 			</td>

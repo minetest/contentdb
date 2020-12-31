@@ -23,16 +23,15 @@ from app.models import Package, APIToken, Permission
 from app.blueprints.api.support import error, handleCreateRelease
 
 
-@bp.route("/gitlab/webhook/", methods=["POST"])
-@csrf.exempt
-def webhook():
+def webhook_impl():
 	json = request.json
 
 	# Get package
-	gitlab_url = "gitlab.com/{}/{}".format(json["project"]["namespace"], json["project"]["name"])
-	package = Package.query.filter(Package.repo.like("%{}%".format(gitlab_url))).first()
+	gitlab_url = json["project"]["web_url"].replace("https://", "").replace("http://", "")
+	package = Package.query.filter(Package.repo.ilike("%{}%".format(gitlab_url))).first()
 	if package is None:
-		return error(400, "Unknown package")
+		return error(400,
+				"Could not find package, did you set the VCS repo in CDB correctly? Expected {}".format(gitlab_url))
 
 	# Get all tokens for package
 	secret = request.headers.get("X-Gitlab-Token")
@@ -40,11 +39,11 @@ def webhook():
 		return error(403, "Token required")
 
 	token = APIToken.query.filter_by(access_token=secret).first()
-	if secret is None:
+	if token is None:
 		return error(403, "Invalid authentication")
 
 	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
-		return error(403, "Only trusted members can use webhooks")
+		return error(403, "You do not have the permission to approve releases")
 
 	#
 	# Check event
@@ -65,3 +64,12 @@ def webhook():
 	#
 
 	return handleCreateRelease(token, package, title, ref)
+
+
+@bp.route("/gitlab/webhook/", methods=["POST"])
+@csrf.exempt
+def webhook():
+	try:
+		return webhook_impl()
+	except KeyError as err:
+		return error(400, "Missing field: {}".format(err.args[0]))

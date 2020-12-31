@@ -9,16 +9,15 @@
 {% endblock %}
 
 {% block content %}
-	<p>
-		<a href="{{ url_for('admin.tag_list') }}">Back to list</a> |
-		<a href="{{ url_for('admin.create_edit_tag') }}">New Tag</a>
-	</p>
+	<a class="btn btn-primary float-right" href="{{ url_for('admin.create_edit_tag') }}">New Tag</a>
+	<a class="btn btn-secondary mb-4" href="{{ url_for('admin.tag_list') }}">Back to list</a>
 
 	{% from "macros/forms.html" import render_field, render_submit_field %}
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.title) }}
+		{{ render_field(form.description) }}
 		{% if tag %}
 			{{ render_field(form.name) }}
 		{% endif %}

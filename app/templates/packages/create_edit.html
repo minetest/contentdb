@@ -7,16 +7,17 @@
 	{% endif %}
 {% endblock %}
 
-{% from "macros/forms.html" import render_field, render_submit_field, form_scripts, render_multiselect_field, render_mpackage_field, render_deps_field, package_lists %}
+{% from "macros/forms.html" import render_field, render_field_prefix_button, render_submit_field, form_scripts,
+		render_multiselect_field, render_mpackage_field, render_deps_field, package_lists %}
 
 {% block scriptextra %}
 	{{ form_scripts() }}
 	{% if enable_wizard %}
 		<script src="/static/url.min.js"></script>
 		<script src="/static/polltask.js"></script>
-		<script src="/static/package_create.js?v=3"></script>
+		<script src="/static/package_create.js?v=4"></script>
 	{% endif %}
-	<script src="/static/package_edit.js?v=3"></script>
+	<script src="/static/package_edit.js?v=4"></script>
 {% endblock %}
 
 {% block content %}
@@ -27,6 +28,17 @@
 
 		{{ _("Have you read the Package Inclusion Policy and Guidance yet?") }}
 	</div>
+
+	{% if package and package.checkPerm(current_user, "REIMPORT_META") and package.releases.first() %}
+		<form class="alert alert-secondary mb-5" method="post" action="{{ package.getUpdateFromReleaseURL() }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input class="btn btn-sm btn-warning float-right" type="submit" value="{{ _('Import') }}" />
+
+			<b>{{ _("Reimport meta from latest release.") }}</b>
+			{{ _("This will override 'provides', 'dependencies', and 'optional_dependencies'.") }}
+			<div style="clear:both;"></div>
+		</form>
+	{% endif %}
 
 	<noscript>
 		<div class="alert alert-warning">
@@ -55,6 +67,7 @@
 			</div>
 			{{ render_field(form.short_desc, class_="pkg_meta") }}
 			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
+			{{ render_multiselect_field(form.content_warnings, class_="pkg_meta") }}
 			<div class="pkg_meta row">
 				{{ render_field(form.license, class_="not_txp col-sm-6") }}
 				{{ render_field(form.media_license, class_="col-sm-6") }}
@@ -69,12 +82,17 @@
 		<fieldset class="pkg_meta">
 			<legend class="not_txp">{{ _("Dependencies") }}</legend>
 
-			{{ render_mpackage_field(form.provides_str, class_="not_txp", placeholder="Comma separated list") }}
-			{{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
-			{{ render_deps_field(form.softdep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
+			<p class="alert alert-secondary not_txp">
+				<span class="fas fa-info pr-1"></span>
+
+				{{ _("Note: This information is now updated automatically when creating a release.") }}
+			</p>
+
+			{# {{ render_deps_field(form.harddep_str, class_="not_txp not_game", placeholder="Comma separated list") }}
+			{{ render_deps_field(form.softdep_str, class_="not_txp not_game", placeholder="Comma separated list") }} #}
 		</fieldset>
 
-		<fieldset>
+		<fieldset class="mt-4">
 			<legend class="pkg_meta">{{ _("Repository and Links") }}</legend>
 
 			<div class="pkg_wiz_1">
@@ -97,9 +115,12 @@
 
 			{{ render_field(form.website, class_="pkg_meta") }}
 			{{ render_field(form.issueTracker, class_="pkg_meta") }}
-			{{ render_field(form.forums, class_="pkg_meta", placeholder=_("Tip: paste in a forum topic URL")) }}
+			{{ render_field_prefix_button(form.forums, class_="pkg_meta",
+				pattern="[0-9]+",
+				prefix=_("forum.minetest.net/viewtopic.php?t="),
+				placeholder=_("Tip: paste in a forum topic URL")) }}
 		</fieldset>
 
-		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
+		<div class="pkg_meta mt-5">{{ render_submit_field(form.submit) }}</div>
 	</form>
 {% endblock %}

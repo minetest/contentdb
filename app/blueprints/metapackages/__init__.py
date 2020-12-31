@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,16 +16,20 @@
 
 
 from flask import *
+from sqlalchemy import func
+from app.models import MetaPackage, Package, db, Dependency, PackageState, ForumTopic
 
 bp = Blueprint("metapackages", __name__)
 
-from flask_user import *
-from app.models import *
 
 @bp.route("/metapackages/")
 def list_all():
-	mpackages = MetaPackage.query.order_by(db.asc(MetaPackage.name)).all()
-	return render_template("meta/list.html", mpackages=mpackages)
+	mpackages = db.session.query(MetaPackage, func.count(Package.id)) \
+			.select_from(MetaPackage).outerjoin(MetaPackage.packages) \
+			.order_by(db.asc(MetaPackage.name)) \
+			.group_by(MetaPackage.id).all()
+	return render_template("metapackages/list.html", mpackages=mpackages)
+
 
 @bp.route("/metapackages/<name>/")
 def view(name):
@@ -33,4 +37,29 @@ def view(name):
 	if mpackage is None:
 		abort(404)
 
-	return render_template("meta/view.html", mpackage=mpackage)
+	dependers = db.session.query(Package) \
+		.select_from(MetaPackage) \
+		.filter(MetaPackage.name==name) \
+		.join(MetaPackage.dependencies) \
+		.join(Dependency.depender) \
+		.filter(Dependency.optional==False, Package.state==PackageState.APPROVED) \
+		.all()
+
+	optional_dependers = db.session.query(Package) \
+		.select_from(MetaPackage) \
+		.filter(MetaPackage.name==name) \
+		.join(MetaPackage.dependencies) \
+		.join(Dependency.depender) \
+		.filter(Dependency.optional==True, Package.state==PackageState.APPROVED) \
+		.all()
+
+	similar_topics = None
+	if mpackage.packages.filter_by(state=PackageState.APPROVED).count() == 0:
+		similar_topics = ForumTopic.query \
+				.filter_by(name=name) \
+				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
+				.all()
+
+	return render_template("metapackages/view.html", mpackage=mpackage,
+			dependers=dependers, optional_dependers=optional_dependers,
+			similar_topics=similar_topics)

@@ -1,26 +1,30 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Add a screenshot | {{ package.title }}
+	Edit screenshot | {{ package.title }}
 {% endblock %}
 
 {% block content %}
-	<a href="{{ screenshot.url }}">
-		<img src="{{ screenshot.getThumbnailURL() }}" alt="{{ screenshot.title }}" />
-	</a>
+	<div class="row">
+		{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
+		<form method="POST" action="" enctype="multipart/form-data" class="col-md">
+			<h1>Edit screenshot</h1>
 
-	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
-	<form method="POST" action="" enctype="multipart/form-data">
-		{{ form.hidden_tag() }}
+			{{ form.hidden_tag() }}
 
-		{{ render_field(form.title) }}
-		{{ render_checkbox_field(form.delete) }}
+			{{ render_field(form.title) }}
 
-		{% if package.checkPerm(current_user, "APPROVE_SCREENSHOT") %}
-			{{ render_checkbox_field(form.approved) }}
-		{% else %}
-			<p>Approved: {{ screenshot.approved }}</p>
-		{% endif %}
-		{{ render_submit_field(form.submit) }}
-	</form>
+			{% if package.checkPerm(current_user, "APPROVE_SCREENSHOT") %}
+				{{ render_checkbox_field(form.approved) }}
+			{% else %}
+				<p>Approved: {{ screenshot.approved }}</p>
+			{% endif %}
+
+			{{ render_submit_field(form.submit) }}
+		</form>
+
+		<a href="{{ screenshot.url }}" class="col-md-4 text-right">
+			<img src="{{ screenshot.getThumbnailURL() }}" alt="{{ screenshot.title }}" />
+		</a>
+	</div>
 {% endblock %}

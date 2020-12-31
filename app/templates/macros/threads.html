@@ -5,10 +5,10 @@
 	<li class="row my-2 mx-0">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('users.profile', username=r.author.username) }}">
-				<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
 			</a>
 		</div>
-		<div class="col">
+		<div class="col pr-0">
 			<div class="card">
 				<div class="card-header">
 					<a class="author {{ r.author.rank.name }}"
@@ -22,6 +22,25 @@
 				</div>
 
 				<div class="card-body">
+					{% if r.checkPerm(current_user, "DELETE_REPLY") %}
+						<a class="float-right btn btn-secondary btn-sm ml-2"
+								href="{{ url_for('threads.delete_reply', id=thread.id, reply=r.id) }}">
+							<i class="fas fa-trash"></i>
+						</a>
+					{% endif %}
+
+					{% if current_user == thread.author and thread.review and thread.replies[0] == r %}
+						<a class="float-right btn btn-primary btn-sm ml-2"
+								href="{{ thread.review.package.getReviewURL() }}">
+							<i class="fas fa-edit"></i>
+						</a>
+					{% elif r.checkPerm(current_user, "EDIT_REPLY") %}
+						<a class="float-right btn btn-primary btn-sm ml-2"
+								href="{{ url_for('threads.edit_reply', id=thread.id, reply=r.id) }}">
+							<i class="fas fa-edit"></i>
+						</a>
+					{% endif %}
+
 					{{ r.comment | markdown }}
 				</div>
 			</div>
@@ -30,10 +49,17 @@
 	{% endfor %}
 </ul>
 
+{% if thread.locked %}
+	<p class="my-0 py-4 text-center">
+		<i class="fas fa-lock mr-3"></i>
+		{{ _("This thread has been locked by a moderator.") }}
+	</p>
+{% endif %}
+
 {% if current_user.is_authenticated %}
 <div class="row mt-0 mb-4 comments mx-0">
 	<div class="col-md-1 p-1">
-		<img class="img-responsive user-photo img-thumbnail img-thumbnail-1" src="{{ current_user.getProfilePicURL() }}">
+		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ current_user.getProfilePicURL() }}">
 	</div>
 	<div class="col">
 		<div class="card">
@@ -42,17 +68,26 @@
 				<a name="reply"></a>
 			</div>
 
-			{% if current_user.canCommentRL() %}
-				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<textarea class="form-control markdown" required maxlength=500 name="comment"></textarea><br />
-					<input class="btn btn-primary" type="submit" value="Comment" />
-				</form>
-			{% else %}
+			{% if not current_user.canCommentRL() %}
 				<div class="card-body">
-					<textarea class="form-control" readonly disabled>Please wait before commenting again.</textarea><br />
+					<textarea class="form-control" readonly disabled>{{ _("Please wait before commenting again.") }}</textarea><br />
 					<input class="btn btn-primary" type="submit" disabled value="Comment" />
 				</div>
+			{% elif not thread.checkPerm(current_user, "COMMENT_THREAD") %}
+				<div class="card-body">
+					{% if thread.locked %}
+						<textarea class="form-control" readonly disabled>{{ _("This thread has been locked.") }}</textarea><br />
+					{% else %}
+						<textarea class="form-control" readonly disabled>{{ _("You don't have permission to post.") }}</textarea><br />
+					{% endif %}
+					<input class="btn btn-primary" type="submit" disabled value="Comment" />
+				</div>
+			{% else %}
+				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<textarea class="form-control markdown" required maxlength=2000 name="comment"></textarea><br />
+					<input class="btn btn-primary" type="submit" value="Comment" />
+				</form>
 			{% endif %}
 		</div>
 	</div>
@@ -60,24 +95,95 @@
 {% endif %}
 {% endmacro %}
 
-{% macro render_threadlist(threads, list_group=False) -%}
-	{% if not list_group %}<ul>{% endif %}
-		{% for t in threads %}
-			<li {% if list_group %}class="list-group-item"{% endif %}>
-				{% if list_group %}
-					<a href="{{ url_for('threads.view', id=t.id) }}">
-						{% if t.private %}&#x1f512; {% endif %}
+{% macro render_compact_threadlist(threads) -%}
+	{% for t in threads %}
+		<a class="list-group-item list-group-item-action"
+				href="{{ url_for('threads.view', id=t.id) }}">
+			{% if t.private %}&#x1f512; {% endif %}
+			<strong>{{ t.title }}</strong>
+			by {{ t.author.display_name }}
+		</a>
+	{% else %}
+		<p class="list-group-item"><i>No threads found</i></p>
+	{% endfor %}
+{% endmacro %}
+
+{% macro render_threadlist(threads) -%}
+	<div class="list-group-item">
+		<div class="row text-muted">
+			<span class="col-md">
+				{{ _("Thread") }}
+			</span>
+
+			<span class="col-md-3">
+				{{ _("Last Reply") }}
+			</span>
+
+			<span class="col-md-2"></span>
+		</div>
+	</div>
+
+	{% for t in threads %}
+		{% set replies = t.replies.count() - 1 %}
+
+		<a class="list-group-item list-group-item-action"
+				href="{{ url_for('threads.view', id=t.id) }}">
+			<div class="row">
+				<div class="col-md">
+					{% if not t.review and t.private %}
+						<i class="fas fa-lock" style="color:#ffac33;"></i>
+					{% elif not t.review %}
+						<i class="fas fa-comment-alt" style="color:#666;"></i>
+					{% elif t.review.recommends %}
+						<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
+					{% else %}
+						<i class="fas fa-thumbs-down" style="color:#f66;"></i>
+					{% endif %}
+					<strong class="ml-1">
 						{{ t.title }}
-						by {{ t.author.display_name }}
-					</a>
-				{% else %}
-					{% if t.private %}&#x1f512; {% endif %}
-					<a href="{{ url_for('threads.view', id=t.id) }}">{{ t.title }}</a>
-					by {{ t.author.display_name }}
+					</strong><br />
+					<span>
+						{{ t.author.display_name }}
+					</span>
+					<span class="text-muted ml-3">
+						{{ t.created_at | datetime }}
+					</span>
+				</div>
+
+				{% if replies > 0 %}
+					<span class="col-md-auto text-muted">
+						{{ replies }}
+						<i class="fas fa-comment ml-1"></i>
+					</span>
 				{% endif %}
-			</li>
-		{% else %}
-			<li {% if list_group %}class="list-group-item"{% endif %}><i>No threads found</i></li>
-		{% endfor %}
-	{% if not list_group %}</ul>{% endif %}
+
+				<div class="col-md-3">
+					{% if replies > 0 %}
+						{% set latest = t.get_latest_reply() %}
+						<span>
+							{{ latest.author.display_name }}
+						</span><br />
+						<span class="text-muted">
+							{{ latest.created_at | datetime }}
+						</span>
+					{% endif %}
+				</div>
+
+				{% if t.package %}
+					<div class="col-md-2 text-muted text-right">
+						<img
+							class="img-fluid"
+							style="max-height: 22px; max-width: 22px;"
+							src="{{ t.package.getThumbnailURL(1) }}" /><br />
+
+						<span class="pl-2">
+							{{ t.package.title }}
+						</span>
+					</div>
+				{% endif %}
+			</div>
+		</a>
+	{% else %}
+		<p class="list-group-item"><i>No threads found</i></p>
+	{% endfor %}
 {% endmacro %}

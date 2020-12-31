@@ -45,7 +45,8 @@
 	<script src="/static/release_minmax.js?v=1"></script>
 	<script>
 		function setup_toggle(type) {
-			var toggle = $("#set_" + type);
+			const toggle = $("#set_" + type);
+
 			function on_change() {
 				if (toggle.is(":checked")) {
 					// $("#" + type + "_rel").removeAttr("disabled");

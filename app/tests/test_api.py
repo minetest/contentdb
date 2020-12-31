@@ -1,9 +1,7 @@
-import pytest
-from app import app
 from app.default_data import populate_test_data
-from app.models import db, License, Tag, User, UserRank, Package
-from utils import client, recreate_db, parse_json
-from utils import is_str, is_int, is_optional
+from app.models import db, Package, PackageState
+from utils import parse_json, is_str, is_int, is_optional
+
 
 def validate_package_list(packages, strict=False):
 	valid_keys = {
@@ -46,7 +44,7 @@ def test_packages_with_contents(client):
 	packages = parse_json(rv.data)
 
 	assert len(packages) > 0
-	assert len(packages) == Package.query.filter_by(approved=True).count()
+	assert len(packages) == Package.query.filter_by(state=PackageState.APPROVED).count()
 
 	validate_package_list(packages)
 

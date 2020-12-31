@@ -6,18 +6,99 @@ Notifications
 
 {% block content %}
 	{% if current_user.notifications %}
-		<form method="post" action="{{ url_for('notifications.clear') }}">
+		<form method="post" action="{{ url_for('notifications.clear') }}" class="float-right">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<input type="submit" value="Clear All" />
+			<input type="submit" class="btn btn-primary" value="Clear All" />
 		</form>
+		<a href="{{ url_for('users.email_notifications', username=current_user.username) }}" class="btn btn-secondary float-right mr-3">
+			{{ _("Edit email notification settings") }}
+		</a>
 	{% endif %}
-	<ul>
-		{% for n in current_user.notifications %}
-			<li><a href="{{ n.url }}">
-				{{ n.title}} [{{ n.causer.display_name }}]
-			</a></li>
+
+	<h1>Notifications</h1>
+
+	{% if current_user.notifications %}
+	<p>
+		Newest first.
+	</p>
+	{% endif %}
+
+	{% if editor_notifications %}
+		<h2>Your Notifications</h2>
+	{% endif %}
+
+	<div class="list-group mt-3">
+		{% for n in notifications %}
+			<a class="list-group-item list-group-item-action" href="{{ n.url }}">
+				<div class="row">
+					{% if n.package %}
+
+						<div class="col-sm-auto text-muted">
+							<img
+								class="img-fluid"
+								style="max-height: 22px; max-width: 22px;"
+								src="{{ n.package.getThumbnailURL(1) }}" />
+
+							<span class="pl-2">
+								{{ n.package.title }}
+							</span>
+						</div>
+					{% endif %}
+
+					<div class="col-sm">
+						{{ n.title}}
+					</div>
+
+					<div class="col-sm-auto text-muted text-right">
+						<span class="pr-2">{{ n.causer.display_name }}</span>
+						<img
+							class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+							style="max-height: 22px;"
+							src="{{ n.causer.getProfilePicURL() }}" />
+					</div>
+				</div>
+			</a>
 		{% else %}
-			<li><i>No notifications</i></ul>
+			<p class="list-group-item"><i>No notifications</i></p>
 		{% endfor %}
-	</ul>
+	</div>
+
+	{% if editor_notifications %}
+		<h2>Editor Notifications</h2>
+
+		<div class="list-group mt-3">
+			{% for n in editor_notifications %}
+				<a class="list-group-item list-group-item-action" href="{{ n.url }}">
+					<div class="row">
+						{% if n.package %}
+							<div class="col-sm-auto text-muted">
+								<img
+									class="img-fluid"
+									style="max-height: 22px; max-width: 22px;"
+									src="{{ n.package.getThumbnailURL(1) }}" />
+
+								<span class="pl-2">
+									{{ n.package.title }}
+								</span>
+							</div>
+						{% endif %}
+
+						<div class="col-sm">
+							{{ n.title}}
+						</div>
+
+						<div class="col-sm-auto text-muted text-right">
+							<span class="pr-2">{{ n.causer.display_name }}</span>
+							<img
+								class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+								style="max-height: 22px;"
+								src="{{ n.causer.getProfilePicURL() }}" />
+						</div>
+					</div>
+				</a>
+			{% else %}
+				<p class="list-group-item"><i>No notifications</i></p>
+			{% endfor %}
+		</div>
+	{% endif %}
 {% endblock %}

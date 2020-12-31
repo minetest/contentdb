@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,22 +16,29 @@
 
 
 from flask import render_template, redirect, request, session, url_for, abort
-from flask_user import login_required, current_user
-from . import bp
-from app.models import db, User, APIToken, Package, Permission
-from app.utils import randomString
-from app.querybuilder import QueryBuilder
-
+from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import *
-from wtforms.validators import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms.validators import *
+
+from app.models import db, User, APIToken, Package, Permission
+from app.utils import randomString
+from . import bp
+from ..users.settings import get_setting_tabs
+
 
 class CreateAPIToken(FlaskForm):
 	name	     = StringField("Name", [InputRequired(), Length(1, 30)])
-	package      = QuerySelectField("Limit to package", allow_blank=True, \
+	package      = QuerySelectField("Limit to package", allow_blank=True,
 			get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	submit	     = SubmitField("Save")
+
+
+@bp.route("/user/tokens/")
+@login_required
+def list_tokens_redirect():
+	return redirect(url_for("api.list_tokens", username=current_user.username))
 
 
 @bp.route("/users/<username>/tokens/")
@@ -44,7 +51,7 @@ def list_tokens(username):
 	if not user.checkPerm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
 
-	return render_template("api/list_tokens.html", user=user)
+	return render_template("api/list_tokens.html", user=user, tabs=get_setting_tabs(user), current_tab="api_tokens")
 
 
 @bp.route("/users/<username>/tokens/new/", methods=["GET", "POST"])
@@ -74,7 +81,7 @@ def create_edit_token(username, id=None):
 	form = CreateAPIToken(formdata=request.form, obj=token)
 	form.package.query_factory = lambda: Package.query.filter_by(author=user).all()
 
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if is_new:
 			token = APIToken()
 			token.owner = user

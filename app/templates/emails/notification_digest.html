@@ -1,0 +1,39 @@
+{% extends "emails/base.html" %}
+
+{% block content %}
+
+{% for type, group in notifications | groupby("package.title") %}
+	<h2>
+		{{ type or _("Other Notifications") }}
+	</h2>
+
+	<ul>
+		{% for notification in group %}
+			<li>
+				<a href="{{ notification.url | abs_url }}">{{ notification.title }}</a> -
+				{{ _("from %(username)s.", username=notification.causer.display_name) }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endfor %}
+
+<p style="margin-top: 3em;">
+	<a class="btn" href="{{ abs_url_for('notifications.list_all') }}">
+		View Notifications
+	</a>
+</p>
+
+{% endblock %}
+
+{% block footer %}
+	You are receiving this email because you are a registered user of ContentDB,
+	and have email notifications enabled. <br>
+
+	<a href="{{ abs_url_for('users.email_notifications', username=user.username) }}">
+		{{ _("Manage your preferences") }}
+	</a>
+	|
+	<a href="{{ abs_url_for('users.unsubscribe', token=sub.token) }}">
+		{{ _("Unsubscribe") }}
+	</a> <br>
+{% endblock %}

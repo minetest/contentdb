@@ -1,16 +1,20 @@
 {% extends "base.html" %}
 
 {% block title %}
-Minetest Versions
+{{ _("Minetest Versions") }}
 {% endblock %}
 
 {% block content %}
-	<p>
-		<a href="{{ url_for('admin.create_edit_version') }}">New Version</a>
-	</p>
-	<ul>
+	<a class="btn btn-primary float-right" href="{{ url_for('admin.create_edit_version') }}">{{ _("New Version") }}</a>
+
+	<h1>{{ _("Minetest Versions") }}</h1>
+
+	<div class="list-group">
 		{% for v in versions %}
-			<li><a href="{{ url_for('admin.create_edit_version', name=v.name) }}">{{ v.name }}</a></li>
+			<a class="list-group-item list-group-item-action"
+					href="{{ url_for('admin.create_edit_version', name=v.name) }}">
+				{{ v.name }}
+			</a>
 		{% endfor %}
-	</ul>
+	</div>
 {% endblock %}

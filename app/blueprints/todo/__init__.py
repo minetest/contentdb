@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -15,8 +15,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import *
-from flask_user import *
-import flask_menu as menu
+from flask_login import current_user, login_required
+from sqlalchemy import or_
+
 from app.models import *
 from app.querybuilder import QueryBuilder
 from app.utils import get_int_or_abort
@@ -31,8 +32,12 @@ def view():
 	canApproveScn = Permission.APPROVE_SCREENSHOT.check(current_user)
 
 	packages = None
+	wip_packages = None
 	if canApproveNew:
-		packages = Package.query.filter_by(approved=False, soft_deleted=False).order_by(db.desc(Package.created_at)).all()
+		packages = Package.query.filter_by(state=PackageState.READY_FOR_REVIEW) \
+			.order_by(db.desc(Package.created_at)).all()
+		wip_packages = Package.query.filter(or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)) \
+			.order_by(db.desc(Package.created_at)).all()
 
 	releases = None
 	if canApproveRel:
@@ -64,10 +69,20 @@ def view():
 			.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
 			.count()
 
+	total_packages = Package.query.filter_by(state=PackageState.APPROVED).count()
+	total_to_tag = Package.query.filter_by(state=PackageState.APPROVED, tags=None).count()
+
+	unfulfilled_meta_packages = MetaPackage.query \
+			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
+			.filter(MetaPackage.dependencies.any(optional=False)) \
+			.order_by(db.asc(MetaPackage.name)).count()
+
 	return render_template("todo/list.html", title="Reports and Work Queue",
-		packages=packages, releases=releases, screenshots=screenshots,
+		packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
 		canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
-		topics_to_add=topics_to_add, total_topics=total_topics)
+		topics_to_add=topics_to_add, total_topics=total_topics,
+			total_packages=total_packages, total_to_tag=total_to_tag,
+			unfulfilled_meta_packages=unfulfilled_meta_packages)
 
 
 @bp.route("/todo/topics/")
@@ -89,14 +104,37 @@ def topics():
 		num = 100
 
 	query = query.paginate(page, num, True)
-	next_url = url_for("todo.topics", page=query.next_num, query=qb.search, \
-	 	show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
+	next_url = url_for("todo.topics", page=query.next_num, query=qb.search,
+			show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_next else None
-	prev_url = url_for("todo.topics", page=query.prev_num, query=qb.search, \
-	 	show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
+	prev_url = url_for("todo.topics", page=query.prev_num, query=qb.search,
+			show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_prev else None
 
-	return render_template("todo/topics.html", topics=query.items, total=total, \
-			topic_count=topic_count, query=qb.search, show_discarded=qb.show_discarded, \
-			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages, \
+	return render_template("todo/topics.html", topics=query.items, total=total,
+			topic_count=topic_count, query=qb.search, show_discarded=qb.show_discarded,
+			next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages,
 			n=num, sort_by=qb.order_by)
+
+
+@bp.route("/todo/tags/")
+@login_required
+def tags():
+	qb    = QueryBuilder(request.args)
+	qb.setSortIfNone("score", "desc")
+	query = qb.buildPackageQuery()
+
+	tags = Tag.query.order_by(db.asc(Tag.title)).all()
+
+	return render_template("todo/tags.html", packages=query.all(), tags=tags)
+
+
+@bp.route("/todo/metapackages/")
+@login_required
+def metapackages():
+	mpackages = MetaPackage.query \
+			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
+			.filter(MetaPackage.dependencies.any(optional=False)) \
+			.order_by(db.asc(MetaPackage.name)).all()
+
+	return render_template("todo/metapackages.html", mpackages=mpackages)

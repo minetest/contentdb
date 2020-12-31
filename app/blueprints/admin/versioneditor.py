@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,13 +16,14 @@
 
 
 from flask import *
-from flask_user import *
-from . import bp
-from app.models import *
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
+
+from app.models import *
 from app.utils import rank_required
+from . import bp
+
 
 @bp.route("/versions/")
 @rank_required(UserRank.MODERATOR)
@@ -45,7 +46,7 @@ def create_edit_version(name=None):
 			abort(404)
 
 	form = VersionForm(formdata=request.form, obj=version)
-	if request.method == "POST" and form.validate():
+	if form.validate_on_submit():
 		if version is None:
 			version = MinetestRelease(form.name.data)
 			db.session.add(version)

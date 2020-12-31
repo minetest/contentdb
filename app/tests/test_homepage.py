@@ -1,8 +1,6 @@
-import pytest
-from app import app
 from app.default_data import populate_test_data
-from app.models import db, License, Tag, User, UserRank
-from utils import client, recreate_db
+from app.models import db
+
 
 def test_homepage_empty(client):
 	"""Start with a blank database."""

@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Reviews") }}
+{% endblock %}
+
+{% block content %}
+	{% from "macros/pagination.html" import render_pagination %}
+	{% from "macros/reviews.html" import render_reviews %}
+
+	{{ render_pagination(pagination, url_set_query) }}
+	{{ render_reviews(reviews, current_user, True) }}
+	{{ render_pagination(pagination, url_set_query) }}
+{% endblock %}

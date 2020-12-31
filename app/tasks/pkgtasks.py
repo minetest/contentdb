@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -20,5 +20,10 @@ from app.tasks import celery
 
 @celery.task()
 def updatePackageScores():
-	Package.query.update({ "score": Package.score * 0.95 })
+	Package.query.update({ "score_downloads": Package.score_downloads * 0.95 })
+	db.session.commit()
+
+	for package in Package.query.all():
+		package.recalcScore()
+
 	db.session.commit()

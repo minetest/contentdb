@@ -22,7 +22,7 @@ $(function() {
 
 			function setField(id, value) {
 				if (value && value != "") {
-					var ele = $(id);
+					const ele = $(id);
 					ele.val(value);
 					ele.trigger("change");
 				}
@@ -30,14 +30,13 @@ $(function() {
 
 			performTask("/tasks/getmeta/new/?url=" + encodeURI(repoURL)).then(function(result) {
 				setField("#name", result.name);
-				setField("#provides_str", result.provides);
 				setField("#title", result.title);
 				setField("#repo", result.repo || repoURL);
 				setField("#issueTracker", result.issueTracker);
 				setField("#desc", result.description);
 				setField("#short_desc", result.short_description);
-				setField("#harddep_str", result.depends);
-				setField("#softdep_str", result.optional_depends);
+				// setField("#harddep_str", result.depends);
+				// setField("#softdep_str", result.optional_depends);
 				setField("#short_desc", result.short_description);
 				setField("#forums", result.forumId);
 				if (result.type && result.type.length > 2) {

@@ -1,7 +1,7 @@
 $(".topic-discard").click(function() {
-	var ele = $(this);
-	var tid = ele.attr("data-tid");
-	var discard = !ele.parent().parent().hasClass("discardtopic");
+	const ele = $(this);
+	const tid = ele.attr("data-tid");
+	const discard = !ele.parent().parent().hasClass("discardtopic");
 	fetch(new Request("/api/topic_discard/?tid=" + tid +
 			"&discard=" + (discard ? "true" : "false"), {
 		method: "post",

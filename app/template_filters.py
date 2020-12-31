@@ -1,15 +1,28 @@
-from . import app
-from .utils import abs_url_for
+from . import app, utils
+from .models import Permission, Package, PackageState, PackageRelease
+from .utils import abs_url_for, url_set_query
+from flask_login import current_user
+from flask_babel import format_timedelta, gettext
 from urllib.parse import urlparse
+from datetime import datetime as dt
 
 @app.context_processor
 def inject_debug():
-    return dict(debug=app.debug)
-
+	return dict(debug=app.debug)
 
 @app.context_processor
 def inject_functions():
-    return dict(abs_url_for=abs_url_for)
+	check_global_perm = Permission.checkPerm
+	return dict(abs_url_for=abs_url_for, url_set_query=url_set_query, check_global_perm=check_global_perm)
+
+@app.context_processor
+def inject_todo():
+	todo_list_count = None
+	if current_user and current_user.is_authenticated and current_user.canAccessTodoList():
+		todo_list_count = Package.query.filter_by(state=PackageState.READY_FOR_REVIEW).count()
+		todo_list_count += PackageRelease.query.filter_by(approved=False, task_id=None).count()
+
+	return dict(todo_list_count=todo_list_count)
 
 @app.template_filter()
 def throw(err):
@@ -21,8 +34,20 @@ def domain(url):
 
 @app.template_filter()
 def date(value):
-    return value.strftime("%Y-%m-%d")
+	return value.strftime("%Y-%m-%d")
 
 @app.template_filter()
 def datetime(value):
-    return value.strftime("%Y-%m-%d %H:%M") + " UTC"
+	delta = dt.utcnow() - value
+	if delta.days == 0:
+		return gettext("%(delta)s ago", delta=format_timedelta(value))
+	else:
+		return value.strftime("%Y-%m-%d %H:%M") + " UTC"
+
+@app.template_filter()
+def timedelta(value):
+	return format_timedelta(value)
+
+@app.template_filter()
+def abs_url(url):
+	return utils.abs_url(url)

@@ -1,23 +1,23 @@
-{% extends "base.html" %}
+{% extends "users/settings_base.html" %}
 
 {% block title %}
-	{{ _("List tokens for %(username)s", username=user.username) }}
+	{{ _("API Tokens | %(username)s", username=user.username) }}
 {% endblock %}
 
-
-{% block content %}
+{% block pane %}
 	<a class="btn btn-primary float-right" href="{{ url_for('api.create_edit_token', username=user.username) }}">Create</a>
-	<h1 class="mt-0">{{ self.title() }}</h1>
+	<a class="btn btn-secondary mr-2 float-right" href="/help/api/">API Documentation</a>
+	<h2 class="mt-0">{{ _("API Tokens") }}</h2>
 
-	<ul>
+	<div class="list-group">
 		{% for token in user.tokens %}
-			<li>
-				<a href="{{ url_for('api.create_edit_token', username=user.username, id=token.id) }}">{{ token.name }}</a>
-			</li>
+			<a class="list-group-item list-group-item-action" href="{{ url_for('api.create_edit_token', username=user.username, id=token.id) }}">
+				{{ token.name }}
+			</a>
 		{% else %}
-			<li>
+			<span class="list-group-item">
 				<i>No tokens created</i>
-			</li>
+			</span>
 		{% endfor %}
-	</ul>
+	</div>
 {% endblock %}

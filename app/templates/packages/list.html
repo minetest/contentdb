@@ -19,26 +19,38 @@
 		</p>
 	{% endif %}
 
+	<aside class="mb-5">
+		<p class="text-muted">Filter by tags</p>
+
+		{% for pair in tags %}
+			{% set count = pair[0] %}
+			{% set tag = pair[1] %}
+
+			{% if tag in selected_tags %}
+				<a class="btn btn-sm btn-primary m-1" rel="nofollow"
+						title="{{ tag.description or '' }}"
+						href="{{ url_set_query(page=1, _remove={ 'tag': tag.name }) }}">
+					{{ tag.title }}
+					<span class="badge badge-pill badge-light ml-1">{{ count }}</span>
+				</a>
+			{% else %}
+				<a class="btn btn-sm btn-secondary m-1" rel="nofollow"
+						title="{{ tag.description or '' }}"
+						href="{{ url_set_query(page=1, _add={ 'tag': tag.name }) }}">
+					{{ tag.title }}
+					<span class="badge badge-pill badge-light ml-1">{{ count }}</span>
+				</a>
+			{% endif %}
+		{% endfor %}
+	</aside>
 
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 	{{ render_pkggrid(packages) }}
 
-	<ul class="pagination mt-4">
-		<li class="page-item {% if not prev_url %}disabled{% endif %}">
-			<a class="page-link" {% if prev_url %}href="{{ prev_url }}"{% endif %}>&laquo;</a>
-		</li>
-		{% for n in range(1, page_max+1) %}
-			<li class="page-item {% if n == page %}active{% endif %}">
-				<a class="page-link"
-						href="{{ url_for('packages.list_all', type=type, q=query, page=n) }}">
-					{{ n }}
-				</a>
-			</li>
-		{% endfor %}
-		<li class="page-item {% if not next_url %}disabled{% endif %}">
-			<a class="page-link" {% if next_url %}href="{{ next_url }}"{% endif %}>&raquo;</a>
-		</li>
-	</ul>
+
+	{% from "macros/pagination.html" import render_pagination %}
+	{{ render_pagination(pagination, url_set_query) }}
+
 
 	{% if topics %}
 		<h2 style="margin-top:2em;">More content from the forums</h2>
@@ -46,5 +58,6 @@
 		{% from "macros/topics.html" import render_topics %}
 		{{ render_topics(topics, current_user) }}
 	{% endif %}
+
 
 {% endblock %}

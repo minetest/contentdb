@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Delete user {{ user.display_name }}
+{% endblock %}
+
+{% block content %}
+	<form method="POST" action="" class="card box_grey">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+		<h3 class="card-header">{{ self.title() }}</h3>
+		<div class="card-body">
+			<p><b>Deleting is permanent</b></p>
+
+			{% if can_delete %}
+				<p>
+					{{ _("This will delete your account, removing %(threads)d threads and %(replies)d replies.",
+							threads=user.threads.count(), replies=user.replies.count()) }}
+				</p>
+			{% else %}
+				<p>
+					{{ _("As you have packages and/or forum threads, your account cannot be fully deleted.") }}
+					{{ _("Instead, your account will be deactivated and all personal information wiped - including %(threads)d threads and %(replies)d replies.",
+							threads=user.threads.count(), replies=user.replies.count()) }}
+					{{ _("See the privacy policy for more information.") }}
+				</p>
+			{% endif %}
+
+			<a class="btn btn-secondary mr-3" href="{{ url_for('users.account', username=user.username) }}">Cancel</a>
+			<input type="submit" value="{% if can_delete %}Delete{% else %}Deactivate{% endif %}" class="btn btn-danger" />
+		</div>
+	</form>
+{% endblock %}

@@ -6,202 +6,131 @@
 
 {% block content %}
 
+<article class="row mb-5">
+	<div class="col-auto image mx-0">
+		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ user.getProfilePicURL() }}" alt="Profile picture">
+	</div>
+	<div class="col">
+		{% if user.can_see_edit_profile(current_user) %}
+			<a class="btn btn-primary float-right" href="{{ url_for('users.profile_edit', username=user.username) }}">
+				{{ _("Edit Profile") }}
+			</a>
+		{%  endif %}
+
+		{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) and user.email %}
+			<a class="btn btn-secondary float-right mr-3" href="{{ url_for('admin.send_single_email', username=user.username) }}">
+				{{  _("Send Email") }}
+			</a>
+		{% endif %}
+
+		<h1 class="ml-3 my-0">
+			{{ user.display_name }}
+		</h1>
+
+		<div class="info-row mx-0 mt-2 mb-0">
+			<div class="btn-group-horizontal">
+				<span class="btn">
+					<i class="fas fa-user"></i>
+					<span class="count">
+						{{ user.rank.getTitle() }}
+					</span>
+				</span>
+
+				{% if user.forums_username %}
+					<a class="btn" href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
+						<i class="fas fa-comments"></i>
+						<span class="count">
+							{{ _("Forums") }}
+						</span>
+					</a>
+				{% endif %}
+
+				{% if user.github_username %}
+					<a class="btn" href="https://github.com/{{ user.github_username }}">
+						<i class="fas fa-code-branch"></i>
+						<span class="count">
+							{{ _("GitHub") }}
+						</span>
+					</a>
+				{% endif %}
+
+				{% if user.website_url %}
+					<a class="btn" href="{{ user.website_url }}" rel="nofollow">
+						<i class="fas fa-globe-europe"></i>
+						<span class="count">
+							{{  _("Website") }}
+						</span>
+					</a>
+				{% endif %}
+
+				{% if user.donate_url %}
+					<a class="btn" href="{{ user.donate_url }}" rel="nofollow">
+						<i class="fas fa-donate"></i>
+						<span class="count">
+							{{  _("Donate") }}
+						</span>
+					</a>
+				{% endif %}
+
+				<a class="btn" href="{{ url_for('packages.list_all', author=user.username) }}">
+					<i class="fas fa-box"></i>
+					<span class="count">
+						<strong>{{ user.packages.count() }}</strong>
+						{{ _("packages") }}
+					</span>
+				</a>
+
+				<a class="btn" href="#reviews">
+					<i class="fas fa-star-half-alt"></i>
+					<span class="count">
+						<strong>{{ user.reviews | length }}</strong>
+						{{ _("reviews") }}
+					</span>
+				</a>
+
+				<span>
+					<i class="fas fa-comment"></i>
+					<span class="count">
+						<strong>{{ user.replies.count() }}</strong>
+						{{ _("comments") }}
+					</span>
+				</span>
+			</div>
+		</div>
+	</div>
+</article>
+
+
 {% if not current_user.is_authenticated and user.rank == user.rank.NOT_JOINED and user.forums_username %}
-<div class="alert alert-info">
-	<a class="float-right btn btn-default btn-sm"
-		href="{{ url_for('users.claim', username=user.forums_username) }}">Claim</a>
+	<div class="alert alert-secondary mb-5">
+		<a class="float-right btn btn-default btn-sm"
+			href="{{ url_for('users.claim_forums', username=user.forums_username) }}">Claim</a>
 
-	Is this you? Claim your account now!
-</div>
-{% endif %}
-
-<div class="row mb-3">
-	<div class="col-sm-6">
-		<div class="card">
-			<h2 class="card-header">{{ user.display_name }}</h2>
-			<div class="card-body row">
-				<div class="col-md-2">
-					{% if user.forums_username %}
-						<a href="https://forum.minetest.net/ucp.php?i=profile&mode=avatar">
-					{% elif user.email %}
-						<a href="https://en.gravatar.com/">
-					{% endif %}
-					<img class="img-responsive user-photo img-thumbnail  img-thumbnail-1" src="{{ user.getProfilePicURL() }}">
-					{% if user.forums_username or user.email %}
-						</a>
-					{% endif %}
-				</div>
-				<div class="col">
-					<table class="table">
-						<tr>
-							<td>Rank:</td>
-							<td>
-								{{ user.rank.getTitle() }}
-							</td>
-						</tr>
-						<tr>
-							<td>Links:</td>
-							<td>
-								{% if user.forums_username %}
-									<a href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
-										Minetest Forum
-									</a>
-								{% elif user == current_user %}
-									No forum account
-								{% endif %}
-
-								{% if user.github_username or user == current_user %}
-									|
-								{% endif %}
-
-								{% if user.github_username %}
-									<a href="https://github.com/{{ user.github_username }}">GitHub</a>
-								{% elif user == current_user %}
-									<a href="{{ url_for('github.start') }}">Link Github</a>
-								{% endif %}
-
-								{% if user.website_url %}
-									| <a href="{{ user.website_url }}" rel="nofollow">Website</a>
-								{% endif %}
-
-
-								{% if user == current_user %}
-									<br>
-									<small class="text-muted">
-										<span style="padding-right: 5px;">&#x1f30e;</span>
-										Visible to everyone
-									</small>
-								{% endif %}
-							</td>
-						</tr>
-
-						{% if user == current_user and user.github_username %}
-							<tr>
-								<td>Privacy:</td>
-								<td>
-									<a href="{{ url_for('github.view_permissions') }}">View ContentDB's GitHub Permissions</a>
-								</td>
-							</tr>
-						{% endif %}
-
-						{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
-						<tr>
-							<td>Admin</td>
-							<td>
-								{% if user.email %}
-									<a class="btn btn-primary" href="{{ url_for('users.send_email', username=user.username) }}">
-										Email
-									</a>
-								{% else %}
-									<a class="btn btn-primary disabled"
-											data-toggle="tooltip" data-placement="bottom"
-											title="No email address for user"
-											style="pointer-events: all;">
-										Email
-									</a>
-								{% endif %}
-							</td>
-						</tr>
-						{% endif %}
-						{% if user == current_user %}
-							<tr>
-								<td>Profile Picture:</td>
-								<td>
-									{% if user.forums_username %}
-										<form method="post" action="{{ url_for('users.user_check', username=user.username) }}" class="" style="display:inline-block;">
-											<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-											<input type="submit" class="btn btn-primary" value="Sync with Forums" />
-										</form>
-									{% endif %}
-									{% if user.email %}
-										<a class="btn btn-primary" href="https://en.gravatar.com/">
-											Gravatar
-										</a>
-									{% else %}
-										<a class="btn btn-primary disabled"
-												data-toggle="tooltip" data-placement="bottom"
-												title="Please add an email address to use Gravatar"
-												style="pointer-events: all;">
-											Gravatar
-										</a>
-									{% endif %}
-								</td>
-						</tr>
-							<tr>
-								<td>Password:</td>
-								<td>
-									{% if user.password %}
-										Set | <a href="{{ url_for('user.change_password') }}">Change</a>
-									{% else %}
-										Not set | <a href="{{ url_for('users.set_password') }}">Set</a>
-									{% endif %}
-								</td>
-							</tr>
-						{% endif %}
-						{% if user.checkPerm(current_user, "CREATE_TOKEN") %}
-						<tr>
-							<td>API Tokens:</td>
-							<td>
-								<a href="{{ url_for('api.list_tokens', username=user.username) }}">Manage</a>
-								<span class="badge badge-primary">{{ user.tokens.count() }}</span>
-							</td>
-						</tr>
-						{% endif %}
-					</table>
-				</div>
-			</div>
-		</div>
-	</div>
-
-{% if form %}
-	{% from "macros/forms.html" import render_field, render_submit_field %}
-	<div class="col-sm-6">
-		<div class="card">
-			<div class="card-header">Edit Details</div>
-			<div class="card-body">
-				<form action="" method="POST" class="form box-body" role="form">
-					{{ form.hidden_tag() }}
-
-					{% if user.checkPerm(current_user, "CHANGE_DNAME") %}
-						{{ render_field(form.display_name, tabindex=230) }}
-					{% endif %}
-
-					{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}
-						{{ render_field(form.website_url, tabindex=232) }}
-						{{ render_field(form.donate_url, tabindex=233) }}
-					{% endif %}
-
-					{% if user.checkPerm(current_user, "CHANGE_EMAIL") %}
-						{{ render_field(form.email, tabindex=240) }}
-						<i>We'll send you an email to verify it if changed.</i>
-					{% endif %}
-
-					{% if user.checkPerm(current_user, "CHANGE_RANK") %}
-						{{ render_field(form.rank, tabindex=250) }}
-					{% endif %}
-
-					<p>
-						{{ render_submit_field(form.submit, tabindex=280) }}
-					</p>
-				</form>
-			</div>
-		</div>
+		Is this you? Claim your account now!
 	</div>
 {% endif %}
-</div>
+
+
+{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.EDITOR)) %}
+<a class="float-right btn btn-sm btn-primary"
+		href="{{ url_for('todo.tags', author=user.username) }}">
+	View list of tags
+</a>
+{% endif %}
+
+<h2 class="my-3">{{ _("Packages") }}</h2>
 
 {% from "macros/packagegridtile.html" import render_pkggrid %}
 {{ render_pkggrid(packages, show_author=False) }}
 
-{% if user.donate_url %}
-	<div class="alert alert-secondary">
-		Like {{ user.display_name }}'s work?
-		<a href="{{ user.donate_url }}" rel="nofollow">Donate now!</a>
-	</div>
-{% endif %}
+
+<h2 class="my-3" id="reviews">{{ _("Reviews") }}</h2>
+{% from "macros/reviews.html" import render_reviews %}
+{{ render_reviews(user.reviews, current_user, True) }}
+
 
 {% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.EDITOR)) %}
-	<div class="card mt-3">
+	<div class="card mt-5">
 		<a name="unadded-topics"></a>
 		<h2 class="card-header">Unadded topics</h2>
 
@@ -224,7 +153,7 @@
 
 {% block scriptextra %}
 	<script>
-		var csrf_token = "{{ csrf_token() }}";
+		const csrf_token = "{{ csrf_token() }}";
 	</script>
 	<script src="/static/topic_discard.js"></script>
 {% endblock %}

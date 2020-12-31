@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{% if warning %}
+		Edit {{ warning.title }}
+	{% else %}
+		New warning
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<a class="btn btn-primary float-right" href="{{ url_for('admin.create_edit_warning') }}">New Warning</a>
+	<a class="btn btn-secondary mb-4" href="{{ url_for('admin.warning_list') }}">Back to list</a>
+
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.title) }}
+		{{ render_field(form.description) }}
+		{% if warning %}
+			{{ render_field(form.name) }}
+		{% endif %}
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}

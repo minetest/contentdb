@@ -20,35 +20,21 @@
 {% endblock %}
 
 {% block content %}
-<!-- <header class="jumbotron">
-	<div class="container">
-		<h1 class="display-3">{{ config.USER_APP_NAME }}</h1>
-
-		<p class="lead">
-			Minetest's official content repository.
-			Browse {{ count }} packages,
-			the majority of which are available under a free
-			and open source license.
-		</p>
-	</div>
-</header>
-
-<main class="container"> -->
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 
 
-	<a href="{{ url_for('packages.list_all', sort='created_at', order='desc') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Recently Added") }}</h2>
 	{{ render_pkggrid(new) }}
 
 
-	<a href="{{ url_for('packages.list_all', type='mod', sort='score', order='desc') }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', sort='last_release', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
-	<h2 class="my-3">{{ _("Top Mods") }}</h2>
-	{{ render_pkggrid(pop_mod) }}
+	<h2 class="my-3">{{ _("Recently Updated") }}</h2>
+	{{ render_pkggrid(updated) }}
 
 
 	<a href="{{ url_for('packages.list_all', type='game', sort='score', order='desc') }}" class="btn btn-secondary float-right">
@@ -58,13 +44,51 @@
 	{{ render_pkggrid(pop_gam) }}
 
 
+	<a href="{{ url_for('packages.list_all', type='mod', sort='score', order='desc') }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Top Mods") }}</h2>
+	{{ render_pkggrid(pop_mod) }}
+
+
 	<a href="{{ url_for('packages.list_all', type='txp', sort='score', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Top Texture Packs") }}</h2>
 	{{ render_pkggrid(pop_txp) }}
 
-	<div class="text-center">
+
+	<h2 class="my-3">{{ _("Search by Tags") }}</h2>
+	{% for pair in tags %}
+		{% set count = pair[0] %}
+		{% set tag = pair[1] %}
+
+		<a class="btn btn-sm btn-secondary m-1" rel="nofollow"
+				title="{{ tag.description or '' }}"
+				href="{{ url_for('packages.list_all', tag=tag.name) }}">
+			{{ tag.title }}
+			<span class="badge badge-pill badge-light ml-1">{{ count }}</span>
+		</a>
+	{% endfor %}
+	<div class="clearfix mb-4"></div>
+
+
+	<a href="{{ url_for('packages.list_all', sort='reviews', order='desc') }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Top Reviewed") }}</h2>
+	{{ render_pkggrid(high_reviewed) }}
+
+
+	<a href="{{ url_for('packages.list_reviews') }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Recent Positive Reviews") }}</h2>
+	{% from "macros/reviews.html" import render_reviews %}
+	{{ render_reviews(reviews, current_user, True) }}
+
+
+	<div class="text-center mt-5">
 		<small>
 			{{ _("CDB has %(count)d packages, with a total of %(downloads)d downloads.", count=count, downloads=downloads) }}
 		</small>

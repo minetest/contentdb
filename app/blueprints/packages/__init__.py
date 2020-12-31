@@ -1,4 +1,4 @@
-# Content DB
+# ContentDB
 # Copyright (C) 2018  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
@@ -18,4 +18,4 @@ from flask import Blueprint
 
 bp = Blueprint("packages", __name__)
 
-from . import packages, screenshots, releases
+from . import packages, screenshots, releases, reviews

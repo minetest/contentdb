@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Screenshots | {{ package.title }}
+{% endblock %}
+
+{% block content %}
+	<h1 class="mb-5"><a href="{{ package.getDetailsURL() }}">{{ package.title }}</a></h1>
+
+	{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+		<a href="{{ package.getNewScreenshotURL() }}" class="btn btn-primary float-right">
+			{{ _("Add Image") }}
+		</a>
+	{% endif %}
+	<h2 class="mt-0">Screenshots</h2>
+
+	<p class="mb-4">
+		{{ _("Topmost screenshot will be used as the package thumbnail.") }}
+	</p>
+
+	<ul class="list-group sortable">
+		{% for ss in package.screenshots %}
+			{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+				<li class="list-group-item" data-id="{{ ss.id }}">
+					<div class="row">
+						<div class="col-auto text-muted pr-2">
+							<i class="fas fa-bars"></i>
+						</div>
+						<div class="col-auto">
+							<img class="img-fluid" style="max-height: 64px;"
+									src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+						</div>
+						<span class="col">
+							{{ ss.title }}
+						</span>
+						<form action="{{ ss.getDeleteURL() }}" method="POST" class="col-auto text-right" role="form">
+							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+							<a class="btn btn-sm btn-primary" href="{{ ss.getEditURL() }}">
+								<i class="fas fa-edit"></i>
+							</a>
+							<button type="submit" class="btn btn-sm btn-danger ml-2">
+								<i class="fas fa-trash"></i>
+							</button>
+						</form>
+					</div>
+				</li>
+			{% endif %}
+		{% else %}
+			<li class="list-group-item">
+				<i>No screenshots.</i>
+			</li>
+		{% endfor %}
+	</ul>
+
+	<form action="" method="POST" class="form mt-4" role="form">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		<input type="hidden" name="order" value="" />
+		<input type="submit" value="{{ _("Save Order") }}" class="btn btn-primary">
+	</form>
+
+	<noscript>
+		<p class="alert alert-warning mt-5">
+			{{ _("Reordering requires JavaScript.") }}
+		</p>
+	</noscript>
+
+	<h2>{{ _("Cover Image") }}</h2>
+
+	{% from "macros/forms.html" import render_submit_field, render_field %}
+	<form action="" method="POST" class="form" role="form">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.cover_image, tabindex=220) }}
+
+		{{ render_submit_field(form.submit, tabindex=280) }}
+	</form>
+{% endblock %}
+
+{% block scriptextra %}
+	<script src="/static/jquery-ui.min.js?v=2"></script>
+	<script>
+		function update() {
+			const elements = Array.from(document.getElementsByClassName("sortable")[0].children);
+			const ids = elements.map(x => x.dataset.id).filter(x => x);
+			$("input[name='order']").val(ids.join(","))
+		}
+
+		update();
+
+		$(function() {
+			$(".sortable").sortable({
+				update: update
+			});
+		});
+	</script>
+{% endblock %}

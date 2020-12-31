@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Delete reply in {{ thread.title }}
+{% endblock %}
+
+{% block content %}
+	<form method="POST" action="" class="card box_grey">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+
+		<h3 class="card-header">Delete reply by {{ reply.author.display_name }}</h3>
+		<div class="card-body">
+			{{ reply.comment | markdown }}
+		</div>
+		<div class="card-body">
+			<p>Deleting is permanent</p>
+
+			<a class="btn btn-secondary mr-3" href="{{ thread.getViewURL() }}">Cancel</a>
+			<input type="submit" value="Delete" class="btn btn-danger" />
+		</div>
+	</form>
+{% endblock %}

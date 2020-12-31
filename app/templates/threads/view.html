@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Threads
+{{ thread.title }} - {{ _("Threads") }}
 {% endblock %}
 
 {% block content %}
@@ -17,14 +17,47 @@ Threads
 				<input type="submit" class="btn btn-primary" value="Subscribe" />
 			</form>
 		{% endif %}
+		{% if thread and thread.checkPerm(current_user, "DELETE_THREAD") %}
+			<a href="{{ url_for('threads.delete_thread', id=thread.id) }}" class="float-right mr-2 btn btn-danger">{{ _('Delete') }}</a>
+		{% endif %}
+		{% if thread and thread.checkPerm(current_user, "LOCK_THREAD") %}
+			{% if thread.locked %}
+				<form method="post" action="{{ url_for('threads.set_lock', id=thread.id, lock=0) }}" class="float-right mr-2">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="submit" class="btn btn-secondary" value="{{ _('Unlock') }}" />
+				</form>
+			{% else %}
+				<form method="post" action="{{ url_for('threads.set_lock', id=thread.id, lock=1) }}" class="float-right mr-2">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="submit" class="btn btn-secondary" value="{{ _('Lock') }}" />
+				</form>
+			{% endif %}
+		{% endif %}
 	{% endif %}
 
-	<h1>{% if thread.private %}&#x1f512; {% endif %}{{ thread.title }}</h1>
+	{% if current_user == thread.author and thread.review %}
+		<a class="btn btn-primary ml-1 float-right mr-2"
+				href="{{ thread.review.package.getReviewURL() }}">
+			<i class="fas fa-edit"></i>
+			{{ _("Edit Review") }}
+		</a>
+	{% endif %}
 
-	{% if thread.package or current_user.is_authenticated %}
-		{% if thread.package %}
-			<p>Package: <a href="{{ thread.package.getDetailsURL() }}">{{ thread.package.title }}</a></p>
+	<h1>
+		{% if thread.review %}
+			{% if thread.review.recommends %}
+				<i class="fas fa-thumbs-up mr-2" style="color:#6f6;"></i>
+			{% else %}
+				<i class="fas fa-thumbs-down mr-2" style="color:#f66;"></i>
+			{% endif %}
 		{% endif %}
+		{% if thread.private %}&#x1f512; {% endif %}{{ thread.title }}
+	</h1>
+
+	{% if thread.package %}
+		<p>
+			Package: <a href="{{ thread.package.getDetailsURL() }}">{{ thread.package.title }}</a>
+		</p>
 	{% endif %}
 
 	{% if thread.private %}

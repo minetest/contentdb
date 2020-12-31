@@ -1,0 +1,71 @@
+{% extends "users/settings_base.html" %}
+
+{% block title %}
+	{{ _("Edit Profile | %(username)s", username=user.username) }}
+{% endblock %}
+
+{% block pane %}
+<h2 class="mt-0">{{ _("Edit Profile") }}</h2>
+
+<h3>{{ _("Profile Picture") }}</h3>
+<div class="row">
+	<div class="col-md-2">
+		{% if user.forums_username %}
+			<a href="https://forum.minetest.net/ucp.php?i=profile&mode=avatar">
+		{% elif user.email %}
+			<a href="https://en.gravatar.com/">
+		{% endif %}
+		<img class="img-fluid user-photo img-thumbnail  img-thumbnail-1" src="{{ user.getProfilePicURL() }}">
+		{% if user.forums_username or user.email %}
+			</a>
+		{% endif %}
+	</div>
+	<div class="col">
+		{% if user.forums_username %}
+			<form method="post" action="{{ url_for('users.user_check', username=user.username) }}" class="" style="display:inline-block;">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<input type="submit" class="btn btn-primary" value="{{  _('Sync with Forums') }}" />
+			</form>
+		{% endif %}
+		{% if user.email %}
+			<a class="btn btn-primary" href="https://en.gravatar.com/">
+				Gravatar
+			</a>
+		{% else %}
+			<a class="btn btn-primary disabled"
+					data-toggle="tooltip" data-placement="bottom"
+					title="Please add an email address to use Gravatar"
+					style="pointer-events: all;">
+				Gravatar
+			</a>
+		{% endif %}
+	</div>
+</div>
+
+<h3>{{ _("Profile Information") }}</h3>
+
+{% from "macros/forms.html" import render_field, render_field_prefix, render_submit_field %}
+<form action="" method="POST" class="form" role="form">
+	{{ form.hidden_tag() }}
+
+	{% if user.checkPerm(current_user, "CHANGE_USERNAMES") %}
+		{{ render_field(form.display_name, tabindex=230) }}
+		{{ render_field(form.forums_username, tabindex=230) }}
+		{{ render_field_prefix(form.github_username, tabindex=230) }}
+	{% endif %}
+
+	{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}
+		{{ render_field(form.website_url, tabindex=232) }}
+		{{ render_field(form.donate_url, tabindex=233) }}
+	{% endif %}
+
+	{% if user.checkPerm(current_user, "CHANGE_RANK") %}
+		{{ render_field(form.rank, tabindex=250) }}
+	{% endif %}
+
+	<p>
+		{{ render_submit_field(form.submit, tabindex=280) }}
+	</p>
+</form>
+
+{% endblock %}

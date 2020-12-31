@@ -1,0 +1,67 @@
+{% macro render_audit_log(log, current_user) -%}
+	<div class="list-group mt-3">
+		{% for entry in log %}
+			<a class="list-group-item list-group-item-action"
+				{% if entry.description and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+					href="{{ url_for('admin.audit_view', id=entry.id) }}">
+				{% else %}
+					href="{{ entry.url }}">
+				{% endif %}
+
+				<div class="row {% if entry.severity == entry.severity.NORMAL %}text-muted{% endif %}">
+					<div class="col-sm-auto text-center" style="width: 50px;"
+							title="{{ _('Severity: %(sev)s.', sev=entry.severity.getTitle()) }}">
+						{% if entry.severity == entry.severity.MODERATION %}
+							<i class="fas fa-exclamation-triangle" style="color: yellow;"></i>
+						{% elif entry.severity == entry.severity.EDITOR %}
+							<i class="fas fa-users" style="color: #537eac;"></i>
+						{% elif entry.severity == entry.severity.USER %}
+							<i class="fas fa-user"></i>
+						{% endif %}
+					</div>
+
+					<div class="col-sm-2 text-muted">
+						{% if entry.causer %}
+							<img
+								class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+								style="max-height: 22px;"
+								src="{{ entry.causer.getProfilePicURL() }}" />
+
+							<span class="pl-2">{{ entry.causer.display_name }}</span>
+						{% else %}
+							<i>Deleted User</i>
+						{% endif %}
+					</div>
+
+					<div class="col-sm">
+						{{ entry.title}}
+
+						{% if entry.description %}
+							<i class="fas fa-paperclip ml-3"></i>
+						{% endif %}
+					</div>
+
+					{% if entry.package %}
+						<div class="col-sm-auto text-muted">
+							<span class="pr-2">
+								{{ entry.package.title }}
+							</span>
+
+							<img
+								class="img-fluid"
+								style="max-height: 22px; max-width: 22px;"
+								src="{{ entry.package.getThumbnailURL(1) }}" />
+						</div>
+					{% endif %}
+
+
+					<div class="col-sm-auto text-muted">
+						{{ entry.created_at | datetime }}
+					</div>
+				</div>
+			</a>
+		{% else %}
+			<p class="list-group-item"><i>No audit log entires.</i></p>
+		{% endfor %}
+	</div>
+{% endmacro %}

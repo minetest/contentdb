@@ -17,10 +17,6 @@ The process is as follows:
 3. The git host posts a webhook notification to ContentDB, using the API token assigned to it.
 4. ContentDB checks the API token and issues a new release.
 
-<p class="alert alert-info">
-	This feature is in beta, and is only available for Trusted Members.
-</p>
-
 ## Setting up
 
 ### GitHub (automatic)
@@ -40,9 +36,9 @@ The process is as follows:
 
 ### GitHub (manual)
 
-1. Create an API Token by visiting your profile and clicking "API Tokens: Manage".
+1. Create a ContentDB API Token at [Profile > API Tokens: Manage](/user/tokens/).
 2. Copy the access token that was generated.
-3. Go to the repository's settings > Webhooks > Add Webhook.
+3. Go to the GitLab repository's settings > Webhooks > Add Webhook.
 4. Set the payload URL to `https://content.minetest.net/github/webhook/`
 5. Set the content type to JSON.
 6. Set the secret to the access token that you copied.
@@ -50,32 +46,24 @@ The process is as follows:
   * If you want a rolling release, choose "just the push event".
   * Or if you want a stable release cycle based on tags,
     choose "Let me select" > Branch or tag creation.
+8. Create.
 
 ### GitLab (manual)
 
-1. Create an API Token by visiting your profile and clicking "API Tokens: Manage".
+1. Create a ContentDB API Token at [Profile > API Tokens: Manage](/user/tokens/).
 2. Copy the access token that was generated.
-3. Go to the repository's settings > Integrations.
+3. Go to the GitLab repository's settings > Webhooks.
 4. Set the URL to `https://content.minetest.net/gitlab/webhook/`
-6. Set the secret token to the access token that you copied.
+6. Set the secret token to the ContentDB access token that you copied.
 7. Set the events
     * If you want a rolling release, choose "Push events".
     * Or if you want a stable release cycle based on tags,
       choose "Tag push events".
+8. Add webhook.
 
 ## Configuring
 
-### Setting minimum and maximum Minetest versions
-
-<p class="alert alert-info">
-	This feature is unimplemented.
-</p>
-
-1. Open up the conf file for the package.
-   This will be `game.conf`, `mod.conf`, `modpack.conf`, or `texture_pack.conf`
-   depending on the content type.
-2. Set `min_protocol` and `max_protocol` to the respective protocol numbers
-   of the Minetest versions.
-     * 0.4 = 32
-     * 5.0 = 37
-     * 5.1 = 38
+See the [Package Configuration and Releases Guide](/help/package_config/) for
+documentation on configuring the release creation.
+You can set the min/max Minetest version from the Git repository, and also
+configure what files are included.

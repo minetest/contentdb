@@ -6,60 +6,6 @@
 
 {% block content %}
 	<h2 class="mb-4">Approval Queue</h2>
-
-	<div class="row">
-		{% if canApproveNew and packages %}
-		<div class="col-sm-6">
-			<div class="card">
-				<h3 class="card-header">Packages</h3>
-				<div class="list-group list-group-flush">
-					{% for p in packages %}
-						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
-							{% if p.getState() == "thread" %}
-								<span class="mr-2 badge badge-danger">Thread</span>
-							{% elif p.getState() == "ready" %}
-								<span class="mr-2 badge badge-success">Ready</span>
-							{% elif p.getState() == "wip" %}
-								<span class="mr-2 badge badge-warning">WIP</span>
-							{% elif p.getState() == "license" %}
-								<span class="mr-2 badge badge-info">WIP</span>
-							{% endif %}
-
-							{{ p.title }} by {{ p.author.display_name }}
-						</a>
-					{% else %}
-						<li class="list-group-item"><i>No packages need reviewing.</i></li>
-					{% endfor %}
-				</div>
-			</div>
-		</div>
-		{% endif %}
-
-		{% if canApproveRel and releases %}
-		<div class="col-sm-6">
-			<div class="card">
-				<h3 class="card-header">Releases</h3>
-				<ul class="list-group list-group-flush">
-					{% for r in releases %}
-						<li class="list-group-item">
-							{% if r.task_id %}
-								<span class="mr-2 badge badge-warning">Importing</span>
-							{% endif %}
-							<a href="{{ r.getEditURL() }}">{{ r.title }}</a>
-							on
-							<a href="{{ r.package.getDetailsURL() }}">
-								{{ r.package.title }} by {{ r.package.author.display_name }}
-							</a>
-						</li>
-					{% else %}
-						<li class="list-group-item"><i>No releases need reviewing.</i></li>
-					{% endfor %}
-				</ul>
-			</div>
-		</div>
-		{% endif %}
-	</div>
-
 	{% if canApproveScn and screenshots %}
 		<div class="card my-4">
 			<h3 class="card-header">Screenshots
@@ -93,13 +39,125 @@
 		</div>
 	{% endif %}
 
+	<div class="row">
+		{% if canApproveNew and (packages or wip_packages) %}
+		<div class="col-sm-6">
+			<div class="card">
+				<h3 class="card-header">Packages</h3>
+				<div class="list-group list-group-flush">
+					{% for p in packages %}
+						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+							<span class="float-right" title="Created {{ p.created_at | datetime }}">
+								<small>
+									{{ p.created_at | timedelta }} ago
+								</small>
+							</span>
+
+							{% if "Other" in p.license.name or "Other" in p.media_license.name %}
+								<span class="mr-2 badge badge-info">License</span>
+							{% else %}
+								<span class="mr-2 badge badge-success">Ready</span>
+							{% endif %}
+
+							{{ p.title }} by {{ p.author.display_name }}
+
+
+						</a>
+					{% else %}
+						<li class="list-group-item"><i>No packages need reviewing.</i></li>
+					{% endfor %}
+				</div>
+			</div>
+
+			<div class="card mt-5">
+				<h3 class="card-header">WIP Packages</h3>
+				<div class="list-group list-group-flush" style="max-height: 300px; overflow: hidden auto;">
+					{% for p in wip_packages %}
+						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+							<span class="float-right" title="Created {{ p.created_at | datetime }}">
+								<small>
+									{{ p.created_at | timedelta }} ago
+								</small>
+							</span>
+
+							{% if p.state == p.state.WIP %}
+								<span class="mr-2 badge badge-warning">WIP</span>
+							{% else %}
+								<span class="mr-2 badge badge-danger">{{ p.state.value }}</span>
+							{% endif %}
+
+							{{ p.title }} by {{ p.author.display_name }}
+						</a>
+					{% else %}
+						<li class="list-group-item"><i>No packages need reviewing.</i></li>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+		{% endif %}
+
+		{% if canApproveRel and releases %}
+		<div class="col-sm-6">
+			<div class="card">
+				<h3 class="card-header">Releases</h3>
+				<ul class="list-group list-group-flush" style="max-height: 500px; overflow: hidden auto;">
+					{% for r in releases %}
+						<li class="list-group-item">
+							{% if r.task_id %}
+								<span class="mr-2 badge badge-warning">Importing</span>
+							{% endif %}
+							<a href="{{ r.getEditURL() }}">{{ r.title }}</a>
+							on
+							<a href="{{ r.package.getDetailsURL() }}">
+								{{ r.package.title }} by {{ r.package.author.display_name }}
+							</a>
+						</li>
+					{% else %}
+						<li class="list-group-item"><i>No releases need reviewing.</i></li>
+					{% endfor %}
+				</ul>
+			</div>
+		</div>
+		{% endif %}
+	</div>
+
 	{% if not (packages or screenshots or releases) %}
 		<p>
 			<i>All done!</i>
 		</p>
 	{% endif %}
 
-	<h2 class="mt-4">Unadded Topic List</h2>
+
+	<h2 class="mt-5">Tag Packages</h2>
+
+	<p>
+		{{ total_to_tag }} / {{ total_packages }} packages don't have any tags.
+	</p>
+
+	<div class="progress my-4">
+		{% set perc = 100 * (total_packages - total_to_tag) / total_packages %}
+		<div class="progress-bar bg-success" role="progressbar"
+			style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+	</div>
+
+	<a class="btn btn-primary" href="{{ url_for('todo.tags') }}">View Tags</a>
+
+
+	{% if unfulfilled_meta_packages %}
+		<h2 class="mt-5">
+			<span class="fas fa-exclamation-triangle pr-2" style="color: orange;"></span>
+			{{ unfulfilled_meta_packages }} Unfulfilled Dependencies
+		</h2>
+
+		<p>
+			Meta packages that have hard dependers, but are not fulfilled.
+		</p>
+
+		<a class="btn btn-primary" href="{{ url_for('todo.metapackages') }}">View</a>
+	{% endif %}
+
+
+	<h2 class="mt-5">Unadded Topic List</h2>
 
 	{% if total_topics > 0 %}
 		<p>
@@ -119,5 +177,4 @@
 			The forum topic crawler needs to run at least once for this section to work.
 		</p>
 	{% endif %}
-
 {% endblock %}

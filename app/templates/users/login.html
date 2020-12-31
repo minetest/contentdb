@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+
+{% block title %}
+Sign in
+{% endblock %}
+
+{% block content %}
+<div class="row">
+	<div class="col-sm-8">
+		<div class="card">
+			{% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
+			<h2 class="card-header">{%trans%}Sign in{%endtrans%}</h2>
+
+			<form action="" method="POST" class="form card-body" role="form">
+				{{ form.hidden_tag() }}
+
+				{# Username or Email field #}
+				{{ render_field(form.username, tabindex=110) }}
+
+				{# Password field #}
+				{% set field = form.password %}
+				<div class="form-group {% if field.errors %}has-error{% endif %}">
+					<label for="{{ field.id }}" class="control-label">{{ field.label.text }}
+						<a href="{{ url_for('users.forgot_password') }}" tabindex='195'>
+							[{%trans%}Forgot my password{%endtrans%}]</a>
+					</label>
+					{{ field(class_='form-control', tabindex=120) }}
+					{% if field.errors %}
+					{% for e in field.errors %}
+					<p class="help-block">{{ e }}</p>
+					{% endfor %}
+					{% endif %}
+				</div>
+
+				{# Remember me #}
+				{{ render_checkbox_field(form.remember_me, tabindex=130) }}
+
+				{# Submit button #}
+				<p>
+					{{ render_submit_field(form.submit, tabindex=180) }}
+				</p>
+			</form>
+		</div>
+
+		<div class="card mt-4">
+			<h2 class="card-header">{%trans%}Sign in with Github{%endtrans%}</h2>
+			<div class="card-body">
+				<a class="btn btn-primary" href="{{ url_for('github.start') }}">GitHub</a>
+			</div>
+		</div>
+	</div>
+
+	<aside class="col-sm-4">
+		<div class="card">
+			<h2 class="card-header">{%trans%}New here?{%endtrans%}</h2>
+			<div class="card-body">
+				<p>Create an account using your forum account or email.</p>
+
+				<a href="{{ url_for('users.claim') }}" class="btn btn-primary">{%trans%}Claim your account{%endtrans%}</a>
+			</div>
+		</div>
+	</aside>
+</div>
+{% endblock %}

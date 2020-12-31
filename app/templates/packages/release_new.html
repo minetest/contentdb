@@ -7,15 +7,15 @@
 {% block content %}
 	<p class="alert alert-info mb-4">
 		<a class="float-right btn btn-sm btn-info" href="{{ url_for('flatpage', path='help/release_webhooks') }}">{{ _("Learn more") }}</a>
-		{% if package.author == current_user and package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
+		{% if package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
 			<a class="float-right btn btn-sm btn-info mr-2" href="{{ url_for('github.setup_webhook', pid=package.id) }}">{{ _("Setup webhook") }}</a>
 			<i class="fas fa-info mr-2"></i>
 
-			{{ _("Set up a webhook on GitHub to create releases automatically.") }}
+			{{ _("Create releases automatically when you push commits or tags to GitHub, using a webhook or the API.") }}
 		{% elif package.repo %}
 			<i class="fas fa-info mr-2"></i>
 
-			{{ _("You can create releases automatically when you push commits or tags to your repository.") }}
+			{{ _("You can create releases automatically when you push commits or tags to your repository, using a webhook or the API.") }}
 		{% else %}
 			<i class="fas fa-info mr-2"></i>
 
@@ -27,15 +27,28 @@
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
+		<h3>1. Name release</h3>
+
 		{{ render_field(form.title, placeholder="Human readable. Eg: 1.0.0 or 2018-05-28") }}
+
+		<h3 class="mt-5">2. Set the content</h3>
+
 		<p class="mb-0">Method</p>
 		{{ render_radio_field(form.uploadOpt) }}
 
 		{% if package.repo %}
-			{{ render_field(form.vcsLabel, class_="mt-3") }}
+			{{ render_field(form.vcsLabel, placeholder="Leave blank to use default branch", class_="mt-3",
+					pattern="[A-Za-z0-9/._-]+") }}
 		{% endif %}
 
 		{{ render_field(form.fileUpload, fieldclass="form-control-file", class_="mt-3", accept=".zip") }}
+
+		<p>
+			Take a look at the <a href="/help/package_config/">Package Configuration and Releases Guide</a> for
+			tips on customising releases.
+		</p>
+
+		<h3 class="mt-5">3. Supported Minetest versions</h3>
 
 		<div class="row">
 			{{ render_field(form.min_rel, class_="col-sm-6") }}
@@ -47,15 +60,21 @@
 		</p>
 
 		<p>
-			Note: Min and max versions will be used to hide the package on
-			platforms not within the range.
-			You cannot select the oldest version for min or the newest version
-			for max as this does not make sense - you can't predict the future.<br />
+			Set the minimum and maximum Minetest versions supported.
+			This release will be hidden to clients outside of that range.<br />
 			Leave both as None if in doubt.
+			You can <a href="/help/package_config/">set this automatically</a> in the .conf of your package.
+		</p>
+		<p>
+			You cannot select the oldest version for min or the newest version
+			for max as this does not make sense - you can't predict the future.
 		</p>
 
-		{{ render_submit_field(form.submit) }}
+		<p class="mt-5">
+			{{ render_submit_field(form.submit) }}
+		</p>
 	</form>
+
 {% endblock %}
 
 {% block scriptextra %}

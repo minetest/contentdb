@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ mpackage.name }} - Meta Packages
+{% endblock %}
+
+{% block content %}
+	<h1>Meta Package "{{ mpackage.name }}"</h1>
+
+	<h2>Provided By</h2>
+
+	{% from "macros/packagegridtile.html" import render_pkggrid %}
+	{{ render_pkggrid(mpackage.packages.filter_by(state="APPROVED").all()) }}
+
+	{% if similar_topics %}
+		<p>Unforuntately, this isn't on ContentDB yet! Here's some forum topics:</p>
+		<ul>
+			{% for t in similar_topics %}
+				<li>
+					[{{ t.type.value }}]
+					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
+						{{ t.title }} by {{ t.author.display_name }}
+					</a>
+					{% if t.wip %}[WIP]{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+
+	<h2>Required By</h2>
+	{{ render_pkggrid(dependers) }}
+
+	<h2>Optionally Used By</h2>
+	{{ render_pkggrid(optional_dependers) }}
+{% endblock %}

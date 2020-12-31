@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
 	<link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=10">
+	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=18">
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
 	<link rel="shortcut icon" href="/favicon-16.png" sizes="16x16">
 	<link rel="icon" href="/favicon-128.png" sizes="128x128">
@@ -60,10 +60,39 @@
 				</form>
 				<ul class="navbar-nav ml-auto">
 					{% if current_user.is_authenticated %}
-						<li class="nav-item"><a class="nav-link" href="{{ url_for('notifications.list_all') }}">
-							<img src="/static/notification{% if current_user.notifications %}_alert{% endif %}.svg" />
-						</a></li>
-						<li class="nav-item"><a class="nav-link" href="{{ url_for('packages.create_edit') }}">+</a></li>
+						{% if todo_list_count is not none %}
+							<li class="nav-item">
+								<a class="nav-link notification-icon"
+											href="{{ url_for('todo.view') }}"
+											title="{{ _('Work Queue') }}">
+									{% if todo_list_count > 0 %}
+										<i class="fas fa-inbox"></i>
+										<span class="badge badge-pill badge-notify" style="font-size:10px;">{{ todo_list_count }}</span>
+									{% else %}
+										<i class="fas fa-inbox" ></i>
+									{% endif %}
+								</a>
+							</li>
+						{% endif %}
+						<li class="nav-item">
+							<a class="nav-link notification-icon"
+										href="{{ url_for('notifications.list_all') }}"
+										title="{{ _('Notifications') }}">
+								{% if current_user.notifications %}
+									<i class="fas fa-bell"></i>
+									<span class="badge badge-pill badge-notify" style="font-size:10px;">{{ current_user.notifications | length }}</span>
+								{% else %}
+									<i class="fas fa-bell" ></i>
+								{% endif %}
+							</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link"
+									href="{{ url_for('packages.create_edit') }}"
+									title="{{ _('Add Package') }}">
+								<i class="fas fa-plus"></i>
+							</a>
+						</li>
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle"
 								data-toggle="dropdown"
@@ -71,32 +100,38 @@
 								aria-expanded="false">{{ current_user.display_name }}
 									<span class="caret"></span></a>
 
-							<ul class="dropdown-menu" role="menu">
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}">Profile</a>
 								</li>
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}#unadded-topics">Your unadded topics</a>
 								</li>
-								{% if current_user.canAccessTodoList() %}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('todo.view') }}">{{ _("Work Queue") }}</a></li>
-									<li class="nav-item"><a  class="nav-link" href="{{ url_for('users.list_all') }}">{{ _("User list") }}</a></li>
+								{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+									<div class="dropdown-divider"></div>
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.audit') }}">{{ _("Audit Log") }}</a></li>
 								{% endif %}
-								<li class="nav-item">
-									<a class="nav-link" href="{{ url_for('todo.topics') }}">{{ _("All unadded topics") }}</a>
-								</li>
 								{% if current_user.rank == current_user.rank.ADMIN %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.admin_page') }}">{{ _("Admin") }}</a></li>
+								{% else %}
+									{% if check_global_perm(current_user, "EDIT_TAGS") %}
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.tag_list') }}">{{ _("Tag Editor") }}</a></li>
+									{% elif check_global_perm(current_user, "CREATE_TAG") %}
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.create_edit_tag') }}">{{ _("Create Tag") }}</a></li>
+									{% endif %}
+									{% if current_user.rank == current_user.rank.MODERATOR %}
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.license_list') }}">{{ _("License Editor") }}</a></li>
+									{% endif %}
 								{% endif %}
-								{% if current_user.rank == current_user.rank.MODERATOR %}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.tag_list') }}">{{ _("Tag Editor") }}</a></li>
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.license_list') }}">{{ _("License Editor") }}</a></li>
-								{% endif %}
-								<li class="nav-item"><a class="nav-link" href="{{ url_for('user.logout') }}">{{ _("Sign out") }}</a></li>
+								<div class="dropdown-divider"></div>
+								<li class="nav-item">
+									<a class="nav-link" href="{{ url_for('users.profile_edit', username=current_user.username) }}">Settings</a>
+								</li>
+								<li class="nav-item"><a class="nav-link" href="{{ url_for('users.logout') }}">{{ _("Sign out") }}</a></li>
 							</ul>
 						</li>
 					{% else %}
-						<li><a class="nav-link" href="{{ url_for('user.login') }}">{{ _("Sign in") }}</a></li>
+						<li><a class="nav-link" href="{{ url_for('users.login') }}">{{ _("Sign in") }}</a></li>
 					{% endif %}
 				</ul>
 			</div>
@@ -128,13 +163,19 @@
 	</main>
 	{% endblock %}
 
-	<footer class="container footer-copyright my-5 page-footer font-small text-center">
-		ContentDB &copy; 2018-20 to <a href="https://rubenwardy.com/">rubenwardy</a> |
-		<a href="https://github.com/minetest/contentdb">GitHub</a> |
-		<a href="{{ url_for('flatpage', path='help') }}">{{ _("Help") }}</a> |
-		<a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a> |
-		<a href="{{ url_for('flatpage', path='help/reporting') }}">{{ _("Report / DMCA") }}</a> |
-		<a href="{{ url_for('users.list_all') }}">{{ _("User List") }}</a>
+	<footer class="my-5">
+		<p class="pt-5 mb-1">
+			ContentDB &copy; 2018-20 to <a href="https://rubenwardy.com/">rubenwardy</a>
+		</p>
+
+		<ul class="list-inline my-1">
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help') }}">{{ _("Help") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help/reporting') }}">{{ _("Report / DMCA") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('users.list_all') }}">{{ _("User List") }}</a></li>
+			<li class="list-inline-item"><a href="https://github.com/minetest/contentdb">{{ _("Source Code") }}</a></li>
+		</ul>
 
 		{% if debug %}
 			<p style="color: red">

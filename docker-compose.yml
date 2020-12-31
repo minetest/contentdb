@@ -60,3 +60,12 @@ services:
       - 5124:5124
     depends_on:
       - redis
+
+  exporter:
+    image: ovalmoney/celery-exporter
+    env_file:
+      - config.env
+    ports:
+      - 5125:9540
+    depends_on:
+      - redis

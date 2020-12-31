@@ -1,11 +1,11 @@
-var min = $("#min_rel");
-var max = $("#max_rel");
-var none = $("#min_rel option:first-child").attr("value");
-var warning = $("#minmax_warning");
+const min = $("#min_rel");
+const max = $("#max_rel");
+const none = $("#min_rel option:first-child").attr("value");
+const warning = $("#minmax_warning");
 
 function ver_check() {
-	var minv = min.val();
-	var maxv = max.val();
+	const minv = min.val();
+	const maxv = max.val();
 
 	if (minv != none && maxv != none && minv > maxv) {
 		warning.show();

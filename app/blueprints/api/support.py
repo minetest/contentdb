@@ -1,12 +1,12 @@
 from app.models import PackageRelease, db, Permission
 from app.tasks.importtasks import makeVCSRelease
 from celery import uuid
-from flask import jsonify, make_response, url_for
+from flask import jsonify, abort, make_response, url_for
 import datetime
 
 
 def error(status, message):
-	return make_response(jsonify({ "success": False, "error": message }), status)
+	abort(make_response(jsonify({ "success": False, "error": message }), status))
 
 
 def handleCreateRelease(token, package, title, ref):

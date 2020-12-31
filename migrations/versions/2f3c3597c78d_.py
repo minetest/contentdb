@@ -5,11 +5,10 @@ Revises: 9ec17b558413
 Create Date: 2019-01-29 02:43:08.865695
 
 """
-from alembic import op
 import sqlalchemy as sa
-from sqlalchemy.dialects import postgresql
-from sqlalchemy_utils.types import TSVectorType
+from alembic import op
 from sqlalchemy_searchable import sync_trigger
+from sqlalchemy_utils.types import TSVectorType
 
 # revision identifiers, used by Alembic.
 revision = '2f3c3597c78d'
