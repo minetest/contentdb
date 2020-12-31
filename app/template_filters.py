@@ -2,7 +2,7 @@ from . import app, utils
 from .models import Permission, Package, PackageState, PackageRelease
 from .utils import abs_url_for, url_set_query
 from flask_login import current_user
-from flask_babel import format_timedelta
+from flask_babel import format_timedelta, gettext
 from urllib.parse import urlparse
 from datetime import datetime as dt
 
@@ -40,7 +40,7 @@ def date(value):
 def datetime(value):
 	delta = dt.utcnow() - value
 	if delta.days == 0:
-		return format_timedelta(value)
+		return gettext("%(delta)s ago", delta=format_timedelta(value))
 	else:
 		return value.strftime("%Y-%m-%d %H:%M") + " UTC"
 
