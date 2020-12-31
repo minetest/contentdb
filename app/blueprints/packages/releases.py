@@ -24,7 +24,7 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
 from app.rediscache import has_key, set_key, make_download_key
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease, updateMetaFromRelease
+from app.tasks.importtasks import makeVCSRelease, checkZipRelease
 from app.utils import *
 from . import bp
 
@@ -108,7 +108,6 @@ def create_release(package):
 				db.session.commit()
 
 				checkZipRelease.apply_async((rel.id, uploadedPath), task_id=rel.task_id)
-				updateMetaFromRelease.delay(rel.id, uploadedPath)
 
 				msg = "Release {} created".format(rel.title)
 				addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, rel.getEditURL(), package)

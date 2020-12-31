@@ -170,25 +170,6 @@ def postReleaseCheckUpdate(self, release, path):
 
 
 @celery.task(bind=True)
-def updateMetaFromRelease(self, id, path):
-	release = PackageRelease.query.get(id)
-	if release is None:
-		raise TaskError("No such release!")
-	elif release.package is None:
-		raise TaskError("No package attached to release")
-
-	print("updateMetaFromRelease: {} for {}/{}" \
-		.format(id, release.package.author.display_name, release.package.name))
-
-	with get_temp_dir() as temp:
-		with ZipFile(path, 'r') as zip_ref:
-			zip_ref.extractall(temp)
-
-		postReleaseCheckUpdate(self, release, temp)
-		db.session.commit()
-
-
-@celery.task(bind=True)
 def checkZipRelease(self, id, path):
 	release = PackageRelease.query.get(id)
 	if release is None:
@@ -231,8 +212,6 @@ def makeVCSRelease(self, id, branch):
 		release.commit_hash = repo.head.object.hexsha
 		release.approve(release.package.author)
 		db.session.commit()
-
-		updateMetaFromRelease.delay(release.id, destPath)
 
 		return release.url
 

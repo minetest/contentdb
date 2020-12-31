@@ -30,7 +30,7 @@ from wtforms.validators import *
 
 from app.querybuilder import QueryBuilder
 from app.rediscache import has_key, set_key
-from app.tasks.importtasks import importRepoScreenshot, updateMetaFromRelease
+from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
 from app.utils import *
 from . import bp
 
@@ -545,6 +545,6 @@ def update_from_release(package):
 
 	task_id = uuid()
 	zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
-	updateMetaFromRelease.apply_async((release.id, zippath), task_id=task_id)
+	checkZipRelease.apply_async((release.id, zippath), task_id=task_id)
 
 	return redirect(url_for("tasks.check", id=task_id, r=package.getEditURL()))
