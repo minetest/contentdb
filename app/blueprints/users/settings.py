@@ -214,6 +214,10 @@ def delete(username):
 	if not user:
 		abort(404)
 
+	if user.rank.atLeast(UserRank.MODERATOR):
+		flash("Users with moderator rank or above cannot be deleted", "danger")
+		return redirect(url_for("users.account", username=username))
+
 	if request.method == "GET":
 		return render_template("users/delete.html", user=user, can_delete=user.can_delete())
 
