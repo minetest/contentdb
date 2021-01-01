@@ -84,11 +84,14 @@ class PackageTreeNode:
 		result = {}
 
 		# .conf file
+		meta_file_path = self.getMetaFilePath()
 		try:
-			with open(self.getMetaFilePath() or "", "r") as myfile:
+			with open(meta_file_path or "", "r") as myfile:
 				conf = parse_conf(myfile.read())
 				for key, value in conf.items():
 					result[key] = value
+		except SyntaxError as e:
+			raise MinetestCheckError("Error while reading {}: {}".format(meta_file_path , e.msg))
 		except IOError:
 			pass
 
