@@ -35,14 +35,9 @@ def get_setting_tabs(user):
 	]
 
 
-# Define the User profile form
 class UserProfileForm(FlaskForm):
-	display_name = StringField("Display name", [Optional(), Length(2, 100)])
-	forums_username = StringField("Forums Username", [Optional(), Length(2, 50)])
-	github_username = StringField("GitHub Username", [Optional(), Length(2, 50)])
 	website_url = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
 	donate_url = StringField("Donation URL", [Optional(), URL()], filters = [lambda x: x or None])
-	rank = SelectField("Rank", [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce, default=UserRank.NEW_MEMBER)
 	submit = SubmitField("Save")
 
 
@@ -57,44 +52,22 @@ def profile_edit(username):
 		flash("Permission denied", "danger")
 		return redirect(url_for("users.profile", username=username))
 
-
-	form = UserProfileForm(formdata=request.form, obj=user)
-
-	# Process valid POST
-	if request.method=="POST" and form.validate():
+	form = UserProfileForm(obj=user)
+	if form.validate_on_submit():
 		severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
 		addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
 				url_for("users.profile", username=username))
-
-		# Copy form fields to user_profile fields
-		if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
-			user.display_name = form.display_name.data
-			user.forums_username = nonEmptyOrNone(form.forums_username.data)
-			user.github_username = nonEmptyOrNone(form.github_username.data)
 
 		if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
 			user.website_url  = form["website_url"].data
 			user.donate_url   = form["donate_url"].data
 
-		if user.checkPerm(current_user, Permission.CHANGE_RANK):
-			newRank = form["rank"].data
-			if current_user.rank.atLeast(newRank):
-				if newRank != user.rank:
-					user.rank = form["rank"].data
-					msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
-					addAuditLog(AuditSeverity.MODERATION, current_user, msg, url_for("users.profile", username=username))
-			else:
-				flash("Can't promote a user to a rank higher than yourself!", "danger")
-
-		# Save user_profile
 		db.session.commit()
 
 		return redirect(url_for("users.profile", username=username))
 
 	# Process GET or invalid POST
 	return render_template("users/profile_edit.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="edit_profile")
-
-
 
 
 def make_settings_form():
@@ -193,7 +166,16 @@ def email_notifications(username=None):
 			tabs=get_setting_tabs(user), current_tab="notifications")
 
 
-@bp.route("/users/<username>/settings/account/")
+class UserAccountForm(FlaskForm):
+	display_name = StringField("Display name", [Optional(), Length(2, 100)])
+	forums_username = StringField("Forums Username", [Optional(), Length(2, 50)])
+	github_username = StringField("GitHub Username", [Optional(), Length(2, 50)])
+	rank = SelectField("Rank", [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce,
+			default=UserRank.NEW_MEMBER)
+	submit = SubmitField("Save")
+
+
+@bp.route("/users/<username>/settings/account/", methods=["GET", "POST"])
 @login_required
 def account(username):
 	user : User = User.query.filter_by(username=username).first()
@@ -203,6 +185,35 @@ def account(username):
 	if not user.can_see_edit_profile(current_user):
 		flash("Permission denied", "danger")
 		return redirect(url_for("users.profile", username=username))
+
+	can_edit_account_settings = user.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
+			user.checkPerm(current_user, Permission.CHANGE_RANK)
+	form = UserAccountForm(obj=user) if can_edit_account_settings else None
+	if form and form.validate_on_submit():
+		severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
+		addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
+				url_for("users.profile", username=username))
+
+		# Copy form fields to user_profile fields
+		if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
+			user.display_name = form.display_name.data
+			user.forums_username = nonEmptyOrNone(form.forums_username.data)
+			user.github_username = nonEmptyOrNone(form.github_username.data)
+
+		if user.checkPerm(current_user, Permission.CHANGE_RANK):
+			newRank = form["rank"].data
+			if current_user.rank.atLeast(newRank):
+				if newRank != user.rank:
+					user.rank = form["rank"].data
+					msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
+					addAuditLog(AuditSeverity.MODERATION, current_user, msg,
+							url_for("users.profile", username=username))
+			else:
+				flash("Can't promote a user to a rank higher than yourself!", "danger")
+
+		db.session.commit()
+
+		return redirect(url_for("users.account", username=username))
 
 	return render_template("users/account.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="account")
 

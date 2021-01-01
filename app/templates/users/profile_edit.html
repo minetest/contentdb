@@ -48,19 +48,9 @@
 <form action="" method="POST" class="form" role="form">
 	{{ form.hidden_tag() }}
 
-	{% if user.checkPerm(current_user, "CHANGE_USERNAMES") %}
-		{{ render_field(form.display_name, tabindex=230) }}
-		{{ render_field(form.forums_username, tabindex=230) }}
-		{{ render_field_prefix(form.github_username, tabindex=230) }}
-	{% endif %}
-
 	{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}
 		{{ render_field(form.website_url, tabindex=232) }}
 		{{ render_field(form.donate_url, tabindex=233) }}
-	{% endif %}
-
-	{% if user.checkPerm(current_user, "CHANGE_RANK") %}
-		{{ render_field(form.rank, tabindex=250) }}
 	{% endif %}
 
 	<p>
