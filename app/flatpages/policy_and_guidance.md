@@ -1,9 +1,5 @@
 title: Package Inclusion Policy and Guidance
 
-<div class="alert alert-warning">
-	<b>Note:</b> This is a draft
-</div>
-
 ## 0. Overview
 
 ContentDB is for the community, and as such listings should be useful to the
@@ -31,9 +27,10 @@ including ones not covered by this document, and to ban users who abuse this ser
 ### 2.1. Acceptable Content
 
 Sexually-orientated content is not permitted.
+If in doubt at what this means, [contact us by raising a report](/help/reporting/).
 
-Mature content, including that relating to drugs, excessive gore, violence, or
-excessive horror, is not currently permitted - but will be in the future.
+Mature content is permitted providing that it is labelled correctly.
+See [Content Flags](/help/content_flags/).
 
 The submission of malware is strictly prohibited. This includes software that
 does not do as it advertises, for example, if it posts telemetry without stating
@@ -43,7 +40,7 @@ clearly that it does in the package meta.
 
 ContentDB should only currently contain playable content - content which is
 sufficiently complete to be useful to end-users. It's fine to add stuff which
-is still a Work in Progress (WIP) as long as it adds sufficient value -
+is still a Work in Progress (WIP) as long as it adds sufficient value;
 MineClone 2 is a good example of a WIP package which may break between releases
 but still has value. Note that this doesn't mean that you should add a thing
 you started working on yesterday, it's worth adding all the basic stuff to
@@ -57,6 +54,8 @@ libraries allows them to be installed when a mod depends on it.
 ## 3. Technical Names
 
 ### 3.1 Right to a name
+
+A package uses a name when it has that name or contains a mod that uses that name.
 
 The first package to use a name based on the creation of its forum topic or
 ContentDB submission has the right to the technical name. The use of a package
