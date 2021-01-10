@@ -16,16 +16,13 @@ def parse_conf(string):
 
 		key_value = line.split("=", 2)
 		if len(key_value) < 2:
-			syntax_error("No value given")
+			syntax_error("Expected line to contain '='")
 
 		key = key_value[0].strip()
 		if key == "":
-			syntax_error("Empty key")
+			syntax_error("Missing key before '='")
 
 		value = key_value[1].strip()
-		if value == "":
-			syntax_error("Empty value")
-
 		if value.startswith('"""'):
 			value_lines = []
 			closed = False
