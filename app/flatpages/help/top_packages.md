@@ -1,46 +1,30 @@
 title: Top Packages Algorithm
 
-## Score
+## Package Score
 
-A package's score is currently equal to a pseudo rolling average of downloads,
-plus the sum of review scores.
+Each package is given a `score`, which is used when ordering them in the
+"Top Games/Mods/Texture Packs" lists. The intention of this feature is
+to make it easier for new users to find good packages.
+
+A package's score is equal to a rolling average of recent downloads,
+plus the sum of the score given by reviews.
 
 A review score is 100 if positive, -100 if negative.
 
-	score  =  avg_downloads + Σ 100 * (positive ? 1 : -1)
+    reviews_sum = sum(100 * (positive ? 1 : -1))
+    score       = avg_downloads + reviews_sum
 
 ## Pseudo rolling average of downloads
 
-Every package loses 5% of its score every day, and will gain 1 score for each
-unique download.
+Each package adds 1 to `avg_downloads` for each unique download,
+and then loses 5% (=1/20) of the value every day.
 
-This metric aims to be roughly equivalent to the average downloads.
+This is called a [Frecency](https://en.wikipedia.org/wiki/Frecency) heuristic,
+a measure which combines both frequency and recency.
 
-## Seeded using a legacy heuristic
-
-The scoring system was seeded (ie: the scores were initially set to) 20% of an
-arbitrary legacy heuristic that was previously used to rank packages.
-
-This legacy heuristic is as follows:
-
-	forum_score = views / max(years_since_creation, 2 weeks) + 80*clamp(months, 0.5, 6)
-	forum_bonus = views + posts
-
-	multiplier = 1
-	if no screenshot:
-		multiplier *= 0.8
-
-	score = multiplier * (max(downloads, forum_score * 0.6) + forum_bonus)
-
-As said, this legacy score is no longer used when ranking mods.
-It was only used to provide an initial score for the rolling average,
-which was 20% of the above value.
-
-## Manual adjustments
-
-The admin occasionally reduces all packages by a set percentage to speed up
-convergence. Convergence is when the pseudo-rolling average matches the actual
-rolling average - the effect of the legacy heuristic is gone.
+"Unique download" is counted per IP per package.
+Downloading an update won't increase the download count if it's already been
+downloaded from that IP.
 
 ## Transparency and Feedback
 
