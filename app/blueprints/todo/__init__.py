@@ -129,6 +129,11 @@ def tags():
 	return render_template("todo/tags.html", packages=query.all(), tags=tags)
 
 
+@bp.route("/user/tags/")
+def tags_user():
+	return redirect(url_for('todo.tags', author=current_user.username))
+
+
 @bp.route("/todo/metapackages/")
 @login_required
 def metapackages():
