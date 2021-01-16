@@ -64,36 +64,38 @@ class PackageTreeNode:
 			self.add_children_from_mod_dir(None)
 
 
-	def getMetaFilePath(self):
-		filename = None
+	def getMetaFileName(self):
 		if self.type == ContentType.GAME:
-			filename = "game.conf"
+			return "game.conf"
 		elif self.type == ContentType.MOD:
-			filename = "mod.conf"
+			return "mod.conf"
 		elif self.type == ContentType.MODPACK:
-			filename = "modpack.conf"
+			return "modpack.conf"
 		elif self.type == ContentType.TXP:
-			filename = "texture_pack.conf"
+			return "texture_pack.conf"
 		else:
 			return None
-
-		return self.baseDir + "/" + filename
 
 
 	def read_meta(self):
 		result = {}
 
 		# .conf file
-		meta_file_path = self.getMetaFilePath()
+		meta_file_name = self.getMetaFileName()
+		meta_file_rel = self.relative + meta_file_name
+		meta_file_path = self.baseDir + "/" + meta_file_name
 		try:
 			with open(meta_file_path or "", "r") as myfile:
 				conf = parse_conf(myfile.read())
 				for key, value in conf.items():
 					result[key] = value
 		except SyntaxError as e:
-			raise MinetestCheckError("Error while reading {}: {}".format(meta_file_path , e.msg))
+			raise MinetestCheckError("Error while reading {}: {}".format(meta_file_rel , e.msg))
 		except IOError:
 			pass
+
+		if "release" in result:
+			raise MinetestCheckError("{} should not contain 'release' key, as this is for use by ContentDB only.".format(meta_file_rel))
 
 		# description.txt
 		if not "description" in result:
