@@ -26,7 +26,20 @@ Tokens can be attained by visiting [Profile > "API Tokens"](/user/tokens/).
 * GET `/api/scores/` - See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/`
 * GET `/api/packages/<username>/<name>/dependencies/`
-    * If query argument `only_hard` is present, only hard deps will be returned.
+	* If query argument `only_hard` is present, only hard deps will be returned.
+* GET `/api/tags/` - List of:
+	* `name` - technical name
+	* `title` - human-readable title
+	* `description` - tag description or null
+* GET `/api/homepage/`
+	* `count` - number of packages
+	* `downloads` - get number of downloads
+	* `new` - new packages
+	* `updated` - recently updated packages
+	* `pop_mod` - popular mods
+	* `pop_txp` - popular textures
+	* `pop_game` - popular games
+	* `high_reviewed` - highest reviewed
 
 ### Releases
 
@@ -70,6 +83,9 @@ Supported query parameters:
 * `order` - Sort ascending (`asc`) or descending (`desc`).
 * `protocol_version` - Only show packages supported by this Minetest protocol version.
 * `engine_version` - Only show packages supported by this Minetest engine version, eg: `5.3.0`.
+* `fmt` - How the response is formated.
+	* `keys` - author/name only.
+	* `short` - stuff needed for the Minetest client. 
 
 
 ## Topic Queries

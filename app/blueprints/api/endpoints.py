@@ -25,6 +25,7 @@ from app.models import *
 from app.utils import is_package_page
 from app.markdown import render_markdown
 from app.querybuilder import QueryBuilder
+from sqlalchemy.sql.expression import func
 
 @bp.route("/api/packages/")
 def packages():
@@ -32,9 +33,16 @@ def packages():
 	query = qb.buildPackageQuery()
 	ver   = qb.getMinetestVersion()
 
-	pkgs = [package.getAsDictionaryShort(current_app.config["BASE_URL"], version=ver) \
-			for package in query.all()]
-	return jsonify([package for package in pkgs if package.get("release")])
+	if request.args.get("fmt") == "keys":
+		return jsonify([package.getAsDictionaryKey() for package in query.all()])
+
+	def toJson(package: Package):
+		return package.getAsDictionaryShort(current_app.config["BASE_URL"], version=ver)
+
+	pkgs = [toJson(package) for package in query.all()]
+	if "engine_version" in request.args or "protocol_version" in request.args:
+		pkgs = [package for package in pkgs if package.get("release")]
+	return jsonify(pkgs)
 
 
 @bp.route("/api/scores/")
@@ -50,6 +58,50 @@ def package_scores():
 @is_package_page
 def package(package):
 	return jsonify(package.getAsDictionary(current_app.config["BASE_URL"]))
+
+
+@bp.route("/api/tags/")
+def tags():
+	return jsonify([tag.getAsDictionary() for tag in Tag.query.all() ])
+
+
+@bp.route("/api/homepage/")
+def homepage():
+	query   = Package.query.filter_by(state=PackageState.APPROVED)
+	count   = query.count()
+
+	new     = query.order_by(db.desc(Package.approved_at)).limit(4).all()
+	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
+	pop_gam = query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(8).all()
+	pop_txp = query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score)).limit(8).all()
+	high_reviewed = query.order_by(db.desc(Package.score - Package.score_downloads)) \
+			.filter(Package.reviews.any()).limit(4).all()
+
+	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
+			.filter_by(state=PackageState.APPROVED) \
+			.order_by(db.desc(PackageRelease.releaseDate)) \
+			.limit(20).all()
+	updated = updated[:4]
+
+	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
+	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
+
+	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
+		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
+
+	def mapPackages(packages):
+		return [pkg.getAsDictionaryKey() for pkg in packages]
+
+	return {
+		"count": count,
+		"downloads": downloads,
+		"new": mapPackages(new),
+		"updated": mapPackages(updated),
+		"pop_mod": mapPackages(pop_mod),
+		"pop_txp": mapPackages(pop_txp),
+		"pop_game": mapPackages(pop_gam),
+		"high_reviewed": mapPackages(high_reviewed),
+	}
 
 
 def resolve_package_deps(out, package, only_hard):
