@@ -80,22 +80,24 @@ class PackageTreeNode:
 	def read_meta(self):
 		result = {}
 
-		# .conf file
+		# Read .conf file
 		meta_file_name = self.getMetaFileName()
-		meta_file_rel = self.relative + meta_file_name
-		meta_file_path = self.baseDir + "/" + meta_file_name
-		try:
-			with open(meta_file_path or "", "r") as myfile:
-				conf = parse_conf(myfile.read())
-				for key, value in conf.items():
-					result[key] = value
-		except SyntaxError as e:
-			raise MinetestCheckError("Error while reading {}: {}".format(meta_file_rel , e.msg))
-		except IOError:
-			pass
+		if meta_file_name is not None:
+			meta_file_rel = self.relative + meta_file_name
+			meta_file_path = self.baseDir + "/" + meta_file_name
+			try:
+				with open(meta_file_path or "", "r") as myfile:
+					conf = parse_conf(myfile.read())
+					for key, value in conf.items():
+						result[key] = value
+			except SyntaxError as e:
+				raise MinetestCheckError("Error while reading {}: {}".format(meta_file_rel , e.msg))
+			except IOError:
+				pass
 
-		if "release" in result:
-			raise MinetestCheckError("{} should not contain 'release' key, as this is for use by ContentDB only.".format(meta_file_rel))
+			if "release" in result:
+				raise MinetestCheckError("{} should not contain 'release' key, as this is for use by ContentDB only.".format(meta_file_rel))
+
 
 		# description.txt
 		if not "description" in result:
