@@ -160,6 +160,9 @@ class User(db.Model, UserMixin):
 	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user",
 			cascade="all, delete, delete-orphan")
 
+	email_verifications = db.relationship("UserEmailVerification", foreign_keys="UserEmailVerification.user_id",
+			back_populates="user", cascade="all, delete, delete-orphan", lazy="dynamic")
+
 	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.causer_id", back_populates="causer",
 			order_by=desc("audit_log_entry_created_at"), lazy="dynamic")
 
@@ -275,7 +278,7 @@ class UserEmailVerification(db.Model):
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	email   = db.Column(db.String(100), nullable=False)
 	token   = db.Column(db.String(32), nullable=True)
-	user    = db.relationship("User", foreign_keys=[user_id])
+	user    = db.relationship("User", foreign_keys=[user_id], back_populates="email_verifications")
 	is_password_reset = db.Column(db.Boolean, nullable=False, default=False)
 
 
