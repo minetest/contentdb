@@ -16,11 +16,15 @@
 		{{ render_field(form.email, tabindex=100) }}
 
 		<p>
-			Your email is needed to recover your account if you forget your
-			password, and to send (configurable) notifications.
-			Your email will never be shared with a third-party.
+			{{  _("Your email is needed to recover your account if you forget your password, and to send (configurable) notifications.") }}
+			{{  _("Your email will never be shared with a third-party.") }}
 		</p>
 
+		{% if user.email_verifications.filter_by(is_password_reset=False).count() > 0 %}
+			<p>
+				<i>{{ _("There is at least one verification pending.") }}</i>
+			</p>
+		{% endif %}
 
 		<h3>Notification Settings</h3>
 
