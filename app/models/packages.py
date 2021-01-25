@@ -73,10 +73,10 @@ class PackageType(enum.Enum):
 
 
 class PackageState(enum.Enum):
-	WIP = "Work in Progress"
+	WIP = "Draft"
 	CHANGES_NEEDED  = "Changes Needed"
 	READY_FOR_REVIEW = "Ready for Review"
-	APPROVED  = "Approved"
+	APPROVED = "Approved"
 	DELETED = "Deleted"
 
 	def toName(self):
