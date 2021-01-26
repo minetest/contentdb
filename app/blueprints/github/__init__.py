@@ -18,17 +18,14 @@ from flask import Blueprint
 
 bp = Blueprint("github", __name__)
 
-from flask import redirect, url_for, request, flash, abort, render_template, jsonify, current_app
-from flask_login import current_user, login_required
+from flask import redirect, url_for, request, flash, jsonify, current_app
+from flask_login import current_user
 from sqlalchemy import func, or_, and_
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission, AuditSeverity
-from app.utils import randomString, abs_url_for, addAuditLog, login_user_set_active
+from app.utils import abs_url_for, addAuditLog, login_user_set_active
 from app.blueprints.api.support import error, handleCreateRelease
-import hmac, requests, json
-
-from flask_wtf import FlaskForm
-from wtforms import SelectField, SubmitField
+import hmac, requests
 
 @bp.route("/github/start/")
 def start():
@@ -153,130 +150,3 @@ def webhook():
 	#
 
 	return handleCreateRelease(actual_token, package, title, ref)
-
-
-class SetupWebhookForm(FlaskForm):
-	event   = SelectField("Event Type", choices=[('create', 'New tag or GitHub release'), ('push', 'Push')])
-	submit  = SubmitField("Save")
-
-
-@bp.route("/github/callback/webhook/")
-@github.authorized_handler
-def callback_webhook(oauth_token=None):
-	pid = request.args.get("pid")
-	if pid is None:
-		abort(404)
-
-	current_user.github_access_token = oauth_token
-	db.session.commit()
-
-	return redirect(url_for("github.setup_webhook", pid=pid))
-
-
-@bp.route("/github/webhook/new/", methods=["GET", "POST"])
-@login_required
-def setup_webhook():
-	pid = request.args.get("pid")
-	if pid is None:
-		abort(404)
-
-	package = Package.query.get(pid)
-	if package is None:
-		abort(404)
-
-	if not package.checkPerm(current_user, Permission.APPROVE_RELEASE):
-		flash("Only trusted members can use webhooks", "danger")
-		return redirect(package.getDetailsURL())
-
-	gh_user, gh_repo = package.getGitHubFullName()
-	if gh_user is None or gh_repo is None:
-		flash("Unable to get Github full name from repo address", "danger")
-		return redirect(package.getDetailsURL())
-
-	if current_user.github_access_token is None:
-		return github.authorize("write:repo_hook",
-				redirect_uri=abs_url_for("github.callback_webhook", pid=pid))
-
-	form = SetupWebhookForm(formdata=request.form)
-	if form.validate_on_submit():
-		token = APIToken()
-		token.name = "GitHub Webhook for " + package.title
-		token.owner = current_user
-		token.access_token = randomString(32)
-		token.package = package
-
-		event = form.event.data
-		if event != "push" and event != "create":
-			abort(500)
-
-		if handleMakeWebhook(gh_user, gh_repo, package,
-				current_user.github_access_token, event, token):
-			flash("Successfully created webhook", "success")
-			return redirect(package.getDetailsURL())
-		else:
-			return redirect(url_for("github.setup_webhook", pid=package.id))
-
-	return render_template("github/setup_webhook.html",
-			form=form, package=package)
-
-
-def handleMakeWebhook(gh_user: str, gh_repo: str, package: Package, oauth: str, event: str, token: APIToken):
-	url = "https://api.github.com/repos/{}/{}/hooks".format(gh_user, gh_repo)
-	headers = {
-		"Authorization": "token " + oauth
-	}
-	data = {
-		"name": "web",
-		"active": True,
-		"events": [event],
-		"config": {
-			"url": abs_url_for("github.webhook"),
-			"content_type": "json",
-			"secret": token.access_token
-		},
-	}
-
-	# First check that the webhook doesn't already exist
-	r = requests.get(url, headers=headers)
-
-	if r.status_code == 401 or r.status_code == 403:
-		current_user.github_access_token = None
-		db.session.commit()
-		return False
-
-	if r.status_code != 200:
-		flash("Failed to create webhook, received response from Github " +
-			str(r.status_code) + ": " +
-			str(r.json().get("message")), "danger")
-		return False
-
-	for hook in r.json():
-		if hook.get("config") and hook["config"].get("url") and \
-				hook["config"]["url"] == data["config"]["url"]:
-			flash("Failed to create webhook, as it already exists", "danger")
-			return False
-
-
-	# Create it
-	r = requests.post(url, headers=headers, data=json.dumps(data))
-
-	if r.status_code == 201:
-		package.update_config = None
-		db.session.add(token)
-		db.session.commit()
-
-		return True
-
-	elif r.status_code == 401 or r.status_code == 403:
-		current_user.github_access_token = None
-		db.session.commit()
-
-		return False
-
-	else:
-		import sys
-		print(r.text, file=sys.stderr)
-
-		message = str(r.status_code) + ": " + str(r.json().get("message"))
-		flash("Failed to create webhook, Github says: " + message, "danger")
-		return False
