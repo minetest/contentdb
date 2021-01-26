@@ -6,12 +6,11 @@ or for implementing ContentDB compatible servers.
 
 ## Package List API call
 
-The first request the client makes is to `/api/packages/`.
-The client will provide a list of supported types, the current engine version information,
-and any hidden [Content Flags](https://content.minetest.net/help/content_flags/).
+The client makes a single [API](https://content.minetest.net/help/api/) request to `/api/packages/`.
 
-Because the client specifies the engine version information, the response must contain a release
-number and the package must be downloadable.
+The query arguments will include a list of supported types, the current
+[engine version](https://content.minetest.net/api/minetest_versions/),
+and any hidden [Content Flags](https://content.minetest.net/help/content_flags/).
 
 Example URL:
 <https://content.minetest.net/api/packages/?type=mod&type=game&type=txp&protocol_version=39&engine_version=5.3.0&hide=nonfree&hide=desktop_default>
@@ -31,6 +30,16 @@ Example response:
     }
 ]
 ```
+
+`thumbnail` is optional, but all other fields are required. 
+
+`type` is one of `mod`, `game`, or `txp`.
+
+`release` is the release ID. Newer releases have higher IDs.
+Minetest compares this ID to a locally stored version to detect whether a package has updates.
+
+Because the client specifies the engine version information, the response must contain a release
+number and the package must be downloadable.
 
 ## Screenshots
 
