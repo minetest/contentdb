@@ -29,6 +29,9 @@ def checkForumAccount(username, forceNoSave=False):
 	except OSError:
 		return
 
+	if profile is None:
+		return
+
 	user = User.query.filter_by(forums_username=username).first()
 
 	# Create user
