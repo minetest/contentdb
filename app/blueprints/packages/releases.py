@@ -301,6 +301,8 @@ def update_config(package):
 				if last_release and last_release.commit_hash:
 					package.update_config.last_commit = last_release.commit_hash
 
+			package.update_config.auto_created = False
+
 			db.session.commit()
 
 			if package.update_config.last_commit is None:

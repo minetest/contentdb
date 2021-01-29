@@ -965,5 +965,8 @@ class PackageUpdateConfig(db.Model):
 
 	make_release = db.Column(db.Boolean, nullable=False, default=False)
 
+	# Was this made using Add Update Configs in Admin?
+	auto_created = db.Column(db.Boolean, nullable=False, default=False)
+
 	def set_outdated(self):
 		self.outdated_at = datetime.datetime.utcnow()

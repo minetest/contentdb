@@ -179,6 +179,7 @@ def admin_page():
 			added = 0
 			for pkg in Package.query.filter(Package.repo != None, Package.releases.any(), Package.update_config == None).all():
 				pkg.update_config = PackageUpdateConfig()
+				pkg.update_config.auto_created = True
 
 				release: PackageRelease = pkg.releases.first()
 				if release and release.commit_hash:
