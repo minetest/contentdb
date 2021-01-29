@@ -1,0 +1,45 @@
+{% macro render_outdated_packages(outdated_packages) -%}
+<ul class="list-group mt-3">
+	{% for package in outdated_packages %}
+		<li class="list-group-item">
+			<div class="row">
+				{% if package %}
+					<a class="col-sm-2 text-muted" href="{{ package.getDetailsURL() }}">
+						<img
+							class="img-fluid"
+							style="max-height: 22px; max-width: 22px;"
+							src="{{ package.getThumbnailURL(1) }}" />
+
+						<span class="pl-2">
+							{{ package.title }}
+						</span>
+					</a>
+				{% endif %}
+
+				<div class="col-sm">
+					{{ _("Git repo has commit %(ref)s", ref=package.update_config.last_commit[0:5]) }}
+				</div>
+
+				<div class="col-sm-auto">
+					<a class="btn btn-sm btn-primary mr-2" href="{{ package.getCreateReleaseURL() }}">
+						<i class="fas fa-plus mr-1"></i>
+						{{ _("Release") }}
+					</a>
+
+					<a class="btn btn-sm btn-secondary mr-2" href="{{ package.repo }}">
+						<i class="fas fa-code-branch mr-1"></i>
+						{{ _("Repo") }}
+					</a>
+
+					<a class="btn btn-sm btn-secondary" href="{{ package.getUpdateConfigURL() }}">
+						<i class="fas fa-cog mr-1"></i>
+						{{ _("Update settings") }}
+					</a>
+				</div>
+			</div>
+		</li>
+	{% else %}
+		<p class="list-group-item"><i>No outdated packages.</i></p>
+	{% endfor %}
+</ul>
+{% endmacro %}

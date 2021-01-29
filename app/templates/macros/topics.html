@@ -1,5 +1,5 @@
-{% macro render_topics_table(topics, show_author=True, show_discard=False, current_user=current_user) -%}
-<table class="table">
+{% macro render_topics_table(topics, show_author=True, show_discard=False, current_user=current_user, class_=None) -%}
+<table class="table {{ class_ }}">
 	<tr>
 		<th></th>
 		<th>Title</th>

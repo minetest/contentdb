@@ -56,7 +56,7 @@ def admin_page():
 				import time
 				time.sleep(0.1)
 
-			return redirect(url_for("todo.view"))
+			return redirect(url_for("todo.view_editor"))
 
 		elif action == "reimportpackages":
 			tasks = []
@@ -72,7 +72,7 @@ def admin_page():
 				import time
 				time.sleep(0.1)
 
-			return redirect(url_for("todo.view"))
+			return redirect(url_for("todo.view_editor"))
 
 		elif action == "importforeign":
 			releases = PackageRelease.query.filter(PackageRelease.url.like("http%")).all()
@@ -87,7 +87,7 @@ def admin_page():
 				import time
 				time.sleep(0.1)
 
-			return redirect(url_for("todo.view"))
+			return redirect(url_for("todo.view_editor"))
 
 		elif action == "importmodlist":
 			task = importTopicList.delay()

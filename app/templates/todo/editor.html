@@ -1,7 +1,7 @@
-{% extends "base.html" %}
+{% extends "todo/todo_base.html" %}
 
 {% block title %}
-{{ title }}
+	{{ _("Editor Work Queue") }}
 {% endblock %}
 
 {% block content %}
@@ -9,7 +9,7 @@
 	{% if canApproveScn and screenshots %}
 		<div class="card my-4">
 			<h3 class="card-header">Screenshots
-				<form class="float-right"  method="post" action="{{ url_for('todo.view') }}">
+				<form class="float-right"  method="post" action="{{ url_for('todo.view_editor') }}">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" name="action" value="screenshots_approve_all" />
 					<input class="btn btn-sm btn-primary" type="submit" value="Approve All" />
@@ -62,31 +62,6 @@
 							{{ p.title }} by {{ p.author.display_name }}
 
 
-						</a>
-					{% else %}
-						<li class="list-group-item"><i>No packages need reviewing.</i></li>
-					{% endfor %}
-				</div>
-			</div>
-
-			<div class="card mt-5">
-				<h3 class="card-header">WIP Packages</h3>
-				<div class="list-group list-group-flush" style="max-height: 300px; overflow: hidden auto;">
-					{% for p in wip_packages %}
-						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
-							<span class="float-right" title="Created {{ p.created_at | datetime }}">
-								<small>
-									{{ p.created_at | timedelta }} ago
-								</small>
-							</span>
-
-							{% if p.state == p.state.WIP %}
-								<span class="mr-2 badge badge-warning">WIP</span>
-							{% else %}
-								<span class="mr-2 badge badge-danger">{{ p.state.value }}</span>
-							{% endif %}
-
-							{{ p.title }} by {{ p.author.display_name }}
 						</a>
 					{% else %}
 						<li class="list-group-item"><i>No packages need reviewing.</i></li>
@@ -157,24 +132,46 @@
 	{% endif %}
 
 
-	<h2 class="mt-5">Unadded Topic List</h2>
+	<h2 class="mt-5">{{ _("Outdated packages") }}</h2>
 
-	{% if total_topics > 0 %}
+	{% if outdated_packages > 0 %}
 		<p>
-			{{ total_topics - topics_to_add }} / {{ total_topics }} packages have been been added to cdb,
-			based on cdb's forum parser. {{ topics_to_add }} remaining.
+			{{ _("There are %(count)s potentially outdated packages packages", count=outdated_packages) }}
 		</p>
-
-		<div class="progress my-4">
-			{% set perc = 100 * (total_topics - topics_to_add) / total_topics %}
-			<div class="progress-bar bg-success" role="progressbar"
-				style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
-		</div>
-
-		<a class="btn btn-primary" href="{{ url_for('todo.topics') }}">View Unadded Topic List</a>
+		<a class="btn btn-primary" href="{{ url_for('todo.outdated') }}">{{  _("View Outdated") }}</a>
 	{% else %}
 		<p>
-			The forum topic crawler needs to run at least once for this section to work.
+			<i>{{ _("No outdated packages") }}</i>
 		</p>
+	{% endif %}
+
+
+	<h2 class="mt-5">WIP</h2>
+
+	{% if canApproveNew and (packages or wip_packages) %}
+		<div class="card">
+			<h3 class="card-header">WIP Packages</h3>
+			<div class="list-group list-group-flush" style="max-height: 300px; overflow: hidden auto;">
+				{% for p in wip_packages %}
+					<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+						<span class="float-right" title="Created {{ p.created_at | datetime }}">
+							<small>
+								{{ p.created_at | timedelta }} ago
+							</small>
+						</span>
+
+						{% if p.state == p.state.WIP %}
+							<span class="mr-2 badge badge-warning">WIP</span>
+						{% else %}
+							<span class="mr-2 badge badge-danger">{{ p.state.value }}</span>
+						{% endif %}
+
+						{{ p.title }} by {{ p.author.display_name }}
+					</a>
+				{% else %}
+					<li class="list-group-item"><i>No packages need reviewing.</i></li>
+				{% endfor %}
+			</div>
+		</div>
 	{% endif %}
 {% endblock %}

@@ -63,7 +63,7 @@
 						{% if todo_list_count is not none %}
 							<li class="nav-item">
 								<a class="nav-link notification-icon"
-											href="{{ url_for('todo.view') }}"
+											href="{{ url_for('todo.view_editor') }}"
 											title="{{ _('Work Queue') }}">
 									{% if todo_list_count > 0 %}
 										<i class="fas fa-inbox"></i>
@@ -73,7 +73,16 @@
 									{% endif %}
 								</a>
 							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link notification-icon"
+											href="{{ url_for('todo.view_user', username=current_user.username) }}"
+											title="{{ _('To do list') }}">
+									<i class="fas fa-tasks" ></i>
+								</a>
+							</li>
 						{% endif %}
+
 						<li class="nav-item">
 							<a class="nav-link notification-icon"
 										href="{{ url_for('notifications.list_all') }}"
@@ -105,22 +114,22 @@
 									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}">Profile</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}#unadded-topics">Your unadded topics</a>
+									<a class="nav-link" href="{{ url_for('todo.view_user', username=current_user.username) }}">To do list</a>
 								</li>
 								{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
 									<div class="dropdown-divider"></div>
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.audit') }}">{{ _("Audit Log") }}</a></li>
-								{% endif %}
-								{% if current_user.rank == current_user.rank.ADMIN %}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.admin_page') }}">{{ _("Admin") }}</a></li>
-								{% else %}
-									{% if check_global_perm(current_user, "EDIT_TAGS") %}
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.tag_list') }}">{{ _("Tag Editor") }}</a></li>
-									{% elif check_global_perm(current_user, "CREATE_TAG") %}
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.create_edit_tag') }}">{{ _("Create Tag") }}</a></li>
-									{% endif %}
-									{% if current_user.rank == current_user.rank.MODERATOR %}
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.license_list') }}">{{ _("License Editor") }}</a></li>
+									{% if current_user.rank == current_user.rank.ADMIN %}
+										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.admin_page') }}">{{ _("Admin") }}</a></li>
+									{% else %}
+										{% if check_global_perm(current_user, "EDIT_TAGS") %}
+											<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.tag_list') }}">{{ _("Tag Editor") }}</a></li>
+										{% elif check_global_perm(current_user, "CREATE_TAG") %}
+											<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.create_edit_tag') }}">{{ _("Create Tag") }}</a></li>
+										{% endif %}
+										{% if current_user.rank == current_user.rank.MODERATOR %}
+											<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.license_list') }}">{{ _("License Editor") }}</a></li>
+										{% endif %}
 									{% endif %}
 								{% endif %}
 								<div class="dropdown-divider"></div>

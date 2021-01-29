@@ -54,17 +54,8 @@ def profile(username):
 		packages = packages.filter_by(state=PackageState.APPROVED)
 	packages = packages.order_by(db.asc(Package.title))
 
-	topics_to_add = None
-	if current_user == user or user.checkPerm(current_user, Permission.CHANGE_AUTHOR):
-		topics_to_add = ForumTopic.query \
-			.filter_by(author_id=user.id) \
-			.filter(~ db.exists().where(Package.forums == ForumTopic.topic_id)) \
-			.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
-			.all()
-
 	# Process GET or invalid POST
-	return render_template("users/profile.html",
-			user=user, packages=packages, topics_to_add=topics_to_add)
+	return render_template("users/profile.html", user=user, packages=packages)
 
 
 @bp.route("/users/<username>/check/", methods=["POST"])

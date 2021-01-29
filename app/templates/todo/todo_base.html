@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block container %}
+	{% if current_user.rank.atLeast(current_user.rank.EDITOR) %}
+		<nav class="pt-4 tabs-container">
+			<div class="container">
+				<ul class="nav nav-tabs">
+					<li class="nav-item">
+						<a class="nav-link {% if current_tab == "user" %}active{% endif %}"
+								href="{{ url_for('todo.view_user', username=current_user.username) }}">
+							{{ _("%(username)s's to do list", username=current_user.display_name) }}
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {% if current_tab == "editor" %}active{% endif %}"
+								href="{{ url_for('todo.view_editor') }}">
+							{{ _("Editor Work Queue") }}
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {% if current_tab == "outdated" %}active{% endif %}"
+								href="{{ url_for('todo.outdated') }}">
+							{{ _("All Outdated Packages") }}
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {% if current_tab == "topics" %}active{% endif %}"
+								href="{{ url_for('todo.topics') }}">
+							{{ _("Topics") }}
+						</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	{% endif %}
+
+	<main class="container mt-5">
+		{% if not current_user.rank.atLeast(current_user.rank.EDITOR) %}
+			<h1 class="mb-5">{{ self.title() }}</h1>
+		{% endif %}
+
+		{{ self.content() }}
+	</main>
+{% endblock %}
