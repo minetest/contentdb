@@ -120,11 +120,25 @@
 						</span>
 					</div>
 				{% endif %}
-				<div class="btn-group-horizontal col-md-auto">
+				<div class="btn-group btn-group-horizontal col-md-auto">
 					{% if release %}
-						<a class="btn btn-download btn_green" rel="nofollow"
+						<a class="btn btn-download" rel="nofollow"
 								href="{{ package.getDownloadURL() }}">
 							{{ _("Download") }}
+						</a>
+						{% if package.type == package.type.MOD %}
+							{% set installing_url = "https://wiki.minetest.net/Installing_Mods" %}
+						{% elif package.type == package.type.GAME %}
+							{% set installing_url = "https://wiki.minetest.net/Games#Installing_games" %}
+						{% elif package.type == package.type.TXP %}
+							{% set installing_url = "https://wiki.minetest.net/Installing_Texture_Packs" %}
+						{% else %}
+							{{ 0 / 0 }}
+						{% endif %}
+
+
+						<a href="{{ installing_url }}" class="btn btn-download">
+							<i class="fas fa-question-circle"></i>
 						</a>
 					{% else %}
 						<i>
