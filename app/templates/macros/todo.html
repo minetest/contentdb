@@ -4,7 +4,7 @@
 		<li class="list-group-item">
 			<div class="row">
 				{% if package %}
-					<a class="col-sm-2 text-muted" href="{{ package.getDetailsURL() }}">
+					<a class="col-sm-4 text-muted" href="{{ package.getDetailsURL() }}">
 						<img
 							class="img-fluid"
 							style="max-height: 22px; max-width: 22px;"
@@ -22,6 +22,9 @@
 					{% else %}
 						{{ _("Git repo has commit %(ref)s", ref=package.update_config.last_commit[0:5]) }}
 					{% endif %}
+					<span class="text-muted ml-3">
+						{{ package.update_config.outdated_at | datetime }}
+					</span>
 				</div>
 
 				<div class="col-sm-auto">
