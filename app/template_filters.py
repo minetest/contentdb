@@ -36,13 +36,22 @@ def domain(url):
 def date(value):
 	return value.strftime("%Y-%m-%d")
 
+
+@app.template_filter()
+def full_datetime(value):
+	return value.strftime("%Y-%m-%d %H:%M") + " UTC"
+
 @app.template_filter()
 def datetime(value):
 	delta = dt.utcnow() - value
 	if delta.days == 0:
 		return gettext("%(delta)s ago", delta=format_timedelta(value))
 	else:
-		return value.strftime("%Y-%m-%d %H:%M") + " UTC"
+		return full_datetime(value)
+
+@app.template_filter()
+def isodate(value):
+	return value.strftime("%Y-%m-%d")
 
 @app.template_filter()
 def timedelta(value):

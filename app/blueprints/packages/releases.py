@@ -72,8 +72,12 @@ def create_release(package):
 	form = CreatePackageReleaseForm()
 	if package.repo is not None:
 		form["uploadOpt"].choices = [("vcs", "Import from Git"), ("upload", "Upload .zip file")]
-		if request.method != "POST":
+		if request.method == "GET":
 			form["uploadOpt"].data = "vcs"
+			form.vcsLabel.data = request.args.get("ref")
+
+	if request.method == "GET":
+		form.title.data = request.args.get("title")
 
 	if form.validate_on_submit():
 		if form["uploadOpt"].data == "vcs":

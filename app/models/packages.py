@@ -505,9 +505,9 @@ class Package(db.Model):
 		return url_for("packages.screenshots",
 				author=self.author.username, name=self.name)
 
-	def getCreateReleaseURL(self):
+	def getCreateReleaseURL(self, **kwargs):
 		return url_for("packages.create_release",
-				author=self.author.username, name=self.name)
+				author=self.author.username, name=self.name, **kwargs)
 
 	def getBulkReleaseURL(self):
 		return url_for("packages.bulk_change_release",
