@@ -18,7 +18,7 @@
 			<ul class="card-body d-flex p-0 flex-row flex-wrap justify-content-start align-content-start p-4">
 				{% for s in screenshots %}
 					<li class="packagetile flex-fill"><a href="{{ s.getEditURL() }}"
-						style="background-image: url({{ s.getThumbnailURL(3) or '/static/placeholder.png' }});">
+						style="background-image: url({{ s.getThumbnailOrPlaceholder(3) }});">
 						<div class="packagegridscrub"></div>
 						<div class="packagegridinfo">
 							<h3>

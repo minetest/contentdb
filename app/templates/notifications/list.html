@@ -37,7 +37,7 @@ Notifications
 							<img
 								class="img-fluid"
 								style="max-height: 22px; max-width: 22px;"
-								src="{{ n.package.getThumbnailURL(1) }}" />
+								src="{{ n.package.getThumbnailOrPlaceholder() }}" />
 
 							<span class="pl-2">
 								{{ n.package.title }}
@@ -75,7 +75,7 @@ Notifications
 								<img
 									class="img-fluid"
 									style="max-height: 22px; max-width: 22px;"
-									src="{{ n.package.getThumbnailURL(1) }}" />
+									src="{{ n.package.getThumbnailOrPlaceholder() }}" />
 
 								<span class="pl-2">
 									{{ n.package.title }}

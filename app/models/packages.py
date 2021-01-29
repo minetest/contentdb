@@ -444,6 +444,9 @@ class Package(db.Model):
 			"downloads": self.downloads
 		}
 
+	def getThumbnailOrPlaceholder(self, level=2):
+		return self.getThumbnailURL(level) or "/static/placeholder.png"
+
 	def getThumbnailURL(self, level=2):
 		screenshot = self.screenshots.filter_by(approved=True).order_by(db.asc(PackageScreenshot.id)).first()
 		return screenshot.getThumbnailURL(level) if screenshot is not None else None
