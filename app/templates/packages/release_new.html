@@ -10,7 +10,12 @@
 	{% if package.update_config %}
 		<p class="alert alert-secondary mb-4">
 			<a class="float-right btn btn-sm btn-secondary" href="{{ package.getUpdateConfigURL() }}">{{ _("Settings") }}</a>
-			{{ _("You have automatic releases enabled") }}
+			{% if package.update_config.make_release %}
+				{{ _("You have automatic releases enabled.") }}
+			{% else %}
+				{{ _("You have Git update notifications enabled.") }}
+				{{ _("You can enable automatic updates in the update detection settings.") }}
+			{% endif %}
 		</p>
 	{% else %}
 		<p class="alert alert-info mb-4">

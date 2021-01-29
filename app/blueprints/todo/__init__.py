@@ -75,7 +75,7 @@ def view_editor():
 
 	outdated_packages = Package.query \
 			.filter(Package.state == PackageState.APPROVED,
-					Package.update_config.has(outdated=True)).count()
+					Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))).count()
 
 	return render_template("todo/editor.html", current_tab="editor",
 			packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
@@ -165,7 +165,7 @@ def view_user(username=None):
 
 	outdated_packages = user.maintained_packages \
 			.filter(Package.state != PackageState.DELETED,
-					Package.update_config.has(outdated=True)) \
+					Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))) \
 			.order_by(db.asc(Package.title)).all()
 
 	topics_to_add = ForumTopic.query \
@@ -184,6 +184,7 @@ def view_user(username=None):
 def outdated():
 	outdated_packages = Package.query \
 			.filter(Package.state == PackageState.APPROVED,
-					Package.update_config.has(outdated=True)).all()
+					Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None)))\
+			.order_by(db.desc(PackageUpdateConfig.outdated_at)).all()
 
 	return render_template("todo/outdated.html", current_tab="outdated", outdated_packages=outdated_packages)

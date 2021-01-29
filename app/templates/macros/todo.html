@@ -17,7 +17,11 @@
 				{% endif %}
 
 				<div class="col-sm">
-					{{ _("Git repo has commit %(ref)s", ref=package.update_config.last_commit[0:5]) }}
+					{% if package.update_config.trigger == package.update_config.trigger.TAG and package.update_config.last_tag %}
+						{{ _("New tag: %(tag)s", tag=package.update_config.last_tag) }}
+					{% else %}
+						{{ _("Git repo has commit %(ref)s", ref=package.update_config.last_commit[0:5]) }}
+					{% endif %}
 				</div>
 
 				<div class="col-sm-auto">

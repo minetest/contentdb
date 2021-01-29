@@ -106,6 +106,24 @@ def get_commit_hash(git_url, ref_name=None):
 	return remote_refs.get(ref_name)
 
 
+def get_latest_tag(git_url):
+	with get_temp_dir() as git_dir:
+		repo = git.Repo.init(git_dir)
+		origin = repo.create_remote("origin", url=git_url)
+		origin.fetch()
+
+		refs = repo.git.ls_remote(tags=True, sort="creatordate").split('\n')
+		if len(refs) == 0:
+			return None
+
+		last_ref = refs[-1]
+		hash_ref_list = last_ref.split('\t')
+
+		tag = hash_ref_list[1].replace("refs/tags/", "")
+		commit_hash = repo.git.rev_parse(tag + "^{}")
+		return tag, commit_hash
+
+
 @celery.task()
 def getMeta(urlstr, author):
 	with clone_repo(urlstr, recursive=True) as repo:
@@ -297,6 +315,67 @@ def importForeignDownloads(self, id):
 		db.session.commit()
 
 
+def check_update_config_impl(package):
+	config = package.update_config
+
+	if config.trigger == PackageUpdateTrigger.COMMIT:
+		tag = None
+		commit = get_commit_hash(package.repo, package.update_config.ref)
+	elif config.trigger == PackageUpdateTrigger.TAG:
+		tag, commit = get_latest_tag(package.repo)
+	else:
+		raise TaskError("Unknown update trigger")
+
+	if config.last_commit == commit:
+		if tag and config.last_tag != tag:
+			config.last_tag = tag
+			db.session.commit()
+		return
+
+	if not config.last_commit:
+		config.last_commit = commit
+		config.last_tag = tag
+		db.session.commit()
+		return
+
+	if config.make_release:
+		rel = PackageRelease()
+		rel.package = package
+		rel.title = tag if tag else commit[0:5]
+		rel.url = ""
+		rel.task_id = uuid()
+		db.session.add(rel)
+		db.session.commit()
+
+		makeVCSRelease.apply_async((rel.id, commit), task_id=rel.task_id)
+
+	elif config.outdated_at is None:
+		config.set_outdated()
+
+		if config.trigger == PackageUpdateTrigger.COMMIT:
+			msg_last = ""
+			if config.last_commit:
+				msg_last = " The last commit was {}".format(config.last_commit[0:5])
+
+			msg = "New commit {} found on the Git repo, is the package outdated?{}" \
+				.format(commit[0:5], msg_last)
+		else:
+			msg_last = ""
+			if config.last_tag:
+				msg_last = " The last tag was {}".format(config.last_tag)
+
+			msg = "New tag {} found on the Git repo.{}" \
+				.format(tag, msg_last)
+
+		for user in package.maintainers:
+			addSystemNotification(user, NotificationType.BOT,
+					msg, url_for("todo.view_user", username=user.username, _external=False), package)
+
+	config.last_commit = commit
+	config.last_tag = tag
+	db.session.commit()
+
+
 @celery.task(bind=True)
 def check_update_config(self, package_id):
 	package: Package = Package.query.get(package_id)
@@ -305,14 +384,9 @@ def check_update_config(self, package_id):
 	elif package.update_config is None:
 		raise TaskError("No update config attached to package")
 
-	config = package.update_config
-
-	if config.trigger != PackageUpdateTrigger.COMMIT:
-		return
-
 	err = None
 	try:
-		hash = get_commit_hash(package.repo, package.update_config.ref)
+		check_update_config_impl(package)
 	except IndexError as e:
 		err = "Unable to find the reference.\n" + str(e)
 	except GitCommandError as e:
@@ -320,6 +394,8 @@ def check_update_config(self, package_id):
 		err = e.stderr
 	except gitdb.exc.BadName as e:
 		err = "Unable to find the reference " + (package.update_config.ref or "?") + "\n" + e.stderr
+	except TaskError as e:
+		err = e.value
 
 	if err:
 		err = err.replace("stderr: ", "") \
@@ -327,48 +403,12 @@ def check_update_config(self, package_id):
 			.strip()
 
 		msg = "Error: {}.\n\nTask ID: {}\n\n[Change update configuration]({})" \
-				.format(err, self.request.id, package.getUpdateConfigURL())
+			.format(err, self.request.id, package.getUpdateConfigURL())
 
 		post_bot_message(package, "Failed to check git repository", msg)
 
 		db.session.commit()
 		return
-
-	if config.last_commit == hash:
-		return
-
-	if not config.last_commit:
-		config.last_commit = hash
-		db.session.commit()
-		return
-
-	if config.make_release:
-		rel = PackageRelease()
-		rel.package = package
-		rel.title = hash[0:5]
-		rel.url = ""
-		rel.task_id = uuid()
-		db.session.add(rel)
-		db.session.commit()
-
-		makeVCSRelease.apply_async((rel.id, package.update_config.ref), task_id=rel.task_id)
-
-	elif not config.outdated:
-		config.outdated = True
-
-		msg_last = ""
-		if config.last_commit:
-			msg_last = " The last commit was {}".format(config.last_commit[0:5])
-
-		msg = "New commit {} found on the Git repo, is the package outdated?{}" \
-			.format(hash[0:5], msg_last)
-
-		for user in package.maintainers:
-			addSystemNotification(user, NotificationType.BOT,
-					msg, url_for("todo.view_user", username=user.username), package)
-
-	config.last_commit = hash
-	db.session.commit()
 
 
 @celery.task

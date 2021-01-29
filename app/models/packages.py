@@ -861,7 +861,7 @@ class PackageRelease(db.Model):
 		self.approved = True
 
 		if self.package.update_config:
-			self.package.update_config.outdated = False
+			self.package.update_config.outdated_at = None
 			self.package.update_config.last_commit = self.commit_hash
 
 		return True
@@ -955,11 +955,15 @@ class PackageUpdateConfig(db.Model):
 	package     = db.relationship("Package", back_populates="update_config", foreign_keys=[package_id])
 
 	last_commit = db.Column(db.String(41), nullable=True, default=None)
+	last_tag    = db.Column(db.String(41), nullable=True, default=None)
 
-	# Set to true when an outdated notification is sent. Set to false when a release is created
-	outdated    = db.Column(db.Boolean, nullable=False, default=False)
+	# Set to now when an outdated notification is sent. Set to None when a release is created
+	outdated_at = db.Column(db.DateTime, nullable=True, default=None)
 
 	trigger     = db.Column(db.Enum(PackageUpdateTrigger), nullable=False, default=PackageUpdateTrigger.COMMIT)
 	ref         = db.Column(db.String(41), nullable=True, default=None)
 
 	make_release = db.Column(db.Boolean, nullable=False, default=False)
+
+	def set_outdated(self):
+		self.outdated_at = datetime.datetime.utcnow()

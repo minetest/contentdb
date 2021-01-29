@@ -24,7 +24,7 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
 from app.rediscache import has_key, set_key, make_download_key
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease
+from app.tasks.importtasks import makeVCSRelease, checkZipRelease, check_update_config
 from app.utils import *
 from . import bp
 
@@ -278,6 +278,7 @@ def update_config(package):
 			flash("Deleted update configuration", "success")
 			if package.update_config:
 				db.session.delete(package.update_config)
+			db.session.commit()
 		else:
 			if package.update_config is None:
 				package.update_config = PackageUpdateConfig()
@@ -287,7 +288,15 @@ def update_config(package):
 			package.update_config.ref = nonEmptyOrNone(form.ref.data)
 			package.update_config.make_release = form.action.data == "make_release"
 
-		db.session.commit()
+			if package.update_config.last_commit is None:
+				last_release = package.releases.first()
+				if last_release and last_release.commit_hash:
+					package.update_config.last_commit = last_release.commit_hash
+
+			db.session.commit()
+
+			if package.update_config.last_commit is None:
+				check_update_config.delay(package.id)
 
 		if not form.disable.data and package.releases.count() == 0:
 			flash("Now, please create an initial release", "success")

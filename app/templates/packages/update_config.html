@@ -31,19 +31,18 @@
 
 		{{ render_field(form.trigger, class_="mt-5") }}
 
-		<p class="text-warning mb-4">
-			<small>
-				<span class="fas fa-exclamation-triangle mr-2"></span>
+		{{ render_field(form.ref, placeholder="Leave blank to use default branch",
+				pattern="[A-Za-z0-9/._-]+") }}
 
-				{{ _("The new tag trigger isn't supported yet.") }}
-				{{ _("If you choose it, it won't trigger until it is supported.") }}
-				{{ _("In the meantime, you can use webhooks to create releases on tag events.") }}
+		<p class="text-muted mb-4 mt-0">
+			<small>
+				<span class="fas fa-info mx-1"></span>
+
+				{{ _("Currently, the branch name field is only used by the New Commit trigger.") }}
 			</small>
 		</p>
 
 
-		{{ render_field(form.ref, placeholder="Leave blank to use default branch",
-				pattern="[A-Za-z0-9/._-]+") }}
 		{{ render_field(form.action) }}
 
 		<p class="mt-5">
