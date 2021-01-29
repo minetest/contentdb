@@ -24,7 +24,7 @@
 
 		<p class="mt-5">
 			<a class="btn btn-primary" href="{{ package.getUpdateConfigURL() }}">Automatically</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.getUpdateConfigURL() }}">Manually, enable reminders</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getUpdateConfigURL(action="notification") }}">Manually, enable reminders</a>
 			<a class="btn btn-secondary ml-2" href="{{ package.getCreateReleaseURL() }}">Manually, no reminders</a>
 			<a class="btn btn-secondary ml-2" href="{{ package.getDetailsURL() }}">Later</a>
 		</p>

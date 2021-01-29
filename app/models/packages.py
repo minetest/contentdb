@@ -513,9 +513,9 @@ class Package(db.Model):
 		return url_for("packages.bulk_change_release",
 			author=self.author.username, name=self.name)
 
-	def getUpdateConfigURL(self):
+	def getUpdateConfigURL(self, action=None):
 		return url_for("packages.update_config",
-			author=self.author.username, name=self.name)
+			author=self.author.username, name=self.name, action=action)
 
 	def getSetupReleasesURL(self):
 		return url_for("packages.setup_releases",

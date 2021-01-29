@@ -251,7 +251,7 @@ def delete_release(package, id):
 
 class PackageUpdateConfigFrom(FlaskForm):
 	trigger = SelectField("Trigger", [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
-			default=PackageUpdateTrigger.COMMIT)
+			default=PackageUpdateTrigger.TAG)
 	ref     = StringField("Branch name", [Optional()], default=None)
 	action  = SelectField("Action", [InputRequired()], choices=[("notification", "Notification"), ("make_release", "Create Release")], default="make_release")
 	submit  = SubmitField("Save Settings")
@@ -270,8 +270,12 @@ def update_config(package):
 		return redirect(package.getEditURL())
 
 	form = PackageUpdateConfigFrom(obj=package.update_config)
-	if request.method == "GET" and package.update_config:
-		form.action.data = "make_release" if package.update_config.make_release else "notification"
+	if request.method == "GET":
+		if package.update_config:
+			form.action.data = "make_release" if package.update_config.make_release else "notification"
+		elif request.args.get("action") == "notification":
+			form.trigger.data = PackageUpdateTrigger.COMMIT
+			form.action.data = "notification"
 
 	if form.validate_on_submit():
 		if form.disable.data:
