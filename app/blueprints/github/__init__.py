@@ -142,9 +142,6 @@ def webhook():
 	else:
 		return error(400, "Unsupported event. Only 'push', `create:tag`, and 'ping' are supported.")
 
-	# Disable update config if webhooks are used
-	package.update_config = None
-
 	#
 	# Perform release
 	#
