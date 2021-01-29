@@ -1,5 +1,5 @@
 # ContentDB
-# Copyright (C) 2018  rubenwardy
+# Copyright (C) 2018-21  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -88,22 +88,20 @@ def clone_repo(urlstr, ref=None, recursive=False):
 			.strip())
 
 
-def get_commit_hash(urlstr, ref_name=None):
-	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
-	gitUrl = generateGitURL(urlstr)
-	assert ref_name != ""
-
-	repo = git.Repo.init(gitDir)
-	origin: git.Remote = repo.create_remote("origin", url=gitUrl)
-	assert origin.exists()
-	origin.fetch()
-
+def get_commit_hash(git_url, ref_name=None):
 	if ref_name:
-		ref: git.Reference = origin.refs[ref_name]
+		ref_name = "refs/heads/" + ref_name
 	else:
-		ref: git.Reference = origin.refs[0]
+		ref_name = "HEAD"
 
-	return ref.commit.hexsha
+	g = git.cmd.Git()
+
+	remote_refs = {}
+	for ref in g.ls_remote(git_url).split('\n'):
+		hash_ref_list = ref.split('\t')
+		remote_refs[hash_ref_list[1]] = hash_ref_list[0]
+
+	return remote_refs.get(ref_name)
 
 
 @celery.task()
