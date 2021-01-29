@@ -213,7 +213,7 @@ def is_package_page(f):
 	return decorated_function
 
 
-def addNotification(target: User, causer: User, type: NotificationType, title: str, url: str, package: Package =None):
+def addNotification(target, causer: User, type: NotificationType, title: str, url: str, package: Package = None):
 	try:
 		iter(target)
 		for x in target:
@@ -253,6 +253,13 @@ def nonEmptyOrNone(str):
 		return None
 
 	return str
+
+
+def addSystemNotification(target, type: NotificationType, title: str, url: str, package: Package = None):
+	system_user = User.query.filter_by(username="ContentDB").first()
+	assert system_user
+
+	return addNotification(target, system_user, type, title, url, package)
 
 
 def post_bot_message(package: Package, title: str, message: str):

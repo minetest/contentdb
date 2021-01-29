@@ -144,9 +144,13 @@ def metapackages():
 	return render_template("todo/metapackages.html", mpackages=mpackages)
 
 
+@bp.route("/user/todo/")
 @bp.route("/users/<username>/todo/")
 @login_required
-def view_user(username):
+def view_user(username=None):
+	if username is None:
+		return redirect(url_for("todo.view_user", username=current_user.username))
+
 	user : User = User.query.filter_by(username=username).first()
 	if not user:
 		abort(404)

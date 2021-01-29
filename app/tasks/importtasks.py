@@ -27,7 +27,7 @@ from kombu import uuid
 
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString, getExtension, post_bot_message
+from app.utils import randomString, getExtension, post_bot_message, addSystemNotification
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 
 
@@ -89,6 +89,8 @@ def clone_repo(urlstr, ref=None, recursive=False):
 
 
 def get_commit_hash(git_url, ref_name=None):
+	git_url = generateGitURL(git_url)
+
 	if ref_name:
 		ref_name = "refs/heads/" + ref_name
 	else:
@@ -358,10 +360,12 @@ def check_update_config(self, package_id):
 		if config.last_commit:
 			msg_last = " The last commit was {}".format(config.last_commit[0:5])
 
-		msg = "New commit {} was found on the Git repository.{}\n\n[Change update configuration]({})" \
-			.format(hash[0:5], msg_last, package.getUpdateConfigURL())
+		msg = "New commit {} found on the Git repo, is the package outdated?{}" \
+			.format(hash[0:5], msg_last)
 
-		post_bot_message(package, "New commit detected, package may be outdated", msg)
+		for user in package.maintainers:
+			addSystemNotification(user, NotificationType.BOT,
+					msg, url_for("todo.view_user", username=user.username), package)
 
 	config.last_commit = hash
 	db.session.commit()
