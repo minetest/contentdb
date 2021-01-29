@@ -132,20 +132,6 @@
 	{% endif %}
 
 
-	<h2 class="mt-5">{{ _("Outdated packages") }}</h2>
-
-	{% if outdated_packages > 0 %}
-		<p>
-			{{ _("There are %(count)s potentially outdated packages packages", count=outdated_packages) }}
-		</p>
-		<a class="btn btn-primary" href="{{ url_for('todo.outdated') }}">{{  _("View Outdated") }}</a>
-	{% else %}
-		<p>
-			<i>{{ _("No outdated packages") }}</i>
-		</p>
-	{% endif %}
-
-
 	<h2 class="mt-5">WIP</h2>
 
 	{% if canApproveNew and (packages or wip_packages) %}

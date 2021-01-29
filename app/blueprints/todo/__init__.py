@@ -61,10 +61,6 @@ def view_editor():
 		else:
 			abort(400)
 
-	topic_query = ForumTopic.query \
-			.filter_by(discarded=False)
-
-
 	total_packages = Package.query.filter_by(state=PackageState.APPROVED).count()
 	total_to_tag = Package.query.filter_by(state=PackageState.APPROVED, tags=None).count()
 
@@ -73,15 +69,11 @@ def view_editor():
 			.filter(MetaPackage.dependencies.any(optional=False)) \
 			.order_by(db.asc(MetaPackage.name)).count()
 
-	outdated_packages = Package.query \
-			.filter(Package.state == PackageState.APPROVED,
-					Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))).count()
-
 	return render_template("todo/editor.html", current_tab="editor",
 			packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
 			canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
 			total_packages=total_packages, total_to_tag=total_to_tag,
-			unfulfilled_meta_packages=unfulfilled_meta_packages, outdated_packages=outdated_packages)
+			unfulfilled_meta_packages=unfulfilled_meta_packages)
 
 
 @bp.route("/todo/topics/")
