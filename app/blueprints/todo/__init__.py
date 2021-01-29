@@ -182,9 +182,10 @@ def view_user(username=None):
 @bp.route("/todo/outdated/")
 @login_required
 def outdated():
-	outdated_packages = Package.query \
-			.filter(Package.state == PackageState.APPROVED,
-					Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None)))\
-			.order_by(db.desc(PackageUpdateConfig.outdated_at)).all()
+	outdated_packages = db.session.query(Package).select_from(PackageUpdateConfig) \
+			.filter(PackageUpdateConfig.outdated_at.isnot(None)) \
+			.order_by(db.desc(PackageUpdateConfig.outdated_at)) \
+			.join(PackageUpdateConfig.package) \
+			.filter(Package.state == PackageState.APPROVED).all()
 
 	return render_template("todo/outdated.html", current_tab="outdated", outdated_packages=outdated_packages)
