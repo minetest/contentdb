@@ -9,6 +9,10 @@ ContentDB offers the ability to automatically create releases using webhooks
 from either Github or Gitlab. If you're not using either of those services,
 you can also use the [API](../api) to create releases.
 
+ContentDB also offers the ability to poll a Git repo and check for updates
+without any web hooks, this is limited to once a day.
+See [Automatic Update Detection](/help/update_config/).
+
 The process is as follows:
 
 1. The user creates an API Token and a webhook to use it.

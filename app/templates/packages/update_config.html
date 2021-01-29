@@ -5,6 +5,7 @@
 {% endblock %}
 
 {% block content %}
+	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
 	<h1>{{ _("Configure Git Update Detection") }}</h1>
 
 	<p>
@@ -15,15 +16,6 @@
 		{{ _("ContentDB will poll your Git repository every day, if your package is approved.") }}
 		{{ _("You should consider using webhooks or the API for faster releases.") }}
 	</p>
-
-	{% if package.checkPerm(current_user, "APPROVE_RELEASE") and package.getIsOnGitHub() %}
-		<p class="alert alert-secondary mb-4">
-			<a class="float-right btn btn-sm btn-info" href="{{ url_for('flatpage', path='help/release_webhooks') }}">{{ _("Learn more") }}</a>
-			<i class="fas fa-info mr-2"></i>
-
-			{{ _("You can create releases faster by using a webhook or the API.") }}
-		</p>
-	{% endif %}
 
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 	<form method="POST" action="">
