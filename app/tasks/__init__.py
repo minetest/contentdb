@@ -73,8 +73,7 @@ CELERYBEAT_SCHEDULE = {
 		'task': 'app.tasks.pkgtasks.updatePackageScores',
 		'schedule': crontab(minute=10, hour=1),
 	},
-
-	'package_score_update': {
+	'check_for_updates': {
 		'task': 'app.tasks.importtasks.check_for_updates',
 		'schedule': crontab(minute=10, hour=1),
 	},
