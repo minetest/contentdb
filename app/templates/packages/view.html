@@ -174,6 +174,36 @@
 
 	<section class="container mt-4">
 		<aside class="float-right ml-4" style="width: 18rem;">
+			{% if package.checkPerm(current_user, "MAKE_RELEASE") and package.update_config and package.update_config.outdated_at %}
+				<div class="alert alert-warning">
+					<p class="mt-0 my-1">
+						<b>Package may be outdated</b>
+					</p>
+					<p class="mt-0 my-1">
+						{% if package.update_config.trigger == package.update_config.trigger.TAG and package.update_config.last_tag %}
+							{{ _("New tag: %(tag)s.", tag=package.update_config.last_tag) }}
+						{% else %}
+							{{ _("Git repo has commit %(ref)s.", ref=package.update_config.last_commit[0:5]) }}
+						{% endif %}
+					</p>
+					<p class="mt-0 my-1" style="font-size: 80%; opacity: 85%;">
+						<i class="fas fa-lock mr-1"></i>
+						{{ _("Only visible to the author and Editors.") }}
+					</p>
+					<div class="btn-group btn-group-sm my-0">
+						<a class="btn btn-warning"
+								href="{{ package.getCreateReleaseURL(title=release_title, ref=config.last_tag or config.last_commit) }}">
+							<i class="fas fa-plus mr-1"></i>
+							{{ _("Release") }}
+						</a>
+						<a class="btn btn-warning" href="{{ package.getUpdateConfigURL() }}">
+							<i class="fas fa-cog mr-1"></i>
+							{{ _("Update settings") }}
+						</a>
+					</div>
+				</div>
+			{% endif %}
+
 			<div class="card mb-4">
 				<div class="card-header">
 					Details
