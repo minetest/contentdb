@@ -338,6 +338,9 @@ def check_update_config_impl(package):
 		db.session.commit()
 		return
 
+	if package.releases.any(commit_hash=commit):
+		return
+
 	if config.make_release:
 		rel = PackageRelease()
 		rel.package = package
