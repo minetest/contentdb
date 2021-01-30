@@ -404,10 +404,10 @@ class Package(db.Model):
 			"type": self.type.toName(),
 		}
 
-	def getAsDictionaryShort(self, base_url, version=None, release_id=None):
+	def getAsDictionaryShort(self, base_url, version=None, release_id=None, no_load=False):
 		tnurl = self.getThumbnailURL(1)
 
-		if release_id is None:
+		if release_id is None and no_load == False:
 			release = self.getDownloadRelease(version=version)
 			release_id = release and release.id
 
