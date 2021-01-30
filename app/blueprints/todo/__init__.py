@@ -17,6 +17,7 @@
 from flask import *
 from flask_login import current_user, login_required
 from sqlalchemy import or_
+from sqlalchemy.sql.operators import is_
 
 from app.models import *
 from app.querybuilder import QueryBuilder
@@ -166,9 +167,13 @@ def view_user(username=None):
 			.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 			.all()
 
+	needs_tags = user.maintained_packages \
+		.filter(Package.state != PackageState.APPROVED) \
+		.filter_by(tags=None).order_by(db.asc(Package.title)).all()
+
 	return render_template("todo/user.html", current_tab="user", user=user,
 			unapproved_packages=unapproved_packages, outdated_packages=outdated_packages,
-			topics_to_add=topics_to_add)
+			needs_tags=needs_tags, topics_to_add=topics_to_add)
 
 
 @bp.route("/todo/outdated/")
