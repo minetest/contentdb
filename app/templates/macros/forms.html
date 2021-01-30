@@ -4,13 +4,16 @@
 	{% endfor %}
 {% endmacro %}
 
-{% macro render_field(field, label=None, label_visible=true, right_url=None, right_label=None, fieldclass=None) -%}
+{% macro render_field(field, label=None, label_visible=true, right_url=None, right_label=None, fieldclass=None, hint=None) -%}
 	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
 			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
 		{% endif %}
 		{{ field(class_=fieldclass or 'form-control', **kwargs) }}
+		{% if hint %}
+			<small class="form-text text-muted">{{ hint | safe }}</small>
+		{% endif %}
 		{{ render_errors(field) }}
 	</div>
 {%- endmacro %}

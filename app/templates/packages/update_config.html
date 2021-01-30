@@ -22,21 +22,13 @@
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.trigger, class_="mt-5") }}
+		{{ render_field(form.trigger, class_="mt-5", hint=_("The event which triggers the action to occur.")) }}
 
-		{{ render_field(form.ref, placeholder="Leave blank to use default branch",
-				pattern="[A-Za-z0-9/._-]+") }}
+		{{ render_field(form.ref, placeholder=_("Leave blank to use default branch"),
+				pattern="[A-Za-z0-9/._-]+",
+				hint=_("Currently, the branch name field is only used by the New Commit trigger.")) }}
 
-		<p class="text-muted mb-4 mt-0">
-			<small>
-				<span class="fas fa-info mx-1"></span>
-
-				{{ _("Currently, the branch name field is only used by the New Commit trigger.") }}
-			</small>
-		</p>
-
-
-		{{ render_field(form.action) }}
+		{{ render_field(form.action, hint=_("The action to perform.")) }}
 
 		<p class="mt-5">
 			{{ render_submit_field(form.submit) }}
