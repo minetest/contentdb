@@ -37,11 +37,16 @@
 	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
 	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('packages.bulk_update_config', username=user.username) }}">See all Update Settings</a>
 	<h2>{{ _("Potentially Outdated Packages") }}</h2>
-	{% if outdated_packages %}
-		<p>
-			{{ _("Instead of marking packages as outdated, you can automatically create releases when New Commits or New Tags are pushed to Git by clicking 'Update Settings'.") }}
-		</p>
-	{% endif %}
+	<p class="alert alert-info">
+		{{ _("New: Git Update Detection has been set up to send outdated notifications for all packages automatically.") }}<br />
+		{{ _("Consider changing the update settings to create releases automatically instead.") }}
+	</p>
+	<p>
+		{{ _("Instead of marking packages as outdated, you can automatically create releases when New Commits or New Tags are pushed to Git by clicking 'Update Settings'.") }}
+		{% if outdated_packages %}
+			{{ _("To remove a package from below, create a release or change the update settings.") }}
+		{% endif %}
+	</p>
 
 	{% from "macros/todo.html" import render_outdated_packages %}
 	{{ render_outdated_packages(outdated_packages, current_user) }}
