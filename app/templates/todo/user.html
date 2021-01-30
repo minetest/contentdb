@@ -6,7 +6,7 @@
 
 {% block content %}
 	<h2>{{ _("Unapproved Packages Needing Action") }}</h2>
-	<div class="list-group mt-3">
+	<div class="list-group mt-3 mb-5">
 		{% for package in unapproved_packages %}
 			<a class="list-group-item list-group-item-action" href="{{ package.getDetailsURL() }}">
 				<div class="row">
@@ -34,7 +34,14 @@
 	</div>
 
 
-	<h2 class="mt-5">{{ _("Outdated Packages") }}</h2>
+	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
+	<h2>{{ _("Potentially Outdated Packages") }}</h2>
+	{% if outdated_packages %}
+		<p>
+			{{ _("Instead of marking packages as outdated, you can automatically create releases when New Commits or New Tags are pushed to Git by clicking 'Update Settings'.") }}
+		</p>
+	{% endif %}
+
 	{% from "macros/todo.html" import render_outdated_packages %}
 	{{ render_outdated_packages(outdated_packages) }}
 
