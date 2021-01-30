@@ -197,7 +197,7 @@ def apply_all_updates(username):
 			continue
 
 		if package.releases.filter(or_(PackageRelease.task_id.isnot(None),
-				PackageRelease.commit_hash==package.update_config.last_commit)).count():
+				PackageRelease.commit_hash==package.update_config.last_commit)).count() > 0:
 			continue
 
 		title = package.update_config.get_title()
