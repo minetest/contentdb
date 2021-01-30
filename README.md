@@ -2,7 +2,7 @@
 [![Build status](https://gitlab.com/minetest/contentdb/badges/master/pipeline.svg)](https://gitlab.com/minetest/contentdb/pipelines)
 
 Content database for Minetest mods, games, and more.\
-Developed by rubenwardy, license GPLv3.0+.
+Developed by rubenwardy, license AGPLv3.0+.
 
 See [Getting Started](docs/getting_started.md).
 
