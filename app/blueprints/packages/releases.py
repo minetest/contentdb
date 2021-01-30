@@ -156,7 +156,7 @@ def download_release(package, id):
 @login_required
 @is_package_page
 def edit_release(package, id):
-	release = PackageRelease.query.get(id)
+	release : PackageRelease = PackageRelease.query.get(id)
 	if release is None or release.package != package:
 		abort(404)
 
@@ -173,7 +173,6 @@ def edit_release(package, id):
 		form.approved.data = release.approved
 
 	if form.validate_on_submit():
-		wasApproved = release.approved
 		if canEdit:
 			release.title = form["title"].data
 			release.min_rel = form["min_rel"].data.getActual()
@@ -185,10 +184,10 @@ def edit_release(package, id):
 			if release.task_id is not None:
 				release.task_id = None
 
-		if canApprove:
-			release.approved = form["approved"].data
-		else:
-			release.approved = wasApproved
+		if form.approved.data:
+			release.approve(current_user)
+		elif canApprove:
+			release.approved = False
 
 		db.session.commit()
 		return redirect(package.getDetailsURL())

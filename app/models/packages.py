@@ -856,6 +856,9 @@ class PackageRelease(db.Model):
 		if not self.package.checkPerm(user, Permission.APPROVE_RELEASE):
 			return False
 
+		if self.approved:
+			return True
+
 		assert self.task_id is None and self.url is not None and self.url != ""
 
 		self.approved = True
