@@ -11,7 +11,7 @@ you can also use the [API](../api) to create releases.
 
 ContentDB also offers the ability to poll a Git repo and check for updates
 without any web hooks, this is limited to once a day.
-See [Automatic Update Detection](/help/update_config/).
+See [Git Update Detection](/help/update_config/).
 
 The process is as follows:
 

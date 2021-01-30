@@ -1,4 +1,4 @@
-title: Automatic Update Detection
+title: Git Update Detection
 
 ## Introduction
 
