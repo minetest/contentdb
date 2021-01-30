@@ -346,7 +346,7 @@ def check_update_config_impl(package):
 		rel.task_id = uuid()
 		db.session.add(rel)
 
-		msg = "Created release {} (Git Update Config)".format(rel.title)
+		msg = "Created release {} (Git Update Detection)".format(rel.title)
 		addSystemAuditLog(AuditSeverity.NORMAL, msg, package.getDetailsURL(), package)
 
 		db.session.commit()
