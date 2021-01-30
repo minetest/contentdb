@@ -18,19 +18,33 @@
 		{{ _("Git Update Detection is clever enough to not create a release again if you've already created it manually or using webhooks/the API.") }}
 	</p>
 
-	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, render_radio_field %}
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.trigger, class_="mt-5", hint=_("The event which triggers the action to occur.")) }}
+		<h3 class="mt-5">Trigger</h3>
+
+		<p class="text-muted">
+			{{ _("The trigger is the event that triggers the action.") }}
+		</p>
+
+		{{ render_radio_field(form.trigger, label_visible=false) }}
 
 		{{ render_field(form.ref, placeholder=_("Leave blank to use default branch"),
-				pattern="[A-Za-z0-9/._-]+",
+				pattern="[A-Za-z0-9/._-]+", class_="mt-3",
 				hint=_("Currently, the branch name field is only used by the New Commit trigger.")) }}
 
-		{{ render_field(form.action, hint=_("The action to perform.")) }}
 
-		<p class="mt-5">
+		<h3 class="mt-5">Action</h3>
+
+		<p class="text-muted">
+			{{ _("The action to perform when the trigger happens.") }}
+			{{ _("Once a package is marked as outdated, you won't receive any more notifications until it is marked up to date.") }}
+		</p>
+
+		{{ render_radio_field(form.action, label_visible=false) }}
+
+		<p class="mt-5 pt-4">
 			{{ render_submit_field(form.submit) }}
 			{{ render_submit_field(form.disable, class_="btn btn-secondary ml-2") }}
 		</p>

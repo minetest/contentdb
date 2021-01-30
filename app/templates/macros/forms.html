@@ -154,19 +154,29 @@
 	</div>
 {%- endmacro %}
 
-{% macro render_radio_field(field) -%}
-	{% for value, label, checked in field.iter_choices() %}
-		<div class="form-check my-1">
-			<label class="form-check-label">
-				<input class="form-check-input" type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
-				{{ label }}
-			</label>
-		</div>
-	{% endfor %}
+{% macro render_radio_field(field, hint=None, label=None, label_visible=true) -%}
+	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
+		{% if label_visible %}
+			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
+			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
+		{% endif %}
+		{% for value, label, checked in field.iter_choices() %}
+			<div class="form-check my-1">
+				<label class="form-check-label">
+					<input class="form-check-input" type="radio" name="{{ field.id }}" id="{{ field.id }}" value="{{ value }}"{% if checked %} checked{% endif %}>
+					{{ label }}
+				</label>
+			</div>
+		{% endfor %}
+		{% if hint %}
+			<small class="form-text text-muted">{{ hint | safe }}</small>
+		{% endif %}
+		{{ render_errors(field) }}
+	</div>
 {%- endmacro %}
 
 {% macro render_toggle_field(field, icons=[]) -%}
-<div class="btn-group btn-group-toggle" data-toggle="buttons">
+<div class="btn-group btn-group-toggle {{ kwargs.pop('class_', '') }}" data-toggle="buttons">
 	{% for value, label, checked in field.iter_choices() %}
 		<label class="btn btn-primary{% if checked %} active{% endif %}">
 			{% set icon = icons[value] %}

@@ -253,10 +253,10 @@ def delete_release(package, id):
 
 
 class PackageUpdateConfigFrom(FlaskForm):
-	trigger = SelectField("Trigger", [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
+	trigger = RadioField("Trigger", [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
 			default=PackageUpdateTrigger.TAG)
 	ref     = StringField("Branch name", [Optional()], default=None)
-	action  = SelectField("Action", [InputRequired()], choices=[("notification", "Notification"), ("make_release", "Create Release")], default="make_release")
+	action  = RadioField("Action", [InputRequired()], choices=[("notification", "Send notification and mark as outdated"), ("make_release", "Create release")], default="make_release")
 	submit  = SubmitField("Save Settings")
 	disable = SubmitField("Disable Automation")
 
