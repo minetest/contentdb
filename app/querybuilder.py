@@ -1,5 +1,6 @@
-from flask import abort
+from flask import abort, current_app
 from sqlalchemy import or_
+from sqlalchemy.orm import subqueryload
 from sqlalchemy.sql.expression import func
 
 from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, ContentWarning, PackageState
@@ -45,11 +46,15 @@ class QueryBuilder:
 		self.hide_flags.discard("nonfree")
 
 		# Filters
-
 		self.search = args.get("q")
-		self.minetest_version = args.get("engine_version")
-		self.protocol_version = get_int_or_abort(args.get("protocol_version"))
 		self.author = args.get("author")
+
+		protocol_version = get_int_or_abort(args.get("protocol_version"))
+		minetest_version = args.get("engine_version")
+		if protocol_version or minetest_version:
+			self.version = MinetestRelease.get(minetest_version, protocol_version)
+		else:
+			self.version = None
 
 		self.show_discarded = isYes(args.get("show_discarded"))
 		self.show_added = args.get("show_added")
@@ -64,11 +69,30 @@ class QueryBuilder:
 			self.order_by = name
 			self.order_dir = dir
 
-	def getMinetestVersion(self):
-		if not self.protocol_version and not self.minetest_version:
-			return None
+	def getReleases(self):
+		releases_query = db.session.query(PackageRelease.package_id, func.max(PackageRelease.id)) \
+			.select_from(PackageRelease).filter(PackageRelease.approved) \
+			.group_by(PackageRelease.package_id)
 
-		return MinetestRelease.get(self.minetest_version, self.protocol_version)
+		if self.version:
+			releases_query = releases_query \
+				.filter(or_(PackageRelease.min_rel_id == None,
+					PackageRelease.min_rel_id <= self.version.id)) \
+				.filter(or_(PackageRelease.max_rel_id == None,
+					PackageRelease.max_rel_id >= self.version.id))
+
+		return releases_query.all()
+
+	def convertToDictionary(self, packages):
+		releases = {}
+		for [package_id, release_id] in self.getReleases():
+			releases[package_id] = release_id
+
+		def toJson(package: Package):
+			release_id = releases[package.id]
+			return package.getAsDictionaryShort(current_app.config["BASE_URL"], release_id=release_id)
+
+		return [toJson(pkg) for pkg in packages]
 
 	def buildPackageQuery(self):
 		if self.order_by == "last_release":
@@ -77,7 +101,14 @@ class QueryBuilder:
 		else:
 			query = Package.query.filter_by(state=PackageState.APPROVED)
 
-		return self.filterPackageQuery(self.orderPackageQuery(query))
+		query = query.options(subqueryload(Package.main_screenshot))
+
+		query = self.orderPackageQuery(self.filterPackageQuery(query))
+
+		if self.limit:
+			query = query.limit(self.limit)
+
+		return query
 
 	def filterPackageQuery(self, query):
 		if len(self.types) > 0:
@@ -105,16 +136,13 @@ class QueryBuilder:
 			query = query.filter(Package.license.has(License.is_foss == True))
 			query = query.filter(Package.media_license.has(License.is_foss == True))
 
-		if self.protocol_version or self.minetest_version:
-			version = self.getMinetestVersion()
-			if version:
-				query = query.join(Package.releases) \
-					.filter(PackageRelease.approved==True) \
-					.filter(or_(PackageRelease.min_rel_id==None, PackageRelease.min_rel_id<=version.id)) \
-					.filter(or_(PackageRelease.max_rel_id==None, PackageRelease.max_rel_id>=version.id))
-
-		if self.limit:
-			query = query.limit(self.limit)
+		if self.version:
+			query = query.join(Package.releases) \
+				.filter(PackageRelease.approved == True) \
+				.filter(or_(PackageRelease.min_rel_id == None,
+					PackageRelease.min_rel_id <= self.version.id)) \
+				.filter(or_(PackageRelease.max_rel_id == None,
+					PackageRelease.max_rel_id >= self.version.id))
 
 		return query
 

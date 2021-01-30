@@ -311,6 +311,10 @@ class Package(db.Model):
 	screenshots = db.relationship("PackageScreenshot", back_populates="package", foreign_keys="PackageScreenshot.package_id",
 			lazy="dynamic", order_by=db.asc("package_screenshot_order"), cascade="all, delete, delete-orphan")
 
+	main_screenshot = db.relationship("PackageScreenshot", uselist=False, foreign_keys="PackageScreenshot.package_id",
+			lazy=True, order_by=db.asc("package_screenshot_order"),
+			primaryjoin="and_(Package.id==PackageScreenshot.package_id, PackageScreenshot.approved)")
+
 	cover_image_id = db.Column(db.Integer, db.ForeignKey("package_screenshot.id"), nullable=True, default=None)
 	cover_image = db.relationship("PackageScreenshot", uselist=False, foreign_keys=[cover_image_id])
 
@@ -400,16 +404,20 @@ class Package(db.Model):
 			"type": self.type.toName(),
 		}
 
-	def getAsDictionaryShort(self, base_url, version=None, release=None):
+	def getAsDictionaryShort(self, base_url, version=None, release_id=None):
 		tnurl = self.getThumbnailURL(1)
-		release = release if release else self.getDownloadRelease(version=version)
+
+		if release_id is None:
+			release = self.getDownloadRelease(version=version)
+			release_id = release and release.id
+
 		return {
 			"name": self.name,
 			"title": self.title,
 			"author": self.author.username,
 			"short_description": self.short_desc,
 			"type": self.type.toName(),
-			"release": release and release.id,
+			"release": release_id,
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None
 		}
 
@@ -448,11 +456,11 @@ class Package(db.Model):
 		return self.getThumbnailURL(level) or "/static/placeholder.png"
 
 	def getThumbnailURL(self, level=2):
-		screenshot = self.screenshots.filter_by(approved=True).order_by(db.asc(PackageScreenshot.id)).first()
+		screenshot = self.main_screenshot
 		return screenshot.getThumbnailURL(level) if screenshot is not None else None
 
 	def getMainScreenshotURL(self, absolute=False):
-		screenshot = self.screenshots.filter_by(approved=True).order_by(db.asc(PackageScreenshot.id)).first()
+		screenshot = self.main_screenshot
 		if screenshot is None:
 			return None
 

@@ -31,15 +31,11 @@ from sqlalchemy.sql.expression import func
 def packages():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
-	ver   = qb.getMinetestVersion()
 
 	if request.args.get("fmt") == "keys":
 		return jsonify([package.getAsDictionaryKey() for package in query.all()])
 
-	def toJson(package: Package):
-		return package.getAsDictionaryShort(current_app.config["BASE_URL"], version=ver)
-
-	pkgs = [toJson(package) for package in query.all()]
+	pkgs = qb.convertToDictionary(query.all())
 	if "engine_version" in request.args or "protocol_version" in request.args:
 		pkgs = [package for package in pkgs if package.get("release")]
 	return jsonify(pkgs)
