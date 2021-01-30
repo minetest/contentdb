@@ -43,7 +43,7 @@
 	{% endif %}
 
 	{% from "macros/todo.html" import render_outdated_packages %}
-	{{ render_outdated_packages(outdated_packages) }}
+	{{ render_outdated_packages(outdated_packages, current_user) }}
 
 
 	<h2 class="mt-5">{{ _("Unadded Topics") }}</h2>

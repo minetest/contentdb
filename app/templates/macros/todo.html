@@ -1,4 +1,4 @@
-{% macro render_outdated_packages(outdated_packages) -%}
+{% macro render_outdated_packages(outdated_packages, current_player) -%}
 <ul class="list-group mt-3">
 	{% for package in outdated_packages %}
 		{% set config = package.update_config %}
@@ -30,21 +30,25 @@
 
 				<div class="col-sm-auto">
 					{% set release_title = config.last_tag or (config.outdated_at | isodate) %}
-					<a class="btn btn-sm btn-primary mr-2"
-							href="{{ package.getCreateReleaseURL(title=release_title, ref=config.last_tag or config.last_commit) }}">
-						<i class="fas fa-plus mr-1"></i>
-						{{ _("Release") }}
-					</a>
+					{% if package.checkPerm(current_player, "MAKE_RELEASE") %}
+						<a class="btn btn-sm btn-primary mr-2"
+								href="{{ package.getCreateReleaseURL(title=release_title, ref=config.last_tag or config.last_commit) }}">
+							<i class="fas fa-plus mr-1"></i>
+							{{ _("Release") }}
+						</a>
+					{% endif %}
 
 					<a class="btn btn-sm btn-secondary mr-2" href="{{ package.repo }}">
 						<i class="fas fa-code-branch mr-1"></i>
 						{{ _("Repo") }}
 					</a>
 
-					<a class="btn btn-sm btn-secondary" href="{{ package.getUpdateConfigURL() }}">
-						<i class="fas fa-cog mr-1"></i>
-						{{ _("Update settings") }}
-					</a>
+					{% if package.checkPerm(current_player, "MAKE_RELEASE") %}
+						<a class="btn btn-sm btn-secondary" href="{{ package.getUpdateConfigURL() }}">
+							<i class="fas fa-cog mr-1"></i>
+							{{ _("Update settings") }}
+						</a>
+					{% endif %}
 				</div>
 			</div>
 		</li>

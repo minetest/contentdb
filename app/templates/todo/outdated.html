@@ -18,5 +18,5 @@
 	<div class="clearfix"></div>
 
 	{% from "macros/todo.html" import render_outdated_packages %}
-	{{ render_outdated_packages(outdated_packages) }}
+	{{ render_outdated_packages(outdated_packages, current_user) }}
 {% endblock %}
