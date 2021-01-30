@@ -265,6 +265,29 @@ class PackageUpdateConfigFrom(FlaskForm):
 	disable = SubmitField("Disable Automation")
 
 
+def set_update_config(package, form):
+	if package.update_config is None:
+		package.update_config = PackageUpdateConfig()
+		db.session.add(package.update_config)
+
+	form.populate_obj(package.update_config)
+	package.update_config.ref = nonEmptyOrNone(form.ref.data)
+	package.update_config.make_release = form.action.data == "make_release"
+
+	if package.update_config.last_commit is None:
+		last_release = package.releases.first()
+		if last_release and last_release.commit_hash:
+			package.update_config.last_commit = last_release.commit_hash
+
+	package.update_config.outdated_at = None
+	package.update_config.auto_created = False
+
+	db.session.commit()
+
+	if package.update_config.last_commit is None:
+		check_update_config.delay(package.id)
+
+
 @bp.route("/packages/<author>/<name>/update-config/", methods=["GET", "POST"])
 @login_required
 @is_package_page
@@ -291,26 +314,7 @@ def update_config(package):
 				db.session.delete(package.update_config)
 			db.session.commit()
 		else:
-			if package.update_config is None:
-				package.update_config = PackageUpdateConfig()
-				db.session.add(package.update_config)
-
-			form.populate_obj(package.update_config)
-			package.update_config.ref = nonEmptyOrNone(form.ref.data)
-			package.update_config.make_release = form.action.data == "make_release"
-
-			if package.update_config.last_commit is None:
-				last_release = package.releases.first()
-				if last_release and last_release.commit_hash:
-					package.update_config.last_commit = last_release.commit_hash
-
-			package.update_config.outdated_at = None
-			package.update_config.auto_created = False
-
-			db.session.commit()
-
-			if package.update_config.last_commit is None:
-				check_update_config.delay(package.id)
+			set_update_config(package, form)
 
 		if not form.disable.data and package.releases.count() == 0:
 			flash("Now, please create an initial release", "success")
@@ -334,9 +338,13 @@ def setup_releases(package):
 	return render_template("packages/release_wizard.html", package=package)
 
 
-@bp.route("/users/<username>/update-configs/")
+@bp.route("/user/update-configs/")
+@bp.route("/users/<username>/update-configs/", methods=["GET", "POST"])
 @login_required
-def bulk_update_config(username):
+def bulk_update_config(username=None):
+	if username is None:
+		return redirect(url_for("packages.bulk_update_config", username=current_user.username))
+
 	user: User = User.query.filter_by(username=username).first()
 	if not user:
 		abort(404)
@@ -344,9 +352,16 @@ def bulk_update_config(username):
 	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
 		abort(403)
 
-	confs = user.maintained_packages \
+	form = PackageUpdateConfigFrom()
+	if form.validate_on_submit():
+		for package in user.packages.filter(Package.state != PackageState.DELETED, Package.repo.isnot(None)).all():
+			set_update_config(package, form)
+
+		return redirect(url_for("packages.bulk_update_config", username=username))
+
+	confs = user.packages \
 		.filter(Package.state != PackageState.DELETED,
 			Package.update_config.has()) \
 		.order_by(db.asc(Package.title)).all()
 
-	return render_template("packages/bulk_update_conf.html", user=user, confs=confs)
+	return render_template("packages/bulk_update_conf.html", user=user, confs=confs, form=form)

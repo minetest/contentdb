@@ -7,7 +7,32 @@
 {% block content %}
 	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
 	<h1 class="mb-5">{{ self.title() }}</h1>
+	<h2>{{ _("Packages with Update Settings") }}</h2>
 
 	{% from "macros/todo.html" import render_outdated_packages %}
 	{{ render_outdated_packages(confs, current_user, show_config=True) }}
+
+	{% if form %}
+		<h2 class="mt-5">{{ _("Bulk Set Update Settings") }}</h2>
+		<p class="alert alert-danger">
+			{{ _("This will set the update settings for all packages with a Git repo.") }}
+		</p>
+
+		{% from "macros/forms.html" import render_field, render_submit_field, render_radio_field %}
+		<form method="POST" action="">
+			{{ form.hidden_tag() }}
+
+			{{ render_radio_field(form.trigger) }}
+
+			{{ render_field(form.ref, placeholder=_("Leave blank to use default branch"),
+					pattern="[A-Za-z0-9/._-]+", class_="mt-3",
+					hint=_("Currently, the branch name field is only used by the New Commit trigger.")) }}
+
+			{{ render_radio_field(form.action) }}
+
+			<p class="mt-4">
+				{{ render_submit_field(form.submit) }}
+			</p>
+		</form>
+	{% endif %}
 {% endblock %}
