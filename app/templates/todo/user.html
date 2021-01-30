@@ -31,9 +31,14 @@
 		{% endfor %}
 	</div>
 
-
 	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
 	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('packages.bulk_update_config', username=user.username) }}">See all Update Settings</a>
+	{% if outdated_packages %}
+		<form class="float-right mr-2"  method="post" action="{{ url_for('todo.apply_all_updates', username=user.username) }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input class="btn btn-primary" type="submit" value="{{ _("Create All Releases") }}" />
+		</form>
+	{% endif %}
 	<h2>{{ _("Potentially Outdated Packages") }}</h2>
 	<p class="alert alert-info">
 		{{ _("New: Git Update Detection has been set up on all packages to send notifications.") }}<br />

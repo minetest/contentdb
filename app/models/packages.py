@@ -995,7 +995,11 @@ class PackageUpdateConfig(db.Model):
 		else:
 			return "New tag {} found on the Git repo.".format(self.last_tag)
 
+	def get_title(self):
+		return self.last_tag or self.outdated_at.strftime("%Y-%m-%d")
+
+	def get_ref(self):
+		return self.last_tag or self.last_commit
+
 	def get_create_release_url(self):
-		title = self.last_tag or self.outdated_at.strftime("%Y-%m-%d")
-		ref = self.last_tag or self.last_commit
-		return self.package.getCreateReleaseURL(title=title, ref=ref)
+		return self.package.getCreateReleaseURL(title=self.get_title(), ref=self.get_ref())
