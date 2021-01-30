@@ -15,6 +15,7 @@
 	<p>
 		{{ _("ContentDB will poll your Git repository every day, if your package is approved.") }}
 		{{ _("You should consider using webhooks or the API for faster releases.") }}
+		{{ _("Git Update Detection is clever enough to not create a release again if you've already created it manually or using webhooks/the API.") }}
 	</p>
 
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
