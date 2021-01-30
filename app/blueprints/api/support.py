@@ -1,15 +1,18 @@
-from app.models import PackageRelease, db, Permission
-from app.tasks.importtasks import makeVCSRelease
+import datetime
+
 from celery import uuid
 from flask import jsonify, abort, make_response, url_for
-import datetime
+
+from app.models import PackageRelease, db, Permission
+from app.tasks.importtasks import makeVCSRelease
+from app.utils import AuditSeverity, addAuditLog
 
 
 def error(status, message):
 	abort(make_response(jsonify({ "success": False, "error": message }), status))
 
 
-def handleCreateRelease(token, package, title, ref):
+def handleCreateRelease(token, package, title, ref, reason="API"):
 	if not token.canOperateOnPackage(package):
 		return error(403, "API token does not have access to the package")
 
@@ -29,6 +32,10 @@ def handleCreateRelease(token, package, title, ref):
 	rel.min_rel = None
 	rel.max_rel = None
 	db.session.add(rel)
+
+	msg = "Created release {} ({})".format(rel.title, reason)
+	addAuditLog(AuditSeverity.NORMAL, token.owner, msg, package.getDetailsURL(), package)
+
 	db.session.commit()
 
 	makeVCSRelease.apply_async((rel.id, ref), task_id=rel.task_id)

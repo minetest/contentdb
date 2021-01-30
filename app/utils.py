@@ -228,7 +228,7 @@ def addNotification(target, causer: User, type: NotificationType, title: str, ur
 		db.session.add(notif)
 
 
-def addAuditLog(severity, causer, title, url, package=None, description=None):
+def addAuditLog(severity: AuditSeverity, causer: User, title: str, url: str, package : Package =None, description : str =None):
 	entry = AuditLogEntry(causer, severity, title, url, package, description)
 	db.session.add(entry)
 
@@ -260,6 +260,13 @@ def addSystemNotification(target, type: NotificationType, title: str, url: str, 
 	assert system_user
 
 	return addNotification(target, system_user, type, title, url, package)
+
+
+def addSystemAuditLog(severity: AuditSeverity, title: str, url: str, package=None, description=None):
+	system_user = User.query.filter_by(username="ContentDB").first()
+	assert system_user
+
+	return addAuditLog(severity, system_user, title, url, package, description)
 
 
 def post_bot_message(package: Package, title: str, message: str):

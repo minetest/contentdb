@@ -146,4 +146,4 @@ def webhook():
 	# Perform release
 	#
 
-	return handleCreateRelease(actual_token, package, title, ref)
+	return handleCreateRelease(actual_token, package, title, ref, reason="Webhook")

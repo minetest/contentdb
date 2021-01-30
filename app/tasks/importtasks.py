@@ -27,7 +27,7 @@ from kombu import uuid
 
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString, getExtension, post_bot_message, addSystemNotification
+from app.utils import randomString, getExtension, post_bot_message, addSystemNotification, addSystemAuditLog
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 
 
@@ -345,6 +345,10 @@ def check_update_config_impl(package):
 		rel.url = ""
 		rel.task_id = uuid()
 		db.session.add(rel)
+
+		msg = "Created release {} (Git Update Config)".format(rel.title)
+		addSystemAuditLog(AuditSeverity.NORMAL, msg, package.getDetailsURL(), package)
+
 		db.session.commit()
 
 		makeVCSRelease.apply_async((rel.id, commit), task_id=rel.task_id)

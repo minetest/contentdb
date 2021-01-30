@@ -63,7 +63,7 @@ def webhook_impl():
 	# Perform release
 	#
 
-	return handleCreateRelease(token, package, title, ref)
+	return handleCreateRelease(token, package, title, ref, reason="Webhook")
 
 
 @bp.route("/gitlab/webhook/", methods=["POST"])
