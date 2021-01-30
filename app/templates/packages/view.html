@@ -175,15 +175,16 @@
 	<section class="container mt-4">
 		<aside class="float-right ml-4" style="width: 18rem;">
 			{% if package.checkPerm(current_user, "MAKE_RELEASE") and package.update_config and package.update_config.outdated_at %}
+				{% set config = package.update_config %}
 				<div class="alert alert-warning">
 					<p class="mt-0 my-1">
 						<b>Package may be outdated</b>
 					</p>
 					<p class="mt-0 my-1">
-						{% if package.update_config.trigger == package.update_config.trigger.TAG and package.update_config.last_tag %}
-							{{ _("New tag: %(tag)s.", tag=package.update_config.last_tag) }}
+						{% if config.trigger == config.trigger.TAG and config.last_tag %}
+							{{ _("New tag: %(tag)s.", tag=config.last_tag) }}
 						{% else %}
-							{{ _("Git repo has commit %(ref)s.", ref=package.update_config.last_commit[0:5]) }}
+							{{ _("Git repo has commit %(ref)s.", ref=config.last_commit[0:5]) }}
 						{% endif %}
 					</p>
 					<p class="mt-0 my-1" style="font-size: 80%; opacity: 85%;">
