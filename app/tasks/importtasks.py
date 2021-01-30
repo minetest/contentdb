@@ -339,7 +339,7 @@ def check_update_config_impl(package):
 		db.session.commit()
 		return
 
-	if package.releases.any(commit_hash=commit):
+	if package.releases.filter_by(commit_hash=commit).count() > 0:
 		return
 
 	if config.make_release:
