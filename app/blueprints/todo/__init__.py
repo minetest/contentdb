@@ -117,7 +117,7 @@ def tags():
 
 	tags = Tag.query.order_by(db.asc(Tag.title)).all()
 
-	return render_template("todo/tags.html", packages=query.all(), tags=tags)
+	return render_template("todo/tags.html", current_tab="tags", packages=query.all(), tags=tags)
 
 
 @bp.route("/user/tags/")

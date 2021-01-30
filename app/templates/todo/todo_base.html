@@ -24,6 +24,12 @@
 						</a>
 					</li>
 					<li class="nav-item">
+						<a class="nav-link {% if current_tab == "tags" %}active{% endif %}"
+								href="{{ url_for('todo.tags') }}">
+							{{ _("All Package Tags") }}
+						</a>
+					</li>
+					<li class="nav-item">
 						<a class="nav-link {% if current_tab == "topics" %}active{% endif %}"
 								href="{{ url_for('todo.topics') }}">
 							{{ _("Forum Topics") }}
