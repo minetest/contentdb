@@ -978,14 +978,14 @@ class PackageUpdateConfig(db.Model):
 		if self.trigger == PackageUpdateTrigger.COMMIT:
 			msg = "New commit {} found on the Git repo.".format(self.last_commit[0:5])
 
+			last_release = self.package.releases.first()
+			if last_release and last_release.commit_hash:
+				msg += " The last release was commit {}".format(last_release.commit_hash[0:5])
+
+			return msg
+
 		else:
-			msg = "New tag {} found on the Git repo.".format(self.last_tag)
-
-		last_release = self.package.releases.first()
-		if last_release and last_release.commit_hash:
-			msg += " The last release was commit {}".format(last_release.commit_hash[0:5])
-
-		return msg
+			return "New tag {} found on the Git repo.".format(self.last_tag)
 
 	def get_create_release_url(self):
 		title = self.last_tag or self.outdated_at.strftime("%Y-%m-%d")
