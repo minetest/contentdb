@@ -113,6 +113,7 @@ def get_latest_tag(git_url):
 		origin.fetch()
 
 		refs = repo.git.ls_remote(tags=True, sort="creatordate").split('\n')
+		refs = [ref for ref in refs if ref.strip() != ""]
 		if len(refs) == 0:
 			return None
 
@@ -394,8 +395,6 @@ def check_update_config(self, package_id):
 	err = None
 	try:
 		check_update_config_impl(package)
-	except IndexError as e:
-		err = "Unable to find the reference.\n" + str(e)
 	except GitCommandError as e:
 		# This is needed to stop the backtrace being weird
 		err = e.stderr

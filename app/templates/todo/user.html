@@ -57,6 +57,9 @@
 	<div class="mt-5"></div>
 	<a class="btn btn-secondary float-right" href="{{ url_for('todo.tags', author=user.username) }}">See All</a>
 	<h2>{{ _("Packages Without Tags") }}</h2>
+	<p>
+		Labelling your packages with tags helps users find them.
+	</p>
 	<div class="list-group mt-3 mb-5">
 		{% for package in needs_tags %}
 			<a class="list-group-item list-group-item-action" href="{{ package.getDetailsURL() }}">
