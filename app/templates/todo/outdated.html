@@ -5,6 +5,18 @@
 {% endblock %}
 
 {% block content %}
+	<div class="btn-group btn-group-sm float-right">
+		<a class="btn btn-secondary {% if sort_by != 'score' %}active{% endif %}"
+				href="{{ url_set_query(sort='date') }}">
+			Sort by date
+		</a>
+		<a class="btn btn-secondary {% if sort_by == 'score' %}active{% endif %}"
+				href="{{ url_set_query(sort='score') }}">
+			Sort by score
+		</a>
+	</div>
+	<div class="clearfix"></div>
+
 	{% from "macros/todo.html" import render_outdated_packages %}
 	{{ render_outdated_packages(outdated_packages) }}
 {% endblock %}
