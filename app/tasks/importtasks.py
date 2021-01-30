@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import os, git, tempfile, shutil, gitdb, contextlib
+import os, git, tempfile, shutil, gitdb, contextlib, datetime
 from git import GitCommandError
 from git_archive_all import GitArchiver
 from urllib.error import HTTPError
@@ -341,7 +341,7 @@ def check_update_config_impl(package):
 	if config.make_release:
 		rel = PackageRelease()
 		rel.package = package
-		rel.title = tag if tag else commit[0:5]
+		rel.title = tag if tag else datetime.datetime.utcnow().strftime("%Y-%m-%d")
 		rel.url = ""
 		rel.task_id = uuid()
 		db.session.add(rel)
