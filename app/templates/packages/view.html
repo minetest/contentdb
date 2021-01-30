@@ -181,20 +181,14 @@
 						<b>Package may be outdated</b>
 					</p>
 					<p class="mt-0 my-1">
-						{% if config.trigger == config.trigger.TAG and config.last_tag %}
-							{{ _("New tag: %(tag)s.", tag=config.last_tag) }}
-						{% else %}
-							{{ _("Git repo has commit %(ref)s.", ref=config.last_commit[0:5]) }}
-						{% endif %}
+						{{ config.get_message() }}
 					</p>
 					<p class="mt-0 my-1" style="font-size: 80%; opacity: 85%;">
 						<i class="fas fa-lock mr-1"></i>
 						{{ _("Only visible to the author and Editors.") }}
 					</p>
 					<div class="btn-group btn-group-sm my-0">
-						{% set release_title = config.last_tag or (config.outdated_at | isodate) %}
-						<a class="btn btn-warning"
-								href="{{ package.getCreateReleaseURL(title=release_title, ref=config.last_tag or config.last_commit) }}">
+						<a class="btn btn-warning" href="{{ config.get_create_release_url() }}">
 							<i class="fas fa-plus mr-1"></i>
 							{{ _("Release") }}
 						</a>

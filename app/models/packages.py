@@ -973,3 +973,21 @@ class PackageUpdateConfig(db.Model):
 
 	def set_outdated(self):
 		self.outdated_at = datetime.datetime.utcnow()
+
+	def get_message(self):
+		if self.trigger == PackageUpdateTrigger.COMMIT:
+			msg = "New commit {} found on the Git repo.".format(self.last_commit[0:5])
+
+		else:
+			msg = "New tag {} found on the Git repo.".format(self.last_tag)
+
+		last_release = self.package.releases.first()
+		if last_release and last_release.commit_hash:
+			msg += " The last release was commit {}".format(last_release.commit_hash[0:5])
+
+		return msg
+
+	def get_create_release_url(self):
+		title = self.last_tag or self.outdated_at.strftime("%Y-%m-%d")
+		ref = self.last_tag or self.last_commit
+		return self.package.getCreateReleaseURL(title=title, ref=ref)

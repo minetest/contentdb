@@ -22,12 +22,8 @@
 						{% set action = "Make release" if config.make_release else "Notification" %}
 						{{ _("On %(trigger)s, do %(action)s", trigger=config.trigger.value, action=action) }}
 					{% else %}
-						{% if config.trigger == config.trigger.TAG and config.last_tag %}
-							{{ _("New tag: %(tag)s", tag=config.last_tag) }}
-						{% else %}
-							{{ _("Git repo has commit %(ref)s", ref=config.last_commit[0:5]) }}
-						{% endif %}
-						<span class="text-muted ml-3">
+						{{ config.get_message() }}<br />
+						<span class="text-muted">
 							{{ config.outdated_at | datetime }}
 						</span>
 					{% endif %}
@@ -35,10 +31,8 @@
 
 				<div class="col-sm-auto">
 					{% if not show_config %}
-						{% set release_title = config.last_tag or (config.outdated_at | isodate) %}
 						{% if package.checkPerm(current_player, "MAKE_RELEASE") %}
-							<a class="btn btn-sm btn-primary mr-2"
-									href="{{ package.getCreateReleaseURL(title=release_title, ref=config.last_tag or config.last_commit) }}">
+							<a class="btn btn-sm btn-primary mr-2" href="{{ config.get_create_release_url() }}">
 								<i class="fas fa-plus mr-1"></i>
 								{{ _("Release") }}
 							</a>
