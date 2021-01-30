@@ -180,10 +180,11 @@ def outdated():
 			.filter(Package.state == PackageState.APPROVED)
 
 	sort_by = request.args.get("sort")
-	if sort_by == "score":
-		query = query.order_by(db.desc(Package.score))
-	else:
+	if sort_by == "date":
 		query = query.order_by(db.desc(PackageUpdateConfig.outdated_at))
+	else:
+		sort_by = "score"
+		query = query.order_by(db.desc(Package.score))
 
 	return render_template("todo/outdated.html", current_tab="outdated",
 			outdated_packages=query.all(), sort_by=sort_by)

@@ -6,7 +6,7 @@
 
 {% block content %}
 	<div class="btn-group btn-group-sm float-right">
-		<a class="btn btn-secondary {% if sort_by != 'score' %}active{% endif %}"
+		<a class="btn btn-secondary {% if sort_by == 'date' %}active{% endif %}"
 				href="{{ url_set_query(sort='date') }}">
 			Sort by date
 		</a>
