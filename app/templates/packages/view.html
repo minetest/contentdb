@@ -192,6 +192,7 @@
 						{{ _("Only visible to the author and Editors.") }}
 					</p>
 					<div class="btn-group btn-group-sm my-0">
+						{% set release_title = config.last_tag or (config.outdated_at | isodate) %}
 						<a class="btn btn-warning"
 								href="{{ package.getCreateReleaseURL(title=release_title, ref=config.last_tag or config.last_commit) }}">
 							<i class="fas fa-plus mr-1"></i>
