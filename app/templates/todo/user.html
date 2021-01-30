@@ -35,6 +35,7 @@
 
 
 	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
+	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('packages.bulk_update_config', username=user.username) }}">See all Update Settings</a>
 	<h2>{{ _("Potentially Outdated Packages") }}</h2>
 	{% if outdated_packages %}
 		<p>
@@ -44,7 +45,6 @@
 
 	{% from "macros/todo.html" import render_outdated_packages %}
 	{{ render_outdated_packages(outdated_packages, current_user) }}
-
 
 	<h2 class="mt-5">{{ _("Unadded Topics") }}</h2>
 	{% if topics_to_add %}

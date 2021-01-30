@@ -301,6 +301,7 @@ def update_config(package):
 				if last_release and last_release.commit_hash:
 					package.update_config.last_commit = last_release.commit_hash
 
+			package.update_config.outdated_at = None
 			package.update_config.auto_created = False
 
 			db.session.commit()
@@ -328,3 +329,21 @@ def setup_releases(package):
 		return redirect(package.getUpdateConfigURL())
 
 	return render_template("packages/release_wizard.html", package=package)
+
+
+@bp.route("/users/<username>/update-configs/")
+@login_required
+def bulk_update_config(username):
+	user: User = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
+		abort(403)
+
+	confs = user.maintained_packages \
+		.filter(Package.state != PackageState.DELETED,
+			Package.update_config.has()) \
+		.order_by(db.asc(Package.title)).all()
+
+	return render_template("packages/bulk_update_conf.html", user=user, confs=confs)

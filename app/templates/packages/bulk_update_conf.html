@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("%(username)s's Automated Update Detection Configs", username=user.display_name) }}
+{% endblock %}
+
+{% block content %}
+	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
+	<h1 class="mb-5">{{ self.title() }}</h1>
+
+	{% from "macros/todo.html" import render_outdated_packages %}
+	{{ render_outdated_packages(confs, current_user, show_config=True) }}
+{% endblock %}
