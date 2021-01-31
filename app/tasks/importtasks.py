@@ -115,7 +115,7 @@ def get_latest_tag(git_url):
 		refs = repo.git.ls_remote(tags=True, sort="creatordate").split('\n')
 		refs = [ref for ref in refs if ref.strip() != ""]
 		if len(refs) == 0:
-			return None
+			return None, None
 
 		last_ref = refs[-1]
 		hash_ref_list = last_ref.split('\t')
