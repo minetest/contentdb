@@ -17,6 +17,10 @@ title: Help
 * [Creating Releases using Webhooks](release_webhooks)
 * [Package Configuration and Releases Guide](package_config)
 
+## Help for Specific User Ranks
+
+* [Editors](editors)
+
 ## APIs
 
 * [API](api)
