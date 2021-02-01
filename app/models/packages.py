@@ -357,31 +357,6 @@ class Package(db.Model):
 	def getIsFOSS(self):
 		return self.license.is_foss and self.media_license.is_foss
 
-	def getIsOnGitHub(self):
-		if self.repo is None:
-			return False
-
-		url = urlparse(self.repo)
-		return url.netloc == "github.com"
-
-	def getGitHubFullName(self):
-		if self.repo is None:
-			return None
-
-		url = urlparse(self.repo)
-		if url.netloc != "github.com":
-			return None
-
-		import re
-		m = re.search(r"^\/([^\/]+)\/([^\/]+)\/?$", url.path)
-		if m is None:
-			return
-
-		user = m.group(1)
-		repo = m.group(2).replace(".git", "")
-
-		return user, repo
-
 	def getSortedDependencies(self, is_hard=None):
 		query = self.dependencies
 		if is_hard is not None:

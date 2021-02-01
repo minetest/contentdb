@@ -26,7 +26,7 @@ from wtforms.validators import InputRequired, Length
 
 from app.models import *
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
-from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, importForeignDownloads, check_for_updates
+from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates
 from app.utils import rank_required, addAuditLog, addNotification
 from . import bp
 
@@ -65,21 +65,6 @@ def admin_page():
 				if release:
 					zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
 					tasks.append(checkZipRelease.s(release.id, zippath))
-
-			result = group(tasks).apply_async()
-
-			while not result.ready():
-				import time
-				time.sleep(0.1)
-
-			return redirect(url_for("todo.view_editor"))
-
-		elif action == "importforeign":
-			releases = PackageRelease.query.filter(PackageRelease.url.like("http%")).all()
-
-			tasks = []
-			for release in releases:
-				tasks.append(importForeignDownloads.s(release.id))
 
 			result = group(tasks).apply_async()
 
