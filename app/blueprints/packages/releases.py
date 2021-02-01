@@ -274,10 +274,15 @@ def set_update_config(package, form):
 	package.update_config.ref = nonEmptyOrNone(form.ref.data)
 	package.update_config.make_release = form.action.data == "make_release"
 
-	if package.update_config.last_commit is None:
-		last_release = package.releases.first()
-		if last_release and last_release.commit_hash:
-			package.update_config.last_commit = last_release.commit_hash
+	if package.update_config.trigger == PackageUpdateTrigger.COMMIT:
+		if package.update_config.last_commit is None:
+			last_release = package.releases.first()
+			if last_release and last_release.commit_hash:
+				package.update_config.last_commit = last_release.commit_hash
+	elif package.update_config.trigger == PackageUpdateTrigger.TAG:
+		# Only create releases for tags created after this
+		package.update_config.last_commit = None
+		package.update_config.last_tag = None
 
 	package.update_config.outdated_at = None
 	package.update_config.auto_created = False

@@ -214,7 +214,7 @@ def apply_all_updates(username):
 		makeVCSRelease.apply_async((rel.id, ref),
 				task_id=rel.task_id)
 
-		msg = "Created release {} (Applied all Git Update Config)".format(rel.title)
+		msg = "Created release {} (Applied all Git Update Detection)".format(rel.title)
 		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg,
 				rel.getEditURL(), package)
 		addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.getDetailsURL(), package)

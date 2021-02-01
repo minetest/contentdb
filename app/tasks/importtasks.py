@@ -327,6 +327,9 @@ def check_update_config_impl(package):
 	else:
 		raise TaskError("Unknown update trigger")
 
+	if commit is None:
+		return
+
 	if config.last_commit == commit:
 		if tag and config.last_tag != tag:
 			config.last_tag = tag
