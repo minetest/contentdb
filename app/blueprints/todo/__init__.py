@@ -21,7 +21,7 @@ from sqlalchemy import or_
 
 from app.models import *
 from app.querybuilder import QueryBuilder
-from app.utils import get_int_or_abort, addNotification, addAuditLog
+from app.utils import get_int_or_abort, addNotification, addAuditLog, isYes
 from app.tasks.importtasks import makeVCSRelease
 
 bp = Blueprint("todo", __name__)
@@ -226,10 +226,15 @@ def apply_all_updates(username):
 @bp.route("/todo/outdated/")
 @login_required
 def outdated():
+	is_mtm_only = isYes(request.args.get("mtm"))
+
 	query = db.session.query(Package).select_from(PackageUpdateConfig) \
 			.filter(PackageUpdateConfig.outdated_at.isnot(None)) \
 			.join(PackageUpdateConfig.package) \
 			.filter(Package.state == PackageState.APPROVED)
+
+	if is_mtm_only:
+		query = query.filter(Package.repo.ilike("%github.com/minetest-mods/%"))
 
 	sort_by = request.args.get("sort")
 	if sort_by == "date":
@@ -239,4 +244,4 @@ def outdated():
 		query = query.order_by(db.desc(Package.score))
 
 	return render_template("todo/outdated.html", current_tab="outdated",
-			outdated_packages=query.all(), sort_by=sort_by)
+			outdated_packages=query.all(), sort_by=sort_by, is_mtm_only=is_mtm_only)
