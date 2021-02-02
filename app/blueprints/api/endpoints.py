@@ -20,7 +20,7 @@ from sqlalchemy.sql.expression import func
 
 from app import csrf
 from app.utils.markdown import render_markdown
-from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot
+from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot, License
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page
 from . import bp
@@ -42,15 +42,6 @@ def packages():
 	return jsonify(pkgs)
 
 
-@bp.route("/api/scores/")
-def package_scores():
-	qb    = QueryBuilder(request.args)
-	query = qb.buildPackageQuery()
-
-	pkgs = [package.getScoreDict() for package in query.all()]
-	return jsonify(pkgs)
-
-
 @bp.route("/api/packages/<author>/<name>/")
 @is_package_page
 def package(package):
@@ -66,47 +57,6 @@ def edit_package(token, package):
 		error(401, "Authentication needed")
 
 	return api_edit_package(token, package, request.json)
-
-
-@bp.route("/api/tags/")
-def tags():
-	return jsonify([tag.getAsDictionary() for tag in Tag.query.all() ])
-
-
-@bp.route("/api/homepage/")
-def homepage():
-	query   = Package.query.filter_by(state=PackageState.APPROVED)
-	count   = query.count()
-
-	new     = query.order_by(db.desc(Package.approved_at)).limit(4).all()
-	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
-	pop_gam = query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(8).all()
-	pop_txp = query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score)).limit(8).all()
-	high_reviewed = query.order_by(db.desc(Package.score - Package.score_downloads)) \
-			.filter(Package.reviews.any()).limit(4).all()
-
-	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
-			.filter_by(state=PackageState.APPROVED) \
-			.order_by(db.desc(PackageRelease.releaseDate)) \
-			.limit(20).all()
-	updated = updated[:4]
-
-	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
-	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
-
-	def mapPackages(packages):
-		return [pkg.getAsDictionaryKey() for pkg in packages]
-
-	return {
-		"count": count,
-		"downloads": downloads,
-		"new": mapPackages(new),
-		"updated": mapPackages(updated),
-		"pop_mod": mapPackages(pop_mod),
-		"pop_txp": mapPackages(pop_txp),
-		"pop_game": mapPackages(pop_gam),
-		"high_reviewed": mapPackages(high_reviewed)
-	}
 
 
 def resolve_package_deps(out, package, only_hard):
@@ -175,12 +125,6 @@ def topic_set_discard():
 	db.session.commit()
 
 	return jsonify(topic.getAsDictionary())
-
-
-@bp.route("/api/minetest_versions/")
-def versions():
-	return jsonify([rel.getAsDictionary() \
-			for rel in MinetestRelease.query.all() if rel.getActual() is not None])
 
 
 @bp.route("/api/whoami/")
@@ -357,3 +301,65 @@ def order_screenshots(token: APIToken, package: Package):
 		error(400, "Expected order body to be array")
 
 	return api_order_screenshots(token, package, request.json)
+
+
+@bp.route("/api/scores/")
+def package_scores():
+	qb    = QueryBuilder(request.args)
+	query = qb.buildPackageQuery()
+
+	pkgs = [package.getScoreDict() for package in query.all()]
+	return jsonify(pkgs)
+
+
+@bp.route("/api/tags/")
+def tags():
+	return jsonify([tag.getAsDictionary() for tag in Tag.query.all() ])
+
+
+@bp.route("/api/licenses/")
+def licenses():
+	return jsonify([ { "name": license.name, "is_foss": license.is_foss } \
+		for license in License.query.order_by(db.asc(License.name)).all() ])
+
+
+@bp.route("/api/homepage/")
+def homepage():
+	query   = Package.query.filter_by(state=PackageState.APPROVED)
+	count   = query.count()
+
+	new     = query.order_by(db.desc(Package.approved_at)).limit(4).all()
+	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
+	pop_gam = query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(8).all()
+	pop_txp = query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score)).limit(8).all()
+	high_reviewed = query.order_by(db.desc(Package.score - Package.score_downloads)) \
+			.filter(Package.reviews.any()).limit(4).all()
+
+	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
+			.filter_by(state=PackageState.APPROVED) \
+			.order_by(db.desc(PackageRelease.releaseDate)) \
+			.limit(20).all()
+	updated = updated[:4]
+
+	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
+	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
+
+	def mapPackages(packages):
+		return [pkg.getAsDictionaryKey() for pkg in packages]
+
+	return {
+		"count": count,
+		"downloads": downloads,
+		"new": mapPackages(new),
+		"updated": mapPackages(updated),
+		"pop_mod": mapPackages(pop_mod),
+		"pop_txp": mapPackages(pop_txp),
+		"pop_game": mapPackages(pop_gam),
+		"high_reviewed": mapPackages(high_reviewed)
+	}
+
+
+@bp.route("/api/minetest_versions/")
+def versions():
+	return jsonify([rel.getAsDictionary() \
+			for rel in MinetestRelease.query.all() if rel.getActual() is not None])
