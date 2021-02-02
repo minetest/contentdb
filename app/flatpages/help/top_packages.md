@@ -11,8 +11,10 @@ plus the sum of the score given by reviews.
 
 A review score is 100 if positive, -100 if negative.
 
-    reviews_sum = sum(100 * (positive ? 1 : -1))
-    score       = avg_downloads + reviews_sum
+```c
+reviews_sum = sum(100 * (positive ? 1 : -1));
+score       = avg_downloads + reviews_sum;
+```
 
 ## Pseudo rolling average of downloads
 

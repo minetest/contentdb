@@ -102,7 +102,7 @@ def populate_test_data(session):
 	mod1.desc = """
 Majority of awards are back ported from Calinou's old fork in Carbone, under same license.
 
-```
+```lua
 awards.register_achievement("award_mesefind",{
     title = "First Mese Find",
     description = "Found some Mese!",

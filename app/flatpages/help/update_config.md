@@ -3,7 +3,7 @@ title: Git Update Detection
 ## Introduction
 
 When you push a change to your Git repository, ContentDB can create a new release automatically or
-send you a reminder. ContentDB will check your Git repository every day, but you can use
+send you a reminder. ContentDB will check your Git repository one per day, but you can use
 webhooks or the API for faster updates.
 
 Git Update Detection is clever enough to not create a release again if you've already created

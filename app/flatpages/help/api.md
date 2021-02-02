@@ -5,11 +5,11 @@ title: API
 Not all endpoints require authentication.
 Authentication is done using Bearer tokens:
 
-	Authorization: Bearer YOURTOKEN
+```bash
+curl -H "Authorization: Bearer YOURTOKEN" https://content.minetest.net/api/whoami/
+```
 
-You can use the `/api/whoami` to check authentication.
-
-Tokens can be attained by visiting [Profile > "API Tokens"](/user/tokens/).
+Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 
 ## Endpoints
 
@@ -43,8 +43,8 @@ Tokens can be attained by visiting [Profile > "API Tokens"](/user/tokens/).
 
 ### Releases
 
-* GET `/api/packages/<username>/<name>/releases/`
-* POST `/api/packages/<username>/<name>/releases/new/`
+* GET `/api/packages/<username>/<name>/releases/` (List)
+* POST `/api/packages/<username>/<name>/releases/new/` (Create)
 	* Requires authentication.
 	* Body is multipart form if zip upload, JSON otherwise.
 	* `title`: human-readable name of the release.
@@ -55,6 +55,19 @@ Tokens can be attained by visiting [Profile > "API Tokens"](/user/tokens/).
 		* `file`: multipart file to upload, like `<input type=file>`.
 	* You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
 
+Examples:
+
+```bash
+# Create release from Git
+curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
+	-H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
+	-d "{\"method\": \"git\", \"title\": \"My Release\", \"ref\": \"master\" }"
+
+# Create release from zip upload
+curl https://content.minetest.net/api/packages/username/name/releases/new/ \
+	-H "Authorization: Bearer YOURTOKEN" \
+	-F title="My Release" -F file=@path/to/file.zip
+```
 
 ### Topics
 

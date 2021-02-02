@@ -12,7 +12,6 @@ title: Help
 ## Help for Package Authors
 
 * [Package Inclusion Policy and Guidance](/policy_and_guidance/)
-* [Package Tags](package_tags)
 * [Git Update Detection](update_config)
 * [Creating Releases using Webhooks](release_webhooks)
 * [Package Configuration and Releases Guide](package_config)

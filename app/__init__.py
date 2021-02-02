@@ -1,5 +1,5 @@
 # ContentDB
-# Copyright (C) 2018-1  rubenwardy
+# Copyright (C) 2018-21  rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -21,7 +21,7 @@ import flask_menu as menu
 from flask_mail import Mail
 from flask_github import GitHub
 from flask_wtf.csrf import CSRFProtect
-from flask_flatpages import FlatPages
+from flask_flatpages import FlatPages, pygments_style_defs
 from flask_babel import Babel
 from flask_login import logout_user, current_user, LoginManager
 import os, redis
@@ -29,6 +29,14 @@ import os, redis
 app = Flask(__name__, static_folder="public/static")
 app.config["FLATPAGES_ROOT"] = "flatpages"
 app.config["FLATPAGES_EXTENSION"] = ".md"
+app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = ["fenced_code", "tables", "codehilite"]
+app.config["FLATPAGES_EXTENSION_CONFIG"] = {
+	"fenced_code": {},
+	"tables": {},
+	"codehilite": {
+		"linenums": "True"
+	}
+}
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
 
 r = redis.Redis.from_url(app.config["REDIS_URL"])
@@ -41,8 +49,8 @@ pages = FlatPages(app)
 babel = Babel(app)
 gravatar = Gravatar(app,
 		size=58,
-		rating='g',
-		default='mp',
+		rating="g",
+		default="mp",
 		force_default=False,
 		force_lower=False,
 		use_ssl=True,
@@ -66,7 +74,7 @@ init_app(app)
 
 # @babel.localeselector
 # def get_locale():
-# 	return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
+# 	return request.accept_languages.best_match(app.config["LANGUAGES"].keys())
 
 from . import models, template_filters
 
@@ -80,13 +88,13 @@ create_blueprints(app)
 
 @app.route("/uploads/<path:path>")
 def send_upload(path):
-	return send_from_directory(app.config['UPLOAD_DIR'], path)
+	return send_from_directory(app.config["UPLOAD_DIR"], path)
 
-@menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { 'path': 'help' })
-@app.route('/<path:path>/')
+@menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { "path": "help" })
+@app.route("/<path:path>/")
 def flatpage(path):
 	page = pages.get_or_404(path)
-	template = page.meta.get('template', 'flatpage.html')
+	template = page.meta.get("template", "flatpage.html")
 	return render_template(template, page=page)
 
 @app.before_request
@@ -95,7 +103,7 @@ def check_for_ban():
 		if current_user.rank == models.UserRank.BANNED:
 			flash("You have been banned.", "danger")
 			logout_user()
-			return redirect(url_for('users.login'))
+			return redirect(url_for("users.login"))
 		elif current_user.rank == models.UserRank.NOT_JOINED:
 			current_user.rank = models.UserRank.MEMBER
 			models.db.session.commit()
