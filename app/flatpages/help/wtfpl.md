@@ -1,5 +1,5 @@
 title: WTFPL is a terrible license
-no_h1: true
+toc: False
 
 <div id="warning" class="alert alert-warning">
 	<span class="icon_message"></span>
@@ -19,8 +19,6 @@ no_h1: true
 			$("#warning").hide();
 	</script>
 </div>
-
-# WTFPL is a terrible license
 
 The use of WTFPL as a license is discouraged for multiple reasons.
 
