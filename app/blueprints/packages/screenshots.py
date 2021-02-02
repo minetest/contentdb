@@ -24,6 +24,8 @@ from wtforms.validators import *
 
 from app.utils import *
 from . import bp
+from app.logic.LogicError import LogicError
+from app.logic.screenshots import do_create_screenshot
 
 
 class CreateScreenshotForm(FlaskForm):
@@ -88,27 +90,11 @@ def create_screenshot(package):
 	# Initial form class from post data and default data
 	form = CreateScreenshotForm()
 	if form.validate_on_submit():
-		uploadedUrl, uploadedPath = doFileUpload(form.fileUpload.data, "image",
-				"a PNG or JPG image file")
-		if uploadedUrl is not None:
-			counter = 1
-			for screenshot in package.screenshots:
-				screenshot.order = counter
-				counter += 1
-
-			ss = PackageScreenshot()
-			ss.package  = package
-			ss.title    = form["title"].data or "Untitled"
-			ss.url      = uploadedUrl
-			ss.approved = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
-			ss.order    = counter
-			db.session.add(ss)
-
-			msg = "Screenshot added {}" \
-					.format(ss.title)
-			addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, package.getDetailsURL(), package)
-			db.session.commit()
+		try:
+			do_create_screenshot(current_user, package, form.title.data, form.fileUpload.data)
 			return redirect(package.getEditScreenshotsURL())
+		except LogicError as e:
+			flash(e.message, "danger")
 
 	return render_template("packages/screenshot_new.html", package=package, form=form)
 

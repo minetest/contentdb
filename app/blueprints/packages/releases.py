@@ -15,7 +15,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from celery import uuid
 from flask import *
 from flask_login import login_required
 from flask_wtf import FlaskForm
@@ -23,8 +22,9 @@ from wtforms import *
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
+from app.logic.releases import do_create_vcs_release, LogicError, do_create_zip_release
 from app.rediscache import has_key, set_key, make_download_key
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease, check_update_config
+from app.tasks.importtasks import check_update_config
 from app.utils import *
 from . import bp
 
@@ -80,48 +80,16 @@ def create_release(package):
 		form.title.data = request.args.get("title")
 
 	if form.validate_on_submit():
-		if form["uploadOpt"].data == "vcs":
-			rel = PackageRelease()
-			rel.package = package
-			rel.title   = form["title"].data
-			rel.url     = ""
-			rel.task_id = uuid()
-			rel.min_rel = form["min_rel"].data.getActual()
-			rel.max_rel = form["max_rel"].data.getActual()
-			db.session.add(rel)
-			db.session.commit()
-
-			makeVCSRelease.apply_async((rel.id, nonEmptyOrNone(form.vcsLabel.data)), task_id=rel.task_id)
-
-			msg = "Created release {}".format(rel.title)
-			addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, rel.getEditURL(), package)
-			addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.getDetailsURL(), package)
-			db.session.commit()
-
+		try:
+			if form["uploadOpt"].data == "vcs":
+				rel = do_create_vcs_release(current_user, package, form.title.data,
+						form.vcsLabel.data, form.min_rel.data.getActual(), form.max_rel.data.getActual())
+			else:
+				rel = do_create_zip_release(current_user, package, form.title.data,
+						form.fileUpload.data, form.min_rel.data.getActual(), form.max_rel.data.getActual())
 			return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))
-		else:
-			uploadedUrl, uploadedPath = doFileUpload(form.fileUpload.data, "zip", "a zip file")
-			if uploadedUrl is not None:
-				rel = PackageRelease()
-				rel.package = package
-				rel.title = form["title"].data
-				rel.url = uploadedUrl
-				rel.task_id = uuid()
-				rel.min_rel = form["min_rel"].data.getActual()
-				rel.max_rel = form["max_rel"].data.getActual()
-				db.session.add(rel)
-				db.session.commit()
-
-				checkZipRelease.apply_async((rel.id, uploadedPath), task_id=rel.task_id)
-
-				msg = "Created release {}".format(rel.title)
-				addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT,
-						msg, rel.getEditURL(), package)
-				addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.getDetailsURL(),
-						package)
-				db.session.commit()
-
-				return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))
+		except LogicError as e:
+			flash(e.message, "danger")
 
 	return render_template("packages/release_new.html", package=package, form=form)
 

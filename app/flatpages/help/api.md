@@ -46,10 +46,13 @@ Tokens can be attained by visiting [Profile > "API Tokens"](/user/tokens/).
 * GET `/api/packages/<username>/<name>/releases/`
 * POST `/api/packages/<username>/<name>/releases/new/`
 	* Requires authentication.
+	* Body is multipart form if zip upload, JSON otherwise.
 	* `title`: human-readable name of the release.
-	* `method`: Release-creation method, only `git` is supported.
-	* If `git` release-creation method:
-		* `ref` - git reference, eg: `master`.
+	* For Git release creation:
+		* `method`: must be `git`.
+		* `ref`: (Optional) git reference, eg: `master`.
+	* For zip upload release creation: 
+		* `file`: multipart file to upload, like `<input type=file>`.
 	* You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
 
 

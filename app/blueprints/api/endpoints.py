@@ -19,7 +19,7 @@ from flask import *
 from flask_login import current_user, login_required
 from . import bp
 from .auth import is_api_authd
-from .support import error, handleCreateRelease
+from .support import error, api_create_vcs_release, api_create_zip_release
 from app import csrf
 from app.models import *
 from app.utils import is_package_page
@@ -210,15 +210,23 @@ def create_release(token, package):
 	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
 		error(403, "You do not have the permission to approve releases")
 
-	json = request.json
-	if json is None:
-		error(400, "JSON post data is required")
+	data = request.json or request.form
+	if "title" not in data:
+		error(400, "Title is required in the POST data")
 
-	for option in ["method", "title", "ref"]:
-		if json.get(option) is None:
-			error(400, option + " is required in the POST data")
+	if request.json:
+		for option in ["method", "ref"]:
+			if option not in data:
+				error(400, option + " is required in the POST data")
 
-	if json["method"].lower() != "git":
-		error(400, "Release-creation methods other than git are not supported")
+		if data["method"].lower() != "git":
+			error(400, "Release-creation methods other than git are not supported")
 
-	return handleCreateRelease(token, package, json["title"], json["ref"])
+		return api_create_vcs_release(token, package, data["title"], data["ref"])
+
+	elif request.files:
+		file = request.files.get("file")
+		if file is None:
+			error(400, "Missing 'file' in multipart body")
+
+		return api_create_zip_release(token, package, data["title"], file)

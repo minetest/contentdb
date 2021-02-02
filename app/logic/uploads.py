@@ -17,37 +17,25 @@
 
 import imghdr
 import os
-import random
-import string
 
-from flask import request, flash
-
+from app.logic.LogicError import LogicError
 from app.models import *
+from app.utils import randomString
 
 
-def getExtension(filename):
+def get_extension(filename):
 	return filename.rsplit(".", 1)[1].lower() if "." in filename else None
 
 ALLOWED_IMAGES = {"jpeg", "png"}
 def isAllowedImage(data):
 	return imghdr.what(None, data) in ALLOWED_IMAGES
 
-def shouldReturnJson():
-	return "application/json" in request.accept_mimetypes and \
-			not "text/html" in request.accept_mimetypes
-
-def randomString(n):
-	return ''.join(random.choice(string.ascii_lowercase + \
-			string.ascii_uppercase + string.digits) for _ in range(n))
-
-def doFileUpload(file, fileType, fileTypeDesc):
+def upload_file(file, fileType, fileTypeDesc):
 	if not file or file is None or file.filename == "":
-		flash("No selected file", "danger")
-		return None, None
+		raise LogicError(400, "Expected file")
 
 	assert os.path.isdir(app.config["UPLOAD_DIR"]), "UPLOAD_DIR must exist"
 
-	allowedExtensions = []
 	isImage = False
 	if fileType == "image":
 		allowedExtensions = ["jpg", "jpeg", "png"]
@@ -57,18 +45,17 @@ def doFileUpload(file, fileType, fileTypeDesc):
 	else:
 		raise Exception("Invalid fileType")
 
-	ext = getExtension(file.filename)
+	ext = get_extension(file.filename)
 	if ext is None or not ext in allowedExtensions:
-		flash("Please upload " + fileTypeDesc, "danger")
-		return None, None
+		raise LogicError(400, "Please upload " + fileTypeDesc)
 
 	if isImage and not isAllowedImage(file.stream.read()):
-		flash("Uploaded image isn't actually an image", "danger")
-		return None, None
+		raise LogicError(400, "Uploaded image isn't actually an image")
 
 	file.stream.seek(0)
 
 	filename = randomString(10) + "." + ext
 	filepath = os.path.join(app.config["UPLOAD_DIR"], filename)
 	file.save(filepath)
+
 	return "/uploads/" + filename, filepath

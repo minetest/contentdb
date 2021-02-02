@@ -1,5 +1,5 @@
 # ContentDB
-# Copyright (C) 2018-21 rubenwardy
+# Copyright (C) 2021 rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -13,37 +13,12 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import random
-import string
-
-from .flask import *
-from .models import *
-from .user import *
 
 
-YESES = ["yes", "true", "1", "on"]
+class LogicError(Exception):
+	def __init__(self, code, message):
+		self.code = code
+		self.message = message
 
-
-def isYes(val):
-	return val and val.lower() in YESES
-
-
-def isNo(val):
-	return val and not isYes(val)
-
-
-def nonEmptyOrNone(str):
-	if str is None or str == "":
-		return None
-
-	return str
-
-
-def shouldReturnJson():
-	return "application/json" in request.accept_mimetypes and \
-			not "text/html" in request.accept_mimetypes
-
-
-def randomString(n):
-	return ''.join(random.choice(string.ascii_lowercase + \
-			string.ascii_uppercase + string.digits) for _ in range(n))
+	def __str__(self):
+		return repr("LogicError {}: {}".format(self.code, self.message))

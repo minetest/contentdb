@@ -24,7 +24,7 @@ from sqlalchemy import func, or_, and_
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission, AuditSeverity
 from app.utils import abs_url_for, addAuditLog, login_user_set_active
-from app.blueprints.api.support import error, handleCreateRelease
+from app.blueprints.api.support import error, api_create_vcs_release
 import hmac, requests
 
 @bp.route("/github/start/")
@@ -146,4 +146,4 @@ def webhook():
 	# Perform release
 	#
 
-	return handleCreateRelease(actual_token, package, title, ref, reason="Webhook")
+	return api_create_vcs_release(actual_token, package, title, ref, reason="Webhook")
