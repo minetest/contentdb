@@ -79,7 +79,7 @@ def create_edit_token(username, id=None):
 		access_token = session.pop("token_" + str(token.id), None)
 
 	form = CreateAPIToken(formdata=request.form, obj=token)
-	form.package.query_factory = lambda: Package.query.filter_by(author=user).all()
+	form.package.query_factory = lambda: user.maintained_packages.all()
 
 	if form.validate_on_submit():
 		if is_new:

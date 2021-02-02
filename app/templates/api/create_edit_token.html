@@ -47,8 +47,8 @@
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.name, placeholder="Human readable") }}
-		{{ render_field(form.package) }}
+		{{ render_field(form.name, placeholder="Human readable", hint=_("Human-readable name to tell tokens apart.")) }}
+		{{ render_field(form.package, hint=_("Recommended: Only allows token to interact with a particular package.")) }}
 
 		{{ render_submit_field(form.submit) }}
 	</form>

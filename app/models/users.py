@@ -167,9 +167,9 @@ class User(db.Model, UserMixin):
 	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.causer_id", back_populates="causer",
 			order_by=desc("audit_log_entry_created_at"), lazy="dynamic")
 
-	maintained_packages = db.relationship("Package", lazy="dynamic", secondary="maintainers")
+	maintained_packages = db.relationship("Package", lazy="dynamic", secondary="maintainers", order_by=db.asc("package_title"))
 
-	packages      = db.relationship("Package", back_populates="author", lazy="dynamic")
+	packages      = db.relationship("Package", back_populates="author", lazy="dynamic", order_by=db.asc("package_title"))
 	reviews       = db.relationship("PackageReview", back_populates="author", order_by=db.desc("package_review_created_at"), cascade="all, delete, delete-orphan")
 	tokens        = db.relationship("APIToken", back_populates="owner", lazy="dynamic", cascade="all, delete, delete-orphan")
 	threads       = db.relationship("Thread", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")

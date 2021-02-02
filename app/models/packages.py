@@ -909,6 +909,14 @@ class PackageScreenshot(db.Model):
 	def getThumbnailURL(self, level=2):
 		return self.url.replace("/uploads/", "/thumbnails/{:d}/".format(level))
 
+	def getAsDictionary(self):
+		return {
+			"id": self.id,
+			"title": self.title,
+			"url": self.url,
+			"approved": self.approved,
+		}
+
 
 class PackageUpdateTrigger(enum.Enum):
 	COMMIT = "New Commit"
