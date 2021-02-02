@@ -400,6 +400,10 @@ class Package(db.Model):
 		release = self.getDownloadRelease(version=version)
 		return {
 			"author": self.author.username,
+			"maintainers": [x.username for x in self.maintainers],
+
+			"state": self.state.name,
+
 			"name": self.name,
 			"title": self.title,
 			"short_description": self.short_desc,
@@ -414,6 +418,9 @@ class Package(db.Model):
 			"website": self.website,
 			"issue_tracker": self.issueTracker,
 			"forums": self.forums,
+
+			"tags": [x.name for x in self.tags],
+			"content_warnings": [x.name for x in self.content_warnings],
 
 			"provides": [x.name for x in self.provides],
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,

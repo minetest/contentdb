@@ -39,14 +39,18 @@ def get_license(name):
 
 name_re = re.compile("^[a-z0-9_]+$")
 
-TYPES = {
-	"name": str,
+any = "?"
+ALLOWED_FIELDS = {
+	"type": any,
 	"title": str,
+	"name": str,
 	"short_description": str,
 	"short_desc": str,
-	"desc": str,
 	"tags": list,
 	"content_warnings": list,
+	"license": any,
+	"media_license": any,
+	"desc": str,
 	"repo": str,
 	"website": str,
 	"issue_tracker": str,
@@ -63,9 +67,12 @@ def is_int(val):
 
 
 def validate(data: dict):
-	for key, typ in TYPES.items():
-		if data.get(key) is not None:
-			check(isinstance(data[key], typ), key + " must be a " + typ.__name__)
+	for key, value in data.items():
+		if value is not None:
+			typ = ALLOWED_FIELDS.get(key)
+			check(typ is not None, key + " is not a known field")
+			if typ != any:
+				check(isinstance(value, typ), key + " must be a " + typ.__name__)
 
 	if "name" in data:
 		name = data["name"]

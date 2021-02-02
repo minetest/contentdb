@@ -218,19 +218,23 @@ def makeLabel(obj):
 		return obj.title
 
 class PackageForm(FlaskForm):
-	name             = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	title            = StringField("Title (Human-readable)", [InputRequired(), Length(3, 100)])
-	short_desc       = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
-	desc             = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])
 	type             = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
-	license          = QuerySelectField("License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	media_license    = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	title            = StringField("Title (Human-readable)", [InputRequired(), Length(3, 100)])
+	name             = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	short_desc       = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
+
 	tags             = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
 	content_warnings = QuerySelectMultipleField('Content Warnings', query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)
+	license          = QuerySelectField("License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	media_license    = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+
+	desc             = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])
+
 	repo             = StringField("VCS Repository URL", [Optional(), URL()], filters = [lambda x: x or None])
 	website          = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
 	issueTracker     = StringField("Issue Tracker URL", [Optional(), URL()], filters = [lambda x: x or None])
 	forums           = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
+
 	submit           = SubmitField("Save")
 
 
@@ -301,15 +305,15 @@ def create_edit(author=None, name=None):
 
 		try:
 			do_edit_package(current_user, package, wasNew, {
-				"name": form.name.data,
-				"title": form.title.data,
-				"short_desc": form.short_desc.data,
-				"desc": form.desc.data,
 				"type": form.type.data,
-				"license": form.license.data,
-				"media_license": form.media_license.data,
+				"title": form.title.data,
+				"name": form.name.data,
+				"short_desc": form.short_desc.data,
 				"tags": form.tags.raw_data,
 				"content_warnings": form.content_warnings.raw_data,
+				"license": form.license.data,
+				"media_license": form.media_license.data,
+				"desc": form.desc.data,
 				"repo": form.repo.data,
 				"website": form.website.data,
 				"issueTracker": form.issueTracker.data,

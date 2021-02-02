@@ -1,12 +1,29 @@
 title: API
 
+## Responses and Error Handling
+
+If there is an error, the response will be JSON similar to the following with a non-200 status code: 
+
+```json
+{
+    "success": false,
+    "error": "The error message"
+}
+```
+
+Successful GET requests will return the resource's information directly as a JSON response.
+
+Other successful results will return a dictionary with `success` equaling true, and
+often other keys with information.
+
+
 ## Authentication
 
-Not all endpoints require authentication.
-Authentication is done using Bearer tokens:
+Not all endpoints require authentication, but it is done using Bearer tokens:
 
 ```bash
-curl -H "Authorization: Bearer YOURTOKEN" https://content.minetest.net/api/whoami/
+curl https://content.minetest.net/api/whoami/ \
+    -H "Authorization: Bearer YOURTOKEN" 
 ```
 
 Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
@@ -23,18 +40,36 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/` (Read)
 * PUT `/api/packages/<author>/<name>/` (Update)
-    * JSON dictionary with any of these keys (all are optional):
-        * `title`: Human-readable title.
-        * `short_description`
-        * `desc`
+    * JSON dictionary with any of these keys (all are optional, null to delete Nullables):
         * `type`: One of `GAME`, `MOD`, `TXP`.
+        * `title`: Human-readable title.
+        * `name`: Technical name (needs permission if already approved).
+        * `short_description`
+        * `tags`: List of tag names, see [misc](#misc).
+        * `content_Warnings`: List of content warning names, see [misc](#misc).
         * `license`: A license name.
-        * `media_license`: A license name.
+        * `media_license`: A license name.          
+        * `desc`: Long markdown description.
         * `repo`: Git repo URL.
         * `website`: Website URL.
         * `issue_tracker`: Issue tracker URL.
+        * `forums`: forum topic ID.
 * GET `/api/packages/<username>/<name>/dependencies/`
     * If query argument `only_hard` is present, only hard deps will be returned.
+
+Examples:
+
+```bash
+# Edit packages
+curl -X PUT http://localhost:5123/api/packages/username/name/ \
+    -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
+    -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "wtfpl" }'
+    
+# Remove website URL
+curl -X PUT http://localhost:5123/api/packages/username/name/ \
+    -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
+    -d '{ "website": null }'
+```
 
 ### Package Queries
 
@@ -93,7 +128,7 @@ Examples:
 # Create release from Git
 curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
-    -d "{\"method\": \"git\", \"title\": \"My Release\", \"ref\": \"master\" }"
+    -d '{ "method": "git", "title": "My Release", "ref": "master" }'
 
 # Create release from zip upload
 curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
