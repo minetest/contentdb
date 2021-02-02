@@ -909,11 +909,12 @@ class PackageScreenshot(db.Model):
 	def getThumbnailURL(self, level=2):
 		return self.url.replace("/uploads/", "/thumbnails/{:d}/".format(level))
 
-	def getAsDictionary(self):
+	def getAsDictionary(self, base_url=""):
 		return {
 			"id": self.id,
+			"order": self.order,
 			"title": self.title,
-			"url": self.url,
+			"url": base_url + self.url,
 			"approved": self.approved,
 		}
 

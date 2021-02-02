@@ -20,12 +20,12 @@ from sqlalchemy.sql.expression import func
 
 from app import csrf
 from app.markdown import render_markdown
-from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Tags, Permission, ForumTopic, MinetestRelease, APIToken
+from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Tags, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page
 from . import bp
 from .auth import is_api_authd
-from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot
+from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, api_order_screenshots
 
 
 @bp.route("/api/packages/")
@@ -147,13 +147,6 @@ def package_dependencies(package):
 	return jsonify(out)
 
 
-@bp.route("/api/packages/<author>/<name>/releases/")
-@is_package_page
-def list_releases(package):
-	releases = package.releases.filter_by(approved=True).all()
-	return jsonify([ rel.getAsDictionary() for rel in releases ])
-
-
 @bp.route("/api/topics/")
 def topics():
 	qb     = QueryBuilder(request.args)
@@ -200,6 +193,13 @@ def markdown():
 	return render_markdown(request.data.decode("utf-8"))
 
 
+@bp.route("/api/packages/<author>/<name>/releases/")
+@is_package_page
+def list_releases(package):
+	releases = package.releases.filter_by(approved=True).all()
+	return jsonify([ rel.getAsDictionary() for rel in releases ])
+
+
 @bp.route("/api/packages/<author>/<name>/releases/new/", methods=["POST"])
 @csrf.exempt
 @is_package_page
@@ -233,6 +233,13 @@ def create_release(token, package):
 		return api_create_zip_release(token, package, data["title"], file)
 
 
+@bp.route("/api/packages/<author>/<name>/screenshots/")
+@is_package_page
+def list_screenshots(package):
+	screenshots = package.screenshots.all()
+	return jsonify([ss.getAsDictionary(current_app.config["BASE_URL"]) for ss in screenshots])
+
+
 @bp.route("/api/packages/<author>/<name>/screenshots/new/", methods=["POST"])
 @csrf.exempt
 @is_package_page
@@ -253,3 +260,62 @@ def create_screenshot(token: APIToken, package: Package):
 		error(400, "Missing 'file' in multipart body")
 
 	return api_create_screenshot(token, package, data["title"], file)
+
+
+@bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/")
+@is_package_page
+def screenshot(package, id):
+	ss = PackageScreenshot.query.get(id)
+	if ss is None or ss.package != package:
+		error(404, "Screenshot not found")
+
+	return jsonify(ss.getAsDictionary(current_app.config["BASE_URL"]))
+
+
+@bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/", methods=["DELETE"])
+@csrf.exempt
+@is_package_page
+@is_api_authd
+def delete_screenshot(token: APIToken, package: Package, id: int):
+	ss = PackageScreenshot.query.get(id)
+	if ss is None or ss.package != package:
+		error(404, "Screenshot not found")
+
+	if not token:
+		error(401, "Authentication needed")
+
+	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
+		error(403, "You do not have the permission to delete screenshots")
+
+	if not token.canOperateOnPackage(package):
+		error(403, "API token does not have access to the package")
+
+	if package.cover_image == ss:
+		package.cover_image = None
+		db.session.merge(package)
+
+	db.session.delete(ss)
+	db.session.commit()
+
+	return jsonify({ "success": True })
+
+
+@bp.route("/api/packages/<author>/<name>/screenshots/order/", methods=["POST"])
+@csrf.exempt
+@is_package_page
+@is_api_authd
+def order_screenshots(token: APIToken, package: Package):
+	if not token:
+		error(401, "Authentication needed")
+
+	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
+		error(403, "You do not have the permission to delete screenshots")
+
+	if not token.canOperateOnPackage(package):
+		error(403, "API token does not have access to the package")
+
+	json = request.json
+	if json is None or not isinstance(json, list):
+		error(400, "Expected order body to be array")
+
+	return api_order_screenshots(token, package, request.json)

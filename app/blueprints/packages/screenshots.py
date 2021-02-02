@@ -25,7 +25,7 @@ from wtforms.validators import *
 from app.utils import *
 from . import bp
 from app.logic.LogicError import LogicError
-from app.logic.screenshots import do_create_screenshot
+from app.logic.screenshots import do_create_screenshot, do_order_screenshots
 
 
 class CreateScreenshotForm(FlaskForm):
@@ -61,17 +61,11 @@ def screenshots(package):
 	if request.method == "POST":
 		order = request.form.get("order")
 		if order:
-			lookup = {}
-			for screenshot in package.screenshots:
-				lookup[str(screenshot.id)] = screenshot
-
-			counter = 1
-			for id in order.split(","):
-				lookup[id].order = counter
-				counter += 1
-
-			db.session.commit()
-			return redirect(package.getDetailsURL())
+			try:
+				do_order_screenshots(current_user, package, order.split(","))
+				return redirect(package.getDetailsURL())
+			except LogicError as e:
+				flash(e.message, "danger")
 
 		if form.validate_on_submit():
 			form.populate_obj(package)

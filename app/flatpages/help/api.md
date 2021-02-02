@@ -16,9 +16,9 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 ### Misc
 
 * GET `/api/whoami/` - Json dictionary with the following keys:
-	* `is_authenticated` - True on successful API authentication
-	* `username` - Username of the user authenticated as, null otherwise.
-	* 4xx status codes will be thrown on unsupported authentication type, invalid access token, or other errors.
+    * `is_authenticated` - True on successful API authentication
+    * `username` - Username of the user authenticated as, null otherwise.
+    * 4xx status codes will be thrown on unsupported authentication type, invalid access token, or other errors.
 
 ### Packages
 
@@ -26,70 +26,95 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 * GET `/api/scores/` - See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/`
 * GET `/api/packages/<username>/<name>/dependencies/`
-	* If query argument `only_hard` is present, only hard deps will be returned.
+    * If query argument `only_hard` is present, only hard deps will be returned.
 * GET `/api/tags/` - List of:
-	* `name` - technical name
-	* `title` - human-readable title
-	* `description` - tag description or null
+    * `name` - technical name
+    * `title` - human-readable title
+    * `description` - tag description or null
 * GET `/api/homepage/`
-	* `count` - number of packages
-	* `downloads` - get number of downloads
-	* `new` - new packages
-	* `updated` - recently updated packages
-	* `pop_mod` - popular mods
-	* `pop_txp` - popular textures
-	* `pop_game` - popular games
-	* `high_reviewed` - highest reviewed
+    * `count` - number of packages
+    * `downloads` - get number of downloads
+    * `new` - new packages
+    * `updated` - recently updated packages
+    * `pop_mod` - popular mods
+    * `pop_txp` - popular textures
+    * `pop_game` - popular games
+    * `high_reviewed` - highest reviewed
 
 ### Releases
 
 * GET `/api/packages/<username>/<name>/releases/` (List)
 * POST `/api/packages/<username>/<name>/releases/new/` (Create)
-	* Requires authentication.
-	* Body is multipart form if zip upload, JSON otherwise.
-	* `title`: human-readable name of the release.
-	* For Git release creation:
-		* `method`: must be `git`.
-		* `ref`: (Optional) git reference, eg: `master`.
-	* For zip upload release creation: 
-		* `file`: multipart file to upload, like `<input type=file>`.
-	* You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
+    * Requires authentication.
+    * Body is multipart form if zip upload, JSON otherwise.
+    * `title`: human-readable name of the release.
+    * For Git release creation:
+        * `method`: must be `git`.
+        * `ref`: (Optional) git reference, eg: `master`.
+    * For zip upload release creation: 
+        * `file`: multipart file to upload, like `<input type=file>`.
+    * You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
 
 Examples:
 
 ```bash
 # Create release from Git
 curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
-	-H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
-	-d "{\"method\": \"git\", \"title\": \"My Release\", \"ref\": \"master\" }"
+    -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
+    -d "{\"method\": \"git\", \"title\": \"My Release\", \"ref\": \"master\" }"
 
 # Create release from zip upload
 curl https://content.minetest.net/api/packages/username/name/releases/new/ \
-	-H "Authorization: Bearer YOURTOKEN" \
-	-F title="My Release" -F file=@path/to/file.zip
+    -H "Authorization: Bearer YOURTOKEN" \
+    -F title="My Release" -F file=@path/to/file.zip
 ```
 
 ### Screenshots
 
+* GET `/api/packages/<username>/<name>/screenshots/` (List)
+    * Returns array of screenshot dictionaries with keys:
+        * `id`: screenshot ID
+        * `approved`: true if approved and visible.
+        * `title`: human-readable name for the screenshot, shown as a caption and alt text.
+        * `url`: absolute URL to screenshot.
+        * `order`: Number used in ordering.
+* GET `/api/packages/<username>/<name>/screenshots/<id>/` (Read)
+    * Returns screenshot dictionary like above.
 * POST `/api/packages/<username>/<name>/screenshots/new/` (Create)
-	* Requires authentication.
-	* Body is multipart form data.
-	* `title`: human-readable name for the screenshot, shown as a caption and alt text.
-	* `file`: multipart file to upload, like `<input type=file>`.
+    * Requires authentication.
+    * Body is multipart form data.
+    * `title`: human-readable name for the screenshot, shown as a caption and alt text.
+    * `file`: multipart file to upload, like `<input type=file>`.
+* DELETE `/api/packages/<username>/<name>/screenshots/<id>/` (Delete)
+    * Requires authentication.
+    * Deletes screenshot.
+* POST `/api/packages/<username>/<name>/screenshots/order/`
+    * Requires authentication.
+    * Body is a JSON array containing the screenshot IDs in their order.
 
-Example:
+Examples:
 
 ```bash
+# Create screenshots
 curl https://content.minetest.net/api/packages/username/name/screenshots/new/ \
-	-H "Authorization: Bearer YOURTOKEN" \
-	-F title="My Release" -F file=@path/to/screnshot.png
+    -H "Authorization: Bearer YOURTOKEN" \
+    -F title="My Release" -F file=@path/to/screnshot.png
+
+# Delete screenshot
+curl -X DELETE https://content.minetest.net/api/packages/username/name/screenshots/3/ \
+    -H "Authorization: Bearer YOURTOKEN" 
+    
+# Reorder screenshots
+curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/order/ \
+    -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
+    -d "[13, 2, 5, 7]"
 ```
 
 ### Topics
 
 * GET `/api/topics/` - Supports [Package Queries](#package-queries), and the following two options:
-	* `show_added` - Show topics which exist as packages, default true.
-	* `show_discarded` - Show topics which have been marked as outdated, default false.
+    * `show_added` - Show topics which exist as packages, default true.
+    * `show_discarded` - Show topics which have been marked as outdated, default false.
 
 ### Minetest
 
@@ -100,7 +125,7 @@ curl https://content.minetest.net/api/packages/username/name/screenshots/new/ \
 
 Example:
 
-	/api/packages/?type=mod&type=game&q=mobs+fun&hide=nonfree&hide=gore
+    /api/packages/?type=mod&type=game&q=mobs+fun&hide=nonfree&hide=gore
 
 Supported query parameters:
 
@@ -116,15 +141,15 @@ Supported query parameters:
 * `protocol_version` - Only show packages supported by this Minetest protocol version.
 * `engine_version` - Only show packages supported by this Minetest engine version, eg: `5.3.0`.
 * `fmt` - How the response is formated.
-	* `keys` - author/name only.
-	* `short` - stuff needed for the Minetest client. 
+    * `keys` - author/name only.
+    * `short` - stuff needed for the Minetest client. 
 
 
 ## Topic Queries
 
 Example:
 
-	/api/topics/?q=mobs
+    /api/topics/?q=mobs
 
 Supported query parameters:
 

@@ -1,5 +1,6 @@
 from werkzeug.exceptions import abort
 
+from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
 from app.models import User, Package, PackageScreenshot, Permission, NotificationType, db
 from app.utils import addNotification
@@ -27,3 +28,21 @@ def do_create_screenshot(user: User, package: Package, title: str, file):
 	db.session.commit()
 
 	return ss
+
+
+def do_order_screenshots(_user: User, package: Package, order: [any]):
+	lookup = {}
+	for screenshot in package.screenshots.all():
+		lookup[screenshot.id] = screenshot
+
+	counter = 1
+	for id in order:
+		try:
+			lookup[int(id)].order = counter
+			counter += 1
+		except KeyError as e:
+			raise LogicError(400, "Unable to find screenshot with id={}".format(id))
+		except ValueError as e:
+			raise LogicError(400, "Invalid number: {}".format(id))
+
+	db.session.commit()
