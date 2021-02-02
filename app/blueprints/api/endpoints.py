@@ -25,7 +25,7 @@ from app.querybuilder import QueryBuilder
 from app.utils import is_package_page
 from . import bp
 from .auth import is_api_authd
-from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, api_order_screenshots
+from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, api_order_screenshots, api_edit_package
 
 
 @bp.route("/api/packages/")
@@ -55,6 +55,17 @@ def package_scores():
 @is_package_page
 def package(package):
 	return jsonify(package.getAsDictionary(current_app.config["BASE_URL"]))
+
+
+@bp.route("/api/packages/<author>/<name>/", methods=["PUT"])
+@csrf.exempt
+@is_package_page
+@is_api_authd
+def edit_package(token, package):
+	if not token:
+		error(401, "Authentication needed")
+
+	return api_edit_package(token, package, request.json)
 
 
 @bp.route("/api/tags/")

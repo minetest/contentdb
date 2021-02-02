@@ -19,7 +19,7 @@ from urllib.parse import quote as urlescape
 
 import flask_menu as menu
 from celery import uuid
-from flask import render_template
+from flask import render_template, flash
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from sqlalchemy import or_, func
@@ -33,6 +33,8 @@ from app.rediscache import has_key, set_key
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
 from app.utils import *
 from . import bp
+from ...logic.LogicError import LogicError
+from ...logic.packages import do_edit_package
 
 
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
@@ -193,7 +195,6 @@ def shield(package, type):
 	return redirect(url)
 
 
-
 @bp.route("/packages/<author>/<name>/download/")
 @is_package_page
 def download(package):
@@ -240,7 +241,6 @@ class PackageForm(FlaskForm):
 @login_required
 def create_edit(author=None, name=None):
 	package = None
-	form = None
 	if author is None:
 		form = PackageForm(formdata=request.form)
 		author = request.args.get("author")
@@ -301,48 +301,35 @@ def create_edit(author=None, name=None):
 			package.maintainers.append(author)
 			wasNew = True
 
-		elif package.name != form.name.data and not package.checkPerm(current_user, Permission.CHANGE_NAME):
-			flash("Unable to change package name", "danger")
-			return redirect(url_for("packages.create_edit", author=author, name=name))
+		try:
+			do_edit_package(current_user, package, wasNew, {
+				"name": form.name.data,
+				"title": form.title.data,
+				"short_desc": form.short_desc.data,
+				"desc": form.desc.data,
+				"type": form.type.data,
+				"license": form.license.data,
+				"media_license": form.media_license.data,
+				"tags": form.tags.raw_data,
+				"content_warnings": form.content_warnings.raw_data,
+				"repo": form.repo.data,
+				"website": form.website.data,
+				"issueTracker": form.issueTracker.data,
+				"forums": form.forums.data,
+			})
 
-		else:
-			msg = "Edited {}".format(package.title)
+			if wasNew and package.repo is not None:
+				importRepoScreenshot.delay(package.id)
 
-			addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT,
-					msg, package.getDetailsURL(), package)
+			next_url = package.getDetailsURL()
+			if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
+				next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
+			elif wasNew:
+				next_url = package.getSetupReleasesURL()
 
-			severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
-			addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
-
-		form.populate_obj(package) # copy to row
-
-		if package.type == PackageType.TXP:
-			package.license = package.media_license
-
-		if wasNew and package.type == PackageType.MOD:
-			m = MetaPackage.GetOrCreate(package.name, {})
-			package.provides.append(m)
-
-		package.tags.clear()
-		for tag in form.tags.raw_data:
-			package.tags.append(Tag.query.get(tag))
-
-		package.content_warnings.clear()
-		for warning in form.content_warnings.raw_data:
-			package.content_warnings.append(ContentWarning.query.get(warning))
-
-		db.session.commit() # save
-
-		if wasNew and package.repo is not None:
-			importRepoScreenshot.delay(package.id)
-
-		next_url = package.getDetailsURL()
-		if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
-			next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
-		elif wasNew:
-			next_url = package.getSetupReleasesURL()
-
-		return redirect(next_url)
+			return redirect(next_url)
+		except LogicError as e:
+			flash(e.message, "danger")
 
 	package_query = Package.query.filter_by(state=PackageState.APPROVED)
 	if package is not None:

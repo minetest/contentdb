@@ -16,14 +16,26 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * `username` - Username of the user authenticated as, null otherwise.
     * 4xx status codes will be thrown on unsupported authentication type, invalid access token, or other errors.
 
-
 ## Packages
 
-* GET `/api/packages/` - See [Package Queries](#package-queries)
-* GET `/api/scores/` - See [Package Queries](#package-queries)
-* GET `/api/packages/<username>/<name>/`
+* GET `/api/packages/` (List)
+    * See [Package Queries](#package-queries)
+* GET `/api/packages/<username>/<name>/` (Read)
+* PUT `/api/packages/<author>/<name>/` (Update)
+    * JSON dictionary with any of these keys (all are optional):
+        * `title`: Human-readable title.
+        * `short_desc`
+        * `desc`
+        * `type`: One of `GAME`, `MOD`, `TXP`.
+        * `license`: A license name.
+        * `media_license`: A license name.
+        * `repo`: Git repo URL.
+        * `website`: Website URL.
+        * `issue_tracker`: Issue tracker URL.
 * GET `/api/packages/<username>/<name>/dependencies/`
     * If query argument `only_hard` is present, only hard deps will be returned.
+* GET `/api/scores/`
+    * See [Package Queries](#package-queries)
 * GET `/api/tags/` - List of:
     * `name` - technical name
     * `title` - human-readable title
@@ -37,7 +49,6 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * `pop_txp` - popular textures
     * `pop_game` - popular games
     * `high_reviewed` - highest reviewed
-    * `tags`
 
 ### Package Queries
 
