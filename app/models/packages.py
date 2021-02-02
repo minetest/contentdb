@@ -759,6 +759,13 @@ class MinetestRelease(db.Model):
 	def getActual(self):
 		return None if self.name == "None" else self
 
+	def getAsDictionary(self):
+		return {
+			"name": self.name,
+			"protocol_version": self.protocol,
+			"is_dev": "-dev" in self.name,
+		}
+
 	@classmethod
 	def get(cls, version, protocol_num):
 		if version:
@@ -810,8 +817,8 @@ class PackageRelease(db.Model):
 			"release_date": self.releaseDate.isoformat(),
 			"commit": self.commit_hash,
 			"downloads": self.downloads,
-			"min_protocol": self.min_rel and self.min_rel.protocol,
-			"max_protocol": self.max_rel and self.max_rel.protocol
+			"min_minetest_version": self.min_rel and self.min_rel.getAsDictionary(),
+			"max_minetest_version": self.max_rel and self.max_rel.getAsDictionary(),
 		}
 
 	def getEditURL(self):

@@ -83,9 +83,6 @@ def homepage():
 	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 
-	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
-		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
-
 	def mapPackages(packages):
 		return [pkg.getAsDictionaryKey() for pkg in packages]
 
@@ -97,7 +94,7 @@ def homepage():
 		"pop_mod": mapPackages(pop_mod),
 		"pop_txp": mapPackages(pop_txp),
 		"pop_game": mapPackages(pop_gam),
-		"high_reviewed": mapPackages(high_reviewed),
+		"high_reviewed": mapPackages(high_reviewed)
 	}
 
 
@@ -112,9 +109,6 @@ def resolve_package_deps(out, package, only_hard):
 	for dep in package.dependencies:
 		if only_hard and dep.optional:
 			continue
-
-		name = None
-		fulfilled_by = None
 
 		if dep.package:
 			name = dep.package.name
@@ -174,7 +168,7 @@ def topic_set_discard():
 
 @bp.route("/api/minetest_versions/")
 def versions():
-	return jsonify([{ "name": rel.name, "protocol_version": rel.protocol }\
+	return jsonify([rel.getAsDictionary() \
 			for rel in MinetestRelease.query.all() if rel.getActual() is not None])
 
 
@@ -196,8 +190,7 @@ def markdown():
 @bp.route("/api/packages/<author>/<name>/releases/")
 @is_package_page
 def list_releases(package):
-	releases = package.releases.filter_by(approved=True).all()
-	return jsonify([ rel.getAsDictionary() for rel in releases ])
+	return jsonify([ rel.getAsDictionary() for rel in package.releases.all() ])
 
 
 @bp.route("/api/packages/<author>/<name>/releases/new/", methods=["POST"])
@@ -215,13 +208,10 @@ def create_release(token, package):
 	if "title" not in data:
 		error(400, "Title is required in the POST data")
 
-	if request.json:
+	if data.get("method") == "git":
 		for option in ["method", "ref"]:
 			if option not in data:
 				error(400, option + " is required in the POST data")
-
-		if data["method"].lower() != "git":
-			error(400, "Release-creation methods other than git are not supported")
 
 		return api_create_vcs_release(token, package, data["title"], data["ref"])
 
@@ -231,6 +221,43 @@ def create_release(token, package):
 			error(400, "Missing 'file' in multipart body")
 
 		return api_create_zip_release(token, package, data["title"], file)
+
+	else:
+		error(400, "Unknown release-creation method. Specify the method or provide a file.")
+
+
+@bp.route("/api/packages/<author>/<name>/releases/<int:id>/")
+@is_package_page
+def release(package: Package, id: int):
+	release = PackageRelease.query.get(id)
+	if release is None or release.package != package:
+		error(404, "Release not found")
+
+	return jsonify(release.getAsDictionary())
+
+
+@bp.route("/api/packages/<author>/<name>/releases/<int:id>/", methods=["DELETE"])
+@csrf.exempt
+@is_package_page
+@is_api_authd
+def delete_release(token: APIToken, package: Package, id: int):
+	release = PackageRelease.query.get(id)
+	if release is None or release.package != package:
+		error(404, "Release not found")
+
+	if not token:
+		error(401, "Authentication needed")
+
+	if not token.canOperateOnPackage(package):
+		error(403, "API token does not have access to the package")
+
+	if not release.checkPerm(token.owner, Permission.DELETE_RELEASE):
+		error(403, "Unable to delete the release, make sure there's a newer release available")
+
+	db.session.delete(release)
+	db.session.commit()
+
+	return jsonify({"success": True})
 
 
 @bp.route("/api/packages/<author>/<name>/screenshots/")

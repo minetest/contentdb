@@ -15,7 +15,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 
 ### Misc
 
-* GET `/api/whoami/` - Json dictionary with the following keys:
+* GET `/api/whoami/` - JSON dictionary with the following keys:
     * `is_authenticated` - True on successful API authentication
     * `username` - Username of the user authenticated as, null otherwise.
     * 4xx status codes will be thrown on unsupported authentication type, invalid access token, or other errors.
@@ -40,13 +40,24 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * `pop_txp` - popular textures
     * `pop_game` - popular games
     * `high_reviewed` - highest reviewed
+    * `tags`
 
 ### Releases
 
 * GET `/api/packages/<username>/<name>/releases/` (List)
+    * Returns array of release dictionaries with keys:
+        * `id`: release ID
+        * `title`: human-readable title
+        * `release_date`: Date released
+        * `url`: download URL
+        * `commit`: commit hash or null
+        * `downloads`: number of downloads
+        * `min_minetest_version`: dict or null, minimum supported minetest version (inclusive).
+        * `max_minetest_version`: dict or null, minimum supported minetest version (inclusive).
+* GET `/api/packages/<username>/<name>/releases/<id>/` (Read)
 * POST `/api/packages/<username>/<name>/releases/new/` (Create)
     * Requires authentication.
-    * Body is multipart form if zip upload, JSON otherwise.
+    * Body can be JSON or multipart form data. Zip uploads must be multipart form data.
     * `title`: human-readable name of the release.
     * For Git release creation:
         * `method`: must be `git`.
@@ -54,7 +65,10 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * For zip upload release creation: 
         * `file`: multipart file to upload, like `<input type=file>`.
     * You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
-
+* DELETE `/api/packages/<username>/<name>/releases/<id>/` (Delete)
+    * Requires authentication.
+    * Deletes release.
+  
 Examples:
 
 ```bash
@@ -64,9 +78,13 @@ curl -X POST https://content.minetest.net/api/packages/username/name/releases/ne
     -d "{\"method\": \"git\", \"title\": \"My Release\", \"ref\": \"master\" }"
 
 # Create release from zip upload
-curl https://content.minetest.net/api/packages/username/name/releases/new/ \
+curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/file.zip
+
+# Delete release
+curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/3/ \
+    -H "Authorization: Bearer YOURTOKEN" 
 ```
 
 ### Screenshots
@@ -96,7 +114,7 @@ Examples:
 
 ```bash
 # Create screenshots
-curl https://content.minetest.net/api/packages/username/name/screenshots/new/ \
+curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/screnshot.png
 
