@@ -5,9 +5,44 @@
 {% endblock %}
 
 {% block container %}
-	<main class="container mt-4 content">
-		{% if not page["no_h1"] %}<h1>{{ page['title'] }}</h1>{% endif %}
 
-		{{ page.html | safe }}
-	</main>
+{% set html = page.html %}
+{% if page.meta.get("toc", True) %}
+	<div class="container mt-4">
+		<main class="row">
+			<article class="col-md-9 content">
+				{% if not page["no_h1"] %}<h1>{{ page['title'] }}</h1>{% endif %}
+
+				{{ html | safe }}
+			</article>
+
+			<nav class="col-md-3 toc">
+				{% set headings = get_headings(html) %}
+				<ul class="nav flex-column" role="menu">
+					{% for item in headings recursive %}
+						<li class="nav-item">
+							<a class="nav-link" href="#{{ item.link }}">
+								{{ item.text }}
+							</a>
+							{% if item.children %}
+								<ul class="nav flex-column" role="menu">
+									{{ loop(item.children) }}
+								</ul>
+							{% endif %}
+						</li>
+					{% endfor %}
+				</ul>
+			</nav>
+		</main>
+	</div>
+{% else %}
+	<div class="container mt-4">
+		<article class="content">
+			{% if not page["no_h1"] %}<h1>{{ page['title'] }}</h1>{% endif %}
+
+			{{ html | safe }}
+		</article>
+	</div>
+{% endif %}
+
 {% endblock %}

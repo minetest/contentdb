@@ -6,6 +6,9 @@ from flask_babel import format_timedelta, gettext
 from urllib.parse import urlparse
 from datetime import datetime as dt
 
+from .utils.markdown import get_headings
+
+
 @app.context_processor
 def inject_debug():
 	return dict(debug=app.debug)
@@ -13,7 +16,9 @@ def inject_debug():
 @app.context_processor
 def inject_functions():
 	check_global_perm = Permission.checkPerm
-	return dict(abs_url_for=abs_url_for, url_set_query=url_set_query, check_global_perm=check_global_perm)
+	return dict(abs_url_for=abs_url_for, url_set_query=url_set_query,
+			check_global_perm=check_global_perm,
+			get_headings=get_headings)
 
 @app.context_processor
 def inject_todo():

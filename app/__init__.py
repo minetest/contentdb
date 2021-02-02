@@ -21,7 +21,7 @@ import flask_menu as menu
 from flask_mail import Mail
 from flask_github import GitHub
 from flask_wtf.csrf import CSRFProtect
-from flask_flatpages import FlatPages, pygments_style_defs
+from flask_flatpages import FlatPages
 from flask_babel import Babel
 from flask_login import logout_user, current_user, LoginManager
 import os, redis
@@ -29,7 +29,7 @@ import os, redis
 app = Flask(__name__, static_folder="public/static")
 app.config["FLATPAGES_ROOT"] = "flatpages"
 app.config["FLATPAGES_EXTENSION"] = ".md"
-app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = ["fenced_code", "tables", "codehilite"]
+app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = ["fenced_code", "tables", "codehilite", 'toc']
 app.config["FLATPAGES_EXTENSION_CONFIG"] = {
 	"fenced_code": {},
 	"tables": {},
@@ -69,7 +69,7 @@ if not app.debug and app.config["MAIL_UTILS_ERROR_SEND_TO"]:
 	app.logger.addHandler(build_handler(app))
 
 
-from .markdown import init_app
+from app.utils.markdown import init_app
 init_app(app)
 
 # @babel.localeselector

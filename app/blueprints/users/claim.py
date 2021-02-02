@@ -19,7 +19,7 @@ from flask import redirect, render_template, session, request, flash, url_for
 from app.models import db, User, UserRank
 from app.utils import randomString, login_user_set_active
 from app.tasks.forumtasks import checkForumAccount
-from app.tasks.phpbbparser import getProfile
+from app.utils.phpbbparser import getProfile
 import re
 
 

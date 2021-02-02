@@ -3,6 +3,7 @@ from functools import partial
 import bleach
 from bleach import Cleaner
 from bleach.linkifier import LinkifyFilter
+from bs4 import BeautifulSoup
 from markdown import Markdown
 from flask import Markup
 
@@ -40,6 +41,10 @@ def allow_class(_tag, name, value):
 	return name == "class" and value in ALLOWED_CSS
 
 ALLOWED_ATTRIBUTES = {
+	"h1": ["id"],
+	"h2": ["id"],
+	"h3": ["id"],
+	"h4": ["id"],
 	"a": ["href", "title"],
 	"img": ["src", "title", "alt"],
 	"code": allow_class,
@@ -51,6 +56,7 @@ ALLOWED_PROTOCOLS = ["http", "https", "mailto"]
 
 md = None
 
+
 def render_markdown(source):
 	html = md.convert(source)
 
@@ -61,6 +67,7 @@ def render_markdown(source):
 			filters=[partial(LinkifyFilter, callbacks=bleach.linkifier.DEFAULT_CALLBACKS)])
 	return cleaner.clean(html)
 
+
 def init_app(app):
 	global md
 
@@ -69,3 +76,26 @@ def init_app(app):
 	@app.template_filter()
 	def markdown(source):
 		return Markup(render_markdown(source))
+
+
+def get_headings(html: str):
+	soup = BeautifulSoup(html, "html.parser")
+	headings = soup.find_all(["h1", "h2", "h3"])
+
+	root = []
+	stack = []
+	for heading in headings:
+		this = { "link": heading.get("id") or "", "text": heading.text, "children": [] }
+		this_level = int(heading.name[1:]) - 1
+
+		while this_level <= len(stack):
+			stack.pop()
+
+		if len(stack) > 0:
+			stack[-1]["children"].append(this)
+		else:
+			root.append(this)
+
+		stack.append(this)
+
+	return root

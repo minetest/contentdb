@@ -148,3 +148,24 @@ blockquote {
 		border-bottom: none;
 	}
 }
+
+.toc {
+	.nav-link {
+		color: #ADADAD;
+		padding: 0.25rem 0.5rem;
+
+		&:hover, &.active {
+			color: #DDD;
+		}
+	}
+
+	.nav .nav {
+		margin: 0.1em 0 0.1em 0.7rem;
+		padding-left: 0.25em;
+		border-left: 3px solid rgba(173, 173, 173, 0.25);
+	}
+
+	& > .nav > * > .nav {
+		margin-bottom: 0.5em;
+	}
+}

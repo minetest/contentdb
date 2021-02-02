@@ -11,16 +11,13 @@ curl -H "Authorization: Bearer YOURTOKEN" https://content.minetest.net/api/whoam
 
 Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 
-## Endpoints
-
-### Misc
-
 * GET `/api/whoami/` - JSON dictionary with the following keys:
     * `is_authenticated` - True on successful API authentication
     * `username` - Username of the user authenticated as, null otherwise.
     * 4xx status codes will be thrown on unsupported authentication type, invalid access token, or other errors.
 
-### Packages
+
+## Packages
 
 * GET `/api/packages/` - See [Package Queries](#package-queries)
 * GET `/api/scores/` - See [Package Queries](#package-queries)
@@ -42,7 +39,31 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * `high_reviewed` - highest reviewed
     * `tags`
 
-### Releases
+### Package Queries
+
+Example:
+
+    /api/packages/?type=mod&type=game&q=mobs+fun&hide=nonfree&hide=gore
+
+Supported query parameters:
+
+* `type` - Package types (`mod`, `game`, `txp`).
+* `q` - Query string.
+* `author` - Filter by author.
+* `tag` - Filter by tags.
+* `random` - When present, enable random ordering and ignore `sort`.
+* `limit` - Return at most `limit` packages.
+* `hide` - Hide content based on [Content Flags](/help/content_flags/).
+* `sort` - Sort by (`name`, `title`, `score`, `reviews`, `downloads`, `created_at`, `approved_at`, `last_release`).
+* `order` - Sort ascending (`asc`) or descending (`desc`).
+* `protocol_version` - Only show packages supported by this Minetest protocol version.
+* `engine_version` - Only show packages supported by this Minetest engine version, eg: `5.3.0`.
+* `fmt` - How the response is formated.
+    * `keys` - author/name only.
+    * `short` - stuff needed for the Minetest client. 
+
+
+## Releases
 
 * GET `/api/packages/<username>/<name>/releases/` (List)
     * Returns array of release dictionaries with keys:
@@ -87,7 +108,8 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
     -H "Authorization: Bearer YOURTOKEN" 
 ```
 
-### Screenshots
+
+## Screenshots
 
 * GET `/api/packages/<username>/<name>/screenshots/` (List)
     * Returns array of screenshot dictionaries with keys:
@@ -129,42 +151,14 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
     -d "[13, 2, 5, 7]"
 ```
 
-### Topics
+
+## Topics
 
 * GET `/api/topics/` - Supports [Package Queries](#package-queries), and the following two options:
     * `show_added` - Show topics which exist as packages, default true.
     * `show_discarded` - Show topics which have been marked as outdated, default false.
 
-### Minetest
-
-* GET `/api/minetest_versions/`
-
-
-## Package Queries
-
-Example:
-
-    /api/packages/?type=mod&type=game&q=mobs+fun&hide=nonfree&hide=gore
-
-Supported query parameters:
-
-* `type` - Package types (`mod`, `game`, `txp`).
-* `q` - Query string.
-* `author` - Filter by author.
-* `tag` - Filter by tags.
-* `random` - When present, enable random ordering and ignore `sort`.
-* `limit` - Return at most `limit` packages.
-* `hide` - Hide content based on [Content Flags](/help/content_flags/).
-* `sort` - Sort by (`name`, `title`, `score`, `reviews`, `downloads`, `created_at`, `approved_at`, `last_release`).
-* `order` - Sort ascending (`asc`) or descending (`desc`).
-* `protocol_version` - Only show packages supported by this Minetest protocol version.
-* `engine_version` - Only show packages supported by this Minetest engine version, eg: `5.3.0`.
-* `fmt` - How the response is formated.
-    * `keys` - author/name only.
-    * `short` - stuff needed for the Minetest client. 
-
-
-## Topic Queries
+### Topic Queries
 
 Example:
 
@@ -178,3 +172,8 @@ Supported query parameters:
 * `show_added` - Show topics that have an existing package.
 * `show_discarded` - Show topics marked as discarded.
 * `limit` - Return at most `limit` topics.
+
+
+## Minetest
+
+* GET `/api/minetest_versions/`

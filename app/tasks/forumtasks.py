@@ -18,7 +18,7 @@
 import json, re, sys
 from app.models import *
 from app.tasks import celery
-from .phpbbparser import getProfile, getTopicsFromForum
+from app.utils.phpbbparser import getProfile, getTopicsFromForum
 import urllib.request
 
 @celery.task()
