@@ -95,6 +95,7 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
         * `approved`: true if approved and visible.
         * `title`: human-readable name for the screenshot, shown as a caption and alt text.
         * `url`: absolute URL to screenshot.
+        * `created_at`: ISO time.
         * `order`: Number used in ordering.
 * GET `/api/packages/<username>/<name>/screenshots/<id>/` (Read)
     * Returns screenshot dictionary like above.

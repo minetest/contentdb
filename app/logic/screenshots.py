@@ -2,11 +2,11 @@ import datetime
 
 from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
-from app.models import User, Package, PackageScreenshot, Permission, NotificationType, db
-from app.utils import addNotification
+from app.models import User, Package, PackageScreenshot, Permission, NotificationType, db, AuditSeverity
+from app.utils import addNotification, addAuditLog
 
 
-def do_create_screenshot(user: User, package: Package, title: str, file):
+def do_create_screenshot(user: User, package: Package, title: str, file, reason: str = None):
 	thirty_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=30)
 	count = package.screenshots.filter(PackageScreenshot.created_at > thirty_minutes_ago).count()
 	if count >= 20:
@@ -27,9 +27,14 @@ def do_create_screenshot(user: User, package: Package, title: str, file):
 	ss.order    = counter
 	db.session.add(ss)
 
-	msg = "Screenshot added {}" \
-			.format(ss.title)
+	if reason is None:
+		msg = "Created screenshot {}".format(ss.title)
+	else:
+		msg = "Created screenshot {} ({})".format(ss.title, reason)
+
 	addNotification(package.maintainers, user, NotificationType.PACKAGE_EDIT, msg, package.getDetailsURL(), package)
+	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getDetailsURL(), package)
+
 	db.session.commit()
 
 	return ss

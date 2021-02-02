@@ -25,11 +25,14 @@ def error(code: int, msg: str):
 	abort(make_response(jsonify({ "success": False, "error": msg }), code))
 
 # Catches LogicErrors and aborts with JSON error
-def run_safe(f, *args, **kwargs):
-	try:
-		return f(*args, **kwargs)
-	except LogicError as e:
-		error(e.code, e.message)
+def guard(f):
+	def ret(*args, **kwargs):
+		try:
+			return f(*args, **kwargs)
+		except LogicError as e:
+			error(e.code, e.message)
+
+	return ret
 
 
 def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: str,
@@ -37,7 +40,9 @@ def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: s
 	if not token.canOperateOnPackage(package):
 		error(403, "API token does not have access to the package")
 
-	rel = run_safe(do_create_vcs_release, token.owner, package, title, ref, None, None, reason)
+	reason += ", token=" + token.name
+
+	rel = guard(do_create_vcs_release)(token.owner, package, title, ref, None, None, reason)
 
 	return jsonify({
 		"success": True,
@@ -50,7 +55,9 @@ def api_create_zip_release(token: APIToken, package: Package, title: str, file, 
 	if not token.canOperateOnPackage(package):
 		error(403, "API token does not have access to the package")
 
-	rel = run_safe(do_create_zip_release, token.owner, package, title, file, None, None, reason)
+	reason += ", token=" + token.name
+
+	rel = guard(do_create_zip_release)(token.owner, package, title, file, None, None, reason)
 
 	return jsonify({
 		"success": True,
@@ -59,11 +66,13 @@ def api_create_zip_release(token: APIToken, package: Package, title: str, file, 
 	})
 
 
-def api_create_screenshot(token: APIToken, package: Package, title: str, file):
+def api_create_screenshot(token: APIToken, package: Package, title: str, file, reason="API"):
 	if not token.canOperateOnPackage(package):
 		error(403, "API token does not have access to the package")
 
-	ss : PackageScreenshot = run_safe(do_create_screenshot, token.owner, package, title, file)
+	reason += ", token=" + token.name
+
+	ss : PackageScreenshot = guard(do_create_screenshot)(token.owner, package, title, file, reason)
 
 	return jsonify({
 		"success": True,
@@ -75,7 +84,7 @@ def api_order_screenshots(token: APIToken, package: Package, order: [any]):
 	if not token.canOperateOnPackage(package):
 		error(403, "API token does not have access to the package")
 
-	run_safe(do_order_screenshots, token.owner, package, order)
+	guard(do_order_screenshots)(token.owner, package, order)
 
 	return jsonify({
 		"success": True

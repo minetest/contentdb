@@ -900,6 +900,7 @@ class PackageScreenshot(db.Model):
 	title      = db.Column(db.String(100), nullable=False)
 	url        = db.Column(db.String(100), nullable=False)
 	approved   = db.Column(db.Boolean, nullable=False, default=False)
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	def getEditURL(self):
 		return url_for("packages.edit_screenshot",
@@ -923,6 +924,7 @@ class PackageScreenshot(db.Model):
 			"title": self.title,
 			"url": base_url + self.url,
 			"approved": self.approved,
+			"created_at": self.created_at.isoformat(),
 		}
 
 
