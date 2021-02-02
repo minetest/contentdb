@@ -17,7 +17,8 @@
 
 from flask import jsonify, abort, make_response, url_for
 from app.logic.releases import LogicError, do_create_vcs_release, do_create_zip_release
-from app.models import APIToken, Package, MinetestRelease
+from app.logic.screenshots import do_create_screenshot
+from app.models import APIToken, Package, MinetestRelease, PackageScreenshot
 
 
 def error(code: int, msg: str):
@@ -55,4 +56,16 @@ def api_create_zip_release(token: APIToken, package: Package, title: str, file, 
 		"success": True,
 		"task": url_for("tasks.check", id=rel.task_id),
 		"release": rel.getAsDictionary()
+	})
+
+
+def api_create_screenshot(token: APIToken, package: Package, title: str, file):
+	if not token.canOperateOnPackage(package):
+		error(403, "API token does not have access to the package")
+
+	ss : PackageScreenshot = run_safe(do_create_screenshot, token.owner, package, title, file)
+
+	return jsonify({
+		"success": True,
+		"screenshot": ss.getAsDictionary()
 	})

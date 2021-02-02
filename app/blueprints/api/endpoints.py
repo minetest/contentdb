@@ -14,18 +14,19 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-from flask import *
+from flask import request, jsonify, current_app, abort
 from flask_login import current_user, login_required
+from sqlalchemy.sql.expression import func
+
+from app import csrf
+from app.markdown import render_markdown
+from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Tags, Permission, ForumTopic, MinetestRelease, APIToken
+from app.querybuilder import QueryBuilder
+from app.utils import is_package_page
 from . import bp
 from .auth import is_api_authd
-from .support import error, api_create_vcs_release, api_create_zip_release
-from app import csrf
-from app.models import *
-from app.utils import is_package_page
-from app.markdown import render_markdown
-from app.querybuilder import QueryBuilder
-from sqlalchemy.sql.expression import func
+from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot
+
 
 @bp.route("/api/packages/")
 def packages():
@@ -230,3 +231,25 @@ def create_release(token, package):
 			error(400, "Missing 'file' in multipart body")
 
 		return api_create_zip_release(token, package, data["title"], file)
+
+
+@bp.route("/api/packages/<author>/<name>/screenshots/new/", methods=["POST"])
+@csrf.exempt
+@is_package_page
+@is_api_authd
+def create_screenshot(token: APIToken, package: Package):
+	if not token:
+		error(401, "Authentication needed")
+
+	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
+		error(403, "You do not have the permission to create screenshots")
+
+	data = request.form
+	if "title" not in data:
+		error(400, "Title is required in the POST data")
+
+	file = request.files.get("file")
+	if file is None:
+		error(400, "Missing 'file' in multipart body")
+
+	return api_create_screenshot(token, package, data["title"], file)

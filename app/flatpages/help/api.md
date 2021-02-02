@@ -69,6 +69,22 @@ curl https://content.minetest.net/api/packages/username/name/releases/new/ \
 	-F title="My Release" -F file=@path/to/file.zip
 ```
 
+### Screenshots
+
+* POST `/api/packages/<username>/<name>/screenshots/new/` (Create)
+	* Requires authentication.
+	* Body is multipart form data.
+	* `title`: human-readable name for the screenshot, shown as a caption and alt text.
+	* `file`: multipart file to upload, like `<input type=file>`.
+
+Example:
+
+```bash
+curl https://content.minetest.net/api/packages/username/name/screenshots/new/ \
+	-H "Authorization: Bearer YOURTOKEN" \
+	-F title="My Release" -F file=@path/to/screnshot.png
+```
+
 ### Topics
 
 * GET `/api/topics/` - Supports [Package Queries](#package-queries), and the following two options:
