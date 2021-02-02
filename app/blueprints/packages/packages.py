@@ -227,13 +227,11 @@ class PackageForm(FlaskForm):
 	media_license    = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	tags             = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
 	content_warnings = QuerySelectMultipleField('Content Warnings', query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)
-	# harddep_str      = StringField("Hard Dependencies", [Optional()])
-	# softdep_str      = StringField("Soft Dependencies", [Optional()])
 	repo             = StringField("VCS Repository URL", [Optional(), URL()], filters = [lambda x: x or None])
 	website          = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
 	issueTracker     = StringField("Issue Tracker URL", [Optional(), URL()], filters = [lambda x: x or None])
-	forums	         = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
-	submit	         = SubmitField("Save")
+	forums           = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
+	submit           = SubmitField("Save")
 
 
 @bp.route("/packages/new/", methods=["GET", "POST"])

@@ -15,23 +15,95 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+import re, validators
 
 from app.logic.LogicError import LogicError
-from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, NotificationType, AuditSeverity
+from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, NotificationType, AuditSeverity, License
 from app.utils import addNotification, addAuditLog
 
 
+def check(cond: bool, msg: str):
+	if not cond:
+		raise LogicError(400, msg)
+
+
+def get_license(name):
+	if type(name) == License:
+		return name
+
+	license = License.query.filter(License.name.ilike(name)).first()
+	if license is None:
+		raise LogicError(400, "Unknown license: " + name)
+	return license
+
+
+name_re = re.compile("^[a-z0-9_]+$")
+
+TYPES = {
+	"name": str,
+	"title": str,
+	"short_description": str,
+	"short_desc": str,
+	"desc": str,
+	"tags": list,
+	"content_warnings": list,
+	"repo": str,
+	"website": str,
+	"issue_tracker": str,
+	"issueTracker": str,
+	"forums": int,
+}
+
+def is_int(val):
+	try:
+		int(val)
+		return True
+	except ValueError:
+		return False
+
+
+def validate(data: dict):
+	for key, typ in TYPES.items():
+		if data.get(key) is not None:
+			check(isinstance(data[key], typ), key + " must be a " + typ.__name__)
+
+	if "name" in data:
+		name = data["name"]
+		check(isinstance(name, str), "Name must be a string")
+		check(bool(name_re.match(name)),
+			"Name can only contain lower case letters (a-z), digits (0-9), and underscores (_)")
+
+	for key in ["repo", "website", "issue_tracker", "issueTracker"]:
+		value = data.get(key)
+		if value is not None:
+			check(value.startswith("http://") or value.startswith("https://"),
+					key + " must start with http:// or https://")
+
+			check(validators.url(value, public=True), key + " must be a valid URL")
+
+
 def do_edit_package(user: User, package: Package, was_new: bool, data: dict, reason: str = None):
+	if not package.checkPerm(user, Permission.EDIT_PACKAGE):
+		raise LogicError(403, "You do not have permission to edit this package")
+
 	if "name" in data and package.name != data["name"] and \
 			not package.checkPerm(user, Permission.CHANGE_NAME):
 		raise LogicError(403, "You do not have permission to change the package name")
 
-	if not package.checkPerm(user, Permission.EDIT_PACKAGE):
-		raise LogicError(403, "You do not have permission to edit this package")
-
-	for alias, to in { "short_description": "short_desc" }.items():
+	for alias, to in { "short_description": "short_desc", "issue_tracker": "issueTracker" }.items():
 		if alias in data:
 			data[to] = data[alias]
+
+	validate(data)
+
+	if "type" in data:
+		data["type"] = PackageType.coerce(data["type"])
+
+	if "license" in data:
+		data["license"] = get_license(data["license"])
+
+	if "media_license" in data:
+		data["media_license"] = get_license(data["media_license"])
 
 	for key in ["name", "title", "short_desc", "desc", "type", "license", "media_license",
 			"repo", "website", "issueTracker", "forums"]:
@@ -45,16 +117,27 @@ def do_edit_package(user: User, package: Package, was_new: bool, data: dict, rea
 		m = MetaPackage.GetOrCreate(package.name, {})
 		package.provides.append(m)
 
-	package.tags.clear()
-
-	if "tag" in data:
-		for tag in data["tag"]:
-			package.tags.append(Tag.query.get(tag))
+	if "tags" in data:
+		package.tags.clear()
+		for tag_id in data["tags"]:
+			if is_int(tag_id):
+				package.tags.append(Tag.query.get(tag_id))
+			else:
+				tag = Tag.query.filter_by(name=tag_id).first()
+				if tag is None:
+					raise LogicError(400, "Unknown tag: " + tag_id)
+				package.tags.append(tag)
 
 	if "content_warnings" in data:
 		package.content_warnings.clear()
-		for warning in data["content_warnings"]:
-			package.content_warnings.append(ContentWarning.query.get(warning))
+		for warning_id in data["content_warnings"]:
+			if is_int(warning_id):
+				package.content_warnings.append(ContentWarning.query.get(warning_id))
+			else:
+				warning = ContentWarning.query.filter_by(name=warning_id).first()
+				if warning is None:
+					raise LogicError(400, "Unknown warning: " + warning_id)
+				package.content_warnings.append(warning)
 
 	if not was_new:
 		if reason is None:

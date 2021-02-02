@@ -24,7 +24,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 * PUT `/api/packages/<author>/<name>/` (Update)
     * JSON dictionary with any of these keys (all are optional):
         * `title`: Human-readable title.
-        * `short_desc`
+        * `short_description`
         * `desc`
         * `type`: One of `GAME`, `MOD`, `TXP`.
         * `license`: A license name.
