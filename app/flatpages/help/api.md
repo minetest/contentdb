@@ -63,7 +63,7 @@ Examples:
 # Edit packages
 curl -X PUT http://localhost:5123/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
-    -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "wtfpl" }'
+    -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "WTFPL" }'
     
 # Remove website URL
 curl -X PUT http://localhost:5123/api/packages/username/name/ \

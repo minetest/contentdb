@@ -85,23 +85,23 @@ def clearNotifications(url):
 		Notification.query.filter_by(user=current_user, url=url).delete()
 		db.session.commit()
 
-def addSystemNotification(target, type: NotificationType, title: str, url: str, package: Package = None):
+
+def get_system_user():
 	system_user = User.query.filter_by(username="ContentDB").first()
 	assert system_user
+	return system_user
 
-	return addNotification(target, system_user, type, title, url, package)
+
+def addSystemNotification(target, type: NotificationType, title: str, url: str, package: Package = None):
+	return addNotification(target, get_system_user(), type, title, url, package)
 
 
 def addSystemAuditLog(severity: AuditSeverity, title: str, url: str, package=None, description=None):
-	system_user = User.query.filter_by(username="ContentDB").first()
-	assert system_user
-
-	return addAuditLog(severity, system_user, title, url, package, description)
+	return addAuditLog(severity, get_system_user(), title, url, package, description)
 
 
 def post_bot_message(package: Package, title: str, message: str):
-	system_user = User.query.filter_by(username="ContentDB").first()
-	assert system_user
+	system_user = get_system_user()
 
 	thread = package.threads.filter_by(author=system_user).first()
 	if not thread:

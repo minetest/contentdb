@@ -13,8 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
+import json
 import os, shutil, gitdb
 from zipfile import ZipFile
 from git import GitCommandError
@@ -23,9 +22,11 @@ from kombu import uuid
 
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog
+from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog, get_system_user
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
+from ..logic.LogicError import LogicError
+from ..logic.packages import do_edit_package
 
 
 @celery.task()
@@ -90,12 +91,20 @@ def postReleaseCheckUpdate(self, release, path):
 			db.session.add(Dependency(package, meta=meta, optional=True))
 
 		# Update min/max
-
 		if tree.meta.get("min_minetest_version"):
 			release.min_rel = MinetestRelease.get(tree.meta["min_minetest_version"], None)
 
 		if tree.meta.get("max_minetest_version"):
 			release.max_rel = MinetestRelease.get(tree.meta["max_minetest_version"], None)
+
+		try:
+			with open(os.path.join(tree.baseDir, ".cdb.json"), "r") as f:
+				data = json.loads(f.read())
+				do_edit_package(package.author, package, False, data, "Post release hook")
+		except LogicError as e:
+			raise TaskError(e.message)
+		except IOError:
+			pass
 
 		return tree
 

@@ -20,7 +20,7 @@ from sqlalchemy.sql.expression import func
 
 from app import csrf
 from app.utils.markdown import render_markdown
-from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot, License
+from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page
 from . import bp
@@ -315,6 +315,11 @@ def package_scores():
 @bp.route("/api/tags/")
 def tags():
 	return jsonify([tag.getAsDictionary() for tag in Tag.query.all() ])
+
+
+@bp.route("/api/content_warnings/")
+def content_warnings():
+	return jsonify([warning.getAsDictionary() for warning in ContentWarning.query.all() ])
 
 
 @bp.route("/api/licenses/")

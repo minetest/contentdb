@@ -727,6 +727,10 @@ class ContentWarning(db.Model):
 		regex = re.compile("[^a-z_]")
 		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
 
+	def getAsDictionary(self):
+		description = self.description if self.description != "" else None
+		return { "name": self.name, "title": self.title, "description": description }
+
 
 class Tag(db.Model):
 	id              = db.Column(db.Integer, primary_key=True)

@@ -15,11 +15,12 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import re, validators
+import re
+import validators
 
 from app.logic.LogicError import LogicError
-from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, NotificationType, AuditSeverity, License
-from app.utils import addNotification, addAuditLog
+from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, License
+from app.utils import addAuditLog
 
 
 def check(cond: bool, msg: str):
@@ -151,9 +152,6 @@ def do_edit_package(user: User, package: Package, was_new: bool, data: dict, rea
 			msg = "Edited {}".format(package.title)
 		else:
 			msg = "Edited {} ({})".format(package.title, reason)
-
-		addNotification(package.maintainers, user, NotificationType.PACKAGE_EDIT,
-				msg, package.getDetailsURL(), package)
 
 		severity = AuditSeverity.NORMAL if user in package.maintainers else AuditSeverity.EDITOR
 		addAuditLog(severity, user, msg, package.getDetailsURL(), package)
