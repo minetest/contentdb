@@ -54,7 +54,7 @@ It should be a JSON dictionary with one or more of the following optional keys:
 * `content_warnings`: List of content warning names, see [/api/content_warnings/](/api/content_warnings/).
 * `license`: A license name, see [/api/licenses/](/api/licenses/).
 * `media_license`: A license name.          
-* `description`: Long markdown description.
+* `long_description`: Long markdown description.
 * `repo`: Git repo URL.
 * `website`: Website URL.
 * `issue_tracker`: Issue tracker URL.
