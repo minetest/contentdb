@@ -40,6 +40,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/` (Read)
 * PUT `/api/packages/<author>/<name>/` (Update)
+    * Requires authentication.
     * JSON dictionary with any of these keys (all are optional, null to delete Nullables):
         * `type`: One of `GAME`, `MOD`, `TXP`.
         * `title`: Human-readable title.

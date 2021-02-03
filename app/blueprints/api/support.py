@@ -44,7 +44,7 @@ def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: s
 
 	reason += ", token=" + token.name
 
-	rel = guard(do_create_vcs_release)(token.owner, package, title, ref, None, None, reason)
+	rel = guard(do_create_vcs_release)(token.owner, package, title, ref, min_v, max_v, reason)
 
 	return jsonify({
 		"success": True,
@@ -53,13 +53,14 @@ def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: s
 	})
 
 
-def api_create_zip_release(token: APIToken, package: Package, title: str, file, reason="API"):
+def api_create_zip_release(token: APIToken, package: Package, title: str, file,
+		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason="API"):
 	if not token.canOperateOnPackage(package):
 		error(403, "API token does not have access to the package")
 
 	reason += ", token=" + token.name
 
-	rel = guard(do_create_zip_release)(token.owner, package, title, file, None, None, reason)
+	rel = guard(do_create_zip_release)(token.owner, package, title, file, min_v, max_v, reason)
 
 	return jsonify({
 		"success": True,
