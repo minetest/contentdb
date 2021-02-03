@@ -47,7 +47,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `name`: Technical name (needs permission if already approved).
         * `short_description`
         * `tags`: List of tag names, see [misc](#misc).
-        * `content_Warnings`: List of content warning names, see [misc](#misc).
+        * `content_warnings`: List of content warning names, see [misc](#misc).
         * `license`: A license name.
         * `media_license`: A license name.          
         * `long_description`: Long markdown description.
