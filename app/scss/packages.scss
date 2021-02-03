@@ -1,24 +1,30 @@
-.screenshot_list, .screenshot_list li, .screenshot_list li a {
+.screenshot_list {
 	list-style: none;
-	margin: 0;
 	padding: 0;
-}
+	margin: 0 0 2em;
 
-.screenshot_list li {
-	display: inline-block;
-	vertical-align: middle;
-	margin: 5px;
-	padding: 0;
-}
+	li, li a {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
 
-.screenshot_list li a {
-	display: block;
-}
+	li {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 5px;
+		padding: 0;
 
-.screenshot_list img {
-	width: 200px;
-	height: 133px;
-	object-fit: cover;
+		a {
+			display: block;
+		}
+	}
+
+	img {
+		width: 200px;
+		height: 133px;
+		object-fit: cover;
+	}
 }
 
 .screenshot-add {
