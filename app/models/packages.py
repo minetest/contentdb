@@ -407,7 +407,7 @@ class Package(db.Model):
 			"name": self.name,
 			"title": self.title,
 			"short_description": self.short_desc,
-			"desc": self.desc,
+			"long_description": self.desc,
 			"type": self.type.toName(),
 			"created_at": self.created_at.isoformat(),
 

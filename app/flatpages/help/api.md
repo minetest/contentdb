@@ -49,7 +49,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `content_Warnings`: List of content warning names, see [misc](#misc).
         * `license`: A license name.
         * `media_license`: A license name.          
-        * `desc`: Long markdown description.
+        * `long_description`: Long markdown description.
         * `repo`: Git repo URL.
         * `website`: Website URL.
         * `issue_tracker`: Issue tracker URL.
@@ -63,7 +63,7 @@ Examples:
 # Edit packages
 curl -X PUT http://localhost:5123/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
-    -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "WTFPL" }'
+    -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "MIT" }'
     
 # Remove website URL
 curl -X PUT http://localhost:5123/api/packages/username/name/ \

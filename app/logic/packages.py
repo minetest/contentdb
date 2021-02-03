@@ -51,6 +51,7 @@ ALLOWED_FIELDS = {
 	"content_warnings": list,
 	"license": any,
 	"media_license": any,
+	"long_description": str,
 	"desc": str,
 	"repo": str,
 	"website": str,
@@ -58,6 +59,13 @@ ALLOWED_FIELDS = {
 	"issueTracker": str,
 	"forums": int,
 }
+
+ALIASES = {
+	"short_description": "short_desc",
+	"issue_tracker": "issueTracker",
+	"long_description": "desc"
+}
+
 
 def is_int(val):
 	try:
@@ -98,7 +106,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, data: dict, rea
 			not package.checkPerm(user, Permission.CHANGE_NAME):
 		raise LogicError(403, "You do not have permission to change the package name")
 
-	for alias, to in { "short_description": "short_desc", "issue_tracker": "issueTracker" }.items():
+	for alias, to in ALIASES.items():
 		if alias in data:
 			data[to] = data[alias]
 

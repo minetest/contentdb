@@ -34,9 +34,10 @@ There are some situations where the settings are correct, but you want to mark a
 up-to-date - for example, if you don't want to make a release for a particular tag.
 Clicking "Save" on "Update Settings" will mark a package as up-to-date.
 
-## Configuring
+## Configuring Release Creation
 
 See the [Package Configuration and Releases Guide](/help/package_config/) for
 documentation on configuring the release creation.
-You can set the min/max Minetest version from the Git repository, and also
-configure what files are included.
+
+From the Git repository, you can set the min/max Minetest versions, which files are included,
+and update the package meta.

@@ -44,17 +44,17 @@ and for mods only:
 You can include a `.cdb.json` file in the root of your content directory (ie: next to a .conf)
 to update the package meta.
 
-It should be a JSON dictionary with one or more of the following optional keys.
+It should be a JSON dictionary with one or more of the following optional keys:
 
 * `type`: One of `GAME`, `MOD`, `TXP`.
 * `title`: Human-readable title.
 * `name`: Technical name (needs permission if already approved).
 * `short_description`
 * `tags`: List of tag names, see [/api/tags/](/api/tags/).
-* `content_Warnings`: List of content warning names, see [/api/content_warnings/](/api/content_warnings/).
+* `content_warnings`: List of content warning names, see [/api/content_warnings/](/api/content_warnings/).
 * `license`: A license name, see [/api/licenses/](/api/licenses/).
 * `media_license`: A license name.          
-* `desc`: Long markdown description.
+* `description`: Long markdown description.
 * `repo`: Git repo URL.
 * `website`: Website URL.
 * `issue_tracker`: Issue tracker URL.
@@ -68,7 +68,8 @@ Example:
 {
     "title": "Foo bar",
     "tags": ["pvp", "survival"],
-    "license": "WTFPL"
+    "license": "MIT",
+    "website": null
 }
 ```
 
@@ -83,8 +84,9 @@ choose Git as the method when creating a release.
 
 ### Automatic Release Creation
 
-The preferred way is to use [webhooks from GitLab or GitHub](/help/release_webhooks/).
-You can also use the [API](/help/api/) to create releases.
+See [Git Update Detection](/help/update_config/).
+You can also use [GitLab/GitHub webhooks](/help/release_webhooks/) or the [API](/help/api/)
+to create releases.
 
 ### Min and Max Minetest Versions
 
