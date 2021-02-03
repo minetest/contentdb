@@ -33,8 +33,8 @@ from . import bp
 class LoginForm(FlaskForm):
 	username = StringField("Username or email", [InputRequired()])
 	password = PasswordField("Password", [InputRequired(), Length(6, 100)])
-	remember_me = BooleanField("Remember me")
-	submit = SubmitField("Login")
+	remember_me = BooleanField("Remember me", default=True)
+	submit = SubmitField("Sign in")
 
 
 def handle_login(form):
@@ -85,6 +85,9 @@ def login():
 		ret = handle_login(form)
 		if ret:
 			return ret
+
+	if request.method == "GET":
+		form.remember_me.data = True
 
 
 	return render_template("users/login.html", form=form)
