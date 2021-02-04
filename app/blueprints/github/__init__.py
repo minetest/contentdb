@@ -146,4 +146,7 @@ def webhook():
 	# Perform release
 	#
 
+	if package.releases.filter_by(commit_hash=ref).count() > 0:
+		return
+
 	return api_create_vcs_release(actual_token, package, title, ref, reason="Webhook")
