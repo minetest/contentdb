@@ -5,7 +5,26 @@
 {% endblock %}
 
 {% block content %}
-<table class="table">
+<div class="row">
+	<div class="col-md-6">
+		<form method="GET">
+			<label for="q" class="sr-only">{{ _('Search all packages') }}</label>
+			<div class="input-group">
+				<input class="form-control" id="q" name="q" type="text" placeholder="{{ _('Search all packages') }}">
+				<div class="input-group-append">
+					<input class="btn btn-primary" type="submit" value="{{ _('Search') }}">
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-6 text-right">
+		{% if check_global_perm(current_user, "EDIT_TAGS") %}
+			<a class="btn btn-secondary" href="{{ url_for('admin.tag_list') }}">{{ _("Edit Tags") }}</a>
+		{% endif %}
+	</div>
+</div>
+
+<table class="table mt-t">
 	<tr>
 		<th>Package</th>
 		<th></th>
@@ -29,7 +48,10 @@
 			</td>
 			<td class="tags">
 				{% for tag in package.tags %}
-					<span class="badge badge-primary mr-1">{{ tag.title }}</span>
+					<a class="badge badge-primary mr-1"
+							href="{{ url_set_query(_add={ 'tag': tag.name }) }}">
+						{{ tag.title }}
+					</a>
 				{% endfor %}
 				<!-- <a class="badge badge-secondary add-btn px-2" href="#">
 					<i class="fas fa-plus"></i>
