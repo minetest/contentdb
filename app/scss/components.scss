@@ -9,6 +9,7 @@
 	border: 1px solid #444 !important;
 	overflow-x: hidden;
 	overflow-y: auto;
+	max-width: 700px;
 	max-height: 400px;
 
 	li {
@@ -19,6 +20,13 @@
 
 	a {
 		display: block;
+		padding: 0.3em 0.5em !important;
+		margin: 0 !important;
+	}
+
+	a:hover, a:focus, li:focus a {
+		font-weight: normal !important;
+		text-decoration: none;
 		padding: 0.3em 0.5em !important;
 		margin: 0 !important;
 	}

@@ -58,9 +58,9 @@
 {%- endmacro %}
 
 {% macro form_scripts() -%}
-	<link href="/static/libs/jquery-ui.min.css?v=2" rel="stylesheet" type="text/css">
-	<script src="/static/libs/jquery-ui.min.js?v=2"></script>
-	<script src="/static/tagselector.js?v=3"></script>
+	<link href="/static/libs/jquery-ui.min.css" rel="stylesheet" type="text/css">
+	<script src="/static/libs/jquery-ui.min.js"></script>
+	<script src="/static/tagselector.js?v=4"></script>
 {% endmacro %}
 
 {% macro package_lists() -%}
@@ -109,38 +109,6 @@
 		</div>
 		<div class="invalid-remaining invalid-feedback"></div>
 		{{ field(class_='form-control', **kwargs) }}
-		{{ render_errors(field) }}
-	</div>
-{% endmacro %}
-
-{% macro render_mpackage_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
-	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
-		{% if field.type != 'HiddenField' and label_visible %}
-			{% if not label %}{% set label=field.label.text %}{% endif %}
-			<label for="{{ field.id }}">{{ label|safe }}</label>
-		{% endif %}
-		<div class="metapackage_selector bulletselector form-control">
-			<input type="text" placeholder="Comma-seperated values">
-			<div class="clearboth"></div>
-		</div>
-		{{ field(class_='form-control', **kwargs) }}
-		<div class="invalid-remaining invalid-feedback"></div>
-		{{ render_errors(field) }}
-	</div>
-{% endmacro %}
-
-{% macro render_deps_field(field, label=None, label_visible=true, right_url=None, right_label=None) -%}
-	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
-		{% if field.type != 'HiddenField' and label_visible %}
-			{% if not label %}{% set label=field.label.text %}{% endif %}
-			<label for="{{ field.id }}">{{ label|safe }}</label>
-		{% endif %}
-		<div class="deps_selector bulletselector form-control">
-			<input type="text" placeholder="Comma-seperated values">
-			<div class="clearboth"></div>
-		</div>
-		{{ field(class_='form-control', **kwargs) }}
-		<div class="invalid-remaining invalid-feedback"></div>
 		{{ render_errors(field) }}
 	</div>
 {% endmacro %}
