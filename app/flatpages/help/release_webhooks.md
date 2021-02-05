@@ -20,6 +20,11 @@ The process is as follows:
 3. The git host posts a webhook notification to ContentDB, using the API token assigned to it.
 4. ContentDB checks the API token and issues a new release.
 
+<p class="alert alert-warning">
+    "New commit" or "push" based webhooks are currently broken as they don't check the branch name.
+    This means that releases will be created for pushes to non-default branches.
+</p>
+
 ## Setting up
 
 ### GitHub
@@ -49,9 +54,10 @@ The process is as follows:
       choose "Tag push events".
 8. Add webhook.
 
-## Configuring
+## Configuring Release Creation
 
 See the [Package Configuration and Releases Guide](/help/package_config/) for
 documentation on configuring the release creation.
-You can set the min/max Minetest version from the Git repository, and also
-configure what files are included.
+
+From the Git repository, you can set the min/max Minetest versions, which files are included,
+and update the package meta.

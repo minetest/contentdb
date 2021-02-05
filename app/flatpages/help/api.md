@@ -46,10 +46,10 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `title`: Human-readable title.
         * `name`: Technical name (needs permission if already approved).
         * `short_description`
-        * `tags`: List of tag names, see [misc](#misc).
-        * `content_warnings`: List of content warning names, see [misc](#misc).
-        * `license`: A license name.
-        * `media_license`: A license name.          
+        * `tags`: List of [tag](#tags) names.
+        * `content_warnings`: List of [content warning](#content-warnings) names.
+        * `license`: A [license](#licenses) name.
+        * `media_license`: A [license](#licenses) name.   
         * `long_description`: Long markdown description.
         * `repo`: Git repo URL.
         * `website`: Website URL.
@@ -187,7 +187,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
 
 ## Topics
 
-* GET `/api/topics/`:  Supports [Package Queries](#package-queries), and the following two options:
+* GET `/api/topics/` ([View](/api/topics/)):  Supports [Package Queries](#package-queries), and the following two options:
     * `show_added`:  Show topics which exist as packages, default true.
     * `show_discarded`:  Show topics which have been marked as outdated, default false.
 
@@ -206,19 +206,49 @@ Supported query parameters:
 * `show_discarded`:  Show topics marked as discarded.
 * `limit`:  Return at most `limit` topics.
 
+## Types
 
-## Misc
+### Tags
 
-* GET `/api/scores/`
-    * See [Package Queries](#package-queries)
-* GET `/api/tags/`:  List of:
+* GET `/api/tags/` ([View](/api/tags/)):  List of:
     * `name`:  technical name
     * `title`:  human-readable title
     * `description`:  tag description or null
-* GET `/api/licenses/`:  List of:
+    
+### Content Warnings
+
+* GET `/api/content_warnings/` ([View](/api/content_warnings/)):  List of:
+    * `name`:  technical name
+    * `title`:  human-readable title
+    * `description`:  tag description or null
+
+### Licenses
+
+* GET `/api/licenses/` ([View](/api/licenses/)):  List of:
     * `name`
     * `is_foss`: whether the license is foss
-* GET `/api/homepage/`
+
+### Minetest Versions
+
+* GET `/api/minetest_versions/` ([View](/api/minetest_versions/))
+    * `name`: Version name.
+    * `is_dev`: boolean, is dev version.
+    * `protocol_version`: protocol version umber.
+
+
+## Misc
+
+* GET `/api/scores/` ([View](/api/scores/))
+    * See [Top Packages Algorithm](/help/top_packages/).
+    * Supports [Package Queries](#package-queries).
+    * Returns list of:
+        * `author`: package author name.
+        * `name`: package technical name.
+        * `downloads`: number of downloads.
+        * `score`: total package score.
+        * `score_reviews`: score from reviews.
+        * `score_downloads`: score from downloads.
+* GET `/api/homepage/` ([View](/api/homepage/)) - get contents of homepage.
     * `count`:  number of packages
     * `downloads`:  get number of downloads
     * `new`:  new packages
@@ -227,4 +257,3 @@ Supported query parameters:
     * `pop_txp`:  popular textures
     * `pop_game`:  popular games
     * `high_reviewed`:  highest reviewed
-* GET `/api/minetest_versions/`

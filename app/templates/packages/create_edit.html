@@ -29,6 +29,14 @@
 		{{ _("Have you read the Package Inclusion Policy and Guidance yet?") }}
 	</div>
 
+	{% if package %}
+		<div class="alert alert-secondary">
+			<a class="float-right btn btn-sm btn-default" href="/help/package_config/#cdbjson">{{ _("Read more") }}</a>
+
+			{{ _("You can include a .cdb.json file in your %(type)s to update these details automatically.", type=package.type.value.lower()) }}
+		</div>
+	{% endif %}
+
 	{% if package and package.checkPerm(current_user, "REIMPORT_META") and package.releases.first() %}
 		<form class="alert alert-secondary mb-5" method="post" action="{{ package.getUpdateFromReleaseURL() }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

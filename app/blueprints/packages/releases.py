@@ -280,6 +280,9 @@ def update_config(package):
 			form.trigger.data = PackageUpdateTrigger.COMMIT
 			form.action.data = "notification"
 
+		if "trigger" in request.args:
+			form.trigger.data = PackageUpdateTrigger.get(request.args["trigger"])
+
 	if form.validate_on_submit():
 		if form.disable.data:
 			flash("Deleted update configuration", "success")

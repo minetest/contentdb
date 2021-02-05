@@ -5,6 +5,9 @@
 {% endblock %}
 
 {% block content %}
+	<a class="btn btn-secondary float-right" href="{{ package.getDetailsURL() }}">
+		{{ _("Later") }}
+	</a>
 	<h1>{{ self.title() }}</h1>
 
 	<p>
@@ -22,12 +25,35 @@
 			{{ _("This can be changed later.") }}
 		</p>
 
-		<p class="mt-5">
-			<a class="btn btn-primary" href="{{ package.getUpdateConfigURL() }}">Automatically</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.getUpdateConfigURL(action="notification") }}">Manually, enable reminders</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.getCreateReleaseURL() }}">Manually, no reminders</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.getDetailsURL() }}">Later</a>
-		</p>
+
+		<div class="row">
+			<div class="col-md-6 mt-5">
+				<h3 class="mt-0">{{ _("Automatically (Recommended)") }}</h3>
+				<p>
+					<a class="btn btn-primary" href="{{ package.getUpdateConfigURL(trigger="commit") }}">
+						{{ _("Rolling Release") }}
+					</a>
+					<a class="btn btn-primary ml-2" href="{{ package.getUpdateConfigURL(trigger="tag") }}">
+						{{ _("On Git Tag") }}
+					</a>
+{#					<a class="btn btn-secondary ml-2" href="{{ package.getUpdateConfigURL() }}">#}
+{#						{{ _("Advanced") }}#}
+{#					</a>#}
+				</p>
+			</div>
+
+			<div class="col-md-6 mt-5">
+				<h3 class="mt-0">{{ _("Manually") }}</h3>
+				<p>
+					<a class="btn btn-secondary" href="{{ package.getUpdateConfigURL(action="notification") }}">
+						{{ _("With reminders") }}
+					</a>
+					<a class="btn btn-secondary ml-2" href="{{ package.getCreateReleaseURL() }}">
+						{{ _("No reminders") }}
+					</a>
+				</p>
+			</div>
+		</div>
 	{% else %}
 		<p>
 			{{ _("Using Git would allow you to create releases automatically when you push code or tags.") }}
