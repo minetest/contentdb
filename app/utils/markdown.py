@@ -1,3 +1,5 @@
+import base64
+import hmac
 from functools import partial
 
 import bleach
@@ -58,14 +60,25 @@ md = None
 
 
 def render_markdown(source):
+	# Parse markdown
 	html = md.convert(source)
 
+	# Proxify images
+	soup = BeautifulSoup(html, "html.parser")
+	for img in soup.find_all("img"):
+		mac = base64.b64encode(hmac.new("123".encode("utf-8"), img["src"].encode("utf-8"), 'sha1').digest())
+		img["src"] = "http://localhost:5126/,{}{}".format(mac.decode("utf-8"), img["src"])
+	html = str(soup)
+
+	# Clean and linkify
 	cleaner = Cleaner(
 			tags=ALLOWED_TAGS,
 			attributes=ALLOWED_ATTRIBUTES,
 			protocols=ALLOWED_PROTOCOLS,
 			filters=[partial(LinkifyFilter, callbacks=bleach.linkifier.DEFAULT_CALLBACKS)])
-	return cleaner.clean(html)
+	html = cleaner.clean(html)
+
+	return html
 
 
 def init_app(app):

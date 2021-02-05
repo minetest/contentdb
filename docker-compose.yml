@@ -69,3 +69,11 @@ services:
       - 5125:9540
     depends_on:
       - redis
+
+#  imageproxy:
+#    image: willnorris/imageproxy
+#    entrypoint: ["/app/imageproxy", "-addr", "0.0.0.0:5126", "-signatureKey", "${IMAGEPROXY_KEY}"]
+#    env_file:
+#      - config.env
+#    ports:
+#      - 5126:5126
