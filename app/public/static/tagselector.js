@@ -2,9 +2,17 @@
  * Tag Selector plugin for jQuery: Facilitates selecting multiple tags by extending jQuery UI Autocomplete.
  * You may use Tag Selector under the terms of either the MIT License or the GNU General Public License (GPL) Version 2.
  * https://petprojects.googlecode.com/svn/trunk/MIT-LICENSE.txt
- * https://petprojects.googlecode.com/svn/trunk/GPL-LICENSE.txt
  */
 (function($) {
+	function make_bold(text) {
+		const idx = text.indexOf(":");
+		if (idx > 0) {
+			return `<b>${text.substring(0, idx)}</b><span class="text-muted">: ${text.substring(idx + 1)}`;
+		} else {
+			return `<b>${text}</b>`;
+		}
+	}
+
 	function hide_error(input) {
 		const err = input.parent().parent().find(".invalid-remaining");
 		err.hide();
@@ -86,7 +94,7 @@
 			input.data('ui-autocomplete')._renderItem = function(ul, item) {
 					return $('<li/>')
 						.data('item.autocomplete', item)
-						.append($('<a/>').text(item.toString()))
+						.append($('<a/>').html(item.toString()))
 						.appendTo(ul);
 				};
 
@@ -249,7 +257,7 @@
 					id: $(this).attr("value"),
 					value: text,
 					selected: !!$(this).attr("selected"),
-					toString: function() { return text; },
+					toString: function() { return make_bold(text); },
 				});
 			});
 

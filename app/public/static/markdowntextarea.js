@@ -17,6 +17,7 @@ $("textarea.markdown").each(function() {
 	new EasyMDE({
 		element: this,
 		hideIcons: ["image"],
+		showIcons: ["code", "table"],
 		forceSync: true,
 		previewRender: (plainText, preview) => {
 			if (timeout_id) {

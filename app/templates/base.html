@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
-
 <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
-	<link rel="stylesheet" type="text/css" href="/static/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/static/libs/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=22">
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
 	<link rel="shortcut icon" href="/favicon-16.png" sizes="16x16">
@@ -14,7 +13,6 @@
 	<link rel="icon" href="/favicon-32.png" sizes="32x32">
 	{% block headextra %}{% endblock %}
 </head>
-
 <body>
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container">
@@ -193,11 +191,10 @@
 		{% endif %}
 	</footer>
 
-	<script src="/static/jquery.min.js"></script>
-	<script src="/static/popper.min.js"></script>
-	<script src="/static/bootstrap.min.js"></script>
-	<script src="/static/easymde.min.js"></script>
-	<link rel="stylesheet" type="text/css" href="/static/easymde.min.css">
+	<script src="/static/libs/jquery.min.js"></script>
+	<script src="/static/libs/bootstrap.min.js"></script>
+	<script src="/static/libs/easymde.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/libs/easymde.min.css">
 	<link href="/static/fa/css/all.css" rel="stylesheet">
 	<script src="/static/markdowntextarea.js"></script>
 
