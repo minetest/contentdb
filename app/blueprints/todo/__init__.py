@@ -117,9 +117,14 @@ def tags():
 	qb.setSortIfNone("score", "desc")
 	query = qb.buildPackageQuery()
 
+	only_no_tags = isYes(request.args.get("no_tags"))
+	if only_no_tags:
+		query = query.filter(Package.tags==None)
+
 	tags = Tag.query.order_by(db.asc(Tag.title)).all()
 
-	return render_template("todo/tags.html", current_tab="tags", packages=query.all(), tags=tags)
+	return render_template("todo/tags.html", current_tab="tags", packages=query.all(), \
+			tags=tags, only_no_tags=only_no_tags)
 
 
 @bp.route("/user/tags/")
