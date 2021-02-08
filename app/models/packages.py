@@ -325,8 +325,8 @@ class Package(db.Model):
 	reviews = db.relationship("PackageReview", back_populates="package", order_by=db.desc("package_review_created_at"),
 			cascade="all, delete, delete-orphan")
 
-	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.package_id", back_populates="package",
-			order_by=db.desc("audit_log_entry_created_at"))
+	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.package_id",
+			lazy="dynamic", back_populates="package", order_by=db.desc("audit_log_entry_created_at"))
 
 	notifications = db.relationship("Notification", foreign_keys="Notification.package_id",
 			back_populates="package", cascade="all, delete, delete-orphan")
@@ -528,6 +528,10 @@ class Package(db.Model):
 
 	def getReviewURL(self):
 		return url_for('packages.review',
+				author=self.author.username, name=self.name)
+
+	def getAuditLogURL(self):
+		return url_for('packages.audit',
 				author=self.author.username, name=self.name)
 
 	def getDownloadRelease(self, version=None):

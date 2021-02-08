@@ -527,3 +527,19 @@ def update_from_release(package):
 	checkZipRelease.apply_async((release.id, zippath), task_id=task_id)
 
 	return redirect(url_for("tasks.check", id=task_id, r=package.getEditURL()))
+
+
+@bp.route("/packages/<author>/<name>/audit/")
+@login_required
+@is_package_page
+def audit(package):
+	if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
+		abort(403)
+
+	page = get_int_or_abort(request.args.get("page"), 1)
+	num = min(40, get_int_or_abort(request.args.get("n"), 100))
+
+	query = package.audit_log_entries.order_by(db.desc(AuditLogEntry.created_at))
+
+	pagination = query.paginate(page, num, True)
+	return render_template("admin/audit.html", log=pagination.items, pagination=pagination)

@@ -59,6 +59,7 @@ def url_set_query(**kwargs):
 
 
 	dargs = dict(args.lists())
+	dargs.update(request.view_args)
 
 	return url_for(request.endpoint, **dargs)
 

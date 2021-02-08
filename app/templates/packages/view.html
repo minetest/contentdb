@@ -322,7 +322,7 @@
 											href="{{ url_for('metapackages.view', name=dep.meta_package.name) }}">
 										{{ dep.meta_package.name }}
 								{% else %}
-									{{ "Excepted package or meta_package in dep!" | throw }}
+									{{ "Expected package or meta_package in dep!" | throw }}
 								{% endif %}</a>
 							{% endfor %}
 						{% endif %}
@@ -410,12 +410,17 @@
 				</ul>
 			</div>
 
-			{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") and current_user != package.author and not current_user.rank.atLeast(current_user.rank.EDITOR) %}
+			{% if package.approved and current_user != package.author %}
 				<a class="float-right"
 					href="{{ url_for('threads.new', pid=package.id) }}">
 						Report a problem with this listing
 				</a>
 			{% endif %}
+			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+				<a class="float-right" href="{{ package.getAuditLogURL() }}">
+					See audit log
+				</a>
+			{%  endif %}
 		</aside>
 
 		{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
