@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from urllib.parse import urljoin
+from urllib.parse import urljoin, urlparse
 
 import user_agents
 from flask import request, abort
