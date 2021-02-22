@@ -6,4 +6,4 @@
 #   docker-compose directly:  docker-compose up --build
 #
 
-sudo docker-compose up --build -d --scale worker=2
+docker-compose up --build -d --scale worker=2

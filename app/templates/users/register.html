@@ -7,13 +7,13 @@ Register
 {% block content %}
 {% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
 
-<div class="card">
+<div class="card w-50 text-left" style="margin: 2em auto;">
 	<h2 class="card-header">{{ _("Register") }}</h2>
 
 	<form action="" method="POST" class="form card-body" role="form">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.username) }}
+		{{ render_field(form.username, pattern="[a-zA-Z0-9._ -]+", title="Only a-zA-Z0-9._ allowed") }}
 		{{ render_field(form.email) }}
 		{{ render_field(form.password) }}
 

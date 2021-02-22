@@ -5,22 +5,22 @@ Create Account from Forums User
 {% endblock %}
 
 {% block content %}
-	<h1>{{ self.title() }}</h1>
+<h1>{{ self.title() }}</h1>
 
-	<h2>{{ _("Confirm Your Account") }}</h2>
+<h2>{{ _("Confirm Your Account") }}</h2>
 
-	<p>
-		You'll need to use prove that you have access to your forum account using one of the options below.<br>
-		This is so ContentDB can link your account to your forum account.
-	</p>
+<p>
+	You'll need to use prove that you have access to your forum account using one of the options below.<br>
+	This is so ContentDB can link your account to your forum account.
+</p>
 
-	<p>
-		Don't have a forums account?
-		You can still <a href="{{ url_for('users.register') }}">sign up without one</a>.
-	</p>
+<p>
+	Don't have a forums account?
+	You can still <a href="{{ url_for('users.register') }}">sign up without one</a>.
+</p>
 
-	<div class="row mt-5">
-		<div class="col-sm-6">
+<div class="row mt-5">
+	<div class="col-sm-6">
 		<div class="card">
 			<div class="card-header">
 				<span class="badge badge-pill badge-dark mr-2">Option 1</span>
@@ -48,9 +48,9 @@ Create Account from Forums User
 				<input class="btn btn-primary" type="submit" value="Next: log in with GitHub">
 			</form>
 		</div>
-		</div>
+	</div>
 
-		<div class="col-sm-6">
+	<div class="col-sm-6">
 		<div class="card">
 			<div class="card-header">
 				<span class="badge badge-pill badge-dark mr-2">Option 2</span>
@@ -91,23 +91,6 @@ Create Account from Forums User
 				<input class="btn btn-primary" type="submit" value="Next">
 			</form>
 		</div>
-		</div>
-
-{#		<div class="col-sm-4">#}
-{#			<div class="card">#}
-{#				<div class="card-header">#}
-{#					Email/password sign up#}
-{#				</div>#}
-{##}
-{#				<div class="card-body">#}
-{#					<p>#}
-{#						If you have a forum account, please use one of the other two#}
-{#						options.#}
-{#					</p>#}
-{##}
-{#					<a class="btn btn-primary" href="{{ url_for('users.register') }}">Register</a>#}
-{#				</div>#}
-{#			</div>#}
-{#		</div>#}
 	</div>
+</div>
 {% endblock %}
