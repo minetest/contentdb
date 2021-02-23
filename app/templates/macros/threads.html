@@ -16,6 +16,12 @@
 						{{ r.author.display_name }}
 					</a>
 
+					{% if r.author.username != r.author.display_name %}
+						<span class="text-muted small mr-2">
+							({{ r.author.username }})
+						</span>
+					{% endif %}
+
 					{% if r.author in thread.package.maintainers %}
 						<span class="badge badge-dark">
 							{{ _("Maintainer") }}
@@ -33,7 +39,7 @@
 					</a>
 				</div>
 
-				<div class="card-body">
+				<div class="card-body markdown">
 					{% if r.checkPerm(current_user, "DELETE_REPLY") %}
 						<a class="float-right btn btn-secondary btn-sm ml-2"
 								href="{{ url_for('threads.delete_reply', id=thread.id, reply=r.id) }}">

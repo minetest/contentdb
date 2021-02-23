@@ -450,7 +450,9 @@
 			{% endfor %}
 		</ul>
 
-		{{ package.desc | markdown }}
+		<article class="markdown">
+			{{ package.desc | markdown }}
+		</article>
 
 		<div style="clear: both;"></div>
 

@@ -9,7 +9,7 @@
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
 		<h3 class="card-header">Delete reply by {{ reply.author.display_name }}</h3>
-		<div class="card-body">
+		<div class="card-body markdown">
 			{{ reply.comment | markdown }}
 		</div>
 		<div class="card-body">
