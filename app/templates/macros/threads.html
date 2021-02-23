@@ -77,9 +77,10 @@
 {% if current_user.is_authenticated %}
 <div class="row mt-0 mb-4 comments mx-0">
 	<div class="col-md-1 p-1">
-		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ current_user.getProfilePicURL() }}">
+		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+			 src="{{ current_user.getProfilePicURL() }}">
 	</div>
-	<div class="col">
+	<div class="col pr-0">
 		<div class="card">
 			<div class="card-header {{ current_user.rank.name }}">
 				{{ current_user.display_name }}
