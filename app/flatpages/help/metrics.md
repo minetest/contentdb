@@ -6,7 +6,14 @@ title: Prometheus Metrics
 dimensional data model, flexible query language, efficient time series database
 and modern alerting approach".
 
-Prometheus Metrics can be accessed at [/metrics](/metrics).
+Prometheus Metrics can be accessed at [/metrics](/metrics), or you can view them
+on the Grafana instance below.
+
+<p>
+    <a class="btn btn-primary" href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb">
+        View ContentDB on Grafana
+    </a>
+</p>
 
 ## Metrics
 
