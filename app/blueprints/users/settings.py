@@ -50,7 +50,7 @@ def handle_profile_edit(form, user, username):
 
 	if user.checkPerm(current_user, Permission.CHANGE_DISPLAY_NAME) and \
 			user.display_name != form.display_name.data:
-		if User.query.filter(id != user.id,
+		if User.query.filter(User.id != user.id,
 				or_(User.username == form.display_name.data,
 						User.display_name.ilike(form.display_name.data))).count() > 0:
 			flash("A user already has that name", "danger")
