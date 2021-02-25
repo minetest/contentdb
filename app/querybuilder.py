@@ -207,7 +207,8 @@ class QueryBuilder:
 			query = query.order_by(db.asc(ForumTopic.created_at))
 
 		if self.search:
-			query = query.filter(ForumTopic.title.ilike('%' + self.search + '%'))
+			query = query.filter(or_(ForumTopic.title.ilike('%' + self.search + '%'),
+					ForumTopic.name == self.search.lower()))
 
 		if len(self.types) > 0:
 			query = query.filter(ForumTopic.type.in_(self.types))
