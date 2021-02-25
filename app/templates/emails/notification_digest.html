@@ -11,7 +11,7 @@
 		{% for notification in group %}
 			<li>
 				<a href="{{ notification.url | abs_url }}">{{ notification.title }}</a> -
-				{{ _("from %(username)s.", username=notification.causer.display_name) }}
+				{{ _("from %(username)s.", username=notification.causer.username) }}
 			</li>
 		{% endfor %}
 	</ul>

@@ -49,6 +49,11 @@
 
 				<span class="col-sm {{ user.rank }}">
 					{{ user.display_name }}
+					{% if user.username != user.display_name %}
+						<span class="text-muted small ml-2">
+							({{ user.username }})
+						</span>
+					{% endif %}
 				</span>
 
 				<div class="col-sm-1 text-center">

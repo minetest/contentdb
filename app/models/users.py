@@ -88,6 +88,7 @@ class Permission(enum.Enum):
 	CREATE_TOKEN       = "CREATE_TOKEN"
 	EDIT_MAINTAINERS   = "EDIT_MAINTAINERS"
 	CHANGE_PROFILE_URLS = "CHANGE_PROFILE_URLS"
+	CHANGE_DISPLAY_NAME = "CHANGE_DISPLAY_NAME"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts
@@ -216,6 +217,8 @@ class User(db.Model, UserMixin):
 			return user.rank.atLeast(UserRank.MODERATOR)
 		elif perm == Permission.CHANGE_EMAIL or perm == Permission.CHANGE_PROFILE_URLS:
 			return user == self or user.rank.atLeast(UserRank.ADMIN)
+		elif perm == Permission.CHANGE_DISPLAY_NAME:
+			return user.rank.atLeast(UserRank.MEMBER if user == self else UserRank.MODERATOR)
 		elif perm == Permission.CREATE_TOKEN:
 			if user == self:
 				return user.rank.atLeast(UserRank.MEMBER)

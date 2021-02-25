@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-	{{ _('Delete "%(title)s" by %(author)s', title=thread.title, author=thread.author.display_name) }}
+	{{ _('Delete "%(title)s" by %(author)s', title=thread.title, author=thread.author.username) }}
 {% endblock %}
 
 {% block content %}

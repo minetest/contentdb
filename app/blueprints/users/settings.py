@@ -1,6 +1,7 @@
 from flask import *
 from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
+from sqlalchemy import or_
 from wtforms import *
 from wtforms.validators import *
 
@@ -36,9 +37,37 @@ def get_setting_tabs(user):
 
 
 class UserProfileForm(FlaskForm):
+	display_name = StringField("Display Name", [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x)])
 	website_url = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
 	donate_url = StringField("Donation URL", [Optional(), URL()], filters = [lambda x: x or None])
 	submit = SubmitField("Save")
+
+
+def handle_profile_edit(form, user, username):
+	severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
+	addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
+			url_for("users.profile", username=username))
+
+	if user.checkPerm(current_user, Permission.CHANGE_DISPLAY_NAME) and \
+			user.display_name != form.display_name.data:
+		if User.query.filter(id != user.id,
+				or_(User.username == form.display_name.data,
+						User.display_name.ilike(form.display_name.data))).count() > 0:
+			flash("A user already has that name", "danger")
+			return None
+
+		user.display_name = form.display_name.data
+		addAuditLog(severity, current_user, "Changed display name of {} to {}"
+			.format(user.username, user.display_name),
+				url_for("users.profile", username=username))
+
+	if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
+		user.website_url = form["website_url"].data
+		user.donate_url = form["donate_url"].data
+
+	db.session.commit()
+
+	return redirect(url_for("users.profile", username=username))
 
 
 @bp.route("/users/<username>/settings/profile/", methods=["GET", "POST"])
@@ -54,17 +83,9 @@ def profile_edit(username):
 
 	form = UserProfileForm(obj=user)
 	if form.validate_on_submit():
-		severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
-		addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
-				url_for("users.profile", username=username))
-
-		if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
-			user.website_url  = form["website_url"].data
-			user.donate_url   = form["donate_url"].data
-
-		db.session.commit()
-
-		return redirect(url_for("users.profile", username=username))
+		ret = handle_profile_edit(form, user, username)
+		if ret:
+			return ret
 
 	# Process GET or invalid POST
 	return render_template("users/profile_edit.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="edit_profile")

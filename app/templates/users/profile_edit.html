@@ -48,6 +48,10 @@
 <form action="" method="POST" class="form" role="form">
 	{{ form.hidden_tag() }}
 
+	{% if user.checkPerm(current_user, "CHANGE_DISPLAY_NAME") %}
+		{{ render_field(form.display_name, tabindex=230, hint=_("Pretending to be another user is grounds for a permanent ban")) }}
+	{% endif %}
+
 	{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}
 		{{ render_field(form.website_url, tabindex=232) }}
 		{{ render_field(form.donate_url, tabindex=233) }}

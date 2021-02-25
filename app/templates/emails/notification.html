@@ -5,14 +5,12 @@
 	{{ notification.title }}
 </h2>
 
-
-
 <p>
 	{% if notification.package %}
 		{{ _("From %(username)s and on package %(package)s.",
-				username=notification.causer.display_name, package=notification.package.title) }}
+				username=notification.causer.username, package=notification.package.title) }}
 	{% else %}
-		{{ _("From %(username)s.", username=notification.causer.display_name) }}
+		{{ _("From %(username)s.", username=notification.causer.username) }}
 	{% endif %}
 </p>
 

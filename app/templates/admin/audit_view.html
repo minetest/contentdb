@@ -13,11 +13,11 @@
 
 	{% if entry.causer %}
 		<p class="text-muted mb-4">
-			{{ _("Caused by %(author)s.", author=entry.causer.display_name) }}
+			{{ _("Caused by %(author)s.", author=entry.causer.username) }}
 		</p>
 	{%  else %}
 		<p class="text-muted mb-4">
-			{{ _("Caused by a deleted user.", author=entry.causer.display_name) }}
+			{{ _("Caused by a deleted user.") }}
 		</p>
 	{%  endif %}
 
