@@ -57,6 +57,8 @@ def handle_profile_edit(form, user, username):
 			return None
 
 		user.display_name = form.display_name.data
+
+		severity = AuditSeverity.USER if current_user == user else AuditSeverity.MODERATION
 		addAuditLog(severity, current_user, "Changed display name of {} to {}"
 			.format(user.username, user.display_name),
 				url_for("users.profile", username=username))
