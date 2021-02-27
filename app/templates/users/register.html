@@ -13,22 +13,32 @@ Register
 	<form action="" method="POST" class="form card-body" role="form">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.username, pattern="[a-zA-Z0-9._ -]+", title="Only a-zA-Z0-9._ allowed") }}
-		{{ render_field(form.email) }}
-		{{ render_field(form.password) }}
+		{{ render_field(form.username, pattern="[a-zA-Z0-9._ -]+", title=_("Only a-zA-Z0-9._ allowed"),
+				hint=_("Only alphanumeric characters, periods, underscores, and minuses are allowed (a-zA-Z0-9._)")) }}
 
-		<p>
-			Must be at least 8 characters long.
-		</p>
+		{{ render_field(form.display_name,
+			hint=_("Human readable name, defaults to username if not specified. This can be changed later."),
+			placeholder=_("Same as username")) }}
+
+		{{ render_field(form.email,
+				hint=_("Your email is needed to recover your account if you forget your password and to send (configurable) notifications. ") +
+					_("Your email will never be shared with a third-party.")) }}
+
+		{{ render_field(form.password, hint=_("Must be at least 8 characters long.")) }}
+
 		<p>
 			Password suggestion
 			(<a href="https://xkcd.com/936/">Why?</a>):
 			<code>{{ suggested_password }}</code>
 		</p>
 
-		<p>
-			Please read the <a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a>.
-		</p>
+		{% set label %}
+			{{ _("I agree to the ") }}
+			<a href="{{ url_for('flatpage', path='privacy_policy') }} ">
+				{{ _("Privacy Policy") }}
+			</a>
+		{% endset %}
+		{{ render_checkbox_field(form.agree, label=label, class_="my-4") }}
 
 		{# Submit button #}
 		<p>

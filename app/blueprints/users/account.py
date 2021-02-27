@@ -100,16 +100,19 @@ def logout():
 
 
 class RegisterForm(FlaskForm):
+	display_name = StringField("Display Name", [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x)])
 	username = StringField("Username", [InputRequired(),
 			Regexp("^[a-zA-Z0-9._ -]+$", message="Only a-zA-Z0-9._ allowed")])
 	email = StringField("Email", [InputRequired(), Email()])
 	password = PasswordField("Password", [InputRequired(), Length(6, 100)])
+	agree = BooleanField("I agree", [Required()])
 	submit = SubmitField("Register")
 
 
 def handle_register(form):
 	user_by_name = User.query.filter(or_(
 			User.username == form.username.data,
+			User.display_name == form.display_name.data,
 			User.forums_username == form.username.data,
 			User.github_username == form.username.data)).first()
 	if user_by_name:
@@ -117,7 +120,7 @@ def handle_register(form):
 			flash("An account already exists for that username but hasn't been claimed yet.", "danger")
 			return redirect(url_for("users.claim_forums", username=user_by_name.forums_username))
 		else:
-			flash("That username is already in use, please choose another.", "danger")
+			flash("That username/display name is already in use, please choose another.", "danger")
 			return
 
 
@@ -134,9 +137,11 @@ def handle_register(form):
 
 	user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
 	user.notification_preferences = UserNotificationPreferences(user)
+	if form.display_name.data:
+		user.display_name = form.display_name.data
 	db.session.add(user)
 
-	addAuditLog(AuditSeverity.USER, user, "Registered with email",
+	addAuditLog(AuditSeverity.USER, user, "Registered with email, display name=" + user.display_name,
 			url_for("users.profile", username=user.username))
 
 	token = randomString(32)
