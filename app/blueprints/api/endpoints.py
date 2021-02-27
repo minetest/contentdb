@@ -175,7 +175,9 @@ def create_release(token, package):
 		if file is None:
 			error(400, "Missing 'file' in multipart body")
 
-		return api_create_zip_release(token, package, data["title"], file)
+		commit_hash = data.get("commit")
+
+		return api_create_zip_release(token, package, data["title"], file, None, None, "API", commit_hash)
 
 	else:
 		error(400, "Unknown release-creation method. Specify the method or provide a file.")

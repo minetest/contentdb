@@ -14,7 +14,16 @@ If there is an error, the response will be JSON similar to the following with a 
 Successful GET requests will return the resource's information directly as a JSON response.
 
 Other successful results will return a dictionary with `success` equaling true, and
-often other keys with information.
+often other keys with information. For example:
+
+```js
+{
+    "success": true,
+    "release": {
+        /* same as returned by a GET */ 
+    }
+}
+```
 
 
 ## Authentication
@@ -117,7 +126,8 @@ Supported query parameters:
         * `method`: must be `git`.
         * `ref`: (Optional) git reference, eg: `master`.
     * For zip upload release creation: 
-        * `file`: multipart file to upload, like `<input type=file>`.
+        * `file`: multipart file to upload, like `<input type="file" name="file">`.
+        * `commit`: (Optional) Source Git commit hash, for informational purposes.
     * You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
 * DELETE `/api/packages/<username>/<name>/releases/<id>/` (Delete)
     * Requires authentication.
@@ -135,6 +145,11 @@ curl -X POST https://content.minetest.net/api/packages/username/name/releases/ne
 curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/file.zip
+
+# Create release from zip upload with commit hash
+curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
+    -H "Authorization: Bearer YOURTOKEN" \
+    -F title="My Release" -F commit="8ef74deec170a8ce789f6055a59d43876d16a7ea" -F file=@path/to/file.zip
 
 # Delete release
 curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/3/ \
@@ -169,7 +184,7 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
 Examples:
 
 ```bash
-# Create screenshots
+# Create screenshot
 curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/screnshot.png

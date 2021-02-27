@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import datetime
+import datetime, re
 
 from celery import uuid
 
@@ -63,8 +63,14 @@ def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
 
 
 def do_create_zip_release(user: User, package: Package, title: str, file,
-		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason: str = None):
+		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason: str = None,
+		commit_hash: str = None):
 	check_can_create_release(user, package)
+
+	if commit_hash:
+		commit_hash = commit_hash.lower()
+		if not (len(commit_hash) == 40 and re.match(r"^[0-9a-f]+$", commit_hash)):
+			raise LogicError(400, "Invalid commit hash; it must be a 40 character long base16 string")
 
 	uploaded_url, uploaded_path = upload_file(file, "zip", "a zip file")
 
@@ -73,6 +79,7 @@ def do_create_zip_release(user: User, package: Package, title: str, file,
 	rel.title   = title
 	rel.url     = uploaded_url
 	rel.task_id = uuid()
+	rel.commit_hash = commit_hash
 	rel.min_rel = min_v
 	rel.max_rel = max_v
 	db.session.add(rel)
