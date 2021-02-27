@@ -112,6 +112,7 @@ class RegisterForm(FlaskForm):
 def handle_register(form):
 	user_by_name = User.query.filter(or_(
 			User.username == form.username.data,
+			User.username == form.display_name.data,
 			User.display_name == form.display_name.data,
 			User.forums_username == form.username.data,
 			User.github_username == form.username.data)).first()
