@@ -50,12 +50,12 @@
 					{% if current_user == thread.author and thread.review and thread.replies[0] == r %}
 						<a class="float-right btn btn-primary btn-sm ml-2"
 								href="{{ thread.review.package.getReviewURL() }}">
-							<i class="fas fa-edit"></i>
+							<i class="fas fa-pen"></i>
 						</a>
 					{% elif r.checkPerm(current_user, "EDIT_REPLY") %}
 						<a class="float-right btn btn-primary btn-sm ml-2"
 								href="{{ url_for('threads.edit_reply', id=thread.id, reply=r.id) }}">
-							<i class="fas fa-edit"></i>
+							<i class="fas fa-pen"></i>
 						</a>
 					{% endif %}
 

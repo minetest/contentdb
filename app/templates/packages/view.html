@@ -37,7 +37,7 @@
 			<div class="btn-group float-right mb-4">
 				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
 					<a class="btn btn-primary" href="{{ package.getEditURL() }}">
-						<i class="fas fa-edit mr-1"></i>
+						<i class="fas fa-pen mr-1"></i>
 						{{ _("Edit") }}
 					</a>
 				{% endif %}
@@ -407,7 +407,7 @@
 					<dt>Maintainers</dt>
 					<dd>
 						{% if package.checkPerm(current_user, "EDIT_MAINTAINERS") %}
-							<a class="btn btn-primary btn-sm ml-1 float-right" href="{{ package.getEditMaintainersURL() }}"><i class="fas fa-edit"></i></a>
+							<a class="btn btn-primary btn-sm ml-1 float-right" href="{{ package.getEditMaintainersURL() }}"><i class="fas fa-pen"></i></a>
 						{% endif %}
 
 						{% for user in package.maintainers %}
