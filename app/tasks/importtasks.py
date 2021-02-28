@@ -26,7 +26,7 @@ from app.utils import randomString, post_bot_message, addSystemNotification, add
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from ..logic.LogicError import LogicError
-from ..logic.packages import do_edit_package
+from ..logic.packages import do_edit_package, ALIASES
 
 
 @celery.task()
@@ -37,17 +37,31 @@ def getMeta(urlstr, author):
 		except MinetestCheckError as err:
 			raise TaskError(str(err))
 
-		result = {"name": tree.name, "provides": tree.getModNames(), "type": tree.type.name}
-
-		for key in ["depends", "optional_depends"]:
-			result[key] = tree.fold("meta", key)
+		result = {"name": tree.name, "type": tree.type.name}
 
 		for key in ["title", "repo", "issueTracker", "forumId", "description", "short_description"]:
 			result[key] = tree.get(key)
 
-		for mod in result["provides"]:
-			result["depends"].discard(mod)
-			result["optional_depends"].discard(mod)
+		result["forums"] = result.get("forumId")
+
+		readme_path = tree.getReadMePath()
+		if readme_path:
+			with open(readme_path, "r") as f:
+				result["long_description"] = f.read()
+
+		try:
+			with open(os.path.join(tree.baseDir, ".cdb.json"), "r") as f:
+				data = json.loads(f.read())
+				for key, value in data.items():
+					result[key] = value
+		except LogicError as e:
+			raise TaskError(e.message)
+		except IOError:
+			pass
+
+		for alias, to in ALIASES.items():
+			if alias in result:
+				result[to] = result[alias]
 
 		for key, value in result.items():
 			if isinstance(value, set):

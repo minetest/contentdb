@@ -14,7 +14,7 @@ $("textarea.markdown").each(function() {
 
 	let timeout_id = null;
 
-	new EasyMDE({
+	this.easy_mde = new EasyMDE({
 		element: this,
 		hideIcons: ["image"],
 		showIcons: ["code", "table"],

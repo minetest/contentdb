@@ -279,8 +279,6 @@ def create_edit(author=None, name=None):
 			form.license.data = None
 			form.media_license.data = None
 		else:
-			# form.harddep_str.data  = ",".join([str(x) for x in package.getSortedHardDependencies() ])
-			# form.softdep_str.data  = ",".join([str(x) for x in package.getSortedOptionalDependencies() ])
 			form.tags.data         = list(package.tags)
 			form.content_warnings.data = list(package.content_warnings)
 

@@ -63,6 +63,11 @@ class PackageTreeNode:
 		elif self.type == ContentType.MODPACK:
 			self.add_children_from_mod_dir(None)
 
+	def getReadMePath(self):
+		for filename in os.listdir(self.baseDir):
+			path = os.path.join(self.baseDir, filename)
+			if os.path.isfile(path) and filename.lower().startswith("readme."):
+				return path
 
 	def getMetaFileName(self):
 		if self.type == ContentType.GAME:
@@ -75,7 +80,6 @@ class PackageTreeNode:
 			return "texture_pack.conf"
 		else:
 			return None
-
 
 	def read_meta(self):
 		result = {}
@@ -145,7 +149,6 @@ class PackageTreeNode:
 						raise MinetestCheckError(
 								"Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_." \
 									.format(dep, self.relative))
-
 
 		# Check dependencies
 		checkDependencies(result["depends"])

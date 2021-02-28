@@ -25,6 +25,14 @@ $(function() {
 					const ele = $(id);
 					ele.val(value);
 					ele.trigger("change");
+
+					// EasyMDE doesn't always refresh the codemirror correctly
+					if (ele[0].easy_mde) {
+						setTimeout(() => {
+							ele[0].easy_mde.value(value);
+							ele[0].easy_mde.codemirror.refresh()
+						}, 100);
+					}
 				}
 			}
 
@@ -33,12 +41,9 @@ $(function() {
 				setField("#title", result.title);
 				setField("#repo", result.repo || repoURL);
 				setField("#issueTracker", result.issueTracker);
-				setField("#desc", result.description);
-				setField("#short_desc", result.short_description);
-				// setField("#harddep_str", result.depends);
-				// setField("#softdep_str", result.optional_depends);
-				setField("#short_desc", result.short_description);
-				setField("#forums", result.forumId);
+				setField("#desc", result.desc);
+				setField("#short_desc", result.short_desc);
+				setField("#forums", result.forums);
 				if (result.type && result.type.length > 2) {
 					$("#type").val(result.type);
 				}
