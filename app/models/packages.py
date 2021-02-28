@@ -458,7 +458,7 @@ class Package(db.Model):
 					author=self.author.username, name=self.name)
 		else:
 			return url_for("packages.view",
-					author=self.author.username, name=self.name)
+					author=self.author.username, name=self.name, _external=False)
 
 	def getShieldURL(self, type):
 		from app.utils import abs_url_for

@@ -20,7 +20,7 @@ bp = Blueprint("gitlab", __name__)
 
 from app import csrf
 from app.models import Package, APIToken, Permission
-from app.blueprints.api.support import error, api_create_vcs_release
+from app.blueprints.api.support import error, api_create_vcs_release, api_handle_webhook_push
 
 
 def webhook_impl():
@@ -66,7 +66,10 @@ def webhook_impl():
 	if package.releases.filter_by(commit_hash=ref).count() > 0:
 		return
 
-	return api_create_vcs_release(token, package, title, ref, reason="Webhook")
+	if event == "push":
+		return api_handle_webhook_push(token, package, title, ref, json.get("ref"))
+	else:
+		return api_create_vcs_release(token, package, title, ref, reason="Webhook")
 
 
 @bp.route("/gitlab/webhook/", methods=["POST"])

@@ -24,7 +24,7 @@ from sqlalchemy import func, or_, and_
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission, AuditSeverity
 from app.utils import abs_url_for, addAuditLog, login_user_set_active
-from app.blueprints.api.support import error, api_create_vcs_release
+from app.blueprints.api.support import error, api_create_vcs_release, api_handle_webhook_push
 import hmac, requests
 
 @bp.route("/github/start/")
@@ -149,4 +149,7 @@ def webhook():
 	if package.releases.filter_by(commit_hash=ref).count() > 0:
 		return
 
-	return api_create_vcs_release(actual_token, package, title, ref, reason="Webhook")
+	if event == "push":
+		return api_handle_webhook_push(actual_token, package, title, ref, json.get("ref"))
+	else:
+		return api_create_vcs_release(actual_token, package, title, ref, reason="Webhook")

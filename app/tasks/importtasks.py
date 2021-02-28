@@ -22,8 +22,8 @@ from kombu import uuid
 
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog, get_system_user
-from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
+from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog, get_system_user, addAuditLog
+from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir, get_default_branch
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from ..logic.LogicError import LogicError
 from ..logic.packages import do_edit_package, ALIASES
@@ -155,14 +155,14 @@ def checkZipRelease(self, id, path):
 
 
 @celery.task(bind=True)
-def makeVCSRelease(self, id, branch):
+def makeVCSRelease(self, id, ref):
 	release = PackageRelease.query.get(id)
 	if release is None:
 		raise TaskError("No such release!")
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	with clone_repo(release.package.repo, ref=branch, recursive=True) as repo:
+	with clone_repo(release.package.repo, ref=ref, recursive=True) as repo:
 		postReleaseCheckUpdate(self, release, repo.working_tree_dir)
 
 		filename = randomString(10) + ".zip"
@@ -180,6 +180,38 @@ def makeVCSRelease(self, id, branch):
 		db.session.commit()
 
 		return release.url
+
+
+@celery.task(bind=True)
+def makeVCSReleaseCheckBranch(self, user_id: int, package_id: int, title: str, ref: str, branch: str, reason: str):
+	package = Package.query.get(package_id)
+	if package is None:
+		raise TaskError("No such package!")
+
+	user = User.query.get(user_id)
+	if user is None:
+		raise TaskError("No such user!")
+
+	default_branch = get_default_branch(package.repo)
+	if branch != default_branch:
+		return
+
+	rel = PackageRelease()
+	rel.package = package
+	rel.title = title
+	rel.url = ""
+	rel.task_id = uuid()
+	db.session.add(rel)
+
+	if reason is None:
+		msg = "Created release {}".format(rel.title)
+	else:
+		msg = "Created release {} ({})".format(rel.title, reason)
+	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getDetailsURL(), package)
+
+	db.session.commit()
+
+	makeVCSRelease(self, rel.id, ref)
 
 
 @celery.task()

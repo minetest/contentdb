@@ -18,7 +18,7 @@
 from flask import jsonify, abort, make_response, url_for, current_app
 
 from app.logic.packages import do_edit_package
-from app.logic.releases import LogicError, do_create_vcs_release, do_create_zip_release
+from app.logic.releases import LogicError, do_create_vcs_release, do_create_zip_release, do_handle_webhook_push
 from app.logic.screenshots import do_create_screenshot, do_order_screenshots
 from app.models import APIToken, Package, MinetestRelease, PackageScreenshot
 
@@ -50,6 +50,23 @@ def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: s
 		"success": True,
 		"task": url_for("tasks.check", id=rel.task_id),
 		"release": rel.getAsDictionary()
+	})
+
+
+def api_handle_webhook_push(token: APIToken, package: Package, title: str, ref: str, branch: str):
+	if not token.canOperateOnPackage(package):
+		error(403, "API token does not have access to the package")
+
+	reason = "Webhook, token=" + token.name
+
+	if branch:
+		branch = branch.replace("refs/heads/", "")
+
+	task_id = guard(do_handle_webhook_push)(token.owner, package, title, ref, branch, reason)
+
+	return jsonify({
+		"success": True,
+		"task": url_for("tasks.check", id=task_id),
 	})
 
 

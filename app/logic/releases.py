@@ -22,7 +22,7 @@ from celery import uuid
 from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
 from app.models import PackageRelease, db, Permission, User, Package, MinetestRelease
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease
+from app.tasks.importtasks import makeVCSRelease, makeVCSReleaseCheckBranch, checkZipRelease
 from app.utils import AuditSeverity, addAuditLog, nonEmptyOrNone
 
 
@@ -60,6 +60,14 @@ def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
 	makeVCSRelease.apply_async((rel.id, nonEmptyOrNone(ref)), task_id=rel.task_id)
 
 	return rel
+
+
+def do_handle_webhook_push(user: User, package: Package, title: str, commit: str, branch: str,
+		reason: str = None):
+	check_can_create_release(user, package)
+
+	task = makeVCSReleaseCheckBranch.delay((user.id, package.id, title, nonEmptyOrNone(commit), branch, reason))
+	return task.id
 
 
 def do_create_zip_release(user: User, package: Package, title: str, file,

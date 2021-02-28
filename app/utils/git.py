@@ -79,6 +79,32 @@ def clone_repo(urlstr, ref=None, recursive=False):
 			.strip())
 
 
+def get_default_branch(git_url):
+	git_url = generateGitURL(git_url)
+
+	g = git.cmd.Git()
+
+	remote_refs = {}
+	for ref in g.ls_remote(git_url).split('\n'):
+		hash_ref_list = ref.split('\t')
+		remote_refs[hash_ref_list[1]] = hash_ref_list[0]
+
+	hash = remote_refs.get("HEAD")
+	matching = []
+	for ref, value in remote_refs.items():
+		if value == hash and ref != "HEAD":
+			matching.append(ref)
+
+	if len(matching) == 1:
+		return matching[0].replace("refs/heads/", "")
+	elif len(matching) == 0 or "master" in matching:
+		return "master"
+	elif "main" in matching:
+		return "main"
+	else:
+		return matching[0].replace("refs/heads/", "")
+
+
 def get_latest_commit(git_url, ref_name=None):
 	git_url = generateGitURL(git_url)
 
