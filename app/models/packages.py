@@ -68,7 +68,7 @@ class PackageType(enum.Enum):
 
 	@classmethod
 	def coerce(cls, item):
-		return item if type(item) == PackageType else PackageType[item]
+		return item if type(item) == PackageType else PackageType[item.upper()]
 
 
 class PackageState(enum.Enum):
@@ -107,7 +107,7 @@ class PackageState(enum.Enum):
 
 	@classmethod
 	def coerce(cls, item):
-		return item if type(item) == PackageState else PackageState[item]
+		return item if type(item) == PackageState else PackageState[item.upper()]
 
 
 PACKAGE_STATE_FLOW = {
@@ -965,7 +965,7 @@ class PackageUpdateTrigger(enum.Enum):
 
 	@classmethod
 	def coerce(cls, item):
-		return item if type(item) == PackageUpdateTrigger else PackageUpdateTrigger[item]
+		return item if type(item) == PackageUpdateTrigger else PackageUpdateTrigger[item.upper()]
 
 
 class PackageUpdateConfig(db.Model):

@@ -72,7 +72,7 @@ class AuditSeverity(enum.Enum):
 
 	@classmethod
 	def coerce(cls, item):
-		return item if type(item) == AuditSeverity else AuditSeverity[item]
+		return item if type(item) == AuditSeverity else AuditSeverity[item.upper()]
 
 
 class AuditLogEntry(db.Model):

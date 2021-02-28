@@ -54,7 +54,7 @@ class UserRank(enum.Enum):
 
 	@classmethod
 	def coerce(cls, item):
-		return item if type(item) == UserRank else UserRank[item]
+		return item if type(item) == UserRank else UserRank[item.upper()]
 
 
 class Permission(enum.Enum):
@@ -376,7 +376,7 @@ class NotificationType(enum.Enum):
 
 	@classmethod
 	def coerce(cls, item):
-		return item if type(item) == NotificationType else NotificationType[item]
+		return item if type(item) == NotificationType else NotificationType[item.upper()]
 
 
 class Notification(db.Model):
