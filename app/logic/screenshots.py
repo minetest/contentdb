@@ -1,4 +1,4 @@
-import datetime
+import datetime, json
 
 from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
@@ -46,13 +46,13 @@ def do_order_screenshots(_user: User, package: Package, order: [any]):
 		lookup[screenshot.id] = screenshot
 
 	counter = 1
-	for id in order:
+	for ss_id in order:
 		try:
-			lookup[int(id)].order = counter
+			lookup[int(ss_id)].order = counter
 			counter += 1
 		except KeyError as e:
-			raise LogicError(400, "Unable to find screenshot with id={}".format(id))
-		except ValueError as e:
-			raise LogicError(400, "Invalid number: {}".format(id))
+			raise LogicError(400, "Unable to find screenshot with id={}".format(ss_id))
+		except (ValueError, TypeError) as e:
+			raise LogicError(400, "Invalid id, not a number: {}".format(json.dumps(ss_id)))
 
 	db.session.commit()
