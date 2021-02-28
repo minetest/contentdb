@@ -34,7 +34,7 @@ app.config["FLATPAGES_EXTENSION_CONFIG"] = {
 	"fenced_code": {},
 	"tables": {},
 	"codehilite": {
-		"linenums": "True"
+		"guess_lang": False,
 	}
 }
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])

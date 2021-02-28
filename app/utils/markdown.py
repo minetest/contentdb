@@ -71,7 +71,9 @@ def render_markdown(source):
 def init_app(app):
 	global md
 
-	md = Markdown(extensions=app.config["FLATPAGES_MARKDOWN_EXTENSIONS"], output_format="html5")
+	md = Markdown(extensions=app.config["FLATPAGES_MARKDOWN_EXTENSIONS"],
+			extension_configs=app.config["FLATPAGES_EXTENSION_CONFIG"],
+			output_format="html5")
 
 	@app.template_filter()
 	def markdown(source):
