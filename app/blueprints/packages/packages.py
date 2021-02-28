@@ -219,7 +219,7 @@ def makeLabel(obj):
 
 class PackageForm(FlaskForm):
 	type             = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
-	title            = StringField("Title (Human-readable)", [InputRequired(), Length(3, 100)])
+	title            = StringField("Title (Human-readable)", [InputRequired(), Length(1, 100)])
 	name             = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	short_desc       = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
 
