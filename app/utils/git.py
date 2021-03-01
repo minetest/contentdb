@@ -40,28 +40,13 @@ def get_temp_dir():
 # Throws `TaskError` on failure.
 # Caller is responsible for deleting returned directory.
 @contextlib.contextmanager
-def clone_repo(urlstr, ref=None, recursive=False):
+def clone_repo(urlstr, ref=None):
 	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
 
-	err = None
 	try:
 		gitUrl = generateGitURL(urlstr)
-		print("Cloning from " + gitUrl)
-
-		if ref is None:
-			repo = git.Repo.clone_from(gitUrl, gitDir,
-					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
-		else:
-			assert ref != ""
-
-			repo = git.Repo.init(gitDir)
-			origin = repo.create_remote("origin", url=gitUrl)
-			assert origin.exists()
-			origin.fetch()
-			repo.git.checkout(ref)
-
-			for submodule in repo.submodules:
-				submodule.update(init=True)
+		repo = git.Repo.clone_from(gitUrl, gitDir, b=ref,
+				progress=None, env=None, depth=1, recursive=True, kill_after_timeout=15)
 
 		yield repo
 		shutil.rmtree(gitDir)

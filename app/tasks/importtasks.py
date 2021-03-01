@@ -31,7 +31,7 @@ from ..logic.packages import do_edit_package, ALIASES
 
 @celery.task()
 def getMeta(urlstr, author):
-	with clone_repo(urlstr, recursive=True) as repo:
+	with clone_repo(urlstr) as repo:
 		try:
 			tree = build_tree(repo.working_tree_dir, author=author, repo=urlstr)
 		except MinetestCheckError as err:
@@ -162,7 +162,7 @@ def makeVCSRelease(self, id, branch):
 	elif release.package is None:
 		raise TaskError("No package attached to release")
 
-	with clone_repo(release.package.repo, ref=branch, recursive=True) as repo:
+	with clone_repo(release.package.repo, branch) as repo:
 		postReleaseCheckUpdate(self, release, repo.working_tree_dir)
 
 		filename = randomString(10) + ".zip"
