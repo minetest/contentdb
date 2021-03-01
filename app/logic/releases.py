@@ -32,8 +32,8 @@ def check_can_create_release(user: User, package: Package):
 
 	five_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=5)
 	count = package.releases.filter(PackageRelease.releaseDate > five_minutes_ago).count()
-	if count >= 2:
-		raise LogicError(429, "Too many requests, please wait before trying again")
+	if count >= 5:
+		raise LogicError(429, "You've created too many releases for this package in the last 5 minutes, please wait before trying again")
 
 
 def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
