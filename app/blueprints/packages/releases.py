@@ -121,7 +121,7 @@ def download_release(package, id):
 
 			db.session.commit()
 
-	return redirect(release.url, code=300)
+	return redirect(release.url)
 
 
 @bp.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])

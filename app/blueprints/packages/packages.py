@@ -208,7 +208,7 @@ def download(package):
 			flash("No download available.", "danger")
 			return redirect(package.getDetailsURL())
 	else:
-		return redirect(release.getDownloadURL(), code=302)
+		return redirect(release.getDownloadURL())
 
 
 def makeLabel(obj):
