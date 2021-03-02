@@ -102,7 +102,7 @@ def logout():
 class RegisterForm(FlaskForm):
 	display_name = StringField("Display Name", [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x)])
 	username = StringField("Username", [InputRequired(),
-			Regexp("^[a-zA-Z0-9._ -]+$", message="Only a-zA-Z0-9._ allowed")])
+			Regexp("^[a-zA-Z0-9._-]+$", message="Only a-zA-Z0-9._ allowed")])
 	email = StringField("Email", [InputRequired(), Email()])
 	password = PasswordField("Password", [InputRequired(), Length(6, 100)])
 	agree = BooleanField("I agree", [Required()])

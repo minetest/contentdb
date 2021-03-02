@@ -13,7 +13,7 @@ Register
 	<form action="" method="POST" class="form card-body" role="form">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.username, pattern="[a-zA-Z0-9._ -]+", title=_("Only a-zA-Z0-9._ allowed"),
+		{{ render_field(form.username, pattern="[a-zA-Z0-9._-]+", title=_("Only a-zA-Z0-9._ allowed"),
 				hint=_("Only alphanumeric characters, periods, underscores, and minuses are allowed (a-zA-Z0-9._)")) }}
 
 		{{ render_field(form.display_name,
