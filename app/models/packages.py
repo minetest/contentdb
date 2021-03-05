@@ -835,6 +835,19 @@ class PackageRelease(db.Model):
 			"max_minetest_version": self.max_rel and self.max_rel.getAsDictionary(),
 		}
 
+	def getLongAsDictionary(self):
+		return {
+			"id": self.id,
+			"title": self.title,
+			"url": self.url if self.url != "" else None,
+			"release_date": self.releaseDate.isoformat(),
+			"commit": self.commit_hash,
+			"downloads": self.downloads,
+			"min_minetest_version": self.min_rel and self.min_rel.getAsDictionary(),
+			"max_minetest_version": self.max_rel and self.max_rel.getAsDictionary(),
+			"package": self.package.getAsDictionaryKey()
+		}
+
 	def getEditURL(self):
 		return url_for("packages.edit_release",
 				author=self.package.author.username,

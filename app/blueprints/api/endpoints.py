@@ -20,7 +20,7 @@ from sqlalchemy.sql.expression import func
 
 from app import csrf
 from app.utils.markdown import render_markdown
-from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning
+from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page
 from . import bp
@@ -140,6 +140,28 @@ def whoami(token):
 @csrf.exempt
 def markdown():
 	return render_markdown(request.data.decode("utf-8"))
+
+
+@bp.route("/api/releases/")
+def list_all_releases():
+	query = PackageRelease.query.filter_by(approved=True) \
+			.filter(PackageRelease.package.has(state=PackageState.APPROVED)) \
+			.order_by(db.desc(PackageRelease.releaseDate))
+
+	if "author" in request.args:
+		author = User.query.filter_by(username=request.args["author"]).first()
+		if author is None:
+			abort(404)
+		query = query.filter(PackageRelease.package.has(author=author))
+
+	if "maintainer" in request.args:
+		maintainer = User.query.filter_by(username=request.args["maintainer"]).first()
+		if maintainer is None:
+			abort(404)
+		query = query.join(Package)
+		query = query.filter(Package.maintainers.any(id=maintainer.id))
+
+	return jsonify([ rel.getLongAsDictionary() for rel in query.limit(30).all() ])
 
 
 @bp.route("/api/packages/<author>/<name>/releases/")

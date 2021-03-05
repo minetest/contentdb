@@ -70,7 +70,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 Examples:
 
 ```bash
-# Edit packages
+# Edit package
 curl -X PUT http://localhost:5123/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "MIT" }'
@@ -107,7 +107,11 @@ Supported query parameters:
 
 ## Releases
 
-* GET `/api/packages/<username>/<name>/releases/` (List)
+* GET `/api/releases/` (List)   
+    * Limited to 30 most recent releases.
+    * Optional arguments:
+        * `author`: Filter by author
+        * `maintainer`: Filter by maintainer
     * Returns array of release dictionaries with keys:
         * `id`: release ID
         * `title`: human-readable title
@@ -117,6 +121,12 @@ Supported query parameters:
         * `downloads`: number of downloads
         * `min_minetest_version`: dict or null, minimum supported minetest version (inclusive).
         * `max_minetest_version`: dict or null, minimum supported minetest version (inclusive).
+        * `package`
+            * `author`: author username.
+            * `name`
+            * `type`: `mod`, `game`, or `txp`
+* GET `/api/packages/<username>/<name>/releases/` (List)
+    * Returns array of release dictionaries, see above, but without package info.
 * GET `/api/packages/<username>/<name>/releases/<id>/` (Read)
 * POST `/api/packages/<username>/<name>/releases/new/` (Create)
     * Requires authentication.
