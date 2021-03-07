@@ -453,12 +453,12 @@
 				</h3>
 				<ul class="list-group">
 					{% for rel in releases %}
-						{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
+						{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")  %}
 							<li class="list-group-item">
 
-								{% if package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")  %}
+								{% if package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")  %}
 									<a class="btn btn-sm btn-primary float-right" href="{{ rel.getEditURL() }}">Edit
-									{% if not rel.task_id and not rel.approved and package.checkPerm(current_user, "APPROVE_RELEASE") %}
+									{% if not rel.task_id and not rel.approved and rel.checkPerm(current_user, "APPROVE_RELEASE") %}
 										/ Approve
 									{% endif %}
 									</a>
@@ -487,7 +487,7 @@
 
 									created {{ rel.releaseDate | date }}.
 								</small>
-								{% if (package.checkPerm(current_user, "MAKE_RELEASE") or package.checkPerm(current_user, "APPROVE_RELEASE")) and rel.task_id %}
+								{% if (package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")) and rel.task_id %}
 									<a href="{{ url_for('tasks.check', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
 								{% elif not rel.approved %}
 									Waiting for approval.

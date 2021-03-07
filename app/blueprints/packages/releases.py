@@ -133,7 +133,7 @@ def edit_release(package, id):
 		abort(404)
 
 	canEdit	= package.checkPerm(current_user, Permission.MAKE_RELEASE)
-	canApprove = package.checkPerm(current_user, Permission.APPROVE_RELEASE)
+	canApprove = release.checkPerm(current_user, Permission.APPROVE_RELEASE)
 	if not (canEdit or canApprove):
 		return redirect(package.getDetailsURL())
 

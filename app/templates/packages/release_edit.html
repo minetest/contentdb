@@ -34,7 +34,7 @@
 
 			<br />
 		{% else %}
-			{% if package.checkPerm(current_user, "APPROVE_RELEASE") %}
+			{% if release.checkPerm(current_user, "APPROVE_RELEASE") %}
 				{{ render_checkbox_field(form.approved, class_="my-3") }}
 			{% else %}
 				Approved: {{ release.approved }}

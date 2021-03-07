@@ -870,7 +870,7 @@ class PackageRelease(db.Model):
 		self.releaseDate = datetime.datetime.now()
 
 	def approve(self, user):
-		if not self.package.checkPerm(user, Permission.APPROVE_RELEASE):
+		if not self.checkPerm(user, Permission.APPROVE_RELEASE):
 			return False
 
 		if self.approved:
@@ -895,24 +895,26 @@ class PackageRelease(db.Model):
 		elif type(perm) != Permission:
 			raise Exception("Unknown permission given to PackageRelease.checkPerm()")
 
-		isOwner = user == self.package.author
+		isMaintainer = user == self.package.author or user in self.package.maintainers
 
 		if perm == Permission.DELETE_RELEASE:
 			if user.rank.atLeast(UserRank.ADMIN):
 				return True
 
-			if not (isOwner or user.rank.atLeast(UserRank.EDITOR)):
+			if not (isMaintainer or user.rank.atLeast(UserRank.EDITOR)):
 				return False
 
 			if not self.package.approved or self.task_id is not None:
 				return True
 
-			count = PackageRelease.query \
-					.filter_by(package_id=self.package_id) \
+			count = self.package.releases \
 					.filter(PackageRelease.id > self.id) \
 					.count()
 
 			return count > 0
+		elif perm == Permission.APPROVE_RELEASE:
+			return isMaintainer and user.rank.atLeast(
+					UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 		else:
 			raise Exception("Permission {} is not related to releases".format(perm.name))
 
