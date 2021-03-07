@@ -21,8 +21,8 @@ The process is as follows:
 4. ContentDB checks the API token and issues a new release.
 
 <p class="alert alert-warning">
-    "New commit" or "push" based webhooks are currently broken as they don't check the branch name.
-    This means that releases will be created for pushes to non-default branches.
+    "New commit" or "push" based webhooks will currently only work on branches named `master` or
+    `main`.
 </p>
 
 ## Setting up

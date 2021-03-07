@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import Blueprint, request
+from flask import Blueprint, request, jsonify
 
 bp = Blueprint("gitlab", __name__)
 
@@ -53,6 +53,12 @@ def webhook_impl():
 	if event == "push":
 		ref = json["after"]
 		title = ref[:5]
+
+		branch = json["ref"].replace("refs/heads/", "")
+		if branch not in ["master", "main"]:
+			return jsonify({"success": False,
+				"message": "Webhook ignored, as it's not on the master/main branch"})
+
 	elif event == "tag_push":
 		ref = json["ref"]
 		title = ref.replace("refs/tags/", "")

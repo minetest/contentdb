@@ -134,6 +134,10 @@ def webhook():
 	if event == "push":
 		ref = json["after"]
 		title = json["head_commit"]["message"].partition("\n")[0]
+		branch = json["ref"].replace("refs/heads/", "")
+		if branch not in [ "master", "main" ]:
+			return jsonify({ "success": False, "message": "Webhook ignored, as it's not on the master/main branch" })
+
 	elif event == "create" and json["ref_type"] == "tag":
 		ref = json["ref"]
 		title = ref
