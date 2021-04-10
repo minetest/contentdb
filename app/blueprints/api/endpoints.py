@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import request, jsonify, current_app, abort
+from flask import request, jsonify, current_app
 from flask_login import current_user, login_required
 from sqlalchemy.sql.expression import func
 
@@ -115,11 +115,11 @@ def topic_set_discard():
 	tid = request.args.get("tid")
 	discard = request.args.get("discard")
 	if tid is None or discard is None:
-		abort(400)
+		error(400, "Missing topic ID or discard bool")
 
 	topic = ForumTopic.query.get(tid)
 	if not topic.checkPerm(current_user, Permission.TOPIC_DISCARD):
-		abort(403)
+		error(403, "Permission denied, need: TOPIC_DISCARD")
 
 	topic.discarded = discard == "true"
 	db.session.commit()
@@ -151,13 +151,13 @@ def list_all_releases():
 	if "author" in request.args:
 		author = User.query.filter_by(username=request.args["author"]).first()
 		if author is None:
-			abort(404)
+			error(404, "Author not found")
 		query = query.filter(PackageRelease.package.has(author=author))
 
 	if "maintainer" in request.args:
 		maintainer = User.query.filter_by(username=request.args["maintainer"]).first()
 		if maintainer is None:
-			abort(404)
+			error(404, "Maintainer not found")
 		query = query.join(Package)
 		query = query.filter(Package.maintainers.any(id=maintainer.id))
 

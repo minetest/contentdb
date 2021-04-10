@@ -114,3 +114,7 @@ from .utils import clearNotifications
 def check_for_notifications():
 	if current_user.is_authenticated:
 		clearNotifications(request.path)
+
+@app.errorhandler(404)
+def page_not_found(e):
+	return render_template("404.html"), 404

@@ -122,8 +122,8 @@ Supported query parameters:
         * `min_minetest_version`: dict or null, minimum supported minetest version (inclusive).
         * `max_minetest_version`: dict or null, minimum supported minetest version (inclusive).
         * `package`
-            * `author`: author username.
-            * `name`
+            * `author`: author username
+            * `name`: technical name
             * `type`: `mod`, `game`, or `txp`
 * GET `/api/packages/<username>/<name>/releases/` (List)
     * Returns array of release dictionaries, see above, but without package info.
