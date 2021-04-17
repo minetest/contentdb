@@ -102,14 +102,19 @@ def logout():
 class RegisterForm(FlaskForm):
 	display_name = StringField("Display Name", [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x)])
 	username = StringField("Username", [InputRequired(),
-			Regexp("^[a-zA-Z0-9._-]+$", message="Only a-zA-Z0-9._ allowed")])
-	email = StringField("Email", [InputRequired(), Email()])
+					Regexp("^[a-zA-Z0-9._-]+$", message="Only a-zA-Z0-9._ allowed")])
+	email    = StringField("Email", [InputRequired(), Email()])
 	password = PasswordField("Password", [InputRequired(), Length(6, 100)])
-	agree = BooleanField("I agree", [Required()])
-	submit = SubmitField("Register")
+	question  = StringField("What is the result of the above calculation?", [InputRequired()])
+	agree    = BooleanField("I agree", [DataRequired()])
+	submit   = SubmitField("Register")
 
 
 def handle_register(form):
+	if form.question.data.strip().lower() != "19":
+		flash("Incorrect captcha answer", "danger")
+		return
+
 	user_by_name = User.query.filter(or_(
 			User.username == form.username.data,
 			User.username == form.display_name.data,
@@ -168,7 +173,8 @@ def register():
 		if ret:
 			return ret
 
-	return render_template("users/register.html", form=form, suggested_password=genphrase(entropy=52, wordset="bip39"))
+	return render_template("users/register.html", form=form,
+			suggested_password=genphrase(entropy=52, wordset="bip39"))
 
 
 class ForgotPasswordForm(FlaskForm):

@@ -32,6 +32,11 @@ Register
 			<code>{{ suggested_password }}</code>
 		</p>
 
+		<p>
+			<img src="/static/puzzle.png" />
+		</p>
+		{{ render_field(form.question, hint=_("Please prove that you are human")) }}
+
 		{% set label %}
 			{{ _("I agree to the ") }}
 			<a href="{{ url_for('flatpage', path='privacy_policy') }} ">
