@@ -913,8 +913,9 @@ class PackageRelease(db.Model):
 
 			return count > 0
 		elif perm == Permission.APPROVE_RELEASE:
-			return isMaintainer and user.rank.atLeast(
-					UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
+			return user.rank.atLeast(UserRank.EDITOR) or \
+					(isMaintainer and user.rank.atLeast(
+						UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER))
 		else:
 			raise Exception("Permission {} is not related to releases".format(perm.name))
 
