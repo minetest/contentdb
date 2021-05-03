@@ -1,6 +1,6 @@
 from app.default_data import populate_test_data
 from app.models import db, Package, PackageState
-from app.utils import parse_json, is_str, is_int, is_optional
+from .utils import is_str, is_int, is_optional, parse_json
 from .utils import client # noqa
 
 
