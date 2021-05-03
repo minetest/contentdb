@@ -1,6 +1,7 @@
 from app.default_data import populate_test_data
 from app.models import db, Package, PackageState
 from utils import parse_json, is_str, is_int, is_optional
+from .utils import client # noqa
 
 
 def validate_package_list(packages, strict=False):

@@ -1,5 +1,6 @@
 from app.default_data import populate_test_data
 from app.models import db
+from .utils import client # noqa
 
 
 def test_homepage_empty(client):
