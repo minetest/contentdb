@@ -60,8 +60,9 @@ def clone_repo(urlstr, ref=None, recursive=False):
 			origin.fetch()
 			repo.git.checkout(ref)
 
-			for submodule in repo.submodules:
-				submodule.update(init=True)
+			if recursive:
+				for submodule in repo.submodules:
+					submodule.update(init=True)
 
 		yield repo
 		shutil.rmtree(gitDir)
