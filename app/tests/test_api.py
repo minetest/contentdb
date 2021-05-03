@@ -44,3 +44,18 @@ def test_packages_with_query(client):
 
 	assert (packages[0]["name"] == "food" and packages[1]["name"] == "food_sweet") or \
 		(packages[1]["name"] == "food" and packages[0]["name"] == "food_sweet")
+
+
+def test_dependencies(client):
+	"""Start with a test database."""
+
+	populate_test_data(db.session)
+	db.session.commit()
+
+	deps = parse_json(client.get("/api/packages/rubenwardy/food_sweet/dependencies/").data)
+	deps = deps["rubenwardy/food_sweet"]
+
+	assert len(deps) == 1
+	assert not deps[0]["is_optional"]
+	assert len(deps[0]["packages"]) == 1
+	assert deps[0]["packages"][0] == "rubenwardy/food"
