@@ -22,7 +22,7 @@ from app import csrf
 from app.utils.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User
 from app.querybuilder import QueryBuilder
-from app.utils import is_package_page
+from app.utils import is_package_page, get_int_or_abort
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, api_order_screenshots, api_edit_package
@@ -390,5 +390,14 @@ def homepage():
 
 @bp.route("/api/minetest_versions/")
 def versions():
+	protocol_version = request.args.get("protocol_version")
+	engine_version = request.args.get("engine_version")
+	if protocol_version or engine_version:
+		rel = MinetestRelease.get(engine_version, get_int_or_abort(protocol_version))
+		if rel is None:
+			error(404, "No releases found")
+
+		return jsonify(rel.getAsDictionary())
+
 	return jsonify([rel.getAsDictionary() \
 			for rel in MinetestRelease.query.all() if rel.getActual() is not None])

@@ -43,3 +43,25 @@ def client():
 		yield client
 
 	app.config["TESTING"] = False
+
+
+def validate_package_list(packages, strict=False):
+	valid_keys = {
+		"author", "name", "release",
+		"short_description", "thumbnail",
+		"title", "type"
+	}
+
+	for package in packages:
+		assert set(package.keys()).issubset(valid_keys)
+
+		assert is_str(package.get("author"))
+		assert is_str(package.get("name"))
+		if strict:
+			assert is_int(package.get("release"))
+		else:
+			assert is_optional(int, package.get("release"))
+		assert is_str(package.get("short_description"))
+		assert is_optional(str, package.get("thumbnail"))
+		assert is_str(package.get("title"))
+		assert is_str(package.get("type"))

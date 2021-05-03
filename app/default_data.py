@@ -15,6 +15,8 @@ def populate(session):
 	session.add(MinetestRelease("0.4.16/17", 32))
 	session.add(MinetestRelease("5.0", 37))
 	session.add(MinetestRelease("5.1", 38))
+	session.add(MinetestRelease("5.2", 39))
+	session.add(MinetestRelease("5.3", 39))
 
 	tags = {}
 	for tag in ["Inventory", "Mapgen", "Building",

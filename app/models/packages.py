@@ -796,7 +796,8 @@ class MinetestRelease(db.Model):
 
 		if protocol_num:
 			# Find the closest matching release
-			return MinetestRelease.query.order_by(db.desc(MinetestRelease.protocol)) \
+			return MinetestRelease.query.order_by(db.desc(MinetestRelease.protocol),
+							db.desc(MinetestRelease.id)) \
 						.filter(MinetestRelease.protocol <= protocol_num).first()
 
 		return None
