@@ -35,6 +35,7 @@ def is_int(v):
 @pytest.fixture
 def client():
 	app.config["TESTING"] = True
+	app.config['WTF_CSRF_ENABLED'] = False
 
 	recreate_db()
 	assert User.query.count() == 1
@@ -43,6 +44,7 @@ def client():
 		yield client
 
 	app.config["TESTING"] = False
+	app.config['WTF_CSRF_ENABLED'] = True
 
 
 def validate_package_list(packages, strict=False):
@@ -65,3 +67,18 @@ def validate_package_list(packages, strict=False):
 		assert is_optional(str, package.get("thumbnail"))
 		assert is_str(package.get("title"))
 		assert is_str(package.get("type"))
+
+
+def login(client, username, password):
+	return client.post("/user/login/", data=dict(
+			username=username,
+			password=password,
+	), follow_redirects=True)
+
+
+def logout(client):
+	return client.post("/user/logout/", follow_redirects=True)
+
+
+def is_logged_in(rv):
+	return b"/user/login/" not in rv.data and b"/user/logout/" in rv.data

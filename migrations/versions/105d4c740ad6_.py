@@ -5,6 +5,8 @@ Revises: 886c92dc6eaa
 Create Date: 2020-12-15 17:28:56.559801
 
 """
+import datetime
+
 from alembic import op
 import sqlalchemy as sa
 
@@ -25,6 +27,7 @@ def upgrade():
 
     conn = op.get_bind()
     system_user = User("ContentDB", active=False)
+    system_user.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
     system_user.rank = UserRank.BOT
 
     session = orm.Session(bind=conn)

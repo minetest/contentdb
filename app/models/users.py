@@ -143,7 +143,7 @@ class User(db.Model, UserMixin):
 
 	# User email information
 	email         = db.Column(db.String(255), nullable=True, unique=True)
-	email_confirmed_at  = db.Column(db.DateTime(), nullable=True)
+	email_confirmed_at  = db.Column(db.DateTime(), nullable=True, server_default=None)
 
 	# User information
 	profile_pic   = db.Column(db.String(255), nullable=True, server_default=None)
@@ -178,7 +178,6 @@ class User(db.Model, UserMixin):
 
 	def __init__(self, username=None, active=False, email=None, password=None):
 		self.username = username
-		self.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
 		self.display_name = username
 		self.is_active = active
 		self.email = email
