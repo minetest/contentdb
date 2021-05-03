@@ -8,7 +8,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Copy config
-      run: cp utils/gitlabci/* .
+      run: cp utils/ci/* .
     - name: Build the Docker image
       run: docker-compose build
     - name: Start Docker
