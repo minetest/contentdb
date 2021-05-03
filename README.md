@@ -1,5 +1,5 @@
 # Content Database
-![Build Status](https://github.com/minetest/contentdb/workflows/test/badge.svg)
+![Build Status](https://github.com/minetest/contentdb/actions/workflows/test.yml/badge.svg)
 
 Content database for Minetest mods, games, and more.\
 Developed by rubenwardy, license AGPLv3.0+.
