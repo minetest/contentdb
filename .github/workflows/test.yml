@@ -3,7 +3,7 @@ name: Tests
 on: [push, pull_request]
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
@@ -11,10 +11,6 @@ jobs:
       run: cp utils/gitlabci/* .
     - name: Build the Docker image
       run: docker-compose build
-
-  test:
-    runs-on: ubuntu-latest
-    steps:
     - name: Start Docker
       run: docker-compose up -d
     - name: Run migrations
