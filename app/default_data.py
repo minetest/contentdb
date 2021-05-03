@@ -53,7 +53,7 @@ def populate_test_data(session):
 	ez.rank = UserRank.EDITOR
 	session.add(ez)
 
-	not1 = Notification(admin_user, ez, "Awards approved", "/packages/rubenwardy/awards/")
+	not1 = Notification(admin_user, ez, NotificationType.PACKAGE_APPROVAL, "Awards approved", "/packages/rubenwardy/awards/")
 	session.add(not1)
 
 	jeija = User("Jeija")
