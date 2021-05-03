@@ -1,0 +1,21 @@
+name: Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Copy config
+      run: cp utils/ci/* .
+    - name: Build the Docker image
+      run: docker-compose build
+    - name: Start Docker
+      run: docker-compose up -d
+    - name: Run migrations
+      run: ./utils/run_migrations.sh
+    - name: Run tests
+      run: ./utils/tests_cov.sh
+    - name: Stop Docker
+      run: docker-compose down

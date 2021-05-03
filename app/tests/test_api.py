@@ -1,6 +1,7 @@
 from app.default_data import populate_test_data
 from app.models import db, Package, PackageState
-from utils import parse_json, is_str, is_int, is_optional
+from .utils import is_str, is_int, is_optional, parse_json
+from .utils import client # noqa
 
 
 def validate_package_list(packages, strict=False):
@@ -73,14 +74,15 @@ def test_packages_with_protocol_high(client):
 	populate_test_data(db.session)
 	db.session.commit()
 
-	rv = client.get("/api/packages/?protocol_version=40")
+	rv = client.get("/api/packages/?protocol_version=100")
 
 	packages = parse_json(rv.data)
 
-	assert len(packages) == 4
-
 	for package in packages:
 		assert package["name"] != "mesecons"
+		assert package["name"] != "handholds"
+
+	assert len(packages) == 4
 
 	validate_package_list(packages, True)
 
