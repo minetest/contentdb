@@ -25,6 +25,17 @@
 {% endblock %}
 
 {% block content %}
+	{% if package %}
+		<h2 class="mt-0">{{ _("Edit Details") }}</h2>
+	{% else %}
+		<h2 class="mt-0">
+			{{ _("Create Package") }}
+			{% if author != current_user %}
+				for {{ author.display_name }}
+			{% endif %}
+		</h2>
+	{% endif %}
+
 	{% if not package %}
 		<div class="alert alert-info">
 			<a class="float-right btn btn-sm btn-default" href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("View") }}</a>

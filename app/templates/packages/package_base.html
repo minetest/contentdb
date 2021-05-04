@@ -1,40 +1,38 @@
 {% extends "base.html" %}
 
 {% block container %}
+<main class="container mt-4">
 	{% if tabs %}
-		<nav class="pt-4 tabs-container">
-			<div class="container">
-				<a class="float-right btn btn-primary" href="{{ package.getDetailsURL() }}">
-					{{ _("View Package") }}
-				</a>
-				<h1 class="mb-5">
-					<a href="{{ package.getDetailsURL() }}">
-						{{ package.title }}
+		<div class="row">
+			<div class="col-md-3 mb-4">
+				<div class="list-group">
+					<a class="list-group-item list-group-item-action" href="{{ package.getDetailsURL() }}">
+						<span class="row m-0 p-0">
+							<span class="col-auto m-0 p-0">
+								<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+										src="{{ package.getThumbnailOrPlaceholder(1) }}" alt="Thumbnail" style="max-height: 20px;">
+							</span>
+							<span class="col m-0 p-0 pl-2">
+								{{ package.title }}
+							</span>
+						</span>
 					</a>
-				</h1>
-
-				<ul class="nav nav-tabs">
 					{% for item in tabs %}
-						<li class="nav-item">
-							<a href="{{ item.url }}" class="nav-link {% if item.id == current_tab %}active{% endif %}">
-								{{ item.title }}
-							</a>
-						</li>
+						<a href="{{ item.url }}"
+								class="list-group-item list-group-item-action {% if item.id == current_tab %}active{% endif %}">
+							{{ item.title }}
+						</a>
 					{% endfor %}
-				</ul>
+				</div>
 			</div>
-		</nav>
-	{% endif %}
+			<div class="col-md-9">
+		{% endif %}
 
-	{% if tabs %}
-		<main class="container mt-5">
-			{{ self.content() }}
-		</main>
-	{% else %}
-		<main class="container mt-4">
-			<h1 class="mb-4">{{ self.title() }}</h1>
+		{{ self.content() }}
 
-			{{ self.content() }}
-		</main>
+		{% if tabs %}
+			</div>
+		</div>
 	{% endif %}
+</main>
 {% endblock %}

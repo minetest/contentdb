@@ -454,6 +454,7 @@
 					{% from "macros/releases.html" import render_releases %}
 					{{ render_releases(releases, package, current_user) }}
 				</ul>
+
 				<h3>
 					{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}
 						<div class="btn-group float-right">
@@ -462,7 +463,6 @@
 					{% endif %}
 					Threads
 				</h3>
-
 				<div class="list-group">
 					{% from "macros/threads.html" import render_compact_threadlist %}
 					{{ render_compact_threadlist(threads) }}
