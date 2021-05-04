@@ -104,8 +104,8 @@ def get_latest_tag(git_url):
 		origin = repo.create_remote("origin", url=git_url)
 		origin.fetch()
 
-		refs = repo.git.ls_remote(tags=True, sort="creatordate").split('\n')
-		refs = [ref for ref in refs if ref.strip() != ""]
+		refs = repo.git.for_each_ref(sort="creatordate", format="%(objectname)\t%(refname)").split("\n")
+		refs = [ref for ref in refs if "refs/tags/" in ref]
 		if len(refs) == 0:
 			return None, None
 
