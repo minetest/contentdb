@@ -25,7 +25,6 @@
 		{% set package_warning="Non-free media" %}
 	{% endif %}
 	{% set release = package.getDownloadRelease() %}
-
 <main>
 	{% set cover_image = package.cover_image.url or package.getMainScreenshotURL() %}
 	<header class="jumbotron pb-3"
@@ -94,7 +93,8 @@
 							{{ package.author.display_name }}
 						</span>
 					</a>
-					<a class="btn" rel="nofollow" href="{{ package.getDownloadURL() }}" title="{{ _("Downloads") }}">
+					<a class="btn" rel="nofollow" href="{{ package.getDownloadURL() }}" title="{{ _("Downloads") }}"
+							download="{{ release.getDownloadFileName() }}">
 						<i class="fas fa-download"></i>
 						<span class="count">{{ package.downloads }}</span>
 					</a>
@@ -151,7 +151,7 @@
 				{% endif %}
 				<div class="btn-group btn-group-horizontal col-md-auto">
 					{% if release %}
-						<a class="btn btn-download" rel="nofollow"
+						<a class="btn btn-download" rel="nofollow" download="{{ release.getDownloadFileName() }}"
 								href="{{ package.getDownloadURL() }}">
 							{{ _("Download") }}
 						</a>
@@ -466,7 +466,10 @@
 
 								{% if not rel.approved %}<i>{% endif %}
 
-								<a href="{{ rel.getDownloadURL() }}" rel="nofollow">{{ rel.title }}</a>
+								<a href="{{ rel.getDownloadURL() }}" rel="nofollow"
+										download="{{ rel.getDownloadFileName() }}">
+									{{ rel.title }}
+								</a>
 
 								<span style="color:#ddd;">
 									{% if rel.min_rel and rel.max_rel %}

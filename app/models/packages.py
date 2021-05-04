@@ -872,6 +872,9 @@ class PackageRelease(db.Model):
 	def __init__(self):
 		self.releaseDate = datetime.datetime.now()
 
+	def getDownloadFileName(self):
+		return f"{self.package.name}_{self.id}.zip"
+
 	def approve(self, user):
 		if not self.checkPerm(user, Permission.APPROVE_RELEASE):
 			return False
