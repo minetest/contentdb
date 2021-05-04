@@ -23,7 +23,7 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
 from app.utils import *
-from . import bp
+from . import bp, get_package_tabs
 from app.logic.LogicError import LogicError
 from app.logic.screenshots import do_create_screenshot, do_order_screenshots
 
@@ -71,7 +71,8 @@ def screenshots(package):
 			form.populate_obj(package)
 			db.session.commit()
 
-	return render_template("packages/screenshots.html", package=package, form=form)
+	return render_template("packages/screenshots.html", package=package, form=form,
+			tabs=get_package_tabs(current_user, package), current_tab="screenshots")
 
 
 @bp.route("/packages/<author>/<name>/screenshots/new/", methods=["GET", "POST"])

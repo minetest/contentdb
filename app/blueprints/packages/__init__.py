@@ -16,6 +16,42 @@
 
 from flask import Blueprint
 
+from app.models import User, Package, Permission
+
 bp = Blueprint("packages", __name__)
+
+
+def get_package_tabs(user: User, package: Package):
+	if package is None or not package.checkPerm(user, Permission.EDIT_PACKAGE):
+		return []
+
+	return [
+		{
+			"id": "edit",
+			"title": "Edit Details",
+			"url": package.getEditURL()
+		},
+		{
+			"id": "releases",
+			"title": "Releases",
+			"url": package.getReleaseListURL()
+		},
+		{
+			"id": "screenshots",
+			"title": "Screenshots",
+			"url": package.getEditScreenshotsURL()
+		},
+		{
+			"id": "maintainers",
+			"title": "Maintainers",
+			"url": package.getEditMaintainersURL()
+		},
+		{
+			"id": "remove",
+			"title": "Remove",
+			"url": package.getRemoveURL()
+		}
+	]
+
 
 from . import packages, screenshots, releases, reviews

@@ -1,11 +1,10 @@
-{% extends "base.html" %}
+{% extends "packages/package_base.html" %}
 
 {% block title %}
-	Edit release | {{ package.title }}
+	Edit release - {{ package.title }}
 {% endblock %}
 
 {% block content %}
-	<h2>{{ _("Edit Release") }}</h2>
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}

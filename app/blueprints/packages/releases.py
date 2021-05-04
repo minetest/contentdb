@@ -26,7 +26,15 @@ from app.logic.releases import do_create_vcs_release, LogicError, do_create_zip_
 from app.rediscache import has_key, set_key, make_download_key
 from app.tasks.importtasks import check_update_config
 from app.utils import *
-from . import bp
+from . import bp, get_package_tabs
+
+
+@bp.route("/packages/<author>/<name>/releases/", methods=["GET", "POST"])
+@is_package_page
+def list_releases(package):
+	return render_template("packages/releases_list.html",
+			package=package,
+			tabs=get_package_tabs(current_user, package), current_tab="releases")
 
 
 def get_mt_releases(is_max):
@@ -60,6 +68,7 @@ class EditPackageReleaseForm(FlaskForm):
 	max_rel  = QuerySelectField("Maximum Minetest Version", [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit   = SubmitField("Save")
+
 
 @bp.route("/packages/<author>/<name>/releases/new/", methods=["GET", "POST"])
 @login_required
@@ -162,7 +171,7 @@ def edit_release(package, id):
 			release.approved = False
 
 		db.session.commit()
-		return redirect(package.getDetailsURL())
+		return redirect(package.getReleaseListURL())
 
 	return render_template("packages/release_edit.html", package=package, release=release, form=form)
 
@@ -202,7 +211,7 @@ def bulk_change_release(package):
 
 		db.session.commit()
 
-		return redirect(package.getDetailsURL())
+		return redirect(package.getReleaseListURL())
 
 	return render_template("packages/release_bulk_change.html", package=package, form=form)
 
@@ -216,7 +225,7 @@ def delete_release(package, id):
 		abort(404)
 
 	if not release.checkPerm(current_user, Permission.DELETE_RELEASE):
-		return redirect(release.getEditURL())
+		return redirect(release.getReleaseListURL())
 
 	db.session.delete(release)
 	db.session.commit()
@@ -296,7 +305,7 @@ def update_config(package):
 			flash("Now, please create an initial release", "success")
 			return redirect(package.getCreateReleaseURL())
 
-		return redirect(package.getDetailsURL())
+		return redirect(package.getReleaseListURL())
 
 	return render_template("packages/update_config.html", package=package, form=form)
 

@@ -1,0 +1,51 @@
+{% macro render_releases(releases, package, current_user) -%}
+	{% for rel in releases %}
+		{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")  %}
+			<li class="list-group-item">
+				{% if package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")  %}
+					<a class="btn btn-sm btn-primary float-right" href="{{ rel.getEditURL() }}">Edit
+					{% if not rel.task_id and not rel.approved and rel.checkPerm(current_user, "APPROVE_RELEASE") %}
+						/ Approve
+					{% endif %}
+					</a>
+				{% endif %}
+
+				{% if not rel.approved %}<i>{% endif %}
+
+				<a href="{{ rel.getDownloadURL() }}" rel="nofollow" download="{{ rel.getDownloadFileName() }}">
+					{{ rel.title }}
+				</a>
+
+				<span style="color:#ddd;">
+					{% if rel.min_rel and rel.max_rel %}
+						[MT {{ rel.min_rel.name }}-{{ rel.max_rel.name }}]
+					{% elif rel.min_rel %}
+						[MT {{ rel.min_rel.name }}+]
+					{% elif rel.max_rel %}
+						[MT &le;{{ rel.max_rel.name }}]
+					{% endif %}
+				</span>
+
+				<br>
+
+				<small style="color:#999;">
+					{% if rel.commit_hash %}
+							[{{ rel.commit_hash | truncate(5, end='') }}]
+					{% endif %}
+
+					created {{ rel.releaseDate | date }}.
+				</small>
+				{% if (package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")) and rel.task_id %}
+					<a href="{{ url_for('tasks.check', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
+				{% elif not rel.approved %}
+					Waiting for approval.
+				{% endif %}
+
+				{% if not rel.approved %}</i>{% endif %}
+
+			</li>
+		{% endif %}
+	{% else %}
+		<li class="list-group-item">No releases available.</li>
+	{% endfor %}
+{% endmacro %}

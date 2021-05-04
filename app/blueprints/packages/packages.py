@@ -32,7 +32,7 @@ from app.querybuilder import QueryBuilder
 from app.rediscache import has_key, set_key
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
 from app.utils import *
-from . import bp
+from . import bp, get_package_tabs
 from ...logic.LogicError import LogicError
 from ...logic.packages import do_edit_package
 
@@ -339,7 +339,8 @@ def create_edit(author=None, name=None):
 	return render_template("packages/create_edit.html", package=package,
 			form=form, author=author, enable_wizard=enableWizard,
 			packages=package_query.all(),
-			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all())
+			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all(),
+			tabs=get_package_tabs(current_user, package), current_tab="edit")
 
 
 @bp.route("/packages/<author>/<name>/state/", methods=["POST"])
@@ -388,7 +389,8 @@ def move_to_state(package):
 @is_package_page
 def remove(package):
 	if request.method == "GET":
-		return render_template("packages/remove.html", package=package)
+		return render_template("packages/remove.html", package=package,
+				tabs=get_package_tabs(current_user, package), current_tab="remove")
 
 	if "delete" in request.form:
 		if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
@@ -478,8 +480,8 @@ def edit_maintainers(package):
 
 	users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).order_by(db.asc(User.username)).all()
 
-	return render_template("packages/edit_maintainers.html",
-			package=package, form=form, users=users)
+	return render_template("packages/edit_maintainers.html", package=package, form=form,
+			users=users, tabs=get_package_tabs(current_user, package), current_tab="maintainers")
 
 
 @bp.route("/packages/<author>/<name>/remove-self-maintainer/", methods=["POST"])

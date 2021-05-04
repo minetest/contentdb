@@ -1,14 +1,12 @@
-{% extends "base.html" %}
+{% extends "packages/package_base.html" %}
 
 {% block title %}
 	{{ _("Edit Maintainers") }}
 {% endblock %}
 
-{% from "macros/forms.html" import render_submit_field, render_field %}
 
 {% block content %}
-	<h1>{{ _("Edit Maintainers") }}</h1>
-
+	{% from "macros/forms.html" import render_submit_field, render_field %}
 	<p>
 		{{ _("Maintainers are given write access to the package.") }}
 		{{ _("Depending on their rank, they will be able to edit the package, create releases and screenshots, and read private threads.") }}

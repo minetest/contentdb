@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block container %}
+	{% if tabs %}
+		<nav class="pt-4 tabs-container">
+			<div class="container">
+				<a class="float-right btn btn-primary" href="{{ package.getDetailsURL() }}">
+					{{ _("View Package") }}
+				</a>
+				<h1 class="mb-5">
+					<a href="{{ package.getDetailsURL() }}">
+						{{ package.title }}
+					</a>
+				</h1>
+
+				<ul class="nav nav-tabs">
+					{% for item in tabs %}
+						<li class="nav-item">
+							<a href="{{ item.url }}" class="nav-link {% if item.id == current_tab %}active{% endif %}">
+								{{ item.title }}
+							</a>
+						</li>
+					{% endfor %}
+				</ul>
+			</div>
+		</nav>
+	{% endif %}
+
+	{% if tabs %}
+		<main class="container mt-5">
+			{{ self.content() }}
+		</main>
+	{% else %}
+		<main class="container mt-4">
+			<h1 class="mb-4">{{ self.title() }}</h1>
+
+			{{ self.content() }}
+		</main>
+	{% endif %}
+{% endblock %}

@@ -1,9 +1,13 @@
-{% extends "base.html" %}
+{% extends "packages/package_base.html" %}
 
 {% block title %}
-	{{ package.title or "Create Package" }}
-	{% if not package and author != current_user %}
-		for {{ author.display_name }}
+	{% if package %}
+		{{ _("Edit - %(title)s", title=package.title) }}
+		{% if not package and author != current_user %}
+			for {{ author.display_name }}
+		{% endif %}
+	{% else %}
+		{{ _("Create Package") }}
 	{% endif %}
 {% endblock %}
 
@@ -21,15 +25,13 @@
 {% endblock %}
 
 {% block content %}
-	<h1>{{ _("Create Package") }}</h1>
+	{% if not package %}
+		<div class="alert alert-info">
+			<a class="float-right btn btn-sm btn-default" href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("View") }}</a>
 
-	<div class="alert alert-info">
-		<a class="float-right btn btn-sm btn-default" href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("View") }}</a>
-
-		{{ _("Have you read the Package Inclusion Policy and Guidance yet?") }}
-	</div>
-
-	{% if package %}
+			{{ _("Have you read the Package Inclusion Policy and Guidance yet?") }}
+		</div>
+	{% else %}
 		<div class="alert alert-secondary">
 			<a class="float-right btn btn-sm btn-default" href="/help/package_config/#cdbjson">{{ _("Read more") }}</a>
 

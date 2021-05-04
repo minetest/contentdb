@@ -1,14 +1,12 @@
-{% extends "base.html" %}
+{% extends "packages/package_base.html" %}
 
 {% block title %}
-Delete | {{ package.title }}
+Remove {{ package.title }}
 {% endblock %}
 
 {% block content %}
-<form class="card mb-3" style="max-width: 40rem; margin: auto;" method="POST" action="" >
-	<h3 class="card-header">Remove {{ package.title }}</h3>
-
-	<div class="card-body">
+	<form method="POST" action="">
+		<h2>Remove {{ package.title }}</h2>
 		<p>
 			In order to avoid data loss, you cannot permanently delete packages.
 			You can remove them from ContentDB, which will cause them to not be
@@ -32,6 +30,5 @@ Delete | {{ package.title }}
 		{% if package.approved %}
 			<input type="submit" name="unapprove" value="Unapprove" class="btn btn-warning" />
 		{% endif %}
-	</div>
-</form>
+	</form>
 {% endblock %}

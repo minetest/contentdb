@@ -1,14 +1,13 @@
-{% extends "base.html" %}
+{% extends "packages/package_base.html" %}
 
 {% block title %}
-	Screenshots | {{ package.title }}
+	Screenshots - {{ package.title }}
 {% endblock %}
 
 {% block content %}
-	<h1 class="mb-5"><a href="{{ package.getDetailsURL() }}">{{ package.title }}</a></h1>
-
 	{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 		<a href="{{ package.getNewScreenshotURL() }}" class="btn btn-primary float-right">
+			<i class="fas fa-plus mr-1"></i>
 			{{ _("Add Image") }}
 		</a>
 	{% endif %}
