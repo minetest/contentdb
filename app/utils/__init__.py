@@ -13,8 +13,8 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import random
-import string
+
+import secrets
 
 from .flask import *
 from .models import *
@@ -45,5 +45,4 @@ def shouldReturnJson():
 
 
 def randomString(n):
-	return ''.join(random.choice(string.ascii_lowercase + \
-			string.ascii_uppercase + string.digits) for _ in range(n))
+	return secrets.token_hex(int(n / 2))
