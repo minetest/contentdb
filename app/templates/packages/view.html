@@ -93,11 +93,13 @@
 							{{ package.author.display_name }}
 						</span>
 					</a>
-					<a class="btn" rel="nofollow" href="{{ package.getDownloadURL() }}" title="{{ _("Downloads") }}"
-							download="{{ release.getDownloadFileName() }}">
-						<i class="fas fa-download"></i>
-						<span class="count">{{ package.downloads }}</span>
-					</a>
+					{% if release %}
+						<a class="btn" rel="nofollow" href="{{ package.getDownloadURL() }}" title="{{ _("Downloads") }}"
+								download="{{ release.getDownloadFileName() }}">
+							<i class="fas fa-download"></i>
+							<span class="count">{{ package.downloads }}</span>
+						</a>
+					{% endif %}
 					<a class="btn" href="{{ url_for('threads.list_all', pid=package.id) }}" title="{{ _("Threads") }}">
 						<i class="fas fa-comment-alt"></i>
 						<span class="count">{{ threads | length }}</span>
