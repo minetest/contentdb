@@ -104,7 +104,7 @@ def set_lock(id):
 		flash("Unlocked thread", "success")
 
 	addNotification(thread.watchers, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
-	addAuditLog(AuditSeverity.MODERATION, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
+	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.getViewURL(), thread.package)
 
 	db.session.commit()
 
