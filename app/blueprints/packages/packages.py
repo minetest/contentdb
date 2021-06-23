@@ -182,7 +182,7 @@ def view(package):
 @is_package_page
 def shield(package, type):
 	if type == "title":
-		url = "https://img.shields.io/badge/ContentDB-{}-{}" \
+		url = "https://img.shields.io/static/v1?label=ContentDB&message={}&color={}" \
 			.format(urlescape(package.title), urlescape("#375a7f"))
 	elif type == "downloads":
 		#api_url = abs_url_for("api.package", author=package.author.username, name=package.name)
