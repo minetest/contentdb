@@ -69,18 +69,16 @@ def callback(oauth_token):
 		if userByGithub is None:
 			flash("Unable to find an account for that Github user", "danger")
 			return redirect(url_for("users.claim_forums"))
-		elif login_user_set_active(userByGithub, remember=True):
-			addAuditLog(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",
-					url_for("users.profile", username=userByGithub.username))
-			db.session.commit()
 
-			if not current_user.password:
-				return redirect(next_url or url_for("users.set_password", optional=True))
-			else:
-				return redirect(next_url or url_for("homepage.home"))
-		else:
+		ret = login_user_set_active(userByGithub, remember=True)
+		if ret is None:
 			flash("Authorization failed [err=gh-login-failed]", "danger")
 			return redirect(url_for("users.login"))
+
+		addAuditLog(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",
+				url_for("users.profile", username=userByGithub.username))
+		db.session.commit()
+		return ret
 
 
 @bp.route("/github/webhook/", methods=["POST"])

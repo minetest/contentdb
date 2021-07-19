@@ -105,11 +105,12 @@ def claim_forums():
 					db.session.add(user)
 					db.session.commit()
 
-				if login_user_set_active(user, remember=True):
-					return redirect(url_for("users.set_password"))
-				else:
+				ret = login_user_set_active(user, remember=True)
+				if ret is None:
 					flash("Unable to login as user", "danger")
 					return redirect(url_for("users.claim_forums", username=username))
+
+				return ret
 
 			else:
 				flash("Could not find the key in your signature!", "danger")

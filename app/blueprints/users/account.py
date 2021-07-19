@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
+
 from flask import *
 from flask_login import current_user, login_required, logout_user, login_user
 from flask_wtf import FlaskForm
@@ -24,7 +25,7 @@ from wtforms.validators import *
 
 from app.models import *
 from app.tasks.emails import send_verify_email, send_anon_email, send_unsubscribe_verify, send_user_email
-from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog, nonEmptyOrNone
+from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog, nonEmptyOrNone, post_login
 from passlib.pwd import genphrase
 
 from . import bp
@@ -61,14 +62,11 @@ def handle_login(form):
 			url_for("users.profile", username=user.username))
 	db.session.commit()
 
-	login_user(user, remember=form.remember_me.data)
-	flash("Logged in successfully.", "success")
+	if not login_user(user, remember=form.remember_me.data):
+		flash("Login failed", "danger")
+		return
 
-	next = request.args.get("next")
-	if next and not is_safe_url(next):
-		abort(400)
-
-	return redirect(next or url_for("homepage.home"))
+	return post_login(user, request.args.get("next"))
 
 
 @bp.route("/user/login/", methods=["GET", "POST"])

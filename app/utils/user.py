@@ -19,9 +19,10 @@ from functools import wraps
 
 from flask_login import login_user, current_user
 from passlib.handlers.bcrypt import bcrypt
-from flask import redirect, url_for, abort
+from flask import redirect, url_for, abort, flash
 
 from app.models import User, UserRank, UserNotificationPreferences, db
+from app.utils import is_safe_url
 
 
 def check_password_hash(stored, given):
@@ -35,14 +36,33 @@ def make_flask_login_password(plaintext):
 	return bcrypt.hash(plaintext.encode("UTF-8"))
 
 
-def login_user_set_active(user: User, *args, **kwargs):
+def post_login(user: User, next_url):
+	if next_url and is_safe_url(next_url):
+		return redirect(next_url)
+
+	if not current_user.password:
+		return redirect(url_for("users.set_password", optional=True))
+
+	notif_count = len(user.notifications)
+	if notif_count > 0:
+		if notif_count >= 10:
+			flash("You have a lot of notifications, you should either read or clear them", "info")
+		return redirect(url_for("notifications.list_all"))
+
+	return redirect(url_for("homepage.home"))
+
+
+def login_user_set_active(user: User, next_url: str = None, *args, **kwargs):
 	if user.rank == UserRank.NOT_JOINED and user.email is None:
 		user.rank = UserRank.MEMBER
 		user.notification_preferences = UserNotificationPreferences(user)
 		user.is_active = True
 		db.session.commit()
 
-	return login_user(user, *args, **kwargs)
+	if login_user(user, *args, **kwargs):
+		return post_login(user, next_url)
+
+	return None
 
 
 def rank_required(rank):
