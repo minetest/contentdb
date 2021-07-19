@@ -21,13 +21,14 @@ from celery import group
 from flask import *
 from flask_login import current_user, login_user
 from flask_wtf import FlaskForm
+from sqlalchemy import or_
 from wtforms import *
 from wtforms.validators import InputRequired, Length
 
 from app.models import *
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates
-from app.utils import rank_required, addAuditLog, addNotification
+from app.utils import rank_required, addAuditLog, addNotification, get_system_user
 from . import bp
 
 
@@ -183,6 +184,30 @@ def admin_page():
 
 			flash("Started update configs", "success")
 			return redirect(url_for("admin.admin_page"))
+
+		elif action == "remindwip":
+			users = User.query.filter(User.packages.any(or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)))
+			system_user = get_system_user()
+			for user in users:
+				packages = db.session.query(Package.title).filter(
+						Package.author_id==user.id,
+						or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)) \
+					.all()
+
+				# Who needs translations?
+				packages = [pkg[0] for pkg in packages]
+				if len(packages) >= 3:
+					packages[len(packages) - 1] = "and " + packages[len(packages) - 1]
+					packages_list = ", ".join(packages)
+				else:
+					packages_list = "and ".join(packages)
+
+				havent = "haven't" if len(packages) > 1 else "hasn't"
+
+				addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
+						f"Did you forget? {packages_list} {havent} been submitted for review yet",
+						url_for('todo.view_user', username=user.username))
+			db.session.commit()
 
 		else:
 			flash("Unknown action: " + action, "danger")
