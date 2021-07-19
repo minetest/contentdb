@@ -22,7 +22,6 @@ from . import db
 from .users import Permission, UserRank
 from .packages import Package
 
-
 watchers = db.Table("watchers",
 	db.Column("user_id", db.Integer, db.ForeignKey("user.id"), primary_key=True),
 	db.Column("thread_id", db.Integer, db.ForeignKey("thread.id"), primary_key=True)
@@ -85,8 +84,13 @@ class Thread(db.Model):
 		elif perm == Permission.COMMENT_THREAD:
 			return canSee and (not self.locked or user.rank.atLeast(UserRank.MODERATOR))
 
-		elif perm == Permission.LOCK_THREAD or perm == Permission.DELETE_THREAD:
+		elif perm == Permission.LOCK_THREAD:
 			return user.rank.atLeast(UserRank.MODERATOR)
+
+		elif perm == Permission.DELETE_THREAD:
+			from app.utils.models import get_system_user
+			return (self.author == get_system_user() and self.package and
+					user in self.package.maintainers) or user.rank.atLeast(UserRank.MODERATOR)
 
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))
