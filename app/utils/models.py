@@ -110,7 +110,7 @@ def post_bot_message(package: Package, title: str, message: str):
 		thread.title = "Bot messages for {}".format(package.title)
 		thread.author = system_user
 		thread.private = True
-		thread.watchers.append(package.author)
+		thread.watchers.extend(package.maintainers)
 		db.session.add(thread)
 		db.session.flush()
 

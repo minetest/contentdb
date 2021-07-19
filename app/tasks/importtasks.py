@@ -70,7 +70,7 @@ def getMeta(urlstr, author):
 		return result
 
 
-def postReleaseCheckUpdate(self, release, path):
+def postReleaseCheckUpdate(self, release: PackageRelease, path):
 	try:
 		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
 				author=release.package.author.username, name=release.package.name)
@@ -129,6 +129,9 @@ def postReleaseCheckUpdate(self, release, path):
 
 	except MinetestCheckError as err:
 		db.session.rollback()
+
+		msg = f"{err}\n\nTask ID: {self.request.id}\n\nRelease: [View Release]({release.getEditURL()})"
+		post_bot_message(release.package, f"Release {release.title} validation failed", msg)
 
 		if "Fails validation" not in release.title:
 			release.title += " (Fails validation)"

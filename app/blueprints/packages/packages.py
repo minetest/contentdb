@@ -448,8 +448,12 @@ def edit_maintainers(package):
 		usernames = [x.strip().lower() for x in form.maintainers_str.data.split(",")]
 		users = User.query.filter(func.lower(User.username).in_(usernames)).all()
 
+		thread = package.threads.filter_by(author=get_system_user()).first()
+
 		for user in users:
 			if not user in package.maintainers:
+				if thread:
+					thread.watchers.append(user)
 				addNotification(user, current_user, NotificationType.MAINTAINER,
 						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
 
