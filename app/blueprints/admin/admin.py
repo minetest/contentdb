@@ -203,9 +203,11 @@ def admin_page():
 					packages_list = "and ".join(packages)
 
 				havent = "haven't" if len(packages) > 1 else "hasn't"
+				if len(packages_list) + 54  > 100:
+					packages_list = packages_list[0:(100-54-1)] + "…"
 
 				addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
-						f"Did you forget? {packages_list} {havent} been submitted for review yet",
+					f"Did you forget? {packages_list} {havent} been submitted for review yet",
 						url_for('todo.view_user', username=user.username))
 			db.session.commit()
 
