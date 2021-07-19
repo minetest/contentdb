@@ -20,7 +20,7 @@ bp = Blueprint("threads", __name__)
 from flask_login import current_user, login_required
 from app import menu
 from app.models import *
-from app.utils import addNotification, isYes, addAuditLog
+from app.utils import addNotification, isYes, addAuditLog, get_system_user
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
@@ -211,7 +211,7 @@ def edit_reply(id):
 
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
 def view(id):
-	thread = Thread.query.get(id)
+	thread: Thread = Thread.query.get(id)
 	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
@@ -238,6 +238,12 @@ def view(id):
 
 			msg = "New comment on '{}'".format(thread.title)
 			addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
+
+			if thread.author == get_system_user():
+				editors = User.query.filter(User.rank >= UserRank.EDITOR).all()
+				addNotification(editors, current_user, NotificationType.EDITOR_MISC, msg,
+						thread.getViewURL(), thread.package)
+
 			db.session.commit()
 
 			return redirect(thread.getViewURL())
