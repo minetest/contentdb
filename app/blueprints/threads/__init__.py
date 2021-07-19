@@ -331,9 +331,6 @@ def new():
 		if is_review_thread:
 			package.review_thread = thread
 
-			if package.state == PackageState.READY_FOR_REVIEW and current_user not in package.maintainers:
-				package.state = PackageState.CHANGES_NEEDED
-
 
 		notif_msg = "New thread '{}'".format(thread.title)
 		if package is not None:
