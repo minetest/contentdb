@@ -59,13 +59,16 @@ def edit_package(token, package):
 	return api_edit_package(token, package, request.json)
 
 
-def resolve_package_deps(out, package, only_hard):
+def resolve_package_deps(out, package, only_hard, depth=1):
 	id = package.getId()
 	if id in out:
 		return
 
 	ret = []
 	out[id] = ret
+
+	if package.type != PackageType.MOD:
+		return
 
 	for dep in package.dependencies:
 		if only_hard and dep.optional:
@@ -74,12 +77,16 @@ def resolve_package_deps(out, package, only_hard):
 		if dep.package:
 			name = dep.package.name
 			fulfilled_by = [ dep.package.getId() ]
-			resolve_package_deps(out, dep.package, only_hard)
+			resolve_package_deps(out, dep.package, only_hard, depth)
 
 		elif dep.meta_package:
 			name = dep.meta_package.name
 			fulfilled_by = [ pkg.getId() for pkg in dep.meta_package.packages]
-			# TODO: resolve most likely candidate
+
+			if depth == 1:
+				most_likely = next((pkg for pkg in dep.meta_package.packages if pkg.type == PackageType.MOD), None)
+				if most_likely:
+					resolve_package_deps(out, most_likely, only_hard, depth + 1)
 
 		else:
 			raise Exception("Malformed dependency")
