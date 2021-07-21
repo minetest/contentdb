@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
 	<link rel="stylesheet" type="text/css" href="/static/libs/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=26">
+	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=27">
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
 	<link rel="shortcut icon" href="/favicon-16.png" sizes="16x16">
 	<link rel="icon" href="/favicon-128.png" sizes="128x128">
@@ -65,7 +65,7 @@
 											title="{{ _('Work Queue') }}">
 									{% if todo_list_count > 0 %}
 										<i class="fas fa-inbox"></i>
-										<span class="badge badge-pill badge-notify" style="font-size:10px;">{{ todo_list_count }}</span>
+										<span class="badge badge-pill badge-notify">{{ todo_list_count }}</span>
 									{% else %}
 										<i class="fas fa-inbox" ></i>
 									{% endif %}
@@ -87,7 +87,16 @@
 										title="{{ _('Notifications') }}">
 								{% if current_user.notifications %}
 									<i class="fas fa-bell"></i>
-									<span class="badge badge-pill badge-notify" style="font-size:10px;">{{ current_user.notifications | length }}</span>
+									{% set num_notifs = current_user.notifications | length %}
+									{% if num_notifs > 60 %}
+										<span class="badge badge-pill badge-notify badge-emoji">
+											😢
+										</span>
+									{% else %}
+										<span class="badge badge-pill badge-notify">
+											{{ num_notifs }}
+										</span>
+									{% endif %}
 								{% else %}
 									<i class="fas fa-bell" ></i>
 								{% endif %}
