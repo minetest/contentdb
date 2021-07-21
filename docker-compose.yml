@@ -51,16 +51,6 @@ services:
     depends_on:
       - redis
 
-  flower:
-    image: mher/flower
-    command: ["flower", "--broker=redis://redis:6379/0", "--port=5124"]
-    env_file:
-      - config.env
-    ports:
-      - 5124:5124
-    depends_on:
-      - redis
-
   exporter:
     image: ovalmoney/celery-exporter
     env_file:
