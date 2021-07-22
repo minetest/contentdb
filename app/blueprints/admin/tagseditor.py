@@ -44,6 +44,7 @@ class TagForm(FlaskForm):
 	title	    = StringField("Title", [InputRequired(), Length(3,100)])
 	description = TextAreaField("Description", [Optional(), Length(0, 500)])
 	name        = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	is_protected = BooleanField("Is Protected")
 	submit      = SubmitField("Save")
 
 @bp.route("/tags/new/", methods=["GET", "POST"])
@@ -59,14 +60,16 @@ def create_edit_tag(name=None):
 	if not Permission.checkPerm(current_user, Permission.EDIT_TAGS if tag else Permission.CREATE_TAG):
 		abort(403)
 
-	form = TagForm(formdata=request.form, obj=tag)
+	form = TagForm( obj=tag)
 	if form.validate_on_submit():
 		if tag is None:
 			tag = Tag(form.title.data)
 			tag.description = form.description.data
+			tag.is_protected = form.is_protected.data
 			db.session.add(tag)
 		else:
 			form.populate_obj(tag)
+
 		db.session.commit()
 
 		if Permission.EDIT_TAGS.check(current_user):

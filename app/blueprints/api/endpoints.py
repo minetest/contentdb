@@ -364,6 +364,8 @@ def homepage():
 	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
 
+	featured = Package.query.filter(Package.tags.any(name="featured")).order_by(
+			func.random()).limit(6).all()
 	new     = query.order_by(db.desc(Package.approved_at)).limit(4).all()
 	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
 	pop_gam = query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(8).all()
@@ -386,6 +388,7 @@ def homepage():
 	return {
 		"count": count,
 		"downloads": downloads,
+		"featured": featured,
 		"new": mapPackages(new),
 		"updated": mapPackages(updated),
 		"pop_mod": mapPackages(pop_mod),

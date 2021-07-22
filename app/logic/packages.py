@@ -19,7 +19,7 @@ import re
 import validators
 
 from app.logic.LogicError import LogicError
-from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, License
+from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, License, UserRank
 from app.utils import addAuditLog
 
 
@@ -134,15 +134,20 @@ def do_edit_package(user: User, package: Package, was_new: bool, data: dict, rea
 		package.provides.append(m)
 
 	if "tags" in data:
+		old_tags = package.tags
 		package.tags.clear()
 		for tag_id in data["tags"]:
 			if is_int(tag_id):
-				package.tags.append(Tag.query.get(tag_id))
+				tag = Tag.query.get(tag_id)
 			else:
 				tag = Tag.query.filter_by(name=tag_id).first()
 				if tag is None:
 					raise LogicError(400, "Unknown tag: " + tag_id)
-				package.tags.append(tag)
+
+			if tag.is_protected and tag not in old_tags and not user.rank.atLeast(UserRank.EDITOR):
+				raise LogicError(400, f"Unable to add protected tag {tag.title} to package")
+
+			package.tags.append(tag)
 
 	if "content_warnings" in data:
 		package.content_warnings.clear()

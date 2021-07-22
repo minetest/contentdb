@@ -18,6 +18,8 @@ def home():
 	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
 
+	featured = Package.query.filter(Package.tags.any(name="featured")).order_by(func.random()).limit(6).all()
+
 	new     = join(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
 	pop_gam = join(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(8).all()
@@ -39,5 +41,5 @@ def home():
 	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
 		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
 
-	return render_template("index.html", count=count, downloads=downloads, tags=tags,
+	return render_template("index.html", count=count, downloads=downloads, tags=tags, featured=featured,
 			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, high_reviewed=high_reviewed, reviews=reviews)

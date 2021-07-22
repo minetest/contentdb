@@ -12,7 +12,7 @@
 	<a class="btn btn-primary float-right" href="{{ url_for('admin.create_edit_tag') }}">New Tag</a>
 	<a class="btn btn-secondary mb-4" href="{{ url_for('admin.tag_list') }}">Back to list</a>
 
-	{% from "macros/forms.html" import render_field, render_submit_field %}
+	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
@@ -21,6 +21,10 @@
 		{% if tag %}
 			{{ render_field(form.name) }}
 		{% endif %}
+		<div class="form-group my-5">
+			{{ render_checkbox_field(form.is_protected) }}
+			<small class="form-text text-muted">Whether non-Editors can add this tag to packages</small>
+		</div>
 		{{ render_submit_field(form.submit) }}
 	</form>
 {% endblock %}

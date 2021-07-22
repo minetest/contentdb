@@ -70,6 +70,23 @@ def getMeta(urlstr, author):
 		return result
 
 
+def get_edit_data_from_dir(dir: str):
+	data = {}
+	for path in [os.path.join(dir, ".cdb.json"), os.path.join(dir, ".cdb", "meta.json")]:
+		if os.path.isfile(path):
+			with open(path, "r") as f:
+				data = json.loads(f.read())
+			break
+
+	for path in [os.path.join(dir, ".cdb.md"), os.path.join(dir, ".cdb", "long_description.md")]:
+		if os.path.isfile(path):
+			with open(path, "r") as f:
+				data["long_description"] = f.read().replace("\r\n", "\n")
+			break
+
+	return data
+
+
 def postReleaseCheckUpdate(self, release: PackageRelease, path):
 	try:
 		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
@@ -117,13 +134,11 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 			release.max_rel = MinetestRelease.get(tree.meta["max_minetest_version"], None)
 
 		try:
-			with open(os.path.join(tree.baseDir, ".cdb.json"), "r") as f:
-				data = json.loads(f.read())
+			data = get_edit_data_from_dir(tree.baseDir)
+			if data != {}:  # Not sure if this will actually work to check not empty, probably not
 				do_edit_package(package.author, package, False, data, "Post release hook")
 		except LogicError as e:
 			raise TaskError(e.message)
-		except IOError:
-			pass
 
 		return tree
 
