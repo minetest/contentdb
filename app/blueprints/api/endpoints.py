@@ -388,7 +388,7 @@ def homepage():
 	return {
 		"count": count,
 		"downloads": downloads,
-		"featured": featured,
+		"featured": mapPackages(featured),
 		"new": mapPackages(new),
 		"updated": mapPackages(updated),
 		"pop_mod": mapPackages(pop_mod),
