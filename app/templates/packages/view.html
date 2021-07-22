@@ -221,7 +221,9 @@
 								<li>
 									<a href="{{ ss.url }}" class="position-relative">
 										<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
-										<span class="badge bg-dark badge-tr">{{ _("Awaiting review") }}</span>
+										{% if not ss.approved %}
+											<span class="badge bg-dark badge-tr">{{ _("Awaiting review") }}</span>
+										{% endif %}
 									</a>
 								</li>
 							{% endif %}
