@@ -30,9 +30,14 @@
 							<img class="img-fluid" style="max-height: 64px;"
 									src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
 						</div>
-						<span class="col">
+						<div class="col">
 							{{ ss.title }}
-						</span>
+							{% if not ss.approved %}
+								<div class="text-muted">
+									Awaiting review
+								</div>
+							{%  endif %}
+						</div>
 						<form action="{{ ss.getDeleteURL() }}" method="POST" class="col-auto text-right" role="form">
 							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 							<a class="btn btn-sm btn-primary" href="{{ ss.getEditURL() }}">

@@ -219,8 +219,9 @@
 						{% for ss in screenshots %}
 							{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 								<li>
-									<a href="{{ ss.url }}">
+									<a href="{{ ss.url }}" class="position-relative">
 										<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+										<span class="badge bg-dark badge-tr">{{ _("Awaiting review") }}</span>
 									</a>
 								</li>
 							{% endif %}
