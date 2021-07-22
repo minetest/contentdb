@@ -134,7 +134,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, data: dict, rea
 		package.provides.append(m)
 
 	if "tags" in data:
-		old_tags = package.tags
+		old_tags = list(package.tags)
 		package.tags.clear()
 		for tag_id in data["tags"]:
 			if is_int(tag_id):

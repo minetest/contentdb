@@ -21,7 +21,7 @@
 
 {% block content %}
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
-	<div id="featuredCarousel" class="carousel slide mb-5" data-ride="carousel">
+	<div id="featuredCarousel" class="carousel slide my-0" data-ride="carousel" data-interval="7500">
 		<ol class="carousel-indicators">
 			{% for package in featured %}
 				<li data-target="#featuredCarousel" data-slide-to="{{ loop.index - 1 }}" {% if loop.index == 1 %}class="active"{% endif %}></li>
@@ -37,14 +37,14 @@
 							<img class="embed-responsive-item" src="{{ cover_image }}"
 								alt="{{ _('%(title)s by %(author)s', title=package.title, author=package.author.display_name) }}">
 						</div>
-						<div class="carousel-caption d-none d-md-block text-shadow">
-							<h3 class="mt-0 mb-3 fs-2">
+						<div class="carousel-caption text-shadow">
+							<h3 class="mt-0 mb-3">
 								{{ _('<strong>%(title)s</strong> by %(author)s', title=package.title, author=package.author.display_name) }}
 							</h3>
 							<p>
 								{{ package.short_desc }}
 							</p>
-							<div>
+							<div class="d-none d-md-block">
 								<span class="mr-2">
 									{{ package.type.value }}
 								</span>
@@ -82,6 +82,12 @@
 		<a class="carousel-control-next" href="#featuredCarousel" role="button" data-slide="next">
 			<span class="carousel-control-next-icon" aria-hidden="true"></span>
 			<span class="sr-only">{{ _("Next") }}</span>
+		</a>
+	</div>
+	<div class="text-right mb-5 text-muted" style="opacity: 0.4;">
+		<a href="/help/featured/" class="btn">
+			<i class="fas fa-question-circle mr-1"></i>
+			Featured
 		</a>
 	</div>
 

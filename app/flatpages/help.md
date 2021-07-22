@@ -9,6 +9,7 @@ toc: False
 * [Ranks and Permissions](ranks_permissions)
 * [Reporting Content](reporting)
 * [Top Packages Algorithm](top_packages)
+* [Featured Packages](featured)
 
 ## Help for Package Authors
 

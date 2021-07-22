@@ -173,12 +173,33 @@ pre code {
 	}
 }
 
-.fs-2 {
-	font-size: calc(1.325rem + .9vw) !important;
+#featuredCarousel {
+	.embed-responsive-item {
+		filter: brightness(0.85);
+		object-fit: cover;
+	}
+	.carousel-item, .embed-responsive-item {
+		max-height: 50vh;
+	}
+	.carousel-inner {
+		background-color: #000;
+		border-radius: 3px;
+		overflow: hidden;
+	}
+	.carousel-indicators {
+		margin-bottom: 0 !important;
+		opacity: 0.6;
+	}
+}
+
+@media (min-width: 768px) {
+	#featuredCarousel h3 {
+		font-size: calc(1.325rem + .9vw) !important;
+	}
 }
 
 .text-shadow {
-	text-shadow: 3px 3px 3px rgba(10,10,10,0.2);
+	text-shadow: 0 0 10px rgba(10, 10, 10, 0.2), 3px 3px 3px rgba(10, 10, 10, 0.4);
 }
 
 @import "dracula.scss";
