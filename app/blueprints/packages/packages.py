@@ -302,7 +302,7 @@ def create_edit(author=None, name=None):
 			wasNew = True
 
 		try:
-			do_edit_package(current_user, package, wasNew, {
+			do_edit_package(current_user, package, wasNew, True, {
 				"type": form.type.data,
 				"title": form.title.data,
 				"name": form.name.data,

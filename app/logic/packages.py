@@ -40,17 +40,17 @@ def get_license(name):
 
 name_re = re.compile("^[a-z0-9_]+$")
 
-any = "?"
+AnyType = "?"
 ALLOWED_FIELDS = {
-	"type": any,
+	"type": AnyType,
 	"title": str,
 	"name": str,
 	"short_description": str,
 	"short_desc": str,
 	"tags": list,
 	"content_warnings": list,
-	"license": any,
-	"media_license": any,
+	"license": AnyType,
+	"media_license": AnyType,
 	"long_description": str,
 	"desc": str,
 	"repo": str,
@@ -80,7 +80,7 @@ def validate(data: dict):
 		if value is not None:
 			typ = ALLOWED_FIELDS.get(key)
 			check(typ is not None, key + " is not a known field")
-			if typ != any:
+			if typ != AnyType:
 				check(isinstance(value, typ), key + " must be a " + typ.__name__)
 
 	if "name" in data:
@@ -98,7 +98,8 @@ def validate(data: dict):
 			check(validators.url(value, public=True), key + " must be a valid URL")
 
 
-def do_edit_package(user: User, package: Package, was_new: bool, data: dict, reason: str = None):
+def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, data: dict,
+		reason: str = None):
 	if not package.checkPerm(user, Permission.EDIT_PACKAGE):
 		raise LogicError(403, "You do not have permission to edit this package")
 
@@ -144,10 +145,18 @@ def do_edit_package(user: User, package: Package, was_new: bool, data: dict, rea
 				if tag is None:
 					raise LogicError(400, "Unknown tag: " + tag_id)
 
+			if not was_web and tag.is_protected:
+				break
+
 			if tag.is_protected and tag not in old_tags and not user.rank.atLeast(UserRank.EDITOR):
 				raise LogicError(400, f"Unable to add protected tag {tag.title} to package")
 
 			package.tags.append(tag)
+
+		if not was_web:
+			for tag in old_tags:
+				if tag.is_protected:
+					package.tags.append(tag)
 
 	if "content_warnings" in data:
 		package.content_warnings.clear()

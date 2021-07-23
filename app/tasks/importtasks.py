@@ -119,7 +119,7 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 		try:
 			with open(os.path.join(tree.baseDir, ".cdb.json"), "r") as f:
 				data = json.loads(f.read())
-				do_edit_package(package.author, package, False, data, "Post release hook")
+				do_edit_package(package.author, package, False, False, data, "Post release hook")
 		except LogicError as e:
 			raise TaskError(e.message)
 		except IOError:

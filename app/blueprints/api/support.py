@@ -100,7 +100,7 @@ def api_edit_package(token: APIToken, package: Package, data: dict, reason: str 
 
 	reason += ", token=" + token.name
 
-	package = guard(do_edit_package)(token.owner, package, False, data, reason)
+	package = guard(do_edit_package)(token.owner, package, False, False, data, reason)
 
 	return jsonify({
 		"success": True,
