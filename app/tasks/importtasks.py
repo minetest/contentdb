@@ -75,6 +75,9 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
 				author=release.package.author.username, name=release.package.name)
 
+		if tree.name is not None and release.package.name != tree.name:
+			raise MinetestCheckError(f"Expected {tree.relative} to have technical name {release.package.name}, instead has name {tree.name}")
+
 		cache = {}
 		def getMetaPackages(names):
 			return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
