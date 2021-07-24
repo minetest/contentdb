@@ -18,6 +18,7 @@
 		{{ form.hidden_tag() }}
 
 		{% if user.checkPerm(current_user, "CHANGE_USERNAMES") %}
+			{{ render_field(form.username, tabindex=230) }}
 			{{ render_field(form.display_name, tabindex=230) }}
 			{{ render_field(form.forums_username, tabindex=230) }}
 			{{ render_field_prefix(form.github_username, tabindex=230) }}

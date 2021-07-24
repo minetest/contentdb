@@ -337,6 +337,9 @@ class Package(db.Model):
 	update_config = db.relationship("PackageUpdateConfig", uselist=False, back_populates="package",
 			cascade="all, delete, delete-orphan")
 
+	aliases = db.relationship("PackageAlias",  foreign_keys="PackageAlias.package_id",
+			back_populates="package", cascade="all, delete, delete-orphan")
+
 	def __init__(self, package=None):
 		if package is None:
 			return
@@ -385,15 +388,21 @@ class Package(db.Model):
 			release = self.getDownloadRelease(version=version)
 			release_id = release and release.id
 
-		return {
+		ret = {
 			"name": self.name,
 			"title": self.title,
 			"author": self.author.username,
 			"short_description": self.short_desc,
 			"type": self.type.toName(),
 			"release": release_id,
-			"thumbnail": (base_url + tnurl) if tnurl is not None else None
+			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
+			"aliases": [ alias.getAsDictionary() for alias in self.aliases ],
 		}
+
+		if not ret["aliases"]:
+			del ret["aliases"]
+
+		return ret
 
 	def getAsDictionary(self, base_url, version=None):
 		tnurl = self.getThumbnailURL(1)
@@ -542,6 +551,14 @@ class Package(db.Model):
 				return rel
 
 		return None
+
+	def getAliasListURL(self):
+		return url_for("packages.alias_list",
+				author=self.author.username, name=self.name)
+
+	def getAliasCreateURL(self):
+		return url_for("packages.alias_create_edit",
+				author=self.author.username, name=self.name)
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
@@ -1033,3 +1050,24 @@ class PackageUpdateConfig(db.Model):
 
 	def get_create_release_url(self):
 		return self.package.getCreateReleaseURL(title=self.get_title(), ref=self.get_ref())
+
+
+class PackageAlias(db.Model):
+	id         = db.Column(db.Integer, primary_key=True)
+
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=False)
+	package    = db.relationship("Package", back_populates="aliases", foreign_keys=[package_id])
+
+	author     = db.Column(db.String(50), nullable=False)
+	name      = db.Column(db.String(100), nullable=False)
+
+	def __init__(self, author="", name=""):
+		self.author = author
+		self.name = name
+
+	def getEditURL(self):
+		return url_for("packages.alias_create_edit", author=self.package.author.username,
+				name=self.package.name, alias_id=self.id)
+
+	def getAsDictionary(self):
+		return f"{self.author}/{self.name}"

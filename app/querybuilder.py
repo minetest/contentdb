@@ -101,7 +101,7 @@ class QueryBuilder:
 		else:
 			query = Package.query.filter_by(state=PackageState.APPROVED)
 
-		query = query.options(subqueryload(Package.main_screenshot))
+		query = query.options(subqueryload(Package.main_screenshot), subqueryload(Package.aliases))
 
 		query = self.orderPackageQuery(self.filterPackageQuery(query))
 

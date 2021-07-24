@@ -18,7 +18,7 @@
 from functools import wraps
 from flask import abort, redirect, url_for, request
 from flask_login import current_user
-from app.models import User, NotificationType, Package, UserRank, Notification, db, AuditSeverity, AuditLogEntry, ThreadReply, Thread, PackageState, PackageType
+from app.models import User, NotificationType, Package, UserRank, Notification, db, AuditSeverity, AuditLogEntry, ThreadReply, Thread, PackageState, PackageType, PackageAlias
 
 
 def getPackageByInfo(author, name):
@@ -45,16 +45,22 @@ def is_package_page(f):
 		package = getPackageByInfo(author, name)
 		if package is None:
 			package = getPackageByInfo(author, name + "_game")
-			if package is None or package.type != PackageType.GAME:
-				abort(404)
+			if package and package.type == PackageType.GAME:
+				args = dict(kwargs)
+				args["name"] = name + "_game"
+				return redirect(url_for(request.endpoint, **args))
 
-			args = dict(kwargs)
-			args["name"] = name + "_game"
-			return redirect(url_for(request.endpoint, **args))
+			alias = PackageAlias.query.filter_by(author=author, name=name).first()
+			if alias is not None:
+				args = dict(kwargs)
+				args["author"] = alias.package.author.username
+				args["name"] = alias.package.name
+				return redirect(url_for(request.endpoint, **args))
+
+			abort(404)
 
 		del kwargs["author"]
 		del kwargs["name"]
-
 		return f(package=package, *args, **kwargs)
 
 	return decorated_function

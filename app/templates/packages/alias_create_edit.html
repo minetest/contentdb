@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Alias") }}
+{% endblock %}
+
+{% block link %}
+	<a href="{{ package.getDetailsURL() }}">{{ package.title }}</a>
+{% endblock %}
+
+{% block content %}
+<a class="btn btn-secondary" href="{{ package.getAliasListURL() }}">Back to Aliases</a>
+
+{% from "macros/forms.html" import render_field, render_submit_field, render_toggle_field %}
+<form method="POST" action="" enctype="multipart/form-data" class="mt-4">
+	{{ form.hidden_tag() }}
+
+	{{ render_field(form.author) }}
+	{{ render_field(form.name) }}
+	{{ render_submit_field(form.submit) }}
+</form>
+
+{% endblock %}

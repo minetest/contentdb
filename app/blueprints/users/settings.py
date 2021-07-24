@@ -56,6 +56,12 @@ def handle_profile_edit(form, user, username):
 			flash("A user already has that name", "danger")
 			return None
 
+		alias_by_name = PackageAlias.query.filter(or_(
+				PackageAlias.author == form.display_name.data)).first()
+		if alias_by_name:
+			flash("A user already has that name", "danger")
+			return
+
 		user.display_name = form.display_name.data
 
 		severity = AuditSeverity.USER if current_user == user else AuditSeverity.MODERATION
@@ -190,6 +196,7 @@ def email_notifications(username=None):
 
 
 class UserAccountForm(FlaskForm):
+	username = StringField("Username", [Optional(), Length(1, 50)])
 	display_name = StringField("Display name", [Optional(), Length(2, 100)])
 	forums_username = StringField("Forums Username", [Optional(), Length(2, 50)])
 	github_username = StringField("GitHub Username", [Optional(), Length(2, 50)])
@@ -219,6 +226,14 @@ def account(username):
 
 		# Copy form fields to user_profile fields
 		if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
+			if user.username != form.username.data:
+				for package in user.packages:
+					alias = PackageAlias(user.username, package.name)
+					package.aliases.append(alias)
+					db.session.add(alias)
+
+				user.username = form.username.data
+
 			user.display_name = form.display_name.data
 			user.forums_username = nonEmptyOrNone(form.forums_username.data)
 			user.github_username = nonEmptyOrNone(form.github_username.data)

@@ -545,3 +545,42 @@ def audit(package):
 
 	pagination = query.paginate(page, num, True)
 	return render_template("admin/audit.html", log=pagination.items, pagination=pagination)
+
+
+class PackageAliasForm(FlaskForm):
+	author  = StringField("Author Name", [InputRequired(), Length(1, 50)])
+	name    = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	submit  = SubmitField("Save")
+
+
+@bp.route("/packages/<author>/<name>/aliases/")
+@rank_required(UserRank.EDITOR)
+@is_package_page
+def alias_list(package: Package):
+	return render_template("packages/alias_list.html", package=package)
+
+
+@bp.route("/packages/<author>/<name>/aliases/new/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/aliases/<int:alias_id>/", methods=["GET", "POST"])
+@rank_required(UserRank.EDITOR)
+@is_package_page
+def alias_create_edit(package: Package, alias_id: int = None):
+	alias = None
+	if alias_id:
+		alias = PackageAlias.query.get(alias_id)
+		if alias is None or alias.package != package:
+			abort(404)
+
+	form = PackageAliasForm(request.form, obj=alias)
+	if form.validate_on_submit():
+		if alias is None:
+			alias = PackageAlias()
+			alias.package = package
+			db.session.add(alias)
+
+		form.populate_obj(alias)
+		db.session.commit()
+
+		return redirect(package.getAliasListURL())
+
+	return render_template("packages/alias_create_edit.html", package=package, form=form)

@@ -127,6 +127,12 @@ def handle_register(form):
 			flash("That username/display name is already in use, please choose another.", "danger")
 			return
 
+	alias_by_name = PackageAlias.query.filter(or_(
+			PackageAlias.author==form.username.data,
+			PackageAlias.author==form.display_name.data)).first()
+	if alias_by_name:
+		flash("That username/display name is already in use, please choose another.", "danger")
+		return
 
 	user_by_email = User.query.filter_by(email=form.email.data).first()
 	if user_by_email:
