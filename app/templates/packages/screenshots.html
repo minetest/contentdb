@@ -6,7 +6,7 @@
 
 {% block content %}
 	{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-		<a href="{{ package.getNewScreenshotURL() }}" class="btn btn-primary float-right">
+		<a href="{{ package.getURL("packages.create_screenshot") }}" class="btn btn-primary float-right">
 			<i class="fas fa-plus mr-1"></i>
 			{{ _("Add Image") }}
 		</a>

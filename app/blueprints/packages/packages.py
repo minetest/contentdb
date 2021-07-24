@@ -70,7 +70,7 @@ def list_all():
 	if qb.lucky:
 		package = query.first()
 		if package:
-			return redirect(package.getDetailsURL())
+			return redirect(package.getURL("packages.view"))
 
 		topic = qb.buildTopicQuery().first()
 		if qb.search and topic:
@@ -206,7 +206,7 @@ def download(package):
 			return "", 204
 		else:
 			flash("No download available.", "danger")
-			return redirect(package.getDetailsURL())
+			return redirect(package.getURL("packages.view"))
 	else:
 		return redirect(release.getDownloadURL())
 
@@ -263,7 +263,7 @@ def create_edit(author=None, name=None):
 		if package is None:
 			abort(404)
 		if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
-			return redirect(package.getDetailsURL())
+			return redirect(package.getURL("packages.view"))
 
 		author = package.author
 
@@ -321,11 +321,11 @@ def create_edit(author=None, name=None):
 			if wasNew and package.repo is not None:
 				importRepoScreenshot.delay(package.id)
 
-			next_url = package.getDetailsURL()
+			next_url = package.getURL("packages.view")
 			if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
 				next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
 			elif wasNew:
-				next_url = package.getSetupReleasesURL()
+				next_url = package.getURL("packages.setup_releases")
 
 			return redirect(next_url)
 		except LogicError as e:
@@ -353,7 +353,7 @@ def move_to_state(package):
 
 	if not package.canMoveToState(current_user, state):
 		flash("You don't have permission to do that", "danger")
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	package.state = state
 	msg = "Marked {} as {}".format(package.title, state.value)
@@ -368,9 +368,9 @@ def move_to_state(package):
 
 		msg = "Approved {}".format(package.title)
 
-	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getDetailsURL(), package)
+	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getURL("packages.view"), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
-	addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
+	addAuditLog(severity, current_user, msg, package.getURL("packages.view"), package)
 
 	db.session.commit()
 
@@ -381,7 +381,7 @@ def move_to_state(package):
 		else:
 			return redirect(url_for('threads.new', pid=package.id, title='Package approval comments'))
 
-	return redirect(package.getDetailsURL())
+	return redirect(package.getURL("packages.view"))
 
 
 @bp.route("/packages/<author>/<name>/remove/", methods=["GET", "POST"])
@@ -395,7 +395,7 @@ def remove(package):
 	if "delete" in request.form:
 		if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
 			flash("You don't have permission to do that.", "danger")
-			return redirect(package.getDetailsURL())
+			return redirect(package.getURL("packages.view"))
 
 		package.state = PackageState.DELETED
 
@@ -411,19 +411,19 @@ def remove(package):
 	elif "unapprove" in request.form:
 		if not package.checkPerm(current_user, Permission.UNAPPROVE_PACKAGE):
 			flash("You don't have permission to do that.", "danger")
-			return redirect(package.getDetailsURL())
+			return redirect(package.getURL("packages.view"))
 
 		package.state = PackageState.WIP
 
 		msg = "Unapproved {}".format(package.title)
-		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getDetailsURL(), package)
-		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.getDetailsURL(), package)
+		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getURL("packages.view"), package)
+		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.getURL("packages.view"), package)
 
 		db.session.commit()
 
 		flash("Unapproved package", "success")
 
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 	else:
 		abort(400)
 
@@ -440,7 +440,7 @@ class PackageMaintainersForm(FlaskForm):
 def edit_maintainers(package):
 	if not package.checkPerm(current_user, Permission.EDIT_MAINTAINERS):
 		flash("You do not have permission to edit maintainers", "danger")
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	form = PackageMaintainersForm(formdata=request.form)
 	if request.method == "GET":
@@ -457,12 +457,12 @@ def edit_maintainers(package):
 				if thread:
 					thread.watchers.append(user)
 				addNotification(user, current_user, NotificationType.MAINTAINER,
-						"Added you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
+						"Added you as a maintainer of {}".format(package.title), package.getURL("packages.view"), package)
 
 		for user in package.maintainers:
 			if user != package.author and not user in users:
 				addNotification(user, current_user, NotificationType.MAINTAINER,
-						"Removed you as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
+						"Removed you as a maintainer of {}".format(package.title), package.getURL("packages.view"), package)
 
 		package.maintainers.clear()
 		package.maintainers.extend(users)
@@ -470,13 +470,13 @@ def edit_maintainers(package):
 			package.maintainers.append(package.author)
 
 		msg = "Edited {} maintainers".format(package.title)
-		addNotification(package.author, current_user, NotificationType.MAINTAINER, msg, package.getDetailsURL(), package)
+		addNotification(package.author, current_user, NotificationType.MAINTAINER, msg, package.getURL("packages.view"), package)
 		severity = AuditSeverity.NORMAL if current_user == package.author else AuditSeverity.MODERATION
-		addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
+		addAuditLog(severity, current_user, msg, package.getURL("packages.view"), package)
 
 		db.session.commit()
 
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).order_by(db.asc(User.username)).all()
 
@@ -498,11 +498,11 @@ def remove_self_maintainers(package):
 		package.maintainers.remove(current_user)
 
 		addNotification(package.author, current_user, NotificationType.MAINTAINER,
-				"Removed themself as a maintainer of {}".format(package.title), package.getDetailsURL(), package)
+				"Removed themself as a maintainer of {}".format(package.title), package.getURL("packages.view"), package)
 
 		db.session.commit()
 
-	return redirect(package.getDetailsURL())
+	return redirect(package.getURL("packages.view"))
 
 
 @bp.route("/packages/<author>/<name>/audit/")
@@ -556,7 +556,7 @@ def alias_create_edit(package: Package, alias_id: int = None):
 		form.populate_obj(alias)
 		db.session.commit()
 
-		return redirect(package.getAliasListURL())
+		return redirect(package.getURL("packages.alias_list"))
 
 	return render_template("packages/alias_create_edit.html", package=package, form=form)
 

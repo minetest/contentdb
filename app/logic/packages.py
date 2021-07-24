@@ -176,7 +176,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			msg = "Edited {} ({})".format(package.title, reason)
 
 		severity = AuditSeverity.NORMAL if user in package.maintainers else AuditSeverity.EDITOR
-		addAuditLog(severity, user, msg, package.getDetailsURL(), package)
+		addAuditLog(severity, user, msg, package.getURL("packages.view"), package)
 
 	db.session.commit()
 

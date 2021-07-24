@@ -46,7 +46,7 @@ class ReviewForm(FlaskForm):
 def review(package):
 	if current_user in package.maintainers:
 		flash("You can't review your own package!", "danger")
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	review = PackageReview.query.filter_by(package=package, author=current_user).first()
 
@@ -110,7 +110,7 @@ def review(package):
 
 		db.session.commit()
 
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	return render_template("packages/review_create_edit.html",
 			form=form, package=package, review=review)

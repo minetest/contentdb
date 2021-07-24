@@ -296,7 +296,7 @@ def new():
 		flash("Please wait before opening another thread", "danger")
 
 		if package:
-			return redirect(package.getDetailsURL())
+			return redirect(package.getURL("packages.view"))
 		else:
 			return redirect(url_for("homepage.home"))
 

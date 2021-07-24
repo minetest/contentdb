@@ -150,7 +150,7 @@ class PackageReview(db.Model):
 		return 1 if self.recommends else -1
 
 	def getEditURL(self):
-		return self.package.getReviewURL()
+		return self.package.getURL("packages.review")
 
 	def getDeleteURL(self):
 		return url_for("packages.delete_review",

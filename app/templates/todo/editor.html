@@ -17,7 +17,7 @@
 			</h3>
 			<ul class="card-body d-flex p-0 flex-row flex-wrap justify-content-start align-content-start p-4">
 				{% for s in screenshots %}
-					<li class="packagetile flex-fill"><a href="{{ s.getEditURL() }}"
+					<li class="packagetile flex-fill"><a href="{{ s.getURL("packages.create_edit") }}"
 						style="background-image: url({{ s.getThumbnailURL(3) }});">
 						<div class="packagegridscrub"></div>
 						<div class="packagegridinfo">
@@ -46,7 +46,7 @@
 				<h3 class="card-header">Packages</h3>
 				<div class="list-group list-group-flush">
 					{% for p in packages %}
-						<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+						<a href="{{ p.getURL("packages.view") }}" class="list-group-item list-group-item-action">
 							<span class="float-right" title="Created {{ p.created_at | datetime }}">
 								<small>
 									{{ p.created_at | timedelta }} ago
@@ -83,7 +83,7 @@
 							{% endif %}
 							<a href="{{ r.getEditURL() }}">{{ r.title }}</a>
 							on
-							<a href="{{ r.package.getDetailsURL() }}">
+							<a href="{{ r.package.getURL("packages.view") }}">
 								{{ r.package.title }} by {{ r.package.author.display_name }}
 							</a>
 						</li>
@@ -139,7 +139,7 @@
 			<h3 class="card-header">WIP Packages</h3>
 			<div class="list-group list-group-flush" style="max-height: 300px; overflow: hidden auto;">
 				{% for p in wip_packages %}
-					<a href="{{ p.getDetailsURL() }}" class="list-group-item list-group-item-action">
+					<a href="{{ p.getURL("packages.view") }}" class="list-group-item list-group-item-action">
 						<span class="float-right" title="Created {{ p.created_at | datetime }}">
 							<small>
 								{{ p.created_at | timedelta }} ago

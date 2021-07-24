@@ -53,7 +53,7 @@ def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
 		msg = "Created release {}".format(rel.title)
 	else:
 		msg = "Created release {} ({})".format(rel.title, reason)
-	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getDetailsURL(), package)
+	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getURL("packages.view"), package)
 
 	db.session.commit()
 
@@ -88,7 +88,7 @@ def do_create_zip_release(user: User, package: Package, title: str, file,
 		msg = "Created release {}".format(rel.title)
 	else:
 		msg = "Created release {} ({})".format(rel.title, reason)
-	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getDetailsURL(), package)
+	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getURL("packages.view"), package)
 
 	db.session.commit()
 

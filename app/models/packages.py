@@ -435,7 +435,7 @@ class Package(db.Model):
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
 			"screenshots": [base_url + ss.url for ss in self.screenshots],
 
-			"url": base_url + self.getDownloadURL(),
+			"url": base_url + self.getURL("packages.download"),
 			"release": release and release.id,
 
 			"score": round(self.score * 10) / 10,
@@ -460,17 +460,12 @@ class Package(db.Model):
 		else:
 			return screenshot.url
 
-	def getURL(self, endpoint):
-		return url_for(endpoint, author=self.author.username, name=self.name)
-
-	def getDetailsURL(self, absolute=False):
+	def getURL(self, endpoint, absolute=False, **kwargs):
 		if absolute:
 			from app.utils import abs_url_for
-			return abs_url_for("packages.view",
-					author=self.author.username, name=self.name)
+			return abs_url_for(endpoint, author=self.author.username, name=self.name, **kwargs)
 		else:
-			return url_for("packages.view",
-					author=self.author.username, name=self.name)
+			return url_for(endpoint, author=self.author.username, name=self.name, **kwargs)
 
 	def getShieldURL(self, type):
 		from app.utils import abs_url_for
@@ -479,15 +474,7 @@ class Package(db.Model):
 
 	def makeShield(self, type):
 		return "[![ContentDB]({})]({})" \
-			.format(self.getShieldURL(type), self.getDetailsURL(True))
-
-	def getEditURL(self):
-		return url_for("packages.create_edit",
-				author=self.author.username, name=self.name)
-
-	def getReleaseListURL(self):
-		return url_for("packages.list_releases",
-				author=self.author.username, name=self.name)
+			.format(self.getShieldURL(type), self.getURL("packages.view", True))
 
 	def getSetStateURL(self, state):
 		if type(state) == str:
@@ -498,54 +485,6 @@ class Package(db.Model):
 		return url_for("packages.move_to_state",
 				author=self.author.username, name=self.name, state=state.name.lower())
 
-	def getRemoveURL(self):
-		return url_for("packages.remove",
-				author=self.author.username, name=self.name)
-
-	def getNewScreenshotURL(self):
-		return url_for("packages.create_screenshot",
-				author=self.author.username, name=self.name)
-
-	def getEditScreenshotsURL(self):
-		return url_for("packages.screenshots",
-				author=self.author.username, name=self.name)
-
-	def getCreateReleaseURL(self, **kwargs):
-		return url_for("packages.create_release",
-				author=self.author.username, name=self.name, **kwargs)
-
-	def getBulkReleaseURL(self):
-		return url_for("packages.bulk_change_release",
-			author=self.author.username, name=self.name)
-
-	def getUpdateConfigURL(self, trigger=None, action=None):
-		return url_for("packages.update_config",
-			author=self.author.username, name=self.name, trigger=trigger, action=action)
-
-	def getSetupReleasesURL(self):
-		return url_for("packages.setup_releases",
-			author=self.author.username, name=self.name)
-
-	def getDownloadURL(self):
-		return url_for("packages.download",
-				author=self.author.username, name=self.name)
-
-	def getEditMaintainersURL(self):
-		return url_for("packages.edit_maintainers",
-				author=self.author.username, name=self.name)
-
-	def getRemoveSelfMaintainerURL(self):
-		return url_for("packages.remove_self_maintainers",
-				author=self.author.username, name=self.name)
-
-	def getReviewURL(self, external=False):
-		return url_for('packages.review', _external=external,
-				author=self.author.username, name=self.name)
-
-	def getAuditLogURL(self):
-		return url_for('packages.audit',
-				author=self.author.username, name=self.name)
-
 	def getDownloadRelease(self, version=None):
 		for rel in self.releases:
 			if rel.approved and (version is None or
@@ -554,14 +493,6 @@ class Package(db.Model):
 				return rel
 
 		return None
-
-	def getAliasListURL(self):
-		return url_for("packages.alias_list",
-				author=self.author.username, name=self.name)
-
-	def getAliasCreateURL(self):
-		return url_for("packages.alias_create_edit",
-				author=self.author.username, name=self.name)
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
@@ -1049,7 +980,7 @@ class PackageUpdateConfig(db.Model):
 		return self.last_tag or self.last_commit
 
 	def get_create_release_url(self):
-		return self.package.getCreateReleaseURL(title=self.get_title(), ref=self.get_ref())
+		return self.package.getURL("packages.create_release", title=self.get_title(), ref=self.get_ref())
 
 
 class PackageAlias(db.Model):

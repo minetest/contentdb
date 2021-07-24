@@ -32,8 +32,8 @@ def do_create_screenshot(user: User, package: Package, title: str, file, reason:
 	else:
 		msg = "Created screenshot {} ({})".format(ss.title, reason)
 
-	addNotification(package.maintainers, user, NotificationType.PACKAGE_EDIT, msg, package.getDetailsURL(), package)
-	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getDetailsURL(), package)
+	addNotification(package.maintainers, user, NotificationType.PACKAGE_EDIT, msg, package.getURL("packages.view"), package)
+	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getURL("packages.view"), package)
 
 	db.session.commit()
 

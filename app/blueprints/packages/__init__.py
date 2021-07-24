@@ -29,22 +29,22 @@ def get_package_tabs(user: User, package: Package):
 		{
 			"id": "edit",
 			"title": "Edit Details",
-			"url": package.getEditURL()
+			"url": package.getURL("packages.create_edit")
 		},
 		{
 			"id": "releases",
 			"title": "Releases",
-			"url": package.getReleaseListURL()
+			"url": package.getURL("packages.list_releases")
 		},
 		{
 			"id": "screenshots",
 			"title": "Screenshots",
-			"url": package.getEditScreenshotsURL()
+			"url": package.getURL("packages.screenshots")
 		},
 		{
 			"id": "maintainers",
 			"title": "Maintainers",
-			"url": package.getEditMaintainersURL()
+			"url": package.getURL("packages.edit_maintainers")
 		},
 		{
 			"id": "audit",
@@ -59,7 +59,7 @@ def get_package_tabs(user: User, package: Package):
 		{
 			"id": "remove",
 			"title": "Remove",
-			"url": package.getRemoveURL()
+			"url": package.getURL("packages.remove")
 		}
 	]
 

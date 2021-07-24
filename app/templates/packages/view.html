@@ -10,7 +10,7 @@
 	<meta name="og:title" content="{{ package.title }}"/>
 	<meta name="og:description" content="{{ package.short_desc }}"/>
 	<meta name="description" content="{{ package.short_desc }}"/>
-	<meta name="og:url" content="{{ package.getDetailsURL(absolute=True) }}"/>
+	<meta name="og:url" content="{{ package.getURL("packages.view", absolute=True) }}"/>
 	{% if package.getMainScreenshotURL() %}
 	<meta name="og:image" content="{{ package.getMainScreenshotURL(absolute=True) }}"/>
 	{% endif %}
@@ -35,19 +35,19 @@
 		<div class="container">
 			<div class="btn-group float-right mb-4">
 				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-					<a class="btn btn-primary" href="{{ package.getEditURL() }}">
+					<a class="btn btn-primary" href="{{ package.getURL("packages.create_edit") }}">
 						<i class="fas fa-pen mr-1"></i>
 						{{ _("Edit") }}
 					</a>
 				{% endif %}
 				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-					<a class="btn btn-primary" href="{{ package.getCreateReleaseURL() }}">
+					<a class="btn btn-primary" href="{{ package.getURL("packages.create_release") }}">
 						<i class="fas fa-plus mr-1"></i>
 						{{ _("Release") }}
 					</a>
 				{% endif %}
 				{% if package.checkPerm(current_user, "DELETE_PACKAGE") or package.checkPerm(current_user, "UNAPPROVE_PACKAGE") %}
-					<a class="btn btn-danger" href="{{ package.getRemoveURL() }}">
+					<a class="btn btn-danger" href="{{ package.getURL("packages.remove") }}">
 						<i class="fas fa-trash mr-1"></i>
 						{{ _("Remove") }}
 					</a>
@@ -94,7 +94,7 @@
 						</span>
 					</a>
 					{% if release %}
-						<a class="btn" rel="nofollow" href="{{ package.getDownloadURL() }}" title="{{ _("Downloads") }}"
+						<a class="btn" rel="nofollow" href="{{ package.getURL("packages.download") }}" title="{{ _("Downloads") }}"
 								download="{{ release.getDownloadFileName() }}">
 							<i class="fas fa-download"></i>
 							<span class="count">{{ package.downloads }}</span>
@@ -154,7 +154,7 @@
 				<div class="btn-group btn-group-horizontal col-md-auto">
 					{% if release %}
 						<a class="btn btn-download" rel="nofollow" download="{{ release.getDownloadFileName() }}"
-								href="{{ package.getDownloadURL() }}">
+								href="{{ package.getURL("packages.download") }}">
 							{{ _("Download") }}
 						</a>
 						{% if package.type == package.type.MOD %}
@@ -209,7 +209,7 @@
 				{% set screenshots = package.screenshots.all() %}
 				{% if screenshots or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 					{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-						<a href="{{ package.getEditScreenshotsURL() }}" class="btn btn-primary float-right">
+						<a href="{{ package.getURL("packages.screenshots") }}" class="btn btn-primary float-right">
 							<i class="fas fa-images mr-1"></i>
 							Edit
 						</a>
@@ -229,7 +229,7 @@
 							{% endif %}
 						{% else %}
 							<li>
-								<a href="{{ package.getNewScreenshotURL() }}">
+								<a href="{{ package.getURL("packages.create_screenshot") }}">
 									<i class="fas fa-plus screenshot-add"></i>
 								</a>
 							</li>
@@ -249,7 +249,7 @@
 				{% if current_user.is_authenticated %}
 					{% if has_review %}
 						<p>
-							<a class="btn btn-primary" href="{{ package.getReviewURL() }}">
+							<a class="btn btn-primary" href="{{ package.getURL("packages.review") }}">
 								{{ _("Edit Review") }}
 							</a>
 						</p>
@@ -307,7 +307,7 @@
 								<i class="fas fa-plus mr-1"></i>
 								{{ _("Release") }}
 							</a>
-							<a class="btn btn-warning" href="{{ package.getUpdateConfigURL() }}">
+							<a class="btn btn-warning" href="{{ package.getURL("packages.update_config") }}">
 								<i class="fas fa-cog mr-1"></i>
 								{{ _("Update settings") }}
 							</a>
@@ -329,7 +329,7 @@
 							{% for dep in package.getSortedHardDependencies() %}
 								{%- if dep.package %}
 									<a class="badge badge-primary"
-											href="{{ dep.package.getDetailsURL() }}">
+											href="{{ dep.package.getURL("packages.view") }}">
 										{{ dep.package.title }} by {{ dep.package.author.display_name }}
 									</a>
 								{% elif dep.meta_package %}
@@ -352,7 +352,7 @@
 								{% for dep in optional_deps %}
 									{%- if dep.package %}
 										<a class="badge badge-secondary"
-												href="{{ dep.package.getDetailsURL() }}">
+												href="{{ dep.package.getURL("packages.view") }}">
 											{{ dep.package.title }} by {{ dep.package.author.display_name }}
 									{% elif dep.meta_package %}
 										<a class="badge badge-secondary"
@@ -399,7 +399,7 @@
 						{% endfor %}
 
 						{% if current_user in package.maintainers and current_user != package.author %}
-							<form class="mt-2"  method="post" action="{{ package.getRemoveSelfMaintainerURL() }}">
+							<form class="mt-2"  method="post" action="{{ package.getURL("packages.remove_self_maintainers") }}">
 								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 								<input class="btn btn-sm btn-link p-0" type="submit" value="{{ _('Remove myself') }}" />
 							</form>
@@ -422,7 +422,7 @@
 
 				<h3>
 					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-						<a class="btn btn-primary btn-sm float-right" href="{{ package.getCreateReleaseURL() }}"><i class="fas fa-plus"></i></a>
+						<a class="btn btn-primary btn-sm float-right" href="{{ package.getURL("packages.create_release") }}"><i class="fas fa-plus"></i></a>
 					{% endif %}
 					{{ _("Releases") }}
 				</h3>
@@ -433,7 +433,7 @@
 					{% else %}
 						{{ render_releases_download(releases, package) }}
 					{% endif %}
-					<a class="list-group-item list-group-item-action text-center py-1 text-muted" href="{{ package.getReleaseListURL() }}">
+					<a class="list-group-item list-group-item-action text-center py-1 text-muted" href="{{ package.getURL("packages.list_releases") }}">
 						More
 					</a>
 				</div>
@@ -459,7 +459,7 @@
 						</a>
 					{% endif %}
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-						<a class="float-right" href="{{ package.getAuditLogURL() }}">
+						<a class="float-right" href="{{ package.getURL("packages.audit") }}">
 							See audit log
 						</a>
 					{% endif %}

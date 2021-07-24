@@ -75,7 +75,7 @@ class EditPackageReleaseForm(FlaskForm):
 @is_package_page
 def create_release(package):
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	# Initial form class from post data and default data
 	form = CreatePackageReleaseForm()
@@ -144,7 +144,7 @@ def edit_release(package, id):
 	canEdit	= package.checkPerm(current_user, Permission.MAKE_RELEASE)
 	canApprove = release.checkPerm(current_user, Permission.APPROVE_RELEASE)
 	if not (canEdit or canApprove):
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	# Initial form class from post data and default data
 	form = EditPackageReleaseForm(formdata=request.form, obj=release)
@@ -171,7 +171,7 @@ def edit_release(package, id):
 			release.approved = False
 
 		db.session.commit()
-		return redirect(package.getReleaseListURL())
+		return redirect(package.getURL("packages.list_releases"))
 
 	return render_template("packages/release_edit.html", package=package, release=release, form=form)
 
@@ -193,7 +193,7 @@ class BulkReleaseForm(FlaskForm):
 @is_package_page
 def bulk_change_release(package):
 	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	# Initial form class from post data and default data
 	form = BulkReleaseForm()
@@ -211,7 +211,7 @@ def bulk_change_release(package):
 
 		db.session.commit()
 
-		return redirect(package.getReleaseListURL())
+		return redirect(package.getURL("packages.list_releases"))
 
 	return render_template("packages/release_bulk_change.html", package=package, form=form)
 
@@ -225,12 +225,12 @@ def delete_release(package, id):
 		abort(404)
 
 	if not release.checkPerm(current_user, Permission.DELETE_RELEASE):
-		return redirect(release.getReleaseListURL())
+		return redirect(package.getURL("packages.list_releases"))
 
 	db.session.delete(release)
 	db.session.commit()
 
-	return redirect(package.getDetailsURL())
+	return redirect(package.getURL("packages.view"))
 
 
 class PackageUpdateConfigFrom(FlaskForm):
@@ -279,7 +279,7 @@ def update_config(package):
 
 	if not package.repo:
 		flash("Please add a Git repository URL in order to set up automatic releases", "danger")
-		return redirect(package.getEditURL())
+		return redirect(package.getURL("packages.create_edit"))
 
 	form = PackageUpdateConfigFrom(obj=package.update_config)
 	if request.method == "GET":
@@ -303,9 +303,9 @@ def update_config(package):
 
 		if not form.disable.data and package.releases.count() == 0:
 			flash("Now, please create an initial release", "success")
-			return redirect(package.getCreateReleaseURL())
+			return redirect(package.getURL("packages.create_release"))
 
-		return redirect(package.getReleaseListURL())
+		return redirect(package.getURL("packages.list_releases"))
 
 	return render_template("packages/update_config.html", package=package, form=form)
 
@@ -318,7 +318,7 @@ def setup_releases(package):
 		abort(403)
 
 	if package.update_config:
-		return redirect(package.getUpdateConfigURL())
+		return redirect(package.getURL("packages.update_config"))
 
 	return render_template("packages/release_wizard.html", package=package)
 

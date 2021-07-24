@@ -88,7 +88,7 @@
 					created {{ rel.releaseDate | date }}.
 				</small>
 				{% if (package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")) and rel.task_id %}
-					<a href="{{ url_for('tasks.check', id=rel.task_id, r=package.getDetailsURL()) }}">Importing...</a>
+					<a href="{{ url_for('tasks.check', id=rel.task_id, r=package.getURL("packages.view")) }}">Importing...</a>
 				{% elif not rel.approved %}
 					Waiting for approval.
 				{% endif %}

@@ -50,10 +50,10 @@ class EditPackageScreenshotsForm(FlaskForm):
 @is_package_page
 def screenshots(package):
 	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	if package.screenshots.count() == 0:
-		return redirect(package.getNewScreenshotURL())
+		return redirect(package.getURL("packages.create_screenshot"))
 
 	form = EditPackageScreenshotsForm(obj=package)
 	form.cover_image.query = package.screenshots
@@ -63,7 +63,7 @@ def screenshots(package):
 		if order:
 			try:
 				do_order_screenshots(current_user, package, order.split(","))
-				return redirect(package.getDetailsURL())
+				return redirect(package.getURL("packages.view"))
 			except LogicError as e:
 				flash(e.message, "danger")
 
@@ -80,14 +80,14 @@ def screenshots(package):
 @is_package_page
 def create_screenshot(package):
 	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
-		return redirect(package.getDetailsURL())
+		return redirect(package.getURL("packages.view"))
 
 	# Initial form class from post data and default data
 	form = CreateScreenshotForm()
 	if form.validate_on_submit():
 		try:
 			do_create_screenshot(current_user, package, form.title.data, form.fileUpload.data)
-			return redirect(package.getEditScreenshotsURL())
+			return redirect(package.getURL("packages.screenshots"))
 		except LogicError as e:
 			flash(e.message, "danger")
 
@@ -105,7 +105,7 @@ def edit_screenshot(package, id):
 	canEdit	= package.checkPerm(current_user, Permission.ADD_SCREENSHOTS)
 	canApprove = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
 	if not (canEdit or canApprove):
-		return redirect(package.getEditScreenshotsURL())
+		return redirect(package.getURL("packages.screenshots"))
 
 	# Initial form class from post data and default data
 	form = EditScreenshotForm(obj=screenshot)
@@ -121,7 +121,7 @@ def edit_screenshot(package, id):
 			screenshot.approved = wasApproved
 
 		db.session.commit()
-		return redirect(package.getEditScreenshotsURL())
+		return redirect(package.getURL("packages.screenshots"))
 
 	return render_template("packages/screenshot_edit.html", package=package, screenshot=screenshot, form=form)
 
@@ -145,4 +145,4 @@ def delete_screenshot(package, id):
 	db.session.delete(screenshot)
 	db.session.commit()
 
-	return redirect(package.getEditScreenshotsURL())
+	return redirect(package.getURL("packages.screenshots"))

@@ -221,8 +221,8 @@ def apply_all_updates(username):
 
 		msg = "Created release {} (Applied all Git Update Detection)".format(rel.title)
 		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg,
-				rel.getEditURL(), package)
-		addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.getDetailsURL(), package)
+				rel.getURL("packages.create_edit"), package)
+		addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.getURL("packages.view"), package)
 		db.session.commit()
 
 	return redirect(url_for("todo.view_user", username=username))

@@ -262,7 +262,7 @@ def check_update_config_impl(package):
 		db.session.add(rel)
 
 		msg = "Created release {} (Git Update Detection)".format(rel.title)
-		addSystemAuditLog(AuditSeverity.NORMAL, msg, package.getDetailsURL(), package)
+		addSystemAuditLog(AuditSeverity.NORMAL, msg, package.getURL("packages.view"), package)
 
 		db.session.commit()
 
@@ -320,7 +320,7 @@ def check_update_config(self, package_id):
 			.strip()
 
 		msg = "Error: {}.\n\nTask ID: {}\n\n[Change update configuration]({})" \
-			.format(err, self.request.id, package.getUpdateConfigURL())
+			.format(err, self.request.id, package.getURL("packages.update_config"))
 
 		post_bot_message(package, "Failed to check git repository", msg)
 

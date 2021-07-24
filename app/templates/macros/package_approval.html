@@ -18,9 +18,9 @@
 	{% set message %}
 		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 			{% if package.update_config %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.getCreateReleaseURL() }}">Create first release</a>
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL("packages.create_release") }}">Create first release</a>
 			{% else %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.getSetupReleasesURL() }}">Set up releases</a>
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL("packages.setup_releases") }}">Set up releases</a>
 			{% endif %}
 			{{ _("You need to create a release before this package can be approved.") }}
 		{% else %}

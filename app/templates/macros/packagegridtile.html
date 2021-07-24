@@ -1,5 +1,5 @@
 {% macro render_pkgtile(package, show_author) -%}
-	<li class="packagetile flex-fill"><a href="{{ package.getDetailsURL() }}"
+	<li class="packagetile flex-fill"><a href="{{ package.getURL("packages.view") }}"
 		style="background-image: url({{ package.getThumbnailOrPlaceholder(2) }});">
 		<div class="packagegridscrub"></div>
 		<div class="packagegridinfo">

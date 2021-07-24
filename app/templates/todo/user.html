@@ -8,7 +8,7 @@
 	<h2>{{ _("Unapproved Packages Needing Action") }}</h2>
 	<div class="list-group mt-3 mb-5">
 		{% for package in unapproved_packages %}
-			<a class="list-group-item list-group-item-action" href="{{ package.getDetailsURL() }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.getURL("packages.view") }}">
 				<div class="row">
 					<div class="col-sm-2 text-muted">
 						<img
@@ -62,7 +62,7 @@
 	</p>
 	<div class="list-group mt-3 mb-5">
 		{% for package in needs_tags %}
-			<a class="list-group-item list-group-item-action" href="{{ package.getDetailsURL() }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.getURL("packages.view") }}">
 				<img
 					class="img-fluid"
 					style="max-height: 22px; max-width: 22px;"

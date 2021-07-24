@@ -37,7 +37,7 @@
 
 	{% if current_user == thread.author and thread.review %}
 		<a class="btn btn-primary ml-1 float-right mr-2"
-				href="{{ thread.review.package.getReviewURL() }}">
+				href="{{ thread.review.package.getURL("packages.review") }}">
 			<i class="fas fa-pen"></i>
 			{{ _("Edit Review") }}
 		</a>
@@ -56,7 +56,7 @@
 
 	{% if thread.package %}
 		<p>
-			Package: <a href="{{ thread.package.getDetailsURL() }}">{{ thread.package.title }}</a>
+			Package: <a href="{{ thread.package.getURL("packages.view") }}">{{ thread.package.title }}</a>
 		</p>
 	{% endif %}
 

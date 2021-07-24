@@ -23,7 +23,7 @@ Remove {{ package.title }}
 
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-		<a class="btn btn-secondary float-right" href="{{ package.getDetailsURL() }}">Cancel</a>
+		<a class="btn btn-secondary float-right" href="{{ package.getURL("packages.view") }}">Cancel</a>
 
 		<input type="submit" name="delete" value="Remove" class="btn btn-danger mr-2" />
 
