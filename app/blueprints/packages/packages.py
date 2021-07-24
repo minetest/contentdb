@@ -518,7 +518,8 @@ def audit(package):
 	query = package.audit_log_entries.order_by(db.desc(AuditLogEntry.created_at))
 
 	pagination = query.paginate(page, num, True)
-	return render_template("admin/audit.html", log=pagination.items, pagination=pagination)
+	return render_template("packages/audit.html", log=pagination.items, pagination=pagination,
+		package=package, tabs=get_package_tabs(current_user, package), current_tab="audit")
 
 
 class PackageAliasForm(FlaskForm):
@@ -558,3 +559,11 @@ def alias_create_edit(package: Package, alias_id: int = None):
 		return redirect(package.getAliasListURL())
 
 	return render_template("packages/alias_create_edit.html", package=package, form=form)
+
+
+@bp.route("/packages/<author>/<name>/share/")
+@login_required
+@is_package_page
+def share(package):
+	return render_template("packages/share.html", package=package,
+			tabs=get_package_tabs(current_user, package), current_tab="share")

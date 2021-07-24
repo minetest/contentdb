@@ -1,0 +1,35 @@
+{% extends "packages/package_base.html" %}
+
+{% block title %}
+Share and Badges
+{% endblock %}
+
+{% block content %}
+	<h2 class="mt-0">{{ self.title() }}</h2>
+
+	<h3>Links</h3>
+
+	<p>
+		Review link:
+	</p>
+
+	<pre><code>{{ package.getReviewURL(external=True) }}</code></pre>
+
+	<h3>Badges</h3>
+
+	<p>
+		{{ package.makeShield("title") | markdown }}
+	</p>
+
+	<p>
+		<pre><code>{{ package.makeShield("title") }}</code></pre>
+	</p>
+
+	<p>
+		{{ package.makeShield("downloads") | markdown }}
+	</p>
+
+	<p>
+		<pre><code>{{ package.makeShield("downloads") }}</code></pre>
+	</p>
+{% endblock %}

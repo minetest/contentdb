@@ -286,26 +286,6 @@
 						{% endfor %}
 					</ul>
 				{% endif %}
-
-				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-					<h2>Badges</h2>
-
-					<p>
-						{{ package.makeShield("title") | markdown }}
-					</p>
-
-					<p>
-						<pre><code>{{ package.makeShield("title") }}</code></pre>
-					</p>
-
-					<p>
-						{{ package.makeShield("downloads") | markdown }}
-					</p>
-
-					<p>
-						<pre><code>{{ package.makeShield("downloads") }}</code></pre>
-					</p>
-				{% endif %}
 			</div>
 
 			<aside class="col-md-3 info-sidebar">
@@ -411,12 +391,8 @@
 					<dd>{{ package.created_at | datetime }}</dd>
 					<dt>Maintainers</dt>
 					<dd>
-						{% if package.checkPerm(current_user, "EDIT_MAINTAINERS") %}
-							<a class="btn btn-primary btn-sm ml-1 float-right" href="{{ package.getEditMaintainersURL() }}"><i class="fas fa-pen"></i></a>
-						{% endif %}
-
 						{% for user in package.maintainers %}
-							<a class="badge badge-primary"
+							<a class="badge badge-secondary"
 								href="{{ url_for('users.profile', username=user.username) }}">
 								{{ user.display_name }}
 							</a>
@@ -425,7 +401,7 @@
 						{% if current_user in package.maintainers and current_user != package.author %}
 							<form class="mt-2"  method="post" action="{{ package.getRemoveSelfMaintainerURL() }}">
 								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-								<input class="btn btn-sm btn-link p-0" type="submit" value="{{ _("Remove myself") }}" />
+								<input class="btn btn-sm btn-link p-0" type="submit" value="{{ _('Remove myself') }}" />
 							</form>
 						{% endif %}
 					</dd>
@@ -448,12 +424,19 @@
 					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 						<a class="btn btn-primary btn-sm float-right" href="{{ package.getCreateReleaseURL() }}"><i class="fas fa-plus"></i></a>
 					{% endif %}
-					<a href="{{ package.getReleaseListURL() }}">{{ _("Releases") }}</a>
+					{{ _("Releases") }}
 				</h3>
-				<ul class="list-group">
-					{% from "macros/releases.html" import render_releases %}
-					{{ render_releases(releases, package, current_user) }}
-				</ul>
+				<div class="list-group">
+					{% from "macros/releases.html" import render_releases, render_releases_download %}
+					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+						{{ render_releases(releases, package, current_user) }}
+					{% else %}
+						{{ render_releases_download(releases, package) }}
+					{% endif %}
+					<a class="list-group-item list-group-item-action text-center py-1 text-muted" href="{{ package.getReleaseListURL() }}">
+						More
+					</a>
+				</div>
 
 				<h3>
 					{% if package.approved and package.checkPerm(current_user, "CREATE_THREAD") %}

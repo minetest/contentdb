@@ -47,6 +47,16 @@ def get_package_tabs(user: User, package: Package):
 			"url": package.getEditMaintainersURL()
 		},
 		{
+			"id": "audit",
+			"title": "Audit Log",
+			"url": package.getURL("packages.audit")
+		},
+		{
+			"id": "share",
+			"title": "Share and Badges",
+			"url": package.getURL("packages.share")
+		},
+		{
 			"id": "remove",
 			"title": "Remove",
 			"url": package.getRemoveURL()

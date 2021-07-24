@@ -5,34 +5,40 @@
 {% endblock %}
 
 {% block content %}
-	<p class="float-right">
-		{% if package.update_config %}
-			<a class="btn btn-secondary" href="{{ package.getUpdateConfigURL() }}">
-				<i class="fas fa-cog mr-1"></i>
-				{{ _("Update settings") }}
-			</a>
-		{% elif package.repo %}
-			<a class="btn btn-secondary" href="{{ package.getSetupReleasesURL() }}">
-				<i class="fas fa-hat-wizard mr-1"></i>
-				{{ _("Set up automatic releases") }}
-			</a>
-		{% endif %}
+	{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+		<p class="float-right">
+			{% if package.update_config %}
+				<a class="btn btn-secondary" href="{{ package.getUpdateConfigURL() }}">
+					<i class="fas fa-cog mr-1"></i>
+					{{ _("Update settings") }}
+				</a>
+			{% elif package.repo %}
+				<a class="btn btn-secondary" href="{{ package.getSetupReleasesURL() }}">
+					<i class="fas fa-hat-wizard mr-1"></i>
+					{{ _("Set up automatic releases") }}
+				</a>
+			{% endif %}
 
-		<a class="btn btn-secondary ml-1" href="{{ package.getBulkReleaseURL() }}">
-			<i class="fas fa-wrench mr-1"></i>
-			Bulk update
-		</a>
+			<a class="btn btn-secondary ml-1" href="{{ package.getBulkReleaseURL() }}">
+				<i class="fas fa-wrench mr-1"></i>
+				Bulk update
+			</a>
 
-		<a class="btn btn-primary ml-1" href="{{ package.getCreateReleaseURL() }}">
-			<i class="fas fa-plus mr-1"></i>
-			Create
-		</a>
-	</p>
+			<a class="btn btn-primary ml-1" href="{{ package.getCreateReleaseURL() }}">
+				<i class="fas fa-plus mr-1"></i>
+				Create
+			</a>
+		</p>
+	{% endif %}
 
 	<h2 class="mt-0">{{ _("Releases") }}</h2>
 
-	<ul class="list-group">
-		{% from "macros/releases.html" import render_releases %}
-		{{ render_releases(package.releases, package, current_user) }}
-	</ul>
+	<div class="list-group">
+		{% from "macros/releases.html" import render_releases_edit, render_releases_download %}
+		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+			{{ render_releases_edit(package.releases, package) }}
+		{% else %}
+			{{ render_releases_download(package.releases, package) }}
+		{% endif %}
+	</div>
 {% endblock %}

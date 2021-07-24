@@ -460,6 +460,9 @@ class Package(db.Model):
 		else:
 			return screenshot.url
 
+	def getURL(self, endpoint):
+		return url_for(endpoint, author=self.author.username, name=self.name)
+
 	def getDetailsURL(self, absolute=False):
 		if absolute:
 			from app.utils import abs_url_for
@@ -535,8 +538,8 @@ class Package(db.Model):
 		return url_for("packages.remove_self_maintainers",
 				author=self.author.username, name=self.name)
 
-	def getReviewURL(self):
-		return url_for('packages.review',
+	def getReviewURL(self, external=False):
+		return url_for('packages.review', _external=external,
 				author=self.author.username, name=self.name)
 
 	def getAuditLogURL(self):
