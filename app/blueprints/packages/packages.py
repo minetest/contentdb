@@ -505,34 +505,6 @@ def remove_self_maintainers(package):
 	return redirect(package.getDetailsURL())
 
 
-@bp.route("/packages/<author>/<name>/import-meta/", methods=["POST"])
-@login_required
-@is_package_page
-def update_from_release(package):
-	if not package.checkPerm(current_user, Permission.REIMPORT_META):
-		flash("You don't have permission to reimport meta", "danger")
-		return redirect(package.getDetailsURL())
-
-	release = package.releases.first()
-	if not release:
-		flash("Release needed", "danger")
-		return redirect(package.getDetailsURL())
-
-	msg = "Updated meta from latest release"
-	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT,
-			msg, package.getDetailsURL(), package)
-	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
-	addAuditLog(severity, current_user, msg, package.getDetailsURL(), package)
-
-	db.session.commit()
-
-	task_id = uuid()
-	zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
-	checkZipRelease.apply_async((release.id, zippath), task_id=task_id)
-
-	return redirect(url_for("tasks.check", id=task_id, r=package.getEditURL()))
-
-
 @bp.route("/packages/<author>/<name>/audit/")
 @login_required
 @is_package_page

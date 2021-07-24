@@ -50,17 +50,6 @@
 		</div>
 	{% endif %}
 
-	{% if package and package.checkPerm(current_user, "REIMPORT_META") and package.releases.first() %}
-		<form class="alert alert-secondary mb-5" method="post" action="{{ package.getUpdateFromReleaseURL() }}">
-			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<input class="btn btn-sm btn-warning float-right" type="submit" value="{{ _('Import') }}" />
-
-			<b>{{ _("Reimport meta from latest release.") }}</b>
-			{{ _("This will override 'provides', 'dependencies', and 'optional_dependencies'.") }}
-			<div style="clear:both;"></div>
-		</form>
-	{% endif %}
-
 	<noscript>
 		<div class="alert alert-warning">
 			{{ _("Javascript is needed to improve the user interface, and is needed for features

@@ -535,10 +535,6 @@ class Package(db.Model):
 		return url_for("packages.remove_self_maintainers",
 				author=self.author.username, name=self.name)
 
-	def getUpdateFromReleaseURL(self):
-		return url_for("packages.update_from_release",
-				author=self.author.username, name=self.name)
-
 	def getReviewURL(self):
 		return url_for('packages.review',
 				author=self.author.username, name=self.name)
@@ -606,9 +602,6 @@ class Package(db.Model):
 
 		elif perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
-
-		elif perm == Permission.REIMPORT_META:
-			return user.rank.atLeast(UserRank.ADMIN)
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
