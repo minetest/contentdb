@@ -38,7 +38,7 @@
 		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 			{{ render_releases_edit(package.releases, package) }}
 		{% else %}
-			{{ render_releases_download(package.releases, package) }}
+			{{ render_releases_download(package.releases, package, current_user) }}
 		{% endif %}
 	</div>
 {% endblock %}

@@ -431,7 +431,7 @@
 					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 						{{ render_releases(releases, package, current_user) }}
 					{% else %}
-						{{ render_releases_download(releases, package) }}
+						{{ render_releases_download(releases, package, current_user) }}
 					{% endif %}
 					<a class="list-group-item list-group-item-action text-center py-1 text-muted" href="{{ package.getURL("packages.list_releases") }}">
 						More
