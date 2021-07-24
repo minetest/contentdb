@@ -9,8 +9,9 @@ def test_login_logout(client):
 	rv = client.get("/")
 	assert not is_logged_in(rv)
 
+	assert b"Sign out" not in rv.data
 	rv = login(client, "rubenwardy", "tuckfrump")
-	assert b"Logged in successfully." in rv.data
+	assert b"Sign out" in rv.data
 	assert is_logged_in(rv)
 
 	rv = client.get("/")
@@ -81,6 +82,7 @@ def test_register_flow(client):
 	rv = client.get(url_for('users.verify_email', token=email.token), follow_redirects=True)
 	assert b"You may now log in" in rv.data
 
+	assert b"Sign out" not in rv.data
 	rv = login(client, username, "password")
-	assert b"Logged in successfully." in rv.data
+	assert b"Sign out" in rv.data
 	assert is_logged_in(rv)
