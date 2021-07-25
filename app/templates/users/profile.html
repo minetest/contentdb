@@ -13,17 +13,20 @@
 	<div class="col">
 		{% if user.can_see_edit_profile(current_user) %}
 			<a class="btn btn-primary float-right" href="{{ url_for('users.profile_edit', username=user.username) }}">
+				<i class="fas fa-pen mr-1"></i>
 				{{ _("Edit Profile") }}
 			</a>
 
 			<a class="btn btn-secondary float-right mr-3" href="{{ url_for('todo.view_user', username=user.username) }}">
+				<i class="fas fa-tasks mr-1"></i>
 				{{ _("To Do List") }}
 			</a>
 		{%  endif %}
 
 		{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) and user.email %}
 			<a class="btn btn-secondary float-right mr-3" href="{{ url_for('admin.send_single_email', username=user.username) }}">
-				{{  _("Send Email") }}
+				<i class="fas fa-envelope mr-1"></i>
+				{{ _("Send Email") }}
 			</a>
 		{% endif %}
 
@@ -132,7 +135,7 @@
 						{% set badge_color = "white" %}
 					{% endif %}
 					<div class="card-body media align-items-center">
-						<i class="fas fa-thumbs-up ml-2 mr-4 text-size" style="font-size: 45px; color: {{ badge_color }};"></i>
+						<i class="fas fa-star-half-alt ml-2 mr-4 text-size" style="font-size: 45px; color: {{ badge_color }};"></i>
 						<div class="media-body">
 							{% if review_idx == 0 %}
 								<h5 class="mt-0">
