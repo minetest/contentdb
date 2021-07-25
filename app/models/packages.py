@@ -143,7 +143,7 @@ class PackagePropertyKey(enum.Enum):
 			return str(value)
 
 
-provides = db.Table("provides",
+PackageProvides = db.Table("provides",
 	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
 	db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
 )
@@ -296,7 +296,7 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=True)
 
-	provides = db.relationship("MetaPackage", secondary=provides, order_by=db.asc("name"), back_populates="packages")
+	provides = db.relationship("MetaPackage", secondary=PackageProvides, order_by=db.asc("name"), back_populates="packages")
 
 	dependencies = db.relationship("Dependency", back_populates="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
@@ -615,7 +615,7 @@ class MetaPackage(db.Model):
 	id           = db.Column(db.Integer, primary_key=True)
 	name         = db.Column(db.String(100), unique=True, nullable=False)
 	dependencies = db.relationship("Dependency", back_populates="meta_package", lazy="dynamic")
-	packages     = db.relationship("Package", lazy="dynamic", back_populates="provides", secondary=provides)
+	packages     = db.relationship("Package", lazy="dynamic", back_populates="provides", secondary=PackageProvides)
 
 	mp_name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
 

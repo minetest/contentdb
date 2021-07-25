@@ -18,8 +18,7 @@
 from urllib.parse import quote as urlescape
 
 import flask_menu as menu
-from celery import uuid
-from flask import render_template, flash
+from flask import render_template
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from sqlalchemy import or_, func
@@ -30,11 +29,12 @@ from wtforms.validators import *
 
 from app.querybuilder import QueryBuilder
 from app.rediscache import has_key, set_key
-from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
+from app.tasks.importtasks import importRepoScreenshot
 from app.utils import *
 from . import bp, get_package_tabs
 from ...logic.LogicError import LogicError
 from ...logic.packages import do_edit_package
+from app.models.packages import PackageProvides
 
 
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
@@ -118,25 +118,35 @@ def getReleases(package):
 @bp.route("/packages/<author>/<name>/")
 @is_package_page
 def view(package):
-	alternatives = None
-	if package.type == PackageType.MOD:
-		alternatives = Package.query \
-			.filter_by(name=package.name, type=PackageType.MOD) \
-			.filter(Package.id != package.id, Package.state!=PackageState.DELETED) \
-			.order_by(db.desc(Package.score)) \
-			.all()
+	show_similar = not package.approved and (
+			current_user in package.maintainers or
+				package.checkPerm(current_user, Permission.APPROVE_NEW))
 
+	packages_modnames = None
+	similar_topics = None
+	if show_similar and package.type != PackageType.TXP:
+		packages_modnames = Package.query.filter(Package.id != package.id,
+				Package.state != PackageState.DELETED) \
+				.filter(Package.provides.any(PackageProvides.c.metapackage_id.in_([p.id for p in package.provides]))) \
+				.order_by(db.desc(Package.score)) \
+				.all()
 
-	show_similar_topics = current_user == package.author or \
-			package.checkPerm(current_user, Permission.APPROVE_NEW)
-
-	similar_topics = None if not show_similar_topics else \
-			ForumTopic.query \
+		similar_topics = ForumTopic.query \
 				.filter_by(name=package.name) \
 				.filter(ForumTopic.topic_id != package.forums) \
 				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
 				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 				.all()
+
+	packages_uses = None
+	if package.type == PackageType.MOD:
+		packages_uses = Package.query.filter(
+				Package.type == PackageType.MOD,
+				Package.id != package.id,
+				Package.state != PackageState.DELETED,
+				Package.dependencies.any(
+						Dependency.meta_package_id.in_([p.id for p in package.provides]))) \
+			.order_by(db.desc(Package.score)).limit(6).all()
 
 	releases = getReleases(package)
 
@@ -172,8 +182,8 @@ def view(package):
 	has_review = current_user.is_authenticated and PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
 	return render_template("packages/view.html",
-			package=package, releases=releases,
-			alternatives=alternatives, similar_topics=similar_topics,
+			package=package, releases=releases, packages_uses=packages_uses,
+			packages_modnames=packages_modnames, similar_topics=similar_topics,
 			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
 			threads=threads.all(), has_review=has_review)
 

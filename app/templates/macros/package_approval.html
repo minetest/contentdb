@@ -1,4 +1,4 @@
-{% macro render_banners(package, current_user, topic_error, topic_error_lvl, similar_topics) -%}
+{% macro render_banners(package, current_user, topic_error, topic_error_lvl, show_modname_warning) -%}
 
 <div class="row mb-4">
 	<span class="col">
@@ -82,13 +82,10 @@
 	</div>
 {% endif %}
 
-{% if similar_topics %}
+{% if show_modname_warning %}
 	<div class="alert alert-warning">
-		Please make sure that this package has the right to
-		the name '{{ package.name }}'.
-		See the
-		<a href="/policy_and_guidance/">Inclusion Policy</a>
-		for more info.
+		Please make sure that this package has the right to all the technical names it provides.
+		See the <a href="/policy_and_guidance/">Inclusion Policy</a> for more info.
 	</div>
 {% endif %}
 
