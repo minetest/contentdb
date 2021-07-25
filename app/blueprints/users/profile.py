@@ -75,7 +75,8 @@ def profile(username):
 	all_package_ranks = db.session.query(
 			Package.author_id,
 			func.rank().over(order_by=db.desc(Package.score)) \
-				.label('rank')).order_by(db.asc(text("rank"))).subquery()
+				.label('rank')).order_by(db.asc(text("rank"))) \
+		.filter_by(state=PackageState.APPROVED).subquery()
 	user_package_ranks = db.session.query(all_package_ranks) \
 		.filter_by(author_id=user.id).first()
 	min_package_rank = user_package_ranks[1] if user_package_ranks else None

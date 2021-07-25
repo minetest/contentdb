@@ -218,7 +218,7 @@
 				</div>
 			</div>
 		{% endif %}
-		{% if min_package_rank <= 30 %}
+		{% if min_package_rank is not none and min_package_rank <= 30 %}
 			{% if min_package_rank <= 5 %}
 				{% set badge_color = "gold" %}
 			{% elif min_package_rank <= 10 %}
