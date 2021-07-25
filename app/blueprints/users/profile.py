@@ -58,6 +58,7 @@ def profile(username):
 		.select_from(User).join(PackageReview) \
 		.group_by(User.username).order_by(text("count DESC")).all()
 	users_by_reviews = [ username for username, _ in users_by_reviews ]
+
 	review_idx = None
 	review_percent = None
 	try:
@@ -66,9 +67,14 @@ def profile(username):
 	except ValueError:
 		pass
 
+	total_downloads = db.session.query(func.sum(Package.downloads)) \
+		.select_from(User) \
+		.join(User.maintained_packages) \
+		.filter(User.id == user.id, Package.state == PackageState.APPROVED).scalar()
+
 	# Process GET or invalid POST
 	return render_template("users/profile.html", user=user, packages=packages,
-			review_idx=review_idx, review_percent=review_percent)
+			total_downloads=total_downloads, review_idx=review_idx, review_percent=review_percent)
 
 
 @bp.route("/users/<username>/check/", methods=["POST"])

@@ -180,6 +180,42 @@
 				</span>
 			</div>
 		{% endif %}
+		{% if total_downloads >= 50000 %}
+			{% if total_downloads >= 300000 %}
+				{% set badge_color = "gold" %}
+			{% elif total_downloads >= 100000 %}
+				{% set badge_color = "#888" %}
+			{% elif total_downloads >= 75000 %}
+				{% set badge_color = "#cd7f32" %}
+			{% else %}
+				{% set badge_color = "white" %}
+			{% endif %}
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body media align-items-center">
+						<i class="fas fa-users ml-2 mr-4 text-size" style="font-size: 45px; color: {{ badge_color }};"></i>
+						<div class="media-body">
+							<h5 class="mt-0">
+								{% if total_downloads >= 300000 %}
+									{{ _(">300k downloads") }}
+								{% elif total_downloads >= 100000 %}
+									{{ _(">100k downloads") }}
+								{% elif total_downloads >= 75000 %}
+									{{ _(">75k downloads") }}
+								{% else %}
+									{{ _(">50k downloads") }}
+								{% endif %}
+							</h5>
+							<p class="my-0">
+								{{ _("Has received %(downloads)d downloads across all packages.",
+										display_name=user.display_name, downloads=total_downloads) }}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
+	</div>
 {% endif %}
 
 {% if current_user == user or user.checkPerm(current_user, "CHANGE_AUTHOR") %}
