@@ -54,8 +54,21 @@ def profile(username):
 		packages = packages.filter_by(state=PackageState.APPROVED)
 	packages = packages.order_by(db.asc(Package.title))
 
+	users_by_reviews = db.session.query(User.username, func.count(PackageReview.id).label("count")) \
+		.select_from(User).join(PackageReview) \
+		.group_by(User.username).order_by(text("count DESC")).all()
+	users_by_reviews = [ username for username, _ in users_by_reviews ]
+	review_idx = None
+	review_percent = None
+	try:
+		review_idx = users_by_reviews.index(user.username)
+		review_percent = round(100 * review_idx / len(users_by_reviews), 1)
+	except ValueError:
+		pass
+
 	# Process GET or invalid POST
-	return render_template("users/profile.html", user=user, packages=packages)
+	return render_template("users/profile.html", user=user, packages=packages,
+			review_idx=review_idx, review_percent=review_percent)
 
 
 @bp.route("/users/<username>/check/", methods=["POST"])
