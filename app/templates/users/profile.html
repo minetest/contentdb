@@ -275,6 +275,15 @@
 {{ render_pkggrid(packages, show_author=False) }}
 
 
+{% if maintained_packages %}
+	<h2 class="my-3">{{ _("Maintained Packages") }}</h2>
+	<p class="text-muted">
+		{{ _("This user is also a maintainer of the following packages") }}
+	</p>
+	{{ render_pkggrid(maintained_packages) }}
+{%  endif %}
+
+
 <h2 class="my-3" id="reviews">{{ _("Reviews") }}</h2>
 {% from "macros/reviews.html" import render_reviews %}
 {{ render_reviews(user.reviews, current_user, True) }}

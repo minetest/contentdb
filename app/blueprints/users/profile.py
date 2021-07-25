@@ -49,10 +49,17 @@ def profile(username):
 	if not user:
 		abort(404)
 
-	packages = user.packages.filter(Package.state != PackageState.DELETED)
 	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
-		packages = packages.filter_by(state=PackageState.APPROVED)
-	packages = packages.order_by(db.asc(Package.title))
+		packages = user.packages.filter_by(state=PackageState.APPROVED)
+		maintained_packages = user.maintained_packages.filter_by(state=PackageState.APPROVED)
+	else:
+		packages = user.packages.filter(Package.state != PackageState.DELETED)
+		maintained_packages = user.maintained_packages.filter(Package.state != PackageState.DELETED)
+
+	packages = packages.order_by(db.asc(Package.title)).all()
+	maintained_packages = maintained_packages \
+		.filter(Package.author != user) \
+		.order_by(db.asc(Package.title)).all()
 
 	users_by_reviews = db.session.query(User.username, func.count(PackageReview.id).label("count")) \
 		.select_from(User).join(PackageReview) \
@@ -69,7 +76,7 @@ def profile(username):
 
 	total_downloads = db.session.query(func.sum(Package.downloads)) \
 		.select_from(User) \
-		.join(User.maintained_packages) \
+		.join(User.packages) \
 		.filter(User.id == user.id, Package.state == PackageState.APPROVED).scalar() or 0
 
 	all_package_ranks = db.session.query(
@@ -82,7 +89,8 @@ def profile(username):
 	min_package_rank = user_package_ranks[1] if user_package_ranks else None
 
 	# Process GET or invalid POST
-	return render_template("users/profile.html", user=user, packages=packages,
+	return render_template("users/profile.html", user=user,
+			packages=packages, maintained_packages=maintained_packages,
 			total_downloads=total_downloads, min_package_rank=min_package_rank,
 			review_idx=review_idx, review_percent=review_percent)
 
