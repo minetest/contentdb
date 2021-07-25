@@ -70,7 +70,7 @@ def profile(username):
 	total_downloads = db.session.query(func.sum(Package.downloads)) \
 		.select_from(User) \
 		.join(User.maintained_packages) \
-		.filter(User.id == user.id, Package.state == PackageState.APPROVED).scalar()
+		.filter(User.id == user.id, Package.state == PackageState.APPROVED).scalar() or 0
 
 	# Process GET or invalid POST
 	return render_template("users/profile.html", user=user, packages=packages,
