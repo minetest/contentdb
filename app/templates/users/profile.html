@@ -172,12 +172,12 @@
 			</div>
 		{% elif current_user == user %}
 			<div class="col-md-4">
-				<span class="border border-dark rounded p-3 text-muted">
+				<p class="border border-dark rounded p-3 text-muted my-0">
 					{{ _("Consider writing more reviews to get a badge.") }}
 					{% if review_idx %}
 						{{ _("You are in place %(place)s.", place=review_idx + 1) }}
 					{% endif %}
-				</span>
+				</p>
 			</div>
 		{% endif %}
 		{% if total_downloads >= 50000 %}
