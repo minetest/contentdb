@@ -105,7 +105,7 @@ def get_user_medals(user: User) -> Tuple[List[Medal], List[Medal]]:
 	except ValueError:
 		pass
 
-	if review_percent and review_percent < 25:
+	if review_percent is not None and review_percent < 25:
 		if review_idx == 0:
 			title = gettext(u"Most reviews")
 			description = gettext(
@@ -154,16 +154,22 @@ def get_user_medals(user: User) -> Tuple[List[Medal], List[Medal]]:
 			None)
 	if user_package_ranks:
 		top_rank = user_package_ranks[2]
-		top_type = PackageType.coerce(user_package_ranks[0]).value
+		top_type = PackageType.coerce(user_package_ranks[0])
 		if top_rank == 1:
-			title = gettext(u"Top %(type)s", type=top_type.lower())
+			title = gettext(u"Top %(type)s", type=top_type.value.lower())
 		else:
-			title = gettext(u"Top %(group)d %(type)s", group=top_rank, type=top_type.lower())
+			title = gettext(u"Top %(group)d %(type)s", group=top_rank, type=top_type.value.lower())
+		if top_type == PackageType.MOD:
+			icon = "fa-box"
+		elif top_type == PackageType.GAME:
+			icon = "fa-gamepad"
+		else:
+			icon = "fa-paint-brush"
 
 		description = gettext(u"%(display_name)s has a %(type)s placed at #%(place)d.",
-				display_name=user.display_name, type=top_type.lower(), place=top_rank)
+				display_name=user.display_name, type=top_type.value.lower(), place=top_rank)
 		unlocked.append(
-				Medal.make_unlocked(place_to_color(top_rank), "fa-trophy", title, description))
+				Medal.make_unlocked(place_to_color(top_rank), icon, title, description))
 
 	#
 	# DOWNLOADS

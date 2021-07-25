@@ -125,7 +125,7 @@
 	<div class="row mb-5">
 		{% for medal in medals_unlocked %}
 			<div class="col-md-4">
-				<div class="card">
+				<div class="card h-100">
 					<div class="card-body media align-items-center">
 						<i class="fas {{ medal.icon }} ml-2 mr-4 text-size"
 						   style="font-size: 45px; color: {{ medal.color }};"></i>
@@ -141,10 +141,10 @@
 				</div>
 			</div>
 		{% endfor %}
-		{% if current_user == user %}
+		{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.ADMIN)) %}
 			{% for medal in medals_locked %}
 				<div class="col-md-4">
-					<div class="border border-dark rounded p-3 text-muted my-0">
+					<div class="border border-dark rounded p-3 text-muted my-0 h-100">
 						<p>
 							{{ medal.description }}
 						</p>
