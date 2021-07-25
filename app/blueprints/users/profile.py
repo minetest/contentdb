@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import math
 
 from flask import *
 from flask_login import current_user, login_required
@@ -64,6 +65,10 @@ def profile(username):
 	users_by_reviews = db.session.query(User.username, func.count(PackageReview.id).label("count")) \
 		.select_from(User).join(PackageReview) \
 		.group_by(User.username).order_by(text("count DESC")).all()
+	try:
+		review_boundary = users_by_reviews[math.floor(len(users_by_reviews) * 0.25)][1] + 1
+	except IndexError:
+		review_boundary = None
 	users_by_reviews = [ username for username, _ in users_by_reviews ]
 
 	review_idx = None
@@ -80,19 +85,26 @@ def profile(username):
 		.filter(User.id == user.id, Package.state == PackageState.APPROVED).scalar() or 0
 
 	all_package_ranks = db.session.query(
+			Package.type,
 			Package.author_id,
-			func.rank().over(order_by=db.desc(Package.score)) \
+			func.rank().over(order_by=db.desc(Package.score), partition_by=Package.type) \
 				.label('rank')).order_by(db.asc(text("rank"))) \
 		.filter_by(state=PackageState.APPROVED).subquery()
+
 	user_package_ranks = db.session.query(all_package_ranks) \
 		.filter_by(author_id=user.id).first()
-	min_package_rank = user_package_ranks[1] if user_package_ranks else None
+	min_package_rank = None
+	min_package_type = None
+	if user_package_ranks:
+		min_package_rank = user_package_ranks[2]
+		min_package_type = PackageType.coerce(user_package_ranks[0]).value
 
 	# Process GET or invalid POST
 	return render_template("users/profile.html", user=user,
 			packages=packages, maintained_packages=maintained_packages,
-			total_downloads=total_downloads, min_package_rank=min_package_rank,
-			review_idx=review_idx, review_percent=review_percent)
+			total_downloads=total_downloads,
+			review_idx=review_idx, review_percent=review_percent, review_boundary=review_boundary,
+			min_package_rank=min_package_rank, min_package_type=min_package_type)
 
 
 @bp.route("/users/<username>/check/", methods=["POST"])

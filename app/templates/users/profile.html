@@ -95,7 +95,8 @@
 				<a class="btn" href="#reviews">
 					<i class="fas fa-star-half-alt"></i>
 					<span class="count">
-						<strong>{{ user.reviews | length }}</strong>
+						{% set num_reviews = user.reviews | length %}
+						<strong>{{ num_reviews }}</strong>
 						{{ _("reviews") }}
 					</span>
 				</a>
@@ -175,12 +176,21 @@
 			</div>
 		{% elif current_user == user %}
 			<div class="col-md-4">
-				<p class="border border-dark rounded p-3 text-muted my-0">
-					{{ _("Consider writing more reviews to get a badge.") }}
-					{% if review_idx %}
-						{{ _("You are in place %(place)s.", place=review_idx + 1) }}
-					{% endif %}
-				</p>
+				<div class="border border-dark rounded p-3 text-muted my-0">
+					<p>
+						{{ _("Consider writing more reviews to get a medal.") }}
+						{% if review_idx %}
+							{{ _("You are in place %(place)s.", place=review_idx + 1) }}
+						{% endif %}
+					</p>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar"
+								style="width: {{ [100 * num_reviews / review_boundary, 100] | min }}%;"
+								aria-valuenow="{{ num_reviews }}" aria-valuemin="0" aria-valuemax="{{ review_boundary }}">
+							{{ _("%(value)d / %(target)d", value=num_reviews, target=review_boundary) }}
+						</div>
+					</div>
+				</div>
 			</div>
 		{% endif %}
 		{% if total_downloads >= 50000 %}
@@ -219,22 +229,27 @@
 			</div>
 		{% elif total_downloads > 0 and current_user == user %}
 			<div class="col-md-4">
-				<p class="border border-dark rounded p-3 text-muted my-0">
-					{{ _("Your packages have %(downloads)d downloads in total.", downloads=total_downloads) }}
-{#					<div class="progress">#}
-{#						<div class="progress-bar" role="progressbar"#}
-{#								style="width: {{ [100 * total_downloads / 50000, 100] | min }}%;"#}
-{#								aria-valuenow="{{ total_downloads }}" aria-valuemin="0" aria-valuemax="50000"></div>#}
-{#					</div>#}
-				</p>
+				<div class="border border-dark rounded p-3 text-muted my-0">
+					<p>
+						{{ _("Your packages have %(downloads)d downloads in total.", downloads=total_downloads) }}
+						{{ _("First medal is at 50k.") }}
+					</p>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar"
+								style="width: {{ [100 * total_downloads / 50000, 100] | min }}%;"
+								aria-valuenow="{{ total_downloads }}" aria-valuemin="0" aria-valuemax="50000">
+							{{ _("%(value)d / %(target)d", value=total_downloads, target=50000) }}
+						</div>
+					</div>
+				</div>
 			</div>
 		{% endif %}
-		{% if min_package_rank is not none and min_package_rank <= 30 %}
-			{% if min_package_rank <= 5 %}
+		{% if min_package_rank is not none and min_package_rank <= 20 %}
+			{% if min_package_rank == 1 %}
 				{% set badge_color = "gold" %}
-			{% elif min_package_rank <= 10 %}
+			{% elif min_package_rank == 2 %}
 				{% set badge_color = "#888" %}
-			{% elif min_package_rank <= 20 %}
+			{% elif min_package_rank == 3 %}
 				{% set badge_color = "#cd7f32" %}
 			{% else %}
 				{% set badge_color = "white" %}
@@ -245,15 +260,7 @@
 						<i class="fas fa-trophy ml-2 mr-4 text-size" style="font-size: 45px; color: {{ badge_color }};"></i>
 						<div class="media-body">
 							<h5 class="mt-0">
-								{% if min_package_rank <= 5 %}
-									{{ _("Top 5 package") }}
-								{% elif min_package_rank <= 10 %}
-									{{ _("Top 10 package") }}
-								{% elif min_package_rank <= 20 %}
-									{{ _("Top 20 package") }}
-								{% else %}
-									{{ _("Top 30 package") }}
-								{% endif %}
+								{{ _("Top %(place)d %(type)s", place=min_package_rank, type=min_package_type) }}
 							</h5>
 							<p class="my-0">
 								{{ _("%(display_name)s has a package placed at #%(place)d.",
