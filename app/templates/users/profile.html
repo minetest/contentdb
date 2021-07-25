@@ -123,153 +123,41 @@
 	</div>
 {% else %}
 	<div class="row mb-5">
-		{% if review_percent is not none and review_percent < 25 and review_idx >= 0 %}
-			<div class="col-md-4">
-				<div class="card">
-					{% if review_idx == 0 %}
-						{% set badge_color = "gold" %}
-					{% elif review_idx == 1 %}
-						{% set badge_color = "#888" %}
-					{% elif review_idx == 2 %}
-						{% set badge_color = "#cd7f32" %}
-					{% else %}
-						{% set badge_color = "white" %}
-					{% endif %}
-					<div class="card-body media align-items-center">
-						<i class="fas fa-star-half-alt ml-2 mr-4 text-size" style="font-size: 45px; color: {{ badge_color }};"></i>
-						<div class="media-body">
-							{% if review_idx == 0 %}
-								<h5 class="mt-0">
-									{{ _("Most reviews", perc=review_percent) }}
-								</h5>
-								<p class="my-0">
-									{{ _("%(display_name)s has written the most reviews on ContentDB.",
-											display_name=user.display_name) }}
-								</p>
-							{% elif review_idx <= 2 %}
-								<h5 class="mt-0">
-									{% if review_idx == 1 %}
-										{{ _("2nd most reviews", perc=review_percent) }}
-									{% else %}
-										{{ _("3rd most reviews", perc=review_percent) }}
-									{% endif %}
-								</h5>
-								<p class="my-0">
-									{{ _("This puts %(display_name)s in the top %(perc)s%%",
-											display_name=user.display_name, perc=review_percent) }}
-								</p>
-							{% else %}
-								<h5 class="mt-0">
-									{{ _("Top %(perc)s%% reviewer", perc=review_percent) }}
-								</h5>
-								<p class="my-0">
-									{% if review_idx == 1 %}
-										{{ _("Only 1 user has written more reviews.") }}
-									{% else %}
-										{{ _("Only %(place)d users have written more reviews.", place=review_idx) }}
-									{% endif %}
-								</p>
-							{% endif %}
-						</div>
-					</div>
-				</div>
-			</div>
-		{% elif current_user == user %}
-			<div class="col-md-4">
-				<div class="border border-dark rounded p-3 text-muted my-0">
-					<p>
-						{{ _("Consider writing more reviews to get a medal.") }}
-						{% if review_idx %}
-							{{ _("You are in place %(place)s.", place=review_idx + 1) }}
-						{% endif %}
-					</p>
-					<div class="progress">
-						<div class="progress-bar" role="progressbar"
-								style="width: {{ [100 * num_reviews / review_boundary, 100] | min }}%;"
-								aria-valuenow="{{ num_reviews }}" aria-valuemin="0" aria-valuemax="{{ review_boundary }}">
-							{{ _("%(value)d / %(target)d", value=num_reviews, target=review_boundary) }}
-						</div>
-					</div>
-				</div>
-			</div>
-		{% endif %}
-		{% if total_downloads >= 50000 %}
-			{% if total_downloads >= 300000 %}
-				{% set badge_color = "gold" %}
-			{% elif total_downloads >= 100000 %}
-				{% set badge_color = "#888" %}
-			{% elif total_downloads >= 75000 %}
-				{% set badge_color = "#cd7f32" %}
-			{% else %}
-				{% set badge_color = "white" %}
-			{% endif %}
+		{% for medal in medals_unlocked %}
 			<div class="col-md-4">
 				<div class="card">
 					<div class="card-body media align-items-center">
-						<i class="fas fa-users ml-2 mr-4 text-size" style="font-size: 45px; color: {{ badge_color }};"></i>
+						<i class="fas {{ medal.icon }} ml-2 mr-4 text-size"
+						   style="font-size: 45px; color: {{ medal.color }};"></i>
 						<div class="media-body">
 							<h5 class="mt-0">
-								{% if total_downloads >= 300000 %}
-									{{ _(">300k downloads") }}
-								{% elif total_downloads >= 100000 %}
-									{{ _(">100k downloads") }}
-								{% elif total_downloads >= 75000 %}
-									{{ _(">75k downloads") }}
-								{% else %}
-									{{ _(">50k downloads") }}
-								{% endif %}
+								{{ medal.title }}
 							</h5>
 							<p class="my-0">
-								{{ _("Has received %(downloads)d downloads across all packages.",
-										display_name=user.display_name, downloads=total_downloads) }}
+								{{ medal.description }}
 							</p>
 						</div>
 					</div>
 				</div>
 			</div>
-		{% elif total_downloads > 0 and current_user == user %}
-			<div class="col-md-4">
-				<div class="border border-dark rounded p-3 text-muted my-0">
-					<p>
-						{{ _("Your packages have %(downloads)d downloads in total.", downloads=total_downloads) }}
-						{{ _("First medal is at 50k.") }}
-					</p>
-					<div class="progress">
-						<div class="progress-bar" role="progressbar"
-								style="width: {{ [100 * total_downloads / 50000, 100] | min }}%;"
-								aria-valuenow="{{ total_downloads }}" aria-valuemin="0" aria-valuemax="50000">
-							{{ _("%(value)d / %(target)d", value=total_downloads, target=50000) }}
+		{% endfor %}
+		{% if current_user == user %}
+			{% for medal in medals_locked %}
+				<div class="col-md-4">
+					<div class="border border-dark rounded p-3 text-muted my-0">
+						<p>
+							{{ medal.description }}
+						</p>
+						<div class="progress">
+							<div class="progress-bar" role="progressbar"
+									style="width: {{ [100 * medal.progress[0] / medal.progress[1], 100] | min }}%;"
+									aria-valuenow="{{ medal.progress[0] }}" aria-valuemin="0" aria-valuemax="{{ medal.progress[1] }}">
+								{{ _("%(value)d / %(target)d", value=medal.progress[0], target=medal.progress[1]) }}
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		{% endif %}
-		{% if min_package_rank is not none and min_package_rank <= 20 %}
-			{% if min_package_rank == 1 %}
-				{% set badge_color = "gold" %}
-			{% elif min_package_rank == 2 %}
-				{% set badge_color = "#888" %}
-			{% elif min_package_rank == 3 %}
-				{% set badge_color = "#cd7f32" %}
-			{% else %}
-				{% set badge_color = "white" %}
-			{% endif %}
-			<div class="col-md-4">
-				<div class="card">
-					<div class="card-body media align-items-center">
-						<i class="fas fa-trophy ml-2 mr-4 text-size" style="font-size: 45px; color: {{ badge_color }};"></i>
-						<div class="media-body">
-							<h5 class="mt-0">
-								{{ _("Top %(place)d %(type)s", place=min_package_rank, type=min_package_type) }}
-							</h5>
-							<p class="my-0">
-								{{ _("%(display_name)s has a package placed at #%(place)d.",
-										display_name=user.display_name, place=min_package_rank) }}
-							</p>
-						</div>
-					</div>
-				</div>
-			</div>
+			{% endfor %}
 		{% endif %}
 	</div>
 {% endif %}

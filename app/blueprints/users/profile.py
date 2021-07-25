@@ -15,10 +15,12 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import math
+from typing import List, Optional, Tuple
 
 from flask import *
+from flask_babel import gettext
 from flask_login import current_user, login_required
-from sqlalchemy import func
+from sqlalchemy import func, and_, or_
 
 from app.models import *
 from app.tasks.forumtasks import checkForumAccount
@@ -44,6 +46,159 @@ def by_forums_username(username):
 	return render_template("users/forums_no_such_user.html", username=username)
 
 
+class Medal:
+	description: str
+	color: Optional[str]
+	icon: str
+	title: Optional[str]
+	progress: Optional[Tuple[int, int]]
+
+	def __init__(self, description: str, **kwargs):
+		self.description = description
+		self.color = kwargs.get("color", "white")
+		self.icon = kwargs.get("icon", None)
+		self.title = kwargs.get("title", None)
+		self.progress = kwargs.get("progress", None)
+
+	@classmethod
+	def make_unlocked(cls, color: str, icon: str, title: str, description: str):
+		return Medal(description=description, color=color, icon=icon, title=title)
+
+	@classmethod
+	def make_locked(cls, description: str, progress: Tuple[int, int]):
+		return Medal(description=description, progress=progress)
+
+
+def place_to_color(place: int) -> str:
+	if place == 1:
+		return "gold"
+	elif place == 2:
+		return "#888"
+	elif place == 3:
+		return "#cd7f32"
+	else:
+		return "white"
+
+
+def get_user_medals(user: User) -> Tuple[List[Medal], List[Medal]]:
+	unlocked = []
+	locked = []
+
+	#
+	# REVIEWS
+	#
+
+	users_by_reviews = db.session.query(User.username, func.count(PackageReview.id).label("count")) \
+		.select_from(User).join(PackageReview) \
+		.group_by(User.username).order_by(text("count DESC")).all()
+	try:
+		review_boundary = users_by_reviews[math.floor(len(users_by_reviews) * 0.25)][1] + 1
+	except IndexError:
+		review_boundary = None
+	users_by_reviews = [username for username, _ in users_by_reviews]
+
+	review_idx = None
+	review_percent = None
+	try:
+		review_idx = users_by_reviews.index(user.username)
+		review_percent = round(100 * review_idx / len(users_by_reviews), 1)
+	except ValueError:
+		pass
+
+	if review_percent and review_percent < 25:
+		if review_idx == 0:
+			title = gettext(u"Most reviews")
+			description = gettext(
+					u"%(display_name)s has written the most reviews on ContentDB.",
+					display_name=user.display_name)
+		elif review_idx <= 2:
+			if review_idx == 1:
+				title = gettext(u"2nd most reviews")
+			else:
+				title = gettext(u"3rd most reviews")
+			description = gettext(
+					u"This puts %(display_name)s in the top %(perc)s%%",
+					display_name=user.display_name, perc=review_percent)
+		else:
+			title = gettext(u"Top %(perc)s%% reviewer", perc=review_percent)
+			description = gettext(u"Only %(place)d users have written more reviews.", place=review_idx)
+
+		unlocked.append(Medal.make_unlocked(
+				place_to_color(review_idx + 1), "fa-star-half-alt", title, description))
+	else:
+		description = gettext(u"Consider writing more reviews to get a medal.")
+		if review_idx:
+			description += " " + gettext(u"You are in place %(place)s.", place=review_idx + 1)
+		locked.append(Medal.make_locked(
+				description, (len(user.reviews), review_boundary)))
+
+	#
+	# TOP PACKAGES
+	#
+	all_package_ranks = db.session.query(
+			Package.type,
+			Package.author_id,
+			func.rank().over(
+					order_by=db.desc(Package.score),
+					partition_by=Package.type) \
+				.label("rank")).order_by(db.asc(text("rank"))) \
+		.filter_by(state=PackageState.APPROVED).subquery()
+
+	user_package_ranks = db.session.query(all_package_ranks) \
+		.filter_by(author_id=user.id) \
+		.filter(text("rank <= 30")) \
+		.all()
+
+	user_package_ranks = next(
+			(x for x in user_package_ranks if x[0] == PackageType.MOD or x[2] <= 10),
+			None)
+	if user_package_ranks:
+		top_rank = user_package_ranks[2]
+		top_type = PackageType.coerce(user_package_ranks[0]).value
+		if top_rank == 1:
+			title = gettext(u"Top %(type)s", type=top_type.lower())
+		else:
+			title = gettext(u"Top %(group)d %(type)s", group=top_rank, type=top_type.lower())
+
+		description = gettext(u"%(display_name)s has a %(type)s placed at #%(place)d.",
+				display_name=user.display_name, type=top_type.lower(), place=top_rank)
+		unlocked.append(
+				Medal.make_unlocked(place_to_color(top_rank), "fa-trophy", title, description))
+
+	#
+	# DOWNLOADS
+	#
+	total_downloads = db.session.query(func.sum(Package.downloads)) \
+		.select_from(User) \
+		.join(User.packages) \
+		.filter(User.id == user.id,
+			Package.state == PackageState.APPROVED).scalar()
+	if total_downloads is None:
+		pass
+	elif total_downloads < 50000:
+		description = gettext(u"Your packages have %(downloads)d downloads in total.", downloads=total_downloads)
+		description += " " + gettext(u"First medal is at 50k.")
+		locked.append(Medal.make_locked(description, (total_downloads, 50000)))
+	else:
+		if total_downloads >= 300000:
+			place = 1
+			title = gettext(u">300k downloads")
+		elif total_downloads >= 100000:
+			place = 2
+			title = gettext(u">100k downloads")
+		elif total_downloads >= 75000:
+			place = 3
+			title = gettext(u">75k downloads")
+		else:
+			place = 10
+			title = gettext(u">50k downloads")
+		description = gettext(u"Has received %(downloads)d downloads across all packages.",
+				display_name=user.display_name, downloads=total_downloads)
+		unlocked.append(Medal.make_unlocked(place_to_color(place), "fa-users", title, description))
+
+	return unlocked, locked
+
+
 @bp.route("/users/<username>/")
 def profile(username):
 	user = User.query.filter_by(username=username).first()
@@ -62,49 +217,11 @@ def profile(username):
 		.filter(Package.author != user) \
 		.order_by(db.asc(Package.title)).all()
 
-	users_by_reviews = db.session.query(User.username, func.count(PackageReview.id).label("count")) \
-		.select_from(User).join(PackageReview) \
-		.group_by(User.username).order_by(text("count DESC")).all()
-	try:
-		review_boundary = users_by_reviews[math.floor(len(users_by_reviews) * 0.25)][1] + 1
-	except IndexError:
-		review_boundary = None
-	users_by_reviews = [ username for username, _ in users_by_reviews ]
-
-	review_idx = None
-	review_percent = None
-	try:
-		review_idx = users_by_reviews.index(user.username)
-		review_percent = round(100 * review_idx / len(users_by_reviews), 1)
-	except ValueError:
-		pass
-
-	total_downloads = db.session.query(func.sum(Package.downloads)) \
-		.select_from(User) \
-		.join(User.packages) \
-		.filter(User.id == user.id, Package.state == PackageState.APPROVED).scalar() or 0
-
-	all_package_ranks = db.session.query(
-			Package.type,
-			Package.author_id,
-			func.rank().over(order_by=db.desc(Package.score), partition_by=Package.type) \
-				.label('rank')).order_by(db.asc(text("rank"))) \
-		.filter_by(state=PackageState.APPROVED).subquery()
-
-	user_package_ranks = db.session.query(all_package_ranks) \
-		.filter_by(author_id=user.id).first()
-	min_package_rank = None
-	min_package_type = None
-	if user_package_ranks:
-		min_package_rank = user_package_ranks[2]
-		min_package_type = PackageType.coerce(user_package_ranks[0]).value
-
+	unlocked, locked = get_user_medals(user)
 	# Process GET or invalid POST
 	return render_template("users/profile.html", user=user,
 			packages=packages, maintained_packages=maintained_packages,
-			total_downloads=total_downloads,
-			review_idx=review_idx, review_percent=review_percent, review_boundary=review_boundary,
-			min_package_rank=min_package_rank, min_package_type=min_package_type)
+			medals_unlocked=unlocked, medals_locked=locked)
 
 
 @bp.route("/users/<username>/check/", methods=["POST"])
