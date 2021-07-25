@@ -2,8 +2,13 @@ title: Featured Packages
 
 ## What are Featured Packages?
 
-Featured Packages are shown at the top of the ContentDB homepage. In the future, featured packages
-may be shown inside the Minetest client. Only Editors can add the "Featured" tag to a package.
+Featured Packages are shown at the top of the ContentDB homepage. In the future,
+featured packages may be shown inside the Minetest client.
+
+The purpose is to promote content that demonstrates a high quality of what is
+possible in Minetest. The selection should be varied, and should vary over time.
+The featured content should be content that we are comfortable recommending to
+a first time player.
 
 ## How are the packages chosen?
 
@@ -11,40 +16,51 @@ Before a package can be considered, it must fulfil the criteria in the below lis
 There are three types of criteria:
 
 * "MUST": These must absolutely be fulfilled, no exceptions!
-* "SHOULD": Most of them should be fulfilled, if possible. Some of them can be left out if there's a reason.
+* "SHOULD": Most of them should be fulfilled, if possible. Some of them can be
+  left out if there's a reason.
 * "CAN": Can be fulfilled for bonus points, they are entirely optional.
 
-For a chance to get featured, a package must fulfill all "MUST" criteria and ideally as many "SHOULD"
-criteria as possible. The more, the better. Thankfully, many criteria are trivial to fulfil. Note
-that ticking off all the boxes is not enough: Just because a package completes the checklist
-does not make it good. Other aspects of the package should be rated as well. See this list
-as a starting point, not as an exhaustive quality control.
+For a chance to get featured, a package must fulfil all "MUST" criteria and
+ideally as many "SHOULD" criteria as possible. The more, the better. Thankfully,
+many criteria are trivial to fulfil. Note that ticking off all the boxes is not
+enough: Just because a package completes the checklist does not make it good.
+Other aspects of the package should be rated as well. See this list as a
+starting point, not as an exhaustive quality control.
 
-A game that fulfills all MUST criteria but zero SHOULD criteria is probably not a good candidate.
+Editors are responsible for maintaining the list of featured packages. Authors
+can request that their package be considered by opening a thread titled
+"Feature Package" on their package. To speed things up, they should justify
+why they meet (or don't meet) the below criteria. Editors must abstain from
+voting on packages where they have a conflict of interest.
+
+A package being featured does not mean that it will be featured forever. A
+package may be unfeatured if it no longer meets the criteria, to make space for
+other packages to be featured, or for another reason.
 
 ## General Requirements
 
 ### General
 
-* MUST: Be 100% free and open source (FSF-approved or OSI-approved. WTFPL is not allowed).
+* MUST: Be 100% free and open source (as marked as Free on ContentDB).
 * MUST: Work out-of-the-box (no weird setup or settings required).
 * MUST: Be compatible with the latest stable Minetest release.
 * SHOULD: Use source control (such as Git).
-* SHOULD: Have at least 3 reviews, and be >90% positive.
+* SHOULD: Have at least 3 reviews, and be largely positive.
 
 ### Stability
 
 * MUST: Be well maintained (author is present and active).
 * MUST: Be reasonably stable, with no game-breaking or major bugs.
-* MUST: The author does not consider the package to be in an experimental/development/alpha state.
+* MUST: The author does not consider the package to be in an
+  experimental/development/alpha state.
 * MUST: No error messages from the engine (e.g. missing textures).
 * SHOULD: No major map breakages (including unknown nodes, corruption, loss of inventories).
   Map breakages are a sign that the package isn't sufficiently stable.
 
-Note: Any map breakage is excused immediately if "disaster relief" (i.e. tools to repair the damage)
+Note: Any map breakage will be excused if "disaster relief" (i.e. tools to repair the damage)
 is available.
 
-### Meta and packaging  
+### Meta and packaging
 
 * MUST: `screenshot.png` is present and up-to-date, with a correct aspect ratio (3:2).
 * MUST: Have a high resolution cover image (on ContentDB, at least 1920x1080 pixels).
@@ -99,7 +115,6 @@ is available.
 
 ### Quality Assurance
 
-* MUST: Comply with [Rule 3 (Technical Names)](/policy_and_guidance/#3-technical-names).
 * MUST: No flooding the console/log file with warnings.
 * MUST: No duplicate crafting recipes.
 * MUST: Highly experimental features are disabled by default.
@@ -114,7 +129,7 @@ is available.
 * MUST: Game is not littered with typos or bad grammar (a few typos are OK but should be fixed, when found).
 * SHOULD: All items have unique names (items which disguise themselves as another item are exempt).
 * SHOULD: The writing style of all item names is grammatical and consistent.
-* SHOULD: Descriptions of things convey useful and meaningful information (if applicable). 
+* SHOULD: Descriptions of things convey useful and meaningful information (if applicable).
 * CAN: Text is written in clear and (if possible) simple language.
 * CAN: Very technical language is avoided (unless hackers are the audience).
 * CAN: Game is translatable.
