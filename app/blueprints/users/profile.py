@@ -72,9 +72,18 @@ def profile(username):
 		.join(User.maintained_packages) \
 		.filter(User.id == user.id, Package.state == PackageState.APPROVED).scalar() or 0
 
+	all_package_ranks = db.session.query(
+			Package.author_id,
+			func.rank().over(order_by=db.desc(Package.score)) \
+				.label('rank')).order_by(db.asc(text("rank"))).subquery()
+	user_package_ranks = db.session.query(all_package_ranks) \
+		.filter_by(author_id=user.id).first()
+	min_package_rank = user_package_ranks[1] if user_package_ranks else None
+
 	# Process GET or invalid POST
 	return render_template("users/profile.html", user=user, packages=packages,
-			total_downloads=total_downloads, review_idx=review_idx, review_percent=review_percent)
+			total_downloads=total_downloads, min_package_rank=min_package_rank,
+			review_idx=review_idx, review_percent=review_percent)
 
 
 @bp.route("/users/<username>/check/", methods=["POST"])

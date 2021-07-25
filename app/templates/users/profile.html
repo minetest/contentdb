@@ -218,6 +218,41 @@
 				</div>
 			</div>
 		{% endif %}
+		{% if min_package_rank <= 30 %}
+			{% if min_package_rank <= 5 %}
+				{% set badge_color = "gold" %}
+			{% elif min_package_rank <= 10 %}
+				{% set badge_color = "#888" %}
+			{% elif min_package_rank <= 20 %}
+				{% set badge_color = "#cd7f32" %}
+			{% else %}
+				{% set badge_color = "white" %}
+			{% endif %}
+			<div class="col-md-4">
+				<div class="card">
+					<div class="card-body media align-items-center">
+						<i class="fas fa-trophy ml-2 mr-4 text-size" style="font-size: 45px; color: {{ badge_color }};"></i>
+						<div class="media-body">
+							<h5 class="mt-0">
+								{% if min_package_rank <= 5 %}
+									{{ _("Top 5 package") }}
+								{% elif min_package_rank <= 10 %}
+									{{ _("Top 10 package") }}
+								{% elif min_package_rank <= 20 %}
+									{{ _("Top 20 package") }}
+								{% else %}
+									{{ _("Top 30 package") }}
+								{% endif %}
+							</h5>
+							<p class="my-0">
+								{{ _("%(display_name)s has a package placed at #%(place)d.",
+										display_name=user.display_name, place=min_package_rank) }}
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{% endif %}
 	</div>
 {% endif %}
 
