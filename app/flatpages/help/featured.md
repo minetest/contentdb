@@ -1,6 +1,120 @@
 title: Featured Packages
 
-Editors can choose packages to feature on the homepage.
-This is done using the Featured tag.
+## What are Featured Packages?
 
-We are still deciding on a policy for choosing Featured packages. 
+Featured Packages are shown at the top of the ContentDB homepage. In the future, featured packages
+may be shown inside the Minetest client. Only Editors can add the "Featured" tag to a package.
+
+## How are the packages chosen?
+
+Before a package can be considered, it must fulfil the criteria in the below lists.
+There are three types of criteria:
+
+* "MUST": These must absolutely be fulfilled, no exceptions!
+* "SHOULD": Most of them should be fulfilled, if possible. Some of them can be left out if there's a reason.
+* "CAN": Can be fulfilled for bonus points, they are entirely optional.
+
+For a chance to get featured, a package must fulfill all "MUST" criteria and ideally as many "SHOULD"
+criteria as possible. The more, the better. Thankfully, many criteria are trivial to fulfil. Note
+that ticking off all the boxes is not enough: Just because a package completes the checklist
+does not make it good. Other aspects of the package should be rated as well. See this list
+as a starting point, not as an exhaustive quality control.
+
+A game that fulfills all MUST criteria but zero SHOULD criteria is probably not a good candidate.
+
+## General Requirements
+
+### General
+
+* MUST: Be 100% free and open source (FSF-approved or OSI-approved. WTFPL is not allowed).
+* MUST: Work out-of-the-box (no weird setup or settings required).
+* MUST: Be compatible with the latest stable Minetest release.
+* SHOULD: Use source control (such as Git).
+* SHOULD: Have at least 3 reviews, and be >90% positive.
+
+### Stability
+
+* MUST: Be well maintained (author is present and active).
+* MUST: Be reasonably stable, with no game-breaking or major bugs.
+* MUST: The author does not consider the package to be in an experimental/development/alpha state.
+* MUST: No error messages from the engine (e.g. missing textures).
+* SHOULD: No major map breakages (including unknown nodes, corruption, loss of inventories).
+  Map breakages are a sign that the package isn't sufficiently stable.
+
+Note: Any map breakage is excused immediately if "disaster relief" (i.e. tools to repair the damage)
+is available.
+
+### Meta and packaging  
+
+* MUST: `screenshot.png` is present and up-to-date, with a correct aspect ratio (3:2).
+* MUST: Have a high resolution cover image (on ContentDB, at least 1920x1080 pixels).
+* MUST: mod/game/texture_pack.conf present with description and name, and dependencies if relevant.
+* MUST: Contain a README file and a LICENSE file. These may be `.md` or `.txt`.
+* SHOULD: All important settings are in settingtypes.txt with description.
+
+## Game-specific Requirements
+
+### Meta and packaging
+
+* MUST: Have a main menu icon and header image.
+* MUST: Include a README file that includes at least:
+    * Game name
+    * Short game description
+    * List of relevant links (download, bugtracker, etc.)
+    * Pointers to other relevant files (like license)
+    * Which Minetest versions are supported
+
+### Stability
+
+* MUST: Does not break when changing key minetest.conf settings.
+* MUST: If any major setting (like `enable_damage`) is unsupported, game must deal with
+  it appropriately (e.g. force-disable the setting).
+
+### Usability
+
+* MUST: Unsupported mapgens are disabled in game.conf.
+* SHOULD: Passes the Beginner Test: A newbie to the game (but not Minetest) wouldn't get completely
+  stuck within the first 5 minutes of playing.
+* SHOULD: Has a crafting guide or something similar (unless not required).
+* SHOULD: Documentation: Reasonably complete manual (or similar) ''somewhere'' or the game explains itself.
+* SHOULD: All formspecs use listrings, where appropriate.
+
+### Gameplay
+
+* CAN: Passes the Six Hour Test (only applies to sandbox games): The game doesn't run out of new
+  content before the first 6 hours of playing.
+* CAN: Players don't feel that something in the game is "lacking".
+
+### Audiovisuals
+
+* MUST: Audiovisual design should be of good quality.
+* MUST: No obvious GUI/HUD breakages.
+* MUST: Sounds have no obvious artifacts like clicks or unintentional noise.
+* MUST: All sounds sound OK with headphones, too.
+* MUST: No nodes with unintentional sounds.
+* SHOULD: Graphical design is mostly consistent.
+* SHOULD: Sounds are used.
+* SHOULD: Sounds are normalized (more or less).
+* CAN: Texture packs are supported normally.
+
+### Quality Assurance
+
+* MUST: Comply with [Rule 3 (Technical Names)](/policy_and_guidance/#3-technical-names).
+* MUST: No flooding the console/log file with warnings.
+* MUST: No duplicate crafting recipes.
+* MUST: Highly experimental features are disabled by default.
+* MUST: Experimental features are clearly marked as such.
+* SHOULD: No unknown nodes/items/objects appear.
+* SHOULD: No dependency on legacy API calls.
+* SHOULD: No console warnings.
+
+### Writing
+
+* MUST: All items that can be obtained in normal gameplay have `description` set.
+* MUST: Game is not littered with typos or bad grammar (a few typos are OK but should be fixed, when found).
+* SHOULD: All items have unique names (items which disguise themselves as another item are exempt).
+* SHOULD: The writing style of all item names is grammatical and consistent.
+* SHOULD: Descriptions of things convey useful and meaningful information (if applicable). 
+* CAN: Text is written in clear and (if possible) simple language.
+* CAN: Very technical language is avoided (unless hackers are the audience).
+* CAN: Game is translatable.
