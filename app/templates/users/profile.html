@@ -217,6 +217,17 @@
 					</div>
 				</div>
 			</div>
+		{% elif total_downloads > 0 and current_user == user %}
+			<div class="col-md-4">
+				<p class="border border-dark rounded p-3 text-muted my-0">
+					{{ _("Your packages have %(downloads)d downloads in total.", downloads=total_downloads) }}
+{#					<div class="progress">#}
+{#						<div class="progress-bar" role="progressbar"#}
+{#								style="width: {{ [100 * total_downloads / 50000, 100] | min }}%;"#}
+{#								aria-valuenow="{{ total_downloads }}" aria-valuemin="0" aria-valuemax="50000"></div>#}
+{#					</div>#}
+				</p>
+			</div>
 		{% endif %}
 		{% if min_package_rank is not none and min_package_rank <= 30 %}
 			{% if min_package_rank <= 5 %}
