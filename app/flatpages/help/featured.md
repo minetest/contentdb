@@ -44,7 +44,7 @@ other packages to be featured, or for another reason.
 * MUST: Be 100% free and open source (as marked as Free on ContentDB).
 * MUST: Work out-of-the-box (no weird setup or settings required).
 * MUST: Be compatible with the latest stable Minetest release.
-* SHOULD: Use source control (such as Git).
+* SHOULD: Use public source control (such as Git).
 * SHOULD: Have at least 3 reviews, and be largely positive.
 
 ### Stability
@@ -52,7 +52,7 @@ other packages to be featured, or for another reason.
 * MUST: Be well maintained (author is present and active).
 * MUST: Be reasonably stable, with no game-breaking or major bugs.
 * MUST: The author does not consider the package to be in an
-  experimental/development/alpha state.
+  experimental/development/alpha state. Beta and "unfinished" packages are fine.
 * MUST: No error messages from the engine (e.g. missing textures).
 * SHOULD: No major map breakages (including unknown nodes, corruption, loss of inventories).
   Map breakages are a sign that the package isn't sufficiently stable.
@@ -62,10 +62,17 @@ is available.
 
 ### Meta and packaging
 
-* MUST: `screenshot.png` is present and up-to-date, with a correct aspect ratio (3:2).
-* MUST: Have a high resolution cover image (on ContentDB, at least 1920x1080 pixels).
-* MUST: mod/game/texture_pack.conf present with description and name, and dependencies if relevant.
+* MUST: `screenshot.png` is present and up-to-date, with a correct aspect ratio (3:2, at least 300x200).
+* MUST: Have a high resolution cover image on ContentDB (at least 1280x768 pixels).
+  It may be shown cropped to 16:9 aspect ratio, or shorter.
+* MUST: mod.conf/game.conf/texture_pack.conf present with:
+    * name (if mod or game)
+    * description
+    * dependencies (if relevant)
+    * `min_minetest_version` and `max_minetest_version` (if relevant)
 * MUST: Contain a README file and a LICENSE file. These may be `.md` or `.txt`.
+    * README files typically contain helpful links (download, manual, bugtracker, etc), and other
+      information that players or (potential) contributors may need.
 * SHOULD: All important settings are in settingtypes.txt with description.
 
 ## Game-specific Requirements
@@ -73,27 +80,24 @@ is available.
 ### Meta and packaging
 
 * MUST: Have a main menu icon and header image.
-* MUST: Include a README file that includes at least:
-    * Game name
-    * Short game description
-    * List of relevant links (download, bugtracker, etc.)
-    * Pointers to other relevant files (like license)
-    * Which Minetest versions are supported
 
 ### Stability
 
 * MUST: Does not break when changing key minetest.conf settings.
-* MUST: If any major setting (like `enable_damage`) is unsupported, game must deal with
-  it appropriately (e.g. force-disable the setting).
+* MUST: If any major setting (like `enable_damage`) is unsupported, the game must disable it
+  using `disabled_settings` in the `game.conf`, and deal with it appropriately in the code
+  (e.g. force-disable the setting, as the user may still set the setting in `minetest.conf`)
 
 ### Usability
 
 * MUST: Unsupported mapgens are disabled in game.conf.
 * SHOULD: Passes the Beginner Test: A newbie to the game (but not Minetest) wouldn't get completely
   stuck within the first 5 minutes of playing.
-* SHOULD: Has a crafting guide or something similar (unless not required).
-* SHOULD: Documentation: Reasonably complete manual (or similar) ''somewhere'' or the game explains itself.
-* SHOULD: All formspecs use listrings, where appropriate.
+* SHOULD: Have good documentation. This may include one or more of:
+    * A craftguide, or other in-game learning system
+    * A manual
+    * A wiki
+    * Something else
 
 ### Gameplay
 
@@ -111,7 +115,6 @@ is available.
 * SHOULD: Graphical design is mostly consistent.
 * SHOULD: Sounds are used.
 * SHOULD: Sounds are normalized (more or less).
-* CAN: Texture packs are supported normally.
 
 ### Quality Assurance
 
@@ -131,5 +134,3 @@ is available.
 * SHOULD: The writing style of all item names is grammatical and consistent.
 * SHOULD: Descriptions of things convey useful and meaningful information (if applicable).
 * CAN: Text is written in clear and (if possible) simple language.
-* CAN: Very technical language is avoided (unless hackers are the audience).
-* CAN: Game is translatable.
