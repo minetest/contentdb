@@ -122,21 +122,21 @@ def view(package):
 			current_user in package.maintainers or
 				package.checkPerm(current_user, Permission.APPROVE_NEW))
 
-	packages_modnames = None
-	similar_topics = None
+	conflicting_modnames = None
 	if show_similar and package.type != PackageType.TXP:
-		packages_modnames = Package.query.filter(Package.id != package.id,
-				Package.state != PackageState.DELETED) \
-				.filter(Package.provides.any(PackageProvides.c.metapackage_id.in_([p.id for p in package.provides]))) \
-				.order_by(db.desc(Package.score)) \
+		conflicting_modnames = db.session.query(MetaPackage.name) \
+				.filter(MetaPackage.id.in_([ mp.id for mp in package.provides ])) \
+				.filter(MetaPackage.packages.any(Package.id != package.id)) \
 				.all()
 
-		similar_topics = ForumTopic.query \
-				.filter_by(name=package.name) \
+		conflicting_modnames += db.session.query(ForumTopic.name) \
+				.filter(ForumTopic.name.in_([ mp.name for mp in package.provides ])) \
 				.filter(ForumTopic.topic_id != package.forums) \
 				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
 				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 				.all()
+
+		conflicting_modnames = set([x[0] for x in conflicting_modnames])
 
 	packages_uses = None
 	if package.type == PackageType.MOD:
@@ -183,7 +183,7 @@ def view(package):
 
 	return render_template("packages/view.html",
 			package=package, releases=releases, packages_uses=packages_uses,
-			packages_modnames=packages_modnames, similar_topics=similar_topics,
+			conflicting_modnames=conflicting_modnames,
 			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
 			threads=threads.all(), has_review=has_review)
 
@@ -577,3 +577,25 @@ def alias_create_edit(package: Package, alias_id: int = None):
 def share(package):
 	return render_template("packages/share.html", package=package,
 			tabs=get_package_tabs(current_user, package), current_tab="share")
+
+
+@bp.route("/packages/<author>/<name>/similar/")
+@is_package_page
+def similar(package):
+	packages_modnames = {}
+	for metapackage in package.provides:
+		packages_modnames[metapackage] = Package.query.filter(Package.id != package.id,
+				Package.state != PackageState.DELETED) \
+			.filter(Package.provides.any(PackageProvides.c.metapackage_id == metapackage.id)) \
+			.order_by(db.desc(Package.score)) \
+			.all()
+
+	similar_topics = ForumTopic.query \
+		.filter_by(name=package.name) \
+		.filter(ForumTopic.topic_id != package.forums) \
+		.filter(~ db.exists().where(Package.forums == ForumTopic.topic_id)) \
+		.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
+		.all()
+
+	return render_template("packages/similar.html", package=package,
+			packages_modnames=packages_modnames, similar_topics=similar_topics)

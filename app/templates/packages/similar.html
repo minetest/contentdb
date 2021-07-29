@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block title %}
+Modname Uniqueness
+{% endblock %}
+
+{% block content %}
+	<h1><a href="{{ package.getURL("packages.view") }}">{{ package.title }}</a></h1>
+	<h2>{{ self.title() }}</h2>
+
+	{% if packages_modnames %}
+		<h3>Packages sharing provided mods</h3>
+		<p class="text-muted">
+			This package contains modnames that are present in the following packages:
+		</p>
+		{% for metapackage, packages in packages_modnames.items() %}
+			<h4>{{ metapackage.name }}</h4>
+			<ul>
+				{% for pkg in packages %}
+					<li>
+						<a href="{{ pkg.getURL('packages.view') }}">
+							{{ _("%(title)s by %(author)s", title=pkg.title, author=pkg.author.display_name) }}
+						</a>
+						[{{ pkg.type.value }}]
+					</li>
+				{% endfor %}
+			</ul>
+		{% endfor %}
+	{% endif %}
+
+	{% if similar_topics %}
+		<h3>Similar Forum Topics</h3>
+		<ul>
+			{% for t in similar_topics %}
+				<li>
+					[{{ t.type.value }}]
+					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
+						{{ t.title }} by {{ t.author.display_name }}
+					</a>
+					{% if t.wip %}[WIP]{% endif %}
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}

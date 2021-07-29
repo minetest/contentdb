@@ -1,4 +1,4 @@
-{% macro render_banners(package, current_user, topic_error, topic_error_lvl, show_modname_warning) -%}
+{% macro render_banners(package, current_user, topic_error, topic_error_lvl, conflicting_modnames) -%}
 
 <div class="row mb-4">
 	<span class="col">
@@ -82,10 +82,16 @@
 	</div>
 {% endif %}
 
-{% if show_modname_warning %}
+{% if conflicting_modnames %}
 	<div class="alert alert-warning">
-		Please make sure that this package has the right to all the technical names it provides.
-		See the <a href="/policy_and_guidance/">Inclusion Policy</a> for more info.
+		<a class="float-right btn btn-sm btn-warning" href="{{ package.getURL('packages.similar') }}">
+			More info
+		</a>
+		{% if conflicting_modnames | length > 4 %}
+			Please make sure that this package has the right to the names it uses.
+		{% else %}
+			Please make sure that this package has the right to the names {{ conflicting_modnames | join(", ") }}.
+		{% endif %}
 	</div>
 {% endif %}
 

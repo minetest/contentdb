@@ -185,7 +185,7 @@
 		<section class="my-4 pb-3" style="border-bottom: 1px solid rgba(0,0,0,0.5);">
 			<div class="container">
 				{% from "macros/package_approval.html" import render_banners %}
-				{{ render_banners(package, current_user, topic_error, topic_error_lvl, similar_topics or packages_modnames) }}
+				{{ render_banners(package, current_user, topic_error, topic_error_lvl, conflicting_modnames) }}
 
 				{% if review_thread and review_thread.checkPerm(current_user, "SEE_THREAD") %}
 					<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
@@ -269,42 +269,6 @@
 					<h2>Used By</h2>
 					{% from "macros/packagegridtile.html" import render_pkggrid %}
 					{{ render_pkggrid(packages_uses) }}
-				{% endif %}
-
-				{% if packages_modnames or similar_topics %}
-					<h2>Modname uniqueness</h2>
-
-					{% if packages_modnames %}
-						<h3>Packages sharing provided mods</h3>
-						<p class="text-muted">
-							This package contains modnames that are present in the following packages:
-						</p>
-						<ul>
-							{% for pkg in packages_modnames %}
-								<li>
-									<a href="{{ pkg.getURL('packages.view') }}">
-										{{ _("%(title)s by %(author)s", title=pkg.title, author=pkg.author.display_name) }}
-									</a>
-									[{{ pkg.type.value }}]
-								</li>
-							{% endfor %}
-						</ul>
-					{% endif %}
-
-					{% if similar_topics %}
-						<h3>Similar Forum Topics</h3>
-						<ul>
-							{% for t in similar_topics %}
-								<li>
-									[{{ t.type.value }}]
-									<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
-										{{ t.title }} by {{ t.author.display_name }}
-									</a>
-									{% if t.wip %}[WIP]{% endif %}
-								</li>
-							{% endfor %}
-						</ul>
-					{% endif %}
 				{% endif %}
 			</div>
 
