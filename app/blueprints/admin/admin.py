@@ -14,22 +14,15 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-import os
-
-from celery import group
 from flask import *
 from flask_login import current_user, login_user
 from flask_wtf import FlaskForm
-from sqlalchemy import or_
 from wtforms import *
 from wtforms.validators import InputRequired, Length
-
-from app.models import *
-from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
-from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates
 from app.utils import rank_required, addAuditLog, addNotification, get_system_user
 from . import bp
+from .actions import actions
+from ...models import UserRank, Package, db, PackageState, User, AuditSeverity, NotificationType
 
 
 @bp.route("/admin/", methods=["GET", "POST"])
@@ -38,63 +31,7 @@ def admin_page():
 	if request.method == "POST":
 		action = request.form["action"]
 
-		if action == "delstuckreleases":
-			PackageRelease.query.filter(PackageRelease.task_id != None).delete()
-			db.session.commit()
-			return redirect(url_for("admin.admin_page"))
-
-		elif action == "checkreleases":
-			releases = PackageRelease.query.filter(PackageRelease.url.like("/uploads/%")).all()
-
-			tasks = []
-			for release in releases:
-				zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
-				tasks.append(checkZipRelease.s(release.id, zippath))
-
-			result = group(tasks).apply_async()
-
-			while not result.ready():
-				import time
-				time.sleep(0.1)
-
-			return redirect(url_for("todo.view_editor"))
-
-		elif action == "reimportpackages":
-			tasks = []
-			for package in Package.query.filter(Package.state!=PackageState.DELETED).all():
-				release = package.releases.first()
-				if release:
-					zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
-					tasks.append(checkZipRelease.s(release.id, zippath))
-
-			result = group(tasks).apply_async()
-
-			while not result.ready():
-				import time
-				time.sleep(0.1)
-
-			return redirect(url_for("todo.view_editor"))
-
-		elif action == "importmodlist":
-			task = importTopicList.delay()
-			return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
-
-		elif action == "checkusers":
-			task = checkAllForumAccounts.delay()
-			return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
-
-		elif action == "importscreenshots":
-			packages = Package.query \
-				.filter(Package.state!=PackageState.DELETED) \
-				.outerjoin(PackageScreenshot, Package.id==PackageScreenshot.package_id) \
-				.filter(PackageScreenshot.id==None) \
-				.all()
-			for package in packages:
-				importRepoScreenshot.delay(package.id)
-
-			return redirect(url_for("admin.admin_page"))
-
-		elif action == "restore":
+		if action == "restore":
 			package = Package.query.get(request.form["package"])
 			if package is None:
 				flash("Unknown package", "danger")
@@ -103,119 +40,16 @@ def admin_page():
 				db.session.commit()
 				return redirect(url_for("admin.admin_page"))
 
-		elif action == "recalcscores":
-			for p in Package.query.all():
-				p.recalcScore()
-
-			db.session.commit()
-			return redirect(url_for("admin.admin_page"))
-
-		elif action == "cleanuploads":
-			upload_dir = app.config['UPLOAD_DIR']
-
-			(_, _, filenames) = next(os.walk(upload_dir))
-			existing_uploads = set(filenames)
-
-			if len(existing_uploads) != 0:
-				def getURLsFromDB(column):
-					results = db.session.query(column).filter(column != None, column != "").all()
-					return set([os.path.basename(x[0]) for x in results])
-
-				release_urls = getURLsFromDB(PackageRelease.url)
-				screenshot_urls = getURLsFromDB(PackageScreenshot.url)
-
-				db_urls = release_urls.union(screenshot_urls)
-				unreachable = existing_uploads.difference(db_urls)
-
-				import sys
-				print("On Disk: ", existing_uploads, file=sys.stderr)
-				print("In DB: ", db_urls, file=sys.stderr)
-				print("Unreachable: ", unreachable, file=sys.stderr)
-
-				for filename in unreachable:
-					os.remove(os.path.join(upload_dir, filename))
-
-				flash("Deleted " + str(len(unreachable)) + " unreachable uploads", "success")
-			else:
-				flash("No downloads to create", "danger")
-
-			return redirect(url_for("admin.admin_page"))
-
-		elif action == "delmetapackages":
-			query = MetaPackage.query.filter(~MetaPackage.dependencies.any(), ~MetaPackage.packages.any())
-			count = query.count()
-			query.delete(synchronize_session=False)
-			db.session.commit()
-
-			flash("Deleted " + str(count) + " unused meta packages", "success")
-			return redirect(url_for("admin.admin_page"))
-
-		elif action == "delremovedpackages":
-			query = Package.query.filter_by(state=PackageState.DELETED)
-			count = query.count()
-			for pkg in query.all():
-				pkg.review_thread = None
-				db.session.delete(pkg)
-			db.session.commit()
-
-			flash("Deleted {} soft deleted packages packages".format(count), "success")
-			return redirect(url_for("admin.admin_page"))
-
-		elif action == "addupdateconfig":
-			added = 0
-			for pkg in Package.query.filter(Package.repo != None, Package.releases.any(), Package.update_config == None).all():
-				pkg.update_config = PackageUpdateConfig()
-				pkg.update_config.auto_created = True
-
-				release: PackageRelease = pkg.releases.first()
-				if release and release.commit_hash:
-					pkg.update_config.last_commit = release.commit_hash
-
-				db.session.add(pkg.update_config)
-				added += 1
-
-			db.session.commit()
-
-			flash("Added {} update configs".format(added), "success")
-			return redirect(url_for("admin.admin_page"))
-
-		elif action == "runupdateconfig":
-			check_for_updates.delay()
-
-			flash("Started update configs", "success")
-			return redirect(url_for("admin.admin_page"))
-
-		elif action == "remindwip":
-			users = User.query.filter(User.packages.any(or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)))
-			system_user = get_system_user()
-			for user in users:
-				packages = db.session.query(Package.title).filter(
-						Package.author_id==user.id,
-						or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)) \
-					.all()
-
-				# Who needs translations?
-				packages = [pkg[0] for pkg in packages]
-				if len(packages) >= 3:
-					packages[len(packages) - 1] = "and " + packages[len(packages) - 1]
-					packages_list = ", ".join(packages)
-				else:
-					packages_list = "and ".join(packages)
-
-				havent = "haven't" if len(packages) > 1 else "hasn't"
-				if len(packages_list) + 54  > 100:
-					packages_list = packages_list[0:(100-54-1)] + "…"
-
-				addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
-					f"Did you forget? {packages_list} {havent} been submitted for review yet",
-						url_for('todo.view_user', username=user.username))
-			db.session.commit()
+		elif action in actions:
+			ret = actions[action]["func"]()
+			if ret:
+				return ret
 
 		else:
 			flash("Unknown action: " + action, "danger")
 
 	deleted_packages = Package.query.filter(Package.state==PackageState.DELETED).all()
-	return render_template("admin/list.html", deleted_packages=deleted_packages)
+	return render_template("admin/list.html", deleted_packages=deleted_packages, actions=actions)
 
 class SwitchUserForm(FlaskForm):
 	username = StringField("Username")
@@ -255,7 +89,7 @@ def send_bulk_notification():
 				"Sent bulk notification", None, None, form.title.data)
 
 		users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).all()
-		addNotification(users, current_user, NotificationType.OTHER, form.title.data, form.url.data, None)
+		addNotification(users, get_system_user(), NotificationType.OTHER, form.title.data, form.url.data, None)
 		db.session.commit()
 
 		return redirect(url_for("admin.admin_page"))

@@ -27,19 +27,11 @@
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<div class="row px-3">
 						<select name="action" class="custom-select col">
-							<option value="cleanuploads" selected>Delete unreachable uploads</option>
-							<option value="delmetapackages">Delete unused meta packages</option>
-							<option value="delstuckreleases">Delete stuck releases</option>
-							<option value="reimportpackages">Reimport meta</option>
-							<option value="recalcscores">Recalculate package scores</option>
-							<option value="div">------</option>
-							<option value="checkreleases">Validate all Zip releases</option>
-							<option value="importmodlist">Import forum topics</option>
-							<option value="checkusers">Check forum users</option>
-							<option value="importscreenshots">Import screenshots from VCS</option>
-							<option value="addupdateconfig">Add update configs</option>
-							<option value="runupdateconfig">Run update configs</option>
-							<option value="remindwip">Send WIP/Changes needed notifications</option>
+							{% for id, action in actions.items() %}
+								<option value="{{ id }}" {% if loop.first %}selected{% endif %}>
+									{{ action["title"] }}
+								</option>
+							{% endfor %}
 						</select>
 						<input type="submit" value="Perform" class="col-sm-auto btn btn-primary ml-2" />
 					</div>
