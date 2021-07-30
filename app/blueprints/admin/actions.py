@@ -16,6 +16,7 @@
 
 
 import os
+from typing import List
 
 from celery import group
 from flask import *
@@ -41,7 +42,7 @@ def action(title: str):
 	return func
 
 @action("Delete stuck releases")
-def delstuckreleases():
+def del_stuck_releases():
 	PackageRelease.query.filter(PackageRelease.task_id != None).delete()
 	db.session.commit()
 	return redirect(url_for("admin.admin_page"))
@@ -103,7 +104,7 @@ def import_screenshots():
 	return redirect(url_for("admin.admin_page"))
 
 @action("Clean uploads")
-def cleanuploads():
+def clean_uploads():
 	upload_dir = app.config['UPLOAD_DIR']
 
 	(_, _, filenames) = next(os.walk(upload_dir))
@@ -135,7 +136,7 @@ def cleanuploads():
 	return redirect(url_for("admin.admin_page"))
 
 @action("Delete metapackages")
-def delmetapackages():
+def del_meta_packages():
 	query = MetaPackage.query.filter(~MetaPackage.dependencies.any(), ~MetaPackage.packages.any())
 	count = query.count()
 	query.delete(synchronize_session=False)
@@ -145,7 +146,7 @@ def delmetapackages():
 	return redirect(url_for("admin.admin_page"))
 
 @action("Delete removed packages")
-def delremovedpackages():
+def del_removed_packages():
 	query = Package.query.filter_by(state=PackageState.DELETED)
 	count = query.count()
 	for pkg in query.all():
@@ -157,7 +158,7 @@ def delremovedpackages():
 	return redirect(url_for("admin.admin_page"))
 
 @action("Add update config")
-def addupdateconfig():
+def add_update_config():
 	added = 0
 	for pkg in Package.query.filter(Package.repo != None, Package.releases.any(), Package.update_config == None).all():
 		pkg.update_config = PackageUpdateConfig()
@@ -176,14 +177,23 @@ def addupdateconfig():
 	return redirect(url_for("admin.admin_page"))
 
 @action("Run update configs")
-def runupdateconfig():
+def run_update_config():
 	check_for_updates.delay()
 
 	flash("Started update configs", "success")
 	return redirect(url_for("admin.admin_page"))
 
+def _package_list(packages: List[str]):
+	# Who needs translations?
+	if len(packages) >= 3:
+		packages[len(packages) - 1] = "and " + packages[len(packages) - 1]
+		packages_list = ", ".join(packages)
+	else:
+		packages_list = "and ".join(packages)
+	return packages_list
+
 @action("Send WIP package notification")
-def remindwip():
+def remind_wip():
 	users = User.query.filter(User.packages.any(or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)))
 	system_user = get_system_user()
 	for user in users:
@@ -192,14 +202,8 @@ def remindwip():
 				or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)) \
 			.all()
 
-		# Who needs translations?
 		packages = [pkg[0] for pkg in packages]
-		if len(packages) >= 3:
-			packages[len(packages) - 1] = "and " + packages[len(packages) - 1]
-			packages_list = ", ".join(packages)
-		else:
-			packages_list = "and ".join(packages)
-
+		packages_list = _package_list(packages)
 		havent = "haven't" if len(packages) > 1 else "hasn't"
 		if len(packages_list) + 54  > 100:
 			packages_list = packages_list[0:(100-54-1)] + "…"
@@ -207,4 +211,24 @@ def remindwip():
 		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 			f"Did you forget? {packages_list} {havent} been submitted for review yet",
 				url_for('todo.view_user', username=user.username))
+	db.session.commit()
+
+@action("Send outdated package notification")
+def remind_outdated():
+	users = User.query.filter(User.maintained_packages.any(
+			Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))))
+	system_user = get_system_user()
+	for user in users:
+		packages = db.session.query(Package.title).filter(
+				Package.maintainers.any(User.id==user.id),
+				Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))) \
+			.all()
+
+		packages = [pkg[0] for pkg in packages]
+		packages_list = _package_list(packages)
+
+		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
+				f"The following packages may be outdated: {packages_list}",
+				url_for('todo.view_user', username=user.username))
+
 	db.session.commit()
