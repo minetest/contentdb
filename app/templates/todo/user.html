@@ -5,6 +5,15 @@
 {% endblock %}
 
 {% block content %}
+	{% if user.notification_preferences is none %}
+		<h2>{{ _("Misc To do") }}</h2>
+		<div class="list-group mt-3 mb-5">
+			<a class="list-group-item list-group-item-action"
+					href="{{ url_for('users.email_notifications', username=user.username) }}">
+				{{ _("Enable email notifications") }}
+			</a>
+		</div>
+	{% endif %}
 	<h2>{{ _("Unapproved Packages Needing Action") }}</h2>
 	<div class="list-group mt-3 mb-5">
 		{% for package in unapproved_packages %}

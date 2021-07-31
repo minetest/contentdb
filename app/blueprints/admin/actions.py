@@ -237,15 +237,15 @@ def remind_outdated():
 @action("Import licenses from SPDX")
 def import_licenses():
 	renames = {
-		"GPLv2" : "GPL-2.0-only",
-		"GPLv3" : "GPL-3.0-only",
-		"AGPLv2" : "AGPL-2.0-only",
-		"AGPLv3" : "AGPL-3.0-only",
-		"LGPLv2.1" : "LGPL-2.1-only",
-		"LGPLv3" : "LGPL-3.0-only",
-		"Apache 2.0" : "Apache-2.0",
+		"GPLv2": "GPL-2.0-only",
+		"GPLv3": "GPL-3.0-only",
+		"AGPLv2": "AGPL-2.0-only",
+		"AGPLv3": "AGPL-3.0-only",
+		"LGPLv2.1": "LGPL-2.1-only",
+		"LGPLv3": "LGPL-3.0-only",
+		"Apache 2.0": "Apache-2.0",
 		"BSD 2-Clause / FreeBSD": "BSD-2-Clause-FreeBSD",
-		"BSD 3-Clause" : "BSD-3-Clause",
+		"BSD 3-Clause": "BSD-3-Clause",
 		"CC0": "CC0-1.0",
 		"CC BY 3.0": "CC-BY-3.0",
 		"CC BY 4.0": "CC-BY-4.0",

@@ -49,6 +49,10 @@ def post_login(user: User, next_url):
 			flash("You have a lot of notifications, you should either read or clear them", "info")
 		return redirect(url_for("notifications.list_all"))
 
+	if user.notification_preferences is None:
+		flash("Please consider enabling email notifications, you can customise how much is sent", "info")
+		return redirect(url_for("users.email_notifications", username=user.username))
+
 	return redirect(url_for("homepage.home"))
 
 
