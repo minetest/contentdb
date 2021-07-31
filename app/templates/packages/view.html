@@ -16,6 +16,14 @@
 	{% endif %}
 {% endblock %}
 
+{% macro render_license(license) %}
+	{% if license.url %}
+		<a href="{{ license.url }}">{{ license.name }}</a>
+	{% else %}
+		{{ license.name }}
+	{% endif %}
+{% endmacro %}
+
 {% block container %}
 	{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
 		{% set package_warning="Non-free code and media" %}
@@ -363,12 +371,12 @@
 					<dt>{{ _("License") }}</dt>
 					<dd>
 						{% if package.license == package.media_license %}
-							{{ package.license.name }}
+							{{ render_license(package.license) }}
 						{% elif package.type == package.type.TXP %}
-							{{ package.media_license.name }}
+							{{ render_license(package.media_license) }}
 						{% else %}
-							{{ package.license.name }} for code,<br />
-							{{ package.media_license.name }} for media.
+							{{ render_license(package.license) }} for code,<br />
+							{{ render_license(package.media_license) }} for media.
 						{% endif %}
 					</dd>
 					<dt>Added</dt>

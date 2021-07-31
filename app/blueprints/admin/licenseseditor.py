@@ -18,10 +18,11 @@
 from flask import *
 from flask_wtf import FlaskForm
 from wtforms import *
+from wtforms.fields.html5 import URLField
 from wtforms.validators import *
 
 from app.models import *
-from app.utils import rank_required
+from app.utils import rank_required, nonEmptyOrNone
 from . import bp
 
 
@@ -33,6 +34,7 @@ def license_list():
 class LicenseForm(FlaskForm):
 	name	 = StringField("Name", [InputRequired(), Length(3,100)])
 	is_foss  = BooleanField("Is FOSS")
+	url      = URLField("URL", [Optional], filters=[nonEmptyOrNone])
 	submit   = SubmitField("Save")
 
 @bp.route("/licenses/new/", methods=["GET", "POST"])

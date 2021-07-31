@@ -18,6 +18,7 @@
 import os
 from typing import List
 
+import requests
 from celery import group
 from flask import *
 from sqlalchemy import or_
@@ -230,5 +231,52 @@ def remind_outdated():
 		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 				f"The following packages may be outdated: {packages_list}",
 				url_for('todo.view_user', username=user.username))
+
+	db.session.commit()
+
+@action("Import licenses from SPDX")
+def import_licenses():
+	renames = {
+		"GPLv2" : "GPL-2.0-only",
+		"GPLv3" : "GPL-3.0-only",
+		"AGPLv2" : "AGPL-2.0-only",
+		"AGPLv3" : "AGPL-3.0-only",
+		"LGPLv2.1" : "LGPL-2.1-only",
+		"LGPLv3" : "LGPL-3.0-only",
+		"Apache 2.0" : "Apache-2.0",
+		"BSD 2-Clause / FreeBSD": "BSD-2-Clause-FreeBSD",
+		"BSD 3-Clause" : "BSD-3-Clause",
+		"CC0": "CC0-1.0",
+		"CC BY 3.0": "CC-BY-3.0",
+		"CC BY 4.0": "CC-BY-4.0",
+		"CC BY-NC-SA 3.0": "CC-BY-NC-SA-3.0",
+		"CC BY-SA 3.0": "CC-BY-SA-3.0",
+		"CC BY-SA 4.0": "CC-BY-SA-4.0",
+		"NPOSLv3": "NPOSL-3.0",
+		"MPL 2.0": "MPL-2.0",
+		"EUPLv1.2": "EUPL-1.2",
+		"SIL Open Font License v1.1": "OFL-1.1",
+	}
+
+	for old_name, new_name in renames.items():
+		License.query.filter_by(name=old_name).update({ "name": new_name })
+
+	r = requests.get(
+			"https://raw.githubusercontent.com/spdx/license-list-data/master/json/licenses.json")
+	licenses = r.json()["licenses"]
+
+	existing_licenses = {}
+	for license in License.query.all():
+		assert license.name not in renames.keys()
+		existing_licenses[license.name.lower()] = license
+
+	for license in licenses:
+		obj = existing_licenses.get(license["licenseId"].lower())
+		if obj:
+			obj.url = license["reference"]
+		elif license.get("isOsiApproved") and license.get("isFsfLibre") and \
+				not license["isDeprecatedLicenseId"]:
+			obj = License(license["licenseId"], True, license["reference"])
+			db.session.add(obj)
 
 	db.session.commit()
