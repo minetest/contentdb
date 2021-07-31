@@ -528,11 +528,9 @@ class Package(db.Model):
 		elif perm == Permission.APPROVE_SCREENSHOT:
 			return isMaintainer and user.rank.atLeast(UserRank.TRUSTED_MEMBER if self.approved else UserRank.NEW_MEMBER)
 
-		elif perm == Permission.EDIT_MAINTAINERS:
-			return isOwner or user.rank.atLeast(UserRank.MODERATOR)
-
-		elif perm == Permission.UNAPPROVE_PACKAGE or perm == Permission.DELETE_PACKAGE:
-			return user.rank.atLeast(UserRank.MEMBER if isOwner else UserRank.EDITOR)
+		elif perm == Permission.EDIT_MAINTAINERS or perm == Permission.UNAPPROVE_PACKAGE or \
+				perm == Permission.DELETE_PACKAGE:
+			return isOwner or user.rank.atLeast(UserRank.EDITOR)
 
 		elif perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
