@@ -27,7 +27,16 @@
 			{% endif %}
 
 			<a class="btn btn-secondary mr-3" href="{{ url_for('users.account', username=user.username) }}">Cancel</a>
-			<input type="submit" value="{% if can_delete %}Delete{% else %}Deactivate{% endif %}" class="btn btn-danger" />
+			<input type="submit"
+				{% if can_delete %}
+					name="delete" value="Delete"
+				{% else %}
+					name="deactivate" value="Deactivate"
+				{% endif %}
+				class="btn btn-danger" />
+			{% if not can_delete and current_user.rank.atLeast(current_user.rank.ADMIN) %}
+				<input type="submit" name="delete" value="Delete Anyway" class="btn btn-danger ml-3" />
+			{% endif %}
 		</div>
 	</form>
 {% endblock %}

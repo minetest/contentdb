@@ -115,7 +115,7 @@ class ForumTopic(db.Model):
 	topic_id  = db.Column(db.Integer, primary_key=True, autoincrement=False)
 
 	author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
-	author    = db.relationship("User")
+	author    = db.relationship("User", back_populates="forum_topics")
 
 	wip       = db.Column(db.Boolean, server_default="0")
 	discarded = db.Column(db.Boolean, server_default="0")

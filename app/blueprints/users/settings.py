@@ -270,13 +270,18 @@ def delete(username):
 	if request.method == "GET":
 		return render_template("users/delete.html", user=user, can_delete=user.can_delete())
 
-	if user.can_delete():
+	if "delete" in request.form and (user.can_delete() or current_user.rank.atLeast(UserRank.ADMIN)):
 		msg = "Deleted user {}".format(user.username)
 		flash(msg, "success")
 		addAuditLog(AuditSeverity.MODERATION, current_user, msg, None)
 
+		if current_user.rank.atLeast(UserRank.ADMIN):
+			for pkg in user.packages.all():
+				pkg.review_thread = None
+				db.session.delete(pkg)
+
 		db.session.delete(user)
-	else:
+	elif "deactivate" in request.form:
 		user.replies.delete()
 		for thread in user.threads.all():
 			db.session.delete(thread)
@@ -286,6 +291,8 @@ def delete(username):
 		msg = "Deactivated user {}".format(user.username)
 		flash(msg, "success")
 		addAuditLog(AuditSeverity.MODERATION, current_user, msg, None)
+	else:
+		assert False
 
 	db.session.commit()
 
