@@ -75,7 +75,7 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
 				author=release.package.author.username, name=release.package.name)
 
-		if tree.name is not None and release.package.name != tree.name:
+		if tree.name is not None and release.package.name != tree.name and tree.type == ContentType.MOD:
 			raise MinetestCheckError(f"Expected {tree.relative} to have technical name {release.package.name}, instead has name {tree.name}")
 
 		cache = {}
