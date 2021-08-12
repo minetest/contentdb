@@ -63,18 +63,24 @@ def view_editor():
 		else:
 			abort(400)
 
+	license_needed = Package.query \
+		.filter(Package.state.in_([PackageState.READY_FOR_REVIEW, PackageState.APPROVED])) \
+		.filter(or_(Package.license.has(License.name.like("Other %")),
+			Package.media_license.has(License.name.like("Other %")))) \
+		.all()
+
 	total_packages = Package.query.filter_by(state=PackageState.APPROVED).count()
 	total_to_tag = Package.query.filter_by(state=PackageState.APPROVED, tags=None).count()
 
 	unfulfilled_meta_packages = MetaPackage.query \
 			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
-			.filter(MetaPackage.dependencies.any(optional=False)) \
+			.filter(MetaPackage.dependencies.any(Package.state == PackageState.APPROVED, optional=False)) \
 			.order_by(db.asc(MetaPackage.name)).count()
 
 	return render_template("todo/editor.html", current_tab="editor",
 			packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
 			canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
-			total_packages=total_packages, total_to_tag=total_to_tag,
+			license_needed=license_needed, total_packages=total_packages, total_to_tag=total_to_tag,
 			unfulfilled_meta_packages=unfulfilled_meta_packages)
 
 

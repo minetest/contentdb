@@ -96,6 +96,19 @@ class PackageState(enum.Enum):
 	def __str__(self):
 		return self.name
 
+	@property
+	def color(self):
+		if self == self.WIP:
+			return "warning"
+		elif self == self.CHANGES_NEEDED:
+			return "danger"
+		elif self == self.READY_FOR_REVIEW:
+			return "success"
+		elif self == self.APPROVED:
+			return "info"
+		else:
+			return "danger"
+
 	@classmethod
 	def get(cls, name):
 		try:

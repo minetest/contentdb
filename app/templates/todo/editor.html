@@ -60,8 +60,6 @@
 							{% endif %}
 
 							{{ p.title }} by {{ p.author.display_name }}
-
-
 						</a>
 					{% else %}
 						<li class="list-group-item"><i>No packages need reviewing.</i></li>
@@ -100,6 +98,28 @@
 		<p>
 			<i>All done!</i>
 		</p>
+	{% endif %}
+
+	{% if license_needed %}
+		<h2 class="mt-5">License Needed</h2>
+		<div class="card">
+			<h3 class="card-header">License Needed</h3>
+			<div class="list-group list-group-flush">
+				{% for p in license_needed %}
+					<a href="{{ p.getURL("packages.view") }}" class="list-group-item list-group-item-action">
+						<span class="float-right" title="Created {{ p.created_at | datetime }}">
+							<small>
+								{{ p.created_at | timedelta }} ago
+							</small>
+						</span>
+
+						<span class="mr-2 badge badge-{{ p.state.color }}">{{ p.state.value }}</span>
+
+						{{ p.title }} by {{ p.author.display_name }}
+					</a>
+				{% endfor %}
+			</div>
+		</div>
 	{% endif %}
 
 
