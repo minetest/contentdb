@@ -76,7 +76,7 @@ class Thread(db.Model):
 		if self.package:
 			isMaintainer = isMaintainer or user in self.package.maintainers
 
-		canSee = not self.private or isMaintainer or user.rank.atLeast(UserRank.EDITOR)
+		canSee = not self.private or isMaintainer or user.rank.atLeast(UserRank.APPROVER)
 
 		if perm == Permission.SEE_THREAD:
 			return canSee

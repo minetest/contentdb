@@ -22,7 +22,7 @@ Topics to be Added
 		</div>
 
 		<div class="btn-group  btn-group-sm">
-			{% if current_user.rank.atLeast(current_user.rank.EDITOR) %}
+			{% if current_user.rank.atLeast(current_user.rank.APPROVER) %}
 				{% if n >= 10000 %}
 					<a class="btn btn-secondary"
 							href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=100, sort=sort_by) }}">

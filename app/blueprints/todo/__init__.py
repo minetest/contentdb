@@ -99,7 +99,7 @@ def topics():
 
 	page  = get_int_or_abort(request.args.get("page"), 1)
 	num   = get_int_or_abort(request.args.get("n"), 100)
-	if num > 100 and not current_user.rank.atLeast(UserRank.EDITOR):
+	if num > 100 and not current_user.rank.atLeast(UserRank.APPROVER):
 		num = 100
 
 	query = query.paginate(page, num, True)
@@ -160,7 +160,7 @@ def view_user(username=None):
 	if not user:
 		abort(404)
 
-	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
+	if current_user != user and not current_user.rank.atLeast(UserRank.APPROVER):
 		abort(403)
 
 	unapproved_packages = user.packages \

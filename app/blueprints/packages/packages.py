@@ -176,7 +176,7 @@ def view(package):
 	threads = Thread.query.filter_by(package_id=package.id, review_id=None)
 	if not current_user.is_authenticated:
 		threads = threads.filter_by(private=False)
-	elif not current_user.rank.atLeast(UserRank.EDITOR) and not current_user == package.author:
+	elif not current_user.rank.atLeast(UserRank.APPROVER) and not current_user == package.author:
 		threads = threads.filter(or_(Thread.private == False, Thread.author == current_user))
 
 	has_review = current_user.is_authenticated and PackageReview.query.filter_by(package=package, author=current_user).count() > 0
@@ -519,7 +519,8 @@ def remove_self_maintainers(package):
 @login_required
 @is_package_page
 def audit(package):
-	if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
+	if not (package.checkPerm(current_user, Permission.EDIT_PACKAGE) or
+			package.checkPerm(current_user, Permission.APPROVE_NEW)):
 		abort(403)
 
 	page = get_int_or_abort(request.args.get("page"), 1)

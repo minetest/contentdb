@@ -520,6 +520,7 @@ class Package(db.Model):
 
 		isOwner = user == self.author
 		isMaintainer = isOwner or user.rank.atLeast(UserRank.EDITOR) or user in self.maintainers
+		isApprover = user.rank.atLeast(UserRank.APPROVER)
 
 		if perm == Permission.CREATE_THREAD:
 			return user.rank.atLeast(UserRank.MEMBER)
@@ -528,9 +529,11 @@ class Package(db.Model):
 		elif perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
 			return isMaintainer
 
-		elif perm == Permission.EDIT_PACKAGE or \
-				perm == Permission.APPROVE_CHANGES or perm == Permission.APPROVE_RELEASE:
+		elif perm == Permission.EDIT_PACKAGE:
 			return isMaintainer and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
+
+		elif perm == Permission.APPROVE_RELEASE:
+			return (isMaintainer or isApprover) and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
 		# Anyone can change the package name when not approved, but only editors when approved
 		elif perm == Permission.CHANGE_NAME:
@@ -538,14 +541,17 @@ class Package(db.Model):
 
 		# Editors can change authors and approve new packages
 		elif perm == Permission.APPROVE_NEW or perm == Permission.CHANGE_AUTHOR:
-			return user.rank.atLeast(UserRank.EDITOR)
+			return isApprover
 
 		elif perm == Permission.APPROVE_SCREENSHOT:
-			return isMaintainer and user.rank.atLeast(UserRank.TRUSTED_MEMBER if self.approved else UserRank.NEW_MEMBER)
+			return (isMaintainer or isApprover) and \
+				user.rank.atLeast(UserRank.TRUSTED_MEMBER if self.approved else UserRank.NEW_MEMBER)
 
-		elif perm == Permission.EDIT_MAINTAINERS or perm == Permission.UNAPPROVE_PACKAGE or \
-				perm == Permission.DELETE_PACKAGE:
+		elif perm == Permission.EDIT_MAINTAINERS or perm == Permission.DELETE_PACKAGE:
 			return isOwner or user.rank.atLeast(UserRank.EDITOR)
+
+		elif perm == Permission.UNAPPROVE_PACKAGE:
+			return isOwner or user.rank.atLeast(UserRank.APPROVER)
 
 		elif perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
@@ -575,9 +581,10 @@ class Package(db.Model):
 			return False
 
 		if state == PackageState.READY_FOR_REVIEW or state == PackageState.APPROVED:
-			requiredPerm = Permission.APPROVE_NEW if state == PackageState.APPROVED else Permission.EDIT_PACKAGE
+			if state == PackageState.APPROVED and not self.checkPerm(user, Permission.APPROVE_NEW):
+				return False
 
-			if not self.checkPerm(user, requiredPerm):
+			if not (self.checkPerm(user, Permission.APPROVE_NEW) or self.checkPerm(user, Permission.EDIT_PACKAGE)):
 				return False
 
 			if state == PackageState.APPROVED and  ("Other" in self.license.name or "Other" in self.media_license.name):
@@ -881,7 +888,7 @@ class PackageRelease(db.Model):
 
 			return count > 0
 		elif perm == Permission.APPROVE_RELEASE:
-			return user.rank.atLeast(UserRank.EDITOR) or \
+			return user.rank.atLeast(UserRank.APPROVER) or \
 					(isMaintainer and user.rank.atLeast(
 						UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER))
 		else:

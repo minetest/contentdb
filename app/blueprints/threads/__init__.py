@@ -240,8 +240,8 @@ def view(id):
 			addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
 
 			if thread.author == get_system_user():
-				editors = User.query.filter(User.rank >= UserRank.EDITOR).all()
-				addNotification(editors, current_user, NotificationType.EDITOR_MISC, msg,
+				approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
+				addNotification(approvers, current_user, NotificationType.EDITOR_MISC, msg,
 						thread.getViewURL(), thread.package)
 
 			db.session.commit()
@@ -336,8 +336,8 @@ def new():
 		if package is not None:
 			addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
 
-		editors = User.query.filter(User.rank >= UserRank.EDITOR).all()
-		addNotification(editors, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
+		approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
+		addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
 
 		db.session.commit()
 

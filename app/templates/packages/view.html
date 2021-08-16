@@ -200,7 +200,7 @@
 					{% if review_thread.private %}
 						<p><i>
 							This thread is only visible to the package owner and users of
-							Editor rank or above.
+							Approver rank or above.
 						</i></p>
 					{% endif %}
 
@@ -450,7 +450,7 @@
 								Report a problem with this listing
 						</a>
 					{% endif %}
-					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+					{% if package.checkPerm(current_user, "EDIT_PACKAGE") or package.checkPerm(current_user, "APPROVE_NEW") %}
 						<a class="float-right" href="{{ package.getURL("packages.audit") }}">
 							See audit log
 						</a>

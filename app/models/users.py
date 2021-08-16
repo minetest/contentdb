@@ -31,10 +31,11 @@ class UserRank(enum.Enum):
 	NEW_MEMBER     = 2
 	MEMBER         = 3
 	TRUSTED_MEMBER = 4
-	EDITOR         = 5
-	BOT            = 6
-	MODERATOR      = 7
-	ADMIN          = 8
+	APPROVER       = 5
+	EDITOR         = 6
+	BOT            = 7
+	MODERATOR      = 8
+	ADMIN          = 9
 
 	def atLeast(self, min):
 		return self.value >= min.value
@@ -59,7 +60,6 @@ class UserRank(enum.Enum):
 
 class Permission(enum.Enum):
 	EDIT_PACKAGE       = "EDIT_PACKAGE"
-	APPROVE_CHANGES    = "APPROVE_CHANGES"
 	DELETE_PACKAGE     = "DELETE_PACKAGE"
 	CHANGE_AUTHOR      = "CHANGE_AUTHOR"
 	CHANGE_NAME        = "CHANGE_NAME"
@@ -96,13 +96,14 @@ class Permission(enum.Enum):
 			return False
 
 		if self == Permission.APPROVE_NEW or \
-				self == Permission.APPROVE_CHANGES    or \
 				self == Permission.APPROVE_RELEASE    or \
 				self == Permission.APPROVE_SCREENSHOT or \
-				self == Permission.EDIT_TAGS or \
-				self == Permission.CREATE_TAG or \
 				self == Permission.SEE_THREAD:
+			return user.rank.atLeast(UserRank.APPROVER)
+
+		elif self == Permission.EDIT_TAGS or self == Permission.CREATE_TAG:
 			return user.rank.atLeast(UserRank.EDITOR)
+
 		else:
 			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
 
@@ -186,8 +187,7 @@ class User(db.Model, UserMixin):
 
 	def canAccessTodoList(self):
 		return Permission.APPROVE_NEW.check(self) or \
-				Permission.APPROVE_RELEASE.check(self) or \
-				Permission.APPROVE_CHANGES.check(self)
+				Permission.APPROVE_RELEASE.check(self)
 
 	def isClaimed(self):
 		return self.rank.atLeast(UserRank.NEW_MEMBER)
