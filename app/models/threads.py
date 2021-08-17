@@ -54,8 +54,19 @@ class Thread(db.Model):
 
 	watchers   = db.relationship("User", secondary=watchers, backref="watching")
 
-	def getViewURL(self):
-		return url_for("threads.view", id=self.id, _external=False)
+	def get_description(self):
+		comment = self.replies[0].comment.replace("\r\n", " ").replace("\n", " ").replace("  ", " ")
+		if len(comment) > 100:
+			return comment[:97] + "..."
+		else:
+			return comment
+
+	def getViewURL(self, absolute=False):
+		if absolute:
+			from ..utils import abs_url_for
+			return abs_url_for("threads.view", id=self.id)
+		else:
+			return url_for("threads.view", id=self.id, _external=False)
 
 	def getSubscribeURL(self):
 		return url_for("threads.subscribe", id=self.id)

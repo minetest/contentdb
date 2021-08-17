@@ -23,6 +23,7 @@ from wtforms import *
 from wtforms.validators import *
 from app.models import db, PackageReview, Thread, ThreadReply, NotificationType
 from app.utils import is_package_page, addNotification, get_int_or_abort
+from app.tasks.webhooktasks import post_discord_webhook
 
 
 @bp.route("/reviews/")
@@ -107,6 +108,10 @@ def review(package):
 
 		addNotification(package.maintainers, current_user, type, notif_msg,
 				url_for("threads.view", id=thread.id), package)
+
+		if was_new:
+			post_discord_webhook.delay(thread.author.username,
+					"Reviewed {}: {}".format(package.title, thread.getViewURL(absolute=True)), False)
 
 		db.session.commit()
 

@@ -15,6 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from flask import *
 
+from app.tasks.webhooktasks import post_discord_webhook
+
 bp = Blueprint("threads", __name__)
 
 from flask_login import current_user, login_required
@@ -243,6 +245,8 @@ def view(id):
 				approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
 				addNotification(approvers, current_user, NotificationType.EDITOR_MISC, msg,
 						thread.getViewURL(), thread.package)
+				post_discord_webhook.delay(current_user.username,
+						"Replied to bot messages: {}".format(thread.getViewURL(absolute=True)), True)
 
 			db.session.commit()
 
@@ -331,13 +335,16 @@ def new():
 		if is_review_thread:
 			package.review_thread = thread
 
-
 		notif_msg = "New thread '{}'".format(thread.title)
 		if package is not None:
 			addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
 
 		approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
 		addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
+
+		if is_review_thread:
+			post_discord_webhook.delay(current_user.username,
+					"Opened approval thread: {}".format(thread.getViewURL(absolute=True)), True)
 
 		db.session.commit()
 

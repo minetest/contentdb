@@ -32,9 +32,10 @@ from app.rediscache import has_key, set_key
 from app.tasks.importtasks import importRepoScreenshot
 from app.utils import *
 from . import bp, get_package_tabs
-from ...logic.LogicError import LogicError
-from ...logic.packages import do_edit_package
+from app.logic.LogicError import LogicError
+from app.logic.packages import do_edit_package
 from app.models.packages import PackageProvides
+from app.tasks.webhooktasks import post_discord_webhook
 
 
 @menu.register_menu(bp, ".mods", "Mods", order=11, endpoint_arguments_constructor=lambda: { 'type': 'mod' })
@@ -370,6 +371,8 @@ def move_to_state(package):
 
 	if state == PackageState.APPROVED:
 		if not package.approved_at:
+			post_discord_webhook.delay(package.author.username,
+					"New package {}".format(package.getURL("packages.view", absolute=True)), False)
 			package.approved_at = datetime.datetime.now()
 
 		screenshots = PackageScreenshot.query.filter_by(package=package, approved=False).all()
@@ -377,6 +380,9 @@ def move_to_state(package):
 			s.approved = True
 
 		msg = "Approved {}".format(package.title)
+	elif state == PackageState.READY_FOR_REVIEW:
+		post_discord_webhook.delay(package.author.username,
+				"Ready for Review: {}".format(package.getURL("packages.view", absolute=True)), True)
 
 	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getURL("packages.view"), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR

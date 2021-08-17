@@ -1,7 +1,26 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ thread.title }} - {{ _("Threads") }}
+	{%- if thread.package -%}
+		{%- if thread.review -%}
+			{%- if thread.review.recommends -%}
+				{%- set rating = "👍" -%}
+			{%- else -%}
+				{%- set rating = "👎" -%}
+			{%- endif -%}
+		{%- endif -%}
+		{{ rating }} {{ _("%(title)s on %(package)s", title=thread.title, package=thread.package.title) }}
+	{%- else -%}
+		{{ thread.title }}
+	{%- endif -%}
+{% endblock %}
+
+{% block headextra %}
+	<meta name="og:title" content="{{ self.title() }}"/>
+	<meta name="og:description" content="{{ thread.get_description() }}"/>
+	<meta name="description" content="{{ thread.get_description() }}"/>
+	<meta name="og:url" content="{{ thread.getViewURL(absolute=True) }}"/>
+	<meta name="og:image" content="{{ thread.author.getProfilePicURL() }}"/>
 {% endblock %}
 
 {% block content %}
