@@ -23,8 +23,8 @@ def detect_type(path):
 	elif os.path.isfile(path + "/modpack.txt") or \
 			os.path.isfile(path + "/modpack.conf"):
 		return ContentType.MODPACK
-	elif os.path.isdir(path + "/mods"):
-		return ContentType.GAME
+	# elif os.path.isdir(path + "/mods"):
+	# 	return ContentType.GAME
 	elif os.path.isfile(path + "/texture_pack.conf"):
 		return ContentType.TXP
 	else:
@@ -155,7 +155,7 @@ class PackageTreeNode:
 		checkDependencies(result["optional_depends"])
 
 		# Fix games using "name" as "title"
-		if self.type == ContentType.GAME:
+		if self.type == ContentType.GAME and "name" in result:
 			result["title"] = result["name"]
 			del result["name"]
 
