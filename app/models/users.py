@@ -172,6 +172,7 @@ class User(db.Model, UserMixin):
 
 	packages      = db.relationship("Package", back_populates="author", lazy="dynamic", order_by=db.asc("package_title"))
 	reviews       = db.relationship("PackageReview", back_populates="author", order_by=db.desc("package_review_created_at"), cascade="all, delete, delete-orphan")
+	review_votes  = db.relationship("PackageReviewVote", back_populates="user", cascade="all, delete, delete-orphan")
 	tokens        = db.relationship("APIToken", back_populates="owner", lazy="dynamic", cascade="all, delete, delete-orphan")
 	threads       = db.relationship("Thread", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
 	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")

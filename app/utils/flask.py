@@ -40,6 +40,12 @@ def abs_url_for(path, **kwargs):
 def abs_url(path):
 	return urljoin(app.config["BASE_URL"], path)
 
+def url_set_anchor(anchor):
+	args = MultiDict(request.args)
+	dargs = dict(args.lists())
+	dargs.update(request.view_args)
+	return url_for(request.endpoint, **dargs) + "#" + anchor
+
 def url_set_query(**kwargs):
 	args = MultiDict(request.args)
 

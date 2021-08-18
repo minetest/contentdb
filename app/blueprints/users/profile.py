@@ -15,12 +15,12 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import math
-from typing import List, Optional, Tuple
+from typing import Optional
 
 from flask import *
 from flask_babel import gettext
 from flask_login import current_user, login_required
-from sqlalchemy import func, and_, or_
+from sqlalchemy import func
 
 from app.models import *
 from app.tasks.forumtasks import checkForumAccount
@@ -88,49 +88,51 @@ def get_user_medals(user: User) -> Tuple[List[Medal], List[Medal]]:
 	# REVIEWS
 	#
 
-	users_by_reviews = db.session.query(User.username, func.count(PackageReview.id).label("count")) \
+	users_by_reviews = db.session.query(User.username, func.sum(PackageReview.score).label("karma")) \
 		.select_from(User).join(PackageReview) \
-		.group_by(User.username).order_by(text("count DESC")).all()
+		.group_by(User.username).order_by(text("karma DESC")).all()
 	try:
 		review_boundary = users_by_reviews[math.floor(len(users_by_reviews) * 0.25)][1] + 1
 	except IndexError:
 		review_boundary = None
-	users_by_reviews = [username for username, _ in users_by_reviews]
+	usernames_by_reviews = [username for username, _ in users_by_reviews]
 
 	review_idx = None
 	review_percent = None
+	review_karma = 0
 	try:
-		review_idx = users_by_reviews.index(user.username)
+		review_idx = usernames_by_reviews.index(user.username)
 		review_percent = round(100 * review_idx / len(users_by_reviews), 1)
+		review_karma = max(users_by_reviews[review_idx][1], 0)
 	except ValueError:
 		pass
 
 	if review_percent is not None and review_percent < 25:
 		if review_idx == 0:
-			title = gettext(u"Most reviews")
+			title = gettext(u"Top reviewer")
 			description = gettext(
-					u"%(display_name)s has written the most reviews on ContentDB.",
+					u"%(display_name)s has written the most helpful reviews on ContentDB.",
 					display_name=user.display_name)
 		elif review_idx <= 2:
 			if review_idx == 1:
-				title = gettext(u"2nd most reviews")
+				title = gettext(u"2nd most helpful reviewer")
 			else:
-				title = gettext(u"3rd most reviews")
+				title = gettext(u"3rd most helpful reviewer")
 			description = gettext(
 					u"This puts %(display_name)s in the top %(perc)s%%",
 					display_name=user.display_name, perc=review_percent)
 		else:
 			title = gettext(u"Top %(perc)s%% reviewer", perc=review_percent)
-			description = gettext(u"Only %(place)d users have written more reviews.", place=review_idx)
+			description = gettext(u"Only %(place)d users have written more helpful reviews.", place=review_idx)
 
 		unlocked.append(Medal.make_unlocked(
 				place_to_color(review_idx + 1), "fa-star-half-alt", title, description))
 	else:
-		description = gettext(u"Consider writing more reviews to get a medal.")
+		description = gettext(u"Consider writing more helpful reviews to get a medal.")
 		if review_idx:
 			description += " " + gettext(u"You are in place %(place)s.", place=review_idx + 1)
 		locked.append(Medal.make_locked(
-				description, (len(user.reviews), review_boundary)))
+				description, (review_karma, review_boundary)))
 
 	#
 	# TOP PACKAGES

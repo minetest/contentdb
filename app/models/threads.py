@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import datetime
+from typing import Tuple, List
 
 from flask import url_for
 
@@ -156,6 +157,16 @@ class PackageReview(db.Model):
 	recommends = db.Column(db.Boolean, nullable=False)
 
 	thread     = db.relationship("Thread", uselist=False, back_populates="review")
+	votes      = db.relationship("PackageReviewVote", back_populates="review")
+
+	score      = db.Column(db.Integer, nullable=False, default=1)
+
+	def get_totals(self, current_user = None) -> Tuple[int,int,bool]:
+		votes: List[PackageReviewVote] = self.votes
+		pos = sum([ 1 for vote in votes if vote.is_positive ])
+		neg = sum([ 1 for vote in votes if not vote.is_positive])
+		user_vote = next(filter(lambda vote: vote.user == current_user, votes), None)
+		return pos, neg, user_vote.is_positive if user_vote else None
 
 	def asSign(self):
 		return 1 if self.recommends else -1
@@ -167,3 +178,25 @@ class PackageReview(db.Model):
 		return url_for("packages.delete_review",
 				author=self.package.author.username,
 				name=self.package.name)
+
+	def getVoteUrl(self, next_url=None):
+		return url_for("packages.review_vote",
+				author=self.package.author.username,
+				name=self.package.name,
+				review_id=self.id,
+				r=next_url)
+
+	def update_score(self):
+		(pos, neg, _) = self.get_totals()
+		self.score = 3 * (pos - neg) + 1
+
+
+class PackageReviewVote(db.Model):
+	review_id = db.Column(db.Integer, db.ForeignKey("package_review.id"), primary_key=True)
+	review = db.relationship("PackageReview", foreign_keys=[review_id], back_populates="votes")
+	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
+	user = db.relationship("User", foreign_keys=[user_id], back_populates="review_votes")
+
+	is_positive = db.Column(db.Boolean, nullable=False)
+
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)

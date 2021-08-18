@@ -253,7 +253,7 @@
 
 				<h2 id="reviews" class="mt-0">{{ _("Reviews") }}</h2>
 
-				{% from "macros/reviews.html" import render_reviews, render_review_form, render_review_preview %}
+				{% from "macros/reviews.html" import render_reviews, render_review_form, render_review_preview with context %}
 				{% if current_user.is_authenticated %}
 					{% if has_review %}
 						<p>

@@ -191,7 +191,7 @@
 
 
 <h2 class="my-3" id="reviews">{{ _("Reviews") }}</h2>
-{% from "macros/reviews.html" import render_reviews %}
+{% from "macros/reviews.html" import render_reviews with context %}
 {{ render_reviews(user.reviews, current_user, True) }}
 
 {% endblock %}

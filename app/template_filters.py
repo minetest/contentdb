@@ -1,6 +1,6 @@
 from . import app, utils
 from .models import Permission, Package, PackageState, PackageRelease
-from .utils import abs_url_for, url_set_query
+from .utils import abs_url_for, url_set_query, url_set_anchor
 from flask_login import current_user
 from flask_babel import format_timedelta, gettext
 from urllib.parse import urlparse
@@ -16,9 +16,8 @@ def inject_debug():
 @app.context_processor
 def inject_functions():
 	check_global_perm = Permission.checkPerm
-	return dict(abs_url_for=abs_url_for, url_set_query=url_set_query,
-			check_global_perm=check_global_perm,
-			get_headings=get_headings)
+	return dict(abs_url_for=abs_url_for, url_set_query=url_set_query, url_set_anchor=url_set_anchor,
+			check_global_perm=check_global_perm, get_headings=get_headings)
 
 @app.context_processor
 def inject_todo():

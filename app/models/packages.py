@@ -337,7 +337,8 @@ class Package(db.Model):
 	threads = db.relationship("Thread", back_populates="package", order_by=db.desc("thread_created_at"),
 			foreign_keys="Thread.package_id", cascade="all, delete, delete-orphan", lazy="dynamic")
 
-	reviews = db.relationship("PackageReview", back_populates="package", order_by=db.desc("package_review_created_at"),
+	reviews = db.relationship("PackageReview", back_populates="package",
+			order_by=[db.desc("package_review_score"),db.desc("package_review_created_at")],
 			cascade="all, delete, delete-orphan")
 
 	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.package_id",

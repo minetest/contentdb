@@ -1,7 +1,28 @@
+{% macro render_review_vote(review, current_user, next_url) %}
+	{% set (positive, negative, is_positive) = review.get_totals(current_user) %}
+	<form class="-group" method="post" action="{{ review.getVoteUrl(next_url) }}">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		<div class="btn-group">
+			<button class="btn {% if is_positive == true %}btn-primary{% else %}btn-secondary{% endif %}" name="is_positive" value="yes">
+				<i class="fas fa-thumbs-up mr-1"></i>
+				{{ _("Helpful") }}
+				<span class="badge badge-light ml-1">{{ positive }}</span>
+			</button>
+			<button class="btn {% if is_positive == false %}btn-primary{% else %}btn-secondary{% endif %}" name="is_positive" value="no">
+				<i class="fas fa-thumbs-down mr-1"></i>
+				{{ _("Unhelpful") }}
+				<span class="badge badge-light ml-1">{{ negative }}</span>
+			</button>
+		</div>
+	</form>
+{% endmacro %}
+
 {% macro render_reviews(reviews, current_user, show_package_link=False) -%}
 <ul class="comments mt-4 mb-0">
 	{% for review in reviews %}
+		{% set review_anchor = "review-" + (review.id | string) %}
 		<li class="row my-2 mx-0">
+			<a id="{{ review_anchor }}"></a>
 			<div class="col-md-1 p-1">
 				<a href="{{ url_for('users.profile', username=review.author.username) }}">
 					<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ review.author.getProfilePicURL() }}">
@@ -44,7 +65,7 @@
 
 							{{ reply.comment | markdown }}
 
-							<p class="mt-2 mb-0">
+							<div class="btn-toolbar mt-2 mb-0">
 								{% if show_package_link %}
 									<a class="btn btn-primary mr-1" href="{{ review.package.getURL("packages.view") }}">
 										{{ _("%(title)s by %(author)s",
@@ -53,12 +74,14 @@
 									</a>
 								{% endif %}
 
-								<a class="btn {% if review.thread.replies.count() > 1 %} btn-primary {% else %} btn-secondary {% endif %}"
+								<a class="btn {% if review.thread.replies.count() > 1 %} btn-primary {% else %} btn-secondary {% endif %} mr-1"
 										href="{{ url_for('threads.view', id=review.thread.id) }}">
 									<i class="fas fa-comments mr-2"></i>
 									{{ _("%(num)d comments", num=review.thread.replies.count() - 1) }}
 								</a>
-							</p>
+
+								{{ render_review_vote(review, current_user, url_set_anchor(review_anchor)) }}
+							</div>
 						</div>
 					</div>
 				</div>

@@ -1,5 +1,7 @@
 {% macro render_thread(thread, current_user) -%}
 
+{% from "macros/reviews.html" import render_review_vote %}
+
 <ul class="comments mt-4 mb-0">
 	{% for r in thread.replies %}
 	<li class="row my-2 mx-0">
@@ -60,6 +62,10 @@
 					{% endif %}
 
 					{{ r.comment | markdown }}
+
+					{% if thread.replies[0] == r and thread.review %}
+						{{ render_review_vote(thread.review, current_user, thread.getViewURL()) }}
+					{% endif %}
 				</div>
 			</div>
 		</div>

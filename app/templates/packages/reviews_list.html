@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-	{% from "macros/pagination.html" import render_pagination %}
-	{% from "macros/reviews.html" import render_reviews %}
+	{% from "macros/pagination.html" import render_pagination with context %}
+	{% from "macros/reviews.html" import render_reviews with context %}
 
 	{{ render_pagination(pagination, url_set_query) }}
 	{{ render_reviews(reviews, current_user, True) }}

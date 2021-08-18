@@ -21,8 +21,8 @@ from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from app.models import db, PackageReview, Thread, ThreadReply, NotificationType
-from app.utils import is_package_page, addNotification, get_int_or_abort
+from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package
+from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url
 from app.tasks.webhooktasks import post_discord_webhook
 
 
@@ -146,3 +146,43 @@ def delete_review(package):
 	db.session.commit()
 
 	return redirect(thread.getViewURL())
+
+
+def handle_review_vote(package: Package, review_id: int):
+	if current_user in package.maintainers:
+		flash("You can't vote on the reviews on your own package!", "danger")
+		return
+
+	review: PackageReview = PackageReview.query.get(review_id)
+	if review is None or review.package != package:
+		abort(404)
+
+	if review.author == current_user:
+		flash("You can't vote on your own reviews!", "danger")
+		return
+
+	vote = PackageReviewVote.query.filter_by(review=review, user=current_user).first()
+	if vote is None:
+		vote = PackageReviewVote()
+		vote.review = review
+		vote.user = current_user
+		vote.is_positive = isYes(request.form["is_positive"])
+		db.session.add(vote)
+	else:
+		vote.is_positive = isYes(request.form["is_positive"])
+
+	review.update_score()
+	db.session.commit()
+
+
+@bp.route("/packages/<author>/<name>/review/<int:review_id>/", methods=["POST"])
+@login_required
+@is_package_page
+def review_vote(package, review_id):
+	handle_review_vote(package, review_id)
+
+	next_url = request.args.get("r")
+	if next_url and is_safe_url(next_url):
+		return redirect(next_url)
+	else:
+		return redirect(review.thread.getViewURL())
