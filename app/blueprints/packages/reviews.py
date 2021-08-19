@@ -161,15 +161,19 @@ def handle_review_vote(package: Package, review_id: int):
 		flash("You can't vote on your own reviews!", "danger")
 		return
 
+	is_positive = isYes(request.form["is_positive"])
+
 	vote = PackageReviewVote.query.filter_by(review=review, user=current_user).first()
 	if vote is None:
 		vote = PackageReviewVote()
 		vote.review = review
 		vote.user = current_user
-		vote.is_positive = isYes(request.form["is_positive"])
+		vote.is_positive = is_positive
 		db.session.add(vote)
+	elif vote.is_positive == is_positive:
+		db.session.delete(vote)
 	else:
-		vote.is_positive = isYes(request.form["is_positive"])
+		vote.is_positive = is_positive
 
 	review.update_score()
 	db.session.commit()
