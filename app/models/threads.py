@@ -157,7 +157,7 @@ class PackageReview(db.Model):
 	recommends = db.Column(db.Boolean, nullable=False)
 
 	thread     = db.relationship("Thread", uselist=False, back_populates="review")
-	votes      = db.relationship("PackageReviewVote", back_populates="review")
+	votes      = db.relationship("PackageReviewVote", back_populates="review", cascade="all, delete, delete-orphan")
 
 	score      = db.Column(db.Integer, nullable=False, default=1)
 
