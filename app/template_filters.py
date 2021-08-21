@@ -6,7 +6,7 @@ from flask_babel import format_timedelta, gettext
 from urllib.parse import urlparse
 from datetime import datetime as dt
 
-from .utils.markdown import get_headings
+from app.markdown import get_headings
 
 
 @app.context_processor

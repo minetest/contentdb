@@ -21,7 +21,7 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 
-from app.utils.markdown import render_markdown
+from app.markdown import render_markdown
 from app.models import *
 from app.tasks.emails import send_user_email
 from app.utils import rank_required, addAuditLog

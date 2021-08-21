@@ -19,7 +19,7 @@ from flask_login import current_user, login_required
 from sqlalchemy.sql.expression import func
 
 from app import csrf
-from app.utils.markdown import render_markdown
+from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort

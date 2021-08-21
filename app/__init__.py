@@ -25,18 +25,14 @@ from flask_flatpages import FlatPages
 from flask_babel import Babel
 from flask_login import logout_user, current_user, LoginManager
 import os, redis
+from app.markdown import init_markdown, MARKDOWN_EXTENSIONS, MARKDOWN_EXTENSION_CONFIG
+
 
 app = Flask(__name__, static_folder="public/static")
 app.config["FLATPAGES_ROOT"] = "flatpages"
 app.config["FLATPAGES_EXTENSION"] = ".md"
-app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = ["fenced_code", "tables", "codehilite", 'toc']
-app.config["FLATPAGES_EXTENSION_CONFIG"] = {
-	"fenced_code": {},
-	"tables": {},
-	"codehilite": {
-		"guess_lang": False,
-	}
-}
+app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = MARKDOWN_EXTENSIONS
+app.config["FLATPAGES_EXTENSION_CONFIG"] = MARKDOWN_EXTENSION_CONFIG
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
 
 r = redis.Redis.from_url(app.config["REDIS_URL"])
@@ -55,6 +51,7 @@ gravatar = Gravatar(app,
 		force_lower=False,
 		use_ssl=True,
 		base_url=None)
+init_markdown(app)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
@@ -69,8 +66,7 @@ if not app.debug and app.config["MAIL_UTILS_ERROR_SEND_TO"]:
 	app.logger.addHandler(build_handler(app))
 
 
-from app.utils.markdown import init_app
-init_app(app)
+
 
 # @babel.localeselector
 # def get_locale():

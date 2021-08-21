@@ -6,6 +6,9 @@ from bleach.linkifier import LinkifyFilter
 from bs4 import BeautifulSoup
 from markdown import Markdown
 from flask import Markup
+from markdown.extensions import Extension
+from markdown.inlinepatterns import SimpleTagInlineProcessor
+
 
 # Based on
 # https://github.com/Wenzil/mdx_bleach/blob/master/mdx_bleach/whitelist.py
@@ -25,7 +28,7 @@ ALLOWED_TAGS = [
 	"a",
 	"img",
 	"table", "thead", "tbody", "tr", "th", "td",
-	"div", "span",
+	"div", "span", "del", "s",
 ]
 
 ALLOWED_CSS = [
@@ -68,11 +71,30 @@ def render_markdown(source):
 	return cleaner.clean(html)
 
 
-def init_app(app):
+class DelInsExtension(Extension):
+	def extendMarkdown(self, md):
+		del_proc = SimpleTagInlineProcessor(r'(\~\~)(.+?)(\~\~)', 'del')
+		md.inlinePatterns.register(del_proc, 'del', 200)
+
+		ins_proc = SimpleTagInlineProcessor(r'(\+\+)(.+?)(\+\+)', 'ins')
+		md.inlinePatterns.register(ins_proc, 'ins', 200)
+
+
+MARKDOWN_EXTENSIONS = ["fenced_code", "tables", "codehilite", "toc", DelInsExtension()]
+MARKDOWN_EXTENSION_CONFIG = {
+	"fenced_code": {},
+	"tables": {},
+	"codehilite": {
+		"guess_lang": False,
+	}
+}
+
+
+def init_markdown(app):
 	global md
 
-	md = Markdown(extensions=app.config["FLATPAGES_MARKDOWN_EXTENSIONS"],
-			extension_configs=app.config["FLATPAGES_EXTENSION_CONFIG"],
+	md = Markdown(extensions=MARKDOWN_EXTENSIONS,
+			extension_configs=MARKDOWN_EXTENSION_CONFIG,
 			output_format="html5")
 
 	@app.template_filter()
