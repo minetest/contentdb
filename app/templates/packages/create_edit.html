@@ -70,7 +70,8 @@
 			{{ render_field(form.type, class_="pkg_meta col-sm-2") }}
 			{{ render_field(form.title, class_="pkg_meta col-sm-7") }}
 			{% if package and package.approved and not package.checkPerm(current_user, "CHANGE_NAME") %}
-				{{ render_field(form.name, class_="pkg_meta col-sm-3", readonly=True) }}
+				{{ render_field(form.name, class_="pkg_meta col-sm-3",
+					readonly=True, hint=_("Please open a thread to request a name change")) }}
 			{% else %}
 				{{ render_field(form.name, class_="pkg_meta col-sm-3", pattern="[a-z0-9_]+", title=_("Lower case letters (a-z), digits (0-9), and underscores (_) only")) }}
 			{% endif %}
