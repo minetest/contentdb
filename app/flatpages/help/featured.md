@@ -1,5 +1,9 @@
 title: Featured Packages
 
+<p class="alert alert-warning">
+	<b>Note:</b> This is a draft, and is likely to change
+</p>
+
 ## What are Featured Packages?
 
 Featured Packages are shown at the top of the ContentDB homepage. In the future,
@@ -83,9 +87,8 @@ is available.
 
 ### Stability
 
-* MUST: Does not break when changing key minetest.conf settings.
 * MUST: If any major setting (like `enable_damage`) is unsupported, the game must disable it
-  using `disabled_settings` in the `game.conf`, and deal with it appropriately in the code
+  using `disabled_settings` in the `game.conf`, and deal with it appropritely in the code
   (e.g. force-disable the setting, as the user may still set the setting in `minetest.conf`)
 
 ### Usability
@@ -110,8 +113,6 @@ is available.
 * MUST: Audiovisual design should be of good quality.
 * MUST: No obvious GUI/HUD breakages.
 * MUST: Sounds have no obvious artifacts like clicks or unintentional noise.
-* MUST: All sounds sound OK with headphones, too.
-* MUST: No nodes with unintentional sounds.
 * SHOULD: Graphical design is mostly consistent.
 * SHOULD: Sounds are used.
 * SHOULD: Sounds are normalized (more or less).
@@ -120,15 +121,15 @@ is available.
 
 * MUST: No flooding the console/log file with warnings.
 * MUST: No duplicate crafting recipes.
-* MUST: Highly experimental features are disabled by default.
-* MUST: Experimental features are clearly marked as such.
+* MUST: Highly experimental game features are disabled by default.
+* MUST: Experimental game features are clearly marked as such.
 * SHOULD: No unknown nodes/items/objects appear.
 * SHOULD: No dependency on legacy API calls.
 * SHOULD: No console warnings.
 
 ### Writing
 
-* MUST: All items that can be obtained in normal gameplay have `description` set.
+* MUST: All items that can be obtained in normal gameplay have `description` set (whether in the definition or meta).
 * MUST: Game is not littered with typos or bad grammar (a few typos are OK but should be fixed, when found).
 * SHOULD: All items have unique names (items which disguise themselves as another item are exempt).
 * SHOULD: The writing style of all item names is grammatical and consistent.
