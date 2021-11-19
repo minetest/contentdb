@@ -88,7 +88,7 @@ is available.
 ### Stability
 
 * MUST: If any major setting (like `enable_damage`) is unsupported, the game must disable it
-  using `disabled_settings` in the `game.conf`, and deal with it appropritely in the code
+  using `disabled_settings` in the `game.conf`, and deal with it appropriately in the code
   (e.g. force-disable the setting, as the user may still set the setting in `minetest.conf`)
 
 ### Usability
