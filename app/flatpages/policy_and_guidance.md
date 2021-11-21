@@ -134,6 +134,20 @@ ContentDB is for the community. We may remove any promotions if we feel that
 they're inappropriate.
 
 
-## 6. Reporting Violations
+## 6. Reviews and Package Score
+
+You may invite players to review your package(s). One way to do this is by sharing the link found in the
+"Share and Badges" page of the package's settings.
+
+You must not require anyone to review a package. You must not promise or provide incentives for reviewing a package,
+including but not limited to monetary rewards, in-game items, features, and/or privileges.
+You may give a cosmetic-only role or badge to those who review your package - this must not be tied to the content or
+rating of the review.
+
+You must not attempt to unfairly manipulate your package's ranking, whether by reviews or any other method.
+Doing so may result in temporary or permanent suspension from ContentDB.
+
+
+## 7. Reporting Violations
 
 See the [Reporting Content](/help/reporting/) page.
