@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template
+from flask import Blueprint, render_template, redirect
 
 bp = Blueprint("homepage", __name__)
 
@@ -23,6 +23,11 @@ class GameJam:
 	type = type("", (), dict(value="Competition"))()
 	content_warnings = []
 	reviews = []
+
+
+@bp.route("/gamejam/")
+def gamejam():
+	return redirect("https://forum.minetest.net/viewtopic.php?t=27512")
 
 
 @bp.route("/")
