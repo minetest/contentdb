@@ -6,6 +6,24 @@ from app.models import *
 import flask_menu as menu
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
+from flask_login import current_user
+
+
+class GameJam:
+	cover_image = type("", (), dict(url="/static/gamejam.png"))()
+	tags = []
+
+	def getURL(self, _name):
+		return "https://forum.minetest.net/viewtopic.php?t=27512"
+
+	title = "Minetest Game Jam 2021"
+	author = None
+
+	short_desc = "We're holding a 3-week Game Jam starting December 1st! Sharpen your gamedev skills with a chance for a cash prize."
+	type = type("", (), dict(value="Competition"))()
+	content_warnings = []
+	reviews = []
+
 
 @bp.route("/")
 @menu.register_menu(bp, ".", "Home")
@@ -19,6 +37,8 @@ def home():
 	count   = query.count()
 
 	featured = query.filter(Package.tags.any(name="featured")).order_by(func.random()).limit(6).all()
+	if current_user.is_authenticated:
+		featured.insert(0, GameJam())
 
 	new     = join(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
