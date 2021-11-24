@@ -26,9 +26,22 @@ from app.utils import is_package_page, get_int_or_abort
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, api_order_screenshots, api_edit_package
+from functools import wraps
+
+
+def cors_allowed(f):
+	@wraps(f)
+	def inner(*args, **kwargs):
+		res = f(*args, **kwargs)
+		res.headers["Access-Control-Allow-Origin"] = "*"
+		res.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+		res.headers["Access-Control-Allow-Headers"] = "Content-Type"
+		return res
+	return inner
 
 
 @bp.route("/api/packages/")
+@cors_allowed
 def packages():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
@@ -44,6 +57,7 @@ def packages():
 
 @bp.route("/api/packages/<author>/<name>/")
 @is_package_page
+@cors_allowed
 def package(package):
 	return jsonify(package.getAsDictionary(current_app.config["BASE_URL"]))
 
@@ -52,6 +66,7 @@ def package(package):
 @csrf.exempt
 @is_package_page
 @is_api_authd
+@cors_allowed
 def edit_package(token, package):
 	if not token:
 		error(401, "Authentication needed")
@@ -100,6 +115,7 @@ def resolve_package_deps(out, package, only_hard, depth=1):
 
 @bp.route("/api/packages/<author>/<name>/dependencies/")
 @is_package_page
+@cors_allowed
 def package_dependencies(package):
 	only_hard = request.args.get("only_hard")
 
@@ -110,6 +126,7 @@ def package_dependencies(package):
 
 
 @bp.route("/api/topics/")
+@cors_allowed
 def topics():
 	qb     = QueryBuilder(request.args)
 	query  = qb.buildTopicQuery(show_added=True)
@@ -136,6 +153,7 @@ def topic_set_discard():
 
 @bp.route("/api/whoami/")
 @is_api_authd
+@cors_allowed
 def whoami(token):
 	if token is None:
 		return jsonify({ "is_authenticated": False, "username": None })
@@ -150,6 +168,7 @@ def markdown():
 
 
 @bp.route("/api/releases/")
+@cors_allowed
 def list_all_releases():
 	query = PackageRelease.query.filter_by(approved=True) \
 			.filter(PackageRelease.package.has(state=PackageState.APPROVED)) \
@@ -173,6 +192,7 @@ def list_all_releases():
 
 @bp.route("/api/packages/<author>/<name>/releases/")
 @is_package_page
+@cors_allowed
 def list_releases(package):
 	return jsonify([ rel.getAsDictionary() for rel in package.releases.all() ])
 
@@ -181,6 +201,7 @@ def list_releases(package):
 @csrf.exempt
 @is_package_page
 @is_api_authd
+@cors_allowed
 def create_release(token, package):
 	if not token:
 		error(401, "Authentication needed")
@@ -214,6 +235,7 @@ def create_release(token, package):
 
 @bp.route("/api/packages/<author>/<name>/releases/<int:id>/")
 @is_package_page
+@cors_allowed
 def release(package: Package, id: int):
 	release = PackageRelease.query.get(id)
 	if release is None or release.package != package:
@@ -226,6 +248,7 @@ def release(package: Package, id: int):
 @csrf.exempt
 @is_package_page
 @is_api_authd
+@cors_allowed
 def delete_release(token: APIToken, package: Package, id: int):
 	release = PackageRelease.query.get(id)
 	if release is None or release.package != package:
@@ -248,6 +271,7 @@ def delete_release(token: APIToken, package: Package, id: int):
 
 @bp.route("/api/packages/<author>/<name>/screenshots/")
 @is_package_page
+@cors_allowed
 def list_screenshots(package):
 	screenshots = package.screenshots.all()
 	return jsonify([ss.getAsDictionary(current_app.config["BASE_URL"]) for ss in screenshots])
@@ -257,6 +281,7 @@ def list_screenshots(package):
 @csrf.exempt
 @is_package_page
 @is_api_authd
+@cors_allowed
 def create_screenshot(token: APIToken, package: Package):
 	if not token:
 		error(401, "Authentication needed")
@@ -277,6 +302,7 @@ def create_screenshot(token: APIToken, package: Package):
 
 @bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/")
 @is_package_page
+@cors_allowed
 def screenshot(package, id):
 	ss = PackageScreenshot.query.get(id)
 	if ss is None or ss.package != package:
@@ -289,6 +315,7 @@ def screenshot(package, id):
 @csrf.exempt
 @is_package_page
 @is_api_authd
+@cors_allowed
 def delete_screenshot(token: APIToken, package: Package, id: int):
 	ss = PackageScreenshot.query.get(id)
 	if ss is None or ss.package != package:
@@ -317,6 +344,7 @@ def delete_screenshot(token: APIToken, package: Package, id: int):
 @csrf.exempt
 @is_package_page
 @is_api_authd
+@cors_allowed
 def order_screenshots(token: APIToken, package: Package):
 	if not token:
 		error(401, "Authentication needed")
@@ -335,6 +363,7 @@ def order_screenshots(token: APIToken, package: Package):
 
 
 @bp.route("/api/scores/")
+@cors_allowed
 def package_scores():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
@@ -344,22 +373,26 @@ def package_scores():
 
 
 @bp.route("/api/tags/")
+@cors_allowed
 def tags():
 	return jsonify([tag.getAsDictionary() for tag in Tag.query.all() ])
 
 
 @bp.route("/api/content_warnings/")
+@cors_allowed
 def content_warnings():
 	return jsonify([warning.getAsDictionary() for warning in ContentWarning.query.all() ])
 
 
 @bp.route("/api/licenses/")
+@cors_allowed
 def licenses():
 	return jsonify([ { "name": license.name, "is_foss": license.is_foss } \
 		for license in License.query.order_by(db.asc(License.name)).all() ])
 
 
 @bp.route("/api/homepage/")
+@cors_allowed
 def homepage():
 	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
@@ -399,6 +432,7 @@ def homepage():
 
 
 @bp.route("/api/minetest_versions/")
+@cors_allowed
 def versions():
 	protocol_version = request.args.get("protocol_version")
 	engine_version = request.args.get("engine_version")
