@@ -124,6 +124,8 @@ def display_name_default(context):
 class User(db.Model, UserMixin):
 	id           = db.Column(db.Integer, primary_key=True)
 
+	created_at = db.Column(db.DateTime, nullable=True, default=datetime.datetime.utcnow)
+
 	# User authentication information
 	username     = db.Column(db.String(50, collation="NOCASE"), nullable=False, unique=True, index=True)
 	password     = db.Column(db.String(255), nullable=True, server_default=None)
@@ -288,6 +290,7 @@ class UserEmailVerification(db.Model):
 	token   = db.Column(db.String(32), nullable=True)
 	user    = db.relationship("User", foreign_keys=[user_id], back_populates="email_verifications")
 	is_password_reset = db.Column(db.Boolean, nullable=False, default=False)
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 
 class EmailSubscription(db.Model):
