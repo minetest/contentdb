@@ -311,9 +311,17 @@ def set_password():
 @bp.route("/user/verify/")
 def verify_email():
 	token = request.args.get("token")
-	ver : UserEmailVerification = UserEmailVerification.query.filter_by(token=token).first()
+	ver: UserEmailVerification = UserEmailVerification.query.filter_by(token=token).first()
 	if ver is None:
 		flash("Unknown verification token!", "danger")
+		return redirect(url_for("homepage.home"))
+
+	delta = (datetime.datetime.now() - ver.created_at)
+	delta: datetime.timedelta
+	if delta.total_seconds() > 12*60*60:
+		flash("Token has expired", "danger")
+		db.session.delete(ver)
+		db.session.commit()
 		return redirect(url_for("homepage.home"))
 
 	user = ver.user
