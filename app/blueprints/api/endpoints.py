@@ -35,7 +35,7 @@ def cors_allowed(f):
 		res = f(*args, **kwargs)
 		res.headers["Access-Control-Allow-Origin"] = "*"
 		res.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
-		res.headers["Access-Control-Allow-Headers"] = "Content-Type"
+		res.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
 		return res
 	return inner
 
