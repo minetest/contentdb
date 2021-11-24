@@ -139,8 +139,7 @@ def handle_register(form):
 		send_anon_email.delay(form.email.data, "Email already in use",
 				"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(
 						user_by_email.display_name))
-		flash("Check your email address to verify your account", "success")
-		return redirect(url_for("homepage.home"))
+		return redirect(url_for("flatpage", path="email_sent"))
 	elif EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
 		flash("That email address has been unsubscribed/blacklisted, and cannot be used", "danger")
 		return
@@ -165,8 +164,7 @@ def handle_register(form):
 
 	send_verify_email.delay(form.email.data, token)
 
-	flash("Check your email address to verify your account", "success")
-	return redirect(url_for("homepage.home"))
+	return redirect(url_for("flatpage", path="email_sent"))
 
 
 @bp.route("/user/register/", methods=["GET", "POST"])
@@ -213,12 +211,19 @@ def forgot_password():
 						associated with this email.
 					</p>
 					<p>
+						This may be because you used another email with your account, or because you never 
+						confirmed your email.
+					</p>
+					<p>
+						You can use GitHub to log in if it is associated with your account.
+						Otherwise, you may need to contact rubenwardy for help.
+					</p>
+					<p>
 						If you weren't expecting to receive this email, then you can safely ignore it.
 					</p>
 			""")
 
-		flash("Check your email address to continue the reset", "success")
-		return redirect(url_for("homepage.home"))
+		return redirect(url_for("flatpage", path="email_sent"))
 
 	return render_template("users/forgot_password.html", form=form)
 
@@ -370,8 +375,7 @@ def unsubscribe_verify():
 		db.session.commit()
 		send_unsubscribe_verify.delay(form.email.data)
 
-		flash("Check your email address to continue the unsubscribe", "success")
-		return redirect(url_for("homepage.home"))
+		return redirect(url_for("flatpage", path="email_sent"))
 
 	return render_template("users/unsubscribe.html", form=form)
 

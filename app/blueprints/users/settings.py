@@ -146,10 +146,8 @@ def handle_email_notifications(user, prefs: UserNotificationPreferences, is_new,
 			db.session.add(ver)
 			db.session.commit()
 
-			flash("Check your email to confirm it", "success")
-
 			send_verify_email.delay(newEmail, token)
-			return redirect(url_for("users.email_notifications", username=user.username))
+			return redirect(url_for("flatpage", path="email_sent"))
 
 	db.session.commit()
 	return redirect(url_for("users.email_notifications", username=user.username))

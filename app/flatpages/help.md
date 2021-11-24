@@ -1,8 +1,10 @@
 title: Help
 toc: False
 
+
 ## General Help
 
+* [Frequently Asked Questions](faq)
 * [Content Ratings and Flags](content_flags)
 * [Non-free Licenses](non_free)
 * [Why WTFPL is a terrible license](wtfpl)
