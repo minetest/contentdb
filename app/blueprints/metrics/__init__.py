@@ -50,9 +50,9 @@ def generate_metrics(full=False):
 	users = User.query.filter(User.rank != UserRank.NOT_JOINED).count()
 
 	ret = ""
-	ret += write_single_stat("contentdb_packages", "Total packages", "counter", packages)
-	ret += write_single_stat("contentdb_users", "Number of registered users", "counter", users)
-	ret += write_single_stat("contentdb_downloads", "Total downloads", "counter", downloads)
+	ret += write_single_stat("contentdb_packages", "Total packages", "gauge", packages)
+	ret += write_single_stat("contentdb_users", "Number of registered users", "gauge", users)
+	ret += write_single_stat("contentdb_downloads", "Total downloads", "gauge", downloads)
 
 	if full:
 		scores = Package.query.join(User).with_entities(User.username, Package.name, Package.score) \
