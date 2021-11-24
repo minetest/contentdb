@@ -87,13 +87,13 @@ CELERYBEAT_SCHEDULE = {
 		'schedule': crontab(minute=0, hour=14), # 1400
 	},
 	'delete_inactive_users': {
-		'task': 'app.tasks.users.delete_inactive_users',
+		'task': 'app.tasks.usertasks.delete_inactive_users',
 		'schedule': crontab(minute=15), # every hour at quarter past
 	},
 }
 celery.conf.beat_schedule = CELERYBEAT_SCHEDULE
 
-from . import importtasks, forumtasks, emails, pkgtasks, celery
+from . import importtasks, forumtasks, emails, pkgtasks, usertasks
 
 
 # noinspection PyUnusedLocal

@@ -280,3 +280,11 @@ def import_licenses():
 			db.session.add(obj)
 
 	db.session.commit()
+
+
+@action("Delete inactive users")
+def delete_inactive_users():
+	users = User.query.filter(User.is_active==False, User.packages==None, User.forum_topics==None, User.rank==UserRank.NOT_JOINED).all()
+	for user in users:
+		db.session.delete(user)
+	db.session.commit()

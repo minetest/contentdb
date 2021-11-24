@@ -16,11 +16,16 @@
 
 
 import datetime
-from app.models import User
+from app.models import User, db, UserRank
 from app.tasks import celery
 
 
 @celery.task()
 def delete_inactive_users():
-    threshold = datetime.datetime.now() - datetime.timedelta(hours=12)
-    User.query.filter(User.is_active==False, User.packages==None, User.created_at<=threshold).delete()
+    threshold = datetime.datetime.now() - datetime.timedelta(hours=5)
+
+    users = User.query.filter(User.is_active==False, User.packages==None, User.forum_topics==None, User.created_at<=threshold, User.rank==UserRank.NOT_JOINED).all()
+    for user in users:
+        db.session.delete(user)
+
+    db.session.commit()
