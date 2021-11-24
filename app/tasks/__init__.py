@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from logging import Filter
 
 import flask
@@ -67,24 +68,28 @@ celery = make_celery(app)
 CELERYBEAT_SCHEDULE = {
 	'topic_list_import': {
 		'task': 'app.tasks.forumtasks.importTopicList',
-		'schedule': crontab(minute=1, hour=1),
+		'schedule': crontab(minute=1, hour=1), # 0101
 	},
 	'package_score_update': {
 		'task': 'app.tasks.pkgtasks.updatePackageScores',
-		'schedule': crontab(minute=10, hour=1),
+		'schedule': crontab(minute=10, hour=1), # 0110
 	},
 	'check_for_updates': {
 		'task': 'app.tasks.importtasks.check_for_updates',
-		'schedule': crontab(minute=10, hour=1),
+		'schedule': crontab(minute=10, hour=1), # 0110
 	},
 	'send_pending_notifications': {
 		'task': 'app.tasks.emails.send_pending_notifications',
-		'schedule': crontab(minute='*/5'),
+		'schedule': crontab(minute='*/5'), # every 5 minutes
 	},
 	'send_notification_digests': {
 		'task': 'app.tasks.emails.send_pending_digests',
-		'schedule': crontab(minute=0, hour=14),
-	}
+		'schedule': crontab(minute=0, hour=14), # 1400
+	},
+	'delete_inactive_users': {
+		'task': 'app.tasks.users.delete_inactive_users',
+		'schedule': crontab(minute=15), # every hour at quarter past
+	},
 }
 celery.conf.beat_schedule = CELERYBEAT_SCHEDULE
 
