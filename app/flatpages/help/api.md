@@ -210,6 +210,42 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
 ```
 
 
+## Reviews
+
+* GET `/api/packages/<username></<name>/releases/` (List)
+    * Returns array of review dictionaries with keys:
+        * `user`: dictionary with `display_name` and `username`.
+        * `title`: review title 
+        * `comment`: the text
+        * `is_positive`: boolean
+        * `created_at`: iso timestamp
+        * `votes`: dictionary with `helpful` and `unhelpful`,
+* GET `/api/reviews/` (List)
+    * Above, but for all packages.
+    * Each review has a `package` dictionary with `type`, `author` and `name`
+
+Example:
+
+```json
+[
+  {
+    "comment": "This is a really good mod!", 
+    "created_at": "2021-11-24T16:18:33.764084", 
+    "is_positive": true, 
+    "title": "Really good", 
+    "user": {
+      "display_name": "rubenwardy", 
+      "username": "rubenwardy"
+    }, 
+    "votes": {
+      "helpful": 0, 
+      "unhelpful": 0
+    }
+  }
+]
+```
+
+
 ## Topics
 
 * GET `/api/topics/` ([View](/api/topics/)):  Supports [Package Queries](#package-queries), and the following two options:

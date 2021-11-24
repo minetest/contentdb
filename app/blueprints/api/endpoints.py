@@ -20,7 +20,8 @@ from sqlalchemy.sql.expression import func
 
 from app import csrf
 from app.markdown import render_markdown
-from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User
+from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
+	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort
 from . import bp
@@ -360,6 +361,21 @@ def order_screenshots(token: APIToken, package: Package):
 		error(400, "Expected order body to be array")
 
 	return api_order_screenshots(token, package, request.json)
+
+
+@bp.route("/api/packages/<author>/<name>/reviews/")
+@is_package_page
+@cors_allowed
+def list_reviews(package):
+	reviews = package.reviews
+	return jsonify([review.getAsDictionary() for review in reviews])
+
+
+@bp.route("/api/reviews/")
+@cors_allowed
+def list_all_reviews():
+	reviews = PackageReview.query.all()
+	return jsonify([review.getAsDictionary(True) for review in reviews])
 
 
 @bp.route("/api/scores/")

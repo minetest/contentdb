@@ -168,6 +168,26 @@ class PackageReview(db.Model):
 		user_vote = next(filter(lambda vote: vote.user == current_user, votes), None)
 		return pos, neg, user_vote.is_positive if user_vote else None
 
+	def getAsDictionary(self, include_package=False):
+		pos, neg, _user = self.get_totals()
+		ret = {
+			"is_positive": self.recommends,
+			"user": {
+				"username": self.author.username,
+				"display_name": self.author.display_name,
+			},
+			"created_at": self.created_at.isoformat(),
+			"votes": {
+				"helpful": pos,
+				"unhelpful": neg,
+			},
+			"title": self.thread.title,
+			"comment": self.thread.replies[0].comment,
+		}
+		if include_package:
+			ret["package"] = self.package.getAsDictionaryKey()
+		return ret
+
 	def asSign(self):
 		return 1 if self.recommends else -1
 
