@@ -1,5 +1,11 @@
 title: API
 
+
+## Resources
+
+* [How the Minetest client uses the API](https://github.com/minetest/contentdb/blob/master/docs/minetest_client.md)
+
+
 ## Responses and Error Handling
 
 If there is an error, the response will be JSON similar to the following with a non-200 status code: 
@@ -67,16 +73,23 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 * GET `/api/packages/<username>/<name>/dependencies/`
     * If query argument `only_hard` is present, only hard deps will be returned.
 
+You can download a package by building one of the two URLs:
+
+```
+https://content.minetest.net/packages/${author}/${name}/download/`
+https://content.minetest.net/packages/${author}/${name}/releases/${release}/download/`
+```
+
 Examples:
 
 ```bash
 # Edit package
-curl -X PUT http://localhost:5123/api/packages/username/name/ \
+curl -X PUT https://content.minetest.net/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "MIT" }'
     
 # Remove website URL
-curl -X PUT http://localhost:5123/api/packages/username/name/ \
+curl -X PUT https://content.minetest.net/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d '{ "website": null }'
 ```
@@ -190,6 +203,9 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
 * POST `/api/packages/<username>/<name>/screenshots/order/`
     * Requires authentication.
     * Body is a JSON array containing the screenshot IDs in their order.
+
+Currently, to get a different size of thumbnail you can replace the number in `/thumbnails/1/` with any number from 1-3.
+The resolutions returned may change in the future, and we may move to a more capable thumbnail generation.
 
 Examples:
 
