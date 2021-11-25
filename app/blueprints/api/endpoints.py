@@ -434,7 +434,7 @@ def homepage():
 	def mapPackages(packages):
 		return [pkg.getAsDictionaryKey() for pkg in packages]
 
-	return {
+	return jsonify({
 		"count": count,
 		"downloads": downloads,
 		"featured": mapPackages(featured),
@@ -444,7 +444,7 @@ def homepage():
 		"pop_txp": mapPackages(pop_txp),
 		"pop_game": mapPackages(pop_gam),
 		"high_reviewed": mapPackages(high_reviewed)
-	}
+	})
 
 
 @bp.route("/api/minetest_versions/")
