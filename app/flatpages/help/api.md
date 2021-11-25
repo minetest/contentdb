@@ -228,7 +228,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
 
 ## Reviews
 
-* GET `/api/packages/<username>/<name>/releases/` (List)
+* GET `/api/packages/<username>/<name>/reviews/` (List)
     * Returns array of review dictionaries with keys:
         * `user`: dictionary with `display_name` and `username`.
         * `title`: review title 
