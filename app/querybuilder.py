@@ -37,7 +37,7 @@ class QueryBuilder:
 
 		self.random = "random" in args
 		self.lucky  = "lucky" in args
-		self.limit  = 1 if self.lucky else args.get("limit")
+		self.limit  = 1 if self.lucky else get_int_or_abort(args.get("limit"), None)
 		self.order_by  = args.get("sort")
 		self.order_dir = args.get("order") or "desc"
 
