@@ -259,13 +259,25 @@ def handle_set_password(form):
 				flash("That email address has been unsubscribed/blacklisted, and cannot be used", "danger")
 				return
 
-			token = randomString(32)
+			user_by_email = User.query.filter_by(email=form.email.data).first()
+			if user_by_email:
+				send_anon_email.delay(form.email.data, "Email already in use",
+						"We were unable to create the account as the email is already in use by {}. Try a different email address.".format(
+						user_by_email.display_name))
+			else:
+				token = randomString(32)
 
-			ver = UserEmailVerification()
-			ver.user = current_user
-			ver.token = token
-			ver.email = newEmail
-			db.session.add(ver)
+				ver = UserEmailVerification()
+				ver.user = current_user
+				ver.token = token
+				ver.email = newEmail
+				db.session.add(ver)
+				db.session.commit()
+
+				send_verify_email.delay(form.email.data, token)
+
+			flash("Your password has been changed successfully.", "success")
+			return redirect(url_for("flatpage", path="email_sent"))
 
 	db.session.commit()
 	flash("Your password has been changed successfully.", "success")
