@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+from typing import List
 
 from flask import request, jsonify, current_app
 from flask_login import current_user, login_required
@@ -431,8 +432,8 @@ def homepage():
 	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 
-	def mapPackages(packages):
-		return [pkg.getAsDictionaryKey() for pkg in packages]
+	def mapPackages(packages: List[Package]):
+		return [pkg.getAsDictionaryShort(current_app.config["BASE_URL"]) for pkg in packages]
 
 	return jsonify({
 		"count": count,
