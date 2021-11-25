@@ -38,7 +38,7 @@ def client():
 	app.config['WTF_CSRF_ENABLED'] = False
 
 	recreate_db()
-	assert User.query.count() == 1
+	assert User.query.count() == 2
 
 	with app.test_client() as client:
 		yield client
