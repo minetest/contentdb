@@ -11,6 +11,11 @@ def populate(session):
 	admin_user.rank = UserRank.ADMIN
 	session.add(admin_user)
 
+	system_user = User("ContentDB", active=False)
+	system_user.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
+	system_user.rank = UserRank.BOT
+	session.add(system_user)
+
 	session.add(MinetestRelease("None", 0))
 	session.add(MinetestRelease("0.4.16/17", 32))
 	session.add(MinetestRelease("5.0", 37))
@@ -22,7 +27,7 @@ def populate(session):
 	for tag in ["Inventory", "Mapgen", "Building",
 		"Mobs and NPCs", "Tools", "Player effects",
 		"Environment", "Transport", "Maintenance", "Plants and farming",
-		"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
+		"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer", "Featured"]:
 		row = Tag(tag)
 		tags[row.name] = row
 		session.add(row)

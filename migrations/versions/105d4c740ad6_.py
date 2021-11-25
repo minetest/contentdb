@@ -25,15 +25,6 @@ def upgrade():
     op.execute("COMMIT")
     op.execute("ALTER TYPE userrank ADD VALUE 'BOT' AFTER 'EDITOR'")
 
-    conn = op.get_bind()
-    system_user = User("ContentDB", active=False)
-    system_user.email_confirmed_at = datetime.datetime.now() - datetime.timedelta(days=6000)
-    system_user.rank = UserRank.BOT
-
-    session = orm.Session(bind=conn)
-    session.add(system_user)
-    session.commit()
-
 
 def downgrade():
     pass
