@@ -264,21 +264,20 @@ Example:
 
 ## Topics
 
-* GET `/api/topics/` ([View](/api/topics/)):  Supports [Package Queries](#package-queries), and the following two options:
-    * `show_added`:  Show topics which exist as packages, default true.
-    * `show_discarded`:  Show topics which have been marked as outdated, default false.
+* GET `/api/topics/` ([View](/api/topics/))
+    * See [Topic Queries](#topic-queries)
 
 ### Topic Queries
 
 Example:
 
-    /api/topics/?q=mobs
+    /api/topics/?q=mobs&type=mod&type=game
 
 Supported query parameters:
 
 * `q`:  Query string.
-* `sort`:  Sort by (`name`, `views`, `date`).
-* `order`:  Sort ascending (`asc`) or descending (`desc`).
+* `type`:  Package types (`mod`, `game`, `txp`).
+* `sort`:  Sort by (`name`, `views`, `created_at`).
 * `show_added`:  Show topics that have an existing package.
 * `show_discarded`:  Show topics marked as discarded.
 * `limit`:  Return at most `limit` topics.
