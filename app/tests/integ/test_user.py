@@ -62,7 +62,7 @@ def test_register_flow(client):
 	assert User.query.filter_by(username=username).first() is None
 
 	rv = register(client, username, "Test User", "password", "test@example.com", "19")
-	assert b"Check your email address to verify your account" in rv.data
+	assert b"We've sent an email to the address you specified" in rv.data
 
 	user = User.query.filter_by(username=username).first()
 	assert user is not None
