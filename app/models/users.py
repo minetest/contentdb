@@ -201,7 +201,7 @@ class User(db.Model, UserMixin):
 		elif self.rank == UserRank.BOT:
 			return "/static/bot_avatar.png"
 		else:
-			return gravatar(self.email or "")
+			return gravatar(self.email or f"{self.username}@content.minetest.net")
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
