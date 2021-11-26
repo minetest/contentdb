@@ -246,7 +246,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
         * `page`: page number, integer from 1 to max
         * `n`: number of results per page, max 100
         * `author`: filter by review author username
-        * `q`: filter by title (exact match, case insensitive, no fulltext search)
+        * `q`: filter by title (case insensitive, no fulltext search)
 
 Example:
 
