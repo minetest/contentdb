@@ -400,7 +400,7 @@ def list_all_reviews():
 			"previous": abs_url(url_set_query(page=page - 1)) if page > 1 else None,
 			"next": abs_url(url_set_query(page=page + 1)) if pagination.next_num else None,
 		},
-		"reviews": [review.getAsDictionary(True) for review in pagination.items],
+		"items": [review.getAsDictionary(True) for review in pagination.items],
 	})
 
 
