@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import math
 from typing import List
 
 import flask_sqlalchemy
@@ -396,9 +397,12 @@ def list_all_reviews():
 	pagination: flask_sqlalchemy.Pagination = query.paginate(page, num, True)
 	return jsonify({
 		"page": pagination.page,
+		"per_page": pagination.per_page,
+		"page_count": math.ceil(pagination.total / pagination.per_page),
+		"total": pagination.total,
 		"urls": {
-			"previous": abs_url(url_set_query(page=page - 1)) if page > 1 else None,
-			"next": abs_url(url_set_query(page=page + 1)) if pagination.next_num else None,
+			"previous": abs_url(url_set_query(page=page - 1)) if pagination.has_prev else None,
+			"next": abs_url(url_set_query(page=page + 1)) if pagination.has_next else None,
 		},
 		"items": [review.getAsDictionary(True) for review in pagination.items],
 	})
