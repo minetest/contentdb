@@ -237,8 +237,16 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
         * `created_at`: iso timestamp
         * `votes`: dictionary with `helpful` and `unhelpful`,
 * GET `/api/reviews/` (List)
-    * Above, but for all packages.
-    * Each review has a `package` dictionary with `type`, `author` and `name`
+    * Returns a paginated response. This is a dictionary with `page`, `url`, and `items`.
+        * `page`: page number, integer from 1 to max
+        * `url`: dictionary containing `next` and `previous`
+        * `items`: array of review dictionaries, like above.
+          * Each review also has a `package` dictionary with `type`, `author` and `name`
+    * Query arguments:
+        * `page`: page number, integer from 1 to max
+        * `n`: number of results per page, max 100
+        * `author`: filter by review author username
+        * `q`: filter by title (exact match, case insensitive, no fulltext search)
 
 Example:
 

@@ -15,16 +15,18 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from typing import List
 
+import flask_sqlalchemy
 from flask import request, jsonify, current_app
 from flask_login import current_user, login_required
+from sqlalchemy.orm import subqueryload, joinedload
 from sqlalchemy.sql.expression import func
 
 from app import csrf
 from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
-	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview
+	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread
 from app.querybuilder import QueryBuilder
-from app.utils import is_package_page, get_int_or_abort
+from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, isYes
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, api_order_screenshots, api_edit_package
@@ -375,8 +377,31 @@ def list_reviews(package):
 @bp.route("/api/reviews/")
 @cors_allowed
 def list_all_reviews():
-	reviews = PackageReview.query.all()
-	return jsonify([review.getAsDictionary(True) for review in reviews])
+	page = get_int_or_abort(request.args.get("page"), 1)
+	num = min(get_int_or_abort(request.args.get("n"), 100), 100)
+
+	query = PackageReview.query
+	query = query.options(joinedload(PackageReview.author), joinedload(PackageReview.package))
+
+	if request.args.get("author"):
+		query = query.join(User).filter(User.username == request.args.get("author"))
+
+	if request.args.get("is_positive"):
+		query = query.filter(PackageReview.recommends == isYes(request.args.get("is_positive")))
+
+	q = request.args.get("q")
+	if q:
+		query = query.filter(PackageReview.thread.has(Thread.title.ilike(f"%{q}%")))
+
+	pagination: flask_sqlalchemy.Pagination = query.paginate(page, num, True)
+	return jsonify({
+		"page": pagination.page,
+		"urls": {
+			"previous": abs_url(url_set_query(page=page - 1)) if page > 1 else None,
+			"next": abs_url(url_set_query(page=page + 1)) if pagination.next_num else None,
+		},
+		"reviews": [review.getAsDictionary(True) for review in pagination.items],
+	})
 
 
 @bp.route("/api/scores/")
