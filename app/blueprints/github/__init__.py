@@ -136,13 +136,23 @@ def webhook():
 		if branch not in [ "master", "main" ]:
 			return jsonify({ "success": False, "message": "Webhook ignored, as it's not on the master/main branch" })
 
-	elif event == "create" and json["ref_type"] == "tag":
+	elif event == "create":
+		ref_type = json.get("ref_type")
+		if ref_type != "tag":
+			return jsonify({
+					"success": False,
+					"message": "Webhook ignored, as it's a non-tag create event. ref_type='{}'.".format(ref_type)
+			})
+
 		ref = json["ref"]
 		title = ref
+
 	elif event == "ping":
 		return jsonify({ "success": True, "message": "Ping successful" })
+
 	else:
-		return error(400, "Unsupported event. Only 'push', `create:tag`, and 'ping' are supported.")
+		return error(400, "Unsupported event: '{}'. Only 'push', 'create:tag', and 'ping' are supported."
+				.format(event or "null"))
 
 	#
 	# Perform release
