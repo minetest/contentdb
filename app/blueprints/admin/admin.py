@@ -95,3 +95,31 @@ def send_bulk_notification():
 		return redirect(url_for("admin.admin_page"))
 
 	return render_template("admin/send_bulk_notification.html", form=form)
+
+
+@bp.route("/admin/restore/", methods=["GET", "POST"])
+@rank_required(UserRank.EDITOR)
+def restore():
+	if request.method == "POST":
+		target = request.form["submit"]
+		if "Review" in target:
+			target = PackageState.READY_FOR_REVIEW
+		elif "Changes" in target:
+			target = PackageState.CHANGES_NEEDED
+		else:
+			target = PackageState.WIP
+
+		package = Package.query.get(request.form["package"])
+		if package is None:
+			flash("Unknown package", "danger")
+		else:
+			package.state = target
+
+			addAuditLog(AuditSeverity.EDITOR, current_user, f"Restored package to state {target.value}",
+					package.getURL("packages.view"), package)
+
+			db.session.commit()
+			return redirect(package.getURL("packages.view"))
+
+	deleted_packages = Package.query.filter(Package.state==PackageState.DELETED).join(Package.author).order_by(db.asc(User.username), db.asc(Package.name)).all()
+	return render_template("admin/restore.html", deleted_packages=deleted_packages)
