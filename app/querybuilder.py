@@ -29,7 +29,7 @@ class QueryBuilder:
 		tags = [tag for tag in tags if tag is not None]
 
 		# Hide
-		hide_flags = args.getlist("hide")
+		self.hide_flags = set(args.getlist("hide"))
 
 		self.title  = title
 		self.types  = types
@@ -41,13 +41,17 @@ class QueryBuilder:
 		self.order_by  = args.get("sort")
 		self.order_dir = args.get("order") or "desc"
 
-		use_platform_defaults = "android_default" in hide_flags or "desktop_default" in hide_flags
+		if "android_default" in self.hide_flags:
+			self.hide_flags.update(["*", "wip", "deprecated"])
+			self.hide_flags.discard("android_default")
 
-		self.hide_nonfree = "nonfree" in hide_flags
-		self.hide_wip = "wip" in hide_flags or use_platform_defaults
-		self.hide_deprecated = "deprecated" in hide_flags or use_platform_defaults
+		if "desktop_default" in self.hide_flags:
+			self.hide_flags.update(["wip", "deprecated"])
+			self.hide_flags.discard("desktop_default")
 
-		self.hide_flags = set(hide_flags)
+		self.hide_nonfree = "nonfree" in self.hide_flags
+		self.hide_wip = "wip" in self.hide_flags
+		self.hide_deprecated = "deprecated" in self.hide_flags
 		self.hide_flags.discard("nonfree")
 		self.hide_flags.discard("wip")
 		self.hide_flags.discard("deprecated")
@@ -131,7 +135,7 @@ class QueryBuilder:
 		for tag in self.tags:
 			query = query.filter(Package.tags.any(Tag.id == tag.id))
 
-		if "android_default" in self.hide_flags:
+		if "*" in self.hide_flags:
 			query = query.filter(~ Package.content_warnings.any())
 		else:
 			for flag in self.hide_flags:

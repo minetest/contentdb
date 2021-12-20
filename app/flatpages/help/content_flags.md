@@ -15,25 +15,27 @@ contentdb_flag_blacklist = nonfree, bad_language, drugs
 
 A flag can be:
 
-* `nonfree` - can be used to hide packages which do not qualify as
+* `nonfree`: can be used to hide packages which do not qualify as
     'free software', as defined by the Free Software Foundation.
-* `wip` - packages marked as Work in Progress 
-* `deprecated` - packages marked as Deprecated
+* `wip`: packages marked as Work in Progress 
+* `deprecated`: packages marked as Deprecated
 * A content warning, given below.
-* `android_default` - meta-flag that filters out any content with a content warning and WIP packages
-* `desktop_default` - meta-flag that filters out WIP packages.
+* `*`: hides all content warnings.
 
-The `_default` flags are designed so that we can change how different platforms filter the package list
-based on 
+There are also two meta-flags, which are designed so that we can change how different platforms filter the package list
+without making a release.
+
+* `android_default`: currently same as `*, wip, deprecated`. Hides all content warnings, WIP packages, and deprecated packages
+* `desktop_default`: currently same as `wip, deprecated`. Hides all WIP and deprecated packages
 
 ## Content Warnings
 
 Packages with mature content will be tagged with a content warning based
 on the content type.
 
-* `bad_language` - swearing.
-* `drugs` - drugs or alcohol.
+* `bad_language`: swearing.
+* `drugs`: drugs or alcohol.
 * `gambling`
-* `gore` - blood, etc.
-* `horror` - shocking and scary content.
-* `violence` - non-cartoon violence.
+* `gore`: blood, etc.
+* `horror`: shocking and scary content.
+* `violence`: non-cartoon violence.
