@@ -385,7 +385,7 @@ def list_all_reviews():
 	query = query.options(joinedload(PackageReview.author), joinedload(PackageReview.package))
 
 	if request.args.get("author"):
-		query = query.join(User).filter(User.username == request.args.get("author"))
+		query = query.filter(PackageReview.author.has(User.username == request.args.get("author")))
 
 	if request.args.get("is_positive"):
 		query = query.filter(PackageReview.recommends == isYes(request.args.get("is_positive")))

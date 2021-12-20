@@ -77,6 +77,7 @@
 			{% endif %}
 			</div>
 			{{ render_field(form.short_desc, class_="pkg_meta") }}
+			{{ render_field(form.dev_state, class_="pkg_meta", hint=_("Please choose 'Work in Progress' if your package is unstable, and shouldn't be recommended to all players")) }}
 			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
 			{{ render_multiselect_field(form.content_warnings, class_="pkg_meta") }}
 			<div class="pkg_meta row">

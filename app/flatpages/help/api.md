@@ -61,6 +61,8 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `title`: Human-readable title.
         * `name`: Technical name (needs permission if already approved).
         * `short_description`
+        * `dev_state`: One of `WIP`, `BETA`, `ACTIVELY_DEVELOPED`, `MAINTENANCE_ONLY`, `AS_IS`, `DEPRECATED`,
+            `LOOKING_FOR_MAINTAINER`.
         * `tags`: List of [tag](#tags) names.
         * `content_warnings`: List of [content warning](#content-warnings) names.
         * `license`: A [license](#licenses) name.

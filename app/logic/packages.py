@@ -19,7 +19,8 @@ import re
 import validators
 
 from app.logic.LogicError import LogicError
-from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, License, UserRank
+from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
+	License, UserRank, PackageDevState
 from app.utils import addAuditLog
 
 
@@ -47,6 +48,7 @@ ALLOWED_FIELDS = {
 	"name": str,
 	"short_description": str,
 	"short_desc": str,
+	"dev_state": AnyType,
 	"tags": list,
 	"content_warnings": list,
 	"license": AnyType,
@@ -116,13 +118,18 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 	if "type" in data:
 		data["type"] = PackageType.coerce(data["type"])
 
+	if "dev_state" in data:
+		data["dev_state"] = PackageDevState.coerce(data["dev_state"])
+		if data["dev_state"] is None:
+			raise LogicError(400, "dev_state cannot be null")
+
 	if "license" in data:
 		data["license"] = get_license(data["license"])
 
 	if "media_license" in data:
 		data["media_license"] = get_license(data["media_license"])
 
-	for key in ["name", "title", "short_desc", "desc", "type", "license", "media_license",
+	for key in ["name", "title", "short_desc", "desc", "type", "dev_state", "license", "media_license",
 			"repo", "website", "issueTracker", "forums"]:
 		if key in data:
 			setattr(package, key, data[key])

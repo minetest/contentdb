@@ -46,6 +46,9 @@ but still has value. Note that this doesn't mean that you should add a thing
 you started working on yesterday, it's worth adding all the basic stuff to
 make your package useful.
 
+You should make sure to mark Work in Progress stuff as such in the "maintenance status" column, 
+as this will help advise players.
+
 Adding non-player facing mods, such as libraries and server tools, is perfectly fine
 and encouraged. ContentDB isn't just for player-facing things, and adding
 libraries allows them to be installed when a mod depends on it.

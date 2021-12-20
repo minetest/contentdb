@@ -16,10 +16,15 @@ contentdb_flag_blacklist = nonfree, bad_language, drugs
 A flag can be:
 
 * `nonfree` - can be used to hide packages which do not qualify as
-	'free software', as defined by the Free Software Foundation.
+    'free software', as defined by the Free Software Foundation.
+* `wip` - packages marked as Work in Progress 
+* `deprecated` - packages marked as Deprecated
 * A content warning, given below.
-* `android_default` - meta-flag that filters out any content with a content warning.
-* `desktop_default` - meta-flag that doesn't filter anything out for now.
+* `android_default` - meta-flag that filters out any content with a content warning and WIP packages
+* `desktop_default` - meta-flag that filters out WIP packages.
+
+The `_default` flags are designed so that we can change how different platforms filter the package list
+based on 
 
 ## Content Warnings
 

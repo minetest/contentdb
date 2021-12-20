@@ -3,7 +3,8 @@ from sqlalchemy import or_
 from sqlalchemy.orm import subqueryload
 from sqlalchemy.sql.expression import func
 
-from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, ContentWarning, PackageState
+from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, \
+	ContentWarning, PackageState, PackageDevState
 from .utils import isYes, get_int_or_abort
 
 
@@ -30,7 +31,6 @@ class QueryBuilder:
 		# Hide
 		hide_flags = args.getlist("hide")
 
-
 		self.title  = title
 		self.types  = types
 		self.tags   = tags
@@ -41,9 +41,16 @@ class QueryBuilder:
 		self.order_by  = args.get("sort")
 		self.order_dir = args.get("order") or "desc"
 
+		use_platform_defaults = "android_default" in hide_flags or "desktop_default" in hide_flags
+
 		self.hide_nonfree = "nonfree" in hide_flags
+		self.hide_wip = "wip" in hide_flags or use_platform_defaults
+		self.hide_deprecated = "deprecated" in hide_flags or use_platform_defaults
+
 		self.hide_flags = set(hide_flags)
 		self.hide_flags.discard("nonfree")
+		self.hide_flags.discard("wip")
+		self.hide_flags.discard("deprecated")
 
 		# Filters
 		self.search = args.get("q")
@@ -135,6 +142,11 @@ class QueryBuilder:
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))
 			query = query.filter(Package.media_license.has(License.is_foss == True))
+
+		if self.hide_wip:
+			query = query.filter(or_(Package.dev_state == None, Package.dev_state != PackageDevState.WIP))
+		if self.hide_deprecated:
+			query = query.filter(or_(Package.dev_state == None, Package.dev_state != PackageDevState.DEPRECATED))
 
 		if self.version:
 			query = query.join(Package.releases) \

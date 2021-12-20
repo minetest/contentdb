@@ -73,6 +73,65 @@ class PackageType(enum.Enum):
 		return item if type(item) == PackageType else PackageType[item.upper()]
 
 
+class PackageDevState(enum.Enum):
+	WIP = "Work in Progress"
+	BETA  = "Beta"
+	ACTIVELY_DEVELOPED = "Actively Developed"
+	MAINTENANCE_ONLY = "Maintenance Only"
+	AS_IS = "As-Is"
+	DEPRECATED = "Deprecated"
+	LOOKING_FOR_MAINTAINER = "Looking for Maintainer"
+
+	def toName(self):
+		return self.name.lower()
+
+	def __str__(self):
+		return self.name
+
+	def get_desc(self):
+		if self == PackageDevState.WIP:
+			return "Under active development, and may break worlds/things without warning"
+		elif self == PackageDevState.BETA:
+			return "Fully playable, but with some breakages/changes expected"
+		elif self == PackageDevState.MAINTENANCE_ONLY:
+			return "Finished, with bug fixes being made as needed"
+		elif self == PackageDevState.AS_IS:
+			return "Finished, the maintainer doesn't intend to continue working on it or provide support"
+		elif self == PackageDevState.DEPRECATED:
+			return "The maintainer doesn't recommend this package. See the description for more info"
+		else:
+			return None
+
+	@classmethod
+	def get(cls, name):
+		try:
+			return PackageDevState[name.upper()]
+		except KeyError:
+			return None
+
+	@classmethod
+	def choices(cls, with_none):
+		def build_label(choice):
+			desc = choice.get_desc()
+			if desc is None:
+				return choice.value
+			else:
+				return f"{choice.value}: {desc}"
+
+		ret = [(choice, build_label(choice)) for choice in cls]
+
+		if with_none:
+			ret.insert(0, ("__None", ""))
+
+		return ret
+
+	@classmethod
+	def coerce(cls, item):
+		if item is None or (isinstance(item, str) and item.upper() == "__NONE"):
+			return None
+		return item if type(item) == PackageDevState else PackageDevState[item.upper()]
+
+
 class PackageState(enum.Enum):
 	WIP = "Draft"
 	CHANGES_NEEDED  = "Changes Needed"
@@ -292,7 +351,8 @@ class Package(db.Model):
 	media_license_id = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	media_license    = db.relationship("License", foreign_keys=[media_license_id])
 
-	state         = db.Column(db.Enum(PackageState), nullable=False, default=PackageState.WIP)
+	state     = db.Column(db.Enum(PackageState), nullable=False, default=PackageState.WIP)
+	dev_state = db.Column(db.Enum(PackageDevState), nullable=True, default=None)
 
 	@property
 	def approved(self):

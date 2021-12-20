@@ -71,6 +71,12 @@
 			</p>
 
 			<p>
+				{% if package.dev_state.name == "LOOKING_FOR_MAINTAINER" or package.dev_state.name == "DEPRECATED" %}
+					<span class="badge badge-warning" title="{{ package.dev_state.get_desc() }}">
+						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
+						{{ package.dev_state.value }}
+					</span>
+				{% endif %}
 				{% if package_warning %}
 					<a class="badge badge-danger" href="/help/non_free/">
 						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
@@ -84,6 +90,12 @@
 						{{ warning.title }}
 					</a>
 				{% endfor %}
+				{% if package.dev_state.name == "WIP" %}
+					<span class="badge badge-info" title="{{ package.dev_state.get_desc() }}">
+						<i class="fas fa-tools" style="margin-right: 0.3em;"></i>
+						{{ _("Work in Progress") }}
+					</span>
+				{% endif %}
 				{% for t in package.tags %}
 					<a class="badge badge-primary" rel="nofollow"
 							title="{{ t.description or '' }}"
@@ -379,7 +391,13 @@
 							{{ render_license(package.media_license) }} for media.
 						{% endif %}
 					</dd>
-					<dt>Added</dt>
+					<dt>{{ _("Maintenance State") }}</dt>
+					{% if package.dev_state %}
+						<dd title="{{ package.dev_state.get_desc() }}">{{ package.dev_state.value }}</dd>
+					{% else %}
+						<dd><i>Unknown</i></dd>
+					{% endif %}
+					<dt>{{ _("Added") }}</dt>
 					<dd>{{ package.created_at | datetime }}</dd>
 					<dt>Maintainers</dt>
 					<dd>
