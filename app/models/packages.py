@@ -492,7 +492,7 @@ class Package(db.Model):
 			"maintainers": [x.username for x in self.maintainers],
 
 			"state": self.state.name,
-			"dev_state": self.dev_state.name,
+			"dev_state": self.dev_state.name if self.dev_state else None,
 
 			"name": self.name,
 			"title": self.title,
