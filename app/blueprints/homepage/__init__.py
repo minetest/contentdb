@@ -6,7 +6,6 @@ from app.models import *
 import flask_menu as menu
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
-from flask_login import current_user
 
 
 class GameJam:
@@ -14,12 +13,12 @@ class GameJam:
 	tags = []
 
 	def getURL(self, _name):
-		return "https://forum.minetest.net/viewtopic.php?t=27512"
+		return "https://content.minetest.net/packages/?tag=jam_game_2021&random=1"
 
 	title = "Minetest Game Jam 2021"
 	author = None
 
-	short_desc = "We're holding a 3-week Game Jam starting December 1st! Sharpen your gamedev skills with a chance for a cash prize."
+	short_desc = "It's now time for everyone to play and rate all 24 games"
 	type = type("", (), dict(value="Competition"))()
 	content_warnings = []
 	reviews = []
