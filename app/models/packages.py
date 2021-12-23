@@ -464,11 +464,15 @@ class Package(db.Model):
 			release = self.getDownloadRelease(version=version)
 			release_id = release and release.id
 
+		short_desc = self.short_desc
+		if self.dev_state == PackageDevState.WIP:
+			short_desc = "Work in Progress. " + self.short_desc
+
 		ret = {
 			"name": self.name,
 			"title": self.title,
 			"author": self.author.username,
-			"short_description": self.short_desc,
+			"short_description": short_desc,
 			"type": self.type.toName(),
 			"release": release_id,
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
@@ -488,6 +492,7 @@ class Package(db.Model):
 			"maintainers": [x.username for x in self.maintainers],
 
 			"state": self.state.name,
+			"dev_state": self.dev_state.name,
 
 			"name": self.name,
 			"title": self.title,

@@ -42,11 +42,11 @@ class QueryBuilder:
 		self.order_dir = args.get("order") or "desc"
 
 		if "android_default" in self.hide_flags:
-			self.hide_flags.update(["*", "wip", "deprecated"])
+			self.hide_flags.update(["*", "deprecated"])
 			self.hide_flags.discard("android_default")
 
 		if "desktop_default" in self.hide_flags:
-			self.hide_flags.update(["wip", "deprecated"])
+			self.hide_flags.update(["deprecated"])
 			self.hide_flags.discard("desktop_default")
 
 		self.hide_nonfree = "nonfree" in self.hide_flags
