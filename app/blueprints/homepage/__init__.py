@@ -8,27 +8,6 @@ from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
 
-class GameJam:
-	cover_image = type("", (), dict(url="/static/gamejam.png"))()
-	tags = []
-
-	def getURL(self, _name):
-		return "https://content.minetest.net/packages/?tag=jam_game_2021&random=1"
-
-	title = "Minetest Game Jam 2021"
-	author = None
-
-	short_desc = "It's now time for everyone to play and rate all 24 games"
-	type = type("", (), dict(value="Competition"))()
-	content_warnings = []
-	reviews = []
-
-
-@bp.route("/gamejam/")
-def gamejam():
-	return redirect("https://forum.minetest.net/viewtopic.php?t=27512")
-
-
 @bp.route("/")
 @menu.register_menu(bp, ".", "Home")
 def home():
@@ -41,7 +20,6 @@ def home():
 	count   = query.count()
 
 	featured = query.filter(Package.tags.any(name="featured")).order_by(func.random()).limit(6).all()
-	featured.insert(0, GameJam())
 
 	new     = join(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
