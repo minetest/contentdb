@@ -283,6 +283,11 @@
 				{% else %}
 					{{ render_review_preview(package) }}
 				{% endif %}
+
+				{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.ADMIN) %}
+					<a href="{{ package.getURL('packages.review_votes') }}" class="btn btn-secondary">Review Votes</a>
+				{% endif %}
+
 				{{ render_reviews(package.reviews, current_user) }}
 
 				{% if packages_uses %}

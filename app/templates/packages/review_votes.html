@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Review Votes") }}
+{% endblock %}
+
+{% block link %}
+	<a href="{{ package.getURL("packages.view") }}">{{ package.title }}</a>
+{% endblock %}
+
+
+{% block content %}
+	<h1>{{ _("Review votes on %(title)s by %(author)s", title=self.link(), author=package.author.display_name) }}</h1>
+
+	<h2>Helpful Biases</h2>
+	{% set total_reviews = reviews | length %}
+	<p>
+		This section shows whether users tend vote in a way that agrees or disagrees with a package.
+		Total reviews: {{ total_reviews }}.
+	</p>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Username</th>
+				<th>Balance</th>
+				<th>With Pkg</th>
+				<th>Against Pkg</th>
+				<th>No Vote</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for info in user_biases %}
+				{% set total_votes = info.with_ + info.against %}
+				<tr
+					{% if total_votes > 3 and total_votes > total_reviews * 0.5 and ((info.balance / total_votes) | abs) > 0.8 %}
+						style="color: #e74c3c;"
+					{% elif total_votes > 3 and ((info.balance / total_votes) | abs) > 0.9 %}
+						style="color: #f39c12;"
+					{% endif %}>
+					<td>{{ info.username }}</td>
+					<td>{{ info.balance }}</td>
+					<td>{{ info.with_ }} ({{ info.perc_with }}%)</td>
+					<td>{{ info.against }} ({{ 100 - info.perc_with }}%)</td>
+					<td>{{ info.no_vote }}</td>
+				</tr>
+			{% else %}
+				<tr><td colspan=3><i>No votes</i></td></tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+	<h2>Reviews</h2>
+	<table class="table">
+		{% for review in reviews %}
+			<tr>
+				<th colspan="2">
+					{% if review.recommends %}
+						<i class="fas fa-thumbs-up text-success mr-2"></i>
+					{% else %}
+						<i class="fas fa-thumbs-down text-danger mr-2"></i>
+					{% endif %}
+					<a href="{{ review.thread.getViewURL() }}">
+						{{ review.thread.title }}
+					</a> by {{ review.author.display_name }}
+				</th>
+			</tr>
+			<tr>
+				<td>
+					{% for vote in review.votes %}
+						{% if vote.is_positive %}
+							<a href="{{ url_for('users.profile', username=vote.user.username) }}" class="badge badge-secondary">
+								{{ vote.user.username }}
+							</a>
+						{% endif %}
+					{% endfor %}
+				</td>
+				<td>
+					{% for vote in review.votes %}
+						{% if not vote.is_positive %}
+							<a href="{{ url_for('users.profile', username=vote.user.username) }}" class="badge badge-secondary">
+								{{ vote.user.username }}
+							</a>
+						{% endif %}
+					{% endfor %}
+				</td>
+			</tr>
+		{% endfor %}
+	</table>
+{% endblock %}

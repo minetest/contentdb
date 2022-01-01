@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+from collections import namedtuple
 
 from . import bp
 
@@ -21,8 +22,8 @@ from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package
-from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url
+from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package, UserRank
+from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url, rank_required
 from app.tasks.webhooktasks import post_discord_webhook
 
 
@@ -190,3 +191,34 @@ def review_vote(package, review_id):
 		return redirect(next_url)
 	else:
 		return redirect(review.thread.getViewURL())
+
+
+
+@bp.route("/packages/<author>/<name>/review-votes/")
+@rank_required(UserRank.ADMIN)
+@is_package_page
+def review_votes(package):
+	user_biases = {}
+	for review in package.reviews:
+		review_sign = 1 if review.recommends else -1
+		for vote in review.votes:
+			user_biases[vote.user.username] = user_biases.get(vote.user.username, [0, 0])
+			vote_sign = 1 if vote.is_positive else -1
+			vote_bias = review_sign * vote_sign
+			if vote_bias == 1:
+				user_biases[vote.user.username][0] += 1
+			else:
+				user_biases[vote.user.username][1] += 1
+
+	BiasInfo = namedtuple("BiasInfo", "username balance with_ against no_vote perc_with")
+	user_biases_info = []
+	for username, bias in user_biases.items():
+		total_votes = bias[0] + bias[1]
+		balance = bias[0] - bias[1]
+		perc_with = round((100 * bias[0]) / total_votes)
+		user_biases_info.append(BiasInfo(username, balance, bias[0], bias[1], len(package.reviews) - total_votes, perc_with))
+
+	user_biases_info.sort(key=lambda x: -abs(x.balance))
+
+	return render_template("packages/review_votes.html", form=form, package=package, reviews=package.reviews,
+			user_biases=user_biases_info)
