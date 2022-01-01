@@ -4,14 +4,12 @@
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 		<div class="btn-group">
 			<button class="btn {% if is_positive == true %}btn-primary{% else %}btn-secondary{% endif %}" name="is_positive" value="yes">
-				<i class="fas fa-thumbs-up mr-1"></i>
 				{{ _("Helpful") }}
 				{% if positive > 0 %}
 					<span class="badge badge-light ml-1">{{ positive }}</span>
 				{% endif %}
 			</button>
 			<button class="btn {% if is_positive == false %}btn-primary{% else %}btn-secondary{% endif %}" name="is_positive" value="no">
-				<i class="fas fa-thumbs-down mr-1"></i>
 				{{ _("Unhelpful") }}
 				{% if negative > 0 %}
 					<span class="badge badge-light ml-1">{{ negative }}</span>
