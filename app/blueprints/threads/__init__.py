@@ -355,10 +355,10 @@ def new():
 	return render_template("threads/new.html", form=form, allow_private_change=allow_change, package=package)
 
 
-@bp.route("/users/<username>/replies/")
-def user_replies(username):
+@bp.route("/users/<username>/comments/")
+def user_comments(username):
 	user = User.query.filter_by(username=username).first()
 	if user is None:
 		abort(404)
 
-	return render_template("threads/user_replies.html", user=user, replies=user.replies)
+	return render_template("threads/user_comments.html", user=user, replies=user.replies)

@@ -6,11 +6,11 @@
 {% endblock %}
 
 {% block title %}
-	{{ _("Replies by %(user)s", user=user.display_name) }}
+	{{ _("Comments by %(user)s", user=user.display_name) }}
 {% endblock %}
 
 {% block content %}
-<h1>{{ _("Replies by %(user)s", user=self.link()) }}</h1>
+<h1>{{ _("Comments by %(user)s", user=self.link()) }}</h1>
 
 
 <ul class="comments mt-5 mb-0">
