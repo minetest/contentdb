@@ -28,6 +28,7 @@ from wtforms import *
 from wtforms.validators import *
 from app.utils import get_int_or_abort
 
+
 @menu.register_menu(bp, ".threads", "Threads", order=20)
 @bp.route("/threads/")
 def list_all():
@@ -344,7 +345,7 @@ def new():
 
 		if is_review_thread:
 			post_discord_webhook.delay(current_user.username,
-					"Opened approval thread: {}".format(thread.getViewURL(absolute=True)), True)
+					"Opened approval thread: {}".format(thread.gcletViewURL(absolute=True)), True)
 
 		db.session.commit()
 
@@ -352,3 +353,12 @@ def new():
 
 
 	return render_template("threads/new.html", form=form, allow_private_change=allow_change, package=package)
+
+
+@bp.route("/users/<username>/replies/")
+def user_replies(username):
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		abort(404)
+
+	return render_template("threads/user_replies.html", user=user, replies=user.replies)

@@ -101,13 +101,13 @@
 					</span>
 				</a>
 
-				<span>
+				<a class="btn" href="{{ url_for('threads.user_replies', username=user.username) }}">
 					<i class="fas fa-comment"></i>
 					<span class="count">
 						<strong>{{ user.replies.count() }}</strong>
 						{{ _("comments") }}
 					</span>
-				</span>
+				</a>
 			</div>
 		</div>
 	</div>

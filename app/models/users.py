@@ -177,7 +177,7 @@ class User(db.Model, UserMixin):
 	review_votes  = db.relationship("PackageReviewVote", back_populates="user", cascade="all, delete, delete-orphan")
 	tokens        = db.relationship("APIToken", back_populates="owner", lazy="dynamic", cascade="all, delete, delete-orphan")
 	threads       = db.relationship("Thread", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
-	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
+	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan", order_by=db.desc("created_at"))
 	forum_topics  = db.relationship("ForumTopic", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
 
 	def __init__(self, username=None, active=False, email=None, password=None):

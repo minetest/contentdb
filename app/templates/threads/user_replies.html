@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+
+
+{% block link %}
+	<a href="{{ url_for('users.profile', username=user.username) }}">{{ user.display_name }}</a>
+{% endblock %}
+
+{% block title %}
+	{{ _("Replies by %(user)s", user=user.display_name) }}
+{% endblock %}
+
+{% block content %}
+<h1>{{ _("Replies by %(user)s", user=self.link()) }}</h1>
+
+
+<ul class="comments mt-5 mb-0">
+{% for r in replies %}
+	<li class="row my-2 mx-0">
+		<div class="col-md-1 p-1">
+			<a href="{{ url_for('users.profile', username=r.author.username) }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
+			</a>
+		</div>
+		<div class="col pr-0">
+			<div class="card">
+				<div class="card-header">
+
+					<a class="author {{ r.author.rank.name }} mr-3"
+							href="{{ url_for('users.profile', username=r.author.username) }}">
+						{{ r.author.display_name }}
+					</a>
+
+					{% if r.author.username != r.author.display_name %}
+						<span class="text-muted small mr-2">
+							({{ r.author.username }})
+						</span>
+					{% endif %}
+
+					{% if r == r.thread.replies[0] %}
+						<a class="badge badge-primary" href="{{ r.thread.getViewURL() }}">
+							{{ r.thread.title }}
+						</a>
+					{% else %}
+						<i class="fas fa-reply mr-2"></i>
+						<a class="badge badge-dark" href="{{ r.thread.getViewURL() }}">
+							Reply to <b>{{ r.thread.title }}</b>
+						</a>
+					{% endif %}
+
+					<a name="reply-{{ r.id }}" class="text-muted float-right"
+							href="{{ url_for('threads.view', id=r.thread.id) }}#reply-{{ r.id }}">
+						{{ r.created_at | datetime }}
+					</a>
+				</div>
+
+				<div class="card-body markdown">
+					{{ r.comment | markdown }}
+				</div>
+			</div>
+		</div>
+	</li>
+	{% endfor %}
+</ul>
+
+{% endblock %}
