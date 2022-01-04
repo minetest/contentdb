@@ -229,18 +229,13 @@ def makeLabel(obj):
 		return obj.title
 
 
-def NotNullOption(_form, field):
-	if field.data is None or field.data.name == "__None":
-		raise ValidationError("This field is required")
-
-
 class PackageForm(FlaskForm):
 	type             = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
 	title            = StringField("Title (Human-readable)", [InputRequired(), Length(1, 100)])
 	name             = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	short_desc       = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
 
-	dev_state        = SelectField("Maintenance State", [InputRequired(), NotNullOption], choices=PackageDevState.choices(with_none=True), coerce=PackageDevState.coerce)
+	dev_state        = SelectField("Maintenance State", [InputRequired()], choices=PackageDevState.choices(with_none=True), coerce=PackageDevState.coerce)
 
 	tags             = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
 	content_warnings = QuerySelectMultipleField('Content Warnings', query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)

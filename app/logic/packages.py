@@ -120,8 +120,6 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 
 	if "dev_state" in data:
 		data["dev_state"] = PackageDevState.coerce(data["dev_state"])
-		if data["dev_state"] is None:
-			raise LogicError(400, "dev_state cannot be null")
 
 	if "license" in data:
 		data["license"] = get_license(data["license"])

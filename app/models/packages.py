@@ -121,13 +121,13 @@ class PackageDevState(enum.Enum):
 		ret = [(choice, build_label(choice)) for choice in cls]
 
 		if with_none:
-			ret.insert(0, ("__None", ""))
+			ret.insert(0, (None, ""))
 
 		return ret
 
 	@classmethod
 	def coerce(cls, item):
-		if item is None or (isinstance(item, str) and item.upper() == "__NONE"):
+		if item is None or (isinstance(item, str) and item.upper() == "NONE"):
 			return None
 		return item if type(item) == PackageDevState else PackageDevState[item.upper()]
 
