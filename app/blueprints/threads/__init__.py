@@ -345,7 +345,7 @@ def new():
 
 		if is_review_thread:
 			post_discord_webhook.delay(current_user.username,
-					"Opened approval thread: {}".format(thread.gcletViewURL(absolute=True)), True)
+					"Opened approval thread: {}".format(thread.getViewURL(absolute=True)), True)
 
 		db.session.commit()
 
