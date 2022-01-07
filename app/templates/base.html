@@ -127,7 +127,7 @@
 									<a class="nav-link" href="{{ url_for('todo.view_user', username=current_user.username) }}">To do list</a>
 								</li>
 								{% if current_user.rank.atLeast(current_user.rank.EDITOR) or check_global_perm(current_user, "CREATE_TAG") %}
-									<div class="dropdown-divider"></div>
+									<li class="dropdown-divider"></li>
 								{% endif %}
 								{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.audit') }}">{{ _("Audit Log") }}</a></li>
@@ -147,7 +147,7 @@
 								{% elif check_global_perm(current_user, "CREATE_TAG") %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.create_edit_tag') }}">{{ _("Create Tag") }}</a></li>
 								{% endif %}
-								<div class="dropdown-divider"></div>
+								<li class="dropdown-divider"></li>
 								<li class="nav-item">
 									<a class="nav-link" href="{{ url_for('users.profile_edit', username=current_user.username) }}">Settings</a>
 								</li>
@@ -181,6 +181,14 @@
 										<input type="hidden" name="r" value="{{ url_set_query() }}" />
 										<input type="submit" class="btn btn-link nav-link" value="Français (fr)">
 									</form>
+								</li>
+								<li class="dropdown-divider"></li>
+								<li class="nav-item">
+									<a class="nav-link" href="https://github.com/minetest/contentdb/issues/156">
+										<small>
+											Help make more of CDB translatable
+										</small>
+									</a>
 								</li>
 							</ul>
 						</form>
