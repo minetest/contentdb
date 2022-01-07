@@ -109,12 +109,15 @@
 								<i class="fas fa-plus"></i>
 							</a>
 						</li>
+
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle"
-								data-toggle="dropdown"
-								role="button"
-								aria-expanded="false">{{ current_user.display_name }}
-									<span class="caret"></span></a>
+									data-toggle="dropdown"
+									role="button"
+									aria-expanded="false">
+								{{ current_user.display_name }}
+								<span class="caret"></span>
+							</a>
 
 							<ul class="dropdown-menu dropdown-menu-right" role="menu">
 								<li class="nav-item">
@@ -154,6 +157,34 @@
 					{% else %}
 						<li><a class="nav-link" href="{{ url_for('users.login') }}">{{ _("Sign in") }}</a></li>
 					{% endif %}
+
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle"
+								data-toggle="dropdown"
+								role="button"
+								aria-expanded="false">
+							<i class="fas fa-language"></i>
+						</a>
+							<ul class="dropdown-menu dropdown-menu-right" role="menu">
+								<li class="nav-item">
+									<form method="POST" action="{{ url_for('set_locale') }}">
+										<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+										<input type="hidden" name="locale" value="en" />
+										<input type="hidden" name="r" value="{{ url_set_query() }}" />
+										<input type="submit" class="btn btn-link nav-link" value="English (en)">
+									</form>
+								</li>
+								<li>
+									<form method="POST" action="{{ url_for('set_locale') }}">
+										<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+										<input type="hidden" name="locale" value="fr" />
+										<input type="hidden" name="r" value="{{ url_set_query() }}" />
+										<input type="submit" class="btn btn-link nav-link" value="Français (fr)">
+									</form>
+								</li>
+							</ul>
+						</form>
+					</li>
 				</ul>
 			</div>
 		</div>

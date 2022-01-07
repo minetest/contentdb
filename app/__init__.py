@@ -33,6 +33,12 @@ app.config["FLATPAGES_ROOT"] = "flatpages"
 app.config["FLATPAGES_EXTENSION"] = ".md"
 app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = MARKDOWN_EXTENSIONS
 app.config["FLATPAGES_EXTENSION_CONFIG"] = MARKDOWN_EXTENSION_CONFIG
+app.config["BABEL_TRANSLATION_DIRECTORIES"] = "../translations"
+app.config["LANGUAGES"] = {
+    "en": "English",
+    "fr": "Français",
+}
+
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
 
 r = redis.Redis.from_url(app.config["REDIS_URL"])
@@ -57,6 +63,7 @@ login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "users.login"
 
+
 from .sass import sass
 sass(app)
 
@@ -66,13 +73,8 @@ if not app.debug and app.config["MAIL_UTILS_ERROR_SEND_TO"]:
 	app.logger.addHandler(build_handler(app))
 
 
-
-
-# @babel.localeselector
-# def get_locale():
-# 	return request.accept_languages.best_match(app.config["LANGUAGES"].keys())
-
 from . import models, template_filters
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -104,7 +106,8 @@ def check_for_ban():
 			current_user.rank = models.UserRank.MEMBER
 			models.db.session.commit()
 
-from .utils import clearNotifications
+from .utils import clearNotifications, is_safe_url
+
 
 @app.before_request
 def check_for_notifications():
@@ -114,3 +117,31 @@ def check_for_notifications():
 @app.errorhandler(404)
 def page_not_found(e):
 	return render_template("404.html"), 404
+
+
+@babel.localeselector
+def get_locale():
+	locales = app.config["LANGUAGES"].keys()
+
+	locale = request.cookies.get("locale")
+	if locale in locales:
+		return locale
+
+	return request.accept_languages.best_match(locales)
+
+
+@app.route("/set-locale/", methods=["POST"])
+def set_locale():
+	locale = request.form.get("locale")
+	if locale not in app.config["LANGUAGES"].keys():
+		flash("Unknown locale {}".format(locale), "danger")
+		locale = None
+
+	next_url = request.form.get("r")
+	if next_url and is_safe_url(next_url):
+		resp = make_response(redirect(next_url))
+	else:
+		resp = make_response(redirect(url_for("homepage.home")))
+
+	resp.set_cookie("locale", locale)
+	return resp

@@ -16,7 +16,9 @@ COPY utils utils
 COPY config.cfg config.cfg
 COPY migrations migrations
 COPY app app
+COPY translations translations
 
+RUN pybabel compile -d translations
 RUN chown -R cdb:cdb /home/cdb
 
 USER cdb
