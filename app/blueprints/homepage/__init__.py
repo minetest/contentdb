@@ -3,13 +3,11 @@ from flask import Blueprint, render_template, redirect
 bp = Blueprint("homepage", __name__)
 
 from app.models import *
-import flask_menu as menu
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
 
 @bp.route("/")
-@menu.register_menu(bp, ".", "Home")
 def home():
 	def join(query):
 		return query.options(

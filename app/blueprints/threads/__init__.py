@@ -20,7 +20,6 @@ from app.tasks.webhooktasks import post_discord_webhook
 bp = Blueprint("threads", __name__)
 
 from flask_login import current_user, login_required
-from app import menu
 from app.models import *
 from app.utils import addNotification, isYes, addAuditLog, get_system_user
 from flask_wtf import FlaskForm
@@ -29,7 +28,6 @@ from wtforms.validators import *
 from app.utils import get_int_or_abort
 
 
-@menu.register_menu(bp, ".threads", "Threads", order=20)
 @bp.route("/threads/")
 def list_all():
 	query = Thread.query

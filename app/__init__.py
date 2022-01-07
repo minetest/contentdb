@@ -17,7 +17,6 @@
 
 from flask import *
 from flask_gravatar import Gravatar
-import flask_menu as menu
 from flask_mail import Mail
 from flask_github import GitHub
 from flask_wtf.csrf import CSRFProtect
@@ -43,7 +42,6 @@ app.config.from_pyfile(os.environ["FLASK_CONFIG"])
 
 r = redis.Redis.from_url(app.config["REDIS_URL"])
 
-menu.Menu(app=app)
 github = GitHub(app)
 csrf = CSRFProtect(app)
 mail = Mail(app)
@@ -88,7 +86,6 @@ create_blueprints(app)
 def send_upload(path):
 	return send_from_directory(app.config["UPLOAD_DIR"], path)
 
-@menu.register_menu(app, ".help", "Help", order=19, endpoint_arguments_constructor=lambda: { "path": "help" })
 @app.route("/<path:path>/")
 def flatpage(path):
 	page = pages.get_or_404(path)

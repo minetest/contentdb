@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-07 20:58+0000\n"
+"POT-Creation-Date: 2022-01-07 21:08+0000\n"
 "PO-Revision-Date: 2022-01-04 21:25+0000\n"
 "Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
 "Language: fr\n"
@@ -120,93 +120,124 @@ msgid ""
 "been deleted, or you may not have access to it."
 msgstr ""
 
-#: app/templates/base.html:65
+#: app/templates/base.html:27
+msgid "Mods"
+msgstr ""
+
+#: app/templates/base.html:30
+#, fuzzy
+msgid "Games"
+msgstr "Nom"
+
+#: app/templates/base.html:33
+#, fuzzy
+msgid "Texture Packs"
+msgstr "Top des Packs de textures"
+
+#: app/templates/base.html:36
+msgid "Random"
+msgstr ""
+
+#: app/templates/base.html:39 app/templates/base.html:239
+msgid "Help"
+msgstr "Aide"
+
+#: app/templates/base.html:42 app/templates/packages/view.html:123
+msgid "Threads"
+msgstr "Fils"
+
+#: app/templates/base.html:48
+#, fuzzy, python-format
+msgid "Search %(type)s"
+msgstr "Top %(type)s"
+
+#: app/templates/base.html:50 app/templates/todo/tags.html:15
+msgid "Search"
+msgstr "Rechercher"
+
+#: app/templates/base.html:62
 msgid "Work Queue"
 msgstr "File d'attente"
 
-#: app/templates/base.html:78 app/templates/base.html:130
+#: app/templates/base.html:75 app/templates/base.html:127
 msgid "To do list"
 msgstr "À faire"
 
-#: app/templates/base.html:87
+#: app/templates/base.html:84
 msgid "Notifications"
 msgstr "Notifications"
 
-#: app/templates/base.html:108
+#: app/templates/base.html:105
 msgid "Add Package"
 msgstr "Créer un paquet"
 
-#: app/templates/base.html:125
+#: app/templates/base.html:122
 #, fuzzy
 msgid "Profile"
 msgstr "Modifier le profil"
 
-#: app/templates/base.html:139
+#: app/templates/base.html:136
 msgid "Audit Log"
 msgstr "Journal d'audit"
 
-#: app/templates/base.html:143
+#: app/templates/base.html:140
 msgid "Admin"
 msgstr "Admin"
 
-#: app/templates/base.html:146
+#: app/templates/base.html:143
 #, fuzzy
 msgid "License Editor"
 msgstr "Éditeur de licences"
 
-#: app/templates/base.html:151
+#: app/templates/base.html:148
 msgid "Restore Package"
 msgstr "Restaurer le paquet"
 
-#: app/templates/base.html:154
+#: app/templates/base.html:151
 msgid "Tag Editor"
 msgstr "Éditeur d'étiquettes"
 
-#: app/templates/base.html:156
+#: app/templates/base.html:153
 msgid "Create Tag"
 msgstr "Créer une étiquette"
 
-#: app/templates/base.html:161 app/templates/packages/release_new.html:12
+#: app/templates/base.html:158 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "Paramètres"
 
-#: app/templates/base.html:164
+#: app/templates/base.html:161
 msgid "Sign out"
 msgstr "Se déconnecter"
 
-#: app/templates/base.html:168
+#: app/templates/base.html:165
 msgid "Sign in"
 msgstr "Se connecter"
 
-#: app/templates/base.html:242
-msgid "Help"
-msgstr "Aide"
-
-#: app/templates/base.html:243
+#: app/templates/base.html:240
 msgid "Policy and Guidance"
 msgstr "Règles et Recommandations"
 
-#: app/templates/base.html:244
+#: app/templates/base.html:241
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:245 app/templates/users/register.html:43
+#: app/templates/base.html:242 app/templates/users/register.html:43
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
 
-#: app/templates/base.html:246
+#: app/templates/base.html:243
 msgid "Report / DMCA"
 msgstr "Signaler / DMCA"
 
-#: app/templates/base.html:247
+#: app/templates/base.html:244
 msgid "Stats / Monitoring"
 msgstr "Statistiques / Monitoring"
 
-#: app/templates/base.html:248
+#: app/templates/base.html:245
 msgid "User List"
 msgstr "Liste des utilisateurs"
 
-#: app/templates/base.html:249
+#: app/templates/base.html:246
 msgid "Source Code"
 msgstr "Code source"
 
@@ -1010,10 +1041,6 @@ msgstr "Auteur"
 msgid "Downloads"
 msgstr "Téléchargements"
 
-#: app/templates/packages/view.html:123
-msgid "Threads"
-msgstr "Fils"
-
 #: app/templates/packages/view.html:138 app/templates/users/profile.html:73
 msgid "Website"
 msgstr "Site web"
@@ -1154,10 +1181,6 @@ msgstr "Étiquettes de paquet"
 #: app/templates/todo/tags.html:11 app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "Rechercher dans tous les paquets"
-
-#: app/templates/todo/tags.html:15
-msgid "Search"
-msgstr "Rechercher"
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
 msgid "Missing tags only"
