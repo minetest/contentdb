@@ -22,15 +22,15 @@
 
 			{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
 				<p style="color:#f33;">
-					<b>Warning:</b> Non-free code and media.
+					{{ _("<b>Warning:</b> Non-free code and media.") }}
 				</p>
 			{% elif not package.license.is_foss and package.type != package.type.TXP %}
 				<p style="color:#f33;">
-					<b>Warning:</b> Non-free code.
+					{{ _("<b>Warning:</b> Non-free code.") }}
 				</p>
 			{% elif not package.media_license.is_foss %}
 				<p style="color:#f33;">
-					<b>Warning:</b> Non-free media.
+					{{ _("<b>Warning:</b> Non-free media.") }}
 				</p>
 			{% endif %}
 		</div>
@@ -42,7 +42,7 @@
 		{% for p in packages %}
 			{{ render_pkgtile(p, show_author) }}
 		{% else %}
-			<li class="packagetile flex-fill"><i>No packages available</i></li>
+			<li class="packagetile flex-fill"><i>{{ _("No packages available") }}</i></li>
 		{% endfor %}
 		{% if packages %}
 			{% for i in range(4) %}

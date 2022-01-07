@@ -1,33 +1,34 @@
 {% extends "emails/base.html" %}
 
 {% block content %}
-<h2 style="margin-top: 0;">Hello!</h2>
+<h2 style="margin-top: 0;">{{ _("Hello!") }}</h2>
 
 <p>
-	This email has been sent to you because someone (hopefully you)
-	has entered your email address as a user's email.
+	{{ _("This email has been sent to you because someone (hopefully you) has entered your email address as a user's email.") }}
 </p>
 
 <p>
-	If it wasn't you, then just delete this email.
+	{{ _("If it wasn't you, then just delete this email.") }}
 </p>
 
 <p>
-	If this was you, then please click this link to confirm the address:
+	{{ _("If this was you, then please click this link to confirm the address:") }}
 </p>
 
 <a class="btn" href="{{ abs_url_for('users.verify_email', token=token) }}">
-	Confirm Email Address
+	{{ _("Confirm Email Address") }}
 </a>
 
 <p style="font-size: 80%;">
-	Or paste this into your browser: <code>{{ abs_url_for('users.verify_email', token=token) }}</code>
+	{{ _("Or paste this into your browser:") }}
+	<code>{{ abs_url_for('users.verify_email', token=token) }}</code>
 <p>
 
 {% endblock %}
 
 {% block footer %}
-	You are receiving this email because someone (hopefully you) entered your email address as a user's email. <br>
+	{{ _("You are receiving this email because someone (hopefully you) entered your email address as a user's email.") }}
+	<br>
 	<a href="{{ abs_url_for('users.unsubscribe', token=sub.token) }}">
 		{{ _("Unsubscribe") }}
 	</a>

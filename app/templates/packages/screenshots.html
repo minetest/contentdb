@@ -1,7 +1,7 @@
 {% extends "packages/package_base.html" %}
 
 {% block title %}
-	Screenshots - {{ package.title }}
+	{{ _("Screenshots") }} - {{ package.title }}
 {% endblock %}
 
 {% block content %}
@@ -11,7 +11,7 @@
 			{{ _("Add Image") }}
 		</a>
 	{% endif %}
-	<h2 class="mt-0">Screenshots</h2>
+	<h2 class="mt-0">{{ _("Screenshots") }}</h2>
 
 	<p class="mb-4">
 		{{ _("Topmost screenshot will be used as the package thumbnail.") }}
@@ -33,7 +33,7 @@
 							{{ ss.title }}
 							{% if not ss.approved %}
 								<div class="text-muted">
-									Awaiting review
+									{{ _("Awaiting review") }}
 								</div>
 							{%  endif %}
 						</div>
@@ -51,7 +51,7 @@
 			{% endif %}
 		{% else %}
 			<li class="list-group-item">
-				<i>No screenshots.</i>
+				<i>{{ _("No screenshots.") }}</i>
 			</li>
 		{% endfor %}
 	</ul>
@@ -59,7 +59,7 @@
 	<form action="" method="POST" class="form mt-4" role="form">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 		<input type="hidden" name="order" value="" />
-		<input type="submit" value="{{ _("Save Order") }}" class="btn btn-primary">
+		<input type="submit" value="{{ _('Save Order') }}" class="btn btn-primary">
 	</form>
 
 	<noscript>

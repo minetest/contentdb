@@ -31,7 +31,7 @@
 					</div>
 
 					<div class="col-sm">
-						State: {{ package.state.value }}
+						{{ _("State") }}: {{ package.state.value }}
 					</div>
 				</div>
 			</a>
@@ -41,7 +41,9 @@
 	</div>
 
 	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
-	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('packages.bulk_update_config', username=user.username) }}">See all Update Settings</a>
+	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('packages.bulk_update_config', username=user.username) }}">
+		{{ _("See all Update Settings") }}
+	</a>
 	{% if outdated_packages %}
 		<form class="float-right mr-2"  method="post" action="{{ url_for('todo.apply_all_updates', username=user.username) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
@@ -67,7 +69,7 @@
 	<a class="btn btn-secondary float-right" href="{{ url_for('todo.tags', author=user.username) }}">See All</a>
 	<h2>{{ _("Packages Without Tags") }}</h2>
 	<p>
-		Labelling your packages with tags helps users find them.
+		{{ _("Labelling your packages with tags helps users find them.") }}
 	</p>
 	<div class="list-group mt-3 mb-5">
 		{% for package in needs_tags %}
@@ -90,8 +92,8 @@
 	<h2 class="mt-5">{{ _("Unadded Topics") }}</h2>
 	{% if topics_to_add %}
 		<p>
-			List of your forum topics which do not have a matching package.
-			Topics with a strikethrough have been marked as discarded.
+			{{ _("List of your forum topics which do not have a matching package.") }}
+			{{ _("Topics with a strikethrough have been marked as discarded.") }}
 		</p>
 
 		<div style="max-height: 20em; overflow-y: auto">
@@ -99,7 +101,7 @@
 			{{ render_topics_table(topics_to_add, show_author=False, show_discard=True, current_user=current_user) }}
 		</div>
 	{% else %}
-		<p class="card-body">Congrats! You don't have any topics which aren't on CDB.</p>
+		<p class="card-body">{{ _("Congrats! You don't have any topics which aren't on CDB.") }}</p>
 	{% endif %}
 {% endblock %}
 

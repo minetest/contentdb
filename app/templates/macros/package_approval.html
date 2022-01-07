@@ -2,7 +2,7 @@
 
 <div class="row mb-4">
 	<span class="col">
-		State: <strong>{{ package.state.value }}</strong>
+		{{ _("State") }}: <strong>{{ package.state.value }}</strong>
 	</span>
 
 	{% for state in package.getNextStates(current_user) %}
@@ -18,9 +18,13 @@
 	{% set message %}
 		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 			{% if package.update_config %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL("packages.create_release") }}">Create first release</a>
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL("packages.create_release") }}">
+					{{ _("Create first release") }}
+				</a>
 			{% else %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL("packages.setup_releases") }}">Set up releases</a>
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL("packages.setup_releases") }}">
+					{{ _("Set up releases") }}
+				</a>
 			{% endif %}
 			{{ _("You need to create a release before this package can be approved.") }}
 		{% else %}
@@ -29,36 +33,38 @@
 	{% endset %}
 
 {% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
-	{% set message = "You need to add at least one screenshot." %}
+	{% set message = _("You need to add at least one screenshot.") %}
 
 {% elif package.getMissingHardDependenciesQuery().count() > 0 %}
 	{% set deps = package.getMissingHardDependencies() | join(", ") %}
-	{% set message = "The following hard dependencies need to be added to ContentDB first: " + deps %}
+	{% set message = _("The following hard dependencies need to be added to ContentDB first: %(deps)s", deps) %}
 
 {% elif topic_error_lvl == "danger" %}
 {% elif package.state == package.state.READY_FOR_REVIEW and ("Other" in package.license.name or "Other" in package.media_license.name) %}
-	{% set message = "Please wait for the license to be added to CDB." %}
+	{% set message = _("Please wait for the license to be added to CDB.") %}
 
 {% else %}
 	{% set level = "info" %}
 	{% set message %}
 		{% if package.screenshots.count() == 0 %}
-			<b>You should add at least one screenshot, but this isn't required.</b><br />
+			<b>
+				{{ _("You should add at least one screenshot, but this isn't required.") }}
+			</b><br />
 		{% endif %}
 
 		{% if package.state == package.state.READY_FOR_REVIEW %}
 			{% if not package.getDownloadRelease() %}
-				Please wait for the release to be approved.
+				{{ _("Please wait for the release to be approved.") }}
 			{% elif package.checkPerm(current_user, "APPROVE_NEW") %}
-				You can now approve this package if you're ready.
+				{{ _("You can now approve this package if you're ready.") }}
 			{% else %}
-				Please wait for the package to be approved.
+				{{ _("Please wait for the package to be approved.") }}
 			{% endif %}
 		{% else %}
 			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-				You can now submit this package for approval if you're ready.
+				{{ _("You can now submit this package for approval if you're ready.") }}
 			{% else %}
-				This package can be submitted for approval when ready.
+				{{ _("This package can be submitted for approval when ready.") }}
 			{% endif %}
 		{% endif %}
 	{% endset %}
@@ -88,16 +94,18 @@
 			More info
 		</a>
 		{% if conflicting_modnames | length > 4 %}
-			Please make sure that this package has the right to the names it uses.
+			{{ _("Please make sure that this package has the right to the names it uses.") }}
 		{% else %}
-			Please make sure that this package has the right to the names {{ conflicting_modnames | join(", ") }}.
+			{{ _("Please make sure that this package has the right to the names %(names)s", names=conflicting_modnames | join(", ")) }}.
 		{% endif %}
 	</div>
 {% endif %}
 
 {% if not package.review_thread and (package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW")) %}
 	<div class="alert alert-secondary">
-		<a class="float-right btn btn-sm btn-secondary" href="{{ url_for('threads.new', pid=package.id, title='Package approval comments') }}">Open Thread</a>
+		<a class="float-right btn btn-sm btn-secondary" href="{{ url_for('threads.new', pid=package.id, title='Package approval comments') }}">
+			{{ _("Open Thread") }}
+		</a>
 
 		 {{ _("Package review thread") }}:
 		 {{ _("You can open a thread if you have a question for the reviewer or package author.") }}

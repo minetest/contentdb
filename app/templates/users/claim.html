@@ -10,17 +10,22 @@
 	<h2>{{ _("Do you have an account on the Minetest Forums?") }}</h2>
 
 	<p>
-		ContentDB will link your account to your forum account.
+		{{ _("ContentDB will link your account to your forum account.") }}
 	</p>
 
 	<p>
-		You don't need a forum account, however, it's recommended to make the most
-		out of the Minetest community.
+		{{ _("You don't need a forum account, however, it's recommended to make the most out of the Minetest community.") }}
 	</p>
 
 	<p class="mt-5">
-		<a class="btn btn-primary mr-3" href="{{ url_for('users.claim_forums') }}"><b>Yes</b>, I have a forums account</a>
-		<a class="btn btn-primary mr-3" href="{{ url_for('users.register') }}"><b>No</b>, I don't have one</a>
-		<a class="btn btn-secondary" href="https://forum.minetest.net/ucp.php?mode=register">Create forum account</a>
+		<a class="btn btn-primary mr-3" href="{{ url_for('users.claim_forums') }}">
+			{{ _("<b>Yes</b>, I have a forums account") }}
+		</a>
+		<a class="btn btn-primary mr-3" href="{{ url_for('users.register') }}">
+			{{ _("<b>No</b>, I don't have one") }}
+		</a>
+		<a class="btn btn-secondary" href="https://forum.minetest.net/ucp.php?mode=register">
+			{{ _("Create forum account") }}
+		</a>
 	</p>
 {% endblock %}

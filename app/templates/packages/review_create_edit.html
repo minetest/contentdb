@@ -13,7 +13,7 @@
 
 {% if package.issueTracker %}
 	<p class="alert alert-secondary">
-		Found a bug? Post on the <a href="{{ package.issueTracker }}">issue tracker</a> instead.<br />
+		{{ _("Found a bug? Post on the <a href='%{url}s'>issue tracker</a> instead.", url=package.issueTracker) }}<br />
 	</p>
 {% endif %}
 

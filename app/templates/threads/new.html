@@ -1,15 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}
-	New Thread
+	{{ _("New Thread") }}
 {% endblock %}
 
 {% block content %}
 
 {% if package and current_user != package.author and package.issueTracker %}
 	<p class="alert alert-secondary">
-		Found a bug? Post on the <a href="{{ package.issueTracker }}">issue tracker</a> instead.<br />
-		If the package shouldn't be on CDB (eg: if it doesn't work at all), then you can let us know here.
+		{{ _("Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead.", url=package.issueTracker) }}<br />
+		{{ _("If the package shouldn't be on CDB (eg: if it doesn't work at all), then you can let us know here.") }}
 	</p>
 {% endif %}
 
@@ -37,8 +37,7 @@
 
 	{{ render_checkbox_field(form.private, class_="my-3") }}
 	<p>
-		Only you, the package author, and users of Approver rank
-		and above can read private threads.
+		{{ _("Only you, the package author, and users of Approver rank and above can read private threads.") }}
 	</p>
 
 	{{ render_submit_field(form.submit) }}

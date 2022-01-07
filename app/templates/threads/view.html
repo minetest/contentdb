@@ -28,12 +28,12 @@
 		{% if current_user in thread.watchers %}
 			<form method="post" action="{{ thread.getUnsubscribeURL() }}" class="float-right">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<input type="submit" class="btn btn-primary" value="Unsubscribe" />
+				<input type="submit" class="btn btn-primary" value="{{ _('Unsubscribe') }}" />
 			</form>
 		{% else %}
 			<form method="post" action="{{ thread.getSubscribeURL() }}" class="float-right">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<input type="submit" class="btn btn-primary" value="Subscribe" />
+				<input type="submit" class="btn btn-primary" value="{{ _('Subscribe') }}" />
 			</form>
 		{% endif %}
 		{% if thread and thread.checkPerm(current_user, "DELETE_THREAD") %}
@@ -75,14 +75,13 @@
 
 	{% if thread.package %}
 		<p>
-			Package: <a href="{{ thread.package.getURL("packages.view") }}">{{ thread.package.title }}</a>
+			{{ _("Package") }}: <a href="{{ thread.package.getURL("packages.view") }}">{{ thread.package.title }}</a>
 		</p>
 	{% endif %}
 
 	{% if thread.private %}
 		<i>
-			This thread is only visible to its creator, the package owner, and users of
-			Approver rank or above.
+			{{ _("This thread is only visible to its creator, the package owner, and users of Approver rank or above.") }}
 		</i>
 	{% endif %}
 

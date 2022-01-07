@@ -1,7 +1,11 @@
 {% extends "users/settings_base.html" %}
 
 {% block title %}
-	{{ _("Account and Security | %(username)s", username=user.username) }}
+	{{ _("Account and Security - %(username)s", username=user.username) }}
+{% endblock %}
+
+{% block ruben_link %}
+	<a href="https://forum.minetest.net/ucp.php?i=pm&mode=compose&u=2051">rubenwardy</a>
 {% endblock %}
 
 {% block pane %}
@@ -37,9 +41,13 @@
 <h3>{{ _("Password") }}</h3>
 {% if user == current_user %}
 	{% if user.password %}
-		<a class="btn btn-primary" href="{{ url_for('users.change_password') }}">Change Password</a>
+		<a class="btn btn-primary" href="{{ url_for('users.change_password') }}">
+			{{ _("Change Password") }}
+		</a>
 	{% else %}
-		<a class="btn btn-primary" href="{{ url_for('users.set_password') }}">Set Password</a>
+		<a class="btn btn-primary" href="{{ url_for('users.set_password') }}">
+			{{ _("Set Password") }}
+		</a>
 	{% endif %}
 {% else %}
 	{% if user.password %}
@@ -56,11 +64,10 @@
 		<td>
 			{% if user.forums_username %}
 				<a class="btn btn-secondary" href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
-					Connected [{{ user.forums_username }}]
+					{{ _("Connected") }} [{{ user.forums_username }}]
 				</a>
 			{% else %}
-				Please <a href="https://forum.minetest.net/ucp.php?i=pm&mode=compose&u=2051">PM rubenwardy</a>
-				on the forums to link your account.
+				{{ _("Please PM %(rubenwardy)s on the forums to link your account.", rubenwardy=self.ruben_link()) }}
 			{% endif %}
 		</td>
 	</tr>
@@ -69,23 +76,29 @@
 		<td>
 			{% if user.github_username %}
 				<a class="btn btn-secondary" href="https://github.com/{{ user.github_username }}">
-					Connected [{{ user.github_username }}]
+					{{ _("Connected") }} [{{ user.github_username }}]
 				</a>
 
 				{% if user == current_user %}
-					<a class="btn btn-secondary ml-2" href="{{ url_for('github.view_permissions') }}">View ContentDB's GitHub Permissions</a>
+					<a class="btn btn-secondary ml-2" href="{{ url_for('github.view_permissions') }}">
+						{{ _("View ContentDB's GitHub Permissions") }}
+					</a>
 				{% endif %}
 			{% elif user == current_user %}
-				<a class="btn btn-secondary" href="{{ url_for('github.start') }}">Link Github</a>
+				<a class="btn btn-secondary" href="{{ url_for('github.start') }}">
+					{{ _("Link Github") }}
+				</a>
 			{% else %}
-				None
+				{{ _("None") }}
 			{% endif %}
 		</td>
 	</tr>
 </table>
 
 {% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
-	<a class="btn btn-secondary float-right" href="{{ url_for('admin.audit', username=user.username) }}">View All</a>
+	<a class="btn btn-secondary float-right" href="{{ url_for('admin.audit', username=user.username) }}">
+		{{ _("View All") }}
+	</a>
 {% endif %}
 
 <h3>{{ _("Recent Account Actions") }}</h3>
@@ -96,7 +109,8 @@
 <h3>{{ _("Account Deletion and Deactivation") }}</h3>
 
 {% if current_user.rank.atLeast(current_user.rank.ADMIN) %}
-	<a class="btn btn-danger" href="{{ url_for('users.delete', username=user.username) }}">Delete or Deactivate</a>
+	<a class="btn btn-danger" href="{{ url_for('users.delete', username=user.username) }}">
+		{{ _("Delete or Deactivate") }}</a>
 {% else %}
 	<p>
 		{{ _("Account Deletion and Deactivation isn't available to users yet.") }}

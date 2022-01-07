@@ -6,24 +6,24 @@ Remove {{ package.title }}
 
 {% block content %}
 	<form method="POST" action="">
-		<h2 class="mt-0">Remove {{ package.title }}</h2>
+		<h2 class="mt-0">{{ _("Remove %(title)s", title=package.title) }}</h2>
 		<p>
-			In order to avoid data loss, you cannot permanently delete packages.
+			{{ _("In order to avoid data loss, you cannot permanently delete packages.
 			You can remove them from ContentDB, which will cause them to not be
 			visible to any users and they may be permanently deleted in the future.
-			The Admin can restore removed packages, if needed.
+			The Admin can restore removed packages, if needed.") }}
 		</p>
 
 		{% if package.approved %}
 			<p>
-				Unapproving a package will put it back into Draft, where
-				it can be submitted for approval again.
+				{{ _("Unapproving a package will put it back into Draft, where
+				it can be submitted for approval again.") }}
 			</p>
 		{% endif %}
 
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-		<a class="btn btn-secondary float-right" href="{{ package.getURL("packages.view") }}">Cancel</a>
+		<a class="btn btn-secondary float-right" href="{{ package.getURL("packages.view") }}">{{ _("Cancel") }}</a>
 
 		<input type="submit" name="delete" value="Remove" class="btn btn-danger mr-2" />
 

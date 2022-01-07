@@ -9,7 +9,9 @@
 {% endblock %}
 
 {% block content %}
-<a class="btn btn-primary float-right" href="{{ package.getURL("packages.alias_create_edit") }}">Create</a>
+<a class="btn btn-primary float-right" href="{{ package.getURL("packages.alias_create_edit") }}">
+	{{ _("Create") }}
+</a>
 <h1>{{ _("Aliases for %(title)s by %(author)s", title=self.link(), author=package.author.display_name) }}</h1>
 
 <div class="list-group">
@@ -19,7 +21,7 @@
 		</a>
 	{% else %}
 		<div class="list-group-item">
-			No aliases
+			{{ _("No aliases") }}
 		</div>
 	{% endfor %}
 </div>

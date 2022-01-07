@@ -2,11 +2,11 @@
 <table class="table {{ class_ }}">
 	<tr>
 		<th></th>
-		<th>Title</th>
-		{% if show_author %}<th>Author</th>{% endif %}
-		<th>Name</th>
-		<th>Date</th>
-		<th>Actions</th>
+		<th>{{ _("Title") }}</th>
+		{% if show_author %}<th>{{ _("Author") }}</th>{% endif %}
+		<th>{{ _("Name") }}</th>
+		<th>{{ _("Date") }}</th>
+		<th>{{ _("Actions") }}</th>
 	</tr>
 	{% for topic in topics %}
 		<tr class="{% if topic.wip %}wiptopic{% endif %} {% if topic.discarded %}discardtopic{% endif %}">
@@ -15,7 +15,7 @@
 			</td>
 			<td>
 				<a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a>
-				{% if topic.wip %}[WIP]{% endif %}
+				{% if topic.wip %}[{{ _("WIP") }}]{% endif %}
 			</td>
 			{% if show_author %}
 				<td><a href="{{ url_for('users.profile', username=topic.author.username) }}">{{ topic.author.display_name}}</a></td>
@@ -26,15 +26,15 @@
 				{% if current_user == topic.author or topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
 					<a class="btn btn-primary"
 							href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
-						Create
+						{{ _("Create") }}
 					</a>
 				{% endif %}
 				{% if show_discard and current_user.is_authenticated and topic.checkPerm(current_user, "TOPIC_DISCARD") %}
 					<a class="btn btn-{% if topic.discarded %}success{% else %}danger{% endif %} topic-discard" data-tid={{ topic.topic_id }}>
 						{% if topic.discarded %}
-							Show
+							{{ _("Show") }}
 						{% else %}
-							Discard
+							{{ _("Discard") }}
 						{% endif %}
 					</a>
 				{% endif %}
@@ -53,14 +53,17 @@
 	{% for topic in topics %}
 		<li{% if topic.wip %} class="wiptopic"{% endif %}>
 			<a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a>
-			{% if topic.wip %}[WIP]{% endif %}
-			{% if topic.discarded %}[Old]{% endif %}
+			{% if topic.wip %}[{{ _("WIP") }}]{% endif %}
+			{% if topic.discarded %}[{{ _("Old") }}]{% endif %}
 			{% if topic.name %}[{{ topic.name }}]{% endif %}
 			{% if show_author %}
 				by <a href="{{ url_for('users.profile', username=topic.author.username) }}">{{ topic.author.display_name }}</a>
 			{% endif %}
 			{% if topic.author == current_user or topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
-				| <a href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">Create</a>
+				|
+				<a href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
+					{{ _("Create") }}
+				</a>
 			{% endif %}
 		</li>
 	{% endfor %}

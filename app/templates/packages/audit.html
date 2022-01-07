@@ -1,11 +1,11 @@
 {% extends "packages/package_base.html" %}
 
 {% block title %}
-Audit Log
+{{ _("Audit Log") }}
 {% endblock %}
 
 {% block content %}
-	<h2 class="mt-0">Audit Log</h2>
+	<h2 class="mt-0">{{ self.title() }}</h2>
 
 	{% from "macros/pagination.html" import render_pagination %}
 	{% from "macros/audit_log.html" import render_audit_log %}

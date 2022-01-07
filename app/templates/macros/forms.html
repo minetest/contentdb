@@ -49,7 +49,7 @@
 			</div>
 			{{ field(class_=fieldclass or 'form-control', **kwargs) }}
 			<a class="btn btn-secondary" id="{{ field.name }}-button">
-				View
+				{{ _("View") }}
 			</a>
 		</div>
 
@@ -104,7 +104,7 @@
 			<label for="{{ field.id }}">{{ label|safe }}</label>
 		{% endif %}
 		<div class="multichoice_selector bulletselector form-control">
-			<input type="text" placeholder="Start typing to see suggestions">
+			<input type="text" placeholder="{{ _('Start typing to see suggestions') }}">
 			<div class="clearboth"></div>
 		</div>
 		<div class="invalid-remaining invalid-feedback"></div>

@@ -26,11 +26,11 @@
 
 {% block container %}
 	{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
-		{% set package_warning="Non-free code and media" %}
+		{% set package_warning=_("Non-free code and media") %}
 	{% elif not package.license.is_foss and package.type != package.type.TXP %}
-		{% set package_warning="Non-free code" %}
+		{% set package_warning=_("Non-free code") %}
 	{% elif not package.media_license.is_foss %}
-		{% set package_warning="Non-free media" %}
+		{% set package_warning=_("Non-free media") %}
 	{% endif %}
 	{% set release = package.getDownloadRelease() %}
 <main>
@@ -211,8 +211,7 @@
 					<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
 					{% if review_thread.private %}
 						<p><i>
-							This thread is only visible to the package owner and users of
-							Approver rank or above.
+							{{ _("This thread is only visible to the package owner and users of Approver rank or above.") }}
 						</i></p>
 					{% endif %}
 
@@ -231,7 +230,7 @@
 					{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 						<a href="{{ package.getURL("packages.screenshots") }}" class="btn btn-primary float-right">
 							<i class="fas fa-images mr-1"></i>
-							Edit
+							{{ _("Edit") }}
 						</a>
 					{% endif %}
 
@@ -285,13 +284,13 @@
 				{% endif %}
 
 				{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.ADMIN) %}
-					<a href="{{ package.getURL('packages.review_votes') }}" class="btn btn-secondary">Review Votes</a>
+					<a href="{{ package.getURL('packages.review_votes') }}" class="btn btn-secondary">{{ _("Review Votes") }}</a>
 				{% endif %}
 
 				{{ render_reviews(package.reviews, current_user) }}
 
 				{% if packages_uses %}
-					<h2>Used By</h2>
+					<h2>{{ _("Used By") }}</h2>
 					{% from "macros/packagegridtile.html" import render_pkggrid %}
 					{{ render_pkggrid(packages_uses) }}
 				{% endif %}
@@ -302,7 +301,7 @@
 					{% set config = package.update_config %}
 					<div class="alert alert-warning">
 						<p class="mt-0 my-1">
-							<b>Package may be outdated</b>
+							<b>{{ _("Package may be outdated") }}</b>
 						</p>
 						<p class="mt-0 my-1">
 							{{ config.get_message() }}
@@ -326,7 +325,7 @@
 				{% if package_warning %}
 					<p class="alert alert-danger">
 						<a href="/help/non_free/" class="float-right">Info</a>
-						<b>Warning:</b> {{ package_warning }}
+						<b>{{ _("Warning") }}:</b> {{ package_warning }}
 					</p>
 				{% endif %}
 
@@ -339,7 +338,8 @@
 								{%- if dep.package %}
 									<a class="badge badge-primary"
 											href="{{ dep.package.getURL("packages.view") }}">
-										{{ dep.package.title }} by {{ dep.package.author.display_name }}
+										{{ _("%(title)s by %(display_name)s",
+												title=dep.package.title, display_name=dep.package.author.display_name) }}
 									</a>
 								{% elif dep.meta_package %}
 									<a class="badge badge-primary"
@@ -350,7 +350,7 @@
 									{{ "Expected package or meta_package in dep!" | throw }}
 								{% endif %}
 							{% else %}
-								No required dependencies
+								{{ _("No required dependencies") }}
 							{% endfor %}
 						</dd>
 
@@ -362,7 +362,8 @@
 									{%- if dep.package %}
 										<a class="badge badge-secondary"
 												href="{{ dep.package.getURL("packages.view") }}">
-											{{ dep.package.title }} by {{ dep.package.author.display_name }}
+											{{ _("%(title)s by %(display_name)s",
+													title=dep.package.title, display_name=dep.package.author.display_name) }}
 									{% elif dep.meta_package %}
 										<a class="badge badge-secondary"
 												href="{{ url_for('metapackages.view', name=dep.meta_package.name) }}">
@@ -400,11 +401,11 @@
 					{% if package.dev_state %}
 						<dd title="{{ package.dev_state.get_desc() }}">{{ package.dev_state.value }}</dd>
 					{% else %}
-						<dd><i>Unknown</i></dd>
+						<dd><i>{{ _("Unknown") }}</i></dd>
 					{% endif %}
 					<dt>{{ _("Added") }}</dt>
 					<dd>{{ package.created_at | datetime }}</dd>
-					<dt>Maintainers</dt>
+					<dt>{{ _("Maintainers") }}</dt>
 					<dd>
 						{% for user in package.maintainers %}
 							<a class="badge badge-secondary"
@@ -421,7 +422,7 @@
 						{% endif %}
 					</dd>
 					{% if package.provides %}
-						<dt>Provides</dt>
+						<dt>{{ _("Provides") }}</dt>
 						<dd>{% for meta in package.provides %}
 							<a class="badge badge-secondary"
 							 href="{{ url_for('metapackages.view', name=meta.name) }}">{{ meta.name }}</a>
@@ -431,7 +432,7 @@
 
 				{% if package.author.donate_url %}
 					<a class="btn btn-secondary btn-block my-4" href="{{ package.author.donate_url }}" rel="nofollow">
-						Like {{ package.author.display_name }}'s work? Donate now!
+						{{ _("Like %(display_name)s's work? Donate now!", display_name=package.author.display_name) }}
 					</a>
 				{% endif %}
 
@@ -449,7 +450,7 @@
 						{{ render_releases_download(releases, package, current_user) }}
 					{% endif %}
 					<a class="list-group-item list-group-item-action text-center py-1 text-muted" href="{{ package.getURL("packages.list_releases") }}">
-						More
+						{{ _("More") }}
 					</a>
 				</div>
 
@@ -459,7 +460,7 @@
 							<a class="btn btn-primary btn-sm mx-1" href="{{ url_for('threads.new', pid=package.id) }}"><i class="fas fa-plus"></i></a>
 						</div>
 					{% endif %}
-					Threads
+					{{ _("Threads") }}
 				</h3>
 				<div class="list-group">
 					{% from "macros/threads.html" import render_compact_threadlist %}
@@ -470,12 +471,12 @@
 					{% if package.approved and current_user != package.author %}
 						<a class="float-right"
 							href="{{ url_for('threads.new', pid=package.id) }}">
-								Report a problem with this listing
+								{{ _("Report a problem with this listing") }}
 						</a>
 					{% endif %}
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") or package.checkPerm(current_user, "APPROVE_NEW") %}
 						<a class="float-right" href="{{ package.getURL("packages.audit") }}">
-							See audit log
+							{{ _("See audit log") }}
 						</a>
 					{% endif %}
 				</p>

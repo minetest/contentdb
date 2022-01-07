@@ -29,7 +29,7 @@
 
 							<span class="pl-2">{{ entry.causer.username }}</span>
 						{% else %}
-							<i>Deleted User</i>
+							<i>{{ _("Deleted User") }}</i>
 						{% endif %}
 					</div>
 
@@ -61,7 +61,7 @@
 				</div>
 			</a>
 		{% else %}
-			<p class="list-group-item"><i>No audit log entires.</i></p>
+			<p class="list-group-item"><i>{{ _("No audit log entries.") }}</i></p>
 		{% endfor %}
 	</div>
 {% endmacro %}

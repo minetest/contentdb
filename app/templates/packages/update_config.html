@@ -22,7 +22,7 @@
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 
-		<h3 class="mt-5">Trigger</h3>
+		<h3 class="mt-5">{{ _("Trigger") }}</h3>
 
 		<p class="text-muted">
 			{{ _("The trigger is the event that triggers the action.") }}
@@ -35,7 +35,7 @@
 				hint=_("Currently, the branch name field is only used by the New Commit trigger.")) }}
 
 
-		<h3 class="mt-5">Action</h3>
+		<h3 class="mt-5">{{ _("Action") }}</h3>
 
 		<p class="text-muted">
 			{{ _("The action to perform when the trigger happens.") }}

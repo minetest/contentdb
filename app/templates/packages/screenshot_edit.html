@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Edit screenshot | {{ package.title }}
+	{{ _("Edit screenshot") }} - {{ package.title }}
 {% endblock %}
 
 {% block content %}
 	<div class="row">
 		{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 		<form method="POST" action="" enctype="multipart/form-data" class="col-md">
-			<h1>Edit screenshot</h1>
+			<h1>{{ _("Edit screenshot") }}</h1>
 
 			{{ form.hidden_tag() }}
 
@@ -17,7 +17,7 @@
 			{% if package.checkPerm(current_user, "APPROVE_SCREENSHOT") %}
 				{{ render_checkbox_field(form.approved) }}
 			{% else %}
-				<p>Approved: {{ screenshot.approved }}</p>
+				<p>{{ _("Approved") }}: {{ screenshot.approved }}</p>
 			{% endif %}
 
 			{{ render_submit_field(form.submit) }}

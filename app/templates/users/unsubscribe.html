@@ -36,28 +36,29 @@
 		{% if user %}
 			<div class="alert alert-danger">
 				<p>
-					<strong>Unsubscribing may prevent you from being able to sign into the
-					account '{{ user.display_name }}'</strong>.
+					<strong>
+						{{ _("Unsubscribing may prevent you from being able to sign into the account '%(display_name)s'", display_name=user.display_name) }}
+					</strong>.
 				</p>
 				<p class="mb-0">
-					ContentDB will no longer be able to send "forget password" and other essential system emails.
-					Consider editing your email notification preferences instead.
+					{{ _("ContentDB will no longer be able to send "forget password" and other essential system emails.
+					Consider editing your email notification preferences instead.") }}
 				</p>
 			</div>
 		{% else %}
 			<p class="alert alert-warning">
-				You won't be able to use this email with ContentDB anymore.
+				{{ _("You won't be able to use this email with ContentDB anymore.") }}
 			</p>
 		{% endif %}
 
 		<div class="button-group mt-4">
 			{% if user %}
 				<a class="btn btn-primary mr-3" href="{{ url_for('users.email_notifications', username=user.username) }}">
-					Edit Notification Preferences
+					{{ _("Edit Notification Preferences") }}
 				</a>
 			{% endif %}
 
-			<input class="btn btn-danger" type="submit" value="Unsubscribe">
+			<input class="btn btn-danger" type="submit" value="{{ _('Unsubscribe') }}">
 		</div>
 	</form>
 {% endif %}

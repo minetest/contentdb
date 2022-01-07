@@ -129,7 +129,7 @@
 			by {{ t.author.display_name }}
 		</a>
 	{% else %}
-		<p class="list-group-item"><i>No threads found</i></p>
+		<p class="list-group-item"><i>{{ _("No threads found") }}</i></p>
 	{% endfor %}
 {% endmacro %}
 
@@ -209,6 +209,6 @@
 			</div>
 		</a>
 	{% else %}
-		<p class="list-group-item"><i>No threads found</i></p>
+		<p class="list-group-item"><i>{{ _("No threads found") }}</i></p>
 	{% endfor %}
 {% endmacro %}

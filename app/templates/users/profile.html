@@ -8,7 +8,7 @@
 
 <article class="row mb-5">
 	<div class="col-auto image mx-0">
-		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ user.getProfilePicURL() }}" alt="Profile picture">
+		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ user.getProfilePicURL() }}" alt="{{ _('Profile picture') }}">
 	</div>
 	<div class="col">
 		{% if user.can_see_edit_profile(current_user) %}
@@ -117,9 +117,9 @@
 {% if not current_user.is_authenticated and user.rank == user.rank.NOT_JOINED and user.forums_username %}
 	<div class="alert alert-secondary mb-5">
 		<a class="float-right btn btn-default btn-sm"
-			href="{{ url_for('users.claim_forums', username=user.forums_username) }}">Claim</a>
+			href="{{ url_for('users.claim_forums', username=user.forums_username) }}">{{ _("Claim") }}</a>
 
-		Is this you? Claim your account now!
+		{{ _("Is this you? Claim your account now!") }}
 	</div>
 {% else %}
 	<div class="row mb-5">
@@ -166,13 +166,13 @@
 	<a class="float-right btn btn-sm btn-primary"
 			href="{{ url_for('packages.create_edit', author=user.username) }}">
 		<i class="fas fa-plus mr-1"></i>
-		Create package
+		{{ _("Create package") }}
 	</a>
 {% endif %}
 {% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.EDITOR)) %}
 	<a class="float-right btn btn-sm btn-secondary mr-2"
 			href="{{ url_for('todo.tags', author=user.username) }}">
-		View list of tags
+		{{ _("View list of tags") }}
 	</a>
 {% endif %}
 <h2 class="my-3">{{ _("Packages") }}</h2>

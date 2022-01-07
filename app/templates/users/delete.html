@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Delete user {{ user.username }}
+	{{ _("Delete user %(username)s", username=user.username) }}
 {% endblock %}
 
 {% block content %}
@@ -10,7 +10,7 @@
 
 		<h3 class="card-header">{{ self.title() }}</h3>
 		<div class="card-body">
-			<p><b>Deleting is permanent</b></p>
+			<p><b>{{ _("Deleting is permanent") }}</b></p>
 
 			{% if can_delete %}
 				<p>
@@ -26,16 +26,18 @@
 				</p>
 			{% endif %}
 
-			<a class="btn btn-secondary mr-3" href="{{ url_for('users.account', username=user.username) }}">Cancel</a>
+			<a class="btn btn-secondary mr-3" href="{{ url_for('users.account', username=user.username) }}">
+				{{ _("Cancel") }}
+			</a>
 			<input type="submit"
 				{% if can_delete %}
-					name="delete" value="Delete"
+					name="delete" value="{{ _('Delete') }}"
 				{% else %}
-					name="deactivate" value="Deactivate"
+					name="deactivate" value="{{ _('Deactivate') }}"
 				{% endif %}
 				class="btn btn-danger" />
 			{% if not can_delete and current_user.rank.atLeast(current_user.rank.ADMIN) %}
-				<input type="submit" name="delete" value="Delete Anyway" class="btn btn-danger ml-3" />
+				<input type="submit" name="delete" value="{{ _('Delete Anyway') }}" class="btn btn-danger ml-3" />
 			{% endif %}
 		</div>
 	</form>

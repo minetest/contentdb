@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-Notifications
+	{{ _("Notifications") }}
 {% endblock %}
 
 {% block content %}
@@ -15,16 +15,16 @@ Notifications
 		</a>
 	{% endif %}
 
-	<h1>Notifications</h1>
+	<h1>{{ self.title() }}</h1>
 
 	{% if current_user.notifications %}
 	<p>
-		Newest first.
+		{{ _("Newest first.") }}
 	</p>
 	{% endif %}
 
 	{% if editor_notifications %}
-		<h2>Your Notifications</h2>
+		<h2>{{ _("Your Notifications") }}</h2>
 	{% endif %}
 
 	<div class="list-group mt-3">
@@ -58,12 +58,12 @@ Notifications
 				</div>
 			</a>
 		{% else %}
-			<p class="list-group-item"><i>No notifications</i></p>
+			<p class="list-group-item"><i>{{ _("No notifications") }}</i></p>
 		{% endfor %}
 	</div>
 
 	{% if editor_notifications %}
-		<h2>Editor/Approver Notifications</h2>
+		<h2>{{ _("Editor/Approver Notifications") }}</h2>
 
 		<div class="list-group mt-3">
 			{% for n in editor_notifications %}
@@ -96,7 +96,7 @@ Notifications
 					</div>
 				</a>
 			{% else %}
-				<p class="list-group-item"><i>No notifications</i></p>
+				<p class="list-group-item"><i>{{ _("No notifications") }}</i></p>
 			{% endfor %}
 		</div>
 	{% endif %}

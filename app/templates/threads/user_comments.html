@@ -43,7 +43,7 @@
 					{% else %}
 						<i class="fas fa-reply mr-2"></i>
 						<a class="badge badge-dark" href="{{ r.thread.getViewURL() }}">
-							Reply to <b>{{ r.thread.title }}</b>
+							{{ _("Reply to <b>%(title)s</b>", title=r.thread.title) }}
 						</a>
 					{% endif %}
 

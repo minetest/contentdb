@@ -1,21 +1,21 @@
 {% extends "packages/package_base.html" %}
 
 {% block title %}
-Share and Badges
+{{ _("Share and Badges") }}
 {% endblock %}
 
 {% block content %}
 	<h2 class="mt-0">{{ self.title() }}</h2>
 
-	<h3>Links</h3>
+	<h3>{{ _("Links") }}</h3>
 
 	<p>
-		Review link:
+		{{ _("Review link") }}:
 	</p>
 
 	<pre><code>{{ package.getURL("packages.review", absolute=True) }}</code></pre>
 
-	<h3>Badges</h3>
+	<h3>{{ _("Badges") }}</h3>
 
 	<p>
 		{{ package.makeShield("title") | markdown }}

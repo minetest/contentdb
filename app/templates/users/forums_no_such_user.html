@@ -15,7 +15,9 @@
 	</p>
 
 	{% if not current_user.is_authenticated %}
-		<a class="btn btn-primary" href="{{ url_for('users.claim_forums', username=username) }}">Claim Account</a>
+		<a class="btn btn-primary" href="{{ url_for('users.claim_forums', username=username) }}">
+			{{ _("Claim Account") }}
+		</a>
 	{% endif %}
 </article>
 {% endblock %}

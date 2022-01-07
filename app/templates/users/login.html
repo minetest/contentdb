@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Sign in
+	{{ _("Sign in") }}
 {% endblock %}
 
 {% block container %}
@@ -10,7 +10,7 @@
 		<form class="signin" method="POST">
 			{{ form.hidden_tag() }}
 
-			<h1 class="h3 mb-4 font-weight-normal">Sign in</h1>
+			<h1 class="h3 mb-4 font-weight-normal">{{ self.title() }}</h1>
 
 			{{ render_field(form.username, tabindex=110, label_visible=False, placeholder=_("Username or email")) }}
 			{{ render_field(form.password, tabindex=120, label_visible=False, placeholder=_("Password")) }}

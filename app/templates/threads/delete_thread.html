@@ -13,10 +13,10 @@
 			{{ thread.replies[0].comment | markdown }}
 		</div>
 		<div class="card-body">
-			<p>Deleting is permanent</p>
+			<p>{{ _("Deleting is permanent") }}</p>
 
-			<a class="btn btn-secondary mr-3" href="{{ thread.getViewURL() }}">Cancel</a>
-			<input type="submit" value="Delete" class="btn btn-danger" />
+			<a class="btn btn-secondary mr-3" href="{{ thread.getViewURL() }}">{{ _("Cancel") }}</a>
+			<input type="submit" value="{{ _('Delete') }}" class="btn btn-danger" />
 		</div>
 	</form>
 {% endblock %}

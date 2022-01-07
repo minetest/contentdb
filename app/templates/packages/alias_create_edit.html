@@ -9,7 +9,9 @@
 {% endblock %}
 
 {% block content %}
-<a class="btn btn-secondary" href="{{ package.getURL("packages.alias_list") }}">Back to Aliases</a>
+<a class="btn btn-secondary" href="{{ package.getURL("packages.alias_list") }}">
+	{{ _("Back to Aliases") }}
+</a>
 
 {% from "macros/forms.html" import render_field, render_submit_field, render_toggle_field %}
 <form method="POST" action="" enctype="multipart/form-data" class="mt-4">

@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Create a release | {{ package.title }}
+	{{ _("Bulk Change Releases") }} - {{ package.title }}
 {% endblock %}
 
 {% block content %}
-	<h1>Bulk Change Releases</h1>
+	<h1>{{ self.title() }}</h1>
 
 	<p class="mb-5">
-		Use this page to set the min and max of all releases for your package.
+		{{ _("Use this page to set the min and max of all releases for your package.") }}
 	</p>
 
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
@@ -26,15 +26,16 @@
 		{{ render_checkbox_field(form.only_change_none) }}
 
 		<p id="minmax_warning" style="color:#f00; display: none;">
-			Maximum must be greater than or equal to the minimum!
+			{{ _("Maximum must be greater than or equal to the minimum!") }}
 		</p>
 
 		<p class="mt-3">
-			Note: Min and max versions will be used to hide the package on
-			platforms not within the range.
-			You cannot select the oldest version for min or the newest version
-			for max as this does not make sense - you can't predict the future.<br />
-			Leave both as None if in doubt.
+			{{ _("Note: Min and max versions will be used to hide the package on
+			platforms not within the range.") }}
+			{{ _("You cannot select the oldest version for min or the newest version
+			for max as this does not make sense - you can't predict the future.") }}
+			<br />
+			{{ _("Leave both as None if in doubt.") }}
 		</p>
 
 		{{ render_submit_field(form.submit) }}

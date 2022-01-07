@@ -1,7 +1,7 @@
 {% extends "packages/package_base.html" %}
 
 {% block title %}
-	Edit release - {{ package.title }}
+	{{ _("Edit release") }} - {{ package.title }}
 {% endblock %}
 
 {% block content %}
@@ -14,21 +14,22 @@
 		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 			{{ render_field(form.title) }}
 		{% else %}
-			Title: {{ release.title }}
+			{{ _("Title") }}: {{ release.title }}
 		{% endif %}
 
 		{% if package.checkPerm(current_user, "CHANGE_RELEASE_URL") %}
 			{{ render_field(form.url) }}
 		{% else %}
-			Url: <a href="{{ release.url }}">{{ release.url }}</a><br />
+			{{ _("URL") }}: <a href="{{ release.url }}">{{ release.url }}</a><br />
 		{% endif %}
 
 		{% if release.commit_hash %}
-			Commit Hash: {{ release.commit_hash }}<br />
+			{{ _("Commit Hash") }}: {{ release.commit_hash }}<br />
 		{% endif %}
 
 		{% if release.task_id %}
-			Importing... <a href="{{ url_for('tasks.check', id=release.task_id, r=release.getEditURL()) }}">view task</a><br />
+			{{ _("Importing...") }}
+			<a href="{{ url_for('tasks.check', id=release.task_id, r=release.getEditURL()) }}">{{ _("view task") }}</a><br />
 			{% if package.checkPerm(current_user, "CHANGE_RELEASE_URL") %}
 				{{ render_field(form.task_id) }}
 			{% endif %}
@@ -38,11 +39,11 @@
 			{% if release.checkPerm(current_user, "APPROVE_RELEASE") %}
 				{{ render_checkbox_field(form.approved, class_="my-3") }}
 			{% else %}
-				Approved: {{ release.approved }}
+				{{ _("Approved") }}: {{ release.approved }}
 			{% endif %}
 		{% endif %}
 
-		<h3 class="mt-5">Supported Minetest versions</h3>
+		<h3 class="mt-5">{{ _("Supported Minetest versions") }}</h3>
 
 		<div class="row">
 			{{ render_field(form.min_rel, class_="col-sm-6") }}
@@ -50,18 +51,20 @@
 		</div>
 
 		<p id="minmax_warning" style="color:#f00; display: none;">
-			Maximum must be greater than or equal to the minimum!
+			{{ _("Maximum must be greater than or equal to the minimum!") }}
 		</p>
 
 		<p>
-			Set the minimum and maximum Minetest versions supported.
-			This release will be hidden to clients outside of that range.<br />
-			Leave both as None if in doubt.
-			You can <a href="/help/package_config/">set this automatically</a> in the .conf of your package.
+			{{ _("Set the minimum and maximum Minetest versions supported.
+			This release will be hidden to clients outside of that range. ") }}
+			<br />
+			{{ _("Leave both as None if in doubt.") }}
+
+			{{ _("You can <a href='/help/package_config/'>set this automatically</a> in the .conf of your package.") }}
 		</p>
 		<p>
-			You cannot select the oldest version for min or the newest version
-			for max as this does not make sense - you can't predict the future.
+			{{ _("You cannot select the oldest version for min or the newest version
+			for max as this does not make sense - you can't predict the future.") }}
 		</p>
 
 		<p class="mt-5">

@@ -14,7 +14,7 @@
 	{% if token %}
 		<form class="float-right" method="POST" action="{{ url_for('api.delete_token', username=token.owner.username, id=token.id) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-			<input class="btn btn-danger" type="submit" value="Delete">
+			<input class="btn btn-danger" type="submit" value="{{ _('Delete') }}">
 		</form>
 	{% endif %}
 
@@ -30,15 +30,14 @@
 			<div class="card-header">{{ _("Access Token") }}</div>
 			<div class="card-body">
 				<p>
-					For security reasons, access tokens will only be shown once.
-					Reset the token if it is lost.
+					{{ _("For security reasons, access tokens will only be shown once. Reset the token if it is lost.") }}
 				</p>
 				{% if access_token %}
 					<input class="form-control my-3" type="text" readonly value="{{ access_token }}" class="form-control">
 				{% endif %}
 				<form method="POST" action="{{ url_for('api.reset_token', username=token.owner.username, id=token.id) }}">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-					<input class="btn btn-primary" type="submit" value="Reset">
+					<input class="btn btn-primary" type="submit" value="{{ _('Reset') }}">
 				</form>
 			</div>
 		</div>

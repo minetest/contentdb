@@ -10,21 +10,21 @@ Create Account from Forums User
 <h2>{{ _("Confirm Your Account") }}</h2>
 
 <p>
-	You'll need to use prove that you have access to your forum account using one of the options below.<br>
-	This is so ContentDB can link your account to your forum account.
+	{{ _("You'll need to use prove that you have access to your forum account using one of the options below.") }}<br>
+	{{ _("This is so ContentDB can link your account to your forum account.") }}
 </p>
 
 <p>
-	Don't have a forums account?
-	You can still <a href="{{ url_for('users.register') }}">sign up without one</a>.
+	{{ _("Don't have a forums account?") }}
+	{{ _("You can still <a href='%(url)s'>sign up without one</a>.", link=url_for('users.register')) }}
 </p>
 
 <div class="row mt-5">
 	<div class="col-sm-6">
 		<div class="card">
 			<div class="card-header">
-				<span class="badge badge-pill badge-dark mr-2">Option 1</span>
-				Use GitHub field in forum profile
+				<span class="badge badge-pill badge-dark mr-2">{{ _("Option 1") }}</span>
+				{{ _("Use GitHub field in forum profile") }}
 			</div>
 
 			<form method="post" class="card-body" action="">
@@ -32,20 +32,19 @@ Create Account from Forums User
 				<input class="form-control" type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
 				<p>
-					Enter your forum username here:
+					{{ _("Enter your forum username here:") }}
 				</p>
 
 				<input class="form-control my-4" type="text" name="username" value="{{ username }}"
-					   placeholder="Forum username" pattern="[a-zA-Z0-9._ -]+" title="Only a-zA-Z0-9._ allowed" required>
+					   placeholder="{{ _('Forum username') }}" pattern="[a-zA-Z0-9._ -]+"
+					   title="{{ _('Only a-zA-Z0-9._ allowed') }}" required>
 
 				<p>
-					You'll need to have the GitHub field in your forum profile
-					filled out. Log into the forum and
-					<a href="https://forum.minetest.net/ucp.php?i=173">
-						do that here</a>.
+					{{ _("You'll need to have the GitHub field in your forum profile filled out.") }}
+					{{ _("Log into the forum and <a href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>.") }}
 				</p>
 
-				<input class="btn btn-primary" type="submit" value="Next: log in with GitHub">
+				<input class="btn btn-primary" type="submit" value="{{ _('Next: log in with GitHub') }}">
 			</form>
 		</div>
 	</div>
@@ -53,8 +52,8 @@ Create Account from Forums User
 	<div class="col-sm-6">
 		<div class="card">
 			<div class="card-header">
-				<span class="badge badge-pill badge-dark mr-2">Option 2</span>
-				Verification token
+				<span class="badge badge-pill badge-dark mr-2">{{ _("Option 2") }}</span>
+				{{ _("Verification token") }}
 			</div>
 
 			<form method="post" class="card-body" action="">
@@ -62,33 +61,30 @@ Create Account from Forums User
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
 				<p>
-					Enter your forum username here:
+					{{ _("Enter your forum username here:") }}
 				</p>
 
 				<input class="form-control my-3" type="text" name="username" value="{{ username }}"
-					   placeholder="Forum username" pattern="[a-zA-Z0-9._ -]+" title="Only a-zA-Z0-9._ allowed" required>
+					   placeholder="{{ _('Forum username') }}" pattern="[a-zA-Z0-9._ -]+" title="{{ _('Only a-zA-Z0-9._ allowed') }}" required>
 
 				<p>
-					Go to
-					<a href="https://forum.minetest.net/ucp.php?i=profile&mode=signature">
-						User Control Panel > Profile > Edit signature
-					</a>
+					{{ _("Go to <a href="https://forum.minetest.net/ucp.php?i=profile&mode=signature">User Control Panel > Profile > Edit signature</a>") }}
 				</p>
 
 				<p>
-					Paste this into your signature:
+					{{ _("Paste this into your signature:") }}
 				</p>
 
 				<input class="form-control my-3" type="text" value="{{ key }}" readonly size=32>
 
 				<p>
-					Click next so we can check it.
+					{{ _("Click next so we can check it.") }}
 				</p>
 				<p>
-					Don't worry, you can remove it after this is done.
+					{{ _("Don't worry, you can remove it after this is done.") }}
 				</p>
 
-				<input class="btn btn-primary" type="submit" value="Next">
+				<input class="btn btn-primary" type="submit" value="{{ _('Next') }}">
 			</form>
 		</div>
 	</div>

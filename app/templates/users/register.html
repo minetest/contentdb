@@ -1,14 +1,14 @@
 {% extends "base.html" %}
 
 {% block title %}
-Register
+{{ _("Register") }}
 {% endblock %}
 
 {% block content %}
 {% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
 
 <div class="card w-50 text-left" style="margin: 2em auto;">
-	<h2 class="card-header">{{ _("Register") }}</h2>
+	<h2 class="card-header">{{ self.title() }}</h2>
 
 	<form action="" method="POST" class="form card-body" role="form">
 		{{ form.hidden_tag() }}
@@ -27,8 +27,8 @@ Register
 		{{ render_field(form.password, hint=_("Must be at least 8 characters long.")) }}
 
 		<p>
-			Password suggestion
-			(<a href="https://xkcd.com/936/">Why?</a>):
+			{{ _("Password suggestion") }}
+			(<a href="https://xkcd.com/936/">{{ _("Why?") }}</a>):
 			<code>{{ suggested_password }}</code>
 		</p>
 

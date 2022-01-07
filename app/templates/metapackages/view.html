@@ -1,35 +1,37 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ mpackage.name }} - Meta Packages
+{{ mpackage.name }} - {{ _("Meta Packages") }}
 {% endblock %}
 
 {% block content %}
-	<h1>Meta Package "{{ mpackage.name }}"</h1>
+	<h1>{{ _("Meta Package \"%(name)s\"", name=mpackage.name) }}</h1>
 
-	<h2>Provided By</h2>
+	<h2>{{ _("Provided By") }}</h2>
 
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 	{{ render_pkggrid(mpackage.packages.filter_by(state="APPROVED").all()) }}
 
 	{% if similar_topics %}
-		<p>Unforuntately, this isn't on ContentDB yet! Here's some forum topics:</p>
+		<p>
+			{{ _("Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):") }}
+		</p>
 		<ul>
 			{% for t in similar_topics %}
 				<li>
 					[{{ t.type.value }}]
 					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
-						{{ t.title }} by {{ t.author.display_name }}
+						{{ _("%(title)s by %(display_name)s", title=t.title, display_name=t.author.display_name) }}
 					</a>
-					{% if t.wip %}[WIP]{% endif %}
+					{% if t.wip %}[{{ _("WIP") }}]{% endif %}
 				</li>
 			{% endfor %}
 		</ul>
 	{% endif %}
 
-	<h2>Required By</h2>
+	<h2>{{ _("Required By") }}</h2>
 	{{ render_pkggrid(dependers) }}
 
-	<h2>Optionally Used By</h2>
+	<h2>{{ _("Optionally Used By") }}</h2>
 	{{ render_pkggrid(optional_dependers) }}
 {% endblock %}

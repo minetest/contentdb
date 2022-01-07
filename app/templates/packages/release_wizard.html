@@ -65,9 +65,15 @@
 		</p>
 
 		<p class="mt-5">
-			<a class="btn btn-primary" href="{{ package.getURL("packages.create_edit") }}">Add Git repo</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.getURL("packages.create_release") }}">Create releases manually</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.getURL("packages.view") }}">Later</a>
+			<a class="btn btn-primary" href="{{ package.getURL("packages.create_edit") }}">
+				{{ _("Add Git repo") }}
+			</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getURL("packages.create_release") }}">
+				{{ _("Create releases manually") }}
+			</a>
+			<a class="btn btn-secondary ml-2" href="{{ package.getURL("packages.view") }}">
+				{{ _("Later") }}
+			</a>
 		</p>
 	{% endif %}
 {% endblock %}

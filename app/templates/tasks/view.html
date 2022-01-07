@@ -1,17 +1,19 @@
 {% extends "base.html" %}
 
 {% block title %}
-Working
+	{% if "error" in info or info.status == "FAILURE" or info.status == "REVOKED" %}
+		{{ _("Task Failed") }}
+	{% else %}
+		{{ _("Working…") }}
+	{% endif %}
 {% endblock %}
 
 {% block content %}
-	{% if "error" in info or info.status == "FAILURE" or info.status == "REVOKED" %}
-		<h1>Task Failed</h1>
+	<h1>{{ self.title() }}</h1>
 
+	{% if "error" in info or info.status == "FAILURE" or info.status == "REVOKED" %}
 		<pre>{{ info.error }}</pre>
 	{% else %}
-		<h1>Working…</h1>
-
 		<script src="/static/polltask.js"></script>
 		<script>
 			// @author rubenwardy
@@ -21,7 +23,7 @@ Working
 					.catch(function() { location.reload() })
 		</script>
 		<noscript>
-			Reload the page to check for updates.
+			{{ _("Reload the page to check for updates.") }}
 		</noscript>
 	{% endif %}
 {% endblock %}

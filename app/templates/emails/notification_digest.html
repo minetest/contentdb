@@ -19,15 +19,15 @@
 
 <p style="margin-top: 3em;">
 	<a class="btn" href="{{ abs_url_for('notifications.list_all') }}">
-		View Notifications
+		{{ _("View Notifications") }}
 	</a>
 </p>
 
 {% endblock %}
 
 {% block footer %}
-	You are receiving this email because you are a registered user of ContentDB,
-	and have email notifications enabled. <br>
+	{{ _("You are receiving this email because you are a registered user of ContentDB, and have email notifications enabled.") }}
+	<br>
 
 	<a href="{{ abs_url_for('users.email_notifications', username=user.username) }}">
 		{{ _("Manage your preferences") }}
