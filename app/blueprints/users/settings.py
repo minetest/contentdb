@@ -1,4 +1,5 @@
 from flask import *
+from flask_babel import gettext
 from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
@@ -53,13 +54,13 @@ def handle_profile_edit(form, user, username):
 		if User.query.filter(User.id != user.id,
 				or_(User.username == form.display_name.data,
 						User.display_name.ilike(form.display_name.data))).count() > 0:
-			flash("A user already has that name", "danger")
+			flash(gettext("A user already has that name"), "danger")
 			return None
 
 		alias_by_name = PackageAlias.query.filter(or_(
 				PackageAlias.author == form.display_name.data)).first()
 		if alias_by_name:
-			flash("A user already has that name", "danger")
+			flash(gettext("A user already has that name"), "danger")
 			return
 
 		user.display_name = form.display_name.data
@@ -86,7 +87,7 @@ def profile_edit(username):
 		abort(404)
 
 	if not user.can_see_edit_profile(current_user):
-		flash("Permission denied", "danger")
+		flash(gettext("Permission denied"), "danger")
 		return redirect(url_for("users.profile", username=username))
 
 	form = UserProfileForm(obj=user)
@@ -211,7 +212,7 @@ def account(username):
 		abort(404)
 
 	if not user.can_see_edit_profile(current_user):
-		flash("Permission denied", "danger")
+		flash(gettext("Permission denied"), "danger")
 		return redirect(url_for("users.profile", username=username))
 
 	can_edit_account_settings = user.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
@@ -245,7 +246,7 @@ def account(username):
 					addAuditLog(AuditSeverity.MODERATION, current_user, msg,
 							url_for("users.profile", username=username))
 			else:
-				flash("Can't promote a user to a rank higher than yourself!", "danger")
+				flash(gettext("Can't promote a user to a rank higher than yourself!"), "danger")
 
 		db.session.commit()
 
@@ -262,7 +263,7 @@ def delete(username):
 		abort(404)
 
 	if user.rank.atLeast(UserRank.MODERATOR):
-		flash("Users with moderator rank or above cannot be deleted", "danger")
+		flash(gettext("Users with moderator rank or above cannot be deleted"), "danger")
 		return redirect(url_for("users.account", username=username))
 
 	if request.method == "GET":

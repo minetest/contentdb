@@ -14,6 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from flask import *
+from flask_babel import gettext
 
 from app.tasks.webhooktasks import post_discord_webhook
 
@@ -59,9 +60,9 @@ def subscribe(id):
 		abort(404)
 
 	if current_user in thread.watchers:
-		flash("Already subscribed!", "success")
+		flash(gettext("Already subscribed!"), "success")
 	else:
-		flash("Subscribed to thread", "success")
+		flash(gettext("Subscribed to thread"), "success")
 		thread.watchers.append(current_user)
 		db.session.commit()
 
@@ -76,11 +77,11 @@ def unsubscribe(id):
 		abort(404)
 
 	if current_user in thread.watchers:
-		flash("Unsubscribed!", "success")
+		flash(gettext("Unsubscribed!"), "success")
 		thread.watchers.remove(current_user)
 		db.session.commit()
 	else:
-		flash("Already not subscribed!", "success")
+		flash(gettext("Already not subscribed!"), "success")
 
 	return redirect(thread.getViewURL())
 
@@ -99,10 +100,10 @@ def set_lock(id):
 	msg = None
 	if thread.locked:
 		msg = "Locked thread '{}'".format(thread.title)
-		flash("Locked thread", "success")
+		flash(gettext("Locked thread"), "success")
 	else:
 		msg = "Unlocked thread '{}'".format(thread.title)
-		flash("Unlocked thread", "success")
+		flash(gettext("Unlocked thread"), "success")
 
 	addNotification(thread.watchers, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
 	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.getViewURL(), thread.package)
@@ -151,7 +152,7 @@ def delete_reply(id):
 		abort(404)
 
 	if thread.replies[0] == reply:
-		flash("Cannot delete thread opening post!", "danger")
+		flash(gettext("Cannot delete thread opening post!"), "danger")
 		return redirect(thread.getViewURL())
 
 	if not reply.checkPerm(current_user, Permission.DELETE_REPLY):
@@ -220,11 +221,11 @@ def view(id):
 		comment = request.form["comment"]
 
 		if not thread.checkPerm(current_user, Permission.COMMENT_THREAD):
-			flash("You cannot comment on this thread", "danger")
+			flash(gettext("You cannot comment on this thread"), "danger")
 			return redirect(thread.getViewURL())
 
 		if not current_user.canCommentRL():
-			flash("Please wait before commenting again", "danger")
+			flash(gettext("Please wait before commenting again"), "danger")
 			return redirect(thread.getViewURL())
 
 		if 2000 >= len(comment) > 3:
@@ -252,7 +253,7 @@ def view(id):
 			return redirect(thread.getViewURL())
 
 		else:
-			flash("Comment needs to be between 3 and 2000 characters.")
+			flash(gettext("Comment needs to be between 3 and 2000 characters."), "danger")
 
 	return render_template("threads/view.html", thread=thread)
 
@@ -273,7 +274,7 @@ def new():
 	if "pid" in request.args:
 		package = Package.query.get(int(request.args.get("pid")))
 		if package is None:
-			flash("Unable to find that package!", "danger")
+			flash(gettext("Unable to find that package!"), "danger")
 
 	# Don't allow making orphan threads on approved packages for now
 	if package is None:
@@ -287,16 +288,16 @@ def new():
 
 	# Check that user can make the thread
 	if not package.checkPerm(current_user, Permission.CREATE_THREAD):
-		flash("Unable to create thread!", "danger")
+		flash(gettext("Unable to create thread!"), "danger")
 		return redirect(url_for("homepage.home"))
 
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
-		flash("A review thread already exists!", "danger")
+		flash(gettext("A review thread already exists!"), "danger")
 		return redirect(package.review_thread.getViewURL())
 
 	elif not current_user.canOpenThreadRL():
-		flash("Please wait before opening another thread", "danger")
+		flash(gettext("Please wait before opening another thread"), "danger")
 
 		if package:
 			return redirect(package.getURL("packages.view"))

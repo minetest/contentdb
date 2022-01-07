@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint
+from flask_babel import gettext
 
 bp = Blueprint("github", __name__)
 
@@ -42,7 +43,7 @@ def view_permissions():
 def callback(oauth_token):
 	next_url = request.args.get("next")
 	if oauth_token is None:
-		flash("Authorization failed [err=gh-oauth-login-failed]", "danger")
+		flash(gettext("Authorization failed [err=gh-oauth-login-failed]"), "danger")
 		return redirect(url_for("users.login"))
 
 	# Get Github username
@@ -58,21 +59,21 @@ def callback(oauth_token):
 		if userByGithub is None:
 			current_user.github_username = username
 			db.session.commit()
-			flash("Linked github to account", "success")
+			flash(gettext("Linked github to account"), "success")
 			return redirect(url_for("homepage.home"))
 		else:
-			flash("Github account is already associated with another user", "danger")
+			flash(gettext("Github account is already associated with another user"), "danger")
 			return redirect(url_for("homepage.home"))
 
 	# If not logged in, log in
 	else:
 		if userByGithub is None:
-			flash("Unable to find an account for that Github user", "danger")
+			flash(gettext("Unable to find an account for that Github user"), "danger")
 			return redirect(url_for("users.claim_forums"))
 
 		ret = login_user_set_active(userByGithub, remember=True)
 		if ret is None:
-			flash("Authorization failed [err=gh-login-failed]", "danger")
+			flash(gettext("Authorization failed [err=gh-login-failed]"), "danger")
 			return redirect(url_for("users.login"))
 
 		addAuditLog(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",

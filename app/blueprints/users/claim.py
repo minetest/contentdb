@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+from flask_babel import gettext
 
 from . import bp
 from flask import redirect, render_template, session, request, flash, url_for
@@ -42,16 +43,16 @@ def claim_forums():
 		method = request.args.get("method")
 
 		if not check_username(username):
-			flash("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin", "danger")
+			flash(gettext("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin"), "danger")
 			return redirect(url_for("users.claim_forums"))
 
 		user = User.query.filter_by(forums_username=username).first()
 		if user and user.rank.atLeast(UserRank.NEW_MEMBER):
-			flash("User has already been claimed", "danger")
+			flash(gettext("User has already been claimed"), "danger")
 			return redirect(url_for("users.claim_forums"))
 		elif method == "github":
 			if user is None or user.github_username is None:
-				flash("Unable to get GitHub username for user", "danger")
+				flash(gettext("Unable to get GitHub username for user"), "danger")
 				return redirect(url_for("users.claim_forums", username=username))
 			else:
 				return redirect(url_for("github.start"))
@@ -67,14 +68,14 @@ def claim_forums():
 		username = request.form.get("username")
 
 		if not check_username(username):
-			flash("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin", "danger")
+			flash(gettext("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin"), "danger")
 		elif ctype == "github":
 			task = checkForumAccount.delay(username)
 			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.claim_forums", username=username, method="github")))
 		elif ctype == "forum":
 			user = User.query.filter_by(forums_username=username).first()
 			if user is not None and user.rank.atLeast(UserRank.NEW_MEMBER):
-				flash("That user has already been claimed!", "danger")
+				flash(gettext("That user has already been claimed!"), "danger")
 				return redirect(url_for("users.claim_forums"))
 
 			# Get signature
@@ -88,11 +89,11 @@ def claim_forums():
 				else:
 					message = str(e)
 
-				flash("Error whilst attempting to access forums: " + message, "danger")
+				flash(gettext(u"Error whilst attempting to access forums: %(message)s", message=message), "danger")
 				return redirect(url_for("users.claim_forums", username=username))
 
 			if profile is None:
-				flash("Unable to get forum signature - does the user exist?", "danger")
+				flash(gettext("Unable to get forum signature - does the user exist?"), "danger")
 				return redirect(url_for("users.claim_forums", username=username))
 
 			# Look for key
@@ -107,15 +108,15 @@ def claim_forums():
 
 				ret = login_user_set_active(user, remember=True)
 				if ret is None:
-					flash("Unable to login as user", "danger")
+					flash(gettext("Unable to login as user"), "danger")
 					return redirect(url_for("users.claim_forums", username=username))
 
 				return ret
 
 			else:
-				flash("Could not find the key in your signature!", "danger")
+				flash(gettext("Could not find the key in your signature!"), "danger")
 				return redirect(url_for("users.claim_forums", username=username))
 		else:
-			flash("Unknown claim type", "danger")
+			flash(gettext("Unknown claim type"), "danger")
 
 	return render_template("users/claim_forums.html", username=username, key="cdb_" + token)

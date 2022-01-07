@@ -15,6 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from collections import namedtuple
 
+from flask_babel import gettext
+
 from . import bp
 
 from flask import *
@@ -47,7 +49,7 @@ class ReviewForm(FlaskForm):
 @is_package_page
 def review(package):
 	if current_user in package.maintainers:
-		flash("You can't review your own package!", "danger")
+		flash(gettext("You can't review your own package!"), "danger")
 		return redirect(package.getURL("packages.view"))
 
 	review = PackageReview.query.filter_by(package=package, author=current_user).first()
@@ -151,7 +153,7 @@ def delete_review(package):
 
 def handle_review_vote(package: Package, review_id: int):
 	if current_user in package.maintainers:
-		flash("You can't vote on the reviews on your own package!", "danger")
+		flash(gettext("You can't vote on the reviews on your own package!"), "danger")
 		return
 
 	review: PackageReview = PackageReview.query.get(review_id)
@@ -159,7 +161,7 @@ def handle_review_vote(package: Package, review_id: int):
 		abort(404)
 
 	if review.author == current_user:
-		flash("You can't vote on your own reviews!", "danger")
+		flash(gettext("You can't vote on your own reviews!"), "danger")
 		return
 
 	is_positive = isYes(request.form["is_positive"])

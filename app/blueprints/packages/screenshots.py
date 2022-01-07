@@ -16,6 +16,7 @@
 
 
 from flask import *
+from flask_babel import gettext
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from wtforms import *
@@ -135,7 +136,7 @@ def delete_screenshot(package, id):
 		abort(404)
 
 	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
-		flash("Permission denied", "danger")
+		flash(gettext("Permission denied"), "danger")
 		return redirect(url_for("homepage.home"))
 
 	if package.cover_image == screenshot:

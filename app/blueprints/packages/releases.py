@@ -16,6 +16,7 @@
 
 
 from flask import *
+from flask_babel import gettext
 from flask_login import login_required
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -278,7 +279,7 @@ def update_config(package):
 		abort(403)
 
 	if not package.repo:
-		flash("Please add a Git repository URL in order to set up automatic releases", "danger")
+		flash(gettext("Please add a Git repository URL in order to set up automatic releases"), "danger")
 		return redirect(package.getURL("packages.create_edit"))
 
 	form = PackageUpdateConfigFrom(obj=package.update_config)
@@ -294,7 +295,7 @@ def update_config(package):
 
 	if form.validate_on_submit():
 		if form.disable.data:
-			flash("Deleted update configuration", "success")
+			flash(gettext("Deleted update configuration"), "success")
 			if package.update_config:
 				db.session.delete(package.update_config)
 			db.session.commit()
@@ -302,7 +303,7 @@ def update_config(package):
 			set_update_config(package, form)
 
 		if not form.disable.data and package.releases.count() == 0:
-			flash("Now, please create an initial release", "success")
+			flash(gettext("Now, please create an initial release"), "success")
 			return redirect(package.getURL("packages.create_release"))
 
 		return redirect(package.getURL("packages.list_releases"))

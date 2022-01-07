@@ -18,7 +18,7 @@
 from urllib.parse import quote as urlescape
 
 from flask import render_template
-from flask_babel import lazy_gettext
+from flask_babel import lazy_gettext, gettext
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from sqlalchemy import or_, func
@@ -156,16 +156,16 @@ def view(package):
 	if package.state != PackageState.APPROVED and package.forums is not None:
 		errors = []
 		if Package.query.filter(Package.forums==package.forums, Package.state!=PackageState.DELETED).count() > 1:
-			errors.append("<b>Error: Another package already uses this forum topic!</b>")
+			errors.append("<b>" + gettext("Error: Another package already uses this forum topic!") + "</b>")
 			topic_error_lvl = "danger"
 
 		topic = ForumTopic.query.get(package.forums)
 		if topic is not None:
 			if topic.author != package.author:
-				errors.append("<b>Error: Forum topic author doesn't match package author.</b>")
+				errors.append("<b>" + gettext("Error: Forum topic author doesn't match package author.") + "</b>")
 				topic_error_lvl = "danger"
 		elif package.type != PackageType.TXP:
-			errors.append("Warning: Forum topic not found. This may happen if the topic has only just been created.")
+			errors.append(gettext("Warning: Forum topic not found. This may happen if the topic has only just been created."))
 
 		topic_error = "<br />".join(errors)
 
@@ -212,7 +212,7 @@ def download(package):
 				not "text/html" in request.accept_mimetypes:
 			return "", 204
 		else:
-			flash("No download available.", "danger")
+			flash(gettext("No download available."), "danger")
 			return redirect(package.getURL("packages.view"))
 	else:
 		return redirect(release.getDownloadURL())
@@ -261,11 +261,11 @@ def create_edit(author=None, name=None):
 		else:
 			author = User.query.filter_by(username=author).first()
 			if author is None:
-				flash("Unable to find that user", "danger")
+				flash(gettext("Unable to find that user"), "danger")
 				return redirect(url_for("packages.create_edit"))
 
 			if not author.checkPerm(current_user, Permission.CHANGE_AUTHOR):
-				flash("Permission denied", "danger")
+				flash(gettext("Permission denied"), "danger")
 				return redirect(url_for("packages.create_edit"))
 
 	else:
@@ -303,7 +303,7 @@ def create_edit(author=None, name=None):
 				if package.state == PackageState.READY_FOR_REVIEW:
 					Package.query.filter_by(name=form["name"].data, author_id=author.id).delete()
 				else:
-					flash("Package already exists!", "danger")
+					flash(gettext("Package already exists!"), "danger")
 					return redirect(url_for("packages.create_edit"))
 
 			package = Package()
@@ -363,7 +363,7 @@ def move_to_state(package):
 		abort(400)
 
 	if not package.canMoveToState(current_user, state):
-		flash("You don't have permission to do that", "danger")
+		flash(gettext("You don't have permission to do that"), "danger")
 		return redirect(package.getURL("packages.view"))
 
 	package.state = state
@@ -391,7 +391,7 @@ def move_to_state(package):
 	db.session.commit()
 
 	if package.state == PackageState.CHANGES_NEEDED:
-		flash("Please comment what changes are needed in the review thread", "warning")
+		flash(gettext("Please comment what changes are needed in the review thread"), "warning")
 		if package.review_thread:
 			return redirect(package.review_thread.getViewURL())
 		else:
@@ -410,7 +410,7 @@ def remove(package):
 
 	if "delete" in request.form:
 		if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
-			flash("You don't have permission to do that.", "danger")
+			flash(gettext("You don't have permission to do that."), "danger")
 			return redirect(package.getURL("packages.view"))
 
 		package.state = PackageState.DELETED
@@ -421,12 +421,12 @@ def remove(package):
 		addAuditLog(AuditSeverity.EDITOR, current_user, msg, url)
 		db.session.commit()
 
-		flash("Deleted package", "success")
+		flash(gettext("Deleted package"), "success")
 
 		return redirect(url)
 	elif "unapprove" in request.form:
 		if not package.checkPerm(current_user, Permission.UNAPPROVE_PACKAGE):
-			flash("You don't have permission to do that.", "danger")
+			flash(gettext("You don't have permission to do that."), "danger")
 			return redirect(package.getURL("packages.view"))
 
 		package.state = PackageState.WIP
@@ -437,7 +437,7 @@ def remove(package):
 
 		db.session.commit()
 
-		flash("Unapproved package", "success")
+		flash(gettext("Unapproved package"), "success")
 
 		return redirect(package.getURL("packages.view"))
 	else:
@@ -455,7 +455,7 @@ class PackageMaintainersForm(FlaskForm):
 @is_package_page
 def edit_maintainers(package):
 	if not package.checkPerm(current_user, Permission.EDIT_MAINTAINERS):
-		flash("You do not have permission to edit maintainers", "danger")
+		flash(gettext("You do not have permission to edit maintainers"), "danger")
 		return redirect(package.getURL("packages.view"))
 
 	form = PackageMaintainersForm(formdata=request.form)
@@ -505,10 +505,10 @@ def edit_maintainers(package):
 @is_package_page
 def remove_self_maintainers(package):
 	if not current_user in package.maintainers:
-		flash("You are not a maintainer", "danger")
+		flash(gettext("You are not a maintainer"), "danger")
 
 	elif current_user == package.author:
-		flash("Package owners cannot remove themselves as maintainers", "danger")
+		flash(gettext("Package owners cannot remove themselves as maintainers"), "danger")
 
 	else:
 		package.maintainers.remove(current_user)

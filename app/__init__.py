@@ -96,7 +96,7 @@ def flatpage(path):
 def check_for_ban():
 	if current_user.is_authenticated:
 		if current_user.rank == models.UserRank.BANNED:
-			flash("You have been banned.", "danger")
+			flash(gettext("You have been banned."), "danger")
 			logout_user()
 			return redirect(url_for("users.login"))
 		elif current_user.rank == models.UserRank.NOT_JOINED:
