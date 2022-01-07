@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-07 21:18+0000\n"
+"POT-Creation-Date: 2022-01-07 21:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,9 +17,75 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.9.1\n"
 
+#: app/__init__.py:99
+msgid "You have been banned."
+msgstr ""
+
 #: app/template_filters.py:52
 #, python-format
 msgid "%(delta)s ago"
+msgstr ""
+
+#: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
+#: app/templates/admin/warnings/list.html:20
+#: app/templates/metapackages/list.html:12
+msgid "Name"
+msgstr ""
+
+#: app/blueprints/api/tokens.py:34
+msgid "Limit to package"
+msgstr ""
+
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:248
+#: app/blueprints/packages/packages.py:450
+#: app/blueprints/packages/packages.py:546
+#: app/blueprints/packages/releases.py:60
+#: app/blueprints/packages/releases.py:71 app/blueprints/packages/reviews.py:46
+#: app/blueprints/packages/screenshots.py:35
+#: app/blueprints/packages/screenshots.py:41
+#: app/blueprints/packages/screenshots.py:46
+#: app/blueprints/users/account.py:237 app/blueprints/users/account.py:244
+#: app/blueprints/users/settings.py:44 app/blueprints/users/settings.py:106
+#: app/blueprints/users/settings.py:204
+msgid "Save"
+msgstr ""
+
+#: app/blueprints/github/__init__.py:46
+msgid "Authorization failed [err=gh-oauth-login-failed]"
+msgstr ""
+
+#: app/blueprints/github/__init__.py:62
+msgid "Linked github to account"
+msgstr ""
+
+#: app/blueprints/github/__init__.py:65
+msgid "Github account is already associated with another user"
+msgstr ""
+
+#: app/blueprints/github/__init__.py:71
+msgid "Unable to find an account for that Github user"
+msgstr ""
+
+#: app/blueprints/github/__init__.py:76
+msgid "Authorization failed [err=gh-login-failed]"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:159
+msgid "Error: Another package already uses this forum topic!"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:165
+msgid "Error: Forum topic author doesn't match package author."
+msgstr ""
+
+#: app/blueprints/packages/packages.py:168
+msgid ""
+"Warning: Forum topic not found. This may happen if the topic has only "
+"just been created."
+msgstr ""
+
+#: app/blueprints/packages/packages.py:215
+msgid "No download available."
 msgstr ""
 
 #: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:384
@@ -31,10 +97,12 @@ msgid "Title (Human-readable)"
 msgstr ""
 
 #: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:544
 msgid "Name (Technical)"
 msgstr ""
 
 #: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:545
 #: app/templates/packages/create_edit.html:76
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr ""
@@ -72,7 +140,7 @@ msgstr ""
 msgid "VCS Repository URL"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:244
+#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:42
 msgid "Website URL"
 msgstr ""
 
@@ -84,8 +152,465 @@ msgstr ""
 msgid "Forum Topic ID"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:248
-msgid "Save"
+#: app/blueprints/packages/packages.py:264
+msgid "Unable to find that user"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:268
+#: app/blueprints/packages/screenshots.py:139
+#: app/blueprints/users/settings.py:90 app/blueprints/users/settings.py:215
+msgid "Permission denied"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:306
+msgid "Package already exists!"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:366
+msgid "You don't have permission to do that"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:394
+msgid "Please comment what changes are needed in the review thread"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:413
+#: app/blueprints/packages/packages.py:429
+msgid "You don't have permission to do that."
+msgstr ""
+
+#: app/blueprints/packages/packages.py:424
+msgid "Deleted package"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:440
+msgid "Unapproved package"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:449
+msgid "Maintainers (Comma-separated)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:458
+msgid "You do not have permission to edit maintainers"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:508
+msgid "You are not a maintainer"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:511
+msgid "Package owners cannot remove themselves as maintainers"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:543
+msgid "Author Name"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:52
+#: app/blueprints/packages/releases.py:63 app/blueprints/packages/reviews.py:42
+#: app/blueprints/threads/__init__.py:262 app/templates/macros/reviews.html:128
+msgid "Title"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:53
+msgid "Method"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:54
+msgid "Git reference (ie: commit hash, branch, or tag)"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:55
+#: app/blueprints/packages/screenshots.py:34
+msgid "File Upload"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:56
+#: app/blueprints/packages/releases.py:67
+#: app/blueprints/packages/releases.py:183
+msgid "Minimum Minetest Version"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:58
+#: app/blueprints/packages/releases.py:69
+#: app/blueprints/packages/releases.py:186
+msgid "Maximum Minetest Version"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:64
+msgid "URL"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:65
+msgid "Task ID"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:66
+#: app/blueprints/packages/screenshots.py:40
+msgid "Is Approved"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:182
+msgid "Set Min"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:185
+msgid "Set Max"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:188
+msgid "Only change values previously set as none"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:189
+msgid "Update"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:238
+msgid "Trigger"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:240
+msgid "Branch name"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:241
+msgid "Action"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:242
+msgid "Send notification and mark as outdated"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:242
+msgid "Create release"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:244
+msgid "Save Settings"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:245
+msgid "Disable Automation"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:284
+msgid "Please add a Git repository URL in order to set up automatic releases"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:300
+msgid "Deleted update configuration"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:308
+msgid "Now, please create an initial release"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:43 app/blueprints/threads/__init__.py:174
+#: app/blueprints/threads/__init__.py:175
+#: app/blueprints/threads/__init__.py:263
+msgid "Comment"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:264
+msgid "Private"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:45 app/templates/macros/reviews.html:115
+#: app/templates/macros/reviews.html:154
+msgid "Yes"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:45 app/templates/macros/reviews.html:119
+#: app/templates/macros/reviews.html:158
+msgid "No"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:53
+msgid "You can't review your own package!"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:157
+msgid "You can't vote on the reviews on your own package!"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:165
+msgid "You can't vote on your own reviews!"
+msgstr ""
+
+#: app/blueprints/packages/screenshots.py:33
+#: app/blueprints/packages/screenshots.py:39
+msgid "Title/Caption"
+msgstr ""
+
+#: app/blueprints/packages/screenshots.py:45
+#: app/templates/packages/screenshots.html:71
+msgid "Cover Image"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:63
+msgid "Already subscribed!"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:65
+msgid "Subscribed to thread"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:80
+msgid "Unsubscribed!"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:84
+msgid "Already not subscribed!"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:103
+msgid "Locked thread"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:106
+msgid "Unlocked thread"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:155
+msgid "Cannot delete thread opening post!"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:224
+msgid "You cannot comment on this thread"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:228
+msgid "Please wait before commenting again"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:256
+msgid "Comment needs to be between 3 and 2000 characters."
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:265
+msgid "Open Thread"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:277
+msgid "Unable to find that package!"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:291
+msgid "Unable to create thread!"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:296
+msgid "A review thread already exists!"
+msgstr ""
+
+#: app/blueprints/threads/__init__.py:300
+msgid "Please wait before opening another thread"
+msgstr ""
+
+#: app/blueprints/users/account.py:36 app/templates/users/login.html:15
+msgid "Username or email"
+msgstr ""
+
+#: app/blueprints/users/account.py:37 app/blueprints/users/account.py:106
+#: app/templates/users/account.html:37 app/templates/users/login.html:16
+msgid "Password"
+msgstr ""
+
+#: app/blueprints/users/account.py:38
+msgid "Remember me"
+msgstr ""
+
+#: app/blueprints/users/account.py:39 app/templates/base.html:165
+msgid "Sign in"
+msgstr ""
+
+#: app/blueprints/users/account.py:45
+msgid "Incorrect email or password"
+msgstr ""
+
+#: app/blueprints/users/account.py:53
+#, python-format
+msgid "User %(username)s does not exist"
+msgstr ""
+
+#: app/blueprints/users/account.py:56
+msgid "Incorrect password. Did you set one?"
+msgstr ""
+
+#: app/blueprints/users/account.py:59
+msgid "You need to confirm the registration email"
+msgstr ""
+
+#: app/blueprints/users/account.py:67
+msgid "Login failed"
+msgstr ""
+
+#: app/blueprints/users/account.py:102 app/blueprints/users/settings.py:41
+msgid "Display Name"
+msgstr ""
+
+#: app/blueprints/users/account.py:103 app/blueprints/users/settings.py:198
+#: app/templates/users/list.html:18
+msgid "Username"
+msgstr ""
+
+#: app/blueprints/users/account.py:104 app/templates/users/register.html:16
+msgid "Only a-zA-Z0-9._ allowed"
+msgstr ""
+
+#: app/blueprints/users/account.py:105 app/blueprints/users/account.py:184
+#: app/blueprints/users/account.py:233 app/blueprints/users/account.py:384
+#: app/blueprints/users/settings.py:105
+msgid "Email"
+msgstr ""
+
+#: app/blueprints/users/account.py:107
+msgid "What is the result of the above calculation?"
+msgstr ""
+
+#: app/blueprints/users/account.py:108
+msgid "I agree"
+msgstr ""
+
+#: app/blueprints/users/account.py:109 app/templates/users/login.html:34
+#: app/templates/users/register.html:11
+msgid "Register"
+msgstr ""
+
+#: app/blueprints/users/account.py:114
+msgid "Incorrect captcha answer"
+msgstr ""
+
+#: app/blueprints/users/account.py:125
+msgid "An account already exists for that username but hasn't been claimed yet."
+msgstr ""
+
+#: app/blueprints/users/account.py:128 app/blueprints/users/account.py:135
+msgid "That username/display name is already in use, please choose another."
+msgstr ""
+
+#: app/blueprints/users/account.py:141 app/blueprints/users/account.py:268
+#, python-format
+msgid ""
+"We were unable to create the account as the email is already in use by "
+"%(display_name)s. Try a different email address."
+msgstr ""
+
+#: app/blueprints/users/account.py:145 app/blueprints/users/account.py:262
+msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
+msgstr ""
+
+#: app/blueprints/users/account.py:185
+msgid "Reset Password"
+msgstr ""
+
+#: app/blueprints/users/account.py:234 app/blueprints/users/account.py:241
+msgid "New password"
+msgstr ""
+
+#: app/blueprints/users/account.py:235 app/blueprints/users/account.py:242
+msgid "Verify password"
+msgstr ""
+
+#: app/blueprints/users/account.py:236 app/blueprints/users/account.py:243
+msgid "Passwords must match"
+msgstr ""
+
+#: app/blueprints/users/account.py:240
+msgid "Old password"
+msgstr ""
+
+#: app/blueprints/users/account.py:251
+msgid "Passwords do not much"
+msgstr ""
+
+#: app/blueprints/users/account.py:282 app/blueprints/users/account.py:286
+msgid "Your password has been changed successfully."
+msgstr ""
+
+#: app/blueprints/users/account.py:301
+msgid "Old password is incorrect"
+msgstr ""
+
+#: app/blueprints/users/account.py:331
+msgid "Unknown verification token!"
+msgstr ""
+
+#: app/blueprints/users/account.py:337
+msgid "Token has expired"
+msgstr ""
+
+#: app/blueprints/users/account.py:351
+msgid "Another user is already using that email"
+msgstr ""
+
+#: app/blueprints/users/account.py:354
+msgid "Confirmed email change"
+msgstr ""
+
+#: app/blueprints/users/account.py:358
+msgid "Email address changed"
+msgstr ""
+
+#: app/blueprints/users/account.py:359
+msgid ""
+"Your email address has changed. If you didn't request this, please "
+"contact an administrator."
+msgstr ""
+
+#: app/blueprints/users/account.py:377
+msgid "You may now log in"
+msgstr ""
+
+#: app/blueprints/users/account.py:385
+msgid "Send"
+msgstr ""
+
+#: app/blueprints/users/account.py:416
+msgid ""
+"That email is now blacklisted. Please contact an admin if you wish to "
+"undo this."
+msgstr ""
+
+#: app/blueprints/users/claim.py:46 app/blueprints/users/claim.py:71
+msgid ""
+"Invalid username - must only contain A-Za-z0-9._. Consider contacting an "
+"admin"
+msgstr ""
+
+#: app/blueprints/users/claim.py:51
+msgid "User has already been claimed"
+msgstr ""
+
+#: app/blueprints/users/claim.py:55
+msgid "Unable to get GitHub username for user"
+msgstr ""
+
+#: app/blueprints/users/claim.py:78
+msgid "That user has already been claimed!"
+msgstr ""
+
+#: app/blueprints/users/claim.py:92
+#, python-format
+msgid "Error whilst attempting to access forums: %(message)s"
+msgstr ""
+
+#: app/blueprints/users/claim.py:96
+msgid "Unable to get forum signature - does the user exist?"
+msgstr ""
+
+#: app/blueprints/users/claim.py:111
+msgid "Unable to login as user"
+msgstr ""
+
+#: app/blueprints/users/claim.py:117
+msgid "Could not find the key in your signature!"
+msgstr ""
+
+#: app/blueprints/users/claim.py:120
+msgid "Unknown claim type"
 msgstr ""
 
 #: app/blueprints/users/profile.py:112
@@ -172,6 +697,38 @@ msgstr ""
 #: app/blueprints/users/profile.py:203
 #, python-format
 msgid "Has received %(downloads)d downloads across all packages."
+msgstr ""
+
+#: app/blueprints/users/settings.py:43
+msgid "Donation URL"
+msgstr ""
+
+#: app/blueprints/users/settings.py:57 app/blueprints/users/settings.py:63
+msgid "A user already has that name"
+msgstr ""
+
+#: app/blueprints/users/settings.py:199
+msgid "Display name"
+msgstr ""
+
+#: app/blueprints/users/settings.py:200
+msgid "Forums Username"
+msgstr ""
+
+#: app/blueprints/users/settings.py:201
+msgid "GitHub Username"
+msgstr ""
+
+#: app/blueprints/users/settings.py:202 app/templates/users/list.html:14
+msgid "Rank"
+msgstr ""
+
+#: app/blueprints/users/settings.py:249
+msgid "Can't promote a user to a rank higher than yourself!"
+msgstr ""
+
+#: app/blueprints/users/settings.py:266
+msgid "Users with moderator rank or above cannot be deleted"
 msgstr ""
 
 #: app/templates/404.html:4
@@ -272,10 +829,6 @@ msgstr ""
 
 #: app/templates/base.html:161
 msgid "Sign out"
-msgstr ""
-
-#: app/templates/base.html:165
-msgid "Sign in"
 msgstr ""
 
 #: app/templates/base.html:240
@@ -419,12 +972,6 @@ msgstr ""
 
 #: app/templates/admin/tags/list.html:8
 msgid "New Tag"
-msgstr ""
-
-#: app/templates/admin/tags/list.html:26
-#: app/templates/admin/warnings/list.html:20
-#: app/templates/metapackages/list.html:12
-msgid "Name"
 msgstr ""
 
 #: app/templates/admin/tags/list.html:30
@@ -587,21 +1134,9 @@ msgstr ""
 msgid "Do you recommend this %(type)s?"
 msgstr ""
 
-#: app/templates/macros/reviews.html:115 app/templates/macros/reviews.html:154
-msgid "Yes"
-msgstr ""
-
-#: app/templates/macros/reviews.html:119 app/templates/macros/reviews.html:158
-msgid "No"
-msgstr ""
-
 #: app/templates/macros/reviews.html:124
 #: app/templates/packages/review_create_edit.html:40
 msgid "Why or why not? Try to be constructive"
-msgstr ""
-
-#: app/templates/macros/reviews.html:128
-msgid "Title"
 msgstr ""
 
 #: app/templates/macros/reviews.html:133
@@ -998,10 +1533,6 @@ msgstr ""
 msgid "Reordering requires JavaScript."
 msgstr ""
 
-#: app/templates/packages/screenshots.html:71
-msgid "Cover Image"
-msgstr ""
-
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
@@ -1276,10 +1807,6 @@ msgstr ""
 msgid "Edit Account"
 msgstr ""
 
-#: app/templates/users/account.html:37 app/templates/users/login.html:16
-msgid "Password"
-msgstr ""
-
 #: app/templates/users/account.html:46
 msgid "Has password"
 msgstr ""
@@ -1370,21 +1897,9 @@ msgstr ""
 msgid "Users"
 msgstr ""
 
-#: app/templates/users/list.html:14
-msgid "Rank"
-msgstr ""
-
-#: app/templates/users/list.html:18
-msgid "Username"
-msgstr ""
-
 #: app/templates/users/list.html:34
 #, python-format
 msgid "Rank: %(rank)s."
-msgstr ""
-
-#: app/templates/users/login.html:15
-msgid "Username or email"
 msgstr ""
 
 #: app/templates/users/login.html:20
@@ -1393,10 +1908,6 @@ msgstr ""
 
 #: app/templates/users/login.html:30 app/templates/users/profile.html:64
 msgid "GitHub"
-msgstr ""
-
-#: app/templates/users/login.html:34 app/templates/users/register.html:11
-msgid "Register"
 msgstr ""
 
 #: app/templates/users/profile.html:17 app/templates/users/profile_edit.html:8
@@ -1459,10 +1970,6 @@ msgstr ""
 
 #: app/templates/users/profile_edit.html:52
 msgid "Pretending to be another user is grounds for a permanent ban"
-msgstr ""
-
-#: app/templates/users/register.html:16
-msgid "Only a-zA-Z0-9._ allowed"
 msgstr ""
 
 #: app/templates/users/register.html:17
@@ -1532,5 +2039,15 @@ msgstr ""
 
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
+msgstr ""
+
+#: app/utils/user.py:50
+msgid "You have a lot of notifications, you should either read or clear them"
+msgstr ""
+
+#: app/utils/user.py:54
+msgid ""
+"Please consider enabling email notifications, you can customise how much "
+"is sent"
 msgstr ""
 
