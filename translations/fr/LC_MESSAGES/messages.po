@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-07 21:08+0000\n"
+"POT-Creation-Date: 2022-01-07 21:18+0000\n"
 "PO-Revision-Date: 2022-01-04 21:25+0000\n"
 "Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
 "Language: fr\n"
@@ -23,6 +23,78 @@ msgstr ""
 #, python-format
 msgid "%(delta)s ago"
 msgstr "il y a %(delta)s"
+
+#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:384
+msgid "Type"
+msgstr "Type"
+
+#: app/blueprints/packages/packages.py:230
+msgid "Title (Human-readable)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:231
+msgid "Name (Technical)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:231
+#: app/templates/packages/create_edit.html:76
+msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
+msgstr ""
+"Lettres minuscules (a-z), chiffres (0-9) et caractères de soulignement "
+"(_) uniquement"
+
+#: app/blueprints/packages/packages.py:232
+msgid "Short Description (Plaintext)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:399
+msgid "Maintenance State"
+msgstr "État d'entretien"
+
+#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
+#: app/templates/admin/tags/list.html:10
+msgid "Tags"
+msgstr "Étiquettes"
+
+#: app/blueprints/packages/packages.py:237
+msgid "Content Warnings"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:388
+msgid "License"
+msgstr "Licence"
+
+#: app/blueprints/packages/packages.py:239
+#, fuzzy
+msgid "Media License"
+msgstr "Ajouter une Licence"
+
+#: app/blueprints/packages/packages.py:241
+msgid "Long Description (Markdown)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:243
+msgid "VCS Repository URL"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:244
+#, fuzzy
+msgid "Website URL"
+msgstr "Site web"
+
+#: app/blueprints/packages/packages.py:245
+#, fuzzy
+msgid "Issue Tracker URL"
+msgstr "Suivi des problèmes"
+
+#: app/blueprints/packages/packages.py:246
+#, fuzzy
+msgid "Forum Topic ID"
+msgstr "Sujets du forum"
+
+#: app/blueprints/packages/packages.py:248
+msgid "Save"
+msgstr ""
 
 #: app/blueprints/users/profile.py:112
 msgid "Top reviewer"
@@ -150,6 +222,11 @@ msgstr "Fils"
 #, fuzzy, python-format
 msgid "Search %(type)s"
 msgstr "Top %(type)s"
+
+#: app/templates/base.html:48 app/templates/todo/tags.html:11
+#: app/templates/todo/tags.html:13
+msgid "Search all packages"
+msgstr "Rechercher dans tous les paquets"
 
 #: app/templates/base.html:50 app/templates/todo/tags.html:15
 msgid "Search"
@@ -354,10 +431,6 @@ msgstr "Ajouter une Licence"
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
 msgstr "Licences"
-
-#: app/templates/admin/tags/list.html:4 app/templates/admin/tags/list.html:10
-msgid "Tags"
-msgstr "Étiquettes"
 
 #: app/templates/admin/tags/list.html:8
 msgid "New Tag"
@@ -710,12 +783,6 @@ msgstr "Paquet"
 #: app/templates/packages/create_edit.html:74
 msgid "Please open a thread to request a name change"
 msgstr ""
-
-#: app/templates/packages/create_edit.html:76
-msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr ""
-"Lettres minuscules (a-z), chiffres (0-9) et caractères de soulignement "
-"(_) uniquement"
 
 #: app/templates/packages/create_edit.html:80
 msgid ""
@@ -1112,21 +1179,9 @@ msgstr "Optionnel"
 msgid "Information"
 msgstr "Informations"
 
-#: app/templates/packages/view.html:384
-msgid "Type"
-msgstr "Type"
-
 #: app/templates/packages/view.html:386
 msgid "Technical Name"
 msgstr "Nom technique"
-
-#: app/templates/packages/view.html:388
-msgid "License"
-msgstr "Licence"
-
-#: app/templates/packages/view.html:399
-msgid "Maintenance State"
-msgstr "État d'entretien"
 
 #: app/templates/packages/view.html:405
 msgid "Added"
@@ -1177,10 +1232,6 @@ msgstr "Tous les paquets obsolètes"
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
 msgstr "Étiquettes de paquet"
-
-#: app/templates/todo/tags.html:11 app/templates/todo/tags.html:13
-msgid "Search all packages"
-msgstr "Rechercher dans tous les paquets"
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
 msgid "Missing tags only"

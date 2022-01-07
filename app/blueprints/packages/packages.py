@@ -18,6 +18,7 @@
 from urllib.parse import quote as urlescape
 
 from flask import render_template
+from flask_babel import lazy_gettext
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from sqlalchemy import or_, func
@@ -225,26 +226,26 @@ def makeLabel(obj):
 
 
 class PackageForm(FlaskForm):
-	type             = SelectField("Type", [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
-	title            = StringField("Title (Human-readable)", [InputRequired(), Length(1, 100)])
-	name             = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	short_desc       = StringField("Short Description (Plaintext)", [InputRequired(), Length(1,200)])
+	type             = SelectField(lazy_gettext("Type"), [InputRequired()], choices=PackageType.choices(), coerce=PackageType.coerce, default=PackageType.MOD)
+	title            = StringField(lazy_gettext("Title (Human-readable)"), [InputRequired(), Length(1, 100)])
+	name             = StringField(lazy_gettext("Name (Technical)"), [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, lazy_gettext("Lower case letters (a-z), digits (0-9), and underscores (_) only"))])
+	short_desc       = StringField(lazy_gettext("Short Description (Plaintext)"), [InputRequired(), Length(1,200)])
 
-	dev_state        = SelectField("Maintenance State", [InputRequired()], choices=PackageDevState.choices(with_none=True), coerce=PackageDevState.coerce)
+	dev_state        = SelectField(lazy_gettext("Maintenance State"), [InputRequired()], choices=PackageDevState.choices(with_none=True), coerce=PackageDevState.coerce)
 
-	tags             = QuerySelectMultipleField('Tags', query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
-	content_warnings = QuerySelectMultipleField('Content Warnings', query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)
-	license          = QuerySelectField("License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	media_license    = QuerySelectField("Media License", [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	tags             = QuerySelectMultipleField(lazy_gettext('Tags'), query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
+	content_warnings = QuerySelectMultipleField(lazy_gettext('Content Warnings'), query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)
+	license          = QuerySelectField(lazy_gettext("License"), [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	media_license    = QuerySelectField(lazy_gettext("Media License"), [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 
-	desc             = TextAreaField("Long Description (Markdown)", [Optional(), Length(0,10000)])
+	desc             = TextAreaField(lazy_gettext("Long Description (Markdown)"), [Optional(), Length(0,10000)])
 
-	repo             = StringField("VCS Repository URL", [Optional(), URL()], filters = [lambda x: x or None])
-	website          = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
-	issueTracker     = StringField("Issue Tracker URL", [Optional(), URL()], filters = [lambda x: x or None])
-	forums           = IntegerField("Forum Topic ID", [Optional(), NumberRange(0,999999)])
+	repo             = StringField(lazy_gettext("VCS Repository URL"), [Optional(), URL()], filters = [lambda x: x or None])
+	website          = StringField(lazy_gettext("Website URL"), [Optional(), URL()], filters = [lambda x: x or None])
+	issueTracker     = StringField(lazy_gettext("Issue Tracker URL"), [Optional(), URL()], filters = [lambda x: x or None])
+	forums           = IntegerField(lazy_gettext("Forum Topic ID"), [Optional(), NumberRange(0,999999)])
 
-	submit           = SubmitField("Save")
+	submit           = SubmitField(lazy_gettext("Save"))
 
 
 @bp.route("/packages/new/", methods=["GET", "POST"])

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-07 21:08+0000\n"
+"POT-Creation-Date: 2022-01-07 21:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,6 +20,72 @@ msgstr ""
 #: app/template_filters.py:52
 #, python-format
 msgid "%(delta)s ago"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:384
+msgid "Type"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:230
+msgid "Title (Human-readable)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:231
+msgid "Name (Technical)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:231
+#: app/templates/packages/create_edit.html:76
+msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:232
+msgid "Short Description (Plaintext)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:399
+msgid "Maintenance State"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
+#: app/templates/admin/tags/list.html:10
+msgid "Tags"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:237
+msgid "Content Warnings"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:388
+msgid "License"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:239
+msgid "Media License"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:241
+msgid "Long Description (Markdown)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:243
+msgid "VCS Repository URL"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:244
+msgid "Website URL"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:245
+msgid "Issue Tracker URL"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:246
+msgid "Forum Topic ID"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:248
+msgid "Save"
 msgstr ""
 
 #: app/blueprints/users/profile.py:112
@@ -145,6 +211,11 @@ msgstr ""
 #: app/templates/base.html:48
 #, python-format
 msgid "Search %(type)s"
+msgstr ""
+
+#: app/templates/base.html:48 app/templates/todo/tags.html:11
+#: app/templates/todo/tags.html:13
+msgid "Search all packages"
 msgstr ""
 
 #: app/templates/base.html:50 app/templates/todo/tags.html:15
@@ -344,10 +415,6 @@ msgstr ""
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr ""
-
-#: app/templates/admin/tags/list.html:4 app/templates/admin/tags/list.html:10
-msgid "Tags"
 msgstr ""
 
 #: app/templates/admin/tags/list.html:8
@@ -683,10 +750,6 @@ msgstr ""
 
 #: app/templates/packages/create_edit.html:74
 msgid "Please open a thread to request a name change"
-msgstr ""
-
-#: app/templates/packages/create_edit.html:76
-msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr ""
 
 #: app/templates/packages/create_edit.html:80
@@ -1065,20 +1128,8 @@ msgstr ""
 msgid "Information"
 msgstr ""
 
-#: app/templates/packages/view.html:384
-msgid "Type"
-msgstr ""
-
 #: app/templates/packages/view.html:386
 msgid "Technical Name"
-msgstr ""
-
-#: app/templates/packages/view.html:388
-msgid "License"
-msgstr ""
-
-#: app/templates/packages/view.html:399
-msgid "Maintenance State"
 msgstr ""
 
 #: app/templates/packages/view.html:405
@@ -1128,10 +1179,6 @@ msgstr ""
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
-msgstr ""
-
-#: app/templates/todo/tags.html:11 app/templates/todo/tags.html:13
-msgid "Search all packages"
 msgstr ""
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
