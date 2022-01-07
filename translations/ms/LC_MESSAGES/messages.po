@@ -8,21 +8,22 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-07 21:59+0000\n"
-"PO-Revision-Date: 2022-01-07 21:58+0000\n"
+"PO-Revision-Date: 2022-01-07 23:27+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
+"ms/>\n"
 "Language: ms\n"
-"Language-Team: Malay "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:99
 msgid "You have been banned."
-msgstr ""
+msgstr "Anda telah diharamkan."
 
 #: app/template_filters.py:52
 #, python-format
@@ -33,11 +34,11 @@ msgstr "%(delta)s yang lalu"
 #: app/templates/admin/warnings/list.html:20
 #: app/templates/metapackages/list.html:12
 msgid "Name"
-msgstr ""
+msgstr "Nama"
 
 #: app/blueprints/api/tokens.py:34
 msgid "Limit to package"
-msgstr ""
+msgstr "Hadkan ke pakej"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:248
 #: app/blueprints/packages/packages.py:450
@@ -55,41 +56,43 @@ msgstr "Simpan"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr ""
+msgstr "Pengesahan kuasa gagal [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked github to account"
-msgstr ""
+msgstr "Github dipautkan ke akaun"
 
 #: app/blueprints/github/__init__.py:65
 msgid "Github account is already associated with another user"
-msgstr ""
+msgstr "Akaun Github sudah dikaitkan dengan pengguna lain"
 
 #: app/blueprints/github/__init__.py:71
 msgid "Unable to find an account for that Github user"
-msgstr ""
+msgstr "Tidak mampu cari akaun untuk pengguna Github tersebut"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr ""
+msgstr "Pengesahan kuasa gagal [err=gh-login-failed]"
 
 #: app/blueprints/packages/packages.py:159
 msgid "Error: Another package already uses this forum topic!"
-msgstr ""
+msgstr "Ralat: Pakej lain sudah menggunakan topik forum ini!"
 
 #: app/blueprints/packages/packages.py:165
 msgid "Error: Forum topic author doesn't match package author."
-msgstr ""
+msgstr "Ralat: Pencipta topik forum tidak sepadan dengan pencipta pakej."
 
 #: app/blueprints/packages/packages.py:168
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr ""
+"Amaran: Topik forum tidak dijumpai. Ini mungkin berlaku sekiranya topik "
+"tersebut baru saja dicipta."
 
 #: app/blueprints/packages/packages.py:215
 msgid "No download available."
-msgstr ""
+msgstr "Tiada muat turun tersedia."
 
 #: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:384
 msgid "Type"
@@ -157,68 +160,69 @@ msgstr "ID Topik Forum"
 
 #: app/blueprints/packages/packages.py:264
 msgid "Unable to find that user"
-msgstr ""
+msgstr "Tidak jumpa pengguna tersebut"
 
 #: app/blueprints/packages/packages.py:268
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:90 app/blueprints/users/settings.py:215
 msgid "Permission denied"
-msgstr ""
+msgstr "Kebenaran ditolak"
 
 #: app/blueprints/packages/packages.py:306
 msgid "Package already exists!"
-msgstr ""
+msgstr "Pakej sudah wujud!"
 
 #: app/blueprints/packages/packages.py:366
 msgid "You don't have permission to do that"
-msgstr ""
+msgstr "Anda tiada kebenaran untuk berbuat sedemikian"
 
 #: app/blueprints/packages/packages.py:394
 msgid "Please comment what changes are needed in the review thread"
 msgstr ""
+"Sila tulis komen mengenai perubahan apa yang diperlukan dalam bebenang ulasan"
 
 #: app/blueprints/packages/packages.py:413
 #: app/blueprints/packages/packages.py:429
 msgid "You don't have permission to do that."
-msgstr ""
+msgstr "Anda tiada kebenaran untuk berbuat sedemikian."
 
 #: app/blueprints/packages/packages.py:424
 msgid "Deleted package"
-msgstr ""
+msgstr "Pakej dipadam"
 
 #: app/blueprints/packages/packages.py:440
 msgid "Unapproved package"
-msgstr ""
+msgstr "Pakej tidak diluluskan"
 
 #: app/blueprints/packages/packages.py:449
 msgid "Maintainers (Comma-separated)"
-msgstr ""
+msgstr "Penyenggara (Dipisahkan dengan koma)"
 
 #: app/blueprints/packages/packages.py:458
 msgid "You do not have permission to edit maintainers"
-msgstr ""
+msgstr "Anda tiada kebenaran untuk mengedit penyenggara"
 
 #: app/blueprints/packages/packages.py:508
 msgid "You are not a maintainer"
-msgstr ""
+msgstr "Anda bukan seorang penyenggara"
 
 #: app/blueprints/packages/packages.py:511
 msgid "Package owners cannot remove themselves as maintainers"
-msgstr ""
+msgstr "Pemilik pakej tidak boleh mengeluarkan diri sendiri sebagai penyenggara"
 
 #: app/blueprints/packages/packages.py:543
 msgid "Author Name"
-msgstr ""
+msgstr "Nama Pencipta"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:63 app/blueprints/packages/reviews.py:42
 #: app/blueprints/threads/__init__.py:262 app/templates/macros/reviews.html:128
 msgid "Title"
-msgstr ""
+msgstr "Tajuk"
 
 #: app/blueprints/packages/releases.py:53
 msgid "Method"
-msgstr ""
+msgstr "Kaedah"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
@@ -629,30 +633,32 @@ msgstr ""
 
 #: app/blueprints/users/profile.py:118
 msgid "2nd most helpful reviewer"
-msgstr ""
+msgstr "Pengulas paling berguna tempat kedua"
 
 #: app/blueprints/users/profile.py:120
 msgid "3rd most helpful reviewer"
-msgstr ""
+msgstr "Pengulas paling berguna tempat ketiga"
 
 #: app/blueprints/users/profile.py:121
 #, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
-msgstr ""
+msgstr "Ini meletakkan %(display_name)s di kalangan %(perc)s%% teratas"
 
 #: app/blueprints/users/profile.py:125
 #, python-format
 msgid "Top %(perc)s%% reviewer"
-msgstr ""
+msgstr "Pengulas %(perc)s%% teratas"
 
 #: app/blueprints/users/profile.py:126
 #, python-format
 msgid "Only %(place)d users have written more helpful reviews."
-msgstr ""
+msgstr "Hanya %(place)d pengguna telah menulis ulasan yang lebih berguna."
 
 #: app/blueprints/users/profile.py:131
 msgid "Consider writing more helpful reviews to get a medal."
 msgstr ""
+"Pertimbangkan untuk menulis lebih banyak ulasan yang lebih berguna untuk "
+"dapatkan pingat."
 
 #: app/blueprints/users/profile.py:133
 #, python-format
@@ -2058,4 +2064,3 @@ msgstr ""
 
 #~ msgid "forum.minetest.net/viewtopic.php?t="
 #~ msgstr ""
-
