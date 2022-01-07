@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from flask import *
-from flask_babel import gettext
+from flask_babel import gettext, lazy_gettext
 
 from app.tasks.webhooktasks import post_discord_webhook
 
@@ -171,8 +171,8 @@ def delete_reply(id):
 
 
 class CommentForm(FlaskForm):
-	comment = TextAreaField("Comment", [InputRequired(), Length(10, 2000)])
-	submit  = SubmitField("Comment")
+	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
+	submit  = SubmitField(lazy_gettext("Comment"))
 
 
 @bp.route("/threads/<int:id>/edit/", methods=["GET", "POST"])
@@ -259,10 +259,10 @@ def view(id):
 
 
 class ThreadForm(FlaskForm):
-	title	= StringField("Title", [InputRequired(), Length(3,100)])
-	comment = TextAreaField("Comment", [InputRequired(), Length(10, 2000)])
-	private = BooleanField("Private")
-	submit  = SubmitField("Open Thread")
+	title	= StringField(lazy_gettext("Title"), [InputRequired(), Length(3,100)])
+	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
+	private = BooleanField(lazy_gettext("Private"))
+	submit  = SubmitField(lazy_gettext("Open Thread"))
 
 
 @bp.route("/threads/new/", methods=["GET", "POST"])

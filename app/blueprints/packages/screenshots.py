@@ -16,7 +16,7 @@
 
 
 from flask import *
-from flask_babel import gettext
+from flask_babel import gettext, lazy_gettext
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from wtforms import *
@@ -30,20 +30,20 @@ from app.logic.screenshots import do_create_screenshot, do_order_screenshots
 
 
 class CreateScreenshotForm(FlaskForm):
-	title	   = StringField("Title/Caption", [Optional(), Length(-1, 100)])
-	fileUpload = FileField("File Upload", [InputRequired()])
-	submit	   = SubmitField("Save")
+	title	   = StringField(lazy_gettext("Title/Caption"), [Optional(), Length(-1, 100)])
+	fileUpload = FileField(lazy_gettext("File Upload"), [InputRequired()])
+	submit	   = SubmitField(lazy_gettext("Save"))
 
 
 class EditScreenshotForm(FlaskForm):
-	title	 = StringField("Title/Caption", [Optional(), Length(-1, 100)])
-	approved = BooleanField("Is Approved")
-	submit   = SubmitField("Save")
+	title	 = StringField(lazy_gettext("Title/Caption"), [Optional(), Length(-1, 100)])
+	approved = BooleanField(lazy_gettext("Is Approved"))
+	submit   = SubmitField(lazy_gettext("Save"))
 
 
 class EditPackageScreenshotsForm(FlaskForm):
-	cover_image      = QuerySelectField("Cover Image", [DataRequired()], allow_blank=True, get_pk=lambda a: a.id, get_label=lambda a: a.title)
-	submit	         = SubmitField("Save")
+	cover_image      = QuerySelectField(lazy_gettext("Cover Image"), [DataRequired()], allow_blank=True, get_pk=lambda a: a.id, get_label=lambda a: a.title)
+	submit	         = SubmitField(lazy_gettext("Save"))
 
 
 @bp.route("/packages/<author>/<name>/screenshots/", methods=["GET", "POST"])

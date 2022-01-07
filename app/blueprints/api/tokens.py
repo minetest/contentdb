@@ -16,6 +16,7 @@
 
 
 from flask import render_template, redirect, request, session, url_for, abort
+from flask_babel import lazy_gettext
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -29,10 +30,10 @@ from ..users.settings import get_setting_tabs
 
 
 class CreateAPIToken(FlaskForm):
-	name	     = StringField("Name", [InputRequired(), Length(1, 30)])
-	package      = QuerySelectField("Limit to package", allow_blank=True,
+	name	     = StringField(lazy_gettext("Name"), [InputRequired(), Length(1, 30)])
+	package      = QuerySelectField(lazy_gettext("Limit to package"), allow_blank=True,
 			get_pk=lambda a: a.id, get_label=lambda a: a.title)
-	submit	     = SubmitField("Save")
+	submit	     = SubmitField(lazy_gettext("Save"))
 
 
 @bp.route("/user/tokens/")

@@ -1,5 +1,5 @@
 from flask import *
-from flask_babel import gettext
+from flask_babel import gettext, lazy_gettext
 from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
@@ -38,10 +38,10 @@ def get_setting_tabs(user):
 
 
 class UserProfileForm(FlaskForm):
-	display_name = StringField("Display Name", [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x)])
-	website_url = StringField("Website URL", [Optional(), URL()], filters = [lambda x: x or None])
-	donate_url = StringField("Donation URL", [Optional(), URL()], filters = [lambda x: x or None])
-	submit = SubmitField("Save")
+	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x)])
+	website_url = StringField(lazy_gettext("Website URL"), [Optional(), URL()], filters = [lambda x: x or None])
+	donate_url = StringField(lazy_gettext("Donation URL"), [Optional(), URL()], filters = [lambda x: x or None])
+	submit = SubmitField(lazy_gettext("Save"))
 
 
 def handle_profile_edit(form, user, username):
@@ -102,8 +102,8 @@ def profile_edit(username):
 
 def make_settings_form():
 	attrs = {
-		"email": StringField("Email", [Optional(), Email()]),
-		"submit": SubmitField("Save")
+		"email": StringField(lazy_gettext("Email"), [Optional(), Email()]),
+		"submit": SubmitField(lazy_gettext("Save"))
 	}
 
 	for notificationType in NotificationType:
@@ -195,13 +195,13 @@ def email_notifications(username=None):
 
 
 class UserAccountForm(FlaskForm):
-	username = StringField("Username", [Optional(), Length(1, 50)])
-	display_name = StringField("Display name", [Optional(), Length(2, 100)])
-	forums_username = StringField("Forums Username", [Optional(), Length(2, 50)])
-	github_username = StringField("GitHub Username", [Optional(), Length(2, 50)])
-	rank = SelectField("Rank", [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce,
+	username = StringField(lazy_gettext("Username"), [Optional(), Length(1, 50)])
+	display_name = StringField(lazy_gettext("Display name"), [Optional(), Length(2, 100)])
+	forums_username = StringField(lazy_gettext("Forums Username"), [Optional(), Length(2, 50)])
+	github_username = StringField(lazy_gettext("GitHub Username"), [Optional(), Length(2, 50)])
+	rank = SelectField(lazy_gettext("Rank"), [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce,
 			default=UserRank.NEW_MEMBER)
-	submit = SubmitField("Save")
+	submit = SubmitField(lazy_gettext("Save"))
 
 
 @bp.route("/users/<username>/settings/account/", methods=["GET", "POST"])

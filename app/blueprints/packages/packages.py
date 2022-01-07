@@ -446,8 +446,8 @@ def remove(package):
 
 
 class PackageMaintainersForm(FlaskForm):
-	maintainers_str  = StringField("Maintainers (Comma-separated)", [Optional()])
-	submit	      = SubmitField("Save")
+	maintainers_str  = StringField(lazy_gettext("Maintainers (Comma-separated)"), [Optional()])
+	submit	      = SubmitField(lazy_gettext("Save"))
 
 
 @bp.route("/packages/<author>/<name>/edit-maintainers/", methods=["GET", "POST"])
@@ -540,9 +540,10 @@ def audit(package):
 
 
 class PackageAliasForm(FlaskForm):
-	author  = StringField("Author Name", [InputRequired(), Length(1, 50)])
-	name    = StringField("Name (Technical)", [InputRequired(), Length(1, 100), Regexp("^[a-z0-9_]+$", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	submit  = SubmitField("Save")
+	author  = StringField(lazy_gettext("Author Name"), [InputRequired(), Length(1, 50)])
+	name    = StringField(lazy_gettext("Name (Technical)"), [InputRequired(), Length(1, 100),
+			Regexp("^[a-z0-9_]+$", 0, lazy_gettext("Lower case letters (a-z), digits (0-9), and underscores (_) only"))])
+	submit  = SubmitField(lazy_gettext("Save"))
 
 
 @bp.route("/packages/<author>/<name>/aliases/")

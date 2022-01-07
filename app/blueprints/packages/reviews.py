@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 from collections import namedtuple
 
-from flask_babel import gettext
+from flask_babel import gettext, lazy_gettext
 
 from . import bp
 
@@ -39,10 +39,11 @@ def list_reviews():
 
 
 class ReviewForm(FlaskForm):
-	title	= StringField("Title", [InputRequired(), Length(3,100)])
-	comment = TextAreaField("Comment", [InputRequired(), Length(10, 2000)])
-	recommends = RadioField("Private", [InputRequired()], choices=[("yes", "Yes"), ("no", "No")])
-	submit  = SubmitField("Save")
+	title	= StringField(lazy_gettext("Title"), [InputRequired(), Length(3,100)])
+	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
+	recommends = RadioField(lazy_gettext("Private"), [InputRequired()],
+			choices=[("yes", lazy_gettext("Yes")), ("no", lazy_gettext("No"))])
+	submit  = SubmitField(lazy_gettext("Save"))
 
 @bp.route("/packages/<author>/<name>/review/", methods=["GET", "POST"])
 @login_required

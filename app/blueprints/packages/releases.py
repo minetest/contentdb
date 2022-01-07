@@ -16,7 +16,7 @@
 
 
 from flask import *
-from flask_babel import gettext
+from flask_babel import gettext, lazy_gettext
 from flask_login import login_required
 from flask_wtf import FlaskForm
 from wtforms import *
@@ -49,26 +49,26 @@ def get_mt_releases(is_max):
 
 
 class CreatePackageReleaseForm(FlaskForm):
-	title	   = StringField("Title", [InputRequired(), Length(1, 30)])
-	uploadOpt  = RadioField ("Method", choices=[("upload", "File Upload")], default="upload")
-	vcsLabel   = StringField("Git reference (ie: commit hash, branch, or tag)", default=None)
-	fileUpload = FileField("File Upload")
-	min_rel    = QuerySelectField("Minimum Minetest Version", [InputRequired()],
+	title	   = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)])
+	uploadOpt  = RadioField(lazy_gettext("Method"), choices=[("upload", "File Upload")], default="upload")
+	vcsLabel   = StringField(lazy_gettext("Git reference (ie: commit hash, branch, or tag)"), default=None)
+	fileUpload = FileField(lazy_gettext("File Upload"))
+	min_rel    = QuerySelectField(lazy_gettext("Minimum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	max_rel    = QuerySelectField("Maximum Minetest Version", [InputRequired()],
+	max_rel    = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	submit	   = SubmitField("Save")
+	submit	   = SubmitField(lazy_gettext("Save"))
 
 class EditPackageReleaseForm(FlaskForm):
-	title    = StringField("Title", [InputRequired(), Length(1, 30)])
-	url      = StringField("URL", [Optional()])
-	task_id  = StringField("Task ID", filters = [lambda x: x or None])
-	approved = BooleanField("Is Approved")
-	min_rel  = QuerySelectField("Minimum Minetest Version", [InputRequired()],
+	title    = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)])
+	url      = StringField(lazy_gettext("URL"), [Optional()])
+	task_id  = StringField(lazy_gettext("Task ID"), filters = [lambda x: x or None])
+	approved = BooleanField(lazy_gettext("Is Approved"))
+	min_rel  = QuerySelectField(lazy_gettext("Minimum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	max_rel  = QuerySelectField("Maximum Minetest Version", [InputRequired()],
+	max_rel  = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	submit   = SubmitField("Save")
+	submit   = SubmitField(lazy_gettext("Save"))
 
 
 @bp.route("/packages/<author>/<name>/releases/new/", methods=["GET", "POST"])
@@ -179,14 +179,14 @@ def edit_release(package, id):
 
 
 class BulkReleaseForm(FlaskForm):
-	set_min = BooleanField("Set Min")
-	min_rel  = QuerySelectField("Minimum Minetest Version", [InputRequired()],
+	set_min = BooleanField(lazy_gettext("Set Min"))
+	min_rel  = QuerySelectField(lazy_gettext("Minimum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	set_max = BooleanField("Set Max")
-	max_rel  = QuerySelectField("Maximum Minetest Version", [InputRequired()],
+	set_max = BooleanField(lazy_gettext("Set Max"))
+	max_rel  = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	only_change_none = BooleanField("Only change values previously set as none")
-	submit   = SubmitField("Update")
+	only_change_none = BooleanField(lazy_gettext("Only change values previously set as none"))
+	submit   = SubmitField(lazy_gettext("Update"))
 
 
 @bp.route("/packages/<author>/<name>/releases/bulk_change/", methods=["GET", "POST"])
@@ -235,12 +235,14 @@ def delete_release(package, id):
 
 
 class PackageUpdateConfigFrom(FlaskForm):
-	trigger = RadioField("Trigger", [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
+	trigger = RadioField(lazy_gettext("Trigger"), [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
 			default=PackageUpdateTrigger.TAG)
-	ref     = StringField("Branch name", [Optional()], default=None)
-	action  = RadioField("Action", [InputRequired()], choices=[("notification", "Send notification and mark as outdated"), ("make_release", "Create release")], default="make_release")
-	submit  = SubmitField("Save Settings")
-	disable = SubmitField("Disable Automation")
+	ref     = StringField(lazy_gettext("Branch name"), [Optional()], default=None)
+	action  = RadioField(lazy_gettext("Action"), [InputRequired()],
+			choices=[("notification", lazy_gettext("Send notification and mark as outdated")), ("make_release", lazy_gettext("Create release"))],
+			default="make_release")
+	submit  = SubmitField(lazy_gettext("Save Settings"))
+	disable = SubmitField(lazy_gettext("Disable Automation"))
 
 
 def set_update_config(package, form):

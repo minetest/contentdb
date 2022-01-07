@@ -17,7 +17,7 @@
 
 
 from flask import *
-from flask_babel import gettext
+from flask_babel import gettext, lazy_gettext
 from flask_login import current_user, login_required, logout_user, login_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
@@ -33,10 +33,10 @@ from . import bp
 
 
 class LoginForm(FlaskForm):
-	username = StringField("Username or email", [InputRequired()])
-	password = PasswordField("Password", [InputRequired(), Length(6, 100)])
-	remember_me = BooleanField("Remember me", default=True)
-	submit = SubmitField("Sign in")
+	username = StringField(lazy_gettext("Username or email"), [InputRequired()])
+	password = PasswordField(lazy_gettext("Password"), [InputRequired(), Length(6, 100)])
+	remember_me = BooleanField(lazy_gettext("Remember me"), default=True)
+	submit = SubmitField(lazy_gettext("Sign in"))
 
 
 def handle_login(form):
@@ -99,14 +99,14 @@ def logout():
 
 
 class RegisterForm(FlaskForm):
-	display_name = StringField("Display Name", [Optional(), Length(1, 20)], filters=[nonEmptyOrNone])
-	username = StringField("Username", [InputRequired(),
-					Regexp("^[a-zA-Z0-9._-]+$", message="Only a-zA-Z0-9._ allowed")])
-	email    = StringField("Email", [InputRequired(), Email()])
-	password = PasswordField("Password", [InputRequired(), Length(6, 100)])
-	question  = StringField("What is the result of the above calculation?", [InputRequired()])
-	agree    = BooleanField("I agree", [DataRequired()])
-	submit   = SubmitField("Register")
+	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[nonEmptyOrNone])
+	username = StringField(lazy_gettext("Username"), [InputRequired(),
+					Regexp("^[a-zA-Z0-9._-]+$", message=lazy_gettext("Only a-zA-Z0-9._ allowed"))])
+	email    = StringField(lazy_gettext("Email"), [InputRequired(), Email()])
+	password = PasswordField(lazy_gettext("Password"), [InputRequired(), Length(6, 100)])
+	question  = StringField(lazy_gettext("What is the result of the above calculation?"), [InputRequired()])
+	agree    = BooleanField(lazy_gettext("I agree"), [DataRequired()])
+	submit   = SubmitField(lazy_gettext("Register"))
 
 
 def handle_register(form):
@@ -181,8 +181,8 @@ def register():
 
 
 class ForgotPasswordForm(FlaskForm):
-	email = StringField("Email", [InputRequired(), Email()])
-	submit = SubmitField("Reset Password")
+	email = StringField(lazy_gettext("Email"), [InputRequired(), Email()])
+	submit = SubmitField(lazy_gettext("Reset Password"))
 
 @bp.route("/user/forgot-password/", methods=["GET", "POST"])
 def forgot_password():
@@ -230,16 +230,18 @@ def forgot_password():
 
 
 class SetPasswordForm(FlaskForm):
-	email = StringField("Email", [Optional(), Email()])
-	password = PasswordField("New password", [InputRequired(), Length(8, 100)])
-	password2 = PasswordField("Verify password", [InputRequired(), Length(8, 100), validators.EqualTo('password', message='Passwords must match')])
-	submit = SubmitField("Save")
+	email = StringField(lazy_gettext("Email"), [Optional(), Email()])
+	password = PasswordField(lazy_gettext("New password"), [InputRequired(), Length(8, 100)])
+	password2 = PasswordField(lazy_gettext("Verify password"), [InputRequired(), Length(8, 100),
+			validators.EqualTo('password', message=lazy_gettext('Passwords must match'))])
+	submit = SubmitField(lazy_gettext("Save"))
 
 class ChangePasswordForm(FlaskForm):
-	old_password = PasswordField("Old password", [InputRequired(), Length(8, 100)])
-	password = PasswordField("New password", [InputRequired(), Length(8, 100)])
-	password2 = PasswordField("Verify password", [InputRequired(), Length(8, 100), validators.EqualTo('password', message='Passwords must match')])
-	submit = SubmitField("Save")
+	old_password = PasswordField(lazy_gettext("Old password"), [InputRequired(), Length(8, 100)])
+	password = PasswordField(lazy_gettext("New password"), [InputRequired(), Length(8, 100)])
+	password2 = PasswordField(lazy_gettext("Verify password"), [InputRequired(), Length(8, 100),
+			validators.EqualTo('password', message=lazy_gettext('Passwords must match'))])
+	submit = SubmitField(lazy_gettext("Save"))
 
 
 def handle_set_password(form):
@@ -379,8 +381,8 @@ def verify_email():
 
 
 class UnsubscribeForm(FlaskForm):
-	email = StringField("Email", [InputRequired(), Email()])
-	submit = SubmitField("Send")
+	email = StringField(lazy_gettext("Email"), [InputRequired(), Email()])
+	submit = SubmitField(lazy_gettext("Send"))
 
 
 def unsubscribe_verify():
