@@ -143,5 +143,7 @@ def set_locale():
 	else:
 		resp = make_response(redirect(url_for("homepage.home")))
 
-	resp.set_cookie("locale", locale)
+	if locale:
+		resp.set_cookie("locale", locale)
+
 	return resp
