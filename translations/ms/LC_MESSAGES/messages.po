@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-07 21:59+0000\n"
+"POT-Creation-Date: 2022-01-07 23:27+0000\n"
 "PO-Revision-Date: 2022-01-07 23:27+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
-"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
-"ms/>\n"
 "Language: ms\n"
+"Language-Team: Malay "
+"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:99
@@ -31,7 +30,7 @@ msgid "%(delta)s ago"
 msgstr "%(delta)s yang lalu"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
-#: app/templates/admin/warnings/list.html:20
+#: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
 #: app/templates/metapackages/list.html:12
 msgid "Name"
 msgstr "Nama"
@@ -74,6 +73,42 @@ msgstr "Tidak mampu cari akaun untuk pengguna Github tersebut"
 msgid "Authorization failed [err=gh-login-failed]"
 msgstr "Pengesahan kuasa gagal [err=gh-login-failed]"
 
+#: app/blueprints/packages/__init__.py:32
+#: app/templates/packages/create_edit.html:29
+msgid "Edit Details"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:37
+#: app/templates/packages/releases_list.html:34
+#: app/templates/packages/view.html:443 app/templates/todo/editor.html:75
+msgid "Releases"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:42
+#: app/templates/packages/screenshots.html:4
+#: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
+msgid "Screenshots"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:47
+#: app/templates/packages/edit_maintainers.html:8
+#: app/templates/packages/view.html:408
+msgid "Maintainers"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
+#: app/templates/packages/audit.html:4
+msgid "Audit Log"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
+msgid "Share and Badges"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:60
+msgid "Remove"
+msgstr ""
+
 #: app/blueprints/packages/packages.py:159
 msgid "Error: Another package already uses this forum topic!"
 msgstr "Ralat: Pakej lain sudah menggunakan topik forum ini!"
@@ -94,7 +129,7 @@ msgstr ""
 msgid "No download available."
 msgstr "Tiada muat turun tersedia."
 
-#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:384
+#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:385
 msgid "Type"
 msgstr "Jenis"
 
@@ -117,7 +152,7 @@ msgstr "Huruf kecil (a-z), digit (0-9), dan garis bawah (_) sahaja"
 msgid "Short Description (Plaintext)"
 msgstr "Perihal Pendek (Teks biasa)"
 
-#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:399
+#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:400
 msgid "Maintenance State"
 msgstr "Keadaan Penyenggaraan"
 
@@ -130,7 +165,7 @@ msgstr "Tag"
 msgid "Content Warnings"
 msgstr "Amaran Kandungan"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:388
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:389
 msgid "License"
 msgstr "Lesen"
 
@@ -179,7 +214,8 @@ msgstr "Anda tiada kebenaran untuk berbuat sedemikian"
 #: app/blueprints/packages/packages.py:394
 msgid "Please comment what changes are needed in the review thread"
 msgstr ""
-"Sila tulis komen mengenai perubahan apa yang diperlukan dalam bebenang ulasan"
+"Sila tulis komen mengenai perubahan apa yang diperlukan dalam bebenang "
+"ulasan"
 
 #: app/blueprints/packages/packages.py:413
 #: app/blueprints/packages/packages.py:429
@@ -217,20 +253,24 @@ msgstr "Nama Pencipta"
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:63 app/blueprints/packages/reviews.py:42
 #: app/blueprints/threads/__init__.py:262 app/templates/macros/reviews.html:128
+#: app/templates/macros/topics.html:5
+#: app/templates/packages/release_edit.html:17
 msgid "Title"
 msgstr "Tajuk"
 
 #: app/blueprints/packages/releases.py:53
+#: app/templates/packages/release_new.html:46
 msgid "Method"
 msgstr "Kaedah"
 
-#: app/blueprints/packages/releases.py:54
-msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr ""
-
+#: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:54
+msgid "Git reference (ie: commit hash, branch, or tag)"
 msgstr ""
 
 #: app/blueprints/packages/releases.py:56
@@ -246,6 +286,7 @@ msgid "Maximum Minetest Version"
 msgstr ""
 
 #: app/blueprints/packages/releases.py:64
+#: app/templates/packages/release_edit.html:23
 msgid "URL"
 msgstr ""
 
@@ -256,6 +297,14 @@ msgstr ""
 #: app/blueprints/packages/releases.py:66
 #: app/blueprints/packages/screenshots.py:40
 msgid "Is Approved"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:84
+msgid "Import from Git"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:84
+msgid "Upload .zip file"
 msgstr ""
 
 #: app/blueprints/packages/releases.py:182
@@ -275,6 +324,7 @@ msgid "Update"
 msgstr ""
 
 #: app/blueprints/packages/releases.py:238
+#: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr ""
 
@@ -283,6 +333,7 @@ msgid "Branch name"
 msgstr ""
 
 #: app/blueprints/packages/releases.py:241
+#: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr ""
 
@@ -397,6 +448,7 @@ msgid "Comment needs to be between 3 and 2000 characters."
 msgstr ""
 
 #: app/blueprints/threads/__init__.py:265
+#: app/templates/macros/package_approval.html:107
 msgid "Open Thread"
 msgstr ""
 
@@ -421,7 +473,7 @@ msgid "Username or email"
 msgstr ""
 
 #: app/blueprints/users/account.py:37 app/blueprints/users/account.py:106
-#: app/templates/users/account.html:37 app/templates/users/login.html:16
+#: app/templates/users/account.html:41 app/templates/users/login.html:16
 msgid "Password"
 msgstr ""
 
@@ -430,6 +482,7 @@ msgid "Remember me"
 msgstr ""
 
 #: app/blueprints/users/account.py:39 app/templates/base.html:165
+#: app/templates/users/login.html:4
 msgid "Sign in"
 msgstr ""
 
@@ -482,7 +535,7 @@ msgid "I agree"
 msgstr ""
 
 #: app/blueprints/users/account.py:109 app/templates/users/login.html:34
-#: app/templates/users/register.html:11
+#: app/templates/users/register.html:4
 msgid "Register"
 msgstr ""
 
@@ -498,6 +551,10 @@ msgstr ""
 msgid "That username/display name is already in use, please choose another."
 msgstr ""
 
+#: app/blueprints/users/account.py:140 app/blueprints/users/account.py:267
+msgid "Email already in use"
+msgstr ""
+
 #: app/blueprints/users/account.py:141 app/blueprints/users/account.py:268
 #, python-format
 msgid ""
@@ -506,6 +563,7 @@ msgid ""
 msgstr ""
 
 #: app/blueprints/users/account.py:145 app/blueprints/users/account.py:262
+#: app/blueprints/users/settings.py:133
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
 
@@ -710,6 +768,24 @@ msgstr ""
 msgid "Has received %(downloads)d downloads across all packages."
 msgstr ""
 
+#: app/blueprints/users/settings.py:19 app/templates/users/profile.html:17
+#: app/templates/users/profile_edit.html:8
+msgid "Edit Profile"
+msgstr ""
+
+#: app/blueprints/users/settings.py:24 app/templates/users/account.html:12
+msgid "Account and Security"
+msgstr ""
+
+#: app/blueprints/users/settings.py:29
+#: app/templates/users/settings_email.html:8
+msgid "Email and Notifications"
+msgstr ""
+
+#: app/blueprints/users/settings.py:34 app/templates/api/list_tokens.html:10
+msgid "API Tokens"
+msgstr ""
+
 #: app/blueprints/users/settings.py:43
 msgid "Donation URL"
 msgstr ""
@@ -769,10 +845,12 @@ msgid "Random"
 msgstr ""
 
 #: app/templates/base.html:39 app/templates/base.html:239
+#: app/templates/packages/bulk_update_conf.html:8
 msgid "Help"
 msgstr ""
 
 #: app/templates/base.html:42 app/templates/packages/view.html:123
+#: app/templates/packages/view.html:463 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr ""
 
@@ -798,7 +876,7 @@ msgstr ""
 msgid "To do list"
 msgstr ""
 
-#: app/templates/base.html:84
+#: app/templates/base.html:84 app/templates/notifications/list.html:4
 msgid "Notifications"
 msgstr ""
 
@@ -808,10 +886,6 @@ msgstr ""
 
 #: app/templates/base.html:122
 msgid "Profile"
-msgstr ""
-
-#: app/templates/base.html:136
-msgid "Audit Log"
 msgstr ""
 
 #: app/templates/base.html:140
@@ -840,6 +914,10 @@ msgstr ""
 
 #: app/templates/base.html:161
 msgid "Sign out"
+msgstr ""
+
+#: app/templates/base.html:196
+msgid "Help translate ContentDB"
 msgstr ""
 
 #: app/templates/base.html:240
@@ -875,7 +953,6 @@ msgid "Welcome"
 msgstr ""
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
-#: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
 msgstr ""
@@ -886,7 +963,7 @@ msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr ""
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:127 app/templates/packages/view.html:266
+#: app/templates/packages/view.html:127 app/templates/packages/view.html:265
 #: app/templates/users/profile.html:193
 msgid "Reviews"
 msgstr ""
@@ -987,6 +1064,7 @@ msgstr ""
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
+#: app/templates/users/settings_email.html:44
 msgid "Description"
 msgstr ""
 
@@ -996,7 +1074,8 @@ msgstr ""
 
 #: app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
-#: app/templates/metapackages/list.html:16 app/templates/users/list.html:22
+#: app/templates/metapackages/list.html:16 app/templates/packages/list.html:4
+#: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:178
 msgid "Packages"
 msgstr ""
@@ -1028,6 +1107,15 @@ msgstr ""
 msgid "Create API Token"
 msgstr ""
 
+#: app/templates/api/create_edit_token.html:17
+#: app/templates/packages/release_edit.html:80
+#: app/templates/packages/review_create_edit.html:55
+#: app/templates/threads/delete_reply.html:19
+#: app/templates/threads/delete_thread.html:19
+#: app/templates/threads/view.html:40 app/templates/users/delete.html:34
+msgid "Delete"
+msgstr ""
+
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
 msgstr ""
@@ -1042,11 +1130,21 @@ msgstr ""
 msgid "Access Token"
 msgstr ""
 
-#: app/templates/api/create_edit_token.html:50
+#: app/templates/api/create_edit_token.html:33
+msgid ""
+"For security reasons, access tokens will only be shown once. Reset the "
+"token if it is lost."
+msgstr ""
+
+#: app/templates/api/create_edit_token.html:40
+msgid "Reset"
+msgstr ""
+
+#: app/templates/api/create_edit_token.html:49
 msgid "Human-readable name to tell tokens apart."
 msgstr ""
 
-#: app/templates/api/create_edit_token.html:51
+#: app/templates/api/create_edit_token.html:50
 msgid "Recommended: Only allows token to interact with a particular package."
 msgstr ""
 
@@ -1055,13 +1153,26 @@ msgstr ""
 msgid "API Tokens | %(username)s"
 msgstr ""
 
-#: app/templates/api/list_tokens.html:10
-msgid "API Tokens"
+#: app/templates/api/list_tokens.html:8 app/templates/macros/topics.html:29
+#: app/templates/macros/topics.html:65
+#: app/templates/packages/alias_list.html:13
+#: app/templates/packages/releases_list.html:29
+msgid "Create"
+msgstr ""
+
+#: app/templates/api/list_tokens.html:9
+msgid "API Documentation"
+msgstr ""
+
+#: app/templates/api/list_tokens.html:19
+msgid "No tokens created"
 msgstr ""
 
 #: app/templates/emails/base.html:63 app/templates/emails/notification.html:34
 #: app/templates/emails/notification_digest.html:37
-#: app/templates/emails/verify.html:32 app/templates/users/unsubscribe.html:4
+#: app/templates/emails/verify.html:33
+#: app/templates/emails/verify_unsubscribe.html:13
+#: app/templates/threads/view.html:31
 msgid "Unsubscribe"
 msgstr ""
 
@@ -1073,6 +1184,17 @@ msgstr ""
 #: app/templates/emails/notification.html:13
 #, python-format
 msgid "From %(username)s."
+msgstr ""
+
+#: app/templates/emails/notification.html:19
+msgid "View Notification"
+msgstr ""
+
+#: app/templates/emails/notification.html:26
+#: app/templates/emails/notification_digest.html:29
+msgid ""
+"You are receiving this email because you are a registered user of "
+"ContentDB, and have email notifications enabled."
 msgstr ""
 
 #: app/templates/emails/notification.html:30
@@ -1094,28 +1216,201 @@ msgstr ""
 msgid "from %(username)s."
 msgstr ""
 
+#: app/templates/emails/notification_digest.html:22
+msgid "View Notifications"
+msgstr ""
+
+#: app/templates/emails/verify.html:4
+#: app/templates/emails/verify_unsubscribe.html:5
+msgid "Hello!"
+msgstr ""
+
+#: app/templates/emails/verify.html:7
+msgid ""
+"This email has been sent to you because someone (hopefully you) has "
+"entered your email address as a user's email."
+msgstr ""
+
+#: app/templates/emails/verify.html:11
+msgid "If it wasn't you, then just delete this email."
+msgstr ""
+
+#: app/templates/emails/verify.html:15
+msgid "If this was you, then please click this link to confirm the address:"
+msgstr ""
+
+#: app/templates/emails/verify.html:19
+msgid "Confirm Email Address"
+msgstr ""
+
+#: app/templates/emails/verify.html:23
+#: app/templates/emails/verify_unsubscribe.html:17
+msgid "Or paste this into your browser:"
+msgstr ""
+
+#: app/templates/emails/verify.html:30
+msgid ""
+"You are receiving this email because someone (hopefully you) entered your"
+" email address as a user's email."
+msgstr ""
+
+#: app/templates/emails/verify_unsubscribe.html:9
+msgid ""
+"We're sorry to see you go. You just need to do one more thing before your"
+" email is blacklisted."
+msgstr ""
+
+#: app/templates/emails/verify_unsubscribe.html:23
+msgid ""
+"You are receiving this email because someone (hopefully you) entered your"
+" email address in the unsubscribe form."
+msgstr ""
+
 #: app/templates/macros/audit_log.html:13
 #, python-format
 msgid "Severity: %(sev)s."
 msgstr ""
 
-#: app/templates/macros/package_approval.html:25
+#: app/templates/macros/audit_log.html:32
+msgid "Deleted User"
+msgstr ""
+
+#: app/templates/macros/audit_log.html:64
+msgid "No audit log entries."
+msgstr ""
+
+#: app/templates/macros/forms.html:52
+#: app/templates/packages/create_edit.html:41
+msgid "View"
+msgstr ""
+
+#: app/templates/macros/forms.html:107
+msgid "Start typing to see suggestions"
+msgstr ""
+
+#: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:34
+msgid "State"
+msgstr ""
+
+#: app/templates/macros/package_approval.html:22
+msgid "Create first release"
+msgstr ""
+
+#: app/templates/macros/package_approval.html:26
+msgid "Set up releases"
+msgstr ""
+
+#: app/templates/macros/package_approval.html:29
 msgid "You need to create a release before this package can be approved."
 msgstr ""
 
-#: app/templates/macros/package_approval.html:27
+#: app/templates/macros/package_approval.html:31
 msgid "A release is required before this package can be approved."
 msgstr ""
 
-#: app/templates/macros/package_approval.html:102
+#: app/templates/macros/package_approval.html:36
+msgid "You need to add at least one screenshot."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:40
+#, python-format
+msgid ""
+"The following hard dependencies need to be added to ContentDB first: "
+"%(deps)s"
+msgstr ""
+
+#: app/templates/macros/package_approval.html:44
+msgid "Please wait for the license to be added to CDB."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:51
+msgid "You should add at least one screenshot, but this isn't required."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:57
+msgid "Please wait for the release to be approved."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:59
+msgid "You can now approve this package if you're ready."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:61
+msgid "Please wait for the package to be approved."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:65
+msgid "You can now submit this package for approval if you're ready."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:67
+msgid "This package can be submitted for approval when ready."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:97
+msgid "Please make sure that this package has the right to the names it uses."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:99
+#, python-format
+msgid "Please make sure that this package has the right to the names %(names)s"
+msgstr ""
+
+#: app/templates/macros/package_approval.html:110
 msgid "Package review thread"
 msgstr ""
 
-#: app/templates/macros/package_approval.html:103
+#: app/templates/macros/package_approval.html:111
 msgid ""
 "You can open a thread if you have a question for the reviewer or package "
 "author."
 msgstr ""
+
+#: app/templates/macros/packagegridtile.html:25
+msgid "<b>Warning:</b> Non-free code and media."
+msgstr ""
+
+#: app/templates/macros/packagegridtile.html:29
+msgid "<b>Warning:</b> Non-free code."
+msgstr ""
+
+#: app/templates/macros/packagegridtile.html:33
+msgid "<b>Warning:</b> Non-free media."
+msgstr ""
+
+#: app/templates/macros/packagegridtile.html:45
+#, fuzzy
+msgid "No packages available"
+msgstr "Tiada muat turun tersedia."
+
+#: app/templates/macros/releases.html:20 app/templates/macros/releases.html:47
+#: app/templates/macros/releases.html:89
+#, python-format
+msgid "created %(date)s"
+msgstr ""
+
+#: app/templates/macros/releases.html:60
+msgid "Edit / Approve"
+msgstr ""
+
+#: app/templates/macros/releases.html:62 app/templates/packages/view.html:48
+#: app/templates/packages/view.html:233
+msgid "Edit"
+msgstr ""
+
+#: app/templates/macros/releases.html:93
+#: app/templates/packages/release_edit.html:31
+msgid "Importing..."
+msgstr ""
+
+#: app/templates/macros/releases.html:96
+msgid "Waiting for approval."
+msgstr ""
+
+#: app/templates/macros/releases.html:103
+#, fuzzy
+msgid "No releases available."
+msgstr "Tiada muat turun tersedia."
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
@@ -1174,6 +1469,10 @@ msgstr ""
 msgid "You don't have permission to post."
 msgstr ""
 
+#: app/templates/macros/threads.html:132 app/templates/macros/threads.html:212
+msgid "No threads found"
+msgstr ""
+
 #: app/templates/macros/threads.html:140
 msgid "Thread"
 msgstr ""
@@ -1188,7 +1487,7 @@ msgid "On %(trigger)s, do %(action)s"
 msgstr ""
 
 #: app/templates/macros/todo.html:37 app/templates/packages/view.html:54
-#: app/templates/packages/view.html:317
+#: app/templates/packages/view.html:316
 msgid "Release"
 msgstr ""
 
@@ -1198,25 +1497,122 @@ msgstr ""
 
 #: app/templates/macros/todo.html:50
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:321
+#: app/templates/packages/view.html:320
 msgid "Update settings"
+msgstr ""
+
+#: app/templates/macros/todo.html:57
+#, fuzzy
+msgid "No outdated packages."
+msgstr "Pakej tidak diluluskan"
+
+#: app/templates/macros/topics.html:6 app/templates/packages/view.html:110
+msgid "Author"
+msgstr ""
+
+#: app/templates/macros/topics.html:8
+msgid "Date"
+msgstr ""
+
+#: app/templates/macros/topics.html:9
+msgid "Actions"
+msgstr ""
+
+#: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
+#: app/templates/metapackages/view.html:26 app/templates/todo/editor.html:158
+#: app/templates/todo/editor.html:173
+msgid "WIP"
+msgstr ""
+
+#: app/templates/macros/topics.html:35
+msgid "Show"
+msgstr ""
+
+#: app/templates/macros/topics.html:37
+msgid "Discard"
+msgstr ""
+
+#: app/templates/macros/topics.html:57
+msgid "Old"
+msgstr ""
+
+#: app/templates/metapackages/list.html:4
+#: app/templates/metapackages/view.html:4
+#, fuzzy
+msgid "Meta Packages"
+msgstr "Pakej dipadam"
+
+#: app/templates/metapackages/list.html:37
+msgid "No meta packages found."
+msgstr ""
+
+#: app/templates/metapackages/view.html:8
+#, python-format
+msgid "Meta Package \"%(name)s\""
+msgstr ""
+
+#: app/templates/metapackages/view.html:10
+msgid "Provided By"
+msgstr ""
+
+#: app/templates/metapackages/view.html:17
+msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
+msgstr ""
+
+#: app/templates/metapackages/view.html:24 app/templates/packages/view.html:341
+#: app/templates/packages/view.html:365 app/templates/todo/editor.html:85
+#, python-format
+msgid "%(title)s by %(display_name)s"
+msgstr ""
+
+#: app/templates/metapackages/view.html:32
+msgid "Required By"
+msgstr ""
+
+#: app/templates/metapackages/view.html:35
+msgid "Optionally Used By"
 msgstr ""
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
 msgstr ""
 
+#: app/templates/notifications/list.html:22
+msgid "Newest first."
+msgstr ""
+
+#: app/templates/notifications/list.html:27
+msgid "Your Notifications"
+msgstr ""
+
+#: app/templates/notifications/list.html:61
+#: app/templates/notifications/list.html:99
+msgid "No notifications"
+msgstr ""
+
+#: app/templates/notifications/list.html:66
+msgid "Editor/Approver Notifications"
+msgstr ""
+
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
+msgstr ""
+
+#: app/templates/packages/alias_create_edit.html:13
+msgid "Back to Aliases"
 msgstr ""
 
 #: app/templates/packages/alias_list.html:4
 msgid "Aliases"
 msgstr ""
 
-#: app/templates/packages/alias_list.html:13
+#: app/templates/packages/alias_list.html:15
 #, python-format
 msgid "Aliases for %(title)s by %(author)s"
+msgstr ""
+
+#: app/templates/packages/alias_list.html:24
+msgid "No aliases"
 msgstr ""
 
 #: app/templates/packages/bulk_update_conf.html:4
@@ -1237,6 +1633,7 @@ msgid "This will set the update settings for all packages with a Git repo."
 msgstr ""
 
 #: app/templates/packages/bulk_update_conf.html:27
+#: app/templates/packages/release_new.html:50
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
 msgstr ""
@@ -1254,14 +1651,6 @@ msgstr ""
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
 msgid "Create Package"
-msgstr ""
-
-#: app/templates/packages/create_edit.html:29
-msgid "Edit Details"
-msgstr ""
-
-#: app/templates/packages/create_edit.html:41
-msgid "View"
 msgstr ""
 
 #: app/templates/packages/create_edit.html:43
@@ -1291,6 +1680,7 @@ msgid "Whilst disabled Javascript may work, it is not officially supported."
 msgstr ""
 
 #: app/templates/packages/create_edit.html:67
+#: app/templates/threads/view.html:78
 msgid "Package"
 msgstr ""
 
@@ -1343,10 +1733,6 @@ msgstr ""
 msgid "Edit Maintainers"
 msgstr ""
 
-#: app/templates/packages/edit_maintainers.html:8
-msgid "Maintainers"
-msgstr ""
-
 #: app/templates/packages/edit_maintainers.html:11
 msgid "Maintainers are given write access to the package."
 msgstr ""
@@ -1363,27 +1749,107 @@ msgid ""
 "themselves."
 msgstr ""
 
-#: app/templates/packages/release_edit.html:72
+#: app/templates/packages/list.html:21
+#, python-format
+msgid "Did you mean to search for packages by %(authors)s?"
+msgstr ""
+
+#: app/templates/packages/list.html:26
+msgid "Filter by tags"
+msgstr ""
+
+#: app/templates/packages/list.html:59
+msgid "More content from the forums"
+msgstr ""
+
+#: app/templates/packages/package_base.html:13
+msgid "Thumbnail"
+msgstr ""
+
+#: app/templates/packages/release_bulk_change.html:4
+msgid "Bulk Change Releases"
+msgstr ""
+
+#: app/templates/packages/release_bulk_change.html:11
+msgid "Use this page to set the min and max of all releases for your package."
+msgstr ""
+
+#: app/templates/packages/release_bulk_change.html:29
+#: app/templates/packages/release_edit.html:54
+#: app/templates/packages/release_new.html:70
+msgid "Maximum must be greater than or equal to the minimum!"
+msgstr ""
+
+#: app/templates/packages/release_bulk_change.html:33
+msgid ""
+"Note: Min and max versions will be used to hide the package on\n"
+"\t\t\tplatforms not within the range."
+msgstr ""
+
+#: app/templates/packages/release_bulk_change.html:35
+#: app/templates/packages/release_edit.html:66
+#: app/templates/packages/release_new.html:86
+msgid ""
+"You cannot select the oldest version for min or the newest version\n"
+"\t\t\tfor max as this does not make sense - you can't predict the future."
+msgstr ""
+
+#: app/templates/packages/release_bulk_change.html:38
+#: app/templates/packages/release_edit.html:61
+#: app/templates/packages/release_new.html:83
+msgid "Leave both as None if in doubt."
+msgstr ""
+
+#: app/templates/packages/release_edit.html:4
+msgid "Edit release"
+msgstr ""
+
+#: app/templates/packages/release_edit.html:27
+msgid "Commit Hash"
+msgstr ""
+
+#: app/templates/packages/release_edit.html:32
+msgid "view task"
+msgstr ""
+
+#: app/templates/packages/release_edit.html:42
+#: app/templates/packages/screenshot_edit.html:20
+#, fuzzy
+msgid "Approved"
+msgstr "Pakej tidak diluluskan"
+
+#: app/templates/packages/release_edit.html:46
+msgid "Supported Minetest versions"
+msgstr ""
+
+#: app/templates/packages/release_edit.html:58
+#: app/templates/packages/release_new.html:80
+msgid ""
+"Set the minimum and maximum Minetest versions supported.\n"
+"\t\t\tThis release will be hidden to clients outside of that range. "
+msgstr ""
+
+#: app/templates/packages/release_edit.html:63
+msgid ""
+"You can <a href='/help/package_config/'>set this automatically</a> in the"
+" .conf of your package."
+msgstr ""
+
+#: app/templates/packages/release_edit.html:75
 msgid "Delete Release"
 msgstr ""
 
-#: app/templates/packages/release_edit.html:77
-#: app/templates/packages/review_create_edit.html:55
-#: app/templates/threads/view.html:40
-msgid "Delete"
-msgstr ""
-
-#: app/templates/packages/release_edit.html:78
+#: app/templates/packages/release_edit.html:81
 msgid "This is permanent."
 msgstr ""
 
-#: app/templates/packages/release_edit.html:79
+#: app/templates/packages/release_edit.html:82
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
 msgstr ""
 
-#: app/templates/packages/release_edit.html:84
+#: app/templates/packages/release_edit.html:87
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr ""
 
@@ -1415,6 +1881,7 @@ msgid ""
 msgstr ""
 
 #: app/templates/packages/release_new.html:28
+#: app/templates/packages/release_wizard.html:69
 msgid "Add Git repo"
 msgstr ""
 
@@ -1425,11 +1892,42 @@ msgid ""
 "code or tags."
 msgstr ""
 
+#: app/templates/packages/release_new.html:40
+msgid "1. Name release"
+msgstr ""
+
+#: app/templates/packages/release_new.html:42
+msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
+msgstr ""
+
+#: app/templates/packages/release_new.html:44
+msgid "2. Set the content"
+msgstr ""
+
+#: app/templates/packages/release_new.html:57
+msgid ""
+"Take a look at the <a href='/help/package_config/'>Package Configuration "
+"and Releases Guide</a> for\n"
+"\t\t\ttips on customising releases."
+msgstr ""
+
+#: app/templates/packages/release_new.html:61
+msgid "3. Supported Minetest versions"
+msgstr ""
+
+#: app/templates/packages/release_new.html:75
+msgid ""
+"The .conf of your package can <a href='/help/package_config/'>set this "
+"automatically</a>,\n"
+"\t\t\twhich will override your selection."
+msgstr ""
+
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
 msgstr ""
 
 #: app/templates/packages/release_wizard.html:9
+#: app/templates/packages/release_wizard.html:75
 msgid "Later"
 msgstr ""
 
@@ -1490,6 +1988,10 @@ msgstr ""
 msgid "Unfortunately, you will otherwise need to create a release manually."
 msgstr ""
 
+#: app/templates/packages/release_wizard.html:72
+msgid "Create releases manually"
+msgstr ""
+
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
@@ -1499,14 +2001,45 @@ msgstr ""
 msgid "Set up automatic releases"
 msgstr ""
 
-#: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:442
-msgid "Releases"
+#: app/templates/packages/releases_list.html:24
+msgid "Bulk update"
+msgstr ""
+
+#: app/templates/packages/remove.html:9
+#, python-format
+msgid "Remove %(title)s"
+msgstr ""
+
+#: app/templates/packages/remove.html:11
+msgid ""
+"In order to avoid data loss, you cannot permanently delete packages.\n"
+"\t\t\tYou can remove them from ContentDB, which will cause them to not be"
+"\n"
+"\t\t\tvisible to any users and they may be permanently deleted in the "
+"future.\n"
+"\t\t\tThe Admin can restore removed packages, if needed."
+msgstr ""
+
+#: app/templates/packages/remove.html:19
+msgid ""
+"Unapproving a package will put it back into Draft, where\n"
+"\t\t\t\tit can be submitted for approval again."
+msgstr ""
+
+#: app/templates/packages/remove.html:26
+#: app/templates/threads/delete_reply.html:18
+#: app/templates/threads/delete_thread.html:18
+#: app/templates/users/delete.html:30
+msgid "Cancel"
 msgstr ""
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
+msgstr ""
+
+#: app/templates/packages/review_create_edit.html:16
+msgid "Found a bug? Post on the <a href='%{url}s'>issue tracker</a> instead."
 msgstr ""
 
 #: app/templates/packages/review_create_edit.html:56
@@ -1520,12 +2053,23 @@ msgid ""
 msgstr ""
 
 #: app/templates/packages/review_votes.html:4
+#: app/templates/packages/view.html:287
 msgid "Review Votes"
 msgstr ""
 
 #: app/templates/packages/review_votes.html:13
 #, python-format
 msgid "Review votes on %(title)s by %(author)s"
+msgstr ""
+
+#: app/templates/packages/screenshot_edit.html:4
+#: app/templates/packages/screenshot_edit.html:11
+msgid "Edit screenshot"
+msgstr ""
+
+#: app/templates/packages/screenshot_new.html:4
+#: app/templates/packages/screenshot_new.html:8
+msgid "Add a screenshot"
 msgstr ""
 
 #: app/templates/packages/screenshots.html:11
@@ -1536,6 +2080,15 @@ msgstr ""
 msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr ""
 
+#: app/templates/packages/screenshots.html:36
+#: app/templates/packages/view.html:244
+msgid "Awaiting review"
+msgstr ""
+
+#: app/templates/packages/screenshots.html:54
+msgid "No screenshots."
+msgstr ""
+
 #: app/templates/packages/screenshots.html:62
 msgid "Save Order"
 msgstr ""
@@ -1543,6 +2096,19 @@ msgstr ""
 #: app/templates/packages/screenshots.html:67
 msgid "Reordering requires JavaScript."
 msgstr ""
+
+#: app/templates/packages/share.html:10
+msgid "Links"
+msgstr ""
+
+#: app/templates/packages/share.html:13
+msgid "Review link"
+msgstr ""
+
+#: app/templates/packages/share.html:18
+#, fuzzy
+msgid "Badges"
+msgstr "Tag"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -1579,20 +2145,20 @@ msgid ""
 "notifications until it is marked up to date."
 msgstr ""
 
-#: app/templates/packages/view.html:48
-msgid "Edit"
+#: app/templates/packages/view.html:29
+msgid "Non-free code and media"
 msgstr ""
 
-#: app/templates/packages/view.html:60
-msgid "Remove"
+#: app/templates/packages/view.html:31
+msgid "Non-free code"
+msgstr ""
+
+#: app/templates/packages/view.html:33
+msgid "Non-free media"
 msgstr ""
 
 #: app/templates/packages/view.html:96
 msgid "Work in Progress"
-msgstr ""
-
-#: app/templates/packages/view.html:110
-msgid "Author"
 msgstr ""
 
 #: app/templates/packages/view.html:117
@@ -1638,48 +2204,114 @@ msgstr ""
 msgid "No downloads available"
 msgstr ""
 
-#: app/templates/packages/view.html:245
-msgid "Awaiting review"
+#: app/templates/packages/view.html:214
+msgid ""
+"This thread is only visible to the package owner and users of Approver "
+"rank or above."
 msgstr ""
 
-#: app/templates/packages/view.html:273 app/templates/threads/view.html:61
+#: app/templates/packages/view.html:272 app/templates/threads/view.html:61
 msgid "Edit Review"
 msgstr ""
 
-#: app/templates/packages/view.html:278
+#: app/templates/packages/view.html:277
 msgid "You can't review your own package."
 msgstr ""
 
-#: app/templates/packages/view.html:312
+#: app/templates/packages/view.html:293
+msgid "Used By"
+msgstr ""
+
+#: app/templates/packages/view.html:304
+msgid "Package may be outdated"
+msgstr ""
+
+#: app/templates/packages/view.html:311
 msgid "Only visible to the author and Editors."
 msgstr ""
 
-#: app/templates/packages/view.html:334
+#: app/templates/packages/view.html:328
+msgid "Warning"
+msgstr ""
+
+#: app/templates/packages/view.html:333
 msgid "Dependencies"
 msgstr ""
 
-#: app/templates/packages/view.html:336
+#: app/templates/packages/view.html:335
 msgid "Required"
+msgstr ""
+
+#: app/templates/packages/view.html:353
+msgid "No required dependencies"
 msgstr ""
 
 #: app/templates/packages/view.html:359
 msgid "Optional"
 msgstr ""
 
-#: app/templates/packages/view.html:380
+#: app/templates/packages/view.html:381
 msgid "Information"
 msgstr ""
 
-#: app/templates/packages/view.html:386
+#: app/templates/packages/view.html:387
 msgid "Technical Name"
 msgstr ""
 
-#: app/templates/packages/view.html:405
+#: app/templates/packages/view.html:404
+msgid "Unknown"
+msgstr ""
+
+#: app/templates/packages/view.html:406
 msgid "Added"
 msgstr ""
 
-#: app/templates/packages/view.html:419
+#: app/templates/packages/view.html:420
 msgid "Remove myself"
+msgstr ""
+
+#: app/templates/packages/view.html:425
+msgid "Provides"
+msgstr ""
+
+#: app/templates/packages/view.html:435
+#, python-format
+msgid "Like %(display_name)s's work? Donate now!"
+msgstr ""
+
+#: app/templates/packages/view.html:453
+msgid "More"
+msgstr ""
+
+#: app/templates/packages/view.html:474
+msgid "Report a problem with this listing"
+msgstr ""
+
+#: app/templates/packages/view.html:479
+msgid "See audit log"
+msgstr ""
+
+#: app/templates/tasks/view.html:5
+msgid "Task Failed"
+msgstr ""
+
+#: app/templates/tasks/view.html:7
+msgid "Working…"
+msgstr ""
+
+#: app/templates/tasks/view.html:26
+msgid "Reload the page to check for updates."
+msgstr ""
+
+#: app/templates/threads/delete_reply.html:4
+#, python-format
+msgid "Delete reply by %{username)s in %(title)s "
+msgstr ""
+
+#: app/templates/threads/delete_reply.html:16
+#: app/templates/threads/delete_thread.html:16
+#: app/templates/users/delete.html:13
+msgid "Deleting is permanent"
 msgstr ""
 
 #: app/templates/threads/delete_thread.html:4
@@ -1692,15 +2324,45 @@ msgstr ""
 msgid "Edit reply"
 msgstr ""
 
+#: app/templates/threads/new.html:4
+msgid "New Thread"
+msgstr ""
+
+#: app/templates/threads/new.html:11
+#, python-format
+msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
+msgstr ""
+
+#: app/templates/threads/new.html:12
+msgid ""
+"If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
+"you can let us know here."
+msgstr ""
+
+#: app/templates/threads/new.html:40
+msgid ""
+"Only you, the package author, and users of Approver rank and above can "
+"read private threads."
+msgstr ""
+
 #: app/templates/threads/user_comments.html:9
 #: app/templates/threads/user_comments.html:13
 #, python-format
 msgid "Comments by %(user)s"
 msgstr ""
 
+#: app/templates/threads/user_comments.html:46
+#, python-format
+msgid "Reply to <b>%(title)s</b>"
+msgstr ""
+
 #: app/templates/threads/view.html:12
 #, python-format
 msgid "%(title)s on %(package)s"
+msgstr ""
+
+#: app/templates/threads/view.html:36
+msgid "Subscribe"
 msgstr ""
 
 #: app/templates/threads/view.html:46
@@ -1711,8 +2373,65 @@ msgstr ""
 msgid "Lock"
 msgstr ""
 
+#: app/templates/threads/view.html:84
+msgid ""
+"This thread is only visible to its creator, the package owner, and users "
+"of Approver rank or above."
+msgstr ""
+
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
+msgstr ""
+
+#: app/templates/todo/editor.html:8
+msgid "Approval Queue"
+msgstr ""
+
+#: app/templates/todo/editor.html:15
+#, fuzzy
+msgid "Approve All"
+msgstr "Pakej tidak diluluskan"
+
+#: app/templates/todo/editor.html:33
+msgid "No screenshots need reviewing."
+msgstr ""
+
+#: app/templates/todo/editor.html:65 app/templates/todo/editor.html:181
+msgid "No packages need reviewing."
+msgstr ""
+
+#: app/templates/todo/editor.html:80
+msgid "Importing"
+msgstr ""
+
+#: app/templates/todo/editor.html:90
+msgid "No releases need reviewing."
+msgstr ""
+
+#: app/templates/todo/editor.html:100
+msgid "All done!"
+msgstr ""
+
+#: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
+msgid "License Needed"
+msgstr ""
+
+#: app/templates/todo/editor.html:127
+#, fuzzy
+msgid "Tag Packages"
+msgstr "Pakej dipadam"
+
+#: app/templates/todo/editor.html:130
+#, python-format
+msgid "%(total_to_tag)d / %(total_packages)d packages don't have any tags."
+msgstr ""
+
+#: app/templates/todo/editor.html:140
+msgid "View Tags"
+msgstr ""
+
+#: app/templates/todo/editor.html:147
+msgid "Unfulfilled Dependencies"
 msgstr ""
 
 #: app/templates/todo/outdated.html:4
@@ -1760,103 +2479,180 @@ msgstr ""
 msgid "Unapproved Packages Needing Action"
 msgstr ""
 
-#: app/templates/todo/user.html:39 app/templates/todo/user.html:85
+#: app/templates/todo/user.html:39 app/templates/todo/user.html:87
 msgid "Nothing to do :)"
 msgstr ""
 
-#: app/templates/todo/user.html:48
+#: app/templates/todo/user.html:45
+msgid "See all Update Settings"
+msgstr ""
+
+#: app/templates/todo/user.html:50
 msgid "Create All Releases"
 msgstr ""
 
-#: app/templates/todo/user.html:51
+#: app/templates/todo/user.html:53
 msgid "Potentially Outdated Packages"
 msgstr ""
 
-#: app/templates/todo/user.html:53
+#: app/templates/todo/user.html:55
 msgid ""
 "New: Git Update Detection has been set up on all packages to send "
 "notifications."
 msgstr ""
 
-#: app/templates/todo/user.html:54
+#: app/templates/todo/user.html:56
 msgid ""
 "Consider changing the update settings to create releases automatically "
 "instead."
 msgstr ""
 
-#: app/templates/todo/user.html:57
+#: app/templates/todo/user.html:59
 msgid ""
 "Instead of marking packages as outdated, you can automatically create "
 "releases when New Commits or New Tags are pushed to Git by clicking "
 "'Update Settings'."
 msgstr ""
 
-#: app/templates/todo/user.html:59
+#: app/templates/todo/user.html:61
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
 
-#: app/templates/todo/user.html:68
+#: app/templates/todo/user.html:70
 msgid "Packages Without Tags"
 msgstr ""
 
-#: app/templates/todo/user.html:90
+#: app/templates/todo/user.html:72
+msgid "Labelling your packages with tags helps users find them."
+msgstr ""
+
+#: app/templates/todo/user.html:92
 msgid "Unadded Topics"
+msgstr ""
+
+#: app/templates/todo/user.html:95
+msgid "List of your forum topics which do not have a matching package."
+msgstr ""
+
+#: app/templates/todo/user.html:96
+msgid "Topics with a strikethrough have been marked as discarded."
+msgstr ""
+
+#: app/templates/todo/user.html:104
+msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr ""
 
 #: app/templates/users/account.html:4
 #, python-format
-msgid "Account and Security | %(username)s"
+msgid "Account and Security - %(username)s"
 msgstr ""
 
-#: app/templates/users/account.html:8
-msgid "Account and Security"
-msgstr ""
-
-#: app/templates/users/account.html:12
+#: app/templates/users/account.html:16
 msgid "Edit Account"
 msgstr ""
 
-#: app/templates/users/account.html:46
+#: app/templates/users/account.html:45
+msgid "Change Password"
+msgstr ""
+
+#: app/templates/users/account.html:49
+#: app/templates/users/change_set_password.html:20
+msgid "Set Password"
+msgstr ""
+
+#: app/templates/users/account.html:54
 msgid "Has password"
 msgstr ""
 
-#: app/templates/users/account.html:48
+#: app/templates/users/account.html:56
 msgid "Doesn't have password"
 msgstr ""
 
-#: app/templates/users/account.html:52
+#: app/templates/users/account.html:60
 msgid "Linked Accounts"
 msgstr ""
 
-#: app/templates/users/account.html:91
+#: app/templates/users/account.html:67 app/templates/users/account.html:79
+msgid "Connected"
+msgstr ""
+
+#: app/templates/users/account.html:70
+#, python-format
+msgid "Please PM %(rubenwardy)s on the forums to link your account."
+msgstr ""
+
+#: app/templates/users/account.html:84
+msgid "View ContentDB's GitHub Permissions"
+msgstr ""
+
+#: app/templates/users/account.html:89
+msgid "Link Github"
+msgstr ""
+
+#: app/templates/users/account.html:92
+msgid "None"
+msgstr ""
+
+#: app/templates/users/account.html:100
+msgid "View All"
+msgstr ""
+
+#: app/templates/users/account.html:104
 msgid "Recent Account Actions"
 msgstr ""
 
-#: app/templates/users/account.html:96
+#: app/templates/users/account.html:109
 msgid "Account Deletion and Deactivation"
 msgstr ""
 
-#: app/templates/users/account.html:102
+#: app/templates/users/account.html:113
+msgid "Delete or Deactivate"
+msgstr ""
+
+#: app/templates/users/account.html:116
 msgid "Account Deletion and Deactivation isn't available to users yet."
 msgstr ""
 
-#: app/templates/users/account.html:103
+#: app/templates/users/account.html:117
 msgid "Please contact the admin."
 msgstr ""
 
-#: app/templates/users/change_set_password.html:26
+#: app/templates/users/change_set_password.html:11
+msgid "It is recommended that you set a password for your account."
+msgstr ""
+
+#: app/templates/users/change_set_password.html:14
+msgid "Skip"
+msgstr ""
+
+#: app/templates/users/change_set_password.html:28
 #: app/templates/users/register.html:24
 msgid ""
 "Your email is needed to recover your account if you forget your password "
 "and to send (configurable) notifications. "
 msgstr ""
 
-#: app/templates/users/change_set_password.html:27
+#: app/templates/users/change_set_password.html:29
 #: app/templates/users/register.html:25
 #: app/templates/users/settings_email.html:20
 msgid "Your email will never be shared with a third-party."
+msgstr ""
+
+#: app/templates/users/change_set_password.html:36
+#: app/templates/users/register.html:27
+msgid "Must be at least 8 characters long."
+msgstr ""
+
+#: app/templates/users/change_set_password.html:40
+#: app/templates/users/register.html:30
+msgid "Password suggestion"
+msgstr ""
+
+#: app/templates/users/change_set_password.html:41
+#: app/templates/users/register.html:31
+msgid "Why?"
 msgstr ""
 
 #: app/templates/users/claim.html:4
@@ -1867,8 +2663,31 @@ msgstr ""
 msgid "Do you have an account on the Minetest Forums?"
 msgstr ""
 
-#: app/templates/users/claim_forums.html:10
-msgid "Confirm Your Account"
+#: app/templates/users/claim.html:13
+msgid "ContentDB will link your account to your forum account."
+msgstr ""
+
+#: app/templates/users/claim.html:17
+msgid ""
+"You don't need a forum account, however, it's recommended to make the "
+"most out of the Minetest community."
+msgstr ""
+
+#: app/templates/users/claim.html:22
+msgid "<b>Yes</b>, I have a forums account"
+msgstr ""
+
+#: app/templates/users/claim.html:25
+msgid "<b>No</b>, I don't have one"
+msgstr ""
+
+#: app/templates/users/claim.html:28
+msgid "Create forum account"
+msgstr ""
+
+#: app/templates/users/delete.html:4
+#, python-format
+msgid "Delete user %(username)s"
 msgstr ""
 
 #: app/templates/users/delete.html:17
@@ -1895,13 +2714,25 @@ msgstr ""
 msgid "See the privacy policy for more information."
 msgstr ""
 
-#: app/templates/users/forgot_password.html:11
+#: app/templates/users/delete.html:36
+msgid "Deactivate"
+msgstr ""
+
+#: app/templates/users/delete.html:40
+msgid "Delete Anyway"
+msgstr ""
+
+#: app/templates/users/forgot_password.html:4
 msgid "Request Password Reset"
 msgstr ""
 
 #: app/templates/users/forums_no_such_user.html:14
 #, python-format
 msgid "Unfortunately, %(username)s doesn't have an account on ContentDB yet."
+msgstr ""
+
+#: app/templates/users/forums_no_such_user.html:19
+msgid "Claim Account"
 msgstr ""
 
 #: app/templates/users/list.html:4 app/templates/users/list.html:8
@@ -1921,8 +2752,8 @@ msgstr ""
 msgid "GitHub"
 msgstr ""
 
-#: app/templates/users/profile.html:17 app/templates/users/profile_edit.html:8
-msgid "Edit Profile"
+#: app/templates/users/profile.html:11
+msgid "Profile picture"
 msgstr ""
 
 #: app/templates/users/profile.html:22
@@ -1949,9 +2780,26 @@ msgstr ""
 msgid "comments"
 msgstr ""
 
+#: app/templates/users/profile.html:120
+msgid "Claim"
+msgstr ""
+
+#: app/templates/users/profile.html:122
+msgid "Is this you? Claim your account now!"
+msgstr ""
+
 #: app/templates/users/profile.html:155
 #, python-format
 msgid "%(value)d / %(target)d"
+msgstr ""
+
+#: app/templates/users/profile.html:169
+#, fuzzy
+msgid "Create package"
+msgstr "Pakej dipadam"
+
+#: app/templates/users/profile.html:175
+msgid "View list of tags"
 msgstr ""
 
 #: app/templates/users/profile.html:185
@@ -1964,7 +2812,7 @@ msgstr ""
 
 #: app/templates/users/profile_edit.html:4
 #, python-format
-msgid "Edit Profile | %(username)s"
+msgid "Edit Profile - %(username)s"
 msgstr ""
 
 #: app/templates/users/profile_edit.html:10
@@ -1999,10 +2847,6 @@ msgstr ""
 msgid "Same as username"
 msgstr ""
 
-#: app/templates/users/register.html:27
-msgid "Must be at least 8 characters long."
-msgstr ""
-
 #: app/templates/users/register.html:38
 msgid "Please prove that you are human"
 msgstr ""
@@ -2013,11 +2857,11 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:4
 #, python-format
-msgid "Email and Notifications | %(username)s"
+msgid "Email and Notifications - %(username)s"
 msgstr ""
 
-#: app/templates/users/settings_email.html:8
-msgid "Email and Notifications"
+#: app/templates/users/settings_email.html:14
+msgid "Email Address"
 msgstr ""
 
 #: app/templates/users/settings_email.html:19
@@ -2030,26 +2874,30 @@ msgstr ""
 msgid "There is at least one verification pending."
 msgstr ""
 
+#: app/templates/users/settings_email.html:29
+msgid "Notification Settings"
+msgstr ""
+
 #: app/templates/users/settings_email.html:33
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr ""
 
-#: app/templates/users/unsubscribe.html:11
+#: app/templates/users/settings_email.html:38
 msgid ""
-"This will blacklist an email address, preventing ContentDB from ever "
-"sending emails to it - including password resets."
+"Configure whether certain types of notifications are sent immediately, or"
+" as part of a daily digest."
 msgstr ""
 
-#: app/templates/users/unsubscribe.html:20
-msgid "Please enter the email address you wish to blacklist."
+#: app/templates/users/settings_email.html:43
+msgid "Event"
 msgstr ""
 
-#: app/templates/users/unsubscribe.html:21
-msgid "You will then need to confirm the email"
+#: app/templates/users/settings_email.html:45
+msgid "Immediately"
 msgstr ""
 
-#: app/templates/users/unsubscribe.html:33
-msgid "You may now unsubscribe."
+#: app/templates/users/settings_email.html:46
+msgid "In digest"
 msgstr ""
 
 #: app/utils/user.py:50
@@ -2064,3 +2912,32 @@ msgstr ""
 
 #~ msgid "forum.minetest.net/viewtopic.php?t="
 #~ msgstr ""
+
+#~ msgid "Account and Security | %(username)s"
+#~ msgstr ""
+
+#~ msgid "Confirm Your Account"
+#~ msgstr ""
+
+#~ msgid "Edit Profile | %(username)s"
+#~ msgstr ""
+
+#~ msgid "Email and Notifications | %(username)s"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "This will blacklist an email address,"
+#~ " preventing ContentDB from ever sending "
+#~ "emails to it - including password "
+#~ "resets."
+#~ msgstr ""
+
+#~ msgid "Please enter the email address you wish to blacklist."
+#~ msgstr ""
+
+#~ msgid "You will then need to confirm the email"
+#~ msgstr ""
+
+#~ msgid "You may now unsubscribe."
+#~ msgstr ""
+
