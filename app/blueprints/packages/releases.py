@@ -50,7 +50,7 @@ def get_mt_releases(is_max):
 
 class CreatePackageReleaseForm(FlaskForm):
 	title	   = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)])
-	uploadOpt  = RadioField(lazy_gettext("Method"), choices=[("upload", "File Upload")], default="upload")
+	uploadOpt  = RadioField(lazy_gettext("Method"), choices=[("upload", lazy_gettext("File Upload"))], default="upload")
 	vcsLabel   = StringField(lazy_gettext("Git reference (ie: commit hash, branch, or tag)"), default=None)
 	fileUpload = FileField(lazy_gettext("File Upload"))
 	min_rel    = QuerySelectField(lazy_gettext("Minimum Minetest Version"), [InputRequired()],
@@ -81,7 +81,7 @@ def create_release(package):
 	# Initial form class from post data and default data
 	form = CreatePackageReleaseForm()
 	if package.repo is not None:
-		form["uploadOpt"].choices = [("vcs", "Import from Git"), ("upload", "Upload .zip file")]
+		form["uploadOpt"].choices = [("vcs", gettext("Import from Git")), ("upload", gettext("Upload .zip file"))]
 		if request.method == "GET":
 			form["uploadOpt"].data = "vcs"
 			form.vcsLabel.data = request.args.get("ref")

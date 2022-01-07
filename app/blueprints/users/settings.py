@@ -16,22 +16,22 @@ def get_setting_tabs(user):
 	return [
 		{
 			"id": "edit_profile",
-			"title": "Edit Profile",
+			"title": gettext("Edit Profile"),
 			"url": url_for("users.profile_edit", username=user.username)
 		},
 		{
 			"id": "account",
-			"title": "Account and Security",
+			"title": gettext("Account and Security"),
 			"url": url_for("users.account", username=user.username)
 		},
 		{
 			"id": "notifications",
-			"title": "Email and Notifications",
+			"title": gettext("Email and Notifications"),
 			"url": url_for("users.email_notifications", username=user.username)
 		},
 		{
 			"id": "api_tokens",
-			"title": "API Tokens",
+			"title": gettext("API Tokens"),
 			"url": url_for("api.list_tokens", username=user.username)
 		},
 	]
@@ -130,7 +130,7 @@ def handle_email_notifications(user, prefs: UserNotificationPreferences, is_new,
 		newEmail = form.email.data
 		if newEmail and newEmail != user.email and newEmail.strip() != "":
 			if EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
-				flash("That email address has been unsubscribed/blacklisted, and cannot be used", "danger")
+				flash(gettext("That email address has been unsubscribed/blacklisted, and cannot be used"), "danger")
 				return
 
 			token = randomString(32)

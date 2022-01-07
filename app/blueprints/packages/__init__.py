@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint
+from flask_babel import gettext
 
 from app.models import User, Package, Permission
 
@@ -28,37 +29,37 @@ def get_package_tabs(user: User, package: Package):
 	return [
 		{
 			"id": "edit",
-			"title": "Edit Details",
+			"title": gettext("Edit Details"),
 			"url": package.getURL("packages.create_edit")
 		},
 		{
 			"id": "releases",
-			"title": "Releases",
+			"title": gettext("Releases"),
 			"url": package.getURL("packages.list_releases")
 		},
 		{
 			"id": "screenshots",
-			"title": "Screenshots",
+			"title": gettext("Screenshots"),
 			"url": package.getURL("packages.screenshots")
 		},
 		{
 			"id": "maintainers",
-			"title": "Maintainers",
+			"title": gettext("Maintainers"),
 			"url": package.getURL("packages.edit_maintainers")
 		},
 		{
 			"id": "audit",
-			"title": "Audit Log",
+			"title": gettext("Audit Log"),
 			"url": package.getURL("packages.audit")
 		},
 		{
 			"id": "share",
-			"title": "Share and Badges",
+			"title": gettext("Share and Badges"),
 			"url": package.getURL("packages.share")
 		},
 		{
 			"id": "remove",
-			"title": "Remove",
+			"title": gettext("Remove"),
 			"url": package.getURL("packages.remove")
 		}
 	]

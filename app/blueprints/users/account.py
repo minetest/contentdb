@@ -137,7 +137,7 @@ def handle_register(form):
 
 	user_by_email = User.query.filter_by(email=form.email.data).first()
 	if user_by_email:
-		send_anon_email.delay(form.email.data, "Email already in use",
+		send_anon_email.delay(form.email.data, gettext("Email already in use"),
 			gettext("We were unable to create the account as the email is already in use by %(display_name)s. Try a different email address.",
 					display_name=user_by_email.display_name))
 		return redirect(url_for("flatpage", path="email_sent"))
@@ -264,7 +264,7 @@ def handle_set_password(form):
 
 			user_by_email = User.query.filter_by(email=form.email.data).first()
 			if user_by_email:
-				send_anon_email.delay(form.email.data, "Email already in use",
+				send_anon_email.delay(form.email.data, gettext("Email already in use"),
 					gettext(u"We were unable to create the account as the email is already in use by %(display_name)s. Try a different email address.",
 							display_name=user_by_email.display_name))
 			else:
