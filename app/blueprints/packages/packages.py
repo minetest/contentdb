@@ -99,7 +99,7 @@ def list_all():
 	selected_tags = set(qb.tags)
 
 	return render_template("packages/list.html",
-			title=title, packages=query.items, pagination=query,
+			query_hint=title, packages=query.items, pagination=query,
 			query=search, tags=tags, selected_tags=selected_tags, type=type_name,
 			authors=authors, packages_count=query.total, topics=topics)
 
