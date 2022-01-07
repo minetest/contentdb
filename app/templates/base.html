@@ -121,16 +121,24 @@
 
 							<ul class="dropdown-menu dropdown-menu-right" role="menu">
 								<li class="nav-item">
-									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}">Profile</a>
+									<a class="nav-link" href="{{ url_for('users.profile', username=current_user.username) }}">
+										{{ _("Profile") }}
+									</a>
 								</li>
 								<li class="nav-item">
-									<a class="nav-link" href="{{ url_for('todo.view_user', username=current_user.username) }}">To do list</a>
+									<a class="nav-link" href="{{ url_for('todo.view_user', username=current_user.username) }}">
+										{{ _("To do list") }}
+									</a>
 								</li>
 								{% if current_user.rank.atLeast(current_user.rank.EDITOR) or check_global_perm(current_user, "CREATE_TAG") %}
 									<li class="dropdown-divider"></li>
 								{% endif %}
 								{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.audit') }}">{{ _("Audit Log") }}</a></li>
+									<li class="nav-item">
+										<a class="nav-link" href="{{ url_for('admin.audit') }}">
+											{{ _("Audit Log") }}
+										</a>
+									</li>
 									{% if current_user.rank == current_user.rank.ADMIN %}
 										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.admin_page') }}">{{ _("Admin") }}</a></li>
 									{% else %}
@@ -149,7 +157,9 @@
 								{% endif %}
 								<li class="dropdown-divider"></li>
 								<li class="nav-item">
-									<a class="nav-link" href="{{ url_for('users.profile_edit', username=current_user.username) }}">Settings</a>
+									<a class="nav-link" href="{{ url_for('users.profile_edit', username=current_user.username) }}">
+										{{ _("Settings") }}
+									</a>
 								</li>
 								<li class="nav-item"><a class="nav-link" href="{{ url_for('users.logout') }}">{{ _("Sign out") }}</a></li>
 							</ul>
@@ -225,7 +235,7 @@
 
 	<footer class="my-5">
 		<p class="pt-5 mb-1">
-			ContentDB &copy; 2018-21 to <a href="https://rubenwardy.com/">rubenwardy</a>
+			ContentDB &copy; 2018-22 to <a href="https://rubenwardy.com/">rubenwardy</a>
 		</p>
 
 		<ul class="list-inline my-1">

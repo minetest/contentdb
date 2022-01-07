@@ -1,4 +1,4 @@
-# Translations template for PROJECT.
+# Spanish translations for PROJECT.
 # Copyright (C) 2022 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-04 19:05+0000\n"
+"POT-Creation-Date: 2022-01-07 20:58+0000\n"
 "PO-Revision-Date: 2022-01-06 19:53+0000\n"
 "Last-Translator: Joaquín Villalba <joaco-mono@hotmail.com>\n"
-"Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
-"contentdb/es/>\n"
 "Language: es\n"
+"Language-Team: Spanish "
+"<https://hosted.weblate.org/projects/minetest/contentdb/es/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/template_filters.py:52
@@ -111,11 +110,21 @@ msgstr ""
 msgid "Has received %(downloads)d downloads across all packages."
 msgstr ""
 
+#: app/templates/404.html:4
+msgid "Page not found"
+msgstr ""
+
+#: app/templates/404.html:10
+msgid ""
+"That page could not be found. The link may be broken, the page may have "
+"been deleted, or you may not have access to it."
+msgstr ""
+
 #: app/templates/base.html:65
 msgid "Work Queue"
 msgstr ""
 
-#: app/templates/base.html:78
+#: app/templates/base.html:78 app/templates/base.html:130
 msgid "To do list"
 msgstr ""
 
@@ -127,67 +136,75 @@ msgstr ""
 msgid "Add Package"
 msgstr ""
 
-#: app/templates/base.html:130
+#: app/templates/base.html:125
+msgid "Profile"
+msgstr ""
+
+#: app/templates/base.html:139
 msgid "Audit Log"
 msgstr ""
 
-#: app/templates/base.html:132
+#: app/templates/base.html:143
 msgid "Admin"
 msgstr ""
 
-#: app/templates/base.html:135
+#: app/templates/base.html:146
 msgid "License Editor"
 msgstr ""
 
-#: app/templates/base.html:140
+#: app/templates/base.html:151
 msgid "Restore Package"
 msgstr ""
 
-#: app/templates/base.html:143
+#: app/templates/base.html:154
 msgid "Tag Editor"
 msgstr ""
 
-#: app/templates/base.html:145
+#: app/templates/base.html:156
 msgid "Create Tag"
 msgstr ""
 
-#: app/templates/base.html:151
+#: app/templates/base.html:161 app/templates/packages/release_new.html:12
+msgid "Settings"
+msgstr ""
+
+#: app/templates/base.html:164
 msgid "Sign out"
 msgstr ""
 
-#: app/templates/base.html:155
+#: app/templates/base.html:168
 msgid "Sign in"
 msgstr ""
 
-#: app/templates/base.html:193
+#: app/templates/base.html:242
 msgid "Help"
 msgstr ""
 
-#: app/templates/base.html:194
+#: app/templates/base.html:243
 msgid "Policy and Guidance"
 msgstr ""
 
-#: app/templates/base.html:195
+#: app/templates/base.html:244
 msgid "API"
 msgstr ""
 
-#: app/templates/base.html:196 app/templates/users/register.html:43
+#: app/templates/base.html:245 app/templates/users/register.html:43
 msgid "Privacy Policy"
 msgstr ""
 
-#: app/templates/base.html:197
+#: app/templates/base.html:246
 msgid "Report / DMCA"
 msgstr ""
 
-#: app/templates/base.html:198
+#: app/templates/base.html:247
 msgid "Stats / Monitoring"
 msgstr ""
 
-#: app/templates/base.html:199
+#: app/templates/base.html:248
 msgid "User List"
 msgstr ""
 
-#: app/templates/base.html:200
+#: app/templates/base.html:249
 msgid "Source Code"
 msgstr ""
 
@@ -218,6 +235,10 @@ msgstr ""
 
 #: app/templates/index.html:90
 msgid "Next"
+msgstr ""
+
+#: app/templates/index.html:96
+msgid "Featured"
 msgstr ""
 
 #: app/templates/index.html:101 app/templates/index.html:108
@@ -678,10 +699,6 @@ msgstr ""
 msgid "Importing... (This may take a while)"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:119
-msgid "forum.minetest.net/viewtopic.php?t="
-msgstr ""
-
 #: app/templates/packages/create_edit.html:120
 msgid "Tip: paste in a forum topic URL"
 msgstr ""
@@ -737,10 +754,6 @@ msgstr ""
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
 msgid "Create a release"
-msgstr ""
-
-#: app/templates/packages/release_new.html:12
-msgid "Settings"
 msgstr ""
 
 #: app/templates/packages/release_new.html:14
@@ -1454,3 +1467,7 @@ msgstr ""
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
 msgstr ""
+
+#~ msgid "forum.minetest.net/viewtopic.php?t="
+#~ msgstr ""
+

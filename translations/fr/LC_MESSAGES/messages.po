@@ -1,4 +1,4 @@
-# Translations template for PROJECT.
+# French translations for PROJECT.
 # Copyright (C) 2022 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-04 19:05+0000\n"
+"POT-Creation-Date: 2022-01-07 20:58+0000\n"
 "PO-Revision-Date: 2022-01-04 21:25+0000\n"
 "Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
-"contentdb/fr/>\n"
 "Language: fr\n"
+"Language-Team: French "
+"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
+"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/template_filters.py:52
@@ -32,8 +31,7 @@ msgstr "Meilleur évaluateur"
 #: app/blueprints/users/profile.py:113
 #, python-format
 msgid "%(display_name)s has written the most helpful reviews on ContentDB."
-msgstr ""
-"%(display_name)s a écrit les évaluations les plus utiles sur le ContentDB."
+msgstr "%(display_name)s a écrit les évaluations les plus utiles sur le ContentDB."
 
 #: app/blueprints/users/profile.py:118
 msgid "2nd most helpful reviewer"
@@ -56,8 +54,7 @@ msgstr "Top %(perc)s%% évaluateur"
 #: app/blueprints/users/profile.py:126
 #, python-format
 msgid "Only %(place)d users have written more helpful reviews."
-msgstr ""
-"Seulement %(place)d utilisateurs ont écrit des évaluations plus utiles."
+msgstr "Seulement %(place)d utilisateurs ont écrit des évaluations plus utiles."
 
 #: app/blueprints/users/profile.py:131
 msgid "Consider writing more helpful reviews to get a medal."
@@ -113,11 +110,21 @@ msgstr ">50k téléchargements"
 msgid "Has received %(downloads)d downloads across all packages."
 msgstr "A reçu %(downloads)d téléchargements au total pour tous ses paquets."
 
+#: app/templates/404.html:4
+msgid "Page not found"
+msgstr ""
+
+#: app/templates/404.html:10
+msgid ""
+"That page could not be found. The link may be broken, the page may have "
+"been deleted, or you may not have access to it."
+msgstr ""
+
 #: app/templates/base.html:65
 msgid "Work Queue"
 msgstr "File d'attente"
 
-#: app/templates/base.html:78
+#: app/templates/base.html:78 app/templates/base.html:130
 msgid "To do list"
 msgstr "À faire"
 
@@ -129,68 +136,77 @@ msgstr "Notifications"
 msgid "Add Package"
 msgstr "Créer un paquet"
 
-#: app/templates/base.html:130
+#: app/templates/base.html:125
+#, fuzzy
+msgid "Profile"
+msgstr "Modifier le profil"
+
+#: app/templates/base.html:139
 msgid "Audit Log"
 msgstr "Journal d'audit"
 
-#: app/templates/base.html:132
+#: app/templates/base.html:143
 msgid "Admin"
 msgstr "Admin"
 
-#: app/templates/base.html:135
+#: app/templates/base.html:146
 #, fuzzy
 msgid "License Editor"
 msgstr "Éditeur de licences"
 
-#: app/templates/base.html:140
+#: app/templates/base.html:151
 msgid "Restore Package"
 msgstr "Restaurer le paquet"
 
-#: app/templates/base.html:143
+#: app/templates/base.html:154
 msgid "Tag Editor"
 msgstr "Éditeur d'étiquettes"
 
-#: app/templates/base.html:145
+#: app/templates/base.html:156
 msgid "Create Tag"
 msgstr "Créer une étiquette"
 
-#: app/templates/base.html:151
+#: app/templates/base.html:161 app/templates/packages/release_new.html:12
+msgid "Settings"
+msgstr "Paramètres"
+
+#: app/templates/base.html:164
 msgid "Sign out"
 msgstr "Se déconnecter"
 
-#: app/templates/base.html:155
+#: app/templates/base.html:168
 msgid "Sign in"
 msgstr "Se connecter"
 
-#: app/templates/base.html:193
+#: app/templates/base.html:242
 msgid "Help"
 msgstr "Aide"
 
-#: app/templates/base.html:194
+#: app/templates/base.html:243
 msgid "Policy and Guidance"
 msgstr "Règles et Recommandations"
 
-#: app/templates/base.html:195
+#: app/templates/base.html:244
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:196 app/templates/users/register.html:43
+#: app/templates/base.html:245 app/templates/users/register.html:43
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
 
-#: app/templates/base.html:197
+#: app/templates/base.html:246
 msgid "Report / DMCA"
 msgstr "Signaler / DMCA"
 
-#: app/templates/base.html:198
+#: app/templates/base.html:247
 msgid "Stats / Monitoring"
 msgstr "Statistiques / Monitoring"
 
-#: app/templates/base.html:199
+#: app/templates/base.html:248
 msgid "User List"
 msgstr "Liste des utilisateurs"
 
-#: app/templates/base.html:200
+#: app/templates/base.html:249
 msgid "Source Code"
 msgstr "Code source"
 
@@ -222,6 +238,11 @@ msgstr "Précédent"
 #: app/templates/index.html:90
 msgid "Next"
 msgstr "Suivant"
+
+#: app/templates/index.html:96
+#, fuzzy
+msgid "Featured"
+msgstr "Requis"
 
 #: app/templates/index.html:101 app/templates/index.html:108
 #: app/templates/index.html:115 app/templates/index.html:122
@@ -366,8 +387,8 @@ msgstr "Les Tokens d'API permettent à des scripts d'agir en votre nom."
 
 #: app/templates/api/create_edit_token.html:25
 msgid ""
-"Be careful with what/whom you share tokens with, as you are responsible for "
-"your account's actions."
+"Be careful with what/whom you share tokens with, as you are responsible "
+"for your account's actions."
 msgstr ""
 "Faites attention à qui et à quoi vous donnez vos Tokens, car vous êtes "
 "responsable des actions de votre compte."
@@ -602,8 +623,7 @@ msgstr "Laissez vide pour utiliser la branche par défaut"
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
-msgid ""
-"Currently, the branch name field is only used by the New Commit trigger."
+msgid "Currently, the branch name field is only used by the New Commit trigger."
 msgstr ""
 
 #: app/templates/packages/create_edit.html:5
@@ -635,11 +655,11 @@ msgstr "Lire plus"
 #: app/templates/packages/create_edit.html:49
 #, python-format
 msgid ""
-"You can include a .cdb.json file in your %(type)s to update these details "
-"automatically."
+"You can include a .cdb.json file in your %(type)s to update these details"
+" automatically."
 msgstr ""
-"Vous pouvez inclure un fichier .cdb.json dans votre %(type)s pour mettre à "
-"jour ces détails automatiquement."
+"Vous pouvez inclure un fichier .cdb.json dans votre %(type)s pour mettre "
+"à jour ces détails automatiquement."
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -663,13 +683,13 @@ msgstr ""
 #: app/templates/packages/create_edit.html:76
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr ""
-"Lettres minuscules (a-z), chiffres (0-9) et caractères de soulignement (_) "
-"uniquement"
+"Lettres minuscules (a-z), chiffres (0-9) et caractères de soulignement "
+"(_) uniquement"
 
 #: app/templates/packages/create_edit.html:80
 msgid ""
-"Please choose 'Work in Progress' if your package is unstable, and shouldn't "
-"be recommended to all players"
+"Please choose 'Work in Progress' if your package is unstable, and "
+"shouldn't be recommended to all players"
 msgstr ""
 "Veuillez choisir \"Travail en cours\" si votre paquet est instable et ne "
 "devrait pas être recommandé à tous les joueurs"
@@ -706,10 +726,6 @@ msgstr "Sauter l'importation automatique"
 #: app/templates/packages/create_edit.html:112
 msgid "Importing... (This may take a while)"
 msgstr "Importation... (Cela peut prendre un certain temps)"
-
-#: app/templates/packages/create_edit.html:119
-msgid "forum.minetest.net/viewtopic.php?t="
-msgstr ""
 
 #: app/templates/packages/create_edit.html:120
 msgid "Tip: paste in a forum topic URL"
@@ -756,8 +772,8 @@ msgstr "Ceci est permanent."
 
 #: app/templates/packages/release_edit.html:79
 msgid ""
-"Any associated uploads will not be deleted immediately, but the release will "
-"no longer be listed."
+"Any associated uploads will not be deleted immediately, but the release "
+"will no longer be listed."
 msgstr ""
 
 #: app/templates/packages/release_edit.html:84
@@ -768,10 +784,6 @@ msgstr ""
 #: app/templates/packages/release_new.html:8
 msgid "Create a release"
 msgstr "Publier une version"
-
-#: app/templates/packages/release_new.html:12
-msgid "Settings"
-msgstr "Paramètres"
 
 #: app/templates/packages/release_new.html:14
 msgid "You have automatic releases enabled."
@@ -791,8 +803,8 @@ msgstr ""
 
 #: app/templates/packages/release_new.html:26
 msgid ""
-"You can create releases automatically when you push commits or tags to your "
-"repository."
+"You can create releases automatically when you push commits or tags to "
+"your repository."
 msgstr ""
 "Vous pouvez créer des versions automatiquement lorsque vous envoyez des "
 "commits ou des étiquettes à votre référentiel."
@@ -807,8 +819,8 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
-"L'utilisation de Git vous permettrait de créer automatiquement des versions "
-"lorsque vous diffusez du code ou des étiquettes."
+"L'utilisation de Git vous permettrait de créer automatiquement des "
+"versions lorsque vous diffusez du code ou des étiquettes."
 
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
@@ -825,23 +837,23 @@ msgstr ""
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
-"You need to create releases even if you use a rolling release development "
-"cycle, as Minetest needs them to check for updates."
+"You need to create releases even if you use a rolling release development"
+" cycle, as Minetest needs them to check for updates."
 msgstr ""
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
 msgid ""
-"When you push a change to your Git repository, ContentDB can create a new "
-"release automatically or send you a reminder."
+"When you push a change to your Git repository, ContentDB can create a new"
+" release automatically or send you a reminder."
 msgstr ""
 "Lorsque vous apportez un changement à votre dépôt Git, le ContentDB peut "
 "créer une nouvelle version automatiquement ou vous envoyer un rappel."
 
 #: app/templates/packages/release_wizard.html:21
 msgid ""
-"ContentDB will check your Git repository every day, but you can use webhooks "
-"or the API for faster updates."
+"ContentDB will check your Git repository every day, but you can use "
+"webhooks or the API for faster updates."
 msgstr ""
 "Le ContentDB vérifiera votre dépôt Git tous les jours, mais vous pouvez "
 "utiliser des webhooks ou l'API pour des mises à jour plus rapides."
@@ -949,14 +961,14 @@ msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
 msgstr ""
-"Le ContentDB vérifiera votre dépôt Git tous les jours, si votre paquet est "
-"approuvé."
+"Le ContentDB vérifiera votre dépôt Git tous les jours, si votre paquet "
+"est approuvé."
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
 msgstr ""
-"Vous devriez envisager d'utiliser les webhooks ou l'API pour une création "
-"des versions plus rapide."
+"Vous devriez envisager d'utiliser les webhooks ou l'API pour une création"
+" des versions plus rapide."
 
 #: app/templates/packages/update_config.html:18
 msgid ""
@@ -1211,13 +1223,13 @@ msgstr ""
 #: app/templates/todo/user.html:57
 msgid ""
 "Instead of marking packages as outdated, you can automatically create "
-"releases when New Commits or New Tags are pushed to Git by clicking 'Update "
-"Settings'."
+"releases when New Commits or New Tags are pushed to Git by clicking "
+"'Update Settings'."
 msgstr ""
 "Au lieu de marquer les paquets comme périmés, vous pouvez créer "
 "automatiquement des versions lorsque de nouveaux commits ou de nouvelles "
-"étiquettes sont poussés vers Git en cliquant sur « Mettre les paramètres à "
-"jour »."
+"étiquettes sont poussés vers Git en cliquant sur « Mettre les paramètres "
+"à jour »."
 
 #: app/templates/todo/user.html:59
 msgid ""
@@ -1283,8 +1295,8 @@ msgstr "Veuillez contacter l'admin."
 #: app/templates/users/change_set_password.html:26
 #: app/templates/users/register.html:24
 msgid ""
-"Your email is needed to recover your account if you forget your password and "
-"to send (configurable) notifications. "
+"Your email is needed to recover your account if you forget your password "
+"and to send (configurable) notifications. "
 msgstr ""
 "Votre adresse électronique est nécessaire pour récupérer votre compte si "
 "vous oubliez votre mot de passe et pour envoyer des notifications "
@@ -1311,8 +1323,8 @@ msgstr "Confirmez votre compte"
 #: app/templates/users/delete.html:17
 #, python-format
 msgid ""
-"This will delete your account, removing %(threads)d threads and %(replies)d "
-"replies."
+"This will delete your account, removing %(threads)d threads and "
+"%(replies)d replies."
 msgstr ""
 
 #: app/templates/users/delete.html:22
@@ -1324,8 +1336,8 @@ msgstr ""
 #: app/templates/users/delete.html:23
 #, python-format
 msgid ""
-"Instead, your account will be deactivated and all personal information wiped "
-"- including %(threads)d threads and %(replies)d replies."
+"Instead, your account will be deactivated and all personal information "
+"wiped - including %(threads)d threads and %(replies)d replies."
 msgstr ""
 
 #: app/templates/users/delete.html:25
@@ -1339,8 +1351,7 @@ msgstr "Demander la réinitialisation du mot de passe"
 #: app/templates/users/forums_no_such_user.html:14
 #, python-format
 msgid "Unfortunately, %(username)s doesn't have an account on ContentDB yet."
-msgstr ""
-"Malheureusement, %(username)s n'a pas encore de compte sur le ContentDB."
+msgstr "Malheureusement, %(username)s n'a pas encore de compte sur le ContentDB."
 
 #: app/templates/users/list.html:4 app/templates/users/list.html:8
 msgid "Users"
@@ -1445,11 +1456,11 @@ msgstr "Seulement a-zA-Z0-9._ autorisé"
 
 #: app/templates/users/register.html:17
 msgid ""
-"Only alphanumeric characters, periods, underscores, and minuses are allowed "
-"(a-zA-Z0-9._)"
+"Only alphanumeric characters, periods, underscores, and minuses are "
+"allowed (a-zA-Z0-9._)"
 msgstr ""
-"Seuls les caractères alphanumériques, les points, les traits de soulignement "
-"et les minuscules sont autorisés (a-zA-Z0-9._)"
+"Seuls les caractères alphanumériques, les points, les traits de "
+"soulignement et les minuscules sont autorisés (a-zA-Z0-9._)"
 
 #: app/templates/users/register.html:20
 msgid ""
@@ -1486,8 +1497,8 @@ msgstr "Courriels et notifications"
 
 #: app/templates/users/settings_email.html:19
 msgid ""
-"Your email is needed to recover your account if you forget your password, "
-"and to send (configurable) notifications."
+"Your email is needed to recover your account if you forget your password,"
+" and to send (configurable) notifications."
 msgstr ""
 "Votre adresse électronique est nécessaire pour récupérer votre compte si "
 "vous oubliez votre mot de passe, et pour envoyer des notifications "
@@ -1500,22 +1511,23 @@ msgstr "Il y a au moins une vérification en cours."
 #: app/templates/users/settings_email.html:33
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr ""
-"Les notifications par courriel sont actuellement désactivées. Cliquez sur "
-"« enregistrer » ; pour les activer."
+"Les notifications par courriel sont actuellement désactivées. Cliquez sur"
+" « enregistrer » ; pour les activer."
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
-"This will blacklist an email address, preventing ContentDB from ever sending "
-"emails to it - including password resets."
+"This will blacklist an email address, preventing ContentDB from ever "
+"sending emails to it - including password resets."
 msgstr ""
-"Ceci mettra une adresse électronique sur liste noire, empêchant ContentDB de "
-"lui envoyer des courriels – y compris des réinitialisations de mot de passe."
+"Ceci mettra une adresse électronique sur liste noire, empêchant ContentDB"
+" de lui envoyer des courriels – y compris des réinitialisations de mot de"
+" passe."
 
 #: app/templates/users/unsubscribe.html:20
 msgid "Please enter the email address you wish to blacklist."
 msgstr ""
-"Veuillez saisir l'adresse électronique que vous souhaitez mettre sur liste "
-"noire."
+"Veuillez saisir l'adresse électronique que vous souhaitez mettre sur "
+"liste noire."
 
 #: app/templates/users/unsubscribe.html:21
 msgid "You will then need to confirm the email"
@@ -1524,3 +1536,7 @@ msgstr "Vous devrez ensuite confirmer l'adresse courriel"
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
 msgstr "Vous pouvez maintenant vous désabonner."
+
+#~ msgid "forum.minetest.net/viewtopic.php?t="
+#~ msgstr ""
+

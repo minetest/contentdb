@@ -1,13 +1,12 @@
 {% extends "base.html" %}
 
 {% block title %}
-	Page not found
+	{{ _("Page not found") }}
 {% endblock %}
 
 {% block content %}
-	<h1>Page not found</h1>
+	<h1>{{ self.title() }}</h1>
 	<p>
-		That page could not be found. The link may be broken, the page may have been deleted,
-		or you may not have access to it.
+		{{ _("That page could not be found. The link may be broken, the page may have been deleted, or you may not have access to it.") }}
 	</p>
 {% endblock %}
