@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-07 21:18+0000\n"
-"PO-Revision-Date: 2022-01-04 21:25+0000\n"
+"PO-Revision-Date: 2022-01-07 21:58+0000\n"
 "Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/template_filters.py:52
@@ -30,11 +31,11 @@ msgstr "Type"
 
 #: app/blueprints/packages/packages.py:230
 msgid "Title (Human-readable)"
-msgstr ""
+msgstr "Titre (Lisible)"
 
 #: app/blueprints/packages/packages.py:231
 msgid "Name (Technical)"
-msgstr ""
+msgstr "Nom (Technique)"
 
 #: app/blueprints/packages/packages.py:231
 #: app/templates/packages/create_edit.html:76
@@ -45,7 +46,7 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:232
 msgid "Short Description (Plaintext)"
-msgstr ""
+msgstr "Description Courte (Texte)"
 
 #: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:399
 msgid "Maintenance State"
@@ -58,7 +59,7 @@ msgstr "Étiquettes"
 
 #: app/blueprints/packages/packages.py:237
 msgid "Content Warnings"
-msgstr ""
+msgstr "Avertissements de contenu"
 
 #: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:388
 msgid "License"
@@ -67,20 +68,19 @@ msgstr "Licence"
 #: app/blueprints/packages/packages.py:239
 #, fuzzy
 msgid "Media License"
-msgstr "Ajouter une Licence"
+msgstr "Licence média"
 
 #: app/blueprints/packages/packages.py:241
 msgid "Long Description (Markdown)"
-msgstr ""
+msgstr "Description Longue (Markdown)"
 
 #: app/blueprints/packages/packages.py:243
 msgid "VCS Repository URL"
-msgstr ""
+msgstr "URL du dépôt VCS"
 
 #: app/blueprints/packages/packages.py:244
-#, fuzzy
 msgid "Website URL"
-msgstr "Site web"
+msgstr "URL du site web"
 
 #: app/blueprints/packages/packages.py:245
 #, fuzzy
@@ -94,7 +94,7 @@ msgstr "Sujets du forum"
 
 #: app/blueprints/packages/packages.py:248
 msgid "Save"
-msgstr ""
+msgstr "Sauvegarder"
 
 #: app/blueprints/users/profile.py:112
 msgid "Top reviewer"
@@ -184,22 +184,23 @@ msgstr "A reçu %(downloads)d téléchargements au total pour tous ses paquets."
 
 #: app/templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Page introuvable"
 
 #: app/templates/404.html:10
 msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
+"Cette page n'a pas pu être trouvée. Le lien est peut-être rompu, la page a "
+"peut-être été supprimée ou vous n'y avez peut-être pas accès."
 
 #: app/templates/base.html:27
 msgid "Mods"
-msgstr ""
+msgstr "Mods"
 
 #: app/templates/base.html:30
-#, fuzzy
 msgid "Games"
-msgstr "Nom"
+msgstr "Jeux"
 
 #: app/templates/base.html:33
 #, fuzzy
@@ -208,7 +209,7 @@ msgstr "Top des Packs de textures"
 
 #: app/templates/base.html:36
 msgid "Random"
-msgstr ""
+msgstr "Aléatoire"
 
 #: app/templates/base.html:39 app/templates/base.html:239
 msgid "Help"
@@ -582,6 +583,8 @@ msgid ""
 "You can open a thread if you have a question for the reviewer or package "
 "author."
 msgstr ""
+"Vous pouvez ouvrir un fil de discussion si vous avez une question à poser à "
+"l'examinateur ou à l'auteur du paquet."
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
@@ -733,20 +736,20 @@ msgstr ""
 #: app/templates/packages/create_edit.html:5
 #, python-format
 msgid "Edit - %(title)s"
-msgstr ""
+msgstr "Edition - %(title)s"
 
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
 msgid "Create Package"
-msgstr ""
+msgstr "Créer un paquet"
 
 #: app/templates/packages/create_edit.html:29
 msgid "Edit Details"
-msgstr ""
+msgstr "Éditer les détails"
 
 #: app/templates/packages/create_edit.html:41
 msgid "View"
-msgstr ""
+msgstr "Voir"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
@@ -766,11 +769,15 @@ msgstr ""
 "à jour ces détails automatiquement."
 
 #: app/templates/packages/create_edit.html:55
+#, fuzzy
 msgid ""
 "Javascript is needed to improve the user interface, and is needed for "
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
+"JavaScript est nécessaire pour améliorer l'interface utilisateur et pour les "
+"fonctionnalités telles que la recherche de métadonnées dans Git et "
+"l'autocomplétion."
 
 #: app/templates/packages/create_edit.html:57
 msgid "Whilst disabled Javascript may work, it is not officially supported."
@@ -1406,6 +1413,8 @@ msgid ""
 "As you have packages and/or forum threads, your account cannot be fully "
 "deleted."
 msgstr ""
+"Comme vous avez des paquets et/ou des fils de discussion sur le forum, votre "
+"compte ne peut pas être entièrement supprimé."
 
 #: app/templates/users/delete.html:23
 #, python-format
@@ -1413,6 +1422,9 @@ msgid ""
 "Instead, your account will be deactivated and all personal information "
 "wiped - including %(threads)d threads and %(replies)d replies."
 msgstr ""
+"Au lieu de cela, votre compte sera désactivé et toutes les informations "
+"personnelles seront effacées - y compris les %(threads)d discussions et les "
+"%(replies)d réponses."
 
 #: app/templates/users/delete.html:25
 msgid "See the privacy policy for more information."
@@ -1494,8 +1506,9 @@ msgid "%(value)d / %(target)d"
 msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:185
+#, fuzzy
 msgid "Maintained Packages"
-msgstr ""
+msgstr "Paquets gérés"
 
 #: app/templates/users/profile.html:187
 msgid "This user is also a maintainer of the following packages"
@@ -1613,4 +1626,3 @@ msgstr "Vous pouvez maintenant vous désabonner."
 
 #~ msgid "forum.minetest.net/viewtopic.php?t="
 #~ msgstr ""
-
