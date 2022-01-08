@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-07 23:27+0000\n"
+"POT-Creation-Date: 2022-01-08 02:19+0000\n"
 "PO-Revision-Date: 2022-01-07 21:58+0000\n"
 "Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
 "Language: fr\n"
@@ -540,7 +540,9 @@ msgstr ""
 msgid "Username"
 msgstr "Nom d'utilisateur"
 
-#: app/blueprints/users/account.py:104 app/templates/users/register.html:16
+#: app/blueprints/users/account.py:104 app/templates/users/claim_forums.html:40
+#: app/templates/users/claim_forums.html:68
+#: app/templates/users/register.html:16
 msgid "Only a-zA-Z0-9._ allowed"
 msgstr "Seulement a-zA-Z0-9._ autorisé"
 
@@ -617,7 +619,7 @@ msgid "Old password"
 msgstr "A un mot de passe"
 
 #: app/blueprints/users/account.py:251
-msgid "Passwords do not much"
+msgid "Passwords do not match"
 msgstr ""
 
 #: app/blueprints/users/account.py:282 app/blueprints/users/account.py:286
@@ -985,6 +987,7 @@ msgid "Welcome"
 msgstr "Bienvenue"
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
+#: app/templates/packages/similar.html:22
 #, fuzzy, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(title)s par %(author)s"
@@ -1004,7 +1007,7 @@ msgstr "Évaluations"
 msgid "Previous"
 msgstr "Précédent"
 
-#: app/templates/index.html:90
+#: app/templates/index.html:90 app/templates/users/claim_forums.html:87
 msgid "Next"
 msgstr "Suivant"
 
@@ -1581,7 +1584,8 @@ msgid "Actions"
 msgstr "Notifications"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
-#: app/templates/metapackages/view.html:26 app/templates/todo/editor.html:158
+#: app/templates/metapackages/view.html:26
+#: app/templates/packages/similar.html:40 app/templates/todo/editor.html:158
 #: app/templates/todo/editor.html:173
 msgid "WIP"
 msgstr ""
@@ -1621,7 +1625,8 @@ msgstr ""
 msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
 msgstr ""
 
-#: app/templates/metapackages/view.html:24 app/templates/packages/view.html:341
+#: app/templates/metapackages/view.html:24
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:341
 #: app/templates/packages/view.html:365 app/templates/todo/editor.html:85
 #, fuzzy, python-format
 msgid "%(title)s by %(display_name)s"
@@ -2209,6 +2214,23 @@ msgstr "évaluations"
 #, fuzzy
 msgid "Badges"
 msgstr "Étiquettes"
+
+#: app/templates/packages/similar.html:4
+msgid "Modname Uniqueness"
+msgstr ""
+
+#: app/templates/packages/similar.html:12
+msgid "Packages sharing provided mods"
+msgstr ""
+
+#: app/templates/packages/similar.html:14
+msgid "This package contains modnames that are present in the following packages:"
+msgstr ""
+
+#: app/templates/packages/similar.html:32
+#, fuzzy
+msgid "Similar Forum Topics"
+msgstr "Sujets du forum"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -2815,6 +2837,94 @@ msgstr ""
 msgid "Create forum account"
 msgstr "Créer un compte"
 
+#: app/templates/users/claim_forums.html:10
+#, fuzzy
+msgid "Confirm Your Account"
+msgstr "Créer un compte"
+
+#: app/templates/users/claim_forums.html:13
+msgid ""
+"You'll need to use prove that you have access to your forum account using"
+" one of the options below."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:14
+msgid "This is so ContentDB can link your account to your forum account."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:18
+#, fuzzy
+msgid "Don't have a forums account?"
+msgstr "Créer un compte"
+
+#: app/templates/users/claim_forums.html:19
+#, python-format
+msgid "You can still <a href='%(url)s'>sign up without one</a>."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:26
+#, fuzzy
+msgid "Option 1"
+msgstr "Optionnel"
+
+#: app/templates/users/claim_forums.html:27
+msgid "Use GitHub field in forum profile"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:35
+#: app/templates/users/claim_forums.html:64
+msgid "Enter your forum username here:"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:39
+#: app/templates/users/claim_forums.html:68
+#, fuzzy
+msgid "Forum username"
+msgstr "de %(username)s."
+
+#: app/templates/users/claim_forums.html:43
+msgid "You'll need to have the GitHub field in your forum profile filled out."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:44
+msgid ""
+"Log into the forum and <a "
+"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:47
+msgid "Next: log in with GitHub"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:55
+#, fuzzy
+msgid "Option 2"
+msgstr "Optionnel"
+
+#: app/templates/users/claim_forums.html:56
+#, fuzzy
+msgid "Verification token"
+msgstr "Modifier les paramètres de notification par courriel"
+
+#: app/templates/users/claim_forums.html:71
+msgid ""
+"Go to <a "
+"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"Control Panel > Profile > Edit signature</a>"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:75
+msgid "Paste this into your signature:"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:81
+msgid "Click next so we can check it."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:84
+msgid "Don't worry, you can remove it after this is done."
+msgstr ""
+
 #: app/templates/users/delete.html:4
 #, fuzzy, python-format
 msgid "Delete user %(username)s"
@@ -3088,4 +3198,7 @@ msgstr ""
 
 #~ msgid "You may now unsubscribe."
 #~ msgstr "Vous pouvez maintenant vous désabonner."
+
+#~ msgid "Passwords do not much"
+#~ msgstr ""
 

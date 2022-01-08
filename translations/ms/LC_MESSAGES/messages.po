@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-07 23:27+0000\n"
+"POT-Creation-Date: 2022-01-08 02:19+0000\n"
 "PO-Revision-Date: 2022-01-08 02:19+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
-"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
-"ms/>\n"
 "Language: ms\n"
+"Language-Team: Malay "
+"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:99
@@ -517,7 +516,9 @@ msgstr "Nama Paparan"
 msgid "Username"
 msgstr "Nama Pengguna"
 
-#: app/blueprints/users/account.py:104 app/templates/users/register.html:16
+#: app/blueprints/users/account.py:104 app/templates/users/claim_forums.html:40
+#: app/templates/users/claim_forums.html:68
+#: app/templates/users/register.html:16
 msgid "Only a-zA-Z0-9._ allowed"
 msgstr "Hanya a-zA-Z0-9._ dibenarkan"
 
@@ -552,8 +553,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:128 app/blueprints/users/account.py:135
 msgid "That username/display name is already in use, please choose another."
-msgstr ""
-"Nama pengguna/nama paparan tersebut sudah digunakan, sila pilih yang lain."
+msgstr "Nama pengguna/nama paparan tersebut sudah digunakan, sila pilih yang lain."
 
 #: app/blueprints/users/account.py:140 app/blueprints/users/account.py:267
 msgid "Email already in use"
@@ -565,15 +565,15 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
-"Kami tidak mampu mencipta akaun kerana e-mel tersebut sudah digunakan oleh "
-"%(display_name)s. Cuba alamat e-mel yang lain."
+"Kami tidak mampu mencipta akaun kerana e-mel tersebut sudah digunakan "
+"oleh %(display_name)s. Cuba alamat e-mel yang lain."
 
 #: app/blueprints/users/account.py:145 app/blueprints/users/account.py:262
 #: app/blueprints/users/settings.py:133
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
-"Alamat e-mel tersebut sudah dibuang langganan/disenaraihitamkan, dan tidak "
-"boleh digunakan"
+"Alamat e-mel tersebut sudah dibuang langganan/disenaraihitamkan, dan "
+"tidak boleh digunakan"
 
 #: app/blueprints/users/account.py:185
 msgid "Reset Password"
@@ -596,8 +596,9 @@ msgid "Old password"
 msgstr "Kata laluan lama"
 
 #: app/blueprints/users/account.py:251
-msgid "Passwords do not much"
-msgstr ""
+#, fuzzy
+msgid "Passwords do not match"
+msgstr "Kata laluan mestilah sepadan"
 
 #: app/blueprints/users/account.py:282 app/blueprints/users/account.py:286
 msgid "Your password has been changed successfully."
@@ -679,7 +680,8 @@ msgstr "Ralat ketika cuba untuk mencapai forum: %(message)s"
 #: app/blueprints/users/claim.py:96
 msgid "Unable to get forum signature - does the user exist?"
 msgstr ""
-"Tidak mampu mendapatkan tandatangan forum - adakah pengguna tersebut wujud?"
+"Tidak mampu mendapatkan tandatangan forum - adakah pengguna tersebut "
+"wujud?"
 
 #: app/blueprints/users/claim.py:111
 msgid "Unable to login as user"
@@ -828,7 +830,8 @@ msgstr "Pangkat"
 #: app/blueprints/users/settings.py:249
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr ""
-"Tidak boleh naikkan pengguna ke pangkat lebih tinggi dari diri anda sendiri!"
+"Tidak boleh naikkan pengguna ke pangkat lebih tinggi dari diri anda "
+"sendiri!"
 
 #: app/blueprints/users/settings.py:266
 msgid "Users with moderator rank or above cannot be deleted"
@@ -844,8 +847,8 @@ msgid ""
 "been deleted, or you may not have access to it."
 msgstr ""
 "Halaman tersebut tidak boleh dijumpai. Mungkin pautan tersebut rosak, "
-"mungkin halaman telah dipadam, atau mungkin anda tiada capaian ke halaman "
-"tersebut."
+"mungkin halaman telah dipadam, atau mungkin anda tiada capaian ke halaman"
+" tersebut."
 
 #: app/templates/base.html:27
 msgid "Mods"
@@ -972,6 +975,7 @@ msgid "Welcome"
 msgstr "Selamat Datang"
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
+#: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(title)s oleh %(author)s"
@@ -991,7 +995,7 @@ msgstr "Ulasan"
 msgid "Previous"
 msgstr "Sebelumnya"
 
-#: app/templates/index.html:90
+#: app/templates/index.html:90 app/templates/users/claim_forums.html:87
 msgid "Next"
 msgstr "Seterusnya"
 
@@ -1042,8 +1046,8 @@ msgstr "Ulasan Positif Baru"
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
 msgstr ""
-"CDB mempunyai %(count)d pakej, dengan jumlah keseluruhan %(downloads)d muat "
-"turun."
+"CDB mempunyai %(count)d pakej, dengan jumlah keseluruhan %(downloads)d "
+"muat turun."
 
 #: app/templates/admin/audit_view.html:16
 #, python-format
@@ -1282,24 +1286,24 @@ msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr ""
-"Anda menerima e-mel ini kerana seseorang (harapnya anda) telah memasukkan "
-"alamat e-mel anda sebagai e-mel seorang pengguna."
+"Anda menerima e-mel ini kerana seseorang (harapnya anda) telah memasukkan"
+" alamat e-mel anda sebagai e-mel seorang pengguna."
 
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
-"Kami mohon maaf atas pemergian anda. Anda hanya perlu lakukan satu langkah "
-"lagi sebelum e-mel anda disenaraihitamkan."
+"Kami mohon maaf atas pemergian anda. Anda hanya perlu lakukan satu "
+"langkah lagi sebelum e-mel anda disenaraihitamkan."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
 msgstr ""
-"Anda menerima e-mel ini kerana seseorang (harapnya anda) memasukkan alamat e-"
-"mel anda dalam borang buang langganan."
+"Anda menerima e-mel ini kerana seseorang (harapnya anda) memasukkan "
+"alamat e-mel anda dalam borang buang langganan."
 
 #: app/templates/macros/audit_log.html:13
 #, python-format
@@ -1353,8 +1357,8 @@ msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
 "%(deps)s"
 msgstr ""
-"Kebergantungan wajib berikut perlu ditambah ke ContentDB terlebih dahulu: "
-"%(deps)s"
+"Kebergantungan wajib berikut perlu ditambah ke ContentDB terlebih dahulu:"
+" %(deps)s"
 
 #: app/templates/macros/package_approval.html:44
 msgid "Please wait for the license to be added to CDB."
@@ -1380,8 +1384,7 @@ msgstr "Sila tunggu pakej tersebut diluluskan dahulu."
 
 #: app/templates/macros/package_approval.html:65
 msgid "You can now submit this package for approval if you're ready."
-msgstr ""
-"Anda boleh hantar pakej ini untuk kelulusan sekiranya anda telah bersedia."
+msgstr "Anda boleh hantar pakej ini untuk kelulusan sekiranya anda telah bersedia."
 
 #: app/templates/macros/package_approval.html:67
 msgid "This package can be submitted for approval when ready."
@@ -1405,8 +1408,8 @@ msgid ""
 "You can open a thread if you have a question for the reviewer or package "
 "author."
 msgstr ""
-"Anda boleh buka bebenang sekiranya anda mempunyai soalan untuk pengulas atau "
-"pencipta pakej."
+"Anda boleh buka bebenang sekiranya anda mempunyai soalan untuk pengulas "
+"atau pencipta pakej."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
@@ -1558,7 +1561,8 @@ msgid "Actions"
 msgstr "Perbuatan"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
-#: app/templates/metapackages/view.html:26 app/templates/todo/editor.html:158
+#: app/templates/metapackages/view.html:26
+#: app/templates/packages/similar.html:40 app/templates/todo/editor.html:158
 #: app/templates/todo/editor.html:173
 msgid "WIP"
 msgstr "KDP"
@@ -1596,9 +1600,11 @@ msgstr "Diberikan Oleh"
 #: app/templates/metapackages/view.html:17
 msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
 msgstr ""
-"Malangnya, ini masih belum ada di ContentDB lagi! Ini topik forum berkaitan:"
+"Malangnya, ini masih belum ada di ContentDB lagi! Ini topik forum "
+"berkaitan:"
 
-#: app/templates/metapackages/view.html:24 app/templates/packages/view.html:341
+#: app/templates/metapackages/view.html:24
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:341
 #: app/templates/packages/view.html:365 app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -1670,8 +1676,8 @@ msgstr "Tetapkan Tetapan Kemas Kini secara Pukal"
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
 msgstr ""
-"Ini akan menetapkan tetapan kemas kini untuk kesemua pakej dengan repositori "
-"Git."
+"Ini akan menetapkan tetapan kemas kini untuk kesemua pakej dengan "
+"repositori Git."
 
 #: app/templates/packages/bulk_update_conf.html:27
 #: app/templates/packages/release_new.html:50
@@ -1724,8 +1730,8 @@ msgstr ""
 #: app/templates/packages/create_edit.html:57
 msgid "Whilst disabled Javascript may work, it is not officially supported."
 msgstr ""
-"Walaupun boleh berfungsi dengan Javascript dilumpuhkan, ia tidak disokong "
-"secara rasmi."
+"Walaupun boleh berfungsi dengan Javascript dilumpuhkan, ia tidak disokong"
+" secara rasmi."
 
 #: app/templates/packages/create_edit.html:67
 #: app/templates/threads/view.html:78
@@ -1741,8 +1747,8 @@ msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
-"Sila pilih 'Kerja Dalam Proses' sekiranya pakej anda tidak stabil, dan tidak "
-"patut disyorkan kepada semua pemain"
+"Sila pilih 'Kerja Dalam Proses' sekiranya pakej anda tidak stabil, dan "
+"tidak patut disyorkan kepada semua pemain"
 
 #: app/templates/packages/create_edit.html:89
 msgid "If there is no media, set the Media License to the same as the License."
@@ -1759,13 +1765,12 @@ msgid ""
 "imported."
 msgstr ""
 "Masukkan URL repositori untuk pakej.\n"
-"\t\t\t\tJika repositori menggunakan git maka metadata akan diimport secara "
-"automatik."
+"\t\t\t\tJika repositori menggunakan git maka metadata akan diimport "
+"secara automatik."
 
 #: app/templates/packages/create_edit.html:101
 msgid "Leave blank if you don't have a repo. Click skip if the import fails."
-msgstr ""
-"Tinggal kosong jika anda tiada repositori. Klik langkau jika import gagal."
+msgstr "Tinggal kosong jika anda tiada repositori. Klik langkau jika import gagal."
 
 #: app/templates/packages/create_edit.html:107
 msgid "Next (Autoimport)"
@@ -1796,16 +1801,16 @@ msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
 msgstr ""
-"Bergantung kepada pangkat, mereka akan mampu edit pakej, cipta terbitan dan "
-"tangkap layar, dan baca bebenang peribadi."
+"Bergantung kepada pangkat, mereka akan mampu edit pakej, cipta terbitan "
+"dan tangkap layar, dan baca bebenang peribadi."
 
 #: app/templates/packages/edit_maintainers.html:13
 msgid ""
 "Maintainers cannot add or remove other maintainers, but can remove "
 "themselves."
 msgstr ""
-"Penyenggara tidak boleh menambah atau mengeluarkan penyenggara lain, tetapi "
-"boleh mengeluarkan diri sendiri."
+"Penyenggara tidak boleh menambah atau mengeluarkan penyenggara lain, "
+"tetapi boleh mengeluarkan diri sendiri."
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -1831,8 +1836,8 @@ msgstr "Tukar Terbitan secara Pukal"
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
-"Guna halaman ini untuk menetapkan minimum dan maksimum bagi kesemua terbitan "
-"untuk pakej anda."
+"Guna halaman ini untuk menetapkan minimum dan maksimum bagi kesemua "
+"terbitan untuk pakej anda."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
@@ -1855,10 +1860,10 @@ msgid ""
 "You cannot select the oldest version for min or the newest version\n"
 "\t\t\tfor max as this does not make sense - you can't predict the future."
 msgstr ""
-"Anda tidak boleh memilih versi paling lama untuk minimum atau versi paling "
-"baharu\n"
-"\t\t\tuntuk maksimum kerana ia tidak masuk akal - anda tidak boleh meramal "
-"masa hadapan."
+"Anda tidak boleh memilih versi paling lama untuk minimum atau versi "
+"paling baharu\n"
+"\t\t\tuntuk maksimum kerana ia tidak masuk akal - anda tidak boleh "
+"meramal masa hadapan."
 
 #: app/templates/packages/release_bulk_change.html:38
 #: app/templates/packages/release_edit.html:61
@@ -1894,15 +1899,16 @@ msgid ""
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
 "Tetapkan versi minimum dan maksimum Minetest yang disokong.\n"
-"\t\t\tTerbitan ini akan disembunyikan daripada klien di luar julat tersebut. "
+"\t\t\tTerbitan ini akan disembunyikan daripada klien di luar julat "
+"tersebut. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
-"Anda boleh <a href='/help/package_config/'>tetapkan ini secara automatiknya</"
-"a> dalam .conf bagi pakej anda."
+"Anda boleh <a href='/help/package_config/'>tetapkan ini secara "
+"automatiknya</a> dalam .conf bagi pakej anda."
 
 #: app/templates/packages/release_edit.html:75
 msgid "Delete Release"
@@ -1917,8 +1923,8 @@ msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
 msgstr ""
-"Sebarang muat naik yang berkaitan tidak dipadam serta-merta, tetapi terbitan "
-"tidak akan disenaraikan lagi."
+"Sebarang muat naik yang berkaitan tidak dipadam serta-merta, tetapi "
+"terbitan tidak akan disenaraikan lagi."
 
 #: app/templates/packages/release_edit.html:87
 msgid "You cannot delete the latest release; please create a newer one first."
@@ -1941,8 +1947,7 @@ msgstr "Anda membolehkan pemberitahuan kemas kini Git."
 
 #: app/templates/packages/release_new.html:17
 msgid "You can enable automatic updates in the update settings."
-msgstr ""
-"Anda boleh membolehkan kemas kini automatik menerusi tetapan kemas kini."
+msgstr "Anda boleh membolehkan kemas kini automatik menerusi tetapan kemas kini."
 
 #: app/templates/packages/release_new.html:23
 msgid "Set up"
@@ -1988,8 +1993,8 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
-"Cuba lihat <a href='/help/package_config/'>Panduan Terbitan dan Konfigurasi "
-"Pakej</a>untuk\n"
+"Cuba lihat <a href='/help/package_config/'>Panduan Terbitan dan "
+"Konfigurasi Pakej</a>untuk\n"
 "\t\t\tpetua dalam menyesuaikan terbitan."
 
 #: app/templates/packages/release_new.html:61
@@ -2002,8 +2007,9 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
-"Maklumat .conf bagi pakej anda boleh <a href='/help/package_config/"
-"'>menetapkan maklumat ini secara automatiknya</a>,\n"
+"Maklumat .conf bagi pakej anda boleh <a "
+"href='/help/package_config/'>menetapkan maklumat ini secara "
+"automatiknya</a>,\n"
 "\t\t\tyang mana ia akan mengatasi pilihan anda."
 
 #: app/templates/packages/release_wizard.html:4
@@ -2025,8 +2031,9 @@ msgid ""
 "You need to create releases even if you use a rolling release development"
 " cycle, as Minetest needs them to check for updates."
 msgstr ""
-"Anda perlu mencipta terbitan walaupun jika anda gunakan kitaran pembangunan "
-"terbitan berterusan, kerana Minetest perlukannya untuk periksa kemas kini."
+"Anda perlu mencipta terbitan walaupun jika anda gunakan kitaran "
+"pembangunan terbitan berterusan, kerana Minetest perlukannya untuk "
+"periksa kemas kini."
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
@@ -2035,16 +2042,16 @@ msgid ""
 " release automatically or send you a reminder."
 msgstr ""
 "Apabila anda menyerah suatu perubahan ke repositori Git anda, ContentDB "
-"boleh mencipta terbitan baharu secara automatiknya atau hantar peringatan "
-"kepada anda."
+"boleh mencipta terbitan baharu secara automatiknya atau hantar peringatan"
+" kepada anda."
 
 #: app/templates/packages/release_wizard.html:21
 msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
-"ContentDB akan periksa repositori Git anda setiap hari, tetapi anda boleh "
-"gunakan cangkuk sesawang webhook atau API untuk kemas kini lebih pantas."
+"ContentDB akan periksa repositori Git anda setiap hari, tetapi anda boleh"
+" gunakan cangkuk sesawang webhook atau API untuk kemas kini lebih pantas."
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
@@ -2199,6 +2206,22 @@ msgstr ""
 #: app/templates/packages/share.html:18
 msgid "Badges"
 msgstr "Lencana"
+
+#: app/templates/packages/similar.html:4
+msgid "Modname Uniqueness"
+msgstr ""
+
+#: app/templates/packages/similar.html:12
+msgid "Packages sharing provided mods"
+msgstr ""
+
+#: app/templates/packages/similar.html:14
+msgid "This package contains modnames that are present in the following packages:"
+msgstr ""
+
+#: app/templates/packages/similar.html:32
+msgid "Similar Forum Topics"
+msgstr ""
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -2773,6 +2796,93 @@ msgstr ""
 msgid "Create forum account"
 msgstr ""
 
+#: app/templates/users/claim_forums.html:10
+msgid "Confirm Your Account"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:13
+msgid ""
+"You'll need to use prove that you have access to your forum account using"
+" one of the options below."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:14
+msgid "This is so ContentDB can link your account to your forum account."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:18
+msgid "Don't have a forums account?"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:19
+#, python-format
+msgid "You can still <a href='%(url)s'>sign up without one</a>."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:26
+#, fuzzy
+msgid "Option 1"
+msgstr "URL Derma"
+
+#: app/templates/users/claim_forums.html:27
+msgid "Use GitHub field in forum profile"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:35
+#: app/templates/users/claim_forums.html:64
+msgid "Enter your forum username here:"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:39
+#: app/templates/users/claim_forums.html:68
+#, fuzzy
+msgid "Forum username"
+msgstr "Nama Pengguna Forum"
+
+#: app/templates/users/claim_forums.html:43
+msgid "You'll need to have the GitHub field in your forum profile filled out."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:44
+msgid ""
+"Log into the forum and <a "
+"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:47
+msgid "Next: log in with GitHub"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:55
+#, fuzzy
+msgid "Option 2"
+msgstr "URL Derma"
+
+#: app/templates/users/claim_forums.html:56
+#, fuzzy
+msgid "Verification token"
+msgstr "Token pengesahan tidak diketahui!"
+
+#: app/templates/users/claim_forums.html:71
+msgid ""
+"Go to <a "
+"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"Control Panel > Profile > Edit signature</a>"
+msgstr ""
+
+#: app/templates/users/claim_forums.html:75
+#, fuzzy
+msgid "Paste this into your signature:"
+msgstr "Atau tampal ini ke dalam pelayar anda:"
+
+#: app/templates/users/claim_forums.html:81
+msgid "Click next so we can check it."
+msgstr ""
+
+#: app/templates/users/claim_forums.html:84
+msgid "Don't worry, you can remove it after this is done."
+msgstr ""
+
 #: app/templates/users/delete.html:4
 #, python-format
 msgid "Delete user %(username)s"
@@ -3027,3 +3137,7 @@ msgstr ""
 
 #~ msgid "You may now unsubscribe."
 #~ msgstr ""
+
+#~ msgid "Passwords do not much"
+#~ msgstr ""
+
