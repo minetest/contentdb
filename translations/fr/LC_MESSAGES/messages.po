@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-08 02:19+0000\n"
-"PO-Revision-Date: 2022-01-07 21:58+0000\n"
+"PO-Revision-Date: 2022-01-08 16:39+0000\n"
 "Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:99
 msgid "You have been banned."
-msgstr ""
+msgstr "Vous avez été banni."
 
 #: app/template_filters.py:52
 #, python-format
@@ -55,7 +56,7 @@ msgstr "Sauvegarder"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr ""
+msgstr "Échec de l'autorisation [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 #, fuzzy
@@ -64,15 +65,16 @@ msgstr "Comptes liés"
 
 #: app/blueprints/github/__init__.py:65
 msgid "Github account is already associated with another user"
-msgstr ""
+msgstr "Le compte Github est déjà associé à un autre utilisateur"
 
 #: app/blueprints/github/__init__.py:71
+#, fuzzy
 msgid "Unable to find an account for that Github user"
-msgstr ""
+msgstr "Impossible de trouver un compte pour cet utilisateur Github"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr ""
+msgstr "Échec de l'autorisation [err=gh-login-failed]"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -89,7 +91,7 @@ msgstr "Versions"
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr ""
+msgstr "Captures d'écran"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
@@ -103,20 +105,24 @@ msgid "Audit Log"
 msgstr "Journal d'audit"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
+#, fuzzy
 msgid "Share and Badges"
-msgstr ""
+msgstr "Partage et badges"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:60
 msgid "Remove"
 msgstr "Retirer"
 
 #: app/blueprints/packages/packages.py:159
+#, fuzzy
 msgid "Error: Another package already uses this forum topic!"
-msgstr ""
+msgstr "Erreur : Un autre paquet utilise déjà ce sujet de forum !"
 
 #: app/blueprints/packages/packages.py:165
+#, fuzzy
 msgid "Error: Forum topic author doesn't match package author."
 msgstr ""
+"Erreur : L'auteur du sujet du forum ne correspond pas à l'auteur du paquet."
 
 #: app/blueprints/packages/packages.py:168
 msgid ""
@@ -200,17 +206,17 @@ msgstr "Sujets du forum"
 
 #: app/blueprints/packages/packages.py:264
 msgid "Unable to find that user"
-msgstr ""
+msgstr "Impossible de trouver cet utilisateur"
 
 #: app/blueprints/packages/packages.py:268
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:90 app/blueprints/users/settings.py:215
 msgid "Permission denied"
-msgstr ""
+msgstr "Permission refusée"
 
 #: app/blueprints/packages/packages.py:306
 msgid "Package already exists!"
-msgstr ""
+msgstr "Le paquet existe déjà !"
 
 #: app/blueprints/packages/packages.py:366
 #, fuzzy
@@ -220,6 +226,7 @@ msgstr "Vous n'avez pas la permission de poster."
 #: app/blueprints/packages/packages.py:394
 msgid "Please comment what changes are needed in the review thread"
 msgstr ""
+"Veuillez spécifier les changements nécessaires dans le fil de discussion"
 
 #: app/blueprints/packages/packages.py:413
 #: app/blueprints/packages/packages.py:429
@@ -239,7 +246,7 @@ msgstr "Paquets non approuvés nécessitant une action"
 
 #: app/blueprints/packages/packages.py:449
 msgid "Maintainers (Comma-separated)"
-msgstr ""
+msgstr "Responsables (séparés par des virgules)"
 
 #: app/blueprints/packages/packages.py:458
 #, fuzzy
@@ -247,8 +254,9 @@ msgid "You do not have permission to edit maintainers"
 msgstr "Vous n'avez pas la permission de poster."
 
 #: app/blueprints/packages/packages.py:508
+#, fuzzy
 msgid "You are not a maintainer"
-msgstr ""
+msgstr "Vous n'êtes pas un responsable"
 
 #: app/blueprints/packages/packages.py:511
 msgid "Package owners cannot remove themselves as maintainers"
@@ -256,7 +264,7 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:543
 msgid "Author Name"
-msgstr ""
+msgstr "Nom de l'auteur"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:63 app/blueprints/packages/reviews.py:42
@@ -269,13 +277,14 @@ msgstr "Titre"
 #: app/blueprints/packages/releases.py:53
 #: app/templates/packages/release_new.html:46
 msgid "Method"
-msgstr ""
+msgstr "Méthode"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
+#, fuzzy
 msgid "File Upload"
-msgstr ""
+msgstr "Chargement de fichiers"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
@@ -298,7 +307,7 @@ msgstr "Versions de Minetest"
 #: app/blueprints/packages/releases.py:64
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: app/blueprints/packages/releases.py:65
 msgid "Task ID"
@@ -315,23 +324,25 @@ msgstr ""
 
 #: app/blueprints/packages/releases.py:84
 msgid "Upload .zip file"
-msgstr ""
+msgstr "Charger le fichier .zip"
 
 #: app/blueprints/packages/releases.py:182
+#, fuzzy
 msgid "Set Min"
-msgstr ""
+msgstr "Définir Minimum"
 
 #: app/blueprints/packages/releases.py:185
 msgid "Set Max"
-msgstr ""
+msgstr "Définir Maximum"
 
 #: app/blueprints/packages/releases.py:188
 msgid "Only change values previously set as none"
 msgstr ""
 
 #: app/blueprints/packages/releases.py:189
+#, fuzzy
 msgid "Update"
-msgstr ""
+msgstr "Mise à jour"
 
 #: app/blueprints/packages/releases.py:238
 #: app/templates/packages/update_config.html:25
@@ -529,11 +540,11 @@ msgstr "Vous devrez ensuite confirmer l'adresse courriel"
 
 #: app/blueprints/users/account.py:67
 msgid "Login failed"
-msgstr ""
+msgstr "Échec de l'authentification"
 
 #: app/blueprints/users/account.py:102 app/blueprints/users/settings.py:41
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #: app/blueprints/users/account.py:103 app/blueprints/users/settings.py:198
 #: app/templates/users/list.html:18
@@ -559,7 +570,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:108
 msgid "I agree"
-msgstr ""
+msgstr "J'accepte"
 
 #: app/blueprints/users/account.py:109 app/templates/users/login.html:34
 #: app/templates/users/register.html:4
@@ -611,7 +622,7 @@ msgstr "A un mot de passe"
 
 #: app/blueprints/users/account.py:236 app/blueprints/users/account.py:243
 msgid "Passwords must match"
-msgstr ""
+msgstr "Les mots de passe doivent correspondre"
 
 #: app/blueprints/users/account.py:240
 #, fuzzy
@@ -620,15 +631,15 @@ msgstr "A un mot de passe"
 
 #: app/blueprints/users/account.py:251
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Les mots de passe ne correspondent pas"
 
 #: app/blueprints/users/account.py:282 app/blueprints/users/account.py:286
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "Votre mot de passe a été modifié avec succès."
 
 #: app/blueprints/users/account.py:301
 msgid "Old password is incorrect"
-msgstr ""
+msgstr "L'ancien mot de passe est incorrect"
 
 #: app/blueprints/users/account.py:331
 msgid "Unknown verification token!"
@@ -640,29 +651,33 @@ msgstr ""
 
 #: app/blueprints/users/account.py:351
 msgid "Another user is already using that email"
-msgstr ""
+msgstr "Un autre utilisateur utilise déjà cet e-mail"
 
 #: app/blueprints/users/account.py:354
+#, fuzzy
 msgid "Confirmed email change"
-msgstr ""
+msgstr "Confirmation du changement d'adresse électronique"
 
 #: app/blueprints/users/account.py:358
+#, fuzzy
 msgid "Email address changed"
-msgstr ""
+msgstr "L'adresse électronique a changé"
 
 #: app/blueprints/users/account.py:359
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
+"Votre adresse électronique a changé. Si vous ne l'avez pas demandé, veuillez "
+"contacter un administrateur."
 
 #: app/blueprints/users/account.py:377
 msgid "You may now log in"
-msgstr ""
+msgstr "Vous pouvez maintenant vous connecter"
 
 #: app/blueprints/users/account.py:385
 msgid "Send"
-msgstr ""
+msgstr "Envoyé"
 
 #: app/blueprints/users/account.py:416
 msgid ""
@@ -814,16 +829,17 @@ msgid "API Tokens"
 msgstr "Tokens d'API"
 
 #: app/blueprints/users/settings.py:43
+#, fuzzy
 msgid "Donation URL"
-msgstr ""
+msgstr "URL de Don"
 
 #: app/blueprints/users/settings.py:57 app/blueprints/users/settings.py:63
 msgid "A user already has that name"
-msgstr ""
+msgstr "Un utilisateur a déjà ce nom"
 
 #: app/blueprints/users/settings.py:199
 msgid "Display name"
-msgstr ""
+msgstr "Nom affiché"
 
 #: app/blueprints/users/settings.py:200
 #, fuzzy
@@ -842,6 +858,7 @@ msgstr "Rang"
 #: app/blueprints/users/settings.py:249
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr ""
+"Vous ne pouvez pas promouvoir un utilisateur à un rang supérieur au vôtre !"
 
 #: app/blueprints/users/settings.py:266
 msgid "Users with moderator rank or above cannot be deleted"
@@ -952,7 +969,7 @@ msgstr "Se déconnecter"
 
 #: app/templates/base.html:196
 msgid "Help translate ContentDB"
-msgstr ""
+msgstr "Aider à traduire le ContentDB"
 
 #: app/templates/base.html:240
 msgid "Policy and Guidance"
@@ -1204,8 +1221,9 @@ msgid "Create"
 msgstr "Créer une étiquette"
 
 #: app/templates/api/list_tokens.html:9
+#, fuzzy
 msgid "API Documentation"
-msgstr ""
+msgstr "Documentation de l'API"
 
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
@@ -1287,7 +1305,7 @@ msgstr ""
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
-msgstr ""
+msgstr "Confirmer l'adresse e-mail"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
@@ -1333,7 +1351,7 @@ msgstr "Voir"
 
 #: app/templates/macros/forms.html:107
 msgid "Start typing to see suggestions"
-msgstr ""
+msgstr "Commencez à taper pour voir les suggestions"
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:34
 #, fuzzy
@@ -1375,7 +1393,7 @@ msgstr ""
 
 #: app/templates/macros/package_approval.html:44
 msgid "Please wait for the license to be added to CDB."
-msgstr ""
+msgstr "Veuillez attendre que la licence soit ajoutée au CDB."
 
 #: app/templates/macros/package_approval.html:51
 msgid "You should add at least one screenshot, but this isn't required."
@@ -1427,15 +1445,15 @@ msgstr ""
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
-msgstr ""
+msgstr "<b>Avertissement:</b> Code et ressources non libres."
 
 #: app/templates/macros/packagegridtile.html:29
 msgid "<b>Warning:</b> Non-free code."
-msgstr ""
+msgstr "<b>Avertissement:</b> Code non libre."
 
 #: app/templates/macros/packagegridtile.html:33
 msgid "<b>Warning:</b> Non-free media."
-msgstr ""
+msgstr "<b>Avertissement:</b> Ressources non libres."
 
 #: app/templates/macros/packagegridtile.html:45
 #, fuzzy
@@ -1460,7 +1478,7 @@ msgstr "Modifier"
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
-msgstr ""
+msgstr "Importation..."
 
 #: app/templates/macros/releases.html:96
 msgid "Waiting for approval."
@@ -1588,7 +1606,7 @@ msgstr "Notifications"
 #: app/templates/packages/similar.html:40 app/templates/todo/editor.html:158
 #: app/templates/todo/editor.html:173
 msgid "WIP"
-msgstr ""
+msgstr "WIP"
 
 #: app/templates/macros/topics.html:35
 msgid "Show"
@@ -1618,8 +1636,9 @@ msgid "Meta Package \"%(name)s\""
 msgstr ""
 
 #: app/templates/metapackages/view.html:10
+#, fuzzy
 msgid "Provided By"
-msgstr ""
+msgstr "Fourni par"
 
 #: app/templates/metapackages/view.html:17
 msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
@@ -1638,8 +1657,9 @@ msgid "Required By"
 msgstr "Requis"
 
 #: app/templates/metapackages/view.html:35
+#, fuzzy
 msgid "Optionally Used By"
-msgstr ""
+msgstr "Utilisé en option par"
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
@@ -1759,6 +1779,8 @@ msgstr ""
 #: app/templates/packages/create_edit.html:57
 msgid "Whilst disabled Javascript may work, it is not officially supported."
 msgstr ""
+"Bien que JavaScript puisse être désactivé, cela n'est pas officiellement "
+"pris en charge."
 
 #: app/templates/packages/create_edit.html:67
 #: app/templates/threads/view.html:78
@@ -1850,7 +1872,7 @@ msgstr ""
 
 #: app/templates/packages/package_base.html:13
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniature"
 
 #: app/templates/packages/release_bulk_change.html:4
 msgid "Bulk Change Releases"
@@ -2133,7 +2155,7 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:18
 #: app/templates/users/delete.html:30
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #: app/templates/packages/review_create_edit.html:12
 #, fuzzy, python-format
@@ -2143,6 +2165,8 @@ msgstr "Poster une évaluation pour %(title)s par %(author)s"
 #: app/templates/packages/review_create_edit.html:16
 msgid "Found a bug? Post on the <a href='%{url}s'>issue tracker</a> instead."
 msgstr ""
+"Vous avez trouvé un bug ? Reportez le plutôt sur l'<a href='%{url}s'>issue "
+"tracker</a>."
 
 #: app/templates/packages/review_create_edit.html:56
 msgid "Delete review."
@@ -2274,15 +2298,15 @@ msgstr ""
 
 #: app/templates/packages/view.html:29
 msgid "Non-free code and media"
-msgstr ""
+msgstr "Code et ressources non libres"
 
 #: app/templates/packages/view.html:31
 msgid "Non-free code"
-msgstr ""
+msgstr "Code non libre"
 
 #: app/templates/packages/view.html:33
 msgid "Non-free media"
-msgstr ""
+msgstr "Ressources non libres"
 
 #: app/templates/packages/view.html:96
 msgid "Work in Progress"
@@ -2347,7 +2371,7 @@ msgstr "Vous ne pouvez pas évaluer votre propre paquet."
 
 #: app/templates/packages/view.html:293
 msgid "Used By"
-msgstr ""
+msgstr "Utilisé par"
 
 #: app/templates/packages/view.html:304
 msgid "Package may be outdated"
@@ -2407,7 +2431,7 @@ msgstr "évaluations"
 #: app/templates/packages/view.html:435
 #, python-format
 msgid "Like %(display_name)s's work? Donate now!"
-msgstr ""
+msgstr "Vous aimez le travail de %(display_name)s ? Faites un don maintenant !"
 
 #: app/templates/packages/view.html:453
 #, fuzzy
@@ -2429,7 +2453,7 @@ msgstr ""
 
 #: app/templates/tasks/view.html:7
 msgid "Working…"
-msgstr ""
+msgstr "Travail en cours…"
 
 #: app/templates/tasks/view.html:26
 msgid "Reload the page to check for updates."
@@ -2538,7 +2562,7 @@ msgstr ""
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
-msgstr ""
+msgstr "Importation"
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need reviewing."
@@ -2823,14 +2847,16 @@ msgid ""
 "You don't need a forum account, however, it's recommended to make the "
 "most out of the Minetest community."
 msgstr ""
+"Vous n'avez pas besoin d'un compte sur le forum, cependant il est recommandé "
+"pour profiter au maximum de la communauté Minetest."
 
 #: app/templates/users/claim.html:22
 msgid "<b>Yes</b>, I have a forums account"
-msgstr ""
+msgstr "<b>Oui</b>, J'ai un compte sur le forum"
 
 #: app/templates/users/claim.html:25
 msgid "<b>No</b>, I don't have one"
-msgstr ""
+msgstr "<b>Non</b>, Je n'en ai pas"
 
 #: app/templates/users/claim.html:28
 #, fuzzy
@@ -3047,7 +3073,7 @@ msgstr "Créer un paquet"
 
 #: app/templates/users/profile.html:175
 msgid "View list of tags"
-msgstr ""
+msgstr "Afficher la liste des tags"
 
 #: app/templates/users/profile.html:185
 #, fuzzy
@@ -3116,7 +3142,7 @@ msgstr "Courriels et notifications | %(username)s"
 
 #: app/templates/users/settings_email.html:14
 msgid "Email Address"
-msgstr ""
+msgstr "Adresse e-mail"
 
 #: app/templates/users/settings_email.html:19
 msgid ""
@@ -3154,7 +3180,7 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:45
 msgid "Immediately"
-msgstr ""
+msgstr "Immédiatement"
 
 #: app/templates/users/settings_email.html:46
 msgid "In digest"
@@ -3163,12 +3189,16 @@ msgstr ""
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
 msgstr ""
+"Vous avez beaucoup de notifications, vous devriez soit les lire, soit les "
+"effacer"
 
 #: app/utils/user.py:54
 msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
 msgstr ""
+"Pensez à activer les notifications par e-mail, vous pouvez personnaliser ce "
+"qui est envoyé"
 
 #~ msgid "forum.minetest.net/viewtopic.php?t="
 #~ msgstr ""
@@ -3201,4 +3231,3 @@ msgstr ""
 
 #~ msgid "Passwords do not much"
 #~ msgstr ""
-
