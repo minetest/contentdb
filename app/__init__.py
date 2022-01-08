@@ -36,6 +36,7 @@ app.config["BABEL_TRANSLATION_DIRECTORIES"] = "../translations"
 app.config["LANGUAGES"] = {
 	"en": "English",
 	"fr": "Français",
+	"id": "Bahasa Indonesia",
 	"ms": "Bahasa Melayu",
 }
 
