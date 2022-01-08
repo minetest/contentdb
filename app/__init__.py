@@ -121,11 +121,14 @@ def page_not_found(e):
 def get_locale():
 	locales = app.config["LANGUAGES"].keys()
 
-	locale = request.cookies.get("locale")
-	if locale in locales:
-		return locale
+	if request:
+		locale = request.cookies.get("locale")
+		if locale in locales:
+			return locale
 
-	return request.accept_languages.best_match(locales)
+		return request.accept_languages.best_match(locales)
+
+	return None
 
 
 @app.route("/set-locale/", methods=["POST"])
