@@ -2163,9 +2163,9 @@ msgid "Post a review for %(title)s by %(author)s"
 msgstr "Poster une évaluation pour %(title)s par %(author)s"
 
 #: app/templates/packages/review_create_edit.html:16
-msgid "Found a bug? Post on the <a href='%{url}s'>issue tracker</a> instead."
+msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr ""
-"Vous avez trouvé un bug ? Reportez le plutôt sur l'<a href='%{url}s'>issue "
+"Vous avez trouvé un bug ? Reportez le plutôt sur l'<a href='%(url)s'>issue "
 "tracker</a>."
 
 #: app/templates/packages/review_create_edit.html:56
@@ -2461,7 +2461,7 @@ msgstr ""
 
 #: app/templates/threads/delete_reply.html:4
 #, python-format
-msgid "Delete reply by %{username)s in %(title)s "
+msgid "Delete reply by %(username)s in %(title)s "
 msgstr ""
 
 #: app/templates/threads/delete_reply.html:16

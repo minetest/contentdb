@@ -2131,7 +2131,7 @@ msgid "Post a review for %(title)s by %(author)s"
 msgstr "Pos ulasan untuk %(title)s oleh %(author)s"
 
 #: app/templates/packages/review_create_edit.html:16
-msgid "Found a bug? Post on the <a href='%{url}s'>issue tracker</a> instead."
+msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr "Menemukan masalah? Pos di <a href='%(url)s'>pelacak masalah</a> saja."
 
 #: app/templates/packages/review_create_edit.html:56
@@ -2423,7 +2423,7 @@ msgstr "Muat ulang halaman untuk memeriksa pembaruan."
 
 #: app/templates/threads/delete_reply.html:4
 #, python-format
-msgid "Delete reply by %{username)s in %(title)s "
+msgid "Delete reply by %(username)s in %(title)s "
 msgstr "Hapus balasan oleh %(username)s dalam %(title)s "
 
 #: app/templates/threads/delete_reply.html:16
