@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-08 02:19+0000\n"
-"PO-Revision-Date: 2022-01-08 09:14+0000\n"
-"Last-Translator: rubenwardy <rw@rubenwardy.com>\n"
+"PO-Revision-Date: 2022-01-08 20:08+0000\n"
+"Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
+"Yasuyoshi <translation@mnh48.moe>\n"
 "Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
 "ms/>\n"
 "Language: ms\n"
@@ -1039,7 +1040,7 @@ msgstr "Paling Banyak Diulas"
 
 #: app/templates/index.html:160
 msgid "Recent Positive Reviews"
-msgstr "Ulasan Positif Baru"
+msgstr "Ulasan Positif Terbaru"
 
 #: app/templates/index.html:167
 #, python-format
@@ -1059,7 +1060,7 @@ msgstr "Dilakukan oleh pengguna terpadam."
 
 #: app/templates/admin/list.html:62
 msgid "Deletion is permanent."
-msgstr "Pemadaman adalah abadi."
+msgstr "Pemadaman adalah kekal."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
@@ -1915,7 +1916,7 @@ msgstr "Padam Terbitan"
 
 #: app/templates/packages/release_edit.html:81
 msgid "This is permanent."
-msgstr "Ini abadi."
+msgstr "Ini bersifat kekal."
 
 #: app/templates/packages/release_edit.html:82
 msgid ""
@@ -2049,8 +2050,8 @@ msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
-"ContentDB akan periksa repositori Git anda setiap hari, tetapi anda boleh"
-" gunakan cangkuk sesawang webhook atau API untuk kemas kini lebih pantas."
+"ContentDB akan periksa repositori Git anda setiap hari, tetapi anda boleh "
+"gunakan cangkuk sesawang webhook atau API untuk kemas kini lebih cepat."
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
@@ -2083,29 +2084,29 @@ msgstr "Tanpa peringatan"
 
 #: app/templates/packages/release_wizard.html:60
 msgid "Unfortunately, you will otherwise need to create a release manually."
-msgstr ""
+msgstr "Malangnya, jika tidak anda perlu cipta terbitan secara manual."
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
-msgstr ""
+msgstr "Cipta terbitan secara manual"
 
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
-msgstr ""
+msgstr "Terbitan - %(title)s"
 
 #: app/templates/packages/releases_list.html:18
 msgid "Set up automatic releases"
-msgstr ""
+msgstr "Tetapkan terbitan automatik"
 
 #: app/templates/packages/releases_list.html:24
 msgid "Bulk update"
-msgstr ""
+msgstr "Kemas kini pukal"
 
 #: app/templates/packages/remove.html:9
 #, python-format
 msgid "Remove %(title)s"
-msgstr ""
+msgstr "Buang %(title)s"
 
 #: app/templates/packages/remove.html:11
 msgid ""
@@ -2116,12 +2117,20 @@ msgid ""
 "future.\n"
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
+"Untuk mengelakkan kehilangan data, anda tidak boleh memadam pakej secara "
+"kekal.\n"
+"\t\t\tAnda boleh membuangnya dari ContentDB, yang akan menyebabkannya tidak\n"
+"\t\t\tkelihatan oleh mana-mana pengguna dan akan dipadam secara kekal pada "
+"masa hadapan.\n"
+"\t\t\tPentadbir boleh memulihkan pakej yang dibuang, jika perlu."
 
 #: app/templates/packages/remove.html:19
 msgid ""
 "Unapproving a package will put it back into Draft, where\n"
 "\t\t\t\tit can be submitted for approval again."
 msgstr ""
+"Membuang kelulusan pakej akan membuatkannya dikembalikan menjadi Draf,\n"
+"\t\t\t\tyang mana ia boleh dihantar untuk proses kelulusan semula."
 
 #: app/templates/packages/remove.html:26
 #: app/templates/threads/delete_reply.html:18
@@ -2133,74 +2142,76 @@ msgstr "Batal"
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
-msgstr ""
+msgstr "Hantar ulasan untuk %(title)s oleh %(author)s"
 
 #: app/templates/packages/review_create_edit.html:16
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
-msgstr ""
+msgstr "Jumpa pepijat? Hantarkan ke <a href='%(url)s'>penjejak isu</a> sahaja."
 
 #: app/templates/packages/review_create_edit.html:56
 msgid "Delete review."
-msgstr ""
+msgstr "Padam ulasan."
 
 #: app/templates/packages/review_create_edit.html:57
 msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
 msgstr ""
+"Ini akan mengubah ulasan menjadi bebenang, mengekalkan komen tetapi membuang "
+"kesannya ke atas penarafan pakej."
 
 #: app/templates/packages/review_votes.html:4
 #: app/templates/packages/view.html:287
 msgid "Review Votes"
-msgstr ""
+msgstr "Periksa Undian"
 
 #: app/templates/packages/review_votes.html:13
 #, python-format
 msgid "Review votes on %(title)s by %(author)s"
-msgstr ""
+msgstr "Periksa undian pada %(title)s oleh %(author)s"
 
 #: app/templates/packages/screenshot_edit.html:4
 #: app/templates/packages/screenshot_edit.html:11
 msgid "Edit screenshot"
-msgstr ""
+msgstr "Edit tangkap layar"
 
 #: app/templates/packages/screenshot_new.html:4
 #: app/templates/packages/screenshot_new.html:8
 msgid "Add a screenshot"
-msgstr ""
+msgstr "Tambah tangkap layar"
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
-msgstr ""
+msgstr "Tambah Imej"
 
 #: app/templates/packages/screenshots.html:17
 msgid "Topmost screenshot will be used as the package thumbnail."
-msgstr ""
+msgstr "Tangkap layar paling atas akan digunakan sebagai imej kenit pakej."
 
 #: app/templates/packages/screenshots.html:36
 #: app/templates/packages/view.html:244
 msgid "Awaiting review"
-msgstr ""
+msgstr "Menunggu pemeriksaan"
 
 #: app/templates/packages/screenshots.html:54
 msgid "No screenshots."
-msgstr ""
+msgstr "Tiada tangkap layar."
 
 #: app/templates/packages/screenshots.html:62
 msgid "Save Order"
-msgstr ""
+msgstr "Simpan Tertib"
 
 #: app/templates/packages/screenshots.html:67
 msgid "Reordering requires JavaScript."
-msgstr ""
+msgstr "Perubahan tertib memerlukan JavaScript."
 
 #: app/templates/packages/share.html:10
 msgid "Links"
-msgstr ""
+msgstr "Pautan"
 
 #: app/templates/packages/share.html:13
 msgid "Review link"
-msgstr ""
+msgstr "Pautan ulasan"
 
 #: app/templates/packages/share.html:18
 msgid "Badges"
@@ -2208,296 +2219,313 @@ msgstr "Lencana"
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
-msgstr ""
+msgstr "Keunikan Nama Mods"
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
-msgstr ""
+msgstr "Pakej yang berkongsi mods yang diberi"
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
-msgstr ""
+msgstr "Pakej ini mengandungi nama mods yang wujud dalam pakej berikut:"
 
 #: app/templates/packages/similar.html:32
 msgid "Similar Forum Topics"
-msgstr ""
+msgstr "Topik Forum yang Serupa"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
-msgstr ""
+msgstr "Tetapkan Pengesan Kemas Kini Git"
 
 #: app/templates/packages/update_config.html:16
 msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
 msgstr ""
+"ContentDB akan tinjau repositori Git anda setiap hari, sekiranya pakej anda "
+"diluluskan."
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
 msgstr ""
+"Anda patut mempertimbangkan penggunaan cangkuk sesawang webhook atau API "
+"untuk terbitan lebih cepat."
 
 #: app/templates/packages/update_config.html:18
 msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
 msgstr ""
+"Pengesan Kemas Kini Git cukup pandai untuk tidak cipta terbitan lagi jika "
+"anda sudah ciptanya secara manual atau menggunakan cangkuk sesawang webhook/"
+"API."
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
-msgstr ""
+msgstr "Picu ialah peristiwa yang memicu perbuatan."
 
 #: app/templates/packages/update_config.html:41
 msgid "The action to perform when the trigger happens."
-msgstr ""
+msgstr "Perbuatan untuk dilakukan apabila picu terjadi."
 
 #: app/templates/packages/update_config.html:42
 msgid ""
 "Once a package is marked as outdated, you won't receive any more "
 "notifications until it is marked up to date."
 msgstr ""
+"Apabila suatu pakej ditandai sebagai lapuk, anda tidak akan menerima "
+"sebarang pemberitahuan sehingga ia ditandai sebagai dikemaskini."
 
 #: app/templates/packages/view.html:29
 msgid "Non-free code and media"
-msgstr ""
+msgstr "Kod dan media tidak bebas"
 
 #: app/templates/packages/view.html:31
 msgid "Non-free code"
-msgstr ""
+msgstr "Kod tidak bebas"
 
 #: app/templates/packages/view.html:33
 msgid "Non-free media"
-msgstr ""
+msgstr "Media tidak bebas"
 
 #: app/templates/packages/view.html:96
 msgid "Work in Progress"
-msgstr ""
+msgstr "Kerja Dalam Proses"
 
 #: app/templates/packages/view.html:117
 msgid "Downloads"
-msgstr ""
+msgstr "Muat Turun"
 
 #: app/templates/packages/view.html:138 app/templates/users/profile.html:73
 msgid "Website"
-msgstr ""
+msgstr "Laman Sesawang"
 
 #: app/templates/packages/view.html:144
 msgid "Source"
-msgstr ""
+msgstr "Sumber"
 
 #: app/templates/packages/view.html:150 app/templates/users/profile.html:55
 msgid "Forums"
-msgstr ""
+msgstr "Forum"
 
 #: app/templates/packages/view.html:156
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Penjejak Isu"
 
 #: app/templates/packages/view.html:165
 #, python-format
 msgid "%(min)s - %(max)s"
-msgstr ""
+msgstr "%(min)s - %(max)s"
 
 #: app/templates/packages/view.html:167
 #, python-format
 msgid "%(min)s and above"
-msgstr ""
+msgstr "%(min)s dan ke atas"
 
 #: app/templates/packages/view.html:169
 #, python-format
 msgid "%(max)s and below"
-msgstr ""
+msgstr "%(max)s dan ke bawah"
 
 #: app/templates/packages/view.html:178
 msgid "Download"
-msgstr ""
+msgstr "Muat Turun"
 
 #: app/templates/packages/view.html:196
 msgid "No downloads available"
-msgstr ""
+msgstr "Tiada muat turun tersedia"
 
 #: app/templates/packages/view.html:214
 msgid ""
 "This thread is only visible to the package owner and users of Approver "
 "rank or above."
 msgstr ""
+"Bebenang ini hanya kelihatan kepada pemilik pakej dan pengguna berpangkat "
+"Pelulus ke atas."
 
 #: app/templates/packages/view.html:272 app/templates/threads/view.html:61
 msgid "Edit Review"
-msgstr ""
+msgstr "Edit Ulasan"
 
 #: app/templates/packages/view.html:277
 msgid "You can't review your own package."
-msgstr ""
+msgstr "Anda tidak boleh mengulas pakej anda sendiri."
 
 #: app/templates/packages/view.html:293
 msgid "Used By"
-msgstr ""
+msgstr "Digunakan Oleh"
 
 #: app/templates/packages/view.html:304
 msgid "Package may be outdated"
-msgstr ""
+msgstr "Pakej mungkin sudah lapuk"
 
 #: app/templates/packages/view.html:311
 msgid "Only visible to the author and Editors."
-msgstr ""
+msgstr "Hanya kelihatan kepada pencipta dan Penyunting."
 
 #: app/templates/packages/view.html:328
 msgid "Warning"
-msgstr ""
+msgstr "Amaran"
 
 #: app/templates/packages/view.html:333
 msgid "Dependencies"
-msgstr ""
+msgstr "Kebergantungan"
 
 #: app/templates/packages/view.html:335
 msgid "Required"
-msgstr ""
+msgstr "Wajib"
 
 #: app/templates/packages/view.html:353
 msgid "No required dependencies"
-msgstr ""
+msgstr "Tiada kebergantungan wajib"
 
 #: app/templates/packages/view.html:359
 msgid "Optional"
-msgstr ""
+msgstr "Pilihan"
 
 #: app/templates/packages/view.html:381
 msgid "Information"
-msgstr ""
+msgstr "Maklumat"
 
 #: app/templates/packages/view.html:387
 msgid "Technical Name"
-msgstr ""
+msgstr "Nama Teknikal"
 
 #: app/templates/packages/view.html:404
 msgid "Unknown"
-msgstr ""
+msgstr "Tidak Diketahui"
 
 #: app/templates/packages/view.html:406
 msgid "Added"
-msgstr ""
+msgstr "Telah Ditambah"
 
 #: app/templates/packages/view.html:420
 msgid "Remove myself"
-msgstr ""
+msgstr "Keluarkan diri sendiri"
 
 #: app/templates/packages/view.html:425
 msgid "Provides"
-msgstr ""
+msgstr "Memberikan"
 
 #: app/templates/packages/view.html:435
 #, python-format
 msgid "Like %(display_name)s's work? Donate now!"
-msgstr ""
+msgstr "Suka ciptaan %(display_name)s? Derma sekarang!"
 
 #: app/templates/packages/view.html:453
 msgid "More"
-msgstr ""
+msgstr "Lebih lagi"
 
 #: app/templates/packages/view.html:474
 msgid "Report a problem with this listing"
-msgstr ""
+msgstr "Laporkan masalah dengan senarai ini"
 
 #: app/templates/packages/view.html:479
 msgid "See audit log"
-msgstr ""
+msgstr "Lihat log audit"
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
-msgstr ""
+msgstr "Tugas Gagal"
 
 #: app/templates/tasks/view.html:7
 msgid "Working…"
-msgstr ""
+msgstr "Membuat tugas…"
 
 #: app/templates/tasks/view.html:26
 msgid "Reload the page to check for updates."
-msgstr ""
+msgstr "Muat semula halaman untuk memeriksa kemas kini."
 
 #: app/templates/threads/delete_reply.html:4
 #, python-format
 msgid "Delete reply by %(username)s in %(title)s "
-msgstr ""
+msgstr "Padam balasan oleh %(username)s dalam %(title)s "
 
 #: app/templates/threads/delete_reply.html:16
 #: app/templates/threads/delete_thread.html:16
 #: app/templates/users/delete.html:13
 msgid "Deleting is permanent"
-msgstr ""
+msgstr "Pemadaman itu bersifat kekal"
 
 #: app/templates/threads/delete_thread.html:4
 #, python-format
 msgid "Delete \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Padam \"%(title)s\" oleh %(author)s"
 
 #: app/templates/threads/edit_reply.html:4
 #: app/templates/threads/edit_reply.html:8
 msgid "Edit reply"
-msgstr ""
+msgstr "Edit balasan"
 
 #: app/templates/threads/new.html:4
 msgid "New Thread"
-msgstr ""
+msgstr "Bebenang Baharu"
 
 #: app/templates/threads/new.html:11
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
-msgstr ""
+msgstr "Jumpa pepijat? Hantarkan ke <a href='%(url)s'>penjejak isu</a> sahaja."
 
 #: app/templates/threads/new.html:12
 msgid ""
 "If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
 "you can let us know here."
 msgstr ""
+"Sekiranya pakej ini tidak patut ada di CDB (cth: jika ia langsung tidak "
+"berfungsi), anda boleh beritahu kami di sini."
 
 #: app/templates/threads/new.html:40
 msgid ""
 "Only you, the package author, and users of Approver rank and above can "
 "read private threads."
 msgstr ""
+"Hanya anda, pencipta pakej, dan pengguna berpangkat Pelulus dan ke atas "
+"boleh baca bebenang peribadi."
 
 #: app/templates/threads/user_comments.html:9
 #: app/templates/threads/user_comments.html:13
 #, python-format
 msgid "Comments by %(user)s"
-msgstr ""
+msgstr "Komen oleh %(user)s"
 
 #: app/templates/threads/user_comments.html:46
 #, python-format
 msgid "Reply to <b>%(title)s</b>"
-msgstr ""
+msgstr "Balas ke <b>%(title)s</b>"
 
 #: app/templates/threads/view.html:12
 #, python-format
 msgid "%(title)s on %(package)s"
-msgstr ""
+msgstr "%(title)s di %(package)s"
 
 #: app/templates/threads/view.html:36
 msgid "Subscribe"
-msgstr ""
+msgstr "Langgan"
 
 #: app/templates/threads/view.html:46
 msgid "Unlock"
-msgstr ""
+msgstr "Buka Kunci"
 
 #: app/templates/threads/view.html:51
 msgid "Lock"
-msgstr ""
+msgstr "Kunci"
 
 #: app/templates/threads/view.html:84
 msgid ""
 "This thread is only visible to its creator, the package owner, and users "
 "of Approver rank or above."
 msgstr ""
+"Bebenang ini hanya kelihatan kepada penciptanya, pemilik pakej, dan pengguna "
+"berpangkat Pelulus atau ke atas."
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
-msgstr ""
+msgstr "Baris Gilir Tugas Penyunting"
 
 #: app/templates/todo/editor.html:8
 msgid "Approval Queue"
-msgstr ""
+msgstr "Baris Gilir Kelulusan"
 
 #: app/templates/todo/editor.html:15
 msgid "Approve All"
@@ -2505,27 +2533,27 @@ msgstr "Luluskan Semua"
 
 #: app/templates/todo/editor.html:33
 msgid "No screenshots need reviewing."
-msgstr ""
+msgstr "Tiada tangkap layar yang perlu diperiksa."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:181
 msgid "No packages need reviewing."
-msgstr ""
+msgstr "Tiada pakej yang perlu diperiksa."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
-msgstr ""
+msgstr "Mengimport"
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need reviewing."
-msgstr ""
+msgstr "Tiada terbitan yang perlu diperiksa."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
-msgstr ""
+msgstr "Semua selesai!"
 
 #: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
 msgid "License Needed"
-msgstr ""
+msgstr "Lesen Diperlukan"
 
 #: app/templates/todo/editor.html:127
 msgid "Tag Packages"
@@ -2534,88 +2562,92 @@ msgstr "Tag Pakej"
 #: app/templates/todo/editor.html:130
 #, python-format
 msgid "%(total_to_tag)d / %(total_packages)d packages don't have any tags."
-msgstr ""
+msgstr "%(total_to_tag)d / %(total_packages)d pakej tidak ada sebarang tag."
 
 #: app/templates/todo/editor.html:140
 msgid "View Tags"
-msgstr ""
+msgstr "Lihat Tag"
 
 #: app/templates/todo/editor.html:147
 msgid "Unfulfilled Dependencies"
-msgstr ""
+msgstr "Kebergantungan Tidak Dipenuhi"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
-msgstr ""
+msgstr "Semua pakej lapuk"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
-msgstr ""
+msgstr "Tag Pakej"
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
 msgid "Missing tags only"
-msgstr ""
+msgstr "Tiada tag sahaja"
 
 #: app/templates/todo/tags.html:31
 msgid "Edit Tags"
-msgstr ""
+msgstr "Edit Tag"
 
 #: app/templates/todo/tags.html:77
 msgid "Edit tags"
-msgstr ""
+msgstr "Edit tag"
 
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
 msgid "%(username)s's to do list"
-msgstr ""
+msgstr "Senarai tugasan yang %(username)s perlu buat"
 
 #: app/templates/todo/todo_base.html:23
 msgid "All Outdated Packages"
-msgstr ""
+msgstr "Semua Pakej Lapuk"
 
 #: app/templates/todo/todo_base.html:35
 msgid "Forum Topics"
-msgstr ""
+msgstr "Topik Forum"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
-msgstr ""
+msgstr "Lain-lain Perlu Dibuat"
 
 #: app/templates/todo/user.html:13
 msgid "Enable email notifications"
-msgstr ""
+msgstr "Bolehkan pemberitahuan e-mel"
 
 #: app/templates/todo/user.html:17
 msgid "Unapproved Packages Needing Action"
-msgstr ""
+msgstr "Pakej Belum Lulus Memerlukan Perbuatan"
 
 #: app/templates/todo/user.html:39 app/templates/todo/user.html:87
 msgid "Nothing to do :)"
-msgstr ""
+msgstr "Tiada apa-apa perlu dibuat :)"
 
 #: app/templates/todo/user.html:45
 msgid "See all Update Settings"
-msgstr ""
+msgstr "Lihat semua Tetapan Kemas Kini"
 
 #: app/templates/todo/user.html:50
 msgid "Create All Releases"
-msgstr ""
+msgstr "Cipta Semua Terbitan"
 
 #: app/templates/todo/user.html:53
 msgid "Potentially Outdated Packages"
-msgstr ""
+msgstr "Pakej yang Mungkin Lapuk"
 
 #: app/templates/todo/user.html:55
 msgid ""
 "New: Git Update Detection has been set up on all packages to send "
 "notifications."
 msgstr ""
+"Baharu: Pengesan Kemas Kini Git telah ditetapkan pada semua pakej untuk "
+"menghantar pemberitahuan."
 
 #: app/templates/todo/user.html:56
 msgid ""
 "Consider changing the update settings to create releases automatically "
 "instead."
 msgstr ""
+"Pertimbangkan untuk tukar tetapan kemas kini untuk cipta terbitan secara "
+"automatik sahaja."
 
 #: app/templates/todo/user.html:59
 msgid ""
@@ -2819,9 +2851,8 @@ msgid "You can still <a href='%(url)s'>sign up without one</a>."
 msgstr ""
 
 #: app/templates/users/claim_forums.html:26
-#, fuzzy
 msgid "Option 1"
-msgstr "URL Derma"
+msgstr "Pilihan 1"
 
 #: app/templates/users/claim_forums.html:27
 msgid "Use GitHub field in forum profile"
@@ -2834,9 +2865,8 @@ msgstr ""
 
 #: app/templates/users/claim_forums.html:39
 #: app/templates/users/claim_forums.html:68
-#, fuzzy
 msgid "Forum username"
-msgstr "Nama Pengguna Forum"
+msgstr "Nama pengguna forum"
 
 #: app/templates/users/claim_forums.html:43
 msgid "You'll need to have the GitHub field in your forum profile filled out."
@@ -2853,14 +2883,12 @@ msgid "Next: log in with GitHub"
 msgstr ""
 
 #: app/templates/users/claim_forums.html:55
-#, fuzzy
 msgid "Option 2"
-msgstr "URL Derma"
+msgstr "Pilihan 2"
 
 #: app/templates/users/claim_forums.html:56
-#, fuzzy
 msgid "Verification token"
-msgstr "Token pengesahan tidak diketahui!"
+msgstr "Token pengesahan"
 
 #: app/templates/users/claim_forums.html:71
 msgid ""
@@ -2870,9 +2898,8 @@ msgid ""
 msgstr ""
 
 #: app/templates/users/claim_forums.html:75
-#, fuzzy
 msgid "Paste this into your signature:"
-msgstr "Atau tampal ini ke dalam pelayar anda:"
+msgstr "Tampal ini ke dalam tandatangan anda:"
 
 #: app/templates/users/claim_forums.html:81
 msgid "Click next so we can check it."
@@ -2971,7 +2998,7 @@ msgstr ""
 
 #: app/templates/users/profile.html:100
 msgid "reviews"
-msgstr ""
+msgstr "ulasan"
 
 #: app/templates/users/profile.html:108
 msgid "comments"
@@ -3025,7 +3052,7 @@ msgstr ""
 
 #: app/templates/users/profile_edit.html:52
 msgid "Pretending to be another user is grounds for a permanent ban"
-msgstr ""
+msgstr "Menyamar menjadi pengguna lain itu penyebab untuk pengharaman kekal"
 
 #: app/templates/users/register.html:17
 msgid ""
