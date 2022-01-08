@@ -21,7 +21,7 @@ from flask_mail import Mail
 from flask_github import GitHub
 from flask_wtf.csrf import CSRFProtect
 from flask_flatpages import FlatPages
-from flask_babel import Babel
+from flask_babel import Babel, gettext
 from flask_login import logout_user, current_user, LoginManager
 import os, redis
 from app.markdown import init_markdown, MARKDOWN_EXTENSIONS, MARKDOWN_EXTENSION_CONFIG

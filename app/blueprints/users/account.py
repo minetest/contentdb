@@ -248,7 +248,7 @@ def handle_set_password(form):
 	one = form.password.data
 	two = form.password2.data
 	if one != two:
-		flash(gettext("Passwords do not much"), "danger")
+		flash(gettext("Passwords do not match"), "danger")
 		return
 
 	addAuditLog(AuditSeverity.USER, current_user, "Changed their password", url_for("users.profile", username=current_user.username))
