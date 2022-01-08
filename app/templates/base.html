@@ -173,22 +173,16 @@
 							<i class="fas fa-language"></i>
 						</a>
 							<ul class="dropdown-menu dropdown-menu-right" role="menu">
-								<li class="nav-item">
-									<form method="POST" action="{{ url_for('set_locale') }}">
-										<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-										<input type="hidden" name="locale" value="en" />
-										<input type="hidden" name="r" value="{{ url_set_query() }}" />
-										<input type="submit" class="btn btn-link nav-link" value="English (en)">
-									</form>
-								</li>
-								<li>
-									<form method="POST" action="{{ url_for('set_locale') }}">
-										<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-										<input type="hidden" name="locale" value="fr" />
-										<input type="hidden" name="r" value="{{ url_set_query() }}" />
-										<input type="submit" class="btn btn-link nav-link" value="Français (fr)">
-									</form>
-								</li>
+								{% for locale, locale_name in config["LANGUAGES"].items() %}
+									<li class="nav-item">
+										<form method="POST" action="{{ url_for('set_locale') }}">
+											<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+											<input type="hidden" name="locale" value="{{ locale }}" />
+											<input type="hidden" name="r" value="{{ url_set_query() }}" />
+											<input type="submit" class="btn btn-link nav-link" value="{{ locale_name }} ({{ locale }})">
+										</form>
+									</li>
+								{% endfor %}
 								<li class="dropdown-divider"></li>
 								<li class="nav-item ">
 									<a class="nav-link" href="https://hosted.weblate.org/projects/minetest/contentdb/">

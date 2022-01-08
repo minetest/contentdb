@@ -34,8 +34,9 @@ app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = MARKDOWN_EXTENSIONS
 app.config["FLATPAGES_EXTENSION_CONFIG"] = MARKDOWN_EXTENSION_CONFIG
 app.config["BABEL_TRANSLATION_DIRECTORIES"] = "../translations"
 app.config["LANGUAGES"] = {
-    "en": "English",
-    "fr": "Français",
+	"en": "English",
+	"fr": "Français",
+	"ms": "Bahasa Melayu",
 }
 
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
