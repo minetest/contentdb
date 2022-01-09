@@ -24,8 +24,11 @@ Remove {{ package.title }}
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
 		<div class="form-group">
-			<label for="reason">Reason</label>
+			<label for="reason">{{ _("Reason") }}</label>
 			<input id="reason" class="form-control" type="text" name="reason" required minlength="5">
+			<small class="form-text text-muted">
+				{{ _("Reason for unapproval / deletion, this is shown in the audit log") }}
+			</small>
 		</div>
 
 		<a class="btn btn-secondary float-right" href="{{ package.getURL("packages.view") }}">{{ _("Cancel") }}</a>
