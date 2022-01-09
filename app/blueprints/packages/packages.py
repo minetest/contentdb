@@ -408,6 +408,8 @@ def remove(package):
 		return render_template("packages/remove.html", package=package,
 				tabs=get_package_tabs(current_user, package), current_tab="remove")
 
+	reason = request.form.get("reason") or "?"
+
 	if "delete" in request.form:
 		if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
 			flash(gettext("You don't have permission to do that."), "danger")
@@ -416,7 +418,7 @@ def remove(package):
 		package.state = PackageState.DELETED
 
 		url = url_for("users.profile", username=package.author.username)
-		msg = "Deleted {}".format(package.title)
+		msg = "Deleted {}, reason={}".format(package.title, reason)
 		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, url, package)
 		addAuditLog(AuditSeverity.EDITOR, current_user, msg, url)
 		db.session.commit()
@@ -431,7 +433,7 @@ def remove(package):
 
 		package.state = PackageState.WIP
 
-		msg = "Unapproved {}".format(package.title)
+		msg = "Unapproved {}, reason={}".format(package.title, reason)
 		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getURL("packages.view"), package)
 		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.getURL("packages.view"), package)
 
