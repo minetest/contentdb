@@ -491,3 +491,35 @@ def versions():
 
 	return jsonify([rel.getAsDictionary() \
 			for rel in MinetestRelease.query.all() if rel.getActual() is not None])
+
+
+@bp.route("/api/dependencies/")
+@cors_allowed
+def all_deps():
+	qb = QueryBuilder(request.args)
+	query = qb.buildPackageQuery()
+
+	def format_pkg(pkg: Package):
+		return {
+			"type": pkg.type.toName(),
+			"author": pkg.author.username,
+			"name": pkg.name,
+			"provides": [x.name for x in pkg.provides],
+			"depends": [str(x) for x in pkg.dependencies if not x.optional],
+			"optional_depends": [str(x) for x in pkg.dependencies if x.optional],
+		}
+
+	page = get_int_or_abort(request.args.get("page"), 1)
+	num = min(get_int_or_abort(request.args.get("n"), 100), 100)
+	pagination: flask_sqlalchemy.Pagination = query.paginate(page, num, True)
+	return jsonify({
+		"page": pagination.page,
+		"per_page": pagination.per_page,
+		"page_count": math.ceil(pagination.total / pagination.per_page),
+		"total": pagination.total,
+		"urls": {
+			"previous": abs_url(url_set_query(page=page - 1)) if pagination.has_prev else None,
+			"next": abs_url(url_set_query(page=page + 1)) if pagination.has_next else None,
+		},
+		"items": [format_pkg(pkg) for pkg in pagination.items],
+	})

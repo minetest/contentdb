@@ -32,6 +32,23 @@ often other keys with information. For example:
 ```
 
 
+### Paginated Results
+
+Some API endpoints returns results in pages. The page number is specified using the `page` query argument, and
+the number of items is specified using `num`
+
+The response will be a dictionary with the following keys:
+
+* `page`: page number, integer from 1 to max 
+* `per_page`: number of items per page, same as `n`
+* `page_count`: number of pages
+* `total`: total number of results
+* `urls`: dictionary containing
+    * `next`: url to next page
+    * `previous`: url to previous page
+* `items`: array of items
+
+
 ## Authentication
 
 Not all endpoints require authentication, but it is done using Bearer tokens:
@@ -73,7 +90,22 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `issue_tracker`: Issue tracker URL.
         * `forums`: forum topic ID.
 * GET `/api/packages/<username>/<name>/dependencies/`
+    * Returns dependencies, with suggested candidates 
     * If query argument `only_hard` is present, only hard deps will be returned.
+* GET `/api/dependencies/`
+    * Returns `provides` and raw dependencies for all packages.
+    * Supports [Package Queries](#package-queries)
+    * [Paginated result](#paginated-results), max 100 results per page
+    * Each item in `items` will be a dictionary with the following keys:
+        * `type`: One of `GAME`, `MOD`, `TXP`. 
+        * `author`: Username of the package author.
+        * `name`: Package name.
+        * `provides`: List of technical mod names inside the package.
+        * `depends`: List of hard dependencies.
+            * Each dep will either be a metapackage dependency (`name`), or a
+                package dependency (`author/name`).
+        * `optional_depends`: list of optional dependencies
+            * Same as above.
 
 You can download a package by building one of the two URLs:
 
@@ -240,13 +272,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
         * `votes`: dictionary with `helpful` and `unhelpful`,
 * GET `/api/reviews/` (List)
     * Returns a paginated response. This is a dictionary with `page`, `url`, and `items`.
-        * `page`: page number, integer from 1 to max
-        * `per_page`: number of items per page, same as `n`
-        * `page_count`: number of pages
-        * `total`: total number of results
-        * `urls`: dictionary containing
-            * `next`: url to next page
-            * `previous`: url to previous page
+        * [Paginated result](#paginated-results)
         * `items`: array of review dictionaries, like above
             * Each review also has a `package` dictionary with `type`, `author` and `name`
     * Query arguments:
