@@ -47,6 +47,9 @@ def url_set_anchor(anchor):
 	return url_for(request.endpoint, **dargs) + "#" + anchor
 
 def url_set_query(**kwargs):
+	if request.endpoint is None:
+		return None
+
 	args = MultiDict(request.args)
 
 	for key, value in kwargs.items():
