@@ -510,7 +510,7 @@ def all_deps():
 		}
 
 	page = get_int_or_abort(request.args.get("page"), 1)
-	num = min(get_int_or_abort(request.args.get("n"), 100), 100)
+	num = min(get_int_or_abort(request.args.get("n"), 100), 300)
 	pagination: flask_sqlalchemy.Pagination = query.paginate(page, num, True)
 	return jsonify({
 		"page": pagination.page,

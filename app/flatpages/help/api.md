@@ -95,7 +95,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 * GET `/api/dependencies/`
     * Returns `provides` and raw dependencies for all packages.
     * Supports [Package Queries](#package-queries)
-    * [Paginated result](#paginated-results), max 100 results per page
+    * [Paginated result](#paginated-results), max 300 results per page
     * Each item in `items` will be a dictionary with the following keys:
         * `type`: One of `GAME`, `MOD`, `TXP`. 
         * `author`: Username of the package author.

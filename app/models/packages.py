@@ -453,7 +453,7 @@ class Package(db.Model):
 	def getAsDictionaryKey(self):
 		return {
 			"name": self.name,
-			"author": self.author.display_name,
+			"author": self.author.username,
 			"type": self.type.toName(),
 		}
 
