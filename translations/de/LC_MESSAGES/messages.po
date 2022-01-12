@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-08 02:19+0000\n"
-"PO-Revision-Date: 2022-01-12 16:07+0000\n"
-"Last-Translator: Buckaroo Banzai <postmaster@rudin.io>\n"
+"PO-Revision-Date: 2022-01-12 20:50+0000\n"
+"Last-Translator: cx384 <muelladresse84@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/minetest/"
 "contentdb/de/>\n"
 "Language: de\n"
@@ -1338,9 +1338,8 @@ msgid "Create first release"
 msgstr "Erste Version freigeben"
 
 #: app/templates/macros/package_approval.html:26
-#, fuzzy
 msgid "Set up releases"
-msgstr "Freigaben einrichten"
+msgstr "Versionen Bearbeiten"
 
 #: app/templates/macros/package_approval.html:29
 msgid "You need to create a release before this package can be approved."
@@ -1537,7 +1536,7 @@ msgstr "Letzte Antwort"
 #: app/templates/macros/todo.html:23
 #, python-format
 msgid "On %(trigger)s, do %(action)s"
-msgstr ""
+msgstr "Bei %(trigger)s, tuh %(action)s"
 
 #: app/templates/macros/todo.html:37 app/templates/packages/view.html:54
 #: app/templates/packages/view.html:316
@@ -1645,74 +1644,80 @@ msgstr "Keine Benachrichtigungen"
 
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
-msgstr ""
+msgstr "Bearbeiter/Genehmiger Nachrichten"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
-msgstr ""
+msgstr "Pseudonym"
 
 #: app/templates/packages/alias_create_edit.html:13
 msgid "Back to Aliases"
-msgstr ""
+msgstr "Zurück zu Pseudonymen"
 
 #: app/templates/packages/alias_list.html:4
 msgid "Aliases"
-msgstr ""
+msgstr "Pseudonyme"
 
 #: app/templates/packages/alias_list.html:15
 #, python-format
 msgid "Aliases for %(title)s by %(author)s"
-msgstr ""
+msgstr "Pseudonyme für %(title)s von %(author)s"
 
 #: app/templates/packages/alias_list.html:24
 msgid "No aliases"
-msgstr ""
+msgstr "Keine Pseudonyme"
 
 #: app/templates/packages/bulk_update_conf.html:4
 #, python-format
 msgid "Git Update Detection for %(username)s"
-msgstr ""
+msgstr "Git Aktualisierungs Erkennung für %(username)s"
 
 #: app/templates/packages/bulk_update_conf.html:10
 msgid "Packages with Update Settings"
-msgstr ""
+msgstr "Paket mit Aktualisierungs Einstellungen"
 
 #: app/templates/packages/bulk_update_conf.html:16
 msgid "Bulk Set Update Settings"
-msgstr ""
+msgstr "lege mehrfache Aktualisierungs Einstellungen fest"
 
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
 msgstr ""
+"Hierbei werden die Aktualisierungs Einstellungen für alle Pakete mit einer "
+"Git-Repository festgelegt."
 
 #: app/templates/packages/bulk_update_conf.html:27
 #: app/templates/packages/release_new.html:50
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
-msgstr ""
+msgstr "Leer lassen, um die default branch zu verwenden"
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
 msgid "Currently, the branch name field is only used by the New Commit trigger."
 msgstr ""
+"Derzeit wird das Feld für die branch nur für den New Commit Auslöser "
+"verwendet."
 
 #: app/templates/packages/create_edit.html:5
 #, python-format
 msgid "Edit - %(title)s"
-msgstr ""
+msgstr "Bearbeite - %(title)s"
 
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
 msgid "Create Package"
-msgstr ""
+msgstr "Erstelle Paket"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
 msgstr ""
+"Haben Sie die Richtlinien und Anleitungen zum Einschließen von Paketen schon "
+"gelesen?"
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
-msgstr ""
+msgstr "Weiter lesen"
 
 #: app/templates/packages/create_edit.html:49
 #, python-format
@@ -1720,6 +1725,8 @@ msgid ""
 "You can include a .cdb.json file in your %(type)s to update these details"
 " automatically."
 msgstr ""
+"Sie können eine .cdb.json-Datei in Ihre %(type)s einfügen, um diese Details "
+"automatisch zu aktualisieren."
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -1727,10 +1734,16 @@ msgid ""
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
+"Javascript wird benötigt, um die Benutzeroberfläche zu verbessern und wird "
+"für Funktionen benötigt\n"
+"\t\t\twie das Auffinden von Metadaten aus Git und die automatische "
+"Vervollständigung."
 
 #: app/templates/packages/create_edit.html:57
 msgid "Whilst disabled Javascript may work, it is not officially supported."
 msgstr ""
+"Deaktiviertes Javascript kann zwar funktionieren, wird aber nicht offiziell "
+"unterstützt."
 
 #: app/templates/packages/create_edit.html:67
 #: app/templates/threads/view.html:78
