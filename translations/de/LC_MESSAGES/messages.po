@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-08 02:19+0000\n"
 "PO-Revision-Date: 2022-01-12 14:35+0000\n"
-"Last-Translator: Buckaroo Banzai <postmaster@rudin.io>\n"
+"Last-Translator: activivan <activivan@mail.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/minetest/"
 "contentdb/de/>\n"
 "Language: de\n"
@@ -1335,7 +1335,7 @@ msgstr "Zustand"
 
 #: app/templates/macros/package_approval.html:22
 msgid "Create first release"
-msgstr ""
+msgstr "Ersten Release erstellen"
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
@@ -1348,10 +1348,11 @@ msgstr ""
 #: app/templates/macros/package_approval.html:31
 msgid "A release is required before this package can be approved."
 msgstr ""
+"Bevor dieses Paket freigegeben werden kann, ist ein Release erforderlich."
 
 #: app/templates/macros/package_approval.html:36
 msgid "You need to add at least one screenshot."
-msgstr ""
+msgstr "Du musst mindestens einen Screenshot hinzufügen."
 
 #: app/templates/macros/package_approval.html:40
 #, python-format
@@ -1359,34 +1360,40 @@ msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
 "%(deps)s"
 msgstr ""
+"Die folgenden benötigten Abhängigkeiten (Dependencies) müssen zuerst zu "
+"ContentDB hinzugefügt werden: %(deps)s"
 
 #: app/templates/macros/package_approval.html:44
 msgid "Please wait for the license to be added to CDB."
-msgstr ""
+msgstr "Warte bitte, bis diese Lizenz zu ContentDB hinzugefügt wurde."
 
 #: app/templates/macros/package_approval.html:51
 msgid "You should add at least one screenshot, but this isn't required."
 msgstr ""
+"Du solltest mindestens einen Screenshot hinzufügen, obwohl dies nicht "
+"zwingend notwendig ist."
 
 #: app/templates/macros/package_approval.html:57
 msgid "Please wait for the release to be approved."
-msgstr ""
+msgstr "Bitte warte, bis der Release freigegeben wurde."
 
 #: app/templates/macros/package_approval.html:59
 msgid "You can now approve this package if you're ready."
-msgstr ""
+msgstr "Du kannst dieses Paket nun freigeben, wenn du bereit bist."
 
 #: app/templates/macros/package_approval.html:61
 msgid "Please wait for the package to be approved."
-msgstr ""
+msgstr "Bitte warte, bis das Paket freigegeben wurde."
 
 #: app/templates/macros/package_approval.html:65
 msgid "You can now submit this package for approval if you're ready."
 msgstr ""
+"Du kannst nun dieses Paket für eine Freigabe einreichen, wenn du bereit bist."
 
 #: app/templates/macros/package_approval.html:67
 msgid "This package can be submitted for approval when ready."
 msgstr ""
+"Dieses Paket kann für eine Freigabe eingereicht werden, wenn es bereit ist."
 
 #: app/templates/macros/package_approval.html:97
 msgid "Please make sure that this package has the right to the names it uses."
@@ -1396,42 +1403,45 @@ msgstr ""
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr ""
+"Bitte stelle sicher, dass dieses Paket Rechte für die Namen %(names)s hat"
 
 #: app/templates/macros/package_approval.html:110
 msgid "Package review thread"
-msgstr ""
+msgstr "Paketprüfungs Thread"
 
 #: app/templates/macros/package_approval.html:111
 msgid ""
 "You can open a thread if you have a question for the reviewer or package "
 "author."
 msgstr ""
+"Du kannst einen Thread eröffnen, wenn du eine Frage an den Rezensenten oder "
+"Paket-Autoren hast."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
-msgstr ""
+msgstr "<b>Warnung:</b> Nicht freier Code und Medien."
 
 #: app/templates/macros/packagegridtile.html:29
 msgid "<b>Warning:</b> Non-free code."
-msgstr ""
+msgstr "<b>Warnung:</b> Nicht freier Code."
 
 #: app/templates/macros/packagegridtile.html:33
 msgid "<b>Warning:</b> Non-free media."
-msgstr ""
+msgstr "<b>Warnung:</b> Nicht freie Medien."
 
 #: app/templates/macros/packagegridtile.html:45
 msgid "No packages available"
-msgstr ""
+msgstr "Keine Pakete verfügbar"
 
 #: app/templates/macros/releases.html:20 app/templates/macros/releases.html:47
 #: app/templates/macros/releases.html:89
 #, python-format
 msgid "created %(date)s"
-msgstr ""
+msgstr "erstellt am %(date)s"
 
 #: app/templates/macros/releases.html:60
 msgid "Edit / Approve"
-msgstr ""
+msgstr "Bearbeiten / Freigeben"
 
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:48
 #: app/templates/packages/view.html:233
@@ -1441,84 +1451,84 @@ msgstr "Bearbeiten"
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
-msgstr ""
+msgstr "Importiere..."
 
 #: app/templates/macros/releases.html:96
 msgid "Waiting for approval."
-msgstr ""
+msgstr "Warte auf Freigabe."
 
 #: app/templates/macros/releases.html:103
 msgid "No releases available."
-msgstr ""
+msgstr "Keine Releases verfügbar."
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
-msgstr ""
+msgstr "Hilfreich"
 
 #: app/templates/macros/reviews.html:13
 msgid "Unhelpful"
-msgstr ""
+msgstr "Nicht hilfreich"
 
 #: app/templates/macros/reviews.html:82
 #, python-format
 msgid "%(num)d comments"
-msgstr ""
+msgstr "%(num)d Kommentare"
 
 #: app/templates/macros/reviews.html:94
 msgid "No reviews, yet."
-msgstr ""
+msgstr "Noch keine Bewertungen."
 
 #: app/templates/macros/reviews.html:104 app/templates/macros/reviews.html:143
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
-msgstr ""
+msgstr "Bewertung"
 
 #: app/templates/macros/reviews.html:109 app/templates/macros/reviews.html:148
 #: app/templates/packages/review_create_edit.html:35
 #, python-format
 msgid "Do you recommend this %(type)s?"
-msgstr ""
+msgstr "Empfiehlst du diesen %(type)s?"
 
 #: app/templates/macros/reviews.html:124
 #: app/templates/packages/review_create_edit.html:40
 msgid "Why or why not? Try to be constructive"
-msgstr ""
+msgstr "Warum oder warum nicht? Versuche, konstruktiv zu sein"
 
 #: app/templates/macros/reviews.html:133
 msgid "Post Review"
-msgstr ""
+msgstr "Nachbericht"
 
 #: app/templates/macros/threads.html:29
 msgid "Maintainer"
-msgstr ""
+msgstr "Instandhalter"
 
 #: app/templates/macros/threads.html:79
 msgid "This thread has been locked by a moderator."
-msgstr ""
+msgstr "Dieser Thread wurde von einem Moderator gesperrt."
 
 #: app/templates/macros/threads.html:98
 msgid "Please wait before commenting again."
-msgstr ""
+msgstr "Bitte warte, bevor du erneut kommentierst."
 
 #: app/templates/macros/threads.html:104
 msgid "This thread has been locked."
-msgstr ""
+msgstr "Dieser Thread wurde gesperrt."
 
 #: app/templates/macros/threads.html:106
 msgid "You don't have permission to post."
-msgstr ""
+msgstr "Du hast keine Berechtigung zum posten."
 
 #: app/templates/macros/threads.html:132 app/templates/macros/threads.html:212
 msgid "No threads found"
-msgstr ""
+msgstr "Keine Threads gefunden"
 
 #: app/templates/macros/threads.html:140
 msgid "Thread"
-msgstr ""
+msgstr "Thread"
 
 #: app/templates/macros/threads.html:144
 msgid "Last Reply"
-msgstr ""
+msgstr "Letzte Antwort"
 
 #: app/templates/macros/todo.html:23
 #, python-format
@@ -1528,106 +1538,106 @@ msgstr ""
 #: app/templates/macros/todo.html:37 app/templates/packages/view.html:54
 #: app/templates/packages/view.html:316
 msgid "Release"
-msgstr ""
+msgstr "Release"
 
 #: app/templates/macros/todo.html:44
 msgid "Repo"
-msgstr ""
+msgstr "Repo"
 
 #: app/templates/macros/todo.html:50
 #: app/templates/packages/releases_list.html:13
 #: app/templates/packages/view.html:320
 msgid "Update settings"
-msgstr ""
+msgstr "Einstellungen aktualisieren"
 
 #: app/templates/macros/todo.html:57
 msgid "No outdated packages."
-msgstr ""
+msgstr "Keine veralteten Pakete."
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:110
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: app/templates/macros/topics.html:8
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
-msgstr ""
+msgstr "Aktionen"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
 #: app/templates/metapackages/view.html:26
 #: app/templates/packages/similar.html:40 app/templates/todo/editor.html:158
 #: app/templates/todo/editor.html:173
 msgid "WIP"
-msgstr ""
+msgstr "WIP (In Entwicklung)"
 
 #: app/templates/macros/topics.html:35
 msgid "Show"
-msgstr ""
+msgstr "Zeigen"
 
 #: app/templates/macros/topics.html:37
 msgid "Discard"
-msgstr ""
+msgstr "Verwerfen"
 
 #: app/templates/macros/topics.html:57
 msgid "Old"
-msgstr ""
+msgstr "Alt"
 
 #: app/templates/metapackages/list.html:4
 #: app/templates/metapackages/view.html:4
 msgid "Meta Packages"
-msgstr ""
+msgstr "Meta Pakete"
 
 #: app/templates/metapackages/list.html:37
 msgid "No meta packages found."
-msgstr ""
+msgstr "Keine Meta Pakete gefunden."
 
 #: app/templates/metapackages/view.html:8
 #, python-format
 msgid "Meta Package \"%(name)s\""
-msgstr ""
+msgstr "Meta Paket \"%(name)s\""
 
 #: app/templates/metapackages/view.html:10
 msgid "Provided By"
-msgstr ""
+msgstr "Bereitgestellt von"
 
 #: app/templates/metapackages/view.html:17
 msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
-msgstr ""
+msgstr "Leider ist dies noch nicht auf ContentDB! Hier ein Forum Thema:"
 
 #: app/templates/metapackages/view.html:24
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:341
 #: app/templates/packages/view.html:365 app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
-msgstr ""
+msgstr "%(title)s von %(display_name)s"
 
 #: app/templates/metapackages/view.html:32
 msgid "Required By"
-msgstr ""
+msgstr "Benötigt von"
 
 #: app/templates/metapackages/view.html:35
 msgid "Optionally Used By"
-msgstr ""
+msgstr "Optional genutzt von"
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
-msgstr ""
+msgstr "Email-Benachrichtigungseinstellungen bearbeiten"
 
 #: app/templates/notifications/list.html:22
 msgid "Newest first."
-msgstr ""
+msgstr "Neueste zuerst."
 
 #: app/templates/notifications/list.html:27
 msgid "Your Notifications"
-msgstr ""
+msgstr "Deine Benachrichtigungen"
 
 #: app/templates/notifications/list.html:61
 #: app/templates/notifications/list.html:99
 msgid "No notifications"
-msgstr ""
+msgstr "Keine Benachrichtigungen"
 
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
