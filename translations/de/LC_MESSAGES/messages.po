@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-08 02:19+0000\n"
-"PO-Revision-Date: 2022-01-13 17:05+0000\n"
-"Last-Translator: debiankaios <info@debiankaios.de>\n"
+"PO-Revision-Date: 2022-01-13 17:31+0000\n"
+"Last-Translator: cx384 <muelladresse84@web.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/minetest/"
 "contentdb/de/>\n"
 "Language: de\n"
@@ -2550,89 +2550,90 @@ msgstr ""
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
-msgstr ""
+msgstr "Bearbeiter Arbeitswarteschlange"
 
 #: app/templates/todo/editor.html:8
 msgid "Approval Queue"
-msgstr ""
+msgstr "Genehmigungswarteschlange"
 
 #: app/templates/todo/editor.html:15
 msgid "Approve All"
-msgstr ""
+msgstr "Alle genehmigen"
 
 #: app/templates/todo/editor.html:33
 msgid "No screenshots need reviewing."
-msgstr ""
+msgstr "Screenshots müssen nicht überprüft werden."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:181
 msgid "No packages need reviewing."
-msgstr ""
+msgstr "Pakete müssen nicht überprüft werden."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
-msgstr ""
+msgstr "Importieren"
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need reviewing."
-msgstr ""
+msgstr "Veröffentlichungen müssen nicht überprüft werden."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
-msgstr ""
+msgstr "Alles erledigt!"
 
 #: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
 msgid "License Needed"
-msgstr ""
+msgstr "Lizenz Erforderlich"
 
 #: app/templates/todo/editor.html:127
+#, fuzzy
 msgid "Tag Packages"
-msgstr ""
+msgstr "Tag Pakete"
 
 #: app/templates/todo/editor.html:130
 #, python-format
 msgid "%(total_to_tag)d / %(total_packages)d packages don't have any tags."
-msgstr ""
+msgstr "%(total_to_tag)d / %(total_packages)d Pakete haben keine Tags."
 
 #: app/templates/todo/editor.html:140
 msgid "View Tags"
-msgstr ""
+msgstr "Tags anzeigen"
 
 #: app/templates/todo/editor.html:147
 msgid "Unfulfilled Dependencies"
-msgstr ""
+msgstr "Unerfüllte Abhängigkeiten"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
-msgstr ""
+msgstr "Alle veralteten Pakete"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
-msgstr ""
+msgstr "Paket Tags"
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
 msgid "Missing tags only"
-msgstr ""
+msgstr "Nur fehlende Tags"
 
 #: app/templates/todo/tags.html:31
 msgid "Edit Tags"
-msgstr ""
+msgstr "Tags Bearbeiten"
 
 #: app/templates/todo/tags.html:77
 msgid "Edit tags"
-msgstr ""
+msgstr "Tags bearbeiten"
 
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
-#, python-format
+#, fuzzy, python-format
 msgid "%(username)s's to do list"
-msgstr ""
+msgstr "%(username)s's To-Do-Liste"
 
 #: app/templates/todo/todo_base.html:23
 msgid "All Outdated Packages"
-msgstr ""
+msgstr "Alle Veralteten Pakete"
 
 #: app/templates/todo/todo_base.html:35
 msgid "Forum Topics"
-msgstr "Forum Themen"
+msgstr "Forum Topics"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
@@ -2644,35 +2645,39 @@ msgstr "E-Mail-Benachrichtigungen aktivieren"
 
 #: app/templates/todo/user.html:17
 msgid "Unapproved Packages Needing Action"
-msgstr ""
+msgstr "Nicht genehmigte Pakete mit Handlungsbedarf"
 
 #: app/templates/todo/user.html:39 app/templates/todo/user.html:87
 msgid "Nothing to do :)"
-msgstr ""
+msgstr "Nichts zu tun :)"
 
 #: app/templates/todo/user.html:45
 msgid "See all Update Settings"
-msgstr ""
+msgstr "Alle Update-Einstellungen anzeigen"
 
 #: app/templates/todo/user.html:50
 msgid "Create All Releases"
-msgstr ""
+msgstr "Alle Veröffentlichungen erstellen"
 
 #: app/templates/todo/user.html:53
 msgid "Potentially Outdated Packages"
-msgstr ""
+msgstr "Potenziell veraltete Pakete"
 
 #: app/templates/todo/user.html:55
 msgid ""
 "New: Git Update Detection has been set up on all packages to send "
 "notifications."
 msgstr ""
+"Neu: Git Update Detection wurde für alle Pakete eingerichtet, um "
+"Benachrichtigungen zu senden."
 
 #: app/templates/todo/user.html:56
 msgid ""
 "Consider changing the update settings to create releases automatically "
 "instead."
 msgstr ""
+"Erwägen Sie, die Aktualisierungseinstellungen so zu ändern, dass stattdessen "
+"automatisch Veröffentlichungen erstellt werden."
 
 #: app/templates/todo/user.html:59
 msgid ""
@@ -2680,16 +2685,21 @@ msgid ""
 "releases when New Commits or New Tags are pushed to Git by clicking 'Update "
 "Settings'."
 msgstr ""
+"Anstatt Pakete als veraltet zu markieren, können Sie automatisch "
+"Veröffentlichungen erstellen lassen, wenn neue Commits oder neue Tags mit "
+"Git gepusht werden, indem Sie auf \"Einstellungen aktualisieren\" klicken."
 
 #: app/templates/todo/user.html:61
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
+"Um ein Paket von unten zu entfernen, erstellen Sie eine neue Version oder "
+"ändern Sie die Aktualisierungseinstellungen."
 
 #: app/templates/todo/user.html:70
 msgid "Packages Without Tags"
-msgstr ""
+msgstr "Pakete ohne Tags"
 
 #: app/templates/todo/user.html:72
 msgid "Labelling your packages with tags helps users find them."
@@ -2756,7 +2766,7 @@ msgstr ""
 
 #: app/templates/users/account.html:89
 msgid "Link Github"
-msgstr ""
+msgstr "Github verlinken"
 
 #: app/templates/users/account.html:92
 msgid "None"
@@ -2764,35 +2774,35 @@ msgstr "keine"
 
 #: app/templates/users/account.html:100
 msgid "View All"
-msgstr ""
+msgstr "Alles anzeigen"
 
 #: app/templates/users/account.html:104
 msgid "Recent Account Actions"
-msgstr ""
+msgstr "Kürzliche Kontoaktionen"
 
 #: app/templates/users/account.html:109
 msgid "Account Deletion and Deactivation"
-msgstr ""
+msgstr "Löschung und Deaktivierung des Kontos"
 
 #: app/templates/users/account.html:113
 msgid "Delete or Deactivate"
-msgstr ""
+msgstr "Löschen oder Deaktivieren"
 
 #: app/templates/users/account.html:116
 msgid "Account Deletion and Deactivation isn't available to users yet."
-msgstr ""
+msgstr "Kontolöschung und -deaktivierung ist für Benutzer noch nicht verfügbar."
 
 #: app/templates/users/account.html:117
 msgid "Please contact the admin."
-msgstr ""
+msgstr "Bitte kontaktieren Sie den Administrator."
 
 #: app/templates/users/change_set_password.html:11
 msgid "It is recommended that you set a password for your account."
-msgstr ""
+msgstr "Es wird empfohlen, ein Passwort für Ihr Konto festzulegen."
 
 #: app/templates/users/change_set_password.html:14
 msgid "Skip"
-msgstr ""
+msgstr "Überspringen"
 
 #: app/templates/users/change_set_password.html:28
 #: app/templates/users/register.html:24
@@ -2800,57 +2810,62 @@ msgid ""
 "Your email is needed to recover your account if you forget your password and "
 "to send (configurable) notifications. "
 msgstr ""
+"Ihre E-Mailadresse wird benötigt, um Ihr Konto wiederherzustellen, wenn Sie "
+"Ihr Passwort vergessen haben, und um (konfigurierbare) Benachrichtigungen zu "
+"senden. "
 
 #: app/templates/users/change_set_password.html:29
 #: app/templates/users/register.html:25
 #: app/templates/users/settings_email.html:20
 msgid "Your email will never be shared with a third-party."
-msgstr ""
+msgstr "Ihre E-Mailadresse wird niemals an Dritte weitergegeben."
 
 #: app/templates/users/change_set_password.html:36
 #: app/templates/users/register.html:27
 msgid "Must be at least 8 characters long."
-msgstr ""
+msgstr "Muss mindestens 8 Zeichen lang sein."
 
 #: app/templates/users/change_set_password.html:40
 #: app/templates/users/register.html:30
 msgid "Password suggestion"
-msgstr ""
+msgstr "Passwortvorschlag"
 
 #: app/templates/users/change_set_password.html:41
 #: app/templates/users/register.html:31
 msgid "Why?"
-msgstr ""
+msgstr "Warum?"
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
-msgstr ""
+msgstr "Konto erstellen"
 
 #: app/templates/users/claim.html:10
 msgid "Do you have an account on the Minetest Forums?"
-msgstr ""
+msgstr "Haben Sie ein Konto auf den Minetest Forum?"
 
 #: app/templates/users/claim.html:13
 msgid "ContentDB will link your account to your forum account."
-msgstr ""
+msgstr "ContentDB wird Ihr Konto mit Ihrem Forumskonto verknüpfen."
 
 #: app/templates/users/claim.html:17
 msgid ""
 "You don't need a forum account, however, it's recommended to make the most "
 "out of the Minetest community."
 msgstr ""
+"Sie brauchen kein Forumskonto, aber es wird empfohlen, um optimal mit der "
+"Minetest Gemeinschaft verknüpft zu sein."
 
 #: app/templates/users/claim.html:22
 msgid "<b>Yes</b>, I have a forums account"
-msgstr ""
+msgstr "<b>Ja</b>, ich habe ein Forum Konto"
 
 #: app/templates/users/claim.html:25
 msgid "<b>No</b>, I don't have one"
-msgstr ""
+msgstr "<b>Nein</b>, ich habe keins"
 
 #: app/templates/users/claim.html:28
 msgid "Create forum account"
-msgstr ""
+msgstr "Ein Forum Konto erstellen"
 
 #: app/templates/users/claim_forums.html:10
 msgid "Confirm Your Account"
@@ -2895,48 +2910,53 @@ msgstr ""
 
 #: app/templates/users/claim_forums.html:43
 msgid "You'll need to have the GitHub field in your forum profile filled out."
-msgstr ""
+msgstr "Sie müssen das GitHub-Feld in Ihrem Forumsprofil ausgefüllt haben."
 
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a href='https://forum.minetest.net/ucp.php?i=173'>do "
 "that here</a>."
 msgstr ""
+"Loggen Sie sich auf dem Forum und <a href='https://forum.minetest.net/"
+"ucp.php?i=173'> tun Sie das hier</a> ein."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
-msgstr ""
+msgstr "als Nächstes: mit GitHub anmelden"
 
 #: app/templates/users/claim_forums.html:55
 msgid "Option 2"
-msgstr ""
+msgstr "Variante 2"
 
 #: app/templates/users/claim_forums.html:56
 msgid "Verification token"
-msgstr ""
+msgstr "Verifizierungstoken"
 
 #: app/templates/users/claim_forums.html:71
 msgid ""
 "Go to <a href='https://forum.minetest.net/ucp.php?"
 "i=profile&mode=signature'>User Control Panel > Profile > Edit signature</a>"
 msgstr ""
+"Gehen zu <a href='https://forum.minetest.net/"
+"ucp.php?i=profile&mode=signature'>User Control Panel > Profile > Edit "
+"signature</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
-msgstr ""
+msgstr "Fügen Sie dies in Ihre Signatur ein:"
 
 #: app/templates/users/claim_forums.html:81
 msgid "Click next so we can check it."
-msgstr ""
+msgstr "Klicken Sie auf Weiter, damit wir es überprüfen können."
 
 #: app/templates/users/claim_forums.html:84
 msgid "Don't worry, you can remove it after this is done."
-msgstr ""
+msgstr "Keine Sorge, Sie können es entfernen, nachdem dies erledigt ist."
 
 #: app/templates/users/delete.html:4
 #, python-format
 msgid "Delete user %(username)s"
-msgstr ""
+msgstr "Benutzer löschen %(username)s"
 
 #: app/templates/users/delete.html:17
 #, python-format
@@ -2944,12 +2964,16 @@ msgid ""
 "This will delete your account, removing %(threads)d threads and %(replies)d "
 "replies."
 msgstr ""
+"Dies wird Ihr Konto löschen, %(threads)d Threads und %(replies)d Antworten "
+"entfernen."
 
 #: app/templates/users/delete.html:22
 msgid ""
 "As you have packages and/or forum threads, your account cannot be fully "
 "deleted."
 msgstr ""
+"Da Sie Pakete und/oder Forenbeiträge haben, kann Ihr Konto nicht vollständig "
+"gelöscht werden."
 
 #: app/templates/users/delete.html:23
 #, python-format
