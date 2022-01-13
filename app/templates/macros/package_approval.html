@@ -37,7 +37,7 @@
 
 {% elif package.getMissingHardDependenciesQuery().count() > 0 %}
 	{% set deps = package.getMissingHardDependencies() | join(", ") %}
-	{% set message = _("The following hard dependencies need to be added to ContentDB first: %(deps)s", deps) %}
+	{% set message = _("The following hard dependencies need to be added to ContentDB first: %(deps)s", deps=deps) %}
 
 {% elif topic_error_lvl == "danger" %}
 {% elif package.state == package.state.READY_FOR_REVIEW and ("Other" in package.license.name or "Other" in package.media_license.name) %}
