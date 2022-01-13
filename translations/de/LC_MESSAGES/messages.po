@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-08 02:19+0000\n"
-"PO-Revision-Date: 2022-01-13 16:26+0000\n"
-"Last-Translator: cx384 <muelladresse84@web.de>\n"
+"PO-Revision-Date: 2022-01-13 17:05+0000\n"
+"Last-Translator: debiankaios <info@debiankaios.de>\n"
 "Language-Team: German <https://hosted.weblate.org/projects/minetest/"
 "contentdb/de/>\n"
 "Language: de\n"
@@ -1546,7 +1546,7 @@ msgstr "Release"
 
 #: app/templates/macros/todo.html:44
 msgid "Repo"
-msgstr "Repo"
+msgstr "Speicherort"
 
 #: app/templates/macros/todo.html:50
 #: app/templates/packages/releases_list.html:13
@@ -1765,11 +1765,10 @@ msgstr ""
 "für alle Spieler empfohlen werden sollte"
 
 #: app/templates/packages/create_edit.html:89
-#, fuzzy
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr ""
-"Legen Sie die Medienlizenz auf die gleiche Lizenz fest, wenn keine Medien "
-"vorhanden sind."
+"Setzen Sie die Medienlizenz auf die gleiche Lizenz wie die normale, sofern "
+"keine Medien vorhanden sind."
 
 #: app/templates/packages/create_edit.html:95
 msgid "Repository and Links"
@@ -1816,7 +1815,6 @@ msgid "Maintainers are given write access to the package."
 msgstr "Die Maintainer erhalten Schreibzugriff auf das Paket."
 
 #: app/templates/packages/edit_maintainers.html:12
-#, fuzzy
 msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
@@ -1877,13 +1875,11 @@ msgstr ""
 #: app/templates/packages/release_bulk_change.html:35
 #: app/templates/packages/release_edit.html:66
 #: app/templates/packages/release_new.html:86
-#, fuzzy
 msgid ""
 "You cannot select the oldest version for min or the newest version\n"
 "\t\t\tfor max as this does not make sense - you can't predict the future."
 msgstr ""
-"Sie können nicht die älteste Version für min oder die neueste Version für "
-"max auswählen.\n"
+"Sie können nicht die älteste Version für min oder die neueste Version\n"
 "\t\t\tfür max wählen, da dies keinen Sinn macht - man kann die Zukunft nicht "
 "vorhersagen."
 
@@ -1925,13 +1921,12 @@ msgstr ""
 "nicht angezeigt. "
 
 #: app/templates/packages/release_edit.html:63
-#, fuzzy
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the ."
 "conf of your package."
 msgstr ""
-"Sie können <a href='/help/package_config/'> festlegen welche automatisch</a> "
-"in der .conf Ihres Pakets einstellen."
+"Sie können <a href='/help/package_config/'> auf automatisch festlegen</a> in "
+"der .conf Ihres Pakets einstellen."
 
 #: app/templates/packages/release_edit.html:75
 msgid "Delete Release"
@@ -2174,14 +2169,12 @@ msgid "Post a review for %(title)s by %(author)s"
 msgstr "Eine Rezension abgeben für %(title)s von %(author)s"
 
 #: app/templates/packages/review_create_edit.html:16
-#, fuzzy
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr ""
 "Haben Sie einen Fehler gefunden? Posten Sie ihn stattdessen auf dem <a "
 "href='%(url)s'>issue tracker</a>."
 
 #: app/templates/packages/review_create_edit.html:56
-#, fuzzy
 msgid "Delete review."
 msgstr "Rezension löschen."
 
@@ -2639,15 +2632,15 @@ msgstr ""
 
 #: app/templates/todo/todo_base.html:35
 msgid "Forum Topics"
-msgstr ""
+msgstr "Forum Themen"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
-msgstr ""
+msgstr "Anderes zu tun"
 
 #: app/templates/todo/user.html:13
 msgid "Enable email notifications"
-msgstr ""
+msgstr "E-Mail-Benachrichtigungen aktivieren"
 
 #: app/templates/todo/user.html:17
 msgid "Unapproved Packages Needing Action"
