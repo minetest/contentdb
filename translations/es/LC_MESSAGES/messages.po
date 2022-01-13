@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-08 02:19+0000\n"
-"PO-Revision-Date: 2022-01-12 20:50+0000\n"
-"Last-Translator: Minetest-j45 <janscheresmonesma@gmail.com>\n"
+"PO-Revision-Date: 2022-01-13 15:48+0000\n"
+"Last-Translator: Joaquín Villalba <joaco-mono@hotmail.com>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
 "contentdb/es/>\n"
 "Language: es\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: app/__init__.py:99
 msgid "You have been banned."
-msgstr ""
+msgstr "Has sido expulsado."
 
 #: app/template_filters.py:52
 #, python-format
@@ -37,7 +37,7 @@ msgstr "Nombre"
 
 #: app/blueprints/api/tokens.py:34
 msgid "Limit to package"
-msgstr ""
+msgstr "Limitar al paquete"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:248
 #: app/blueprints/packages/packages.py:450
@@ -55,15 +55,15 @@ msgstr "Guardar"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr ""
+msgstr "La autorización falló[err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked github to account"
-msgstr ""
+msgstr "Github vinculado a la cuenta"
 
 #: app/blueprints/github/__init__.py:65
 msgid "Github account is already associated with another user"
-msgstr ""
+msgstr "La cuenta de Github ya está asociada con otro usuario"
 
 #: app/blueprints/github/__init__.py:71
 msgid "Unable to find an account for that Github user"
@@ -71,7 +71,7 @@ msgstr "Incapaz de encontrar una cuenta para ese usuario de Github"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr ""
+msgstr "La autorización falló [err=gh-login-failed]"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -99,11 +99,11 @@ msgstr "Mantenedores"
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr ""
+msgstr "Registro de auditoría"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
 msgid "Share and Badges"
-msgstr ""
+msgstr "Compartir e Insignias"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:60
 msgid "Remove"
@@ -111,21 +111,23 @@ msgstr "Eliminar"
 
 #: app/blueprints/packages/packages.py:159
 msgid "Error: Another package already uses this forum topic!"
-msgstr ""
+msgstr "Error: Otro paquete ya utiliza este tema del foro!"
 
 #: app/blueprints/packages/packages.py:165
 msgid "Error: Forum topic author doesn't match package author."
-msgstr ""
+msgstr "Error: El autor del tema del foro no coincide con el autor del paquete."
 
 #: app/blueprints/packages/packages.py:168
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr ""
+"Advertencia: Tema del foro no encontrado. Esto puede ocurrir si el tema "
+"acaba de ser creado."
 
 #: app/blueprints/packages/packages.py:215
 msgid "No download available."
-msgstr ""
+msgstr "Ninguna descarga disponible."
 
 #: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:385
 msgid "Type"
@@ -144,7 +146,7 @@ msgstr "Nombre (Técnico)"
 #: app/blueprints/packages/packages.py:545
 #: app/templates/packages/create_edit.html:76
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr ""
+msgstr "Sólo letras minúsculas (a-z), dígitos (0-9) y guiones bajos (_)"
 
 #: app/blueprints/packages/packages.py:232
 msgid "Short Description (Plaintext)"
@@ -157,19 +159,19 @@ msgstr "Estado de mantenimiento"
 #: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10
 msgid "Tags"
-msgstr ""
+msgstr "Etiquetas"
 
 #: app/blueprints/packages/packages.py:237
 msgid "Content Warnings"
-msgstr ""
+msgstr "Advertencias de contenido"
 
 #: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:389
 msgid "License"
-msgstr ""
+msgstr "Licencia"
 
 #: app/blueprints/packages/packages.py:239
 msgid "Media License"
-msgstr ""
+msgstr "Licencia de medios"
 
 #: app/blueprints/packages/packages.py:241
 msgid "Long Description (Markdown)"
@@ -177,7 +179,7 @@ msgstr "Descripción larga (Markdown)"
 
 #: app/blueprints/packages/packages.py:243
 msgid "VCS Repository URL"
-msgstr ""
+msgstr "URL del repositorio de VCS"
 
 #: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:42
 msgid "Website URL"
@@ -185,11 +187,11 @@ msgstr "URL del sitio web"
 
 #: app/blueprints/packages/packages.py:245
 msgid "Issue Tracker URL"
-msgstr ""
+msgstr "URL del rastreador de problemas"
 
 #: app/blueprints/packages/packages.py:246
 msgid "Forum Topic ID"
-msgstr ""
+msgstr "ID del tema del foro"
 
 #: app/blueprints/packages/packages.py:264
 msgid "Unable to find that user"
@@ -203,28 +205,28 @@ msgstr "Permiso denegado"
 
 #: app/blueprints/packages/packages.py:306
 msgid "Package already exists!"
-msgstr ""
+msgstr "El paquete ya existe!"
 
 #: app/blueprints/packages/packages.py:366
 msgid "You don't have permission to do that"
-msgstr ""
+msgstr "No tienes permiso para hacer eso"
 
 #: app/blueprints/packages/packages.py:394
 msgid "Please comment what changes are needed in the review thread"
-msgstr ""
+msgstr "Por favor, comente qué cambios son necesarios en el hilo de revisión"
 
 #: app/blueprints/packages/packages.py:413
 #: app/blueprints/packages/packages.py:429
 msgid "You don't have permission to do that."
-msgstr ""
+msgstr "No tienes permiso para hacer eso."
 
 #: app/blueprints/packages/packages.py:424
 msgid "Deleted package"
-msgstr ""
+msgstr "Paquete eliminado"
 
 #: app/blueprints/packages/packages.py:440
 msgid "Unapproved package"
-msgstr ""
+msgstr "Paquete no aprobado"
 
 #: app/blueprints/packages/packages.py:449
 msgid "Maintainers (Comma-separated)"
@@ -232,7 +234,7 @@ msgstr "Mantenedores (separados por comas)"
 
 #: app/blueprints/packages/packages.py:458
 msgid "You do not have permission to edit maintainers"
-msgstr ""
+msgstr "No tiene permiso para editar mantenedores"
 
 #: app/blueprints/packages/packages.py:508
 msgid "You are not a maintainer"
@@ -241,6 +243,8 @@ msgstr "No eres un mantenedor"
 #: app/blueprints/packages/packages.py:511
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr ""
+"Los propietarios de paquetes no pueden eliminarse a sí mismos como "
+"mantenedores"
 
 #: app/blueprints/packages/packages.py:543
 msgid "Author Name"
@@ -263,11 +267,11 @@ msgstr "Método"
 #: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
-msgstr ""
+msgstr "Subir archivo"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr ""
+msgstr "Referencia Git (es decir, hash de commit, rama o etiqueta)"
 
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:67
@@ -288,12 +292,12 @@ msgstr "URL"
 
 #: app/blueprints/packages/releases.py:65
 msgid "Task ID"
-msgstr ""
+msgstr "ID de tarea"
 
 #: app/blueprints/packages/releases.py:66
 #: app/blueprints/packages/screenshots.py:40
 msgid "Is Approved"
-msgstr ""
+msgstr "Está aprobado"
 
 #: app/blueprints/packages/releases.py:84
 msgid "Import from Git"
@@ -305,15 +309,15 @@ msgstr "Subir archivo .zip"
 
 #: app/blueprints/packages/releases.py:182
 msgid "Set Min"
-msgstr ""
+msgstr "Establecer mínimo"
 
 #: app/blueprints/packages/releases.py:185
 msgid "Set Max"
-msgstr ""
+msgstr "Establecer máximo"
 
 #: app/blueprints/packages/releases.py:188
 msgid "Only change values previously set as none"
-msgstr ""
+msgstr "Sólo cambiar los valores previamente establecidos como ninguno"
 
 #: app/blueprints/packages/releases.py:189
 msgid "Update"
@@ -3011,6 +3015,8 @@ msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
 msgstr ""
+"Considere la posibilidad de activar las notificaciones por correo "
+"electrónico, puede personalizar cuánto se envía"
 
 #~ msgid "forum.minetest.net/viewtopic.php?t="
 #~ msgstr ""
