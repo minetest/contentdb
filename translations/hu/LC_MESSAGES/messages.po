@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-08 02:19+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-01-13 22:35+0000\n"
+"Last-Translator: pampogo kiraly <pampogo.kiraly@gmail.com>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/hu/>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:99
@@ -24,13 +27,13 @@ msgstr ""
 #: app/template_filters.py:52
 #, python-format
 msgid "%(delta)s ago"
-msgstr ""
+msgstr "%(delta)s előtt"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
 #: app/templates/metapackages/list.html:12
 msgid "Name"
-msgstr ""
+msgstr "Név"
 
 #: app/blueprints/api/tokens.py:34
 msgid "Limit to package"
@@ -48,11 +51,11 @@ msgstr ""
 #: app/blueprints/users/settings.py:44 app/blueprints/users/settings.py:106
 #: app/blueprints/users/settings.py:204
 msgid "Save"
-msgstr ""
+msgstr "Mentés"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr ""
+msgstr "Belépés sikertelen [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked github to account"
@@ -60,105 +63,109 @@ msgstr ""
 
 #: app/blueprints/github/__init__.py:65
 msgid "Github account is already associated with another user"
-msgstr ""
+msgstr "A github fiók már társítva van egy másik felhasználóhoz"
 
 #: app/blueprints/github/__init__.py:71
 msgid "Unable to find an account for that Github user"
-msgstr ""
+msgstr "Nem található fiók ehhez a github felhasználóhoz"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr ""
+msgstr "Belépés sikertelen [err=gh-login-failed]"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
 msgid "Edit Details"
-msgstr ""
+msgstr "Részletek Szerkesztése"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
 #: app/templates/packages/view.html:443 app/templates/todo/editor.html:75
 msgid "Releases"
-msgstr ""
+msgstr "Verziók"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr ""
+msgstr "Képek"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
 #: app/templates/packages/view.html:408
 msgid "Maintainers"
-msgstr ""
+msgstr "Karbantartók"
 
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr ""
+msgstr "Ellenőrzési Napló"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
+#, fuzzy
 msgid "Share and Badges"
-msgstr ""
+msgstr "Megosztás és Jelvények"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:60
 msgid "Remove"
-msgstr ""
+msgstr "Törlés"
 
 #: app/blueprints/packages/packages.py:159
 msgid "Error: Another package already uses this forum topic!"
-msgstr ""
+msgstr "Hiba: Egy másik csomag már használja ezt a fórum témát!"
 
 #: app/blueprints/packages/packages.py:165
 msgid "Error: Forum topic author doesn't match package author."
-msgstr ""
+msgstr "Hiba: A fórum téma szerzője nem egyezik a csomag szerzőjével."
 
 #: app/blueprints/packages/packages.py:168
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr ""
+"Figyelem: A fórum téma nem található. Ez akkor fordulhat elő, ha a téma csak "
+"most jött létre."
 
 #: app/blueprints/packages/packages.py:215
+#, fuzzy
 msgid "No download available."
-msgstr ""
+msgstr "A letöltésre nincs lehetőség."
 
 #: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:385
 msgid "Type"
-msgstr ""
+msgstr "Gépelni"
 
 #: app/blueprints/packages/packages.py:230
 msgid "Title (Human-readable)"
-msgstr ""
+msgstr "Cím (Ember-által-olvasható)"
 
 #: app/blueprints/packages/packages.py:231
 #: app/blueprints/packages/packages.py:544
 msgid "Name (Technical)"
-msgstr ""
+msgstr "Név (Technikai)"
 
 #: app/blueprints/packages/packages.py:231
 #: app/blueprints/packages/packages.py:545
 #: app/templates/packages/create_edit.html:76
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr ""
+msgstr "Csak kisbetűk (a-z), számjegyek (0-9) és aláhúzásjelek (_)"
 
 #: app/blueprints/packages/packages.py:232
 msgid "Short Description (Plaintext)"
-msgstr ""
+msgstr "Rövid leírás (egyszerű szöveg)"
 
 #: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:400
 msgid "Maintenance State"
-msgstr ""
+msgstr "Karbantartási Állapot"
 
 #: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10
 msgid "Tags"
-msgstr ""
+msgstr "Címkék"
 
 #: app/blueprints/packages/packages.py:237
 msgid "Content Warnings"
-msgstr ""
+msgstr "Tartalomra vonatkozó figyelmeztetések"
 
 #: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:389
 msgid "License"
@@ -170,7 +177,7 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:241
 msgid "Long Description (Markdown)"
-msgstr ""
+msgstr "Hosszú Leírás (Markdown)"
 
 #: app/blueprints/packages/packages.py:243
 msgid "VCS Repository URL"
@@ -178,33 +185,34 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:42
 msgid "Website URL"
-msgstr ""
+msgstr "Weboldal URL"
 
 #: app/blueprints/packages/packages.py:245
+#, fuzzy
 msgid "Issue Tracker URL"
-msgstr ""
+msgstr "Probléma Követő URL"
 
 #: app/blueprints/packages/packages.py:246
 msgid "Forum Topic ID"
-msgstr ""
+msgstr "Fórum Téma ID"
 
 #: app/blueprints/packages/packages.py:264
 msgid "Unable to find that user"
-msgstr ""
+msgstr "A felhasználó nem található"
 
 #: app/blueprints/packages/packages.py:268
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:90 app/blueprints/users/settings.py:215
 msgid "Permission denied"
-msgstr ""
+msgstr "Hozzáférés megtagadva"
 
 #: app/blueprints/packages/packages.py:306
 msgid "Package already exists!"
-msgstr ""
+msgstr "A csomag már létezik!"
 
 #: app/blueprints/packages/packages.py:366
 msgid "You don't have permission to do that"
-msgstr ""
+msgstr "Nincs erre engedélye"
 
 #: app/blueprints/packages/packages.py:394
 msgid "Please comment what changes are needed in the review thread"
@@ -213,35 +221,36 @@ msgstr ""
 #: app/blueprints/packages/packages.py:413
 #: app/blueprints/packages/packages.py:429
 msgid "You don't have permission to do that."
-msgstr ""
+msgstr "Nincs erre engedélye."
 
 #: app/blueprints/packages/packages.py:424
 msgid "Deleted package"
-msgstr ""
+msgstr "Törölt csomag"
 
 #: app/blueprints/packages/packages.py:440
 msgid "Unapproved package"
-msgstr ""
+msgstr "Nem jóváhagyott csomag"
 
 #: app/blueprints/packages/packages.py:449
 msgid "Maintainers (Comma-separated)"
-msgstr ""
+msgstr "Karbantartók (vesszővel-elválasztva)"
 
 #: app/blueprints/packages/packages.py:458
 msgid "You do not have permission to edit maintainers"
-msgstr ""
+msgstr "Nincs engedélye a karbantartók szerkesztésére"
 
 #: app/blueprints/packages/packages.py:508
 msgid "You are not a maintainer"
-msgstr ""
+msgstr "Nem vagy karbantartó"
 
 #: app/blueprints/packages/packages.py:511
+#, fuzzy
 msgid "Package owners cannot remove themselves as maintainers"
-msgstr ""
+msgstr "A csomag tulajdonosai nem távolíthatják el magukat karbantartóként"
 
 #: app/blueprints/packages/packages.py:543
 msgid "Author Name"
-msgstr ""
+msgstr "Szerző Neve"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:63 app/blueprints/packages/reviews.py:42
@@ -249,18 +258,18 @@ msgstr ""
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
-msgstr ""
+msgstr "Cím"
 
 #: app/blueprints/packages/releases.py:53
 #: app/templates/packages/release_new.html:46
 msgid "Method"
-msgstr ""
+msgstr "Módszer"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
-msgstr ""
+msgstr "Fájl Feltöltés"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
@@ -270,18 +279,18 @@ msgstr ""
 #: app/blueprints/packages/releases.py:67
 #: app/blueprints/packages/releases.py:183
 msgid "Minimum Minetest Version"
-msgstr ""
+msgstr "Minimális Minetest Verzió"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:69
 #: app/blueprints/packages/releases.py:186
 msgid "Maximum Minetest Version"
-msgstr ""
+msgstr "Maximális Minetest Verzió"
 
 #: app/blueprints/packages/releases.py:64
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: app/blueprints/packages/releases.py:65
 msgid "Task ID"
@@ -290,15 +299,15 @@ msgstr ""
 #: app/blueprints/packages/releases.py:66
 #: app/blueprints/packages/screenshots.py:40
 msgid "Is Approved"
-msgstr ""
+msgstr "Jóváhagyva"
 
 #: app/blueprints/packages/releases.py:84
 msgid "Import from Git"
-msgstr ""
+msgstr "Importálás a Gitből"
 
 #: app/blueprints/packages/releases.py:84
 msgid "Upload .zip file"
-msgstr ""
+msgstr ".zip fájl feltöltése"
 
 #: app/blueprints/packages/releases.py:182
 msgid "Set Min"
@@ -309,12 +318,13 @@ msgid "Set Max"
 msgstr ""
 
 #: app/blueprints/packages/releases.py:188
+#, fuzzy
 msgid "Only change values previously set as none"
-msgstr ""
+msgstr "Csak a korábban semmire beálított értékeket módosítsa"
 
 #: app/blueprints/packages/releases.py:189
 msgid "Update"
-msgstr ""
+msgstr "Frissítés"
 
 #: app/blueprints/packages/releases.py:238
 #: app/templates/packages/update_config.html:25
@@ -328,227 +338,236 @@ msgstr ""
 #: app/blueprints/packages/releases.py:241
 #: app/templates/packages/update_config.html:38
 msgid "Action"
-msgstr ""
+msgstr "Akció"
 
 #: app/blueprints/packages/releases.py:242
 msgid "Send notification and mark as outdated"
-msgstr ""
+msgstr "Értesítés küldése és megjelölés elavultként"
 
 #: app/blueprints/packages/releases.py:242
+#, fuzzy
 msgid "Create release"
-msgstr ""
+msgstr "Verzió létrehozása"
 
 #: app/blueprints/packages/releases.py:244
 msgid "Save Settings"
-msgstr ""
+msgstr "Beállítások Mentése"
 
 #: app/blueprints/packages/releases.py:245
+#, fuzzy
 msgid "Disable Automation"
-msgstr ""
+msgstr "Automatizálás Kikapcsolása"
 
 #: app/blueprints/packages/releases.py:284
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
 
 #: app/blueprints/packages/releases.py:300
+#, fuzzy
 msgid "Deleted update configuration"
-msgstr ""
+msgstr "Törölt frissítési konfiguráció"
 
 #: app/blueprints/packages/releases.py:308
 msgid "Now, please create an initial release"
-msgstr ""
+msgstr "Most kérjük, hozzon létre egy kezdeti verziót"
 
 #: app/blueprints/packages/reviews.py:43 app/blueprints/threads/__init__.py:174
 #: app/blueprints/threads/__init__.py:175
 #: app/blueprints/threads/__init__.py:263
 msgid "Comment"
-msgstr ""
+msgstr "Megjegyzés"
 
 #: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:264
 msgid "Private"
-msgstr ""
+msgstr "Privát"
 
 #: app/blueprints/packages/reviews.py:45 app/templates/macros/reviews.html:115
 #: app/templates/macros/reviews.html:154
 msgid "Yes"
-msgstr ""
+msgstr "Igen"
 
 #: app/blueprints/packages/reviews.py:45 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:158
 msgid "No"
-msgstr ""
+msgstr "Nem"
 
 #: app/blueprints/packages/reviews.py:53
 msgid "You can't review your own package!"
-msgstr ""
+msgstr "Nem tudod értékelni a saját csomagodat!"
 
 #: app/blueprints/packages/reviews.py:157
+#, fuzzy
 msgid "You can't vote on the reviews on your own package!"
-msgstr ""
+msgstr "A saját csomagod értékeléseire nem szavazhatsz!"
 
 #: app/blueprints/packages/reviews.py:165
 msgid "You can't vote on your own reviews!"
-msgstr ""
+msgstr "Nem szavazhatsz a saját értékeléseidre!"
 
 #: app/blueprints/packages/screenshots.py:33
 #: app/blueprints/packages/screenshots.py:39
 msgid "Title/Caption"
-msgstr ""
+msgstr "Cím/Felirat"
 
 #: app/blueprints/packages/screenshots.py:45
 #: app/templates/packages/screenshots.html:71
+#, fuzzy
 msgid "Cover Image"
-msgstr ""
+msgstr "Borítókép"
 
 #: app/blueprints/threads/__init__.py:63
 msgid "Already subscribed!"
-msgstr ""
+msgstr "Már feliratkozott!"
 
 #: app/blueprints/threads/__init__.py:65
 msgid "Subscribed to thread"
-msgstr ""
+msgstr "Feliratkozott a témára"
 
 #: app/blueprints/threads/__init__.py:80
 msgid "Unsubscribed!"
-msgstr ""
+msgstr "Leiratkozott!"
 
 #: app/blueprints/threads/__init__.py:84
 msgid "Already not subscribed!"
-msgstr ""
+msgstr "Már nincsen feliratkozva!"
 
 #: app/blueprints/threads/__init__.py:103
 msgid "Locked thread"
-msgstr ""
+msgstr "Lezárt téma"
 
 #: app/blueprints/threads/__init__.py:106
+#, fuzzy
 msgid "Unlocked thread"
-msgstr ""
+msgstr "Feloldott téma"
 
 #: app/blueprints/threads/__init__.py:155
 msgid "Cannot delete thread opening post!"
-msgstr ""
+msgstr "A téma nyitó hozzászólását nem lehet törölni!"
 
 #: app/blueprints/threads/__init__.py:224
 msgid "You cannot comment on this thread"
-msgstr ""
+msgstr "Nem szólhat hozzá ehhez a témához"
 
 #: app/blueprints/threads/__init__.py:228
 msgid "Please wait before commenting again"
-msgstr ""
+msgstr "Kérjük, várjon, mielőtt újra hozzászólna"
 
 #: app/blueprints/threads/__init__.py:256
 msgid "Comment needs to be between 3 and 2000 characters."
-msgstr ""
+msgstr "A hozzászólásnak 3 és 2000 karakter között kell lennie."
 
 #: app/blueprints/threads/__init__.py:265
 #: app/templates/macros/package_approval.html:107
 msgid "Open Thread"
-msgstr ""
+msgstr "Téma Megnyitása"
 
 #: app/blueprints/threads/__init__.py:277
 msgid "Unable to find that package!"
-msgstr ""
+msgstr "A csomag nem található!"
 
 #: app/blueprints/threads/__init__.py:291
 msgid "Unable to create thread!"
-msgstr ""
+msgstr "Nem lehet létrehozni a témát!"
 
 #: app/blueprints/threads/__init__.py:296
 msgid "A review thread already exists!"
-msgstr ""
+msgstr "Már létezik egy értékelési téma!"
 
 #: app/blueprints/threads/__init__.py:300
 msgid "Please wait before opening another thread"
-msgstr ""
+msgstr "Kérjük, várjon, mielőtt újabb témát nyitna"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr ""
+msgstr "Felhasználónév vagy e-mail"
 
 #: app/blueprints/users/account.py:37 app/blueprints/users/account.py:106
 #: app/templates/users/account.html:41 app/templates/users/login.html:16
 msgid "Password"
-msgstr ""
+msgstr "Jelszó"
 
 #: app/blueprints/users/account.py:38
 msgid "Remember me"
-msgstr ""
+msgstr "Emlékezz rám"
 
 #: app/blueprints/users/account.py:39 app/templates/base.html:165
 #: app/templates/users/login.html:4
 msgid "Sign in"
-msgstr ""
+msgstr "Bejelentkezés"
 
 #: app/blueprints/users/account.py:45
 msgid "Incorrect email or password"
-msgstr ""
+msgstr "Helytelen e-mail vagy jelszó"
 
 #: app/blueprints/users/account.py:53
 #, python-format
 msgid "User %(username)s does not exist"
-msgstr ""
+msgstr "A %(username)s felhasználó nem létezik"
 
 #: app/blueprints/users/account.py:56
 msgid "Incorrect password. Did you set one?"
-msgstr ""
+msgstr "Hibás jelszó. Beállítottál egyet?"
 
 #: app/blueprints/users/account.py:59
 msgid "You need to confirm the registration email"
-msgstr ""
+msgstr "Meg kell erősítenie a regisztrációs e-mailt"
 
 #: app/blueprints/users/account.py:67
 msgid "Login failed"
-msgstr ""
+msgstr "A bejelentkezés sikertelen"
 
 #: app/blueprints/users/account.py:102 app/blueprints/users/settings.py:41
 msgid "Display Name"
-msgstr ""
+msgstr "Megjelenítendő Név"
 
 #: app/blueprints/users/account.py:103 app/blueprints/users/settings.py:198
 #: app/templates/users/list.html:18
 msgid "Username"
-msgstr ""
+msgstr "Felhasználónév"
 
 #: app/blueprints/users/account.py:104 app/templates/users/claim_forums.html:40
 #: app/templates/users/claim_forums.html:68
 #: app/templates/users/register.html:16
 msgid "Only a-zA-Z0-9._ allowed"
-msgstr ""
+msgstr "Csak a-zA-Z0-9._ engedélyezett"
 
 #: app/blueprints/users/account.py:105 app/blueprints/users/account.py:184
 #: app/blueprints/users/account.py:233 app/blueprints/users/account.py:384
 #: app/blueprints/users/settings.py:105
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: app/blueprints/users/account.py:107
 msgid "What is the result of the above calculation?"
-msgstr ""
+msgstr "Mi a fenti számítás eredménye?"
 
 #: app/blueprints/users/account.py:108
 msgid "I agree"
-msgstr ""
+msgstr "Egyetértek"
 
 #: app/blueprints/users/account.py:109 app/templates/users/login.html:34
 #: app/templates/users/register.html:4
 msgid "Register"
-msgstr ""
+msgstr "Regisztráció"
 
 #: app/blueprints/users/account.py:114
 msgid "Incorrect captcha answer"
-msgstr ""
+msgstr "Hibás captcha válasz"
 
 #: app/blueprints/users/account.py:125
+#, fuzzy
 msgid "An account already exists for that username but hasn't been claimed yet."
-msgstr ""
+msgstr "Már létezik egy fiók ehhez a felhasználónévhez, de még nem igényelték."
 
 #: app/blueprints/users/account.py:128 app/blueprints/users/account.py:135
 msgid "That username/display name is already in use, please choose another."
 msgstr ""
+"Ez a felhasználónév/megjelenítendő név már használatban van, kérjük, "
+"válasszon másikat."
 
 #: app/blueprints/users/account.py:140 app/blueprints/users/account.py:267
 msgid "Email already in use"
-msgstr ""
+msgstr "Már használatban lévő e-mail"
 
 #: app/blueprints/users/account.py:141 app/blueprints/users/account.py:268
 #, python-format
@@ -556,6 +575,8 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
+"Nem tudtuk létrehozni a fiókot, mivel az e-mailt már használja "
+"%(display_name)s. Próbáljon ki egy másik e-mail címet."
 
 #: app/blueprints/users/account.py:145 app/blueprints/users/account.py:262
 #: app/blueprints/users/settings.py:133
@@ -563,40 +584,42 @@ msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
 
 #: app/blueprints/users/account.py:185
+#, fuzzy
 msgid "Reset Password"
-msgstr ""
+msgstr "Jelszó Visszaállítása"
 
 #: app/blueprints/users/account.py:234 app/blueprints/users/account.py:241
 msgid "New password"
-msgstr ""
+msgstr "Új jelszó"
 
 #: app/blueprints/users/account.py:235 app/blueprints/users/account.py:242
 msgid "Verify password"
-msgstr ""
+msgstr "Jelszó megerösítése"
 
 #: app/blueprints/users/account.py:236 app/blueprints/users/account.py:243
 msgid "Passwords must match"
-msgstr ""
+msgstr "A jelszavaknak egyezniük kell"
 
 #: app/blueprints/users/account.py:240
 msgid "Old password"
-msgstr ""
+msgstr "Régi jelszó"
 
 #: app/blueprints/users/account.py:251
 msgid "Passwords do not match"
-msgstr ""
+msgstr "A jelszavak nem egyeznek"
 
 #: app/blueprints/users/account.py:282 app/blueprints/users/account.py:286
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "A jelszó sikeresen megváltozott."
 
 #: app/blueprints/users/account.py:301
 msgid "Old password is incorrect"
-msgstr ""
+msgstr "A régi jelszó helytelen"
 
 #: app/blueprints/users/account.py:331
+#, fuzzy
 msgid "Unknown verification token!"
-msgstr ""
+msgstr "Ismeretlen ellenőrző jelszó!"
 
 #: app/blueprints/users/account.py:337
 msgid "Token has expired"
@@ -604,21 +627,23 @@ msgstr ""
 
 #: app/blueprints/users/account.py:351
 msgid "Another user is already using that email"
-msgstr ""
+msgstr "Egy másik felhasználó már használja ezt az e-mail címet"
 
 #: app/blueprints/users/account.py:354
 msgid "Confirmed email change"
-msgstr ""
+msgstr "Megerősített e-mail módosítás"
 
 #: app/blueprints/users/account.py:358
 msgid "Email address changed"
-msgstr ""
+msgstr "Megváltozott az e-mail cím"
 
 #: app/blueprints/users/account.py:359
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
+"Az e-mail címe megváltozott. Ha ezt nem kérte, forduljon egy "
+"rendszergazdához."
 
 #: app/blueprints/users/account.py:377
 msgid "You may now log in"
@@ -626,7 +651,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:385
 msgid "Send"
-msgstr ""
+msgstr "Küldés"
 
 #: app/blueprints/users/account.py:416
 msgid ""
@@ -635,10 +660,13 @@ msgid ""
 msgstr ""
 
 #: app/blueprints/users/claim.py:46 app/blueprints/users/claim.py:71
+#, fuzzy
 msgid ""
 "Invalid username - must only contain A-Za-z0-9._. Consider contacting an "
 "admin"
 msgstr ""
+"Érvénytelen felhasználónév - csak A-Za-z0-9._-t tartalmazhat. Fontolja meg a "
+"kapcsolatfelvevést egy adminisztrátorral"
 
 #: app/blueprints/users/claim.py:51
 msgid "User has already been claimed"
@@ -825,7 +853,7 @@ msgstr ""
 
 #: app/templates/base.html:30
 msgid "Games"
-msgstr ""
+msgstr "Játékok"
 
 #: app/templates/base.html:33
 msgid "Texture Packs"
@@ -838,7 +866,7 @@ msgstr ""
 #: app/templates/base.html:39 app/templates/base.html:239
 #: app/templates/packages/bulk_update_conf.html:8
 msgid "Help"
-msgstr ""
+msgstr "Segítség"
 
 #: app/templates/base.html:42 app/templates/packages/view.html:123
 #: app/templates/packages/view.html:463 app/templates/threads/list.html:4
@@ -857,7 +885,7 @@ msgstr ""
 
 #: app/templates/base.html:50 app/templates/todo/tags.html:15
 msgid "Search"
-msgstr ""
+msgstr "Keresés"
 
 #: app/templates/base.html:62
 msgid "Work Queue"
@@ -901,7 +929,7 @@ msgstr ""
 
 #: app/templates/base.html:158 app/templates/packages/release_new.html:12
 msgid "Settings"
-msgstr ""
+msgstr "Beállítások"
 
 #: app/templates/base.html:161
 msgid "Sign out"
@@ -1106,7 +1134,7 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:19
 #: app/templates/threads/view.html:40 app/templates/users/delete.html:34
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1150,7 +1178,7 @@ msgstr ""
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
-msgstr ""
+msgstr "Létrehozás"
 
 #: app/templates/api/list_tokens.html:9
 msgid "API Documentation"
@@ -1387,7 +1415,7 @@ msgstr ""
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:48
 #: app/templates/packages/view.html:233
 msgid "Edit"
-msgstr ""
+msgstr "Szerkesztés"
 
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
@@ -2020,7 +2048,7 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:18
 #: app/templates/users/delete.html:30
 msgid "Cancel"
-msgstr ""
+msgstr "Mégse"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2552,7 +2580,7 @@ msgstr ""
 
 #: app/templates/users/account.html:45
 msgid "Change Password"
-msgstr ""
+msgstr "Jelszó Módosítása"
 
 #: app/templates/users/account.html:49
 #: app/templates/users/change_set_password.html:20
@@ -2590,7 +2618,7 @@ msgstr ""
 
 #: app/templates/users/account.html:92
 msgid "None"
-msgstr ""
+msgstr "Nincs"
 
 #: app/templates/users/account.html:100
 msgid "View All"
