@@ -21,7 +21,7 @@ class QueryBuilder:
 		types = [PackageType.get(tname) for tname in types]
 		types = [type for type in types if type is not None]
 		if len(types) > 0:
-			title = ", ".join([type.value + "s" for type in types])
+			title = ", ".join([str(type.plural) for type in types])
 
 		# Get tags types
 		tags = args.getlist("tag")

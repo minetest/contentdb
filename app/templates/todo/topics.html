@@ -9,15 +9,15 @@ Topics to be Added
 		<div class="btn-group btn-group-sm mr-2">
 			<a class="btn btn-secondary {% if sort_by=='date' %}active{% endif %}"
 					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='date') }}">
-				Sort by date
+				{{ _("Sort by date") }}
 			</a>
 			<a class="btn btn-secondary {% if sort_by=='name' %}active{% endif %}"
 					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='name') }}">
-				Sort by name
+				{{ _("Sort by name") }}
 			</a>
 			<a class="btn btn-secondary {% if sort_by=='views' %}active{% endif %}"
 					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='views') }}">
-				Sort by views
+				{{ _("Sort by views") }}
 			</a>
 		</div>
 
@@ -26,29 +26,27 @@ Topics to be Added
 				{% if n >= 10000 %}
 					<a class="btn btn-secondary"
 							href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=100, sort=sort_by) }}">
-						Paginated list
+						{{ _("Paginated list") }}
 					</a>
 				{% else %}
 					<a class="btn btn-secondary"
 							href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=10000, sort=sort_by) }}">
-						Unlimited list
+						{{ _("Unlimited list") }}
 					</a>
 				{% endif %}
 			{% endif %}
 
 			<a class="btn btn-secondary" href="{{ url_for('todo.topics', q=query, show_discarded=not show_discarded, n=n, sort=sort_by) }}">
 				{% if not show_discarded %}
-					Show
+					{{ _("Show discarded topics") }}
 				{% else %}
-					Hide
+					{{ _("Hide discarded topics") }}
 				{% endif %}
-
-				discarded topics
 			</a>
 		</div>
 	</div>
 
-	<h1>Topics to be Added</h1>
+	<h1>{{ _("Topics to be Added") }}</h1>
 
 	{% if topic_count > 0 %}
 		<p>

@@ -18,6 +18,8 @@
 import imghdr
 import os
 
+from flask_babel import lazy_gettext
+
 from app.logic.LogicError import LogicError
 from app.models import *
 from app.utils import randomString
@@ -47,10 +49,10 @@ def upload_file(file, fileType, fileTypeDesc):
 
 	ext = get_extension(file.filename)
 	if ext is None or not ext in allowedExtensions:
-		raise LogicError(400, "Please upload " + fileTypeDesc)
+		raise LogicError(400, lazy_gettext("Please upload %(file_desc)s", file_desc=fileTypeDesc))
 
 	if isImage and not isAllowedImage(file.stream.read()):
-		raise LogicError(400, "Uploaded image isn't actually an image")
+		raise LogicError(400, lazy_gettext("Uploaded image isn't actually an image"))
 
 	file.stream.seek(0)
 

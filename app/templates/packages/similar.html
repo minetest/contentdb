@@ -21,7 +21,7 @@
 						<a href="{{ pkg.getURL('packages.view') }}">
 							{{ _("%(title)s by %(author)s", title=pkg.title, author=pkg.author.display_name) }}
 						</a>
-						[{{ pkg.type.value }}]
+						[{{ pkg.type.text }}]
 					</li>
 				{% endfor %}
 			</ul>

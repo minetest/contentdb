@@ -18,6 +18,7 @@
 import datetime, re
 
 from celery import uuid
+from flask_babel import lazy_gettext
 
 from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
@@ -28,12 +29,12 @@ from app.utils import AuditSeverity, addAuditLog, nonEmptyOrNone
 
 def check_can_create_release(user: User, package: Package):
 	if not package.checkPerm(user, Permission.MAKE_RELEASE):
-		raise LogicError(403, "You do not have permission to make releases")
+		raise LogicError(403, lazy_gettext("You do not have permission to make releases"))
 
 	five_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=5)
 	count = package.releases.filter(PackageRelease.releaseDate > five_minutes_ago).count()
 	if count >= 5:
-		raise LogicError(429, "You've created too many releases for this package in the last 5 minutes, please wait before trying again")
+		raise LogicError(429, lazy_gettext("You've created too many releases for this package in the last 5 minutes, please wait before trying again"))
 
 
 def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
@@ -70,7 +71,7 @@ def do_create_zip_release(user: User, package: Package, title: str, file,
 	if commit_hash:
 		commit_hash = commit_hash.lower()
 		if not (len(commit_hash) == 40 and re.match(r"^[0-9a-f]+$", commit_hash)):
-			raise LogicError(400, "Invalid commit hash; it must be a 40 character long base16 string")
+			raise LogicError(400, lazy_gettext("Invalid commit hash; it must be a 40 character long base16 string"))
 
 	uploaded_url, uploaded_path = upload_file(file, "zip", "a zip file")
 

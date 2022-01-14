@@ -393,7 +393,7 @@
 
 				<dl>
 					<dt>{{ _("Type") }}</dt>
-					<dd>{{ package.type.value }}</dd>
+					<dd>{{ package.type.text }}</dd>
 					<dt>{{ _("Technical Name") }}</dt>
 					<dd>{{ package.name }}</dd>
 					<dt>{{ _("License") }}</dt>
@@ -403,8 +403,8 @@
 						{% elif package.type == package.type.TXP %}
 							{{ render_license(package.media_license) }}
 						{% else %}
-							{{ render_license(package.license) }} for code,<br />
-							{{ render_license(package.media_license) }} for media.
+							{{ _("%(code_license)s for code,<br>%(media_license)s for media.",
+									code_license=render_license(package.license), media_license=render_license(package.media_license)) }}
 						{% endif %}
 					</dd>
 					<dt>{{ _("Maintenance State") }}</dt>

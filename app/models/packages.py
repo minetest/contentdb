@@ -19,6 +19,7 @@ import datetime
 import enum
 
 from flask import url_for
+from flask_babel import lazy_gettext
 from flask_sqlalchemy import BaseQuery
 from sqlalchemy_searchable import SearchQueryMixin
 from sqlalchemy_utils.types import TSVectorType
@@ -57,6 +58,24 @@ class PackageType(enum.Enum):
 	def __str__(self):
 		return self.name
 
+	@property
+	def text(self):
+		if self == PackageType.MOD:
+			return lazy_gettext("Mod")
+		elif self == PackageType.GAME:
+			return lazy_gettext("Game")
+		elif self == PackageType.TXP:
+			return lazy_gettext("Texture Pack")
+
+	@property
+	def plural(self):
+		if self == PackageType.MOD:
+			return lazy_gettext("Mods")
+		elif self == PackageType.GAME:
+			return lazy_gettext("Games")
+		elif self == PackageType.TXP:
+			return lazy_gettext("Texture Packs")
+
 	@classmethod
 	def get(cls, name):
 		try:
@@ -66,7 +85,7 @@ class PackageType(enum.Enum):
 
 	@classmethod
 	def choices(cls):
-		return [(choice, choice.value) for choice in cls]
+		return [(choice, choice.text) for choice in cls]
 
 	@classmethod
 	def coerce(cls, item):

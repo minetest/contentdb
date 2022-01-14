@@ -9,11 +9,11 @@
 		<div class="btn-group btn-group-sm mr-2">
 			{% if is_mtm_only %}
 				<a class="btn btn-sm btn-primary active" href="{{ url_set_query(mtm=0) }}">
-					Minetest Mods only
+					{{ _("Minetest-Mods org only") }}
 				</a>
 			{% else %}
 				<a class="btn btn-sm btn-secondary" href="{{ url_set_query(mtm=1) }}">
-					Minetest Mods only
+					{{ _("Minetest-Mods org only") }}
 				</a>
 			{% endif %}
 		</div>
@@ -21,11 +21,11 @@
 		<div class="btn-group btn-group-sm">
 			<a class="btn {% if sort_by == 'date' %}btn-primary active{% else %}btn-secondary{% endif %}"
 					href="{{ url_set_query(sort='date') }}">
-				Sort by date
+				{{ _("Sort by date") }}
 			</a>
 			<a class="btn {% if sort_by == 'score' %}btn-primary active{% else %}btn-secondary{% endif %}"
 					href="{{ url_set_query(sort='score') }}">
-				Sort by score
+				{{ _("Sort by score") }}
 			</a>
 		</div>
 	</div>

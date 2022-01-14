@@ -148,10 +148,12 @@
 		</h2>
 
 		<p>
-			Meta packages that have hard dependers, but are not fulfilled.
+			{{ _("Meta packages that have hard dependers, but no packages providing them.") }}
 		</p>
 
-		<a class="btn btn-primary" href="{{ url_for('todo.metapackages') }}">View</a>
+		<a class="btn btn-primary" href="{{ url_for('todo.metapackages') }}">
+			{{ _("View") }}
+		</a>
 	{% endif %}
 
 

@@ -51,7 +51,7 @@
 							{% if package.author %}
 								<div class="d-none d-md-block">
 									<span class="mr-2">
-										{{ package.type.value }}
+										{{ package.type.text }}
 									</span>
 									{% for warning in package.content_warnings %}
 										<span class="badge badge-warning" title="{{ warning.description }}">

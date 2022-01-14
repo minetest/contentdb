@@ -11,7 +11,7 @@
 	{% for topic in topics %}
 		<tr class="{% if topic.wip %}wiptopic{% endif %} {% if topic.discarded %}discardtopic{% endif %}">
 			<td>
-				[{{ topic.type.value }}]
+				[{{ topic.type.text }}]
 			</td>
 			<td>
 				<a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a>

@@ -235,8 +235,10 @@ def delete_release(package, id):
 
 
 class PackageUpdateConfigFrom(FlaskForm):
-	trigger = RadioField(lazy_gettext("Trigger"), [InputRequired()], choices=PackageUpdateTrigger.choices(), coerce=PackageUpdateTrigger.coerce,
-			default=PackageUpdateTrigger.TAG)
+	trigger = RadioField(lazy_gettext("Trigger"), [InputRequired()],
+			choices=[(PackageUpdateTrigger.COMMIT, lazy_gettext("New Commit")),
+					(PackageUpdateTrigger.TAG, lazy_gettext("New Tag"))],
+			coerce=PackageUpdateTrigger.coerce, default=PackageUpdateTrigger.TAG)
 	ref     = StringField(lazy_gettext("Branch name"), [Optional()], default=None)
 	action  = RadioField(lazy_gettext("Action"), [InputRequired()],
 			choices=[("notification", lazy_gettext("Send notification and mark as outdated")), ("make_release", lazy_gettext("Create release"))],

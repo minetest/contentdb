@@ -32,7 +32,7 @@
 				</div>
 				<div class="card-body">
 					<p>
-						{{ _("Do you recommend this %(type)s?", type=package.type.value | lower) }}
+						{{ _("Do you recommend this %(type)s?", type=package.type.text | lower) }}
 					</p>
 					{{ render_toggle_field(form.recommends, icons={"yes":"fa-thumbs-up", "no":"fa-thumbs-down"}) }}
 

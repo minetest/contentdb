@@ -10,9 +10,9 @@ def do_create_screenshot(user: User, package: Package, title: str, file, reason:
 	thirty_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=30)
 	count = package.screenshots.filter(PackageScreenshot.created_at > thirty_minutes_ago).count()
 	if count >= 20:
-		raise LogicError(429, "Too many requests, please wait before trying again")
+		raise LogicError(429, lazy_gettext("Too many requests, please wait before trying again"))
 
-	uploaded_url, uploaded_path = upload_file(file, "image", "a PNG or JPG image file")
+	uploaded_url, uploaded_path = upload_file(file, "image", lazy_gettext("a PNG or JPG image file"))
 
 	counter = 1
 	for screenshot in package.screenshots.all():

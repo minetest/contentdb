@@ -40,7 +40,9 @@
 		{% endfor %}
 	</div>
 
-	<a class="btn btn-secondary float-right" href="/help/update_config/">Help</a>
+	<a class="btn btn-secondary float-right" href="/help/update_config/">
+		{{ _("Help") }}
+	</a>
 	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('packages.bulk_update_config', username=user.username) }}">
 		{{ _("See all Update Settings") }}
 	</a>
@@ -66,7 +68,8 @@
 	{{ render_outdated_packages(outdated_packages, current_user) }}
 
 	<div class="mt-5"></div>
-	<a class="btn btn-secondary float-right" href="{{ url_for('todo.tags', author=user.username) }}">See All</a>
+	<a class="btn btn-secondary float-right" href="{{ url_for('todo.tags', author=user.username) }}">
+		{{_ ("See All") }}</a>
 	<h2>{{ _("Packages Without Tags") }}</h2>
 	<p>
 		{{ _("Labelling your packages with tags helps users find them.") }}

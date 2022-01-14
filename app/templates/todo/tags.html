@@ -35,9 +35,9 @@
 
 <table class="table mt-5">
 	<tr>
-		<th>Package</th>
+		<th>{{ _("Package") }}</th>
 		<th></th>
-		<th>Tags</th>
+		<th>{{ _("Tags") }}</th>
 	</tr>
 	{% for package in packages %}
 		<tr>
@@ -70,70 +70,5 @@
 	{% endfor %}
 </table>
 
-<div class="modal">
-	<div class="modal-dialog" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5 class="modal-title">{{ _("Edit tags") }}</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<select name="tags" multiple>
-					{% for tag in tags %}
-						<option value="{{ tag.name }}">{{ tag.title }}</option>
-					{% endfor %}
-				</select>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Update</button>
-			</div>
-		</div>
-	</div>
-</div>
 {% endblock %}
-
-{% from "macros/forms.html" import form_scripts %}
-
-{% block scriptextra %}
-{{ form_scripts() }}
-
-<script>
-	$(".add-btn").click(function() {
-		$(this).parent().parent();
-
-		$(".modal select option").removeAttr("selected");
-		$(".multichoice_selector").remove();
-
-		$(".modal .modal-body").prepend(`
-			<div class="multichoice_selector bulletselector form-control">
-				<input type="text" placeholder="Start typing to see suggestions">
-				<div class="clearboth"></div>
-			</div>
-		`);
-
-		$(".modal").modal("show");
-		$(".modal input").focus();
-		$(".multichoice_selector").each(function() {
-			const ele = $(this);
-			const sel = ele.parent().find("select");
-			sel.hide();
-
-			const options = [];
-			sel.find("option").each(function() {
-				const text = $(this).text();
-				options.push({
-					id: $(this).attr("value"),
-					value: text,
-					toString: function() { return text; },
-				});
-			});
-
-			ele.selectSelector(options, sel);
-		});
-	});
-
-</script>
 {% endblock %}

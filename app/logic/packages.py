@@ -17,6 +17,7 @@
 
 import re
 import validators
+from flask_babel import lazy_gettext
 
 from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
@@ -35,7 +36,7 @@ def get_license(name):
 
 	license = License.query.filter(License.name.ilike(name)).first()
 	if license is None:
-		raise LogicError(400, "Unknown license: " + name)
+		raise LogicError(400, "Unknown license " + name)
 	return license
 
 
@@ -89,7 +90,7 @@ def validate(data: dict):
 		name = data["name"]
 		check(isinstance(name, str), "Name must be a string")
 		check(bool(name_re.match(name)),
-			"Name can only contain lower case letters (a-z), digits (0-9), and underscores (_)")
+			lazy_gettext("Name can only contain lower case letters (a-z), digits (0-9), and underscores (_)"))
 
 	for key in ["repo", "website", "issue_tracker", "issueTracker"]:
 		value = data.get(key)
@@ -103,11 +104,11 @@ def validate(data: dict):
 def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, data: dict,
 		reason: str = None):
 	if not package.checkPerm(user, Permission.EDIT_PACKAGE):
-		raise LogicError(403, "You do not have permission to edit this package")
+		raise LogicError(403, lazy_gettext("You do not have permission to edit this package"))
 
 	if "name" in data and package.name != data["name"] and \
 			not package.checkPerm(user, Permission.CHANGE_NAME):
-		raise LogicError(403, "You do not have permission to change the package name")
+		raise LogicError(403, lazy_gettext("You do not have permission to change the package name"))
 
 	for alias, to in ALIASES.items():
 		if alias in data:
@@ -154,7 +155,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 				break
 
 			if tag.is_protected and tag not in old_tags and not user.rank.atLeast(UserRank.EDITOR):
-				raise LogicError(400, f"Unable to add protected tag {tag.title} to package")
+				raise LogicError(400, lazy_gettext("Unable to add protected tag {tag.title} to package"))
 
 			package.tags.append(tag)
 
