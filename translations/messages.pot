@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-14 18:24+0000\n"
+"POT-Creation-Date: 2022-01-14 18:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -832,7 +832,8 @@ msgid "You do not have permission to change the package name"
 msgstr ""
 
 #: app/logic/packages.py:158
-msgid "Unable to add protected tag {tag.title} to package"
+#, python-format
+msgid "Unable to add protected tag %(title)s to package"
 msgstr ""
 
 #: app/logic/releases.py:32
