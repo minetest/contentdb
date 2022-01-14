@@ -45,7 +45,7 @@
 				<form class="form-inline my-2 my-lg-0" method="GET" action="/packages/">
 					{% if type %}<input type="hidden" name="type" value="{{ type }}" />{% endif %}
 					<input class="form-control" name="q" type="text"
-						placeholder="{% if query_hint %}{{ _('Search %(type)s', type=query_hint | lower) }}{% else %}{{ _('Search all packages') }}{% endif %}
+						placeholder="{% if query_hint %}{{ _('Search %(type)s', type=query_hint | lower) }}{% else %}{{ _('Search all packages') }}{% endif %}"
 						value="{{ query or ''}}">
 					<input class="btn btn-secondary my-2 my-sm-0 mr-sm-2" type="submit" value="{{ _('Search') }}" />
 					<!-- <input class="btn btn-secondary my-2 my-sm-0"

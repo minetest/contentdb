@@ -35,6 +35,7 @@ app.config["FLATPAGES_EXTENSION_CONFIG"] = MARKDOWN_EXTENSION_CONFIG
 app.config["BABEL_TRANSLATION_DIRECTORIES"] = "../translations"
 app.config["LANGUAGES"] = {
 	"en": "English",
+	"de": "Deutsch",
 	"fr": "Français",
 	"id": "Bahasa Indonesia",
 	"ms": "Bahasa Melayu",
