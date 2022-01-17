@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-14 18:27+0000\n"
-"PO-Revision-Date: 2022-01-12 20:50+0000\n"
+"PO-Revision-Date: 2022-01-16 03:56+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
+"ms/>\n"
 "Language: ms\n"
-"Language-Team: Malay "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -330,7 +331,7 @@ msgstr "Picu"
 
 #: app/blueprints/packages/releases.py:239
 msgid "New Commit"
-msgstr ""
+msgstr "Serahan Baharu"
 
 #: app/blueprints/packages/releases.py:240 app/templates/admin/tags/list.html:8
 msgid "New Tag"
@@ -640,7 +641,7 @@ msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
-"Alamat e-mel anda telah ditukar. Jika anda tidak meminta pertukaran ini, "
+"Alamat e-mel anda telah ditukar. Jika anda tidak memohon pertukaran ini, "
 "sila hubungi pentadbir."
 
 #: app/blueprints/users/account.py:377
@@ -845,71 +846,70 @@ msgid "Users with moderator rank or above cannot be deleted"
 msgstr "Pengguna dengan pangkat moderator ke atas tidak boleh dipadam"
 
 #: app/logic/packages.py:93
-#, fuzzy
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
-msgstr "Huruf kecil (a-z), digit (0-9), dan garis bawah (_) sahaja"
+msgstr ""
+"Nama hanya boleh mengandungi huruf kecil (a-z), digit (0-9), dan garis bawah "
+"(_) sahaja"
 
 #: app/logic/packages.py:107
-#, fuzzy
 msgid "You do not have permission to edit this package"
-msgstr "Anda tiada kebenaran untuk mengedit penyenggara"
+msgstr "Anda tiada kebenaran untuk mengedit pakej ini"
 
 #: app/logic/packages.py:111
-#, fuzzy
 msgid "You do not have permission to change the package name"
-msgstr "Anda tiada kebenaran untuk berbuat sedemikian"
+msgstr "Anda tiada kebenaran untuk mengubah nama pakej"
 
 #: app/logic/packages.py:158
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr ""
+msgstr "Tidak mampu menambah tag terlindung %(title)s kepada pakej"
 
 #: app/logic/releases.py:32
-#, fuzzy
 msgid "You do not have permission to make releases"
-msgstr "Anda tiada kebenaran untuk mengedit penyenggara"
+msgstr "Anda tiada kebenaran untuk mencipta terbitan"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Anda telah mencipta terlalu banyak terbitan untuk pakej ini dalam 5 minit "
+"lepas, sila tunggu sebentar sebelum mencuba lagi"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
+"Cincang serahan tidak sah; ia mestilah rentetan asas 16 dengan panjang 40 "
+"aksara"
 
 #: app/logic/screenshots.py:13
-#, fuzzy
 msgid "Too many requests, please wait before trying again"
-msgstr "Sila tunggu sebentar sebelum menulis komen lagi"
+msgstr "Terlalu banyak permintaan, sila tunggu sebentar sebelum mencuba lagi"
 
 #: app/logic/screenshots.py:15
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "suatu fail imej PNG atau JPG"
 
 #: app/logic/uploads.py:52
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Sila muat naik %(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "Imej yang dimuat naik sebenarnya bukan sejenis imej"
 
 #: app/models/packages.py:64
 msgid "Mod"
-msgstr ""
+msgstr "Mods"
 
 #: app/models/packages.py:66
-#, fuzzy
 msgid "Game"
-msgstr "Nama"
+msgstr "Permainan"
 
 #: app/models/packages.py:68
-#, fuzzy
 msgid "Texture Pack"
 msgstr "Pek Tekstur"
 
@@ -2207,13 +2207,12 @@ msgstr ""
 "\t\t\t\tyang mana ia boleh dihantar untuk proses kelulusan semula."
 
 #: app/templates/packages/remove.html:27
-#, fuzzy
 msgid "Reason"
-msgstr "Bebenang"
+msgstr "Sebab"
 
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
-msgstr ""
+msgstr "Sebab bagi ketidaklulusan / pemadaman, ini ditunjukkan dalam log audit"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
@@ -2455,12 +2454,11 @@ msgstr "Amaran"
 
 #: app/templates/packages/view.html:334
 msgid "Like this package? Help support its development by making a donation"
-msgstr ""
+msgstr "Suka pakej ini? Bantu menyokong pembangunannya dengan menderma"
 
 #: app/templates/packages/view.html:337
-#, fuzzy
 msgid "Donate now"
-msgstr "Derma"
+msgstr "Derma sekarang"
 
 #: app/templates/packages/view.html:343
 msgid "Dependencies"
@@ -2489,7 +2487,7 @@ msgstr "Nama Teknikal"
 #: app/templates/packages/view.html:406
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
-msgstr ""
+msgstr "%(code_license)s untuk kod, <br>%(media_license)s untuk media."
 
 #: app/templates/packages/view.html:414
 msgid "Unknown"
@@ -2664,6 +2662,8 @@ msgstr "Kebergantungan Tidak Dipenuhi"
 #: app/templates/todo/editor.html:151
 msgid "Meta packages that have hard dependers, but no packages providing them."
 msgstr ""
+"Pakej meta yang mempunyai kebergantungan wajib, tetapi tiada pakej yang "
+"menyediakannya."
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
@@ -2671,15 +2671,15 @@ msgstr "Semua pakej lapuk"
 
 #: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
 msgid "Minetest-Mods org only"
-msgstr ""
+msgstr "Minetest-Mods org sahaja"
 
 #: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
-msgstr ""
+msgstr "Isih mengikut tarikh"
 
 #: app/templates/todo/outdated.html:28
 msgid "Sort by score"
-msgstr ""
+msgstr "Isih mengikut mata"
 
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
@@ -2699,34 +2699,32 @@ msgid "Forum Topics"
 msgstr "Topik Forum"
 
 #: app/templates/todo/topics.html:16
-#, fuzzy
 msgid "Sort by name"
-msgstr "Nama Pengguna"
+msgstr "Isih mengikut nama"
 
 #: app/templates/todo/topics.html:20
-#, fuzzy
 msgid "Sort by views"
-msgstr "ulasan"
+msgstr "Isih mengikut pandangan"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
-msgstr ""
+msgstr "Senarai berhalaman"
 
 #: app/templates/todo/topics.html:34
 msgid "Unlimited list"
-msgstr ""
+msgstr "Senarai tak terhad"
 
 #: app/templates/todo/topics.html:41
 msgid "Show discarded topics"
-msgstr ""
+msgstr "Tunjuk topik diabaikan"
 
 #: app/templates/todo/topics.html:43
 msgid "Hide discarded topics"
-msgstr ""
+msgstr "Sembunyi topik diabaikan"
 
 #: app/templates/todo/topics.html:49
 msgid "Topics to be Added"
-msgstr ""
+msgstr "Topik untuk Ditambah"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
@@ -2792,7 +2790,7 @@ msgstr ""
 
 #: app/templates/todo/user.html:72
 msgid "See All"
-msgstr ""
+msgstr "Lihat Semua"
 
 #: app/templates/todo/user.html:73
 msgid "Packages Without Tags"
@@ -3342,4 +3340,3 @@ msgstr ""
 
 #~ msgid "Unable to add protected tag {tag.title} to package"
 #~ msgstr ""
-
