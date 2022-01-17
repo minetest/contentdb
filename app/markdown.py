@@ -98,6 +98,8 @@ class MentionPattern(Pattern):
 		self.config = config
 
 	def handleMatch(self, m):
+		from app.models import User
+
 		label = m.group(2)
 		user = m.group(3)
 		package_name = m.group(4)
@@ -107,6 +109,9 @@ class MentionPattern(Pattern):
 			el.set("href", url_for("packages.view", author=user, name=package_name))
 			return el
 		else:
+			if User.query.filter_by(username=user).count() == 0:
+				return None
+
 			el = ElementTree.Element("a")
 			el.text = label
 			el.set("href", url_for("users.profile", username=user))
