@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-14 18:27+0000\n"
-"PO-Revision-Date: 2022-01-13 15:48+0000\n"
+"PO-Revision-Date: 2022-01-17 15:22+0000\n"
 "Last-Translator: Joaquín Villalba <joaco-mono@hotmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/es/>\n"
 "Language: es\n"
-"Language-Team: Spanish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/es/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -325,11 +326,11 @@ msgstr "Actualizar"
 #: app/blueprints/packages/releases.py:238
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
-msgstr ""
+msgstr "Desencadenar"
 
 #: app/blueprints/packages/releases.py:239
 msgid "New Commit"
-msgstr ""
+msgstr "Nuevo Commit"
 
 #: app/blueprints/packages/releases.py:240 app/templates/admin/tags/list.html:8
 msgid "New Tag"
@@ -337,7 +338,7 @@ msgstr "Nueva etiqueta"
 
 #: app/blueprints/packages/releases.py:242
 msgid "Branch name"
-msgstr ""
+msgstr "Nombre de la rama"
 
 #: app/blueprints/packages/releases.py:243
 #: app/templates/packages/update_config.html:38
@@ -346,7 +347,7 @@ msgstr "Acción"
 
 #: app/blueprints/packages/releases.py:244
 msgid "Send notification and mark as outdated"
-msgstr ""
+msgstr "Enviar notificación y marcar como obsoleto"
 
 #: app/blueprints/packages/releases.py:244
 msgid "Create release"
@@ -363,10 +364,12 @@ msgstr "Desactivar la automatización"
 #: app/blueprints/packages/releases.py:286
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
+"Por favor añada la dirección de un repositorio Git para configurar "
+"lanzamientos automáticos"
 
 #: app/blueprints/packages/releases.py:302
 msgid "Deleted update configuration"
-msgstr ""
+msgstr "Configuración de actualización eliminada"
 
 #: app/blueprints/packages/releases.py:310
 msgid "Now, please create an initial release"
@@ -376,7 +379,7 @@ msgstr "Ahora, crea un lanzamiento inicial"
 #: app/blueprints/threads/__init__.py:175
 #: app/blueprints/threads/__init__.py:263
 msgid "Comment"
-msgstr ""
+msgstr "Comentar"
 
 #: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:264
 msgid "Private"
@@ -394,49 +397,49 @@ msgstr "No"
 
 #: app/blueprints/packages/reviews.py:53
 msgid "You can't review your own package!"
-msgstr ""
+msgstr "¡No puede reseñar su propio paquete!"
 
 #: app/blueprints/packages/reviews.py:157
 msgid "You can't vote on the reviews on your own package!"
-msgstr ""
+msgstr "¡No puede votar en las reseñas de su propio paquete!"
 
 #: app/blueprints/packages/reviews.py:165
 msgid "You can't vote on your own reviews!"
-msgstr ""
+msgstr "¡No puede votar en sus propias reseñas!"
 
 #: app/blueprints/packages/screenshots.py:33
 #: app/blueprints/packages/screenshots.py:39
 msgid "Title/Caption"
-msgstr ""
+msgstr "Título"
 
 #: app/blueprints/packages/screenshots.py:45
 #: app/templates/packages/screenshots.html:71
 msgid "Cover Image"
-msgstr ""
+msgstr "Imagen de portada"
 
 #: app/blueprints/threads/__init__.py:63
 msgid "Already subscribed!"
-msgstr ""
+msgstr "¡Ya está suscrito!"
 
 #: app/blueprints/threads/__init__.py:65
 msgid "Subscribed to thread"
-msgstr ""
+msgstr "Suscrito al hilo"
 
 #: app/blueprints/threads/__init__.py:80
 msgid "Unsubscribed!"
-msgstr ""
+msgstr "Suscripción cancelada"
 
 #: app/blueprints/threads/__init__.py:84
 msgid "Already not subscribed!"
-msgstr ""
+msgstr "¡Ya no estás suscrito!"
 
 #: app/blueprints/threads/__init__.py:103
 msgid "Locked thread"
-msgstr ""
+msgstr "Hilo bloqueado"
 
 #: app/blueprints/threads/__init__.py:106
 msgid "Unlocked thread"
-msgstr ""
+msgstr "Hilo desbloqueado"
 
 #: app/blueprints/threads/__init__.py:155
 msgid "Cannot delete thread opening post!"
@@ -444,24 +447,24 @@ msgstr ""
 
 #: app/blueprints/threads/__init__.py:224
 msgid "You cannot comment on this thread"
-msgstr ""
+msgstr "No puede comentar en este hilo"
 
 #: app/blueprints/threads/__init__.py:228
 msgid "Please wait before commenting again"
-msgstr ""
+msgstr "Por favor espere para comentar de nuevo"
 
 #: app/blueprints/threads/__init__.py:256
 msgid "Comment needs to be between 3 and 2000 characters."
-msgstr ""
+msgstr "El comentario debe tener entre 3 y 2000 caracteres."
 
 #: app/blueprints/threads/__init__.py:265
 #: app/templates/macros/package_approval.html:107
 msgid "Open Thread"
-msgstr ""
+msgstr "Crear Hilo"
 
 #: app/blueprints/threads/__init__.py:277
 msgid "Unable to find that package!"
-msgstr ""
+msgstr "¡No se ha podido encontrar ese paquete!"
 
 #: app/blueprints/threads/__init__.py:291
 msgid "Unable to create thread!"
@@ -469,11 +472,11 @@ msgstr ""
 
 #: app/blueprints/threads/__init__.py:296
 msgid "A review thread already exists!"
-msgstr ""
+msgstr "¡Ya existe un hilo de evaluación!"
 
 #: app/blueprints/threads/__init__.py:300
 msgid "Please wait before opening another thread"
-msgstr ""
+msgstr "Por favor espere antes de crear otro hilo"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
@@ -491,11 +494,11 @@ msgstr "Recuérdame"
 #: app/blueprints/users/account.py:39 app/templates/base.html:165
 #: app/templates/users/login.html:4
 msgid "Sign in"
-msgstr ""
+msgstr "Registrarse"
 
 #: app/blueprints/users/account.py:45
 msgid "Incorrect email or password"
-msgstr ""
+msgstr "Correo electrónico o contraseña incorrectos"
 
 #: app/blueprints/users/account.py:53
 #, python-format
@@ -504,19 +507,19 @@ msgstr "El usuario %(username)s no existe"
 
 #: app/blueprints/users/account.py:56
 msgid "Incorrect password. Did you set one?"
-msgstr ""
+msgstr "Contraseña incorrecta. ¿Ha establecido alguna?"
 
 #: app/blueprints/users/account.py:59
 msgid "You need to confirm the registration email"
-msgstr ""
+msgstr "Debe confirmar el correo electrónico de registro"
 
 #: app/blueprints/users/account.py:67
 msgid "Login failed"
-msgstr ""
+msgstr "Inicio de sesión fallido"
 
 #: app/blueprints/users/account.py:102 app/blueprints/users/settings.py:41
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre a mostrar"
 
 #: app/blueprints/users/account.py:103 app/blueprints/users/settings.py:198
 #: app/templates/users/list.html:18
@@ -527,7 +530,7 @@ msgstr "Nombre de usuario"
 #: app/templates/users/claim_forums.html:68
 #: app/templates/users/register.html:16
 msgid "Only a-zA-Z0-9._ allowed"
-msgstr ""
+msgstr "Sólo se admiten los caracteres a-zA-Z0-9._"
 
 #: app/blueprints/users/account.py:105 app/blueprints/users/account.py:184
 #: app/blueprints/users/account.py:233 app/blueprints/users/account.py:384
@@ -537,7 +540,7 @@ msgstr "Correo electrónico"
 
 #: app/blueprints/users/account.py:107
 msgid "What is the result of the above calculation?"
-msgstr ""
+msgstr "¿Cuál es el resultado del cálculo de arriba?"
 
 #: app/blueprints/users/account.py:108
 msgid "I agree"
@@ -550,15 +553,17 @@ msgstr "Registrarse"
 
 #: app/blueprints/users/account.py:114
 msgid "Incorrect captcha answer"
-msgstr ""
+msgstr "Respuesta del captcha incorrecta"
 
 #: app/blueprints/users/account.py:125
 msgid "An account already exists for that username but hasn't been claimed yet."
 msgstr ""
+"Ya existe una cuenta con ese nombre de usuario pero aún no ha sido reclamada."
 
 #: app/blueprints/users/account.py:128 app/blueprints/users/account.py:135
 msgid "That username/display name is already in use, please choose another."
 msgstr ""
+"Ese nombre de usuario/nombre a mostrar ya está en uso, por favor elija otro."
 
 #: app/blueprints/users/account.py:140 app/blueprints/users/account.py:267
 msgid "Email already in use"
@@ -570,11 +575,15 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
+"No hemos podido crear la cuenta porque el correo electrónico ya está en uso "
+"por %(display_name)s. Pruebe con otra dirección de correo electrónico."
 
 #: app/blueprints/users/account.py:145 app/blueprints/users/account.py:262
 #: app/blueprints/users/settings.py:133
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
+"Esa dirección de correo electrónico ha sido borrada/puesta en la lista "
+"negra, y no puede ser usada"
 
 #: app/blueprints/users/account.py:185
 msgid "Reset Password"
@@ -602,41 +611,43 @@ msgstr "Las contraseñas no coinciden"
 
 #: app/blueprints/users/account.py:282 app/blueprints/users/account.py:286
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "Su contraseña ha sido cambiada satisfactoriamente."
 
 #: app/blueprints/users/account.py:301
 msgid "Old password is incorrect"
-msgstr ""
+msgstr "La contraseña antigua es incorrecta"
 
 #: app/blueprints/users/account.py:331
 msgid "Unknown verification token!"
-msgstr ""
+msgstr "Token de verificación desconocido"
 
 #: app/blueprints/users/account.py:337
 msgid "Token has expired"
-msgstr ""
+msgstr "El token ha expirado"
 
 #: app/blueprints/users/account.py:351
 msgid "Another user is already using that email"
-msgstr ""
+msgstr "Otro usuario está usando ese correo electrónico"
 
 #: app/blueprints/users/account.py:354
 msgid "Confirmed email change"
-msgstr ""
+msgstr "Cambio de correo electrónico confirmado"
 
 #: app/blueprints/users/account.py:358
 msgid "Email address changed"
-msgstr ""
+msgstr "Dirección de correo electrónico cambiada"
 
 #: app/blueprints/users/account.py:359
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
+"Su dirección de correo electrónico ha cambiado. Si no ha solicitado esto, "
+"por favor póngase en contacto con un administrador."
 
 #: app/blueprints/users/account.py:377
 msgid "You may now log in"
-msgstr ""
+msgstr "Ahora puede iniciar sesión"
 
 #: app/blueprints/users/account.py:385
 msgid "Send"
@@ -647,20 +658,24 @@ msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
 msgstr ""
+"Ese correo electrónico está ahora en la lista negra. Por favor contacte con "
+"un administrador si desea deshacer esto."
 
 #: app/blueprints/users/claim.py:46 app/blueprints/users/claim.py:71
 msgid ""
 "Invalid username - must only contain A-Za-z0-9._. Consider contacting an "
 "admin"
 msgstr ""
+"Nombre de usuario inválido - debe contener únicamente A-Za-z0-9._. Considere "
+"contactar con un administrador"
 
 #: app/blueprints/users/claim.py:51
 msgid "User has already been claimed"
-msgstr ""
+msgstr "El usuario ya ha sido reclamado"
 
 #: app/blueprints/users/claim.py:55
 msgid "Unable to get GitHub username for user"
-msgstr ""
+msgstr "No se ha podido obtener el nombre de usuario de GitHub para el usuario"
 
 #: app/blueprints/users/claim.py:78
 msgid "That user has already been claimed!"
@@ -3194,4 +3209,3 @@ msgstr ""
 
 #~ msgid "Unable to add protected tag {tag.title} to package"
 #~ msgstr ""
-
