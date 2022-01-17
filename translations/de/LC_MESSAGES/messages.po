@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-14 18:27+0000\n"
-"PO-Revision-Date: 2022-01-13 22:35+0000\n"
+"PO-Revision-Date: 2022-01-16 03:56+0000\n"
 "Last-Translator: debiankaios <info@debiankaios.de>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
+"contentdb/de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.10.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -329,7 +330,7 @@ msgstr "Auslösen"
 
 #: app/blueprints/packages/releases.py:239
 msgid "New Commit"
-msgstr ""
+msgstr "Neues commit"
 
 #: app/blueprints/packages/releases.py:240 app/templates/admin/tags/list.html:8
 msgid "New Tag"
@@ -849,71 +850,70 @@ msgstr ""
 "werden"
 
 #: app/logic/packages.py:93
-#, fuzzy
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
-msgstr "Nur Kleinbuchstaben (a-z), Ziffern (0-9) und Unterstriche (_)"
+msgstr ""
+"Namen dürfen nur Kleinbuchstaben (a-z), Ziffern (0-9) und Unterstriche (_) "
+"enthalten"
 
 #: app/logic/packages.py:107
-#, fuzzy
 msgid "You do not have permission to edit this package"
-msgstr "Du hast nicht die Erlaubnis die Entwickler zu ändern"
+msgstr "Sie haben keine Berechtigung, dieses Paket zu bearbeiten"
 
 #: app/logic/packages.py:111
-#, fuzzy
 msgid "You do not have permission to change the package name"
-msgstr "Sie haben nicht die Erlaubnis das zu tun"
+msgstr "Sie haben nicht die Erlaubnis, den Paketnamen zu ändern"
 
 #: app/logic/packages.py:158
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr ""
+msgstr "Geschütztes Tag %(title)s kann nicht zum Paket hinzugefügt werden"
 
 #: app/logic/releases.py:32
-#, fuzzy
 msgid "You do not have permission to make releases"
-msgstr "Du hast nicht die Erlaubnis die Entwickler zu ändern"
+msgstr "Sie haben nicht die Erlaubnis, neue Versionen zu erstellen"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Sie haben in den letzten 5 Minuten zu viele Freigaben für dieses Paket "
+"erstellt. Bitte warten Sie, bevor Sie es erneut versuchen"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
+"Ungültiger Commit-Hash; es muss eine 40 Zeichen lange Hexadezimal-"
+"Zeichenkette sein"
 
 #: app/logic/screenshots.py:13
-#, fuzzy
 msgid "Too many requests, please wait before trying again"
-msgstr "Bitte warten Sie, bevor Sie erneut einen Kommentar abgeben"
+msgstr "Zu viele Anfragen, bitte warten Sie, bevor Sie es erneut versuchen"
 
 #: app/logic/screenshots.py:15
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "eine PNG- oder JPG-Bilddatei"
 
 #: app/logic/uploads.py:52
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Bitte %(file_desc)s hochladen"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "Hochgeladenes Bild ist nicht wirklich ein Bild"
 
 #: app/models/packages.py:64
 msgid "Mod"
-msgstr ""
+msgstr "Mod"
 
 #: app/models/packages.py:66
-#, fuzzy
 msgid "Game"
-msgstr "Name"
+msgstr "Spiel"
 
 #: app/models/packages.py:68
-#, fuzzy
 msgid "Texture Pack"
 msgstr "Texturpakete"
 
@@ -2233,13 +2233,14 @@ msgstr ""
 "\t\t\t\tes erneut zur Genehmigung vorgelegt werden kann."
 
 #: app/templates/packages/remove.html:27
-#, fuzzy
 msgid "Reason"
-msgstr "Themen"
+msgstr "Grund"
 
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr ""
+"Grund für die Nichtgenehmigung/Löschung, dieser wird im Prüf-Protokoll "
+"angezeigt"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
@@ -2487,11 +2488,12 @@ msgstr "Warnung"
 #: app/templates/packages/view.html:334
 msgid "Like this package? Help support its development by making a donation"
 msgstr ""
+"Gefällt Ihnen dieses Paket? Unterstützen Sie seine Entwicklung mit einer "
+"Spende"
 
 #: app/templates/packages/view.html:337
-#, fuzzy
 msgid "Donate now"
-msgstr "Spenden"
+msgstr "Spende nun"
 
 #: app/templates/packages/view.html:343
 msgid "Dependencies"
@@ -2520,7 +2522,7 @@ msgstr "Technischer Name"
 #: app/templates/packages/view.html:406
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
-msgstr ""
+msgstr "%(code_license)s für Code,<br>%(media_license)s für Medien."
 
 #: app/templates/packages/view.html:414
 msgid "Unknown"
@@ -2695,6 +2697,8 @@ msgstr "Unerfüllte Abhängigkeiten"
 #: app/templates/todo/editor.html:151
 msgid "Meta packages that have hard dependers, but no packages providing them."
 msgstr ""
+"Meta-Pakete, die harte Abhängigkeiten haben, aber keine Pakete, die sie "
+"bereitstellen."
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
@@ -2702,15 +2706,15 @@ msgstr "Alle veralteten Pakete"
 
 #: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
 msgid "Minetest-Mods org only"
-msgstr ""
+msgstr "Nur Minetest-Mods org"
 
 #: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
-msgstr ""
+msgstr "Nach Datum sortieren"
 
 #: app/templates/todo/outdated.html:28
 msgid "Sort by score"
-msgstr ""
+msgstr "Nach Punktzahl sortieren"
 
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
@@ -2730,34 +2734,32 @@ msgid "Forum Topics"
 msgstr "Forum Topics"
 
 #: app/templates/todo/topics.html:16
-#, fuzzy
 msgid "Sort by name"
-msgstr "Benutzername"
+msgstr "Nach Benutzername sortieren"
 
 #: app/templates/todo/topics.html:20
-#, fuzzy
 msgid "Sort by views"
-msgstr "Rezensionen"
+msgstr "Nach Rezensionen sortieren"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
-msgstr ""
+msgstr "Paginierte Liste"
 
 #: app/templates/todo/topics.html:34
 msgid "Unlimited list"
-msgstr ""
+msgstr "Unlimitierte Liste"
 
 #: app/templates/todo/topics.html:41
 msgid "Show discarded topics"
-msgstr ""
+msgstr "Verworfene Themen anzeigen"
 
 #: app/templates/todo/topics.html:43
 msgid "Hide discarded topics"
-msgstr ""
+msgstr "Verworfene Themen ausblenden"
 
 #: app/templates/todo/topics.html:49
 msgid "Topics to be Added"
-msgstr ""
+msgstr "Neu hinzukommende Themen"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
@@ -2824,7 +2826,7 @@ msgstr ""
 
 #: app/templates/todo/user.html:72
 msgid "See All"
-msgstr ""
+msgstr "Alle sehen"
 
 #: app/templates/todo/user.html:73
 msgid "Packages Without Tags"
@@ -3351,4 +3353,3 @@ msgstr ""
 
 #~ msgid "Unable to add protected tag {tag.title} to package"
 #~ msgstr ""
-
