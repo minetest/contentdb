@@ -140,7 +140,7 @@ class PackageTreeNode:
 
 
 		def checkDependencies(deps):
-			for dep in result["depends"]:
+			for dep in deps:
 				if not basenamePattern.match(dep):
 					if " " in dep:
 						raise MinetestCheckError("Invalid dependency name '{}' for mod at {}, did you forget a comma?" \
