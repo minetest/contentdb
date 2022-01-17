@@ -16,6 +16,7 @@
 from flask import *
 from flask_babel import gettext, lazy_gettext
 
+from app.markdown import get_user_mentions, render_markdown
 from app.tasks.webhooktasks import post_discord_webhook
 
 bp = Blueprint("threads", __name__)
@@ -238,6 +239,15 @@ def view(id):
 			if not current_user in thread.watchers:
 				thread.watchers.append(current_user)
 
+			for mentioned_username in get_user_mentions(render_markdown(comment)):
+				mentioned = User.query.filter_by(username=mentioned_username)
+				if mentioned is None:
+					continue
+
+				msg = "Mentioned by {} in '{}'".format(current_user.display_name, thread.title)
+				addNotification(mentioned, current_user, NotificationType.THREAD_REPLY,
+						msg, thread.getViewURL(), thread.package)
+
 			msg = "New comment on '{}'".format(thread.title)
 			addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
 
@@ -335,12 +345,22 @@ def new():
 		if is_review_thread:
 			package.review_thread = thread
 
+		for mentioned_username in get_user_mentions(render_markdown(form.comment.data)):
+			mentioned = User.query.filter_by(username=mentioned_username)
+			if mentioned is None:
+				continue
+
+			msg = "Mentioned by {} in new thread '{}'".format(current_user.display_name, thread.title)
+			addNotification(mentioned, current_user, NotificationType.NEW_THREAD,
+							msg, thread.getViewURL(), thread.package)
+
 		notif_msg = "New thread '{}'".format(thread.title)
 		if package is not None:
 			addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
 
 		approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
 		addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
+
 
 		if is_review_thread:
 			post_discord_webhook.delay(current_user.username,

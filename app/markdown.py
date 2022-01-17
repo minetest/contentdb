@@ -5,10 +5,11 @@ from bleach import Cleaner
 from bleach.linkifier import LinkifyFilter
 from bs4 import BeautifulSoup
 from markdown import Markdown
-from flask import Markup
+from flask import Markup, url_for
 from markdown.extensions import Extension
 from markdown.inlinepatterns import SimpleTagInlineProcessor
-
+from markdown.inlinepatterns import Pattern
+from xml.etree import ElementTree
 
 # Based on
 # https://github.com/Wenzil/mdx_bleach/blob/master/mdx_bleach/whitelist.py
@@ -40,15 +41,17 @@ ALLOWED_CSS = [
 	"s2", "se", "sh", "si", "sx", "sr", "s1", "ss", "bp", "fm", "vc", "vg", "vi", "vm", "il",
 ]
 
+
 def allow_class(_tag, name, value):
 	return name == "class" and value in ALLOWED_CSS
+
 
 ALLOWED_ATTRIBUTES = {
 	"h1": ["id"],
 	"h2": ["id"],
 	"h3": ["id"],
 	"h4": ["id"],
-	"a": ["href", "title"],
+	"a": ["href", "title", "data-username"],
 	"img": ["src", "title", "alt"],
 	"code": allow_class,
 	"div": allow_class,
@@ -64,23 +67,63 @@ def render_markdown(source):
 	html = md.convert(source)
 
 	cleaner = Cleaner(
-			tags=ALLOWED_TAGS,
-			attributes=ALLOWED_ATTRIBUTES,
-			protocols=ALLOWED_PROTOCOLS,
-			filters=[partial(LinkifyFilter, callbacks=bleach.linkifier.DEFAULT_CALLBACKS)])
+		tags=ALLOWED_TAGS,
+		attributes=ALLOWED_ATTRIBUTES,
+		protocols=ALLOWED_PROTOCOLS,
+		filters=[partial(LinkifyFilter, callbacks=bleach.linkifier.DEFAULT_CALLBACKS)])
 	return cleaner.clean(html)
 
 
 class DelInsExtension(Extension):
 	def extendMarkdown(self, md):
-		del_proc = SimpleTagInlineProcessor(r'(\~\~)(.+?)(\~\~)', 'del')
-		md.inlinePatterns.register(del_proc, 'del', 200)
+		del_proc = SimpleTagInlineProcessor(r"(\~\~)(.+?)(\~\~)", "del")
+		md.inlinePatterns.register(del_proc, "del", 200)
 
-		ins_proc = SimpleTagInlineProcessor(r'(\+\+)(.+?)(\+\+)', 'ins')
-		md.inlinePatterns.register(ins_proc, 'ins', 200)
+		ins_proc = SimpleTagInlineProcessor(r"(\+\+)(.+?)(\+\+)", "ins")
+		md.inlinePatterns.register(ins_proc, "ins", 200)
 
 
-MARKDOWN_EXTENSIONS = ["fenced_code", "tables", "codehilite", "toc", DelInsExtension()]
+RE_PARTS = dict(
+	USER=r"[A-Za-z0-9._-]*\b",
+	REPO=r"[A-Za-z0-9_]+\b"
+)
+
+
+class MentionPattern(Pattern):
+	ANCESTOR_EXCLUDES = ("a",)
+
+	def __init__(self, config, md):
+		MENTION_RE = r"(@({USER})(?:\/({REPO}))?)".format(**RE_PARTS)
+		super(MentionPattern, self).__init__(MENTION_RE, md)
+		self.config = config
+
+	def handleMatch(self, m):
+		label = m.group(2)
+		user = m.group(3)
+		package_name = m.group(4)
+		if package_name:
+			el = ElementTree.Element("a")
+			el.text = label
+			el.set("href", url_for("packages.view", author=user, name=package_name))
+			return el
+		else:
+			el = ElementTree.Element("a")
+			el.text = label
+			el.set("href", url_for("users.profile", username=user))
+			el.set("data-username", user)
+			return el
+
+
+class MentionExtension(Extension):
+	def __init__(self, *args, **kwargs):
+		super(MentionExtension, self).__init__(*args, **kwargs)
+
+	def extendMarkdown(self, md):
+		md.ESCAPED_CHARS.append("@")
+		md.inlinePatterns.register(MentionPattern(self.getConfigs(), md), "mention", 20)
+
+
+MARKDOWN_EXTENSIONS = ["fenced_code", "tables", "codehilite", "toc", DelInsExtension(), MentionExtension()]
 MARKDOWN_EXTENSION_CONFIG = {
 	"fenced_code": {},
 	"tables": {},
@@ -109,7 +152,7 @@ def get_headings(html: str):
 	root = []
 	stack = []
 	for heading in headings:
-		this = { "link": heading.get("id") or "", "text": heading.text, "children": [] }
+		this = {"link": heading.get("id") or "", "text": heading.text, "children": []}
 		this_level = int(heading.name[1:]) - 1
 
 		while this_level <= len(stack):
@@ -123,3 +166,9 @@ def get_headings(html: str):
 		stack.append(this)
 
 	return root
+
+
+def get_user_mentions(html: str) -> set:
+	soup = BeautifulSoup(html, "html.parser")
+	links = soup.select("a[data-username]")
+	return set([x.get("data-username") for x in links])
