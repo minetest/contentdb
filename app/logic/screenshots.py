@@ -1,5 +1,7 @@
 import datetime, json
 
+from flask_babel import lazy_gettext
+
 from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
 from app.models import User, Package, PackageScreenshot, Permission, NotificationType, db, AuditSeverity
