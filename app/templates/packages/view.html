@@ -108,7 +108,7 @@
 			<div class="info-row row" style="margin-top: 2rem;">
 				<div class="btn-group-horizontal col">
 					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}" title="{{ _("Author") }}">
-						<i class="fas fa-user"></i>
+						<img src="{{ package.author.getProfilePicURL() }}" style="max-height: 1em; filter: none">
 						<span class="count">
 							{{ package.author.display_name }}
 						</span>
