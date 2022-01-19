@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-14 18:27+0000\n"
-"PO-Revision-Date: 2022-01-17 15:22+0000\n"
-"Last-Translator: waxtatect <piero@live.ie>\n"
+"PO-Revision-Date: 2022-01-19 07:54+0000\n"
+"Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/minetest/"
 "contentdb/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.10.1\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -190,9 +190,8 @@ msgid "Website URL"
 msgstr "URL du site web"
 
 #: app/blueprints/packages/packages.py:245
-#, fuzzy
 msgid "Issue Tracker URL"
-msgstr "Suivi des problèmes"
+msgstr "URL du suivi des problèmes"
 
 #: app/blueprints/packages/packages.py:246
 msgid "Forum Topic ID"
@@ -282,13 +281,13 @@ msgstr "Référence Git (c'est-à-dire : hash du commit, branche, ou tag)"
 #: app/blueprints/packages/releases.py:67
 #: app/blueprints/packages/releases.py:183
 msgid "Minimum Minetest Version"
-msgstr "Versions de Minetest minimum"
+msgstr "Version Minimum de Minetest"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:69
 #: app/blueprints/packages/releases.py:186
 msgid "Maximum Minetest Version"
-msgstr "Versions de Minetest maximum"
+msgstr "Version maximale de Minetest"
 
 #: app/blueprints/packages/releases.py:64
 #: app/templates/packages/release_edit.html:23
@@ -297,7 +296,7 @@ msgstr "URL"
 
 #: app/blueprints/packages/releases.py:65
 msgid "Task ID"
-msgstr ""
+msgstr "ID de tâche"
 
 #: app/blueprints/packages/releases.py:66
 #: app/blueprints/packages/screenshots.py:40
@@ -360,7 +359,7 @@ msgstr "Publier une version"
 
 #: app/blueprints/packages/releases.py:246
 msgid "Save Settings"
-msgstr "Sauvegarder les paramètres"
+msgstr "Mettre à jour les paramètres"
 
 #: app/blueprints/packages/releases.py:247
 msgid "Disable Automation"
@@ -384,11 +383,11 @@ msgstr "Maintenant, veuillez créer une version initiale"
 #: app/blueprints/threads/__init__.py:175
 #: app/blueprints/threads/__init__.py:263
 msgid "Comment"
-msgstr "commentaire"
+msgstr "Commentaires"
 
 #: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:264
 msgid "Private"
-msgstr "Privé.e"
+msgstr "Privée"
 
 #: app/blueprints/packages/reviews.py:45 app/templates/macros/reviews.html:115
 #: app/templates/macros/reviews.html:154
@@ -626,11 +625,11 @@ msgstr "L'ancien mot de passe est incorrect"
 
 #: app/blueprints/users/account.py:331
 msgid "Unknown verification token!"
-msgstr ""
+msgstr "Jeton de vérification inconnu"
 
 #: app/blueprints/users/account.py:337
 msgid "Token has expired"
-msgstr ""
+msgstr "Jeton de vérification expiré"
 
 #: app/blueprints/users/account.py:351
 msgid "Another user is already using that email"
