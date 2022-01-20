@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-20 01:16+0000\n"
+"POT-Creation-Date: 2022-01-20 01:28+0000\n"
 "PO-Revision-Date: 2022-01-19 07:54+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
@@ -58,15 +58,18 @@ msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "Pengesahan kuasa gagal [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
-msgid "Linked github to account"
+#, fuzzy
+msgid "Linked GitHub to account"
 msgstr "Github dipautkan ke akaun"
 
 #: app/blueprints/github/__init__.py:65
-msgid "Github account is already associated with another user"
+#, fuzzy
+msgid "GitHub account is already associated with another user"
 msgstr "Akaun Github sudah dikaitkan dengan pengguna lain"
 
 #: app/blueprints/github/__init__.py:71
-msgid "Unable to find an account for that Github user"
+#, fuzzy
+msgid "Unable to find an account for that GitHub user"
 msgstr "Tidak mampu cari akaun untuk pengguna Github tersebut"
 
 #: app/blueprints/github/__init__.py:76
@@ -144,7 +147,7 @@ msgstr "Nama (Teknikal)"
 
 #: app/blueprints/packages/packages.py:231
 #: app/blueprints/packages/packages.py:547
-#: app/templates/packages/create_edit.html:76
+#: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Huruf kecil (a-z), digit (0-9), dan garis bawah (_) sahaja"
 
@@ -1804,8 +1807,9 @@ msgstr ""
 "maklumat ini secara automatiknya."
 
 #: app/templates/packages/create_edit.html:55
+#, fuzzy
 msgid ""
-"Javascript is needed to improve the user interface, and is needed for "
+"JavaScript is needed to improve the user interface, and is needed for "
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
@@ -1813,22 +1817,16 @@ msgstr ""
 "diperlukan\n"
 "\t\t\tuntuk sifat seperti mencari metadata dari git, dan autopelengkapan."
 
-#: app/templates/packages/create_edit.html:57
-msgid "Whilst disabled Javascript may work, it is not officially supported."
-msgstr ""
-"Walaupun boleh berfungsi dengan Javascript dilumpuhkan, ia tidak disokong"
-" secara rasmi."
-
-#: app/templates/packages/create_edit.html:67
+#: app/templates/packages/create_edit.html:66
 #: app/templates/threads/view.html:78
 msgid "Package"
 msgstr "Pakej"
 
-#: app/templates/packages/create_edit.html:74
+#: app/templates/packages/create_edit.html:73
 msgid "Please open a thread to request a name change"
 msgstr "Sila buka bebenang untuk memohon pertukaran nama"
 
-#: app/templates/packages/create_edit.html:80
+#: app/templates/packages/create_edit.html:79
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
@@ -1836,15 +1834,15 @@ msgstr ""
 "Sila pilih 'Kerja Dalam Proses' sekiranya pakej anda tidak stabil, dan "
 "tidak patut disyorkan kepada semua pemain"
 
-#: app/templates/packages/create_edit.html:89
+#: app/templates/packages/create_edit.html:88
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr "Sekiranya tiada media, tetapkan Lesen Media menjadi sama dengan Lesen."
 
-#: app/templates/packages/create_edit.html:95
+#: app/templates/packages/create_edit.html:94
 msgid "Repository and Links"
 msgstr "Repositori dan Pautan"
 
-#: app/templates/packages/create_edit.html:98
+#: app/templates/packages/create_edit.html:97
 msgid ""
 "Enter the repo URL for the package.\n"
 "\t\t\t\tIf the repo uses git then the metadata will be automatically "
@@ -1854,23 +1852,23 @@ msgstr ""
 "\t\t\t\tJika repositori menggunakan git maka metadata akan diimport "
 "secara automatik."
 
-#: app/templates/packages/create_edit.html:101
+#: app/templates/packages/create_edit.html:100
 msgid "Leave blank if you don't have a repo. Click skip if the import fails."
 msgstr "Tinggal kosong jika anda tiada repositori. Klik langkau jika import gagal."
 
-#: app/templates/packages/create_edit.html:107
+#: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
 msgstr "Seterusnya (Autoimport)"
 
-#: app/templates/packages/create_edit.html:108
+#: app/templates/packages/create_edit.html:107
 msgid "Skip Autoimport"
 msgstr "Langkau Autoimport"
 
-#: app/templates/packages/create_edit.html:112
+#: app/templates/packages/create_edit.html:111
 msgid "Importing... (This may take a while)"
 msgstr "Mengimport... (Ini mungkin makan masa)"
 
-#: app/templates/packages/create_edit.html:120
+#: app/templates/packages/create_edit.html:119
 msgid "Tip: paste in a forum topic URL"
 msgstr "Petua: tampalkan URL topik forum"
 
@@ -3360,4 +3358,10 @@ msgstr ""
 
 #~ msgid "Unable to add protected tag {tag.title} to package"
 #~ msgstr ""
+
+#~ msgid "Whilst disabled Javascript may work, it is not officially supported."
+#~ msgstr ""
+#~ "Walaupun boleh berfungsi dengan Javascript "
+#~ "dilumpuhkan, ia tidak disokong secara "
+#~ "rasmi."
 

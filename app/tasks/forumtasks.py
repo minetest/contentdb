@@ -44,7 +44,7 @@ def checkForumAccount(username, forceNoSave=False):
 	# Get github username
 	github_username = profile.get("github")
 	if github_username is not None and github_username.strip() != "":
-		print("Updated github username for " + user.display_name + " to " + github_username)
+		print("Updated GitHub username for " + user.display_name + " to " + github_username)
 		user.github_username = github_username
 		needsSaving = True
 

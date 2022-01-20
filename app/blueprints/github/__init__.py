@@ -59,16 +59,16 @@ def callback(oauth_token):
 		if userByGithub is None:
 			current_user.github_username = username
 			db.session.commit()
-			flash(gettext("Linked github to account"), "success")
+			flash(gettext("Linked GitHub to account"), "success")
 			return redirect(url_for("homepage.home"))
 		else:
-			flash(gettext("Github account is already associated with another user"), "danger")
+			flash(gettext("GitHub account is already associated with another user"), "danger")
 			return redirect(url_for("homepage.home"))
 
 	# If not logged in, log in
 	else:
 		if userByGithub is None:
-			flash(gettext("Unable to find an account for that Github user"), "danger")
+			flash(gettext("Unable to find an account for that GitHub user"), "danger")
 			return redirect(url_for("users.claim_forums"))
 
 		ret = login_user_set_active(userByGithub, remember=True)
