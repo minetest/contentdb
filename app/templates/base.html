@@ -234,7 +234,9 @@
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help/api') }}">{{ _("API") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a></li>
-			<li class="list-inline-item"><a href="{{ url_for('report.report', url=url_current(True)) }}">{{ _("Report") }}</a></li>
+			{% if request.endpoint != "flatpage" %}
+				<li class="list-inline-item"><a href="{{ url_for('report.report', url=url_current(True)) }}">{{ _("Report") }}</a></li>
+			{% endif %}
 			<li class="list-inline-item"><a href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb">{{ _("Stats / Monitoring") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('users.list_all') }}">{{ _("User List") }}</a></li>
 			<li class="list-inline-item"><a href="https://github.com/minetest/contentdb">{{ _("Source Code") }}</a></li>
