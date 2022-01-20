@@ -9,7 +9,7 @@ toc: False
 * [Non-free Licenses](non_free)
 * [Why WTFPL is a terrible license](wtfpl)
 * [Ranks and Permissions](ranks_permissions)
-* [Reporting Content](reporting)
+* [Contact Us](contact_us)
 * [Top Packages Algorithm](top_packages)
 * [Featured Packages](featured)
 

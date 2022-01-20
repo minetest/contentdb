@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Report") }}
+{% endblock %}
+
+{% block content %}
+
+{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
+<h1>{{ _("Report") }}</h1>
+
+<form method="POST" action="" enctype="multipart/form-data">
+	{{ form.hidden_tag() }}
+	{% if url %}
+		<p>
+			URL: <code>{{ url }}</code>
+		</p>
+	{% else %}
+		{{ render_field(form.url, hint=_("URL to the thing you're reporting")) }}
+	{% endif %}
+	{{ render_field(form.message, hint=_("What are you reporting? Why are you reporting it?")) }}
+	{{ render_submit_field(form.submit) }}
+
+	<p class="mt-5 text-muted">
+		{{ _("Reports will be shared with ContentDB stuff.") }}
+		{% if is_anon %}
+			{{ _("Only the admin will be able to see who made the report.") }}
+		{% endif %}
+	</p>
+</form>
+
+{% endblock %}

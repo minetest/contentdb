@@ -27,7 +27,7 @@ including ones not covered by this document, and to ban users who abuse this ser
 ### 2.1. Acceptable Content
 
 Sexually-orientated content is not permitted.
-If in doubt at what this means, [contact us by raising a report](/help/reporting/).
+If in doubt at what this means, [contact us by raising a report](/report/).
 
 Mature content is permitted providing that it is labelled correctly.
 See [Content Flags](/help/content_flags/).
@@ -153,4 +153,4 @@ Doing so may result in temporary or permanent suspension from ContentDB.
 
 ## 7. Reporting Violations
 
-See the [Reporting Content](/help/reporting/) page.
+Please click "Report" on the package page.

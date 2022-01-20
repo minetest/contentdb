@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import render_template
+from flask import render_template, escape
 from flask_mail import Message
 from app import mail
 from app.models import Notification, db, EmailSubscription, User
@@ -86,7 +86,7 @@ def send_email_with_reason(email, subject, text, html, reason):
 	msg = Message(subject, recipients=[email])
 
 	msg.body = text
-	html = html or text
+	html = html or f"<pre>{escape(text)}</pre>"
 	msg.html = render_template("emails/base.html", subject=subject, content=html, reason=reason, sub=sub)
 	mail.send(msg)
 

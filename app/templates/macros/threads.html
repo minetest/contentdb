@@ -36,7 +36,7 @@
 					{% endif %}
 
 					<a name="reply-{{ r.id }}" class="text-muted float-right"
-							href="{{ url_for('threads.view', id=thread.id) }}#reply-{{ r.id }}">
+							href="{{ r.get_url() }}">
 						{{ r.created_at | datetime }}
 					</a>
 				</div>
@@ -48,10 +48,17 @@
 							<i class="fas fa-trash"></i>
 						</a>
 					{% endif %}
+					{% if current_user != r.author %}
+						<a class="float-right btn-secondary btn-sm ml-2"
+								title="{{ _('Report') }}"
+								href="{{ url_for('report.report', url=r.get_url()) }}">
+							<i class="fas fa-flag mr-1"></i>
+						</a>
+					{% endif %}
 
 					{% if current_user == thread.author and thread.review and thread.replies[0] == r %}
 						<a class="float-right btn btn-primary btn-sm ml-2"
-								href="{{ thread.review.package.getURL("packages.review") }}">
+								href="{{ thread.review.package.getURL('packages.review') }}">
 							<i class="fas fa-pen"></i>
 						</a>
 					{% elif r.checkPerm(current_user, "EDIT_REPLY") %}

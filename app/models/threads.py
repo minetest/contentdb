@@ -124,6 +124,9 @@ class ThreadReply(db.Model):
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
+	def get_url(self):
+		return url_for('threads.view', id=self.thread.id) + "#reply-" + str(self.id)
+
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
 			return False

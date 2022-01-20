@@ -72,7 +72,7 @@ requested. See below.
 
 ## Removal Requests
 
-Please [raise a report](https://content.minetest.net/help/reporting/) if you
+Please [raise a report](https://content.minetest.net/report/?anon=0) if you
 wish to remove your personal information.
 
 ContentDB keeps a record of each username and forum topic on the forums,
