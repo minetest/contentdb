@@ -33,9 +33,9 @@ def is_safe_url(target):
 
 # These are given to Jinja in template_filters.py
 
-def abs_url_for(path, **kwargs):
+def abs_url_for(endpoint: str, **kwargs):
 	scheme = "https" if app.config["BASE_URL"][:5] == "https" else "http"
-	return url_for(path, _external=True, _scheme=scheme, **kwargs)
+	return url_for(endpoint, _external=True, _scheme=scheme, **kwargs)
 
 def abs_url(path):
 	return urljoin(app.config["BASE_URL"], path)
