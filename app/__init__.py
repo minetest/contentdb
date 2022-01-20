@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+import datetime
 
 from flask import *
 from flask_gravatar import Gravatar
@@ -134,6 +134,7 @@ def get_locale():
 
 
 @app.route("/set-locale/", methods=["POST"])
+@csrf.exempt
 def set_locale():
 	locale = request.form.get("locale")
 	if locale not in app.config["LANGUAGES"].keys():
@@ -147,6 +148,8 @@ def set_locale():
 		resp = make_response(redirect(url_for("homepage.home")))
 
 	if locale:
-		resp.set_cookie("locale", locale)
+		expire_date = datetime.datetime.now()
+		expire_date = expire_date + datetime.timedelta(days=5*365)
+		resp.set_cookie("locale", locale, expires=expire_date)
 
 	return resp
