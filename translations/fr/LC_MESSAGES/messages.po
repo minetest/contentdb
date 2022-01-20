@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-20 01:28+0000\n"
-"PO-Revision-Date: 2022-01-19 07:54+0000\n"
-"Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
+"PO-Revision-Date: 2022-01-20 21:45+0000\n"
+"Last-Translator: Lemente <crafted.by.lemente@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -57,19 +58,16 @@ msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "Échec de l'autorisation [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
-#, fuzzy
 msgid "Linked GitHub to account"
 msgstr "Compte GitHub lié"
 
 #: app/blueprints/github/__init__.py:65
-#, fuzzy
 msgid "GitHub account is already associated with another user"
 msgstr "Le compte Github est déjà associé à un autre utilisateur"
 
 #: app/blueprints/github/__init__.py:71
-#, fuzzy
 msgid "Unable to find an account for that GitHub user"
-msgstr "Impossible de trouver un compte pour cet utilisateur Github"
+msgstr "Impossible de trouver un compte pour cet utilisateur GitHub"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
@@ -159,8 +157,9 @@ msgid "Short Description (Plaintext)"
 msgstr "Description Courte (Texte)"
 
 #: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:410
+#, fuzzy
 msgid "Maintenance State"
-msgstr "État d'entretien"
+msgstr "État de maintenance"
 
 #: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10
@@ -390,7 +389,7 @@ msgstr "Commentaires"
 
 #: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:274
 msgid "Private"
-msgstr "Privée"
+msgstr "Privé"
 
 #: app/blueprints/packages/reviews.py:45 app/templates/macros/reviews.html:115
 #: app/templates/macros/reviews.html:154
@@ -884,6 +883,8 @@ msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Vous avez créé trop de versions pour ce paquet dans les 5 dernières minutes, "
+"veuillez attendre avant de réessayer."
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
@@ -900,7 +901,7 @@ msgstr "une image PNG ou JPG"
 #: app/logic/uploads.py:52
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Veuillez importer %(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
@@ -933,12 +934,11 @@ msgstr "Packs de textures"
 #: app/models/packages.py:166
 #, fuzzy
 msgid "Submit for Approval"
-msgstr "En attente de l'approbation."
+msgstr "Envoyer pour vérification"
 
 #: app/models/packages.py:168
-#, fuzzy
 msgid "Approve"
-msgstr "Approuvé"
+msgstr "Approuver"
 
 #: app/models/packages.py:170 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:80
@@ -977,9 +977,9 @@ msgid "Threads"
 msgstr "Fils"
 
 #: app/templates/base.html:48
-#, fuzzy, python-format
+#, python-format
 msgid "Search %(type)s"
-msgstr "Top %(type)s"
+msgstr "Rechercher %(type)s"
 
 #: app/templates/base.html:48
 msgid "Search all packages"
@@ -1294,7 +1294,7 @@ msgid "Unsubscribe"
 msgstr "Se désabonner"
 
 #: app/templates/emails/notification.html:10
-#, fuzzy, python-format
+#, python-format
 msgid "From %(username)s and on package %(package)s."
 msgstr "De %(username)s sur le paquet %(package)s."
 
@@ -1415,9 +1415,8 @@ msgid "Start typing to see suggestions"
 msgstr "Commencez à taper pour voir les suggestions"
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:34
-#, fuzzy
 msgid "State"
-msgstr "Plus tard"
+msgstr "État"
 
 #: app/templates/macros/package_approval.html:22
 msgid "Create first release"
@@ -1525,7 +1524,7 @@ msgstr "Aucun paquet disponible"
 
 #: app/templates/macros/releases.html:20 app/templates/macros/releases.html:47
 #: app/templates/macros/releases.html:89
-#, fuzzy, python-format
+#, python-format
 msgid "created %(date)s"
 msgstr "crée %(date)s"
 
@@ -1646,7 +1645,7 @@ msgstr "Aucun paquet obsolète."
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:110
 msgid "Author"
-msgstr "Auteur"
+msgstr "Auteur·ice"
 
 #: app/templates/macros/topics.html:8
 msgid "Date"
@@ -1704,9 +1703,9 @@ msgstr ""
 #: app/templates/metapackages/view.html:24
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:351
 #: app/templates/packages/view.html:375 app/templates/todo/editor.html:85
-#, fuzzy, python-format
+#, python-format
 msgid "%(title)s by %(display_name)s"
-msgstr "%(title)s sur %(display_name)s"
+msgstr "%(title)s de %(display_name)s"
 
 #: app/templates/metapackages/view.html:32
 #, fuzzy
@@ -1817,16 +1816,14 @@ msgstr ""
 "à jour ces détails automatiquement."
 
 #: app/templates/packages/create_edit.html:55
-#, fuzzy
 msgid ""
 "JavaScript is needed to improve the user interface, and is needed for "
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
-"JavaScript est nécessaire pour améliorer l'interface utilisateur et pour "
-"les fonctionnalités\n"
-"\t\t\t telles que la recherche de métadonnées dans Git et "
-"l'autocomplétion."
+"JavaScript est nécessaire pour améliorer l'interface utilisateur, pour les "
+"fonctionnalités\n"
+"telles que la recherche de métadonnées dans Git, ainsi que l'autocomplétion."
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/threads/view.html:78
@@ -1932,6 +1929,8 @@ msgstr ""
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
+"Utilisez cette page pour définir le minimum et le maximum de toutes les "
+"versions pour votre paquet."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
@@ -1944,6 +1943,8 @@ msgid ""
 "Note: Min and max versions will be used to hide the package on\n"
 "\t\t\tplatforms not within the range."
 msgstr ""
+"Note : les versions min et max seront utilisées pour masquer\n"
+"le paquet aux clients en dehors de la plage."
 
 #: app/templates/packages/release_bulk_change.html:35
 #: app/templates/packages/release_edit.html:66
@@ -1952,6 +1953,9 @@ msgid ""
 "You cannot select the oldest version for min or the newest version\n"
 "\t\t\tfor max as this does not make sense - you can't predict the future."
 msgstr ""
+"Vous ne pouvez pas choisir la version la plus ancienne pour min\n"
+"ni la version la plus récente pour max. Ça n'a pas de sens.\n"
+"Vous ne pouvez pas prédire l’avenir."
 
 #: app/templates/packages/release_bulk_change.html:38
 #: app/templates/packages/release_edit.html:61
@@ -1960,9 +1964,8 @@ msgid "Leave both as None if in doubt."
 msgstr ""
 
 #: app/templates/packages/release_edit.html:4
-#, fuzzy
 msgid "Edit release"
-msgstr "Publier une version"
+msgstr "Modifier la version"
 
 #: app/templates/packages/release_edit.html:27
 #, fuzzy
@@ -1972,7 +1975,7 @@ msgstr "commentaires"
 #: app/templates/packages/release_edit.html:32
 #, fuzzy
 msgid "view task"
-msgstr "Votes d'évaluation"
+msgstr "afficher la tâche"
 
 #: app/templates/packages/release_edit.html:42
 #: app/templates/packages/screenshot_edit.html:20
@@ -1989,6 +1992,8 @@ msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
+"Définissez les versions minimale et maximale de Minetest supportées.\n"
+"Cette version sera cachée aux clients en dehors de cette plage. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
@@ -2111,9 +2116,9 @@ msgid "Later"
 msgstr "Plus tard"
 
 #: app/templates/packages/release_wizard.html:14
-#, python-format
+#, fuzzy, python-format
 msgid "A release is a single downloadable version of your %(title)s."
-msgstr ""
+msgstr "Une version est un fichier téléchargeable de votre %(title)s."
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
@@ -2175,7 +2180,6 @@ msgid "Unfortunately, you will otherwise need to create a release manually."
 msgstr "Malheureusement, vous devrez sinon créer une version manuellement."
 
 #: app/templates/packages/release_wizard.html:72
-#, fuzzy
 msgid "Create releases manually"
 msgstr "Publier des versions manuellement"
 
@@ -2193,9 +2197,9 @@ msgid "Bulk update"
 msgstr ""
 
 #: app/templates/packages/remove.html:9
-#, fuzzy, python-format
+#, python-format
 msgid "Remove %(title)s"
-msgstr "Versions - %(title)s"
+msgstr "Supprimer %(title)s"
 
 #: app/templates/packages/remove.html:11
 msgid ""
@@ -2220,9 +2224,8 @@ msgid ""
 msgstr ""
 
 #: app/templates/packages/remove.html:27
-#, fuzzy
 msgid "Reason"
-msgstr "Fils"
+msgstr "Raison"
 
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
@@ -2257,6 +2260,8 @@ msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
 msgstr ""
+"Ceci convertira la critique en fil de discussion. Les commentaires seront "
+"conservés, mais elle n'impactera plus la note du paquet."
 
 #: app/templates/packages/review_votes.html:4
 #: app/templates/packages/view.html:287
@@ -2266,7 +2271,7 @@ msgstr "Votes d'évaluation"
 #: app/templates/packages/review_votes.html:13
 #, python-format
 msgid "Review votes on %(title)s by %(author)s"
-msgstr ""
+msgstr "Examiner les votes sur %(title)s de %(author)s"
 
 #: app/templates/packages/screenshot_edit.html:4
 #: app/templates/packages/screenshot_edit.html:11
@@ -2287,9 +2292,8 @@ msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr "La première image sera utilisée comme vignette du paquet."
 
 #: app/templates/packages/screenshots.html:36
-#, fuzzy
 msgid "Awaiting approval"
-msgstr "En attente de l'approbation."
+msgstr "En attente d'examen"
 
 #: app/templates/packages/screenshots.html:54
 msgid "No screenshots."
@@ -2317,7 +2321,7 @@ msgstr "Badges"
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
-msgstr ""
+msgstr "Originalité du nom du mod"
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
@@ -2355,6 +2359,9 @@ msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
 msgstr ""
+"Git Update Detection est suffisamment intelligent pour ne pas créer une "
+"nouvelle version si vous l'avez déjà créée manuellement ou à l'aide de "
+"webhooks/de l'API."
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
@@ -2502,7 +2509,7 @@ msgstr "Nom technique"
 #: app/templates/packages/view.html:406
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
-msgstr ""
+msgstr "%(code_license)s pour le code,<br>%(media_license)s pour les médias."
 
 #: app/templates/packages/view.html:414
 msgid "Unknown"
@@ -2634,28 +2641,24 @@ msgid "Approval Queue"
 msgstr ""
 
 #: app/templates/todo/editor.html:15
-#, fuzzy
 msgid "Approve All"
-msgstr "Paquets non approuvés nécessitant une action"
+msgstr "Tout valider"
 
 #: app/templates/todo/editor.html:33
-#, fuzzy
 msgid "No screenshots need approval."
-msgstr "Pas de capture d'écran."
+msgstr "Aucune capture d'écran à vérifier."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
-#, fuzzy
 msgid "No packages need approval."
-msgstr "Aucun paquet disponible"
+msgstr "Aucun paquet à vérifier."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
 msgstr "Importation"
 
 #: app/templates/todo/editor.html:90
-#, fuzzy
 msgid "No releases need approval."
-msgstr "Aucune version disponible."
+msgstr "Aucune version à vérifier."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
@@ -2721,14 +2724,12 @@ msgid "Forum Topics"
 msgstr "Sujets du forum"
 
 #: app/templates/todo/topics.html:16
-#, fuzzy
 msgid "Sort by name"
-msgstr "Nom d'utilisateur"
+msgstr "Trier par nom"
 
 #: app/templates/todo/topics.html:20
-#, fuzzy
 msgid "Sort by views"
-msgstr "évaluations"
+msgstr "Trier par vues"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
@@ -2748,7 +2749,7 @@ msgstr ""
 
 #: app/templates/todo/topics.html:49
 msgid "Topics to be Added"
-msgstr ""
+msgstr "Sujets à ajouter"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
@@ -2767,9 +2768,8 @@ msgid "Nothing to do :)"
 msgstr "Rien à faire :)"
 
 #: app/templates/todo/user.html:47
-#, fuzzy
 msgid "See all Update Settings"
-msgstr "Mettre à jour les paramètres"
+msgstr "Voir tous les paramètres de mise à jour"
 
 #: app/templates/todo/user.html:52
 msgid "Create All Releases"
@@ -2793,6 +2793,8 @@ msgid ""
 "Consider changing the update settings to create releases automatically "
 "instead."
 msgstr ""
+"Vous pouvez changer les paramètres de mise à jour pour créer des versions "
+"automatiques."
 
 #: app/templates/todo/user.html:61
 msgid ""
@@ -2810,6 +2812,8 @@ msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
+"Pour retirer un paquet de la liste ci-dessous, créez une version ou modifiez "
+"les paramètres de mise à jour."
 
 #: app/templates/todo/user.html:72
 msgid "See All"
@@ -2836,11 +2840,8 @@ msgid "Topics with a strikethrough have been marked as discarded."
 msgstr ""
 
 #: app/templates/todo/user.html:107
-#, fuzzy
 msgid "Congrats! You don't have any topics which aren't on CDB."
-msgstr ""
-"Félicitation ! Vous n'avez aucune discussion de forum qui ne soit pas sur"
-" CDB."
+msgstr "Félicitation ! Aucun de vos sujets de forum ne manque sur CDB."
 
 #: app/templates/users/account.html:4
 #, python-format
@@ -2887,7 +2888,7 @@ msgstr "Voir les permissions GitHub de ContentDB"
 
 #: app/templates/users/account.html:89
 msgid "Link Github"
-msgstr ""
+msgstr "Lien GitHub"
 
 #: app/templates/users/account.html:92
 msgid "None"
@@ -2912,8 +2913,8 @@ msgstr "Supprimer ou désactiver"
 #: app/templates/users/account.html:116
 msgid "Account Deletion and Deactivation isn't available to users yet."
 msgstr ""
-"La suppression et la désactivation des comptes ne sont pas encore "
-"disponibles pour les utilisateurs."
+"La suppression et la désactivation de compte n'est pas encore disponibles "
+"pour les utilisateurs."
 
 #: app/templates/users/account.html:117
 msgid "Please contact the admin."
@@ -2924,9 +2925,8 @@ msgid "It is recommended that you set a password for your account."
 msgstr "Il est recommandé de définir un mot de passe pour votre compte."
 
 #: app/templates/users/change_set_password.html:14
-#, fuzzy
 msgid "Skip"
-msgstr "Passer"
+msgstr "Ignorer"
 
 #: app/templates/users/change_set_password.html:28
 #: app/templates/users/register.html:24
@@ -2988,7 +2988,6 @@ msgid "<b>No</b>, I don't have one"
 msgstr "<b>Non</b>, Je n'en ai pas"
 
 #: app/templates/users/claim.html:28
-#, fuzzy
 msgid "Create forum account"
 msgstr "Créer un compte forum"
 
@@ -3194,7 +3193,6 @@ msgid "%(value)d / %(target)d"
 msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:169
-#, fuzzy
 msgid "Create package"
 msgstr "Créer un paquet"
 
@@ -3211,7 +3209,7 @@ msgid "This user is also a maintainer of the following packages"
 msgstr "Cet utilisateur est également responsable des paquets suivants"
 
 #: app/templates/users/profile_edit.html:4
-#, fuzzy, python-format
+#, python-format
 msgid "Edit Profile - %(username)s"
 msgstr "Modifier le profil | %(username)s"
 
@@ -3262,7 +3260,7 @@ msgid "I agree to the "
 msgstr "J'accepte de "
 
 #: app/templates/users/settings_email.html:4
-#, fuzzy, python-format
+#, python-format
 msgid "Email and Notifications - %(username)s"
 msgstr "Courriels et notifications | %(username)s"
 
@@ -3392,4 +3390,3 @@ msgstr ""
 #~ "Bien que JavaScript puisse être "
 #~ "désactivé, cela n'est pas officiellement "
 #~ "pris en charge."
-
