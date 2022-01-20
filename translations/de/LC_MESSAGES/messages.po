@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-20 01:28+0000\n"
-"PO-Revision-Date: 2022-01-20 00:48+0000\n"
+"PO-Revision-Date: 2022-01-20 21:45+0000\n"
 "Last-Translator: Wuzzy <almikes@aol.com>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
+"contentdb/de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -57,19 +58,16 @@ msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "Autorisierung fehlgeschlagen [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
-#, fuzzy
 msgid "Linked GitHub to account"
-msgstr "Github wurde mit dem Konto verknüpft"
+msgstr "GitHub wurde mit dem Konto verknüpft"
 
 #: app/blueprints/github/__init__.py:65
-#, fuzzy
 msgid "GitHub account is already associated with another user"
-msgstr "Das Github-Konto ist bereits mit einem anderen Benutzer verknüpft"
+msgstr "Das GitHub-Konto ist bereits mit einem anderen Benutzer verknüpft"
 
 #: app/blueprints/github/__init__.py:71
-#, fuzzy
 msgid "Unable to find an account for that GitHub user"
-msgstr "Nicht möglich, ein Konto für diesen Github-Benutzer zu finden"
+msgstr "Nicht möglich, ein Konto für diesen GitHub-Benutzer zu finden"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
@@ -101,7 +99,7 @@ msgstr "Betreuer"
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr "Überprüfungs-Protokoll"
+msgstr "Auditierungsprotokoll"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -214,10 +212,9 @@ msgid "You don't have permission to do that"
 msgstr "Sie haben nicht die Erlaubnis, das zu tun"
 
 #: app/blueprints/packages/packages.py:394
-#, fuzzy
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
-"Bitte kommentieren Sie im Review-Thema, welche Änderungen erforderlich "
+"Bitte kommentieren Sie im Genehmigungsthema, welche Änderungen erforderlich "
 "sind"
 
 #: app/blueprints/packages/packages.py:415
@@ -474,9 +471,8 @@ msgid "Unable to create thread!"
 msgstr "Thema kann nicht erstellt werden!"
 
 #: app/blueprints/threads/__init__.py:306
-#, fuzzy
 msgid "An approval thread already exists!"
-msgstr "Es gibt bereits ein Review-Thema!"
+msgstr "Es gibt bereits ein Genehmigungsthema!"
 
 #: app/blueprints/threads/__init__.py:310
 msgid "Please wait before opening another thread"
@@ -934,14 +930,12 @@ msgid "Texture Packs"
 msgstr "Texturenpakete"
 
 #: app/models/packages.py:166
-#, fuzzy
 msgid "Submit for Approval"
-msgstr "Warte auf Genehmigung."
+msgstr "Für Genehmigung absenden"
 
 #: app/models/packages.py:168
-#, fuzzy
 msgid "Approve"
-msgstr "Genehmigt"
+msgstr "Genehmigen"
 
 #: app/models/packages.py:170 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:80
@@ -1058,7 +1052,7 @@ msgstr "Datenschutzbestimmungen"
 
 #: app/templates/base.html:237
 msgid "Report / DMCA"
-msgstr "Bericht / DMCA"
+msgstr "Melden / DMCA"
 
 #: app/templates/base.html:238
 msgid "Stats / Monitoring"
@@ -1502,18 +1496,16 @@ msgstr ""
 "%(names)s hat"
 
 #: app/templates/macros/package_approval.html:110
-#, fuzzy
 msgid "Package approval thread"
-msgstr "Paket-Review-Thema"
+msgstr "Paketgenehmigungsthema"
 
 #: app/templates/macros/package_approval.html:111
-#, fuzzy
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
-"Sie können ein Thema eröffnen, wenn Sie eine Frage an den Rezensenten "
-"oder Paketautoren haben."
+"Sie können ein Thema eröffnen, falls Sie eine Frage an den Genehmiger oder "
+"Paketautoren haben."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
@@ -1646,7 +1638,7 @@ msgstr "Speicherort"
 #: app/templates/packages/releases_list.html:13
 #: app/templates/packages/view.html:320
 msgid "Update settings"
-msgstr "Einstellungen aktualisieren"
+msgstr "Aktualisierungseinstellungen"
 
 #: app/templates/macros/todo.html:57
 msgid "No outdated packages."
@@ -1824,16 +1816,15 @@ msgstr ""
 "Details automatisch zu aktualisieren."
 
 #: app/templates/packages/create_edit.html:55
-#, fuzzy
 msgid ""
 "JavaScript is needed to improve the user interface, and is needed for "
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
-"Javascript wird benötigt, um die Benutzeroberfläche zu verbessern und "
-"wird für Funktionen benötigt\n"
+"JavaScript wird benötigt, um die Benutzeroberfläche zu verbessern und wird "
+"für Funktionen\n"
 "\t\t\twie das Auffinden von Metadaten aus Git und die automatische "
-"Vervollständigung."
+"Vervollständigung benötigt."
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/threads/view.html:78
@@ -2248,7 +2239,7 @@ msgstr "Grund"
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr ""
-"Grund für die Nichtgenehmigung/Löschung, dieser wird im Prüf-Protokoll "
+"Grund für die Nichtgenehmigung/Löschung, dies wird im Auditierungsprotokoll "
 "angezeigt"
 
 #: app/templates/packages/remove.html:34
@@ -2313,9 +2304,8 @@ msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr "Das oberste Bildschirmfoto wird als Vorschaubild für das Paket verwendet."
 
 #: app/templates/packages/screenshots.html:36
-#, fuzzy
 msgid "Awaiting approval"
-msgstr "Warte auf Genehmigung."
+msgstr "Warte auf Genehmigung"
 
 #: app/templates/packages/screenshots.html:54
 msgid "No screenshots."
@@ -2563,7 +2553,7 @@ msgstr "Ein Problem mit diesem Eintrag melden"
 
 #: app/templates/packages/view.html:483
 msgid "See audit log"
-msgstr "Siehe Überwachungsprotokoll"
+msgstr "Siehe Auditierungsprotokoll"
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
@@ -2667,23 +2657,20 @@ msgid "Approve All"
 msgstr "Alle genehmigen"
 
 #: app/templates/todo/editor.html:33
-#, fuzzy
 msgid "No screenshots need approval."
-msgstr "Keine Bildschirmfotos brauchen eine Überprüfung."
+msgstr "Keine Bildschirmfotos brauchen eine Genehmigung."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
-#, fuzzy
 msgid "No packages need approval."
-msgstr "Keine Pakete brauchen eine Überprüfung."
+msgstr "Keine Pakete brauchen eine Genehmigung."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
 msgstr "Importieren"
 
 #: app/templates/todo/editor.html:90
-#, fuzzy
 msgid "No releases need approval."
-msgstr "Keine Releases brauchen eine Überprüfung."
+msgstr "Keine Releases brauchen eine Genehmigung."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
@@ -3373,4 +3360,3 @@ msgstr ""
 #~ "Deaktiviertes Javascript kann zwar "
 #~ "funktionieren, wird aber nicht offiziell "
 #~ "unterstützt."
-
