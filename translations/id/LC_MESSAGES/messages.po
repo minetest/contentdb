@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-14 18:27+0000\n"
+"POT-Creation-Date: 2022-01-20 01:16+0000\n"
 "PO-Revision-Date: 2022-01-12 20:50+0000\n"
 "Last-Translator: Muhammad Rifqi Priyo Susanto "
 "<muhammadrifqipriyosusanto@gmail.com>\n"
@@ -212,7 +212,8 @@ msgid "You don't have permission to do that"
 msgstr "Anda tidak memiliki izin untuk melakukannya"
 
 #: app/blueprints/packages/packages.py:394
-msgid "Please comment what changes are needed in the review thread"
+#, fuzzy
+msgid "Please comment what changes are needed in the approval thread"
 msgstr "Harap tuliskan perubahan yang dibutuhkan dalam utas ulasan"
 
 #: app/blueprints/packages/packages.py:415
@@ -250,7 +251,7 @@ msgstr "Nama Pembuat"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:63 app/blueprints/packages/reviews.py:42
-#: app/blueprints/threads/__init__.py:262 app/templates/macros/reviews.html:128
+#: app/blueprints/threads/__init__.py:272 app/templates/macros/reviews.html:128
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
@@ -371,13 +372,13 @@ msgstr "Konfigurasi pembaruan yang dihapus"
 msgid "Now, please create an initial release"
 msgstr "Sekarang, silakan buat rilis awalan"
 
-#: app/blueprints/packages/reviews.py:43 app/blueprints/threads/__init__.py:174
-#: app/blueprints/threads/__init__.py:175
-#: app/blueprints/threads/__init__.py:263
+#: app/blueprints/packages/reviews.py:43 app/blueprints/threads/__init__.py:175
+#: app/blueprints/threads/__init__.py:176
+#: app/blueprints/threads/__init__.py:273
 msgid "Comment"
 msgstr "Komentar"
 
-#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:264
+#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:274
 msgid "Private"
 msgstr "Pribadi"
 
@@ -413,64 +414,65 @@ msgstr "Judul/Takarir"
 msgid "Cover Image"
 msgstr "Gambar Sampul"
 
-#: app/blueprints/threads/__init__.py:63
+#: app/blueprints/threads/__init__.py:64
 msgid "Already subscribed!"
 msgstr "Telah berlangganan!"
 
-#: app/blueprints/threads/__init__.py:65
+#: app/blueprints/threads/__init__.py:66
 msgid "Subscribed to thread"
 msgstr "Berlangganan ke utas"
 
-#: app/blueprints/threads/__init__.py:80
+#: app/blueprints/threads/__init__.py:81
 msgid "Unsubscribed!"
 msgstr "Berhenti langganan!"
 
-#: app/blueprints/threads/__init__.py:84
+#: app/blueprints/threads/__init__.py:85
 msgid "Already not subscribed!"
 msgstr "Telah berhenti langganan!"
 
-#: app/blueprints/threads/__init__.py:103
+#: app/blueprints/threads/__init__.py:104
 msgid "Locked thread"
 msgstr "Utas yang dikunci"
 
-#: app/blueprints/threads/__init__.py:106
+#: app/blueprints/threads/__init__.py:107
 msgid "Unlocked thread"
 msgstr "Utas yang tidak terkunci"
 
-#: app/blueprints/threads/__init__.py:155
+#: app/blueprints/threads/__init__.py:156
 msgid "Cannot delete thread opening post!"
 msgstr "Tidak dapat menghapus pos pembuka utas!"
 
-#: app/blueprints/threads/__init__.py:224
+#: app/blueprints/threads/__init__.py:225
 msgid "You cannot comment on this thread"
 msgstr "Anda tidak dapat berkomentar dalam utas ini"
 
-#: app/blueprints/threads/__init__.py:228
+#: app/blueprints/threads/__init__.py:229
 msgid "Please wait before commenting again"
 msgstr "Harap tunggu sebelum berkomentar lagi"
 
-#: app/blueprints/threads/__init__.py:256
+#: app/blueprints/threads/__init__.py:266
 msgid "Comment needs to be between 3 and 2000 characters."
 msgstr "Komentar harus terdiri dari 3 sampai 2.000 karakter."
 
-#: app/blueprints/threads/__init__.py:265
+#: app/blueprints/threads/__init__.py:275
 #: app/templates/macros/package_approval.html:107
 msgid "Open Thread"
 msgstr "Buka Utas"
 
-#: app/blueprints/threads/__init__.py:277
+#: app/blueprints/threads/__init__.py:287
 msgid "Unable to find that package!"
 msgstr "Tidak dapat mencari paket tersebut!"
 
-#: app/blueprints/threads/__init__.py:291
+#: app/blueprints/threads/__init__.py:301
 msgid "Unable to create thread!"
 msgstr "Tidak dapat membuat utas!"
 
-#: app/blueprints/threads/__init__.py:296
-msgid "A review thread already exists!"
+#: app/blueprints/threads/__init__.py:306
+#, fuzzy
+msgid "An approval thread already exists!"
 msgstr "Utas ulasan telah ada!"
 
-#: app/blueprints/threads/__init__.py:300
+#: app/blueprints/threads/__init__.py:310
 msgid "Please wait before opening another thread"
 msgstr "Harap tunggu sebelum membuka utas baru"
 
@@ -869,12 +871,12 @@ msgstr ""
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
 
-#: app/logic/screenshots.py:13
+#: app/logic/screenshots.py:15
 #, fuzzy
 msgid "Too many requests, please wait before trying again"
 msgstr "Harap tunggu sebelum berkomentar lagi"
 
-#: app/logic/screenshots.py:15
+#: app/logic/screenshots.py:17
 msgid "a PNG or JPG image file"
 msgstr ""
 
@@ -912,6 +914,25 @@ msgstr "Permainan"
 #: app/models/packages.py:77 app/templates/base.html:33
 msgid "Texture Packs"
 msgstr "Paket Tekstur"
+
+#: app/models/packages.py:166
+#, fuzzy
+msgid "Submit for Approval"
+msgstr "Menunggu persetujuan."
+
+#: app/models/packages.py:168
+#, fuzzy
+msgid "Approve"
+msgstr "Disetujui"
+
+#: app/models/packages.py:170 app/templates/api/create_edit_token.html:17
+#: app/templates/packages/release_edit.html:80
+#: app/templates/packages/review_create_edit.html:55
+#: app/templates/threads/delete_reply.html:19
+#: app/templates/threads/delete_thread.html:19
+#: app/templates/threads/view.html:40 app/templates/users/delete.html:34
+msgid "Delete"
+msgstr "Hapus"
 
 #: app/templates/404.html:4
 msgid "Page not found"
@@ -1189,15 +1210,6 @@ msgstr "Sunting - %(name)s"
 msgid "Create API Token"
 msgstr "Buat Token API"
 
-#: app/templates/api/create_edit_token.html:17
-#: app/templates/packages/release_edit.html:80
-#: app/templates/packages/review_create_edit.html:55
-#: app/templates/threads/delete_reply.html:19
-#: app/templates/threads/delete_thread.html:19
-#: app/templates/threads/view.html:40 app/templates/users/delete.html:34
-msgid "Delete"
-msgstr "Hapus"
-
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
 msgstr "Token API membolehkan skrip untuk bertindak mewakili Anda."
@@ -1460,12 +1472,14 @@ msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr "Harap pastikan paket ini memiliki izin untuk menggunakan nama %(names)s"
 
 #: app/templates/macros/package_approval.html:110
-msgid "Package review thread"
+#, fuzzy
+msgid "Package approval thread"
 msgstr "Utas ulasan paket"
 
 #: app/templates/macros/package_approval.html:111
+#, fuzzy
 msgid ""
-"You can open a thread if you have a question for the reviewer or package "
+"You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
 "Anda dapat membuka utas jika memiliki pertanyaan terhadap pengulas atau "
@@ -2255,9 +2269,9 @@ msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr "Tangkapan layar teratas akan dipakai sebagai thumbnail paket."
 
 #: app/templates/packages/screenshots.html:36
-#: app/templates/packages/view.html:244
-msgid "Awaiting review"
-msgstr "Menunggu tinjauan"
+#, fuzzy
+msgid "Awaiting approval"
+msgstr "Menunggu persetujuan."
 
 #: app/templates/packages/screenshots.html:54
 msgid "No screenshots."
@@ -2406,6 +2420,10 @@ msgid ""
 msgstr ""
 "Utas ini hanya tersedia kepada pemilik paket dan pengguna dengan jabatan "
 "Penyetuju ke atas."
+
+#: app/templates/packages/view.html:244
+msgid "Awaiting review"
+msgstr "Menunggu tinjauan"
 
 #: app/templates/packages/view.html:272 app/templates/threads/view.html:61
 msgid "Edit Review"
@@ -2599,11 +2617,13 @@ msgid "Approve All"
 msgstr "Setujui Semua"
 
 #: app/templates/todo/editor.html:33
-msgid "No screenshots need reviewing."
+#, fuzzy
+msgid "No screenshots need approval."
 msgstr "Tidak ada tangkapan layar yang perlu ditinjau."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
-msgid "No packages need reviewing."
+#, fuzzy
+msgid "No packages need approval."
 msgstr "Tidak ada paket yang perlu ditinjau."
 
 #: app/templates/todo/editor.html:80
@@ -2611,7 +2631,8 @@ msgid "Importing"
 msgstr "Mengimpor"
 
 #: app/templates/todo/editor.html:90
-msgid "No releases need reviewing."
+#, fuzzy
+msgid "No releases need approval."
 msgstr "Tidak ada rilis yang perlu ditinjau."
 
 #: app/templates/todo/editor.html:100

@@ -163,11 +163,11 @@ class PackageState(enum.Enum):
 
 	def verb(self):
 		if self == self.READY_FOR_REVIEW:
-			return "Submit for Review"
+			return lazy_gettext("Submit for Approval")
 		elif self == self.APPROVED:
-			return "Approve"
+			return lazy_gettext("Approve")
 		elif self == self.DELETED:
-			return "Delete"
+			return lazy_gettext("Delete")
 		else:
 			return self.value
 

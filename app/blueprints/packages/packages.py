@@ -391,7 +391,7 @@ def move_to_state(package):
 	db.session.commit()
 
 	if package.state == PackageState.CHANGES_NEEDED:
-		flash(gettext("Please comment what changes are needed in the review thread"), "warning")
+		flash(gettext("Please comment what changes are needed in the approval thread"), "warning")
 		if package.review_thread:
 			return redirect(package.review_thread.getViewURL())
 		else:

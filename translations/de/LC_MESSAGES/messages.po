@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-14 18:27+0000\n"
+"POT-Creation-Date: 2022-01-20 01:16+0000\n"
 "PO-Revision-Date: 2022-01-20 00:48+0000\n"
 "Last-Translator: Wuzzy <almikes@aol.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
-"contentdb/de/>\n"
 "Language: de\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -212,9 +211,11 @@ msgid "You don't have permission to do that"
 msgstr "Sie haben nicht die Erlaubnis, das zu tun"
 
 #: app/blueprints/packages/packages.py:394
-msgid "Please comment what changes are needed in the review thread"
+#, fuzzy
+msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
-"Bitte kommentieren Sie im Review-Thema, welche Änderungen erforderlich sind"
+"Bitte kommentieren Sie im Review-Thema, welche Änderungen erforderlich "
+"sind"
 
 #: app/blueprints/packages/packages.py:415
 #: app/blueprints/packages/packages.py:431
@@ -251,7 +252,7 @@ msgstr "Autorenname"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:63 app/blueprints/packages/reviews.py:42
-#: app/blueprints/threads/__init__.py:262 app/templates/macros/reviews.html:128
+#: app/blueprints/threads/__init__.py:272 app/templates/macros/reviews.html:128
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
@@ -374,13 +375,13 @@ msgstr "Gelöschte Update-Konfiguration"
 msgid "Now, please create an initial release"
 msgstr "Bitte erstellen Sie nun einen ersten Release"
 
-#: app/blueprints/packages/reviews.py:43 app/blueprints/threads/__init__.py:174
-#: app/blueprints/threads/__init__.py:175
-#: app/blueprints/threads/__init__.py:263
+#: app/blueprints/packages/reviews.py:43 app/blueprints/threads/__init__.py:175
+#: app/blueprints/threads/__init__.py:176
+#: app/blueprints/threads/__init__.py:273
 msgid "Comment"
 msgstr "Kommentar"
 
-#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:264
+#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:274
 msgid "Private"
 msgstr "Privat"
 
@@ -416,64 +417,65 @@ msgstr "Titel/Untertitel"
 msgid "Cover Image"
 msgstr "Titelbild"
 
-#: app/blueprints/threads/__init__.py:63
+#: app/blueprints/threads/__init__.py:64
 msgid "Already subscribed!"
 msgstr "Bereits abonniert!"
 
-#: app/blueprints/threads/__init__.py:65
+#: app/blueprints/threads/__init__.py:66
 msgid "Subscribed to thread"
 msgstr "Thema abonniert"
 
-#: app/blueprints/threads/__init__.py:80
+#: app/blueprints/threads/__init__.py:81
 msgid "Unsubscribed!"
 msgstr "Deabonniert!"
 
-#: app/blueprints/threads/__init__.py:84
+#: app/blueprints/threads/__init__.py:85
 msgid "Already not subscribed!"
 msgstr "Bereits nicht abonniert!"
 
-#: app/blueprints/threads/__init__.py:103
+#: app/blueprints/threads/__init__.py:104
 msgid "Locked thread"
 msgstr "Gesperrtes Thema"
 
-#: app/blueprints/threads/__init__.py:106
+#: app/blueprints/threads/__init__.py:107
 msgid "Unlocked thread"
 msgstr "Entsperrtes Thema"
 
-#: app/blueprints/threads/__init__.py:155
+#: app/blueprints/threads/__init__.py:156
 msgid "Cannot delete thread opening post!"
 msgstr "Beitrag zur Eröffnung des Themas kann nicht gelöscht werden!"
 
-#: app/blueprints/threads/__init__.py:224
+#: app/blueprints/threads/__init__.py:225
 msgid "You cannot comment on this thread"
 msgstr "Sie können dieses Thema nicht kommentieren"
 
-#: app/blueprints/threads/__init__.py:228
+#: app/blueprints/threads/__init__.py:229
 msgid "Please wait before commenting again"
 msgstr "Bitte warten Sie, bevor Sie erneut einen Kommentar abgeben"
 
-#: app/blueprints/threads/__init__.py:256
+#: app/blueprints/threads/__init__.py:266
 msgid "Comment needs to be between 3 and 2000 characters."
 msgstr "Der Kommentar muss zwischen 3 und 2000 Zeichen lang sein."
 
-#: app/blueprints/threads/__init__.py:265
+#: app/blueprints/threads/__init__.py:275
 #: app/templates/macros/package_approval.html:107
 msgid "Open Thread"
 msgstr "Offenes Thema"
 
-#: app/blueprints/threads/__init__.py:277
+#: app/blueprints/threads/__init__.py:287
 msgid "Unable to find that package!"
 msgstr "Nicht möglich, dieses Paket zu finden!"
 
-#: app/blueprints/threads/__init__.py:291
+#: app/blueprints/threads/__init__.py:301
 msgid "Unable to create thread!"
 msgstr "Thema kann nicht erstellt werden!"
 
-#: app/blueprints/threads/__init__.py:296
-msgid "A review thread already exists!"
+#: app/blueprints/threads/__init__.py:306
+#, fuzzy
+msgid "An approval thread already exists!"
 msgstr "Es gibt bereits ein Review-Thema!"
 
-#: app/blueprints/threads/__init__.py:300
+#: app/blueprints/threads/__init__.py:310
 msgid "Please wait before opening another thread"
 msgstr "Bitte warten Sie, bevor Sie ein neues Thema eröffnen"
 
@@ -644,8 +646,8 @@ msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
-"Ihre E-Mail-Adresse hat sich geändert. Wenn Sie dies nicht beantragt haben, "
-"wenden Sie sich bitte an einen Administrator."
+"Ihre E-Mail-Adresse hat sich geändert. Wenn Sie dies nicht beantragt "
+"haben, wenden Sie sich bitte an einen Administrator."
 
 #: app/blueprints/users/account.py:377
 msgid "You may now log in"
@@ -668,8 +670,8 @@ msgid ""
 "Invalid username - must only contain A-Za-z0-9._. Consider contacting an "
 "admin"
 msgstr ""
-"Ungültiger Benutzername – darf nur A-Za-z0-9._ enthalten. Wenden Sie sich an "
-"einen Administrator"
+"Ungültiger Benutzername – darf nur A-Za-z0-9._ enthalten. Wenden Sie sich"
+" an einen Administrator"
 
 #: app/blueprints/users/claim.py:51
 msgid "User has already been claimed"
@@ -690,8 +692,7 @@ msgstr "Fehler beim Versuch, auf die Foren zuzugreifen: %(message)s"
 
 #: app/blueprints/users/claim.py:96
 msgid "Unable to get forum signature - does the user exist?"
-msgstr ""
-"Signatur des Forums kann nicht abgerufen werden – existiert der Benutzer?"
+msgstr "Signatur des Forums kann nicht abgerufen werden – existiert der Benutzer?"
 
 #: app/blueprints/users/claim.py:111
 msgid "Unable to login as user"
@@ -854,8 +855,8 @@ msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr ""
-"Namen dürfen nur Kleinbuchstaben (a-z), Ziffern (0-9) und Unterstriche (_) "
-"enthalten"
+"Namen dürfen nur Kleinbuchstaben (a-z), Ziffern (0-9) und Unterstriche "
+"(_) enthalten"
 
 #: app/logic/packages.py:107
 msgid "You do not have permission to edit this package"
@@ -888,11 +889,11 @@ msgstr ""
 "Ungültiger Commit-Hash; es muss eine 40 Zeichen lange Hexadezimal-"
 "Zeichenkette sein"
 
-#: app/logic/screenshots.py:13
+#: app/logic/screenshots.py:15
 msgid "Too many requests, please wait before trying again"
 msgstr "Zu viele Anfragen, bitte warten Sie, bevor Sie es erneut versuchen"
 
-#: app/logic/screenshots.py:15
+#: app/logic/screenshots.py:17
 msgid "a PNG or JPG image file"
 msgstr "eine PNG- oder JPG-Bilddatei"
 
@@ -928,6 +929,25 @@ msgstr "Spiele"
 #: app/models/packages.py:77 app/templates/base.html:33
 msgid "Texture Packs"
 msgstr "Texturenpakete"
+
+#: app/models/packages.py:166
+#, fuzzy
+msgid "Submit for Approval"
+msgstr "Warte auf Genehmigung."
+
+#: app/models/packages.py:168
+#, fuzzy
+msgid "Approve"
+msgstr "Genehmigt"
+
+#: app/models/packages.py:170 app/templates/api/create_edit_token.html:17
+#: app/templates/packages/release_edit.html:80
+#: app/templates/packages/review_create_edit.html:55
+#: app/templates/threads/delete_reply.html:19
+#: app/templates/threads/delete_thread.html:19
+#: app/templates/threads/view.html:40 app/templates/users/delete.html:34
+msgid "Delete"
+msgstr "Löschen"
 
 #: app/templates/404.html:4
 msgid "Page not found"
@@ -1205,15 +1225,6 @@ msgstr "Bearbeiten – %(name)s"
 msgid "Create API Token"
 msgstr "API-Token erstellen"
 
-#: app/templates/api/create_edit_token.html:17
-#: app/templates/packages/release_edit.html:80
-#: app/templates/packages/review_create_edit.html:55
-#: app/templates/threads/delete_reply.html:19
-#: app/templates/threads/delete_thread.html:19
-#: app/templates/threads/view.html:40 app/templates/users/delete.html:34
-msgid "Delete"
-msgstr "Löschen"
-
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
 msgstr "API-Tokens ermöglichen es Skripten, in Ihrem Namen zu handeln."
@@ -1346,8 +1357,8 @@ msgstr "Falls nicht Sie das waren, können sie diese E-Mail löschen."
 #: app/templates/emails/verify.html:15
 msgid "If this was you, then please click this link to confirm the address:"
 msgstr ""
-"Falls Sie das waren, klicken Sie bitte auf den folgenden Link, um die E-Mail-"
-"Adresse zu bestätigen:"
+"Falls Sie das waren, klicken Sie bitte auf den folgenden Link, um die E"
+"-Mail-Adresse zu bestätigen:"
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
@@ -1363,24 +1374,24 @@ msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr ""
-"Sie empfangen diese E-Mail, weil jemand (hoffentlich Sie) die E-Mail-Adresse "
-"als Benutzer-E-Mail hinterlegt hat."
+"Sie empfangen diese E-Mail, weil jemand (hoffentlich Sie) die E-Mail-"
+"Adresse als Benutzer-E-Mail hinterlegt hat."
 
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
-"Es tut uns leid, Sie gehen zu sehen. Sie müssen nur noch eine Sache machen, "
-"bevor Ihre E-Mail-Addresse auf die schwarze Liste gesetzt wird."
+"Es tut uns leid, Sie gehen zu sehen. Sie müssen nur noch eine Sache "
+"machen, bevor Ihre E-Mail-Addresse auf die schwarze Liste gesetzt wird."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
 msgstr ""
-"Sie empfangen diese E-Mail, weil jemand (hoffentlich Sie) die E-Mail-Adresse "
-"im Abmelden-Formular eingegeben hat."
+"Sie empfangen diese E-Mail, weil jemand (hoffentlich Sie) die E-Mail-"
+"Adresse im Abmelden-Formular eingegeben hat."
 
 #: app/templates/macros/audit_log.html:13
 #, python-format
@@ -1420,7 +1431,8 @@ msgstr "Releases bearbeiten"
 #: app/templates/macros/package_approval.html:29
 msgid "You need to create a release before this package can be approved."
 msgstr ""
-"Bevor dieses Paket genehmigt werden kann, müssen Sie einen Release erstellen."
+"Bevor dieses Paket genehmigt werden kann, müssen Sie einen Release "
+"erstellen."
 
 #: app/templates/macros/package_approval.html:31
 msgid "A release is required before this package can be approved."
@@ -1464,14 +1476,14 @@ msgstr "Bitte warten Sie, bis das Paket genehmigt wurde."
 #: app/templates/macros/package_approval.html:65
 msgid "You can now submit this package for approval if you're ready."
 msgstr ""
-"Sie können nun dieses Paket für eine Genehmigung einreichen, wenn Sie bereit "
-"sind."
+"Sie können nun dieses Paket für eine Genehmigung einreichen, wenn Sie "
+"bereit sind."
 
 #: app/templates/macros/package_approval.html:67
 msgid "This package can be submitted for approval when ready."
 msgstr ""
-"Dieses Paket kann für eine Genehmigung eingereicht werden, wenn es bereit "
-"ist."
+"Dieses Paket kann für eine Genehmigung eingereicht werden, wenn es bereit"
+" ist."
 
 #: app/templates/macros/package_approval.html:97
 msgid "Please make sure that this package has the right to the names it uses."
@@ -1483,20 +1495,22 @@ msgstr ""
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr ""
-"Bitte stellen Sie sicher, dass dieses Paket Rechte für die Namen %(names)s "
-"hat"
+"Bitte stellen Sie sicher, dass dieses Paket Rechte für die Namen "
+"%(names)s hat"
 
 #: app/templates/macros/package_approval.html:110
-msgid "Package review thread"
+#, fuzzy
+msgid "Package approval thread"
 msgstr "Paket-Review-Thema"
 
 #: app/templates/macros/package_approval.html:111
+#, fuzzy
 msgid ""
-"You can open a thread if you have a question for the reviewer or package "
+"You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
-"Sie können ein Thema eröffnen, wenn Sie eine Frage an den Rezensenten oder "
-"Paketautoren haben."
+"Sie können ein Thema eröffnen, wenn Sie eine Frage an den Rezensenten "
+"oder Paketautoren haben."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
@@ -1686,8 +1700,7 @@ msgstr "Bereitgestellt von"
 
 #: app/templates/metapackages/view.html:17
 msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
-msgstr ""
-"Leider ist dies noch nicht auf ContentDB! Hier sind ein paar Forenthemen:"
+msgstr "Leider ist dies noch nicht auf ContentDB! Hier sind ein paar Forenthemen:"
 
 #: app/templates/metapackages/view.html:24
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:351
@@ -1762,8 +1775,8 @@ msgstr "Massenweise Aktualisierungseinstellungen setzen"
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
 msgstr ""
-"Hierbei werden die Aktualisierungseinstellungen für alle Pakete mit einem "
-"Git-Repository festgelegt."
+"Hierbei werden die Aktualisierungseinstellungen für alle Pakete mit einem"
+" Git-Repository festgelegt."
 
 #: app/templates/packages/bulk_update_conf.html:27
 #: app/templates/packages/release_new.html:50
@@ -1838,14 +1851,14 @@ msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
-"Bitte wählen Sie „In Arbeit“, wenn Ihr Paket instabil ist und nicht für alle "
-"Spieler empfohlen werden sollte"
+"Bitte wählen Sie „In Arbeit“, wenn Ihr Paket instabil ist und nicht für "
+"alle Spieler empfohlen werden sollte"
 
 #: app/templates/packages/create_edit.html:89
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr ""
-"Setzen Sie die Medienlizenz auf die gleiche Lizenz wie die normale Lizenz, "
-"sofern keine Medien vorhanden sind."
+"Setzen Sie die Medienlizenz auf die gleiche Lizenz wie die normale "
+"Lizenz, sofern keine Medien vorhanden sind."
 
 #: app/templates/packages/create_edit.html:95
 msgid "Repository and Links"
@@ -1897,16 +1910,16 @@ msgid ""
 "releases and screenshots, and read private threads."
 msgstr ""
 "Abhängig von ihrem Rang werden sie in der Lage sein, das Paket zu "
-"bearbeiten, Releases und Bildschirmfotos zu erstellen, und private Themen zu "
-"lesen."
+"bearbeiten, Releases und Bildschirmfotos zu erstellen, und private Themen"
+" zu lesen."
 
 #: app/templates/packages/edit_maintainers.html:13
 msgid ""
 "Maintainers cannot add or remove other maintainers, but can remove "
 "themselves."
 msgstr ""
-"Betreuer können keine anderen Betreuer hinzufügen oder entfernen, aber sie "
-"können sich selbst entfernen."
+"Betreuer können keine anderen Betreuer hinzufügen oder entfernen, aber "
+"sie können sich selbst entfernen."
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -1932,8 +1945,8 @@ msgstr "Massenänderungsreleases"
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
-"Verwenden Sie diese Seite, um die Min- und Max-Version aller Releases für "
-"Ihr Paket festzulegen."
+"Verwenden Sie diese Seite, um die Min- und Max-Version aller Releases für"
+" Ihr Paket festzulegen."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
@@ -1957,8 +1970,8 @@ msgid ""
 "\t\t\tfor max as this does not make sense - you can't predict the future."
 msgstr ""
 "Sie können nicht die älteste Version für min oder die neueste Version\n"
-"\t\t\tfür max wählen, da dies keinen Sinn macht – man kann die Zukunft nicht "
-"vorhersagen."
+"\t\t\tfür max wählen, da dies keinen Sinn macht – man kann die Zukunft "
+"nicht vorhersagen."
 
 #: app/templates/packages/release_bulk_change.html:38
 #: app/templates/packages/release_edit.html:61
@@ -1994,8 +2007,8 @@ msgid ""
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
 "Legen Sie die minimal und maximal unterstützten Minetest-Versionen fest.\n"
-"\t\t\tDieser Release wird für Clients, die außerhalb dieses Bereichs liegen, "
-"nicht angezeigt. "
+"\t\t\tDieser Release wird für Clients, die außerhalb dieses Bereichs "
+"liegen, nicht angezeigt. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
@@ -2024,8 +2037,8 @@ msgstr ""
 #: app/templates/packages/release_edit.html:87
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr ""
-"Sie können den neuesten Release nicht löschen, bitte erstellen Sie zuerst "
-"ein neueres."
+"Sie können den neuesten Release nicht löschen, bitte erstellen Sie zuerst"
+" ein neueres."
 
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
@@ -2043,8 +2056,8 @@ msgstr "Sie haben die Git-Update-Benachrichtigungen aktiviert."
 #: app/templates/packages/release_new.html:17
 msgid "You can enable automatic updates in the update settings."
 msgstr ""
-"Sie können automatische Aktualisierungen in den Aktualisierungseinstellungen "
-"aktivieren."
+"Sie können automatische Aktualisierungen in den "
+"Aktualisierungseinstellungen aktivieren."
 
 #: app/templates/packages/release_new.html:23
 msgid "Set up"
@@ -2069,8 +2082,8 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
-"Mit Git können Sie Releases automatisch erstellen, wenn Sie Code oder Tags "
-"pushen."
+"Mit Git können Sie Releases automatisch erstellen, wenn Sie Code oder "
+"Tags pushen."
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
@@ -2090,8 +2103,8 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
-"Werfen Sie einen Blick in das <a href='/help/package_config/'>Handbuch zur "
-"Paketkonfiguration und Releases</a> für\n"
+"Werfen Sie einen Blick in das <a href='/help/package_config/'>Handbuch "
+"zur Paketkonfiguration und Releases</a> für\n"
 "\t\t\tTipps zum Anpassen von Releases."
 
 #: app/templates/packages/release_new.html:61
@@ -2128,8 +2141,8 @@ msgid ""
 " cycle, as Minetest needs them to check for updates."
 msgstr ""
 "Sie müssen Releases erstellen, auch wenn Sie einen Rolling-Release-"
-"Entwicklungszyklus verwenden, da Minetest diese benötigt, um nach Updates zu "
-"suchen."
+"Entwicklungszyklus verwenden, da Minetest diese benötigt, um nach Updates"
+" zu suchen."
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
@@ -2269,9 +2282,9 @@ msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
 msgstr ""
-"Dadurch wird die Rezension in ein Thema umgewandelt, wobei die Kommentare "
-"erhalten bleiben, aber ihre Wirkung auf die Bewertung des Pakets aufgehoben "
-"wird."
+"Dadurch wird die Rezension in ein Thema umgewandelt, wobei die Kommentare"
+" erhalten bleiben, aber ihre Wirkung auf die Bewertung des Pakets "
+"aufgehoben wird."
 
 #: app/templates/packages/review_votes.html:4
 #: app/templates/packages/view.html:287
@@ -2299,13 +2312,12 @@ msgstr "Bild hinzufügen"
 
 #: app/templates/packages/screenshots.html:17
 msgid "Topmost screenshot will be used as the package thumbnail."
-msgstr ""
-"Das oberste Bildschirmfoto wird als Vorschaubild für das Paket verwendet."
+msgstr "Das oberste Bildschirmfoto wird als Vorschaubild für das Paket verwendet."
 
 #: app/templates/packages/screenshots.html:36
-#: app/templates/packages/view.html:244
-msgid "Awaiting review"
-msgstr "Review steht noch aus"
+#, fuzzy
+msgid "Awaiting approval"
+msgstr "Warte auf Genehmigung."
 
 #: app/templates/packages/screenshots.html:54
 msgid "No screenshots."
@@ -2365,17 +2377,17 @@ msgstr ""
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
 msgstr ""
-"Sie sollten die Verwendung von Webhooks oder der API für schnellere Releases "
-"in Betracht ziehen."
+"Sie sollten die Verwendung von Webhooks oder der API für schnellere "
+"Releases in Betracht ziehen."
 
 #: app/templates/packages/update_config.html:18
 msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
 msgstr ""
-"Die Git-Update-Erkennung ist klug genug, um einen Release nicht erneut zu "
-"erstellen, wenn Sie diese bereits manuell oder über Webhooks bzw. die API "
-"erstellt haben."
+"Die Git-Update-Erkennung ist klug genug, um einen Release nicht erneut zu"
+" erstellen, wenn Sie diese bereits manuell oder über Webhooks bzw. die "
+"API erstellt haben."
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
@@ -2457,8 +2469,12 @@ msgid ""
 "This thread is only visible to the package owner and users of Approver "
 "rank or above."
 msgstr ""
-"Dieses Thema ist nur für den Paketeigentümer und Benutzer mit dem Rang eines "
-"Genehmigers oder höher sichtbar."
+"Dieses Thema ist nur für den Paketeigentümer und Benutzer mit dem Rang "
+"eines Genehmigers oder höher sichtbar."
+
+#: app/templates/packages/view.html:244
+msgid "Awaiting review"
+msgstr "Review steht noch aus"
 
 #: app/templates/packages/view.html:272 app/templates/threads/view.html:61
 msgid "Edit Review"
@@ -2637,8 +2653,8 @@ msgid ""
 "This thread is only visible to its creator, the package owner, and users "
 "of Approver rank or above."
 msgstr ""
-"Dieses Thema ist nur für seinen Ersteller, den Paketbesitzer und Benutzer "
-"mit dem Rang „Genehmiger“ oder höher sichtbar."
+"Dieses Thema ist nur für seinen Ersteller, den Paketbesitzer und Benutzer"
+" mit dem Rang „Genehmiger“ oder höher sichtbar."
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
@@ -2653,11 +2669,13 @@ msgid "Approve All"
 msgstr "Alle genehmigen"
 
 #: app/templates/todo/editor.html:33
-msgid "No screenshots need reviewing."
+#, fuzzy
+msgid "No screenshots need approval."
 msgstr "Keine Bildschirmfotos brauchen eine Überprüfung."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
-msgid "No packages need reviewing."
+#, fuzzy
+msgid "No packages need approval."
 msgstr "Keine Pakete brauchen eine Überprüfung."
 
 #: app/templates/todo/editor.html:80
@@ -2665,7 +2683,8 @@ msgid "Importing"
 msgstr "Importieren"
 
 #: app/templates/todo/editor.html:90
-msgid "No releases need reviewing."
+#, fuzzy
+msgid "No releases need approval."
 msgstr "Keine Releases brauchen eine Überprüfung."
 
 #: app/templates/todo/editor.html:100
@@ -2801,8 +2820,8 @@ msgid ""
 "Consider changing the update settings to create releases automatically "
 "instead."
 msgstr ""
-"Erwägen Sie, die Aktualisierungseinstellungen so zu ändern, dass stattdessen "
-"automatisch Releases erstellt werden."
+"Erwägen Sie, die Aktualisierungseinstellungen so zu ändern, dass "
+"stattdessen automatisch Releases erstellt werden."
 
 #: app/templates/todo/user.html:61
 msgid ""
@@ -2810,17 +2829,17 @@ msgid ""
 "releases when New Commits or New Tags are pushed to Git by clicking "
 "'Update Settings'."
 msgstr ""
-"Anstatt Pakete als veraltet zu markieren, können Sie automatisch Releases "
-"erstellen lassen, wenn neue Commits oder neue Tags mit Git gepusht werden, "
-"indem Sie auf „Einstellungen aktualisieren“ klicken."
+"Anstatt Pakete als veraltet zu markieren, können Sie automatisch Releases"
+" erstellen lassen, wenn neue Commits oder neue Tags mit Git gepusht "
+"werden, indem Sie auf „Einstellungen aktualisieren“ klicken."
 
 #: app/templates/todo/user.html:63
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
-"Um ein Paket von unten zu entfernen, erstellen Sie ein neues Releases oder "
-"ändern Sie die Aktualisierungseinstellungen."
+"Um ein Paket von unten zu entfernen, erstellen Sie ein neues Releases "
+"oder ändern Sie die Aktualisierungseinstellungen."
 
 #: app/templates/todo/user.html:72
 msgid "See All"
@@ -2941,9 +2960,9 @@ msgid ""
 "Your email is needed to recover your account if you forget your password "
 "and to send (configurable) notifications. "
 msgstr ""
-"Ihre E-Mail-Adresse wird benötigt, um Ihr Konto wiederherzustellen, wenn Sie "
-"Ihr Passwort vergessen haben, und um (konfigurierbare) Benachrichtigungen zu "
-"senden. "
+"Ihre E-Mail-Adresse wird benötigt, um Ihr Konto wiederherzustellen, wenn "
+"Sie Ihr Passwort vergessen haben, und um (konfigurierbare) "
+"Benachrichtigungen zu senden. "
 
 #: app/templates/users/change_set_password.html:29
 #: app/templates/users/register.html:25
@@ -3007,8 +3026,8 @@ msgid ""
 "You'll need to use prove that you have access to your forum account using"
 " one of the options below."
 msgstr ""
-"Sie müssen nachweisen, dass Sie Zugang zu Ihrem Forenkonto haben, indem Sie "
-"eine der folgenden Optionen verwenden."
+"Sie müssen nachweisen, dass Sie Zugang zu Ihrem Forenkonto haben, indem "
+"Sie eine der folgenden Optionen verwenden."
 
 #: app/templates/users/claim_forums.html:14
 msgid "This is so ContentDB can link your account to your forum account."
@@ -3052,8 +3071,8 @@ msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Loggen Sie sich auf dem Forum ein und <a href='https://forum.minetest.net/"
-"ucp.php?i=173'>tun Sie das hier</a>."
+"Loggen Sie sich auf dem Forum ein und <a "
+"href='https://forum.minetest.net/ucp.php?i=173'>tun Sie das hier</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -3100,8 +3119,8 @@ msgid ""
 "This will delete your account, removing %(threads)d threads and "
 "%(replies)d replies."
 msgstr ""
-"Dies wird Ihr Konto löschen, %(threads)d Themen und %(replies)d Antworten "
-"entfernen."
+"Dies wird Ihr Konto löschen, %(threads)d Themen und %(replies)d Antworten"
+" entfernen."
 
 #: app/templates/users/delete.html:22
 msgid ""
@@ -3117,8 +3136,8 @@ msgid ""
 "Instead, your account will be deactivated and all personal information "
 "wiped - including %(threads)d threads and %(replies)d replies."
 msgstr ""
-"Stattdessen wird Ihr Konto deaktiviert und alle persönlichen Daten werden "
-"gelöscht – einschließlich %(threads)d Themen und %(replies)d Antworten."
+"Stattdessen wird Ihr Konto deaktiviert und alle persönlichen Daten werden"
+" gelöscht – einschließlich %(threads)d Themen und %(replies)d Antworten."
 
 #: app/templates/users/delete.html:25
 msgid "See the privacy policy for more information."
@@ -3239,8 +3258,8 @@ msgstr "Profil-Informationen"
 #: app/templates/users/profile_edit.html:52
 msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr ""
-"Sich als ein anderer Benutzer auszugeben, ist ein Grund für eine permanente "
-"Sperre"
+"Sich als ein anderer Benutzer auszugeben, ist ein Grund für eine "
+"permanente Sperre"
 
 #: app/templates/users/register.html:17
 msgid ""
@@ -3350,3 +3369,4 @@ msgstr ""
 
 #~ msgid "Unable to add protected tag {tag.title} to package"
 #~ msgstr ""
+

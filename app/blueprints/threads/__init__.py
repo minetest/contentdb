@@ -303,7 +303,7 @@ def new():
 
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
-		flash(gettext("A review thread already exists!"), "danger")
+		flash(gettext("An approval thread already exists!"), "danger")
 		return redirect(package.review_thread.getViewURL())
 
 	elif not current_user.canOpenThreadRL():

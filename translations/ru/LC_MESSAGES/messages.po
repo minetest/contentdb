@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-14 18:27+0000\n"
+"POT-Creation-Date: 2022-01-20 01:16+0000\n"
 "PO-Revision-Date: 2022-01-10 15:53+0000\n"
 "Last-Translator: Mikitko <rudzik8@protonmail.com>\n"
 "Language: ru\n"
@@ -214,7 +214,8 @@ msgid "You don't have permission to do that"
 msgstr "У вас нету разрешения это делать"
 
 #: app/blueprints/packages/packages.py:394
-msgid "Please comment what changes are needed in the review thread"
+#, fuzzy
+msgid "Please comment what changes are needed in the approval thread"
 msgstr "Пожалуйста, отметьте какие изменения требуются в review треде"
 
 #: app/blueprints/packages/packages.py:415
@@ -252,7 +253,7 @@ msgstr "Имя автора"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:63 app/blueprints/packages/reviews.py:42
-#: app/blueprints/threads/__init__.py:262 app/templates/macros/reviews.html:128
+#: app/blueprints/threads/__init__.py:272 app/templates/macros/reviews.html:128
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
@@ -375,13 +376,13 @@ msgstr "Удалить обновлённую конфигурацию"
 msgid "Now, please create an initial release"
 msgstr "Теперь, создайте первый релиз"
 
-#: app/blueprints/packages/reviews.py:43 app/blueprints/threads/__init__.py:174
-#: app/blueprints/threads/__init__.py:175
-#: app/blueprints/threads/__init__.py:263
+#: app/blueprints/packages/reviews.py:43 app/blueprints/threads/__init__.py:175
+#: app/blueprints/threads/__init__.py:176
+#: app/blueprints/threads/__init__.py:273
 msgid "Comment"
 msgstr "Комментарий"
 
-#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:264
+#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:274
 msgid "Private"
 msgstr "Приватный"
 
@@ -417,64 +418,65 @@ msgstr "Название/подпись"
 msgid "Cover Image"
 msgstr "Изображение для обложки"
 
-#: app/blueprints/threads/__init__.py:63
+#: app/blueprints/threads/__init__.py:64
 msgid "Already subscribed!"
 msgstr "Уже подписано!"
 
-#: app/blueprints/threads/__init__.py:65
+#: app/blueprints/threads/__init__.py:66
 msgid "Subscribed to thread"
 msgstr "Подписано на тред"
 
-#: app/blueprints/threads/__init__.py:80
+#: app/blueprints/threads/__init__.py:81
 msgid "Unsubscribed!"
 msgstr "Подписка отменена!"
 
-#: app/blueprints/threads/__init__.py:84
+#: app/blueprints/threads/__init__.py:85
 msgid "Already not subscribed!"
 msgstr "Уже не подписано!"
 
-#: app/blueprints/threads/__init__.py:103
+#: app/blueprints/threads/__init__.py:104
 msgid "Locked thread"
 msgstr "Закрытый тред"
 
-#: app/blueprints/threads/__init__.py:106
+#: app/blueprints/threads/__init__.py:107
 msgid "Unlocked thread"
 msgstr "Открытый тред"
 
-#: app/blueprints/threads/__init__.py:155
+#: app/blueprints/threads/__init__.py:156
 msgid "Cannot delete thread opening post!"
 msgstr "Не могу удалить пост, начинающий тред!"
 
-#: app/blueprints/threads/__init__.py:224
+#: app/blueprints/threads/__init__.py:225
 msgid "You cannot comment on this thread"
 msgstr "Вы не можете оставлять комментарии в этом треде"
 
-#: app/blueprints/threads/__init__.py:228
+#: app/blueprints/threads/__init__.py:229
 msgid "Please wait before commenting again"
 msgstr "Пожалуйста, подождите прежде чем снова комментировать"
 
-#: app/blueprints/threads/__init__.py:256
+#: app/blueprints/threads/__init__.py:266
 msgid "Comment needs to be between 3 and 2000 characters."
 msgstr "Комментарий должен быть размером от 3 до 2000 символов."
 
-#: app/blueprints/threads/__init__.py:265
+#: app/blueprints/threads/__init__.py:275
 #: app/templates/macros/package_approval.html:107
 msgid "Open Thread"
 msgstr "Открыть тред"
 
-#: app/blueprints/threads/__init__.py:277
+#: app/blueprints/threads/__init__.py:287
 msgid "Unable to find that package!"
 msgstr "Не получилось найти это дополнение!"
 
-#: app/blueprints/threads/__init__.py:291
+#: app/blueprints/threads/__init__.py:301
 msgid "Unable to create thread!"
 msgstr "Не получилось создать тред!"
 
-#: app/blueprints/threads/__init__.py:296
-msgid "A review thread already exists!"
+#: app/blueprints/threads/__init__.py:306
+#, fuzzy
+msgid "An approval thread already exists!"
 msgstr "Review тред уже существует!"
 
-#: app/blueprints/threads/__init__.py:300
+#: app/blueprints/threads/__init__.py:310
 msgid "Please wait before opening another thread"
 msgstr "Пожалуйста, подождите прежде чем открывать ещё один тред"
 
@@ -875,12 +877,12 @@ msgstr ""
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
 
-#: app/logic/screenshots.py:13
+#: app/logic/screenshots.py:15
 #, fuzzy
 msgid "Too many requests, please wait before trying again"
 msgstr "Пожалуйста, подождите прежде чем снова комментировать"
 
-#: app/logic/screenshots.py:15
+#: app/logic/screenshots.py:17
 msgid "a PNG or JPG image file"
 msgstr ""
 
@@ -918,6 +920,24 @@ msgstr "Игры"
 #: app/models/packages.py:77 app/templates/base.html:33
 msgid "Texture Packs"
 msgstr "Текстур паки"
+
+#: app/models/packages.py:166
+msgid "Submit for Approval"
+msgstr ""
+
+#: app/models/packages.py:168
+#, fuzzy
+msgid "Approve"
+msgstr "Проверен"
+
+#: app/models/packages.py:170 app/templates/api/create_edit_token.html:17
+#: app/templates/packages/release_edit.html:80
+#: app/templates/packages/review_create_edit.html:55
+#: app/templates/threads/delete_reply.html:19
+#: app/templates/threads/delete_thread.html:19
+#: app/templates/threads/view.html:40 app/templates/users/delete.html:34
+msgid "Delete"
+msgstr ""
 
 #: app/templates/404.html:4
 msgid "Page not found"
@@ -1195,15 +1215,6 @@ msgstr ""
 msgid "Create API Token"
 msgstr ""
 
-#: app/templates/api/create_edit_token.html:17
-#: app/templates/packages/release_edit.html:80
-#: app/templates/packages/review_create_edit.html:55
-#: app/templates/threads/delete_reply.html:19
-#: app/templates/threads/delete_thread.html:19
-#: app/templates/threads/view.html:40 app/templates/users/delete.html:34
-msgid "Delete"
-msgstr ""
-
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
 msgstr ""
@@ -1446,12 +1457,12 @@ msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr ""
 
 #: app/templates/macros/package_approval.html:110
-msgid "Package review thread"
+msgid "Package approval thread"
 msgstr ""
 
 #: app/templates/macros/package_approval.html:111
 msgid ""
-"You can open a thread if you have a question for the reviewer or package "
+"You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
 
@@ -2178,8 +2189,7 @@ msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr ""
 
 #: app/templates/packages/screenshots.html:36
-#: app/templates/packages/view.html:244
-msgid "Awaiting review"
+msgid "Awaiting approval"
 msgstr ""
 
 #: app/templates/packages/screenshots.html:54
@@ -2320,6 +2330,10 @@ msgstr ""
 msgid ""
 "This thread is only visible to the package owner and users of Approver "
 "rank or above."
+msgstr ""
+
+#: app/templates/packages/view.html:244
+msgid "Awaiting review"
 msgstr ""
 
 #: app/templates/packages/view.html:272 app/templates/threads/view.html:61
@@ -2507,11 +2521,11 @@ msgid "Approve All"
 msgstr ""
 
 #: app/templates/todo/editor.html:33
-msgid "No screenshots need reviewing."
+msgid "No screenshots need approval."
 msgstr ""
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
-msgid "No packages need reviewing."
+msgid "No packages need approval."
 msgstr ""
 
 #: app/templates/todo/editor.html:80
@@ -2519,7 +2533,7 @@ msgid "Importing"
 msgstr ""
 
 #: app/templates/todo/editor.html:90
-msgid "No releases need reviewing."
+msgid "No releases need approval."
 msgstr ""
 
 #: app/templates/todo/editor.html:100
@@ -3154,5 +3168,23 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Unable to add protected tag {tag.title} to package"
+#~ msgstr ""
+
+#~ msgid "Package review thread"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "You can open a thread if you "
+#~ "have a question for the reviewer "
+#~ "or package author."
+#~ msgstr ""
+
+#~ msgid "No screenshots need reviewing."
+#~ msgstr ""
+
+#~ msgid "No packages need reviewing."
+#~ msgstr ""
+
+#~ msgid "No releases need reviewing."
 #~ msgstr ""
 

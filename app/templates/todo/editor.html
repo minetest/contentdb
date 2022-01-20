@@ -30,7 +30,7 @@
 						</div>
 					</a></li>
 				{% else %}
-					<li><i>{{ _("No screenshots need reviewing.") }}</i></li>
+					<li><i>{{ _("No screenshots need approval.") }}</i></li>
 				{% endfor %}
 				{% for i in range(4) %}
 					<li class="packagetile flex-fill"></li>
@@ -62,7 +62,7 @@
 							{{ p.title }} by {{ p.author.display_name }}
 						</a>
 					{% else %}
-						<li class="list-group-item"><i>{{ _("No packages need reviewing.") }}</i></li>
+						<li class="list-group-item"><i>{{ _("No packages need approval.") }}</i></li>
 					{% endfor %}
 				</div>
 			</div>
@@ -87,7 +87,7 @@
 							</a>
 						</li>
 					{% else %}
-						<li class="list-group-item"><i>{{ _("No releases need reviewing.") }}</i></li>
+						<li class="list-group-item"><i>{{ _("No releases need approval.") }}</i></li>
 					{% endfor %}
 				</ul>
 			</div>
@@ -180,7 +180,7 @@
 						{{ p.title }} by {{ p.author.display_name }}
 					</a>
 				{% else %}
-					<li class="list-group-item"><i>{{ _("No packages need reviewing.") }}</i></li>
+					<li class="list-group-item"><i>{{ _("No packages need approval.") }}</i></li>
 				{% endfor %}
 			</div>
 		</div>
