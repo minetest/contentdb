@@ -140,7 +140,7 @@ def handle_register(form):
 		send_anon_email.delay(form.email.data, gettext("Email already in use"),
 			gettext("We were unable to create the account as the email is already in use by %(display_name)s. Try a different email address.",
 					display_name=user_by_email.display_name))
-		return redirect(url_for("flatpage", path="email_sent"))
+		return redirect(url_for("users.email_sent"))
 	elif EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
 		flash(gettext("That email address has been unsubscribed/blacklisted, and cannot be used"), "danger")
 		return
@@ -165,7 +165,7 @@ def handle_register(form):
 
 	send_verify_email.delay(form.email.data, token)
 
-	return redirect(url_for("flatpage", path="email_sent"))
+	return redirect(url_for("users.email_sent"))
 
 
 @bp.route("/user/register/", methods=["GET", "POST"])
@@ -224,7 +224,7 @@ def forgot_password():
 					</p>
 			""")
 
-		return redirect(url_for("flatpage", path="email_sent"))
+		return redirect(url_for("users.email_sent"))
 
 	return render_template("users/forgot_password.html", form=form)
 
@@ -280,7 +280,7 @@ def handle_set_password(form):
 				send_verify_email.delay(form.email.data, token)
 
 			flash(gettext("Your password has been changed successfully."), "success")
-			return redirect(url_for("flatpage", path="email_sent"))
+			return redirect(url_for("users.email_sent"))
 
 	db.session.commit()
 	flash(gettext("Your password has been changed successfully."), "success")
@@ -398,7 +398,7 @@ def unsubscribe_verify():
 		db.session.commit()
 		send_unsubscribe_verify.delay(form.email.data)
 
-		return redirect(url_for("flatpage", path="email_sent"))
+		return redirect(url_for("users.email_sent"))
 
 	return render_template("users/unsubscribe.html", form=form)
 
@@ -428,3 +428,8 @@ def unsubscribe():
 			return unsubscribe_manage(sub)
 
 	return unsubscribe_verify()
+
+
+@bp.route("/email_sent/")
+def email_sent():
+	return render_template("users/email_sent.html")
