@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-20 01:28+0000\n"
-"PO-Revision-Date: 2022-01-19 07:54+0000\n"
+"PO-Revision-Date: 2022-01-20 21:45+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
+"ms/>\n"
 "Language: ms\n"
-"Language-Team: Malay "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -58,17 +59,14 @@ msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "Pengesahan kuasa gagal [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
-#, fuzzy
 msgid "Linked GitHub to account"
 msgstr "Github dipautkan ke akaun"
 
 #: app/blueprints/github/__init__.py:65
-#, fuzzy
 msgid "GitHub account is already associated with another user"
 msgstr "Akaun Github sudah dikaitkan dengan pengguna lain"
 
 #: app/blueprints/github/__init__.py:71
-#, fuzzy
 msgid "Unable to find an account for that GitHub user"
 msgstr "Tidak mampu cari akaun untuk pengguna Github tersebut"
 
@@ -125,8 +123,8 @@ msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr ""
-"Amaran: Topik forum tidak dijumpai. Ini mungkin berlaku sekiranya topik "
-"tersebut baru saja dicipta."
+"Amaran: Topik forum tidak dijumpai. Ini mungkin berlaku jika topik tersebut "
+"baru saja dicipta."
 
 #: app/blueprints/packages/packages.py:215
 msgid "No download available."
@@ -215,11 +213,10 @@ msgid "You don't have permission to do that"
 msgstr "Anda tiada kebenaran untuk berbuat sedemikian"
 
 #: app/blueprints/packages/packages.py:394
-#, fuzzy
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
 "Sila tulis komen mengenai perubahan apa yang diperlukan dalam bebenang "
-"ulasan"
+"kelulusan"
 
 #: app/blueprints/packages/packages.py:415
 #: app/blueprints/packages/packages.py:431
@@ -473,9 +470,8 @@ msgid "Unable to create thread!"
 msgstr "Tidak mampu cipta bebenang!"
 
 #: app/blueprints/threads/__init__.py:306
-#, fuzzy
 msgid "An approval thread already exists!"
-msgstr "Bebenang ulasan sudah wujud!"
+msgstr "Bebenang kelulusan sudah wujud!"
 
 #: app/blueprints/threads/__init__.py:310
 msgid "Please wait before opening another thread"
@@ -930,14 +926,12 @@ msgid "Texture Packs"
 msgstr "Pek Tekstur"
 
 #: app/models/packages.py:166
-#, fuzzy
 msgid "Submit for Approval"
-msgstr "Menunggu kelulusan."
+msgstr "Hantar untuk Proses Kelulusan"
 
 #: app/models/packages.py:168
-#, fuzzy
 msgid "Approve"
-msgstr "Diluluskan"
+msgstr "Luluskan"
 
 #: app/models/packages.py:170 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:80
@@ -1463,7 +1457,7 @@ msgstr "Sila tunggu terbitan tersebut diluluskan dahulu."
 
 #: app/templates/macros/package_approval.html:59
 msgid "You can now approve this package if you're ready."
-msgstr "Anda boleh luluskan pakej ini sekarang sekiranya anda telah bersedia."
+msgstr "Anda boleh luluskan pakej ini sekarang jika anda telah bersedia."
 
 #: app/templates/macros/package_approval.html:61
 msgid "Please wait for the package to be approved."
@@ -1471,11 +1465,12 @@ msgstr "Sila tunggu pakej tersebut diluluskan dahulu."
 
 #: app/templates/macros/package_approval.html:65
 msgid "You can now submit this package for approval if you're ready."
-msgstr "Anda boleh hantar pakej ini untuk kelulusan sekiranya anda telah bersedia."
+msgstr ""
+"Anda boleh hantar pakej ini untuk proses kelulusan jika anda telah bersedia."
 
 #: app/templates/macros/package_approval.html:67
 msgid "This package can be submitted for approval when ready."
-msgstr "Pakej ini boleh dihantar untuk kelulusan apabila telah bersedia."
+msgstr "Pakej ini boleh dihantar untuk proses kelulusan apabila telah bersedia."
 
 #: app/templates/macros/package_approval.html:97
 msgid "Please make sure that this package has the right to the names it uses."
@@ -1487,18 +1482,16 @@ msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr "Sila pastikan pakej ini mempunyai hak ke atas nama %(names)s"
 
 #: app/templates/macros/package_approval.html:110
-#, fuzzy
 msgid "Package approval thread"
-msgstr "Bebenang ulasan pakej"
+msgstr "Bebenang kelulusan pakej"
 
 #: app/templates/macros/package_approval.html:111
-#, fuzzy
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
-"Anda boleh buka bebenang sekiranya anda mempunyai soalan untuk pengulas "
-"atau pencipta pakej."
+"Anda boleh buka bebenang jika anda ada soalan untuk pelulus atau pencipta "
+"pakej."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
@@ -1807,13 +1800,12 @@ msgstr ""
 "maklumat ini secara automatiknya."
 
 #: app/templates/packages/create_edit.html:55
-#, fuzzy
 msgid ""
 "JavaScript is needed to improve the user interface, and is needed for "
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
-"Javascript diperlukan untuk menambah baik antara muka pengguna, dan "
+"JavaScript diperlukan untuk menambah baik antara muka pengguna, dan "
 "diperlukan\n"
 "\t\t\tuntuk sifat seperti mencari metadata dari git, dan autopelengkapan."
 
@@ -1831,12 +1823,12 @@ msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
-"Sila pilih 'Kerja Dalam Proses' sekiranya pakej anda tidak stabil, dan "
-"tidak patut disyorkan kepada semua pemain"
+"Sila pilih 'Kerja Dalam Proses' jika pakej anda tidak stabil, dan tidak "
+"patut disyorkan kepada semua pemain"
 
 #: app/templates/packages/create_edit.html:88
 msgid "If there is no media, set the Media License to the same as the License."
-msgstr "Sekiranya tiada media, tetapkan Lesen Media menjadi sama dengan Lesen."
+msgstr "Jika tiada media, tetapkan Lesen Media menjadi sama dengan Lesen."
 
 #: app/templates/packages/create_edit.html:94
 msgid "Repository and Links"
@@ -2284,9 +2276,8 @@ msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr "Tangkap layar paling atas akan digunakan sebagai imej kenit pakej."
 
 #: app/templates/packages/screenshots.html:36
-#, fuzzy
 msgid "Awaiting approval"
-msgstr "Menunggu kelulusan."
+msgstr "Menunggu kelulusan"
 
 #: app/templates/packages/screenshots.html:54
 msgid "No screenshots."
@@ -2338,8 +2329,8 @@ msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
 msgstr ""
-"ContentDB akan tinjau repositori Git anda setiap hari, sekiranya pakej "
-"anda diluluskan."
+"ContentDB akan tinjau repositori Git anda setiap hari, jika pakej anda "
+"diluluskan."
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
@@ -2574,8 +2565,8 @@ msgid ""
 "If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
 "you can let us know here."
 msgstr ""
-"Sekiranya pakej ini tidak patut ada di CDB (cth: jika ia langsung tidak "
-"berfungsi), anda boleh beritahu kami di sini."
+"Jika pakej ini tidak patut ada di CDB (cth: jika ia langsung tidak berfungsi)"
+", anda boleh beritahu kami di sini."
 
 #: app/templates/threads/new.html:40
 msgid ""
@@ -2634,23 +2625,20 @@ msgid "Approve All"
 msgstr "Luluskan Semua"
 
 #: app/templates/todo/editor.html:33
-#, fuzzy
 msgid "No screenshots need approval."
-msgstr "Tiada tangkap layar yang perlu diperiksa."
+msgstr "Tiada tangkap layar yang perlukan kelulusan."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
-#, fuzzy
 msgid "No packages need approval."
-msgstr "Tiada pakej yang perlu diperiksa."
+msgstr "Tiada pakej yang perlukan kelulusan."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
 msgstr "Mengimport"
 
 #: app/templates/todo/editor.html:90
-#, fuzzy
 msgid "No releases need approval."
-msgstr "Tiada terbitan yang perlu diperiksa."
+msgstr "Tiada terbitan yang perlukan kelulusan."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
@@ -2925,8 +2913,8 @@ msgid ""
 "Your email is needed to recover your account if you forget your password "
 "and to send (configurable) notifications. "
 msgstr ""
-"E-mel anda diperlukan untuk memulihkan akaun anda sekiranya anda terlupa "
-"kata laluan dan untuk menghantar pemberitahuan (boleh diubah). "
+"E-mel anda diperlukan untuk memulihkan akaun anda jika anda terlupa kata "
+"laluan dan untuk menghantar pemberitahuan (boleh diubah). "
 
 #: app/templates/users/change_set_password.html:29
 #: app/templates/users/register.html:25
@@ -3263,8 +3251,8 @@ msgid ""
 "Your email is needed to recover your account if you forget your password,"
 " and to send (configurable) notifications."
 msgstr ""
-"E-mel anda diperlukan untuk memulihkan akaun anda sekiranya anda terlupa "
-"kata laluan, dan untuk menghantar pemberitahuan (boleh diubah)."
+"E-mel anda diperlukan untuk memulihkan akaun anda jika anda terlupa kata "
+"laluan, dan untuk menghantar pemberitahuan (boleh diubah)."
 
 #: app/templates/users/settings_email.html:25
 msgid "There is at least one verification pending."
@@ -3364,4 +3352,3 @@ msgstr ""
 #~ "Walaupun boleh berfungsi dengan Javascript "
 #~ "dilumpuhkan, ia tidak disokong secara "
 #~ "rasmi."
-
