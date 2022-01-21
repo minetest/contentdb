@@ -33,6 +33,9 @@ from . import bp, get_package_tabs
 @bp.route("/packages/<author>/<name>/releases/", methods=["GET", "POST"])
 @is_package_page
 def list_releases(package):
+	if not package.checkPerm(current_user, Permission.SEE_PACKAGE):
+		abort(404)
+
 	return render_template("packages/releases_list.html",
 			package=package,
 			tabs=get_package_tabs(current_user, package), current_tab="releases")
@@ -107,6 +110,9 @@ def create_release(package):
 @bp.route("/packages/<author>/<name>/releases/<id>/download/")
 @is_package_page
 def download_release(package, id):
+	if not package.checkPerm(current_user, Permission.SEE_PACKAGE):
+		abort(404)
+
 	release = PackageRelease.query.get(id)
 	if release is None or release.package != package:
 		abort(404)

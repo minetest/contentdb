@@ -59,6 +59,7 @@ class UserRank(enum.Enum):
 
 
 class Permission(enum.Enum):
+	SEE_PACKAGE        = "SEE_PACKAGE"
 	EDIT_PACKAGE       = "EDIT_PACKAGE"
 	DELETE_PACKAGE     = "DELETE_PACKAGE"
 	CHANGE_AUTHOR      = "CHANGE_AUTHOR"
