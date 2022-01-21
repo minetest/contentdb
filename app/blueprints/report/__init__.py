@@ -19,14 +19,13 @@ from flask_babel import lazy_gettext
 from flask_login import current_user
 from flask_wtf import FlaskForm
 from werkzeug.utils import redirect
-from wtforms import TextAreaField, SubmitField, BooleanField
-from wtforms.fields.html5 import URLField
-from wtforms.validators import InputRequired, Optional, Length
+from wtforms import TextAreaField, SubmitField
+from wtforms.validators import InputRequired, Length
 
 from app.models import User, UserRank
 from app.tasks.emails import send_user_email
 from app.tasks.webhooktasks import post_discord_webhook
-from app.utils import isYes, isNo, abs_url
+from app.utils import isNo, abs_url_samesite
 
 bp = Blueprint("report", __name__)
 
@@ -42,7 +41,7 @@ def report():
 
 	url = request.args.get("url")
 	if url:
-		url = abs_url(url)
+		url = abs_url_samesite(url)
 
 	form = ReportForm(formdata=request.form)
 	if form.validate_on_submit():

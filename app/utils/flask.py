@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from urllib.parse import urljoin, urlparse
+from urllib.parse import urljoin, urlparse, urlunparse
 
 import user_agents
 from flask import request, abort
@@ -39,6 +39,10 @@ def abs_url_for(endpoint: str, **kwargs):
 
 def abs_url(path):
 	return urljoin(app.config["BASE_URL"], path)
+
+def abs_url_samesite(path):
+	base = urlparse(app.config["BASE_URL"])
+	return urlunparse(base._replace(path=path))
 
 def url_current(abs=False):
 	args = MultiDict(request.args)
