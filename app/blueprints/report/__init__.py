@@ -26,13 +26,12 @@ from wtforms.validators import InputRequired, Optional, Length
 from app.models import User, UserRank
 from app.tasks.emails import send_user_email
 from app.tasks.webhooktasks import post_discord_webhook
-from app.utils import isYes, isNo
+from app.utils import isYes, isNo, abs_url
 
 bp = Blueprint("report", __name__)
 
 
 class ReportForm(FlaskForm):
-	url = URLField(lazy_gettext("URL"), [Optional()])
 	message = TextAreaField(lazy_gettext("Message"), [InputRequired(), Length(10, 10000)])
 	submit = SubmitField(lazy_gettext("Report"))
 
@@ -41,26 +40,25 @@ class ReportForm(FlaskForm):
 def report():
 	is_anon = not current_user.is_authenticated or not isNo(request.args.get("anon"))
 
-	form = ReportForm(formdata=request.form)
-	if request.method == "GET":
-		if "url" in request.args:
-			form.url.data = request.args["url"]
+	url = request.args.get("url")
+	if url:
+		url = abs_url(url)
 
+	form = ReportForm(formdata=request.form)
 	if form.validate_on_submit():
 		if current_user.is_authenticated:
 			user_info = f"{current_user.username}"
 		else:
 			user_info = request.headers.get("X-Forwarded-For") or request.remote_addr
 
-		url = request.args.get("url") or form.url.data or "?"
 		text = f"{url}\n\n{form.message.data}"
 
 		task = None
 		for admin in User.query.filter_by(rank=UserRank.ADMIN).all():
 			task = send_user_email.delay(admin.email, f"User report from {user_info}", text)
 
-		post_discord_webhook.delay(None if is_anon else current_user.username, f"**New Report**\n`{url}`\n\n{form.message.data}", True)
+		post_discord_webhook.delay(None if is_anon else current_user.username, f"**New Report**\n{url}\n\n{form.message.data}", True)
 
 		return redirect(url_for("tasks.check", id=task.id, r=url_for("homepage.home")))
 
-	return render_template("report/index.html", form=form, url=request.args.get("url"), is_anon=is_anon)
+	return render_template("report/index.html", form=form, url=url, is_anon=is_anon)
