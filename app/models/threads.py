@@ -137,7 +137,7 @@ class ThreadReply(db.Model):
 			raise Exception("Unknown permission given to ThreadReply.checkPerm()")
 
 		if perm == Permission.EDIT_REPLY:
-			return user == self.author and user.rank.atLeast(UserRank.MEMBER) and not self.thread.locked
+			return user.rank.atLeast(UserRank.MEMBER if user == self.author else UserRank.MODERATOR) and not self.thread.locked
 
 		elif perm == Permission.DELETE_REPLY:
 			return user.rank.atLeast(UserRank.MODERATOR) and self.thread.replies[0] != self
