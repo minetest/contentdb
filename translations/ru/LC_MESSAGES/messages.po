@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-20 01:28+0000\n"
+"POT-Creation-Date: 2022-01-21 01:24+0000\n"
 "PO-Revision-Date: 2022-01-10 15:53+0000\n"
 "Last-Translator: Mikitko <rudzik8@protonmail.com>\n"
 "Language: ru\n"
@@ -162,7 +162,7 @@ msgid "Maintenance State"
 msgstr "Статус Разработки"
 
 #: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
-#: app/templates/admin/tags/list.html:10
+#: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "Теги"
 
@@ -289,7 +289,7 @@ msgstr "Минимальная версия Minetest"
 msgid "Maximum Minetest Version"
 msgstr "Максимальная версия Minetest"
 
-#: app/blueprints/packages/releases.py:64
+#: app/blueprints/packages/releases.py:64 app/blueprints/report/__init__.py:35
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
 msgstr "URL"
@@ -420,6 +420,17 @@ msgstr "Название/подпись"
 #: app/templates/packages/screenshots.html:71
 msgid "Cover Image"
 msgstr "Изображение для обложки"
+
+#: app/blueprints/report/__init__.py:36
+msgid "Message"
+msgstr ""
+
+#: app/blueprints/report/__init__.py:37 app/templates/base.html:238
+#: app/templates/macros/threads.html:53 app/templates/packages/view.html:478
+#: app/templates/report/index.html:4 app/templates/report/index.html:10
+#: app/templates/users/profile.html:28
+msgid "Report"
+msgstr ""
 
 #: app/blueprints/threads/__init__.py:64
 msgid "Already subscribed!"
@@ -974,11 +985,12 @@ msgstr "Треды"
 msgid "Search %(type)s"
 msgstr "Искать %(type)s"
 
-#: app/templates/base.html:48
+#: app/templates/base.html:48 app/templates/todo/tags.html:11
+#: app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "Искать все дополнения"
 
-#: app/templates/base.html:50
+#: app/templates/base.html:50 app/templates/todo/tags.html:15
 msgid "Search"
 msgstr "Поиск"
 
@@ -1046,19 +1058,15 @@ msgstr ""
 msgid "Privacy Policy"
 msgstr ""
 
-#: app/templates/base.html:237
-msgid "Report / DMCA"
-msgstr ""
-
-#: app/templates/base.html:238
+#: app/templates/base.html:240
 msgid "Stats / Monitoring"
 msgstr ""
 
-#: app/templates/base.html:239
+#: app/templates/base.html:241
 msgid "User List"
 msgstr ""
 
-#: app/templates/base.html:240
+#: app/templates/base.html:242
 msgid "Source Code"
 msgstr ""
 
@@ -1079,7 +1087,7 @@ msgstr ""
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:127 app/templates/packages/view.html:265
-#: app/templates/users/profile.html:193
+#: app/templates/users/profile.html:198
 msgid "Reviews"
 msgstr ""
 
@@ -1187,7 +1195,7 @@ msgstr ""
 #: app/templates/admin/warnings/list.html:28
 #: app/templates/metapackages/list.html:16 app/templates/packages/list.html:4
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
-#: app/templates/users/profile.html:178
+#: app/templates/users/profile.html:183
 msgid "Packages"
 msgstr ""
 
@@ -1554,31 +1562,31 @@ msgstr ""
 msgid "Maintainer"
 msgstr ""
 
-#: app/templates/macros/threads.html:79
+#: app/templates/macros/threads.html:86
 msgid "This thread has been locked by a moderator."
 msgstr ""
 
-#: app/templates/macros/threads.html:98
+#: app/templates/macros/threads.html:105
 msgid "Please wait before commenting again."
 msgstr ""
 
-#: app/templates/macros/threads.html:104
+#: app/templates/macros/threads.html:111
 msgid "This thread has been locked."
 msgstr ""
 
-#: app/templates/macros/threads.html:106
+#: app/templates/macros/threads.html:113
 msgid "You don't have permission to post."
 msgstr ""
 
-#: app/templates/macros/threads.html:132 app/templates/macros/threads.html:212
+#: app/templates/macros/threads.html:139 app/templates/macros/threads.html:219
 msgid "No threads found"
 msgstr ""
 
-#: app/templates/macros/threads.html:140
+#: app/templates/macros/threads.html:147
 msgid "Thread"
 msgstr ""
 
-#: app/templates/macros/threads.html:144
+#: app/templates/macros/threads.html:151
 msgid "Last Reply"
 msgstr ""
 
@@ -1777,7 +1785,7 @@ msgid ""
 msgstr ""
 
 #: app/templates/packages/create_edit.html:66
-#: app/templates/threads/view.html:78
+#: app/templates/threads/view.html:78 app/templates/todo/tags.html:38
 msgid "Package"
 msgstr ""
 
@@ -2286,7 +2294,7 @@ msgstr ""
 msgid "Downloads"
 msgstr ""
 
-#: app/templates/packages/view.html:138 app/templates/users/profile.html:73
+#: app/templates/packages/view.html:138 app/templates/users/profile.html:78
 msgid "Website"
 msgstr ""
 
@@ -2294,7 +2302,7 @@ msgstr ""
 msgid "Source"
 msgstr ""
 
-#: app/templates/packages/view.html:150 app/templates/users/profile.html:55
+#: app/templates/packages/view.html:150 app/templates/users/profile.html:60
 msgid "Forums"
 msgstr ""
 
@@ -2416,12 +2424,24 @@ msgstr ""
 msgid "More"
 msgstr ""
 
-#: app/templates/packages/view.html:478
-msgid "Report a problem with this listing"
+#: app/templates/packages/view.html:486
+msgid "See audit log"
 msgstr ""
 
-#: app/templates/packages/view.html:483
-msgid "See audit log"
+#: app/templates/report/index.html:19
+msgid "URL to the thing you're reporting"
+msgstr ""
+
+#: app/templates/report/index.html:21
+msgid "What are you reporting? Why are you reporting it?"
+msgstr ""
+
+#: app/templates/report/index.html:25
+msgid "Reports will be shared with ContentDB stuff."
+msgstr ""
+
+#: app/templates/report/index.html:27
+msgid "Only the admin will be able to see who made the report."
 msgstr ""
 
 #: app/templates/tasks/view.html:5
@@ -2580,6 +2600,19 @@ msgstr ""
 msgid "Sort by score"
 msgstr ""
 
+#: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
+msgid "Package Tags"
+msgstr ""
+
+#: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
+msgid "Missing tags only"
+msgstr ""
+
+#: app/templates/todo/tags.html:31
+#, fuzzy
+msgid "Edit Tags"
+msgstr "Изменить Детали"
+
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
 msgid "%(username)s's to do list"
@@ -2587,10 +2620,6 @@ msgstr ""
 
 #: app/templates/todo/todo_base.html:23
 msgid "All Outdated Packages"
-msgstr ""
-
-#: app/templates/todo/todo_base.html:29
-msgid "Package Tags"
 msgstr ""
 
 #: app/templates/todo/todo_base.html:35
@@ -2967,6 +2996,27 @@ msgstr ""
 msgid "Delete Anyway"
 msgstr ""
 
+#: app/templates/users/email_sent.html:4
+#, fuzzy
+msgid "Check Your Email"
+msgstr "Username или email"
+
+#: app/templates/users/email_sent.html:11
+msgid "We've sent an email to the address you specified."
+msgstr ""
+
+#: app/templates/users/email_sent.html:12
+msgid "You'll need to click the link in the email to confirm it."
+msgstr ""
+
+#: app/templates/users/email_sent.html:16
+msgid "The link will expire in 12 hours"
+msgstr ""
+
+#: app/templates/users/email_sent.html:22
+msgid "My email never arrived"
+msgstr ""
+
 #: app/templates/users/forgot_password.html:4
 msgid "Request Password Reset"
 msgstr ""
@@ -2993,7 +3043,7 @@ msgstr ""
 msgid "Forgot my password"
 msgstr ""
 
-#: app/templates/users/login.html:30 app/templates/users/profile.html:64
+#: app/templates/users/login.html:30 app/templates/users/profile.html:69
 msgid "GitHub"
 msgstr ""
 
@@ -3005,52 +3055,52 @@ msgstr ""
 msgid "To Do List"
 msgstr ""
 
-#: app/templates/users/profile.html:29
+#: app/templates/users/profile.html:34
 msgid "Send Email"
 msgstr ""
 
-#: app/templates/users/profile.html:82
+#: app/templates/users/profile.html:87
 msgid "Donate"
 msgstr ""
 
-#: app/templates/users/profile.html:91
+#: app/templates/users/profile.html:96
 msgid "packages"
 msgstr ""
 
-#: app/templates/users/profile.html:100
+#: app/templates/users/profile.html:105
 msgid "reviews"
 msgstr ""
 
-#: app/templates/users/profile.html:108
+#: app/templates/users/profile.html:113
 msgid "comments"
 msgstr ""
 
-#: app/templates/users/profile.html:120
+#: app/templates/users/profile.html:125
 msgid "Claim"
 msgstr ""
 
-#: app/templates/users/profile.html:122
+#: app/templates/users/profile.html:127
 msgid "Is this you? Claim your account now!"
 msgstr ""
 
-#: app/templates/users/profile.html:155
+#: app/templates/users/profile.html:160
 #, python-format
 msgid "%(value)d / %(target)d"
 msgstr ""
 
-#: app/templates/users/profile.html:169
+#: app/templates/users/profile.html:174
 msgid "Create package"
 msgstr ""
 
-#: app/templates/users/profile.html:175
+#: app/templates/users/profile.html:180
 msgid "View list of tags"
 msgstr ""
 
-#: app/templates/users/profile.html:185
+#: app/templates/users/profile.html:190
 msgid "Maintained Packages"
 msgstr ""
 
-#: app/templates/users/profile.html:187
+#: app/templates/users/profile.html:192
 msgid "This user is also a maintainer of the following packages"
 msgstr ""
 
@@ -3195,5 +3245,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Whilst disabled Javascript may work, it is not officially supported."
+#~ msgstr ""
+
+#~ msgid "Report / DMCA"
+#~ msgstr ""
+
+#~ msgid "Report a problem with this listing"
 #~ msgstr ""
 

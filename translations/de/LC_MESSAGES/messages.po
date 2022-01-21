@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-20 01:28+0000\n"
+"POT-Creation-Date: 2022-01-21 01:24+0000\n"
 "PO-Revision-Date: 2022-01-20 21:45+0000\n"
 "Last-Translator: Wuzzy <almikes@aol.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
-"contentdb/de/>\n"
 "Language: de\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -157,7 +156,7 @@ msgid "Maintenance State"
 msgstr "Entwicklungsstadium"
 
 #: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
-#: app/templates/admin/tags/list.html:10
+#: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "Tags"
 
@@ -214,8 +213,8 @@ msgstr "Sie haben nicht die Erlaubnis, das zu tun"
 #: app/blueprints/packages/packages.py:394
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
-"Bitte kommentieren Sie im Genehmigungsthema, welche Änderungen erforderlich "
-"sind"
+"Bitte kommentieren Sie im Genehmigungsthema, welche Änderungen "
+"erforderlich sind"
 
 #: app/blueprints/packages/packages.py:415
 #: app/blueprints/packages/packages.py:431
@@ -285,7 +284,7 @@ msgstr "Minimale Minetest-Version"
 msgid "Maximum Minetest Version"
 msgstr "Maximale Minetest-Version"
 
-#: app/blueprints/packages/releases.py:64
+#: app/blueprints/packages/releases.py:64 app/blueprints/report/__init__.py:35
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
 msgstr "URL"
@@ -416,6 +415,18 @@ msgstr "Titel/Untertitel"
 #: app/templates/packages/screenshots.html:71
 msgid "Cover Image"
 msgstr "Titelbild"
+
+#: app/blueprints/report/__init__.py:36
+msgid "Message"
+msgstr ""
+
+#: app/blueprints/report/__init__.py:37 app/templates/base.html:238
+#: app/templates/macros/threads.html:53 app/templates/packages/view.html:478
+#: app/templates/report/index.html:4 app/templates/report/index.html:10
+#: app/templates/users/profile.html:28
+#, fuzzy
+msgid "Report"
+msgstr "Speicherort"
 
 #: app/blueprints/threads/__init__.py:64
 msgid "Already subscribed!"
@@ -978,11 +989,12 @@ msgstr "Themen"
 msgid "Search %(type)s"
 msgstr "Suche %(type)s"
 
-#: app/templates/base.html:48
+#: app/templates/base.html:48 app/templates/todo/tags.html:11
+#: app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "Alle Pakete durchsuchen"
 
-#: app/templates/base.html:50
+#: app/templates/base.html:50 app/templates/todo/tags.html:15
 msgid "Search"
 msgstr "Suchen"
 
@@ -1050,19 +1062,15 @@ msgstr "API"
 msgid "Privacy Policy"
 msgstr "Datenschutzbestimmungen"
 
-#: app/templates/base.html:237
-msgid "Report / DMCA"
-msgstr "Melden / DMCA"
-
-#: app/templates/base.html:238
+#: app/templates/base.html:240
 msgid "Stats / Monitoring"
 msgstr "Statistiken / Überwachung"
 
-#: app/templates/base.html:239
+#: app/templates/base.html:241
 msgid "User List"
 msgstr "Benutzerliste"
 
-#: app/templates/base.html:240
+#: app/templates/base.html:242
 msgid "Source Code"
 msgstr "Quellcode"
 
@@ -1083,7 +1091,7 @@ msgstr "<strong>%(title)s</strong> von %(author)s"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:127 app/templates/packages/view.html:265
-#: app/templates/users/profile.html:193
+#: app/templates/users/profile.html:198
 msgid "Reviews"
 msgstr "Rezensionen"
 
@@ -1191,7 +1199,7 @@ msgstr "Aufrufe"
 #: app/templates/admin/warnings/list.html:28
 #: app/templates/metapackages/list.html:16 app/templates/packages/list.html:4
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
-#: app/templates/users/profile.html:178
+#: app/templates/users/profile.html:183
 msgid "Packages"
 msgstr "Pakete"
 
@@ -1504,8 +1512,8 @@ msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
-"Sie können ein Thema eröffnen, falls Sie eine Frage an den Genehmiger oder "
-"Paketautoren haben."
+"Sie können ein Thema eröffnen, falls Sie eine Frage an den Genehmiger "
+"oder Paketautoren haben."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
@@ -1592,31 +1600,31 @@ msgstr "Rezension abgeben"
 msgid "Maintainer"
 msgstr "Betreuer"
 
-#: app/templates/macros/threads.html:79
+#: app/templates/macros/threads.html:86
 msgid "This thread has been locked by a moderator."
 msgstr "Dieses Thema wurde von einem Moderator gesperrt."
 
-#: app/templates/macros/threads.html:98
+#: app/templates/macros/threads.html:105
 msgid "Please wait before commenting again."
 msgstr "Bitte warten Sie, bevor Sie erneut kommentieren."
 
-#: app/templates/macros/threads.html:104
+#: app/templates/macros/threads.html:111
 msgid "This thread has been locked."
 msgstr "Dieses Thema wurde gesperrt."
 
-#: app/templates/macros/threads.html:106
+#: app/templates/macros/threads.html:113
 msgid "You don't have permission to post."
 msgstr "Sie haben keine Berechtigung zum Schreiben."
 
-#: app/templates/macros/threads.html:132 app/templates/macros/threads.html:212
+#: app/templates/macros/threads.html:139 app/templates/macros/threads.html:219
 msgid "No threads found"
 msgstr "Keine Themen gefunden"
 
-#: app/templates/macros/threads.html:140
+#: app/templates/macros/threads.html:147
 msgid "Thread"
 msgstr "Thema"
 
-#: app/templates/macros/threads.html:144
+#: app/templates/macros/threads.html:151
 msgid "Last Reply"
 msgstr "Letzte Antwort"
 
@@ -1821,13 +1829,13 @@ msgid ""
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
-"JavaScript wird benötigt, um die Benutzeroberfläche zu verbessern und wird "
-"für Funktionen\n"
+"JavaScript wird benötigt, um die Benutzeroberfläche zu verbessern und "
+"wird für Funktionen\n"
 "\t\t\twie das Auffinden von Metadaten aus Git und die automatische "
 "Vervollständigung benötigt."
 
 #: app/templates/packages/create_edit.html:66
-#: app/templates/threads/view.html:78
+#: app/templates/threads/view.html:78 app/templates/todo/tags.html:38
 msgid "Package"
 msgstr "Paket"
 
@@ -2239,8 +2247,8 @@ msgstr "Grund"
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr ""
-"Grund für die Nichtgenehmigung/Löschung, dies wird im Auditierungsprotokoll "
-"angezeigt"
+"Grund für die Nichtgenehmigung/Löschung, dies wird im "
+"Auditierungsprotokoll angezeigt"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
@@ -2413,7 +2421,7 @@ msgstr "In Arbeit"
 msgid "Downloads"
 msgstr "Heruntergeladen"
 
-#: app/templates/packages/view.html:138 app/templates/users/profile.html:73
+#: app/templates/packages/view.html:138 app/templates/users/profile.html:78
 msgid "Website"
 msgstr "Webseite"
 
@@ -2421,7 +2429,7 @@ msgstr "Webseite"
 msgid "Source"
 msgstr "Quelle"
 
-#: app/templates/packages/view.html:150 app/templates/users/profile.html:55
+#: app/templates/packages/view.html:150 app/templates/users/profile.html:60
 msgid "Forums"
 msgstr "Forum"
 
@@ -2547,13 +2555,25 @@ msgstr "Stellt bereit"
 msgid "More"
 msgstr "Mehr"
 
-#: app/templates/packages/view.html:478
-msgid "Report a problem with this listing"
-msgstr "Ein Problem mit diesem Eintrag melden"
-
-#: app/templates/packages/view.html:483
+#: app/templates/packages/view.html:486
 msgid "See audit log"
 msgstr "Siehe Auditierungsprotokoll"
+
+#: app/templates/report/index.html:19
+msgid "URL to the thing you're reporting"
+msgstr ""
+
+#: app/templates/report/index.html:21
+msgid "What are you reporting? Why are you reporting it?"
+msgstr ""
+
+#: app/templates/report/index.html:25
+msgid "Reports will be shared with ContentDB stuff."
+msgstr ""
+
+#: app/templates/report/index.html:27
+msgid "Only the admin will be able to see who made the report."
+msgstr ""
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
@@ -2719,6 +2739,19 @@ msgstr "Nach Datum sortieren"
 msgid "Sort by score"
 msgstr "Nach Punktzahl sortieren"
 
+#: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
+msgid "Package Tags"
+msgstr "Paket-Tags"
+
+#: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
+msgid "Missing tags only"
+msgstr ""
+
+#: app/templates/todo/tags.html:31
+#, fuzzy
+msgid "Edit Tags"
+msgstr "Angaben verändern"
+
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
 msgid "%(username)s's to do list"
@@ -2727,10 +2760,6 @@ msgstr "To-Do-Liste von %(username)s"
 #: app/templates/todo/todo_base.html:23
 msgid "All Outdated Packages"
 msgstr "Alle veralteten Pakete"
-
-#: app/templates/todo/todo_base.html:29
-msgid "Package Tags"
-msgstr "Paket-Tags"
 
 #: app/templates/todo/todo_base.html:35
 msgid "Forum Topics"
@@ -3136,6 +3165,27 @@ msgstr "Deaktivieren"
 msgid "Delete Anyway"
 msgstr "Trotzdem löschen"
 
+#: app/templates/users/email_sent.html:4
+#, fuzzy
+msgid "Check Your Email"
+msgstr "Benutzername oder E-Mail"
+
+#: app/templates/users/email_sent.html:11
+msgid "We've sent an email to the address you specified."
+msgstr ""
+
+#: app/templates/users/email_sent.html:12
+msgid "You'll need to click the link in the email to confirm it."
+msgstr ""
+
+#: app/templates/users/email_sent.html:16
+msgid "The link will expire in 12 hours"
+msgstr ""
+
+#: app/templates/users/email_sent.html:22
+msgid "My email never arrived"
+msgstr ""
+
 #: app/templates/users/forgot_password.html:4
 msgid "Request Password Reset"
 msgstr "Zurücksetzen des Passworts anfordern"
@@ -3162,7 +3212,7 @@ msgstr "Rang: %(rank)s."
 msgid "Forgot my password"
 msgstr "Ich habe mein Passwort vergessen"
 
-#: app/templates/users/login.html:30 app/templates/users/profile.html:64
+#: app/templates/users/login.html:30 app/templates/users/profile.html:69
 msgid "GitHub"
 msgstr "GitHub"
 
@@ -3174,52 +3224,52 @@ msgstr "Profilbild"
 msgid "To Do List"
 msgstr "To-Do-Liste"
 
-#: app/templates/users/profile.html:29
+#: app/templates/users/profile.html:34
 msgid "Send Email"
 msgstr "E-Mail senden"
 
-#: app/templates/users/profile.html:82
+#: app/templates/users/profile.html:87
 msgid "Donate"
 msgstr "Spenden"
 
-#: app/templates/users/profile.html:91
+#: app/templates/users/profile.html:96
 msgid "packages"
 msgstr "Pakete"
 
-#: app/templates/users/profile.html:100
+#: app/templates/users/profile.html:105
 msgid "reviews"
 msgstr "Rezensionen"
 
-#: app/templates/users/profile.html:108
+#: app/templates/users/profile.html:113
 msgid "comments"
 msgstr "Kommentare"
 
-#: app/templates/users/profile.html:120
+#: app/templates/users/profile.html:125
 msgid "Claim"
 msgstr "Beanspruchen"
 
-#: app/templates/users/profile.html:122
+#: app/templates/users/profile.html:127
 msgid "Is this you? Claim your account now!"
 msgstr "Sind Sie das? Beanspruchen Sie jetzt Ihr Konto!"
 
-#: app/templates/users/profile.html:155
+#: app/templates/users/profile.html:160
 #, python-format
 msgid "%(value)d / %(target)d"
 msgstr "%(value)d / %(target)d"
 
-#: app/templates/users/profile.html:169
+#: app/templates/users/profile.html:174
 msgid "Create package"
 msgstr "Paket erstellen"
 
-#: app/templates/users/profile.html:175
+#: app/templates/users/profile.html:180
 msgid "View list of tags"
 msgstr "Liste von Tags ansehen"
 
-#: app/templates/users/profile.html:185
+#: app/templates/users/profile.html:190
 msgid "Maintained Packages"
 msgstr "Betreute Pakete"
 
-#: app/templates/users/profile.html:187
+#: app/templates/users/profile.html:192
 msgid "This user is also a maintainer of the following packages"
 msgstr "Dieser Benutzer ist auch ein Betreuer der folgenden Pakete"
 
@@ -3360,3 +3410,10 @@ msgstr ""
 #~ "Deaktiviertes Javascript kann zwar "
 #~ "funktionieren, wird aber nicht offiziell "
 #~ "unterstützt."
+
+#~ msgid "Report / DMCA"
+#~ msgstr "Melden / DMCA"
+
+#~ msgid "Report a problem with this listing"
+#~ msgstr "Ein Problem mit diesem Eintrag melden"
+
