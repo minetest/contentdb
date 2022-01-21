@@ -1,0 +1,66 @@
+{% extends "users/settings_base.html" %}
+
+{% block title %}
+	{{ _("Moderator Tools") }}
+{% endblock %}
+
+{% block pane %}
+<h2 class="mt-0">{{ _("Moderator Tools") }}</h2>
+
+<h3>
+	{{ _("Edit Account") }}
+</h3>
+
+{% from "macros/forms.html" import render_field, render_field_prefix, render_submit_field %}
+<form action="" method="POST" class="form" role="form">
+	{{ form.hidden_tag() }}
+
+	{% if user.checkPerm(current_user, "CHANGE_USERNAMES") %}
+		{{ render_field(form.username, tabindex=230) }}
+		{{ render_field(form.display_name, tabindex=230) }}
+		{{ render_field(form.forums_username, tabindex=230) }}
+		{{ render_field_prefix(form.github_username, tabindex=230) }}
+	{% endif %}
+
+	{% if user.checkPerm(current_user, "CHANGE_RANK") %}
+		{{ render_field(form.rank, tabindex=250) }}
+	{% endif %}
+
+	<p>
+		{{ render_submit_field(form.submit, tabindex=280) }}
+	</p>
+</form>
+
+
+<h3>{{ _("Password") }}</h3>
+{% if user.password %}
+	<p>{{ _("Has password") }}</p>
+{% else %}
+	<p class="text-danger">{{ _("Doesn't have password") }}</p>
+{% endif %}
+
+{% if not user.rank.atLeast(current_user.rank) %}
+	<h3>{{ _("Ban") }}</h3>
+	{% if user.rank.name == "BANNED" %}
+		<p>
+			Banned.
+		</p>
+	{% else %}
+		<form method="POST" action="{{ url_for('users.modtools_ban', username=user.username) }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input type="submit" value="{{ _('Ban') }}" class="btn btn-danger" />
+		</form>
+	{% endif %}
+
+	<h3>{{ _("Change Email and Send Password Reset") }}</h3>
+	<form method="POST" action="{{ url_for('users.modtools_set_email', username=user.username) }}">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		<div class="form-group">
+			<label for="email">{{ _("Email Address") }}</label>
+			<input type="email" class="form-control" name="email" id="email" value="{{ user.email or '' }}" />
+		</div>
+		<input type="submit" value="{{ _('Save') }}" class="btn btn-primary" />
+	</form>
+{% endif %}
+
+{% endblock %}

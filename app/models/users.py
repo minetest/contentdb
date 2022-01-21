@@ -216,10 +216,12 @@ class User(db.Model, UserMixin):
 		# Members can edit their own packages, and editors can edit any packages
 		if perm == Permission.CHANGE_AUTHOR:
 			return user.rank.atLeast(UserRank.EDITOR)
-		elif perm == Permission.CHANGE_RANK or perm == Permission.CHANGE_USERNAMES:
+		elif perm == Permission.CHANGE_USERNAMES:
 			return user.rank.atLeast(UserRank.MODERATOR)
+		elif perm == Permission.CHANGE_RANK:
+			return user.rank.atLeast(UserRank.MODERATOR) and not self.rank.atLeast(user.rank)
 		elif perm == Permission.CHANGE_EMAIL or perm == Permission.CHANGE_PROFILE_URLS:
-			return user == self or user.rank.atLeast(UserRank.ADMIN)
+			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and not self.rank.atLeast(user.rank))
 		elif perm == Permission.CHANGE_DISPLAY_NAME:
 			return user.rank.atLeast(UserRank.MEMBER if user == self else UserRank.MODERATOR)
 		elif perm == Permission.CREATE_TOKEN:

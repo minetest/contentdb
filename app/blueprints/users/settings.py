@@ -13,7 +13,7 @@ from . import bp
 
 
 def get_setting_tabs(user):
-	return [
+	ret = [
 		{
 			"id": "edit_profile",
 			"title": gettext("Edit Profile"),
@@ -35,6 +35,15 @@ def get_setting_tabs(user):
 			"url": url_for("api.list_tokens", username=user.username)
 		},
 	]
+
+	if current_user.rank.atLeast(UserRank.MODERATOR):
+		ret.append({
+			"id": "modtools",
+			"title": gettext("Moderator Tools"),
+			"url": url_for("users.modtools", username=user.username)
+		})
+
+	return ret
 
 
 class UserProfileForm(FlaskForm):
@@ -194,65 +203,14 @@ def email_notifications(username=None):
 			tabs=get_setting_tabs(user), current_tab="notifications")
 
 
-class UserAccountForm(FlaskForm):
-	username = StringField(lazy_gettext("Username"), [Optional(), Length(1, 50)])
-	display_name = StringField(lazy_gettext("Display name"), [Optional(), Length(2, 100)])
-	forums_username = StringField(lazy_gettext("Forums Username"), [Optional(), Length(2, 50)])
-	github_username = StringField(lazy_gettext("GitHub Username"), [Optional(), Length(2, 50)])
-	rank = SelectField(lazy_gettext("Rank"), [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce,
-			default=UserRank.NEW_MEMBER)
-	submit = SubmitField(lazy_gettext("Save"))
-
-
-@bp.route("/users/<username>/settings/account/", methods=["GET", "POST"])
+@bp.route("/users/<username>/settings/account/")
 @login_required
 def account(username):
 	user : User = User.query.filter_by(username=username).first()
 	if not user:
 		abort(404)
 
-	if not user.can_see_edit_profile(current_user):
-		flash(gettext("Permission denied"), "danger")
-		return redirect(url_for("users.profile", username=username))
-
-	can_edit_account_settings = user.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
-			user.checkPerm(current_user, Permission.CHANGE_RANK)
-	form = UserAccountForm(obj=user) if can_edit_account_settings else None
-	if form and form.validate_on_submit():
-		severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
-		addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
-				url_for("users.profile", username=username))
-
-		# Copy form fields to user_profile fields
-		if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
-			if user.username != form.username.data:
-				for package in user.packages:
-					alias = PackageAlias(user.username, package.name)
-					package.aliases.append(alias)
-					db.session.add(alias)
-
-				user.username = form.username.data
-
-			user.display_name = form.display_name.data
-			user.forums_username = nonEmptyOrNone(form.forums_username.data)
-			user.github_username = nonEmptyOrNone(form.github_username.data)
-
-		if user.checkPerm(current_user, Permission.CHANGE_RANK):
-			newRank = form["rank"].data
-			if current_user.rank.atLeast(newRank):
-				if newRank != user.rank:
-					user.rank = form["rank"].data
-					msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
-					addAuditLog(AuditSeverity.MODERATION, current_user, msg,
-							url_for("users.profile", username=username))
-			else:
-				flash(gettext("Can't promote a user to a rank higher than yourself!"), "danger")
-
-		db.session.commit()
-
-		return redirect(url_for("users.account", username=username))
-
-	return render_template("users/account.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="account")
+	return render_template("users/account.html", user=user, tabs=get_setting_tabs(user), current_tab="account")
 
 
 @bp.route("/users/<username>/delete/", methods=["GET", "POST"])
@@ -299,3 +257,112 @@ def delete(username):
 		logout_user()
 
 	return redirect(url_for("homepage.home"))
+
+
+class ModToolsForm(FlaskForm):
+	username = StringField(lazy_gettext("Username"), [Optional(), Length(1, 50)])
+	display_name = StringField(lazy_gettext("Display name"), [Optional(), Length(2, 100)])
+	forums_username = StringField(lazy_gettext("Forums Username"), [Optional(), Length(2, 50)])
+	github_username = StringField(lazy_gettext("GitHub Username"), [Optional(), Length(2, 50)])
+	rank = SelectField(lazy_gettext("Rank"), [Optional()], choices=UserRank.choices(), coerce=UserRank.coerce,
+			default=UserRank.NEW_MEMBER)
+	submit = SubmitField(lazy_gettext("Save"))
+
+
+@bp.route("/users/<username>/modtools/", methods=["GET", "POST"])
+@rank_required(UserRank.MODERATOR)
+def modtools(username):
+	user: User = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	if not user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+		abort(403)
+
+	form = ModToolsForm(obj=user)
+	if form.validate_on_submit():
+		severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
+		addAuditLog(severity, current_user, "Edited {}'s account".format(user.display_name),
+				url_for("users.profile", username=username))
+
+		# Copy form fields to user_profile fields
+		if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
+			if user.username != form.username.data:
+				for package in user.packages:
+					alias = PackageAlias(user.username, package.name)
+					package.aliases.append(alias)
+					db.session.add(alias)
+
+				user.username = form.username.data
+
+			user.display_name = form.display_name.data
+			user.forums_username = nonEmptyOrNone(form.forums_username.data)
+			user.github_username = nonEmptyOrNone(form.github_username.data)
+
+		if user.checkPerm(current_user, Permission.CHANGE_RANK):
+			newRank = form["rank"].data
+			if current_user.rank.atLeast(newRank):
+				if newRank != user.rank:
+					user.rank = form["rank"].data
+					msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
+					addAuditLog(AuditSeverity.MODERATION, current_user, msg,
+								url_for("users.profile", username=username))
+			else:
+				flash(gettext("Can't promote a user to a rank higher than yourself!"), "danger")
+
+		db.session.commit()
+
+		return redirect(url_for("users.modtools", username=username))
+
+	return render_template("users/modtools.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="modtools")
+
+
+@bp.route("/users/<username>/modtools/set-email/", methods=["POST"])
+@rank_required(UserRank.MODERATOR)
+def modtools_set_email(username):
+	user: User = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	if not user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+		abort(403)
+
+	user.email = request.form["email"]
+	user.is_active = False
+
+	token = randomString(32)
+	addAuditLog(AuditSeverity.MODERATION, current_user, f"Set email and sent a password reset on {user.username}",
+			url_for("users.profile", username=user.username), None)
+
+	ver = UserEmailVerification()
+	ver.user = user
+	ver.token = token
+	ver.email = user.email
+	ver.is_password_reset = True
+	db.session.add(ver)
+	db.session.commit()
+
+	send_verify_email.delay(user.email, token)
+
+	flash(f"Set email and sent a password reset on {user.username}", "success")
+	return redirect(url_for("users.modtools", username=username))
+
+
+@bp.route("/users/<username>/modtools/ban/", methods=["POST"])
+@rank_required(UserRank.MODERATOR)
+def modtools_ban(username):
+	user: User = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	if not user.checkPerm(current_user, Permission.CHANGE_RANK):
+		abort(403)
+
+	user.rank = UserRank.BANNED
+
+	addAuditLog(AuditSeverity.MODERATION, current_user, f"Banned {user.username}",
+			url_for("users.profile", username=user.username), None)
+	db.session.commit()
+
+	flash(f"Banned {user.username}", "success")
+	return redirect(url_for("users.modtools", username=username))

@@ -28,11 +28,19 @@
 			{{ _("Report") }}
 		</a>
 
-		{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) and user.email %}
-			<a class="btn btn-secondary float-right mr-3" href="{{ url_for('admin.send_single_email', username=user.username) }}">
-				<i class="fas fa-envelope mr-1"></i>
-				{{ _("Send Email") }}
-			</a>
+		{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+			{% if not user.rank.atLeast(current_user.rank) %}
+				<a class="btn btn-secondary float-right mr-3" href="{{ url_for('users.modtools', username=user.username) }}">
+					<i class="fas fa-user-shield mr-1"></i>
+					{{ _("Moderator Tools") }}
+				</a>
+			{% endif %}
+			{% if user.email %}
+				<a class="btn btn-secondary float-right mr-3" href="{{ url_for('admin.send_single_email', username=user.username) }}">
+					<i class="fas fa-envelope mr-1"></i>
+					{{ _("Send Email") }}
+				</a>
+			{% endif %}
 		{% endif %}
 
 		<h1 class="ml-3 my-0 {{ user.rank.name }}">
