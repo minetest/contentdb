@@ -143,7 +143,7 @@ def view(package):
 		packages_uses = Package.query.filter(
 				Package.type == PackageType.MOD,
 				Package.id != package.id,
-				Package.state != PackageState.DELETED,
+				Package.state == PackageState.APPROVED,
 				Package.dependencies.any(
 						Dependency.meta_package_id.in_([p.id for p in package.provides]))) \
 			.order_by(db.desc(Package.score)).limit(6).all()
