@@ -9,8 +9,7 @@
 				{%- set rating = "👎" -%}
 			{%- endif -%}
 		{%- endif -%}
-		{{ rating }}
-		{{ thread.title }} - {{ thread.package.title }}
+		{{ rating }} {{ thread.title }} - {{ thread.package.title }}
 	{%- else -%}
 		{{ thread.title }}
 	{%- endif -%}
