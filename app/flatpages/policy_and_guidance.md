@@ -83,6 +83,23 @@ should be possible to use the new mod as a drop-in replacement.
 We reserve the right to decide whether a mod counts as a fork or
 reimplementation of the mod that owns the name.
 
+### 3.3. Reserved namespaces
+ 
+A reserved namespace is a prefix to a package name like `abc_`, where any package names that begin with that prefix
+need permission from the namespace owner to be used.
+ 
+You can request a namespace be reserved by opening a thread on a package that uses it. A namespace must be in active
+use and must be specific enough to have low risk of conflict - for example, `mobs` cannot be a reserved namespace.
+The package must also be deemed "serious" enough to get a reservation - larger and more longterm projects are more
+likely to qualify.
+
+Mod names used in packages posted on CDB or the forums before 2022-01-21 are exempt.
+ 
+List of reserved namespaces:
+
+* `nc_` is reserved by NodeCore.
+* `ikea_` is reserved by IKEA.
+
 
 ## 4. Licenses
 
