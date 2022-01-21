@@ -18,6 +18,7 @@
 import json, re, sys
 from app.models import *
 from app.tasks import celery
+from app.utils import is_username_valid
 from app.utils.phpbbparser import getProfile, getTopicsFromForum
 import urllib.request
 
@@ -136,6 +137,9 @@ def importTopicList():
 		user = username_to_user.get(username)
 		if user:
 			return user
+
+		if not is_username_valid(username):
+			return None
 
 		user = User.query.filter_by(forums_username=username).first()
 		if user is None:

@@ -26,7 +26,8 @@ from wtforms.validators import *
 
 from app.models import *
 from app.tasks.emails import send_verify_email, send_anon_email, send_unsubscribe_verify, send_user_email
-from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog, nonEmptyOrNone, post_login
+from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog, \
+	nonEmptyOrNone, post_login, is_username_valid
 from passlib.pwd import genphrase
 
 from . import bp
@@ -112,6 +113,10 @@ class RegisterForm(FlaskForm):
 def handle_register(form):
 	if form.question.data.strip().lower() != "19":
 		flash(gettext("Incorrect captcha answer"), "danger")
+		return
+
+	if not is_username_valid(form.username.data):
+		flash(gettext("Username is invalid"))
 		return
 
 	user_by_name = User.query.filter(or_(

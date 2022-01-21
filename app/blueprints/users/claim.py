@@ -18,15 +18,9 @@ from flask_babel import gettext
 from . import bp
 from flask import redirect, render_template, session, request, flash, url_for
 from app.models import db, User, UserRank
-from app.utils import randomString, login_user_set_active
+from app.utils import randomString, login_user_set_active, is_username_valid
 from app.tasks.forumtasks import checkForumAccount
 from app.utils.phpbbparser import getProfile
-import re
-
-
-def check_username(username):
-	return username is not None and len(username) >= 2 and re.match("^[A-Za-z0-9._-]*$", username)
-
 
 
 @bp.route("/user/claim/", methods=["GET", "POST"])
@@ -42,7 +36,7 @@ def claim_forums():
 	else:
 		method = request.args.get("method")
 
-		if not check_username(username):
+		if not is_username_valid(username):
 			flash(gettext("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin"), "danger")
 			return redirect(url_for("users.claim_forums"))
 
@@ -67,7 +61,7 @@ def claim_forums():
 		ctype	= request.form.get("claim_type")
 		username = request.form.get("username")
 
-		if not check_username(username):
+		if not is_username_valid(username):
 			flash(gettext("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin"), "danger")
 		elif ctype == "github":
 			task = checkForumAccount.delay(username)
