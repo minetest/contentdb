@@ -70,10 +70,15 @@ class FlaskMailHandler(logging.Handler):
 		return subject
 
 	def emit(self, record):
+		subject = self.getSubject(record)
 		text = self.format(record)				if self.formatter	  else None
 		html = "<pre>{}</pre>".format(text)
+
+		if "The recipient has exceeded message rate limit. Try again later" in subject:
+			return
+
 		for email in self.send_to:
-			send_user_email.delay(email, "en", self.getSubject(record), text, html)
+			send_user_email.delay(email, "en", subject, text, html)
 
 
 def build_handler(app):
