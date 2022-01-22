@@ -596,7 +596,7 @@ class Package(db.Model):
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
-			return False
+			return perm == Permission.SEE_PACKAGE and self.state == PackageState.APPROVED
 
 		if type(perm) == str:
 			perm = Permission[perm]
