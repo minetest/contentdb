@@ -54,7 +54,8 @@ def report():
 
 		task = None
 		for admin in User.query.filter_by(rank=UserRank.ADMIN).all():
-			task = send_user_email.delay(admin.email, f"User report from {user_info}", text)
+			task = send_user_email.delay(admin.email, admin.locale or "en",
+					f"User report from {user_info}", text)
 
 		post_discord_webhook.delay(None if is_anon else current_user.username, f"**New Report**\n{url}\n\n{form.message.data}", True)
 

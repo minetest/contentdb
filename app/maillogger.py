@@ -73,7 +73,7 @@ class FlaskMailHandler(logging.Handler):
 		text = self.format(record)				if self.formatter	  else None
 		html = "<pre>{}</pre>".format(text)
 		for email in self.send_to:
-			send_user_email.delay(email, self.getSubject(record), text, html)
+			send_user_email.delay(email, "en", self.getSubject(record), text, html)
 
 
 def build_handler(app):

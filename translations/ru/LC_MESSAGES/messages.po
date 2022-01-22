@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-22 20:28+0000\n"
+"POT-Creation-Date: 2022-01-22 21:22+0000\n"
 "PO-Revision-Date: 2022-01-10 15:53+0000\n"
 "Last-Translator: Mikitko <rudzik8@protonmail.com>\n"
 "Language: ru\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: app/blueprints/packages/screenshots.py:35
 #: app/blueprints/packages/screenshots.py:41
 #: app/blueprints/packages/screenshots.py:46
-#: app/blueprints/users/account.py:242 app/blueprints/users/account.py:249
+#: app/blueprints/users/account.py:228 app/blueprints/users/account.py:235
 #: app/blueprints/users/settings.py:53 app/blueprints/users/settings.py:115
 #: app/blueprints/users/settings.py:269 app/templates/users/modtools.html:62
 msgid "Save"
@@ -550,7 +550,7 @@ msgid "Only a-zA-Z0-9._ allowed"
 msgstr "Только a-zA-Z0-9._ разрешены"
 
 #: app/blueprints/users/account.py:106 app/blueprints/users/account.py:189
-#: app/blueprints/users/account.py:238 app/blueprints/users/account.py:389
+#: app/blueprints/users/account.py:224 app/blueprints/users/account.py:376
 #: app/blueprints/users/settings.py:114
 msgid "Email"
 msgstr "Email"
@@ -585,11 +585,11 @@ msgstr "Аккаунт для этого имени пользователя у�
 msgid "That username/display name is already in use, please choose another."
 msgstr "Это имя пользователя/отображаемое имя уже используется, выберите другое."
 
-#: app/blueprints/users/account.py:145 app/blueprints/users/account.py:272
+#: app/blueprints/users/account.py:145 app/blueprints/users/account.py:258
 msgid "Email already in use"
 msgstr "Email уже используется"
 
-#: app/blueprints/users/account.py:146 app/blueprints/users/account.py:273
+#: app/blueprints/users/account.py:146 app/blueprints/users/account.py:259
 #, python-format
 msgid ""
 "We were unable to create the account as the email is already in use by "
@@ -598,7 +598,7 @@ msgstr ""
 "У нас не получилось создать аккаунт так как email уже используется "
 "%(display_name)s. Попробуйте другой email адрес."
 
-#: app/blueprints/users/account.py:150 app/blueprints/users/account.py:267
+#: app/blueprints/users/account.py:150 app/blueprints/users/account.py:253
 #: app/blueprints/users/settings.py:142
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
@@ -609,55 +609,59 @@ msgstr ""
 msgid "Reset Password"
 msgstr "Сбросить пароль"
 
-#: app/blueprints/users/account.py:239 app/blueprints/users/account.py:246
+#: app/blueprints/users/account.py:215
+msgid "Unable to find account"
+msgstr ""
+
+#: app/blueprints/users/account.py:225 app/blueprints/users/account.py:232
 msgid "New password"
 msgstr "Новый пароль"
 
-#: app/blueprints/users/account.py:240 app/blueprints/users/account.py:247
+#: app/blueprints/users/account.py:226 app/blueprints/users/account.py:233
 msgid "Verify password"
 msgstr "Подтвердить пароль"
 
-#: app/blueprints/users/account.py:241 app/blueprints/users/account.py:248
+#: app/blueprints/users/account.py:227 app/blueprints/users/account.py:234
 msgid "Passwords must match"
 msgstr "Пароли должны совпадать"
 
-#: app/blueprints/users/account.py:245
+#: app/blueprints/users/account.py:231
 msgid "Old password"
 msgstr "Старый пароль"
 
-#: app/blueprints/users/account.py:256
+#: app/blueprints/users/account.py:242
 msgid "Passwords do not match"
 msgstr "Пароли не совпадают"
 
-#: app/blueprints/users/account.py:287 app/blueprints/users/account.py:291
+#: app/blueprints/users/account.py:273 app/blueprints/users/account.py:277
 msgid "Your password has been changed successfully."
 msgstr "Ваш пароль был успешно изменён."
 
-#: app/blueprints/users/account.py:306
+#: app/blueprints/users/account.py:292
 msgid "Old password is incorrect"
 msgstr "Старый пароль неправильный"
 
-#: app/blueprints/users/account.py:336
+#: app/blueprints/users/account.py:322
 msgid "Unknown verification token!"
 msgstr "Неизвестный токен верификации!"
 
-#: app/blueprints/users/account.py:342
+#: app/blueprints/users/account.py:328
 msgid "Token has expired"
 msgstr "Токен просрочен"
 
-#: app/blueprints/users/account.py:356
+#: app/blueprints/users/account.py:342
 msgid "Another user is already using that email"
 msgstr "Другой пользователь уже использует этот email"
 
-#: app/blueprints/users/account.py:359
+#: app/blueprints/users/account.py:345
 msgid "Confirmed email change"
 msgstr "Подтвердить изменение email"
 
-#: app/blueprints/users/account.py:363
+#: app/blueprints/users/account.py:350
 msgid "Email address changed"
 msgstr "Адрес email изменён"
 
-#: app/blueprints/users/account.py:364
+#: app/blueprints/users/account.py:351
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
@@ -665,15 +669,15 @@ msgstr ""
 "Ваш email адрес был изменён. Если вы этого не запрашивали, пожалуйста, "
 "свяжитесь с администратором."
 
-#: app/blueprints/users/account.py:382
+#: app/blueprints/users/account.py:369
 msgid "You may now log in"
 msgstr "Теперь вы можете войти"
 
-#: app/blueprints/users/account.py:390
+#: app/blueprints/users/account.py:377
 msgid "Send"
 msgstr "Отправить"
 
-#: app/blueprints/users/account.py:421
+#: app/blueprints/users/account.py:408
 msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
@@ -962,6 +966,42 @@ msgstr "Проверен"
 #: app/templates/threads/delete_thread.html:19
 #: app/templates/threads/view.html:40 app/templates/users/delete.html:34
 msgid "Delete"
+msgstr ""
+
+#: app/tasks/emails.py:102
+msgid ""
+"You are receiving this email because you are a registered user of "
+"ContentDB."
+msgstr ""
+
+#: app/tasks/emails.py:109 app/templates/emails/verify.html:30
+msgid ""
+"You are receiving this email because someone (hopefully you) entered your"
+" email address as a user's email."
+msgstr ""
+
+#: app/tasks/emails.py:143
+#, python-format
+msgid "%(num)d new notifications"
+msgstr ""
+
+#: app/tasks/emails.py:145 app/templates/macros/forms.html:52
+#: app/templates/packages/create_edit.html:41
+#: app/templates/todo/editor.html:155
+msgid "View"
+msgstr ""
+
+#: app/tasks/emails.py:148
+msgid "Manage email settings"
+msgstr ""
+
+#: app/tasks/emails.py:150 app/templates/emails/base.html:63
+#: app/templates/emails/notification.html:34
+#: app/templates/emails/notification_digest.html:37
+#: app/templates/emails/verify.html:33
+#: app/templates/emails/verify_unsubscribe.html:13
+#: app/templates/threads/view.html:31
+msgid "Unsubscribe"
 msgstr ""
 
 #: app/templates/404.html:4
@@ -1289,14 +1329,6 @@ msgstr ""
 msgid "No tokens created"
 msgstr ""
 
-#: app/templates/emails/base.html:63 app/templates/emails/notification.html:34
-#: app/templates/emails/notification_digest.html:37
-#: app/templates/emails/verify.html:33
-#: app/templates/emails/verify_unsubscribe.html:13
-#: app/templates/threads/view.html:31
-msgid "Unsubscribe"
-msgstr ""
-
 #: app/templates/emails/notification.html:10
 #, python-format
 msgid "From %(username)s and on package %(package)s."
@@ -1341,6 +1373,32 @@ msgstr ""
 msgid "View Notifications"
 msgstr ""
 
+#: app/templates/emails/unable_to_find_account.html:2
+msgid ""
+"We were unable to perform the password reset as we could not find an "
+"account associated with this email."
+msgstr ""
+
+#: app/templates/emails/unable_to_find_account.html:5
+msgid ""
+"This may be because you used another email with your account, or because "
+"you never confirmed your email."
+msgstr ""
+
+#: app/templates/emails/unable_to_find_account.html:8
+msgid "You can use GitHub to log in if it is associated with your account."
+msgstr ""
+
+#: app/templates/emails/unable_to_find_account.html:9
+msgid "Otherwise, you may need to contact rubenwardy for help."
+msgstr ""
+
+#: app/templates/emails/unable_to_find_account.html:12
+msgid ""
+"If you weren't expecting to receive this email, then you can safely "
+"ignore it."
+msgstr ""
+
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
@@ -1369,12 +1427,6 @@ msgstr ""
 msgid "Or paste this into your browser:"
 msgstr ""
 
-#: app/templates/emails/verify.html:30
-msgid ""
-"You are receiving this email because someone (hopefully you) entered your"
-" email address as a user's email."
-msgstr ""
-
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
@@ -1398,12 +1450,6 @@ msgstr ""
 
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
-msgstr ""
-
-#: app/templates/macros/forms.html:52
-#: app/templates/packages/create_edit.html:41
-#: app/templates/todo/editor.html:155
-msgid "View"
 msgstr ""
 
 #: app/templates/macros/forms.html:107

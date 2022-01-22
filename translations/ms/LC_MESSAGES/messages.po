@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-22 20:28+0000\n"
+"POT-Creation-Date: 2022-01-22 21:22+0000\n"
 "PO-Revision-Date: 2022-01-22 20:27+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
@@ -47,7 +47,7 @@ msgstr "Hadkan ke pakej"
 #: app/blueprints/packages/screenshots.py:35
 #: app/blueprints/packages/screenshots.py:41
 #: app/blueprints/packages/screenshots.py:46
-#: app/blueprints/users/account.py:242 app/blueprints/users/account.py:249
+#: app/blueprints/users/account.py:228 app/blueprints/users/account.py:235
 #: app/blueprints/users/settings.py:53 app/blueprints/users/settings.py:115
 #: app/blueprints/users/settings.py:269 app/templates/users/modtools.html:62
 msgid "Save"
@@ -543,7 +543,7 @@ msgid "Only a-zA-Z0-9._ allowed"
 msgstr "Hanya a-zA-Z0-9._ dibenarkan"
 
 #: app/blueprints/users/account.py:106 app/blueprints/users/account.py:189
-#: app/blueprints/users/account.py:238 app/blueprints/users/account.py:389
+#: app/blueprints/users/account.py:224 app/blueprints/users/account.py:376
 #: app/blueprints/users/settings.py:114
 msgid "Email"
 msgstr "E-mel"
@@ -580,11 +580,11 @@ msgstr ""
 msgid "That username/display name is already in use, please choose another."
 msgstr "Nama pengguna/nama paparan tersebut sudah digunakan, sila pilih yang lain."
 
-#: app/blueprints/users/account.py:145 app/blueprints/users/account.py:272
+#: app/blueprints/users/account.py:145 app/blueprints/users/account.py:258
 msgid "Email already in use"
 msgstr "E-mel sudah digunakan"
 
-#: app/blueprints/users/account.py:146 app/blueprints/users/account.py:273
+#: app/blueprints/users/account.py:146 app/blueprints/users/account.py:259
 #, python-format
 msgid ""
 "We were unable to create the account as the email is already in use by "
@@ -593,7 +593,7 @@ msgstr ""
 "Kami tidak mampu mencipta akaun kerana e-mel tersebut sudah digunakan "
 "oleh %(display_name)s. Cuba alamat e-mel yang lain."
 
-#: app/blueprints/users/account.py:150 app/blueprints/users/account.py:267
+#: app/blueprints/users/account.py:150 app/blueprints/users/account.py:253
 #: app/blueprints/users/settings.py:142
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
@@ -604,55 +604,59 @@ msgstr ""
 msgid "Reset Password"
 msgstr "Tetap Semula Kata Laluan"
 
-#: app/blueprints/users/account.py:239 app/blueprints/users/account.py:246
+#: app/blueprints/users/account.py:215
+msgid "Unable to find account"
+msgstr ""
+
+#: app/blueprints/users/account.py:225 app/blueprints/users/account.py:232
 msgid "New password"
 msgstr "Kata laluan baharu"
 
-#: app/blueprints/users/account.py:240 app/blueprints/users/account.py:247
+#: app/blueprints/users/account.py:226 app/blueprints/users/account.py:233
 msgid "Verify password"
 msgstr "Sahkan kata laluan"
 
-#: app/blueprints/users/account.py:241 app/blueprints/users/account.py:248
+#: app/blueprints/users/account.py:227 app/blueprints/users/account.py:234
 msgid "Passwords must match"
 msgstr "Kata laluan mestilah sepadan"
 
-#: app/blueprints/users/account.py:245
+#: app/blueprints/users/account.py:231
 msgid "Old password"
 msgstr "Kata laluan lama"
 
-#: app/blueprints/users/account.py:256
+#: app/blueprints/users/account.py:242
 msgid "Passwords do not match"
 msgstr "Kata laluan mestilah sepadan"
 
-#: app/blueprints/users/account.py:287 app/blueprints/users/account.py:291
+#: app/blueprints/users/account.py:273 app/blueprints/users/account.py:277
 msgid "Your password has been changed successfully."
 msgstr "Kata laluan anda telah berjaya ditukar."
 
-#: app/blueprints/users/account.py:306
+#: app/blueprints/users/account.py:292
 msgid "Old password is incorrect"
 msgstr "Kata laluan lama tidak betul"
 
-#: app/blueprints/users/account.py:336
+#: app/blueprints/users/account.py:322
 msgid "Unknown verification token!"
 msgstr "Token pengesahan tidak diketahui!"
 
-#: app/blueprints/users/account.py:342
+#: app/blueprints/users/account.py:328
 msgid "Token has expired"
 msgstr "Token telah tamat tempoh"
 
-#: app/blueprints/users/account.py:356
+#: app/blueprints/users/account.py:342
 msgid "Another user is already using that email"
 msgstr "Pengguna lain sudah menggunakan e-mel tersebut"
 
-#: app/blueprints/users/account.py:359
+#: app/blueprints/users/account.py:345
 msgid "Confirmed email change"
 msgstr "Pertukaran e-mel disahkan"
 
-#: app/blueprints/users/account.py:363
+#: app/blueprints/users/account.py:350
 msgid "Email address changed"
 msgstr "Alamat e-mel telah ditukar"
 
-#: app/blueprints/users/account.py:364
+#: app/blueprints/users/account.py:351
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
@@ -660,15 +664,15 @@ msgstr ""
 "Alamat e-mel anda telah ditukar. Jika anda tidak memohon pertukaran ini, "
 "sila hubungi pentadbir."
 
-#: app/blueprints/users/account.py:382
+#: app/blueprints/users/account.py:369
 msgid "You may now log in"
 msgstr "Anda boleh log masuk sekarang"
 
-#: app/blueprints/users/account.py:390
+#: app/blueprints/users/account.py:377
 msgid "Send"
 msgstr "Hantar"
 
-#: app/blueprints/users/account.py:421
+#: app/blueprints/users/account.py:408
 msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
@@ -962,6 +966,44 @@ msgstr "Luluskan"
 #: app/templates/threads/view.html:40 app/templates/users/delete.html:34
 msgid "Delete"
 msgstr "Padam"
+
+#: app/tasks/emails.py:102
+msgid ""
+"You are receiving this email because you are a registered user of "
+"ContentDB."
+msgstr ""
+
+#: app/tasks/emails.py:109 app/templates/emails/verify.html:30
+msgid ""
+"You are receiving this email because someone (hopefully you) entered your"
+" email address as a user's email."
+msgstr ""
+"Anda menerima e-mel ini kerana seseorang (harapnya anda) telah memasukkan"
+" alamat e-mel anda sebagai e-mel seorang pengguna."
+
+#: app/tasks/emails.py:143
+#, python-format
+msgid "%(num)d new notifications"
+msgstr ""
+
+#: app/tasks/emails.py:145 app/templates/macros/forms.html:52
+#: app/templates/packages/create_edit.html:41
+#: app/templates/todo/editor.html:155
+msgid "View"
+msgstr "Lihat"
+
+#: app/tasks/emails.py:148
+msgid "Manage email settings"
+msgstr ""
+
+#: app/tasks/emails.py:150 app/templates/emails/base.html:63
+#: app/templates/emails/notification.html:34
+#: app/templates/emails/notification_digest.html:37
+#: app/templates/emails/verify.html:33
+#: app/templates/emails/verify_unsubscribe.html:13
+#: app/templates/threads/view.html:31
+msgid "Unsubscribe"
+msgstr "Buang langganan"
 
 #: app/templates/404.html:4
 msgid "Page not found"
@@ -1295,14 +1337,6 @@ msgstr "Pendokumenan API"
 msgid "No tokens created"
 msgstr "Tiada token dicipta"
 
-#: app/templates/emails/base.html:63 app/templates/emails/notification.html:34
-#: app/templates/emails/notification_digest.html:37
-#: app/templates/emails/verify.html:33
-#: app/templates/emails/verify_unsubscribe.html:13
-#: app/templates/threads/view.html:31
-msgid "Unsubscribe"
-msgstr "Buang langganan"
-
 #: app/templates/emails/notification.html:10
 #, python-format
 msgid "From %(username)s and on package %(package)s."
@@ -1349,6 +1383,32 @@ msgstr "daripada %(username)s."
 msgid "View Notifications"
 msgstr "Lihat Pemberitahuan"
 
+#: app/templates/emails/unable_to_find_account.html:2
+msgid ""
+"We were unable to perform the password reset as we could not find an "
+"account associated with this email."
+msgstr ""
+
+#: app/templates/emails/unable_to_find_account.html:5
+msgid ""
+"This may be because you used another email with your account, or because "
+"you never confirmed your email."
+msgstr ""
+
+#: app/templates/emails/unable_to_find_account.html:8
+msgid "You can use GitHub to log in if it is associated with your account."
+msgstr ""
+
+#: app/templates/emails/unable_to_find_account.html:9
+msgid "Otherwise, you may need to contact rubenwardy for help."
+msgstr ""
+
+#: app/templates/emails/unable_to_find_account.html:12
+msgid ""
+"If you weren't expecting to receive this email, then you can safely "
+"ignore it."
+msgstr ""
+
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
@@ -1379,14 +1439,6 @@ msgstr "Sahkan Alamat E-mel"
 msgid "Or paste this into your browser:"
 msgstr "Atau tampal ini ke dalam pelayar anda:"
 
-#: app/templates/emails/verify.html:30
-msgid ""
-"You are receiving this email because someone (hopefully you) entered your"
-" email address as a user's email."
-msgstr ""
-"Anda menerima e-mel ini kerana seseorang (harapnya anda) telah memasukkan"
-" alamat e-mel anda sebagai e-mel seorang pengguna."
-
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
@@ -1415,12 +1467,6 @@ msgstr "Pengguna Dipadam"
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
 msgstr "Tiada masukan log audit."
-
-#: app/templates/macros/forms.html:52
-#: app/templates/packages/create_edit.html:41
-#: app/templates/todo/editor.html:155
-msgid "View"
-msgstr "Lihat"
 
 #: app/templates/macros/forms.html:107
 msgid "Start typing to see suggestions"

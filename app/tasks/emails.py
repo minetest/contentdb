@@ -16,6 +16,7 @@
 
 
 from flask import render_template, escape
+from flask_babel import force_locale, gettext
 from flask_mail import Message
 from app import mail
 from app.models import Notification, db, EmailSubscription, User
@@ -36,112 +37,121 @@ def get_email_subscription(email):
 
 
 @celery.task()
-def send_verify_email(email, token):
+def send_verify_email(email, token, locale):
 	sub = get_email_subscription(email)
 	if sub.blacklisted:
 		return
 
-	msg = Message("Confirm email address", recipients=[email])
+	with force_locale(locale or "en"):
+		msg = Message("Confirm email address", recipients=[email])
 
-	msg.body = """
-			This email has been sent to you because someone (hopefully you)
-			has entered your email address as a user's email.
+		msg.body = """
+				This email has been sent to you because someone (hopefully you)
+				has entered your email address as a user's email.
+	
+				If it wasn't you, then just delete this email.
+	
+				If this was you, then please click this link to confirm the address:
+	
+				{}
+			""".format(abs_url_for('users.verify_email', token=token))
 
-			If it wasn't you, then just delete this email.
-
-			If this was you, then please click this link to confirm the address:
-
-			{}
-		""".format(abs_url_for('users.verify_email', token=token))
-
-	msg.html = render_template("emails/verify.html", token=token, sub=sub)
-	mail.send(msg)
+		msg.html = render_template("emails/verify.html", token=token, sub=sub)
+		mail.send(msg)
 
 
 @celery.task()
-def send_unsubscribe_verify(email):
+def send_unsubscribe_verify(email, locale):
 	sub = get_email_subscription(email)
 	if sub.blacklisted:
 		return
 
-	msg = Message("Confirm unsubscribe", recipients=[email])
+	with force_locale(locale or "en"):
+		msg = Message("Confirm unsubscribe", recipients=[email])
 
-	msg.body = """
-				We're sorry to see you go. You just need to do one more thing before your email is blacklisted.
-				
-				Click this link to blacklist email: {} 
-			""".format(abs_url_for('users.unsubscribe', token=sub.token))
+		msg.body = """
+					We're sorry to see you go. You just need to do one more thing before your email is blacklisted.
+					
+					Click this link to blacklist email: {} 
+				""".format(abs_url_for('users.unsubscribe', token=sub.token))
 
-	msg.html = render_template("emails/verify_unsubscribe.html", sub=sub)
-	mail.send(msg)
+		msg.html = render_template("emails/verify_unsubscribe.html", sub=sub)
+		mail.send(msg)
 
 
 @celery.task()
-def send_email_with_reason(email, subject, text, html, reason):
+def send_email_with_reason(email: str, locale: str, subject: str, text: str, html: str, reason: str):
 	sub = get_email_subscription(email)
 	if sub.blacklisted:
 		return
 
-	from flask_mail import Message
-	msg = Message(subject, recipients=[email])
+	with force_locale(locale or "en"):
+		from flask_mail import Message
+		msg = Message(subject, recipients=[email])
 
-	msg.body = text
-	html = html or f"<pre>{escape(text)}</pre>"
-	msg.html = render_template("emails/base.html", subject=subject, content=html, reason=reason, sub=sub)
-	mail.send(msg)
-
-
-@celery.task()
-def send_user_email(email: str, subject: str, text: str, html=None):
-	return send_email_with_reason(email, subject, text, html,
-			"You are receiving this email because you are a registered user of ContentDB.")
+		msg.body = text
+		html = html or f"<pre>{escape(text)}</pre>"
+		msg.html = render_template("emails/base.html", subject=subject, content=html, reason=reason, sub=sub)
+		mail.send(msg)
 
 
 @celery.task()
-def send_anon_email(email: str, subject: str, text: str, html=None):
-	return send_email_with_reason(email, subject, text, html,
-			"You are receiving this email because someone (hopefully you) entered your email address as a user's email.")
+def send_user_email(email: str, locale: str, subject: str, text: str, html=None):
+	with force_locale(locale or "en"):
+		return send_email_with_reason(email, locale, subject, text, html,
+				gettext("You are receiving this email because you are a registered user of ContentDB."))
 
 
-def send_single_email(notification):
+@celery.task()
+def send_anon_email(email: str, locale: str, subject: str, text: str, html=None):
+	with force_locale(locale or "en"):
+		return send_email_with_reason(email, locale, subject, text, html,
+				gettext("You are receiving this email because someone (hopefully you) entered your email address as a user's email."))
+
+
+def send_single_email(notification, locale):
 	sub = get_email_subscription(notification.user.email)
 	if sub.blacklisted:
 		return
 
-	msg = Message(notification.title, recipients=[notification.user.email])
+	with force_locale(locale or "en"):
+		msg = Message(notification.title, recipients=[notification.user.email])
 
-	msg.body = """
-			New notification: {}
-			
-			View: {}
-			
-			Manage email settings: {}
-			Unsubscribe: {}
-		""".format(notification.title, abs_url(notification.url),
-					abs_url_for("users.email_notifications", username=notification.user.username),
-					abs_url_for("users.unsubscribe", token=sub.token))
+		msg.body = """
+				New notification: {}
+				
+				View: {}
+				
+				Manage email settings: {}
+				Unsubscribe: {}
+			""".format(notification.title, abs_url(notification.url),
+						abs_url_for("users.email_notifications", username=notification.user.username),
+						abs_url_for("users.unsubscribe", token=sub.token))
 
-	msg.html = render_template("emails/notification.html", notification=notification, sub=sub)
-	mail.send(msg)
+		msg.html = render_template("emails/notification.html", notification=notification, sub=sub)
+		mail.send(msg)
 
 
-def send_notification_digest(notifications: [Notification]):
+def send_notification_digest(notifications: [Notification], locale):
 	user = notifications[0].user
 
 	sub = get_email_subscription(user.email)
 	if sub.blacklisted:
 		return
 
-	msg = Message("{} new notifications".format(len(notifications)), recipients=[user.email])
+	with force_locale(locale or "en"):
+		msg = Message(gettext("%(num)d new notifications", len(notifications)), recipients=[user.email])
 
-	msg.body = "".join(["<{}> {}\nView: {}\n\n".format(notification.causer.display_name, notification.title, abs_url(notification.url)) for notification in notifications])
+		msg.body = "".join(["<{}> {}\n{}: {}\n\n".format(notification.causer.display_name, notification.title, gettext("View"), abs_url(notification.url)) for notification in notifications])
 
-	msg.body += "Manage email settings: {}\nUnsubscribe: {}".format(
-			abs_url_for("users.email_notifications", username=user.username),
-			abs_url_for("users.unsubscribe", token=sub.token))
+		msg.body += "{}: {}\n{}: {}".format(
+				gettext("Manage email settings"),
+				abs_url_for("users.email_notifications", username=user.username),
+				gettext("Unsubscribe"),
+				abs_url_for("users.unsubscribe", token=sub.token))
 
-	msg.html = render_template("emails/notification_digest.html", notifications=notifications, user=user, sub=sub)
-	mail.send(msg)
+		msg.html = render_template("emails/notification_digest.html", notifications=notifications, user=user, sub=sub)
+		mail.send(msg)
 
 
 @celery.task()
@@ -154,7 +164,7 @@ def send_pending_digests():
 				notification.emailed = True
 
 		if len(to_send) > 0:
-			send_notification_digest(to_send)
+			send_notification_digest(to_send, user.locale or "en")
 
 		db.session.commit()
 
@@ -174,6 +184,6 @@ def send_pending_notifications():
 		db.session.commit()
 
 		if len(to_send) > 1:
-			send_notification_digest(to_send)
+			send_notification_digest(to_send, user.locale or "en")
 		elif len(to_send) > 0:
-			send_single_email(to_send[0])
+			send_single_email(to_send[0], user.locale or "en")

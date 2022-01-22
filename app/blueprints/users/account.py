@@ -17,7 +17,7 @@
 
 
 from flask import *
-from flask_babel import gettext, lazy_gettext
+from flask_babel import gettext, lazy_gettext, get_locale
 from flask_login import current_user, login_required, logout_user, login_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
@@ -142,7 +142,7 @@ def handle_register(form):
 
 	user_by_email = User.query.filter_by(email=form.email.data).first()
 	if user_by_email:
-		send_anon_email.delay(form.email.data, gettext("Email already in use"),
+		send_anon_email.delay(form.email.data, get_locale().language, gettext("Email already in use"),
 			gettext("We were unable to create the account as the email is already in use by %(display_name)s. Try a different email address.",
 					display_name=user_by_email.display_name))
 		return redirect(url_for("users.email_sent"))
@@ -168,7 +168,7 @@ def handle_register(form):
 	db.session.add(ver)
 	db.session.commit()
 
-	send_verify_email.delay(form.email.data, token)
+	send_verify_email.delay(form.email.data, token, get_locale().language)
 
 	return redirect(url_for("users.email_sent"))
 
@@ -209,25 +209,11 @@ def forgot_password():
 			db.session.add(ver)
 			db.session.commit()
 
-			send_verify_email.delay(form.email.data, token)
+			send_verify_email.delay(form.email.data, token, get_locale().language)
 		else:
-			send_anon_email.delay(email, "Unable to find account", """
-					<p>
-						We were unable to perform the password reset as we could not find an account
-						associated with this email.
-					</p>
-					<p>
-						This may be because you used another email with your account, or because you never 
-						confirmed your email.
-					</p>
-					<p>
-						You can use GitHub to log in if it is associated with your account.
-						Otherwise, you may need to contact rubenwardy for help.
-					</p>
-					<p>
-						If you weren't expecting to receive this email, then you can safely ignore it.
-					</p>
-			""")
+			html = render_template("emails/unable_to_find_account.html")
+			send_anon_email.delay(email, get_locale().language, gettext("Unable to find account"),
+					html, html)
 
 		return redirect(url_for("users.email_sent"))
 
@@ -269,7 +255,7 @@ def handle_set_password(form):
 
 			user_by_email = User.query.filter_by(email=form.email.data).first()
 			if user_by_email:
-				send_anon_email.delay(form.email.data, gettext("Email already in use"),
+				send_anon_email.delay(form.email.data, get_locale().language, gettext("Email already in use"),
 					gettext(u"We were unable to create the account as the email is already in use by %(display_name)s. Try a different email address.",
 							display_name=user_by_email.display_name))
 			else:
@@ -282,7 +268,7 @@ def handle_set_password(form):
 				db.session.add(ver)
 				db.session.commit()
 
-				send_verify_email.delay(form.email.data, token)
+				send_verify_email.delay(form.email.data, token, get_locale().language)
 
 			flash(gettext("Your password has been changed successfully."), "success")
 			return redirect(url_for("users.email_sent"))
@@ -360,6 +346,7 @@ def verify_email():
 
 		if user.email:
 			send_user_email.delay(user.email,
+					user.locale or "en",
 					gettext("Email address changed"),
 					gettext("Your email address has changed. If you didn't request this, please contact an administrator."))
 
@@ -401,7 +388,7 @@ def unsubscribe_verify():
 
 		sub.token = randomString(32)
 		db.session.commit()
-		send_unsubscribe_verify.delay(form.email.data)
+		send_unsubscribe_verify.delay(form.email.data, get_locale().language)
 
 		return redirect(url_for("users.email_sent"))
 

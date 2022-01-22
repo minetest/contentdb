@@ -1,5 +1,5 @@
 from flask import *
-from flask_babel import gettext, lazy_gettext
+from flask_babel import gettext, lazy_gettext, get_locale
 from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
@@ -156,7 +156,7 @@ def handle_email_notifications(user, prefs: UserNotificationPreferences, is_new,
 			db.session.add(ver)
 			db.session.commit()
 
-			send_verify_email.delay(newEmail, token)
+			send_verify_email.delay(newEmail, token, get_locale().language)
 			return redirect(url_for("users.email_sent"))
 
 	db.session.commit()
@@ -342,7 +342,7 @@ def modtools_set_email(username):
 	db.session.add(ver)
 	db.session.commit()
 
-	send_verify_email.delay(user.email, token)
+	send_verify_email.delay(user.email, token, user.locale or "en")
 
 	flash(f"Set email and sent a password reset on {user.username}", "success")
 	return redirect(url_for("users.modtools", username=username))
