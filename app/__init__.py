@@ -121,16 +121,19 @@ def page_not_found(e):
 
 @babel.localeselector
 def get_locale():
+	if not request:
+		return None
+
 	locales = app.config["LANGUAGES"].keys()
 
-	if request:
-		locale = request.cookies.get("locale")
-		if locale in locales:
-			return locale
+	if current_user.is_authenticated and current_user.locale in locales:
+		return current_user.locale
 
-		return request.accept_languages.best_match(locales)
+	locale = request.cookies.get("locale")
+	if locale in locales:
+		return locale
 
-	return None
+	return request.accept_languages.best_match(locales)
 
 
 @app.route("/set-locale/", methods=["POST"])
@@ -151,5 +154,9 @@ def set_locale():
 		expire_date = datetime.datetime.now()
 		expire_date = expire_date + datetime.timedelta(days=5*365)
 		resp.set_cookie("locale", locale, expires=expire_date)
+
+		if current_user.is_authenticated:
+			current_user.locale = locale
+			models.db.session.commit()
 
 	return resp

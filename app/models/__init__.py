@@ -117,8 +117,8 @@ class ForumTopic(db.Model):
 	author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author    = db.relationship("User", back_populates="forum_topics")
 
-	wip       = db.Column(db.Boolean, server_default="0")
-	discarded = db.Column(db.Boolean, server_default="0")
+	wip       = db.Column(db.Boolean, default=False, nullable=False)
+	discarded = db.Column(db.Boolean, default=False, nullable=False)
 
 	type      = db.Column(db.Enum(PackageType), nullable=False)
 	title     = db.Column(db.String(200), nullable=False)
