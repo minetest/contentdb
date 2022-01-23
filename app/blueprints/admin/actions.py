@@ -187,7 +187,7 @@ def run_update_config():
 def _package_list(packages: List[str]):
 	# Who needs translations?
 	if len(packages) >= 3:
-		packages[len(packages) - 1] = " and " + packages[len(packages) - 1]
+		packages[len(packages) - 1] = "and " + packages[len(packages) - 1]
 		packages_list = ", ".join(packages)
 	else:
 		packages_list = " and ".join(packages)
