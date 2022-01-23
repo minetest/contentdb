@@ -1,5 +1,8 @@
 title: Privacy Policy
 
+Last Updated: 2022-01-23
+([View updates](https://github.com/minetest/contentdb/commits/master/app/flatpages/privacy_policy.md))
+
 ## What Information is Collected
 
 **All users:**
@@ -15,8 +18,9 @@ title: Privacy Policy
 * Email address
 * Passwords (hashed and salted using BCrypt)
 * Profile information, such as website URLs and donation URLs
-* Comments and threads
+* Comments, threads, and reviews
 * Audit log actions (such as edits and logins) and their time stamps
+* Preferred language/locale. This defaults to your browser's locale, but can be changed by the user
 
 ContentDB collects usernames of content creators from the forums,
 as this is required to index forum topics.
@@ -30,10 +34,12 @@ Please avoid giving other personal information as we do not want it.
 
 * Logged HTTP requests may be used for debugging ContentDB.
 * Email addresses are used to:
-    * Provide essential system messages, such as password resets.
+    * Provide essential system messages, such as password resets and privacy policy updates.
     * Send notifications - the user may configure this to their needs, including opting out.
+    * The admin may use ContentDB to send emails when they need to contact a user.
 * Passwords are used to authenticate the user.
-* The audit log is used to record actions that may be harmful
+* The audit log is used to record actions that may be harmful.
+* Preferred language/locale is used to translate emails and the ContentDB interface.
 * Other information is displayed as part of ContentDB's service.
 
 ## Who has access
@@ -43,7 +49,7 @@ Please avoid giving other personal information as we do not want it.
 * Encrypted backups may be shared with selected Minetest staff members (moderators + core devs).
   The keys and the backups themselves are given to different people,
   requiring at least two staff members to read a backup.
-* Emails are visible to moderators and the admin.
+* Email addresses are visible to moderators and the admin.
   They have access to assist users, and they are not permitted to share email addresses.
 * Hashing protects passwords from being read whilst stored in the database or in backups.
 * Profile information is public, including URLs and linked accounts.
@@ -52,11 +58,12 @@ Please avoid giving other personal information as we do not want it.
 * The complete audit log is visible to moderators.
   Users may see their own audit log actions on their account settings page.
   Owners, maintainers, and editors may be able to see the actions on a package in the future.
+* Preferred language can only be viewed by this with access to the database or a backup.
 * We may be required to share information with law enforcement.
 
 ## Location
 
-The ContentDB production server is currently located in Canada.
+The ContentDB production server is currently located in Germany.
 Backups are stored in the UK.
 Encrypted backups may be stored in other countries, such as the US or EU.
 
