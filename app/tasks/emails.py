@@ -140,7 +140,7 @@ def send_notification_digest(notifications: [Notification], locale):
 		return
 
 	with force_locale(locale or "en"):
-		msg = Message(gettext("%(num)d new notifications", len(notifications)), recipients=[user.email])
+		msg = Message(gettext("%(num)d new notifications", num=len(notifications)), recipients=[user.email])
 
 		msg.body = "".join(["<{}> {}\n{}: {}\n\n".format(notification.causer.display_name, notification.title, gettext("View"), abs_url(notification.url)) for notification in notifications])
 

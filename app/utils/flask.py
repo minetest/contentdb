@@ -45,6 +45,9 @@ def abs_url_samesite(path):
 	return urlunparse(base._replace(path=path))
 
 def url_current(abs=False):
+	if request.args is None or request.view_args is None:
+		return None
+
 	args = MultiDict(request.args)
 	dargs = dict(args.lists())
 	dargs.update(request.view_args)
