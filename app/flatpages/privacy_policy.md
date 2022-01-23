@@ -12,6 +12,7 @@ Last Updated: 2022-01-23
 	* IP address
 	* Page URL
 	* Response status code
+* Preferred language/locale. This defaults to the browser's locale, but can be changed by the user
 
 **With an account:**
 
@@ -20,7 +21,6 @@ Last Updated: 2022-01-23
 * Profile information, such as website URLs and donation URLs
 * Comments, threads, and reviews
 * Audit log actions (such as edits and logins) and their time stamps
-* Preferred language/locale. This defaults to your browser's locale, but can be changed by the user
 
 ContentDB collects usernames of content creators from the forums,
 as this is required to index forum topics.
