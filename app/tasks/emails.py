@@ -79,7 +79,7 @@ def send_unsubscribe_verify(email, locale):
 		mail.send(msg)
 
 
-@celery.task(rate_limit="10/m")
+@celery.task(rate_limit="80/m")
 def send_email_with_reason(email: str, locale: str, subject: str, text: str, html: str, reason: str):
 	sub = get_email_subscription(email)
 	if sub.blacklisted:
@@ -95,14 +95,14 @@ def send_email_with_reason(email: str, locale: str, subject: str, text: str, htm
 		mail.send(msg)
 
 
-@celery.task(rate_limit="10/m")
+@celery.task(rate_limit="80/m")
 def send_user_email(email: str, locale: str, subject: str, text: str, html=None):
 	with force_locale(locale or "en"):
 		return send_email_with_reason(email, locale, subject, text, html,
 				gettext("You are receiving this email because you are a registered user of ContentDB."))
 
 
-@celery.task(rate_limit="10/m")
+@celery.task(rate_limit="80/m")
 def send_anon_email(email: str, locale: str, subject: str, text: str, html=None):
 	with force_locale(locale or "en"):
 		return send_email_with_reason(email, locale, subject, text, html,
