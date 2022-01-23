@@ -190,7 +190,7 @@ def _package_list(packages: List[str]):
 		packages[len(packages) - 1] = "and " + packages[len(packages) - 1]
 		packages_list = ", ".join(packages)
 	else:
-		packages_list = "and ".join(packages)
+		packages_list = " and ".join(packages)
 	return packages_list
 
 @action("Send WIP package notification")
