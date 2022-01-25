@@ -250,6 +250,7 @@ class PackageForm(FlaskForm):
 	website          = StringField(lazy_gettext("Website URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	issueTracker     = StringField(lazy_gettext("Issue Tracker URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	forums           = IntegerField(lazy_gettext("Forum Topic ID"), [Optional(), NumberRange(0,999999)])
+	video_url        = StringField(lazy_gettext("Video URL"), [Optional(), URL()], filters = [lambda x: x or None])
 
 	submit           = SubmitField(lazy_gettext("Save"))
 
@@ -333,6 +334,7 @@ def create_edit(author=None, name=None):
 				"website": form.website.data,
 				"issueTracker": form.issueTracker.data,
 				"forums": form.forums.data,
+				"video_url": form.video_url.data,
 			})
 
 			if wasNew and package.repo is not None:

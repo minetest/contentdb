@@ -17,6 +17,10 @@
 	{% endif %}
 {% endblock %}
 
+{% block scriptextra %}
+	<script src="/static/video_embed.js"></script>
+{% endblock %}
+
 {% macro render_license(license) %}
 	{% if license.url %}
 		<a href="{{ license.url }}">{{ license.name }}</a>
@@ -89,19 +93,19 @@
 		<div class="container">
 			<div class="btn-group float-right mb-4">
 				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-					<a class="btn btn-primary" href="{{ package.getURL("packages.create_edit") }}">
+					<a class="btn btn-primary" href="{{ package.getURL('packages.create_edit') }}">
 						<i class="fas fa-pen mr-1"></i>
 						{{ _("Edit") }}
 					</a>
 				{% endif %}
 				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-					<a class="btn btn-primary" href="{{ package.getURL("packages.create_release") }}">
+					<a class="btn btn-primary" href="{{ package.getURL('packages.create_release') }}">
 						<i class="fas fa-plus mr-1"></i>
 						{{ _("Release") }}
 					</a>
 				{% endif %}
 				{% if package.checkPerm(current_user, "DELETE_PACKAGE") or package.checkPerm(current_user, "UNAPPROVE_PACKAGE") %}
-					<a class="btn btn-danger" href="{{ package.getURL("packages.remove") }}">
+					<a class="btn btn-danger" href="{{ package.getURL('packages.remove') }}">
 						<i class="fas fa-trash mr-1"></i>
 						{{ _("Remove") }}
 					</a>
@@ -236,33 +240,44 @@
 		<div class="row">
 			<div class="col-md-9" style="padding-right: 45px;">
 				{% set screenshots = package.screenshots.all() %}
-				{% if screenshots or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-					{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-						<a href="{{ package.getURL("packages.screenshots") }}" class="btn btn-primary float-right">
-							<i class="fas fa-images mr-1"></i>
-							{{ _("Edit") }}
-						</a>
-					{% endif %}
 
-					<ul class="screenshot_list">
-						{% for ss in screenshots %}
-							{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-								<li>
-									<a href="{{ ss.url }}" class="position-relative">
-										<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
-										{% if not ss.approved %}
-											<span class="badge bg-dark badge-tr">{{ _("Awaiting review") }}</span>
-										{% endif %}
-									</a>
-								</li>
-							{% endif %}
-						{% else %}
+				{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+					<a href="{{ package.getURL('packages.screenshots') }}" class="btn btn-primary float-right">
+						<i class="fas fa-images mr-1"></i>
+						{{ _("Edit") }}
+					</a>
+				{% endif %}
+
+				{% if screenshots or package.checkPerm(current_user, "ADD_SCREENSHOTS") or package.video_url %}
+					<ul class="gallery">
+						{% if package.video_url %}
 							<li>
-								<a href="{{ package.getURL("packages.create_screenshot") }}">
-									<i class="fas fa-plus screenshot-add"></i>
+								<a href="{{ package.video_url }}" class="video-embed" title="{{ _('YouTube video embed') }}">
+									<i class="fas fa-play"></i>
 								</a>
 							</li>
-						{% endfor %}
+						{% endif %}
+
+						{% if screenshots or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+							{% for ss in screenshots %}
+								{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+									<li>
+										<a href="{{ ss.url }}" class="gallery-image">
+											<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+											{% if not ss.approved %}
+												<span class="badge bg-dark badge-tr">{{ _("Awaiting review") }}</span>
+											{% endif %}
+										</a>
+									</li>
+								{% endif %}
+							{% else %}
+								<li>
+									<a href="{{ package.getURL('packages.create_screenshot') }}">
+										<i class="fas fa-plus screenshot-add"></i>
+									</a>
+								</li>
+							{% endfor %}
+						{% endif %}
 					</ul>
 				{% endif %}
 

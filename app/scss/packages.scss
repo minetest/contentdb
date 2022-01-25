@@ -1,54 +1,8 @@
-.screenshot_list {
-	list-style: none;
-	padding: 0;
-	margin: 0 0 2em;
-
-	li, li a {
-		list-style: none;
-		margin: 0;
-		padding: 0;
-	}
-
-	li {
-		display: inline-block;
-		vertical-align: middle;
-		margin: 5px;
-		padding: 0;
-
-		a {
-			display: block;
-		}
-	}
-
-	img {
-		width: 200px;
-		height: 133px;
-		object-fit: cover;
-	}
-}
-
 .badge-tr {
 	position: absolute;
 	top: 5px;
 	right: 5px;
 	color: #ccc !important;;
-}
-
-.screenshot-add {
-	display: block !important;
-	width: 200px;
-	height: 133px;
-	background: #444;
-	color: #666;
-	text-align: center;
-	line-height: 133px !important;
-	font-size: 80px;
-
-	&:hover {
-		background: #555;
-		color: #999;
-		text-decoration: none;
-	}
 }
 
 .info-row {

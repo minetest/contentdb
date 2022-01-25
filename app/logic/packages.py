@@ -23,6 +23,7 @@ from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
 	License, UserRank, PackageDevState
 from app.utils import addAuditLog
+from app.utils.url import clean_youtube_url
 
 
 def check(cond: bool, msg: str):
@@ -61,6 +62,7 @@ ALLOWED_FIELDS = {
 	"issue_tracker": str,
 	"issueTracker": str,
 	"forums": int,
+	"video_url": str,
 }
 
 ALIASES = {
@@ -128,8 +130,13 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 	if "media_license" in data:
 		data["media_license"] = get_license(data["media_license"])
 
+	if "video_url" in data:
+		data["video_url"] = clean_youtube_url(data["video_url"])
+		if data["video_url"] is None:
+			raise LogicError(400, lazy_gettext("Video URL is not a YouTube video URL"))
+
 	for key in ["name", "title", "short_desc", "desc", "type", "dev_state", "license", "media_license",
-			"repo", "website", "issueTracker", "forums"]:
+			"repo", "website", "issueTracker", "forums", "video_url"]:
 		if key in data:
 			setattr(package, key, data[key])
 

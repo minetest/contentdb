@@ -389,6 +389,7 @@ class Package(db.Model):
 	website      = db.Column(db.String(200), nullable=True)
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=True)
+	video_url    = db.Column(db.String(200), nullable=True, default=None)
 
 	provides = db.relationship("MetaPackage", secondary=PackageProvides, order_by=db.asc("name"), back_populates="packages")
 
@@ -527,6 +528,7 @@ class Package(db.Model):
 			"website": self.website,
 			"issue_tracker": self.issueTracker,
 			"forums": self.forums,
+			"video_url": self.video_url,
 
 			"tags": [x.name for x in self.tags],
 			"content_warnings": [x.name for x in self.content_warnings],

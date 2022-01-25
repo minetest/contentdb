@@ -14,13 +14,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import re
 import secrets
 
 from .flask import *
 from .models import *
 from .user import *
-import re
-
 
 YESES = ["yes", "true", "1", "on"]
 
