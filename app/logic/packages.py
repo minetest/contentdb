@@ -130,7 +130,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 	if "media_license" in data:
 		data["media_license"] = get_license(data["media_license"])
 
-	if "video_url" in data:
+	if "video_url" in data and data["video_url"] is not None:
 		data["video_url"] = clean_youtube_url(data["video_url"]) or data["video_url"]
 		if "dQw4w9WgXcQ" in data["video_url"]:
 			raise LogicError(403, "Never gonna give you up / Never gonna let you down / Never gonna run around and desert you")
