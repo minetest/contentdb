@@ -132,6 +132,8 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 
 	if "video_url" in data:
 		data["video_url"] = clean_youtube_url(data["video_url"]) or data["video_url"]
+		if "dQw4w9WgXcQ" in data["video_url"]:
+			raise LogicError(403, "Never gonna give you up / Never gonna let you down / Never gonna run around and desert you")
 
 	for key in ["name", "title", "short_desc", "desc", "type", "dev_state", "license", "media_license",
 			"repo", "website", "issueTracker", "forums", "video_url"]:
