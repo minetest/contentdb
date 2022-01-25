@@ -1,4 +1,5 @@
 {% set query=package.name %}
+{% set release = package.getDownloadRelease() %}
 
 {% extends "base.html" %}
 
@@ -24,6 +25,52 @@
 	{% endif %}
 {% endmacro %}
 
+{% block download_btn %}
+	{% if release %}
+		<a class="btn btn-block btn-download" rel="nofollow" download="{{ release.getDownloadFileName() }}"
+				href="{{ package.getURL('packages.download') }}">
+			<div>
+				{{ _("Download") }}
+			</div>
+
+			{% if release and (release.min_rel or release.max_rel) %}
+				<small class="count display-block">
+					{% if release.min_rel and release.max_rel %}
+						{{ _("Minetest %(min)s - %(max)s", min=release.min_rel.name, max=release.max_rel.name) }}
+					{% elif release.min_rel %}
+						{{ _("For Minetest %(min)s and above", min=release.min_rel.name) }}
+					{% elif release.max_rel %}
+						{{ _("Minetest %(max)s and below", max=release.max_rel.name) }}
+					{% endif %}
+				</small>
+			{% endif %}
+		</a>
+
+		{% if package.type == package.type.MOD %}
+			{% set installing_url = "https://wiki.minetest.net/Installing_Mods" %}
+		{% elif package.type == package.type.GAME %}
+			{% set installing_url = "https://wiki.minetest.net/Games#Installing_games" %}
+		{% elif package.type == package.type.TXP %}
+			{% set installing_url = "https://wiki.minetest.net/Installing_Texture_Packs" %}
+		{% else %}
+			{{ 0 / 0 }}
+		{% endif %}
+
+		<p class="text-center mt-1 mb-4">
+			<a href="{{ installing_url }}">
+				<small>
+					<i class="fas fa-question-circle mr-1"></i>
+					{{ _("How do I install this?") }}
+				</small>
+			</a>
+		</p>
+	{% else %}
+		<i>
+			{{ _("No downloads available") }}
+		</i>
+	{% endif %}
+{% endblock %}
+
 {% block container %}
 	{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
 		{% set package_warning=_("Non-free code and media") %}
@@ -32,7 +79,6 @@
 	{% elif not package.media_license.is_foss %}
 		{% set package_warning=_("Non-free media") %}
 	{% endif %}
-	{% set release = package.getDownloadRelease() %}
 <main>
 	{% set cover_image = package.cover_image.url or package.getMainScreenshotURL() %}
 	<header class="jumbotron pb-3"
@@ -47,7 +93,7 @@
 						<i class="fas fa-pen mr-1"></i>
 						{{ _("Edit") }}
 					</a>
-				{% endif %}
+				{% e[ndif %}
 				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 					<a class="btn btn-primary" href="{{ package.getURL("packages.create_release") }}">
 						<i class="fas fa-plus mr-1"></i>
@@ -157,46 +203,6 @@
 						</a>
 					{% endif %}
 				</div>
-				{% if release and (release.min_rel or release.max_rel) %}
-					<div class="btn col-md-auto">
-						<img src="https://www.minetest.net/media/icon.svg" style="max-height: 1.2em;">
-						<span class="count">
-							{% if release.min_rel and release.max_rel %}
-								{{ _("%(min)s - %(max)s", min=release.min_rel.name, max=release.max_rel.name) }}
-							{% elif release.min_rel %}
-								{{ _("%(min)s and above", min=release.min_rel.name) }}
-							{% elif release.max_rel %}
-								{{ _("%(max)s and below", max=release.max_rel.name) }}
-							{% endif %}
-						</span>
-					</div>
-				{% endif %}
-				<div class="btn-group btn-group-horizontal col-md-auto">
-					{% if release %}
-						<a class="btn btn-download" rel="nofollow" download="{{ release.getDownloadFileName() }}"
-								href="{{ package.getURL("packages.download") }}">
-							{{ _("Download") }}
-						</a>
-						{% if package.type == package.type.MOD %}
-							{% set installing_url = "https://wiki.minetest.net/Installing_Mods" %}
-						{% elif package.type == package.type.GAME %}
-							{% set installing_url = "https://wiki.minetest.net/Games#Installing_games" %}
-						{% elif package.type == package.type.TXP %}
-							{% set installing_url = "https://wiki.minetest.net/Installing_Texture_Packs" %}
-						{% else %}
-							{{ 0 / 0 }}
-						{% endif %}
-
-
-						<a href="{{ installing_url }}" class="btn btn-download">
-							<i class="fas fa-question-circle"></i>
-						</a>
-					{% else %}
-						<i>
-							{{ _("No downloads available") }}
-						</i>
-					{% endif %}
-				</div>
 			</div>
 		</div>
 	</header>
@@ -221,6 +227,10 @@
 			</div>
 		</section>
 	{% endif %}
+
+	<div class="container d-block d-md-none">
+		{{ self.download_btn() }}
+	</div>
 
 	<section class="container mt-4">
 		<div class="row">
@@ -297,6 +307,10 @@
 			</div>
 
 			<aside class="col-md-3 info-sidebar">
+				<div class="d-none d-md-block">
+					{{ self.download_btn() }}
+				</div>
+
 				{% if package.checkPerm(current_user, "MAKE_RELEASE") and package.update_config and package.update_config.outdated_at %}
 					{% set config = package.update_config %}
 					<div class="alert alert-warning">
@@ -482,7 +496,7 @@
 						{% if package.approved and current_user != package.author %}
 							|
 						{% endif %}
-						<a href="{{ package.getURL("packages.audit") }}">
+						<a href="{{ package.getURL('packages.audit') }}">
 							{{ _("See audit log") }}
 						</a>
 					{% endif %}
