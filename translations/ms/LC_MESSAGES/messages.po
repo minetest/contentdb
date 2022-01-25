@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-25 21:04+0000\n"
+"POT-Creation-Date: 2022-01-25 22:37+0000\n"
 "PO-Revision-Date: 2022-01-23 17:15+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
@@ -80,7 +80,7 @@ msgstr "Edit Maklumat"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:476 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:479 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Terbitan"
 
@@ -92,7 +92,7 @@ msgstr "Tangkap Layar"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:447
+#: app/templates/packages/view.html:450
 msgid "Maintainers"
 msgstr "Penyenggara"
 
@@ -129,7 +129,7 @@ msgstr ""
 msgid "No download available."
 msgstr "Tiada muat turun tersedia."
 
-#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:424
+#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:427
 msgid "Type"
 msgstr "Jenis"
 
@@ -152,7 +152,7 @@ msgstr "Huruf kecil (a-z), digit (0-9), dan garis bawah (_) sahaja"
 msgid "Short Description (Plaintext)"
 msgstr "Perihal Pendek (Teks biasa)"
 
-#: app/blueprints/packages/packages.py:240 app/templates/packages/view.html:439
+#: app/blueprints/packages/packages.py:240 app/templates/packages/view.html:442
 msgid "Maintenance State"
 msgstr "Keadaan Penyenggaraan"
 
@@ -165,7 +165,7 @@ msgstr "Tag"
 msgid "Content Warnings"
 msgstr "Amaran Kandungan"
 
-#: app/blueprints/packages/packages.py:244 app/templates/packages/view.html:428
+#: app/blueprints/packages/packages.py:244 app/templates/packages/view.html:431
 msgid "License"
 msgstr "Lesen"
 
@@ -424,7 +424,7 @@ msgid "Message"
 msgstr "Mesej"
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:238
-#: app/templates/macros/threads.html:53 app/templates/packages/view.html:507
+#: app/templates/macros/threads.html:53 app/templates/packages/view.html:510
 #: app/templates/report/index.html:4 app/templates/report/index.html:10
 #: app/templates/users/profile.html:28
 msgid "Report"
@@ -889,11 +889,7 @@ msgstr "Anda tiada kebenaran untuk mengedit pakej ini"
 msgid "You do not have permission to change the package name"
 msgstr "Anda tiada kebenaran untuk mengubah nama pakej"
 
-#: app/logic/packages.py:136
-msgid "Video URL is not a YouTube video URL"
-msgstr ""
-
-#: app/logic/packages.py:165
+#: app/logic/packages.py:163
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
 msgstr "Tidak mampu menambah tag terlindung %(title)s kepada pakej"
@@ -1037,7 +1033,7 @@ msgid "Help"
 msgstr "Bantuan"
 
 #: app/templates/base.html:42 app/templates/packages/view.html:173
-#: app/templates/packages/view.html:496 app/templates/threads/list.html:4
+#: app/templates/packages/view.html:499 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Bebenang"
 
@@ -1147,7 +1143,7 @@ msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> oleh %(author)s"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:177 app/templates/packages/view.html:290
+#: app/templates/packages/view.html:177 app/templates/packages/view.html:293
 #: app/templates/users/profile.html:206
 msgid "Reviews"
 msgstr "Ulasan"
@@ -1692,7 +1688,7 @@ msgid "On %(trigger)s, do %(action)s"
 msgstr "Apabila %(trigger)s, lakukan %(action)s"
 
 #: app/templates/macros/todo.html:37 app/templates/packages/view.html:104
-#: app/templates/packages/view.html:345
+#: app/templates/packages/view.html:348
 msgid "Release"
 msgstr "Terbitan"
 
@@ -1702,7 +1698,7 @@ msgstr "Repositori"
 
 #: app/templates/macros/todo.html:50
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:349
+#: app/templates/packages/view.html:352
 msgid "Update settings"
 msgstr "Tetapan kemas kini"
 
@@ -1766,8 +1762,8 @@ msgstr ""
 "berkaitan:"
 
 #: app/templates/metapackages/view.html:24
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:380
-#: app/templates/packages/view.html:404 app/templates/todo/editor.html:85
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:383
+#: app/templates/packages/view.html:407 app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s oleh %(display_name)s"
@@ -1945,7 +1941,7 @@ msgid "Tip: paste in a forum topic URL"
 msgstr "Petua: tampalkan URL topik forum"
 
 #: app/templates/packages/create_edit.html:120
-msgid "Only supports YouTube, for now"
+msgid "YouTube videos will be shown in an embed."
 msgstr ""
 
 #: app/templates/packages/edit_maintainers.html:4
@@ -2332,7 +2328,7 @@ msgstr ""
 "membuang kesannya ke atas penarafan pakej."
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:312
+#: app/templates/packages/view.html:315
 msgid "Review Votes"
 msgstr "Periksa Undian"
 
@@ -2526,96 +2522,92 @@ msgstr ""
 "Bebenang ini hanya kelihatan kepada pemilik pakej dan pengguna berpangkat"
 " Pelulus ke atas."
 
-#: app/templates/packages/view.html:255
-msgid "YouTube video embed"
-msgstr ""
-
-#: app/templates/packages/view.html:268
+#: app/templates/packages/view.html:271
 msgid "Awaiting review"
 msgstr "Menunggu pemeriksaan"
 
-#: app/templates/packages/view.html:297 app/templates/threads/view.html:61
+#: app/templates/packages/view.html:300 app/templates/threads/view.html:61
 msgid "Edit Review"
 msgstr "Edit Ulasan"
 
-#: app/templates/packages/view.html:302
+#: app/templates/packages/view.html:305
 msgid "You can't review your own package."
 msgstr "Anda tidak boleh mengulas pakej anda sendiri."
 
-#: app/templates/packages/view.html:318
+#: app/templates/packages/view.html:321
 msgid "Used By"
 msgstr "Digunakan Oleh"
 
-#: app/templates/packages/view.html:333
+#: app/templates/packages/view.html:336
 msgid "Package may be outdated"
 msgstr "Pakej mungkin sudah lapuk"
 
-#: app/templates/packages/view.html:340
+#: app/templates/packages/view.html:343
 msgid "Only visible to the author and Editors."
 msgstr "Hanya kelihatan kepada pencipta dan Penyunting."
 
-#: app/templates/packages/view.html:357
+#: app/templates/packages/view.html:360
 msgid "Warning"
 msgstr "Amaran"
 
-#: app/templates/packages/view.html:363
+#: app/templates/packages/view.html:366
 msgid "Like this package? Help support its development by making a donation"
 msgstr "Suka pakej ini? Bantu menyokong pembangunannya dengan menderma"
 
-#: app/templates/packages/view.html:366
+#: app/templates/packages/view.html:369
 msgid "Donate now"
 msgstr "Derma sekarang"
 
-#: app/templates/packages/view.html:372
+#: app/templates/packages/view.html:375
 msgid "Dependencies"
 msgstr "Kebergantungan"
 
-#: app/templates/packages/view.html:374
+#: app/templates/packages/view.html:377
 msgid "Required"
 msgstr "Wajib"
 
-#: app/templates/packages/view.html:392
+#: app/templates/packages/view.html:395
 msgid "No required dependencies"
 msgstr "Tiada kebergantungan wajib"
 
-#: app/templates/packages/view.html:398
+#: app/templates/packages/view.html:401
 msgid "Optional"
 msgstr "Pilihan"
 
-#: app/templates/packages/view.html:420
+#: app/templates/packages/view.html:423
 msgid "Information"
 msgstr "Maklumat"
 
-#: app/templates/packages/view.html:426
+#: app/templates/packages/view.html:429
 msgid "Technical Name"
 msgstr "Nama Teknikal"
 
-#: app/templates/packages/view.html:435
+#: app/templates/packages/view.html:438
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s untuk kod, <br>%(media_license)s untuk media."
 
-#: app/templates/packages/view.html:443
+#: app/templates/packages/view.html:446
 msgid "Unknown"
 msgstr "Tidak Diketahui"
 
-#: app/templates/packages/view.html:445
+#: app/templates/packages/view.html:448
 msgid "Added"
 msgstr "Ditambah Pada"
 
-#: app/templates/packages/view.html:459
+#: app/templates/packages/view.html:462
 msgid "Remove myself"
 msgstr "Keluarkan diri sendiri"
 
-#: app/templates/packages/view.html:464
+#: app/templates/packages/view.html:467
 msgid "Provides"
 msgstr "Menyediakan"
 
-#: app/templates/packages/view.html:486
+#: app/templates/packages/view.html:489
 msgid "More"
 msgstr "Lebih lagi"
 
-#: app/templates/packages/view.html:515
+#: app/templates/packages/view.html:518
 msgid "See audit log"
 msgstr "Lihat log audit"
 
@@ -3556,4 +3548,13 @@ msgstr ""
 
 #~ msgid "%(max)s and below"
 #~ msgstr "%(max)s dan ke bawah"
+
+#~ msgid "Video URL is not a YouTube video URL"
+#~ msgstr ""
+
+#~ msgid "Only supports YouTube, for now"
+#~ msgstr ""
+
+#~ msgid "YouTube video embed"
+#~ msgstr ""
 

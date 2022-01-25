@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-25 21:04+0000\n"
+"POT-Creation-Date: 2022-01-25 22:37+0000\n"
 "PO-Revision-Date: 2022-01-10 15:53+0000\n"
 "Last-Translator: Imre Kristoffer Eilertsen <imreeil42@gmail.com>\n"
 "Language: nb_NO\n"
@@ -79,7 +79,7 @@ msgstr ""
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:476 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:479 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:447
+#: app/templates/packages/view.html:450
 msgid "Maintainers"
 msgstr ""
 
@@ -126,7 +126,7 @@ msgstr ""
 msgid "No download available."
 msgstr ""
 
-#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:424
+#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:427
 msgid "Type"
 msgstr ""
 
@@ -149,7 +149,7 @@ msgstr ""
 msgid "Short Description (Plaintext)"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:240 app/templates/packages/view.html:439
+#: app/blueprints/packages/packages.py:240 app/templates/packages/view.html:442
 msgid "Maintenance State"
 msgstr ""
 
@@ -162,7 +162,7 @@ msgstr ""
 msgid "Content Warnings"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:244 app/templates/packages/view.html:428
+#: app/blueprints/packages/packages.py:244 app/templates/packages/view.html:431
 msgid "License"
 msgstr ""
 
@@ -419,7 +419,7 @@ msgid "Message"
 msgstr ""
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:238
-#: app/templates/macros/threads.html:53 app/templates/packages/view.html:507
+#: app/templates/macros/threads.html:53 app/templates/packages/view.html:510
 #: app/templates/report/index.html:4 app/templates/report/index.html:10
 #: app/templates/users/profile.html:28
 msgid "Report"
@@ -862,11 +862,7 @@ msgstr ""
 msgid "You do not have permission to change the package name"
 msgstr ""
 
-#: app/logic/packages.py:136
-msgid "Video URL is not a YouTube video URL"
-msgstr ""
-
-#: app/logic/packages.py:165
+#: app/logic/packages.py:163
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
 msgstr ""
@@ -1002,7 +998,7 @@ msgid "Help"
 msgstr "Hjelp"
 
 #: app/templates/base.html:42 app/templates/packages/view.html:173
-#: app/templates/packages/view.html:496 app/templates/threads/list.html:4
+#: app/templates/packages/view.html:499 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr ""
 
@@ -1112,7 +1108,7 @@ msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> av %(author)s"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:177 app/templates/packages/view.html:290
+#: app/templates/packages/view.html:177 app/templates/packages/view.html:293
 #: app/templates/users/profile.html:206
 msgid "Reviews"
 msgstr ""
@@ -1629,7 +1625,7 @@ msgid "On %(trigger)s, do %(action)s"
 msgstr ""
 
 #: app/templates/macros/todo.html:37 app/templates/packages/view.html:104
-#: app/templates/packages/view.html:345
+#: app/templates/packages/view.html:348
 msgid "Release"
 msgstr ""
 
@@ -1639,7 +1635,7 @@ msgstr ""
 
 #: app/templates/macros/todo.html:50
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:349
+#: app/templates/packages/view.html:352
 msgid "Update settings"
 msgstr ""
 
@@ -1701,8 +1697,8 @@ msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
 msgstr ""
 
 #: app/templates/metapackages/view.html:24
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:380
-#: app/templates/packages/view.html:404 app/templates/todo/editor.html:85
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:383
+#: app/templates/packages/view.html:407 app/templates/todo/editor.html:85
 #, fuzzy, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s av %(display_name)s"
@@ -1868,7 +1864,7 @@ msgid "Tip: paste in a forum topic URL"
 msgstr ""
 
 #: app/templates/packages/create_edit.html:120
-msgid "Only supports YouTube, for now"
+msgid "YouTube videos will be shown in an embed."
 msgstr ""
 
 #: app/templates/packages/edit_maintainers.html:4
@@ -2204,7 +2200,7 @@ msgid ""
 msgstr ""
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:312
+#: app/templates/packages/view.html:315
 msgid "Review Votes"
 msgstr ""
 
@@ -2387,97 +2383,93 @@ msgid ""
 "rank or above."
 msgstr ""
 
-#: app/templates/packages/view.html:255
-msgid "YouTube video embed"
-msgstr ""
-
-#: app/templates/packages/view.html:268
+#: app/templates/packages/view.html:271
 msgid "Awaiting review"
 msgstr ""
 
-#: app/templates/packages/view.html:297 app/templates/threads/view.html:61
+#: app/templates/packages/view.html:300 app/templates/threads/view.html:61
 msgid "Edit Review"
 msgstr ""
 
-#: app/templates/packages/view.html:302
+#: app/templates/packages/view.html:305
 msgid "You can't review your own package."
 msgstr ""
 
-#: app/templates/packages/view.html:318
+#: app/templates/packages/view.html:321
 msgid "Used By"
 msgstr ""
 
-#: app/templates/packages/view.html:333
+#: app/templates/packages/view.html:336
 msgid "Package may be outdated"
 msgstr ""
 
-#: app/templates/packages/view.html:340
+#: app/templates/packages/view.html:343
 msgid "Only visible to the author and Editors."
 msgstr ""
 
-#: app/templates/packages/view.html:357
+#: app/templates/packages/view.html:360
 msgid "Warning"
 msgstr ""
 
-#: app/templates/packages/view.html:363
+#: app/templates/packages/view.html:366
 msgid "Like this package? Help support its development by making a donation"
 msgstr ""
 
-#: app/templates/packages/view.html:366
+#: app/templates/packages/view.html:369
 msgid "Donate now"
 msgstr ""
 
-#: app/templates/packages/view.html:372
+#: app/templates/packages/view.html:375
 msgid "Dependencies"
 msgstr ""
 
-#: app/templates/packages/view.html:374
+#: app/templates/packages/view.html:377
 msgid "Required"
 msgstr ""
 
-#: app/templates/packages/view.html:392
+#: app/templates/packages/view.html:395
 msgid "No required dependencies"
 msgstr ""
 
-#: app/templates/packages/view.html:398
+#: app/templates/packages/view.html:401
 msgid "Optional"
 msgstr ""
 
-#: app/templates/packages/view.html:420
+#: app/templates/packages/view.html:423
 msgid "Information"
 msgstr ""
 
-#: app/templates/packages/view.html:426
+#: app/templates/packages/view.html:429
 msgid "Technical Name"
 msgstr ""
 
-#: app/templates/packages/view.html:435
+#: app/templates/packages/view.html:438
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr ""
 
-#: app/templates/packages/view.html:443
+#: app/templates/packages/view.html:446
 msgid "Unknown"
 msgstr ""
 
-#: app/templates/packages/view.html:445
+#: app/templates/packages/view.html:448
 msgid "Added"
 msgstr ""
 
-#: app/templates/packages/view.html:459
+#: app/templates/packages/view.html:462
 msgid "Remove myself"
 msgstr ""
 
-#: app/templates/packages/view.html:464
+#: app/templates/packages/view.html:467
 msgid "Provides"
 msgstr ""
 
-#: app/templates/packages/view.html:486
+#: app/templates/packages/view.html:489
 #, fuzzy
 msgid "More"
 msgstr "Vis mer"
 
-#: app/templates/packages/view.html:515
+#: app/templates/packages/view.html:518
 msgid "See audit log"
 msgstr ""
 
@@ -3408,5 +3400,14 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "%(max)s and below"
+#~ msgstr ""
+
+#~ msgid "Video URL is not a YouTube video URL"
+#~ msgstr ""
+
+#~ msgid "Only supports YouTube, for now"
+#~ msgstr ""
+
+#~ msgid "YouTube video embed"
 #~ msgstr ""
 
