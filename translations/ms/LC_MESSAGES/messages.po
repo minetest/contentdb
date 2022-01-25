@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-22 21:22+0000\n"
+"POT-Creation-Date: 2022-01-25 21:04+0000\n"
 "PO-Revision-Date: 2022-01-23 17:15+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
-"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
-"ms/>\n"
 "Language: ms\n"
+"Language-Team: Malay "
+"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -40,9 +39,9 @@ msgstr "Nama"
 msgid "Limit to package"
 msgstr "Hadkan ke pakej"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:254
-#: app/blueprints/packages/packages.py:458
-#: app/blueprints/packages/packages.py:554
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:255
+#: app/blueprints/packages/packages.py:460
+#: app/blueprints/packages/packages.py:556
 #: app/blueprints/packages/releases.py:63
 #: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:47
 #: app/blueprints/packages/screenshots.py:35
@@ -81,7 +80,7 @@ msgstr "Edit Maklumat"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:447 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:476 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Terbitan"
 
@@ -93,7 +92,7 @@ msgstr "Tangkap Layar"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:418
+#: app/templates/packages/view.html:447
 msgid "Maintainers"
 msgstr "Penyenggara"
 
@@ -106,7 +105,7 @@ msgstr "Log Audit"
 msgid "Share and Badges"
 msgstr "Kongsi dan Lencana"
 
-#: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:60
+#: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:110
 msgid "Remove"
 msgstr "Buang"
 
@@ -130,7 +129,7 @@ msgstr ""
 msgid "No download available."
 msgstr "Tiada muat turun tersedia."
 
-#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:395
+#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:424
 msgid "Type"
 msgstr "Jenis"
 
@@ -139,12 +138,12 @@ msgid "Title (Human-readable)"
 msgstr "Tajuk (Bacaan manusia)"
 
 #: app/blueprints/packages/packages.py:237
-#: app/blueprints/packages/packages.py:552
+#: app/blueprints/packages/packages.py:554
 msgid "Name (Technical)"
 msgstr "Nama (Teknikal)"
 
 #: app/blueprints/packages/packages.py:237
-#: app/blueprints/packages/packages.py:553
+#: app/blueprints/packages/packages.py:555
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Huruf kecil (a-z), digit (0-9), dan garis bawah (_) sahaja"
@@ -153,7 +152,7 @@ msgstr "Huruf kecil (a-z), digit (0-9), dan garis bawah (_) sahaja"
 msgid "Short Description (Plaintext)"
 msgstr "Perihal Pendek (Teks biasa)"
 
-#: app/blueprints/packages/packages.py:240 app/templates/packages/view.html:410
+#: app/blueprints/packages/packages.py:240 app/templates/packages/view.html:439
 msgid "Maintenance State"
 msgstr "Keadaan Penyenggaraan"
 
@@ -166,7 +165,7 @@ msgstr "Tag"
 msgid "Content Warnings"
 msgstr "Amaran Kandungan"
 
-#: app/blueprints/packages/packages.py:244 app/templates/packages/view.html:399
+#: app/blueprints/packages/packages.py:244 app/templates/packages/view.html:428
 msgid "License"
 msgstr "Lesen"
 
@@ -194,60 +193,64 @@ msgstr "URL Penjejak Isu"
 msgid "Forum Topic ID"
 msgstr "ID Topik Forum"
 
-#: app/blueprints/packages/packages.py:270
+#: app/blueprints/packages/packages.py:253
+msgid "Video URL"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:271
 msgid "Unable to find that user"
 msgstr "Tidak jumpa pengguna tersebut"
 
-#: app/blueprints/packages/packages.py:274
+#: app/blueprints/packages/packages.py:275
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:99
 msgid "Permission denied"
 msgstr "Kebenaran ditolak"
 
-#: app/blueprints/packages/packages.py:312
+#: app/blueprints/packages/packages.py:313
 msgid "Package already exists!"
 msgstr "Pakej sudah wujud!"
 
-#: app/blueprints/packages/packages.py:372
+#: app/blueprints/packages/packages.py:374
 msgid "You don't have permission to do that"
 msgstr "Anda tiada kebenaran untuk berbuat sedemikian"
 
-#: app/blueprints/packages/packages.py:400
+#: app/blueprints/packages/packages.py:402
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
 "Sila tulis komen mengenai perubahan apa yang diperlukan dalam bebenang "
 "kelulusan"
 
-#: app/blueprints/packages/packages.py:421
-#: app/blueprints/packages/packages.py:437
+#: app/blueprints/packages/packages.py:423
+#: app/blueprints/packages/packages.py:439
 msgid "You don't have permission to do that."
 msgstr "Anda tiada kebenaran untuk berbuat sedemikian."
 
-#: app/blueprints/packages/packages.py:432
+#: app/blueprints/packages/packages.py:434
 msgid "Deleted package"
 msgstr "Pakej dipadam"
 
-#: app/blueprints/packages/packages.py:448
+#: app/blueprints/packages/packages.py:450
 msgid "Unapproved package"
 msgstr "Pakej tidak diluluskan"
 
-#: app/blueprints/packages/packages.py:457
+#: app/blueprints/packages/packages.py:459
 msgid "Maintainers (Comma-separated)"
 msgstr "Penyenggara (Dipisahkan dengan koma)"
 
-#: app/blueprints/packages/packages.py:466
+#: app/blueprints/packages/packages.py:468
 msgid "You do not have permission to edit maintainers"
 msgstr "Anda tiada kebenaran untuk mengedit penyenggara"
 
-#: app/blueprints/packages/packages.py:516
+#: app/blueprints/packages/packages.py:518
 msgid "You are not a maintainer"
 msgstr "Anda bukan seorang penyenggara"
 
-#: app/blueprints/packages/packages.py:519
+#: app/blueprints/packages/packages.py:521
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Pemilik pakej tidak boleh mengeluarkan diri sendiri sebagai penyenggara"
 
-#: app/blueprints/packages/packages.py:551
+#: app/blueprints/packages/packages.py:553
 msgid "Author Name"
 msgstr "Nama Pencipta"
 
@@ -421,7 +424,7 @@ msgid "Message"
 msgstr "Mesej"
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:238
-#: app/templates/macros/threads.html:53 app/templates/packages/view.html:478
+#: app/templates/macros/threads.html:53 app/templates/packages/view.html:507
 #: app/templates/report/index.html:4 app/templates/report/index.html:10
 #: app/templates/users/profile.html:28
 msgid "Report"
@@ -870,7 +873,7 @@ msgstr ""
 "Tidak boleh naikkan pengguna ke pangkat lebih tinggi dari diri anda "
 "sendiri!"
 
-#: app/logic/packages.py:93
+#: app/logic/packages.py:95
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
@@ -878,15 +881,19 @@ msgstr ""
 "Nama hanya boleh mengandungi huruf kecil (a-z), digit (0-9), dan garis "
 "bawah (_) sahaja"
 
-#: app/logic/packages.py:107
+#: app/logic/packages.py:109
 msgid "You do not have permission to edit this package"
 msgstr "Anda tiada kebenaran untuk mengedit pakej ini"
 
-#: app/logic/packages.py:111
+#: app/logic/packages.py:113
 msgid "You do not have permission to change the package name"
 msgstr "Anda tiada kebenaran untuk mengubah nama pakej"
 
-#: app/logic/packages.py:158
+#: app/logic/packages.py:136
+msgid "Video URL is not a YouTube video URL"
+msgstr ""
+
+#: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
 msgstr "Tidak mampu menambah tag terlindung %(title)s kepada pakej"
@@ -998,10 +1005,11 @@ msgstr "Uruskan tetapan e-mel"
 
 #: app/tasks/emails.py:150 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
-#: app/templates/emails/notification_digest.html:37
+#: app/templates/emails/notification_digest.html:51
 #: app/templates/emails/verify.html:33
 #: app/templates/emails/verify_unsubscribe.html:13
-#: app/templates/threads/view.html:31
+#: app/templates/threads/view.html:31 app/templates/users/unsubscribe.html:4
+#: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
 msgstr "Buang langganan"
 
@@ -1028,8 +1036,8 @@ msgstr "Rawak"
 msgid "Help"
 msgstr "Bantuan"
 
-#: app/templates/base.html:42 app/templates/packages/view.html:123
-#: app/templates/packages/view.html:467 app/templates/threads/list.html:4
+#: app/templates/base.html:42 app/templates/packages/view.html:173
+#: app/templates/packages/view.html:496 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Bebenang"
 
@@ -1139,7 +1147,7 @@ msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> oleh %(author)s"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:127 app/templates/packages/view.html:265
+#: app/templates/packages/view.html:177 app/templates/packages/view.html:290
 #: app/templates/users/profile.html:206
 msgid "Reviews"
 msgstr "Ulasan"
@@ -1352,7 +1360,7 @@ msgid "View Notification"
 msgstr "Lihat Pemberitahuan"
 
 #: app/templates/emails/notification.html:26
-#: app/templates/emails/notification_digest.html:29
+#: app/templates/emails/notification_digest.html:43
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
@@ -1361,7 +1369,7 @@ msgstr ""
 "anda membolehkan pemberitahuan e-mel."
 
 #: app/templates/emails/notification.html:30
-#: app/templates/emails/notification_digest.html:33
+#: app/templates/emails/notification_digest.html:47
 msgid "Manage your preferences"
 msgstr "Uruskan keutamaan anda"
 
@@ -1370,16 +1378,17 @@ msgstr "Uruskan keutamaan anda"
 msgid "This is a '%(type)s' notification."
 msgstr "Ini pemberitahuan '%(type)s'."
 
-#: app/templates/emails/notification_digest.html:7
-msgid "Other Notifications"
-msgstr "Pemberitahuan Lain"
-
 #: app/templates/emails/notification_digest.html:14
+#: app/templates/emails/notification_digest.html:29
 #, python-format
 msgid "from %(username)s."
 msgstr "daripada %(username)s."
 
 #: app/templates/emails/notification_digest.html:22
+msgid "Other Notifications"
+msgstr "Pemberitahuan Lain"
+
+#: app/templates/emails/notification_digest.html:36
 msgid "View Notifications"
 msgstr "Lihat Pemberitahuan"
 
@@ -1388,21 +1397,20 @@ msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
-"Kami tidak mampu menetapkan semula kata laluan kerana kami tidak menjumpai "
-"akaun yang berkait dengan e-mel ini."
+"Kami tidak mampu menetapkan semula kata laluan kerana kami tidak "
+"menjumpai akaun yang berkait dengan e-mel ini."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
-"Ini mungkin disebabkan anda menggunakan e-mel yang lain dengan akaun anda, "
-"atau kerana anda tidak pernah mengesahkan e-mel anda."
+"Ini mungkin disebabkan anda menggunakan e-mel yang lain dengan akaun "
+"anda, atau kerana anda tidak pernah mengesahkan e-mel anda."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
-msgstr ""
-"Anda boleh gunakan GitHub untuk log masuk jika ia dikaitkan ke akaun anda."
+msgstr "Anda boleh gunakan GitHub untuk log masuk jika ia dikaitkan ke akaun anda."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
@@ -1413,8 +1421,8 @@ msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
 msgstr ""
-"Jika anda tidak menjangka untuk menerima e-mel ini, anda boleh abaikannya "
-"sahaja."
+"Jika anda tidak menjangka untuk menerima e-mel ini, anda boleh abaikannya"
+" sahaja."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
@@ -1591,8 +1599,8 @@ msgstr "dicipta pada %(date)s"
 msgid "Edit / Approve"
 msgstr "Edit / Luluskan"
 
-#: app/templates/macros/releases.html:62 app/templates/packages/view.html:48
-#: app/templates/packages/view.html:233
+#: app/templates/macros/releases.html:62 app/templates/packages/view.html:98
+#: app/templates/packages/view.html:247
 msgid "Edit"
 msgstr "Edit"
 
@@ -1683,8 +1691,8 @@ msgstr "Balasan Terakhir"
 msgid "On %(trigger)s, do %(action)s"
 msgstr "Apabila %(trigger)s, lakukan %(action)s"
 
-#: app/templates/macros/todo.html:37 app/templates/packages/view.html:54
-#: app/templates/packages/view.html:316
+#: app/templates/macros/todo.html:37 app/templates/packages/view.html:104
+#: app/templates/packages/view.html:345
 msgid "Release"
 msgstr "Terbitan"
 
@@ -1694,7 +1702,7 @@ msgstr "Repositori"
 
 #: app/templates/macros/todo.html:50
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:320
+#: app/templates/packages/view.html:349
 msgid "Update settings"
 msgstr "Tetapan kemas kini"
 
@@ -1702,7 +1710,7 @@ msgstr "Tetapan kemas kini"
 msgid "No outdated packages."
 msgstr "Tiada pakej lapuk."
 
-#: app/templates/macros/topics.html:6 app/templates/packages/view.html:110
+#: app/templates/macros/topics.html:6 app/templates/packages/view.html:160
 msgid "Author"
 msgstr "Pencipta"
 
@@ -1758,8 +1766,8 @@ msgstr ""
 "berkaitan:"
 
 #: app/templates/metapackages/view.html:24
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:351
-#: app/templates/packages/view.html:375 app/templates/todo/editor.html:85
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:380
+#: app/templates/packages/view.html:404 app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s oleh %(display_name)s"
@@ -1935,6 +1943,10 @@ msgstr "Mengimport... (Ini mungkin makan masa)"
 #: app/templates/packages/create_edit.html:119
 msgid "Tip: paste in a forum topic URL"
 msgstr "Petua: tampalkan URL topik forum"
+
+#: app/templates/packages/create_edit.html:120
+msgid "Only supports YouTube, for now"
+msgstr ""
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2320,7 +2332,7 @@ msgstr ""
 "membuang kesannya ke atas penarafan pakej."
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:287
+#: app/templates/packages/view.html:312
 msgid "Review Votes"
 msgstr "Periksa Undian"
 
@@ -2362,6 +2374,14 @@ msgstr "Simpan Tertib"
 #: app/templates/packages/screenshots.html:67
 msgid "Reordering requires JavaScript."
 msgstr "Perubahan tertib memerlukan JavaScript."
+
+#: app/templates/packages/screenshots.html:82
+msgid "Videos"
+msgstr ""
+
+#: app/templates/packages/screenshots.html:84
+msgid "You can set a video on the Edit Details page"
+msgstr ""
 
 #: app/templates/packages/share.html:10
 msgid "Links"
@@ -2435,66 +2455,70 @@ msgstr ""
 "Apabila suatu pakej ditandai sebagai lapuk, anda tidak akan menerima "
 "sebarang pemberitahuan sehingga ia ditandai sebagai dikemaskini."
 
-#: app/templates/packages/view.html:29
-msgid "Non-free code and media"
-msgstr "Kod dan media tidak bebas"
-
-#: app/templates/packages/view.html:31
-msgid "Non-free code"
-msgstr "Kod tidak bebas"
-
-#: app/templates/packages/view.html:33
-msgid "Non-free media"
-msgstr "Media tidak bebas"
-
-#: app/templates/packages/view.html:96
-msgid "Work in Progress"
-msgstr "Kerja Dalam Proses"
-
-#: app/templates/packages/view.html:117
-msgid "Downloads"
-msgstr "Muat Turun"
-
-#: app/templates/packages/view.html:138 app/templates/users/profile.html:86
-msgid "Website"
-msgstr "Laman Sesawang"
-
-#: app/templates/packages/view.html:144
-msgid "Source"
-msgstr "Sumber"
-
-#: app/templates/packages/view.html:150 app/templates/users/profile.html:68
-msgid "Forums"
-msgstr "Forum"
-
-#: app/templates/packages/view.html:156
-msgid "Issue Tracker"
-msgstr "Penjejak Isu"
-
-#: app/templates/packages/view.html:165
-#, python-format
-msgid "%(min)s - %(max)s"
-msgstr "%(min)s - %(max)s"
-
-#: app/templates/packages/view.html:167
-#, python-format
-msgid "%(min)s and above"
-msgstr "%(min)s dan ke atas"
-
-#: app/templates/packages/view.html:169
-#, python-format
-msgid "%(max)s and below"
-msgstr "%(max)s dan ke bawah"
-
-#: app/templates/packages/view.html:178
+#: app/templates/packages/view.html:37
 msgid "Download"
 msgstr "Muat Turun"
 
-#: app/templates/packages/view.html:196
+#: app/templates/packages/view.html:43
+#, python-format
+msgid "Minetest %(min)s - %(max)s"
+msgstr ""
+
+#: app/templates/packages/view.html:45
+#, python-format
+msgid "For Minetest %(min)s and above"
+msgstr ""
+
+#: app/templates/packages/view.html:47
+#, python-format
+msgid "Minetest %(max)s and below"
+msgstr ""
+
+#: app/templates/packages/view.html:67
+msgid "How do I install this?"
+msgstr ""
+
+#: app/templates/packages/view.html:73
 msgid "No downloads available"
 msgstr "Tiada muat turun tersedia"
 
-#: app/templates/packages/view.html:214
+#: app/templates/packages/view.html:80
+msgid "Non-free code and media"
+msgstr "Kod dan media tidak bebas"
+
+#: app/templates/packages/view.html:82
+msgid "Non-free code"
+msgstr "Kod tidak bebas"
+
+#: app/templates/packages/view.html:84
+msgid "Non-free media"
+msgstr "Media tidak bebas"
+
+#: app/templates/packages/view.html:146
+msgid "Work in Progress"
+msgstr "Kerja Dalam Proses"
+
+#: app/templates/packages/view.html:167
+msgid "Downloads"
+msgstr "Muat Turun"
+
+#: app/templates/packages/view.html:188 app/templates/users/profile.html:86
+msgid "Website"
+msgstr "Laman Sesawang"
+
+#: app/templates/packages/view.html:194
+msgid "Source"
+msgstr "Sumber"
+
+#: app/templates/packages/view.html:200 app/templates/users/profile.html:68
+msgid "Forums"
+msgstr "Forum"
+
+#: app/templates/packages/view.html:206
+msgid "Issue Tracker"
+msgstr "Penjejak Isu"
+
+#: app/templates/packages/view.html:224
 msgid ""
 "This thread is only visible to the package owner and users of Approver "
 "rank or above."
@@ -2502,92 +2526,96 @@ msgstr ""
 "Bebenang ini hanya kelihatan kepada pemilik pakej dan pengguna berpangkat"
 " Pelulus ke atas."
 
-#: app/templates/packages/view.html:244
+#: app/templates/packages/view.html:255
+msgid "YouTube video embed"
+msgstr ""
+
+#: app/templates/packages/view.html:268
 msgid "Awaiting review"
 msgstr "Menunggu pemeriksaan"
 
-#: app/templates/packages/view.html:272 app/templates/threads/view.html:61
+#: app/templates/packages/view.html:297 app/templates/threads/view.html:61
 msgid "Edit Review"
 msgstr "Edit Ulasan"
 
-#: app/templates/packages/view.html:277
+#: app/templates/packages/view.html:302
 msgid "You can't review your own package."
 msgstr "Anda tidak boleh mengulas pakej anda sendiri."
 
-#: app/templates/packages/view.html:293
+#: app/templates/packages/view.html:318
 msgid "Used By"
 msgstr "Digunakan Oleh"
 
-#: app/templates/packages/view.html:304
+#: app/templates/packages/view.html:333
 msgid "Package may be outdated"
 msgstr "Pakej mungkin sudah lapuk"
 
-#: app/templates/packages/view.html:311
+#: app/templates/packages/view.html:340
 msgid "Only visible to the author and Editors."
 msgstr "Hanya kelihatan kepada pencipta dan Penyunting."
 
-#: app/templates/packages/view.html:328
+#: app/templates/packages/view.html:357
 msgid "Warning"
 msgstr "Amaran"
 
-#: app/templates/packages/view.html:334
+#: app/templates/packages/view.html:363
 msgid "Like this package? Help support its development by making a donation"
 msgstr "Suka pakej ini? Bantu menyokong pembangunannya dengan menderma"
 
-#: app/templates/packages/view.html:337
+#: app/templates/packages/view.html:366
 msgid "Donate now"
 msgstr "Derma sekarang"
 
-#: app/templates/packages/view.html:343
+#: app/templates/packages/view.html:372
 msgid "Dependencies"
 msgstr "Kebergantungan"
 
-#: app/templates/packages/view.html:345
+#: app/templates/packages/view.html:374
 msgid "Required"
 msgstr "Wajib"
 
-#: app/templates/packages/view.html:363
+#: app/templates/packages/view.html:392
 msgid "No required dependencies"
 msgstr "Tiada kebergantungan wajib"
 
-#: app/templates/packages/view.html:369
+#: app/templates/packages/view.html:398
 msgid "Optional"
 msgstr "Pilihan"
 
-#: app/templates/packages/view.html:391
+#: app/templates/packages/view.html:420
 msgid "Information"
 msgstr "Maklumat"
 
-#: app/templates/packages/view.html:397
+#: app/templates/packages/view.html:426
 msgid "Technical Name"
 msgstr "Nama Teknikal"
 
-#: app/templates/packages/view.html:406
+#: app/templates/packages/view.html:435
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s untuk kod, <br>%(media_license)s untuk media."
 
-#: app/templates/packages/view.html:414
+#: app/templates/packages/view.html:443
 msgid "Unknown"
 msgstr "Tidak Diketahui"
 
-#: app/templates/packages/view.html:416
+#: app/templates/packages/view.html:445
 msgid "Added"
 msgstr "Ditambah Pada"
 
-#: app/templates/packages/view.html:430
+#: app/templates/packages/view.html:459
 msgid "Remove myself"
 msgstr "Keluarkan diri sendiri"
 
-#: app/templates/packages/view.html:435
+#: app/templates/packages/view.html:464
 msgid "Provides"
 msgstr "Menyediakan"
 
-#: app/templates/packages/view.html:457
+#: app/templates/packages/view.html:486
 msgid "More"
 msgstr "Lebih lagi"
 
-#: app/templates/packages/view.html:486
+#: app/templates/packages/view.html:515
 msgid "See audit log"
 msgstr "Lihat log audit"
 
@@ -3398,6 +3426,46 @@ msgstr "Serta-merta"
 msgid "In digest"
 msgstr "Dalam ringkasan"
 
+#: app/templates/users/unsubscribe.html:11
+msgid ""
+"This will blacklist an email address, preventing ContentDB from ever "
+"sending emails to it - including password resets."
+msgstr ""
+
+#: app/templates/users/unsubscribe.html:20
+msgid "Please enter the email address you wish to blacklist."
+msgstr ""
+
+#: app/templates/users/unsubscribe.html:21
+msgid "You will then need to confirm the email"
+msgstr ""
+
+#: app/templates/users/unsubscribe.html:33
+msgid "You may now unsubscribe."
+msgstr ""
+
+#: app/templates/users/unsubscribe.html:40
+#, python-format
+msgid ""
+"Unsubscribing may prevent you from being able to sign into the account "
+"'%(display_name)s'"
+msgstr ""
+
+#: app/templates/users/unsubscribe.html:44
+msgid ""
+"ContentDB will no longer be able to send \"forget password\" and other "
+"essential system emails.\n"
+"\t\t\t\t\tConsider editing your email notification preferences instead."
+msgstr ""
+
+#: app/templates/users/unsubscribe.html:50
+msgid "You won't be able to use this email with ContentDB anymore."
+msgstr ""
+
+#: app/templates/users/unsubscribe.html:57
+msgid "Edit Notification Preferences"
+msgstr ""
+
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
 msgstr "Anda mempunyai banyak pemberitahuan, anda patut membacanya atau memadamnya"
@@ -3479,3 +3547,13 @@ msgstr ""
 
 #~ msgid "%(title)s on %(package)s"
 #~ msgstr "%(title)s di %(package)s"
+
+#~ msgid "%(min)s - %(max)s"
+#~ msgstr "%(min)s - %(max)s"
+
+#~ msgid "%(min)s and above"
+#~ msgstr "%(min)s dan ke atas"
+
+#~ msgid "%(max)s and below"
+#~ msgstr "%(max)s dan ke bawah"
+
