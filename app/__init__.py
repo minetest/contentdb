@@ -130,18 +130,19 @@ def get_locale():
 		return current_user.locale
 
 	locale = request.cookies.get("locale")
-	if locale in locales:
-		if current_user.is_authenticated:
-			new_session = models.db.create_session({})()
-			new_session.query(models.User) \
-				.filter(models.User.username == current_user.username) \
-				.update({ "locale": locale })
-			new_session.commit()
-			new_session.close()
+	if locale not in locales:
+		locale = request.accept_languages.best_match(locales)
 
-		return locale
+	if locale and current_user.is_authenticated:
+		new_session = models.db.create_session({})()
+		new_session.query(models.User) \
+			.filter(models.User.username == current_user.username) \
+			.update({ "locale": locale })
+		new_session.commit()
+		new_session.close()
 
-	return request.accept_languages.best_match(locales)
+	return locale
+
 
 
 @app.route("/set-locale/", methods=["POST"])
