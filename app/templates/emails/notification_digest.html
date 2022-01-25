@@ -2,9 +2,9 @@
 
 {% block content %}
 
-{% for type, group in notifications | groupby("package.title") %}
+{% for title, group in notifications | select("package") | groupby("package.title") %}
 	<h2>
-		{{ type or _("Other Notifications") }}
+		{{ title }}
 	</h2>
 
 	<ul>
@@ -17,6 +17,20 @@
 	</ul>
 {% endfor %}
 
+{% for group in notifications | reject("package") %}
+	<h2>
+		{{ _("Other Notifications") }}
+	</h2>
+
+	<ul>
+		{% for notification in group %}
+			<li>
+				<a href="{{ notification.url | abs_url }}">{{ notification.title }}</a> -
+				{{ _("from %(username)s.", username=notification.causer.username) }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endfor %}
 <p style="margin-top: 3em;">
 	<a class="btn" href="{{ abs_url_for('notifications.list_all') }}">
 		{{ _("View Notifications") }}
