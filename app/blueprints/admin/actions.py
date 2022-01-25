@@ -21,7 +21,7 @@ from typing import List
 import requests
 from celery import group
 from flask import *
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 
 from app.models import *
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
@@ -206,7 +206,7 @@ def remind_wip():
 		packages = [pkg[0] for pkg in packages]
 		packages_list = _package_list(packages)
 		havent = "haven't" if len(packages) > 1 else "hasn't"
-		if len(packages_list) + 54  > 100:
+		if len(packages_list) + 54 > 100:
 			packages_list = packages_list[0:(100-54-1)] + "…"
 
 		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
@@ -287,4 +287,27 @@ def delete_inactive_users():
 	users = User.query.filter(User.is_active==False, User.packages==None, User.forum_topics==None, User.rank==UserRank.NOT_JOINED).all()
 	for user in users:
 		db.session.delete(user)
+	db.session.commit()
+
+
+@action("Send Video URL notification")
+def remind_video_url():
+	users = User.query.filter(User.maintained_packages.any(
+			and_(Package.video_url.is_(None), Package.type==PackageType.GAME, Package.state==PackageState.APPROVED)))
+	system_user = get_system_user()
+	for user in users:
+		packages = db.session.query(Package.title).filter(
+				or_(Package.author==user, Package.maintainers.any(User.id==user.id)),
+				Package.video_url.is_(None),
+				Package.type == PackageType.GAME,
+				Package.state == PackageState.APPROVED) \
+			.all()
+
+		packages = [pkg[0] for pkg in packages]
+		packages_list = _package_list(packages)
+
+		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
+				f"You should add a video to {packages_list}",
+				url_for('users.profile', username=user.username))
+
 	db.session.commit()
