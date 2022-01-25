@@ -131,9 +131,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 		data["media_license"] = get_license(data["media_license"])
 
 	if "video_url" in data:
-		data["video_url"] = clean_youtube_url(data["video_url"])
-		if data["video_url"] is None:
-			raise LogicError(400, lazy_gettext("Video URL is not a YouTube video URL"))
+		data["video_url"] = clean_youtube_url(data["video_url"]) or data["video_url"]
 
 	for key in ["name", "title", "short_desc", "desc", "type", "dev_state", "license", "media_license",
 			"repo", "website", "issueTracker", "forums", "video_url"]:

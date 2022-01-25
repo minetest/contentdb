@@ -61,7 +61,7 @@ It should be a JSON dictionary with one or more of the following optional keys:
 * `website`: Website URL.
 * `issue_tracker`: Issue tracker URL.
 * `forums`: forum topic ID.
-* `video_url`: URL to a video, YouTube only for now.
+* `video_url`: URL to a video.
 
 Use `null` to unset fields where relevant.
 

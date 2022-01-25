@@ -252,8 +252,11 @@
 					<ul class="gallery">
 						{% if package.video_url %}
 							<li>
-								<a href="{{ package.video_url }}" class="video-embed" title="{{ _('YouTube video embed') }}">
+								<a href="{{ package.video_url }}" class="video-embed">
 									<i class="fas fa-play"></i>
+									<div class="label">
+										<i class="fas fa-external-link-square-alt"></i>
+									</div>
 								</a>
 							</li>
 						{% endif %}

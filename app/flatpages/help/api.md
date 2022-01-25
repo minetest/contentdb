@@ -89,7 +89,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `website`: Website URL.
         * `issue_tracker`: Issue tracker URL.
         * `forums`: forum topic ID.
-        * `video_url`: URL to a video, YouTube only for now.
+        * `video_url`: URL to a video.
 * GET `/api/packages/<username>/<name>/dependencies/`
     * Returns dependencies, with suggested candidates 
     * If query argument `only_hard` is present, only hard deps will be returned.

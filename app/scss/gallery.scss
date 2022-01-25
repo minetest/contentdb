@@ -47,11 +47,12 @@
 	background: #111;
 	position: relative;
 	display: flex !important;
+	flex-direction: column !important;
 	align-items: center !important;
 	justify-content: center !important;
 	cursor: pointer;
 
-	.fas {
+	.fa-play {
 		display: block;
 		font-size: 200%;
 		color: #f44;
@@ -60,9 +61,17 @@
 	&:hover {
 		background: #191919;
 
-		.fas {
+		.fa-play {
 			color: red;
 		}
+	}
+
+	.label {
+		position: absolute;
+		top: 0.25rem;
+		right: 0.5rem;
+		color: #555;
+		font-size: 80%;
 	}
 }
 

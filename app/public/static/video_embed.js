@@ -24,6 +24,8 @@ document.querySelectorAll(".video-embed").forEach(ele => {
 
 			ele.setAttribute("data-src", href);
 			ele.removeAttribute("href");
+
+			ele.querySelector(".label").innerText = "YouTube";
 		}
 	} catch (e) {
 		console.error(url);
