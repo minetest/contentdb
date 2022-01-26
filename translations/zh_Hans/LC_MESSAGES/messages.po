@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-25 22:37+0000\n"
+"POT-Creation-Date: 2022-01-26 03:09+0000\n"
 "PO-Revision-Date: 2022-01-23 17:15+0000\n"
 "Last-Translator: Y.W. <y5nw@outlook.com>\n"
 "Language: zh_Hans\n"
@@ -410,7 +410,7 @@ msgid "Title/Caption"
 msgstr "标题"
 
 #: app/blueprints/packages/screenshots.py:45
-#: app/templates/packages/screenshots.html:71
+#: app/templates/packages/screenshots.html:89
 msgid "Cover Image"
 msgstr "封面图像"
 
@@ -870,7 +870,7 @@ msgstr ""
 msgid "You do not have permission to change the package name"
 msgstr ""
 
-#: app/logic/packages.py:163
+#: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
 msgstr ""
@@ -889,12 +889,19 @@ msgstr ""
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
 
-#: app/logic/screenshots.py:15
+#: app/logic/screenshots.py:16
 msgid "Too many requests, please wait before trying again"
 msgstr ""
 
-#: app/logic/screenshots.py:17
+#: app/logic/screenshots.py:18
 msgid "a PNG or JPG image file"
+msgstr ""
+
+#: app/logic/screenshots.py:35
+#, python-format
+msgid ""
+"Screenshot is too small, it should be at least %(width)s by %(height)s "
+"pixels"
 msgstr ""
 
 #: app/logic/uploads.py:52
@@ -906,40 +913,40 @@ msgstr "请上传%(file_desc)s"
 msgid "Uploaded image isn't actually an image"
 msgstr ""
 
-#: app/models/packages.py:64
+#: app/models/packages.py:65
 #, fuzzy
 msgid "Mod"
 msgstr "Mod"
 
-#: app/models/packages.py:66
+#: app/models/packages.py:67
 msgid "Game"
 msgstr ""
 
-#: app/models/packages.py:68
+#: app/models/packages.py:69
 msgid "Texture Pack"
 msgstr ""
 
-#: app/models/packages.py:73 app/templates/base.html:27
+#: app/models/packages.py:74 app/templates/base.html:27
 msgid "Mods"
 msgstr ""
 
-#: app/models/packages.py:75 app/templates/base.html:30
+#: app/models/packages.py:76 app/templates/base.html:30
 msgid "Games"
 msgstr ""
 
-#: app/models/packages.py:77 app/templates/base.html:33
+#: app/models/packages.py:78 app/templates/base.html:33
 msgid "Texture Packs"
 msgstr ""
 
-#: app/models/packages.py:166
+#: app/models/packages.py:167
 msgid "Submit for Approval"
 msgstr ""
 
-#: app/models/packages.py:168
+#: app/models/packages.py:169
 msgid "Approve"
 msgstr "批准"
 
-#: app/models/packages.py:170 app/templates/api/create_edit_token.html:17
+#: app/models/packages.py:171 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:80
 #: app/templates/packages/review_create_edit.html:55
 #: app/templates/threads/delete_reply.html:19
@@ -1001,7 +1008,7 @@ msgstr "随机"
 
 #: app/templates/base.html:39 app/templates/base.html:233
 #: app/templates/packages/bulk_update_conf.html:8
-#: app/templates/packages/update_config.html:8 app/templates/todo/user.html:44
+#: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
 msgid "Help"
 msgstr "帮助"
 
@@ -1437,7 +1444,7 @@ msgstr ""
 msgid "Start typing to see suggestions"
 msgstr ""
 
-#: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:34
+#: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
 msgid "State"
 msgstr ""
 
@@ -2228,6 +2235,14 @@ msgstr ""
 msgid "Add a screenshot"
 msgstr ""
 
+#: app/templates/packages/screenshot_new.html:10
+#: app/templates/todo/user.html:73
+#, python-format
+msgid ""
+"The recommended resolution is 1920x1080, and screenshots must be at least"
+" %(width)dx%(height)d."
+msgstr ""
+
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
 msgstr ""
@@ -2236,27 +2251,39 @@ msgstr ""
 msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr ""
 
-#: app/templates/packages/screenshots.html:36
+#: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:77
+msgid "Way too small"
+msgstr ""
+
+#: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:80
+msgid "Too small"
+msgstr ""
+
+#: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
+msgid "Not HD"
+msgstr ""
+
+#: app/templates/packages/screenshots.html:53
 msgid "Awaiting approval"
 msgstr ""
 
-#: app/templates/packages/screenshots.html:54
+#: app/templates/packages/screenshots.html:72
 msgid "No screenshots."
 msgstr ""
 
-#: app/templates/packages/screenshots.html:62
+#: app/templates/packages/screenshots.html:80
 msgid "Save Order"
 msgstr ""
 
-#: app/templates/packages/screenshots.html:67
+#: app/templates/packages/screenshots.html:85
 msgid "Reordering requires JavaScript."
 msgstr ""
 
-#: app/templates/packages/screenshots.html:82
+#: app/templates/packages/screenshots.html:100
 msgid "Videos"
 msgstr ""
 
-#: app/templates/packages/screenshots.html:84
+#: app/templates/packages/screenshots.html:102
 msgid "You can set a video on the Edit Details page"
 msgstr ""
 
@@ -2706,76 +2733,81 @@ msgstr ""
 msgid "Enable email notifications"
 msgstr ""
 
-#: app/templates/todo/user.html:17
+#: app/templates/todo/user.html:18
 msgid "Unapproved Packages Needing Action"
 msgstr ""
 
-#: app/templates/todo/user.html:39 app/templates/todo/user.html:90
+#: app/templates/todo/user.html:40 app/templates/todo/user.html:121
+#: app/templates/todo/user.html:145
 msgid "Nothing to do :)"
 msgstr ""
 
-#: app/templates/todo/user.html:47
+#: app/templates/todo/user.html:48
 msgid "See all Update Settings"
 msgstr ""
 
-#: app/templates/todo/user.html:52
+#: app/templates/todo/user.html:53
 msgid "Create All Releases"
 msgstr ""
 
-#: app/templates/todo/user.html:55
+#: app/templates/todo/user.html:56
 msgid "Potentially Outdated Packages"
 msgstr ""
 
-#: app/templates/todo/user.html:57
-msgid ""
-"New: Git Update Detection has been set up on all packages to send "
-"notifications."
-msgstr ""
-
 #: app/templates/todo/user.html:58
-msgid ""
-"Consider changing the update settings to create releases automatically "
-"instead."
-msgstr ""
-
-#: app/templates/todo/user.html:61
 msgid ""
 "Instead of marking packages as outdated, you can automatically create "
 "releases when New Commits or New Tags are pushed to Git by clicking "
 "'Update Settings'."
 msgstr ""
 
-#: app/templates/todo/user.html:63
+#: app/templates/todo/user.html:60
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
 
+#: app/templates/todo/user.html:68
+msgid "Small Screenshots"
+msgstr ""
+
+#: app/templates/todo/user.html:71
+msgid ""
+"These packages have screenshots that are too small, and should be "
+"replaced."
+msgstr ""
+
 #: app/templates/todo/user.html:72
+msgid ""
+"Red and orange are screenshots below the limit, and grey screenshots are "
+"below the recommended resolution."
+msgstr ""
+
+#: app/templates/todo/user.html:127
 msgid "See All"
 msgstr ""
 
-#: app/templates/todo/user.html:73
+#: app/templates/todo/user.html:128
 msgid "Packages Without Tags"
 msgstr ""
 
-#: app/templates/todo/user.html:75
+#: app/templates/todo/user.html:130
 msgid "Labelling your packages with tags helps users find them."
 msgstr ""
 
-#: app/templates/todo/user.html:95
+#: app/templates/todo/user.html:150
 msgid "Unadded Topics"
 msgstr ""
 
-#: app/templates/todo/user.html:98
+#: app/templates/todo/user.html:153
 msgid "List of your forum topics which do not have a matching package."
 msgstr ""
 
-#: app/templates/todo/user.html:99
+#: app/templates/todo/user.html:154
 msgid "Topics with a strikethrough have been marked as discarded."
 msgstr ""
 
-#: app/templates/todo/user.html:107
+#: app/templates/todo/user.html:162
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr ""
 
@@ -3326,5 +3358,16 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "YouTube video embed"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "New: Git Update Detection has been "
+#~ "set up on all packages to send "
+#~ "notifications."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Consider changing the update settings to"
+#~ " create releases automatically instead."
 #~ msgstr ""
 
