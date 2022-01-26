@@ -15,14 +15,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import *
+from flask import redirect, render_template, abort, url_for, request, flash
 from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
+from wtforms import StringField, TextAreaField, SubmitField
+from wtforms.validators import InputRequired, Length, Optional, Regexp
 
-from app.models import *
 from app.utils import rank_required
 from . import bp
+from ...models import UserRank, ContentWarning, db
 
 
 @bp.route("/admin/warnings/")
@@ -30,11 +30,14 @@ from . import bp
 def warning_list():
 	return render_template("admin/warnings/list.html", warnings=ContentWarning.query.order_by(db.asc(ContentWarning.title)).all())
 
+
 class WarningForm(FlaskForm):
-	title	    = StringField("Title", [InputRequired(), Length(3,100)])
+	title = StringField("Title", [InputRequired(), Length(3, 100)])
 	description = TextAreaField("Description", [Optional(), Length(0, 500)])
-	name        = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	submit      = SubmitField("Save")
+	name = StringField("Name", [Optional(), Length(1, 20),
+					Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	submit = SubmitField("Save")
+
 
 @bp.route("/admin/warnings/new/", methods=["GET", "POST"])
 @bp.route("/admin/warnings/<name>/edit/", methods=["GET", "POST"])

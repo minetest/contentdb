@@ -20,16 +20,18 @@ from typing import List
 
 import requests
 from celery import group
-from flask import *
+from flask import redirect, url_for, flash, current_app
 from sqlalchemy import or_, and_
 
-from app.models import *
+from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
+	NotificationType, PackageUpdateConfig, License, UserRank, PackageType
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates
 from app.utils import addNotification, get_system_user
 from app.utils.image import get_image_size
 
 actions = {}
+
 
 def action(title: str):
 	def func(f):
@@ -43,13 +45,15 @@ def action(title: str):
 
 	return func
 
+
 @action("Delete stuck releases")
 def del_stuck_releases():
-	PackageRelease.query.filter(PackageRelease.task_id != None).delete()
+	PackageRelease.query.filter(PackageRelease.task_id.isnot(None)).delete()
 	db.session.commit()
 	return redirect(url_for("admin.admin_page"))
 
-@action("Check releases")
+
+@action("Check ZIP releases")
 def check_releases():
 	releases = PackageRelease.query.filter(PackageRelease.url.like("/uploads/%")).all()
 
@@ -65,10 +69,11 @@ def check_releases():
 
 	return redirect(url_for("todo.view_editor"))
 
-@action("Reimport packages")
+
+@action("Check the first release of all packages")
 def reimport_packages():
 	tasks = []
-	for package in Package.query.filter(Package.state!=PackageState.DELETED).all():
+	for package in Package.query.filter(Package.state != PackageState.DELETED).all():
 		release = package.releases.first()
 		if release:
 			tasks.append(checkZipRelease.s(release.id, release.file_path))
@@ -81,42 +86,46 @@ def reimport_packages():
 
 	return redirect(url_for("todo.view_editor"))
 
-@action("Import topic list")
+
+@action("Import forum topic list")
 def import_topic_list():
 	task = importTopicList.delay()
 	return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
+
 
 @action("Check all forum accounts")
 def check_all_forum_accounts():
 	task = checkAllForumAccounts.delay()
 	return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 
+
 @action("Import screenshots")
 def import_screenshots():
 	packages = Package.query \
-		.filter(Package.state!=PackageState.DELETED) \
-		.outerjoin(PackageScreenshot, Package.id==PackageScreenshot.package_id) \
-		.filter(PackageScreenshot.id==None) \
+		.filter(Package.state != PackageState.DELETED) \
+		.outerjoin(PackageScreenshot, Package.id == PackageScreenshot.package_id) \
+		.filter(PackageScreenshot.id.is_(None)) \
 		.all()
 	for package in packages:
 		importRepoScreenshot.delay(package.id)
 
 	return redirect(url_for("admin.admin_page"))
 
-@action("Clean uploads")
+
+@action("Remove unused uploads")
 def clean_uploads():
-	upload_dir = app.config['UPLOAD_DIR']
+	upload_dir = current_app.config['UPLOAD_DIR']
 
 	(_, _, filenames) = next(os.walk(upload_dir))
 	existing_uploads = set(filenames)
 
 	if len(existing_uploads) != 0:
-		def getURLsFromDB(column):
-			results = db.session.query(column).filter(column != None, column != "").all()
+		def get_filenames_from_column(column):
+			results = db.session.query(column).filter(column.isnot(None), column != "").all()
 			return set([os.path.basename(x[0]) for x in results])
 
-		release_urls = getURLsFromDB(PackageRelease.url)
-		screenshot_urls = getURLsFromDB(PackageScreenshot.url)
+		release_urls = get_filenames_from_column(PackageRelease.url)
+		screenshot_urls = get_filenames_from_column(PackageScreenshot.url)
 
 		db_urls = release_urls.union(screenshot_urls)
 		unreachable = existing_uploads.difference(db_urls)
@@ -135,7 +144,8 @@ def clean_uploads():
 
 	return redirect(url_for("admin.admin_page"))
 
-@action("Delete metapackages")
+
+@action("Delete unused metapackages")
 def del_meta_packages():
 	query = MetaPackage.query.filter(~MetaPackage.dependencies.any(), ~MetaPackage.packages.any())
 	count = query.count()
@@ -144,6 +154,7 @@ def del_meta_packages():
 
 	flash("Deleted " + str(count) + " unused meta packages", "success")
 	return redirect(url_for("admin.admin_page"))
+
 
 @action("Delete removed packages")
 def del_removed_packages():
@@ -157,24 +168,6 @@ def del_removed_packages():
 	flash("Deleted {} soft deleted packages packages".format(count), "success")
 	return redirect(url_for("admin.admin_page"))
 
-@action("Add update config")
-def add_update_config():
-	added = 0
-	for pkg in Package.query.filter(Package.repo != None, Package.releases.any(), Package.update_config == None).all():
-		pkg.update_config = PackageUpdateConfig()
-		pkg.update_config.auto_created = True
-
-		release: PackageRelease = pkg.releases.first()
-		if release and release.commit_hash:
-			pkg.update_config.last_commit = release.commit_hash
-
-		db.session.add(pkg.update_config)
-		added += 1
-
-	db.session.commit()
-
-	flash("Added {} update configs".format(added), "success")
-	return redirect(url_for("admin.admin_page"))
 
 @action("Run update configs")
 def run_update_config():
@@ -182,6 +175,7 @@ def run_update_config():
 
 	flash("Started update configs", "success")
 	return redirect(url_for("admin.admin_page"))
+
 
 def _package_list(packages: List[str]):
 	# Who needs translations?
@@ -192,14 +186,15 @@ def _package_list(packages: List[str]):
 		packages_list = " and ".join(packages)
 	return packages_list
 
+
 @action("Send WIP package notification")
 def remind_wip():
-	users = User.query.filter(User.packages.any(or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)))
+	users = User.query.filter(User.packages.any(or_(Package.state == PackageState.WIP, Package.state == PackageState.CHANGES_NEEDED)))
 	system_user = get_system_user()
 	for user in users:
 		packages = db.session.query(Package.title).filter(
-				Package.author_id==user.id,
-				or_(Package.state==PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)) \
+				Package.author_id == user.id,
+				or_(Package.state == PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)) \
 			.all()
 
 		packages = [pkg[0] for pkg in packages]
@@ -212,6 +207,7 @@ def remind_wip():
 			f"Did you forget? {packages_list} {havent} been submitted for review yet",
 				url_for('todo.view_user', username=user.username))
 	db.session.commit()
+
 
 @action("Send outdated package notification")
 def remind_outdated():
@@ -232,6 +228,7 @@ def remind_outdated():
 				url_for('todo.view_user', username=user.username))
 
 	db.session.commit()
+
 
 @action("Import licenses from SPDX")
 def import_licenses():
@@ -283,7 +280,8 @@ def import_licenses():
 
 @action("Delete inactive users")
 def delete_inactive_users():
-	users = User.query.filter(User.is_active==False, User.packages==None, User.forum_topics==None, User.rank==UserRank.NOT_JOINED).all()
+	users = User.query.filter(User.is_active == False, User.packages.is_(None), User.forum_topics.is_(None),
+			User.rank == UserRank.NOT_JOINED).all()
 	for user in users:
 		db.session.delete(user)
 	db.session.commit()
@@ -313,7 +311,7 @@ def remind_video_url():
 
 
 @action("Update screenshot sizes")
-def remind_video_url():
+def update_screenshot_sizes():
 	import sys
 
 	for screenshot in PackageScreenshot.query.all():

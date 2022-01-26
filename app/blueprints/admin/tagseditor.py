@@ -15,14 +15,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import *
+from flask import redirect, render_template, abort, url_for, request
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
+from wtforms import StringField, TextAreaField, BooleanField, SubmitField
+from wtforms.validators import InputRequired, Length, Optional, Regexp
 
-from app.models import *
 from . import bp
+from ...models import Permission, Tag, db
 
 
 @bp.route("/tags/")
@@ -40,12 +40,14 @@ def tag_list():
 
 	return render_template("admin/tags/list.html", tags=query.all())
 
+
 class TagForm(FlaskForm):
-	title	    = StringField("Title", [InputRequired(), Length(3,100)])
+	title = StringField("Title", [InputRequired(), Length(3, 100)])
 	description = TextAreaField("Description", [Optional(), Length(0, 500)])
-	name        = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	name = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	is_protected = BooleanField("Is Protected")
-	submit      = SubmitField("Save")
+	submit = SubmitField("Save")
+
 
 @bp.route("/tags/new/", methods=["GET", "POST"])
 @bp.route("/tags/<name>/edit/", methods=["GET", "POST"])

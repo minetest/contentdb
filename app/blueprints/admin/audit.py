@@ -41,6 +41,6 @@ def audit():
 
 @bp.route("/admin/audit/<int:id>/")
 @rank_required(UserRank.MODERATOR)
-def audit_view(id):
-	entry = AuditLogEntry.query.get(id)
+def audit_view(id_):
+	entry = AuditLogEntry.query.get(id_)
 	return render_template("admin/audit_view.html", entry=entry)

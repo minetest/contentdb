@@ -15,15 +15,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import *
+from flask import redirect, render_template, abort, url_for, request, flash
 from flask_wtf import FlaskForm
-from wtforms import *
+from wtforms import StringField, BooleanField, SubmitField
 from wtforms.fields.html5 import URLField
-from wtforms.validators import *
+from wtforms.validators import InputRequired, Length, Optional
 
-from app.models import *
 from app.utils import rank_required, nonEmptyOrNone
 from . import bp
+from ...models import UserRank, License, db
 
 
 @bp.route("/licenses/")
@@ -31,11 +31,13 @@ from . import bp
 def license_list():
 	return render_template("admin/licenses/list.html", licenses=License.query.order_by(db.asc(License.name)).all())
 
+
 class LicenseForm(FlaskForm):
-	name	 = StringField("Name", [InputRequired(), Length(3,100)])
-	is_foss  = BooleanField("Is FOSS")
-	url      = URLField("URL", [Optional], filters=[nonEmptyOrNone])
-	submit   = SubmitField("Save")
+	name = StringField("Name", [InputRequired(), Length(3, 100)])
+	is_foss = BooleanField("Is FOSS")
+	url = URLField("URL", [Optional], filters=[nonEmptyOrNone])
+	submit = SubmitField("Save")
+
 
 @bp.route("/licenses/new/", methods=["GET", "POST"])
 @bp.route("/licenses/<name>/edit/", methods=["GET", "POST"])

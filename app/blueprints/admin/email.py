@@ -14,18 +14,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-from flask import *
+from flask import request, abort, url_for, redirect, render_template, flash
 from flask_login import current_user
 from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
+from wtforms import TextAreaField, SubmitField, StringField
+from wtforms.validators import InputRequired, Length
 
 from app.markdown import render_markdown
-from app.models import *
 from app.tasks.emails import send_user_email
 from app.utils import rank_required, addAuditLog
 from . import bp
+from ...models import UserRank, User, AuditSeverity
 
 
 class SendEmailForm(FlaskForm):
@@ -67,11 +66,11 @@ def send_bulk_email():
 	form = SendEmailForm(request.form)
 	if form.validate_on_submit():
 		addAuditLog(AuditSeverity.MODERATION, current_user,
-				"Sent bulk email", None, None, form.text.data)
+				"Sent bulk email", url_for("admin.admin_page"), None, form.text.data)
 
 		text = form.text.data
 		html = render_markdown(text)
-		for user in User.query.filter(User.email != None).all():
+		for user in User.query.filter(User.email.isnot(None)).all():
 			send_user_email.delay(user.email, user.locale or "en", form.subject.data, text, html)
 
 		return redirect(url_for("admin.admin_page"))

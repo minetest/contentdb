@@ -14,10 +14,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import *
+from flask import redirect, render_template, url_for, request, flash
 from flask_login import current_user, login_user
 from flask_wtf import FlaskForm
-from wtforms import *
+from wtforms import StringField, SubmitField
 from wtforms.validators import InputRequired, Length
 from app.utils import rank_required, addAuditLog, addNotification, get_system_user
 from . import bp
@@ -48,8 +48,9 @@ def admin_page():
 		else:
 			flash("Unknown action: " + action, "danger")
 
-	deleted_packages = Package.query.filter(Package.state==PackageState.DELETED).all()
+	deleted_packages = Package.query.filter(Package.state == PackageState.DELETED).all()
 	return render_template("admin/list.html", deleted_packages=deleted_packages, actions=actions)
+
 
 class SwitchUserForm(FlaskForm):
 	username = StringField("Username")
@@ -69,14 +70,13 @@ def switch_user():
 		else:
 			flash("Unable to login as user", "danger")
 
-
 	# Process GET or invalid POST
 	return render_template("admin/switch_user.html", form=form)
 
 
 class SendNotificationForm(FlaskForm):
-	title  = StringField("Title", [InputRequired(), Length(1, 300)])
-	url    = StringField("URL", [InputRequired(), Length(1, 100)], default="/")
+	title = StringField("Title", [InputRequired(), Length(1, 300)])
+	url = StringField("URL", [InputRequired(), Length(1, 100)], default="/")
 	submit = SubmitField("Send")
 
 
@@ -86,7 +86,7 @@ def send_bulk_notification():
 	form = SendNotificationForm(request.form)
 	if form.validate_on_submit():
 		addAuditLog(AuditSeverity.MODERATION, current_user,
-				"Sent bulk notification", None, None, form.title.data)
+				"Sent bulk notification", url_for("admin.admin_page"), None, form.title.data)
 
 		users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).all()
 		addNotification(users, get_system_user(), NotificationType.OTHER, form.title.data, form.url.data, None)
@@ -121,5 +121,10 @@ def restore():
 			db.session.commit()
 			return redirect(package.getURL("packages.view"))
 
-	deleted_packages = Package.query.filter(Package.state==PackageState.DELETED).join(Package.author).order_by(db.asc(User.username), db.asc(Package.name)).all()
+	deleted_packages = Package.query \
+		.filter(Package.state == PackageState.DELETED) \
+		.join(Package.author) \
+		.order_by(db.asc(User.username), db.asc(Package.name)) \
+		.all()
+
 	return render_template("admin/restore.html", deleted_packages=deleted_packages)

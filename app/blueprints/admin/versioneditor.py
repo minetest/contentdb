@@ -15,14 +15,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import *
+from flask import redirect, render_template, abort, url_for, request, flash
 from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
+from wtforms import StringField, IntegerField, SubmitField
+from wtforms.validators import InputRequired, Length
 
-from app.models import *
 from app.utils import rank_required
 from . import bp
+from ...models import UserRank, MinetestRelease, db
 
 
 @bp.route("/versions/")
@@ -30,10 +30,12 @@ from . import bp
 def version_list():
 	return render_template("admin/versions/list.html", versions=MinetestRelease.query.order_by(db.asc(MinetestRelease.id)).all())
 
+
 class VersionForm(FlaskForm):
-	name	 = StringField("Name", [InputRequired(), Length(3,100)])
+	name = StringField("Name", [InputRequired(), Length(3, 100)])
 	protocol = IntegerField("Protocol")
-	submit   = SubmitField("Save")
+	submit = SubmitField("Save")
+
 
 @bp.route("/versions/new/", methods=["GET", "POST"])
 @bp.route("/versions/<name>/edit/", methods=["GET", "POST"])
