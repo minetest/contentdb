@@ -6,6 +6,7 @@ from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
 from app.models import User, Package, PackageScreenshot, Permission, NotificationType, db, AuditSeverity
 from app.utils import addNotification, addAuditLog
+from app.utils.image import get_image_size
 
 
 def do_create_screenshot(user: User, package: Package, title: str, file, reason: str = None):
@@ -27,6 +28,13 @@ def do_create_screenshot(user: User, package: Package, title: str, file, reason:
 	ss.url      = uploaded_url
 	ss.approved = package.checkPerm(user, Permission.APPROVE_SCREENSHOT)
 	ss.order    = counter
+	ss.width, ss.height = get_image_size(uploaded_path)
+
+	if ss.is_too_small():
+		raise LogicError(429,
+				lazy_gettext("Screenshot is too small, it should be at least %(width)s by %(height)s pixels",
+						width=PackageScreenshot.HARD_MIN_SIZE[0], height=PackageScreenshot.HARD_MIN_SIZE[1]))
+
 	db.session.add(ss)
 
 	if reason is None:

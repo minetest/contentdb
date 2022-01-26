@@ -6,6 +6,10 @@
 
 {% block content %}
 	<h1>{{ _("Add a screenshot") }}</h1>
+	<p class="mb-4">
+		{{ _("The recommended resolution is 1920x1080, and screenshots must be at least %(width)dx%(height)d.",
+				width=920, height=517) }}
+	</p>
 
 	{% from "macros/forms.html" import render_field, render_submit_field %}
 	<form method="POST" action="" enctype="multipart/form-data">

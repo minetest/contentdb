@@ -6,7 +6,7 @@
 
 {% block content %}
 	{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-		<a href="{{ package.getURL("packages.create_screenshot") }}" class="btn btn-primary float-right">
+		<a href="{{ package.getURL('packages.create_screenshot') }}" class="btn btn-primary float-right">
 			<i class="fas fa-plus mr-1"></i>
 			{{ _("Add Image") }}
 		</a>
@@ -26,16 +26,34 @@
 							<i class="fas fa-bars"></i>
 						</div>
 						<div class="col-auto">
-							<img class="img-fluid" style="max-height: 64px;"
-									src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+							<img class="img-fluid" style="max-height: 64px;" src="{{ ss.getThumbnailURL() }}" />
 						</div>
 						<div class="col">
 							{{ ss.title }}
-							{% if not ss.approved %}
-								<div class="text-muted">
-									{{ _("Awaiting approval") }}
-								</div>
-							{%  endif %}
+
+							<div class="mt-1 text-muted">
+								{{ ss.width }} x {{ ss.height }}
+								{% if ss.is_low_res() %}
+									{% if ss.is_very_small() %}
+										<span class="badge badge-danger ml-3">
+											{{ _("Way too small") }}
+										</span>
+									{% elif ss.is_too_small() %}
+										<span class="badge badge-warning ml-3">
+											{{ _("Too small") }}
+										</span>
+									{% else %}
+										<span class="badge badge-secondary ml-3">
+											{{ _("Not HD") }}
+										</span>
+									{% endif %}
+								{% endif %}
+								{% if not ss.approved %}
+									<span class="ml-3">
+										{{ _("Awaiting approval") }}
+									</span>
+								{% endif %}
+							</div>
 						</div>
 						<form action="{{ ss.getDeleteURL() }}" method="POST" class="col-auto text-right" role="form">
 							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

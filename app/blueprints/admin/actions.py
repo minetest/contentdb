@@ -27,6 +27,7 @@ from app.models import *
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates
 from app.utils import addNotification, get_system_user
+from app.utils.image import get_image_size
 
 actions = {}
 
@@ -54,8 +55,7 @@ def check_releases():
 
 	tasks = []
 	for release in releases:
-		zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
-		tasks.append(checkZipRelease.s(release.id, zippath))
+		tasks.append(checkZipRelease.s(release.id, release.file_path))
 
 	result = group(tasks).apply_async()
 
@@ -71,8 +71,7 @@ def reimport_packages():
 	for package in Package.query.filter(Package.state!=PackageState.DELETED).all():
 		release = package.releases.first()
 		if release:
-			zippath = release.url.replace("/uploads/", app.config["UPLOAD_DIR"])
-			tasks.append(checkZipRelease.s(release.id, zippath))
+			tasks.append(checkZipRelease.s(release.id, release.file_path))
 
 	result = group(tasks).apply_async()
 
@@ -309,5 +308,18 @@ def remind_video_url():
 		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 				f"You should add a video to {packages_list}",
 				url_for('users.profile', username=user.username))
+
+	db.session.commit()
+
+
+@action("Update screenshot sizes")
+def remind_video_url():
+	import sys
+
+	for screenshot in PackageScreenshot.query.all():
+		width, height = get_image_size(screenshot.file_path)
+		print(f"{screenshot.url}: {width}, {height}", file=sys.stderr)
+		screenshot.width = width
+		screenshot.height = height
 
 	db.session.commit()

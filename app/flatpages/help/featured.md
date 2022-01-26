@@ -67,7 +67,7 @@ is available.
 ### Meta and packaging
 
 * MUST: `screenshot.png` is present and up-to-date, with a correct aspect ratio (3:2, at least 300x200).
-* MUST: Have a high resolution cover image on ContentDB (at least 1280x768 pixels).
+* MUST: Have a high resolution cover image on ContentDB (at least 1280x720 pixels).
   It may be shown cropped to 16:9 aspect ratio, or shorter.
 * MUST: mod.conf/game.conf/texture_pack.conf present with:
     * name (if mod or game)

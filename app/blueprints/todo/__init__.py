@@ -17,7 +17,7 @@
 from celery import uuid
 from flask import *
 from flask_login import current_user, login_required
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 
 from app.models import *
 from app.querybuilder import QueryBuilder
@@ -168,6 +168,11 @@ def view_user(username=None):
 			Package.state == PackageState.CHANGES_NEEDED)) \
 		.order_by(db.asc(Package.created_at)).all()
 
+	packages_with_small_screenshots = user.maintained_packages \
+		.filter(Package.screenshots.any(and_(PackageScreenshot.width < PackageScreenshot.SOFT_MIN_SIZE[0],
+				PackageScreenshot.height < PackageScreenshot.SOFT_MIN_SIZE[1]))) \
+		.all()
+
 	outdated_packages = user.maintained_packages \
 			.filter(Package.state != PackageState.DELETED,
 					Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))) \
@@ -185,7 +190,9 @@ def view_user(username=None):
 
 	return render_template("todo/user.html", current_tab="user", user=user,
 			unapproved_packages=unapproved_packages, outdated_packages=outdated_packages,
-			needs_tags=needs_tags, topics_to_add=topics_to_add)
+			needs_tags=needs_tags, topics_to_add=topics_to_add,
+			packages_with_small_screenshots=packages_with_small_screenshots,
+			screenshot_min_size=PackageScreenshot.HARD_MIN_SIZE, screenshot_rec_size=PackageScreenshot.SOFT_MIN_SIZE)
 
 
 @bp.route("/users/<username>/update-configs/apply-all/", methods=["POST"])

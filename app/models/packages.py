@@ -26,6 +26,7 @@ from sqlalchemy_utils.types import TSVectorType
 
 from . import db
 from .users import Permission, UserRank, User
+from .. import app
 
 
 class PackageQuery(BaseQuery, SearchQueryMixin):
@@ -885,6 +886,10 @@ class PackageRelease(db.Model):
 	# If the release is approved, then the task_id must be null and the url must be present
 	CK_approval_valid = db.CheckConstraint("not approved OR (task_id IS NULL AND (url = '') IS NOT FALSE)")
 
+	@property
+	def file_path(self):
+		return self.url.replace("/uploads/", app.config["UPLOAD_DIR"])
+
 	def getAsDictionary(self):
 		return {
 			"id": self.id,
@@ -986,6 +991,9 @@ class PackageRelease(db.Model):
 
 
 class PackageScreenshot(db.Model):
+	HARD_MIN_SIZE = (920, 517)
+	SOFT_MIN_SIZE = (1280, 720)
+
 	id         = db.Column(db.Integer, primary_key=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=False)
@@ -996,6 +1004,22 @@ class PackageScreenshot(db.Model):
 	url        = db.Column(db.String(100), nullable=False)
 	approved   = db.Column(db.Boolean, nullable=False, default=False)
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+	width      = db.Column(db.Integer, nullable=False)
+	height     = db.Column(db.Integer, nullable=False)
+
+	def is_very_small(self):
+		return self.width < 720 or self.height < 405
+
+	def is_too_small(self):
+		return self.width < PackageScreenshot.HARD_MIN_SIZE[0] or self.height < PackageScreenshot.HARD_MIN_SIZE[1]
+
+	def is_low_res(self):
+		return self.width < PackageScreenshot.SOFT_MIN_SIZE[0] or self.height < PackageScreenshot.SOFT_MIN_SIZE[1]
+
+	@property
+	def file_path(self):
+		return self.url.replace("/uploads/", app.config["UPLOAD_DIR"])
 
 	def getEditURL(self):
 		return url_for("packages.edit_screenshot",

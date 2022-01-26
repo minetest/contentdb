@@ -14,6 +14,7 @@
 			</a>
 		</div>
 	{% endif %}
+
 	<h2>{{ _("Unapproved Packages Needing Action") }}</h2>
 	<div class="list-group mt-3 mb-5">
 		{% for package in unapproved_packages %}
@@ -53,21 +54,75 @@
 		</form>
 	{% endif %}
 	<h2>{{ _("Potentially Outdated Packages") }}</h2>
-	<p class="alert alert-info">
-		{{ _("New: Git Update Detection has been set up on all packages to send notifications.") }}<br />
-		{{ _("Consider changing the update settings to create releases automatically instead.") }}
-	</p>
 	<p>
 		{{ _("Instead of marking packages as outdated, you can automatically create releases when New Commits or New Tags are pushed to Git by clicking 'Update Settings'.") }}
 		{% if outdated_packages %}
 			{{ _("To remove a package from below, create a release or change the update settings.") }}
 		{% endif %}
 	</p>
-
 	{% from "macros/todo.html" import render_outdated_packages %}
 	{{ render_outdated_packages(outdated_packages, current_user) }}
 
+
 	<div class="mt-5"></div>
+	<h2 id="small-screenshots">{{ _("Small Screenshots") }}</h2>
+	{% if packages_with_small_screenshots %}
+		<p>
+			{{ _("These packages have screenshots that are too small, and should be replaced.") }}
+			{{ _("Red and orange are screenshots below the limit, and grey screenshots are below the recommended resolution.") }}
+			{{ _("The recommended resolution is 1920x1080, and screenshots must be at least %(width)dx%(height)d.",
+					width=920, height=517) }}
+
+			<span class="badge badge-danger ml-3">
+				{{ _("Way too small") }}
+			</span>
+			<span class="badge badge-warning">
+				{{ _("Too small") }}
+			</span>
+			<span class="badge badge-secondary">
+				{{ _("Not HD") }}
+			</span>
+		</p>
+	{% endif %}
+	<div class="list-group mt-3 mb-5">
+		{% for package in packages_with_small_screenshots %}
+			<a class="list-group-item list-group-item-action" href="{{ package.getURL('packages.screenshots') }}">
+				<div class="row">
+					<div class="col-sm-3 text-muted" style="min-width: 200px;">
+						<img
+							class="img-fluid"
+							style="max-height: 22px; max-width: 22px;"
+							src="{{ package.getThumbnailOrPlaceholder() }}" />
+
+						<span class="pl-2">
+							{{ package.title }}
+						</span>
+					</div>
+
+					<div class="col-sm">
+						{% for ss in package.screenshots %}
+							{% if ss.is_low_res() %}
+								{% if ss.is_very_small() %}
+									{% set badge_color = "badge-danger" %}
+								{% elif ss.is_too_small() %}
+									{% set badge_color = "badge-warning" %}
+								{% else %}
+									{% set badge_color = "badge-secondary" %}
+								{% endif %}
+								<span class="badge {{ badge_color }} ml-2" title="{{ ss.title }}">
+									 {{ ss.width }} x {{ ss.height }}
+								</span>
+							{% endif %}
+						{% endfor %}
+					</div>
+				</div>
+			</a>
+		{% else %}
+			<p class="text-muted">{{ _("Nothing to do :)") }}</p>
+		{% endfor %}
+	</div>
+
+
 	<a class="btn btn-secondary float-right" href="{{ url_for('todo.tags', author=user.username) }}">
 		{{_ ("See All") }}</a>
 	<h2>{{ _("Packages Without Tags") }}</h2>

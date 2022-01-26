@@ -27,6 +27,7 @@ from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_tem
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from ..logic.LogicError import LogicError
 from ..logic.packages import do_edit_package, ALIASES
+from ..utils.image import get_image_size
 
 
 @celery.task()
@@ -213,6 +214,10 @@ def importRepoScreenshot(id):
 					ss.package = package
 					ss.title   = "screenshot.png"
 					ss.url	 = "/uploads/" + filename
+					ss.width, ss.height = get_image_size(destPath)
+					if ss.is_too_small():
+						return None
+
 					db.session.add(ss)
 					db.session.commit()
 
