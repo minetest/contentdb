@@ -20,7 +20,7 @@ from flask_babel import gettext, lazy_gettext
 from flask_login import login_required
 from flask_wtf import FlaskForm
 from wtforms import *
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
 from app.logic.releases import do_create_vcs_release, LogicError, do_create_zip_release
@@ -52,7 +52,7 @@ def get_mt_releases(is_max):
 
 
 class CreatePackageReleaseForm(FlaskForm):
-	title	   = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)])
+	title      = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)])
 	uploadOpt  = RadioField(lazy_gettext("Method"), choices=[("upload", lazy_gettext("File Upload"))], default="upload")
 	vcsLabel   = StringField(lazy_gettext("Git reference (ie: commit hash, branch, or tag)"), default=None)
 	fileUpload = FileField(lazy_gettext("File Upload"))
@@ -60,7 +60,8 @@ class CreatePackageReleaseForm(FlaskForm):
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	max_rel    = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	submit	   = SubmitField(lazy_gettext("Save"))
+	submit     = SubmitField(lazy_gettext("Save"))
+
 
 class EditPackageReleaseForm(FlaskForm):
 	title    = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)])

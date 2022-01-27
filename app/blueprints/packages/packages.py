@@ -24,7 +24,7 @@ from flask_login import login_required
 from sqlalchemy import or_, func
 from sqlalchemy.orm import joinedload, subqueryload
 from wtforms import *
-from wtforms.ext.sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
+from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import *
 
 from app.querybuilder import QueryBuilder

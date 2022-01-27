@@ -20,7 +20,7 @@ from flask_babel import lazy_gettext
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import *
-from wtforms.ext.sqlalchemy.fields import QuerySelectField
+from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
 
 from app.models import db, User, APIToken, Package, Permission

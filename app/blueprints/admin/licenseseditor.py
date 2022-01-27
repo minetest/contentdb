@@ -17,8 +17,7 @@
 
 from flask import redirect, render_template, abort, url_for, request, flash
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, SubmitField
-from wtforms.fields.html5 import URLField
+from wtforms import StringField, BooleanField, SubmitField, URLField
 from wtforms.validators import InputRequired, Length, Optional
 
 from app.utils import rank_required, nonEmptyOrNone
