@@ -289,15 +289,15 @@ def create_edit(author=None, name=None):
 	# Initial form class from post data and default data
 	if request.method == "GET":
 		if package is None:
-			form.name.data   = request.args.get("bname")
-			form.title.data  = request.args.get("title")
-			form.repo.data   = request.args.get("repo")
+			form.name.data = request.args.get("bname")
+			form.title.data = request.args.get("title")
+			form.repo.data = request.args.get("repo")
 			form.forums.data = request.args.get("forums")
 			form.license.data = None
 			form.media_license.data = None
 		else:
-			form.tags.data         = list(package.tags)
-			form.content_warnings.data = list(package.content_warnings)
+			form.tags.data = package.tags
+			form.content_warnings.data = package.content_warnings
 
 	if request.method == "POST" and form.type.data == PackageType.TXP:
 		form.license.data = form.media_license.data
