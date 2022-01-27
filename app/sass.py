@@ -12,16 +12,16 @@ Code unabashedly adapted from https://github.com/weapp/flask-coffee2js
 import os
 import os.path
 import codecs
-from flask import *
-from scss import Scss
+import sass
+from flask import send_from_directory
 
-def _convert(dir, src, dst):
+
+def _convert(dir_path, src, dst):
 	original_wd = os.getcwd()
-	os.chdir(dir)
+	os.chdir(dir_path)
 
-	css = Scss()
 	source = codecs.open(src, 'r', encoding='utf-8').read()
-	output = css.compile(source)
+	output = sass.compile(string=source)
 
 	os.chdir(original_wd)
 
@@ -29,8 +29,9 @@ def _convert(dir, src, dst):
 	outfile.write(output)
 	outfile.close()
 
-def _getDirPath(app, originalPath, create=False):
-	path = originalPath
+
+def _get_dir_path(app, original_path, create=False):
+	path = original_path
 
 	if not os.path.isdir(path):
 		path = os.path.join(app.root_path, path)
@@ -39,25 +40,25 @@ def _getDirPath(app, originalPath, create=False):
 		if create:
 			os.mkdir(path)
 		else:
-			raise IOError("Unable to find " + originalPath)
+			raise IOError("Unable to find " + original_path)
 
 	return path
 
-def sass(app, inputDir='scss', outputPath='static', force=False, cacheDir="public/static"):
-	static_url_path = app.static_url_path
-	inputDir = _getDirPath(app, inputDir)
-	cacheDir = _getDirPath(app, cacheDir or outputPath, True)
+
+def init_app(app, input_dir='scss', dest='static', force=False, cache_dir="public/static"):
+	input_dir = _get_dir_path(app, input_dir)
+	cache_dir = _get_dir_path(app, cache_dir or dest, True)
 
 	def _sass(filepath):
-		sassfile = "%s/%s.scss" % (inputDir, filepath)
-		cacheFile = "%s/%s.css" % (cacheDir, filepath)
+		scss_file = "%s/%s.scss" % (input_dir, filepath)
+		cache_file = "%s/%s.css" % (cache_dir, filepath)
 
 		# Source file exists, and needs regenerating
-		if os.path.isfile(sassfile) and (force or not os.path.isfile(cacheFile) or
-										 os.path.getmtime(sassfile) > os.path.getmtime(cacheFile)):
-			_convert(inputDir, sassfile, cacheFile)
-			app.logger.debug('Compiled %s into %s' % (sassfile, cacheFile))
+		if os.path.isfile(scss_file) and (force or not os.path.isfile(cache_file) or
+					os.path.getmtime(scss_file) > os.path.getmtime(cache_file)):
+			_convert(input_dir, scss_file, cache_file)
+			app.logger.debug('Compiled %s into %s' % (scss_file, cache_file))
 
-		return send_from_directory(cacheDir, filepath + ".css")
+		return send_from_directory(cache_dir, filepath + ".css")
 
-	app.add_url_rule("/%s/<path:filepath>.css" % outputPath, 'sass', _sass)
+	app.add_url_rule("/%s/<path:filepath>.css" % dest, 'sass', _sass)

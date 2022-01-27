@@ -407,7 +407,7 @@ class Package(db.Model):
 			lazy="dynamic", order_by=db.asc("package_screenshot_order"), cascade="all, delete, delete-orphan")
 
 	main_screenshot = db.relationship("PackageScreenshot", uselist=False, foreign_keys="PackageScreenshot.package_id",
-			lazy=True, order_by=db.asc("package_screenshot_order"),
+			lazy=True, order_by=db.asc("package_screenshot_order"), viewonly=True,
 			primaryjoin="and_(Package.id==PackageScreenshot.package_id, PackageScreenshot.approved)")
 
 	cover_image_id = db.Column(db.Integer, db.ForeignKey("package_screenshot.id"), nullable=True, default=None)

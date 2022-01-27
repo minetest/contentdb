@@ -65,7 +65,7 @@ login_manager.init_app(app)
 login_manager.login_view = "users.login"
 
 
-from .sass import sass
+from .sass import init_app as sass
 sass(app)
 
 
