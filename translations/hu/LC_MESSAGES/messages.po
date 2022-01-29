@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-26 03:09+0000\n"
-"PO-Revision-Date: 2022-01-23 17:15+0000\n"
-"Last-Translator: pampogo kiraly <pampogo.kiraly@gmail.com>\n"
+"PO-Revision-Date: 2022-01-29 19:51+0000\n"
+"Last-Translator: Balázs Kovács <kovacs.balazs.ktk@gmail.com>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/hu/>\n"
 "Language: hu\n"
-"Language-Team: Hungarian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/hu/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
 msgid "You have been banned."
-msgstr ""
+msgstr "Kitiltottak."
 
 #: app/template_filters.py:52
 #, python-format
@@ -36,7 +37,7 @@ msgstr "Név"
 
 #: app/blueprints/api/tokens.py:34
 msgid "Limit to package"
-msgstr ""
+msgstr "Csomagkorlát"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:255
 #: app/blueprints/packages/packages.py:460
@@ -58,7 +59,7 @@ msgstr "Belépés sikertelen [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked GitHub to account"
-msgstr ""
+msgstr "A GitHub-ot hozzákapcsoltuk a fiókhoz"
 
 #: app/blueprints/github/__init__.py:65
 #, fuzzy
@@ -170,11 +171,11 @@ msgstr "Tartalomra vonatkozó figyelmeztetések"
 
 #: app/blueprints/packages/packages.py:244 app/templates/packages/view.html:431
 msgid "License"
-msgstr ""
+msgstr "Licenc"
 
 #: app/blueprints/packages/packages.py:245
 msgid "Media License"
-msgstr ""
+msgstr "Média licenc"
 
 #: app/blueprints/packages/packages.py:247
 msgid "Long Description (Markdown)"
@@ -182,7 +183,7 @@ msgstr "Hosszú Leírás (Markdown)"
 
 #: app/blueprints/packages/packages.py:249
 msgid "VCS Repository URL"
-msgstr ""
+msgstr "VCS tároló URL"
 
 #: app/blueprints/packages/packages.py:250 app/blueprints/users/settings.py:51
 msgid "Website URL"
@@ -199,7 +200,7 @@ msgstr "Fórum Téma ID"
 
 #: app/blueprints/packages/packages.py:253
 msgid "Video URL"
-msgstr ""
+msgstr "Videó URL"
 
 #: app/blueprints/packages/packages.py:271
 msgid "Unable to find that user"
@@ -222,6 +223,8 @@ msgstr "Nincs erre engedélye"
 #: app/blueprints/packages/packages.py:402
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
+"Kérjük, hogy a jóváhagyási témában írja meg, milyen változtatásokra van "
+"szükség"
 
 #: app/blueprints/packages/packages.py:423
 #: app/blueprints/packages/packages.py:439
@@ -278,7 +281,7 @@ msgstr "Fájl Feltöltés"
 
 #: app/blueprints/packages/releases.py:57
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr ""
+msgstr "Git hivatkozás (azaz: commit hash, branch vagy tag)"
 
 #: app/blueprints/packages/releases.py:59
 #: app/blueprints/packages/releases.py:70
@@ -299,7 +302,7 @@ msgstr "URL"
 
 #: app/blueprints/packages/releases.py:68
 msgid "Task ID"
-msgstr ""
+msgstr "Feladat azonosítója"
 
 #: app/blueprints/packages/releases.py:69
 #: app/blueprints/packages/screenshots.py:40
@@ -316,11 +319,11 @@ msgstr ".zip fájl feltöltése"
 
 #: app/blueprints/packages/releases.py:188
 msgid "Set Min"
-msgstr ""
+msgstr "Minimum beállítása"
 
 #: app/blueprints/packages/releases.py:191
 msgid "Set Max"
-msgstr ""
+msgstr "Maximum beállítása"
 
 #: app/blueprints/packages/releases.py:194
 #, fuzzy
@@ -334,19 +337,19 @@ msgstr "Frissítés"
 #: app/blueprints/packages/releases.py:244
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
-msgstr ""
+msgstr "Trigger"
 
 #: app/blueprints/packages/releases.py:245
 msgid "New Commit"
-msgstr ""
+msgstr "Új Commit"
 
 #: app/blueprints/packages/releases.py:246 app/templates/admin/tags/list.html:8
 msgid "New Tag"
-msgstr ""
+msgstr "Új címke"
 
 #: app/blueprints/packages/releases.py:248
 msgid "Branch name"
-msgstr ""
+msgstr "Branch neve"
 
 #: app/blueprints/packages/releases.py:249
 #: app/templates/packages/update_config.html:38
@@ -374,6 +377,8 @@ msgstr "Automatizálás Kikapcsolása"
 #: app/blueprints/packages/releases.py:292
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
+"Kérjük, adja meg egy Git tároló URL címét az automatikus kiadások "
+"beállításához"
 
 #: app/blueprints/packages/releases.py:308
 #, fuzzy
@@ -430,14 +435,14 @@ msgstr "Borítókép"
 
 #: app/blueprints/report/__init__.py:34
 msgid "Message"
-msgstr ""
+msgstr "Üzenet"
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:238
 #: app/templates/macros/threads.html:53 app/templates/packages/view.html:510
 #: app/templates/report/index.html:4 app/templates/report/index.html:10
 #: app/templates/users/profile.html:28
 msgid "Report"
-msgstr ""
+msgstr "Jelentés"
 
 #: app/blueprints/threads/__init__.py:64
 msgid "Already subscribed!"
@@ -612,7 +617,7 @@ msgstr ""
 #: app/blueprints/users/account.py:150 app/blueprints/users/account.py:253
 #: app/blueprints/users/settings.py:142
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
-msgstr ""
+msgstr "Ez az e-mail cím leiratkozott/fekete listára került és nem használható"
 
 #: app/blueprints/users/account.py:190
 #, fuzzy
@@ -621,7 +626,7 @@ msgstr "Jelszó Visszaállítása"
 
 #: app/blueprints/users/account.py:215
 msgid "Unable to find account"
-msgstr ""
+msgstr "Nem találja a fiókot"
 
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:232
 msgid "New password"
@@ -658,7 +663,7 @@ msgstr "Ismeretlen ellenőrző jelszó!"
 
 #: app/blueprints/users/account.py:328
 msgid "Token has expired"
-msgstr ""
+msgstr "A token lejárt"
 
 #: app/blueprints/users/account.py:342
 msgid "Another user is already using that email"
@@ -693,6 +698,8 @@ msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
 msgstr ""
+"Ez az e-mail mostantól feketelistán van. Kérjük, lépjen kapcsolatba egy "
+"adminisztrátorral, ha le szeretné venni onnan."
 
 #: app/blueprints/users/claim.py:40 app/blueprints/users/claim.py:65
 #, fuzzy
@@ -705,11 +712,11 @@ msgstr ""
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
-msgstr ""
+msgstr "A felhasználónév már használatban van"
 
 #: app/blueprints/users/claim.py:49
 msgid "Unable to get GitHub username for user"
-msgstr ""
+msgstr "Nem sikerült lekérni a felhasználó GitHub-felhasználónevét"
 
 #: app/blueprints/users/claim.py:72
 msgid "That user has already been claimed!"
@@ -3447,4 +3454,3 @@ msgstr ""
 #~ "Consider changing the update settings to"
 #~ " create releases automatically instead."
 #~ msgstr ""
-
