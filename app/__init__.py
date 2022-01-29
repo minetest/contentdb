@@ -39,6 +39,7 @@ app.config["LANGUAGES"] = {
 	"fr": "Français",
 	"id": "Bahasa Indonesia",
 	"ms": "Bahasa Melayu",
+	"ru": "русский язык",
 }
 
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
