@@ -330,9 +330,11 @@ Supported query parameters:
 ### Tags
 
 * GET `/api/tags/` ([View](/api/tags/)):  List of:
-    * `name`:  technical name
-    * `title`:  human-readable title
-    * `description`:  tag description or null
+    * `name`:  technical name.
+    * `title`:  human-readable title.
+    * `description`:  tag description or null.
+    * `is_protected`: boolean, whether the tag is protected (can only be set by Editors in the web interface).
+    * `views`: number of views of this tag.
     
 ### Content Warnings
 

@@ -818,7 +818,13 @@ class Tag(db.Model):
 
 	def getAsDictionary(self):
 		description = self.description if self.description != "" else None
-		return { "name": self.name, "title": self.title, "description": description }
+		return {
+			"name": self.name,
+			"title": self.title,
+			"description": description,
+			"is_protected": self.is_protected,
+			"views": self.views,
+		}
 
 
 class MinetestRelease(db.Model):
