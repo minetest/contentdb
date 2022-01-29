@@ -159,7 +159,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 					raise LogicError(400, "Unknown tag: " + tag_id)
 
 			if not was_web and tag.is_protected:
-				break
+				continue
 
 			if tag.is_protected and tag not in old_tags and not user.rank.atLeast(UserRank.EDITOR):
 				raise LogicError(400, lazy_gettext("Unable to add protected tag %(title)s to package", title=tag.title))
