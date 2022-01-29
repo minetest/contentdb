@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-26 03:09+0000\n"
-"PO-Revision-Date: 2022-01-23 17:15+0000\n"
+"PO-Revision-Date: 2022-01-26 22:42+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
+"ms/>\n"
 "Language: ms\n"
-"Language-Team: Malay "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:102
@@ -195,7 +196,7 @@ msgstr "ID Topik Forum"
 
 #: app/blueprints/packages/packages.py:253
 msgid "Video URL"
-msgstr ""
+msgstr "URL Video"
 
 #: app/blueprints/packages/packages.py:271
 msgid "Unable to find that user"
@@ -926,6 +927,8 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
+"Tangkap layar terlalu kecil, ia mestilah sekurang-kurangnya "
+"%(width)sx%(height)s piksel"
 
 #: app/logic/uploads.py:52
 #, python-format
@@ -1949,7 +1952,7 @@ msgstr "Petua: tampalkan URL topik forum"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
-msgstr ""
+msgstr "Video YouTube akan dipaparkan dalam benaman."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2361,6 +2364,8 @@ msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
 msgstr ""
+"Resolusi yang digalakkan ialah 1920x1080, dan tangkap layar mestilah "
+"sekurang-kurangnya %(width)dx%(height)d."
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
@@ -2372,15 +2377,15 @@ msgstr "Tangkap layar paling atas akan digunakan sebagai imej kenit pakej."
 
 #: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:77
 msgid "Way too small"
-msgstr ""
+msgstr "Terlalu kecil sangat"
 
 #: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:80
 msgid "Too small"
-msgstr ""
+msgstr "Kecil sangat"
 
 #: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
 msgid "Not HD"
-msgstr ""
+msgstr "Bukan HD"
 
 #: app/templates/packages/screenshots.html:53
 msgid "Awaiting approval"
@@ -2400,11 +2405,11 @@ msgstr "Perubahan tertib memerlukan JavaScript."
 
 #: app/templates/packages/screenshots.html:100
 msgid "Videos"
-msgstr ""
+msgstr "Video"
 
 #: app/templates/packages/screenshots.html:102
 msgid "You can set a video on the Edit Details page"
-msgstr ""
+msgstr "Anda boleh tetapkan video di halaman Edit Maklumat"
 
 #: app/templates/packages/share.html:10
 msgid "Links"
@@ -2485,21 +2490,21 @@ msgstr "Muat Turun"
 #: app/templates/packages/view.html:43
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
-msgstr ""
+msgstr "Minetest %(min)s - %(max)s"
 
 #: app/templates/packages/view.html:45
 #, python-format
 msgid "For Minetest %(min)s and above"
-msgstr ""
+msgstr "Untuk Minetest %(min)s dan ke atas"
 
 #: app/templates/packages/view.html:47
 #, python-format
 msgid "Minetest %(max)s and below"
-msgstr ""
+msgstr "Untuk Minetest %(max)s dan ke bawah"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
-msgstr ""
+msgstr "Bagaimana untuk pasangkan ini?"
 
 #: app/templates/packages/view.html:73
 msgid "No downloads available"
@@ -2911,19 +2916,23 @@ msgstr ""
 
 #: app/templates/todo/user.html:68
 msgid "Small Screenshots"
-msgstr ""
+msgstr "Tangkap Layar Kecil"
 
 #: app/templates/todo/user.html:71
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr ""
+"Pakej-pakej ini mempunyai tangkap layar yang terlalu kecil, dan patut "
+"digantikan."
 
 #: app/templates/todo/user.html:72
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr ""
+"Yang warna merah dan jingga itu tangkap layar di bawah had minimum, manakala "
+"yang kelabu itu tangkap layar di bawah resolusi yang digalakkan."
 
 #: app/templates/todo/user.html:127
 msgid "See All"
@@ -3451,18 +3460,20 @@ msgid ""
 "This will blacklist an email address, preventing ContentDB from ever "
 "sending emails to it - including password resets."
 msgstr ""
+"Ini akan menyenaraihitamkan alamat e-mel, mencegah ContentDB daripada "
+"menghantar sebarang e-mel kepadanya - termasuk penetapan semula kata laluan."
 
 #: app/templates/users/unsubscribe.html:20
 msgid "Please enter the email address you wish to blacklist."
-msgstr ""
+msgstr "Sila masukkan alamat e-mel yang anda ingin senaraihitamkan."
 
 #: app/templates/users/unsubscribe.html:21
 msgid "You will then need to confirm the email"
-msgstr ""
+msgstr "Kemudian anda perlu mengesahkan e-mel tersebut"
 
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
-msgstr ""
+msgstr "Kini anda boleh buang langganan."
 
 #: app/templates/users/unsubscribe.html:40
 #, python-format
@@ -3470,6 +3481,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to sign into the account "
 "'%(display_name)s'"
 msgstr ""
+"Membuang langganan boleh menghalang anda daripada log masuk ke akaun "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -3477,14 +3490,18 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
+"ContentDB tidak akan mampu menghantar e-mel \"terlupa kata laluan\" dan e-"
+"mel sistem asas yang lain.\n"
+"\t\t\t\t\tSila pertimbangkan untuk edit keutamaan pemberitahuan e-mel "
+"menggantikan ini."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
-msgstr ""
+msgstr "Anda tidak akan mampu menggunakan e-mel ini dengan ContentDB lagi."
 
 #: app/templates/users/unsubscribe.html:57
 msgid "Edit Notification Preferences"
-msgstr ""
+msgstr "Edit Keutamaan Pemberitahuan"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -3602,4 +3619,3 @@ msgstr ""
 #~ "Pertimbangkan untuk tukar tetapan kemas "
 #~ "kini untuk cipta terbitan secara "
 #~ "automatik sahaja."
-
