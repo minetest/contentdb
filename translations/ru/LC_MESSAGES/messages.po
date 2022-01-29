@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-26 03:09+0000\n"
-"PO-Revision-Date: 2022-01-28 11:42+0000\n"
-"Last-Translator: Mikitko <rudzik8@protonmail.com>\n"
+"PO-Revision-Date: 2022-01-29 19:51+0000\n"
+"Last-Translator: Nikita Epifanov <nikgreens@protonmail.com>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
 "contentdb/ru/>\n"
 "Language: ru\n"
@@ -723,6 +723,7 @@ msgid "Could not find the key in your signature!"
 msgstr "Не получилось найти ключ в вашей подписи!"
 
 #: app/blueprints/users/claim.py:114
+#, fuzzy
 msgid "Unknown claim type"
 msgstr "Неизвестный тип занимания"
 
@@ -962,7 +963,7 @@ msgstr "Отправить на проверку"
 #: app/models/packages.py:169
 #, fuzzy
 msgid "Approve"
-msgstr "Проверен"
+msgstr "Проверить"
 
 #: app/models/packages.py:171 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:80
@@ -1742,14 +1743,13 @@ msgid "WIP"
 msgstr "WIP"
 
 #: app/templates/macros/topics.html:35
-#, fuzzy
 msgid "Show"
 msgstr "Показать"
 
 #: app/templates/macros/topics.html:37
 #, fuzzy
 msgid "Discard"
-msgstr "Отказаться"
+msgstr "Отклонить"
 
 #: app/templates/macros/topics.html:57
 #, fuzzy
@@ -1758,17 +1758,15 @@ msgstr "Старые"
 
 #: app/templates/metapackages/list.html:4
 #: app/templates/metapackages/view.html:4
-#, fuzzy
 msgid "Meta Packages"
 msgstr "Мета дополнения"
 
 #: app/templates/metapackages/list.html:37
-#, fuzzy
 msgid "No meta packages found."
 msgstr "Не найдено мета дополнений."
 
 #: app/templates/metapackages/view.html:8
-#, fuzzy, python-format
+#, python-format
 msgid "Meta Package \"%(name)s\""
 msgstr "Мета дополнение \"%(name)s\""
 
@@ -1843,12 +1841,10 @@ msgid "Git Update Detection for %(username)s"
 msgstr "Git обнаружение обновлений для %(username)s"
 
 #: app/templates/packages/bulk_update_conf.html:10
-#, fuzzy
 msgid "Packages with Update Settings"
 msgstr "Дополнения с настройками обновления"
 
 #: app/templates/packages/bulk_update_conf.html:16
-#, fuzzy
 msgid "Bulk Set Update Settings"
 msgstr "Массовая установка настроек обновления"
 
@@ -1865,7 +1861,6 @@ msgstr "Оставьте пустым, чтобы использовать ве�
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
-#, fuzzy
 msgid "Currently, the branch name field is only used by the New Commit trigger."
 msgstr ""
 "В настоящее время поле имени ветки используется только триггером нового "
@@ -2013,7 +2008,6 @@ msgid "Thumbnail"
 msgstr "Миниатюра"
 
 #: app/templates/packages/release_bulk_change.html:4
-#, fuzzy
 msgid "Bulk Change Releases"
 msgstr "Массовое изменение релизов"
 
@@ -2849,9 +2843,8 @@ msgid "Missing tags only"
 msgstr "Только отсутствующие теги"
 
 #: app/templates/todo/tags.html:31
-#, fuzzy
 msgid "Edit Tags"
-msgstr "Изменить Детали"
+msgstr "Редактировать теги"
 
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
@@ -2867,9 +2860,8 @@ msgid "Forum Topics"
 msgstr "Темы форума"
 
 #: app/templates/todo/topics.html:16
-#, fuzzy
 msgid "Sort by name"
-msgstr "Имя пользователя"
+msgstr "Сортировать по имени"
 
 #: app/templates/todo/topics.html:20
 msgid "Sort by views"
@@ -3270,9 +3262,8 @@ msgid "Delete Anyway"
 msgstr "Удалить в любом случае"
 
 #: app/templates/users/email_sent.html:4
-#, fuzzy
 msgid "Check Your Email"
-msgstr "Username или email"
+msgstr "Проверьте электронную почту"
 
 #: app/templates/users/email_sent.html:11
 msgid "We've sent an email to the address you specified."
@@ -3390,7 +3381,6 @@ msgid "View list of tags"
 msgstr "Просмотр списка тегов"
 
 #: app/templates/users/profile.html:198
-#, fuzzy
 msgid "Maintained Packages"
 msgstr "Разрабатываемые дополнения"
 
