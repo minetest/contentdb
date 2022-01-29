@@ -185,8 +185,8 @@ def view_user(username=None):
 			.all()
 
 	needs_tags = user.maintained_packages \
-		.filter(Package.state != PackageState.DELETED) \
-		.filter_by(tags=None).order_by(db.asc(Package.title)).all()
+		.filter(Package.state != PackageState.DELETED, Package.tags==None) \
+		.order_by(db.asc(Package.title)).all()
 
 	return render_template("todo/user.html", current_tab="user", user=user,
 			unapproved_packages=unapproved_packages, outdated_packages=outdated_packages,
