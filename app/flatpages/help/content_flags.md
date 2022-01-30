@@ -25,8 +25,8 @@ A flag can be:
 There are also two meta-flags, which are designed so that we can change how different platforms filter the package list
 without making a release.
 
-* `android_default`: currently same as `*, deprecated`. Hides all content warnings, WIP packages, and deprecated packages
-* `desktop_default`: currently same as `deprecated`. Hides all WIP and deprecated packages
+* `android_default`: currently same as `*, deprecated`. Hides all content warnings and deprecated packages
+* `desktop_default`: currently same as `deprecated`. Hides deprecated packages
 
 ## Content Warnings
 
