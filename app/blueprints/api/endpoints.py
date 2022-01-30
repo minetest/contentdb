@@ -13,13 +13,14 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import math
 from typing import List
 
 import flask_sqlalchemy
 from flask import request, jsonify, current_app
 from flask_login import current_user, login_required
-from sqlalchemy.orm import subqueryload, joinedload
+from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
 from app import csrf
@@ -474,6 +475,26 @@ def homepage():
 		"pop_txp": mapPackages(pop_txp),
 		"pop_game": mapPackages(pop_gam),
 		"high_reviewed": mapPackages(high_reviewed)
+	})
+
+
+@bp.route("/api/welcome/v1/")
+@cors_allowed
+def welcome_v1():
+	featured = Package.query \
+		.filter(Package.type == PackageType.GAME, Package.state == PackageState.APPROVED,
+				Package.tags.any(name="featured")) \
+		.order_by(func.random()) \
+		.limit(5).all()
+
+	mtg = Package.query.filter(Package.author.has(username="Minetest"), Package.name == "minetest_game").one()
+	featured.insert(2, mtg)
+
+	def map_packages(packages: List[Package]):
+		return [pkg.getAsDictionaryShort(current_app.config["BASE_URL"]) for pkg in packages]
+
+	return jsonify({
+		"featured": map_packages(featured),
 	})
 
 
