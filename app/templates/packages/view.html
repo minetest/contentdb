@@ -322,6 +322,13 @@
 					{% from "macros/packagegridtile.html" import render_pkggrid %}
 					{{ render_pkggrid(packages_uses) }}
 				{% endif %}
+
+				{% if package.type == package.type.GAME %}
+					<h2>{{ _("Content") }}</h2>
+					<a href="{{ package.getURL('packages.game_hub') }}" class="btn btn-lg btn-primary">
+						{{ _("View content for game") }}
+					</a>
+				{% endif %}
 			</div>
 
 			<aside class="col-md-3 info-sidebar">
@@ -369,6 +376,12 @@
 							{{ _("Donate now") }}
 						</a>
 					</div>
+				{% endif %}
+
+				{% if package.type == package.type.GAME %}
+					<a href="{{ package.getURL('packages.game_hub') }}" class="btn btn-lg btn-block mb-4 btn-primary">
+						{{ _("View content for game") }}
+					</a>
 				{% endif %}
 
 				{% if package.type != package.type.TXP %}

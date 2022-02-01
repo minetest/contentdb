@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ _("Community Hub") }} -
+{{ _('%(title)s by %(author)s', title=package.title, author=package.author.display_name) }}
+{% endblock %}
+
+
+{% block headextra %}
+	<meta name="og:title" content="{{ self.title() }}"/>
+	<meta name="og:description" content="{{ _('Mods for %(title)s', title=package.title) }}"/>
+	<meta name="description" content="{{ _('Mods for %(title)s', title=package.title) }}"/>
+	<meta name="og:url" content="{{ package.getURL('packages.game_hub', absolute=True) }}"/>
+	{% if package.getMainScreenshotURL() %}
+		<meta name="og:image" content="{{ package.getMainScreenshotURL(absolute=True) }}"/>
+	{% endif %}
+{% endblock %}
+
+
+{% block content %}
+	{% from "macros/packagegridtile.html" import render_pkggrid %}
+
+	<h1 class="mb-5">
+		{{ _("Community Hub") }} -
+		<a href="{{ package.getURL('packages.view') }}">
+			{{ _('%(title)s by %(author)s', title=package.title, author=package.author.display_name) }}
+		</a>
+	</h1>
+
+	<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Recently Added") }}</h2>
+	{{ render_pkggrid(new) }}
+
+
+	<a href="{{ url_for('packages.list_all', sort='last_release', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Recently Updated") }}</h2>
+	{{ render_pkggrid(updated) }}
+
+
+	<a href="{{ url_for('packages.list_all', type='mod', sort='score', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Top Mods") }}</h2>
+	{{ render_pkggrid(pop_mod) }}
+
+
+	<a href="{{ url_for('packages.list_all', sort='reviews', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Highest Reviewed") }}</h2>
+	{{ render_pkggrid(high_reviewed) }}
+
+{% endblock %}

@@ -75,6 +75,10 @@ class QueryBuilder:
 		if self.search is not None and self.search.strip() == "":
 			self.search = None
 
+		self.game = args.get("game")
+		if self.game:
+			self.game = Package.get_by_key(self.game)
+
 	def setSortIfNone(self, name, dir="desc"):
 		if self.order_by is None:
 			self.order_by = name
@@ -131,6 +135,9 @@ class QueryBuilder:
 				abort(404)
 
 			query = query.filter_by(author=author)
+
+		if self.game:
+			query = query.filter(Package.supported_games.any(game=self.game))
 
 		for tag in self.tags:
 			query = query.filter(Package.tags.any(Tag.id == tag.id))

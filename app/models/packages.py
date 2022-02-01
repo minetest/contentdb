@@ -475,6 +475,14 @@ class Package(db.Model):
 		for e in PackagePropertyKey:
 			setattr(self, e.name, getattr(package, e.name))
 
+	@classmethod
+	def get_by_key(cls, key):
+		parts = key.split("/")
+		if len(parts) != 2:
+			return None
+
+		return Package.query.filter(Package.name == parts[1], Package.author.has(username=parts[0])).first()
+
 	def getId(self):
 		return "{}/{}".format(self.author.username, self.name)
 

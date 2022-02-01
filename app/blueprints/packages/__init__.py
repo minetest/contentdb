@@ -65,4 +65,4 @@ def get_package_tabs(user: User, package: Package):
 	]
 
 
-from . import packages, screenshots, releases, reviews
+from . import packages, screenshots, releases, reviews, game_hub
