@@ -16,15 +16,17 @@
 
 
 import os
+import sys
 from typing import List
 
 import requests
 from celery import group
-from flask import redirect, url_for, flash, current_app
+from flask import redirect, url_for, flash, current_app, jsonify
 from sqlalchemy import or_, and_
 
+from app.logic.game_support import GameSupportResolver
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
-	NotificationType, PackageUpdateConfig, License, UserRank, PackageType
+	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, PackageGameSupport
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates
 from app.utils import addNotification, get_system_user
@@ -320,4 +322,11 @@ def update_screenshot_sizes():
 		screenshot.width = width
 		screenshot.height = height
 
+	db.session.commit()
+
+
+@action("Detect game support")
+def detect_game_support():
+	resolver = GameSupportResolver()
+	resolver.update_all()
 	db.session.commit()

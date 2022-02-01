@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import json
 import os, shutil, gitdb
 from zipfile import ZipFile
@@ -22,10 +23,11 @@ from kombu import uuid
 
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog, get_system_user
+from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from ..logic.LogicError import LogicError
+from ..logic.game_support import GameSupportResolver
 from ..logic.packages import do_edit_package, ALIASES
 from ..utils.image import get_image_size
 
@@ -112,6 +114,10 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 
 		for meta in getMetaPackages(optional_depends):
 			db.session.add(Dependency(package, meta=meta, optional=True))
+
+		# Update game supports
+		resolver = GameSupportResolver()
+		resolver.update(package)
 
 		# Update min/max
 		if tree.meta.get("min_minetest_version"):

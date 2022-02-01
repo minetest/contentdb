@@ -344,6 +344,25 @@ class Dependency(db.Model):
 		return retval
 
 
+class PackageGameSupport(db.Model):
+	id = db.Column(db.Integer, primary_key=True)
+
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=False)
+	package = db.relationship("Package", foreign_keys=[package_id])
+
+	game_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=False)
+	game = db.relationship("Package", foreign_keys=[game_id])
+
+	supports = db.Column(db.Boolean, nullable=False, default=True)
+	confidence = db.Column(db.Integer, nullable=False, default=0)
+
+	__table_args__ = (db.UniqueConstraint("game_id", "package_id", name="_package_game_support_uc"),)
+
+	def __init__(self, package, game):
+		self.package = package
+		self.game = game
+
+
 class Package(db.Model):
 	query_class  = PackageQuery
 
@@ -395,6 +414,12 @@ class Package(db.Model):
 	provides = db.relationship("MetaPackage", secondary=PackageProvides, order_by=db.asc("name"), back_populates="packages")
 
 	dependencies = db.relationship("Dependency", back_populates="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
+
+	supported_games = db.relationship("PackageGameSupport", back_populates="package", lazy="dynamic",
+			foreign_keys=[PackageGameSupport.package_id])
+
+	game_supported_mods = db.relationship("PackageGameSupport", back_populates="game", lazy="dynamic",
+			foreign_keys=[PackageGameSupport.game_id])
 
 	tags = db.relationship("Tag", secondary=Tags, back_populates="packages")
 
@@ -470,6 +495,11 @@ class Package(db.Model):
 
 	def getSortedOptionalDependencies(self):
 		return self.getSortedDependencies(False)
+
+	def getSortedSupportedGames(self):
+		supported = self.supported_games.all()
+		supported.sort(key=lambda x: -x.game.score)
+		return supported
 
 	def getAsDictionaryKey(self):
 		return {

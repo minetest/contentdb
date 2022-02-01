@@ -419,6 +419,19 @@
 					</dl>
 				{% endif %}
 
+				{% if package.type == package.type.MOD %}
+					<h3>{{ _("Supported Games") }}</h3>
+					{% for support in package.getSortedSupportedGames() %}
+						<a class="badge badge-primary"
+								href="{{ support.game.getURL('packages.view') }}">
+							{{ _("%(title)s by %(display_name)s",
+									title=support.game.title, display_name=support.game.author.display_name) }}
+						</a>
+					{% else %}
+						{{ _("No specifc game is required") }}
+					{% endfor %}
+				{% endif %}
+
 				<h3>
 					{{ _("Information") }}
 				</h3>
