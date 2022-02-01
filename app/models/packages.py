@@ -599,7 +599,7 @@ class Package(db.Model):
 
 	def checkPerm(self, user, perm):
 		if not user.is_authenticated:
-			return perm == Permission.SEE_PACKAGE and self.state == PackageState.APPROVED
+			return False
 
 		if type(perm) == str:
 			perm = Permission[perm]
@@ -610,10 +610,7 @@ class Package(db.Model):
 		isMaintainer = isOwner or user.rank.atLeast(UserRank.EDITOR) or user in self.maintainers
 		isApprover = user.rank.atLeast(UserRank.APPROVER)
 
-		if perm == Permission.SEE_PACKAGE:
-			return self.state == PackageState.APPROVED or isMaintainer or isApprover
-
-		elif perm == Permission.CREATE_THREAD:
+		if perm == Permission.CREATE_THREAD:
 			return user.rank.atLeast(UserRank.MEMBER)
 
 		# Members can edit their own packages, and editors can edit any packages

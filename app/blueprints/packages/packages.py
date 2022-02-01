@@ -115,9 +115,6 @@ def getReleases(package):
 @bp.route("/packages/<author>/<name>/")
 @is_package_page
 def view(package):
-	if not package.checkPerm(current_user, Permission.SEE_PACKAGE):
-		abort(404)
-
 	show_similar = not package.approved and (
 			current_user in package.maintainers or
 				package.checkPerm(current_user, Permission.APPROVE_NEW))
@@ -208,9 +205,6 @@ def shield(package, type):
 @bp.route("/packages/<author>/<name>/download/")
 @is_package_page
 def download(package):
-	if not package.checkPerm(current_user, Permission.SEE_PACKAGE):
-		abort(404)
-
 	release = package.getDownloadRelease()
 
 	if release is None:
@@ -593,9 +587,6 @@ def alias_create_edit(package: Package, alias_id: int = None):
 @login_required
 @is_package_page
 def share(package):
-	if not package.checkPerm(current_user, Permission.SEE_PACKAGE):
-		abort(404)
-
 	return render_template("packages/share.html", package=package,
 			tabs=get_package_tabs(current_user, package), current_tab="share")
 
@@ -603,9 +594,6 @@ def share(package):
 @bp.route("/packages/<author>/<name>/similar/")
 @is_package_page
 def similar(package):
-	if not package.checkPerm(current_user, Permission.SEE_PACKAGE):
-		abort(404)
-
 	packages_modnames = {}
 	for metapackage in package.provides:
 		packages_modnames[metapackage] = Package.query.filter(Package.id != package.id,
