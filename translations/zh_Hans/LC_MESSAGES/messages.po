@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-26 03:09+0000\n"
-"PO-Revision-Date: 2022-02-01 11:39+0000\n"
-"Last-Translator: Gao Tiesuan <yepifoas@666email.com>\n"
+"PO-Revision-Date: 2022-02-01 14:55+0000\n"
+"Last-Translator: Y.W. <y5nw@outlook.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "minetest/contentdb/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #: app/__init__.py:102
 msgid "You have been banned."
-msgstr "你被封号了。"
+msgstr "您被封号了。"
 
 #: app/template_filters.py:52
 #, python-format
@@ -59,15 +59,15 @@ msgstr "验证失败 [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked GitHub to account"
-msgstr "绑定猫站账号"
+msgstr "已绑定GitHub账号"
 
 #: app/blueprints/github/__init__.py:65
 msgid "GitHub account is already associated with another user"
-msgstr "猫站账号已与其他用户绑定"
+msgstr "GitHub账号已与其他用户绑定"
 
 #: app/blueprints/github/__init__.py:71
 msgid "Unable to find an account for that GitHub user"
-msgstr "无法找到猫站用户的账号"
+msgstr "无法找到该GitHub用户的账号"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
@@ -540,7 +540,7 @@ msgstr "用户名"
 #: app/templates/users/claim_forums.html:68
 #: app/templates/users/register.html:16
 msgid "Only a-zA-Z0-9._ allowed"
-msgstr ""
+msgstr "只允许使用这些字符：a-zA-Z0-9._"
 
 #: app/blueprints/users/account.py:106 app/blueprints/users/account.py:189
 #: app/blueprints/users/account.py:224 app/blueprints/users/account.py:376
@@ -643,7 +643,7 @@ msgstr "另一个用户已经在使用该电子邮件"
 
 #: app/blueprints/users/account.py:345
 msgid "Confirmed email change"
-msgstr ""
+msgstr "已确认的电子邮件变更"
 
 #: app/blueprints/users/account.py:350
 msgid "Email address changed"
@@ -673,7 +673,7 @@ msgstr "该电子邮件现在已被列入黑名单。如果您希望撤消此操
 msgid ""
 "Invalid username - must only contain A-Za-z0-9._. Consider contacting an "
 "admin"
-msgstr ""
+msgstr "用户名只能包含 A-Za-z0-9._。请考虑联系管理员"
 
 #: app/blueprints/users/claim.py:45
 #, fuzzy
@@ -857,12 +857,14 @@ msgid ""
 msgstr "名称只能包含小写字母（a-z）、数字（0-9）和下划线（_）"
 
 #: app/logic/packages.py:109
+#, fuzzy
 msgid "You do not have permission to edit this package"
-msgstr ""
+msgstr "您没有权限编辑这个软件包"
 
 #: app/logic/packages.py:113
+#, fuzzy
 msgid "You do not have permission to change the package name"
-msgstr ""
+msgstr "您没有权限修改这个软件包的名字"
 
 #: app/logic/packages.py:165
 #, python-format
@@ -870,8 +872,9 @@ msgid "Unable to add protected tag %(title)s to package"
 msgstr ""
 
 #: app/logic/releases.py:32
+#, fuzzy
 msgid "You do not have permission to make releases"
-msgstr ""
+msgstr "您没有权限发布新版本"
 
 #: app/logic/releases.py:37
 msgid ""
@@ -912,28 +915,32 @@ msgid "Mod"
 msgstr "Mod"
 
 #: app/models/packages.py:67
+#, fuzzy
 msgid "Game"
-msgstr ""
+msgstr "子游戏"
 
 #: app/models/packages.py:69
+#, fuzzy
 msgid "Texture Pack"
-msgstr ""
+msgstr "材质包"
 
 #: app/models/packages.py:74 app/templates/base.html:27
 msgid "Mods"
 msgstr ""
 
 #: app/models/packages.py:76 app/templates/base.html:30
+#, fuzzy
 msgid "Games"
-msgstr ""
+msgstr "子游戏"
 
 #: app/models/packages.py:78 app/templates/base.html:33
+#, fuzzy
 msgid "Texture Packs"
-msgstr ""
+msgstr "材质包"
 
 #: app/models/packages.py:167
 msgid "Submit for Approval"
-msgstr ""
+msgstr "提交并申请批准"
 
 #: app/models/packages.py:169
 msgid "Approve"
@@ -949,10 +956,11 @@ msgid "Delete"
 msgstr "删除"
 
 #: app/tasks/emails.py:102
+#, fuzzy
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
-msgstr ""
+msgstr "您是ContentDB的一名用户，所以收到了这封邮件。"
 
 #: app/tasks/emails.py:109 app/templates/emails/verify.html:30
 msgid ""
@@ -1037,12 +1045,14 @@ msgid "Notifications"
 msgstr "通知"
 
 #: app/templates/base.html:105
+#, fuzzy
 msgid "Add Package"
-msgstr ""
+msgstr "添加软件包"
 
 #: app/templates/base.html:122
+#, fuzzy
 msgid "Profile"
-msgstr ""
+msgstr "个人资料"
 
 #: app/templates/base.html:140
 msgid "Admin"
@@ -1069,8 +1079,9 @@ msgid "Settings"
 msgstr "设置"
 
 #: app/templates/base.html:161
+#, fuzzy
 msgid "Sign out"
-msgstr ""
+msgstr "退出"
 
 #: app/templates/base.html:190
 msgid "Help translate ContentDB"
@@ -1137,16 +1148,18 @@ msgstr ""
 #: app/templates/index.html:115 app/templates/index.html:122
 #: app/templates/index.html:129 app/templates/index.html:151
 #: app/templates/index.html:158
+#, fuzzy
 msgid "See more"
-msgstr ""
+msgstr "查看更多"
 
 #: app/templates/index.html:103
 msgid "Recently Added"
 msgstr "最近添加的"
 
 #: app/templates/index.html:110
+#, fuzzy
 msgid "Recently Updated"
-msgstr ""
+msgstr "最近更新的"
 
 #: app/templates/index.html:117
 msgid "Top Games"
@@ -1165,8 +1178,9 @@ msgid "Search by Tags"
 msgstr ""
 
 #: app/templates/index.html:153
+#, fuzzy
 msgid "Highest Reviewed"
-msgstr ""
+msgstr "评价最高的"
 
 #: app/templates/index.html:160
 msgid "Recent Positive Reviews"
@@ -1195,13 +1209,14 @@ msgid "Send bulk email"
 msgstr "批量发送电子邮件"
 
 #: app/templates/admin/send_bulk_notification.html:4
+#, fuzzy
 msgid "Send bulk notification"
-msgstr ""
+msgstr "批量发送消息"
 
 #: app/templates/admin/send_email.html:4
-#, python-format
+#, fuzzy, python-format
 msgid "Send email to %(username)s"
-msgstr ""
+msgstr "给%(username)s发送电子邮件"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
@@ -1231,17 +1246,20 @@ msgstr ""
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
+#, fuzzy
 msgid "Minetest Versions"
-msgstr ""
+msgstr "Minetest版本"
 
 #: app/templates/admin/versions/list.html:8
+#, fuzzy
 msgid "New Version"
-msgstr ""
+msgstr "新版本"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
+#, fuzzy
 msgid "Warnings"
-msgstr ""
+msgstr "警告"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
@@ -1277,8 +1295,9 @@ msgid ""
 msgstr ""
 
 #: app/templates/api/create_edit_token.html:40
+#, fuzzy
 msgid "Reset"
-msgstr ""
+msgstr "重置"
 
 #: app/templates/api/create_edit_token.html:49
 msgid "Human-readable name to tell tokens apart."
@@ -1297,12 +1316,14 @@ msgstr ""
 #: app/templates/macros/topics.html:65
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
+#, fuzzy
 msgid "Create"
-msgstr ""
+msgstr "创建"
 
 #: app/templates/api/list_tokens.html:9
+#, fuzzy
 msgid "API Documentation"
-msgstr ""
+msgstr "API文档"
 
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
@@ -1319,8 +1340,9 @@ msgid "From %(username)s."
 msgstr ""
 
 #: app/templates/emails/notification.html:19
+#, fuzzy
 msgid "View Notification"
-msgstr ""
+msgstr "查看消息"
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:43
@@ -1346,12 +1368,14 @@ msgid "from %(username)s."
 msgstr ""
 
 #: app/templates/emails/notification_digest.html:22
+#, fuzzy
 msgid "Other Notifications"
-msgstr ""
+msgstr "其它消息"
 
 #: app/templates/emails/notification_digest.html:36
+#, fuzzy
 msgid "View Notifications"
-msgstr ""
+msgstr "查看消息"
 
 #: app/templates/emails/unable_to_find_account.html:2
 msgid ""
@@ -1399,8 +1423,9 @@ msgid "If this was you, then please click this link to confirm the address:"
 msgstr ""
 
 #: app/templates/emails/verify.html:19
+#, fuzzy
 msgid "Confirm Email Address"
-msgstr ""
+msgstr "确认电子邮箱地址"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
@@ -1437,12 +1462,14 @@ msgid "Start typing to see suggestions"
 msgstr ""
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
+#, fuzzy
 msgid "State"
-msgstr ""
+msgstr "状态"
 
 #: app/templates/macros/package_approval.html:22
+#, fuzzy
 msgid "Create first release"
-msgstr ""
+msgstr "发布第一个版本"
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
@@ -1652,12 +1679,14 @@ msgid "No outdated packages."
 msgstr ""
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:160
+#, fuzzy
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #: app/templates/macros/topics.html:8
+#, fuzzy
 msgid "Date"
-msgstr ""
+msgstr "日期"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
@@ -1671,8 +1700,9 @@ msgid "WIP"
 msgstr ""
 
 #: app/templates/macros/topics.html:35
+#, fuzzy
 msgid "Show"
-msgstr ""
+msgstr "显示"
 
 #: app/templates/macros/topics.html:37
 msgid "Discard"
