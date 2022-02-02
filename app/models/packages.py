@@ -1093,6 +1093,7 @@ class PackageScreenshot(db.Model):
 			"url": base_url + self.url,
 			"approved": self.approved,
 			"created_at": self.created_at.isoformat(),
+			"is_cover_image": self.package.cover_image == self,
 		}
 
 

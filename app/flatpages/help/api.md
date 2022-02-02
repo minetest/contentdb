@@ -226,6 +226,7 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
         * `url`: absolute URL to screenshot.
         * `created_at`: ISO time.
         * `order`: Number used in ordering.
+        * `is_cover_image`: true for cover image.
 * GET `/api/packages/<username>/<name>/screenshots/<id>/` (Read)
     * Returns screenshot dictionary like above.
 * POST `/api/packages/<username>/<name>/screenshots/new/` (Create)
