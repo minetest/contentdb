@@ -53,12 +53,11 @@ def view(name):
 		.filter(Dependency.optional==True, Package.state==PackageState.APPROVED) \
 		.all()
 
-	similar_topics = None
-	if mpackage.packages.filter_by(state=PackageState.APPROVED).count() == 0:
-		similar_topics = ForumTopic.query \
-				.filter_by(name=name) \
-				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
-				.all()
+	similar_topics = ForumTopic.query \
+		.filter_by(name=name) \
+		.filter(~ db.exists().where(Package.forums == ForumTopic.topic_id)) \
+		.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
+		.all()
 
 	return render_template("metapackages/view.html", mpackage=mpackage,
 			dependers=dependers, optional_dependers=optional_dependers,

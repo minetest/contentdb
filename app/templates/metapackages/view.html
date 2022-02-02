@@ -4,18 +4,21 @@
 {{ mpackage.name }} - {{ _("Meta Packages") }}
 {% endblock %}
 
+{% from "macros/packagegridtile.html" import render_pkggrid %}
+
 {% block content %}
 	<h1>{{ _("Meta Package \"%(name)s\"", name=mpackage.name) }}</h1>
 
 	<h2>{{ _("Provided By") }}</h2>
 
-	{% from "macros/packagegridtile.html" import render_pkggrid %}
-	{{ render_pkggrid(mpackage.packages.filter_by(state="APPROVED").all()) }}
+	<h3>{{ _("Games") }}</h3>
+	{{ render_pkggrid(mpackage.packages.filter_by(type="GAME", state="APPROVED").all()) }}
+
+	<h3>{{ _("Mods") }}</h3>
+	{{ render_pkggrid(mpackage.packages.filter_by(type="MOD", state="APPROVED").all()) }}
 
 	{% if similar_topics %}
-		<p>
-			{{ _("Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):") }}
-		</p>
+		<h3>{{ _("Forum Topics") }}</h3>
 		<ul>
 			{% for t in similar_topics %}
 				<li>
