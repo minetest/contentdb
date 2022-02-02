@@ -354,7 +354,7 @@ class PackageGameSupport(db.Model):
 	game = db.relationship("Package", foreign_keys=[game_id])
 
 	supports = db.Column(db.Boolean, nullable=False, default=True)
-	confidence = db.Column(db.Integer, nullable=False, default=0)
+	confidence = db.Column(db.Integer, nullable=False, default=1)
 
 	__table_args__ = (db.UniqueConstraint("game_id", "package_id", name="_package_game_support_uc"),)
 
@@ -580,7 +580,15 @@ class Package(db.Model):
 			"release": release and release.id,
 
 			"score": round(self.score * 10) / 10,
-			"downloads": self.downloads
+			"downloads": self.downloads,
+
+			"game_support": [
+				{
+					"supports": support.supports,
+					"confidence": support.confidence,
+					"game": support.game.getAsDictionaryShort(base_url, version)
+				} for support in self.supported_games.all()
+			]
 		}
 
 	def getThumbnailOrPlaceholder(self, level=2):
