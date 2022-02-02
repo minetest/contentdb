@@ -134,7 +134,7 @@ class GameSupportResolver:
 		return retval
 
 	def update_all(self) -> None:
-		for package in Package.query.filter_by(type=PackageType.MOD, state=PackageState.APPROVED).all():
+		for package in Package.query.filter(Package.type == PackageType.MOD, Package.state != PackageState.DELETED).all():
 			retval = self.resolve(package, [])
 			for game in retval:
 				support = PackageGameSupport(package, game)
