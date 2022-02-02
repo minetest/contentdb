@@ -240,7 +240,7 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
 * POST `/api/packages/<username>/<name>/screenshots/order/`
     * Requires authentication.
     * Body is a JSON array containing the screenshot IDs in their order.
-* POST `/api/packages/<username>/<name>/screenshots/order/`
+* POST `/api/packages/<username>/<name>/screenshots/cover-image/`
     * Requires authentication.
     * Body is a JSON dictionary with "cover_image" containing the screenshot ID.
 
