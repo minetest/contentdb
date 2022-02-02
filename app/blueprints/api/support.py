@@ -19,7 +19,7 @@ from flask import jsonify, abort, make_response, url_for, current_app
 
 from app.logic.packages import do_edit_package
 from app.logic.releases import LogicError, do_create_vcs_release, do_create_zip_release
-from app.logic.screenshots import do_create_screenshot, do_order_screenshots
+from app.logic.screenshots import do_create_screenshot, do_order_screenshots, do_set_cover_image
 from app.models import APIToken, Package, MinetestRelease, PackageScreenshot
 
 
@@ -88,6 +88,17 @@ def api_order_screenshots(token: APIToken, package: Package, order: [any]):
 		error(403, "API token does not have access to the package")
 
 	guard(do_order_screenshots)(token.owner, package, order)
+
+	return jsonify({
+		"success": True
+	})
+
+
+def api_set_cover_image(token: APIToken, package: Package, cover_image):
+	if not token.canOperateOnPackage(package):
+		error(403, "API token does not have access to the package")
+
+	guard(do_set_cover_image)(token.owner, package, cover_image)
 
 	return jsonify({
 		"success": True

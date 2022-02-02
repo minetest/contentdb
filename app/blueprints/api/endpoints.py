@@ -31,7 +31,8 @@ from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, isYes
 from . import bp
 from .auth import is_api_authd
-from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, api_order_screenshots, api_edit_package
+from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
+	api_order_screenshots, api_edit_package, api_set_cover_image
 from functools import wraps
 
 
@@ -356,7 +357,7 @@ def order_screenshots(token: APIToken, package: Package):
 		error(401, "Authentication needed")
 
 	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
-		error(403, "You do not have the permission to delete screenshots")
+		error(403, "You do not have the permission to change screenshots")
 
 	if not token.canOperateOnPackage(package):
 		error(403, "API token does not have access to the package")
@@ -366,6 +367,28 @@ def order_screenshots(token: APIToken, package: Package):
 		error(400, "Expected order body to be array")
 
 	return api_order_screenshots(token, package, request.json)
+
+
+@bp.route("/api/packages/<author>/<name>/screenshots/cover-image/", methods=["POST"])
+@csrf.exempt
+@is_package_page
+@is_api_authd
+@cors_allowed
+def set_cover_image(token: APIToken, package: Package):
+	if not token:
+		error(401, "Authentication needed")
+
+	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
+		error(403, "You do not have the permission to change screenshots")
+
+	if not token.canOperateOnPackage(package):
+		error(403, "API token does not have access to the package")
+
+	json = request.json
+	if json is None or not isinstance(json, dict) or "cover_image" not in json:
+		error(400, "Expected body to be an object with cover_image as a key")
+
+	return api_set_cover_image(token, package, request.json["cover_image"])
 
 
 @bp.route("/api/packages/<author>/<name>/reviews/")

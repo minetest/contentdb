@@ -66,3 +66,18 @@ def do_order_screenshots(_user: User, package: Package, order: [any]):
 			raise LogicError(400, "Invalid id, not a number: {}".format(json.dumps(ss_id)))
 
 	db.session.commit()
+
+
+def do_set_cover_image(_user: User, package: Package, cover_image):
+	try:
+		cover_image = int(cover_image)
+	except (ValueError, TypeError) as e:
+		raise LogicError(400, "Invalid id, not a number: {}".format(json.dumps(cover_image)))
+
+	for screenshot in package.screenshots.all():
+		if screenshot.id == cover_image:
+			package.cover_image = screenshot
+			db.session.commit()
+			return
+
+	raise LogicError(400, "Unable to find screenshot")

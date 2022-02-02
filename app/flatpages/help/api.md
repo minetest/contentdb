@@ -238,6 +238,9 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
 * POST `/api/packages/<username>/<name>/screenshots/order/`
     * Requires authentication.
     * Body is a JSON array containing the screenshot IDs in their order.
+* POST `/api/packages/<username>/<name>/screenshots/order/`
+    * Requires authentication.
+    * Body is a JSON dictionary with "cover_image" containing the screenshot ID.
 
 Currently, to get a different size of thumbnail you can replace the number in `/thumbnails/1/` with any number from 1-3.
 The resolutions returned may change in the future, and we may move to a more capable thumbnail generation.
@@ -258,6 +261,11 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/screensho
 curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/order/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d "[13, 2, 5, 7]"
+    
+# Set cover image
+curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/cover-image/ \
+    -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
+    -d "{ 'cover_image': 123 }"
 ```
 
 
