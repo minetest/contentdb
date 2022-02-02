@@ -304,7 +304,7 @@ def create_screenshot(token: APIToken, package: Package):
 	if file is None:
 		error(400, "Missing 'file' in multipart body")
 
-	return api_create_screenshot(token, package, data["title"], file)
+	return api_create_screenshot(token, package, data["title"], file, isYes(data.get("is_cover_image")))
 
 
 @bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/")

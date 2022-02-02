@@ -234,6 +234,7 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
     * Body is multipart form data.
     * `title`: human-readable name for the screenshot, shown as a caption and alt text.
     * `file`: multipart file to upload, like `<input type=file>`.
+    * `is_cover_image`: set cover image to this.
 * DELETE `/api/packages/<username>/<name>/screenshots/<id>/` (Delete)
     * Requires authentication.
     * Deletes screenshot.
@@ -254,6 +255,11 @@ Examples:
 curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/screnshot.png
+    
+# Create screenshot and set it as the cover image
+curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/new/ \
+    -H "Authorization: Bearer YOURTOKEN" \
+    -F title="My Release" -F file=@path/to/screnshot.png -F is_cover_image="true"
 
 # Delete screenshot
 curl -X DELETE https://content.minetest.net/api/packages/username/name/screenshots/3/ \

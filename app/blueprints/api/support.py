@@ -69,13 +69,13 @@ def api_create_zip_release(token: APIToken, package: Package, title: str, file,
 	})
 
 
-def api_create_screenshot(token: APIToken, package: Package, title: str, file, reason="API"):
+def api_create_screenshot(token: APIToken, package: Package, title: str, file, is_cover_image: bool, reason="API"):
 	if not token.canOperateOnPackage(package):
 		error(403, "API token does not have access to the package")
 
 	reason += ", token=" + token.name
 
-	ss : PackageScreenshot = guard(do_create_screenshot)(token.owner, package, title, file, reason)
+	ss : PackageScreenshot = guard(do_create_screenshot)(token.owner, package, title, file, is_cover_image, reason)
 
 	return jsonify({
 		"success": True,

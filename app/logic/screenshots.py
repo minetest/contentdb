@@ -9,7 +9,7 @@ from app.utils import addNotification, addAuditLog
 from app.utils.image import get_image_size
 
 
-def do_create_screenshot(user: User, package: Package, title: str, file, reason: str = None):
+def do_create_screenshot(user: User, package: Package, title: str, file, is_cover_image: bool, reason: str = None):
 	thirty_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=30)
 	count = package.screenshots.filter(PackageScreenshot.created_at > thirty_minutes_ago).count()
 	if count >= 20:
@@ -46,6 +46,10 @@ def do_create_screenshot(user: User, package: Package, title: str, file, reason:
 	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getURL("packages.view"), package)
 
 	db.session.commit()
+
+	if is_cover_image:
+		package.cover_image = ss
+		db.session.commit()
 
 	return ss
 

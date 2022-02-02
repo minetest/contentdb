@@ -87,7 +87,7 @@ def create_screenshot(package):
 	form = CreateScreenshotForm()
 	if form.validate_on_submit():
 		try:
-			do_create_screenshot(current_user, package, form.title.data, form.fileUpload.data)
+			do_create_screenshot(current_user, package, form.title.data, form.fileUpload.data, False)
 			return redirect(package.getURL("packages.screenshots"))
 		except LogicError as e:
 			flash(e.message, "danger")
