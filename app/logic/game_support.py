@@ -111,9 +111,6 @@ class GameSupportResolver:
 
 		self.checked_packages.add(key)
 
-		if len(history) >= 50:
-			raise LogicError(500, f"Too deep! {', '.join(history)}")
-
 		if package.type != PackageType.MOD:
 			raise LogicError(500, "Got non-mod")
 
@@ -128,7 +125,7 @@ class GameSupportResolver:
 			else:
 				retval.intersection_update(ret)
 				if len(retval) == 0:
-					raise LogicError(500, f"Conflict! Supported games narrowed at {key}")
+					raise LogicError(500, f"Detected game support contradiction, {key} may not be compatible with any games")
 
 		self.resolved_packages[key] = retval
 		return retval
@@ -147,14 +144,15 @@ class GameSupportResolver:
 
 		retval = self.resolve(package, [])
 		for game in retval:
+			assert game
+
 			lookup = previous_supported.pop(game, None)
-			if lookup:
-				if lookup.confidence == 0:
-					lookup.supports = True
-					db.session.merge(lookup)
-			else:
+			if lookup is None:
 				support = PackageGameSupport(package, game)
 				db.session.add(support)
+			elif lookup.confidence == 0:
+				lookup.supports = True
+				db.session.merge(lookup)
 
 		for game, support in previous_supported.items():
 			if support.confidence == 0:
