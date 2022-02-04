@@ -14,19 +14,24 @@
 </div>
 
 {% set level = "warning" %}
-{% if package.releases.count() == 0 %}
+{% if package.releases.filter_by(task_id=None).count() == 0 %}
 	{% set message %}
 		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 			{% if package.update_config %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL("packages.create_release") }}">
-					{{ _("Create first release") }}
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL('packages.create_release') }}">
+					{{ _("Create release") }}
 				</a>
 			{% else %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL("packages.setup_releases") }}">
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL('packages.setup_releases') }}">
 					{{ _("Set up releases") }}
 				</a>
 			{% endif %}
-			{{ _("You need to create a release before this package can be approved.") }}
+
+			{% if package.releases.count() == 0 %}
+				{{ _("You need to create a release before this package can be approved.") }}
+			{% else %}
+				{{ _("Release is still importing, or has an error.") }}
+			{% endif %}
 		{% else %}
 			{{ _("A release is required before this package can be approved.") }}
 		{% endif %}
