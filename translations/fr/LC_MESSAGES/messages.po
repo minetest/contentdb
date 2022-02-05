@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-26 03:09+0000\n"
-"PO-Revision-Date: 2022-02-03 05:52+0000\n"
-"Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
+"PO-Revision-Date: 2022-02-05 16:54+0000\n"
+"Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/minetest/"
 "contentdb/fr/>\n"
 "Language: fr\n"
@@ -649,7 +649,7 @@ msgstr "L'ancien mot de passe est incorrect"
 
 #: app/blueprints/users/account.py:322
 msgid "Unknown verification token!"
-msgstr "Jeton de vérification inconnu"
+msgstr "Jeton de vérification inconnu !"
 
 #: app/blueprints/users/account.py:328
 msgid "Token has expired"
@@ -909,8 +909,8 @@ msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
-"Vous avez créé trop de versions pour ce paquet dans les 5 dernières "
-"minutes, veuillez attendre avant de réessayer."
+"Vous avez créé trop de versions pour ce paquet dans les 5 dernières minutes, "
+"veuillez attendre avant de réessayer"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
@@ -1847,9 +1847,8 @@ msgid "Packages with Update Settings"
 msgstr "Paquets avec paramètres de mise à jour"
 
 #: app/templates/packages/bulk_update_conf.html:16
-#, fuzzy
 msgid "Bulk Set Update Settings"
-msgstr "Paramètres des mises à jour groupées"
+msgstr "Paramètres de mise à jour groupées"
 
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
@@ -2013,7 +2012,6 @@ msgid "Thumbnail"
 msgstr "Miniature"
 
 #: app/templates/packages/release_bulk_change.html:4
-#, fuzzy
 msgid "Bulk Change Releases"
 msgstr "Modification de versions groupée"
 
@@ -2134,7 +2132,6 @@ msgstr ""
 "mise à jour."
 
 #: app/templates/packages/release_new.html:23
-#, fuzzy
 msgid "Set up"
 msgstr "Configurer"
 
@@ -2445,8 +2442,9 @@ msgid "Modname Uniqueness"
 msgstr "Originalité du nom du mod"
 
 #: app/templates/packages/similar.html:12
+#, fuzzy
 msgid "Packages sharing provided mods"
-msgstr ""
+msgstr "Paquets partageant les mêmes mods"
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
