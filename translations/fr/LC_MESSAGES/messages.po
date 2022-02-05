@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-01-26 03:09+0000\n"
 "PO-Revision-Date: 2022-02-05 16:54+0000\n"
-"Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
+"Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/minetest/"
 "contentdb/fr/>\n"
 "Language: fr\n"
@@ -1416,6 +1416,8 @@ msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
+"Peut-être que vous avez renseigné un autre email pour ce compte, ou que vous "
+"n'avez jamais confirmé votre email."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
@@ -1577,16 +1579,15 @@ msgstr "Veuillez vous assurer que ce paquet a les droit sur les noms %(names)s"
 
 #: app/templates/macros/package_approval.html:110
 msgid "Package approval thread"
-msgstr ""
+msgstr "Fil de discussions pour la validation des paquets"
 
 #: app/templates/macros/package_approval.html:111
-#, fuzzy
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
-"Vous pouvez ouvrir un fil de discussion si vous avez une question à poser"
-" à l'examinateur ou à l'auteur du paquet."
+"Vous pouvez ouvrir un fil de discussion si vous avez une question à poser à "
+"l'examinateur ou à l'auteur du paquet."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
@@ -2247,8 +2248,9 @@ msgid "Rolling Release"
 msgstr "Développement en continu"
 
 #: app/templates/packages/release_wizard.html:37
+#, fuzzy
 msgid "On Git Tag"
-msgstr ""
+msgstr "Sur l'étiquette Git"
 
 #: app/templates/packages/release_wizard.html:46
 msgid "Manually"
@@ -2309,6 +2311,8 @@ msgid ""
 "Unapproving a package will put it back into Draft, where\n"
 "\t\t\t\tit can be submitted for approval again."
 msgstr ""
+"Désapprouver un paquet le remettra dans les brouillons,\n"
+"\t\t\t\t\toù il pourra à nouveau être soumis pour validation."
 
 #: app/templates/packages/remove.html:27
 msgid "Reason"
@@ -2649,7 +2653,7 @@ msgstr "Me retirer"
 #: app/templates/packages/view.html:467
 #, fuzzy
 msgid "Provides"
-msgstr "évaluations"
+msgstr "Fournis"
 
 #: app/templates/packages/view.html:489
 msgid "More"
@@ -2758,7 +2762,7 @@ msgstr ""
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 #, fuzzy
 msgid "Editor Work Queue"
-msgstr "Tâches de l'éditeur"
+msgstr "File de tâches de l'éditeur"
 
 #: app/templates/todo/editor.html:8
 msgid "Approval Queue"
@@ -2821,8 +2825,9 @@ msgid "All Outdated packages"
 msgstr "Tous les paquets obsolètes"
 
 #: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
+#, fuzzy
 msgid "Minetest-Mods org only"
-msgstr ""
+msgstr "Minetest-Mods org seuls"
 
 #: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
@@ -3488,6 +3493,8 @@ msgid ""
 "This will blacklist an email address, preventing ContentDB from ever "
 "sending emails to it - including password resets."
 msgstr ""
+"Cela interdira cet email, empêchant ContentDB de pouvoir d'y envoyer des "
+"messages, même pour réinitialiser le mot de passe."
 
 #: app/templates/users/unsubscribe.html:20
 msgid "Please enter the email address you wish to blacklist."
@@ -3507,6 +3514,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to sign into the account "
 "'%(display_name)s'"
 msgstr ""
+"Vous désinscrire peut vous empêcher de vous connecter à nouveau au compte "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -3514,10 +3523,13 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
+"ContentDB ne pourra plus vous envoyer d'email pour réinitialiser votre mot "
+"de passe ou pour d'autres raisons essentielles.\n"
+"\t\t\t\t\tPréférez plutôt modifier les préférences de notification."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
-msgstr ""
+msgstr "Vous ne pourrez plus utiliser cet email pour ContextDB à nouveau."
 
 #: app/templates/users/unsubscribe.html:57
 msgid "Edit Notification Preferences"
