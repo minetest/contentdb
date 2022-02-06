@@ -6,7 +6,7 @@ Developed by rubenwardy, license AGPLv3.0+.
 
 See [Getting Started](docs/getting_started.md) for setting up a development/prodiction environment.
 
-See [Developer's Intro](docs/dev_intro.md) for an overview of the code organisation.
+See [Developer Intro](docs/dev_intro.md) for an overview of the code organisation.
 
 ## How-tos
 
