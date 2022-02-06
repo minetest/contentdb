@@ -54,3 +54,5 @@ To hot/live update CDB whilst it is running, use:
 	./utils/reload.sh
 
 This will only work with python code and templates, it won't update tasks or config.
+
+Now consider reading the [Developer's Introduction](dev_intro.md).

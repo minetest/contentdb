@@ -2,7 +2,15 @@
 
 ## Overview 
 
-ContentDB is a Python Flask webservice, with a PostgreSQL database.
+ContentDB is a Python [Flask](https://flask.palletsprojects.com/en/2.0.x/) webservice.
+There's a PostgreSQL database, manipulated using the [SQLAlchemy ORM](https://docs.sqlalchemy.org/en/14/). 
+
+When a user makes a request, Python Flask will direct the request to a *route* in an *blueprint*. 
+A [blueprint](https://flask.palletsprojects.com/en/2.0.x/blueprints/) is a Flask construct to hold a set of routes.
+Routes are implemented using Python, and likely to respond by using database *models* and rendering HTML *templates*.
+
+Routes may also use functions in the `logic` module, which is a directory containing reusable functions. This
+allows the API, asynchronous tasks, and the front-end to reuse code. 
 
 To avoid blocking web requests, background jobs run as
 [Celery](https://docs.celeryproject.org/en/stable/getting-started/introduction.html) tasks.
@@ -14,8 +22,7 @@ To avoid blocking web requests, background jobs run as
 
 The `app` directory contains the Python Flask application.
 
-* `blueprints` contains all the Python code behind each endpoint. 
-    A [blueprint](https://flask.palletsprojects.com/en/2.0.x/blueprints/) is a Flask construct to hold a set of endpoints.
+* `blueprints` contains all the Python code behind each endpoint.
 * `templates` contains all the HTML templates used to generate responses. Each directory in here matches a director in blueprints.
 * `models` contains all the Database table classes. ContentDB uses [SQLAlchemy](https://docs.sqlalchemy.org/en/14/) to interact with PostgreSQL.
 * `flatpages` contains all the markdown user documentation, including `/help`.
@@ -40,6 +47,59 @@ which is used to generate SQLAlachemy queries for packages and topics.
 
 Generally, you want to start by finding the endpoint and then seeing the code it calls.
 
-Endpoints are sensibly organised in `app/blueprints`. 
+Endpoints are sensibly organised in `app/blueprints`.
 
 You can also use a file search. For example, to find the package edit endpoint, search for `.route("/packages/<author>/<name>/edit/")`.
+
+
+## Users and Permissions
+
+Many routes need to check whether a user can do a particular thing. Rather than hard coding this,
+models tend to have a `checkPerm` function which takes a user and a `Permission`.
+
+A permission may be something like `Permission.EDIT_PACKAGE` or `Permission.DELETE_THREAD`.
+
+```bash
+if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
+    abort(403)
+```
+
+
+## Translations
+
+ContentDB uses [Flask-Babel](https://flask-babel.tkte.ch/) for translation. All strings need to be tagged using
+a gettext function.
+
+### Translating templates (HTML)
+
+```html
+<div class="something" title="{{ _('This is translatable now') }}">
+	{{ _("Please remember to do something related to this page or something") }}
+</div>
+```
+
+With parameters:
+
+```html
+<p>
+	{{ _("Hello %(username)s, you have %(count)d new messages", username=username, count=count) }}
+</p>
+```
+
+See <https://pythonhosted.org/Flask-Babel/#flask.ext.babel.Babel.localeselector> and
+<https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-xiv-i18n-and-l10n>.
+
+### Translating Python
+
+If the text is within a request, then you can use gettext like so:
+
+```py
+flash(gettext("Some error message"), "danger")
+```
+
+If the text is global, for example as part of a python class, then you need to use lazy_gettext:
+
+```py
+class PackageForm(FlaskForm):
+	title            = StringField(lazy_gettext("Title (Human-readable)"), [InputRequired(), Length(1, 100)])
+```
