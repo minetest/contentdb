@@ -17,7 +17,7 @@
 
 import sys
 
-from typing import List, Dict
+from typing import List, Dict, Optional, Iterator, Iterable
 
 from app.logic.LogicError import LogicError
 from app.models import Package, MetaPackage, PackageType, PackageState, PackageGameSupport, db
@@ -54,13 +54,40 @@ mtg_mod_blacklist = {
 }
 
 
+class PackageSet:
+	packages: Dict[str, Package]
+
+	def __init__(self, packages: Optional[Iterable[Package]] = None):
+		self.packages = {}
+		if packages:
+			self.update(packages)
+
+	def update(self, packages: Iterable[Package]):
+		for package in packages:
+			key = package.getId()
+			if key not in self.packages:
+				self.packages[key] = package
+
+	def intersection_update(self, other):
+		keys = set(self.packages.keys())
+		keys.difference_update(set(other.packages.keys()))
+		for key in keys:
+			del self.packages[key]
+
+	def __len__(self):
+		return len(self.packages)
+
+	def __iter__(self):
+		return self.packages.values().__iter__()
+
+
 class GameSupportResolver:
 	checked_packages = set()
 	checked_metapackages = set()
-	resolved_packages = {}
-	resolved_metapackages = {}
+	resolved_packages: Dict[str, PackageSet] = {}
+	resolved_metapackages: Dict[str, PackageSet] = {}
 
-	def resolve_for_meta_package(self, meta: MetaPackage, history: List[str]) -> set[Package]:
+	def resolve_for_meta_package(self, meta: MetaPackage, history: List[str]) -> PackageSet:
 		print(f"Resolving for {meta.name}", file=sys.stderr)
 
 		key = meta.name
@@ -69,11 +96,11 @@ class GameSupportResolver:
 
 		if key in self.checked_metapackages:
 			print(f"Error, cycle found: {','.join(history)}", file=sys.stderr)
-			return set()
+			return PackageSet()
 
 		self.checked_metapackages.add(key)
 
-		retval = set()
+		retval = PackageSet()
 
 		for package in meta.packages:
 			if package.state != PackageState.APPROVED:
@@ -84,7 +111,7 @@ class GameSupportResolver:
 
 			ret = self.resolve(package, history)
 			if len(ret) == 0:
-				retval = set()
+				retval = PackageSet()
 				break
 
 			retval.update(ret)
@@ -92,29 +119,29 @@ class GameSupportResolver:
 		self.resolved_metapackages[key] = retval
 		return retval
 
-	def resolve(self, package: Package, history: List[str]) -> set[Package]:
-		key = "{}/{}".format(package.author.username.lower(), package.name)
+	def resolve(self, package: Package, history: List[str]) -> PackageSet:
+		key = package.getId()
 		print(f"Resolving for {key}", file=sys.stderr)
 
 		history = history.copy()
 		history.append(key)
 
 		if package.type == PackageType.GAME:
-			return {package}
+			return PackageSet([package])
 
 		if key in self.resolved_packages:
 			return self.resolved_packages.get(key)
 
 		if key in self.checked_packages:
 			print(f"Error, cycle found: {','.join(history)}", file=sys.stderr)
-			return set()
+			return PackageSet()
 
 		self.checked_packages.add(key)
 
 		if package.type != PackageType.MOD:
 			raise LogicError(500, "Got non-mod")
 
-		retval = set()
+		retval = PackageSet()
 
 		for dep in package.dependencies.filter_by(optional=False).all():
 			ret = self.resolve_for_meta_package(dep.meta_package, history)
@@ -138,15 +165,15 @@ class GameSupportResolver:
 				db.session.add(support)
 
 	def update(self, package: Package) -> None:
-		previous_supported: Dict[Package, PackageGameSupport] = {}
+		previous_supported: Dict[str, PackageGameSupport] = {}
 		for support in package.supported_games.all():
-			previous_supported[support.game] = support
+			previous_supported[support.game.getId()] = support
 
 		retval = self.resolve(package, [])
 		for game in retval:
 			assert game
 
-			lookup = previous_supported.pop(game, None)
+			lookup = previous_supported.pop(game.getId(), None)
 			if lookup is None:
 				support = PackageGameSupport(package, game)
 				db.session.add(support)

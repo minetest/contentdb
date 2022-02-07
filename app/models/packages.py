@@ -483,12 +483,6 @@ class Package(db.Model):
 
 		return Package.query.filter(Package.name == parts[1], Package.author.has(username=parts[0])).first()
 
-	def __eq__(self, other):
-		return self.name == other.name and self.author_id == other.author_id
-
-	def __hash__(self):
-		return hash((self.author_id, self.name))
-
 	def getId(self):
 		return "{}/{}".format(self.author.username, self.name)
 
