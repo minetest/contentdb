@@ -120,6 +120,8 @@ class GameSupportResolver:
 		return retval
 
 	def resolve(self, package: Package, history: List[str]) -> PackageSet:
+		db.session.merge(package)
+
 		key = package.getId()
 		print(f"Resolving for {key}", file=sys.stderr)
 
