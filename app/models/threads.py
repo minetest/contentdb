@@ -200,7 +200,8 @@ class PackageReview(db.Model):
 	def getDeleteURL(self):
 		return url_for("packages.delete_review",
 				author=self.package.author.username,
-				name=self.package.name)
+				name=self.package.name,
+				reviewer=self.author.username)
 
 	def getVoteUrl(self, next_url=None):
 		return url_for("packages.review_vote",
@@ -212,6 +213,20 @@ class PackageReview(db.Model):
 	def update_score(self):
 		(pos, neg, _) = self.get_totals()
 		self.score = 3 * (pos - neg) + 1
+
+	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return False
+
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to PackageReview.checkPerm()")
+
+		if perm == Permission.DELETE_REVIEW:
+			return user == self.author or user.rank.atLeast(UserRank.MODERATOR)
+		else:
+			raise Exception("Permission {} is not related to reviews".format(perm.name))
 
 
 class PackageReviewVote(db.Model):

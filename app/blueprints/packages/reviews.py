@@ -24,8 +24,9 @@ from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
-from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package, UserRank
-from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url, rank_required
+from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package, UserRank, \
+	Permission, AuditSeverity
+from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url, rank_required, addAuditLog
 from app.tasks.webhooktasks import post_discord_webhook
 
 
@@ -125,13 +126,18 @@ def review(package):
 			form=form, package=package, review=review)
 
 
-@bp.route("/packages/<author>/<name>/review/delete/", methods=["POST"])
+@bp.route("/packages/<author>/<name>/reviews/<reviewer>/delete/", methods=["POST"])
 @login_required
 @is_package_page
-def delete_review(package):
-	review = PackageReview.query.filter_by(package=package, author=current_user).first()
+def delete_review(package, reviewer):
+	review = PackageReview.query \
+		.filter(PackageReview.package == package, PackageReview.author.has(username=reviewer)) \
+		.first()
 	if review is None or review.package != package:
 		abort(404)
+
+	if not review.checkPerm(current_user, Permission.DELETE_REVIEW):
+		abort(403)
 
 	thread = review.thread
 
@@ -142,6 +148,10 @@ def delete_review(package):
 	db.session.add(reply)
 
 	thread.review = None
+
+	msg = "Converted review by {} to thread".format(review.author.display_name)
+	addAuditLog(AuditSeverity.MODERATION if current_user.username != reviewer else AuditSeverity.NORMAL,
+			current_user, msg, thread.getViewURL(), thread.package)
 
 	notif_msg = "Deleted review '{}', comments were kept as a thread".format(thread.title)
 	addNotification(package.maintainers, current_user, NotificationType.OTHER, notif_msg, url_for("threads.view", id=thread.id), package)

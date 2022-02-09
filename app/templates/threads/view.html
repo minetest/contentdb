@@ -36,10 +36,16 @@
 				<input type="submit" class="btn btn-primary" value="{{ _('Subscribe') }}" />
 			</form>
 		{% endif %}
-		{% if thread and thread.checkPerm(current_user, "DELETE_THREAD") %}
+		{% if thread.checkPerm(current_user, "DELETE_THREAD") %}
 			<a href="{{ url_for('threads.delete_thread', id=thread.id) }}" class="float-right mr-2 btn btn-danger">{{ _('Delete') }}</a>
 		{% endif %}
-		{% if thread and thread.checkPerm(current_user, "LOCK_THREAD") %}
+		{% if thread.review and thread.review.checkPerm(current_user, "DELETE_REVIEW") and current_user.username != thread.review.author.username %}
+			<form method="post" action="{{ thread.review.getDeleteURL() }}" class="float-right mr-2">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<input type="submit" class="btn btn-danger" value="{{ _('Convert to Thread') }}" />
+			</form>
+		{% endif %}
+		{% if thread.checkPerm(current_user, "LOCK_THREAD") %}
 			{% if thread.locked %}
 				<form method="post" action="{{ url_for('threads.set_lock', id=thread.id, lock=0) }}" class="float-right mr-2">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
