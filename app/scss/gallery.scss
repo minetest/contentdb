@@ -1,35 +1,21 @@
-.gallery {
+.gallery-thumbnails {
 	list-style: none;
-	padding: 0;
-	margin: 0 0 2em;
+	margin: 0;
+	padding: 0.5rem 0;
 	overflow: auto hidden;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	gap: 0.5rem;
 
-	li, li a {
+	li {
+		display: block;
 		list-style: none;
 		margin: 0;
 		padding: 0;
-	}
-
-	li {
-		display: inline-block;
-		vertical-align: middle;
-		margin: 5px;
-		padding: 0;
-
-		a {
-			display: block;
-			text-decoration: none;
-
-			&:hover {
-				text-decoration: none;
-			}
-		}
-	}
-
-	.gallery-image {
 		position: relative;
 
-		&:hover img {
+		&:hover img, .active img {
 			filter: brightness(1.1);
 		}
 	}

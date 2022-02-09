@@ -11,14 +11,15 @@
 	<meta name="og:title" content="{{ package.title }}"/>
 	<meta name="og:description" content="{{ package.short_desc }}"/>
 	<meta name="description" content="{{ package.short_desc }}"/>
-	<meta name="og:url" content="{{ package.getURL("packages.view", absolute=True) }}"/>
+	<meta name="og:url" content="{{ package.getURL('packages.view', absolute=True) }}"/>
 	{% if package.getMainScreenshotURL() %}
 	<meta name="og:image" content="{{ package.getMainScreenshotURL(absolute=True) }}"/>
 	{% endif %}
 {% endblock %}
 
 {% block scriptextra %}
-	<script src="/static/video_embed.js"></script>
+	<script async src="/static/video_embed.js"></script>
+	<script async src="/static/gallery.js"></script>
 {% endblock %}
 
 {% macro render_license(license) %}
@@ -31,7 +32,7 @@
 
 {% block download_btn %}
 	{% if release %}
-		<a class="btn btn-block btn-download" rel="nofollow" download="{{ release.getDownloadFileName() }}"
+		<a class="btn btn-block btn-lg btn-download" rel="nofollow" download="{{ release.getDownloadFileName() }}"
 				href="{{ package.getURL('packages.download') }}">
 			<div>
 				{{ _("Download") }}
@@ -60,7 +61,7 @@
 			{{ 0 / 0 }}
 		{% endif %}
 
-		<p class="text-center mt-1 mb-4">
+		<p class="text-center mt-1 mb-0">
 			<a href="{{ installing_url }}">
 				<small>
 					<i class="fas fa-question-circle mr-1"></i>
@@ -83,130 +84,41 @@
 	{% elif not package.media_license.is_foss %}
 		{% set package_warning=_("Non-free media") %}
 	{% endif %}
+<style>
+	.bg-banner {
+		background-size: cover;
+		background-repeat: no-repeat;
+		background-position: center;
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 65vh;
+		z-index: -1;
+	}
+</style>
 <main>
 	{% set cover_image = package.cover_image.url or package.getMainScreenshotURL() %}
-	<header class="jumbotron pb-3"
-			style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ cover_image }}');
-				background-size: cover;
-				background-repeat: no-repeat;
-				background-position: center;">
-		<div class="container">
-			<div class="btn-group float-right mb-4">
-				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-					<a class="btn btn-primary" href="{{ package.getURL('packages.create_edit') }}">
-						<i class="fas fa-pen mr-1"></i>
-						{{ _("Edit") }}
-					</a>
-				{% endif %}
-				{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
-					<a class="btn btn-primary" href="{{ package.getURL('packages.create_release') }}">
-						<i class="fas fa-plus mr-1"></i>
-						{{ _("Release") }}
-					</a>
-				{% endif %}
-				{% if package.checkPerm(current_user, "DELETE_PACKAGE") or package.checkPerm(current_user, "UNAPPROVE_PACKAGE") %}
-					<a class="btn btn-danger" href="{{ package.getURL('packages.remove') }}">
-						<i class="fas fa-trash mr-1"></i>
-						{{ _("Remove") }}
-					</a>
-				{% endif %}
-			</div>
-
-			<h1 class="display-3">
+	{% if cover_image %}
+		<div style="position:relative;">
+			<div class="bg-banner" style="background: linear-gradient(rgba(34, 34, 34, 0.7), rgba(34, 34, 34, 1)), url('{{ cover_image }}');
+					background-size: cover;
+					background-repeat: no-repeat;
+					background-position: center;"></div>
+		</div>
+	{% endif %}
+	<header class="container pt-3 mb-4">
+		<div class="row align-items-center">
+			<h1 class="col my-0 display-4">
 				{{ package.title }}
 			</h1>
 
-			<p class="lead">
-				{{ package.short_desc }}
-			</p>
-
-			<p>
-				{% if package.dev_state.name == "LOOKING_FOR_MAINTAINER" or package.dev_state.name == "DEPRECATED" %}
-					<span class="badge badge-warning" title="{{ package.dev_state.get_desc() }}">
-						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
-						{{ package.dev_state.value }}
-					</span>
-				{% endif %}
-				{% if package_warning %}
-					<a class="badge badge-danger" href="/help/non_free/">
-						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
-						{{ package_warning }}
+			<div class="col-md-3 text-right">
+				{% if package.type == package.type.GAME %}
+					<a href="{{ package.getURL('packages.game_hub') }}" class="btn btn-lg btn-block btn-primary">
+						{{ _("View content for game") }}
 					</a>
 				{% endif %}
-				{% for warning in package.content_warnings %}
-					<a class="badge badge-warning" rel="nofollow" href="/help/content_flags/"
-							title="{{ warning.description }}">
-						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
-						{{ warning.title }}
-					</a>
-				{% endfor %}
-				{% if package.dev_state.name == "WIP" %}
-					<span class="badge badge-info" title="{{ package.dev_state.get_desc() }}">
-						<i class="fas fa-tools" style="margin-right: 0.3em;"></i>
-						{{ _("Work in Progress") }}
-					</span>
-				{% endif %}
-				{% for t in package.tags %}
-					<a class="badge badge-primary" rel="nofollow"
-							title="{{ t.description or '' }}"
-							href="{{ url_for('packages.list_all', tag=t.name) }}">
-						{{ t.title }}
-					</a>
-				{% endfor %}
-			</p>
-
-			<div class="info-row row" style="margin-top: 2rem;">
-				<div class="btn-group-horizontal col">
-					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}" title="{{ _("Author") }}">
-						<img src="{{ package.author.getProfilePicURL() }}" style="max-height: 1em; filter: none">
-						<span class="count">
-							{{ package.author.display_name }}
-						</span>
-					</a>
-					{% if release %}
-						<a class="btn" rel="nofollow" href="{{ package.getURL("packages.download") }}" title="{{ _("Downloads") }}"
-								download="{{ release.getDownloadFileName() }}">
-							<i class="fas fa-download"></i>
-							<span class="count">{{ package.downloads }}</span>
-						</a>
-					{% endif %}
-					<a class="btn" href="{{ url_for('threads.list_all', pid=package.id) }}" title="{{ _("Threads") }}">
-						<i class="fas fa-comment-alt"></i>
-						<span class="count">{{ threads | length }}</span>
-					</a>
-					<a class="btn" href="#reviews" title="{{ _("Reviews") }}">
-						<i class="fas fa-star-half-alt"></i>
-						<span class="count">
-							+{{ package.reviews | selectattr("recommends") | list | length }}
-							/
-							-{{ package.reviews | rejectattr("recommends") | list | length }}
-						</span>
-					</a>
-					{% if package.website %}
-						<a class="btn" href="{{ package.website }}">
-							<i class="fas fa-globe-europe"></i>
-							<span class="count">{{ _("Website") }}</span>
-						</a>
-					{% endif %}
-					{% if package.repo %}
-						<a class="btn" href="{{ package.repo }}">
-							<i class="fas fa-code"></i>
-							<span class="count">{{ _("Source") }}</span>
-						</a>
-					{% endif %}
-					{% if package.forums %}
-						<a class="btn" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">
-							<i class="fas fa-comments"></i>
-							<span class="count">{{ _("Forums") }}</span>
-						</a>
-					{% endif %}
-					{% if package.issueTracker %}
-						<a class="btn" href="{{ package.issueTracker }}">
-							<i class="fas fa-bug"></i>
-							<span class="count">{{ _("Issue Tracker") }}</span>
-						</a>
-					{% endif %}
-				</div>
 			</div>
 		</div>
 	</header>
@@ -232,24 +144,37 @@
 		</section>
 	{% endif %}
 
-	<div class="container d-block d-md-none">
-		{{ self.download_btn() }}
-	</div>
-
-	<section class="container mt-4">
+	<section class="container mb-4">
 		<div class="row">
-			<div class="col-md-9" style="padding-right: 45px;">
-				{% set screenshots = package.screenshots.all() %}
-
-				{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-					<a href="{{ package.getURL('packages.screenshots') }}" class="btn btn-primary float-right">
-						<i class="fas fa-images mr-1"></i>
-						{{ _("Edit") }}
-					</a>
-				{% endif %}
-
-				{% if screenshots or package.checkPerm(current_user, "ADD_SCREENSHOTS") or package.video_url %}
-					<ul class="gallery">
+			{% set screenshots = package.screenshots.all() %}
+			{% if screenshots or package.checkPerm(current_user, "ADD_SCREENSHOTS") or package.video_url %}
+				<div id="packageGallery" class="col-md-9 carousel slide my-0" data-ride="carousel" data-interval="7500">
+					<div class="carousel-inner">
+						{% for ss in screenshots %}
+							<div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
+								<a href="{{ ss.url }}">
+									<div class="embed-responsive embed-responsive-16by9">
+										<img class="embed-responsive-item" src="{{ ss.url }}"
+											alt="{{ ss.title }}">
+									</div>
+									<div class="carousel-caption text-shadow">
+										<h3 class="my-0">
+											{{ ss.title }}
+										</h3>
+									</div>
+								</a>
+							</div>
+						{% endfor %}
+						<a class="carousel-control-prev" href="#packageGallery" role="button" data-slide="prev">
+							<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+							<span class="sr-only">{{ _("Previous") }}</span>
+						</a>
+						<a class="carousel-control-next" href="#packageGallery" role="button" data-slide="next">
+							<span class="carousel-control-next-icon" aria-hidden="true"></span>
+							<span class="sr-only">{{ _("Next") }}</span>
+						</a>
+					</div>
+					<ol class="gallery-thumbnails">
 						{% if package.video_url %}
 							<li>
 								<a href="{{ package.video_url }}" class="video-embed">
@@ -263,16 +188,12 @@
 
 						{% if screenshots or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 							{% for ss in screenshots %}
-								{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-									<li>
-										<a href="{{ ss.url }}" class="gallery-image">
-											<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
-											{% if not ss.approved %}
-												<span class="badge bg-dark badge-tr">{{ _("Awaiting review") }}</span>
-											{% endif %}
-										</a>
-									</li>
-								{% endif %}
+								<li data-target="#packageGallery" data-slide-to="{{ loop.index - 1 }}" {% if loop.index == 1 %}class="active"{% endif %}>
+									<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+									{% if not ss.approved %}
+										<span class="badge bg-dark badge-tr">{{ _("Awaiting review") }}</span>
+									{% endif %}
+								</li>
 							{% else %}
 								<li>
 									<a href="{{ package.getURL('packages.create_screenshot') }}">
@@ -281,9 +202,76 @@
 								</li>
 							{% endfor %}
 						{% endif %}
-					</ul>
-				{% endif %}
+					</ol>
+				</div>
+				<div class="col-md-3">
+			{% else %}
+				<div class="col">
+			{% endif %}
+				<div class="btn-group btn-group-sm mb-3">
+					{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+						<a class="btn btn-primary" href="{{ package.getURL('packages.create_edit') }}">
+							<i class="fas fa-pen mr-1"></i>
+							{{ _("Edit") }}
+						</a>
+					{% endif %}
+					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+						<a class="btn btn-primary" href="{{ package.getURL('packages.create_release') }}">
+							<i class="fas fa-plus mr-1"></i>
+							{{ _("Release") }}
+						</a>
+					{% endif %}
+					{% if package.checkPerm(current_user, "DELETE_PACKAGE") or package.checkPerm(current_user, "UNAPPROVE_PACKAGE") %}
+						<a class="btn btn-danger" href="{{ package.getURL('packages.remove') }}">
+							<i class="fas fa-trash mr-1"></i>
+							{{ _("Remove") }}
+						</a>
+					{% endif %}
+				</div>
+				<p class="lead">
+					{{ package.short_desc }}
+				</p>
+				<p>
+					{% if package.dev_state.name == "LOOKING_FOR_MAINTAINER" or package.dev_state.name == "DEPRECATED" %}
+						<span class="badge badge-warning" title="{{ package.dev_state.get_desc() }}">
+							<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
+							{{ package.dev_state.value }}
+						</span>
+					{% endif %}
+					{% if package_warning %}
+						<a class="badge badge-danger" href="/help/non_free/">
+							<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
+							{{ package_warning }}
+						</a>
+					{% endif %}
+					{% for warning in package.content_warnings %}
+						<a class="badge badge-warning" rel="nofollow" href="/help/content_flags/"
+								title="{{ warning.description }}">
+							<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
+							{{ warning.title }}
+						</a>
+					{% endfor %}
+					{% if package.dev_state.name == "WIP" %}
+						<span class="badge badge-info" title="{{ package.dev_state.get_desc() }}">
+							<i class="fas fa-tools" style="margin-right: 0.3em;"></i>
+							{{ _("Work in Progress") }}
+						</span>
+					{% endif %}
+					{% for t in package.tags %}
+						<a class="badge badge-primary" rel="nofollow"
+								title="{{ t.description or '' }}"
+								href="{{ url_for('packages.list_all', tag=t.name) }}">
+							{{ t.title }}
+						</a>
+					{% endfor %}
+				</p>
+			</div>
+		</div>
+	</section>
 
+	<section class="container">
+		<div class="row">
+			<div class="col-md-9" style="padding-right: 45px;">
 				{% if package.desc %}
 					<article class="markdown panel mb-5">
 						{{ package.desc | markdown }}
@@ -296,7 +284,7 @@
 				{% if current_user.is_authenticated %}
 					{% if has_review %}
 						<p>
-							<a class="btn btn-primary" href="{{ package.getURL("packages.review") }}">
+							<a class="btn btn-primary" href="{{ package.getURL('packages.review') }}">
 								{{ _("Edit Review") }}
 							</a>
 						</p>
@@ -332,7 +320,7 @@
 			</div>
 
 			<aside class="col-md-3 info-sidebar">
-				<div class="d-none d-md-block">
+				<div class="mb-4">
 					{{ self.download_btn() }}
 				</div>
 
@@ -376,12 +364,6 @@
 							{{ _("Donate now") }}
 						</a>
 					</div>
-				{% endif %}
-
-				{% if package.type == package.type.GAME %}
-					<a href="{{ package.getURL('packages.game_hub') }}" class="btn btn-lg btn-block mb-4 btn-primary">
-						{{ _("View content for game") }}
-					</a>
 				{% endif %}
 
 				{% if package.type != package.type.TXP %}
