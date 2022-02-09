@@ -2,7 +2,7 @@
 
 {% block content %}
 
-{% for title, group in notifications | select("package") | groupby("package.title") %}
+{% for title, group in notifications | selectattr("package") | groupby("package.title") %}
 	<h2>
 		{{ title }}
 	</h2>
@@ -17,7 +17,7 @@
 	</ul>
 {% endfor %}
 
-{% for group in notifications | reject("package") %}
+{% for group in notifications | selectattr("package", "none") %}
 	<h2>
 		{{ _("Other Notifications") }}
 	</h2>

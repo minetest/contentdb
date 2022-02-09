@@ -157,6 +157,9 @@ def delete_review(package, reviewer):
 	addNotification(package.maintainers, current_user, NotificationType.OTHER, notif_msg, url_for("threads.view", id=thread.id), package)
 
 	db.session.delete(review)
+
+	package.recalcScore()
+
 	db.session.commit()
 
 	return redirect(thread.getViewURL())

@@ -3,7 +3,7 @@
 		{% for entry in log %}
 			<a class="list-group-item list-group-item-action"
 				{% if entry.description and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
-					href="{{ url_for('admin.audit_view', id=entry.id) }}">
+					href="{{ url_for('admin.audit_view', id_=entry.id) }}">
 				{% else %}
 					href="{{ entry.url }}">
 				{% endif %}

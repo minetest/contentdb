@@ -49,7 +49,7 @@ Generally, you want to start by finding the endpoint and then seeing the code it
 
 Endpoints are sensibly organised in `app/blueprints`.
 
-You can also use a file search. For example, to find the package edit endpoint, search for `.route("/packages/<author>/<name>/edit/")`.
+You can also use a file search. For example, to find the package edit endpoint, search for `"/packages/<author>/<name>/edit/"`.
 
 
 ## Users and Permissions
