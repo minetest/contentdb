@@ -39,7 +39,7 @@ def audit():
 	return render_template("admin/audit.html", log=pagination.items, pagination=pagination)
 
 
-@bp.route("/admin/audit/<int:id>/")
+@bp.route("/admin/audit/<int:id_>/")
 @rank_required(UserRank.MODERATOR)
 def audit_view(id_):
 	entry = AuditLogEntry.query.get(id_)
