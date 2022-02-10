@@ -30,7 +30,7 @@ services:
 
   worker:
     build: .
-    command: celery -A app.tasks.celery worker
+    command: celery -A app.tasks.celery worker --concurrency 1
     env_file:
       - config.env
     environment:
