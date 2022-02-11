@@ -17,20 +17,23 @@
 	</ul>
 {% endfor %}
 
-{% for group in notifications | selectattr("package", "none") %}
+{% set other_notifications = notifications | selectattr("package", "none") %}
+
+{% if other_notifications %}
 	<h2>
 		{{ _("Other Notifications") }}
 	</h2>
 
 	<ul>
-		{% for notification in group %}
+		{% for notification in other_notifications %}
 			<li>
 				<a href="{{ notification.url | abs_url }}">{{ notification.title }}</a> -
 				{{ _("from %(username)s.", username=notification.causer.username) }}
 			</li>
 		{% endfor %}
 	</ul>
-{% endfor %}
+{% endif %}
+
 <p style="margin-top: 3em;">
 	<a class="btn" href="{{ abs_url_for('notifications.list_all') }}">
 		{{ _("View Notifications") }}

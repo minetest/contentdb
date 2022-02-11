@@ -27,6 +27,7 @@ from sqlalchemy import or_, and_
 from app.logic.game_support import GameSupportResolver
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
 	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, PackageGameSupport
+from app.tasks.emails import send_pending_digests
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates
 from app.utils import addNotification, get_system_user
@@ -330,3 +331,8 @@ def detect_game_support():
 	resolver = GameSupportResolver()
 	resolver.update_all()
 	db.session.commit()
+
+
+@action("Send pending notif digests")
+def do_send_pending_digests():
+	send_pending_digests.delay()
