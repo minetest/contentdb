@@ -37,8 +37,13 @@ def get_email_subscription(email):
 	return ret
 
 
-def gen_headers(sub: EmailSubscription) -> Dict[str,str]:
-	return {"List-Help": f"<{abs_url_for('flatpage', path='help/faq/')}>", "List-Unsubscribe": f"<{sub.url}>"}
+def gen_headers(sub: EmailSubscription, is_bulk: bool) -> Dict[str,str]:
+	headers = {"List-Help": f"<{abs_url_for('flatpage', path='help/faq/')}>", "List-Unsubscribe": f"<{sub.url}>"}
+
+	if is_bulk:
+		headers["Precedence"] = "Bulk"
+
+	return headers
 
 
 @celery.task()
@@ -48,7 +53,7 @@ def send_verify_email(email, token, locale):
 		return
 
 	with force_locale(locale or "en"):
-		msg = Message("Confirm email address", recipients=[email], extra_headers=gen_headers(sub))
+		msg = Message("Confirm email address", recipients=[email], extra_headers=gen_headers(sub, False))
 
 		msg.body = """
 				This email has been sent to you because someone (hopefully you)
@@ -72,7 +77,7 @@ def send_unsubscribe_verify(email, locale):
 		return
 
 	with force_locale(locale or "en"):
-		msg = Message("Confirm unsubscribe", recipients=[email], extra_headers=gen_headers(sub))
+		msg = Message("Confirm unsubscribe", recipients=[email], extra_headers=gen_headers(sub, False))
 
 		msg.body = """
 					We're sorry to see you go. You just need to do one more thing before your email is blacklisted.
@@ -91,7 +96,7 @@ def send_email_with_reason(email: str, locale: str, subject: str, text: str, htm
 		return
 
 	with force_locale(locale or "en"):
-		msg = Message(subject, recipients=[email], extra_headers=gen_headers(sub))
+		msg = Message(subject, recipients=[email], extra_headers=gen_headers(sub, conn is not None))
 
 		msg.body = text
 		html = html or f"<pre>{escape(text)}</pre>"
@@ -120,7 +125,7 @@ def send_single_email(notification, locale):
 		return
 
 	with force_locale(locale or "en"):
-		msg = Message(notification.title, recipients=[notification.user.email], extra_headers=gen_headers(sub))
+		msg = Message(notification.title, recipients=[notification.user.email], extra_headers=gen_headers(sub, False))
 
 		msg.body = """
 				New notification: {}
