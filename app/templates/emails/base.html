@@ -59,7 +59,7 @@
 				<p>
 					{% block footer %}
 						{{ reason }} <br>
-						<a href="{{ abs_url_for('users.unsubscribe', token=sub.token) }}">
+						<a href="{{ sub.url }}">
 							{{ _("Unsubscribe") }}
 						</a>
 					{% endblock %}

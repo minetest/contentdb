@@ -21,7 +21,7 @@ from wtforms import TextAreaField, SubmitField, StringField
 from wtforms.validators import InputRequired, Length
 
 from app.markdown import render_markdown
-from app.tasks.emails import send_user_email
+from app.tasks.emails import send_user_email, send_bulk_email as task_send_bulk
 from app.utils import rank_required, addAuditLog
 from . import bp
 from ...models import UserRank, User, AuditSeverity
@@ -70,8 +70,7 @@ def send_bulk_email():
 
 		text = form.text.data
 		html = render_markdown(text)
-		for user in User.query.filter(User.email.isnot(None)).all():
-			send_user_email.delay(user.email, user.locale or "en", form.subject.data, text, html)
+		task_send_bulk.delay(form.subject.data, text, html)
 
 		return redirect(url_for("admin.admin_page"))
 

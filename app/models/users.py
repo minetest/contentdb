@@ -309,6 +309,11 @@ class EmailSubscription(db.Model):
 		self.blacklisted = False
 		self.token = None
 
+	@property
+	def url(self):
+		from ..utils import abs_url_for
+		return abs_url_for('users.unsubscribe', token=self.token)
+
 
 class NotificationType(enum.Enum):
 	# Package / release / etc

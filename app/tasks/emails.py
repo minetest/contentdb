@@ -14,9 +14,10 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from typing import Dict
 
 from flask import render_template, escape
-from flask_babel import force_locale, gettext
+from flask_babel import force_locale, gettext, lazy_gettext
 from flask_mail import Message
 from app import mail
 from app.models import Notification, db, EmailSubscription, User
@@ -36,6 +37,10 @@ def get_email_subscription(email):
 	return ret
 
 
+def gen_headers(sub: EmailSubscription) -> Dict[str,str]:
+	return {"List-Help": f"<{abs_url_for('flatpage', path='help/faq/')}>", "List-Unsubscribe": f"<{sub.url}>"}
+
+
 @celery.task()
 def send_verify_email(email, token, locale):
 	sub = get_email_subscription(email)
@@ -43,16 +48,16 @@ def send_verify_email(email, token, locale):
 		return
 
 	with force_locale(locale or "en"):
-		msg = Message("Confirm email address", recipients=[email])
+		msg = Message("Confirm email address", recipients=[email], extra_headers=gen_headers(sub))
 
 		msg.body = """
 				This email has been sent to you because someone (hopefully you)
 				has entered your email address as a user's email.
-	
+
 				If it wasn't you, then just delete this email.
-	
+
 				If this was you, then please click this link to confirm the address:
-	
+
 				{}
 			""".format(abs_url_for('users.verify_email', token=token))
 
@@ -67,7 +72,7 @@ def send_unsubscribe_verify(email, locale):
 		return
 
 	with force_locale(locale or "en"):
-		msg = Message("Confirm unsubscribe", recipients=[email])
+		msg = Message("Confirm unsubscribe", recipients=[email], extra_headers=gen_headers(sub))
 
 		msg.body = """
 					We're sorry to see you go. You just need to do one more thing before your email is blacklisted.
@@ -80,33 +85,33 @@ def send_unsubscribe_verify(email, locale):
 
 
 @celery.task(rate_limit="25/m")
-def send_email_with_reason(email: str, locale: str, subject: str, text: str, html: str, reason: str):
+def send_email_with_reason(email: str, locale: str, subject: str, text: str, html: str, reason: str, conn: any):
 	sub = get_email_subscription(email)
 	if sub.blacklisted:
 		return
 
 	with force_locale(locale or "en"):
-		from flask_mail import Message
-		msg = Message(subject, recipients=[email])
+		msg = Message(subject, recipients=[email], extra_headers=gen_headers(sub))
 
 		msg.body = text
 		html = html or f"<pre>{escape(text)}</pre>"
 		msg.html = render_template("emails/base.html", subject=subject, content=html, reason=reason, sub=sub)
-		mail.send(msg)
+		if conn:
+			conn.send(msg)
+		else:
+			mail.send(msg)
 
 
 @celery.task(rate_limit="25/m")
-def send_user_email(email: str, locale: str, subject: str, text: str, html=None):
-	with force_locale(locale or "en"):
-		return send_email_with_reason(email, locale, subject, text, html,
-				gettext("You are receiving this email because you are a registered user of ContentDB."))
+def send_user_email(email: str, locale: str, subject: str, text: str, html=None, conn=None):
+	return send_email_with_reason(email, locale, subject, text, html,
+			lazy_gettext("You are receiving this email because you are a registered user of ContentDB."), conn)
 
 
 @celery.task(rate_limit="25/m")
 def send_anon_email(email: str, locale: str, subject: str, text: str, html=None):
-	with force_locale(locale or "en"):
-		return send_email_with_reason(email, locale, subject, text, html,
-				gettext("You are receiving this email because someone (hopefully you) entered your email address as a user's email."))
+	return send_email_with_reason(email, locale, subject, text, html,
+			lazy_gettext("You are receiving this email because someone (hopefully you) entered your email address as a user's email."))
 
 
 def send_single_email(notification, locale):
@@ -115,7 +120,7 @@ def send_single_email(notification, locale):
 		return
 
 	with force_locale(locale or "en"):
-		msg = Message(notification.title, recipients=[notification.user.email])
+		msg = Message(notification.title, recipients=[notification.user.email], extra_headers=gen_headers(sub))
 
 		msg.body = """
 				New notification: {}
@@ -187,3 +192,10 @@ def send_pending_notifications():
 			send_notification_digest(to_send, user.locale or "en")
 		elif len(to_send) > 0:
 			send_single_email(to_send[0], user.locale or "en")
+
+
+@celery.task()
+def send_bulk_email(subject: str, text: str, html=None):
+	with mail.connect() as conn:
+		for user in User.query.filter(User.email.isnot(None)).all():
+			send_user_email(user.email, user.locale or "en", subject, text, html, conn)
