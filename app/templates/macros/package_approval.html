@@ -48,6 +48,10 @@
 {% elif package.state == package.state.READY_FOR_REVIEW and ("Other" in package.license.name or "Other" in package.media_license.name) %}
 	{% set message = _("Please wait for the license to be added to CDB.") %}
 
+{% elif package.state == package.state.READY_FOR_REVIEW and (package.provides | length) == 1 and package.provides[0].name != package.name %}
+	{% set level = "danger" %}
+	{% set message = _("Mod name does not match package name.") %}
+
 {% else %}
 	{% set level = "info" %}
 	{% set message %}
