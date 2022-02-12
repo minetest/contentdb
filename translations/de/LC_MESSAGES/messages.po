@@ -7,20 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-01-26 03:09+0000\n"
+"POT-Creation-Date: 2022-02-12 14:57+0000\n"
 "PO-Revision-Date: 2022-02-05 16:54+0000\n"
 "Last-Translator: Wuzzy <almikes@aol.com>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
-"contentdb/de/>\n"
 "Language: de\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app/__init__.py:102
+#: app/__init__.py:103
 msgid "You have been banned."
 msgstr "Sie wurden verbannt."
 
@@ -39,11 +38,11 @@ msgstr "Name"
 msgid "Limit to package"
 msgstr "Auf Paket begrenzen"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:460
-#: app/blueprints/packages/packages.py:556
-#: app/blueprints/packages/releases.py:63
-#: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:47
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:454
+#: app/blueprints/packages/packages.py:550
+#: app/blueprints/packages/releases.py:60
+#: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:47
 #: app/blueprints/packages/screenshots.py:35
 #: app/blueprints/packages/screenshots.py:41
 #: app/blueprints/packages/screenshots.py:46
@@ -80,7 +79,7 @@ msgstr "Angaben verändern"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:479 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:509 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Releases"
 
@@ -92,7 +91,7 @@ msgstr "Bildschirmfotos"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:450
+#: app/templates/packages/view.html:480
 msgid "Maintainers"
 msgstr "Betreuer"
 
@@ -109,15 +108,15 @@ msgstr "Teilen und Abzeichen"
 msgid "Remove"
 msgstr "Löschen"
 
-#: app/blueprints/packages/packages.py:162
+#: app/blueprints/packages/packages.py:159
 msgid "Error: Another package already uses this forum topic!"
 msgstr "Fehler: Ein anderes Paket benutzt bereits dieses Forumthema!"
 
-#: app/blueprints/packages/packages.py:168
+#: app/blueprints/packages/packages.py:165
 msgid "Error: Forum topic author doesn't match package author."
 msgstr "Fehler: Forumthemenautor ist nicht der gleiche wie der Paketautor."
 
-#: app/blueprints/packages/packages.py:171
+#: app/blueprints/packages/packages.py:168
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
@@ -125,257 +124,258 @@ msgstr ""
 "Warnung: Forumthema nicht gefunden. Dies kann passieren, wenn das Thema "
 "gerade erst erstellt wurde."
 
-#: app/blueprints/packages/packages.py:221
+#: app/blueprints/packages/packages.py:215
 msgid "No download available."
 msgstr "Kein Download verfügbar."
 
-#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:427
+#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:457
 msgid "Type"
 msgstr "Typ"
 
-#: app/blueprints/packages/packages.py:236
+#: app/blueprints/packages/packages.py:230
 msgid "Title (Human-readable)"
 msgstr "Titel (Für Menschen lesbar)"
 
-#: app/blueprints/packages/packages.py:237
-#: app/blueprints/packages/packages.py:554
+#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:548
 msgid "Name (Technical)"
 msgstr "Name (Technisch)"
 
-#: app/blueprints/packages/packages.py:237
-#: app/blueprints/packages/packages.py:555
+#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:549
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Nur Kleinbuchstaben (a-z), Ziffern (0-9) und Unterstriche (_)"
 
-#: app/blueprints/packages/packages.py:238
+#: app/blueprints/packages/packages.py:232
 msgid "Short Description (Plaintext)"
 msgstr "Kurzbeschreibung (Fließtext)"
 
-#: app/blueprints/packages/packages.py:240 app/templates/packages/view.html:442
+#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:472
 msgid "Maintenance State"
 msgstr "Entwicklungsstadium"
 
-#: app/blueprints/packages/packages.py:242 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "Tags"
 
-#: app/blueprints/packages/packages.py:243
+#: app/blueprints/packages/packages.py:237
 msgid "Content Warnings"
 msgstr "Inhaltswarnungen"
 
-#: app/blueprints/packages/packages.py:244 app/templates/packages/view.html:431
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:461
 msgid "License"
 msgstr "Lizenz"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:239
 msgid "Media License"
 msgstr "Medienlizenz"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:241
 msgid "Long Description (Markdown)"
 msgstr "Längere Beschreibung (Markdown)"
 
-#: app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:243
 msgid "VCS Repository URL"
 msgstr "URL des VCS-Repositorys"
 
-#: app/blueprints/packages/packages.py:250 app/blueprints/users/settings.py:51
+#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:51
 msgid "Website URL"
 msgstr "Webseiten-URL"
 
-#: app/blueprints/packages/packages.py:251
+#: app/blueprints/packages/packages.py:245
 msgid "Issue Tracker URL"
 msgstr "Issue-Tracker-URL"
 
-#: app/blueprints/packages/packages.py:252
+#: app/blueprints/packages/packages.py:246
 msgid "Forum Topic ID"
 msgstr "Forumthema-ID"
 
-#: app/blueprints/packages/packages.py:253
+#: app/blueprints/packages/packages.py:247
 msgid "Video URL"
 msgstr "Video-URL"
 
-#: app/blueprints/packages/packages.py:271
+#: app/blueprints/packages/packages.py:265
 msgid "Unable to find that user"
 msgstr "Dieser Benutzer kann nicht gefunden werden"
 
-#: app/blueprints/packages/packages.py:275
+#: app/blueprints/packages/packages.py:269
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:99
 msgid "Permission denied"
 msgstr "Erlaubnis verweigert"
 
-#: app/blueprints/packages/packages.py:313
+#: app/blueprints/packages/packages.py:307
 msgid "Package already exists!"
 msgstr "Paket existiert bereits!"
 
-#: app/blueprints/packages/packages.py:374
+#: app/blueprints/packages/packages.py:368
 msgid "You don't have permission to do that"
 msgstr "Sie haben nicht die Erlaubnis, das zu tun"
 
-#: app/blueprints/packages/packages.py:402
+#: app/blueprints/packages/packages.py:396
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
 "Bitte kommentieren Sie im Genehmigungsthema, welche Änderungen "
 "erforderlich sind"
 
-#: app/blueprints/packages/packages.py:423
-#: app/blueprints/packages/packages.py:439
+#: app/blueprints/packages/packages.py:417
+#: app/blueprints/packages/packages.py:433
 msgid "You don't have permission to do that."
 msgstr "Sie haben nicht die Erlaubnis, das zu tun."
 
-#: app/blueprints/packages/packages.py:434
+#: app/blueprints/packages/packages.py:428
 msgid "Deleted package"
 msgstr "Gelöschte Pakete"
 
-#: app/blueprints/packages/packages.py:450
+#: app/blueprints/packages/packages.py:444
 msgid "Unapproved package"
 msgstr "Ungenehmigte Pakete"
 
-#: app/blueprints/packages/packages.py:459
+#: app/blueprints/packages/packages.py:453
 msgid "Maintainers (Comma-separated)"
 msgstr "Betreuer (Komma-getrennt)"
 
-#: app/blueprints/packages/packages.py:468
+#: app/blueprints/packages/packages.py:462
 msgid "You do not have permission to edit maintainers"
 msgstr "Sie haben nicht die Erlaubnis, die Betreuer zu ändern"
 
-#: app/blueprints/packages/packages.py:518
+#: app/blueprints/packages/packages.py:512
 msgid "You are not a maintainer"
 msgstr "Sie sind kein Betreuer"
 
-#: app/blueprints/packages/packages.py:521
+#: app/blueprints/packages/packages.py:515
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Paketbesitzer können sich nicht selbst als Betreuer entfernen"
 
-#: app/blueprints/packages/packages.py:553
+#: app/blueprints/packages/packages.py:547
 msgid "Author Name"
 msgstr "Autorenname"
 
-#: app/blueprints/packages/releases.py:55
-#: app/blueprints/packages/releases.py:66 app/blueprints/packages/reviews.py:43
+#: app/blueprints/packages/releases.py:52
+#: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
 #: app/blueprints/threads/__init__.py:272 app/templates/macros/reviews.html:128
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
 msgstr "Titel"
 
-#: app/blueprints/packages/releases.py:56
+#: app/blueprints/packages/releases.py:53
 #: app/templates/packages/release_new.html:46
 msgid "Method"
 msgstr "Methode"
 
-#: app/blueprints/packages/releases.py:56
-#: app/blueprints/packages/releases.py:58
+#: app/blueprints/packages/releases.py:53
+#: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
 msgstr "Dateien hochladen"
 
-#: app/blueprints/packages/releases.py:57
+#: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
 msgstr "Git-Referenz (d.h.: Commit-Hash, Branch oder Tag)"
 
-#: app/blueprints/packages/releases.py:59
-#: app/blueprints/packages/releases.py:70
-#: app/blueprints/packages/releases.py:189
+#: app/blueprints/packages/releases.py:56
+#: app/blueprints/packages/releases.py:68
+#: app/blueprints/packages/releases.py:184
 msgid "Minimum Minetest Version"
 msgstr "Minimale Minetest-Version"
 
-#: app/blueprints/packages/releases.py:61
-#: app/blueprints/packages/releases.py:72
-#: app/blueprints/packages/releases.py:192
+#: app/blueprints/packages/releases.py:58
+#: app/blueprints/packages/releases.py:70
+#: app/blueprints/packages/releases.py:187
 msgid "Maximum Minetest Version"
 msgstr "Maximale Minetest-Version"
 
-#: app/blueprints/packages/releases.py:67
+#: app/blueprints/packages/releases.py:65
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
 msgstr "URL"
 
-#: app/blueprints/packages/releases.py:68
+#: app/blueprints/packages/releases.py:66
 msgid "Task ID"
 msgstr "Aufgaben-ID"
 
-#: app/blueprints/packages/releases.py:69
+#: app/blueprints/packages/releases.py:67
 #: app/blueprints/packages/screenshots.py:40
 msgid "Is Approved"
 msgstr "Ist genehmigt"
 
-#: app/blueprints/packages/releases.py:87
+#: app/blueprints/packages/releases.py:85
 msgid "Import from Git"
 msgstr "Von Git importieren"
 
-#: app/blueprints/packages/releases.py:87
+#: app/blueprints/packages/releases.py:85
 msgid "Upload .zip file"
 msgstr ".zip-Datei hochladen"
 
-#: app/blueprints/packages/releases.py:188
+#: app/blueprints/packages/releases.py:183
 msgid "Set Min"
 msgstr "Minimum setzen"
 
-#: app/blueprints/packages/releases.py:191
+#: app/blueprints/packages/releases.py:186
 msgid "Set Max"
 msgstr "Maximum setzen"
 
-#: app/blueprints/packages/releases.py:194
+#: app/blueprints/packages/releases.py:189
 msgid "Only change values previously set as none"
 msgstr "Nur Werte ändern, die zuvor als „none“ festgelegt wurden"
 
-#: app/blueprints/packages/releases.py:195
+#: app/blueprints/packages/releases.py:190
 msgid "Update"
 msgstr "Update"
 
-#: app/blueprints/packages/releases.py:244
+#: app/blueprints/packages/releases.py:239
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Trigger"
 
-#: app/blueprints/packages/releases.py:245
+#: app/blueprints/packages/releases.py:240
 msgid "New Commit"
 msgstr "Neuer Commit"
 
-#: app/blueprints/packages/releases.py:246 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:241 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Neuer Tag"
 
-#: app/blueprints/packages/releases.py:248
+#: app/blueprints/packages/releases.py:243
 msgid "Branch name"
 msgstr "Branch-Name"
 
-#: app/blueprints/packages/releases.py:249
+#: app/blueprints/packages/releases.py:244
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Aktion"
 
-#: app/blueprints/packages/releases.py:250
+#: app/blueprints/packages/releases.py:245
 msgid "Send notification and mark as outdated"
 msgstr "Benachrichtigung senden und als veraltet markieren"
 
-#: app/blueprints/packages/releases.py:250
+#: app/blueprints/packages/releases.py:245
+#: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "Release erstellen"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:247
 msgid "Save Settings"
 msgstr "Einstellung speichern"
 
-#: app/blueprints/packages/releases.py:253
+#: app/blueprints/packages/releases.py:248
 msgid "Disable Automation"
 msgstr "Automatisierung deaktivieren"
 
-#: app/blueprints/packages/releases.py:292
+#: app/blueprints/packages/releases.py:287
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
 "Bitte fügen Sie eine Git-Repository-URL hinzu, um automatische Releases "
 "einzurichten"
 
-#: app/blueprints/packages/releases.py:308
+#: app/blueprints/packages/releases.py:303
 msgid "Deleted update configuration"
 msgstr "Gelöschte Update-Konfiguration"
 
-#: app/blueprints/packages/releases.py:316
+#: app/blueprints/packages/releases.py:311
 msgid "Now, please create an initial release"
 msgstr "Bitte erstellen Sie nun einen ersten Release"
 
@@ -403,11 +403,11 @@ msgstr "Nein"
 msgid "You can't review your own package!"
 msgstr "Sie können Ihr eigenes Paket nicht rezensieren!"
 
-#: app/blueprints/packages/reviews.py:161
+#: app/blueprints/packages/reviews.py:170
 msgid "You can't vote on the reviews on your own package!"
 msgstr "Sie können nicht über die Rezensionen für Ihr eigenes Paket abstimmen!"
 
-#: app/blueprints/packages/reviews.py:169
+#: app/blueprints/packages/reviews.py:178
 msgid "You can't vote on your own reviews!"
 msgstr "Sie können nicht über Ihre eigenen Rezensionen abstimmen!"
 
@@ -426,7 +426,7 @@ msgid "Message"
 msgstr "Nachricht"
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:238
-#: app/templates/macros/threads.html:53 app/templates/packages/view.html:510
+#: app/templates/macros/threads.html:53 app/templates/packages/view.html:540
 #: app/templates/report/index.html:4 app/templates/report/index.html:10
 #: app/templates/users/profile.html:28
 msgid "Report"
@@ -473,7 +473,7 @@ msgid "Comment needs to be between 3 and 2000 characters."
 msgstr "Der Kommentar muss zwischen 3 und 2000 Zeichen lang sein."
 
 #: app/blueprints/threads/__init__.py:275
-#: app/templates/macros/package_approval.html:107
+#: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
 msgstr "Offenes Thema"
 
@@ -931,8 +931,8 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
-"Der Screenshot ist zu klein, er sollte mindestens %(width)s mal %(height)s "
-"Pixel groß sein"
+"Der Screenshot ist zu klein, er sollte mindestens %(width)s mal "
+"%(height)s Pixel groß sein"
 
 #: app/logic/uploads.py:52
 #, python-format
@@ -956,10 +956,12 @@ msgid "Texture Pack"
 msgstr "Texturenpaket"
 
 #: app/models/packages.py:74 app/templates/base.html:27
+#: app/templates/metapackages/view.html:17
 msgid "Mods"
 msgstr "Mods"
 
 #: app/models/packages.py:76 app/templates/base.html:30
+#: app/templates/metapackages/view.html:14
 msgid "Games"
 msgstr "Spiele"
 
@@ -976,7 +978,7 @@ msgid "Approve"
 msgstr "Genehmigen"
 
 #: app/models/packages.py:171 app/templates/api/create_edit_token.html:17
-#: app/templates/packages/release_edit.html:80
+#: app/templates/packages/release_edit.html:75
 #: app/templates/packages/review_create_edit.html:55
 #: app/templates/threads/delete_reply.html:19
 #: app/templates/threads/delete_thread.html:19
@@ -984,7 +986,7 @@ msgstr "Genehmigen"
 msgid "Delete"
 msgstr "Löschen"
 
-#: app/tasks/emails.py:102
+#: app/tasks/emails.py:113
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
@@ -992,7 +994,7 @@ msgstr ""
 "Sie erhalten diese E-Mail, weil Sie ein registrierter Benutzer von "
 "ContentDB sind."
 
-#: app/tasks/emails.py:109 app/templates/emails/verify.html:30
+#: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
@@ -1000,24 +1002,24 @@ msgstr ""
 "Sie empfangen diese E-Mail, weil jemand (hoffentlich Sie) die E-Mail-"
 "Adresse als Benutzer-E-Mail hinterlegt hat."
 
-#: app/tasks/emails.py:143
+#: app/tasks/emails.py:153
 #, python-format
 msgid "%(num)d new notifications"
 msgstr "%(num)d neue Nachrichten"
 
-#: app/tasks/emails.py:145 app/templates/macros/forms.html:52
+#: app/tasks/emails.py:155 app/templates/macros/forms.html:52
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
 msgstr "Ansehen"
 
-#: app/tasks/emails.py:148
+#: app/tasks/emails.py:158
 msgid "Manage email settings"
 msgstr "E-Mail-Einstellungen verwalten"
 
-#: app/tasks/emails.py:150 app/templates/emails/base.html:63
+#: app/tasks/emails.py:160 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
-#: app/templates/emails/notification_digest.html:51
+#: app/templates/emails/notification_digest.html:54
 #: app/templates/emails/verify.html:33
 #: app/templates/emails/verify_unsubscribe.html:13
 #: app/templates/threads/view.html:31 app/templates/users/unsubscribe.html:4
@@ -1048,7 +1050,7 @@ msgid "Help"
 msgstr "Hilfe"
 
 #: app/templates/base.html:42 app/templates/packages/view.html:173
-#: app/templates/packages/view.html:499 app/templates/threads/list.html:4
+#: app/templates/packages/view.html:529 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Themen"
 
@@ -1147,6 +1149,8 @@ msgid "Welcome"
 msgstr "Willkommen"
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
+#: app/templates/packages/game_hub.html:5
+#: app/templates/packages/game_hub.html:26
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
@@ -1178,15 +1182,18 @@ msgstr "Vorgestellt"
 #: app/templates/index.html:101 app/templates/index.html:108
 #: app/templates/index.html:115 app/templates/index.html:122
 #: app/templates/index.html:129 app/templates/index.html:151
-#: app/templates/index.html:158
+#: app/templates/index.html:158 app/templates/packages/game_hub.html:31
+#: app/templates/packages/game_hub.html:38
+#: app/templates/packages/game_hub.html:45
+#: app/templates/packages/game_hub.html:52
 msgid "See more"
 msgstr "Mehr sehen"
 
-#: app/templates/index.html:103
+#: app/templates/index.html:103 app/templates/packages/game_hub.html:33
 msgid "Recently Added"
 msgstr "Zuletzt hinzugefügt"
 
-#: app/templates/index.html:110
+#: app/templates/index.html:110 app/templates/packages/game_hub.html:40
 msgid "Recently Updated"
 msgstr "Zuletzt aktualisiert"
 
@@ -1194,7 +1201,7 @@ msgstr "Zuletzt aktualisiert"
 msgid "Top Games"
 msgstr "Top-Spiele"
 
-#: app/templates/index.html:124
+#: app/templates/index.html:124 app/templates/packages/game_hub.html:47
 msgid "Top Mods"
 msgstr "Top-Mods"
 
@@ -1206,7 +1213,7 @@ msgstr "Top-Texturenpakete"
 msgid "Search by Tags"
 msgstr "Suche nach Tags"
 
-#: app/templates/index.html:153
+#: app/templates/index.html:153 app/templates/packages/game_hub.html:54
 msgid "Highest Reviewed"
 msgstr "Beste Bewertung"
 
@@ -1371,7 +1378,7 @@ msgid "View Notification"
 msgstr "Benachrichtigungen anschauen"
 
 #: app/templates/emails/notification.html:26
-#: app/templates/emails/notification_digest.html:43
+#: app/templates/emails/notification_digest.html:46
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
@@ -1380,7 +1387,7 @@ msgstr ""
 "ContentDB sind und E-Mail-Benachrichtigungen aktiviert haben."
 
 #: app/templates/emails/notification.html:30
-#: app/templates/emails/notification_digest.html:47
+#: app/templates/emails/notification_digest.html:50
 msgid "Manage your preferences"
 msgstr "Verwalten Sie Ihre Einstellungen"
 
@@ -1390,16 +1397,16 @@ msgid "This is a '%(type)s' notification."
 msgstr "Dies ist eine „%(type)s“-Benachrichtigung."
 
 #: app/templates/emails/notification_digest.html:14
-#: app/templates/emails/notification_digest.html:29
+#: app/templates/emails/notification_digest.html:31
 #, python-format
 msgid "from %(username)s."
 msgstr "Von %(username)s."
 
-#: app/templates/emails/notification_digest.html:22
+#: app/templates/emails/notification_digest.html:24
 msgid "Other Notifications"
 msgstr "Andere Benachrichtigungen"
 
-#: app/templates/emails/notification_digest.html:36
+#: app/templates/emails/notification_digest.html:39
 msgid "View Notifications"
 msgstr "Benachrichtigungen anschauen"
 
@@ -1506,29 +1513,29 @@ msgstr "Beginnen Sie mit der Eingabe, um Vorschläge zu sehen"
 msgid "State"
 msgstr "Zustand"
 
-#: app/templates/macros/package_approval.html:22
-msgid "Create first release"
-msgstr "Ersten Release erstellen"
-
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
 msgstr "Releases bearbeiten"
 
-#: app/templates/macros/package_approval.html:29
+#: app/templates/macros/package_approval.html:31
 msgid "You need to create a release before this package can be approved."
 msgstr ""
 "Bevor dieses Paket genehmigt werden kann, müssen Sie einen Release "
 "erstellen."
 
-#: app/templates/macros/package_approval.html:31
+#: app/templates/macros/package_approval.html:33
+msgid "Release is still importing, or has an error."
+msgstr ""
+
+#: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
 msgstr "Bevor dieses Paket genehmigt werden kann, ist ein Release erforderlich."
 
-#: app/templates/macros/package_approval.html:36
+#: app/templates/macros/package_approval.html:41
 msgid "You need to add at least one screenshot."
 msgstr "Sie müssen mindestens ein Bildschirmfoto hinzufügen."
 
-#: app/templates/macros/package_approval.html:40
+#: app/templates/macros/package_approval.html:45
 #, python-format
 msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
@@ -1537,58 +1544,58 @@ msgstr ""
 "Die folgenden benötigten Abhängigkeiten müssen zuerst zu ContentDB "
 "hinzugefügt werden: %(deps)s"
 
-#: app/templates/macros/package_approval.html:44
+#: app/templates/macros/package_approval.html:49
 msgid "Please wait for the license to be added to CDB."
 msgstr "Warten Sie bitte, bis diese Lizenz zu ContentDB hinzugefügt wurde."
 
-#: app/templates/macros/package_approval.html:51
+#: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot, but this isn't required."
 msgstr ""
 "Sie sollten mindestens ein Bildschirmfoto hinzufügen, obwohl dies nicht "
 "zwingend notwendig ist."
 
-#: app/templates/macros/package_approval.html:57
+#: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
 msgstr "Bitte warten Sie, bis der Release genehmigt wurde."
 
-#: app/templates/macros/package_approval.html:59
+#: app/templates/macros/package_approval.html:64
 msgid "You can now approve this package if you're ready."
 msgstr "Sie können dieses Paket nun genehmigen, wenn Sie bereit sind."
 
-#: app/templates/macros/package_approval.html:61
+#: app/templates/macros/package_approval.html:66
 msgid "Please wait for the package to be approved."
 msgstr "Bitte warten Sie, bis das Paket genehmigt wurde."
 
-#: app/templates/macros/package_approval.html:65
+#: app/templates/macros/package_approval.html:70
 msgid "You can now submit this package for approval if you're ready."
 msgstr ""
 "Sie können nun dieses Paket für eine Genehmigung einreichen, wenn Sie "
 "bereit sind."
 
-#: app/templates/macros/package_approval.html:67
+#: app/templates/macros/package_approval.html:72
 msgid "This package can be submitted for approval when ready."
 msgstr ""
 "Dieses Paket kann für eine Genehmigung eingereicht werden, wenn es bereit"
 " ist."
 
-#: app/templates/macros/package_approval.html:97
+#: app/templates/macros/package_approval.html:102
 msgid "Please make sure that this package has the right to the names it uses."
 msgstr ""
 "Bitte stellen Sie sicher, dass dieses Paket das Recht auf die verwendeten"
 " Namen hat."
 
-#: app/templates/macros/package_approval.html:99
+#: app/templates/macros/package_approval.html:104
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr ""
 "Bitte stellen Sie sicher, dass dieses Paket Rechte für die Namen "
 "%(names)s hat"
 
-#: app/templates/macros/package_approval.html:110
+#: app/templates/macros/package_approval.html:115
 msgid "Package approval thread"
 msgstr "Paketgenehmigungsthema"
 
-#: app/templates/macros/package_approval.html:111
+#: app/templates/macros/package_approval.html:116
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
@@ -1715,7 +1722,7 @@ msgid "On %(trigger)s, do %(action)s"
 msgstr "Bei %(trigger)s, tue %(action)s"
 
 #: app/templates/macros/todo.html:37 app/templates/packages/view.html:104
-#: app/templates/packages/view.html:348
+#: app/templates/packages/view.html:355
 msgid "Release"
 msgstr "Release"
 
@@ -1725,7 +1732,7 @@ msgstr "Speicherort"
 
 #: app/templates/macros/todo.html:50
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:352
+#: app/templates/packages/view.html:359
 msgid "Update settings"
 msgstr "Aktualisierungseinstellungen"
 
@@ -1746,7 +1753,7 @@ msgid "Actions"
 msgstr "Aktionen"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
-#: app/templates/metapackages/view.html:26
+#: app/templates/metapackages/view.html:29
 #: app/templates/packages/similar.html:40 app/templates/todo/editor.html:160
 #: app/templates/todo/editor.html:175
 msgid "WIP"
@@ -1773,31 +1780,32 @@ msgstr "Meta-Pakete"
 msgid "No meta packages found."
 msgstr "Keine Meta-Pakete gefunden."
 
-#: app/templates/metapackages/view.html:8
+#: app/templates/metapackages/view.html:10
 #, python-format
 msgid "Meta Package \"%(name)s\""
 msgstr "Meta-Paket „%(name)s“"
 
-#: app/templates/metapackages/view.html:10
+#: app/templates/metapackages/view.html:12
 msgid "Provided By"
 msgstr "Bereitgestellt von"
 
-#: app/templates/metapackages/view.html:17
-msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
-msgstr "Leider ist dies noch nicht auf ContentDB! Hier sind ein paar Forenthemen:"
+#: app/templates/metapackages/view.html:21 app/templates/todo/todo_base.html:35
+msgid "Forum Topics"
+msgstr "Forenthemen"
 
-#: app/templates/metapackages/view.html:24
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:383
-#: app/templates/packages/view.html:407 app/templates/todo/editor.html:85
+#: app/templates/metapackages/view.html:27
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:396
+#: app/templates/packages/view.html:420 app/templates/packages/view.html:440
+#: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s von %(display_name)s"
 
-#: app/templates/metapackages/view.html:32
+#: app/templates/metapackages/view.html:35
 msgid "Required By"
 msgstr "Benötigt von"
 
-#: app/templates/metapackages/view.html:35
+#: app/templates/metapackages/view.html:38
 msgid "Optionally Used By"
 msgstr "Optional genutzt von"
 
@@ -1916,7 +1924,7 @@ msgstr ""
 "Vervollständigung benötigt."
 
 #: app/templates/packages/create_edit.html:66
-#: app/templates/threads/view.html:78 app/templates/todo/tags.html:38
+#: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
 msgid "Package"
 msgstr "Paket"
 
@@ -2003,6 +2011,17 @@ msgstr ""
 "Betreuer können keine anderen Betreuer hinzufügen oder entfernen, aber "
 "sie können sich selbst entfernen."
 
+#: app/templates/packages/game_hub.html:4
+#: app/templates/packages/game_hub.html:24
+msgid "Community Hub"
+msgstr ""
+
+#: app/templates/packages/game_hub.html:11
+#: app/templates/packages/game_hub.html:12
+#, python-format
+msgid "Mods for %(title)s"
+msgstr ""
+
 #: app/templates/packages/list.html:21
 #, python-format
 msgid "Did you mean to search for packages by %(authors)s?"
@@ -2044,18 +2063,7 @@ msgstr ""
 "Hinweis: Die Min- und Max-Versionen werden verwendet, um das Paket auf\n"
 "\t\t\tPlattformen auszublenden, die nicht in diesem Bereich liegen."
 
-#: app/templates/packages/release_bulk_change.html:35
-#: app/templates/packages/release_edit.html:66
-#: app/templates/packages/release_new.html:86
-msgid ""
-"You cannot select the oldest version for min or the newest version\n"
-"\t\t\tfor max as this does not make sense - you can't predict the future."
-msgstr ""
-"Sie können nicht die älteste Version für min oder die neueste Version\n"
-"\t\t\tfür max wählen, da dies keinen Sinn macht – man kann die Zukunft "
-"nicht vorhersagen."
-
-#: app/templates/packages/release_bulk_change.html:38
+#: app/templates/packages/release_bulk_change.html:36
 #: app/templates/packages/release_edit.html:61
 #: app/templates/packages/release_new.html:83
 msgid "Leave both as None if in doubt."
@@ -2100,15 +2108,15 @@ msgstr ""
 "Sie können <a href='/help/package_config/'> auf automatisch festlegen</a>"
 " in der .conf Ihres Pakets einstellen."
 
-#: app/templates/packages/release_edit.html:75
+#: app/templates/packages/release_edit.html:70
 msgid "Delete Release"
 msgstr "Release löschen"
 
-#: app/templates/packages/release_edit.html:81
+#: app/templates/packages/release_edit.html:76
 msgid "This is permanent."
 msgstr "Dies ist dauerhaft."
 
-#: app/templates/packages/release_edit.html:82
+#: app/templates/packages/release_edit.html:77
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
@@ -2116,7 +2124,7 @@ msgstr ""
 "Alle damit verbundenen Uploads werden nicht sofort gelöscht, aber der "
 "Release wird nicht mehr aufgelistet."
 
-#: app/templates/packages/release_edit.html:87
+#: app/templates/packages/release_edit.html:82
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr ""
 "Sie können den neuesten Release nicht löschen, bitte erstellen Sie zuerst"
@@ -2591,7 +2599,7 @@ msgstr ""
 msgid "Awaiting review"
 msgstr "Review steht noch aus"
 
-#: app/templates/packages/view.html:300 app/templates/threads/view.html:61
+#: app/templates/packages/view.html:300 app/templates/threads/view.html:67
 msgid "Edit Review"
 msgstr "Rezension bearbeiten"
 
@@ -2603,78 +2611,102 @@ msgstr "Sie können Ihr eigenes Paket nicht rezensieren."
 msgid "Used By"
 msgstr "Verwendet von"
 
-#: app/templates/packages/view.html:336
+#: app/templates/packages/view.html:327
+msgid "Content"
+msgstr ""
+
+#: app/templates/packages/view.html:329 app/templates/packages/view.html:383
+msgid "View content for game"
+msgstr ""
+
+#: app/templates/packages/view.html:343
 msgid "Package may be outdated"
 msgstr "Paket ist möglicherweise veraltet"
 
-#: app/templates/packages/view.html:343
+#: app/templates/packages/view.html:350
 msgid "Only visible to the author and Editors."
 msgstr "Nur für den Autor und die Bearbeiter sichtbar."
 
-#: app/templates/packages/view.html:360
+#: app/templates/packages/view.html:367
 msgid "Warning"
 msgstr "Warnung"
 
-#: app/templates/packages/view.html:366
+#: app/templates/packages/view.html:373
 msgid "Like this package? Help support its development by making a donation"
 msgstr ""
 "Gefällt Ihnen dieses Paket? Unterstützen Sie seine Entwicklung mit einer "
 "Spende"
 
-#: app/templates/packages/view.html:369
+#: app/templates/packages/view.html:376
 msgid "Donate now"
 msgstr "Jetzt spenden"
 
-#: app/templates/packages/view.html:375
+#: app/templates/packages/view.html:388
 msgid "Dependencies"
 msgstr "Abhängigkeiten"
 
-#: app/templates/packages/view.html:377
+#: app/templates/packages/view.html:390
 msgid "Required"
 msgstr "Erforderlich"
 
-#: app/templates/packages/view.html:395
+#: app/templates/packages/view.html:408
 msgid "No required dependencies"
 msgstr "Nicht erforderliche Abhängigkeiten"
 
-#: app/templates/packages/view.html:401
+#: app/templates/packages/view.html:414
 msgid "Optional"
 msgstr "Optional"
 
-#: app/templates/packages/view.html:423
+#: app/templates/packages/view.html:436
+msgid "Compatible Games"
+msgstr ""
+
+#: app/templates/packages/view.html:444
+msgid "No specific game is required"
+msgstr ""
+
+#: app/templates/packages/view.html:447
+msgid "This is an experimental feature."
+msgstr ""
+
+#: app/templates/packages/view.html:448
+msgid "Supported games are determined by an algorithm, and may not be correct."
+msgstr ""
+
+#: app/templates/packages/view.html:453
 msgid "Information"
 msgstr "Informationen"
 
-#: app/templates/packages/view.html:429
+#: app/templates/packages/view.html:459
 msgid "Technical Name"
 msgstr "Technischer Name"
 
-#: app/templates/packages/view.html:438
+#: app/templates/packages/view.html:468
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s für Code,<br>%(media_license)s für Medien."
 
-#: app/templates/packages/view.html:446
+#: app/templates/packages/view.html:476
 msgid "Unknown"
 msgstr "Unbekannt"
 
-#: app/templates/packages/view.html:448
+#: app/templates/packages/view.html:478
 msgid "Added"
 msgstr "Hinzugefügt"
 
-#: app/templates/packages/view.html:462
+#: app/templates/packages/view.html:492
 msgid "Remove myself"
 msgstr "Entferne mich selbst"
 
-#: app/templates/packages/view.html:467
+#: app/templates/packages/view.html:497
 msgid "Provides"
 msgstr "Stellt bereit"
 
-#: app/templates/packages/view.html:489
+#: app/templates/packages/view.html:519
 msgid "More"
 msgstr "Mehr"
 
-#: app/templates/packages/view.html:518
+#: app/templates/packages/view.html:548
 msgid "See audit log"
 msgstr "Siehe Auditierungsprotokoll"
 
@@ -2689,6 +2721,12 @@ msgstr "Meldungen werden mit dem ContentDB-Personal geteilt."
 #: app/templates/report/index.html:25
 msgid "Only the admin will be able to see who made the report."
 msgstr "Nur der Administrator kann sehen wer die Meldung erstellt hat."
+
+#: app/templates/report/index.html:29
+msgid ""
+"Found a bug? Please report on the package's issue tracker or in a thread "
+"instead."
+msgstr ""
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
@@ -2758,15 +2796,19 @@ msgstr "Antworte auf <b>%(title)s</b>"
 msgid "Subscribe"
 msgstr "Abonnieren"
 
-#: app/templates/threads/view.html:46
+#: app/templates/threads/view.html:45
+msgid "Convert to Thread"
+msgstr ""
+
+#: app/templates/threads/view.html:52
 msgid "Unlock"
 msgstr "Entsperren"
 
-#: app/templates/threads/view.html:51
+#: app/templates/threads/view.html:57
 msgid "Lock"
 msgstr "Sperren"
 
-#: app/templates/threads/view.html:84
+#: app/templates/threads/view.html:90
 msgid ""
 "This thread is only visible to its creator, the package owner, and users "
 "of Approver rank or above."
@@ -2870,10 +2912,6 @@ msgstr "To-Do-Liste von %(username)s"
 msgid "All Outdated Packages"
 msgstr "Alle veralteten Pakete"
 
-#: app/templates/todo/todo_base.html:35
-msgid "Forum Topics"
-msgstr "Forenthemen"
-
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
 msgstr "Nach Benutzername sortieren"
@@ -2958,15 +2996,16 @@ msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr ""
-"Diese Pakete haben Screenshots, die zu klein sind und ersetzt werden sollten."
+"Diese Pakete haben Screenshots, die zu klein sind und ersetzt werden "
+"sollten."
 
 #: app/templates/todo/user.html:72
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr ""
-"Rot und orange sind Screenshots, die unter dem Grenzwert liegen, und graue "
-"Screenshots liegen unter der empfohlenen Auflösung."
+"Rot und orange sind Screenshots, die unter dem Grenzwert liegen, und "
+"graue Screenshots liegen unter der empfohlenen Auflösung."
 
 #: app/templates/todo/user.html:127
 msgid "See All"
@@ -3503,8 +3542,8 @@ msgid ""
 "sending emails to it - including password resets."
 msgstr ""
 "Damit wird eine E-Mail-Adresse auf eine schwarze Liste gesetzt, so dass "
-"ContentDB keine E-Mails mehr an diese Adresse senden kann - auch nicht zum "
-"Zurücksetzen von Passwörtern."
+"ContentDB keine E-Mails mehr an diese Adresse senden kann - auch nicht "
+"zum Zurücksetzen von Passwörtern."
 
 #: app/templates/users/unsubscribe.html:20
 msgid "Please enter the email address you wish to blacklist."
@@ -3526,8 +3565,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to sign into the account "
 "'%(display_name)s'"
 msgstr ""
-"Wenn Sie sich abmelden, können Sie sich möglicherweise nicht mehr bei dem "
-"Konto \"%(display_name)s\" anmelden"
+"Wenn Sie sich abmelden, können Sie sich möglicherweise nicht mehr bei dem"
+" Konto \"%(display_name)s\" anmelden"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -3537,8 +3576,8 @@ msgid ""
 msgstr ""
 "ContentDB wird nicht mehr in der Lage sein, \"Passwort vergessen\" und "
 "andere wichtige System-E-Mails zu versenden.\n"
-"\t\t\t\t\tSie sollten stattdessen Ihre E-Mail-Benachrichtigungseinstellungen "
-"bearbeiten."
+"\t\t\t\t\tSie sollten stattdessen Ihre E-Mail-"
+"Benachrichtigungseinstellungen bearbeiten."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
@@ -3632,3 +3671,24 @@ msgstr ""
 #~ "Erwägen Sie, die Aktualisierungseinstellungen "
 #~ "so zu ändern, dass stattdessen "
 #~ "automatisch Releases erstellt werden."
+
+#~ msgid "Create first release"
+#~ msgstr "Ersten Release erstellen"
+
+#~ msgid "Unfortunately, this isn't on ContentDB yet! Here's some forum topic(s):"
+#~ msgstr ""
+#~ "Leider ist dies noch nicht auf "
+#~ "ContentDB! Hier sind ein paar "
+#~ "Forenthemen:"
+
+#~ msgid ""
+#~ "You cannot select the oldest version for min or the newest version\n"
+#~ "\t\t\tfor max as this does not "
+#~ "make sense - you can't predict the"
+#~ " future."
+#~ msgstr ""
+#~ "Sie können nicht die älteste Version für min oder die neueste Version\n"
+#~ "\t\t\tfür max wählen, da dies "
+#~ "keinen Sinn macht – man kann die"
+#~ " Zukunft nicht vorhersagen."
+
