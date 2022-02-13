@@ -56,7 +56,7 @@ def del_stuck_releases():
 	return redirect(url_for("admin.admin_page"))
 
 
-@action("Check ZIP releases")
+@action("Check all releases (postReleaseCheckUpdate)")
 def check_releases():
 	releases = PackageRelease.query.filter(PackageRelease.url.like("/uploads/%")).all()
 
@@ -73,7 +73,7 @@ def check_releases():
 	return redirect(url_for("todo.view_editor"))
 
 
-@action("Check the first release of all packages")
+@action("Check latest release of all packages (postReleaseCheckUpdate)")
 def reimport_packages():
 	tasks = []
 	for package in Package.query.filter(Package.state != PackageState.DELETED).all():
@@ -102,7 +102,7 @@ def check_all_forum_accounts():
 	return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 
 
-@action("Import screenshots")
+@action("Import screenshots from Git")
 def import_screenshots():
 	packages = Package.query \
 		.filter(Package.state != PackageState.DELETED) \
@@ -283,7 +283,7 @@ def import_licenses():
 
 @action("Delete inactive users")
 def delete_inactive_users():
-	users = User.query.filter(User.is_active == False, User.packages.is_(None), User.forum_topics.is_(None),
+	users = User.query.filter(User.is_active == False, ~User.packages.any(), ~User.forum_topics.any(),
 			User.rank == UserRank.NOT_JOINED).all()
 	for user in users:
 		db.session.delete(user)

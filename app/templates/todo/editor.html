@@ -123,22 +123,22 @@
 		</div>
 	{% endif %}
 
+	{% if total_to_tag != 0 %}
+		<h2 class="mt-5">{{ _("Tag Packages") }}</h2>
 
-	<h2 class="mt-5">{{ _("Tag Packages") }}</h2>
+		<p>
+			{{ _("%(total_to_tag)d / %(total_packages)d packages don't have any tags.",
+					total_to_tag=total_to_tag, total_packages=total_packages) }}
+		</p>
 
-	<p>
-		{{ _("%(total_to_tag)d / %(total_packages)d packages don't have any tags.",
-				total_to_tag=total_to_tag, total_packages=total_packages) }}
-	</p>
+		<div class="progress my-4">
+			{% set perc = 100 * (total_packages - total_to_tag) / total_packages %}
+			<div class="progress-bar bg-success" role="progressbar"
+				style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
+		</div>
 
-	<div class="progress my-4">
-		{% set perc = 100 * (total_packages - total_to_tag) / total_packages %}
-		<div class="progress-bar bg-success" role="progressbar"
-			style="width: {{ perc }}%" aria-valuenow="{{ perc }}" aria-valuemin="0" aria-valuemax="100"></div>
-	</div>
-
-	<a class="btn btn-primary" href="{{ url_for('todo.tags') }}">{{ _("View Tags") }}</a>
-
+		<a class="btn btn-primary" href="{{ url_for('todo.tags') }}">{{ _("View Tags") }}</a>
+	{% endif %}
 
 	{% if unfulfilled_meta_packages %}
 		<h2 class="mt-5">

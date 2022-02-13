@@ -74,7 +74,7 @@ def view_editor():
 
 	unfulfilled_meta_packages = MetaPackage.query \
 			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
-			.filter(MetaPackage.dependencies.any(Package.state == PackageState.APPROVED, optional=False)) \
+			.filter(MetaPackage.dependencies.any(Dependency.depender.has(state=PackageState.APPROVED), optional=False)) \
 			.order_by(db.asc(MetaPackage.name)).count()
 
 	return render_template("todo/editor.html", current_tab="editor",
@@ -143,7 +143,7 @@ def tags_user():
 def metapackages():
 	mpackages = MetaPackage.query \
 			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
-			.filter(MetaPackage.dependencies.any(optional=False)) \
+			.filter(MetaPackage.dependencies.any(Dependency.depender.has(state=PackageState.APPROVED), optional=False)) \
 			.order_by(db.asc(MetaPackage.name)).all()
 
 	return render_template("todo/metapackages.html", mpackages=mpackages)
