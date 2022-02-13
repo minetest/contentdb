@@ -358,11 +358,45 @@ def modtools_ban(username):
 	if not user.checkPerm(current_user, Permission.CHANGE_RANK):
 		abort(403)
 
-	user.rank = UserRank.BANNED
+	message = request.form["message"]
+	expires_at = request.form.get("expires_at")
 
-	addAuditLog(AuditSeverity.MODERATION, current_user, f"Banned {user.username}",
+	user.ban = UserBan()
+	user.ban.banned_by = current_user
+	user.ban.message = message
+
+	if expires_at and expires_at != "":
+		user.ban.expires_at = expires_at
+	else:
+		user.rank = UserRank.BANNED
+
+	addAuditLog(AuditSeverity.MODERATION, current_user, f"Banned {user.username}, expires {user.ban.expires_at or '-'}, message: {message}",
 			url_for("users.profile", username=user.username), None)
 	db.session.commit()
 
 	flash(f"Banned {user.username}", "success")
+	return redirect(url_for("users.modtools", username=username))
+
+
+@bp.route("/users/<username>/modtools/unban/", methods=["POST"])
+@rank_required(UserRank.MODERATOR)
+def modtools_unban(username):
+	user: User = User.query.filter_by(username=username).first()
+	if not user:
+		abort(404)
+
+	if not user.checkPerm(current_user, Permission.CHANGE_RANK):
+		abort(403)
+
+	if user.ban:
+		db.session.delete(user.ban)
+
+	if user.rank == UserRank.BANNED:
+		user.rank = UserRank.MEMBER
+
+	addAuditLog(AuditSeverity.MODERATION, current_user, f"Unbanned {user.username}",
+			url_for("users.profile", username=user.username), None)
+	db.session.commit()
+
+	flash(f"Unbanned {user.username}", "success")
 	return redirect(url_for("users.modtools", username=username))

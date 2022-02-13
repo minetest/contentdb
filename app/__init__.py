@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import datetime
 
 from flask import *
@@ -25,7 +26,6 @@ from flask_babel import Babel, gettext
 from flask_login import logout_user, current_user, LoginManager
 import os, redis
 from app.markdown import init_markdown, MARKDOWN_EXTENSIONS, MARKDOWN_EXTENSION_CONFIG
-
 
 app = Flask(__name__, static_folder="public/static")
 app.config["FLATPAGES_ROOT"] = "flatpages"
@@ -86,9 +86,11 @@ def load_user(user_id):
 from .blueprints import create_blueprints
 create_blueprints(app)
 
+
 @app.route("/uploads/<path:path>")
 def send_upload(path):
 	return send_from_directory(app.config["UPLOAD_DIR"], path)
+
 
 @app.route("/<path:path>/")
 def flatpage(path):
@@ -96,16 +98,26 @@ def flatpage(path):
 	template = page.meta.get("template", "flatpage.html")
 	return render_template(template, page=page)
 
+
 @app.before_request
 def check_for_ban():
 	if current_user.is_authenticated:
-		if current_user.rank == models.UserRank.BANNED:
-			flash(gettext("You have been banned."), "danger")
+		if current_user.ban and current_user.ban.has_expired:
+			models.db.session.delete(current_user.ban)
+			if current_user.rank == models.UserRank.BANNED:
+				current_user.rank = models.UserRank.MEMBER
+			models.db.session.commit()
+		elif current_user.ban or current_user.rank == models.UserRank.BANNED:
+			if current_user.ban:
+				flash(gettext("Banned:") + " " + current_user.ban.message, "danger")
+			else:
+				flash(gettext("You have been banned."), "danger")
 			logout_user()
 			return redirect(url_for("users.login"))
 		elif current_user.rank == models.UserRank.NOT_JOINED:
 			current_user.rank = models.UserRank.MEMBER
 			models.db.session.commit()
+
 
 from .utils import clearNotifications, is_safe_url
 
@@ -114,6 +126,7 @@ from .utils import clearNotifications, is_safe_url
 def check_for_notifications():
 	if current_user.is_authenticated:
 		clearNotifications(request.path)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
@@ -143,7 +156,6 @@ def get_locale():
 		new_session.close()
 
 	return locale
-
 
 
 @app.route("/set-locale/", methods=["POST"])

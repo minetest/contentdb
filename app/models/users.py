@@ -183,6 +183,8 @@ class User(db.Model, UserMixin):
 	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan", order_by=db.desc("created_at"))
 	forum_topics  = db.relationship("ForumTopic", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
 
+	ban = db.relationship("UserBan", foreign_keys="UserBan.user_id", back_populates="user", uselist=False)
+
 	def __init__(self, username=None, active=False, email=None, password=None):
 		self.username = username
 		self.display_name = username
@@ -482,3 +484,21 @@ class UserNotificationPreferences(db.Model):
 
 		value = 1 if value else 0
 		setattr(self, "pref_" + notification_type.toName(), value)
+
+
+class UserBan(db.Model):
+	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
+	user = db.relationship("User", foreign_keys=[user_id], back_populates="ban")
+
+	message = db.Column(db.UnicodeText, nullable=False)
+
+	banned_by_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	banned_by = db.relationship("User", foreign_keys=[banned_by_id])
+
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+	expires_at = db.Column(db.DateTime, nullable=True, default=None)
+
+	@property
+	def has_expired(self):
+		return self.expires_at and datetime.datetime.now() > self.expires_at
