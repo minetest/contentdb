@@ -116,7 +116,7 @@ def send_user_email(email: str, locale: str, subject: str, text: str, html=None,
 @celery.task(rate_limit="25/m")
 def send_anon_email(email: str, locale: str, subject: str, text: str, html=None):
 	return send_email_with_reason(email, locale, subject, text, html,
-			lazy_gettext("You are receiving this email because someone (hopefully you) entered your email address as a user's email."))
+			lazy_gettext("You are receiving this email because someone (hopefully you) entered your email address as a user's email."), None)
 
 
 def send_single_email(notification, locale):
