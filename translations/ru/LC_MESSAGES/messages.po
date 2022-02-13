@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-01-29 21:28+0000\n"
+"PO-Revision-Date: 2022-02-15 23:53+0000\n"
 "Last-Translator: Nikita Epifanov <nikgreens@protonmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:103
@@ -1517,7 +1518,7 @@ msgstr "Вам нужно создать релиз, прежде чем это 
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
-msgstr ""
+msgstr "Релиз все еще импортируется или имеет ошибку."
 
 #: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
@@ -1993,13 +1994,13 @@ msgstr ""
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:24
 msgid "Community Hub"
-msgstr ""
+msgstr "Центр сообщества"
 
 #: app/templates/packages/game_hub.html:11
 #: app/templates/packages/game_hub.html:12
 #, python-format
 msgid "Mods for %(title)s"
-msgstr ""
+msgstr "Моды для %(title)s"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2586,11 +2587,11 @@ msgstr "Используется"
 
 #: app/templates/packages/view.html:327
 msgid "Content"
-msgstr ""
+msgstr "Дополнения"
 
 #: app/templates/packages/view.html:329 app/templates/packages/view.html:383
 msgid "View content for game"
-msgstr ""
+msgstr "Посмотреть дополнения для игры"
 
 #: app/templates/packages/view.html:343
 msgid "Package may be outdated"
@@ -2632,19 +2633,20 @@ msgstr "Необязательно"
 
 #: app/templates/packages/view.html:436
 msgid "Compatible Games"
-msgstr ""
+msgstr "Совместимые игры"
 
 #: app/templates/packages/view.html:444
+#, fuzzy
 msgid "No specific game is required"
-msgstr ""
+msgstr "Не требуется конкретная игра"
 
 #: app/templates/packages/view.html:447
 msgid "This is an experimental feature."
-msgstr ""
+msgstr "Это экспериментальная функция."
 
 #: app/templates/packages/view.html:448
 msgid "Supported games are determined by an algorithm, and may not be correct."
-msgstr ""
+msgstr "Поддерживаемые игры определяются алгоритмом и могут быть неверными."
 
 #: app/templates/packages/view.html:453
 msgid "Information"
@@ -2700,6 +2702,8 @@ msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
 msgstr ""
+"Нашли ошибку? Пожалуйста, сообщите об этом на трекере проблем дополнения или "
+"в теме."
 
 #: app/templates/tasks/view.html:5
 #, fuzzy
@@ -2773,7 +2777,7 @@ msgstr "Подписаться"
 
 #: app/templates/threads/view.html:45
 msgid "Convert to Thread"
-msgstr ""
+msgstr "Конвертировать в тему"
 
 #: app/templates/threads/view.html:52
 msgid "Unlock"
@@ -3678,4 +3682,3 @@ msgstr ""
 #~ "\t\t\tдля максимальной, так как это "
 #~ "не имеет смысла - вы не можете "
 #~ "предсказать будущее."
-
