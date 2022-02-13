@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-02-01 14:55+0000\n"
-"Last-Translator: Y.W. <y5nw@outlook.com>\n"
+"PO-Revision-Date: 2022-02-13 00:52+0000\n"
+"Last-Translator: neinwhal <fishyWET@hotmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"minetest/contentdb/zh_Hans/>\n"
 "Language: zh_Hans\n"
-"Language-Team: Chinese (Simplified) "
-"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hans/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.11-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:103
@@ -676,9 +677,8 @@ msgid ""
 msgstr "用户名只能包含 A-Za-z0-9._。请考虑联系管理员"
 
 #: app/blueprints/users/claim.py:45
-#, fuzzy
 msgid "User has already been claimed"
-msgstr "用户已被认领"
+msgstr "用户已经被认领"
 
 #: app/blueprints/users/claim.py:49
 msgid "Unable to get GitHub username for user"
@@ -776,24 +776,24 @@ msgstr "第一张奖章为50k。"
 
 #: app/blueprints/users/profile.py:193
 msgid ">300k downloads"
-msgstr ""
+msgstr ">30万下载"
 
 #: app/blueprints/users/profile.py:196
 msgid ">100k downloads"
-msgstr ""
+msgstr ">10万下载"
 
 #: app/blueprints/users/profile.py:199
 msgid ">75k downloads"
-msgstr ""
+msgstr ">7万5千下载"
 
 #: app/blueprints/users/profile.py:202
 msgid ">50k downloads"
-msgstr ""
+msgstr ">5万下载"
 
 #: app/blueprints/users/profile.py:203
 #, python-format
 msgid "Has received %(downloads)d downloads across all packages."
-msgstr ""
+msgstr "所有的软件包收到%(downloads)d次下载。"
 
 #: app/blueprints/users/settings.py:19 app/templates/users/profile.html:17
 #: app/templates/users/profile_edit.html:8
@@ -810,13 +810,14 @@ msgid "Email and Notifications"
 msgstr "电子邮件和通知"
 
 #: app/blueprints/users/settings.py:34 app/templates/api/list_tokens.html:10
+#, fuzzy
 msgid "API Tokens"
-msgstr ""
+msgstr "应用程式介面的令牌"
 
 #: app/blueprints/users/settings.py:42 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:35
 msgid "Moderator Tools"
-msgstr ""
+msgstr "版主工具"
 
 #: app/blueprints/users/settings.py:52
 msgid "Donation URL"
@@ -824,11 +825,11 @@ msgstr "捐款网址"
 
 #: app/blueprints/users/settings.py:66 app/blueprints/users/settings.py:72
 msgid "A user already has that name"
-msgstr ""
+msgstr "用户已经有该名称"
 
 #: app/blueprints/users/settings.py:224
 msgid "Users with moderator rank or above cannot be deleted"
-msgstr ""
+msgstr "不能删除版主或者以上的用户"
 
 #: app/blueprints/users/settings.py:264
 msgid "Display name"
@@ -844,11 +845,11 @@ msgstr "GitHub用户名"
 
 #: app/blueprints/users/settings.py:267 app/templates/users/list.html:14
 msgid "Rank"
-msgstr ""
+msgstr "等级"
 
 #: app/blueprints/users/settings.py:311
 msgid "Can't promote a user to a rank higher than yourself!"
-msgstr ""
+msgstr "不能提升用户等级到比自己更高的等级！"
 
 #: app/logic/packages.py:95
 msgid ""
@@ -857,22 +858,19 @@ msgid ""
 msgstr "名称只能包含小写字母（a-z）、数字（0-9）和下划线（_）"
 
 #: app/logic/packages.py:109
-#, fuzzy
 msgid "You do not have permission to edit this package"
 msgstr "您没有权限编辑这个软件包"
 
 #: app/logic/packages.py:113
-#, fuzzy
 msgid "You do not have permission to change the package name"
 msgstr "您没有权限修改这个软件包的名字"
 
 #: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr ""
+msgstr "无法将保护的标签%(title)s加到软件包"
 
 #: app/logic/releases.py:32
-#, fuzzy
 msgid "You do not have permission to make releases"
 msgstr "您没有权限发布新版本"
 
@@ -880,26 +878,27 @@ msgstr "您没有权限发布新版本"
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
-msgstr ""
+msgstr "您在过去 5 分钟内为软件包创建了太多版本，请稍候再重试"
 
 #: app/logic/releases.py:74
+#, fuzzy
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr ""
+msgstr "无效的提交哈希值; 必须要 40 个字符长的十六进制符串"
 
 #: app/logic/screenshots.py:16
 msgid "Too many requests, please wait before trying again"
-msgstr ""
+msgstr "要求太多，请稍候再试"
 
 #: app/logic/screenshots.py:18
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "一个PNG 或 JPG 的图像文件"
 
 #: app/logic/screenshots.py:35
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
-msgstr ""
+msgstr "截图太小，至少需要%(width)sx%(height)s像素"
 
 #: app/logic/uploads.py:52
 #, python-format
@@ -908,16 +907,15 @@ msgstr "请上传%(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "上传的图片上不是图片"
 
 #: app/models/packages.py:65
 msgid "Mod"
 msgstr "Mod"
 
 #: app/models/packages.py:67
-#, fuzzy
 msgid "Game"
-msgstr "子游戏"
+msgstr "子博弈"
 
 #: app/models/packages.py:69
 #, fuzzy
@@ -927,13 +925,12 @@ msgstr "材质包"
 #: app/models/packages.py:74 app/templates/base.html:27
 #: app/templates/metapackages/view.html:17
 msgid "Mods"
-msgstr ""
+msgstr "模组"
 
 #: app/models/packages.py:76 app/templates/base.html:30
 #: app/templates/metapackages/view.html:14
-#, fuzzy
 msgid "Games"
-msgstr "子游戏"
+msgstr "子博弈"
 
 #: app/models/packages.py:78 app/templates/base.html:33
 #, fuzzy
@@ -968,7 +965,7 @@ msgstr "您是ContentDB的一名用户，所以收到了这封邮件。"
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
-msgstr ""
+msgstr "您收到这封电子邮件是因为有人（希望是您）输入了您的电子邮件地址为用户的电子邮件。"
 
 #: app/tasks/emails.py:153
 #, python-format
@@ -3444,4 +3441,3 @@ msgstr ""
 #~ "make sense - you can't predict the"
 #~ " future."
 #~ msgstr ""
-
