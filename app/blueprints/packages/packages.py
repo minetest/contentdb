@@ -422,7 +422,7 @@ def remove(package):
 		url = url_for("users.profile", username=package.author.username)
 		msg = "Deleted {}, reason={}".format(package.title, reason)
 		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, url, package)
-		addAuditLog(AuditSeverity.EDITOR, current_user, msg, url)
+		addAuditLog(AuditSeverity.EDITOR, current_user, msg, url, package)
 		db.session.commit()
 
 		flash(gettext("Deleted package"), "success")
