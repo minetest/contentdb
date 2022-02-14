@@ -80,7 +80,7 @@ def view_editor():
 	audit_log = AuditLogEntry.query \
 		.filter(AuditLogEntry.package.has()) \
 		.order_by(db.desc(AuditLogEntry.created_at)) \
-		.limit(10).all()
+		.limit(20).all()
 
 	return render_template("todo/editor.html", current_tab="editor",
 			packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
