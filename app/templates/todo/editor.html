@@ -157,6 +157,18 @@
 	{% endif %}
 
 
+	<div class="mt-5"></div>
+	{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+		<a class="btn btn-secondary float-right" href="{{ url_for('admin.audit') }}">
+			{{ _("View All") }}
+		</a>
+	{% endif %}
+	<h2>{{ _("Recent Actions") }}</h2>
+
+	{% from "macros/audit_log.html" import render_audit_log %}
+	{{ render_audit_log(audit_log, current_user) }}
+
+
 	<h2 class="mt-5">{{ _("WIP") }}</h2>
 
 	{% if canApproveNew and (packages or wip_packages) %}

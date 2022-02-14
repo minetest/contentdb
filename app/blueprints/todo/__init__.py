@@ -77,11 +77,16 @@ def view_editor():
 			.filter(MetaPackage.dependencies.any(Dependency.depender.has(state=PackageState.APPROVED), optional=False)) \
 			.order_by(db.asc(MetaPackage.name)).count()
 
+	audit_log = AuditLogEntry.query \
+		.filter(AuditLogEntry.package.has()) \
+		.order_by(db.desc(AuditLogEntry.created_at)) \
+		.limit(10).all()
+
 	return render_template("todo/editor.html", current_tab="editor",
 			packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
 			canApproveNew=canApproveNew, canApproveRel=canApproveRel, canApproveScn=canApproveScn,
 			license_needed=license_needed, total_packages=total_packages, total_to_tag=total_to_tag,
-			unfulfilled_meta_packages=unfulfilled_meta_packages)
+			unfulfilled_meta_packages=unfulfilled_meta_packages, audit_log=audit_log)
 
 
 @bp.route("/todo/topics/")
