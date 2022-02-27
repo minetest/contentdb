@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-01-23 17:15+0000\n"
-"Last-Translator: rubenwardy <rw@rubenwardy.com>\n"
+"PO-Revision-Date: 2022-02-28 14:59+0000\n"
+"Last-Translator: Minetest-j45 <janscheresmonesma@gmail.com>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/es/>\n"
 "Language: es\n"
-"Language-Team: Spanish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/es/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.11.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:103
@@ -194,7 +195,7 @@ msgstr "ID del tema del foro"
 
 #: app/blueprints/packages/packages.py:247
 msgid "Video URL"
-msgstr ""
+msgstr "URL de vídeo"
 
 #: app/blueprints/packages/packages.py:265
 msgid "Unable to find that user"
@@ -839,7 +840,7 @@ msgstr "Tokens de la API"
 #: app/blueprints/users/settings.py:42 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:35
 msgid "Moderator Tools"
-msgstr ""
+msgstr "Herramientas de Moderador"
 
 #: app/blueprints/users/settings.py:52
 msgid "Donation URL"
@@ -926,6 +927,8 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
+"La captura de pantalla es muy pequeña, debería ser de al menos %(width)s por "
+"%(height)s píxeles"
 
 #: app/logic/uploads.py:52
 #, python-format
@@ -984,6 +987,8 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
 msgstr ""
+"Está recibiendo este correo electrónico porque es un usuario registrado en "
+"ContentDB."
 
 #: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
@@ -996,7 +1001,7 @@ msgstr ""
 #: app/tasks/emails.py:153
 #, python-format
 msgid "%(num)d new notifications"
-msgstr ""
+msgstr "%(num)d notificaciones nuevas"
 
 #: app/tasks/emails.py:155 app/templates/macros/forms.html:52
 #: app/templates/packages/create_edit.html:41
@@ -1006,7 +1011,7 @@ msgstr "Ver"
 
 #: app/tasks/emails.py:158
 msgid "Manage email settings"
-msgstr ""
+msgstr "Gestionar ajustes de correo electrónico"
 
 #: app/tasks/emails.py:160 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
@@ -1415,7 +1420,7 @@ msgstr ""
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
-msgstr ""
+msgstr "Puede usar GitHub para iniciar sesión si está asociado a su cuenta."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
@@ -1426,6 +1431,7 @@ msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
 msgstr ""
+"Si no esperaba recibir este correo electrónico, puede ignorarlo sin problema."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
@@ -1508,7 +1514,7 @@ msgstr "Debe crear una versión antes de que se pueda aprobar este paquete."
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
-msgstr ""
+msgstr "El lanzamiento aún se está importando, o tiene un error."
 
 #: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
@@ -1811,20 +1817,20 @@ msgstr "Alias"
 
 #: app/templates/packages/alias_create_edit.html:13
 msgid "Back to Aliases"
-msgstr ""
+msgstr "Volver a Alias"
 
 #: app/templates/packages/alias_list.html:4
 msgid "Aliases"
-msgstr ""
+msgstr "Alias"
 
 #: app/templates/packages/alias_list.html:15
 #, python-format
 msgid "Aliases for %(title)s by %(author)s"
-msgstr ""
+msgstr "Alias para %(title)s por %(author)s"
 
 #: app/templates/packages/alias_list.html:24
 msgid "No aliases"
-msgstr ""
+msgstr "No hay alias"
 
 #: app/templates/packages/bulk_update_conf.html:4
 #, python-format
@@ -1837,7 +1843,7 @@ msgstr "Paquetes con Configuración de Actualización"
 
 #: app/templates/packages/bulk_update_conf.html:16
 msgid "Bulk Set Update Settings"
-msgstr ""
+msgstr "Establecer Ajustes de Actualización en Masa"
 
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
@@ -1954,7 +1960,7 @@ msgstr "Consejo: pegue en una dirección de los foros"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
-msgstr ""
+msgstr "Los vídeos de YouTube se mostrarán incrustados."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -1983,7 +1989,7 @@ msgstr ""
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:24
 msgid "Community Hub"
-msgstr ""
+msgstr "Centro Comunitario"
 
 #: app/templates/packages/game_hub.html:11
 #: app/templates/packages/game_hub.html:12
@@ -2168,7 +2174,7 @@ msgstr ""
 
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
-msgstr ""
+msgstr "¿Cómo quiere crear lanzamientos?"
 
 #: app/templates/packages/release_wizard.html:9
 #: app/templates/packages/release_wizard.html:75
@@ -2206,11 +2212,11 @@ msgstr "Esto se puede cambiar más tarde."
 
 #: app/templates/packages/release_wizard.html:31
 msgid "Automatically (Recommended)"
-msgstr ""
+msgstr "Automáticamente (recomendado)"
 
 #: app/templates/packages/release_wizard.html:34
 msgid "Rolling Release"
-msgstr ""
+msgstr "Ciclo de lanzamiento progresivo"
 
 #: app/templates/packages/release_wizard.html:37
 msgid "On Git Tag"
@@ -2218,7 +2224,7 @@ msgstr ""
 
 #: app/templates/packages/release_wizard.html:46
 msgid "Manually"
-msgstr ""
+msgstr "Manualmente"
 
 #: app/templates/packages/release_wizard.html:49
 msgid "With reminders"
@@ -2234,12 +2240,12 @@ msgstr ""
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
-msgstr ""
+msgstr "Crear lanzamientos manualmente"
 
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
-msgstr ""
+msgstr "Lanzamientos - %(title)s"
 
 #: app/templates/packages/releases_list.html:18
 msgid "Set up automatic releases"
@@ -2252,7 +2258,7 @@ msgstr ""
 #: app/templates/packages/remove.html:9
 #, python-format
 msgid "Remove %(title)s"
-msgstr ""
+msgstr "Eliminar %(title)s"
 
 #: app/templates/packages/remove.html:11
 msgid ""
@@ -2352,15 +2358,15 @@ msgstr "La captura de pantalla superior será usada como miniatura del paquete."
 
 #: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:77
 msgid "Way too small"
-msgstr ""
+msgstr "Demasiado pequeño"
 
 #: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:80
 msgid "Too small"
-msgstr ""
+msgstr "Muy pequeño"
 
 #: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
 msgid "Not HD"
-msgstr ""
+msgstr "No es HD"
 
 #: app/templates/packages/screenshots.html:53
 msgid "Awaiting approval"
@@ -2380,11 +2386,11 @@ msgstr "Reordenar requiere JavaScript."
 
 #: app/templates/packages/screenshots.html:100
 msgid "Videos"
-msgstr ""
+msgstr "Vídeos"
 
 #: app/templates/packages/screenshots.html:102
 msgid "You can set a video on the Edit Details page"
-msgstr ""
+msgstr "Puede añadir un vídeo en la página Editar Detalles"
 
 #: app/templates/packages/share.html:10
 msgid "Links"
@@ -2460,30 +2466,30 @@ msgstr ""
 
 #: app/templates/packages/view.html:37
 msgid "Download"
-msgstr ""
+msgstr "Descargar"
 
 #: app/templates/packages/view.html:43
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
-msgstr ""
+msgstr "Minetest %(min)s - %(max)s"
 
 #: app/templates/packages/view.html:45
 #, python-format
 msgid "For Minetest %(min)s and above"
-msgstr ""
+msgstr "Para Minetest %(min)s y superior"
 
 #: app/templates/packages/view.html:47
 #, python-format
 msgid "Minetest %(max)s and below"
-msgstr ""
+msgstr "Minetest %(max)s e inferior"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
-msgstr ""
+msgstr "¿Cómo instalo esto?"
 
 #: app/templates/packages/view.html:73
 msgid "No downloads available"
-msgstr ""
+msgstr "No hay descargas disponibles"
 
 #: app/templates/packages/view.html:80
 msgid "Non-free code and media"
@@ -2529,7 +2535,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:271
 msgid "Awaiting review"
-msgstr ""
+msgstr "Esperando revisión"
 
 #: app/templates/packages/view.html:300 app/templates/threads/view.html:67
 msgid "Edit Review"
@@ -2541,23 +2547,23 @@ msgstr ""
 
 #: app/templates/packages/view.html:321
 msgid "Used By"
-msgstr ""
+msgstr "Usado Por"
 
 #: app/templates/packages/view.html:327
 msgid "Content"
-msgstr ""
+msgstr "Contenido"
 
 #: app/templates/packages/view.html:329 app/templates/packages/view.html:383
 msgid "View content for game"
-msgstr ""
+msgstr "Ver contenido para el juego"
 
 #: app/templates/packages/view.html:343
 msgid "Package may be outdated"
-msgstr ""
+msgstr "El paquete podría estar obsoleto"
 
 #: app/templates/packages/view.html:350
 msgid "Only visible to the author and Editors."
-msgstr ""
+msgstr "Sólo visible para el autor y Editores."
 
 #: app/templates/packages/view.html:367
 msgid "Warning"
@@ -3612,4 +3618,3 @@ msgstr ""
 #~ "\t\t\tpara el máximo ya que esto"
 #~ " no tiene sentido - no puede "
 #~ "predecir el futuro."
-
