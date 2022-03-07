@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-03-07 07:04+0000\n"
+"PO-Revision-Date: 2022-03-07 23:19+0000\n"
 "Last-Translator: Jakub Z <mrkubax10@onet.pl>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/minetest/"
 "contentdb/pl/>\n"
@@ -1826,44 +1826,46 @@ msgstr "Wykrywanie aktualizacji repozytorium Git dla %(username)s"
 
 #: app/templates/packages/bulk_update_conf.html:10
 msgid "Packages with Update Settings"
-msgstr ""
+msgstr "Paczki ze zmianą ustawień"
 
 #: app/templates/packages/bulk_update_conf.html:16
 msgid "Bulk Set Update Settings"
-msgstr ""
+msgstr "Zbiorcze ustawienia aktualizacji"
 
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
 msgstr ""
+"To zmieni ustawienia aktualizacji dla wszystkich paczek z repozytorium Git."
 
 #: app/templates/packages/bulk_update_conf.html:27
 #: app/templates/packages/release_new.html:50
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
-msgstr ""
+msgstr "Pozostaw puste aby użyć domyślnej gałęzi"
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
 msgid "Currently, the branch name field is only used by the New Commit trigger."
 msgstr ""
+"Na razie pole z nazwą gałęzi jest tylko używane przez wyzwalacz Nowy Commit."
 
 #: app/templates/packages/create_edit.html:5
 #, python-format
 msgid "Edit - %(title)s"
-msgstr ""
+msgstr "Edytuj - %(title)s"
 
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
 msgid "Create Package"
-msgstr ""
+msgstr "Utwórz paczkę"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
-msgstr ""
+msgstr "Czy przeczytałeś Politykę i wytyczne dotyczące uwzględniania paczek?"
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
-msgstr ""
+msgstr "Czytaj więcej"
 
 #: app/templates/packages/create_edit.html:49
 #, python-format
@@ -1871,6 +1873,8 @@ msgid ""
 "You can include a .cdb.json file in your %(type)s to update these details"
 " automatically."
 msgstr ""
+"Możesz załączyć plik .cdb.json w twojej %(type)s aby zaktualizować te detale "
+"automatycznie."
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -1878,29 +1882,36 @@ msgid ""
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
+"JavaScript jest wymagana aby poprawić interfejs użytkownika oraz jest "
+"potrzebna do funkcjonalności\n"
+"takich jak pobieranie metadanych z repozytorium git oraz autouzupełnianie."
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
 msgid "Package"
-msgstr ""
+msgstr "Paczka"
 
 #: app/templates/packages/create_edit.html:73
 msgid "Please open a thread to request a name change"
-msgstr ""
+msgstr "Otwórz wątek aby poprosić o zmianę nazwy"
 
 #: app/templates/packages/create_edit.html:79
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
+"Wybierz opcję 'W trakcie prac' jeżeli twoja paczka jest niestabilna i jeżeli "
+"nie powinna być polecana wszystkim graczom"
 
 #: app/templates/packages/create_edit.html:88
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr ""
+"Jeżeli paczka nie posiada multimediów ustaw Licencję multimediów na taką "
+"samą jak Licencję kodu źródłowego."
 
 #: app/templates/packages/create_edit.html:94
 msgid "Repository and Links"
-msgstr ""
+msgstr "Repozytorium i odnośniki"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
@@ -1908,125 +1919,138 @@ msgid ""
 "\t\t\t\tIf the repo uses git then the metadata will be automatically "
 "imported."
 msgstr ""
+"Wpisz URL repozytorium paczki.\n"
+"Jeżeli repozytorium używa narzędzia git metadane zostaną automatyczne "
+"zaimportowane."
 
 #: app/templates/packages/create_edit.html:100
 msgid "Leave blank if you don't have a repo. Click skip if the import fails."
 msgstr ""
+"Pozostaw puste jeżeli nie posiadasz repozytorium. Naciśnij Pomiń jeżeli "
+"importowanie nie uda się."
 
 #: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
-msgstr ""
+msgstr "Następny (Autoimportowanie)"
 
 #: app/templates/packages/create_edit.html:107
 msgid "Skip Autoimport"
-msgstr ""
+msgstr "Pomiń autoimportowanie"
 
 #: app/templates/packages/create_edit.html:111
 msgid "Importing... (This may take a while)"
-msgstr ""
+msgstr "Importowanie... (Może to trochę potrwać)"
 
 #: app/templates/packages/create_edit.html:119
 msgid "Tip: paste in a forum topic URL"
-msgstr ""
+msgstr "Wskazówka: wklej to w URL tematu na forum"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
-msgstr ""
+msgstr "Filmy YouTube będą wyświetlały się jako embed."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
-msgstr ""
+msgstr "Edytuj opiekunów"
 
 #: app/templates/packages/edit_maintainers.html:11
 msgid "Maintainers are given write access to the package."
-msgstr ""
+msgstr "Opiekunowie posiadają możliwość zapisu do paczki."
 
 #: app/templates/packages/edit_maintainers.html:12
 msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
 msgstr ""
+"W zależności od ich rangi, będą mogli edytować paczkę, tworzyć wydania i "
+"zrzuty ekranu oraz czytać prywatne wątki."
 
 #: app/templates/packages/edit_maintainers.html:13
 msgid ""
 "Maintainers cannot add or remove other maintainers, but can remove "
 "themselves."
 msgstr ""
+"Opiekunowie nie mogą dodać lub usunąć innych opiekunów ale mogą usunąć "
+"samych siebie."
 
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:24
 msgid "Community Hub"
-msgstr ""
+msgstr "Portal społecznościowy"
 
 #: app/templates/packages/game_hub.html:11
 #: app/templates/packages/game_hub.html:12
 #, python-format
 msgid "Mods for %(title)s"
-msgstr ""
+msgstr "Modyfikacje używane w %(title)s"
 
 #: app/templates/packages/list.html:21
 #, python-format
 msgid "Did you mean to search for packages by %(authors)s?"
-msgstr ""
+msgstr "Czy chodziło ci o wyszukanie paczek po %(authors)s?"
 
 #: app/templates/packages/list.html:26
 msgid "Filter by tags"
-msgstr ""
+msgstr "Filtruj po tagach"
 
 #: app/templates/packages/list.html:59
 msgid "More content from the forums"
-msgstr ""
+msgstr "Więcej zawartości z forum"
 
 #: app/templates/packages/package_base.html:13
 msgid "Thumbnail"
-msgstr ""
+msgstr "Miniatura"
 
 #: app/templates/packages/release_bulk_change.html:4
 msgid "Bulk Change Releases"
-msgstr ""
+msgstr "Zmiany zbiorcze wydań"
 
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
+"Użyj tej strony aby ustawić minimalną i maksymalną wspieraną wersję "
+"Minetesta wszystkich wydań twojej paczki."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
 #: app/templates/packages/release_new.html:70
 msgid "Maximum must be greater than or equal to the minimum!"
-msgstr ""
+msgstr "Maksymalna musi być większa lub równa minimalnej!"
 
 #: app/templates/packages/release_bulk_change.html:33
 msgid ""
 "Note: Min and max versions will be used to hide the package on\n"
 "\t\t\tplatforms not within the range."
 msgstr ""
+"Uwaga: Minimalna i maksymalna wersja będą używane aby ukryć paczkę na\n"
+"platformach poza zakresem."
 
 #: app/templates/packages/release_bulk_change.html:36
 #: app/templates/packages/release_edit.html:61
 #: app/templates/packages/release_new.html:83
 msgid "Leave both as None if in doubt."
-msgstr ""
+msgstr "Pozostaw obydwie jako None w razie wątpliwości."
 
 #: app/templates/packages/release_edit.html:4
 msgid "Edit release"
-msgstr ""
+msgstr "Edytuj wydanie"
 
 #: app/templates/packages/release_edit.html:27
 msgid "Commit Hash"
-msgstr ""
+msgstr "Hash commitu"
 
 #: app/templates/packages/release_edit.html:32
 msgid "view task"
-msgstr ""
+msgstr "zobacz zadanie"
 
 #: app/templates/packages/release_edit.html:42
 #: app/templates/packages/screenshot_edit.html:20
 msgid "Approved"
-msgstr ""
+msgstr "Zatwierdzone"
 
 #: app/templates/packages/release_edit.html:46
 msgid "Supported Minetest versions"
-msgstr ""
+msgstr "Wspierane wersje Minetesta"
 
 #: app/templates/packages/release_edit.html:58
 #: app/templates/packages/release_new.html:80
@@ -2034,43 +2058,49 @@ msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
+"Ustaw minimalną i maksymalną wspieraną wersję Minetesta.\n"
+"To wydanie będzie ukryte dla klientów poza tym zakresem. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
+"Możesz <a href='/help/package_config/'>ustawić to automatycznie</a> w pliku ."
+"conf twojej paczki."
 
 #: app/templates/packages/release_edit.html:70
 msgid "Delete Release"
-msgstr ""
+msgstr "Usuń wydanie"
 
 #: app/templates/packages/release_edit.html:76
 msgid "This is permanent."
-msgstr ""
+msgstr "To jest trwałe."
 
 #: app/templates/packages/release_edit.html:77
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
 msgstr ""
+"Jakiekolwiek powiązane przesyłanie nie będzie usunięte od razu ale wydanie "
+"nie będzie się więcej pojawiać."
 
 #: app/templates/packages/release_edit.html:82
 msgid "You cannot delete the latest release; please create a newer one first."
-msgstr ""
+msgstr "Nie możesz usunąć najnowszego wydania; najpierw utwórz kolejne."
 
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
 msgid "Create a release"
-msgstr ""
+msgstr "Utwórz wydanie"
 
 #: app/templates/packages/release_new.html:14
 msgid "You have automatic releases enabled."
-msgstr ""
+msgstr "Automatyczne wydania są włączone."
 
 #: app/templates/packages/release_new.html:16
 msgid "You have Git update notifications enabled."
-msgstr ""
+msgstr "Powiadomienia o aktualizacji repozytorium Git są włączone."
 
 #: app/templates/packages/release_new.html:17
 msgid "You can enable automatic updates in the update settings."
