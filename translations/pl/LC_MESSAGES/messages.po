@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-03-07 23:19+0000\n"
+"PO-Revision-Date: 2022-03-11 03:36+0000\n"
 "Last-Translator: Jakub Z <mrkubax10@onet.pl>\n"
 "Language-Team: Polish <https://hosted.weblate.org/projects/minetest/"
 "contentdb/pl/>\n"
@@ -2104,22 +2104,24 @@ msgstr "Powiadomienia o aktualizacji repozytorium Git są włączone."
 
 #: app/templates/packages/release_new.html:17
 msgid "You can enable automatic updates in the update settings."
-msgstr ""
+msgstr "Możesz włączyć automatyczne aktualizacje w ustawieniach aktualizacji."
 
 #: app/templates/packages/release_new.html:23
 msgid "Set up"
-msgstr ""
+msgstr "Ustaw"
 
 #: app/templates/packages/release_new.html:26
 msgid ""
 "You can create releases automatically when you push commits or tags to "
 "your repository."
 msgstr ""
+"Możesz tworzyć wydania automatycznie kiedy wypychasz zmiany lub tagi do "
+"twojego repozytorium."
 
 #: app/templates/packages/release_new.html:28
 #: app/templates/packages/release_wizard.html:69
 msgid "Add Git repo"
-msgstr ""
+msgstr "Dodaj repozytorium Git"
 
 #: app/templates/packages/release_new.html:31
 #: app/templates/packages/release_wizard.html:59
@@ -2127,18 +2129,20 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
+"Używanie narzędzia Git pozwoli ci na tworzenie wydań automatycznie kiedy "
+"wypychasz kod lub tagi."
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
-msgstr ""
+msgstr "1. Nazwij wydanie"
 
 #: app/templates/packages/release_new.html:42
 msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
-msgstr ""
+msgstr "Czytelne dla człowieka. Tj: 1.0.0 or 2018-05-28"
 
 #: app/templates/packages/release_new.html:44
 msgid "2. Set the content"
-msgstr ""
+msgstr "2. Ustaw zawartość"
 
 #: app/templates/packages/release_new.html:57
 msgid ""
@@ -2146,10 +2150,13 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
+"Zobacz stronę <a href='/help/package_config/'>Wytyczne dotyczące "
+"konfiguracji i wydań paczek</a> po\n"
+"wskazówki dotyczące dostosowywania wersji."
 
 #: app/templates/packages/release_new.html:61
 msgid "3. Supported Minetest versions"
-msgstr ""
+msgstr "3. Wspierane wersje Minetesta"
 
 #: app/templates/packages/release_new.html:75
 msgid ""
@@ -2157,26 +2164,31 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
+"Plik .conf twojej paczki może <a href='/help/package_config/'>ustawić to "
+"automatycznie</a>\n"
+"co spowoduje nadpisanie twojego wyboru."
 
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
-msgstr ""
+msgstr "W jaki sposób chcesz tworzyć wydania?"
 
 #: app/templates/packages/release_wizard.html:9
 #: app/templates/packages/release_wizard.html:75
 msgid "Later"
-msgstr ""
+msgstr "Później"
 
 #: app/templates/packages/release_wizard.html:14
 #, python-format
 msgid "A release is a single downloadable version of your %(title)s."
-msgstr ""
+msgstr "Wydanie to pojedyncza wersja do pobrania twojej %(title)s."
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
 "You need to create releases even if you use a rolling release development"
 " cycle, as Minetest needs them to check for updates."
 msgstr ""
+"Musisz tworzyć wydania nawet jeżeli używasz toczącego cyklu rozwoju, "
+"ponieważ Minetest potrzebuje ich aby sprawdzać aktualizacje."
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
@@ -2184,67 +2196,71 @@ msgid ""
 "When you push a change to your Git repository, ContentDB can create a new"
 " release automatically or send you a reminder."
 msgstr ""
+"Kiedy wypychasz zmianę do twojego repozytorium Git, ContentDB może utworzyć "
+"wydanie automatycznie lub wysłać ci powiadomienie."
 
 #: app/templates/packages/release_wizard.html:21
 msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
+"ContentDB będzie sprawdzać twoje repozytorium Git codziennie ale możesz użyć "
+"webhooków lub API dla szybszych aktualizacji."
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
 msgid "This can be changed later."
-msgstr ""
+msgstr "Może to zostać zmienione później."
 
 #: app/templates/packages/release_wizard.html:31
 msgid "Automatically (Recommended)"
-msgstr ""
+msgstr "Automatycznie (Zalecane)"
 
 #: app/templates/packages/release_wizard.html:34
 msgid "Rolling Release"
-msgstr ""
+msgstr "Toczący cykl rozwoju"
 
 #: app/templates/packages/release_wizard.html:37
 msgid "On Git Tag"
-msgstr ""
+msgstr "Podczas tworzenia nowego tagu Git"
 
 #: app/templates/packages/release_wizard.html:46
 msgid "Manually"
-msgstr ""
+msgstr "Ręcznie"
 
 #: app/templates/packages/release_wizard.html:49
 msgid "With reminders"
-msgstr ""
+msgstr "Z powiadomieniami"
 
 #: app/templates/packages/release_wizard.html:52
 msgid "No reminders"
-msgstr ""
+msgstr "Bez powiadomień"
 
 #: app/templates/packages/release_wizard.html:60
 msgid "Unfortunately, you will otherwise need to create a release manually."
-msgstr ""
+msgstr "Niestety, w przeciwnym razie będziesz musiał utworzyć wydanie ręcznie."
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
-msgstr ""
+msgstr "Twórz wydania ręcznie"
 
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
-msgstr ""
+msgstr "Wydania - %(title)s"
 
 #: app/templates/packages/releases_list.html:18
 msgid "Set up automatic releases"
-msgstr ""
+msgstr "Ustaw automatyczne wydania"
 
 #: app/templates/packages/releases_list.html:24
 msgid "Bulk update"
-msgstr ""
+msgstr "Aktualizacja zbiorowa"
 
 #: app/templates/packages/remove.html:9
 #, python-format
 msgid "Remove %(title)s"
-msgstr ""
+msgstr "Usuń %(title)s"
 
 #: app/templates/packages/remove.html:11
 msgid ""
@@ -2255,68 +2271,80 @@ msgid ""
 "future.\n"
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
+"W celu ominięcia utraty danych nie możesz trwale usuwać paczek.\n"
+"Możesz usunąć je z ContentDB co spowoduje, że nie będą\n"
+"widoczne dla żadnego użytkownika i mogą zostać usunięte trwale w przyszłości."
+"\n"
+"Administrator może przywracać usunięte paczki w razie potrzeby."
 
 #: app/templates/packages/remove.html:19
 msgid ""
 "Unapproving a package will put it back into Draft, where\n"
 "\t\t\t\tit can be submitted for approval again."
 msgstr ""
+"Anulowanie zatwierdzenia paczki przywróci ją do stanu wersji roboczej\n"
+"i będzie mogła być ponownie wysłana do zatwierdzenia."
 
 #: app/templates/packages/remove.html:27
 msgid "Reason"
-msgstr ""
+msgstr "Powód"
 
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr ""
+"Powód anulowania zatwierdzenia / usunięcia, będzie się to wyświetlać w logu "
+"audytów"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
 #: app/templates/threads/delete_thread.html:18
 #: app/templates/users/delete.html:30
 msgid "Cancel"
-msgstr ""
+msgstr "Anuluj"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
-msgstr ""
+msgstr "Wyślij opinię dla %(title)s autorstwa %(author)s"
 
 #: app/templates/packages/review_create_edit.html:16
 #: app/templates/threads/new.html:11
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr ""
+"Znalazłeś błąd? Powiadom autorów na <a href='%(url)s'>liście błędów</a>."
 
 #: app/templates/packages/review_create_edit.html:56
 msgid "Delete review."
-msgstr ""
+msgstr "Usuń opinię."
 
 #: app/templates/packages/review_create_edit.html:57
 msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
 msgstr ""
+"To zamieni opinię w wątek, pozostawiając komentarze ale usuwając wpływ na "
+"ocenę paczki."
 
 #: app/templates/packages/review_votes.html:4
 #: app/templates/packages/view.html:315
 msgid "Review Votes"
-msgstr ""
+msgstr "Recenzuj głosy"
 
 #: app/templates/packages/review_votes.html:13
 #, python-format
 msgid "Review votes on %(title)s by %(author)s"
-msgstr ""
+msgstr "Recenzuj głosy w %(title)s autorstwa %(author)s"
 
 #: app/templates/packages/screenshot_edit.html:4
 #: app/templates/packages/screenshot_edit.html:11
 msgid "Edit screenshot"
-msgstr ""
+msgstr "Edytuj zrzut ekranu"
 
 #: app/templates/packages/screenshot_new.html:4
 #: app/templates/packages/screenshot_new.html:8
 msgid "Add a screenshot"
-msgstr ""
+msgstr "Dodaj zrzut ekranu"
 
 #: app/templates/packages/screenshot_new.html:10
 #: app/templates/todo/user.html:73
@@ -2325,546 +2353,565 @@ msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
 msgstr ""
+"Zalecana rozdzielczość to 1920x1080 oraz zrzuty ekranu muszą mieć co "
+"najmniej %(width)dx%(height)d pikseli."
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
-msgstr ""
+msgstr "Dodaj zdjęcie"
 
 #: app/templates/packages/screenshots.html:17
 msgid "Topmost screenshot will be used as the package thumbnail."
-msgstr ""
+msgstr "Najwyższy zrzut ekranu będzie używany jako miniatura paczki."
 
 #: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:77
 msgid "Way too small"
-msgstr ""
+msgstr "Zdecydowanie za mały"
 
 #: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:80
 msgid "Too small"
-msgstr ""
+msgstr "Za mały"
 
 #: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
 msgid "Not HD"
-msgstr ""
+msgstr "Nie jest rozdzielczości HD"
 
 #: app/templates/packages/screenshots.html:53
 msgid "Awaiting approval"
-msgstr ""
+msgstr "Czeka na zatwierdzenie"
 
 #: app/templates/packages/screenshots.html:72
 msgid "No screenshots."
-msgstr ""
+msgstr "Brak zrzutów ekranu."
 
 #: app/templates/packages/screenshots.html:80
 msgid "Save Order"
-msgstr ""
+msgstr "Zapisz kolejność"
 
 #: app/templates/packages/screenshots.html:85
 msgid "Reordering requires JavaScript."
-msgstr ""
+msgstr "Zmiana kolejności wymaga JavaScript."
 
 #: app/templates/packages/screenshots.html:100
 msgid "Videos"
-msgstr ""
+msgstr "Filmy"
 
 #: app/templates/packages/screenshots.html:102
 msgid "You can set a video on the Edit Details page"
-msgstr ""
+msgstr "Możesz edytować film na stronie Edytuj detale"
 
 #: app/templates/packages/share.html:10
 msgid "Links"
-msgstr ""
+msgstr "Odnośniki"
 
 #: app/templates/packages/share.html:13
 msgid "Review link"
-msgstr ""
+msgstr "Recenzuj odnośnik"
 
 #: app/templates/packages/share.html:18
 msgid "Badges"
-msgstr ""
+msgstr "Odznaki"
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
-msgstr ""
+msgstr "Unikalność nazwy modyfikacji"
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
-msgstr ""
+msgstr "Modyfikacje dostarczane przez udostępnianie paczek"
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
 msgstr ""
+"Ta paczka zawiera nazwy modyfikacji, które są obecne w następujących "
+"paczkach:"
 
 #: app/templates/packages/similar.html:32
 msgid "Similar Forum Topics"
-msgstr ""
+msgstr "Podobne tematy na forum"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
-msgstr ""
+msgstr "Ustaw wykrywanie aktualizacji Git"
 
 #: app/templates/packages/update_config.html:16
 msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
 msgstr ""
+"ContentDB będzie sprawdzać twoje repozytorium Git codzienne jeżeli paczka "
+"jest zatwierdzona."
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
-msgstr ""
+msgstr "Powinieneś rozważyć użycie webhooków lub API dla szybszych wydań."
 
 #: app/templates/packages/update_config.html:18
 msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
 msgstr ""
+"Wykrywanie aktualizacji Git jest wystarczająco sprytne aby nie tworzyć "
+"wydania ponownie jeżeli utworzyłeś je ręcznie lub używając webhooków/API."
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
-msgstr ""
+msgstr "Wyzwalacz jest wydarzeniem, które wyzwala akcję."
 
 #: app/templates/packages/update_config.html:41
 msgid "The action to perform when the trigger happens."
-msgstr ""
+msgstr "Akcja uruchamiana w trakcie wyzwolenia."
 
 #: app/templates/packages/update_config.html:42
 msgid ""
 "Once a package is marked as outdated, you won't receive any more "
 "notifications until it is marked up to date."
 msgstr ""
+"Kiedy paczka jest oznaczona jako przestarzała nie będziesz otrzymywał "
+"żadnych powiadomień dopóki nie zostanie oznaczona jako aktualna."
 
 #: app/templates/packages/view.html:37
 msgid "Download"
-msgstr ""
+msgstr "Pobierz"
 
 #: app/templates/packages/view.html:43
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
-msgstr ""
+msgstr "Minetest %(min)s - %(max)s"
 
 #: app/templates/packages/view.html:45
 #, python-format
 msgid "For Minetest %(min)s and above"
-msgstr ""
+msgstr "Dla Minetesta %(min)s i wyższych"
 
 #: app/templates/packages/view.html:47
 #, python-format
 msgid "Minetest %(max)s and below"
-msgstr ""
+msgstr "Minetest %(max)s i niżej"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
-msgstr ""
+msgstr "Jak mogę to zainstalować?"
 
 #: app/templates/packages/view.html:73
 msgid "No downloads available"
-msgstr ""
+msgstr "Brak opcji pobierania"
 
 #: app/templates/packages/view.html:80
 msgid "Non-free code and media"
-msgstr ""
+msgstr "Niewolny kod i multimedia"
 
 #: app/templates/packages/view.html:82
 msgid "Non-free code"
-msgstr ""
+msgstr "Niewolny kod"
 
 #: app/templates/packages/view.html:84
 msgid "Non-free media"
-msgstr ""
+msgstr "Niewolne multimedia"
 
 #: app/templates/packages/view.html:146
 msgid "Work in Progress"
-msgstr ""
+msgstr "W trakcie prac"
 
 #: app/templates/packages/view.html:167
 msgid "Downloads"
-msgstr ""
+msgstr "Pobrania"
 
 #: app/templates/packages/view.html:188 app/templates/users/profile.html:86
 msgid "Website"
-msgstr ""
+msgstr "Strona internetowa"
 
 #: app/templates/packages/view.html:194
 msgid "Source"
-msgstr ""
+msgstr "Kod źródłowy"
 
 #: app/templates/packages/view.html:200 app/templates/users/profile.html:68
 msgid "Forums"
-msgstr ""
+msgstr "Forum"
 
 #: app/templates/packages/view.html:206
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Lista błędów"
 
 #: app/templates/packages/view.html:224
 msgid ""
 "This thread is only visible to the package owner and users of Approver "
 "rank or above."
 msgstr ""
+"Ten wątek jest widoczny tylko dla właściciela paczki oraz użytkowników z "
+"rangą Zatwierdzacz lub wyższą."
 
 #: app/templates/packages/view.html:271
 msgid "Awaiting review"
-msgstr ""
+msgstr "Oczekuje recenzji"
 
 #: app/templates/packages/view.html:300 app/templates/threads/view.html:67
 msgid "Edit Review"
-msgstr ""
+msgstr "Edytuj recenzję"
 
 #: app/templates/packages/view.html:305
 msgid "You can't review your own package."
-msgstr ""
+msgstr "Nie możesz recenzować swoich paczek."
 
 #: app/templates/packages/view.html:321
 msgid "Used By"
-msgstr ""
+msgstr "Używane przez"
 
 #: app/templates/packages/view.html:327
 msgid "Content"
-msgstr ""
+msgstr "Zawartość"
 
 #: app/templates/packages/view.html:329 app/templates/packages/view.html:383
 msgid "View content for game"
-msgstr ""
+msgstr "Zobacz zawartość dla gry"
 
 #: app/templates/packages/view.html:343
 msgid "Package may be outdated"
-msgstr ""
+msgstr "Paczka może być przestarzała"
 
 #: app/templates/packages/view.html:350
 msgid "Only visible to the author and Editors."
-msgstr ""
+msgstr "Widoczne tylko dla autora i Osób edytujących."
 
 #: app/templates/packages/view.html:367
 msgid "Warning"
-msgstr ""
+msgstr "Uwaga"
 
 #: app/templates/packages/view.html:373
 msgid "Like this package? Help support its development by making a donation"
-msgstr ""
+msgstr "Lubisz tą paczkę? Wspomóż jej rozwój poprzez wysyłanie darowizny"
 
 #: app/templates/packages/view.html:376
 msgid "Donate now"
-msgstr ""
+msgstr "Wyślij darowiznę"
 
 #: app/templates/packages/view.html:388
 msgid "Dependencies"
-msgstr ""
+msgstr "Zależności"
 
 #: app/templates/packages/view.html:390
 msgid "Required"
-msgstr ""
+msgstr "Wymagane"
 
 #: app/templates/packages/view.html:408
 msgid "No required dependencies"
-msgstr ""
+msgstr "Brak wymaganych zależności"
 
 #: app/templates/packages/view.html:414
 msgid "Optional"
-msgstr ""
+msgstr "Opcjonalne"
 
 #: app/templates/packages/view.html:436
 msgid "Compatible Games"
-msgstr ""
+msgstr "Kompatybilne gry"
 
 #: app/templates/packages/view.html:444
 msgid "No specific game is required"
-msgstr ""
+msgstr "Żadna konkretna gra nie jest wymagana"
 
 #: app/templates/packages/view.html:447
 msgid "This is an experimental feature."
-msgstr ""
+msgstr "To jest eksperymentalna funkcjonalność."
 
 #: app/templates/packages/view.html:448
 msgid "Supported games are determined by an algorithm, and may not be correct."
-msgstr ""
+msgstr "Wspierane gry są ustalane przez algorytm i mogą nie być poprawne."
 
 #: app/templates/packages/view.html:453
 msgid "Information"
-msgstr ""
+msgstr "Informacje"
 
 #: app/templates/packages/view.html:459
 msgid "Technical Name"
-msgstr ""
+msgstr "Techniczna nazwa"
 
 #: app/templates/packages/view.html:468
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr ""
+"%(code_license)s dla kodu źródłowego,<br>%(media_license)s dla multimediów."
 
 #: app/templates/packages/view.html:476
 msgid "Unknown"
-msgstr ""
+msgstr "Nieznany"
 
 #: app/templates/packages/view.html:478
 msgid "Added"
-msgstr ""
+msgstr "Dodano"
 
 #: app/templates/packages/view.html:492
 msgid "Remove myself"
-msgstr ""
+msgstr "Usuń siebie"
 
 #: app/templates/packages/view.html:497
 msgid "Provides"
-msgstr ""
+msgstr "Zapewnia"
 
 #: app/templates/packages/view.html:519
 msgid "More"
-msgstr ""
+msgstr "Więcej"
 
 #: app/templates/packages/view.html:548
 msgid "See audit log"
-msgstr ""
+msgstr "Zobacz log audytów"
 
 #: app/templates/report/index.html:19
 msgid "What are you reporting? Why are you reporting it?"
-msgstr ""
+msgstr "Co zgłaszasz? Dlaczego to zgłaszasz?"
 
 #: app/templates/report/index.html:23
 msgid "Reports will be shared with ContentDB staff."
-msgstr ""
+msgstr "Zgłoszenia zostaną udostępnione personelu ContentDB."
 
 #: app/templates/report/index.html:25
 msgid "Only the admin will be able to see who made the report."
-msgstr ""
+msgstr "Tylko administrator będzie mógł zobaczyć kto wysłał zgłoszenie."
 
 #: app/templates/report/index.html:29
 msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
-msgstr ""
+msgstr "Znalazłeś błąd? Zgłoś go na liście błędów paczki lub utwórz wątek."
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
-msgstr ""
+msgstr "Zadanie nieudane"
 
 #: app/templates/tasks/view.html:7
 msgid "Working…"
-msgstr ""
+msgstr "Działanie…"
 
 #: app/templates/tasks/view.html:26
 msgid "Reload the page to check for updates."
-msgstr ""
+msgstr "Wczytaj stronę ponownie aby sprawdzić aktualizacje."
 
 #: app/templates/threads/delete_reply.html:4
 #, python-format
 msgid "Delete reply by %(username)s in %(title)s "
-msgstr ""
+msgstr "Usuń odpowiedź autorstwa %(username)s w %(title)s "
 
 #: app/templates/threads/delete_reply.html:16
 #: app/templates/threads/delete_thread.html:16
 #: app/templates/users/delete.html:13
 msgid "Deleting is permanent"
-msgstr ""
+msgstr "Usunięcie jest trwałe"
 
 #: app/templates/threads/delete_thread.html:4
 #, python-format
 msgid "Delete \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Usuń \"%(title)s\" autorstwa %(author)s"
 
 #: app/templates/threads/edit_reply.html:4
 #: app/templates/threads/edit_reply.html:8
 msgid "Edit reply"
-msgstr ""
+msgstr "Edytuj odpowiedź"
 
 #: app/templates/threads/new.html:4
 msgid "New Thread"
-msgstr ""
+msgstr "Nowy wątek"
 
 #: app/templates/threads/new.html:12
 msgid ""
 "If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
 "you can let us know here."
 msgstr ""
+"Jeżeli paczka nie powinna pojawiać się na CDB (tj: jeżeli nie działa), "
+"możesz nam o tym powiedzieć tutaj."
 
 #: app/templates/threads/new.html:40
 msgid ""
 "Only you, the package author, and users of Approver rank and above can "
 "read private threads."
 msgstr ""
+"Tylko ty, autor paczki, oraz użytkownicy z rangą Zatwierdzacz lub wyższą "
+"mogą czytać prywatne wątki."
 
 #: app/templates/threads/user_comments.html:9
 #: app/templates/threads/user_comments.html:13
 #, python-format
 msgid "Comments by %(user)s"
-msgstr ""
+msgstr "Komentarze autorstwa %(user)s"
 
 #: app/templates/threads/user_comments.html:46
 #, python-format
 msgid "Reply to <b>%(title)s</b>"
-msgstr ""
+msgstr "Odpowiedź do <b>%(title)s</b>"
 
 #: app/templates/threads/view.html:36
 msgid "Subscribe"
-msgstr ""
+msgstr "Subskrybuj"
 
 #: app/templates/threads/view.html:45
 msgid "Convert to Thread"
-msgstr ""
+msgstr "Konwertuj na wątek"
 
 #: app/templates/threads/view.html:52
 msgid "Unlock"
-msgstr ""
+msgstr "Odblokuj"
 
 #: app/templates/threads/view.html:57
 msgid "Lock"
-msgstr ""
+msgstr "Zablokuj"
 
 #: app/templates/threads/view.html:90
 msgid ""
 "This thread is only visible to its creator, the package owner, and users "
 "of Approver rank or above."
 msgstr ""
+"Ten wątek jest widoczny tylko dla twórcy, właściciela paczki oraz "
+"użytkowników z rangą Zatwierdzacz lub wyższą."
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
-msgstr ""
+msgstr "Kolejka zadań edytora"
 
 #: app/templates/todo/editor.html:8
 msgid "Approval Queue"
-msgstr ""
+msgstr "Kolejka zatwierdzenia"
 
 #: app/templates/todo/editor.html:15
 msgid "Approve All"
-msgstr ""
+msgstr "Zatwierdź wszystkie"
 
 #: app/templates/todo/editor.html:33
 msgid "No screenshots need approval."
-msgstr ""
+msgstr "Żadne zrzuty ekranu nie wymagają zatwierdzenia."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
 msgid "No packages need approval."
-msgstr ""
+msgstr "Żadne paczki nie wymagają zatwierdzenia."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
-msgstr ""
+msgstr "Importowanie"
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need approval."
-msgstr ""
+msgstr "Żadne wydania nie wymagają zatwierdzenia."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
-msgstr ""
+msgstr "Wszystko zrobione!"
 
 #: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
 msgid "License Needed"
-msgstr ""
+msgstr "Wymagana licencja"
 
 #: app/templates/todo/editor.html:127
 msgid "Tag Packages"
-msgstr ""
+msgstr "Dodaj tagi do paczek"
 
 #: app/templates/todo/editor.html:130
 #, python-format
 msgid "%(total_to_tag)d / %(total_packages)d packages don't have any tags."
-msgstr ""
+msgstr "%(total_to_tag)d / %(total_packages)d paczek nie ma żadnych tagów."
 
 #: app/templates/todo/editor.html:140
 msgid "View Tags"
-msgstr ""
+msgstr "Zobacz tagi"
 
 #: app/templates/todo/editor.html:147
 msgid "Unfulfilled Dependencies"
-msgstr ""
+msgstr "Niespełnione zależności"
 
 #: app/templates/todo/editor.html:151
 msgid "Meta packages that have hard dependers, but no packages providing them."
-msgstr ""
+msgstr "Meta paczki, które mają zależności ale żadne paczki ich nie zapewniają."
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
-msgstr ""
+msgstr "Wszystkie przestarzałe paczki"
 
 #: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
 msgid "Minetest-Mods org only"
-msgstr ""
+msgstr "Modyfikacje z organizacji Minetest-Mods"
 
 #: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
-msgstr ""
+msgstr "Sortuj po dacie"
 
 #: app/templates/todo/outdated.html:28
 msgid "Sort by score"
-msgstr ""
+msgstr "Sortuj po ocenach"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
-msgstr ""
+msgstr "Tagi paczki"
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
 msgid "Missing tags only"
-msgstr ""
+msgstr "Tylko brakujące tagi"
 
 #: app/templates/todo/tags.html:31
 msgid "Edit Tags"
-msgstr ""
+msgstr "Edytuj tagi"
 
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
 msgid "%(username)s's to do list"
-msgstr ""
+msgstr "Lista rzeczy do zrobienia użytkownika %(username)s"
 
 #: app/templates/todo/todo_base.html:23
 msgid "All Outdated Packages"
-msgstr ""
+msgstr "Wszystkie przestarzałe paczki"
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
-msgstr ""
+msgstr "Sortuj po nazwie"
 
 #: app/templates/todo/topics.html:20
 msgid "Sort by views"
-msgstr ""
+msgstr "Sortuj po wyświetleniach"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
-msgstr ""
+msgstr "Lista ze stronami"
 
 #: app/templates/todo/topics.html:34
 msgid "Unlimited list"
-msgstr ""
+msgstr "Lista nielimitowana"
 
 #: app/templates/todo/topics.html:41
 msgid "Show discarded topics"
-msgstr ""
+msgstr "Pokaż odrzucone tematy"
 
 #: app/templates/todo/topics.html:43
 msgid "Hide discarded topics"
-msgstr ""
+msgstr "Ukryj odrzucone tematy"
 
 #: app/templates/todo/topics.html:49
 msgid "Topics to be Added"
-msgstr ""
+msgstr "Tematy do dodania"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
-msgstr ""
+msgstr "Różne rzeczy do zrobienia"
 
 #: app/templates/todo/user.html:13
 msgid "Enable email notifications"
-msgstr ""
+msgstr "Włącz powiadomienia email"
 
 #: app/templates/todo/user.html:18
 msgid "Unapproved Packages Needing Action"
-msgstr ""
+msgstr "Niezatwierdzone paczki wymagające działania"
 
 #: app/templates/todo/user.html:40 app/templates/todo/user.html:121
 #: app/templates/todo/user.html:145
 msgid "Nothing to do :)"
-msgstr ""
+msgstr "Brak rzeczy do zrobienia :)"
 
 #: app/templates/todo/user.html:48
 msgid "See all Update Settings"
-msgstr ""
+msgstr "Zobacz wszystkie ustawienia aktualizacji"
 
 #: app/templates/todo/user.html:53
 msgid "Create All Releases"
-msgstr ""
+msgstr "Utwórz wszystkie wydania"
 
 #: app/templates/todo/user.html:56
 msgid "Potentially Outdated Packages"
-msgstr ""
+msgstr "Potencjalnie przestarzałe paczki"
 
 #: app/templates/todo/user.html:58
 msgid ""
@@ -2872,135 +2919,145 @@ msgid ""
 "releases when New Commits or New Tags are pushed to Git by clicking "
 "'Update Settings'."
 msgstr ""
+"Zamiast oznaczać paczki jako przestarzałe możesz automatycznie tworzyć "
+"wydania gdy nowe commity lub tagi są wypchnięte do repozytorium Git używając "
+"'Ustawień aktualizacji'."
 
 #: app/templates/todo/user.html:60
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
+"Aby usunąć paczkę poniżej utwórz wydanie lub zmień ustawienia aktualizacji."
 
 #: app/templates/todo/user.html:68
 msgid "Small Screenshots"
-msgstr ""
+msgstr "Małe zrzuty ekranu"
 
 #: app/templates/todo/user.html:71
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr ""
+"Te paczki posiadają zrzuty ekranu, które są za małe i powinny być zamienione."
 
 #: app/templates/todo/user.html:72
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr ""
+"Czerwone i pomarańczowe to zrzuty ekranu poniżej limitu oraz szare zrzuty "
+"ekranu są poniżej zalecanej rozdzielczości."
 
 #: app/templates/todo/user.html:127
 msgid "See All"
-msgstr ""
+msgstr "Zobacz wszystko"
 
 #: app/templates/todo/user.html:128
 msgid "Packages Without Tags"
-msgstr ""
+msgstr "Paczki bez tagów"
 
 #: app/templates/todo/user.html:130
 msgid "Labelling your packages with tags helps users find them."
-msgstr ""
+msgstr "Oznaczanie paczek za pomocą tagów pomaga użytkownikom je odnaleźć."
 
 #: app/templates/todo/user.html:150
 msgid "Unadded Topics"
-msgstr ""
+msgstr "Niedodane tematy"
 
 #: app/templates/todo/user.html:153
 msgid "List of your forum topics which do not have a matching package."
-msgstr ""
+msgstr "Lista twoich tematów na forum, które nie mają odpowiadającej paczki."
 
 #: app/templates/todo/user.html:154
 msgid "Topics with a strikethrough have been marked as discarded."
-msgstr ""
+msgstr "Skreślone tematy zostały oznaczone jako odrzucone."
 
 #: app/templates/todo/user.html:162
 msgid "Congrats! You don't have any topics which aren't on CDB."
-msgstr ""
+msgstr "Gratulacje! Nie masz żadnych tematów, które nie są na CDB."
 
 #: app/templates/users/account.html:4
 #, python-format
 msgid "Account and Security - %(username)s"
-msgstr ""
+msgstr "Konto i bezpieczeństwo - %(username)s"
 
 #: app/templates/users/account.html:18
 msgid "Change Password"
-msgstr ""
+msgstr "Zmień hasło"
 
 #: app/templates/users/account.html:22
 #: app/templates/users/change_set_password.html:20
 msgid "Set Password"
-msgstr ""
+msgstr "Ustaw hasło"
 
 #: app/templates/users/account.html:27 app/templates/users/modtools.html:37
 msgid "Has password"
-msgstr ""
+msgstr "Posiada hasło"
 
 #: app/templates/users/account.html:29 app/templates/users/modtools.html:39
 msgid "Doesn't have password"
-msgstr ""
+msgstr "Nie posiada hasła"
 
 #: app/templates/users/account.html:33
 msgid "Linked Accounts"
-msgstr ""
+msgstr "Połączone konta"
 
 #: app/templates/users/account.html:40 app/templates/users/account.html:52
 msgid "Connected"
-msgstr ""
+msgstr "Połączone"
 
 #: app/templates/users/account.html:43
 #, python-format
 msgid "Please PM %(rubenwardy)s on the forums to link your account."
 msgstr ""
+"Wyślij wiadomość prywatną do użytkownika %(rubenwardy)s na forum aby "
+"połączyć swoje konto."
 
 #: app/templates/users/account.html:57
 msgid "View ContentDB's GitHub Permissions"
-msgstr ""
+msgstr "Zobacz uprawnienia GitHub serwisu ContentDB"
 
 #: app/templates/users/account.html:62
 msgid "Link Github"
-msgstr ""
+msgstr "Połącz konto GitHub"
 
 #: app/templates/users/account.html:65
 msgid "None"
-msgstr ""
+msgstr "Brak"
 
 #: app/templates/users/account.html:73
 msgid "View All"
-msgstr ""
+msgstr "Zobacz wszystko"
 
 #: app/templates/users/account.html:77
 msgid "Recent Account Actions"
-msgstr ""
+msgstr "Ostatnie akcje na koncie"
 
 #: app/templates/users/account.html:82
 msgid "Account Deletion and Deactivation"
-msgstr ""
+msgstr "Usuwanie konta oraz dezaktywacja"
 
 #: app/templates/users/account.html:86
 msgid "Delete or Deactivate"
-msgstr ""
+msgstr "Usuń lub dezaktywuj"
 
 #: app/templates/users/account.html:89
 msgid "Account Deletion and Deactivation isn't available to users yet."
 msgstr ""
+"Usuwanie konta oraz dezaktywacja nie jest jeszcze dostępna dla użytkowników."
 
 #: app/templates/users/account.html:90
 msgid "Please contact the admin."
-msgstr ""
+msgstr "Skontaktuj się z administratorem."
 
 #: app/templates/users/change_set_password.html:11
 msgid "It is recommended that you set a password for your account."
-msgstr ""
+msgstr "Zalecane jest ustawienie hasła dla twojego konta."
 
 #: app/templates/users/change_set_password.html:14
 msgid "Skip"
-msgstr ""
+msgstr "Pomiń"
 
 #: app/templates/users/change_set_password.html:28
 #: app/templates/users/register.html:24
@@ -3008,98 +3065,106 @@ msgid ""
 "Your email is needed to recover your account if you forget your password "
 "and to send (configurable) notifications. "
 msgstr ""
+"Twój email jest wymagany do odzyskania konta jeżeli zapomnisz hasła oraz do "
+"wysyłania powiadomień. "
 
 #: app/templates/users/change_set_password.html:29
 #: app/templates/users/register.html:25
 #: app/templates/users/settings_email.html:20
 msgid "Your email will never be shared with a third-party."
-msgstr ""
+msgstr "Twój email nigdy nie będzie udostępniony osobom trzecim."
 
 #: app/templates/users/change_set_password.html:36
 #: app/templates/users/register.html:27
 msgid "Must be at least 8 characters long."
-msgstr ""
+msgstr "Musi mieć co najmniej 8 znaków długości."
 
 #: app/templates/users/change_set_password.html:40
 #: app/templates/users/register.html:30
 msgid "Password suggestion"
-msgstr ""
+msgstr "Sugestia hasła"
 
 #: app/templates/users/change_set_password.html:41
 #: app/templates/users/register.html:31
 msgid "Why?"
-msgstr ""
+msgstr "Dlaczego?"
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
-msgstr ""
+msgstr "Utwórz konto"
 
 #: app/templates/users/claim.html:10
 msgid "Do you have an account on the Minetest Forums?"
-msgstr ""
+msgstr "Czy posiadasz konto na Forum Minetest?"
 
 #: app/templates/users/claim.html:13
 msgid "ContentDB will link your account to your forum account."
-msgstr ""
+msgstr "ContentDB połączy twoje konto z kontem na forum."
 
 #: app/templates/users/claim.html:17
 msgid ""
 "You don't need a forum account, however, it's recommended to make the "
 "most out of the Minetest community."
 msgstr ""
+"Nie musisz mieć konta na forum, mimo to, jest zalecane jak najlepiej "
+"zaangażować się w społeczność Minetest."
 
 #: app/templates/users/claim.html:22
 msgid "<b>Yes</b>, I have a forums account"
-msgstr ""
+msgstr "<b>Tak</b>, posiadam konto na forum"
 
 #: app/templates/users/claim.html:25
 msgid "<b>No</b>, I don't have one"
-msgstr ""
+msgstr "<b>Nie</b>, nie posiadam"
 
 #: app/templates/users/claim.html:28
 msgid "Create forum account"
-msgstr ""
+msgstr "Utwórz konto na forum"
 
 #: app/templates/users/claim_forums.html:10
 msgid "Confirm Your Account"
-msgstr ""
+msgstr "Potwierdź swoje konto"
 
 #: app/templates/users/claim_forums.html:13
 msgid ""
 "You'll need to use prove that you have access to your forum account using"
 " one of the options below."
 msgstr ""
+"Musisz udowodnić, że masz dostęp do swojego konta na forum używając jednej z "
+"opcji poniżej."
 
 #: app/templates/users/claim_forums.html:14
 msgid "This is so ContentDB can link your account to your forum account."
 msgstr ""
+"To jest po to aby ContentDB mógł połączyć twoje konto z twoim kontem na "
+"forum."
 
 #: app/templates/users/claim_forums.html:18
 msgid "Don't have a forums account?"
-msgstr ""
+msgstr "Nie posiadasz konta na forum?"
 
 #: app/templates/users/claim_forums.html:19
 #, python-format
 msgid "You can still <a href='%(url)s'>sign up without one</a>."
-msgstr ""
+msgstr "Możesz <a href='%(url)s'>zarejestrować się bez niego</a>."
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
-msgstr ""
+msgstr "Opcja 1"
 
 #: app/templates/users/claim_forums.html:27
 msgid "Use GitHub field in forum profile"
-msgstr ""
+msgstr "Użyj pola GitHub na twoim profilu forum"
 
 #: app/templates/users/claim_forums.html:35
 #: app/templates/users/claim_forums.html:64
 msgid "Enter your forum username here:"
-msgstr ""
+msgstr "Wpisz twoją nazwę użytkownika na forum tutaj:"
 
 #: app/templates/users/claim_forums.html:39
 #: app/templates/users/claim_forums.html:68
 msgid "Forum username"
-msgstr ""
+msgstr "Nazwa użytkownika na forum"
 
 #: app/templates/users/claim_forums.html:43
 msgid "You'll need to have the GitHub field in your forum profile filled out."
