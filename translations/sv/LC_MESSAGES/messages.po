@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-03-07 07:03+0000\n"
+"PO-Revision-Date: 2022-03-11 03:36+0000\n"
 "Last-Translator: ROllerozxa <temporaryemail4meh+github@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/minetest/"
 "contentdb/sv/>\n"
@@ -99,7 +99,7 @@ msgstr "Underhållare"
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr ""
+msgstr "Auditeringslogg"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -651,17 +651,19 @@ msgstr "En annan användare använder redan den E-mailen"
 
 #: app/blueprints/users/account.py:345
 msgid "Confirmed email change"
-msgstr ""
+msgstr "Bekräftad mejländring"
 
 #: app/blueprints/users/account.py:350
 msgid "Email address changed"
-msgstr ""
+msgstr "Mejladress har ändrats"
 
 #: app/blueprints/users/account.py:351
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
+"Din mejladress har ändrats. Om du inte har bett om detta, var vänligen "
+"kontakta en administratör."
 
 #: app/blueprints/users/account.py:369
 msgid "You may now log in"
@@ -676,45 +678,49 @@ msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
 msgstr ""
+"Den mejladdressen är nu svartlistad. Kontakta en administratör om du vill "
+"ångra detta."
 
 #: app/blueprints/users/claim.py:40 app/blueprints/users/claim.py:65
 msgid ""
 "Invalid username - must only contain A-Za-z0-9._. Consider contacting an "
 "admin"
 msgstr ""
+"Ogiltigt användarnamn - måste endast innehålla A-Za-z0-9.-. Överväg att "
+"kontakta en administratör"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
-msgstr ""
+msgstr "Någon har redan gjort anspråk på denna användare"
 
 #: app/blueprints/users/claim.py:49
 msgid "Unable to get GitHub username for user"
-msgstr ""
+msgstr "Kunde inte hitta GitHub-användarnamn för användare"
 
 #: app/blueprints/users/claim.py:72
 msgid "That user has already been claimed!"
-msgstr ""
+msgstr "Någon har redan gjort anspråk på denna användare!"
 
 #: app/blueprints/users/claim.py:86
 #, python-format
 msgid "Error whilst attempting to access forums: %(message)s"
-msgstr ""
+msgstr "Fel när man försökte komma åt forumen: %(message)s"
 
 #: app/blueprints/users/claim.py:90
 msgid "Unable to get forum signature - does the user exist?"
-msgstr ""
+msgstr "Kunde inte hitta forumsignatur - finns användaren?"
 
 #: app/blueprints/users/claim.py:105
 msgid "Unable to login as user"
-msgstr ""
+msgstr "Kunde inte logga in som användare"
 
 #: app/blueprints/users/claim.py:111
 msgid "Could not find the key in your signature!"
-msgstr ""
+msgstr "Kunde inte hitta nyckeln i din signatur!"
 
 #: app/blueprints/users/claim.py:114
 msgid "Unknown claim type"
-msgstr ""
+msgstr "Okänd anspråkstyp"
 
 #: app/blueprints/users/profile.py:112
 msgid "Top reviewer"
@@ -840,64 +846,68 @@ msgstr "Användare med moderatorrank eller över kan inte tas bort"
 
 #: app/blueprints/users/settings.py:264
 msgid "Display name"
-msgstr ""
+msgstr "Visningsnamn"
 
 #: app/blueprints/users/settings.py:265
 msgid "Forums Username"
-msgstr ""
+msgstr "Forumanvändarnamn"
 
 #: app/blueprints/users/settings.py:266
 msgid "GitHub Username"
-msgstr ""
+msgstr "GitHub-användarnamn"
 
 #: app/blueprints/users/settings.py:267 app/templates/users/list.html:14
 msgid "Rank"
-msgstr ""
+msgstr "Rang"
 
 #: app/blueprints/users/settings.py:311
 msgid "Can't promote a user to a rank higher than yourself!"
-msgstr ""
+msgstr "Kan inte flytta upp en användare till en rang högre än dig själv!"
 
 #: app/logic/packages.py:95
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr ""
+"Namn kan bara innehålla gemena bokstäver (a-z), siffror (0-9) och "
+"understreck (_)"
 
 #: app/logic/packages.py:109
 msgid "You do not have permission to edit this package"
-msgstr ""
+msgstr "Du har inte behörighet att ändra detta paket"
 
 #: app/logic/packages.py:113
 msgid "You do not have permission to change the package name"
-msgstr ""
+msgstr "Du har inte behörighet att ändra paketnamnet"
 
 #: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr ""
+msgstr "Kunde inte lägga till skyddad tagg %(title)s till paket"
 
 #: app/logic/releases.py:32
 msgid "You do not have permission to make releases"
-msgstr ""
+msgstr "Du har inte behörighet att göra utsläpp"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Du har skapat för många utsläpp för detta paket i de senaste 5 minuterna, "
+"vänta innan du försöker igen"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr ""
+msgstr "Ogiltig commit-hash; den måste vara en 40 bokstäver lång base16-sträng"
 
 #: app/logic/screenshots.py:16
 msgid "Too many requests, please wait before trying again"
-msgstr ""
+msgstr "För många förfrågningar, vänta innan du försöker igen"
 
 #: app/logic/screenshots.py:18
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "en PNG- eller JPG-bildfil"
 
 #: app/logic/screenshots.py:35
 #, python-format
@@ -905,49 +915,51 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
+"Skärmdump är för liten, den måste vara åtminstonde %(width)sx%(height)s "
+"pixlar"
 
 #: app/logic/uploads.py:52
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Var snäll och ladda upp %(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "Uppladdad bild är egentligen inte en bild"
 
 #: app/models/packages.py:65
 msgid "Mod"
-msgstr ""
+msgstr "Modd"
 
 #: app/models/packages.py:67
 msgid "Game"
-msgstr ""
+msgstr "Spel"
 
 #: app/models/packages.py:69
 msgid "Texture Pack"
-msgstr ""
+msgstr "Texturpaket"
 
 #: app/models/packages.py:74 app/templates/base.html:27
 #: app/templates/metapackages/view.html:17
 msgid "Mods"
-msgstr ""
+msgstr "Moddar"
 
 #: app/models/packages.py:76 app/templates/base.html:30
 #: app/templates/metapackages/view.html:14
 msgid "Games"
-msgstr ""
+msgstr "Spel"
 
 #: app/models/packages.py:78 app/templates/base.html:33
 msgid "Texture Packs"
-msgstr ""
+msgstr "Texturpaket"
 
 #: app/models/packages.py:167
 msgid "Submit for Approval"
-msgstr ""
+msgstr "Skicka in för godkännande"
 
 #: app/models/packages.py:169
 msgid "Approve"
-msgstr ""
+msgstr "Godkänn"
 
 #: app/models/packages.py:171 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
@@ -956,34 +968,37 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:19
 #: app/templates/threads/view.html:40 app/templates/users/delete.html:34
 msgid "Delete"
-msgstr ""
+msgstr "Ta bort"
 
 #: app/tasks/emails.py:113
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
 msgstr ""
+"Du har fått detta mejl eftersom du är en registrerad användare av ContentDB."
 
 #: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr ""
+"Du har fått detta mejl eftersom någon (förhoppningsvis du) skrev in din "
+"mejladress som en användares mejl."
 
 #: app/tasks/emails.py:153
 #, python-format
 msgid "%(num)d new notifications"
-msgstr ""
+msgstr "%(num)d nya notiser"
 
 #: app/tasks/emails.py:155 app/templates/macros/forms.html:52
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
-msgstr ""
+msgstr "Visa"
 
 #: app/tasks/emails.py:158
 msgid "Manage email settings"
-msgstr ""
+msgstr "Hantera mejlinställningar"
 
 #: app/tasks/emails.py:160 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
@@ -993,126 +1008,128 @@ msgstr ""
 #: app/templates/threads/view.html:31 app/templates/users/unsubscribe.html:4
 #: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Avprenumerera"
 
 #: app/templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Sida kunde inte hittas"
 
 #: app/templates/404.html:10
 msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
+"Den sidan kunde inte hittas. Länken kanske är trasig, sidan kan ha tagits "
+"bort, eller så har du inte åtkomst till denna sida."
 
 #: app/templates/base.html:36
 msgid "Random"
-msgstr ""
+msgstr "Slumpmässig"
 
 #: app/templates/base.html:39 app/templates/base.html:233
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
 msgid "Help"
-msgstr ""
+msgstr "Hjälp"
 
 #: app/templates/base.html:42 app/templates/packages/view.html:173
 #: app/templates/packages/view.html:529 app/templates/threads/list.html:4
 msgid "Threads"
-msgstr ""
+msgstr "Trådar"
 
 #: app/templates/base.html:48
 #, python-format
 msgid "Search %(type)s"
-msgstr ""
+msgstr "Sök %(type)s"
 
 #: app/templates/base.html:48 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
-msgstr ""
+msgstr "Sök alla paket"
 
 #: app/templates/base.html:50 app/templates/todo/tags.html:15
 msgid "Search"
-msgstr ""
+msgstr "Sök"
 
 #: app/templates/base.html:62
 msgid "Work Queue"
-msgstr ""
+msgstr "Arbetskö"
 
 #: app/templates/base.html:75 app/templates/base.html:127
 msgid "To do list"
-msgstr ""
+msgstr "Att-göra lista"
 
 #: app/templates/base.html:84 app/templates/notifications/list.html:4
 msgid "Notifications"
-msgstr ""
+msgstr "Notiser"
 
 #: app/templates/base.html:105
 msgid "Add Package"
-msgstr ""
+msgstr "Lägg till paket"
 
 #: app/templates/base.html:122
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: app/templates/base.html:140
 msgid "Admin"
-msgstr ""
+msgstr "Administration"
 
 #: app/templates/base.html:143
 msgid "License Editor"
-msgstr ""
+msgstr "Licensredigerare"
 
 #: app/templates/base.html:148
 msgid "Restore Package"
-msgstr ""
+msgstr "Återställ paket"
 
 #: app/templates/base.html:151
 msgid "Tag Editor"
-msgstr ""
+msgstr "Taggredigerare"
 
 #: app/templates/base.html:153
 msgid "Create Tag"
-msgstr ""
+msgstr "Skapa tagg"
 
 #: app/templates/base.html:158 app/templates/packages/release_new.html:12
 msgid "Settings"
-msgstr ""
+msgstr "Inställningar"
 
 #: app/templates/base.html:161
 msgid "Sign out"
-msgstr ""
+msgstr "Logga ut"
 
 #: app/templates/base.html:190
 msgid "Help translate ContentDB"
-msgstr ""
+msgstr "Hjälp översätt ContentDB"
 
 #: app/templates/base.html:234
 msgid "Policy and Guidance"
-msgstr ""
+msgstr "Policy och förhållning"
 
 #: app/templates/base.html:235
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: app/templates/base.html:236 app/templates/users/register.html:43
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Integritetspolicy"
 
 #: app/templates/base.html:240
 msgid "Stats / Monitoring"
-msgstr ""
+msgstr "Statistik / Övervakning"
 
 #: app/templates/base.html:241
 msgid "User List"
-msgstr ""
+msgstr "Användarlista"
 
 #: app/templates/base.html:242
 msgid "Source Code"
-msgstr ""
+msgstr "Källkod"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "Välkommen"
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
 #: app/templates/packages/game_hub.html:5
@@ -1120,30 +1137,30 @@ msgstr ""
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
-msgstr ""
+msgstr "%(title)s av %(author)s"
 
 #: app/templates/index.html:43
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
-msgstr ""
+msgstr "<strong>%(title)s</strong> av %(author)s"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:177 app/templates/packages/view.html:293
 #: app/templates/users/profile.html:206
 msgid "Reviews"
-msgstr ""
+msgstr "Recensioner"
 
 #: app/templates/index.html:86
 msgid "Previous"
-msgstr ""
+msgstr "Föregående"
 
 #: app/templates/index.html:90 app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr ""
+msgstr "Nästa"
 
 #: app/templates/index.html:96
 msgid "Featured"
-msgstr ""
+msgstr "Presenterad"
 
 #: app/templates/index.html:101 app/templates/index.html:108
 #: app/templates/index.html:115 app/templates/index.html:122
@@ -1153,88 +1170,88 @@ msgstr ""
 #: app/templates/packages/game_hub.html:45
 #: app/templates/packages/game_hub.html:52
 msgid "See more"
-msgstr ""
+msgstr "Se mer"
 
 #: app/templates/index.html:103 app/templates/packages/game_hub.html:33
 msgid "Recently Added"
-msgstr ""
+msgstr "Senast tillagd"
 
 #: app/templates/index.html:110 app/templates/packages/game_hub.html:40
 msgid "Recently Updated"
-msgstr ""
+msgstr "Senast uppdaterad"
 
 #: app/templates/index.html:117
 msgid "Top Games"
-msgstr ""
+msgstr "Topp spel"
 
 #: app/templates/index.html:124 app/templates/packages/game_hub.html:47
 msgid "Top Mods"
-msgstr ""
+msgstr "Topp moddar"
 
 #: app/templates/index.html:131
 msgid "Top Texture Packs"
-msgstr ""
+msgstr "Topp texturpaket"
 
 #: app/templates/index.html:135
 msgid "Search by Tags"
-msgstr ""
+msgstr "Sök från taggar"
 
 #: app/templates/index.html:153 app/templates/packages/game_hub.html:54
 msgid "Highest Reviewed"
-msgstr ""
+msgstr "Högst recenserad"
 
 #: app/templates/index.html:160
 msgid "Recent Positive Reviews"
-msgstr ""
+msgstr "Senaste positiva recensioner"
 
 #: app/templates/index.html:167
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
-msgstr ""
+msgstr "CDB har %(count)d paket, med %(downloads)d nerladdningar totalt."
 
 #: app/templates/admin/audit_view.html:16
 #, python-format
 msgid "Caused by %(author)s."
-msgstr ""
+msgstr "Orsakad av %(author)s."
 
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
-msgstr ""
+msgstr "Orsakad av borttagen användare."
 
 #: app/templates/admin/list.html:62
 msgid "Deletion is permanent."
-msgstr ""
+msgstr "Radering är permanent."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
-msgstr ""
+msgstr "Skicka bulkmejl"
 
 #: app/templates/admin/send_bulk_notification.html:4
 msgid "Send bulk notification"
-msgstr ""
+msgstr "Skicka bulknotis"
 
 #: app/templates/admin/send_email.html:4
 #, python-format
 msgid "Send email to %(username)s"
-msgstr ""
+msgstr "Skicka mejl till %(username)s"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
-msgstr ""
+msgstr "Ny licens"
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr ""
+msgstr "Licenser"
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:44
 msgid "Description"
-msgstr ""
+msgstr "Beskrivning"
 
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
-msgstr ""
+msgstr "Visningar"
 
 #: app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
@@ -1242,100 +1259,104 @@ msgstr ""
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:191
 msgid "Packages"
-msgstr ""
+msgstr "Paket"
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Minetest Versions"
-msgstr ""
+msgstr "Minetestversioner"
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
-msgstr ""
+msgstr "Ny version"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
 msgid "Warnings"
-msgstr ""
+msgstr "Varningar"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
-msgstr ""
+msgstr "Ny varning"
 
 #: app/templates/api/create_edit_token.html:5
 #, python-format
 msgid "Edit - %(name)s"
-msgstr ""
+msgstr "Redigera - %(name)s"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
-msgstr ""
+msgstr "Skapa API-token"
 
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
-msgstr ""
+msgstr "API-tokens låter skript agera i ditt ställe."
 
 #: app/templates/api/create_edit_token.html:25
 msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
+"Var aktsam med vem eller vilka du delar tokens med, eftersom du är ansvarig "
+"för ditt kontos handlingar."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "Access Token"
-msgstr ""
+msgstr "Åtkomsttoken"
 
 #: app/templates/api/create_edit_token.html:33
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
 msgstr ""
+"På grund av säkerheten visas åtkomsttokens endast en gång. Återställ den om "
+"du har tappat bort den."
 
 #: app/templates/api/create_edit_token.html:40
 msgid "Reset"
-msgstr ""
+msgstr "Återställ"
 
 #: app/templates/api/create_edit_token.html:49
 msgid "Human-readable name to tell tokens apart."
-msgstr ""
+msgstr "Mänskligt läsbart namn för att urskilja olika tokens."
 
 #: app/templates/api/create_edit_token.html:50
 msgid "Recommended: Only allows token to interact with a particular package."
-msgstr ""
+msgstr "Rekommenderat: Tillåt en token att endast påverka ett specifikt paket."
 
 #: app/templates/api/list_tokens.html:4
 #, python-format
 msgid "API Tokens | %(username)s"
-msgstr ""
+msgstr "API-tokens | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/macros/topics.html:29
 #: app/templates/macros/topics.html:65
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
-msgstr ""
+msgstr "Skapa"
 
 #: app/templates/api/list_tokens.html:9
 msgid "API Documentation"
-msgstr ""
+msgstr "API-dokumentation"
 
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
-msgstr ""
+msgstr "Ingen token skapades"
 
 #: app/templates/emails/notification.html:10
 #, python-format
 msgid "From %(username)s and on package %(package)s."
-msgstr ""
+msgstr "Från %(username)s på paket %(package)s."
 
 #: app/templates/emails/notification.html:13
 #, python-format
 msgid "From %(username)s."
-msgstr ""
+msgstr "Från %(username)s."
 
 #: app/templates/emails/notification.html:19
 msgid "View Notification"
-msgstr ""
+msgstr "Visa notis"
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:46
@@ -1343,61 +1364,68 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
 msgstr ""
+"Du har fått detta mejl eftersom du är en registrerad användare av ContentDB, "
+"och har mejlnotiser aktiverade."
 
 #: app/templates/emails/notification.html:30
 #: app/templates/emails/notification_digest.html:50
 msgid "Manage your preferences"
-msgstr ""
+msgstr "Hantera dina preferenser"
 
 #: app/templates/emails/notification.html:37
 #, python-format
 msgid "This is a '%(type)s' notification."
-msgstr ""
+msgstr "Detta är en '%(type)s'-notis."
 
 #: app/templates/emails/notification_digest.html:14
 #: app/templates/emails/notification_digest.html:31
 #, python-format
 msgid "from %(username)s."
-msgstr ""
+msgstr "från %(username)s."
 
 #: app/templates/emails/notification_digest.html:24
 msgid "Other Notifications"
-msgstr ""
+msgstr "Andra notiser"
 
 #: app/templates/emails/notification_digest.html:39
 msgid "View Notifications"
-msgstr ""
+msgstr "Visa notiser"
 
 #: app/templates/emails/unable_to_find_account.html:2
 msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
+"Vi kunde inte hantera lösenordsåterställningen eftersom vi inte kunde hitta "
+"ett konto associerat med denna mejl."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
+"Detta kan vara eftersom du använde en annan mejladress med ditt konto, eller "
+"eftersom du aldrig verifierade din mejl."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
 msgstr ""
+"Du kan använda GitHub för att logga in om det är associerat med ditt konto."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
-msgstr ""
+msgstr "Annars kan du kontakta rubenwardy för hjälp."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
-msgstr ""
+msgstr "Om du inte förväntade detta mejl kan du ignorera detta."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
-msgstr ""
+msgstr "Hej!"
 
 #: app/templates/emails/verify.html:7
 msgid ""
