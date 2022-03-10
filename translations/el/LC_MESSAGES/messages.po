@@ -8,13 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: Automatically generated\n"
-"Language-Team: none\n"
+"PO-Revision-Date: 2022-03-11 03:36+0000\n"
+"Last-Translator: THANOS SIOURDAKIS <siourdakisthanos@gmail.com>\n"
+"Language-Team: Greek <https://hosted.weblate.org/projects/minetest/contentdb/"
+"el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.12-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:103
@@ -30,7 +33,7 @@ msgstr ""
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
 #: app/templates/metapackages/list.html:12
 msgid "Name"
-msgstr ""
+msgstr "Όνομα"
 
 #: app/blueprints/api/tokens.py:34
 msgid "Limit to package"
@@ -48,7 +51,7 @@ msgstr ""
 #: app/blueprints/users/settings.py:53 app/blueprints/users/settings.py:115
 #: app/blueprints/users/settings.py:269 app/templates/users/modtools.html:62
 msgid "Save"
-msgstr ""
+msgstr "Αποθήκευση"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -73,19 +76,19 @@ msgstr ""
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
 msgid "Edit Details"
-msgstr ""
+msgstr "Επεξεργασία λεπτομερειών"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
 #: app/templates/packages/view.html:509 app/templates/todo/editor.html:75
 msgid "Releases"
-msgstr ""
+msgstr "Εκδόσεις"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr ""
+msgstr "Στιγμιότυπα"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
@@ -96,7 +99,7 @@ msgstr ""
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr ""
+msgstr "Αρχείο ελέγχου"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -104,7 +107,7 @@ msgstr ""
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:110
 msgid "Remove"
-msgstr ""
+msgstr "Αφαίρεση"
 
 #: app/blueprints/packages/packages.py:159
 msgid "Error: Another package already uses this forum topic!"
@@ -126,7 +129,7 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:457
 msgid "Type"
-msgstr ""
+msgstr "Τύπος"
 
 #: app/blueprints/packages/packages.py:230
 msgid "Title (Human-readable)"
@@ -154,7 +157,7 @@ msgstr ""
 #: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
-msgstr ""
+msgstr "Ετικέτες"
 
 #: app/blueprints/packages/packages.py:237
 msgid "Content Warnings"
@@ -162,7 +165,7 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:461
 msgid "License"
-msgstr ""
+msgstr "Άδεια"
 
 #: app/blueprints/packages/packages.py:239
 msgid "Media License"
@@ -178,7 +181,7 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:51
 msgid "Website URL"
-msgstr ""
+msgstr "URL ιστοσελίδας"
 
 #: app/blueprints/packages/packages.py:245
 msgid "Issue Tracker URL"
@@ -190,7 +193,7 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:247
 msgid "Video URL"
-msgstr ""
+msgstr "Βίντεο URL"
 
 #: app/blueprints/packages/packages.py:265
 msgid "Unable to find that user"
@@ -200,7 +203,7 @@ msgstr ""
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:99
 msgid "Permission denied"
-msgstr ""
+msgstr "Η άδεια απορρίφθηκε"
 
 #: app/blueprints/packages/packages.py:307
 msgid "Package already exists!"
@@ -245,7 +248,7 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:547
 msgid "Author Name"
-msgstr ""
+msgstr "Όνομα Συντάκτη"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -253,18 +256,18 @@ msgstr ""
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
-msgstr ""
+msgstr "Τίτλος"
 
 #: app/blueprints/packages/releases.py:53
 #: app/templates/packages/release_new.html:46
 msgid "Method"
-msgstr ""
+msgstr "Μέθοδος"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
-msgstr ""
+msgstr "Ανέβασμα αρχείου"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
@@ -285,7 +288,7 @@ msgstr ""
 #: app/blueprints/packages/releases.py:65
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: app/blueprints/packages/releases.py:66
 msgid "Task ID"
@@ -318,12 +321,12 @@ msgstr ""
 
 #: app/blueprints/packages/releases.py:190
 msgid "Update"
-msgstr ""
+msgstr "Αναβάθμιση"
 
 #: app/blueprints/packages/releases.py:239
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
-msgstr ""
+msgstr "Ενεργοποίηση"
 
 #: app/blueprints/packages/releases.py:240
 msgid "New Commit"
@@ -340,7 +343,7 @@ msgstr ""
 #: app/blueprints/packages/releases.py:244
 #: app/templates/packages/update_config.html:38
 msgid "Action"
-msgstr ""
+msgstr "Ενέργεια"
 
 #: app/blueprints/packages/releases.py:245
 msgid "Send notification and mark as outdated"
@@ -353,7 +356,7 @@ msgstr ""
 
 #: app/blueprints/packages/releases.py:247
 msgid "Save Settings"
-msgstr ""
+msgstr "Αποθήκευση Ρυθμίσεων"
 
 #: app/blueprints/packages/releases.py:248
 msgid "Disable Automation"
@@ -375,21 +378,21 @@ msgstr ""
 #: app/blueprints/threads/__init__.py:176
 #: app/blueprints/threads/__init__.py:273
 msgid "Comment"
-msgstr ""
+msgstr "Σχόλιο"
 
 #: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:274
 msgid "Private"
-msgstr ""
+msgstr "Ιδιωτικό"
 
 #: app/blueprints/packages/reviews.py:46 app/templates/macros/reviews.html:115
 #: app/templates/macros/reviews.html:154
 msgid "Yes"
-msgstr ""
+msgstr "Ναι"
 
 #: app/blueprints/packages/reviews.py:46 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:158
 msgid "No"
-msgstr ""
+msgstr "Όχι"
 
 #: app/blueprints/packages/reviews.py:54
 msgid "You can't review your own package!"
@@ -411,18 +414,18 @@ msgstr ""
 #: app/blueprints/packages/screenshots.py:45
 #: app/templates/packages/screenshots.html:89
 msgid "Cover Image"
-msgstr ""
+msgstr "Εικόνα εξωφύλλου"
 
 #: app/blueprints/report/__init__.py:34
 msgid "Message"
-msgstr ""
+msgstr "Μήνυμα"
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:238
 #: app/templates/macros/threads.html:53 app/templates/packages/view.html:540
 #: app/templates/report/index.html:4 app/templates/report/index.html:10
 #: app/templates/users/profile.html:28
 msgid "Report"
-msgstr ""
+msgstr "Αναφορά"
 
 #: app/blueprints/threads/__init__.py:64
 msgid "Already subscribed!"
@@ -487,22 +490,22 @@ msgstr ""
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr ""
+msgstr "Όνομα χρήστη ή email"
 
 #: app/blueprints/users/account.py:38 app/blueprints/users/account.py:107
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
 #: app/templates/users/modtools.html:35
 msgid "Password"
-msgstr ""
+msgstr "Κωδικός"
 
 #: app/blueprints/users/account.py:39
 msgid "Remember me"
-msgstr ""
+msgstr "Να με θυμάσαι"
 
 #: app/blueprints/users/account.py:40 app/templates/base.html:165
 #: app/templates/users/login.html:4
 msgid "Sign in"
-msgstr ""
+msgstr "Σύνδεση"
 
 #: app/blueprints/users/account.py:46
 msgid "Incorrect email or password"
@@ -523,16 +526,16 @@ msgstr ""
 
 #: app/blueprints/users/account.py:68
 msgid "Login failed"
-msgstr ""
+msgstr "Η σύνδεση απέτυχε"
 
 #: app/blueprints/users/account.py:103 app/blueprints/users/settings.py:50
 msgid "Display Name"
-msgstr ""
+msgstr "Εμφανιζόμενο όνομα"
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:263
 #: app/templates/users/list.html:18
 msgid "Username"
-msgstr ""
+msgstr "Όνομα χρήστη"
 
 #: app/blueprints/users/account.py:105 app/templates/users/claim_forums.html:40
 #: app/templates/users/claim_forums.html:68
@@ -544,7 +547,7 @@ msgstr ""
 #: app/blueprints/users/account.py:224 app/blueprints/users/account.py:376
 #: app/blueprints/users/settings.py:114
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: app/blueprints/users/account.py:108
 msgid "What is the result of the above calculation?"
@@ -552,12 +555,12 @@ msgstr ""
 
 #: app/blueprints/users/account.py:109
 msgid "I agree"
-msgstr ""
+msgstr "συμφωνώ"
 
 #: app/blueprints/users/account.py:110 app/templates/users/login.html:34
 #: app/templates/users/register.html:4
 msgid "Register"
-msgstr ""
+msgstr "Εγγραφή"
 
 #: app/blueprints/users/account.py:115
 msgid "Incorrect captcha answer"
@@ -565,7 +568,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:119
 msgid "Username is invalid"
-msgstr ""
+msgstr "Το όνομα χρήστη δεν είναι έγκυρο"
 
 #: app/blueprints/users/account.py:130
 msgid "An account already exists for that username but hasn't been claimed yet."
@@ -593,7 +596,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:190
 msgid "Reset Password"
-msgstr ""
+msgstr "Επαναφορά κωδικού"
 
 #: app/blueprints/users/account.py:215
 msgid "Unable to find account"
@@ -601,7 +604,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:232
 msgid "New password"
-msgstr ""
+msgstr "Νέος κωδικός πρόσβασης"
 
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:233
 msgid "Verify password"
@@ -609,19 +612,19 @@ msgstr ""
 
 #: app/blueprints/users/account.py:227 app/blueprints/users/account.py:234
 msgid "Passwords must match"
-msgstr ""
+msgstr "Οι κωδικοί πρόσβασης πρέπει να ταιριάζουν"
 
 #: app/blueprints/users/account.py:231
 msgid "Old password"
-msgstr ""
+msgstr "Παλιός Κωδικός"
 
 #: app/blueprints/users/account.py:242
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Οι κωδικοί πρόσβασης δεν ταιριάζουν"
 
 #: app/blueprints/users/account.py:273 app/blueprints/users/account.py:277
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "Ο κωδικός πρόσβασής σας άλλαξε με επιτυχία."
 
 #: app/blueprints/users/account.py:292
 msgid "Old password is incorrect"
@@ -659,7 +662,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:377
 msgid "Send"
-msgstr ""
+msgstr "Αποστολή"
 
 #: app/blueprints/users/account.py:408
 msgid ""
@@ -795,7 +798,7 @@ msgstr ""
 #: app/blueprints/users/settings.py:19 app/templates/users/profile.html:17
 #: app/templates/users/profile_edit.html:8
 msgid "Edit Profile"
-msgstr ""
+msgstr "Επεξεργασία Προφίλ"
 
 #: app/blueprints/users/settings.py:24 app/templates/users/account.html:12
 msgid "Account and Security"
@@ -829,7 +832,7 @@ msgstr ""
 
 #: app/blueprints/users/settings.py:264
 msgid "Display name"
-msgstr ""
+msgstr "Προβολή ονόματος"
 
 #: app/blueprints/users/settings.py:265
 msgid "Forums Username"
@@ -841,7 +844,7 @@ msgstr ""
 
 #: app/blueprints/users/settings.py:267 app/templates/users/list.html:14
 msgid "Rank"
-msgstr ""
+msgstr "Κατάταξη"
 
 #: app/blueprints/users/settings.py:311
 msgid "Can't promote a user to a rank higher than yourself!"
@@ -910,7 +913,7 @@ msgstr ""
 
 #: app/models/packages.py:67
 msgid "Game"
-msgstr ""
+msgstr "Παιχνίδι"
 
 #: app/models/packages.py:69
 msgid "Texture Pack"
@@ -924,7 +927,7 @@ msgstr ""
 #: app/models/packages.py:76 app/templates/base.html:30
 #: app/templates/metapackages/view.html:14
 msgid "Games"
-msgstr ""
+msgstr "Παιχνίδια"
 
 #: app/models/packages.py:78 app/templates/base.html:33
 msgid "Texture Packs"
@@ -936,7 +939,7 @@ msgstr ""
 
 #: app/models/packages.py:169
 msgid "Approve"
-msgstr ""
+msgstr "Έγκριση"
 
 #: app/models/packages.py:171 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
@@ -945,7 +948,7 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:19
 #: app/templates/threads/view.html:40 app/templates/users/delete.html:34
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: app/tasks/emails.py:113
 msgid ""
@@ -968,7 +971,7 @@ msgstr ""
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
-msgstr ""
+msgstr "Προβολή"
 
 #: app/tasks/emails.py:158
 msgid "Manage email settings"
@@ -982,11 +985,11 @@ msgstr ""
 #: app/templates/threads/view.html:31 app/templates/users/unsubscribe.html:4
 #: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Κατάργηση εγγραφής"
 
 #: app/templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Η σελίδα δεν βρέθηκε"
 
 #: app/templates/404.html:10
 msgid ""
@@ -996,18 +999,18 @@ msgstr ""
 
 #: app/templates/base.html:36
 msgid "Random"
-msgstr ""
+msgstr "Τυχαία"
 
 #: app/templates/base.html:39 app/templates/base.html:233
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
 msgid "Help"
-msgstr ""
+msgstr "Βοήθεια"
 
 #: app/templates/base.html:42 app/templates/packages/view.html:173
 #: app/templates/packages/view.html:529 app/templates/threads/list.html:4
 msgid "Threads"
-msgstr ""
+msgstr "Νήματα"
 
 #: app/templates/base.html:48
 #, python-format
@@ -1021,7 +1024,7 @@ msgstr ""
 
 #: app/templates/base.html:50 app/templates/todo/tags.html:15
 msgid "Search"
-msgstr ""
+msgstr "Αναζήτηση"
 
 #: app/templates/base.html:62
 msgid "Work Queue"
@@ -1033,19 +1036,19 @@ msgstr ""
 
 #: app/templates/base.html:84 app/templates/notifications/list.html:4
 msgid "Notifications"
-msgstr ""
+msgstr "Ειδοποιήσεις"
 
 #: app/templates/base.html:105
 msgid "Add Package"
-msgstr ""
+msgstr "Προσθήκη Πακέτου"
 
 #: app/templates/base.html:122
 msgid "Profile"
-msgstr ""
+msgstr "Προφίλ"
 
 #: app/templates/base.html:140
 msgid "Admin"
-msgstr ""
+msgstr "Διαχειριστής"
 
 #: app/templates/base.html:143
 msgid "License Editor"
@@ -1065,11 +1068,11 @@ msgstr ""
 
 #: app/templates/base.html:158 app/templates/packages/release_new.html:12
 msgid "Settings"
-msgstr ""
+msgstr "Ρυθμίσεις"
 
 #: app/templates/base.html:161
 msgid "Sign out"
-msgstr ""
+msgstr "Αποσύνδεση"
 
 #: app/templates/base.html:190
 msgid "Help translate ContentDB"
@@ -1081,11 +1084,11 @@ msgstr ""
 
 #: app/templates/base.html:235
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: app/templates/base.html:236 app/templates/users/register.html:43
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Πολιτική απορρήτου"
 
 #: app/templates/base.html:240
 msgid "Stats / Monitoring"
@@ -1093,15 +1096,15 @@ msgstr ""
 
 #: app/templates/base.html:241
 msgid "User List"
-msgstr ""
+msgstr "Λίστα Χρήστη"
 
 #: app/templates/base.html:242
 msgid "Source Code"
-msgstr ""
+msgstr "Πηγαίος Κώδικας"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "Καλωσήρθατε"
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
 #: app/templates/packages/game_hub.html:5
@@ -1120,19 +1123,19 @@ msgstr ""
 #: app/templates/packages/view.html:177 app/templates/packages/view.html:293
 #: app/templates/users/profile.html:206
 msgid "Reviews"
-msgstr ""
+msgstr "Αξιολογήσεις"
 
 #: app/templates/index.html:86
 msgid "Previous"
-msgstr ""
+msgstr "Προηγούμενο"
 
 #: app/templates/index.html:90 app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr ""
+msgstr "Επόμενο"
 
 #: app/templates/index.html:96
 msgid "Featured"
-msgstr ""
+msgstr "Προτεινόμενα"
 
 #: app/templates/index.html:101 app/templates/index.html:108
 #: app/templates/index.html:115 app/templates/index.html:122
@@ -1142,11 +1145,11 @@ msgstr ""
 #: app/templates/packages/game_hub.html:45
 #: app/templates/packages/game_hub.html:52
 msgid "See more"
-msgstr ""
+msgstr "Δείτε περισσότερα"
 
 #: app/templates/index.html:103 app/templates/packages/game_hub.html:33
 msgid "Recently Added"
-msgstr ""
+msgstr "Προστέθηκαν Πρόσφατα"
 
 #: app/templates/index.html:110 app/templates/packages/game_hub.html:40
 msgid "Recently Updated"
@@ -1213,17 +1216,17 @@ msgstr ""
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr ""
+msgstr "Άδειες"
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:44
 msgid "Description"
-msgstr ""
+msgstr "Περιγραφή"
 
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
-msgstr ""
+msgstr "Προβολές"
 
 #: app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
@@ -1231,7 +1234,7 @@ msgstr ""
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:191
 msgid "Packages"
-msgstr ""
+msgstr "Πακέτα"
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
@@ -1240,12 +1243,12 @@ msgstr ""
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
-msgstr ""
+msgstr "Νέα έκδοση"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
 msgid "Warnings"
-msgstr ""
+msgstr "Απενεργοποίηση προειδοποιήσεων παραβίασης"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
@@ -1272,7 +1275,7 @@ msgstr ""
 
 #: app/templates/api/create_edit_token.html:30
 msgid "Access Token"
-msgstr ""
+msgstr "Διακριτικό Πρόσβασης"
 
 #: app/templates/api/create_edit_token.html:33
 msgid ""
@@ -1282,7 +1285,7 @@ msgstr ""
 
 #: app/templates/api/create_edit_token.html:40
 msgid "Reset"
-msgstr ""
+msgstr "Επαναφορά"
 
 #: app/templates/api/create_edit_token.html:49
 msgid "Human-readable name to tell tokens apart."
@@ -1302,7 +1305,7 @@ msgstr ""
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
-msgstr ""
+msgstr "Δημιουργία"
 
 #: app/templates/api/list_tokens.html:9
 msgid "API Documentation"
@@ -1324,7 +1327,7 @@ msgstr ""
 
 #: app/templates/emails/notification.html:19
 msgid "View Notification"
-msgstr ""
+msgstr "Προβολή Ειδοποίησης"
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:46
@@ -1386,7 +1389,7 @@ msgstr ""
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
-msgstr ""
+msgstr "Γειά σας!"
 
 #: app/templates/emails/verify.html:7
 msgid ""
@@ -1404,7 +1407,7 @@ msgstr ""
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
-msgstr ""
+msgstr "Επιβεβαίωση διεύθυνσης email"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
@@ -1430,7 +1433,7 @@ msgstr ""
 
 #: app/templates/macros/audit_log.html:32
 msgid "Deleted User"
-msgstr ""
+msgstr "Διαγραμμένος χρήστης"
 
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
@@ -1442,7 +1445,7 @@ msgstr ""
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
 msgid "State"
-msgstr ""
+msgstr "Κατάσταση"
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
@@ -1547,12 +1550,12 @@ msgstr ""
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:98
 #: app/templates/packages/view.html:247
 msgid "Edit"
-msgstr ""
+msgstr "Επεξεργασία"
 
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
-msgstr ""
+msgstr "Πραγματοποιείται εισαγωγή..."
 
 #: app/templates/macros/releases.html:96
 msgid "Waiting for approval."
@@ -1564,7 +1567,7 @@ msgstr ""
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
-msgstr ""
+msgstr "Βοηθητικός"
 
 #: app/templates/macros/reviews.html:13
 msgid "Unhelpful"
@@ -1582,7 +1585,7 @@ msgstr ""
 #: app/templates/macros/reviews.html:104 app/templates/macros/reviews.html:143
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
-msgstr ""
+msgstr "Αναθεώρηση"
 
 #: app/templates/macros/reviews.html:109 app/templates/macros/reviews.html:148
 #: app/templates/packages/review_create_edit.html:35
@@ -1597,7 +1600,7 @@ msgstr ""
 
 #: app/templates/macros/reviews.html:133
 msgid "Post Review"
-msgstr ""
+msgstr "Συμπληρώστε Κριτική"
 
 #: app/templates/macros/threads.html:29
 msgid "Maintainer"
@@ -1625,11 +1628,11 @@ msgstr ""
 
 #: app/templates/macros/threads.html:147
 msgid "Thread"
-msgstr ""
+msgstr "Κλωστή"
 
 #: app/templates/macros/threads.html:151
 msgid "Last Reply"
-msgstr ""
+msgstr "Τελευταία Απάντηση"
 
 #: app/templates/macros/todo.html:23
 #, python-format
@@ -1639,7 +1642,7 @@ msgstr ""
 #: app/templates/macros/todo.html:37 app/templates/packages/view.html:104
 #: app/templates/packages/view.html:355
 msgid "Release"
-msgstr ""
+msgstr "Διορθωτική"
 
 #: app/templates/macros/todo.html:44
 msgid "Repo"
@@ -1657,15 +1660,15 @@ msgstr ""
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:160
 msgid "Author"
-msgstr ""
+msgstr "Συντάκτης"
 
 #: app/templates/macros/topics.html:8
 msgid "Date"
-msgstr ""
+msgstr "Ημερομηνία"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
-msgstr ""
+msgstr "Ενέργειες"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
 #: app/templates/metapackages/view.html:29
@@ -1676,15 +1679,15 @@ msgstr ""
 
 #: app/templates/macros/topics.html:35
 msgid "Show"
-msgstr ""
+msgstr "Μπάρα προόδου διαβάσματος"
 
 #: app/templates/macros/topics.html:37
 msgid "Discard"
-msgstr ""
+msgstr "Απορρίψη"
 
 #: app/templates/macros/topics.html:57
 msgid "Old"
-msgstr ""
+msgstr "Παλιό"
 
 #: app/templates/metapackages/list.html:4
 #: app/templates/metapackages/view.html:4
@@ -1706,7 +1709,7 @@ msgstr ""
 
 #: app/templates/metapackages/view.html:21 app/templates/todo/todo_base.html:35
 msgid "Forum Topics"
-msgstr ""
+msgstr "Θέματα φόρουμ"
 
 #: app/templates/metapackages/view.html:27
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:396
@@ -1734,12 +1737,12 @@ msgstr ""
 
 #: app/templates/notifications/list.html:27
 msgid "Your Notifications"
-msgstr ""
+msgstr "Οι Ειδοποιήσεις σας"
 
 #: app/templates/notifications/list.html:61
 #: app/templates/notifications/list.html:99
 msgid "No notifications"
-msgstr ""
+msgstr "Δεν υπάρχουν ειδοποιήσεις"
 
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
@@ -1747,7 +1750,7 @@ msgstr ""
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
-msgstr ""
+msgstr "Ψευδώνυμο"
 
 #: app/templates/packages/alias_create_edit.html:13
 msgid "Back to Aliases"
@@ -1755,7 +1758,7 @@ msgstr ""
 
 #: app/templates/packages/alias_list.html:4
 msgid "Aliases"
-msgstr ""
+msgstr "Ψευδώνυμα"
 
 #: app/templates/packages/alias_list.html:15
 #, python-format
@@ -1802,7 +1805,7 @@ msgstr ""
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
 msgid "Create Package"
-msgstr ""
+msgstr "Δημιουργία Πακέτου"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
@@ -1810,7 +1813,7 @@ msgstr ""
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
-msgstr ""
+msgstr "Διαβάστε περισσότερα"
 
 #: app/templates/packages/create_edit.html:49
 #, python-format
@@ -1829,7 +1832,7 @@ msgstr ""
 #: app/templates/packages/create_edit.html:66
 #: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
 msgid "Package"
-msgstr ""
+msgstr "Πακέτο"
 
 #: app/templates/packages/create_edit.html:73
 msgid "Please open a thread to request a name change"
@@ -1918,7 +1921,7 @@ msgstr ""
 
 #: app/templates/packages/list.html:26
 msgid "Filter by tags"
-msgstr ""
+msgstr "Φιλτράρισμα με βάση τις ετικέτες"
 
 #: app/templates/packages/list.html:59
 msgid "More content from the forums"
@@ -1926,7 +1929,7 @@ msgstr ""
 
 #: app/templates/packages/package_base.html:13
 msgid "Thumbnail"
-msgstr ""
+msgstr "Μικρογραφία"
 
 #: app/templates/packages/release_bulk_change.html:4
 msgid "Bulk Change Releases"
@@ -1969,7 +1972,7 @@ msgstr ""
 #: app/templates/packages/release_edit.html:42
 #: app/templates/packages/screenshot_edit.html:20
 msgid "Approved"
-msgstr ""
+msgstr "Εγκρίθηκε"
 
 #: app/templates/packages/release_edit.html:46
 msgid "Supported Minetest versions"
@@ -2082,7 +2085,7 @@ msgstr ""
 #: app/templates/packages/release_wizard.html:9
 #: app/templates/packages/release_wizard.html:75
 msgid "Later"
-msgstr ""
+msgstr "Αργότερα"
 
 #: app/templates/packages/release_wizard.html:14
 #, python-format
@@ -2127,7 +2130,7 @@ msgstr ""
 
 #: app/templates/packages/release_wizard.html:46
 msgid "Manually"
-msgstr ""
+msgstr "Μη αυτόματα"
 
 #: app/templates/packages/release_wizard.html:49
 msgid "With reminders"
@@ -2181,7 +2184,7 @@ msgstr ""
 
 #: app/templates/packages/remove.html:27
 msgid "Reason"
-msgstr ""
+msgstr "Αιτία"
 
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
@@ -2192,7 +2195,7 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:18
 #: app/templates/users/delete.html:30
 msgid "Cancel"
-msgstr ""
+msgstr "Άκυρο"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2228,7 +2231,7 @@ msgstr ""
 #: app/templates/packages/screenshot_edit.html:4
 #: app/templates/packages/screenshot_edit.html:11
 msgid "Edit screenshot"
-msgstr ""
+msgstr "Επεξεργασία στιγμιοτύπου"
 
 #: app/templates/packages/screenshot_new.html:4
 #: app/templates/packages/screenshot_new.html:8
@@ -2245,7 +2248,7 @@ msgstr ""
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
-msgstr ""
+msgstr "Προσθήκη εικόνας"
 
 #: app/templates/packages/screenshots.html:17
 msgid "Topmost screenshot will be used as the package thumbnail."
@@ -2257,7 +2260,7 @@ msgstr ""
 
 #: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:80
 msgid "Too small"
-msgstr ""
+msgstr "Πολύ μικρό"
 
 #: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
 msgid "Not HD"
@@ -2265,7 +2268,7 @@ msgstr ""
 
 #: app/templates/packages/screenshots.html:53
 msgid "Awaiting approval"
-msgstr ""
+msgstr "Εν αναμονή έγκρισης"
 
 #: app/templates/packages/screenshots.html:72
 msgid "No screenshots."
@@ -2273,7 +2276,7 @@ msgstr ""
 
 #: app/templates/packages/screenshots.html:80
 msgid "Save Order"
-msgstr ""
+msgstr "Αποθήκευση Παραγγελίας"
 
 #: app/templates/packages/screenshots.html:85
 msgid "Reordering requires JavaScript."
@@ -2281,7 +2284,7 @@ msgstr ""
 
 #: app/templates/packages/screenshots.html:100
 msgid "Videos"
-msgstr ""
+msgstr "Βίντεο"
 
 #: app/templates/packages/screenshots.html:102
 msgid "You can set a video on the Edit Details page"
@@ -2289,7 +2292,7 @@ msgstr ""
 
 #: app/templates/packages/share.html:10
 msgid "Links"
-msgstr ""
+msgstr "Σύνδεσμοι"
 
 #: app/templates/packages/share.html:13
 msgid "Review link"
@@ -2297,7 +2300,7 @@ msgstr ""
 
 #: app/templates/packages/share.html:18
 msgid "Badges"
-msgstr ""
+msgstr "Εμβλήματα"
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
@@ -2352,7 +2355,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:37
 msgid "Download"
-msgstr ""
+msgstr "Λήψη"
 
 #: app/templates/packages/view.html:43
 #, python-format
@@ -2395,23 +2398,23 @@ msgstr ""
 
 #: app/templates/packages/view.html:167
 msgid "Downloads"
-msgstr ""
+msgstr "Λήψεις"
 
 #: app/templates/packages/view.html:188 app/templates/users/profile.html:86
 msgid "Website"
-msgstr ""
+msgstr "Ιστοσελίδα"
 
 #: app/templates/packages/view.html:194
 msgid "Source"
-msgstr ""
+msgstr "Προέλευση"
 
 #: app/templates/packages/view.html:200 app/templates/users/profile.html:68
 msgid "Forums"
-msgstr ""
+msgstr "Φόρουμς"
 
 #: app/templates/packages/view.html:206
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Ιχνηλάτης Θεμάτων"
 
 #: app/templates/packages/view.html:224
 msgid ""
@@ -2421,11 +2424,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:271
 msgid "Awaiting review"
-msgstr ""
+msgstr "Εν αναμονή κριτικής"
 
 #: app/templates/packages/view.html:300 app/templates/threads/view.html:67
 msgid "Edit Review"
-msgstr ""
+msgstr "Επεξεργασία αναθεώρησης"
 
 #: app/templates/packages/view.html:305
 msgid "You can't review your own package."
@@ -2433,11 +2436,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:321
 msgid "Used By"
-msgstr ""
+msgstr "Χρησιμοποιηθηκε απο"
 
 #: app/templates/packages/view.html:327
 msgid "Content"
-msgstr ""
+msgstr "Περιεχόμενο"
 
 #: app/templates/packages/view.html:329 app/templates/packages/view.html:383
 msgid "View content for game"
@@ -2453,7 +2456,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:367
 msgid "Warning"
-msgstr ""
+msgstr "Προειδοποίηση"
 
 #: app/templates/packages/view.html:373
 msgid "Like this package? Help support its development by making a donation"
@@ -2465,11 +2468,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:388
 msgid "Dependencies"
-msgstr ""
+msgstr "Εξαρτήσεις"
 
 #: app/templates/packages/view.html:390
 msgid "Required"
-msgstr ""
+msgstr "Απαιτείται"
 
 #: app/templates/packages/view.html:408
 msgid "No required dependencies"
@@ -2477,7 +2480,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:414
 msgid "Optional"
-msgstr ""
+msgstr "Προαιρετικό"
 
 #: app/templates/packages/view.html:436
 msgid "Compatible Games"
@@ -2497,7 +2500,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:453
 msgid "Information"
-msgstr ""
+msgstr "Πληροφορίες"
 
 #: app/templates/packages/view.html:459
 msgid "Technical Name"
@@ -2510,11 +2513,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:476
 msgid "Unknown"
-msgstr ""
+msgstr "Άγνωστο"
 
 #: app/templates/packages/view.html:478
 msgid "Added"
-msgstr ""
+msgstr "Προστέθηκε"
 
 #: app/templates/packages/view.html:492
 msgid "Remove myself"
@@ -2522,11 +2525,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:497
 msgid "Provides"
-msgstr ""
+msgstr "Τι Παρέχει"
 
 #: app/templates/packages/view.html:519
 msgid "More"
-msgstr ""
+msgstr "Περισσότερα"
 
 #: app/templates/packages/view.html:548
 msgid "See audit log"
@@ -2612,7 +2615,7 @@ msgstr ""
 
 #: app/templates/threads/view.html:36
 msgid "Subscribe"
-msgstr ""
+msgstr "Εγγραφή"
 
 #: app/templates/threads/view.html:45
 msgid "Convert to Thread"
@@ -2620,11 +2623,11 @@ msgstr ""
 
 #: app/templates/threads/view.html:52
 msgid "Unlock"
-msgstr ""
+msgstr "Ξεκλείδωμα"
 
 #: app/templates/threads/view.html:57
 msgid "Lock"
-msgstr ""
+msgstr "Κλείδωμα"
 
 #: app/templates/threads/view.html:90
 msgid ""
@@ -2654,7 +2657,7 @@ msgstr ""
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
-msgstr ""
+msgstr "Εισαγωγή σε εξέλιξη"
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need approval."
@@ -2662,7 +2665,7 @@ msgstr ""
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
-msgstr ""
+msgstr "Ολα τελείωσαν!"
 
 #: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
 msgid "License Needed"
@@ -2699,7 +2702,7 @@ msgstr ""
 
 #: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
-msgstr ""
+msgstr "Ταξινόμηση κατά ημερομηνία"
 
 #: app/templates/todo/outdated.html:28
 msgid "Sort by score"
@@ -2728,7 +2731,7 @@ msgstr ""
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
-msgstr ""
+msgstr "Σειρά ταξινόμησης"
 
 #: app/templates/todo/topics.html:20
 msgid "Sort by views"
@@ -2847,12 +2850,12 @@ msgstr ""
 
 #: app/templates/users/account.html:18
 msgid "Change Password"
-msgstr ""
+msgstr "Αλλαγή Κωδικού"
 
 #: app/templates/users/account.html:22
 #: app/templates/users/change_set_password.html:20
 msgid "Set Password"
-msgstr ""
+msgstr "Ορισμός κωδικού πρόσβασης"
 
 #: app/templates/users/account.html:27 app/templates/users/modtools.html:37
 msgid "Has password"
@@ -2864,11 +2867,11 @@ msgstr ""
 
 #: app/templates/users/account.html:33
 msgid "Linked Accounts"
-msgstr ""
+msgstr "Συνδεδεμένοι Λογαριασμοί"
 
 #: app/templates/users/account.html:40 app/templates/users/account.html:52
 msgid "Connected"
-msgstr ""
+msgstr "Συνδέθηκε"
 
 #: app/templates/users/account.html:43
 #, python-format
@@ -2885,11 +2888,11 @@ msgstr ""
 
 #: app/templates/users/account.html:65
 msgid "None"
-msgstr ""
+msgstr "Κανένα"
 
 #: app/templates/users/account.html:73
 msgid "View All"
-msgstr ""
+msgstr "Προβολή Όλων"
 
 #: app/templates/users/account.html:77
 msgid "Recent Account Actions"
@@ -2917,7 +2920,7 @@ msgstr ""
 
 #: app/templates/users/change_set_password.html:14
 msgid "Skip"
-msgstr ""
+msgstr "Παράβλεψη"
 
 #: app/templates/users/change_set_password.html:28
 #: app/templates/users/register.html:24
@@ -2945,11 +2948,11 @@ msgstr ""
 #: app/templates/users/change_set_password.html:41
 #: app/templates/users/register.html:31
 msgid "Why?"
-msgstr ""
+msgstr "Γιατί;"
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
-msgstr ""
+msgstr "Δημιουργία λογαριασμού"
 
 #: app/templates/users/claim.html:10
 msgid "Do you have an account on the Minetest Forums?"
@@ -3002,7 +3005,7 @@ msgstr ""
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
-msgstr ""
+msgstr "Επιλογή 1"
 
 #: app/templates/users/claim_forums.html:27
 msgid "Use GitHub field in forum profile"
@@ -3034,7 +3037,7 @@ msgstr ""
 
 #: app/templates/users/claim_forums.html:55
 msgid "Option 2"
-msgstr ""
+msgstr "Επιλογή 2"
 
 #: app/templates/users/claim_forums.html:56
 msgid "Verification token"
@@ -3090,7 +3093,7 @@ msgstr ""
 
 #: app/templates/users/delete.html:36
 msgid "Deactivate"
-msgstr ""
+msgstr "Απενεργοποίηση"
 
 #: app/templates/users/delete.html:40
 msgid "Delete Anyway"
@@ -3098,7 +3101,7 @@ msgstr ""
 
 #: app/templates/users/email_sent.html:4
 msgid "Check Your Email"
-msgstr ""
+msgstr "Ελέγξτε το email σας"
 
 #: app/templates/users/email_sent.html:11
 msgid "We've sent an email to the address you specified."
@@ -3118,7 +3121,7 @@ msgstr ""
 
 #: app/templates/users/forgot_password.html:4
 msgid "Request Password Reset"
-msgstr ""
+msgstr "Αίτημα επαναφοράς κωδικού πρόσβασης"
 
 #: app/templates/users/forums_no_such_user.html:14
 #, python-format
@@ -3131,7 +3134,7 @@ msgstr ""
 
 #: app/templates/users/list.html:4 app/templates/users/list.html:8
 msgid "Users"
-msgstr ""
+msgstr "Χρήστες"
 
 #: app/templates/users/list.html:34
 #, python-format
@@ -3140,19 +3143,19 @@ msgstr ""
 
 #: app/templates/users/login.html:20
 msgid "Forgot my password"
-msgstr ""
+msgstr "Ξέχασα τον κωδικό μου"
 
 #: app/templates/users/login.html:30 app/templates/users/profile.html:77
 msgid "GitHub"
-msgstr ""
+msgstr "Github"
 
 #: app/templates/users/modtools.html:11
 msgid "Edit Account"
-msgstr ""
+msgstr "Επεξεργασία λογαριασμού"
 
 #: app/templates/users/modtools.html:43 app/templates/users/modtools.html:51
 msgid "Ban"
-msgstr ""
+msgstr "Αποκλεισμός"
 
 #: app/templates/users/modtools.html:55
 msgid "Change Email and Send Password Reset"
@@ -3161,11 +3164,11 @@ msgstr ""
 #: app/templates/users/modtools.html:59
 #: app/templates/users/settings_email.html:14
 msgid "Email Address"
-msgstr ""
+msgstr "Διεύθυνση Email"
 
 #: app/templates/users/profile.html:11
 msgid "Profile picture"
-msgstr ""
+msgstr "Εικόνα προφίλ"
 
 #: app/templates/users/profile.html:22
 msgid "To Do List"
@@ -3173,11 +3176,11 @@ msgstr ""
 
 #: app/templates/users/profile.html:41
 msgid "Send Email"
-msgstr ""
+msgstr "Αποστολή Email"
 
 #: app/templates/users/profile.html:95
 msgid "Donate"
-msgstr ""
+msgstr "Δωρεά"
 
 #: app/templates/users/profile.html:104
 msgid "packages"
@@ -3185,15 +3188,15 @@ msgstr ""
 
 #: app/templates/users/profile.html:113
 msgid "reviews"
-msgstr ""
+msgstr "αξιολογήσεις"
 
 #: app/templates/users/profile.html:121
 msgid "comments"
-msgstr ""
+msgstr "σχόλια"
 
 #: app/templates/users/profile.html:133
 msgid "Claim"
-msgstr ""
+msgstr "Εμπλουτισμός"
 
 #: app/templates/users/profile.html:135
 msgid "Is this you? Claim your account now!"
@@ -3206,7 +3209,7 @@ msgstr ""
 
 #: app/templates/users/profile.html:182
 msgid "Create package"
-msgstr ""
+msgstr "Δημιουργία πακέτου"
 
 #: app/templates/users/profile.html:188
 msgid "View list of tags"
@@ -3227,7 +3230,7 @@ msgstr ""
 
 #: app/templates/users/profile_edit.html:10
 msgid "Profile Picture"
-msgstr ""
+msgstr "Εικόνα προφίλ"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
@@ -3235,7 +3238,7 @@ msgstr ""
 
 #: app/templates/users/profile_edit.html:45
 msgid "Profile Information"
-msgstr ""
+msgstr "Πληροφορίες προφίλ"
 
 #: app/templates/users/profile_edit.html:52
 msgid "Pretending to be another user is grounds for a permanent ban"
@@ -3259,11 +3262,11 @@ msgstr ""
 
 #: app/templates/users/register.html:38
 msgid "Please prove that you are human"
-msgstr ""
+msgstr "Παρακαλώ αποδείξτε ότι είστε άνθρωπος"
 
 #: app/templates/users/register.html:41
 msgid "I agree to the "
-msgstr ""
+msgstr "Συμφωνώ με "
 
 #: app/templates/users/settings_email.html:4
 #, python-format
@@ -3282,7 +3285,7 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:29
 msgid "Notification Settings"
-msgstr ""
+msgstr "Ρυθμίσεις ειδοποιήσεων"
 
 #: app/templates/users/settings_email.html:33
 msgid "Email notifications are currently turned off. Click 'save' to enable."
@@ -3296,11 +3299,14 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:43
 msgid "Event"
-msgstr ""
+msgstr "Εκδήλωση"
 
 #: app/templates/users/settings_email.html:45
 msgid "Immediately"
 msgstr ""
+"Αυτό το εργαλείο θα διαγράψει την προσωρινή μνήμη προσωρινής εικόνας "
+"Instagram. Οι εικόνες που εμφανίζονται στις σελίδες προϊόντων θα ανανεωθούν "
+"αμέσως."
 
 #: app/templates/users/settings_email.html:46
 msgid "In digest"
