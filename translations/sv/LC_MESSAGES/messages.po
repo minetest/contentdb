@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-03-13 15:56+0000\n"
+"PO-Revision-Date: 2022-03-16 17:56+0000\n"
 "Last-Translator: ROllerozxa <temporaryemail4meh+github@gmail.com>\n"
 "Language-Team: Swedish <https://hosted.weblate.org/projects/minetest/"
 "contentdb/sv/>\n"
@@ -2055,6 +2055,8 @@ msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
+"Ställ in den minsta och högsta Minetestversionen som stöds.\n"
+"\t\t\tDetta utsläpp kommer gömmas för klienter utanför spannet. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
@@ -2159,6 +2161,9 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
+".conf-filen för ditt paket kan <a href='/help/package_config/'>ställas in "
+"automatiskt</a>.\n"
+"\t\t\tvilket kommer överskrida ditt val."
 
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
@@ -2197,61 +2202,63 @@ msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
+"ContentDB kommer kolla din Git-repository varje dag, men du kan använda "
+"webhooks eller API:t för snabbare uppdateringar."
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
 msgid "This can be changed later."
-msgstr ""
+msgstr "Detta kan ändras senare."
 
 #: app/templates/packages/release_wizard.html:31
 msgid "Automatically (Recommended)"
-msgstr ""
+msgstr "Automatiskt (Rekommenderas)"
 
 #: app/templates/packages/release_wizard.html:34
 msgid "Rolling Release"
-msgstr ""
+msgstr "Rullande utsläpp"
 
 #: app/templates/packages/release_wizard.html:37
 msgid "On Git Tag"
-msgstr ""
+msgstr "På Git-tagg"
 
 #: app/templates/packages/release_wizard.html:46
 msgid "Manually"
-msgstr ""
+msgstr "Manuellt"
 
 #: app/templates/packages/release_wizard.html:49
 msgid "With reminders"
-msgstr ""
+msgstr "Med påminnelse"
 
 #: app/templates/packages/release_wizard.html:52
 msgid "No reminders"
-msgstr ""
+msgstr "Ingen påminnelse"
 
 #: app/templates/packages/release_wizard.html:60
 msgid "Unfortunately, you will otherwise need to create a release manually."
-msgstr ""
+msgstr "Annars behöver du tyvärr skapa ett utsläpp manuellt."
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
-msgstr ""
+msgstr "Skapa utsläpp manuellt"
 
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
-msgstr ""
+msgstr "Utsläpp - %(title)s"
 
 #: app/templates/packages/releases_list.html:18
 msgid "Set up automatic releases"
-msgstr ""
+msgstr "Ställ in automatiska utsläpp"
 
 #: app/templates/packages/releases_list.html:24
 msgid "Bulk update"
-msgstr ""
+msgstr "Massupdatera"
 
 #: app/templates/packages/remove.html:9
 #, python-format
 msgid "Remove %(title)s"
-msgstr ""
+msgstr "Ta bort %(title)s"
 
 #: app/templates/packages/remove.html:11
 msgid ""
@@ -2262,12 +2269,18 @@ msgid ""
 "future.\n"
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
+"För att undvika dataförlust kan du inte permanent ta bort paket.\n"
+"\t\t\tDu kan ta bort de från ContentDB, vilket gör att de inte syns för\n"
+"\t\t\tandra användare och kan tas bort permanent senare.\n"
+"\t\t\tAdministratörer kan återställa borttagna paket, efter behov."
 
 #: app/templates/packages/remove.html:19
 msgid ""
 "Unapproving a package will put it back into Draft, where\n"
 "\t\t\t\tit can be submitted for approval again."
 msgstr ""
+"Avgodkännande av ett paket sätter det tillbaka till Draft, där\n"
+"\t\t\t\tden kan skickas för godkännande igen."
 
 #: app/templates/packages/remove.html:27
 msgid "Reason"
@@ -2276,6 +2289,7 @@ msgstr "Anledning"
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr ""
+"Anledning för avgodkännande / borttagande, detta visas i auditeringsloggen"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
@@ -2306,6 +2320,8 @@ msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
 msgstr ""
+"Detta kommer göra om recensionen till en tråd, vilket behåller kommentarer "
+"men tar bort effekten på paketets betyg."
 
 #: app/templates/packages/review_votes.html:4
 #: app/templates/packages/view.html:315
@@ -2391,38 +2407,39 @@ msgstr "Recensionlänk"
 
 #: app/templates/packages/share.html:18
 msgid "Badges"
-msgstr ""
+msgstr "Emblem"
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
-msgstr ""
+msgstr "Moddnamnunikhet"
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
-msgstr ""
+msgstr "Paket som delar försedda moddar"
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
-msgstr ""
+msgstr "Detta paket innehåller moddnamn som finns i följande paket:"
 
 #: app/templates/packages/similar.html:32
 msgid "Similar Forum Topics"
-msgstr ""
+msgstr "Liknande forumtrådar"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
-msgstr ""
+msgstr "Konfigurera Git-uppdateringar"
 
 #: app/templates/packages/update_config.html:16
 msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
 msgstr ""
+"ContentDB kommer kolla din Git-repository varje dag, om ditt paket godkänns."
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
-msgstr ""
+msgstr "Överväg att använda webhooks eller API:et för snabbare uppdateringar."
 
 #: app/templates/packages/update_config.html:18
 msgid ""
@@ -2432,76 +2449,78 @@ msgstr ""
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
-msgstr ""
+msgstr "Triggern är händelsen som triggar handlingen."
 
 #: app/templates/packages/update_config.html:41
 msgid "The action to perform when the trigger happens."
-msgstr ""
+msgstr "Vad som ska utföras när triggern händer."
 
 #: app/templates/packages/update_config.html:42
 msgid ""
 "Once a package is marked as outdated, you won't receive any more "
 "notifications until it is marked up to date."
 msgstr ""
+"När ett paket har markerats som föråldrad kommer du inte få några fler "
+"notiser förrens den är markerad som aktuell."
 
 #: app/templates/packages/view.html:37
 msgid "Download"
-msgstr ""
+msgstr "Ladda ner"
 
 #: app/templates/packages/view.html:43
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
-msgstr ""
+msgstr "Minetest %(min)s-%(max)s"
 
 #: app/templates/packages/view.html:45
 #, python-format
 msgid "For Minetest %(min)s and above"
-msgstr ""
+msgstr "För Minetest %(min)s och över"
 
 #: app/templates/packages/view.html:47
 #, python-format
 msgid "Minetest %(max)s and below"
-msgstr ""
+msgstr "För Minetest %(max)s och under"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
-msgstr ""
+msgstr "Hur installerar jag detta?"
 
 #: app/templates/packages/view.html:73
 msgid "No downloads available"
-msgstr ""
+msgstr "Inga nerladdningar tillgängliga"
 
 #: app/templates/packages/view.html:80
 msgid "Non-free code and media"
-msgstr ""
+msgstr "Icke-fri kod och media"
 
 #: app/templates/packages/view.html:82
 msgid "Non-free code"
-msgstr ""
+msgstr "Icke-fri kod"
 
 #: app/templates/packages/view.html:84
 msgid "Non-free media"
-msgstr ""
+msgstr "Icke-fri media"
 
 #: app/templates/packages/view.html:146
 msgid "Work in Progress"
-msgstr ""
+msgstr "Under arbete"
 
 #: app/templates/packages/view.html:167
 msgid "Downloads"
-msgstr ""
+msgstr "Nerladdningar"
 
 #: app/templates/packages/view.html:188 app/templates/users/profile.html:86
 msgid "Website"
-msgstr ""
+msgstr "Hemsida"
 
 #: app/templates/packages/view.html:194
 msgid "Source"
-msgstr ""
+msgstr "Källkod"
 
 #: app/templates/packages/view.html:200 app/templates/users/profile.html:68
 msgid "Forums"
-msgstr ""
+msgstr "Forum"
 
 #: app/templates/packages/view.html:206
 msgid "Issue Tracker"
