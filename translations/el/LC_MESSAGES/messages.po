@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-03-11 03:36+0000\n"
-"Last-Translator: THANOS SIOURDAKIS <siourdakisthanos@gmail.com>\n"
+"PO-Revision-Date: 2022-03-20 15:57+0000\n"
+"Last-Translator: DeadManWalking <deadmanwalkingto@gmail.com>\n"
 "Language-Team: Greek <https://hosted.weblate.org/projects/minetest/contentdb/"
 "el/>\n"
 "Language: el\n"
@@ -22,12 +22,12 @@ msgstr ""
 
 #: app/__init__.py:103
 msgid "You have been banned."
-msgstr ""
+msgstr "Έχετε αποκλειστεί."
 
 #: app/template_filters.py:52
 #, python-format
 msgid "%(delta)s ago"
-msgstr ""
+msgstr "Πριν %(delta)s"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
@@ -55,23 +55,23 @@ msgstr "Αποθήκευση"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr ""
+msgstr "Η εξουσιοδότηση απέτυχε [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked GitHub to account"
-msgstr ""
+msgstr "Συνδέθηκε το GitHub με τον λογαριασμό"
 
 #: app/blueprints/github/__init__.py:65
 msgid "GitHub account is already associated with another user"
-msgstr ""
+msgstr "Ο λογαριασμός GitHub έχει ήδη συσχετιστεί με άλλον χρήστη"
 
 #: app/blueprints/github/__init__.py:71
 msgid "Unable to find an account for that GitHub user"
-msgstr ""
+msgstr "Δεν είναι δυνατή η εύρεση λογαριασμού για αυτόν τον χρήστη GitHub"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr ""
+msgstr "Η εξουσιοδότηση απέτυχε [err=gh-login-failed]"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -94,7 +94,7 @@ msgstr "Στιγμιότυπα"
 #: app/templates/packages/edit_maintainers.html:8
 #: app/templates/packages/view.html:480
 msgid "Maintainers"
-msgstr ""
+msgstr "Συντηρητές"
 
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
 #: app/templates/packages/audit.html:4
@@ -103,7 +103,7 @@ msgstr "Αρχείο ελέγχου"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
 msgid "Share and Badges"
-msgstr ""
+msgstr "Κοινή χρήση και Σήματα"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:110
 msgid "Remove"
@@ -111,11 +111,13 @@ msgstr "Αφαίρεση"
 
 #: app/blueprints/packages/packages.py:159
 msgid "Error: Another package already uses this forum topic!"
-msgstr ""
+msgstr "Σφάλμα: Ένα άλλο πακέτο χρησιμοποιεί ήδη αυτό το θέμα του φόρουμ!"
 
 #: app/blueprints/packages/packages.py:165
 msgid "Error: Forum topic author doesn't match package author."
 msgstr ""
+"Σφάλμα: Ο συγγραφέας του θέματος του φόρουμ δεν ταιριάζει με τον συγγραφέα "
+"του πακέτου."
 
 #: app/blueprints/packages/packages.py:168
 msgid ""
