@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-02-28 14:59+0000\n"
-"Last-Translator: MinecraftTAO <guangtao13631219661@outlook.com>\n"
+"PO-Revision-Date: 2022-03-24 07:55+0000\n"
+"Last-Translator: Gao Tiesuan <yepifoas@666email.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "minetest/contentdb/zh_Hans/>\n"
 "Language: zh_Hans\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.11.1-dev\n"
+"X-Generator: Weblate 4.12-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:103
@@ -144,7 +144,7 @@ msgstr "名称（技术性）"
 #: app/blueprints/packages/packages.py:549
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr "只允许小写字母（a-z），数字（0-9），下划线"
+msgstr "只允许小写字母（a-z），数字（0-9），下划线（_）"
 
 #: app/blueprints/packages/packages.py:232
 msgid "Short Description (Plaintext)"
@@ -165,11 +165,11 @@ msgstr "内容警告"
 
 #: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:461
 msgid "License"
-msgstr "软件许可证"
+msgstr "许可证"
 
 #: app/blueprints/packages/packages.py:239
 msgid "Media License"
-msgstr "媒体内容软件许可证"
+msgstr "媒体内容许可证"
 
 #: app/blueprints/packages/packages.py:241
 msgid "Long Description (Markdown)"
@@ -185,7 +185,7 @@ msgstr "网站URL"
 
 #: app/blueprints/packages/packages.py:245
 msgid "Issue Tracker URL"
-msgstr "工单追踪器URL"
+msgstr "问题追踪器URL"
 
 #: app/blueprints/packages/packages.py:246
 msgid "Forum Topic ID"
@@ -347,7 +347,7 @@ msgstr "动作"
 
 #: app/blueprints/packages/releases.py:245
 msgid "Send notification and mark as outdated"
-msgstr "发送须知并标记为过期包"
+msgstr "发送通知并标记为过期包"
 
 #: app/blueprints/packages/releases.py:245
 #: app/templates/macros/package_approval.html:22
@@ -396,15 +396,15 @@ msgstr "否"
 
 #: app/blueprints/packages/reviews.py:54
 msgid "You can't review your own package!"
-msgstr "你不能自己评价自己的软件包！"
+msgstr "你不能自己评测自己的软件包！"
 
 #: app/blueprints/packages/reviews.py:170
 msgid "You can't vote on the reviews on your own package!"
-msgstr "你不能自己为自己软件包的评论投票！"
+msgstr "你不能自己为自己软件包的评测投票！"
 
 #: app/blueprints/packages/reviews.py:178
 msgid "You can't vote on your own reviews!"
-msgstr "你不能自己为自己的评价投票！"
+msgstr "你不能自己为自己的评测投票！"
 
 #: app/blueprints/packages/screenshots.py:33
 #: app/blueprints/packages/screenshots.py:39
@@ -461,7 +461,7 @@ msgstr "你不能在此贴下评论"
 
 #: app/blueprints/threads/__init__.py:229
 msgid "Please wait before commenting again"
-msgstr "请在再次评论前等待"
+msgstr "请稍后再评论"
 
 #: app/blueprints/threads/__init__.py:266
 msgid "Comment needs to be between 3 and 2000 characters."
@@ -486,7 +486,7 @@ msgstr "审核贴已存在！"
 
 #: app/blueprints/threads/__init__.py:310
 msgid "Please wait before opening another thread"
-msgstr "开启另外一个贴子前请等待"
+msgstr "请稍后开启另外一个贴子"
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
@@ -632,11 +632,11 @@ msgstr "旧密码不正确"
 
 #: app/blueprints/users/account.py:322
 msgid "Unknown verification token!"
-msgstr "未知验证口令！"
+msgstr "未知验证令牌！"
 
 #: app/blueprints/users/account.py:328
 msgid "Token has expired"
-msgstr "口令已过期"
+msgstr "令牌已过期"
 
 #: app/blueprints/users/account.py:342
 msgid "Another user is already using that email"
@@ -678,7 +678,7 @@ msgstr "用户名只能包含 A-Za-z0-9._。请考虑联系管理员"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
-msgstr "用户已经被认领"
+msgstr "用户已被认领"
 
 #: app/blueprints/users/claim.py:49
 msgid "Unable to get GitHub username for user"
@@ -711,20 +711,20 @@ msgstr "未知的认领类型"
 
 #: app/blueprints/users/profile.py:112
 msgid "Top reviewer"
-msgstr "顶级评论者"
+msgstr "顶级评测者"
 
 #: app/blueprints/users/profile.py:113
 #, python-format
 msgid "%(display_name)s has written the most helpful reviews on ContentDB."
-msgstr "%(display_name)s在ContentDB上写了最有帮助的评论。"
+msgstr "%(display_name)s在ContentDB上写了最有帮助的评测。"
 
 #: app/blueprints/users/profile.py:118
 msgid "2nd most helpful reviewer"
-msgstr "第二位最有帮助的评论者"
+msgstr "第二位最有帮助的评测者"
 
 #: app/blueprints/users/profile.py:120
 msgid "3rd most helpful reviewer"
-msgstr "第三位最有帮助的评论者"
+msgstr "第三位最有帮助的评测者"
 
 #: app/blueprints/users/profile.py:121
 #, python-format
@@ -734,16 +734,16 @@ msgstr "这使%(display_name)s位于顶部%(perc)s%%"
 #: app/blueprints/users/profile.py:125
 #, python-format
 msgid "Top %(perc)s%% reviewer"
-msgstr "最高 %(perc)s%% 评论者"
+msgstr "最高 %(perc)s%% 评测者"
 
 #: app/blueprints/users/profile.py:126
 #, python-format
 msgid "Only %(place)d users have written more helpful reviews."
-msgstr "只有%(place)d个用户写了更多有帮助的评论。"
+msgstr "只有%(place)d个用户写了更多有帮助的评测。"
 
 #: app/blueprints/users/profile.py:131
 msgid "Consider writing more helpful reviews to get a medal."
-msgstr "请考虑写更多有帮助的评论以获得奖章。"
+msgstr "请考虑写更多有帮助的评测以获得奖章。"
 
 #: app/blueprints/users/profile.py:133
 #, python-format
@@ -772,23 +772,23 @@ msgstr "您的软件包总共有 %(downloads)d 次下载。"
 
 #: app/blueprints/users/profile.py:188
 msgid "First medal is at 50k."
-msgstr "第一张奖章为50k。"
+msgstr "第一张奖章为5万下载量。"
 
 #: app/blueprints/users/profile.py:193
 msgid ">300k downloads"
-msgstr ">30万下载"
+msgstr ">30万下载量"
 
 #: app/blueprints/users/profile.py:196
 msgid ">100k downloads"
-msgstr ">10万下载"
+msgstr ">10万下载量"
 
 #: app/blueprints/users/profile.py:199
 msgid ">75k downloads"
-msgstr ">7万5千下载"
+msgstr ">7.5万下载量"
 
 #: app/blueprints/users/profile.py:202
 msgid ">50k downloads"
-msgstr ">5万下载"
+msgstr ">5万下载量"
 
 #: app/blueprints/users/profile.py:203
 #, python-format
@@ -823,9 +823,8 @@ msgid "Donation URL"
 msgstr "捐款网址"
 
 #: app/blueprints/users/settings.py:66 app/blueprints/users/settings.py:72
-#, fuzzy
 msgid "A user already has that name"
-msgstr "用户已经有该名称"
+msgstr "有用户已经占有该名称"
 
 #: app/blueprints/users/settings.py:224
 msgid "Users with moderator rank or above cannot be deleted"
@@ -868,21 +867,21 @@ msgstr "您没有权限修改这个软件包的名字"
 #: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr "无法将保护的标签%(title)s加到软件包"
+msgstr "无法将保护标签%(title)s加到软件包"
 
 #: app/logic/releases.py:32
 msgid "You do not have permission to make releases"
-msgstr "您没有权限发布新版本"
+msgstr "您没有权限创建新发行版"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
-msgstr "您在过去 5 分钟内为软件包创建了太多版本，请稍候再重试"
+msgstr "您在过去 5 分钟内为软件包创建了太多发行版，请稍候再重试"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr "无效的提交哈希值; 它必须是40个字符长的十六进制字符串"
+msgstr "无效的提交哈希值; 必须是40个字符长的十六进制字符串"
 
 #: app/logic/screenshots.py:16
 msgid "Too many requests, please wait before trying again"
@@ -906,7 +905,7 @@ msgstr "请上传%(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr "上传的图片上不是图片"
+msgstr "上传的图片不是图片"
 
 #: app/models/packages.py:65
 msgid "Mod"
@@ -914,7 +913,7 @@ msgstr "Mod"
 
 #: app/models/packages.py:67
 msgid "Game"
-msgstr "游戏"
+msgstr "子游戏"
 
 #: app/models/packages.py:69
 msgid "Texture Pack"
@@ -923,12 +922,12 @@ msgstr "材质包"
 #: app/models/packages.py:74 app/templates/base.html:27
 #: app/templates/metapackages/view.html:17
 msgid "Mods"
-msgstr "模组"
+msgstr "Mod"
 
 #: app/models/packages.py:76 app/templates/base.html:30
 #: app/templates/metapackages/view.html:14
 msgid "Games"
-msgstr "游戏"
+msgstr "子游戏"
 
 #: app/models/packages.py:78 app/templates/base.html:33
 msgid "Texture Packs"
@@ -955,13 +954,13 @@ msgstr "删除"
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
-msgstr "因为您是ContentDB的一名用户，所以您收到了这封邮件。"
+msgstr "您收到这封邮件是因为您是ContentDB的一名用户。"
 
 #: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
-msgstr "您收到这封电子邮件是因为有人（希望是您）输入了您的电子邮件地址为用户的电子邮件。"
+msgstr "您收到这封电子邮件是因为有人（希望是您）输入了您的电子邮件地址。"
 
 #: app/tasks/emails.py:153
 #, python-format
@@ -1010,9 +1009,8 @@ msgstr "帮助"
 
 #: app/templates/base.html:42 app/templates/packages/view.html:173
 #: app/templates/packages/view.html:529 app/templates/threads/list.html:4
-#, fuzzy
 msgid "Threads"
-msgstr "帖子"
+msgstr "贴子"
 
 #: app/templates/base.html:48
 #, python-format
@@ -1074,7 +1072,7 @@ msgstr "设置"
 
 #: app/templates/base.html:161
 msgid "Sign out"
-msgstr "退出"
+msgstr "登出"
 
 #: app/templates/base.html:190
 msgid "Help translate ContentDB"
@@ -1112,12 +1110,12 @@ msgstr "欢迎"
 #: app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:26
 #: app/templates/packages/similar.html:22
-#, fuzzy, python-format
+#, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(title)s (作者:%(author)s)"
 
 #: app/templates/index.html:43
-#, fuzzy, python-format
+#, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> (作者:%(author)s)"
 
@@ -1125,7 +1123,7 @@ msgstr "<strong>%(title)s</strong> (作者:%(author)s)"
 #: app/templates/packages/view.html:177 app/templates/packages/view.html:293
 #: app/templates/users/profile.html:206
 msgid "Reviews"
-msgstr "评价"
+msgstr "评测"
 
 #: app/templates/index.html:86
 msgid "Previous"
@@ -1133,7 +1131,7 @@ msgstr "返回"
 
 #: app/templates/index.html:90 app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr "下个"
+msgstr "下一个"
 
 #: app/templates/index.html:96
 msgid "Featured"
@@ -1159,11 +1157,11 @@ msgstr "最近更新的"
 
 #: app/templates/index.html:117
 msgid "Top Games"
-msgstr "顶级游戏"
+msgstr "顶级子游戏"
 
 #: app/templates/index.html:124 app/templates/packages/game_hub.html:47
 msgid "Top Mods"
-msgstr "顶级模组"
+msgstr "顶级Mod"
 
 #: app/templates/index.html:131
 msgid "Top Texture Packs"
@@ -1175,29 +1173,29 @@ msgstr "标签搜索"
 
 #: app/templates/index.html:153 app/templates/packages/game_hub.html:54
 msgid "Highest Reviewed"
-msgstr "最高评论"
+msgstr "评测最多"
 
 #: app/templates/index.html:160
 msgid "Recent Positive Reviews"
-msgstr "最近积极的评价"
+msgstr "最近好评"
 
 #: app/templates/index.html:167
-#, fuzzy, python-format
+#, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
-msgstr "CDB拥有%(count)d软件包，总共有%(downloads)d下载。"
+msgstr "CDB拥有%(count)d软件包，总共有%(downloads)d次下载。"
 
 #: app/templates/admin/audit_view.html:16
 #, python-format
 msgid "Caused by %(author)s."
-msgstr "%(author)s造成的。"
+msgstr "由%(author)s引发。"
 
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
-msgstr "删除了用户造成的。"
+msgstr "由已删除用户引发。"
 
 #: app/templates/admin/list.html:62
 msgid "Deletion is permanent."
-msgstr "删除是永久性的。"
+msgstr "删除是永久的。"
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
@@ -1205,7 +1203,7 @@ msgstr "批量发送电子邮件"
 
 #: app/templates/admin/send_bulk_notification.html:4
 msgid "Send bulk notification"
-msgstr "大量发送消息"
+msgstr "批量发送通知"
 
 #: app/templates/admin/send_email.html:4
 #, python-format
@@ -1214,11 +1212,11 @@ msgstr "给%(username)s发送电子邮件"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
-msgstr "新的软件许可证"
+msgstr "新的许可证"
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr "软件许可证"
+msgstr "许可证"
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
@@ -1267,14 +1265,13 @@ msgstr "创建API令牌"
 
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
-msgstr "允许API令牌代表您行事。"
+msgstr "API令牌允许脚本代表您行事。"
 
 #: app/templates/api/create_edit_token.html:25
-#, fuzzy
 msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
-msgstr "请注意与您共享令牌的对象，您对自己的帐户行为负责。"
+msgstr "请注意您共享令牌的对象，您对自己的帐户行为负责。"
 
 #: app/templates/api/create_edit_token.html:30
 msgid "Access Token"
@@ -1284,19 +1281,17 @@ msgstr "访问令牌"
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
-msgstr "出于安全原因，使用权的令牌只会显示一次。如果令牌丢失，请重置令牌。"
+msgstr "出于安全原因，访问令牌只会显示一次。如果令牌丢失，请重置令牌。"
 
 #: app/templates/api/create_edit_token.html:40
 msgid "Reset"
 msgstr "重置"
 
 #: app/templates/api/create_edit_token.html:49
-#, fuzzy
 msgid "Human-readable name to tell tokens apart."
-msgstr "人类可读的名称区分令牌。"
+msgstr "用于区分令牌人类可读的名称。"
 
 #: app/templates/api/create_edit_token.html:50
-#, fuzzy
 msgid "Recommended: Only allows token to interact with a particular package."
 msgstr "推荐：只允许令牌与特定软件包交互。"
 
@@ -1313,23 +1308,22 @@ msgid "Create"
 msgstr "创建"
 
 #: app/templates/api/list_tokens.html:9
-#, fuzzy
 msgid "API Documentation"
 msgstr "API文档"
 
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
-msgstr "没有创建令牌"
+msgstr "没有已创建的令牌"
 
 #: app/templates/emails/notification.html:10
 #, python-format
 msgid "From %(username)s and on package %(package)s."
-msgstr ""
+msgstr "来自%(username)s关于软件包%(package)s。"
 
 #: app/templates/emails/notification.html:13
 #, python-format
 msgid "From %(username)s."
-msgstr ""
+msgstr "来自%(username)s。"
 
 #: app/templates/emails/notification.html:19
 msgid "View Notification"
@@ -1337,7 +1331,6 @@ msgstr "查看消息"
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:46
-#, fuzzy
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
@@ -1351,54 +1344,48 @@ msgstr "管理您的设置"
 #: app/templates/emails/notification.html:37
 #, python-format
 msgid "This is a '%(type)s' notification."
-msgstr "这是一个 '%(type)s' 的通知。"
+msgstr "这是一个 '%(type)s' 通知。"
 
 #: app/templates/emails/notification_digest.html:14
 #: app/templates/emails/notification_digest.html:31
 #, python-format
 msgid "from %(username)s."
-msgstr ""
+msgstr "来自%(username)s。"
 
 #: app/templates/emails/notification_digest.html:24
-#, fuzzy
 msgid "Other Notifications"
-msgstr "其它消息"
+msgstr "其它通知"
 
 #: app/templates/emails/notification_digest.html:39
-#, fuzzy
 msgid "View Notifications"
-msgstr "查看消息"
+msgstr "查看通知"
 
 #: app/templates/emails/unable_to_find_account.html:2
-#, fuzzy
 msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr "找不到与此电子邮件关联的帐户，无法执行密码重置。"
 
 #: app/templates/emails/unable_to_find_account.html:5
-#, fuzzy
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
-msgstr "这可能是因为您在帐户中使用了另一封电子邮件，或者因为您从未确认您的电子邮件。"
+msgstr "这可能是因为您在帐户中使用了另一个电子邮件地址，或者因为您从未确认您的电子邮"
+"件。"
 
 #: app/templates/emails/unable_to_find_account.html:8
-#, fuzzy
 msgid "You can use GitHub to log in if it is associated with your account."
-msgstr "如果与您的帐户相关联，您可以使用 GitHub 登录。"
+msgstr "如果与您的帐户绑定，您可以使用 GitHub 登录。"
 
 #: app/templates/emails/unable_to_find_account.html:9
-#, fuzzy
 msgid "Otherwise, you may need to contact rubenwardy for help."
 msgstr "否则，您可能需要联系 rubenwardy 寻求帮助。"
 
 #: app/templates/emails/unable_to_find_account.html:12
-#, fuzzy
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
-msgstr "如果您没有要求收到这封电子邮件，您可以放心地忽略它。"
+msgstr "如果您没有请求这封电子邮件，您可以放心地忽略它。"
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
@@ -1406,41 +1393,35 @@ msgid "Hello!"
 msgstr "你好！"
 
 #: app/templates/emails/verify.html:7
-#, fuzzy
 msgid ""
 "This email has been sent to you because someone (hopefully you) has "
 "entered your email address as a user's email."
-msgstr "这封电子邮件已发送给您是因为有人（希望是您）输入了您的电子邮件地址作为用户的电子邮件。"
+msgstr "您收到这封电子邮件是因为有人（希望是您）输入了您的电子邮件地址。"
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
 msgstr "如果不是您，请删除电子邮件。"
 
 #: app/templates/emails/verify.html:15
-#, fuzzy
 msgid "If this was you, then please click this link to confirm the address:"
 msgstr "如果这是您，请单击此链接以确认这地址："
 
 #: app/templates/emails/verify.html:19
-#, fuzzy
 msgid "Confirm Email Address"
 msgstr "确认电子邮箱地址"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
-#, fuzzy
 msgid "Or paste this into your browser:"
 msgstr "或将其粘贴到浏览器中："
 
 #: app/templates/emails/verify_unsubscribe.html:9
-#, fuzzy
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr "我们很遗憾看到你的离开。在您的电子邮件被列入黑名单之前，您只需要再做一件事。"
 
 #: app/templates/emails/verify_unsubscribe.html:23
-#, fuzzy
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
@@ -1456,115 +1437,98 @@ msgid "Deleted User"
 msgstr "已被删除的用户"
 
 #: app/templates/macros/audit_log.html:64
-#, fuzzy
 msgid "No audit log entries."
 msgstr "没有审核日志条目。"
 
 #: app/templates/macros/forms.html:107
-#, fuzzy
 msgid "Start typing to see suggestions"
-msgstr "开始输入查看建议"
+msgstr "开始输入来查看建议"
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
-#, fuzzy
 msgid "State"
 msgstr "状态"
 
 #: app/templates/macros/package_approval.html:26
-#, fuzzy
 msgid "Set up releases"
 msgstr "设置发行版"
 
 #: app/templates/macros/package_approval.html:31
-#, fuzzy
 msgid "You need to create a release before this package can be approved."
-msgstr "您需要先创建一个发行版才能批准软件包。"
+msgstr "您需要先创建一个发行版才能将软件包交付审核。"
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
 msgstr "发行版仍在导入，或遇到错误。"
 
 #: app/templates/macros/package_approval.html:36
-#, fuzzy
 msgid "A release is required before this package can be approved."
-msgstr "在批准此软件包之前需要发布版本。"
+msgstr "需要发行版才能将软件包交付审核。"
 
 #: app/templates/macros/package_approval.html:41
-#, fuzzy
 msgid "You need to add at least one screenshot."
 msgstr "您需要添加至少一个截图。"
 
 #: app/templates/macros/package_approval.html:45
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
 "%(deps)s"
-msgstr "需要先将以下硬依赖性添加到 ContentDB：%(deps)s"
+msgstr "需要先将以下硬依赖项添加到 ContentDB：%(deps)s"
 
 #: app/templates/macros/package_approval.html:49
 msgid "Please wait for the license to be added to CDB."
-msgstr "请等软件许可证添加到 CDB。"
+msgstr "请等待许可证添加到 CDB。"
 
 #: app/templates/macros/package_approval.html:56
-#, fuzzy
 msgid "You should add at least one screenshot, but this isn't required."
-msgstr "您应该添加至少一个截图，但这没有要求的。"
+msgstr "您最好添加至少一个截图，但这并不必要。"
 
 #: app/templates/macros/package_approval.html:62
-#, fuzzy
 msgid "Please wait for the release to be approved."
-msgstr "请等发行版获得批准。"
+msgstr "请等发行版审核。"
 
 #: app/templates/macros/package_approval.html:64
-#, fuzzy
 msgid "You can now approve this package if you're ready."
-msgstr "如果你准备好了，可以批准这软件包。"
+msgstr "您随时可以批准此软件包。"
 
 #: app/templates/macros/package_approval.html:66
 msgid "Please wait for the package to be approved."
-msgstr "请等软件包被批准。"
+msgstr "请等待软件包审核。"
 
 #: app/templates/macros/package_approval.html:70
-#, fuzzy
 msgid "You can now submit this package for approval if you're ready."
-msgstr "如果你准备好了，可以提交此软件包以供批准。"
+msgstr "您随时可以可以提交此软件包以供批准。"
 
 #: app/templates/macros/package_approval.html:72
-#, fuzzy
 msgid "This package can be submitted for approval when ready."
 msgstr "准备好时可以提交此软件包以供批准。"
 
 #: app/templates/macros/package_approval.html:102
-#, fuzzy
 msgid "Please make sure that this package has the right to the names it uses."
-msgstr "请确保此软件包对其使用的名称具有权利。"
+msgstr "请确保您有权利使用该软件包名称。"
 
 #: app/templates/macros/package_approval.html:104
-#, fuzzy, python-format
+#, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
-msgstr "请确保此软件包对其使用的名称具%(names)s有权利。"
+msgstr "请确保您有权利使用该软件包名称%(names)s"
 
 #: app/templates/macros/package_approval.html:115
-#, fuzzy
 msgid "Package approval thread"
-msgstr "软件包审核贴评论"
+msgstr "软件包审核贴"
 
 #: app/templates/macros/package_approval.html:116
-#, fuzzy
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
-msgstr "如果您对审批者或软件包作者有疑问，可以打开一个评论。"
+msgstr "如果您对审核者或软件包作者有疑问，可以创建贴子。"
 
 #: app/templates/macros/packagegridtile.html:25
-#, fuzzy
 msgid "<b>Warning:</b> Non-free code and media."
-msgstr "<b>警告：</b> 非自由编码和媒体。"
+msgstr "<b>警告：</b> 非自由代码和媒体内容。"
 
 #: app/templates/macros/packagegridtile.html:29
-#, fuzzy
 msgid "<b>Warning:</b> Non-free code."
-msgstr "<b>警告：</b> 非自由编码。"
+msgstr "<b>警告：</b> 非自由代码。"
 
 #: app/templates/macros/packagegridtile.html:33
 msgid "<b>Warning:</b> Non-free media."
@@ -1591,7 +1555,6 @@ msgstr "编辑"
 
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
-#, fuzzy
 msgid "Importing..."
 msgstr "导入中..."
 
@@ -1600,19 +1563,16 @@ msgid "Waiting for approval."
 msgstr "等待批准。"
 
 #: app/templates/macros/releases.html:103
-#, fuzzy
 msgid "No releases available."
 msgstr "没有可用的发行版。"
 
 #: app/templates/macros/reviews.html:7
-#, fuzzy
 msgid "Helpful"
 msgstr "有帮助"
 
 #: app/templates/macros/reviews.html:13
-#, fuzzy
 msgid "Unhelpful"
-msgstr "无益"
+msgstr "没有帮助"
 
 #: app/templates/macros/reviews.html:82
 #, python-format
@@ -1620,13 +1580,11 @@ msgid "%(num)d comments"
 msgstr "%(num)d个评论"
 
 #: app/templates/macros/reviews.html:94
-#, fuzzy
 msgid "No reviews, yet."
 msgstr "还没有评测。"
 
 #: app/templates/macros/reviews.html:104 app/templates/macros/reviews.html:143
 #: app/templates/packages/review_create_edit.html:4
-#, fuzzy
 msgid "Review"
 msgstr "评测"
 
@@ -1639,59 +1597,57 @@ msgstr "你推荐 %(type)s 吗？"
 #: app/templates/macros/reviews.html:124
 #: app/templates/packages/review_create_edit.html:40
 msgid "Why or why not? Try to be constructive"
-msgstr ""
+msgstr "为什么？请发表有建设性的评价"
 
 #: app/templates/macros/reviews.html:133
-#, fuzzy
 msgid "Post Review"
 msgstr "发表评测"
 
 #: app/templates/macros/threads.html:29
 msgid "Maintainer"
-msgstr ""
+msgstr "维护者"
 
 #: app/templates/macros/threads.html:86
 msgid "This thread has been locked by a moderator."
-msgstr ""
+msgstr "本贴子已被版主锁定。"
 
 #: app/templates/macros/threads.html:105
 msgid "Please wait before commenting again."
-msgstr ""
+msgstr "请稍后再评论。"
 
 #: app/templates/macros/threads.html:111
 msgid "This thread has been locked."
-msgstr ""
+msgstr "本贴子已被锁定。"
 
 #: app/templates/macros/threads.html:113
 msgid "You don't have permission to post."
-msgstr ""
+msgstr "你没有发贴权限。"
 
 #: app/templates/macros/threads.html:139 app/templates/macros/threads.html:219
 msgid "No threads found"
-msgstr ""
+msgstr "找不到贴子"
 
 #: app/templates/macros/threads.html:147
 msgid "Thread"
-msgstr ""
+msgstr "贴子"
 
 #: app/templates/macros/threads.html:151
-#, fuzzy
 msgid "Last Reply"
-msgstr "最后的回复"
+msgstr "上一条回复"
 
 #: app/templates/macros/todo.html:23
 #, python-format
 msgid "On %(trigger)s, do %(action)s"
-msgstr ""
+msgstr "在%(trigger)s时，执行操作%(action)s"
 
 #: app/templates/macros/todo.html:37 app/templates/packages/view.html:104
 #: app/templates/packages/view.html:355
 msgid "Release"
-msgstr ""
+msgstr "发行版"
 
 #: app/templates/macros/todo.html:44
 msgid "Repo"
-msgstr ""
+msgstr "仓库"
 
 #: app/templates/macros/todo.html:50
 #: app/templates/packages/releases_list.html:13
@@ -1701,64 +1657,60 @@ msgstr "更新设置"
 
 #: app/templates/macros/todo.html:57
 msgid "No outdated packages."
-msgstr ""
+msgstr "没有过期软件包。"
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:160
-#, fuzzy
 msgid "Author"
 msgstr "作者"
 
 #: app/templates/macros/topics.html:8
-#, fuzzy
 msgid "Date"
 msgstr "日期"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
-msgstr ""
+msgstr "操作"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
 #: app/templates/metapackages/view.html:29
 #: app/templates/packages/similar.html:40 app/templates/todo/editor.html:160
 #: app/templates/todo/editor.html:175
 msgid "WIP"
-msgstr ""
+msgstr "未完工"
 
 #: app/templates/macros/topics.html:35
-#, fuzzy
 msgid "Show"
 msgstr "显示"
 
 #: app/templates/macros/topics.html:37
-#, fuzzy
 msgid "Discard"
 msgstr "丢弃"
 
 #: app/templates/macros/topics.html:57
 msgid "Old"
-msgstr "旧的"
+msgstr "旧"
 
 #: app/templates/metapackages/list.html:4
 #: app/templates/metapackages/view.html:4
 msgid "Meta Packages"
-msgstr ""
+msgstr "元包"
 
 #: app/templates/metapackages/list.html:37
 msgid "No meta packages found."
-msgstr ""
+msgstr "找不到元包。"
 
 #: app/templates/metapackages/view.html:10
 #, python-format
 msgid "Meta Package \"%(name)s\""
-msgstr ""
+msgstr "元包“%(name)s”"
 
 #: app/templates/metapackages/view.html:12
 msgid "Provided By"
-msgstr ""
+msgstr "提供者"
 
 #: app/templates/metapackages/view.html:21 app/templates/todo/todo_base.html:35
 msgid "Forum Topics"
-msgstr "论坛主题"
+msgstr "论坛贴子"
 
 #: app/templates/metapackages/view.html:27
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:396
@@ -1766,15 +1718,15 @@ msgstr "论坛主题"
 #: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
-msgstr ""
+msgstr "%(title)s(作者%(display_name)s)"
 
 #: app/templates/metapackages/view.html:35
 msgid "Required By"
-msgstr ""
+msgstr "该软件包为以下包的依赖项"
 
 #: app/templates/metapackages/view.html:38
 msgid "Optionally Used By"
-msgstr ""
+msgstr "该软件包为以下包的可选依赖项"
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
@@ -1782,7 +1734,7 @@ msgstr "编辑电子邮件通知设置"
 
 #: app/templates/notifications/list.html:22
 msgid "Newest first."
-msgstr "新的先来。"
+msgstr "从新到旧。"
 
 #: app/templates/notifications/list.html:27
 msgid "Your Notifications"
@@ -1795,65 +1747,61 @@ msgstr "没有通知"
 
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
-msgstr ""
+msgstr "编辑/审核者通知"
 
 #: app/templates/packages/alias_create_edit.html:4
-#, fuzzy
 msgid "Alias"
 msgstr "别名"
 
 #: app/templates/packages/alias_create_edit.html:13
-#, fuzzy
 msgid "Back to Aliases"
 msgstr "返回别名"
 
 #: app/templates/packages/alias_list.html:4
-#, fuzzy
 msgid "Aliases"
 msgstr "别名"
 
 #: app/templates/packages/alias_list.html:15
 #, python-format
 msgid "Aliases for %(title)s by %(author)s"
-msgstr ""
+msgstr "%(title)s（作者:%(author)s）的别名"
 
 #: app/templates/packages/alias_list.html:24
-#, fuzzy
 msgid "No aliases"
 msgstr "没有别名"
 
 #: app/templates/packages/bulk_update_conf.html:4
 #, python-format
 msgid "Git Update Detection for %(username)s"
-msgstr ""
+msgstr "%(username)s的Git更新检测"
 
 #: app/templates/packages/bulk_update_conf.html:10
 msgid "Packages with Update Settings"
-msgstr ""
+msgstr "带有更新设置的包"
 
 #: app/templates/packages/bulk_update_conf.html:16
 msgid "Bulk Set Update Settings"
-msgstr ""
+msgstr "批量设定更新设置"
 
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
-msgstr ""
+msgstr "这会为所有带有Git仓库的包设定更新设置。"
 
 #: app/templates/packages/bulk_update_conf.html:27
 #: app/templates/packages/release_new.html:50
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
-msgstr ""
+msgstr "留空则使用默认分支"
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
 msgid "Currently, the branch name field is only used by the New Commit trigger."
-msgstr ""
+msgstr "目前，分支名称仅用于新提交触发器。"
 
 #: app/templates/packages/create_edit.html:5
 #, python-format
 msgid "Edit - %(title)s"
-msgstr ""
+msgstr "编辑 - %(title)s"
 
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
@@ -1862,7 +1810,7 @@ msgstr "创建软件包"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
-msgstr ""
+msgstr "你读过《软件包收容政策和指导》了吗？"
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
@@ -1873,7 +1821,7 @@ msgstr "阅读更多"
 msgid ""
 "You can include a .cdb.json file in your %(type)s to update these details"
 " automatically."
-msgstr ""
+msgstr "要自动更新这些细节信息，您可以在%(type)s中放置.cdb.json文件。"
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -1881,6 +1829,8 @@ msgid ""
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
+"需要JavaScript来改善用户界面，并用于查找\n"
+"Git元数据、自动补全等功能。"
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
@@ -1889,21 +1839,21 @@ msgstr "软件包"
 
 #: app/templates/packages/create_edit.html:73
 msgid "Please open a thread to request a name change"
-msgstr ""
+msgstr "请开贴请求重命名"
 
 #: app/templates/packages/create_edit.html:79
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
-msgstr ""
+msgstr "选择“未完工”表明您的包不稳定，不应该像所有玩家推荐"
 
 #: app/templates/packages/create_edit.html:88
 msgid "If there is no media, set the Media License to the same as the License."
-msgstr ""
+msgstr "如果没有媒体内容，媒体许可证同软件许可证。"
 
 #: app/templates/packages/create_edit.html:94
 msgid "Repository and Links"
-msgstr ""
+msgstr "仓库和链接"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
@@ -1911,48 +1861,48 @@ msgid ""
 "\t\t\t\tIf the repo uses git then the metadata will be automatically "
 "imported."
 msgstr ""
+"输入软件包仓库URL。\n"
+"如果该软件包使用Git，元数据会自动导入。"
 
 #: app/templates/packages/create_edit.html:100
 msgid "Leave blank if you don't have a repo. Click skip if the import fails."
-msgstr ""
+msgstr "没有仓库则留空，导入失败请点击跳过。"
 
 #: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
-msgstr ""
+msgstr "下一个（自动导入）"
 
 #: app/templates/packages/create_edit.html:107
 msgid "Skip Autoimport"
-msgstr ""
+msgstr "跳过自动导入"
 
 #: app/templates/packages/create_edit.html:111
 msgid "Importing... (This may take a while)"
-msgstr ""
+msgstr "导入中…（需要一段时间）"
 
 #: app/templates/packages/create_edit.html:119
 msgid "Tip: paste in a forum topic URL"
-msgstr ""
+msgstr "提示：粘贴论坛贴子URL"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
-msgstr ""
+msgstr "YouTube视频将显示为嵌入元素。"
 
 #: app/templates/packages/edit_maintainers.html:4
-#, fuzzy
 msgid "Edit Maintainers"
 msgstr "编辑维护者"
 
 #: app/templates/packages/edit_maintainers.html:11
 msgid "Maintainers are given write access to the package."
-msgstr ""
+msgstr "维护者有软件包的写权限。"
 
 #: app/templates/packages/edit_maintainers.html:12
 msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
-msgstr ""
+msgstr "根据等级，他们可以编辑软件包，创建发行版和屏幕快照，阅读私有贴子。"
 
 #: app/templates/packages/edit_maintainers.html:13
-#, fuzzy
 msgid ""
 "Maintainers cannot add or remove other maintainers, but can remove "
 "themselves."
@@ -1960,7 +1910,6 @@ msgstr "维护者不能添加或移除其他维护者，但可以移除自己。
 
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:24
-#, fuzzy
 msgid "Community Hub"
 msgstr "社区中心"
 
@@ -1968,16 +1917,16 @@ msgstr "社区中心"
 #: app/templates/packages/game_hub.html:12
 #, python-format
 msgid "Mods for %(title)s"
-msgstr ""
+msgstr "%(title)s的Mod"
 
 #: app/templates/packages/list.html:21
 #, python-format
 msgid "Did you mean to search for packages by %(authors)s?"
-msgstr ""
+msgstr "你是想搜索作者为%(authors)s的包吗？"
 
 #: app/templates/packages/list.html:26
 msgid "Filter by tags"
-msgstr ""
+msgstr "按标签过滤"
 
 #: app/templates/packages/list.html:59
 msgid "More content from the forums"
@@ -1989,29 +1938,31 @@ msgstr "缩略图"
 
 #: app/templates/packages/release_bulk_change.html:4
 msgid "Bulk Change Releases"
-msgstr ""
+msgstr "批量修改发行版"
 
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
-msgstr ""
+msgstr "用此页面设置软件包所有发行版的最小值和最大值。"
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
 #: app/templates/packages/release_new.html:70
 msgid "Maximum must be greater than or equal to the minimum!"
-msgstr ""
+msgstr "最大值必须大于等于最小值！"
 
 #: app/templates/packages/release_bulk_change.html:33
 msgid ""
 "Note: Min and max versions will be used to hide the package on\n"
 "\t\t\tplatforms not within the range."
 msgstr ""
+"注意：版本的最小值和最大值会用于对\n"
+"不在区间范围内的平台隐藏此软件包。"
 
 #: app/templates/packages/release_bulk_change.html:36
 #: app/templates/packages/release_edit.html:61
 #: app/templates/packages/release_new.html:83
 msgid "Leave both as None if in doubt."
-msgstr ""
+msgstr "如有疑虑请留空。"
 
 #: app/templates/packages/release_edit.html:4
 msgid "Edit release"
@@ -2019,7 +1970,7 @@ msgstr "编辑发行版"
 
 #: app/templates/packages/release_edit.html:27
 msgid "Commit Hash"
-msgstr ""
+msgstr "提交哈希"
 
 #: app/templates/packages/release_edit.html:32
 msgid "view task"
@@ -2028,11 +1979,11 @@ msgstr "查看任务"
 #: app/templates/packages/release_edit.html:42
 #: app/templates/packages/screenshot_edit.html:20
 msgid "Approved"
-msgstr "批准了"
+msgstr "已通过"
 
 #: app/templates/packages/release_edit.html:46
 msgid "Supported Minetest versions"
-msgstr ""
+msgstr "支持的Minetest版本"
 
 #: app/templates/packages/release_edit.html:58
 #: app/templates/packages/release_new.html:80
@@ -2040,12 +1991,14 @@ msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
+"设置支持的Minetest最小和最大版本。\n"
+"发行版将对超出范围内的客户端隐藏。 "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
-msgstr ""
+msgstr "您可以在软件包的.conf文件中<a href='/help/package_config/'>自动设置</a>。"
 
 #: app/templates/packages/release_edit.html:70
 msgid "Delete Release"
@@ -2053,34 +2006,34 @@ msgstr "删除发行版"
 
 #: app/templates/packages/release_edit.html:76
 msgid "This is permanent."
-msgstr "这是永久性的。"
+msgstr "这是永久的。"
 
 #: app/templates/packages/release_edit.html:77
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
-msgstr ""
+msgstr "相关的上传都不会马上被删除，但是不在列入发行版。"
 
 #: app/templates/packages/release_edit.html:82
 msgid "You cannot delete the latest release; please create a newer one first."
-msgstr ""
+msgstr "你不能删除最新的发行版，请先创建一个新的版本。"
 
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
 msgid "Create a release"
-msgstr "创建一个发行版"
+msgstr "创建发行版"
 
 #: app/templates/packages/release_new.html:14
 msgid "You have automatic releases enabled."
-msgstr ""
+msgstr "您已开启自动发行。"
 
 #: app/templates/packages/release_new.html:16
 msgid "You have Git update notifications enabled."
-msgstr ""
+msgstr "您已开启Git更新通知。"
 
 #: app/templates/packages/release_new.html:17
 msgid "You can enable automatic updates in the update settings."
-msgstr ""
+msgstr "您可以在更新设置中开启自动更新。"
 
 #: app/templates/packages/release_new.html:23
 msgid "Set up"
@@ -2090,32 +2043,31 @@ msgstr "设置"
 msgid ""
 "You can create releases automatically when you push commits or tags to "
 "your repository."
-msgstr ""
+msgstr "您可以在往仓库里上传提交或标签时自动创建发行版。"
 
 #: app/templates/packages/release_new.html:28
 #: app/templates/packages/release_wizard.html:69
 msgid "Add Git repo"
-msgstr ""
+msgstr "添加Git仓库"
 
 #: app/templates/packages/release_new.html:31
 #: app/templates/packages/release_wizard.html:59
 msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
-msgstr ""
+msgstr "使用Git意味着您可以在往仓库里上传提交或标签时自动创建发行版。"
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
-msgstr ""
+msgstr "1. 命名发行版"
 
 #: app/templates/packages/release_new.html:42
-#, fuzzy
 msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
 msgstr "人类可读。例如：1.0.0 或 2018-05-28"
 
 #: app/templates/packages/release_new.html:44
 msgid "2. Set the content"
-msgstr ""
+msgstr "2. 设置内容"
 
 #: app/templates/packages/release_new.html:57
 msgid ""
@@ -2123,10 +2075,12 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
+"看看<a href='/help/package_config/'>软件包配置发行指导</a>获得\n"
+"自定义发行版的提示。"
 
 #: app/templates/packages/release_new.html:61
 msgid "3. Supported Minetest versions"
-msgstr ""
+msgstr "3. 支持的Minetest版本"
 
 #: app/templates/packages/release_new.html:75
 msgid ""
@@ -2134,10 +2088,12 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
+"软件包的.conf文件可以<a href='/help/package_config/'>自动设置</a>，\n"
+"覆盖您的选择。"
 
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
-msgstr ""
+msgstr "您希望如何创建发行版？"
 
 #: app/templates/packages/release_wizard.html:9
 #: app/templates/packages/release_wizard.html:75
@@ -2147,26 +2103,27 @@ msgstr "稍后"
 #: app/templates/packages/release_wizard.html:14
 #, python-format
 msgid "A release is a single downloadable version of your %(title)s."
-msgstr ""
+msgstr "发行版是%(title)s的单个可下载版本。"
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
 "You need to create releases even if you use a rolling release development"
 " cycle, as Minetest needs them to check for updates."
-msgstr ""
+msgstr "即使开发周期采用滚动更新策略，您仍然需要创建发行版，Minetest要用发行版来检查"
+"更新。"
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
 msgid ""
 "When you push a change to your Git repository, ContentDB can create a new"
 " release automatically or send you a reminder."
-msgstr ""
+msgstr "往Git仓库上传更新时，ContentDB会自动创建发行版或者提醒你。"
 
 #: app/templates/packages/release_wizard.html:21
 msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
-msgstr ""
+msgstr "ContentDB每天检查Git仓库，您也可以用web钩子或API加速更新。"
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
@@ -2175,50 +2132,48 @@ msgstr "这可以稍后更改。"
 
 #: app/templates/packages/release_wizard.html:31
 msgid "Automatically (Recommended)"
-msgstr ""
+msgstr "自动（推荐）"
 
 #: app/templates/packages/release_wizard.html:34
 msgid "Rolling Release"
-msgstr ""
+msgstr "滚动更新"
 
 #: app/templates/packages/release_wizard.html:37
 msgid "On Git Tag"
-msgstr ""
+msgstr "根据Git标签"
 
 #: app/templates/packages/release_wizard.html:46
 msgid "Manually"
-msgstr ""
+msgstr "手动"
 
 #: app/templates/packages/release_wizard.html:49
-#, fuzzy
 msgid "With reminders"
 msgstr "带提醒"
 
 #: app/templates/packages/release_wizard.html:52
-#, fuzzy
 msgid "No reminders"
 msgstr "无提醒"
 
 #: app/templates/packages/release_wizard.html:60
 msgid "Unfortunately, you will otherwise need to create a release manually."
-msgstr ""
+msgstr "否则，你可能需要手动创建发行版。"
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
-msgstr ""
+msgstr "手动创建发行版"
 
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
-msgstr ""
+msgstr "发行版 - %(title)s"
 
 #: app/templates/packages/releases_list.html:18
 msgid "Set up automatic releases"
-msgstr ""
+msgstr "配置自动发行版"
 
 #: app/templates/packages/releases_list.html:24
 msgid "Bulk update"
-msgstr ""
+msgstr "批量更新"
 
 #: app/templates/packages/remove.html:9
 #, python-format
@@ -2234,12 +2189,18 @@ msgid ""
 "future.\n"
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
+"为了避免数据丢失，你不能永久地删除软件包。\n"
+"你可以把它们从 ContentDB 中删除，这将导致它们\n"
+"对所有用户都不可见，并且可能在将来被永久删除。\n"
+"如果需要，管理员可以恢复被删除的包。"
 
 #: app/templates/packages/remove.html:19
 msgid ""
 "Unapproving a package will put it back into Draft, where\n"
 "\t\t\t\tit can be submitted for approval again."
 msgstr ""
+"审核不通过的包会放回草稿中，\n"
+"可以再次提交以供审核。"
 
 #: app/templates/packages/remove.html:27
 msgid "Reason"
@@ -2247,7 +2208,7 @@ msgstr "原因"
 
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
-msgstr ""
+msgstr "不批准/删除的原因，这将显示在审计日志中"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
@@ -2259,13 +2220,13 @@ msgstr "取消"
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
-msgstr ""
+msgstr "发表对%(title)s（作者:%(author)s）的评测"
 
 #: app/templates/packages/review_create_edit.html:16
 #: app/templates/threads/new.html:11
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
-msgstr ""
+msgstr "发现错误？在 <a href='%(url)s'> 问题跟踪器 </a> 上发布。"
 
 #: app/templates/packages/review_create_edit.html:56
 msgid "Delete review."
@@ -2275,18 +2236,17 @@ msgstr "删除评测。"
 msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
-msgstr ""
+msgstr "这将把评测转换为主题，保留评论，而消除其对软件包评级的影响。"
 
 #: app/templates/packages/review_votes.html:4
 #: app/templates/packages/view.html:315
-#, fuzzy
 msgid "Review Votes"
-msgstr "评测等级"
+msgstr "评测投票"
 
 #: app/templates/packages/review_votes.html:13
 #, python-format
 msgid "Review votes on %(title)s by %(author)s"
-msgstr ""
+msgstr "%(title)s（作者:%(author)s）的评测投票"
 
 #: app/templates/packages/screenshot_edit.html:4
 #: app/templates/packages/screenshot_edit.html:11
@@ -2296,7 +2256,7 @@ msgstr "编辑截图"
 #: app/templates/packages/screenshot_new.html:4
 #: app/templates/packages/screenshot_new.html:8
 msgid "Add a screenshot"
-msgstr "添加一张截图"
+msgstr "添加截图"
 
 #: app/templates/packages/screenshot_new.html:10
 #: app/templates/todo/user.html:73
@@ -2304,7 +2264,7 @@ msgstr "添加一张截图"
 msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
-msgstr ""
+msgstr "推荐分辨率1920x1080，截图大小至少%(width)dx%(height)d。"
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
@@ -2312,7 +2272,7 @@ msgstr "添加图片"
 
 #: app/templates/packages/screenshots.html:17
 msgid "Topmost screenshot will be used as the package thumbnail."
-msgstr ""
+msgstr "最靠上的屏幕截图将用于软件包缩略图。"
 
 #: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:77
 msgid "Way too small"
@@ -2323,9 +2283,8 @@ msgid "Too small"
 msgstr "太小"
 
 #: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
-#, fuzzy
 msgid "Not HD"
-msgstr "不高清"
+msgstr "非高清"
 
 #: app/templates/packages/screenshots.html:53
 msgid "Awaiting approval"
@@ -2333,89 +2292,87 @@ msgstr "等待批准"
 
 #: app/templates/packages/screenshots.html:72
 msgid "No screenshots."
-msgstr "没截图。"
+msgstr "无截图。"
 
 #: app/templates/packages/screenshots.html:80
 msgid "Save Order"
-msgstr ""
+msgstr "保存顺序"
 
 #: app/templates/packages/screenshots.html:85
 msgid "Reordering requires JavaScript."
-msgstr ""
+msgstr "排列顺序需要JavaScript。"
 
 #: app/templates/packages/screenshots.html:100
 msgid "Videos"
 msgstr "视频"
 
 #: app/templates/packages/screenshots.html:102
-#, fuzzy
 msgid "You can set a video on the Edit Details page"
 msgstr "您可以在编辑详细信息页面上设置视频"
 
 #: app/templates/packages/share.html:10
-#, fuzzy
 msgid "Links"
 msgstr "链接"
 
 #: app/templates/packages/share.html:13
 msgid "Review link"
-msgstr ""
+msgstr "评测链接"
 
 #: app/templates/packages/share.html:18
-#, fuzzy
 msgid "Badges"
 msgstr "徽章"
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
-msgstr ""
+msgstr "Mod名称唯一性"
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
-msgstr ""
+msgstr "共享提供的Mod的软件包"
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
-msgstr ""
+msgstr "该软件包包含了在以下软件包中存在的Mod名称："
 
 #: app/templates/packages/similar.html:32
 msgid "Similar Forum Topics"
-msgstr "类似的论坛主题"
+msgstr "类似的论坛贴子"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
-msgstr ""
+msgstr "配置Git更新检测"
 
 #: app/templates/packages/update_config.html:16
 msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
-msgstr ""
+msgstr "如果软件包批准通过，ContentDB会每天查询Git仓库。"
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
-msgstr ""
+msgstr "您应该考虑用web钩子或API加速更新。"
 
 #: app/templates/packages/update_config.html:18
 msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
-msgstr ""
+msgstr "Git更新检测非常智能，如果你已经手动或使用webhooks/the "
+"API创建了一个发行版，就不会再重新创建。"
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
-msgstr ""
+msgstr "触发器是触发操作的事件。"
 
 #: app/templates/packages/update_config.html:41
 msgid "The action to perform when the trigger happens."
-msgstr ""
+msgstr "触发器触发时要执行的操作。"
 
 #: app/templates/packages/update_config.html:42
 msgid ""
 "Once a package is marked as outdated, you won't receive any more "
 "notifications until it is marked up to date."
-msgstr ""
+msgstr "一旦软件包被标记为过期，你就不会再收到通知，直到它被标记为最新。"
 
 #: app/templates/packages/view.html:37
 msgid "Download"
@@ -2424,17 +2381,17 @@ msgstr "下载"
 #: app/templates/packages/view.html:43
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
-msgstr ""
+msgstr "Minetest %(min)s - %(max)s"
 
 #: app/templates/packages/view.html:45
 #, python-format
 msgid "For Minetest %(min)s and above"
-msgstr ""
+msgstr "适用于 Minetest %(min)s 及以上版本"
 
 #: app/templates/packages/view.html:47
 #, python-format
 msgid "Minetest %(max)s and below"
-msgstr ""
+msgstr "Minetest %(max)s 及以下版本"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
@@ -2446,20 +2403,19 @@ msgstr "没有可用的下载"
 
 #: app/templates/packages/view.html:80
 msgid "Non-free code and media"
-msgstr ""
+msgstr "非自由代码和媒体"
 
 #: app/templates/packages/view.html:82
 msgid "Non-free code"
-msgstr ""
+msgstr "非自由代码"
 
 #: app/templates/packages/view.html:84
 msgid "Non-free media"
-msgstr ""
+msgstr "非自由媒体内容"
 
 #: app/templates/packages/view.html:146
-#, fuzzy
 msgid "Work in Progress"
-msgstr "在建造中"
+msgstr "未完工"
 
 #: app/templates/packages/view.html:167
 msgid "Downloads"
@@ -2470,7 +2426,6 @@ msgid "Website"
 msgstr "网站"
 
 #: app/templates/packages/view.html:194
-#, fuzzy
 msgid "Source"
 msgstr "来源"
 
@@ -2486,12 +2441,11 @@ msgstr "问题跟踪器"
 msgid ""
 "This thread is only visible to the package owner and users of Approver "
 "rank or above."
-msgstr ""
+msgstr "该贴子仅对软件包所有者和审核者及以上人员可见。"
 
 #: app/templates/packages/view.html:271
-#, fuzzy
 msgid "Awaiting review"
-msgstr "等待审核"
+msgstr "等待评测"
 
 #: app/templates/packages/view.html:300 app/templates/threads/view.html:67
 msgid "Edit Review"
@@ -2499,29 +2453,27 @@ msgstr "编辑评测"
 
 #: app/templates/packages/view.html:305
 msgid "You can't review your own package."
-msgstr ""
+msgstr "你不能自己评测自己的软件包。"
 
 #: app/templates/packages/view.html:321
 msgid "Used By"
-msgstr "使用者"
+msgstr "被用于"
 
 #: app/templates/packages/view.html:327
 msgid "Content"
 msgstr "内容"
 
 #: app/templates/packages/view.html:329 app/templates/packages/view.html:383
-#, fuzzy
 msgid "View content for game"
-msgstr "查看游戏内容"
+msgstr "查看子游戏内容"
 
 #: app/templates/packages/view.html:343
 msgid "Package may be outdated"
 msgstr "软件包可能已过时"
 
 #: app/templates/packages/view.html:350
-#, fuzzy
 msgid "Only visible to the author and Editors."
-msgstr "只对作者和编辑可见"
+msgstr "只对作者和编辑可见。"
 
 #: app/templates/packages/view.html:367
 msgid "Warning"
@@ -2529,38 +2481,35 @@ msgstr "警告"
 
 #: app/templates/packages/view.html:373
 msgid "Like this package? Help support its development by making a donation"
-msgstr ""
+msgstr "喜欢这个软件包？捐款来支持发展"
 
 #: app/templates/packages/view.html:376
-#, fuzzy
 msgid "Donate now"
 msgstr "立即捐款"
 
 #: app/templates/packages/view.html:388
 msgid "Dependencies"
-msgstr ""
+msgstr "依赖项"
 
 #: app/templates/packages/view.html:390
 msgid "Required"
-msgstr "必需的"
+msgstr "必需"
 
 #: app/templates/packages/view.html:408
 msgid "No required dependencies"
-msgstr ""
+msgstr "没有必需的依赖项"
 
 #: app/templates/packages/view.html:414
-#, fuzzy
 msgid "Optional"
-msgstr "自选的"
+msgstr "可选"
 
 #: app/templates/packages/view.html:436
-#, fuzzy
 msgid "Compatible Games"
-msgstr "兼容游戏"
+msgstr "兼容子游戏"
 
 #: app/templates/packages/view.html:444
 msgid "No specific game is required"
-msgstr ""
+msgstr "不需要特定的子游戏"
 
 #: app/templates/packages/view.html:447
 msgid "This is an experimental feature."
@@ -2568,7 +2517,7 @@ msgstr "这是一个实验性功能。"
 
 #: app/templates/packages/view.html:448
 msgid "Supported games are determined by an algorithm, and may not be correct."
-msgstr ""
+msgstr "支持的游戏是由一个算法计算，不保证正确性。"
 
 #: app/templates/packages/view.html:453
 msgid "Information"
@@ -2581,25 +2530,23 @@ msgstr "技术名称"
 #: app/templates/packages/view.html:468
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
-msgstr ""
+msgstr "代码%(code_license)s，媒体%(media_license)s。"
 
 #: app/templates/packages/view.html:476
 msgid "Unknown"
 msgstr "未知"
 
 #: app/templates/packages/view.html:478
-#, fuzzy
 msgid "Added"
-msgstr "添加"
+msgstr "已添加"
 
 #: app/templates/packages/view.html:492
-#, fuzzy
 msgid "Remove myself"
-msgstr "退出自己"
+msgstr "移除自己"
 
 #: app/templates/packages/view.html:497
 msgid "Provides"
-msgstr ""
+msgstr "提供"
 
 #: app/templates/packages/view.html:519
 msgid "More"
@@ -2607,20 +2554,17 @@ msgstr "更多"
 
 #: app/templates/packages/view.html:548
 msgid "See audit log"
-msgstr ""
+msgstr "见审计日志"
 
 #: app/templates/report/index.html:19
-#, fuzzy
 msgid "What are you reporting? Why are you reporting it?"
-msgstr "你在举报什么？你为什么要举报？"
+msgstr "你要举报什么？为什么要举报？"
 
 #: app/templates/report/index.html:23
-#, fuzzy
 msgid "Reports will be shared with ContentDB staff."
-msgstr "举报将与 ContentDB 审核人员共享"
+msgstr "举报将共享至 ContentDB 审核人员."
 
 #: app/templates/report/index.html:25
-#, fuzzy
 msgid "Only the admin will be able to see who made the report."
 msgstr "只有管理员才能看到举报人。"
 
@@ -2628,35 +2572,35 @@ msgstr "只有管理员才能看到举报人。"
 msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
-msgstr ""
+msgstr "发现错误？请在软件包的问题跟踪器或贴子中报告。"
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
-msgstr ""
+msgstr "任务失败"
 
 #: app/templates/tasks/view.html:7
 msgid "Working…"
-msgstr ""
+msgstr "工作中…"
 
 #: app/templates/tasks/view.html:26
 msgid "Reload the page to check for updates."
-msgstr ""
+msgstr "刷新页面以检查更新。"
 
 #: app/templates/threads/delete_reply.html:4
 #, python-format
 msgid "Delete reply by %(username)s in %(title)s "
-msgstr ""
+msgstr "删除%(username)s在%(title)s的回复 "
 
 #: app/templates/threads/delete_reply.html:16
 #: app/templates/threads/delete_thread.html:16
 #: app/templates/users/delete.html:13
 msgid "Deleting is permanent"
-msgstr "删除是永久性的"
+msgstr "删除是永久的"
 
 #: app/templates/threads/delete_thread.html:4
 #, python-format
 msgid "Delete \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "删除%(author)s的\"%(title)s\""
 
 #: app/templates/threads/edit_reply.html:4
 #: app/templates/threads/edit_reply.html:8
@@ -2664,27 +2608,27 @@ msgid "Edit reply"
 msgstr "编辑回复"
 
 #: app/templates/threads/new.html:4
-#, fuzzy
 msgid "New Thread"
-msgstr "新评论"
+msgstr "新贴子"
 
 #: app/templates/threads/new.html:12
 msgid ""
 "If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
 "you can let us know here."
-msgstr ""
+msgstr "如果该软件包不应该出现在CDB上（例如：改软件包根本不能运作），那么你可以在这里"
+"告知我们。"
 
 #: app/templates/threads/new.html:40
 msgid ""
 "Only you, the package author, and users of Approver rank and above can "
 "read private threads."
-msgstr ""
+msgstr "只有你，软件包所有者和审核者及以上人员可以阅读私有贴子。"
 
 #: app/templates/threads/user_comments.html:9
 #: app/templates/threads/user_comments.html:13
 #, python-format
 msgid "Comments by %(user)s"
-msgstr "评论者："
+msgstr "%(user)s写的评论"
 
 #: app/templates/threads/user_comments.html:46
 #, python-format
@@ -2693,15 +2637,15 @@ msgstr "回复 <b>%(title)s</b>"
 
 #: app/templates/threads/view.html:36
 msgid "Subscribe"
-msgstr "订阅"
+msgstr "关注"
 
 #: app/templates/threads/view.html:45
 msgid "Convert to Thread"
-msgstr ""
+msgstr "转换为贴子"
 
 #: app/templates/threads/view.html:52
 msgid "Unlock"
-msgstr "开锁"
+msgstr "解锁"
 
 #: app/templates/threads/view.html:57
 msgid "Lock"
@@ -2711,65 +2655,64 @@ msgstr "锁定"
 msgid ""
 "This thread is only visible to its creator, the package owner, and users "
 "of Approver rank or above."
-msgstr ""
+msgstr "该贴子仅对创建者，软件包所有者和审核者及以上人员可见。"
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
-msgstr ""
+msgstr "编辑人员工作队列"
 
 #: app/templates/todo/editor.html:8
 msgid "Approval Queue"
-msgstr ""
+msgstr "审核队列"
 
 #: app/templates/todo/editor.html:15
 msgid "Approve All"
-msgstr ""
+msgstr "全部批准"
 
 #: app/templates/todo/editor.html:33
 msgid "No screenshots need approval."
-msgstr ""
+msgstr "没有截图需要审核。"
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
 msgid "No packages need approval."
-msgstr ""
+msgstr "没有软件包需要审核。"
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
-msgstr ""
+msgstr "导入中"
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need approval."
-msgstr ""
+msgstr "没有发行版需要审核。"
 
 #: app/templates/todo/editor.html:100
-#, fuzzy
 msgid "All done!"
-msgstr "全做完了！"
+msgstr "全部完成！"
 
 #: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
 msgid "License Needed"
-msgstr "需要软件许可证"
+msgstr "需要许可证"
 
 #: app/templates/todo/editor.html:127
 msgid "Tag Packages"
-msgstr ""
+msgstr "标记包"
 
 #: app/templates/todo/editor.html:130
 #, python-format
 msgid "%(total_to_tag)d / %(total_packages)d packages don't have any tags."
-msgstr ""
+msgstr "%(total_to_tag)d / %(total_packages)d 包没有标签。"
 
 #: app/templates/todo/editor.html:140
 msgid "View Tags"
-msgstr ""
+msgstr "查看标签"
 
 #: app/templates/todo/editor.html:147
 msgid "Unfulfilled Dependencies"
-msgstr ""
+msgstr "未满足的依赖项"
 
 #: app/templates/todo/editor.html:151
 msgid "Meta packages that have hard dependers, but no packages providing them."
-msgstr ""
+msgstr "有硬性依赖但没有软件包提供这些依赖的元包。"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
@@ -2777,7 +2720,7 @@ msgstr "所有过时的软件包"
 
 #: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
 msgid "Minetest-Mods org only"
-msgstr ""
+msgstr "仅限Minetest-Mods org"
 
 #: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
@@ -2789,11 +2732,11 @@ msgstr "按分数排序"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
-msgstr ""
+msgstr "软件包标签"
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
 msgid "Missing tags only"
-msgstr ""
+msgstr "仅缺失的标签"
 
 #: app/templates/todo/tags.html:31
 msgid "Edit Tags"
@@ -2802,7 +2745,7 @@ msgstr "编辑标签"
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
 msgid "%(username)s's to do list"
-msgstr ""
+msgstr "%(username)s的待办事项列表"
 
 #: app/templates/todo/todo_base.html:23
 msgid "All Outdated Packages"
@@ -2818,29 +2761,27 @@ msgstr "按浏览量排序"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
-msgstr ""
+msgstr "分页列表"
 
 #: app/templates/todo/topics.html:34
 msgid "Unlimited list"
-msgstr ""
+msgstr "无限列表"
 
 #: app/templates/todo/topics.html:41
-#, fuzzy
 msgid "Show discarded topics"
-msgstr "显示丢弃的主题"
+msgstr "显示丢弃的贴子"
 
 #: app/templates/todo/topics.html:43
-#, fuzzy
 msgid "Hide discarded topics"
-msgstr "隐藏丢弃的主题"
+msgstr "隐藏丢弃的贴子"
 
 #: app/templates/todo/topics.html:49
 msgid "Topics to be Added"
-msgstr ""
+msgstr "需要添加的贴子"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
-msgstr ""
+msgstr "其他待办事项"
 
 #: app/templates/todo/user.html:13
 msgid "Enable email notifications"
@@ -2848,53 +2789,54 @@ msgstr "启用电子邮件通知"
 
 #: app/templates/todo/user.html:18
 msgid "Unapproved Packages Needing Action"
-msgstr ""
+msgstr "需要操作的未通过包"
 
 #: app/templates/todo/user.html:40 app/templates/todo/user.html:121
 #: app/templates/todo/user.html:145
 msgid "Nothing to do :)"
-msgstr "无事可做 :)"
+msgstr "无事可做 ^_^"
 
 #: app/templates/todo/user.html:48
 msgid "See all Update Settings"
-msgstr ""
+msgstr "查看所有更新设置"
 
 #: app/templates/todo/user.html:53
 msgid "Create All Releases"
-msgstr ""
+msgstr "创建所有发行版"
 
 #: app/templates/todo/user.html:56
 msgid "Potentially Outdated Packages"
-msgstr ""
+msgstr "可能过时的软件包"
 
 #: app/templates/todo/user.html:58
 msgid ""
 "Instead of marking packages as outdated, you can automatically create "
 "releases when New Commits or New Tags are pushed to Git by clicking "
 "'Update Settings'."
-msgstr ""
+msgstr "你可以点击 '更新设置'，在新提交或新标签上传到 Git "
+"时自动创建发行版，而不需要将软件包标记为过期。"
 
 #: app/templates/todo/user.html:60
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
-msgstr ""
+msgstr "要从下面删除软件包，请创建发行版或改变更新设置。"
 
 #: app/templates/todo/user.html:68
 msgid "Small Screenshots"
-msgstr "小的截图"
+msgstr "小截图"
 
 #: app/templates/todo/user.html:71
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
-msgstr ""
+msgstr "这些软件包截图太小了，应该替换掉。"
 
 #: app/templates/todo/user.html:72
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
-msgstr ""
+msgstr "红色和橙色是低于限制的截图，灰色截图是低于推荐分辨率的截图。"
 
 #: app/templates/todo/user.html:127
 msgid "See All"
@@ -2902,29 +2844,27 @@ msgstr "查看全部"
 
 #: app/templates/todo/user.html:128
 msgid "Packages Without Tags"
-msgstr ""
+msgstr "无标签的软件包"
 
 #: app/templates/todo/user.html:130
 msgid "Labelling your packages with tags helps users find them."
-msgstr ""
+msgstr "用标签标记软件包有助于用户查找。"
 
 #: app/templates/todo/user.html:150
-#, fuzzy
 msgid "Unadded Topics"
-msgstr "未添加的主题"
+msgstr "未添加的贴子"
 
 #: app/templates/todo/user.html:153
 msgid "List of your forum topics which do not have a matching package."
-msgstr ""
+msgstr "列出没有对应软件包的论坛贴子。"
 
 #: app/templates/todo/user.html:154
 msgid "Topics with a strikethrough have been marked as discarded."
-msgstr ""
+msgstr "标删除线的贴子已被丢弃。"
 
 #: app/templates/todo/user.html:162
-#, fuzzy
 msgid "Congrats! You don't have any topics which aren't on CDB."
-msgstr "恭喜！您没有任何不在 CDB 上的主题。"
+msgstr "恭喜！您没有任何不在 CDB 上的贴子。"
 
 #: app/templates/users/account.html:4
 #, python-format
@@ -2954,25 +2894,24 @@ msgstr "关联账户"
 
 #: app/templates/users/account.html:40 app/templates/users/account.html:52
 msgid "Connected"
-msgstr "连接了"
+msgstr "已连接"
 
 #: app/templates/users/account.html:43
 #, python-format
 msgid "Please PM %(rubenwardy)s on the forums to link your account."
-msgstr ""
+msgstr "请在论坛上私信%(rubenwardy)s链接你的账户。"
 
 #: app/templates/users/account.html:57
 msgid "View ContentDB's GitHub Permissions"
-msgstr ""
+msgstr "查看ContentDB的GitHub权限"
 
 #: app/templates/users/account.html:62
 msgid "Link Github"
 msgstr "链接 Github"
 
 #: app/templates/users/account.html:65
-#, fuzzy
 msgid "None"
-msgstr "毫无"
+msgstr "无"
 
 #: app/templates/users/account.html:73
 msgid "View All"
@@ -2980,20 +2919,17 @@ msgstr "查看全部"
 
 #: app/templates/users/account.html:77
 msgid "Recent Account Actions"
-msgstr ""
+msgstr "最近的帐户操作"
 
 #: app/templates/users/account.html:82
-#, fuzzy
 msgid "Account Deletion and Deactivation"
 msgstr "帐户删除和停用"
 
 #: app/templates/users/account.html:86
-#, fuzzy
 msgid "Delete or Deactivate"
 msgstr "删除或停用"
 
 #: app/templates/users/account.html:89
-#, fuzzy
 msgid "Account Deletion and Deactivation isn't available to users yet."
 msgstr "用户还不能使用帐户删除和停用。"
 
@@ -3002,7 +2938,6 @@ msgid "Please contact the admin."
 msgstr "请联系管理员。"
 
 #: app/templates/users/change_set_password.html:11
-#, fuzzy
 msgid "It is recommended that you set a password for your account."
 msgstr "建议您为您的帐户设置密码。"
 
@@ -3015,19 +2950,18 @@ msgstr "跳过"
 msgid ""
 "Your email is needed to recover your account if you forget your password "
 "and to send (configurable) notifications. "
-msgstr ""
+msgstr "需要用你的电子邮件来在您忘记密码时恢复账户，并发送通知（可配置）。 "
 
 #: app/templates/users/change_set_password.html:29
 #: app/templates/users/register.html:25
 #: app/templates/users/settings_email.html:20
 msgid "Your email will never be shared with a third-party."
-msgstr ""
+msgstr "您的电子邮件绝不会与第三方共享。"
 
 #: app/templates/users/change_set_password.html:36
 #: app/templates/users/register.html:27
-#, fuzzy
 msgid "Must be at least 8 characters long."
-msgstr "长度必须至少为 8 个字符。"
+msgstr "长度至少为 8 个字符。"
 
 #: app/templates/users/change_set_password.html:40
 #: app/templates/users/register.html:30
@@ -3048,7 +2982,6 @@ msgid "Do you have an account on the Minetest Forums?"
 msgstr "您在 Minetest 论坛上有帐户吗？"
 
 #: app/templates/users/claim.html:13
-#, fuzzy
 msgid "ContentDB will link your account to your forum account."
 msgstr "ContentDB 会将您的帐户链接到您的论坛帐户。"
 
@@ -3056,15 +2989,15 @@ msgstr "ContentDB 会将您的帐户链接到您的论坛帐户。"
 msgid ""
 "You don't need a forum account, however, it's recommended to make the "
 "most out of the Minetest community."
-msgstr ""
+msgstr "你不需要论坛账户，但是，为了最好地利用Minetest社区，建议使用该账户。"
 
 #: app/templates/users/claim.html:22
 msgid "<b>Yes</b>, I have a forums account"
-msgstr "<b>是的</b>，我有一个论坛帐户"
+msgstr "<b>是</b>，我有一个论坛帐户"
 
 #: app/templates/users/claim.html:25
 msgid "<b>No</b>, I don't have one"
-msgstr "<b>没有</b>，我没有论坛帐户"
+msgstr "<b>否</b>，我没有论坛帐户"
 
 #: app/templates/users/claim.html:28
 msgid "Create forum account"
@@ -3075,25 +3008,23 @@ msgid "Confirm Your Account"
 msgstr "确认您的帐户"
 
 #: app/templates/users/claim_forums.html:13
-#, fuzzy
 msgid ""
 "You'll need to use prove that you have access to your forum account using"
 " one of the options below."
-msgstr "您需要使用以下选项之一证明您有权访问您的论坛帐户。"
+msgstr "您需要使用以下选项之一证明您有权访问论坛帐户。"
 
 #: app/templates/users/claim_forums.html:14
-#, fuzzy
 msgid "This is so ContentDB can link your account to your forum account."
-msgstr "这样 ContentDB 可以将您的帐户链接到您的论坛帐户。"
+msgstr "这样 ContentDB 可以将您的帐户链接到论坛帐户。"
 
 #: app/templates/users/claim_forums.html:18
 msgid "Don't have a forums account?"
-msgstr "没有论坛帐户吗？"
+msgstr "没有论坛帐户？"
 
 #: app/templates/users/claim_forums.html:19
 #, python-format
 msgid "You can still <a href='%(url)s'>sign up without one</a>."
-msgstr ""
+msgstr "你仍然可以<a href='%(url)s'>在没有的情况下注册</a>。"
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
@@ -3101,12 +3032,12 @@ msgstr "选项1"
 
 #: app/templates/users/claim_forums.html:27
 msgid "Use GitHub field in forum profile"
-msgstr ""
+msgstr "在论坛个人信息中使用GitHub字段"
 
 #: app/templates/users/claim_forums.html:35
 #: app/templates/users/claim_forums.html:64
 msgid "Enter your forum username here:"
-msgstr "输入您的论坛用户名："
+msgstr "输入论坛用户名："
 
 #: app/templates/users/claim_forums.html:39
 #: app/templates/users/claim_forums.html:68
@@ -3115,17 +3046,17 @@ msgstr "论坛用户名"
 
 #: app/templates/users/claim_forums.html:43
 msgid "You'll need to have the GitHub field in your forum profile filled out."
-msgstr ""
+msgstr "你需要在论坛的个人信息中填写GitHub字段。"
 
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
-msgstr ""
+msgstr "登录论坛，<a href='https://forum.minetest.net/ucp.php?i=173'>在这里操作</a>。"
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
-msgstr ""
+msgstr "下一步：用GitHub登录"
 
 #: app/templates/users/claim_forums.html:55
 msgid "Option 2"
@@ -3133,7 +3064,7 @@ msgstr "选项 2"
 
 #: app/templates/users/claim_forums.html:56
 msgid "Verification token"
-msgstr ""
+msgstr "验证令牌"
 
 #: app/templates/users/claim_forums.html:71
 msgid ""
@@ -3141,15 +3072,16 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
+"前往<a href='https://forum.minetest.net/ucp."
+"php?i=profile&mode=signature'>用户控制面板/个人信息/编辑签名</a>"
 
 #: app/templates/users/claim_forums.html:75
-#, fuzzy
 msgid "Paste this into your signature:"
-msgstr "将此粘贴到您的论坛签名中："
+msgstr "将此粘贴到论坛签名中："
 
 #: app/templates/users/claim_forums.html:81
 msgid "Click next so we can check it."
-msgstr "单击下一步，以便我们检查它。"
+msgstr "单击下一步，以便我们检查。"
 
 #: app/templates/users/claim_forums.html:84
 msgid "Don't worry, you can remove it after this is done."
@@ -3161,58 +3093,57 @@ msgid "Delete user %(username)s"
 msgstr "删除用户 %(username)s"
 
 #: app/templates/users/delete.html:17
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "This will delete your account, removing %(threads)d threads and "
 "%(replies)d replies."
-msgstr "删除您的帐户，删除 %(threads)d 个评论和 %(replies)d 个回复。"
+msgstr "这将删除您的帐户，删除 %(threads)d 个评论和 %(replies)d 个回复。"
 
 #: app/templates/users/delete.html:22
 msgid ""
 "As you have packages and/or forum threads, your account cannot be fully "
 "deleted."
-msgstr ""
+msgstr "由于你有软件包和论坛贴子，你的账户不能完全删除。"
 
 #: app/templates/users/delete.html:23
 #, python-format
 msgid ""
 "Instead, your account will be deactivated and all personal information "
 "wiped - including %(threads)d threads and %(replies)d replies."
-msgstr ""
+msgstr "你的账户将被停用，所有的个人信息将被抹去--"
+"包括%(threads)d个贴子和%(replies)d个回复。"
 
 #: app/templates/users/delete.html:25
 msgid "See the privacy policy for more information."
-msgstr ""
+msgstr "更多信息见隐私政策。"
 
 #: app/templates/users/delete.html:36
 msgid "Deactivate"
-msgstr ""
+msgstr "停用"
 
 #: app/templates/users/delete.html:40
 msgid "Delete Anyway"
-msgstr ""
+msgstr "仍要删除"
 
 #: app/templates/users/email_sent.html:4
 msgid "Check Your Email"
-msgstr "查看你的电子邮件"
+msgstr "检查您的电子邮件"
 
 #: app/templates/users/email_sent.html:11
 msgid "We've sent an email to the address you specified."
-msgstr "我们已向您指定的地址发送了一封电子邮件。"
+msgstr "我们已向您指定的地址发送了电子邮件。"
 
 #: app/templates/users/email_sent.html:12
 msgid "You'll need to click the link in the email to confirm it."
-msgstr ""
+msgstr "你需要点击邮件中的链接来确认。"
 
 #: app/templates/users/email_sent.html:16
-#, fuzzy
 msgid "The link will expire in 12 hours"
 msgstr "链接将在 12 小时后失效"
 
 #: app/templates/users/email_sent.html:22
-#, fuzzy
 msgid "My email never arrived"
-msgstr "我的电子邮件从未到达"
+msgstr "我没收到电子邮件"
 
 #: app/templates/users/forgot_password.html:4
 msgid "Request Password Reset"
@@ -3221,24 +3152,24 @@ msgstr "要求密码重置"
 #: app/templates/users/forums_no_such_user.html:14
 #, python-format
 msgid "Unfortunately, %(username)s doesn't have an account on ContentDB yet."
-msgstr ""
+msgstr "很遗憾，%(username)s在ContentDB上还没有账户。"
 
 #: app/templates/users/forums_no_such_user.html:19
 msgid "Claim Account"
-msgstr ""
+msgstr "认领账户"
 
 #: app/templates/users/list.html:4 app/templates/users/list.html:8
 msgid "Users"
-msgstr ""
+msgstr "用户"
 
 #: app/templates/users/list.html:34
 #, python-format
 msgid "Rank: %(rank)s."
-msgstr ""
+msgstr "等级：%(rank)s。"
 
 #: app/templates/users/login.html:20
 msgid "Forgot my password"
-msgstr "忘了我的密码"
+msgstr "忘了密码"
 
 #: app/templates/users/login.html:30 app/templates/users/profile.html:77
 msgid "GitHub"
@@ -3249,14 +3180,12 @@ msgid "Edit Account"
 msgstr "编辑帐户"
 
 #: app/templates/users/modtools.html:43 app/templates/users/modtools.html:51
-#, fuzzy
 msgid "Ban"
-msgstr "禁止"
+msgstr "封号"
 
 #: app/templates/users/modtools.html:55
-#, fuzzy
 msgid "Change Email and Send Password Reset"
-msgstr "更改电子邮件和发送密码重置"
+msgstr "更改电子邮件和发送密码重置邮件"
 
 #: app/templates/users/modtools.html:59
 #: app/templates/users/settings_email.html:14
@@ -3264,14 +3193,12 @@ msgid "Email Address"
 msgstr "电子邮件地址"
 
 #: app/templates/users/profile.html:11
-#, fuzzy
 msgid "Profile picture"
 msgstr "个人资料图片"
 
 #: app/templates/users/profile.html:22
-#, fuzzy
 msgid "To Do List"
-msgstr "待办事项清单"
+msgstr "待办列表"
 
 #: app/templates/users/profile.html:41
 msgid "Send Email"
@@ -3295,16 +3222,16 @@ msgstr "评论"
 
 #: app/templates/users/profile.html:133
 msgid "Claim"
-msgstr ""
+msgstr "认领"
 
 #: app/templates/users/profile.html:135
 msgid "Is this you? Claim your account now!"
-msgstr ""
+msgstr "这是你吗？现在就认领账户!"
 
 #: app/templates/users/profile.html:168
 #, python-format
 msgid "%(value)d / %(target)d"
-msgstr ""
+msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:182
 msgid "Create package"
@@ -3312,20 +3239,20 @@ msgstr "创建软件包"
 
 #: app/templates/users/profile.html:188
 msgid "View list of tags"
-msgstr ""
+msgstr "查看标签列表"
 
 #: app/templates/users/profile.html:198
 msgid "Maintained Packages"
-msgstr ""
+msgstr "维护的包"
 
 #: app/templates/users/profile.html:200
 msgid "This user is also a maintainer of the following packages"
-msgstr ""
+msgstr "该用户也是以下软件包的维护者"
 
 #: app/templates/users/profile_edit.html:4
 #, python-format
 msgid "Edit Profile - %(username)s"
-msgstr ""
+msgstr "编辑个人信息 - %(username)s"
 
 #: app/templates/users/profile_edit.html:10
 msgid "Profile Picture"
@@ -3337,35 +3264,33 @@ msgstr "与论坛同步"
 
 #: app/templates/users/profile_edit.html:45
 msgid "Profile Information"
-msgstr ""
+msgstr "个人信息"
 
 #: app/templates/users/profile_edit.html:52
 msgid "Pretending to be another user is grounds for a permanent ban"
-msgstr ""
+msgstr "假冒其他用户者永久封号"
 
 #: app/templates/users/register.html:17
 msgid ""
 "Only alphanumeric characters, periods, underscores, and minuses are "
 "allowed (a-zA-Z0-9._)"
-msgstr ""
+msgstr "仅允许字母，数字，句点，下划线，横杠（a-zA-Z0-9._）"
 
 #: app/templates/users/register.html:20
 msgid ""
 "Human readable name, defaults to username if not specified. This can be "
 "changed later."
-msgstr ""
+msgstr "人类可读的名字，默认为用户名。稍后可更改。"
 
 #: app/templates/users/register.html:21
 msgid "Same as username"
-msgstr ""
+msgstr "同用户名"
 
 #: app/templates/users/register.html:38
-#, fuzzy
 msgid "Please prove that you are human"
-msgstr "请证明你是人"
+msgstr "请证明你是人类"
 
 #: app/templates/users/register.html:41
-#, fuzzy
 msgid "I agree to the "
 msgstr "我同意 "
 
@@ -3378,18 +3303,17 @@ msgstr "电子邮件和通知 - %(username)s"
 msgid ""
 "Your email is needed to recover your account if you forget your password,"
 " and to send (configurable) notifications."
-msgstr ""
+msgstr "需要用你的电子邮件来在您忘记密码时恢复账户，并发送通知（可配置）。"
 
 #: app/templates/users/settings_email.html:25
 msgid "There is at least one verification pending."
-msgstr ""
+msgstr "至少有一项等待中的验证。"
 
 #: app/templates/users/settings_email.html:29
 msgid "Notification Settings"
 msgstr "通知设置"
 
 #: app/templates/users/settings_email.html:33
-#, fuzzy
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr "电子邮件通知目前已禁用。单击“保存”以启用。"
 
@@ -3397,47 +3321,45 @@ msgstr "电子邮件通知目前已禁用。单击“保存”以启用。"
 msgid ""
 "Configure whether certain types of notifications are sent immediately, or"
 " as part of a daily digest."
-msgstr ""
+msgstr "配置某个类型的通知是立即发送，还是并入每日摘要发送。"
 
 #: app/templates/users/settings_email.html:43
 msgid "Event"
-msgstr ""
+msgstr "事件"
 
 #: app/templates/users/settings_email.html:45
 msgid "Immediately"
-msgstr "立即"
+msgstr "马上"
 
 #: app/templates/users/settings_email.html:46
 msgid "In digest"
-msgstr ""
+msgstr "摘要"
 
 #: app/templates/users/unsubscribe.html:11
-#, fuzzy
 msgid ""
 "This will blacklist an email address, preventing ContentDB from ever "
 "sending emails to it - including password resets."
-msgstr "这会将电子邮件地址列入黑名单，防止 ContentDB 向其发送电子邮件-包括密码重置。"
+msgstr "这会将电子邮件地址列入黑名单，防止 ContentDB "
+"向其发送电子邮件-包括密码重置邮件。"
 
 #: app/templates/users/unsubscribe.html:20
-#, fuzzy
 msgid "Please enter the email address you wish to blacklist."
 msgstr "请输入您希望列入黑名单的电子邮件地址。"
 
 #: app/templates/users/unsubscribe.html:21
-#, fuzzy
 msgid "You will then need to confirm the email"
-msgstr "您需要确认电子邮件"
+msgstr "您将需要确认电子邮件"
 
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
-msgstr "您在可以退订了。"
+msgstr "您在可以取消关注了。"
 
 #: app/templates/users/unsubscribe.html:40
 #, python-format
 msgid ""
 "Unsubscribing may prevent you from being able to sign into the account "
 "'%(display_name)s'"
-msgstr ""
+msgstr "取消关注可能会使你无法登录到账户%(display_name)s"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -3445,21 +3367,22 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
+"ContentDB将不再能够发送\"忘记密码\"和其他重要的系统邮件。\n"
+"可以考虑编辑你的电子邮件通知设置。"
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
-msgstr "您将无法再将此电子邮件与 ContentDB 使用。"
+msgstr "您将无法再将此电子邮件用于 ContentDB。"
 
 #: app/templates/users/unsubscribe.html:57
 msgid "Edit Notification Preferences"
-msgstr "编辑通知首选项"
+msgstr "编辑通知设置"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
-msgstr "您有很多通知，您应该阅读或清除它们"
+msgstr "您有很多通知，您应该阅读或清除这些通知"
 
 #: app/utils/user.py:54
-#, fuzzy
 msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
