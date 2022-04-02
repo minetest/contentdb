@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ _("Search in Package Releases") }}
+{% endblock %}
+
+{% block query_hint %}
+<a href="https://www.digitalocean.com/community/tutorials/using-grep-regular-expressions-to-search-for-text-patterns-in-linux#extended-regular-expressions">
+	POSIX Extended Regular Expressions
+</a>
+{% endblock %}
+
+{% block content %}
+	<h1>{{ self.title() }}</h1>
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form action="" method="POST" class="form" role="form">
+		{{ form.hidden_tag() }}
+		{{ render_field(form.query, hint=self.query_hint()) }}
+		{{ render_field(form.file_filter, hint="Supports wildcards and regex") }}
+		{{ render_submit_field(form.submit, tabindex=180) }}
+	</form>
+
+	<p class="mt-5">
+		For more information, see <a href="https://linux.die.net/man/1/zipgrep">ZipGrep's man page</a>.
+	</p>
+{% endblock %}

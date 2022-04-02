@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ _("'%(query)s' - Search Package Releases", query=query) }}
+{% endblock %}
+
+{% block content %}
+	<a class="btn btn-secondary float-right" href="{{ url_for('zipgrep.zipgrep_search') }}">New Query</a>
+	<h1>{{ _("Search in Package Releases") }}</h1>
+	<h2>{{ query }}</h2>
+
+	<p class="text-muted">
+		Found in {{ matches | count }} packages.
+	</p>
+
+	<div class="list-group">
+		{% for match in matches %}
+			<div class="list-group-item">
+				<div class="row">
+					<div class="col-sm-2 text-muted">
+						<img
+							class="img-fluid"
+							src="{{ match.package.getThumbnailOrPlaceholder() }}" />
+
+						<div class="mt-2">
+							<a href="{{ match.package.getURL('packages.view') }}">
+								{{ match.package.title }}
+							</a>
+							by {{ match.package.author.display_name }}
+						</div>
+
+						<p class="mt-4">
+							{{ match.lines.split("\n") | select | list | count }} matches
+						</p>
+
+						<a class="mt-4 btn btn-secondary" href="{{ match.package.getDownloadRelease().getDownloadURL() }}">
+							Download
+						</a>
+					</div>
+					<div class="col-sm-10">
+						<pre style="max-height: 300px;" class="m-0">{{ match.lines }}</pre>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

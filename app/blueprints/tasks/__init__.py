@@ -25,6 +25,7 @@ from app.utils import *
 
 bp = Blueprint("tasks", __name__)
 
+
 @csrf.exempt
 @bp.route("/tasks/getmeta/new/", methods=["POST"])
 @login_required
@@ -36,6 +37,7 @@ def start_getmeta():
 		"poll_url": url_for("tasks.check", id=aresult.id),
 	})
 
+
 @bp.route("/tasks/<id>/")
 def check(id):
 	result = celery.AsyncResult(id)
@@ -43,7 +45,6 @@ def check(id):
 	traceback = result.traceback
 	result = result.result
 
-	None
 	if isinstance(result, Exception):
 		info = {
 				'id': id,
