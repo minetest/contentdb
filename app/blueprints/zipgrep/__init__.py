@@ -16,7 +16,7 @@
 
 
 from celery import uuid
-from flask import Blueprint, render_template, redirect, request
+from flask import Blueprint, render_template, redirect, request, abort
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField
 from wtforms.validators import InputRequired, Length
@@ -53,6 +53,9 @@ def zipgrep_search():
 @bp.route("/zipgrep/<id>/")
 def view_results(id):
 	result = celery.AsyncResult(id)
+	if result.status == "PENDING":
+		abort(404)
+
 	if result.status != "SUCCESS" or isinstance(result.result, Exception):
 		result_url = url_for("zipgrep.view_results", id=id)
 		return redirect(url_for("tasks.check", id=id, r=result_url))

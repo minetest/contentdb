@@ -10,7 +10,7 @@
 	<h2>{{ query }}</h2>
 
 	<p class="text-muted">
-		Found in {{ matches | count }} packages.
+		Found in {{ matches | count }} package(s).
 	</p>
 
 	<div class="list-group">
@@ -30,7 +30,7 @@
 						</div>
 
 						<p class="mt-4">
-							{{ match.lines.split("\n") | select | list | count }} matches
+							{{ match.lines.split("\n") | select | list | count }} match(es)
 						</p>
 
 						<a class="mt-4 btn btn-secondary" href="{{ match.package.getDownloadRelease().getDownloadURL() }}">
