@@ -2,9 +2,15 @@
 
 {% block title %}
 	{{ _("Threads") }}
+	{% if package %}
+		- {{ package.title }}
+	{% endif %}
 {% endblock %}
 
 {% block content %}
+	{% if current_user.is_authenticated and package %}
+		<a href="{{ url_for('threads.new', pid=package and package.id) }}" class="btn btn-primary float-right">{{ _("New Thread") }}</a>
+	{% endif %}
 	<h1>{{ self.title() }}</h1>
 
 	{% from "macros/pagination.html" import render_pagination %}

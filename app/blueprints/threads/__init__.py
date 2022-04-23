@@ -36,10 +36,12 @@ def list_all():
 	if not Permission.SEE_THREAD.check(current_user):
 		query = query.filter_by(private=False)
 
+	package = None
 	pid = request.args.get("pid")
 	if pid:
 		pid = get_int_or_abort(pid)
-		query = query.filter_by(package_id=pid)
+		package = Package.query.get(pid)
+		query = query.filter_by(package=package)
 
 	query = query.filter_by(review_id=None)
 
@@ -50,7 +52,7 @@ def list_all():
 
 	pagination = query.paginate(page, num, True)
 
-	return render_template("threads/list.html", pagination=pagination, threads=pagination.items)
+	return render_template("threads/list.html", pagination=pagination, threads=pagination.items, package=package)
 
 
 @bp.route("/threads/<int:id>/subscribe/", methods=["POST"])
@@ -279,20 +281,17 @@ def new():
 	if "pid" in request.args:
 		package = Package.query.get(int(request.args.get("pid")))
 		if package is None:
-			flash(gettext("Unable to find that package!"), "danger")
+			abort(404)
 
-	# Don't allow making orphan threads on approved packages for now
-	if package is None:
-		abort(403)
+	def_is_private = request.args.get("private") or False
+	if package is None and not current_user.rank.atLeast(UserRank.APPROVER):
+		abort(404)
 
-	def_is_private   = request.args.get("private") or False
-	if package is None:
-		def_is_private = True
-	allow_change     = package and package.approved
+	allow_change = package and package.approved
 	is_review_thread = package and not package.approved
 
 	# Check that user can make the thread
-	if not package.checkPerm(current_user, Permission.CREATE_THREAD):
+	if package and not package.checkPerm(current_user, Permission.CREATE_THREAD):
 		flash(gettext("Unable to create thread!"), "danger")
 		return redirect(url_for("homepage.home"))
 
@@ -325,7 +324,7 @@ def new():
 		db.session.add(thread)
 
 		thread.watchers.append(current_user)
-		if package is not None and package.author != current_user:
+		if package and package.author != current_user:
 			thread.watchers.append(package.author)
 
 		reply = ThreadReply()
@@ -350,13 +349,14 @@ def new():
 			addNotification(mentioned, current_user, NotificationType.NEW_THREAD,
 							msg, thread.getViewURL(), thread.package)
 
+			thread.watchers.append(mentioned)
+
 		notif_msg = "New thread '{}'".format(thread.title)
 		if package is not None:
 			addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
 
 		approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
 		addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
-
 
 		if is_review_thread:
 			post_discord_webhook.delay(current_user.username,
