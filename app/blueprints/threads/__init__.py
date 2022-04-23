@@ -289,7 +289,7 @@ def new():
 	if package is None and not current_user.rank.atLeast(UserRank.APPROVER):
 		abort(404)
 
-	allow_change = package and package.approved
+	allow_private_change = not package or package.approved
 	is_review_thread = package and not package.approved
 
 	# Check that user can make the thread
@@ -321,7 +321,7 @@ def new():
 		thread = Thread()
 		thread.author  = current_user
 		thread.title   = form.title.data
-		thread.private = form.private.data if allow_change else def_is_private
+		thread.private = form.private.data if allow_private_change else def_is_private
 		thread.package = package
 		db.session.add(thread)
 
@@ -369,7 +369,7 @@ def new():
 		return redirect(thread.getViewURL())
 
 
-	return render_template("threads/new.html", form=form, allow_private_change=allow_change, package=package)
+	return render_template("threads/new.html", form=form, allow_private_change=allow_private_change, package=package)
 
 
 @bp.route("/users/<username>/comments/")
