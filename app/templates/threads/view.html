@@ -89,11 +89,14 @@
 		<aside class="row">
 			<div class="col-md-9">
 				<i>
-					{{ _("This thread is only visible to its creator, the package owner, and users of Approver rank or above.") }}
+					{{ _("This thread is only visible to its creator, package maintainers, users of Approver rank or above, and @mentioned users.") }}
 				</i>
 			</div>
 			<div class="col-md-3">
 				<div class="d-flex flex-row justify-content-end flex-wrap align-items-center" style="gap: 0.5em;">
+					<span class="text-muted mr-2" title="{{ _('This thread is visible to the following users') }}">
+						{{ _("Visible to:") }}
+					</span>
 					{% for viewer in thread.get_visible_to() %}
 						<a href="{{ url_for('users.profile', username=viewer.username) }}" title="{{ viewer.display_name }}">
 							<img style="max-height: 2em;" src="{{ viewer.getProfilePicURL() }}" alt="{{ viewer.display_name }}" />
