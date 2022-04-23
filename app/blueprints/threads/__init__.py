@@ -218,54 +218,48 @@ def view(id):
 	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
-	if current_user.is_authenticated and request.method == "POST":
-		comment = request.form["comment"]
+	form = CommentForm(formdata=request.form) if thread.checkPerm(current_user, Permission.COMMENT_THREAD) else None
 
-		if not thread.checkPerm(current_user, Permission.COMMENT_THREAD):
-			flash(gettext("You cannot comment on this thread"), "danger")
-			return redirect(thread.getViewURL())
+	if form and form.validate_on_submit():
+		comment = form.comment.data
 
 		if not current_user.canCommentRL():
 			flash(gettext("Please wait before commenting again"), "danger")
 			return redirect(thread.getViewURL())
 
-		if 2000 >= len(comment) > 3:
-			reply = ThreadReply()
-			reply.author = current_user
-			reply.comment = comment
-			db.session.add(reply)
+		reply = ThreadReply()
+		reply.author = current_user
+		reply.comment = comment
+		db.session.add(reply)
 
-			thread.replies.append(reply)
-			if not current_user in thread.watchers:
-				thread.watchers.append(current_user)
+		thread.replies.append(reply)
+		if current_user not in thread.watchers:
+			thread.watchers.append(current_user)
 
-			for mentioned_username in get_user_mentions(render_markdown(comment)):
-				mentioned = User.query.filter_by(username=mentioned_username)
-				if mentioned is None:
-					continue
+		for mentioned_username in get_user_mentions(render_markdown(comment)):
+			mentioned = User.query.filter_by(username=mentioned_username)
+			if mentioned is None:
+				continue
 
-				msg = "Mentioned by {} in '{}'".format(current_user.display_name, thread.title)
-				addNotification(mentioned, current_user, NotificationType.THREAD_REPLY,
-						msg, thread.getViewURL(), thread.package)
+			msg = "Mentioned by {} in '{}'".format(current_user.display_name, thread.title)
+			addNotification(mentioned, current_user, NotificationType.THREAD_REPLY,
+					msg, thread.getViewURL(), thread.package)
 
-			msg = "New comment on '{}'".format(thread.title)
-			addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
+		msg = "New comment on '{}'".format(thread.title)
+		addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
 
-			if thread.author == get_system_user():
-				approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
-				addNotification(approvers, current_user, NotificationType.EDITOR_MISC, msg,
-						thread.getViewURL(), thread.package)
-				post_discord_webhook.delay(current_user.username,
-						"Replied to bot messages: {}".format(thread.getViewURL(absolute=True)), True)
+		if thread.author == get_system_user():
+			approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
+			addNotification(approvers, current_user, NotificationType.EDITOR_MISC, msg,
+					thread.getViewURL(), thread.package)
+			post_discord_webhook.delay(current_user.username,
+					"Replied to bot messages: {}".format(thread.getViewURL(absolute=True)), True)
 
-			db.session.commit()
+		db.session.commit()
 
-			return redirect(thread.getViewURL())
+		return redirect(thread.getViewURL())
 
-		else:
-			flash(gettext("Comment needs to be between 3 and 2000 characters."), "danger")
-
-	return render_template("threads/view.html", thread=thread)
+	return render_template("threads/view.html", thread=thread, form=form)
 
 
 class ThreadForm(FlaskForm):

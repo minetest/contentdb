@@ -92,5 +92,5 @@
 	{% endif %}
 
 	{% from "macros/threads.html" import render_thread %}
-	{{ render_thread(thread, current_user) }}
+	{{ render_thread(thread, current_user, form) }}
 {% endblock %}

@@ -1,4 +1,4 @@
-{% macro render_thread(thread, current_user) -%}
+{% macro render_thread(thread, current_user, form=None) -%}
 
 {% from "macros/reviews.html" import render_review_vote %}
 
@@ -114,6 +114,14 @@
 					{% endif %}
 					<input class="btn btn-primary" type="submit" disabled value="Comment" />
 				</div>
+			{% elif form %}
+
+{% from "macros/forms.html" import render_field, render_submit_field %}
+				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
+					{{ form.hidden_tag() }}
+					{{ render_field(form.comment, fieldclass="form-control markdown", label="") }}
+					{{ render_submit_field(form.submit) }}
+				</form>
 			{% else %}
 				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
