@@ -20,7 +20,7 @@ from typing import Tuple, List
 from flask import url_for
 
 from . import db
-from .users import Permission, UserRank
+from .users import Permission, UserRank, User
 from .packages import Package
 
 watchers = db.Table("watchers",
@@ -88,7 +88,7 @@ class Thread(db.Model):
 		if self.package:
 			isMaintainer = isMaintainer or user in self.package.maintainers
 
-		canSee = not self.private or isMaintainer or user.rank.atLeast(UserRank.APPROVER)
+		canSee = not self.private or isMaintainer or user.rank.atLeast(UserRank.APPROVER) or user in self.watchers
 
 		if perm == Permission.SEE_THREAD:
 			return canSee
@@ -106,6 +106,20 @@ class Thread(db.Model):
 
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))
+
+	def get_visible_to(self) -> list[User]:
+		retval = {
+			self.author.username: self.author
+		}
+
+		for user in self.watchers:
+			retval[user.username] = user
+
+		if self.package:
+			for user in self.package.maintainers:
+				retval[user.username] = user
+
+		return list(retval.values())
 
 	def get_latest_reply(self):
 		return ThreadReply.query.filter_by(thread_id=self.id).order_by(db.desc(ThreadReply.id)).first()

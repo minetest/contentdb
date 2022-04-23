@@ -81,14 +81,30 @@
 
 	{% if thread.package %}
 		<p>
-			{{ _("Package") }}: <a href="{{ thread.package.getURL("packages.view") }}">{{ thread.package.title }}</a>
+			{{ _("Package") }}: <a href="{{ thread.package.getURL('packages.view') }}">{{ thread.package.title }}</a>
 		</p>
 	{% endif %}
 
 	{% if thread.private %}
-		<i>
-			{{ _("This thread is only visible to its creator, the package owner, and users of Approver rank or above.") }}
-		</i>
+		<aside class="row">
+			<div class="col-md-9">
+				<i>
+					{{ _("This thread is only visible to its creator, the package owner, and users of Approver rank or above.") }}
+				</i>
+			</div>
+			<div class="col-md-3">
+				<div class="d-flex flex-row justify-content-end flex-wrap align-items-center" style="gap: 0.5em;">
+					{% for viewer in thread.get_visible_to() %}
+						<a href="{{ url_for('users.profile', username=viewer.username) }}" title="{{ viewer.display_name }}">
+							<img style="max-height: 2em;" src="{{ viewer.getProfilePicURL() }}" alt="{{ viewer.display_name }}" />
+						</a>
+					{% endfor %}
+					<a href="{{ url_for('users.list_all') }}" title="{{ _('Plus approvers and editors') }}">
+						+ <i class="fas fa-user-check"></i>
+					</a>
+				</div>
+			</div>
+		</aside>
 	{% endif %}
 
 	{% from "macros/threads.html" import render_thread %}
