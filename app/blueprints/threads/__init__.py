@@ -220,7 +220,8 @@ def view(id):
 
 	form = CommentForm(formdata=request.form) if thread.checkPerm(current_user, Permission.COMMENT_THREAD) else None
 
-	if form and form.validate_on_submit():
+	# Check that title is none to load comments into textarea if redirected from new thread page
+	if form and form.validate_on_submit() and request.form.get("title") is None:
 		comment = form.comment.data
 
 		if not current_user.canCommentRL():
@@ -297,8 +298,9 @@ def new():
 
 	# Only allow creating one thread when not approved
 	elif is_review_thread and package.review_thread is not None:
-		flash(gettext("An approval thread already exists!"), "danger")
-		return redirect(package.review_thread.getViewURL())
+		# Redirect submit to `view` page, which checks for `title` in the form data and so won't commit the reply
+		flash(gettext("An approval thread already exists! Consider replying there instead"), "danger")
+		return redirect(package.review_thread.getViewURL(), code=307)
 
 	elif not current_user.canOpenThreadRL():
 		flash(gettext("Please wait before opening another thread"), "danger")
