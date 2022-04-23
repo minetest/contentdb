@@ -136,6 +136,8 @@ class ThreadReply(db.Model):
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author     = db.relationship("User", back_populates="replies", foreign_keys=[author_id])
 
+	is_status_update = db.Column(db.Boolean, server_default="0", nullable=False)
+
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	def get_url(self):

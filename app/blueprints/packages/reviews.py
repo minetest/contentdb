@@ -145,6 +145,7 @@ def delete_review(package, reviewer):
 	reply.thread  = thread
 	reply.author  = current_user
 	reply.comment = "_converted review into a thread_"
+	reply.is_status_update = True
 	db.session.add(reply)
 
 	thread.review = None

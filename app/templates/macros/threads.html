@@ -1,9 +1,6 @@
-{% macro render_thread(thread, current_user, form=None) -%}
+{% macro render_reply(r, thread, current_user) -%}
+	{% from "macros/reviews.html" import render_review_vote %}
 
-{% from "macros/reviews.html" import render_review_vote %}
-
-<ul class="comments mt-4 mb-0">
-	{% for r in thread.replies %}
 	<li class="row my-2 mx-0">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('users.profile', username=r.author.username) }}">
@@ -77,6 +74,43 @@
 			</div>
 		</div>
 	</li>
+{% endmacro %}
+
+
+{% macro render_status_update(r, thread, current_user) -%}
+	<li class="row my-2 mx-0 align-items-center">
+		<div class="col-md-1 p-1">
+			<a href="{{ url_for('users.profile', username=r.author.username) }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
+			</a>
+		</div>
+		<div class="col-auto">
+			<a class="author {{ r.author.rank.name }}"
+					href="{{ url_for('users.profile', username=r.author.username) }}">
+				{{ r.author.display_name }}
+			</a>
+		</div>
+		<div class="col pr-0 status-update">
+			{{ r.comment | markdown }}
+		</div>
+		<div class="col-auto">
+			<a name="reply-{{ r.id }}" class="text-muted float-right"
+					href="{{ r.get_url() }}">
+				{{ r.created_at | datetime }}
+			</a>
+		</div>
+	</li>
+{% endmacro %}
+
+
+{% macro render_thread(thread, current_user, form=None) -%}
+<ul class="comments mt-4 mb-0">
+	{% for r in thread.replies %}
+		{% if r.is_status_update %}
+			{{ render_status_update(r, thread, current_user) }}
+		{% else %}
+			{{ render_reply(r, thread, current_user) }}
+		{% endif %}
 	{% endfor %}
 </ul>
 
@@ -115,8 +149,7 @@
 					<input class="btn btn-primary" type="submit" disabled value="Comment" />
 				</div>
 			{% elif form %}
-
-{% from "macros/forms.html" import render_field, render_submit_field %}
+				{% from "macros/forms.html" import render_field, render_submit_field %}
 				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
 					{{ form.hidden_tag() }}
 					{{ render_field(form.comment, fieldclass="form-control markdown", label="") }}
