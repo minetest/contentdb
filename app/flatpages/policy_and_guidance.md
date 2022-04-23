@@ -11,6 +11,8 @@ the listings and to combat abuse.
 * **Don't use the name of another mod unless your mod is a fork or reimplementation.** <sup>3</sup>
 * **Licenses must allow derivatives, redistribution, and must not discriminate.** <sup>4</sup>
 * **Don't put promotions or advertisements in any package metadata.** <sup>5</sup>
+* **Don't manipulate package placement using reviews or downloads.** <sup>6</sup>
+* **Screenshots must not be misleading.** <sup>7</sup>
 * **The ContentDB admin reserves the right to remove packages for any reason**,
   including ones not covered by this document, and to ban users who abuse
   this service. <sup>1</sup>
@@ -151,6 +153,26 @@ You must not attempt to unfairly manipulate your package's ranking, whether by r
 Doing so may result in temporary or permanent suspension from ContentDB.
 
 
-## 7. Reporting Violations
+## 7. Screenshots
+
+1. Screenshots must not violate copyright. You should have the rights to the screenshot.
+2. Screenshots should not be misleading, e.g. do not use idealized mockups or blender concept renders if they do not accurately reflect in-game appearance.
+3. Screenshots should depict the actual content of the package in some way, i.e. no "off-topic" images.
+4. Content that is prominently displayed or "focal" should be either present in, or interact with, the package in some way.
+   These can include things in other packages if they have a dependency relationship (either way), or if the submitted
+   package in some way enhances, extends, or alters that content.
+
+   Unrelated package content can be allowed to show what the package content will look like in a typical/realistic game scene,
+   but should be "in the background" only as far as possible.
+5. Screenshots must only contain content appropriate for the Content Warnings of the package.
+6. Images should be MOSTLY in-game screenshots. Some alterations are okay, such as collages, added text,
+   some reasonable compositing. Logo/brochure images are allowed but should NOT be the cover image.
+
+   Don't just use one of the textures from the package; show it in-situ as it actually looks in the game.
+9. Packages should have a screenshot when reasonably applicable.
+10. Screenshots should be of reasonable dimensions. We recommend using 1920x1080.
+
+
+## 8. Reporting Violations
 
 Please click "Report" on the package page.
