@@ -248,6 +248,8 @@ def view(id):
 			addNotification(mentioned, current_user, NotificationType.THREAD_REPLY,
 					msg, thread.getViewURL(), thread.package)
 
+			thread.watchers.append(mentioned)
+
 		msg = "New comment on '{}'".format(thread.title)
 		addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
 
