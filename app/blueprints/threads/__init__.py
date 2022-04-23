@@ -240,7 +240,7 @@ def view(id):
 			thread.watchers.append(current_user)
 
 		for mentioned_username in get_user_mentions(render_markdown(comment)):
-			mentioned = User.query.filter_by(username=mentioned_username)
+			mentioned = User.query.filter_by(username=mentioned_username).first()
 			if mentioned is None:
 				continue
 
@@ -343,7 +343,7 @@ def new():
 			package.review_thread = thread
 
 		for mentioned_username in get_user_mentions(render_markdown(form.comment.data)):
-			mentioned = User.query.filter_by(username=mentioned_username)
+			mentioned = User.query.filter_by(username=mentioned_username).first()
 			if mentioned is None:
 				continue
 

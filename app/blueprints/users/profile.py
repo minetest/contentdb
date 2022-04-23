@@ -66,6 +66,9 @@ class Medal:
 
 	@classmethod
 	def make_locked(cls, description: str, progress: Tuple[int, int]):
+		if progress[0] is None or progress[1] is None:
+			raise Exception("Invalid progress")
+
 		return Medal(description=description, progress=progress)
 
 
@@ -127,7 +130,7 @@ def get_user_medals(user: User) -> Tuple[List[Medal], List[Medal]]:
 
 		unlocked.append(Medal.make_unlocked(
 				place_to_color(review_idx + 1), "fa-star-half-alt", title, description))
-	else:
+	elif review_boundary is not None:
 		description = gettext(u"Consider writing more helpful reviews to get a medal.")
 		if review_idx:
 			description += " " + gettext(u"You are in place %(place)s.", place=review_idx + 1)
