@@ -247,8 +247,8 @@
 					{% endif %}
 				</div>
 
-				{% if t.package %}
-					<div class="col-md-2 text-muted text-right">
+				<div class="col-md-2 text-muted text-right">
+					{% if t.package %}
 						<img
 							class="img-fluid"
 							style="max-height: 22px; max-width: 22px;"
@@ -257,8 +257,8 @@
 						<span class="pl-2">
 							{{ t.package.title }}
 						</span>
-					</div>
-				{% endif %}
+					{% endif %}
+				</div>
 			</div>
 		</a>
 	{% else %}
