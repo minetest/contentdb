@@ -270,6 +270,25 @@ class User(db.Model, UserMixin):
 		return Thread.query.filter_by(author=self) \
 			.filter(Thread.created_at > hour_ago).count() < 2 * factor
 
+	def canReviewRL(self):
+		from app.models import PackageReview
+
+		factor = 1
+		if self.rank.atLeast(UserRank.ADMIN):
+			return True
+		elif self.rank.atLeast(UserRank.TRUSTED_MEMBER):
+			factor *= 5
+
+		five_mins_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=5)
+		if PackageReview.query.filter_by(author=self) \
+				.filter(PackageReview.created_at > five_mins_ago).count() >= 4 * factor:
+			return False
+
+		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
+		return PackageReview.query.filter_by(author=self) \
+			.filter(PackageReview.created_at > hour_ago).count() < 30 * factor
+
+
 	def __eq__(self, other):
 		if other is None:
 			return False

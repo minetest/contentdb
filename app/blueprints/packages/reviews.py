@@ -54,6 +54,10 @@ def review(package):
 		flash(gettext("You can't review your own package!"), "danger")
 		return redirect(package.getURL("packages.view"))
 
+	if not current_user.canReviewRL():
+		flash(gettext("You've reviewed too many packages recently. Please wait before trying again, and consider making your reviews more detailed"), "danger")
+		return redirect(package.getURL("packages.view"))
+
 	review = PackageReview.query.filter_by(package=package, author=current_user).first()
 
 	form = ReviewForm(formdata=request.form, obj=review)
