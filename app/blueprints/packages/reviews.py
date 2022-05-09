@@ -54,11 +54,11 @@ def review(package):
 		flash(gettext("You can't review your own package!"), "danger")
 		return redirect(package.getURL("packages.view"))
 
-	if not current_user.canReviewRL():
-		flash(gettext("You've reviewed too many packages recently. Please wait before trying again, and consider making your reviews more detailed"), "danger")
-		return redirect(package.getURL("packages.view"))
-
 	review = PackageReview.query.filter_by(package=package, author=current_user).first()
+	can_review = review is not None or current_user.canReviewRL()
+
+	if not can_review:
+		flash(gettext("You've reviewed too many packages recently. Please wait before trying again, and consider making your reviews more detailed"), "danger")
 
 	form = ReviewForm(formdata=request.form, obj=review)
 
@@ -69,7 +69,7 @@ def review(package):
 		form.comment.data = review.thread.replies[0].comment
 
 	# Validate and submit
-	elif form.validate_on_submit():
+	elif can_review and form.validate_on_submit():
 		was_new = False
 		if not review:
 			was_new = True

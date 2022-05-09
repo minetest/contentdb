@@ -281,12 +281,12 @@ class User(db.Model, UserMixin):
 
 		five_mins_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=5)
 		if PackageReview.query.filter_by(author=self) \
-				.filter(PackageReview.created_at > five_mins_ago).count() >= 4 * factor:
+				.filter(PackageReview.created_at > five_mins_ago).count() > 2 * factor:
 			return False
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		return PackageReview.query.filter_by(author=self) \
-			.filter(PackageReview.created_at > hour_ago).count() < 30 * factor
+			.filter(PackageReview.created_at > hour_ago).count() < 10 * factor
 
 
 	def __eq__(self, other):
