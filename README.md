@@ -8,6 +8,10 @@ See [Getting Started](docs/getting_started.md) for setting up a development/prod
 
 See [Developer Intro](docs/dev_intro.md) for an overview of the code organisation.
 
+## Credits
+
+* `app/public/static/placeholder.png`: erlehmann, Warr1024. License: CC BY-SA 3.0
+
 ## How-tos
 
 ```sh
