@@ -13,14 +13,14 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
-
+import typing
 from urllib.parse import quote as urlescape
 
 from flask import render_template
 from flask_babel import lazy_gettext, gettext
 from flask_wtf import FlaskForm
 from flask_login import login_required
+from jinja2 import Markup
 from sqlalchemy import or_, func, and_
 from sqlalchemy.orm import joinedload, subqueryload
 from wtforms import *
@@ -249,6 +249,62 @@ class PackageForm(FlaskForm):
 	submit           = SubmitField(lazy_gettext("Save"))
 
 
+def handle_create_edit(package: typing.Optional[Package], form: PackageForm, author: User):
+	wasNew = False
+	if package is None:
+		package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
+		if package is not None:
+			if package.state == PackageState.DELETED:
+				package.review_thread_id = None
+				db.session.delete(package)
+			else:
+				flash(Markup(
+					f"<a class='btn btn-sm btn-danger float-right' href='{package.getURL('packages.view')}'>View</a>" +
+					gettext("Package already exists")), "danger")
+				return None
+
+		package = Package()
+		package.author = author
+		package.maintainers.append(author)
+		wasNew = True
+
+	try:
+		do_edit_package(current_user, package, wasNew, True, {
+			"type": form.type.data,
+			"title": form.title.data,
+			"name": form.name.data,
+			"short_desc": form.short_desc.data,
+			"dev_state": form.dev_state.data,
+			"tags": form.tags.raw_data,
+			"content_warnings": form.content_warnings.raw_data,
+			"license": form.license.data,
+			"media_license": form.media_license.data,
+			"desc": form.desc.data,
+			"repo": form.repo.data,
+			"website": form.website.data,
+			"issueTracker": form.issueTracker.data,
+			"forums": form.forums.data,
+			"video_url": form.video_url.data,
+		})
+
+		if wasNew:
+			msg = f"Created package {author.username}/{form.name.data}"
+			addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.getURL("packages.view"), package)
+
+		if wasNew and package.repo is not None:
+			importRepoScreenshot.delay(package.id)
+
+		next_url = package.getURL("packages.view")
+		if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
+			next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
+		elif wasNew:
+			next_url = package.getURL("packages.setup_releases")
+
+		return redirect(next_url)
+	except LogicError as e:
+		flash(e.message, "danger")
+
+
 @bp.route("/packages/new/", methods=["GET", "POST"])
 @bp.route("/packages/<author>/<name>/edit/", methods=["GET", "POST"])
 @login_required
@@ -297,52 +353,9 @@ def create_edit(author=None, name=None):
 		form.license.data = form.media_license.data
 
 	if form.validate_on_submit():
-		wasNew = False
-		if package is None:
-			package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
-			if package is not None:
-				if package.state == PackageState.DELETED:
-					Package.query.filter_by(name=form["name"].data, author_id=author.id).delete()
-				else:
-					flash(gettext("Package already exists!"), "danger")
-					return redirect(package.getURL("packages.view"))
-
-			package = Package()
-			package.author = author
-			package.maintainers.append(author)
-			wasNew = True
-
-		try:
-			do_edit_package(current_user, package, wasNew, True, {
-				"type": form.type.data,
-				"title": form.title.data,
-				"name": form.name.data,
-				"short_desc": form.short_desc.data,
-				"dev_state": form.dev_state.data,
-				"tags": form.tags.raw_data,
-				"content_warnings": form.content_warnings.raw_data,
-				"license": form.license.data,
-				"media_license": form.media_license.data,
-				"desc": form.desc.data,
-				"repo": form.repo.data,
-				"website": form.website.data,
-				"issueTracker": form.issueTracker.data,
-				"forums": form.forums.data,
-				"video_url": form.video_url.data,
-			})
-
-			if wasNew and package.repo is not None:
-				importRepoScreenshot.delay(package.id)
-
-			next_url = package.getURL("packages.view")
-			if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
-				next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
-			elif wasNew:
-				next_url = package.getURL("packages.setup_releases")
-
-			return redirect(next_url)
-		except LogicError as e:
-			flash(e.message, "danger")
+		ret = handle_create_edit(package, form, author)
+		if ret:
+			return ret
 
 	package_query = Package.query.filter_by(state=PackageState.APPROVED)
 	if package is not None:

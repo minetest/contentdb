@@ -402,7 +402,8 @@ class Package(db.Model):
 	downloads     = db.Column(db.Integer, nullable=False, default=0)
 
 	review_thread_id = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=True, default=None)
-	review_thread    = db.relationship("Thread", uselist=False, foreign_keys=[review_thread_id], back_populates="is_review_thread")
+	review_thread    = db.relationship("Thread", uselist=False, foreign_keys=[review_thread_id],
+			back_populates="is_review_thread", post_update=True)
 
 	# Downloads
 	repo         = db.Column(db.String(200), nullable=True)
