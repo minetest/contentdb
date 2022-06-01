@@ -21,7 +21,7 @@ from flask import render_template
 from flask_babel import lazy_gettext, gettext
 from flask_wtf import FlaskForm
 from flask_login import login_required
-from sqlalchemy import or_, func
+from sqlalchemy import or_, func, and_
 from sqlalchemy.orm import joinedload, subqueryload
 from wtforms import *
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
@@ -123,7 +123,7 @@ def view(package):
 	if show_similar and package.type != PackageType.TXP:
 		conflicting_modnames = db.session.query(MetaPackage.name) \
 				.filter(MetaPackage.id.in_([ mp.id for mp in package.provides ])) \
-				.filter(MetaPackage.packages.any(Package.id != package.id)) \
+				.filter(MetaPackage.packages.any(and_(Package.id != package.id, Package.state == PackageState.APPROVED))) \
 				.all()
 
 		conflicting_modnames += db.session.query(ForumTopic.name) \
@@ -298,14 +298,14 @@ def create_edit(author=None, name=None):
 
 	if form.validate_on_submit():
 		wasNew = False
-		if not package:
+		if package is None:
 			package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
 			if package is not None:
-				if package.state == PackageState.READY_FOR_REVIEW:
+				if package.state == PackageState.DELETED:
 					Package.query.filter_by(name=form["name"].data, author_id=author.id).delete()
 				else:
 					flash(gettext("Package already exists!"), "danger")
-					return redirect(url_for("packages.create_edit"))
+					return redirect(package.getURL("packages.view"))
 
 			package = Package()
 			package.author = author

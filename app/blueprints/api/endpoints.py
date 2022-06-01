@@ -103,10 +103,11 @@ def resolve_package_deps(out, package, only_hard, depth=1):
 
 		elif dep.meta_package:
 			name = dep.meta_package.name
-			fulfilled_by = [ pkg.getId() for pkg in dep.meta_package.packages]
+			fulfilled_by = [ pkg.getId() for pkg in dep.meta_package.packages if pkg.state == PackageState.APPROVED]
 
 			if depth == 1 and not dep.optional:
-				most_likely = next((pkg for pkg in dep.meta_package.packages if pkg.type == PackageType.MOD), None)
+				most_likely = next((pkg for pkg in dep.meta_package.packages \
+						if pkg.type == PackageType.MOD and pkg.state == PackageState.APPROVED), None)
 				if most_likely:
 					resolve_package_deps(out, most_likely, only_hard, depth + 1)
 

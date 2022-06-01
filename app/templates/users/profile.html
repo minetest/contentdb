@@ -100,7 +100,7 @@
 				<a class="btn" href="{{ url_for('packages.list_all', author=user.username) }}">
 					<i class="fas fa-box"></i>
 					<span class="count">
-						<strong>{{ user.packages.count() }}</strong>
+						<strong>{{ user.packages.filter_by(state='APPROVED').count() }}</strong>
 						{{ _("packages") }}
 					</span>
 				</a>
