@@ -8,8 +8,9 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-04-02 09:09+0000\n"
-"Last-Translator: Linerly <linerly@protonmail.com>\n"
+"PO-Revision-Date: 2022-05-11 10:15+0000\n"
+"Last-Translator: Muhammad Rifqi Priyo Susanto "
+"<muhammadrifqipriyosusanto@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/minetest/"
 "contentdb/id/>\n"
 "Language: id\n"
@@ -17,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:103
@@ -217,7 +218,7 @@ msgstr "Anda tidak memiliki izin untuk melakukannya"
 
 #: app/blueprints/packages/packages.py:396
 msgid "Please comment what changes are needed in the approval thread"
-msgstr "Harap tuliskan perubahan yang dibutuhkan dalam utas ulasan"
+msgstr "Harap tuliskan perubahan yang dibutuhkan dalam utas persetujuan"
 
 #: app/blueprints/packages/packages.py:417
 #: app/blueprints/packages/packages.py:433
@@ -332,7 +333,7 @@ msgstr "Pemicu"
 
 #: app/blueprints/packages/releases.py:240
 msgid "New Commit"
-msgstr ""
+msgstr "Commit Baru"
 
 #: app/blueprints/packages/releases.py:241 app/templates/admin/tags/list.html:8
 msgid "New Tag"
@@ -420,15 +421,14 @@ msgstr "Gambar Sampul"
 
 #: app/blueprints/report/__init__.py:34
 msgid "Message"
-msgstr ""
+msgstr "Pesan"
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:238
 #: app/templates/macros/threads.html:53 app/templates/packages/view.html:540
 #: app/templates/report/index.html:4 app/templates/report/index.html:10
 #: app/templates/users/profile.html:28
-#, fuzzy
 msgid "Report"
-msgstr "Repo"
+msgstr "Laporkan"
 
 #: app/blueprints/threads/__init__.py:64
 msgid "Already subscribed!"
@@ -484,9 +484,8 @@ msgid "Unable to create thread!"
 msgstr "Tidak dapat membuat utas!"
 
 #: app/blueprints/threads/__init__.py:306
-#, fuzzy
 msgid "An approval thread already exists!"
-msgstr "Utas ulasan telah ada!"
+msgstr "Utas persetujuan telah ada!"
 
 #: app/blueprints/threads/__init__.py:310
 msgid "Please wait before opening another thread"
@@ -545,7 +544,7 @@ msgstr "Nama Pengguna"
 #: app/templates/users/claim_forums.html:68
 #: app/templates/users/register.html:16
 msgid "Only a-zA-Z0-9._ allowed"
-msgstr "Hanya a-zA-Z0-9_ yang dibolehkan"
+msgstr "Hanya a-zA-Z0-9._ yang dibolehkan"
 
 #: app/blueprints/users/account.py:106 app/blueprints/users/account.py:189
 #: app/blueprints/users/account.py:224 app/blueprints/users/account.py:376
@@ -571,9 +570,8 @@ msgid "Incorrect captcha answer"
 msgstr "Jawaban captcha salah"
 
 #: app/blueprints/users/account.py:119
-#, fuzzy
 msgid "Username is invalid"
-msgstr "Nama pengguna atau surel/pos-el"
+msgstr "Nama pengguna tidak sah"
 
 #: app/blueprints/users/account.py:130
 msgid "An account already exists for that username but hasn't been claimed yet."
@@ -593,7 +591,7 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
-"Kami tidak dapat membuat akun karena surelnya telah dipakai oleh "
+"Kami tidak dapat membuat akunnya karena surelnya telah dipakai oleh "
 "%(display_name)s. Harap pakai alamat surel yang berbeda."
 
 #: app/blueprints/users/account.py:150 app/blueprints/users/account.py:253
@@ -607,7 +605,7 @@ msgstr "Reset Kata Sandi"
 
 #: app/blueprints/users/account.py:215
 msgid "Unable to find account"
-msgstr ""
+msgstr "Tidak dapat mencari akun"
 
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:232
 msgid "New password"
@@ -686,7 +684,7 @@ msgid ""
 "Invalid username - must only contain A-Za-z0-9._. Consider contacting an "
 "admin"
 msgstr ""
-"Nama pengguna tidak sah - hanya boleh berisi A-Za-z0-9_. Silakan hubungi "
+"Nama pengguna tidak sah - hanya boleh berisi A-Za-z0-9._. Silakan hubungi "
 "admin"
 
 #: app/blueprints/users/claim.py:45
@@ -699,7 +697,7 @@ msgstr "Tidak dapat mengambil nama pengguna GitHub untuk pengguna"
 
 #: app/blueprints/users/claim.py:72
 msgid "That user has already been claimed!"
-msgstr "Pengguna ini telah diklaim!"
+msgstr "Pengguna tersebut telah diklaim!"
 
 #: app/blueprints/users/claim.py:86
 #, python-format
@@ -785,7 +783,7 @@ msgstr "Paket Anda telah diunduh %(downloads)d kali secara keseluruhan."
 
 #: app/blueprints/users/profile.py:188
 msgid "First medal is at 50k."
-msgstr "Medali pertama ada pada 50 ribu."
+msgstr "Medali pertama ada di 50 ribu."
 
 #: app/blueprints/users/profile.py:193
 msgid ">300k downloads"
@@ -829,7 +827,7 @@ msgstr "Token API"
 #: app/blueprints/users/settings.py:42 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:35
 msgid "Moderator Tools"
-msgstr ""
+msgstr "Alat Moderator"
 
 #: app/blueprints/users/settings.py:52
 msgid "Donation URL"
@@ -866,50 +864,49 @@ msgstr ""
 "sendiri!"
 
 #: app/logic/packages.py:95
-#, fuzzy
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
-msgstr "Huruf kecil (a-z), angka (0-9), dan garis bawah (_) saja"
+msgstr ""
+"Nama hanya boleh terdiri dari huruf kecil (a-z), angka (0-9), dan garis "
+"bawah (_)"
 
 #: app/logic/packages.py:109
-#, fuzzy
 msgid "You do not have permission to edit this package"
-msgstr "Anda tidak memiliki izin untuk menyunting daftar pengelola"
+msgstr "Anda tidak memiliki izin untuk menyunting paket ini"
 
 #: app/logic/packages.py:113
-#, fuzzy
 msgid "You do not have permission to change the package name"
-msgstr "Anda tidak memiliki izin untuk melakukannya"
+msgstr "Anda tidak memiliki izin untuk mengganti nama paket"
 
 #: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr ""
+msgstr "Tidak dapat menambahkan label %(title)s ke paket"
 
 #: app/logic/releases.py:32
-#, fuzzy
 msgid "You do not have permission to make releases"
-msgstr "Anda tidak memiliki izin untuk menyunting daftar pengelola"
+msgstr "Anda tidak memiliki izin untuk membuat rilis"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Anda telah membuat terlalu banyak rilis untuk paket ini dalam 5 menit "
+"terakhir. Harap tunggu sebelum mencoba lagi"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr ""
+msgstr "Hash commit tidak sah; ia harus berupa 40 karakter heksadesimal"
 
 #: app/logic/screenshots.py:16
-#, fuzzy
 msgid "Too many requests, please wait before trying again"
-msgstr "Harap tunggu sebelum berkomentar lagi"
+msgstr "Terlalu banyak permintaan. Harap tunggu sebelum mencoba lagi"
 
 #: app/logic/screenshots.py:18
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "sebuah berkas citra PNG atau JPG"
 
 #: app/logic/screenshots.py:35
 #, python-format
@@ -917,27 +914,27 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
+"Tangkapan layar terlalu kecil. Ia harus berukuran setidaknya %(width)s kali "
+"%(height)s piksel"
 
 #: app/logic/uploads.py:52
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Harap unggah %(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "Citra yang diunggah bukanlah citra"
 
 #: app/models/packages.py:65
 msgid "Mod"
-msgstr ""
+msgstr "Mod"
 
 #: app/models/packages.py:67
-#, fuzzy
 msgid "Game"
-msgstr "Nama"
+msgstr "Permainan"
 
 #: app/models/packages.py:69
-#, fuzzy
 msgid "Texture Pack"
 msgstr "Paket Tekstur"
 
@@ -956,14 +953,12 @@ msgid "Texture Packs"
 msgstr "Paket Tekstur"
 
 #: app/models/packages.py:167
-#, fuzzy
 msgid "Submit for Approval"
-msgstr "Menunggu persetujuan."
+msgstr "Ajukan untuk Disetujui"
 
 #: app/models/packages.py:169
-#, fuzzy
 msgid "Approve"
-msgstr "Disetujui"
+msgstr "Setujui"
 
 #: app/models/packages.py:171 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
@@ -978,7 +973,7 @@ msgstr "Hapus"
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
-msgstr ""
+msgstr "Anda menerima surel ini karena menjadi pengguna terdaftar di ContentDB."
 
 #: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
@@ -991,7 +986,7 @@ msgstr ""
 #: app/tasks/emails.py:153
 #, python-format
 msgid "%(num)d new notifications"
-msgstr ""
+msgstr "%(num)d pemberitahuan baru"
 
 #: app/tasks/emails.py:155 app/templates/macros/forms.html:52
 #: app/templates/packages/create_edit.html:41
@@ -1001,7 +996,7 @@ msgstr "Lihat"
 
 #: app/tasks/emails.py:158
 msgid "Manage email settings"
-msgstr ""
+msgstr "Kelola pengaturan surel"
 
 #: app/tasks/emails.py:160 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
@@ -1399,26 +1394,31 @@ msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
+"Kami tidak bisa mereset kata sandi karena tidak menemukan akun yang terkait "
+"dengan surel ini."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
+"Ini mungkin karena Anda menggunakan surel lain untuk akun Anda atau karena "
+"Anda tidak pernah mengonfirmasi surel Anda."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
 msgstr ""
+"Anda bisa menggunakan GitHub untuk masuk jika ia ditautkan dengan akun Anda."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
-msgstr ""
+msgstr "Jika tidak, Anda perlu menghubungi rubenwardy untuk bantuan."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
-msgstr ""
+msgstr "Jika Anda tidak merasa menerima surel ini, Anda bisa mengabaikannya."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
@@ -1499,7 +1499,7 @@ msgstr "Anda perlu membuat rilis sebelum paket ini bisa disetujui."
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
-msgstr ""
+msgstr "Rilis sedang mengimpor atau mengalami masalah."
 
 #: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
@@ -1558,17 +1558,15 @@ msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr "Harap pastikan paket ini memiliki izin untuk menggunakan nama %(names)s"
 
 #: app/templates/macros/package_approval.html:115
-#, fuzzy
 msgid "Package approval thread"
-msgstr "Utas ulasan paket"
+msgstr "Utas persetujuan paket"
 
 #: app/templates/macros/package_approval.html:116
-#, fuzzy
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
-"Anda dapat membuka utas jika memiliki pertanyaan terhadap pengulas atau "
+"Anda dapat membuka utas jika memiliki pertanyaan terhadap penyetuju atau "
 "pembuat paket."
 
 #: app/templates/macros/packagegridtile.html:25
@@ -1877,15 +1875,13 @@ msgstr ""
 "memperbarui detail ini secara otomatis."
 
 #: app/templates/packages/create_edit.html:55
-#, fuzzy
 msgid ""
 "JavaScript is needed to improve the user interface, and is needed for "
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
-"JavaScript dibutuhkan untuk meningkatkan antarmuka pengguna dan dipakai "
-"untuk beberapa fitur\n"
-"\t\t\tseperti mencari metadata dari Git dan isi otomatis."
+"JavaScript diperlukan untuk meningkatkan antarmuka pengguna dan diperlukan\n"
+"\t\t\tuntuk fitur seperti mencari metadata dari git dan isi otomatis."
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
@@ -1946,7 +1942,7 @@ msgstr "Tip: tempelkan URL topik forum"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
-msgstr ""
+msgstr "Video YouTube akan ditampilkan sebagai sematan."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -1975,13 +1971,13 @@ msgstr ""
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:24
 msgid "Community Hub"
-msgstr ""
+msgstr "Pusat Komunitas"
 
 #: app/templates/packages/game_hub.html:11
 #: app/templates/packages/game_hub.html:12
 #, python-format
 msgid "Mods for %(title)s"
-msgstr ""
+msgstr "Mod untuk %(title)s"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2181,7 +2177,7 @@ msgstr "Nanti"
 #: app/templates/packages/release_wizard.html:14
 #, python-format
 msgid "A release is a single downloadable version of your %(title)s."
-msgstr "Sebuah rilis adalah versi tunggal yang bisa diunduh dari %(title)s Anda."
+msgstr "Sebuah rilis adalah versi tunggal %(title)s Anda yang bisa diunduh."
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
@@ -2288,13 +2284,12 @@ msgstr ""
 "\t\t\t\tnantinya bisa dikirim lagi untuk disetujui."
 
 #: app/templates/packages/remove.html:27
-#, fuzzy
 msgid "Reason"
-msgstr "Utas"
+msgstr "Alasan"
 
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
-msgstr ""
+msgstr "Alasan tidak setuju/hapus. Ini ditampilkan dalam log audit"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
@@ -2353,6 +2348,8 @@ msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
 msgstr ""
+"Resolusi yang disarankan adalah 1920x1080 dan tangkapan layar harus "
+"setidaknya %(width)dx%(height)d."
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
@@ -2364,20 +2361,19 @@ msgstr "Tangkapan layar teratas akan dipakai sebagai thumbnail paket."
 
 #: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:77
 msgid "Way too small"
-msgstr ""
+msgstr "Sangat terlalu kecil"
 
 #: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:80
 msgid "Too small"
-msgstr ""
+msgstr "Terlalu kecil"
 
 #: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
 msgid "Not HD"
-msgstr ""
+msgstr "Tidak HD"
 
 #: app/templates/packages/screenshots.html:53
-#, fuzzy
 msgid "Awaiting approval"
-msgstr "Menunggu persetujuan."
+msgstr "Menunggu persetujuan"
 
 #: app/templates/packages/screenshots.html:72
 msgid "No screenshots."
@@ -2393,11 +2389,11 @@ msgstr "Permintaan ulang membutuhkan JavaScript."
 
 #: app/templates/packages/screenshots.html:100
 msgid "Videos"
-msgstr ""
+msgstr "Video"
 
 #: app/templates/packages/screenshots.html:102
 msgid "You can set a video on the Edit Details page"
-msgstr ""
+msgstr "Anda bisa mengatur video di halaman Sunting Detail"
 
 #: app/templates/packages/share.html:10
 msgid "Links"
@@ -2475,21 +2471,21 @@ msgstr "Unduh"
 #: app/templates/packages/view.html:43
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
-msgstr ""
+msgstr "Minetest %(min)s-%(max)s"
 
 #: app/templates/packages/view.html:45
 #, python-format
 msgid "For Minetest %(min)s and above"
-msgstr ""
+msgstr "Untuk Minetest %(min)s ke atas"
 
 #: app/templates/packages/view.html:47
 #, python-format
 msgid "Minetest %(max)s and below"
-msgstr ""
+msgstr "Minetest %(max)s ke bawah"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
-msgstr ""
+msgstr "Bagaimana memasangnya?"
 
 #: app/templates/packages/view.html:73
 msgid "No downloads available"
@@ -2557,11 +2553,11 @@ msgstr "Dipakai oleh"
 
 #: app/templates/packages/view.html:327
 msgid "Content"
-msgstr ""
+msgstr "Konten"
 
 #: app/templates/packages/view.html:329 app/templates/packages/view.html:383
 msgid "View content for game"
-msgstr ""
+msgstr "Lihat konten permainan"
 
 #: app/templates/packages/view.html:343
 msgid "Package may be outdated"
@@ -2577,12 +2573,11 @@ msgstr "Peringatan"
 
 #: app/templates/packages/view.html:373
 msgid "Like this package? Help support its development by making a donation"
-msgstr ""
+msgstr "Suka paket ini? Dukung pengembangannya dengan menyumbang/donasi"
 
 #: app/templates/packages/view.html:376
-#, fuzzy
 msgid "Donate now"
-msgstr "Donasi"
+msgstr "Donasi sekarang"
 
 #: app/templates/packages/view.html:388
 msgid "Dependencies"
@@ -2602,19 +2597,19 @@ msgstr "Opsional"
 
 #: app/templates/packages/view.html:436
 msgid "Compatible Games"
-msgstr ""
+msgstr "Permainan yang Sesuai"
 
 #: app/templates/packages/view.html:444
 msgid "No specific game is required"
-msgstr ""
+msgstr "Tidak ada permainan khusus yang diwajibkan"
 
 #: app/templates/packages/view.html:447
 msgid "This is an experimental feature."
-msgstr ""
+msgstr "Ini adalah fitur eksperimental."
 
 #: app/templates/packages/view.html:448
 msgid "Supported games are determined by an algorithm, and may not be correct."
-msgstr ""
+msgstr "Permainan yang didukung ditentukan oleh algoritme dan bisa saja keliru."
 
 #: app/templates/packages/view.html:453
 msgid "Information"
@@ -2627,7 +2622,7 @@ msgstr "Nama Teknis"
 #: app/templates/packages/view.html:468
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
-msgstr ""
+msgstr "%(code_license)s untuk kode,<br>%(media_license)s untuk media."
 
 #: app/templates/packages/view.html:476
 msgid "Unknown"
@@ -2655,21 +2650,23 @@ msgstr "Lihat log audit"
 
 #: app/templates/report/index.html:19
 msgid "What are you reporting? Why are you reporting it?"
-msgstr ""
+msgstr "Apa yang dilaporkan? Mengapa melaporkannya?"
 
 #: app/templates/report/index.html:23
 msgid "Reports will be shared with ContentDB staff."
-msgstr ""
+msgstr "Laporan akan dibagikan dengan staf ContentDB."
 
 #: app/templates/report/index.html:25
 msgid "Only the admin will be able to see who made the report."
-msgstr ""
+msgstr "Hanya admin yang bisa melihat pembuat laporan."
 
 #: app/templates/report/index.html:29
 msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
 msgstr ""
+"Menemukan bug? Harap laporkan di pelacak masalah paketnya atau dalam sebuah "
+"utas."
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
@@ -2741,7 +2738,7 @@ msgstr "Berlangganan"
 
 #: app/templates/threads/view.html:45
 msgid "Convert to Thread"
-msgstr ""
+msgstr "Ubah ke Utas"
 
 #: app/templates/threads/view.html:52
 msgid "Unlock"
@@ -2772,23 +2769,20 @@ msgid "Approve All"
 msgstr "Setujui Semua"
 
 #: app/templates/todo/editor.html:33
-#, fuzzy
 msgid "No screenshots need approval."
-msgstr "Tidak ada tangkapan layar yang perlu ditinjau."
+msgstr "Tidak ada tangkapan layar yang perlu disetujui."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
-#, fuzzy
 msgid "No packages need approval."
-msgstr "Tidak ada paket yang perlu ditinjau."
+msgstr "Tidak ada paket yang perlu disetujui."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
 msgstr "Mengimpor"
 
 #: app/templates/todo/editor.html:90
-#, fuzzy
 msgid "No releases need approval."
-msgstr "Tidak ada rilis yang perlu ditinjau."
+msgstr "Tidak ada rilis yang perlu disetujui."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
@@ -2825,15 +2819,15 @@ msgstr "Semua paket usang"
 
 #: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
 msgid "Minetest-Mods org only"
-msgstr ""
+msgstr "Organisasi Minetest-Mods saja"
 
 #: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
-msgstr ""
+msgstr "Urut berdasarkan tanggal"
 
 #: app/templates/todo/outdated.html:28
 msgid "Sort by score"
-msgstr ""
+msgstr "Urut berdasarkan nilai"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -2841,12 +2835,11 @@ msgstr "Label Paket"
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
 msgid "Missing tags only"
-msgstr ""
+msgstr "Hanya tanpa label"
 
 #: app/templates/todo/tags.html:31
-#, fuzzy
 msgid "Edit Tags"
-msgstr "Sunting Detail"
+msgstr "Sunting Label"
 
 #: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
 #, python-format
@@ -2858,34 +2851,32 @@ msgid "All Outdated Packages"
 msgstr "Semua Paket Usang"
 
 #: app/templates/todo/topics.html:16
-#, fuzzy
 msgid "Sort by name"
-msgstr "Nama Pengguna"
+msgstr "Urut berdasarkan nama"
 
 #: app/templates/todo/topics.html:20
-#, fuzzy
 msgid "Sort by views"
-msgstr "ulasan"
+msgstr "Urut berdasarkan penayangan"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
-msgstr ""
+msgstr "Daftar berhalaman"
 
 #: app/templates/todo/topics.html:34
 msgid "Unlimited list"
-msgstr ""
+msgstr "Daftar tanpa batas"
 
 #: app/templates/todo/topics.html:41
 msgid "Show discarded topics"
-msgstr ""
+msgstr "Tampilkan topik yang diabaikan"
 
 #: app/templates/todo/topics.html:43
 msgid "Hide discarded topics"
-msgstr ""
+msgstr "Sembunyikan topik yang diabaikan"
 
 #: app/templates/todo/topics.html:49
 msgid "Topics to be Added"
-msgstr ""
+msgstr "Topik untuk Ditambahkan"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
@@ -2936,23 +2927,27 @@ msgstr ""
 
 #: app/templates/todo/user.html:68
 msgid "Small Screenshots"
-msgstr ""
+msgstr "Tangkapan Layar Kecil"
 
 #: app/templates/todo/user.html:71
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr ""
+"Paket-paket ini memiliki tangkapan layar yang terlalu kecil dan perlu "
+"diganti."
 
 #: app/templates/todo/user.html:72
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr ""
+"Merah dan jingga adalah tangkapan layar yang di bawah batas. Abu-abu adalah "
+"tangkapan layar yang di bawah saran."
 
 #: app/templates/todo/user.html:127
 msgid "See All"
-msgstr ""
+msgstr "Lihat Semua"
 
 #: app/templates/todo/user.html:128
 msgid "Packages Without Tags"
@@ -3178,7 +3173,7 @@ msgstr ""
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
-msgstr "Selanjutnya: masuk log GitHub"
+msgstr "Selanjutnya: masuk dengan GitHub"
 
 #: app/templates/users/claim_forums.html:55
 msgid "Option 2"
@@ -3254,25 +3249,25 @@ msgid "Delete Anyway"
 msgstr "Tetap Hapus Saja"
 
 #: app/templates/users/email_sent.html:4
-#, fuzzy
 msgid "Check Your Email"
-msgstr "Nama pengguna atau surel/pos-el"
+msgstr "Periksa Surel Anda"
 
 #: app/templates/users/email_sent.html:11
 msgid "We've sent an email to the address you specified."
-msgstr ""
+msgstr "Kami telah mengirimkan surel ke alamat yang Anda berikan."
 
 #: app/templates/users/email_sent.html:12
 msgid "You'll need to click the link in the email to confirm it."
 msgstr ""
+"Anda perlu mengeklik tautan yang ada dalam surel untuk mengonfirmasinya."
 
 #: app/templates/users/email_sent.html:16
 msgid "The link will expire in 12 hours"
-msgstr ""
+msgstr "Tautannya akan hangus dalam 12 jam"
 
 #: app/templates/users/email_sent.html:22
 msgid "My email never arrived"
-msgstr ""
+msgstr "Surelnya tak pernah sampai"
 
 #: app/templates/users/forgot_password.html:4
 msgid "Request Password Reset"
@@ -3310,11 +3305,11 @@ msgstr "Sunting Akun"
 
 #: app/templates/users/modtools.html:43 app/templates/users/modtools.html:51
 msgid "Ban"
-msgstr ""
+msgstr "Blokir"
 
 #: app/templates/users/modtools.html:55
 msgid "Change Email and Send Password Reset"
-msgstr ""
+msgstr "Ganti Surel dan Kirim Reset Kata Sandi"
 
 #: app/templates/users/modtools.html:59
 #: app/templates/users/settings_email.html:14
@@ -3477,18 +3472,20 @@ msgid ""
 "This will blacklist an email address, preventing ContentDB from ever "
 "sending emails to it - including password resets."
 msgstr ""
+"Ini akan memblokir alamat surel dan mencegah ContentDB mengirimkan surel ke "
+"sana, termasuk reset kata sandi."
 
 #: app/templates/users/unsubscribe.html:20
 msgid "Please enter the email address you wish to blacklist."
-msgstr ""
+msgstr "Harap masukkan alamat surel yang ingin diblokir."
 
 #: app/templates/users/unsubscribe.html:21
 msgid "You will then need to confirm the email"
-msgstr ""
+msgstr "Anda perlu mengonfirmasi surelnya"
 
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
-msgstr ""
+msgstr "Anda telah berhenti langganan."
 
 #: app/templates/users/unsubscribe.html:40
 #, python-format
@@ -3496,6 +3493,7 @@ msgid ""
 "Unsubscribing may prevent you from being able to sign into the account "
 "'%(display_name)s'"
 msgstr ""
+"Berhenti langganan akan mencegah Anda bisa masuk ke akun '%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -3503,14 +3501,17 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
+"ContentDB tidak lagi dapat mengirimkan \"lupa kata sandi\" dan sistem surel "
+"penting lainnya.\n"
+"\t\t\t\t\tKami sarankan untuk mengatur pilihan pemberitahuan saja."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
-msgstr ""
+msgstr "Anda tidak dapat lagi menggunakan surel ini di ContentDB."
 
 #: app/templates/users/unsubscribe.html:57
 msgid "Edit Notification Preferences"
-msgstr ""
+msgstr "Sunting Pilihan Pemberitahuan"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
