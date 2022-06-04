@@ -37,7 +37,7 @@ def claim_forums():
 		method = request.args.get("method")
 
 		if not is_username_valid(username):
-			flash(gettext("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin"), "danger")
+			flash(gettext("Invalid username, Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed. Consider contacting an admin"), "danger")
 			return redirect(url_for("users.claim_forums"))
 
 		user = User.query.filter_by(forums_username=username).first()
@@ -62,7 +62,7 @@ def claim_forums():
 		username = request.form.get("username")
 
 		if not is_username_valid(username):
-			flash(gettext("Invalid username - must only contain A-Za-z0-9._. Consider contacting an admin"), "danger")
+			flash(gettext("Invalid username, Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed. Consider contacting an admin"), "danger")
 		elif ctype == "github":
 			task = checkForumAccount.delay(username)
 			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.claim_forums", username=username, method="github")))

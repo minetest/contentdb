@@ -53,7 +53,7 @@ def test_register(client):
 
 	rv = register(client, "££££!!!", "Test User", "password", "test@example.com", "13")
 	assert b"invalid-feedback" in rv.data
-	assert b"Only a-zA-Z0-9._ allowed</p>" in rv.data
+	assert b"Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed</p>" in rv.data
 
 
 def test_register_flow(client):

@@ -106,11 +106,11 @@ def validate(data: dict):
 def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, data: dict,
 		reason: str = None):
 	if not package.checkPerm(user, Permission.EDIT_PACKAGE):
-		raise LogicError(403, lazy_gettext("You do not have permission to edit this package"))
+		raise LogicError(403, lazy_gettext("You don't have permission to edit this package"))
 
 	if "name" in data and package.name != data["name"] and \
 			not package.checkPerm(user, Permission.CHANGE_NAME):
-		raise LogicError(403, lazy_gettext("You do not have permission to change the package name"))
+		raise LogicError(403, lazy_gettext("You don't have permission to change the package name"))
 
 	for alias, to in ALIASES.items():
 		if alias in data:

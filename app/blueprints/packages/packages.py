@@ -427,7 +427,7 @@ def remove(package):
 
 	if "delete" in request.form:
 		if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
-			flash(gettext("You don't have permission to do that."), "danger")
+			flash(gettext("You don't have permission to do that"), "danger")
 			return redirect(package.getURL("packages.view"))
 
 		package.state = PackageState.DELETED
@@ -443,7 +443,7 @@ def remove(package):
 		return redirect(url)
 	elif "unapprove" in request.form:
 		if not package.checkPerm(current_user, Permission.UNAPPROVE_PACKAGE):
-			flash(gettext("You don't have permission to do that."), "danger")
+			flash(gettext("You don't have permission to do that"), "danger")
 			return redirect(package.getURL("packages.view"))
 
 		package.state = PackageState.WIP
@@ -472,7 +472,7 @@ class PackageMaintainersForm(FlaskForm):
 @is_package_page
 def edit_maintainers(package):
 	if not package.checkPerm(current_user, Permission.EDIT_MAINTAINERS):
-		flash(gettext("You do not have permission to edit maintainers"), "danger")
+		flash(gettext("You don't have permission to edit maintainers"), "danger")
 		return redirect(package.getURL("packages.view"))
 
 	form = PackageMaintainersForm(formdata=request.form)

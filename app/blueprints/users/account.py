@@ -102,7 +102,8 @@ def logout():
 class RegisterForm(FlaskForm):
 	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[nonEmptyOrNone])
 	username = StringField(lazy_gettext("Username"), [InputRequired(),
-					Regexp("^[a-zA-Z0-9._-]+$", message=lazy_gettext("Only a-zA-Z0-9._ allowed"))])
+			Regexp("^[a-zA-Z0-9._-]+$", message=lazy_gettext(
+				"Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed"))])
 	email    = StringField(lazy_gettext("Email"), [InputRequired(), Email()])
 	password = PasswordField(lazy_gettext("Password"), [InputRequired(), Length(6, 100)])
 	question  = StringField(lazy_gettext("What is the result of the above calculation?"), [InputRequired()])

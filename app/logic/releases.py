@@ -29,7 +29,7 @@ from app.utils import AuditSeverity, addAuditLog, nonEmptyOrNone
 
 def check_can_create_release(user: User, package: Package):
 	if not package.checkPerm(user, Permission.MAKE_RELEASE):
-		raise LogicError(403, lazy_gettext("You do not have permission to make releases"))
+		raise LogicError(403, lazy_gettext("You don't have permission to make releases"))
 
 	five_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=5)
 	count = package.releases.filter(PackageRelease.releaseDate > five_minutes_ago).count()
