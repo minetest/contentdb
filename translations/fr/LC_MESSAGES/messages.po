@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-02-12 14:57+0000\n"
-"PO-Revision-Date: 2022-04-15 08:11+0000\n"
-"Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
+"PO-Revision-Date: 2022-04-26 16:07+0000\n"
+"Last-Translator: 3raven <elise_declerck@laposte.net>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/minetest/"
 "contentdb/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.12-dev\n"
+"X-Generator: Weblate 4.12.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:103
@@ -903,7 +903,7 @@ msgstr "Impossible d'ajouter l’étiquette protégée %(title)s au paquet"
 
 #: app/logic/releases.py:32
 msgid "You do not have permission to make releases"
-msgstr "Vous n'avez pas la permission de créer des versions"
+msgstr "Vous n'avez pas la permission de créer des versions publiées"
 
 #: app/logic/releases.py:37
 msgid ""
@@ -2256,7 +2256,6 @@ msgid "Rolling Release"
 msgstr "Développement en continu"
 
 #: app/templates/packages/release_wizard.html:37
-#, fuzzy
 msgid "On Git Tag"
 msgstr "Sur l'étiquette Git"
 
@@ -2455,7 +2454,6 @@ msgid "Modname Uniqueness"
 msgstr "Originalité du nom du mod"
 
 #: app/templates/packages/similar.html:12
-#, fuzzy
 msgid "Packages sharing provided mods"
 msgstr "Paquets partageant les mêmes mods"
 
@@ -2526,7 +2524,7 @@ msgid "For Minetest %(min)s and above"
 msgstr "Pour Minetest %(min)s et au dessus"
 
 #: app/templates/packages/view.html:47
-#, fuzzy, python-format
+#, python-format
 msgid "Minetest %(max)s and below"
 msgstr "Minetest %(max)s et en dessous"
 
@@ -2686,9 +2684,8 @@ msgid "Remove myself"
 msgstr "Me retirer"
 
 #: app/templates/packages/view.html:497
-#, fuzzy
 msgid "Provides"
-msgstr "Fournis"
+msgstr "Fournit"
 
 #: app/templates/packages/view.html:519
 msgid "More"
@@ -2807,7 +2804,6 @@ msgstr ""
 "et les utilisateurs de rang \"Approver\" et supérieur."
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
-#, fuzzy
 msgid "Editor Work Queue"
 msgstr "File de tâches de l'éditeur"
 
@@ -3527,7 +3523,6 @@ msgid "Immediately"
 msgstr "Immédiatement"
 
 #: app/templates/users/settings_email.html:46
-#, fuzzy
 msgid "In digest"
 msgstr "En résumé"
 
