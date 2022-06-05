@@ -177,9 +177,9 @@ Doing so may result in temporary or permanent suspension from ContentDB.
 3.  **Screenshots must only contain content appropriate for the Content Warnings of
     the package.**
 
-4.  **Screenshots should be MOSTLY in-game screenshots.** Some alterations are okay, such
-    as collages, added text, some reasonable compositing. Logo/brochure images
-    are allowed but should NOT be the cover image.
+4.  **Screenshots should be MOSTLY in-game screenshots, if applicable.** Some
+    alterations on in-game screenshots are okay, such as collages, added text,
+    some reasonable compositing.
 
     Don't just use one of the textures from the package; show it in-situ as it
     actually looks in the game.
