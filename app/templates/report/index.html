@@ -6,8 +6,22 @@
 
 {% block content %}
 
-{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 <h1>{{ _("Report") }}</h1>
+
+{% if not form %}
+
+<p>
+	{{ _("Due to spam, we no longer accept reports from anonymous users on this form.") }}
+	{{ _("Please sign in or contact the admin in another way") }}
+</p>
+<p>
+	<a href="{{ _('users.login') }}" class="btn btn-primary mr-2">Login</a>
+	<a href="https://rubenwardy.com/contact/" class="btn btn-secondary">Contact the admin</a>
+</p>
+
+{% else %}
+
+{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
 
 <form method="POST" action="" enctype="multipart/form-data">
 	{{ form.hidden_tag() }}
@@ -17,6 +31,7 @@
 		</p>
 	{% endif %}
 	{{ render_field(form.message, hint=_("What are you reporting? Why are you reporting it?")) }}
+	{{ render_field(form.not_a_request) }}
 	{{ render_submit_field(form.submit) }}
 
 	<p class="mt-5 text-muted">
@@ -29,5 +44,7 @@
 		{{ _("Found a bug? Please report on the package's issue tracker or in a thread instead.") }}
 	</p>
 </form>
+
+{% endif %}
 
 {% endblock %}

@@ -43,8 +43,8 @@ def report():
 	if url:
 		url = abs_url_samesite(url)
 
-	form = ReportForm(formdata=request.form)
-	if form.validate_on_submit():
+	form = ReportForm(formdata=request.form) if current_user.is_authenticated else None
+	if form and form.validate_on_submit():
 		if current_user.is_authenticated:
 			user_info = f"{current_user.username}"
 		else:
