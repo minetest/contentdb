@@ -42,7 +42,7 @@ app.config["LANGUAGES"] = {
 	"pl": "Język Polski",
 	"ru": "русский язык",
 	"sk": "Slovenčina",
-	"sw": "Svenska",
+	"sv": "Svenska",
 	"zh_Hans": "汉语",
 }
 
