@@ -17,7 +17,7 @@
 
 import sys
 
-from typing import List, Dict, Optional, Iterator, Iterable
+from typing import List, Dict, Optional, Iterator, Iterable, Tuple
 
 from app.logic.LogicError import LogicError
 from app.models import Package, MetaPackage, PackageType, PackageState, PackageGameSupport, db
@@ -167,25 +167,23 @@ class GameSupportResolver:
 				db.session.add(support)
 
 	"""
-	Add supported game to a package, given the confidence.
+	Update game supported package on a package, given the confidence.
 	
 	Higher confidences outweigh lower ones.
 	"""
-	def add_supported(self, package: Package, supported_games: PackageSet, confidence: int):
-		previous_supported: Dict[str, PackageGameSupport] = {}
+	def set_supported(self, package: Package, game_is_supported: List[Tuple[Package, bool]], confidence: int):
+		previous_supported: Dict[int, PackageGameSupport] = {}
 		for support in package.supported_games.all():
 			db.session.merge(support.game)
-			previous_supported[support.game.getId()] = support
+			previous_supported[support.game.id] = support
 
-		for game in supported_games:
-			assert game
-
-			lookup = previous_supported.pop(game.getId(), None)
+		for game, supports in game_is_supported:
+			lookup = previous_supported.pop(game.id, None)
 			if lookup is None:
 				support = PackageGameSupport(package, game, confidence)
 				db.session.add(support)
 			elif lookup.confidence <= confidence:
-				lookup.supports = True
+				lookup.supports = supports
 				lookup.confidence = confidence
 				db.session.merge(lookup)
 
@@ -195,4 +193,9 @@ class GameSupportResolver:
 
 	def update(self, package: Package) -> None:
 		retval = self.resolve(package, [])
-		self.add_supported(package, retval, 1)
+
+		game_is_supported = []
+		for game in retval:
+			game_is_supported.append((game, True))
+
+		self.set_supported(package, game_is_supported, 1)

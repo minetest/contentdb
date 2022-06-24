@@ -37,6 +37,8 @@ ContentDB understands the following information:
 and for mods only:
 
 * `name` - the mod technical name.
+* `supported_games` - List of supported game technical names.
+* `unsupported_games` - List of not supported game technical names. Useful to override game support detection.
 
 
 ## .cdb.json

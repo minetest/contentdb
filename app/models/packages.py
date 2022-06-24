@@ -507,8 +507,8 @@ class Package(db.Model):
 		return self.getSortedDependencies(False)
 
 	def getSortedSupportedGames(self):
-		supported = self.supported_games.all()
-		supported.sort(key=lambda x: -x.game.score)
+		supported = self.supported_games.filter_by(supports=True).all()
+		supported.sort(key=lambda x: -(x.game.score + 100000*x.confidence))
 		return supported
 
 	def getAsDictionaryKey(self):

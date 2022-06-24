@@ -20,6 +20,7 @@ from zipfile import ZipFile
 from git import GitCommandError
 from git_archive_all import GitArchiver
 from kombu import uuid
+from sqlalchemy import or_, and_
 
 from app.models import *
 from app.tasks import celery, TaskError
@@ -27,7 +28,7 @@ from app.utils import randomString, post_bot_message, addSystemNotification, add
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from ..logic.LogicError import LogicError
-from ..logic.game_support import GameSupportResolver
+from ..logic.game_support import GameSupportResolver, PackageSet
 from ..logic.packages import do_edit_package, ALIASES
 from ..utils.image import get_image_size
 
@@ -71,6 +72,20 @@ def getMeta(urlstr, author):
 				result[key] = list(value)
 
 		return result
+
+
+def get_games_from_csv(csv: str) -> List[Package]:
+	retval = []
+	supported_games_raw = csv.split(",")
+	for game_name in supported_games_raw:
+		game_name = game_name.strip()
+		if game_name.endswith("_game"):
+			game_name = game_name[:-5]
+		games = Package.query.filter(and_(Package.state==PackageState.APPROVED, Package.type==PackageType.GAME,
+				or_(Package.name==game_name, Package.name==game_name + "_game"))).all()
+		retval.extend(games)
+
+	return retval
 
 
 def postReleaseCheckUpdate(self, release: PackageRelease, path):
@@ -118,6 +133,15 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 		# Update game supports
 		if package.type == PackageType.MOD:
 			resolver = GameSupportResolver()
+			game_is_supported = []
+			if "supported_games" in tree.meta:
+				for game in get_games_from_csv(tree.meta["supported_games"]):
+					game_is_supported.append((game, True))
+			if "unsupported_games" in tree.meta:
+				for game in get_games_from_csv(tree.meta["unsupported_games"]):
+					game_is_supported.append((game, False))
+
+			resolver.set_supported(package, game_is_supported, 10)
 			resolver.update(package)
 
 		# Update min/max
