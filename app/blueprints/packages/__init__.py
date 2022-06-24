@@ -17,7 +17,7 @@
 from flask import Blueprint
 from flask_babel import gettext
 
-from app.models import User, Package, Permission
+from app.models import User, Package, Permission, PackageType
 
 bp = Blueprint("packages", __name__)
 
@@ -26,7 +26,7 @@ def get_package_tabs(user: User, package: Package):
 	if package is None or not package.checkPerm(user, Permission.EDIT_PACKAGE):
 		return []
 
-	return [
+	retval = [
 		{
 			"id": "edit",
 			"title": gettext("Edit Details"),
@@ -63,6 +63,15 @@ def get_package_tabs(user: User, package: Package):
 			"url": package.getURL("packages.remove")
 		}
 	]
+
+	if package.type == PackageType.MOD:
+		retval.insert(1, {
+			"id": "game_support",
+			"title": gettext("Supported Games"),
+			"url": package.getURL("packages.game_support")
+		})
+
+	return retval
 
 
 from . import packages, screenshots, releases, reviews, game_hub

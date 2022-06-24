@@ -624,3 +624,18 @@ def similar(package):
 
 	return render_template("packages/similar.html", package=package,
 			packages_modnames=packages_modnames, similar_topics=similar_topics)
+
+
+@bp.route("/packages/<author>/<name>/support/")
+@login_required
+@is_package_page
+def game_support(package):
+	if package.type != PackageType.MOD:
+		abort(404)
+
+	if not (package.checkPerm(current_user, Permission.EDIT_PACKAGE) or
+			package.checkPerm(current_user, Permission.APPROVE_NEW)):
+		abort(403)
+
+	return render_template("packages/game_support.html", package=package,
+			tabs=get_package_tabs(current_user, package), current_tab="game_support")

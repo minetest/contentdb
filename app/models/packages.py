@@ -506,8 +506,12 @@ class Package(db.Model):
 	def getSortedOptionalDependencies(self):
 		return self.getSortedDependencies(False)
 
-	def getSortedSupportedGames(self):
-		supported = self.supported_games.filter_by(supports=True).all()
+	def getSortedSupportedGames(self, include_unsupported=False):
+		query = self.supported_games
+		if not include_unsupported:
+			query = query.filter_by(supports=True)
+
+		supported = query.all()
 		supported.sort(key=lambda x: -(x.game.score + 100000*x.confidence))
 		return supported
 

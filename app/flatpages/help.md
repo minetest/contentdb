@@ -19,6 +19,7 @@ toc: False
 * [Git Update Detection](update_config)
 * [Creating Releases using Webhooks](release_webhooks)
 * [Package Configuration and Releases Guide](package_config)
+* [Supported Games](game_support)
 
 ## Help for Specific User Ranks
 

@@ -1,0 +1,64 @@
+{% extends "packages/package_base.html" %}
+
+{% block title %}
+{{ _("Supported Games") }}
+{% endblock %}
+
+{% block content %}
+	<h2 class="mt-0">{{ self.title() }}</h2>
+
+	<p class="alert alert-info">
+		<a class="float-right btn btn-sm" href="{{ url_for('flatpage', path='help/game_support') }}">
+			{{ _("Read more") }}
+		</a>
+		{{ _("Support is determined based on dependencies and fields in mod.conf") }}
+	</p>
+
+	<div class="list-group">
+		<div class="list-group-item">
+			<div class="row">
+				<span class="col-5">
+					{{ _("Package") }}
+				</span>
+				<span class="col-5">
+					{{ _("Source") }}
+				</span>
+				<span class="col-2 text-right">
+					{{ _("Supported?") }}
+				</span>
+			</div>
+		</div>
+
+		{% for support in package.getSortedSupportedGames(True) %}
+			<a class="list-group-item list-group-item-action"
+					href="{{ support.game.getURL('packages.view') }}">
+				<div class="row">
+					<span class="col-5">
+						{{ _("%(title)s by %(display_name)s",
+								title=support.game.title, display_name=support.game.author.display_name) }}
+					</span>
+					<span class="col-5">
+						{% if support.confidence == 1 %}
+							{{ _("Detected from dependencies") }}
+						{% elif support.confidence == 10 %}
+							{{ _("mod.conf") }}
+						{% else %}
+							{{ support.confidence }}
+						{% endif %}
+					</span>
+					<span class="col-2 text-right">
+						{% if support.supports %}
+							<span class="badge badge-success">Yes</span>
+						{% else %}
+							<span class="badge badge-danger">No</span>
+						{% endif %}
+					</span>
+				</div>
+			</a>
+		{% else %}
+			<div class="list-group-item text-muted">
+				{{ _("No specific game is required") }}
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
