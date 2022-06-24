@@ -323,7 +323,7 @@
 					{{ render_pkggrid(packages_uses) }}
 				{% endif %}
 
-				{% if false %}
+				{% if package.type == package.type.GAME %}
 					<h2>{{ _("Content") }}</h2>
 					<a href="{{ package.getURL('packages.game_hub') }}" class="btn btn-lg btn-primary">
 						{{ _("View content for game") }}
@@ -432,7 +432,7 @@
 					</dl>
 				{% endif %}
 
-				{% if false %}
+				{% if package.type == package.type.MOD %}
 					<h3>{{ _("Compatible Games") }}</h3>
 					<div style="max-height: 300px; overflow: hidden auto;">
 						{% for support in package.getSortedSupportedGames() %}

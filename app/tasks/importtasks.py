@@ -116,9 +116,9 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 			db.session.add(Dependency(package, meta=meta, optional=True))
 
 		# Update game supports
-		# if package.type == PackageType.MOD:
-		# 	resolver = GameSupportResolver()
-		# 	resolver.update(package)
+		if package.type == PackageType.MOD:
+			resolver = GameSupportResolver()
+			resolver.update(package)
 
 		# Update min/max
 		if tree.meta.get("min_minetest_version"):

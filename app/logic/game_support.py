@@ -163,26 +163,36 @@ class GameSupportResolver:
 		for package in Package.query.filter(Package.type == PackageType.MOD, Package.state != PackageState.DELETED).all():
 			retval = self.resolve(package, [])
 			for game in retval:
-				support = PackageGameSupport(package, game)
+				support = PackageGameSupport(package, game, 1)
 				db.session.add(support)
 
-	def update(self, package: Package) -> None:
+	"""
+	Add supported game to a package, given the confidence.
+	
+	Higher confidences outweigh lower ones.
+	"""
+	def add_supported(self, package: Package, supported_games: PackageSet, confidence: int):
 		previous_supported: Dict[str, PackageGameSupport] = {}
 		for support in package.supported_games.all():
+			db.session.merge(support.game)
 			previous_supported[support.game.getId()] = support
 
-		retval = self.resolve(package, [])
-		for game in retval:
+		for game in supported_games:
 			assert game
 
 			lookup = previous_supported.pop(game.getId(), None)
 			if lookup is None:
-				support = PackageGameSupport(package, game)
+				support = PackageGameSupport(package, game, confidence)
 				db.session.add(support)
-			elif lookup.confidence == 0:
+			elif lookup.confidence <= confidence:
 				lookup.supports = True
+				lookup.confidence = confidence
 				db.session.merge(lookup)
 
 		for game, support in previous_supported.items():
-			if support.confidence == 0:
-				db.session.remove(support)
+			if support.confidence == confidence:
+				db.session.delete(support)
+
+	def update(self, package: Package) -> None:
+		retval = self.resolve(package, [])
+		self.add_supported(package, retval, 1)
