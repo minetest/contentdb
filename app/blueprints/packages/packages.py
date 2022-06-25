@@ -628,7 +628,7 @@ def similar(package):
 
 
 class GameSupportForm(FlaskForm):
-	enable_support_detection = BooleanField(lazy_gettext("Enable support detection based on dependencies"))
+	enable_support_detection = BooleanField(lazy_gettext("Enable support detection based on dependencies (recommended)"), [Optional()])
 	supported = StringField(lazy_gettext("Supported games (Comma-separated)"), [Optional()])
 	unsupported = StringField(lazy_gettext("Unsupported games (Comma-separated)"), [Optional()])
 	submit = SubmitField(lazy_gettext("Save"))
@@ -644,6 +644,9 @@ def game_support(package):
 	can_edit = package.checkPerm(current_user, Permission.EDIT_PACKAGE)
 	if not (can_edit or package.checkPerm(current_user, Permission.APPROVE_NEW)):
 		abort(403)
+
+	force_game_detection = package.supported_games.filter(and_(
+		PackageGameSupport.confidence > 1, PackageGameSupport.supports == True)).count() == 0
 
 	form = GameSupportForm() if can_edit else None
 	if request.method == "GET":
@@ -665,8 +668,9 @@ def game_support(package):
 
 		next_url = package.getURL("packages.game_support")
 
-		if form.enable_support_detection.data != package.enable_game_support_detection:
-			package.enable_game_support_detection = form.enable_support_detection.data
+		enable_support_detection = form.enable_support_detection.data or force_game_detection
+		if enable_support_detection != package.enable_game_support_detection:
+			package.enable_game_support_detection = enable_support_detection
 			if package.enable_game_support_detection:
 				db.session.commit()
 
@@ -682,4 +686,5 @@ def game_support(package):
 		return redirect(next_url)
 
 	return render_template("packages/game_support.html", package=package, form=form,
+			force_game_detection=force_game_detection,
 			tabs=get_package_tabs(current_user, package), current_tab="game_support")

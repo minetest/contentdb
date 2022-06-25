@@ -5,16 +5,13 @@
 {% endblock %}
 
 {% block content %}
+	<a class="float-right btn btn-secondary" href="{{ url_for('flatpage', path='help/game_support') }}">
+		{{ _("Documentation") }}
+	</a>
 	<h2 class="mt-0">{{ self.title() }}</h2>
 
 	<p class="alert alert-warning">
 		This feature is experimental
-	</p>
-	<p class="alert alert-info">
-		<a class="float-right btn btn-sm" href="{{ url_for('flatpage', path='help/game_support') }}">
-			{{ _("Read more") }}
-		</a>
-		{{ _("Support is determined based on dependencies and fields in mod.conf") }}
 	</p>
 
 	<div class="list-group">
@@ -75,7 +72,12 @@
 		<form method="POST" action="" class="tableform">
 			{{ form.hidden_tag() }}
 
-			{{ render_checkbox_field(form.enable_support_detection) }}
+			{{ render_checkbox_field(form.enable_support_detection, disabled=force_game_detection) }}
+			{% if force_game_detection %}
+				<p class="text-muted">
+					{{ _("You need to manually define at least one supported game before you can turn this off.") }}
+				</p>
+			{% endif %}
 
 			{% if package.checkPerm(current_user, "EDIT_PACKAGE") and current_user not in package.maintainers %}
 				<h3>
