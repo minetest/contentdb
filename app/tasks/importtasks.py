@@ -76,24 +76,6 @@ def getMeta(urlstr, author):
 		return result
 
 
-def releaseUpdateGameSupport(package_id: int, supported_games, unsupported_games):
-	with db.create_session({})() as session:
-		package = session.query(Package).get(package_id)
-		resolver = GameSupportResolver(session)
-
-		game_is_supported = {}
-		if supported_games:
-			for game in get_games_from_csv(session, supported_games):
-				game_is_supported[game.id] = True
-		if unsupported_games:
-			for game in get_games_from_csv(session, unsupported_games):
-				game_is_supported[game.id] = False
-
-		resolver.set_supported(package, game_is_supported, 10)
-		resolver.update(package)
-		session.commit()
-
-
 def postReleaseCheckUpdate(self, release: PackageRelease, path):
 	try:
 		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
@@ -154,7 +136,18 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 
 		# Update game support
 		if package.type == PackageType.MOD:
-			releaseUpdateGameSupport(package.id, tree.meta.get("supported_games"), tree.meta.get("unsupported_games"))
+			resolver = GameSupportResolver(db.session)
+
+			game_is_supported = {}
+			if "supported_games" in tree.meta:
+				for game in get_games_from_csv(db.session, tree.meta["supported_games"]):
+					game_is_supported[game.id] = True
+			if "unsupported_games" in tree.meta:
+				for game in get_games_from_csv(db.session, tree.meta["unsupported_games"]):
+					game_is_supported[game.id] = False
+
+			resolver.set_supported(package, game_is_supported, 10)
+			resolver.update(package)
 
 		return tree
 
