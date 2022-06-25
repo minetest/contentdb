@@ -50,8 +50,8 @@ minetest_game_mods = {
 
 
 mtg_mod_blacklist = {
-	"repixture", "tutorial", "runorfall", "realtest_mt5", "mevo", "xaenvironment",
-	"survivethedays"
+	"pacman", "tutorial", "runorfall", "realtest_mt5", "mevo", "xaenvironment",
+	"survivethedays", "holidayhorrors",
 }
 
 
