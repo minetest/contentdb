@@ -64,6 +64,10 @@
 		{% endfor %}
 	</div>
 
+	{% if mod_conf_lines %}
+		<h3>{{ _("Generated mod.conf lines") }}</h3>
+		<pre><code>{{ mod_conf_lines }}</code></pre>
+	{% endif %}
 
 	{% if form %}
 		<h2>Options</h2>

@@ -649,13 +649,15 @@ def game_support(package):
 		PackageGameSupport.confidence > 1, PackageGameSupport.supports == True)).count() == 0
 
 	form = GameSupportForm() if can_edit else None
-	if request.method == "GET":
+	if form and request.method == "GET":
 		form.enable_support_detection.data = package.enable_game_support_detection
 		manual_supported_games = package.supported_games.filter_by(confidence=8).all()
 		form.supported.data = ", ".join([x.game.name for x in manual_supported_games if x.supports])
 		form.unsupported.data = ", ".join([x.game.name for x in manual_supported_games if not x.supports])
 
 	if form and form.validate_on_submit():
+		detect_update_needed = False
+
 		if current_user not in package.maintainers:
 			resolver = GameSupportResolver(db.session)
 
@@ -665,6 +667,7 @@ def game_support(package):
 			for game in get_games_from_csv(db.session, form.unsupported.data or ""):
 				game_is_supported[game.id] = False
 			resolver.set_supported(package, game_is_supported, 8)
+			detect_update_needed = True
 
 		next_url = package.getURL("packages.game_support")
 
@@ -672,19 +675,32 @@ def game_support(package):
 		if enable_support_detection != package.enable_game_support_detection:
 			package.enable_game_support_detection = enable_support_detection
 			if package.enable_game_support_detection:
-				db.session.commit()
-
-				release = package.releases.first()
-				if release:
-					task_id = uuid()
-					checkZipRelease.apply_async((release.id, release.file_path), task_id=task_id)
-					next_url = url_for("tasks.check", id=task_id, r=next_url)
+				detect_update_needed = True
 			else:
 				package.supported_games.filter_by(confidence=1).delete()
-				db.session.commit()
+
+		db.session.commit()
+
+		if detect_update_needed:
+			release = package.releases.first()
+			if release:
+				task_id = uuid()
+				checkZipRelease.apply_async((release.id, release.file_path), task_id=task_id)
+				next_url = url_for("tasks.check", id=task_id, r=next_url)
 
 		return redirect(next_url)
 
+	all_game_support = package.supported_games.all()
+	all_game_support.sort(key=lambda x: -x.game.score)
+	supported_games = ", ".join([x.game.name for x in all_game_support if x.supports])
+	unsupported_games = ", ".join([x.game.name for x in all_game_support if not x.supports])
+
+	mod_conf_lines = ""
+	if supported_games:
+		mod_conf_lines += f"supported_games = {supported_games}"
+	if unsupported_games:
+		mod_conf_lines += f"\nunsupported_games = {unsupported_games}"
+
 	return render_template("packages/game_support.html", package=package, form=form,
-			force_game_detection=force_game_detection,
+			mod_conf_lines=mod_conf_lines, force_game_detection=force_game_detection,
 			tabs=get_package_tabs(current_user, package), current_tab="game_support")
