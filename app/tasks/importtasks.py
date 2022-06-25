@@ -76,6 +76,13 @@ def getMeta(urlstr, author):
 		return result
 
 
+@celery.task()
+def updateAllGameSupport():
+	resolver = GameSupportResolver(db.session)
+	resolver.update_all()
+	db.session.commit()
+
+
 def postReleaseCheckUpdate(self, release: PackageRelease, path):
 	try:
 		tree = build_tree(path, expected_type=ContentType[release.package.type.name],

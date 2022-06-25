@@ -16,11 +16,10 @@
 
 
 import os
-import sys
 from typing import List
 
 import requests
-from celery import group
+from celery import group, uuid
 from flask import redirect, url_for, flash, current_app, jsonify
 from sqlalchemy import or_, and_
 
@@ -29,7 +28,7 @@ from app.models import PackageRelease, db, Package, PackageState, PackageScreens
 	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, PackageGameSupport
 from app.tasks.emails import send_pending_digests
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
-from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates
+from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates, updateAllGameSupport
 from app.utils import addNotification, get_system_user
 from app.utils.image import get_image_size
 
@@ -328,9 +327,9 @@ def update_screenshot_sizes():
 
 @action("Detect game support")
 def detect_game_support():
-	resolver = GameSupportResolver(db.session)
-	resolver.update_all()
-	db.session.commit()
+	task_id = uuid()
+	updateAllGameSupport.apply_async((), task_id=task_id)
+	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
 
 
 @action("Send pending notif digests")
