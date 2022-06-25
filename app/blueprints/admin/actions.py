@@ -328,7 +328,7 @@ def update_screenshot_sizes():
 
 @action("Detect game support")
 def detect_game_support():
-	resolver = GameSupportResolver()
+	resolver = GameSupportResolver(db.session)
 	resolver.update_all()
 	db.session.commit()
 

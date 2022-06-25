@@ -17,11 +17,11 @@ import typing
 from urllib.parse import quote as urlescape
 
 from flask import render_template
-from flask_babel import lazy_gettext, gettext
+from celery import uuid
 from flask_wtf import FlaskForm
 from flask_login import login_required
 from jinja2 import Markup
-from sqlalchemy import or_, func, and_
+from sqlalchemy import func
 from sqlalchemy.orm import joinedload, subqueryload
 from wtforms import *
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
@@ -29,7 +29,7 @@ from wtforms.validators import *
 
 from app.querybuilder import QueryBuilder
 from app.rediscache import has_key, set_key
-from app.tasks.importtasks import importRepoScreenshot
+from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
 from app.utils import *
 from . import bp, get_package_tabs
 from app.logic.LogicError import LogicError
@@ -628,6 +628,7 @@ def similar(package):
 
 
 class GameSupportForm(FlaskForm):
+	enable_support_detection = BooleanField(lazy_gettext("Enable support detection based on dependencies"))
 	supported = StringField(lazy_gettext("Supported games (Comma-separated)"), [Optional()])
 	unsupported = StringField(lazy_gettext("Unsupported games (Comma-separated)"), [Optional()])
 	submit = SubmitField(lazy_gettext("Save"))
@@ -646,21 +647,38 @@ def game_support(package):
 
 	form = GameSupportForm() if can_edit else None
 	if request.method == "GET":
+		form.enable_support_detection.data = package.enable_game_support_detection
 		manual_supported_games = package.supported_games.filter_by(confidence=8).all()
 		form.supported.data = ", ".join([x.game.name for x in manual_supported_games if x.supports])
 		form.unsupported.data = ", ".join([x.game.name for x in manual_supported_games if not x.supports])
 
 	if form and form.validate_on_submit():
-		resolver = GameSupportResolver()
-		game_is_supported = []
-		for game in get_games_from_csv(form.supported.data or ""):
-			game_is_supported.append((game, True))
-		for game in get_games_from_csv(form.unsupported.data or ""):
-			game_is_supported.append((game, False))
-		resolver.set_supported(package, game_is_supported, 8)
-		db.session.commit()
+		resolver = GameSupportResolver(db.session)
 
-		return redirect(package.getURL("packages.game_support"))
+		game_is_supported = {}
+		for game in get_games_from_csv(db.session, form.supported.data or ""):
+			game_is_supported[game.id] = True
+		for game in get_games_from_csv(db.session, form.unsupported.data or ""):
+			game_is_supported[game.id] = False
+		resolver.set_supported(package, game_is_supported, 8)
+
+		next_url = package.getURL("packages.game_support")
+
+		if form.enable_support_detection.data != package.enable_game_support_detection:
+			package.enable_game_support_detection = form.enable_support_detection.data
+			if package.enable_game_support_detection:
+				db.session.commit()
+
+				release = package.releases.first()
+				if release:
+					task_id = uuid()
+					checkZipRelease.apply_async((release.id, release.file_path), task_id=task_id)
+					next_url = url_for("tasks.check", id=task_id, r=next_url)
+			else:
+				package.supported_games.filter_by(confidence=1).delete()
+				db.session.commit()
+
+		return redirect(next_url)
 
 	return render_template("packages/game_support.html", package=package, form=form,
 			tabs=get_package_tabs(current_user, package), current_tab="game_support")

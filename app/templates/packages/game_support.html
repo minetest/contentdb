@@ -68,18 +68,23 @@
 	</div>
 
 
-	{% if form and package.checkPerm(current_user, "EDIT_PACKAGE") and current_user not in package.maintainers %}
-		<h2>
-			{{ _("Added by Editor") }}
-			<i class="ml-2 fas fa-user-edit"></i>
-		</h2>
+	{% if form %}
+		<h2>Options</h2>
 
 		{% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
 		<form method="POST" action="" class="tableform">
 			{{ form.hidden_tag() }}
 
-			{{ render_field(form.supported) }}
-			{{ render_field(form.unsupported) }}
+			{{ render_checkbox_field(form.enable_support_detection) }}
+
+			{% if package.checkPerm(current_user, "EDIT_PACKAGE") and current_user not in package.maintainers %}
+				<h3>
+					{{ _("Added by Editor") }}
+					<i class="ml-2 fas fa-user-edit"></i>
+				</h3>
+				{{ render_field(form.supported) }}
+				{{ render_field(form.unsupported) }}
+			{% endif %}
 
 			{{ render_submit_field(form.submit, class_="mt-4 btn btn-primary") }}
 		</form>

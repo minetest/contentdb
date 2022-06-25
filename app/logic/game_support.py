@@ -16,11 +16,12 @@
 
 
 import sys
+from typing import List, Dict, Optional, Iterable
 
-from typing import List, Dict, Optional, Iterator, Iterable, Tuple
+import sqlalchemy.orm
 
 from app.logic.LogicError import LogicError
-from app.models import Package, MetaPackage, PackageType, PackageState, PackageGameSupport, db
+from app.models import Package, MetaPackage, PackageType, PackageState, PackageGameSupport
 
 """
 get_game_support(package):
@@ -82,10 +83,14 @@ class PackageSet:
 
 
 class GameSupportResolver:
+	session: sqlalchemy.orm.Session
 	checked_packages = set()
 	checked_metapackages = set()
 	resolved_packages: Dict[str, PackageSet] = {}
 	resolved_metapackages: Dict[str, PackageSet] = {}
+
+	def __init__(self, session):
+		self.session = session
 
 	def resolve_for_meta_package(self, meta: MetaPackage, history: List[str]) -> PackageSet:
 		print(f"Resolving for {meta.name}", file=sys.stderr)
@@ -120,8 +125,6 @@ class GameSupportResolver:
 		return retval
 
 	def resolve(self, package: Package, history: List[str]) -> PackageSet:
-		db.session.merge(package)
-
 		key = package.getId()
 		print(f"Resolving for {key}", file=sys.stderr)
 
@@ -160,47 +163,41 @@ class GameSupportResolver:
 		return retval
 
 	def update_all(self) -> None:
-		for package in Package.query.filter(Package.type == PackageType.MOD, Package.state != PackageState.DELETED).all():
+		for package in self.session.query(Package).filter(Package.type == PackageType.MOD, Package.state != PackageState.DELETED).all():
 			retval = self.resolve(package, [])
 			for game in retval:
 				support = PackageGameSupport(package, game, 1, True)
-				db.session.add(support)
+				self.session.add(support)
 
 	"""
 	Update game supported package on a package, given the confidence.
 	
 	Higher confidences outweigh lower ones.
 	"""
-	def set_supported(self, package: Package, game_is_supported: List[Tuple[Package, bool]], confidence: int):
+	def set_supported(self, package: Package, game_is_supported: Dict[int, bool], confidence: int):
 		previous_supported: Dict[int, PackageGameSupport] = {}
 		for support in package.supported_games.all():
-			db.session.merge(support.game)
 			previous_supported[support.game.id] = support
 
-		seen_game = {}
-		for game, supports in game_is_supported:
-			if seen_game.get(game.id):
-				continue
-
-			seen_game[game.id] = True
-			lookup = previous_supported.pop(game.id, None)
+		for game_id, supports in game_is_supported.items():
+			game = self.session.query(Package).get(game_id)
+			lookup = previous_supported.pop(game_id, None)
 			if lookup is None:
 				support = PackageGameSupport(package, game, confidence, supports)
-				db.session.add(support)
+				self.session.add(support)
 			elif lookup.confidence <= confidence:
 				lookup.supports = supports
 				lookup.confidence = confidence
-				db.session.merge(lookup)
 
 		for game, support in previous_supported.items():
 			if support.confidence == confidence:
-				db.session.delete(support)
+				self.session.delete(support)
 
 	def update(self, package: Package) -> None:
-		retval = self.resolve(package, [])
-
-		game_is_supported = []
-		for game in retval:
-			game_is_supported.append((game, True))
+		game_is_supported = {}
+		if package.enable_game_support_detection:
+			retval = self.resolve(package, [])
+			for game in retval:
+				game_is_supported[game.id] = True
 
 		self.set_supported(package, game_is_supported, 1)

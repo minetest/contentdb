@@ -414,6 +414,8 @@ class Package(db.Model):
 	forums       = db.Column(db.Integer,     nullable=True)
 	video_url    = db.Column(db.String(200), nullable=True, default=None)
 
+	enable_game_support_detection = db.Column(db.Boolean, nullable=False, default=True)
+
 	provides = db.relationship("MetaPackage", secondary=PackageProvides, order_by=db.asc("name"), back_populates="packages")
 
 	dependencies = db.relationship("Dependency", back_populates="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])

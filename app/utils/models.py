@@ -18,6 +18,7 @@
 from functools import wraps
 from typing import List
 
+import sqlalchemy.orm
 from flask import abort, redirect, url_for, request
 from flask_login import current_user
 from sqlalchemy import or_, and_
@@ -136,14 +137,14 @@ def post_bot_message(package: Package, title: str, message: str):
 	thread.replies.append(reply)
 
 
-def get_games_from_csv(csv: str) -> List[Package]:
+def get_games_from_csv(session: sqlalchemy.orm.Session, csv: str) -> List[Package]:
 	retval = []
 	supported_games_raw = csv.split(",")
 	for game_name in supported_games_raw:
 		game_name = game_name.strip()
 		if game_name.endswith("_game"):
 			game_name = game_name[:-5]
-		games = Package.query.filter(and_(Package.state==PackageState.APPROVED, Package.type==PackageType.GAME,
+		games = session.query(Package).filter(and_(Package.state==PackageState.APPROVED, Package.type==PackageType.GAME,
 				or_(Package.name==game_name, Package.name==game_name + "_game"))).all()
 		retval.extend(games)
 

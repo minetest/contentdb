@@ -14,9 +14,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import gitdb
 import json
-import os, shutil, gitdb
+import os
+import shutil
 from zipfile import ZipFile
+
 from git import GitCommandError
 from git_archive_all import GitArchiver
 from kombu import uuid
@@ -27,7 +30,7 @@ from app.utils import randomString, post_bot_message, addSystemNotification, add
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from ..logic.LogicError import LogicError
-from ..logic.game_support import GameSupportResolver, PackageSet
+from ..logic.game_support import GameSupportResolver
 from ..logic.packages import do_edit_package, ALIASES
 from ..utils.image import get_image_size
 
@@ -73,6 +76,25 @@ def getMeta(urlstr, author):
 		return result
 
 
+@celery.task()
+def releaseUpdateGameSupport(package_id: int, supported_games, unsupported_games):
+	with db.create_session({})() as session:
+		package = session.query(Package).get(package_id)
+		resolver = GameSupportResolver(session)
+
+		game_is_supported = {}
+		if supported_games:
+			for game in get_games_from_csv(session, supported_games):
+				game_is_supported[game.id] = True
+		if unsupported_games:
+			for game in get_games_from_csv(session, unsupported_games):
+				game_is_supported[game.id] = False
+
+		resolver.set_supported(package, game_is_supported, 10)
+		resolver.update(package)
+		session.commit()
+
+
 def postReleaseCheckUpdate(self, release: PackageRelease, path):
 	try:
 		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
@@ -115,20 +137,6 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 		for meta in getMetaPackages(optional_depends):
 			db.session.add(Dependency(package, meta=meta, optional=True))
 
-		# Update game supports
-		if package.type == PackageType.MOD:
-			resolver = GameSupportResolver()
-			game_is_supported = []
-			if "supported_games" in tree.meta:
-				for game in get_games_from_csv(tree.meta["supported_games"]):
-					game_is_supported.append((game, True))
-			if "unsupported_games" in tree.meta:
-				for game in get_games_from_csv(tree.meta["unsupported_games"]):
-					game_is_supported.append((game, False))
-
-			resolver.set_supported(package, game_is_supported, 10)
-			resolver.update(package)
-
 		# Update min/max
 		if tree.meta.get("min_minetest_version"):
 			release.min_rel = MinetestRelease.get(tree.meta["min_minetest_version"], None)
@@ -144,6 +152,10 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 			raise TaskError(e.message)
 		except IOError:
 			pass
+
+		# Update game support
+		if package.type == PackageType.MOD:
+			releaseUpdateGameSupport.delay(package.id, tree.meta.get("supported_games"), tree.meta.get("unsupported_games"))
 
 		return tree
 
