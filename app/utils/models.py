@@ -16,8 +16,12 @@
 
 
 from functools import wraps
+from typing import List
+
 from flask import abort, redirect, url_for, request
 from flask_login import current_user
+from sqlalchemy import or_, and_
+
 from app.models import User, NotificationType, Package, UserRank, Notification, db, AuditSeverity, AuditLogEntry, ThreadReply, Thread, PackageState, PackageType, PackageAlias
 
 
@@ -130,3 +134,17 @@ def post_bot_message(package: Package, title: str, message: str):
 			title, thread.getViewURL(), thread.package)
 
 	thread.replies.append(reply)
+
+
+def get_games_from_csv(csv: str) -> List[Package]:
+	retval = []
+	supported_games_raw = csv.split(",")
+	for game_name in supported_games_raw:
+		game_name = game_name.strip()
+		if game_name.endswith("_game"):
+			game_name = game_name[:-5]
+		games = Package.query.filter(and_(Package.state==PackageState.APPROVED, Package.type==PackageType.GAME,
+				or_(Package.name==game_name, Package.name==game_name + "_game"))).all()
+		retval.extend(games)
+
+	return retval

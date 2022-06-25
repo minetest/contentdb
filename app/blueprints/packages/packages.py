@@ -36,6 +36,7 @@ from app.logic.LogicError import LogicError
 from app.logic.packages import do_edit_package
 from app.models.packages import PackageProvides
 from app.tasks.webhooktasks import post_discord_webhook
+from ...logic.game_support import GameSupportResolver
 
 
 @bp.route("/packages/")
@@ -626,16 +627,40 @@ def similar(package):
 			packages_modnames=packages_modnames, similar_topics=similar_topics)
 
 
-@bp.route("/packages/<author>/<name>/support/")
+class GameSupportForm(FlaskForm):
+	supported = StringField(lazy_gettext("Supported games (Comma-separated)"), [Optional()])
+	unsupported = StringField(lazy_gettext("Unsupported games (Comma-separated)"), [Optional()])
+	submit = SubmitField(lazy_gettext("Save"))
+
+
+@bp.route("/packages/<author>/<name>/support/", methods=["GET", "POST"])
 @login_required
 @is_package_page
 def game_support(package):
 	if package.type != PackageType.MOD:
 		abort(404)
 
-	if not (package.checkPerm(current_user, Permission.EDIT_PACKAGE) or
-			package.checkPerm(current_user, Permission.APPROVE_NEW)):
+	can_edit = package.checkPerm(current_user, Permission.EDIT_PACKAGE)
+	if not (can_edit or package.checkPerm(current_user, Permission.APPROVE_NEW)):
 		abort(403)
 
-	return render_template("packages/game_support.html", package=package,
+	form = GameSupportForm() if can_edit else None
+	if request.method == "GET":
+		manual_supported_games = package.supported_games.filter_by(confidence=8).all()
+		form.supported.data = ", ".join([x.game.name for x in manual_supported_games if x.supports])
+		form.unsupported.data = ", ".join([x.game.name for x in manual_supported_games if not x.supports])
+
+	if form and form.validate_on_submit():
+		resolver = GameSupportResolver()
+		game_is_supported = []
+		for game in get_games_from_csv(form.supported.data or ""):
+			game_is_supported.append((game, True))
+		for game in get_games_from_csv(form.unsupported.data or ""):
+			game_is_supported.append((game, False))
+		resolver.set_supported(package, game_is_supported, 8)
+		db.session.commit()
+
+		return redirect(package.getURL("packages.game_support"))
+
+	return render_template("packages/game_support.html", package=package, form=form,
 			tabs=get_package_tabs(current_user, package), current_tab="game_support")

@@ -20,11 +20,10 @@ from zipfile import ZipFile
 from git import GitCommandError
 from git_archive_all import GitArchiver
 from kombu import uuid
-from sqlalchemy import or_, and_
 
 from app.models import *
 from app.tasks import celery, TaskError
-from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog
+from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog, get_games_from_csv
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from ..logic.LogicError import LogicError
@@ -72,20 +71,6 @@ def getMeta(urlstr, author):
 				result[key] = list(value)
 
 		return result
-
-
-def get_games_from_csv(csv: str) -> List[Package]:
-	retval = []
-	supported_games_raw = csv.split(",")
-	for game_name in supported_games_raw:
-		game_name = game_name.strip()
-		if game_name.endswith("_game"):
-			game_name = game_name[:-5]
-		games = Package.query.filter(and_(Package.state==PackageState.APPROVED, Package.type==PackageType.GAME,
-				or_(Package.name==game_name, Package.name==game_name + "_game"))).all()
-		retval.extend(games)
-
-	return retval
 
 
 def postReleaseCheckUpdate(self, release: PackageRelease, path):

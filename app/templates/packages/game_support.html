@@ -7,6 +7,9 @@
 {% block content %}
 	<h2 class="mt-0">{{ self.title() }}</h2>
 
+	<p class="alert alert-warning">
+		This feature is experimental
+	</p>
 	<p class="alert alert-info">
 		<a class="float-right btn btn-sm" href="{{ url_for('flatpage', path='help/game_support') }}">
 			{{ _("Read more") }}
@@ -40,6 +43,8 @@
 					<span class="col-5">
 						{% if support.confidence == 1 %}
 							{{ _("Detected from dependencies") }}
+						{% elif support.confidence == 8 %}
+							{{ _("Added by Editor") }}
 						{% elif support.confidence == 10 %}
 							{{ _("mod.conf") }}
 						{% else %}
@@ -61,4 +66,22 @@
 			</div>
 		{% endfor %}
 	</div>
+
+
+	{% if form and package.checkPerm(current_user, "EDIT_PACKAGE") and current_user not in package.maintainers %}
+		<h2>
+			{{ _("Added by Editor") }}
+			<i class="ml-2 fas fa-user-edit"></i>
+		</h2>
+
+		{% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
+		<form method="POST" action="" class="tableform">
+			{{ form.hidden_tag() }}
+
+			{{ render_field(form.supported) }}
+			{{ render_field(form.unsupported) }}
+
+			{{ render_submit_field(form.submit, class_="mt-4 btn btn-primary") }}
+		</form>
+	{% endif %}
 {% endblock %}

@@ -163,7 +163,7 @@ class GameSupportResolver:
 		for package in Package.query.filter(Package.type == PackageType.MOD, Package.state != PackageState.DELETED).all():
 			retval = self.resolve(package, [])
 			for game in retval:
-				support = PackageGameSupport(package, game, 1)
+				support = PackageGameSupport(package, game, 1, True)
 				db.session.add(support)
 
 	"""
@@ -177,10 +177,15 @@ class GameSupportResolver:
 			db.session.merge(support.game)
 			previous_supported[support.game.id] = support
 
+		seen_game = {}
 		for game, supports in game_is_supported:
+			if seen_game.get(game.id):
+				continue
+
+			seen_game[game.id] = True
 			lookup = previous_supported.pop(game.id, None)
 			if lookup is None:
-				support = PackageGameSupport(package, game, confidence)
+				support = PackageGameSupport(package, game, confidence, supports)
 				db.session.add(support)
 			elif lookup.confidence <= confidence:
 				lookup.supports = supports

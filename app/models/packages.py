@@ -358,10 +358,11 @@ class PackageGameSupport(db.Model):
 
 	__table_args__ = (db.UniqueConstraint("game_id", "package_id", name="_package_game_support_uc"),)
 
-	def __init__(self, package, game, confidence):
+	def __init__(self, package, game, confidence, supports):
 		self.package = package
 		self.game = game
 		self.confidence = confidence
+		self.supports = supports
 
 
 class Package(db.Model):
