@@ -653,14 +653,15 @@ def game_support(package):
 		form.unsupported.data = ", ".join([x.game.name for x in manual_supported_games if not x.supports])
 
 	if form and form.validate_on_submit():
-		resolver = GameSupportResolver(db.session)
+		if current_user not in package.maintainers:
+			resolver = GameSupportResolver(db.session)
 
-		game_is_supported = {}
-		for game in get_games_from_csv(db.session, form.supported.data or ""):
-			game_is_supported[game.id] = True
-		for game in get_games_from_csv(db.session, form.unsupported.data or ""):
-			game_is_supported[game.id] = False
-		resolver.set_supported(package, game_is_supported, 8)
+			game_is_supported = {}
+			for game in get_games_from_csv(db.session, form.supported.data or ""):
+				game_is_supported[game.id] = True
+			for game in get_games_from_csv(db.session, form.unsupported.data or ""):
+				game_is_supported[game.id] = False
+			resolver.set_supported(package, game_is_supported, 8)
 
 		next_url = package.getURL("packages.game_support")
 

@@ -76,7 +76,6 @@ def getMeta(urlstr, author):
 		return result
 
 
-@celery.task()
 def releaseUpdateGameSupport(package_id: int, supported_games, unsupported_games):
 	with db.create_session({})() as session:
 		package = session.query(Package).get(package_id)
@@ -155,7 +154,7 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 
 		# Update game support
 		if package.type == PackageType.MOD:
-			releaseUpdateGameSupport.delay(package.id, tree.meta.get("supported_games"), tree.meta.get("unsupported_games"))
+			releaseUpdateGameSupport(package.id, tree.meta.get("supported_games"), tree.meta.get("unsupported_games"))
 
 		return tree
 

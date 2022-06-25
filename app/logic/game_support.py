@@ -55,44 +55,17 @@ mtg_mod_blacklist = {
 }
 
 
-class PackageSet:
-	packages: Dict[str, Package]
-
-	def __init__(self, packages: Optional[Iterable[Package]] = None):
-		self.packages = {}
-		if packages:
-			self.update(packages)
-
-	def update(self, packages: Iterable[Package]):
-		for package in packages:
-			key = package.getId()
-			if key not in self.packages:
-				self.packages[key] = package
-
-	def intersection_update(self, other):
-		keys = set(self.packages.keys())
-		keys.difference_update(set(other.packages.keys()))
-		for key in keys:
-			del self.packages[key]
-
-	def __len__(self):
-		return len(self.packages)
-
-	def __iter__(self):
-		return self.packages.values().__iter__()
-
-
 class GameSupportResolver:
 	session: sqlalchemy.orm.Session
 	checked_packages = set()
 	checked_metapackages = set()
-	resolved_packages: Dict[str, PackageSet] = {}
-	resolved_metapackages: Dict[str, PackageSet] = {}
+	resolved_packages: Dict[int, set[int]] = {}
+	resolved_metapackages: Dict[int, set[int]] = {}
 
 	def __init__(self, session):
 		self.session = session
 
-	def resolve_for_meta_package(self, meta: MetaPackage, history: List[str]) -> PackageSet:
+	def resolve_for_meta_package(self, meta: MetaPackage, history: List[str]) -> set[int]:
 		print(f"Resolving for {meta.name}", file=sys.stderr)
 
 		key = meta.name
@@ -101,11 +74,11 @@ class GameSupportResolver:
 
 		if key in self.checked_metapackages:
 			print(f"Error, cycle found: {','.join(history)}", file=sys.stderr)
-			return PackageSet()
+			return set()
 
 		self.checked_metapackages.add(key)
 
-		retval = PackageSet()
+		retval = set()
 
 		for package in meta.packages:
 			if package.state != PackageState.APPROVED:
@@ -116,7 +89,7 @@ class GameSupportResolver:
 
 			ret = self.resolve(package, history)
 			if len(ret) == 0:
-				retval = PackageSet()
+				retval = set()
 				break
 
 			retval.update(ret)
@@ -124,29 +97,29 @@ class GameSupportResolver:
 		self.resolved_metapackages[key] = retval
 		return retval
 
-	def resolve(self, package: Package, history: List[str]) -> PackageSet:
-		key = package.getId()
+	def resolve(self, package: Package, history: List[str]) -> set[int]:
+		key = package.id
 		print(f"Resolving for {key}", file=sys.stderr)
 
 		history = history.copy()
 		history.append(key)
 
 		if package.type == PackageType.GAME:
-			return PackageSet([package])
+			return {package.id}
 
 		if key in self.resolved_packages:
 			return self.resolved_packages.get(key)
 
 		if key in self.checked_packages:
 			print(f"Error, cycle found: {','.join(history)}", file=sys.stderr)
-			return PackageSet()
+			return set()
 
 		self.checked_packages.add(key)
 
 		if package.type != PackageType.MOD:
 			raise LogicError(500, "Got non-mod")
 
-		retval = PackageSet()
+		retval = set()
 
 		for dep in package.dependencies.filter_by(optional=False).all():
 			ret = self.resolve_for_meta_package(dep.meta_package, history)
@@ -165,7 +138,8 @@ class GameSupportResolver:
 	def update_all(self) -> None:
 		for package in self.session.query(Package).filter(Package.type == PackageType.MOD, Package.state != PackageState.DELETED).all():
 			retval = self.resolve(package, [])
-			for game in retval:
+			for game_id in retval:
+				game = self.session.query(Package).get(game_id)
 				support = PackageGameSupport(package, game, 1, True)
 				self.session.add(support)
 
@@ -197,7 +171,7 @@ class GameSupportResolver:
 		game_is_supported = {}
 		if package.enable_game_support_detection:
 			retval = self.resolve(package, [])
-			for game in retval:
-				game_is_supported[game.id] = True
+			for game_id in retval:
+				game_is_supported[game_id] = True
 
 		self.set_supported(package, game_is_supported, 1)
