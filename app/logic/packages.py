@@ -150,7 +150,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 	if "tags" in data:
 		old_tags = list(package.tags)
 		package.tags.clear()
-		for tag_id in data["tags"]:
+		for tag_id in (data["tags"] or []):
 			if is_int(tag_id):
 				tag = Tag.query.get(tag_id)
 			else:
@@ -173,7 +173,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 
 	if "content_warnings" in data:
 		package.content_warnings.clear()
-		for warning_id in data["content_warnings"]:
+		for warning_id in (data["content_warnings"] or []):
 			if is_int(warning_id):
 				package.content_warnings.append(ContentWarning.query.get(warning_id))
 			else:

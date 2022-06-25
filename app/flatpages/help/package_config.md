@@ -65,7 +65,7 @@ It should be a JSON dictionary with one or more of the following optional keys:
 * `forums`: forum topic ID.
 * `video_url`: URL to a video.
 
-Use `null` to unset fields where relevant.
+Use `null` or `[]` to unset fields where relevant.
 
 Example:
 
