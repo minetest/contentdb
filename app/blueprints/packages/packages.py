@@ -249,6 +249,10 @@ class PackageForm(FlaskForm):
 
 	submit           = SubmitField(lazy_gettext("Save"))
 
+	def validate_name(form, field):
+		if field.data == "_game":
+			raise ValidationError(lazy_gettext("_game is not an allowed name"))
+
 
 def handle_create_edit(package: typing.Optional[Package], form: PackageForm, author: User):
 	wasNew = False

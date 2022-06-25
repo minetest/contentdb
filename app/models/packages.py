@@ -382,7 +382,7 @@ class Package(db.Model):
 	created_at   = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 	approved_at  = db.Column(db.DateTime, nullable=True, default=None)
 
-	name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
+	name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$' AND name != '_game'")
 
 	search_vector = db.Column(TSVectorType("name", "title", "short_desc", "desc",
 			weights={ "name": "A", "title": "B", "short_desc": "C", "desc": "D" }))
