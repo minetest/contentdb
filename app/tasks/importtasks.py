@@ -154,7 +154,8 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 	except MinetestCheckError as err:
 		db.session.rollback()
 
-		msg = f"{err}\n\nTask ID: {self.request.id}\n\nRelease: [View Release]({release.getEditURL()})"
+		task_url = url_for('tasks.check', id=self.request.id)
+		msg = f"{err}\n\n[View Release]({release.getEditURL()}) | [View Task]({task_url})"
 		post_bot_message(release.package, f"Release {release.title} validation failed", msg)
 
 		if "Fails validation" not in release.title:
@@ -347,8 +348,8 @@ def check_update_config(self, package_id):
 			.replace("Cloning into '/tmp/", "Cloning into '") \
 			.strip()
 
-		msg = "Error: {}.\n\nTask ID: {}\n\n[Change update configuration]({})" \
-			.format(err, self.request.id, package.getURL("packages.update_config"))
+		msg = "Error: {}.\n\n[Change update configuration]({}) | [View task]({})" \
+			.format(err, package.getURL("packages.update_config"), url_for("tasks.check", id=self.request.id))
 
 		post_bot_message(package, "Failed to check git repository", msg)
 

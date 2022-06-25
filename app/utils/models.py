@@ -118,7 +118,7 @@ def post_bot_message(package: Package, title: str, message: str):
 	if not thread:
 		thread = Thread()
 		thread.package = package
-		thread.title = "Bot messages for {}".format(package.title)
+		thread.title = "Messages for '{}'".format(package.title)
 		thread.author = system_user
 		thread.private = True
 		thread.watchers.extend(package.maintainers)
@@ -128,7 +128,7 @@ def post_bot_message(package: Package, title: str, message: str):
 	reply = ThreadReply()
 	reply.thread  = thread
 	reply.author  = system_user
-	reply.comment = "**{}**\n\n{}".format(title, message)
+	reply.comment = "**{}**\n\n{}\n\nThis is an automated message, but you can reply if you need help".format(title, message)
 	db.session.add(reply)
 
 	addNotification(thread.watchers, system_user, NotificationType.BOT,
