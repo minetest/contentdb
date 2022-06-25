@@ -651,7 +651,7 @@ def game_support(package):
 	form = GameSupportForm() if can_edit else None
 	if form and request.method == "GET":
 		form.enable_support_detection.data = package.enable_game_support_detection
-		manual_supported_games = package.supported_games.filter_by(confidence=8).all()
+		manual_supported_games = package.supported_games.filter_by(confidence=11).all()
 		form.supported.data = ", ".join([x.game.name for x in manual_supported_games if x.supports])
 		form.unsupported.data = ", ".join([x.game.name for x in manual_supported_games if not x.supports])
 
@@ -666,7 +666,7 @@ def game_support(package):
 				game_is_supported[game.id] = True
 			for game in get_games_from_csv(db.session, form.unsupported.data or ""):
 				game_is_supported[game.id] = False
-			resolver.set_supported(package, game_is_supported, 8)
+			resolver.set_supported(package, game_is_supported, 11)
 			detect_update_needed = True
 
 		next_url = package.getURL("packages.game_support")

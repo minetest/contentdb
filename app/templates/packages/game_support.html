@@ -40,7 +40,7 @@
 					<span class="col-5">
 						{% if support.confidence == 1 %}
 							{{ _("Detected from dependencies") }}
-						{% elif support.confidence == 8 %}
+						{% elif support.confidence == 11 %}
 							{{ _("Added by Editor") }}
 						{% elif support.confidence == 10 %}
 							{{ _("mod.conf") }}
@@ -85,7 +85,7 @@
 
 			{% if package.checkPerm(current_user, "EDIT_PACKAGE") and current_user not in package.maintainers %}
 				<h3>
-					{{ _("Added by Editor") }}
+					{{ _("Editor Overrides") }}
 					<i class="ml-2 fas fa-user-edit"></i>
 				</h3>
 				{{ render_field(form.supported) }}
