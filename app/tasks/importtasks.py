@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+from json import JSONDecodeError
 
 import gitdb
 import json
@@ -138,6 +139,8 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 				do_edit_package(package.author, package, False, False, data, "Post release hook")
 		except LogicError as e:
 			raise TaskError(e.message)
+		except JSONDecodeError as e:
+			raise TaskError("Whilst reading .cdb.json: " + str(e))
 		except IOError:
 			pass
 
