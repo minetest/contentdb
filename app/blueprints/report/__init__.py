@@ -64,4 +64,4 @@ def report():
 
 		return redirect(url_for("tasks.check", id=task.id, r=url_for("homepage.home")))
 
-	return render_template("report/index.html", form=form, url=url, is_anon=is_anon)
+	return render_template("report/index.html", form=form, url=url, is_anon=is_anon, noindex=url is not None)

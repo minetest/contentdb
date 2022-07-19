@@ -4,6 +4,12 @@
 	{{ _("Report") }}
 {% endblock %}
 
+{% block headextra %}
+	{% if noindex %}
+		<meta name="robots" content="noindex">
+	{% endif %}
+{% endblock %}
+
 {% block content %}
 
 <h1>{{ _("Report") }}</h1>
