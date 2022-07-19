@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import Blueprint, request, render_template, url_for
+from flask import Blueprint, request, render_template, url_for, abort
 from flask_babel import lazy_gettext
 from flask_login import current_user
 from flask_wtf import FlaskForm
@@ -41,6 +41,9 @@ def report():
 
 	url = request.args.get("url")
 	if url:
+		if url.startswith("/report/"):
+			abort(404)
+
 		url = abs_url_samesite(url)
 
 	form = ReportForm(formdata=request.form) if current_user.is_authenticated else None

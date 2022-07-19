@@ -234,7 +234,7 @@
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help/api') }}">{{ _("API") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a></li>
-			{% if request.endpoint != "flatpage" %}
+			{% if request.endpoint != "flatpage" and request.endpoint != "report.report" %}
 				<li class="list-inline-item"><a href="{{ url_for('report.report', url=url_current()) }}">{{ _("Report") }}</a></li>
 			{% endif %}
 			<li class="list-inline-item"><a href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb">{{ _("Stats / Monitoring") }}</a></li>
