@@ -31,7 +31,7 @@ from app.tasks.zipgrep import search_in_releases
 
 
 class SearchForm(FlaskForm):
-	query = StringField(lazy_gettext("Text to find (regex)"), [InputRequired(), Length(6, 100)])
+	query = StringField(lazy_gettext("Text to find (regex)"), [InputRequired(), Length(1, 100)])
 	file_filter = StringField(lazy_gettext("File filter"), [InputRequired(), Length(1, 100)], default="*.lua")
 	remember_me = BooleanField(lazy_gettext("Remember me"), default=True)
 	submit = SubmitField(lazy_gettext("Search"))
