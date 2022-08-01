@@ -6,9 +6,9 @@ Editors are users of rank Editor or above.
 They are responsible for ensuring that the package listings of ContentDB are useful.
 For this purpose, they can/will:
 
-* Review and approve packages (see Editor Work Queue).
+* Review and approve packages.
 * Edit any package - including tags, releases, screenshots, and maintainers.
-* Create packages on behalf of authors who aren't present (see Forum Topics).
+* Create packages on behalf of authors who aren't present.
 
 Editors should make sure they are familiar with the
 [Package Inclusion Policy and Guidance](/policy_and_guidance/).
@@ -27,9 +27,6 @@ The [Editor Work Queue](/todo/) and related pages contain useful information for
 * Packages which are outdated or are missing tags.
 * A list of forum topics without packages.
   Editors can create the packages or "discard" them if they don't think it's worth adding them.
-
-## Forum Topics
-
 
 ## Editor Notifications
 
