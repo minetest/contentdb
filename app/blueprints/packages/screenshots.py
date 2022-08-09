@@ -31,7 +31,7 @@ from app.logic.screenshots import do_create_screenshot, do_order_screenshots
 
 class CreateScreenshotForm(FlaskForm):
 	title	   = StringField(lazy_gettext("Title/Caption"), [Optional(), Length(-1, 100)])
-	fileUpload = FileField(lazy_gettext("File Upload"), [InputRequired()])
+	file_upload = FileField(lazy_gettext("File Upload"), [InputRequired()])
 	submit	   = SubmitField(lazy_gettext("Save"))
 
 
@@ -87,7 +87,7 @@ def create_screenshot(package):
 	form = CreateScreenshotForm()
 	if form.validate_on_submit():
 		try:
-			do_create_screenshot(current_user, package, form.title.data, form.fileUpload.data, False)
+			do_create_screenshot(current_user, package, form.title.data, form.file_upload.data, False)
 			return redirect(package.getURL("packages.screenshots"))
 		except LogicError as e:
 			flash(e.message, "danger")

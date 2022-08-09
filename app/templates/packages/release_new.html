@@ -51,7 +51,7 @@
 					pattern="[A-Za-z0-9/._-]+") }}
 		{% endif %}
 
-		{{ render_field(form.fileUpload, fieldclass="form-control-file", class_="mt-3", accept=".zip") }}
+		{{ render_field(form.file_upload, fieldclass="form-control-file", class_="mt-3", accept=".zip") }}
 
 		<p>
 			{{ _("Take a look at the <a href='/help/package_config/'>Package Configuration and Releases Guide</a> for
@@ -94,10 +94,10 @@
 	<script>
 		function check_opt() {
 			if ($("input[name=uploadOpt]:checked").val() == "vcs") {
-				$("#fileUpload").parent().hide();
+				$("#file_upload").parent().hide();
 				$("#vcsLabel").parent().show();
 			} else {
-				$("#fileUpload").parent().show();
+				$("#file_upload").parent().show();
 				$("#vcsLabel").parent().hide();
 			}
 		}
