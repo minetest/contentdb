@@ -272,3 +272,26 @@ def outdated():
 
 	return render_template("todo/outdated.html", current_tab="outdated",
 			outdated_packages=query.all(), sort_by=sort_by, is_mtm_only=is_mtm_only)
+
+
+@bp.route("/todo/screenshots/")
+@login_required
+def screenshots():
+	is_mtm_only = isYes(request.args.get("mtm"))
+
+	query = db.session.query(Package) \
+			.filter(~Package.screenshots.any()) \
+			.filter(Package.state == PackageState.APPROVED)
+
+	if is_mtm_only:
+		query = query.filter(Package.repo.ilike("%github.com/minetest-mods/%"))
+
+	sort_by = request.args.get("sort")
+	if sort_by == "date":
+		query = query.order_by(db.desc(Package.approved_at))
+	else:
+		sort_by = "score"
+		query = query.order_by(db.desc(Package.score))
+
+	return render_template("todo/screenshots.html", current_tab="screenshots",
+			packages=query.all(), sort_by=sort_by, is_mtm_only=is_mtm_only)

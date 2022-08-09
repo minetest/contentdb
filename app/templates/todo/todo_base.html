@@ -6,31 +6,37 @@
 			<div class="container">
 				<ul class="nav nav-tabs">
 					<li class="nav-item">
-						<a class="nav-link {% if current_tab == "user" %}active{% endif %}"
+						<a class="nav-link {% if current_tab == 'user' %}active{% endif %}"
 								href="{{ url_for('todo.view_user', username=current_user.username) }}">
-							{{ _("%(username)s's to do list", username=current_user.display_name) }}
+							{{ _("Your to do list") }}
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {% if current_tab == "editor" %}active{% endif %}"
+						<a class="nav-link {% if current_tab == 'editor' %}active{% endif %}"
 								href="{{ url_for('todo.view_editor') }}">
 							{{ _("Editor Work Queue") }}
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {% if current_tab == "outdated" %}active{% endif %}"
+						<a class="nav-link {% if current_tab == 'outdated' %}active{% endif %}"
 								href="{{ url_for('todo.outdated') }}">
-							{{ _("All Outdated Packages") }}
+							{{ _("Outdated Packages") }}
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {% if current_tab == "tags" %}active{% endif %}"
+						<a class="nav-link {% if current_tab == 'tags' %}active{% endif %}"
 								href="{{ url_for('todo.tags') }}">
 							{{ _("Package Tags") }}
 						</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link {% if current_tab == "topics" %}active{% endif %}"
+						<a class="nav-link {% if current_tab == 'screenshots' %}active{% endif %}"
+								href="{{ url_for('todo.screenshots') }}">
+							{{ _("Missing Screenshots") }}
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link {% if current_tab == 'topics' %}active{% endif %}"
 								href="{{ url_for('todo.topics') }}">
 							{{ _("Forum Topics") }}
 						</a>
