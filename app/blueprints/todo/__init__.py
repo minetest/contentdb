@@ -173,6 +173,9 @@ def view_user(username=None):
 			Package.state == PackageState.CHANGES_NEEDED)) \
 		.order_by(db.asc(Package.created_at)).all()
 
+	packages_with_no_screenshots = user.maintained_packages.filter(
+		~Package.screenshots.any(), Package.state == PackageState.APPROVED).all()
+
 	packages_with_small_screenshots = user.maintained_packages \
 		.filter(Package.screenshots.any(and_(PackageScreenshot.width < PackageScreenshot.SOFT_MIN_SIZE[0],
 				PackageScreenshot.height < PackageScreenshot.SOFT_MIN_SIZE[1]))) \
@@ -190,12 +193,13 @@ def view_user(username=None):
 			.all()
 
 	needs_tags = user.maintained_packages \
-		.filter(Package.state != PackageState.DELETED, Package.tags==None) \
+		.filter(Package.state != PackageState.DELETED, ~Package.tags.any()) \
 		.order_by(db.asc(Package.title)).all()
 
 	return render_template("todo/user.html", current_tab="user", user=user,
 			unapproved_packages=unapproved_packages, outdated_packages=outdated_packages,
 			needs_tags=needs_tags, topics_to_add=topics_to_add,
+			packages_with_no_screenshots=packages_with_no_screenshots,
 			packages_with_small_screenshots=packages_with_small_screenshots,
 			screenshot_min_size=PackageScreenshot.HARD_MIN_SIZE, screenshot_rec_size=PackageScreenshot.SOFT_MIN_SIZE)
 

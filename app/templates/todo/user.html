@@ -65,6 +65,26 @@
 
 
 	<div class="mt-5"></div>
+	<h2 id="missing-screenshots">{{ _("Missing Screenshots") }}</h2>
+	<div class="list-group mt-3 mb-5">
+		{% for package in packages_with_no_screenshots %}
+			<a class="list-group-item list-group-item-action" href="{{ package.getURL('packages.screenshots') }}">
+				<img
+					class="img-fluid"
+					style="max-height: 22px; max-width: 22px;"
+					src="{{ package.getThumbnailOrPlaceholder() }}" />
+
+				<span class="pl-2">
+					{{ package.title }}
+				</span>
+			</a>
+		{% else %}
+			<p class="text-muted">{{ _("Nothing to do :)") }}</p>
+		{% endfor %}
+	</div>
+
+
+	<div class="mt-5"></div>
 	<h2 id="small-screenshots">{{ _("Small Screenshots") }}</h2>
 	{% if packages_with_small_screenshots %}
 		<p>
