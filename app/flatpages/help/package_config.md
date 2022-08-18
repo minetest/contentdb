@@ -22,12 +22,14 @@ The filename of the `.conf` file depends on the content type:
 The `.conf` uses a key-value format, separated using equals. Here's a simple example:
 
 	name = mymod
+	title = My Mod
 	description = A short description to show in the client.
 
 ### Understood values
 
 ContentDB understands the following information:
 
+* `title` - A human-readable title.
 * `description` - A short description to show in the client.
 * `depends` - Comma-separated hard dependencies.
 * `optional_depends` - Comma-separated soft dependencies.
