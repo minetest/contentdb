@@ -2,6 +2,7 @@ from flask import abort, current_app
 from sqlalchemy import or_
 from sqlalchemy.orm import subqueryload
 from sqlalchemy.sql.expression import func
+from sqlalchemy_searchable import search
 
 from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, \
 	ContentWarning, PackageState, PackageDevState
@@ -171,7 +172,7 @@ class QueryBuilder:
 
 	def orderPackageQuery(self, query):
 		if self.search:
-			query = query.search(self.search, sort=self.order_by is None)
+			query = search(query, self.search, sort=self.order_by is None)
 
 		if self.random:
 			query = query.order_by(func.random())
