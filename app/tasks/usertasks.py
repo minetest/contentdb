@@ -16,16 +16,31 @@
 
 
 import datetime
-from app.models import User, db, UserRank
+
+from sqlalchemy import or_, and_
+
+from app.models import User, db, UserRank, ThreadReply, Package
 from app.tasks import celery
 
 
 @celery.task()
 def delete_inactive_users():
-    threshold = datetime.datetime.now() - datetime.timedelta(hours=5)
+	threshold = datetime.datetime.now() - datetime.timedelta(hours=5)
 
-    users = User.query.filter(User.is_active==False, User.packages==None, User.forum_topics==None, User.created_at<=threshold, User.rank==UserRank.NOT_JOINED).all()
-    for user in users:
-        db.session.delete(user)
+	users = User.query.filter(User.is_active == False, User.packages == None, User.forum_topics == None,
+			User.created_at <= threshold, User.rank == UserRank.NOT_JOINED).all()
+	for user in users:
+		db.session.delete(user)
 
-    db.session.commit()
+	db.session.commit()
+
+
+@celery.task()
+def upgrade_new_members():
+	threshold = datetime.datetime.now() - datetime.timedelta(days=7)
+
+	User.query.filter(and_(User.rank == UserRank.NEW_MEMBER, or_(
+			User.replies.any(ThreadReply.created_at < threshold),
+			User.packages.any(Package.approved_at < threshold)))).update({"rank": UserRank.MEMBER})
+
+	db.session.commit()

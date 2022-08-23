@@ -227,7 +227,7 @@ class User(db.Model, UserMixin):
 		elif perm == Permission.CHANGE_EMAIL or perm == Permission.CHANGE_PROFILE_URLS:
 			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and not self.rank.atLeast(user.rank))
 		elif perm == Permission.CHANGE_DISPLAY_NAME:
-			return user.rank.atLeast(UserRank.MEMBER if user == self else UserRank.MODERATOR)
+			return user.rank.atLeast(UserRank.NEW_MEMBER if user == self else UserRank.MODERATOR)
 		elif perm == Permission.CREATE_TOKEN:
 			if user == self:
 				return user.rank.atLeast(UserRank.MEMBER)
@@ -243,16 +243,18 @@ class User(db.Model, UserMixin):
 		if self.rank.atLeast(UserRank.ADMIN):
 			return True
 		elif self.rank.atLeast(UserRank.TRUSTED_MEMBER):
-			factor *= 2
+			factor = 3
+		elif self.rank.atLeast(UserRank.MEMBER):
+			factor = 2
 
 		one_min_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=1)
 		if ThreadReply.query.filter_by(author=self) \
-				.filter(ThreadReply.created_at > one_min_ago).count() >= 3 * factor:
+				.filter(ThreadReply.created_at > one_min_ago).count() >= 2 * factor:
 			return False
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		if ThreadReply.query.filter_by(author=self) \
-				.filter(ThreadReply.created_at > hour_ago).count() >= 20 * factor:
+				.filter(ThreadReply.created_at > hour_ago).count() >= 10 * factor:
 			return False
 
 		return True
@@ -264,7 +266,9 @@ class User(db.Model, UserMixin):
 		if self.rank.atLeast(UserRank.ADMIN):
 			return True
 		elif self.rank.atLeast(UserRank.TRUSTED_MEMBER):
-			factor *= 5
+			factor = 5
+		elif self.rank.atLeast(UserRank.MEMBER):
+			factor = 2
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		return Thread.query.filter_by(author=self) \

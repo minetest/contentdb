@@ -666,14 +666,14 @@ class Package(db.Model):
 		isApprover = user.rank.atLeast(UserRank.APPROVER)
 
 		if perm == Permission.CREATE_THREAD:
-			return user.rank.atLeast(UserRank.MEMBER)
+			return user.rank.atLeast(UserRank.NEW_MEMBER)
 
 		# Members can edit their own packages, and editors can edit any packages
 		elif perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
 			return isMaintainer
 
 		elif perm == Permission.EDIT_PACKAGE:
-			return isMaintainer and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
+			return isMaintainer and user.rank.atLeast(UserRank.NEW_MEMBER)
 
 		elif perm == Permission.APPROVE_RELEASE:
 			return (isMaintainer or isApprover) and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
@@ -688,7 +688,7 @@ class Package(db.Model):
 
 		elif perm == Permission.APPROVE_SCREENSHOT:
 			return (isMaintainer or isApprover) and \
-				user.rank.atLeast(UserRank.TRUSTED_MEMBER if self.approved else UserRank.NEW_MEMBER)
+				user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
 		elif perm == Permission.EDIT_MAINTAINERS or perm == Permission.DELETE_PACKAGE:
 			return isOwner or user.rank.atLeast(UserRank.EDITOR)

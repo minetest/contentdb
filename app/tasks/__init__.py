@@ -76,7 +76,7 @@ CELERYBEAT_SCHEDULE = {
 	},
 	'check_for_updates': {
 		'task': 'app.tasks.importtasks.check_for_updates',
-		'schedule': crontab(minute=10, hour=1), # 0110
+		'schedule': crontab(minute=10, hour=2), # 0210
 	},
 	'send_pending_notifications': {
 		'task': 'app.tasks.emails.send_pending_notifications',
@@ -89,6 +89,10 @@ CELERYBEAT_SCHEDULE = {
 	'delete_inactive_users': {
 		'task': 'app.tasks.usertasks.delete_inactive_users',
 		'schedule': crontab(minute=15), # every hour at quarter past
+	},
+	'upgrade_new_members': {
+		'task': 'app.tasks.usertasks.upgrade_new_members',
+		'schedule': crontab(minute=10, hour=3), # 0310
 	},
 }
 celery.conf.beat_schedule = CELERYBEAT_SCHEDULE

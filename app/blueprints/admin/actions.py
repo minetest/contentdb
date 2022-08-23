@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+import datetime
 import os
 from typing import List
 
@@ -25,7 +25,7 @@ from sqlalchemy import or_, and_
 
 from app.logic.game_support import GameSupportResolver
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
-	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, PackageGameSupport
+	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, PackageGameSupport, ThreadReply
 from app.tasks.emails import send_pending_digests
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates, updateAllGameSupport
@@ -335,3 +335,14 @@ def detect_game_support():
 @action("Send pending notif digests")
 def do_send_pending_digests():
 	send_pending_digests.delay()
+
+
+@action("Set users to new member")
+def set_new_members():
+	threshold = datetime.datetime.now() - datetime.timedelta(days=7)
+
+	User.query.filter(User.rank == UserRank.MEMBER,
+		~User.replies.any(ThreadReply.created_at < threshold),
+		~User.packages.any(Package.approved_at < threshold)).update({"rank": UserRank.NEW_MEMBER}, synchronize_session=False)
+
+	db.session.commit()

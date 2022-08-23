@@ -119,7 +119,7 @@ def check_for_ban():
 			logout_user()
 			return redirect(url_for("users.login"))
 		elif current_user.rank == models.UserRank.NOT_JOINED:
-			current_user.rank = models.UserRank.MEMBER
+			current_user.rank = models.UserRank.NEW_MEMBER
 			models.db.session.commit()
 
 

@@ -59,7 +59,7 @@ def post_login(user: User, next_url):
 
 def login_user_set_active(user: User, next_url: str = None, *args, **kwargs):
 	if user.rank == UserRank.NOT_JOINED and user.email is None:
-		user.rank = UserRank.MEMBER
+		user.rank = UserRank.NEW_MEMBER
 		user.notification_preferences = UserNotificationPreferences(user)
 		user.is_active = True
 		db.session.commit()
