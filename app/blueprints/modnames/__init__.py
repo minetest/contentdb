@@ -24,7 +24,7 @@ bp = Blueprint("modnames", __name__)
 
 @bp.route("/metapackages/<path:path>")
 def mp_redirect(path):
-	return redirect(path.replace("/metapackages/", "/modnames/"))
+	return redirect("/modnames/" + path)
 
 
 @bp.route("/modnames/")
