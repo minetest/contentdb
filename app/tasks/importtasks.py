@@ -102,7 +102,7 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 		package.provides.clear()
 		package.provides.extend(getMetaPackages(tree.getModNames()))
 
-		# Delete all meta package dependencies
+		# Delete all mod name dependencies
 		package.dependencies.filter(Dependency.meta_package != None).delete()
 
 		# Get raw dependencies

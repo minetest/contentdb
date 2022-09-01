@@ -143,15 +143,15 @@ def tags_user():
 	return redirect(url_for('todo.tags', author=current_user.username))
 
 
-@bp.route("/todo/metapackages/")
+@bp.route("/todo/modnames/")
 @login_required
-def metapackages():
-	mpackages = MetaPackage.query \
+def modnames():
+	mnames = MetaPackage.query \
 			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
 			.filter(MetaPackage.dependencies.any(Dependency.depender.has(state=PackageState.APPROVED), optional=False)) \
 			.order_by(db.asc(MetaPackage.name)).all()
 
-	return render_template("todo/metapackages.html", mpackages=mpackages)
+	return render_template("todo/modnames.html", modnames=mnames)
 
 
 @bp.route("/user/todo/")

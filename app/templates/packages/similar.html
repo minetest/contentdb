@@ -13,8 +13,8 @@
 		<p class="text-muted">
 			{{ _("This package contains modnames that are present in the following packages:") }}
 		</p>
-		{% for metapackage, packages in packages_modnames.items() %}
-			<h4>{{ metapackage.name }}</h4>
+		{% for modname, packages in packages_modnames.items() %}
+			<h4>{{ modname.name }}</h4>
 			<ul>
 				{% for pkg in packages %}
 					<li>

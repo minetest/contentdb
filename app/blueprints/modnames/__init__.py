@@ -19,22 +19,27 @@ from flask import *
 from sqlalchemy import func
 from app.models import MetaPackage, Package, db, Dependency, PackageState, ForumTopic
 
-bp = Blueprint("metapackages", __name__)
+bp = Blueprint("modnames", __name__)
 
 
-@bp.route("/metapackages/")
+@bp.route("/metapackages/<path:path>")
+def mp_redirect(path):
+	return redirect(path.replace("/metapackages/", "/modnames/"))
+
+
+@bp.route("/modnames/")
 def list_all():
-	mpackages = db.session.query(MetaPackage, func.count(Package.id)) \
+	modnames = db.session.query(MetaPackage, func.count(Package.id)) \
 			.select_from(MetaPackage).outerjoin(MetaPackage.packages) \
 			.order_by(db.asc(MetaPackage.name)) \
 			.group_by(MetaPackage.id).all()
-	return render_template("metapackages/list.html", mpackages=mpackages)
+	return render_template("modnames/list.html", modnames=modnames)
 
 
-@bp.route("/metapackages/<name>/")
+@bp.route("/modnames/<name>/")
 def view(name):
-	mpackage = MetaPackage.query.filter_by(name=name).first()
-	if mpackage is None:
+	modname = MetaPackage.query.filter_by(name=name).first()
+	if modname is None:
 		abort(404)
 
 	dependers = db.session.query(Package) \
@@ -59,6 +64,6 @@ def view(name):
 		.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
 		.all()
 
-	return render_template("metapackages/view.html", mpackage=mpackage,
+	return render_template("modnames/view.html", modname=modname,
 			dependers=dependers, optional_dependers=optional_dependers,
 			similar_topics=similar_topics)

@@ -34,7 +34,7 @@ get_game_support(package):
 	return support
 
 get_meta_package_support(meta):
-	for package implementing meta package:
+	for package implementing mod name:
 		support = support OR get_game_support(package)
 
 	return support
@@ -58,9 +58,9 @@ mtg_mod_blacklist = {
 class GameSupportResolver:
 	session: sqlalchemy.orm.Session
 	checked_packages = set()
-	checked_metapackages = set()
+	checked_modnames = set()
 	resolved_packages: Dict[int, set[int]] = {}
-	resolved_metapackages: Dict[int, set[int]] = {}
+	resolved_modnames: Dict[int, set[int]] = {}
 
 	def __init__(self, session):
 		self.session = session
@@ -69,14 +69,14 @@ class GameSupportResolver:
 		print(f"Resolving for {meta.name}", file=sys.stderr)
 
 		key = meta.name
-		if key in self.resolved_metapackages:
-			return self.resolved_metapackages.get(key)
+		if key in self.resolved_modnames:
+			return self.resolved_modnames.get(key)
 
-		if key in self.checked_metapackages:
+		if key in self.checked_modnames:
 			print(f"Error, cycle found: {','.join(history)}", file=sys.stderr)
 			return set()
 
-		self.checked_metapackages.add(key)
+		self.checked_modnames.add(key)
 
 		retval = set()
 
@@ -94,7 +94,7 @@ class GameSupportResolver:
 
 			retval.update(ret)
 
-		self.resolved_metapackages[key] = retval
+		self.resolved_modnames[key] = retval
 		return retval
 
 	def resolve(self, package: Package, history: List[str]) -> set[int]:

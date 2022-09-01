@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ _("Meta Packages") }}
+{{ _("Mod Names") }}
 {% endblock %}
 
 {% block content %}
@@ -18,11 +18,11 @@
 			</div>
 		</div>
 
-		{% for pair in mpackages %}
+		{% for pair in modnames %}
 			{% set meta = pair[0] %}
 			{% set count = pair[1] %}
 			<a class="list-group-item list-group-item-action"
-					href="{{ url_for('metapackages.view', name=meta.name) }}">
+					href="{{ url_for('modnames.view', name=meta.name) }}">
 				<div class="row">
 					<div class="col-sm">
 						{{ meta.name }}
@@ -34,7 +34,7 @@
 				</div>
 			</a>
 		{% else %}
-			<li><i>{{ _("No meta packages found.") }}</i></li>
+			<li><i>{{ _("No mod names found.") }}</i></li>
 		{% endfor %}
 	</div>
 {% endblock %}

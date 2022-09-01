@@ -25,7 +25,7 @@ from sqlalchemy import or_, and_
 
 from app.logic.game_support import GameSupportResolver
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
-	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, PackageGameSupport, ThreadReply
+	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, ThreadReply
 from app.tasks.emails import send_pending_digests
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates, updateAllGameSupport
@@ -147,14 +147,14 @@ def clean_uploads():
 	return redirect(url_for("admin.admin_page"))
 
 
-@action("Delete unused metapackages")
-def del_meta_packages():
+@action("Delete unused mod names")
+def del_mod_names():
 	query = MetaPackage.query.filter(~MetaPackage.dependencies.any(), ~MetaPackage.packages.any())
 	count = query.count()
 	query.delete(synchronize_session=False)
 	db.session.commit()
 
-	flash("Deleted " + str(count) + " unused meta packages", "success")
+	flash("Deleted " + str(count) + " unused mod names", "success")
 	return redirect(url_for("admin.admin_page"))
 
 

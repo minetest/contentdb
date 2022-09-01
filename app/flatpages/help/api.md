@@ -104,7 +104,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `name`: Package name.
         * `provides`: List of technical mod names inside the package.
         * `depends`: List of hard dependencies.
-            * Each dep will either be a metapackage dependency (`name`), or a
+            * Each dep will either be a modname dependency (`name`), or a
                 package dependency (`author/name`).
         * `optional_depends`: list of optional dependencies
             * Same as above.

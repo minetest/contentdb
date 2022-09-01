@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ mpackage.name }} - {{ _("Meta Packages") }}
+{{ modname.name }} - {{ _("Mod Names") }}
 {% endblock %}
 
 {% from "macros/packagegridtile.html" import render_pkggrid %}
 
 {% block content %}
-	<h1>{{ _("Meta Package \"%(name)s\"", name=mpackage.name) }}</h1>
+	<h1>{{ _("Mod Name \"%(name)s\"", name=modname.name) }}</h1>
 
 	<h2>{{ _("Provided By") }}</h2>
 
 	<h3>{{ _("Mods") }}</h3>
-	{{ render_pkggrid(mpackage.packages.filter_by(type="MOD", state="APPROVED").all()) }}
+	{{ render_pkggrid(modname.packages.filter_by(type="MOD", state="APPROVED").all()) }}
 
 	<h3>{{ _("Games") }}</h3>
-	{{ render_pkggrid(mpackage.packages.filter_by(type="GAME", state="APPROVED").all()) }}
+	{{ render_pkggrid(modname.packages.filter_by(type="GAME", state="APPROVED").all()) }}
 
 	{% if similar_topics %}
 		<h3>{{ _("Forum Topics") }}</h3>

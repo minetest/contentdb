@@ -398,7 +398,7 @@
 									</a>
 								{% elif dep.meta_package %}
 									<a class="badge badge-primary"
-											href="{{ url_for('metapackages.view', name=dep.meta_package.name) }}">
+											href="{{ url_for('modnames.view', name=dep.meta_package.name) }}">
 										{{ dep.meta_package.name }}
 									</a>
 								{% else %}
@@ -421,7 +421,7 @@
 													title=dep.package.title, display_name=dep.package.author.display_name) }}
 									{% elif dep.meta_package %}
 										<a class="badge badge-secondary"
-												href="{{ url_for('metapackages.view', name=dep.meta_package.name) }}">
+												href="{{ url_for('modnames.view', name=dep.meta_package.name) }}">
 											{{ dep.meta_package.name }}
 									{% else %}
 										{{ "Expected package or meta_package in dep!" | throw }}
@@ -507,7 +507,7 @@
 						<dt>{{ _("Provides") }}</dt>
 						<dd>{% for meta in package.provides %}
 							<a class="badge badge-secondary"
-							 href="{{ url_for('metapackages.view', name=meta.name) }}">{{ meta.name }}</a>
+							 href="{{ url_for('modnames.view', name=meta.name) }}">{{ meta.name }}</a>
 						{% endfor %}</dd>
 					{% endif %}
 				</dl>

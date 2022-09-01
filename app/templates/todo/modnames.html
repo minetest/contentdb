@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block title %}
+Unfulfilled Mod Names
+{% endblock %}
+
+{% block content %}
+	<h1>Unfulfilled Mod Names</h1>
+
+	<p>
+		Mod names that have hard dependers, but are not fulfilled.
+	</p>
+
+	<div class="list-group">
+		{% for meta in modnames %}
+			<a class="list-group-item list-group-item-action"
+					href="{{ url_for('modnames.view', name=meta.name) }}">
+				{{ meta.name }}
+			</a>
+		{% else %}
+			<li><i>No mod names found.</i></li>
+		{% endfor %}
+	</div>
+{% endblock %}

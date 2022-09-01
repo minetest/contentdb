@@ -66,7 +66,7 @@
 {% macro package_lists() -%}
 	<script>
 		meta_packages = [
-			{% for m in mpackages %}
+			{% for m in modnames %}
 				{# This is safe as name can only contain `[a-z0-9_]` #}
 				{
 					id: "{{ m.name }}",

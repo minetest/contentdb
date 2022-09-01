@@ -370,7 +370,7 @@ def create_edit(author=None, name=None):
 	return render_template("packages/create_edit.html", package=package,
 			form=form, author=author, enable_wizard=enableWizard,
 			packages=package_query.all(),
-			mpackages=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all(),
+			modnames=MetaPackage.query.order_by(db.asc(MetaPackage.name)).all(),
 			tabs=get_package_tabs(current_user, package), current_tab="edit")
 
 
@@ -613,10 +613,10 @@ def share(package):
 @is_package_page
 def similar(package):
 	packages_modnames = {}
-	for metapackage in package.provides:
-		packages_modnames[metapackage] = Package.query.filter(Package.id != package.id,
+	for mname in package.provides:
+		packages_modnames[mname] = Package.query.filter(Package.id != package.id,
 				Package.state != PackageState.DELETED) \
-			.filter(Package.provides.any(PackageProvides.c.metapackage_id == metapackage.id)) \
+			.filter(Package.provides.any(PackageProvides.c.metapackage_id == mname.id)) \
 			.order_by(db.desc(Package.score)) \
 			.all()
 
