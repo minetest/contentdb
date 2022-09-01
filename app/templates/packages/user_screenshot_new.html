@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Add a screenshot") }} - {{ package.title }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ _("Add a screenshot") }}</h1>
+
+	{% from "macros/forms.html" import render_field, render_submit_field %}
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.title) }}
+		{{ render_field(form.file_upload, fieldclass="form-control-file", accept="image/png,image/jpeg") }}
+		{{ render_checkbox_field
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}

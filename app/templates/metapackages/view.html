@@ -11,11 +11,11 @@
 
 	<h2>{{ _("Provided By") }}</h2>
 
-	<h3>{{ _("Games") }}</h3>
-	{{ render_pkggrid(mpackage.packages.filter_by(type="GAME", state="APPROVED").all()) }}
-
 	<h3>{{ _("Mods") }}</h3>
 	{{ render_pkggrid(mpackage.packages.filter_by(type="MOD", state="APPROVED").all()) }}
+
+	<h3>{{ _("Games") }}</h3>
+	{{ render_pkggrid(mpackage.packages.filter_by(type="GAME", state="APPROVED").all()) }}
 
 	{% if similar_topics %}
 		<h3>{{ _("Forum Topics") }}</h3>
