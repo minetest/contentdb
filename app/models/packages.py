@@ -385,7 +385,7 @@ class Package(db.Model):
 	name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$' AND name != '_game'")
 
 	search_vector = db.Column(TSVectorType("name", "title", "short_desc", "desc",
-			weights={ "name": "A", "title": "B", "short_desc": "C", "desc": "D" }))
+			weights={ "name": "A", "title": "B", "short_desc": "C" }))
 
 	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	license      = db.relationship("License", foreign_keys=[license_id])
