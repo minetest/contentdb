@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-05-24 12:14+0000\n"
-"Last-Translator: Covarubio <6amffsl@gmail.com>\n"
+"PO-Revision-Date: 2022-06-24 21:19+0000\n"
+"Last-Translator: Темак <artemkotlubai@yandex.ru>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:115
@@ -59,40 +60,40 @@ msgstr "Сохранить"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr "Ошибка авторизации [err=gh-oauth-login-failed]"
+msgstr "Ошибка входа [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked GitHub to account"
-msgstr "Привязка GitHub к аккаунту"
+msgstr "Привязка GitHub к учётной записи"
 
 #: app/blueprints/github/__init__.py:65
 msgid "GitHub account is already associated with another user"
-msgstr "Аккаунт Github уже привязан к другому пользователю"
+msgstr "Учётная запись Github уже привязана к другому пользователю"
 
 #: app/blueprints/github/__init__.py:71
 msgid "Unable to find an account for that GitHub user"
-msgstr "Не удалось найти аккаунт данного пользователя Github"
+msgstr "Не удалось найти учётную запись данного пользователя Github"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr "Ошибка авторизации [err=gh-login-failed]"
+msgstr "Ошибка входа [err=gh-login-failed]"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
 msgid "Edit Details"
-msgstr "Изменить Детали"
+msgstr "Изменить подробности"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
 #: app/templates/packages/view.html:512 app/templates/todo/editor.html:75
 msgid "Releases"
-msgstr "Релизы"
+msgstr "Выпуски"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr "Скриншоты"
+msgstr "Снимки экрана"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
@@ -103,7 +104,7 @@ msgstr "Разработчики"
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr "Журнал аудита"
+msgstr "Журнал проверок"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -126,8 +127,8 @@ msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr ""
-"Предупреждение: Тема на форуме не найдена. Это может произойти если тема "
-"была только что создана."
+"Внимание: Тема на форуме не найдена. Это может произойти если тема была "
+"только что создана."
 
 #: app/blueprints/packages/packages.py:215
 msgid "No download available."
@@ -160,12 +161,12 @@ msgstr "Краткое описание (обычный текст)"
 
 #: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:475
 msgid "Maintenance State"
-msgstr "Статус разработки"
+msgstr "Состояние разработки"
 
 #: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
-msgstr "Теги"
+msgstr "Метки"
 
 #: app/blueprints/packages/packages.py:237
 msgid "Content Warnings"
@@ -185,11 +186,11 @@ msgstr "Длинное описание (Markdown)"
 
 #: app/blueprints/packages/packages.py:243
 msgid "VCS Repository URL"
-msgstr "URL VCS репозитория"
+msgstr "URL VCS сетевого хранилища"
 
 #: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:51
 msgid "Website URL"
-msgstr "URL сайта"
+msgstr "Адрес страницы"
 
 #: app/blueprints/packages/packages.py:245
 msgid "Issue Tracker URL"
@@ -201,11 +202,11 @@ msgstr "ID темы на форуме"
 
 #: app/blueprints/packages/packages.py:247
 msgid "Video URL"
-msgstr "URL видео"
+msgstr "Адрес видео"
 
 #: app/blueprints/packages/packages.py:263
 msgid "Package already exists"
-msgstr ""
+msgstr "Дополнение уже существует"
 
 #: app/blueprints/packages/packages.py:321
 msgid "Unable to find that user"
@@ -225,7 +226,7 @@ msgstr "У вас нету разрешения это делать"
 
 #: app/blueprints/packages/packages.py:409
 msgid "Please comment what changes are needed in the approval thread"
-msgstr "Пожалуйста, прокомментируйте, какие изменения необходимы в теме проверки"
+msgstr "Пожалуйста, напишите, какие изменения необходимы в теме проверки"
 
 #: app/blueprints/packages/packages.py:441
 msgid "Deleted package"
@@ -276,7 +277,7 @@ msgstr "Загрузка файлов"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr "Git метка (хэш коммита, ветка или тег)"
+msgstr "Git метка (хэш коммита, ветвь или метка)"
 
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:68
@@ -293,11 +294,11 @@ msgstr "Максимальная версия Minetest"
 #: app/blueprints/packages/releases.py:65
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
-msgstr "URL"
+msgstr "Адрес"
 
 #: app/blueprints/packages/releases.py:66
 msgid "Task ID"
-msgstr "ID задания"
+msgstr "Идентификатор задания"
 
 #: app/blueprints/packages/releases.py:67
 #: app/blueprints/packages/screenshots.py:40
@@ -318,7 +319,7 @@ msgstr "Поставить минимум"
 
 #: app/blueprints/packages/releases.py:186
 msgid "Set Max"
-msgstr "Поставить максимум"
+msgstr "Поставить предел"
 
 #: app/blueprints/packages/releases.py:189
 msgid "Only change values previously set as none"
@@ -335,15 +336,15 @@ msgstr "Триггер"
 
 #: app/blueprints/packages/releases.py:240
 msgid "New Commit"
-msgstr "Новый коммит"
+msgstr "Новая контрольная точка"
 
 #: app/blueprints/packages/releases.py:241 app/templates/admin/tags/list.html:8
 msgid "New Tag"
-msgstr "Новый тег"
+msgstr "Новая метка"
 
 #: app/blueprints/packages/releases.py:243
 msgid "Branch name"
-msgstr "Название ветки"
+msgstr "Название ветви"
 
 #: app/blueprints/packages/releases.py:244
 #: app/templates/packages/update_config.html:38
@@ -357,7 +358,7 @@ msgstr "Отправить уведомление и пометить как у�
 #: app/blueprints/packages/releases.py:245
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
-msgstr "Создать релиз"
+msgstr "Создать выпуск"
 
 #: app/blueprints/packages/releases.py:247
 msgid "Save Settings"
@@ -370,7 +371,7 @@ msgstr "Отключить автоматизацию"
 #: app/blueprints/packages/releases.py:287
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
-"Пожалуйста, добавьте URL Git репозитория чтобы настроить автоматические "
+"Пожалуйста, добавьте адрес Git репозитория чтобы настроить автоматические "
 "релизы"
 
 #: app/blueprints/packages/releases.py:303
@@ -389,7 +390,7 @@ msgstr "Комментарий"
 
 #: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:273
 msgid "Private"
-msgstr "Приватный"
+msgstr "Частный"
 
 #: app/blueprints/packages/reviews.py:46 app/templates/macros/reviews.html:115
 #: app/templates/macros/reviews.html:154
@@ -446,7 +447,7 @@ msgstr "Уже подписано!"
 
 #: app/blueprints/threads/__init__.py:68
 msgid "Subscribed to thread"
-msgstr "Подписано на тред"
+msgstr "Подписаны на ветвь обсуждения"
 
 #: app/blueprints/threads/__init__.py:83
 msgid "Unsubscribed!"
@@ -454,19 +455,19 @@ msgstr "Подписка отменена!"
 
 #: app/blueprints/threads/__init__.py:87
 msgid "Already not subscribed!"
-msgstr "Уже не подписано!"
+msgstr "Уже не подписаны!"
 
 #: app/blueprints/threads/__init__.py:106
 msgid "Locked thread"
-msgstr "Закрытый тред"
+msgstr "Закрытая ветвь обсуждения"
 
 #: app/blueprints/threads/__init__.py:109
 msgid "Unlocked thread"
-msgstr "Открытый тред"
+msgstr "Открытая ветвь обсуждения"
 
 #: app/blueprints/threads/__init__.py:158
 msgid "Cannot delete thread opening post!"
-msgstr "Не могу удалить пост, начинающий тред!"
+msgstr "Не могу удалить запись, начинающую ветвь обсуждения!"
 
 #: app/blueprints/threads/__init__.py:230
 msgid "Please wait before commenting again"
@@ -475,11 +476,11 @@ msgstr "Пожалуйста, подождите прежде чем снова 
 #: app/blueprints/threads/__init__.py:274
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
-msgstr "Открыть тред"
+msgstr "Открыть ветвь обсуждения"
 
 #: app/blueprints/threads/__init__.py:297
 msgid "Unable to create thread!"
-msgstr "Не получилось создать тред!"
+msgstr "Не получилось создать ветвь обсуждения!"
 
 #: app/blueprints/threads/__init__.py:303
 msgid "An approval thread already exists! Consider replying there instead"
@@ -487,11 +488,11 @@ msgstr ""
 
 #: app/blueprints/threads/__init__.py:307
 msgid "Please wait before opening another thread"
-msgstr "Пожалуйста, подождите прежде чем открывать ещё один тред"
+msgstr "Пожалуйста, подождите прежде чем открывать ещё одну ветвь обсуждения"
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr "Username или email"
+msgstr "Имя пользователя или электронная почта"
 
 #: app/blueprints/users/account.py:38 app/blueprints/users/account.py:108
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
@@ -510,7 +511,7 @@ msgstr "Войти"
 
 #: app/blueprints/users/account.py:46
 msgid "Incorrect email or password"
-msgstr "Неправильный email или пароль"
+msgstr "Неправильная электронная почта или пароль"
 
 #: app/blueprints/users/account.py:54
 #, python-format
@@ -523,11 +524,11 @@ msgstr "Неправильный пароль. Вы его установили?
 
 #: app/blueprints/users/account.py:60
 msgid "You need to confirm the registration email"
-msgstr "Вам нужно подтвердить email для регистрации"
+msgstr "Вам нужно подтвердить электронную почту для регистрации"
 
 #: app/blueprints/users/account.py:68
 msgid "Login failed"
-msgstr "Попытка войти провалена"
+msgstr "Ошибка входа"
 
 #: app/blueprints/users/account.py:103 app/blueprints/users/settings.py:50
 msgid "Display Name"
@@ -548,7 +549,7 @@ msgstr ""
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:377
 #: app/blueprints/users/settings.py:114
 msgid "Email"
-msgstr "Email"
+msgstr "Электронная почта"
 
 #: app/blueprints/users/account.py:109
 msgid "What is the result of the above calculation?"
@@ -573,7 +574,9 @@ msgstr "Имя пользователя недействительно"
 
 #: app/blueprints/users/account.py:131
 msgid "An account already exists for that username but hasn't been claimed yet."
-msgstr "Аккаунт для этого имени пользователя уже существует но ещё не был занят."
+msgstr ""
+"Учётная запись для этого имени пользователя уже существует, но ещё не была "
+"занята."
 
 #: app/blueprints/users/account.py:134 app/blueprints/users/account.py:141
 msgid "That username/display name is already in use, please choose another."
@@ -581,7 +584,7 @@ msgstr "Это имя пользователя/отображаемое имя �
 
 #: app/blueprints/users/account.py:146 app/blueprints/users/account.py:259
 msgid "Email already in use"
-msgstr "Email уже используется"
+msgstr "Электронная почта уже используется"
 
 #: app/blueprints/users/account.py:147 app/blueprints/users/account.py:260
 #, python-format
@@ -589,15 +592,15 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
-"У нас не получилось создать аккаунт так как email уже используется "
-"%(display_name)s. Попробуйте другой email адрес."
+"У нас не получилось создать учётную запись так как электронная почта уже "
+"используется %(display_name)s. Попробуйте другой адрес."
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:254
 #: app/blueprints/users/settings.py:142
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
-"Этот email уже был отписан/отправлен в чёрный список, и не может быть "
-"использован"
+"Эта электронная почта уже была отписана/отправлена в чёрный список, и не "
+"может быть использована"
 
 #: app/blueprints/users/account.py:191
 msgid "Reset Password"
@@ -605,7 +608,7 @@ msgstr "Сбросить пароль"
 
 #: app/blueprints/users/account.py:216
 msgid "Unable to find account"
-msgstr "Не удается найти аккаунт"
+msgstr "Не удаётся найти учётную запись"
 
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:233
 msgid "New password"
@@ -637,31 +640,31 @@ msgstr "Старый пароль неправильный"
 
 #: app/blueprints/users/account.py:323
 msgid "Unknown verification token!"
-msgstr "Неизвестный токен верификации!"
+msgstr "Неизвестный код подтверждения!"
 
 #: app/blueprints/users/account.py:329
 msgid "Token has expired"
-msgstr "Токен просрочен"
+msgstr "Код просрочен"
 
 #: app/blueprints/users/account.py:343
 msgid "Another user is already using that email"
-msgstr "Другой пользователь уже использует этот email"
+msgstr "Другой пользователь уже использует эту электронную почту"
 
 #: app/blueprints/users/account.py:346
 msgid "Confirmed email change"
-msgstr "Подтвердить изменение email"
+msgstr "Подтвердить изменение электронной почты"
 
 #: app/blueprints/users/account.py:351
 msgid "Email address changed"
-msgstr "Адрес email изменён"
+msgstr "Адрес электронной почты изменён"
 
 #: app/blueprints/users/account.py:352
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
-"Ваш email адрес был изменён. Если вы этого не запрашивали, пожалуйста, "
-"свяжитесь с администратором."
+"Ваш адрес электронной почты был изменён. Если вы этого не запрашивали, "
+"пожалуйста, свяжитесь с администратором."
 
 #: app/blueprints/users/account.py:370
 msgid "You may now log in"
@@ -676,8 +679,8 @@ msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
 msgstr ""
-"Этот email был отправлен в чёрный список. Пожалуйста, свяжитесь с "
-"администратором если вы хотите это отменить."
+"Эта электронная почта была отправлена в чёрный список. Пожалуйста, свяжитесь "
+"с администратором, если вы хотите это отменить."
 
 #: app/blueprints/users/claim.py:40 app/blueprints/users/claim.py:65
 msgid ""
@@ -783,23 +786,23 @@ msgstr "Ваши дополнения в сумме имеют %(downloads)d з�
 
 #: app/blueprints/users/profile.py:191
 msgid "First medal is at 50k."
-msgstr "Первая медаль на 50k."
+msgstr "Первая медаль на 50к."
 
 #: app/blueprints/users/profile.py:196
 msgid ">300k downloads"
-msgstr ">300k загрузок"
+msgstr "&gt;300к загрузок"
 
 #: app/blueprints/users/profile.py:199
 msgid ">100k downloads"
-msgstr ">100k загрузок"
+msgstr "&gt;100к загрузок"
 
 #: app/blueprints/users/profile.py:202
 msgid ">75k downloads"
-msgstr ">75k загрузок"
+msgstr "&gt;75к загрузок"
 
 #: app/blueprints/users/profile.py:205
 msgid ">50k downloads"
-msgstr ">50k загрузок"
+msgstr "&gt;50к загрузок"
 
 #: app/blueprints/users/profile.py:206
 #, python-format
@@ -813,12 +816,12 @@ msgstr "Изменить профиль"
 
 #: app/blueprints/users/settings.py:24 app/templates/users/account.html:12
 msgid "Account and Security"
-msgstr "Аккаунт и безопасность"
+msgstr "Учётная запись и безопасность"
 
 #: app/blueprints/users/settings.py:29
 #: app/templates/users/settings_email.html:8
 msgid "Email and Notifications"
-msgstr "Email и уведомления"
+msgstr "Электронная почта и уведомления"
 
 #: app/blueprints/users/settings.py:34 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
@@ -831,7 +834,7 @@ msgstr "Инструменты модератора"
 
 #: app/blueprints/users/settings.py:52
 msgid "Donation URL"
-msgstr "URL пожертвований"
+msgstr "Страница пожертвований"
 
 #: app/blueprints/users/settings.py:66 app/blueprints/users/settings.py:72
 msgid "A user already has that name"
@@ -859,15 +862,15 @@ msgstr "Ранг"
 
 #: app/blueprints/users/settings.py:311
 msgid "Can't promote a user to a rank higher than yourself!"
-msgstr "Нельзя повысить пользователя на ранг выше своего!"
+msgstr "Нельзя повысить пользователя на звание выше своего!"
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "Текст для поиска (регулярное выражение)"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Фильтр файлов"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
 #: app/templates/todo/tags.html:15
@@ -884,20 +887,20 @@ msgstr ""
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "У вас нет разрешения на правку этого дополнения"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "У вас нет разрешения на изменение имени дополнения"
 
 #: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr "Не удается добавить защищенный тег %(title)s в дополнение"
+msgstr "Не удается добавить защищенную метку %(title)s в дополнение"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "У вас нет разрешения на создание выпусков"
 
 #: app/logic/releases.py:37
 msgid ""
@@ -909,7 +912,9 @@ msgstr ""
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr "Неверный хэш коммита; он должен быть base16 строкой и длиной 40 символов"
+msgstr ""
+"Неверный хэш ветви обсуждения; он должен быть «base16» строкой и длиной 40 "
+"символов"
 
 #: app/logic/screenshots.py:16
 msgid "Too many requests, please wait before trying again"
@@ -925,7 +930,7 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
-"Скриншот слишком маленький, он должен быть не менее %(width)s на "
+"Снимок экрана слишком маленький, он должен быть не менее %(width)s на "
 "%(height)s пикселей"
 
 #: app/logic/uploads.py:52
@@ -935,7 +940,7 @@ msgstr "Пожалуйста, загрузите %(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr "Загруженное изображение на самом деле не является изображением"
+msgstr "Загруженное изображение на самом деле им не является"
 
 #: app/models/packages.py:65
 msgid "Mod"
@@ -947,7 +952,7 @@ msgstr "Игра"
 
 #: app/models/packages.py:69
 msgid "Texture Pack"
-msgstr "Пакет текстур"
+msgstr "Набор текстур"
 
 #: app/models/packages.py:74 app/templates/base.html:27
 #: app/templates/metapackages/view.html:17
@@ -961,7 +966,7 @@ msgstr "Игры"
 
 #: app/models/packages.py:78 app/templates/base.html:33
 msgid "Texture Packs"
-msgstr "Текстур паки"
+msgstr "Наборы текстур"
 
 #: app/models/packages.py:167
 msgid "Submit for Approval"
@@ -1030,8 +1035,8 @@ msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
-"Эта страница не найдена. Ссылка может быть сломана, страница удалена, или"
-" у вас нету к ней доступа."
+"Эта страница не найдена. Ссылка может быть сломана, страница удалена, или у "
+"вас нет к ней доступа."
 
 #: app/templates/base.html:36
 msgid "Random"
@@ -1046,7 +1051,7 @@ msgstr "Помощь"
 #: app/templates/base.html:42 app/templates/packages/view.html:173
 #: app/templates/packages/view.html:532 app/templates/threads/list.html:4
 msgid "Threads"
-msgstr "Треды"
+msgstr "Ветви обсуждения"
 
 #: app/templates/base.html:48
 #, python-format
@@ -1084,7 +1089,7 @@ msgstr "Администратор"
 
 #: app/templates/base.html:143
 msgid "License Editor"
-msgstr "Редактор лицензий"
+msgstr "Правка лицензий"
 
 #: app/templates/base.html:148
 msgid "Restore Package"
@@ -1092,11 +1097,11 @@ msgstr "Восстановить дополнение"
 
 #: app/templates/base.html:151
 msgid "Tag Editor"
-msgstr "Редактор тегов"
+msgstr "Правка меток"
 
 #: app/templates/base.html:153
 msgid "Create Tag"
-msgstr "Создать тег"
+msgstr "Создать метку"
 
 #: app/templates/base.html:158 app/templates/packages/release_new.html:12
 msgid "Settings"
@@ -1124,7 +1129,7 @@ msgstr "Политика конфиденциальности"
 
 #: app/templates/base.html:240
 msgid "Stats / Monitoring"
-msgstr "Статистика/Мониторинг"
+msgstr "Статистика/ Отслеживание"
 
 #: app/templates/base.html:241
 msgid "User List"
@@ -1197,15 +1202,15 @@ msgstr "Лучшие моды"
 
 #: app/templates/index.html:131
 msgid "Top Texture Packs"
-msgstr "Лучшие пакеты текстур"
+msgstr "Лучшие наборы текстур"
 
 #: app/templates/index.html:135
 msgid "Search by Tags"
-msgstr "Поиск по тегам"
+msgstr "Поиск по меткам"
 
 #: app/templates/index.html:153 app/templates/packages/game_hub.html:54
 msgid "Highest Reviewed"
-msgstr "Самые обозреваемые"
+msgstr "Самые просматриваемые"
 
 #: app/templates/index.html:160
 msgid "Recent Positive Reviews"
@@ -1290,7 +1295,7 @@ msgstr "Новое предупреждение"
 #: app/templates/api/create_edit_token.html:5
 #, python-format
 msgid "Edit - %(name)s"
-msgstr "Редактировать - %(name)s"
+msgstr "Править - %(name)s"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
@@ -1331,7 +1336,7 @@ msgstr "Читаемое имя для различения токенов."
 #: app/templates/api/create_edit_token.html:50
 msgid "Recommended: Only allows token to interact with a particular package."
 msgstr ""
-"Рекомендуется: Позволяет токену взаимодействовать только с определенным "
+"Советуется: Позволяет токену взаимодействовать только с определенным "
 "дополнением."
 
 #: app/templates/api/list_tokens.html:4
@@ -1365,7 +1370,6 @@ msgid "From %(username)s."
 msgstr "От %(username)s."
 
 #: app/templates/emails/notification.html:19
-#, fuzzy
 msgid "View Notification"
 msgstr "Посмотреть уведомление"
 
@@ -1400,7 +1404,6 @@ msgid "Other Notifications"
 msgstr "Другие уведомления"
 
 #: app/templates/emails/notification_digest.html:39
-#, fuzzy
 msgid "View Notifications"
 msgstr "Просмотр уведомлений"
 
@@ -1417,13 +1420,15 @@ msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
-"Это может быть связано с тем, что вы использовали другую электронную "
-"почту для аккаунта, или с тем, что вы никогда не подтверждали свою "
+"Это может быть связано с тем, что вы использовали другую электронную почту "
+"для учётной записи, или с тем, что вы никогда не подтверждали свою "
 "электронную почту."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
-msgstr "Вы можете использовать GitHub для входа, если он связан с вашим аккаунтом."
+msgstr ""
+"Вы можете использовать GitHub для входа, если он связан с вашей учётной "
+"записью."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
@@ -1435,7 +1440,7 @@ msgstr ""
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
-msgstr "Если вы не ожидали получить это письмо, то можете смело игнорировать его."
+msgstr "Если вы не ожидали получить это письмо, то можете смело пропустить его."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
@@ -2636,9 +2641,8 @@ msgid "Compatible Games"
 msgstr "Совместимые игры"
 
 #: app/templates/packages/view.html:445
-#, fuzzy
 msgid "No specific game is required"
-msgstr "Не требуется конкретная игра"
+msgstr "Не требуется определённая игра"
 
 #: app/templates/packages/view.html:450
 msgid "This is an experimental feature."
@@ -2789,11 +2793,11 @@ msgstr "Закрыть"
 
 #: app/templates/threads/view.html:97
 msgid "This thread is visible to the following users"
-msgstr ""
+msgstr "Эта ветвь обсуждения видна следующим пользователям"
 
 #: app/templates/threads/view.html:98
 msgid "Visible to:"
-msgstr ""
+msgstr "Видимо для:"
 
 #: app/templates/threads/view.html:105
 msgid "Plus approvers and editors"
@@ -2836,9 +2840,8 @@ msgid "License Needed"
 msgstr "Требуется лицензия"
 
 #: app/templates/todo/editor.html:127
-#, fuzzy
 msgid "Tag Packages"
-msgstr "Тег дополнений"
+msgstr "Метка дополнений"
 
 #: app/templates/todo/editor.html:130
 #, python-format
@@ -2865,25 +2868,23 @@ msgstr "Смотреть все"
 
 #: app/templates/todo/editor.html:196
 msgid "Recent Actions"
-msgstr ""
+msgstr "Недавние действия"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
 msgstr "Все устаревшие дополнения"
 
 #: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
-#, fuzzy
 msgid "Minetest-Mods org only"
-msgstr "Только орг. Minetest-Mods"
+msgstr "Только орг. «Minetest-Mods»"
 
 #: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
 msgstr "Сортировать по дате"
 
 #: app/templates/todo/outdated.html:28
-#, fuzzy
 msgid "Sort by score"
-msgstr "Сортировать по счету"
+msgstr "Упорядочивать по счёту"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -2923,12 +2924,10 @@ msgid "Unlimited list"
 msgstr "Неограниченный список"
 
 #: app/templates/todo/topics.html:41
-#, fuzzy
 msgid "Show discarded topics"
 msgstr "Показать отклоненные темы"
 
 #: app/templates/todo/topics.html:43
-#, fuzzy
 msgid "Hide discarded topics"
 msgstr "Скрыть отклоненные темы"
 
@@ -3078,7 +3077,6 @@ msgid "Link Github"
 msgstr "Привязать Github"
 
 #: app/templates/users/account.html:65
-#, fuzzy
 msgid "None"
 msgstr "Ничего"
 
@@ -3340,9 +3338,8 @@ msgid "Unfortunately, %(username)s doesn't have an account on ContentDB yet."
 msgstr "К сожалению, %(username)s пока не имеет учетной записи на ContentDB."
 
 #: app/templates/users/forums_no_such_user.html:19
-#, fuzzy
 msgid "Claim Account"
-msgstr "Занять аккаунт"
+msgstr "Занять Учётную запись"
 
 #: app/templates/users/list.html:4 app/templates/users/list.html:8
 msgid "Users"
@@ -3370,12 +3367,14 @@ msgid "Ban"
 msgstr "Забанить"
 
 #: app/templates/users/modtools.html:56
+#, fuzzy
 msgid "Unban"
-msgstr ""
+msgstr "Разрешить доступ"
 
 #: app/templates/users/modtools.html:65
+#, fuzzy
 msgid "Message to display to banned user"
-msgstr ""
+msgstr "Сообщение для отображения пользователю, которому запрещён доступ."
 
 #: app/templates/users/modtools.html:69
 msgid "Expires At"
@@ -3383,7 +3382,7 @@ msgstr ""
 
 #: app/templates/users/modtools.html:72
 msgid "Expiry date. Leave blank for permanent ban"
-msgstr ""
+msgstr "Срок годности. Оставить пустым для постоянного запрета"
 
 #: app/templates/users/modtools.html:79
 msgid "Change Email and Send Password Reset"
@@ -3428,9 +3427,8 @@ msgid "Claim"
 msgstr "Занять"
 
 #: app/templates/users/profile.html:135
-#, fuzzy
 msgid "Is this you? Claim your account now!"
-msgstr "Это вы? Займите свой аккаунт прямо сейчас!"
+msgstr "Это вы? Займите свою учётную запись прямо сейчас!"
 
 #: app/templates/users/profile.html:168
 #, python-format
@@ -3598,12 +3596,12 @@ msgstr "Редактирование настроек уведомлений"
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr ""
+msgstr "Искать в выпусках дополнений"
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr ""
+msgstr "'%(query)s' - Искать выпуски дополнений"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -3778,4 +3776,3 @@ msgstr ""
 #~ "Эта тема видна только ее создателю, "
 #~ "владельцу дополнения и пользователям с "
 #~ "рангом Проверяющий или выше."
-
