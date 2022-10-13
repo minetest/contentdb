@@ -8,20 +8,22 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-05-15 12:16+0000\n"
-"Last-Translator: Linerly <linerly@protonmail.com>\n"
+"PO-Revision-Date: 2022-08-17 19:21+0000\n"
+"Last-Translator: Muhammad Rifqi Priyo Susanto "
+"<muhammadrifqipriyosusanto@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/id/>\n"
 "Language: id\n"
-"Language-Team: Indonesian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/id/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:115
 msgid "Banned:"
-msgstr ""
+msgstr "Diblokir:"
 
 #: app/__init__.py:117
 msgid "You have been banned."
@@ -202,7 +204,7 @@ msgstr "URL Video"
 
 #: app/blueprints/packages/packages.py:263
 msgid "Package already exists"
-msgstr ""
+msgstr "Paket telah ada"
 
 #: app/blueprints/packages/packages.py:321
 msgid "Unable to find that user"
@@ -238,7 +240,7 @@ msgstr "Pengelola (Dipisahkan dengan Koma)"
 
 #: app/blueprints/packages/packages.py:475
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "Anda tidak memiliki izin untuk menyunting pengelola"
 
 #: app/blueprints/packages/packages.py:525
 msgid "You are not a maintainer"
@@ -405,6 +407,8 @@ msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
+"Anda mengulas terlalu banyak paket baru-baru ini. Harap tunggu sebelum "
+"mencoba lagi dan harap buat ulasan Anda lebih detail"
 
 #: app/blueprints/packages/reviews.py:175
 msgid "You can't vote on the reviews on your own package!"
@@ -478,7 +482,7 @@ msgstr "Tidak dapat membuat utas!"
 
 #: app/blueprints/threads/__init__.py:303
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Sebuah utas persetujuan telah ada! Harap membalasnya di sana"
 
 #: app/blueprints/threads/__init__.py:307
 msgid "Please wait before opening another thread"
@@ -538,6 +542,8 @@ msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
+"Hanya huruf alfabet (A-Za-z), angka (0-9), garis bawah (_), tanda hubung (-)"
+", dan titik (.) yang dibolehkan"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:190
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:377
@@ -678,6 +684,9 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
+"Nama pengguna tidak sah. Hanya huruf alfabet (A-Za-z), angka (0-9), garis "
+"bawah (_), tanda hubung (-), dan titik (.) yang dibolehkan. Harap hubungi "
+"admin"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
@@ -857,11 +866,11 @@ msgstr ""
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "Teks pencarian (regex)"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Filter berkas"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
 #: app/templates/todo/tags.html:15
@@ -878,11 +887,11 @@ msgstr ""
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "Anda tidak memiliki izin untuk menyunting paket ini"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "Anda tidak memiliki izin untuk menyunting nama paket"
 
 #: app/logic/packages.py:165
 #, python-format
@@ -891,7 +900,7 @@ msgstr "Tidak dapat menambahkan label %(title)s ke paket"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "Anda tidak memiliki izin untuk membuat rilis"
 
 #: app/logic/releases.py:37
 msgid ""
@@ -1675,6 +1684,8 @@ msgstr "Anda tidak memiliki izin untuk mengepos."
 #: app/templates/macros/threads.html:167
 msgid "You can add someone to a private thread by writing @username."
 msgstr ""
+"Anda dapat menambahkan seseorang ke utas pribadi dengan menulis "
+"@namapengguna."
 
 #: app/templates/macros/threads.html:185 app/templates/macros/threads.html:265
 msgid "No threads found"
@@ -1928,7 +1939,7 @@ msgstr ""
 #: app/templates/packages/create_edit.html:100
 msgid "Leave blank if you don't have a repo. Click skip if the import fails."
 msgstr ""
-"Biarkan kosong jika Anda tidak punya repo. Klik lewati jika pengimporan "
+"Biarkan kosong jika Anda tidak memiliki repo. Klik lewati jika pengimporan "
 "gagal."
 
 #: app/templates/packages/create_edit.html:106
@@ -2541,6 +2552,8 @@ msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
 msgstr ""
+"Utas ini hanya tampak kepada pembuatnya, pengelola paket, pengguna dengan "
+"jabatan Penyetuju ke atas, dan pengguna yang @disebut."
 
 #: app/templates/packages/view.html:271
 msgid "Awaiting review"
@@ -2757,15 +2770,15 @@ msgstr "Kunci"
 
 #: app/templates/threads/view.html:97
 msgid "This thread is visible to the following users"
-msgstr ""
+msgstr "Utas ini tampak kepada pengguna berikut"
 
 #: app/templates/threads/view.html:98
 msgid "Visible to:"
-msgstr ""
+msgstr "Tampak kepada:"
 
 #: app/templates/threads/view.html:105
 msgid "Plus approvers and editors"
-msgstr ""
+msgstr "Dengan penyetuju dan penyunting"
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
@@ -2823,8 +2836,8 @@ msgstr "Dependensi yang Tidak Dipenuhi"
 #: app/templates/todo/editor.html:151
 msgid "Meta packages that have hard dependers, but no packages providing them."
 msgstr ""
-"Paket meta yang mempunyai ketergantungan keras, tetapi tidak ada paket "
-"yang menyediakannya."
+"Paket meta yang memiliki ketergantungan keras, tetapi tidak ada paket yang "
+"menyediakannya."
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -2832,7 +2845,7 @@ msgstr "Lihat Semua"
 
 #: app/templates/todo/editor.html:196
 msgid "Recent Actions"
-msgstr ""
+msgstr "Tindakan Terkini"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
@@ -3105,7 +3118,7 @@ msgstr "Buat Akun"
 
 #: app/templates/users/claim.html:10
 msgid "Do you have an account on the Minetest Forums?"
-msgstr "Apakah Anda punya akun di Forum Minetest?"
+msgstr "Apakah Anda memiliki akun di Forum Minetest?"
 
 #: app/templates/users/claim.html:13
 msgid "ContentDB will link your account to your forum account."
@@ -3121,11 +3134,11 @@ msgstr ""
 
 #: app/templates/users/claim.html:22
 msgid "<b>Yes</b>, I have a forums account"
-msgstr "<b>Ya</b>, saya punya akun forum"
+msgstr "<b>Ya</b>, saya memiliki akun forum"
 
 #: app/templates/users/claim.html:25
 msgid "<b>No</b>, I don't have one"
-msgstr "<b>Tidak</b>, saya tidak punya akun forum"
+msgstr "<b>Tidak</b>, saya tidak memiliki akun forum"
 
 #: app/templates/users/claim.html:28
 msgid "Create forum account"
@@ -3331,19 +3344,19 @@ msgstr "Blokir"
 
 #: app/templates/users/modtools.html:56
 msgid "Unban"
-msgstr ""
+msgstr "Buka Blokir"
 
 #: app/templates/users/modtools.html:65
 msgid "Message to display to banned user"
-msgstr ""
+msgstr "Pesan untuk ditampilkan kepada pengguna terblokir"
 
 #: app/templates/users/modtools.html:69
 msgid "Expires At"
-msgstr ""
+msgstr "Kedaluwarsa Pada"
 
 #: app/templates/users/modtools.html:72
 msgid "Expiry date. Leave blank for permanent ban"
-msgstr ""
+msgstr "Tanggal kedaluwarsa. Kosongkan untuk blokir permanen"
 
 #: app/templates/users/modtools.html:79
 msgid "Change Email and Send Password Reset"
@@ -3555,12 +3568,12 @@ msgstr "Sunting Pilihan Pemberitahuan"
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr ""
+msgstr "Cari dalam Rilis Paket"
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr ""
+msgstr "'%(query)s' - Pencarian Rilisan Paket"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -3718,4 +3731,3 @@ msgstr ""
 #~ "Utas ini hanya terlihat oleh pembuat,"
 #~ " pemilik paket, dan pengguna dengan "
 #~ "jabatan Penyetuju ke atas."
-
