@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-03-30 21:10+0000\n"
-"Last-Translator: Pexauteau Santander <pexauteau@gmail.com>\n"
+"PO-Revision-Date: 2022-08-13 08:17+0000\n"
+"Last-Translator: BRN Systems <brnsystems123@gmail.com>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/minetest/"
+"contentdb/sk/>\n"
 "Language: sk\n"
-"Language-Team: Slovak "
-"<https://hosted.weblate.org/projects/minetest/contentdb/sk/>\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:115
 msgid "Banned:"
-msgstr ""
+msgstr "Zabanovaný:"
 
 #: app/__init__.py:117
 msgid "You have been banned."
@@ -202,7 +203,7 @@ msgstr "URL videa"
 
 #: app/blueprints/packages/packages.py:263
 msgid "Package already exists"
-msgstr ""
+msgstr "Balíček už existuje"
 
 #: app/blueprints/packages/packages.py:321
 msgid "Unable to find that user"
@@ -238,7 +239,7 @@ msgstr "Členovia údržby (oddeľuj čiarkou)"
 
 #: app/blueprints/packages/packages.py:475
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "Nemáte právo na upravovanie členov údržby"
 
 #: app/blueprints/packages/packages.py:525
 msgid "You are not a maintainer"
@@ -405,6 +406,8 @@ msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
+"Nedávno ste ohodnotili príliš veľa balíčkov. Prosím počkajte pred ďalším "
+"pokusom a zvážte podrobnejšie hodnotenie"
 
 #: app/blueprints/packages/reviews.py:175
 msgid "You can't vote on the reviews on your own package!"
@@ -478,7 +481,7 @@ msgstr "Nemôžem vytvoriť vlákno!"
 
 #: app/blueprints/threads/__init__.py:303
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Schvaľovacie vlákno už existuje! Zvážte odpoveď tam"
 
 #: app/blueprints/threads/__init__.py:307
 msgid "Please wait before opening another thread"
@@ -538,6 +541,8 @@ msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
+"Povolené sú iba písmená abecedy (A-Za-z), čísla (0-9), podčiarkovníky (_), "
+"mínusky (-) a bodky (.)"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:190
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:377
@@ -680,6 +685,9 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
+"Neplatné používateľské meno. Povolené sú iba písmená abecedy (A-Za-z), čísla "
+"(0-9), podčiarkovníky (_), mínusky (-) a bodky (.). Zvážte kontaktovanie "
+"správcu"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
@@ -857,11 +865,11 @@ msgstr "Nemôžeš pozdvihnúť užívateľa na vyššiu úroveň než je tá tv
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "Text na hľadanie (regex)"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Filter súborov"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
 #: app/templates/todo/tags.html:15
@@ -876,11 +884,11 @@ msgstr "Meno môže obsahovať len malé písmená (a-z), čísla (0-9), a podtr
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "Nemáte právo na upravenie tohto balíčka"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "Nemáte právo na zmenu mena balíčka"
 
 #: app/logic/packages.py:165
 #, python-format
@@ -889,7 +897,7 @@ msgstr "Nemožno pridať ochranný tag %(title)s na balík"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "Nemáte povolenie na vytvorenie vydania"
 
 #: app/logic/releases.py:37
 msgid ""
@@ -1666,7 +1674,7 @@ msgstr "Nemáš povolenie na prispievanie."
 
 #: app/templates/macros/threads.html:167
 msgid "You can add someone to a private thread by writing @username."
-msgstr ""
+msgstr "Do súkromného vlákna môžete niekoho pridať napísaním @username."
 
 #: app/templates/macros/threads.html:185 app/templates/macros/threads.html:265
 msgid "No threads found"
@@ -2527,6 +2535,8 @@ msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
 msgstr ""
+"Toto vlákno je viditeľné iba pre jeho tvorcu, správcov balíkov, používateľov "
+"s hodnosťou Schvaľovateľa alebo vyššie a @spomenutých používateľov."
 
 #: app/templates/packages/view.html:271
 msgid "Awaiting review"
@@ -2743,15 +2753,15 @@ msgstr "Uzamkni"
 
 #: app/templates/threads/view.html:97
 msgid "This thread is visible to the following users"
-msgstr ""
+msgstr "Toto vlákno je viditeľné pre nasledujúcich používateľov"
 
 #: app/templates/threads/view.html:98
 msgid "Visible to:"
-msgstr ""
+msgstr "Viditeľné pre:"
 
 #: app/templates/threads/view.html:105
 msgid "Plus approvers and editors"
-msgstr ""
+msgstr "Plus schvaľovatelia a redaktori"
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
@@ -2818,7 +2828,7 @@ msgstr "Pozri všetko"
 
 #: app/templates/todo/editor.html:196
 msgid "Recent Actions"
-msgstr ""
+msgstr "Nedávne akcie"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
@@ -3313,19 +3323,19 @@ msgstr "Zakázať (Ban)"
 
 #: app/templates/users/modtools.html:56
 msgid "Unban"
-msgstr ""
+msgstr "Zrušiť ban"
 
 #: app/templates/users/modtools.html:65
 msgid "Message to display to banned user"
-msgstr ""
+msgstr "Správa, ktorá sa zobrazí zabanovanému používateľovi"
 
 #: app/templates/users/modtools.html:69
 msgid "Expires At"
-msgstr ""
+msgstr "Platnosť vyprší o"
 
 #: app/templates/users/modtools.html:72
 msgid "Expiry date. Leave blank for permanent ban"
-msgstr ""
+msgstr "Dátum skončenia. Pre trvalý ban ponechajte prázdne"
 
 #: app/templates/users/modtools.html:79
 msgid "Change Email and Send Password Reset"
@@ -3537,12 +3547,12 @@ msgstr "Upraviť emailové upozornenia"
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr ""
+msgstr "Vyhľadajte vo Vydaniach balíčkov"
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr ""
+msgstr "'%(query)s' - Hľadať vo vydaniach balíčkov"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -3611,4 +3621,3 @@ msgstr ""
 #~ "Toto vlákno je viditeľné iba pre "
 #~ "tvorcu, majiteľa balíka a užívateľov so"
 #~ " statusom Schvaľovateľ alebo vyšším."
-
