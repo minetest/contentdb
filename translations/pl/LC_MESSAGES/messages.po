@@ -8,21 +8,22 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-05-24 12:14+0000\n"
+"PO-Revision-Date: 2022-06-12 12:14+0000\n"
 "Last-Translator: Jakub Z <mrkubax10@onet.pl>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/pl/>\n"
 "Language: pl\n"
-"Language-Team: Polish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/pl/>\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && "
-"(n%100<10 || n%100>=20) ? 1 : 2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.13-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:115
 msgid "Banned:"
-msgstr ""
+msgstr "Użytkownik zbanowany:"
 
 #: app/__init__.py:117
 msgid "You have been banned."
@@ -203,7 +204,7 @@ msgstr "URL filmiku"
 
 #: app/blueprints/packages/packages.py:263
 msgid "Package already exists"
-msgstr ""
+msgstr "Paczka już istnieje"
 
 #: app/blueprints/packages/packages.py:321
 msgid "Unable to find that user"
@@ -241,7 +242,7 @@ msgstr "Opiekunowie (po przecinku)"
 
 #: app/blueprints/packages/packages.py:475
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "Nie masz uprawnień aby edytować listę opiekunów"
 
 #: app/blueprints/packages/packages.py:525
 msgid "You are not a maintainer"
@@ -408,6 +409,8 @@ msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
+"W ostatnim czasie zrecenzowałeś zbyt dużo paczek. Poczekaj zanim spróbujesz "
+"ponownie oraz rozważ pisanie bardziej szczegółowych recenzji"
 
 #: app/blueprints/packages/reviews.py:175
 msgid "You can't vote on the reviews on your own package!"
@@ -481,7 +484,7 @@ msgstr "Nie można utworzyć wątku!"
 
 #: app/blueprints/threads/__init__.py:303
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Wątek zatwierdzający już istnieje! Rozważ utworzenie odpowiedzi tam"
 
 #: app/blueprints/threads/__init__.py:307
 msgid "Please wait before opening another thread"
@@ -541,6 +544,8 @@ msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
+"Tylko litery alfabetu (A-Za-z), liczby (0-9), podłogi (_), minusy (-) oraz "
+"kropki (.) są dozwolone"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:190
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:377
@@ -685,6 +690,9 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
+"Nieprawidłowa nazwa użytkownika, tylko litery alfabetu (A-Za-z), liczby (0-9)"
+", podłogi (_), minusy (-) oraz kropki (.) są dozwolone. Rozważ "
+"skontaktowanie się z adminem"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
@@ -862,11 +870,11 @@ msgstr "Nie możesz promować użytkownika na rangę wyższą niż twoja!"
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "Tekst do wyszukania (wyrażenie regularne)"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Filtr plików"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
 #: app/templates/todo/tags.html:15
@@ -881,11 +889,11 @@ msgstr "Nazwa może zawierać tylko małe litery (a-z), cyfry (0-9) oraz podłog
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "Nie masz uprawnień aby edytować tą paczkę"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "Nie masz uprawnień aby zmienić nazwę paczki"
 
 #: app/logic/packages.py:165
 #, python-format
@@ -894,7 +902,7 @@ msgstr "Nie można dodać chronionego tagu %(title)s do paczki"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "Nie masz uprawnień aby tworzyć wydania"
 
 #: app/logic/releases.py:37
 msgid ""
@@ -1675,7 +1683,7 @@ msgstr "Nie masz uprawnień aby napisać post."
 
 #: app/templates/macros/threads.html:167
 msgid "You can add someone to a private thread by writing @username."
-msgstr ""
+msgstr "Możesz dodać kogoś do prywatnego wątku pisząc @nazwa_użytkownika."
 
 #: app/templates/macros/threads.html:185 app/templates/macros/threads.html:265
 msgid "No threads found"
@@ -2545,6 +2553,8 @@ msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
 msgstr ""
+"Ten wątek jest tylko widoczny dla jego autora, opiekunów paczki, "
+"użytkowników z rangą Zatwierdzacz lub wyższą oraz @oznaczonych użytkowników."
 
 #: app/templates/packages/view.html:271
 msgid "Awaiting review"
@@ -2761,15 +2771,15 @@ msgstr "Zablokuj"
 
 #: app/templates/threads/view.html:97
 msgid "This thread is visible to the following users"
-msgstr ""
+msgstr "Ten wątek jest widoczny dla następujących użytkowników"
 
 #: app/templates/threads/view.html:98
 msgid "Visible to:"
-msgstr ""
+msgstr "Widoczny dla:"
 
 #: app/templates/threads/view.html:105
 msgid "Plus approvers and editors"
-msgstr ""
+msgstr "Dodatkowo osoby zatwierdzające i edytujące"
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
@@ -2834,7 +2844,7 @@ msgstr "Zobacz wszystko"
 
 #: app/templates/todo/editor.html:196
 msgid "Recent Actions"
-msgstr ""
+msgstr "Ostatnie akcje"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
@@ -3338,19 +3348,19 @@ msgstr "Zbanuj"
 
 #: app/templates/users/modtools.html:56
 msgid "Unban"
-msgstr ""
+msgstr "Odbanuj"
 
 #: app/templates/users/modtools.html:65
 msgid "Message to display to banned user"
-msgstr ""
+msgstr "Wiadomość dla zbanowanego użytkownika"
 
 #: app/templates/users/modtools.html:69
 msgid "Expires At"
-msgstr ""
+msgstr "Wygasa"
 
 #: app/templates/users/modtools.html:72
 msgid "Expiry date. Leave blank for permanent ban"
-msgstr ""
+msgstr "Data wygaśnięcia. Pozostaw pustą dla stałego bana"
 
 #: app/templates/users/modtools.html:79
 msgid "Change Email and Send Password Reset"
@@ -3562,12 +3572,12 @@ msgstr "Edytuj Preferencje Powiadomień"
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr ""
+msgstr "Szukaj w wydaniach paczki"
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr ""
+msgstr "'%(query)s' - Wyszukiwanie w wydaniach paczki"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -3634,4 +3644,3 @@ msgstr "Rozważ włączenie powiadomień e-mail, możesz dostosować ilość wys
 #~ "Ten wątek jest widoczny tylko dla "
 #~ "twórcy, właściciela paczki oraz użytkowników"
 #~ " z rangą Zatwierdzacz lub wyższą."
-
