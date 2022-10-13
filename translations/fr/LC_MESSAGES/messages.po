@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-04-27 23:09+0000\n"
+"PO-Revision-Date: 2022-06-27 10:20+0000\n"
 "Last-Translator: Maxime Leroy <lisacintosh@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.13.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:115
 msgid "Banned:"
-msgstr ""
+msgstr "Banni :"
 
 #: app/__init__.py:117
 msgid "You have been banned."
@@ -206,7 +207,7 @@ msgstr "URL de la vidéo"
 
 #: app/blueprints/packages/packages.py:263
 msgid "Package already exists"
-msgstr ""
+msgstr "Le paquet existe déjà"
 
 #: app/blueprints/packages/packages.py:321
 msgid "Unable to find that user"
@@ -242,7 +243,7 @@ msgstr "Responsables (séparés par des virgules)"
 
 #: app/blueprints/packages/packages.py:475
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "Vous n'avez pas l'autorisation de modifier les mainteneurs"
 
 #: app/blueprints/packages/packages.py:525
 msgid "You are not a maintainer"
@@ -413,6 +414,8 @@ msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
+"Vous avez évalué trop de paquets récemment. Veuillez attendre avant de "
+"réessayer, et pensez à plus détailler vos évaluations"
 
 #: app/blueprints/packages/reviews.py:175
 msgid "You can't vote on the reviews on your own package!"
@@ -486,7 +489,7 @@ msgstr "Impossible de créer le fil de discussion !"
 
 #: app/blueprints/threads/__init__.py:303
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Un fil d'approbation existe déjà ! Considérez plutôt d'y répondre"
 
 #: app/blueprints/threads/__init__.py:307
 msgid "Please wait before opening another thread"
@@ -546,6 +549,8 @@ msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
+"Seules les lettres (A-Za-z), les numéros (0-9), les tirets-bas (_), les "
+"moins (-), et les points (.) sont autorisés"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:190
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:377
@@ -692,6 +697,9 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
+"Nom d'utilisateur invalide, Seules les lettres (A-Za-z), les numéros (0-9), "
+"les tirets-bas (_), les moins (-), et les points (.) sont autorisés. Vous "
+"pouvez contacter un administrateur"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
@@ -875,11 +883,11 @@ msgstr ""
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "Le texte à chercher (regex)"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Filtre de fichiers"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
 #: app/templates/todo/tags.html:15
@@ -896,11 +904,11 @@ msgstr ""
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "Vous n'avez pas l'autorisation de modifier ce paquet"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "Vous n'avez pas l'autorisation de modifier le nom du paquet"
 
 #: app/logic/packages.py:165
 #, python-format
@@ -909,7 +917,7 @@ msgstr "Impossible d'ajouter l’étiquette protégée %(title)s au paquet"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "Vous n'avez pas l'autorisation de créer des versions"
 
 #: app/logic/releases.py:37
 msgid ""
@@ -1703,6 +1711,8 @@ msgstr "Vous n'avez pas la permission de poster."
 #: app/templates/macros/threads.html:167
 msgid "You can add someone to a private thread by writing @username."
 msgstr ""
+"Vous pouvez ajouter quelqu'un à fil de discussion privé avec @nom-"
+"utilisateur."
 
 #: app/templates/macros/threads.html:185 app/templates/macros/threads.html:265
 msgid "No threads found"
@@ -2582,6 +2592,9 @@ msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
 msgstr ""
+"Ce fil n'est disponible que pour son créateur, les mainteneurs de paquets, "
+"les utilisateurs de rang Approbateur ou supérieur, et les utilisateurs "
+"@mentionnés."
 
 #: app/templates/packages/view.html:271
 msgid "Awaiting review"
@@ -2800,15 +2813,15 @@ msgstr "Verrouiller"
 
 #: app/templates/threads/view.html:97
 msgid "This thread is visible to the following users"
-msgstr ""
+msgstr "Ce fil de discussion est visible pour les utilisateurs suivants"
 
 #: app/templates/threads/view.html:98
 msgid "Visible to:"
-msgstr ""
+msgstr "Visible à :"
 
 #: app/templates/threads/view.html:105
 msgid "Plus approvers and editors"
-msgstr ""
+msgstr "Et aussi les examinateurs et les éditeurs"
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
@@ -2876,7 +2889,7 @@ msgstr "Voir tout"
 
 #: app/templates/todo/editor.html:196
 msgid "Recent Actions"
-msgstr ""
+msgstr "Actions récentes"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
@@ -3234,13 +3247,12 @@ msgid "You'll need to have the GitHub field in your forum profile filled out."
 msgstr "Vous devrez avoir complété le champ GitHub dans votre profil sur le forum."
 
 #: app/templates/users/claim_forums.html:44
-#, fuzzy
 msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Se connecter au forum et <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>faites ça ici</a>."
+"Se connecter au forum et <a href=\"https://forum.minetest.net/ucp.php?i=173\""
+">faites ça ici</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -3380,19 +3392,19 @@ msgstr "Bannir"
 
 #: app/templates/users/modtools.html:56
 msgid "Unban"
-msgstr ""
+msgstr "Réintéger"
 
 #: app/templates/users/modtools.html:65
 msgid "Message to display to banned user"
-msgstr ""
+msgstr "Le message à afficher pour les utilisateur bannis"
 
 #: app/templates/users/modtools.html:69
 msgid "Expires At"
-msgstr ""
+msgstr "Expire le"
 
 #: app/templates/users/modtools.html:72
 msgid "Expiry date. Leave blank for permanent ban"
-msgstr ""
+msgstr "Date d'expiration. Laissez vide pour un bannissement indéfini"
 
 #: app/templates/users/modtools.html:79
 msgid "Change Email and Send Password Reset"
@@ -3609,12 +3621,12 @@ msgstr "Modifier les préférences de notification"
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr ""
+msgstr "Rechercher dans les versions des paquets"
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr ""
+msgstr "'%(query)s' - Recherche dans les versions des paquets"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -3822,4 +3834,3 @@ msgstr ""
 #~ "son créateur, le propriétaire du paquet,"
 #~ " et les utilisateurs de rang "
 #~ "\"Approver\" et supérieur."
-
