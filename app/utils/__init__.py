@@ -25,7 +25,8 @@ YESES = ["yes", "true", "1", "on"]
 
 
 def is_username_valid(username):
-	return username is not None and len(username) >= 2 and re.match(r"^[A-Za-z0-9._-]*$", username)
+	return username is not None and len(username) >= 2 and \
+			re.match(r"^[A-Za-z0-9._-]*$", username) and not re.match(r"^\.*$")
 
 
 def isYes(val):
