@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-07-24 16:23+0000\n"
-"Last-Translator: Valentino <phamtomwhite@protonmail.com>\n"
+"PO-Revision-Date: 2022-08-04 06:19+0000\n"
+"Last-Translator: Andrés Morgensen <expressindia_aeromax@slmail.me>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
 "contentdb/es/>\n"
 "Language: es\n"
@@ -570,9 +570,8 @@ msgid "Incorrect captcha answer"
 msgstr "Respuesta del captcha incorrecta"
 
 #: app/blueprints/users/account.py:120
-#, fuzzy
 msgid "Username is invalid"
-msgstr "Nombre de usuario o correo electrónico"
+msgstr "El nombre de usuario es inválido"
 
 #: app/blueprints/users/account.py:131
 msgid "An account already exists for that username but hasn't been claimed yet."
@@ -613,7 +612,7 @@ msgstr "Restablecer la contraseña"
 
 #: app/blueprints/users/account.py:216
 msgid "Unable to find account"
-msgstr ""
+msgstr "No se ha podido encontrar la cuenta"
 
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:233
 msgid "New password"
@@ -693,6 +692,9 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
+"Usuario inválido, solo se permiten letras del abecedario (A-Z a-z), números "
+"(09), guiones bajos (_), guiones (-) y puntos (.). Considere contactar a un "
+"administrador"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
@@ -874,7 +876,7 @@ msgstr ""
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Filtro de archivos"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
 #: app/templates/todo/tags.html:15
@@ -891,11 +893,11 @@ msgstr ""
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "No tienes permiso para editar este paquete"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "No tienes permiso para cambiar el nombre de este paquete"
 
 #: app/logic/packages.py:165
 #, python-format
@@ -904,7 +906,7 @@ msgstr "No se ha podido añadir la etiqueta protegida %(title)s al paquete"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "No tienes permiso para hacer lanzamientos"
 
 #: app/logic/releases.py:37
 msgid ""
@@ -1414,12 +1416,16 @@ msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
+"No hemos podido realizar el restablecimiento de la contraseña porque no "
+"hemos podido encontrar una cuenta asociada a este correo electrónico."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
+"Esto puede deberse a que usaste otro correo electrónico con tu cuenta, o a "
+"que nunca confirmaste tu correo electrónico."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
@@ -1428,6 +1434,7 @@ msgstr "Puede usar GitHub para iniciar sesión si está asociado a su cuenta."
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
 msgstr ""
+"De lo contrario, es posible que necesites contactar a rubenwardy por ayuda."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1691,7 +1698,7 @@ msgstr "No tiene permiso para publicar."
 
 #: app/templates/macros/threads.html:167
 msgid "You can add someone to a private thread by writing @username."
-msgstr ""
+msgstr "Puedes añadir a alguien a un hilo privado escribiendo @nombredeusuario."
 
 #: app/templates/macros/threads.html:185 app/templates/macros/threads.html:265
 msgid "No threads found"
@@ -1780,7 +1787,7 @@ msgstr "Proporcionado Por"
 
 #: app/templates/metapackages/view.html:21 app/templates/todo/todo_base.html:35
 msgid "Forum Topics"
-msgstr ""
+msgstr "Temas del foro"
 
 #: app/templates/metapackages/view.html:27
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:396
@@ -2003,7 +2010,7 @@ msgstr "Centro Comunitario"
 #: app/templates/packages/game_hub.html:12
 #, python-format
 msgid "Mods for %(title)s"
-msgstr ""
+msgstr "Mods para %(title)s"
 
 #: app/templates/packages/list.html:21
 #, python-format
