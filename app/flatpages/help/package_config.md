@@ -19,11 +19,20 @@ The filename of the `.conf` file depends on the content type:
 * `game.conf` for games.
 * `texture_pack.conf` for texture packs.
 
-The `.conf` uses a key-value format, separated using equals. Here's a simple example:
+The `.conf` uses a key-value format, separated using equals.
+
+Here's a simple example of `mod.conf`, `modpack.conf`, or `texture_pack.conf`:
 
 	name = mymod
 	title = My Mod
 	description = A short description to show in the client.
+
+Here's a simple example of `game.conf`:
+
+	title = My Game
+	description = A short description to show in the client.
+
+Note that you should not specify `name` in game.conf.
 
 ### Understood values
 
