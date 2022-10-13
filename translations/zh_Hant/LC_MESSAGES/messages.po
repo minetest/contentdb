@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-04-22 09:13+0000\n"
+"PO-Revision-Date: 2022-10-03 02:25+0000\n"
 "Last-Translator: Yic95 <0Luke.Luke0@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
+"minetest/contentdb/zh_Hant/>\n"
 "Language: zh_Hant\n"
-"Language-Team: Chinese (Traditional) "
-"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hant/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.14.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:115
 msgid "Banned:"
-msgstr ""
+msgstr "封禁："
 
 #: app/__init__.py:117
 msgid "You have been banned."
@@ -30,7 +31,7 @@ msgstr "你已被封禁。"
 #: app/template_filters.py:52
 #, python-format
 msgid "%(delta)s ago"
-msgstr ""
+msgstr "%(delta)s 天前"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
@@ -40,7 +41,7 @@ msgstr "名字"
 
 #: app/blueprints/api/tokens.py:34
 msgid "Limit to package"
-msgstr ""
+msgstr "套件限制"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:249
 #: app/blueprints/packages/packages.py:467
@@ -58,29 +59,28 @@ msgstr "儲存"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr ""
+msgstr "認證失敗 [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked GitHub to account"
-msgstr ""
+msgstr "連接 GitHub 帳號"
 
 #: app/blueprints/github/__init__.py:65
 msgid "GitHub account is already associated with another user"
-msgstr ""
+msgstr "GitHub 帳號已與其它用戶關連"
 
 #: app/blueprints/github/__init__.py:71
-#, fuzzy
 msgid "Unable to find an account for that GitHub user"
-msgstr "找不到該用戶"
+msgstr "找不到該 GitHub 用戶"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr ""
+msgstr "認證失敗 [err=gh-login-failed]"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
 msgid "Edit Details"
-msgstr ""
+msgstr "編輯細節"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
@@ -197,11 +197,11 @@ msgstr "論壇主題編號"
 
 #: app/blueprints/packages/packages.py:247
 msgid "Video URL"
-msgstr ""
+msgstr "影片 URL"
 
 #: app/blueprints/packages/packages.py:263
 msgid "Package already exists"
-msgstr ""
+msgstr "套件已存在"
 
 #: app/blueprints/packages/packages.py:321
 msgid "Unable to find that user"
@@ -238,7 +238,7 @@ msgstr "管理者（以逗點分割）"
 
 #: app/blueprints/packages/packages.py:475
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "你無權編輯維護者"
 
 #: app/blueprints/packages/packages.py:525
 msgid "You are not a maintainer"
@@ -838,7 +838,7 @@ msgstr ""
 
 #: app/blueprints/users/settings.py:266
 msgid "GitHub Username"
-msgstr ""
+msgstr "GitHub 用戶名"
 
 #: app/blueprints/users/settings.py:267 app/templates/users/list.html:14
 msgid "Rank"
@@ -1108,11 +1108,11 @@ msgstr ""
 
 #: app/templates/base.html:242
 msgid "Source Code"
-msgstr ""
+msgstr "原始碼"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "歡迎"
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
 #: app/templates/packages/game_hub.html:5
@@ -1120,30 +1120,30 @@ msgstr ""
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
-msgstr ""
+msgstr "%(title)s（作者為 %(author)s）"
 
 #: app/templates/index.html:43
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
-msgstr ""
+msgstr "<strong>%(title)s</strong>（作者為 %(author)s）"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:177 app/templates/packages/view.html:293
 #: app/templates/users/profile.html:206
 msgid "Reviews"
-msgstr ""
+msgstr "評論"
 
 #: app/templates/index.html:86
 msgid "Previous"
-msgstr ""
+msgstr "上個"
 
 #: app/templates/index.html:90 app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr ""
+msgstr "下個"
 
 #: app/templates/index.html:96
 msgid "Featured"
-msgstr ""
+msgstr "出色套件"
 
 #: app/templates/index.html:101 app/templates/index.html:108
 #: app/templates/index.html:115 app/templates/index.html:122
@@ -1153,44 +1153,44 @@ msgstr ""
 #: app/templates/packages/game_hub.html:45
 #: app/templates/packages/game_hub.html:52
 msgid "See more"
-msgstr ""
+msgstr "查看更多"
 
 #: app/templates/index.html:103 app/templates/packages/game_hub.html:33
 msgid "Recently Added"
-msgstr ""
+msgstr "新進套件"
 
 #: app/templates/index.html:110 app/templates/packages/game_hub.html:40
 msgid "Recently Updated"
-msgstr ""
+msgstr "最近更新"
 
 #: app/templates/index.html:117
 msgid "Top Games"
-msgstr ""
+msgstr "優質遊戲"
 
 #: app/templates/index.html:124 app/templates/packages/game_hub.html:47
 msgid "Top Mods"
-msgstr ""
+msgstr "優質模組"
 
 #: app/templates/index.html:131
 msgid "Top Texture Packs"
-msgstr ""
+msgstr "優質材質包"
 
 #: app/templates/index.html:135
 msgid "Search by Tags"
-msgstr ""
+msgstr "標籤搜尋"
 
 #: app/templates/index.html:153 app/templates/packages/game_hub.html:54
 msgid "Highest Reviewed"
-msgstr ""
+msgstr "最多評論"
 
 #: app/templates/index.html:160
 msgid "Recent Positive Reviews"
-msgstr ""
+msgstr "最近好評"
 
 #: app/templates/index.html:167
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
-msgstr ""
+msgstr "CDB 有 %(count)d 個套件、%(downloads)d 次下載。"
 
 #: app/templates/admin/audit_view.html:16
 #, python-format
@@ -1203,7 +1203,7 @@ msgstr ""
 
 #: app/templates/admin/list.html:62
 msgid "Deletion is permanent."
-msgstr ""
+msgstr "移除不可後悔。"
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
@@ -1224,13 +1224,13 @@ msgstr ""
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr ""
+msgstr "授權條款"
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:44
 msgid "Description"
-msgstr ""
+msgstr "描述"
 
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
@@ -1242,25 +1242,25 @@ msgstr ""
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:191
 msgid "Packages"
-msgstr ""
+msgstr "套件"
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Minetest Versions"
-msgstr ""
+msgstr "Minetest 版本"
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
-msgstr ""
+msgstr "新版本"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
 msgid "Warnings"
-msgstr ""
+msgstr "警告"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
-msgstr ""
+msgstr "新警告"
 
 #: app/templates/api/create_edit_token.html:5
 #, python-format
@@ -3556,4 +3556,3 @@ msgstr ""
 #~ " creator, the package owner, and "
 #~ "users of Approver rank or above."
 #~ msgstr ""
-
