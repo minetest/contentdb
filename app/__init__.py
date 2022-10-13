@@ -38,11 +38,13 @@ app.config["LANGUAGES"] = {
 	"de": "Deutsch",
 	"fr": "Français",
 	"id": "Bahasa Indonesia",
+	"it": "Italiano",
 	"ms": "Bahasa Melayu",
 	"pl": "Język Polski",
 	"ru": "русский язык",
 	"sk": "Slovenčina",
 	"sv": "Svenska",
+	"vi": "tiếng Việt",
 	"zh_Hans": "汉语",
 }
 
