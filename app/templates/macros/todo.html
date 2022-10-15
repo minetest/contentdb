@@ -1,21 +1,19 @@
-{% macro render_outdated_packages(outdated_packages, current_player, show_config=False) -%}
+{% macro render_outdated_packages(outdated_packages, current_user, show_config=False) -%}
 <ul class="list-group mt-3">
 	{% for package in outdated_packages %}
 		{% set config = package.update_config %}
 		<li class="list-group-item">
 			<div class="row">
-				{% if package %}
-					<a class="col-sm-auto text-muted" style="min-width: 200px;" href="{{ package.getURL("packages.view") }}">
-						<img
-							class="img-fluid"
-							style="max-height: 22px; max-width: 22px;"
-							src="{{ package.getThumbnailOrPlaceholder() }}" />
+				<a class="col-sm-auto text-muted" style="min-width: 200px;" href="{{ package.getURL("packages.view") }}">
+					<img
+						class="img-fluid"
+						style="max-height: 22px; max-width: 22px;"
+						src="{{ package.getThumbnailOrPlaceholder() }}" />
 
-						<span class="pl-2">
-							{{ package.title }}
-						</span>
-					</a>
-				{% endif %}
+					<span class="pl-2">
+						{{ package.title }}
+					</span>
+				</a>
 
 				<div class="col-sm">
 					{% if show_config %}
@@ -31,7 +29,7 @@
 
 				<div class="col-sm-auto">
 					{% if not show_config %}
-						{% if package.checkPerm(current_player, "MAKE_RELEASE") %}
+						{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 							<a class="btn btn-sm btn-primary mr-2" href="{{ config.get_create_release_url() }}">
 								<i class="fas fa-plus mr-1"></i>
 								{{ _("Release") }}
@@ -44,7 +42,7 @@
 						{{ _("Repo") }}
 					</a>
 
-					{% if package.checkPerm(current_player, "MAKE_RELEASE") %}
+					{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
 						<a class="btn btn-sm btn-secondary" href="{{ package.getURL("packages.update_config") }}">
 							<i class="fas fa-cog mr-1"></i>
 							{{ _("Update settings") }}
@@ -57,4 +55,34 @@
 		<p class="list-group-item"><i>{{ _("No outdated packages.") }}</i></p>
 	{% endfor %}
 </ul>
+{% endmacro %}
+
+{% macro render_mtsupport_packages(packages, current_user, show_config=False) -%}
+<div class="list-group mt-3">
+	{% for package in packages %}
+		<a class="list-group-item list-group-item-action" href="{{ package.getURL('packages.list_releases') }}">
+			<div class="row">
+				<div class="col-sm-auto text-muted" style="min-width: 200px;">
+					<img
+						class="img-fluid"
+						style="max-height: 22px; max-width: 22px;"
+						src="{{ package.getThumbnailOrPlaceholder() }}" />
+
+					<span class="pl-2">
+						{{ package.title }}
+					</span>
+				</div>
+
+				<div class="col-sm">
+					{% set release = package.getDownloadRelease() %}
+					{% if release %}
+						{{ release.min_rel.name }} - {{ release.max_rel.name }}
+					{% endif %}
+				</div>
+			</div>
+		</a>
+	{% else %}
+		<p class="list-group-item"><i>{{ _("No outdated packages.") }}</i></p>
+	{% endfor %}
+</div>
 {% endmacro %}

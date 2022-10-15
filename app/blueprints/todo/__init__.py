@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import sys
 
 from celery import uuid
 from flask import *
@@ -295,3 +296,28 @@ def screenshots():
 
 	return render_template("todo/screenshots.html", current_tab="screenshots",
 			packages=query.all(), sort_by=sort_by, is_mtm_only=is_mtm_only)
+
+
+@bp.route("/todo/mtver_support/")
+@login_required
+def mtver_support():
+	is_mtm_only = isYes(request.args.get("mtm"))
+
+	current_stable = MinetestRelease.query.filter(~MinetestRelease.name.like("%-dev")).order_by(db.desc(MinetestRelease.id)).first()
+
+	query = db.session.query(Package) \
+			.filter(~Package.releases.any(or_(PackageRelease.max_rel==None, PackageRelease.max_rel == current_stable))) \
+			.filter(Package.state == PackageState.APPROVED)
+
+	if is_mtm_only:
+		query = query.filter(Package.repo.ilike("%github.com/minetest-mods/%"))
+
+	sort_by = request.args.get("sort")
+	if sort_by == "date":
+		query = query.order_by(db.desc(Package.approved_at))
+	else:
+		sort_by = "score"
+		query = query.order_by(db.desc(Package.score))
+
+	return render_template("todo/mtver_support.html", current_tab="screenshots",
+			packages=query.all(), sort_by=sort_by, is_mtm_only=is_mtm_only, current_stable=current_stable)
