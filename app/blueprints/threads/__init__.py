@@ -23,7 +23,7 @@ bp = Blueprint("threads", __name__)
 
 from flask_login import current_user, login_required
 from app.models import *
-from app.utils import addNotification, isYes, addAuditLog, get_system_user
+from app.utils import addNotification, isYes, addAuditLog, get_system_user, rank_required
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
@@ -373,6 +373,7 @@ def new():
 
 
 @bp.route("/users/<username>/comments/")
+@rank_required(UserRank.EDITOR)
 def user_comments(username):
 	user = User.query.filter_by(username=username).first()
 	if user is None:
