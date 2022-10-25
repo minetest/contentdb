@@ -22,7 +22,7 @@ bp = Blueprint("thumbnails", __name__)
 import os
 from PIL import Image
 
-ALLOWED_RESOLUTIONS=[(100,67), (270,180), (350,233)]
+ALLOWED_RESOLUTIONS=[(100,67), (270,180), (350,233), (1100,520)]
 
 def mkdir(path):
 	assert path != "" and path is not None
@@ -68,7 +68,6 @@ def resize_and_crop(img_path, modified_path, size):
 def make_thumbnail(img, level):
 	if level > len(ALLOWED_RESOLUTIONS) or level <= 0:
 		abort(403)
-
 	w, h = ALLOWED_RESOLUTIONS[level - 1]
 
 	upload_dir = current_app.config["UPLOAD_DIR"]
