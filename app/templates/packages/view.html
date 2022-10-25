@@ -12,8 +12,8 @@
 	<meta name="og:description" content="{{ package.short_desc }}"/>
 	<meta name="description" content="{{ package.short_desc }}"/>
 	<meta name="og:url" content="{{ package.getURL("packages.view", absolute=True) }}"/>
-	{% if package.getMainScreenshotURL() %}
-	<meta name="og:image" content="{{ package.getMainScreenshotURL(absolute=True) }}"/>
+	{% if package.getThumbnailURL(3, True) %}
+	<meta name="og:image" content="{{ package.getThumbnailURL(3, True) }}"/>
 	{% endif %}
 {% endblock %}
 
@@ -84,7 +84,7 @@
 		{% set package_warning=_("Non-free media") %}
 	{% endif %}
 <main>
-	{% set cover_image = package.cover_image.url or package.getMainScreenshotURL() %}
+	{% set cover_image = package.getCoverImageURL() %}
 	<header class="jumbotron pb-3"
 			style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ cover_image }}');
 				background-size: cover;

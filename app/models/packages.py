@@ -603,20 +603,18 @@ class Package(db.Model):
 	def getThumbnailOrPlaceholder(self, level=2):
 		return self.getThumbnailURL(level) or "/static/placeholder.png"
 
-	def getThumbnailURL(self, level=2):
+	def getThumbnailURL(self, level=2, abs=False):
 		screenshot = self.main_screenshot
-		return screenshot.getThumbnailURL(level) if screenshot is not None else None
-
-	def getMainScreenshotURL(self, absolute=False):
-		screenshot = self.main_screenshot
-		if screenshot is None:
-			return None
-
-		if absolute:
+		url = screenshot.getThumbnailURL(level) if screenshot is not None else None
+		if abs:
 			from app.utils import abs_url
-			return abs_url(screenshot.url)
+			return abs_url(url)
 		else:
-			return screenshot.url
+			return url
+
+	def getCoverImageURL(self):
+		screenshot = self.cover_image or self.main_screenshot
+		return screenshot and screenshot.getThumbnailURL(4)
 
 	def getURL(self, endpoint, absolute=False, **kwargs):
 		if absolute:

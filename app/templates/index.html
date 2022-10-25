@@ -29,7 +29,7 @@
 		</ol>
 		<div class="carousel-inner">
 			{% for package in featured %}
-				{% set cover_image = package.cover_image.url or package.getMainScreenshotURL() %}
+				{% set cover_image = package.getCoverImageURL() %}
 				{% set tags =  package.tags | sort(attribute="views", reverse=True) %}
 				<div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
 					<a href="{{ package.getURL("packages.view") }}">

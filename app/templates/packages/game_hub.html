@@ -11,8 +11,8 @@
 	<meta name="og:description" content="{{ _('Mods for %(title)s', title=package.title) }}"/>
 	<meta name="description" content="{{ _('Mods for %(title)s', title=package.title) }}"/>
 	<meta name="og:url" content="{{ package.getURL('packages.game_hub', absolute=True) }}"/>
-	{% if package.getMainScreenshotURL() %}
-		<meta name="og:image" content="{{ package.getMainScreenshotURL(absolute=True) }}"/>
+	{% if package.getThumbnailURL(3, True) %}
+		<meta name="og:image" content="{{ package.getThumbnailURL(3, True) }}"/>
 	{% endif %}
 {% endblock %}
 
