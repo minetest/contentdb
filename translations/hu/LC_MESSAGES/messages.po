@@ -8,20 +8,22 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-01-29 19:51+0000\n"
-"Last-Translator: Balázs Kovács <kovacs.balazs.ktk@gmail.com>\n"
+"PO-Revision-Date: 2022-10-19 17:01+0000\n"
+"Last-Translator: Kisjuhász Attila <kj.attil@gmail.com>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/hu/>\n"
 "Language: hu\n"
-"Language-Team: Hungarian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/hu/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.2-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:115
+#, fuzzy
 msgid "Banned:"
-msgstr ""
+msgstr "Kitiltva:"
 
 #: app/__init__.py:117
 msgid "You have been banned."
@@ -70,9 +72,8 @@ msgid "GitHub account is already associated with another user"
 msgstr "A github fiók már társítva van egy másik felhasználóhoz"
 
 #: app/blueprints/github/__init__.py:71
-#, fuzzy
 msgid "Unable to find an account for that GitHub user"
-msgstr "Nem található fiók ehhez a github felhasználóhoz"
+msgstr "Nem található fiók ehhez a GitHub-felhasználóhoz"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
@@ -132,9 +133,8 @@ msgstr ""
 "csak most jött létre."
 
 #: app/blueprints/packages/packages.py:215
-#, fuzzy
 msgid "No download available."
-msgstr "A letöltésre nincs lehetőség."
+msgstr "Nem érhető el letöltés."
 
 #: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:460
 msgid "Type"
@@ -193,9 +193,8 @@ msgid "Website URL"
 msgstr "Weboldal URL"
 
 #: app/blueprints/packages/packages.py:245
-#, fuzzy
 msgid "Issue Tracker URL"
-msgstr "Probléma Követő URL"
+msgstr "Követett URL Probléma"
 
 #: app/blueprints/packages/packages.py:246
 msgid "Forum Topic ID"
@@ -207,7 +206,7 @@ msgstr "Videó URL"
 
 #: app/blueprints/packages/packages.py:263
 msgid "Package already exists"
-msgstr ""
+msgstr "A csomag már létezik"
 
 #: app/blueprints/packages/packages.py:321
 msgid "Unable to find that user"
@@ -245,16 +244,15 @@ msgstr "Karbantartók (vesszővel-elválasztva)"
 
 #: app/blueprints/packages/packages.py:475
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "Nincs engedélye a karbantartók szerkesztéséhez"
 
 #: app/blueprints/packages/packages.py:525
 msgid "You are not a maintainer"
 msgstr "Nem vagy karbantartó"
 
 #: app/blueprints/packages/packages.py:528
-#, fuzzy
 msgid "Package owners cannot remove themselves as maintainers"
-msgstr "A csomag tulajdonosai nem távolíthatják el magukat karbantartóként"
+msgstr "A csomagtulajdonosok nem tudják eltávolítani magukat karbantartóként"
 
 #: app/blueprints/packages/packages.py:560
 msgid "Author Name"
@@ -326,9 +324,8 @@ msgid "Set Max"
 msgstr "Maximum beállítása"
 
 #: app/blueprints/packages/releases.py:189
-#, fuzzy
 msgid "Only change values previously set as none"
-msgstr "Csak a korábban semmire beálított értékeket módosítsa"
+msgstr "Csak a korábban egyik sem értékre beállított módosítása"
 
 #: app/blueprints/packages/releases.py:190
 msgid "Update"
@@ -362,7 +359,6 @@ msgstr "Értesítés küldése és megjelölés elavultként"
 
 #: app/blueprints/packages/releases.py:245
 #: app/templates/macros/package_approval.html:22
-#, fuzzy
 msgid "Create release"
 msgstr "Verzió létrehozása"
 
@@ -371,9 +367,8 @@ msgid "Save Settings"
 msgstr "Beállítások Mentése"
 
 #: app/blueprints/packages/releases.py:248
-#, fuzzy
 msgid "Disable Automation"
-msgstr "Automatizálás Kikapcsolása"
+msgstr "Automatizálás Tiltása"
 
 #: app/blueprints/packages/releases.py:287
 msgid "Please add a Git repository URL in order to set up automatic releases"
@@ -382,9 +377,8 @@ msgstr ""
 "beállításához"
 
 #: app/blueprints/packages/releases.py:303
-#, fuzzy
 msgid "Deleted update configuration"
-msgstr "Törölt frissítési konfiguráció"
+msgstr "Frissítési konfiguráció törölve"
 
 #: app/blueprints/packages/releases.py:311
 msgid "Now, please create an initial release"
@@ -419,9 +413,10 @@ msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
+"Az utóbbi időben túl sok csomagot tekintett át. Kérjük, várjon, mielőtt újra "
+"próbálkozna, és fontolja meg az értékelések részletesebbé tételét"
 
 #: app/blueprints/packages/reviews.py:175
-#, fuzzy
 msgid "You can't vote on the reviews on your own package!"
 msgstr "A saját csomagod értékeléseire nem szavazhatsz!"
 
@@ -436,7 +431,6 @@ msgstr "Cím/Felirat"
 
 #: app/blueprints/packages/screenshots.py:45
 #: app/templates/packages/screenshots.html:89
-#, fuzzy
 msgid "Cover Image"
 msgstr "Borítókép"
 
@@ -472,9 +466,8 @@ msgid "Locked thread"
 msgstr "Lezárt téma"
 
 #: app/blueprints/threads/__init__.py:109
-#, fuzzy
 msgid "Unlocked thread"
-msgstr "Feloldott téma"
+msgstr "Feloldott szál"
 
 #: app/blueprints/threads/__init__.py:158
 msgid "Cannot delete thread opening post!"
@@ -495,7 +488,7 @@ msgstr "Nem lehet létrehozni a témát!"
 
 #: app/blueprints/threads/__init__.py:303
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Már létezik jóváhagyási szál! Fontolja meg, hogy inkább ott válaszol"
 
 #: app/blueprints/threads/__init__.py:307
 msgid "Please wait before opening another thread"
@@ -555,6 +548,8 @@ msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
+"Csak alfabetikus betűk (A-Za-z), számok (0-9), aláhúzásjelek (_), "
+"mínuszjelek (-) és pontok (.) megengedettek"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:190
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:377
@@ -580,12 +575,10 @@ msgid "Incorrect captcha answer"
 msgstr "Hibás captcha válasz"
 
 #: app/blueprints/users/account.py:120
-#, fuzzy
 msgid "Username is invalid"
-msgstr "Felhasználónév vagy e-mail"
+msgstr "Érvénytelen felhasználónév"
 
 #: app/blueprints/users/account.py:131
-#, fuzzy
 msgid "An account already exists for that username but hasn't been claimed yet."
 msgstr "Már létezik egy fiók ehhez a felhasználónévhez, de még nem igényelték."
 
@@ -614,7 +607,6 @@ msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr "Ez az e-mail cím leiratkozott/fekete listára került és nem használható"
 
 #: app/blueprints/users/account.py:191
-#, fuzzy
 msgid "Reset Password"
 msgstr "Jelszó Visszaállítása"
 
@@ -651,9 +643,8 @@ msgid "Old password is incorrect"
 msgstr "A régi jelszó helytelen"
 
 #: app/blueprints/users/account.py:323
-#, fuzzy
 msgid "Unknown verification token!"
-msgstr "Ismeretlen ellenőrző jelszó!"
+msgstr "Ismeretlen ellenőrző jelkép!"
 
 #: app/blueprints/users/account.py:329
 msgid "Token has expired"
@@ -701,6 +692,9 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
+"Érvénytelen felhasználónév, Csak alfabetikus betűk (A-Za-z), számok (0-9), "
+"aláhúzásjelek (_), mínuszjelek (-) és pontok (.) engedélyezettek. Érdemes "
+"lehet kapcsolatba lépni egy rendszergazdával"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
@@ -712,177 +706,177 @@ msgstr "Nem sikerült lekérni a felhasználó GitHub-felhasználónevét"
 
 #: app/blueprints/users/claim.py:72
 msgid "That user has already been claimed!"
-msgstr ""
+msgstr "Ez a felhasználó már foglalt!"
 
 #: app/blueprints/users/claim.py:86
 #, python-format
 msgid "Error whilst attempting to access forums: %(message)s"
-msgstr ""
+msgstr "Hiba a fórumok elérésekor: %(message)s"
 
 #: app/blueprints/users/claim.py:90
 msgid "Unable to get forum signature - does the user exist?"
-msgstr ""
+msgstr "Nem sikerült lekérni a fórum aláírását – Létezik a felhasználó?"
 
 #: app/blueprints/users/claim.py:105
 msgid "Unable to login as user"
-msgstr ""
+msgstr "Nem sikerült felhasználóként bejelentkezni"
 
 #: app/blueprints/users/claim.py:111
 msgid "Could not find the key in your signature!"
-msgstr ""
+msgstr "Nem található a kulcs az aláírásában!"
 
 #: app/blueprints/users/claim.py:114
 msgid "Unknown claim type"
-msgstr ""
+msgstr "Ismeretlen jogcímtípus"
 
 #: app/blueprints/users/profile.py:115
 msgid "Top reviewer"
-msgstr ""
+msgstr "Legjobb értékelő"
 
 #: app/blueprints/users/profile.py:116
 #, python-format
 msgid "%(display_name)s has written the most helpful reviews on ContentDB."
-msgstr ""
+msgstr "%(display_name)s írta a leghasznosabb véleményeket a ContentDB-n."
 
 #: app/blueprints/users/profile.py:121
 msgid "2nd most helpful reviewer"
-msgstr ""
+msgstr "A második legsegítőkészebb értékelő"
 
 #: app/blueprints/users/profile.py:123
 msgid "3rd most helpful reviewer"
-msgstr ""
+msgstr "A 3. legsegítőkészebb értékelő"
 
 #: app/blueprints/users/profile.py:124
 #, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
-msgstr ""
+msgstr "Ezzel került %(display_name)s a csúcsra %(perc)s%%"
 
 #: app/blueprints/users/profile.py:128
 #, python-format
 msgid "Top %(perc)s%% reviewer"
-msgstr ""
+msgstr "Legjobb %(perc)s bíráló"
 
 #: app/blueprints/users/profile.py:129
 #, python-format
 msgid "Only %(place)d users have written more helpful reviews."
-msgstr ""
+msgstr "Csak a %(place)d felhasználók írták hasznosabb véleményeket."
 
 #: app/blueprints/users/profile.py:134
 msgid "Consider writing more helpful reviews to get a medal."
-msgstr ""
+msgstr "Fontolja meg, hogy több hasznos véleményt írjon az érem megszerzéséhez."
 
 #: app/blueprints/users/profile.py:136
 #, python-format
 msgid "You are in place %(place)s."
-msgstr ""
+msgstr "Ön a következő helyen van %(place)s."
 
 #: app/blueprints/users/profile.py:164
 #, python-format
 msgid "Top %(type)s"
-msgstr ""
+msgstr "Legjobb %(type)s"
 
 #: app/blueprints/users/profile.py:166
 #, python-format
 msgid "Top %(group)d %(type)s"
-msgstr ""
+msgstr "Legjobb %(group)d%(type)s"
 
 #: app/blueprints/users/profile.py:175
 #, python-format
 msgid "%(display_name)s has a %(type)s placed at #%(place)d."
-msgstr ""
+msgstr "%(display_name)s egy %(type)s áthelyezve # %(place)d."
 
 #: app/blueprints/users/profile.py:190
 #, python-format
 msgid "Your packages have %(downloads)d downloads in total."
-msgstr ""
+msgstr "A csomagjai %(downloads)d letöltés összesen."
 
 #: app/blueprints/users/profile.py:191
 msgid "First medal is at 50k."
-msgstr ""
+msgstr "Az első érem 50 ezer."
 
 #: app/blueprints/users/profile.py:196
 msgid ">300k downloads"
-msgstr ""
+msgstr "&gt;300 ezer letöltés"
 
 #: app/blueprints/users/profile.py:199
 msgid ">100k downloads"
-msgstr ""
+msgstr "&gt;100 ezer letöltés"
 
 #: app/blueprints/users/profile.py:202
 msgid ">75k downloads"
-msgstr ""
+msgstr "&gt;75 ezer letöltés"
 
 #: app/blueprints/users/profile.py:205
 msgid ">50k downloads"
-msgstr ""
+msgstr "&gt;50 ezer letöltés"
 
 #: app/blueprints/users/profile.py:206
 #, python-format
 msgid "Has received %(downloads)d downloads across all packages."
-msgstr ""
+msgstr "Fogadott %(downloads)d letöltések az összes csomagban."
 
 #: app/blueprints/users/settings.py:19 app/templates/users/profile.html:17
 #: app/templates/users/profile_edit.html:8
 msgid "Edit Profile"
-msgstr ""
+msgstr "Profil Szerkesztése"
 
 #: app/blueprints/users/settings.py:24 app/templates/users/account.html:12
 msgid "Account and Security"
-msgstr ""
+msgstr "Fiók és Biztonság"
 
 #: app/blueprints/users/settings.py:29
 #: app/templates/users/settings_email.html:8
 msgid "Email and Notifications"
-msgstr ""
+msgstr "Email és Értesítések"
 
 #: app/blueprints/users/settings.py:34 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
-msgstr ""
+msgstr "API-Tokenek"
 
 #: app/blueprints/users/settings.py:42 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:35
 msgid "Moderator Tools"
-msgstr ""
+msgstr "Moderátor Eszközök"
 
 #: app/blueprints/users/settings.py:52
 msgid "Donation URL"
-msgstr ""
+msgstr "Az adományozás URL-je"
 
 #: app/blueprints/users/settings.py:66 app/blueprints/users/settings.py:72
 msgid "A user already has that name"
-msgstr ""
+msgstr "Van már felhasználó ezzel a névvel"
 
 #: app/blueprints/users/settings.py:224
 msgid "Users with moderator rank or above cannot be deleted"
-msgstr ""
+msgstr "A moderátori vagy magasabb rangú felhasználók nem törölhetők"
 
 #: app/blueprints/users/settings.py:264
 msgid "Display name"
-msgstr ""
+msgstr "Megjelenítendő név"
 
 #: app/blueprints/users/settings.py:265
 msgid "Forums Username"
-msgstr ""
+msgstr "Fórum Felhasználónév"
 
 #: app/blueprints/users/settings.py:266
 msgid "GitHub Username"
-msgstr ""
+msgstr "GitHub Felhasználónév"
 
 #: app/blueprints/users/settings.py:267 app/templates/users/list.html:14
 msgid "Rank"
-msgstr ""
+msgstr "Rang"
 
 #: app/blueprints/users/settings.py:311
 msgid "Can't promote a user to a rank higher than yourself!"
-msgstr ""
+msgstr "Nem léptethet fel egy felhasználót sajátjánál magasabb rangra!"
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "Keresendő szöveg (regex)"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Fájlszűrő"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
 #: app/templates/todo/tags.html:15
@@ -890,47 +884,51 @@ msgid "Search"
 msgstr "Keresés"
 
 #: app/logic/packages.py:95
-#, fuzzy
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
-msgstr "Csak kisbetűk (a-z), számjegyek (0-9) és aláhúzásjelek (_)"
+msgstr ""
+"A név csak kisbetűket (a-z), számjegyeket (0-9) és aláhúzásjelet (_) "
+"tartalmazhat"
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "Nincs engedélye a csomag szerkesztésére"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "Nincs jogosultsága a csomagnév megváltoztatására"
 
 #: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr ""
+msgstr "Nem sikerült hozzáadni a védett címkét a %(title)s csomaghoz"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "Nincs engedélye kiadások készítésére"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Túl sok kiadást hozott létre ehhez a csomaghoz az elmúlt 5 percben. Kérjük, "
+"várjon, mielőtt újra próbálkozna"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
+"Érvénytelen véglegesítési hash; 40 karakterből kell állnia 16 bázis "
+"karakterlánccal"
 
 #: app/logic/screenshots.py:16
-#, fuzzy
 msgid "Too many requests, please wait before trying again"
-msgstr "Kérjük, várjon, mielőtt újra hozzászólna"
+msgstr "Túl sok kérés. Kérjük, várjon, mielőtt újra próbálkozna"
 
 #: app/logic/screenshots.py:18
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "PNG vagy JPG képfájl"
 
 #: app/logic/screenshots.py:35
 #, python-format
@@ -938,15 +936,17 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
+"A képernyőkép túl kicsi, legalább ilyennek kell lennie %(width)s X %(height)"
+"s pixel"
 
 #: app/logic/uploads.py:52
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Kérjük, töltse fel %(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "A feltöltött kép valójában nem kép"
 
 #: app/models/packages.py:65
 msgid "Mod"
@@ -3602,4 +3602,3 @@ msgstr ""
 #~ " creator, the package owner, and "
 #~ "users of Approver rank or above."
 #~ msgstr ""
-
