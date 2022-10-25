@@ -7,6 +7,31 @@ from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
 
+class GameJam:
+	cover_image = type("", (), dict(url="https://raw.githubusercontent.com/GreenXenith/minetestgamejam/master/2022/images/banner.png"))()
+	tags = []
+
+	def getCoverImageURL(self):
+		return "https://raw.githubusercontent.com/GreenXenith/minetestgamejam/master/2022/images/banner.png"
+
+	def getURL(self, _name):
+		return "/gamejam/"
+
+	title = "Minetest Game Jam 2022"
+	author = None
+
+	short_desc = "It's back! We're holding a 3-week Game Jam starting November 1st. Sharpen your gamedev skills with a " \
+				 "chance for cash prizes. "
+	type = type("", (), dict(value="Competition"))()
+	content_warnings = []
+	reviews = []
+
+
+@bp.route("/gamejam/")
+def gamejam():
+	return redirect("https://forum.minetest.net/viewtopic.php?t=28802")
+
+
 @bp.route("/")
 def home():
 	def join(query):
@@ -18,6 +43,7 @@ def home():
 	count   = query.count()
 
 	featured = query.filter(Package.tags.any(name="featured")).order_by(func.random()).limit(6).all()
+	featured.insert(0, GameJam())
 
 	new     = join(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
