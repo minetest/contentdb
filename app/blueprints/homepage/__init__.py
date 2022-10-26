@@ -7,12 +7,15 @@ from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
 
+GAMEJAM_BANNER = "https://raw.githubusercontent.com/GreenXenith/minetestgamejam/master/2022/images/banner_textless.png"
+
+
 class GameJam:
-	cover_image = type("", (), dict(url="https://raw.githubusercontent.com/GreenXenith/minetestgamejam/master/2022/images/banner.png"))()
+	cover_image = type("", (), dict(url=GAMEJAM_BANNER))()
 	tags = []
 
 	def getCoverImageURL(self):
-		return "https://raw.githubusercontent.com/GreenXenith/minetestgamejam/master/2022/images/banner.png"
+		return GAMEJAM_BANNER
 
 	def getURL(self, _name):
 		return "/gamejam/"
