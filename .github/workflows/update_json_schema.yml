@@ -1,0 +1,36 @@
+name: Update JSON Schema
+
+on:
+  schedule:
+    # Run every day
+    - cron: "0 0 * * *"
+
+# IMPORTANT: Do not run this workflow on pull request since this workflow
+# has permission to modify contents.
+
+permissions:
+  contents: write
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Run Updater
+        run: cd docs && python3 ./docs/cdb_schema_update.py
+      - name: Check if Changed
+        run: |
+          if [[ `git status --porcelain` ]]; then
+            echo "CHANGED=true" >> "$GITHUB_ENV"
+            echo "Changes detected"
+          else
+            echo "No changes detected"
+          fi
+      - name: Commit and Push
+        if: ${{ env.CHANGED == 'true' }}
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add ./docs/cdb_schema.json
+          git commit -m "Update JSON Schema for `.cdb.json`"
+          git push "https://${GITHUB_ACTOR}:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git"
