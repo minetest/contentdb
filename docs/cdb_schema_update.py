@@ -36,6 +36,8 @@ for i in res_tags:
 
 # FETCH CONTENT WARNINGS
 
+print("Fetching Content Warnings")
+
 res_warn = requests.get(SERVER + "/api/content_warnings/").json()
 
 warn_names = []
@@ -48,13 +50,14 @@ for i in res_warn:
 
 # UPDATE SCHEMAT
 
+print("Updating Schemat")
+
 with open("cdb_schema.json", "r") as f:
     content = json.loads(f.read())
-    print(content)
 
 with open("cdb_schema.json", "w") as f:
-    content["definitions"]["license"]["enum"] = licenses_names
-    content["definitions"]["license"]["enumDescriptions"] = licenses_descs
+    content["$defs"]["license"]["enum"] = licenses_names
+    content["$defs"]["license"]["enumDescriptions"] = licenses_descs
 
     content["properties"]["tags"]["items"]["enum"] = tags_names
     content["properties"]["tags"]["items"]["enumDescriptions"] = tags_descs
