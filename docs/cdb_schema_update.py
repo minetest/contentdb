@@ -50,7 +50,7 @@ for i in res_warn:
 
 # UPDATE SCHEMAT
 
-print("Updating Schemat")
+print("Updating Schema")
 
 with open("cdb_schema.json", "r") as f:
     content = json.loads(f.read())
