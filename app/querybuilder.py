@@ -1,4 +1,5 @@
 from flask import abort, current_app
+from flask_babel import lazy_gettext
 from sqlalchemy import or_
 from sqlalchemy.orm import subqueryload
 from sqlalchemy.sql.expression import func
@@ -10,9 +11,28 @@ from .utils import isYes, get_int_or_abort
 
 
 class QueryBuilder:
-	title  = None
 	types  = None
 	search = None
+
+	@property
+	def title(self):
+		if len(self.types) == 1:
+			package_type = str(self.types[0].plural)
+		else:
+			package_type = lazy_gettext("Packages")
+
+		if len(self.tags) == 0:
+			ret = package_type
+		elif len(self.tags) == 1:
+			ret = self.tags[0].title + " " + package_type
+		else:
+			tags = ", ".join([tag.title for tag in self.tags])
+			ret = f"{tags} - {package_type}"
+
+		if self.search:
+			ret = f"{self.search} - {ret}"
+
+		return ret
 
 	def __init__(self, args):
 		title = "Packages"
@@ -21,8 +41,6 @@ class QueryBuilder:
 		types = args.getlist("type")
 		types = [PackageType.get(tname) for tname in types]
 		types = [type for type in types if type is not None]
-		if len(types) > 0:
-			title = ", ".join([str(type.plural) for type in types])
 
 		# Get tags types
 		tags = args.getlist("tag")
@@ -32,7 +50,6 @@ class QueryBuilder:
 		# Hide
 		self.hide_flags = set(args.getlist("hide"))
 
-		self.title  = title
 		self.types  = types
 		self.tags   = tags
 
