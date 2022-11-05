@@ -114,6 +114,9 @@ def download_release(package, id):
 
 	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
 	if ip is not None and not is_user_bot():
+		is_minetest = (request.headers.get("User-Agent") or "").startswith("Minetest")
+		PackageDailyStats.update(package, is_minetest, request.args.get("reason"))
+
 		key = make_download_key(ip, release.package)
 		if not has_key(key):
 			set_key(key, "true")
@@ -130,7 +133,7 @@ def download_release(package, id):
 					"score": Package.score + bonus
 				})
 
-			db.session.commit()
+		db.session.commit()
 
 	return redirect(release.url)
 

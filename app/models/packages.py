@@ -23,6 +23,7 @@ from flask_babel import lazy_gettext
 from flask_sqlalchemy import BaseQuery
 from sqlalchemy_searchable import SearchQueryMixin
 from sqlalchemy_utils.types import TSVectorType
+from sqlalchemy.dialects.postgresql import insert
 
 from . import db
 from .users import Permission, UserRank, User
@@ -1200,3 +1201,49 @@ class PackageAlias(db.Model):
 
 	def getAsDictionary(self):
 		return f"{self.author}/{self.name}"
+
+
+class PackageDailyStats(db.Model):
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), primary_key=True)
+	package = db.relationship("Package", foreign_keys=[package_id])
+	date = db.Column(db.Date, primary_key=True)
+
+	platform_minetest = db.Column(db.Integer, nullable=False, default=0)
+	platform_other = db.Column(db.Integer, nullable=False, default=0)
+
+	reason_new = db.Column(db.Integer, nullable=False, default=0)
+	reason_dependency = db.Column(db.Integer, nullable=False, default=0)
+	reason_update = db.Column(db.Integer, nullable=False, default=0)
+
+	@staticmethod
+	def update(package: Package, is_minetest: bool, reason: str):
+		date = datetime.date.today()
+		to_update = dict()
+		kwargs = {
+			"package_id": package.id, "date": date
+		}
+
+		field_platform = "platform_minetest" if is_minetest else "platform_other"
+		to_update[field_platform] = getattr(PackageDailyStats, field_platform) + 1
+		kwargs[field_platform] = 1
+
+		field_reason = None
+		if reason == "new":
+			field_reason = "reason_new"
+		elif reason == "dep":
+			field_reason = "reason_dependency"
+		elif reason == "update":
+			field_reason = "./reason_update"
+
+		if field_reason:
+			to_update[field_reason] = getattr(PackageDailyStats, field_reason) + 1
+			kwargs[field_reason] = 1
+
+		stmt = insert(PackageDailyStats).values(**kwargs)
+		stmt = stmt.on_conflict_do_update(
+			index_elements=[PackageDailyStats.package_id, PackageDailyStats.date],
+			set_=to_update
+		)
+
+		conn = db.session.connection()
+		conn.execute(stmt)
