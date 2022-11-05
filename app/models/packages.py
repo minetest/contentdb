@@ -1230,10 +1230,10 @@ class PackageDailyStats(db.Model):
 		field_reason = None
 		if reason == "new":
 			field_reason = "reason_new"
-		elif reason == "dep":
+		elif reason == "dependency":
 			field_reason = "reason_dependency"
 		elif reason == "update":
-			field_reason = "./reason_update"
+			field_reason = "reason_update"
 
 		if field_reason:
 			to_update[field_reason] = getattr(PackageDailyStats, field_reason) + 1
