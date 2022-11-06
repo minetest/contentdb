@@ -115,13 +115,18 @@ def download_release(package, id):
 	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
 	if ip is not None and not is_user_bot():
 		is_minetest = (request.headers.get("User-Agent") or "").startswith("Minetest")
-		PackageDailyStats.update(package, is_minetest, request.args.get("reason"))
+		reason = request.args.get("reason")
+		PackageDailyStats.update(package, is_minetest, reason)
 
 		key = make_download_key(ip, release.package)
 		if not has_key(key):
 			set_key(key, "true")
 
-			bonus = 1
+			bonus = 0
+			if reason == "new":
+				bonus = 1
+			elif reason == "dependency" or reason == "update":
+				bonus = 0.5
 
 			PackageRelease.query.filter_by(id=release.id).update({
 					"downloads": PackageRelease.downloads + 1
