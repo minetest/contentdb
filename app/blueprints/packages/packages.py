@@ -708,3 +708,10 @@ def game_support(package):
 	return render_template("packages/game_support.html", package=package, form=form,
 			mod_conf_lines=mod_conf_lines, force_game_detection=force_game_detection,
 			tabs=get_package_tabs(current_user, package), current_tab="game_support")
+
+
+@bp.route("/packages/<author>/<name>/stats/")
+@is_package_page
+def stats(package):
+	return render_template("packages/stats.html",
+		package=package, tabs=get_package_tabs(current_user, package), current_tab="stats")

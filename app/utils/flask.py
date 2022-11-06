@@ -82,7 +82,6 @@ def url_set_query(**kwargs):
 		else:
 			args.setlist(key, [ value ])
 
-
 	dargs = dict(args.lists())
 	if request.view_args:
 		dargs.update(request.view_args)

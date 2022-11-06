@@ -164,8 +164,7 @@
 						</span>
 					</a>
 					{% if release %}
-						<a class="btn" rel="nofollow" href="{{ package.getURL("packages.download") }}" title="{{ _("Downloads") }}"
-								download="{{ release.getDownloadFileName() }}">
+						<a class="btn" rel="nofollow" href="{{ package.getURL('packages.stats') }}" title="{{ _('Statistics') }}">
 							<i class="fas fa-download"></i>
 							<span class="count">{{ package.downloads }}</span>
 						</a>
@@ -544,16 +543,19 @@
 				</div>
 
 				<p class="mt-3">
+					<a href="{{ package.getURL('packages.stats') }}">
+						<i class="fas fa-chart-line mr-1"></i>
+						{{ _("Statistics") }}
+					</a>
 					{% if package.approved and current_user != package.author %}
+						|
 						<a href="{{ url_for('report.report', url=url_current()) }}">
 							<i class="fas fa-flag mr-1"></i>
 							{{ _("Report") }}
 						</a>
 					{% endif %}
 					{% if package.checkPerm(current_user, "EDIT_PACKAGE") or package.checkPerm(current_user, "APPROVE_NEW") %}
-						{% if package.approved and current_user != package.author %}
-							|
-						{% endif %}
+						|
 						<a href="{{ package.getURL('packages.audit') }}">
 							{{ _("See audit log") }}
 						</a>

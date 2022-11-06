@@ -1,0 +1,54 @@
+{% extends "packages/package_base.html" %}
+
+{% block title %}
+{{ _("Statistics") }}
+{% endblock %}
+
+{% block scriptextra %}
+	<script src="/static/libs/chart.min.js"></script>
+	<script src="/static/libs/chartjs-adapter-date-fns.bundle.min.js"></script>
+	<script src="/static/package_stats.js"></script>
+{% endblock %}
+
+{% block content %}
+	<h2 class="mt-0">{{ self.title() }}</h2>
+	<noscript>
+		<p class="alert alert-danger">
+			{{ _("JavaScript is needed for graphs") }}
+		</p>
+	</noscript>
+	<div class="row mb-5">
+		<div class="col-md-4">
+			<div class="card h-100">
+				<div class="card-body media align-items-center">
+					<i class="fas fa-download ml-2 mr-4 text-size" style="font-size: 45px; color: #999;"></i>
+					<div class="media-body">
+						<div class="mt-0 h4">
+							{{ package.downloads }}
+						</div>
+						<div class="my-0">
+							{{ _("Lifetime downloads") }}
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="loading">{{ _("Loading...") }}</div>
+	<div id="stats-root" data-source="{{ package.getURL('api.package_stats') }}">
+		<h3>{{ _("Downloads") }}</h3>
+
+		<h4>{{ _("Client") }}</h4>
+		<p class="text-muted">
+			{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}
+		</p>
+		<canvas id="chart-platform" class="chart"></canvas>
+
+		<h4 class="mt-5">{{ _("Reason") }}</h4>
+		<p class="text-muted">
+			{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}
+		</p>
+		<canvas id="chart-reason" class="chart"></canvas>
+		<canvas id="chart-reason-pie" class="chart mt-4"></canvas>
+	</div>
+{% endblock %}
