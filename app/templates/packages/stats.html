@@ -1,17 +1,17 @@
 {% extends "packages/package_base.html" %}
 
 {% block title %}
-{{ _("Statistics") }}
+{{ _("Statistics") }} - {{ package.title }}
 {% endblock %}
 
 {% block scriptextra %}
 	<script src="/static/libs/chart.min.js"></script>
 	<script src="/static/libs/chartjs-adapter-date-fns.bundle.min.js"></script>
-	<script src="/static/package_stats.js"></script>
+	<script src="/static/package_stats.js?v=2"></script>
 {% endblock %}
 
 {% block content %}
-	<h2 class="mt-0">{{ self.title() }}</h2>
+	<h2 class="mt-0">{{ _("Statistics") }}</h2>
 	<noscript>
 		<p class="alert alert-danger">
 			{{ _("JavaScript is needed for graphs") }}
@@ -35,7 +35,7 @@
 		</div>
 	</div>
 	<div id="loading">{{ _("Loading...") }}</div>
-	<div id="stats-root" data-source="{{ package.getURL('api.package_stats') }}">
+	<div id="stats-root" data-source="{{ package.getURL('api.package_stats') }}" style="display: none;">
 		<h3>{{ _("Downloads") }}</h3>
 
 		<h4>{{ _("Client") }}</h4>
@@ -45,10 +45,30 @@
 		<canvas id="chart-platform" class="chart"></canvas>
 
 		<h4 class="mt-5">{{ _("Reason") }}</h4>
+		<ul>
+			<li>{{ _("<b>New Install</b>: the user clicked [Install] inside of Minetest.") }}</li>
+			<li>{{ _("<b>Dependency</b>: was installed automatically to fulfill a dependency.") }}</li>
+			<li>{{ _("<b>Update</b>: download was to update the package.") }}</li>
+			<li>{{ _("<b>Other / Unknown</b>: downloaded by a web browser or an outdated Minetest version (before 5.5).") }}</li>
+		</ul>
 		<p class="text-muted">
 			{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}
 		</p>
 		<canvas id="chart-reason" class="chart"></canvas>
-		<canvas id="chart-reason-pie" class="chart mt-4"></canvas>
+		<div class="row">
+			<div class="col-md-6">
+				<canvas id="chart-reason-pie" class="chart mt-4"></canvas>
+			</div>
+		</div>
+
+		<h3>{{ _("Need more stats?") }}</h3>
+		<p>
+			{{ _("Check out the ContentDB Grafana dashboard for CDB-wide stats") }}
+		</p>
+		<p>
+			<a href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb" class="btn btn-primary">
+				{{ _("ContentDB Grafana") }}
+			</a>
+		</p>
 	</div>
 {% endblock %}

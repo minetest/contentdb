@@ -40,6 +40,7 @@ async function load_data() {
 				- json.reason_update[i]);
 
 	document.getElementById("loading").style.display = "none";
+	root.style.display = "block";
 
 	function getData(list) {
 		return list.map((value, i) => ({ x: json.dates[i], y: value }));
