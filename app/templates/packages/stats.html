@@ -7,7 +7,7 @@
 {% block scriptextra %}
 	<script src="/static/libs/chart.min.js"></script>
 	<script src="/static/libs/chartjs-adapter-date-fns.bundle.min.js"></script>
-	<script src="/static/package_charts.js"></script>
+	<script src="/static/package_charts.js?v=2"></script>
 {% endblock %}
 
 {% block content %}
@@ -35,6 +35,9 @@
 		</div>
 	</div>
 	<div id="loading">{{ _("Loading...") }}</div>
+	<div id="empty-view" style="display: none;">
+		{{ _("No data") }}
+	</div>
 	<div id="stats-root" data-source="{{ package.getURL('api.package_stats') }}" style="display: none;">
 		<h3>{{ _("Downloads") }}</h3>
 

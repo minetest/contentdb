@@ -34,12 +34,18 @@ async function load_data() {
 	const response = await fetch(source);
 	const json = await response.json();
 
+	document.getElementById("loading").style.display = "none";
+
+	if (json == null) {
+		document.getElementById("empty-view").style.display = "block";
+		return;
+	}
+
 	const jsonOther = json.platform_minetest.map((value, i) =>
 			value + json.platform_other[i]
 				- json.reason_new[i] - json.reason_dependency[i]
 				- json.reason_update[i]);
 
-	document.getElementById("loading").style.display = "none";
 	root.style.display = "block";
 
 	function getData(list) {
