@@ -1220,7 +1220,8 @@ class PackageDailyStats(db.Model):
 
 	@staticmethod
 	def update(package: Package, is_minetest: bool, reason: str):
-		date = datetime.date.today()
+		date = datetime.datetime.utcnow().date()
+
 		to_update = dict()
 		kwargs = {
 			"package_id": package.id, "date": date
