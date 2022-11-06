@@ -468,6 +468,9 @@ class Package(db.Model):
 	aliases = db.relationship("PackageAlias",  foreign_keys="PackageAlias.package_id",
 			back_populates="package", cascade="all, delete, delete-orphan")
 
+	daily_stats = db.relationship("PackageDailyStats", foreign_keys="PackageDailyStats.package_id",
+			back_populates="package", cascade="all, delete, delete-orphan", lazy="dynamic")
+
 	def __init__(self, package=None):
 		if package is None:
 			return
@@ -1205,7 +1208,7 @@ class PackageAlias(db.Model):
 
 class PackageDailyStats(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), primary_key=True)
-	package = db.relationship("Package", foreign_keys=[package_id])
+	package = db.relationship("Package", back_populates="daily_stats", foreign_keys=[package_id])
 	date = db.Column(db.Date, primary_key=True)
 
 	platform_minetest = db.Column(db.Integer, nullable=False, default=0)

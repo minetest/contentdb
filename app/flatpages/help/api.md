@@ -108,6 +108,16 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
                 package dependency (`author/name`).
         * `optional_depends`: list of optional dependencies
             * Same as above.
+* GET `/api/packages/<username>/<name>/stats/`
+    * Returns daily stats for package, or null if there is no data.
+    * EXPERIMENTAL. This API may change without warning.
+    * A table with the following keys:
+        * `dates`: list of dates in isoformat
+        * `platform_minetest`: list of integers per date
+        * `platform_other`: list of integers per date
+        * `reason_new`: list of integers per date
+        * `reason_dependency`: list of integers per date
+        * `reason_update`: list of integers per date
 
 You can download a package by building one of the two URLs:
 

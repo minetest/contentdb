@@ -35,6 +35,8 @@ from .support import error, api_create_vcs_release, api_create_zip_release, api_
 	api_order_screenshots, api_edit_package, api_set_cover_image
 from functools import wraps
 
+from ...logic.graphs import flatten_data
+
 
 def cors_allowed(f):
 	@wraps(f)
@@ -431,6 +433,13 @@ def list_all_reviews():
 		},
 		"items": [review.getAsDictionary(True) for review in pagination.items],
 	})
+
+
+@bp.route("/api/packages/<author>/<name>/stats/")
+@is_package_page
+@cors_allowed
+def package_stats(package: Package):
+	return jsonify(flatten_data(package))
 
 
 @bp.route("/api/scores/")
