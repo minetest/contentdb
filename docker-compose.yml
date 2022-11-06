@@ -22,7 +22,9 @@ services:
       - 5123:5123
     volumes:
       - "./data/uploads:/var/cdb/uploads"
+      - "./data/logs:/var/cdb/logs"
       - "./app:/source/app"
+      - "./utils:/source/utils"
       - "./migrations:/source/migrations"
     depends_on:
       - db
