@@ -106,15 +106,15 @@ async function load_data() {
 			type: "doughnut",
 			data: data,
 			options: {
-			plugins: {
-				legend: {
-					position: "right",
-					labels: {
-						color: labelColor,
+				responsive: true,
+				plugins: {
+					legend: {
+						labels: {
+							color: labelColor,
+						},
 					},
 				},
-			},
-		}
+			}
 		};
 		new Chart(ctx, config);
 	}

@@ -7,7 +7,7 @@
 {% block scriptextra %}
 	<script src="/static/libs/chart.min.js"></script>
 	<script src="/static/libs/chartjs-adapter-date-fns.bundle.min.js"></script>
-	<script src="/static/package_charts.js?v=2"></script>
+	<script src="/static/package_charts.js?v=3"></script>
 {% endblock %}
 
 {% block content %}
@@ -39,15 +39,13 @@
 		{{ _("No data") }}
 	</div>
 	<div id="stats-root" data-source="{{ package.getURL('api.package_stats') }}" style="display: none;">
-		<h3>{{ _("Downloads") }}</h3>
-
-		<h4>{{ _("Client") }}</h4>
+		<h3>{{ _("Downloads by Client") }}</h3>
 		<p class="text-muted">
 			{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}
 		</p>
 		<canvas id="chart-platform" class="chart"></canvas>
 
-		<h4 class="mt-5">{{ _("Reason") }}</h4>
+		<h3 class="mt-5">{{ _("Downloads by Reason") }}</h3>
 		<ul>
 			<li>{{ _("<b>New Install</b>: the user clicked [Install] inside of Minetest.") }}</li>
 			<li>{{ _("<b>Dependency</b>: was installed automatically to fulfill a dependency.") }}</li>
@@ -58,13 +56,13 @@
 			{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}
 		</p>
 		<canvas id="chart-reason" class="chart"></canvas>
-		<div class="row">
+		<div class="row mt-4 mb-5">
 			<div class="col-md-6">
-				<canvas id="chart-reason-pie" class="chart mt-4"></canvas>
+				<canvas id="chart-reason-pie" class="chart"></canvas>
 			</div>
 		</div>
 
-		<h3>{{ _("Need more stats?") }}</h3>
+		<h3 style="margin-top: 6em;">{{ _("Need more stats?") }}</h3>
 		<p>
 			{{ _("Check out the ContentDB Grafana dashboard for CDB-wide stats") }}
 		</p>
