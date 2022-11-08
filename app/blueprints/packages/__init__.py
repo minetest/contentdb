@@ -55,7 +55,7 @@ def get_package_tabs(user: User, package: Package):
 		{
 			"id": "stats",
 			"title": gettext("Statistics"),
-			"url": package.getURL("packages.stats")
+			"url": package.getURL("packages.statistics")
 		},
 		{
 			"id": "share",

@@ -16,7 +16,7 @@
 import typing
 from urllib.parse import quote as urlescape
 
-from flask import render_template
+from flask import render_template, make_response
 from celery import uuid
 from flask_wtf import FlaskForm
 from flask_login import login_required
@@ -712,6 +712,31 @@ def game_support(package):
 
 @bp.route("/packages/<author>/<name>/stats/")
 @is_package_page
-def stats(package):
+def statistics(package):
 	return render_template("packages/stats.html",
 		package=package, tabs=get_package_tabs(current_user, package), current_tab="stats")
+
+
+@bp.route("/packages/<author>/<name>/stats.csv")
+@is_package_page
+def stats_csv(package):
+	stats: List[PackageDailyStats] = package.daily_stats.order_by(db.asc(PackageDailyStats.date)).all()
+
+	columns = ["platform_minetest", "platform_other", "reason_new",
+				"reason_dependency", "reason_update"]
+
+	result = "Date, " + ", ".join(columns) + "\n"
+
+	for stat in stats:
+		stat: PackageDailyStats
+		result += stat.date.isoformat()
+		for i, key in enumerate(columns):
+			result += ", " + str(getattr(stat, key))
+		result += "\n"
+
+	date = datetime.datetime.utcnow().date()
+
+	res = make_response(result, 200)
+	res.headers["Content-Disposition"] = f"attachment; filename={package.author.username}_{package.name}_stats_{date.isoformat()}.csv"
+	res.headers["Content-type"] = "text/csv"
+	return res

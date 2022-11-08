@@ -11,6 +11,10 @@
 {% endblock %}
 
 {% block content %}
+	<a class="btn btn-secondary float-right" href="{{ package.getURL('packages.stats_csv') }}">
+		<i class="fas fa-download mr-1"></i>
+		{{ _("Download (.csv)") }}
+	</a>
 	<h2 class="mt-0">{{ _("Statistics") }}</h2>
 	<noscript>
 		<p class="alert alert-danger">
