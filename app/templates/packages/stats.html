@@ -7,38 +7,74 @@
 {% block scriptextra %}
 	<script src="/static/libs/chart.min.js"></script>
 	<script src="/static/libs/chartjs-adapter-date-fns.bundle.min.js"></script>
-	<script src="/static/package_charts.js?v=3"></script>
+	<script src="/static/package_charts.js?v=4"></script>
 {% endblock %}
 
 {% block content %}
 	<h2 class="mt-0">{{ _("Statistics") }}</h2>
 	<noscript>
 		<p class="alert alert-danger">
-			{{ _("JavaScript is needed for graphs") }}
+			{{ _("JavaScript is required to display charts and statistics") }}
 		</p>
 	</noscript>
 	<div class="row mb-5">
 		<div class="col-md-4">
 			<div class="card h-100">
-				<div class="card-body media align-items-center">
-					<i class="fas fa-download ml-2 mr-4 text-size" style="font-size: 45px; color: #999;"></i>
-					<div class="media-body">
-						<div class="mt-0 h4">
-							{{ package.downloads }}
-						</div>
-						<div class="my-0">
-							{{ _("Lifetime downloads") }}
-						</div>
+				<div class="card-body align-items-center text-center">
+					<div class="mt-0 mb-3">
+						<i class="fas fa-download mr-1"></i>
+						{{ _("Lifetime unique downloads") }}
+					</div>
+					<div class="my-0 h4">
+						{{ package.downloads }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="card h-100">
+				<div class="card-body align-items-center text-center">
+					<div class="mt-0 mb-3">
+						<i class="fas fa-download mr-1"></i>
+						{{ _("Downloads, past 7 days") }}
+					</div>
+					<div class="my-0 h4">
+						<span id='downloads_total7d'></span>
+						<small class="text-muted ml-2">
+							({{ _("%(downloads)s per day", downloads=("<span id='downloads_avg7d'></span>" | safe)) }})
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4" id="downloads30">
+			<div class="card h-100">
+				<div class="card-body align-items-center text-center">
+					<div class="mt-0 mb-3">
+						<i class="fas fa-download mr-1"></i>
+						{{ _("Downloads, past 30 days") }}
+					</div>
+					<div class="my-0 h4">
+						<span id='downloads_total30d'></span>
+						<small class="text-muted ml-2">
+							({{ _("%(downloads)s per day", downloads=("<span id='downloads_avg30d'></span>" | safe)) }})
+						</small>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<div id="loading">{{ _("Loading...") }}</div>
+
 	<div id="empty-view" style="display: none;">
 		{{ _("No data") }}
 	</div>
+
 	<div id="stats-root" data-source="{{ package.getURL('api.package_stats') }}" style="display: none;">
+
 		<h3>{{ _("Downloads by Client") }}</h3>
 		<p class="text-muted">
 			{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}

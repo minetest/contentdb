@@ -25,6 +25,11 @@ function hexToRgb(hex) {
 }
 
 
+function sum(list) {
+	return list.reduce((acc, x) => acc + x, 0);
+}
+
+
 const chartColorsBg = chartColors.map(color => `rgba(${hexToRgb(color.slice(1))}, 0.2)`);
 
 
@@ -41,6 +46,18 @@ async function load_data() {
 		return;
 	}
 
+	const total7 = sum(json.platform_minetest.slice(-7)) + sum(json.platform_other.slice(-7));
+	document.getElementById("downloads_total7d").textContent = total7;
+	document.getElementById("downloads_avg7d").textContent = (total7 / 7).toFixed(0);
+
+	if (json.platform_minetest.length >= 30) {
+		const total30 = sum(json.platform_minetest.slice(-30)) + sum(json.platform_other.slice(-30));
+		document.getElementById("downloads_total30d").textContent = total30;
+		document.getElementById("downloads_avg30d").textContent = (total30 / 30).toFixed(0);
+	} else {
+		document.getElementById("downloads30").style.display = "none";
+	}
+
 	const jsonOther = json.platform_minetest.map((value, i) =>
 			value + json.platform_other[i]
 				- json.reason_new[i] - json.reason_dependency[i]
@@ -50,10 +67,6 @@ async function load_data() {
 
 	function getData(list) {
 		return list.map((value, i) => ({ x: json.dates[i], y: value }));
-	}
-
-	function sum(list) {
-		return list.reduce((acc, x) => acc + x, 0);
 	}
 
 	{
