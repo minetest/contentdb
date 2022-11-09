@@ -89,7 +89,6 @@ async function load_data() {
 		const data = {
 			datasets: Object.entries(json.package_downloads)
 				.sort((a, b) => packageRecentDownloads[a[0]] - packageRecentDownloads[b[0]])
-				.slice(0, 6)
 				.map(([label, values]) => ({ label, data: getData(values) })),
 		};
 		setup_chart(ctx, data);
