@@ -130,6 +130,11 @@
 										{{ _("To do list") }}
 									</a>
 								</li>
+								<li class="nav-item">
+									<a class="nav-link" href="{{ url_for('users.statistics', username=current_user.username) }}">
+										{{ _("Statistics") }}
+									</a>
+								</li>
 								{% if current_user.rank.atLeast(current_user.rank.EDITOR) or check_global_perm(current_user, "CREATE_TAG") %}
 									<li class="dropdown-divider"></li>
 								{% endif %}
