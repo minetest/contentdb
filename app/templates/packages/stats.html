@@ -4,17 +4,20 @@
 {{ _("Statistics") }} - {{ package.title }}
 {% endblock %}
 
-{% from "macros/stats.html" import render_package_stats, render_package_stats_js %}
+{% from "macros/stats.html" import render_package_stats, render_package_stats_js, render_package_selector %}
 
 {% block scriptextra %}
 	{{ render_package_stats_js() }}
 {% endblock %}
 
 {% block content %}
-	<a class="btn btn-secondary float-right" href="{{ package.getURL('packages.stats_csv') }}">
-		<i class="fas fa-download mr-1"></i>
-		{{ _("Download (.csv)") }}
-	</a>
+	<div class="float-right">
+		<a class="btn btn-secondary mr-2" href="{{ package.getURL('packages.stats_csv') }}">
+			<i class="fas fa-download mr-1"></i>
+			{{ _("Download (.csv)") }}
+		</a>
+		{{ render_package_selector(package.author, package=package) }}
+	</div>
 	<h2 class="mt-0">{{ _("Statistics") }}</h2>
 	{{ render_package_stats(package.getURL('api.package_stats'), package.downloads) }}
 {% endblock %}

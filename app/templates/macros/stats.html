@@ -5,6 +5,30 @@
 {% endmacro %}
 
 
+{% macro render_package_selector(user, package=None) %}
+	<nav class="dropdown d-inline-block">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			{% if package %}
+				{{ package.title }}
+			{% else %}
+				{{ _("%(display_name)s's packages", display_name=user.display_name) }}
+			{% endif %}
+		</button>
+		<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<a class="dropdown-item" href="{{ url_for('users.statistics', username=user.username) }}">
+				{{ _("%(display_name)s's packages", display_name=user.display_name) }}
+			</a>
+			<div class="dropdown-divider"></div>
+			{% for package in user.packages.filter_by(state='APPROVED').all() %}
+				<a class="dropdown-item" href="{{ package.getURL('packages.statistics') }}">
+					{{ package.title }}
+				</a>
+			{% endfor %}
+		</div>
+	</nav>
+{% endmacro %}
+
+
 {% macro render_package_stats(source, downloads) %}
 	<noscript>
 		<p class="alert alert-danger">
