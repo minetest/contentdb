@@ -29,13 +29,12 @@ from app.models import Tag, PackageState, PackageType, Package, db, PackageRelea
 	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, isYes
+from app.logic.graphs import get_package_stats, get_package_stats_for_user
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
 	api_order_screenshots, api_edit_package, api_set_cover_image
 from functools import wraps
-
-from ...logic.graphs import flatten_data
 
 
 def cors_allowed(f):
@@ -439,7 +438,7 @@ def list_all_reviews():
 @is_package_page
 @cors_allowed
 def package_stats(package: Package):
-	return jsonify(flatten_data(package))
+	return jsonify(get_package_stats(package))
 
 
 @bp.route("/api/scores/")
@@ -577,3 +576,13 @@ def all_deps():
 		},
 		"items": [format_pkg(pkg) for pkg in pagination.items],
 	})
+
+
+@bp.route("/api/users/<username>/stats/")
+@cors_allowed
+def user_stats(username: str):
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		error(404, "User not found")
+
+	return jsonify(get_package_stats_for_user(user))

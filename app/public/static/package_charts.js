@@ -32,6 +32,7 @@ function sum(list) {
 
 const chartColorsBg = chartColors.map(color => `rgba(${hexToRgb(color.slice(1))}, 0.2)`);
 
+const SECONDS_IN_A_DAY = 1000 * 3600 * 24;
 
 async function load_data() {
 	const root = document.getElementById("stats-root");
@@ -45,6 +46,14 @@ async function load_data() {
 		document.getElementById("empty-view").style.display = "block";
 		return;
 	}
+
+	const startDate = new Date(json.start);
+	const endDate = new Date(json.end);
+	const numberOfDays = Math.round((endDate.valueOf() - startDate.valueOf()) / SECONDS_IN_A_DAY) + 1;
+	const dates = [...Array(numberOfDays)].map((_, i) => {
+		const date = new Date(startDate.valueOf() + i*SECONDS_IN_A_DAY);
+		return date.toISOString().split('T')[0];
+	});
 
 	const total7 = sum(json.platform_minetest.slice(-7)) + sum(json.platform_other.slice(-7));
 	document.getElementById("downloads_total7d").textContent = total7;
@@ -66,7 +75,7 @@ async function load_data() {
 	root.style.display = "block";
 
 	function getData(list) {
-		return list.map((value, i) => ({ x: json.dates[i], y: value }));
+		return list.map((value, i) => ({ x: dates[i], y: value }));
 	}
 
 	{

@@ -110,14 +110,16 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
             * Same as above.
 * GET `/api/packages/<username>/<name>/stats/`
     * Returns daily stats for package, or null if there is no data.
+    * Daily date is done based on the UTC timezone.
     * EXPERIMENTAL. This API may change without warning.
     * A table with the following keys:
-        * `dates`: list of dates in isoformat
-        * `platform_minetest`: list of integers per date
-        * `platform_other`: list of integers per date
-        * `reason_new`: list of integers per date
-        * `reason_dependency`: list of integers per date
-        * `reason_update`: list of integers per date
+        * `from`: start date, inclusive. Ex: 2022-10-22.
+        * `end`: end date, inclusive. Ex: 2022-11-05.
+        * `platform_minetest`: list of integers per day.
+        * `platform_other`: list of integers per day.
+        * `reason_new`: list of integers per day.
+        * `reason_dependency`: list of integers per day.
+        * `reason_update`: list of integers per day.
 
 You can download a package by building one of the two URLs:
 
