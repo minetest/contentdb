@@ -138,7 +138,11 @@ def parseForumListPage(id, page, out, extra=None):
 		left   = topic.find(class_="topic-poster")
 		date   = left.find("time").get_text()
 		date   = datetime.strptime(date, "%a %b %d, %Y %H:%M")
-		author = left.find_all("a")[-1].get_text().strip()
+		links  = left.find_all("a")
+		if len(links) == 0:
+			continue
+
+		author = links[-1].get_text().strip()
 
 		# Get counts
 		posts  = topic.find(class_="posts").find(text=True)
