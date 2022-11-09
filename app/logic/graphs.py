@@ -14,9 +14,6 @@ keys = ["platform_minetest", "platform_other", "reason_new",
 
 
 def _flatten_data(stats):
-	if len(stats) == 0:
-		return None
-
 	start_date = stats[0].date
 	end_date = stats[-1].date
 	result = {
@@ -44,6 +41,9 @@ def _flatten_data(stats):
 
 def get_package_stats(package: Package):
 	stats = package.daily_stats.order_by(db.asc(PackageDailyStats.date)).all()
+	if len(stats) == 0:
+		return None
+
 	return _flatten_data(stats)
 
 
@@ -59,6 +59,8 @@ def get_package_stats_for_user(user: User):
 		.order_by(db.asc(PackageDailyStats.date)) \
 		.group_by(PackageDailyStats.date) \
 		.all()
+	if len(stats) == 0:
+		return None
 
 	results = _flatten_data(stats)
 	results["package_downloads"] = get_package_overview_for_user(user, stats[0].date, stats[-1].date)
