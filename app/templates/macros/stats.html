@@ -1,7 +1,7 @@
 {% macro render_package_stats_js() %}
 	<script src="/static/libs/chart.min.js"></script>
 	<script src="/static/libs/chartjs-adapter-date-fns.bundle.min.js"></script>
-	<script src="/static/package_charts.js?v=5"></script>
+	<script src="/static/package_charts.js?v=6"></script>
 {% endmacro %}
 
 
@@ -92,6 +92,13 @@
 	</div>
 
 	<div id="stats-root" data-source="{{ source }}" style="display: none;">
+		<section id="downloads-by-package" class="d-none">
+			<h3>{{ _("Downloads by Package") }}</h3>
+			<p class="text-muted">
+				{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}
+			</p>
+			<canvas id="chart-packages" class="chart"></canvas>
+		</section>
 
 		<h3>{{ _("Downloads by Client") }}</h3>
 		<p class="text-muted">

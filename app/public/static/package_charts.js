@@ -78,6 +78,23 @@ async function load_data() {
 		return list.map((value, i) => ({ x: dates[i], y: value }));
 	}
 
+	if (json.package_downloads) {
+		const packageRecentDownloads = Object.fromEntries(Object.entries(json.package_downloads)
+			.map(([label, values]) => [label, sum(values.slice(-30))]));
+		console.log(packageRecentDownloads);
+
+		document.getElementById("downloads-by-package").classList.remove("d-none");
+		const ctx = document.getElementById("chart-packages").getContext("2d");
+
+		const data = {
+			datasets: Object.entries(json.package_downloads)
+				.sort((a, b) => packageRecentDownloads[a[0]] - packageRecentDownloads[b[0]])
+				.slice(0, 6)
+				.map(([label, values]) => ({ label, data: getData(values) })),
+		};
+		setup_chart(ctx, data);
+	}
+
 	{
 		const ctx = document.getElementById("chart-platform").getContext("2d");
 		const data = {
@@ -148,9 +165,9 @@ function setup_chart(ctx, data) {
 		const colorIdx = data.datasets.length - i - 1;
 		return {
 			fill: true,
-			backgroundColor: chartColorsBg[colorIdx],
-			borderColor: chartColors[colorIdx],
-			pointBackgroundColor: chartColors[colorIdx],
+			backgroundColor: chartColorsBg[colorIdx] ?? chartColorsBg[0],
+			borderColor: chartColors[colorIdx] ?? chartColors[0],
+			pointBackgroundColor: chartColors[colorIdx] ?? chartColors[0],
 			...set,
 		};
 	});
