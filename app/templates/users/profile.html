@@ -97,10 +97,11 @@
 					</a>
 				{% endif %}
 
+				{% set package_count = user.packages.filter_by(state='APPROVED').count() %}
 				<a class="btn" href="{{ url_for('packages.list_all', author=user.username) }}">
 					<i class="fas fa-box"></i>
 					<span class="count">
-						<strong>{{ user.packages.filter_by(state='APPROVED').count() }}</strong>
+						<strong>{{ package_count }}</strong>
 						{{ _("packages") }}
 					</span>
 				</a>
@@ -121,6 +122,15 @@
 						{{ _("comments") }}
 					</span>
 				</a>
+
+				{% if package_count %}
+					<a class="btn" href="{{ url_for('users.statistics', username=user.username) }}">
+						<i class="fas fa-chart-line"></i>
+						<span class="count">
+							{{ _("Statistics") }}
+						</span>
+					</a>
+				{% endif %}
 			</div>
 		</div>
 	</div>

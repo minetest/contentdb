@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ _("Statistics for %(display_name)s's packages", display_name=user.display_name) }}
+{% endblock %}
+
+{% from "macros/stats.html" import render_package_stats, render_package_stats_js, render_package_selector %}
+
+{% block scriptextra %}
+	{{ render_package_stats_js() }}
+{% endblock %}
+
+{% block content %}
+	<h2 class="mt-0">{{ self.title() }}</h2>
+	{{ render_package_stats(url_for("api.user_stats", username=user.username), downloads) }}
+{% endblock %}

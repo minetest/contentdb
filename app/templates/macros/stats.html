@@ -1,0 +1,105 @@
+{% macro render_package_stats_js() %}
+	<script src="/static/libs/chart.min.js"></script>
+	<script src="/static/libs/chartjs-adapter-date-fns.bundle.min.js"></script>
+	<script src="/static/package_charts.js?v=5"></script>
+{% endmacro %}
+
+
+{% macro render_package_stats(source, downloads) %}
+	<noscript>
+		<p class="alert alert-danger">
+			{{ _("JavaScript is required to display charts and statistics") }}
+		</p>
+	</noscript>
+	<div class="row mb-5">
+		<div class="col-md-4">
+			<div class="card h-100">
+				<div class="card-body align-items-center text-center">
+					<div class="mt-0 mb-3">
+						<i class="fas fa-download mr-1"></i>
+						{{ _("Lifetime unique downloads") }}
+					</div>
+					<div class="my-0 h4">
+						{{ downloads }}
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4">
+			<div class="card h-100">
+				<div class="card-body align-items-center text-center">
+					<div class="mt-0 mb-3">
+						<i class="fas fa-download mr-1"></i>
+						{{ _("Downloads, past 7 days") }}
+					</div>
+					<div class="my-0 h4">
+						<span id='downloads_total7d'></span>
+						<small class="text-muted ml-2">
+							({{ _("%(downloads)s per day", downloads=("<span id='downloads_avg7d'></span>" | safe)) }})
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-4" id="downloads30">
+			<div class="card h-100">
+				<div class="card-body align-items-center text-center">
+					<div class="mt-0 mb-3">
+						<i class="fas fa-download mr-1"></i>
+						{{ _("Downloads, past 30 days") }}
+					</div>
+					<div class="my-0 h4">
+						<span id='downloads_total30d'></span>
+						<small class="text-muted ml-2">
+							({{ _("%(downloads)s per day", downloads=("<span id='downloads_avg30d'></span>" | safe)) }})
+						</small>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="loading">{{ _("Loading...") }}</div>
+
+	<div id="empty-view" style="display: none;">
+		{{ _("No data") }}
+	</div>
+
+	<div id="stats-root" data-source="{{ source }}" style="display: none;">
+
+		<h3>{{ _("Downloads by Client") }}</h3>
+		<p class="text-muted">
+			{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}
+		</p>
+		<canvas id="chart-platform" class="chart"></canvas>
+
+		<h3 class="mt-5">{{ _("Downloads by Reason") }}</h3>
+		<ul>
+			<li>{{ _("<b>New Install</b>: the user clicked [Install] inside of Minetest.") }}</li>
+			<li>{{ _("<b>Dependency</b>: was installed automatically to fulfill a dependency.") }}</li>
+			<li>{{ _("<b>Update</b>: download was to update the package.") }}</li>
+			<li>{{ _("<b>Other / Unknown</b>: downloaded by a web browser or an outdated Minetest version (before 5.5).") }}</li>
+		</ul>
+		<p class="text-muted">
+			{{ _("This is a stacked area graph. For total downloads, look at the combined height.") }}
+		</p>
+		<canvas id="chart-reason" class="chart"></canvas>
+		<div class="row mt-4 mb-5">
+			<div class="col-md-6">
+				<canvas id="chart-reason-pie" class="chart"></canvas>
+			</div>
+		</div>
+
+		<h3 style="margin-top: 6em;">{{ _("Need more stats?") }}</h3>
+		<p>
+			{{ _("Check out the ContentDB Grafana dashboard for CDB-wide stats") }}
+		</p>
+		<p>
+			<a href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb" class="btn btn-primary">
+				{{ _("ContentDB Grafana") }}
+			</a>
+		</p>
+	</div>
+{% endmacro %}

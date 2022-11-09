@@ -252,3 +252,14 @@ def user_check(username):
 	next_url = url_for("users.profile", username=username)
 
 	return redirect(url_for("tasks.check", id=task.id, r=next_url))
+
+
+@bp.route("/users/<username>/stats/")
+def statistics(username):
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		abort(404)
+
+	downloads = db.session.query(func.sum(Package.downloads)).filter(Package.author==user).one()
+
+	return render_template("users/stats.html", user=user, downloads=downloads[0])
