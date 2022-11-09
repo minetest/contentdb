@@ -578,6 +578,16 @@ def all_deps():
 	})
 
 
+@bp.route("/api/users/<username>/")
+@cors_allowed
+def user_view(username: str):
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		error(404, "User not found")
+
+	return jsonify(user.get_dict())
+
+
 @bp.route("/api/users/<username>/stats/")
 @cors_allowed
 def user_stats(username: str):

@@ -166,7 +166,7 @@ Supported query parameters:
     * `short`:  stuff needed for the Minetest client. 
 
 
-## Releases
+### Releases
 
 * GET `/api/releases/` (List)   
     * Limited to 30 most recent releases.
@@ -228,7 +228,7 @@ curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/
 ```
 
 
-## Screenshots
+### Screenshots
 
 * GET `/api/packages/<username>/<name>/screenshots/` (List)
     * Returns array of screenshot dictionaries with keys:
@@ -289,7 +289,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
 ```
 
 
-## Reviews
+### Reviews
 
 * GET `/api/packages/<username>/<name>/reviews/` (List)
     * Returns array of review dictionaries with keys:
@@ -331,6 +331,36 @@ Example:
   }
 ]
 ```
+
+
+## Users
+
+* GET `/api/users/<username>/`
+    * `username`
+    * `display_name`: human-readable name to be displayed in GUIs.
+    * `rank`: ContentDB [rank](/help/ranks_permissions/).
+    * `profile_pic_url`: URL to profile picture, or null.
+    * `website_url`: URL to website, or null.
+    * `donate_url`: URL to donate page, or null.
+    * `connections`: object
+        * `github`: GitHub username, or null.
+        * `forums`: forums username, or null.
+    * `links`: object
+        * `api_packages`: URL to API to list this user's packages.
+        * `profile`: URL to the HTML profile page.
+* GET `/api/users/<username>/stats/`
+    * Returns daily stats for the user's packages, or null if there is no data.
+    * Daily date is done based on the UTC timezone.
+    * EXPERIMENTAL. This API may change without warning.
+    * A table with the following keys:
+        * `from`: start date, inclusive. Ex: 2022-10-22.
+        * `end`: end date, inclusive. Ex: 2022-11-05.
+        * `package_downloads`: map of package title to list of integers per day.
+        * `platform_minetest`: list of integers per day.
+        * `platform_other`: list of integers per day.
+        * `reason_new`: list of integers per day.
+        * `reason_dependency`: list of integers per day.
+        * `reason_update`: list of integers per day.
 
 
 ## Topics

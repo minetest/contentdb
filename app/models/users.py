@@ -18,6 +18,7 @@
 import datetime
 import enum
 
+from flask import url_for
 from flask_login import UserMixin
 from sqlalchemy import desc, text
 
@@ -161,17 +162,17 @@ class User(db.Model, UserMixin):
 
 	# Content
 	notifications = db.relationship("Notification", foreign_keys="Notification.user_id",
-			order_by=desc(text("Notification.created_at")), back_populates="user", cascade="all, delete, delete-orphan")
+									order_by=desc(text("Notification.created_at")), back_populates="user", cascade="all, delete, delete-orphan")
 	caused_notifications = db.relationship("Notification", foreign_keys="Notification.causer_id",
-			back_populates="causer", cascade="all, delete, delete-orphan", lazy="dynamic")
+										   back_populates="causer", cascade="all, delete, delete-orphan", lazy="dynamic")
 	notification_preferences = db.relationship("UserNotificationPreferences", uselist=False, back_populates="user",
-			cascade="all, delete, delete-orphan")
+											   cascade="all, delete, delete-orphan")
 
 	email_verifications = db.relationship("UserEmailVerification", foreign_keys="UserEmailVerification.user_id",
-			back_populates="user", cascade="all, delete, delete-orphan", lazy="dynamic")
+										  back_populates="user", cascade="all, delete, delete-orphan", lazy="dynamic")
 
 	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.causer_id", back_populates="causer",
-			order_by=desc("audit_log_entry_created_at"), lazy="dynamic")
+										order_by=desc("audit_log_entry_created_at"), lazy="dynamic")
 
 	maintained_packages = db.relationship("Package", lazy="dynamic", secondary="maintainers", order_by=db.asc("package_title"))
 
@@ -185,6 +186,24 @@ class User(db.Model, UserMixin):
 
 	ban = db.relationship("UserBan", foreign_keys="UserBan.user_id", back_populates="user", uselist=False)
 
+	def get_dict(self):
+		return {
+			"username": self.username,
+			"display_name": self.display_name,
+			"rank": self.rank.name.lower(),
+			"profile_pic_url": self.profile_pic,
+			"website_url": self.website_url,
+			"donate_url": self.donate_url,
+			"connections": {
+				"github": self.github_username,
+				"forums": self.forums_username,
+			},
+			"links": {
+				"api_packages": url_for("api.packages", author=self.username),
+				"profile": url_for("users.profile", username=self.username),
+			}
+		}
+
 	def __init__(self, username=None, active=False, email=None, password=None):
 		self.username = username
 		self.display_name = username
@@ -195,7 +214,7 @@ class User(db.Model, UserMixin):
 
 	def canAccessTodoList(self):
 		return Permission.APPROVE_NEW.check(self) or \
-				Permission.APPROVE_RELEASE.check(self)
+			   Permission.APPROVE_RELEASE.check(self)
 
 	def isClaimed(self):
 		return self.rank.atLeast(UserRank.NEW_MEMBER)
@@ -272,7 +291,7 @@ class User(db.Model, UserMixin):
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		return Thread.query.filter_by(author=self) \
-			.filter(Thread.created_at > hour_ago).count() < 2 * factor
+				   .filter(Thread.created_at > hour_ago).count() < 2 * factor
 
 	def canReviewRL(self):
 		from app.models import PackageReview
@@ -290,7 +309,7 @@ class User(db.Model, UserMixin):
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		return PackageReview.query.filter_by(author=self) \
-			.filter(PackageReview.created_at > hour_ago).count() < 10 * factor
+				   .filter(PackageReview.created_at > hour_ago).count() < 10 * factor
 
 
 	def __eq__(self, other):
@@ -305,8 +324,8 @@ class User(db.Model, UserMixin):
 
 	def can_see_edit_profile(self, current_user):
 		return self.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
-			self.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
-			self.checkPerm(current_user, Permission.CHANGE_RANK)
+			   self.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
+			   self.checkPerm(current_user, Permission.CHANGE_RANK)
 
 	def can_delete(self):
 		from app.models import ForumTopic
