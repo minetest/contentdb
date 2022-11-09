@@ -254,6 +254,12 @@ def user_check(username):
 	return redirect(url_for("tasks.check", id=task.id, r=next_url))
 
 
+@bp.route("/user/stats/")
+@login_required
+def statistics_redirect():
+	return redirect(url_for("users.statistics", username=current_user.username))
+
+
 @bp.route("/users/<username>/stats/")
 def statistics(username):
 	user = User.query.filter_by(username=username).first()
