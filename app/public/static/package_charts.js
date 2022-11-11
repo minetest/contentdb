@@ -2,6 +2,8 @@
 
 
 const labelColor = "#bbb";
+const annotationColor = "#bbb";
+const annotationLabelBgColor = "#444";
 const gridColor = "#333";
 
 
@@ -13,6 +15,25 @@ const chartColors = [
 	"#1f78c1",
 	"#ba43a9",
 ];
+
+
+const annotationNov5 = {
+	type: 'line',
+	borderColor: annotationColor,
+	borderWidth: 1,
+	click: function({chart, element}) {
+		document.location = "https://fosstodon.org/@rubenwardy/109303281233703275";
+	},
+	label: {
+		backgroundColor: annotationLabelBgColor,
+		content: "YouTube Video",
+		display: true,
+		position: "end",
+		color: "#00bc8c",
+	},
+	scaleID: 'x',
+	value: "2022-11-05",
+};
 
 
 function hexToRgb(hex) {
@@ -81,7 +102,6 @@ async function load_data() {
 	if (json.package_downloads) {
 		const packageRecentDownloads = Object.fromEntries(Object.entries(json.package_downloads)
 			.map(([label, values]) => [label, sum(values.slice(-30))]));
-		console.log(packageRecentDownloads);
 
 		document.getElementById("downloads-by-package").classList.remove("d-none");
 		const ctx = document.getElementById("chart-packages").getContext("2d");
@@ -186,7 +206,13 @@ function setup_chart(ctx, data) {
 					labels: {
 						color: labelColor,
 					}
-				}
+				},
+
+				annotation: {
+					annotations: {
+						annotationNov5,
+					},
+				},
 			},
 			interaction: {
 				mode: "nearest",
