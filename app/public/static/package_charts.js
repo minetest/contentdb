@@ -18,7 +18,7 @@ const chartColors = [
 
 
 const annotationNov5 = {
-	type: 'line',
+	type: "line",
 	borderColor: annotationColor,
 	borderWidth: 1,
 	click: function({chart, element}) {
@@ -30,8 +30,11 @@ const annotationNov5 = {
 		display: true,
 		position: "end",
 		color: "#00bc8c",
+		rotation: "auto",
+		backgroundShadowColor: "rgba(0, 0, 0, 0.4)",
+		shadowBlur: 3,
 	},
-	scaleID: 'x',
+	scaleID: "x",
 	value: "2022-11-05",
 };
 
@@ -73,7 +76,7 @@ async function load_data() {
 	const numberOfDays = Math.round((endDate.valueOf() - startDate.valueOf()) / SECONDS_IN_A_DAY) + 1;
 	const dates = [...Array(numberOfDays)].map((_, i) => {
 		const date = new Date(startDate.valueOf() + i*SECONDS_IN_A_DAY);
-		return date.toISOString().split('T')[0];
+		return date.toISOString().split("T")[0];
 	});
 
 	const total7 = sum(json.platform_minetest.slice(-7)) + sum(json.platform_other.slice(-7));
