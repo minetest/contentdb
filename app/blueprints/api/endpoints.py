@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import math
+from functools import wraps
 from typing import List
 
 import flask_sqlalchemy
@@ -24,17 +25,16 @@ from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
 from app import csrf
+from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_all_package_stats
 from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
 	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, isYes
-from app.logic.graphs import get_package_stats, get_package_stats_for_user
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
 	api_order_screenshots, api_edit_package, api_set_cover_image
-from functools import wraps
 
 
 def cors_allowed(f):
@@ -439,6 +439,12 @@ def list_all_reviews():
 @cors_allowed
 def package_stats(package: Package):
 	return jsonify(get_package_stats(package))
+
+
+@bp.route("/api/package_stats/")
+@cors_allowed
+def all_package_stats():
+	return jsonify(get_all_package_stats())
 
 
 @bp.route("/api/scores/")

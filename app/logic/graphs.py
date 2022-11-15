@@ -1,5 +1,7 @@
 import datetime
 from datetime import timedelta
+from typing import Optional
+
 from app.models import User, Package, PackageDailyStats, db, PackageState
 from sqlalchemy import func
 
@@ -68,11 +70,16 @@ def get_package_stats_for_user(user: User):
 	return results
 
 
-def get_package_overview_for_user(user: User, start_date: datetime.date, end_date: datetime.date):
-	stats = db.session \
+def get_package_overview_for_user(user: Optional[User], start_date: datetime.date, end_date: datetime.date):
+	query = db.session \
 		.query(PackageDailyStats.package_id, PackageDailyStats.date,
-			(PackageDailyStats.platform_minetest + PackageDailyStats.platform_other).label("downloads")) \
-		.filter(PackageDailyStats.package.has(author_id=user.id, state=PackageState.APPROVED)) \
+			(PackageDailyStats.platform_minetest + PackageDailyStats.platform_other).label("downloads"))
+
+	if user:
+		query = query.filter(PackageDailyStats.package.has(author_id=user.id))
+
+	stats = query \
+		.filter(PackageDailyStats.package.has(state=PackageState.APPROVED)) \
 		.order_by(db.asc(PackageDailyStats.package_id), db.asc(PackageDailyStats.date)) \
 		.all()
 
@@ -84,8 +91,12 @@ def get_package_overview_for_user(user: User, start_date: datetime.date, end_dat
 		bucket.append(stat)
 
 	package_title_by_id = {}
-	for package in user.packages.filter_by(state=PackageState.APPROVED).all():
-		package_title_by_id[package.id] = package.title
+	pkg_query = user.packages if user else Package.query
+	for package in pkg_query.filter_by(state=PackageState.APPROVED).all():
+		if user:
+			package_title_by_id[package.id] = package.title
+		else:
+			package_title_by_id[package.id] = package.getId()
 
 	result = {}
 
@@ -105,5 +116,14 @@ def get_package_overview_for_user(user: User, start_date: datetime.date, end_dat
 			else:
 				row.append(0)
 
-
 	return result
+
+
+def get_all_package_stats():
+	end_date = datetime.datetime.utcnow().date()
+	start_date = (datetime.datetime.utcnow() - datetime.timedelta(days=29)).date()
+	return {
+		"start": start_date.isoformat(),
+		"end": end_date.isoformat(),
+		"package_downloads": get_package_overview_for_user(None, start_date, end_date),
+	}
