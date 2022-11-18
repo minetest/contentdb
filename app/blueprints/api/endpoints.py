@@ -19,10 +19,11 @@ from functools import wraps
 from typing import List
 
 import flask_sqlalchemy
-from flask import request, jsonify, current_app
+from flask import request, jsonify, current_app, Response
 from flask_login import current_user, login_required
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
+from werkzeug.datastructures import ResponseCacheControl
 
 from app import csrf
 from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_all_package_stats
@@ -40,7 +41,7 @@ from .support import error, api_create_vcs_release, api_create_zip_release, api_
 def cors_allowed(f):
 	@wraps(f)
 	def inner(*args, **kwargs):
-		res = f(*args, **kwargs)
+		res: Response = f(*args, **kwargs)
 		res.headers["Access-Control-Allow-Origin"] = "*"
 		res.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
 		res.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
@@ -48,8 +49,21 @@ def cors_allowed(f):
 	return inner
 
 
+def cached(max_age: int):
+	def decorator(f):
+		@wraps(f)
+		def inner(*args, **kwargs):
+			res: Response = f(*args, **kwargs)
+			res.cache_control.max_age = max_age
+			return res
+		return inner
+
+	return decorator
+
+
 @bp.route("/api/packages/")
 @cors_allowed
+@cached(300)
 def packages():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
@@ -437,18 +451,21 @@ def list_all_reviews():
 @bp.route("/api/packages/<author>/<name>/stats/")
 @is_package_page
 @cors_allowed
+@cached(300)
 def package_stats(package: Package):
 	return jsonify(get_package_stats(package))
 
 
 @bp.route("/api/package_stats/")
 @cors_allowed
+@cached(900)
 def all_package_stats():
 	return jsonify(get_all_package_stats())
 
 
 @bp.route("/api/scores/")
 @cors_allowed
+@cached(300)
 def package_scores():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
