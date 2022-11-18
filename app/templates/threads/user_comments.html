@@ -36,7 +36,7 @@
 						</span>
 					{% endif %}
 
-					{% if r == r.thread.replies[0] %}
+					{% if r == r.thread.first_reply %}
 						<a class="badge badge-primary" href="{{ r.thread.getViewURL() }}">
 							{{ r.thread.title }}
 						</a>

@@ -53,7 +53,7 @@
 						</a>
 					{% endif %}
 
-					{% if current_user == thread.author and thread.review and thread.replies[0] == r %}
+					{% if current_user == thread.author and thread.review and thread.first_reply == r %}
 						<a class="float-right btn btn-primary btn-sm ml-2"
 								href="{{ thread.review.package.getURL('packages.review') }}">
 							<i class="fas fa-pen"></i>
@@ -67,7 +67,7 @@
 
 					{{ r.comment | markdown }}
 
-					{% if thread.replies[0] == r and thread.review %}
+					{% if thread.first_reply == r and thread.review %}
 						{{ render_review_vote(thread.review, current_user, thread.getViewURL()) }}
 					{% endif %}
 				</div>

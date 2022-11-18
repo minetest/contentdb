@@ -55,8 +55,12 @@ class Thread(db.Model):
 
 	watchers   = db.relationship("User", secondary=watchers, backref="watching")
 
+	first_reply = db.relationship("ThreadReply", uselist=False, foreign_keys="ThreadReply.thread_id",
+			lazy=True, order_by=db.asc("id"), viewonly=True,
+			primaryjoin="Thread.id==ThreadReply.thread_id")
+
 	def get_description(self):
-		comment = self.replies[0].comment.replace("\r\n", " ").replace("\n", " ").replace("  ", " ")
+		comment = self.first_reply.comment.replace("\r\n", " ").replace("\n", " ").replace("  ", " ")
 		if len(comment) > 100:
 			return comment[:97] + "..."
 		else:
@@ -156,7 +160,7 @@ class ThreadReply(db.Model):
 			return user.rank.atLeast(UserRank.NEW_MEMBER if user == self.author else UserRank.MODERATOR) and not self.thread.locked
 
 		elif perm == Permission.DELETE_REPLY:
-			return user.rank.atLeast(UserRank.MODERATOR) and self.thread.replies[0] != self
+			return user.rank.atLeast(UserRank.MODERATOR) and self.thread.first_reply != self
 
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))
@@ -201,7 +205,7 @@ class PackageReview(db.Model):
 				"unhelpful": neg,
 			},
 			"title": self.thread.title,
-			"comment": self.thread.replies[0].comment,
+			"comment": self.thread.first_reply.comment,
 		}
 		if include_package:
 			ret["package"] = self.package.getAsDictionaryKey()

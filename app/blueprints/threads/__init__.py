@@ -154,7 +154,7 @@ def delete_reply(id):
 	if reply is None or reply.thread != thread:
 		abort(404)
 
-	if thread.replies[0] == reply:
+	if thread.first_reply == reply:
 		flash(gettext("Cannot delete thread opening post!"), "danger")
 		return redirect(thread.getViewURL())
 

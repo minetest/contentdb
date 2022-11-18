@@ -66,7 +66,7 @@ def review(package):
 	if request.method == "GET" and review:
 		form.title.data = review.thread.title
 		form.recommends.data = "yes" if review.recommends else "no"
-		form.comment.data = review.thread.replies[0].comment
+		form.comment.data = review.thread.first_reply.comment
 
 	# Validate and submit
 	elif can_review and form.validate_on_submit():
@@ -99,7 +99,7 @@ def review(package):
 
 			thread.replies.append(reply)
 		else:
-			reply = thread.replies[0]
+			reply = thread.first_reply
 			reply.comment = form.comment.data
 
 		thread.title   = form.title.data

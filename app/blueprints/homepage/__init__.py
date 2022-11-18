@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, redirect
 bp = Blueprint("homepage", __name__)
 
 from app.models import *
-from sqlalchemy.orm import joinedload, subqueryload
+from sqlalchemy.orm import joinedload, subqueryload, contains_eager
 from sqlalchemy.sql.expression import func
 
 
@@ -45,6 +45,13 @@ def home():
 				joinedload(Package.license),
 				joinedload(Package.media_license))
 
+	def review_load(query):
+		return query.options(
+			joinedload(PackageReview.author),
+			joinedload(PackageReview.thread).joinedload(Thread.first_reply),
+			joinedload(PackageReview.package).joinedload(Package.author).load_only(User.username, User.display_name),
+			joinedload(PackageReview.package).load_only(Package.title, Package.name).subqueryload(Package.main_screenshot))
+
 	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
 
@@ -64,7 +71,7 @@ def home():
 			.limit(20)).all()
 	updated = updated[:4]
 
-	reviews = PackageReview.query.filter_by(recommends=True).order_by(db.desc(PackageReview.created_at)).limit(5).all()
+	reviews = review_load(PackageReview.query.filter_by(recommends=True).order_by(db.desc(PackageReview.created_at))).limit(5).all()
 
 	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]

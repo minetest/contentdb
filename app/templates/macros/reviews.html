@@ -38,7 +38,7 @@
 				{% endif %}
 			</div>
 			{% if review.thread %}
-				{% set reply = review.thread.replies[0] %}
+				{% set reply = review.thread.first_reply %}
 				<div class="col pr-0">
 					<div class="card">
 						<div class="card-header">
