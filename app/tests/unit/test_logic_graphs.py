@@ -28,6 +28,6 @@ def test_flatten_data():
 		DailyStat("2022-04-02", 1)
 	])
 
-	assert res["start"] == datetime.date.fromisoformat("2022-03-28")
-	assert res["end"] == datetime.date.fromisoformat("2022-04-02")
+	assert res["start"] == "2022-03-28"
+	assert res["end"] == "2022-04-02"
 	assert res["platform_minetest"] == [3, 10, 0, 0, 5, 1]
