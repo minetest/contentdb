@@ -3,7 +3,7 @@ from flask import Blueprint, render_template, redirect
 bp = Blueprint("homepage", __name__)
 
 from app.models import *
-from sqlalchemy.orm import joinedload
+from sqlalchemy.orm import joinedload, subqueryload
 from sqlalchemy.sql.expression import func
 
 
@@ -37,8 +37,11 @@ def gamejam():
 
 @bp.route("/")
 def home():
-	def join(query):
+	def package_load(query):
 		return query.options(
+				joinedload(Package.author),
+				subqueryload(Package.main_screenshot),
+				subqueryload(Package.cover_image),
 				joinedload(Package.license),
 				joinedload(Package.media_license))
 
@@ -48,17 +51,17 @@ def home():
 	featured = query.filter(Package.tags.any(name="featured")).order_by(func.random()).limit(6).all()
 	featured.insert(0, GameJam())
 
-	new     = join(query.order_by(db.desc(Package.approved_at))).limit(4).all()
-	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
-	pop_gam = join(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(8).all()
-	pop_txp = join(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(8).all()
-	high_reviewed = join(query.order_by(db.desc(Package.score - Package.score_downloads))) \
+	new     = package_load(query.order_by(db.desc(Package.approved_at))).limit(4).all()
+	pop_mod = package_load(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
+	pop_gam = package_load(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(8).all()
+	pop_txp = package_load(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(8).all()
+	high_reviewed = package_load(query.order_by(db.desc(Package.score - Package.score_downloads))) \
 			.filter(Package.reviews.any()).limit(4).all()
 
-	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
-			.filter_by(state=PackageState.APPROVED) \
-			.order_by(db.desc(PackageRelease.releaseDate)) \
-			.limit(20).all()
+	updated = package_load(db.session.query(Package).select_from(PackageRelease).join(Package)
+			.filter_by(state=PackageState.APPROVED)
+			.order_by(db.desc(PackageRelease.releaseDate))
+			.limit(20)).all()
 	updated = updated[:4]
 
 	reviews = PackageReview.query.filter_by(recommends=True).order_by(db.desc(PackageReview.created_at)).limit(5).all()
