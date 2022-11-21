@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-10-13 15:38+0000\n"
+"PO-Revision-Date: 2022-11-17 02:47+0000\n"
 "Last-Translator: Gao Tiesuan <yepifoas@666email.com>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "minetest/contentdb/zh_Hans/>\n"
@@ -571,7 +571,7 @@ msgstr "该用户名已存在账户，但尚未被认领。"
 
 #: app/blueprints/users/account.py:134 app/blueprints/users/account.py:141
 msgid "That username/display name is already in use, please choose another."
-msgstr "该用户名/显示名称已被使用，请选择另一个。"
+msgstr "该用户名/显示名称已被使用，请选择另一个名称。"
 
 #: app/blueprints/users/account.py:146 app/blueprints/users/account.py:259
 msgid "Email already in use"
@@ -582,7 +582,8 @@ msgstr "电子邮件已使用"
 msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
-msgstr "我们无法创建该账户，因为该电子邮件已经被 %(display_name)s 使用。请尝试使用另一个电子邮件地址。"
+msgstr "我们无法创建该账户，因为该电子邮件已经被 %(display_name)s "
+"使用。请使用另一个电子邮件地址。"
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:254
 #: app/blueprints/users/settings.py:142
@@ -619,7 +620,7 @@ msgstr "密码不匹配"
 
 #: app/blueprints/users/account.py:274 app/blueprints/users/account.py:278
 msgid "Your password has been changed successfully."
-msgstr "您的密码已被成功更改。"
+msgstr "您的密码已成功更改。"
 
 #: app/blueprints/users/account.py:293
 msgid "Old password is incorrect"
@@ -688,7 +689,7 @@ msgstr "该用户已被认领！"
 #: app/blueprints/users/claim.py:86
 #, python-format
 msgid "Error whilst attempting to access forums: %(message)s"
-msgstr "尝试访问论坛时出错：%(message)s"
+msgstr "访问论坛时出错：%(message)s"
 
 #: app/blueprints/users/claim.py:90
 msgid "Unable to get forum signature - does the user exist?"
@@ -724,7 +725,7 @@ msgid "3rd most helpful reviewer"
 msgstr "第三位最有帮助的评测者"
 
 #: app/blueprints/users/profile.py:124
-#, python-format
+#, fuzzy, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
 msgstr "这使%(display_name)s位于前%(perc)s%%"
 
@@ -734,13 +735,13 @@ msgid "Top %(perc)s%% reviewer"
 msgstr "最高 %(perc)s%% 评测者"
 
 #: app/blueprints/users/profile.py:129
-#, python-format
+#, fuzzy, python-format
 msgid "Only %(place)d users have written more helpful reviews."
 msgstr "只有%(place)d个用户写了更多有帮助的评测。"
 
 #: app/blueprints/users/profile.py:134
 msgid "Consider writing more helpful reviews to get a medal."
-msgstr "请考虑写更多有帮助的评测以获得奖章。"
+msgstr "编写更多有帮助的评测来获得奖章。"
 
 #: app/blueprints/users/profile.py:136
 #, python-format
@@ -758,7 +759,7 @@ msgid "Top %(group)d %(type)s"
 msgstr "最高 %(group)d %(type)s"
 
 #: app/blueprints/users/profile.py:175
-#, python-format
+#, fuzzy, python-format
 msgid "%(display_name)s has a %(type)s placed at #%(place)d."
 msgstr "%(display_name)s 有一个 %(type)s 放置在 #%(place)d 处。"
 
