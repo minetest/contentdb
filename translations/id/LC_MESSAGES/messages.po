@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-06-05 18:10+0100\n"
-"PO-Revision-Date: 2022-08-17 19:21+0000\n"
+"PO-Revision-Date: 2022-11-11 05:46+0000\n"
 "Last-Translator: Muhammad Rifqi Priyo Susanto "
 "<muhammadrifqipriyosusanto@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/minetest/"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14-dev\n"
+"X-Generator: Weblate 4.15-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:115
@@ -151,7 +151,7 @@ msgstr "Nama (Teknis)"
 #: app/blueprints/packages/packages.py:562
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr "Huruf kecil (a-z), angka (0-9), dan garis bawah (_) saja"
+msgstr "Hanya huruf kecil (a-z), angka (0-9), dan garis bawah (_)"
 
 #: app/blueprints/packages/packages.py:232
 msgid "Short Description (Plaintext)"
@@ -236,7 +236,7 @@ msgstr "Paket yang tidak disetujui"
 
 #: app/blueprints/packages/packages.py:466
 msgid "Maintainers (Comma-separated)"
-msgstr "Pengelola (Dipisahkan dengan Koma)"
+msgstr "Pengelola (Dipisahkan Koma)"
 
 #: app/blueprints/packages/packages.py:475
 msgid "You don't have permission to edit maintainers"
@@ -275,7 +275,7 @@ msgstr "Unggah Berkas"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr "Referensi Git (misal hash commit, branch, atau tag)"
+msgstr "Referensi Git (hash commit, branch, atau tag)"
 
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:68
@@ -461,7 +461,7 @@ msgstr "Utas yang dikunci"
 
 #: app/blueprints/threads/__init__.py:109
 msgid "Unlocked thread"
-msgstr "Utas yang tidak terkunci"
+msgstr "Utas yang tidak dikunci"
 
 #: app/blueprints/threads/__init__.py:158
 msgid "Cannot delete thread opening post!"
@@ -490,7 +490,7 @@ msgstr "Harap tunggu sebelum membuka utas baru"
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr "Nama pengguna atau surel/pos-el"
+msgstr "Nama pengguna atau surel"
 
 #: app/blueprints/users/account.py:38 app/blueprints/users/account.py:108
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
@@ -542,8 +542,8 @@ msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
-"Hanya huruf alfabet (A-Za-z), angka (0-9), garis bawah (_), tanda hubung (-)"
-", dan titik (.) yang dibolehkan"
+"Hanya huruf Latin (A-Za-z), angka (0-9), garis bawah (_), tanda hubung (-), "
+"dan titik (.) yang dibolehkan"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:190
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:377
@@ -684,7 +684,7 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
-"Nama pengguna tidak sah. Hanya huruf alfabet (A-Za-z), angka (0-9), garis "
+"Nama pengguna tidak sah. Hanya huruf Latin (A-Za-z), angka (0-9), garis "
 "bawah (_), tanda hubung (-), dan titik (.) yang dibolehkan. Harap hubungi "
 "admin"
 
@@ -775,7 +775,8 @@ msgstr "%(group)d %(type)s teratas"
 #: app/blueprints/users/profile.py:175
 #, python-format
 msgid "%(display_name)s has a %(type)s placed at #%(place)d."
-msgstr "%(display_name)s memiliki sebuah %(type)s yang ada di urutan ke-%(place)d."
+msgstr ""
+"%(display_name)s memiliki sebuah %(type)s yang ada pada urutan ke-%(place)d."
 
 #: app/blueprints/users/profile.py:190
 #, python-format
@@ -891,12 +892,12 @@ msgstr "Anda tidak memiliki izin untuk menyunting paket ini"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr "Anda tidak memiliki izin untuk menyunting nama paket"
+msgstr "Anda tidak memiliki izin untuk menyunting nama paket ini"
 
 #: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr "Tidak dapat menambahkan label %(title)s ke paket"
+msgstr "Tidak dapat menambahkan label terlindungi %(title)s ke paket"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
@@ -912,7 +913,7 @@ msgstr ""
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr "Hash commit tidak sah; ia harus berupa 40 karakter heksadesimal"
+msgstr "Hash commit tidak sah. Ia harus berupa 40 karakter heksadesimal"
 
 #: app/logic/screenshots.py:16
 msgid "Too many requests, please wait before trying again"
@@ -1032,7 +1033,7 @@ msgid ""
 "been deleted, or you may not have access to it."
 msgstr ""
 "Halaman ini tidak ditemukan. Tautannya mungkin rusak, halamannya sudah "
-"dihapus, atau Anda tidak memiliki akses ke sana."
+"dihapus, atau Anda tidak memiliki akses ke sini."
 
 #: app/templates/base.html:36
 msgid "Random"
@@ -1880,7 +1881,7 @@ msgstr "Sudahkan Anda membaca Kebijakan dan Panduan Penambahan Paket?"
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
-msgstr "Baca lebih banyak"
+msgstr "Baca lebih lanjut"
 
 #: app/templates/packages/create_edit.html:49
 #, python-format
@@ -2202,8 +2203,8 @@ msgid ""
 "You need to create releases even if you use a rolling release development"
 " cycle, as Minetest needs them to check for updates."
 msgstr ""
-"Anda butuh membuat rilis meski Anda menggunakan daur pengembangan rolling"
-" release karena Minetest membutuhkannya untuk memeriksa pembaruan."
+"Anda butuh membuat rilis meski Anda menggunakan daur pengembangan rilis "
+"bergulir karena Minetest membutuhkannya untuk memeriksa pembaruan."
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
@@ -2654,7 +2655,7 @@ msgstr "Ditambahkan"
 
 #: app/templates/packages/view.html:495
 msgid "Remove myself"
-msgstr "Hapus diri sendiri"
+msgstr "Hapus diri saya"
 
 #: app/templates/packages/view.html:500
 msgid "Provides"
