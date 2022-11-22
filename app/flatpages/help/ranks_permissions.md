@@ -266,7 +266,7 @@ title: Ranks and Permissions
 		</tr>
 		<tr>
 			<td>Create Token</td>
-			<td></td> <!-- new -->
+			<td>✓</td> <!-- new -->
 			<td></td>
 			<td>✓</td> <!-- member -->
 			<td></td>

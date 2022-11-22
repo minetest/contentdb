@@ -249,7 +249,7 @@ class User(db.Model, UserMixin):
 			return user.rank.atLeast(UserRank.NEW_MEMBER if user == self else UserRank.MODERATOR)
 		elif perm == Permission.CREATE_TOKEN:
 			if user == self:
-				return user.rank.atLeast(UserRank.MEMBER)
+				return user.rank.atLeast(UserRank.NEW_MEMBER)
 			else:
 				return user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank)
 		else:
