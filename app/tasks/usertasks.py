@@ -37,10 +37,11 @@ def delete_inactive_users():
 
 @celery.task()
 def upgrade_new_members():
-	threshold = datetime.datetime.now() - datetime.timedelta(days=7)
+	with db.create_session({})() as session:
+		threshold = datetime.datetime.now() - datetime.timedelta(days=7)
 
-	User.query.filter(and_(User.rank == UserRank.NEW_MEMBER, or_(
-			User.replies.any(ThreadReply.created_at < threshold),
-			User.packages.any(Package.approved_at < threshold)))).update({"rank": UserRank.MEMBER})
+		session.query(User).filter(and_(User.rank == UserRank.NEW_MEMBER, or_(
+				User.replies.any(ThreadReply.created_at < threshold),
+				User.packages.any(Package.approved_at < threshold)))).update({"rank": UserRank.MEMBER}, synchronize_session=False)
 
-	db.session.commit()
+		session.commit()

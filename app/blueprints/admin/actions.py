@@ -29,6 +29,7 @@ from app.models import PackageRelease, db, Package, PackageState, PackageScreens
 from app.tasks.emails import send_pending_digests
 from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates, updateAllGameSupport
+from app.tasks.usertasks import upgrade_new_members
 from app.utils import addNotification, get_system_user
 from app.utils.image import get_image_size
 
@@ -339,10 +340,6 @@ def do_send_pending_digests():
 
 @action("Set users to new member")
 def set_new_members():
-	threshold = datetime.datetime.now() - datetime.timedelta(days=7)
-
-	User.query.filter(User.rank == UserRank.MEMBER,
-		~User.replies.any(ThreadReply.created_at < threshold),
-		~User.packages.any(Package.approved_at < threshold)).update({"rank": UserRank.NEW_MEMBER}, synchronize_session=False)
-
-	db.session.commit()
+	task_id = uuid()
+	upgrade_new_members.apply_async((), task_id=task_id)
+	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
