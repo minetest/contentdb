@@ -260,13 +260,14 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 		package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
 		if package is not None:
 			if package.state == PackageState.DELETED:
-				package.review_thread_id = None
-				db.session.delete(package)
+				flash(
+					gettext("Package already exists, but is removed. Please contact ContentDB staff to restore the package"),
+					"danger")
 			else:
 				flash(Markup(
 					f"<a class='btn btn-sm btn-danger float-right' href='{package.getURL('packages.view')}'>View</a>" +
 					gettext("Package already exists")), "danger")
-				return None
+			return None
 
 		package = Package()
 		package.author = author
