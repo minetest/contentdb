@@ -3,31 +3,8 @@ from flask import Blueprint, render_template, redirect
 bp = Blueprint("homepage", __name__)
 
 from app.models import *
-from sqlalchemy.orm import joinedload, subqueryload, contains_eager
+from sqlalchemy.orm import joinedload, subqueryload
 from sqlalchemy.sql.expression import func
-
-
-GAMEJAM_BANNER = "https://raw.githubusercontent.com/GreenXenith/minetestgamejam/master/2022/images/banner_textless.png"
-
-
-class GameJam:
-	cover_image = type("", (), dict(url=GAMEJAM_BANNER))()
-	tags = []
-
-	def getCoverImageURL(self):
-		return GAMEJAM_BANNER
-
-	def getURL(self, _name):
-		return "/gamejam/"
-
-	title = "Minetest Game Jam 2022"
-	author = None
-
-	short_desc = "It's back! We're holding a 3-week Game Jam starting November 1st. Sharpen your gamedev skills with a " \
-				 "chance for cash prizes. "
-	type = type("", (), dict(value="Competition"))()
-	content_warnings = []
-	reviews = []
 
 
 @bp.route("/gamejam/")
@@ -56,7 +33,6 @@ def home():
 	count   = query.count()
 
 	featured = query.filter(Package.tags.any(name="featured")).order_by(func.random()).limit(6).all()
-	featured.insert(0, GameJam())
 
 	new     = package_load(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = package_load(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
