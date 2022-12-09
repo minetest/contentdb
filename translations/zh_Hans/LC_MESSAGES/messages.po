@@ -7,26 +7,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-05 18:10+0100\n"
+"POT-Creation-Date: 2022-12-09 19:06+0000\n"
 "PO-Revision-Date: 2022-11-17 02:47+0000\n"
 "Last-Translator: Gao Tiesuan <yepifoas@666email.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"minetest/contentdb/zh_Hans/>\n"
 "Language: zh_Hans\n"
+"Language-Team: Chinese (Simplified) "
+"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hans/>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app/__init__.py:115
+#: app/__init__.py:122
 msgid "Banned:"
 msgstr "已封号："
 
-#: app/__init__.py:117
+#: app/__init__.py:124
 msgid "You have been banned."
 msgstr "您被封号了。"
+
+#: app/querybuilder.py:22 app/templates/admin/tags/list.html:38
+#: app/templates/admin/warnings/list.html:28
+#: app/templates/modnames/list.html:16 app/templates/packages/list.html:4
+#: app/templates/todo/editor.html:46 app/templates/users/list.html:22
+#: app/templates/users/profile.html:201
+msgid "Packages"
+msgstr "软件包"
 
 #: app/template_filters.py:52
 #, python-format
@@ -35,7 +42,7 @@ msgstr "%(delta)s以前"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
-#: app/templates/metapackages/list.html:12
+#: app/templates/modnames/list.html:12
 msgid "Name"
 msgstr "名称"
 
@@ -43,9 +50,10 @@ msgstr "名称"
 msgid "Limit to package"
 msgstr "软件包限制"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:249
-#: app/blueprints/packages/packages.py:467
-#: app/blueprints/packages/packages.py:563
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:473
+#: app/blueprints/packages/packages.py:569
+#: app/blueprints/packages/packages.py:639
 #: app/blueprints/packages/releases.py:60
 #: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:47
 #: app/blueprints/packages/screenshots.py:35
@@ -84,7 +92,7 @@ msgstr "编辑详细信息"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:512 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:523 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "发行版"
 
@@ -96,160 +104,193 @@ msgstr "截图"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:483
+#: app/templates/packages/view.html:494
 msgid "Maintainers"
 msgstr "维护者"
 
-#: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
+#: app/blueprints/packages/__init__.py:52 app/templates/base.html:144
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
 msgstr "审计报告"
 
-#: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
+#: app/blueprints/packages/__init__.py:57 app/templates/base.html:135
+#: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
+#: app/templates/packages/view.html:211 app/templates/users/profile.html:130
+msgid "Statistics"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
 msgstr "分享和徽章"
 
-#: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:110
+#: app/blueprints/packages/__init__.py:67 app/templates/packages/view.html:110
 msgid "Remove"
 msgstr "移除"
 
-#: app/blueprints/packages/packages.py:159
+#: app/blueprints/packages/__init__.py:75
+#: app/templates/packages/game_support.html:4
+msgid "Supported Games"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:160
 msgid "Error: Another package already uses this forum topic!"
 msgstr "错误：该论坛贴子已被另一个软件包使用！"
 
-#: app/blueprints/packages/packages.py:165
+#: app/blueprints/packages/packages.py:166
 msgid "Error: Forum topic author doesn't match package author."
 msgstr "错误：论坛贴子作者与软件包作者不匹配。"
 
-#: app/blueprints/packages/packages.py:168
+#: app/blueprints/packages/packages.py:169
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr "错误：论坛贴子未找到。有可能该贴子刚刚创建。"
 
-#: app/blueprints/packages/packages.py:215
+#: app/blueprints/packages/packages.py:216
 msgid "No download available."
 msgstr "无可用下载。"
 
-#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:460
+#: app/blueprints/packages/packages.py:230 app/templates/packages/view.html:471
 msgid "Type"
 msgstr "类型"
 
-#: app/blueprints/packages/packages.py:230
+#: app/blueprints/packages/packages.py:231
 msgid "Title (Human-readable)"
 msgstr "标题（人类可读）"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:561
+#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:567
 msgid "Name (Technical)"
 msgstr "名称（技术性）"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:562
+#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:568
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "只允许小写字母（a-z），数字（0-9），下划线（_）"
 
-#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:233
 msgid "Short Description (Plaintext)"
 msgstr "简短说明（纯文本）"
 
-#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:475
+#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:486
 msgid "Maintenance State"
 msgstr "开发周期"
 
-#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:237 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "标签"
 
-#: app/blueprints/packages/packages.py:237
+#: app/blueprints/packages/packages.py:238
 msgid "Content Warnings"
 msgstr "内容警告"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:464
+#: app/blueprints/packages/packages.py:239 app/templates/packages/view.html:475
 msgid "License"
 msgstr "许可证"
 
-#: app/blueprints/packages/packages.py:239
+#: app/blueprints/packages/packages.py:240
 msgid "Media License"
 msgstr "媒体内容许可证"
 
-#: app/blueprints/packages/packages.py:241
+#: app/blueprints/packages/packages.py:242
 msgid "Long Description (Markdown)"
 msgstr "长说明（Markdown）"
 
-#: app/blueprints/packages/packages.py:243
+#: app/blueprints/packages/packages.py:244
 msgid "VCS Repository URL"
 msgstr "版本控制系统仓库URL"
 
-#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:51
+#: app/blueprints/packages/packages.py:245 app/blueprints/users/settings.py:51
 msgid "Website URL"
 msgstr "网站URL"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:246
 msgid "Issue Tracker URL"
 msgstr "问题追踪器URL"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:247
 msgid "Forum Topic ID"
 msgstr "论坛贴子ID"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:248
 msgid "Video URL"
 msgstr "视频URL"
 
-#: app/blueprints/packages/packages.py:263
+#: app/blueprints/packages/packages.py:254
+msgid "_game is not an allowed name"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:264
+msgid ""
+"Package already exists, but is removed. Please contact ContentDB staff to"
+" restore the package"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:269
 msgid "Package already exists"
 msgstr "软件包已存在"
 
-#: app/blueprints/packages/packages.py:321
+#: app/blueprints/packages/packages.py:327
 msgid "Unable to find that user"
 msgstr "找不到该用户"
 
-#: app/blueprints/packages/packages.py:325
+#: app/blueprints/packages/packages.py:331
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:99
 msgid "Permission denied"
 msgstr "拒绝访问"
 
-#: app/blueprints/packages/packages.py:381
-#: app/blueprints/packages/packages.py:430
-#: app/blueprints/packages/packages.py:446
+#: app/blueprints/packages/packages.py:387
+#: app/blueprints/packages/packages.py:436
+#: app/blueprints/packages/packages.py:452
 msgid "You don't have permission to do that"
 msgstr "你没有进行该操作的权限"
 
-#: app/blueprints/packages/packages.py:409
+#: app/blueprints/packages/packages.py:415
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "请在审核贴评论中说明需要作出哪些修改"
 
-#: app/blueprints/packages/packages.py:441
+#: app/blueprints/packages/packages.py:447
 msgid "Deleted package"
 msgstr "已删除的软件包"
 
-#: app/blueprints/packages/packages.py:457
+#: app/blueprints/packages/packages.py:463
 msgid "Unapproved package"
 msgstr "未通过的软件包"
 
-#: app/blueprints/packages/packages.py:466
+#: app/blueprints/packages/packages.py:472
 msgid "Maintainers (Comma-separated)"
 msgstr "维护者（用逗号隔开）"
 
-#: app/blueprints/packages/packages.py:475
+#: app/blueprints/packages/packages.py:481
 msgid "You don't have permission to edit maintainers"
 msgstr "你没有权限编辑维护者"
 
-#: app/blueprints/packages/packages.py:525
+#: app/blueprints/packages/packages.py:531
 msgid "You are not a maintainer"
 msgstr "你不是维护者"
 
-#: app/blueprints/packages/packages.py:528
+#: app/blueprints/packages/packages.py:534
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "软件包所有人不能把自己移除出维护者列表"
 
-#: app/blueprints/packages/packages.py:560
+#: app/blueprints/packages/packages.py:566
 msgid "Author Name"
 msgstr "作者名"
+
+#: app/blueprints/packages/packages.py:636
+msgid "Enable support detection based on dependencies (recommended)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:637
+msgid "Supported games (Comma-separated)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:638
+msgid "Unsupported games (Comma-separated)"
+msgstr ""
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -276,13 +317,13 @@ msgstr "Git引用（即：提交哈希，分支或标签）"
 
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:68
-#: app/blueprints/packages/releases.py:184
+#: app/blueprints/packages/releases.py:192
 msgid "Minimum Minetest Version"
 msgstr "最低Minetest版本"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:70
-#: app/blueprints/packages/releases.py:187
+#: app/blueprints/packages/releases.py:195
 msgid "Maximum Minetest Version"
 msgstr "最高Minetest版本"
 
@@ -308,70 +349,70 @@ msgstr "从Git导入"
 msgid "Upload .zip file"
 msgstr "上传zip文件"
 
-#: app/blueprints/packages/releases.py:183
+#: app/blueprints/packages/releases.py:191
 msgid "Set Min"
 msgstr "设置最小值"
 
-#: app/blueprints/packages/releases.py:186
+#: app/blueprints/packages/releases.py:194
 msgid "Set Max"
 msgstr "设置最大值"
 
-#: app/blueprints/packages/releases.py:189
+#: app/blueprints/packages/releases.py:197
 msgid "Only change values previously set as none"
 msgstr "仅修改之前为空的值"
 
-#: app/blueprints/packages/releases.py:190
+#: app/blueprints/packages/releases.py:198
 msgid "Update"
 msgstr "更新"
 
-#: app/blueprints/packages/releases.py:239
+#: app/blueprints/packages/releases.py:247
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "钩子"
 
-#: app/blueprints/packages/releases.py:240
+#: app/blueprints/packages/releases.py:248
 msgid "New Commit"
 msgstr "新提交"
 
-#: app/blueprints/packages/releases.py:241 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:249 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "新标签"
 
-#: app/blueprints/packages/releases.py:243
+#: app/blueprints/packages/releases.py:251
 msgid "Branch name"
 msgstr "分支名称"
 
-#: app/blueprints/packages/releases.py:244
+#: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "动作"
 
-#: app/blueprints/packages/releases.py:245
+#: app/blueprints/packages/releases.py:253
 msgid "Send notification and mark as outdated"
 msgstr "发送通知并标记为过期包"
 
-#: app/blueprints/packages/releases.py:245
+#: app/blueprints/packages/releases.py:253
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "创建发行版"
 
-#: app/blueprints/packages/releases.py:247
+#: app/blueprints/packages/releases.py:255
 msgid "Save Settings"
 msgstr "保存设置"
 
-#: app/blueprints/packages/releases.py:248
+#: app/blueprints/packages/releases.py:256
 msgid "Disable Automation"
 msgstr "关闭自动化"
 
-#: app/blueprints/packages/releases.py:287
+#: app/blueprints/packages/releases.py:295
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "要自动发布，请添加Git仓库URL"
 
-#: app/blueprints/packages/releases.py:303
+#: app/blueprints/packages/releases.py:311
 msgid "Deleted update configuration"
 msgstr "已删除更新配置"
 
-#: app/blueprints/packages/releases.py:311
+#: app/blueprints/packages/releases.py:319
 msgid "Now, please create an initial release"
 msgstr "现在，请创建初始发行版"
 
@@ -427,9 +468,9 @@ msgstr "封面图像"
 msgid "Message"
 msgstr "消息"
 
-#: app/blueprints/report/__init__.py:35 app/templates/base.html:238
-#: app/templates/macros/threads.html:50 app/templates/packages/view.html:543
-#: app/templates/report/index.html:4 app/templates/report/index.html:10
+#: app/blueprints/report/__init__.py:35 app/templates/base.html:246
+#: app/templates/macros/threads.html:50 app/templates/packages/view.html:554
+#: app/templates/report/index.html:4 app/templates/report/index.html:15
 #: app/templates/users/profile.html:28
 msgid "Report"
 msgstr "举报"
@@ -497,7 +538,7 @@ msgstr "密码"
 msgid "Remember me"
 msgstr "记住我"
 
-#: app/blueprints/users/account.py:40 app/templates/base.html:165
+#: app/blueprints/users/account.py:40 app/templates/base.html:173
 #: app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "登录"
@@ -582,8 +623,7 @@ msgstr "电子邮件已使用"
 msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
-msgstr "我们无法创建该账户，因为该电子邮件已经被 %(display_name)s "
-"使用。请使用另一个电子邮件地址。"
+msgstr "我们无法创建该账户，因为该电子邮件已经被 %(display_name)s 使用。请使用另一个电子邮件地址。"
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:254
 #: app/blueprints/users/settings.py:142
@@ -671,8 +711,7 @@ msgid ""
 "Invalid username, Only alphabetic letters (A-Za-z), numbers (0-9), "
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
-msgstr "用户名无效，只允许字母（A-Za-z）、数字（0-9）、下划线（_）、减号（-）和句号（"
-".）。考虑联系管理员"
+msgstr "用户名无效，只允许字母（A-Za-z）、数字（0-9）、下划线（_）、减号（-）和句号（.）。考虑联系管理员"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
@@ -856,10 +895,37 @@ msgstr "要查找的文本（正则表达式）"
 msgid "File filter"
 msgstr "文件过滤器"
 
-#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
+#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:49
 #: app/templates/todo/tags.html:15
 msgid "Search"
 msgstr "搜索"
+
+#: app/logic/package_validator.py:20
+msgid "A package already exists with this name. Please see Policy and Guidance 3"
+msgstr ""
+
+#: app/logic/package_validator.py:23
+#: app/templates/macros/package_approval.html:36
+msgid "A release is required before this package can be approved."
+msgstr "需要发行版才能将软件包交付审核。"
+
+#: app/logic/package_validator.py:29
+#: app/templates/macros/package_approval.html:45
+#, python-format
+msgid ""
+"The following hard dependencies need to be added to ContentDB first: "
+"%(deps)s"
+msgstr "需要先将以下硬依赖项添加到 ContentDB：%(deps)s"
+
+#: app/logic/package_validator.py:34
+#: app/templates/macros/package_approval.html:41
+msgid "You need to add at least one screenshot."
+msgstr "您需要添加至少一个截图。"
+
+#: app/logic/package_validator.py:37
+#: app/templates/macros/package_approval.html:49
+msgid "Please wait for the license to be added to CDB."
+msgstr "请等待许可证添加到 CDB。"
 
 #: app/logic/packages.py:95
 msgid ""
@@ -918,41 +984,41 @@ msgstr "请上传%(file_desc)s"
 msgid "Uploaded image isn't actually an image"
 msgstr "上传的图片不是图片"
 
-#: app/models/packages.py:65
+#: app/models/packages.py:66
 msgid "Mod"
 msgstr "Mod"
 
-#: app/models/packages.py:67
+#: app/models/packages.py:68
 msgid "Game"
 msgstr "子游戏"
 
-#: app/models/packages.py:69
+#: app/models/packages.py:70
 msgid "Texture Pack"
 msgstr "材质包"
 
-#: app/models/packages.py:74 app/templates/base.html:27
-#: app/templates/metapackages/view.html:17
+#: app/models/packages.py:75 app/templates/base.html:27
+#: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Mod"
 
-#: app/models/packages.py:76 app/templates/base.html:30
-#: app/templates/metapackages/view.html:14
+#: app/models/packages.py:77 app/templates/base.html:30
+#: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "子游戏"
 
-#: app/models/packages.py:78 app/templates/base.html:33
+#: app/models/packages.py:79 app/templates/base.html:33
 msgid "Texture Packs"
 msgstr "材质包"
 
-#: app/models/packages.py:167
+#: app/models/packages.py:168
 msgid "Submit for Approval"
 msgstr "交付审核"
 
-#: app/models/packages.py:169
+#: app/models/packages.py:170
 msgid "Approve"
 msgstr "批准"
 
-#: app/models/packages.py:171 app/templates/api/create_edit_token.html:17
+#: app/models/packages.py:172 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
 #: app/templates/packages/review_create_edit.html:55
 #: app/templates/threads/delete_reply.html:19
@@ -1012,100 +1078,100 @@ msgstr "找不到页面。该页面可能已被删除，或者您没有权限访
 msgid "Random"
 msgstr "随机"
 
-#: app/templates/base.html:39 app/templates/base.html:233
+#: app/templates/base.html:39 app/templates/base.html:241
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
 msgid "Help"
 msgstr "帮助"
 
-#: app/templates/base.html:42 app/templates/packages/view.html:173
-#: app/templates/packages/view.html:532 app/templates/threads/list.html:4
-msgid "Threads"
-msgstr "贴子"
-
-#: app/templates/base.html:48
+#: app/templates/base.html:46
 #, python-format
 msgid "Search %(type)s"
 msgstr "搜索%(type)s"
 
-#: app/templates/base.html:48 app/templates/todo/tags.html:11
+#: app/templates/base.html:46 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "搜索所有软件包"
 
-#: app/templates/base.html:62
+#: app/templates/base.html:65
 msgid "Work Queue"
 msgstr "工作队列"
 
-#: app/templates/base.html:75 app/templates/base.html:127
+#: app/templates/base.html:78 app/templates/base.html:130
 msgid "To do list"
 msgstr "待办列表"
 
-#: app/templates/base.html:84 app/templates/notifications/list.html:4
+#: app/templates/base.html:87 app/templates/notifications/list.html:4
 msgid "Notifications"
 msgstr "通知"
 
-#: app/templates/base.html:105
+#: app/templates/base.html:108
 msgid "Add Package"
 msgstr "添加软件包"
 
-#: app/templates/base.html:122
+#: app/templates/base.html:125
 msgid "Profile"
 msgstr "个人资料"
 
-#: app/templates/base.html:140
+#: app/templates/base.html:148
 msgid "Admin"
 msgstr "管理员"
 
-#: app/templates/base.html:143
+#: app/templates/base.html:151
 msgid "License Editor"
 msgstr "软件许可证编辑器"
 
-#: app/templates/base.html:148
+#: app/templates/base.html:156
 msgid "Restore Package"
 msgstr "恢复软件包"
 
-#: app/templates/base.html:151
+#: app/templates/base.html:159
 msgid "Tag Editor"
 msgstr "标签编辑器"
 
-#: app/templates/base.html:153
+#: app/templates/base.html:161
 msgid "Create Tag"
 msgstr "创建标签"
 
-#: app/templates/base.html:158 app/templates/packages/release_new.html:12
+#: app/templates/base.html:166 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "设置"
 
-#: app/templates/base.html:161
+#: app/templates/base.html:169
 msgid "Sign out"
 msgstr "登出"
 
-#: app/templates/base.html:190
+#: app/templates/base.html:198
 msgid "Help translate ContentDB"
 msgstr "帮助翻译ContentDB"
 
-#: app/templates/base.html:234
+#: app/templates/base.html:242
 msgid "Policy and Guidance"
 msgstr "政策和指导"
 
-#: app/templates/base.html:235
+#: app/templates/base.html:243
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:236 app/templates/users/register.html:43
+#: app/templates/base.html:244 app/templates/users/register.html:43
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: app/templates/base.html:240
+#: app/templates/base.html:248
 msgid "Stats / Monitoring"
 msgstr "统计/监控"
 
-#: app/templates/base.html:241
+#: app/templates/base.html:249
 msgid "User List"
 msgstr "用户列表"
 
-#: app/templates/base.html:242
+#: app/templates/base.html:250 app/templates/packages/view.html:173
+#: app/templates/packages/view.html:543 app/templates/threads/list.html:4
+msgid "Threads"
+msgstr "贴子"
+
+#: app/templates/base.html:251
 msgid "Source Code"
 msgstr "源代码"
 
@@ -1127,8 +1193,8 @@ msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> (作者:%(author)s)"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:177 app/templates/packages/view.html:293
-#: app/templates/users/profile.html:206
+#: app/templates/packages/view.html:177 app/templates/packages/view.html:297
+#: app/templates/users/profile.html:216
 msgid "Reviews"
 msgstr "评测"
 
@@ -1234,14 +1300,6 @@ msgstr "描述"
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
 msgstr "浏览量"
-
-#: app/templates/admin/tags/list.html:38
-#: app/templates/admin/warnings/list.html:28
-#: app/templates/metapackages/list.html:16 app/templates/packages/list.html:4
-#: app/templates/todo/editor.html:46 app/templates/users/list.html:22
-#: app/templates/users/profile.html:191
-msgid "Packages"
-msgstr "软件包"
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
@@ -1466,25 +1524,6 @@ msgstr "您需要先创建一个发行版才能将软件包交付审核。"
 msgid "Release is still importing, or has an error."
 msgstr "发行版仍在导入，或遇到错误。"
 
-#: app/templates/macros/package_approval.html:36
-msgid "A release is required before this package can be approved."
-msgstr "需要发行版才能将软件包交付审核。"
-
-#: app/templates/macros/package_approval.html:41
-msgid "You need to add at least one screenshot."
-msgstr "您需要添加至少一个截图。"
-
-#: app/templates/macros/package_approval.html:45
-#, python-format
-msgid ""
-"The following hard dependencies need to be added to ContentDB first: "
-"%(deps)s"
-msgstr "需要先将以下硬依赖项添加到 ContentDB：%(deps)s"
-
-#: app/templates/macros/package_approval.html:49
-msgid "Please wait for the license to be added to CDB."
-msgstr "请等待许可证添加到 CDB。"
-
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot, but this isn't required."
 msgstr "您最好添加至少一个截图，但这并不必要。"
@@ -1555,7 +1594,7 @@ msgid "Edit / Approve"
 msgstr "编辑 / 批准"
 
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:98
-#: app/templates/packages/view.html:247
+#: app/templates/packages/view.html:251
 msgid "Edit"
 msgstr "编辑"
 
@@ -1609,6 +1648,89 @@ msgstr "为什么？请发表有建设性的评价"
 msgid "Post Review"
 msgstr "发表评测"
 
+#: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
+#, python-format
+msgid "%(display_name)s's packages"
+msgstr ""
+
+#: app/templates/macros/stats.html:36
+msgid "JavaScript is required to display charts and statistics"
+msgstr ""
+
+#: app/templates/macros/stats.html:45
+msgid "Lifetime unique downloads"
+msgstr ""
+
+#: app/templates/macros/stats.html:59
+msgid "Downloads, past 7 days"
+msgstr ""
+
+#: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
+#, python-format
+msgid "%(downloads)s per day"
+msgstr ""
+
+#: app/templates/macros/stats.html:76
+msgid "Downloads, past 30 days"
+msgstr ""
+
+#: app/templates/macros/stats.html:89
+msgid "Loading..."
+msgstr ""
+
+#: app/templates/macros/stats.html:92
+msgid "No data"
+msgstr ""
+
+#: app/templates/macros/stats.html:97
+msgid "Downloads by Package"
+msgstr ""
+
+#: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
+#: app/templates/macros/stats.html:118
+msgid ""
+"This is a stacked area graph. For total downloads, look at the combined "
+"height."
+msgstr ""
+
+#: app/templates/macros/stats.html:104
+msgid "Downloads by Client"
+msgstr ""
+
+#: app/templates/macros/stats.html:110
+msgid "Downloads by Reason"
+msgstr ""
+
+#: app/templates/macros/stats.html:112
+msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
+msgstr ""
+
+#: app/templates/macros/stats.html:113
+msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
+msgstr ""
+
+#: app/templates/macros/stats.html:114
+msgid "<b>Update</b>: download was to update the package."
+msgstr ""
+
+#: app/templates/macros/stats.html:115
+msgid ""
+"<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
+"Minetest version (before 5.5)."
+msgstr ""
+
+#: app/templates/macros/stats.html:127
+msgid "Need more stats?"
+msgstr ""
+
+#: app/templates/macros/stats.html:129
+msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
+msgstr ""
+
+#: app/templates/macros/stats.html:133
+msgid "ContentDB Grafana"
+msgstr ""
+
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
 msgstr "维护者"
@@ -1645,27 +1767,27 @@ msgstr "贴子"
 msgid "Last Reply"
 msgstr "最新回复"
 
-#: app/templates/macros/todo.html:23
+#: app/templates/macros/todo.html:21
 #, python-format
 msgid "On %(trigger)s, do %(action)s"
 msgstr "在%(trigger)s时，执行操作%(action)s"
 
-#: app/templates/macros/todo.html:37 app/templates/packages/view.html:104
-#: app/templates/packages/view.html:355
+#: app/templates/macros/todo.html:35 app/templates/packages/view.html:104
+#: app/templates/packages/view.html:359
 msgid "Release"
 msgstr "发行版"
 
-#: app/templates/macros/todo.html:44
+#: app/templates/macros/todo.html:42
 msgid "Repo"
 msgstr "仓库"
 
-#: app/templates/macros/todo.html:50
+#: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:359
+#: app/templates/packages/view.html:363
 msgid "Update settings"
 msgstr "更新设置"
 
-#: app/templates/macros/todo.html:57
+#: app/templates/macros/todo.html:55 app/templates/macros/todo.html:85
 msgid "No outdated packages."
 msgstr "没有过期软件包。"
 
@@ -1682,9 +1804,8 @@ msgid "Actions"
 msgstr "操作"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
-#: app/templates/metapackages/view.html:29
-#: app/templates/packages/similar.html:40 app/templates/todo/editor.html:160
-#: app/templates/todo/editor.html:175
+#: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
+#: app/templates/todo/editor.html:160 app/templates/todo/editor.html:175
 msgid "WIP"
 msgstr "未完工"
 
@@ -1700,41 +1821,41 @@ msgstr "丢弃"
 msgid "Old"
 msgstr "旧"
 
-#: app/templates/metapackages/list.html:4
-#: app/templates/metapackages/view.html:4
-msgid "Meta Packages"
-msgstr "元包"
+#: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
+msgid "Mod Names"
+msgstr ""
 
-#: app/templates/metapackages/list.html:37
-msgid "No meta packages found."
-msgstr "找不到元包。"
+#: app/templates/modnames/list.html:37
+msgid "No mod names found."
+msgstr ""
 
-#: app/templates/metapackages/view.html:10
+#: app/templates/modnames/view.html:10
 #, python-format
-msgid "Meta Package \"%(name)s\""
-msgstr "元包“%(name)s”"
+msgid "Mod Name \"%(name)s\""
+msgstr ""
 
-#: app/templates/metapackages/view.html:12
+#: app/templates/modnames/view.html:12
 msgid "Provided By"
 msgstr "提供者"
 
-#: app/templates/metapackages/view.html:21 app/templates/todo/todo_base.html:35
+#: app/templates/modnames/view.html:21 app/templates/todo/todo_base.html:41
 msgid "Forum Topics"
 msgstr "论坛贴子"
 
-#: app/templates/metapackages/view.html:27
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:396
-#: app/templates/packages/view.html:420 app/templates/packages/view.html:441
+#: app/templates/modnames/view.html:27
+#: app/templates/packages/game_support.html:37
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:400
+#: app/templates/packages/view.html:424 app/templates/packages/view.html:452
 #: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s(作者%(display_name)s)"
 
-#: app/templates/metapackages/view.html:35
+#: app/templates/modnames/view.html:35
 msgid "Required By"
 msgstr "该软件包为以下包的依赖项"
 
-#: app/templates/metapackages/view.html:38
+#: app/templates/modnames/view.html:38
 msgid "Optionally Used By"
 msgstr "该软件包为以下包的可选依赖项"
 
@@ -1843,6 +1964,7 @@ msgstr ""
 "Git元数据、自动补全等功能。"
 
 #: app/templates/packages/create_edit.html:66
+#: app/templates/packages/game_support.html:21
 #: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
 msgid "Package"
 msgstr "软件包"
@@ -1928,6 +2050,50 @@ msgstr "社区中心"
 #, python-format
 msgid "Mods for %(title)s"
 msgstr "%(title)s的Mod"
+
+#: app/templates/packages/game_support.html:9
+msgid "Documentation"
+msgstr ""
+
+#: app/templates/packages/game_support.html:24
+#: app/templates/packages/view.html:194
+msgid "Source"
+msgstr "源代码"
+
+#: app/templates/packages/game_support.html:27
+msgid "Supported?"
+msgstr ""
+
+#: app/templates/packages/game_support.html:42
+msgid "Detected from dependencies"
+msgstr ""
+
+#: app/templates/packages/game_support.html:44
+msgid "Added by Editor"
+msgstr ""
+
+#: app/templates/packages/game_support.html:46
+msgid "mod.conf"
+msgstr ""
+
+#: app/templates/packages/game_support.html:62
+#: app/templates/packages/view.html:456
+msgid "No specific game is required"
+msgstr "不需要特定的子游戏"
+
+#: app/templates/packages/game_support.html:68
+msgid "Generated mod.conf lines"
+msgstr ""
+
+#: app/templates/packages/game_support.html:82
+msgid ""
+"You need to manually define at least one supported game before you can "
+"turn this off."
+msgstr ""
+
+#: app/templates/packages/game_support.html:88
+msgid "Editor Overrides"
+msgstr ""
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2248,7 +2414,7 @@ msgid ""
 msgstr "这将把评测转换为主题，保留评论，而消除其对软件包评级的影响。"
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:315
+#: app/templates/packages/view.html:319
 msgid "Review Votes"
 msgstr "评测投票"
 
@@ -2268,7 +2434,7 @@ msgid "Add a screenshot"
 msgstr "添加截图"
 
 #: app/templates/packages/screenshot_new.html:10
-#: app/templates/todo/user.html:73
+#: app/templates/todo/user.html:93
 #, python-format
 msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
@@ -2283,15 +2449,15 @@ msgstr "添加图片"
 msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr "最靠上的屏幕截图将用于软件包缩略图。"
 
-#: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:77
+#: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:97
 msgid "Way too small"
 msgstr "太小了"
 
-#: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:80
+#: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:100
 msgid "Too small"
 msgstr "太小"
 
-#: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
+#: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:103
 msgid "Not HD"
 msgstr "非高清"
 
@@ -2346,6 +2512,10 @@ msgstr "该软件包包含了在以下软件包中存在的Mod名称："
 #: app/templates/packages/similar.html:32
 msgid "Similar Forum Topics"
 msgstr "类似的论坛贴子"
+
+#: app/templates/packages/stats.html:17
+msgid "Download (.csv)"
+msgstr ""
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -2433,10 +2603,6 @@ msgstr "下载"
 msgid "Website"
 msgstr "网站"
 
-#: app/templates/packages/view.html:194
-msgid "Source"
-msgstr "源代码"
-
 #: app/templates/packages/view.html:200 app/templates/users/profile.html:68
 msgid "Forums"
 msgstr "论坛"
@@ -2445,139 +2611,144 @@ msgstr "论坛"
 msgid "Issue Tracker"
 msgstr "问题跟踪器"
 
-#: app/templates/packages/view.html:224 app/templates/threads/view.html:92
+#: app/templates/packages/view.html:228 app/templates/threads/view.html:92
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
-msgstr "这个贴子只对其创建者、软件包维护者、审核者及以上级别的用户、“@”提到的用户可见"
-"。"
+msgstr "这个贴子只对其创建者、软件包维护者、审核者及以上级别的用户、“@”提到的用户可见。"
 
-#: app/templates/packages/view.html:271
+#: app/templates/packages/view.html:275
 msgid "Awaiting review"
 msgstr "等待评测"
 
-#: app/templates/packages/view.html:300 app/templates/threads/view.html:67
+#: app/templates/packages/view.html:304 app/templates/threads/view.html:67
 msgid "Edit Review"
 msgstr "编辑评测"
 
-#: app/templates/packages/view.html:305
+#: app/templates/packages/view.html:309
 msgid "You can't review your own package."
 msgstr "你不能自己评测自己的软件包。"
 
-#: app/templates/packages/view.html:321
+#: app/templates/packages/view.html:325
 msgid "Used By"
 msgstr "被用于"
 
-#: app/templates/packages/view.html:327
+#: app/templates/packages/view.html:331
 msgid "Content"
 msgstr "内容"
 
-#: app/templates/packages/view.html:329 app/templates/packages/view.html:383
+#: app/templates/packages/view.html:333 app/templates/packages/view.html:387
 msgid "View content for game"
 msgstr "查看子游戏内容"
 
-#: app/templates/packages/view.html:343
+#: app/templates/packages/view.html:347
 msgid "Package may be outdated"
 msgstr "软件包可能已过时"
 
-#: app/templates/packages/view.html:350
+#: app/templates/packages/view.html:354
 msgid "Only visible to the author and Editors."
 msgstr "只对作者和编辑可见。"
 
-#: app/templates/packages/view.html:367
+#: app/templates/packages/view.html:371
 msgid "Warning"
 msgstr "警告"
 
-#: app/templates/packages/view.html:373
+#: app/templates/packages/view.html:377
 msgid "Like this package? Help support its development by making a donation"
 msgstr "喜欢这个软件包？捐款来支持发展"
 
-#: app/templates/packages/view.html:376
+#: app/templates/packages/view.html:380
 msgid "Donate now"
 msgstr "立即捐款"
 
-#: app/templates/packages/view.html:388
+#: app/templates/packages/view.html:392
 msgid "Dependencies"
 msgstr "依赖项"
 
-#: app/templates/packages/view.html:390
+#: app/templates/packages/view.html:394
 msgid "Required"
 msgstr "必需"
 
-#: app/templates/packages/view.html:408
+#: app/templates/packages/view.html:412
 msgid "No required dependencies"
 msgstr "没有必需的依赖项"
 
-#: app/templates/packages/view.html:414
+#: app/templates/packages/view.html:418
 msgid "Optional"
 msgstr "可选"
 
-#: app/templates/packages/view.html:436
+#: app/templates/packages/view.html:446
 msgid "Compatible Games"
 msgstr "兼容子游戏"
 
-#: app/templates/packages/view.html:445
-msgid "No specific game is required"
-msgstr "不需要特定的子游戏"
-
-#: app/templates/packages/view.html:450
+#: app/templates/packages/view.html:461
 msgid "This is an experimental feature."
 msgstr "这是一个实验性功能。"
 
-#: app/templates/packages/view.html:451
+#: app/templates/packages/view.html:462
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr "支持的游戏是由算法计算，不保证正确性。"
 
-#: app/templates/packages/view.html:456
+#: app/templates/packages/view.html:467
 msgid "Information"
 msgstr "信息"
 
-#: app/templates/packages/view.html:462
+#: app/templates/packages/view.html:473
 msgid "Technical Name"
 msgstr "技术名称"
 
-#: app/templates/packages/view.html:471
+#: app/templates/packages/view.html:482
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "代码%(code_license)s，媒体%(media_license)s。"
 
-#: app/templates/packages/view.html:479
+#: app/templates/packages/view.html:490
 msgid "Unknown"
 msgstr "未知"
 
-#: app/templates/packages/view.html:481
+#: app/templates/packages/view.html:492
 msgid "Added"
 msgstr "添加时间"
 
-#: app/templates/packages/view.html:495
+#: app/templates/packages/view.html:506
 msgid "Remove myself"
 msgstr "移除自己"
 
-#: app/templates/packages/view.html:500
+#: app/templates/packages/view.html:511
 msgid "Provides"
 msgstr "提供"
 
-#: app/templates/packages/view.html:522
+#: app/templates/packages/view.html:533
 msgid "More"
 msgstr "更多"
 
-#: app/templates/packages/view.html:551
+#: app/templates/packages/view.html:562
 msgid "See audit log"
 msgstr "见审计日志"
 
-#: app/templates/report/index.html:19
+#: app/templates/report/index.html:20
+msgid ""
+"Due to spam, we no longer accept reports from anonymous users on this "
+"form."
+msgstr ""
+
+#: app/templates/report/index.html:21
+msgid "Please sign in or contact the admin in another way"
+msgstr ""
+
+#: app/templates/report/index.html:39
 msgid "What are you reporting? Why are you reporting it?"
 msgstr "你要举报什么？为什么要举报？"
 
-#: app/templates/report/index.html:23
+#: app/templates/report/index.html:43
 msgid "Reports will be shared with ContentDB staff."
 msgstr "举报将共享至 ContentDB 审核人员。"
 
-#: app/templates/report/index.html:25
+#: app/templates/report/index.html:45
 msgid "Only the admin will be able to see who made the report."
 msgstr "只有管理员才能看到举报人。"
 
-#: app/templates/report/index.html:29
+#: app/templates/report/index.html:49
 msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
@@ -2725,8 +2896,8 @@ msgid "Unfulfilled Dependencies"
 msgstr "未满足的依赖项"
 
 #: app/templates/todo/editor.html:151
-msgid "Meta packages that have hard dependers, but no packages providing them."
-msgstr "有硬性依赖但没有软件包提供这些依赖的元包。"
+msgid "Mod names that have hard dependers, but no packages providing them."
+msgstr ""
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -2736,21 +2907,41 @@ msgstr "查看全部"
 msgid "Recent Actions"
 msgstr "最近的活动"
 
+#: app/templates/todo/mtver_support.html:4
+#, python-format
+msgid "Packages not supporting %(rel)s"
+msgstr ""
+
+#: app/templates/todo/mtver_support.html:13
+#: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
+#: app/templates/todo/outdated.html:16 app/templates/todo/screenshots.html:12
+#: app/templates/todo/screenshots.html:16
+msgid "Minetest-Mods org only"
+msgstr "仅限Minetest-Mods org"
+
+#: app/templates/todo/mtver_support.html:25 app/templates/todo/outdated.html:24
+#: app/templates/todo/screenshots.html:24 app/templates/todo/topics.html:12
+msgid "Sort by date"
+msgstr "按日期排序"
+
+#: app/templates/todo/mtver_support.html:29 app/templates/todo/outdated.html:28
+#: app/templates/todo/screenshots.html:28
+msgid "Sort by score"
+msgstr "按分数排序"
+
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
 msgstr "所有过时的软件包"
 
-#: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
-msgid "Minetest-Mods org only"
-msgstr "仅限Minetest-Mods org"
+#: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
+#: app/templates/todo/user.html:68
+msgid "Missing Screenshots"
+msgstr ""
 
-#: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
-msgid "Sort by date"
-msgstr "按日期排序"
-
-#: app/templates/todo/outdated.html:28
-msgid "Sort by score"
-msgstr "按分数排序"
+#: app/templates/todo/screenshots.html:33
+#, python-format
+msgid "%(count)d packages"
+msgstr ""
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -2764,14 +2955,13 @@ msgstr "仅缺失的标签"
 msgid "Edit Tags"
 msgstr "编辑标签"
 
-#: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
-#, python-format
-msgid "%(username)s's to do list"
-msgstr "%(username)s的待办事项列表"
+#: app/templates/todo/todo_base.html:11
+msgid "Your to do list"
+msgstr ""
 
 #: app/templates/todo/todo_base.html:23
-msgid "All Outdated Packages"
-msgstr "所有过时的软件包"
+msgid "Outdated Packages"
+msgstr ""
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
@@ -2801,6 +2991,11 @@ msgstr "隐藏丢弃的贴子"
 msgid "Topics to be Added"
 msgstr "需要添加的贴子"
 
+#: app/templates/todo/user.html:4
+#, python-format
+msgid "%(username)s's to do list"
+msgstr "%(username)s的待办事项列表"
+
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
 msgstr "其他待办事项"
@@ -2813,8 +3008,8 @@ msgstr "启用电子邮件通知"
 msgid "Unapproved Packages Needing Action"
 msgstr "需要操作的未通过包"
 
-#: app/templates/todo/user.html:40 app/templates/todo/user.html:121
-#: app/templates/todo/user.html:145
+#: app/templates/todo/user.html:40 app/templates/todo/user.html:82
+#: app/templates/todo/user.html:141 app/templates/todo/user.html:165
 msgid "Nothing to do :)"
 msgstr "没有需要办的事情 (*^o^*)"
 
@@ -2843,47 +3038,47 @@ msgid ""
 "settings."
 msgstr "要从下面删除软件包，请创建发行版或改变更新设置。"
 
-#: app/templates/todo/user.html:68
+#: app/templates/todo/user.html:88
 msgid "Small Screenshots"
 msgstr "小截图"
 
-#: app/templates/todo/user.html:71
+#: app/templates/todo/user.html:91
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr "这些软件包截图太小了，应该替换掉。"
 
-#: app/templates/todo/user.html:72
+#: app/templates/todo/user.html:92
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr "红色和橙色是低于限制的截图，灰色截图是低于推荐分辨率的截图。"
 
-#: app/templates/todo/user.html:127
+#: app/templates/todo/user.html:147
 msgid "See All"
 msgstr "查看全部"
 
-#: app/templates/todo/user.html:128
+#: app/templates/todo/user.html:148
 msgid "Packages Without Tags"
 msgstr "无标签的软件包"
 
-#: app/templates/todo/user.html:130
+#: app/templates/todo/user.html:150
 msgid "Labelling your packages with tags helps users find them."
 msgstr "用标签标记软件包有助于用户搜索。"
 
-#: app/templates/todo/user.html:150
+#: app/templates/todo/user.html:170
 msgid "Unadded Topics"
 msgstr "未添加的贴子"
 
-#: app/templates/todo/user.html:153
+#: app/templates/todo/user.html:173
 msgid "List of your forum topics which do not have a matching package."
 msgstr "列出没有对应软件包的论坛贴子。"
 
-#: app/templates/todo/user.html:154
+#: app/templates/todo/user.html:174
 msgid "Topics with a strikethrough have been marked as discarded."
 msgstr "标删除线的贴子已被丢弃。"
 
-#: app/templates/todo/user.html:162
+#: app/templates/todo/user.html:182
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "恭喜！您没有任何不在 CDB 上的贴子。"
 
@@ -2999,24 +3194,20 @@ msgid "Do you have an account on the Minetest Forums?"
 msgstr "您在 Minetest 论坛上有帐户吗？"
 
 #: app/templates/users/claim.html:13
-msgid "ContentDB will link your account to your forum account."
-msgstr "ContentDB 会将您的帐户链接到您的论坛帐户。"
-
-#: app/templates/users/claim.html:17
 msgid ""
-"You don't need a forum account, however, it's recommended to make the "
-"most out of the Minetest community."
-msgstr "你不需要论坛账户，但是，为了最好地利用Minetest社区，建议使用该账户。"
+"ContentDB will link your account to your forum account if you have one, "
+"but you don't need one."
+msgstr ""
 
-#: app/templates/users/claim.html:22
+#: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
 msgstr "<b>是</b>，我有一个论坛帐户"
 
-#: app/templates/users/claim.html:25
+#: app/templates/users/claim.html:21
 msgid "<b>No</b>, I don't have one"
 msgstr "<b>否</b>，我没有论坛帐户"
 
-#: app/templates/users/claim.html:28
+#: app/templates/users/claim.html:24
 msgid "Create forum account"
 msgstr "创建论坛账户"
 
@@ -3246,44 +3437,44 @@ msgstr "发送电子邮件"
 msgid "Donate"
 msgstr "捐赠"
 
-#: app/templates/users/profile.html:104
+#: app/templates/users/profile.html:105
 msgid "packages"
 msgstr "软件包"
 
-#: app/templates/users/profile.html:113
+#: app/templates/users/profile.html:114
 msgid "reviews"
 msgstr "评测"
 
-#: app/templates/users/profile.html:121
+#: app/templates/users/profile.html:122
 msgid "comments"
 msgstr "评论"
 
-#: app/templates/users/profile.html:133
+#: app/templates/users/profile.html:143
 msgid "Claim"
 msgstr "认领"
 
-#: app/templates/users/profile.html:135
+#: app/templates/users/profile.html:145
 msgid "Is this you? Claim your account now!"
 msgstr "这是你吗？现在就认领账户!"
 
-#: app/templates/users/profile.html:168
+#: app/templates/users/profile.html:178
 #, python-format
 msgid "%(value)d / %(target)d"
 msgstr "%(value)d / %(target)d"
 
-#: app/templates/users/profile.html:182
+#: app/templates/users/profile.html:192
 msgid "Create package"
 msgstr "创建软件包"
 
-#: app/templates/users/profile.html:188
+#: app/templates/users/profile.html:198
 msgid "View list of tags"
 msgstr "查看标签列表"
 
-#: app/templates/users/profile.html:198
+#: app/templates/users/profile.html:208
 msgid "Maintained Packages"
 msgstr "维护的包"
 
-#: app/templates/users/profile.html:200
+#: app/templates/users/profile.html:210
 msgid "This user is also a maintainer of the following packages"
 msgstr "该用户也是以下软件包的维护者"
 
@@ -3372,6 +3563,11 @@ msgstr "马上"
 #: app/templates/users/settings_email.html:46
 msgid "In digest"
 msgstr "摘要"
+
+#: app/templates/users/stats.html:4
+#, python-format
+msgid "Statistics for %(display_name)s's packages"
+msgstr ""
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
@@ -3538,3 +3734,28 @@ msgstr "请考虑启用电子邮件通知，您可以自定义发送的数量"
 #~ " creator, the package owner, and "
 #~ "users of Approver rank or above."
 #~ msgstr "该贴子仅对创建者，软件包所有者和审核者及以上人员可见。"
+
+#~ msgid "Meta Packages"
+#~ msgstr "元包"
+
+#~ msgid "No meta packages found."
+#~ msgstr "找不到元包。"
+
+#~ msgid "Meta Package \"%(name)s\""
+#~ msgstr "元包“%(name)s”"
+
+#~ msgid "Meta packages that have hard dependers, but no packages providing them."
+#~ msgstr "有硬性依赖但没有软件包提供这些依赖的元包。"
+
+#~ msgid "All Outdated Packages"
+#~ msgstr "所有过时的软件包"
+
+#~ msgid "ContentDB will link your account to your forum account."
+#~ msgstr "ContentDB 会将您的帐户链接到您的论坛帐户。"
+
+#~ msgid ""
+#~ "You don't need a forum account, "
+#~ "however, it's recommended to make the"
+#~ " most out of the Minetest community."
+#~ msgstr "你不需要论坛账户，但是，为了最好地利用Minetest社区，建议使用该账户。"
+

@@ -1,4 +1,4 @@
-# Translations template for PROJECT.
+# Vietnamese translations for PROJECT.
 # Copyright (C) 2022 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
 # FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
@@ -7,26 +7,33 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2022-06-05 18:10+0100\n"
+"POT-Creation-Date: 2022-12-09 19:06+0000\n"
 "PO-Revision-Date: 2022-08-25 11:19+0000\n"
 "Last-Translator: Văn Chí <chiv8331@gmail.com>\n"
-"Language-Team: Vietnamese <https://hosted.weblate.org/projects/minetest/"
-"contentdb/vi/>\n"
 "Language: vi\n"
+"Language-Team: Vietnamese "
+"<https://hosted.weblate.org/projects/minetest/contentdb/vi/>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.14-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
-#: app/__init__.py:115
+#: app/__init__.py:122
 msgid "Banned:"
 msgstr "Đã bị cấm:"
 
-#: app/__init__.py:117
+#: app/__init__.py:124
 msgid "You have been banned."
 msgstr "Bạn đã và đang bị cấm."
+
+#: app/querybuilder.py:22 app/templates/admin/tags/list.html:38
+#: app/templates/admin/warnings/list.html:28
+#: app/templates/modnames/list.html:16 app/templates/packages/list.html:4
+#: app/templates/todo/editor.html:46 app/templates/users/list.html:22
+#: app/templates/users/profile.html:201
+msgid "Packages"
+msgstr "Gói"
 
 #: app/template_filters.py:52
 #, fuzzy, python-format
@@ -35,7 +42,7 @@ msgstr "%(delta)s trước"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
-#: app/templates/metapackages/list.html:12
+#: app/templates/modnames/list.html:12
 msgid "Name"
 msgstr "Tên"
 
@@ -44,9 +51,10 @@ msgstr "Tên"
 msgid "Limit to package"
 msgstr "Giới hạn bởi gói"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:249
-#: app/blueprints/packages/packages.py:467
-#: app/blueprints/packages/packages.py:563
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:473
+#: app/blueprints/packages/packages.py:569
+#: app/blueprints/packages/packages.py:639
 #: app/blueprints/packages/releases.py:60
 #: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:47
 #: app/blueprints/packages/screenshots.py:35
@@ -87,7 +95,7 @@ msgstr "Sửa thông tin"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:512 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:523 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Phát hành"
 
@@ -99,165 +107,198 @@ msgstr "Ảnh chụp màn hình"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:483
+#: app/templates/packages/view.html:494
 msgid "Maintainers"
 msgstr "Người bảo trì"
 
-#: app/blueprints/packages/__init__.py:52 app/templates/base.html:136
+#: app/blueprints/packages/__init__.py:52 app/templates/base.html:144
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
 msgstr "Nhật ký kiểm toán"
 
-#: app/blueprints/packages/__init__.py:57 app/templates/packages/share.html:4
+#: app/blueprints/packages/__init__.py:57 app/templates/base.html:135
+#: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
+#: app/templates/packages/view.html:211 app/templates/users/profile.html:130
+msgid "Statistics"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
 msgstr "Chia sẻ và Huy hiệu"
 
-#: app/blueprints/packages/__init__.py:62 app/templates/packages/view.html:110
+#: app/blueprints/packages/__init__.py:67 app/templates/packages/view.html:110
 msgid "Remove"
 msgstr "Loại bỏ"
 
-#: app/blueprints/packages/packages.py:159
+#: app/blueprints/packages/__init__.py:75
+#: app/templates/packages/game_support.html:4
+msgid "Supported Games"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:160
 msgid "Error: Another package already uses this forum topic!"
 msgstr "Lỗi: Một gói khác đã sử dụng chủ đề diễn đàn này rồi!"
 
-#: app/blueprints/packages/packages.py:165
+#: app/blueprints/packages/packages.py:166
 msgid "Error: Forum topic author doesn't match package author."
 msgstr "Lỗi: Tác giả chủ đề diễn đàn không khớp với tác giả gói."
 
-#: app/blueprints/packages/packages.py:168
+#: app/blueprints/packages/packages.py:169
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr ""
-"Cảnh báo: Không tìm thấy chủ đề diễn đàn. Điều này có lẽ sẽ xảy ra nếu chủ "
-"đề chỉ mới vừa được tạo."
+"Cảnh báo: Không tìm thấy chủ đề diễn đàn. Điều này có lẽ sẽ xảy ra nếu "
+"chủ đề chỉ mới vừa được tạo."
 
-#: app/blueprints/packages/packages.py:215
+#: app/blueprints/packages/packages.py:216
 msgid "No download available."
 msgstr "Không có sẵn bản tải xuống nào."
 
-#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:460
+#: app/blueprints/packages/packages.py:230 app/templates/packages/view.html:471
 #, fuzzy
 msgid "Type"
 msgstr "Nhập"
 
-#: app/blueprints/packages/packages.py:230
+#: app/blueprints/packages/packages.py:231
 msgid "Title (Human-readable)"
 msgstr "Tiêu đề (Người-đọc được)"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:561
+#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:567
 msgid "Name (Technical)"
 msgstr "Tên (Kỹ thuật)"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:562
+#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:568
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Chỉ chữ thường (az), chữ số (0-9) và dấu gạch dưới (_)"
 
-#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:233
 msgid "Short Description (Plaintext)"
 msgstr "Mô tả ngắn gọn (Văn bản thô)"
 
-#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:475
+#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:486
 msgid "Maintenance State"
 msgstr "Trạng thái Bảo trì"
 
-#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:237 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "Thẻ"
 
-#: app/blueprints/packages/packages.py:237
+#: app/blueprints/packages/packages.py:238
 msgid "Content Warnings"
 msgstr "Cảnh báo Nội dung"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:464
+#: app/blueprints/packages/packages.py:239 app/templates/packages/view.html:475
 msgid "License"
 msgstr "Giấy phép"
 
-#: app/blueprints/packages/packages.py:239
+#: app/blueprints/packages/packages.py:240
 #, fuzzy
 msgid "Media License"
 msgstr "Giấy phép phương tiện truyền thông"
 
-#: app/blueprints/packages/packages.py:241
+#: app/blueprints/packages/packages.py:242
 msgid "Long Description (Markdown)"
 msgstr "Mô tả dài (Cho phép đánh dấu)"
 
-#: app/blueprints/packages/packages.py:243
+#: app/blueprints/packages/packages.py:244
 msgid "VCS Repository URL"
 msgstr "URL kho lưu trữ VCS"
 
-#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:51
+#: app/blueprints/packages/packages.py:245 app/blueprints/users/settings.py:51
 msgid "Website URL"
 msgstr "URL trang web"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:246
 msgid "Issue Tracker URL"
 msgstr "URL của Trình theo dõi Sự cố"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:247
 msgid "Forum Topic ID"
 msgstr "ID chủ đề diễn đàn"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:248
 msgid "Video URL"
 msgstr "URL video"
 
-#: app/blueprints/packages/packages.py:263
+#: app/blueprints/packages/packages.py:254
+msgid "_game is not an allowed name"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:264
+msgid ""
+"Package already exists, but is removed. Please contact ContentDB staff to"
+" restore the package"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:269
 msgid "Package already exists"
 msgstr "Gói đã tồn tại rồi"
 
-#: app/blueprints/packages/packages.py:321
+#: app/blueprints/packages/packages.py:327
 msgid "Unable to find that user"
 msgstr "Không thể tìm thấy người dùng đó"
 
-#: app/blueprints/packages/packages.py:325
+#: app/blueprints/packages/packages.py:331
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:99
 msgid "Permission denied"
 msgstr "Quyền bị từ chối"
 
-#: app/blueprints/packages/packages.py:381
-#: app/blueprints/packages/packages.py:430
-#: app/blueprints/packages/packages.py:446
+#: app/blueprints/packages/packages.py:387
+#: app/blueprints/packages/packages.py:436
+#: app/blueprints/packages/packages.py:452
 msgid "You don't have permission to do that"
 msgstr "Bạn không có quyền làm điều đó"
 
-#: app/blueprints/packages/packages.py:409
+#: app/blueprints/packages/packages.py:415
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Vui lòng nhận xét những thay đổi gì là cần thiết trong chuỗi phê duyệt"
 
-#: app/blueprints/packages/packages.py:441
+#: app/blueprints/packages/packages.py:447
 msgid "Deleted package"
 msgstr "Gói đã xóa"
 
-#: app/blueprints/packages/packages.py:457
+#: app/blueprints/packages/packages.py:463
 #, fuzzy
 msgid "Unapproved package"
 msgstr "Gói chưa được phê duyệt"
 
-#: app/blueprints/packages/packages.py:466
+#: app/blueprints/packages/packages.py:472
 msgid "Maintainers (Comma-separated)"
 msgstr "Những người bảo trì (được phân tách-bằng dấu phẩy)"
 
-#: app/blueprints/packages/packages.py:475
+#: app/blueprints/packages/packages.py:481
 msgid "You don't have permission to edit maintainers"
 msgstr "Bạn không có quyền chỉnh sửa người bảo trì"
 
-#: app/blueprints/packages/packages.py:525
+#: app/blueprints/packages/packages.py:531
 msgid "You are not a maintainer"
 msgstr "Bạn không phải người bảo trì"
 
-#: app/blueprints/packages/packages.py:528
+#: app/blueprints/packages/packages.py:534
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Chủ sở hữu gói không thể tự xóa mình khỏi tư cách là người bảo trì"
 
-#: app/blueprints/packages/packages.py:560
+#: app/blueprints/packages/packages.py:566
 msgid "Author Name"
 msgstr "Tên Tác giả"
+
+#: app/blueprints/packages/packages.py:636
+msgid "Enable support detection based on dependencies (recommended)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:637
+msgid "Supported games (Comma-separated)"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:638
+msgid "Unsupported games (Comma-separated)"
+msgstr ""
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -285,13 +326,13 @@ msgstr "Tham chiếu Git (ví dụ: cam kết băm, nhánh hoặc thẻ)"
 
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:68
-#: app/blueprints/packages/releases.py:184
+#: app/blueprints/packages/releases.py:192
 msgid "Minimum Minetest Version"
 msgstr "Phiên bản Minetest Thấp nhất"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:70
-#: app/blueprints/packages/releases.py:187
+#: app/blueprints/packages/releases.py:195
 msgid "Maximum Minetest Version"
 msgstr "Phiên bản Minetest Cao nhất"
 
@@ -317,73 +358,72 @@ msgstr "Nhập từ Git"
 msgid "Upload .zip file"
 msgstr "Tải lên tệp .zip"
 
-#: app/blueprints/packages/releases.py:183
+#: app/blueprints/packages/releases.py:191
 msgid "Set Min"
 msgstr "Đặt tối thiểu"
 
-#: app/blueprints/packages/releases.py:186
+#: app/blueprints/packages/releases.py:194
 msgid "Set Max"
 msgstr "Đặt tối đa"
 
-#: app/blueprints/packages/releases.py:189
+#: app/blueprints/packages/releases.py:197
 msgid "Only change values previously set as none"
 msgstr "Chỉ thay đổi các giá trị đã đặt trước đó là none"
 
-#: app/blueprints/packages/releases.py:190
+#: app/blueprints/packages/releases.py:198
 msgid "Update"
 msgstr "Cập nhật"
 
-#: app/blueprints/packages/releases.py:239
+#: app/blueprints/packages/releases.py:247
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Kích hoạt"
 
-#: app/blueprints/packages/releases.py:240
+#: app/blueprints/packages/releases.py:248
 msgid "New Commit"
 msgstr "Cam kết Mới"
 
-#: app/blueprints/packages/releases.py:241 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:249 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Thẻ Mới"
 
-#: app/blueprints/packages/releases.py:243
+#: app/blueprints/packages/releases.py:251
 #, fuzzy
 msgid "Branch name"
 msgstr "Tên chi nhánh"
 
-#: app/blueprints/packages/releases.py:244
+#: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Hành động"
 
-#: app/blueprints/packages/releases.py:245
+#: app/blueprints/packages/releases.py:253
 msgid "Send notification and mark as outdated"
 msgstr "Gửi thông báo và đánh dấu là đã lỗi thời"
 
-#: app/blueprints/packages/releases.py:245
+#: app/blueprints/packages/releases.py:253
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "Tạo phát hành"
 
-#: app/blueprints/packages/releases.py:247
+#: app/blueprints/packages/releases.py:255
 msgid "Save Settings"
 msgstr "Lưu Cài Đặt"
 
-#: app/blueprints/packages/releases.py:248
+#: app/blueprints/packages/releases.py:256
 #, fuzzy
 msgid "Disable Automation"
 msgstr "Tắt tự động hóa"
 
-#: app/blueprints/packages/releases.py:287
+#: app/blueprints/packages/releases.py:295
 msgid "Please add a Git repository URL in order to set up automatic releases"
-msgstr ""
-"Vui lòng thêm URL kho lưu trữ Git để thiết lập các bản phát hành tự động"
+msgstr "Vui lòng thêm URL kho lưu trữ Git để thiết lập các bản phát hành tự động"
 
-#: app/blueprints/packages/releases.py:303
+#: app/blueprints/packages/releases.py:311
 msgid "Deleted update configuration"
 msgstr "Đã xóa cấu hình cập nhật"
 
-#: app/blueprints/packages/releases.py:311
+#: app/blueprints/packages/releases.py:319
 msgid "Now, please create an initial release"
 msgstr "Bây giờ, hãy tạo một bản phát hành ban đầu"
 
@@ -416,8 +456,8 @@ msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
-"Gần đây, bạn đã đánh giá quá nhiều gói. Vui lòng đợi trước khi thử lại và "
-"cân nhắc làm cho bài đánh giá của bạn chi tiết hơn"
+"Gần đây, bạn đã đánh giá quá nhiều gói. Vui lòng đợi trước khi thử lại và"
+" cân nhắc làm cho bài đánh giá của bạn chi tiết hơn"
 
 #: app/blueprints/packages/reviews.py:175
 msgid "You can't vote on the reviews on your own package!"
@@ -441,9 +481,9 @@ msgstr "Ảnh bìa"
 msgid "Message"
 msgstr "Tin nhắn"
 
-#: app/blueprints/report/__init__.py:35 app/templates/base.html:238
-#: app/templates/macros/threads.html:50 app/templates/packages/view.html:543
-#: app/templates/report/index.html:4 app/templates/report/index.html:10
+#: app/blueprints/report/__init__.py:35 app/templates/base.html:246
+#: app/templates/macros/threads.html:50 app/templates/packages/view.html:554
+#: app/templates/report/index.html:4 app/templates/report/index.html:15
 #: app/templates/users/profile.html:28
 msgid "Report"
 msgstr "Báo cáo"
@@ -515,7 +555,7 @@ msgstr "Mật khẩu"
 msgid "Remember me"
 msgstr "Nhớ thông tin đăng nhập của tôi"
 
-#: app/blueprints/users/account.py:40 app/templates/base.html:165
+#: app/blueprints/users/account.py:40 app/templates/base.html:173
 #: app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "Đăng nhập"
@@ -589,12 +629,12 @@ msgstr "Tên người dùng không hợp lệ"
 #, fuzzy
 msgid "An account already exists for that username but hasn't been claimed yet."
 msgstr ""
-"Một tài khoản đã tồn tại cho tên người dùng đó nhưng vẫn chưa được xác nhận."
+"Một tài khoản đã tồn tại cho tên người dùng đó nhưng vẫn chưa được xác "
+"nhận."
 
 #: app/blueprints/users/account.py:134 app/blueprints/users/account.py:141
 msgid "That username/display name is already in use, please choose another."
-msgstr ""
-"Tên người dùng / tên hiển thị đó đã được sử dụng, vui lòng chọn tên khác."
+msgstr "Tên người dùng / tên hiển thị đó đã được sử dụng, vui lòng chọn tên khác."
 
 #: app/blueprints/users/account.py:146 app/blueprints/users/account.py:259
 msgid "Email already in use"
@@ -606,15 +646,15 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
-"Chúng tôi không thể tạo tài khoản vì email đã được %(display_name)s sử dụng. "
-"Hãy thử một địa chỉ email khác."
+"Chúng tôi không thể tạo tài khoản vì email đã được %(display_name)s sử "
+"dụng. Hãy thử một địa chỉ email khác."
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:254
 #: app/blueprints/users/settings.py:142
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
-"Địa chỉ email đó đã bị hủy đăng ký / đưa vào danh sách đen và không thể sử "
-"dụng"
+"Địa chỉ email đó đã bị hủy đăng ký / đưa vào danh sách đen và không thể "
+"sử dụng"
 
 #: app/blueprints/users/account.py:191
 msgid "Reset Password"
@@ -678,8 +718,8 @@ msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
-"Địa chỉ email của bạn đã thay đổi. Nếu bạn không yêu cầu điều này, vui lòng "
-"liên hệ với quản trị viên."
+"Địa chỉ email của bạn đã thay đổi. Nếu bạn không yêu cầu điều này, vui "
+"lòng liên hệ với quản trị viên."
 
 #: app/blueprints/users/account.py:370
 msgid "You may now log in"
@@ -694,8 +734,8 @@ msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
 msgstr ""
-"Email đó hiện đã được đưa vào danh sách đen. Vui lòng liên hệ với quản trị "
-"viên nếu bạn muốn hoàn tác việc này."
+"Email đó hiện đã được đưa vào danh sách đen. Vui lòng liên hệ với quản "
+"trị viên nếu bạn muốn hoàn tác việc này."
 
 #: app/blueprints/users/claim.py:40 app/blueprints/users/claim.py:65
 msgid ""
@@ -893,18 +933,45 @@ msgstr "Văn bản cần tìm (biểu thức chính quy)"
 msgid "File filter"
 msgstr "Bộ lọc tệp"
 
-#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:50
+#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:49
 #: app/templates/todo/tags.html:15
 msgid "Search"
 msgstr "Tìm kiếm"
+
+#: app/logic/package_validator.py:20
+msgid "A package already exists with this name. Please see Policy and Guidance 3"
+msgstr ""
+
+#: app/logic/package_validator.py:23
+#: app/templates/macros/package_approval.html:36
+msgid "A release is required before this package can be approved."
+msgstr "Một bản phát hành là cần thiết trước khi gói này có thể được chấp thuận."
+
+#: app/logic/package_validator.py:29
+#: app/templates/macros/package_approval.html:45
+#, python-format
+msgid ""
+"The following hard dependencies need to be added to ContentDB first: "
+"%(deps)s"
+msgstr "Trước tiên cần thêm các phần phụ thuộc cứng sau vào ContentDB: %(deps)s"
+
+#: app/logic/package_validator.py:34
+#: app/templates/macros/package_approval.html:41
+msgid "You need to add at least one screenshot."
+msgstr "Bạn cần thêm ít nhất một ảnh chụp màn hình."
+
+#: app/logic/package_validator.py:37
+#: app/templates/macros/package_approval.html:49
+msgid "Please wait for the license to be added to CDB."
+msgstr "Xin vui lòng chờ đợi cho giấy phép được thêm vào CBD."
 
 #: app/logic/packages.py:95
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr ""
-"Tên chỉ có thể chứa các chữ cái viết thường (az), chữ số (0-9) và dấu gạch "
-"dưới (_)"
+"Tên chỉ có thể chứa các chữ cái viết thường (az), chữ số (0-9) và dấu "
+"gạch dưới (_)"
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
@@ -928,8 +995,8 @@ msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
-"Bạn đã tạo quá nhiều bản phát hành cho gói này trong 5 phút qua, vui lòng "
-"đợi trước khi thử lại"
+"Bạn đã tạo quá nhiều bản phát hành cho gói này trong 5 phút qua, vui lòng"
+" đợi trước khi thử lại"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
@@ -959,43 +1026,43 @@ msgstr "Vui lòng tải lên %(file_desc)s"
 msgid "Uploaded image isn't actually an image"
 msgstr "Hình ảnh được tải lên thực tế không phải là hình ảnh"
 
-#: app/models/packages.py:65
+#: app/models/packages.py:66
 #, fuzzy
 msgid "Mod"
 msgstr "Mod"
 
-#: app/models/packages.py:67
+#: app/models/packages.py:68
 msgid "Game"
 msgstr "Trò chơi"
 
-#: app/models/packages.py:69
+#: app/models/packages.py:70
 msgid "Texture Pack"
 msgstr "Gói kết cấu"
 
-#: app/models/packages.py:74 app/templates/base.html:27
-#: app/templates/metapackages/view.html:17
+#: app/models/packages.py:75 app/templates/base.html:27
+#: app/templates/modnames/view.html:14
 #, fuzzy
 msgid "Mods"
 msgstr "Sửa đổi"
 
-#: app/models/packages.py:76 app/templates/base.html:30
-#: app/templates/metapackages/view.html:14
+#: app/models/packages.py:77 app/templates/base.html:30
+#: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Trò chơi"
 
-#: app/models/packages.py:78 app/templates/base.html:33
+#: app/models/packages.py:79 app/templates/base.html:33
 msgid "Texture Packs"
 msgstr "Gói Kết cấu"
 
-#: app/models/packages.py:167
+#: app/models/packages.py:168
 msgid "Submit for Approval"
 msgstr "Nộp để được Chấp nhận"
 
-#: app/models/packages.py:169
+#: app/models/packages.py:170
 msgid "Approve"
 msgstr "Chấp thuận"
 
-#: app/models/packages.py:171 app/templates/api/create_edit_token.html:17
+#: app/models/packages.py:172 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
 #: app/templates/packages/review_create_edit.html:55
 #: app/templates/threads/delete_reply.html:19
@@ -1015,8 +1082,8 @@ msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr ""
-"Bạn nhận được email này vì ai đó (hy vọng là bạn) đã nhập địa chỉ email của "
-"bạn làm email của người dùng."
+"Bạn nhận được email này vì ai đó (hy vọng là bạn) đã nhập địa chỉ email "
+"của bạn làm email của người dùng."
 
 #: app/tasks/emails.py:153
 #, python-format
@@ -1052,108 +1119,108 @@ msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
-"Trang đó không thể được tìm thấy. Liên kết có thể bị hỏng, trang có thể đã "
-"bị xóa, hoặc có thể bạn không có quyền truy cập vào nó."
+"Trang đó không thể được tìm thấy. Liên kết có thể bị hỏng, trang có thể "
+"đã bị xóa, hoặc có thể bạn không có quyền truy cập vào nó."
 
 #: app/templates/base.html:36
 msgid "Random"
 msgstr "Ngẫu nhiên"
 
-#: app/templates/base.html:39 app/templates/base.html:233
+#: app/templates/base.html:39 app/templates/base.html:241
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
 msgid "Help"
 msgstr "Trợ giúp"
 
-#: app/templates/base.html:42 app/templates/packages/view.html:173
-#: app/templates/packages/view.html:532 app/templates/threads/list.html:4
-#, fuzzy
-msgid "Threads"
-msgstr "Chủ đề"
-
-#: app/templates/base.html:48
+#: app/templates/base.html:46
 #, python-format
 msgid "Search %(type)s"
 msgstr "Tìm kiếm %(type)s"
 
-#: app/templates/base.html:48 app/templates/todo/tags.html:11
+#: app/templates/base.html:46 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "Tìm kiếm tất cả gói"
 
-#: app/templates/base.html:62
+#: app/templates/base.html:65
 msgid "Work Queue"
 msgstr "Hàng đợi Công việc"
 
-#: app/templates/base.html:75 app/templates/base.html:127
+#: app/templates/base.html:78 app/templates/base.html:130
 msgid "To do list"
 msgstr "Những việc cần làm"
 
-#: app/templates/base.html:84 app/templates/notifications/list.html:4
+#: app/templates/base.html:87 app/templates/notifications/list.html:4
 msgid "Notifications"
 msgstr "Thông báo"
 
-#: app/templates/base.html:105
+#: app/templates/base.html:108
 msgid "Add Package"
 msgstr "Thêm Gói"
 
-#: app/templates/base.html:122
+#: app/templates/base.html:125
 msgid "Profile"
 msgstr "Hồ sơ"
 
-#: app/templates/base.html:140
+#: app/templates/base.html:148
 msgid "Admin"
 msgstr "Quản trị"
 
-#: app/templates/base.html:143
+#: app/templates/base.html:151
 msgid "License Editor"
 msgstr "Trình chỉnh sửa Giấy phép"
 
-#: app/templates/base.html:148
+#: app/templates/base.html:156
 msgid "Restore Package"
 msgstr "Khôi phục Gói"
 
-#: app/templates/base.html:151
+#: app/templates/base.html:159
 msgid "Tag Editor"
 msgstr "Trình biên Tập Thẻ"
 
-#: app/templates/base.html:153
+#: app/templates/base.html:161
 msgid "Create Tag"
 msgstr "Tạo thẻ"
 
-#: app/templates/base.html:158 app/templates/packages/release_new.html:12
+#: app/templates/base.html:166 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "Cài đặt"
 
-#: app/templates/base.html:161
+#: app/templates/base.html:169
 msgid "Sign out"
 msgstr "Đăng xuất"
 
-#: app/templates/base.html:190
+#: app/templates/base.html:198
 msgid "Help translate ContentDB"
 msgstr "Giúp dịch ContentDB"
 
-#: app/templates/base.html:234
+#: app/templates/base.html:242
 msgid "Policy and Guidance"
 msgstr "Chính sách và Hướng dẫn"
 
-#: app/templates/base.html:235
+#: app/templates/base.html:243
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:236 app/templates/users/register.html:43
+#: app/templates/base.html:244 app/templates/users/register.html:43
 msgid "Privacy Policy"
 msgstr "Chính sách Bảo mật"
 
-#: app/templates/base.html:240
+#: app/templates/base.html:248
 msgid "Stats / Monitoring"
 msgstr "Thống kê / Giám sát"
 
-#: app/templates/base.html:241
+#: app/templates/base.html:249
 msgid "User List"
 msgstr "Danh sách người dùng"
 
-#: app/templates/base.html:242
+#: app/templates/base.html:250 app/templates/packages/view.html:173
+#: app/templates/packages/view.html:543 app/templates/threads/list.html:4
+#, fuzzy
+msgid "Threads"
+msgstr "Chủ đề"
+
+#: app/templates/base.html:251
 msgid "Source Code"
 msgstr "Mã Nguồn"
 
@@ -1175,8 +1242,8 @@ msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> bởi %(author)s"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:177 app/templates/packages/view.html:293
-#: app/templates/users/profile.html:206
+#: app/templates/packages/view.html:177 app/templates/packages/view.html:297
+#: app/templates/users/profile.html:216
 msgid "Reviews"
 msgstr "Đánh giá"
 
@@ -1283,14 +1350,6 @@ msgstr "Mô tả"
 msgid "Views"
 msgstr "Lượt xem"
 
-#: app/templates/admin/tags/list.html:38
-#: app/templates/admin/warnings/list.html:28
-#: app/templates/metapackages/list.html:16 app/templates/packages/list.html:4
-#: app/templates/todo/editor.html:46 app/templates/users/list.html:22
-#: app/templates/users/profile.html:191
-msgid "Packages"
-msgstr "Gói"
-
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Minetest Versions"
@@ -1329,8 +1388,8 @@ msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
-"Hãy cẩn thận với những gì / người mà bạn chia sẻ mã thông báo, vì bạn chịu "
-"trách nhiệm về các hành động của tài khoản của mình."
+"Hãy cẩn thận với những gì / người mà bạn chia sẻ mã thông báo, vì bạn "
+"chịu trách nhiệm về các hành động của tài khoản của mình."
 
 #: app/templates/api/create_edit_token.html:30
 #, fuzzy
@@ -1343,8 +1402,8 @@ msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
 msgstr ""
-"Vì lý do bảo mật, mã thông báo truy cập sẽ chỉ được hiển thị một lần.  Đặt "
-"lại mã thông báo nếu nó bị mất."
+"Vì lý do bảo mật, mã thông báo truy cập sẽ chỉ được hiển thị một lần.  "
+"Đặt lại mã thông báo nếu nó bị mất."
 
 #: app/templates/api/create_edit_token.html:40
 msgid "Reset"
@@ -1401,8 +1460,8 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
 msgstr ""
-"Bạn đã nhận được email này vì bạn là người đã đăng ký của ContentDB, và đã "
-"kích hoạt gửi email thông báo."
+"Bạn đã nhận được email này vì bạn là người đã đăng ký của ContentDB, và "
+"đã kích hoạt gửi email thông báo."
 
 #: app/templates/emails/notification.html:30
 #: app/templates/emails/notification_digest.html:50
@@ -1433,22 +1492,22 @@ msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
-"Chúng tôi không thể thực hiện việc đặt lại mật khẩu vì chúng tôi không thể "
-"tìm thấy tài khoản được liên kết với email này."
+"Chúng tôi không thể thực hiện việc đặt lại mật khẩu vì chúng tôi không "
+"thể tìm thấy tài khoản được liên kết với email này."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
-"Điều này có thể là do bạn đã sử dụng một email khác với tài khoản của mình "
-"hoặc vì bạn chưa bao giờ xác nhận email của mình."
+"Điều này có thể là do bạn đã sử dụng một email khác với tài khoản của "
+"mình hoặc vì bạn chưa bao giờ xác nhận email của mình."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
 msgstr ""
-"Bạn có thể sử dụng GitHub để đăng nhập nếu nó được liên kết với tài khoản "
-"của bạn."
+"Bạn có thể sử dụng GitHub để đăng nhập nếu nó được liên kết với tài khoản"
+" của bạn."
 
 #: app/templates/emails/unable_to_find_account.html:9
 #, fuzzy
@@ -1471,8 +1530,8 @@ msgid ""
 "This email has been sent to you because someone (hopefully you) has "
 "entered your email address as a user's email."
 msgstr ""
-"Email này được gửi cho bạn vì ai đó (hy vọng là bạn) đã nhập địa chỉ email "
-"của bạn làm email của người dùng."
+"Email này được gửi cho bạn vì ai đó (hy vọng là bạn) đã nhập địa chỉ "
+"email của bạn làm email của người dùng."
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
@@ -1481,7 +1540,8 @@ msgstr "Nếu đó không phải là bạn, thì chỉ cần xóa email này."
 #: app/templates/emails/verify.html:15
 msgid "If this was you, then please click this link to confirm the address:"
 msgstr ""
-"Nếu đây là bạn, thì xin vui lòng nhấn vào liên kết này để xác nhận địa chỉ:"
+"Nếu đây là bạn, thì xin vui lòng nhấn vào liên kết này để xác nhận địa "
+"chỉ:"
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
@@ -1497,16 +1557,16 @@ msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
-"Chúng tôi rất tiếc khi thấy bạn ra đi. Bạn chỉ cần làm một việc nữa trước "
-"khi email của bạn bị đưa vào danh sách đen."
+"Chúng tôi rất tiếc khi thấy bạn ra đi. Bạn chỉ cần làm một việc nữa trước"
+" khi email của bạn bị đưa vào danh sách đen."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
 msgstr ""
-"Bạn nhận được email này vì ai đó (hy vọng là bạn) đã nhập địa chỉ email của "
-"bạn vào biểu mẫu hủy đăng ký."
+"Bạn nhận được email này vì ai đó (hy vọng là bạn) đã nhập địa chỉ email "
+"của bạn vào biểu mẫu hủy đăng ký."
 
 #: app/templates/macros/audit_log.html:13
 #, python-format
@@ -1542,30 +1602,9 @@ msgstr "Bạn cần tạo một bản phát hành trước khi gói này có th�
 msgid "Release is still importing, or has an error."
 msgstr "Bản phát hành vẫn đang nhập hoặc có lỗi."
 
-#: app/templates/macros/package_approval.html:36
-msgid "A release is required before this package can be approved."
-msgstr ""
-"Một bản phát hành là cần thiết trước khi gói này có thể được chấp thuận."
-
-#: app/templates/macros/package_approval.html:41
-msgid "You need to add at least one screenshot."
-msgstr "Bạn cần thêm ít nhất một ảnh chụp màn hình."
-
-#: app/templates/macros/package_approval.html:45
-#, python-format
-msgid ""
-"The following hard dependencies need to be added to ContentDB first: "
-"%(deps)s"
-msgstr "Trước tiên cần thêm các phần phụ thuộc cứng sau vào ContentDB: %(deps)s"
-
-#: app/templates/macros/package_approval.html:49
-msgid "Please wait for the license to be added to CDB."
-msgstr "Xin vui lòng chờ đợi cho giấy phép được thêm vào CBD."
-
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot, but this isn't required."
-msgstr ""
-"Bạn nên thêm ít nhất một ảnh chụp màn hình, nhưng điều này không bắt buộc."
+msgstr "Bạn nên thêm ít nhất một ảnh chụp màn hình, nhưng điều này không bắt buộc."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1605,8 +1644,8 @@ msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
-"Bạn có thể mở một chủ đề nếu bạn có một câu hỏi cho các người phê duyệt hoặc "
-"tác giả gói."
+"Bạn có thể mở một chủ đề nếu bạn có một câu hỏi cho các người phê duyệt "
+"hoặc tác giả gói."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
@@ -1635,7 +1674,7 @@ msgid "Edit / Approve"
 msgstr "Chỉnh sửa / Phê duyệt"
 
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:98
-#: app/templates/packages/view.html:247
+#: app/templates/packages/view.html:251
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
@@ -1689,6 +1728,89 @@ msgstr "Tại sao hoặc tại sao không? Cố gắng mang tính xây dựng"
 msgid "Post Review"
 msgstr "Đăng đánh giá"
 
+#: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
+#, python-format
+msgid "%(display_name)s's packages"
+msgstr ""
+
+#: app/templates/macros/stats.html:36
+msgid "JavaScript is required to display charts and statistics"
+msgstr ""
+
+#: app/templates/macros/stats.html:45
+msgid "Lifetime unique downloads"
+msgstr ""
+
+#: app/templates/macros/stats.html:59
+msgid "Downloads, past 7 days"
+msgstr ""
+
+#: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
+#, python-format
+msgid "%(downloads)s per day"
+msgstr ""
+
+#: app/templates/macros/stats.html:76
+msgid "Downloads, past 30 days"
+msgstr ""
+
+#: app/templates/macros/stats.html:89
+msgid "Loading..."
+msgstr ""
+
+#: app/templates/macros/stats.html:92
+msgid "No data"
+msgstr ""
+
+#: app/templates/macros/stats.html:97
+msgid "Downloads by Package"
+msgstr ""
+
+#: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
+#: app/templates/macros/stats.html:118
+msgid ""
+"This is a stacked area graph. For total downloads, look at the combined "
+"height."
+msgstr ""
+
+#: app/templates/macros/stats.html:104
+msgid "Downloads by Client"
+msgstr ""
+
+#: app/templates/macros/stats.html:110
+msgid "Downloads by Reason"
+msgstr ""
+
+#: app/templates/macros/stats.html:112
+msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
+msgstr ""
+
+#: app/templates/macros/stats.html:113
+msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
+msgstr ""
+
+#: app/templates/macros/stats.html:114
+msgid "<b>Update</b>: download was to update the package."
+msgstr ""
+
+#: app/templates/macros/stats.html:115
+msgid ""
+"<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
+"Minetest version (before 5.5)."
+msgstr ""
+
+#: app/templates/macros/stats.html:127
+msgid "Need more stats?"
+msgstr ""
+
+#: app/templates/macros/stats.html:129
+msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
+msgstr ""
+
+#: app/templates/macros/stats.html:133
+msgid "ContentDB Grafana"
+msgstr ""
+
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
 msgstr "Người bảo trì"
@@ -1725,27 +1847,27 @@ msgstr "Chủ đề"
 msgid "Last Reply"
 msgstr "Trả lời cuối cùng"
 
-#: app/templates/macros/todo.html:23
+#: app/templates/macros/todo.html:21
 #, python-format
 msgid "On %(trigger)s, do %(action)s"
 msgstr "Nếu %(trigger)s, thì %(action)s"
 
-#: app/templates/macros/todo.html:37 app/templates/packages/view.html:104
-#: app/templates/packages/view.html:355
+#: app/templates/macros/todo.html:35 app/templates/packages/view.html:104
+#: app/templates/packages/view.html:359
 msgid "Release"
 msgstr "Phát hành"
 
-#: app/templates/macros/todo.html:44
+#: app/templates/macros/todo.html:42
 msgid "Repo"
 msgstr "Kho"
 
-#: app/templates/macros/todo.html:50
+#: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:359
+#: app/templates/packages/view.html:363
 msgid "Update settings"
 msgstr "Cài đặt cập nhật"
 
-#: app/templates/macros/todo.html:57
+#: app/templates/macros/todo.html:55 app/templates/macros/todo.html:85
 msgid "No outdated packages."
 msgstr "Không có gói lỗi thời."
 
@@ -1763,9 +1885,8 @@ msgid "Actions"
 msgstr "Hành động"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
-#: app/templates/metapackages/view.html:29
-#: app/templates/packages/similar.html:40 app/templates/todo/editor.html:160
-#: app/templates/todo/editor.html:175
+#: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
+#: app/templates/todo/editor.html:160 app/templates/todo/editor.html:175
 #, fuzzy
 msgid "WIP"
 msgstr "WIP"
@@ -1783,43 +1904,41 @@ msgstr "Bỏ đi"
 msgid "Old"
 msgstr "Cũ"
 
-#: app/templates/metapackages/list.html:4
-#: app/templates/metapackages/view.html:4
-#, fuzzy
-msgid "Meta Packages"
-msgstr "Siêu Gói"
+#: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
+msgid "Mod Names"
+msgstr ""
 
-#: app/templates/metapackages/list.html:37
-#, fuzzy
-msgid "No meta packages found."
-msgstr "Không tìm thấy siêu gói nào."
+#: app/templates/modnames/list.html:37
+msgid "No mod names found."
+msgstr ""
 
-#: app/templates/metapackages/view.html:10
-#, fuzzy, python-format
-msgid "Meta Package \"%(name)s\""
-msgstr "Siêu gói \"%(name)s\""
+#: app/templates/modnames/view.html:10
+#, python-format
+msgid "Mod Name \"%(name)s\""
+msgstr ""
 
-#: app/templates/metapackages/view.html:12
+#: app/templates/modnames/view.html:12
 msgid "Provided By"
 msgstr "Được Cung Cấp Bởi"
 
-#: app/templates/metapackages/view.html:21 app/templates/todo/todo_base.html:35
+#: app/templates/modnames/view.html:21 app/templates/todo/todo_base.html:41
 msgid "Forum Topics"
 msgstr "Chủ đề diễn đàn"
 
-#: app/templates/metapackages/view.html:27
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:396
-#: app/templates/packages/view.html:420 app/templates/packages/view.html:441
+#: app/templates/modnames/view.html:27
+#: app/templates/packages/game_support.html:37
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:400
+#: app/templates/packages/view.html:424 app/templates/packages/view.html:452
 #: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s bởi %(display_name)s"
 
-#: app/templates/metapackages/view.html:35
+#: app/templates/modnames/view.html:35
 msgid "Required By"
 msgstr "Yêu cầu bởi"
 
-#: app/templates/metapackages/view.html:38
+#: app/templates/modnames/view.html:38
 msgid "Optionally Used By"
 msgstr "Tùy chọn được sử dụng bởi"
 
@@ -1892,7 +2011,8 @@ msgstr "Để trống để sử dụng nhánh mặc định"
 #: app/templates/packages/update_config.html:35
 msgid "Currently, the branch name field is only used by the New Commit trigger."
 msgstr ""
-"Hiện tại, trường tên nhánh chỉ được sử dụng bởi trình kích hoạt Cam kết mới."
+"Hiện tại, trường tên nhánh chỉ được sử dụng bởi trình kích hoạt Cam kết "
+"mới."
 
 #: app/templates/packages/create_edit.html:5
 #, python-format
@@ -1918,8 +2038,8 @@ msgid ""
 "You can include a .cdb.json file in your %(type)s to update these details"
 " automatically."
 msgstr ""
-"Bạn có thể bao gồm tệp .cdb.json trong %(type)s của mình để cập nhật các chi "
-"tiết này một cách tự động."
+"Bạn có thể bao gồm tệp .cdb.json trong %(type)s của mình để cập nhật các "
+"chi tiết này một cách tự động."
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -1932,6 +2052,7 @@ msgstr ""
 "\t\t\tchẳng hạn như tìm siêu dữ liệu từ git và tự động hoàn thành."
 
 #: app/templates/packages/create_edit.html:66
+#: app/templates/packages/game_support.html:21
 #: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
 msgid "Package"
 msgstr "Gói"
@@ -1945,14 +2066,14 @@ msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
-"Vui lòng chọn 'Đang tiến hành' nếu gói của bạn không ổn định và không nên "
-"được khuyến nghị cho tất cả người chơi"
+"Vui lòng chọn 'Đang tiến hành' nếu gói của bạn không ổn định và không nên"
+" được khuyến nghị cho tất cả người chơi"
 
 #: app/templates/packages/create_edit.html:88
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr ""
-"Nếu không có phương tiện truyền thông, hãy đặt Giấy phép Phương tiện truyền "
-"thông giống như giấy Phép."
+"Nếu không có phương tiện truyền thông, hãy đặt Giấy phép Phương tiện "
+"truyền thông giống như giấy Phép."
 
 #: app/templates/packages/create_edit.html:94
 msgid "Repository and Links"
@@ -1970,7 +2091,8 @@ msgstr ""
 #: app/templates/packages/create_edit.html:100
 msgid "Leave blank if you don't have a repo. Click skip if the import fails."
 msgstr ""
-"Để trống nếu bạn không có một kho. Nhấn vào bỏ qua nếu nhập khẩu không thành."
+"Để trống nếu bạn không có một kho. Nhấn vào bỏ qua nếu nhập khẩu không "
+"thành."
 
 #: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
@@ -2006,16 +2128,16 @@ msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
 msgstr ""
-"Tùy thuộc vào thứ hạng của họ, mà họ sẽ có thể chỉnh sửa gói, tạo bản phát "
-"hành và ảnh chụp màn hình cũng như đọc các chuỗi riêng tư."
+"Tùy thuộc vào thứ hạng của họ, mà họ sẽ có thể chỉnh sửa gói, tạo bản "
+"phát hành và ảnh chụp màn hình cũng như đọc các chuỗi riêng tư."
 
 #: app/templates/packages/edit_maintainers.html:13
 msgid ""
 "Maintainers cannot add or remove other maintainers, but can remove "
 "themselves."
 msgstr ""
-"Người bảo trì không thể thêm hoặc bớt người bảo trì khác, nhưng có thể tự "
-"loại bỏ."
+"Người bảo trì không thể thêm hoặc bớt người bảo trì khác, nhưng có thể tự"
+" loại bỏ."
 
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:24
@@ -2027,6 +2149,50 @@ msgstr "Trung Tâm Cộng Đồng"
 #, python-format
 msgid "Mods for %(title)s"
 msgstr "Mods cho %(title)s"
+
+#: app/templates/packages/game_support.html:9
+msgid "Documentation"
+msgstr ""
+
+#: app/templates/packages/game_support.html:24
+#: app/templates/packages/view.html:194
+msgid "Source"
+msgstr "Nguồn"
+
+#: app/templates/packages/game_support.html:27
+msgid "Supported?"
+msgstr ""
+
+#: app/templates/packages/game_support.html:42
+msgid "Detected from dependencies"
+msgstr ""
+
+#: app/templates/packages/game_support.html:44
+msgid "Added by Editor"
+msgstr ""
+
+#: app/templates/packages/game_support.html:46
+msgid "mod.conf"
+msgstr ""
+
+#: app/templates/packages/game_support.html:62
+#: app/templates/packages/view.html:456
+msgid "No specific game is required"
+msgstr "Không có trò chơi cụ thể nào được yêu cầu"
+
+#: app/templates/packages/game_support.html:68
+msgid "Generated mod.conf lines"
+msgstr ""
+
+#: app/templates/packages/game_support.html:82
+msgid ""
+"You need to manually define at least one supported game before you can "
+"turn this off."
+msgstr ""
+
+#: app/templates/packages/game_support.html:88
+msgid "Editor Overrides"
+msgstr ""
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2052,8 +2218,8 @@ msgstr "Thay đổi hàng loạt bản phát hành"
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
-"Sử dụng trang này để đặt giá trị tối thiểu và tối đa của tất cả các bản phát "
-"hành cho gói của bạn."
+"Sử dụng trang này để đặt giá trị tối thiểu và tối đa của tất cả các bản "
+"phát hành cho gói của bạn."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
@@ -2103,16 +2269,16 @@ msgid ""
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
 "Đặt phiên bản Minetest tối thiểu và tối đa được hỗ trợ.\n"
-"\t\t\t Bản phát hành này sẽ bị ẩn đối với các khách hàng bên ngoài phạm vi "
-"đó. "
+"\t\t\t Bản phát hành này sẽ bị ẩn đối với các khách hàng bên ngoài phạm "
+"vi đó. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
-"Bạn có thể <a href=\"/help/package_config/\">đặt cái này tự động</a> trong ."
-"conf của gói của bạn."
+"Bạn có thể <a href=\"/help/package_config/\">đặt cái này tự động</a> "
+"trong .conf của gói của bạn."
 
 #: app/templates/packages/release_edit.html:70
 msgid "Delete Release"
@@ -2127,13 +2293,14 @@ msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
 msgstr ""
-"Mọi nội dung tải lên được liên kết sẽ không bị xóa ngay lập tức, nhưng bản "
-"phát hành sẽ không còn được liệt kê."
+"Mọi nội dung tải lên được liên kết sẽ không bị xóa ngay lập tức, nhưng "
+"bản phát hành sẽ không còn được liệt kê."
 
 #: app/templates/packages/release_edit.html:82
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr ""
-"Bạn không thể xóa bản phát hành mới nhất; vui lòng tạo một cái mới hơn trước."
+"Bạn không thể xóa bản phát hành mới nhất; vui lòng tạo một cái mới hơn "
+"trước."
 
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
@@ -2161,8 +2328,8 @@ msgid ""
 "You can create releases automatically when you push commits or tags to "
 "your repository."
 msgstr ""
-"Bạn có thể tạo bản phát hành tự động khi bạn đẩy các cam kết hoặc thẻ vào "
-"kho lưu trữ của mình."
+"Bạn có thể tạo bản phát hành tự động khi bạn đẩy các cam kết hoặc thẻ vào"
+" kho lưu trữ của mình."
 
 #: app/templates/packages/release_new.html:28
 #: app/templates/packages/release_wizard.html:69
@@ -2175,8 +2342,8 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
-"Sử dụng Git sẽ cho phép bạn tạo bản phát hành tự động khi bạn đẩy mã hoặc "
-"thẻ."
+"Sử dụng Git sẽ cho phép bạn tạo bản phát hành tự động khi bạn đẩy mã hoặc"
+" thẻ."
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
@@ -2196,8 +2363,8 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
-"Hãy nhìn vào <a href=\"/help/package_config/\">Hướng dẫn cấu hình và phát "
-"hành gói</a> cho\n"
+"Hãy nhìn vào <a href=\"/help/package_config/\">Hướng dẫn cấu hình và phát"
+" hành gói</a> cho\n"
 "\t\t\tmẹo tùy chỉnh các bản phát hành."
 
 #: app/templates/packages/release_new.html:61
@@ -2210,8 +2377,8 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
-".conf của gói của bạn có thể <a href=\"/help/package_config/\">đặt thành tự "
-"động</a>,\n"
+".conf của gói của bạn có thể <a href=\"/help/package_config/\">đặt thành "
+"tự động</a>,\n"
 "\t\t\t mà sẽ ghi đè lựa chọn của bạn."
 
 #: app/templates/packages/release_wizard.html:4
@@ -2227,16 +2394,17 @@ msgstr "Để sau"
 #, python-format
 msgid "A release is a single downloadable version of your %(title)s."
 msgstr ""
-"Bản phát hành là một phiên bản có thể tải xuống duy nhất của %(title)s, mà "
-"của bạn."
+"Bản phát hành là một phiên bản có thể tải xuống duy nhất của %(title)s, "
+"mà của bạn."
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
 "You need to create releases even if you use a rolling release development"
 " cycle, as Minetest needs them to check for updates."
 msgstr ""
-"Bạn cần tạo các bản phát hành ngay cả khi bạn sử dụng chu kỳ phát triển bản "
-"phát hành luân phiên, vì Minetest cần chúng để kiểm tra các bản cập nhật."
+"Bạn cần tạo các bản phát hành ngay cả khi bạn sử dụng chu kỳ phát triển "
+"bản phát hành luân phiên, vì Minetest cần chúng để kiểm tra các bản cập "
+"nhật."
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
@@ -2244,16 +2412,16 @@ msgid ""
 "When you push a change to your Git repository, ContentDB can create a new"
 " release automatically or send you a reminder."
 msgstr ""
-"Khi bạn đẩy một thay đổi vào kho lưu trữ Git của mình, ContentDB có thể tự "
-"động tạo một bản phát hành mới hoặc gửi cho bạn lời nhắc."
+"Khi bạn đẩy một thay đổi vào kho lưu trữ Git của mình, ContentDB có thể "
+"tự động tạo một bản phát hành mới hoặc gửi cho bạn lời nhắc."
 
 #: app/templates/packages/release_wizard.html:21
 msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
-"ContentDB sẽ kiểm tra kho lưu trữ Git của bạn mỗi ngày, nhưng bạn có thể sử "
-"dụng webhook hoặc API để cập nhật nhanh hơn."
+"ContentDB sẽ kiểm tra kho lưu trữ Git của bạn mỗi ngày, nhưng bạn có thể "
+"sử dụng webhook hoặc API để cập nhật nhanh hơn."
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
@@ -2288,8 +2456,8 @@ msgstr "Không có nhắc nhở"
 #: app/templates/packages/release_wizard.html:60
 msgid "Unfortunately, you will otherwise need to create a release manually."
 msgstr ""
-"Thật không may, mặc khác, bạn sẽ cần phải tạo bản phát hành theo cách thủ "
-"công."
+"Thật không may, mặc khác, bạn sẽ cần phải tạo bản phát hành theo cách thủ"
+" công."
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
@@ -2323,9 +2491,10 @@ msgid ""
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
 "Để tránh mất dữ liệu, bạn không thể xóa gói vĩnh viễn.\n"
-"\t\t\t Bạn có thể xóa chúng khỏi ContentDB, điều này sẽ khiến chúng không\n"
-"\t\t\t hiển thị cho bất kỳ người dùng nào và chúng có thể bị xóa vĩnh viễn "
-"trong tương lai.\n"
+"\t\t\t Bạn có thể xóa chúng khỏi ContentDB, điều này sẽ khiến chúng không"
+"\n"
+"\t\t\t hiển thị cho bất kỳ người dùng nào và chúng có thể bị xóa vĩnh "
+"viễn trong tương lai.\n"
 "\t\t\t Quản trị viên có thể khôi phục các gói đã xóa, nếu cần."
 
 #: app/templates/packages/remove.html:19
@@ -2343,7 +2512,8 @@ msgstr "Lý do"
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr ""
-"Lý do không chấp thuận / xóa, điều này được hiển thị trong nhật ký kiểm toán"
+"Lý do không chấp thuận / xóa, điều này được hiển thị trong nhật ký kiểm "
+"toán"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
@@ -2362,8 +2532,8 @@ msgstr "Đăng một bài đánh giá cho %(title)s bởi %(author)s"
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr ""
-"Tìm thấy lỗi (bug)? Đăng nó trên <a href=\"%(url)s\">issue tracker</a> thay "
-"vào đó."
+"Tìm thấy lỗi (bug)? Đăng nó trên <a href=\"%(url)s\">issue tracker</a> "
+"thay vào đó."
 
 #: app/templates/packages/review_create_edit.html:56
 msgid "Delete review."
@@ -2378,7 +2548,7 @@ msgstr ""
 "hưởng của nó vào đánh giá gói."
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:315
+#: app/templates/packages/view.html:319
 msgid "Review Votes"
 msgstr "Vote đánh giá"
 
@@ -2398,14 +2568,14 @@ msgid "Add a screenshot"
 msgstr "Thêm ảnh chụp màn hình"
 
 #: app/templates/packages/screenshot_new.html:10
-#: app/templates/todo/user.html:73
+#: app/templates/todo/user.html:93
 #, python-format
 msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
 msgstr ""
-"Độ phân giải được đề xuất là 1920x1080 và ảnh chụp màn hình ít nhất phải là "
-"%(width)dx%(height)d."
+"Độ phân giải được đề xuất là 1920x1080 và ảnh chụp màn hình ít nhất phải "
+"là %(width)dx%(height)d."
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
@@ -2415,16 +2585,16 @@ msgstr "Thêm Hình Ảnh"
 msgid "Topmost screenshot will be used as the package thumbnail."
 msgstr "Ảnh chụp màn hình trên cùng sẽ được sử dụng làm hình thu nhỏ của gói."
 
-#: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:77
+#: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:97
 #, fuzzy
 msgid "Way too small"
 msgstr "Cách quá nhỏ"
 
-#: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:80
+#: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:100
 msgid "Too small"
 msgstr "Quá nhỏ"
 
-#: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:83
+#: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:103
 msgid "Not HD"
 msgstr "Không phải HD"
 
@@ -2481,6 +2651,10 @@ msgstr "Gói này chứa các modnames có trong các gói sau:"
 msgid "Similar Forum Topics"
 msgstr "Chủ đề diễn đàn tương tự"
 
+#: app/templates/packages/stats.html:17
+msgid "Download (.csv)"
+msgstr ""
+
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
@@ -2503,8 +2677,8 @@ msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
 msgstr ""
-"Git Update Detection đủ thông minh để không tạo lại bản phát hành nếu bạn đã "
-"tạo nó theo cách thủ công hoặc sử dụng webhooks / API."
+"Git Update Detection đủ thông minh để không tạo lại bản phát hành nếu bạn"
+" đã tạo nó theo cách thủ công hoặc sử dụng webhooks / API."
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
@@ -2573,10 +2747,6 @@ msgstr "Tải về"
 msgid "Website"
 msgstr "Trang web"
 
-#: app/templates/packages/view.html:194
-msgid "Source"
-msgstr "Nguồn"
-
 #: app/templates/packages/view.html:200 app/templates/users/profile.html:68
 msgid "Forums"
 msgstr "Diễn đàn"
@@ -2585,149 +2755,155 @@ msgstr "Diễn đàn"
 msgid "Issue Tracker"
 msgstr "Theo Dõi Vấn Đề"
 
-#: app/templates/packages/view.html:224 app/templates/threads/view.html:92
+#: app/templates/packages/view.html:228 app/templates/threads/view.html:92
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
 msgstr ""
-"Chủ đề này chỉ hiển thị với người tạo, người duy trì gói, người dùng có xếp "
-"hạng Người phê duyệt trở lên và người dùng @mentioned (được đề cập đến)."
+"Chủ đề này chỉ hiển thị với người tạo, người duy trì gói, người dùng có "
+"xếp hạng Người phê duyệt trở lên và người dùng @mentioned (được đề cập "
+"đến)."
 
-#: app/templates/packages/view.html:271
+#: app/templates/packages/view.html:275
 msgid "Awaiting review"
 msgstr "Chờ xem xét"
 
-#: app/templates/packages/view.html:300 app/templates/threads/view.html:67
+#: app/templates/packages/view.html:304 app/templates/threads/view.html:67
 msgid "Edit Review"
 msgstr "Chỉnh sửa đánh giá"
 
-#: app/templates/packages/view.html:305
+#: app/templates/packages/view.html:309
 msgid "You can't review your own package."
 msgstr "Bạn không thể đánh giá gói của mình."
 
-#: app/templates/packages/view.html:321
+#: app/templates/packages/view.html:325
 msgid "Used By"
 msgstr "Được Sử Dụng Bởi"
 
-#: app/templates/packages/view.html:327
+#: app/templates/packages/view.html:331
 msgid "Content"
 msgstr "Nội dung"
 
-#: app/templates/packages/view.html:329 app/templates/packages/view.html:383
+#: app/templates/packages/view.html:333 app/templates/packages/view.html:387
 msgid "View content for game"
 msgstr "Xem nội dung cho trò chơi"
 
-#: app/templates/packages/view.html:343
+#: app/templates/packages/view.html:347
 msgid "Package may be outdated"
 msgstr "Gói có thể đã lỗi thời"
 
-#: app/templates/packages/view.html:350
+#: app/templates/packages/view.html:354
 msgid "Only visible to the author and Editors."
 msgstr "Chỉ hiển thị cho tác giả và Biên tập viên."
 
-#: app/templates/packages/view.html:367
+#: app/templates/packages/view.html:371
 msgid "Warning"
 msgstr "Cảnh báo"
 
-#: app/templates/packages/view.html:373
+#: app/templates/packages/view.html:377
 msgid "Like this package? Help support its development by making a donation"
 msgstr "Thích gói này? Giúp hỗ trợ sự phát triển của nó bằng cách đóng góp"
 
-#: app/templates/packages/view.html:376
+#: app/templates/packages/view.html:380
 msgid "Donate now"
 msgstr "Quyên góp ngay bây giờ"
 
-#: app/templates/packages/view.html:388
+#: app/templates/packages/view.html:392
 msgid "Dependencies"
 msgstr "Phụ thuộc"
 
-#: app/templates/packages/view.html:390
+#: app/templates/packages/view.html:394
 msgid "Required"
 msgstr "Yêu cầu"
 
-#: app/templates/packages/view.html:408
+#: app/templates/packages/view.html:412
 msgid "No required dependencies"
 msgstr "Không có phụ thuộc bắt buộc"
 
-#: app/templates/packages/view.html:414
+#: app/templates/packages/view.html:418
 msgid "Optional"
 msgstr "Tùy chọn"
 
-#: app/templates/packages/view.html:436
+#: app/templates/packages/view.html:446
 msgid "Compatible Games"
 msgstr "Trò chơi tương thích"
 
-#: app/templates/packages/view.html:445
-msgid "No specific game is required"
-msgstr "Không có trò chơi cụ thể nào được yêu cầu"
-
-#: app/templates/packages/view.html:450
+#: app/templates/packages/view.html:461
 msgid "This is an experimental feature."
 msgstr "Đây là một tính năng thử nghiệm."
 
-#: app/templates/packages/view.html:451
+#: app/templates/packages/view.html:462
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr ""
-"Các trò chơi được hỗ trợ được xác định bởi một thuật toán và có thể không "
-"đúng."
+"Các trò chơi được hỗ trợ được xác định bởi một thuật toán và có thể không"
+" đúng."
 
-#: app/templates/packages/view.html:456
+#: app/templates/packages/view.html:467
 msgid "Information"
 msgstr "Thông tin"
 
-#: app/templates/packages/view.html:462
+#: app/templates/packages/view.html:473
 msgid "Technical Name"
 msgstr "Tên Kỹ Thuật"
 
-#: app/templates/packages/view.html:471
+#: app/templates/packages/view.html:482
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
-msgstr ""
-"%(code_license)s cho mã,<br>%(media_license)s cho phương tiện truền thông."
+msgstr "%(code_license)s cho mã,<br>%(media_license)s cho phương tiện truền thông."
 
-#: app/templates/packages/view.html:479
+#: app/templates/packages/view.html:490
 msgid "Unknown"
 msgstr "Không rõ"
 
-#: app/templates/packages/view.html:481
+#: app/templates/packages/view.html:492
 msgid "Added"
 msgstr "Đã thêm"
 
-#: app/templates/packages/view.html:495
+#: app/templates/packages/view.html:506
 msgid "Remove myself"
 msgstr "Xóa chính tôi"
 
-#: app/templates/packages/view.html:500
+#: app/templates/packages/view.html:511
 msgid "Provides"
 msgstr "Cung cấp"
 
-#: app/templates/packages/view.html:522
+#: app/templates/packages/view.html:533
 msgid "More"
 msgstr "Thêm"
 
-#: app/templates/packages/view.html:551
+#: app/templates/packages/view.html:562
 msgid "See audit log"
 msgstr "Xem nhật ký kiểm tra"
 
-#: app/templates/report/index.html:19
+#: app/templates/report/index.html:20
+msgid ""
+"Due to spam, we no longer accept reports from anonymous users on this "
+"form."
+msgstr ""
+
+#: app/templates/report/index.html:21
+msgid "Please sign in or contact the admin in another way"
+msgstr ""
+
+#: app/templates/report/index.html:39
 msgid "What are you reporting? Why are you reporting it?"
 msgstr "Bạn đang báo cáo điều gì? Tại sao bạn báo cáo nó?"
 
-#: app/templates/report/index.html:23
+#: app/templates/report/index.html:43
 msgid "Reports will be shared with ContentDB staff."
 msgstr "Các báo cáo sẽ được chia sẻ với nhân viên ContentDB."
 
-#: app/templates/report/index.html:25
+#: app/templates/report/index.html:45
 msgid "Only the admin will be able to see who made the report."
 msgstr "Chỉ quản trị viên mới có thể xem ai đã thực hiện báo cáo."
 
-#: app/templates/report/index.html:29
+#: app/templates/report/index.html:49
 msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
 msgstr ""
-"Tìm thấy một lỗi? Xin hãy báo cáo trên trình theo dõi vấn đề của gói hoặc "
-"thay vào đó trong một chuỗi (thread)."
+"Tìm thấy một lỗi? Xin hãy báo cáo trên trình theo dõi vấn đề của gói hoặc"
+" thay vào đó trong một chuỗi (thread)."
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
@@ -2771,16 +2947,16 @@ msgid ""
 "If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
 "you can let us know here."
 msgstr ""
-"Nếu gói không có trên CDB (ví dụ: nếu nó không hoạt động), thì bạn có thể "
-"cho chúng tôi biết tại đây."
+"Nếu gói không có trên CDB (ví dụ: nếu nó không hoạt động), thì bạn có thể"
+" cho chúng tôi biết tại đây."
 
 #: app/templates/threads/new.html:47
 msgid ""
 "Only you, the package author, and users of Approver rank and above can "
 "read private threads."
 msgstr ""
-"Chỉ bạn, tác giả gói và người dùng có xếp hạng Người chấp thuận trở lên mới "
-"có thể đọc các chuỗi(threads) riêng tư."
+"Chỉ bạn, tác giả gói và người dùng có xếp hạng Người chấp thuận trở lên "
+"mới có thể đọc các chuỗi(threads) riêng tư."
 
 #: app/templates/threads/user_comments.html:9
 #: app/templates/threads/user_comments.html:13
@@ -2876,8 +3052,8 @@ msgid "Unfulfilled Dependencies"
 msgstr "Sự phụ thuộc chưa được thực hiện"
 
 #: app/templates/todo/editor.html:151
-msgid "Meta packages that have hard dependers, but no packages providing them."
-msgstr "Các gói meta có phụ thuộc cứng, nhưng không có gói nào cung cấp chúng."
+msgid "Mod names that have hard dependers, but no packages providing them."
+msgstr ""
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -2887,21 +3063,41 @@ msgstr "Xem Tất cả"
 msgid "Recent Actions"
 msgstr "Hành Động Gần Đây"
 
+#: app/templates/todo/mtver_support.html:4
+#, python-format
+msgid "Packages not supporting %(rel)s"
+msgstr ""
+
+#: app/templates/todo/mtver_support.html:13
+#: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
+#: app/templates/todo/outdated.html:16 app/templates/todo/screenshots.html:12
+#: app/templates/todo/screenshots.html:16
+msgid "Minetest-Mods org only"
+msgstr "Chỉ Minetest-Mods org"
+
+#: app/templates/todo/mtver_support.html:25 app/templates/todo/outdated.html:24
+#: app/templates/todo/screenshots.html:24 app/templates/todo/topics.html:12
+msgid "Sort by date"
+msgstr "Lọc theo ngày"
+
+#: app/templates/todo/mtver_support.html:29 app/templates/todo/outdated.html:28
+#: app/templates/todo/screenshots.html:28
+msgid "Sort by score"
+msgstr "Lọc theo điểm"
+
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
 msgstr "Tất cả các gói đã lỗi thời"
 
-#: app/templates/todo/outdated.html:12 app/templates/todo/outdated.html:16
-msgid "Minetest-Mods org only"
-msgstr "Chỉ Minetest-Mods org"
+#: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
+#: app/templates/todo/user.html:68
+msgid "Missing Screenshots"
+msgstr ""
 
-#: app/templates/todo/outdated.html:24 app/templates/todo/topics.html:12
-msgid "Sort by date"
-msgstr "Lọc theo ngày"
-
-#: app/templates/todo/outdated.html:28
-msgid "Sort by score"
-msgstr "Lọc theo điểm"
+#: app/templates/todo/screenshots.html:33
+#, python-format
+msgid "%(count)d packages"
+msgstr ""
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -2915,14 +3111,13 @@ msgstr "Chỉ thẻ thiếu"
 msgid "Edit Tags"
 msgstr "Chỉnh Sửa Thẻ"
 
-#: app/templates/todo/todo_base.html:11 app/templates/todo/user.html:4
-#, python-format
-msgid "%(username)s's to do list"
-msgstr "Công việc cần làm của %(username)s"
+#: app/templates/todo/todo_base.html:11
+msgid "Your to do list"
+msgstr ""
 
 #: app/templates/todo/todo_base.html:23
-msgid "All Outdated Packages"
-msgstr "Tất cả các Gói đã Lỗi thời"
+msgid "Outdated Packages"
+msgstr ""
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
@@ -2952,6 +3147,11 @@ msgstr "Ẩn chủ đề(topics) bị bỏ đi"
 msgid "Topics to be Added"
 msgstr "Các chủ đề(topics) sẽ được thêm vào"
 
+#: app/templates/todo/user.html:4
+#, python-format
+msgid "%(username)s's to do list"
+msgstr "Công việc cần làm của %(username)s"
+
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
 msgstr "Việc làm khác"
@@ -2964,8 +3164,8 @@ msgstr "Cho phép thông báo email"
 msgid "Unapproved Packages Needing Action"
 msgstr "Các gói không được phê duyệt cần hành động"
 
-#: app/templates/todo/user.html:40 app/templates/todo/user.html:121
-#: app/templates/todo/user.html:145
+#: app/templates/todo/user.html:40 app/templates/todo/user.html:82
+#: app/templates/todo/user.html:141 app/templates/todo/user.html:165
 msgid "Nothing to do :)"
 msgstr "Không có gì để làm :)"
 
@@ -2987,63 +3187,63 @@ msgid ""
 "releases when New Commits or New Tags are pushed to Git by clicking "
 "'Update Settings'."
 msgstr ""
-"Thay vì đánh dấu các gói là lỗi thời, bạn có thể tự động tạo bản phát hành "
-"khi Cam kết mới hoặc Thẻ mới được đẩy lên Git bằng cách nhấp vào 'Cài đặt "
-"cập nhật'."
+"Thay vì đánh dấu các gói là lỗi thời, bạn có thể tự động tạo bản phát "
+"hành khi Cam kết mới hoặc Thẻ mới được đẩy lên Git bằng cách nhấp vào "
+"'Cài đặt cập nhật'."
 
 #: app/templates/todo/user.html:60
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
-"Để loại bỏ một gói từ bên dưới, tạo ra một bản phát hành hoặc thay đổi bản "
-"thiết lập."
+"Để loại bỏ một gói từ bên dưới, tạo ra một bản phát hành hoặc thay đổi "
+"bản thiết lập."
 
-#: app/templates/todo/user.html:68
+#: app/templates/todo/user.html:88
 msgid "Small Screenshots"
 msgstr "Ảnh chụp màn hình nhỏ"
 
-#: app/templates/todo/user.html:71
+#: app/templates/todo/user.html:91
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr ""
-"Những gói này có ảnh chụp màn hình nhưng chúng quá nhỏ, và cần được thay thế."
+"Những gói này có ảnh chụp màn hình nhưng chúng quá nhỏ, và cần được thay "
+"thế."
 
-#: app/templates/todo/user.html:72
+#: app/templates/todo/user.html:92
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr ""
-"Màu đỏ và màu cam là ảnh chụp màn hình dưới giới hạn và ảnh chụp màn hình "
-"màu xám ở dưới độ phân giải được đề xuất."
+"Màu đỏ và màu cam là ảnh chụp màn hình dưới giới hạn và ảnh chụp màn hình"
+" màu xám ở dưới độ phân giải được đề xuất."
 
-#: app/templates/todo/user.html:127
+#: app/templates/todo/user.html:147
 msgid "See All"
 msgstr "Thấy Tất cả"
 
-#: app/templates/todo/user.html:128
+#: app/templates/todo/user.html:148
 msgid "Packages Without Tags"
 msgstr "Gói không có thẻ"
 
-#: app/templates/todo/user.html:130
-msgid "Labelling your packages with tags helps users find them."
-msgstr ""
-"Gắn nhãn các gói của bạn bằng các thẻ sẽ giúp người dùng tìm thấy chúng."
-
 #: app/templates/todo/user.html:150
+msgid "Labelling your packages with tags helps users find them."
+msgstr "Gắn nhãn các gói của bạn bằng các thẻ sẽ giúp người dùng tìm thấy chúng."
+
+#: app/templates/todo/user.html:170
 msgid "Unadded Topics"
 msgstr "Chủ đề chưa được cập nhật"
 
-#: app/templates/todo/user.html:153
+#: app/templates/todo/user.html:173
 msgid "List of your forum topics which do not have a matching package."
 msgstr "Danh sách các chủ đề diễn đàn của bạn không có gói phù hợp."
 
-#: app/templates/todo/user.html:154
+#: app/templates/todo/user.html:174
 msgid "Topics with a strikethrough have been marked as discarded."
 msgstr "Các chủ đề có gạch ngang đã được đánh dấu là đã bị loại bỏ."
 
-#: app/templates/todo/user.html:162
+#: app/templates/todo/user.html:182
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "Chúc mừng! Bạn không có bất kỳ chủ đề nào không có trên CDB."
 
@@ -3128,8 +3328,8 @@ msgid ""
 "Your email is needed to recover your account if you forget your password "
 "and to send (configurable) notifications. "
 msgstr ""
-"Email của bạn là cần thiết để phục hồi tài khoản của bạn nếu bạn quên mật "
-"khẩu và để gửi thông báo (theo cấu hình). "
+"Email của bạn là cần thiết để phục hồi tài khoản của bạn nếu bạn quên mật"
+" khẩu và để gửi thông báo (theo cấu hình). "
 
 #: app/templates/users/change_set_password.html:29
 #: app/templates/users/register.html:25
@@ -3161,26 +3361,20 @@ msgid "Do you have an account on the Minetest Forums?"
 msgstr "Bạn có tài khoản trên Diễn đàn Minetest không?"
 
 #: app/templates/users/claim.html:13
-msgid "ContentDB will link your account to your forum account."
-msgstr "ContentDB sẽ liên kết tài khoản của bạn với tài khoản diễn đàn của bạn."
-
-#: app/templates/users/claim.html:17
 msgid ""
-"You don't need a forum account, however, it's recommended to make the "
-"most out of the Minetest community."
+"ContentDB will link your account to your forum account if you have one, "
+"but you don't need one."
 msgstr ""
-"Bạn không cần có tài khoản diễn đàn, tuy nhiên bạn nên tận dụng tối đa cộng "
-"đồng Minetest."
 
-#: app/templates/users/claim.html:22
+#: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
 msgstr "<b>Có</b>, Tôi có một tài khoản diễn đàn"
 
-#: app/templates/users/claim.html:25
+#: app/templates/users/claim.html:21
 msgid "<b>No</b>, I don't have one"
 msgstr "<b>Không</b>, Tôi không có"
 
-#: app/templates/users/claim.html:28
+#: app/templates/users/claim.html:24
 msgid "Create forum account"
 msgstr "Tạo tài khoản diễn đàn"
 
@@ -3193,14 +3387,14 @@ msgid ""
 "You'll need to use prove that you have access to your forum account using"
 " one of the options below."
 msgstr ""
-"Bạn sẽ cần sử dụng chứng minh rằng bạn có quyền truy cập vào tài khoản diễn "
-"đàn của mình bằng một trong các tùy chọn bên dưới."
+"Bạn sẽ cần sử dụng chứng minh rằng bạn có quyền truy cập vào tài khoản "
+"diễn đàn của mình bằng một trong các tùy chọn bên dưới."
 
 #: app/templates/users/claim_forums.html:14
 msgid "This is so ContentDB can link your account to your forum account."
 msgstr ""
-"Điều này để ContentDB có thể liên kết tài khoản của bạn với tài khoản diễn "
-"đàn của bạn."
+"Điều này để ContentDB có thể liên kết tài khoản của bạn với tài khoản "
+"diễn đàn của bạn."
 
 #: app/templates/users/claim_forums.html:18
 msgid "Don't have a forums account?"
@@ -3244,8 +3438,8 @@ msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Đăng nhập vào diễn đàn và <a href=\"https://forum.minetest.net/ucp.php?i="
-"173\">làm điều đó ở đây</a>."
+"Đăng nhập vào diễn đàn và <a "
+"href=\"https://forum.minetest.net/ucp.php?i=173\">làm điều đó ở đây</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -3265,8 +3459,9 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
-"Đi tới <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
-"signature\">Bảng điều khiển người dùng &gt; Hồ sơ&gt; Chỉnh sửa chữ ký</a>"
+"Đi tới <a "
+"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">Bảng"
+" điều khiển người dùng &gt; Hồ sơ&gt; Chỉnh sửa chữ ký</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
@@ -3291,16 +3486,16 @@ msgid ""
 "This will delete your account, removing %(threads)d threads and "
 "%(replies)d replies."
 msgstr ""
-"Thao tác này sẽ xóa tài khoản của bạn, xóa %(threads)d chủ đề(threads ) và "
-"%(replies)d câu trả lời."
+"Thao tác này sẽ xóa tài khoản của bạn, xóa %(threads)d chủ đề(threads ) "
+"và %(replies)d câu trả lời."
 
 #: app/templates/users/delete.html:22
 msgid ""
 "As you have packages and/or forum threads, your account cannot be fully "
 "deleted."
 msgstr ""
-"Như bạn có gói và/ hoặc các đề(threads) diễn đàn, tài khoản của bạn không "
-"thể hoàn toàn xóa."
+"Như bạn có gói và/ hoặc các đề(threads) diễn đàn, tài khoản của bạn không"
+" thể hoàn toàn xóa."
 
 #: app/templates/users/delete.html:23
 #, python-format
@@ -3308,8 +3503,9 @@ msgid ""
 "Instead, your account will be deactivated and all personal information "
 "wiped - including %(threads)d threads and %(replies)d replies."
 msgstr ""
-"Thay vào đó, tài khoản của bạn sẽ bị vô hiệu hóa và tất cả thông tin cá nhân "
-"bị xóa sạch - bao gồm %(threads)d Chủ đề(threads) và %(replies)d phản hồi."
+"Thay vào đó, tài khoản của bạn sẽ bị vô hiệu hóa và tất cả thông tin cá "
+"nhân bị xóa sạch - bao gồm %(threads)d Chủ đề(threads) và %(replies)d "
+"phản hồi."
 
 #: app/templates/users/delete.html:25
 msgid "See the privacy policy for more information."
@@ -3422,44 +3618,44 @@ msgstr "Gửi Email"
 msgid "Donate"
 msgstr "Quyên góp"
 
-#: app/templates/users/profile.html:104
+#: app/templates/users/profile.html:105
 msgid "packages"
 msgstr "gói"
 
-#: app/templates/users/profile.html:113
+#: app/templates/users/profile.html:114
 msgid "reviews"
 msgstr "đánh giá"
 
-#: app/templates/users/profile.html:121
+#: app/templates/users/profile.html:122
 msgid "comments"
 msgstr "bình luận"
 
-#: app/templates/users/profile.html:133
+#: app/templates/users/profile.html:143
 msgid "Claim"
 msgstr "Xác nhận"
 
-#: app/templates/users/profile.html:135
+#: app/templates/users/profile.html:145
 msgid "Is this you? Claim your account now!"
 msgstr "Đây là bạn? Xác nhận tài khoản của bạn ngay bây giờ!"
 
-#: app/templates/users/profile.html:168
+#: app/templates/users/profile.html:178
 #, python-format
 msgid "%(value)d / %(target)d"
 msgstr "%(value)d / %(target)d"
 
-#: app/templates/users/profile.html:182
+#: app/templates/users/profile.html:192
 msgid "Create package"
 msgstr "Tạo gói"
 
-#: app/templates/users/profile.html:188
+#: app/templates/users/profile.html:198
 msgid "View list of tags"
 msgstr "Xem danh sách các thẻ"
 
-#: app/templates/users/profile.html:198
+#: app/templates/users/profile.html:208
 msgid "Maintained Packages"
 msgstr "Gói được duy trì"
 
-#: app/templates/users/profile.html:200
+#: app/templates/users/profile.html:210
 msgid "This user is also a maintainer of the following packages"
 msgstr "Người này cũng là một người bảo trì của các gói sau"
 
@@ -3497,8 +3693,8 @@ msgid ""
 "Human readable name, defaults to username if not specified. This can be "
 "changed later."
 msgstr ""
-"Tên con người có thể đọc được, tên mặc định là tên người dùng nếu không chỉ "
-"định . Điều này có thể được thay đổi sau."
+"Tên con người có thể đọc được, tên mặc định là tên người dùng nếu không "
+"chỉ định . Điều này có thể được thay đổi sau."
 
 #: app/templates/users/register.html:21
 msgid "Same as username"
@@ -3522,8 +3718,8 @@ msgid ""
 "Your email is needed to recover your account if you forget your password,"
 " and to send (configurable) notifications."
 msgstr ""
-"Email của bạn là cần thiết để khôi phục tài khoản nếu bạn quên mật khẩu và "
-"để gửi thông báo (có thể định cấu hình)."
+"Email của bạn là cần thiết để khôi phục tài khoản nếu bạn quên mật khẩu "
+"và để gửi thông báo (có thể định cấu hình)."
 
 #: app/templates/users/settings_email.html:25
 msgid "There is at least one verification pending."
@@ -3556,6 +3752,11 @@ msgstr "Ngay lập tức"
 #: app/templates/users/settings_email.html:46
 msgid "In digest"
 msgstr "Trong thông báo"
+
+#: app/templates/users/stats.html:4
+#, python-format
+msgid "Statistics for %(display_name)s's packages"
+msgstr ""
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
@@ -3592,8 +3793,8 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
-"ContentDB sẽ không thể gửi \"quên mật khẩu\" và các email hệ thống thiết yếu "
-"khác.\n"
+"ContentDB sẽ không thể gửi \"quên mật khẩu\" và các email hệ thống thiết "
+"yếu khác.\n"
 "\t\t\t\t\t Thay vào đó, hãy xem xét chỉnh sửa các tùy chọn thông báo qua "
 "email của bạn."
 
@@ -3623,5 +3824,32 @@ msgstr "Bạn có rất nhiều thông báo, bạn nên đọc hoặc xóa chún
 msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
-msgstr ""
-"Xin hãy cho phép email thông báo, bạn có thể tùy chỉnh bao nhiêu được gửi"
+msgstr "Xin hãy cho phép email thông báo, bạn có thể tùy chỉnh bao nhiêu được gửi"
+
+#~ msgid "Meta Packages"
+#~ msgstr "Siêu Gói"
+
+#~ msgid "No meta packages found."
+#~ msgstr "Không tìm thấy siêu gói nào."
+
+#~ msgid "Meta Package \"%(name)s\""
+#~ msgstr "Siêu gói \"%(name)s\""
+
+#~ msgid "Meta packages that have hard dependers, but no packages providing them."
+#~ msgstr "Các gói meta có phụ thuộc cứng, nhưng không có gói nào cung cấp chúng."
+
+#~ msgid "All Outdated Packages"
+#~ msgstr "Tất cả các Gói đã Lỗi thời"
+
+#~ msgid "ContentDB will link your account to your forum account."
+#~ msgstr "ContentDB sẽ liên kết tài khoản của bạn với tài khoản diễn đàn của bạn."
+
+#~ msgid ""
+#~ "You don't need a forum account, "
+#~ "however, it's recommended to make the"
+#~ " most out of the Minetest community."
+#~ msgstr ""
+#~ "Bạn không cần có tài khoản diễn"
+#~ " đàn, tuy nhiên bạn nên tận "
+#~ "dụng tối đa cộng đồng Minetest."
+
