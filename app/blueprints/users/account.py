@@ -182,8 +182,7 @@ def register():
 		if ret:
 			return ret
 
-	return render_template("users/register.html", form=form,
-			suggested_password=genphrase(entropy=52, wordset="bip39"))
+	return render_template("users/register.html", form=form)
 
 
 class ForgotPasswordForm(FlaskForm):
@@ -292,8 +291,7 @@ def change_password():
 		else:
 			flash(gettext("Old password is incorrect"), "danger")
 
-	return render_template("users/change_set_password.html", form=form,
-			suggested_password=genphrase(entropy=52, wordset="bip39"))
+	return render_template("users/change_set_password.html", form=form)
 
 
 @bp.route("/user/set-password/", methods=["GET", "POST"])
@@ -311,8 +309,7 @@ def set_password():
 		if ret:
 			return ret
 
-	return render_template("users/change_set_password.html", form=form, optional=request.args.get("optional"),
-			suggested_password=genphrase(entropy=52, wordset="bip39"))
+	return render_template("users/change_set_password.html", form=form, optional=request.args.get("optional"))
 
 
 @bp.route("/user/verify/")

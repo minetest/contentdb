@@ -27,12 +27,6 @@
 		{{ render_field(form.password, hint=_("Must be at least 8 characters long.")) }}
 
 		<p>
-			{{ _("Password suggestion") }}
-			(<a href="https://xkcd.com/936/">{{ _("Why?") }}</a>):
-			<code>{{ suggested_password }}</code>
-		</p>
-
-		<p>
 			<img src="/static/puzzle.png" />
 		</p>
 		{{ render_field(form.question, hint=_("Please prove that you are human")) }}
