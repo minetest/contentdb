@@ -160,6 +160,7 @@ Supported query parameters:
 * `q`:  Query string.
 * `author`:  Filter by author.
 * `tag`:  Filter by tags.
+* `game`: Filter by [Game Support](/help/game_support/), ex: `Wuzzy/mineclone2`. (experimental, doesn't show items that support every game currently). 
 * `random`:  When present, enable random ordering and ignore `sort`.
 * `limit`:  Return at most `limit` packages.
 * `hide`:  Hide content based on [Content Flags](/help/content_flags/).
@@ -167,7 +168,7 @@ Supported query parameters:
 * `order`:  Sort ascending (`asc`) or descending (`desc`).
 * `protocol_version`:  Only show packages supported by this Minetest protocol version.
 * `engine_version`:  Only show packages supported by this Minetest engine version, eg: `5.3.0`.
-* `fmt`:  How the response is formated.
+* `fmt`:  How the response is formatted.
     * `keys`:  author/name only.
     * `short`:  stuff needed for the Minetest client. 
 
