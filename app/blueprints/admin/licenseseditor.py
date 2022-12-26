@@ -34,7 +34,7 @@ def license_list():
 class LicenseForm(FlaskForm):
 	name = StringField("Name", [InputRequired(), Length(3, 100)])
 	is_foss = BooleanField("Is FOSS")
-	url = URLField("URL", [Optional], filters=[nonEmptyOrNone])
+	url = URLField("URL", [Optional()], filters=[nonEmptyOrNone])
 	submit = SubmitField("Save")
 
 
