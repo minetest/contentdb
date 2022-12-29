@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-12-09 19:06+0000\n"
-"PO-Revision-Date: 2022-06-07 15:18+0000\n"
-"Last-Translator: Miniontoby <tobias.gaarenstroom@gmail.com>\n"
+"PO-Revision-Date: 2022-12-25 16:50+0000\n"
+"Last-Translator: CouldBeMathijs <mathijs.pittoors@gmail.com>\n"
+"Language-Team: Dutch <https://hosted.weblate.org/projects/minetest/contentdb/"
+"nl/>\n"
 "Language: nl\n"
-"Language-Team: Dutch "
-"<https://hosted.weblate.org/projects/minetest/contentdb/nl/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:122
 msgid "Banned:"
-msgstr ""
+msgstr "Verbannen:"
 
 #: app/__init__.py:124
 msgid "You have been banned."
@@ -33,7 +34,7 @@ msgstr "Je bent verbannen."
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:201
 msgid "Packages"
-msgstr ""
+msgstr "Pakketten"
 
 #: app/template_filters.py:52
 #, python-format
@@ -47,7 +48,6 @@ msgid "Name"
 msgstr "Naam"
 
 #: app/blueprints/api/tokens.py:34
-#, fuzzy
 msgid "Limit to package"
 msgstr "Beperken tot pakket"
 
@@ -67,7 +67,6 @@ msgid "Save"
 msgstr "Opslaan"
 
 #: app/blueprints/github/__init__.py:46
-#, fuzzy
 msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "Autorisatie mislukt [err=gh-oauth-login-failed]"
 
@@ -84,7 +83,6 @@ msgid "Unable to find an account for that GitHub user"
 msgstr "Kan geen account vinden voor die GitHub-gebruiker"
 
 #: app/blueprints/github/__init__.py:76
-#, fuzzy
 msgid "Authorization failed [err=gh-login-failed]"
 msgstr "Autorisatie mislukt [err=gh-login-failed]"
 
@@ -96,8 +94,9 @@ msgstr "Bewerk Details"
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
 #: app/templates/packages/view.html:523 app/templates/todo/editor.html:75
+#, fuzzy
 msgid "Releases"
-msgstr ""
+msgstr "Versies"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/screenshots.html:4
@@ -108,13 +107,11 @@ msgstr "Schermafbeeldingen"
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
 #: app/templates/packages/view.html:494
-#, fuzzy
 msgid "Maintainers"
 msgstr "Onderhouders"
 
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:144
 #: app/templates/packages/audit.html:4
-#, fuzzy
 msgid "Audit Log"
 msgstr "Auditlogboek"
 
@@ -122,7 +119,7 @@ msgstr "Auditlogboek"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:211 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "Statistieken"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -135,20 +132,18 @@ msgstr "Verwijderen"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Ondersteunde spellen"
 
 #: app/blueprints/packages/packages.py:160
-#, fuzzy
 msgid "Error: Another package already uses this forum topic!"
-msgstr "Error: Een ander pakket gebruikt dit forumonderwerp al!"
+msgstr "Fout: Een ander pakket gebruikt dit forumonderwerp al!"
 
 #: app/blueprints/packages/packages.py:166
-#, fuzzy
 msgid "Error: Forum topic author doesn't match package author."
-msgstr "Fout: Auteur van forumonderwerp komt niet overeen met auteur van pakket."
+msgstr ""
+"Fout: Auteur van forumonderwerp komt niet overeen met auteur van pakket."
 
 #: app/blueprints/packages/packages.py:169
-#, fuzzy
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
@@ -194,7 +189,7 @@ msgstr "Tags"
 
 #: app/blueprints/packages/packages.py:238
 msgid "Content Warnings"
-msgstr ""
+msgstr "Inhoudswaarschuwingen"
 
 #: app/blueprints/packages/packages.py:239 app/templates/packages/view.html:475
 msgid "License"
@@ -214,33 +209,37 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:245 app/blueprints/users/settings.py:51
 msgid "Website URL"
-msgstr ""
+msgstr "Website URL"
 
 #: app/blueprints/packages/packages.py:246
+#, fuzzy
 msgid "Issue Tracker URL"
-msgstr ""
+msgstr "URL voor het volgen van problemen"
 
 #: app/blueprints/packages/packages.py:247
 msgid "Forum Topic ID"
-msgstr ""
+msgstr "Forum Thema Id"
 
 #: app/blueprints/packages/packages.py:248
 msgid "Video URL"
-msgstr ""
+msgstr "Video URL"
 
 #: app/blueprints/packages/packages.py:254
+#, fuzzy
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game mag niet name heten"
 
 #: app/blueprints/packages/packages.py:264
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Pakket bestaat al, maar is verwijderd. Contacteer a.u.b. een werknemer van "
+"ContentDB om het pakket te herstellen"
 
 #: app/blueprints/packages/packages.py:269
 msgid "Package already exists"
-msgstr ""
+msgstr "Pakket bestaat al"
 
 #: app/blueprints/packages/packages.py:327
 msgid "Unable to find that user"
@@ -259,18 +258,16 @@ msgid "You don't have permission to do that"
 msgstr "Je hebt geen toestemming om dat te doen"
 
 #: app/blueprints/packages/packages.py:415
-#, fuzzy
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Geef aan welke wijzigingen nodig zijn in de goedkeuringsthread"
 
 #: app/blueprints/packages/packages.py:447
 msgid "Deleted package"
-msgstr ""
+msgstr "Verwijderd pakket"
 
 #: app/blueprints/packages/packages.py:463
-#, fuzzy
 msgid "Unapproved package"
-msgstr "Niet-goedgekeurd pakket"
+msgstr "Niet goedgekeurd pakket"
 
 #: app/blueprints/packages/packages.py:472
 msgid "Maintainers (Comma-separated)"
@@ -278,33 +275,32 @@ msgstr "Onderhouders (gescheiden door komma's)"
 
 #: app/blueprints/packages/packages.py:481
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "Je hebt geen toestemming om de oonderhouders aan te passen"
 
 #: app/blueprints/packages/packages.py:531
 msgid "You are not a maintainer"
 msgstr "Je bent geen onderhouder"
 
 #: app/blueprints/packages/packages.py:534
-#, fuzzy
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Pakketeigenaren kunnen zichzelf niet verwijderen als onderhouder"
 
 #: app/blueprints/packages/packages.py:566
-#, fuzzy
 msgid "Author Name"
-msgstr "Auteur Naam"
+msgstr "Naam van de auteur"
 
 #: app/blueprints/packages/packages.py:636
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr ""
+"Ondersteuningsdetectie inschakelen op basis van afhankelijkheden (aanbevolen)"
 
 #: app/blueprints/packages/packages.py:637
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Ondersteunde spellen (door komma's gescheiden)"
 
 #: app/blueprints/packages/packages.py:638
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Niet ondersteunde spellen (door komma's gescheiden)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -322,12 +318,10 @@ msgstr "Methode"
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
-#, fuzzy
 msgid "File Upload"
 msgstr "Bestand Upload"
 
 #: app/blueprints/packages/releases.py:54
-#, fuzzy
 msgid "Git reference (ie: commit hash, branch, or tag)"
 msgstr "Git-referentie (o.a.: commit hash, branch of tag)"
 
@@ -367,15 +361,15 @@ msgstr "Upload .zip-bestand"
 
 #: app/blueprints/packages/releases.py:191
 msgid "Set Min"
-msgstr ""
+msgstr "Minimum instellen"
 
 #: app/blueprints/packages/releases.py:194
 msgid "Set Max"
-msgstr ""
+msgstr "Maximum instellen"
 
 #: app/blueprints/packages/releases.py:197
 msgid "Only change values previously set as none"
-msgstr ""
+msgstr "Enkel waarden wijzigen die hiervoor \"none\" als waarde hadden"
 
 #: app/blueprints/packages/releases.py:198
 msgid "Update"
@@ -383,11 +377,11 @@ msgstr "Update"
 
 #: app/blueprints/packages/releases.py:247
 #: app/templates/packages/update_config.html:25
+#, fuzzy
 msgid "Trigger"
-msgstr ""
+msgstr "Trigger"
 
 #: app/blueprints/packages/releases.py:248
-#, fuzzy
 msgid "New Commit"
 msgstr "Nieuwe Commit"
 
@@ -396,9 +390,8 @@ msgid "New Tag"
 msgstr "Nieuwe Tag"
 
 #: app/blueprints/packages/releases.py:251
-#, fuzzy
 msgid "Branch name"
-msgstr "Branch naam"
+msgstr "Branch-naam"
 
 #: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:38
@@ -412,7 +405,7 @@ msgstr "Melding verzenden en markeren als verouderd"
 #: app/blueprints/packages/releases.py:253
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
-msgstr ""
+msgstr "Maak release"
 
 #: app/blueprints/packages/releases.py:255
 msgid "Save Settings"
@@ -423,17 +416,16 @@ msgid "Disable Automation"
 msgstr "Automatisering uitschakelen"
 
 #: app/blueprints/packages/releases.py:295
-#, fuzzy
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "Voeg een Git-repository-URL toe om automatische releases in te stellen"
 
 #: app/blueprints/packages/releases.py:311
 msgid "Deleted update configuration"
-msgstr ""
+msgstr "Verwijderde update-instellingen"
 
 #: app/blueprints/packages/releases.py:319
 msgid "Now, please create an initial release"
-msgstr ""
+msgstr "Maak nu een eerste release a.u.b."
 
 #: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:177
 #: app/blueprints/threads/__init__.py:178
@@ -456,7 +448,6 @@ msgid "No"
 msgstr "Nee"
 
 #: app/blueprints/packages/reviews.py:54
-#, fuzzy
 msgid "You can't review your own package!"
 msgstr "Je kunt je eigen pakket niet beoordelen!"
 
@@ -465,11 +456,12 @@ msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
+"Je hebt te veel pakketten beoordeeld. Wacht voor je opnieuw probeert, en "
+"overweeg om je beoordelingen gedetailleerder te maken"
 
 #: app/blueprints/packages/reviews.py:175
-#, fuzzy
 msgid "You can't vote on the reviews on your own package!"
-msgstr "Je kunt niet stemmen op de reviews van je eigen pakket!"
+msgstr "Je kunt niet stemmen op de beoordelingen van je eigen pakket!"
 
 #: app/blueprints/packages/reviews.py:183
 msgid "You can't vote on your own reviews!"
@@ -493,7 +485,6 @@ msgstr "Bericht"
 #: app/templates/macros/threads.html:50 app/templates/packages/view.html:554
 #: app/templates/report/index.html:4 app/templates/report/index.html:15
 #: app/templates/users/profile.html:28
-#, fuzzy
 msgid "Report"
 msgstr "Rapporteren"
 
@@ -502,16 +493,14 @@ msgid "Already subscribed!"
 msgstr "Al geabonneerd!"
 
 #: app/blueprints/threads/__init__.py:68
-#, fuzzy
 msgid "Subscribed to thread"
-msgstr "Geabonneerd op thread"
+msgstr "Geabonneerd op de thread"
 
 #: app/blueprints/threads/__init__.py:83
 msgid "Unsubscribed!"
 msgstr "Uitgeschreven!"
 
 #: app/blueprints/threads/__init__.py:87
-#, fuzzy
 msgid "Already not subscribed!"
 msgstr "Al niet geabonneerd!"
 
@@ -524,7 +513,6 @@ msgid "Unlocked thread"
 msgstr "Ontgrendelde thread"
 
 #: app/blueprints/threads/__init__.py:158
-#, fuzzy
 msgid "Cannot delete thread opening post!"
 msgstr "Kan de openingspost van de thread niet verwijderen!"
 
@@ -534,21 +522,18 @@ msgstr "Wacht even voordat je weer commentaar geeft"
 
 #: app/blueprints/threads/__init__.py:274
 #: app/templates/macros/package_approval.html:112
-#, fuzzy
 msgid "Open Thread"
 msgstr "Open Thread"
 
 #: app/blueprints/threads/__init__.py:297
-#, fuzzy
 msgid "Unable to create thread!"
 msgstr "Kan geen thread maken!"
 
 #: app/blueprints/threads/__init__.py:303
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Er bestaat al een goedkeuringthread! Overweeg daarin te antwoorden"
 
 #: app/blueprints/threads/__init__.py:307
-#, fuzzy
 msgid "Please wait before opening another thread"
 msgstr "Wacht a.u.b. met het openen van een andere thread"
 
@@ -606,6 +591,8 @@ msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
+"Enkel letters van het alfabet (A-Z,a-z), nummers (0-9), lage streepjes (_), "
+"mintekens (-), en punten (.) zijn toegestaan"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:190
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:377
@@ -657,11 +644,10 @@ msgstr ""
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:254
 #: app/blueprints/users/settings.py:142
-#, fuzzy
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
-"Dat e-mailadres is uitgeschreven/op de zwarte lijst gezet en kan niet "
-"worden gebruikt"
+"Dat e-mailadres is uitgeschreven/op de zwarte lijst gezet en kan niet worden "
+"gebruikt"
 
 #: app/blueprints/users/account.py:191
 msgid "Reset Password"
@@ -736,13 +722,12 @@ msgid "Send"
 msgstr "Verstuur"
 
 #: app/blueprints/users/account.py:409
-#, fuzzy
 msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
 msgstr ""
-"Die e-mail staat nu op de zwarte lijst. Neem contact op met een beheerder"
-" als u dit ongedaan wilt maken."
+"Die e-mail staat nu op de zwarte lijst. Neem contact op met een beheerder "
+"als u dit ongedaan wilt maken."
 
 #: app/blueprints/users/claim.py:40 app/blueprints/users/claim.py:65
 msgid ""
@@ -750,6 +735,9 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
+"Gebruikersnaam mag niet, enkel letters van het alfabet (A-Z,a-z), nummers "
+"(0-9), lage streepjes (_), en punten (.) zijn toegestaan. Contacteer een "
+"administrator"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
@@ -764,13 +752,15 @@ msgid "That user has already been claimed!"
 msgstr "Die gebruiker is al geclaimd!"
 
 #: app/blueprints/users/claim.py:86
-#, fuzzy, python-format
+#, python-format
 msgid "Error whilst attempting to access forums: %(message)s"
-msgstr "Fout bij toegang tot forums: %(message)s"
+msgstr "Fout bij het proberen toegang tot de forums te krijgen: %(message)s"
 
 #: app/blueprints/users/claim.py:90
 msgid "Unable to get forum signature - does the user exist?"
 msgstr ""
+"Het is niet mogelijk om de forumhandtekening te krijgen, bestaat de "
+"gebruiker?"
 
 #: app/blueprints/users/claim.py:105
 msgid "Unable to login as user"
@@ -778,7 +768,7 @@ msgstr "Kan niet inloggen als gebruiker"
 
 #: app/blueprints/users/claim.py:111
 msgid "Could not find the key in your signature!"
-msgstr ""
+msgstr "Kon de sleutel niet vinden in je handtekening!"
 
 #: app/blueprints/users/claim.py:114
 msgid "Unknown claim type"
@@ -786,7 +776,7 @@ msgstr "Onbekend claimtype"
 
 #: app/blueprints/users/profile.py:115
 msgid "Top reviewer"
-msgstr ""
+msgstr "Top beoordelaar"
 
 #: app/blueprints/users/profile.py:116
 #, python-format
@@ -804,12 +794,12 @@ msgid "3rd most helpful reviewer"
 msgstr "3e meest behulpzame beoordelaar"
 
 #: app/blueprints/users/profile.py:124
-#, fuzzy, python-format
+#, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
 msgstr "Dit zet %(display_name)s in de top %(perc)s%%"
 
 #: app/blueprints/users/profile.py:128
-#, fuzzy, python-format
+#, python-format
 msgid "Top %(perc)s%% reviewer"
 msgstr "Top %(perc)s%% beoordelaar"
 
@@ -817,137 +807,145 @@ msgstr "Top %(perc)s%% beoordelaar"
 #, python-format
 msgid "Only %(place)d users have written more helpful reviews."
 msgstr ""
+"Enkel %(place)d gebruikers hebben behulpzamere beoordelingen geschreven."
 
 #: app/blueprints/users/profile.py:134
 msgid "Consider writing more helpful reviews to get a medal."
 msgstr ""
+"Je kan nog meer behulpzame beoordelingen schrijven om een medaille te "
+"krijgen."
 
 #: app/blueprints/users/profile.py:136
-#, python-format
+#, fuzzy, python-format
 msgid "You are in place %(place)s."
-msgstr ""
+msgstr "Je staat op de %(place)sste/de"
 
 #: app/blueprints/users/profile.py:164
 #, python-format
 msgid "Top %(type)s"
-msgstr ""
+msgstr "Top %(type)s"
 
 #: app/blueprints/users/profile.py:166
 #, python-format
 msgid "Top %(group)d %(type)s"
-msgstr ""
+msgstr "Top %(group)d %(type)s"
 
 #: app/blueprints/users/profile.py:175
 #, python-format
 msgid "%(display_name)s has a %(type)s placed at #%(place)d."
-msgstr ""
+msgstr "%(display_name)s heeft een %(type)s op %(place)d."
 
 #: app/blueprints/users/profile.py:190
 #, python-format
 msgid "Your packages have %(downloads)d downloads in total."
-msgstr ""
+msgstr "Je pakketten zijn in totaal %(downloads)d keer gedownload."
 
 #: app/blueprints/users/profile.py:191
 msgid "First medal is at 50k."
-msgstr ""
+msgstr "De eerste medaille is bij 50 000."
 
 #: app/blueprints/users/profile.py:196
 msgid ">300k downloads"
-msgstr ""
+msgstr "&gt;300 000 keer gedownload"
 
 #: app/blueprints/users/profile.py:199
 msgid ">100k downloads"
-msgstr ""
+msgstr "&gt;100 000 keer gedownload"
 
 #: app/blueprints/users/profile.py:202
 msgid ">75k downloads"
-msgstr ""
+msgstr "&gt;75 000 keer gedownload"
 
 #: app/blueprints/users/profile.py:205
 msgid ">50k downloads"
-msgstr ""
+msgstr "&gt;50 000 keer gedownload"
 
 #: app/blueprints/users/profile.py:206
 #, python-format
 msgid "Has received %(downloads)d downloads across all packages."
-msgstr ""
+msgstr "Heeft %(downloads)d downloads ontvangen overheen alle pakketten."
 
 #: app/blueprints/users/settings.py:19 app/templates/users/profile.html:17
 #: app/templates/users/profile_edit.html:8
 msgid "Edit Profile"
-msgstr ""
+msgstr "Profiel Wijzigen"
 
 #: app/blueprints/users/settings.py:24 app/templates/users/account.html:12
 msgid "Account and Security"
-msgstr ""
+msgstr "Profiel en Beveiliging"
 
 #: app/blueprints/users/settings.py:29
 #: app/templates/users/settings_email.html:8
 msgid "Email and Notifications"
-msgstr ""
+msgstr "E-mail en Meldingen"
 
 #: app/blueprints/users/settings.py:34 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
-msgstr ""
+msgstr "API Tokens"
 
 #: app/blueprints/users/settings.py:42 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:35
 msgid "Moderator Tools"
-msgstr ""
+msgstr "Hulpmiddelen voor Moderators"
 
 #: app/blueprints/users/settings.py:52
 msgid "Donation URL"
-msgstr ""
+msgstr "URL om te Doneren"
 
 #: app/blueprints/users/settings.py:66 app/blueprints/users/settings.py:72
 msgid "A user already has that name"
-msgstr ""
+msgstr "Er bestaat al een gebruiker met die naam"
 
 #: app/blueprints/users/settings.py:224
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr ""
+"Gebruikers met een Moderator rank of hoger kunnen niet worden verwijderd"
 
 #: app/blueprints/users/settings.py:264
 msgid "Display name"
-msgstr ""
+msgstr "Weergavenaam"
 
 #: app/blueprints/users/settings.py:265
 msgid "Forums Username"
-msgstr ""
+msgstr "Gebruikersnaam voor de Forums"
 
 #: app/blueprints/users/settings.py:266
 msgid "GitHub Username"
-msgstr ""
+msgstr "GitHub Gebruikersnaam"
 
 #: app/blueprints/users/settings.py:267 app/templates/users/list.html:14
 msgid "Rank"
-msgstr ""
+msgstr "Rank"
 
 #: app/blueprints/users/settings.py:311
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr ""
+"Je kan geen gebruikers promoveren tot ranks die hoger zijn dan diegene die "
+"je zelf hebt!"
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "Te vinden tekst (regex)"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Bestandenfilter"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:49
 #: app/templates/todo/tags.html:15
 msgid "Search"
-msgstr ""
+msgstr "Zoeken"
 
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
+"Er bestaat al een pakket met die naam. Bekijk het document \"Beleid en "
+"Begeleiding 3\" (Policy and Guidance 3)"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
-msgstr ""
+msgstr "Er is een release nodig, voordat dit pakket goedgekeurd kan worden."
 
 #: app/logic/package_validator.py:29
 #: app/templates/macros/package_approval.html:45
@@ -956,57 +954,65 @@ msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
 "%(deps)s"
 msgstr ""
+"De volgende verplichte afhankelijkheden moeten eerst toegevoegd worden aan "
+"ContentDB: %(deps)s"
 
 #: app/logic/package_validator.py:34
 #: app/templates/macros/package_approval.html:41
 msgid "You need to add at least one screenshot."
-msgstr ""
+msgstr "Je moet op z'n minst 1 screenshot toevoegen."
 
 #: app/logic/package_validator.py:37
 #: app/templates/macros/package_approval.html:49
 msgid "Please wait for the license to be added to CDB."
-msgstr ""
+msgstr "Wacht a.u.b. tot de licentie wordt toegevoegd aan CBD."
 
 #: app/logic/packages.py:95
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr ""
+"De naam kan enkel kleine letters (a-z), nummers (0-9), en lage streepjes (_) "
+"bevatten"
 
 #: app/logic/packages.py:109
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "Je hebt niet de juiste machtigingen om deze pagina aan te passen"
 
 #: app/logic/packages.py:113
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "Je hebt niet de juiste machtigingen om de pakketnaam aan te passen"
 
 #: app/logic/packages.py:165
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr ""
+msgstr "Het toevoegen van de beschermde tag %(title)s aan het pakket is mislukt"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "Je hebt niet de juiste machtigingen om releases te maken"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Je hebt te veel releases gemaakt voor dit pakket in de laatste 5 minuten, "
+"wacht a.u.b. voor je het opnieuw probeert"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
+"De commit hash klopt niet; het moet een hexadecimale tekenreeks zijn van 40 "
+"tekens lang"
 
 #: app/logic/screenshots.py:16
 msgid "Too many requests, please wait before trying again"
-msgstr ""
+msgstr "Te veel verzoeken, wacht even voordat je het opnieuw probeert"
 
 #: app/logic/screenshots.py:18
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "Een PNG of JPG afbeeldingsbestand"
 
 #: app/logic/screenshots.py:35
 #, python-format
@@ -1014,49 +1020,51 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
+"De screenshot is te klein, het moet op z'n minst %(width)sx%(height)s pixels "
+"groot zijn"
 
 #: app/logic/uploads.py:52
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Upload %(file_desc)s a.u.b."
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "De geüploade afbeelding is eigenlijk geen afbeelding"
 
 #: app/models/packages.py:66
 msgid "Mod"
-msgstr ""
+msgstr "Mod"
 
 #: app/models/packages.py:68
 msgid "Game"
-msgstr ""
+msgstr "Spel"
 
 #: app/models/packages.py:70
 msgid "Texture Pack"
-msgstr ""
+msgstr "Textuurpakket"
 
 #: app/models/packages.py:75 app/templates/base.html:27
 #: app/templates/modnames/view.html:14
 msgid "Mods"
-msgstr ""
+msgstr "Mods"
 
 #: app/models/packages.py:77 app/templates/base.html:30
 #: app/templates/modnames/view.html:17
 msgid "Games"
-msgstr ""
+msgstr "Spellen"
 
 #: app/models/packages.py:79 app/templates/base.html:33
 msgid "Texture Packs"
-msgstr ""
+msgstr "Textuurpakketten"
 
 #: app/models/packages.py:168
 msgid "Submit for Approval"
-msgstr ""
+msgstr "Indienen voor goedkeuring"
 
 #: app/models/packages.py:170
 msgid "Approve"
-msgstr ""
+msgstr "Goedkeuren"
 
 #: app/models/packages.py:172 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
@@ -1065,34 +1073,38 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:19
 #: app/templates/threads/view.html:40 app/templates/users/delete.html:34
 msgid "Delete"
-msgstr ""
+msgstr "Verwijderen"
 
 #: app/tasks/emails.py:113
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
 msgstr ""
+"Je krijgt deze e-mail omdat je een geregistreerde gebruiker van ContentDB "
+"bent."
 
 #: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr ""
+"Je krijgt deze e-mail om dat iemand (hopelijk was jij het), je e-mailadres "
+"gebruikt heeft als de e-mail van een gebruiker."
 
 #: app/tasks/emails.py:153
 #, python-format
 msgid "%(num)d new notifications"
-msgstr ""
+msgstr "%(num)d nieuwe modificaties"
 
 #: app/tasks/emails.py:155 app/templates/macros/forms.html:52
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
-msgstr ""
+msgstr "Bekijken"
 
 #: app/tasks/emails.py:158
 msgid "Manage email settings"
-msgstr ""
+msgstr "Beheer e-mailinstellingen"
 
 #: app/tasks/emails.py:160 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
@@ -1102,122 +1114,124 @@ msgstr ""
 #: app/templates/threads/view.html:31 app/templates/users/unsubscribe.html:4
 #: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Uitschrijven"
 
 #: app/templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Pagina niet gevonden"
 
 #: app/templates/404.html:10
 msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
+"De pagina kon niet worden gevonden. Het kan zijn dat de link niet klopt, de "
+"pagina verwijderd is, of je geen toestemming hebt om deze te bekijken."
 
 #: app/templates/base.html:36
 msgid "Random"
-msgstr ""
+msgstr "Willekeurig"
 
 #: app/templates/base.html:39 app/templates/base.html:241
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
 msgid "Help"
-msgstr ""
+msgstr "Help"
 
 #: app/templates/base.html:46
 #, python-format
 msgid "Search %(type)s"
-msgstr ""
+msgstr "%(type)s zoeken"
 
 #: app/templates/base.html:46 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
-msgstr ""
+msgstr "Zoek door alle pakketten"
 
 #: app/templates/base.html:65
 msgid "Work Queue"
-msgstr ""
+msgstr "Wachtrij"
 
 #: app/templates/base.html:78 app/templates/base.html:130
 msgid "To do list"
-msgstr ""
+msgstr "Nog te doen"
 
 #: app/templates/base.html:87 app/templates/notifications/list.html:4
 msgid "Notifications"
-msgstr ""
+msgstr "Meldingen"
 
 #: app/templates/base.html:108
 msgid "Add Package"
-msgstr ""
+msgstr "Pakket Toevoegen"
 
 #: app/templates/base.html:125
 msgid "Profile"
-msgstr ""
+msgstr "Profiel"
 
 #: app/templates/base.html:148
 msgid "Admin"
-msgstr ""
+msgstr "Administrator"
 
 #: app/templates/base.html:151
 msgid "License Editor"
-msgstr ""
+msgstr "Licentie-editor"
 
 #: app/templates/base.html:156
 msgid "Restore Package"
-msgstr ""
+msgstr "Pakket Herstellen"
 
 #: app/templates/base.html:159
 msgid "Tag Editor"
-msgstr ""
+msgstr "Tag-editor"
 
 #: app/templates/base.html:161
 msgid "Create Tag"
-msgstr ""
+msgstr "Tag Maken"
 
 #: app/templates/base.html:166 app/templates/packages/release_new.html:12
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: app/templates/base.html:169
 msgid "Sign out"
-msgstr ""
+msgstr "Uitloggen"
 
 #: app/templates/base.html:198
 msgid "Help translate ContentDB"
-msgstr ""
+msgstr "Help met het vertalen van ContentDB"
 
 #: app/templates/base.html:242
 msgid "Policy and Guidance"
-msgstr ""
+msgstr "Beleid en Begeleiding"
 
 #: app/templates/base.html:243
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: app/templates/base.html:244 app/templates/users/register.html:43
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Privacybeleid"
 
 #: app/templates/base.html:248
 msgid "Stats / Monitoring"
-msgstr ""
+msgstr "Statistieken en Toezicht"
 
 #: app/templates/base.html:249
 msgid "User List"
-msgstr ""
+msgstr "Gebruikerslijst"
 
 #: app/templates/base.html:250 app/templates/packages/view.html:173
 #: app/templates/packages/view.html:543 app/templates/threads/list.html:4
 msgid "Threads"
-msgstr ""
+msgstr "Threads"
 
 #: app/templates/base.html:251
 msgid "Source Code"
-msgstr ""
+msgstr "Broncode"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "Welkom"
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
 #: app/templates/packages/game_hub.html:5
@@ -1225,30 +1239,30 @@ msgstr ""
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
-msgstr ""
+msgstr "%(title)s door %(author)s"
 
 #: app/templates/index.html:43
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
-msgstr ""
+msgstr "<strong>%(title)s</strong> door %(author)s"
 
 #: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:177 app/templates/packages/view.html:297
 #: app/templates/users/profile.html:216
 msgid "Reviews"
-msgstr ""
+msgstr "Beoordelingen"
 
 #: app/templates/index.html:86
 msgid "Previous"
-msgstr ""
+msgstr "Vorige"
 
 #: app/templates/index.html:90 app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr ""
+msgstr "Volgende"
 
 #: app/templates/index.html:96
 msgid "Featured"
-msgstr ""
+msgstr "Uitgelicht"
 
 #: app/templates/index.html:101 app/templates/index.html:108
 #: app/templates/index.html:115 app/templates/index.html:122
@@ -1258,181 +1272,187 @@ msgstr ""
 #: app/templates/packages/game_hub.html:45
 #: app/templates/packages/game_hub.html:52
 msgid "See more"
-msgstr ""
+msgstr "Meer zien"
 
 #: app/templates/index.html:103 app/templates/packages/game_hub.html:33
 msgid "Recently Added"
-msgstr ""
+msgstr "Recent toegevoegd"
 
 #: app/templates/index.html:110 app/templates/packages/game_hub.html:40
 msgid "Recently Updated"
-msgstr ""
+msgstr "Recent geüpdatet"
 
 #: app/templates/index.html:117
 msgid "Top Games"
-msgstr ""
+msgstr "Top spelletjes"
 
 #: app/templates/index.html:124 app/templates/packages/game_hub.html:47
 msgid "Top Mods"
-msgstr ""
+msgstr "Top Mods"
 
 #: app/templates/index.html:131
 msgid "Top Texture Packs"
-msgstr ""
+msgstr "Top textuurpakketten"
 
 #: app/templates/index.html:135
 msgid "Search by Tags"
-msgstr ""
+msgstr "Op tags Zoeken"
 
 #: app/templates/index.html:153 app/templates/packages/game_hub.html:54
 msgid "Highest Reviewed"
-msgstr ""
+msgstr "Best beoordeeld"
 
 #: app/templates/index.html:160
 msgid "Recent Positive Reviews"
-msgstr ""
+msgstr "Recente positieve beoordelingen"
 
 #: app/templates/index.html:167
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
 msgstr ""
+"CBD heeft %(count)d pakket, die in totaal %(downloads)d keer gedownload zijn."
 
 #: app/templates/admin/audit_view.html:16
 #, python-format
 msgid "Caused by %(author)s."
-msgstr ""
+msgstr "Veroorzaakt door %(author)s."
 
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
-msgstr ""
+msgstr "Veroorzaakt door een verwijderde gebruiker."
 
 #: app/templates/admin/list.html:62
 msgid "Deletion is permanent."
-msgstr ""
+msgstr "Verwijderen kan niet ongedaan worden."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
-msgstr ""
+msgstr "Een e-mail naar veel personen versturen"
 
 #: app/templates/admin/send_bulk_notification.html:4
 msgid "Send bulk notification"
-msgstr ""
+msgstr "Een melding naar veel personen versturen"
 
 #: app/templates/admin/send_email.html:4
 #, python-format
 msgid "Send email to %(username)s"
-msgstr ""
+msgstr "E-mail naar %(username)s versturen"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
-msgstr ""
+msgstr "Nieuwe Licentie"
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr ""
+msgstr "Licenties"
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:44
 msgid "Description"
-msgstr ""
+msgstr "Beschrijving"
 
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
-msgstr ""
+msgstr "Keer bekeken"
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Minetest Versions"
-msgstr ""
+msgstr "Minetest Versies"
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
-msgstr ""
+msgstr "Nieuwe Versie"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
 msgid "Warnings"
-msgstr ""
+msgstr "Waarschuwingen"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
-msgstr ""
+msgstr "Nieuwe Waarschuwing"
 
 #: app/templates/api/create_edit_token.html:5
 #, python-format
 msgid "Edit - %(name)s"
-msgstr ""
+msgstr "%(name)s Wijzigen"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
-msgstr ""
+msgstr "API Token Maken"
 
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
-msgstr ""
+msgstr "Met API-tokens kunnen scripts namens u handelen."
 
 #: app/templates/api/create_edit_token.html:25
 msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
+"Deel je Tokens niet met zomaar iedereen, jij blijft verantwoordelijk voor "
+"wat je account doet."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "Access Token"
-msgstr ""
+msgstr "Toegangstoken"
 
 #: app/templates/api/create_edit_token.html:33
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
 msgstr ""
+"Om veiligheidsredenen worden toegangstokens maar 1 keer getoond. Reset het "
+"token als je het verliest."
 
 #: app/templates/api/create_edit_token.html:40
 msgid "Reset"
-msgstr ""
+msgstr "Reset"
 
 #: app/templates/api/create_edit_token.html:49
 msgid "Human-readable name to tell tokens apart."
-msgstr ""
+msgstr "Naam, leesbaar door de mens, om de tokens uit elkaar te kunnen houden."
 
 #: app/templates/api/create_edit_token.html:50
 msgid "Recommended: Only allows token to interact with a particular package."
 msgstr ""
+"Aanbevolen: Zorgt dat het token enkel kan werken met een specifiek pakket."
 
 #: app/templates/api/list_tokens.html:4
 #, python-format
 msgid "API Tokens | %(username)s"
-msgstr ""
+msgstr "API Tokens | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/macros/topics.html:29
 #: app/templates/macros/topics.html:65
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
-msgstr ""
+msgstr "Maken"
 
 #: app/templates/api/list_tokens.html:9
 msgid "API Documentation"
-msgstr ""
+msgstr "API Documentatie"
 
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
-msgstr ""
+msgstr "Geen tokens gemaakt"
 
 #: app/templates/emails/notification.html:10
 #, python-format
 msgid "From %(username)s and on package %(package)s."
-msgstr ""
+msgstr "Van %(username)s en op pakket %(package)s."
 
 #: app/templates/emails/notification.html:13
 #, python-format
 msgid "From %(username)s."
-msgstr ""
+msgstr "Van %(username)s."
 
 #: app/templates/emails/notification.html:19
 msgid "View Notification"
-msgstr ""
+msgstr "Melding Bekijken"
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:46
@@ -1440,291 +1460,313 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
 msgstr ""
+"Je ontvangt deze e-mail omdat je geregistreerd bent bij ContentDB, en je e-"
+"mailmeldingen aan hebt staan."
 
 #: app/templates/emails/notification.html:30
 #: app/templates/emails/notification_digest.html:50
 msgid "Manage your preferences"
-msgstr ""
+msgstr "Je voorkeuren beheren"
 
 #: app/templates/emails/notification.html:37
 #, python-format
 msgid "This is a '%(type)s' notification."
-msgstr ""
+msgstr "Dit is een '%(type)s' melding."
 
 #: app/templates/emails/notification_digest.html:14
 #: app/templates/emails/notification_digest.html:31
 #, python-format
 msgid "from %(username)s."
-msgstr ""
+msgstr "van %(username)s."
 
 #: app/templates/emails/notification_digest.html:24
 msgid "Other Notifications"
-msgstr ""
+msgstr "Oudere Meldingen"
 
 #: app/templates/emails/notification_digest.html:39
 msgid "View Notifications"
-msgstr ""
+msgstr "Meldingen Bekijken"
 
 #: app/templates/emails/unable_to_find_account.html:2
 msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
+"Omdat we geen account konden vinden met dit e-mailadres, is het ons niet "
+"gelukt om het wachtwoord te resetten."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
+"Dit kan komen omdat je een ander e-mailadres hebt gebruikt, of omdat je "
+"nooit je e-mailadres hebt bevestigd."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
 msgstr ""
+"Je kan GitHub gebruiken om in te loggen, als je dit gekoppeld hebt aan je "
+"account."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
-msgstr ""
+msgstr "Anders zal je rubenwardy moeten contacteren om je te helpen."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
-msgstr ""
+msgstr "Als u deze e-mail niet verwachtte, kunt u deze gerust negeren."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
-msgstr ""
+msgstr "Hallo!"
 
 #: app/templates/emails/verify.html:7
 msgid ""
 "This email has been sent to you because someone (hopefully you) has "
 "entered your email address as a user's email."
 msgstr ""
+"Deze e-mail is gestuurd omdat iemand (hopelijk was jij het), dit e-mailadres "
+"heeft gebruikt voor het maken van een account."
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
-msgstr ""
+msgstr "Als jij dit niet gedaan hebt, mag je deze e-mail negeren/verwijderen."
 
 #: app/templates/emails/verify.html:15
 msgid "If this was you, then please click this link to confirm the address:"
 msgstr ""
+"Als je het wel was, klik dan op deze link om je e-mailadres te bevestigen:"
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
-msgstr ""
+msgstr "E-mailadres bevestigen"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
 msgid "Or paste this into your browser:"
-msgstr ""
+msgstr "Of plak dit in je browser:"
 
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
+"Het spijt ons dat je weggaat. Je moet nog één ding doen voordat je e-mail op "
+"de zwarte lijst komt."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
 msgstr ""
+"Deze e-mail is gestuurd omdat iemand (hopelijk was jij het), dit e-mailadres "
+"wil uitschrijven."
 
 #: app/templates/macros/audit_log.html:13
 #, python-format
 msgid "Severity: %(sev)s."
-msgstr ""
+msgstr "Ernst: %(sev)s."
 
 #: app/templates/macros/audit_log.html:32
 msgid "Deleted User"
-msgstr ""
+msgstr "Verwijderde gebruiker"
 
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
-msgstr ""
+msgstr "Geen controlelogboekvermeldingen."
 
 #: app/templates/macros/forms.html:107
 msgid "Start typing to see suggestions"
-msgstr ""
+msgstr "Begin met typen om suggesties te zien"
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
-msgstr ""
+msgstr "Releases instellen"
 
 #: app/templates/macros/package_approval.html:31
 msgid "You need to create a release before this package can be approved."
-msgstr ""
+msgstr "Je moet een release maken voordat dit pakket goedgekeurd kan worden."
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
-msgstr ""
+msgstr "De release is nog aan het importeren, of hij heeft een fout."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot, but this isn't required."
 msgstr ""
+"Het is aanbevolen om ten minste 1 screenshot in te voegen, maar dit is niet "
+"verplicht."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
-msgstr ""
+msgstr "Wacht tot de release is goedgekeurd."
 
 #: app/templates/macros/package_approval.html:64
 msgid "You can now approve this package if you're ready."
-msgstr ""
+msgstr "Je kan dit pakket nu aanvaarden als je wilt."
 
 #: app/templates/macros/package_approval.html:66
 msgid "Please wait for the package to be approved."
-msgstr ""
+msgstr "Wacht tot het pakket is goedgekeurd."
 
 #: app/templates/macros/package_approval.html:70
 msgid "You can now submit this package for approval if you're ready."
-msgstr ""
+msgstr "Je kan dit pakket nu indienen voor goedkeuring als je wilt."
 
 #: app/templates/macros/package_approval.html:72
 msgid "This package can be submitted for approval when ready."
-msgstr ""
+msgstr "Dit pakket kan ingediend worden om goed te keuren als het klaar is."
 
 #: app/templates/macros/package_approval.html:102
 msgid "Please make sure that this package has the right to the names it uses."
 msgstr ""
+"Zorg a.u.b. dat dit pakket de rechten heeft tot de namen die het gebruikt."
 
 #: app/templates/macros/package_approval.html:104
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr ""
+"Zorg a.u.b. dat dit pakket de rechten heeft om de namen %(names)s te "
+"gebruiken"
 
 #: app/templates/macros/package_approval.html:115
 msgid "Package approval thread"
-msgstr ""
+msgstr "Thread voor de pakketgoedkeuring"
 
 #: app/templates/macros/package_approval.html:116
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
+"Je kan een thread openen als je een vraag hebt voor de persoon die het "
+"pakket heeft goedgekeurd of voor de maker van het pakket."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
-msgstr ""
+msgstr "<b>Waarschuwing:</b> niet-vrije code en media."
 
 #: app/templates/macros/packagegridtile.html:29
 msgid "<b>Warning:</b> Non-free code."
-msgstr ""
+msgstr "<b>Waarschuwing:</b> Niet-vrij code."
 
 #: app/templates/macros/packagegridtile.html:33
 msgid "<b>Warning:</b> Non-free media."
-msgstr ""
+msgstr "<b>Waarschuwing:</b> Niet-vrije media."
 
 #: app/templates/macros/packagegridtile.html:45
 msgid "No packages available"
-msgstr ""
+msgstr "Geen pakketten beschikbaar"
 
 #: app/templates/macros/releases.html:20 app/templates/macros/releases.html:47
 #: app/templates/macros/releases.html:89
 #, python-format
 msgid "created %(date)s"
-msgstr ""
+msgstr "Gemaakt op: %(date)s"
 
 #: app/templates/macros/releases.html:60
 msgid "Edit / Approve"
-msgstr ""
+msgstr "Aanpassen/goedkeuren"
 
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:98
 #: app/templates/packages/view.html:251
 msgid "Edit"
-msgstr ""
+msgstr "Aanpassen"
 
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
-msgstr ""
+msgstr "Aan het importeren..."
 
 #: app/templates/macros/releases.html:96
 msgid "Waiting for approval."
-msgstr ""
+msgstr "Aan het wachten op goedkeuring."
 
 #: app/templates/macros/releases.html:103
 msgid "No releases available."
-msgstr ""
+msgstr "Geen releases beschikbaar."
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
-msgstr ""
+msgstr "Nuttig"
 
 #: app/templates/macros/reviews.html:13
 msgid "Unhelpful"
-msgstr ""
+msgstr "Niet Nuttig"
 
 #: app/templates/macros/reviews.html:82
-#, python-format
+#, fuzzy, python-format
 msgid "%(num)d comments"
-msgstr ""
+msgstr "%(num)d reacties"
 
 #: app/templates/macros/reviews.html:94
 msgid "No reviews, yet."
-msgstr ""
+msgstr "Nog geen beoordelingen."
 
 #: app/templates/macros/reviews.html:104 app/templates/macros/reviews.html:143
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
-msgstr ""
+msgstr "Beoordelen"
 
 #: app/templates/macros/reviews.html:109 app/templates/macros/reviews.html:148
 #: app/templates/packages/review_create_edit.html:35
 #, python-format
 msgid "Do you recommend this %(type)s?"
-msgstr ""
+msgstr "Raad je dit %(type)s aan?"
 
 #: app/templates/macros/reviews.html:124
 #: app/templates/packages/review_create_edit.html:40
 msgid "Why or why not? Try to be constructive"
-msgstr ""
+msgstr "Waarom wel/niet? Probeer constructief te zijn"
 
 #: app/templates/macros/reviews.html:133
 msgid "Post Review"
-msgstr ""
+msgstr "Beoordeling Plaatsen"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "Pakketten van %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "JavaScript is noodzakelijk om statistieken en grafieken te bekijken"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
-msgstr ""
+msgstr "Aantal unieke downloads"
 
 #: app/templates/macros/stats.html:59
 msgid "Downloads, past 7 days"
-msgstr ""
+msgstr "Aantal keer gedownload in de voorbije week"
 
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "%(downloads)s per dag"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "Aantal keer gedownload in de voorbije maand"
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "Bezig met laden..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
-msgstr ""
+msgstr "Geen gegevens"
 
 #: app/templates/macros/stats.html:97
 msgid "Downloads by Package"
-msgstr ""
+msgstr "Keer gedownload per Pakket"
 
 #: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
 #: app/templates/macros/stats.html:118
@@ -1732,155 +1774,166 @@ msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
 msgstr ""
+"Dit is een gestapelde oppervlakte grafiek. Voor totale downloads, kijk naar "
+"de gecombineerde hoogte."
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Client"
-msgstr ""
+msgstr "Keer gedownload per Client"
 
 #: app/templates/macros/stats.html:110
 msgid "Downloads by Reason"
-msgstr ""
+msgstr "Keer gedownload per Reden"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
 msgstr ""
+"<b>Nieuwe installatie</b>: de gebruiker klikte op [Installeren] in Minetest."
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
+"<b>Afhankelijkheid</b>: automatisch geïnstalleerd als een afhankelijkheid "
+"van een pakket."
 
 #: app/templates/macros/stats.html:114
 msgid "<b>Update</b>: download was to update the package."
-msgstr ""
+msgstr "<b>Update</b>: de download was een update voor het pakket."
 
 #: app/templates/macros/stats.html:115
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
 msgstr ""
+"<b>Andere/onbekend</b>: gedownload via een webbrowser of een verouderde "
+"versie van Minetest (voor 5.5)."
 
 #: app/templates/macros/stats.html:127
 msgid "Need more stats?"
-msgstr ""
+msgstr "Meer statistieken nodig?"
 
 #: app/templates/macros/stats.html:129
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
 msgstr ""
+"Bekijk het ContentDB Grafana dashboard voor statistieken van heel over heel "
+"CDB"
 
 #: app/templates/macros/stats.html:133
 msgid "ContentDB Grafana"
-msgstr ""
+msgstr "ContentDB Grafana"
 
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
-msgstr ""
+msgstr "Onderhouder"
 
 #: app/templates/macros/threads.html:120
 msgid "This thread has been locked by a moderator."
-msgstr ""
+msgstr "Deze thread is gesloten door een moderator."
 
 #: app/templates/macros/threads.html:139
 msgid "Please wait before commenting again."
-msgstr ""
+msgstr "Wacht even voor je nog een reactie stuurt."
 
 #: app/templates/macros/threads.html:145
 msgid "This thread has been locked."
-msgstr ""
+msgstr "Deze thread is gesloten."
 
 #: app/templates/macros/threads.html:147
 msgid "You don't have permission to post."
-msgstr ""
+msgstr "Je hebt niet de juiste machtigingen om te posten."
 
 #: app/templates/macros/threads.html:167
 msgid "You can add someone to a private thread by writing @username."
 msgstr ""
+"Je kan iemand toevoegen aan een privé-thread door @gebruikersnaam te "
+"schrijven."
 
 #: app/templates/macros/threads.html:185 app/templates/macros/threads.html:265
 msgid "No threads found"
-msgstr ""
+msgstr "Geen threads gevonden"
 
 #: app/templates/macros/threads.html:193
 msgid "Thread"
-msgstr ""
+msgstr "Thread"
 
 #: app/templates/macros/threads.html:197
 msgid "Last Reply"
-msgstr ""
+msgstr "Laatste reactie"
 
 #: app/templates/macros/todo.html:21
 #, python-format
 msgid "On %(trigger)s, do %(action)s"
-msgstr ""
+msgstr "Als %(trigger)s, doe dan %(action)s"
 
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:104
 #: app/templates/packages/view.html:359
 msgid "Release"
-msgstr ""
+msgstr "Release"
 
 #: app/templates/macros/todo.html:42
 msgid "Repo"
-msgstr ""
+msgstr "Repo"
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
 #: app/templates/packages/view.html:363
 msgid "Update settings"
-msgstr ""
+msgstr "Update-instellingen"
 
 #: app/templates/macros/todo.html:55 app/templates/macros/todo.html:85
 msgid "No outdated packages."
-msgstr ""
+msgstr "Geen verouderde pakketten."
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:160
 msgid "Author"
-msgstr ""
+msgstr "Auteur"
 
 #: app/templates/macros/topics.html:8
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
-msgstr ""
+msgstr "Acties"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
 #: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
 #: app/templates/todo/editor.html:160 app/templates/todo/editor.html:175
 msgid "WIP"
-msgstr ""
+msgstr "mee bezig"
 
 #: app/templates/macros/topics.html:35
 msgid "Show"
-msgstr ""
+msgstr "Laten zien"
 
 #: app/templates/macros/topics.html:37
 msgid "Discard"
-msgstr ""
+msgstr "Weggooien"
 
 #: app/templates/macros/topics.html:57
 msgid "Old"
-msgstr ""
+msgstr "Oud"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Modnamen"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "Geen modnamen gevonden."
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Modnaam \"%(name)s\""
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
-msgstr ""
+msgstr "Verstrekt door"
 
 #: app/templates/modnames/view.html:21 app/templates/todo/todo_base.html:41
 msgid "Forum Topics"
-msgstr ""
+msgstr "Forumthema's"
 
 #: app/templates/modnames/view.html:27
 #: app/templates/packages/game_support.html:37
@@ -1889,103 +1942,106 @@ msgstr ""
 #: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
-msgstr ""
+msgstr "%(title)s door %(display_name)s"
 
 #: app/templates/modnames/view.html:35
 msgid "Required By"
-msgstr ""
+msgstr "Vereist door"
 
 #: app/templates/modnames/view.html:38
 msgid "Optionally Used By"
-msgstr ""
+msgstr "Kan gebruikt worden door"
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
-msgstr ""
+msgstr "E-mailmeldingsinstellingen Wijzigen"
 
 #: app/templates/notifications/list.html:22
 msgid "Newest first."
-msgstr ""
+msgstr "Nieuwste eerst."
 
 #: app/templates/notifications/list.html:27
 msgid "Your Notifications"
-msgstr ""
+msgstr "Jouw meldingen"
 
 #: app/templates/notifications/list.html:61
 #: app/templates/notifications/list.html:99
 msgid "No notifications"
-msgstr ""
+msgstr "Geen meldingen"
 
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
-msgstr ""
+msgstr "Meldingen van editor/goedkeurder"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
-msgstr ""
+msgstr "Andere naam"
 
 #: app/templates/packages/alias_create_edit.html:13
 msgid "Back to Aliases"
-msgstr ""
+msgstr "Terug naar andere namen"
 
 #: app/templates/packages/alias_list.html:4
 msgid "Aliases"
-msgstr ""
+msgstr "Andere namen"
 
 #: app/templates/packages/alias_list.html:15
 #, python-format
 msgid "Aliases for %(title)s by %(author)s"
-msgstr ""
+msgstr "Andere namen voor %(title)s door %(author)s"
 
 #: app/templates/packages/alias_list.html:24
 msgid "No aliases"
-msgstr ""
+msgstr "Geen andere namen"
 
 #: app/templates/packages/bulk_update_conf.html:4
 #, python-format
 msgid "Git Update Detection for %(username)s"
-msgstr ""
+msgstr "Git-updatedetectie voor %(username)s"
 
 #: app/templates/packages/bulk_update_conf.html:10
 msgid "Packages with Update Settings"
-msgstr ""
+msgstr "Pakketten met update-instellingen"
 
 #: app/templates/packages/bulk_update_conf.html:16
 msgid "Bulk Set Update Settings"
-msgstr ""
+msgstr "Update-instellingen bulksgewijs instellen"
 
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
 msgstr ""
+"Zet alle update-instellingen voor alle pakketten met een Git-repository."
 
 #: app/templates/packages/bulk_update_conf.html:27
 #: app/templates/packages/release_new.html:50
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
-msgstr ""
+msgstr "laat leeg om standaardbranch te gebruiken"
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
 msgid "Currently, the branch name field is only used by the New Commit trigger."
 msgstr ""
+"Op het moment is het branchnaamveld enkel gebruikt door de \"New Commit "
+"trigger\"."
 
 #: app/templates/packages/create_edit.html:5
 #, python-format
 msgid "Edit - %(title)s"
-msgstr ""
+msgstr "%(title)s Bewerken"
 
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
 msgid "Create Package"
-msgstr ""
+msgstr "Pakket Maken"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
-msgstr ""
+msgstr "Heb je de \"Package Inclusion Policy and Guidance\" al gelezen?"
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
-msgstr ""
+msgstr "Meer lezen"
 
 #: app/templates/packages/create_edit.html:49
 #, python-format
@@ -1993,6 +2049,8 @@ msgid ""
 "You can include a .cdb.json file in your %(type)s to update these details"
 " automatically."
 msgstr ""
+"Je kan een .cbd.json in je %(type)s opnemen om deze detailleen automatisch "
+"te updaten."
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -2000,30 +2058,37 @@ msgid ""
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
+"JavaScript is noodzakelijk om de UI te verbeteren, en sommige "
+"functionaliteiten te gebruiken\n"
+"\t\t\tzoals metadata van Git zoeken, en automatische aanvullingen."
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/packages/game_support.html:21
 #: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
 msgid "Package"
-msgstr ""
+msgstr "Pakket"
 
 #: app/templates/packages/create_edit.html:73
 msgid "Please open a thread to request a name change"
-msgstr ""
+msgstr "Open een thread om een naamswijziging aan te vragen"
 
 #: app/templates/packages/create_edit.html:79
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
+"Kies \"mee bezig\" als je pakket nog niet stabiel is, en dus nog niet "
+"aanbevolen is aan alle spelers"
 
 #: app/templates/packages/create_edit.html:88
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr ""
+"Als er geen media aanwezig is, zet de medialicentie als dezelfde als de "
+"gewone licentie."
 
 #: app/templates/packages/create_edit.html:94
 msgid "Repository and Links"
-msgstr ""
+msgstr "Repository en Links"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
@@ -2031,169 +2096,186 @@ msgid ""
 "\t\t\t\tIf the repo uses git then the metadata will be automatically "
 "imported."
 msgstr ""
+"Vul de Repository-URL van het pakket in\n"
+"\t\t\t\tAls de repository Git gebruikt zal de metadata automatisch "
+"geïmporteerd worden."
 
 #: app/templates/packages/create_edit.html:100
 msgid "Leave blank if you don't have a repo. Click skip if the import fails."
 msgstr ""
+"Laat leeg als je geen repository hebt. Klik op overslaan als het importeren "
+"mislukt."
 
 #: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
-msgstr ""
+msgstr "Volgende (Automatisch Importeren)"
 
 #: app/templates/packages/create_edit.html:107
 msgid "Skip Autoimport"
-msgstr ""
+msgstr "Automatisch Importeren Overslaan"
 
 #: app/templates/packages/create_edit.html:111
 msgid "Importing... (This may take a while)"
-msgstr ""
+msgstr "Bezig met Importeren... (Dit kan een tijdje duren)"
 
 #: app/templates/packages/create_edit.html:119
+#, fuzzy
 msgid "Tip: paste in a forum topic URL"
-msgstr ""
+msgstr "Hint: plak een forumthema-URL in"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
-msgstr ""
+msgstr "YouTube video's zullen als embedded worden getoond."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
-msgstr ""
+msgstr "Onderhouders Wijzigen"
 
 #: app/templates/packages/edit_maintainers.html:11
 msgid "Maintainers are given write access to the package."
-msgstr ""
+msgstr "Onderhouders hebben toegang gekregen om dit pakket aan te passen."
 
 #: app/templates/packages/edit_maintainers.html:12
 msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
 msgstr ""
+"Afhankelijk van hun rank, zullen ze het pakket kunnen aanpassen, releases en "
+"screenshots maken, en/of privé-threads kunnen lezen."
 
 #: app/templates/packages/edit_maintainers.html:13
 msgid ""
 "Maintainers cannot add or remove other maintainers, but can remove "
 "themselves."
 msgstr ""
+"Onderhouders kunnen geen andere onderhouders toevoegen/verwijderen, ze "
+"kunnen enkel zichzelf verwijderen."
 
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:24
 msgid "Community Hub"
-msgstr ""
+msgstr "Community Hub"
 
 #: app/templates/packages/game_hub.html:11
 #: app/templates/packages/game_hub.html:12
 #, python-format
 msgid "Mods for %(title)s"
-msgstr ""
+msgstr "Mods voor %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr ""
+msgstr "Documentatie"
 
 #: app/templates/packages/game_support.html:24
 #: app/templates/packages/view.html:194
 msgid "Source"
-msgstr ""
+msgstr "Bron"
 
 #: app/templates/packages/game_support.html:27
 msgid "Supported?"
-msgstr ""
+msgstr "Ondersteund?"
 
 #: app/templates/packages/game_support.html:42
 msgid "Detected from dependencies"
-msgstr ""
+msgstr "Gedetecteerd van afhankelijkheden"
 
 #: app/templates/packages/game_support.html:44
 msgid "Added by Editor"
-msgstr ""
+msgstr "Toegevoegd door Editor"
 
 #: app/templates/packages/game_support.html:46
 msgid "mod.conf"
-msgstr ""
+msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
 #: app/templates/packages/view.html:456
 msgid "No specific game is required"
-msgstr ""
+msgstr "Geen specifiek spel is noodzakelijk"
 
 #: app/templates/packages/game_support.html:68
 msgid "Generated mod.conf lines"
-msgstr ""
+msgstr "mod.conf lijnen gegenereerd"
 
 #: app/templates/packages/game_support.html:82
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
 msgstr ""
+"Je moet minstens 1 ondersteund spel handmatig definiëren voordat je dit kan "
+"uitschakelen."
 
 #: app/templates/packages/game_support.html:88
 msgid "Editor Overrides"
-msgstr ""
+msgstr "Editor overschrijft"
 
 #: app/templates/packages/list.html:21
 #, python-format
 msgid "Did you mean to search for packages by %(authors)s?"
-msgstr ""
+msgstr "Wou je pakketten zoeken op %(authors)s?"
 
 #: app/templates/packages/list.html:26
 msgid "Filter by tags"
-msgstr ""
+msgstr "Op tag Filteren"
 
 #: app/templates/packages/list.html:59
 msgid "More content from the forums"
-msgstr ""
+msgstr "Meer van de forums"
 
 #: app/templates/packages/package_base.html:13
 msgid "Thumbnail"
-msgstr ""
+msgstr "Thumbnail"
 
 #: app/templates/packages/release_bulk_change.html:4
 msgid "Bulk Change Releases"
-msgstr ""
+msgstr "Meerdere release Wijzigen"
 
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
+"Gebruik deze pagina om het minimum en maximum van alle release voor jouw "
+"pakket."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
 #: app/templates/packages/release_new.html:70
 msgid "Maximum must be greater than or equal to the minimum!"
-msgstr ""
+msgstr "Het maximum moet groter dan of gelijk zijn aan het minimum!"
 
 #: app/templates/packages/release_bulk_change.html:33
 msgid ""
 "Note: Min and max versions will be used to hide the package on\n"
 "\t\t\tplatforms not within the range."
 msgstr ""
+"Opmerking: Minimum en maximum versies zullen gebruikt worden om het pakket "
+"te verstoppen op\n"
+"\t\t\tplatformen die niet in de range liggen."
 
 #: app/templates/packages/release_bulk_change.html:36
 #: app/templates/packages/release_edit.html:61
 #: app/templates/packages/release_new.html:83
 msgid "Leave both as None if in doubt."
-msgstr ""
+msgstr "Behoud beide als \"none\" als je twijfelt."
 
 #: app/templates/packages/release_edit.html:4
 msgid "Edit release"
-msgstr ""
+msgstr "Release wijzigen"
 
 #: app/templates/packages/release_edit.html:27
 msgid "Commit Hash"
-msgstr ""
+msgstr "Commit Hash"
 
 #: app/templates/packages/release_edit.html:32
 msgid "view task"
-msgstr ""
+msgstr "Taak Bekijken"
 
 #: app/templates/packages/release_edit.html:42
 #: app/templates/packages/screenshot_edit.html:20
 msgid "Approved"
-msgstr ""
+msgstr "Goedgekeurd"
 
 #: app/templates/packages/release_edit.html:46
 msgid "Supported Minetest versions"
-msgstr ""
+msgstr "Ondersteunde Minetest-versies"
 
 #: app/templates/packages/release_edit.html:58
 #: app/templates/packages/release_new.html:80
@@ -2201,62 +2283,73 @@ msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
+"Stel de minimaal en maximaal ondersteunde Minetest-versies in.\n"
+"\t\t\tDeze release wordt verborgen voor clients buiten dat bereik. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
+"Je kan <a href=\"/help/package_config/\"> dit automatisch instellen</a> in "
+"de .conf van je pakket."
 
 #: app/templates/packages/release_edit.html:70
 msgid "Delete Release"
-msgstr ""
+msgstr "Release Verwijderen"
 
 #: app/templates/packages/release_edit.html:76
 msgid "This is permanent."
-msgstr ""
+msgstr "Dit kan niet ongedaan worden."
 
 #: app/templates/packages/release_edit.html:77
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
 msgstr ""
+"Eventuele geassocieerde uploads zullen niet onmiddellijk verwijderd worden, "
+"maar de release zal niet meer zichtbaar zijn."
 
 #: app/templates/packages/release_edit.html:82
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr ""
+"Je kan de meest recente release niet verwijderen; maak eerst een nieuwere."
 
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
 msgid "Create a release"
-msgstr ""
+msgstr "Een release Maken"
 
 #: app/templates/packages/release_new.html:14
 msgid "You have automatic releases enabled."
-msgstr ""
+msgstr "Je hebt automatische releases ingeschakeld."
 
 #: app/templates/packages/release_new.html:16
 msgid "You have Git update notifications enabled."
-msgstr ""
+msgstr "Je hebt Git-updatemeldingen aanstaan."
 
 #: app/templates/packages/release_new.html:17
 msgid "You can enable automatic updates in the update settings."
-msgstr ""
+msgstr "Je kan automatische updates aanzetten in de update-instellingen."
 
 #: app/templates/packages/release_new.html:23
+#, fuzzy
 msgid "Set up"
-msgstr ""
+msgstr "Instellen"
 
 #: app/templates/packages/release_new.html:26
+#, fuzzy
 msgid ""
 "You can create releases automatically when you push commits or tags to "
 "your repository."
 msgstr ""
+"Je kan automatisch nieuwe releases maken wanneer je commits pusht of tag je "
+"repository"
 
 #: app/templates/packages/release_new.html:28
 #: app/templates/packages/release_wizard.html:69
 msgid "Add Git repo"
-msgstr ""
+msgstr "Git-repo Toevoegen"
 
 #: app/templates/packages/release_new.html:31
 #: app/templates/packages/release_wizard.html:59
@@ -2264,18 +2357,20 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
+"Git gebruiken zou er voor zorgen dat je automatische releases krijgt wanneer "
+"je code pusht of tagt."
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
-msgstr ""
+msgstr "1. Release een naam geven"
 
 #: app/templates/packages/release_new.html:42
 msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
-msgstr ""
+msgstr "Leesbaar door een mens, bvb. 1.0.0 of 2022-12-24"
 
 #: app/templates/packages/release_new.html:44
 msgid "2. Set the content"
-msgstr ""
+msgstr "2. Stel de inhoud in"
 
 #: app/templates/packages/release_new.html:57
 msgid ""
@@ -2283,10 +2378,13 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
+"Bekijk de <a href=\"/help/package_config/\">Pakketconfiguratie en "
+"releasehandboek</a> voor\n"
+"\t\t\thints over releases aan te passen."
 
 #: app/templates/packages/release_new.html:61
 msgid "3. Supported Minetest versions"
-msgstr ""
+msgstr "3. Ondersteunde Minetest-versies"
 
 #: app/templates/packages/release_new.html:75
 msgid ""
@@ -3722,4 +3820,3 @@ msgstr ""
 #~ "however, it's recommended to make the"
 #~ " most out of the Minetest community."
 #~ msgstr ""
-
