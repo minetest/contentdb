@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-12-09 19:06+0000\n"
-"PO-Revision-Date: 2022-12-10 23:55+0000\n"
-"Last-Translator: Eduardo Lima <edu200399lim@gmail.com>\n"
+"PO-Revision-Date: 2022-12-13 22:47+0000\n"
+"Last-Translator: Fábio Rodrigues Ribeiro <farribeiro@gmail.com>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "minetest/contentdb/pt_BR/>\n"
 "Language: pt_BR\n"
@@ -33,8 +33,9 @@ msgstr "Você foi banido."
 #: app/templates/modnames/list.html:16 app/templates/packages/list.html:4
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:201
+#, fuzzy
 msgid "Packages"
-msgstr ""
+msgstr "Pacotes"
 
 #: app/template_filters.py:52
 #, python-format
@@ -138,8 +139,9 @@ msgid "Error: Another package already uses this forum topic!"
 msgstr "Erro: Outro pacote já usa este tópico do fórum!"
 
 #: app/blueprints/packages/packages.py:166
+#, fuzzy
 msgid "Error: Forum topic author doesn't match package author."
-msgstr ""
+msgstr "Erro: O autor do tópico do fórum não corresponde ao autor do pacote."
 
 #: app/blueprints/packages/packages.py:169
 #, fuzzy
@@ -155,106 +157,132 @@ msgid "No download available."
 msgstr "Nenhum download disponível."
 
 #: app/blueprints/packages/packages.py:230 app/templates/packages/view.html:471
+#, fuzzy
 msgid "Type"
-msgstr ""
+msgstr "Tipo"
 
 #: app/blueprints/packages/packages.py:231
+#, fuzzy
 msgid "Title (Human-readable)"
-msgstr ""
+msgstr "Título (legível por humanos)"
 
 #: app/blueprints/packages/packages.py:232
 #: app/blueprints/packages/packages.py:567
+#, fuzzy
 msgid "Name (Technical)"
-msgstr ""
+msgstr "Nome (Técnico)"
 
 #: app/blueprints/packages/packages.py:232
 #: app/blueprints/packages/packages.py:568
 #: app/templates/packages/create_edit.html:75
+#, fuzzy
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr ""
+msgstr "Somente letras minúsculas (a-z), dígitos (0-9) e sublinhados (_)"
 
 #: app/blueprints/packages/packages.py:233
+#, fuzzy
 msgid "Short Description (Plaintext)"
-msgstr ""
+msgstr "Breve descrição (texto simples)"
 
 #: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:486
+#, fuzzy
 msgid "Maintenance State"
-msgstr ""
+msgstr "Estado de Manutenção"
 
 #: app/blueprints/packages/packages.py:237 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
+#, fuzzy
 msgid "Tags"
-msgstr ""
+msgstr "Tags"
 
 #: app/blueprints/packages/packages.py:238
+#, fuzzy
 msgid "Content Warnings"
-msgstr ""
+msgstr "Avisos de conteúdo"
 
 #: app/blueprints/packages/packages.py:239 app/templates/packages/view.html:475
+#, fuzzy
 msgid "License"
-msgstr ""
+msgstr "Licença"
 
 #: app/blueprints/packages/packages.py:240
+#, fuzzy
 msgid "Media License"
-msgstr ""
+msgstr "Licença de Mídia"
 
 #: app/blueprints/packages/packages.py:242
+#, fuzzy
 msgid "Long Description (Markdown)"
-msgstr ""
+msgstr "Descrição longa (Markdown)"
 
 #: app/blueprints/packages/packages.py:244
+#, fuzzy
 msgid "VCS Repository URL"
-msgstr ""
+msgstr "URL do repositório VCS"
 
 #: app/blueprints/packages/packages.py:245 app/blueprints/users/settings.py:51
+#, fuzzy
 msgid "Website URL"
-msgstr ""
+msgstr "URL do site"
 
 #: app/blueprints/packages/packages.py:246
+#, fuzzy
 msgid "Issue Tracker URL"
-msgstr ""
+msgstr "URL do Issue Tracker"
 
 #: app/blueprints/packages/packages.py:247
+#, fuzzy
 msgid "Forum Topic ID"
-msgstr ""
+msgstr "ID do tópico do fórum"
 
 #: app/blueprints/packages/packages.py:248
+#, fuzzy
 msgid "Video URL"
-msgstr ""
+msgstr "URL do vídeo"
 
 #: app/blueprints/packages/packages.py:254
+#, fuzzy
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game não é um nome permitido"
 
 #: app/blueprints/packages/packages.py:264
+#, fuzzy
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"O pacote já existe, mas foi removido. Entre em contato com a equipe do "
+"ContentDB para restaurar o pacote"
 
 #: app/blueprints/packages/packages.py:269
+#, fuzzy
 msgid "Package already exists"
-msgstr ""
+msgstr "O pacote já existe"
 
 #: app/blueprints/packages/packages.py:327
+#, fuzzy
 msgid "Unable to find that user"
-msgstr ""
+msgstr "Não foi possível encontrar esse usuário"
 
 #: app/blueprints/packages/packages.py:331
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:99
+#, fuzzy
 msgid "Permission denied"
-msgstr ""
+msgstr "Permissão negada"
 
 #: app/blueprints/packages/packages.py:387
 #: app/blueprints/packages/packages.py:436
 #: app/blueprints/packages/packages.py:452
+#, fuzzy
 msgid "You don't have permission to do that"
-msgstr ""
+msgstr "Você não tem permissão para fazer isso"
 
 #: app/blueprints/packages/packages.py:415
+#, fuzzy
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
+"Por favor, comente quais mudanças são necessárias no tópico de aprovação"
 
 #: app/blueprints/packages/packages.py:447
 msgid "Deleted package"
@@ -3523,95 +3551,127 @@ msgid "There is at least one verification pending."
 msgstr ""
 
 #: app/templates/users/settings_email.html:29
+#, fuzzy
 msgid "Notification Settings"
-msgstr ""
+msgstr "Configurações de notificação"
 
 #: app/templates/users/settings_email.html:33
+#, fuzzy
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr ""
+"As notificações por e-mail estão desativadas no momento. Clique em 'salvar' "
+"para ativar."
 
 #: app/templates/users/settings_email.html:38
+#, fuzzy
 msgid ""
 "Configure whether certain types of notifications are sent immediately, or"
 " as part of a daily digest."
 msgstr ""
+"Configure se determinados tipos de notificações são enviados imediatamente "
+"ou como parte de um resumo diário."
 
 #: app/templates/users/settings_email.html:43
+#, fuzzy
 msgid "Event"
-msgstr ""
+msgstr "Evento"
 
 #: app/templates/users/settings_email.html:45
+#, fuzzy
 msgid "Immediately"
-msgstr ""
+msgstr "Imediatamente"
 
 #: app/templates/users/settings_email.html:46
+#, fuzzy
 msgid "In digest"
-msgstr ""
+msgstr "Em resumo"
 
 #: app/templates/users/stats.html:4
-#, python-format
+#, fuzzy, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr ""
+msgstr "Estatísticas dos pacotes de %(display_name)s"
 
 #: app/templates/users/unsubscribe.html:11
+#, fuzzy
 msgid ""
 "This will blacklist an email address, preventing ContentDB from ever "
 "sending emails to it - including password resets."
 msgstr ""
+"Isso colocará um endereço de e-mail na lista negra, impedindo que o "
+"ContentDB envie e-mails para ele - incluindo redefinições de senha."
 
 #: app/templates/users/unsubscribe.html:20
+#, fuzzy
 msgid "Please enter the email address you wish to blacklist."
 msgstr ""
+"Por favor, digite o endereço de e-mail que você deseja colocar na lista "
+"negra."
 
 #: app/templates/users/unsubscribe.html:21
+#, fuzzy
 msgid "You will then need to confirm the email"
-msgstr ""
+msgstr "Você precisará confirmar o e-mail"
 
 #: app/templates/users/unsubscribe.html:33
+#, fuzzy
 msgid "You may now unsubscribe."
-msgstr ""
+msgstr "Agora você pode cancelar a inscrição."
 
 #: app/templates/users/unsubscribe.html:40
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Unsubscribing may prevent you from being able to sign into the account "
 "'%(display_name)s'"
 msgstr ""
+"Cancelar a inscrição pode impedir que você faça login na conta "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
+#, fuzzy
 msgid ""
 "ContentDB will no longer be able to send \"forget password\" and other "
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
+"O ContentDB não poderá mais enviar \"esqueci a senha\" e outros e-mails "
+"essenciais do sistema.\n"
+"\t\t\t\t\tEm vez disso, considere editar suas preferências de notificação "
+"por e-mail."
 
 #: app/templates/users/unsubscribe.html:50
+#, fuzzy
 msgid "You won't be able to use this email with ContentDB anymore."
-msgstr ""
+msgstr "Você não poderá mais usar este e-mail com o ContentDB."
 
 #: app/templates/users/unsubscribe.html:57
+#, fuzzy
 msgid "Edit Notification Preferences"
-msgstr ""
+msgstr "Editar preferências de notificação"
 
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
+#, fuzzy
 msgid "Search in Package Releases"
-msgstr ""
+msgstr "Pesquisar em versões de pacotes"
 
 #: app/templates/zipgrep/view_results.html:4
-#, python-format
+#, fuzzy, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr ""
+msgstr "'%(query)s' - Pesquisa de versões de pacotes"
 
 #: app/utils/user.py:50
+#, fuzzy
 msgid "You have a lot of notifications, you should either read or clear them"
-msgstr ""
+msgstr "Você tem muitas notificações, você deve ler ou limpá-las"
 
 #: app/utils/user.py:54
+#, fuzzy
 msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
 msgstr ""
+"Por favor, considere ativar as notificações por e-mail, você pode "
+"personalizar o quanto é enviado"
 
 #~ msgid "Meta Packages"
 #~ msgstr ""
