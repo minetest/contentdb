@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2022-12-09 19:06+0000\n"
-"PO-Revision-Date: 2022-07-18 21:16+0000\n"
+"PO-Revision-Date: 2022-12-10 23:55+0000\n"
 "Last-Translator: ROllerozxa <temporaryemail4meh+github@gmail.com>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/sv/>\n"
 "Language: sv\n"
-"Language-Team: Swedish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/sv/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.15-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:122
@@ -117,7 +118,7 @@ msgstr "Auditeringslogg"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:211 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "Statistik"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -130,7 +131,7 @@ msgstr "Ta bort"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Stödda spel"
 
 #: app/blueprints/packages/packages.py:160
 msgid "Error: Another package already uses this forum topic!"
@@ -222,13 +223,15 @@ msgstr "URL för video"
 
 #: app/blueprints/packages/packages.py:254
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game är inte ett tillåtet namn"
 
 #: app/blueprints/packages/packages.py:264
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Paketet existerar redan, men har blivit borttaget. Var snäll kontakta "
+"ContentDB-personal för att återställa paketet"
 
 #: app/blueprints/packages/packages.py:269
 msgid "Package already exists"
@@ -284,15 +287,15 @@ msgstr "Ägarnamn"
 
 #: app/blueprints/packages/packages.py:636
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "Aktivera stöddetektering baserad på beroenden (rekommenderat)"
 
 #: app/blueprints/packages/packages.py:637
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Kompatibla spel (Kommaseparerad)"
 
 #: app/blueprints/packages/packages.py:638
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Ej kompatibla spel (Kommaseparerad)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -924,6 +927,8 @@ msgstr "Sök"
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
+"Ett paket existerar redan med detta namn. Var vänligen se Policy and "
+"Guidance 3"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
@@ -1708,40 +1713,40 @@ msgstr "Skicka recension"
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "%(display_name)ss paket"
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "JavaScript krävs för att se diagram och statistik"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
-msgstr ""
+msgstr "Livstid unika nerladdningar"
 
 #: app/templates/macros/stats.html:59
 msgid "Downloads, past 7 days"
-msgstr ""
+msgstr "Nerladdningar, senaste 7 dagar"
 
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "%(downloads)s per dag"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "Nerladdningar, senaste 30 dagar"
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "Laddar..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
-msgstr ""
+msgstr "Ingen data"
 
 #: app/templates/macros/stats.html:97
 msgid "Downloads by Package"
-msgstr ""
+msgstr "Nerladdningar efter paket"
 
 #: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
 #: app/templates/macros/stats.html:118
@@ -1749,44 +1754,49 @@ msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
 msgstr ""
+"Detta är ett staplat områdesdiagram. För totala nerladdningar se den "
+"kombinerade höjden."
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Client"
-msgstr ""
+msgstr "Nerladdningar av klient"
 
 #: app/templates/macros/stats.html:110
 msgid "Downloads by Reason"
-msgstr ""
+msgstr "Nerladdningar av anledning"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
-msgstr ""
+msgstr "<b>Ny installering</b>: användaren tryckte [Install] innanför Minetest."
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
+"<b>Beroende</b>: var installerad automatiskt för att gottgöra ett beroende."
 
 #: app/templates/macros/stats.html:114
 msgid "<b>Update</b>: download was to update the package."
-msgstr ""
+msgstr "<b>Uppdatering</b>: nerladdning var för att uppdatera paketet."
 
 #: app/templates/macros/stats.html:115
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
 msgstr ""
+"<b>Annan / Okänd</b>: nerladdad av en webbläsare eller en föråldrad "
+"Minetestversion (innan 5.5)."
 
 #: app/templates/macros/stats.html:127
 msgid "Need more stats?"
-msgstr ""
+msgstr "Behöver mer statistik?"
 
 #: app/templates/macros/stats.html:129
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
-msgstr ""
+msgstr "Kolla ContentDB-Grafana:n för heltäckande statistik"
 
 #: app/templates/macros/stats.html:133
 msgid "ContentDB Grafana"
-msgstr ""
+msgstr "ContentDB-Grafana:n"
 
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
@@ -1880,16 +1890,16 @@ msgstr "Gammal"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Moddnamn"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "Inga moddnamn hittades."
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Moddnamn \"%(name)s\""
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
@@ -2125,7 +2135,7 @@ msgstr "Moddar för %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentation"
 
 #: app/templates/packages/game_support.html:24
 #: app/templates/packages/view.html:194
@@ -2134,19 +2144,19 @@ msgstr "Källkod"
 
 #: app/templates/packages/game_support.html:27
 msgid "Supported?"
-msgstr ""
+msgstr "Stöds?"
 
 #: app/templates/packages/game_support.html:42
 msgid "Detected from dependencies"
-msgstr ""
+msgstr "Hittad från beroenden"
 
 #: app/templates/packages/game_support.html:44
 msgid "Added by Editor"
-msgstr ""
+msgstr "Tillagd av redigerare"
 
 #: app/templates/packages/game_support.html:46
 msgid "mod.conf"
-msgstr ""
+msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
 #: app/templates/packages/view.html:456
@@ -2155,17 +2165,19 @@ msgstr "Inget specifikt spel behövs"
 
 #: app/templates/packages/game_support.html:68
 msgid "Generated mod.conf lines"
-msgstr ""
+msgstr "Genererade mod.conf-linjer"
 
 #: app/templates/packages/game_support.html:82
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
 msgstr ""
+"Du behöver manuellt definera minst ett kompatibelt spel innan du kan stänga "
+"av detta."
 
 #: app/templates/packages/game_support.html:88
 msgid "Editor Overrides"
-msgstr ""
+msgstr "Redigeraröverskridelser"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2614,7 +2626,7 @@ msgstr "Liknande forumtrådar"
 
 #: app/templates/packages/stats.html:17
 msgid "Download (.csv)"
-msgstr ""
+msgstr "Ladda ner (.csv)"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -2840,10 +2852,11 @@ msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
 msgstr ""
+"På grund av spam tillåter vi inte längre rapporter från anonyma användare."
 
 #: app/templates/report/index.html:21
 msgid "Please sign in or contact the admin in another way"
-msgstr ""
+msgstr "Vänligen logga in eller kontakta administratören på ett annat sätt"
 
 #: app/templates/report/index.html:39
 msgid "What are you reporting? Why are you reporting it?"
@@ -3013,6 +3026,7 @@ msgstr "Ouppfyllda beroenden"
 #: app/templates/todo/editor.html:151
 msgid "Mod names that have hard dependers, but no packages providing them."
 msgstr ""
+"Moddnamn som har hårda beroenden, men inga paket som tillhandahåller dem."
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -3025,7 +3039,7 @@ msgstr "Senaste åtgärder"
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
-msgstr ""
+msgstr "Paket som inte stöder %(rel)s"
 
 #: app/templates/todo/mtver_support.html:13
 #: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
@@ -3051,12 +3065,12 @@ msgstr "Alla föråldrade paket"
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
 #: app/templates/todo/user.html:68
 msgid "Missing Screenshots"
-msgstr ""
+msgstr "Saknade skärmdumpar"
 
 #: app/templates/todo/screenshots.html:33
 #, python-format
 msgid "%(count)d packages"
-msgstr ""
+msgstr "%(count)d paket"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -3072,11 +3086,11 @@ msgstr "Redigera taggar"
 
 #: app/templates/todo/todo_base.html:11
 msgid "Your to do list"
-msgstr ""
+msgstr "Din att-göra lista"
 
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
-msgstr ""
+msgstr "Föråldrade paket"
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
@@ -3322,6 +3336,8 @@ msgid ""
 "ContentDB will link your account to your forum account if you have one, "
 "but you don't need one."
 msgstr ""
+"ContentDB kommer länka ditt konto till ditt forumkonto om du har ett, men du "
+"behöver inte det."
 
 #: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
@@ -3716,7 +3732,7 @@ msgstr "Sammandraget"
 #: app/templates/users/stats.html:4
 #, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr ""
+msgstr "Statistik för %(display_name)ss paket"
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
@@ -3872,4 +3888,3 @@ msgstr ""
 #~ "Du behöver inte ett forumkonto, men "
 #~ "det rekommenderas för att få the "
 #~ "mesta ut från Minetest-community:t."
-
