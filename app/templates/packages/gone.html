@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ package.title }}
+{% endblock %}
+
+{% block headextra %}
+	<meta name="og:title" content="{{ package.title }}"/>
+	<meta name="og:description" content="{{ package.short_desc }}"/>
+	<meta name="description" content="{{ package.short_desc }}"/>
+	<meta name="og:url" content="{{ package.getURL("packages.view", absolute=True) }}"/>
+	{% if package.getThumbnailURL(3, True) %}
+	<meta name="og:image" content="{{ package.getThumbnailURL(3, True) }}"/>
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	{% if package.approved_at %}
+		<h1>{{ _("Package Removed") }}</h1>
+		<p>
+			{{ _("This package has been unpublished.") }}
+			{{ _("It may have been removed by choice of the author, or by ContentDB staff due to a problem.") }}
+		</p>
+	{% elif package.state.name == "READY_FOR_REVIEW" %}
+		<h1>{{ _("Package Undergoing Review") }}</h1>
+		<p>
+			{{ _("This package is currently undergoing review") }}
+		</p>
+	{% else %}
+		<h1>{{ _("Package Undergoing Review") }}</h1>
+		<p>
+			{{ _("This package is currently undergoing review, and changes are needed before it can be added.") }}
+		</p>
+	{% endif %}
+	<p>
+		{{ _("Please check back again later.") }}
+	</p>
+	<p>
+		<a href="{{ url_for('users.login') }}" class="btn btn-primary">{{ _("Login") }}</a>
+	</p>
+{% endblock %}
