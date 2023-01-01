@@ -58,10 +58,16 @@ class PackageTreeNode:
 			self.add_children_from_mod_dir("mods")
 		elif self.type == ContentType.MOD:
 			if self.name and not basenamePattern.match(self.name):
-				raise MinetestCheckError("Invalid base name for mod {} at {}, names must only contain a-z0-9_." \
-										 .format(self.name, self.relative))
+				raise MinetestCheckError(f"Invalid base name for mod {self.name} at {self.relative}, names must only contain a-z0-9_.")
+			self.check_dir_casing(["textures", "media", "sounds", "models", "locale"])
 		elif self.type == ContentType.MODPACK:
 			self.add_children_from_mod_dir(None)
+
+	def check_dir_casing(self, dirs):
+		for dir in next(os.walk(self.baseDir))[1]:
+			lowercase = dir.lower()
+			if lowercase != dir and lowercase in dirs:
+				raise MinetestCheckError(f"Incorrect case, {dir} should be {lowercase} at {self.relative}{dir}")
 
 	def getReadMePath(self):
 		for filename in os.listdir(self.baseDir):
