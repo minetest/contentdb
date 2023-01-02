@@ -66,8 +66,8 @@ Users can opt-in to showing non-free software, if they wish:
 	<figcaption class="figure-caption">Screenshot of the ContentDB Flag Blacklist setting</figcaption>
 </figure>
 
-In the future, [the `platform_default` flag](/help/content_flags/) will be used to control what content
-each platforms shows - Android is significantly stricter about mature content.
-You may wish to remove all text from that setting completely, leaving it blank,
-if you wish to view all content when this happens. Currently, [mature content is
-not permitted on ContentDB](/policy_and_guidance/).
+The [`platform_default` flag](/help/content_flags/) is used to control what content
+each platforms shows. It doesn't hide anything on Desktop, but hides all mature
+content on Android. You may wish to remove all text from that setting completely, 
+leaving it blank. See [Content Warnings](/help/content_flags/#content-warnings)
+for information on mature content.
