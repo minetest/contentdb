@@ -22,10 +22,14 @@ from git import GitCommandError
 from app.tasks import TaskError
 from app.utils import randomString
 
-def generateGitURL(urlstr):
+
+def generate_git_url(urlstr):
 	scheme, netloc, path, query, frag = urlsplit(urlstr)
 
-	return "http://:@" + netloc + path + query
+	if not scheme.startswith("http"):
+		scheme = "http"
+
+	return scheme + "://:@" + netloc + path + query
 
 
 @contextlib.contextmanager
@@ -45,7 +49,7 @@ def clone_repo(urlstr, ref=None, recursive=False):
 
 	err = None
 	try:
-		gitUrl = generateGitURL(urlstr)
+		gitUrl = generate_git_url(urlstr)
 		print("Cloning from " + gitUrl)
 
 		if ref is None:
@@ -79,7 +83,7 @@ def clone_repo(urlstr, ref=None, recursive=False):
 
 
 def get_latest_commit(git_url, ref_name=None):
-	git_url = generateGitURL(git_url)
+	git_url = generate_git_url(git_url)
 
 	if ref_name:
 		ref_name = "refs/heads/" + ref_name
