@@ -5,7 +5,8 @@ from bleach import Cleaner
 from bleach.linkifier import LinkifyFilter
 from bs4 import BeautifulSoup
 from markdown import Markdown
-from flask import Markup, url_for
+from flask import url_for
+from jinja2.utils import markupsafe
 from markdown.extensions import Extension
 from markdown.inlinepatterns import SimpleTagInlineProcessor
 from markdown.inlinepatterns import Pattern
@@ -147,7 +148,7 @@ def init_markdown(app):
 
 	@app.template_filter()
 	def markdown(source):
-		return Markup(render_markdown(source))
+		return markupsafe.Markup(render_markdown(source))
 
 
 def get_headings(html: str):

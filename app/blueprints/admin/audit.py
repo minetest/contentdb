@@ -35,7 +35,7 @@ def audit():
 			abort(404)
 		query = query.filter_by(causer=user)
 
-	pagination = query.paginate(page, num, True)
+	pagination = query.paginate(page=page, per_page=num)
 	return render_template("admin/audit.html", log=pagination.items, pagination=pagination)
 
 
