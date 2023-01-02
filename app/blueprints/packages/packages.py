@@ -95,7 +95,7 @@ def list_all():
 		topics = qb.buildTopicQuery().all()
 
 	tags_query = db.session.query(func.count(Tags.c.tag_id), Tag) \
-  		.select_from(Tag).join(Tags).join(Package).group_by(Tag.id).order_by(db.asc(Tag.title))
+		.select_from(Tag).join(Tags).join(Package).group_by(Tag.id).order_by(db.asc(Tag.title))
 	tags = qb.filterPackageQuery(tags_query).all()
 
 	selected_tags = set(qb.tags)
@@ -117,7 +117,7 @@ def getReleases(package):
 @is_package_page
 def view(package):
 	if package.state != PackageState.APPROVED and not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
-		return render_template("packages/gone.html", package=package), 503
+		return render_template("packages/gone.html", package=package), 403
 
 	show_similar = not package.approved and (
 			current_user in package.maintainers or
