@@ -91,7 +91,8 @@ reimplementation of the mod that owns the name.
 ### 4.1. Allowed Licenses
 
 Please ensure that you correctly credit any resources (code, assets, or otherwise)
-that you have used in your package.
+that you have used in your package. For help on doing copyright correctly, see
+[Copyright help page](/help/copyright/).
 
 **The use of licenses that do not allow derivatives or redistribution is not
 permitted. This includes CC-ND (No-Derivatives) and lots of closed source licenses.
@@ -101,7 +102,8 @@ of the content on servers or singleplayer is also not permitted.**
 However, closed sourced licenses are allowed if they allow the above.
 
 If the license you use is not on the list then please select "Other", and we'll
-get around to adding it.
+get around to adding it. We tend to reject custom/untested licenses, and 
+reserve the right to decide on whether a license should be included. 
 
 Please note that the definitions of "free" and "non-free" is the same as that
 of the [Free Software Foundation](https://www.gnu.org/philosophy/free-sw.en.html).
