@@ -619,3 +619,109 @@ def user_stats(username: str):
 		error(404, "User not found")
 
 	return jsonify(get_package_stats_for_user(user))
+
+
+@bp.route("/api/cdb_schema/")
+@cors_allowed
+def json_schema():
+	tags = Tag.query.all()
+	warnings = ContentWarning.query.all()
+	licenses = License.query.order_by(db.asc(License.name)).all()
+	return jsonify({
+		"title": "CDB Config",
+		"description": "Package Configuration",
+		"type": "object",
+		"$defs": {
+			"license": {
+				"enum": [license.name for license in licenses],
+				"enumDescriptions": [license.is_foss and "FOSS" or "NON-FOSS" for license in licenses]
+			},
+		},
+		"properties": {
+			"type": {
+				"description": "Package Type",
+				"enum": ["MOD", "GAME", "TXP"],
+				"enumDescriptions": ["Mod", "Game", "Texture Pack"]
+			},
+			"title": {
+				"description": "Human-readable title",
+				"type": "string"
+			},
+			"name": {
+				"description": "Technical name (needs permission if already approved).",
+				"type": "string",
+				"pattern": "^[a-z_]+$"
+			},
+			"short_description": {
+				"description": "Package Short Description",
+				"type": ["string", "null"]
+			},
+			"dev_state": {
+				"description": "Development State",
+				"enum": [
+					"WIP",
+					"BETA",
+					"ACTIVELY_DEVELOPED",
+					"MAINTENANCE_ONLY",
+					"AS_IS",
+					"DEPRECATED",
+					"LOOKING_FOR_MAINTAINER"
+				]
+			},
+			"tags": {
+				"description": "Package Tags",
+				"type": "array",
+				"items": {
+					"enum": [tag.name for tag in tags],
+					"enumDescriptions": [tag.title for tag in tags]
+				},
+				"uniqueItems": True,
+			},
+			"content_warnings": {
+				"description": "Package Content Warnings",
+				"type": "array",
+				"items": {
+					"enum": [warning.name for warning in warnings],
+					"enumDescriptions": [warning.title for warning in warnings]
+				},
+				"uniqueItems": True,
+			},
+			"license": {
+				"description": "Package License",
+				"$ref": "#/$defs/license"
+			},
+			"media_license": {
+				"description": "Package Media License",
+				"$ref": "#/$defs/license"
+			},
+			"long_description": {
+				"description": "Package Long Description",
+				"type": ["string", "null"]
+			},
+			"repo": {
+				"description": "Git Repository URL",
+				"type": "string",
+				"format": "uri"
+			},
+			"website": {
+				"description": "Website URL",
+				"type": ["string", "null"],
+				"format": "uri"
+			},
+			"issue_tracker": {
+				"description": "Issue Tracker URL",
+				"type": ["string", "null"],
+				"format": "uri"
+			},
+			"forums": {
+				"description": "Forum Topic ID",
+				"type": ["integer", "null"],
+				"minimum": 0
+			},
+			"video_url": {
+				"description": "URL to a Video",
+				"type": ["string", "null"],
+				"format": "uri"
+			},
+		},
+	})
