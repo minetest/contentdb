@@ -121,7 +121,19 @@
 	</p>
 {% endif %}
 
-{% if current_user.is_authenticated %}
+{% if form == False %}
+	<div class="row mt-1">
+		<div class="col-md-1 p-1"></div>
+		<div class="col">
+			<a class="btn btn-primary ml-3" href="{{ url_for('threads.view', id=thread.id) }}">
+				<i class="fas fa-reply mr-1"></i>
+				{{ _("Reply") }}
+			</a>
+		</div>
+	</div>
+{% endif %}
+
+{% if current_user.is_authenticated and form != False %}
 <div class="row mt-0 mb-4 comments mx-0">
 	<div class="col-md-1 p-1">
 		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
@@ -150,7 +162,7 @@
 				</div>
 			{% elif form %}
 				{% from "macros/forms.html" import render_field, render_submit_field %}
-				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
+				<form method="post" action="{{ url_for('threads.view', id=thread.id) }}" class="card-body">
 					{{ form.hidden_tag() }}
 					{{ render_field(form.comment, fieldclass="form-control markdown", label="") }}
 					{{ render_submit_field(form.submit) }}
