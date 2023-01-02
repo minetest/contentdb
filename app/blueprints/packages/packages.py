@@ -667,15 +667,18 @@ def game_support(package):
 		detect_update_needed = False
 
 		if current_user not in package.maintainers:
-			resolver = GameSupportResolver(db.session)
+			try:
+				resolver = GameSupportResolver(db.session)
 
-			game_is_supported = {}
-			for game in get_games_from_csv(db.session, form.supported.data or ""):
-				game_is_supported[game.id] = True
-			for game in get_games_from_csv(db.session, form.unsupported.data or ""):
-				game_is_supported[game.id] = False
-			resolver.set_supported(package, game_is_supported, 11)
-			detect_update_needed = True
+				game_is_supported = {}
+				for game in get_games_from_csv(db.session, form.supported.data or ""):
+					game_is_supported[game.id] = True
+				for game in get_games_from_csv(db.session, form.unsupported.data or ""):
+					game_is_supported[game.id] = False
+				resolver.set_supported(package, game_is_supported, 11)
+				detect_update_needed = True
+			except LogicError as e:
+				flash(e.message, "danger")
 
 		next_url = package.getURL("packages.game_support")
 

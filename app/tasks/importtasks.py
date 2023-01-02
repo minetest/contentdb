@@ -146,18 +146,21 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 
 		# Update game support
 		if package.type == PackageType.MOD:
-			resolver = GameSupportResolver(db.session)
+			try:
+				resolver = GameSupportResolver(db.session)
 
-			game_is_supported = {}
-			if "supported_games" in tree.meta:
-				for game in get_games_from_csv(db.session, tree.meta["supported_games"]):
-					game_is_supported[game.id] = True
-			if "unsupported_games" in tree.meta:
-				for game in get_games_from_csv(db.session, tree.meta["unsupported_games"]):
-					game_is_supported[game.id] = False
+				game_is_supported = {}
+				if "supported_games" in tree.meta:
+					for game in get_games_from_csv(db.session, tree.meta["supported_games"]):
+						game_is_supported[game.id] = True
+				if "unsupported_games" in tree.meta:
+					for game in get_games_from_csv(db.session, tree.meta["unsupported_games"]):
+						game_is_supported[game.id] = False
 
-			resolver.set_supported(package, game_is_supported, 10)
-			resolver.update(package)
+				resolver.set_supported(package, game_is_supported, 10)
+				resolver.update(package)
+			except LogicError as e:
+				raise TaskError(e.message)
 
 		return tree
 
