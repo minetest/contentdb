@@ -170,17 +170,18 @@ def view_user(username=None):
 		abort(403)
 
 	unapproved_packages = user.packages \
-		.filter(or_(Package.state == PackageState.WIP,
-			Package.state == PackageState.CHANGES_NEEDED)) \
-		.order_by(db.asc(Package.created_at)).all()
+			.filter(or_(Package.state == PackageState.WIP,
+				Package.state == PackageState.CHANGES_NEEDED)) \
+			.order_by(db.asc(Package.created_at)).all()
 
 	packages_with_no_screenshots = user.maintained_packages.filter(
-		~Package.screenshots.any(), Package.state == PackageState.APPROVED).all()
+			~Package.screenshots.any(), Package.state == PackageState.APPROVED).all()
 
 	packages_with_small_screenshots = user.maintained_packages \
-		.filter(Package.screenshots.any(and_(PackageScreenshot.width < PackageScreenshot.SOFT_MIN_SIZE[0],
-				PackageScreenshot.height < PackageScreenshot.SOFT_MIN_SIZE[1]))) \
-		.all()
+			.filter(Package.state != PackageState.DELETED,
+					Package.screenshots.any(and_(PackageScreenshot.width < PackageScreenshot.SOFT_MIN_SIZE[0],
+					PackageScreenshot.height < PackageScreenshot.SOFT_MIN_SIZE[1]))) \
+			.all()
 
 	outdated_packages = user.maintained_packages \
 			.filter(Package.state != PackageState.DELETED,
