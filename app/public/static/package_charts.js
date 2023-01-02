@@ -184,12 +184,12 @@ async function load_data() {
 
 function setup_chart(ctx, data) {
 	data.datasets = data.datasets.map((set, i) => {
-		const colorIdx = data.datasets.length - i - 1;
+		const colorIdx = (data.datasets.length - i - 1) % chartColors.length;
 		return {
 			fill: true,
-			backgroundColor: chartColorsBg[colorIdx] ?? chartColorsBg[0],
-			borderColor: chartColors[colorIdx] ?? chartColors[0],
-			pointBackgroundColor: chartColors[colorIdx] ?? chartColors[0],
+			backgroundColor: chartColorsBg[colorIdx],
+			borderColor: chartColors[colorIdx],
+			pointBackgroundColor: chartColors[colorIdx],
 			...set,
 		};
 	});
