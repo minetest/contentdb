@@ -117,9 +117,6 @@ def getReleases(package):
 @is_package_page
 def view(package):
 	if package.state != PackageState.APPROVED and not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
-		if package.state == PackageState.WIP:
-			abort(404)
-
 		return render_template("packages/gone.html", package=package), 503
 
 	show_similar = not package.approved and (

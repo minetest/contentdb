@@ -26,6 +26,11 @@
 		<p>
 			{{ _("This package is currently undergoing review") }}
 		</p>
+	{% elif package.state.name == "WIP" %}
+		<h1>{{ _("Package Not Yet Submitted") }}</h1>
+		<p>
+			{{ _("This package has been created but hasn't been submitted for approval yet.") }}
+		</p>
 	{% else %}
 		<h1>{{ _("Package Undergoing Review") }}</h1>
 		<p>
