@@ -297,22 +297,28 @@
 				<h2 id="reviews" class="mt-0">{{ _("Reviews") }}</h2>
 
 				{% from "macros/reviews.html" import render_reviews, render_review_form, render_review_preview with context %}
-				{% if current_user.is_authenticated %}
-					{% if has_review %}
-						<p>
-							<a class="btn btn-primary" href="{{ package.getURL("packages.review") }}">
-								{{ _("Edit Review") }}
-							</a>
-						</p>
-					{% elif current_user in package.maintainers %}
-						<p>
-							{{ _("You can't review your own package.") }}
-						</p>
+				{% if package.state.name == "APPROVED" %}
+					{% if current_user.is_authenticated %}
+						{% if has_review %}
+							<p>
+								<a class="btn btn-primary" href="{{ package.getURL("packages.review") }}">
+									{{ _("Edit Review") }}
+								</a>
+							</p>
+						{% elif current_user in package.maintainers %}
+							<p>
+								{{ _("You can't review your own package.") }}
+							</p>
+						{% else %}
+							{{ render_review_preview(package) }}
+						{% endif %}
 					{% else %}
 						{{ render_review_preview(package) }}
 					{% endif %}
 				{% else %}
-					{{ render_review_preview(package) }}
+					<p>
+						{{ _("Package needs to be approved before it can be reviewed.") }}
+					</p>
 				{% endif %}
 
 				{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.ADMIN) %}

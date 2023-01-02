@@ -25,7 +25,7 @@ from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
 from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package, UserRank, \
-	Permission, AuditSeverity
+	Permission, AuditSeverity, PackageState
 from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url, rank_required, addAuditLog
 from app.tasks.webhooktasks import post_discord_webhook
 
@@ -53,6 +53,9 @@ def review(package):
 	if current_user in package.maintainers:
 		flash(gettext("You can't review your own package!"), "danger")
 		return redirect(package.getURL("packages.view"))
+
+	if package.state != PackageState.APPROVED:
+		abort(404)
 
 	review = PackageReview.query.filter_by(package=package, author=current_user).first()
 	can_review = review is not None or current_user.canReviewRL()
