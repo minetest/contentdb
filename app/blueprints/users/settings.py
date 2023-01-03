@@ -7,7 +7,7 @@ from wtforms import *
 from wtforms.validators import *
 
 from app.models import *
-from app.utils import nonEmptyOrNone, addAuditLog, randomString, rank_required
+from app.utils import nonEmptyOrNone, addAuditLog, randomString, rank_required, has_blocked_domains
 from app.tasks.emails import send_verify_email
 from . import bp
 
@@ -53,7 +53,7 @@ class UserProfileForm(FlaskForm):
 	submit = SubmitField(lazy_gettext("Save"))
 
 
-def handle_profile_edit(form, user, username):
+def handle_profile_edit(form: UserProfileForm, user: User, username: str):
 	severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
 	addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
 			url_for("users.profile", username=username))
@@ -80,8 +80,13 @@ def handle_profile_edit(form, user, username):
 				url_for("users.profile", username=username))
 
 	if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
-		user.website_url = form["website_url"].data
-		user.donate_url = form["donate_url"].data
+		if has_blocked_domains(form.website_url.data, current_user.username, f"{user.username}'s website_url") or \
+				has_blocked_domains(form.donate_url.data, current_user.username, f"{user.username}'s donate_url"):
+			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+			return
+
+		user.website_url = form.website_url.data
+		user.donate_url = form.donate_url.data
 
 	db.session.commit()
 

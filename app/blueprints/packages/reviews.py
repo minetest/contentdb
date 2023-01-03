@@ -26,7 +26,8 @@ from wtforms import *
 from wtforms.validators import *
 from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package, UserRank, \
 	Permission, AuditSeverity, PackageState
-from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url, rank_required, addAuditLog
+from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url, rank_required, \
+	addAuditLog, has_blocked_domains
 from app.tasks.webhooktasks import post_discord_webhook
 
 
@@ -73,61 +74,64 @@ def review(package):
 
 	# Validate and submit
 	elif can_review and form.validate_on_submit():
-		was_new = False
-		if not review:
-			was_new = True
-			review = PackageReview()
-			review.package = package
-			review.author  = current_user
-			db.session.add(review)
-
-		review.recommends = form.recommends.data == "yes"
-
-		thread = review.thread
-		if not thread:
-			thread = Thread()
-			thread.author  = current_user
-			thread.private = False
-			thread.package = package
-			thread.review = review
-			db.session.add(thread)
-
-			thread.watchers.append(current_user)
-
-			reply = ThreadReply()
-			reply.thread  = thread
-			reply.author  = current_user
-			reply.comment = form.comment.data
-			db.session.add(reply)
-
-			thread.replies.append(reply)
+		if has_blocked_domains(form.comment.data, current_user.username, f"review of {package.getId()}"):
+			flash(gettext("Linking to malicious sites is not allowed."), "danger")
 		else:
-			reply = thread.first_reply
-			reply.comment = form.comment.data
+			was_new = False
+			if not review:
+				was_new = True
+				review = PackageReview()
+				review.package = package
+				review.author  = current_user
+				db.session.add(review)
 
-		thread.title   = form.title.data
+			review.recommends = form.recommends.data == "yes"
 
-		db.session.commit()
+			thread = review.thread
+			if not thread:
+				thread = Thread()
+				thread.author  = current_user
+				thread.private = False
+				thread.package = package
+				thread.review = review
+				db.session.add(thread)
 
-		package.recalcScore()
+				thread.watchers.append(current_user)
 
-		if was_new:
-			notif_msg = "New review '{}'".format(form.title.data)
-			type = NotificationType.NEW_REVIEW
-		else:
-			notif_msg = "Updated review '{}'".format(form.title.data)
-			type = NotificationType.OTHER
+				reply = ThreadReply()
+				reply.thread  = thread
+				reply.author  = current_user
+				reply.comment = form.comment.data
+				db.session.add(reply)
 
-		addNotification(package.maintainers, current_user, type, notif_msg,
-				url_for("threads.view", id=thread.id), package)
+				thread.replies.append(reply)
+			else:
+				reply = thread.first_reply
+				reply.comment = form.comment.data
 
-		if was_new:
-			post_discord_webhook.delay(thread.author.username,
-					"Reviewed {}: {}".format(package.title, thread.getViewURL(absolute=True)), False)
+			thread.title   = form.title.data
 
-		db.session.commit()
+			db.session.commit()
 
-		return redirect(package.getURL("packages.view"))
+			package.recalcScore()
+
+			if was_new:
+				notif_msg = "New review '{}'".format(form.title.data)
+				type = NotificationType.NEW_REVIEW
+			else:
+				notif_msg = "Updated review '{}'".format(form.title.data)
+				type = NotificationType.OTHER
+
+			addNotification(package.maintainers, current_user, type, notif_msg,
+					url_for("threads.view", id=thread.id), package)
+
+			if was_new:
+				post_discord_webhook.delay(thread.author.username,
+						"Reviewed {}: {}".format(package.title, thread.getViewURL(absolute=True)), False)
+
+			db.session.commit()
+
+			return redirect(package.getURL("packages.view"))
 
 	return render_template("packages/review_create_edit.html",
 			form=form, package=package, review=review)
@@ -215,7 +219,6 @@ def review_vote(package, review_id):
 		return redirect(next_url)
 	else:
 		return redirect(review.thread.getViewURL())
-
 
 
 @bp.route("/packages/<author>/<name>/review-votes/")

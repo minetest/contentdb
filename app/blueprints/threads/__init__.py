@@ -23,7 +23,7 @@ bp = Blueprint("threads", __name__)
 
 from flask_login import current_user, login_required
 from app.models import *
-from app.utils import addNotification, isYes, addAuditLog, get_system_user, rank_required
+from app.utils import addNotification, isYes, addAuditLog, get_system_user, rank_required, has_blocked_domains
 from flask_wtf import FlaskForm
 from wtforms import *
 from wtforms.validators import *
@@ -189,7 +189,7 @@ def edit_reply(id):
 	if reply_id is None:
 		abort(404)
 
-	reply = ThreadReply.query.get(reply_id)
+	reply: ThreadReply = ThreadReply.query.get(reply_id)
 	if reply is None or reply.thread != thread:
 		abort(404)
 
@@ -199,17 +199,19 @@ def edit_reply(id):
 	form = CommentForm(formdata=request.form, obj=reply)
 	if form.validate_on_submit():
 		comment = form.comment.data
+		if has_blocked_domains(comment, current_user.username, f"edit to reply {reply.get_url(True)}"):
+			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+		else:
+			msg = "Edited reply by {}".format(reply.author.display_name)
+			severity = AuditSeverity.NORMAL if current_user == reply.author else AuditSeverity.MODERATION
+			addNotification(reply.author, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
+			addAuditLog(severity, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
 
-		msg = "Edited reply by {}".format(reply.author.display_name)
-		severity = AuditSeverity.NORMAL if current_user == reply.author else AuditSeverity.MODERATION
-		addNotification(reply.author, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
-		addAuditLog(severity, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
+			reply.comment = comment
 
-		reply.comment = comment
+			db.session.commit()
 
-		db.session.commit()
-
-		return redirect(thread.getViewURL())
+			return redirect(thread.getViewURL())
 
 	return render_template("threads/edit_reply.html", thread=thread, reply=reply, form=form)
 
@@ -229,6 +231,10 @@ def view(id):
 		if not current_user.canCommentRL():
 			flash(gettext("Please wait before commenting again"), "danger")
 			return redirect(thread.getViewURL())
+
+		if has_blocked_domains(comment, current_user.username, f"reply to {thread.getViewURL(True)}"):
+			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+			return render_template("threads/view.html", thread=thread, form=form)
 
 		reply = ThreadReply()
 		reply.author = current_user
@@ -318,55 +324,58 @@ def new():
 
 	# Validate and submit
 	elif form.validate_on_submit():
-		thread = Thread()
-		thread.author  = current_user
-		thread.title   = form.title.data
-		thread.private = form.private.data if allow_private_change else def_is_private
-		thread.package = package
-		db.session.add(thread)
+		if has_blocked_domains(form.comment.data, current_user.username, f"new thread"):
+			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+		else:
+			thread = Thread()
+			thread.author  = current_user
+			thread.title   = form.title.data
+			thread.private = form.private.data if allow_private_change else def_is_private
+			thread.package = package
+			db.session.add(thread)
 
-		thread.watchers.append(current_user)
-		if package and package.author != current_user:
-			thread.watchers.append(package.author)
+			thread.watchers.append(current_user)
+			if package and package.author != current_user:
+				thread.watchers.append(package.author)
 
-		reply = ThreadReply()
-		reply.thread  = thread
-		reply.author  = current_user
-		reply.comment = form.comment.data
-		db.session.add(reply)
+			reply = ThreadReply()
+			reply.thread  = thread
+			reply.author  = current_user
+			reply.comment = form.comment.data
+			db.session.add(reply)
 
-		thread.replies.append(reply)
+			thread.replies.append(reply)
 
-		db.session.commit()
+			db.session.commit()
 
-		if is_review_thread:
-			package.review_thread = thread
+			if is_review_thread:
+				package.review_thread = thread
 
-		for mentioned_username in get_user_mentions(render_markdown(form.comment.data)):
-			mentioned = User.query.filter_by(username=mentioned_username).first()
-			if mentioned is None:
-				continue
+			for mentioned_username in get_user_mentions(render_markdown(form.comment.data)):
+				mentioned = User.query.filter_by(username=mentioned_username).first()
+				if mentioned is None:
+					continue
 
-			msg = "Mentioned by {} in new thread '{}'".format(current_user.display_name, thread.title)
-			addNotification(mentioned, current_user, NotificationType.NEW_THREAD,
-							msg, thread.getViewURL(), thread.package)
+				msg = "Mentioned by {} in new thread '{}'".format(current_user.display_name, thread.title)
+				addNotification(mentioned, current_user, NotificationType.NEW_THREAD,
+								msg, thread.getViewURL(), thread.package)
 
-			thread.watchers.append(mentioned)
+				thread.watchers.append(mentioned)
 
-		notif_msg = "New thread '{}'".format(thread.title)
-		if package is not None:
-			addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
+			notif_msg = "New thread '{}'".format(thread.title)
+			if package is not None:
+				addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
 
-		approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
-		addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
+			approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
+			addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
 
-		if is_review_thread:
-			post_discord_webhook.delay(current_user.username,
-					"Opened approval thread: {}".format(thread.getViewURL(absolute=True)), True)
+			if is_review_thread:
+				post_discord_webhook.delay(current_user.username,
+						"Opened approval thread: {}".format(thread.getViewURL(absolute=True)), True)
 
-		db.session.commit()
+			db.session.commit()
 
-		return redirect(thread.getViewURL())
+			return redirect(thread.getViewURL())
 
 
 	return render_template("threads/new.html", form=form, allow_private_change=allow_private_change, package=package)

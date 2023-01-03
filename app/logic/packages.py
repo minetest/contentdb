@@ -22,7 +22,7 @@ from flask_babel import lazy_gettext
 from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
 	License, UserRank, PackageDevState
-from app.utils import addAuditLog
+from app.utils import addAuditLog, has_blocked_domains
 from app.utils.url import clean_youtube_url
 
 
@@ -117,6 +117,11 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			data[to] = data[alias]
 
 	validate(data)
+
+	for field in ["short_desc", "desc", "website", "issueTracker", "repo", "video_url"]:
+		if field in data and has_blocked_domains(data[field], user.username,
+					f"{field} of {package.getId()}"):
+			raise LogicError(403, lazy_gettext("Linking to malicious sites is not allowed."))
 
 	if "type" in data:
 		data["type"] = PackageType.coerce(data["type"])

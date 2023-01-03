@@ -20,6 +20,7 @@ import secrets
 from .flask import *
 from .models import *
 from .user import *
+from flask import current_app
 
 YESES = ["yes", "true", "1", "on"]
 
@@ -51,3 +52,19 @@ def shouldReturnJson():
 
 def randomString(n):
 	return secrets.token_hex(int(n / 2))
+
+
+def has_blocked_domains(text: str, username: str, location: str) -> bool:
+	if text is None:
+		return False
+
+	blocked_domains = current_app.config["BLOCKED_DOMAINS"]
+	for domain in blocked_domains:
+		if domain in text:
+			from app.tasks.webhooktasks import post_discord_webhook
+			post_discord_webhook.delay(username,
+					f"Attempted to post link to blocked domain {domain} in {location}",
+					True)
+			return True
+
+	return False
