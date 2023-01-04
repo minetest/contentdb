@@ -22,7 +22,7 @@ from app.models import User
 from app.tasks import celery
 
 @celery.task()
-def post_discord_webhook(username: Optional[str], content: str, is_queue: bool):
+def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, title: Optional[str], description: Optional[str], thumbnail: Optional[str]):
 	discord_url = app.config.get("DISCORD_WEBHOOK_QUEUE" if is_queue else "DISCORD_WEBHOOK_FEED")
 	if discord_url is None:
 		return
@@ -36,5 +36,16 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool):
 		user = User.query.filter_by(username=username).first()
 		if user:
 			json["avatar_url"] = user.getProfilePicURL().replace("/./", "/")
+
+	if title:
+		embed = {
+			"title": title,
+			"description": description,
+		}
+
+		if thumbnail:
+			embed["thumbnail"] = {"url": thumbnail}
+
+		json["embeds"] = [embed]
 
 	requests.post(discord_url, json=json)

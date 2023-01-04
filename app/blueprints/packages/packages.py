@@ -396,7 +396,8 @@ def move_to_state(package):
 	if state == PackageState.APPROVED:
 		if not package.approved_at:
 			post_discord_webhook.delay(package.author.username,
-					"New package {}".format(package.getURL("packages.view", absolute=True)), False)
+					"New package {}".format(package.getURL("packages.view", absolute=True)), False,
+					package.title, package.short_desc, package.getThumbnailURL(2, True))
 			package.approved_at = datetime.datetime.now()
 
 		screenshots = PackageScreenshot.query.filter_by(package=package, approved=False).all()
@@ -406,7 +407,8 @@ def move_to_state(package):
 		msg = "Approved {}".format(package.title)
 	elif state == PackageState.READY_FOR_REVIEW:
 		post_discord_webhook.delay(package.author.username,
-				"Ready for Review: {}".format(package.getURL("packages.view", absolute=True)), True)
+				"Ready for Review: {}".format(package.getURL("packages.view", absolute=True)), True,
+				package.title, package.short_desc, package.getThumbnailURL(2, True))
 
 	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getURL("packages.view"), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
