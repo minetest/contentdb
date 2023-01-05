@@ -22,7 +22,7 @@ from app.models import User
 from app.tasks import celery
 
 @celery.task()
-def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, title: Optional[str], description: Optional[str], thumbnail: Optional[str]):
+def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, title: Optional[str] = None, description: Optional[str] = None, thumbnail: Optional[str] = None):
 	discord_url = app.config.get("DISCORD_WEBHOOK_QUEUE" if is_queue else "DISCORD_WEBHOOK_FEED")
 	if discord_url is None:
 		return
