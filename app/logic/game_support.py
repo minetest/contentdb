@@ -98,11 +98,11 @@ class GameSupportResolver:
 		return retval
 
 	def resolve(self, package: Package, history: List[str]) -> set[int]:
-		key = package.id
+		key: int = package.id
 		print(f"Resolving for {key}", file=sys.stderr)
 
 		history = history.copy()
-		history.append(key)
+		history.append(package.getId())
 
 		if package.type == PackageType.GAME:
 			return {package.id}
