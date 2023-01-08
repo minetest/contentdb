@@ -33,10 +33,10 @@ Remove {{ package.title }}
 
 		<a class="btn btn-secondary float-right" href="{{ package.getURL("packages.view") }}">{{ _("Cancel") }}</a>
 
-		<input type="submit" name="delete" value="Remove" class="btn btn-danger mr-2" />
+		<input type="submit" name="delete" value="{{ _('Remove') }}" class="btn btn-danger mr-2" />
 
 		{% if package.approved %}
-			<input type="submit" name="unapprove" value="Unapprove" class="btn btn-warning" />
+			<input type="submit" name="unapprove" value="{{ _('Unapprove') }}" class="btn btn-warning" />
 		{% endif %}
 	</form>
 {% endblock %}
