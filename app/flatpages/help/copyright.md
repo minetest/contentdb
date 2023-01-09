@@ -115,9 +115,10 @@ or public domain.
 
 ### I used an AI
 
-Errrr. This is an untested area, we highly recommend that **you don't use AI art/code** in packages.
+Errrr. This is a legally untested area, we highly recommend that **you don't use AI art/code** in packages
+for that reason.
 
-For now, we haven't banned AI art from ContentDB. Make sure to clearly include it in your package's
+For now, we haven't banned AI art/code from ContentDB. Make sure to clearly include it in your package's
 credit list (include the name of the AI tool used).
 
 Check the tools terms and conditions to see if there are any constraints on use. It looks
@@ -126,7 +127,6 @@ impose conditions.
 
 AI art/code may regurgitate copyrighted things. Make sure that you don't include the
 names of any copyrighted materials in your AI prompts, such as names of games or artists.
-
 
 ## What does ContentDB do?
 
