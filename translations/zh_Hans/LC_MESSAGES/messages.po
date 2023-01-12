@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-01-02 16:19+0000\n"
-"PO-Revision-Date: 2022-12-26 15:32+0000\n"
-"Last-Translator: Worriz BANG-E 谨京 <3263125443@qq.com>\n"
+"PO-Revision-Date: 2023-01-06 08:51+0000\n"
+"Last-Translator: Gao Tiesuan <yepifoas@666email.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"minetest/contentdb/zh_Hans/>\n"
 "Language: zh_Hans\n"
-"Language-Team: Chinese (Simplified) "
-"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hans/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -282,7 +283,7 @@ msgstr "作者名"
 
 #: app/blueprints/packages/packages.py:639
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "启用基于依赖的支持检测（推荐）"
 
 #: app/blueprints/packages/packages.py:640
 msgid "Supported games (Comma-separated)"
@@ -290,7 +291,7 @@ msgstr "支持的游戏（用逗号隔开）"
 
 #: app/blueprints/packages/packages.py:641
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "不支持的游戏（用逗号隔开）"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -902,7 +903,7 @@ msgstr "搜索"
 
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
-msgstr ""
+msgstr "同名软件包已存在。见政策和指南3"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
@@ -1651,85 +1652,85 @@ msgstr "发表评测"
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "%(display_name)s的软件包"
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "需要JavaScript以显示图表和统计数据"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
-msgstr ""
+msgstr "生命期唯一下载"
 
 #: app/templates/macros/stats.html:59
 msgid "Downloads, past 7 days"
-msgstr ""
+msgstr "过去 7 天下载量"
 
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "每天%(downloads)s"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "过去 30 天下载量"
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "加载中..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
-msgstr ""
+msgstr "无数据"
 
 #: app/templates/macros/stats.html:97
 msgid "Downloads by Package"
-msgstr ""
+msgstr "按软件包统计的下载量"
 
 #: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
 #: app/templates/macros/stats.html:118
 msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
-msgstr ""
+msgstr "这是堆叠面积图。总下载量见总高度。"
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Client"
-msgstr ""
+msgstr "按客户端统计的下载量"
 
 #: app/templates/macros/stats.html:110
 msgid "Downloads by Reason"
-msgstr ""
+msgstr "按原因统计的下载量"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
-msgstr ""
+msgstr "<b>新安装</b>：用户在Minetest中点击了[安装]。"
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
-msgstr ""
+msgstr "<b>依赖项</b>：自动安装以满足依赖。"
 
 #: app/templates/macros/stats.html:114
 msgid "<b>Update</b>: download was to update the package."
-msgstr ""
+msgstr "<b>更新</b>：下载软件包更新。"
 
 #: app/templates/macros/stats.html:115
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
-msgstr ""
+msgstr "<b>其他/未知</b>：由浏览器或旧版 Minetest（5.5 之前）下载。"
 
 #: app/templates/macros/stats.html:127
 msgid "Need more stats?"
-msgstr ""
+msgstr "需要更多统计数据？"
 
 #: app/templates/macros/stats.html:129
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
-msgstr ""
+msgstr "查看 ContentDB Grafana 仪表盘，了解全 CDB 统计数据"
 
 #: app/templates/macros/stats.html:133
 msgid "ContentDB Grafana"
-msgstr ""
+msgstr "ContentDB Grafana"
 
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
@@ -1741,7 +1742,7 @@ msgstr "本贴子已被版主锁定。"
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "回复"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
@@ -1827,16 +1828,16 @@ msgstr "旧"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Mod名称"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "找不到Mod名称。"
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Mod名称“%(name)s”"
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
@@ -2057,7 +2058,7 @@ msgstr "%(title)s的Mod"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr ""
+msgstr "文档"
 
 #: app/templates/packages/game_support.html:24
 #: app/templates/packages/view.html:215
@@ -2066,19 +2067,19 @@ msgstr "源代码"
 
 #: app/templates/packages/game_support.html:27
 msgid "Supported?"
-msgstr ""
+msgstr "支持？"
 
 #: app/templates/packages/game_support.html:42
 msgid "Detected from dependencies"
-msgstr ""
+msgstr "从依赖项中检测到"
 
 #: app/templates/packages/game_support.html:44
 msgid "Added by Editor"
-msgstr ""
+msgstr "由编辑器添加"
 
 #: app/templates/packages/game_support.html:46
 msgid "mod.conf"
-msgstr ""
+msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
 #: app/templates/packages/view.html:462
@@ -2087,21 +2088,21 @@ msgstr "不需要特定的子游戏"
 
 #: app/templates/packages/game_support.html:68
 msgid "Generated mod.conf lines"
-msgstr ""
+msgstr "生成的mod.conf行"
 
 #: app/templates/packages/game_support.html:82
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
-msgstr ""
+msgstr "你需要手动定义至少一个支持的子游戏，才可以关闭这个功能。"
 
 #: app/templates/packages/game_support.html:88
 msgid "Editor Overrides"
-msgstr ""
+msgstr "编辑器重载"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr ""
+msgstr "软件包已删除"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
@@ -3810,4 +3811,3 @@ msgstr "请考虑启用电子邮件通知，您可以自定义发送的数量"
 
 #~ msgid "Why?"
 #~ msgstr "为什么？"
-
