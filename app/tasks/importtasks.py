@@ -145,7 +145,7 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 			pass
 
 		# Update game support
-		if package.type == PackageType.MOD:
+		if package.type == PackageType.MOD or package.type == PackageType.TXP:
 			try:
 				resolver = GameSupportResolver(db.session)
 
@@ -158,7 +158,8 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 						game_is_supported[game.id] = False
 
 				resolver.set_supported(package, game_is_supported, 10)
-				resolver.update(package)
+				if package.type == PackageType.MOD:
+					resolver.update(package)
 			except LogicError as e:
 				raise TaskError(e.message)
 

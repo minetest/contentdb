@@ -38,7 +38,6 @@ def game_hub(package: Package):
 
 	new = join(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = join(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
-	pop_gam = join(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(8).all()
 	pop_txp = join(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(8).all()
 	high_reviewed = join(query.order_by(db.desc(Package.score - Package.score_downloads))) \
 		.filter(Package.reviews.any()).limit(4).all()
@@ -50,5 +49,5 @@ def game_hub(package: Package):
 	updated = updated[:4]
 
 	return render_template("packages/game_hub.html", package=package, count=count,
-			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam,
+			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp,
 			high_reviewed=high_reviewed)

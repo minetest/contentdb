@@ -648,7 +648,7 @@ class GameSupportForm(FlaskForm):
 @login_required
 @is_package_page
 def game_support(package):
-	if package.type != PackageType.MOD:
+	if package.type != PackageType.MOD and package.type != PackageType.TXP:
 		abort(404)
 
 	can_edit = package.checkPerm(current_user, Permission.EDIT_PACKAGE)

@@ -48,6 +48,13 @@
 	{{ render_pkggrid(pop_mod) }}
 
 
+	<a href="{{ url_for('packages.list_all', type='txp', sort='score', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+		{{ _("See more") }}
+	</a>
+	<h2 class="my-3">{{ _("Top Texture Packs") }}</h2>
+	{{ render_pkggrid(pop_txp) }}
+
+
 	<a href="{{ url_for('packages.list_all', sort='reviews', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>

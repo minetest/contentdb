@@ -442,31 +442,45 @@
 					</dl>
 				{% endif %}
 
-				{% if package.type == package.type.MOD %}
-					<h3>
-						{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-							<a href="{{ package.getURL('packages.game_support') }}" class="btn btn-secondary btn-sm float-right">
-								<i class="fas fa-pen"></i>
-							</a>
-						{% endif %}
-						{{ _("Compatible Games") }}
-					</h3>
-					<div style="max-height: 300px; overflow: hidden auto;">
-						{% for support in package.getSortedSupportedGames() %}
-							<a class="badge badge-secondary"
-									href="{{ support.game.getURL('packages.view') }}">
-								{{ _("%(title)s by %(display_name)s",
-										title=support.game.title, display_name=support.game.author.display_name) }}
-							</a>
-						{% else %}
-							{{ _("No specific game is required") }}
-						{% endfor %}
-					</div>
+				{% if package.type == package.type.MOD or package.type == package.type.TXP %}
+					{% set supported_games = package.getSortedSupportedGames() %}
+					{% if supported_games or package.type == package.type.MOD %}
+						<h3>
+							{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+								<a href="{{ package.getURL('packages.game_support') }}" class="btn btn-secondary btn-sm float-right">
+									<i class="fas fa-pen"></i>
+								</a>
+							{% endif %}
+							{{ _("Compatible Games") }}
+						</h3>
+						<div style="max-height: 300px; overflow: hidden auto;">
+							{% for support in supported_games %}
+								<a class="badge badge-secondary"
+										href="{{ support.game.getURL('packages.view') }}">
+									{{ _("%(title)s by %(display_name)s",
+											title=support.game.title, display_name=support.game.author.display_name) }}
+								</a>
+							{% else %}
+									{{ _("No specific game is required") }}
+							{% endfor %}
+						</div>
 
-					<p class="text-muted small mt-2 mb-0">
-						{{ _("This is an experimental feature.") }}
-						{{ _("Supported games are determined by an algorithm, and may not be correct.") }}
-					</p>
+						{% if package.type == package.type.MOD %}
+							<p class="text-muted small mt-2 mb-0">
+								{{ _("This is an experimental feature.") }}
+								{{ _("Supported games are determined by an algorithm, and may not be correct.") }}
+							</p>
+						{% endif %}
+					{% elif package.checkPerm(current_user, "EDIT_PACKAGE") %}
+						<p class="alert alert-warning">
+							{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+								<a href="{{ package.getURL('packages.game_support') }}" class="btn btn-warning btn-sm float-right">
+									<i class="fas fa-pen"></i>
+								</a>
+							{% endif %}
+							{{ _("Please specify compatible games") }}
+						</p>
+					{% endif %}
 				{% endif %}
 
 				<h3>
