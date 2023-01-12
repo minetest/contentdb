@@ -69,7 +69,7 @@ def get_package_tabs(user: User, package: Package):
 		}
 	]
 
-	if package.type == PackageType.MOD:
+	if package.type == PackageType.MOD or package.type == PackageType.TXP:
 		retval.insert(1, {
 			"id": "game_support",
 			"title": gettext("Supported Games"),
