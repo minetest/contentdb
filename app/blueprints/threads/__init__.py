@@ -200,7 +200,7 @@ def edit_reply(id):
 	if form.validate_on_submit():
 		comment = form.comment.data
 		if has_blocked_domains(comment, current_user.username, f"edit to reply {reply.get_url(True)}"):
-			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+			flash(gettext("Linking to blocked sites is not allowed"), "danger")
 		else:
 			msg = "Edited reply by {}".format(reply.author.display_name)
 			severity = AuditSeverity.NORMAL if current_user == reply.author else AuditSeverity.MODERATION
@@ -233,7 +233,7 @@ def view(id):
 			return redirect(thread.getViewURL())
 
 		if has_blocked_domains(comment, current_user.username, f"reply to {thread.getViewURL(True)}"):
-			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+			flash(gettext("Linking to blocked sites is not allowed"), "danger")
 			return render_template("threads/view.html", thread=thread, form=form)
 
 		reply = ThreadReply()
@@ -325,7 +325,7 @@ def new():
 	# Validate and submit
 	elif form.validate_on_submit():
 		if has_blocked_domains(form.comment.data, current_user.username, f"new thread"):
-			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+			flash(gettext("Linking to blocked sites is not allowed"), "danger")
 		else:
 			thread = Thread()
 			thread.author  = current_user

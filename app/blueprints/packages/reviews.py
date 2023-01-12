@@ -75,7 +75,7 @@ def review(package):
 	# Validate and submit
 	elif can_review and form.validate_on_submit():
 		if has_blocked_domains(form.comment.data, current_user.username, f"review of {package.getId()}"):
-			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+			flash(gettext("Linking to blocked sites is not allowed"), "danger")
 		else:
 			was_new = False
 			if not review:

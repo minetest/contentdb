@@ -82,7 +82,7 @@ def handle_profile_edit(form: UserProfileForm, user: User, username: str):
 	if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
 		if has_blocked_domains(form.website_url.data, current_user.username, f"{user.username}'s website_url") or \
 				has_blocked_domains(form.donate_url.data, current_user.username, f"{user.username}'s donate_url"):
-			flash(gettext("Linking to malicious sites is not allowed."), "danger")
+			flash(gettext("Linking to blocked sites is not allowed"), "danger")
 			return
 
 		user.website_url = form.website_url.data

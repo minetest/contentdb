@@ -121,7 +121,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 	for field in ["short_desc", "desc", "website", "issueTracker", "repo", "video_url"]:
 		if field in data and has_blocked_domains(data[field], user.username,
 					f"{field} of {package.getId()}"):
-			raise LogicError(403, lazy_gettext("Linking to malicious sites is not allowed."))
+			raise LogicError(403, lazy_gettext("Linking to blocked sites is not allowed"))
 
 	if "type" in data:
 		data["type"] = PackageType.coerce(data["type"])
