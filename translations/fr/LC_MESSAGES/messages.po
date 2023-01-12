@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-01-02 16:19+0000\n"
-"PO-Revision-Date: 2022-12-10 23:54+0000\n"
-"Last-Translator: rubenwardy <rw@rubenwardy.com>\n"
+"PO-Revision-Date: 2023-01-06 08:51+0000\n"
+"Last-Translator: AFCMS <afcm.contact@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -117,7 +118,7 @@ msgstr "Journal d'audit"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:232 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiques"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -130,7 +131,7 @@ msgstr "Retirer"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Jeux Compatibles"
 
 #: app/blueprints/packages/packages.py:163
 msgid "Error: Another package already uses this forum topic!"
@@ -226,13 +227,15 @@ msgstr "URL de la vidéo"
 
 #: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game n'est pas un nom valide"
 
 #: app/blueprints/packages/packages.py:267
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Le package existe déjà, mais a été supprimé. Merci de contacter l'équipe "
+"ContentDB pour restaurer ce package"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Package already exists"
@@ -291,14 +294,16 @@ msgstr "Nom de l'auteur"
 #: app/blueprints/packages/packages.py:639
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr ""
+"Activer la détection de la compatibilité basée sur les dépendances ( "
+"recommandé )"
 
 #: app/blueprints/packages/packages.py:640
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Jeux compatibles ( séparer avec des virgules )"
 
 #: app/blueprints/packages/packages.py:641
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Jeux incompatibles ( séparer avec des virgules )"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -797,7 +802,7 @@ msgstr "3ème évaluateur le plus utile"
 #: app/blueprints/users/profile.py:124
 #, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
-msgstr "Ceci place %(display_name)s dans les %(perc)s%% les plus élevés"
+msgstr "Cela place %(display_name)s dans le top %(perc)s%%"
 
 #: app/blueprints/users/profile.py:128
 #, python-format
@@ -844,19 +849,19 @@ msgstr "La première médaille est à 50k."
 
 #: app/blueprints/users/profile.py:196
 msgid ">300k downloads"
-msgstr ">300k téléchargements"
+msgstr "&gt;300k téléchargements"
 
 #: app/blueprints/users/profile.py:199
 msgid ">100k downloads"
-msgstr ">100k téléchargements"
+msgstr "&gt;100k téléchargements"
 
 #: app/blueprints/users/profile.py:202
 msgid ">75k downloads"
-msgstr ">75k téléchargements"
+msgstr "&gt;75k téléchargements"
 
 #: app/blueprints/users/profile.py:205
 msgid ">50k downloads"
-msgstr ">50k téléchargements"
+msgstr "&gt;50k téléchargements"
 
 #: app/blueprints/users/profile.py:206
 #, python-format
@@ -938,6 +943,8 @@ msgstr "Rechercher"
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
+"Un paquet existe déjà sous ce nom. Veuillez consulter la section Règles et "
+"Recommandations 3"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
@@ -1732,40 +1739,40 @@ msgstr "Créer l'évaluation"
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "Paquets de %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "JavaScript est nécessaire pour afficher les tableaux et statistiques"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
-msgstr ""
+msgstr "Nombre de téléchargement uniques"
 
 #: app/templates/macros/stats.html:59
 msgid "Downloads, past 7 days"
-msgstr ""
+msgstr "Téléchargements sur les 7 derniers jours"
 
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "%(downloads)s par jour"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "Téléchargement sur les 30 derniers jours"
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "Chargement..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
-msgstr ""
+msgstr "Pas de données"
 
 #: app/templates/macros/stats.html:97
 msgid "Downloads by Package"
-msgstr ""
+msgstr "Téléchargements par paquet"
 
 #: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
 #: app/templates/macros/stats.html:118
@@ -1773,44 +1780,55 @@ msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
 msgstr ""
+"Ceci est un graphique à aires superposés. Pour le total des téléchargements, "
+"regardez la hauteur combinée."
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Client"
-msgstr ""
+msgstr "Téléchargements par Client"
 
 #: app/templates/macros/stats.html:110
 msgid "Downloads by Reason"
-msgstr ""
+msgstr "Téléchargements par Raison"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
 msgstr ""
+"<b>Nouvelle Installation</b> : l'utilisateur a cliqué sur [Installer] depuis "
+"Minetest."
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
+"<b>Dépendance</b> : a été installé automatiquement pour satisfaire une "
+"dépendance."
 
 #: app/templates/macros/stats.html:114
 msgid "<b>Update</b>: download was to update the package."
 msgstr ""
+"<b>Mise à Jour</b> : le téléchargement visait à mettre à jour le paquet."
 
 #: app/templates/macros/stats.html:115
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
 msgstr ""
+"<b>Autre / Inconnu</b> : téléchargement depuis un navigateur ou avec une "
+"ancienne version de Minetest (avant 5.5)."
 
 #: app/templates/macros/stats.html:127
 msgid "Need more stats?"
-msgstr ""
+msgstr "Besoin de plus de statistiques ?"
 
 #: app/templates/macros/stats.html:129
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
 msgstr ""
+"Consultez le tableau de bord Grafana du ContentDB pour obtenir des "
+"statistiques sur l'ensemble du ContentDB"
 
 #: app/templates/macros/stats.html:133
 msgid "ContentDB Grafana"
-msgstr ""
+msgstr "Grafana du ContentDB"
 
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
@@ -1822,7 +1840,7 @@ msgstr "Ce fil de discussion a été verrouillé par un modérateur."
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "Répondre"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
@@ -1910,16 +1928,16 @@ msgstr "Ancien"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Nom des Mods"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "Aucun nom de mod trouvé."
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Nom du Mod \"%(name)s\""
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
@@ -2159,7 +2177,7 @@ msgstr "Mods pour %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr ""
+msgstr "Documentation"
 
 #: app/templates/packages/game_support.html:24
 #: app/templates/packages/view.html:215
@@ -2168,19 +2186,19 @@ msgstr "Source"
 
 #: app/templates/packages/game_support.html:27
 msgid "Supported?"
-msgstr ""
+msgstr "Supporté ?"
 
 #: app/templates/packages/game_support.html:42
 msgid "Detected from dependencies"
-msgstr ""
+msgstr "Détecté à partir des dépendances"
 
 #: app/templates/packages/game_support.html:44
 msgid "Added by Editor"
-msgstr ""
+msgstr "Ajouté par l'Editeur"
 
 #: app/templates/packages/game_support.html:46
 msgid "mod.conf"
-msgstr ""
+msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
 #: app/templates/packages/view.html:462
@@ -2189,65 +2207,72 @@ msgstr "Aucun jeu nécessaire n'est précisé"
 
 #: app/templates/packages/game_support.html:68
 msgid "Generated mod.conf lines"
-msgstr ""
+msgstr "Lignes mod.conf générées"
 
 #: app/templates/packages/game_support.html:82
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
 msgstr ""
+"Vous devez définir manuellement au moins un jeu pris en charge avant de "
+"pouvoir désactiver cette fonction."
 
 #: app/templates/packages/game_support.html:88
 msgid "Editor Overrides"
-msgstr ""
+msgstr "Modifications de l'éditeur"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr ""
+msgstr "Paquet supprimé"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
-msgstr ""
+msgstr "Ce paquet a été rendu privé."
 
 #: app/templates/packages/gone.html:22
 msgid ""
 "It may have been removed by choice of the author, or by ContentDB staff "
 "due to a problem."
 msgstr ""
+"Il peut avoir été supprimé par choix de l'auteur, ou par la modération du "
+"ContentDB en raison d'un problème."
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
-msgstr ""
+msgstr "Paquet en cours d'examen"
 
 #: app/templates/packages/gone.html:27
 msgid "This package is currently undergoing review"
-msgstr ""
+msgstr "Ce paquet est actuellement en cours d’examen"
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr ""
+msgstr "Paquet non encore présenté"
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
-msgstr ""
+msgstr "Ce paquet a été créé mais n'a pas encore été présenté pour approbation."
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
 msgstr ""
+"Ce paquet est actuellement en cours de révision, et des modifications sont "
+"nécessaires avant qu'il puisse être ajouté."
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr ""
+msgstr "Veuillez revenir plus tard."
 
 #: app/templates/packages/gone.html:42
 msgid "Or, if you're the author, log in to see more information."
 msgstr ""
+"Ou, si vous êtes l'auteur, connectez-vous pour voir plus d'informations."
 
 #: app/templates/packages/gone.html:45
 msgid "Login"
-msgstr ""
+msgstr "Connexion"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2433,7 +2458,7 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
-"Le .conf dans votre paquet peux <a href='/help/package_config/'>définir "
+"Le .conf dans votre paquet peux <a href=\"/help/package_config/\">définir "
 "cela automatiquement</a>,\n"
 "\t\t\tce qui ignorera votre sélection."
 
@@ -2702,7 +2727,7 @@ msgstr "Sujets du forum similaires"
 
 #: app/templates/packages/stats.html:17
 msgid "Download (.csv)"
-msgstr ""
+msgstr "Télécharger (.csv)"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -2830,7 +2855,7 @@ msgstr "Vous ne pouvez pas évaluer votre propre paquet."
 
 #: app/templates/packages/view.html:320
 msgid "Package needs to be approved before it can be reviewed."
-msgstr ""
+msgstr "Le paquet doit être approuvé avant de pouvoir être évalué."
 
 #: app/templates/packages/view.html:331
 msgid "Used By"
@@ -2936,10 +2961,13 @@ msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
 msgstr ""
+"En raison du spam, nous n'acceptons plus les rapports d'utilisateurs "
+"anonymes sur ce formulaire."
 
 #: app/templates/report/index.html:21
 msgid "Please sign in or contact the admin in another way"
 msgstr ""
+"Veuillez vous connecter ou contacter l'administrateur d'une autre manière"
 
 #: app/templates/report/index.html:39
 msgid "What are you reporting? Why are you reporting it?"
@@ -3109,6 +3137,7 @@ msgstr "Dépendances non satisfaites"
 #: app/templates/todo/editor.html:151
 msgid "Mod names that have hard dependers, but no packages providing them."
 msgstr ""
+"Noms de mod qui ont des dépendances dures, mais aucun paquet les fournissant."
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -3121,7 +3150,7 @@ msgstr "Actions récentes"
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
-msgstr ""
+msgstr "Paquets ne supportant pas %(rel)s"
 
 #: app/templates/todo/mtver_support.html:13
 #: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
@@ -3147,12 +3176,12 @@ msgstr "Tous les paquets obsolètes"
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
 #: app/templates/todo/user.html:68
 msgid "Missing Screenshots"
-msgstr ""
+msgstr "Captures d'écran manquantes"
 
 #: app/templates/todo/screenshots.html:33
 #, python-format
 msgid "%(count)d packages"
-msgstr ""
+msgstr "%(count)d paquets"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -3168,11 +3197,11 @@ msgstr "Modifier les étiquettes"
 
 #: app/templates/todo/todo_base.html:11
 msgid "Your to do list"
-msgstr ""
+msgstr "Votre liste des tâches"
 
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
-msgstr ""
+msgstr "Paquets obsolètes"
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
@@ -3414,6 +3443,8 @@ msgid ""
 "ContentDB will link your account to your forum account if you have one, "
 "but you don't need one."
 msgstr ""
+"Le ContentDB reliera votre compte à votre compte de forum si vous en avez "
+"un, mais vous n'en avez pas besoin."
 
 #: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
@@ -3506,9 +3537,9 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
-"Aller à <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>Panneau"
-" de contrôle utilisateur > Profile > Modifier la signature</a>"
+"Aller à <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
+"signature\">Panneau de contrôle utilisateur &gt; Profile &gt; Modifier la "
+"signature</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
@@ -3808,7 +3839,7 @@ msgstr "En résumé"
 #: app/templates/users/stats.html:4
 #, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr ""
+msgstr "Statistiques pour les paquets de %(display_name)s"
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
@@ -4110,4 +4141,3 @@ msgstr ""
 
 #~ msgid "Why?"
 #~ msgstr "Pourquoi ?"
-
