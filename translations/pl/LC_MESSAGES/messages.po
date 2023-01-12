@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-01-02 16:19+0000\n"
-"PO-Revision-Date: 2022-06-12 12:14+0000\n"
+"PO-Revision-Date: 2023-01-06 08:51+0000\n"
 "Last-Translator: Jakub Z <mrkubax10@onet.pl>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/pl/>\n"
 "Language: pl\n"
-"Language-Team: Polish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/pl/>\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && "
-"(n%100<10 || n%100>=20) ? 1 : 2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 4.15.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -118,7 +119,7 @@ msgstr "Log audytów"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:232 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "Statystyki"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -131,7 +132,7 @@ msgstr "Usuń"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Wspierane gry"
 
 #: app/blueprints/packages/packages.py:163
 msgid "Error: Another package already uses this forum topic!"
@@ -223,13 +224,15 @@ msgstr "URL filmiku"
 
 #: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "fraza _game nie jest dozwolona w nazwie"
 
 #: app/blueprints/packages/packages.py:267
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Paczka już istnieje ale jest usunięta. Skontaktuj się z personelem ContentDB "
+"aby ją przywrócić"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Package already exists"
@@ -287,15 +290,15 @@ msgstr "Nazwa autora"
 
 #: app/blueprints/packages/packages.py:639
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "Włącz wykrywanie wsparcia w oparciu na zależnościach (zalecane)"
 
 #: app/blueprints/packages/packages.py:640
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Wspierane gry (oddzielone przecinkiem)"
 
 #: app/blueprints/packages/packages.py:641
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Niewspierane gry (oddzielone przecinkiem)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -924,7 +927,7 @@ msgstr "Wyszukaj"
 
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
-msgstr ""
+msgstr "Taka paczka już istnieje. Zobacz Politykę i przewodnictwo 3"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
@@ -3921,4 +3924,3 @@ msgstr "Rozważ włączenie powiadomień e-mail, możesz dostosować ilość wys
 
 #~ msgid "Why?"
 #~ msgstr "Dlaczego?"
-
