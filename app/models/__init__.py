@@ -95,6 +95,8 @@ class AuditLogEntry(db.Model):
 
 	def __init__(self, causer, severity, title, url, package=None, description=None):
 		if len(title) > 100:
+			if description is None:
+				description = title[99:]
 			title = title[:99] + "…"
 
 		self.causer   = causer
