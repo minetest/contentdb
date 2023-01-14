@@ -735,10 +735,6 @@ class Package(db.Model):
 			if state == PackageState.APPROVED and ("Other" in self.license.name or "Other" in self.media_license.name):
 				return False
 
-			provides = self.provides
-			if state == PackageState.APPROVED and len(provides) == 1 and provides[0].name != self.name:
-				return False
-
 			if self.getMissingHardDependenciesQuery().count() > 0:
 				return False
 
