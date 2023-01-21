@@ -47,7 +47,7 @@ def get_setting_tabs(user):
 
 
 class UserProfileForm(FlaskForm):
-	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x)])
+	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x.strip())])
 	website_url = StringField(lazy_gettext("Website URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	donate_url = StringField(lazy_gettext("Donation URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	submit = SubmitField(lazy_gettext("Save"))
@@ -58,21 +58,24 @@ def handle_profile_edit(form: UserProfileForm, user: User, username: str):
 	addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
 			url_for("users.profile", username=username))
 
+	display_name = form.display_name.data or user.username
 	if user.checkPerm(current_user, Permission.CHANGE_DISPLAY_NAME) and \
-			user.display_name != form.display_name.data:
+			user.display_name != display_name:
+
 		if User.query.filter(User.id != user.id,
-				or_(User.username == form.display_name.data,
-						User.display_name.ilike(form.display_name.data))).count() > 0:
+				or_(User.username == display_name,
+						User.display_name.ilike(display_name))).count() > 0:
 			flash(gettext("A user already has that name"), "danger")
 			return None
 
+
 		alias_by_name = PackageAlias.query.filter(or_(
-				PackageAlias.author == form.display_name.data)).first()
+				PackageAlias.author == display_name)).first()
 		if alias_by_name:
 			flash(gettext("A user already has that name"), "danger")
 			return
 
-		user.display_name = form.display_name.data
+		user.display_name = display_name
 
 		severity = AuditSeverity.USER if current_user == user else AuditSeverity.MODERATION
 		addAuditLog(severity, current_user, "Changed display name of {} to {}"
