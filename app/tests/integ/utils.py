@@ -34,17 +34,18 @@ def is_int(v):
 
 @pytest.fixture
 def client():
-	app.config["TESTING"] = True
-	app.config['WTF_CSRF_ENABLED'] = False
+	with app.app_context():
+		app.config["TESTING"] = True
+		app.config['WTF_CSRF_ENABLED'] = False
 
-	recreate_db()
-	assert User.query.count() == 2
+		recreate_db()
+		assert User.query.count() == 2
 
-	with app.test_client() as client:
-		yield client
+		with app.test_client() as client:
+			yield client
 
-	app.config["TESTING"] = False
-	app.config['WTF_CSRF_ENABLED'] = True
+		app.config["TESTING"] = False
+		app.config['WTF_CSRF_ENABLED'] = True
 
 
 def validate_package_list(packages, strict=False):
