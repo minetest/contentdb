@@ -25,7 +25,7 @@ def home():
 	def review_load(query):
 		return query.options(
 			joinedload(PackageReview.author),
-			joinedload(PackageReview.thread).joinedload(Thread.first_reply),
+			joinedload(PackageReview.thread).subqueryload(Thread.first_reply),
 			joinedload(PackageReview.package).joinedload(Package.author).load_only(User.username, User.display_name),
 			joinedload(PackageReview.package).load_only(Package.title, Package.name).subqueryload(Package.main_screenshot))
 
