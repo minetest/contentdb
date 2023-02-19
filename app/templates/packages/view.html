@@ -270,7 +270,7 @@
 								{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 									<li>
 										<a href="{{ ss.url }}" class="gallery-image">
-											<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" />
+											<img src="{{ ss.getThumbnailURL() }}" alt="{{ ss.title }}" title="{{ ss.title }}" />
 											{% if not ss.approved %}
 												<span class="badge bg-dark badge-tr">{{ _("Awaiting review") }}</span>
 											{% endif %}
