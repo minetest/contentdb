@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Support packages") }}
+{% endblock %}
+
+{% macro authorlink(author) %}
+	<a href="{{ url_for('users.profile', username=author.username) }}">
+		{{ author.display_name }}
+	</a>
+{% endmacro %}
+
+{% macro render_packages(packages) %}
+	<ul class="list-group">
+		{% for package in packages %}
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-sm-auto text-muted" style="min-width: 250px;">
+						<a href="{{ package.getURL('packages.view') }}">
+							<img
+								class="img-fluid"
+								style="max-height: 22px; max-width: 22px;"
+								src="{{ package.getThumbnailOrPlaceholder() }}" />
+
+							<span class="pl-2">
+								{{ package.title }}
+							</span>
+						</a>
+					</div>
+
+					<div class="col-sm">
+						{{ _("by %(author)s", author=authorlink(package.author)) }}
+					</div>
+
+					<div class="col-sm-auto">
+						<a href="{{ package.getURL('packages.view') }}" class="btn btn-sm btn-secondary mr-1">
+							{{ _("View package") }}
+						</a>
+						<a href="{{ package.author.donate_url }}" class="btn btn-sm btn-primary" rel="nofollow">
+							<i class="fas fa-heart mr-1"></i>
+							{{ _("Donate") }}
+						</a>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}
+
+
+{% block content %}
+	<h1>{{ self.title() }}</h1>
+
+	<h2>{{ _("Based on your reviews") }}</h2>
+	{% if reviewed_packages %}
+		{{ render_packages(reviewed_packages) }}
+	{% elif current_user.is_authenticated %}
+		<p class="text-muted">
+			{{ _("No reviewed packages accepting donations. Considering reviewing your favourite packages") }}
+		</p>
+	{% else %}
+		<p>
+			{{ _("Sign in to see recommendations based on the packages you've reviewed") }}
+		</p>
+		<p>
+			<a class="btn btn-primary" href="{{ url_for('users.login') }}">{{ _("Sign in") }}</a>
+		</p>
+	{% endif %}
+
+	<h2>{{ _("Top packages") }}</h2>
+	{{ render_packages(top_packages) }}
+	<p class="text-center mt-5">
+		<small>
+			{{ _("%(count)d packages are looking for donations", count=packages_count) }}
+		</small>
+	</p>
+{% endblock %}
