@@ -118,6 +118,7 @@
 				prefix="forum.minetest.net/viewtopic.php?t=",
 				placeholder=_("Tip: paste in a forum topic URL")) }}
 			{{ render_field(form.video_url, class_="pkg_meta", hint=_("YouTube videos will be shown in an embed.")) }}
+			{{ render_field(form.donate_url, class_="pkg_meta", hint=_("If blank, the author's donation URL will be used instead.")) }}
 		</fieldset>
 
 		<div class="pkg_meta mt-5">{{ render_submit_field(form.submit) }}</div>

@@ -723,5 +723,10 @@ def json_schema():
 				"type": ["string", "null"],
 				"format": "uri"
 			},
+			"donate_url": {
+				"description": "URL to a donation page",
+				"type": ["string", "null"],
+				"format": "uri"
+			},
 		},
 	})

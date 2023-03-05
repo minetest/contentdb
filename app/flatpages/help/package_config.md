@@ -75,6 +75,7 @@ It should be a JSON dictionary with one or more of the following optional keys:
 * `issue_tracker`: Issue tracker URL.
 * `forums`: forum topic ID.
 * `video_url`: URL to a video.
+* `donate_url`: URL to a donation page.
 
 Use `null` or `[]` to unset fields where relevant.
 

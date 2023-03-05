@@ -63,6 +63,7 @@ ALLOWED_FIELDS = {
 	"issueTracker": str,
 	"forums": int,
 	"video_url": str,
+	"donate_url": str,
 }
 
 ALIASES = {
@@ -118,7 +119,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 
 	validate(data)
 
-	for field in ["short_desc", "desc", "website", "issueTracker", "repo", "video_url"]:
+	for field in ["short_desc", "desc", "website", "issueTracker", "repo", "video_url", "donate_url"]:
 		if field in data and has_blocked_domains(data[field], user.username,
 					f"{field} of {package.getId()}"):
 			raise LogicError(403, lazy_gettext("Linking to blocked sites is not allowed"))
@@ -141,7 +142,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			raise LogicError(403, "Never gonna give you up / Never gonna let you down / Never gonna run around and desert you")
 
 	for key in ["name", "title", "short_desc", "desc", "type", "dev_state", "license", "media_license",
-			"repo", "website", "issueTracker", "forums", "video_url"]:
+			"repo", "website", "issueTracker", "forums", "video_url", "donate_url"]:
 		if key in data:
 			setattr(package, key, data[key])
 

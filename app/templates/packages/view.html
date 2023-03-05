@@ -378,10 +378,10 @@
 					</p>
 				{% endif %}
 
-				{% if package.author.donate_url %}
+				{% if package.donate_url_actual %}
 					<div class="alert alert-secondary mb-4">
 						<p>{{ _("Like this package? Help support its development by making a donation", display_name=package.author.display_name) }}</p>
-						<a class="btn btn-block btn-primary" href="{{ package.author.donate_url }}" rel="nofollow">
+						<a class="btn btn-block btn-primary" href="{{ package.donate_url_actual }}" rel="nofollow">
 							<i class="fas fa-heart mr-2"></i>
 							{{ _("Donate now") }}
 						</a>

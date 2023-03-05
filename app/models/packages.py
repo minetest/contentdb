@@ -414,6 +414,11 @@ class Package(db.Model):
 	issueTracker = db.Column(db.String(200), nullable=True)
 	forums       = db.Column(db.Integer,     nullable=True)
 	video_url    = db.Column(db.String(200), nullable=True, default=None)
+	donate_url   = db.Column(db.String(200), nullable=True, default=None)
+
+	@property
+	def donate_url_actual(self):
+		return self.donate_url or self.author.donate_url
 
 	enable_game_support_detection = db.Column(db.Boolean, nullable=False, default=True)
 
@@ -581,6 +586,7 @@ class Package(db.Model):
 			"issue_tracker": self.issueTracker,
 			"forums": self.forums,
 			"video_url": self.video_url,
+			"donate_url": self.donate_url_actual,
 
 			"tags": [x.name for x in self.tags],
 			"content_warnings": [x.name for x in self.content_warnings],
