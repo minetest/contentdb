@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-01-02 16:19+0000\n"
-"PO-Revision-Date: 2022-12-12 03:47+0000\n"
+"PO-Revision-Date: 2023-03-04 19:37+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
+"contentdb/de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.16.2-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -825,12 +826,12 @@ msgstr "Sie befinden sich auf dem %(place)s. Platz."
 #: app/blueprints/users/profile.py:164
 #, python-format
 msgid "Top %(type)s"
-msgstr "Top %(type)s"
+msgstr "Top-%(type)s"
 
 #: app/blueprints/users/profile.py:166
 #, python-format
 msgid "Top %(group)d %(type)s"
-msgstr "Top %(group)d %(type)s"
+msgstr "Top-%(group)d-%(type)s"
 
 #: app/blueprints/users/profile.py:175
 #, python-format
@@ -1846,7 +1847,7 @@ msgstr "Dieses Thema wurde von einem Moderator gesperrt."
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "Antworten"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
@@ -2232,51 +2233,59 @@ msgstr "Bearbeiterüberschreibungen"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr ""
+msgstr "Paket entfernt"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
-msgstr ""
+msgstr "Dieses Paket wurde depubliziert."
 
 #: app/templates/packages/gone.html:22
 msgid ""
 "It may have been removed by choice of the author, or by ContentDB staff "
 "due to a problem."
 msgstr ""
+"Es könnte sein, dass es aufgrund eines Wunsches des Autoren entfernt wurde, "
+"oder von ContentDB-Mitarbeitern aufgrund eines Problems."
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
-msgstr ""
+msgstr "Paket steht unter einem Review"
 
 #: app/templates/packages/gone.html:27
 msgid "This package is currently undergoing review"
-msgstr ""
+msgstr "Dieses Paket unterliegt derzeit einem Review"
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr ""
+msgstr "Paket noch nicht eingereicht"
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
 msgstr ""
+"Dieses Paket wurde erstellt, aber es wurde noch nicht für die Genehmigung "
+"eingereicht."
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
 msgstr ""
+"Dieses Paket unterliegt derzeit einem Review und es sind Änderungen nötig, "
+"bevor es hinzugefügt werden kann."
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr ""
+msgstr "Bitte schauen Sie später wieder vorbei."
 
 #: app/templates/packages/gone.html:42
 msgid "Or, if you're the author, log in to see more information."
 msgstr ""
+"Oder, falls Sie der Autor sind, loggen Sie sich ein, um mehr Informationen "
+"zu sehen."
 
 #: app/templates/packages/gone.html:45
 msgid "Login"
-msgstr ""
+msgstr "Einloggen"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2865,7 +2874,7 @@ msgstr "Sie können Ihr eigenes Paket nicht rezensieren."
 
 #: app/templates/packages/view.html:320
 msgid "Package needs to be approved before it can be reviewed."
-msgstr ""
+msgstr "Das Paket muss erst genehmigt werden, bevor es rezensiert werden kann."
 
 #: app/templates/packages/view.html:331
 msgid "Used By"
@@ -4112,4 +4121,3 @@ msgstr ""
 
 #~ msgid "Why?"
 #~ msgstr "Warum?"
-
