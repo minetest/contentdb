@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-01-02 16:19+0000\n"
-"PO-Revision-Date: 2022-08-13 08:17+0000\n"
-"Last-Translator: BRN Systems <brnsystems123@gmail.com>\n"
+"PO-Revision-Date: 2023-01-22 14:24+0000\n"
+"Last-Translator: Pexauteau Santander <pexauteau@gmail.com>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/minetest/"
+"contentdb/sk/>\n"
 "Language: sk\n"
-"Language-Team: Slovak "
-"<https://hosted.weblate.org/projects/minetest/contentdb/sk/>\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.15.1\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -117,7 +118,7 @@ msgstr "Audítorský Log"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:232 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "Štatistiky"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -130,7 +131,7 @@ msgstr "Odstrániť"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Podporované hry"
 
 #: app/blueprints/packages/packages.py:163
 msgid "Error: Another package already uses this forum topic!"
@@ -222,13 +223,15 @@ msgstr "URL videa"
 
 #: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game nie je povolený názov"
 
 #: app/blueprints/packages/packages.py:267
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Balíček už existuje, ale je odstránený. Prosím kontaktuj administrátorov "
+"ContentDB aby obnovili balíček"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Package already exists"
@@ -284,15 +287,15 @@ msgstr "Meno autora"
 
 #: app/blueprints/packages/packages.py:639
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "Povoľ podporu zisťovania na základe závislostí (odporúčané)"
 
 #: app/blueprints/packages/packages.py:640
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Podporované hry (oddeľuj čiarkou)"
 
 #: app/blueprints/packages/packages.py:641
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Nepodporované hry (oddeľuj čiarkou)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -919,7 +922,7 @@ msgstr "Hľadaj"
 
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
-msgstr ""
+msgstr "Balíček s takýmto názvom už existuje. Prosím pozri Politika a návod 3"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
@@ -1022,7 +1025,7 @@ msgstr "Balíček textúr"
 #: app/models/packages.py:75 app/templates/base.html:27
 #: app/templates/modnames/view.html:14
 msgid "Mods"
-msgstr "Módy"
+msgstr "Rozšírenia"
 
 #: app/models/packages.py:77 app/templates/base.html:30
 #: app/templates/modnames/view.html:17
@@ -1261,7 +1264,7 @@ msgstr "Najlepšie hry"
 
 #: app/templates/index.html:124 app/templates/packages/game_hub.html:47
 msgid "Top Mods"
-msgstr "Najlepšie módy"
+msgstr "Najlepšie rozšírenia"
 
 #: app/templates/index.html:131
 msgid "Top Texture Packs"
@@ -1696,40 +1699,40 @@ msgstr "Post recenzia"
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "Balíčky %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "Pre zobrazenie grafov a štatistík je vyžadovaný JavaScript"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
-msgstr ""
+msgstr "Jedinečné stiahnutia"
 
 #: app/templates/macros/stats.html:59
 msgid "Downloads, past 7 days"
-msgstr ""
+msgstr "Stiahnutí za posledných 7 dní"
 
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "%(downloads)s za deň"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "Stiahnutí za posledných 30 dní"
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "Načítavam..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
-msgstr ""
+msgstr "Žiadne dáta"
 
 #: app/templates/macros/stats.html:97
 msgid "Downloads by Package"
-msgstr ""
+msgstr "Počet stiahnutí podľa balíčka"
 
 #: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
 #: app/templates/macros/stats.html:118
@@ -1737,44 +1740,49 @@ msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
 msgstr ""
+"Toto je skladaný plošný graf. Pre celkový počet stiahnutí sa pozri na "
+"kombinovanú výšku."
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Client"
-msgstr ""
+msgstr "Počet stiahnutí podľa klienta"
 
 #: app/templates/macros/stats.html:110
 msgid "Downloads by Reason"
-msgstr ""
+msgstr "Počet stiahnutí podľa dôvodu"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
-msgstr ""
+msgstr "<b>New Install</b>: the user clicked [Install] inside of Minetest."
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
+"<b>Dependency</b>: bolo nainštalované automaticky pre potreby závislostí."
 
 #: app/templates/macros/stats.html:114
 msgid "<b>Update</b>: download was to update the package."
-msgstr ""
+msgstr "<b>Update</b>: bol stiahnutý pre aktualizáciu balíčka."
 
 #: app/templates/macros/stats.html:115
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
 msgstr ""
+"<b>Other / Unknown</b>: bol stiahnutý webovým prehliadačom alebo zastaralou "
+"verziou Minetestu (pred 5.5)."
 
 #: app/templates/macros/stats.html:127
 msgid "Need more stats?"
-msgstr ""
+msgstr "Potrebuješ viac štatistík?"
 
 #: app/templates/macros/stats.html:129
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
-msgstr ""
+msgstr "Pozri ContentDB Grafana prehľad pre viac CDB štatistík"
 
 #: app/templates/macros/stats.html:133
 msgid "ContentDB Grafana"
-msgstr ""
+msgstr "ContentDB Grafana"
 
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
@@ -1786,7 +1794,7 @@ msgstr "Toto vlákno bolo uzamknuté správcom."
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "Odpovedať"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
@@ -1872,16 +1880,16 @@ msgstr "Staré"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Názvy rozšírení"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "Nenašli sa žadne názvy rozšírení."
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Názov rozšírenia \"%(name)s\""
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
@@ -2107,11 +2115,11 @@ msgstr "Spoločenské centrum"
 #: app/templates/packages/game_hub.html:12
 #, python-format
 msgid "Mods for %(title)s"
-msgstr "Módy pre %(title)s"
+msgstr "Rozšírenia pre %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr ""
+msgstr "Dokumentácia"
 
 #: app/templates/packages/game_support.html:24
 #: app/templates/packages/view.html:215
@@ -2120,19 +2128,19 @@ msgstr "Zdroj"
 
 #: app/templates/packages/game_support.html:27
 msgid "Supported?"
-msgstr ""
+msgstr "Podpora?"
 
 #: app/templates/packages/game_support.html:42
 msgid "Detected from dependencies"
-msgstr ""
+msgstr "Nájdené medzi závislosťami"
 
 #: app/templates/packages/game_support.html:44
 msgid "Added by Editor"
-msgstr ""
+msgstr "Pridané editorom"
 
 #: app/templates/packages/game_support.html:46
 msgid "mod.conf"
-msgstr ""
+msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
 #: app/templates/packages/view.html:462
@@ -2141,65 +2149,70 @@ msgstr "Nie je potrebná špecifická hra"
 
 #: app/templates/packages/game_support.html:68
 msgid "Generated mod.conf lines"
-msgstr ""
+msgstr "Generované mod.conf riadky"
 
 #: app/templates/packages/game_support.html:82
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
 msgstr ""
+"Musíš ručne stanoviť aspoň jednu podporovanú hru predtým, než toto vypneš."
 
 #: app/templates/packages/game_support.html:88
 msgid "Editor Overrides"
-msgstr ""
+msgstr "Zmeny editora"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr ""
+msgstr "Odstránený balíček"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
-msgstr ""
+msgstr "Tento balíček bol odobraný."
 
 #: app/templates/packages/gone.html:22
 msgid ""
 "It may have been removed by choice of the author, or by ContentDB staff "
 "due to a problem."
 msgstr ""
+"Toto mohlo byť odstránené autorom náhodou, alebo správcom ContentDB kvôli "
+"problémom."
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
-msgstr ""
+msgstr "Kontrolovaný balíček"
 
 #: app/templates/packages/gone.html:27
 msgid "This package is currently undergoing review"
-msgstr ""
+msgstr "Balíček je práve kontrolovaný"
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr ""
+msgstr "Balíček ešte nebol odovzdaný"
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
-msgstr ""
+msgstr "Balíček bol vytvorený, avšak nebol posunutý na schválenie."
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
 msgstr ""
+"Tento balíček je práve kontrolovaný a potrebuje zmeny predtým, než môže byť "
+"pridaný."
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr ""
+msgstr "Prosím, skontroluj znova neskôr."
 
 #: app/templates/packages/gone.html:42
 msgid "Or, if you're the author, log in to see more information."
-msgstr ""
+msgstr "Alebo, ak si autorom, prihlás sa aby si videl viac informácií."
 
 #: app/templates/packages/gone.html:45
 msgid "Login"
-msgstr ""
+msgstr "Prihlásenie"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2633,7 +2646,7 @@ msgstr "Výnimočnosť názvu módu"
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
-msgstr "Módy ponúkajúce zdieľanie balíkov"
+msgstr "Balíky zdieľajúce poskytované rozšírenia"
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
@@ -2647,7 +2660,7 @@ msgstr "Podobné témy na fóte"
 
 #: app/templates/packages/stats.html:17
 msgid "Download (.csv)"
-msgstr ""
+msgstr "Stiahnuť (.csv)"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -2712,7 +2725,7 @@ msgstr "Minetest %(max)s a nižšie"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
-msgstr "Ako nainštalujem toto?"
+msgstr "Ako to nainštalujem?"
 
 #: app/templates/packages/view.html:73
 msgid "No downloads available"
@@ -2773,7 +2786,7 @@ msgstr "Nemôžeš recenzovať svoj vlastný balík."
 
 #: app/templates/packages/view.html:320
 msgid "Package needs to be approved before it can be reviewed."
-msgstr ""
+msgstr "Balíček musí byť schválený predtým, než ho možno prezerať."
 
 #: app/templates/packages/view.html:331
 msgid "Used By"
@@ -2877,10 +2890,12 @@ msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
 msgstr ""
+"Kvôli spamu viac neakceptujeme hlásenia od anonymných užívateľov touto "
+"formou."
 
 #: app/templates/report/index.html:21
 msgid "Please sign in or contact the admin in another way"
-msgstr ""
+msgstr "Prosím zaregistruj sa alebo kontaktuj administrátora iným spôsobom"
 
 #: app/templates/report/index.html:39
 msgid "What are you reporting? Why are you reporting it?"
@@ -3050,6 +3065,8 @@ msgstr "Nesplnené nevyhnutné doplnky"
 #: app/templates/todo/editor.html:151
 msgid "Mod names that have hard dependers, but no packages providing them."
 msgstr ""
+"Názvy rozšírení, ktoré majú prísne závislosti, ale žiadne balíčky ich "
+"neponúkajú."
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -3062,14 +3079,14 @@ msgstr "Nedávne akcie"
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
-msgstr ""
+msgstr "Balíčky, ktoré nepodporujú %(rel)s"
 
 #: app/templates/todo/mtver_support.html:13
 #: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
 #: app/templates/todo/outdated.html:16 app/templates/todo/screenshots.html:12
 #: app/templates/todo/screenshots.html:16
 msgid "Minetest-Mods org only"
-msgstr "Iba Minetest módy org"
+msgstr "Iba Minetest organizačné rozšírenia"
 
 #: app/templates/todo/mtver_support.html:25 app/templates/todo/outdated.html:24
 #: app/templates/todo/screenshots.html:24 app/templates/todo/topics.html:12
@@ -3088,12 +3105,12 @@ msgstr "Všetky zastaralé balíky"
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
 #: app/templates/todo/user.html:68
 msgid "Missing Screenshots"
-msgstr ""
+msgstr "Chýbajú snímky obrazovky"
 
 #: app/templates/todo/screenshots.html:33
 #, python-format
 msgid "%(count)d packages"
-msgstr ""
+msgstr "%(count)d balíčky"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -3109,11 +3126,11 @@ msgstr "Upraviť tagy"
 
 #: app/templates/todo/todo_base.html:11
 msgid "Your to do list"
-msgstr ""
+msgstr "Tvoj zoznam úloh"
 
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
-msgstr ""
+msgstr "Zastaralé balíčky"
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
@@ -3351,6 +3368,8 @@ msgid ""
 "ContentDB will link your account to your forum account if you have one, "
 "but you don't need one."
 msgstr ""
+"ContentDB prepojí tvoj účet k tvojmu účtu na fóre ak už nejaký máš, avšak "
+"žiadny nepotrubuješ."
 
 #: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
@@ -3387,7 +3406,7 @@ msgstr "Nemáš účet na fóre?"
 #: app/templates/users/claim_forums.html:19
 #, python-format
 msgid "You can still <a href='%(url)s'>sign up without one</a>."
-msgstr "Aj tak sa <a href='%(url)s'> môžeš zaregistrovať bez neho</a>."
+msgstr "Aj tak sa môžeš zaregistrovať bez neho."
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
@@ -3739,7 +3758,7 @@ msgstr "Vo výbere"
 #: app/templates/users/stats.html:4
 #, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr ""
+msgstr "Štatistiky pre %(display_name)s balíčka"
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
@@ -3899,4 +3918,3 @@ msgstr ""
 
 #~ msgid "Why?"
 #~ msgstr "Prečo?"
-
