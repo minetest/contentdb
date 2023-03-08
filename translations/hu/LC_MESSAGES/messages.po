@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-01-02 16:19+0000\n"
-"PO-Revision-Date: 2022-10-19 17:01+0000\n"
-"Last-Translator: Kisjuhász Attila <kj.attil@gmail.com>\n"
+"PO-Revision-Date: 2023-02-10 20:37+0000\n"
+"Last-Translator: unacceptium core <kolonics20132a@gmail.com>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/hu/>\n"
 "Language: hu\n"
-"Language-Team: Hungarian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/hu/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.16-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -34,7 +35,7 @@ msgstr "Kitiltottak."
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:201
 msgid "Packages"
-msgstr ""
+msgstr "Csomagok"
 
 #: app/template_filters.py:52
 #, python-format
@@ -75,7 +76,6 @@ msgid "Linked GitHub to account"
 msgstr "A GitHub-ot hozzákapcsoltuk a fiókhoz"
 
 #: app/blueprints/github/__init__.py:65
-#, fuzzy
 msgid "GitHub account is already associated with another user"
 msgstr "A github fiók már társítva van egy másik felhasználóhoz"
 
@@ -95,14 +95,15 @@ msgstr "Részletek Szerkesztése"
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
 #: app/templates/packages/view.html:529 app/templates/todo/editor.html:75
+#, fuzzy
 msgid "Releases"
-msgstr "Verziók"
+msgstr "Változatok"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr "Képek"
+msgstr "Képernyőképek"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
@@ -119,7 +120,7 @@ msgstr "Ellenőrzési Napló"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:232 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "Starisztikák"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 #, fuzzy
@@ -133,7 +134,7 @@ msgstr "Törlés"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Támogatott játékok"
 
 #: app/blueprints/packages/packages.py:163
 msgid "Error: Another package already uses this forum topic!"
@@ -232,6 +233,8 @@ msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Ez a csomag már létezik, de eltávolították. Kérjük keresse fel a ContentDB "
+"szerkesztőségét a csomag visszahozatalához"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Package already exists"
@@ -290,14 +293,15 @@ msgstr "Szerző Neve"
 #: app/blueprints/packages/packages.py:639
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr ""
+"Engedélyezze a támogatottság megjelenését a függőségein alapulva (ajánlott)"
 
 #: app/blueprints/packages/packages.py:640
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Ajánlott játékok (vesszővel elválasztva)"
 
 #: app/blueprints/packages/packages.py:641
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Nem támogatott játékok (vesszővel elválasztva)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
@@ -925,8 +929,11 @@ msgid "Search"
 msgstr "Keresés"
 
 #: app/logic/package_validator.py:20
+#, fuzzy
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
+"Egy csomag már létezik evvel a névvel. kérjük látogassa meg a feltételek és "
+"irányelvek 3-at"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
@@ -940,16 +947,19 @@ msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
 "%(deps)s"
 msgstr ""
+"ezek a fontos függőségek/követelmények előbb meg kell jelenjenek a "
+"ContenetDB-n:%(deps)s"
 
 #: app/logic/package_validator.py:34
 #: app/templates/macros/package_approval.html:41
 msgid "You need to add at least one screenshot."
-msgstr ""
+msgstr "Meg kell adnia legalább egy képernyőképet."
 
 #: app/logic/package_validator.py:37
 #: app/templates/macros/package_approval.html:49
+#, fuzzy
 msgid "Please wait for the license to be added to CDB."
-msgstr ""
+msgstr "Kérjük várjon, amíg a licensz/engedély megjelenik a ContentDB-n"
 
 #: app/logic/packages.py:95
 msgid ""
@@ -1017,22 +1027,22 @@ msgid "Uploaded image isn't actually an image"
 msgstr "A feltöltött kép valójában nem kép"
 
 #: app/models/packages.py:66
+#, fuzzy
 msgid "Mod"
-msgstr ""
+msgstr "Modifikáció \"Mod\""
 
 #: app/models/packages.py:68
-#, fuzzy
 msgid "Game"
-msgstr "Név"
+msgstr "Játék"
 
 #: app/models/packages.py:70
 msgid "Texture Pack"
-msgstr ""
+msgstr "Kinézet(textúra)csomag"
 
 #: app/models/packages.py:75 app/templates/base.html:27
 #: app/templates/modnames/view.html:14
 msgid "Mods"
-msgstr ""
+msgstr "Modifikációk \"Modok\""
 
 #: app/models/packages.py:77 app/templates/base.html:30
 #: app/templates/modnames/view.html:17
@@ -1041,16 +1051,15 @@ msgstr "Játékok"
 
 #: app/models/packages.py:79 app/templates/base.html:33
 msgid "Texture Packs"
-msgstr ""
+msgstr "Kinézet(textúra)csomag"
 
 #: app/models/packages.py:168
 msgid "Submit for Approval"
 msgstr ""
 
 #: app/models/packages.py:170
-#, fuzzy
 msgid "Approve"
-msgstr "Jóváhagyva"
+msgstr "Jóváhagyás"
 
 #: app/models/packages.py:172 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
@@ -1066,27 +1075,30 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
 msgstr ""
+"Ezt az email-t azért kapta, mert egy regisztrált felhasználó a ContentDB-n."
 
 #: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr ""
+"Ezt az email-t azért kapta, mert valaki (reméljük hogy Ön/Te) ezt az email "
+"címet adta meg a saját profiljához."
 
 #: app/tasks/emails.py:153
-#, python-format
+#, fuzzy, python-format
 msgid "%(num)d new notifications"
-msgstr ""
+msgstr "Van%(num)dÚj értesítése"
 
 #: app/tasks/emails.py:155 app/templates/macros/forms.html:52
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
-msgstr ""
+msgstr "Megtekintés"
 
 #: app/tasks/emails.py:158
 msgid "Manage email settings"
-msgstr ""
+msgstr "Email-beállítások megváltoztatása"
 
 #: app/tasks/emails.py:160 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
@@ -1096,21 +1108,23 @@ msgstr ""
 #: app/templates/threads/view.html:31 app/templates/users/unsubscribe.html:4
 #: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Leiratkozás"
 
 #: app/templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Az oldal nem található"
 
 #: app/templates/404.html:10
 msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
+"Ezt az oldalt nem találjuk. Lehet, hogy a link sérült, eltávolították, vagy "
+"nincs engedélye megtekinteni."
 
 #: app/templates/base.html:36
 msgid "Random"
-msgstr ""
+msgstr "Véletlenszerű"
 
 #: app/templates/base.html:39 app/templates/base.html:241
 #: app/templates/packages/bulk_update_conf.html:8
@@ -1121,52 +1135,53 @@ msgstr "Segítség"
 #: app/templates/base.html:46
 #, python-format
 msgid "Search %(type)s"
-msgstr ""
+msgstr "Keresés %(type)s"
 
 #: app/templates/base.html:46 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
-msgstr ""
+msgstr "Minden csomag megtekintése"
 
 #: app/templates/base.html:65
 msgid "Work Queue"
-msgstr ""
+msgstr "Működési sor"
 
 #: app/templates/base.html:78 app/templates/base.html:130
 msgid "To do list"
-msgstr ""
+msgstr "Teendők listája"
 
 #: app/templates/base.html:87 app/templates/notifications/list.html:4
 msgid "Notifications"
-msgstr ""
+msgstr "Értesítések"
 
 #: app/templates/base.html:108
 msgid "Add Package"
-msgstr ""
+msgstr "Csomag hozzáadása"
 
 #: app/templates/base.html:125
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: app/templates/base.html:148
+#, fuzzy
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #: app/templates/base.html:151
 msgid "License Editor"
-msgstr ""
+msgstr "Licensz/engedély szerkesztő"
 
 #: app/templates/base.html:156
 msgid "Restore Package"
-msgstr ""
+msgstr "Csomag visszaállítása"
 
 #: app/templates/base.html:159
 msgid "Tag Editor"
-msgstr ""
+msgstr "Cimke szerkesztés"
 
 #: app/templates/base.html:161
 msgid "Create Tag"
-msgstr ""
+msgstr "Cimke létrehozása"
 
 #: app/templates/base.html:166 app/templates/packages/release_new.html:12
 msgid "Settings"
@@ -1174,11 +1189,11 @@ msgstr "Beállítások"
 
 #: app/templates/base.html:169
 msgid "Sign out"
-msgstr ""
+msgstr "Kijelentkezés"
 
 #: app/templates/base.html:198
 msgid "Help translate ContentDB"
-msgstr ""
+msgstr "Segítsen a ContentDB fordításában"
 
 #: app/templates/base.html:242
 msgid "Policy and Guidance"
@@ -1186,19 +1201,19 @@ msgstr ""
 
 #: app/templates/base.html:243
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: app/templates/base.html:244 app/templates/users/register.html:37
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Adatvédelmi irányelvek"
 
 #: app/templates/base.html:248
 msgid "Stats / Monitoring"
-msgstr ""
+msgstr "Státusz/megfigyelés"
 
 #: app/templates/base.html:249
 msgid "User List"
-msgstr ""
+msgstr "Felhasználó lista"
 
 #: app/templates/base.html:250 app/templates/packages/view.html:194
 #: app/templates/packages/view.html:549 app/templates/threads/list.html:4
@@ -1207,11 +1222,11 @@ msgstr ""
 
 #: app/templates/base.html:251
 msgid "Source Code"
-msgstr ""
+msgstr "Forráskód"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "Üdv"
 
 #: app/templates/index.html:38 app/templates/macros/reviews.html:73
 #: app/templates/packages/game_hub.html:5
@@ -1219,7 +1234,7 @@ msgstr ""
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
-msgstr ""
+msgstr "%(title)skészitő:%(author)s"
 
 #: app/templates/index.html:43
 #, python-format
@@ -1230,19 +1245,20 @@ msgstr ""
 #: app/templates/packages/view.html:198 app/templates/packages/view.html:297
 #: app/templates/users/profile.html:216
 msgid "Reviews"
-msgstr ""
+msgstr "Vélemények"
 
 #: app/templates/index.html:86
 msgid "Previous"
-msgstr ""
+msgstr "Előző"
 
 #: app/templates/index.html:90 app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr ""
+msgstr "Következő"
 
 #: app/templates/index.html:96
+#, fuzzy
 msgid "Featured"
-msgstr ""
+msgstr "Kiemelt"
 
 #: app/templates/index.html:101 app/templates/index.html:108
 #: app/templates/index.html:115 app/templates/index.html:122
@@ -1252,44 +1268,47 @@ msgstr ""
 #: app/templates/packages/game_hub.html:45
 #: app/templates/packages/game_hub.html:52
 msgid "See more"
-msgstr ""
+msgstr "Több megtekintése"
 
 #: app/templates/index.html:103 app/templates/packages/game_hub.html:33
 msgid "Recently Added"
-msgstr ""
+msgstr "Utoljára hozzáadott"
 
 #: app/templates/index.html:110 app/templates/packages/game_hub.html:40
 msgid "Recently Updated"
-msgstr ""
+msgstr "Nemrég frissített"
 
 #: app/templates/index.html:117
 msgid "Top Games"
-msgstr ""
+msgstr "Legjobb játékok"
 
 #: app/templates/index.html:124 app/templates/packages/game_hub.html:47
+#, fuzzy
 msgid "Top Mods"
-msgstr ""
+msgstr "Legjobb modifikációk \"Modok\""
 
 #: app/templates/index.html:131
 msgid "Top Texture Packs"
-msgstr ""
+msgstr "Legjobb megjelenés(textúra)csomagok"
 
 #: app/templates/index.html:135
 msgid "Search by Tags"
-msgstr ""
+msgstr "Cimke szerinti keresés"
 
 #: app/templates/index.html:153 app/templates/packages/game_hub.html:54
 msgid "Highest Reviewed"
-msgstr ""
+msgstr "Legvéleményezettebb"
 
 #: app/templates/index.html:160
 msgid "Recent Positive Reviews"
-msgstr ""
+msgstr "Legújabb pozitív vélemény"
 
 #: app/templates/index.html:167
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
 msgstr ""
+"a CDB jelenleg%(count)dcsomaggal rendelkezik,és%(downloads)da letöltések "
+"száma."
 
 #: app/templates/admin/audit_view.html:16
 #, python-format
@@ -1301,57 +1320,58 @@ msgid "Caused by a deleted user."
 msgstr ""
 
 #: app/templates/admin/list.html:62
+#, fuzzy
 msgid "Deletion is permanent."
-msgstr ""
+msgstr "A törlés végleges."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
-msgstr ""
+msgstr "Többszörös email küldése"
 
 #: app/templates/admin/send_bulk_notification.html:4
 msgid "Send bulk notification"
-msgstr ""
+msgstr "Többszörös értesítés küldése"
 
 #: app/templates/admin/send_email.html:4
 #, python-format
 msgid "Send email to %(username)s"
-msgstr ""
+msgstr "Email küldése %(username)s számára"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
-msgstr ""
+msgstr "Új licensz/engedély"
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr ""
+msgstr "Licenszek/engedélyek"
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:44
 msgid "Description"
-msgstr ""
+msgstr "Leírás"
 
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
-msgstr ""
+msgstr "Megtekintések"
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Minetest Versions"
-msgstr ""
+msgstr "Minetest változatok"
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
-msgstr ""
+msgstr "Új változatok"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
 msgid "Warnings"
-msgstr ""
+msgstr "Figyelmeztetések"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
-msgstr ""
+msgstr "Új figyelmeztetés"
 
 #: app/templates/api/create_edit_token.html:5
 #, python-format
@@ -1374,30 +1394,34 @@ msgstr ""
 
 #: app/templates/api/create_edit_token.html:30
 msgid "Access Token"
-msgstr ""
+msgstr "Zseton elérés"
 
 #: app/templates/api/create_edit_token.html:33
+#, fuzzy
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
 msgstr ""
+"Biztonsági okokból az elérési zsetonok csak egyszer jelennek meg. Állitsa "
+"vissza, ha elvesztette."
 
 #: app/templates/api/create_edit_token.html:40
 msgid "Reset"
-msgstr ""
+msgstr "Visszaállítás"
 
 #: app/templates/api/create_edit_token.html:49
 msgid "Human-readable name to tell tokens apart."
 msgstr ""
 
 #: app/templates/api/create_edit_token.html:50
+#, fuzzy
 msgid "Recommended: Only allows token to interact with a particular package."
-msgstr ""
+msgstr "Ajánlott:csak akkor enged zsetonokat, ha egy adott csomaggal interaktál"
 
 #: app/templates/api/list_tokens.html:4
 #, python-format
 msgid "API Tokens | %(username)s"
-msgstr ""
+msgstr "API zsetonok | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/macros/topics.html:29
 #: app/templates/macros/topics.html:65
@@ -1408,25 +1432,25 @@ msgstr "Létrehozás"
 
 #: app/templates/api/list_tokens.html:9
 msgid "API Documentation"
-msgstr ""
+msgstr "API Dokumentáció"
 
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
-msgstr ""
+msgstr "Nem készült zseton"
 
 #: app/templates/emails/notification.html:10
 #, python-format
 msgid "From %(username)s and on package %(package)s."
-msgstr ""
+msgstr "%(username)s-tól a %(package)s-csomag(ok)ban."
 
 #: app/templates/emails/notification.html:13
 #, python-format
 msgid "From %(username)s."
-msgstr ""
+msgstr "%(username)s-tól."
 
 #: app/templates/emails/notification.html:19
 msgid "View Notification"
-msgstr ""
+msgstr "Értesítés megtekintése"
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:46
@@ -1434,61 +1458,67 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
 msgstr ""
+"Ezen email-t azért kapta,mert regisztrált felhasználó a ContentDB-n, és "
+"engedélyezte az email-okat."
 
 #: app/templates/emails/notification.html:30
 #: app/templates/emails/notification_digest.html:50
 msgid "Manage your preferences"
-msgstr ""
+msgstr "Preferenciák kezelése"
 
 #: app/templates/emails/notification.html:37
 #, python-format
 msgid "This is a '%(type)s' notification."
-msgstr ""
+msgstr "Ez egy '%(type)s' értesítés."
 
 #: app/templates/emails/notification_digest.html:14
 #: app/templates/emails/notification_digest.html:31
 #, python-format
 msgid "from %(username)s."
-msgstr ""
+msgstr "%(username)s-tól."
 
 #: app/templates/emails/notification_digest.html:24
 msgid "Other Notifications"
-msgstr ""
+msgstr "Egyéb értesítések"
 
 #: app/templates/emails/notification_digest.html:39
 msgid "View Notifications"
-msgstr ""
+msgstr "Értesítések megtekintése"
 
 #: app/templates/emails/unable_to_find_account.html:2
 msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
+"Nem sikerült visszaállítani a jelszót,mert nem találtunk ezen email-el "
+"megegyező fiókot."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
+"Lehet azért, mert más fiókot használ evvel az email-el, vagy még nem "
+"engedélyezte azt."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
-msgstr ""
+msgstr "Bejelentkezhet a GitHub-ba, ha összeköttetésben áll a fiókjával."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
-msgstr ""
+msgstr "Másképp értesítenie kell Rubenwardy-t segítségért."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
-msgstr ""
+msgstr "Ha nem várta ezt az email, figyelmen kívül hagyhatja."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
-msgstr ""
+msgstr "Helló!"
 
 #: app/templates/emails/verify.html:7
 msgid ""
@@ -1498,26 +1528,29 @@ msgstr ""
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
-msgstr ""
+msgstr "Ha nem ön volt, törölheti ezt az email-t."
 
 #: app/templates/emails/verify.html:15
+#, fuzzy
 msgid "If this was you, then please click this link to confirm the address:"
-msgstr ""
+msgstr "Ha ön volt, kattintson erre a linkre, hogy elfogjadhassa:"
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
-msgstr ""
+msgstr "Email cím elfogadása"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
 msgid "Or paste this into your browser:"
-msgstr ""
+msgstr "Vagy ezt másolja be böngészőjébe:"
 
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
+"Sajnáljuk,hogy elmegy. Meg kell tennie mégvalamit, mielőtt email-je "
+"feketelistára kerül."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
@@ -1532,7 +1565,7 @@ msgstr ""
 
 #: app/templates/macros/audit_log.html:32
 msgid "Deleted User"
-msgstr ""
+msgstr "Törölt Felhasználó"
 
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
@@ -3640,22 +3673,22 @@ msgstr ""
 
 #: app/templates/users/unsubscribe.html:20
 msgid "Please enter the email address you wish to blacklist."
-msgstr ""
+msgstr "Kérjük,írja be azon email címet,amelyet feketelistázni szeretne."
 
 #: app/templates/users/unsubscribe.html:21
 msgid "You will then need to confirm the email"
-msgstr ""
+msgstr "El kell majd fogadnia az email-t"
 
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
-msgstr ""
+msgstr "Iratkozzon le."
 
 #: app/templates/users/unsubscribe.html:40
 #, python-format
 msgid ""
 "Unsubscribing may prevent you from being able to sign into the account "
 "'%(display_name)s'"
-msgstr ""
+msgstr "Leiratkozás után nem tud bejelentkezni a '%(display_name)s'fiókba"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -3663,34 +3696,41 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
+"ContentDB nem tud több \"elfelejtett jelszó\" és hasonló email-eket küldeni."
+"\n"
+"                                          Ajánlott az email beállítások "
+"módosítása."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
-msgstr ""
+msgstr "Ezt az email-t nem tudja többé a ContentDB-n használni."
 
 #: app/templates/users/unsubscribe.html:57
+#, fuzzy
 msgid "Edit Notification Preferences"
-msgstr ""
+msgstr "Értesítések beállítása"
 
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr ""
+msgstr "Csomagváltozatok keresése"
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr ""
+msgstr "'%(query)s' - Csomagváltozatok keresése"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
-msgstr ""
+msgstr "Sok értesítése van. Olvassa el, vagy törölje őket"
 
 #: app/utils/user.py:54
 msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
 msgstr ""
+"Ajánlott bekapcsolnia az email értesítéseket. Beállíthatja,hogy mijen "
+"gyakoriak legyenek"
 
 #~ msgid "Like %(display_name)s's work? Donate now!"
 #~ msgstr ""
@@ -3877,4 +3917,3 @@ msgstr ""
 
 #~ msgid "Why?"
 #~ msgstr ""
-
