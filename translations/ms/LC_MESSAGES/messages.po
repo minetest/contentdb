@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-01-02 16:19+0000\n"
+"POT-Creation-Date: 2023-03-09 18:38+0000\n"
 "PO-Revision-Date: 2023-01-03 19:51+0000\n"
 "Last-Translator: Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi <translation@mnh48.moe>\n"
-"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
-"ms/>\n"
 "Language: ms\n"
+"Language-Team: Malay "
+"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -52,18 +51,18 @@ msgstr "Nama"
 msgid "Limit to package"
 msgstr "Hadkan ke pakej"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:253
-#: app/blueprints/packages/packages.py:476
-#: app/blueprints/packages/packages.py:572
-#: app/blueprints/packages/packages.py:642
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:254
+#: app/blueprints/packages/packages.py:480
+#: app/blueprints/packages/packages.py:576
+#: app/blueprints/packages/packages.py:646
 #: app/blueprints/packages/releases.py:60
-#: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:47
+#: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:48
 #: app/blueprints/packages/screenshots.py:35
 #: app/blueprints/packages/screenshots.py:41
 #: app/blueprints/packages/screenshots.py:46
 #: app/blueprints/users/account.py:228 app/blueprints/users/account.py:235
-#: app/blueprints/users/settings.py:53 app/blueprints/users/settings.py:115
-#: app/blueprints/users/settings.py:269 app/templates/users/modtools.html:86
+#: app/blueprints/users/settings.py:53 app/blueprints/users/settings.py:123
+#: app/blueprints/users/settings.py:277 app/templates/users/modtools.html:86
 msgid "Save"
 msgstr "Simpan"
 
@@ -94,7 +93,7 @@ msgstr "Edit Maklumat"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:529 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:543 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Terbitan"
 
@@ -106,7 +105,7 @@ msgstr "Tangkap Layar"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:500
+#: app/templates/packages/view.html:514
 msgid "Maintainers"
 msgstr "Penyenggara"
 
@@ -125,7 +124,8 @@ msgstr "Statistik"
 msgid "Share and Badges"
 msgstr "Kongsi dan Lencana"
 
-#: app/blueprints/packages/__init__.py:67 app/templates/packages/view.html:131
+#: app/blueprints/packages/__init__.py:67 app/templates/packages/remove.html:36
+#: app/templates/packages/view.html:131
 msgid "Remove"
 msgstr "Buang"
 
@@ -154,7 +154,7 @@ msgstr ""
 msgid "No download available."
 msgstr "Tiada muat turun tersedia."
 
-#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:477
+#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:491
 msgid "Type"
 msgstr "Jenis"
 
@@ -163,12 +163,12 @@ msgid "Title (Human-readable)"
 msgstr "Tajuk (Bacaan manusia)"
 
 #: app/blueprints/packages/packages.py:235
-#: app/blueprints/packages/packages.py:570
+#: app/blueprints/packages/packages.py:574
 msgid "Name (Technical)"
 msgstr "Nama (Teknikal)"
 
 #: app/blueprints/packages/packages.py:235
-#: app/blueprints/packages/packages.py:571
+#: app/blueprints/packages/packages.py:575
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Huruf kecil (a-z), digit (0-9), dan garis bawah (_) sahaja"
@@ -177,7 +177,7 @@ msgstr "Huruf kecil (a-z), digit (0-9), dan garis bawah (_) sahaja"
 msgid "Short Description (Plaintext)"
 msgstr "Perihal Pendek (Teks biasa)"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:492
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:506
 msgid "Maintenance State"
 msgstr "Keadaan Penyenggaraan"
 
@@ -190,7 +190,7 @@ msgstr "Tag"
 msgid "Content Warnings"
 msgstr "Amaran Kandungan"
 
-#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:481
+#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:495
 msgid "License"
 msgstr "Lesen"
 
@@ -222,11 +222,15 @@ msgstr "ID Topik Forum"
 msgid "Video URL"
 msgstr "URL Video"
 
-#: app/blueprints/packages/packages.py:257
+#: app/blueprints/packages/packages.py:252
+msgid "Donate URL"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:258
 msgid "_game is not an allowed name"
 msgstr "_game bukanlah nama yang dibenarkan"
 
-#: app/blueprints/packages/packages.py:267
+#: app/blueprints/packages/packages.py:268
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -234,75 +238,75 @@ msgstr ""
 "Pakej sudah wujud, tetapi telah dibuang. Sila hubungi kakitangan "
 "ContentDB untuk memulihkan pakej"
 
-#: app/blueprints/packages/packages.py:272
+#: app/blueprints/packages/packages.py:273
 msgid "Package already exists"
 msgstr "Pakej sudah wujud"
 
-#: app/blueprints/packages/packages.py:330
+#: app/blueprints/packages/packages.py:332
 msgid "Unable to find that user"
 msgstr "Tidak jumpa pengguna tersebut"
 
-#: app/blueprints/packages/packages.py:334
+#: app/blueprints/packages/packages.py:336
 #: app/blueprints/packages/screenshots.py:139
-#: app/blueprints/users/settings.py:99
+#: app/blueprints/users/settings.py:107
 msgid "Permission denied"
 msgstr "Kebenaran ditolak"
 
-#: app/blueprints/packages/packages.py:390
-#: app/blueprints/packages/packages.py:439
-#: app/blueprints/packages/packages.py:455
+#: app/blueprints/packages/packages.py:392
+#: app/blueprints/packages/packages.py:443
+#: app/blueprints/packages/packages.py:459
 msgid "You don't have permission to do that"
 msgstr "Anda tiada kebenaran untuk berbuat sedemikian"
 
-#: app/blueprints/packages/packages.py:418
+#: app/blueprints/packages/packages.py:422
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
 "Sila tulis komen mengenai perubahan apa yang diperlukan dalam bebenang "
 "kelulusan"
 
-#: app/blueprints/packages/packages.py:450
+#: app/blueprints/packages/packages.py:454
 msgid "Deleted package"
 msgstr "Pakej dipadam"
 
-#: app/blueprints/packages/packages.py:466
+#: app/blueprints/packages/packages.py:470
 msgid "Unapproved package"
 msgstr "Pakej tidak diluluskan"
 
-#: app/blueprints/packages/packages.py:475
+#: app/blueprints/packages/packages.py:479
 msgid "Maintainers (Comma-separated)"
 msgstr "Penyenggara (Dipisahkan dengan koma)"
 
-#: app/blueprints/packages/packages.py:484
+#: app/blueprints/packages/packages.py:488
 msgid "You don't have permission to edit maintainers"
 msgstr "Anda tiada kebenaran untuk edit penyenggara"
 
-#: app/blueprints/packages/packages.py:534
+#: app/blueprints/packages/packages.py:538
 msgid "You are not a maintainer"
 msgstr "Anda bukan seorang penyenggara"
 
-#: app/blueprints/packages/packages.py:537
+#: app/blueprints/packages/packages.py:541
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Pemilik pakej tidak boleh mengeluarkan diri sendiri sebagai penyenggara"
 
-#: app/blueprints/packages/packages.py:569
+#: app/blueprints/packages/packages.py:573
 msgid "Author Name"
 msgstr "Nama Pencipta"
 
-#: app/blueprints/packages/packages.py:639
+#: app/blueprints/packages/packages.py:643
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Membolehkan pengesan sokongan berdasarkan pada kebergantungan (disyorkan)"
 
-#: app/blueprints/packages/packages.py:640
+#: app/blueprints/packages/packages.py:644
 msgid "Supported games (Comma-separated)"
 msgstr "Permainan disokong (Dipisahkan dengan koma)"
 
-#: app/blueprints/packages/packages.py:641
+#: app/blueprints/packages/packages.py:645
 msgid "Unsupported games (Comma-separated)"
 msgstr "Permainan tidak disokong (Dipisahkan dengan koma)"
 
 #: app/blueprints/packages/releases.py:52
-#: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
-#: app/blueprints/threads/__init__.py:271 app/templates/macros/reviews.html:128
+#: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
+#: app/blueprints/threads/__init__.py:277 app/templates/macros/reviews.html:128
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
@@ -424,31 +428,31 @@ msgstr "Konfigurasi kemas kini telah dipadam"
 msgid "Now, please create an initial release"
 msgstr "Sekarang, sila cipta sebuah terbitan awal"
 
-#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:177
+#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:177
 #: app/blueprints/threads/__init__.py:178
-#: app/blueprints/threads/__init__.py:272
+#: app/blueprints/threads/__init__.py:278
 msgid "Comment"
 msgstr "Komen"
 
-#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:273
+#: app/blueprints/packages/reviews.py:46 app/blueprints/threads/__init__.py:279
 msgid "Private"
 msgstr "Peribadi"
 
-#: app/blueprints/packages/reviews.py:46 app/templates/macros/reviews.html:115
+#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:115
 #: app/templates/macros/reviews.html:154
 msgid "Yes"
 msgstr "Ya"
 
-#: app/blueprints/packages/reviews.py:46 app/templates/macros/reviews.html:119
+#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:158
 msgid "No"
 msgstr "Tidak"
 
-#: app/blueprints/packages/reviews.py:54
+#: app/blueprints/packages/reviews.py:55
 msgid "You can't review your own package!"
 msgstr "Anda tidak boleh mengulas pakej anda sendiri!"
 
-#: app/blueprints/packages/reviews.py:64
+#: app/blueprints/packages/reviews.py:65
 msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
@@ -456,11 +460,18 @@ msgstr ""
 "Anda telah mengulas terlalu banyak pakej baru-baru ini. Sila tunggu "
 "sebelum cuba lagi, dan cuba buat ulasan anda menjadi lebih terperinci"
 
-#: app/blueprints/packages/reviews.py:178
+#: app/blueprints/packages/reviews.py:78 app/blueprints/threads/__init__.py:203
+#: app/blueprints/threads/__init__.py:236
+#: app/blueprints/threads/__init__.py:328 app/blueprints/users/settings.py:88
+#: app/logic/packages.py:125
+msgid "Linking to blocked sites is not allowed"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:182
 msgid "You can't vote on the reviews on your own package!"
 msgstr "Anda tidak boleh mengundi pada ulasan di pakej anda sendiri!"
 
-#: app/blueprints/packages/reviews.py:186
+#: app/blueprints/packages/reviews.py:190
 msgid "You can't vote on your own reviews!"
 msgstr "Anda tidak boleh mengundi pada ulasan anda sendiri!"
 
@@ -479,7 +490,7 @@ msgid "Message"
 msgstr "Mesej"
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:246
-#: app/templates/macros/threads.html:50 app/templates/packages/view.html:560
+#: app/templates/macros/threads.html:50 app/templates/packages/view.html:574
 #: app/templates/report/index.html:4 app/templates/report/index.html:15
 #: app/templates/users/profile.html:28
 msgid "Report"
@@ -513,24 +524,24 @@ msgstr "Bebenang dibuka kunci"
 msgid "Cannot delete thread opening post!"
 msgstr "Tidak boleh padam hantaran pembuka bebenang!"
 
-#: app/blueprints/threads/__init__.py:230
+#: app/blueprints/threads/__init__.py:232
 msgid "Please wait before commenting again"
 msgstr "Sila tunggu sebentar sebelum menulis komen lagi"
 
-#: app/blueprints/threads/__init__.py:274
+#: app/blueprints/threads/__init__.py:280
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
 msgstr "Buka Bebenang"
 
-#: app/blueprints/threads/__init__.py:297
+#: app/blueprints/threads/__init__.py:303
 msgid "Unable to create thread!"
 msgstr "Tidak mampu cipta bebenang!"
 
-#: app/blueprints/threads/__init__.py:303
+#: app/blueprints/threads/__init__.py:309
 msgid "An approval thread already exists! Consider replying there instead"
 msgstr "Bebenang kelulusan sudah wujud! Cuba balas di bebenang tersebut"
 
-#: app/blueprints/threads/__init__.py:307
+#: app/blueprints/threads/__init__.py:313
 msgid "Please wait before opening another thread"
 msgstr "Sila tunggu sebentar sebelum membuka bebenang yang lain"
 
@@ -549,7 +560,7 @@ msgid "Remember me"
 msgstr "Ingat saya"
 
 #: app/blueprints/users/account.py:40 app/templates/base.html:173
-#: app/templates/users/login.html:4
+#: app/templates/donate/index.html:70 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "Log masuk"
 
@@ -578,7 +589,7 @@ msgstr "Log masuk gagal"
 msgid "Display Name"
 msgstr "Nama Paparan"
 
-#: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:263
+#: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:271
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "Nama Pengguna"
@@ -593,7 +604,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:189
 #: app/blueprints/users/account.py:224 app/blueprints/users/account.py:374
-#: app/blueprints/users/settings.py:114
+#: app/blueprints/users/settings.py:122
 msgid "Email"
 msgstr "E-mel"
 
@@ -642,11 +653,11 @@ msgstr ""
 "oleh %(display_name)s. Cuba alamat e-mel yang lain."
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:253
-#: app/blueprints/users/settings.py:142
+#: app/blueprints/users/settings.py:150
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
-"Alamat e-mel tersebut telah dibuang langganan/disenaraihitamkan, dan tidak "
-"boleh digunakan"
+"Alamat e-mel tersebut telah dibuang langganan/disenaraihitamkan, dan "
+"tidak boleh digunakan"
 
 #: app/blueprints/users/account.py:190
 msgid "Reset Password"
@@ -890,31 +901,31 @@ msgstr "Alatan Moderator"
 msgid "Donation URL"
 msgstr "URL Derma"
 
-#: app/blueprints/users/settings.py:66 app/blueprints/users/settings.py:72
+#: app/blueprints/users/settings.py:68 app/blueprints/users/settings.py:75
 msgid "A user already has that name"
 msgstr "Seorang pengguna sudah ada nama tersebut"
 
-#: app/blueprints/users/settings.py:224
+#: app/blueprints/users/settings.py:232
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr "Pengguna dengan pangkat moderator ke atas tidak boleh dipadam"
 
-#: app/blueprints/users/settings.py:264
+#: app/blueprints/users/settings.py:272
 msgid "Display name"
 msgstr "Nama paparan"
 
-#: app/blueprints/users/settings.py:265
+#: app/blueprints/users/settings.py:273
 msgid "Forums Username"
 msgstr "Nama Pengguna Forum"
 
-#: app/blueprints/users/settings.py:266
+#: app/blueprints/users/settings.py:274
 msgid "GitHub Username"
 msgstr "Nama Pengguna GitHub"
 
-#: app/blueprints/users/settings.py:267 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:275 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "Pangkat"
 
-#: app/blueprints/users/settings.py:311
+#: app/blueprints/users/settings.py:319
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr ""
 "Tidak boleh naikkan pengguna ke pangkat lebih tinggi dari diri anda "
@@ -962,7 +973,7 @@ msgstr "Anda perlu tambah sekurang-kurangnya satu tangkap layar."
 msgid "Please wait for the license to be added to CDB."
 msgstr "Sila tunggu lesen tersebut ditambah ke CDB dahulu."
 
-#: app/logic/packages.py:95
+#: app/logic/packages.py:96
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
@@ -970,15 +981,15 @@ msgstr ""
 "Nama hanya boleh mengandungi huruf kecil (a-z), digit (0-9), dan garis "
 "bawah (_) sahaja"
 
-#: app/logic/packages.py:109
+#: app/logic/packages.py:110
 msgid "You don't have permission to edit this package"
 msgstr "Anda tiada kebenaran untuk edit pakej ini"
 
-#: app/logic/packages.py:113
+#: app/logic/packages.py:114
 msgid "You don't have permission to change the package name"
 msgstr "Anda tiada kebenaran untuk menukar nama pakej"
 
-#: app/logic/packages.py:165
+#: app/logic/packages.py:171
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
 msgstr "Tidak mampu menambah tag terlindung %(title)s kepada pakej"
@@ -1215,11 +1226,15 @@ msgid "User List"
 msgstr "Senarai Pengguna"
 
 #: app/templates/base.html:250 app/templates/packages/view.html:194
-#: app/templates/packages/view.html:549 app/templates/threads/list.html:4
+#: app/templates/packages/view.html:563 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Bebenang"
 
 #: app/templates/base.html:251
+msgid "Support Packages"
+msgstr ""
+
+#: app/templates/base.html:252
 msgid "Source Code"
 msgstr "Kod Sumber"
 
@@ -1265,6 +1280,7 @@ msgstr "Sorotan"
 #: app/templates/packages/game_hub.html:38
 #: app/templates/packages/game_hub.html:45
 #: app/templates/packages/game_hub.html:52
+#: app/templates/packages/game_hub.html:59
 msgid "See more"
 msgstr "Lihat lebih lagi"
 
@@ -1284,7 +1300,7 @@ msgstr "Permainan Teratas"
 msgid "Top Mods"
 msgstr "Mods Teratas"
 
-#: app/templates/index.html:131
+#: app/templates/index.html:131 app/templates/packages/game_hub.html:54
 msgid "Top Texture Packs"
 msgstr "Pek Tekstur Teratas"
 
@@ -1292,7 +1308,7 @@ msgstr "Pek Tekstur Teratas"
 msgid "Search by Tags"
 msgstr "Cari mengikut Tag"
 
-#: app/templates/index.html:153 app/templates/packages/game_hub.html:54
+#: app/templates/index.html:153 app/templates/packages/game_hub.html:61
 msgid "Highest Reviewed"
 msgstr "Paling Banyak Diulas"
 
@@ -1433,6 +1449,56 @@ msgstr "Pendokumenan API"
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
 msgstr "Tiada token dicipta"
+
+#: app/templates/donate/index.html:4
+msgid "Support packages"
+msgstr ""
+
+#: app/templates/donate/index.html:32
+#, python-format
+msgid "by %(author)s"
+msgstr ""
+
+#: app/templates/donate/index.html:37
+msgid "View package"
+msgstr ""
+
+#: app/templates/donate/index.html:41 app/templates/users/profile.html:95
+msgid "Donate"
+msgstr "Derma"
+
+#: app/templates/donate/index.html:54
+msgid "Some content creators are accepting donations for their work."
+msgstr ""
+
+#: app/templates/donate/index.html:55
+msgid ""
+"Donations are a great way to support your favorite modders, artists, and "
+"game developers."
+msgstr ""
+
+#: app/templates/donate/index.html:58
+msgid "Based on your reviews"
+msgstr ""
+
+#: app/templates/donate/index.html:63
+msgid ""
+"No reviewed packages accepting donations. Considering reviewing your "
+"favourite packages"
+msgstr ""
+
+#: app/templates/donate/index.html:67
+msgid "Sign in to see recommendations based on the packages you've reviewed"
+msgstr ""
+
+#: app/templates/donate/index.html:74
+msgid "Top packages"
+msgstr ""
+
+#: app/templates/donate/index.html:78
+#, python-format
+msgid "%(count)d packages are looking for donations"
+msgstr ""
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1593,10 +1659,8 @@ msgid "Release is still importing, or has an error."
 msgstr "Terbitan masih dalam proses import, atau mempunyai ralat."
 
 #: app/templates/macros/package_approval.html:56
-msgid "You should add at least one screenshot, but this isn't required."
+msgid "You should add at least one screenshot."
 msgstr ""
-"Anda patut tambah sekurang-kurangnya satu tangkap layar, tetapi ia tidak "
-"wajib."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1931,7 +1995,7 @@ msgstr "Topik Forum"
 #: app/templates/modnames/view.html:27
 #: app/templates/packages/game_support.html:37
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:406
-#: app/templates/packages/view.html:430 app/templates/packages/view.html:458
+#: app/templates/packages/view.html:430 app/templates/packages/view.html:460
 #: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -2114,6 +2178,10 @@ msgstr "Petua: tampalkan URL topik forum"
 msgid "YouTube videos will be shown in an embed."
 msgstr "Video YouTube akan dipaparkan dalam benaman."
 
+#: app/templates/packages/create_edit.html:121
+msgid "If blank, the author's donation URL will be used instead."
+msgstr ""
+
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
 msgstr "Edit Penyenggara"
@@ -2175,7 +2243,7 @@ msgid "mod.conf"
 msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
-#: app/templates/packages/view.html:462
+#: app/templates/packages/view.html:464
 msgid "No specific game is required"
 msgstr "Tiada permainan khusus diperlukan"
 
@@ -2241,11 +2309,11 @@ msgstr ""
 msgid "Please check back again later."
 msgstr "Sila periksa lagi kemudian."
 
-#: app/templates/packages/gone.html:42
+#: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
 msgstr "Atau, jika anda penciptanya, log masuk untuk melihat maklumat lanjut."
 
-#: app/templates/packages/gone.html:45
+#: app/templates/packages/gone.html:48
 msgid "Login"
 msgstr "Log masuk"
 
@@ -2573,6 +2641,10 @@ msgstr "Sebab bagi ketidaklulusan / pemadaman, ini ditunjukkan dalam log audit"
 msgid "Cancel"
 msgstr "Batal"
 
+#: app/templates/packages/remove.html:39
+msgid "Unapprove"
+msgstr ""
+
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
@@ -2877,54 +2949,58 @@ msgstr "Tiada kebergantungan wajib"
 msgid "Optional"
 msgstr "Pilihan"
 
-#: app/templates/packages/view.html:452
+#: app/templates/packages/view.html:454
 msgid "Compatible Games"
 msgstr "Permainan yang Serasi"
 
-#: app/templates/packages/view.html:467
+#: app/templates/packages/view.html:470
 msgid "This is an experimental feature."
 msgstr "Ini suatu sifat yang masih dalam uji kaji."
 
-#: app/templates/packages/view.html:468
+#: app/templates/packages/view.html:471
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr ""
 "Permainan yang disokong ditentukan menggunakan algoritma, dan ia mungkin "
 "tidak betul."
 
-#: app/templates/packages/view.html:473
+#: app/templates/packages/view.html:481
+msgid "Please specify compatible games"
+msgstr ""
+
+#: app/templates/packages/view.html:487
 msgid "Information"
 msgstr "Maklumat"
 
-#: app/templates/packages/view.html:479
+#: app/templates/packages/view.html:493
 msgid "Technical Name"
 msgstr "Nama Teknikal"
 
-#: app/templates/packages/view.html:488
+#: app/templates/packages/view.html:502
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s untuk kod, <br>%(media_license)s untuk media."
 
-#: app/templates/packages/view.html:496
+#: app/templates/packages/view.html:510
 msgid "Unknown"
 msgstr "Tidak Diketahui"
 
-#: app/templates/packages/view.html:498
+#: app/templates/packages/view.html:512
 msgid "Added"
 msgstr "Ditambah Pada"
 
-#: app/templates/packages/view.html:512
+#: app/templates/packages/view.html:526
 msgid "Remove myself"
 msgstr "Keluarkan diri sendiri"
 
-#: app/templates/packages/view.html:517
+#: app/templates/packages/view.html:531
 msgid "Provides"
 msgstr "Menyediakan"
 
-#: app/templates/packages/view.html:539
+#: app/templates/packages/view.html:553
 msgid "More"
 msgstr "Lebih lagi"
 
-#: app/templates/packages/view.html:568
+#: app/templates/packages/view.html:582
 msgid "See audit log"
 msgstr "Lihat log audit"
 
@@ -3661,10 +3737,6 @@ msgstr "Senarai Kerja"
 msgid "Send Email"
 msgstr "Hantar E-mel"
 
-#: app/templates/users/profile.html:95
-msgid "Donate"
-msgstr "Derma"
-
 #: app/templates/users/profile.html:105
 msgid "packages"
 msgstr "pakej"
@@ -4096,3 +4168,10 @@ msgstr ""
 
 #~ msgid "Why?"
 #~ msgstr "Kenapa?"
+
+#~ msgid "You should add at least one screenshot, but this isn't required."
+#~ msgstr ""
+#~ "Anda patut tambah sekurang-kurangnya "
+#~ "satu tangkap layar, tetapi ia tidak "
+#~ "wajib."
+

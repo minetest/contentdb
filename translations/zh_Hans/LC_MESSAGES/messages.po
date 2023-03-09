@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-01-02 16:19+0000\n"
+"POT-Creation-Date: 2023-03-09 18:38+0000\n"
 "PO-Revision-Date: 2023-01-06 08:51+0000\n"
 "Last-Translator: Gao Tiesuan <yepifoas@666email.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"minetest/contentdb/zh_Hans/>\n"
 "Language: zh_Hans\n"
+"Language-Team: Chinese (Simplified) "
+"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hans/>\n"
+"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 4.15.1-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -51,18 +50,18 @@ msgstr "名称"
 msgid "Limit to package"
 msgstr "软件包限制"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:253
-#: app/blueprints/packages/packages.py:476
-#: app/blueprints/packages/packages.py:572
-#: app/blueprints/packages/packages.py:642
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:254
+#: app/blueprints/packages/packages.py:480
+#: app/blueprints/packages/packages.py:576
+#: app/blueprints/packages/packages.py:646
 #: app/blueprints/packages/releases.py:60
-#: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:47
+#: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:48
 #: app/blueprints/packages/screenshots.py:35
 #: app/blueprints/packages/screenshots.py:41
 #: app/blueprints/packages/screenshots.py:46
 #: app/blueprints/users/account.py:228 app/blueprints/users/account.py:235
-#: app/blueprints/users/settings.py:53 app/blueprints/users/settings.py:115
-#: app/blueprints/users/settings.py:269 app/templates/users/modtools.html:86
+#: app/blueprints/users/settings.py:53 app/blueprints/users/settings.py:123
+#: app/blueprints/users/settings.py:277 app/templates/users/modtools.html:86
 msgid "Save"
 msgstr "保存"
 
@@ -93,7 +92,7 @@ msgstr "编辑详细信息"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:529 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:543 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "发行版"
 
@@ -105,7 +104,7 @@ msgstr "截图"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:500
+#: app/templates/packages/view.html:514
 msgid "Maintainers"
 msgstr "维护者"
 
@@ -124,7 +123,8 @@ msgstr "统计"
 msgid "Share and Badges"
 msgstr "分享和徽章"
 
-#: app/blueprints/packages/__init__.py:67 app/templates/packages/view.html:131
+#: app/blueprints/packages/__init__.py:67 app/templates/packages/remove.html:36
+#: app/templates/packages/view.html:131
 msgid "Remove"
 msgstr "移除"
 
@@ -151,7 +151,7 @@ msgstr "错误：论坛贴子未找到。有可能该贴子刚刚创建。"
 msgid "No download available."
 msgstr "无可用下载。"
 
-#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:477
+#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:491
 msgid "Type"
 msgstr "类型"
 
@@ -160,12 +160,12 @@ msgid "Title (Human-readable)"
 msgstr "标题（人类可读）"
 
 #: app/blueprints/packages/packages.py:235
-#: app/blueprints/packages/packages.py:570
+#: app/blueprints/packages/packages.py:574
 msgid "Name (Technical)"
 msgstr "名称（技术性）"
 
 #: app/blueprints/packages/packages.py:235
-#: app/blueprints/packages/packages.py:571
+#: app/blueprints/packages/packages.py:575
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "只允许小写字母（a-z），数字（0-9），下划线（_）"
@@ -174,7 +174,7 @@ msgstr "只允许小写字母（a-z），数字（0-9），下划线（_）"
 msgid "Short Description (Plaintext)"
 msgstr "简短说明（纯文本）"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:492
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:506
 msgid "Maintenance State"
 msgstr "开发周期"
 
@@ -187,7 +187,7 @@ msgstr "标签"
 msgid "Content Warnings"
 msgstr "内容警告"
 
-#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:481
+#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:495
 msgid "License"
 msgstr "许可证"
 
@@ -219,83 +219,87 @@ msgstr "论坛贴子ID"
 msgid "Video URL"
 msgstr "视频URL"
 
-#: app/blueprints/packages/packages.py:257
+#: app/blueprints/packages/packages.py:252
+msgid "Donate URL"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:258
 msgid "_game is not an allowed name"
 msgstr "_game 不是一个准许的名字"
 
-#: app/blueprints/packages/packages.py:267
+#: app/blueprints/packages/packages.py:268
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr "该package已存在，但是已被移除。 请联系 ContentDB 的工作人员来回复该package"
 
-#: app/blueprints/packages/packages.py:272
+#: app/blueprints/packages/packages.py:273
 msgid "Package already exists"
 msgstr "软件包已存在"
 
-#: app/blueprints/packages/packages.py:330
+#: app/blueprints/packages/packages.py:332
 msgid "Unable to find that user"
 msgstr "找不到该用户"
 
-#: app/blueprints/packages/packages.py:334
+#: app/blueprints/packages/packages.py:336
 #: app/blueprints/packages/screenshots.py:139
-#: app/blueprints/users/settings.py:99
+#: app/blueprints/users/settings.py:107
 msgid "Permission denied"
 msgstr "拒绝访问"
 
-#: app/blueprints/packages/packages.py:390
-#: app/blueprints/packages/packages.py:439
-#: app/blueprints/packages/packages.py:455
+#: app/blueprints/packages/packages.py:392
+#: app/blueprints/packages/packages.py:443
+#: app/blueprints/packages/packages.py:459
 msgid "You don't have permission to do that"
 msgstr "你没有进行该操作的权限"
 
-#: app/blueprints/packages/packages.py:418
+#: app/blueprints/packages/packages.py:422
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "请在审核贴评论中说明需要作出哪些修改"
 
-#: app/blueprints/packages/packages.py:450
+#: app/blueprints/packages/packages.py:454
 msgid "Deleted package"
 msgstr "已删除的软件包"
 
-#: app/blueprints/packages/packages.py:466
+#: app/blueprints/packages/packages.py:470
 msgid "Unapproved package"
 msgstr "未通过的软件包"
 
-#: app/blueprints/packages/packages.py:475
+#: app/blueprints/packages/packages.py:479
 msgid "Maintainers (Comma-separated)"
 msgstr "维护者（用逗号隔开）"
 
-#: app/blueprints/packages/packages.py:484
+#: app/blueprints/packages/packages.py:488
 msgid "You don't have permission to edit maintainers"
 msgstr "你没有权限编辑维护者"
 
-#: app/blueprints/packages/packages.py:534
+#: app/blueprints/packages/packages.py:538
 msgid "You are not a maintainer"
 msgstr "你不是维护者"
 
-#: app/blueprints/packages/packages.py:537
+#: app/blueprints/packages/packages.py:541
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "软件包所有人不能把自己移除出维护者列表"
 
-#: app/blueprints/packages/packages.py:569
+#: app/blueprints/packages/packages.py:573
 msgid "Author Name"
 msgstr "作者名"
 
-#: app/blueprints/packages/packages.py:639
+#: app/blueprints/packages/packages.py:643
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "启用基于依赖的支持检测（推荐）"
 
-#: app/blueprints/packages/packages.py:640
+#: app/blueprints/packages/packages.py:644
 msgid "Supported games (Comma-separated)"
 msgstr "支持的游戏（用逗号隔开）"
 
-#: app/blueprints/packages/packages.py:641
+#: app/blueprints/packages/packages.py:645
 msgid "Unsupported games (Comma-separated)"
 msgstr "不支持的游戏（用逗号隔开）"
 
 #: app/blueprints/packages/releases.py:52
-#: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:43
-#: app/blueprints/threads/__init__.py:271 app/templates/macros/reviews.html:128
+#: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
+#: app/blueprints/threads/__init__.py:277 app/templates/macros/reviews.html:128
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
@@ -417,41 +421,48 @@ msgstr "已删除更新配置"
 msgid "Now, please create an initial release"
 msgstr "现在，请创建初始发行版"
 
-#: app/blueprints/packages/reviews.py:44 app/blueprints/threads/__init__.py:177
+#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:177
 #: app/blueprints/threads/__init__.py:178
-#: app/blueprints/threads/__init__.py:272
+#: app/blueprints/threads/__init__.py:278
 msgid "Comment"
 msgstr "评论"
 
-#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:273
+#: app/blueprints/packages/reviews.py:46 app/blueprints/threads/__init__.py:279
 msgid "Private"
 msgstr "私有"
 
-#: app/blueprints/packages/reviews.py:46 app/templates/macros/reviews.html:115
+#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:115
 #: app/templates/macros/reviews.html:154
 msgid "Yes"
 msgstr "是"
 
-#: app/blueprints/packages/reviews.py:46 app/templates/macros/reviews.html:119
+#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:158
 msgid "No"
 msgstr "否"
 
-#: app/blueprints/packages/reviews.py:54
+#: app/blueprints/packages/reviews.py:55
 msgid "You can't review your own package!"
 msgstr "你不能自己评测自己的软件包！"
 
-#: app/blueprints/packages/reviews.py:64
+#: app/blueprints/packages/reviews.py:65
 msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr "您最近评测了太多软件包。请稍候再试，并试着编写更详细的评论"
 
-#: app/blueprints/packages/reviews.py:178
+#: app/blueprints/packages/reviews.py:78 app/blueprints/threads/__init__.py:203
+#: app/blueprints/threads/__init__.py:236
+#: app/blueprints/threads/__init__.py:328 app/blueprints/users/settings.py:88
+#: app/logic/packages.py:125
+msgid "Linking to blocked sites is not allowed"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:182
 msgid "You can't vote on the reviews on your own package!"
 msgstr "你不能自己为自己软件包的评测投票！"
 
-#: app/blueprints/packages/reviews.py:186
+#: app/blueprints/packages/reviews.py:190
 msgid "You can't vote on your own reviews!"
 msgstr "你不能自己为自己的评测投票！"
 
@@ -470,7 +481,7 @@ msgid "Message"
 msgstr "消息"
 
 #: app/blueprints/report/__init__.py:35 app/templates/base.html:246
-#: app/templates/macros/threads.html:50 app/templates/packages/view.html:560
+#: app/templates/macros/threads.html:50 app/templates/packages/view.html:574
 #: app/templates/report/index.html:4 app/templates/report/index.html:15
 #: app/templates/users/profile.html:28
 msgid "Report"
@@ -504,24 +515,24 @@ msgstr "未锁定贴"
 msgid "Cannot delete thread opening post!"
 msgstr "无法删除一楼！"
 
-#: app/blueprints/threads/__init__.py:230
+#: app/blueprints/threads/__init__.py:232
 msgid "Please wait before commenting again"
 msgstr "请稍后再评论"
 
-#: app/blueprints/threads/__init__.py:274
+#: app/blueprints/threads/__init__.py:280
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
 msgstr "打开贴子"
 
-#: app/blueprints/threads/__init__.py:297
+#: app/blueprints/threads/__init__.py:303
 msgid "Unable to create thread!"
 msgstr "无法创建贴子！"
 
-#: app/blueprints/threads/__init__.py:303
+#: app/blueprints/threads/__init__.py:309
 msgid "An approval thread already exists! Consider replying there instead"
 msgstr "已有审核贴！请在现有的审核贴下回贴"
 
-#: app/blueprints/threads/__init__.py:307
+#: app/blueprints/threads/__init__.py:313
 msgid "Please wait before opening another thread"
 msgstr "请稍后开启另外一个贴子"
 
@@ -540,7 +551,7 @@ msgid "Remember me"
 msgstr "记住我"
 
 #: app/blueprints/users/account.py:40 app/templates/base.html:173
-#: app/templates/users/login.html:4
+#: app/templates/donate/index.html:70 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "登录"
 
@@ -569,7 +580,7 @@ msgstr "登录失败"
 msgid "Display Name"
 msgstr "显示名称"
 
-#: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:263
+#: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:271
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "用户名"
@@ -582,7 +593,7 @@ msgstr "只允许字母（A-Za-z）、数字（0-9）、下划线（_）、减�
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:189
 #: app/blueprints/users/account.py:224 app/blueprints/users/account.py:374
-#: app/blueprints/users/settings.py:114
+#: app/blueprints/users/settings.py:122
 msgid "Email"
 msgstr "电子邮件"
 
@@ -627,7 +638,7 @@ msgid ""
 msgstr "我们无法创建该账户，因为该电子邮件已经被 %(display_name)s 使用。请使用另一个电子邮件地址。"
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:253
-#: app/blueprints/users/settings.py:142
+#: app/blueprints/users/settings.py:150
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr "该电子邮件地址已被取消关注/列入黑名单，不能再使用"
 
@@ -860,31 +871,31 @@ msgstr "版主工具"
 msgid "Donation URL"
 msgstr "捐款网址"
 
-#: app/blueprints/users/settings.py:66 app/blueprints/users/settings.py:72
+#: app/blueprints/users/settings.py:68 app/blueprints/users/settings.py:75
 msgid "A user already has that name"
 msgstr "有用户已经占有该名称"
 
-#: app/blueprints/users/settings.py:224
+#: app/blueprints/users/settings.py:232
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr "不能删除版主或者以上的用户"
 
-#: app/blueprints/users/settings.py:264
+#: app/blueprints/users/settings.py:272
 msgid "Display name"
 msgstr "显示名称"
 
-#: app/blueprints/users/settings.py:265
+#: app/blueprints/users/settings.py:273
 msgid "Forums Username"
 msgstr "论坛用户名"
 
-#: app/blueprints/users/settings.py:266
+#: app/blueprints/users/settings.py:274
 msgid "GitHub Username"
 msgstr "GitHub用户名"
 
-#: app/blueprints/users/settings.py:267 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:275 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "等级"
 
-#: app/blueprints/users/settings.py:311
+#: app/blueprints/users/settings.py:319
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr "不能提升用户等级到比自己更高的等级！"
 
@@ -928,21 +939,21 @@ msgstr "您需要添加至少一个截图。"
 msgid "Please wait for the license to be added to CDB."
 msgstr "请等待许可证添加到 CDB。"
 
-#: app/logic/packages.py:95
+#: app/logic/packages.py:96
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr "名称只能包含小写字母（a-z）、数字（0-9）和下划线（_）"
 
-#: app/logic/packages.py:109
+#: app/logic/packages.py:110
 msgid "You don't have permission to edit this package"
 msgstr "你没有权限编辑这个软件包"
 
-#: app/logic/packages.py:113
+#: app/logic/packages.py:114
 msgid "You don't have permission to change the package name"
 msgstr "你没有权限重命名软件包"
 
-#: app/logic/packages.py:165
+#: app/logic/packages.py:171
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
 msgstr "无法将保护标签 %(title)s 加到软件包"
@@ -1168,11 +1179,15 @@ msgid "User List"
 msgstr "用户列表"
 
 #: app/templates/base.html:250 app/templates/packages/view.html:194
-#: app/templates/packages/view.html:549 app/templates/threads/list.html:4
+#: app/templates/packages/view.html:563 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "贴子"
 
 #: app/templates/base.html:251
+msgid "Support Packages"
+msgstr ""
+
+#: app/templates/base.html:252
 msgid "Source Code"
 msgstr "源代码"
 
@@ -1218,6 +1233,7 @@ msgstr "精选"
 #: app/templates/packages/game_hub.html:38
 #: app/templates/packages/game_hub.html:45
 #: app/templates/packages/game_hub.html:52
+#: app/templates/packages/game_hub.html:59
 msgid "See more"
 msgstr "查看更多"
 
@@ -1237,7 +1253,7 @@ msgstr "顶级子游戏"
 msgid "Top Mods"
 msgstr "顶级Mod"
 
-#: app/templates/index.html:131
+#: app/templates/index.html:131 app/templates/packages/game_hub.html:54
 msgid "Top Texture Packs"
 msgstr "顶级材质包"
 
@@ -1245,7 +1261,7 @@ msgstr "顶级材质包"
 msgid "Search by Tags"
 msgstr "标签搜索"
 
-#: app/templates/index.html:153 app/templates/packages/game_hub.html:54
+#: app/templates/index.html:153 app/templates/packages/game_hub.html:61
 msgid "Highest Reviewed"
 msgstr "评测最多"
 
@@ -1380,6 +1396,56 @@ msgstr "API文档"
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
 msgstr "没有已创建的令牌"
+
+#: app/templates/donate/index.html:4
+msgid "Support packages"
+msgstr ""
+
+#: app/templates/donate/index.html:32
+#, python-format
+msgid "by %(author)s"
+msgstr ""
+
+#: app/templates/donate/index.html:37
+msgid "View package"
+msgstr ""
+
+#: app/templates/donate/index.html:41 app/templates/users/profile.html:95
+msgid "Donate"
+msgstr "捐赠"
+
+#: app/templates/donate/index.html:54
+msgid "Some content creators are accepting donations for their work."
+msgstr ""
+
+#: app/templates/donate/index.html:55
+msgid ""
+"Donations are a great way to support your favorite modders, artists, and "
+"game developers."
+msgstr ""
+
+#: app/templates/donate/index.html:58
+msgid "Based on your reviews"
+msgstr ""
+
+#: app/templates/donate/index.html:63
+msgid ""
+"No reviewed packages accepting donations. Considering reviewing your "
+"favourite packages"
+msgstr ""
+
+#: app/templates/donate/index.html:67
+msgid "Sign in to see recommendations based on the packages you've reviewed"
+msgstr ""
+
+#: app/templates/donate/index.html:74
+msgid "Top packages"
+msgstr ""
+
+#: app/templates/donate/index.html:78
+#, python-format
+msgid "%(count)d packages are looking for donations"
+msgstr ""
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1526,8 +1592,8 @@ msgid "Release is still importing, or has an error."
 msgstr "发行版仍在导入，或遇到错误。"
 
 #: app/templates/macros/package_approval.html:56
-msgid "You should add at least one screenshot, but this isn't required."
-msgstr "您最好添加至少一个截图，但这并不必要。"
+msgid "You should add at least one screenshot."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1850,7 +1916,7 @@ msgstr "论坛贴子"
 #: app/templates/modnames/view.html:27
 #: app/templates/packages/game_support.html:37
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:406
-#: app/templates/packages/view.html:430 app/templates/packages/view.html:458
+#: app/templates/packages/view.html:430 app/templates/packages/view.html:460
 #: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -2025,6 +2091,10 @@ msgstr "提示：粘贴论坛贴子URL"
 msgid "YouTube videos will be shown in an embed."
 msgstr "YouTube视频将显示为嵌入元素。"
 
+#: app/templates/packages/create_edit.html:121
+msgid "If blank, the author's donation URL will be used instead."
+msgstr ""
+
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
 msgstr "编辑维护者"
@@ -2082,7 +2152,7 @@ msgid "mod.conf"
 msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
-#: app/templates/packages/view.html:462
+#: app/templates/packages/view.html:464
 msgid "No specific game is required"
 msgstr "不需要特定的子游戏"
 
@@ -2140,11 +2210,11 @@ msgstr ""
 msgid "Please check back again later."
 msgstr ""
 
-#: app/templates/packages/gone.html:42
+#: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
 msgstr ""
 
-#: app/templates/packages/gone.html:45
+#: app/templates/packages/gone.html:48
 msgid "Login"
 msgstr ""
 
@@ -2445,6 +2515,10 @@ msgstr "不批准/删除的原因，这将显示在审计日志中"
 msgid "Cancel"
 msgstr "取消"
 
+#: app/templates/packages/remove.html:39
+msgid "Unapprove"
+msgstr ""
+
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
@@ -2734,52 +2808,56 @@ msgstr "没有必需的依赖项"
 msgid "Optional"
 msgstr "可选"
 
-#: app/templates/packages/view.html:452
+#: app/templates/packages/view.html:454
 msgid "Compatible Games"
 msgstr "兼容子游戏"
 
-#: app/templates/packages/view.html:467
+#: app/templates/packages/view.html:470
 msgid "This is an experimental feature."
 msgstr "这是一个实验性功能。"
 
-#: app/templates/packages/view.html:468
+#: app/templates/packages/view.html:471
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr "支持的游戏是由算法计算，不保证正确性。"
 
-#: app/templates/packages/view.html:473
+#: app/templates/packages/view.html:481
+msgid "Please specify compatible games"
+msgstr ""
+
+#: app/templates/packages/view.html:487
 msgid "Information"
 msgstr "信息"
 
-#: app/templates/packages/view.html:479
+#: app/templates/packages/view.html:493
 msgid "Technical Name"
 msgstr "技术名称"
 
-#: app/templates/packages/view.html:488
+#: app/templates/packages/view.html:502
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "代码%(code_license)s，媒体%(media_license)s。"
 
-#: app/templates/packages/view.html:496
+#: app/templates/packages/view.html:510
 msgid "Unknown"
 msgstr "未知"
 
-#: app/templates/packages/view.html:498
+#: app/templates/packages/view.html:512
 msgid "Added"
 msgstr "添加时间"
 
-#: app/templates/packages/view.html:512
+#: app/templates/packages/view.html:526
 msgid "Remove myself"
 msgstr "移除自己"
 
-#: app/templates/packages/view.html:517
+#: app/templates/packages/view.html:531
 msgid "Provides"
 msgstr "提供"
 
-#: app/templates/packages/view.html:539
+#: app/templates/packages/view.html:553
 msgid "More"
 msgstr "更多"
 
-#: app/templates/packages/view.html:568
+#: app/templates/packages/view.html:582
 msgid "See audit log"
 msgstr "见审计日志"
 
@@ -3480,10 +3558,6 @@ msgstr "待办列表"
 msgid "Send Email"
 msgstr "发送电子邮件"
 
-#: app/templates/users/profile.html:95
-msgid "Donate"
-msgstr "捐赠"
-
 #: app/templates/users/profile.html:105
 msgid "packages"
 msgstr "软件包"
@@ -3811,3 +3885,7 @@ msgstr "请考虑启用电子邮件通知，您可以自定义发送的数量"
 
 #~ msgid "Why?"
 #~ msgstr "为什么？"
+
+#~ msgid "You should add at least one screenshot, but this isn't required."
+#~ msgstr "您最好添加至少一个截图，但这并不必要。"
+
