@@ -50,6 +50,10 @@
 
 {% block content %}
 	<h1>{{ self.title() }}</h1>
+	<p class="lead">
+		{{ _("Some content creators are accepting donations for their work.") }}
+		{{ _("Donations are a great way to support your favorite modders, artists, and game developers.") }}
+	</p>
 
 	<h2>{{ _("Based on your reviews") }}</h2>
 	{% if reviewed_packages %}
