@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-03-09 18:38+0000\n"
-"PO-Revision-Date: 2022-12-10 23:55+0000\n"
+"PO-Revision-Date: 2023-03-11 14:39+0000\n"
 "Last-Translator: Muhammad Rifqi Priyo Susanto "
 "<muhammadrifqipriyosusanto@gmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/id/>\n"
 "Language: id\n"
-"Language-Team: Indonesian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/id/>\n"
-"Plural-Forms: nplurals=1; plural=0\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.16.2-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -224,7 +225,7 @@ msgstr "URL Video"
 
 #: app/blueprints/packages/packages.py:252
 msgid "Donate URL"
-msgstr ""
+msgstr "URL Donasi"
 
 #: app/blueprints/packages/packages.py:258
 msgid "_game is not an allowed name"
@@ -463,7 +464,7 @@ msgstr ""
 #: app/blueprints/threads/__init__.py:328 app/blueprints/users/settings.py:88
 #: app/logic/packages.py:125
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "Tautan ke situs terblokir tidak dibolehkan"
 
 #: app/blueprints/packages/reviews.py:182
 msgid "You can't vote on the reviews on your own package!"
@@ -573,7 +574,7 @@ msgstr "Pengguna %(username)s tidak ada"
 
 #: app/blueprints/users/account.py:57
 msgid "Incorrect password. Did you set one?"
-msgstr "Kata sandi salah. Sudahkah Anda mengaturnya?"
+msgstr "Kata sandi salah. Apakah Anda telah mengaturnya?"
 
 #: app/blueprints/users/account.py:60
 msgid "You need to confirm the registration email"
@@ -629,11 +630,11 @@ msgstr "Nama pengguna tidak sah"
 
 #: app/blueprints/users/account.py:131
 msgid "An account already exists for that username but hasn't been claimed yet."
-msgstr "Akun lain dengan nama pengguna ini sudah ada, tetapi belum diklaim."
+msgstr "Akun lain dengan nama pengguna ini telah ada, tetapi belum diklaim."
 
 #: app/blueprints/users/account.py:134 app/blueprints/users/account.py:141
 msgid "That username/display name is already in use, please choose another."
-msgstr "Nama pengguna/tampilan ini sudah dipakai. Harap pilih lainnya."
+msgstr "Nama pengguna/tampilan ini telah dipakai. Harap pilih lainnya."
 
 #: app/blueprints/users/account.py:146 app/blueprints/users/account.py:258
 msgid "Email already in use"
@@ -1026,7 +1027,7 @@ msgstr "Harap unggah %(file_desc)s"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr "Citra yang diunggah bukanlah citra"
+msgstr "Citra yang diunggah sejatinya bukan citra"
 
 #: app/models/packages.py:66
 msgid "Mod"
@@ -1119,7 +1120,7 @@ msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
-"Halaman ini tidak ditemukan. Tautannya mungkin rusak, halamannya sudah "
+"Halaman ini tidak ditemukan. Tautannya mungkin rusak, halamannya telah "
 "dihapus, atau Anda tidak memiliki akses ke sini."
 
 #: app/templates/base.html:36
@@ -1221,7 +1222,7 @@ msgstr "Utas"
 
 #: app/templates/base.html:251
 msgid "Support Packages"
-msgstr ""
+msgstr "Dukung Paket"
 
 #: app/templates/base.html:252
 msgid "Source Code"
@@ -1390,7 +1391,7 @@ msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
-"Hati-hati terhadap orang yang diberi token karena Anda bertanggung jawab "
+"Hati-hati terhadap pihak yang diberi token karena Anda bertanggung jawab "
 "terhadap tindakan atas nama akun Anda."
 
 #: app/templates/api/create_edit_token.html:30
@@ -1439,16 +1440,16 @@ msgstr "Tidak ada token yang dibuat"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
-msgstr ""
+msgstr "Dukung paket-paket"
 
 #: app/templates/donate/index.html:32
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "oleh %(author)s"
 
 #: app/templates/donate/index.html:37
 msgid "View package"
-msgstr ""
+msgstr "Lihat paket"
 
 #: app/templates/donate/index.html:41 app/templates/users/profile.html:95
 msgid "Donate"
@@ -1456,36 +1457,39 @@ msgstr "Donasi"
 
 #: app/templates/donate/index.html:54
 msgid "Some content creators are accepting donations for their work."
-msgstr ""
+msgstr "Beberapa kreator konten menerima donasi untuk karya mereka."
 
 #: app/templates/donate/index.html:55
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
+"Donasi salah satu cara bagus untuk mendukung pembuat mod, seniman, dan "
+"pengembang permainan kesukaan Anda."
 
 #: app/templates/donate/index.html:58
 msgid "Based on your reviews"
-msgstr ""
+msgstr "Berdasarkan ulasan Anda"
 
 #: app/templates/donate/index.html:63
 msgid ""
 "No reviewed packages accepting donations. Considering reviewing your "
 "favourite packages"
 msgstr ""
+"Tidak ada ulasan paket yang menerima donasi. Harap ulas paket kesukaan Anda"
 
 #: app/templates/donate/index.html:67
 msgid "Sign in to see recommendations based on the packages you've reviewed"
-msgstr ""
+msgstr "Masuk untuk melihat saran berdasarkan paket yang telah Anda ulas"
 
 #: app/templates/donate/index.html:74
 msgid "Top packages"
-msgstr ""
+msgstr "Paket teratas"
 
 #: app/templates/donate/index.html:78
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d paket menerima donasi"
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1649,7 +1653,7 @@ msgstr "Rilis sedang mengimpor atau mengalami masalah."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr ""
+msgstr "Anda perlu menambah setidaknya satu tangkapan layar."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1870,7 +1874,7 @@ msgstr "Utas ini telah dikunci oleh moderator."
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "Balas"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
@@ -2078,7 +2082,7 @@ msgstr "Buat Paket"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
-msgstr "Sudahkan Anda membaca Kebijakan dan Panduan Penambahan Paket?"
+msgstr "Apakah Anda telah membaca Kebijakan dan Panduan Penambahan Paket?"
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
@@ -2167,7 +2171,7 @@ msgstr "Video YouTube akan ditampilkan sebagai sematan."
 
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
-msgstr ""
+msgstr "Jika kosong, URL donasi pembuat yang akan dipakai."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2252,51 +2256,55 @@ msgstr "Ditimpa Editor"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr ""
+msgstr "Paket Dihapus"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
-msgstr ""
+msgstr "Paket ini telah ditarik dari publikasi."
 
 #: app/templates/packages/gone.html:22
 msgid ""
 "It may have been removed by choice of the author, or by ContentDB staff "
 "due to a problem."
 msgstr ""
+"Ini mungkin telah dihapus oleh kehendak pembuat atau oleh staf ContentDB "
+"karena suatu masalah."
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
-msgstr ""
+msgstr "Paket dalam Tinjauan"
 
 #: app/templates/packages/gone.html:27
 msgid "This package is currently undergoing review"
-msgstr ""
+msgstr "Paket ini sedang dalam peninjauan"
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr ""
+msgstr "Paket Yang Belum Dikirim"
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
-msgstr ""
+msgstr "Paket ini telah dibuat, tetapi belum dikirim untuk disetujui."
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
 msgstr ""
+"Paket ini sedang dalam peninjauan dan ada perubahan yang diperlukan sebelum "
+"bisa ditambahkan."
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr ""
+msgstr "Harap periksa lagi nanti."
 
 #: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
-msgstr ""
+msgstr "Atau, jika Anda pembuatnya, masuk untuk melihat informasi lebih lanjut."
 
 #: app/templates/packages/gone.html:48
 msgid "Login"
-msgstr ""
+msgstr "Masuk"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2619,7 +2627,7 @@ msgstr "Batal"
 
 #: app/templates/packages/remove.html:39
 msgid "Unapprove"
-msgstr ""
+msgstr "Batalkan Persetujuan"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2631,7 +2639,7 @@ msgstr "Pos ulasan untuk %(title)s oleh %(author)s"
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr ""
-"Menemukan sebuah masalah? Pos di <a href=\"%(url)s\">pelacak masalah</a> "
+"Menemukan sebuah masalah? Tulis di <a href=\"%(url)s\">pelacak masalah</a> "
 "saja."
 
 #: app/templates/packages/review_create_edit.html:56
@@ -2643,7 +2651,7 @@ msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
 msgstr ""
-"Ini akan mengubah ulasan ke dalam utas, menyimpan komentar, tetapi "
+"Ini akan mengubah ulasan ke dalam utas, yaitu menyimpan komentar, tetapi "
 "menghapus dampaknya terhadap penilaian paket."
 
 #: app/templates/packages/review_votes.html:4
@@ -2706,11 +2714,11 @@ msgstr "Tanpa tangkapan layar."
 
 #: app/templates/packages/screenshots.html:80
 msgid "Save Order"
-msgstr "Simpan Permintaan"
+msgstr "Simpan Urutan"
 
 #: app/templates/packages/screenshots.html:85
 msgid "Reordering requires JavaScript."
-msgstr "Permintaan ulang memerlukan JavaScript."
+msgstr "Pengurutan ulang memerlukan JavaScript."
 
 #: app/templates/packages/screenshots.html:100
 msgid "Videos"
@@ -2874,7 +2882,7 @@ msgstr "Anda tidak dapat mengulas paket Anda sendiri."
 
 #: app/templates/packages/view.html:320
 msgid "Package needs to be approved before it can be reviewed."
-msgstr ""
+msgstr "Paket perlu disetujui sebelum bisa diulas."
 
 #: app/templates/packages/view.html:331
 msgid "Used By"
@@ -2938,7 +2946,7 @@ msgstr "Permainan yang didukung ditentukan oleh algoritme dan bisa saja keliru."
 
 #: app/templates/packages/view.html:481
 msgid "Please specify compatible games"
-msgstr ""
+msgstr "Harap masukkan permainan yang kompatibel"
 
 #: app/templates/packages/view.html:487
 msgid "Information"
@@ -3611,7 +3619,7 @@ msgstr "Nonaktifkan"
 
 #: app/templates/users/delete.html:40
 msgid "Delete Anyway"
-msgstr "Tetap Hapus Saja"
+msgstr "Tetap Hapus"
 
 #: app/templates/users/email_sent.html:4
 msgid "Check Your Email"
@@ -4102,4 +4110,3 @@ msgstr ""
 #~ msgstr ""
 #~ "Anda harap menambahkan setidaknya satu "
 #~ "tangkapan layar meski ini tidak wajib."
-
