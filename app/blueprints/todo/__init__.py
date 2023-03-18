@@ -131,7 +131,7 @@ def tags():
 
 	only_no_tags = isYes(request.args.get("no_tags"))
 	if only_no_tags:
-		query = query.filter(Package.tags.is_(None))
+		query = query.filter(Package.tags==None)
 
 	tags = Tag.query.order_by(db.asc(Tag.title)).all()
 
