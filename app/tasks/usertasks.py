@@ -27,7 +27,7 @@ from app.tasks import celery
 def delete_inactive_users():
 	threshold = datetime.datetime.now() - datetime.timedelta(hours=5)
 
-	users = User.query.filter(User.is_active == False, User.packages == None, User.forum_topics == None,
+	users = User.query.filter(User.is_active == False, User.packages.is_(None), User.forum_topics.is_(None),
 			User.created_at <= threshold, User.rank == UserRank.NOT_JOINED).all()
 	for user in users:
 		db.session.delete(user)

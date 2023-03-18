@@ -19,7 +19,7 @@ from flask import Blueprint, request, jsonify
 bp = Blueprint("gitlab", __name__)
 
 from app import csrf
-from app.models import Package, APIToken, Permission
+from app.models import Package, APIToken, Permission, PackageState
 from app.blueprints.api.support import error, api_create_vcs_release
 
 
@@ -28,7 +28,8 @@ def webhook_impl():
 
 	# Get package
 	gitlab_url = json["project"]["web_url"].replace("https://", "").replace("http://", "")
-	package = Package.query.filter(Package.repo.ilike("%{}%".format(gitlab_url))).first()
+	package = Package.query.filter(
+		Package.repo.ilike("%{}%".format(gitlab_url)), Package.state != PackageState.DELETED).first()
 	if package is None:
 		return error(400,
 				"Could not find package, did you set the VCS repo in CDB correctly? Expected {}".format(gitlab_url))

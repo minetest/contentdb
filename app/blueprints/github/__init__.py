@@ -23,7 +23,7 @@ from flask import redirect, url_for, request, flash, jsonify, current_app
 from flask_login import current_user
 from sqlalchemy import func, or_, and_
 from app import github, csrf
-from app.models import db, User, APIToken, Package, Permission, AuditSeverity
+from app.models import db, User, APIToken, Package, Permission, AuditSeverity, PackageState
 from app.utils import abs_url_for, addAuditLog, login_user_set_active
 from app.blueprints.api.support import error, api_create_vcs_release
 import hmac, requests
@@ -89,13 +89,14 @@ def webhook():
 
 	# Get package
 	github_url = "github.com/" + json["repository"]["full_name"]
-	package = Package.query.filter(Package.repo.ilike("%{}%".format(github_url))).first()
+	package = Package.query.filter(
+		Package.repo.ilike("%{}%".format(github_url)), Package.state != PackageState.DELETED).first()
 	if package is None:
 		return error(400, "Could not find package, did you set the VCS repo in CDB correctly? Expected {}".format(github_url))
 
 	# Get all tokens for package
 	tokens_query = APIToken.query.filter(or_(APIToken.package==package,
-			and_(APIToken.package==None, APIToken.owner==package.author)))
+			and_(APIToken.package.is_(None), APIToken.owner==package.author)))
 
 	possible_tokens = tokens_query.all()
 	actual_token = None
