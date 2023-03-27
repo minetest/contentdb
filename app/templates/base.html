@@ -234,7 +234,7 @@
 
 	<footer class="my-5">
 		<p class="pt-5 mb-1">
-			ContentDB &copy; 2018-23 to <a href="/about/">rubenwardy</a>
+			ContentDB &copy; 2018-23 to <a href="https://rubenwardy.com/">rubenwardy</a>
 		</p>
 
 		<ul class="list-inline my-1">
@@ -242,7 +242,6 @@
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help/api') }}">{{ _("API") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a></li>
-			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='about') }}">{{ _("About") }}</a></li>
 			{% if request.endpoint != "flatpage" and request.endpoint != "report.report" %}
 				<li class="list-inline-item"><a href="{{ url_for('report.report', url=url_current()) }}">{{ _("Report / DMCA") }}</a></li>
 			{% endif %}
