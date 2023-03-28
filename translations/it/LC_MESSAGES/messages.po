@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-03-09 18:38+0000\n"
-"PO-Revision-Date: 2022-06-19 19:16+0000\n"
-"Last-Translator: Pietro Cappuccino <p.cappuccino@tiscali.it>\n"
+"PO-Revision-Date: 2023-03-27 14:57+0000\n"
+"Last-Translator: Giov4 <brancacciogiovanni1@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -117,7 +118,7 @@ msgstr "Log di Audit"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:232 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiche"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -131,7 +132,7 @@ msgstr "Rimuovi"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Giochi Supportati"
 
 #: app/blueprints/packages/packages.py:163
 msgid "Error: Another package already uses this forum topic!"
@@ -225,17 +226,19 @@ msgstr "URL del Video"
 
 #: app/blueprints/packages/packages.py:252
 msgid "Donate URL"
-msgstr ""
+msgstr "URL Donazioni"
 
 #: app/blueprints/packages/packages.py:258
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game non è un nome consentito"
 
 #: app/blueprints/packages/packages.py:268
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Il contenuto esiste già, ma è stato rimosso. Contatta lo staff di ContentDB "
+"perché venga ripristinato"
 
 #: app/blueprints/packages/packages.py:273
 msgid "Package already exists"
@@ -296,14 +299,15 @@ msgstr "Nome dell'Autore"
 #: app/blueprints/packages/packages.py:643
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr ""
+"Abilita il rilevamento del supporto in base alle dipendenze (consigliato)"
 
 #: app/blueprints/packages/packages.py:644
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Giochi supportati (separati da virgole)"
 
 #: app/blueprints/packages/packages.py:645
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Giochi non supportati (separati da virgole)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
@@ -469,7 +473,7 @@ msgstr ""
 #: app/blueprints/threads/__init__.py:328 app/blueprints/users/settings.py:88
 #: app/logic/packages.py:125
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "Non è consentito il reindirizzamento a siti bloccati"
 
 #: app/blueprints/packages/reviews.py:182
 msgid "You can't vote on the reviews on your own package!"
@@ -949,6 +953,8 @@ msgstr "Ricerca"
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
+"Esiste già un contenuto con questo nome. Si prega di consultare Polizza e "
+"Tutoraggio 3"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
@@ -1064,7 +1070,7 @@ msgstr "Giochi"
 
 #: app/models/packages.py:79 app/templates/base.html:33
 msgid "Texture Packs"
-msgstr "Raccolte di Textures"
+msgstr "Pacchetti di Texture"
 
 #: app/models/packages.py:168
 msgid "Submit for Approval"
@@ -1153,7 +1159,7 @@ msgstr "Cerca %(type)s"
 #: app/templates/base.html:46 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
-msgstr "Cerca tutti i contenuti"
+msgstr "Cerca tra tutti i contenuti"
 
 #: app/templates/base.html:65
 msgid "Work Queue"
@@ -1234,7 +1240,7 @@ msgstr "Discussioni"
 
 #: app/templates/base.html:251
 msgid "Support Packages"
-msgstr ""
+msgstr "Supporta i Contenuti"
 
 #: app/templates/base.html:252
 msgid "Source Code"
@@ -1304,7 +1310,7 @@ msgstr "Moduli Migliori"
 
 #: app/templates/index.html:131 app/templates/packages/game_hub.html:54
 msgid "Top Texture Packs"
-msgstr "Raccolte di Textures Migliori"
+msgstr "Migliori Pacchetti di Texture"
 
 #: app/templates/index.html:135
 msgid "Search by Tags"
@@ -1454,16 +1460,16 @@ msgstr "Nessun gettone creato"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
-msgstr ""
+msgstr "Supporta i contenuti"
 
 #: app/templates/donate/index.html:32
-#, python-format
+#, fuzzy, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "da %(author)s"
 
 #: app/templates/donate/index.html:37
 msgid "View package"
-msgstr ""
+msgstr "Visualizza contenuto"
 
 #: app/templates/donate/index.html:41 app/templates/users/profile.html:95
 msgid "Donate"
@@ -1471,36 +1477,40 @@ msgstr "Dona"
 
 #: app/templates/donate/index.html:54
 msgid "Some content creators are accepting donations for their work."
-msgstr ""
+msgstr "Alcuni creatori di contenuti accettano donazioni per il loro lavoro."
 
 #: app/templates/donate/index.html:55
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
+"Le donazioni sono un ottimo modo per supportare i tuoi modder, artisti e "
+"sviluppatori di giochi preferiti."
 
 #: app/templates/donate/index.html:58
 msgid "Based on your reviews"
-msgstr ""
+msgstr "In base alle tue recensioni"
 
 #: app/templates/donate/index.html:63
 msgid ""
 "No reviewed packages accepting donations. Considering reviewing your "
 "favourite packages"
 msgstr ""
+"Nessun contenuto recensito accetta donazioni. Considerare la possibilità di "
+"rivedere i tuoi contenuti preferiti"
 
 #: app/templates/donate/index.html:67
 msgid "Sign in to see recommendations based on the packages you've reviewed"
-msgstr ""
+msgstr "Accedi per visualizzare consigli basati sui contenuti che hai recensito"
 
 #: app/templates/donate/index.html:74
 msgid "Top packages"
-msgstr ""
+msgstr "Migliori contenuti"
 
 #: app/templates/donate/index.html:78
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d contenuti sono alla ricerca di donazioni"
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1666,7 +1676,7 @@ msgstr "Il rilascio è ancora in fase di importo o si è verificato un errore."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr ""
+msgstr "Dovresti aggiungere almeno uno screenshot."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1797,40 +1807,41 @@ msgstr "Pubblica una Recensione"
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "Contenuti di %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "JavaScript è necessario per visualizzare grafici e statistiche"
 
 #: app/templates/macros/stats.html:45
+#, fuzzy
 msgid "Lifetime unique downloads"
-msgstr ""
+msgstr "Scaricamenti unici nel tempo"
 
 #: app/templates/macros/stats.html:59
 msgid "Downloads, past 7 days"
-msgstr ""
+msgstr "Scaricamenti, ultimi 7 giorni"
 
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "%(downloads)s al giorno"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "Scaricamenti, ultimi 30 giorni"
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "Caricamento..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
-msgstr ""
+msgstr "Nessun dato"
 
 #: app/templates/macros/stats.html:97
 msgid "Downloads by Package"
-msgstr ""
+msgstr "Scaricamenti per Contenuto"
 
 #: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
 #: app/templates/macros/stats.html:118
@@ -1838,44 +1849,56 @@ msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
 msgstr ""
+"Si tratta di un grafico ad area sovrapposta. Per gli scaricamenti totali, "
+"osserva l'altezza combinata."
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Client"
-msgstr ""
+msgstr "Scaricamenti per Client"
 
 #: app/templates/macros/stats.html:110
+#, fuzzy
 msgid "Downloads by Reason"
-msgstr ""
+msgstr "Scaricamenti per Motivo"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
 msgstr ""
+"<b>Nuova installazione</b>: l'utente ha fatto clic su [Installa] all'interno "
+"di Minetest."
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
+"<b>Dipendenza</b>: è stata installata automaticamente per soddisfare una "
+"dipendenza."
 
 #: app/templates/macros/stats.html:114
 msgid "<b>Update</b>: download was to update the package."
 msgstr ""
+"<b>Aggiornamento</b>: lo scaricamento serviva per aggiornare il contenuto."
 
 #: app/templates/macros/stats.html:115
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
 msgstr ""
+"<b>Altro / Sconosciuto</b>: scaricato da un browser Web o da una versione "
+"obsoleta di Minetest (precedente alla 5.5)."
 
 #: app/templates/macros/stats.html:127
 msgid "Need more stats?"
-msgstr ""
+msgstr "Hai bisogno di più statistiche?"
 
 #: app/templates/macros/stats.html:129
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
 msgstr ""
+"Controlla il pannello Grafana di ContentDB per le statistiche relative a "
+"tutto il CDB"
 
 #: app/templates/macros/stats.html:133
 msgid "ContentDB Grafana"
-msgstr ""
+msgstr "Grafana di ContentDB"
 
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
@@ -1887,7 +1910,7 @@ msgstr "Questa discussione è stata bloccata da un moderatore."
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "Rispondi"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
@@ -1975,16 +1998,16 @@ msgstr "Vecchio"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Nomi Mod"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "Nessun nome di mod trovato."
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Nome Mod \"%(name)s\""
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
@@ -2188,7 +2211,7 @@ msgstr "I video di YouTube verranno mostrati come incorporati."
 
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
-msgstr ""
+msgstr "Se vuoto, verrà utilizzato l'URL per le donazioni dell'autore."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2227,7 +2250,7 @@ msgstr "Moduli per %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr ""
+msgstr "Documentazione"
 
 #: app/templates/packages/game_support.html:24
 #: app/templates/packages/view.html:215
@@ -2236,19 +2259,21 @@ msgstr "Sorgente"
 
 #: app/templates/packages/game_support.html:27
 msgid "Supported?"
-msgstr ""
+msgstr "Supportato?"
 
 #: app/templates/packages/game_support.html:42
 msgid "Detected from dependencies"
-msgstr ""
+msgstr "Rilevato dalle dipendenze"
 
 #: app/templates/packages/game_support.html:44
+#, fuzzy
 msgid "Added by Editor"
-msgstr ""
+msgstr "Aggiunto dall'Editor"
 
 #: app/templates/packages/game_support.html:46
+#, fuzzy
 msgid "mod.conf"
-msgstr ""
+msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
 #: app/templates/packages/view.html:464
@@ -2257,65 +2282,74 @@ msgstr "Non è richiesto alcun gioco specifico"
 
 #: app/templates/packages/game_support.html:68
 msgid "Generated mod.conf lines"
-msgstr ""
+msgstr "Linee mod.conf generate"
 
 #: app/templates/packages/game_support.html:82
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
 msgstr ""
+"È necessario definire manualmente almeno un gioco supportato prima di "
+"poterlo disattivare."
 
 #: app/templates/packages/game_support.html:88
 msgid "Editor Overrides"
-msgstr ""
+msgstr "Sostituzioni dell'editor"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr ""
+msgstr "Contenuto Rimosso"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
-msgstr ""
+msgstr "Questo contenuto è stato reso non pubblico."
 
 #: app/templates/packages/gone.html:22
 msgid ""
 "It may have been removed by choice of the author, or by ContentDB staff "
 "due to a problem."
 msgstr ""
+"Potrebbe essere stato rimosso per scelta dell'autore o dallo staff di "
+"ContentDB a causa di un problema."
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
-msgstr ""
+msgstr "Contenuto in fase di revisione"
 
 #: app/templates/packages/gone.html:27
 msgid "This package is currently undergoing review"
-msgstr ""
+msgstr "Questo contenuto è attualmente in fase di revisione"
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr ""
+msgstr "Contenuto non ancora inviato"
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
 msgstr ""
+"Questo contenuto è stato creato ma non è stato ancora inviato per "
+"l'approvazione."
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
 msgstr ""
+"Questo contenuto è attualmente in fase di revisione e sono necessarie "
+"modifiche prima di poterlo aggiungere."
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr ""
+msgstr "Si prega di ricontrollare più tardi."
 
 #: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
 msgstr ""
+"Oppure, se sei l'autore, accedi per visualizzare ulteriori informazioni."
 
 #: app/templates/packages/gone.html:48
 msgid "Login"
-msgstr ""
+msgstr "Accedi"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2643,7 +2677,7 @@ msgstr "Annulla"
 
 #: app/templates/packages/remove.html:39
 msgid "Unapprove"
-msgstr ""
+msgstr "Non approvare"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2774,7 +2808,7 @@ msgstr "Argomenti del Forum Simili"
 
 #: app/templates/packages/stats.html:17
 msgid "Download (.csv)"
-msgstr ""
+msgstr "Scarica (.csv)"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -2902,7 +2936,7 @@ msgstr "Non potete recensire un vostro contenuto."
 
 #: app/templates/packages/view.html:320
 msgid "Package needs to be approved before it can be reviewed."
-msgstr ""
+msgstr "Il contenuto deve essere approvato prima di poter essere recensito."
 
 #: app/templates/packages/view.html:331
 msgid "Used By"
@@ -2970,7 +3004,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:481
 msgid "Please specify compatible games"
-msgstr ""
+msgstr "Si prega di specificare i giochi compatibili"
 
 #: app/templates/packages/view.html:487
 msgid "Information"
@@ -3014,10 +3048,12 @@ msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
 msgstr ""
+"A causa dello spam, non accettiamo più segnalazioni da utenti anonimi in "
+"questo modulo."
 
 #: app/templates/report/index.html:21
 msgid "Please sign in or contact the admin in another way"
-msgstr ""
+msgstr "Effettuare l'accesso o contattare l'amministratore in altro modo"
 
 #: app/templates/report/index.html:39
 msgid "What are you reporting? Why are you reporting it?"
@@ -3191,6 +3227,8 @@ msgstr "Dipendenze Non Soddisfatte"
 #: app/templates/todo/editor.html:151
 msgid "Mod names that have hard dependers, but no packages providing them."
 msgstr ""
+"Nomi di mod che hanno dipendenze obbligatorie, ma nessun pacchetto che le "
+"fornisca."
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -3203,7 +3241,7 @@ msgstr "Azioni Recenti"
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
-msgstr ""
+msgstr "Pacchetti che non supportano %(rel)s"
 
 #: app/templates/todo/mtver_support.html:13
 #: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
@@ -3229,12 +3267,12 @@ msgstr "Tutti i Contenuti Obsoleti"
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
 #: app/templates/todo/user.html:68
 msgid "Missing Screenshots"
-msgstr ""
+msgstr "Screenshot mancanti"
 
 #: app/templates/todo/screenshots.html:33
 #, python-format
 msgid "%(count)d packages"
-msgstr ""
+msgstr "%(count)d contenuti"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -3250,11 +3288,11 @@ msgstr "Modifica le Etichette"
 
 #: app/templates/todo/todo_base.html:11
 msgid "Your to do list"
-msgstr ""
+msgstr "La tua lista di cose da fare"
 
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
-msgstr ""
+msgstr "Contenuti Obsoleti"
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
@@ -3497,6 +3535,8 @@ msgid ""
 "ContentDB will link your account to your forum account if you have one, "
 "but you don't need one."
 msgstr ""
+"ContentDB assocerà il tuo account a quello del forum, se ne hai uno, ma non "
+"è obbligatorio."
 
 #: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
@@ -3885,7 +3925,7 @@ msgstr "Come resoconto"
 #: app/templates/users/stats.html:4
 #, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr ""
+msgstr "Statistiche per i contenuti di %(display_name)s"
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
@@ -3996,4 +4036,3 @@ msgstr ""
 #~ "Dovreste aggiungere almeno una cattura "
 #~ "dello schermo, ma non è strettamente "
 #~ "richiesto."
-
