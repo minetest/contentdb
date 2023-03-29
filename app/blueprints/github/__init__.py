@@ -96,7 +96,7 @@ def webhook():
 
 	# Get all tokens for package
 	tokens_query = APIToken.query.filter(or_(APIToken.package==package,
-			and_(APIToken.package.is_(None), APIToken.owner==package.author)))
+			and_(APIToken.package==None, APIToken.owner==package.author)))
 
 	possible_tokens = tokens_query.all()
 	actual_token = None

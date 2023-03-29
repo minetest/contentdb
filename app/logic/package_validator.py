@@ -19,7 +19,7 @@ def validate_package_for_approval(package: Package) -> List[ValidationError]:
 					 Package.name == normalised_name + "_game"))).count() > 0:
 		retval.append(("danger", lazy_gettext("A package already exists with this name. Please see Policy and Guidance 3")))
 
-	if package.releases.filter(PackageRelease.task_id.is_(None)).count() == 0:
+	if package.releases.filter(PackageRelease.task_id==None).count() == 0:
 		retval.append(("danger", lazy_gettext("A release is required before this package can be approved.")))
 		# Don't bother validating any more until we have a release
 		return retval

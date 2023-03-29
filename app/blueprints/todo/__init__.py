@@ -307,7 +307,7 @@ def mtver_support():
 	current_stable = MinetestRelease.query.filter(~MinetestRelease.name.like("%-dev")).order_by(db.desc(MinetestRelease.id)).first()
 
 	query = db.session.query(Package) \
-			.filter(~Package.releases.any(or_(PackageRelease.max_rel.is_(None), PackageRelease.max_rel == current_stable))) \
+			.filter(~Package.releases.any(or_(PackageRelease.max_rel==None, PackageRelease.max_rel == current_stable))) \
 			.filter(Package.state == PackageState.APPROVED)
 
 	if is_mtm_only:

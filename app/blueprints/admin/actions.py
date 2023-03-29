@@ -107,7 +107,7 @@ def import_screenshots():
 	packages = Package.query \
 		.filter(Package.state != PackageState.DELETED) \
 		.outerjoin(PackageScreenshot, Package.id == PackageScreenshot.package_id) \
-		.filter(PackageScreenshot.id.is_(None)) \
+		.filter(PackageScreenshot.id==None) \
 		.all()
 	for package in packages:
 		importRepoScreenshot.delay(package.id)
@@ -293,12 +293,12 @@ def delete_inactive_users():
 @action("Send Video URL notification")
 def remind_video_url():
 	users = User.query.filter(User.maintained_packages.any(
-			and_(Package.video_url.is_(None), Package.type==PackageType.GAME, Package.state==PackageState.APPROVED)))
+			and_(Package.video_url==None, Package.type==PackageType.GAME, Package.state==PackageState.APPROVED)))
 	system_user = get_system_user()
 	for user in users:
 		packages = db.session.query(Package.title).filter(
 				or_(Package.author==user, Package.maintainers.any(User.id==user.id)),
-				Package.video_url.is_(None),
+				Package.video_url==None,
 				Package.type == PackageType.GAME,
 				Package.state == PackageState.APPROVED) \
 			.all()

@@ -748,7 +748,7 @@ class Package(db.Model):
 				(self.type == self.type.GAME or self.type == self.type.TXP) and \
 					self.screenshots.count() == 0
 
-			return self.releases.filter(PackageRelease.task_id.is_(None)).count() > 0 and not needsScreenshot
+			return self.releases.filter(PackageRelease.task_id==None).count() > 0 and not needsScreenshot
 
 		elif state == PackageState.CHANGES_NEEDED:
 			return self.checkPerm(user, Permission.APPROVE_NEW)

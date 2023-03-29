@@ -109,9 +109,9 @@ class QueryBuilder:
 
 		if self.version:
 			releases_query = releases_query \
-				.filter(or_(PackageRelease.min_rel_id.is_(None),
+				.filter(or_(PackageRelease.min_rel_id==None,
 					PackageRelease.min_rel_id <= self.version.id)) \
-				.filter(or_(PackageRelease.max_rel_id.is_(None),
+				.filter(or_(PackageRelease.max_rel_id==None,
 					PackageRelease.max_rel_id >= self.version.id))
 
 		return releases_query.all()
@@ -173,16 +173,16 @@ class QueryBuilder:
 			query = query.filter(Package.media_license.has(License.is_foss == True))
 
 		if self.hide_wip:
-			query = query.filter(or_(Package.dev_state.is_(None), Package.dev_state != PackageDevState.WIP))
+			query = query.filter(or_(Package.dev_state==None, Package.dev_state != PackageDevState.WIP))
 		if self.hide_deprecated:
-			query = query.filter(or_(Package.dev_state.is_(None), Package.dev_state != PackageDevState.DEPRECATED))
+			query = query.filter(or_(Package.dev_state==None, Package.dev_state != PackageDevState.DEPRECATED))
 
 		if self.version:
 			query = query.join(Package.releases) \
 				.filter(PackageRelease.approved == True) \
-				.filter(or_(PackageRelease.min_rel_id.is_(None),
+				.filter(or_(PackageRelease.min_rel_id==None,
 					PackageRelease.min_rel_id <= self.version.id)) \
-				.filter(or_(PackageRelease.max_rel_id.is_(None),
+				.filter(or_(PackageRelease.max_rel_id==None,
 					PackageRelease.max_rel_id >= self.version.id))
 
 		return query
