@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-03-09 18:38+0000\n"
-"PO-Revision-Date: 2022-12-13 22:47+0000\n"
+"PO-Revision-Date: 2023-04-01 21:38+0000\n"
 "Last-Translator: Fábio Rodrigues Ribeiro <farribeiro@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
+"minetest/contentdb/pt_BR/>\n"
 "Language: pt_BR\n"
-"Language-Team: Portuguese (Brazil) "
-"<https://hosted.weblate.org/projects/minetest/contentdb/pt_BR/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.17-dev\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -32,7 +33,6 @@ msgstr "Você foi banido."
 #: app/templates/modnames/list.html:16 app/templates/packages/list.html:4
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:201
-#, fuzzy
 msgid "Packages"
 msgstr "Pacotes"
 
@@ -112,7 +112,7 @@ msgstr "Mantenedores"
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:144
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr ""
+msgstr "Registro de Auditoria"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/base.html:135
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
@@ -122,7 +122,7 @@ msgstr "Estatísticas"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
-msgstr ""
+msgstr "Compartilhar e Selos"
 
 #: app/blueprints/packages/__init__.py:67 app/templates/packages/remove.html:36
 #: app/templates/packages/view.html:131
@@ -242,7 +242,7 @@ msgstr "URL do vídeo"
 
 #: app/blueprints/packages/packages.py:252
 msgid "Donate URL"
-msgstr ""
+msgstr "URL de doação"
 
 #: app/blueprints/packages/packages.py:258
 #, fuzzy
@@ -289,43 +289,44 @@ msgstr "Por favor, comente quais mudanças são necessárias no tópico de aprov
 
 #: app/blueprints/packages/packages.py:454
 msgid "Deleted package"
-msgstr ""
+msgstr "Pacote excluído"
 
 #: app/blueprints/packages/packages.py:470
 msgid "Unapproved package"
-msgstr ""
+msgstr "Pacote não aprovado"
 
 #: app/blueprints/packages/packages.py:479
 msgid "Maintainers (Comma-separated)"
-msgstr ""
+msgstr "Mantenedores(separados por vírgula)"
 
 #: app/blueprints/packages/packages.py:488
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "Você não tem permissão para editar os mantenedores"
 
 #: app/blueprints/packages/packages.py:538
 msgid "You are not a maintainer"
-msgstr ""
+msgstr "Você não é um mantenedor"
 
 #: app/blueprints/packages/packages.py:541
 msgid "Package owners cannot remove themselves as maintainers"
-msgstr ""
+msgstr "Donos do pacote não podem se remover como mantenedores"
 
 #: app/blueprints/packages/packages.py:573
 msgid "Author Name"
-msgstr ""
+msgstr "Nome do autor"
 
 #: app/blueprints/packages/packages.py:643
+#, fuzzy
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "Habilitar detecção de suporte com base em dependências (recomendado)"
 
 #: app/blueprints/packages/packages.py:644
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Jogos suportados (Separados por vírgula)"
 
 #: app/blueprints/packages/packages.py:645
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Jogos não suportados (Separados por vírgula)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
@@ -333,43 +334,45 @@ msgstr ""
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
-msgstr ""
+msgstr "Título"
 
 #: app/blueprints/packages/releases.py:53
 #: app/templates/packages/release_new.html:46
 msgid "Method"
-msgstr ""
+msgstr "Método"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
-msgstr ""
+msgstr "Upload de arquivo"
 
 #: app/blueprints/packages/releases.py:54
+#, fuzzy
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr ""
+msgstr "Referência do Git (ou seja: commit hash, branch ou tag)"
 
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:68
 #: app/blueprints/packages/releases.py:192
 msgid "Minimum Minetest Version"
-msgstr ""
+msgstr "Versão mínima do Minetest"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:70
 #: app/blueprints/packages/releases.py:195
 msgid "Maximum Minetest Version"
-msgstr ""
+msgstr "Versão Máxima do Minetest"
 
 #: app/blueprints/packages/releases.py:65
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: app/blueprints/packages/releases.py:66
+#, fuzzy
 msgid "Task ID"
-msgstr ""
+msgstr "ID da tarefa"
 
 #: app/blueprints/packages/releases.py:67
 #: app/blueprints/packages/screenshots.py:40
@@ -378,11 +381,11 @@ msgstr ""
 
 #: app/blueprints/packages/releases.py:85
 msgid "Import from Git"
-msgstr ""
+msgstr "Importar do Git"
 
 #: app/blueprints/packages/releases.py:85
 msgid "Upload .zip file"
-msgstr ""
+msgstr "Upload de arquivo .zip"
 
 #: app/blueprints/packages/releases.py:191
 msgid "Set Min"
@@ -394,7 +397,7 @@ msgstr ""
 
 #: app/blueprints/packages/releases.py:197
 msgid "Only change values previously set as none"
-msgstr ""
+msgstr "Altere apenas os valores definidos anteriormente como nenhum"
 
 #: app/blueprints/packages/releases.py:198
 msgid "Update"
@@ -407,11 +410,11 @@ msgstr ""
 
 #: app/blueprints/packages/releases.py:248
 msgid "New Commit"
-msgstr ""
+msgstr "Novo commit"
 
 #: app/blueprints/packages/releases.py:249 app/templates/admin/tags/list.html:8
 msgid "New Tag"
-msgstr ""
+msgstr "Nova tag"
 
 #: app/blueprints/packages/releases.py:251
 msgid "Branch name"
@@ -3824,4 +3827,3 @@ msgstr ""
 
 #~ msgid "You should add at least one screenshot, but this isn't required."
 #~ msgstr ""
-
