@@ -247,7 +247,8 @@ def delete(username):
 
 		db.session.delete(user)
 	elif "deactivate" in request.form:
-		user.replies.delete()
+		for reply in user.replies.all():
+			db.session.delete(reply)
 		for thread in user.threads.all():
 			db.session.delete(thread)
 		user.email = None
