@@ -47,7 +47,7 @@ def home():
 			.limit(20)).all()
 	updated = updated[:4]
 
-	reviews = review_load(PackageReview.query.filter(PackageReview.rating >= 3)
+	reviews = review_load(PackageReview.query.filter(PackageReview.rating > 3)
 			.order_by(db.desc(PackageReview.created_at))).limit(5).all()
 
 	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()

@@ -194,7 +194,7 @@ class PackageReview(db.Model):
 	def getAsDictionary(self, include_package=False):
 		pos, neg, _user = self.get_totals()
 		ret = {
-			"is_positive": self.rating >= 3,
+			"is_positive": self.rating > 3,
 			"rating": self.rating,
 			"user": {
 				"username": self.author.username,
