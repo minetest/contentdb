@@ -428,7 +428,10 @@ def list_all_reviews():
 		query = query.filter(PackageReview.author.has(User.username == request.args.get("author")))
 
 	if request.args.get("is_positive"):
-		query = query.filter(PackageReview.recommends == isYes(request.args.get("is_positive")))
+		if isYes(request.args.get("is_positive")):
+			query = query.filter(PackageReview.rating >= 3)
+		else:
+			query = query.filter(PackageReview.rating < 3)
 
 	q = request.args.get("q")
 	if q:

@@ -43,9 +43,10 @@ def list_reviews():
 class ReviewForm(FlaskForm):
 	title	= StringField(lazy_gettext("Title"), [InputRequired(), Length(3,100)])
 	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
-	recommends = RadioField(lazy_gettext("Private"), [InputRequired()],
-			choices=[("yes", lazy_gettext("Yes")), ("no", lazy_gettext("No"))])
+	rating = RadioField(lazy_gettext("Rating"), [InputRequired()],
+			choices=[("5", lazy_gettext("Yes")), ("3", lazy_gettext("Neutral")), ("1", lazy_gettext("No"))])
 	submit  = SubmitField(lazy_gettext("Save"))
+
 
 @bp.route("/packages/<author>/<name>/review/", methods=["GET", "POST"])
 @login_required
@@ -69,7 +70,7 @@ def review(package):
 	# Set default values
 	if request.method == "GET" and review:
 		form.title.data = review.thread.title
-		form.recommends.data = "yes" if review.recommends else "no"
+		form.rating.data = str(review.rating)
 		form.comment.data = review.thread.first_reply.comment
 
 	# Validate and submit
@@ -85,7 +86,7 @@ def review(package):
 				review.author  = current_user
 				db.session.add(review)
 
-			review.recommends = form.recommends.data == "yes"
+			review.rating = int(form.rating.data)
 
 			thread = review.thread
 			if not thread:
@@ -227,7 +228,7 @@ def review_vote(package, review_id):
 def review_votes(package):
 	user_biases = {}
 	for review in package.reviews:
-		review_sign = 1 if review.recommends else -1
+		review_sign = review.asWeight()
 		for vote in review.votes:
 			user_biases[vote.user.username] = user_biases.get(vote.user.username, [0, 0])
 			vote_sign = 1 if vote.is_positive else -1

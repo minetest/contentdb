@@ -177,7 +177,7 @@ class PackageReview(db.Model):
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author     = db.relationship("User", foreign_keys=[author_id], back_populates="reviews")
 
-	recommends = db.Column(db.Boolean, nullable=False)
+	rating     = db.Column(db.Integer, nullable=False)
 
 	thread     = db.relationship("Thread", uselist=False, back_populates="review")
 	votes      = db.relationship("PackageReviewVote", back_populates="review", cascade="all, delete, delete-orphan")
@@ -194,7 +194,8 @@ class PackageReview(db.Model):
 	def getAsDictionary(self, include_package=False):
 		pos, neg, _user = self.get_totals()
 		ret = {
-			"is_positive": self.recommends,
+			"is_positive": self.rating >= 3,
+			"rating": self.rating,
 			"user": {
 				"username": self.author.username,
 				"display_name": self.author.display_name,
@@ -211,8 +212,8 @@ class PackageReview(db.Model):
 			ret["package"] = self.package.getAsDictionaryKey()
 		return ret
 
-	def asSign(self):
-		return 1 if self.recommends else -1
+	def asWeight(self):
+		return 2.0 * self.rating / 5.0 - 1
 
 	def getEditURL(self):
 		return self.package.getURL("packages.review")

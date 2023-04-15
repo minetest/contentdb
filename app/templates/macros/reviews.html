@@ -31,10 +31,12 @@
 				</a>
 			</div>
 			<div class="col-md-auto pl-1 pr-3 pt-2 text-center" style=" font-size: 200%;">
-				{% if review.recommends %}
+				{% if review.rating > 3 %}
 					<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
-				{% else %}
+				{% elif review.rating < 3 %}
 					<i class="fas fa-thumbs-down" style="color:#f66;"></i>
+				{% else %}
+					<i class="fas fa-minus" style="color:#999"></i>
 				{% endif %}
 			</div>
 			{% if review.thread %}
@@ -112,11 +114,15 @@
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-primary">
 					<i class="fas fa-thumbs-up mr-2"></i>
-					<input type="radio" name="recommends" value="yes" autocomplete="off"> {{ _("Yes") }}
+					<input type="radio" name="rating" value="5" autocomplete="off"> {{ _("Yes") }}
+				</label>
+				<label class="btn btn-primary">
+					<i class="fas fa-minus mr-2"></i>
+					<input type="radio" name="rating" value="3" autocomplete="off"> {{ _("Neutral") }}
 				</label>
 				<label class="btn btn-primary">
 					<i class="fas fa-thumbs-down mr-2"></i>
-					<input type="radio" name="recommends" value="no" autocomplete="off"> {{ _("No") }}
+					<input type="radio" name="rating" value="1" autocomplete="off"> {{ _("No") }}
 				</label>
 			</div>
 
@@ -149,11 +155,15 @@
 			</p>
 
 			<div class="btn-group">
-				<button class="btn btn-primary" name="recommends" value="yes">
+				<button class="btn btn-primary" name="rating" value="5">
 					<i class="fas fa-thumbs-up mr-2"></i>
 					{{ _("Yes") }}
 				</button>
-				<button class="btn btn-primary" name="recommends" value="no">
+				<button class="btn btn-primary" name="rating" value="3">
+					<i class="fas fa-minus mr-2"></i>
+					{{ _("Neutral") }}
+				</button>
+				<button class="btn btn-primary" name="rating" value="1">
 					<i class="fas fa-thumbs-down mr-2"></i>
 					{{ _("No") }}
 				</button>

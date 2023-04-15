@@ -224,10 +224,12 @@
 						<i class="fas fa-lock" style="color:#ffac33;"></i>
 					{% elif not t.review %}
 						<i class="fas fa-comment-alt" style="color:#666;"></i>
-					{% elif t.review.recommends %}
+					{% elif t.review.rating > 3 %}
 						<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
-					{% else %}
+					{% elif t.review.rating < 3 %}
 						<i class="fas fa-thumbs-down" style="color:#f66;"></i>
+					{% else %}
+						<i class="fas fa-minus" style="color:#999"></i>
 					{% endif %}
 					<strong class="ml-1">
 						{{ t.title }}

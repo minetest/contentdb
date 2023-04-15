@@ -779,7 +779,7 @@ class Package(db.Model):
 		}
 
 	def recalcScore(self):
-		review_scores = [ 100 * r.asSign() for r in self.reviews ]
+		review_scores = [ 100 * r.asWeight() for r in self.reviews ]
 		self.score = self.score_downloads + sum(review_scores)
 
 

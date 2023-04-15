@@ -3,10 +3,12 @@
 {% block title %}
 	{%- if thread.package -%}
 		{%- if thread.review -%}
-			{%- if thread.review.recommends -%}
+			{%- if thread.review.rating > 3 -%}
 				{%- set rating = "👍" -%}
-			{%- else -%}
+			{%- elif thread.review.rating < 3 -%}
 				{%- set rating = "👎" -%}
+			{%- else -%}
+				{%- set rating = "-" -%}
 			{%- endif -%}
 		{%- endif -%}
 		{{ rating }} {{ thread.title }} - {{ thread.package.title }}
@@ -70,10 +72,12 @@
 
 	<h1>
 		{% if thread.review %}
-			{% if thread.review.recommends %}
+			{% if thread.review.rating > 3 %}
 				<i class="fas fa-thumbs-up mr-2" style="color:#6f6;"></i>
-			{% else %}
+			{% elif thread.review.rating < 3 %}
 				<i class="fas fa-thumbs-down mr-2" style="color:#f66;"></i>
+			{% else %}
+				<i class="fas fa-minus mr-2" style="color:#999"></i>
 			{% endif %}
 		{% endif %}
 		{% if thread.private %}&#x1f512; {% endif %}{{ thread.title }}

@@ -304,6 +304,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
         * `user`: dictionary with `display_name` and `username`.
         * `title`: review title 
         * `comment`: the text
+        * `rating`: 1 for negative, 3 for neutral, 5 for positive
         * `is_positive`: boolean
         * `created_at`: iso timestamp
         * `votes`: dictionary with `helpful` and `unhelpful`,
@@ -316,6 +317,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
         * `page`: page number, integer from 1 to max
         * `n`: number of results per page, max 100
         * `author`: filter by review author username
+        * `rating`: 1 for negative, 3 for neutral, 5 for positive
         * `is_positive`: true or false. Default: null
         * `q`: filter by title (case insensitive, no fulltext search)
 

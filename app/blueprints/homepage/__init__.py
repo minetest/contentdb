@@ -47,7 +47,8 @@ def home():
 			.limit(20)).all()
 	updated = updated[:4]
 
-	reviews = review_load(PackageReview.query.filter_by(recommends=True).order_by(db.desc(PackageReview.created_at))).limit(5).all()
+	reviews = review_load(PackageReview.query.filter(PackageReview.rating >= 3)
+			.order_by(db.desc(PackageReview.created_at))).limit(5).all()
 
 	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]

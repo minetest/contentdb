@@ -69,9 +69,11 @@
 									<span class="btn" title="{{ _('Reviews') }}">
 										<i class="fas fa-star-half-alt"></i>
 										<span class="count">
-											+{{ package.reviews | selectattr("recommends") | list | length }}
+											+{{ package.reviews | selectattr("rating", "equalto", 5) | list | length }}
 											/
-											-{{ package.reviews | rejectattr("recommends") | list | length }}
+											{{ package.reviews | selectattr("rating", "equalto", 3) | list | length }}
+											/
+											-{{ package.reviews | selectattr("rating", "equalto", 1) | list | length }}
 										</span>
 									</span>
 								</div>
