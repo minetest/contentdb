@@ -213,7 +213,10 @@ class PackageReview(db.Model):
 		return ret
 
 	def asWeight(self):
-		return 2.0 * (self.rating - 1) / 4.0 - 1
+		"""
+		From (1, 5) to (-1 to 1)
+		"""
+		return (self.rating - 3.0) / 2.0
 
 	def getEditURL(self):
 		return self.package.getURL("packages.review")
