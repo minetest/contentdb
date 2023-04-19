@@ -36,6 +36,7 @@ from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
 	api_order_screenshots, api_edit_package, api_set_cover_image
+from ...utils.minetest_hypertext import html_to_minetest
 
 
 def cors_allowed(f):
@@ -82,6 +83,16 @@ def packages():
 @cors_allowed
 def package(package):
 	return jsonify(package.getAsDictionary(current_app.config["BASE_URL"]))
+
+
+@bp.route("/api/packages/<author>/<name>/hypertext/")
+@is_package_page
+@cors_allowed
+def package_hypertext(package):
+	formspec_version = request.args["formspec_version"]
+	include_images = isYes(request.args.get("include_images", "true"))
+	html = render_markdown(package.desc)
+	return jsonify(html_to_minetest(html, formspec_version, include_images))
 
 
 @bp.route("/api/packages/<author>/<name>/", methods=["PUT"])
