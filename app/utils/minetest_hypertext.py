@@ -24,52 +24,59 @@ def get_attributes(attrs):
 	return retval
 
 
+def make_indent(w):
+	return f"<img name=blank.png width={16*w} height=1>"
+
+
 class MinetestHTMLParser(HTMLParser):
 	def __init__(self, include_images):
 		super().__init__()
 		self.include_images = include_images
 
-		self.text_buffer = ""
-		self.has_line_started = False
+		self.completed_text = ""
+		self.current_line = ""
 		self.links = {}
 		self.images = {}
 		self.image_tooltips = {}
 		self.is_preserving = False
 		self.remove_until = None
+		self.indent_level = 0
+
+	def finish_line(self):
+		self.completed_text += self.current_line.rstrip() + "\n"
+		self.current_line = ""
 
 	def handle_starttag(self, tag, attrs):
 		if self.is_preserving or self.remove_until:
 			return
 
-		print("OPEN", tag, file=sys.stderr)
-
-		self.has_line_started = True
 		if tag == "p":
-			self.has_line_started = False
+			pass
 		elif tag == "pre":
-			self.text_buffer += "<code>"
+			self.current_line += "<code>"
 			self.is_preserving = True
-			self.has_line_started = False
 		elif tag == "table":
 			# Tables are currently unsupported and removed
 			self.remove_until = "table"
-			self.text_buffer += "<i>(table removed)</i>\n"
+			self.current_line += "<i>(table removed)</i>"
+			self.finish_line()
 		elif tag == "br":
-			self.text_buffer += "\n"
-			self.has_line_started = False
+			self.finish_line()
 		elif tag == "h1" or tag == "h2":
-			self.text_buffer += "\n<big>"
+			self.finish_line()
+			self.current_line += "<big>"
 		elif tag == "h3" or tag == "h4" or tag == "h5":
-			self.text_buffer += "\n<b>"
+			self.finish_line()
+			self.current_line += "<b>"
 		elif tag == "a":
 			for attr in attrs:
 				if attr[0] == "href":
 					name = f"link_{len(self.links)}"
 					self.links[name] = attr[1]
-					self.text_buffer += f"<action name={name}><u>"
+					self.current_line += f"<action name={name}><u>"
 					break
 			else:
-				self.text_buffer += "<action><u>"
+				self.current_line += "<action><u>"
 		elif tag == "img":
 			attr_by_value = get_attributes(attrs)
 			if "src" in attr_by_value and self.include_images:
@@ -77,23 +84,29 @@ class MinetestHTMLParser(HTMLParser):
 				self.images[name] = attr_by_value["src"]
 				width = attr_by_value.get("width", 128)
 				height = attr_by_value.get("height", 128)
-				self.text_buffer += f"<img name={name} width={width} height={height}>"
+				self.current_line += f"<img name={name} width={width} height={height}>"
 
 				if "alt" in attr_by_value:
 					self.image_tooltips[name] = attr_by_value["alt"]
 		elif tag == "b" or tag == "strong":
-			self.text_buffer += "<b>"
+			self.current_line += "<b>"
 		elif tag == "i" or tag == "em":
-			self.text_buffer += "<i>"
+			self.current_line += "<i>"
 		elif tag == "u":
-			self.text_buffer += "<u>"
+			self.current_line += "<u>"
 		elif tag == "li":
-			self.has_line_started = False
-			self.text_buffer += "• "
+			if self.current_line.strip() != "":
+				self.finish_line()
+			else:
+				self.current_line = ""
+
+			self.current_line += make_indent(self.indent_level) + "• "
 		elif tag == "code":
-			self.text_buffer += "<code>"
-		elif tag == "span" or tag == "ul":
+			self.current_line += "<code>"
+		elif tag == "span":
 			pass
+		elif tag == "ul":
+			self.indent_level += 1
 		else:
 			print("UNKNOWN TAG ", tag, attrs, file=sys.stderr)
 
@@ -103,52 +116,46 @@ class MinetestHTMLParser(HTMLParser):
 				self.remove_until = None
 			return
 
-		print("CLOSE", tag, file=sys.stderr)
-
 		if tag == "pre":
-			self.text_buffer = self.text_buffer.rstrip()
-			self.text_buffer += "</code>\n"
+			self.current_line = self.current_line.rstrip() + "</code>"
+			self.finish_line()
 			self.is_preserving = False
-			self.has_line_started = False
 		elif self.is_preserving:
 			return
 		elif tag == "p":
-			self.text_buffer = self.text_buffer.rstrip()
-			self.text_buffer += "\n"
-			self.has_line_started = False
+			self.current_line = self.current_line.rstrip()
+			self.finish_line()
 		elif tag == "h1" or tag == "h2":
-			self.text_buffer += "</big>\n"
-			self.has_line_started = False
+			self.current_line += "</big>"
+			self.finish_line()
 		elif tag == "h3" or tag == "h4" or tag == "h5":
-			self.text_buffer += "</b>\n"
-			self.has_line_started = False
+			self.current_line += "</b>"
+			self.finish_line()
 		elif tag == "a":
-			self.text_buffer += "</u></action>"
+			self.current_line += "</u></action>"
 		elif tag == "code":
-			self.text_buffer += "</code>"
+			self.current_line += "</code>"
 		elif tag == "b" or tag == "strong":
-			self.text_buffer += "</b>"
+			self.current_line += "</b>"
 		elif tag == "i" or tag == "em":
-			self.text_buffer += "</i>"
+			self.current_line += "</i>"
 		elif tag == "u":
-			self.text_buffer += "</u>"
+			self.current_line += "</u>"
 		elif tag == "li":
-			self.text_buffer += "\n"
-		# else:
-		# 	print("END", tag, file=sys.stderr)
+			self.finish_line()
+		elif tag == "ul":
+			self.indent_level = max(self.indent_level - 1, 0)
 
 	def handle_data(self, data):
-		print(f"DATA \"{data}\"", file=sys.stderr)
 		if self.remove_until:
 			return
 
 		if not self.is_preserving:
 			data = normalize_whitespace(data)
-			if not self.has_line_started:
+			if self.current_line.strip() == "":
 				data = data.lstrip()
 
-		self.text_buffer += data
-		self.has_line_started = True
+		self.current_line += data
 
 	def handle_entityref(self, name):
 		to_value = {
@@ -160,17 +167,19 @@ class MinetestHTMLParser(HTMLParser):
 		}
 
 		if name in to_value:
-			self.text_buffer += to_value[name]
+			self.current_line += to_value[name]
 		else:
-			self.text_buffer += f"&{name};"
+			self.current_line += f"&{name};"
 
 
 def html_to_minetest(html, formspec_version=6, include_images=True):
 	parser = MinetestHTMLParser(include_images)
 	parser.feed(html)
+	parser.finish_line()
+
 	return {
 		"head": HEAD,
-		"body": parser.text_buffer.strip() + "\n\n",
+		"body": parser.completed_text.strip() + "\n",
 		"links": parser.links,
 		"images":  parser.images,
 		"image_tooltips": parser.image_tooltips,

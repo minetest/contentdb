@@ -75,12 +75,17 @@ def test_bullets():
 	html = """
 		<ul>
 			<li>One</li>
-			<li>two three</li>
+			<li>two three<ul><li>sub one</li><li>sub two</li></ul></li>
 			<li>four</li>
 		</ul>
 	"""
 
-	expected = "• One\n• two three\n• four\n"
+	expected = "<img name=blank.png width=16 height=1>• One\n" \
+		"<img name=blank.png width=16 height=1>• two three\n" \
+		"<img name=blank.png width=32 height=1>• sub one\n" \
+		"<img name=blank.png width=32 height=1>• sub two\n\n" \
+		"<img name=blank.png width=16 height=1>• four\n"
+
 	result = html_to_minetest(html)
 	assert result["body"].strip() == expected.strip()
 
