@@ -21,7 +21,7 @@ GitHub can only be used to login, not to register.
 There are a number of reasons this may have happened:
 
 * Incorrect email address entered.
-* Temporary problem with ContentDB. 
+* Temporary problem with ContentDB.
 * Email has been unsubscribed.
 
 If the email doesn't arrive after registering by email, then you'll need to try registering again in 12 hours.
@@ -40,9 +40,9 @@ remove your email from the blacklist.
 
 There are a number of methods:
 
-* [Git Update Detection](update_config): ContentDB will check your Git repo daily, and create updates or send you notifications.
-* [Webhooks](release_webhooks): you can configure your Git host to send a webhook to ContentDB, and create an update immediately.
-* the [API](api): This is especially powerful when combined with CI/CD and other API endpoints. 
+* [Git Update Detection](/help/update_config/): ContentDB will check your Git repo daily, and create updates or send you notifications.
+* [Webhooks](/help/release_webhooks/): you can configure your Git host to send a webhook to ContentDB, and create an update immediately.
+* the [API](/help/api/): This is especially powerful when combined with CI/CD and other API endpoints.
 
 
 ## How do I get help?

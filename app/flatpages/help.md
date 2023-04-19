@@ -2,6 +2,11 @@ title: Help
 toc: False
 
 
+## Rules
+
+* [Rules](/rules/)
+* [Package Inclusion Policy and Guidance](/policy_and_guidance/)
+
 ## General Help
 
 * [Frequently Asked Questions](faq)
