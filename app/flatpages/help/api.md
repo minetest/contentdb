@@ -8,7 +8,7 @@ title: API
 
 ## Responses and Error Handling
 
-If there is an error, the response will be JSON similar to the following with a non-200 status code: 
+If there is an error, the response will be JSON similar to the following with a non-200 status code:
 
 ```json
 {
@@ -26,7 +26,7 @@ often other keys with information. For example:
 {
     "success": true,
     "release": {
-        /* same as returned by a GET */ 
+        /* same as returned by a GET */
     }
 }
 ```
@@ -39,7 +39,7 @@ the number of items is specified using `num`
 
 The response will be a dictionary with the following keys:
 
-* `page`: page number, integer from 1 to max 
+* `page`: page number, integer from 1 to max
 * `per_page`: number of items per page, same as `n`
 * `page_count`: number of pages
 * `total`: total number of results
@@ -55,7 +55,7 @@ Not all endpoints require authentication, but it is done using Bearer tokens:
 
 ```bash
 curl https://content.minetest.net/api/whoami/ \
-    -H "Authorization: Bearer YOURTOKEN" 
+    -H "Authorization: Bearer YOURTOKEN"
 ```
 
 Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
@@ -83,7 +83,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `tags`: List of [tag](#tags) names.
         * `content_warnings`: List of [content warning](#content-warnings) names.
         * `license`: A [license](#licenses) name.
-        * `media_license`: A [license](#licenses) name.   
+        * `media_license`: A [license](#licenses) name.
         * `long_description`: Long markdown description.
         * `repo`: Git repo URL.
         * `website`: Website URL.
@@ -92,15 +92,27 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
         * `video_url`: URL to a video.
         * `donate_url`: URL to a donation page.
         * `game_support`: Array of game support information objects. Not currently documented, as subject to change.
+* GET `/api/packages/<author>/<name>/hypertext/`
+    * Converts the long description to [Minetest Markup Language](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#markup-language)
+      to be used in a `hypertext` formspec element.
+    * Query arguments:
+        * `formspec_version`: Required, maximum supported formspec version.
+        * `include_images`: Optional, defaults to true.
+    * Returns JSON dictionary with following key:
+        * `head`: markup for suggested styling and custom tags, prepend to the body before displaying.
+        * `body`: markup for long description.
+        * `links`: dictionary of anchor name to link URL.
+        * `images`: dictionary of img name to image URL
+        * `image_tooltips`: dictionary of img name to tooltip text.
 * GET `/api/packages/<username>/<name>/dependencies/`
-    * Returns dependencies, with suggested candidates 
+    * Returns dependencies, with suggested candidates
     * If query argument `only_hard` is present, only hard deps will be returned.
 * GET `/api/dependencies/`
     * Returns `provides` and raw dependencies for all packages.
     * Supports [Package Queries](#package-queries)
     * [Paginated result](#paginated-results), max 300 results per page
     * Each item in `items` will be a dictionary with the following keys:
-        * `type`: One of `GAME`, `MOD`, `TXP`. 
+        * `type`: One of `GAME`, `MOD`, `TXP`.
         * `author`: Username of the package author.
         * `name`: Package name.
         * `provides`: List of technical mod names inside the package.
@@ -142,7 +154,7 @@ Examples:
 curl -X PUT https://content.minetest.net/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "MIT" }'
-    
+
 # Remove website URL
 curl -X PUT https://content.minetest.net/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
@@ -161,7 +173,7 @@ Supported query parameters:
 * `q`:  Query string.
 * `author`:  Filter by author.
 * `tag`:  Filter by tags.
-* `game`: Filter by [Game Support](/help/game_support/), ex: `Wuzzy/mineclone2`. (experimental, doesn't show items that support every game currently). 
+* `game`: Filter by [Game Support](/help/game_support/), ex: `Wuzzy/mineclone2`. (experimental, doesn't show items that support every game currently).
 * `random`:  When present, enable random ordering and ignore `sort`.
 * `limit`:  Return at most `limit` packages.
 * `hide`:  Hide content based on [Content Flags](/help/content_flags/).
@@ -171,12 +183,12 @@ Supported query parameters:
 * `engine_version`:  Only show packages supported by this Minetest engine version, eg: `5.3.0`.
 * `fmt`:  How the response is formatted.
     * `keys`:  author/name only.
-    * `short`:  stuff needed for the Minetest client. 
+    * `short`:  stuff needed for the Minetest client.
 
 
 ### Releases
 
-* GET `/api/releases/` (List)   
+* GET `/api/releases/` (List)
     * Limited to 30 most recent releases.
     * Optional arguments:
         * `author`: Filter by author
@@ -204,14 +216,14 @@ Supported query parameters:
     * For Git release creation:
         * `method`: must be `git`.
         * `ref`: (Optional) git reference, eg: `master`.
-    * For zip upload release creation: 
+    * For zip upload release creation:
         * `file`: multipart file to upload, like `<input type="file" name="file">`.
         * `commit`: (Optional) Source Git commit hash, for informational purposes.
     * You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
 * DELETE `/api/packages/<username>/<name>/releases/<id>/` (Delete)
     * Requires authentication.
     * Deletes release.
-  
+
 Examples:
 
 ```bash
@@ -232,7 +244,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/releases/ne
 
 # Delete release
 curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/3/ \
-    -H "Authorization: Bearer YOURTOKEN" 
+    -H "Authorization: Bearer YOURTOKEN"
 ```
 
 
@@ -275,7 +287,7 @@ Examples:
 curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/screnshot.png
-    
+
 # Create screenshot and set it as the cover image
 curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
@@ -283,13 +295,13 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
 
 # Delete screenshot
 curl -X DELETE https://content.minetest.net/api/packages/username/name/screenshots/3/ \
-    -H "Authorization: Bearer YOURTOKEN" 
-    
+    -H "Authorization: Bearer YOURTOKEN"
+
 # Reorder screenshots
 curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/order/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d "[13, 2, 5, 7]"
-    
+
 # Set cover image
 curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/cover-image/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
@@ -302,7 +314,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
 * GET `/api/packages/<username>/<name>/reviews/` (List)
     * Returns array of review dictionaries with keys:
         * `user`: dictionary with `display_name` and `username`.
-        * `title`: review title 
+        * `title`: review title
         * `comment`: the text
         * `rating`: 1 for negative, 3 for neutral, 5 for positive
         * `is_positive`: boolean
@@ -326,16 +338,16 @@ Example:
 ```json
 [
   {
-    "comment": "This is a really good mod!", 
-    "created_at": "2021-11-24T16:18:33.764084", 
-    "is_positive": true, 
-    "title": "Really good", 
+    "comment": "This is a really good mod!",
+    "created_at": "2021-11-24T16:18:33.764084",
+    "is_positive": true,
+    "title": "Really good",
     "user": {
-      "display_name": "rubenwardy", 
+      "display_name": "rubenwardy",
       "username": "rubenwardy"
-    }, 
+    },
     "votes": {
-      "helpful": 0, 
+      "helpful": 0,
       "unhelpful": 0
     }
   }
@@ -403,7 +415,7 @@ Supported query parameters:
     * `description`:  tag description or null.
     * `is_protected`: boolean, whether the tag is protected (can only be set by Editors in the web interface).
     * `views`: number of views of this tag.
-    
+
 ### Content Warnings
 
 * GET `/api/content_warnings/` ([View](/api/content_warnings/)):  List of:
