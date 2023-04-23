@@ -22,6 +22,7 @@ import sqlalchemy.orm
 from flask import abort, redirect, url_for, request
 from flask_login import current_user
 from sqlalchemy import or_, and_
+from sqlalchemy.orm import sessionmaker
 
 from app.models import User, NotificationType, Package, UserRank, Notification, db, AuditSeverity, AuditLogEntry, ThreadReply, Thread, PackageState, PackageType, PackageAlias
 
@@ -149,3 +150,7 @@ def get_games_from_csv(session: sqlalchemy.orm.Session, csv: str) -> List[Packag
 		retval.extend(games)
 
 	return retval
+
+
+def create_session():
+	return sessionmaker(bind=db.engine)()

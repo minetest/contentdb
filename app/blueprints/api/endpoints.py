@@ -448,7 +448,7 @@ def list_all_reviews():
 	if q:
 		query = query.filter(PackageReview.thread.has(Thread.title.ilike(f"%{q}%")))
 
-	pagination: flask_sqlalchemy.Pagination = query.paginate(page, num, True)
+	pagination: flask_sqlalchemy.Pagination = query.paginate(page=page, per_page=num)
 	return jsonify({
 		"page": pagination.page,
 		"per_page": pagination.per_page,
@@ -601,7 +601,7 @@ def all_deps():
 
 	page = get_int_or_abort(request.args.get("page"), 1)
 	num = min(get_int_or_abort(request.args.get("n"), 100), 300)
-	pagination: flask_sqlalchemy.Pagination = query.paginate(page, num, True)
+	pagination: flask_sqlalchemy.Pagination = query.paginate(page=page, per_page=num)
 	return jsonify({
 		"page": pagination.page,
 		"per_page": pagination.per_page,

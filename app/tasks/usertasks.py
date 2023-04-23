@@ -20,6 +20,7 @@ import datetime
 from sqlalchemy import or_, and_
 
 from app.models import User, db, UserRank, ThreadReply, Package
+from app.utils.models import create_session
 from app.tasks import celery
 
 
@@ -37,7 +38,7 @@ def delete_inactive_users():
 
 @celery.task()
 def upgrade_new_members():
-	with db.create_session({})() as session:
+	with create_session() as session:
 		threshold = datetime.datetime.now() - datetime.timedelta(days=7)
 
 		session.query(User).filter(and_(User.rank == UserRank.NEW_MEMBER, or_(

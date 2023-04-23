@@ -126,7 +126,7 @@ def check_for_ban():
 			models.db.session.commit()
 
 
-from .utils import clearNotifications, is_safe_url
+from .utils import clearNotifications, is_safe_url, create_session
 
 
 @app.before_request
@@ -159,7 +159,7 @@ def get_locale():
 		locale = request.accept_languages.best_match(locales)
 
 	if locale and current_user.is_authenticated:
-		with models.db.create_session({})() as new_session:
+		with create_session() as new_session:
 			new_session.query(models.User) \
 				.filter(models.User.username == current_user.username) \
 				.update({"locale": locale})

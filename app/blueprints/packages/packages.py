@@ -76,7 +76,7 @@ def list_all():
 
 	page  = get_int_or_abort(request.args.get("page"), 1)
 	num   = min(40, get_int_or_abort(request.args.get("n"), 100))
-	query = query.paginate(page, num, True)
+	query = query.paginate(page=page, per_page=num)
 
 	search = request.args.get("q")
 	type_name = request.args.get("type")
@@ -273,6 +273,7 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 			return None
 
 		package = Package()
+		db.session.add(package)
 		package.author = author
 		package.maintainers.append(author)
 		wasNew = True
@@ -563,7 +564,7 @@ def audit(package):
 
 	query = package.audit_log_entries.order_by(db.desc(AuditLogEntry.created_at))
 
-	pagination = query.paginate(page, num, True)
+	pagination = query.paginate(page=page, per_page=num)
 	return render_template("packages/audit.html", log=pagination.items, pagination=pagination,
 		package=package, tabs=get_package_tabs(current_user, package), current_tab="audit")
 
