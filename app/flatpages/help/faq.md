@@ -30,7 +30,7 @@ try registering again in 12 hours. Unconfirmed accounts are deleted after 12 hou
 
 **When changing your email (or it was set after a forum-based registration)**:
 then you can just set a new email in
-[Settings > Email and Notifications](https://content.minetest.net/user/settings/email/).
+[Settings > Email and Notifications](/user/settings/email/).
 
 If you have previously unsubscribed this email, then ContentDB is completely prevented from sending emails to that
 address. You'll need to use a different email address, or [contact rubenwardy](https://rubenwardy.com/contact/) to
