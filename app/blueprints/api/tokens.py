@@ -85,12 +85,12 @@ def create_edit_token(username, id=None):
 	if form.validate_on_submit():
 		if is_new:
 			token = APIToken()
+			db.session.add(token)
 			token.owner = user
 			token.access_token = randomString(32)
 
 		form.populate_obj(token)
-		db.session.add(token)
-		db.session.commit() # save
+		db.session.commit()
 
 		if is_new:
 			# Store token so it can be shown in the edit page

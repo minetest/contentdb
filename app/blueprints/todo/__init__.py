@@ -108,7 +108,7 @@ def topics():
 	if num > 100 and not current_user.rank.atLeast(UserRank.APPROVER):
 		num = 100
 
-	query = query.paginate(page, num, True)
+	query = query.paginate(page=page, per_page=num)
 	next_url = url_for("todo.topics", page=query.next_num, query=qb.search,
 			show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
 			if query.has_next else None

@@ -36,7 +36,7 @@ def list_reviews():
 	page = get_int_or_abort(request.args.get("page"), 1)
 	num = min(40, get_int_or_abort(request.args.get("n"), 100))
 
-	pagination = PackageReview.query.order_by(db.desc(PackageReview.created_at)).paginate(page, num, True)
+	pagination = PackageReview.query.order_by(db.desc(PackageReview.created_at)).paginate(page=page, per_page=num)
 	return render_template("packages/reviews_list.html", pagination=pagination, reviews=pagination.items)
 
 
