@@ -5,7 +5,8 @@ from bleach import Cleaner
 from bleach.linkifier import LinkifyFilter
 from bs4 import BeautifulSoup
 from markdown import Markdown
-from flask import Markup, url_for
+from flask import url_for
+from jinja2.utils import markupsafe
 from markdown.extensions import Extension
 from markdown.inlinepatterns import SimpleTagInlineProcessor
 from markdown.inlinepatterns import Pattern
@@ -16,7 +17,7 @@ from xml.etree import ElementTree
 #
 # License: MIT
 
-ALLOWED_TAGS = [
+ALLOWED_TAGS = {
 	"h1", "h2", "h3", "h4", "h5", "h6", "hr",
 	"ul", "ol", "li",
 	"p",
@@ -30,7 +31,7 @@ ALLOWED_TAGS = [
 	"img",
 	"table", "thead", "tbody", "tr", "th", "td",
 	"div", "span", "del", "s",
-]
+}
 
 ALLOWED_CSS = [
 	"highlight", "codehilite",
@@ -58,7 +59,7 @@ ALLOWED_ATTRIBUTES = {
 	"span": allow_class,
 }
 
-ALLOWED_PROTOCOLS = ["http", "https", "mailto"]
+ALLOWED_PROTOCOLS = {"http", "https", "mailto"}
 
 md = None
 
@@ -143,11 +144,11 @@ def init_markdown(app):
 
 	md = Markdown(extensions=MARKDOWN_EXTENSIONS,
 			extension_configs=MARKDOWN_EXTENSION_CONFIG,
-			output_format="html5")
+			output_format="html")
 
 	@app.template_filter()
 	def markdown(source):
-		return Markup(render_markdown(source))
+		return markupsafe.Markup(render_markdown(source))
 
 
 def get_headings(html: str):

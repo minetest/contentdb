@@ -57,7 +57,7 @@ github = GitHub(app)
 csrf = CSRFProtect(app)
 mail = Mail(app)
 pages = FlatPages(app)
-babel = Babel(app)
+babel = Babel()
 gravatar = Gravatar(app,
 		size=64,
 		rating="g",
@@ -145,7 +145,6 @@ def server_error(e):
 	return render_template("500.html"), 500
 
 
-@babel.localeselector
 def get_locale():
 	if not request:
 		return None
@@ -163,10 +162,13 @@ def get_locale():
 		with models.db.create_session({})() as new_session:
 			new_session.query(models.User) \
 				.filter(models.User.username == current_user.username) \
-				.update({ "locale": locale })
+				.update({"locale": locale})
 			new_session.commit()
 
 	return locale
+
+
+babel.init_app(app, locale_selector=get_locale)
 
 
 @app.route("/set-locale/", methods=["POST"])

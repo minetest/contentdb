@@ -20,7 +20,7 @@ from flask import render_template, make_response
 from celery import uuid
 from flask_wtf import FlaskForm
 from flask_login import login_required
-from jinja2 import Markup
+from jinja2.utils import markupsafe
 from sqlalchemy import func
 from sqlalchemy.orm import joinedload, subqueryload
 from wtforms import *
@@ -196,8 +196,7 @@ def shield(package, type):
 		url = "https://img.shields.io/static/v1?label=ContentDB&message={}&color={}" \
 			.format(urlescape(package.title), urlescape("#375a7f"))
 	elif type == "downloads":
-		#api_url = abs_url_for("api.package", author=package.author.username, name=package.name)
-		api_url = "https://content.minetest.net" + url_for("api.package", author=package.author.username, name=package.name)
+		api_url = abs_url_for("api.package", author=package.author.username, name=package.name)
 		url = "https://img.shields.io/badge/dynamic/json?color={}&label=ContentDB&query=downloads&suffix=+downloads&url={}" \
 			.format(urlescape("#375a7f"), urlescape(api_url))
 	else:
@@ -268,7 +267,7 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 					gettext("Package already exists, but is removed. Please contact ContentDB staff to restore the package"),
 					"danger")
 			else:
-				flash(Markup(
+				flash(markupsafe.Markup(
 					f"<a class='btn btn-sm btn-danger float-right' href='{package.getURL('packages.view')}'>View</a>" +
 					gettext("Package already exists")), "danger")
 			return None
