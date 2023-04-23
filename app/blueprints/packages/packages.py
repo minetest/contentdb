@@ -103,7 +103,7 @@ def list_all():
 	return render_template("packages/list.html",
 			query_hint=title, packages=query.items, pagination=query,
 			query=search, tags=tags, selected_tags=selected_tags, type=type_name,
-			authors=authors, packages_count=query.total, topics=topics)
+			authors=authors, packages_count=query.total, topics=topics, noindex=qb.noindex)
 
 
 def getReleases(package):

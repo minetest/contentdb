@@ -34,6 +34,11 @@ class QueryBuilder:
 
 		return ret
 
+	@property
+	def noindex(self):
+		return (self.search is not None or len(self.tags) > 1 or len(self.types) > 1 or len(self.hide_flags) > 0 or
+			self.random or self.lucky or self.author or self.version or self.game)
+
 	def __init__(self, args):
 		title = "Packages"
 

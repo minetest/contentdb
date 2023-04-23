@@ -40,7 +40,7 @@ def list_all():
 	pid = request.args.get("pid")
 	if pid:
 		pid = get_int_or_abort(pid)
-		package = Package.query.get(pid)
+		package = Package.query.get_or_404(pid)
 		query = query.filter_by(package=package)
 
 	query = query.filter_by(review_id=None)
@@ -52,7 +52,8 @@ def list_all():
 
 	pagination = query.paginate(page=page, per_page=num)
 
-	return render_template("threads/list.html", pagination=pagination, threads=pagination.items, package=package)
+	return render_template("threads/list.html", pagination=pagination, threads=pagination.items,
+			package=package, noindex=pid)
 
 
 @bp.route("/threads/<int:id>/subscribe/", methods=["POST"])
