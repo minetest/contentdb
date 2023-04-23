@@ -24,10 +24,13 @@ There are a number of reasons this may have happened:
 * Temporary problem with ContentDB.
 * Email has been unsubscribed.
 
-If the email doesn't arrive after registering by email, then you'll need to try registering again in 12 hours.
-Unconfirmed accounts are deleted after 12 hours.
+**When creating an account by email:**
+If the email doesn't arrive after registering by email, then you'll need to
+try registering again in 12 hours. Unconfirmed accounts are deleted after 12 hours.
 
-If the email verification was sent using the Email settings tab, then you can just set a new email.
+**When changing your email (or it was set after a forum-based registration)**:
+then you can just set a new email in
+[Settings > Email and Notifications](https://content.minetest.net/user/settings/email/).
 
 If you have previously unsubscribed this email, then ContentDB is completely prevented from sending emails to that
 address. You'll need to use a different email address, or [contact rubenwardy](https://rubenwardy.com/contact/) to
