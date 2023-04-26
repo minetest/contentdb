@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-03-09 18:38+0000\n"
-"PO-Revision-Date: 2023-04-11 19:50+0000\n"
-"Last-Translator: syl <syl@gresille.org>\n"
+"PO-Revision-Date: 2023-04-17 19:52+0000\n"
+"Last-Translator: John Donne <akheron@zaclys.net>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/minetest/"
 "contentdb/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.17-dev\n"
+"X-Generator: Weblate 4.17\n"
 "Generated-By: Babel 2.9.1\n"
 
 #: app/__init__.py:118
@@ -472,8 +472,9 @@ msgstr ""
 #: app/blueprints/threads/__init__.py:236
 #: app/blueprints/threads/__init__.py:328 app/blueprints/users/settings.py:88
 #: app/logic/packages.py:125
+#, fuzzy
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "Faire référence à des sites bloqués n'est pas autorisé"
 
 #: app/blueprints/packages/reviews.py:182
 msgid "You can't vote on the reviews on your own package!"
@@ -1503,6 +1504,8 @@ msgstr ""
 #: app/templates/donate/index.html:67
 msgid "Sign in to see recommendations based on the packages you've reviewed"
 msgstr ""
+"Connectez-vous pour voir des recommandations basées sur les paquets que vous "
+"avez commentés"
 
 #: app/templates/donate/index.html:74
 msgid "Top packages"
@@ -1511,7 +1514,7 @@ msgstr "Top des paquets"
 #: app/templates/donate/index.html:78
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d paquets ont besoin de dons"
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -2209,6 +2212,7 @@ msgstr "Les vidéos YouTube seront intégrées dans les pages."
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
 msgstr ""
+"Si le champ est vide, l'URL de donation de l'auteur sera utilisée à la place."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2669,7 +2673,7 @@ msgstr "Annuler"
 
 #: app/templates/packages/remove.html:39
 msgid "Unapprove"
-msgstr ""
+msgstr "Désapprouver"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2994,7 +2998,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:481
 msgid "Please specify compatible games"
-msgstr ""
+msgstr "Veuillez spécifier les jeux compatibles"
 
 #: app/templates/packages/view.html:487
 msgid "Information"
