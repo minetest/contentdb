@@ -1,8 +1,8 @@
 {% extends "base.html" %}
 
-{% block title %}
+{% block title -%}
 	{{ _("Support packages") }}
-{% endblock %}
+{%- endblock %}
 
 {% macro authorlink(author) %}
 	<a href="{{ url_for('users.profile', username=author.username) }}">
