@@ -1,14 +1,9 @@
 {% extends "base.html" %}
 
-{% block title %}
+{% block title -%}
 	{{ _("Report") }}
-{% endblock %}
+{%- endblock %}
 
-{% block headextra %}
-	{% if noindex %}
-		<meta name="robots" content="noindex">
-	{% endif %}
-{% endblock %}
 
 {% block content %}
 
