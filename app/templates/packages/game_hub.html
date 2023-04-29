@@ -5,12 +5,11 @@
 {{ _('%(title)s by %(author)s', title=package.title, author=package.author.display_name) }}
 {% endblock %}
 
+{% block description -%}
+	{{ _('Mods and texture packs for %(title)s', title=package.title) }}
+{% endblock %}
 
 {% block headextra %}
-	<meta name="og:title" content="{{ self.title() }}"/>
-	<meta name="og:description" content="{{ _('Mods for %(title)s', title=package.title) }}"/>
-	<meta name="description" content="{{ _('Mods for %(title)s', title=package.title) }}"/>
-	<meta name="og:url" content="{{ package.getURL('packages.game_hub', absolute=True) }}"/>
 	{% if package.getThumbnailURL(3, True) %}
 		<meta name="og:image" content="{{ package.getThumbnailURL(3, True) }}"/>
 	{% endif %}

@@ -1,23 +1,26 @@
 from . import app, utils
 from .models import Permission, Package, PackageState, PackageRelease
 from .utils import abs_url_for, url_set_query, url_set_anchor, url_current
+from .utils.minetest_hypertext import normalize_whitespace as do_normalize_whitespace
+from .markdown import get_headings
+
 from flask_login import current_user
 from flask_babel import format_timedelta, gettext
 from urllib.parse import urlparse
 from datetime import datetime as dt
-
-from app.markdown import get_headings
 
 
 @app.context_processor
 def inject_debug():
 	return dict(debug=app.debug)
 
+
 @app.context_processor
 def inject_functions():
 	check_global_perm = Permission.checkPerm
 	return dict(abs_url_for=abs_url_for, url_set_query=url_set_query, url_set_anchor=url_set_anchor,
 			check_global_perm=check_global_perm, get_headings=get_headings, url_current=url_current)
+
 
 @app.context_processor
 def inject_todo():
@@ -28,13 +31,21 @@ def inject_todo():
 
 	return dict(todo_list_count=todo_list_count)
 
+
 @app.template_filter()
 def throw(err):
 	raise Exception(err)
 
+
+@app.template_filter()
+def normalize_whitespace(str):
+	return do_normalize_whitespace(str).strip()
+
+
 @app.template_filter()
 def domain(url):
 	return urlparse(url).netloc
+
 
 @app.template_filter()
 def date(value):
@@ -45,6 +56,7 @@ def date(value):
 def full_datetime(value):
 	return value.strftime("%Y-%m-%d %H:%M") + " UTC"
 
+
 @app.template_filter()
 def datetime(value):
 	delta = dt.utcnow() - value
@@ -53,13 +65,16 @@ def datetime(value):
 	else:
 		return full_datetime(value)
 
+
 @app.template_filter()
 def isodate(value):
 	return value.strftime("%Y-%m-%d")
 
+
 @app.template_filter()
 def timedelta(value):
 	return format_timedelta(value)
+
 
 @app.template_filter()
 def abs_url(url):

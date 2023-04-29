@@ -17,11 +17,11 @@
 	{%- endif -%}
 {% endblock %}
 
+{% block description -%}
+	{{ thread.get_description() }}
+{%- endblock %}
+
 {% block headextra %}
-	<meta name="og:title" content="{{ self.title() }}"/>
-	<meta name="og:description" content="{{ thread.get_description() }}"/>
-	<meta name="description" content="{{ thread.get_description() }}"/>
-	<meta name="og:url" content="{{ thread.getViewURL(absolute=True) }}"/>
 	<meta name="og:image" content="{{ thread.author.getProfilePicURL() }}"/>
 {% endblock %}
 

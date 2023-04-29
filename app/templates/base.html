@@ -4,16 +4,20 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{% block title %}title{% endblock %} - {{ config.USER_APP_NAME }}</title>
+	<title>{{ self.title() | normalize_whitespace }} - {{ config.USER_APP_NAME }}</title>
 	<link rel="stylesheet" type="text/css" href="/static/libs/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=38">
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
 	<link rel="shortcut icon" href="/favicon-16.png" sizes="16x16">
 	<link rel="icon" href="/favicon-128.png" sizes="128x128">
 	<link rel="icon" href="/favicon-32.png" sizes="32x32">
-	{% if noindex %}
-		<meta name="robots" content="noindex">
-	{% endif %}
+	{% if noindex -%}
+	<meta name="robots" content="noindex">
+	{%- endif %}
+	{% if self.description -%}
+	<meta name="description" content="{{ self.description() | normalize_whitespace }}">
+	<meta name="og:description" content="{{ self.description() | normalize_whitespace }}">
+	{%- endif %}
 	{% block headextra %}{% endblock %}
 </head>
 <body>

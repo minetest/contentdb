@@ -9,12 +9,6 @@
 	{{ _("Donations are a great way to support your favorite modders, artists, and game developers.") }}
 {% endblock %}
 
-{% block headextra %}
-	<meta name="og:title" content="{{ self.title() }}">
-	<meta name="og:description" content="{{ self.description() | replace('\n', ' ') }}">
-	<meta name="description" content="{{ self.description() | replace('\n', ' ') }}">
-{% endblock %}
-
 {% macro authorlink(author) %}
 	<a href="{{ url_for('users.profile', username=author.username) }}">
 		{{ author.display_name }}
