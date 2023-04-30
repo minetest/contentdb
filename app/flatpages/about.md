@@ -7,12 +7,12 @@ ContentDB was created by [rubenwardy](https://rubenwardy.com/) in 2018, he was l
 as it was submitted as university coursework. To learn about the history and development of ContentDB,
 [see the blog post](https://blog.rubenwardy.com/2022/03/24/contentdb/).
 
-ContentDB is open source software, licensed on AGPLv3.0.
+ContentDB is open source software, licensed under AGPLv3.0.
 
-<a href="https://github.com/minetest/contentdb/" class="btn btn-primary">Source code</a>
-<a href="https://github.com/minetest/contentdb/issues/" class="btn btn-secondary">Issue tracker</a>
-<a href="https://rubenwardy.com/contact/" class="btn btn-secondary">Contact admin</a>
-
+<a href="https://github.com/minetest/contentdb/" class="btn btn-primary mr-1">Source code</a>
+<a href="https://github.com/minetest/contentdb/issues/" class="btn btn-secondary mr-1">Issue tracker</a>
+<a href="https://rubenwardy.com/contact/" class="btn btn-secondary mr-1">Contact admin</a>
+<a href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb" class="btn btn-secondary">Stats / monitoring</a>
 
 ## Why was ContentDB created?
 
