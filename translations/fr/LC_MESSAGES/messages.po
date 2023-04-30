@@ -7,24 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-03-09 18:38+0000\n"
+"POT-Creation-Date: 2023-04-30 01:43+0100\n"
 "PO-Revision-Date: 2023-04-17 19:52+0000\n"
 "Last-Translator: John Donne <akheron@zaclys.net>\n"
-"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
-"contentdb/fr/>\n"
 "Language: fr\n"
+"Language-Team: French "
+"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 4.17\n"
-"Generated-By: Babel 2.9.1\n"
+"Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:118
+#: app/__init__.py:119
 msgid "Banned:"
 msgstr "Banni :"
 
-#: app/__init__.py:120
+#: app/__init__.py:121
 msgid "You have been banned."
 msgstr "Vous avez été banni."
 
@@ -36,7 +35,7 @@ msgstr "Vous avez été banni."
 msgid "Packages"
 msgstr "Paquets"
 
-#: app/template_filters.py:52
+#: app/template_filters.py:64
 #, python-format
 msgid "%(delta)s ago"
 msgstr "il y a %(delta)s"
@@ -51,7 +50,7 @@ msgstr "Nom"
 msgid "Limit to package"
 msgstr "Limiter au paquet"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:254
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:253
 #: app/blueprints/packages/packages.py:480
 #: app/blueprints/packages/packages.py:576
 #: app/blueprints/packages/packages.py:646
@@ -62,7 +61,7 @@ msgstr "Limiter au paquet"
 #: app/blueprints/packages/screenshots.py:46
 #: app/blueprints/users/account.py:228 app/blueprints/users/account.py:235
 #: app/blueprints/users/settings.py:53 app/blueprints/users/settings.py:123
-#: app/blueprints/users/settings.py:277 app/templates/users/modtools.html:86
+#: app/blueprints/users/settings.py:278 app/templates/users/modtools.html:86
 msgid "Save"
 msgstr "Sauvegarder"
 
@@ -93,7 +92,7 @@ msgstr "Éditer les détails"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:543 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:545 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Versions"
 
@@ -105,18 +104,18 @@ msgstr "Captures d'écran"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:514
+#: app/templates/packages/view.html:516
 msgid "Maintainers"
 msgstr "Mainteneurs"
 
-#: app/blueprints/packages/__init__.py:52 app/templates/base.html:144
+#: app/blueprints/packages/__init__.py:52 app/templates/base.html:151
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
 msgstr "Journal d'audit"
 
-#: app/blueprints/packages/__init__.py:57 app/templates/base.html:135
+#: app/blueprints/packages/__init__.py:57 app/templates/base.html:142
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
-#: app/templates/packages/view.html:232 app/templates/users/profile.html:130
+#: app/templates/packages/view.html:234 app/templates/users/profile.html:130
 msgid "Statistics"
 msgstr "Statistiques"
 
@@ -152,24 +151,24 @@ msgstr ""
 "Avertissement : Sujet de forum non trouvé. Cela peut se produire si le "
 "sujet vient juste d'être créé."
 
-#: app/blueprints/packages/packages.py:219
+#: app/blueprints/packages/packages.py:218
 msgid "No download available."
 msgstr "Aucun téléchargement disponible."
 
-#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:491
+#: app/blueprints/packages/packages.py:232 app/templates/packages/view.html:493
 msgid "Type"
 msgstr "Type"
 
-#: app/blueprints/packages/packages.py:234
+#: app/blueprints/packages/packages.py:233
 msgid "Title (Human-readable)"
 msgstr "Titre (Lisible)"
 
-#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:234
 #: app/blueprints/packages/packages.py:574
 msgid "Name (Technical)"
 msgstr "Nom (Technique)"
 
-#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:234
 #: app/blueprints/packages/packages.py:575
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
@@ -177,64 +176,64 @@ msgstr ""
 "Lettres minuscules (a-z), chiffres (0-9) et caractères de soulignement "
 "(_) uniquement"
 
-#: app/blueprints/packages/packages.py:236
+#: app/blueprints/packages/packages.py:235
 msgid "Short Description (Plaintext)"
 msgstr "Description Courte (Texte)"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:506
+#: app/blueprints/packages/packages.py:237 app/templates/packages/view.html:508
 msgid "Maintenance State"
 msgstr "État de maintenance"
 
-#: app/blueprints/packages/packages.py:240 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:239 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "Étiquettes"
 
-#: app/blueprints/packages/packages.py:241
+#: app/blueprints/packages/packages.py:240
 msgid "Content Warnings"
 msgstr "Avertissements de contenu"
 
-#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:495
+#: app/blueprints/packages/packages.py:241 app/templates/packages/view.html:497
 msgid "License"
 msgstr "Licence"
 
-#: app/blueprints/packages/packages.py:243
+#: app/blueprints/packages/packages.py:242
 msgid "Media License"
 msgstr "Licence des ressources"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:244
 msgid "Long Description (Markdown)"
 msgstr "Description Longue (Markdown)"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:246
 msgid "VCS Repository URL"
 msgstr "URL du dépôt VCS"
 
-#: app/blueprints/packages/packages.py:248 app/blueprints/users/settings.py:51
+#: app/blueprints/packages/packages.py:247 app/blueprints/users/settings.py:51
 msgid "Website URL"
 msgstr "URL du site web"
 
-#: app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:248
 msgid "Issue Tracker URL"
 msgstr "URL du suivi des problèmes"
 
-#: app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:249
 msgid "Forum Topic ID"
 msgstr "ID du sujet de forum"
 
-#: app/blueprints/packages/packages.py:251
+#: app/blueprints/packages/packages.py:250
 msgid "Video URL"
 msgstr "URL de la vidéo"
 
-#: app/blueprints/packages/packages.py:252
+#: app/blueprints/packages/packages.py:251
 msgid "Donate URL"
 msgstr "URL de don"
 
-#: app/blueprints/packages/packages.py:258
+#: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
 msgstr "_game n'est pas un nom valide"
 
-#: app/blueprints/packages/packages.py:268
+#: app/blueprints/packages/packages.py:267
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -242,7 +241,7 @@ msgstr ""
 "Le package existe déjà, mais a été supprimé. Merci de contacter l'équipe "
 "ContentDB pour restaurer ce package"
 
-#: app/blueprints/packages/packages.py:273
+#: app/blueprints/packages/packages.py:272
 msgid "Package already exists"
 msgstr "Le paquet existe déjà"
 
@@ -312,7 +311,7 @@ msgstr "Jeux incompatibles ( séparer avec des virgules )"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
-#: app/blueprints/threads/__init__.py:277 app/templates/macros/reviews.html:128
+#: app/blueprints/threads/__init__.py:278 app/templates/macros/reviews.html:134
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
@@ -436,31 +435,36 @@ msgstr "Configuration de mise à jour supprimée"
 msgid "Now, please create an initial release"
 msgstr "Maintenant, veuillez créer une version initiale"
 
-#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:177
-#: app/blueprints/threads/__init__.py:178
-#: app/blueprints/threads/__init__.py:278
+#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:178
+#: app/blueprints/threads/__init__.py:179
+#: app/blueprints/threads/__init__.py:279
 msgid "Comment"
 msgstr "Commentaires"
 
-#: app/blueprints/packages/reviews.py:46 app/blueprints/threads/__init__.py:279
-msgid "Private"
-msgstr "Privé"
+#: app/blueprints/packages/reviews.py:46
+msgid "Rating"
+msgstr ""
 
-#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:115
-#: app/templates/macros/reviews.html:154
+#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:117
+#: app/templates/macros/reviews.html:160
 msgid "Yes"
 msgstr "Oui"
 
-#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:119
-#: app/templates/macros/reviews.html:158
+#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:121
+#: app/templates/macros/reviews.html:164
+msgid "Neutral"
+msgstr ""
+
+#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:125
+#: app/templates/macros/reviews.html:168
 msgid "No"
 msgstr "Non"
 
-#: app/blueprints/packages/reviews.py:55
+#: app/blueprints/packages/reviews.py:56
 msgid "You can't review your own package!"
 msgstr "Vous ne pouvez pas évaluer votre propre paquet !"
 
-#: app/blueprints/packages/reviews.py:65
+#: app/blueprints/packages/reviews.py:66
 msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
@@ -468,19 +472,19 @@ msgstr ""
 "Vous avez évalué trop de paquets récemment. Veuillez attendre avant de "
 "réessayer, et pensez à plus détailler vos évaluations"
 
-#: app/blueprints/packages/reviews.py:78 app/blueprints/threads/__init__.py:203
-#: app/blueprints/threads/__init__.py:236
-#: app/blueprints/threads/__init__.py:328 app/blueprints/users/settings.py:88
+#: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:204
+#: app/blueprints/threads/__init__.py:237
+#: app/blueprints/threads/__init__.py:329 app/blueprints/users/settings.py:88
 #: app/logic/packages.py:125
 #, fuzzy
 msgid "Linking to blocked sites is not allowed"
 msgstr "Faire référence à des sites bloqués n'est pas autorisé"
 
-#: app/blueprints/packages/reviews.py:182
+#: app/blueprints/packages/reviews.py:183
 msgid "You can't vote on the reviews on your own package!"
 msgstr "Vous ne pouvez voter pour les évaluations de votre propre paquet !"
 
-#: app/blueprints/packages/reviews.py:190
+#: app/blueprints/packages/reviews.py:191
 msgid "You can't vote on your own reviews!"
 msgstr "Vous ne pouvez pas voter pour vos propres évaluations !"
 
@@ -498,59 +502,62 @@ msgstr "Image de couverture"
 msgid "Message"
 msgstr "Message"
 
-#: app/blueprints/report/__init__.py:35 app/templates/base.html:246
-#: app/templates/macros/threads.html:50 app/templates/packages/view.html:574
-#: app/templates/report/index.html:4 app/templates/report/index.html:15
-#: app/templates/users/profile.html:28
+#: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:50
+#: app/templates/packages/view.html:576 app/templates/report/index.html:4
+#: app/templates/report/index.html:10 app/templates/users/profile.html:28
 msgid "Report"
 msgstr "Signaler"
 
-#: app/blueprints/threads/__init__.py:66
+#: app/blueprints/threads/__init__.py:67
 msgid "Already subscribed!"
 msgstr "Déjà abonné !"
 
-#: app/blueprints/threads/__init__.py:68
+#: app/blueprints/threads/__init__.py:69
 msgid "Subscribed to thread"
 msgstr "Abonné au fil de discussion"
 
-#: app/blueprints/threads/__init__.py:83
+#: app/blueprints/threads/__init__.py:84
 msgid "Unsubscribed!"
 msgstr "Désabonné !"
 
-#: app/blueprints/threads/__init__.py:87
+#: app/blueprints/threads/__init__.py:88
 msgid "Already not subscribed!"
 msgstr "Déjà non abonné !"
 
-#: app/blueprints/threads/__init__.py:106
+#: app/blueprints/threads/__init__.py:107
 msgid "Locked thread"
 msgstr "Fil verrouillé"
 
-#: app/blueprints/threads/__init__.py:109
+#: app/blueprints/threads/__init__.py:110
 msgid "Unlocked thread"
 msgstr "Fil déverrouillé"
 
-#: app/blueprints/threads/__init__.py:158
+#: app/blueprints/threads/__init__.py:159
 msgid "Cannot delete thread opening post!"
 msgstr "Impossible de supprimer le premier message d'un fil !"
 
-#: app/blueprints/threads/__init__.py:232
+#: app/blueprints/threads/__init__.py:233
 msgid "Please wait before commenting again"
 msgstr "Veuillez attendre avant de commenter à nouveau"
 
 #: app/blueprints/threads/__init__.py:280
+msgid "Private"
+msgstr "Privé"
+
+#: app/blueprints/threads/__init__.py:281
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
 msgstr "Ouvrir un fil de discussion"
 
-#: app/blueprints/threads/__init__.py:303
+#: app/blueprints/threads/__init__.py:304
 msgid "Unable to create thread!"
 msgstr "Impossible de créer le fil de discussion !"
 
-#: app/blueprints/threads/__init__.py:309
+#: app/blueprints/threads/__init__.py:310
 msgid "An approval thread already exists! Consider replying there instead"
 msgstr "Un fil d'approbation existe déjà ! Considérez plutôt d'y répondre"
 
-#: app/blueprints/threads/__init__.py:313
+#: app/blueprints/threads/__init__.py:314
 msgid "Please wait before opening another thread"
 msgstr "Veuillez attendre avant de commenter à nouveau"
 
@@ -568,8 +575,8 @@ msgstr "Mot de passe"
 msgid "Remember me"
 msgstr "Se rappeler de moi"
 
-#: app/blueprints/users/account.py:40 app/templates/base.html:173
-#: app/templates/donate/index.html:70 app/templates/users/login.html:4
+#: app/blueprints/users/account.py:40 app/templates/base.html:180
+#: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "Se connecter"
 
@@ -598,7 +605,7 @@ msgstr "Échec de l'authentification"
 msgid "Display Name"
 msgstr "Nom affiché"
 
-#: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:271
+#: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:272
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "Nom d'utilisateur"
@@ -918,23 +925,23 @@ msgstr ""
 "Les utilisateurs ayant le rang de modérateur ou un rang supérieur ne "
 "peuvent pas être supprimés"
 
-#: app/blueprints/users/settings.py:272
+#: app/blueprints/users/settings.py:273
 msgid "Display name"
 msgstr "Nom affiché"
 
-#: app/blueprints/users/settings.py:273
+#: app/blueprints/users/settings.py:274
 msgid "Forums Username"
 msgstr "Nom d'utilisateur sur le forum"
 
-#: app/blueprints/users/settings.py:274
+#: app/blueprints/users/settings.py:275
 msgid "GitHub Username"
 msgstr "Nom d'utilisateur GitHub"
 
-#: app/blueprints/users/settings.py:275 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:276 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "Rang"
 
-#: app/blueprints/users/settings.py:319
+#: app/blueprints/users/settings.py:320
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr ""
 "Vous ne pouvez pas promouvoir un utilisateur à un rang supérieur au vôtre"
@@ -948,7 +955,7 @@ msgstr "Le texte à chercher (regex)"
 msgid "File filter"
 msgstr "Filtre de fichiers"
 
-#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:49
+#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:56
 #: app/templates/todo/tags.html:15
 msgid "Search"
 msgstr "Rechercher"
@@ -1061,17 +1068,17 @@ msgstr "Jeu"
 msgid "Texture Pack"
 msgstr "Pack de texture"
 
-#: app/models/packages.py:75 app/templates/base.html:27
+#: app/models/packages.py:75 app/templates/base.html:34
 #: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Mods"
 
-#: app/models/packages.py:77 app/templates/base.html:30
+#: app/models/packages.py:77 app/templates/base.html:37
 #: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Jeux"
 
-#: app/models/packages.py:79 app/templates/base.html:33
+#: app/models/packages.py:79 app/templates/base.html:40
 msgid "Texture Packs"
 msgstr "Packs de textures"
 
@@ -1088,7 +1095,7 @@ msgstr "Approuver"
 #: app/templates/packages/review_create_edit.html:55
 #: app/templates/threads/delete_reply.html:19
 #: app/templates/threads/delete_thread.html:19
-#: app/templates/threads/view.html:40 app/templates/users/delete.html:34
+#: app/templates/threads/view.html:42 app/templates/users/delete.html:34
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -1126,7 +1133,7 @@ msgstr "Gérer les préférences email"
 #: app/templates/emails/notification_digest.html:54
 #: app/templates/emails/verify.html:33
 #: app/templates/emails/verify_unsubscribe.html:13
-#: app/templates/threads/view.html:31 app/templates/users/unsubscribe.html:4
+#: app/templates/threads/view.html:33 app/templates/users/unsubscribe.html:4
 #: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
 msgstr "Se désabonner"
@@ -1143,108 +1150,120 @@ msgstr ""
 "Cette page n'a pas pu être trouvée. Le lien est peut-être rompu, la page "
 "a peut-être été supprimée ou vous n'y avez peut-être pas accès."
 
-#: app/templates/base.html:36
+#: app/templates/base.html:43
 msgid "Random"
 msgstr "Aléatoire"
 
-#: app/templates/base.html:39 app/templates/base.html:241
+#: app/templates/base.html:46 app/templates/base.html:248
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
 msgid "Help"
 msgstr "Aide"
 
-#: app/templates/base.html:46
+#: app/templates/base.html:53
 #, python-format
 msgid "Search %(type)s"
 msgstr "Rechercher %(type)s"
 
-#: app/templates/base.html:46 app/templates/todo/tags.html:11
+#: app/templates/base.html:53 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "Rechercher dans tous les paquets"
 
-#: app/templates/base.html:65
+#: app/templates/base.html:72
 msgid "Work Queue"
 msgstr "File d'attente"
 
-#: app/templates/base.html:78 app/templates/base.html:130
+#: app/templates/base.html:85 app/templates/base.html:137
 msgid "To do list"
 msgstr "À faire"
 
-#: app/templates/base.html:87 app/templates/notifications/list.html:4
+#: app/templates/base.html:94 app/templates/notifications/list.html:4
 msgid "Notifications"
 msgstr "Notifications"
 
-#: app/templates/base.html:108
+#: app/templates/base.html:115
 msgid "Add Package"
 msgstr "Créer un paquet"
 
-#: app/templates/base.html:125
+#: app/templates/base.html:132
 msgid "Profile"
 msgstr "Profil"
 
-#: app/templates/base.html:148
+#: app/templates/base.html:155
 msgid "Admin"
 msgstr "Admin"
 
-#: app/templates/base.html:151
+#: app/templates/base.html:158
 msgid "License Editor"
 msgstr "Éditeur de licences"
 
-#: app/templates/base.html:156
+#: app/templates/base.html:163
 msgid "Restore Package"
 msgstr "Restaurer le paquet"
 
-#: app/templates/base.html:159
+#: app/templates/base.html:166
 msgid "Tag Editor"
 msgstr "Éditeur d'étiquettes"
 
-#: app/templates/base.html:161
+#: app/templates/base.html:168
 msgid "Create Tag"
 msgstr "Créer une étiquette"
 
-#: app/templates/base.html:166 app/templates/packages/release_new.html:12
+#: app/templates/base.html:173 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "Paramètres"
 
-#: app/templates/base.html:169
+#: app/templates/base.html:176
 msgid "Sign out"
 msgstr "Se déconnecter"
 
-#: app/templates/base.html:198
+#: app/templates/base.html:205
 msgid "Help translate ContentDB"
 msgstr "Aider à traduire le ContentDB"
 
-#: app/templates/base.html:242
+#: app/templates/base.html:249
+msgid "About"
+msgstr ""
+
+#: app/templates/base.html:250
+msgid "Rules"
+msgstr ""
+
+#: app/templates/base.html:251
 msgid "Policy and Guidance"
 msgstr "Règles et Recommandations"
 
-#: app/templates/base.html:243
+#: app/templates/base.html:252
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:244 app/templates/users/register.html:37
+#: app/templates/base.html:253 app/templates/users/register.html:37
 msgid "Privacy Policy"
 msgstr "Politique de confidentialité"
 
-#: app/templates/base.html:248
+#: app/templates/base.html:255
+msgid "Report / DMCA"
+msgstr ""
+
+#: app/templates/base.html:257
 msgid "Stats / Monitoring"
 msgstr "Statistiques / Monitoring"
 
-#: app/templates/base.html:249
+#: app/templates/base.html:258
 msgid "User List"
 msgstr "Liste des utilisateurs"
 
-#: app/templates/base.html:250 app/templates/packages/view.html:194
-#: app/templates/packages/view.html:563 app/templates/threads/list.html:4
+#: app/templates/base.html:259 app/templates/packages/view.html:194
+#: app/templates/packages/view.html:565 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Fils"
 
-#: app/templates/base.html:251
+#: app/templates/base.html:260
 msgid "Support Packages"
 msgstr "Paquets pris en charge"
 
-#: app/templates/base.html:252
+#: app/templates/base.html:261
 msgid "Source Code"
 msgstr "Code source"
 
@@ -1252,81 +1271,85 @@ msgstr "Code source"
 msgid "Welcome"
 msgstr "Bienvenue"
 
-#: app/templates/index.html:38 app/templates/macros/reviews.html:73
+#: app/templates/index.html:8
+msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
+msgstr ""
+
+#: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
-#: app/templates/packages/game_hub.html:26
+#: app/templates/packages/game_hub.html:25
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(title)s par %(author)s"
 
-#: app/templates/index.html:43
+#: app/templates/index.html:47
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> par %(author)s"
 
-#: app/templates/index.html:69 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:198 app/templates/packages/view.html:297
+#: app/templates/index.html:73 app/templates/packages/reviews_list.html:4
+#: app/templates/packages/view.html:198 app/templates/packages/view.html:299
 #: app/templates/users/profile.html:216
 msgid "Reviews"
 msgstr "Évaluations"
 
-#: app/templates/index.html:86
+#: app/templates/index.html:92
 msgid "Previous"
 msgstr "Précédent"
 
-#: app/templates/index.html:90 app/templates/users/claim_forums.html:87
+#: app/templates/index.html:96 app/templates/users/claim_forums.html:87
 msgid "Next"
 msgstr "Suivant"
 
-#: app/templates/index.html:96
+#: app/templates/index.html:102
 msgid "Featured"
 msgstr "Mis en avant"
 
-#: app/templates/index.html:101 app/templates/index.html:108
-#: app/templates/index.html:115 app/templates/index.html:122
-#: app/templates/index.html:129 app/templates/index.html:151
-#: app/templates/index.html:158 app/templates/packages/game_hub.html:31
-#: app/templates/packages/game_hub.html:38
-#: app/templates/packages/game_hub.html:45
-#: app/templates/packages/game_hub.html:52
-#: app/templates/packages/game_hub.html:59
+#: app/templates/index.html:107 app/templates/index.html:114
+#: app/templates/index.html:121 app/templates/index.html:128
+#: app/templates/index.html:135 app/templates/index.html:157
+#: app/templates/index.html:164 app/templates/packages/game_hub.html:30
+#: app/templates/packages/game_hub.html:37
+#: app/templates/packages/game_hub.html:44
+#: app/templates/packages/game_hub.html:51
+#: app/templates/packages/game_hub.html:58
 msgid "See more"
 msgstr "Voir plus"
 
-#: app/templates/index.html:103 app/templates/packages/game_hub.html:33
+#: app/templates/index.html:109 app/templates/packages/game_hub.html:32
 msgid "Recently Added"
 msgstr "Récemment ajouté"
 
-#: app/templates/index.html:110 app/templates/packages/game_hub.html:40
+#: app/templates/index.html:116 app/templates/packages/game_hub.html:39
 msgid "Recently Updated"
 msgstr "Récemment mis à jour"
 
-#: app/templates/index.html:117
+#: app/templates/index.html:123
 msgid "Top Games"
 msgstr "Top des Jeux"
 
-#: app/templates/index.html:124 app/templates/packages/game_hub.html:47
+#: app/templates/index.html:130 app/templates/packages/game_hub.html:46
 msgid "Top Mods"
 msgstr "Top des Mods"
 
-#: app/templates/index.html:131 app/templates/packages/game_hub.html:54
+#: app/templates/index.html:137 app/templates/packages/game_hub.html:53
 msgid "Top Texture Packs"
 msgstr "Top des Packs de textures"
 
-#: app/templates/index.html:135
+#: app/templates/index.html:141
 msgid "Search by Tags"
 msgstr "Recherche par étiquettes"
 
-#: app/templates/index.html:153 app/templates/packages/game_hub.html:61
+#: app/templates/index.html:159 app/templates/packages/game_hub.html:60
 msgid "Highest Reviewed"
 msgstr "Les plus évalués"
 
-#: app/templates/index.html:160
+#: app/templates/index.html:166
 msgid "Recent Positive Reviews"
 msgstr "Évaluations positives récentes"
 
-#: app/templates/index.html:167
+#: app/templates/index.html:173
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
 msgstr ""
@@ -1466,52 +1489,52 @@ msgstr "Aucun token créé"
 msgid "Support packages"
 msgstr ""
 
-#: app/templates/donate/index.html:32
-#, python-format
-msgid "by %(author)s"
-msgstr "par %(author)s"
-
-#: app/templates/donate/index.html:37
-msgid "View package"
-msgstr "Voir le paquet"
-
-#: app/templates/donate/index.html:41 app/templates/users/profile.html:95
-msgid "Donate"
-msgstr "Faire un don"
-
-#: app/templates/donate/index.html:54
+#: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
 msgstr "Certains créateurs de contenu acceptent des dons pour leur travail."
 
-#: app/templates/donate/index.html:55
+#: app/templates/donate/index.html:9
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
-"Les dons sont un bon moyen de soutenir vos créateurs de mods, artistes et "
-"développeurs de jeu préférés."
+"Les dons sont un bon moyen de soutenir vos créateurs de mods, artistes et"
+" développeurs de jeu préférés."
 
-#: app/templates/donate/index.html:58
+#: app/templates/donate/index.html:37
+#, python-format
+msgid "by %(author)s"
+msgstr "par %(author)s"
+
+#: app/templates/donate/index.html:42
+msgid "View package"
+msgstr "Voir le paquet"
+
+#: app/templates/donate/index.html:46 app/templates/users/profile.html:95
+msgid "Donate"
+msgstr "Faire un don"
+
+#: app/templates/donate/index.html:62
 msgid "Based on your reviews"
 msgstr "Basé sur vos évaluations"
 
-#: app/templates/donate/index.html:63
+#: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Considering reviewing your "
 "favourite packages"
 msgstr ""
 
-#: app/templates/donate/index.html:67
+#: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
 msgstr ""
-"Connectez-vous pour voir des recommandations basées sur les paquets que vous "
-"avez commentés"
+"Connectez-vous pour voir des recommandations basées sur les paquets que "
+"vous avez commentés"
 
-#: app/templates/donate/index.html:74
+#: app/templates/donate/index.html:78
 msgid "Top packages"
 msgstr "Top des paquets"
 
-#: app/templates/donate/index.html:78
+#: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
 msgstr "%(count)d paquets ont besoin de dons"
@@ -1752,7 +1775,7 @@ msgid "Edit / Approve"
 msgstr "Éditer / Approuver"
 
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:119
-#: app/templates/packages/view.html:251
+#: app/templates/packages/view.html:253
 msgid "Edit"
 msgstr "Modifier"
 
@@ -1777,32 +1800,32 @@ msgstr "Utile"
 msgid "Unhelpful"
 msgstr "Inutile"
 
-#: app/templates/macros/reviews.html:82
+#: app/templates/macros/reviews.html:84
 #, python-format
 msgid "%(num)d comments"
 msgstr "%(num)d commentaires"
 
-#: app/templates/macros/reviews.html:94
+#: app/templates/macros/reviews.html:96
 msgid "No reviews, yet."
 msgstr "Aucune évaluations pour l'instant."
 
-#: app/templates/macros/reviews.html:104 app/templates/macros/reviews.html:143
+#: app/templates/macros/reviews.html:106 app/templates/macros/reviews.html:149
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
 msgstr "Évaluation"
 
-#: app/templates/macros/reviews.html:109 app/templates/macros/reviews.html:148
+#: app/templates/macros/reviews.html:111 app/templates/macros/reviews.html:154
 #: app/templates/packages/review_create_edit.html:35
 #, python-format
 msgid "Do you recommend this %(type)s?"
 msgstr "Recommandez-vous ce %(type)s ?"
 
-#: app/templates/macros/reviews.html:124
+#: app/templates/macros/reviews.html:130
 #: app/templates/packages/review_create_edit.html:40
 msgid "Why or why not? Try to be constructive"
 msgstr "Pourquoi ou pourquoi pas ? Soyez constructif"
 
-#: app/templates/macros/reviews.html:133
+#: app/templates/macros/reviews.html:139
 msgid "Post Review"
 msgstr "Créer l'évaluation"
 
@@ -1929,7 +1952,7 @@ msgstr ""
 "Vous pouvez ajouter quelqu'un à fil de discussion privé avec @nom-"
 "utilisateur."
 
-#: app/templates/macros/threads.html:197 app/templates/macros/threads.html:277
+#: app/templates/macros/threads.html:197 app/templates/macros/threads.html:279
 msgid "No threads found"
 msgstr "Aucun fil trouvé"
 
@@ -1947,7 +1970,7 @@ msgid "On %(trigger)s, do %(action)s"
 msgstr "Quand %(trigger)s, exécuter %(action)s"
 
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:125
-#: app/templates/packages/view.html:365
+#: app/templates/packages/view.html:367
 msgid "Release"
 msgstr "Version"
 
@@ -1957,7 +1980,7 @@ msgstr "Dépôt"
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:369
+#: app/templates/packages/view.html:371
 msgid "Update settings"
 msgstr "Paramètres de mise à jour"
 
@@ -2018,8 +2041,8 @@ msgstr "Sujets du forum"
 
 #: app/templates/modnames/view.html:27
 #: app/templates/packages/game_support.html:37
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:406
-#: app/templates/packages/view.html:430 app/templates/packages/view.html:460
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:408
+#: app/templates/packages/view.html:432 app/templates/packages/view.html:462
 #: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -2147,7 +2170,7 @@ msgstr ""
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/packages/game_support.html:21
-#: app/templates/threads/view.html:84 app/templates/todo/tags.html:38
+#: app/templates/threads/view.html:88 app/templates/todo/tags.html:38
 msgid "Package"
 msgstr "Paquet"
 
@@ -2212,7 +2235,8 @@ msgstr "Les vidéos YouTube seront intégrées dans les pages."
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
 msgstr ""
-"Si le champ est vide, l'URL de donation de l'auteur sera utilisée à la place."
+"Si le champ est vide, l'URL de donation de l'auteur sera utilisée à la "
+"place."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2239,22 +2263,21 @@ msgstr ""
 "responsables, mais peuvent se supprimer eux-mêmes."
 
 #: app/templates/packages/game_hub.html:4
-#: app/templates/packages/game_hub.html:24
+#: app/templates/packages/game_hub.html:23
 msgid "Community Hub"
 msgstr "Centre communautaire"
 
-#: app/templates/packages/game_hub.html:11
-#: app/templates/packages/game_hub.html:12
+#: app/templates/packages/game_hub.html:9
 #, python-format
-msgid "Mods for %(title)s"
-msgstr "Mods pour %(title)s"
+msgid "Mods and texture packs for %(title)s"
+msgstr ""
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
 msgstr "Documentation"
 
 #: app/templates/packages/game_support.html:24
-#: app/templates/packages/view.html:215
+#: app/templates/packages/view.html:217
 msgid "Source"
 msgstr "Source"
 
@@ -2275,7 +2298,7 @@ msgid "mod.conf"
 msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
-#: app/templates/packages/view.html:464
+#: app/templates/packages/view.html:466
 msgid "No specific game is required"
 msgstr "Aucun jeu nécessaire n'est précisé"
 
@@ -2701,7 +2724,7 @@ msgstr ""
 " conservés, mais elle n'impactera plus la note du paquet."
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:325
+#: app/templates/packages/view.html:327
 msgid "Review Votes"
 msgstr "Votes d'évaluation"
 
@@ -2889,7 +2912,7 @@ msgstr "Code non libre"
 msgid "Non-free media"
 msgstr "Ressources non libres"
 
-#: app/templates/packages/view.html:97 app/templates/threads/view.html:92
+#: app/templates/packages/view.html:97 app/templates/threads/view.html:96
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
@@ -2906,138 +2929,138 @@ msgstr "Travail en cours"
 msgid "Downloads"
 msgstr "Téléchargements"
 
-#: app/templates/packages/view.html:209 app/templates/users/profile.html:86
+#: app/templates/packages/view.html:211 app/templates/users/profile.html:86
 msgid "Website"
 msgstr "Site web"
 
-#: app/templates/packages/view.html:221 app/templates/users/profile.html:68
+#: app/templates/packages/view.html:223 app/templates/users/profile.html:68
 msgid "Forums"
 msgstr "Forums"
 
-#: app/templates/packages/view.html:227
+#: app/templates/packages/view.html:229
 msgid "Issue Tracker"
 msgstr "Suivi des problèmes"
 
-#: app/templates/packages/view.html:275
+#: app/templates/packages/view.html:277
 msgid "Awaiting review"
 msgstr "En attente de révision"
 
-#: app/templates/packages/view.html:305 app/templates/threads/view.html:67
+#: app/templates/packages/view.html:307 app/templates/threads/view.html:69
 msgid "Edit Review"
 msgstr "Éditer l'évaluation"
 
-#: app/templates/packages/view.html:310
+#: app/templates/packages/view.html:312
 msgid "You can't review your own package."
 msgstr "Vous ne pouvez pas évaluer votre propre paquet."
 
-#: app/templates/packages/view.html:320
+#: app/templates/packages/view.html:322
 msgid "Package needs to be approved before it can be reviewed."
 msgstr "Le paquet doit être approuvé avant de pouvoir être évalué."
 
-#: app/templates/packages/view.html:331
+#: app/templates/packages/view.html:333
 msgid "Used By"
 msgstr "Utilisé par"
 
-#: app/templates/packages/view.html:337
+#: app/templates/packages/view.html:339
 msgid "Content"
 msgstr "Contenu"
 
-#: app/templates/packages/view.html:339 app/templates/packages/view.html:393
+#: app/templates/packages/view.html:341 app/templates/packages/view.html:395
 msgid "View content for game"
 msgstr "Voir le contenu de ce jeu"
 
-#: app/templates/packages/view.html:353
+#: app/templates/packages/view.html:355
 msgid "Package may be outdated"
 msgstr "Le paquet peut être obsolète"
 
-#: app/templates/packages/view.html:360
+#: app/templates/packages/view.html:362
 msgid "Only visible to the author and Editors."
 msgstr "Seulement visible par l'auteur et les éditeurs."
 
-#: app/templates/packages/view.html:377
+#: app/templates/packages/view.html:379
 msgid "Warning"
 msgstr "Avertissement"
 
-#: app/templates/packages/view.html:383
+#: app/templates/packages/view.html:385
 msgid "Like this package? Help support its development by making a donation"
 msgstr "Tu apprécies ce paquet ? Supporte son développement en faisant un don"
 
-#: app/templates/packages/view.html:386
+#: app/templates/packages/view.html:388
 msgid "Donate now"
 msgstr "Faire un don"
 
-#: app/templates/packages/view.html:398
+#: app/templates/packages/view.html:400
 msgid "Dependencies"
 msgstr "Dépendances"
 
-#: app/templates/packages/view.html:400
+#: app/templates/packages/view.html:402
 msgid "Required"
 msgstr "Requis"
 
-#: app/templates/packages/view.html:418
+#: app/templates/packages/view.html:420
 msgid "No required dependencies"
 msgstr "Aucune dépendance requise"
 
-#: app/templates/packages/view.html:424
+#: app/templates/packages/view.html:426
 msgid "Optional"
 msgstr "Optionnel"
 
-#: app/templates/packages/view.html:454
+#: app/templates/packages/view.html:456
 msgid "Compatible Games"
 msgstr "Jeux compatibles"
 
-#: app/templates/packages/view.html:470
+#: app/templates/packages/view.html:472
 msgid "This is an experimental feature."
 msgstr "C'est une fonctionnalité expérimentale."
 
-#: app/templates/packages/view.html:471
+#: app/templates/packages/view.html:473
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr ""
 "Les jeux compatibles sont déterminés par un algorithme, et peuvent ne pas"
 " être corrects."
 
-#: app/templates/packages/view.html:481
+#: app/templates/packages/view.html:483
 msgid "Please specify compatible games"
 msgstr "Veuillez spécifier les jeux compatibles"
 
-#: app/templates/packages/view.html:487
+#: app/templates/packages/view.html:489
 msgid "Information"
 msgstr "Informations"
 
-#: app/templates/packages/view.html:493
+#: app/templates/packages/view.html:495
 msgid "Technical Name"
 msgstr "Nom technique"
 
-#: app/templates/packages/view.html:502
+#: app/templates/packages/view.html:504
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s pour le code,<br>%(media_license)s pour les médias."
 
-#: app/templates/packages/view.html:510
+#: app/templates/packages/view.html:512
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: app/templates/packages/view.html:512
+#: app/templates/packages/view.html:514
 msgid "Added"
 msgstr "Ajouté"
 
-#: app/templates/packages/view.html:526
+#: app/templates/packages/view.html:528
 msgid "Remove myself"
 msgstr "Me retirer"
 
-#: app/templates/packages/view.html:531
+#: app/templates/packages/view.html:533
 msgid "Provides"
 msgstr "Fournit"
 
-#: app/templates/packages/view.html:553
+#: app/templates/packages/view.html:555
 msgid "More"
 msgstr "Plus"
 
-#: app/templates/packages/view.html:582
+#: app/templates/packages/view.html:584
 msgid "See audit log"
 msgstr "Afficher le journal d'audit"
 
-#: app/templates/report/index.html:20
+#: app/templates/report/index.html:15
 msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
@@ -3045,23 +3068,23 @@ msgstr ""
 "En raison du spam, nous n'acceptons plus les rapports d'utilisateurs "
 "anonymes sur ce formulaire."
 
-#: app/templates/report/index.html:21
+#: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin in another way"
 msgstr "Veuillez vous connecter ou contacter l'administrateur d'une autre manière"
 
-#: app/templates/report/index.html:39
+#: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
 msgstr "Que signalez-vous ? Pourquoi le signalez-vous ?"
 
-#: app/templates/report/index.html:43
+#: app/templates/report/index.html:38
 msgid "Reports will be shared with ContentDB staff."
 msgstr "Les signalements seront partagés avec l'équipe de ContentDB."
 
-#: app/templates/report/index.html:45
+#: app/templates/report/index.html:40
 msgid "Only the admin will be able to see who made the report."
 msgstr "Seul l'administrateur peut connaitre l'auteur du rapport."
 
-#: app/templates/report/index.html:49
+#: app/templates/report/index.html:44
 msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
@@ -3133,31 +3156,31 @@ msgstr "Commentaires de %(user)s"
 msgid "Reply to <b>%(title)s</b>"
 msgstr "Répondre à <b>%(title)s</b>"
 
-#: app/templates/threads/view.html:36
+#: app/templates/threads/view.html:38
 msgid "Subscribe"
 msgstr "S'abonner"
 
-#: app/templates/threads/view.html:45
+#: app/templates/threads/view.html:47
 msgid "Convert to Thread"
 msgstr "Convertir en discussion"
 
-#: app/templates/threads/view.html:52
+#: app/templates/threads/view.html:54
 msgid "Unlock"
 msgstr "Déverrouiller"
 
-#: app/templates/threads/view.html:57
+#: app/templates/threads/view.html:59
 msgid "Lock"
 msgstr "Verrouiller"
 
-#: app/templates/threads/view.html:97
+#: app/templates/threads/view.html:101
 msgid "This thread is visible to the following users"
 msgstr "Ce fil de discussion est visible pour les utilisateurs suivants"
 
-#: app/templates/threads/view.html:98
+#: app/templates/threads/view.html:102
 msgid "Visible to:"
 msgstr "Visible à :"
 
-#: app/templates/threads/view.html:105
+#: app/templates/threads/view.html:109
 msgid "Plus approvers and editors"
 msgstr "Et aussi les examinateurs et les éditeurs"
 
@@ -4224,3 +4247,7 @@ msgstr ""
 #~ "Vous devriez ajouter au moins une "
 #~ "capture d'écran, mais ce n'est pas "
 #~ "obligatoire."
+
+#~ msgid "Mods for %(title)s"
+#~ msgstr "Mods pour %(title)s"
+
