@@ -15,6 +15,7 @@
 	<meta name="robots" content="noindex">
 	{%- endif %}
 	{% if self.description -%}
+	<meta name="og:title" content="{{ self.title() | normalize_whitespace }}">
 	<meta name="description" content="{{ self.description() | normalize_whitespace }}">
 	<meta name="og:description" content="{{ self.description() | normalize_whitespace }}">
 	{%- endif %}
