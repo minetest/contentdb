@@ -243,7 +243,11 @@ def create_release(token, package):
 	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
 		error(403, "You do not have the permission to approve releases")
 
-	data = request.json or request.form
+	if request.headers.get("Content-Type") == "application/json":
+		data = request.json
+	else:
+		data = request.form
+
 	if "title" not in data:
 		error(400, "Title is required in the POST data")
 
