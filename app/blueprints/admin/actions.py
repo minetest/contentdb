@@ -27,9 +27,9 @@ from app.logic.game_support import GameSupportResolver
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
 	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, ThreadReply
 from app.tasks.emails import send_pending_digests
-from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
+from app.tasks.forumtasks import importTopicList, checkAllForumAccounts, checkForumAccount
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates, updateAllGameSupport
-from app.tasks.usertasks import upgrade_new_members
+from app.tasks.usertasks import upgrade_new_members, set_profile_picture_from_url
 from app.utils import addNotification, get_system_user
 from app.utils.image import get_image_size
 
@@ -102,6 +102,13 @@ def check_all_forum_accounts():
 	return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 
 
+@action("Import forum profile pics")
+def import_forum_profile_pics():
+	users = User.query.filter(and_(User.forums_username.isnot(None), User.profile_pic.ilike("https://forum.minetest.net/%"))).all()
+	for user in users:
+		checkForumAccount.delay(user.forums_username)
+
+
 @action("Import screenshots from Git")
 def import_screenshots():
 	packages = Package.query \
@@ -129,8 +136,9 @@ def clean_uploads():
 
 		release_urls = get_filenames_from_column(PackageRelease.url)
 		screenshot_urls = get_filenames_from_column(PackageScreenshot.url)
+		pp_urls = get_filenames_from_column(User.profile_pic)
 
-		db_urls = release_urls.union(screenshot_urls)
+		db_urls = release_urls.union(screenshot_urls).union(pp_urls)
 		unreachable = existing_uploads.difference(db_urls)
 
 		import sys
@@ -343,3 +351,12 @@ def set_new_members():
 	task_id = uuid()
 	upgrade_new_members.apply_async((), task_id=task_id)
 	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
+
+
+@action("Import profile pictures from forums")
+def import_forum_pp():
+	users = User.query.filter(User.profile_pic.ilike("https://forum.minetest.net/%")).all()
+	for user in users:
+		set_profile_picture_from_url.delay(user.username, user.profile_pic)
+
+	flash(f"Importing {len(users)} profile pictures", "success")

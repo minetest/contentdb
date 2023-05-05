@@ -21,25 +21,29 @@ from app.tasks import celery
 from app.utils import is_username_valid
 from app.utils.phpbbparser import getProfile, getTopicsFromForum
 import urllib.request
+from urllib.parse import urljoin
+from .usertasks import set_profile_picture_from_url
+
 
 @celery.task()
-def checkForumAccount(username, forceNoSave=False):
-	print("Checking " + username)
+def checkForumAccount(forums_username):
+	print("### Checking " + forums_username, file=sys.stderr)
 	try:
-		profile = getProfile("https://forum.minetest.net", username)
-	except OSError:
+		profile = getProfile("https://forum.minetest.net", forums_username)
+	except OSError as e:
+		print(e, file=sys.stderr)
 		return
 
 	if profile is None:
 		return
 
-	user = User.query.filter_by(forums_username=username).first()
+	user = User.query.filter_by(forums_username=forums_username).first()
 
 	# Create user
 	needsSaving = False
 	if user is None:
-		user = User(username)
-		user.forums_username = username
+		user = User(forums_username)
+		user.forums_username = forums_username
 		db.session.add(user)
 
 	# Get github username
@@ -50,33 +54,32 @@ def checkForumAccount(username, forceNoSave=False):
 		needsSaving = True
 
 	pic = profile.avatar
-	if pic and "http" in pic:
+	if pic and pic.startswith("http"):
 		pic = None
 
-	needsSaving = needsSaving or pic != user.profile_pic
-	if pic:
-		user.profile_pic = "https://forum.minetest.net/" + pic
-	else:
-		user.profile_pic = None
-
 	# Save
-	if needsSaving and not forceNoSave:
+	if needsSaving:
 		db.session.commit()
+
+	if pic:
+		pic = urljoin("https://forum.minetest.net/", pic)
+		print(f"####### Picture: {pic}", file=sys.stderr)
+		print(f"####### User pp {user.profile_pic}", file=sys.stderr)
+
+		pic_needs_replacing = user.profile_pic is None or user.profile_pic == "" or \
+				user.profile_pic.startswith("https://forum.minetest.net")
+		if pic_needs_replacing and pic.startswith("https://forum.minetest.net"):
+			print(f"####### Queueing", file=sys.stderr)
+			set_profile_picture_from_url.delay(user.username, pic)
 
 	return needsSaving
 
 
 @celery.task()
-def checkAllForumAccounts(forceNoSave=False):
-	needsSaving = False
+def checkAllForumAccounts():
 	query = User.query.filter(User.forums_username.isnot(None))
 	for user in query.all():
-		needsSaving = checkForumAccount(user.username) or needsSaving
-
-	if needsSaving and not forceNoSave:
-		db.session.commit()
-
-	return needsSaving
+		checkForumAccount(user.forums_username)
 
 
 regex_tag    = re.compile(r"\[([a-z0-9_]+)\]")

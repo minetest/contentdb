@@ -235,25 +235,6 @@ def profile(username):
 			medals_unlocked=unlocked, medals_locked=locked)
 
 
-@bp.route("/users/<username>/check/", methods=["POST"])
-@login_required
-def user_check(username):
-	user = User.query.filter_by(username=username).first()
-	if user is None:
-		abort(404)
-
-	if current_user != user and not current_user.rank.atLeast(UserRank.MODERATOR):
-		abort(403)
-
-	if user.forums_username is None:
-		abort(404)
-
-	task = checkForumAccount.delay(user.forums_username)
-	next_url = url_for("users.profile", username=username)
-
-	return redirect(url_for("tasks.check", id=task.id, r=next_url))
-
-
 @bp.route("/user/stats/")
 @login_required
 def statistics_redirect():

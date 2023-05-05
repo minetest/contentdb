@@ -92,7 +92,7 @@ def getProfile(url, username):
 	url = getProfileURL(url, username)
 
 	try:
-		req = urllib.request.urlopen(url, timeout=5)
+		req = urllib.request.urlopen(url, timeout=15)
 	except urllib.error.HTTPError as e:
 		if e.code == 404:
 			return None

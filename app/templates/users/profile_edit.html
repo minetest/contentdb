@@ -21,12 +21,6 @@
 		{% endif %}
 	</div>
 	<div class="col">
-		{% if user.forums_username %}
-			<form method="post" action="{{ url_for('users.user_check', username=user.username) }}" class="" style="display:inline-block;">
-				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<input type="submit" class="btn btn-primary" value="{{  _('Sync with Forums') }}" />
-			</form>
-		{% endif %}
 		{% if user.email %}
 			<a class="btn btn-primary" href="https://en.gravatar.com/">
 				Gravatar
