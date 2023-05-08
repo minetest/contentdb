@@ -47,6 +47,12 @@ There are a number of methods:
 * [Webhooks](/help/release_webhooks/): you can configure your Git host to send a webhook to ContentDB, and create an update immediately.
 * the [API](/help/api/): This is especially powerful when combined with CI/CD and other API endpoints.
 
+### How do I learn how to make mods and games for Minetest?
+
+You should read
+[the official Minetest Modding Book](https://rubenwardy.com/minetest_modding_book/)
+for a guide to making mods and games using Minetest.
+
 
 ## How do I get help?
 

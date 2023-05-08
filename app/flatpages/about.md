@@ -23,3 +23,9 @@ ContentDB isn't just about supporting the in-game content downloader; it's commo
 and review packages using the ContentDB website, but install using Git rather than the in-game installer.
 **ContentDB's purpose is to be a well-formatted source of information about mods, games,
 and texture packs for Minetest**.
+
+## How do I learn how to make mods and games for Minetest?
+
+You should read
+[the official Minetest Modding Book](https://rubenwardy.com/minetest_modding_book/)
+for a guide to making mods and games using Minetest.
