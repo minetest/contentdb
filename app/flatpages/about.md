@@ -1,4 +1,5 @@
 title: About ContentDB
+description: Information about ContentDB's development, history, and more
 toc: False
 
 ## Development
