@@ -109,9 +109,10 @@ def describe_difference(diff: List, available_space: int) -> typing.Optional[str
 		after = diff[0]["after"]
 
 		if isinstance(before, str) and isinstance(after, str):
-			return f"{key}: {before} -> {after}"
+			if len(before) + len(after) <= available_space + 30:
+				return f"{key}: {before} -> {after}"
 
-		if isinstance(before, list) and isinstance(after, list):
+		elif isinstance(before, list) and isinstance(after, list):
 			removed = []
 			added = []
 			for x in before:
