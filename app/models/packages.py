@@ -393,6 +393,8 @@ class Package(db.Model):
 	media_license_id = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	media_license    = db.relationship("License", foreign_keys=[media_license_id])
 
+	ck_license_txp = db.CheckConstraint("type != 'TXP' OR license_id = media_license_id")
+
 	state     = db.Column(db.Enum(PackageState), nullable=False, default=PackageState.WIP)
 	dev_state = db.Column(db.Enum(PackageDevState), nullable=True, default=None)
 
