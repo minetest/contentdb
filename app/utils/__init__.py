@@ -16,6 +16,9 @@
 
 import re
 import secrets
+from typing import Dict
+
+import typing
 
 from .flask import *
 from .models import *
@@ -68,3 +71,57 @@ def has_blocked_domains(text: str, username: str, location: str) -> bool:
 			return True
 
 	return False
+
+
+def diff_dictionaries(one: Dict, two: Dict):
+	if len(set(one.keys()).difference(set(two.keys()))) != 0:
+		raise "Mismatching keys"
+
+	retval = []
+
+	for key, before in one.items():
+		after = two[key]
+
+		if before is dict:
+			diff = diff_dictionaries(before, after)
+			if len(diff) != 0:
+				retval.append({
+					"key": key,
+					"changes": diff,
+				})
+		elif before != after:
+			retval.append({
+				"key": key,
+				"before": before,
+				"after": after,
+			})
+
+	return retval
+
+
+def describe_difference(diff: List, available_space: int) -> typing.Optional[str]:
+	if len(diff) == 0 or available_space <= 0:
+		return None
+
+	if len(diff) == 1 and "before" in diff[0] and "after" in diff[0]:
+		key = diff[0]["key"]
+		before = diff[0]["before"]
+		after = diff[0]["after"]
+
+		if isinstance(before, str) and isinstance(after, str):
+			return f"{key}: {before} -> {after}"
+
+		if isinstance(before, list) and isinstance(after, list):
+			removed = []
+			added = []
+			for x in before:
+				if x not in after:
+					removed.append(x)
+			for x in after:
+				if x not in before:
+					added.append(x)
+
+			parts = ["-" + str(x) for x in removed] + ["+" + str(x) for x in added]
+			return f"{key}: {', '.join(parts)}"
+
+	return ", ".join([x["key"] for x in diff])

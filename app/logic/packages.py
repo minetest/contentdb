@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+import json
 import re
 import validators
 from flask_babel import lazy_gettext
@@ -22,7 +22,7 @@ from flask_babel import lazy_gettext
 from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
 	License, UserRank, PackageDevState
-from app.utils import addAuditLog, has_blocked_domains
+from app.utils import addAuditLog, has_blocked_domains, diff_dictionaries, describe_difference
 from app.utils.url import clean_youtube_url
 
 
@@ -113,6 +113,8 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			not package.checkPerm(user, Permission.CHANGE_NAME):
 		raise LogicError(403, lazy_gettext("You don't have permission to change the package name"))
 
+	before_dict = package.getAsDictionary("/")
+
 	for alias, to in ALIASES.items():
 		if alias in data:
 			data[to] = data[alias]
@@ -188,14 +190,21 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 					raise LogicError(400, "Unknown warning: " + warning_id)
 				package.content_warnings.append(warning)
 
+	after_dict = package.getAsDictionary("/")
+	diff = diff_dictionaries(before_dict, after_dict)
+
 	if not was_new:
 		if reason is None:
 			msg = "Edited {}".format(package.title)
 		else:
 			msg = "Edited {} ({})".format(package.title, reason)
 
+		diff_desc = describe_difference(diff, 100 - len(msg) - 3)
+		if diff_desc:
+			msg += " [" + diff_desc + "]"
+
 		severity = AuditSeverity.NORMAL if user in package.maintainers else AuditSeverity.EDITOR
-		addAuditLog(severity, user, msg, package.getURL("packages.view"), package)
+		addAuditLog(severity, user, msg, package.getURL("packages.view"), package, json.dumps(diff, indent=4))
 
 	db.session.commit()
 
