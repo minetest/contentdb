@@ -590,10 +590,10 @@ class Package(db.Model):
 			"video_url": self.video_url,
 			"donate_url": self.donate_url_actual,
 
-			"tags": [x.name for x in self.tags],
-			"content_warnings": [x.name for x in self.content_warnings],
+			"tags": sorted([x.name for x in self.tags]),
+			"content_warnings": sorted([x.name for x in self.content_warnings]),
 
-			"provides": [x.name for x in self.provides],
+			"provides": sorted([x.name for x in self.provides]),
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
 			"screenshots": [base_url + ss.url for ss in self.screenshots],
 

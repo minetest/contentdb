@@ -20,6 +20,8 @@ from typing import Dict
 
 import typing
 
+import deep_compare
+
 from .flask import *
 from .models import *
 from .user import *
@@ -73,7 +75,7 @@ def has_blocked_domains(text: str, username: str, location: str) -> bool:
 	return False
 
 
-def diff_dictionaries(one: Dict, two: Dict):
+def diff_dictionaries(one: Dict, two: Dict) -> List:
 	if len(set(one.keys()).difference(set(two.keys()))) != 0:
 		raise "Mismatching keys"
 
@@ -82,14 +84,14 @@ def diff_dictionaries(one: Dict, two: Dict):
 	for key, before in one.items():
 		after = two[key]
 
-		if before is dict:
+		if isinstance(before, dict):
 			diff = diff_dictionaries(before, after)
 			if len(diff) != 0:
 				retval.append({
 					"key": key,
 					"changes": diff,
 				})
-		elif before != after:
+		elif not deep_compare.CompareVariables.compare(before, after):
 			retval.append({
 				"key": key,
 				"before": before,
