@@ -106,6 +106,20 @@ class AuditLogEntry(db.Model):
 		self.package  = package
 		self.description = description
 
+	def checkPerm(self, user, perm):
+		if not user.is_authenticated:
+			return False
+
+		if type(perm) == str:
+			perm = Permission[perm]
+		elif type(perm) != Permission:
+			raise Exception("Unknown permission given to AuditLogEntry.checkPerm()")
+
+		if perm == Permission.VIEW_AUDIT_DESCRIPTION:
+			return user.rank.atLeast(UserRank.APPROVER if self.package is not None else UserRank.MODERATOR)
+		else:
+			raise Exception("Permission {} is not related to audit log entries".format(perm.name))
+
 
 REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com",
 	"minetest.net", "dropboxusercontent.com", "4shared.com",

@@ -90,6 +90,7 @@ class Permission(enum.Enum):
 	DELETE_REVIEW      = "DELETE_REVIEW"
 	CHANGE_PROFILE_URLS = "CHANGE_PROFILE_URLS"
 	CHANGE_DISPLAY_NAME = "CHANGE_DISPLAY_NAME"
+	VIEW_AUDIT_DESCRIPTION = "VIEW_AUDIT_DESCRIPTION"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.checkPerm for package-specific contexts

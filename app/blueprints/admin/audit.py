@@ -15,7 +15,9 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import render_template, request, abort
-from app.models import db, AuditLogEntry, UserRank, User
+from flask_login import current_user, login_required
+
+from app.models import db, AuditLogEntry, UserRank, User, Permission
 from app.utils import rank_required, get_int_or_abort
 
 from . import bp
@@ -40,7 +42,10 @@ def audit():
 
 
 @bp.route("/admin/audit/<int:id_>/")
-@rank_required(UserRank.MODERATOR)
+@login_required
 def audit_view(id_):
-	entry = AuditLogEntry.query.get(id_)
+	entry: AuditLogEntry = AuditLogEntry.query.get_or_404(id_)
+	if not entry.checkPerm(current_user, Permission.VIEW_AUDIT_DESCRIPTION):
+		abort(403)
+
 	return render_template("admin/audit_view.html", entry=entry)

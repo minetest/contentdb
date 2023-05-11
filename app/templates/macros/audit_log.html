@@ -2,7 +2,7 @@
 	<div class="list-group mt-3">
 		{% for entry in log %}
 			<a class="list-group-item list-group-item-action"
-				{% if entry.description and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+				{% if entry.description and entry.checkPerm(current_user, 'VIEW_AUDIT_DESCRIPTION') %}
 					href="{{ url_for('admin.audit_view', id_=entry.id) }}">
 				{% else %}
 					href="{{ entry.url }}">
