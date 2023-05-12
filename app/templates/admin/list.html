@@ -9,6 +9,7 @@
 		<div class="col-md-6">
 			<div class="list-group">
 				<a class="list-group-item list-group-item-action" href="{{ url_for('users.list_all') }}">User list</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.restore') }}">Restore package</a>
 				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.tag_list') }}">Tag Editor</a>
 				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.license_list') }}">License Editor</a>
 				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.version_list') }}">Version Editor</a>
@@ -35,34 +36,6 @@
 						</select>
 						<input type="submit" value="Perform" class="col-sm-auto btn btn-primary ml-2" />
 					</div>
-				</form>
-			</div>
-
-			<div class="card">
-				<h2 class="card-header">Restore Package</h2>
-
-				<form method="post" action="" class="card-body">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="hidden" name="action" value="restore" />
-					<div class="row px-3">
-						<select name="package" class="custom-select col">
-							{% for p in deleted_packages %}
-								<option value={{ p.id }}>{{ p.id}}) {{ p.title }} by {{ p.author.display_name }}</option>
-							{% endfor %}
-						</select>
-						<input type="submit" value="Restore" class="col-sm-auto btn btn-primary ml-2" />
-					</div>
-				</form>
-
-				<form method="post" action="" class="card-body">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<input type="hidden" name="action" value="delremovedpackages" />
-
-					<p>
-						{{ _("Deletion is permanent.") }}
-					</p>
-
-					<input type="submit" value="Delete Removed Packages" class="btn btn-danger" />
 				</form>
 			</div>
 		</div>

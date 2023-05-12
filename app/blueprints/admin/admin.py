@@ -30,17 +30,7 @@ from ...models import UserRank, Package, db, PackageState, User, AuditSeverity, 
 def admin_page():
 	if request.method == "POST":
 		action = request.form["action"]
-
-		if action == "restore":
-			package = Package.query.get(request.form["package"])
-			if package is None:
-				flash("Unknown package", "danger")
-			else:
-				package.state = PackageState.READY_FOR_REVIEW
-				db.session.commit()
-				return redirect(url_for("admin.admin_page"))
-
-		elif action in actions:
+		if action in actions:
 			ret = actions[action]["func"]()
 			if ret:
 				return ret
