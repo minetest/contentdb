@@ -14,24 +14,20 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-import datetime
 import os
 from typing import List
 
 import requests
 from celery import group, uuid
-from flask import redirect, url_for, flash, current_app, jsonify
+from flask import redirect, url_for, flash, current_app
 from sqlalchemy import or_, and_
 
-from app.logic.game_support import GameSupportResolver
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
-	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, ThreadReply
+	NotificationType, PackageUpdateConfig, License, UserRank, PackageType
 from app.tasks.emails import send_pending_digests
-from app.tasks.forumtasks import importTopicList, checkAllForumAccounts, checkForumAccount
+from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates, updateAllGameSupport
-from app.tasks.usertasks import upgrade_new_members, set_profile_picture_from_url
 from app.utils import addNotification, get_system_user
-from app.utils.image import get_image_size
 
 actions = {}
 
@@ -56,40 +52,6 @@ def del_stuck_releases():
 	return redirect(url_for("admin.admin_page"))
 
 
-@action("Check all releases (postReleaseCheckUpdate)")
-def check_releases():
-	releases = PackageRelease.query.filter(PackageRelease.url.like("/uploads/%")).all()
-
-	tasks = []
-	for release in releases:
-		tasks.append(checkZipRelease.s(release.id, release.file_path))
-
-	result = group(tasks).apply_async()
-
-	while not result.ready():
-		import time
-		time.sleep(0.1)
-
-	return redirect(url_for("todo.view_editor"))
-
-
-@action("Check latest release of all packages (postReleaseCheckUpdate)")
-def reimport_packages():
-	tasks = []
-	for package in Package.query.filter(Package.state != PackageState.DELETED).all():
-		release = package.releases.first()
-		if release:
-			tasks.append(checkZipRelease.s(release.id, release.file_path))
-
-	result = group(tasks).apply_async()
-
-	while not result.ready():
-		import time
-		time.sleep(0.1)
-
-	return redirect(url_for("todo.view_editor"))
-
-
 @action("Import forum topic list")
 def import_topic_list():
 	task = importTopicList.delay()
@@ -102,27 +64,7 @@ def check_all_forum_accounts():
 	return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 
 
-@action("Import forum profile pics")
-def import_forum_profile_pics():
-	users = User.query.filter(and_(User.forums_username.isnot(None), User.profile_pic.ilike("https://forum.minetest.net/%"))).all()
-	for user in users:
-		checkForumAccount.delay(user.forums_username)
-
-
-@action("Import screenshots from Git")
-def import_screenshots():
-	packages = Package.query \
-		.filter(Package.state != PackageState.DELETED) \
-		.outerjoin(PackageScreenshot, Package.id == PackageScreenshot.package_id) \
-		.filter(PackageScreenshot.id==None) \
-		.all()
-	for package in packages:
-		importRepoScreenshot.delay(package.id)
-
-	return redirect(url_for("admin.admin_page"))
-
-
-@action("Remove unused uploads")
+@action("Delete unused uploads")
 def clean_uploads():
 	upload_dir = current_app.config['UPLOAD_DIR']
 
@@ -164,19 +106,6 @@ def del_mod_names():
 	db.session.commit()
 
 	flash("Deleted " + str(count) + " unused mod names", "success")
-	return redirect(url_for("admin.admin_page"))
-
-
-@action("Delete removed packages")
-def del_removed_packages():
-	query = Package.query.filter_by(state=PackageState.DELETED)
-	count = query.count()
-	for pkg in query.all():
-		pkg.review_thread = None
-		db.session.delete(pkg)
-	db.session.commit()
-
-	flash("Deleted {} soft deleted packages packages".format(count), "success")
 	return redirect(url_for("admin.admin_page"))
 
 
@@ -321,19 +250,6 @@ def remind_video_url():
 	db.session.commit()
 
 
-@action("Update screenshot sizes")
-def update_screenshot_sizes():
-	import sys
-
-	for screenshot in PackageScreenshot.query.all():
-		width, height = get_image_size(screenshot.file_path)
-		print(f"{screenshot.url}: {width}, {height}", file=sys.stderr)
-		screenshot.width = width
-		screenshot.height = height
-
-	db.session.commit()
-
-
 @action("Detect game support")
 def detect_game_support():
 	task_id = uuid()
@@ -346,17 +262,61 @@ def do_send_pending_digests():
 	send_pending_digests.delay()
 
 
-@action("Set users to new member")
-def set_new_members():
-	task_id = uuid()
-	upgrade_new_members.apply_async((), task_id=task_id)
-	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
+@action("DANGER: Delete removed packages")
+def del_removed_packages():
+	query = Package.query.filter_by(state=PackageState.DELETED)
+	count = query.count()
+	for pkg in query.all():
+		pkg.review_thread = None
+		db.session.delete(pkg)
+	db.session.commit()
+
+	flash("Deleted {} soft deleted packages packages".format(count), "success")
+	return redirect(url_for("admin.admin_page"))
 
 
-@action("Import profile pictures from forums")
-def import_forum_pp():
-	users = User.query.filter(User.profile_pic.ilike("https://forum.minetest.net/%")).all()
-	for user in users:
-		set_profile_picture_from_url.delay(user.username, user.profile_pic)
+@action("DANGER: Check all releases (postReleaseCheckUpdate)")
+def check_releases():
+	releases = PackageRelease.query.filter(PackageRelease.url.like("/uploads/%")).all()
 
-	flash(f"Importing {len(users)} profile pictures", "success")
+	tasks = []
+	for release in releases:
+		tasks.append(checkZipRelease.s(release.id, release.file_path))
+
+	result = group(tasks).apply_async()
+
+	while not result.ready():
+		import time
+		time.sleep(0.1)
+
+	return redirect(url_for("todo.view_editor"))
+
+
+@action("DANGER: Check latest release of all packages (postReleaseCheckUpdate)")
+def reimport_packages():
+	tasks = []
+	for package in Package.query.filter(Package.state != PackageState.DELETED).all():
+		release = package.releases.first()
+		if release:
+			tasks.append(checkZipRelease.s(release.id, release.file_path))
+
+	result = group(tasks).apply_async()
+
+	while not result.ready():
+		import time
+		time.sleep(0.1)
+
+	return redirect(url_for("todo.view_editor"))
+
+
+@action("DANGER: Import screenshots from Git")
+def import_screenshots():
+	packages = Package.query \
+		.filter(Package.state != PackageState.DELETED) \
+		.outerjoin(PackageScreenshot, Package.id == PackageScreenshot.package_id) \
+		.filter(PackageScreenshot.id==None) \
+		.all()
+	for package in packages:
+		importRepoScreenshot.delay(package.id)
+
+	return redirect(url_for("admin.admin_page"))
