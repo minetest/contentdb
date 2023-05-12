@@ -26,5 +26,10 @@
 			<small class="form-text text-muted">Whether non-Editors can add this tag to packages</small>
 		</div>
 		{{ render_submit_field(form.submit) }}
+		{% if tag %}
+			<a class="ml-5" target="_blank" href="{{ url_for('packages.list_all', tag=tag.name) }}">
+				View packages with tag
+			</a>
+		{% endif %}
 	</form>
 {% endblock %}
