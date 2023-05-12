@@ -113,7 +113,9 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			not package.checkPerm(user, Permission.CHANGE_NAME):
 		raise LogicError(403, lazy_gettext("You don't have permission to change the package name"))
 
-	before_dict = package.getAsDictionary("/")
+	before_dict = None
+	if not was_new:
+		before_dict = package.getAsDictionary("/")
 
 	for alias, to in ALIASES.items():
 		if alias in data:
@@ -190,16 +192,16 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 					raise LogicError(400, "Unknown warning: " + warning_id)
 				package.content_warnings.append(warning)
 
-	after_dict = package.getAsDictionary("/")
-	diff = diff_dictionaries(before_dict, after_dict)
-
 	if not was_new:
+		after_dict = package.getAsDictionary("/")
+		diff = diff_dictionaries(before_dict, after_dict)
+
 		if reason is None:
 			msg = "Edited {}".format(package.title)
 		else:
 			msg = "Edited {} ({})".format(package.title, reason)
 
-		diff_desc = describe_difference(diff, 100 - len(msg) - 3)
+		diff_desc = describe_difference(diff, 100 - len(msg) - 3) if diff else None
 		if diff_desc:
 			msg += " [" + diff_desc + "]"
 
