@@ -16,13 +16,14 @@
 
 
 from flask import redirect, render_template, abort, url_for, request, flash
+from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField, URLField
 from wtforms.validators import InputRequired, Length, Optional
 
-from app.utils import rank_required, nonEmptyOrNone
+from app.utils import rank_required, nonEmptyOrNone, addAuditLog
 from . import bp
-from ...models import UserRank, License, db
+from ...models import UserRank, License, db, AuditSeverity
 
 
 @bp.route("/licenses/")
@@ -56,8 +57,14 @@ def create_edit_license(name=None):
 			license = License(form.name.data)
 			db.session.add(license)
 			flash("Created license " + form.name.data, "success")
+
+			addAuditLog(AuditSeverity.MODERATION, current_user, f"Created license {license.name}",
+					url_for("admin.license_list"))
 		else:
 			flash("Updated license " + form.name.data, "success")
+
+			addAuditLog(AuditSeverity.MODERATION, current_user, f"Edited license {license.name}",
+					url_for("admin.license_list"))
 
 		form.populate_obj(license)
 		db.session.commit()

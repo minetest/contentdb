@@ -16,13 +16,14 @@
 
 
 from flask import redirect, render_template, abort, url_for, request, flash
+from flask_login import current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import InputRequired, Length
 
-from app.utils import rank_required
+from app.utils import rank_required, addAuditLog
 from . import bp
-from ...models import UserRank, MinetestRelease, db
+from ...models import UserRank, MinetestRelease, db, AuditSeverity
 
 
 @bp.route("/versions/")
@@ -53,8 +54,14 @@ def create_edit_version(name=None):
 			version = MinetestRelease(form.name.data)
 			db.session.add(version)
 			flash("Created version " + form.name.data, "success")
+
+			addAuditLog(AuditSeverity.MODERATION, current_user, f"Created version {version.name}",
+					url_for("admin.license_list"))
 		else:
 			flash("Updated version " + form.name.data, "success")
+
+			addAuditLog(AuditSeverity.MODERATION, current_user, f"Edited version {version.name}",
+					url_for("admin.version_list"))
 
 		form.populate_obj(version)
 		db.session.commit()
