@@ -7,6 +7,7 @@ Create Date: 2021-11-24 17:12:33.893988
 """
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy import text
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
@@ -17,7 +18,7 @@ depends_on = None
 
 
 def upgrade():
-    op.execute("DELETE FROM user_email_verification")
+    op.execute(text("DELETE FROM user_email_verification"))
     op.add_column('user', sa.Column('created_at', sa.DateTime(), nullable=True))
     op.add_column('user_email_verification', sa.Column('created_at', sa.DateTime(), nullable=False))
 

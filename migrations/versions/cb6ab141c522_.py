@@ -7,7 +7,7 @@ Create Date: 2020-07-08 21:03:51.856561
 """
 import sqlalchemy as sa
 from alembic import op
-from sqlalchemy import orm
+from sqlalchemy import orm, text
 
 # revision identifiers, used by Alembic.
 revision = 'cb6ab141c522'
@@ -29,7 +29,7 @@ def upgrade():
 	bind = op.get_bind()
 	session = orm.Session(bind=bind)
 
-	op.execute('INSERT INTO maintainers (package_id, user_id) SELECT id, author_id FROM package;')
+	op.execute(text('INSERT INTO maintainers (package_id, user_id) SELECT id, author_id FROM package;'))
 
 	session.commit()
 

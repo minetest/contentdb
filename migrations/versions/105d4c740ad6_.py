@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-from sqlalchemy import orm
+from sqlalchemy import orm, text
 from app.models import User, UserRank
 
 revision = '105d4c740ad6'
@@ -22,8 +22,8 @@ depends_on = None
 
 
 def upgrade():
-    op.execute("COMMIT")
-    op.execute("ALTER TYPE userrank ADD VALUE 'BOT' AFTER 'EDITOR'")
+    op.execute(text("COMMIT"))
+    op.execute(text("ALTER TYPE userrank ADD VALUE 'BOT' AFTER 'EDITOR'"))
 
 
 def downgrade():

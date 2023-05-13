@@ -7,6 +7,7 @@ Create Date: 2020-09-16 14:35:43.805422
 """
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy import text
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
@@ -21,8 +22,8 @@ def upgrade():
 	status.create(op.get_bind())
 
 	op.add_column('package', sa.Column('state', sa.Enum('WIP', 'CHANGES_NEEDED', 'READY_FOR_REVIEW', 'APPROVED', 'DELETED', name='packagestate'), nullable=True))
-	op.execute("UPDATE package SET state='APPROVED' WHERE approved=true")
-	op.execute("UPDATE package SET state='DELETED' WHERE soft_deleted=true")
+	op.execute(text("UPDATE package SET state='APPROVED' WHERE approved=true"))
+	op.execute(text("UPDATE package SET state='DELETED' WHERE soft_deleted=true"))
 	op.drop_column('package', 'approved')
 	op.drop_column('package', 'soft_deleted')
 	# ### end Alembic commands ###

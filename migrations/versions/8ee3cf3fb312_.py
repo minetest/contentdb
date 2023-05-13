@@ -6,6 +6,7 @@ Create Date: 2021-05-03 22:21:02.167758
 
 """
 from alembic import op
+from sqlalchemy import text
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
@@ -19,7 +20,7 @@ def upgrade():
     op.alter_column('user', 'email_confirmed_at',
                existing_type=postgresql.TIMESTAMP(),
                nullable=True)
-    op.execute("""UPDATE "user" SET email_confirmed_at = NULL WHERE email_confirmed_at < '2016-01-01'::date""")
+    op.execute(text("""UPDATE "user" SET email_confirmed_at = NULL WHERE email_confirmed_at < '2016-01-01'::date"""))
 
 
 def downgrade():
@@ -27,4 +28,4 @@ def downgrade():
                existing_type=postgresql.TIMESTAMP(),
                nullable=False)
     op.execute(
-            """UPDATE "user" SET email_confirmed_at = '2004-01-01'::date WHERE email_confirmed_at IS NULL""")
+            text("""UPDATE "user" SET email_confirmed_at = '2004-01-01'::date WHERE email_confirmed_at IS NULL"""))

@@ -7,7 +7,7 @@ Create Date: 2020-12-04 22:30:33.420071
 """
 from alembic import op
 import sqlalchemy as sa
-
+from sqlalchemy import text
 
 # revision identifiers, used by Alembic.
 revision = '3f5836a3df5c'
@@ -22,9 +22,9 @@ def upgrade():
                nullable=True,
                existing_server_default=sa.text("''::character varying"))
 
-    op.execute("""
+    op.execute(text("""
         UPDATE "user" SET password=NULL WHERE password=''
-    """)
+    """))
     op.create_check_constraint("CK_password", "user",
             "password IS NULL OR password != ''")
 

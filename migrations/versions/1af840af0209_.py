@@ -7,6 +7,7 @@ Create Date: 2021-08-16 17:17:12.060257
 """
 from alembic import op
 import sqlalchemy as sa
+from sqlalchemy import text
 from sqlalchemy.dialects import postgresql
 
 # revision identifiers, used by Alembic.
@@ -17,8 +18,8 @@ depends_on = None
 
 
 def upgrade():
-    op.execute("COMMIT")
-    op.execute("ALTER TYPE userrank ADD VALUE 'APPROVER' BEFORE 'EDITOR'")
+    op.execute(text("COMMIT"))
+    op.execute(text("ALTER TYPE userrank ADD VALUE 'APPROVER' BEFORE 'EDITOR'"))
 
 
 def downgrade():

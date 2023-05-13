@@ -7,7 +7,7 @@ Create Date: 2020-12-05 02:29:16.706564
 """
 from alembic import op
 import sqlalchemy as sa
-
+from sqlalchemy import text
 
 # revision identifiers, used by Alembic.
 revision = 'c154912eaa0c'
@@ -17,8 +17,8 @@ depends_on = None
 
 
 def upgrade():
-    op.execute("COMMIT")
-    op.execute("ALTER TYPE auditseverity ADD VALUE 'USER'")
+    op.execute(text("COMMIT"))
+    op.execute(text("ALTER TYPE auditseverity ADD VALUE 'USER'"))
 
 def downgrade():
     pass
