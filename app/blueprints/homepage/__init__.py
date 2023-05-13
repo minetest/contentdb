@@ -54,7 +54,8 @@ def home():
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 
 	tags = db.session.query(func.count(Tags.c.tag_id), Tag) \
-		.select_from(Tag).outerjoin(Tags).group_by(Tag.id).order_by(db.asc(Tag.title)).all()
+		.select_from(Tag).outerjoin(Tags).join(Package).filter(Package.state == PackageState.APPROVED)\
+		.group_by(Tag.id).order_by(db.asc(Tag.title)).all()
 
 	return render_template("index.html", count=count, downloads=downloads, tags=tags, featured=featured,
 			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, high_reviewed=high_reviewed, reviews=reviews)
