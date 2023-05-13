@@ -95,7 +95,8 @@ def list_all():
 		topics = qb.buildTopicQuery().all()
 
 	tags_query = db.session.query(func.count(Tags.c.tag_id), Tag) \
-		.select_from(Tag).join(Tags).join(Package).group_by(Tag.id).order_by(db.asc(Tag.title))
+		.select_from(Tag).join(Tags).join(Package).filter(Package.state==PackageState.APPROVED) \
+		.group_by(Tag.id).order_by(db.asc(Tag.title))
 	tags = qb.filterPackageQuery(tags_query).all()
 
 	selected_tags = set(qb.tags)
