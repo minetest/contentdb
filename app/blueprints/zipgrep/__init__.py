@@ -38,7 +38,7 @@ class SearchForm(FlaskForm):
 
 
 @bp.route("/zipgrep/", methods=["GET", "POST"])
-@rank_required(UserRank.ADMIN)
+@rank_required(UserRank.EDITOR)
 def zipgrep_search():
 	form = SearchForm(request.form)
 	if form.validate_on_submit():
