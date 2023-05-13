@@ -21,9 +21,9 @@ def upgrade():
     conn = op.get_bind()
 
     options = {"weights": {"name": "A", "title": "B", "short_desc": "C", "desc": "D"}}
-    sync_trigger(conn, 'package', 'search_vector', ["name", "title", "short_desc", "desc"], options=options)
+    # sync_trigger(conn, 'package', 'search_vector', ["name", "title", "short_desc", "desc"], options=options)
 
 
 def downgrade():
     conn = op.get_bind()
-    sync_trigger(conn, 'package', 'search_vector', ["name", "title", "short_desc", "desc"])
+    # sync_trigger(conn, 'package', 'search_vector', ["name", "title", "short_desc", "desc"])
