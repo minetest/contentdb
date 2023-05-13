@@ -13,6 +13,7 @@
 	<meta name="og:title" content="{{ self.title() | normalize_whitespace }}">
 	<meta name="description" content="{{ self.description() | normalize_whitespace }}">
 	<meta name="og:description" content="{{ self.description() | normalize_whitespace }}">
+	{%- endif %}
 
 	<link rel="stylesheet" type="text/css" href="/static/libs/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=38">
@@ -22,7 +23,6 @@
 	<meta name="robots" content="noindex">
 	{%- endif %}
 
-	{%- endif %}
 	{% block headextra %}{% endblock %}
 </head>
 <body>
