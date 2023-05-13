@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-04-30 01:43+0100\n"
-"PO-Revision-Date: 2023-02-21 16:35+0000\n"
-"Last-Translator: chocomint <silentxe1@gmail.com>\n"
+"PO-Revision-Date: 2023-05-13 15:49+0000\n"
+"Last-Translator: José Muñoz <dr.cabra@disroot.org>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/es/>\n"
 "Language: es\n"
-"Language-Team: Spanish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/es/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:119
@@ -223,7 +224,7 @@ msgstr "URL de vídeo"
 
 #: app/blueprints/packages/packages.py:251
 msgid "Donate URL"
-msgstr ""
+msgstr "URL de donación"
 
 #: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
@@ -437,7 +438,7 @@ msgstr "Comentar"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "Calificación"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:117
 #: app/templates/macros/reviews.html:160
@@ -447,7 +448,7 @@ msgstr "Sí"
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:121
 #: app/templates/macros/reviews.html:164
 msgid "Neutral"
-msgstr ""
+msgstr "Neutral"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:125
 #: app/templates/macros/reviews.html:168
@@ -1212,11 +1213,11 @@ msgstr "Ayuda a traducir ContentDB"
 
 #: app/templates/base.html:249
 msgid "About"
-msgstr ""
+msgstr "Acerca de"
 
 #: app/templates/base.html:250
 msgid "Rules"
-msgstr ""
+msgstr "Reglas"
 
 #: app/templates/base.html:251
 msgid "Policy and Guidance"
@@ -1262,6 +1263,8 @@ msgstr "Bienvenido"
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
+"Bienvenido al mejor lugar para encontrar mods, juegos y paquetes de texturas "
+"de Minetest"
 
 #: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
@@ -1478,6 +1481,7 @@ msgstr ""
 #: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
 msgstr ""
+"Algunos creadores de contenido están aceptando donaciones por su trabajo."
 
 #: app/templates/donate/index.html:9
 msgid ""
@@ -1488,19 +1492,19 @@ msgstr ""
 #: app/templates/donate/index.html:37
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "por %(author)s"
 
 #: app/templates/donate/index.html:42
 msgid "View package"
-msgstr ""
+msgstr "Ver paquete"
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:95
 msgid "Donate"
-msgstr ""
+msgstr "Donar"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews"
-msgstr ""
+msgstr "Basado en tus reseñas"
 
 #: app/templates/donate/index.html:67
 msgid ""
@@ -1511,6 +1515,8 @@ msgstr ""
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
 msgstr ""
+"Inicia sesión para ver recomendaciones basadas en los paquetes que has "
+"reseñado"
 
 #: app/templates/donate/index.html:78
 msgid "Top packages"
@@ -1519,7 +1525,7 @@ msgstr ""
 #: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d paquetes buscan donaciones"
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1687,7 +1693,7 @@ msgstr "El lanzamiento aún se está importando, o tiene un error."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr ""
+msgstr "Deberías añadir al menos una captura de pantalla."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1822,7 +1828,7 @@ msgstr ""
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "Se necesita JavaScript para mostrar gráficos y estadísticas"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
@@ -1835,7 +1841,7 @@ msgstr ""
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "%(downloads)s por día"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
@@ -1843,7 +1849,7 @@ msgstr ""
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "Cargando..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
@@ -1851,7 +1857,7 @@ msgstr ""
 
 #: app/templates/macros/stats.html:97
 msgid "Downloads by Package"
-msgstr ""
+msgstr "Descargas por paquete"
 
 #: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
 #: app/templates/macros/stats.html:118
@@ -1862,11 +1868,11 @@ msgstr ""
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Client"
-msgstr ""
+msgstr "Descargas por cliente"
 
 #: app/templates/macros/stats.html:110
 msgid "Downloads by Reason"
-msgstr ""
+msgstr "Descargas por razón"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
@@ -1875,6 +1881,7 @@ msgstr ""
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
+"<b>Dependencia</b>: se instaló automáticamente para cumplir una dependencia."
 
 #: app/templates/macros/stats.html:114
 msgid "<b>Update</b>: download was to update the package."
@@ -1994,7 +2001,7 @@ msgstr "Antiguo"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Nombres de mods"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
@@ -2239,11 +2246,11 @@ msgstr "Centro Comunitario"
 #: app/templates/packages/game_hub.html:9
 #, python-format
 msgid "Mods and texture packs for %(title)s"
-msgstr ""
+msgstr "Mods y paquetes de textura para %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr ""
+msgstr "Documentación"
 
 #: app/templates/packages/game_support.html:24
 #: app/templates/packages/view.html:217
@@ -2264,7 +2271,7 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:46
 msgid "mod.conf"
-msgstr ""
+msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
 #: app/templates/packages/view.html:466
@@ -2287,7 +2294,7 @@ msgstr ""
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr ""
+msgstr "Paquete removido"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
@@ -2327,7 +2334,7 @@ msgstr ""
 
 #: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
-msgstr ""
+msgstr "O, si eres el autor, inicia sesión para ver más información."
 
 #: app/templates/packages/gone.html:48
 msgid "Login"
@@ -2404,10 +2411,14 @@ msgstr "Versiones compatibles de Minetest"
 
 #: app/templates/packages/release_edit.html:58
 #: app/templates/packages/release_new.html:80
+#, fuzzy
 msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
+"Establezca las versiones mínimas y máximas de Minetest soportadas.\n"
+"\t\t\tEsta versión se ocultará a los clientes que se encuentren fuera de ese "
+"rango. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
@@ -2687,6 +2698,8 @@ msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
 msgstr ""
+"La resolución recomendada es 1920x1080, y las capturas de pantalla deben ser "
+"de al menos %(width)dx%(height)d."
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
@@ -2760,11 +2773,11 @@ msgstr ""
 
 #: app/templates/packages/similar.html:32
 msgid "Similar Forum Topics"
-msgstr ""
+msgstr "Temas del foro similares"
 
 #: app/templates/packages/stats.html:17
 msgid "Download (.csv)"
-msgstr ""
+msgstr "Descargar (.csv)"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -2879,11 +2892,11 @@ msgstr "Esperando revisión"
 
 #: app/templates/packages/view.html:307 app/templates/threads/view.html:69
 msgid "Edit Review"
-msgstr ""
+msgstr "Editar reseña"
 
 #: app/templates/packages/view.html:312
 msgid "You can't review your own package."
-msgstr ""
+msgstr "No puedes reseñar tu propio paquete."
 
 #: app/templates/packages/view.html:322
 msgid "Package needs to be approved before it can be reviewed."
@@ -2911,7 +2924,7 @@ msgstr "Sólo visible para el autor y Editores."
 
 #: app/templates/packages/view.html:379
 msgid "Warning"
-msgstr ""
+msgstr "Advertencia"
 
 #: app/templates/packages/view.html:385
 msgid "Like this package? Help support its development by making a donation"
@@ -2919,15 +2932,15 @@ msgstr ""
 
 #: app/templates/packages/view.html:388
 msgid "Donate now"
-msgstr ""
+msgstr "Donar ahora"
 
 #: app/templates/packages/view.html:400
 msgid "Dependencies"
-msgstr ""
+msgstr "Dependencias"
 
 #: app/templates/packages/view.html:402
 msgid "Required"
-msgstr ""
+msgstr "Requerido"
 
 #: app/templates/packages/view.html:420
 msgid "No required dependencies"
@@ -2935,15 +2948,15 @@ msgstr ""
 
 #: app/templates/packages/view.html:426
 msgid "Optional"
-msgstr ""
+msgstr "Opcional"
 
 #: app/templates/packages/view.html:456
 msgid "Compatible Games"
-msgstr ""
+msgstr "Juegos compatibles"
 
 #: app/templates/packages/view.html:472
 msgid "This is an experimental feature."
-msgstr ""
+msgstr "Esta es una característica experimental."
 
 #: app/templates/packages/view.html:473
 msgid "Supported games are determined by an algorithm, and may not be correct."
@@ -2955,11 +2968,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:489
 msgid "Information"
-msgstr ""
+msgstr "Información"
 
 #: app/templates/packages/view.html:495
 msgid "Technical Name"
-msgstr ""
+msgstr "Nombre técnico"
 
 #: app/templates/packages/view.html:504
 #, python-format
@@ -2968,11 +2981,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:512
 msgid "Unknown"
-msgstr ""
+msgstr "Desconocido"
 
 #: app/templates/packages/view.html:514
 msgid "Added"
-msgstr ""
+msgstr "Añadido"
 
 #: app/templates/packages/view.html:528
 msgid "Remove myself"
@@ -2984,7 +2997,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:555
 msgid "More"
-msgstr ""
+msgstr "Más"
 
 #: app/templates/packages/view.html:584
 msgid "See audit log"
@@ -2995,22 +3008,26 @@ msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
 msgstr ""
+"Debido al spam, ya no aceptamos reportes de usuarios anónimos en este "
+"formulario."
 
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin in another way"
 msgstr ""
+"Por favor, inicia sesión o ponte en contacto con el administrador de otra "
+"manera"
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
-msgstr ""
+msgstr "¿Qué estás reportando? ¿Por qué lo estás reportando?"
 
 #: app/templates/report/index.html:38
 msgid "Reports will be shared with ContentDB staff."
-msgstr ""
+msgstr "Los reportes serán compartidos con el personal de ContentDB."
 
 #: app/templates/report/index.html:40
 msgid "Only the admin will be able to see who made the report."
-msgstr ""
+msgstr "Solo el administrador podrá ver quién hizo el reporte."
 
 #: app/templates/report/index.html:44
 msgid ""
@@ -3049,11 +3066,11 @@ msgstr ""
 #: app/templates/threads/edit_reply.html:4
 #: app/templates/threads/edit_reply.html:8
 msgid "Edit reply"
-msgstr ""
+msgstr "Editar respuesta"
 
 #: app/templates/threads/list.html:12 app/templates/threads/new.html:4
 msgid "New Thread"
-msgstr ""
+msgstr "Nuevo hilo"
 
 #: app/templates/threads/new.html:12
 msgid ""
@@ -3076,7 +3093,7 @@ msgstr ""
 #: app/templates/threads/user_comments.html:46
 #, python-format
 msgid "Reply to <b>%(title)s</b>"
-msgstr ""
+msgstr "Responder a <b>%(title)s</b>"
 
 #: app/templates/threads/view.html:38
 msgid "Subscribe"
@@ -3088,7 +3105,7 @@ msgstr ""
 
 #: app/templates/threads/view.html:54
 msgid "Unlock"
-msgstr ""
+msgstr "Desbloquear"
 
 #: app/templates/threads/view.html:59
 msgid "Lock"
@@ -3112,20 +3129,19 @@ msgstr ""
 
 #: app/templates/todo/editor.html:8
 msgid "Approval Queue"
-msgstr ""
+msgstr "Cola de aprobación"
 
 #: app/templates/todo/editor.html:15
 msgid "Approve All"
 msgstr ""
 
 #: app/templates/todo/editor.html:33
-#, fuzzy
 msgid "No screenshots need approval."
-msgstr "Sin capturas de pantalla."
+msgstr "Ninguna captura de pantalla necesita aprobación."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
 msgid "No packages need approval."
-msgstr ""
+msgstr "Ningún paquete necesita aprobación."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
@@ -3145,16 +3161,17 @@ msgstr ""
 
 #: app/templates/todo/editor.html:127
 msgid "Tag Packages"
-msgstr ""
+msgstr "Etiquetar paquetes"
 
 #: app/templates/todo/editor.html:130
-#, python-format
+#, fuzzy, python-format
 msgid "%(total_to_tag)d / %(total_packages)d packages don't have any tags."
 msgstr ""
+"%(total_to_tag)d / %(total_packages)d paquetes no tienen ninguna etiqueta."
 
 #: app/templates/todo/editor.html:140
 msgid "View Tags"
-msgstr ""
+msgstr "Ver etiquetas"
 
 #: app/templates/todo/editor.html:147
 msgid "Unfulfilled Dependencies"
@@ -3170,7 +3187,7 @@ msgstr ""
 
 #: app/templates/todo/editor.html:196
 msgid "Recent Actions"
-msgstr ""
+msgstr "Acciones recientes"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
@@ -3192,7 +3209,7 @@ msgstr ""
 #: app/templates/todo/mtver_support.html:29 app/templates/todo/outdated.html:28
 #: app/templates/todo/screenshots.html:28
 msgid "Sort by score"
-msgstr ""
+msgstr "Ordenar por calificación"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
@@ -3206,7 +3223,7 @@ msgstr ""
 #: app/templates/todo/screenshots.html:33
 #, python-format
 msgid "%(count)d packages"
-msgstr ""
+msgstr "%(count)d paquetes"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -3217,9 +3234,8 @@ msgid "Missing tags only"
 msgstr ""
 
 #: app/templates/todo/tags.html:31
-#, fuzzy
 msgid "Edit Tags"
-msgstr "Editar Detalles"
+msgstr "Editar etiquetas"
 
 #: app/templates/todo/todo_base.html:11
 msgid "Your to do list"
@@ -3230,9 +3246,8 @@ msgid "Outdated Packages"
 msgstr ""
 
 #: app/templates/todo/topics.html:16
-#, fuzzy
 msgid "Sort by name"
-msgstr "Nombre de usuario"
+msgstr "Ordenar por nombre"
 
 #: app/templates/todo/topics.html:20
 msgid "Sort by views"
@@ -3307,13 +3322,15 @@ msgstr ""
 
 #: app/templates/todo/user.html:88
 msgid "Small Screenshots"
-msgstr ""
+msgstr "Capturas de pantalla pequeñas"
 
 #: app/templates/todo/user.html:91
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr ""
+"Estos paquetes tienen capturas de pantalla demasiado pequeñas y deberían "
+"sustituirse."
 
 #: app/templates/todo/user.html:92
 msgid ""
@@ -3327,7 +3344,7 @@ msgstr ""
 
 #: app/templates/todo/user.html:148
 msgid "Packages Without Tags"
-msgstr ""
+msgstr "Paquetes sin etiquetas"
 
 #: app/templates/todo/user.html:150
 msgid "Labelling your packages with tags helps users find them."
@@ -3352,16 +3369,16 @@ msgstr ""
 #: app/templates/users/account.html:4
 #, python-format
 msgid "Account and Security - %(username)s"
-msgstr ""
+msgstr "Cuenta y Seguridad - %(username)s"
 
 #: app/templates/users/account.html:18
 msgid "Change Password"
-msgstr ""
+msgstr "Cambiar contraseña"
 
 #: app/templates/users/account.html:22
 #: app/templates/users/change_set_password.html:20
 msgid "Set Password"
-msgstr ""
+msgstr "Establecer contraseña"
 
 #: app/templates/users/account.html:27 app/templates/users/modtools.html:37
 msgid "Has password"
@@ -3373,7 +3390,7 @@ msgstr ""
 
 #: app/templates/users/account.html:33
 msgid "Linked Accounts"
-msgstr ""
+msgstr "Cuentas vinculadas"
 
 #: app/templates/users/account.html:40 app/templates/users/account.html:52
 msgid "Connected"
@@ -3444,7 +3461,7 @@ msgstr ""
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
-msgstr ""
+msgstr "Crear cuenta"
 
 #: app/templates/users/claim.html:10
 msgid "Do you have an account on the Minetest Forums?"
@@ -3493,7 +3510,7 @@ msgstr ""
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
-msgstr ""
+msgstr "Opción 1"
 
 #: app/templates/users/claim_forums.html:27
 msgid "Use GitHub field in forum profile"
@@ -3507,7 +3524,7 @@ msgstr ""
 #: app/templates/users/claim_forums.html:39
 #: app/templates/users/claim_forums.html:68
 msgid "Forum username"
-msgstr ""
+msgstr "Nombre de usuario del foro"
 
 #: app/templates/users/claim_forums.html:40
 #: app/templates/users/claim_forums.html:68
@@ -3531,7 +3548,7 @@ msgstr ""
 
 #: app/templates/users/claim_forums.html:55
 msgid "Option 2"
-msgstr ""
+msgstr "Opción 2"
 
 #: app/templates/users/claim_forums.html:56
 msgid "Verification token"
@@ -3621,15 +3638,15 @@ msgstr ""
 #: app/templates/users/forums_no_such_user.html:14
 #, python-format
 msgid "Unfortunately, %(username)s doesn't have an account on ContentDB yet."
-msgstr ""
+msgstr "Desafortunadamente, %(username)s aún no tiene una cuenta en ContentDB."
 
 #: app/templates/users/forums_no_such_user.html:19
 msgid "Claim Account"
-msgstr ""
+msgstr "Reclamar cuenta"
 
 #: app/templates/users/list.html:4 app/templates/users/list.html:8
 msgid "Users"
-msgstr ""
+msgstr "Usuarios"
 
 #: app/templates/users/list.html:34
 #, python-format
@@ -3638,11 +3655,11 @@ msgstr ""
 
 #: app/templates/users/login.html:20
 msgid "Forgot my password"
-msgstr ""
+msgstr "Olvidé mi contraseña"
 
 #: app/templates/users/login.html:30 app/templates/users/profile.html:77
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: app/templates/users/modtools.html:11
 msgid "Edit Account"
@@ -3650,7 +3667,7 @@ msgstr ""
 
 #: app/templates/users/modtools.html:43 app/templates/users/modtools.html:75
 msgid "Ban"
-msgstr ""
+msgstr "Expulsar"
 
 #: app/templates/users/modtools.html:56
 msgid "Unban"
@@ -3675,11 +3692,11 @@ msgstr ""
 #: app/templates/users/modtools.html:83
 #: app/templates/users/settings_email.html:14
 msgid "Email Address"
-msgstr ""
+msgstr "Dirección de correo electrónico"
 
 #: app/templates/users/profile.html:11
 msgid "Profile picture"
-msgstr ""
+msgstr "Foto de perfil"
 
 #: app/templates/users/profile.html:22
 msgid "To Do List"
@@ -3691,15 +3708,15 @@ msgstr ""
 
 #: app/templates/users/profile.html:105
 msgid "packages"
-msgstr ""
+msgstr "paquetes"
 
 #: app/templates/users/profile.html:114
 msgid "reviews"
-msgstr ""
+msgstr "reseñas"
 
 #: app/templates/users/profile.html:122
 msgid "comments"
-msgstr ""
+msgstr "comentarios"
 
 #: app/templates/users/profile.html:143
 msgid "Claim"
@@ -3712,15 +3729,15 @@ msgstr ""
 #: app/templates/users/profile.html:178
 #, python-format
 msgid "%(value)d / %(target)d"
-msgstr ""
+msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:192
 msgid "Create package"
-msgstr ""
+msgstr "Crear paquete"
 
 #: app/templates/users/profile.html:198
 msgid "View list of tags"
-msgstr ""
+msgstr "Ver la lista de etiquetas"
 
 #: app/templates/users/profile.html:208
 msgid "Maintained Packages"
@@ -3733,11 +3750,11 @@ msgstr ""
 #: app/templates/users/profile_edit.html:4
 #, python-format
 msgid "Edit Profile - %(username)s"
-msgstr ""
+msgstr "Editar perfil - %(username)s"
 
 #: app/templates/users/profile_edit.html:10
 msgid "Profile Picture"
-msgstr ""
+msgstr "Foto de perfil"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
@@ -3769,7 +3786,7 @@ msgstr ""
 
 #: app/templates/users/register.html:32
 msgid "Please prove that you are human"
-msgstr ""
+msgstr "Porfavor prueba que eres humano"
 
 #: app/templates/users/register.html:35
 msgid "I agree to the "
@@ -3810,7 +3827,7 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:45
 msgid "Immediately"
-msgstr ""
+msgstr "Inmediatamente"
 
 #: app/templates/users/settings_email.html:46
 msgid "In digest"
@@ -4113,4 +4130,3 @@ msgstr ""
 
 #~ msgid "Mods for %(title)s"
 #~ msgstr "Mods para %(title)s"
-
