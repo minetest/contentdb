@@ -523,7 +523,7 @@ class Package(db.Model):
 	def getSortedSupportedGames(self, include_unsupported=False):
 		query = self.supported_games
 		if not include_unsupported:
-			query = query.filter_by(supports=True)
+			query = query.filter(PackageGameSupport.game.has(state=PackageState.APPROVED)).filter_by(supports=True)
 
 		supported = query.all()
 		supported.sort(key=lambda x: -(x.game.score + 100000*x.confidence))
