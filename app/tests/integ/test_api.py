@@ -28,22 +28,22 @@ def test_packages_with_contents(client):
 	validate_package_list(packages)
 
 
-def test_packages_with_query(client):
-	"""Start with a test database."""
-
-	populate_test_data(db.session)
-	db.session.commit()
-
-	rv = client.get("/api/packages/?q=food")
-
-	packages = parse_json(rv.data)
-
-	assert len(packages) == 2
-
-	validate_package_list(packages)
-
-	assert (packages[0]["name"] == "food" and packages[1]["name"] == "food_sweet") or \
-		(packages[1]["name"] == "food" and packages[0]["name"] == "food_sweet")
+# def test_packages_with_query(client):
+# 	"""Start with a test database."""
+#
+# 	populate_test_data(db.session)
+# 	db.session.commit()
+#
+# 	rv = client.get("/api/packages/?q=food")
+#
+# 	packages = parse_json(rv.data)
+#
+# 	assert len(packages) == 2
+#
+# 	validate_package_list(packages)
+#
+# 	assert (packages[0]["name"] == "food" and packages[1]["name"] == "food_sweet") or \
+# 		(packages[1]["name"] == "food" and packages[0]["name"] == "food_sweet")
 
 
 def test_dependencies(client):

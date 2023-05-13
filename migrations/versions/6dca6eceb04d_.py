@@ -18,11 +18,11 @@ depends_on = None
 
 def upgrade():
 	conn = op.get_bind()
-	sync_trigger(conn, 'package', 'search_vector', ["name", "title", "short_desc", "desc"])
+	# sync_trigger(conn, 'package', 'search_vector', ["name", "title", "short_desc", "desc"])
 	op.create_check_constraint("name_valid", "package", "name ~* '^[a-z0-9_]+$'")
 
 
 def downgrade():
 	conn = op.get_bind()
-	sync_trigger(conn, 'package', 'search_vector', ["title", "short_desc", "desc"])
+	# sync_trigger(conn, 'package', 'search_vector', ["title", "short_desc", "desc"])
 	op.drop_constraint("name_valid", "package", type_="check")

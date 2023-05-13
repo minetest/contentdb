@@ -24,7 +24,7 @@ def upgrade():
     op.create_index('ix_package_search_vector', 'package', ['search_vector'], unique=False, postgresql_using='gin')
 
     conn = op.get_bind()
-    sync_trigger(conn, 'package', 'search_vector', ["title", "short_desc", "desc"])
+    # sync_trigger(conn, 'package', 'search_vector', ["title", "short_desc", "desc"])
     # ### end Alembic commands ###
 
 
