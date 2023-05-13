@@ -1,15 +1,18 @@
 import pytest, json
+from sqlalchemy import text
+
 from app import app
 from app.models import db, User
 from app.default_data import populate
 
+
 def clear_data(session):
 	meta = db.metadata
 	for table in reversed(meta.sorted_tables):
-		session.execute(f'ALTER TABLE "{table.name}" DISABLE TRIGGER ALL;')
+		session.execute(text(f'ALTER TABLE "{table.name}" DISABLE TRIGGER ALL;'))
 		session.execute(table.delete())
-		session.execute(f'ALTER TABLE "{table.name}" ENABLE TRIGGER ALL;')
-		#session.execute(table.delete())
+		session.execute(text(f'ALTER TABLE "{table.name}" ENABLE TRIGGER ALL;'))
+
 
 def recreate_db():
 	clear_data(db.session)
