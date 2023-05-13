@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-04-30 01:43+0100\n"
-"PO-Revision-Date: 2023-01-30 04:08+0000\n"
-"Last-Translator: rubenwardy <rw@rubenwardy.com>\n"
+"PO-Revision-Date: 2023-05-06 19:48+0000\n"
+"Last-Translator: Pexauteau Santander <pexauteau@gmail.com>\n"
+"Language-Team: Slovak <https://hosted.weblate.org/projects/minetest/"
+"contentdb/sk/>\n"
 "Language: sk\n"
-"Language-Team: Slovak "
-"<https://hosted.weblate.org/projects/minetest/contentdb/sk/>\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.18-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:119
@@ -223,7 +224,7 @@ msgstr "URL videa"
 
 #: app/blueprints/packages/packages.py:251
 msgid "Donate URL"
-msgstr ""
+msgstr "URL pre darovanie"
 
 #: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
@@ -433,7 +434,7 @@ msgstr "Komentár"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "Hodnotenie"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:117
 #: app/templates/macros/reviews.html:160
@@ -443,7 +444,7 @@ msgstr "Áno"
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:121
 #: app/templates/macros/reviews.html:164
 msgid "Neutral"
-msgstr ""
+msgstr "Neutrál"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:125
 #: app/templates/macros/reviews.html:168
@@ -467,7 +468,7 @@ msgstr ""
 #: app/blueprints/threads/__init__.py:329 app/blueprints/users/settings.py:88
 #: app/logic/packages.py:125
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "Prepojenie na blokované stránky nie je povolené"
 
 #: app/blueprints/packages/reviews.py:183
 msgid "You can't vote on the reviews on your own package!"
@@ -852,19 +853,19 @@ msgstr "Prvá medaila až za 50 k."
 
 #: app/blueprints/users/profile.py:196
 msgid ">300k downloads"
-msgstr ">300k stiahnutí"
+msgstr "viac než 300k stiahnutí"
 
 #: app/blueprints/users/profile.py:199
 msgid ">100k downloads"
-msgstr ">100k stiahnutí"
+msgstr "viac než 100k stiahnutí"
 
 #: app/blueprints/users/profile.py:202
 msgid ">75k downloads"
-msgstr ">75k stiahnutí"
+msgstr "viac než 75k stiahnutí"
 
 #: app/blueprints/users/profile.py:205
 msgid ">50k downloads"
-msgstr ">50k stiahnutí"
+msgstr "viac než 50k stiahnutí"
 
 #: app/blueprints/users/profile.py:206
 #, python-format
@@ -1197,11 +1198,11 @@ msgstr "Pomôž preložiť ContentDB"
 
 #: app/templates/base.html:249
 msgid "About"
-msgstr ""
+msgstr "Opis"
 
 #: app/templates/base.html:250
 msgid "Rules"
-msgstr ""
+msgstr "Pravidlá"
 
 #: app/templates/base.html:251
 msgid "Policy and Guidance"
@@ -1217,7 +1218,7 @@ msgstr "Politika súkromia"
 
 #: app/templates/base.html:255
 msgid "Report / DMCA"
-msgstr ""
+msgstr "Nahlásiť / DMCA"
 
 #: app/templates/base.html:257
 msgid "Stats / Monitoring"
@@ -1234,7 +1235,7 @@ msgstr "Vlákna"
 
 #: app/templates/base.html:260
 msgid "Support Packages"
-msgstr ""
+msgstr "Podporné balíky"
 
 #: app/templates/base.html:261
 msgid "Source Code"
@@ -1247,6 +1248,8 @@ msgstr "Vitaj"
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
+"Vitaj na najlepšom mieste kde nájdeš modifikácie, hry a balíky textúr pre "
+"Minetest"
 
 #: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
@@ -1456,26 +1459,28 @@ msgstr "Neboli vytvorené žiadne tokeny"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
-msgstr ""
+msgstr "Podpora balíkov"
 
 #: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
-msgstr ""
+msgstr "Niektorí tvorcovia obsahu prijímajú podporu na svoju prácu."
 
 #: app/templates/donate/index.html:9
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
+"Príspevky sú skvelou možnosťou ako podporiť svojho obľúbeného modifikátora, "
+"umelca a vývojára."
 
 #: app/templates/donate/index.html:37
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "od %(author)s"
 
 #: app/templates/donate/index.html:42
 msgid "View package"
-msgstr ""
+msgstr "Pozri balík"
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:95
 msgid "Donate"
@@ -1483,26 +1488,28 @@ msgstr "Prispieť"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews"
-msgstr ""
+msgstr "Na základe tvojho prehliadania"
 
 #: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Considering reviewing your "
 "favourite packages"
 msgstr ""
+"Žiadny z prehliadaných balíkov neprijíma príspevky. Zohľadňujúc prehliadanie "
+"tvojich obľúbených balíkov"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
-msgstr ""
+msgstr "Prihlás sa aby si videl odporúčania na základe prehlidaných balíkov"
 
 #: app/templates/donate/index.html:78
 msgid "Top packages"
-msgstr ""
+msgstr "Najlepšie balíky"
 
 #: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d balíkov hľadá príspevky"
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1662,7 +1669,7 @@ msgstr "Vydanie sa stále nahráva, alebo obsahuje chybu."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr ""
+msgstr "Mal by si pridať aspoň jdnu snímku obrazovky."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1843,7 +1850,7 @@ msgstr "Počet stiahnutí podľa dôvodu"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
-msgstr "<b>New Install</b>: the user clicked [Install] inside of Minetest."
+msgstr "<b>New Install</b>: užívateľ klikol [Install] v Minetest hre."
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
@@ -2173,7 +2180,7 @@ msgstr "YouTube videá sa zobrazia v záložke."
 
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
-msgstr ""
+msgstr "Ak je prázdne, bude použité URL pre príspevky autorovi."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2207,7 +2214,7 @@ msgstr "Spoločenské centrum"
 #: app/templates/packages/game_hub.html:9
 #, python-format
 msgid "Mods and texture packs for %(title)s"
-msgstr ""
+msgstr "Modifikačné balíky a balíky textúr pre %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
@@ -2387,7 +2394,7 @@ msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
-"Môžeš <a href='/help/package_config/'> nastaviť automaticky </a> v .conf "
+"Môžeš <a href=\"/help/package_config/\"> nastaviť automaticky </a> v .conf "
 "svojho balíka."
 
 #: app/templates/packages/release_edit.html:70
@@ -2471,7 +2478,7 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
-"Pozri aj <a href='/help/package_config/'> Nastavenie balíka a Sprievodca "
+"Pozri aj <a href=\"/help/package_config/\"> Nastavenie balíka a Sprievodca "
 "vydaniami</a> alebo pre\n"
 "návrhy pre prispôsobenie vydaní."
 
@@ -2485,7 +2492,7 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
-"Súbor .conf tvojho balíka môže <a href='/help/package_config/'>nastaviť "
+"Súbor .conf tvojho balíka môže <a href=\"/help/package_config/\">nastaviť "
 "automaticky</a>,\n"
 "čo prepíše tvoj výber."
 
@@ -2622,7 +2629,7 @@ msgstr "Zrušiť"
 
 #: app/templates/packages/remove.html:39
 msgid "Unapprove"
-msgstr ""
+msgstr "Neschváliť"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2634,7 +2641,7 @@ msgstr "Zašli recenziu o %(title)s od %(author)s"
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr ""
-"Našiel si bug (chybu)? Napíš na <a href='%(url)s'> sledovanie "
+"Našiel si bug (chybu)? Napíš na <a href=\"%(url)s\"> sledovanie "
 "problémov</a>."
 
 #: app/templates/packages/review_create_edit.html:56
@@ -2945,7 +2952,7 @@ msgstr "Podporované hry sú podmienené algoritmom a nemusia byť správne."
 
 #: app/templates/packages/view.html:483
 msgid "Please specify compatible games"
-msgstr ""
+msgstr "Prosím, upresni kompatibilné hry"
 
 #: app/templates/packages/view.html:489
 msgid "Information"
@@ -3540,8 +3547,8 @@ msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Prihlás sa na fórum a <a href='https://forum.minetest.net/ucp.php?i=173'>"
-" vykonať to môžeš tu</a>."
+"Prihlás sa na fórum a <a href=\"https://forum.minetest.net/ucp.php?i=173\"> "
+"vykonať to môžeš tu</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -3561,9 +3568,8 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
-"Choď na <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
-"Control Panel > Profile > Edit signature</a>"
+"Choď na <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
+"signature\">User Control Panel &gt; Profile &gt; Edit signature</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
@@ -4019,4 +4025,3 @@ msgstr ""
 
 #~ msgid "Mods for %(title)s"
 #~ msgstr "Rozšírenia pre %(title)s"
-
