@@ -53,5 +53,5 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, 
 
 	res = requests.post(discord_url, json=json, headers={"Accept": "application/json"})
 	if res.status_code != 200:
-		raise f"Failed to submit Discord webhook {res.json}"
+		raise Exception(f"Failed to submit Discord webhook {res.json}")
 	res.raise_for_status()
