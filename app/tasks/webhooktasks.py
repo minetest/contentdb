@@ -37,6 +37,8 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, 
 		user = User.query.filter_by(username=username).first()
 		if user:
 			json["avatar_url"] = user.getProfilePicURL().replace("/./", "/")
+			if json["avatar_url"].startswith("/"):
+				json["avatar_url"] = app.config["BASE_URL"] + json["avatar_url"]
 
 	if title:
 		embed = {
@@ -51,5 +53,5 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, 
 
 	res = requests.post(discord_url, json=json, headers={"Accept": "application/json"})
 	if res.status_code != 200:
-		print("Failed to submit Discord webhook", res.json(), file=sys.stderr)
+		raise f"Failed to submit Discord webhook {res.json}"
 	res.raise_for_status()
