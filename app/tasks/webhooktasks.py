@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import sys
 from typing import Optional
 
 import requests
@@ -48,4 +49,7 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, 
 
 		json["embeds"] = [embed]
 
-	requests.post(discord_url, json=json)
+	res = requests.post(discord_url, json=json, headers={"Accept": "application/json"})
+	if res.status_code != 200:
+		print("Failed to submit Discord webhook", res.json(), file=sys.stderr)
+	res.raise_for_status()
