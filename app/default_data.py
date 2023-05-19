@@ -361,7 +361,7 @@ Uses the CTF PvP Engine.
 	mod.name = "pixelbox"
 	mod.title = "PixelBOX Reloaded"
 	mod.license = licenses["CC0"]
-	mod.media_license = licenses["MIT"]
+	mod.media_license = licenses["CC0"]
 	mod.type = PackageType.TXP
 	mod.author = admin_user
 	mod.forums = 14132
