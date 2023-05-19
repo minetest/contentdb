@@ -78,13 +78,14 @@ def get_package_overview_for_user(user: Optional[User], start_date: datetime.dat
 	if user:
 		query = query.filter(PackageDailyStats.package.has(author_id=user.id))
 
-	stats = query \
-		.filter(PackageDailyStats.package.has(state=PackageState.APPROVED)) \
+	all_stats = query \
+		.filter(PackageDailyStats.package.has(state=PackageState.APPROVED),
+				PackageDailyStats.date >= start_date, PackageDailyStats.date <= end_date) \
 		.order_by(db.asc(PackageDailyStats.package_id), db.asc(PackageDailyStats.date)) \
 		.all()
 
 	stats_by_package = {}
-	for stat in stats:
+	for stat in all_stats:
 		bucket = stats_by_package.get(stat.package_id, [])
 		stats_by_package[stat.package_id] = bucket
 
@@ -113,8 +114,10 @@ def get_package_overview_for_user(user: Optional[User], start_date: datetime.dat
 			if stat.date == date:
 				row.append(stat.downloads)
 				i += 1
-			else:
+			elif stat.date > date:
 				row.append(0)
+			else:
+				raise Exception(f"Invalid logic, expected stat {stat.date} to be later than {date}")
 
 	return result
 
