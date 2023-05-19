@@ -166,6 +166,8 @@
 		{% endfor %}
 		{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.ADMIN)) %}
 			{% for medal in medals_locked %}
+				{% set value = medal.progress[0] %}
+				{% set target = medal.progress[1] %}
 				<div class="col-md-4">
 					<div class="border border-dark rounded p-3 text-muted my-0 h-100">
 						<p>
@@ -173,10 +175,18 @@
 						</p>
 						<div class="progress">
 							<div class="progress-bar" role="progressbar"
-									style="width: {{ [100 * medal.progress[0] / medal.progress[1], 100] | min }}%;"
-									aria-valuenow="{{ medal.progress[0] }}" aria-valuemin="0" aria-valuemax="{{ medal.progress[1] }}">
-								{{ _("%(value)d / %(target)d", value=medal.progress[0], target=medal.progress[1]) }}
+									style="width: {{ [100 * value / target, 100] | min }}%;"
+									aria-valuenow="{{ value }}" aria-valuemin="0" aria-valuemax="{{ target }}">
+								{% if value >= target * 0.2 %}
+									{{ _("%(value)d / %(target)d", value=value, target=target) }}
+								{% endif %}
 							</div>
+
+							{% if value < target * 0.2 %}
+								<div class="ml-3 d-flex align-items-center text-muted h-100">
+									{{ _("%(value)d / %(target)d", value=medal.progress[0], target=medal.progress[1]) }}
+								</div>
+							{% endif %}
 						</div>
 					</div>
 				</div>
