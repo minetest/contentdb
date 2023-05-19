@@ -20,7 +20,7 @@ from flask_login import current_user, login_required
 from sqlalchemy import or_, and_
 
 from app.models import User, Package, PackageState, PackageScreenshot, PackageUpdateConfig, ForumTopic, db, \
-	PackageRelease, Permission, NotificationType, AuditSeverity, UserRank
+	PackageRelease, Permission, NotificationType, AuditSeverity, UserRank, PackageType
 from app.tasks.importtasks import makeVCSRelease
 from app.utils import addNotification, addAuditLog
 
@@ -51,6 +51,17 @@ def view_user(username=None):
 				Package.state == PackageState.CHANGES_NEEDED)) \
 			.order_by(db.asc(Package.created_at)).all()
 
+	outdated_packages = user.maintained_packages \
+			.filter(Package.state != PackageState.DELETED,
+					Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))) \
+			.order_by(db.asc(Package.title)).all()
+
+	missing_game_support = user.maintained_packages.filter(
+			Package.state != PackageState.DELETED,
+			Package.type.in_([PackageType.MOD, PackageType.TXP]),
+			~Package.supported_games.any()) \
+			.order_by(db.asc(Package.title)).all()
+
 	packages_with_no_screenshots = user.maintained_packages.filter(
 			~Package.screenshots.any(), Package.state == PackageState.APPROVED).all()
 
@@ -59,11 +70,6 @@ def view_user(username=None):
 					Package.screenshots.any(and_(PackageScreenshot.width < PackageScreenshot.SOFT_MIN_SIZE[0],
 					PackageScreenshot.height < PackageScreenshot.SOFT_MIN_SIZE[1]))) \
 			.all()
-
-	outdated_packages = user.maintained_packages \
-			.filter(Package.state != PackageState.DELETED,
-					Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))) \
-			.order_by(db.asc(Package.title)).all()
 
 	topics_to_add = ForumTopic.query \
 			.filter_by(author_id=user.id) \
@@ -77,7 +83,7 @@ def view_user(username=None):
 
 	return render_template("todo/user.html", current_tab="user", user=user,
 			unapproved_packages=unapproved_packages, outdated_packages=outdated_packages,
-			needs_tags=needs_tags, topics_to_add=topics_to_add,
+			missing_game_support=missing_game_support, needs_tags=needs_tags, topics_to_add=topics_to_add,
 			packages_with_no_screenshots=packages_with_no_screenshots,
 			packages_with_small_screenshots=packages_with_small_screenshots,
 			screenshot_min_size=PackageScreenshot.HARD_MIN_SIZE, screenshot_rec_size=PackageScreenshot.SOFT_MIN_SIZE)
@@ -127,3 +133,22 @@ def apply_all_updates(username):
 		db.session.commit()
 
 	return redirect(url_for("todo.view_user", username=username))
+
+
+@bp.route("/user/game_support/")
+@bp.route("/users/<username>/game_support/")
+@login_required
+def all_game_support(username=None):
+	if username is None:
+		return redirect(url_for("todo.all_game_support", username=current_user.username))
+
+	user: User = User.query.filter_by(username=username).one_or_404()
+	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
+		abort(403)
+
+	packages = user.maintained_packages.filter(
+				Package.state != PackageState.DELETED,
+				Package.type.in_([PackageType.MOD, PackageType.TXP])) \
+			.order_by(db.asc(Package.title)).all()
+
+	return render_template("todo/game_support.html", user=user, packages=packages)

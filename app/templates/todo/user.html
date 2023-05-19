@@ -63,6 +63,38 @@
 	{% from "macros/todo.html" import render_outdated_packages %}
 	{{ render_outdated_packages(outdated_packages, current_user) }}
 
+	<div class="mb-4"></div>
+
+	<a class="btn btn-secondary float-right" href="/help/game_support/">
+		{{ _("Help") }}
+	</a>
+	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('todo.all_game_support', username=user.username) }}">
+		{{ _("See game support for your packages") }}
+	</a>
+	<h2>{{ _("Missing Game Support") }}</h2>
+	{% if missing_game_support %}
+		<p>
+			{{ _("You should specify the games supported by your mods and texture packs.") }}
+			{{ _("Specifying game support makes it easier for players to find your content.") }}
+		</p>
+	{% endif %}
+	<div class="list-group mt-3 mb-5">
+		{% for package in missing_game_support %}
+			<a class="list-group-item list-group-item-action" href="{{ package.getURL('packages.game_support') }}">
+					<img
+						class="img-fluid"
+						style="max-height: 22px; max-width: 22px;"
+						src="{{ package.getThumbnailOrPlaceholder() }}" />
+
+					<span class="pl-2">
+						{{ package.title }}
+					</span>
+			</a>
+		{% else %}
+			<p class="text-muted">{{ _("Nothing to do :)") }}</p>
+		{% endfor %}
+	</div>
+
 
 	<div class="mt-5"></div>
 	<h2 id="missing-screenshots">{{ _("Missing Screenshots") }}</h2>
