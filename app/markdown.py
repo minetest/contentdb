@@ -64,6 +64,14 @@ ALLOWED_PROTOCOLS = {"http", "https", "mailto"}
 md = None
 
 
+def linker_callback(attrs, new=False):
+	if new:
+		text = attrs.get("_text")
+		if not (text.startswith("http://") or text.startswith("https://")):
+			return None
+	return attrs
+
+
 def render_markdown(source):
 	html = md.convert(source)
 
@@ -71,7 +79,7 @@ def render_markdown(source):
 		tags=ALLOWED_TAGS,
 		attributes=ALLOWED_ATTRIBUTES,
 		protocols=ALLOWED_PROTOCOLS,
-		filters=[partial(LinkifyFilter, callbacks=bleach.linkifier.DEFAULT_CALLBACKS)])
+		filters=[partial(LinkifyFilter, callbacks=[linker_callback] + bleach.linkifier.DEFAULT_CALLBACKS, skip_tags={"pre"})])
 	return cleaner.clean(html)
 
 
