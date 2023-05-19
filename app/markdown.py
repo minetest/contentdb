@@ -79,7 +79,9 @@ def render_markdown(source):
 		tags=ALLOWED_TAGS,
 		attributes=ALLOWED_ATTRIBUTES,
 		protocols=ALLOWED_PROTOCOLS,
-		filters=[partial(LinkifyFilter, callbacks=[linker_callback] + bleach.linkifier.DEFAULT_CALLBACKS, skip_tags={"pre"})])
+		filters=[partial(LinkifyFilter,
+				callbacks=[linker_callback] + bleach.linkifier.DEFAULT_CALLBACKS,
+				skip_tags={"pre", "code"})])
 	return cleaner.clean(html)
 
 
