@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-04-30 01:43+0100\n"
-"PO-Revision-Date: 2023-05-10 15:49+0000\n"
+"PO-Revision-Date: 2023-05-17 21:49+0000\n"
 "Last-Translator: Giov4 <brancacciogiovanni1@gmail.com>\n"
 "Language-Team: Italian <https://hosted.weblate.org/projects/minetest/"
 "contentdb/it/>\n"
@@ -76,11 +76,11 @@ msgstr "Profilo collegato a GitHub"
 
 #: app/blueprints/github/__init__.py:65
 msgid "GitHub account is already associated with another user"
-msgstr "L'account GitHub è già associato ad un altrə utentə"
+msgstr "L'account GitHub è già associato ad un altrə utente"
 
 #: app/blueprints/github/__init__.py:71
 msgid "Unable to find an account for that GitHub user"
-msgstr "Impossibile trovare un account per l'utentə GitHub"
+msgstr "Impossibile trovare un account per l'utente GitHub"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
@@ -246,7 +246,7 @@ msgstr "Il contenuto esiste già"
 
 #: app/blueprints/packages/packages.py:332
 msgid "Unable to find that user"
-msgstr "Impossibile trovare l'utentə"
+msgstr "Impossibile trovare l'utente"
 
 #: app/blueprints/packages/packages.py:336
 #: app/blueprints/packages/screenshots.py:139
@@ -564,7 +564,7 @@ msgstr "Aspetta prima di iniziare una nuova discussione, per favore"
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr "Nome utentə o email"
+msgstr "Nome utente o email"
 
 #: app/blueprints/users/account.py:38 app/blueprints/users/account.py:108
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
@@ -588,7 +588,7 @@ msgstr "L'email o la password non sono corretti"
 #: app/blueprints/users/account.py:54
 #, python-format
 msgid "User %(username)s does not exist"
-msgstr "L'utentə %(username)s non esiste"
+msgstr "L'utente %(username)s non esiste"
 
 #: app/blueprints/users/account.py:57
 msgid "Incorrect password. Did you set one?"
@@ -609,7 +609,7 @@ msgstr "Nome da Mostrare"
 #: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:272
 #: app/templates/users/list.html:18
 msgid "Username"
-msgstr "Nome Utentə"
+msgstr "Nome Utente"
 
 #: app/blueprints/users/account.py:105
 msgid ""
@@ -644,17 +644,17 @@ msgstr "Risposta al captcha errata"
 
 #: app/blueprints/users/account.py:120
 msgid "Username is invalid"
-msgstr "Il nome utentə non è valido"
+msgstr "Il nome utente non è valido"
 
 #: app/blueprints/users/account.py:131
 msgid "An account already exists for that username but hasn't been claimed yet."
 msgstr ""
-"Esiste già un account per il nome utentə, ma non è stato ancora attribuito."
+"Esiste già un account per il nome utente, ma non è stato ancora attribuito."
 
 #: app/blueprints/users/account.py:134 app/blueprints/users/account.py:141
 msgid "That username/display name is already in use, please choose another."
 msgstr ""
-"Il nome utentə/nome da mostrare è già in uso, scegline un altro per favore."
+"Il nome utente/nome da mostrare è già in uso, scegline un altro per favore."
 
 #: app/blueprints/users/account.py:146 app/blueprints/users/account.py:258
 msgid "Email already in use"
@@ -722,7 +722,7 @@ msgstr "Il gettone è scaduto"
 
 #: app/blueprints/users/account.py:340
 msgid "Another user is already using that email"
-msgstr "L'email è già in uso per un altrə utentə"
+msgstr "L'email è già in uso per un altrə utente"
 
 #: app/blueprints/users/account.py:343
 msgid "Confirmed email change"
@@ -762,21 +762,21 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
-"Il nome utentə non è valido, sono permessi solo lettere alfabetiche (A-Za-z)"
+"Il nome utente non è valido, sono permessi solo lettere alfabetiche (A-Za-z)"
 ", numeri (0-9), trattini bassi (_), meno (-) e punti (.). Considera di "
 "contattare unə amministratorə"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
-msgstr "L'utentə è già statə attribuitə"
+msgstr "L'utente è già statə registratə"
 
 #: app/blueprints/users/claim.py:49
 msgid "Unable to get GitHub username for user"
-msgstr "Impossibile ottenere il nome utentə GitHub"
+msgstr "Impossibile ottenere il nome utente GitHub"
 
 #: app/blueprints/users/claim.py:72
 msgid "That user has already been claimed!"
-msgstr "L'utentə è già stato attribuitə!"
+msgstr "L'utente è già statə registratə!"
 
 #: app/blueprints/users/claim.py:86
 #, python-format
@@ -785,11 +785,11 @@ msgstr "Errore nel tentativo di accesso al forum: %(message)s"
 
 #: app/blueprints/users/claim.py:90
 msgid "Unable to get forum signature - does the user exist?"
-msgstr "Impossibile ottenere la firma del forum - l'utentə esiste?"
+msgstr "Impossibile ottenere la firma del forum - l'utente esiste?"
 
 #: app/blueprints/users/claim.py:105
 msgid "Unable to login as user"
-msgstr "Impossibile entrare come utentə"
+msgstr "Impossibile entrare come utente"
 
 #: app/blueprints/users/claim.py:111
 msgid "Could not find the key in your signature!"
@@ -914,13 +914,12 @@ msgstr "URL per le donazioni"
 
 #: app/blueprints/users/settings.py:68 app/blueprints/users/settings.py:75
 msgid "A user already has that name"
-msgstr "Un utentə possiede già quel nome"
+msgstr "Quel nome è già in uso"
 
 #: app/blueprints/users/settings.py:232
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr ""
-"Gli utenti col rango di moderatore o superiore non possono essere "
-"cancellati"
+"Lɜ utenti col rango di moderatorə o superiore non possono essere cancellatɜ"
 
 #: app/blueprints/users/settings.py:273
 msgid "Display name"
@@ -928,11 +927,11 @@ msgstr "Nome da mostrare"
 
 #: app/blueprints/users/settings.py:274
 msgid "Forums Username"
-msgstr "Nome Utentə sul Forum"
+msgstr "Nome Utente sul Forum"
 
 #: app/blueprints/users/settings.py:275
 msgid "GitHub Username"
-msgstr "Nome Utentə su GitHub"
+msgstr "Nome Utente su GitHub"
 
 #: app/blueprints/users/settings.py:276 app/templates/users/list.html:14
 msgid "Rank"
@@ -940,7 +939,7 @@ msgstr "Rango"
 
 #: app/blueprints/users/settings.py:320
 msgid "Can't promote a user to a rank higher than yourself!"
-msgstr "Non puoi promuovere un utentə a un livello più alto del tuo!"
+msgstr "Non puoi promuovere un utente ad un livello più alto del tuo!"
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
@@ -958,8 +957,8 @@ msgstr "Ricerca"
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
-"Esiste già un contenuto con questo nome. Si prega di consultare Polizza e"
-" Tutoraggio 3"
+"Esiste già un contenuto con questo nome. Si prega di consultare Politiche e "
+"Linee guida 3"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
@@ -1098,7 +1097,7 @@ msgstr "Rimuovi"
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
-msgstr "Ricevi questa email perchè sei unə utentə registratə di ContentDB."
+msgstr "Ricevi questa email perchè sei unə utente registratə di ContentDB."
 
 #: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
@@ -1106,7 +1105,7 @@ msgid ""
 " email address as a user's email."
 msgstr ""
 "Ricevi questa email perchè qualcunə (si spera tu) ha inserito questo "
-"indirizzo come email di unə utentə."
+"indirizzo come email di unə utente."
 
 #: app/tasks/emails.py:153
 #, python-format
@@ -1228,7 +1227,7 @@ msgstr "Regole"
 
 #: app/templates/base.html:251
 msgid "Policy and Guidance"
-msgstr "Polizza e Tutoraggio"
+msgstr "Politiche e Linee guida"
 
 #: app/templates/base.html:252
 msgid "API"
@@ -1236,7 +1235,7 @@ msgstr "API"
 
 #: app/templates/base.html:253 app/templates/users/register.html:37
 msgid "Privacy Policy"
-msgstr "Polizza sulla Privacy"
+msgstr "Politica sulla Privacy"
 
 #: app/templates/base.html:255
 msgid "Report / DMCA"
@@ -1359,7 +1358,7 @@ msgstr "Causato da %(author)s."
 
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
-msgstr "Causato da unə utentə rimossə."
+msgstr "Causato da unə utente rimossə."
 
 #: app/templates/admin/list.html:62
 msgid "Deletion is permanent."
@@ -1555,8 +1554,8 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
 msgstr ""
-"Ricevi questa email perchè sei unə utentə registratə di ContentDB e hai "
-"attivatə le notifiche email."
+"Ricevi questa email perchè sei unə utente registratə di ContentDB e hai "
+"attivato le notifiche email."
 
 #: app/templates/emails/notification.html:30
 #: app/templates/emails/notification_digest.html:50
@@ -1626,7 +1625,7 @@ msgid ""
 "entered your email address as a user's email."
 msgstr ""
 "Questa email ti è stata inviata perchè qualcunə (si spera tu) ha inserito "
-"questo indirizzo come email utentə."
+"questo indirizzo come email utente."
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
@@ -1669,7 +1668,7 @@ msgstr "Gravità: %(sev)s."
 
 #: app/templates/macros/audit_log.html:32
 msgid "Deleted User"
-msgstr "Utentə Rimossə"
+msgstr "Utente Rimossə"
 
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
@@ -1685,7 +1684,7 @@ msgstr "Stato"
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
-msgstr "Configurate i Rilasci"
+msgstr "Configura i Rilasci"
 
 #: app/templates/macros/package_approval.html:31
 msgid "You need to create a release before this package can be approved."
@@ -1883,7 +1882,7 @@ msgstr "Scaricamenti per Motivo"
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
 msgstr ""
-"<b>Nuova installazione</b>: l'utentə ha fatto clic su [Installa] all'interno "
+"<b>Nuova installazione</b>: l'utente ha fatto clic su [Installa] all'interno "
 "di Minetest."
 
 #: app/templates/macros/stats.html:113
@@ -1945,7 +1944,7 @@ msgstr "Non ti è permesso pubblicare."
 #: app/templates/macros/threads.html:179
 msgid "You can add someone to a private thread by writing @username."
 msgstr ""
-"Puoi aggiungere qualcunə ad una discussione privata scrivendo @nome_utentə."
+"Puoi aggiungere qualcunə ad una discussione privata scrivendo @nome_utente."
 
 #: app/templates/macros/threads.html:197 app/templates/macros/threads.html:279
 msgid "No threads found"
@@ -2137,7 +2136,7 @@ msgstr "Crea un Contenuto"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
-msgstr "Avete già letto la Polizza di Inclusione Contenuti e Tutoraggio?"
+msgstr "Hai già letto la Politica di Inclusione dei Contenuti e le Linee guida?"
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
@@ -2158,7 +2157,7 @@ msgid ""
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
-"JavaScript è necessario per migliorare l'interfaccia utentə e per "
+"JavaScript è necessario per migliorare l'interfaccia utente e per "
 "funzionalità\n"
 "\t\t\tquali la ricerca dei metadati da Git e l'auto-completamento."
 
@@ -2961,7 +2960,7 @@ msgstr "Contenuto"
 
 #: app/templates/packages/view.html:341 app/templates/packages/view.html:395
 msgid "View content for game"
-msgstr "Mostra il contenuto per il gioco"
+msgstr "Mostra contenuti per il gioco"
 
 #: app/templates/packages/view.html:355
 msgid "Package may be outdated"
@@ -3061,7 +3060,7 @@ msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
 msgstr ""
-"A causa dello spam, non accettiamo più segnalazioni da utenti anonimi in "
+"A causa dello spam, non accettiamo più segnalazioni da utenti anonimɜ in "
 "questo modulo."
 
 #: app/templates/report/index.html:16
@@ -3418,11 +3417,11 @@ msgstr "Contenuti Senza Etichette"
 
 #: app/templates/todo/user.html:150
 msgid "Labelling your packages with tags helps users find them."
-msgstr "Inserire delle etichette sui tuoi contenuti aiuta gli utenti a trovarli."
+msgstr "Inserire delle etichette sui tuoi contenuti aiuta lɜ utenti a trovarli."
 
 #: app/templates/todo/user.html:170
 msgid "Unadded Topics"
-msgstr "Argomenti Non Inseriti"
+msgstr "Discussioni Non Inserite"
 
 #: app/templates/todo/user.html:173
 msgid "List of your forum topics which do not have a matching package."
@@ -3581,7 +3580,7 @@ msgstr "Ciò permette a ContentDB di collegare il tuo profilo a quello del forum
 
 #: app/templates/users/claim_forums.html:18
 msgid "Don't have a forums account?"
-msgstr "Non possiedi un account del forum?"
+msgstr "Non possiedi un account sul forum?"
 
 #: app/templates/users/claim_forums.html:19
 #, python-format
@@ -3599,12 +3598,12 @@ msgstr "Utilizza il campo GitHub nel tuo profilo"
 #: app/templates/users/claim_forums.html:35
 #: app/templates/users/claim_forums.html:64
 msgid "Enter your forum username here:"
-msgstr "Inserisci il tuo nome utentə del forum qui:"
+msgstr "Inserisci il tuo nome utente del forum qui:"
 
 #: app/templates/users/claim_forums.html:39
 #: app/templates/users/claim_forums.html:68
 msgid "Forum username"
-msgstr "Nome utentə del forum"
+msgstr "Nome utente del forum"
 
 #: app/templates/users/claim_forums.html:40
 #: app/templates/users/claim_forums.html:68
@@ -3643,7 +3642,7 @@ msgid ""
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
 "Prosegui su <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
-"signature\">Pannello di Controllo dell'Utentə &gt; Profilo &gt; Modifica la "
+"signature\">Pannello di Controllo dell'Utente &gt; Profilo &gt; Modifica la "
 "firma</a>"
 
 #: app/templates/users/claim_forums.html:75
@@ -3661,7 +3660,7 @@ msgstr "Non ti preoccupare, potrai cancellarlo dopo il completamento."
 #: app/templates/users/delete.html:4
 #, python-format
 msgid "Delete user %(username)s"
-msgstr "Cancella utentə %(username)s"
+msgstr "Cancella utente %(username)s"
 
 #: app/templates/users/delete.html:17
 #, python-format
@@ -3691,7 +3690,7 @@ msgstr ""
 
 #: app/templates/users/delete.html:25
 msgid "See the privacy policy for more information."
-msgstr "Leggete la polizza sulla privacy per ulteriori informazioni."
+msgstr "Leggi la politica sulla privacy per ulteriori informazioni."
 
 #: app/templates/users/delete.html:36
 msgid "Deactivate"
@@ -3835,7 +3834,7 @@ msgstr "Contenuti Mantenuti"
 
 #: app/templates/users/profile.html:210
 msgid "This user is also a maintainer of the following packages"
-msgstr "Questə utentə mantiene anche i seguenti contenuti"
+msgstr "Questə utente mantiene anche i seguenti contenuti"
 
 #: app/templates/users/profile_edit.html:4
 #, python-format
@@ -3856,7 +3855,7 @@ msgstr "Informazioni del profilo"
 
 #: app/templates/users/profile_edit.html:52
 msgid "Pretending to be another user is grounds for a permanent ban"
-msgstr "Pretendere di essere unə altrə utentə è motivo di espulsione permanente"
+msgstr "Pretendere di essere unə altrə utente è motivo di espulsione permanente"
 
 #: app/templates/users/register.html:17
 msgid ""
@@ -3871,12 +3870,12 @@ msgid ""
 "Human readable name, defaults to username if not specified. This can be "
 "changed later."
 msgstr ""
-"Nome leggibile da umani, diventa il nome utentə se non è specificato per "
+"Nome leggibile da umani, se non specificato diventerà il nome utente per "
 "impostazione predefinita. Ciò può essere modificato successivamente."
 
 #: app/templates/users/register.html:21
 msgid "Same as username"
-msgstr "Identico al nome utentə"
+msgstr "Identico al nome utente"
 
 #: app/templates/users/register.html:32
 msgid "Please prove that you are human"
@@ -3918,8 +3917,8 @@ msgid ""
 "Configure whether certain types of notifications are sent immediately, or"
 " as part of a daily digest."
 msgstr ""
-"Configurate se certi tipi di notifiche vengono inviate immediatamente, o "
-"sono parte di un resoconto quotidiano."
+"Configura se certi tipi di notifiche devono essere inviate immediatamente, o "
+"fare parte di un resoconto quotidiano."
 
 #: app/templates/users/settings_email.html:43
 msgid "Event"
