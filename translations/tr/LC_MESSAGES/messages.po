@@ -8,24 +8,25 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-04-30 01:43+0100\n"
-"PO-Revision-Date: 2022-01-17 15:22+0000\n"
-"Last-Translator: Mehmet Ali <2045uuttb@relay.firefox.com>\n"
+"PO-Revision-Date: 2023-05-22 22:48+0000\n"
+"Last-Translator: Furkan Baytekin <furkanbaytekin@gmail.com>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/tr/>\n"
 "Language: tr\n"
-"Language-Team: Turkish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/tr/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.18-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:119
 msgid "Banned:"
-msgstr ""
+msgstr "Yasaklı:"
 
 #: app/__init__.py:121
 msgid "You have been banned."
-msgstr ""
+msgstr "Yasaklandınız."
 
 #: app/querybuilder.py:22 app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
@@ -33,7 +34,7 @@ msgstr ""
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:201
 msgid "Packages"
-msgstr ""
+msgstr "Paketler"
 
 #: app/template_filters.py:64
 #, python-format
@@ -48,7 +49,7 @@ msgstr "Ad"
 
 #: app/blueprints/api/tokens.py:34
 msgid "Limit to package"
-msgstr ""
+msgstr "Paket sınırı"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:253
 #: app/blueprints/packages/packages.py:480
@@ -67,28 +68,28 @@ msgstr "Kaydet"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr ""
+msgstr "Yetkilendirme başarısız oldu: [err=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:62
 msgid "Linked GitHub to account"
-msgstr ""
+msgstr "Github hesabına bağlandı"
 
 #: app/blueprints/github/__init__.py:65
 msgid "GitHub account is already associated with another user"
-msgstr ""
+msgstr "GitHub hesabı zaten başka bir kullanıcıyla ilişkilendirilmiş"
 
 #: app/blueprints/github/__init__.py:71
 msgid "Unable to find an account for that GitHub user"
-msgstr ""
+msgstr "Söz konusu GitHub kullanıcısı için bir hesap bulunamadı"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr ""
+msgstr "Yetkilendirme başarısız oldu [err=gh-login-failed]"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
 msgid "Edit Details"
-msgstr ""
+msgstr "Detayları Düzenle"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
@@ -111,45 +112,47 @@ msgstr "Bakımcılar"
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:151
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr ""
+msgstr "Denetim Günlüğü"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/base.html:142
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:234 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "İstatistikler"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
-msgstr ""
+msgstr "Paylaşım ve Rozetler"
 
 #: app/blueprints/packages/__init__.py:67 app/templates/packages/remove.html:36
 #: app/templates/packages/view.html:131
 msgid "Remove"
-msgstr ""
+msgstr "Kaldır"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Desteklenen Oyunlar"
 
 #: app/blueprints/packages/packages.py:163
 msgid "Error: Another package already uses this forum topic!"
-msgstr ""
+msgstr "Hata: Başka bir paket zaten bu forum konusunu kullanıyor!"
 
 #: app/blueprints/packages/packages.py:169
 msgid "Error: Forum topic author doesn't match package author."
-msgstr ""
+msgstr "Hata: Forum konu yazarı, paket yazarıyla eşleşmiyor."
 
 #: app/blueprints/packages/packages.py:172
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr ""
+"Uyarı: Forum konusu bulunamadı. Bu, konu henüz oluşturulduysa "
+"gerçekleşebilir."
 
 #: app/blueprints/packages/packages.py:218
 msgid "No download available."
-msgstr ""
+msgstr "İndirme mevcut değil."
 
 #: app/blueprints/packages/packages.py:232 app/templates/packages/view.html:493
 msgid "Type"
@@ -157,7 +160,7 @@ msgstr "Tür"
 
 #: app/blueprints/packages/packages.py:233
 msgid "Title (Human-readable)"
-msgstr ""
+msgstr "Başlık (İnsan-okunur)"
 
 #: app/blueprints/packages/packages.py:234
 #: app/blueprints/packages/packages.py:574
@@ -168,11 +171,11 @@ msgstr "Ad (Teknik)"
 #: app/blueprints/packages/packages.py:575
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr ""
+msgstr "Yalnızca küçük harfler (a-z), rakamlar (0-9) ve alt çizgiler (_)"
 
 #: app/blueprints/packages/packages.py:235
 msgid "Short Description (Plaintext)"
-msgstr ""
+msgstr "Kısa Açıklama (Düz Metin)"
 
 #: app/blueprints/packages/packages.py:237 app/templates/packages/view.html:508
 msgid "Maintenance State"
@@ -185,7 +188,7 @@ msgstr "Etiketler"
 
 #: app/blueprints/packages/packages.py:240
 msgid "Content Warnings"
-msgstr ""
+msgstr "İçerik Uyarıları"
 
 #: app/blueprints/packages/packages.py:241 app/templates/packages/view.html:497
 msgid "License"
@@ -197,89 +200,91 @@ msgstr "Medya Lisansı"
 
 #: app/blueprints/packages/packages.py:244
 msgid "Long Description (Markdown)"
-msgstr ""
+msgstr "Uzun Açıklama (Markdown)"
 
 #: app/blueprints/packages/packages.py:246
 msgid "VCS Repository URL"
-msgstr ""
+msgstr "VCS Deposu URL'si"
 
 #: app/blueprints/packages/packages.py:247 app/blueprints/users/settings.py:51
 msgid "Website URL"
-msgstr ""
+msgstr "Web Sitesi URL'si"
 
 #: app/blueprints/packages/packages.py:248
 msgid "Issue Tracker URL"
-msgstr ""
+msgstr "Sorun İzleyici URL'si"
 
 #: app/blueprints/packages/packages.py:249
 msgid "Forum Topic ID"
-msgstr ""
+msgstr "Forum Konu ID'si"
 
 #: app/blueprints/packages/packages.py:250
 msgid "Video URL"
-msgstr ""
+msgstr "Video URL'si"
 
 #: app/blueprints/packages/packages.py:251
 msgid "Donate URL"
-msgstr ""
+msgstr "Bağış URL'si"
 
 #: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game izin verilen bir ad değil"
 
 #: app/blueprints/packages/packages.py:267
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Paket zaten var, ancak kaldırıldı. Paketi geri yüklemek için lütfen "
+"ContentDB personeliyle iletişime geçin"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Package already exists"
-msgstr ""
+msgstr "Paket zaten mevcut"
 
 #: app/blueprints/packages/packages.py:332
 msgid "Unable to find that user"
-msgstr ""
+msgstr "Bu kullanıcı bulunamadı"
 
 #: app/blueprints/packages/packages.py:336
 #: app/blueprints/packages/screenshots.py:139
 #: app/blueprints/users/settings.py:107
 msgid "Permission denied"
-msgstr ""
+msgstr "İzin reddedildi"
 
 #: app/blueprints/packages/packages.py:392
 #: app/blueprints/packages/packages.py:443
 #: app/blueprints/packages/packages.py:459
 msgid "You don't have permission to do that"
-msgstr ""
+msgstr "Bunu yapmak için izniniz yok"
 
 #: app/blueprints/packages/packages.py:422
 msgid "Please comment what changes are needed in the approval thread"
-msgstr ""
+msgstr "Lütfen onay dizisinde hangi değişikliklerin gerekli olduğunu yorumlayın"
 
 #: app/blueprints/packages/packages.py:454
 msgid "Deleted package"
-msgstr ""
+msgstr "Silinmiş paket"
 
 #: app/blueprints/packages/packages.py:470
 msgid "Unapproved package"
-msgstr ""
+msgstr "Onaylanmamış paket"
 
 #: app/blueprints/packages/packages.py:479
 msgid "Maintainers (Comma-separated)"
-msgstr ""
+msgstr "Geliştiriciler (Virgülle ayrılmış)"
 
 #: app/blueprints/packages/packages.py:488
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "Geliştiricileri düzenleme izniniz yok"
 
 #: app/blueprints/packages/packages.py:538
 msgid "You are not a maintainer"
-msgstr ""
+msgstr "Bir geliştirici değilsiniz"
 
 #: app/blueprints/packages/packages.py:541
 msgid "Package owners cannot remove themselves as maintainers"
-msgstr ""
+msgstr "Paket sahipleri kendilerini geliştirici olmaktan kaldıramaz"
 
 #: app/blueprints/packages/packages.py:573
 msgid "Author Name"
@@ -287,15 +292,15 @@ msgstr "Yazar Adı"
 
 #: app/blueprints/packages/packages.py:643
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "Bağımlılıklara göre destek algılamayı etkinleştir (önerilen)"
 
 #: app/blueprints/packages/packages.py:644
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Desteklenen oyunlar (Virgülle ayrılmış)"
 
 #: app/blueprints/packages/packages.py:645
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Desteklenmeyen oyunlar (Virgülle ayrılmış)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
@@ -318,7 +323,7 @@ msgstr "Dosya Yükle"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr ""
+msgstr "Git referansı (ör: commit hash, branch veya tag)"
 
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:68
@@ -339,16 +344,16 @@ msgstr "URL"
 
 #: app/blueprints/packages/releases.py:66
 msgid "Task ID"
-msgstr ""
+msgstr "Görev ID"
 
 #: app/blueprints/packages/releases.py:67
 #: app/blueprints/packages/screenshots.py:40
 msgid "Is Approved"
-msgstr ""
+msgstr "Onaylandı"
 
 #: app/blueprints/packages/releases.py:85
 msgid "Import from Git"
-msgstr ""
+msgstr "Git'ten içe aktar"
 
 #: app/blueprints/packages/releases.py:85
 msgid "Upload .zip file"
@@ -356,15 +361,15 @@ msgstr ".zip dosyasını yükle"
 
 #: app/blueprints/packages/releases.py:191
 msgid "Set Min"
-msgstr ""
+msgstr "Minimumu Ayarla"
 
 #: app/blueprints/packages/releases.py:194
 msgid "Set Max"
-msgstr ""
+msgstr "Maksimumu Ayarla"
 
 #: app/blueprints/packages/releases.py:197
 msgid "Only change values previously set as none"
-msgstr ""
+msgstr "Yalnızca daha önce hiçbiri olarak ayarlanan değerleri değiştirin"
 
 #: app/blueprints/packages/releases.py:198
 msgid "Update"
@@ -373,11 +378,11 @@ msgstr "Güncelleme"
 #: app/blueprints/packages/releases.py:247
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
-msgstr ""
+msgstr "Tetiklen"
 
 #: app/blueprints/packages/releases.py:248
 msgid "New Commit"
-msgstr ""
+msgstr "Yeni Commit"
 
 #: app/blueprints/packages/releases.py:249 app/templates/admin/tags/list.html:8
 msgid "New Tag"
@@ -385,21 +390,21 @@ msgstr "Yeni Etiket"
 
 #: app/blueprints/packages/releases.py:251
 msgid "Branch name"
-msgstr ""
+msgstr "Branch adı"
 
 #: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:38
 msgid "Action"
-msgstr ""
+msgstr "Hareket"
 
 #: app/blueprints/packages/releases.py:253
 msgid "Send notification and mark as outdated"
-msgstr ""
+msgstr "Bildirim gönder ve eski olarak işaretle"
 
 #: app/blueprints/packages/releases.py:253
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
-msgstr ""
+msgstr "Sürüm oluştur"
 
 #: app/blueprints/packages/releases.py:255
 msgid "Save Settings"
@@ -407,236 +412,241 @@ msgstr "Ayarları Kaydet"
 
 #: app/blueprints/packages/releases.py:256
 msgid "Disable Automation"
-msgstr ""
+msgstr "Otomasyonu Devre Dışı Bırak"
 
 #: app/blueprints/packages/releases.py:295
 msgid "Please add a Git repository URL in order to set up automatic releases"
-msgstr ""
+msgstr "Otomatik sürümleri ayarlamak için lütfen bir Git deposu URL'si ekleyin"
 
 #: app/blueprints/packages/releases.py:311
 msgid "Deleted update configuration"
-msgstr ""
+msgstr "Silinen güncelleme yapılandırması"
 
 #: app/blueprints/packages/releases.py:319
 msgid "Now, please create an initial release"
-msgstr ""
+msgstr "Şimdi, lütfen bir ilk sürüm oluşturun"
 
 #: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:178
 #: app/blueprints/threads/__init__.py:179
 #: app/blueprints/threads/__init__.py:279
 msgid "Comment"
-msgstr ""
+msgstr "Yorum"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "Derecelendirme"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:117
 #: app/templates/macros/reviews.html:160
 msgid "Yes"
-msgstr ""
+msgstr "Evet"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:121
 #: app/templates/macros/reviews.html:164
 msgid "Neutral"
-msgstr ""
+msgstr "Nötr"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:125
 #: app/templates/macros/reviews.html:168
 msgid "No"
-msgstr ""
+msgstr "Hayır"
 
 #: app/blueprints/packages/reviews.py:56
 msgid "You can't review your own package!"
-msgstr ""
+msgstr "Kendi paketinizi değerlendirmezsiniz!"
 
 #: app/blueprints/packages/reviews.py:66
 msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
+"Son zamanlarda çok fazla paket incelediniz. Tekrar denemeden önce lütfen "
+"bekleyin ve incelemelerinizi daha ayrıntılı hale getirmeyi düşünün"
 
 #: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:204
 #: app/blueprints/threads/__init__.py:237
 #: app/blueprints/threads/__init__.py:329 app/blueprints/users/settings.py:88
 #: app/logic/packages.py:125
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "Engellenen sitelere bağlantı verilmesine izin verilmez"
 
 #: app/blueprints/packages/reviews.py:183
 msgid "You can't vote on the reviews on your own package!"
-msgstr ""
+msgstr "Kendi paketinizle ilgili yorumları oylayamazsınız!"
 
 #: app/blueprints/packages/reviews.py:191
 msgid "You can't vote on your own reviews!"
-msgstr ""
+msgstr "Kendi yorumlarınıza oy veremezsiniz!"
 
 #: app/blueprints/packages/screenshots.py:33
 #: app/blueprints/packages/screenshots.py:39
 msgid "Title/Caption"
-msgstr ""
+msgstr "Başlık"
 
 #: app/blueprints/packages/screenshots.py:45
 #: app/templates/packages/screenshots.html:89
 msgid "Cover Image"
-msgstr ""
+msgstr "Kapak Resmi"
 
 #: app/blueprints/report/__init__.py:34 app/templates/users/modtools.html:62
 msgid "Message"
-msgstr ""
+msgstr "Mesaj"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:50
 #: app/templates/packages/view.html:576 app/templates/report/index.html:4
 #: app/templates/report/index.html:10 app/templates/users/profile.html:28
 msgid "Report"
-msgstr ""
+msgstr "Rapor"
 
 #: app/blueprints/threads/__init__.py:67
 msgid "Already subscribed!"
-msgstr ""
+msgstr "Zaten abonesin!"
 
 #: app/blueprints/threads/__init__.py:69
 msgid "Subscribed to thread"
-msgstr ""
+msgstr "Konuya abone olundu"
 
 #: app/blueprints/threads/__init__.py:84
 msgid "Unsubscribed!"
-msgstr ""
+msgstr "Abonelikten çıkıldı!"
 
 #: app/blueprints/threads/__init__.py:88
 msgid "Already not subscribed!"
-msgstr ""
+msgstr "Zaten abone değilsiniz!"
 
 #: app/blueprints/threads/__init__.py:107
 msgid "Locked thread"
-msgstr ""
+msgstr "Kilitli konu"
 
 #: app/blueprints/threads/__init__.py:110
 msgid "Unlocked thread"
-msgstr ""
+msgstr "Kilitlenmemiş konu"
 
 #: app/blueprints/threads/__init__.py:159
 msgid "Cannot delete thread opening post!"
-msgstr ""
+msgstr "Konu açma gönderisi silinemiyor!"
 
 #: app/blueprints/threads/__init__.py:233
 msgid "Please wait before commenting again"
-msgstr ""
+msgstr "Tekrar yorum yapmadan önce lütfen bekleyin"
 
 #: app/blueprints/threads/__init__.py:280
 msgid "Private"
-msgstr ""
+msgstr "Özel"
 
 #: app/blueprints/threads/__init__.py:281
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
-msgstr ""
+msgstr "Konu Aç"
 
 #: app/blueprints/threads/__init__.py:304
 msgid "Unable to create thread!"
-msgstr ""
+msgstr "Konu oluşturulamıyor!"
 
 #: app/blueprints/threads/__init__.py:310
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Onaylanmış bir konu zaten var! Bunun yerine oraya yanıt vermeyi düşünün"
 
 #: app/blueprints/threads/__init__.py:314
 msgid "Please wait before opening another thread"
-msgstr ""
+msgstr "Lütfen başka bir konu açmadan önce bekleyin"
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr ""
+msgstr "Kullanıcı adı ya da e-posta"
 
 #: app/blueprints/users/account.py:38 app/blueprints/users/account.py:108
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
 #: app/templates/users/modtools.html:35
 msgid "Password"
-msgstr ""
+msgstr "Parola"
 
 #: app/blueprints/users/account.py:39 app/blueprints/zipgrep/__init__.py:36
 msgid "Remember me"
-msgstr ""
+msgstr "Beni hatırla"
 
 #: app/blueprints/users/account.py:40 app/templates/base.html:180
 #: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
-msgstr ""
+msgstr "Giriş yap"
 
 #: app/blueprints/users/account.py:46
 msgid "Incorrect email or password"
-msgstr ""
+msgstr "Hatalı e-posta ya da parola"
 
 #: app/blueprints/users/account.py:54
 #, python-format
 msgid "User %(username)s does not exist"
-msgstr ""
+msgstr "%(username)s kullanıcısı mevcut değil"
 
 #: app/blueprints/users/account.py:57
 msgid "Incorrect password. Did you set one?"
-msgstr ""
+msgstr "Hatalı parola. Bir parola oluşturdunuz mu?"
 
 #: app/blueprints/users/account.py:60
 msgid "You need to confirm the registration email"
-msgstr ""
+msgstr "Kayıt e-postasını onaylamanız gerekiyor"
 
 #: app/blueprints/users/account.py:68
 msgid "Login failed"
-msgstr ""
+msgstr "Giriş başarısız oldu"
 
 #: app/blueprints/users/account.py:103 app/blueprints/users/settings.py:50
 msgid "Display Name"
-msgstr ""
+msgstr "Görünecek İsim"
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:272
 #: app/templates/users/list.html:18
 msgid "Username"
-msgstr ""
+msgstr "Kullanıcı Adı"
 
 #: app/blueprints/users/account.py:105
 msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
+"Yalnızca alfabetik harflere (A-Za-z), sayılara (0-9), alt çizgilere (_), "
+"eksilere (-) ve noktalara (.) izin verilir"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:189
 #: app/blueprints/users/account.py:224 app/blueprints/users/account.py:374
 #: app/blueprints/users/settings.py:122
 msgid "Email"
-msgstr ""
+msgstr "E-posta"
 
 #: app/blueprints/users/account.py:109
 msgid "What is the result of the above calculation?"
-msgstr ""
+msgstr "Yukarıdaki hesaplamanın sonucu nedir?"
 
 #: app/blueprints/users/account.py:110
 msgid "I agree"
-msgstr ""
+msgstr "Onaylıyorum"
 
 #: app/blueprints/users/account.py:111 app/templates/users/login.html:34
 #: app/templates/users/register.html:4
 msgid "Register"
-msgstr ""
+msgstr "Kaydol"
 
 #: app/blueprints/users/account.py:116
 msgid "Incorrect captcha answer"
-msgstr ""
+msgstr "Hatalı captcha yanıtı"
 
 #: app/blueprints/users/account.py:120
 msgid "Username is invalid"
-msgstr ""
+msgstr "Kullanıcı adı geçersiz"
 
 #: app/blueprints/users/account.py:131
 msgid "An account already exists for that username but hasn't been claimed yet."
-msgstr ""
+msgstr "Bu kullanıcı adı için zaten bir hesap var, ancak henüz talep edilmedi."
 
 #: app/blueprints/users/account.py:134 app/blueprints/users/account.py:141
 msgid "That username/display name is already in use, please choose another."
 msgstr ""
+"Bu kullanıcı adı/görünen ad zaten kullanımda, lütfen başka bir tane seçin."
 
 #: app/blueprints/users/account.py:146 app/blueprints/users/account.py:258
 msgid "Email already in use"
-msgstr ""
+msgstr "E-posta zaten kullanımda"
 
 #: app/blueprints/users/account.py:147 app/blueprints/users/account.py:259
 #, python-format
@@ -644,87 +654,94 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
+"E-posta zaten %(display_name)s tarafından kullanıldığından hesabı "
+"oluşturamadık. Farklı bir e-posta adresi deneyin."
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:253
 #: app/blueprints/users/settings.py:150
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
+"Bu e-posta adresi abonelikten çıkarıldı/kara listeye alındı ve kullanılamaz"
 
 #: app/blueprints/users/account.py:190
 msgid "Reset Password"
-msgstr ""
+msgstr "Şifreyi Yenile"
 
 #: app/blueprints/users/account.py:215
 msgid "Unable to find account"
-msgstr ""
+msgstr "Hesap bulunamadı"
 
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:232
 msgid "New password"
-msgstr ""
+msgstr "Yeni Parola"
 
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:233
 msgid "Verify password"
-msgstr ""
+msgstr "Parolayı Doğrula"
 
 #: app/blueprints/users/account.py:227 app/blueprints/users/account.py:234
 msgid "Passwords must match"
-msgstr ""
+msgstr "Parolalar eşleşmeli"
 
 #: app/blueprints/users/account.py:231
 msgid "Old password"
-msgstr ""
+msgstr "Eski Parola"
 
 #: app/blueprints/users/account.py:242
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Parolalar eşleşmiyor"
 
 #: app/blueprints/users/account.py:273 app/blueprints/users/account.py:277
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "Parolanız başarıyla değiştirildi."
 
 #: app/blueprints/users/account.py:292
 msgid "Old password is incorrect"
-msgstr ""
+msgstr "Eski parola hatalı"
 
 #: app/blueprints/users/account.py:320
 msgid "Unknown verification token!"
-msgstr ""
+msgstr "Bilinmeyen doğrulama jetonu!"
 
 #: app/blueprints/users/account.py:326
 msgid "Token has expired"
-msgstr ""
+msgstr "Jetonun süresi doldu"
 
 #: app/blueprints/users/account.py:340
 msgid "Another user is already using that email"
-msgstr ""
+msgstr "Başka bir kullanıcı zaten bu e-postayı kullanıyor"
 
 #: app/blueprints/users/account.py:343
 msgid "Confirmed email change"
-msgstr ""
+msgstr "Onaylanmış e-posta değişikliği"
 
 #: app/blueprints/users/account.py:348
 msgid "Email address changed"
-msgstr ""
+msgstr "E-posta adresi değiştirildi"
 
 #: app/blueprints/users/account.py:349
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
+"E-posta adresiniz değişti. Bunu siz talep etmediyseniz, lütfen bir yönetici "
+"ile iletişime geçin."
 
 #: app/blueprints/users/account.py:367
 msgid "You may now log in"
-msgstr ""
+msgstr "Şimdi giriş yapabilirsiniz"
 
 #: app/blueprints/users/account.py:375
 msgid "Send"
-msgstr ""
+msgstr "Gönder"
 
 #: app/blueprints/users/account.py:406
 msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
 msgstr ""
+"Bu e-posta artık kara listeye alındı. Geri almak istiyorsanız lütfen bir "
+"yönetici ile iletişime geçin."
 
 #: app/blueprints/users/claim.py:40 app/blueprints/users/claim.py:65
 msgid ""
@@ -732,202 +749,207 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
+"Geçersiz kullanıcı adı, Yalnızca alfabetik harflere (A-Za-z), sayılara (0-9)"
+", alt çizgilere (_), eksilere (-) ve noktalara (.) izin verilir. Bir "
+"yönetici ile iletişime geçmeyi düşünün"
 
 #: app/blueprints/users/claim.py:45
 msgid "User has already been claimed"
-msgstr ""
+msgstr "Kullanıcı zaten talep edildi"
 
 #: app/blueprints/users/claim.py:49
 msgid "Unable to get GitHub username for user"
-msgstr ""
+msgstr "Kullanıcı için GitHub kullanıcı adı alınamıyor"
 
 #: app/blueprints/users/claim.py:72
 msgid "That user has already been claimed!"
-msgstr ""
+msgstr "Bu kullanıcı zaten sahiplenildi!"
 
 #: app/blueprints/users/claim.py:86
 #, python-format
 msgid "Error whilst attempting to access forums: %(message)s"
-msgstr ""
+msgstr "Forumlara erişmeye çalışırken hata oluştu: %(message)s"
 
 #: app/blueprints/users/claim.py:90
 msgid "Unable to get forum signature - does the user exist?"
-msgstr ""
+msgstr "Forum imzası alınamadı - kullanıcı mevcut mu?"
 
 #: app/blueprints/users/claim.py:105
 msgid "Unable to login as user"
-msgstr ""
+msgstr "Kullanıcı olarak giriş yapılamadı"
 
 #: app/blueprints/users/claim.py:111
 msgid "Could not find the key in your signature!"
-msgstr ""
+msgstr "İmzanızda anahtar bulunamadı!"
 
 #: app/blueprints/users/claim.py:114
 msgid "Unknown claim type"
-msgstr ""
+msgstr "Bilinmeyen talep türü"
 
 #: app/blueprints/users/profile.py:115
 msgid "Top reviewer"
-msgstr ""
+msgstr "En iyi yorumlayıcı"
 
 #: app/blueprints/users/profile.py:116
 #, python-format
 msgid "%(display_name)s has written the most helpful reviews on ContentDB."
-msgstr ""
+msgstr "%(display_name)s, ContentDB'deki en yararlı incelemeleri yazdı."
 
 #: app/blueprints/users/profile.py:121
 msgid "2nd most helpful reviewer"
-msgstr ""
+msgstr "2'nci en yararlı yorumlayıcı"
 
 #: app/blueprints/users/profile.py:123
 msgid "3rd most helpful reviewer"
-msgstr ""
+msgstr "3'üncü en yararlı yorumlayıcı"
 
 #: app/blueprints/users/profile.py:124
 #, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
-msgstr ""
+msgstr "Bu, %(display_name)s 'i %(perc)s de en iyi yapar"
 
 #: app/blueprints/users/profile.py:128
 #, python-format
 msgid "Top %(perc)s%% reviewer"
-msgstr ""
+msgstr "En iyi %(perc)s%% yorumcusu"
 
 #: app/blueprints/users/profile.py:129
 #, python-format
 msgid "Only %(place)d users have written more helpful reviews."
-msgstr ""
+msgstr "Yalnızca %(place)d kullanıcıları daha yararlı incelemeler yazdı."
 
 #: app/blueprints/users/profile.py:134
 msgid "Consider writing more helpful reviews to get a medal."
-msgstr ""
+msgstr "Madalya almak için daha yararlı yorumlar yazmayı düşünün."
 
 #: app/blueprints/users/profile.py:136
 #, python-format
 msgid "You are in place %(place)s."
-msgstr ""
+msgstr "%(place)s yerindesiniz."
 
 #: app/blueprints/users/profile.py:164
 #, python-format
 msgid "Top %(type)s"
-msgstr ""
+msgstr "En iyi %(type)s"
 
 #: app/blueprints/users/profile.py:166
 #, python-format
 msgid "Top %(group)d %(type)s"
-msgstr ""
+msgstr "En iyi %(group)d %(type)s"
 
 #: app/blueprints/users/profile.py:175
 #, python-format
 msgid "%(display_name)s has a %(type)s placed at #%(place)d."
 msgstr ""
+"%(display_name)s, #%(place)d konumuna yerleştirilmiş bir %(type)s'e sahiptir."
 
 #: app/blueprints/users/profile.py:190
 #, python-format
 msgid "Your packages have %(downloads)d downloads in total."
-msgstr ""
+msgstr "Paketleriniz toplamda %(downloads)d indirmeye sahip."
 
 #: app/blueprints/users/profile.py:191
 msgid "First medal is at 50k."
-msgstr ""
+msgstr "İlk madalya 50 binde."
 
 #: app/blueprints/users/profile.py:196
 msgid ">300k downloads"
-msgstr ""
+msgstr "&gt;300 bin indirme"
 
 #: app/blueprints/users/profile.py:199
 msgid ">100k downloads"
-msgstr ""
+msgstr "&gt;100k indirme"
 
 #: app/blueprints/users/profile.py:202
 msgid ">75k downloads"
-msgstr ""
+msgstr "&gt;75 bin indirme"
 
 #: app/blueprints/users/profile.py:205
 msgid ">50k downloads"
-msgstr ""
+msgstr "&gt;50 bin indirme"
 
 #: app/blueprints/users/profile.py:206
 #, python-format
 msgid "Has received %(downloads)d downloads across all packages."
-msgstr ""
+msgstr "Tüm paketlerde %(downloads)d indirme aldı."
 
 #: app/blueprints/users/settings.py:19 app/templates/users/profile.html:17
 #: app/templates/users/profile_edit.html:8
 msgid "Edit Profile"
-msgstr ""
+msgstr "Profili Düzenle"
 
 #: app/blueprints/users/settings.py:24 app/templates/users/account.html:12
 msgid "Account and Security"
-msgstr ""
+msgstr "Hesap ve Güvenlik"
 
 #: app/blueprints/users/settings.py:29
 #: app/templates/users/settings_email.html:8
 msgid "Email and Notifications"
-msgstr ""
+msgstr "E-posta ve Bildirimler"
 
 #: app/blueprints/users/settings.py:34 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
-msgstr ""
+msgstr "API Jetonları"
 
 #: app/blueprints/users/settings.py:42 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:35
 msgid "Moderator Tools"
-msgstr ""
+msgstr "Moderatör Araçları"
 
 #: app/blueprints/users/settings.py:52
 msgid "Donation URL"
-msgstr ""
+msgstr "Bağış URL'si"
 
 #: app/blueprints/users/settings.py:68 app/blueprints/users/settings.py:75
 msgid "A user already has that name"
-msgstr ""
+msgstr "Bir kullanıcı zaten bu ada sahip"
 
 #: app/blueprints/users/settings.py:232
 msgid "Users with moderator rank or above cannot be deleted"
-msgstr ""
+msgstr "Moderatör veya üzeri rütbeye sahip kullanıcılar silinemez"
 
 #: app/blueprints/users/settings.py:273
 msgid "Display name"
-msgstr ""
+msgstr "Görünen ad"
 
 #: app/blueprints/users/settings.py:274
 msgid "Forums Username"
-msgstr ""
+msgstr "Forumlar Kullanıcı Adı"
 
 #: app/blueprints/users/settings.py:275
 msgid "GitHub Username"
-msgstr ""
+msgstr "GitHub Kullanıcı Adı"
 
 #: app/blueprints/users/settings.py:276 app/templates/users/list.html:14
 msgid "Rank"
-msgstr ""
+msgstr "Rütbe"
 
 #: app/blueprints/users/settings.py:320
 msgid "Can't promote a user to a rank higher than yourself!"
-msgstr ""
+msgstr "Bir kullanıcıyı kendinizden daha yüksek bir rütbeye yükseltemezsiniz!"
 
 #: app/blueprints/zipgrep/__init__.py:34
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "Bulunacak metin (düzenli ifade)"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "File filter"
-msgstr ""
+msgstr "Dosya filtresi"
 
 #: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:56
 #: app/templates/todo/tags.html:15
 msgid "Search"
-msgstr ""
+msgstr "Ara"
 
 #: app/logic/package_validator.py:20
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
+"Bu isimde bir paket zaten mevcuttur. Lütfen Politika ve Kılavuz 3'e bakın"
 
 #: app/logic/package_validator.py:23
 #: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
-msgstr ""
+msgstr "Bu paket onaylanmadan önce bir sürüm gereklidir."
 
 #: app/logic/package_validator.py:29
 #: app/templates/macros/package_approval.html:45
@@ -936,57 +958,62 @@ msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
 "%(deps)s"
 msgstr ""
+"Önce aşağıdaki sabit bağımlılıkların ContentDB'ye eklenmesi gerekir: %(deps)s"
 
 #: app/logic/package_validator.py:34
 #: app/templates/macros/package_approval.html:41
 msgid "You need to add at least one screenshot."
-msgstr ""
+msgstr "En az bir ekran görüntüsü eklemeniz gerekir."
 
 #: app/logic/package_validator.py:37
 #: app/templates/macros/package_approval.html:49
 msgid "Please wait for the license to be added to CDB."
-msgstr ""
+msgstr "Lütfen lisansın CDB'ye eklenmesini bekleyin."
 
 #: app/logic/packages.py:96
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr ""
+"Ad yalnızca küçük harfler (a-z), rakamlar (0-9) ve alt çizgiler (_) "
+"içerebilir"
 
 #: app/logic/packages.py:110
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "Bu paketi düzenlemek için izniniz yok"
 
 #: app/logic/packages.py:114
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "Paket adını değiştirme izniniz yok"
 
 #: app/logic/packages.py:171
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
-msgstr ""
+msgstr "%(title)s korumalı etiketi pakete eklenemiyor"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "Yayınlamak için izniniz yok"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Son 5 dakika içinde bu paket için çok fazla sürüm oluşturdunuz, lütfen "
+"tekrar denemeden önce bekleyin"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr ""
+msgstr "Geçersiz commit hash'i; 40 karakter uzunluğunda base16 dizesi olmalıdır"
 
 #: app/logic/screenshots.py:16
 msgid "Too many requests, please wait before trying again"
-msgstr ""
+msgstr "Çok sayıda istek, tekrar denemeden önce bekleyin"
 
 #: app/logic/screenshots.py:18
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "PNG veya JPG resim dosyası"
 
 #: app/logic/screenshots.py:35
 #, python-format
@@ -994,49 +1021,50 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
+"Ekran görüntüsü çok küçük, en az %(width)s x %(height)s piksel olmalıdır"
 
 #: app/logic/uploads.py:52
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Lütfen %(file_desc)s yükleyin"
 
 #: app/logic/uploads.py:55
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "Yüklenen resim aslında bir resim değil"
 
 #: app/models/packages.py:66
 msgid "Mod"
-msgstr ""
+msgstr "Modifikasyon"
 
 #: app/models/packages.py:68
 msgid "Game"
-msgstr ""
+msgstr "Oyun"
 
 #: app/models/packages.py:70
 msgid "Texture Pack"
-msgstr ""
+msgstr "Doku Paketi"
 
 #: app/models/packages.py:75 app/templates/base.html:34
 #: app/templates/modnames/view.html:14
 msgid "Mods"
-msgstr ""
+msgstr "Modlar"
 
 #: app/models/packages.py:77 app/templates/base.html:37
 #: app/templates/modnames/view.html:17
 msgid "Games"
-msgstr ""
+msgstr "Oyunlar"
 
 #: app/models/packages.py:79 app/templates/base.html:40
 msgid "Texture Packs"
-msgstr ""
+msgstr "Doku Paketleri"
 
 #: app/models/packages.py:168
 msgid "Submit for Approval"
-msgstr ""
+msgstr "Onay için Gönder"
 
 #: app/models/packages.py:170
 msgid "Approve"
-msgstr ""
+msgstr "Onayla"
 
 #: app/models/packages.py:172 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
@@ -1045,34 +1073,38 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:19
 #: app/templates/threads/view.html:42 app/templates/users/delete.html:34
 msgid "Delete"
-msgstr ""
+msgstr "Sil"
 
 #: app/tasks/emails.py:113
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
 msgstr ""
+"Bu e-postayı ContentDB'nin kayıtlı bir kullanıcısı olduğunuz için "
+"alıyorsunuz."
 
 #: app/tasks/emails.py:119 app/templates/emails/verify.html:30
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr ""
+"Bu e-postayı alıyorsunuz çünkü birisi (umarım siz) e-posta adresinizi bir "
+"kullanıcının e-postası olarak girdi."
 
 #: app/tasks/emails.py:153
 #, python-format
 msgid "%(num)d new notifications"
-msgstr ""
+msgstr "%(num)d yeni̇ bi̇ldi̇ri̇m"
 
 #: app/tasks/emails.py:155 app/templates/macros/forms.html:52
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
-msgstr ""
+msgstr "Görünüm"
 
 #: app/tasks/emails.py:158
 msgid "Manage email settings"
-msgstr ""
+msgstr "E-posta ayarlarını yönet"
 
 #: app/tasks/emails.py:160 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
@@ -1082,142 +1114,146 @@ msgstr ""
 #: app/templates/threads/view.html:33 app/templates/users/unsubscribe.html:4
 #: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
-msgstr ""
+msgstr "Abonelikten çık"
 
 #: app/templates/404.html:4
 msgid "Page not found"
-msgstr ""
+msgstr "Sayfa bulunamadı"
 
 #: app/templates/404.html:10
 msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
+"Bu sayfa bulunamadı. Bağlantı bozuk olabilir, sayfa silinmiş olabilir veya "
+"sayfaya erişiminiz olmayabilir."
 
 #: app/templates/base.html:43
 msgid "Random"
-msgstr ""
+msgstr "Rastgele"
 
 #: app/templates/base.html:46 app/templates/base.html:248
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
 msgid "Help"
-msgstr ""
+msgstr "Yardım"
 
 #: app/templates/base.html:53
 #, python-format
 msgid "Search %(type)s"
-msgstr ""
+msgstr "%(type)s Ara"
 
 #: app/templates/base.html:53 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
-msgstr ""
+msgstr "Tüm paketleri ara"
 
 #: app/templates/base.html:72
 msgid "Work Queue"
-msgstr ""
+msgstr "İş Kuyruğu"
 
 #: app/templates/base.html:85 app/templates/base.html:137
 msgid "To do list"
-msgstr ""
+msgstr "Yapılacaklar listesi"
 
 #: app/templates/base.html:94 app/templates/notifications/list.html:4
 msgid "Notifications"
-msgstr ""
+msgstr "Bildirimler"
 
 #: app/templates/base.html:115
 msgid "Add Package"
-msgstr ""
+msgstr "Paket Ekle"
 
 #: app/templates/base.html:132
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: app/templates/base.html:155
 msgid "Admin"
-msgstr ""
+msgstr "Yönetici"
 
 #: app/templates/base.html:158
 msgid "License Editor"
-msgstr ""
+msgstr "Lisans Düzenleyici"
 
 #: app/templates/base.html:163
 msgid "Restore Package"
-msgstr ""
+msgstr "Paketi Geri Yükle"
 
 #: app/templates/base.html:166
 msgid "Tag Editor"
-msgstr ""
+msgstr "Etiket Düzenleyici"
 
 #: app/templates/base.html:168
 msgid "Create Tag"
-msgstr ""
+msgstr "Etiket Oluştur"
 
 #: app/templates/base.html:173 app/templates/packages/release_new.html:12
 msgid "Settings"
-msgstr ""
+msgstr "Ayarlar"
 
 #: app/templates/base.html:176
 msgid "Sign out"
-msgstr ""
+msgstr "Oturumu kapat"
 
 #: app/templates/base.html:205
 msgid "Help translate ContentDB"
-msgstr ""
+msgstr "ContentDB'yi çevirmeye yardım edin"
 
 #: app/templates/base.html:249
 msgid "About"
-msgstr ""
+msgstr "Hakkında"
 
 #: app/templates/base.html:250
 msgid "Rules"
-msgstr ""
+msgstr "Kurallar"
 
 #: app/templates/base.html:251
 msgid "Policy and Guidance"
-msgstr ""
+msgstr "Politika ve Rehberlik"
 
 #: app/templates/base.html:252
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: app/templates/base.html:253 app/templates/users/register.html:37
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Gizlilik Politikası"
 
 #: app/templates/base.html:255
 msgid "Report / DMCA"
-msgstr ""
+msgstr "Rapor / DMCA"
 
 #: app/templates/base.html:257
 msgid "Stats / Monitoring"
-msgstr ""
+msgstr "İstatistikler / İzleme"
 
 #: app/templates/base.html:258
 msgid "User List"
-msgstr ""
+msgstr "Kullanıcı Listesi"
 
 #: app/templates/base.html:259 app/templates/packages/view.html:194
 #: app/templates/packages/view.html:565 app/templates/threads/list.html:4
 msgid "Threads"
-msgstr ""
+msgstr "Konular"
 
 #: app/templates/base.html:260
 msgid "Support Packages"
-msgstr ""
+msgstr "Destek Paketleri"
 
 #: app/templates/base.html:261
 msgid "Source Code"
-msgstr ""
+msgstr "Kaynak Kodu"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "Hoş geldiniz"
 
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
+"Minetest modlarını, oyunlarını ve doku paketlerini bulmak için en iyi yere "
+"hoş geldiniz"
 
 #: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
@@ -1225,30 +1261,30 @@ msgstr ""
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
-msgstr ""
+msgstr "%(author)s geliştiricisinden %(title)s"
 
 #: app/templates/index.html:47
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
-msgstr ""
+msgstr "%(author)s tarafından <strong>%(title)s</strong>"
 
 #: app/templates/index.html:73 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:198 app/templates/packages/view.html:299
 #: app/templates/users/profile.html:216
 msgid "Reviews"
-msgstr ""
+msgstr "Değerlendirmeler"
 
 #: app/templates/index.html:92
 msgid "Previous"
-msgstr ""
+msgstr "Önceki"
 
 #: app/templates/index.html:96 app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr ""
+msgstr "Sonraki"
 
 #: app/templates/index.html:102
 msgid "Featured"
-msgstr ""
+msgstr "Öne Çıkanlar"
 
 #: app/templates/index.html:107 app/templates/index.html:114
 #: app/templates/index.html:121 app/templates/index.html:128
@@ -1259,231 +1295,244 @@ msgstr ""
 #: app/templates/packages/game_hub.html:51
 #: app/templates/packages/game_hub.html:58
 msgid "See more"
-msgstr ""
+msgstr "Daha fazlasını görün"
 
 #: app/templates/index.html:109 app/templates/packages/game_hub.html:32
 msgid "Recently Added"
-msgstr ""
+msgstr "Son Eklenenler"
 
 #: app/templates/index.html:116 app/templates/packages/game_hub.html:39
 msgid "Recently Updated"
-msgstr ""
+msgstr "Son Güncelleme"
 
 #: app/templates/index.html:123
 msgid "Top Games"
-msgstr ""
+msgstr "En İyi Oyunlar"
 
 #: app/templates/index.html:130 app/templates/packages/game_hub.html:46
 msgid "Top Mods"
-msgstr ""
+msgstr "En İyi Modlar"
 
 #: app/templates/index.html:137 app/templates/packages/game_hub.html:53
 msgid "Top Texture Packs"
-msgstr ""
+msgstr "En İyi Doku Paketleri"
 
 #: app/templates/index.html:141
 msgid "Search by Tags"
-msgstr ""
+msgstr "Etiketlere Göre Ara"
 
 #: app/templates/index.html:159 app/templates/packages/game_hub.html:60
 msgid "Highest Reviewed"
-msgstr ""
+msgstr "En Yüksek Değerlendirme"
 
 #: app/templates/index.html:166
 msgid "Recent Positive Reviews"
-msgstr ""
+msgstr "Son Olumlu Eleştiriler"
 
 #: app/templates/index.html:173
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
 msgstr ""
+"CDB'de %(count)d paket var ve toplamda %(downloads)d içerik indirilmiştir."
 
 #: app/templates/admin/audit_view.html:16
 #, python-format
 msgid "Caused by %(author)s."
-msgstr ""
+msgstr "%(author)s tarafından oluşturuldu."
 
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
-msgstr ""
+msgstr "Silinen bir kullanıcı tarafından oluşturuldu."
 
 #: app/templates/admin/list.html:62
 msgid "Deletion is permanent."
-msgstr ""
+msgstr "Silme işlemi kalıcıdır."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
-msgstr ""
+msgstr "Toplu e-posta gönder"
 
 #: app/templates/admin/send_bulk_notification.html:4
 msgid "Send bulk notification"
-msgstr ""
+msgstr "Toplu bildirim gönder"
 
 #: app/templates/admin/send_email.html:4
 #, python-format
 msgid "Send email to %(username)s"
-msgstr ""
+msgstr "%(username)s kullanıcısına e-posta gönder"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
-msgstr ""
+msgstr "Yeni Lisans"
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr ""
+msgstr "Lisanslar"
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:44
 msgid "Description"
-msgstr ""
+msgstr "Açıklama"
 
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
-msgstr ""
+msgstr "Görünümler"
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Minetest Versions"
-msgstr ""
+msgstr "Minetest Sürümleri"
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
-msgstr ""
+msgstr "Yeni Sürüm"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
 msgid "Warnings"
-msgstr ""
+msgstr "Uyarılar"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
-msgstr ""
+msgstr "Yeni Uyarı"
 
 #: app/templates/api/create_edit_token.html:5
 #, python-format
 msgid "Edit - %(name)s"
-msgstr ""
+msgstr "Düzenle - %(name)s"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
-msgstr ""
+msgstr "API Jetonu Oluştur"
 
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
 msgstr ""
+"API Jetonları, komut dosyalarının sizin adınıza hareket etmesine izin verir."
 
 #: app/templates/api/create_edit_token.html:25
 msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
+"Hesabınızın eylemlerinden siz sorumlu olduğunuz için jetonları neyle/"
+"kimlerle paylaştığınıza dikkat edin."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "Access Token"
-msgstr ""
+msgstr "Erişim Jetonu"
 
 #: app/templates/api/create_edit_token.html:33
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
 msgstr ""
+"Güvenlik nedeniyle, erişim jetonları yalnızca bir kez gösterilecektir. "
+"Kaybolması halinde jetonu sıfırlayın."
 
 #: app/templates/api/create_edit_token.html:40
 msgid "Reset"
-msgstr ""
+msgstr "Sıfırla"
 
 #: app/templates/api/create_edit_token.html:49
 msgid "Human-readable name to tell tokens apart."
-msgstr ""
+msgstr "Jetonları ayrı söylemek için insan okunabilir isim."
 
 #: app/templates/api/create_edit_token.html:50
 msgid "Recommended: Only allows token to interact with a particular package."
 msgstr ""
+"Önerilen: Yalnızca jetonun belirli bir paketle etkileşim kurmasına izin "
+"verir."
 
 #: app/templates/api/list_tokens.html:4
 #, python-format
 msgid "API Tokens | %(username)s"
-msgstr ""
+msgstr "API Jetonları | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/macros/topics.html:29
 #: app/templates/macros/topics.html:65
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
-msgstr ""
+msgstr "Oluştur"
 
 #: app/templates/api/list_tokens.html:9
 msgid "API Documentation"
-msgstr ""
+msgstr "API Dokümantasyonu"
 
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
-msgstr ""
+msgstr "Oluşturulan jeton yok"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
-msgstr ""
+msgstr "Destek paketleri"
 
 #: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
-msgstr ""
+msgstr "Bazı içerik oluşturucular çalışmaları için bağış kabul etmektedir."
 
 #: app/templates/donate/index.html:9
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
+"Bağışlar, favori modcularınızı, sanatçılarınızı ve oyun geliştiricilerinizi "
+"desteklemenin harika bir yoludur."
 
 #: app/templates/donate/index.html:37
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "%(author)s tarafından"
 
 #: app/templates/donate/index.html:42
 msgid "View package"
-msgstr ""
+msgstr "Paketi görüntüle"
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:95
 msgid "Donate"
-msgstr ""
+msgstr "Bağış Yapın"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews"
-msgstr ""
+msgstr "İncelemelerinize göre"
 
 #: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Considering reviewing your "
 "favourite packages"
 msgstr ""
+"Bağış kabul eden incelenmiş paket yok. Favori paketlerinizi gözden geçirmeyi "
+"düşünün"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
 msgstr ""
+"İncelemeleri incelediğiniz paketlere göre önerileri görmek için oturum açın"
 
 #: app/templates/donate/index.html:78
 msgid "Top packages"
-msgstr ""
+msgstr "En iyi paketler"
 
 #: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d paket bağış bekliyor"
 
 #: app/templates/emails/notification.html:10
 #, python-format
 msgid "From %(username)s and on package %(package)s."
-msgstr ""
+msgstr "%(username)s kullanıcısından ve %(package)s paketinden."
 
 #: app/templates/emails/notification.html:13
 #, python-format
 msgid "From %(username)s."
-msgstr ""
+msgstr "%(username)s kullanıcısından."
 
 #: app/templates/emails/notification.html:19
 msgid "View Notification"
-msgstr ""
+msgstr "Bildirimi Görüntüle"
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:46
@@ -1491,291 +1540,308 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
 msgstr ""
+"ContentDB'nin kayıtlı bir kullanıcısı olduğunuz ve e-posta bildirimlerini "
+"etkinleştirdiğiniz için bu e-postayı alıyorsunuz."
 
 #: app/templates/emails/notification.html:30
 #: app/templates/emails/notification_digest.html:50
 msgid "Manage your preferences"
-msgstr ""
+msgstr "Tercihlerinizi yönetin"
 
 #: app/templates/emails/notification.html:37
 #, python-format
 msgid "This is a '%(type)s' notification."
-msgstr ""
+msgstr "Bu bir '%(type)s' bildirimidir."
 
 #: app/templates/emails/notification_digest.html:14
 #: app/templates/emails/notification_digest.html:31
 #, python-format
 msgid "from %(username)s."
-msgstr ""
+msgstr "%(username)s tarafından."
 
 #: app/templates/emails/notification_digest.html:24
 msgid "Other Notifications"
-msgstr ""
+msgstr "Diğer Bildirimler"
 
 #: app/templates/emails/notification_digest.html:39
 msgid "View Notifications"
-msgstr ""
+msgstr "Bildirimleri Görüntüle"
 
 #: app/templates/emails/unable_to_find_account.html:2
 msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
+"Bu e-posta ile ilişkili bir hesap bulamadığımız için şifre sıfırlama "
+"işlemini gerçekleştiremedik."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
+"Bunun nedeni hesabınızda başka bir e-posta kullanmanız veya e-postanızı hiç "
+"onaylamamış olmanız olabilir."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
-msgstr ""
+msgstr "Hesabınızla ilişkiliyse oturum açmak için GitHub'ı kullanabilirsiniz."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
 msgstr ""
+"Aksi takdirde, yardım için rubenwardy ile iletişime geçmeniz gerekebilir."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
-msgstr ""
+msgstr "Bu e-postayı almayı beklemiyorsanız, güvenle görmezden gelebilirsiniz."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
-msgstr ""
+msgstr "Merhaba!"
 
 #: app/templates/emails/verify.html:7
 msgid ""
 "This email has been sent to you because someone (hopefully you) has "
 "entered your email address as a user's email."
 msgstr ""
+"Bu e-posta size birisi (umarız siz) e-posta adresinizi kullanıcının e-"
+"postası olarak girdiği için gönderilmiştir."
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
-msgstr ""
+msgstr "Eğer siz değilseniz, o zaman bu e-postayı silin."
 
 #: app/templates/emails/verify.html:15
 msgid "If this was you, then please click this link to confirm the address:"
 msgstr ""
+"Bu kişi sizseniz, adresi teyit etmek için lütfen bu bağlantıya tıklayın:"
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
-msgstr ""
+msgstr "E-posta Adresini Onayla"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
 msgid "Or paste this into your browser:"
-msgstr ""
+msgstr "Ya da bunu tarayıcınıza yapıştırın:"
 
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
+"Gittiğiniz için üzgünüz. E-postanız kara listeye alınmadan önce bir şey daha "
+"yapmanız gerekiyor."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
 msgstr ""
+"Bu e-postayı alıyorsunuz çünkü birisi (umarım siz) e-posta adresinizi "
+"abonelikten çıkma formuna girdi."
 
 #: app/templates/macros/audit_log.html:13
 #, python-format
 msgid "Severity: %(sev)s."
-msgstr ""
+msgstr "Önem derecesi: %(sev)s."
 
 #: app/templates/macros/audit_log.html:32
 msgid "Deleted User"
-msgstr ""
+msgstr "Silinen Kullanıcı"
 
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
-msgstr ""
+msgstr "Denetim günlüğü girişi yok."
 
 #: app/templates/macros/forms.html:107
 msgid "Start typing to see suggestions"
-msgstr ""
+msgstr "Önerileri görmek için yazmaya başlayın"
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
 msgid "State"
-msgstr ""
+msgstr "Durum"
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
-msgstr ""
+msgstr "Sürümleri ayarla"
 
 #: app/templates/macros/package_approval.html:31
 msgid "You need to create a release before this package can be approved."
-msgstr ""
+msgstr "Bu paketin onaylanabilmesi için bir sürüm oluşturmanız gerekir."
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
-msgstr ""
+msgstr "Sürüm hala içe aktarılıyor veya bir hata içeriyor."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr ""
+msgstr "En az bir ekran görüntüsü eklemelisiniz."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
-msgstr ""
+msgstr "Lütfen sürümün onaylanmasını bekleyin."
 
 #: app/templates/macros/package_approval.html:64
 msgid "You can now approve this package if you're ready."
-msgstr ""
+msgstr "Hazırsanız bu paketi onaylayabilirsiniz."
 
 #: app/templates/macros/package_approval.html:66
 msgid "Please wait for the package to be approved."
-msgstr ""
+msgstr "Lütfen paketin onaylanmasını bekleyiniz."
 
 #: app/templates/macros/package_approval.html:70
 msgid "You can now submit this package for approval if you're ready."
-msgstr ""
+msgstr "Hazırsanız artık bu paketi onay için gönderebilirsiniz."
 
 #: app/templates/macros/package_approval.html:72
 msgid "This package can be submitted for approval when ready."
-msgstr ""
+msgstr "Bu paket hazır olduğunda onay için sunulabilir."
 
 #: app/templates/macros/package_approval.html:102
 msgid "Please make sure that this package has the right to the names it uses."
 msgstr ""
+"Lütfen bu paketin kullandığı isimler üzerinde hak sahibi olduğundan emin "
+"olun."
 
 #: app/templates/macros/package_approval.html:104
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
-msgstr ""
+msgstr "Lütfen bu paketin %(names)s isim hakkına sahip olduğundan emin olun"
 
 #: app/templates/macros/package_approval.html:115
 msgid "Package approval thread"
-msgstr ""
+msgstr "Paket onay konusu"
 
 #: app/templates/macros/package_approval.html:116
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
+"Onaylayıcıya veya paket sahibine bir sorunuz varsa bir konu açabilirsiniz."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
-msgstr ""
+msgstr "<b>uyarı:</b> Özgür olmayan kod ve medya."
 
 #: app/templates/macros/packagegridtile.html:29
 msgid "<b>Warning:</b> Non-free code."
-msgstr ""
+msgstr "<b>uyarı:</b> Özgür olmayan kod."
 
 #: app/templates/macros/packagegridtile.html:33
 msgid "<b>Warning:</b> Non-free media."
-msgstr ""
+msgstr "<b>uyarı:</b> Özgür olmayan medya."
 
 #: app/templates/macros/packagegridtile.html:45
 msgid "No packages available"
-msgstr ""
+msgstr "Hiçbiri paket yok"
 
 #: app/templates/macros/releases.html:20 app/templates/macros/releases.html:47
 #: app/templates/macros/releases.html:89
 #, python-format
 msgid "created %(date)s"
-msgstr ""
+msgstr "%(date)s tarihinde oluşturuldu"
 
 #: app/templates/macros/releases.html:60
 msgid "Edit / Approve"
-msgstr ""
+msgstr "Düzenle / Onayla"
 
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:119
 #: app/templates/packages/view.html:253
 msgid "Edit"
-msgstr ""
+msgstr "Düzenle"
 
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
-msgstr ""
+msgstr "İçe aktarılıyor..."
 
 #: app/templates/macros/releases.html:96
 msgid "Waiting for approval."
-msgstr ""
+msgstr "Onay bekleniyor."
 
 #: app/templates/macros/releases.html:103
 msgid "No releases available."
-msgstr ""
+msgstr "Kullanılabilir sürüm yok."
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
-msgstr ""
+msgstr "Yararlı"
 
 #: app/templates/macros/reviews.html:13
 msgid "Unhelpful"
-msgstr ""
+msgstr "Yararsız"
 
 #: app/templates/macros/reviews.html:84
 #, python-format
 msgid "%(num)d comments"
-msgstr ""
+msgstr "%(num)d yorum"
 
 #: app/templates/macros/reviews.html:96
 msgid "No reviews, yet."
-msgstr ""
+msgstr "Henüz inceleme yok."
 
 #: app/templates/macros/reviews.html:106 app/templates/macros/reviews.html:149
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
-msgstr ""
+msgstr "İnceleme"
 
 #: app/templates/macros/reviews.html:111 app/templates/macros/reviews.html:154
 #: app/templates/packages/review_create_edit.html:35
 #, python-format
 msgid "Do you recommend this %(type)s?"
-msgstr ""
+msgstr "%(type)s tavsiye eder misiniz?"
 
 #: app/templates/macros/reviews.html:130
 #: app/templates/packages/review_create_edit.html:40
 msgid "Why or why not? Try to be constructive"
-msgstr ""
+msgstr "Neden öyle ya da değil? Yapıcı olmaya çalışın"
 
 #: app/templates/macros/reviews.html:139
 msgid "Post Review"
-msgstr ""
+msgstr "İncelemeyi gönder"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "%(display_name)s'in paketleri"
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "Grafik ve istatistikleri görüntülemek için JavaScript gereklidir"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
-msgstr ""
+msgstr "Ömür boyu benzersiz indirmeler"
 
 #: app/templates/macros/stats.html:59
 msgid "Downloads, past 7 days"
-msgstr ""
+msgstr "İndirmeler, son 7 gün"
 
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "Günlük %(downloads)s"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "İndirmeler, son 30 gün"
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "Yükleniyor..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
-msgstr ""
+msgstr "Veri yok"
 
 #: app/templates/macros/stats.html:97
 msgid "Downloads by Package"
-msgstr ""
+msgstr "Pakete Göre İndirmeler"
 
 #: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
 #: app/templates/macros/stats.html:118
@@ -1783,159 +1849,164 @@ msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
 msgstr ""
+"Bu yığılmış bir alan grafiğidir. Toplam indirme sayısı için birleşik "
+"yüksekliğe bakın."
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Client"
-msgstr ""
+msgstr "İstemci Tarafından İndirilenler"
 
 #: app/templates/macros/stats.html:110
 msgid "Downloads by Reason"
-msgstr ""
+msgstr "Sebebe Göre İndirmeler"
 
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
-msgstr ""
+msgstr "<b>Yeni Yükleme</b>: kullanıcı Minetest'in içinde [Yükle]'ye tıkladı."
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
+"<b>Bağımlılık</b>: Bir bağımlılığı karşılamak için otomatik olarak yüklendi."
 
 #: app/templates/macros/stats.html:114
 msgid "<b>Update</b>: download was to update the package."
-msgstr ""
+msgstr "<b>Güncelleme</b>: İndirme paketi güncellemek içindi."
 
 #: app/templates/macros/stats.html:115
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
 msgstr ""
+"<b>Diğer / Bilinmiyor</b>: bir web tarayıcısı veya eski bir Minetest sürümü ("
+"5.5'ten önce) tarafından indirildi."
 
 #: app/templates/macros/stats.html:127
 msgid "Need more stats?"
-msgstr ""
+msgstr "Daha fazla istatistiğe mi ihtiyacınız var?"
 
 #: app/templates/macros/stats.html:129
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
-msgstr ""
+msgstr "CDB genelindeki istatistikler için ContentDB Grafana panosuna göz atın"
 
 #: app/templates/macros/stats.html:133
 msgid "ContentDB Grafana"
-msgstr ""
+msgstr "İçerikDB Grafana"
 
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
-msgstr ""
+msgstr "Geliştirici"
 
 #: app/templates/macros/threads.html:120
 msgid "This thread has been locked by a moderator."
-msgstr ""
+msgstr "Bu başlık bir moderatör tarafından kilitlenmiştir."
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "Yanıt"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
-msgstr ""
+msgstr "Lütfen tekrar yorum yapmadan önce bekleyiniz."
 
 #: app/templates/macros/threads.html:157
 msgid "This thread has been locked."
-msgstr ""
+msgstr "Bu konu kilitlenmiştir."
 
 #: app/templates/macros/threads.html:159
 msgid "You don't have permission to post."
-msgstr ""
+msgstr "Paylaşım izniniz yok."
 
 #: app/templates/macros/threads.html:179
 msgid "You can add someone to a private thread by writing @username."
-msgstr ""
+msgstr "@username yazarak birini özel bir ileti dizisine ekleyebilirsiniz."
 
 #: app/templates/macros/threads.html:197 app/templates/macros/threads.html:279
 msgid "No threads found"
-msgstr ""
+msgstr "Konu bulunamadı"
 
 #: app/templates/macros/threads.html:205
 msgid "Thread"
-msgstr ""
+msgstr "Konu"
 
 #: app/templates/macros/threads.html:209
 msgid "Last Reply"
-msgstr ""
+msgstr "Son Yanıt"
 
 #: app/templates/macros/todo.html:21
 #, python-format
 msgid "On %(trigger)s, do %(action)s"
-msgstr ""
+msgstr "%(trigger)s gerçekleşince %(action)s yap"
 
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:125
 #: app/templates/packages/view.html:367
 msgid "Release"
-msgstr ""
+msgstr "Sürüm"
 
 #: app/templates/macros/todo.html:42
 msgid "Repo"
-msgstr ""
+msgstr "Depo"
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
 #: app/templates/packages/view.html:371
 msgid "Update settings"
-msgstr ""
+msgstr "Ayarları güncelle"
 
 #: app/templates/macros/todo.html:55 app/templates/macros/todo.html:85
 msgid "No outdated packages."
-msgstr ""
+msgstr "Eski paket yok."
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:181
 msgid "Author"
-msgstr ""
+msgstr "Yaratıcı"
 
 #: app/templates/macros/topics.html:8
 msgid "Date"
-msgstr ""
+msgstr "Tarih"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
-msgstr ""
+msgstr "Eylemler"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
 #: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
 #: app/templates/todo/editor.html:160 app/templates/todo/editor.html:175
 msgid "WIP"
-msgstr ""
+msgstr "WIP"
 
 #: app/templates/macros/topics.html:35
 msgid "Show"
-msgstr ""
+msgstr "Göster"
 
 #: app/templates/macros/topics.html:37
 msgid "Discard"
-msgstr ""
+msgstr "Yok Say"
 
 #: app/templates/macros/topics.html:57
 msgid "Old"
-msgstr ""
+msgstr "Eski"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Mod İsimleri"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "Mod adı bulunamadı."
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Mod Adı \"%(name)s\""
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
-msgstr ""
+msgstr "Sağlayan"
 
 #: app/templates/modnames/view.html:21 app/templates/todo/todo_base.html:41
 msgid "Forum Topics"
-msgstr ""
+msgstr "Forum Konuları"
 
 #: app/templates/modnames/view.html:27
 #: app/templates/packages/game_support.html:37
@@ -1944,103 +2015,106 @@ msgstr ""
 #: app/templates/todo/editor.html:85
 #, python-format
 msgid "%(title)s by %(display_name)s"
-msgstr ""
+msgstr "%(display_name)s tarafından %(title)s"
 
 #: app/templates/modnames/view.html:35
 msgid "Required By"
-msgstr ""
+msgstr "Gereklilik duyan"
 
 #: app/templates/modnames/view.html:38
 msgid "Optionally Used By"
-msgstr ""
+msgstr "İsteğe bağlı olarak kullanan"
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
-msgstr ""
+msgstr "E-posta bildirim ayarlarını düzenleme"
 
 #: app/templates/notifications/list.html:22
 msgid "Newest first."
-msgstr ""
+msgstr "Önce en yenisi."
 
 #: app/templates/notifications/list.html:27
 msgid "Your Notifications"
-msgstr ""
+msgstr "Bildirimleriniz"
 
 #: app/templates/notifications/list.html:61
 #: app/templates/notifications/list.html:99
 msgid "No notifications"
-msgstr ""
+msgstr "Bildirim yok"
 
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
-msgstr ""
+msgstr "Düzenleyici/Onaylayan Bildirimleri"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
-msgstr ""
+msgstr "Takma ad"
 
 #: app/templates/packages/alias_create_edit.html:13
 msgid "Back to Aliases"
-msgstr ""
+msgstr "Takma Adlara Geri Dön"
 
 #: app/templates/packages/alias_list.html:4
 msgid "Aliases"
-msgstr ""
+msgstr "Takma Adlar"
 
 #: app/templates/packages/alias_list.html:15
 #, python-format
 msgid "Aliases for %(title)s by %(author)s"
-msgstr ""
+msgstr "%(title)s için %(author)s tarafından takma adlar"
 
 #: app/templates/packages/alias_list.html:24
 msgid "No aliases"
-msgstr ""
+msgstr "Takma ad yok"
 
 #: app/templates/packages/bulk_update_conf.html:4
 #, python-format
 msgid "Git Update Detection for %(username)s"
-msgstr ""
+msgstr "%(username)s için Git Güncelleme Algılaması"
 
 #: app/templates/packages/bulk_update_conf.html:10
 msgid "Packages with Update Settings"
-msgstr ""
+msgstr "Güncelleme Ayarları içeren paketler"
 
 #: app/templates/packages/bulk_update_conf.html:16
 msgid "Bulk Set Update Settings"
-msgstr ""
+msgstr "Güncelleme Ayarlarını Toplu Ayarlama"
 
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
 msgstr ""
+"Bu, Git deposu olan tüm paketler için güncelleme ayarlarını belirleyecektir."
 
 #: app/templates/packages/bulk_update_conf.html:27
 #: app/templates/packages/release_new.html:50
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
-msgstr ""
+msgstr "Varsayılan branch'ı kullanmak için boş bırakın"
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
 msgid "Currently, the branch name field is only used by the New Commit trigger."
 msgstr ""
+"Şu anda, branch adı alanı yalnızca Yeni commit tetikleyicisi tarafından "
+"kullanılmaktadır."
 
 #: app/templates/packages/create_edit.html:5
 #, python-format
 msgid "Edit - %(title)s"
-msgstr ""
+msgstr "Düzenle - %(title)s"
 
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
 msgid "Create Package"
-msgstr ""
+msgstr "Paket Oluştur"
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
-msgstr ""
+msgstr "Paket Dahil Etme Politikası ve Kılavuzu'nu henüz okudunuz mu?"
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
-msgstr ""
+msgstr "Devamını oku"
 
 #: app/templates/packages/create_edit.html:49
 #, python-format
@@ -2048,6 +2122,8 @@ msgid ""
 "You can include a .cdb.json file in your %(type)s to update these details"
 " automatically."
 msgstr ""
+"Bu ayrıntıları otomatik olarak güncellemek için %(type)s adresinize bir ."
+"cdb.json dosyası ekleyebilirsiniz."
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -2055,30 +2131,35 @@ msgid ""
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
+"JavaScript, kullanıcı arayüzünü geliştirmek için gereklidir ve özellikler "
+"için gereklidir\n"
+"\t\t\tgit'ten meta veri bulma ve otomatik tamamlama gibi."
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/packages/game_support.html:21
 #: app/templates/threads/view.html:88 app/templates/todo/tags.html:38
 msgid "Package"
-msgstr ""
+msgstr "Paket"
 
 #: app/templates/packages/create_edit.html:73
 msgid "Please open a thread to request a name change"
-msgstr ""
+msgstr "Lütfen ad değişikliği istemek için bir konu açın"
 
 #: app/templates/packages/create_edit.html:79
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
+"Paketiniz kararsızsa ve tüm oyunculara tavsiye edilmemesi gerekiyorsa, "
+"lütfen 'Çalışma Devam Ediyor' seçeneğini seçin"
 
 #: app/templates/packages/create_edit.html:88
 msgid "If there is no media, set the Media License to the same as the License."
-msgstr ""
+msgstr "Medya yoksa, Medya Lisansını Lisans ile aynı şekilde ayarlayın."
 
 #: app/templates/packages/create_edit.html:94
 msgid "Repository and Links"
-msgstr ""
+msgstr "Depo ve Bağlantılar"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
@@ -2086,220 +2167,239 @@ msgid ""
 "\t\t\t\tIf the repo uses git then the metadata will be automatically "
 "imported."
 msgstr ""
+"Paket için depo URL'sini girin.\n"
+"\t\t\t\tDepo git kullanıyorsa meta veriler otomatik olarak içe "
+"aktarılacaktır."
 
 #: app/templates/packages/create_edit.html:100
 msgid "Leave blank if you don't have a repo. Click skip if the import fails."
 msgstr ""
+"Eğer bir deponuz yoksa boş bırakın. İçe aktarma başarısız olursa atla'ya "
+"tıklayın."
 
 #: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
-msgstr ""
+msgstr "Sonraki (Otomatik İçe Aktarma)"
 
 #: app/templates/packages/create_edit.html:107
 msgid "Skip Autoimport"
-msgstr ""
+msgstr "Otomatik İçe Aktarmayı Atla"
 
 #: app/templates/packages/create_edit.html:111
 msgid "Importing... (This may take a while)"
-msgstr ""
+msgstr "İçe aktarılıyor... (Bu biraz zaman alabilir)"
 
 #: app/templates/packages/create_edit.html:119
 msgid "Tip: paste in a forum topic URL"
-msgstr ""
+msgstr "İpucu: bir forum konusunun URL'sini yapıştırın"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
-msgstr ""
+msgstr "YouTube videoları bir gömme içinde gösterilecektir."
 
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
-msgstr ""
+msgstr "Boş bırakılırsa, bunun yerine yayıncının bağış URL'si kullanılır."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
-msgstr ""
+msgstr "Geliştiricileri Düzenle"
 
 #: app/templates/packages/edit_maintainers.html:11
 msgid "Maintainers are given write access to the package."
-msgstr ""
+msgstr "Geliştiricilere pakete yazma erişimi verilir."
 
 #: app/templates/packages/edit_maintainers.html:12
 msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
 msgstr ""
+"Rütbelerine bağlı olarak paketi düzenleyebilecek, sürümler ve ekran "
+"görüntüleri oluşturabilecek ve özel konuları okuyabilecekler."
 
 #: app/templates/packages/edit_maintainers.html:13
 msgid ""
 "Maintainers cannot add or remove other maintainers, but can remove "
 "themselves."
 msgstr ""
+"Bakımcılar diğer bakımcıları ekleyemez veya çıkaramaz, ancak kendilerini "
+"çıkarabilirler."
 
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:23
 msgid "Community Hub"
-msgstr ""
+msgstr "Topluluk Merkezi"
 
 #: app/templates/packages/game_hub.html:9
 #, python-format
 msgid "Mods and texture packs for %(title)s"
-msgstr ""
+msgstr "%(title)s için modlar ve doku paketleri"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr ""
+msgstr "Dokümantasyon"
 
 #: app/templates/packages/game_support.html:24
 #: app/templates/packages/view.html:217
 msgid "Source"
-msgstr ""
+msgstr "Kaynak"
 
 #: app/templates/packages/game_support.html:27
 msgid "Supported?"
-msgstr ""
+msgstr "Destekleniyor mu?"
 
 #: app/templates/packages/game_support.html:42
 msgid "Detected from dependencies"
-msgstr ""
+msgstr "Bağımlılıklardan tespit edildi"
 
 #: app/templates/packages/game_support.html:44
 msgid "Added by Editor"
-msgstr ""
+msgstr "Editör tarafından eklendi"
 
 #: app/templates/packages/game_support.html:46
 msgid "mod.conf"
-msgstr ""
+msgstr "mod.conf"
 
 #: app/templates/packages/game_support.html:62
 #: app/templates/packages/view.html:466
 msgid "No specific game is required"
-msgstr ""
+msgstr "Belirli bir oyun gerekmez"
 
 #: app/templates/packages/game_support.html:68
 msgid "Generated mod.conf lines"
-msgstr ""
+msgstr "Oluşturulan mod.conf satırları"
 
 #: app/templates/packages/game_support.html:82
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
 msgstr ""
+"Bunu kapatabilmeniz için en az bir desteklenen oyunu manuel olarak "
+"tanımlamanız gerekir."
 
 #: app/templates/packages/game_support.html:88
 msgid "Editor Overrides"
-msgstr ""
+msgstr "Düzenleyici Geçersiz Kılmaları"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr ""
+msgstr "Paket Kaldırıldı"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
-msgstr ""
+msgstr "Bu paket yayından kaldırıldı."
 
 #: app/templates/packages/gone.html:22
 msgid ""
 "It may have been removed by choice of the author, or by ContentDB staff "
 "due to a problem."
 msgstr ""
+"Yazarın tercihi ile veya bir sorun nedeniyle ContentDB personeli tarafından "
+"kaldırılmış olabilir."
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
-msgstr ""
+msgstr "Paket İncelemeden Geçiyor"
 
 #: app/templates/packages/gone.html:27
 msgid "This package is currently undergoing review"
-msgstr ""
+msgstr "Bu paket şu anda inceleme aşamasındadır"
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr ""
+msgstr "Paket Henüz Gönderilmedi"
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
-msgstr ""
+msgstr "Bu paket oluşturuldu ancak henüz onay için gönderilmedi."
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
 msgstr ""
+"Bu paket şu anda inceleme aşamasındadır ve eklenebilmesi için değişikliklere "
+"ihtiyaç vardır."
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr ""
+msgstr "Lütfen daha sonra tekrar kontrol edin."
 
 #: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
-msgstr ""
+msgstr "Veya yayıncı sizseniz, daha fazla bilgi görmek için oturum açın."
 
 #: app/templates/packages/gone.html:48
 msgid "Login"
-msgstr ""
+msgstr "Giriş"
 
 #: app/templates/packages/list.html:21
 #, python-format
 msgid "Did you mean to search for packages by %(authors)s?"
-msgstr ""
+msgstr "Paketleri %(authors)s ile mi aramak istediniz?"
 
 #: app/templates/packages/list.html:26
 msgid "Filter by tags"
-msgstr ""
+msgstr "Etiketlere göre filtrele"
 
 #: app/templates/packages/list.html:59
 msgid "More content from the forums"
-msgstr ""
+msgstr "Forumlardan daha fazla içerik"
 
 #: app/templates/packages/package_base.html:13
 msgid "Thumbnail"
-msgstr ""
+msgstr "Küçük Resim"
 
 #: app/templates/packages/release_bulk_change.html:4
 msgid "Bulk Change Releases"
-msgstr ""
+msgstr "Toplu Değişiklik Sürümleri"
 
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
+"Paketiniz için tüm sürümlerin minimum ve maksimum değerlerini ayarlamak için "
+"bu sayfayı kullanın."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
 #: app/templates/packages/release_new.html:70
 msgid "Maximum must be greater than or equal to the minimum!"
-msgstr ""
+msgstr "Maksimum değer minimum değerden büyük veya eşit olmalıdır!"
 
 #: app/templates/packages/release_bulk_change.html:33
 msgid ""
 "Note: Min and max versions will be used to hide the package on\n"
 "\t\t\tplatforms not within the range."
 msgstr ""
+"Not: Min ve maks sürümler, paketi gizlemek için kullanılacaktır.\n"
+"\t\t\taralık içinde olmayan platformlar."
 
 #: app/templates/packages/release_bulk_change.html:36
 #: app/templates/packages/release_edit.html:61
 #: app/templates/packages/release_new.html:83
 msgid "Leave both as None if in doubt."
-msgstr ""
+msgstr "Şüpheniz varsa ikisini de Yok olarak bırakın."
 
 #: app/templates/packages/release_edit.html:4
 msgid "Edit release"
-msgstr ""
+msgstr "Sürümü düzenle"
 
 #: app/templates/packages/release_edit.html:27
 msgid "Commit Hash"
-msgstr ""
+msgstr "Commit Hash"
 
 #: app/templates/packages/release_edit.html:32
 msgid "view task"
-msgstr ""
+msgstr "görevi görüntüle"
 
 #: app/templates/packages/release_edit.html:42
 #: app/templates/packages/screenshot_edit.html:20
 msgid "Approved"
-msgstr ""
+msgstr "Onaylandı"
 
 #: app/templates/packages/release_edit.html:46
 msgid "Supported Minetest versions"
-msgstr ""
+msgstr "Desteklenen Minetest sürümleri"
 
 #: app/templates/packages/release_edit.html:58
 #: app/templates/packages/release_new.html:80
@@ -2307,62 +2407,69 @@ msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
+"Desteklenen minimum ve maksimum Minetest sürümlerini ayarlayın.\n"
+"\t\t\tBu sürüm, bu aralığın dışındaki istemcilere gizlenecektir. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
+"Paketinizin .conf dosyasında <a href=\"/help/package_config/\">bunu otomatik "
+"olarak ayarlayabilirsiniz</a>."
 
 #: app/templates/packages/release_edit.html:70
 msgid "Delete Release"
-msgstr ""
+msgstr "Sürümü Sil"
 
 #: app/templates/packages/release_edit.html:76
 msgid "This is permanent."
-msgstr ""
+msgstr "Bu kalıcıdır."
 
 #: app/templates/packages/release_edit.html:77
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
 msgstr ""
+"İlgili yüklemeler hemen silinmeyecek, ancak sürüm artık listelenmeyecektir."
 
 #: app/templates/packages/release_edit.html:82
 msgid "You cannot delete the latest release; please create a newer one first."
-msgstr ""
+msgstr "En son sürümü silemezsiniz; lütfen öncesinde yeni bir tane oluşturun."
 
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
 msgid "Create a release"
-msgstr ""
+msgstr "Bir sürüm oluşturun"
 
 #: app/templates/packages/release_new.html:14
 msgid "You have automatic releases enabled."
-msgstr ""
+msgstr "Otomatik sürümleri etkinleştirdiniz."
 
 #: app/templates/packages/release_new.html:16
 msgid "You have Git update notifications enabled."
-msgstr ""
+msgstr "Git güncelleme bildirimlerini etkinleştirdiniz."
 
 #: app/templates/packages/release_new.html:17
 msgid "You can enable automatic updates in the update settings."
-msgstr ""
+msgstr "Güncelleme ayarlarından otomatik güncellemeleri etkinleştirebilirsiniz."
 
 #: app/templates/packages/release_new.html:23
 msgid "Set up"
-msgstr ""
+msgstr "Kurulum"
 
 #: app/templates/packages/release_new.html:26
 msgid ""
 "You can create releases automatically when you push commits or tags to "
 "your repository."
 msgstr ""
+"Deponuza commit veya etiketler gönderdiğinizde otomatik olarak sürümler "
+"oluşturabilirsiniz."
 
 #: app/templates/packages/release_new.html:28
 #: app/templates/packages/release_wizard.html:69
 msgid "Add Git repo"
-msgstr ""
+msgstr "Git deposu ekle"
 
 #: app/templates/packages/release_new.html:31
 #: app/templates/packages/release_wizard.html:59
@@ -2370,18 +2477,20 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
+"Git'i kullanmak, kod veya etiket gönderdiğinizde otomatik olarak sürümler "
+"oluşturmanıza olanak tanır."
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
-msgstr ""
+msgstr "1. İsim Sürümü"
 
 #: app/templates/packages/release_new.html:42
 msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
-msgstr ""
+msgstr "İnsan tarafından okunabilir. Örn: 1.0.0 veya 2018-05-28"
 
 #: app/templates/packages/release_new.html:44
 msgid "2. Set the content"
-msgstr ""
+msgstr "2. İçeriği ayarlayın"
 
 #: app/templates/packages/release_new.html:57
 msgid ""
@@ -2389,10 +2498,13 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
+"<a href=\"/help/package_config/\">Package Configuration and Releases Guide ("
+"Paket Yapılandırma ve Sürümler Kılavuzu) sayfasına göz atın</a>.\n"
+"\t\t\tSürümleri özelleştirmeyle ilgili ipuçları."
 
 #: app/templates/packages/release_new.html:61
 msgid "3. Supported Minetest versions"
-msgstr ""
+msgstr "3. Desteklenen Minetest sürümleri"
 
 #: app/templates/packages/release_new.html:75
 msgid ""
@@ -2400,26 +2512,32 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
+"Paketinizin .conf dosyası <a href=\"/help/package_config/\">bunu otomatik "
+"olarak ayarlayabilir</a>,\n"
+"\t\t\tseçiminizi geçersiz kılacaktır."
 
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
-msgstr ""
+msgstr "Sürümleri nasıl oluşturmak istiyorsunuz?"
 
 #: app/templates/packages/release_wizard.html:9
 #: app/templates/packages/release_wizard.html:75
 msgid "Later"
-msgstr ""
+msgstr "Daha sonra"
 
 #: app/templates/packages/release_wizard.html:14
 #, python-format
 msgid "A release is a single downloadable version of your %(title)s."
-msgstr ""
+msgstr "Bir sürüm %(title)s için tek bir indirilebilir versiyondur."
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
 "You need to create releases even if you use a rolling release development"
 " cycle, as Minetest needs them to check for updates."
 msgstr ""
+"Minetest'in güncellemeleri kontrol etmek için bunlara ihtiyacı olduğundan, "
+"yuvarlanan sürüm geliştirme döngüsü kullansanız bile sürümler oluşturmanız "
+"gerekir."
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
@@ -2427,67 +2545,71 @@ msgid ""
 "When you push a change to your Git repository, ContentDB can create a new"
 " release automatically or send you a reminder."
 msgstr ""
+"Git deponuza bir değişiklik gönderdiğinizde, ContentDB otomatik olarak yeni "
+"bir sürüm oluşturabilir veya size bir hatırlatma gönderebilir."
 
 #: app/templates/packages/release_wizard.html:21
 msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
+"ContentDB Git deponuzu her gün kontrol edecektir, ancak daha hızlı "
+"güncellemeler için web kancalarını veya API'yi kullanabilirsiniz."
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
 msgid "This can be changed later."
-msgstr ""
+msgstr "Bu daha sonra değiştirilebilir."
 
 #: app/templates/packages/release_wizard.html:31
 msgid "Automatically (Recommended)"
-msgstr ""
+msgstr "Otomatik (Önerilen)"
 
 #: app/templates/packages/release_wizard.html:34
 msgid "Rolling Release"
-msgstr ""
+msgstr "Yuvarlanan Yayın"
 
 #: app/templates/packages/release_wizard.html:37
 msgid "On Git Tag"
-msgstr ""
+msgstr "Git Etiketinde"
 
 #: app/templates/packages/release_wizard.html:46
 msgid "Manually"
-msgstr ""
+msgstr "Elle"
 
 #: app/templates/packages/release_wizard.html:49
 msgid "With reminders"
-msgstr ""
+msgstr "Hatırlatmalarla"
 
 #: app/templates/packages/release_wizard.html:52
 msgid "No reminders"
-msgstr ""
+msgstr "Hatırlatma yok"
 
 #: app/templates/packages/release_wizard.html:60
 msgid "Unfortunately, you will otherwise need to create a release manually."
-msgstr ""
+msgstr "Ne yazık ki, aksi takdirde elle bir sürüm oluşturmanız gerekecektir."
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
-msgstr ""
+msgstr "Sürümleri elle oluşturun"
 
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
-msgstr ""
+msgstr "Sürümler - %(title)s"
 
 #: app/templates/packages/releases_list.html:18
 msgid "Set up automatic releases"
-msgstr ""
+msgstr "Otomatik sürümleri ayarla"
 
 #: app/templates/packages/releases_list.html:24
 msgid "Bulk update"
-msgstr ""
+msgstr "Toplu güncelleme"
 
 #: app/templates/packages/remove.html:9
 #, python-format
 msgid "Remove %(title)s"
-msgstr ""
+msgstr "%(title)s öğesini kaldır"
 
 #: app/templates/packages/remove.html:11
 msgid ""
@@ -2498,72 +2620,83 @@ msgid ""
 "future.\n"
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
+"Veri kaybını önlemek için paketleri kalıcı olarak silemezsiniz.\n"
+"\t\t\tOnları ContentDB'den kaldırabilirsiniz, bu da onların\n"
+"\t\t\therhangi bir kullanıcı tarafından görülebilir ve gelecekte kalıcı "
+"olarak silinebilir olmalarına neden olur.\n"
+"\t\t\tYönetici, gerekirse kaldırılan paketleri geri yükleyebilir."
 
 #: app/templates/packages/remove.html:19
 msgid ""
 "Unapproving a package will put it back into Draft, where\n"
 "\t\t\t\tit can be submitted for approval again."
 msgstr ""
+"Bir paketin onayının kaldırılması, paketi Taslak haline geri koyacaktır.\n"
+"\t\t\t\ttekrar onay için sunulabilir."
 
 #: app/templates/packages/remove.html:27
 msgid "Reason"
-msgstr ""
+msgstr "Sebep"
 
 #: app/templates/packages/remove.html:30
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
-msgstr ""
+msgstr "Onaylanmama / silinme nedeni, bu denetim günlüğünde gösterilir"
 
 #: app/templates/packages/remove.html:34
 #: app/templates/threads/delete_reply.html:18
 #: app/templates/threads/delete_thread.html:18
 #: app/templates/users/delete.html:30
 msgid "Cancel"
-msgstr ""
+msgstr "İptal"
 
 #: app/templates/packages/remove.html:39
 msgid "Unapprove"
-msgstr ""
+msgstr "Onaylamayın"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
-msgstr ""
+msgstr "%(author)s tarafından %(title)s için bir inceleme gönderin"
 
 #: app/templates/packages/review_create_edit.html:16
 #: app/templates/threads/new.html:11
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr ""
+"Bir hata mı buldunuz? Bunun yerine <a href=\"%(url)s\">sorun izleyiciye</a> "
+"gönderin."
 
 #: app/templates/packages/review_create_edit.html:56
 msgid "Delete review."
-msgstr ""
+msgstr "İncelemeyi sil."
 
 #: app/templates/packages/review_create_edit.html:57
 msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
 msgstr ""
+"Bu, incelemeyi bir konuya dönüştürecek, yorumları koruyacak ancak paketin "
+"derecelendirmesi üzerindeki etkisini ortadan kaldıracaktır."
 
 #: app/templates/packages/review_votes.html:4
 #: app/templates/packages/view.html:327
 msgid "Review Votes"
-msgstr ""
+msgstr "İnceleme Oyları"
 
 #: app/templates/packages/review_votes.html:13
 #, python-format
 msgid "Review votes on %(title)s by %(author)s"
-msgstr ""
+msgstr "%(author)s tarafından %(title)s için verilen oyları gözden geçirin"
 
 #: app/templates/packages/screenshot_edit.html:4
 #: app/templates/packages/screenshot_edit.html:11
 msgid "Edit screenshot"
-msgstr ""
+msgstr "Ekran görüntüsünü düzenle"
 
 #: app/templates/packages/screenshot_new.html:4
 #: app/templates/packages/screenshot_new.html:8
 msgid "Add a screenshot"
-msgstr ""
+msgstr "Ekran görüntüsü ekleyin"
 
 #: app/templates/packages/screenshot_new.html:10
 #: app/templates/todo/user.html:93
@@ -2572,598 +2705,621 @@ msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
 msgstr ""
+"Önerilen çözünürlük 1920x1080'dir ve ekran görüntüleri en az "
+"%(width)dx%(height)d olmalıdır."
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
-msgstr ""
+msgstr "Resim Ekle"
 
 #: app/templates/packages/screenshots.html:17
 msgid "Topmost screenshot will be used as the package thumbnail."
-msgstr ""
+msgstr "En üstteki ekran görüntüsü paket küçük resmi olarak kullanılacaktır."
 
 #: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:97
 msgid "Way too small"
-msgstr ""
+msgstr "Çok küçük"
 
 #: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:100
 msgid "Too small"
-msgstr ""
+msgstr "Çok küçük"
 
 #: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:103
 msgid "Not HD"
-msgstr ""
+msgstr "HD değil"
 
 #: app/templates/packages/screenshots.html:53
 msgid "Awaiting approval"
-msgstr ""
+msgstr "Onay bekleniyor"
 
 #: app/templates/packages/screenshots.html:72
 msgid "No screenshots."
-msgstr ""
+msgstr "Ekran görüntüsü yok."
 
 #: app/templates/packages/screenshots.html:80
 msgid "Save Order"
-msgstr ""
+msgstr "Sıralamayı Kaydet"
 
 #: app/templates/packages/screenshots.html:85
 msgid "Reordering requires JavaScript."
-msgstr ""
+msgstr "Yeniden sıralama JavaScript gerektirir."
 
 #: app/templates/packages/screenshots.html:100
 msgid "Videos"
-msgstr ""
+msgstr "Videolar"
 
 #: app/templates/packages/screenshots.html:102
 msgid "You can set a video on the Edit Details page"
-msgstr ""
+msgstr "Ayrıntıları Düzenle sayfasında bir video ayarlayabilirsiniz"
 
 #: app/templates/packages/share.html:10
 msgid "Links"
-msgstr ""
+msgstr "Bağlantılar"
 
 #: app/templates/packages/share.html:13
 msgid "Review link"
-msgstr ""
+msgstr "İnceleme bağlantısı"
 
 #: app/templates/packages/share.html:18
 msgid "Badges"
-msgstr ""
+msgstr "Rozetler"
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
-msgstr ""
+msgstr "Mod Adı Benzersizliği"
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
-msgstr ""
+msgstr "Sağlanan modları paylaşan paketler"
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
-msgstr ""
+msgstr "Bu paket, aşağıdaki paketlerde bulunan mod adlarını içerir:"
 
 #: app/templates/packages/similar.html:32
 msgid "Similar Forum Topics"
-msgstr ""
+msgstr "Benzer Forum Konuları"
 
 #: app/templates/packages/stats.html:17
 msgid "Download (.csv)"
-msgstr ""
+msgstr "İndir (.csv)"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
-msgstr ""
+msgstr "Git Güncelleme Algılamasını Yapılandır"
 
 #: app/templates/packages/update_config.html:16
 msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
-msgstr ""
+msgstr "ContentDB, paketiniz onaylanırsa Git deponuzu her gün yoklayacaktır."
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
 msgstr ""
+"Daha hızlı sürümler için web kancalarını veya API'yi kullanmayı "
+"düşünmelisiniz."
 
 #: app/templates/packages/update_config.html:18
 msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
 msgstr ""
+"Git Güncelleme Algılaması, bir sürümü zaten manuel olarak veya web "
+"kancalarını / API'yi kullanarak oluşturduysanız tekrar oluşturmayacak kadar "
+"akıllıdır."
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
-msgstr ""
+msgstr "Tetikleyici, eylemi tetikleyen olaydır."
 
 #: app/templates/packages/update_config.html:41
 msgid "The action to perform when the trigger happens."
-msgstr ""
+msgstr "Tetikleme gerçekleştiğinde gerçekleştirilecek eylem."
 
 #: app/templates/packages/update_config.html:42
 msgid ""
 "Once a package is marked as outdated, you won't receive any more "
 "notifications until it is marked up to date."
 msgstr ""
+"Bir paket güncel değil olarak işaretlendiğinde, güncel olarak işaretlenene "
+"kadar başka bildirim almazsınız."
 
 #: app/templates/packages/view.html:37
 msgid "Download"
-msgstr ""
+msgstr "İndir"
 
 #: app/templates/packages/view.html:43
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
-msgstr ""
+msgstr "Minetest %(min)s - %(max)s"
 
 #: app/templates/packages/view.html:45
 #, python-format
 msgid "For Minetest %(min)s and above"
-msgstr ""
+msgstr "Minetest %(min)s ve üzeri için"
 
 #: app/templates/packages/view.html:47
 #, python-format
 msgid "Minetest %(max)s and below"
-msgstr ""
+msgstr "Minetest %(max)s ve altı"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
-msgstr ""
+msgstr "Bunu nasıl yükleyebilirim?"
 
 #: app/templates/packages/view.html:73
 msgid "No downloads available"
-msgstr ""
+msgstr "İndirme mevcut değil"
 
 #: app/templates/packages/view.html:80
 msgid "Non-free code and media"
-msgstr ""
+msgstr "Özgür olmayan kod ve medya"
 
 #: app/templates/packages/view.html:82
 msgid "Non-free code"
-msgstr ""
+msgstr "Özgür olmayan kod"
 
 #: app/templates/packages/view.html:84
 msgid "Non-free media"
-msgstr ""
+msgstr "Özgür olmayan medya"
 
 #: app/templates/packages/view.html:97 app/templates/threads/view.html:96
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
 msgstr ""
+"Bu başlık yalnızca oluşturucusu, paket bakımcıları, Onaylayıcı rütbesi veya "
+"üzeri kullanıcılar ve @bahsedilen kullanıcılar tarafından görülebilir."
 
 #: app/templates/packages/view.html:167
 msgid "Work in Progress"
-msgstr ""
+msgstr "Devam Eden Çalışma"
 
 #: app/templates/packages/view.html:188
 msgid "Downloads"
-msgstr ""
+msgstr "İndirmeler"
 
 #: app/templates/packages/view.html:211 app/templates/users/profile.html:86
 msgid "Website"
-msgstr ""
+msgstr "Web sitesi"
 
 #: app/templates/packages/view.html:223 app/templates/users/profile.html:68
 msgid "Forums"
-msgstr ""
+msgstr "Forumlar"
 
 #: app/templates/packages/view.html:229
 msgid "Issue Tracker"
-msgstr ""
+msgstr "Sorun İzleyici"
 
 #: app/templates/packages/view.html:277
 msgid "Awaiting review"
-msgstr ""
+msgstr "İnceleme bekleniyor"
 
 #: app/templates/packages/view.html:307 app/templates/threads/view.html:69
 msgid "Edit Review"
-msgstr ""
+msgstr "İncelemeyi Düzenle"
 
 #: app/templates/packages/view.html:312
 msgid "You can't review your own package."
-msgstr ""
+msgstr "Kendi paketinizi inceleyemezsiniz."
 
 #: app/templates/packages/view.html:322
 msgid "Package needs to be approved before it can be reviewed."
-msgstr ""
+msgstr "Paketin incelenebilmesi için önce onaylanması gerekmektedir."
 
 #: app/templates/packages/view.html:333
 msgid "Used By"
-msgstr ""
+msgstr "Tarafından kullanılmış"
 
 #: app/templates/packages/view.html:339
 msgid "Content"
-msgstr ""
+msgstr "İçerik"
 
 #: app/templates/packages/view.html:341 app/templates/packages/view.html:395
 msgid "View content for game"
-msgstr ""
+msgstr "Oyun içeriğini görüntüleme"
 
 #: app/templates/packages/view.html:355
 msgid "Package may be outdated"
-msgstr ""
+msgstr "Paket eski olabilir"
 
 #: app/templates/packages/view.html:362
 msgid "Only visible to the author and Editors."
-msgstr ""
+msgstr "Sadece yayınlayıcı ve Editörler tarafından görülebilir."
 
 #: app/templates/packages/view.html:379
 msgid "Warning"
-msgstr ""
+msgstr "Uyarı"
 
 #: app/templates/packages/view.html:385
 msgid "Like this package? Help support its development by making a donation"
 msgstr ""
+"Bu paketi beğendiniz mi? Bağış yaparak gelişimini desteklemeye yardımcı olun"
 
 #: app/templates/packages/view.html:388
 msgid "Donate now"
-msgstr ""
+msgstr "Şimdi bağışta bulunun"
 
 #: app/templates/packages/view.html:400
 msgid "Dependencies"
-msgstr ""
+msgstr "Bağımlılıklar"
 
 #: app/templates/packages/view.html:402
 msgid "Required"
-msgstr ""
+msgstr "Gerekli"
 
 #: app/templates/packages/view.html:420
 msgid "No required dependencies"
-msgstr ""
+msgstr "Gerekli bağımlılık yok"
 
 #: app/templates/packages/view.html:426
 msgid "Optional"
-msgstr ""
+msgstr "İsteğe bağlı"
 
 #: app/templates/packages/view.html:456
 msgid "Compatible Games"
-msgstr ""
+msgstr "Uyumlu Oyunlar"
 
 #: app/templates/packages/view.html:472
 msgid "This is an experimental feature."
-msgstr ""
+msgstr "Bu deneysel bir özelliktir."
 
 #: app/templates/packages/view.html:473
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr ""
+"Desteklenen oyunlar bir algoritma tarafından belirlenir ve doğru olmayabilir."
 
 #: app/templates/packages/view.html:483
 msgid "Please specify compatible games"
-msgstr ""
+msgstr "Lütfen uyumlu oyunları belirtin"
 
 #: app/templates/packages/view.html:489
 msgid "Information"
-msgstr ""
+msgstr "Bilgi"
 
 #: app/templates/packages/view.html:495
 msgid "Technical Name"
-msgstr ""
+msgstr "Teknik İsim"
 
 #: app/templates/packages/view.html:504
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
-msgstr ""
+msgstr "Kod için %(code_license)s, <br>medya için %(media_license)s."
 
 #: app/templates/packages/view.html:512
 msgid "Unknown"
-msgstr ""
+msgstr "Bilinmeyen"
 
 #: app/templates/packages/view.html:514
 msgid "Added"
-msgstr ""
+msgstr "Eklendi"
 
 #: app/templates/packages/view.html:528
 msgid "Remove myself"
-msgstr ""
+msgstr "Kendimi kaldır"
 
 #: app/templates/packages/view.html:533
 msgid "Provides"
-msgstr ""
+msgstr "Sağlar"
 
 #: app/templates/packages/view.html:555
 msgid "More"
-msgstr ""
+msgstr "Daha fazla"
 
 #: app/templates/packages/view.html:584
 msgid "See audit log"
-msgstr ""
+msgstr "Denetim günlüğüne bakın"
 
 #: app/templates/report/index.html:15
 msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
 msgstr ""
+"Spam nedeniyle, artık bu formda anonim kullanıcılardan gelen raporları kabul "
+"etmiyoruz."
 
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin in another way"
-msgstr ""
+msgstr "Lütfen oturum açın veya yöneticiyle başka bir şekilde iletişime geçin"
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
-msgstr ""
+msgstr "Neyi bildiriyorsunuz? Neden bildiriyorsunuz?"
 
 #: app/templates/report/index.html:38
 msgid "Reports will be shared with ContentDB staff."
-msgstr ""
+msgstr "Raporlar ContentDB personeli ile paylaşılacaktır."
 
 #: app/templates/report/index.html:40
 msgid "Only the admin will be able to see who made the report."
-msgstr ""
+msgstr "Sadece yönetici raporu kimin yaptığını görebilir."
 
 #: app/templates/report/index.html:44
 msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
 msgstr ""
+"Bir hata mı buldunuz? Lütfen bunun yerine paketin sorun izleyicisinde veya "
+"bir başlıkta bildirin."
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
-msgstr ""
+msgstr "Görev Başarısız Oldu"
 
 #: app/templates/tasks/view.html:7
 msgid "Working…"
-msgstr ""
+msgstr "Çalışıyor…"
 
 #: app/templates/tasks/view.html:26
 msgid "Reload the page to check for updates."
-msgstr ""
+msgstr "Güncellemeleri kontrol etmek için sayfayı yeniden yükleyin."
 
 #: app/templates/threads/delete_reply.html:4
 #, python-format
 msgid "Delete reply by %(username)s in %(title)s "
-msgstr ""
+msgstr "%(title)s içindeki %(username)s tarafından verilen yanıtı sil "
 
 #: app/templates/threads/delete_reply.html:16
 #: app/templates/threads/delete_thread.html:16
 #: app/templates/users/delete.html:13
 msgid "Deleting is permanent"
-msgstr ""
+msgstr "Silme işlemi kalıcıdır"
 
 #: app/templates/threads/delete_thread.html:4
 #, python-format
 msgid "Delete \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "%(author)s yayıncısının %(title)s ögelerini sil"
 
 #: app/templates/threads/edit_reply.html:4
 #: app/templates/threads/edit_reply.html:8
 msgid "Edit reply"
-msgstr ""
+msgstr "Yanıtı düzenle"
 
 #: app/templates/threads/list.html:12 app/templates/threads/new.html:4
 msgid "New Thread"
-msgstr ""
+msgstr "Yeni Konu"
 
 #: app/templates/threads/new.html:12
 msgid ""
 "If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
 "you can let us know here."
 msgstr ""
+"Paketin CDB'de olmaması gerekiyorsa (örneğin: hiç çalışmıyorsa), o zaman "
+"bize buradan bildirebilirsiniz."
 
 #: app/templates/threads/new.html:47
 msgid ""
 "Only you, the package author, and users of Approver rank and above can "
 "read private threads."
 msgstr ""
+"Özel konuları yalnızca siz, paket yazarı ve Onaylayıcı rütbesi ve üzerindeki "
+"kullanıcılar okuyabilirsiniz."
 
 #: app/templates/threads/user_comments.html:9
 #: app/templates/threads/user_comments.html:13
 #, python-format
 msgid "Comments by %(user)s"
-msgstr ""
+msgstr "%(user)s tarafından yapılan yorumlar"
 
 #: app/templates/threads/user_comments.html:46
 #, python-format
 msgid "Reply to <b>%(title)s</b>"
-msgstr ""
+msgstr "<b>%(title)s</b> için yanıt verin"
 
 #: app/templates/threads/view.html:38
 msgid "Subscribe"
-msgstr ""
+msgstr "Abone Olun"
 
 #: app/templates/threads/view.html:47
 msgid "Convert to Thread"
-msgstr ""
+msgstr "Konuya Dönüştür"
 
 #: app/templates/threads/view.html:54
 msgid "Unlock"
-msgstr ""
+msgstr "Kilidini aç"
 
 #: app/templates/threads/view.html:59
 msgid "Lock"
-msgstr ""
+msgstr "Kilitle"
 
 #: app/templates/threads/view.html:101
 msgid "This thread is visible to the following users"
-msgstr ""
+msgstr "Bu konu aşağıdaki kullanıcılar tarafından görülebilir"
 
 #: app/templates/threads/view.html:102
 msgid "Visible to:"
-msgstr ""
+msgstr "Şunlar tarafından görülebilir:"
 
 #: app/templates/threads/view.html:109
 msgid "Plus approvers and editors"
-msgstr ""
+msgstr "Artı onaylayıcılar ve editörler"
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
-msgstr ""
+msgstr "Düzenleyici Çalışma Kuyruğu"
 
 #: app/templates/todo/editor.html:8
 msgid "Approval Queue"
-msgstr ""
+msgstr "Onay Kuyruğu"
 
 #: app/templates/todo/editor.html:15
 msgid "Approve All"
-msgstr ""
+msgstr "Tümünü Onayla"
 
 #: app/templates/todo/editor.html:33
 msgid "No screenshots need approval."
-msgstr ""
+msgstr "Hiçbir ekran görüntüsü onay beklemiyor."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
 msgid "No packages need approval."
-msgstr ""
+msgstr "Hiçbir paket onay beklemiyor."
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
-msgstr ""
+msgstr "İçe aktarılıyor"
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need approval."
-msgstr ""
+msgstr "Hiçbir sürüm onay beklemiyor."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
-msgstr ""
+msgstr "Hepsi tamam!"
 
 #: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
 msgid "License Needed"
-msgstr ""
+msgstr "Lisans Gerekli"
 
 #: app/templates/todo/editor.html:127
 msgid "Tag Packages"
-msgstr ""
+msgstr "Etiket Paketleri"
 
 #: app/templates/todo/editor.html:130
 #, python-format
 msgid "%(total_to_tag)d / %(total_packages)d packages don't have any tags."
 msgstr ""
+"%(total_to_tag)d / %(total_packages)d paket herhangi bir etikete sahip değil."
 
 #: app/templates/todo/editor.html:140
 msgid "View Tags"
-msgstr ""
+msgstr "Etiketleri Görüntüle"
 
 #: app/templates/todo/editor.html:147
 msgid "Unfulfilled Dependencies"
-msgstr ""
+msgstr "Karşılanmamış Bağımlılıklar"
 
 #: app/templates/todo/editor.html:151
 msgid "Mod names that have hard dependers, but no packages providing them."
 msgstr ""
+"Sabit bağımlıları olan, ancak bunları sağlayan paketler olmayan mod adları."
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
-msgstr ""
+msgstr "Tümünü Gör"
 
 #: app/templates/todo/editor.html:196
 msgid "Recent Actions"
-msgstr ""
+msgstr "Son Eylemler"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
-msgstr ""
+msgstr "%(rel)s desteklemeyen paketler"
 
 #: app/templates/todo/mtver_support.html:13
 #: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
 #: app/templates/todo/outdated.html:16 app/templates/todo/screenshots.html:12
 #: app/templates/todo/screenshots.html:16
 msgid "Minetest-Mods org only"
-msgstr ""
+msgstr "Sadece Minetest-Mods kuruluşu"
 
 #: app/templates/todo/mtver_support.html:25 app/templates/todo/outdated.html:24
 #: app/templates/todo/screenshots.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
-msgstr ""
+msgstr "Tarihe göre sırala"
 
 #: app/templates/todo/mtver_support.html:29 app/templates/todo/outdated.html:28
 #: app/templates/todo/screenshots.html:28
 msgid "Sort by score"
-msgstr ""
+msgstr "Puana göre sırala"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
-msgstr ""
+msgstr "Tüm Güncel olmayan paketler"
 
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
 #: app/templates/todo/user.html:68
 msgid "Missing Screenshots"
-msgstr ""
+msgstr "Eksik Ekran Görüntüleri"
 
 #: app/templates/todo/screenshots.html:33
 #, python-format
 msgid "%(count)d packages"
-msgstr ""
+msgstr "%(count)d paket"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
-msgstr ""
+msgstr "Paket Etiketleri"
 
 #: app/templates/todo/tags.html:23 app/templates/todo/tags.html:27
 msgid "Missing tags only"
-msgstr ""
+msgstr "Yalnızca eksik etiketler"
 
 #: app/templates/todo/tags.html:31
 msgid "Edit Tags"
-msgstr ""
+msgstr "Etiketleri Düzenle"
 
 #: app/templates/todo/todo_base.html:11
 msgid "Your to do list"
-msgstr ""
+msgstr "Yapılacaklar listeniz"
 
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
-msgstr ""
+msgstr "Eski Paketler"
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
-msgstr ""
+msgstr "Ada göre sırala"
 
 #: app/templates/todo/topics.html:20
 msgid "Sort by views"
-msgstr ""
+msgstr "Görünümlere göre sırala"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
-msgstr ""
+msgstr "Sayfalandırılmış liste"
 
 #: app/templates/todo/topics.html:34
 msgid "Unlimited list"
-msgstr ""
+msgstr "Sınırsız liste"
 
 #: app/templates/todo/topics.html:41
 msgid "Show discarded topics"
-msgstr ""
+msgstr "Atılan konuları göster"
 
 #: app/templates/todo/topics.html:43
 msgid "Hide discarded topics"
-msgstr ""
+msgstr "Silinmiş konuları gizle"
 
 #: app/templates/todo/topics.html:49
 msgid "Topics to be Added"
-msgstr ""
+msgstr "Eklenecek Konular"
 
 #: app/templates/todo/user.html:4
 #, python-format
 msgid "%(username)s's to do list"
-msgstr ""
+msgstr "%(username)s kullanıcısının yapılacaklar listesi"
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
-msgstr ""
+msgstr "Çeşitli Yapılacaklar"
 
 #: app/templates/todo/user.html:13
 msgid "Enable email notifications"
-msgstr ""
+msgstr "E-posta bildirimlerini etkinleştir"
 
 #: app/templates/todo/user.html:18
 msgid "Unapproved Packages Needing Action"
-msgstr ""
+msgstr "Eylem Gerektiren Onaylanmamış Paketler"
 
 #: app/templates/todo/user.html:40 app/templates/todo/user.html:82
 #: app/templates/todo/user.html:141 app/templates/todo/user.html:165
 msgid "Nothing to do :)"
-msgstr ""
+msgstr "Yapacak bir şey yok :)"
 
 #: app/templates/todo/user.html:48
 msgid "See all Update Settings"
-msgstr ""
+msgstr "Tüm Güncelleme Ayarlarını Gör"
 
 #: app/templates/todo/user.html:53
 msgid "Create All Releases"
-msgstr ""
+msgstr "Tüm Sürümleri Oluştur"
 
 #: app/templates/todo/user.html:56
 msgid "Potentially Outdated Packages"
-msgstr ""
+msgstr "Potansiyel Olarak Eski Paketler"
 
 #: app/templates/todo/user.html:58
 msgid ""
@@ -3171,131 +3327,144 @@ msgid ""
 "releases when New Commits or New Tags are pushed to Git by clicking "
 "'Update Settings'."
 msgstr ""
+"Paketleri eski olarak işaretlemek yerine, 'Ayarları Güncelle'ye tıklayarak "
+"Git'e Yeni İşlemeler veya Yeni Etiketler gönderildiğinde otomatik olarak "
+"sürümler oluşturabilirsiniz."
 
 #: app/templates/todo/user.html:60
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
+"Bir paketi aşağıdan kaldırmak için bir sürüm oluşturun veya güncelleme "
+"ayarlarını değiştirin."
 
 #: app/templates/todo/user.html:88
 msgid "Small Screenshots"
-msgstr ""
+msgstr "Küçük Ekran Görüntüleri"
 
 #: app/templates/todo/user.html:91
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr ""
+"Bu paketler çok küçük ekran görüntülerine sahiptir ve değiştirilmelidir."
 
 #: app/templates/todo/user.html:92
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr ""
+"Kırmızı ve turuncu, sınırın altındaki ekran görüntüleridir ve gri ekran "
+"görüntüleri önerilen çözünürlüğün altındadır."
 
 #: app/templates/todo/user.html:147
 msgid "See All"
-msgstr ""
+msgstr "Tümünü Gör"
 
 #: app/templates/todo/user.html:148
 msgid "Packages Without Tags"
-msgstr ""
+msgstr "Etiketsiz Paketler"
 
 #: app/templates/todo/user.html:150
 msgid "Labelling your packages with tags helps users find them."
 msgstr ""
+"Paketlerinizi etiketlemek, kullanıcıların onları bulmasına yardımcı olur."
 
 #: app/templates/todo/user.html:170
 msgid "Unadded Topics"
-msgstr ""
+msgstr "Eklenmemiş Konular"
 
 #: app/templates/todo/user.html:173
 msgid "List of your forum topics which do not have a matching package."
-msgstr ""
+msgstr "Eşleşen bir paketi olmayan forum konularınızın listesi."
 
 #: app/templates/todo/user.html:174
 msgid "Topics with a strikethrough have been marked as discarded."
-msgstr ""
+msgstr "Üstü çizili konular atılmış olarak işaretlenmiştir."
 
 #: app/templates/todo/user.html:182
 msgid "Congrats! You don't have any topics which aren't on CDB."
-msgstr ""
+msgstr "Tebrikler! CDB'de olmayan herhangi bir konunuz yok."
 
 #: app/templates/users/account.html:4
 #, python-format
 msgid "Account and Security - %(username)s"
-msgstr ""
+msgstr "Hesap ve Güvenlik - %(username)s"
 
 #: app/templates/users/account.html:18
 msgid "Change Password"
-msgstr ""
+msgstr "Parola Değiştir"
 
 #: app/templates/users/account.html:22
 #: app/templates/users/change_set_password.html:20
 msgid "Set Password"
-msgstr ""
+msgstr "Parola Belirle"
 
 #: app/templates/users/account.html:27 app/templates/users/modtools.html:37
 msgid "Has password"
-msgstr ""
+msgstr "Parola var"
 
 #: app/templates/users/account.html:29 app/templates/users/modtools.html:39
 msgid "Doesn't have password"
-msgstr ""
+msgstr "Parola yok"
 
 #: app/templates/users/account.html:33
 msgid "Linked Accounts"
-msgstr ""
+msgstr "Bağlı Hesaplar"
 
 #: app/templates/users/account.html:40 app/templates/users/account.html:52
 msgid "Connected"
-msgstr ""
+msgstr "Bağlandı"
 
 #: app/templates/users/account.html:43
 #, python-format
 msgid "Please PM %(rubenwardy)s on the forums to link your account."
 msgstr ""
+"Hesabınızı bağlamak için lütfen forumlarda %(rubenwardy)s adresine PM "
+"gönderin."
 
 #: app/templates/users/account.html:57
 msgid "View ContentDB's GitHub Permissions"
-msgstr ""
+msgstr "ContentDB'nin GitHub İzinlerini Görüntüleyin"
 
 #: app/templates/users/account.html:62
 msgid "Link Github"
-msgstr ""
+msgstr "Github'u bağla"
 
 #: app/templates/users/account.html:65
 msgid "None"
-msgstr ""
+msgstr "Hiçbiri"
 
 #: app/templates/users/account.html:77
 msgid "Recent Account Actions"
-msgstr ""
+msgstr "Son Hesap Hareketleri"
 
 #: app/templates/users/account.html:82
 msgid "Account Deletion and Deactivation"
-msgstr ""
+msgstr "Hesap Silme ve Devre Dışı Bırakma"
 
 #: app/templates/users/account.html:86
 msgid "Delete or Deactivate"
-msgstr ""
+msgstr "Sil veya Devre Dışı Bırak"
 
 #: app/templates/users/account.html:89
 msgid "Account Deletion and Deactivation isn't available to users yet."
 msgstr ""
+"Hesap Silme ve Devre Dışı Bırakma henüz kullanıcılar tarafından "
+"kullanılamıyor."
 
 #: app/templates/users/account.html:90
 msgid "Please contact the admin."
-msgstr ""
+msgstr "Lütfen yönetici ile iletişime geçin."
 
 #: app/templates/users/change_set_password.html:11
 msgid "It is recommended that you set a password for your account."
-msgstr ""
+msgstr "Hesabınız için bir parola ayarlamanız önerilir."
 
 #: app/templates/users/change_set_password.html:14
 msgid "Skip"
-msgstr ""
+msgstr "Atla"
 
 #: app/templates/users/change_set_password.html:28
 #: app/templates/users/register.html:24
@@ -3303,112 +3472,121 @@ msgid ""
 "Your email is needed to recover your account if you forget your password "
 "and to send (configurable) notifications. "
 msgstr ""
+"Şifrenizi unutursanız hesabınızı kurtarmak ve (yapılandırılabilir) "
+"bildirimler göndermek için e-postanız gereklidir. "
 
 #: app/templates/users/change_set_password.html:29
 #: app/templates/users/register.html:25
 #: app/templates/users/settings_email.html:20
 msgid "Your email will never be shared with a third-party."
-msgstr ""
+msgstr "E-postanız asla üçüncü bir tarafla paylaşılmayacaktır."
 
 #: app/templates/users/change_set_password.html:36
 #: app/templates/users/register.html:27
 msgid "Must be at least 8 characters long."
-msgstr ""
+msgstr "En az 8 karakter uzunluğunda olmalıdır."
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
-msgstr ""
+msgstr "Hesap Oluştur"
 
 #: app/templates/users/claim.html:10
 msgid "Do you have an account on the Minetest Forums?"
-msgstr ""
+msgstr "Minetest Forumlarında bir hesabınız var mı?"
 
 #: app/templates/users/claim.html:13
 msgid ""
 "ContentDB will link your account to your forum account if you have one, "
 "but you don't need one."
 msgstr ""
+"ContentDB, hesabınız varsa hesabınızı forum hesabınıza bağlayacaktır, ancak "
+"buna ihtiyacınız yoktur."
 
 #: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
-msgstr ""
+msgstr "<b>Evet</b>, forum hesabım var"
 
 #: app/templates/users/claim.html:21
 msgid "<b>No</b>, I don't have one"
-msgstr ""
+msgstr "<b>Hayır</b>, yok"
 
 #: app/templates/users/claim.html:24
 msgid "Create forum account"
-msgstr ""
+msgstr "Forum hesabı oluştur"
 
 #: app/templates/users/claim_forums.html:10
 msgid "Confirm Your Account"
-msgstr ""
+msgstr "Hesabınızı Onaylayın"
 
 #: app/templates/users/claim_forums.html:13
 msgid ""
 "You'll need to use prove that you have access to your forum account using"
 " one of the options below."
 msgstr ""
+"Aşağıdaki seçeneklerden birini kullanarak forum hesabınıza erişiminiz "
+"olduğunu kanıtlamanız gerekir."
 
 #: app/templates/users/claim_forums.html:14
 msgid "This is so ContentDB can link your account to your forum account."
-msgstr ""
+msgstr "Bu, ContentDB'nin hesabınızı forum hesabınıza bağlayabilmesi içindir."
 
 #: app/templates/users/claim_forums.html:18
 msgid "Don't have a forums account?"
-msgstr ""
+msgstr "Forum hesabınız yok mu?"
 
 #: app/templates/users/claim_forums.html:19
 #, python-format
 msgid "You can still <a href='%(url)s'>sign up without one</a>."
 msgstr ""
+"Hala <a href=\"%(url)s\">bunlardan biri olmadan da kaydolabilirsiniz</a>."
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
-msgstr ""
+msgstr "Seçenek 1"
 
 #: app/templates/users/claim_forums.html:27
 msgid "Use GitHub field in forum profile"
-msgstr ""
+msgstr "Forum profilinde GitHub alanını kullanın"
 
 #: app/templates/users/claim_forums.html:35
 #: app/templates/users/claim_forums.html:64
 msgid "Enter your forum username here:"
-msgstr ""
+msgstr "Forum kullanıcı adınızı buraya girin:"
 
 #: app/templates/users/claim_forums.html:39
 #: app/templates/users/claim_forums.html:68
 msgid "Forum username"
-msgstr ""
+msgstr "Forum kullanıcı adı"
 
 #: app/templates/users/claim_forums.html:40
 #: app/templates/users/claim_forums.html:68
 #: app/templates/users/register.html:16
 msgid "Only a-zA-Z0-9._ allowed"
-msgstr ""
+msgstr "Yalnızca a-zA-Z0-9._ için izin verilir"
 
 #: app/templates/users/claim_forums.html:43
 msgid "You'll need to have the GitHub field in your forum profile filled out."
-msgstr ""
+msgstr "Forum profilinizdeki GitHub alanını doldurmuş olmanız gerekir."
 
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
+"Foruma giriş yapın ve <a href=\"https://forum.minetest.net/ucp.php?i=173\""
+">buradan</a> yapın."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
-msgstr ""
+msgstr "Sonraki: GitHub ile oturum açın"
 
 #: app/templates/users/claim_forums.html:55
 msgid "Option 2"
-msgstr ""
+msgstr "Seçenek 2"
 
 #: app/templates/users/claim_forums.html:56
 msgid "Verification token"
-msgstr ""
+msgstr "Doğrulama jetonu"
 
 #: app/templates/users/claim_forums.html:71
 msgid ""
@@ -3416,23 +3594,25 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
+"<a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\""
+">Kullanıcı Kontrol Paneli &gt; Profil &gt; İmzayı Düzenle</a> bölümüne gidin"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
-msgstr ""
+msgstr "Bunu imzanıza yapıştırın:"
 
 #: app/templates/users/claim_forums.html:81
 msgid "Click next so we can check it."
-msgstr ""
+msgstr "Kontrol edebilmemiz için ileri'ye tıklayın."
 
 #: app/templates/users/claim_forums.html:84
 msgid "Don't worry, you can remove it after this is done."
-msgstr ""
+msgstr "Endişelenmeyin, bu işlem tamamlandıktan sonra kaldırabilirsiniz."
 
 #: app/templates/users/delete.html:4
 #, python-format
 msgid "Delete user %(username)s"
-msgstr ""
+msgstr "%(username)s kullanıcısını sil"
 
 #: app/templates/users/delete.html:17
 #, python-format
@@ -3440,12 +3620,15 @@ msgid ""
 "This will delete your account, removing %(threads)d threads and "
 "%(replies)d replies."
 msgstr ""
+"Bu işlem hesabınızı silecek, %(threads)d konularını ve %(replies)d "
+"yanıtlarını kaldıracaktır."
 
 #: app/templates/users/delete.html:22
 msgid ""
 "As you have packages and/or forum threads, your account cannot be fully "
 "deleted."
 msgstr ""
+"Paketleriniz veya forum konularınız olduğu için hesabınız tamamen silinemez."
 
 #: app/templates/users/delete.html:23
 #, python-format
@@ -3453,263 +3636,278 @@ msgid ""
 "Instead, your account will be deactivated and all personal information "
 "wiped - including %(threads)d threads and %(replies)d replies."
 msgstr ""
+"Bunun yerine, hesabınız devre dışı bırakılacak ve %(threads)d konuları ve "
+"%(replies)d yanıtları da dahil olmak üzere tüm kişisel bilgileriniz "
+"silinecektir."
 
 #: app/templates/users/delete.html:25
 msgid "See the privacy policy for more information."
-msgstr ""
+msgstr "Daha fazla bilgi için gizlilik politikasına bakın."
 
 #: app/templates/users/delete.html:36
 msgid "Deactivate"
-msgstr ""
+msgstr "Devre dışı bırak"
 
 #: app/templates/users/delete.html:40
 msgid "Delete Anyway"
-msgstr ""
+msgstr "Yine de Sil"
 
 #: app/templates/users/email_sent.html:4
 msgid "Check Your Email"
-msgstr ""
+msgstr "E-postanızı Kontrol Edin"
 
 #: app/templates/users/email_sent.html:11
 msgid "We've sent an email to the address you specified."
-msgstr ""
+msgstr "Belirttiğiniz adrese bir e-posta gönderdik."
 
 #: app/templates/users/email_sent.html:12
 msgid "You'll need to click the link in the email to confirm it."
-msgstr ""
+msgstr "Onaylamak için e-postadaki bağlantıya tıklamanız gerekecektir."
 
 #: app/templates/users/email_sent.html:16
 msgid "The link will expire in 12 hours"
-msgstr ""
+msgstr "Bağlantı 12 saat içinde sona erecektir"
 
 #: app/templates/users/email_sent.html:22
 msgid "My email never arrived"
-msgstr ""
+msgstr "E-postam hiç ulaşmadı"
 
 #: app/templates/users/forgot_password.html:4
 msgid "Request Password Reset"
-msgstr ""
+msgstr "Şifre Sıfırlama Talebi"
 
 #: app/templates/users/forums_no_such_user.html:14
 #, python-format
 msgid "Unfortunately, %(username)s doesn't have an account on ContentDB yet."
-msgstr ""
+msgstr "Maalesef, %(username)s henüz ContentDB'de bir hesaba sahip değil."
 
 #: app/templates/users/forums_no_such_user.html:19
 msgid "Claim Account"
-msgstr ""
+msgstr "Hesap Talebi"
 
 #: app/templates/users/list.html:4 app/templates/users/list.html:8
 msgid "Users"
-msgstr ""
+msgstr "Kullanıcılar"
 
 #: app/templates/users/list.html:34
 #, python-format
 msgid "Rank: %(rank)s."
-msgstr ""
+msgstr "Rütbe: %(rank)s."
 
 #: app/templates/users/login.html:20
 msgid "Forgot my password"
-msgstr ""
+msgstr "Şifremi unuttum"
 
 #: app/templates/users/login.html:30 app/templates/users/profile.html:77
 msgid "GitHub"
-msgstr ""
+msgstr "GitHub"
 
 #: app/templates/users/modtools.html:11
 msgid "Edit Account"
-msgstr ""
+msgstr "Hesabı Düzenle"
 
 #: app/templates/users/modtools.html:43 app/templates/users/modtools.html:75
 msgid "Ban"
-msgstr ""
+msgstr "Yasakla"
 
 #: app/templates/users/modtools.html:56
 msgid "Unban"
-msgstr ""
+msgstr "Yasağı Kaldır"
 
 #: app/templates/users/modtools.html:65
 msgid "Message to display to banned user"
-msgstr ""
+msgstr "Yasaklı kullanıcıya gösterilecek mesaj"
 
 #: app/templates/users/modtools.html:69
 msgid "Expires At"
-msgstr ""
+msgstr "Geçerlilik Süresi"
 
 #: app/templates/users/modtools.html:72
 msgid "Expiry date. Leave blank for permanent ban"
-msgstr ""
+msgstr "Bitiş tarihi. Kalıcı yasak için boş bırakın"
 
 #: app/templates/users/modtools.html:79
 msgid "Change Email and Send Password Reset"
-msgstr ""
+msgstr "E-postayı değiştirin ve Şifre Sıfırlamayı Gönder"
 
 #: app/templates/users/modtools.html:83
 #: app/templates/users/settings_email.html:14
 msgid "Email Address"
-msgstr ""
+msgstr "E-posta Adresi"
 
 #: app/templates/users/profile.html:11
 msgid "Profile picture"
-msgstr ""
+msgstr "Profil fotoğrafı"
 
 #: app/templates/users/profile.html:22
 msgid "To Do List"
-msgstr ""
+msgstr "Yapılacaklar Listesi"
 
 #: app/templates/users/profile.html:41
 msgid "Send Email"
-msgstr ""
+msgstr "Eposta gönder"
 
 #: app/templates/users/profile.html:105
 msgid "packages"
-msgstr ""
+msgstr "paketler"
 
 #: app/templates/users/profile.html:114
 msgid "reviews"
-msgstr ""
+msgstr "Değerlendirmeler"
 
 #: app/templates/users/profile.html:122
 msgid "comments"
-msgstr ""
+msgstr "yorumlar"
 
 #: app/templates/users/profile.html:143
 msgid "Claim"
-msgstr ""
+msgstr "Talep"
 
 #: app/templates/users/profile.html:145
 msgid "Is this you? Claim your account now!"
-msgstr ""
+msgstr "Bu siz misiniz? Hesabınızı şimdi talep edin!"
 
 #: app/templates/users/profile.html:178
 #, python-format
 msgid "%(value)d / %(target)d"
-msgstr ""
+msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:192
 msgid "Create package"
-msgstr ""
+msgstr "Paket oluştur"
 
 #: app/templates/users/profile.html:198
 msgid "View list of tags"
-msgstr ""
+msgstr "Etiket listesini görüntüle"
 
 #: app/templates/users/profile.html:208
 msgid "Maintained Packages"
-msgstr ""
+msgstr "Geliştirilen Paketler"
 
 #: app/templates/users/profile.html:210
 msgid "This user is also a maintainer of the following packages"
-msgstr ""
+msgstr "Bu kullanıcı aynı zamanda aşağıdaki paketlerin de geliştiricisidir"
 
 #: app/templates/users/profile_edit.html:4
 #, python-format
 msgid "Edit Profile - %(username)s"
-msgstr ""
+msgstr "Profili Düzenle - %(username)s"
 
 #: app/templates/users/profile_edit.html:10
 msgid "Profile Picture"
-msgstr ""
+msgstr "Profil Resmi"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
-msgstr ""
+msgstr "Forumlarla Eşitle"
 
 #: app/templates/users/profile_edit.html:45
 msgid "Profile Information"
-msgstr ""
+msgstr "Profil Bilgileri"
 
 #: app/templates/users/profile_edit.html:52
 msgid "Pretending to be another user is grounds for a permanent ban"
-msgstr ""
+msgstr "Başka bir kullanıcı gibi davranmak kalıcı olarak yasaklanma sebebidir"
 
 #: app/templates/users/register.html:17
 msgid ""
 "Only alphanumeric characters, periods, underscores, and minuses are "
 "allowed (a-zA-Z0-9._)"
 msgstr ""
+"Yalnızca alfanümerik karakterlere, noktalara, alt çizgilere ve eksilere izin "
+"verilir (a-zA-Z0-9._)"
 
 #: app/templates/users/register.html:20
 msgid ""
 "Human readable name, defaults to username if not specified. This can be "
 "changed later."
 msgstr ""
+"İnsan tarafından okunabilir ad, belirtilmemişse varsayılan olarak kullanıcı "
+"adıdır. Bu daha sonra değiştirilebilir."
 
 #: app/templates/users/register.html:21
 msgid "Same as username"
-msgstr ""
+msgstr "Kullanıcı adı ile aynı"
 
 #: app/templates/users/register.html:32
 msgid "Please prove that you are human"
-msgstr ""
+msgstr "Lütfen insan olduğunuzu kanıtlayın"
 
 #: app/templates/users/register.html:35
 msgid "I agree to the "
-msgstr ""
+msgstr "Kabul ediyorum "
 
 #: app/templates/users/settings_email.html:4
 #, python-format
 msgid "Email and Notifications - %(username)s"
-msgstr ""
+msgstr "E-posta ve Bildirimler - %(username)s"
 
 #: app/templates/users/settings_email.html:19
 msgid ""
 "Your email is needed to recover your account if you forget your password,"
 " and to send (configurable) notifications."
 msgstr ""
+"E-postanız, şifrenizi unutmanız durumunda hesabınızı kurtarmak ve "
+"(yapılandırılabilir) bildirimler göndermek için gereklidir."
 
 #: app/templates/users/settings_email.html:25
 msgid "There is at least one verification pending."
-msgstr ""
+msgstr "Bekleyen en az bir doğrulama var."
 
 #: app/templates/users/settings_email.html:29
 msgid "Notification Settings"
-msgstr ""
+msgstr "Bildirim Ayarları"
 
 #: app/templates/users/settings_email.html:33
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr ""
+"E-posta bildirimleri şu anda kapalıdır. Etkinleştirmek için 'kaydet'e "
+"tıklayın."
 
 #: app/templates/users/settings_email.html:38
 msgid ""
 "Configure whether certain types of notifications are sent immediately, or"
 " as part of a daily digest."
 msgstr ""
+"Belirli bildirim türlerinin hemen mi yoksa günlük özetin bir parçası olarak "
+"mı gönderileceğini yapılandırın."
 
 #: app/templates/users/settings_email.html:43
 msgid "Event"
-msgstr ""
+msgstr "Etkinlik"
 
 #: app/templates/users/settings_email.html:45
 msgid "Immediately"
-msgstr ""
+msgstr "Derhal"
 
 #: app/templates/users/settings_email.html:46
 msgid "In digest"
-msgstr ""
+msgstr "Özet olarak"
 
 #: app/templates/users/stats.html:4
 #, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr ""
+msgstr "%(display_name)s paketleri için istatistikler"
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
 "This will blacklist an email address, preventing ContentDB from ever "
 "sending emails to it - including password resets."
 msgstr ""
+"Bu, bir e-posta adresini kara listeye alarak ContentDB'nin parola "
+"sıfırlamaları da dahil olmak üzere bu adrese e-posta göndermesini engeller."
 
 #: app/templates/users/unsubscribe.html:20
 msgid "Please enter the email address you wish to blacklist."
-msgstr ""
+msgstr "Lütfen kara listeye istediğiniz e-posta adresini giriniz."
 
 #: app/templates/users/unsubscribe.html:21
 msgid "You will then need to confirm the email"
-msgstr ""
+msgstr "Daha sonra e-postayı onaylamanız gerekecektir"
 
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
-msgstr ""
+msgstr "Şimdi abonelikten çıkabilirsiniz."
 
 #: app/templates/users/unsubscribe.html:40
 #, python-format
@@ -3717,6 +3915,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to sign into the account "
 "'%(display_name)s'"
 msgstr ""
+"Aboneliğinizi iptal etmeniz hesapta oturum açmanızı engelleyebilir "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -3724,34 +3924,39 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
+"ContentDB artık \"şifremi unuttum\" ve diğer temel sistem e-postalarını "
+"gönderemeyecek.\n"
+"\t\t\t\t\tBunun yerine e-posta bildirim tercihlerinizi düzenlemeyi düşünün."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
-msgstr ""
+msgstr "Bu e-postayı artık ContentDB ile kullanamazsınız."
 
 #: app/templates/users/unsubscribe.html:57
 msgid "Edit Notification Preferences"
-msgstr ""
+msgstr "Bildirim Tercihlerini Düzenle"
 
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr ""
+msgstr "Paket Sürümlerinde Ara"
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr ""
+msgstr "'%(query)s' - Paket Sürümlerini Ara"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
-msgstr ""
+msgstr "Çok fazla bildiriminiz var, bunları ya okumalı ya da silmelisiniz"
 
 #: app/utils/user.py:54
 msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
 msgstr ""
+"Lütfen e-posta bildirimlerini etkinleştirmeyi düşünün, ne kadar "
+"gönderileceğini özelleştirebilirsiniz"
 
 #~ msgid "Please comment what changes are needed in the review thread"
 #~ msgstr ""
@@ -3935,4 +4140,3 @@ msgstr ""
 
 #~ msgid "Mods for %(title)s"
 #~ msgstr ""
-
