@@ -44,6 +44,7 @@ app.config["LANGUAGES"] = {
 	"ru": "русский язык",
 	"sk": "Slovenčina",
 	"sv": "Svenska",
+	"tr": "Türkçe",
 	"uk": "Українська",
 	"vi": "tiếng Việt",
 	"zh_Hans": "汉语",
