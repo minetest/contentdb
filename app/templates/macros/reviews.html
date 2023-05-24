@@ -32,7 +32,7 @@
 			</div>
 			<div class="col-md-auto pl-1 pr-3 pt-2 text-center" style=" font-size: 200%;">
 				{% if review.rating > 3 %}
-					<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
+					<i class="fas fa-birthday-cake" style="color:#6f6;"></i>
 				{% elif review.rating < 3 %}
 					<i class="fas fa-thumbs-down" style="color:#f66;"></i>
 				{% else %}
@@ -113,7 +113,7 @@
 
 			<div class="btn-group btn-group-toggle" data-toggle="buttons">
 				<label class="btn btn-primary">
-					<i class="fas fa-thumbs-up mr-2"></i>
+					<i class="fas fa-birthday-cake mr-2"></i>
 					<input type="radio" name="rating" value="5" autocomplete="off"> {{ _("Yes") }}
 				</label>
 				<label class="btn btn-primary">
@@ -156,7 +156,7 @@
 
 			<div class="btn-group">
 				<button class="btn btn-primary" name="rating" value="5">
-					<i class="fas fa-thumbs-up mr-2"></i>
+					<i class="fas fa-birthday-cake mr-2"></i>
 					{{ _("Yes") }}
 				</button>
 				<button class="btn btn-primary" name="rating" value="3">
