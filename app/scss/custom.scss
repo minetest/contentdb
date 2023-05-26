@@ -209,23 +209,3 @@ pre {
 }
 
 @import "dracula.scss";
-
-body > nav.navbar.bg-primary {
-	background: linear-gradient(to top, #600060, #a000a0);
-
-	.navbar-nav .nav-link {
-		color: rgba(255,255,255,0.8);
-		&:hover {
-			color: white;
-		}
-	}
-
-	.btn-secondary {
-		background: #a000a0;
-		border-color: #a000a0;
-	}
-
-	input[type='text'] {
-		border-color: #a000a0;
-	}
-}
