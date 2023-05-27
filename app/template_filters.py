@@ -1,3 +1,6 @@
+import jinja2.nodes
+from markupsafe import Markup
+
 from . import app, utils
 from .models import Permission, Package, PackageState, PackageRelease
 from .utils import abs_url_for, url_set_query, url_set_anchor, url_current
@@ -37,9 +40,13 @@ def throw(err):
 	raise Exception(err)
 
 
+def persist_safe(ret, original):
+	return Markup(ret) if isinstance(original, Markup) else ret
+
+
 @app.template_filter()
 def normalize_whitespace(str):
-	return do_normalize_whitespace(str).strip()
+	return persist_safe(do_normalize_whitespace(str).strip(), str)
 
 
 @app.template_filter()
