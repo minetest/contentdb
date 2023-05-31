@@ -75,6 +75,18 @@ def packages():
 	pkgs = qb.convertToDictionary(query.all())
 	if "engine_version" in request.args or "protocol_version" in request.args:
 		pkgs = [package for package in pkgs if package.get("release")]
+
+	# Promote featured packages
+	if "sort" not in request.args and "order" not in request.args:
+		featured_lut = set()
+		featured = qb.convertToDictionary(query.filter(Package.tags.any(name="featured")).all())
+		for pkg in featured:
+			featured_lut.add(f"{pkg['author']}/{pkg['name']}")
+			pkg["short_description"] = "Featured. " + pkg["short_description"]
+
+		not_featured = [pkg for pkg in pkgs if f"{pkg['author']}/{pkg['name']}" not in featured_lut]
+		pkgs = featured + not_featured
+
 	return jsonify(pkgs)
 
 
