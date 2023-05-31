@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-04-30 01:43+0100\n"
-"PO-Revision-Date: 2022-07-31 18:18+0000\n"
-"Last-Translator: Fjuro <fjuro@seznam.cz>\n"
+"PO-Revision-Date: 2023-05-27 15:51+0000\n"
+"Last-Translator: Sharpik <david.maliska@seznam.cz>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/minetest/contentdb/"
+"cs/>\n"
 "Language: cs\n"
-"Language-Team: Czech "
-"<https://hosted.weblate.org/projects/minetest/contentdb/cs/>\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 4.18-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:119
@@ -33,7 +34,7 @@ msgstr "Byli jste zabanováni."
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:201
 msgid "Packages"
-msgstr ""
+msgstr "Balíčky"
 
 #: app/template_filters.py:64
 #, python-format
@@ -117,7 +118,7 @@ msgstr "Protokol"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:234 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "Statistiky"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -131,7 +132,7 @@ msgstr "Odebrat"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "Podporované hry"
 
 #: app/blueprints/packages/packages.py:163
 msgid "Error: Another package already uses this forum topic!"
@@ -223,17 +224,19 @@ msgstr "URL videa"
 
 #: app/blueprints/packages/packages.py:251
 msgid "Donate URL"
-msgstr ""
+msgstr "Darujte URL"
 
 #: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game není povolený název"
 
 #: app/blueprints/packages/packages.py:267
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"Tento balíček již v databázi existuje, ale byl odstraněn. Prosím kontaktujte "
+"správce ContentDB, aby balíček obnovil"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Package already exists"
@@ -289,15 +292,15 @@ msgstr "Jméno autora"
 
 #: app/blueprints/packages/packages.py:643
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "Povolte podporu detekce na základě závislostí (doporučeno)"
 
 #: app/blueprints/packages/packages.py:644
 msgid "Supported games (Comma-separated)"
-msgstr ""
+msgstr "Podporované hry (oddělené sředníkem)"
 
 #: app/blueprints/packages/packages.py:645
 msgid "Unsupported games (Comma-separated)"
-msgstr ""
+msgstr "Nepodporované hry (oddělené středníkem)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
@@ -305,340 +308,347 @@ msgstr ""
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
-msgstr ""
+msgstr "Titulek"
 
 #: app/blueprints/packages/releases.py:53
 #: app/templates/packages/release_new.html:46
 msgid "Method"
-msgstr ""
+msgstr "Metoda"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:55
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
-msgstr ""
+msgstr "Nahrání souboru"
 
 #: app/blueprints/packages/releases.py:54
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr ""
+msgstr "Git reference (např.: commit hash, branch, nebo tag)"
 
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:68
 #: app/blueprints/packages/releases.py:192
 msgid "Minimum Minetest Version"
-msgstr ""
+msgstr "Minimální verze Minetestu"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:70
 #: app/blueprints/packages/releases.py:195
 msgid "Maximum Minetest Version"
-msgstr ""
+msgstr "Maximální verze Minetestu"
 
 #: app/blueprints/packages/releases.py:65
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
-msgstr ""
+msgstr "URL"
 
 #: app/blueprints/packages/releases.py:66
 msgid "Task ID"
-msgstr ""
+msgstr "ID úkolu"
 
 #: app/blueprints/packages/releases.py:67
 #: app/blueprints/packages/screenshots.py:40
 msgid "Is Approved"
-msgstr ""
+msgstr "Je schváleno"
 
 #: app/blueprints/packages/releases.py:85
 msgid "Import from Git"
-msgstr ""
+msgstr "Importovat z Gitu"
 
 #: app/blueprints/packages/releases.py:85
 msgid "Upload .zip file"
-msgstr ""
+msgstr "Nahrát .zip soubor"
 
 #: app/blueprints/packages/releases.py:191
 msgid "Set Min"
-msgstr ""
+msgstr "Nastavit minimum"
 
 #: app/blueprints/packages/releases.py:194
 msgid "Set Max"
-msgstr ""
+msgstr "Nastavit maximum"
 
 #: app/blueprints/packages/releases.py:197
 msgid "Only change values previously set as none"
-msgstr ""
+msgstr "Změnit pouze hodnoty předešle nastavené na \"none\""
 
 #: app/blueprints/packages/releases.py:198
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovat"
 
 #: app/blueprints/packages/releases.py:247
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
-msgstr ""
+msgstr "Spustit"
 
 #: app/blueprints/packages/releases.py:248
 msgid "New Commit"
-msgstr ""
+msgstr "Nový Commit"
 
 #: app/blueprints/packages/releases.py:249 app/templates/admin/tags/list.html:8
 msgid "New Tag"
-msgstr ""
+msgstr "Nový tag"
 
 #: app/blueprints/packages/releases.py:251
 msgid "Branch name"
-msgstr ""
+msgstr "Název branche"
 
 #: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:38
 msgid "Action"
-msgstr ""
+msgstr "Akce"
 
 #: app/blueprints/packages/releases.py:253
 msgid "Send notification and mark as outdated"
-msgstr ""
+msgstr "Odeslat upozornění a označit jako zastaralé"
 
 #: app/blueprints/packages/releases.py:253
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
-msgstr ""
+msgstr "Vydat"
 
 #: app/blueprints/packages/releases.py:255
 msgid "Save Settings"
-msgstr ""
+msgstr "Uložit nastavení"
 
 #: app/blueprints/packages/releases.py:256
 msgid "Disable Automation"
-msgstr ""
+msgstr "Deaktivovat automatizaci"
 
 #: app/blueprints/packages/releases.py:295
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
+"Prosím zadejte URL adresu Git repozitáře pro aktivaci automatického vydávání"
 
 #: app/blueprints/packages/releases.py:311
 msgid "Deleted update configuration"
-msgstr ""
+msgstr "Smazat aktualizaci nastavení"
 
 #: app/blueprints/packages/releases.py:319
 msgid "Now, please create an initial release"
-msgstr ""
+msgstr "Nyní prosím vytvořte prvotní vydání"
 
 #: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:178
 #: app/blueprints/threads/__init__.py:179
 #: app/blueprints/threads/__init__.py:279
 msgid "Comment"
-msgstr ""
+msgstr "Komentář"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "Hodnocení"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:117
 #: app/templates/macros/reviews.html:160
 msgid "Yes"
-msgstr ""
+msgstr "Ano"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:121
 #: app/templates/macros/reviews.html:164
 msgid "Neutral"
-msgstr ""
+msgstr "Neutrální"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:125
 #: app/templates/macros/reviews.html:168
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: app/blueprints/packages/reviews.py:56
 msgid "You can't review your own package!"
-msgstr ""
+msgstr "Nemůžete hodnotit vlastní balíček!"
 
 #: app/blueprints/packages/reviews.py:66
 msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
+"V krátké době jste hodnotili příliš mnoho balíčků. Prosím zopakujte akci "
+"později a zvažte, zda by nešlo dělat hodnocení o něco detailněji"
 
 #: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:204
 #: app/blueprints/threads/__init__.py:237
 #: app/blueprints/threads/__init__.py:329 app/blueprints/users/settings.py:88
 #: app/logic/packages.py:125
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "Směrovnání na blokované stránky není povoleno"
 
 #: app/blueprints/packages/reviews.py:183
 msgid "You can't vote on the reviews on your own package!"
-msgstr ""
+msgstr "Nemůžete hlasovat v hodnocení vlastního balíčku!"
 
 #: app/blueprints/packages/reviews.py:191
 msgid "You can't vote on your own reviews!"
-msgstr ""
+msgstr "Nemůžete hlasovat ve vlastním hodnocení!"
 
 #: app/blueprints/packages/screenshots.py:33
 #: app/blueprints/packages/screenshots.py:39
 msgid "Title/Caption"
-msgstr ""
+msgstr "Titulek/Nadpis"
 
 #: app/blueprints/packages/screenshots.py:45
 #: app/templates/packages/screenshots.html:89
 msgid "Cover Image"
-msgstr ""
+msgstr "Obrázek obálky"
 
 #: app/blueprints/report/__init__.py:34 app/templates/users/modtools.html:62
 msgid "Message"
-msgstr ""
+msgstr "Zpráva"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:50
 #: app/templates/packages/view.html:576 app/templates/report/index.html:4
 #: app/templates/report/index.html:10 app/templates/users/profile.html:28
 msgid "Report"
-msgstr ""
+msgstr "Report"
 
 #: app/blueprints/threads/__init__.py:67
 msgid "Already subscribed!"
-msgstr ""
+msgstr "Již odebíráno!"
 
 #: app/blueprints/threads/__init__.py:69
 msgid "Subscribed to thread"
-msgstr ""
+msgstr "Odebírat vlákno"
 
 #: app/blueprints/threads/__init__.py:84
 msgid "Unsubscribed!"
-msgstr ""
+msgstr "Zrušit odběr!"
 
 #: app/blueprints/threads/__init__.py:88
 msgid "Already not subscribed!"
-msgstr ""
+msgstr "Odběr již zrušen!"
 
 #: app/blueprints/threads/__init__.py:107
 msgid "Locked thread"
-msgstr ""
+msgstr "Zamčené vlákno"
 
 #: app/blueprints/threads/__init__.py:110
 msgid "Unlocked thread"
-msgstr ""
+msgstr "Odemčené vlákno"
 
 #: app/blueprints/threads/__init__.py:159
 msgid "Cannot delete thread opening post!"
-msgstr ""
+msgstr "Není možné smazat požadavek na otevření vlákna!"
 
 #: app/blueprints/threads/__init__.py:233
 msgid "Please wait before commenting again"
-msgstr ""
+msgstr "Prosím vydržte, než budete moci znovu komentovat"
 
 #: app/blueprints/threads/__init__.py:280
 msgid "Private"
-msgstr ""
+msgstr "Soukromý"
 
 #: app/blueprints/threads/__init__.py:281
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
-msgstr ""
+msgstr "Otevřít vlákno"
 
 #: app/blueprints/threads/__init__.py:304
 msgid "Unable to create thread!"
-msgstr ""
+msgstr "Vlákno nebylo možné vytvořit!"
 
 #: app/blueprints/threads/__init__.py:310
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Schvalovací vlákno již existuje! Zvažte odpověď tam"
 
 #: app/blueprints/threads/__init__.py:314
 msgid "Please wait before opening another thread"
-msgstr ""
+msgstr "Prosím počkejte, než otevřete další vlákno"
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr ""
+msgstr "Uživatelské jméno nebo e-mail"
 
 #: app/blueprints/users/account.py:38 app/blueprints/users/account.py:108
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
 #: app/templates/users/modtools.html:35
 msgid "Password"
-msgstr ""
+msgstr "Heslo"
 
 #: app/blueprints/users/account.py:39 app/blueprints/zipgrep/__init__.py:36
 msgid "Remember me"
-msgstr ""
+msgstr "Pamatovat si mě"
 
 #: app/blueprints/users/account.py:40 app/templates/base.html:180
 #: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
-msgstr ""
+msgstr "Přihlásit se"
 
 #: app/blueprints/users/account.py:46
 msgid "Incorrect email or password"
-msgstr ""
+msgstr "Špatný e-mail nebo heslo"
 
 #: app/blueprints/users/account.py:54
 #, python-format
 msgid "User %(username)s does not exist"
-msgstr ""
+msgstr "Uživatel %(username)s neexistuje"
 
 #: app/blueprints/users/account.py:57
 msgid "Incorrect password. Did you set one?"
-msgstr ""
+msgstr "Neplatné heslo. Zadali jste nějaké?"
 
 #: app/blueprints/users/account.py:60
 msgid "You need to confirm the registration email"
-msgstr ""
+msgstr "Je třeba potvrdit registrační e-mail"
 
 #: app/blueprints/users/account.py:68
 msgid "Login failed"
-msgstr ""
+msgstr "Přihlášení selhalo"
 
 #: app/blueprints/users/account.py:103 app/blueprints/users/settings.py:50
 msgid "Display Name"
-msgstr ""
+msgstr "Zobrazované jméno"
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/settings.py:272
 #: app/templates/users/list.html:18
 msgid "Username"
-msgstr ""
+msgstr "Uživatelské jméno"
 
 #: app/blueprints/users/account.py:105
 msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
+"Povoleny jsou pouze písmena (A-Za-z), čísla (0-9), podtržítko (_), mínus (-)"
+", a tečka (.)"
 
 #: app/blueprints/users/account.py:107 app/blueprints/users/account.py:189
 #: app/blueprints/users/account.py:224 app/blueprints/users/account.py:374
 #: app/blueprints/users/settings.py:122
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: app/blueprints/users/account.py:109
 msgid "What is the result of the above calculation?"
-msgstr ""
+msgstr "Jaký je výsledek výše uvedeného výpočtu?"
 
 #: app/blueprints/users/account.py:110
 msgid "I agree"
-msgstr ""
+msgstr "Souhlasím"
 
 #: app/blueprints/users/account.py:111 app/templates/users/login.html:34
 #: app/templates/users/register.html:4
 msgid "Register"
-msgstr ""
+msgstr "Registrovat"
 
 #: app/blueprints/users/account.py:116
 msgid "Incorrect captcha answer"
-msgstr ""
+msgstr "Špatně zadaná captcha"
 
 #: app/blueprints/users/account.py:120
 msgid "Username is invalid"
-msgstr ""
+msgstr "Neplatné uživatelské jméno"
 
 #: app/blueprints/users/account.py:131
 msgid "An account already exists for that username but hasn't been claimed yet."
-msgstr ""
+msgstr "Účet pro toho uživatelské jméno již existuje, ale nebyl jestě potvrzen."
 
 #: app/blueprints/users/account.py:134 app/blueprints/users/account.py:141
 msgid "That username/display name is already in use, please choose another."
 msgstr ""
+"Toto uživatelské nebo zobrazované jméno se již používá, vyberte pro to "
+"prosím jiné."
 
 #: app/blueprints/users/account.py:146 app/blueprints/users/account.py:258
 msgid "Email already in use"
-msgstr ""
+msgstr "Tento e-mail se již používá"
 
 #: app/blueprints/users/account.py:147 app/blueprints/users/account.py:259
 #, python-format
@@ -646,47 +656,51 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
+"Účet se nepodařilo vytvořit, protože e-mail %(display_name)s se již používá. "
+"Zkuste jinou e-mailovou adresu."
 
 #: app/blueprints/users/account.py:151 app/blueprints/users/account.py:253
 #: app/blueprints/users/settings.py:150
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
+"Tato e-mailová adresa byla odhlášena, nebo zařazena na černou listinu a "
+"nelze ji pro to použít"
 
 #: app/blueprints/users/account.py:190
 msgid "Reset Password"
-msgstr ""
+msgstr "Resetovat heslo"
 
 #: app/blueprints/users/account.py:215
 msgid "Unable to find account"
-msgstr ""
+msgstr "Nepodařilo se najít účet"
 
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:232
 msgid "New password"
-msgstr ""
+msgstr "Nové heslo"
 
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:233
 msgid "Verify password"
-msgstr ""
+msgstr "Ověřte heslo"
 
 #: app/blueprints/users/account.py:227 app/blueprints/users/account.py:234
 msgid "Passwords must match"
-msgstr ""
+msgstr "Hesla se musí shodovat"
 
 #: app/blueprints/users/account.py:231
 msgid "Old password"
-msgstr ""
+msgstr "Staré heslo"
 
 #: app/blueprints/users/account.py:242
 msgid "Passwords do not match"
-msgstr ""
+msgstr "Hesla se neshodují"
 
 #: app/blueprints/users/account.py:273 app/blueprints/users/account.py:277
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "Vaše heslo bylo úspěšně změněno."
 
 #: app/blueprints/users/account.py:292
 msgid "Old password is incorrect"
-msgstr ""
+msgstr "Staré heslo je špatně zadané"
 
 #: app/blueprints/users/account.py:320
 msgid "Unknown verification token!"
@@ -1109,117 +1123,120 @@ msgstr ""
 #: app/templates/base.html:53
 #, python-format
 msgid "Search %(type)s"
-msgstr ""
+msgstr "Vyhledat %(type)s"
 
 #: app/templates/base.html:53 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
-msgstr ""
+msgstr "Vyhledat ve všech balíčcích"
 
 #: app/templates/base.html:72
 msgid "Work Queue"
-msgstr ""
+msgstr "Pracovní fronta"
 
 #: app/templates/base.html:85 app/templates/base.html:137
 msgid "To do list"
-msgstr ""
+msgstr "To do list"
 
 #: app/templates/base.html:94 app/templates/notifications/list.html:4
 msgid "Notifications"
-msgstr ""
+msgstr "Upozornění"
 
 #: app/templates/base.html:115
 msgid "Add Package"
-msgstr ""
+msgstr "Přidat balíček"
 
 #: app/templates/base.html:132
 msgid "Profile"
-msgstr ""
+msgstr "Profil"
 
 #: app/templates/base.html:155
 msgid "Admin"
-msgstr ""
+msgstr "Admin"
 
 #: app/templates/base.html:158
 msgid "License Editor"
-msgstr ""
+msgstr "Editor licencí"
 
 #: app/templates/base.html:163
 msgid "Restore Package"
-msgstr ""
+msgstr "Obnovit balíček"
 
 #: app/templates/base.html:166
 msgid "Tag Editor"
-msgstr ""
+msgstr "Editor tagů"
 
 #: app/templates/base.html:168
 msgid "Create Tag"
-msgstr ""
+msgstr "Vytvořit tag"
 
 #: app/templates/base.html:173 app/templates/packages/release_new.html:12
 msgid "Settings"
-msgstr ""
+msgstr "Nastavení"
 
 #: app/templates/base.html:176
 msgid "Sign out"
-msgstr ""
+msgstr "Odhlásit se"
 
 #: app/templates/base.html:205
 msgid "Help translate ContentDB"
-msgstr ""
+msgstr "Pomocte přeložit ContentDB"
 
 #: app/templates/base.html:249
+#, fuzzy
 msgid "About"
-msgstr ""
+msgstr "About"
 
 #: app/templates/base.html:250
 msgid "Rules"
-msgstr ""
+msgstr "Pravidla"
 
 #: app/templates/base.html:251
 msgid "Policy and Guidance"
-msgstr ""
+msgstr "Pravidla a návody"
 
 #: app/templates/base.html:252
 msgid "API"
-msgstr ""
+msgstr "API"
 
 #: app/templates/base.html:253 app/templates/users/register.html:37
 msgid "Privacy Policy"
-msgstr ""
+msgstr "Podmínky osobní"
 
 #: app/templates/base.html:255
 msgid "Report / DMCA"
-msgstr ""
+msgstr "Nahlásit / DMCA"
 
 #: app/templates/base.html:257
 msgid "Stats / Monitoring"
-msgstr ""
+msgstr "Stistika / Monitoring"
 
 #: app/templates/base.html:258
 msgid "User List"
-msgstr ""
+msgstr "Seznam uživatelů"
 
 #: app/templates/base.html:259 app/templates/packages/view.html:194
 #: app/templates/packages/view.html:565 app/templates/threads/list.html:4
 msgid "Threads"
-msgstr ""
+msgstr "Vlákna"
 
 #: app/templates/base.html:260
 msgid "Support Packages"
-msgstr ""
+msgstr "Podpora balíčků"
 
 #: app/templates/base.html:261
 msgid "Source Code"
-msgstr ""
+msgstr "Zdrojový kód"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "Vítejte"
 
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
+"Vítejte na nejlepším místě, kde najdete módy, hry a balíčky textur pro "
+"Minetest"
 
 #: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
@@ -1227,30 +1244,30 @@ msgstr ""
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
-msgstr ""
+msgstr "%(title)s od %(author)s"
 
 #: app/templates/index.html:47
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
-msgstr ""
+msgstr "<strong>%(title)s</strong> od %(author)s"
 
 #: app/templates/index.html:73 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:198 app/templates/packages/view.html:299
 #: app/templates/users/profile.html:216
 msgid "Reviews"
-msgstr ""
+msgstr "Recenze"
 
 #: app/templates/index.html:92
 msgid "Previous"
-msgstr ""
+msgstr "Předchozí"
 
 #: app/templates/index.html:96 app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr ""
+msgstr "Další"
 
 #: app/templates/index.html:102
 msgid "Featured"
-msgstr ""
+msgstr "Představeno"
 
 #: app/templates/index.html:107 app/templates/index.html:114
 #: app/templates/index.html:121 app/templates/index.html:128
@@ -1261,231 +1278,241 @@ msgstr ""
 #: app/templates/packages/game_hub.html:51
 #: app/templates/packages/game_hub.html:58
 msgid "See more"
-msgstr ""
+msgstr "Ukázat více"
 
 #: app/templates/index.html:109 app/templates/packages/game_hub.html:32
 msgid "Recently Added"
-msgstr ""
+msgstr "Nedávno přidáno"
 
 #: app/templates/index.html:116 app/templates/packages/game_hub.html:39
 msgid "Recently Updated"
-msgstr ""
+msgstr "Nedávno aktualizováno"
 
 #: app/templates/index.html:123
 msgid "Top Games"
-msgstr ""
+msgstr "Nejlepší hry"
 
 #: app/templates/index.html:130 app/templates/packages/game_hub.html:46
 msgid "Top Mods"
-msgstr ""
+msgstr "Nejlepší módy"
 
 #: app/templates/index.html:137 app/templates/packages/game_hub.html:53
 msgid "Top Texture Packs"
-msgstr ""
+msgstr "Nejlepší balíčky textur"
 
 #: app/templates/index.html:141
 msgid "Search by Tags"
-msgstr ""
+msgstr "Hledat podle tagu"
 
 #: app/templates/index.html:159 app/templates/packages/game_hub.html:60
 msgid "Highest Reviewed"
-msgstr ""
+msgstr "Nejlépe hodnocené"
 
 #: app/templates/index.html:166
 msgid "Recent Positive Reviews"
-msgstr ""
+msgstr "Nedávná pozitivní hodnocení"
 
 #: app/templates/index.html:173
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
-msgstr ""
+msgstr "CDB má %(count)d balíčků, které byly dohromady %(downloads)d staženy."
 
 #: app/templates/admin/audit_view.html:16
-#, python-format
+#, fuzzy, python-format
 msgid "Caused by %(author)s."
-msgstr ""
+msgstr "Způsobené %(author)s."
 
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
-msgstr ""
+msgstr "Učiněno smazaným uživatelem."
 
 #: app/templates/admin/list.html:62
 msgid "Deletion is permanent."
-msgstr ""
+msgstr "Permanentní smazání."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
-msgstr ""
+msgstr "Odeslat hromadný e-mail"
 
 #: app/templates/admin/send_bulk_notification.html:4
 msgid "Send bulk notification"
-msgstr ""
+msgstr "Odeslat hromadné upozornění"
 
 #: app/templates/admin/send_email.html:4
 #, python-format
 msgid "Send email to %(username)s"
-msgstr ""
+msgstr "Odeslat e-mail %(username)s"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
-msgstr ""
+msgstr "Nová licence"
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr ""
+msgstr "Licence"
 
 #: app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:44
 msgid "Description"
-msgstr ""
+msgstr "Popiska"
 
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
-msgstr ""
+msgstr "Shlédnuto"
 
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Minetest Versions"
-msgstr ""
+msgstr "Verze Minetestu"
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
-msgstr ""
+msgstr "Nová verze"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
 msgid "Warnings"
-msgstr ""
+msgstr "Varování"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
-msgstr ""
+msgstr "Nové varování"
 
 #: app/templates/api/create_edit_token.html:5
 #, python-format
 msgid "Edit - %(name)s"
-msgstr ""
+msgstr "Editovat - %(name)s"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
-msgstr ""
+msgstr "Vytvořit API Token"
 
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
-msgstr ""
+msgstr "API tokeny umožňují skriptům provádět věci za vašeho uživatele."
 
 #: app/templates/api/create_edit_token.html:25
 msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
+"Buďte opatrní s tím, s čím/kým sdílíte tokeny, protože jste odpovědní za "
+"akce s nimi vykonané."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "Access Token"
-msgstr ""
+msgstr "Přístupový token"
 
 #: app/templates/api/create_edit_token.html:33
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
 msgstr ""
+"Z bezpečnostních důvodů se přístupové tokeny zobrazí pouze jednou. V případě "
+"ztráty vygenerujte nový token."
 
 #: app/templates/api/create_edit_token.html:40
 msgid "Reset"
-msgstr ""
+msgstr "Resetovat"
 
 #: app/templates/api/create_edit_token.html:49
 msgid "Human-readable name to tell tokens apart."
-msgstr ""
+msgstr "Lidsky čitelné jméno, aby bylo možné rozlišit tokeny."
 
 #: app/templates/api/create_edit_token.html:50
 msgid "Recommended: Only allows token to interact with a particular package."
-msgstr ""
+msgstr "Doporučeno: Umožněte interakci tokenu pouze s konkrétním balíčkem."
 
 #: app/templates/api/list_tokens.html:4
 #, python-format
 msgid "API Tokens | %(username)s"
-msgstr ""
+msgstr "API tokeny | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/macros/topics.html:29
 #: app/templates/macros/topics.html:65
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
-msgstr ""
+msgstr "Vytvořit"
 
 #: app/templates/api/list_tokens.html:9
 msgid "API Documentation"
-msgstr ""
+msgstr "API Dokumentace"
 
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
-msgstr ""
+msgstr "Není vytvořen žádný token"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
-msgstr ""
+msgstr "Podpora balíčků"
 
 #: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
-msgstr ""
+msgstr "Někteří tvůrci obsahu přijímají za svou práci dary."
 
 #: app/templates/donate/index.html:9
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
+"Dary jsou skvělý způsob, jak podpořit své oblíbené moddery, umělce a "
+"vývojáře her."
 
 #: app/templates/donate/index.html:37
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "od %(author)s"
 
 #: app/templates/donate/index.html:42
 msgid "View package"
-msgstr ""
+msgstr "Prohlídnout balíček"
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:95
 msgid "Donate"
-msgstr ""
+msgstr "Daruj"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews"
-msgstr ""
+msgstr "Založeno na Vašem hodnocení"
 
 #: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Considering reviewing your "
 "favourite packages"
 msgstr ""
+"Žádné hodnocení balíčků přijímajících dary. Zvažte ohodnocení vašich "
+"oblíbených balíčků"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
 msgstr ""
+"Chcete-li zobrazit doporučení na základě balíčků, které jste hodnotili, "
+"přihlaste se"
 
 #: app/templates/donate/index.html:78
 msgid "Top packages"
-msgstr ""
+msgstr "Nejlepší balíčky"
 
 #: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d balíčků hledá dárce"
 
 #: app/templates/emails/notification.html:10
-#, python-format
+#, fuzzy, python-format
 msgid "From %(username)s and on package %(package)s."
-msgstr ""
+msgstr "Od %(username)s a v balíčku %(package)s."
 
 #: app/templates/emails/notification.html:13
 #, python-format
 msgid "From %(username)s."
-msgstr ""
+msgstr "Od %(username)s."
 
 #: app/templates/emails/notification.html:19
 msgid "View Notification"
-msgstr ""
+msgstr "Ukázat upozornění"
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:46
@@ -1493,262 +1520,280 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
 msgstr ""
+"Tento e-mail jste obdrželi, protože jste registrovaným uživatelem ContentDB "
+"a máte povolená e-mailová upozornění."
 
 #: app/templates/emails/notification.html:30
 #: app/templates/emails/notification_digest.html:50
 msgid "Manage your preferences"
-msgstr ""
+msgstr "Spravujte své preference"
 
 #: app/templates/emails/notification.html:37
 #, python-format
 msgid "This is a '%(type)s' notification."
-msgstr ""
+msgstr "Toto je '%(type)s' oznámení."
 
 #: app/templates/emails/notification_digest.html:14
 #: app/templates/emails/notification_digest.html:31
 #, python-format
 msgid "from %(username)s."
-msgstr ""
+msgstr "od %(username)s."
 
 #: app/templates/emails/notification_digest.html:24
 msgid "Other Notifications"
-msgstr ""
+msgstr "Další upozornění"
 
 #: app/templates/emails/notification_digest.html:39
 msgid "View Notifications"
-msgstr ""
+msgstr "Zobrazit upozornění"
 
 #: app/templates/emails/unable_to_find_account.html:2
 msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
+"Nemohli jsme provést reset hesla, protože jsme nemohli najít účet spojený s "
+"uvedeným e-mailem."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
+"Toto může to být způsobeno tím, že jste u svého účtu použili jiný e-mail, "
+"nebo jste svůj e-mail nikdy nepotvrdili."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
-msgstr ""
+msgstr "K přihlášení můžete použít GitHub, pokud je spojen s vaším účtem."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
 msgstr ""
+"V opačném případě budete možná muset požádat o pomoc přímo Rubenwardyho."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
 msgstr ""
+"Pokud jste neočekávali, že tento e-mail obdržíte, můžete jej klidně "
+"ignorovat."
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
-msgstr ""
+msgstr "Ahoj!"
 
 #: app/templates/emails/verify.html:7
 msgid ""
 "This email has been sent to you because someone (hopefully you) has "
 "entered your email address as a user's email."
 msgstr ""
+"Tento e-mail vám byl zaslán, protože někdo (doufejme, že vy) zadal vaši e-"
+"mailovou adresu jako e-mail uživatele."
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
-msgstr ""
+msgstr "Pokud jste to nebyli vy, pak tento e-mail jednoduše smažte."
 
 #: app/templates/emails/verify.html:15
 msgid "If this was you, then please click this link to confirm the address:"
-msgstr ""
+msgstr "Pokud jste to byli vy, kliknutím na tento odkaz potvrďte adresu:"
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
-msgstr ""
+msgstr "Potvrďte e-mailovou adresu"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
 msgid "Or paste this into your browser:"
-msgstr ""
+msgstr "Nebo vložte toto do prohlížeče:"
 
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
+"Je nám líto, že odcházíte. Než bude váš e-mail blokován, musíte udělat ještě "
+"jednu věc."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
 msgstr ""
+"Tento e-mail jste obdrželi, protože někdo (doufejme, že vy) zadal vaši e-"
+"mailovou adresu do formuláře pro odhlášení."
 
 #: app/templates/macros/audit_log.html:13
 #, python-format
 msgid "Severity: %(sev)s."
-msgstr ""
+msgstr "Závažnost: %(sev)s."
 
 #: app/templates/macros/audit_log.html:32
 msgid "Deleted User"
-msgstr ""
+msgstr "Smazaný uživatel"
 
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
-msgstr ""
+msgstr "Žádné záznamy protokolu auditu."
 
 #: app/templates/macros/forms.html:107
 msgid "Start typing to see suggestions"
-msgstr ""
+msgstr "Chcete-li zobrazit návrhy, začněte psát"
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
 msgid "State"
-msgstr ""
+msgstr "Stav"
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
-msgstr ""
+msgstr "Nastavte vydání"
 
 #: app/templates/macros/package_approval.html:31
 msgid "You need to create a release before this package can be approved."
-msgstr ""
+msgstr "Než bude možné tento balíček schválit, musíte vytvořit vydání."
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
-msgstr ""
+msgstr "Vydání se stále importuje, nebo došlo k chybě."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr ""
+msgstr "Měli byste přidat alespoň jeden snímek obrazovky."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
-msgstr ""
+msgstr "Počkejte prosím na schválení vydání."
 
 #: app/templates/macros/package_approval.html:64
 msgid "You can now approve this package if you're ready."
-msgstr ""
+msgstr "Nyní můžete tento balíček schválit, pokud jste připraveni."
 
 #: app/templates/macros/package_approval.html:66
 msgid "Please wait for the package to be approved."
-msgstr ""
+msgstr "Prosím počkejte na schválení balíčku."
 
 #: app/templates/macros/package_approval.html:70
 msgid "You can now submit this package for approval if you're ready."
-msgstr ""
+msgstr "Nyní můžete tento balíček odeslat ke schválení, pokud jste připraveni."
 
 #: app/templates/macros/package_approval.html:72
 msgid "This package can be submitted for approval when ready."
-msgstr ""
+msgstr "Až bude balíček připraven, bude jej možné odeslat ke schválení."
 
 #: app/templates/macros/package_approval.html:102
 msgid "Please make sure that this package has the right to the names it uses."
-msgstr ""
+msgstr "Ujistěte se prosím, že tento balíček používá správné názvy."
 
 #: app/templates/macros/package_approval.html:104
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr ""
+"Ujistěte se prosím, že tento balíček má oprávnění na tyto jména %(names)s"
 
 #: app/templates/macros/package_approval.html:115
 msgid "Package approval thread"
-msgstr ""
+msgstr "Schvalovací vlákno"
 
 #: app/templates/macros/package_approval.html:116
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
+"Pokud máte otázku pro schvalovatele nebo autora balíčku, můžete k tomu "
+"otevřít vlákno."
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
-msgstr ""
+msgstr "<b>Upozornění:</b> Kód a média nejsou zdarma."
 
 #: app/templates/macros/packagegridtile.html:29
 msgid "<b>Warning:</b> Non-free code."
-msgstr ""
+msgstr "<b>Upozornění:</b> Kód není zdarma."
 
 #: app/templates/macros/packagegridtile.html:33
 msgid "<b>Warning:</b> Non-free media."
-msgstr ""
+msgstr "<b>Upozornění:</b> Média, která nejsou zdarma."
 
 #: app/templates/macros/packagegridtile.html:45
 msgid "No packages available"
-msgstr ""
+msgstr "Nejsou k dispozici žádné balíčky"
 
 #: app/templates/macros/releases.html:20 app/templates/macros/releases.html:47
 #: app/templates/macros/releases.html:89
 #, python-format
 msgid "created %(date)s"
-msgstr ""
+msgstr "vytvořeno %(date)s"
 
 #: app/templates/macros/releases.html:60
 msgid "Edit / Approve"
-msgstr ""
+msgstr "Editovat / Schválit"
 
 #: app/templates/macros/releases.html:62 app/templates/packages/view.html:119
 #: app/templates/packages/view.html:253
 msgid "Edit"
-msgstr ""
+msgstr "Editovat"
 
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
-msgstr ""
+msgstr "Importuji..."
 
 #: app/templates/macros/releases.html:96
 msgid "Waiting for approval."
-msgstr ""
+msgstr "Čeká na schválení."
 
 #: app/templates/macros/releases.html:103
 msgid "No releases available."
-msgstr ""
+msgstr "Nejsou k dispozici žádná vydání."
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
-msgstr ""
+msgstr "Užitečný"
 
 #: app/templates/macros/reviews.html:13
 msgid "Unhelpful"
-msgstr ""
+msgstr "Neužitečný"
 
 #: app/templates/macros/reviews.html:84
 #, python-format
 msgid "%(num)d comments"
-msgstr ""
+msgstr "%(num)d komentářů"
 
 #: app/templates/macros/reviews.html:96
 msgid "No reviews, yet."
-msgstr ""
+msgstr "Zatím žádné hodnocení."
 
 #: app/templates/macros/reviews.html:106 app/templates/macros/reviews.html:149
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
-msgstr ""
+msgstr "Recenze"
 
 #: app/templates/macros/reviews.html:111 app/templates/macros/reviews.html:154
 #: app/templates/packages/review_create_edit.html:35
 #, python-format
 msgid "Do you recommend this %(type)s?"
-msgstr ""
+msgstr "Doporučujete tento %(type)s?"
 
 #: app/templates/macros/reviews.html:130
 #: app/templates/packages/review_create_edit.html:40
 msgid "Why or why not? Try to be constructive"
-msgstr ""
+msgstr "Proč nebo proč ne? Snažte se být konstruktivní"
 
 #: app/templates/macros/reviews.html:139
 msgid "Post Review"
-msgstr ""
+msgstr "Odeslat recenzi"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "%(display_name)s balíčky"
 
 #: app/templates/macros/stats.html:36
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "K zobrazení grafů a statistik je nutný JavaScript"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
@@ -1761,15 +1806,15 @@ msgstr ""
 #: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
 #, python-format
 msgid "%(downloads)s per day"
-msgstr ""
+msgstr "%(downloads)s za den"
 
 #: app/templates/macros/stats.html:76
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "Staženo za posledních 30 dní"
 
 #: app/templates/macros/stats.html:89
 msgid "Loading..."
-msgstr ""
+msgstr "Načítaní..."
 
 #: app/templates/macros/stats.html:92
 msgid "No data"
@@ -1826,19 +1871,19 @@ msgstr ""
 
 #: app/templates/macros/threads.html:26
 msgid "Maintainer"
-msgstr ""
+msgstr "Spravuje"
 
 #: app/templates/macros/threads.html:120
 msgid "This thread has been locked by a moderator."
-msgstr ""
+msgstr "Toto vlákno bylo uzamčeno moderátorem."
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "Odpověď"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
-msgstr ""
+msgstr "Před dalším komentářem prosím počkejte."
 
 #: app/templates/macros/threads.html:157
 msgid "This thread has been locked."
@@ -1854,15 +1899,15 @@ msgstr ""
 
 #: app/templates/macros/threads.html:197 app/templates/macros/threads.html:279
 msgid "No threads found"
-msgstr ""
+msgstr "Nebyla nalezena žádná vlákna"
 
 #: app/templates/macros/threads.html:205
 msgid "Thread"
-msgstr ""
+msgstr "Vlákno"
 
 #: app/templates/macros/threads.html:209
 msgid "Last Reply"
-msgstr ""
+msgstr "Poslední odpověď"
 
 #: app/templates/macros/todo.html:21
 #, python-format
@@ -1872,11 +1917,11 @@ msgstr ""
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:125
 #: app/templates/packages/view.html:367
 msgid "Release"
-msgstr ""
+msgstr "Vydání"
 
 #: app/templates/macros/todo.html:42
 msgid "Repo"
-msgstr ""
+msgstr "Repo"
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
@@ -1890,37 +1935,37 @@ msgstr ""
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:181
 msgid "Author"
-msgstr ""
+msgstr "Autor"
 
 #: app/templates/macros/topics.html:8
 msgid "Date"
-msgstr ""
+msgstr "Datum"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
-msgstr ""
+msgstr "Akce"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
 #: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
 #: app/templates/todo/editor.html:160 app/templates/todo/editor.html:175
 msgid "WIP"
-msgstr ""
+msgstr "WIP"
 
 #: app/templates/macros/topics.html:35
 msgid "Show"
-msgstr ""
+msgstr "Ukaž"
 
 #: app/templates/macros/topics.html:37
 msgid "Discard"
-msgstr ""
+msgstr "Zavrhnout"
 
 #: app/templates/macros/topics.html:57
 msgid "Old"
-msgstr ""
+msgstr "Starý"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Názvy modů"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
@@ -1979,15 +2024,15 @@ msgstr ""
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
-msgstr ""
+msgstr "Přezdívka"
 
 #: app/templates/packages/alias_create_edit.html:13
 msgid "Back to Aliases"
-msgstr ""
+msgstr "Zpět k přezdívkám"
 
 #: app/templates/packages/alias_list.html:4
 msgid "Aliases"
-msgstr ""
+msgstr "Přezdívky"
 
 #: app/templates/packages/alias_list.html:15
 #, python-format
@@ -3790,4 +3835,3 @@ msgstr ""
 
 #~ msgid "Mods for %(title)s"
 #~ msgstr ""
-
