@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-04-30 01:43+0100\n"
-"PO-Revision-Date: 2023-05-20 16:48+0000\n"
+"PO-Revision-Date: 2023-05-31 16:49+0000\n"
 "Last-Translator: José Muñoz <dr.cabra@disroot.org>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
 "contentdb/es/>\n"
@@ -1838,7 +1838,7 @@ msgstr "Se necesita JavaScript para mostrar gráficos y estadísticas"
 
 #: app/templates/macros/stats.html:45
 msgid "Lifetime unique downloads"
-msgstr ""
+msgstr "Descargas únicas"
 
 #: app/templates/macros/stats.html:59
 msgid "Downloads, past 7 days"
@@ -1883,6 +1883,8 @@ msgstr "Descargas por razón"
 #: app/templates/macros/stats.html:112
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
 msgstr ""
+"<b>Nueva instalación</b>: el usuario hizo clic en [Instalar] dentro de "
+"Minetest."
 
 #: app/templates/macros/stats.html:113
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
@@ -1898,6 +1900,8 @@ msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
 msgstr ""
+"<b>Otra / Desconocida</b>: descargado por un navegador web o una versión de "
+"Minetest desactualizada (anterior a la 5.5)."
 
 #: app/templates/macros/stats.html:127
 msgid "Need more stats?"
@@ -1921,7 +1925,7 @@ msgstr "Este hilo ha sido bloqueado por un moderador."
 
 #: app/templates/macros/threads.html:130
 msgid "Reply"
-msgstr ""
+msgstr "Responder"
 
 #: app/templates/macros/threads.html:151
 msgid "Please wait before commenting again."
@@ -2219,6 +2223,7 @@ msgstr "Los vídeos de YouTube se mostrarán incrustados."
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
 msgstr ""
+"Si está en blanco, se utilizará la URL de donación del autor en su lugar."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2273,7 +2278,7 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:44
 msgid "Added by Editor"
-msgstr ""
+msgstr "Añadido por el editor"
 
 #: app/templates/packages/game_support.html:46
 msgid "mod.conf"
@@ -2286,13 +2291,15 @@ msgstr "No se requiere ningún juego específico"
 
 #: app/templates/packages/game_support.html:68
 msgid "Generated mod.conf lines"
-msgstr ""
+msgstr "Líneas mod.conf generadas"
 
 #: app/templates/packages/game_support.html:82
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
 msgstr ""
+"Tienes que definir manualmente al menos un juego compatible antes de poder "
+"desactivar esto."
 
 #: app/templates/packages/game_support.html:88
 msgid "Editor Overrides"
@@ -2324,21 +2331,23 @@ msgstr "Este paquete se encuentra en proceso de revisión"
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr ""
+msgstr "Paquete aún no presentado"
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
-msgstr ""
+msgstr "Este paquete se ha creado pero aún no se ha enviado para su aprobación."
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
 msgstr ""
+"Este paquete está siendo revisado actualmente, y se necesitan cambios antes "
+"de poder añadirlo."
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr ""
+msgstr "Por favor, vuelve a revisar más tarde."
 
 #: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
@@ -2346,7 +2355,7 @@ msgstr "O, si eres el autor, inicia sesión para ver más información."
 
 #: app/templates/packages/gone.html:48
 msgid "Login"
-msgstr ""
+msgstr "Iniciar sesión"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2419,7 +2428,6 @@ msgstr "Versiones compatibles de Minetest"
 
 #: app/templates/packages/release_edit.html:58
 #: app/templates/packages/release_new.html:80
-#, fuzzy
 msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
@@ -2559,6 +2567,8 @@ msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
+"ContentDB comprobará tu repositorio Git cada día, pero puedes utilizar "
+"webhooks o la API para actualizaciones más rápidas."
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
@@ -2608,7 +2618,7 @@ msgstr ""
 
 #: app/templates/packages/releases_list.html:24
 msgid "Bulk update"
-msgstr ""
+msgstr "Actualización masiva"
 
 #: app/templates/packages/remove.html:9
 #, python-format
@@ -2624,6 +2634,13 @@ msgid ""
 "future.\n"
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
+"Para evitar la pérdida de datos, no puede eliminar paquetes de forma "
+"permanente.\n"
+"\t\t\tPuede eliminarlos de ContentDB, lo que provocará que no sean\n"
+"\t\t\tvisibles para ningún usuario y podrán ser eliminados permanentemente "
+"en el futuro.\n"
+"\t\t\tEl Administrador puede restaurar los paquetes eliminados, si es "
+"necesario."
 
 #: app/templates/packages/remove.html:19
 msgid ""
@@ -2652,7 +2669,7 @@ msgstr "Cancelar"
 
 #: app/templates/packages/remove.html:39
 msgid "Unapprove"
-msgstr ""
+msgstr "Desaprobar"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2802,7 +2819,7 @@ msgstr ""
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
-msgstr ""
+msgstr "Deberías considerar usar webhooks o la API para versiones más rápidas."
 
 #: app/templates/packages/update_config.html:18
 msgid ""
@@ -2873,6 +2890,8 @@ msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
 msgstr ""
+"Este hilo sólo es visible para su creador, los mantenedores de paquetes, los "
+"usuarios de rango Aprobador o superior y los usuarios @mencionados."
 
 #: app/templates/packages/view.html:167
 msgid "Work in Progress"
@@ -2908,7 +2927,7 @@ msgstr "No puedes reseñar tu propio paquete."
 
 #: app/templates/packages/view.html:322
 msgid "Package needs to be approved before it can be reviewed."
-msgstr ""
+msgstr "El paquete debe ser aprobado antes de poder ser reseñado."
 
 #: app/templates/packages/view.html:333
 msgid "Used By"
@@ -2952,7 +2971,7 @@ msgstr "Requerido"
 
 #: app/templates/packages/view.html:420
 msgid "No required dependencies"
-msgstr ""
+msgstr "No se requieren dependencias"
 
 #: app/templates/packages/view.html:426
 msgid "Optional"
@@ -3055,7 +3074,7 @@ msgstr "Trabajando…"
 
 #: app/templates/tasks/view.html:26
 msgid "Reload the page to check for updates."
-msgstr ""
+msgstr "Recarga la página para comprobar si hay actualizaciones."
 
 #: app/templates/threads/delete_reply.html:4
 #, python-format
@@ -3066,12 +3085,12 @@ msgstr ""
 #: app/templates/threads/delete_thread.html:16
 #: app/templates/users/delete.html:13
 msgid "Deleting is permanent"
-msgstr ""
+msgstr "La eliminación es permanente"
 
 #: app/templates/threads/delete_thread.html:4
 #, python-format
 msgid "Delete \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Eliminar \"%(title)s\" por %(author)s"
 
 #: app/templates/threads/edit_reply.html:4
 #: app/templates/threads/edit_reply.html:8
@@ -3095,6 +3114,8 @@ msgid ""
 "Only you, the package author, and users of Approver rank and above can "
 "read private threads."
 msgstr ""
+"Sólo tú, el autor del paquete, y los usuarios de rango Aprobador y superior "
+"pueden leer hilos privados."
 
 #: app/templates/threads/user_comments.html:9
 #: app/templates/threads/user_comments.html:13
@@ -3121,7 +3142,7 @@ msgstr "Desbloquear"
 
 #: app/templates/threads/view.html:59
 msgid "Lock"
-msgstr ""
+msgstr "Bloquear"
 
 #: app/templates/threads/view.html:101
 msgid "This thread is visible to the following users"
@@ -3165,11 +3186,11 @@ msgstr ""
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
-msgstr ""
+msgstr "¡Todo hecho!"
 
 #: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
 msgid "License Needed"
-msgstr ""
+msgstr "Licencia necesaria"
 
 #: app/templates/todo/editor.html:127
 msgid "Tag Packages"
@@ -3255,7 +3276,7 @@ msgstr ""
 
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
-msgstr ""
+msgstr "Paquetes desactualizados"
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
@@ -3263,7 +3284,7 @@ msgstr "Ordenar por nombre"
 
 #: app/templates/todo/topics.html:20
 msgid "Sort by views"
-msgstr ""
+msgstr "Ordenar por vistas"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
@@ -3292,7 +3313,7 @@ msgstr ""
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
-msgstr ""
+msgstr "Otras cosas por hacer"
 
 #: app/templates/todo/user.html:13
 msgid "Enable email notifications"
@@ -3317,7 +3338,7 @@ msgstr ""
 
 #: app/templates/todo/user.html:56
 msgid "Potentially Outdated Packages"
-msgstr ""
+msgstr "Paquetes potencialmente desactualizados"
 
 #: app/templates/todo/user.html:58
 msgid ""
@@ -3406,7 +3427,7 @@ msgstr "Cuentas vinculadas"
 
 #: app/templates/users/account.html:40 app/templates/users/account.html:52
 msgid "Connected"
-msgstr ""
+msgstr "Conectado"
 
 #: app/templates/users/account.html:43
 #, python-format
@@ -3419,7 +3440,7 @@ msgstr ""
 
 #: app/templates/users/account.html:62
 msgid "Link Github"
-msgstr ""
+msgstr "Vincular Github"
 
 #: app/templates/users/account.html:65
 msgid "None"
@@ -3473,7 +3494,7 @@ msgstr "Tu correo electrónico nunca se compartirá con un tercero."
 #: app/templates/users/change_set_password.html:36
 #: app/templates/users/register.html:27
 msgid "Must be at least 8 characters long."
-msgstr ""
+msgstr "Debe tener al menos 8 caracteres."
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
@@ -3560,10 +3581,12 @@ msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
+"Inicie sesión en el foro y <a href=\"https://forum.minetest.net/ucp.php?i="
+"173\">haz eso aquí</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
-msgstr ""
+msgstr "Siguiente: iniciar sesión con GitHub"
 
 #: app/templates/users/claim_forums.html:55
 msgid "Option 2"
@@ -3571,7 +3594,7 @@ msgstr "Opción 2"
 
 #: app/templates/users/claim_forums.html:56
 msgid "Verification token"
-msgstr ""
+msgstr "Token de verificación"
 
 #: app/templates/users/claim_forums.html:71
 msgid ""
@@ -3579,6 +3602,8 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
+"Ve a <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
+"signature\">Panel de control del usuario&gt; Perfil &gt; Editar firma&gt;</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
@@ -3586,16 +3611,16 @@ msgstr "Pega esto en tu firma:"
 
 #: app/templates/users/claim_forums.html:81
 msgid "Click next so we can check it."
-msgstr ""
+msgstr "Haz click en siguiente para que podamos revisarlo."
 
 #: app/templates/users/claim_forums.html:84
 msgid "Don't worry, you can remove it after this is done."
-msgstr ""
+msgstr "No te preocupes, puedes quitarlo una vez hecho esto."
 
 #: app/templates/users/delete.html:4
 #, python-format
 msgid "Delete user %(username)s"
-msgstr ""
+msgstr "Eliminar usuario %(username)s"
 
 #: app/templates/users/delete.html:17
 #, python-format
@@ -3603,12 +3628,16 @@ msgid ""
 "This will delete your account, removing %(threads)d threads and "
 "%(replies)d replies."
 msgstr ""
+"Esto eliminará tu cuenta, borrando los hilos de %(threads)d y las respuestas "
+"de %(replies)d."
 
 #: app/templates/users/delete.html:22
 msgid ""
 "As you have packages and/or forum threads, your account cannot be fully "
 "deleted."
 msgstr ""
+"Como tienes paquetes y/o hilos en el foro, tu cuenta no puede ser eliminada "
+"por completo."
 
 #: app/templates/users/delete.html:23
 #, python-format
@@ -3640,6 +3669,7 @@ msgstr "Hemos enviado un correo electrónico a la dirección que especificaste."
 #: app/templates/users/email_sent.html:12
 msgid "You'll need to click the link in the email to confirm it."
 msgstr ""
+"Tendrás que hacer clic en el enlace del correo electrónico para confirmarlo."
 
 #: app/templates/users/email_sent.html:16
 msgid "The link will expire in 12 hours"
@@ -3787,12 +3817,11 @@ msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr ""
 
 #: app/templates/users/register.html:17
-#, fuzzy
 msgid ""
 "Only alphanumeric characters, periods, underscores, and minuses are "
 "allowed (a-zA-Z0-9._)"
 msgstr ""
-"Solo se permiten caracteres alfanuméricos, puntos, guiones bajos, y medios "
+"Sólo se admiten caracteres alfanuméricos, puntos, guiones bajos y minúsculas "
 "(a-zA-Z0-9._)"
 
 #: app/templates/users/register.html:20
@@ -3837,6 +3866,8 @@ msgstr "Ajustes de notificación"
 #: app/templates/users/settings_email.html:33
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr ""
+"Las notificaciones por correo electrónico están desactivadas. Haz clic en "
+"\"Guardar\" para activarlas."
 
 #: app/templates/users/settings_email.html:38
 msgid ""
