@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-30 01:43+0100\n"
+"POT-Creation-Date: 2023-06-01 18:12+0100\n"
 "PO-Revision-Date: 2023-03-18 23:48+0000\n"
 "Last-Translator: ROllerozxa <rollerozxa@voxelmanip.se>\n"
 "Language: sv\n"
@@ -19,11 +19,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:119
+#: app/__init__.py:120
 msgid "Banned:"
 msgstr "Bannad:"
 
-#: app/__init__.py:121
+#: app/__init__.py:122
 msgid "You have been banned."
 msgstr "Du har blivit bannad."
 
@@ -31,11 +31,11 @@ msgstr "Du har blivit bannad."
 #: app/templates/admin/warnings/list.html:28
 #: app/templates/modnames/list.html:16 app/templates/packages/list.html:4
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
-#: app/templates/users/profile.html:201
+#: app/templates/users/profile.html:211
 msgid "Packages"
 msgstr "Paket"
 
-#: app/template_filters.py:64
+#: app/template_filters.py:71
 #, python-format
 msgid "%(delta)s ago"
 msgstr "%(delta)s sedan"
@@ -50,10 +50,10 @@ msgstr "Namn"
 msgid "Limit to package"
 msgstr "Begränsa till paket"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:253
-#: app/blueprints/packages/packages.py:480
-#: app/blueprints/packages/packages.py:576
-#: app/blueprints/packages/packages.py:646
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:254
+#: app/blueprints/packages/packages.py:481
+#: app/blueprints/packages/packages.py:577
+#: app/blueprints/packages/packages.py:647
 #: app/blueprints/packages/releases.py:60
 #: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:48
 #: app/blueprints/packages/screenshots.py:35
@@ -108,12 +108,12 @@ msgstr "Skärmdumpar"
 msgid "Maintainers"
 msgstr "Underhållare"
 
-#: app/blueprints/packages/__init__.py:52 app/templates/base.html:151
+#: app/blueprints/packages/__init__.py:52 app/templates/base.html:156
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
 msgstr "Auditeringslogg"
 
-#: app/blueprints/packages/__init__.py:57 app/templates/base.html:142
+#: app/blueprints/packages/__init__.py:57 app/templates/base.html:147
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:234 app/templates/users/profile.html:130
 msgid "Statistics"
@@ -133,15 +133,15 @@ msgstr "Ta bort"
 msgid "Supported Games"
 msgstr "Stödda spel"
 
-#: app/blueprints/packages/packages.py:163
+#: app/blueprints/packages/packages.py:164
 msgid "Error: Another package already uses this forum topic!"
 msgstr "Fel: Ett annat paket använder redan den här forumtråden!"
 
-#: app/blueprints/packages/packages.py:169
+#: app/blueprints/packages/packages.py:170
 msgid "Error: Forum topic author doesn't match package author."
 msgstr "Fel: Forumtrådsstartaren stämmer inte överrens med paketskaparen."
 
-#: app/blueprints/packages/packages.py:172
+#: app/blueprints/packages/packages.py:173
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
@@ -149,87 +149,87 @@ msgstr ""
 "Varning: Forumtråd finns inte. Detta kan hända om tråden bara nyss har "
 "skapats."
 
-#: app/blueprints/packages/packages.py:218
+#: app/blueprints/packages/packages.py:219
 msgid "No download available."
 msgstr "Ingen nerladdning tillgänglig."
 
-#: app/blueprints/packages/packages.py:232 app/templates/packages/view.html:493
+#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:493
 msgid "Type"
 msgstr "Typ"
 
-#: app/blueprints/packages/packages.py:233
+#: app/blueprints/packages/packages.py:234
 msgid "Title (Human-readable)"
 msgstr "Titel (Människoläsbar)"
 
-#: app/blueprints/packages/packages.py:234
-#: app/blueprints/packages/packages.py:574
+#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:575
 msgid "Name (Technical)"
 msgstr "Namn (Tekniskt)"
 
-#: app/blueprints/packages/packages.py:234
-#: app/blueprints/packages/packages.py:575
+#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:576
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Endast gemena bokstäver (a-z), siffror (0-9) och understreck (_)"
 
-#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:236
 msgid "Short Description (Plaintext)"
 msgstr "Kort beskrivning (vanlig text)"
 
-#: app/blueprints/packages/packages.py:237 app/templates/packages/view.html:508
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:508
 msgid "Maintenance State"
 msgstr "Underhållsstatus"
 
-#: app/blueprints/packages/packages.py:239 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:240 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "Taggar"
 
-#: app/blueprints/packages/packages.py:240
+#: app/blueprints/packages/packages.py:241
 msgid "Content Warnings"
 msgstr "Innehållsvarningar"
 
-#: app/blueprints/packages/packages.py:241 app/templates/packages/view.html:497
+#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:497
 msgid "License"
 msgstr "Licens"
 
-#: app/blueprints/packages/packages.py:242
+#: app/blueprints/packages/packages.py:243
 msgid "Media License"
 msgstr "Medialicens"
 
-#: app/blueprints/packages/packages.py:244
+#: app/blueprints/packages/packages.py:245
 msgid "Long Description (Markdown)"
 msgstr "Lång beskrivning (Markdown)"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:247
 msgid "VCS Repository URL"
 msgstr "URL för VCS-Repository"
 
-#: app/blueprints/packages/packages.py:247 app/blueprints/users/settings.py:51
+#: app/blueprints/packages/packages.py:248 app/blueprints/users/settings.py:51
 msgid "Website URL"
 msgstr "URL för hemsida"
 
-#: app/blueprints/packages/packages.py:248
+#: app/blueprints/packages/packages.py:249
 msgid "Issue Tracker URL"
 msgstr "URL för felspårare"
 
-#: app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:250
 msgid "Forum Topic ID"
 msgstr "Forumtråd-ID"
 
-#: app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:251
 msgid "Video URL"
 msgstr "URL för video"
 
-#: app/blueprints/packages/packages.py:251
+#: app/blueprints/packages/packages.py:252
 msgid "Donate URL"
 msgstr "Donations-URL"
 
-#: app/blueprints/packages/packages.py:257
+#: app/blueprints/packages/packages.py:258
 msgid "_game is not an allowed name"
 msgstr "_game är inte ett tillåtet namn"
 
-#: app/blueprints/packages/packages.py:267
+#: app/blueprints/packages/packages.py:268
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -237,67 +237,67 @@ msgstr ""
 "Paketet existerar redan, men har blivit borttaget. Var snäll kontakta "
 "ContentDB-personal för att återställa paketet"
 
-#: app/blueprints/packages/packages.py:272
+#: app/blueprints/packages/packages.py:273
 msgid "Package already exists"
 msgstr "Paket finns redan"
 
-#: app/blueprints/packages/packages.py:332
+#: app/blueprints/packages/packages.py:333
 msgid "Unable to find that user"
 msgstr "Kunde inte hitta den användaren"
 
-#: app/blueprints/packages/packages.py:336
-#: app/blueprints/packages/screenshots.py:139
+#: app/blueprints/packages/packages.py:337
+#: app/blueprints/packages/screenshots.py:136
 #: app/blueprints/users/settings.py:107
 msgid "Permission denied"
 msgstr "Åtkomst nekad"
 
-#: app/blueprints/packages/packages.py:392
-#: app/blueprints/packages/packages.py:443
-#: app/blueprints/packages/packages.py:459
+#: app/blueprints/packages/packages.py:393
+#: app/blueprints/packages/packages.py:444
+#: app/blueprints/packages/packages.py:460
 msgid "You don't have permission to do that"
 msgstr "Du har inte tillåtelse att göra detta"
 
-#: app/blueprints/packages/packages.py:422
+#: app/blueprints/packages/packages.py:423
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Var snäll och kommentera vilka ändringar som behövs i godkänningstråden"
 
-#: app/blueprints/packages/packages.py:454
+#: app/blueprints/packages/packages.py:455
 msgid "Deleted package"
 msgstr "Borttaget paket"
 
-#: app/blueprints/packages/packages.py:470
+#: app/blueprints/packages/packages.py:471
 msgid "Unapproved package"
 msgstr "Ej godkänt paket"
 
-#: app/blueprints/packages/packages.py:479
+#: app/blueprints/packages/packages.py:480
 msgid "Maintainers (Comma-separated)"
 msgstr "Underhållare (Komma-separerat)"
 
-#: app/blueprints/packages/packages.py:488
+#: app/blueprints/packages/packages.py:489
 msgid "You don't have permission to edit maintainers"
 msgstr "Du har inte behörighet att redigera underhållare"
 
-#: app/blueprints/packages/packages.py:538
+#: app/blueprints/packages/packages.py:539
 msgid "You are not a maintainer"
 msgstr "Du är inte en underhållare"
 
-#: app/blueprints/packages/packages.py:541
+#: app/blueprints/packages/packages.py:542
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Paketägare kan inte ta bort sig själva som underhållare"
 
-#: app/blueprints/packages/packages.py:573
+#: app/blueprints/packages/packages.py:574
 msgid "Author Name"
 msgstr "Ägarnamn"
 
-#: app/blueprints/packages/packages.py:643
+#: app/blueprints/packages/packages.py:644
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Aktivera stöddetektering baserad på beroenden (rekommenderat)"
 
-#: app/blueprints/packages/packages.py:644
+#: app/blueprints/packages/packages.py:645
 msgid "Supported games (Comma-separated)"
 msgstr "Kompatibla spel (Kommaseparerad)"
 
-#: app/blueprints/packages/packages.py:645
+#: app/blueprints/packages/packages.py:646
 msgid "Unsupported games (Comma-separated)"
 msgstr "Ej kompatibla spel (Kommaseparerad)"
 
@@ -467,7 +467,7 @@ msgstr ""
 #: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:204
 #: app/blueprints/threads/__init__.py:237
 #: app/blueprints/threads/__init__.py:329 app/blueprints/users/settings.py:88
-#: app/logic/packages.py:125
+#: app/logic/packages.py:129
 msgid "Linking to blocked sites is not allowed"
 msgstr "Det är inte tillåtet att länka till blockerade webbplatser"
 
@@ -485,7 +485,7 @@ msgid "Title/Caption"
 msgstr "Titel/Undertitel"
 
 #: app/blueprints/packages/screenshots.py:45
-#: app/templates/packages/screenshots.html:89
+#: app/templates/packages/screenshots.html:110
 msgid "Cover Image"
 msgstr "Titelbild"
 
@@ -566,7 +566,7 @@ msgstr "Lösenord"
 msgid "Remember me"
 msgstr "Kom ihåg mig"
 
-#: app/blueprints/users/account.py:40 app/templates/base.html:180
+#: app/blueprints/users/account.py:40 app/templates/base.html:185
 #: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "Logga in"
@@ -938,7 +938,7 @@ msgstr "Text att hitta (regex)"
 msgid "File filter"
 msgstr "Filfilter"
 
-#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:56
+#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:61
 #: app/templates/todo/tags.html:15
 msgid "Search"
 msgstr "Sök"
@@ -988,7 +988,7 @@ msgstr "Du har inte behörighet att redigera detta paket"
 msgid "You don't have permission to change the package name"
 msgstr "Du har inte behörighet att ändra paketnamnet"
 
-#: app/logic/packages.py:171
+#: app/logic/packages.py:175
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
 msgstr "Kunde inte lägga till skyddad tagg %(title)s till paket"
@@ -1047,17 +1047,17 @@ msgstr "Spel"
 msgid "Texture Pack"
 msgstr "Texturpaket"
 
-#: app/models/packages.py:75 app/templates/base.html:34
+#: app/models/packages.py:75 app/templates/base.html:39
 #: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Moddar"
 
-#: app/models/packages.py:77 app/templates/base.html:37
+#: app/models/packages.py:77 app/templates/base.html:42
 #: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Spel"
 
-#: app/models/packages.py:79 app/templates/base.html:40
+#: app/models/packages.py:79 app/templates/base.html:45
 msgid "Texture Packs"
 msgstr "Texturpaket"
 
@@ -1131,120 +1131,118 @@ msgstr ""
 "Den sidan kunde inte hittas. Länken kanske är trasig, sidan kan ha tagits"
 " bort, eller så har du inte åtkomst till denna sida."
 
-#: app/templates/base.html:43
+#: app/templates/base.html:48
 msgid "Random"
 msgstr "Slumpmässig"
 
-#: app/templates/base.html:46 app/templates/base.html:248
+#: app/templates/base.html:51 app/templates/base.html:253
 #: app/templates/packages/bulk_update_conf.html:8
-#: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
+#: app/templates/packages/update_config.html:8
+#: app/templates/todo/game_support.html:8 app/templates/todo/user.html:45
+#: app/templates/todo/user.html:69
 msgid "Help"
 msgstr "Hjälp"
 
-#: app/templates/base.html:53
+#: app/templates/base.html:58
 #, python-format
 msgid "Search %(type)s"
 msgstr "Sök %(type)s"
 
-#: app/templates/base.html:53 app/templates/todo/tags.html:11
+#: app/templates/base.html:58 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "Sök alla paket"
 
-#: app/templates/base.html:72
+#: app/templates/base.html:77
 msgid "Work Queue"
 msgstr "Arbetskö"
 
-#: app/templates/base.html:85 app/templates/base.html:137
+#: app/templates/base.html:90 app/templates/base.html:142
 msgid "To do list"
 msgstr "Att-göra lista"
 
-#: app/templates/base.html:94 app/templates/notifications/list.html:4
+#: app/templates/base.html:99 app/templates/notifications/list.html:4
 msgid "Notifications"
 msgstr "Notiser"
 
-#: app/templates/base.html:115
+#: app/templates/base.html:120
 msgid "Add Package"
 msgstr "Lägg till paket"
 
-#: app/templates/base.html:132
+#: app/templates/base.html:137
 msgid "Profile"
 msgstr "Profil"
 
-#: app/templates/base.html:155
+#: app/templates/base.html:160
 msgid "Admin"
 msgstr "Administration"
 
-#: app/templates/base.html:158
+#: app/templates/base.html:163
 msgid "License Editor"
 msgstr "Licensredigerare"
 
-#: app/templates/base.html:163
+#: app/templates/base.html:168
 msgid "Restore Package"
 msgstr "Återställ paket"
 
-#: app/templates/base.html:166
+#: app/templates/base.html:171
 msgid "Tag Editor"
 msgstr "Taggredigerare"
 
-#: app/templates/base.html:168
+#: app/templates/base.html:173
 msgid "Create Tag"
 msgstr "Skapa tagg"
 
-#: app/templates/base.html:173 app/templates/packages/release_new.html:12
+#: app/templates/base.html:178 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "Inställningar"
 
-#: app/templates/base.html:176
+#: app/templates/base.html:181
 msgid "Sign out"
 msgstr "Logga ut"
 
-#: app/templates/base.html:205
+#: app/templates/base.html:210
 msgid "Help translate ContentDB"
 msgstr "Hjälp översätt ContentDB"
 
-#: app/templates/base.html:249
+#: app/templates/base.html:254
 msgid "About"
 msgstr ""
 
-#: app/templates/base.html:250
+#: app/templates/base.html:255
 msgid "Rules"
 msgstr ""
 
-#: app/templates/base.html:251
+#: app/templates/base.html:256
 msgid "Policy and Guidance"
 msgstr "Policy och förhållning"
 
-#: app/templates/base.html:252
+#: app/templates/base.html:257
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:253 app/templates/users/register.html:37
+#: app/templates/base.html:258 app/templates/users/register.html:37
 msgid "Privacy Policy"
 msgstr "Integritetspolicy"
 
-#: app/templates/base.html:255
+#: app/templates/base.html:260
 msgid "Report / DMCA"
 msgstr ""
 
-#: app/templates/base.html:257
-msgid "Stats / Monitoring"
-msgstr "Statistik / Övervakning"
-
-#: app/templates/base.html:258
+#: app/templates/base.html:262
 msgid "User List"
 msgstr "Användarlista"
 
-#: app/templates/base.html:259 app/templates/packages/view.html:194
+#: app/templates/base.html:263 app/templates/packages/view.html:194
 #: app/templates/packages/view.html:565 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Trådar"
 
-#: app/templates/base.html:260
+#: app/templates/base.html:264
 msgid "Support Packages"
 msgstr "Stöd paket"
 
-#: app/templates/base.html:261
+#: app/templates/base.html:265
 msgid "Source Code"
 msgstr "Källkod"
 
@@ -1271,7 +1269,7 @@ msgstr "<strong>%(title)s</strong> av %(author)s"
 
 #: app/templates/index.html:73 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:198 app/templates/packages/view.html:299
-#: app/templates/users/profile.html:216
+#: app/templates/users/profile.html:226
 msgid "Reviews"
 msgstr "Recensioner"
 
@@ -1343,10 +1341,6 @@ msgstr "Orsakad av %(author)s."
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
 msgstr "Orsakad av borttagen användare."
-
-#: app/templates/admin/list.html:62
-msgid "Deletion is permanent."
-msgstr "Radering är permanent."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
@@ -2012,7 +2006,7 @@ msgstr "Forumtrådar"
 #: app/templates/packages/game_support.html:37
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:408
 #: app/templates/packages/view.html:432 app/templates/packages/view.html:462
-#: app/templates/todo/editor.html:85
+#: app/templates/todo/editor.html:85 app/templates/todo/game_support.html:36
 #, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s av %(display_name)s"
@@ -2347,6 +2341,7 @@ msgid "More content from the forums"
 msgstr "Mer innehåll från forumen"
 
 #: app/templates/packages/package_base.html:13
+#: app/templates/packages/screenshots.html:93
 msgid "Thumbnail"
 msgstr "Tumnagel"
 
@@ -2701,7 +2696,7 @@ msgid "Add a screenshot"
 msgstr "Lägg till skärmdump"
 
 #: app/templates/packages/screenshot_new.html:10
-#: app/templates/todo/user.html:93
+#: app/templates/todo/user.html:125
 #, python-format
 msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
@@ -2714,43 +2709,48 @@ msgstr ""
 msgid "Add Image"
 msgstr "Lägg till bild"
 
-#: app/templates/packages/screenshots.html:17
-msgid "Topmost screenshot will be used as the package thumbnail."
-msgstr "Högsta skärmdump kommer användas som pakettumnageln."
-
-#: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:97
+#: app/templates/packages/screenshots.html:36 app/templates/todo/user.html:129
 msgid "Way too small"
 msgstr "Alldeles för liten"
 
-#: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:100
+#: app/templates/packages/screenshots.html:40 app/templates/todo/user.html:132
 msgid "Too small"
 msgstr "För liten"
 
-#: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:103
+#: app/templates/packages/screenshots.html:44 app/templates/todo/user.html:135
 msgid "Not HD"
 msgstr "Inte HD"
 
-#: app/templates/packages/screenshots.html:53
+#: app/templates/packages/screenshots.html:50
 msgid "Awaiting approval"
 msgstr "Väntar på godkännande"
 
-#: app/templates/packages/screenshots.html:72
+#: app/templates/packages/screenshots.html:69
+#: app/templates/packages/screenshots.html:123
 msgid "No screenshots."
 msgstr "Inga skärmdumpar."
 
-#: app/templates/packages/screenshots.html:80
+#: app/templates/packages/screenshots.html:78
 msgid "Save Order"
 msgstr "Spara ordning"
 
-#: app/templates/packages/screenshots.html:85
+#: app/templates/packages/screenshots.html:83
 msgid "Reordering requires JavaScript."
 msgstr "Omordning kräver JavaScript."
 
-#: app/templates/packages/screenshots.html:100
+#: app/templates/packages/screenshots.html:88
+msgid "Client Preview"
+msgstr ""
+
+#: app/templates/packages/screenshots.html:90
+msgid "The first screenshot in the list above will be the package thumbnail."
+msgstr ""
+
+#: app/templates/packages/screenshots.html:127
 msgid "Videos"
 msgstr "Videor"
 
-#: app/templates/packages/screenshots.html:102
+#: app/templates/packages/screenshots.html:129
 msgid "You can set a video on the Edit Details page"
 msgstr "Du kan ställa in en video på Redigera detaljer-sidan"
 
@@ -3200,6 +3200,29 @@ msgstr "Visa alla"
 msgid "Recent Actions"
 msgstr "Senaste åtgärder"
 
+#: app/templates/todo/game_support.html:4
+#, python-format
+msgid "Game Support for %(username)s"
+msgstr ""
+
+#: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
+msgid "You should specify the games supported by your mods and texture packs."
+msgstr ""
+
+#: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
+msgid "Specifying game support makes it easier for players to find your content."
+msgstr ""
+
+#: app/templates/todo/game_support.html:43
+msgid "None listed, assumed to support all games"
+msgstr ""
+
+#: app/templates/todo/game_support.html:55 app/templates/todo/user.html:40
+#: app/templates/todo/user.html:94 app/templates/todo/user.html:114
+#: app/templates/todo/user.html:173 app/templates/todo/user.html:197
+msgid "Nothing to do :)"
+msgstr "Inget behöver göras :)"
+
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
@@ -3227,7 +3250,7 @@ msgid "All Outdated packages"
 msgstr "Alla föråldrade paket"
 
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
-#: app/templates/todo/user.html:68
+#: app/templates/todo/user.html:100
 msgid "Missing Screenshots"
 msgstr "Saknade skärmdumpar"
 
@@ -3301,11 +3324,6 @@ msgstr "Aktivera mejlnotifikationer"
 msgid "Unapproved Packages Needing Action"
 msgstr "Ej godkända paket som behöver åtgärdas"
 
-#: app/templates/todo/user.html:40 app/templates/todo/user.html:82
-#: app/templates/todo/user.html:141 app/templates/todo/user.html:165
-msgid "Nothing to do :)"
-msgstr "Inget behöver göras :)"
-
 #: app/templates/todo/user.html:48
 msgid "See all Update Settings"
 msgstr "Se alla uppdateringsinställningar"
@@ -3336,17 +3354,25 @@ msgstr ""
 "För att ta bort ett paket från nedan vänligen skapa ett utsläpp eller "
 "ändra uppdateringsinställningarna."
 
-#: app/templates/todo/user.html:88
+#: app/templates/todo/user.html:72
+msgid "See game support for your packages"
+msgstr ""
+
+#: app/templates/todo/user.html:74
+msgid "Missing Game Support"
+msgstr ""
+
+#: app/templates/todo/user.html:120
 msgid "Small Screenshots"
 msgstr "Små skärmdumpar"
 
-#: app/templates/todo/user.html:91
+#: app/templates/todo/user.html:123
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr "Dessa paket har skärmdumpar som är för små, och som borde ersättas."
 
-#: app/templates/todo/user.html:92
+#: app/templates/todo/user.html:124
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
@@ -3354,31 +3380,31 @@ msgstr ""
 "Röd och orange är skärmdumpar över gränsen, och gråa skärmdumpar är under"
 " den rekommenderade upplösningen."
 
-#: app/templates/todo/user.html:147
+#: app/templates/todo/user.html:179
 msgid "See All"
 msgstr "Se alla"
 
-#: app/templates/todo/user.html:148
+#: app/templates/todo/user.html:180
 msgid "Packages Without Tags"
 msgstr "Paket utan taggar"
 
-#: app/templates/todo/user.html:150
+#: app/templates/todo/user.html:182
 msgid "Labelling your packages with tags helps users find them."
 msgstr "Att beskriva ditt paket med taggar hjälper användare hitta dem."
 
-#: app/templates/todo/user.html:170
+#: app/templates/todo/user.html:202
 msgid "Unadded Topics"
 msgstr "Ej tillagda trådar"
 
-#: app/templates/todo/user.html:173
+#: app/templates/todo/user.html:205
 msgid "List of your forum topics which do not have a matching package."
 msgstr "Lista med forumtrådar som inte har ett respektivt paket."
 
-#: app/templates/todo/user.html:174
+#: app/templates/todo/user.html:206
 msgid "Topics with a strikethrough have been marked as discarded."
 msgstr "Genomstrukna trådar har markerats som bortkastade."
 
-#: app/templates/todo/user.html:182
+#: app/templates/todo/user.html:214
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "Gratulerar! Du har inte några trådar som inte finns på CDB."
 
@@ -3760,24 +3786,24 @@ msgstr "Gör anspråk"
 msgid "Is this you? Claim your account now!"
 msgstr "Är detta du? Gör anspråk på ditt konto nu!"
 
-#: app/templates/users/profile.html:178
+#: app/templates/users/profile.html:181 app/templates/users/profile.html:187
 #, python-format
 msgid "%(value)d / %(target)d"
 msgstr "%(value)d / %(target)d"
 
-#: app/templates/users/profile.html:192
+#: app/templates/users/profile.html:202
 msgid "Create package"
 msgstr "Skapa paket"
 
-#: app/templates/users/profile.html:198
+#: app/templates/users/profile.html:208
 msgid "View list of tags"
 msgstr "Visa lista med taggar"
 
-#: app/templates/users/profile.html:208
+#: app/templates/users/profile.html:218
 msgid "Maintained Packages"
 msgstr "Underhållda paket"
 
-#: app/templates/users/profile.html:210
+#: app/templates/users/profile.html:220
 msgid "This user is also a maintainer of the following packages"
 msgstr "Denna användare är även underhållare för foljande paket"
 
@@ -3790,15 +3816,11 @@ msgstr "Redigera profil - %(username)s"
 msgid "Profile Picture"
 msgstr "Profilbild"
 
-#: app/templates/users/profile_edit.html:27
-msgid "Sync with Forums"
-msgstr "Synkronisera med forum"
-
-#: app/templates/users/profile_edit.html:45
+#: app/templates/users/profile_edit.html:39
 msgid "Profile Information"
 msgstr "Profilinformation"
 
-#: app/templates/users/profile_edit.html:52
+#: app/templates/users/profile_edit.html:46
 msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr ""
 "Låtsas man vara en annan användare leder detta till en permanent "
@@ -4053,4 +4075,16 @@ msgstr ""
 
 #~ msgid "Mods for %(title)s"
 #~ msgstr "Moddar för %(title)s"
+
+#~ msgid "Stats / Monitoring"
+#~ msgstr "Statistik / Övervakning"
+
+#~ msgid "Deletion is permanent."
+#~ msgstr "Radering är permanent."
+
+#~ msgid "Topmost screenshot will be used as the package thumbnail."
+#~ msgstr "Högsta skärmdump kommer användas som pakettumnageln."
+
+#~ msgid "Sync with Forums"
+#~ msgstr "Synkronisera med forum"
 

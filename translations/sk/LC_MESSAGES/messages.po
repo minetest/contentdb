@@ -7,24 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-04-30 01:43+0100\n"
+"POT-Creation-Date: 2023-06-01 18:12+0100\n"
 "PO-Revision-Date: 2023-05-06 19:48+0000\n"
 "Last-Translator: Pexauteau Santander <pexauteau@gmail.com>\n"
-"Language-Team: Slovak <https://hosted.weblate.org/projects/minetest/"
-"contentdb/sk/>\n"
 "Language: sk\n"
+"Language-Team: Slovak "
+"<https://hosted.weblate.org/projects/minetest/contentdb/sk/>\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Weblate 4.18-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:119
+#: app/__init__.py:120
 msgid "Banned:"
 msgstr "Zabanovaný:"
 
-#: app/__init__.py:121
+#: app/__init__.py:122
 msgid "You have been banned."
 msgstr "Dostal si ban."
 
@@ -32,11 +31,11 @@ msgstr "Dostal si ban."
 #: app/templates/admin/warnings/list.html:28
 #: app/templates/modnames/list.html:16 app/templates/packages/list.html:4
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
-#: app/templates/users/profile.html:201
+#: app/templates/users/profile.html:211
 msgid "Packages"
 msgstr "Balíky"
 
-#: app/template_filters.py:64
+#: app/template_filters.py:71
 #, python-format
 msgid "%(delta)s ago"
 msgstr "pred %(delta)s"
@@ -51,10 +50,10 @@ msgstr "Meno"
 msgid "Limit to package"
 msgstr "Limit balíčka"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:253
-#: app/blueprints/packages/packages.py:480
-#: app/blueprints/packages/packages.py:576
-#: app/blueprints/packages/packages.py:646
+#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:254
+#: app/blueprints/packages/packages.py:481
+#: app/blueprints/packages/packages.py:577
+#: app/blueprints/packages/packages.py:647
 #: app/blueprints/packages/releases.py:60
 #: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:48
 #: app/blueprints/packages/screenshots.py:35
@@ -109,12 +108,12 @@ msgstr "Snímky obrazovky"
 msgid "Maintainers"
 msgstr "Členovia údržby"
 
-#: app/blueprints/packages/__init__.py:52 app/templates/base.html:151
+#: app/blueprints/packages/__init__.py:52 app/templates/base.html:156
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
 msgstr "Audítorský Log"
 
-#: app/blueprints/packages/__init__.py:57 app/templates/base.html:142
+#: app/blueprints/packages/__init__.py:57 app/templates/base.html:147
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
 #: app/templates/packages/view.html:234 app/templates/users/profile.html:130
 msgid "Statistics"
@@ -134,15 +133,15 @@ msgstr "Odstrániť"
 msgid "Supported Games"
 msgstr "Podporované hry"
 
-#: app/blueprints/packages/packages.py:163
+#: app/blueprints/packages/packages.py:164
 msgid "Error: Another package already uses this forum topic!"
 msgstr "Chyba: Túto tému na fóre už používa iný balíček!"
 
-#: app/blueprints/packages/packages.py:169
+#: app/blueprints/packages/packages.py:170
 msgid "Error: Forum topic author doesn't match package author."
 msgstr "Chyba: Autor témy fóra sa nezhoduje s autorom balíčka."
 
-#: app/blueprints/packages/packages.py:172
+#: app/blueprints/packages/packages.py:173
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
@@ -150,87 +149,87 @@ msgstr ""
 "Upozornenie: Tému na fóre sa napodarilo nájsť. Toto sa mohlo stať, ak "
 "bola táto téma práve vytvorená."
 
-#: app/blueprints/packages/packages.py:218
+#: app/blueprints/packages/packages.py:219
 msgid "No download available."
 msgstr "Stiahnutie nie je k dispozícii."
 
-#: app/blueprints/packages/packages.py:232 app/templates/packages/view.html:493
+#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:493
 msgid "Type"
 msgstr "Písať"
 
-#: app/blueprints/packages/packages.py:233
+#: app/blueprints/packages/packages.py:234
 msgid "Title (Human-readable)"
 msgstr "Názov (Ľudsky zrozumiteľné)"
 
-#: app/blueprints/packages/packages.py:234
-#: app/blueprints/packages/packages.py:574
+#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:575
 msgid "Name (Technical)"
 msgstr "Meno (Technicky)"
 
-#: app/blueprints/packages/packages.py:234
-#: app/blueprints/packages/packages.py:575
+#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:576
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Iba malé písmená (a-z), čísla (0-9) a podtržníky (_)"
 
-#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:236
 msgid "Short Description (Plaintext)"
 msgstr "Krátky popis (Plaintext)"
 
-#: app/blueprints/packages/packages.py:237 app/templates/packages/view.html:508
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:508
 msgid "Maintenance State"
 msgstr "Stav údržby"
 
-#: app/blueprints/packages/packages.py:239 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:240 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "Tagy"
 
-#: app/blueprints/packages/packages.py:240
+#: app/blueprints/packages/packages.py:241
 msgid "Content Warnings"
 msgstr "Upozornenia obsahu"
 
-#: app/blueprints/packages/packages.py:241 app/templates/packages/view.html:497
+#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:497
 msgid "License"
 msgstr "Licencia"
 
-#: app/blueprints/packages/packages.py:242
+#: app/blueprints/packages/packages.py:243
 msgid "Media License"
 msgstr "Licencia média"
 
-#: app/blueprints/packages/packages.py:244
+#: app/blueprints/packages/packages.py:245
 msgid "Long Description (Markdown)"
 msgstr "Dlhý popis (Poznámka)"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:247
 msgid "VCS Repository URL"
 msgstr "URL pre VCS úložisko"
 
-#: app/blueprints/packages/packages.py:247 app/blueprints/users/settings.py:51
+#: app/blueprints/packages/packages.py:248 app/blueprints/users/settings.py:51
 msgid "Website URL"
 msgstr "URL webstránky"
 
-#: app/blueprints/packages/packages.py:248
+#: app/blueprints/packages/packages.py:249
 msgid "Issue Tracker URL"
 msgstr "URL pre sledovanie chýb"
 
-#: app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:250
 msgid "Forum Topic ID"
 msgstr "ID témy fóra"
 
-#: app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:251
 msgid "Video URL"
 msgstr "URL videa"
 
-#: app/blueprints/packages/packages.py:251
+#: app/blueprints/packages/packages.py:252
 msgid "Donate URL"
 msgstr "URL pre darovanie"
 
-#: app/blueprints/packages/packages.py:257
+#: app/blueprints/packages/packages.py:258
 msgid "_game is not an allowed name"
 msgstr "_game nie je povolený názov"
 
-#: app/blueprints/packages/packages.py:267
+#: app/blueprints/packages/packages.py:268
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -238,67 +237,67 @@ msgstr ""
 "Balíček už existuje, ale je odstránený. Prosím kontaktuj administrátorov "
 "ContentDB aby obnovili balíček"
 
-#: app/blueprints/packages/packages.py:272
+#: app/blueprints/packages/packages.py:273
 msgid "Package already exists"
 msgstr "Balíček už existuje"
 
-#: app/blueprints/packages/packages.py:332
+#: app/blueprints/packages/packages.py:333
 msgid "Unable to find that user"
 msgstr "Užívateľ nebol nájdený"
 
-#: app/blueprints/packages/packages.py:336
-#: app/blueprints/packages/screenshots.py:139
+#: app/blueprints/packages/packages.py:337
+#: app/blueprints/packages/screenshots.py:136
 #: app/blueprints/users/settings.py:107
 msgid "Permission denied"
 msgstr "Práva boli odopreté"
 
-#: app/blueprints/packages/packages.py:392
-#: app/blueprints/packages/packages.py:443
-#: app/blueprints/packages/packages.py:459
+#: app/blueprints/packages/packages.py:393
+#: app/blueprints/packages/packages.py:444
+#: app/blueprints/packages/packages.py:460
 msgid "You don't have permission to do that"
 msgstr "Na tento úkon nemáš povolenie"
 
-#: app/blueprints/packages/packages.py:422
+#: app/blueprints/packages/packages.py:423
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Prosím, do schvaľovacieho vlákna napíš, aké zmeny je potrebné vykonať"
 
-#: app/blueprints/packages/packages.py:454
+#: app/blueprints/packages/packages.py:455
 msgid "Deleted package"
 msgstr "Vymazaný balíček"
 
-#: app/blueprints/packages/packages.py:470
+#: app/blueprints/packages/packages.py:471
 msgid "Unapproved package"
 msgstr "Neschválený balíček"
 
-#: app/blueprints/packages/packages.py:479
+#: app/blueprints/packages/packages.py:480
 msgid "Maintainers (Comma-separated)"
 msgstr "Členovia údržby (oddeľuj čiarkou)"
 
-#: app/blueprints/packages/packages.py:488
+#: app/blueprints/packages/packages.py:489
 msgid "You don't have permission to edit maintainers"
 msgstr "Nemáte právo na upravovanie členov údržby"
 
-#: app/blueprints/packages/packages.py:538
+#: app/blueprints/packages/packages.py:539
 msgid "You are not a maintainer"
 msgstr "Nie si členom údržby"
 
-#: app/blueprints/packages/packages.py:541
+#: app/blueprints/packages/packages.py:542
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Majitelia balíčka sa nemôžu vylúčiť z tímu údržby"
 
-#: app/blueprints/packages/packages.py:573
+#: app/blueprints/packages/packages.py:574
 msgid "Author Name"
 msgstr "Meno autora"
 
-#: app/blueprints/packages/packages.py:643
+#: app/blueprints/packages/packages.py:644
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Povoľ podporu zisťovania na základe závislostí (odporúčané)"
 
-#: app/blueprints/packages/packages.py:644
+#: app/blueprints/packages/packages.py:645
 msgid "Supported games (Comma-separated)"
 msgstr "Podporované hry (oddeľuj čiarkou)"
 
-#: app/blueprints/packages/packages.py:645
+#: app/blueprints/packages/packages.py:646
 msgid "Unsupported games (Comma-separated)"
 msgstr "Nepodporované hry (oddeľuj čiarkou)"
 
@@ -466,7 +465,7 @@ msgstr ""
 #: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:204
 #: app/blueprints/threads/__init__.py:237
 #: app/blueprints/threads/__init__.py:329 app/blueprints/users/settings.py:88
-#: app/logic/packages.py:125
+#: app/logic/packages.py:129
 msgid "Linking to blocked sites is not allowed"
 msgstr "Prepojenie na blokované stránky nie je povolené"
 
@@ -484,7 +483,7 @@ msgid "Title/Caption"
 msgstr "Názov/Titulok"
 
 #: app/blueprints/packages/screenshots.py:45
-#: app/templates/packages/screenshots.html:89
+#: app/templates/packages/screenshots.html:110
 msgid "Cover Image"
 msgstr "Náhľadový obrázok"
 
@@ -565,7 +564,7 @@ msgstr "Heslo"
 msgid "Remember me"
 msgstr "Zapamätaj si ma"
 
-#: app/blueprints/users/account.py:40 app/templates/base.html:180
+#: app/blueprints/users/account.py:40 app/templates/base.html:185
 #: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "Prihlásiť sa"
@@ -935,7 +934,7 @@ msgstr "Text na hľadanie (regex)"
 msgid "File filter"
 msgstr "Filter súborov"
 
-#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:56
+#: app/blueprints/zipgrep/__init__.py:37 app/templates/base.html:61
 #: app/templates/todo/tags.html:15
 msgid "Search"
 msgstr "Hľadaj"
@@ -981,7 +980,7 @@ msgstr "Nemáte právo na upravenie tohto balíčka"
 msgid "You don't have permission to change the package name"
 msgstr "Nemáte právo na zmenu mena balíčka"
 
-#: app/logic/packages.py:171
+#: app/logic/packages.py:175
 #, python-format
 msgid "Unable to add protected tag %(title)s to package"
 msgstr "Nemožno pridať ochranný tag %(title)s na balík"
@@ -1042,17 +1041,17 @@ msgstr "Hra"
 msgid "Texture Pack"
 msgstr "Balíček textúr"
 
-#: app/models/packages.py:75 app/templates/base.html:34
+#: app/models/packages.py:75 app/templates/base.html:39
 #: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Rozšírenia"
 
-#: app/models/packages.py:77 app/templates/base.html:37
+#: app/models/packages.py:77 app/templates/base.html:42
 #: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Hry"
 
-#: app/models/packages.py:79 app/templates/base.html:40
+#: app/models/packages.py:79 app/templates/base.html:45
 msgid "Texture Packs"
 msgstr "Balíčky textúr"
 
@@ -1124,120 +1123,118 @@ msgstr ""
 "Stránku sa nepodarilo nájsť. Odkaz môže byť poškodený, stránka možno bola"
 " vymazaná, alebo na ňu nemáš prístup."
 
-#: app/templates/base.html:43
+#: app/templates/base.html:48
 msgid "Random"
 msgstr "Náhodne"
 
-#: app/templates/base.html:46 app/templates/base.html:248
+#: app/templates/base.html:51 app/templates/base.html:253
 #: app/templates/packages/bulk_update_conf.html:8
-#: app/templates/packages/update_config.html:8 app/templates/todo/user.html:45
+#: app/templates/packages/update_config.html:8
+#: app/templates/todo/game_support.html:8 app/templates/todo/user.html:45
+#: app/templates/todo/user.html:69
 msgid "Help"
 msgstr "Pomoc"
 
-#: app/templates/base.html:53
+#: app/templates/base.html:58
 #, python-format
 msgid "Search %(type)s"
 msgstr "Vyhľadať %(type)s"
 
-#: app/templates/base.html:53 app/templates/todo/tags.html:11
+#: app/templates/base.html:58 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "Prehľadávať všetky balíky"
 
-#: app/templates/base.html:72
+#: app/templates/base.html:77
 msgid "Work Queue"
 msgstr "Pracovný poradovník"
 
-#: app/templates/base.html:85 app/templates/base.html:137
+#: app/templates/base.html:90 app/templates/base.html:142
 msgid "To do list"
 msgstr "Zoznam úloh"
 
-#: app/templates/base.html:94 app/templates/notifications/list.html:4
+#: app/templates/base.html:99 app/templates/notifications/list.html:4
 msgid "Notifications"
 msgstr "Upozornenia"
 
-#: app/templates/base.html:115
+#: app/templates/base.html:120
 msgid "Add Package"
 msgstr "Pridaj balík"
 
-#: app/templates/base.html:132
+#: app/templates/base.html:137
 msgid "Profile"
 msgstr "Prehľad"
 
-#: app/templates/base.html:155
+#: app/templates/base.html:160
 msgid "Admin"
 msgstr "Správca"
 
-#: app/templates/base.html:158
+#: app/templates/base.html:163
 msgid "License Editor"
 msgstr "Úprava licencie"
 
-#: app/templates/base.html:163
+#: app/templates/base.html:168
 msgid "Restore Package"
 msgstr "Obnova balíka"
 
-#: app/templates/base.html:166
+#: app/templates/base.html:171
 msgid "Tag Editor"
 msgstr "Úprava tagu"
 
-#: app/templates/base.html:168
+#: app/templates/base.html:173
 msgid "Create Tag"
 msgstr "Vutvoriť tag"
 
-#: app/templates/base.html:173 app/templates/packages/release_new.html:12
+#: app/templates/base.html:178 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "Nastavenia"
 
-#: app/templates/base.html:176
+#: app/templates/base.html:181
 msgid "Sign out"
 msgstr "Odhlásiť"
 
-#: app/templates/base.html:205
+#: app/templates/base.html:210
 msgid "Help translate ContentDB"
 msgstr "Pomôž preložiť ContentDB"
 
-#: app/templates/base.html:249
+#: app/templates/base.html:254
 msgid "About"
 msgstr "Opis"
 
-#: app/templates/base.html:250
+#: app/templates/base.html:255
 msgid "Rules"
 msgstr "Pravidlá"
 
-#: app/templates/base.html:251
+#: app/templates/base.html:256
 msgid "Policy and Guidance"
 msgstr "Politika a Návod"
 
-#: app/templates/base.html:252
+#: app/templates/base.html:257
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:253 app/templates/users/register.html:37
+#: app/templates/base.html:258 app/templates/users/register.html:37
 msgid "Privacy Policy"
 msgstr "Politika súkromia"
 
-#: app/templates/base.html:255
+#: app/templates/base.html:260
 msgid "Report / DMCA"
 msgstr "Nahlásiť / DMCA"
 
-#: app/templates/base.html:257
-msgid "Stats / Monitoring"
-msgstr "Štatistiky / Monitorovanie"
-
-#: app/templates/base.html:258
+#: app/templates/base.html:262
 msgid "User List"
 msgstr "Zoznam užívateľov"
 
-#: app/templates/base.html:259 app/templates/packages/view.html:194
+#: app/templates/base.html:263 app/templates/packages/view.html:194
 #: app/templates/packages/view.html:565 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Vlákna"
 
-#: app/templates/base.html:260
+#: app/templates/base.html:264
 msgid "Support Packages"
 msgstr "Podporné balíky"
 
-#: app/templates/base.html:261
+#: app/templates/base.html:265
 msgid "Source Code"
 msgstr "Zdrojový kód"
 
@@ -1248,8 +1245,8 @@ msgstr "Vitaj"
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
-"Vitaj na najlepšom mieste kde nájdeš modifikácie, hry a balíky textúr pre "
-"Minetest"
+"Vitaj na najlepšom mieste kde nájdeš modifikácie, hry a balíky textúr pre"
+" Minetest"
 
 #: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
@@ -1266,7 +1263,7 @@ msgstr "<strong>%(title)s</strong> od %(author)s"
 
 #: app/templates/index.html:73 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:198 app/templates/packages/view.html:299
-#: app/templates/users/profile.html:216
+#: app/templates/users/profile.html:226
 msgid "Reviews"
 msgstr "Posudky"
 
@@ -1338,10 +1335,6 @@ msgstr "Spôsobené %(author)s."
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
 msgstr "Spôsobené vymazaným užívateľom."
-
-#: app/templates/admin/list.html:62
-msgid "Deletion is permanent."
-msgstr "Vymazanie je trvalé."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
@@ -1470,8 +1463,8 @@ msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
-"Príspevky sú skvelou možnosťou ako podporiť svojho obľúbeného modifikátora, "
-"umelca a vývojára."
+"Príspevky sú skvelou možnosťou ako podporiť svojho obľúbeného "
+"modifikátora, umelca a vývojára."
 
 #: app/templates/donate/index.html:37
 #, python-format
@@ -1495,8 +1488,8 @@ msgid ""
 "No reviewed packages accepting donations. Considering reviewing your "
 "favourite packages"
 msgstr ""
-"Žiadny z prehliadaných balíkov neprijíma príspevky. Zohľadňujúc prehliadanie "
-"tvojich obľúbených balíkov"
+"Žiadny z prehliadaných balíkov neprijíma príspevky. Zohľadňujúc "
+"prehliadanie tvojich obľúbených balíkov"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
@@ -1999,7 +1992,7 @@ msgstr "Témy fóra"
 #: app/templates/packages/game_support.html:37
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:408
 #: app/templates/packages/view.html:432 app/templates/packages/view.html:462
-#: app/templates/todo/editor.html:85
+#: app/templates/todo/editor.html:85 app/templates/todo/game_support.html:36
 #, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s od %(display_name)s"
@@ -2326,6 +2319,7 @@ msgid "More content from the forums"
 msgstr "Viac obsahu z fóra"
 
 #: app/templates/packages/package_base.html:13
+#: app/templates/packages/screenshots.html:93
 msgid "Thumbnail"
 msgstr "Záložka"
 
@@ -2394,8 +2388,8 @@ msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
-"Môžeš <a href=\"/help/package_config/\"> nastaviť automaticky </a> v .conf "
-"svojho balíka."
+"Môžeš <a href=\"/help/package_config/\"> nastaviť automaticky </a> v "
+".conf svojho balíka."
 
 #: app/templates/packages/release_edit.html:70
 msgid "Delete Release"
@@ -2478,8 +2472,8 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
-"Pozri aj <a href=\"/help/package_config/\"> Nastavenie balíka a Sprievodca "
-"vydaniami</a> alebo pre\n"
+"Pozri aj <a href=\"/help/package_config/\"> Nastavenie balíka a "
+"Sprievodca vydaniami</a> alebo pre\n"
 "návrhy pre prispôsobenie vydaní."
 
 #: app/templates/packages/release_new.html:61
@@ -2492,8 +2486,8 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
-"Súbor .conf tvojho balíka môže <a href=\"/help/package_config/\">nastaviť "
-"automaticky</a>,\n"
+"Súbor .conf tvojho balíka môže <a href=\"/help/package_config/\">nastaviť"
+" automaticky</a>,\n"
 "čo prepíše tvoj výber."
 
 #: app/templates/packages/release_wizard.html:4
@@ -2677,7 +2671,7 @@ msgid "Add a screenshot"
 msgstr "Pridať snímku"
 
 #: app/templates/packages/screenshot_new.html:10
-#: app/templates/todo/user.html:93
+#: app/templates/todo/user.html:125
 #, python-format
 msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
@@ -2690,43 +2684,48 @@ msgstr ""
 msgid "Add Image"
 msgstr "Pridať obrázok"
 
-#: app/templates/packages/screenshots.html:17
-msgid "Topmost screenshot will be used as the package thumbnail."
-msgstr "Prvá snímka bude použitá ako záložka balíka."
-
-#: app/templates/packages/screenshots.html:39 app/templates/todo/user.html:97
+#: app/templates/packages/screenshots.html:36 app/templates/todo/user.html:129
 msgid "Way too small"
 msgstr "Príliš malá"
 
-#: app/templates/packages/screenshots.html:43 app/templates/todo/user.html:100
+#: app/templates/packages/screenshots.html:40 app/templates/todo/user.html:132
 msgid "Too small"
 msgstr "Veľmi malá"
 
-#: app/templates/packages/screenshots.html:47 app/templates/todo/user.html:103
+#: app/templates/packages/screenshots.html:44 app/templates/todo/user.html:135
 msgid "Not HD"
 msgstr "Nie je HD"
 
-#: app/templates/packages/screenshots.html:53
+#: app/templates/packages/screenshots.html:50
 msgid "Awaiting approval"
 msgstr "Čaká na schválenie"
 
-#: app/templates/packages/screenshots.html:72
+#: app/templates/packages/screenshots.html:69
+#: app/templates/packages/screenshots.html:123
 msgid "No screenshots."
 msgstr "Bez obrázkov."
 
-#: app/templates/packages/screenshots.html:80
+#: app/templates/packages/screenshots.html:78
 msgid "Save Order"
 msgstr "Uložiť Usporiadanie"
 
-#: app/templates/packages/screenshots.html:85
+#: app/templates/packages/screenshots.html:83
 msgid "Reordering requires JavaScript."
 msgstr "Reorganizácia vyžaduje JavaScript."
 
-#: app/templates/packages/screenshots.html:100
+#: app/templates/packages/screenshots.html:88
+msgid "Client Preview"
+msgstr ""
+
+#: app/templates/packages/screenshots.html:90
+msgid "The first screenshot in the list above will be the package thumbnail."
+msgstr ""
+
+#: app/templates/packages/screenshots.html:127
 msgid "Videos"
 msgstr "Videá"
 
-#: app/templates/packages/screenshots.html:102
+#: app/templates/packages/screenshots.html:129
 msgid "You can set a video on the Edit Details page"
 msgstr "Video môžeš nastaviť v sekcii Upraviť Detaily"
 
@@ -3182,6 +3181,29 @@ msgstr "Pozri všetko"
 msgid "Recent Actions"
 msgstr "Nedávne akcie"
 
+#: app/templates/todo/game_support.html:4
+#, python-format
+msgid "Game Support for %(username)s"
+msgstr ""
+
+#: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
+msgid "You should specify the games supported by your mods and texture packs."
+msgstr ""
+
+#: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
+msgid "Specifying game support makes it easier for players to find your content."
+msgstr ""
+
+#: app/templates/todo/game_support.html:43
+msgid "None listed, assumed to support all games"
+msgstr ""
+
+#: app/templates/todo/game_support.html:55 app/templates/todo/user.html:40
+#: app/templates/todo/user.html:94 app/templates/todo/user.html:114
+#: app/templates/todo/user.html:173 app/templates/todo/user.html:197
+msgid "Nothing to do :)"
+msgstr "Nedá sa nič robiť :)"
+
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
@@ -3209,7 +3231,7 @@ msgid "All Outdated packages"
 msgstr "Všetky zastaralé balíky"
 
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
-#: app/templates/todo/user.html:68
+#: app/templates/todo/user.html:100
 msgid "Missing Screenshots"
 msgstr "Chýbajú snímky obrazovky"
 
@@ -3283,11 +3305,6 @@ msgstr "Povoliť emailové upozornenia"
 msgid "Unapproved Packages Needing Action"
 msgstr "Neschválené balíky čakajúce na ďalšie kroky"
 
-#: app/templates/todo/user.html:40 app/templates/todo/user.html:82
-#: app/templates/todo/user.html:141 app/templates/todo/user.html:165
-msgid "Nothing to do :)"
-msgstr "Nedá sa nič robiť :)"
-
 #: app/templates/todo/user.html:48
 msgid "See all Update Settings"
 msgstr "Ukázať všetky Aktualizovať nastavenia"
@@ -3318,17 +3335,25 @@ msgstr ""
 "Keď chceš odstrániť balík, vytvor vydanie alebo zmeň aktualizáciu "
 "nastavení."
 
-#: app/templates/todo/user.html:88
+#: app/templates/todo/user.html:72
+msgid "See game support for your packages"
+msgstr ""
+
+#: app/templates/todo/user.html:74
+msgid "Missing Game Support"
+msgstr ""
+
+#: app/templates/todo/user.html:120
 msgid "Small Screenshots"
 msgstr "Malé snímky"
 
-#: app/templates/todo/user.html:91
+#: app/templates/todo/user.html:123
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr "Tieto balíky obsahujú príliš malé snímky a mali by byť nahradené."
 
-#: app/templates/todo/user.html:92
+#: app/templates/todo/user.html:124
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
@@ -3336,31 +3361,31 @@ msgstr ""
 "Červené a oranžové snímky nespĺňajú limit a šedé snímky nespĺňajú "
 "odporúčané rozlíšenie."
 
-#: app/templates/todo/user.html:147
+#: app/templates/todo/user.html:179
 msgid "See All"
 msgstr "Pozri všetko"
 
-#: app/templates/todo/user.html:148
+#: app/templates/todo/user.html:180
 msgid "Packages Without Tags"
 msgstr "Balíky bez tagov"
 
-#: app/templates/todo/user.html:150
+#: app/templates/todo/user.html:182
 msgid "Labelling your packages with tags helps users find them."
 msgstr "Označenie tvojich balíkov tagmi pomáha užívateľom v ich vyhľadávaní."
 
-#: app/templates/todo/user.html:170
+#: app/templates/todo/user.html:202
 msgid "Unadded Topics"
 msgstr "Nepridané témy"
 
-#: app/templates/todo/user.html:173
+#: app/templates/todo/user.html:205
 msgid "List of your forum topics which do not have a matching package."
 msgstr "Zoznam tvojich tém na fóre, ktoré sa nezhodujú so žiadnym balíkom."
 
-#: app/templates/todo/user.html:174
+#: app/templates/todo/user.html:206
 msgid "Topics with a strikethrough have been marked as discarded."
 msgstr "Prešktrnuté témy boli označené na zahodenie."
 
-#: app/templates/todo/user.html:182
+#: app/templates/todo/user.html:214
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "Gratulujem! Nemáš žiadne témy, ktoré by neboli na CDB."
 
@@ -3547,8 +3572,9 @@ msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Prihlás sa na fórum a <a href=\"https://forum.minetest.net/ucp.php?i=173\"> "
-"vykonať to môžeš tu</a>."
+"Prihlás sa na fórum a <a "
+"href=\"https://forum.minetest.net/ucp.php?i=173\"> vykonať to môžeš "
+"tu</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -3568,8 +3594,9 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
-"Choď na <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
-"signature\">User Control Panel &gt; Profile &gt; Edit signature</a>"
+"Choď na <a "
+"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">User"
+" Control Panel &gt; Profile &gt; Edit signature</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
@@ -3739,24 +3766,24 @@ msgstr "Nárokovať"
 msgid "Is this you? Claim your account now!"
 msgstr "Si to ty? Nárokuj svoj účet okamžite!"
 
-#: app/templates/users/profile.html:178
+#: app/templates/users/profile.html:181 app/templates/users/profile.html:187
 #, python-format
 msgid "%(value)d / %(target)d"
 msgstr "%(value)d / %(target)d"
 
-#: app/templates/users/profile.html:192
+#: app/templates/users/profile.html:202
 msgid "Create package"
 msgstr "Vytvoriť balík"
 
-#: app/templates/users/profile.html:198
+#: app/templates/users/profile.html:208
 msgid "View list of tags"
 msgstr "Pozri zoznam tagov"
 
-#: app/templates/users/profile.html:208
+#: app/templates/users/profile.html:218
 msgid "Maintained Packages"
 msgstr "Balíky v údržbe"
 
-#: app/templates/users/profile.html:210
+#: app/templates/users/profile.html:220
 msgid "This user is also a maintainer of the following packages"
 msgstr "Tento užívateľ tiež udržiava nasledujúce balíky"
 
@@ -3769,15 +3796,11 @@ msgstr "Upraviť profil - %(username)s"
 msgid "Profile Picture"
 msgstr "Profilový obrázok"
 
-#: app/templates/users/profile_edit.html:27
-msgid "Sync with Forums"
-msgstr "Synchronizovať s fórom"
-
-#: app/templates/users/profile_edit.html:45
+#: app/templates/users/profile_edit.html:39
 msgid "Profile Information"
 msgstr "Profilové informácie"
 
-#: app/templates/users/profile_edit.html:52
+#: app/templates/users/profile_edit.html:46
 msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr "Predstierať, že si iný užívateľ vedie k trvalému zákazu (ban)"
 
@@ -4025,3 +4048,16 @@ msgstr ""
 
 #~ msgid "Mods for %(title)s"
 #~ msgstr "Rozšírenia pre %(title)s"
+
+#~ msgid "Stats / Monitoring"
+#~ msgstr "Štatistiky / Monitorovanie"
+
+#~ msgid "Deletion is permanent."
+#~ msgstr "Vymazanie je trvalé."
+
+#~ msgid "Topmost screenshot will be used as the package thumbnail."
+#~ msgstr "Prvá snímka bude použitá ako záložka balíka."
+
+#~ msgid "Sync with Forums"
+#~ msgstr "Synchronizovať s fórom"
+
