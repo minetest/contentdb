@@ -53,9 +53,6 @@ def screenshots(package):
 	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
 		return redirect(package.getURL("packages.view"))
 
-	if package.screenshots.count() == 0:
-		return redirect(package.getURL("packages.create_screenshot"))
-
 	form = EditPackageScreenshotsForm(obj=package)
 	form.cover_image.query = package.screenshots
 

@@ -13,12 +13,9 @@
 	{% endif %}
 	<h2 class="mt-0">{{ _("Screenshots") }}</h2>
 
-	<p class="mb-4">
-		{{ _("Topmost screenshot will be used as the package thumbnail.") }}
-	</p>
-
 	<ul class="list-group sortable">
-		{% for ss in package.screenshots %}
+		{% set screenshots = package.screenshots.all() %}
+		{% for ss in screenshots %}
 			{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
 				<li class="list-group-item" data-id="{{ ss.id }}">
 					<div class="row">
@@ -74,28 +71,58 @@
 		{% endfor %}
 	</ul>
 
-	<form action="" method="POST" class="form mt-4" role="form">
-		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-		<input type="hidden" name="order" value="" />
-		<input type="submit" value="{{ _('Save Order') }}" class="btn btn-primary">
-	</form>
+	{% if screenshots %}
+		<form action="" method="POST" class="form mt-4" role="form">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input type="hidden" name="order" value="" />
+			<input type="submit" value="{{ _('Save Order') }}" class="btn btn-primary">
+		</form>
 
-	<noscript>
-		<p class="alert alert-warning mt-5">
-			{{ _("Reordering requires JavaScript.") }}
-		</p>
-	</noscript>
+		<noscript>
+			<p class="alert alert-warning mt-5">
+				{{ _("Reordering requires JavaScript.") }}
+			</p>
+		</noscript>
+	{% endif %}
+
+	<h2 id="client-preview">{{ _("Client Preview") }}</h2>
+	<p class="mb-4">
+		{{ _("The first screenshot in the list above will be the package thumbnail.") }}
+	</p>
+	<div class="client-preview d-flex flex-row align-items-center">
+		<img class="mt-thumb" src="{{ package.getThumbnailOrPlaceholder(1) }}" alt="{{ _('Thumbnail') }}">
+		<div class="flex-grow desc align-self-stretch">
+			<p>
+				<span class="title">{{ package.title }}</span> by {{ package.author.username }}
+			</p>
+			<p>
+				{% if package.state.name == 'WORK_IN_PROGRESS' %}
+					Work in Progress.
+				{% endif %}
+				{{ package.short_desc }}
+			</p>
+		</div>
+		<div>
+			<img src="/static/minetest_client_buttons.png" alt="Install">
+		</div>
+	</div>
 
 	<h2>{{ _("Cover Image") }}</h2>
 
-	{% from "macros/forms.html" import render_submit_field, render_field %}
-	<form action="" method="POST" class="form" role="form">
-		{{ form.hidden_tag() }}
+	{% if screenshots %}
+		{% from "macros/forms.html" import render_submit_field, render_field %}
+		<form action="" method="POST" class="form" role="form">
+			{{ form.hidden_tag() }}
 
-		{{ render_field(form.cover_image, tabindex=220) }}
+			{{ render_field(form.cover_image, tabindex=220) }}
 
-		{{ render_submit_field(form.submit, tabindex=280) }}
-	</form>
+			{{ render_submit_field(form.submit, tabindex=280) }}
+		</form>
+	{% else %}
+		<p class="text-muted">
+			<i>{{ _("No screenshots.") }}</i>
+		</p>
+	{% endif %}
 
 	<h2>{{ _("Videos") }}</h2>
 	<p>
