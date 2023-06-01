@@ -27,7 +27,8 @@ def populate(session):
 	for tag in ["Inventory", "Mapgen", "Building",
 		"Mobs and NPCs", "Tools", "Player effects",
 		"Environment", "Transport", "Maintenance", "Plants and farming",
-		"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer", "Featured"]:
+		"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer",
+		"Featured", "Spotlight"]:
 		row = Tag(tag)
 		tags[row.name] = row
 		session.add(row)

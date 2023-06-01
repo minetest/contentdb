@@ -77,9 +77,9 @@ def packages():
 		pkgs = [package for package in pkgs if package.get("release")]
 
 	# Promote featured packages
-	if "sort" not in request.args and "order" not in request.args:
+	if "sort" not in request.args and "order" not in request.args and "q" not in request.args:
 		featured_lut = set()
-		featured = qb.convertToDictionary(query.filter(Package.tags.any(name="featured")).all())
+		featured = qb.convertToDictionary(query.filter(Package.tags.any(name="featured")).all())[:3]
 		for pkg in featured:
 			featured_lut.add(f"{pkg['author']}/{pkg['name']}")
 			pkg["short_description"] = "Featured. " + pkg["short_description"]
@@ -529,7 +529,7 @@ def homepage():
 	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
 
-	featured = query.filter(Package.tags.any(name="featured")).order_by(
+	spotlight = query.filter(Package.tags.any(name="spotlight")).order_by(
 			func.random()).limit(6).all()
 	new     = query.order_by(db.desc(Package.approved_at)).limit(4).all()
 	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
@@ -553,7 +553,7 @@ def homepage():
 	return jsonify({
 		"count": count,
 		"downloads": downloads,
-		"featured": mapPackages(featured),
+		"spotlight": mapPackages(spotlight),
 		"new": mapPackages(new),
 		"updated": mapPackages(updated),
 		"pop_mod": mapPackages(pop_mod),
@@ -571,9 +571,6 @@ def welcome_v1():
 				Package.tags.any(name="featured")) \
 		.order_by(func.random()) \
 		.limit(5).all()
-
-	mtg = Package.query.filter(Package.author.has(username="Minetest"), Package.name == "minetest_game").one()
-	featured.insert(2, mtg)
 
 	def map_packages(packages: List[Package]):
 		return [pkg.getAsDictionaryShort(current_app.config["BASE_URL"]) for pkg in packages]

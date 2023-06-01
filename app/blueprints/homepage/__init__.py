@@ -32,7 +32,7 @@ def home():
 	query   = Package.query.filter_by(state=PackageState.APPROVED)
 	count   = query.count()
 
-	featured = query.filter(Package.tags.any(name="featured")).order_by(func.random()).limit(6).all()
+	spotlight_pkgs = query.filter(Package.tags.any(name="spotlight")).order_by(func.random()).limit(6).all()
 
 	new     = package_load(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = package_load(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
@@ -57,5 +57,5 @@ def home():
 		.select_from(Tag).outerjoin(Tags).join(Package).filter(Package.state == PackageState.APPROVED)\
 		.group_by(Tag.id).order_by(db.asc(Tag.title)).all()
 
-	return render_template("index.html", count=count, downloads=downloads, tags=tags, featured=featured,
+	return render_template("index.html", count=count, downloads=downloads, tags=tags, spotlight_pkgs=spotlight_pkgs,
 			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, high_reviewed=high_reviewed, reviews=reviews)

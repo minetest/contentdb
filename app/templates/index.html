@@ -27,12 +27,12 @@
 	{% from "macros/packagegridtile.html" import render_pkggrid %}
 	<div id="featuredCarousel" class="carousel slide my-0" data-ride="carousel" data-interval="7500">
 		<ol class="carousel-indicators">
-			{% for package in featured %}
+			{% for package in spotlight_pkgs %}
 				<li data-target="#featuredCarousel" data-slide-to="{{ loop.index - 1 }}" {% if loop.index == 1 %}class="active"{% endif %}></li>
 			{% endfor %}
 		</ol>
 		<div class="carousel-inner">
-			{% for package in featured %}
+			{% for package in spotlight_pkgs %}
 				{% set cover_image = package.getCoverImageURL() %}
 				{% set tags =  package.tags | sort(attribute="views", reverse=True) %}
 				<div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
@@ -64,7 +64,7 @@
 										</span>
 									{% endfor %}
 									{% for t in tags[:3] %}
-										{% if t.name != "featured" %}
+										{% if t.name != "featured" and t.name != "Spotlight" %}
 											<span class="badge badge-primary" title="{{ t.description or '' }}">
 												{{ t.title }}
 											</span>
@@ -96,12 +96,12 @@
 			<span class="sr-only">{{ _("Next") }}</span>
 		</a>
 	</div>
-	<div class="text-right mb-5 text-muted" style="opacity: 0.4;">
+	<!-- <div class="text-right mb-5 text-muted" style="opacity: 0.4;">
 		<a href="/help/featured/" class="btn">
 			<i class="fas fa-question-circle mr-1"></i>
 			{{ _("Featured") }}
 		</a>
-	</div>
+	</div> -->
 
 	<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc') }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
