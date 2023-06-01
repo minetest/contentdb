@@ -79,7 +79,7 @@ def packages():
 	# Promote featured packages
 	if "sort" not in request.args and "order" not in request.args and "q" not in request.args:
 		featured_lut = set()
-		featured = qb.convertToDictionary(query.filter(Package.tags.any(name="featured")).all())[:3]
+		featured = qb.convertToDictionary(query.filter(Package.tags.any(name="featured")).all())
 		for pkg in featured:
 			featured_lut.add(f"{pkg['author']}/{pkg['name']}")
 			pkg["short_description"] = "Featured. " + pkg["short_description"]
