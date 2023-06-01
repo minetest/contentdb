@@ -198,6 +198,59 @@ pre {
 	}
 }
 
+@mixin line_clamp($lines: 0) {
+	overflow: hidden;
+	text-overflow: ellipsis;
+
+	@if $lines == 0 {
+		white-space: nowrap;
+	} @else {
+		// Fallbacks for browsers not supporting line-clamp.
+		max-height: $lines * 1.4em;
+		display: block;
+
+		// Line-clamp settings.
+		line-clamp: $lines;
+		display: -webkit-box;
+		-webkit-line-clamp: $lines;
+		-webkit-box-orient: vertical;
+	}
+}
+
+.client-preview {
+	background: #50525e;
+	padding: 17px 24px 17px 24px;
+	gap: 25px;
+	font-size: 15px;
+
+	.mt-thumb {
+		width: 96px;
+		height: 64px;
+	}
+
+	p {
+		color: #fefefe;
+		margin: 0;
+	}
+
+	.desc p:nth-child(2) {
+		@include line_clamp(2);
+		line-height: 1.4;
+	}
+
+	.title {
+		color: #72fe63;
+	}
+
+	.desc {
+		margin-top: -4px;
+	}
+}
+
+.flex-grow {
+	flex-grow: 1;
+}
+
 @media (min-width: 768px) {
 	#featuredCarousel h3 {
 		font-size: calc(1.325rem + .9vw) !important;
