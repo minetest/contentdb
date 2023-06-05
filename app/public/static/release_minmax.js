@@ -3,12 +3,12 @@
 
 const min = $("#min_rel");
 const max = $("#max_rel");
-const none = $("#min_rel option:first-child").attr("value");
+const none = parseInt($("#min_rel option:first-child").attr("value"));
 const warning = $("#minmax_warning");
 
 function ver_check() {
-	const minv = min.val();
-	const maxv = max.val();
+	const minv = parseInt(min.val());
+	const maxv = parseInt(max.val());
 
 	if (minv != none && maxv != none && minv > maxv) {
 		warning.show();
