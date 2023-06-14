@@ -102,6 +102,11 @@ async function load_data() {
 		return list.map((value, i) => ({ x: dates[i], y: value }));
 	}
 
+	const annotations = {};
+	if (new Date(json.start) < new Date("2022-11-05")) {
+		annotations.annotationNov5 = annotationNov5;
+	}
+
 	if (json.package_downloads) {
 		const packageRecentDownloads = Object.fromEntries(Object.entries(json.package_downloads)
 			.map(([label, values]) => [label, sum(values.slice(-30))]));
@@ -114,7 +119,7 @@ async function load_data() {
 				.sort((a, b) => packageRecentDownloads[a[0]] - packageRecentDownloads[b[0]])
 				.map(([label, values]) => ({ label, data: getData(values) })),
 		};
-		setup_chart(ctx, data);
+		setup_chart(ctx, data, annotations);
 	}
 
 	{
@@ -125,7 +130,7 @@ async function load_data() {
 				{ label: "Minetest", data: getData(json.platform_minetest) },
 			],
 		};
-		setup_chart(ctx, data);
+		setup_chart(ctx, data, annotations);
 	}
 
 	{
@@ -138,7 +143,7 @@ async function load_data() {
 				{ label: "New Install", data: getData(json.reason_new) },
 			],
 		};
-		setup_chart(ctx, data);
+		setup_chart(ctx, data, annotations);
 	}
 
 	{
@@ -182,7 +187,7 @@ async function load_data() {
 }
 
 
-function setup_chart(ctx, data) {
+function setup_chart(ctx, data, annotations) {
 	data.datasets = data.datasets.map((set, i) => {
 		const colorIdx = (data.datasets.length - i - 1) % chartColors.length;
 		return {
@@ -212,9 +217,7 @@ function setup_chart(ctx, data) {
 				},
 
 				annotation: {
-					annotations: {
-						annotationNov5,
-					},
+					annotations,
 				},
 			},
 			interaction: {
