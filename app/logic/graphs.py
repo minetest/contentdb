@@ -41,24 +41,36 @@ def _flatten_data(stats):
 	return result
 
 
-def get_package_stats(package: Package):
-	stats = package.daily_stats.order_by(db.asc(PackageDailyStats.date)).all()
+def get_package_stats(package: Package, start_date: Optional[datetime.date], end_date: Optional[datetime.date]):
+	query = package.daily_stats.order_by(db.asc(PackageDailyStats.date))
+	if start_date:
+		query = query.filter(PackageDailyStats.date >= start_date)
+	if end_date:
+		query = query.filter(PackageDailyStats.date <= end_date)
+
+	stats = query.all()
 	if len(stats) == 0:
 		return None
 
 	return _flatten_data(stats)
 
 
-def get_package_stats_for_user(user: User):
-	stats = db.session \
+def get_package_stats_for_user(user: User, start_date: Optional[datetime.date], end_date: Optional[datetime.date]):
+	query = db.session \
 		.query(PackageDailyStats.date,
 			func.sum(PackageDailyStats.platform_minetest).label("platform_minetest"),
 			func.sum(PackageDailyStats.platform_other).label("platform_other"),
 			func.sum(PackageDailyStats.reason_new).label("reason_new"),
 			func.sum(PackageDailyStats.reason_dependency).label("reason_dependency"),
 			func.sum(PackageDailyStats.reason_update).label("reason_update")) \
-		.filter(PackageDailyStats.package.has(author_id=user.id)) \
-		.order_by(db.asc(PackageDailyStats.date)) \
+		.filter(PackageDailyStats.package.has(author_id=user.id))
+
+	if start_date:
+		query = query.filter(PackageDailyStats.date >= start_date)
+	if end_date:
+		query = query.filter(PackageDailyStats.date <= end_date)
+
+	stats = query.order_by(db.asc(PackageDailyStats.date)) \
 		.group_by(PackageDailyStats.date) \
 		.all()
 	if len(stats) == 0:
@@ -122,9 +134,15 @@ def get_package_overview_for_user(user: Optional[User], start_date: datetime.dat
 	return result
 
 
-def get_all_package_stats():
-	end_date = datetime.datetime.utcnow().date()
-	start_date = (datetime.datetime.utcnow() - datetime.timedelta(days=29)).date()
+def get_all_package_stats(start_date: Optional[datetime.date], end_date: Optional[datetime.date]):
+	now_date = datetime.datetime.utcnow().date()
+	if end_date is None or end_date > now_date:
+		end_date = now_date
+
+	min_start_date = (datetime.datetime.utcnow() - datetime.timedelta(days=29)).date()
+	if start_date is None or start_date < min_start_date:
+		start_date = min_start_date
+
 	return {
 		"start": start_date.isoformat(),
 		"end": end_date.isoformat(),

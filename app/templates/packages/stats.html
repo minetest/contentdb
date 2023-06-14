@@ -4,7 +4,8 @@
 {{ _("Statistics") }} - {{ package.title }}
 {% endblock %}
 
-{% from "macros/stats.html" import render_package_stats, render_package_stats_js, render_package_selector %}
+{% from "macros/stats.html" import render_package_stats, render_package_stats_js,
+		render_package_selector, render_daterange_selector with context %}
 
 {% block scriptextra %}
 	{{ render_package_stats_js() }}
@@ -16,8 +17,9 @@
 			<i class="fas fa-download mr-1"></i>
 			{{ _("Download (.csv)") }}
 		</a>
+		{{ render_daterange_selector(options) }}
 		{{ render_package_selector(package.author, package=package) }}
 	</div>
 	<h2 class="mt-0">{{ _("Statistics") }}</h2>
-	{{ render_package_stats(package.getURL('api.package_stats'), package.downloads) }}
+	{{ render_package_stats(package.getURL('api.package_stats', start=start, end=end), package.downloads) }}
 {% endblock %}

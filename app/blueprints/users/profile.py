@@ -23,8 +23,8 @@ from flask_login import current_user, login_required
 from sqlalchemy import func
 
 from app.models import *
-from app.tasks.forumtasks import checkForumAccount
 from . import bp
+from ...utils import get_daterange_options
 
 
 @bp.route("/users/", methods=["GET"])
@@ -249,4 +249,7 @@ def statistics(username):
 
 	downloads = db.session.query(func.sum(Package.downloads)).filter(Package.author==user).one()
 
-	return render_template("users/stats.html", user=user, downloads=downloads[0])
+	start = request.args.get("start")
+	end = request.args.get("end")
+	return render_template("users/stats.html", user=user, downloads=downloads[0],
+			start=start, end=end, options=get_daterange_options(), noindex=start or end)

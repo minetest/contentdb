@@ -125,8 +125,11 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * Returns daily stats for package, or null if there is no data.
     * Daily date is done based on the UTC timezone.
     * EXPERIMENTAL. This API may change without warning.
+    * Query args:
+        * `start`: start date, inclusive. Optional. Default: 2022-10-01. UTC.
+        * `end`: end date, inclusive. Optional. Default: today. UTC.
     * An object with the following keys:
-        * `start`: start date, inclusive. Ex: 2022-10-22.
+        * `start`: start date, inclusive. Ex: 2022-10-22. M
         * `end`: end date, inclusive. Ex: 2022-11-05.
         * `platform_minetest`: list of integers per day.
         * `platform_other`: list of integers per day.
@@ -374,6 +377,9 @@ Example:
     * Returns daily stats for the user's packages, or null if there is no data.
     * Daily date is done based on the UTC timezone.
     * EXPERIMENTAL. This API may change without warning.
+    * Query args:
+        * `start`: start date, inclusive. Optional. Default: 2022-10-01. UTC.
+        * `end`: end date, inclusive. Optional. Default: today. UTC.
     * A table with the following keys:
         * `from`: start date, inclusive. Ex: 2022-10-22.
         * `end`: end date, inclusive. Ex: 2022-11-05.

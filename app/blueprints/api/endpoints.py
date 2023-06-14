@@ -23,7 +23,6 @@ from flask import request, jsonify, current_app, Response
 from flask_login import current_user, login_required
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
-from werkzeug.datastructures import ResponseCacheControl
 
 from app import csrf
 from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_all_package_stats
@@ -31,7 +30,7 @@ from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
 	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread
 from app.querybuilder import QueryBuilder
-from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, isYes
+from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, isYes, get_request_date
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
@@ -483,7 +482,9 @@ def list_all_reviews():
 @cors_allowed
 @cached(300)
 def package_stats(package: Package):
-	return jsonify(get_package_stats(package))
+	start = get_request_date("start")
+	end = get_request_date("end")
+	return jsonify(get_package_stats(package, start, end))
 
 
 @bp.route("/api/package_stats/")
@@ -645,7 +646,9 @@ def user_stats(username: str):
 	if user is None:
 		error(404, "User not found")
 
-	return jsonify(get_package_stats_for_user(user))
+	start = get_request_date("start")
+	end = get_request_date("end")
+	return jsonify(get_package_stats_for_user(user, start, end))
 
 
 @bp.route("/api/cdb_schema/")

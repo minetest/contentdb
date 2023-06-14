@@ -4,7 +4,8 @@
 {{ _("Statistics for %(display_name)s's packages", display_name=user.display_name) }}
 {% endblock %}
 
-{% from "macros/stats.html" import render_package_stats, render_package_stats_js, render_package_selector %}
+{% from "macros/stats.html" import render_package_stats, render_package_stats_js,
+		render_package_selector, render_daterange_selector with context %}
 
 {% block scriptextra %}
 	{{ render_package_stats_js() }}
@@ -12,8 +13,9 @@
 
 {% block content %}
 	<div class="float-right">
+		{{ render_daterange_selector(options) }}
 		{{ render_package_selector(user, package=None) }}
 	</div>
 	<h2 class="mt-0">{{ self.title() }}</h2>
-	{{ render_package_stats(url_for("api.user_stats", username=user.username), downloads) }}
+	{{ render_package_stats(url_for("api.user_stats", username=user.username, start=start, end=end), downloads) }}
 {% endblock %}

@@ -14,11 +14,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 from urllib.parse import urljoin, urlparse, urlunparse
 
+import typing
 import user_agents
 from flask import request, abort
+from flask_babel import LazyString
 from werkzeug.datastructures import MultiDict
 
 from app.models import *
@@ -88,6 +89,7 @@ def url_set_query(**kwargs):
 
 	return url_for(request.endpoint, **dargs)
 
+
 def get_int_or_abort(v, default=None):
 	if v is None:
 		return default
@@ -97,6 +99,7 @@ def get_int_or_abort(v, default=None):
 	except ValueError:
 		abort(400)
 
+
 def is_user_bot():
 	user_agent = request.headers.get('User-Agent')
 	if user_agent is None:
@@ -104,3 +107,28 @@ def is_user_bot():
 
 	user_agent = user_agents.parse(user_agent)
 	return user_agent.is_bot
+
+
+def get_request_date(key: str) -> typing.Optional[datetime.date]:
+	val = request.args.get(key)
+	if val is None:
+		return None
+
+	try:
+		return datetime.datetime.strptime(val, "%Y-%m-%d").date()
+	except ValueError:
+		abort(400)
+
+
+def get_daterange_options() -> List[Tuple[LazyString, str]]:
+	now = datetime.datetime.utcnow().date()
+	days30 = (datetime.datetime.utcnow() - datetime.timedelta(days=30)).date()
+	days90 = (datetime.datetime.utcnow() - datetime.timedelta(days=90)).date()
+	year_start = datetime.date(now.year, 1, 1)
+
+	return [
+		(lazy_gettext("All time"), url_set_query(start="2022-10-23", end=now.isoformat())),
+		(lazy_gettext("Last 30 days"), url_set_query(start=days30.isoformat(), end=now.isoformat())),
+		(lazy_gettext("Last 90 days"), url_set_query(start=days90.isoformat(), end=now.isoformat())),
+		(lazy_gettext("Year to date"), url_set_query(start=year_start, end=now.isoformat())),
+	]

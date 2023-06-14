@@ -725,8 +725,12 @@ def game_support(package):
 @bp.route("/packages/<author>/<name>/stats/")
 @is_package_page
 def statistics(package):
+	start = request.args.get("start")
+	end = request.args.get("end")
+
 	return render_template("packages/stats.html",
-		package=package, tabs=get_package_tabs(current_user, package), current_tab="stats")
+		package=package, tabs=get_package_tabs(current_user, package), current_tab="stats",
+		start=start, end=end, options=get_daterange_options(), noindex=start or end)
 
 
 @bp.route("/packages/<author>/<name>/stats.csv")
