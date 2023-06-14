@@ -122,13 +122,18 @@ def get_request_date(key: str) -> typing.Optional[datetime.date]:
 
 def get_daterange_options() -> List[Tuple[LazyString, str]]:
 	now = datetime.datetime.utcnow().date()
+	days7 = (datetime.datetime.utcnow() - datetime.timedelta(days=7)).date()
 	days30 = (datetime.datetime.utcnow() - datetime.timedelta(days=30)).date()
 	days90 = (datetime.datetime.utcnow() - datetime.timedelta(days=90)).date()
 	year_start = datetime.date(now.year, 1, 1)
+	last_year_start = datetime.date(now.year - 1, 1, 1)
+	last_year_end = datetime.date(now.year - 1, 12, 31)
 
 	return [
 		(lazy_gettext("All time"), url_set_query(start="2022-10-23", end=now.isoformat())),
+		(lazy_gettext("Last 7 days"), url_set_query(start=days7.isoformat(), end=now.isoformat())),
 		(lazy_gettext("Last 30 days"), url_set_query(start=days30.isoformat(), end=now.isoformat())),
 		(lazy_gettext("Last 90 days"), url_set_query(start=days90.isoformat(), end=now.isoformat())),
 		(lazy_gettext("Year to date"), url_set_query(start=year_start, end=now.isoformat())),
+		(lazy_gettext("Last year"), url_set_query(start=last_year_start, end=last_year_end)),
 	]
