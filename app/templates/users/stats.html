@@ -17,5 +17,5 @@
 		{{ render_package_selector(user, package=None) }}
 	</div>
 	<h2 class="mt-0">{{ self.title() }}</h2>
-	{{ render_package_stats(url_for("api.user_stats", username=user.username, start=start, end=end), downloads) }}
+	{{ render_package_stats(url_for("api.user_stats", username=user.username, start=start, end=end), downloads, start or end) }}
 {% endblock %}

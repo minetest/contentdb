@@ -21,5 +21,5 @@
 		{{ render_package_selector(package.author, package=package) }}
 	</div>
 	<h2 class="mt-0">{{ _("Statistics") }}</h2>
-	{{ render_package_stats(package.getURL('api.package_stats', start=start, end=end), package.downloads) }}
+	{{ render_package_stats(package.getURL('api.package_stats', start=start, end=end), package.downloads, start or end) }}
 {% endblock %}

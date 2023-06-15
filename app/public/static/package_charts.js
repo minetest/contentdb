@@ -1,3 +1,6 @@
+// @author rubenwardy
+// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
+
 "use strict";
 
 
@@ -58,9 +61,45 @@ const chartColorsBg = chartColors.map(color => `rgba(${hexToRgb(color.slice(1))}
 
 const SECONDS_IN_A_DAY = 1000 * 3600 * 24;
 
+
+function format_message(id, values) {
+	let format = document.getElementById(id).textContent;
+	values.forEach((value, i) => {
+		format = format.replace("$" + (i + 1), value);
+	})
+	return format;
+}
+
+
+function add_summary_card(title, icon, value, extra) {
+	const ele = document.createElement("div");
+	ele.innerHTML = `
+		<div class="col-md-4">
+			<div class="card h-100">
+				<div class="card-body align-items-center text-center">
+					<div class="mt-0 mb-3">
+						<i class="fas fa-${icon} mr-1"></i>
+						<span class="summary-title"></span>
+					</div>
+					<div class="my-0 h4">
+						<span class="summary-value"></span>
+						<small class="text-muted ml-2 summary-extra"></small>
+					</div>
+				</div>
+			</div>
+		</div>`;
+
+	ele.querySelector(".summary-title").textContent = title;
+	ele.querySelector(".summary-value").textContent = value;
+	ele.querySelector(".summary-extra").textContent = extra;
+
+	document.getElementById("stats-summaries").appendChild(ele.children[0]);
+}
+
 async function load_data() {
 	const root = document.getElementById("stats-root");
 	const source = root.getAttribute("data-source");
+	const is_range = root.getAttribute("data-is-range") == "true";
 	const response = await fetch(source);
 	const json = await response.json();
 
@@ -79,16 +118,22 @@ async function load_data() {
 		return date.toISOString().split("T")[0];
 	});
 
-	const total7 = sum(json.platform_minetest.slice(-7)) + sum(json.platform_other.slice(-7));
-	document.getElementById("downloads_total7d").textContent = total7;
-	document.getElementById("downloads_avg7d").textContent = (total7 / 7).toFixed(0);
+	if (!is_range) {
+		if (json.platform_minetest.length >= 30) {
+			const total30 = sum(json.platform_minetest.slice(-30)) + sum(json.platform_other.slice(-30));
+			add_summary_card(format_message("downloads-30days", []), "download", total30,
+					format_message("downloads-per-day", [ (total30 / 30).toFixed(0) ]));
+		}
 
-	if (json.platform_minetest.length >= 30) {
-		const total30 = sum(json.platform_minetest.slice(-30)) + sum(json.platform_other.slice(-30));
-		document.getElementById("downloads_total30d").textContent = total30;
-		document.getElementById("downloads_avg30d").textContent = (total30 / 30).toFixed(0);
+		const total7 = sum(json.platform_minetest.slice(-7)) + sum(json.platform_other.slice(-7));
+		add_summary_card(format_message("downloads-7days", []), "download", total7,
+				format_message("downloads-per-day", [ (total7 / 7).toFixed(0) ]));
 	} else {
-		document.getElementById("downloads30").style.display = "none";
+		const total = sum(json.platform_minetest) + sum(json.platform_other);
+		const days = Math.max(json.platform_minetest.length, json.platform_other.length);
+		const title = format_message("downloads-range", [ json.start, json.end ]);
+		add_summary_card(title, "download", total,
+				format_message("downloads-per-day", [ (total / days).toFixed(0) ]));
 	}
 
 	const jsonOther = json.platform_minetest.map((value, i) =>

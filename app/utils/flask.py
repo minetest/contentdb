@@ -38,12 +38,15 @@ def abs_url_for(endpoint: str, **kwargs):
 	scheme = "https" if app.config["BASE_URL"][:5] == "https" else "http"
 	return url_for(endpoint, _external=True, _scheme=scheme, **kwargs)
 
+
 def abs_url(path):
 	return urljoin(app.config["BASE_URL"], path)
+
 
 def abs_url_samesite(path):
 	base = urlparse(app.config["BASE_URL"])
 	return urlunparse(base._replace(path=path))
+
 
 def url_current(abs=False):
 	if request.args is None or request.view_args is None:
@@ -57,11 +60,24 @@ def url_current(abs=False):
 	else:
 		return url_for(request.endpoint, **dargs)
 
+
+def url_clear_query():
+	if request.endpoint is None:
+		return None
+
+	dargs = dict()
+	if request.view_args:
+		dargs.update(request.view_args)
+
+	return url_for(request.endpoint, **dargs)
+
+
 def url_set_anchor(anchor):
 	args = MultiDict(request.args)
 	dargs = dict(args.lists())
 	dargs.update(request.view_args)
 	return url_for(request.endpoint, **dargs) + "#" + anchor
+
 
 def url_set_query(**kwargs):
 	if request.endpoint is None:
@@ -130,7 +146,7 @@ def get_daterange_options() -> List[Tuple[LazyString, str]]:
 	last_year_end = datetime.date(now.year - 1, 12, 31)
 
 	return [
-		(lazy_gettext("All time"), url_set_query(start="2022-10-23", end=now.isoformat())),
+		(lazy_gettext("All time"), url_clear_query()),
 		(lazy_gettext("Last 7 days"), url_set_query(start=days7.isoformat(), end=now.isoformat())),
 		(lazy_gettext("Last 30 days"), url_set_query(start=days30.isoformat(), end=now.isoformat())),
 		(lazy_gettext("Last 90 days"), url_set_query(start=days90.isoformat(), end=now.isoformat())),

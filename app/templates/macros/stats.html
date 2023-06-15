@@ -2,7 +2,7 @@
 	<script src="/static/libs/chart.min.js"></script>
 	<script src="/static/libs/chartjs-adapter-date-fns.bundle.min.js"></script>
 	<script src="/static/libs/chartjs-plugin-annotation.min.js"></script>
-	<script src="/static/package_charts.js?v=10"></script>
+	<script src="/static/package_charts.js?v=11"></script>
 {% endmacro %}
 
 
@@ -44,14 +44,28 @@
 {% endmacro %}
 
 
-{% macro render_package_stats(source, downloads) %}
+{% macro render_package_stats(source, downloads, is_range) %}
+	<div class="d-none">
+		<span id="downloads-7days">
+			{{ _("Downloads, past 7 days") }}
+		</span>
+		<span id="downloads-30days">
+			{{ _("Downloads, past 30 days") }}
+		</span>
+		<span id="downloads-range">
+			{{ _("Downloads from $1 to $2") }}
+		</span>
+		<span id="downloads-per-day">
+			{{ _("$1 per day") }}
+		</span>
+	</div>
 	<noscript>
 		<p class="alert alert-danger">
 			{{ _("JavaScript is required to display charts and statistics") }}
 		</p>
 	</noscript>
-	<div class="row mb-5">
-		<div class="col-md-4">
+	<div class="row mb-5" id="stats-summaries">
+		<div class="col-md-4" id="lifetime-downloads">
 			<div class="card h-100">
 				<div class="card-body align-items-center text-center">
 					<div class="mt-0 mb-3">
@@ -64,40 +78,6 @@
 				</div>
 			</div>
 		</div>
-
-		<div class="col-md-4">
-			<div class="card h-100">
-				<div class="card-body align-items-center text-center">
-					<div class="mt-0 mb-3">
-						<i class="fas fa-download mr-1"></i>
-						{{ _("Downloads, past 7 days") }}
-					</div>
-					<div class="my-0 h4">
-						<span id='downloads_total7d'></span>
-						<small class="text-muted ml-2">
-							({{ _("%(downloads)s per day", downloads=("<span id='downloads_avg7d'></span>" | safe)) }})
-						</small>
-					</div>
-				</div>
-			</div>
-		</div>
-
-		<div class="col-md-4" id="downloads30">
-			<div class="card h-100">
-				<div class="card-body align-items-center text-center">
-					<div class="mt-0 mb-3">
-						<i class="fas fa-download mr-1"></i>
-						{{ _("Downloads, past 30 days") }}
-					</div>
-					<div class="my-0 h4">
-						<span id='downloads_total30d'></span>
-						<small class="text-muted ml-2">
-							({{ _("%(downloads)s per day", downloads=("<span id='downloads_avg30d'></span>" | safe)) }})
-						</small>
-					</div>
-				</div>
-			</div>
-		</div>
 	</div>
 
 	<div id="loading">{{ _("Loading...") }}</div>
@@ -106,7 +86,7 @@
 		{{ _("No data") }}
 	</div>
 
-	<div id="stats-root" data-source="{{ source }}" style="display: none;">
+	<div id="stats-root" data-source="{{ source }}" data-is-range="{{ is_range and 'true' or 'false' }}" style="display: none;">
 		<section id="downloads-by-package" class="d-none">
 			<h3>{{ _("Downloads by Package") }}</h3>
 			<p class="text-muted">
