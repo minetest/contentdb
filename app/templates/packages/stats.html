@@ -17,7 +17,7 @@
 			<i class="fas fa-download mr-1"></i>
 			{{ _("Download (.csv)") }}
 		</a>
-		{{ render_daterange_selector(options) }}
+		{{ render_daterange_selector(options, start or end) }}
 		{{ render_package_selector(package.author, package=package) }}
 	</div>
 	<h2 class="mt-0">{{ _("Statistics") }}</h2>

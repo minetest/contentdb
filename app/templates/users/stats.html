@@ -13,7 +13,7 @@
 
 {% block content %}
 	<div class="float-right">
-		{{ render_daterange_selector(options) }}
+		{{ render_daterange_selector(options, start or end) }}
 		{{ render_package_selector(user, package=None) }}
 	</div>
 	<h2 class="mt-0">{{ self.title() }}</h2>

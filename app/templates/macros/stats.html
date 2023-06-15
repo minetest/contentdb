@@ -30,9 +30,9 @@
 {% endmacro %}
 
 
-{% macro render_daterange_selector(options) %}
-	<nav class="dropdown d-inline-block">
-		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownDateRange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+{% macro render_daterange_selector(options, is_active) %}
+	<nav class="dropdown d-inline-block mr-2">
+		<button class="btn {% if is_active %}btn-primary{% else %}btn-secondary{% endif %} dropdown-toggle" type="button" id="dropdownDateRange" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			{{ _("Date range...") }}
 		</button>
 		<div class="dropdown-menu" aria-labelledby="dropdownDateRange">
