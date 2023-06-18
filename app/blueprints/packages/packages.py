@@ -13,29 +13,29 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import typing
+
 from urllib.parse import quote as urlescape
 
-from flask import render_template, make_response
 from celery import uuid
-from flask_wtf import FlaskForm
+from flask import render_template, make_response
 from flask_login import login_required
+from flask_wtf import FlaskForm
 from jinja2.utils import markupsafe
 from sqlalchemy import func
 from sqlalchemy.orm import joinedload, subqueryload
 from wtforms import *
-from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from wtforms.validators import *
+from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 
-from app.querybuilder import QueryBuilder
-from app.rediscache import has_key, set_key
-from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
-from app.utils import *
-from . import bp, get_package_tabs
 from app.logic.LogicError import LogicError
 from app.logic.packages import do_edit_package
 from app.models.packages import PackageProvides
+from app.querybuilder import QueryBuilder
+from app.rediscache import has_key, set_key
+from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
 from app.tasks.webhooktasks import post_discord_webhook
+from app.utils import *
+from . import bp, get_package_tabs
 from ...logic.game_support import GameSupportResolver
 
 
@@ -253,7 +253,7 @@ class PackageForm(FlaskForm):
 
 	submit           = SubmitField(lazy_gettext("Save"))
 
-	def validate_name(form, field):
+	def validate_name(self, field):
 		if field.data == "_game":
 			raise ValidationError(lazy_gettext("_game is not an allowed name"))
 

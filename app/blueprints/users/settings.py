@@ -1,5 +1,5 @@
 from flask import *
-from flask_babel import gettext, lazy_gettext, get_locale
+from flask_babel import gettext, get_locale
 from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
@@ -7,8 +7,8 @@ from wtforms import *
 from wtforms.validators import *
 
 from app.models import *
-from app.utils import nonEmptyOrNone, addAuditLog, randomString, rank_required, has_blocked_domains
 from app.tasks.emails import send_verify_email
+from app.utils import nonEmptyOrNone, addAuditLog, randomString, rank_required, has_blocked_domains
 from . import bp
 
 

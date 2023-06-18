@@ -64,9 +64,9 @@ def do_order_screenshots(_user: User, package: Package, order: [any]):
 		try:
 			lookup[int(ss_id)].order = counter
 			counter += 1
-		except KeyError as e:
+		except KeyError:
 			raise LogicError(400, "Unable to find screenshot with id={}".format(ss_id))
-		except (ValueError, TypeError) as e:
+		except (ValueError, TypeError):
 			raise LogicError(400, "Invalid id, not a number: {}".format(json.dumps(ss_id)))
 
 	db.session.commit()
@@ -75,7 +75,7 @@ def do_order_screenshots(_user: User, package: Package, order: [any]):
 def do_set_cover_image(_user: User, package: Package, cover_image):
 	try:
 		cover_image = int(cover_image)
-	except (ValueError, TypeError) as e:
+	except (ValueError, TypeError):
 		raise LogicError(400, "Invalid id, not a number: {}".format(json.dumps(cover_image)))
 
 	for screenshot in package.screenshots.all():

@@ -28,9 +28,13 @@ class TaskError(Exception):
 	def __str__(self):
 		return repr("TaskError: " + self.value)
 
+
 class FlaskCelery(Celery):
+	app: flask.app
+
 	def __init__(self, *args, **kwargs):
 		super(FlaskCelery, self).__init__(*args, **kwargs)
+		self.app = None
 		self.patch_task()
 
 		if 'app' in kwargs:
@@ -56,6 +60,7 @@ class FlaskCelery(Celery):
 		self.app = app
 		self.config_from_object(app.config)
 
+
 def make_celery(app):
 	celery = FlaskCelery(app.import_name, backend=app.config['CELERY_RESULT_BACKEND'],
 					broker=app.config['CELERY_BROKER_URL'])
@@ -63,7 +68,9 @@ def make_celery(app):
 	celery.init_app(app)
 	return celery
 
+
 celery = make_celery(app)
+
 
 CELERYBEAT_SCHEDULE = {
 	'topic_list_import': {
@@ -96,6 +103,7 @@ CELERYBEAT_SCHEDULE = {
 	},
 }
 celery.conf.beat_schedule = CELERYBEAT_SCHEDULE
+
 
 from . import importtasks, forumtasks, emails, pkgtasks, usertasks
 

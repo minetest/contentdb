@@ -40,7 +40,6 @@ class QueryBuilder:
 			self.random or self.lucky or self.author or self.version or self.game)
 
 	def __init__(self, args):
-		title = "Packages"
 
 		# Get request types
 		types = args.getlist("type")

@@ -16,8 +16,10 @@
 
 import json
 import re
+import typing
+
 import validators
-from flask_babel import lazy_gettext
+from flask_babel import lazy_gettext, LazyString
 
 from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
@@ -26,7 +28,7 @@ from app.utils import addAuditLog, has_blocked_domains, diff_dictionaries, descr
 from app.utils.url import clean_youtube_url
 
 
-def check(cond: bool, msg: str):
+def check(cond: bool, msg: typing.Union[str, LazyString]):
 	if not cond:
 		raise LogicError(400, msg)
 

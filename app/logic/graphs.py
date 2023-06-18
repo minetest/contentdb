@@ -134,7 +134,7 @@ def get_package_overview_for_user(user: Optional[User], start_date: datetime.dat
 	return result
 
 
-def get_all_package_stats(start_date: Optional[datetime.date], end_date: Optional[datetime.date]):
+def get_all_package_stats(start_date: Optional[datetime.date] = None, end_date: Optional[datetime.date] = None):
 	now_date = datetime.datetime.utcnow().date()
 	if end_date is None or end_date > now_date:
 		end_date = now_date

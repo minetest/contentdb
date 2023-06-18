@@ -214,30 +214,6 @@ PACKAGE_STATE_FLOW = {
 }
 
 
-class PackagePropertyKey(enum.Enum):
-	name          = "Name"
-	title         = "Title"
-	short_desc     = "Short Description"
-	desc          = "Description"
-	type          = "Type"
-	license       = "License"
-	media_license = "Media License"
-	tags          = "Tags"
-	provides      = "Provides"
-	repo          = "Repository"
-	website       = "Website"
-	issueTracker  = "Issue Tracker"
-	forums        = "Forum Topic ID"
-
-	def convert(self, value):
-		if self == PackagePropertyKey.tags:
-			return ",".join([t.title for t in value])
-		elif self == PackagePropertyKey.provides:
-			return ",".join([t.name for t in value])
-		else:
-			return str(value)
-
-
 PackageProvides = db.Table("provides",
 	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
 	db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
@@ -490,9 +466,6 @@ class Package(db.Model):
 		self.state = package.state
 
 		self.maintainers.append(self.author)
-
-		for e in PackagePropertyKey:
-			setattr(self, e.name, getattr(package, e.name))
 
 	@classmethod
 	def get_by_key(cls, key):

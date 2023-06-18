@@ -20,10 +20,10 @@ from flask_babel import lazy_gettext
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import *
-from wtforms_sqlalchemy.fields import QuerySelectField
 from wtforms.validators import *
+from wtforms_sqlalchemy.fields import QuerySelectField
 
-from app.models import db, User, APIToken, Package, Permission
+from app.models import db, User, APIToken, Permission
 from app.utils import randomString
 from . import bp
 from ..users.settings import get_setting_tabs
@@ -136,8 +136,6 @@ def delete_token(username, id):
 
 	if not user.check_perm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
-
-	is_new = id is None
 
 	token = APIToken.query.get(id)
 	if token is None:
