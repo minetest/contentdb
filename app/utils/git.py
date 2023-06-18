@@ -47,7 +47,6 @@ def get_temp_dir():
 def clone_repo(urlstr, ref=None, recursive=False):
 	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
 
-	err = None
 	try:
 		gitUrl = generate_git_url(urlstr)
 		print("Cloning from " + gitUrl)

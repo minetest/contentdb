@@ -73,7 +73,6 @@ def claim_forums():
 				return redirect(url_for("users.claim_forums"))
 
 			# Get signature
-			sig = None
 			try:
 				profile = getProfile("https://forum.minetest.net", username)
 				sig = profile.signature if profile else None

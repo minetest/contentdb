@@ -17,7 +17,7 @@
 
 
 from flask import *
-from flask_babel import gettext, lazy_gettext, get_locale
+from flask_babel import gettext, get_locale
 from flask_login import current_user, login_required, logout_user, login_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
@@ -28,8 +28,6 @@ from app.models import *
 from app.tasks.emails import send_verify_email, send_anon_email, send_unsubscribe_verify, send_user_email
 from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog, \
 	nonEmptyOrNone, post_login, is_username_valid
-from passlib.pwd import genphrase
-
 from . import bp
 
 

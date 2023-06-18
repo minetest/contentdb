@@ -101,7 +101,6 @@ def set_lock(id):
 	if thread.locked is None:
 		abort(400)
 
-	msg = None
 	if thread.locked:
 		msg = "Locked thread '{}'".format(thread.title)
 		flash(gettext("Locked thread"), "success")

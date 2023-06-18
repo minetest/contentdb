@@ -38,10 +38,10 @@ def view_permissions():
 			current_app.config["GITHUB_CLIENT_ID"]
 	return redirect(url)
 
+
 @bp.route("/github/callback/")
 @github.authorized_handler
 def callback(oauth_token):
-	next_url = request.args.get("next")
 	if oauth_token is None:
 		flash(gettext("Authorization failed [err=gh-oauth-login-failed]"), "danger")
 		return redirect(url_for("users.login"))

@@ -14,10 +14,11 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import typing
 from typing import Dict
 
 from flask import render_template, escape
-from flask_babel import force_locale, gettext, lazy_gettext
+from flask_babel import force_locale, gettext, lazy_gettext, LazyString
 from flask_mail import Message
 from app import mail
 from app.models import Notification, db, EmailSubscription, User
@@ -90,7 +91,8 @@ def send_unsubscribe_verify(email, locale):
 
 
 @celery.task(rate_limit="25/m")
-def send_email_with_reason(email: str, locale: str, subject: str, text: str, html: str, reason: str, conn: any):
+def send_email_with_reason(email: str, locale: str, subject: str, text: str, html: str,
+		reason: typing.Union[str, LazyString], conn: any):
 	sub = get_email_subscription(email)
 	if sub.blacklisted:
 		return

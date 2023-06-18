@@ -14,9 +14,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import typing
 from urllib.parse import urljoin, urlparse, urlunparse
 
-import typing
 import user_agents
 from flask import request, abort
 from flask_babel import LazyString

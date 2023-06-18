@@ -52,7 +52,6 @@ def populate_test_data(session):
 	tags = { x.name : x for x in Tag.query.all() }
 	admin_user = User.query.filter_by(rank=UserRank.ADMIN).first()
 	v4 = MinetestRelease.query.filter_by(protocol=32).first()
-	v50 = MinetestRelease.query.filter_by(protocol=37).first()
 	v51 = MinetestRelease.query.filter_by(protocol=38).first()
 
 	ez = User("Shara")
@@ -381,7 +380,6 @@ Uses the CTF PvP Engine.
 
 	metas = {}
 	for package in Package.query.filter_by(type=PackageType.MOD).all():
-		meta = None
 		try:
 			meta = metas[package.name]
 		except KeyError:

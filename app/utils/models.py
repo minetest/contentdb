@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+import typing
 from functools import wraps
 from typing import List
 
@@ -87,7 +87,8 @@ def addNotification(target, causer: User, type: NotificationType, title: str, ur
 		db.session.add(notif)
 
 
-def addAuditLog(severity: AuditSeverity, causer: User, title: str, url: str, package : Package =None, description : str =None):
+def addAuditLog(severity: AuditSeverity, causer: User, title: str, url: typing.Optional[str],
+		package: Package = None, description: str = None):
 	entry = AuditLogEntry(causer, severity, title, url, package, description)
 	db.session.add(entry)
 
