@@ -36,7 +36,7 @@ See [Developer Intro](docs/dev_intro.md) for an overview of the code organisatio
 
 * (optional) Install the [Docker extension](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 * Install the [Python extension](https://marketplace.visualstudio.com/items?itemName=ms-python.python)
-	* Click no to installing pylint (we don't want it to be installed outside of a virtual env)
+	* Click no to installing pylint (we don't want it to be installed outside a virtual env)
 * Set up a virtual env
 	* Replace `psycopg2` with `psycopg2_binary` in requirements.txt (because postgresql won't be installed on the system)
 	* `python3 -m venv env`

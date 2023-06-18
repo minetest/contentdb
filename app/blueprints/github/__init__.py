@@ -46,12 +46,12 @@ def callback(oauth_token):
 		flash(gettext("Authorization failed [err=gh-oauth-login-failed]"), "danger")
 		return redirect(url_for("users.login"))
 
-	# Get Github username
+	# Get GitGub username
 	url = "https://api.github.com/user"
 	r = requests.get(url, headers={"Authorization": "token " + oauth_token})
 	username = r.json()["login"]
 
-	# Get user by github username
+	# Get user by GitHub username
 	userByGithub = User.query.filter(func.lower(User.github_username) == func.lower(username)).first()
 
 	# If logged in, connect

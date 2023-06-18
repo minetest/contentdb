@@ -24,7 +24,7 @@ Both of these are comma-separated lists of game technical ids. Any `_game` suffi
     supported_games = minetest_game, repixture
     unsupported_games = lordofthetest, nodecore, whynot
 
-If your package supports all games by default, you can put "*` in supported_games.
+If your package supports all games by default, you can put "*" in supported_games.
 You can still use unsupported_games to mark games as unsupported.
 You can also specify games that you've tested in supported_games.
 

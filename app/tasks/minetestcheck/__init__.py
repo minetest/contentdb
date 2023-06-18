@@ -18,7 +18,7 @@ class ContentType(Enum):
 
 	def validate_same(self, other):
 		"""
-		Whether or not `other` is an acceptable type for this
+		Whether `other` is an acceptable type for this
 		"""
 		assert other
 

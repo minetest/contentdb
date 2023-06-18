@@ -12,7 +12,7 @@ be done using a GitHub account or a random string in your forum account signatur
 
 If you don't, then you can just sign up using an email address and password.
 
-GitHub can only be used to login, not to register.
+GitHub can only be used to log in, not to register.
 
 <a class="btn btn-primary" href="/user/claim/">Register</a>
 

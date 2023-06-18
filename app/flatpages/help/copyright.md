@@ -24,7 +24,7 @@ licenses, although you should actually read the text as well.
 
 If you use code from other sources (such as mods or games), you'll need to make sure you follow
 their license. A common one is attribution, you should do this by adding a comment next to the
-code and crediting the author in your README / LICENSE file.
+code and crediting the author in your LICENSE file.
 
 It's sometimes fine to copy trivial/small amounts of code under fair use, but this
 is a bit of a grey area. It's better to understand the solution and rewrite it yourself.
@@ -74,7 +74,7 @@ Your Name, CC BY-SA 4.0:
 * [OpenGameArt](https://opengameart.org/) - everything
 * [Kenney game assets](https://www.kenney.nl/assets) - everything
 * [Free Sound](https://freesound.org/) - sounds
-* [PolyHaven](https://polyhaven.com/) - 3d models and textures. 
+* [PolyHaven](https://polyhaven.com/) - 3d models and textures.
 * Other Minetest mods/games
 
     Don't assume the author has correctly licensed their work.
@@ -87,7 +87,7 @@ Your Name, CC BY-SA 4.0:
 ### I made it myself, using X as a guide
 
 Copying by hand is still copying, the law doesn't distinguish this from copy+paste.
-Make your own art without copying colors or patterns from existing games/art. 
+Make your own art without copying colors or patterns from existing games/art.
 
 If you need a good set of colors, see [LOSPEC](https://lospec.com/palette-list).
 
