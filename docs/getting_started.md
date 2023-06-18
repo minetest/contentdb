@@ -16,7 +16,7 @@ Docker is the recommended way to develop and deploy ContentDB.
    Make sure to set `USER_ENABLE_EMAIL` to True.
 
 4. (Optional) Set up GitHub integration
-	1. Make a Github OAuth Client at <https://github.com/settings/developers>:
+	1. Make a GitHub OAuth Client at <https://github.com/settings/developers>:
 	2. Homepage URL - `http://localhost:5123/`
 	3. Authorization callback URL - `http://localhost:5123/user/github/callback/`
 	4. Put client id and client secret in `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` in config.cfg.

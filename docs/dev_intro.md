@@ -5,7 +5,7 @@
 ContentDB is a Python [Flask](https://flask.palletsprojects.com/en/2.0.x/) webservice.
 There's a PostgreSQL database, manipulated using the [SQLAlchemy ORM](https://docs.sqlalchemy.org/en/14/). 
 
-When a user makes a request, Python Flask will direct the request to a *route* in an *blueprint*. 
+When a user makes a request, Python Flask will direct the request to a *route* in a *blueprint*. 
 A [blueprint](https://flask.palletsprojects.com/en/2.0.x/blueprints/) is a Flask construct to hold a set of routes.
 Routes are implemented using Python, and likely to respond by using database *models* and rendering HTML *templates*.
 

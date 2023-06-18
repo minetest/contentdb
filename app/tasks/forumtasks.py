@@ -46,7 +46,7 @@ def checkForumAccount(forums_username):
 		user.forums_username = forums_username
 		db.session.add(user)
 
-	# Get github username
+	# Get GitHub username
 	github_username = profile.get("github")
 	if github_username is not None and github_username.strip() != "":
 		print("Updated GitHub username for " + user.display_name + " to " + github_username)

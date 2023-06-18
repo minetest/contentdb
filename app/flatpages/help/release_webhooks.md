@@ -6,7 +6,7 @@ A webhook is a notification from one service to another. Put simply, a webhook
 is used to notify ContentDB that the git repository has changed.
 
 ContentDB offers the ability to automatically create releases using webhooks
-from either Github or Gitlab. If you're not using either of those services,
+from either GitHub or GitLab. If you're not using either of those services,
 you can also use the [API](../api) to create releases.
 
 ContentDB also offers the ability to poll a Git repo and check for updates

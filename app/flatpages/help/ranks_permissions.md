@@ -2,8 +2,8 @@ title: Ranks and Permissions
 
 ## Overview
 
-* **New Members** - mostly untrusted, cannot change package meta data or publish releases without approval.
-* **Members** - Trusted to change the meta data of their own packages', but cannot approve their own packages.
+* **New Members** - mostly untrusted, cannot change package metadata or publish releases without approval.
+* **Members** - Trusted to change the metadata of their own packages', but cannot approve their own packages.
 * **Trusted Members** - Same as above, but can approve their own releases.
 * **Approvers** - Responsible for approving new packages, screenshots, and releases.
 * **Editors** - Same as above, and can edit any package or release.

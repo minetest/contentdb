@@ -55,7 +55,7 @@ Here's a quick summary related to Minetest content:
 Non-free packages are hidden in the client by default, partly in order to comply
 with the rules of various Linux distributions.
 
-Users can opt-in to showing non-free software, if they wish:
+Users can opt in to showing non-free software, if they wish:
 
 1. In the main menu, go to Settings > All settings
 2. Search for "ContentDB Flag Blacklist".

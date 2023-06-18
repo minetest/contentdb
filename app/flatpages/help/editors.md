@@ -36,7 +36,7 @@ interface, and can be configured separately in Emails and Notifications.
 
 ## Crash Course to being an Editor
 
-The [Package Inclusion Policy and Guidance](/policy_and_guidance/) is our go to resource for making decisions in 
+The [Package Inclusion Policy and Guidance](/policy_and_guidance/) is our go-to resource for making decisions in 
 changes needed, similar to how lua_api.txt is the doc for modders to consult.
 
 In the [Editor console](/todo/), the two most important tabs are the Editor Work Queue and the Forum 
@@ -50,7 +50,7 @@ A simplified process for reviewing a package is as follows:
 1. scan the package image if present for any obvious closed source assets.
 2. if right to a name warning is present, check its validity and if the package meets 
    the exceptions.
-3. if the forums topic missing warning is present, feel free to check it, but its 
+3. if the forums topic missing warning is present, feel free to check it, but it's 
    usually incorrect.
 4. check source, etc links to make sure they work and are correct.
 5. verify that the package has license file that matches what is on the contentdb fields

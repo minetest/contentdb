@@ -64,7 +64,7 @@ class FlaskMailHandler(logging.Handler):
 	def getSubject(self, record):
 		fmt = FlaskMailSubjectFormatter(self.subject_template)
 		subject = fmt.format(record)
-		# Since templates can cause header problems, and we rather have a incomplete email then an error, we fix this
+		# Since templates can cause header problems, and we rather have an incomplete email then an error, we fix this
 		if _is_bad_subject(subject):
 			subject="FlaskMailHandler log-entry from ContentDB [original subject is replaced, because it would result in a bad header]"
 		return subject
