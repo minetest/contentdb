@@ -64,7 +64,7 @@
 
 	{% if current_user == thread.author and thread.review %}
 		<a class="btn btn-primary ml-1 float-right mr-2"
-				href="{{ thread.review.package.get_url("packages.review") }}">
+				href="{{ thread.review.package.get_url('packages.review') }}">
 			<i class="fas fa-pen"></i>
 			{{ _("Edit Review") }}
 		</a>

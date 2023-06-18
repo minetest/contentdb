@@ -4,7 +4,7 @@
 		{% set config = package.update_config %}
 		<li class="list-group-item">
 			<div class="row">
-				<a class="col-sm-auto text-muted" style="min-width: 200px;" href="{{ package.get_url("packages.view") }}">
+				<a class="col-sm-auto text-muted" style="min-width: 200px;" href="{{ package.get_url('packages.view') }}">
 					<img
 						class="img-fluid"
 						style="max-height: 22px; max-width: 22px;"
@@ -43,7 +43,7 @@
 					</a>
 
 					{% if package.check_perm(current_user, "MAKE_RELEASE") %}
-						<a class="btn btn-sm btn-secondary" href="{{ package.get_url("packages.update_config") }}">
+						<a class="btn btn-sm btn-secondary" href="{{ package.get_url('packages.update_config') }}">
 							<i class="fas fa-cog mr-1"></i>
 							{{ _("Update settings") }}
 						</a>

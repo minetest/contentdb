@@ -42,7 +42,7 @@
 	{% for package in packages %}
 		<tr>
 			<td>
-				<a href="{{ package.get_url("packages.view") }}">
+				<a href="{{ package.get_url('packages.view') }}">
 					{{ package.title }}
 				</a>
 
@@ -50,7 +50,7 @@
 			</td>
 			<td class="text-center">
 				{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
-					<a class="btn btn-link btn-sm py-0" href="{{ package.get_url("packages.create_edit") }}">
+					<a class="btn btn-link btn-sm py-0" href="{{ package.get_url('packages.create_edit') }}">
 						<i class="fas fa-pen"></i>
 					</a>
 				{% endif %}

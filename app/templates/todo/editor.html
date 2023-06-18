@@ -46,7 +46,7 @@
 				<h3 class="card-header">{{ _("Packages") }}</h3>
 				<div class="list-group list-group-flush">
 					{% for p in packages %}
-						<a href="{{ p.get_url("packages.view") }}" class="list-group-item list-group-item-action">
+						<a href="{{ p.get_url('packages.view') }}" class="list-group-item list-group-item-action">
 							<span class="float-right" title="Created {{ p.created_at | datetime }}">
 								<small>
 									{{ p.created_at | timedelta }} ago
@@ -81,7 +81,7 @@
 							{% endif %}
 							<a href="{{ r.get_edit_url() }}">{{ r.title }}</a>
 							on
-							<a href="{{ r.package.get_url("packages.view") }}">
+							<a href="{{ r.package.get_url('packages.view') }}">
 								{{ _("%(title)s by %(display_name)s",
 										title=r.package.title, display_name=r.package.author.display_name) }}
 							</a>
@@ -107,7 +107,7 @@
 			<h3 class="card-header">{{ _("License Needed") }}</h3>
 			<div class="list-group list-group-flush">
 				{% for p in license_needed %}
-					<a href="{{ p.get_url("packages.view") }}" class="list-group-item list-group-item-action">
+					<a href="{{ p.get_url('packages.view') }}" class="list-group-item list-group-item-action">
 						<span class="float-right" title="Created {{ p.created_at | datetime }}">
 							<small>
 								{{ p.created_at | timedelta }} ago
@@ -164,7 +164,7 @@
 			<h3 class="card-header">WIP Packages</h3>
 			<div class="list-group list-group-flush" style="max-height: 300px; overflow: hidden auto;">
 				{% for p in wip_packages %}
-					<a href="{{ p.get_url("packages.view") }}" class="list-group-item list-group-item-action">
+					<a href="{{ p.get_url('packages.view') }}" class="list-group-item list-group-item-action">
 						<span class="float-right" title="Created {{ p.created_at | datetime }}">
 							<small>
 								{{ p.created_at | timedelta }} ago
