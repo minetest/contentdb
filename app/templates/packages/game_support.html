@@ -63,9 +63,11 @@
 				</div>
 			</a>
 		{% else %}
-			<div class="list-group-item text-muted">
-				{{ _("No specific game is required") }}
-			</div>
+			{% if not package.supports_all_games %}
+				<div class="list-group-item text-danger">
+					{{ _("Unknown. Please either add supported games or check 'Supports all games'") }}
+				</div>
+			{% endif %}
 		{% endfor %}
 	</div>
 
