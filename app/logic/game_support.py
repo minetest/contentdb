@@ -16,7 +16,7 @@
 
 
 import sys
-from typing import List, Dict, Optional, Iterable
+from typing import List, Dict
 
 import sqlalchemy.orm
 
@@ -102,7 +102,7 @@ class GameSupportResolver:
 		print(f"Resolving for {key}", file=sys.stderr)
 
 		history = history.copy()
-		history.append(package.getId())
+		history.append(package.get_id())
 
 		if package.type == PackageType.GAME:
 			return {package.id}
@@ -135,7 +135,7 @@ class GameSupportResolver:
 		self.resolved_packages[key] = retval
 		return retval
 
-	def update_all(self) -> None:
+	def init_all(self) -> None:
 		for package in self.session.query(Package).filter(Package.type == PackageType.MOD, Package.state != PackageState.DELETED).all():
 			retval = self.resolve(package, [])
 			for game_id in retval:

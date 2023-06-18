@@ -43,7 +43,7 @@ def webhook_impl():
 	if token is None:
 		return error(403, "Invalid authentication")
 
-	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
+	if not package.check_perm(token.owner, Permission.APPROVE_RELEASE):
 		return error(403, "You do not have the permission to approve releases")
 
 	#

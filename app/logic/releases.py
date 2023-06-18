@@ -28,7 +28,7 @@ from app.utils import AuditSeverity, addAuditLog, nonEmptyOrNone
 
 
 def check_can_create_release(user: User, package: Package):
-	if not package.checkPerm(user, Permission.MAKE_RELEASE):
+	if not package.check_perm(user, Permission.MAKE_RELEASE):
 		raise LogicError(403, lazy_gettext("You don't have permission to make releases"))
 
 	five_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=5)
@@ -54,7 +54,7 @@ def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
 		msg = "Created release {}".format(rel.title)
 	else:
 		msg = "Created release {} ({})".format(rel.title, reason)
-	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getURL("packages.view"), package)
+	addAuditLog(AuditSeverity.NORMAL, user, msg, package.get_url("packages.view"), package)
 
 	db.session.commit()
 
@@ -89,7 +89,7 @@ def do_create_zip_release(user: User, package: Package, title: str, file,
 		msg = "Created release {}".format(rel.title)
 	else:
 		msg = "Created release {} ({})".format(rel.title, reason)
-	addAuditLog(AuditSeverity.NORMAL, user, msg, package.getURL("packages.view"), package)
+	addAuditLog(AuditSeverity.NORMAL, user, msg, package.get_url("packages.view"), package)
 
 	db.session.commit()
 

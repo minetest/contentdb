@@ -41,10 +41,10 @@ class UserRank(enum.Enum):
 	def atLeast(self, min):
 		return self.value >= min.value
 
-	def getTitle(self):
+	def get_title(self):
 		return self.name.replace("_", " ").title()
 
-	def toName(self):
+	def to_name(self):
 		return self.name.lower()
 
 	def __str__(self):
@@ -52,7 +52,7 @@ class UserRank(enum.Enum):
 
 	@classmethod
 	def choices(cls):
-		return [(choice, choice.getTitle()) for choice in cls]
+		return [(choice, choice.get_title()) for choice in cls]
 
 	@classmethod
 	def coerce(cls, item):
@@ -93,7 +93,7 @@ class Permission(enum.Enum):
 	VIEW_AUDIT_DESCRIPTION = "VIEW_AUDIT_DESCRIPTION"
 
 	# Only return true if the permission is valid for *all* contexts
-	# See Package.checkPerm for package-specific contexts
+	# See Package.check_perm for package-specific contexts
 	def check(self, user):
 		if not user.is_authenticated:
 			return False
@@ -108,10 +108,10 @@ class Permission(enum.Enum):
 			return user.rank.atLeast(UserRank.EDITOR)
 
 		else:
-			raise Exception("Non-global permission checked globally. Use Package.checkPerm or User.checkPerm instead.")
+			raise Exception("Non-global permission checked globally. Use Package.check_perm or User.check_perm instead.")
 
 	@staticmethod
-	def checkPerm(user, perm):
+	def check_perm(user, perm):
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
@@ -213,14 +213,10 @@ class User(db.Model, UserMixin):
 		self.password = password
 		self.rank = UserRank.NOT_JOINED
 
-	def canAccessTodoList(self):
-		return Permission.APPROVE_NEW.check(self) or \
-			   Permission.APPROVE_RELEASE.check(self)
+	def can_access_todo_list(self):
+		return Permission.APPROVE_NEW.check(self) or Permission.APPROVE_RELEASE.check(self)
 
-	def isClaimed(self):
-		return self.rank.atLeast(UserRank.NEW_MEMBER)
-
-	def getProfilePicURL(self):
+	def get_profile_pic_url(self):
 		if self.profile_pic:
 			return self.profile_pic
 		elif self.rank == UserRank.BOT:
@@ -228,14 +224,14 @@ class User(db.Model, UserMixin):
 		else:
 			return gravatar(self.email or f"{self.username}@content.minetest.net")
 
-	def checkPerm(self, user, perm):
+	def check_perm(self, user, perm):
 		if not user.is_authenticated:
 			return False
 
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to User.checkPerm()")
+			raise Exception("Unknown permission given to User.check_perm()")
 
 		# Members can edit their own packages, and editors can edit any packages
 		if perm == Permission.CHANGE_AUTHOR:
@@ -256,7 +252,7 @@ class User(db.Model, UserMixin):
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
-	def canCommentRL(self):
+	def can_comment_ratelimit(self):
 		from app.models import ThreadReply
 
 		factor = 1
@@ -279,7 +275,7 @@ class User(db.Model, UserMixin):
 
 		return True
 
-	def canOpenThreadRL(self):
+	def can_open_thread_ratelimit(self):
 		from app.models import Thread
 
 		factor = 1
@@ -291,10 +287,10 @@ class User(db.Model, UserMixin):
 			factor = 2
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
-		return Thread.query.filter_by(author=self) \
-				   .filter(Thread.created_at > hour_ago).count() < 2 * factor
+		return Thread.query.filter_by(author=self)\
+				.filter(Thread.created_at > hour_ago).count() < 2 * factor
 
-	def canReviewRL(self):
+	def can_review_ratelimit(self):
 		from app.models import PackageReview
 
 		factor = 1
@@ -310,8 +306,7 @@ class User(db.Model, UserMixin):
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
 		return PackageReview.query.filter_by(author=self) \
-				   .filter(PackageReview.created_at > hour_ago).count() < 10 * factor
-
+				.filter(PackageReview.created_at > hour_ago).count() < 10 * factor
 
 	def __eq__(self, other):
 		if other is None:
@@ -324,9 +319,9 @@ class User(db.Model, UserMixin):
 		return self.id == other.id
 
 	def can_see_edit_profile(self, current_user):
-		return self.checkPerm(current_user, Permission.CHANGE_USERNAMES) or \
-			   self.checkPerm(current_user, Permission.CHANGE_EMAIL) or \
-			   self.checkPerm(current_user, Permission.CHANGE_RANK)
+		return self.check_perm(current_user, Permission.CHANGE_USERNAMES) or \
+				self.check_perm(current_user, Permission.CHANGE_EMAIL) or \
+				self.check_perm(current_user, Permission.CHANGE_RANK)
 
 	def can_delete(self):
 		from app.models import ForumTopic
@@ -392,10 +387,10 @@ class NotificationType(enum.Enum):
 	OTHER          = 0
 
 
-	def getTitle(self):
+	def get_title(self):
 		return self.name.replace("_", " ").title()
 
-	def toName(self):
+	def to_name(self):
 		return self.name.lower()
 
 	def get_description(self):
@@ -430,7 +425,7 @@ class NotificationType(enum.Enum):
 
 	@classmethod
 	def choices(cls):
-		return [(choice, choice.getTitle()) for choice in cls]
+		return [(choice, choice.get_title()) for choice in cls]
 
 	@classmethod
 	def coerce(cls, item):
@@ -512,21 +507,21 @@ class UserNotificationPreferences(db.Model):
 		self.pref_other = 0
 
 	def get_can_email(self, notification_type):
-		return getattr(self, "pref_" + notification_type.toName()) == 2
+		return getattr(self, "pref_" + notification_type.to_name()) == 2
 
 	def set_can_email(self, notification_type, value):
 		value = 2 if value else 0
-		setattr(self, "pref_" + notification_type.toName(), value)
+		setattr(self, "pref_" + notification_type.to_name(), value)
 
 	def get_can_digest(self, notification_type):
-		return getattr(self, "pref_" + notification_type.toName()) >= 1
+		return getattr(self, "pref_" + notification_type.to_name()) >= 1
 
 	def set_can_digest(self, notification_type, value):
 		if self.get_can_email(notification_type):
 			return
 
 		value = 1 if value else 0
-		setattr(self, "pref_" + notification_type.toName(), value)
+		setattr(self, "pref_" + notification_type.to_name(), value)
 
 
 class UserBan(db.Model):

@@ -173,7 +173,7 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 		db.session.rollback()
 
 		task_url = url_for('tasks.check', id=self.request.id)
-		msg = f"{err}\n\n[View Release]({release.getEditURL()}) | [View Task]({task_url})"
+		msg = f"{err}\n\n[View Release]({release.get_edit_url()}) | [View Task]({task_url})"
 		post_bot_message(release.package, f"Release {release.title} validation failed", msg)
 
 		if "Fails validation" not in release.title:
@@ -309,7 +309,7 @@ def check_update_config_impl(package):
 		db.session.add(rel)
 
 		msg = "Created release {} (Git Update Detection)".format(rel.title)
-		addSystemAuditLog(AuditSeverity.NORMAL, msg, package.getURL("packages.view"), package)
+		addSystemAuditLog(AuditSeverity.NORMAL, msg, package.get_url("packages.view"), package)
 
 		db.session.commit()
 
@@ -367,7 +367,7 @@ def check_update_config(self, package_id):
 			.strip()
 
 		msg = "Error: {}.\n\n[Change update configuration]({}) | [View task]({})" \
-			.format(err, package.getURL("packages.update_config"), url_for("tasks.check", id=self.request.id))
+			.format(err, package.get_url("packages.update_config"), url_for("tasks.check", id=self.request.id))
 
 		post_bot_message(package, "Failed to check git repository", msg)
 

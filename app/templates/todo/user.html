@@ -18,13 +18,13 @@
 	<h2>{{ _("Unapproved Packages Needing Action") }}</h2>
 	<div class="list-group mt-3 mb-5">
 		{% for package in unapproved_packages %}
-			<a class="list-group-item list-group-item-action" href="{{ package.getURL("packages.view") }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.get_url("packages.view") }}">
 				<div class="row">
 					<div class="col-sm-2 text-muted">
 						<img
 							class="img-fluid"
 							style="max-height: 22px; max-width: 22px;"
-							src="{{ package.getThumbnailOrPlaceholder() }}" />
+							src="{{ package.get_thumb_or_placeholder() }}" />
 
 						<span class="pl-2">
 							{{ package.title }}
@@ -80,11 +80,11 @@
 	{% endif %}
 	<div class="list-group mt-3 mb-5">
 		{% for package in missing_game_support %}
-			<a class="list-group-item list-group-item-action" href="{{ package.getURL('packages.game_support') }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.get_url('packages.game_support') }}">
 					<img
 						class="img-fluid"
 						style="max-height: 22px; max-width: 22px;"
-						src="{{ package.getThumbnailOrPlaceholder() }}" />
+						src="{{ package.get_thumb_or_placeholder() }}" />
 
 					<span class="pl-2">
 						{{ package.title }}
@@ -100,11 +100,11 @@
 	<h2 id="missing-screenshots">{{ _("Missing Screenshots") }}</h2>
 	<div class="list-group mt-3 mb-5">
 		{% for package in packages_with_no_screenshots %}
-			<a class="list-group-item list-group-item-action" href="{{ package.getURL('packages.screenshots') }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.get_url('packages.screenshots') }}">
 				<img
 					class="img-fluid"
 					style="max-height: 22px; max-width: 22px;"
-					src="{{ package.getThumbnailOrPlaceholder() }}" />
+					src="{{ package.get_thumb_or_placeholder() }}" />
 
 				<span class="pl-2">
 					{{ package.title }}
@@ -138,13 +138,13 @@
 	{% endif %}
 	<div class="list-group mt-3 mb-5">
 		{% for package in packages_with_small_screenshots %}
-			<a class="list-group-item list-group-item-action" href="{{ package.getURL('packages.screenshots') }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.get_url('packages.screenshots') }}">
 				<div class="row">
 					<div class="col-sm-3 text-muted" style="min-width: 200px;">
 						<img
 							class="img-fluid"
 							style="max-height: 22px; max-width: 22px;"
-							src="{{ package.getThumbnailOrPlaceholder() }}" />
+							src="{{ package.get_thumb_or_placeholder() }}" />
 
 						<span class="pl-2">
 							{{ package.title }}
@@ -183,11 +183,11 @@
 	</p>
 	<div class="list-group mt-3 mb-5">
 		{% for package in needs_tags %}
-			<a class="list-group-item list-group-item-action" href="{{ package.getURL("packages.view") }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.get_url("packages.view") }}">
 				<img
 					class="img-fluid"
 					style="max-height: 22px; max-width: 22px;"
-					src="{{ package.getThumbnailOrPlaceholder() }}" />
+					src="{{ package.get_thumb_or_placeholder() }}" />
 
 				<span class="pl-2">
 					{{ package.title }}

@@ -22,7 +22,7 @@
 						<img
 							class="img-fluid"
 							style="max-height: 22px; max-width: 22px;"
-							src="{{ package.getThumbnailOrPlaceholder() }}" />
+							src="{{ package.get_thumb_or_placeholder() }}" />
 
 						<span class="pl-2">
 							{{ package.title }}
@@ -41,7 +41,7 @@
 						{% if supported_games %}
 							{% for support in supported_games %}
 								<a class="badge badge-secondary"
-										href="{{ support.game.getURL('packages.view') }}">
+										href="{{ support.game.get_url('packages.view') }}">
 									{{ _("%(title)s by %(display_name)s",
 											title=support.game.title, display_name=support.game.author.display_name) }}
 								</a>
@@ -53,8 +53,8 @@
 						{% endif %}
 					</div>
 					<div class="col-auto">
-						<a class="btn btn-sm btn-primary" href="{{ package.getURL('packages.game_support') }}">Game Support</a>
-						<a class="btn btn-sm btn-secondary" href="{{ package.getURL('packages.view') }}">Package</a>
+						<a class="btn btn-sm btn-primary" href="{{ package.get_url('packages.game_support') }}">Game Support</a>
+						<a class="btn btn-sm btn-secondary" href="{{ package.get_url('packages.view') }}">Package</a>
 					</div>
 				</div>
 			</div>

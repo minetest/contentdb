@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-	{% if package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
-		<a href="{{ package.getURL('packages.create_screenshot') }}" class="btn btn-primary float-right">
+	{% if package.check_perm(current_user, "ADD_SCREENSHOTS") %}
+		<a href="{{ package.get_url('packages.create_screenshot') }}" class="btn btn-primary float-right">
 			<i class="fas fa-plus mr-1"></i>
 			{{ _("Add Image") }}
 		</a>
@@ -16,14 +16,14 @@
 	<ul class="list-group sortable">
 		{% set screenshots = package.screenshots.all() %}
 		{% for ss in screenshots %}
-			{% if ss.approved or package.checkPerm(current_user, "ADD_SCREENSHOTS") %}
+			{% if ss.approved or package.check_perm(current_user, "ADD_SCREENSHOTS") %}
 				<li class="list-group-item" data-id="{{ ss.id }}">
 					<div class="row">
 						<div class="col-auto text-muted pr-2">
 							<i class="fas fa-bars"></i>
 						</div>
 						<div class="col-auto">
-							<img class="img-fluid" style="max-height: 64px;" src="{{ ss.getThumbnailURL() }}" />
+							<img class="img-fluid" style="max-height: 64px;" src="{{ ss.get_thumb_url() }}" />
 						</div>
 						<div class="col">
 							{{ ss.title }}
@@ -52,9 +52,9 @@
 								{% endif %}
 							</div>
 						</div>
-						<form action="{{ ss.getDeleteURL() }}" method="POST" class="col-auto text-right" role="form">
+						<form action="{{ ss.get_delete_url() }}" method="POST" class="col-auto text-right" role="form">
 							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-							<a class="btn btn-sm btn-primary" href="{{ ss.getEditURL() }}">
+							<a class="btn btn-sm btn-primary" href="{{ ss.get_edit_url() }}">
 								<i class="fas fa-pen"></i>
 							</a>
 							<button type="submit" class="btn btn-sm btn-danger ml-2">
@@ -90,7 +90,7 @@
 		{{ _("The first screenshot in the list above will be the package thumbnail.") }}
 	</p>
 	<div class="client-preview d-flex flex-row align-items-center">
-		<img class="mt-thumb" src="{{ package.getThumbnailOrPlaceholder(1) }}" alt="{{ _('Thumbnail') }}">
+		<img class="mt-thumb" src="{{ package.get_thumb_or_placeholder(1) }}" alt="{{ _('Thumbnail') }}">
 		<div class="flex-grow desc align-self-stretch">
 			<p>
 				<span class="title">{{ package.title }}</span> by {{ package.author.username }}

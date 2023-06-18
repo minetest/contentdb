@@ -1,6 +1,6 @@
 {% macro render_releases_edit(releases, package) %}
 	{% for rel in releases %}
-		<a class="list-group-item list-group-item-action" href="{{ rel.getEditURL() }}">
+		<a class="list-group-item list-group-item-action" href="{{ rel.get_edit_url() }}">
 			{{ rel.title }}
 			<span class="text-muted ml-1">
 				{% if rel.min_rel and rel.max_rel %}
@@ -26,8 +26,8 @@
 
 {% macro render_releases_download(releases, package, current_user) %}
 	{% for rel in releases %}
-		{% if rel.approved or package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")  %}
-			<a class="list-group-item list-group-item-action" href="{{ rel.getDownloadURL() }}">
+		{% if rel.approved or package.check_perm(current_user, "MAKE_RELEASE") or rel.check_perm(current_user, "APPROVE_RELEASE")  %}
+			<a class="list-group-item list-group-item-action" href="{{ rel.get_download_url() }}">
 				{{ rel.title }}
 				<span class="text-muted ml-1">
 					{% if rel.min_rel and rel.max_rel %}
@@ -55,8 +55,8 @@
 {% macro render_releases(releases, package, current_user) -%}
 	{% for rel in releases %}
 		<div class="list-group-item">
-			<a class="btn btn-sm btn-primary float-right" href="{{ rel.getEditURL() }}">
-			{% if not rel.task_id and not rel.approved and rel.checkPerm(current_user, "APPROVE_RELEASE") %}
+			<a class="btn btn-sm btn-primary float-right" href="{{ rel.get_edit_url() }}">
+			{% if not rel.task_id and not rel.approved and rel.check_perm(current_user, "APPROVE_RELEASE") %}
 				{{ _("Edit / Approve") }}
 			{% else %}
 				{{ _("Edit") }}
@@ -65,7 +65,7 @@
 
 			{% if not rel.approved %}<i>{% endif %}
 
-			<a href="{{ rel.getDownloadURL() }}" rel="nofollow" download="{{ rel.getDownloadFileName() }}">
+			<a href="{{ rel.get_download_url() }}" rel="nofollow" download="{{ rel.get_download_filename() }}">
 				{{ rel.title }}
 			</a>
 
@@ -88,8 +88,8 @@
 
 				{{ _("created %(date)s", date=rel.releaseDate | date) }}.
 			</small>
-			{% if (package.checkPerm(current_user, "MAKE_RELEASE") or rel.checkPerm(current_user, "APPROVE_RELEASE")) and rel.task_id %}
-				<a href="{{ url_for('tasks.check', id=rel.task_id, r=package.getURL("packages.view")) }}">
+			{% if (package.check_perm(current_user, "MAKE_RELEASE") or rel.check_perm(current_user, "APPROVE_RELEASE")) and rel.task_id %}
+				<a href="{{ url_for('tasks.check', id=rel.task_id, r=package.get_url("packages.view")) }}">
 					{{ _("Importing...") }}
 				</a>
 			{% elif not rel.approved %}

@@ -106,7 +106,7 @@ def apply_all_updates(username):
 		.order_by(db.asc(Package.title)).all()
 
 	for package in outdated_packages:
-		if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+		if not package.check_perm(current_user, Permission.MAKE_RELEASE):
 			continue
 
 		if package.releases.filter(or_(PackageRelease.task_id.isnot(None),
@@ -129,8 +129,8 @@ def apply_all_updates(username):
 
 		msg = "Created release {} (Applied all Git Update Detection)".format(rel.title)
 		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg,
-				rel.getURL("packages.create_edit"), package)
-		addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.getURL("packages.view"), package)
+				rel.get_url("packages.create_edit"), package)
+		addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.get_url("packages.view"), package)
 		db.session.commit()
 
 	return redirect(url_for("todo.view_user", username=username))
@@ -174,7 +174,7 @@ def confirm_supports_all_games(username=None):
 		db.session.merge(package)
 
 		addAuditLog(AuditSeverity.NORMAL, current_user, "Enabled 'Supports all games' (bulk)",
-				package.getURL("packages.game_support"), package)
+				package.get_url("packages.game_support"), package)
 
 	db.session.commit()
 

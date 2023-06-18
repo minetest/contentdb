@@ -5,11 +5,11 @@
 {% endblock %}
 
 {% block link %}
-	<a href="{{ package.getURL("packages.view") }}">{{ package.title }}</a>
+	<a href="{{ package.get_url("packages.view") }}">{{ package.title }}</a>
 {% endblock %}
 
 {% block content %}
-<a class="btn btn-secondary" href="{{ package.getURL("packages.alias_list") }}">
+<a class="btn btn-secondary" href="{{ package.get_url("packages.alias_list") }}">
 	{{ _("Back to Aliases") }}
 </a>
 

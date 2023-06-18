@@ -109,7 +109,7 @@ def get_package_overview_for_user(user: Optional[User], start_date: datetime.dat
 		if user:
 			package_title_by_id[package.id] = package.title
 		else:
-			package_title_by_id[package.id] = package.getId()
+			package_title_by_id[package.id] = package.get_id()
 
 	result = {}
 

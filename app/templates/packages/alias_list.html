@@ -5,18 +5,18 @@
 {% endblock %}
 
 {% block link %}
-	<a href="{{ package.getURL("packages.view") }}">{{ package.title }}</a>
+	<a href="{{ package.get_url("packages.view") }}">{{ package.title }}</a>
 {% endblock %}
 
 {% block content %}
-<a class="btn btn-primary float-right" href="{{ package.getURL("packages.alias_create_edit") }}">
+<a class="btn btn-primary float-right" href="{{ package.get_url("packages.alias_create_edit") }}">
 	{{ _("Create") }}
 </a>
 <h1>{{ _("Aliases for %(title)s by %(author)s", title=self.link(), author=package.author.display_name) }}</h1>
 
 <div class="list-group">
 	{% for alias in package.aliases %}
-		<a class="list-group-item list-group-item-action" href="{{ alias.getEditURL() }}">
+		<a class="list-group-item list-group-item-action" href="{{ alias.get_edit_url() }}">
 			{{ alias.author }} / {{ alias.name }}
 		</a>
 	{% else %}

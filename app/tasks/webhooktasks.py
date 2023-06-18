@@ -36,7 +36,7 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, 
 		json["username"] = username
 		user = User.query.filter_by(username=username).first()
 		if user:
-			json["avatar_url"] = user.getProfilePicURL().replace("/./", "/")
+			json["avatar_url"] = user.get_profile_pic_url().replace("/./", "/")
 			if json["avatar_url"].startswith("/"):
 				json["avatar_url"] = app.config["BASE_URL"] + json["avatar_url"]
 

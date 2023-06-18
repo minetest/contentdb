@@ -33,10 +33,10 @@
 		</ol>
 		<div class="carousel-inner">
 			{% for package in spotlight_pkgs %}
-				{% set cover_image = package.getCoverImageURL() %}
+				{% set cover_image = package.get_cover_image_url() %}
 				{% set tags =  package.tags | sort(attribute="views", reverse=True) %}
 				<div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
-					<a href="{{ package.getURL("packages.view") }}">
+					<a href="{{ package.get_url("packages.view") }}">
 						<div class="embed-responsive embed-responsive-16by9">
 							<img class="embed-responsive-item" src="{{ cover_image }}"
 								alt="{{ _('%(title)s by %(author)s', title=package.title, author=package.author.display_name) }}">

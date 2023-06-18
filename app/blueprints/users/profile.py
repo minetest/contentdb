@@ -216,7 +216,7 @@ def profile(username):
 	if not user:
 		abort(404)
 
-	if not current_user.is_authenticated or (user != current_user and not current_user.canAccessTodoList()):
+	if not current_user.is_authenticated or (user != current_user and not current_user.can_access_todo_list()):
 		packages = user.packages.filter_by(state=PackageState.APPROVED)
 		maintained_packages = user.maintained_packages.filter_by(state=PackageState.APPROVED)
 	else:

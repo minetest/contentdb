@@ -47,13 +47,13 @@
 			</tr>
 			{% for type in types %}
 				<tr>
-					<td>{{ type.getTitle() }}</td>
+					<td>{{ type.get_title() }}</td>
 					<td>{{ type.get_description() }}</td>
 					<td style="text-align: center;">
-						{{ render_checkbox_field(form["pref_" + type.toName()]) }}
+						{{ render_checkbox_field(form["pref_" + type.to_name()]) }}
 					</td>
 					<td style="text-align: center;">
-						{{ render_checkbox_field(form["pref_" + type.toName() + "_digest"]) }}
+						{{ render_checkbox_field(form["pref_" + type.to_name() + "_digest"]) }}
 					</td>
 				</tr>
 			{% endfor %}

@@ -45,7 +45,7 @@ def audit():
 @login_required
 def audit_view(id_):
 	entry: AuditLogEntry = AuditLogEntry.query.get_or_404(id_)
-	if not entry.checkPerm(current_user, Permission.VIEW_AUDIT_DESCRIPTION):
+	if not entry.check_perm(current_user, Permission.VIEW_AUDIT_DESCRIPTION):
 		abort(403)
 
 	return render_template("admin/audit_view.html", entry=entry)

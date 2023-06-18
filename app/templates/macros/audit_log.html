@@ -2,7 +2,7 @@
 	<div class="list-group mt-3">
 		{% for entry in log %}
 			<a class="list-group-item list-group-item-action"
-				{% if entry.description and entry.checkPerm(current_user, 'VIEW_AUDIT_DESCRIPTION') %}
+				{% if entry.description and entry.check_perm(current_user, 'VIEW_AUDIT_DESCRIPTION') %}
 					href="{{ url_for('admin.audit_view', id_=entry.id) }}">
 				{% else %}
 					href="{{ entry.url }}">
@@ -10,7 +10,7 @@
 
 				<div class="row {% if entry.severity == entry.severity.NORMAL %}text-muted{% endif %}">
 					<div class="col-sm-auto text-center" style="width: 50px;"
-							title="{{ _('Severity: %(sev)s.', sev=entry.severity.getTitle()) }}">
+							title="{{ _('Severity: %(sev)s.', sev=entry.severity.get_title()) }}">
 						{% if entry.severity == entry.severity.MODERATION %}
 							<i class="fas fa-exclamation-triangle" style="color: yellow;"></i>
 						{% elif entry.severity == entry.severity.EDITOR %}
@@ -25,7 +25,7 @@
 							<img
 								class="img-fluid user-photo img-thumbnail img-thumbnail-1"
 								style="max-height: 22px;"
-								src="{{ entry.causer.getProfilePicURL() }}" />
+								src="{{ entry.causer.get_profile_pic_url() }}" />
 
 							<span class="pl-2">{{ entry.causer.username }}</span>
 						{% else %}
@@ -50,7 +50,7 @@
 							<img
 								class="img-fluid"
 								style="max-height: 22px; max-width: 22px;"
-								src="{{ entry.package.getThumbnailOrPlaceholder() }}" />
+								src="{{ entry.package.get_thumb_or_placeholder() }}" />
 						</div>
 					{% endif %}
 

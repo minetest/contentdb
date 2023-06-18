@@ -23,49 +23,49 @@ bp = Blueprint("packages", __name__)
 
 
 def get_package_tabs(user: User, package: Package):
-	if package is None or not package.checkPerm(user, Permission.EDIT_PACKAGE):
+	if package is None or not package.check_perm(user, Permission.EDIT_PACKAGE):
 		return []
 
 	retval = [
 		{
 			"id": "edit",
 			"title": gettext("Edit Details"),
-			"url": package.getURL("packages.create_edit")
+			"url": package.get_url("packages.create_edit")
 		},
 		{
 			"id": "releases",
 			"title": gettext("Releases"),
-			"url": package.getURL("packages.list_releases")
+			"url": package.get_url("packages.list_releases")
 		},
 		{
 			"id": "screenshots",
 			"title": gettext("Screenshots"),
-			"url": package.getURL("packages.screenshots")
+			"url": package.get_url("packages.screenshots")
 		},
 		{
 			"id": "maintainers",
 			"title": gettext("Maintainers"),
-			"url": package.getURL("packages.edit_maintainers")
+			"url": package.get_url("packages.edit_maintainers")
 		},
 		{
 			"id": "audit",
 			"title": gettext("Audit Log"),
-			"url": package.getURL("packages.audit")
+			"url": package.get_url("packages.audit")
 		},
 		{
 			"id": "stats",
 			"title": gettext("Statistics"),
-			"url": package.getURL("packages.statistics")
+			"url": package.get_url("packages.statistics")
 		},
 		{
 			"id": "share",
 			"title": gettext("Share and Badges"),
-			"url": package.getURL("packages.share")
+			"url": package.get_url("packages.share")
 		},
 		{
 			"id": "remove",
 			"title": gettext("Remove"),
-			"url": package.getURL("packages.remove")
+			"url": package.get_url("packages.remove")
 		}
 	]
 
@@ -73,7 +73,7 @@ def get_package_tabs(user: User, package: Package):
 		retval.insert(1, {
 			"id": "game_support",
 			"title": gettext("Supported Games"),
-			"url": package.getURL("packages.game_support")
+			"url": package.get_url("packages.game_support")
 		})
 
 	return retval

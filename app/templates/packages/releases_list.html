@@ -5,26 +5,26 @@
 {% endblock %}
 
 {% block content %}
-	{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+	{% if package.check_perm(current_user, "MAKE_RELEASE") %}
 		<p class="float-right">
 			{% if package.update_config %}
-				<a class="btn btn-secondary" href="{{ package.getURL("packages.update_config") }}">
+				<a class="btn btn-secondary" href="{{ package.get_url("packages.update_config") }}">
 					<i class="fas fa-cog mr-1"></i>
 					{{ _("Update settings") }}
 				</a>
 			{% elif package.repo %}
-				<a class="btn btn-secondary" href="{{ package.getURL("packages.setup_releases") }}">
+				<a class="btn btn-secondary" href="{{ package.get_url("packages.setup_releases") }}">
 					<i class="fas fa-hat-wizard mr-1"></i>
 					{{ _("Set up automatic releases") }}
 				</a>
 			{% endif %}
 
-			<a class="btn btn-secondary ml-1" href="{{ package.getURL("packages.bulk_change_release") }}">
+			<a class="btn btn-secondary ml-1" href="{{ package.get_url("packages.bulk_change_release") }}">
 				<i class="fas fa-wrench mr-1"></i>
 				{{ _("Bulk update") }}
 			</a>
 
-			<a class="btn btn-primary ml-1" href="{{ package.getURL("packages.create_release") }}">
+			<a class="btn btn-primary ml-1" href="{{ package.get_url("packages.create_release") }}">
 				<i class="fas fa-plus mr-1"></i>
 				{{ _("Create") }}
 			</a>
@@ -35,7 +35,7 @@
 
 	<div class="list-group">
 		{% from "macros/releases.html" import render_releases_edit, render_releases_download %}
-		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+		{% if package.check_perm(current_user, "MAKE_RELEASE") %}
 			{{ render_releases_edit(package.releases, package) }}
 		{% else %}
 			{{ render_releases_download(package.releases, package, current_user) }}

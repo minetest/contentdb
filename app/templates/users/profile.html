@@ -8,7 +8,7 @@
 
 <article class="row mb-5">
 	<div class="col-auto image mx-0">
-		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ user.getProfilePicURL() }}" alt="{{ _('Profile picture') }}">
+		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ user.get_profile_pic_url() }}" alt="{{ _('Profile picture') }}">
 	</div>
 	<div class="col">
 		{% if user.can_see_edit_profile(current_user) %}
@@ -57,7 +57,7 @@
 				<span class="btn">
 					<i class="fas fa-user"></i>
 					<span class="count">
-						{{ user.rank.getTitle() }}
+						{{ user.rank.get_title() }}
 					</span>
 				</span>
 
@@ -195,7 +195,7 @@
 	</div>
 {% endif %}
 
-{% if current_user == user or user.checkPerm(current_user, "CHANGE_AUTHOR") %}
+{% if current_user == user or user.check_perm(current_user, "CHANGE_AUTHOR") %}
 	<a class="float-right btn btn-sm btn-primary"
 			href="{{ url_for('packages.create_edit', author=user.username) }}">
 		<i class="fas fa-plus mr-1"></i>

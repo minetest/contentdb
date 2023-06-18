@@ -9,8 +9,8 @@
 {% endblock %}
 
 {% block headextra %}
-	{% if package.getThumbnailURL(3, True) -%}
-		<meta name="og:image" content="{{ package.getThumbnailURL(3, True) }}"/>
+	{% if package.get_thumb_url(3, True) -%}
+		<meta name="og:image" content="{{ package.get_thumb_url(3, True) }}"/>
 	{%- endif %}
 {% endblock %}
 

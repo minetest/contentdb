@@ -18,7 +18,7 @@
 	<li class="row my-2 mx-0">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('users.profile', username=r.author.username) }}">
-				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.get_profile_pic_url() }}">
 			</a>
 		</div>
 		<div class="col pr-0">
@@ -37,12 +37,12 @@
 					{% endif %}
 
 					{% if r == r.thread.first_reply %}
-						<a class="badge badge-primary" href="{{ r.thread.getViewURL() }}">
+						<a class="badge badge-primary" href="{{ r.thread.get_view_url() }}">
 							{{ r.thread.title }}
 						</a>
 					{% else %}
 						<i class="fas fa-reply mr-2"></i>
-						<a class="badge badge-dark" href="{{ r.thread.getViewURL() }}">
+						<a class="badge badge-dark" href="{{ r.thread.get_view_url() }}">
 							{{ _("Reply to <b>%(title)s</b>", title=r.thread.title) }}
 						</a>
 					{% endif %}
