@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-01 18:12+0100\n"
+"POT-Creation-Date: 2023-06-18 21:20+0100\n"
 "PO-Revision-Date: 2023-06-16 14:48+0000\n"
 "Last-Translator: Giov4 <brancacciogiovanni1@gmail.com>\n"
-"Language-Team: Italian <https://hosted.weblate.org/projects/minetest/"
-"contentdb/it/>\n"
 "Language: it\n"
+"Language-Team: Italian "
+"<https://hosted.weblate.org/projects/minetest/contentdb/it/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:120
@@ -54,7 +53,7 @@ msgstr "Limita al contenuto"
 #: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:254
 #: app/blueprints/packages/packages.py:481
 #: app/blueprints/packages/packages.py:577
-#: app/blueprints/packages/packages.py:647
+#: app/blueprints/packages/packages.py:648
 #: app/blueprints/packages/releases.py:60
 #: app/blueprints/packages/releases.py:72 app/blueprints/packages/reviews.py:48
 #: app/blueprints/packages/screenshots.py:35
@@ -93,7 +92,7 @@ msgstr "Modifica Dettagli"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:545 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:592 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Rilasci"
 
@@ -105,7 +104,7 @@ msgstr "Catture Schermo"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:516
+#: app/templates/packages/view.html:563
 msgid "Maintainers"
 msgstr "Manutentorə"
 
@@ -115,7 +114,7 @@ msgid "Audit Log"
 msgstr "Log di Audit"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/base.html:147
-#: app/templates/packages/stats.html:4 app/templates/packages/stats.html:21
+#: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
 #: app/templates/packages/view.html:234 app/templates/users/profile.html:130
 msgid "Statistics"
 msgstr "Statistiche"
@@ -156,7 +155,7 @@ msgstr ""
 msgid "No download available."
 msgstr "Impossibile scaricare."
 
-#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:493
+#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:540
 msgid "Type"
 msgstr "Tipo"
 
@@ -179,7 +178,7 @@ msgstr "Solo lettere minuscole (a-z), numeri (0-9), e trattino basso (_)"
 msgid "Short Description (Plaintext)"
 msgstr "Descrizione Corta (Testo Non Formattato)"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:508
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:555
 msgid "Maintenance State"
 msgstr "Stato di Manutenzione"
 
@@ -192,7 +191,7 @@ msgstr "Etichette"
 msgid "Content Warnings"
 msgstr "Avvertenze sul Contenuto"
 
-#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:497
+#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:544
 msgid "License"
 msgstr "Licenza"
 
@@ -307,6 +306,10 @@ msgstr "Giochi supportati (separati da virgole)"
 #: app/blueprints/packages/packages.py:646
 msgid "Unsupported games (Comma-separated)"
 msgstr "Giochi non supportati (separati da virgole)"
+
+#: app/blueprints/packages/packages.py:647
+msgid "Supports all games (unless stated)"
+msgstr ""
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
@@ -502,7 +505,7 @@ msgid "Message"
 msgstr "Messaggio"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:50
-#: app/templates/packages/view.html:576 app/templates/report/index.html:4
+#: app/templates/packages/view.html:623 app/templates/report/index.html:4
 #: app/templates/report/index.html:10 app/templates/users/profile.html:28
 msgid "Report"
 msgstr "Segnala"
@@ -561,6 +564,10 @@ msgstr ""
 #: app/blueprints/threads/__init__.py:314
 msgid "Please wait before opening another thread"
 msgstr "Aspetta prima di iniziare una nuova discussione, per favore"
+
+#: app/blueprints/todo/user.py:173
+msgid "Done"
+msgstr ""
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
@@ -1053,41 +1060,41 @@ msgstr "Carica %(file_desc)s, per favore"
 msgid "Uploaded image isn't actually an image"
 msgstr "L'immagine caricata non è di fatto una immagine"
 
-#: app/models/packages.py:66
+#: app/models/packages.py:67
 msgid "Mod"
 msgstr "Modulo"
 
-#: app/models/packages.py:68
+#: app/models/packages.py:69
 msgid "Game"
 msgstr "Gioco"
 
-#: app/models/packages.py:70
+#: app/models/packages.py:71
 msgid "Texture Pack"
 msgstr "Pacchetto Texture"
 
-#: app/models/packages.py:75 app/templates/base.html:39
+#: app/models/packages.py:76 app/templates/base.html:39
 #: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Moduli"
 
-#: app/models/packages.py:77 app/templates/base.html:42
+#: app/models/packages.py:78 app/templates/base.html:42
 #: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Giochi"
 
-#: app/models/packages.py:79 app/templates/base.html:45
+#: app/models/packages.py:80 app/templates/base.html:45
 msgid "Texture Packs"
 msgstr "Pacchetti Texture"
 
-#: app/models/packages.py:168
+#: app/models/packages.py:169
 msgid "Submit for Approval"
 msgstr "Invia per l'Approvazione"
 
-#: app/models/packages.py:170
+#: app/models/packages.py:171
 msgid "Approve"
 msgstr "Permetti"
 
-#: app/models/packages.py:172 app/templates/api/create_edit_token.html:17
+#: app/models/packages.py:173 app/templates/api/create_edit_token.html:17
 #: app/templates/packages/release_edit.html:75
 #: app/templates/packages/review_create_edit.html:55
 #: app/templates/threads/delete_reply.html:19
@@ -1251,7 +1258,7 @@ msgid "User List"
 msgstr "Elenco dellз Utentз"
 
 #: app/templates/base.html:263 app/templates/packages/view.html:194
-#: app/templates/packages/view.html:565 app/templates/threads/list.html:4
+#: app/templates/packages/view.html:612 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Discussioni"
 
@@ -1270,8 +1277,8 @@ msgstr "Benvenutə"
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
-"Benvenutə nel posto migliore per trovare moduli, giochi e pacchetti texture "
-"per Minetest"
+"Benvenutə nel posto migliore per trovare moduli, giochi e pacchetti "
+"texture per Minetest"
 
 #: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
@@ -1512,11 +1519,9 @@ msgstr "In base alle tue recensioni"
 
 #: app/templates/donate/index.html:67
 msgid ""
-"No reviewed packages accepting donations. Considering reviewing your "
+"No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
 msgstr ""
-"Nessun contenuto recensito accetta donazioni. Considerare la possibilità "
-"di rivedere i tuoi contenuti preferiti"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
@@ -1829,40 +1834,47 @@ msgid "%(display_name)s's packages"
 msgstr "Contenuti di %(display_name)s"
 
 #: app/templates/macros/stats.html:36
-msgid "JavaScript is required to display charts and statistics"
-msgstr "JavaScript è necessario per visualizzare grafici e statistiche"
+msgid "Date range..."
+msgstr ""
 
-#: app/templates/macros/stats.html:45
-msgid "Lifetime unique downloads"
-msgstr "Scaricamenti unici nel tempo"
-
-#: app/templates/macros/stats.html:59
+#: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
 msgstr "Scaricamenti, ultimi 7 giorni"
 
-#: app/templates/macros/stats.html:64 app/templates/macros/stats.html:81
-#, python-format
-msgid "%(downloads)s per day"
-msgstr "%(downloads)s al giorno"
-
-#: app/templates/macros/stats.html:76
+#: app/templates/macros/stats.html:53
 msgid "Downloads, past 30 days"
 msgstr "Scaricamenti, ultimi 30 giorni"
 
-#: app/templates/macros/stats.html:89
+#: app/templates/macros/stats.html:56
+msgid "Downloads from $1 to $2"
+msgstr ""
+
+#: app/templates/macros/stats.html:59
+msgid "$1 per day"
+msgstr ""
+
+#: app/templates/macros/stats.html:64
+msgid "JavaScript is required to display charts and statistics"
+msgstr "JavaScript è necessario per visualizzare grafici e statistiche"
+
+#: app/templates/macros/stats.html:73
+msgid "Lifetime unique downloads"
+msgstr "Scaricamenti unici nel tempo"
+
+#: app/templates/macros/stats.html:83
 msgid "Loading..."
 msgstr "Caricamento..."
 
-#: app/templates/macros/stats.html:92
+#: app/templates/macros/stats.html:86
 msgid "No data"
 msgstr "Nessun dato"
 
-#: app/templates/macros/stats.html:97
+#: app/templates/macros/stats.html:91
 msgid "Downloads by Package"
 msgstr "Scaricamenti per Contenuto"
 
-#: app/templates/macros/stats.html:99 app/templates/macros/stats.html:106
-#: app/templates/macros/stats.html:118
+#: app/templates/macros/stats.html:93 app/templates/macros/stats.html:100
+#: app/templates/macros/stats.html:112
 msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
@@ -1870,31 +1882,31 @@ msgstr ""
 "Si tratta di un grafico ad area sovrapposta. Per gli scaricamenti totali,"
 " osserva l'altezza combinata."
 
-#: app/templates/macros/stats.html:104
+#: app/templates/macros/stats.html:98
 msgid "Downloads by Client"
 msgstr "Scaricamenti per Client"
 
-#: app/templates/macros/stats.html:110
+#: app/templates/macros/stats.html:104
 msgid "Downloads by Reason"
 msgstr "Scaricamenti per Motivo"
 
-#: app/templates/macros/stats.html:112
+#: app/templates/macros/stats.html:106
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
 msgstr ""
 "<b>Nuova installazione</b>: l'utente ha fatto clic su [Installa] "
 "all'interno di Minetest."
 
-#: app/templates/macros/stats.html:113
+#: app/templates/macros/stats.html:107
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
 "<b>Dipendenza</b>: è stata installata automaticamente per soddisfare una "
 "dipendenza."
 
-#: app/templates/macros/stats.html:114
+#: app/templates/macros/stats.html:108
 msgid "<b>Update</b>: download was to update the package."
 msgstr "<b>Aggiornamento</b>: lo scaricamento serviva per aggiornare il contenuto."
 
-#: app/templates/macros/stats.html:115
+#: app/templates/macros/stats.html:109
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
@@ -1902,17 +1914,17 @@ msgstr ""
 "<b>Altro / Sconosciuto</b>: scaricato da un browser Web o da una versione"
 " obsoleta di Minetest (precedente alla 5.5)."
 
-#: app/templates/macros/stats.html:127
+#: app/templates/macros/stats.html:121
 msgid "Need more stats?"
 msgstr "Hai bisogno di più statistiche?"
 
-#: app/templates/macros/stats.html:129
+#: app/templates/macros/stats.html:123
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
 msgstr ""
 "Controlla il pannello Grafana di ContentDB per le statistiche relative a "
 "tutto il CDB"
 
-#: app/templates/macros/stats.html:133
+#: app/templates/macros/stats.html:127
 msgid "ContentDB Grafana"
 msgstr "Grafana di ContentDB"
 
@@ -2034,10 +2046,11 @@ msgid "Forum Topics"
 msgstr "Argomenti del Forum"
 
 #: app/templates/modnames/view.html:27
-#: app/templates/packages/game_support.html:37
+#: app/templates/packages/game_support.html:42
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:408
-#: app/templates/packages/view.html:432 app/templates/packages/view.html:462
-#: app/templates/todo/editor.html:85 app/templates/todo/game_support.html:36
+#: app/templates/packages/view.html:432 app/templates/packages/view.html:477
+#: app/templates/packages/view.html:509 app/templates/todo/editor.html:85
+#: app/templates/todo/game_support.html:45
 #, python-format
 msgid "%(title)s by %(display_name)s"
 msgstr "%(title)s di %(display_name)s"
@@ -2162,7 +2175,7 @@ msgstr ""
 "\t\t\tquali la ricerca dei metadati da Git e l'auto-completamento."
 
 #: app/templates/packages/create_edit.html:66
-#: app/templates/packages/game_support.html:21
+#: app/templates/packages/game_support.html:20
 #: app/templates/threads/view.html:88 app/templates/todo/tags.html:38
 msgid "Package"
 msgstr "Contenuto"
@@ -2267,37 +2280,46 @@ msgstr "Mod e pacchetti texture per %(title)s"
 msgid "Documentation"
 msgstr "Documentazione"
 
-#: app/templates/packages/game_support.html:24
+#: app/templates/packages/game_support.html:13
+msgid ""
+"Game support is configured using the package's .conf file. See the "
+"documentation for more info"
+msgstr ""
+
+#: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:217
 msgid "Source"
 msgstr "Sorgente"
 
-#: app/templates/packages/game_support.html:27
+#: app/templates/packages/game_support.html:26
 msgid "Supported?"
 msgstr "Supportato?"
 
-#: app/templates/packages/game_support.html:42
+#: app/templates/packages/game_support.html:33
+msgid "Supports all games unless otherwise stated"
+msgstr ""
+
+#: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
 msgstr "Rilevato dalle dipendenze"
 
-#: app/templates/packages/game_support.html:44
+#: app/templates/packages/game_support.html:49
 msgid "Added by Editor"
 msgstr "Aggiunto dall'Editor"
 
-#: app/templates/packages/game_support.html:46
+#: app/templates/packages/game_support.html:51
 msgid "mod.conf"
 msgstr "mod.conf"
 
-#: app/templates/packages/game_support.html:62
-#: app/templates/packages/view.html:466
+#: app/templates/packages/game_support.html:67
 msgid "No specific game is required"
 msgstr "Non è richiesto alcun gioco specifico"
 
-#: app/templates/packages/game_support.html:68
+#: app/templates/packages/game_support.html:73
 msgid "Generated mod.conf lines"
 msgstr "Linee mod.conf generate"
 
-#: app/templates/packages/game_support.html:82
+#: app/templates/packages/game_support.html:87
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
@@ -2305,7 +2327,17 @@ msgstr ""
 "È necessario definire manualmente almeno un gioco supportato prima di "
 "poterlo disattivare."
 
-#: app/templates/packages/game_support.html:88
+#: app/templates/packages/game_support.html:93
+msgid "Unless otherwise stated, this package should work with all games."
+msgstr ""
+
+#: app/templates/packages/game_support.html:94
+msgid ""
+"You can check this and still specify games in supported_games that you've"
+" tested."
+msgstr ""
+
+#: app/templates/packages/game_support.html:99
 msgid "Editor Overrides"
 msgstr "Sostituzioni dell'editor"
 
@@ -2826,7 +2858,7 @@ msgstr "Questo contenuto contiene i nomi dei moduli presenti in quelli seguenti:
 msgid "Similar Forum Topics"
 msgstr "Argomenti del Forum Simili"
 
-#: app/templates/packages/stats.html:17
+#: app/templates/packages/stats.html:18
 msgid "Download (.csv)"
 msgstr "Scarica (.csv)"
 
@@ -3008,58 +3040,82 @@ msgstr "Nessuna dipendenza richiesta"
 msgid "Optional"
 msgstr "Opzionale"
 
-#: app/templates/packages/view.html:456
+#: app/templates/packages/view.html:459
 msgid "Compatible Games"
 msgstr "Giochi Compatibili"
 
-#: app/templates/packages/view.html:472
+#: app/templates/packages/view.html:464
+msgid "Should support most games."
+msgstr ""
+
+#: app/templates/packages/view.html:467
+msgid "Tested with:"
+msgstr ""
+
+#: app/templates/packages/view.html:484
+msgid "No specific game required"
+msgstr ""
+
+#: app/templates/packages/view.html:489
+msgid "Is the above correct?"
+msgstr ""
+
+#: app/templates/packages/view.html:490
+msgid "You need to either confirm this or tell ContentDB about supported games"
+msgstr ""
+
+#: app/templates/packages/view.html:502
+msgid "Does not work with:"
+msgstr ""
+
+#: app/templates/packages/view.html:519
 msgid "This is an experimental feature."
 msgstr "Questa è una funzionalità sperimentale."
 
-#: app/templates/packages/view.html:473
+#: app/templates/packages/view.html:520
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr ""
 "I giochi supportati vengono determinati da un algoritmo e potrebbero non "
 "essere corretti."
 
-#: app/templates/packages/view.html:483
+#: app/templates/packages/view.html:530
 msgid "Please specify compatible games"
 msgstr "Si prega di specificare i giochi compatibili"
 
-#: app/templates/packages/view.html:489
+#: app/templates/packages/view.html:536
 msgid "Information"
 msgstr "Informazioni"
 
-#: app/templates/packages/view.html:495
+#: app/templates/packages/view.html:542
 msgid "Technical Name"
 msgstr "Nome Tecnico"
 
-#: app/templates/packages/view.html:504
+#: app/templates/packages/view.html:551
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s per il codice,<br>%(media_license)s per i media."
 
-#: app/templates/packages/view.html:512
+#: app/templates/packages/view.html:559
 msgid "Unknown"
 msgstr "Sconosciuto"
 
-#: app/templates/packages/view.html:514
+#: app/templates/packages/view.html:561
 msgid "Added"
 msgstr "Inserito"
 
-#: app/templates/packages/view.html:528
+#: app/templates/packages/view.html:575
 msgid "Remove myself"
 msgstr "Rimuovimi"
 
-#: app/templates/packages/view.html:533
+#: app/templates/packages/view.html:580
 msgid "Provides"
 msgstr "Fornisce"
 
-#: app/templates/packages/view.html:555
+#: app/templates/packages/view.html:602
 msgid "More"
 msgstr "Di più"
 
-#: app/templates/packages/view.html:584
+#: app/templates/packages/view.html:631
 msgid "See audit log"
 msgstr "Mostra il log di audit"
 
@@ -3271,15 +3327,38 @@ msgstr ""
 msgid "Specifying game support makes it easier for players to find your content."
 msgstr ""
 
-#: app/templates/todo/game_support.html:43
-msgid "None listed, assumed to support all games"
+#: app/templates/todo/game_support.html:13
+msgid ""
+"If your package supports all games unless otherwise stated, confirm this "
+"using 'Supports all games'"
 msgstr ""
 
-#: app/templates/todo/game_support.html:55 app/templates/todo/user.html:40
+#: app/templates/todo/game_support.html:35
+msgid "Supports all games"
+msgstr ""
+
+#: app/templates/todo/game_support.html:51
+msgid ""
+"No supported games listed. Please either add supported games or check "
+"'Supports all games'"
+msgstr ""
+
+#: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
 #: app/templates/todo/user.html:173 app/templates/todo/user.html:197
 msgid "Nothing to do :)"
 msgstr "Nulla da fare :)"
+
+#: app/templates/todo/game_support.html:68
+msgid ""
+"Click the button below to confirm that all games without listed "
+"supported_games (red text above) do support all games, except for any "
+"games listed in unsupported_games."
+msgstr ""
+
+#: app/templates/todo/game_support.html:72
+msgid "Confirm"
+msgstr ""
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
@@ -4024,6 +4103,30 @@ msgstr "Cerca Nei Rilasci dei Contenuti"
 msgid "'%(query)s' - Search Package Releases"
 msgstr "'%(query)s' - Cerca nei Rilasci dei Contenuti"
 
+#: app/utils/flask.py:149
+msgid "All time"
+msgstr ""
+
+#: app/utils/flask.py:150
+msgid "Last 7 days"
+msgstr ""
+
+#: app/utils/flask.py:151
+msgid "Last 30 days"
+msgstr ""
+
+#: app/utils/flask.py:152
+msgid "Last 90 days"
+msgstr ""
+
+#: app/utils/flask.py:153
+msgid "Year to date"
+msgstr ""
+
+#: app/utils/flask.py:154
+msgid "Last year"
+msgstr ""
+
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
 msgstr "Hai ricevuto molte notifiche, dovresti leggerle o cancellarle"
@@ -4090,3 +4193,18 @@ msgstr ""
 
 #~ msgid "Sync with Forums"
 #~ msgstr "Sincronizza Con il Forum"
+
+#~ msgid ""
+#~ "No reviewed packages accepting donations. "
+#~ "Considering reviewing your favourite packages"
+#~ msgstr ""
+#~ "Nessun contenuto recensito accetta donazioni."
+#~ " Considerare la possibilità di rivedere "
+#~ "i tuoi contenuti preferiti"
+
+#~ msgid "%(downloads)s per day"
+#~ msgstr "%(downloads)s al giorno"
+
+#~ msgid "None listed, assumed to support all games"
+#~ msgstr ""
+
