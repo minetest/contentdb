@@ -58,7 +58,7 @@
 						<div class="card-body markdown">
 							{% if current_user == review.author %}
 								<a class="btn btn-primary btn-sm ml-1 float-right"
-										href="{{ review.package.get_url("packages.review") }}">
+										href="{{ review.package.get_url('packages.review') }}">
 									<i class="fas fa-pen"></i>
 								</a>
 							{% endif %}
@@ -71,7 +71,7 @@
 
 							<div class="btn-toolbar mt-2 mb-0">
 								{% if show_package_link %}
-									<a class="btn btn-primary mr-1" href="{{ review.package.get_url("packages.view") }}">
+									<a class="btn btn-primary mr-1" href="{{ review.package.get_url('packages.view') }}">
 										{{ _("%(title)s by %(author)s",
 												title="<b>" | safe + review.package.title + "</b>" | safe,
 												author=review.package.author.display_name) }}
@@ -105,7 +105,7 @@
 		<div class="card-header">
 			{{ _("Review") }}
 		</div>
-		<form method="post" action="{{ package.get_url("packages.review") }}" class="card-body">
+		<form method="post" action="{{ package.get_url('packages.review') }}" class="card-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<p>
 				{{ _("Do you recommend this %(type)s?", type=package.type.text | lower) }}
@@ -148,7 +148,7 @@
 		<div class="card-header">
 			{{ _("Review") }}
 		</div>
-		<form method="post" action="{{ package.get_url("packages.review") }}" class="card-body">
+		<form method="post" action="{{ package.get_url('packages.review') }}" class="card-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<p>
 				{{ _("Do you recommend this %(type)s?", type=package.type.text | lower) }}

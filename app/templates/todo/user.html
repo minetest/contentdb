@@ -18,7 +18,7 @@
 	<h2>{{ _("Unapproved Packages Needing Action") }}</h2>
 	<div class="list-group mt-3 mb-5">
 		{% for package in unapproved_packages %}
-			<a class="list-group-item list-group-item-action" href="{{ package.get_url("packages.view") }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.get_url('packages.view') }}">
 				<div class="row">
 					<div class="col-sm-2 text-muted">
 						<img
@@ -50,7 +50,7 @@
 	{% if outdated_packages %}
 		<form class="float-right mr-2"  method="post" action="{{ url_for('todo.apply_all_updates', username=user.username) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<input class="btn btn-primary" type="submit" value="{{ _("Create All Releases") }}" />
+			<input class="btn btn-primary" type="submit" value="{{ _('Create All Releases') }}" />
 		</form>
 	{% endif %}
 	<h2>{{ _("Potentially Outdated Packages") }}</h2>
@@ -183,7 +183,7 @@
 	</p>
 	<div class="list-group mt-3 mb-5">
 		{% for package in needs_tags %}
-			<a class="list-group-item list-group-item-action" href="{{ package.get_url("packages.view") }}">
+			<a class="list-group-item list-group-item-action" href="{{ package.get_url('packages.view') }}">
 				<img
 					class="img-fluid"
 					style="max-height: 22px; max-width: 22px;"

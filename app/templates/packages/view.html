@@ -178,7 +178,7 @@
 
 			<div class="info-row row" style="margin-top: 2rem;">
 				<div class="btn-group-horizontal col">
-					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}" title="{{ _("Author") }}">
+					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}" title="{{ _('Author') }}">
 						<img src="{{ package.author.get_profile_pic_url() }}" style="max-height: 1em; filter: none">
 						<span class="count">
 							{{ package.author.display_name }}
@@ -191,11 +191,11 @@
 							<span class="count">{{ package.downloads }}</span>
 						</a>
 					{% endif %}
-					<a class="btn" href="{{ url_for('threads.list_all', pid=package.id) }}" title="{{ _("Threads") }}">
+					<a class="btn" href="{{ url_for('threads.list_all', pid=package.id) }}" title="{{ _('Threads') }}">
 						<i class="fas fa-comment-alt"></i>
 						<span class="count">{{ threads | length }}</span>
 					</a>
-					<a class="btn" href="#reviews" title="{{ _("Reviews") }}">
+					<a class="btn" href="#reviews" title="{{ _('Reviews') }}">
 						<i class="fas fa-star-half-alt"></i>
 						<span class="count">
 							+{{ package.reviews | selectattr("rating", "equalto", 5) | list | length }}
@@ -303,7 +303,7 @@
 					{% if current_user.is_authenticated %}
 						{% if has_review %}
 							<p>
-								<a class="btn btn-primary" href="{{ package.get_url("packages.review") }}">
+								<a class="btn btn-primary" href="{{ package.get_url('packages.review') }}">
 									{{ _("Edit Review") }}
 								</a>
 							</p>
@@ -366,7 +366,7 @@
 								<i class="fas fa-plus mr-1"></i>
 								{{ _("Release") }}
 							</a>
-							<a class="btn btn-warning" href="{{ package.get_url("packages.update_config") }}">
+							<a class="btn btn-warning" href="{{ package.get_url('packages.update_config') }}">
 								<i class="fas fa-cog mr-1"></i>
 								{{ _("Update settings") }}
 							</a>
@@ -404,7 +404,7 @@
 							{% for dep in package.get_sorted_hard_dependencies() %}
 								{%- if dep.package %}
 									<a class="badge badge-primary"
-											href="{{ dep.package.get_url("packages.view") }}">
+											href="{{ dep.package.get_url('packages.view') }}">
 										{{ _("%(title)s by %(display_name)s",
 												title=dep.package.title, display_name=dep.package.author.display_name) }}
 									</a>
@@ -428,7 +428,7 @@
 								{% for dep in optional_deps %}
 									{%- if dep.package %}
 										<a class="badge badge-secondary"
-												href="{{ dep.package.get_url("packages.view") }}">
+												href="{{ dep.package.get_url('packages.view') }}">
 											{{ _("%(title)s by %(display_name)s",
 													title=dep.package.title, display_name=dep.package.author.display_name) }}
 									{% elif dep.meta_package %}
@@ -570,7 +570,7 @@
 						{% endfor %}
 
 						{% if current_user in package.maintainers and current_user != package.author %}
-							<form class="mt-2"  method="post" action="{{ package.get_url("packages.remove_self_maintainers") }}">
+							<form class="mt-2"  method="post" action="{{ package.get_url('packages.remove_self_maintainers') }}">
 								<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 								<input class="btn btn-sm btn-link p-0" type="submit" value="{{ _('Remove myself') }}" />
 							</form>
@@ -587,7 +587,7 @@
 
 				<h3>
 					{% if package.check_perm(current_user, "MAKE_RELEASE") %}
-						<a class="btn btn-primary btn-sm float-right" href="{{ package.get_url("packages.create_release") }}"><i class="fas fa-plus"></i></a>
+						<a class="btn btn-primary btn-sm float-right" href="{{ package.get_url('packages.create_release') }}"><i class="fas fa-plus"></i></a>
 					{% endif %}
 					{{ _("Releases") }}
 				</h3>
@@ -598,7 +598,7 @@
 					{% else %}
 						{{ render_releases_download(releases, package, current_user) }}
 					{% endif %}
-					<a class="list-group-item list-group-item-action text-center py-1 text-muted" href="{{ package.get_url("packages.list_releases") }}">
+					<a class="list-group-item list-group-item-action text-center py-1 text-muted" href="{{ package.get_url('packages.list_releases') }}">
 						{{ _("More") }}
 					</a>
 				</div>

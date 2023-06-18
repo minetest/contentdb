@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<a class="btn btn-secondary float-right" href="{{ package.get_url("packages.view") }}">
+	<a class="btn btn-secondary float-right" href="{{ package.get_url('packages.view') }}">
 		{{ _("Later") }}
 	</a>
 	<h1>{{ self.title() }}</h1>
@@ -30,13 +30,13 @@
 			<div class="col-md-6 mt-5">
 				<h3 class="mt-0">{{ _("Automatically (Recommended)") }}</h3>
 				<p>
-					<a class="btn btn-primary" href="{{ package.get_url("packages.update_config", trigger="commit") }}">
+					<a class="btn btn-primary" href="{{ package.get_url('packages.update_config', trigger='commit') }}">
 						{{ _("Rolling Release") }}
 					</a>
-					<a class="btn btn-primary ml-2" href="{{ package.get_url("packages.update_config", trigger="tag") }}">
+					<a class="btn btn-primary ml-2" href="{{ package.get_url('packages.update_config', trigger='tag') }}">
 						{{ _("On Git Tag") }}
 					</a>
-{#					<a class="btn btn-secondary ml-2" href="{{ package.get_url("packages.update_config") }}">#}
+{#					<a class="btn btn-secondary ml-2" href="{{ package.get_url('packages.update_config') }}">#}
 {#						{{ _("Advanced") }}#}
 {#					</a>#}
 				</p>
@@ -45,10 +45,10 @@
 			<div class="col-md-6 mt-5">
 				<h3 class="mt-0">{{ _("Manually") }}</h3>
 				<p>
-					<a class="btn btn-secondary" href="{{ package.get_url("packages.update_config", action="notification") }}">
+					<a class="btn btn-secondary" href="{{ package.get_url('packages.update_config', action='notification') }}">
 						{{ _("With reminders") }}
 					</a>
-					<a class="btn btn-secondary ml-2" href="{{ package.get_url("packages.create_release") }}">
+					<a class="btn btn-secondary ml-2" href="{{ package.get_url('packages.create_release') }}">
 						{{ _("No reminders") }}
 					</a>
 				</p>
@@ -65,13 +65,13 @@
 		</p>
 
 		<p class="mt-5">
-			<a class="btn btn-primary" href="{{ package.get_url("packages.create_edit") }}">
+			<a class="btn btn-primary" href="{{ package.get_url('packages.create_edit') }}">
 				{{ _("Add Git repo") }}
 			</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.get_url("packages.create_release") }}">
+			<a class="btn btn-secondary ml-2" href="{{ package.get_url('packages.create_release') }}">
 				{{ _("Create releases manually") }}
 			</a>
-			<a class="btn btn-secondary ml-2" href="{{ package.get_url("packages.view") }}">
+			<a class="btn btn-secondary ml-2" href="{{ package.get_url('packages.view') }}">
 				{{ _("Later") }}
 			</a>
 		</p>
