@@ -20,7 +20,7 @@ def inject_debug():
 
 @app.context_processor
 def inject_functions():
-	check_global_perm = Permission.checkPerm
+	check_global_perm = Permission.check_perm
 	return dict(abs_url_for=abs_url_for, url_set_query=url_set_query, url_set_anchor=url_set_anchor,
 			check_global_perm=check_global_perm, get_headings=get_headings, url_current=url_current)
 
@@ -28,7 +28,7 @@ def inject_functions():
 @app.context_processor
 def inject_todo():
 	todo_list_count = None
-	if current_user and current_user.is_authenticated and current_user.canAccessTodoList():
+	if current_user and current_user.is_authenticated and current_user.can_access_todo_list():
 		todo_list_count = Package.query.filter_by(state=PackageState.READY_FOR_REVIEW).count()
 		todo_list_count += PackageRelease.query.filter_by(approved=False, task_id=None).count()
 

@@ -4,7 +4,7 @@
 	<li class="row my-2 mx-0">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('users.profile', username=r.author.username) }}">
-				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.get_profile_pic_url() }}">
 			</a>
 		</div>
 		<div class="col pr-0">
@@ -28,7 +28,7 @@
 					{% endif %}
 					{% if r.author.rank == r.author.rank.BOT %}
 						<span class="badge badge-dark">
-							{{ r.author.rank.getTitle() }}
+							{{ r.author.rank.get_title() }}
 						</span>
 					{% endif %}
 
@@ -39,7 +39,7 @@
 				</div>
 
 				<div class="card-body markdown">
-					{% if r.checkPerm(current_user, "DELETE_REPLY") %}
+					{% if r.check_perm(current_user, "DELETE_REPLY") %}
 						<a class="float-right btn btn-secondary btn-sm ml-2"
 								href="{{ url_for('threads.delete_reply', id=thread.id, reply=r.id) }}">
 							<i class="fas fa-trash"></i>
@@ -55,10 +55,10 @@
 
 					{% if current_user == thread.author and thread.review and thread.first_reply == r %}
 						<a class="float-right btn btn-primary btn-sm ml-2"
-								href="{{ thread.review.package.getURL('packages.review') }}">
+								href="{{ thread.review.package.get_url('packages.review') }}">
 							<i class="fas fa-pen"></i>
 						</a>
-					{% elif r.checkPerm(current_user, "EDIT_REPLY") %}
+					{% elif r.check_perm(current_user, "EDIT_REPLY") %}
 						<a class="float-right btn btn-primary btn-sm ml-2"
 								href="{{ url_for('threads.edit_reply', id=thread.id, reply=r.id) }}">
 							<i class="fas fa-pen"></i>
@@ -68,7 +68,7 @@
 					{{ r.comment | markdown }}
 
 					{% if thread.first_reply == r and thread.review %}
-						{{ render_review_vote(thread.review, current_user, thread.getViewURL()) }}
+						{{ render_review_vote(thread.review, current_user, thread.get_view_url()) }}
 					{% endif %}
 				</div>
 			</div>
@@ -81,7 +81,7 @@
 	<li class="row my-2 mx-0 align-items-center">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('users.profile', username=r.author.username) }}">
-				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.getProfilePicURL() }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.get_profile_pic_url() }}">
 			</a>
 		</div>
 		<div class="col-auto">
@@ -137,7 +137,7 @@
 <div class="row mt-0 mb-4 comments mx-0">
 	<div class="col-md-1 p-1">
 		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
-			 src="{{ current_user.getProfilePicURL() }}">
+			 src="{{ current_user.get_profile_pic_url() }}">
 	</div>
 	<div class="col pr-0">
 		<div class="card">
@@ -146,12 +146,12 @@
 				<a name="reply"></a>
 			</div>
 
-			{% if not current_user.canCommentRL() %}
+			{% if not current_user.can_comment_ratelimit() %}
 				<div class="card-body">
 					<textarea class="form-control" readonly disabled>{{ _("Please wait before commenting again.") }}</textarea><br />
 					<input class="btn btn-primary" type="submit" disabled value="Comment" />
 				</div>
-			{% elif not thread.checkPerm(current_user, "COMMENT_THREAD") %}
+			{% elif not thread.check_perm(current_user, "COMMENT_THREAD") %}
 				<div class="card-body">
 					{% if thread.locked %}
 						<textarea class="form-control" readonly disabled>{{ _("This thread has been locked.") }}</textarea><br />
@@ -266,7 +266,7 @@
 						<img
 							class="img-fluid"
 							style="max-height: 22px; max-width: 22px;"
-							src="{{ t.package.getThumbnailOrPlaceholder() }}" /><br />
+							src="{{ t.package.get_thumb_or_placeholder() }}" /><br />
 
 						<span class="pl-2">
 							{{ t.package.title }}

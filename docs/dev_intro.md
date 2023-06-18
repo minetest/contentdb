@@ -55,12 +55,12 @@ You can also use a file search. For example, to find the package edit endpoint, 
 ## Users and Permissions
 
 Many routes need to check whether a user can do a particular thing. Rather than hard coding this,
-models tend to have a `checkPerm` function which takes a user and a `Permission`.
+models tend to have a `check_perm` function which takes a user and a `Permission`.
 
 A permission may be something like `Permission.EDIT_PACKAGE` or `Permission.DELETE_THREAD`.
 
 ```bash
-if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
+if not package.check_perm(current_user, Permission.EDIT_PACKAGE):
 	abort(403)
 ```
 

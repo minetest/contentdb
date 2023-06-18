@@ -133,7 +133,7 @@ def post_bot_message(package: Package, title: str, message: str):
 	db.session.add(reply)
 
 	addNotification(thread.watchers, system_user, NotificationType.BOT,
-			title, thread.getViewURL(), thread.package)
+			title, thread.get_view_url(), thread.package)
 
 	thread.replies.append(reply)
 

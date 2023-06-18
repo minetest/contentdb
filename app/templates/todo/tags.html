@@ -42,15 +42,15 @@
 	{% for package in packages %}
 		<tr>
 			<td>
-				<a href="{{ package.getURL("packages.view") }}">
+				<a href="{{ package.get_url("packages.view") }}">
 					{{ package.title }}
 				</a>
 
 				by {{ package.author.display_name }}
 			</td>
 			<td class="text-center">
-				{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
-					<a class="btn btn-link btn-sm py-0" href="{{ package.getURL("packages.create_edit") }}">
+				{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
+					<a class="btn btn-link btn-sm py-0" href="{{ package.get_url("packages.create_edit") }}">
 						<i class="fas fa-pen"></i>
 					</a>
 				{% endif %}

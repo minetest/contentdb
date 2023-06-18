@@ -17,7 +17,6 @@
 
 import datetime
 import enum
-import typing
 
 from flask import url_for
 from flask_babel import lazy_gettext
@@ -55,7 +54,7 @@ class PackageType(enum.Enum):
 	GAME = "Game"
 	TXP  = "Texture Pack"
 
-	def toName(self):
+	def to_name(self):
 		return self.name.lower()
 
 	def __str__(self):
@@ -104,7 +103,7 @@ class PackageDevState(enum.Enum):
 	DEPRECATED = "Deprecated"
 	LOOKING_FOR_MAINTAINER = "Looking for Maintainer"
 
-	def toName(self):
+	def to_name(self):
 		return self.name.lower()
 
 	def __str__(self):
@@ -161,7 +160,7 @@ class PackageState(enum.Enum):
 	APPROVED = "Approved"
 	DELETED = "Deleted"
 
-	def toName(self):
+	def to_name(self):
 		return self.name.lower()
 
 	def verb(self):
@@ -503,26 +502,23 @@ class Package(db.Model):
 
 		return Package.query.filter(Package.name == parts[1], Package.author.has(username=parts[0])).first()
 
-	def getId(self):
+	def get_id(self):
 		return "{}/{}".format(self.author.username, self.name)
 
-	def getIsFOSS(self):
-		return self.license.is_foss and self.media_license.is_foss
-
-	def getSortedDependencies(self, is_hard=None):
+	def get_sorted_dependencies(self, is_hard=None):
 		query = self.dependencies
 		if is_hard is not None:
 			query = query.filter_by(optional=not is_hard)
 
 		deps = query.all()
-		deps.sort(key = lambda x: x.getName())
+		deps.sort(key=lambda x: x.getName())
 		return deps
 
-	def getSortedHardDependencies(self):
-		return self.getSortedDependencies(True)
+	def get_sorted_hard_dependencies(self):
+		return self.get_sorted_dependencies(True)
 
-	def getSortedOptionalDependencies(self):
-		return self.getSortedDependencies(False)
+	def get_sorted_optional_dependencies(self):
+		return self.get_sorted_dependencies(False)
 
 	def get_sorted_game_support(self):
 		query = self.supported_games.filter(PackageGameSupport.game.has(state=PackageState.APPROVED))
@@ -542,18 +538,18 @@ class Package(db.Model):
 		return self.supports_all_games or \
 				self.supported_games.filter(PackageGameSupport.confidence > 1).count() > 0
 
-	def getAsDictionaryKey(self):
+	def as_key_dict(self):
 		return {
 			"name": self.name,
 			"author": self.author.username,
-			"type": self.type.toName(),
+			"type": self.type.to_name(),
 		}
 
-	def getAsDictionaryShort(self, base_url, version=None, release_id=None, no_load=False):
-		tnurl = self.getThumbnailURL(1)
+	def as_short_dict(self, base_url, version=None, release_id=None, no_load=False):
+		tnurl = self.get_thumb_url(1)
 
 		if release_id is None and no_load == False:
-			release = self.getDownloadRelease(version=version)
+			release = self.get_download_release(version=version)
 			release_id = release and release.id
 
 		short_desc = self.short_desc
@@ -565,10 +561,10 @@ class Package(db.Model):
 			"title": self.title,
 			"author": self.author.username,
 			"short_description": short_desc,
-			"type": self.type.toName(),
+			"type": self.type.to_name(),
 			"release": release_id,
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
-			"aliases": [ alias.getAsDictionary() for alias in self.aliases ],
+			"aliases": [alias.as_dict() for alias in self.aliases],
 		}
 
 		if not ret["aliases"]:
@@ -576,9 +572,9 @@ class Package(db.Model):
 
 		return ret
 
-	def getAsDictionary(self, base_url, version=None):
-		tnurl = self.getThumbnailURL(1)
-		release = self.getDownloadRelease(version=version)
+	def as_dict(self, base_url, version=None):
+		tnurl = self.get_thumb_url(1)
+		release = self.get_download_release(version=version)
 		return {
 			"author": self.author.username,
 			"maintainers": [x.username for x in self.maintainers],
@@ -590,7 +586,7 @@ class Package(db.Model):
 			"title": self.title,
 			"short_description": self.short_desc,
 			"long_description": self.desc,
-			"type": self.type.toName(),
+			"type": self.type.to_name(),
 			"created_at": self.created_at.isoformat(),
 
 			"license": self.license.name,
@@ -610,7 +606,7 @@ class Package(db.Model):
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
 			"screenshots": [base_url + ss.url for ss in self.screenshots],
 
-			"url": base_url + self.getURL("packages.download"),
+			"url": base_url + self.get_url("packages.download"),
 			"release": release and release.id,
 
 			"score": round(self.score * 10) / 10,
@@ -620,86 +616,86 @@ class Package(db.Model):
 				{
 					"supports": support.supports,
 					"confidence": support.confidence,
-					"game": support.game.getAsDictionaryShort(base_url, version)
+					"game": support.game.as_short_dict(base_url, version)
 				} for support in self.supported_games.all()
 			]
 		}
 
-	def getThumbnailOrPlaceholder(self, level=2):
-		return self.getThumbnailURL(level) or "/static/placeholder.png"
+	def get_thumb_or_placeholder(self, level=2):
+		return self.get_thumb_url(level) or "/static/placeholder.png"
 
-	def getThumbnailURL(self, level=2, abs=False):
+	def get_thumb_url(self, level=2, abs=False):
 		screenshot = self.main_screenshot
-		url = screenshot.getThumbnailURL(level) if screenshot is not None else None
+		url = screenshot.get_thumb_url(level) if screenshot is not None else None
 		if abs:
 			from app.utils import abs_url
 			return abs_url(url)
 		else:
 			return url
 
-	def getCoverImageURL(self):
+	def get_cover_image_url(self):
 		screenshot = self.cover_image or self.main_screenshot
-		return screenshot and screenshot.getThumbnailURL(4)
+		return screenshot and screenshot.get_thumb_url(4)
 
-	def getURL(self, endpoint, absolute=False, **kwargs):
+	def get_url(self, endpoint, absolute=False, **kwargs):
 		if absolute:
 			from app.utils import abs_url_for
 			return abs_url_for(endpoint, author=self.author.username, name=self.name, **kwargs)
 		else:
 			return url_for(endpoint, author=self.author.username, name=self.name, **kwargs)
 
-	def getShieldURL(self, type):
+	def get_shield_url(self, type):
 		from app.utils import abs_url_for
 		return abs_url_for("packages.shield",
 				author=self.author.username, name=self.name, type=type)
 
-	def makeShield(self, type):
+	def make_shield(self, type):
 		return "[![ContentDB]({})]({})" \
-			.format(self.getShieldURL(type), self.getURL("packages.view", True))
+			.format(self.get_shield_url(type), self.get_url("packages.view", True))
 
-	def getSetStateURL(self, state):
+	def get_set_state_url(self, state):
 		if type(state) == str:
 			state = PackageState[state]
 		elif type(state) != PackageState:
-			raise Exception("Unknown state given to Package.canMoveToState()")
+			raise Exception("Unknown state given to Package.can_move_to_state()")
 
 		return url_for("packages.move_to_state",
 				author=self.author.username, name=self.name, state=state.name.lower())
 
-	def getDownloadRelease(self, version=None):
+	def get_download_release(self, version=None):
 		for rel in self.releases:
 			if rel.approved and (version is None or
 					((rel.min_rel is None or rel.min_rel_id <= version.id) and
-					 (rel.max_rel is None or rel.max_rel_id >= version.id))):
+					(rel.max_rel is None or rel.max_rel_id >= version.id))):
 				return rel
 
 		return None
 
-	def checkPerm(self, user, perm):
+	def check_perm(self, user, perm):
 		if not user.is_authenticated:
 			return False
 
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to Package.checkPerm()")
+			raise Exception("Unknown permission given to Package.check_perm()")
 
-		isOwner = user == self.author
-		isMaintainer = isOwner or user.rank.atLeast(UserRank.EDITOR) or user in self.maintainers
-		isApprover = user.rank.atLeast(UserRank.APPROVER)
+		is_owner = user == self.author
+		is_maintainer = is_owner or user.rank.atLeast(UserRank.EDITOR) or user in self.maintainers
+		is_approver = user.rank.atLeast(UserRank.APPROVER)
 
 		if perm == Permission.CREATE_THREAD:
 			return user.rank.atLeast(UserRank.NEW_MEMBER)
 
 		# Members can edit their own packages, and editors can edit any packages
 		elif perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
-			return isMaintainer
+			return is_maintainer
 
 		elif perm == Permission.EDIT_PACKAGE:
-			return isMaintainer and user.rank.atLeast(UserRank.NEW_MEMBER)
+			return is_maintainer and user.rank.atLeast(UserRank.NEW_MEMBER)
 
 		elif perm == Permission.APPROVE_RELEASE:
-			return (isMaintainer or isApprover) and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
+			return (is_maintainer or is_approver) and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
 		# Anyone can change the package name when not approved, but only editors when approved
 		elif perm == Permission.CHANGE_NAME:
@@ -707,17 +703,17 @@ class Package(db.Model):
 
 		# Editors can change authors and approve new packages
 		elif perm == Permission.APPROVE_NEW or perm == Permission.CHANGE_AUTHOR:
-			return isApprover
+			return is_approver
 
 		elif perm == Permission.APPROVE_SCREENSHOT:
-			return (isMaintainer or isApprover) and \
+			return (is_maintainer or is_approver) and \
 				user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
 		elif perm == Permission.EDIT_MAINTAINERS or perm == Permission.DELETE_PACKAGE:
-			return isOwner or user.rank.atLeast(UserRank.EDITOR)
+			return is_owner or user.rank.atLeast(UserRank.EDITOR)
 
 		elif perm == Permission.UNAPPROVE_PACKAGE:
-			return isOwner or user.rank.atLeast(UserRank.APPROVER)
+			return is_owner or user.rank.atLeast(UserRank.APPROVER)
 
 		elif perm == Permission.CHANGE_RELEASE_URL:
 			return user.rank.atLeast(UserRank.MODERATOR)
@@ -725,65 +721,64 @@ class Package(db.Model):
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
 
-	def getMissingHardDependenciesQuery(self):
+	def get_missing_hard_dependencies_query(self):
 		return MetaPackage.query \
 			.filter(~ MetaPackage.packages.any(state=PackageState.APPROVED)) \
 			.filter(MetaPackage.dependencies.any(optional=False, depender=self)) \
 			.order_by(db.asc(MetaPackage.name))
 
-	def getMissingHardDependencies(self):
-		return [mp.name for mp in self.getMissingHardDependenciesQuery().all()]
+	def get_missing_hard_dependencies(self):
+		return [mp.name for mp in self.get_missing_hard_dependencies_query().all()]
 
-	def canMoveToState(self, user, state):
+	def can_move_to_state(self, user, state):
 		if not user.is_authenticated:
 			return False
 
 		if type(state) == str:
 			state = PackageState[state]
 		elif type(state) != PackageState:
-			raise Exception("Unknown state given to Package.canMoveToState()")
+			raise Exception("Unknown state given to Package.can_move_to_state()")
 
 		if state not in PACKAGE_STATE_FLOW[self.state]:
 			return False
 
 		if state == PackageState.READY_FOR_REVIEW or state == PackageState.APPROVED:
-			if state == PackageState.APPROVED and not self.checkPerm(user, Permission.APPROVE_NEW):
+			if state == PackageState.APPROVED and not self.check_perm(user, Permission.APPROVE_NEW):
 				return False
 
-			if not (self.checkPerm(user, Permission.APPROVE_NEW) or self.checkPerm(user, Permission.EDIT_PACKAGE)):
+			if not (self.check_perm(user, Permission.APPROVE_NEW) or self.check_perm(user, Permission.EDIT_PACKAGE)):
 				return False
 
 			if state == PackageState.APPROVED and ("Other" in self.license.name or "Other" in self.media_license.name):
 				return False
 
-			if self.getMissingHardDependenciesQuery().count() > 0:
+			if self.get_missing_hard_dependencies_query().count() > 0:
 				return False
 
-			needsScreenshot = \
-				(self.type == self.type.GAME or self.type == self.type.TXP) and \
-					self.screenshots.count() == 0
+			needs_screenshot = \
+				(self.type == self.type.GAME or self.type == self.type.TXP) and self.screenshots.count() == 0
 
-			return self.releases.filter(PackageRelease.task_id==None).count() > 0 and not needsScreenshot
+			return self.releases.filter(PackageRelease.task_id==None).count() > 0 and not needs_screenshot
 
 		elif state == PackageState.CHANGES_NEEDED:
-			return self.checkPerm(user, Permission.APPROVE_NEW)
+			return self.check_perm(user, Permission.APPROVE_NEW)
 
 		elif state == PackageState.WIP:
-			return self.checkPerm(user, Permission.EDIT_PACKAGE) and \
+			return self.check_perm(user, Permission.EDIT_PACKAGE) and \
 				(user in self.maintainers or user.rank.atLeast(UserRank.ADMIN))
 
 		return True
 
-	def getNextStates(self, user):
+	def get_next_states(self, user):
 		states = []
 
 		for state in PackageState:
-			if self.canMoveToState(user, state):
+			if self.can_move_to_state(user, state):
 				states.append(state)
 
 		return states
 
-	def getScoreDict(self):
+	def as_score_dict(self):
 		return {
 			"author": self.author.username,
 			"name": self.name,
@@ -793,16 +788,16 @@ class Package(db.Model):
 			"downloads": self.downloads
 		}
 
-	def recalcScore(self):
-		review_scores = [ 100 * r.asWeight() for r in self.reviews ]
+	def recalculate_score(self):
+		review_scores = [ 100 * r.as_weight() for r in self.reviews ]
 		self.score = self.score_downloads + sum(review_scores)
 
 
 class MetaPackage(db.Model):
-	id           = db.Column(db.Integer, primary_key=True)
-	name         = db.Column(db.String(100), unique=True, nullable=False)
+	id = db.Column(db.Integer, primary_key=True)
+	name = db.Column(db.String(100), unique=True, nullable=False)
 	dependencies = db.relationship("Dependency", back_populates="meta_package", lazy="dynamic")
-	packages     = db.relationship("Package", lazy="dynamic", back_populates="provides", secondary=PackageProvides)
+	packages = db.relationship("Package", lazy="dynamic", back_populates="provides", secondary=PackageProvides)
 
 	mp_name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$'")
 
@@ -866,7 +861,7 @@ class ContentWarning(db.Model):
 		regex = re.compile("[^a-z_]")
 		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
 
-	def getAsDictionary(self):
+	def as_dict(self):
 		description = self.description if self.description != "" else None
 		return { "name": self.name, "title": self.title, "description": description }
 
@@ -892,7 +887,7 @@ class Tag(db.Model):
 		regex = re.compile("[^a-z_]")
 		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
 
-	def getAsDictionary(self):
+	def as_dict(self):
 		description = self.description if self.description != "" else None
 		return {
 			"name": self.name,
@@ -912,10 +907,10 @@ class MinetestRelease(db.Model):
 		self.name = name
 		self.protocol = protocol
 
-	def getActual(self):
+	def get_actual(self):
 		return None if self.name == "None" else self
 
-	def getAsDictionary(self):
+	def as_dict(self):
 		return {
 			"name": self.name,
 			"protocol_version": self.protocol,
@@ -972,7 +967,7 @@ class PackageRelease(db.Model):
 	def file_path(self):
 		return self.url.replace("/uploads/", app.config["UPLOAD_DIR"])
 
-	def getAsDictionary(self):
+	def as_dict(self):
 		return {
 			"id": self.id,
 			"title": self.title,
@@ -980,11 +975,11 @@ class PackageRelease(db.Model):
 			"release_date": self.releaseDate.isoformat(),
 			"commit": self.commit_hash,
 			"downloads": self.downloads,
-			"min_minetest_version": self.min_rel and self.min_rel.getAsDictionary(),
-			"max_minetest_version": self.max_rel and self.max_rel.getAsDictionary(),
+			"min_minetest_version": self.min_rel and self.min_rel.as_dict(),
+			"max_minetest_version": self.max_rel and self.max_rel.as_dict(),
 		}
 
-	def getLongAsDictionary(self):
+	def as_long_dict(self):
 		return {
 			"id": self.id,
 			"title": self.title,
@@ -992,24 +987,24 @@ class PackageRelease(db.Model):
 			"release_date": self.releaseDate.isoformat(),
 			"commit": self.commit_hash,
 			"downloads": self.downloads,
-			"min_minetest_version": self.min_rel and self.min_rel.getAsDictionary(),
-			"max_minetest_version": self.max_rel and self.max_rel.getAsDictionary(),
-			"package": self.package.getAsDictionaryKey()
+			"min_minetest_version": self.min_rel and self.min_rel.as_dict(),
+			"max_minetest_version": self.max_rel and self.max_rel.as_dict(),
+			"package": self.package.as_key_dict()
 		}
 
-	def getEditURL(self):
+	def get_edit_url(self):
 		return url_for("packages.edit_release",
 				author=self.package.author.username,
 				name=self.package.name,
 				id=self.id)
 
-	def getDeleteURL(self):
+	def get_delete_url(self):
 		return url_for("packages.delete_release",
 				author=self.package.author.username,
 				name=self.package.name,
 				id=self.id)
 
-	def getDownloadURL(self):
+	def get_download_url(self):
 		return url_for("packages.download_release",
 				author=self.package.author.username,
 				name=self.package.name,
@@ -1018,11 +1013,11 @@ class PackageRelease(db.Model):
 	def __init__(self):
 		self.releaseDate = datetime.datetime.now()
 
-	def getDownloadFileName(self):
+	def get_download_filename(self):
 		return f"{self.package.name}_{self.id}.zip"
 
 	def approve(self, user):
-		if not self.checkPerm(user, Permission.APPROVE_RELEASE):
+		if not self.check_perm(user, Permission.APPROVE_RELEASE):
 			return False
 
 		if self.approved:
@@ -1038,22 +1033,22 @@ class PackageRelease(db.Model):
 
 		return True
 
-	def checkPerm(self, user, perm):
+	def check_perm(self, user, perm):
 		if not user.is_authenticated:
 			return False
 
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to PackageRelease.checkPerm()")
+			raise Exception("Unknown permission given to PackageRelease.check_perm()")
 
-		isMaintainer = user == self.package.author or user in self.package.maintainers
+		is_maintainer = user == self.package.author or user in self.package.maintainers
 
 		if perm == Permission.DELETE_RELEASE:
 			if user.rank.atLeast(UserRank.ADMIN):
 				return True
 
-			if not (isMaintainer or user.rank.atLeast(UserRank.EDITOR)):
+			if not (is_maintainer or user.rank.atLeast(UserRank.EDITOR)):
 				return False
 
 			if not self.package.approved or self.task_id is not None:
@@ -1066,7 +1061,7 @@ class PackageRelease(db.Model):
 			return count > 0
 		elif perm == Permission.APPROVE_RELEASE:
 			return user.rank.atLeast(UserRank.APPROVER) or \
-					(isMaintainer and user.rank.atLeast(
+					(is_maintainer and user.rank.atLeast(
 						UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER))
 		else:
 			raise Exception("Permission {} is not related to releases".format(perm.name))
@@ -1103,22 +1098,22 @@ class PackageScreenshot(db.Model):
 	def file_path(self):
 		return self.url.replace("/uploads/", app.config["UPLOAD_DIR"])
 
-	def getEditURL(self):
+	def get_edit_url(self):
 		return url_for("packages.edit_screenshot",
 				author=self.package.author.username,
 				name=self.package.name,
 				id=self.id)
 
-	def getDeleteURL(self):
+	def get_delete_url(self):
 		return url_for("packages.delete_screenshot",
 				author=self.package.author.username,
 				name=self.package.name,
 				id=self.id)
 
-	def getThumbnailURL(self, level=2):
+	def get_thumb_url(self, level=2):
 		return self.url.replace("/uploads/", "/thumbnails/{:d}/".format(level))
 
-	def getAsDictionary(self, base_url=""):
+	def as_dict(self, base_url=""):
 		return {
 			"id": self.id,
 			"order": self.order,
@@ -1136,7 +1131,7 @@ class PackageUpdateTrigger(enum.Enum):
 	COMMIT = "New Commit"
 	TAG = "New Tag"
 
-	def toName(self):
+	def to_name(self):
 		return self.name.lower()
 
 	def __str__(self):
@@ -1199,7 +1194,7 @@ class PackageUpdateConfig(db.Model):
 		return self.last_tag or self.last_commit
 
 	def get_create_release_url(self):
-		return self.package.getURL("packages.create_release", title=self.get_title(), ref=self.get_ref())
+		return self.package.get_url("packages.create_release", title=self.get_title(), ref=self.get_ref())
 
 
 class PackageAlias(db.Model):
@@ -1215,11 +1210,11 @@ class PackageAlias(db.Model):
 		self.author = author
 		self.name = name
 
-	def getEditURL(self):
+	def get_edit_url(self):
 		return url_for("packages.alias_create_edit", author=self.package.author.username,
 				name=self.package.name, alias_id=self.id)
 
-	def getAsDictionary(self):
+	def as_dict(self):
 		return f"{self.author}/{self.name}"
 
 

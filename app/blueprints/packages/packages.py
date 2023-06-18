@@ -68,7 +68,7 @@ def list_all():
 	if qb.lucky:
 		package = query.first()
 		if package:
-			return redirect(package.getURL("packages.view"))
+			return redirect(package.get_url("packages.view"))
 
 		topic = qb.buildTopicQuery().first()
 		if qb.search and topic:
@@ -108,7 +108,7 @@ def list_all():
 
 
 def getReleases(package):
-	if package.checkPerm(current_user, Permission.MAKE_RELEASE):
+	if package.check_perm(current_user, Permission.MAKE_RELEASE):
 		return package.releases.limit(5)
 	else:
 		return package.releases.filter_by(approved=True).limit(5)
@@ -117,12 +117,12 @@ def getReleases(package):
 @bp.route("/packages/<author>/<name>/")
 @is_package_page
 def view(package):
-	if package.state != PackageState.APPROVED and not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
+	if package.state != PackageState.APPROVED and not package.check_perm(current_user, Permission.EDIT_PACKAGE):
 		return render_template("packages/gone.html", package=package), 403
 
 	show_similar = not package.approved and (
 			current_user in package.maintainers or
-				package.checkPerm(current_user, Permission.APPROVE_NEW))
+				package.check_perm(current_user, Permission.APPROVE_NEW))
 
 	conflicting_modnames = None
 	if show_similar and package.type != PackageType.TXP:
@@ -153,7 +153,7 @@ def view(package):
 	releases = getReleases(package)
 
 	review_thread = package.review_thread
-	if review_thread is not None and not review_thread.checkPerm(current_user, Permission.SEE_THREAD):
+	if review_thread is not None and not review_thread.check_perm(current_user, Permission.SEE_THREAD):
 		review_thread = None
 
 	topic_error = None
@@ -209,7 +209,7 @@ def shield(package, type):
 @bp.route("/packages/<author>/<name>/download/")
 @is_package_page
 def download(package):
-	release = package.getDownloadRelease()
+	release = package.get_download_release()
 
 	if release is None:
 		if "application/zip" in request.accept_mimetypes and \
@@ -217,9 +217,9 @@ def download(package):
 			return "", 204
 		else:
 			flash(gettext("No download available."), "danger")
-			return redirect(package.getURL("packages.view"))
+			return redirect(package.get_url("packages.view"))
 	else:
-		return redirect(release.getDownloadURL())
+		return redirect(release.get_download_url())
 
 
 def makeLabel(obj):
@@ -269,7 +269,7 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 					"danger")
 			else:
 				flash(markupsafe.Markup(
-					f"<a class='btn btn-sm btn-danger float-right' href='{package.getURL('packages.view')}'>View</a>" +
+					f"<a class='btn btn-sm btn-danger float-right' href='{package.get_url('packages.view')}'>View</a>" +
 					gettext("Package already exists")), "danger")
 			return None
 
@@ -301,16 +301,16 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 
 		if wasNew:
 			msg = f"Created package {author.username}/{form.name.data}"
-			addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.getURL("packages.view"), package)
+			addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.get_url("packages.view"), package)
 
 		if wasNew and package.repo is not None:
 			importRepoScreenshot.delay(package.id)
 
-		next_url = package.getURL("packages.view")
+		next_url = package.get_url("packages.view")
 		if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
 			next_url = url_for("flatpage", path="help/wtfpl", r=next_url)
 		elif wasNew:
-			next_url = package.getURL("packages.setup_releases")
+			next_url = package.get_url("packages.setup_releases")
 
 		return redirect(next_url)
 	except LogicError as e:
@@ -333,7 +333,7 @@ def create_edit(author=None, name=None):
 				flash(gettext("Unable to find that user"), "danger")
 				return redirect(url_for("packages.create_edit"))
 
-			if not author.checkPerm(current_user, Permission.CHANGE_AUTHOR):
+			if not author.check_perm(current_user, Permission.CHANGE_AUTHOR):
 				flash(gettext("Permission denied"), "danger")
 				return redirect(url_for("packages.create_edit"))
 
@@ -341,8 +341,8 @@ def create_edit(author=None, name=None):
 		package = getPackageByInfo(author, name)
 		if package is None:
 			abort(404)
-		if not package.checkPerm(current_user, Permission.EDIT_PACKAGE):
-			return redirect(package.getURL("packages.view"))
+		if not package.check_perm(current_user, Permission.EDIT_PACKAGE):
+			return redirect(package.get_url("packages.view"))
 
 		author = package.author
 
@@ -389,9 +389,9 @@ def move_to_state(package):
 	if state is None:
 		abort(400)
 
-	if not package.canMoveToState(current_user, state):
+	if not package.can_move_to_state(current_user, state):
 		flash(gettext("You don't have permission to do that"), "danger")
-		return redirect(package.getURL("packages.view"))
+		return redirect(package.get_url("packages.view"))
 
 	package.state = state
 	msg = "Marked {} as {}".format(package.title, state.value)
@@ -399,8 +399,8 @@ def move_to_state(package):
 	if state == PackageState.APPROVED:
 		if not package.approved_at:
 			post_discord_webhook.delay(package.author.username,
-					"New package {}".format(package.getURL("packages.view", absolute=True)), False,
-					package.title, package.short_desc, package.getThumbnailURL(2, True))
+					"New package {}".format(package.get_url("packages.view", absolute=True)), False,
+					package.title, package.short_desc, package.get_thumb_url(2, True))
 			package.approved_at = datetime.datetime.now()
 
 		screenshots = PackageScreenshot.query.filter_by(package=package, approved=False).all()
@@ -410,23 +410,23 @@ def move_to_state(package):
 		msg = "Approved {}".format(package.title)
 	elif state == PackageState.READY_FOR_REVIEW:
 		post_discord_webhook.delay(package.author.username,
-				"Ready for Review: {}".format(package.getURL("packages.view", absolute=True)), True,
-				package.title, package.short_desc, package.getThumbnailURL(2, True))
+				"Ready for Review: {}".format(package.get_url("packages.view", absolute=True)), True,
+				package.title, package.short_desc, package.get_thumb_url(2, True))
 
-	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getURL("packages.view"), package)
+	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.get_url("packages.view"), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
-	addAuditLog(severity, current_user, msg, package.getURL("packages.view"), package)
+	addAuditLog(severity, current_user, msg, package.get_url("packages.view"), package)
 
 	db.session.commit()
 
 	if package.state == PackageState.CHANGES_NEEDED:
 		flash(gettext("Please comment what changes are needed in the approval thread"), "warning")
 		if package.review_thread:
-			return redirect(package.review_thread.getViewURL())
+			return redirect(package.review_thread.get_view_url())
 		else:
 			return redirect(url_for('threads.new', pid=package.id, title='Package approval comments'))
 
-	return redirect(package.getURL("packages.view"))
+	return redirect(package.get_url("packages.view"))
 
 
 @bp.route("/packages/<author>/<name>/remove/", methods=["GET", "POST"])
@@ -440,9 +440,9 @@ def remove(package):
 	reason = request.form.get("reason") or "?"
 
 	if "delete" in request.form:
-		if not package.checkPerm(current_user, Permission.DELETE_PACKAGE):
+		if not package.check_perm(current_user, Permission.DELETE_PACKAGE):
 			flash(gettext("You don't have permission to do that"), "danger")
-			return redirect(package.getURL("packages.view"))
+			return redirect(package.get_url("packages.view"))
 
 		package.state = PackageState.DELETED
 
@@ -456,21 +456,21 @@ def remove(package):
 
 		return redirect(url)
 	elif "unapprove" in request.form:
-		if not package.checkPerm(current_user, Permission.UNAPPROVE_PACKAGE):
+		if not package.check_perm(current_user, Permission.UNAPPROVE_PACKAGE):
 			flash(gettext("You don't have permission to do that"), "danger")
-			return redirect(package.getURL("packages.view"))
+			return redirect(package.get_url("packages.view"))
 
 		package.state = PackageState.WIP
 
 		msg = "Unapproved {}, reason={}".format(package.title, reason)
-		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.getURL("packages.view"), package)
-		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.getURL("packages.view"), package)
+		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.get_url("packages.view"), package)
+		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.get_url("packages.view"), package)
 
 		db.session.commit()
 
 		flash(gettext("Unapproved package"), "success")
 
-		return redirect(package.getURL("packages.view"))
+		return redirect(package.get_url("packages.view"))
 	else:
 		abort(400)
 
@@ -485,9 +485,9 @@ class PackageMaintainersForm(FlaskForm):
 @login_required
 @is_package_page
 def edit_maintainers(package):
-	if not package.checkPerm(current_user, Permission.EDIT_MAINTAINERS):
+	if not package.check_perm(current_user, Permission.EDIT_MAINTAINERS):
 		flash(gettext("You don't have permission to edit maintainers"), "danger")
-		return redirect(package.getURL("packages.view"))
+		return redirect(package.get_url("packages.view"))
 
 	form = PackageMaintainersForm(formdata=request.form)
 	if request.method == "GET":
@@ -504,12 +504,12 @@ def edit_maintainers(package):
 				if thread:
 					thread.watchers.append(user)
 				addNotification(user, current_user, NotificationType.MAINTAINER,
-						"Added you as a maintainer of {}".format(package.title), package.getURL("packages.view"), package)
+						"Added you as a maintainer of {}".format(package.title), package.get_url("packages.view"), package)
 
 		for user in package.maintainers:
 			if user != package.author and not user in users:
 				addNotification(user, current_user, NotificationType.MAINTAINER,
-						"Removed you as a maintainer of {}".format(package.title), package.getURL("packages.view"), package)
+						"Removed you as a maintainer of {}".format(package.title), package.get_url("packages.view"), package)
 
 		package.maintainers.clear()
 		package.maintainers.extend(users)
@@ -517,13 +517,13 @@ def edit_maintainers(package):
 			package.maintainers.append(package.author)
 
 		msg = "Edited {} maintainers".format(package.title)
-		addNotification(package.author, current_user, NotificationType.MAINTAINER, msg, package.getURL("packages.view"), package)
+		addNotification(package.author, current_user, NotificationType.MAINTAINER, msg, package.get_url("packages.view"), package)
 		severity = AuditSeverity.NORMAL if current_user == package.author else AuditSeverity.MODERATION
-		addAuditLog(severity, current_user, msg, package.getURL("packages.view"), package)
+		addAuditLog(severity, current_user, msg, package.get_url("packages.view"), package)
 
 		db.session.commit()
 
-		return redirect(package.getURL("packages.view"))
+		return redirect(package.get_url("packages.view"))
 
 	users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).order_by(db.asc(User.username)).all()
 
@@ -545,19 +545,19 @@ def remove_self_maintainers(package):
 		package.maintainers.remove(current_user)
 
 		addNotification(package.author, current_user, NotificationType.MAINTAINER,
-				"Removed themself as a maintainer of {}".format(package.title), package.getURL("packages.view"), package)
+				"Removed themself as a maintainer of {}".format(package.title), package.get_url("packages.view"), package)
 
 		db.session.commit()
 
-	return redirect(package.getURL("packages.view"))
+	return redirect(package.get_url("packages.view"))
 
 
 @bp.route("/packages/<author>/<name>/audit/")
 @login_required
 @is_package_page
 def audit(package):
-	if not (package.checkPerm(current_user, Permission.EDIT_PACKAGE) or
-			package.checkPerm(current_user, Permission.APPROVE_NEW)):
+	if not (package.check_perm(current_user, Permission.EDIT_PACKAGE) or
+			package.check_perm(current_user, Permission.APPROVE_NEW)):
 		abort(403)
 
 	page = get_int_or_abort(request.args.get("page"), 1)
@@ -605,7 +605,7 @@ def alias_create_edit(package: Package, alias_id: int = None):
 		form.populate_obj(alias)
 		db.session.commit()
 
-		return redirect(package.getURL("packages.alias_list"))
+		return redirect(package.get_url("packages.alias_list"))
 
 	return render_template("packages/alias_create_edit.html", package=package, form=form)
 
@@ -655,8 +655,8 @@ def game_support(package):
 	if package.type != PackageType.MOD and package.type != PackageType.TXP:
 		abort(404)
 
-	can_edit = package.checkPerm(current_user, Permission.EDIT_PACKAGE)
-	if not (can_edit or package.checkPerm(current_user, Permission.APPROVE_NEW)):
+	can_edit = package.check_perm(current_user, Permission.EDIT_PACKAGE)
+	if not (can_edit or package.check_perm(current_user, Permission.APPROVE_NEW)):
 		abort(403)
 
 	force_game_detection = package.supported_games.filter(and_(
@@ -694,7 +694,7 @@ def game_support(package):
 			except LogicError as e:
 				flash(e.message, "danger")
 
-		next_url = package.getURL("packages.game_support")
+		next_url = package.get_url("packages.game_support")
 
 		enable_support_detection = form.enable_support_detection.data or force_game_detection
 		if enable_support_detection != package.enable_game_support_detection:
@@ -706,7 +706,7 @@ def game_support(package):
 
 		package.supports_all_games = form.supports_all_games.data
 
-		addAuditLog(AuditSeverity.NORMAL, current_user, "Edited game support", package.getURL("packages.game_support"), package)
+		addAuditLog(AuditSeverity.NORMAL, current_user, "Edited game support", package.get_url("packages.game_support"), package)
 
 		db.session.commit()
 

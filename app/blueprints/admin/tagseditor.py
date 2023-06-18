@@ -60,7 +60,7 @@ def create_edit_tag(name=None):
 		if tag is None:
 			abort(404)
 
-	if not Permission.checkPerm(current_user, Permission.EDIT_TAGS if tag else Permission.CREATE_TAG):
+	if not Permission.check_perm(current_user, Permission.EDIT_TAGS if tag else Permission.CREATE_TAG):
 		abort(403)
 
 	form = TagForm( obj=tag)

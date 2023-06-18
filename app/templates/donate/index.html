@@ -21,11 +21,11 @@
 			<li class="list-group-item">
 				<div class="row">
 					<div class="col-sm-auto text-muted" style="min-width: 250px;">
-						<a href="{{ package.getURL('packages.view') }}">
+						<a href="{{ package.get_url('packages.view') }}">
 							<img
 								class="img-fluid"
 								style="max-height: 22px; max-width: 22px;"
-								src="{{ package.getThumbnailOrPlaceholder() }}" />
+								src="{{ package.get_thumb_or_placeholder() }}" />
 
 							<span class="pl-2">
 								{{ package.title }}
@@ -38,7 +38,7 @@
 					</div>
 
 					<div class="col-sm-auto">
-						<a href="{{ package.getURL('packages.view') }}" class="btn btn-sm btn-secondary mr-1">
+						<a href="{{ package.get_url('packages.view') }}" class="btn btn-sm btn-secondary mr-1">
 							{{ _("View package") }}
 						</a>
 						<a href="{{ package.donate_url_actual }}" class="btn btn-sm btn-primary" rel="nofollow">

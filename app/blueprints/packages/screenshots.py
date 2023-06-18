@@ -50,8 +50,8 @@ class EditPackageScreenshotsForm(FlaskForm):
 @login_required
 @is_package_page
 def screenshots(package):
-	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
-		return redirect(package.getURL("packages.view"))
+	if not package.check_perm(current_user, Permission.ADD_SCREENSHOTS):
+		return redirect(package.get_url("packages.view"))
 
 	form = EditPackageScreenshotsForm(obj=package)
 	form.cover_image.query = package.screenshots
@@ -61,7 +61,7 @@ def screenshots(package):
 		if order:
 			try:
 				do_order_screenshots(current_user, package, order.split(","))
-				return redirect(package.getURL("packages.view"))
+				return redirect(package.get_url("packages.view"))
 			except LogicError as e:
 				flash(e.message, "danger")
 
@@ -77,15 +77,15 @@ def screenshots(package):
 @login_required
 @is_package_page
 def create_screenshot(package):
-	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
-		return redirect(package.getURL("packages.view"))
+	if not package.check_perm(current_user, Permission.ADD_SCREENSHOTS):
+		return redirect(package.get_url("packages.view"))
 
 	# Initial form class from post data and default data
 	form = CreateScreenshotForm()
 	if form.validate_on_submit():
 		try:
 			do_create_screenshot(current_user, package, form.title.data, form.file_upload.data, False)
-			return redirect(package.getURL("packages.screenshots"))
+			return redirect(package.get_url("packages.screenshots"))
 		except LogicError as e:
 			flash(e.message, "danger")
 
@@ -100,10 +100,10 @@ def edit_screenshot(package, id):
 	if screenshot is None or screenshot.package != package:
 		abort(404)
 
-	canEdit	= package.checkPerm(current_user, Permission.ADD_SCREENSHOTS)
-	canApprove = package.checkPerm(current_user, Permission.APPROVE_SCREENSHOT)
+	canEdit	= package.check_perm(current_user, Permission.ADD_SCREENSHOTS)
+	canApprove = package.check_perm(current_user, Permission.APPROVE_SCREENSHOT)
 	if not (canEdit or canApprove):
-		return redirect(package.getURL("packages.screenshots"))
+		return redirect(package.get_url("packages.screenshots"))
 
 	# Initial form class from post data and default data
 	form = EditScreenshotForm(obj=screenshot)
@@ -119,7 +119,7 @@ def edit_screenshot(package, id):
 			screenshot.approved = wasApproved
 
 		db.session.commit()
-		return redirect(package.getURL("packages.screenshots"))
+		return redirect(package.get_url("packages.screenshots"))
 
 	return render_template("packages/screenshot_edit.html", package=package, screenshot=screenshot, form=form)
 
@@ -132,7 +132,7 @@ def delete_screenshot(package, id):
 	if screenshot is None or screenshot.package != package:
 		abort(404)
 
-	if not package.checkPerm(current_user, Permission.ADD_SCREENSHOTS):
+	if not package.check_perm(current_user, Permission.ADD_SCREENSHOTS):
 		flash(gettext("Permission denied"), "danger")
 		return redirect(url_for("homepage.home"))
 
@@ -143,4 +143,4 @@ def delete_screenshot(package, id):
 	db.session.delete(screenshot)
 	db.session.commit()
 
-	return redirect(package.getURL("packages.screenshots"))
+	return redirect(package.get_url("packages.screenshots"))

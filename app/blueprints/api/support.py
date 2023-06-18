@@ -49,7 +49,7 @@ def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: s
 	return jsonify({
 		"success": True,
 		"task": url_for("tasks.check", id=rel.task_id),
-		"release": rel.getAsDictionary()
+		"release": rel.as_dict()
 	})
 
 
@@ -65,7 +65,7 @@ def api_create_zip_release(token: APIToken, package: Package, title: str, file,
 	return jsonify({
 		"success": True,
 		"task": url_for("tasks.check", id=rel.task_id),
-		"release": rel.getAsDictionary()
+		"release": rel.as_dict()
 	})
 
 
@@ -79,7 +79,7 @@ def api_create_screenshot(token: APIToken, package: Package, title: str, file, i
 
 	return jsonify({
 		"success": True,
-		"screenshot": ss.getAsDictionary()
+		"screenshot": ss.as_dict()
 	})
 
 
@@ -115,5 +115,5 @@ def api_edit_package(token: APIToken, package: Package, data: dict, reason: str 
 
 	return jsonify({
 		"success": True,
-		"package": package.getAsDictionary(current_app.config["BASE_URL"])
+		"package": package.as_dict(current_app.config["BASE_URL"])
 	})

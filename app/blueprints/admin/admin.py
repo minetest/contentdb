@@ -106,10 +106,10 @@ def restore():
 			package.state = target
 
 			addAuditLog(AuditSeverity.EDITOR, current_user, f"Restored package to state {target.value}",
-					package.getURL("packages.view"), package)
+					package.get_url("packages.view"), package)
 
 			db.session.commit()
-			return redirect(package.getURL("packages.view"))
+			return redirect(package.get_url("packages.view"))
 
 	deleted_packages = Package.query \
 		.filter(Package.state == PackageState.DELETED) \

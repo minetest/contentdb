@@ -106,16 +106,16 @@ def validate(data: dict):
 
 def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, data: dict,
 		reason: str = None):
-	if not package.checkPerm(user, Permission.EDIT_PACKAGE):
+	if not package.check_perm(user, Permission.EDIT_PACKAGE):
 		raise LogicError(403, lazy_gettext("You don't have permission to edit this package"))
 
 	if "name" in data and package.name != data["name"] and \
-			not package.checkPerm(user, Permission.CHANGE_NAME):
+			not package.check_perm(user, Permission.CHANGE_NAME):
 		raise LogicError(403, lazy_gettext("You don't have permission to change the package name"))
 
 	before_dict = None
 	if not was_new:
-		before_dict = package.getAsDictionary("/")
+		before_dict = package.as_dict("/")
 
 	for alias, to in ALIASES.items():
 		if alias in data:
@@ -125,7 +125,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 
 	for field in ["short_desc", "desc", "website", "issueTracker", "repo", "video_url", "donate_url"]:
 		if field in data and has_blocked_domains(data[field], user.username,
-					f"{field} of {package.getId()}"):
+					f"{field} of {package.get_id()}"):
 			raise LogicError(403, lazy_gettext("Linking to blocked sites is not allowed"))
 
 	if "type" in data:
@@ -193,7 +193,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 				package.content_warnings.append(warning)
 
 	if not was_new:
-		after_dict = package.getAsDictionary("/")
+		after_dict = package.as_dict("/")
 		diff = diff_dictionaries(before_dict, after_dict)
 
 		if reason is None:
@@ -206,7 +206,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			msg += " [" + diff_desc + "]"
 
 		severity = AuditSeverity.NORMAL if user in package.maintainers else AuditSeverity.EDITOR
-		addAuditLog(severity, user, msg, package.getURL("packages.view"), package, json.dumps(diff, indent=4))
+		addAuditLog(severity, user, msg, package.get_url("packages.view"), package, json.dumps(diff, indent=4))
 
 	db.session.commit()
 

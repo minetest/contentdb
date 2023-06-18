@@ -76,8 +76,8 @@ class EditPackageReleaseForm(FlaskForm):
 @login_required
 @is_package_page
 def create_release(package):
-	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
-		return redirect(package.getURL("packages.view"))
+	if not package.check_perm(current_user, Permission.MAKE_RELEASE):
+		return redirect(package.get_url("packages.view"))
 
 	# Initial form class from post data and default data
 	form = CreatePackageReleaseForm()
@@ -94,11 +94,11 @@ def create_release(package):
 		try:
 			if form["uploadOpt"].data == "vcs":
 				rel = do_create_vcs_release(current_user, package, form.title.data,
-						form.vcsLabel.data, form.min_rel.data.getActual(), form.max_rel.data.getActual())
+						form.vcsLabel.data, form.min_rel.data.get_actual(), form.max_rel.data.get_actual())
 			else:
 				rel = do_create_zip_release(current_user, package, form.title.data,
-						form.file_upload.data, form.min_rel.data.getActual(), form.max_rel.data.getActual())
-			return redirect(url_for("tasks.check", id=rel.task_id, r=rel.getEditURL()))
+						form.file_upload.data, form.min_rel.data.get_actual(), form.max_rel.data.get_actual())
+			return redirect(url_for("tasks.check", id=rel.task_id, r=rel.get_edit_url()))
 		except LogicError as e:
 			flash(e.message, "danger")
 
@@ -151,10 +151,10 @@ def edit_release(package, id):
 	if release is None or release.package != package:
 		abort(404)
 
-	canEdit	= package.checkPerm(current_user, Permission.MAKE_RELEASE)
-	canApprove = release.checkPerm(current_user, Permission.APPROVE_RELEASE)
+	canEdit	= package.check_perm(current_user, Permission.MAKE_RELEASE)
+	canApprove = release.check_perm(current_user, Permission.APPROVE_RELEASE)
 	if not (canEdit or canApprove):
-		return redirect(package.getURL("packages.view"))
+		return redirect(package.get_url("packages.view"))
 
 	# Initial form class from post data and default data
 	form = EditPackageReleaseForm(formdata=request.form, obj=release)
@@ -166,10 +166,10 @@ def edit_release(package, id):
 	if form.validate_on_submit():
 		if canEdit:
 			release.title = form["title"].data
-			release.min_rel = form["min_rel"].data.getActual()
-			release.max_rel = form["max_rel"].data.getActual()
+			release.min_rel = form["min_rel"].data.get_actual()
+			release.max_rel = form["max_rel"].data.get_actual()
 
-		if package.checkPerm(current_user, Permission.CHANGE_RELEASE_URL):
+		if package.check_perm(current_user, Permission.CHANGE_RELEASE_URL):
 			release.url = form["url"].data
 			release.task_id = form["task_id"].data
 			if release.task_id is not None:
@@ -181,7 +181,7 @@ def edit_release(package, id):
 			release.approved = False
 
 		db.session.commit()
-		return redirect(package.getURL("packages.list_releases"))
+		return redirect(package.get_url("packages.list_releases"))
 
 	return render_template("packages/release_edit.html", package=package, release=release, form=form)
 
@@ -202,8 +202,8 @@ class BulkReleaseForm(FlaskForm):
 @login_required
 @is_package_page
 def bulk_change_release(package):
-	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
-		return redirect(package.getURL("packages.view"))
+	if not package.check_perm(current_user, Permission.MAKE_RELEASE):
+		return redirect(package.get_url("packages.view"))
 
 	# Initial form class from post data and default data
 	form = BulkReleaseForm()
@@ -215,13 +215,13 @@ def bulk_change_release(package):
 
 		for release in package.releases.all():
 			if form["set_min"].data and (not only_change_none or release.min_rel is None):
-				release.min_rel = form["min_rel"].data.getActual()
+				release.min_rel = form["min_rel"].data.get_actual()
 			if form["set_max"].data and (not only_change_none or release.max_rel is None):
-				release.max_rel = form["max_rel"].data.getActual()
+				release.max_rel = form["max_rel"].data.get_actual()
 
 		db.session.commit()
 
-		return redirect(package.getURL("packages.list_releases"))
+		return redirect(package.get_url("packages.list_releases"))
 
 	return render_template("packages/release_bulk_change.html", package=package, form=form)
 
@@ -234,13 +234,13 @@ def delete_release(package, id):
 	if release is None or release.package != package:
 		abort(404)
 
-	if not release.checkPerm(current_user, Permission.DELETE_RELEASE):
-		return redirect(package.getURL("packages.list_releases"))
+	if not release.check_perm(current_user, Permission.DELETE_RELEASE):
+		return redirect(package.get_url("packages.list_releases"))
 
 	db.session.delete(release)
 	db.session.commit()
 
-	return redirect(package.getURL("packages.view"))
+	return redirect(package.get_url("packages.view"))
 
 
 class PackageUpdateConfigFrom(FlaskForm):
@@ -288,12 +288,12 @@ def set_update_config(package, form):
 @login_required
 @is_package_page
 def update_config(package):
-	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+	if not package.check_perm(current_user, Permission.MAKE_RELEASE):
 		abort(403)
 
 	if not package.repo:
 		flash(gettext("Please add a Git repository URL in order to set up automatic releases"), "danger")
-		return redirect(package.getURL("packages.create_edit"))
+		return redirect(package.get_url("packages.create_edit"))
 
 	form = PackageUpdateConfigFrom(obj=package.update_config)
 	if request.method == "GET":
@@ -317,9 +317,9 @@ def update_config(package):
 
 		if not form.disable.data and package.releases.count() == 0:
 			flash(gettext("Now, please create an initial release"), "success")
-			return redirect(package.getURL("packages.create_release"))
+			return redirect(package.get_url("packages.create_release"))
 
-		return redirect(package.getURL("packages.list_releases"))
+		return redirect(package.get_url("packages.list_releases"))
 
 	return render_template("packages/update_config.html", package=package, form=form)
 
@@ -328,11 +328,11 @@ def update_config(package):
 @login_required
 @is_package_page
 def setup_releases(package):
-	if not package.checkPerm(current_user, Permission.MAKE_RELEASE):
+	if not package.check_perm(current_user, Permission.MAKE_RELEASE):
 		abort(403)
 
 	if package.update_config:
-		return redirect(package.getURL("packages.update_config"))
+		return redirect(package.get_url("packages.update_config"))
 
 	return render_template("packages/release_wizard.html", package=package)
 

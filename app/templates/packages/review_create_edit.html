@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block link %}
-	<a href="{{ package.getURL("packages.view") }}">{{ package.title }}</a>
+	<a href="{{ package.get_url("packages.view") }}">{{ package.title }}</a>
 {% endblock %}
 
 {% block content %}
@@ -22,7 +22,7 @@
 	{{ form.hidden_tag() }}
 	<div class="row mt-0 mb-4 comments mx-0">
 		<div class="col-md-1 p-1">
-			<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ current_user.getProfilePicURL() }}">
+			<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ current_user.get_profile_pic_url() }}">
 		</div>
 		<div class="col">
 			<div class="card">
@@ -50,7 +50,7 @@
 </form>
 
 {% if review %}
-<form method="POST" action="{{ review.getDeleteURL() }}" class="alert alert-secondary my-5">
+<form method="POST" action="{{ review.get_delete_url() }}" class="alert alert-secondary my-5">
 	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 	<input class="btn btn-sm btn-danger float-right" type="submit" value="{{ _('Delete') }}">
 	<b>{{ _("Delete review.") }}</b>

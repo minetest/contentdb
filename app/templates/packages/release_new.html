@@ -9,7 +9,7 @@
 
 	{% if package.update_config %}
 		<p class="alert alert-secondary mb-4">
-			<a class="float-right btn btn-sm btn-secondary" href="{{ package.getURL("packages.update_config") }}">{{ _("Settings") }}</a>
+			<a class="float-right btn btn-sm btn-secondary" href="{{ package.get_url("packages.update_config") }}">{{ _("Settings") }}</a>
 			{% if package.update_config.make_release %}
 				{{ _("You have automatic releases enabled.") }}
 			{% else %}
@@ -20,12 +20,12 @@
 	{% else %}
 		<p class="alert alert-info mb-4">
 			{% if package.repo %}
-				<a class="float-right btn btn-sm btn-info" href="{{ package.getURL("packages.setup_releases") }}">{{ _("Set up") }}</a>
+				<a class="float-right btn btn-sm btn-info" href="{{ package.get_url("packages.setup_releases") }}">{{ _("Set up") }}</a>
 				<i class="fas fa-info mr-2"></i>
 
 				{{ _("You can create releases automatically when you push commits or tags to your repository.") }}
 			{% else %}
-				<a class="float-right btn btn-sm btn-info" href="{{ package.getURL("packages.create_edit") }}">{{ _("Add Git repo") }}</a>
+				<a class="float-right btn btn-sm btn-info" href="{{ package.get_url("packages.create_edit") }}">{{ _("Add Git repo") }}</a>
 				<i class="fas fa-info mr-2"></i>
 
 				{{ _("Using Git would allow you to create releases automatically when you push code or tags.") }}

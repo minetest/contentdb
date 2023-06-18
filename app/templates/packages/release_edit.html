@@ -11,13 +11,13 @@
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 
-		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+		{% if package.check_perm(current_user, "MAKE_RELEASE") %}
 			{{ render_field(form.title) }}
 		{% else %}
 			{{ _("Title") }}: {{ release.title }}
 		{% endif %}
 
-		{% if package.checkPerm(current_user, "CHANGE_RELEASE_URL") %}
+		{% if package.check_perm(current_user, "CHANGE_RELEASE_URL") %}
 			{{ render_field(form.url) }}
 		{% else %}
 			{{ _("URL") }}: <a href="{{ release.url }}">{{ release.url }}</a><br />
@@ -29,14 +29,14 @@
 
 		{% if release.task_id %}
 			{{ _("Importing...") }}
-			<a href="{{ url_for('tasks.check', id=release.task_id, r=release.getEditURL()) }}">{{ _("view task") }}</a><br />
-			{% if package.checkPerm(current_user, "CHANGE_RELEASE_URL") %}
+			<a href="{{ url_for('tasks.check', id=release.task_id, r=release.get_edit_url()) }}">{{ _("view task") }}</a><br />
+			{% if package.check_perm(current_user, "CHANGE_RELEASE_URL") %}
 				{{ render_field(form.task_id) }}
 			{% endif %}
 
 			<br />
 		{% else %}
-			{% if release.checkPerm(current_user, "APPROVE_RELEASE") %}
+			{% if release.check_perm(current_user, "APPROVE_RELEASE") %}
 				{{ render_checkbox_field(form.approved, class_="my-3") }}
 			{% else %}
 				{{ _("Approved") }}: {{ release.approved }}
@@ -69,8 +69,8 @@
 
 	<h2 class="mt-5">{{ _("Delete Release") }}</h2>
 
-	{% if release.checkPerm(current_user, "DELETE_RELEASE") %}
-		<form method="POST" action="{{ release.getDeleteURL() }}" class="alert alert-secondary mb-5">
+	{% if release.check_perm(current_user, "DELETE_RELEASE") %}
+		<form method="POST" action="{{ release.get_delete_url() }}" class="alert alert-secondary mb-5">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input class="btn btn-sm btn-danger float-right" type="submit" value="{{ _('Delete') }}">
 			<b>{{ _("This is permanent.") }}</b>

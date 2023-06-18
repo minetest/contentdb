@@ -69,7 +69,7 @@ def packages():
 	query = qb.buildPackageQuery()
 
 	if request.args.get("fmt") == "keys":
-		return jsonify([package.getAsDictionaryKey() for package in query.all()])
+		return jsonify([package.as_key_dict() for package in query.all()])
 
 	pkgs = qb.convertToDictionary(query.all())
 	if "engine_version" in request.args or "protocol_version" in request.args:
@@ -93,7 +93,7 @@ def packages():
 @is_package_page
 @cors_allowed
 def package(package):
-	return jsonify(package.getAsDictionary(current_app.config["BASE_URL"]))
+	return jsonify(package.as_dict(current_app.config["BASE_URL"]))
 
 
 @bp.route("/api/packages/<author>/<name>/hypertext/")
@@ -119,7 +119,7 @@ def edit_package(token, package):
 
 
 def resolve_package_deps(out, package, only_hard, depth=1):
-	id = package.getId()
+	id = package.get_id()
 	if id in out:
 		return
 
@@ -135,12 +135,12 @@ def resolve_package_deps(out, package, only_hard, depth=1):
 
 		if dep.package:
 			name = dep.package.name
-			fulfilled_by = [ dep.package.getId() ]
+			fulfilled_by = [ dep.package.get_id() ]
 			resolve_package_deps(out, dep.package, only_hard, depth)
 
 		elif dep.meta_package:
 			name = dep.meta_package.name
-			fulfilled_by = [ pkg.getId() for pkg in dep.meta_package.packages if pkg.state == PackageState.APPROVED]
+			fulfilled_by = [ pkg.get_id() for pkg in dep.meta_package.packages if pkg.state == PackageState.APPROVED]
 
 			if depth == 1 and not dep.optional:
 				most_likely = next((pkg for pkg in dep.meta_package.packages \
@@ -175,7 +175,7 @@ def package_dependencies(package):
 def topics():
 	qb     = QueryBuilder(request.args)
 	query  = qb.buildTopicQuery(show_added=True)
-	return jsonify([t.getAsDictionary() for t in query.all()])
+	return jsonify([t.as_dict() for t in query.all()])
 
 
 @bp.route("/api/topic_discard/", methods=["POST"])
@@ -187,13 +187,13 @@ def topic_set_discard():
 		error(400, "Missing topic ID or discard bool")
 
 	topic = ForumTopic.query.get(tid)
-	if not topic.checkPerm(current_user, Permission.TOPIC_DISCARD):
+	if not topic.check_perm(current_user, Permission.TOPIC_DISCARD):
 		error(403, "Permission denied, need: TOPIC_DISCARD")
 
 	topic.discarded = discard == "true"
 	db.session.commit()
 
-	return jsonify(topic.getAsDictionary())
+	return jsonify(topic.as_dict())
 
 
 @bp.route("/api/whoami/")
@@ -232,14 +232,14 @@ def list_all_releases():
 		query = query.join(Package)
 		query = query.filter(Package.maintainers.contains(maintainer))
 
-	return jsonify([ rel.getLongAsDictionary() for rel in query.limit(30).all() ])
+	return jsonify([ rel.as_long_dict() for rel in query.limit(30).all() ])
 
 
 @bp.route("/api/packages/<author>/<name>/releases/")
 @is_package_page
 @cors_allowed
 def list_releases(package):
-	return jsonify([ rel.getAsDictionary() for rel in package.releases.all() ])
+	return jsonify([ rel.as_dict() for rel in package.releases.all() ])
 
 
 @bp.route("/api/packages/<author>/<name>/releases/new/", methods=["POST"])
@@ -251,7 +251,7 @@ def create_release(token, package):
 	if not token:
 		error(401, "Authentication needed")
 
-	if not package.checkPerm(token.owner, Permission.APPROVE_RELEASE):
+	if not package.check_perm(token.owner, Permission.APPROVE_RELEASE):
 		error(403, "You do not have the permission to approve releases")
 
 	if request.headers.get("Content-Type") == "application/json":
@@ -290,7 +290,7 @@ def release(package: Package, id: int):
 	if release is None or release.package != package:
 		error(404, "Release not found")
 
-	return jsonify(release.getAsDictionary())
+	return jsonify(release.as_dict())
 
 
 @bp.route("/api/packages/<author>/<name>/releases/<int:id>/", methods=["DELETE"])
@@ -309,7 +309,7 @@ def delete_release(token: APIToken, package: Package, id: int):
 	if not token.canOperateOnPackage(package):
 		error(403, "API token does not have access to the package")
 
-	if not release.checkPerm(token.owner, Permission.DELETE_RELEASE):
+	if not release.check_perm(token.owner, Permission.DELETE_RELEASE):
 		error(403, "Unable to delete the release, make sure there's a newer release available")
 
 	db.session.delete(release)
@@ -323,7 +323,7 @@ def delete_release(token: APIToken, package: Package, id: int):
 @cors_allowed
 def list_screenshots(package):
 	screenshots = package.screenshots.all()
-	return jsonify([ss.getAsDictionary(current_app.config["BASE_URL"]) for ss in screenshots])
+	return jsonify([ss.as_dict(current_app.config["BASE_URL"]) for ss in screenshots])
 
 
 @bp.route("/api/packages/<author>/<name>/screenshots/new/", methods=["POST"])
@@ -335,7 +335,7 @@ def create_screenshot(token: APIToken, package: Package):
 	if not token:
 		error(401, "Authentication needed")
 
-	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
+	if not package.check_perm(token.owner, Permission.ADD_SCREENSHOTS):
 		error(403, "You do not have the permission to create screenshots")
 
 	data = request.form
@@ -357,7 +357,7 @@ def screenshot(package, id):
 	if ss is None or ss.package != package:
 		error(404, "Screenshot not found")
 
-	return jsonify(ss.getAsDictionary(current_app.config["BASE_URL"]))
+	return jsonify(ss.as_dict(current_app.config["BASE_URL"]))
 
 
 @bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/", methods=["DELETE"])
@@ -373,7 +373,7 @@ def delete_screenshot(token: APIToken, package: Package, id: int):
 	if not token:
 		error(401, "Authentication needed")
 
-	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
+	if not package.check_perm(token.owner, Permission.ADD_SCREENSHOTS):
 		error(403, "You do not have the permission to delete screenshots")
 
 	if not token.canOperateOnPackage(package):
@@ -398,7 +398,7 @@ def order_screenshots(token: APIToken, package: Package):
 	if not token:
 		error(401, "Authentication needed")
 
-	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
+	if not package.check_perm(token.owner, Permission.ADD_SCREENSHOTS):
 		error(403, "You do not have the permission to change screenshots")
 
 	if not token.canOperateOnPackage(package):
@@ -420,7 +420,7 @@ def set_cover_image(token: APIToken, package: Package):
 	if not token:
 		error(401, "Authentication needed")
 
-	if not package.checkPerm(token.owner, Permission.ADD_SCREENSHOTS):
+	if not package.check_perm(token.owner, Permission.ADD_SCREENSHOTS):
 		error(403, "You do not have the permission to change screenshots")
 
 	if not token.canOperateOnPackage(package):
@@ -438,7 +438,7 @@ def set_cover_image(token: APIToken, package: Package):
 @cors_allowed
 def list_reviews(package):
 	reviews = package.reviews
-	return jsonify([review.getAsDictionary() for review in reviews])
+	return jsonify([review.as_dict() for review in reviews])
 
 
 @bp.route("/api/reviews/")
@@ -473,7 +473,7 @@ def list_all_reviews():
 			"previous": abs_url(url_set_query(page=page - 1)) if pagination.has_prev else None,
 			"next": abs_url(url_set_query(page=page + 1)) if pagination.has_next else None,
 		},
-		"items": [review.getAsDictionary(True) for review in pagination.items],
+		"items": [review.as_dict(True) for review in pagination.items],
 	})
 
 
@@ -501,20 +501,20 @@ def package_scores():
 	qb    = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 
-	pkgs = [package.getScoreDict() for package in query.all()]
+	pkgs = [package.as_score_dict() for package in query.all()]
 	return jsonify(pkgs)
 
 
 @bp.route("/api/tags/")
 @cors_allowed
 def tags():
-	return jsonify([tag.getAsDictionary() for tag in Tag.query.all() ])
+	return jsonify([tag.as_dict() for tag in Tag.query.all() ])
 
 
 @bp.route("/api/content_warnings/")
 @cors_allowed
 def content_warnings():
-	return jsonify([warning.getAsDictionary() for warning in ContentWarning.query.all() ])
+	return jsonify([warning.as_dict() for warning in ContentWarning.query.all() ])
 
 
 @bp.route("/api/licenses/")
@@ -549,7 +549,7 @@ def homepage():
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 
 	def mapPackages(packages: List[Package]):
-		return [pkg.getAsDictionaryShort(current_app.config["BASE_URL"]) for pkg in packages]
+		return [pkg.as_short_dict(current_app.config["BASE_URL"]) for pkg in packages]
 
 	return jsonify({
 		"count": count,
@@ -574,7 +574,7 @@ def welcome_v1():
 		.limit(5).all()
 
 	def map_packages(packages: List[Package]):
-		return [pkg.getAsDictionaryShort(current_app.config["BASE_URL"]) for pkg in packages]
+		return [pkg.as_short_dict(current_app.config["BASE_URL"]) for pkg in packages]
 
 	return jsonify({
 		"featured": map_packages(featured),
@@ -591,10 +591,10 @@ def versions():
 		if rel is None:
 			error(404, "No releases found")
 
-		return jsonify(rel.getAsDictionary())
+		return jsonify(rel.as_dict())
 
-	return jsonify([rel.getAsDictionary() \
-			for rel in MinetestRelease.query.all() if rel.getActual() is not None])
+	return jsonify([rel.as_dict() \
+			for rel in MinetestRelease.query.all() if rel.get_actual() is not None])
 
 
 @bp.route("/api/dependencies/")
@@ -605,7 +605,7 @@ def all_deps():
 
 	def format_pkg(pkg: Package):
 		return {
-			"type": pkg.type.toName(),
+			"type": pkg.type.to_name(),
 			"author": pkg.author.username,
 			"name": pkg.name,
 			"provides": [x.name for x in pkg.provides],

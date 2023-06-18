@@ -49,7 +49,7 @@ def list_tokens(username):
 	if user is None:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CREATE_TOKEN):
+	if not user.check_perm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
 
 	return render_template("api/list_tokens.html", user=user, tabs=get_setting_tabs(user), current_tab="api_tokens")
@@ -63,7 +63,7 @@ def create_edit_token(username, id=None):
 	if user is None:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CREATE_TOKEN):
+	if not user.check_perm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
 
 	is_new = id is None
@@ -108,7 +108,7 @@ def reset_token(username, id):
 	if user is None:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CREATE_TOKEN):
+	if not user.check_perm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
 
 	token = APIToken.query.get(id)
@@ -134,7 +134,7 @@ def delete_token(username, id):
 	if user is None:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CREATE_TOKEN):
+	if not user.check_perm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
 
 	is_new = id is None

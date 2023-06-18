@@ -68,7 +68,7 @@
 			<div class="row">
 			{{ render_field(form.type, class_="pkg_meta col-sm-2") }}
 			{{ render_field(form.title, class_="pkg_meta col-sm-6") }}
-			{% if package and package.approved and not package.checkPerm(current_user, "CHANGE_NAME") %}
+			{% if package and package.approved and not package.check_perm(current_user, "CHANGE_NAME") %}
 				{{ render_field(form.name, class_="pkg_meta col-sm-4",
 					readonly=True, hint=_("Please open a thread to request a name change")) }}
 			{% else %}

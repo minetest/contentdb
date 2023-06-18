@@ -66,27 +66,27 @@ class Thread(db.Model):
 		else:
 			return comment
 
-	def getViewURL(self, absolute=False):
+	def get_view_url(self, absolute=False):
 		if absolute:
 			from ..utils import abs_url_for
 			return abs_url_for("threads.view", id=self.id)
 		else:
 			return url_for("threads.view", id=self.id, _external=False)
 
-	def getSubscribeURL(self):
+	def get_subscribe_url(self):
 		return url_for("threads.subscribe", id=self.id)
 
-	def getUnsubscribeURL(self):
+	def get_unsubscribe_url(self):
 		return url_for("threads.unsubscribe", id=self.id)
 
-	def checkPerm(self, user, perm):
+	def check_perm(self, user, perm):
 		if not user.is_authenticated:
 			return perm == Permission.SEE_THREAD and not self.private
 
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to Thread.checkPerm()")
+			raise Exception("Unknown permission given to Thread.check_perm()")
 
 		isMaintainer = user == self.author or (self.package is not None and self.package.author == user)
 		if self.package:
@@ -145,16 +145,16 @@ class ThreadReply(db.Model):
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	def get_url(self, absolute=False):
-		return self.thread.getViewURL(absolute) + "#reply-" + str(self.id)
+		return self.thread.get_view_url(absolute) + "#reply-" + str(self.id)
 
-	def checkPerm(self, user, perm):
+	def check_perm(self, user, perm):
 		if not user.is_authenticated:
 			return False
 
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to ThreadReply.checkPerm()")
+			raise Exception("Unknown permission given to ThreadReply.check_perm()")
 
 		if perm == Permission.EDIT_REPLY:
 			return user.rank.atLeast(UserRank.NEW_MEMBER if user == self.author else UserRank.MODERATOR) and not self.thread.locked
@@ -191,7 +191,7 @@ class PackageReview(db.Model):
 		user_vote = next(filter(lambda vote: vote.user == current_user, votes), None)
 		return pos, neg, user_vote.is_positive if user_vote else None
 
-	def getAsDictionary(self, include_package=False):
+	def as_dict(self, include_package=False):
 		pos, neg, _user = self.get_totals()
 		ret = {
 			"is_positive": self.rating > 3,
@@ -209,19 +209,19 @@ class PackageReview(db.Model):
 			"comment": self.thread.first_reply.comment,
 		}
 		if include_package:
-			ret["package"] = self.package.getAsDictionaryKey()
+			ret["package"] = self.package.as_key_dict()
 		return ret
 
-	def asWeight(self):
+	def as_weight(self):
 		"""
 		From (1, 5) to (-1 to 1)
 		"""
 		return (self.rating - 3.0) / 2.0
 
-	def getEditURL(self):
-		return self.package.getURL("packages.review")
+	def get_edit_url(self):
+		return self.package.get_url("packages.review")
 
-	def getDeleteURL(self):
+	def get_delete_url(self):
 		return url_for("packages.delete_review",
 				author=self.package.author.username,
 				name=self.package.name,
@@ -238,14 +238,14 @@ class PackageReview(db.Model):
 		(pos, neg, _) = self.get_totals()
 		self.score = 3 * (pos - neg) + 1
 
-	def checkPerm(self, user, perm):
+	def check_perm(self, user, perm):
 		if not user.is_authenticated:
 			return False
 
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to PackageReview.checkPerm()")
+			raise Exception("Unknown permission given to PackageReview.check_perm()")
 
 		if perm == Permission.DELETE_REVIEW:
 			return user == self.author or user.rank.atLeast(UserRank.MODERATOR)

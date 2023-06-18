@@ -54,13 +54,13 @@ class ReviewForm(FlaskForm):
 def review(package):
 	if current_user in package.maintainers:
 		flash(gettext("You can't review your own package!"), "danger")
-		return redirect(package.getURL("packages.view"))
+		return redirect(package.get_url("packages.view"))
 
 	if package.state != PackageState.APPROVED:
 		abort(404)
 
 	review = PackageReview.query.filter_by(package=package, author=current_user).first()
-	can_review = review is not None or current_user.canReviewRL()
+	can_review = review is not None or current_user.can_review_ratelimit()
 
 	if not can_review:
 		flash(gettext("You've reviewed too many packages recently. Please wait before trying again, and consider making your reviews more detailed"), "danger")
@@ -75,7 +75,7 @@ def review(package):
 
 	# Validate and submit
 	elif can_review and form.validate_on_submit():
-		if has_blocked_domains(form.comment.data, current_user.username, f"review of {package.getId()}"):
+		if has_blocked_domains(form.comment.data, current_user.username, f"review of {package.get_id()}"):
 			flash(gettext("Linking to blocked sites is not allowed"), "danger")
 		else:
 			was_new = False
@@ -114,7 +114,7 @@ def review(package):
 
 			db.session.commit()
 
-			package.recalcScore()
+			package.recalculate_score()
 
 			if was_new:
 				notif_msg = "New review '{}'".format(form.title.data)
@@ -128,11 +128,11 @@ def review(package):
 
 			if was_new:
 				post_discord_webhook.delay(thread.author.username,
-						"Reviewed {}: {}".format(package.title, thread.getViewURL(absolute=True)), False)
+						"Reviewed {}: {}".format(package.title, thread.get_view_url(absolute=True)), False)
 
 			db.session.commit()
 
-			return redirect(package.getURL("packages.view"))
+			return redirect(package.get_url("packages.view"))
 
 	return render_template("packages/review_create_edit.html",
 			form=form, package=package, review=review)
@@ -148,7 +148,7 @@ def delete_review(package, reviewer):
 	if review is None or review.package != package:
 		abort(404)
 
-	if not review.checkPerm(current_user, Permission.DELETE_REVIEW):
+	if not review.check_perm(current_user, Permission.DELETE_REVIEW):
 		abort(403)
 
 	thread = review.thread
@@ -164,18 +164,18 @@ def delete_review(package, reviewer):
 
 	msg = "Converted review by {} to thread".format(review.author.display_name)
 	addAuditLog(AuditSeverity.MODERATION if current_user.username != reviewer else AuditSeverity.NORMAL,
-			current_user, msg, thread.getViewURL(), thread.package)
+			current_user, msg, thread.get_view_url(), thread.package)
 
 	notif_msg = "Deleted review '{}', comments were kept as a thread".format(thread.title)
 	addNotification(package.maintainers, current_user, NotificationType.OTHER, notif_msg, url_for("threads.view", id=thread.id), package)
 
 	db.session.delete(review)
 
-	package.recalcScore()
+	package.recalculate_score()
 
 	db.session.commit()
 
-	return redirect(thread.getViewURL())
+	return redirect(thread.get_view_url())
 
 
 def handle_review_vote(package: Package, review_id: int):
@@ -219,7 +219,7 @@ def review_vote(package, review_id):
 	if next_url and is_safe_url(next_url):
 		return redirect(next_url)
 	else:
-		return redirect(review.thread.getViewURL())
+		return redirect(review.thread.get_view_url())
 
 
 @bp.route("/packages/<author>/<name>/review-votes/")
@@ -228,7 +228,7 @@ def review_vote(package, review_id):
 def review_votes(package):
 	user_biases = {}
 	for review in package.reviews:
-		review_sign = review.asWeight()
+		review_sign = review.as_weight()
 		for vote in review.votes:
 			user_biases[vote.user.username] = user_biases.get(vote.user.username, [0, 0])
 			vote_sign = 1 if vote.is_positive else -1

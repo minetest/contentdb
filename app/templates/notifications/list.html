@@ -36,7 +36,7 @@
 							<img
 								class="img-fluid"
 								style="max-height: 22px; max-width: 22px;"
-								src="{{ n.package.getThumbnailOrPlaceholder() }}" />
+								src="{{ n.package.get_thumb_or_placeholder() }}" />
 
 							<span class="pl-2">
 								{{ n.package.title }}
@@ -53,7 +53,7 @@
 						<img
 							class="img-fluid user-photo img-thumbnail img-thumbnail-1"
 							style="max-height: 22px;"
-							src="{{ n.causer.getProfilePicURL() }}" />
+							src="{{ n.causer.get_profile_pic_url() }}" />
 					</div>
 				</div>
 			</a>
@@ -74,7 +74,7 @@
 								<img
 									class="img-fluid"
 									style="max-height: 22px; max-width: 22px;"
-									src="{{ n.package.getThumbnailOrPlaceholder() }}" />
+									src="{{ n.package.get_thumb_or_placeholder() }}" />
 
 								<span class="pl-2">
 									{{ n.package.title }}
@@ -91,7 +91,7 @@
 							<img
 								class="img-fluid user-photo img-thumbnail img-thumbnail-1"
 								style="max-height: 22px;"
-								src="{{ n.causer.getProfilePicURL() }}" />
+								src="{{ n.causer.get_profile_pic_url() }}" />
 						</div>
 					</div>
 				</a>

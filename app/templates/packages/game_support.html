@@ -36,7 +36,7 @@
 
 		{% for support in package.get_sorted_game_support() %}
 			<a class="list-group-item list-group-item-action"
-					href="{{ support.game.getURL('packages.view') }}">
+					href="{{ support.game.get_url('packages.view') }}">
 				<div class="row">
 					<span class="col-5">
 						{{ _("%(title)s by %(display_name)s",

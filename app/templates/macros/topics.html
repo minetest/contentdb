@@ -23,13 +23,13 @@
 			<td>{{ topic.name or ""}}</td>
 			<td>{{ topic.created_at | date }}</td>
 			<td class="btn-group">
-				{% if current_user == topic.author or topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
+				{% if current_user == topic.author or topic.author.check_perm(current_user, "CHANGE_AUTHOR") %}
 					<a class="btn btn-primary"
 							href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
 						{{ _("Create") }}
 					</a>
 				{% endif %}
-				{% if show_discard and current_user.is_authenticated and topic.checkPerm(current_user, "TOPIC_DISCARD") %}
+				{% if show_discard and current_user.is_authenticated and topic.check_perm(current_user, "TOPIC_DISCARD") %}
 					<a class="btn btn-{% if topic.discarded %}success{% else %}danger{% endif %} topic-discard" data-tid={{ topic.topic_id }}>
 						{% if topic.discarded %}
 							{{ _("Show") }}
@@ -59,7 +59,7 @@
 			{% if show_author %}
 				by <a href="{{ url_for('users.profile', username=topic.author.username) }}">{{ topic.author.display_name }}</a>
 			{% endif %}
-			{% if topic.author == current_user or topic.author.checkPerm(current_user, "CHANGE_AUTHOR") %}
+			{% if topic.author == current_user or topic.author.check_perm(current_user, "CHANGE_AUTHOR") %}
 				|
 				<a href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
 					{{ _("Create") }}

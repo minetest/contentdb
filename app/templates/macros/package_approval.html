@@ -5,8 +5,8 @@
 		{{ _("State") }}: <strong>{{ package.state.value }}</strong>
 	</span>
 
-	{% for state in package.getNextStates(current_user) %}
-		<form class="col-auto"  method="post" action="{{ package.getSetStateURL(state) }}">
+	{% for state in package.get_next_states(current_user) %}
+		<form class="col-auto"  method="post" action="{{ package.get_set_state_url(state) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input class="btn btn-sm btn-primary" type="submit" value="{{ state.verb() }}" />
 		</form>
@@ -16,13 +16,13 @@
 {% set level = "warning" %}
 {% if package.releases.filter_by(task_id=None).count() == 0 %}
 	{% set message %}
-		{% if package.checkPerm(current_user, "MAKE_RELEASE") %}
+		{% if package.check_perm(current_user, "MAKE_RELEASE") %}
 			{% if package.update_config %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL('packages.create_release') }}">
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.get_url('packages.create_release') }}">
 					{{ _("Create release") }}
 				</a>
 			{% else %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.getURL('packages.setup_releases') }}">
+				<a class="btn btn-sm btn-warning float-right" href="{{ package.get_url('packages.setup_releases') }}">
 					{{ _("Set up releases") }}
 				</a>
 			{% endif %}
@@ -40,8 +40,8 @@
 {% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
 	{% set message = _("You need to add at least one screenshot.") %}
 
-{% elif package.getMissingHardDependenciesQuery().count() > 0 %}
-	{% set deps = package.getMissingHardDependencies() | join(", ") %}
+{% elif package.get_missing_hard_dependencies_query().count() > 0 %}
+	{% set deps = package.get_missing_hard_dependencies() | join(", ") %}
 	{% set message = _("The following hard dependencies need to be added to ContentDB first: %(deps)s", deps=deps) %}
 
 {% elif topic_error_lvl == "danger" %}
@@ -58,15 +58,15 @@
 		{% endif %}
 
 		{% if package.state == package.state.READY_FOR_REVIEW %}
-			{% if not package.getDownloadRelease() %}
+			{% if not package.get_download_release() %}
 				{{ _("Please wait for the release to be approved.") }}
-			{% elif package.checkPerm(current_user, "APPROVE_NEW") %}
+			{% elif package.check_perm(current_user, "APPROVE_NEW") %}
 				{{ _("You can now approve this package if you're ready.") }}
 			{% else %}
 				{{ _("Please wait for the package to be approved.") }}
 			{% endif %}
 		{% else %}
-			{% if package.checkPerm(current_user, "EDIT_PACKAGE") %}
+			{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
 				{{ _("You can now submit this package for approval if you're ready.") }}
 			{% else %}
 				{{ _("This package can be submitted for approval when ready.") }}
@@ -95,7 +95,7 @@
 
 {% if conflicting_modnames %}
 	<div class="alert alert-warning">
-		<a class="float-right btn btn-sm btn-warning" href="{{ package.getURL('packages.similar') }}">
+		<a class="float-right btn btn-sm btn-warning" href="{{ package.get_url('packages.similar') }}">
 			More info
 		</a>
 		{% if conflicting_modnames | length > 4 %}
@@ -106,7 +106,7 @@
 	</div>
 {% endif %}
 
-{% if not package.review_thread and (package.author == current_user or package.checkPerm(current_user, "APPROVE_NEW")) %}
+{% if not package.review_thread and (package.author == current_user or package.check_perm(current_user, "APPROVE_NEW")) %}
 	<div class="alert alert-secondary">
 		<a class="float-right btn btn-sm btn-secondary" href="{{ url_for('threads.new', pid=package.id, title='Package approval comments') }}">
 			{{ _("Open Thread") }}

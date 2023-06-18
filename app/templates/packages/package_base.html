@@ -6,11 +6,11 @@
 		<div class="row">
 			<div class="col-md-3 mb-4">
 				<div class="list-group">
-					<a class="list-group-item list-group-item-action" href="{{ package.getURL("packages.view") }}">
+					<a class="list-group-item list-group-item-action" href="{{ package.get_url("packages.view") }}">
 						<span class="row m-0 p-0">
 							<span class="col-auto m-0 p-0">
 								<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
-										src="{{ package.getThumbnailOrPlaceholder(1) }}" alt="{{ _('Thumbnail') }}" style="max-height: 20px;">
+										src="{{ package.get_thumb_or_placeholder(1) }}" alt="{{ _('Thumbnail') }}" style="max-height: 20px;">
 							</span>
 							<span class="col m-0 p-0 pl-2">
 								{{ package.title }}

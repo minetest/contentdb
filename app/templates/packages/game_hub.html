@@ -10,8 +10,8 @@
 {% endblock %}
 
 {% block headextra %}
-	{% if package.getThumbnailURL(3, True) %}
-		<meta name="og:image" content="{{ package.getThumbnailURL(3, True) }}"/>
+	{% if package.get_thumb_url(3, True) %}
+		<meta name="og:image" content="{{ package.get_thumb_url(3, True) }}"/>
 	{% endif %}
 {% endblock %}
 
@@ -21,40 +21,40 @@
 
 	<h1 class="mb-5">
 		{{ _("Community Hub") }} -
-		<a href="{{ package.getURL('packages.view') }}">
+		<a href="{{ package.get_url('packages.view') }}">
 			{{ _('%(title)s by %(author)s', title=package.title, author=package.author.display_name) }}
 		</a>
 	</h1>
 
-	<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc', game=package.get_id()) }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Recently Added") }}</h2>
 	{{ render_pkggrid(new) }}
 
 
-	<a href="{{ url_for('packages.list_all', sort='last_release', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', sort='last_release', order='desc', game=package.get_id()) }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Recently Updated") }}</h2>
 	{{ render_pkggrid(updated) }}
 
 
-	<a href="{{ url_for('packages.list_all', type='mod', sort='score', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', type='mod', sort='score', order='desc', game=package.get_id()) }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Top Mods") }}</h2>
 	{{ render_pkggrid(pop_mod) }}
 
 
-	<a href="{{ url_for('packages.list_all', type='txp', sort='score', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', type='txp', sort='score', order='desc', game=package.get_id()) }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Top Texture Packs") }}</h2>
 	{{ render_pkggrid(pop_txp) }}
 
 
-	<a href="{{ url_for('packages.list_all', sort='reviews', order='desc', game=package.getId()) }}" class="btn btn-secondary float-right">
+	<a href="{{ url_for('packages.list_all', sort='reviews', order='desc', game=package.get_id()) }}" class="btn btn-secondary float-right">
 		{{ _("See more") }}
 	</a>
 	<h2 class="my-3">{{ _("Highest Reviewed") }}</h2>

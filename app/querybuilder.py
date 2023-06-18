@@ -128,7 +128,7 @@ class QueryBuilder:
 
 		def toJson(package: Package):
 			release_id = releases.get(package.id)
-			return package.getAsDictionaryShort(current_app.config["BASE_URL"], release_id=release_id, no_load=True)
+			return package.as_short_dict(current_app.config["BASE_URL"], release_id=release_id, no_load=True)
 
 		return [toJson(pkg) for pkg in packages]
 

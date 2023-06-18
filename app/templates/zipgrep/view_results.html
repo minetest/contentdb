@@ -20,10 +20,10 @@
 					<div class="col-sm-2 text-muted">
 						<img
 							class="img-fluid"
-							src="{{ match.package.getThumbnailOrPlaceholder() }}" />
+							src="{{ match.package.get_thumb_or_placeholder() }}" />
 
 						<div class="mt-2">
-							<a href="{{ match.package.getURL('packages.view') }}">
+							<a href="{{ match.package.get_url('packages.view') }}">
 								{{ match.package.title }}
 							</a>
 							by {{ match.package.author.display_name }}
@@ -33,7 +33,7 @@
 							{{ match.lines.split("\n") | select | list | count }} match(es)
 						</p>
 
-						<a class="mt-4 btn btn-secondary" href="{{ match.package.getDownloadRelease().getDownloadURL() }}">
+						<a class="mt-4 btn btn-secondary" href="{{ match.package.get_download_release().get_download_url() }}">
 							Download
 						</a>
 					</div>

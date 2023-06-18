@@ -13,23 +13,23 @@
 		{{ _("Review link") }}:
 	</p>
 
-	<pre><code>{{ package.getURL("packages.review", absolute=True) }}</code></pre>
+	<pre><code>{{ package.get_url("packages.review", absolute=True) }}</code></pre>
 
 	<h3>{{ _("Badges") }}</h3>
 
 	<p>
-		{{ package.makeShield("title") | markdown }}
+		{{ package.make_shield("title") | markdown }}
 	</p>
 
 	<p>
-		<pre><code>{{ package.makeShield("title") }}</code></pre>
+		<pre><code>{{ package.make_shield("title") }}</code></pre>
 	</p>
 
 	<p>
-		{{ package.makeShield("downloads") | markdown }}
+		{{ package.make_shield("downloads") | markdown }}
 	</p>
 
 	<p>
-		<pre><code>{{ package.makeShield("downloads") }}</code></pre>
+		<pre><code>{{ package.make_shield("downloads") }}</code></pre>
 	</p>
 {% endblock %}

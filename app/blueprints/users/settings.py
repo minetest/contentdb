@@ -59,7 +59,7 @@ def handle_profile_edit(form: UserProfileForm, user: User, username: str):
 			url_for("users.profile", username=username))
 
 	display_name = form.display_name.data or user.username
-	if user.checkPerm(current_user, Permission.CHANGE_DISPLAY_NAME) and \
+	if user.check_perm(current_user, Permission.CHANGE_DISPLAY_NAME) and \
 			user.display_name != display_name:
 
 		if User.query.filter(User.id != user.id,
@@ -82,7 +82,7 @@ def handle_profile_edit(form: UserProfileForm, user: User, username: str):
 			.format(user.username, user.display_name),
 				url_for("users.profile", username=username))
 
-	if user.checkPerm(current_user, Permission.CHANGE_PROFILE_URLS):
+	if user.check_perm(current_user, Permission.CHANGE_PROFILE_URLS):
 		if has_blocked_domains(form.website_url.data, current_user.username, f"{user.username}'s website_url") or \
 				has_blocked_domains(form.donate_url.data, current_user.username, f"{user.username}'s donate_url"):
 			flash(gettext("Linking to blocked sites is not allowed"), "danger")
@@ -124,7 +124,7 @@ def make_settings_form():
 	}
 
 	for notificationType in NotificationType:
-		key = "pref_" + notificationType.toName()
+		key = "pref_" + notificationType.to_name()
 		attrs[key] = BooleanField("")
 		attrs[key + "_digest"] = BooleanField("")
 
@@ -135,15 +135,15 @@ SettingsForm = make_settings_form()
 
 def handle_email_notifications(user, prefs: UserNotificationPreferences, is_new, form):
 	for notificationType in NotificationType:
-		field_email = getattr(form, "pref_" + notificationType.toName()).data
-		field_digest = getattr(form, "pref_" + notificationType.toName() + "_digest").data or field_email
+		field_email = getattr(form, "pref_" + notificationType.to_name()).data
+		field_digest = getattr(form, "pref_" + notificationType.to_name() + "_digest").data or field_email
 		prefs.set_can_email(notificationType, field_email)
 		prefs.set_can_digest(notificationType, field_digest)
 
 	if is_new:
 		db.session.add(prefs)
 
-	if user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+	if user.check_perm(current_user, Permission.CHANGE_EMAIL):
 		newEmail = form.email.data
 		if newEmail and newEmail != user.email and newEmail.strip() != "":
 			if EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
@@ -182,7 +182,7 @@ def email_notifications(username=None):
 	if not user:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+	if not user.check_perm(current_user, Permission.CHANGE_EMAIL):
 		abort(403)
 
 	is_new = False
@@ -195,8 +195,8 @@ def email_notifications(username=None):
 	types = []
 	for notificationType in NotificationType:
 		types.append(notificationType)
-		data["pref_" + notificationType.toName()] = prefs.get_can_email(notificationType)
-		data["pref_" + notificationType.toName() + "_digest"] = prefs.get_can_digest(notificationType)
+		data["pref_" + notificationType.to_name()] = prefs.get_can_email(notificationType)
+		data["pref_" + notificationType.to_name() + "_digest"] = prefs.get_can_digest(notificationType)
 
 	data["email"] = user.email
 
@@ -285,7 +285,7 @@ def modtools(username):
 	if not user:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+	if not user.check_perm(current_user, Permission.CHANGE_EMAIL):
 		abort(403)
 
 	form = ModToolsForm(obj=user)
@@ -295,7 +295,7 @@ def modtools(username):
 				url_for("users.profile", username=username))
 
 		# Copy form fields to user_profile fields
-		if user.checkPerm(current_user, Permission.CHANGE_USERNAMES):
+		if user.check_perm(current_user, Permission.CHANGE_USERNAMES):
 			if user.username != form.username.data:
 				for package in user.packages:
 					alias = PackageAlias(user.username, package.name)
@@ -308,12 +308,12 @@ def modtools(username):
 			user.forums_username = nonEmptyOrNone(form.forums_username.data)
 			user.github_username = nonEmptyOrNone(form.github_username.data)
 
-		if user.checkPerm(current_user, Permission.CHANGE_RANK):
+		if user.check_perm(current_user, Permission.CHANGE_RANK):
 			newRank = form["rank"].data
 			if current_user.rank.atLeast(newRank):
 				if newRank != user.rank:
 					user.rank = form["rank"].data
-					msg = "Set rank of {} to {}".format(user.display_name, user.rank.getTitle())
+					msg = "Set rank of {} to {}".format(user.display_name, user.rank.get_title())
 					addAuditLog(AuditSeverity.MODERATION, current_user, msg,
 								url_for("users.profile", username=username))
 			else:
@@ -333,7 +333,7 @@ def modtools_set_email(username):
 	if not user:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CHANGE_EMAIL):
+	if not user.check_perm(current_user, Permission.CHANGE_EMAIL):
 		abort(403)
 
 	user.email = request.form["email"]
@@ -364,7 +364,7 @@ def modtools_ban(username):
 	if not user:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CHANGE_RANK):
+	if not user.check_perm(current_user, Permission.CHANGE_RANK):
 		abort(403)
 
 	message = request.form["message"]
@@ -394,7 +394,7 @@ def modtools_unban(username):
 	if not user:
 		abort(404)
 
-	if not user.checkPerm(current_user, Permission.CHANGE_RANK):
+	if not user.check_perm(current_user, Permission.CHANGE_RANK):
 		abort(403)
 
 	if user.ban:

@@ -39,7 +39,7 @@ def search_in_releases(query: str, file_filter: str):
 				continue
 			elif exit_code == 0:
 				results.append({
-					"package": package.getAsDictionaryKey(),
+					"package": package.as_key_dict(),
 					"lines": handle.stdout.read(),
 				})
 
@@ -48,7 +48,7 @@ def search_in_releases(query: str, file_filter: str):
 		# Create new
 		while len(running) < 1 and len(packages) > 0:
 			package = packages.pop()
-			release: Optional[PackageRelease] = package.getDownloadRelease()
+			release: Optional[PackageRelease] = package.get_download_release()
 			if release:
 				handle = Popen(["zipgrep", query, release.file_path, file_filter], stdout=PIPE, encoding="UTF-8")
 				running.append([package, handle])

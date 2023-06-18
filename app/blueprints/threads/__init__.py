@@ -60,7 +60,7 @@ def list_all():
 @login_required
 def subscribe(id):
 	thread = Thread.query.get(id)
-	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
+	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
 	if current_user in thread.watchers:
@@ -70,14 +70,14 @@ def subscribe(id):
 		thread.watchers.append(current_user)
 		db.session.commit()
 
-	return redirect(thread.getViewURL())
+	return redirect(thread.get_view_url())
 
 
 @bp.route("/threads/<int:id>/unsubscribe/", methods=["POST"])
 @login_required
 def unsubscribe(id):
 	thread = Thread.query.get(id)
-	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
+	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
 	if current_user in thread.watchers:
@@ -87,14 +87,14 @@ def unsubscribe(id):
 	else:
 		flash(gettext("Already not subscribed!"), "success")
 
-	return redirect(thread.getViewURL())
+	return redirect(thread.get_view_url())
 
 
 @bp.route("/threads/<int:id>/set-lock/", methods=["POST"])
 @login_required
 def set_lock(id):
 	thread = Thread.query.get(id)
-	if thread is None or not thread.checkPerm(current_user, Permission.LOCK_THREAD):
+	if thread is None or not thread.check_perm(current_user, Permission.LOCK_THREAD):
 		abort(404)
 
 	thread.locked = isYes(request.args.get("lock"))
@@ -109,19 +109,19 @@ def set_lock(id):
 		msg = "Unlocked thread '{}'".format(thread.title)
 		flash(gettext("Unlocked thread"), "success")
 
-	addNotification(thread.watchers, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
-	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.getViewURL(), thread.package)
+	addNotification(thread.watchers, current_user, NotificationType.OTHER, msg, thread.get_view_url(), thread.package)
+	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.get_view_url(), thread.package)
 
 	db.session.commit()
 
-	return redirect(thread.getViewURL())
+	return redirect(thread.get_view_url())
 
 
 @bp.route("/threads/<int:id>/delete/", methods=["GET", "POST"])
 @login_required
 def delete_thread(id):
 	thread = Thread.query.get(id)
-	if thread is None or not thread.checkPerm(current_user, Permission.DELETE_THREAD):
+	if thread is None or not thread.check_perm(current_user, Permission.DELETE_THREAD):
 		abort(404)
 
 	if request.method == "GET":
@@ -157,21 +157,21 @@ def delete_reply(id):
 
 	if thread.first_reply == reply:
 		flash(gettext("Cannot delete thread opening post!"), "danger")
-		return redirect(thread.getViewURL())
+		return redirect(thread.get_view_url())
 
-	if not reply.checkPerm(current_user, Permission.DELETE_REPLY):
+	if not reply.check_perm(current_user, Permission.DELETE_REPLY):
 		abort(403)
 
 	if request.method == "GET":
 		return render_template("threads/delete_reply.html", thread=thread, reply=reply)
 
 	msg = "Deleted reply by {}".format(reply.author.display_name)
-	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
+	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.get_view_url(), thread.package, reply.comment)
 
 	db.session.delete(reply)
 	db.session.commit()
 
-	return redirect(thread.getViewURL())
+	return redirect(thread.get_view_url())
 
 
 class CommentForm(FlaskForm):
@@ -194,7 +194,7 @@ def edit_reply(id):
 	if reply is None or reply.thread != thread:
 		abort(404)
 
-	if not reply.checkPerm(current_user, Permission.EDIT_REPLY):
+	if not reply.check_perm(current_user, Permission.EDIT_REPLY):
 		abort(403)
 
 	form = CommentForm(formdata=request.form, obj=reply)
@@ -205,14 +205,14 @@ def edit_reply(id):
 		else:
 			msg = "Edited reply by {}".format(reply.author.display_name)
 			severity = AuditSeverity.NORMAL if current_user == reply.author else AuditSeverity.MODERATION
-			addNotification(reply.author, current_user, NotificationType.OTHER, msg, thread.getViewURL(), thread.package)
-			addAuditLog(severity, current_user, msg, thread.getViewURL(), thread.package, reply.comment)
+			addNotification(reply.author, current_user, NotificationType.OTHER, msg, thread.get_view_url(), thread.package)
+			addAuditLog(severity, current_user, msg, thread.get_view_url(), thread.package, reply.comment)
 
 			reply.comment = comment
 
 			db.session.commit()
 
-			return redirect(thread.getViewURL())
+			return redirect(thread.get_view_url())
 
 	return render_template("threads/edit_reply.html", thread=thread, reply=reply, form=form)
 
@@ -220,20 +220,20 @@ def edit_reply(id):
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
 def view(id):
 	thread: Thread = Thread.query.get(id)
-	if thread is None or not thread.checkPerm(current_user, Permission.SEE_THREAD):
+	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
-	form = CommentForm(formdata=request.form) if thread.checkPerm(current_user, Permission.COMMENT_THREAD) else None
+	form = CommentForm(formdata=request.form) if thread.check_perm(current_user, Permission.COMMENT_THREAD) else None
 
 	# Check that title is none to load comments into textarea if redirected from new thread page
 	if form and form.validate_on_submit() and request.form.get("title") is None:
 		comment = form.comment.data
 
-		if not current_user.canCommentRL():
+		if not current_user.can_comment_ratelimit():
 			flash(gettext("Please wait before commenting again"), "danger")
-			return redirect(thread.getViewURL())
+			return redirect(thread.get_view_url())
 
-		if has_blocked_domains(comment, current_user.username, f"reply to {thread.getViewURL(True)}"):
+		if has_blocked_domains(comment, current_user.username, f"reply to {thread.get_view_url(True)}"):
 			flash(gettext("Linking to blocked sites is not allowed"), "danger")
 			return render_template("threads/view.html", thread=thread, form=form)
 
@@ -253,23 +253,23 @@ def view(id):
 
 			msg = "Mentioned by {} in '{}'".format(current_user.display_name, thread.title)
 			addNotification(mentioned, current_user, NotificationType.THREAD_REPLY,
-					msg, thread.getViewURL(), thread.package)
+					msg, thread.get_view_url(), thread.package)
 
 			thread.watchers.append(mentioned)
 
 		msg = "New comment on '{}'".format(thread.title)
-		addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.getViewURL(), thread.package)
+		addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.get_view_url(), thread.package)
 
 		if thread.author == get_system_user():
 			approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
 			addNotification(approvers, current_user, NotificationType.EDITOR_MISC, msg,
-					thread.getViewURL(), thread.package)
+					thread.get_view_url(), thread.package)
 			post_discord_webhook.delay(current_user.username,
-					"Replied to bot messages: {}".format(thread.getViewURL(absolute=True)), True)
+					"Replied to bot messages: {}".format(thread.get_view_url(absolute=True)), True)
 
 		db.session.commit()
 
-		return redirect(thread.getViewURL())
+		return redirect(thread.get_view_url())
 
 	return render_template("threads/view.html", thread=thread, form=form)
 
@@ -300,7 +300,7 @@ def new():
 	is_review_thread = package and not package.approved
 
 	# Check that user can make the thread
-	if package and not package.checkPerm(current_user, Permission.CREATE_THREAD):
+	if package and not package.check_perm(current_user, Permission.CREATE_THREAD):
 		flash(gettext("Unable to create thread!"), "danger")
 		return redirect(url_for("homepage.home"))
 
@@ -308,13 +308,13 @@ def new():
 	elif is_review_thread and package.review_thread is not None:
 		# Redirect submit to `view` page, which checks for `title` in the form data and so won't commit the reply
 		flash(gettext("An approval thread already exists! Consider replying there instead"), "danger")
-		return redirect(package.review_thread.getViewURL(), code=307)
+		return redirect(package.review_thread.get_view_url(), code=307)
 
-	elif not current_user.canOpenThreadRL():
+	elif not current_user.can_open_thread_ratelimit():
 		flash(gettext("Please wait before opening another thread"), "danger")
 
 		if package:
-			return redirect(package.getURL("packages.view"))
+			return redirect(package.get_url("packages.view"))
 		else:
 			return redirect(url_for("homepage.home"))
 
@@ -359,24 +359,24 @@ def new():
 
 				msg = "Mentioned by {} in new thread '{}'".format(current_user.display_name, thread.title)
 				addNotification(mentioned, current_user, NotificationType.NEW_THREAD,
-								msg, thread.getViewURL(), thread.package)
+								msg, thread.get_view_url(), thread.package)
 
 				thread.watchers.append(mentioned)
 
 			notif_msg = "New thread '{}'".format(thread.title)
 			if package is not None:
-				addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.getViewURL(), package)
+				addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.get_view_url(), package)
 
 			approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
-			addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.getViewURL(), package)
+			addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.get_view_url(), package)
 
 			if is_review_thread:
 				post_discord_webhook.delay(current_user.username,
-						"Opened approval thread: {}".format(thread.getViewURL(absolute=True)), True)
+						"Opened approval thread: {}".format(thread.get_view_url(absolute=True)), True)
 
 			db.session.commit()
 
-			return redirect(thread.getViewURL())
+			return redirect(thread.get_view_url())
 
 
 	return render_template("threads/new.html", form=form, allow_private_change=allow_private_change, package=package)

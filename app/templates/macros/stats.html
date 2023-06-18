@@ -21,7 +21,7 @@
 			</a>
 			<div class="dropdown-divider"></div>
 			{% for package in user.packages.filter_by(state='APPROVED').all() %}
-				<a class="dropdown-item" href="{{ package.getURL('packages.statistics') }}">
+				<a class="dropdown-item" href="{{ package.get_url('packages.statistics') }}">
 					{{ package.title }}
 				</a>
 			{% endfor %}

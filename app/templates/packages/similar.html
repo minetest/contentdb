@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<h1><a href="{{ package.getURL("packages.view") }}">{{ package.title }}</a></h1>
+	<h1><a href="{{ package.get_url("packages.view") }}">{{ package.title }}</a></h1>
 	<h2>{{ self.title() }}</h2>
 
 	{% if packages_modnames %}
@@ -18,7 +18,7 @@
 			<ul>
 				{% for pkg in packages %}
 					<li>
-						<a href="{{ pkg.getURL('packages.view') }}">
+						<a href="{{ pkg.get_url('packages.view') }}">
 							{{ _("%(title)s by %(author)s", title=pkg.title, author=pkg.author.display_name) }}
 						</a>
 						[{{ pkg.type.text }}]

@@ -15,7 +15,7 @@
 		{% elif user.email %}
 			<a href="https://en.gravatar.com/">
 		{% endif %}
-		<img class="img-fluid user-photo img-thumbnail  img-thumbnail-1" src="{{ user.getProfilePicURL() }}">
+		<img class="img-fluid user-photo img-thumbnail  img-thumbnail-1" src="{{ user.get_profile_pic_url() }}">
 		{% if user.forums_username or user.email %}
 			</a>
 		{% endif %}
@@ -42,11 +42,11 @@
 <form action="" method="POST" class="form" role="form">
 	{{ form.hidden_tag() }}
 
-	{% if user.checkPerm(current_user, "CHANGE_DISPLAY_NAME") %}
+	{% if user.check_perm(current_user, "CHANGE_DISPLAY_NAME") %}
 		{{ render_field(form.display_name, tabindex=230, hint=_("Pretending to be another user is grounds for a permanent ban")) }}
 	{% endif %}
 
-	{% if user.checkPerm(current_user, "CHANGE_PROFILE_URLS") %}
+	{% if user.check_perm(current_user, "CHANGE_PROFILE_URLS") %}
 		{{ render_field(form.website_url, tabindex=232) }}
 		{{ render_field(form.donate_url, tabindex=233) }}
 	{% endif %}

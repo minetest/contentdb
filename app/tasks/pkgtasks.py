@@ -24,6 +24,6 @@ def updatePackageScores():
 	db.session.commit()
 
 	for package in Package.query.all():
-		package.recalcScore()
+		package.recalculate_score()
 
 	db.session.commit()

@@ -63,12 +63,12 @@ class AuditSeverity(enum.Enum):
 	def __str__(self):
 		return self.name
 
-	def getTitle(self):
+	def get_title(self):
 		return self.name.replace("_", " ").title()
 
 	@classmethod
 	def choices(cls):
-		return [(choice, choice.getTitle()) for choice in cls]
+		return [(choice, choice.get_title()) for choice in cls]
 
 	@classmethod
 	def coerce(cls, item):
@@ -106,14 +106,14 @@ class AuditLogEntry(db.Model):
 		self.package  = package
 		self.description = description
 
-	def checkPerm(self, user, perm):
+	def check_perm(self, user, perm):
 		if not user.is_authenticated:
 			return False
 
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to AuditLogEntry.checkPerm()")
+			raise Exception("Unknown permission given to AuditLogEntry.check_perm()")
 
 		if perm == Permission.VIEW_AUDIT_DESCRIPTION:
 			return user.rank.atLeast(UserRank.APPROVER if self.package is not None else UserRank.MODERATOR)
@@ -156,11 +156,11 @@ class ForumTopic(db.Model):
 
 		return self.link.replace("repo.or.cz/w/", "repo.or.cz/")
 
-	def getAsDictionary(self):
+	def as_dict(self):
 		return {
 			"author": self.author.username,
 			"name":   self.name,
-			"type":   self.type.toName(),
+			"type":   self.type.to_name(),
 			"title":  self.title,
 			"id":     self.topic_id,
 			"link":   self.link,
@@ -171,14 +171,14 @@ class ForumTopic(db.Model):
 			"created_at": self.created_at.isoformat(),
 		}
 
-	def checkPerm(self, user, perm):
+	def check_perm(self, user, perm):
 		if not user.is_authenticated:
 			return False
 
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
-			raise Exception("Unknown permission given to ForumTopic.checkPerm()")
+			raise Exception("Unknown permission given to ForumTopic.check_perm()")
 
 		if perm == Permission.TOPIC_DISCARD:
 			return self.author == user or user.rank.atLeast(UserRank.EDITOR)

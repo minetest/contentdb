@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block link %}
-	<a href="{{ package.getURL("packages.view") }}">{{ package.title }}</a>
+	<a href="{{ package.get_url("packages.view") }}">{{ package.title }}</a>
 {% endblock %}
 
 
@@ -61,7 +61,7 @@
 					{% else %}
 						<i class="fas fa-minus mr-2"></i>
 					{% endif %}
-					<a href="{{ review.thread.getViewURL() }}">
+					<a href="{{ review.thread.get_view_url() }}">
 						{{ review.thread.title }}
 					</a> by {{ review.author.display_name }}
 				</th>

@@ -123,7 +123,7 @@ def webhook():
 	if actual_token is None:
 		return error(403, "Invalid authentication, couldn't validate API token")
 
-	if not package.checkPerm(actual_token.owner, Permission.APPROVE_RELEASE):
+	if not package.check_perm(actual_token.owner, Permission.APPROVE_RELEASE):
 		return error(403, "You do not have the permission to approve releases")
 
 	#

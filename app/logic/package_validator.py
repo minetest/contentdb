@@ -24,7 +24,7 @@ def validate_package_for_approval(package: Package) -> List[ValidationError]:
 		# Don't bother validating any more until we have a release
 		return retval
 
-	missing_deps = package.getMissingHardDependenciesQuery().all()
+	missing_deps = package.get_missing_hard_dependencies_query().all()
 	if len(missing_deps) > 0:
 		retval.append(("danger", lazy_gettext(
 			"The following hard dependencies need to be added to ContentDB first: %(deps)s", deps=missing_deps)))
