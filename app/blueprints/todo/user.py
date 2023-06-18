@@ -164,8 +164,10 @@ def confirm_supports_all_games(username=None):
 
 	packages = user.maintained_packages.filter(
 		Package.state != PackageState.DELETED,
-		Package.type.in_([PackageType.MOD, PackageType.TXP])) \
-		.order_by(db.asc(Package.title)).all()
+		Package.type.in_([PackageType.MOD, PackageType.TXP]),
+		~Package.supported_games.any(),
+		Package.supports_all_games == False) \
+		.all()
 
 	for package in packages:
 		package.supports_all_games = True
