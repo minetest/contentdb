@@ -706,6 +706,8 @@ def game_support(package):
 
 		package.supports_all_games = form.supports_all_games.data
 
+		addAuditLog(AuditSeverity.NORMAL, current_user, "Edited game support", package.getURL("packages.game_support"), package)
+
 		db.session.commit()
 
 		if detect_update_needed:

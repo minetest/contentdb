@@ -162,11 +162,17 @@ def confirm_supports_all_games(username=None):
 	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
 		abort(403)
 
-	db.session.query(Package).filter(
-		Package.maintainers.contains(user),
+	packages = user.maintained_packages.filter(
 		Package.state != PackageState.DELETED,
-		Package.type.in_([PackageType.MOD, PackageType.TXP]),
-		~Package.supported_games.any(supports=True)).update({ "supports_all_games": True })
+		Package.type.in_([PackageType.MOD, PackageType.TXP])) \
+		.order_by(db.asc(Package.title)).all()
+
+	for package in packages:
+		package.supports_all_games = True
+		db.session.merge(package)
+
+		addAuditLog(AuditSeverity.NORMAL, current_user, "Enabled 'Supports all games' (bulk)",
+				package.getURL("packages.game_support"), package)
 
 	db.session.commit()
 
