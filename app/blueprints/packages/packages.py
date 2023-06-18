@@ -644,6 +644,7 @@ class GameSupportForm(FlaskForm):
 	enable_support_detection = BooleanField(lazy_gettext("Enable support detection based on dependencies (recommended)"), [Optional()])
 	supported = StringField(lazy_gettext("Supported games (Comma-separated)"), [Optional()])
 	unsupported = StringField(lazy_gettext("Unsupported games (Comma-separated)"), [Optional()])
+	supports_all_games = BooleanField(lazy_gettext("Supports all games (unless stated)"), [Optional()])
 	submit = SubmitField(lazy_gettext("Save"))
 
 
@@ -661,17 +662,25 @@ def game_support(package):
 	force_game_detection = package.supported_games.filter(and_(
 		PackageGameSupport.confidence > 1, PackageGameSupport.supports == True)).count() == 0
 
+	can_override = can_edit and current_user not in package.maintainers
+
 	form = GameSupportForm() if can_edit else None
 	if form and request.method == "GET":
 		form.enable_support_detection.data = package.enable_game_support_detection
-		manual_supported_games = package.supported_games.filter_by(confidence=11).all()
-		form.supported.data = ", ".join([x.game.name for x in manual_supported_games if x.supports])
-		form.unsupported.data = ", ".join([x.game.name for x in manual_supported_games if not x.supports])
+		form.supports_all_games.data = package.supports_all_games
+
+		if can_override:
+			manual_supported_games = package.supported_games.filter_by(confidence=11).all()
+			form.supported.data = ", ".join([x.game.name for x in manual_supported_games if x.supports])
+			form.unsupported.data = ", ".join([x.game.name for x in manual_supported_games if not x.supports])
+		else:
+			form.supported = None
+			form.unsupported = None
 
 	if form and form.validate_on_submit():
 		detect_update_needed = False
 
-		if current_user not in package.maintainers:
+		if can_override:
 			try:
 				resolver = GameSupportResolver(db.session)
 
@@ -695,6 +704,8 @@ def game_support(package):
 			else:
 				package.supported_games.filter_by(confidence=1).delete()
 
+		package.supports_all_games = form.supports_all_games.data
+
 		db.session.commit()
 
 		if detect_update_needed:
@@ -708,7 +719,10 @@ def game_support(package):
 
 	all_game_support = package.supported_games.all()
 	all_game_support.sort(key=lambda x: -x.game.score)
-	supported_games = ", ".join([x.game.name for x in all_game_support if x.supports])
+	supported_games_list: List[str] = [x.game.name for x in all_game_support if x.supports]
+	if package.supports_all_games:
+		supported_games_list.insert(0, "*")
+	supported_games = ", ".join(supported_games_list)
 	unsupported_games = ", ".join([x.game.name for x in all_game_support if not x.supports])
 
 	mod_conf_lines = ""

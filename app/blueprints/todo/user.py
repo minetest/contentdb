@@ -15,7 +15,8 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from celery import uuid
-from flask import redirect, url_for, abort, render_template
+from flask import redirect, url_for, abort, render_template, flash
+from flask_babel import gettext
 from flask_login import current_user, login_required
 from sqlalchemy import or_, and_
 
@@ -23,7 +24,6 @@ from app.models import User, Package, PackageState, PackageScreenshot, PackageUp
 	PackageRelease, Permission, NotificationType, AuditSeverity, UserRank, PackageType
 from app.tasks.importtasks import makeVCSRelease
 from app.utils import addNotification, addAuditLog
-
 from . import bp
 
 
@@ -59,7 +59,8 @@ def view_user(username=None):
 	missing_game_support = user.maintained_packages.filter(
 			Package.state != PackageState.DELETED,
 			Package.type.in_([PackageType.MOD, PackageType.TXP]),
-			~Package.supported_games.any()) \
+			~Package.supported_games.any(),
+			Package.supports_all_games == False) \
 			.order_by(db.asc(Package.title)).all()
 
 	packages_with_no_screenshots = user.maintained_packages.filter(
@@ -152,3 +153,22 @@ def all_game_support(username=None):
 			.order_by(db.asc(Package.title)).all()
 
 	return render_template("todo/game_support.html", user=user, packages=packages)
+
+
+@bp.route("/users/<username>/confirm_supports_all_games/", methods=["POST"])
+@login_required
+def confirm_supports_all_games(username=None):
+	user: User = User.query.filter_by(username=username).one_or_404()
+	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
+		abort(403)
+
+	db.session.query(Package).filter(
+		Package.maintainers.contains(user),
+		Package.state != PackageState.DELETED,
+		Package.type.in_([PackageType.MOD, PackageType.TXP]),
+		~Package.supported_games.any(supports=True)).update({ "supports_all_games": True })
+
+	db.session.commit()
+
+	flash(gettext("Done"), "success")
+	return redirect(url_for("todo.all_game_support", username=current_user.username))

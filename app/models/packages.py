@@ -17,6 +17,7 @@
 
 import datetime
 import enum
+import typing
 
 from flask import url_for
 from flask_babel import lazy_gettext
@@ -410,6 +411,9 @@ class Package(db.Model):
 	review_thread    = db.relationship("Thread", uselist=False, foreign_keys=[review_thread_id],
 			back_populates="is_review_thread", post_update=True)
 
+	# Supports all games by default, may have unsupported games
+	supports_all_games = db.Column(db.Boolean, nullable=False, default=False)
+
 	# Downloads
 	repo         = db.Column(db.String(200), nullable=True)
 	website      = db.Column(db.String(200), nullable=True)
@@ -520,14 +524,23 @@ class Package(db.Model):
 	def getSortedOptionalDependencies(self):
 		return self.getSortedDependencies(False)
 
-	def getSortedSupportedGames(self, include_unsupported=False):
-		query = self.supported_games
-		if not include_unsupported:
-			query = query.filter(PackageGameSupport.game.has(state=PackageState.APPROVED)).filter_by(supports=True)
+	def get_sorted_game_support(self):
+		query = self.supported_games.filter(PackageGameSupport.game.has(state=PackageState.APPROVED))
 
 		supported = query.all()
 		supported.sort(key=lambda x: -(x.game.score + 100000*x.confidence))
 		return supported
+
+	def get_sorted_game_support_pair(self):
+		supported = self.get_sorted_game_support()
+		return [
+			[x for x in supported if x.supports],
+			[x for x in supported if not x.supports],
+		]
+
+	def has_game_support_confirmed(self):
+		return self.supports_all_games or \
+				self.supported_games.filter(PackageGameSupport.confidence > 1).count() > 0
 
 	def getAsDictionaryKey(self):
 		return {

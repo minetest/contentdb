@@ -230,7 +230,7 @@ def list_all_releases():
 		if maintainer is None:
 			error(404, "Maintainer not found")
 		query = query.join(Package)
-		query = query.filter(Package.maintainers.any(id=maintainer.id))
+		query = query.filter(Package.maintainers.contains(maintainer))
 
 	return jsonify([ rel.getLongAsDictionary() for rel in query.limit(30).all() ])
 

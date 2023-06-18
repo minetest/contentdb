@@ -9,9 +9,8 @@
 		{{ _("Documentation") }}
 	</a>
 	<h2 class="mt-0">{{ self.title() }}</h2>
-
-	<p class="alert alert-warning">
-		This feature is experimental
+	<p>
+		{{ _("Game support is configured using the package's .conf file. See the documentation for more info") }}
 	</p>
 
 	<div class="list-group">
@@ -29,7 +28,13 @@
 			</div>
 		</div>
 
-		{% for support in package.getSortedSupportedGames(True) %}
+		{% if package.supports_all_games %}
+			<div class="list-group-item">
+				{{ _("Supports all games unless otherwise stated") }}
+			</div>
+		{% endif %}
+
+		{% for support in package.get_sorted_game_support() %}
 			<a class="list-group-item list-group-item-action"
 					href="{{ support.game.getURL('packages.view') }}">
 				<div class="row">
@@ -83,7 +88,13 @@
 				</p>
 			{% endif %}
 
-			{% if package.checkPerm(current_user, "EDIT_PACKAGE") and current_user not in package.maintainers %}
+			{{ render_checkbox_field(form.supports_all_games) }}
+			<p class="text-muted">
+				{{ _("Unless otherwise stated, this package should work with all games.") }}
+				{{ _("You can check this and still specify games in supported_games that you've tested.") }}
+			</p>
+
+			{% if form.supported and form.unsupported %}
 				<h3>
 					{{ _("Editor Overrides") }}
 					<i class="ml-2 fas fa-user-edit"></i>

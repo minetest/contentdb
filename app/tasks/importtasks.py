@@ -80,7 +80,7 @@ def getMeta(urlstr, author):
 @celery.task()
 def updateAllGameSupport():
 	resolver = GameSupportResolver(db.session)
-	resolver.update_all()
+	resolver.init_all()
 	db.session.commit()
 
 
@@ -153,6 +153,10 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 				if "supported_games" in tree.meta:
 					for game in get_games_from_csv(db.session, tree.meta["supported_games"]):
 						game_is_supported[game.id] = True
+
+					has_star = any(map(lambda x: x.strip() == "*", tree.meta["supported_games"].split(",")))
+					if has_star:
+						package.supports_all_games = True
 				if "unsupported_games" in tree.meta:
 					for game in get_games_from_csv(db.session, tree.meta["unsupported_games"]):
 						game_is_supported[game.id] = False

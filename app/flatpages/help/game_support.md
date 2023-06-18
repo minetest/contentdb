@@ -12,7 +12,7 @@ user experience.
 
 ## Support sources
 
-### mod.conf
+### mod.conf / texture_pack.conf
 
 You can use `supported_games` to specify games that your mod is compatible with.
 
@@ -23,6 +23,16 @@ Both of these are comma-separated lists of game technical ids. Any `_game` suffi
 
     supported_games = minetest_game, repixture
     unsupported_games = lordofthetest, nodecore, whynot
+
+If your package supports all games by default, you can put "*` in supported_games.
+You can still use unsupported_games to mark games as unsupported.
+You can also specify games that you've tested in supported_games.
+
+    # Should work with all games but I've only tested using Minetest Game:
+    supported_games = *, minetest_games
+
+    # But doesn't work in capturetheflag
+    unsupported_game = capturetheflag
 
 ### Dependencies
 

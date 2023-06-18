@@ -10,6 +10,7 @@
 	<p>
 		{{ _("You should specify the games supported by your mods and texture packs.") }}
 		{{ _("Specifying game support makes it easier for players to find your content.") }}
+		{{ _("If your package supports all games unless otherwise stated, confirm this using 'Supports all games'") }}
 	</p>
 
 
@@ -28,7 +29,15 @@
 						</span>
 					</div>
 					<div class="col">
-						{% set supported_games = package.getSortedSupportedGames() %}
+						{% if package.supports_all_games %}
+							<span class="text-muted pr-2">
+								<i>
+									{{ _("Supports all games") }}
+								</i>
+							</span>
+						{% endif %}
+
+						{% set supported_games = package.get_sorted_game_support_pair()[0] %}
 						{% if supported_games %}
 							{% for support in supported_games %}
 								<a class="badge badge-secondary"
@@ -37,11 +46,9 @@
 											title=support.game.title, display_name=support.game.author.display_name) }}
 								</a>
 							{% endfor %}
-						{% else %}
-							<span class="text-muted">
-								<i>
-									{{ _("None listed, assumed to support all games") }}
-								</i>
+						{% elif not package.supports_all_games %}
+							<span class="text-danger">
+								{{ _("No supported games listed. Please either add supported games or check 'Supports all games'") }}
 							</span>
 						{% endif %}
 					</div>
@@ -55,4 +62,13 @@
 			<p class="text-muted">{{ _("Nothing to do :)") }}</p>
 		{% endfor %}
 	</div>
+
+	<h2>Bulk support all games</h2>
+	<p>
+		{{ _("Click the button below to confirm that all games without listed supported_games (red text above) do support all games, except for any games listed in unsupported_games.") }}
+	</p>
+	<form method="post" action="{{ url_for('todo.confirm_supports_all_games', username=user.username) }}">
+		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+		<input type="submit" value="{{ _('Confirm') }}" class="btn btn-primary">
+	</form>
 {% endblock %}

@@ -140,8 +140,6 @@ def remind_wip():
 		packages = [pkg[0] for pkg in packages]
 		packages_list = _package_list(packages)
 		havent = "haven't" if len(packages) > 1 else "hasn't"
-		if len(packages_list) + 54 > 100:
-			packages_list = packages_list[0:(100-54-1)] + "…"
 
 		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 			f"Did you forget? {packages_list} {havent} been submitted for review yet",
@@ -156,7 +154,7 @@ def remind_outdated():
 	system_user = get_system_user()
 	for user in users:
 		packages = db.session.query(Package.title).filter(
-				Package.maintainers.any(User.id==user.id),
+				Package.maintainers.contains(user),
 				Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))) \
 			.all()
 
@@ -234,7 +232,7 @@ def remind_video_url():
 	system_user = get_system_user()
 	for user in users:
 		packages = db.session.query(Package.title).filter(
-				or_(Package.author==user, Package.maintainers.any(User.id==user.id)),
+				or_(Package.author==user, Package.maintainers.contains(user)),
 				Package.video_url==None,
 				Package.type == PackageType.GAME,
 				Package.state == PackageState.APPROVED) \
@@ -246,6 +244,35 @@ def remind_video_url():
 		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 				f"You should add a video to {packages_list}",
 				url_for('users.profile', username=user.username))
+
+	db.session.commit()
+
+
+@action("Send missing game support notifications")
+def remind_missing_game_support():
+	users = User.query.filter(
+		User.maintained_packages.any(and_(
+			Package.state != PackageState.DELETED,
+			Package.type.in_([PackageType.MOD, PackageType.TXP]),
+			~Package.supported_games.any(),
+			Package.supports_all_games == False))).all()
+
+	system_user = get_system_user()
+	for user in users:
+		packages = db.session.query(Package.title).filter(
+			Package.maintainers.contains(user),
+			Package.state != PackageState.DELETED,
+			Package.type.in_([PackageType.MOD, PackageType.TXP]),
+			~Package.supported_games.any(),
+			Package.supports_all_games == False) \
+			.all()
+
+		packages = [pkg[0] for pkg in packages]
+		packages_list = _package_list(packages)
+
+		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
+						f"You need to confirm whether the following packages support all games: {packages_list}",
+						url_for('todo.all_game_support', username=user.username))
 
 	db.session.commit()
 
