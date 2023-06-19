@@ -765,6 +765,14 @@ class Package(db.Model):
 		review_scores = [ 100 * r.as_weight() for r in self.reviews ]
 		self.score = self.score_downloads + sum(review_scores)
 
+	def get_conf_file_name(self):
+		if self.type == PackageType.MOD:
+			return "mod.conf"
+		elif self.type == PackageType.TXP:
+			return "texture_pack.conf"
+		elif self.type == PackageType.GAME:
+			return "game.conf"
+
 
 class MetaPackage(db.Model):
 	id = db.Column(db.Integer, primary_key=True)
