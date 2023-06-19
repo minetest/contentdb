@@ -30,7 +30,7 @@
 
 		{% if package.supports_all_games %}
 			<div class="list-group-item">
-				{{ _("Supports all games unless otherwise stated") }}
+				{{ _("Supports all games (unless excluded by unsupported_games)") }}
 			</div>
 		{% endif %}
 
@@ -93,7 +93,7 @@
 			{{ render_checkbox_field(form.supports_all_games, disabled=not can_support_all_games) }}
 			{% if can_support_all_games %}
 				<p class="text-muted">
-					{{ _("Unless otherwise stated, this package should work with all games.") }}
+					{{ _("When checked, this indicates that this package should support all games, unless excluded by unsupported_games.") }}
 					{{ _("You can check this and still specify games in supported_games that you've tested.") }}
 				</p>
 			{% elif package.type.name == "TXP" %}
@@ -109,9 +109,11 @@
 				<p class="text-muted">
 					{{ _("It's best to add supported/unsupported games to %(conf)s, but in the meantime you can add them here.",
 							conf=package.get_conf_file_name()) }}
+					{{ _("Adding to %(conf)s allows users who install outside ContentDB to benefit as well.",
+							conf=package.get_conf_file_name()) }}
 				</p>
-				{{ render_field(form.supported) }}
-				{{ render_field(form.unsupported) }}
+				{{ render_field(form.supported, hint=_("Comma-separated game names, ex: minetest_game, nodecore")) }}
+				{{ render_field(form.unsupported, hint=_("Comma-separated game names, ex: minetest_game, nodecore")) }}
 			{% endif %}
 
 			{{ render_submit_field(form.submit, class_="mt-4 btn btn-primary") }}
