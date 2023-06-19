@@ -285,8 +285,8 @@ def create_release(token, package):
 @bp.route("/api/packages/<author>/<name>/releases/<int:id>/")
 @is_package_page
 @cors_allowed
-def release_view(package: Package, id_: int):
-	release = PackageRelease.query.get(id_)
+def release_view(package: Package, id: int):
+	release = PackageRelease.query.get(id)
 	if release is None or release.package != package:
 		error(404, "Release not found")
 
@@ -298,8 +298,8 @@ def release_view(package: Package, id_: int):
 @is_package_page
 @is_api_authd
 @cors_allowed
-def delete_release(token: APIToken, package: Package, id_: int):
-	release = PackageRelease.query.get(id_)
+def delete_release(token: APIToken, package: Package, id: int):
+	release = PackageRelease.query.get(id)
 	if release is None or release.package != package:
 		error(404, "Release not found")
 
@@ -352,8 +352,8 @@ def create_screenshot(token: APIToken, package: Package):
 @bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/")
 @is_package_page
 @cors_allowed
-def screenshot(package, id_):
-	ss = PackageScreenshot.query.get(id_)
+def screenshot(package, id):
+	ss = PackageScreenshot.query.get(id)
 	if ss is None or ss.package != package:
 		error(404, "Screenshot not found")
 
@@ -365,8 +365,8 @@ def screenshot(package, id_):
 @is_package_page
 @is_api_authd
 @cors_allowed
-def delete_screenshot(token: APIToken, package: Package, id_: int):
-	ss = PackageScreenshot.query.get(id_)
+def delete_screenshot(token: APIToken, package: Package, id: int):
+	ss = PackageScreenshot.query.get(id)
 	if ss is None or ss.package != package:
 		error(404, "Screenshot not found")
 

@@ -52,14 +52,14 @@ def zipgrep_search():
 
 
 @bp.route("/zipgrep/<id>/")
-def view_results(id_):
-	result = celery.AsyncResult(id_)
+def view_results(id):
+	result = celery.AsyncResult(id)
 	if result.status == "PENDING":
 		abort(404)
 
 	if result.status != "SUCCESS" or isinstance(result.result, Exception):
-		result_url = url_for("zipgrep.view_results", id=id_)
-		return redirect(url_for("tasks.check", id=id_, r=result_url))
+		result_url = url_for("zipgrep.view_results", id=id)
+		return redirect(url_for("tasks.check", id=id, r=result_url))
 
 	matches = result.result["matches"]
 	for match in matches:

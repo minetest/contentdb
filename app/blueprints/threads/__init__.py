@@ -60,8 +60,8 @@ def list_all():
 
 @bp.route("/threads/<int:id>/subscribe/", methods=["POST"])
 @login_required
-def subscribe(id_):
-	thread = Thread.query.get(id_)
+def subscribe(id):
+	thread = Thread.query.get(id)
 	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
@@ -77,8 +77,8 @@ def subscribe(id_):
 
 @bp.route("/threads/<int:id>/unsubscribe/", methods=["POST"])
 @login_required
-def unsubscribe(id_):
-	thread = Thread.query.get(id_)
+def unsubscribe(id):
+	thread = Thread.query.get(id)
 	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
@@ -94,8 +94,8 @@ def unsubscribe(id_):
 
 @bp.route("/threads/<int:id>/set-lock/", methods=["POST"])
 @login_required
-def set_lock(id_):
-	thread = Thread.query.get(id_)
+def set_lock(id):
+	thread = Thread.query.get(id)
 	if thread is None or not thread.check_perm(current_user, Permission.LOCK_THREAD):
 		abort(404)
 
@@ -120,8 +120,8 @@ def set_lock(id_):
 
 @bp.route("/threads/<int:id>/delete/", methods=["GET", "POST"])
 @login_required
-def delete_thread(id_):
-	thread = Thread.query.get(id_)
+def delete_thread(id):
+	thread = Thread.query.get(id)
 	if thread is None or not thread.check_perm(current_user, Permission.DELETE_THREAD):
 		abort(404)
 
@@ -143,8 +143,8 @@ def delete_thread(id_):
 
 @bp.route("/threads/<int:id>/delete-reply/", methods=["GET", "POST"])
 @login_required
-def delete_reply(id_):
-	thread = Thread.query.get(id_)
+def delete_reply(id):
+	thread = Thread.query.get(id)
 	if thread is None:
 		abort(404)
 
@@ -182,8 +182,8 @@ class CommentForm(FlaskForm):
 
 @bp.route("/threads/<int:id>/edit/", methods=["GET", "POST"])
 @login_required
-def edit_reply(id_):
-	thread = Thread.query.get(id_)
+def edit_reply(id):
+	thread = Thread.query.get(id)
 	if thread is None:
 		abort(404)
 
@@ -219,8 +219,8 @@ def edit_reply(id_):
 
 
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
-def view(id_):
-	thread: Thread = Thread.query.get(id_)
+def view(id):
+	thread: Thread = Thread.query.get(id)
 	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
