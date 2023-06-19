@@ -46,7 +46,7 @@
 						{% if support.confidence == 1 %}
 							{{ _("Detected from dependencies") }}
 						{% elif support.confidence == 11 %}
-							{{ _("Added by Editor") }}
+							{{ _("Overridden on ContentDB") }}
 						{% elif support.confidence == 10 %}
 							{{ package.get_conf_file_name() }}
 						{% else %}
@@ -104,9 +104,12 @@
 
 			{% if form.supported and form.unsupported %}
 				<h3>
-					{{ _("Editor Overrides") }}
-					<i class="ml-2 fas fa-user-edit"></i>
+					{{ _("Overrides") }}
 				</h3>
+				<p class="text-muted">
+					{{ _("It's best to add supported/unsupported games to %(conf)s, but in the meantime you can add them here.",
+							conf=package.get_conf_file_name()) }}
+				</p>
 				{{ render_field(form.supported) }}
 				{{ render_field(form.unsupported) }}
 			{% endif %}

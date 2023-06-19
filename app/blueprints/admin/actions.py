@@ -271,8 +271,8 @@ def remind_missing_game_support():
 		packages_list = _package_list(packages)
 
 		add_notification(user, system_user, NotificationType.PACKAGE_APPROVAL,
-						f"You need to confirm whether the following packages support all games: {packages_list}",
-						 url_for('todo.all_game_support', username=user.username))
+				f"You need to confirm whether the following packages support all games: {packages_list}",
+				url_for('todo.all_game_support', username=user.username))
 
 	db.session.commit()
 

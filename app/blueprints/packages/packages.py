@@ -653,7 +653,7 @@ class GameSupportForm(FlaskForm):
 	enable_support_detection = BooleanField(lazy_gettext("Enable support detection based on dependencies (recommended)"), [Optional()])
 	supported = StringField(lazy_gettext("Supported games (Comma-separated)"), [Optional()])
 	unsupported = StringField(lazy_gettext("Unsupported games (Comma-separated)"), [Optional()])
-	supports_all_games = BooleanField(lazy_gettext("Supports all games (unless stated)"), [Optional()])
+	supports_all_games = BooleanField(lazy_gettext("Supports all games (unless stated) / is game independent"), [Optional()])
 	submit = SubmitField(lazy_gettext("Save"))
 
 
@@ -673,7 +673,7 @@ def game_support(package):
 
 	can_support_all_games = package.type != PackageType.TXP
 
-	can_override = can_edit and current_user not in package.maintainers
+	can_override = can_edit
 
 	form = GameSupportForm() if can_edit else None
 	if form and request.method == "GET":
