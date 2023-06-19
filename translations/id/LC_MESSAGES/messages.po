@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-06-18 21:20+0100\n"
-"PO-Revision-Date: 2023-06-06 06:47+0000\n"
+"PO-Revision-Date: 2023-06-19 23:38+0000\n"
 "Last-Translator: Linerly <linerly@protonmail.com>\n"
+"Language-Team: Indonesian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/id/>\n"
 "Language: id\n"
-"Language-Team: Indonesian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/id/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.18.1\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:120
@@ -303,7 +304,7 @@ msgstr "Permainan yang tidak didukung (Dipisahkan koma)"
 
 #: app/blueprints/packages/packages.py:647
 msgid "Supports all games (unless stated)"
-msgstr ""
+msgstr "Mendukung semua permainan (kecuali ditetapkan)"
 
 #: app/blueprints/packages/releases.py:52
 #: app/blueprints/packages/releases.py:64 app/blueprints/packages/reviews.py:44
@@ -556,7 +557,7 @@ msgstr "Harap tunggu sebelum membuka utas baru"
 
 #: app/blueprints/todo/user.py:173
 msgid "Done"
-msgstr ""
+msgstr "Selesai"
 
 #: app/blueprints/users/account.py:37 app/templates/users/login.html:15
 msgid "Username or email"
@@ -1502,6 +1503,8 @@ msgid ""
 "No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
 msgstr ""
+"Tidak ada paket ditinjau yang menerima donasi. Pertimbangkan meninjau paket "
+"favorit Anda"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
@@ -1809,7 +1812,7 @@ msgstr "Paket milik %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr ""
+msgstr "Jangka tanggal..."
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
@@ -1821,11 +1824,11 @@ msgstr "Unduhan, 30 hari terakhir"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr ""
+msgstr "Unduhan dari $1 ke $2"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr ""
+msgstr "$1 per hari"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -2249,6 +2252,8 @@ msgid ""
 "Game support is configured using the package's .conf file. See the "
 "documentation for more info"
 msgstr ""
+"Dukungan permainan diatur menggunakan berkas .conf paket. Lihat dokumentasi "
+"untuk informasi lanjut"
 
 #: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:217
@@ -2261,7 +2266,7 @@ msgstr "Didukung?"
 
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games unless otherwise stated"
-msgstr ""
+msgstr "Mendukung semua permainan kecuali ditetapkan"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -2294,12 +2299,15 @@ msgstr ""
 #: app/templates/packages/game_support.html:93
 msgid "Unless otherwise stated, this package should work with all games."
 msgstr ""
+"Kecuali ditetapkan, paket ini seharusnya bekerja dengan semua permainan."
 
 #: app/templates/packages/game_support.html:94
 msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
 msgstr ""
+"Anda dapat memeriksa ini dan masih menetapkan permainan dalam "
+"supported_games yang Anda telah coba."
 
 #: app/templates/packages/game_support.html:99
 msgid "Editor Overrides"
@@ -2997,27 +3005,29 @@ msgstr "Permainan yang Sesuai"
 
 #: app/templates/packages/view.html:464
 msgid "Should support most games."
-msgstr ""
+msgstr "Seharusnya mendukung banyak permainan."
 
 #: app/templates/packages/view.html:467
 msgid "Tested with:"
-msgstr ""
+msgstr "Dicoba dengan:"
 
 #: app/templates/packages/view.html:484
 msgid "No specific game required"
-msgstr ""
+msgstr "Tidak ada permainan spesifik yang dibutuhkan"
 
 #: app/templates/packages/view.html:489
 msgid "Is the above correct?"
-msgstr ""
+msgstr "Apakah yang di atas benar?"
 
 #: app/templates/packages/view.html:490
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
+"Anda harus mengonfirmasi ini atau memberi tahu ContentDB tentang permainan "
+"yang didukung"
 
 #: app/templates/packages/view.html:502
 msgid "Does not work with:"
-msgstr ""
+msgstr "Tidak bekerja dengan:"
 
 #: app/templates/packages/view.html:519
 msgid "This is an experimental feature."
@@ -3279,16 +3289,20 @@ msgid ""
 "If your package supports all games unless otherwise stated, confirm this "
 "using 'Supports all games'"
 msgstr ""
+"Jika paket Anda mendukung semua permianan kecuali ditetapkan, konfirmasi ini "
+"menggunakan 'Mendukung semua permainan'"
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
-msgstr ""
+msgstr "Mendukung semua permainan"
 
 #: app/templates/todo/game_support.html:51
 msgid ""
 "No supported games listed. Please either add supported games or check "
 "'Supports all games'"
 msgstr ""
+"Tidak ada permainan didukung yang didaftarkan. Silakan tambahkan permainan "
+"yang didukung atau centang 'Mendukung semua permainan'"
 
 #: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
@@ -3302,10 +3316,13 @@ msgid ""
 "supported_games (red text above) do support all games, except for any "
 "games listed in unsupported_games."
 msgstr ""
+"Klik tombol di bawah untuk mengonfirmasi bahwa semua permainan tanpa "
+"supported_games yang didaftarkan dapat mendukung semua permainan, kecuali "
+"untuk permainan apa pun yang terdaftar dalam unsupported_games."
 
 #: app/templates/todo/game_support.html:72
 msgid "Confirm"
-msgstr ""
+msgstr "Konfirmasi"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
@@ -4047,27 +4064,27 @@ msgstr "'%(query)s' - Pencarian Rilisan Paket"
 
 #: app/utils/flask.py:149
 msgid "All time"
-msgstr ""
+msgstr "Sepanjang waktu"
 
 #: app/utils/flask.py:150
 msgid "Last 7 days"
-msgstr ""
+msgstr "7 hari terakhir"
 
 #: app/utils/flask.py:151
 msgid "Last 30 days"
-msgstr ""
+msgstr "30 hari terakhir"
 
 #: app/utils/flask.py:152
 msgid "Last 90 days"
-msgstr ""
+msgstr "90 hari terakhir"
 
 #: app/utils/flask.py:153
 msgid "Year to date"
-msgstr ""
+msgstr "Tahun ke tanggal"
 
 #: app/utils/flask.py:154
 msgid "Last year"
-msgstr ""
+msgstr "Tahun kemarin"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -4294,4 +4311,3 @@ msgstr ""
 
 #~ msgid "None listed, assumed to support all games"
 #~ msgstr "Tidak ada yang didaftarkan, diasumsikan mendukung semua permainan"
-
