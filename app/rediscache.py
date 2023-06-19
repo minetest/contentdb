@@ -14,16 +14,27 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from . import r
+from . import redis_client
 
-# This file acts as a facade between the releases code and redis,
-# and also means that the releases code avoids knowing about `app`
+# This file acts as a facade between the rest of the code and redis,
+# and also means that the rest of the code avoids knowing about `app`
+
 
 def make_download_key(ip, package):
 	return "{}/{}/{}".format(ip, package.author.username, package.name)
 
+
 def set_key(key, v):
-	r.set(key, v)
+	redis_client.set(key, v)
+
 
 def has_key(key):
-	return r.exists(key)
+	return redis_client.exists(key)
+
+
+def increment_key(key):
+	redis_client.incrby(key, 1)
+
+
+def get_key(key, default=None):
+	return redis_client.get(key) or default

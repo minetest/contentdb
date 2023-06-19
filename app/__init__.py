@@ -54,7 +54,7 @@ app.config["LANGUAGES"] = {
 
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
 
-r = redis.Redis.from_url(app.config["REDIS_URL"])
+redis_client = redis.Redis.from_url(app.config["REDIS_URL"])
 
 github = GitHub(app)
 csrf = CSRFProtect(app)

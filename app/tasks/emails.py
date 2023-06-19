@@ -22,6 +22,7 @@ from flask_babel import force_locale, gettext, lazy_gettext, LazyString
 from flask_mail import Message
 from app import mail
 from app.models import Notification, db, EmailSubscription, User
+from app.rediscache import increment_key
 from app.tasks import celery
 from app.utils import abs_url_for, abs_url, random_string
 
@@ -69,6 +70,7 @@ def send_verify_email(email, token, locale):
 
 		msg.html = render_template("emails/verify.html", token=token, sub=sub)
 		mail.send(msg)
+		increment_key("emails_sent")
 
 
 @celery.task()
@@ -88,6 +90,7 @@ def send_unsubscribe_verify(email, locale):
 
 		msg.html = render_template("emails/verify_unsubscribe.html", sub=sub)
 		mail.send(msg)
+		increment_key("emails_sent")
 
 
 @celery.task(rate_limit="25/m")
@@ -107,6 +110,7 @@ def send_email_with_reason(email: str, locale: str, subject: str, text: str, htm
 			conn.send(msg)
 		else:
 			mail.send(msg)
+		increment_key("emails_sent")
 
 
 @celery.task(rate_limit="25/m")
@@ -142,6 +146,7 @@ def send_single_email(notification, locale):
 
 		msg.html = render_template("emails/notification.html", notification=notification, sub=sub)
 		mail.send(msg)
+		increment_key("emails_sent")
 
 
 def send_notification_digest(notifications: [Notification], locale):
@@ -164,6 +169,7 @@ def send_notification_digest(notifications: [Notification], locale):
 
 		msg.html = render_template("emails/notification_digest.html", notifications=notifications, user=user, sub=sub)
 		mail.send(msg)
+		increment_key("emails_sent")
 
 
 @celery.task()
