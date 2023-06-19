@@ -19,7 +19,7 @@ from sqlalchemy.orm import joinedload
 
 from . import bp
 from app.utils import is_package_page
-from ...models import Package, PackageType, PackageState, db, PackageRelease
+from app.models import Package, PackageType, PackageState, db, PackageRelease
 
 
 @bp.route("/packages/<author>/<name>/hub/")

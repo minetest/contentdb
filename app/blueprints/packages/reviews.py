@@ -13,22 +13,22 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from collections import namedtuple
 
+from flask import render_template, request, redirect, flash, url_for, abort
 from flask_babel import gettext, lazy_gettext
-
-from . import bp
-
-from flask import *
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
+from wtforms import StringField, TextAreaField, SubmitField, RadioField
+from wtforms.validators import InputRequired, Length
+
 from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package, UserRank, \
 	Permission, AuditSeverity, PackageState
+from app.tasks.webhooktasks import post_discord_webhook
 from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url, rank_required, \
 	addAuditLog, has_blocked_domains
-from app.tasks.webhooktasks import post_discord_webhook
+from . import bp
 
 
 @bp.route("/reviews/")
@@ -41,7 +41,7 @@ def list_reviews():
 
 
 class ReviewForm(FlaskForm):
-	title	= StringField(lazy_gettext("Title"), [InputRequired(), Length(3,100)])
+	title = StringField(lazy_gettext("Title"), [InputRequired(), Length(3,100)])
 	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
 	rating = RadioField(lazy_gettext("Rating"), [InputRequired()],
 			choices=[("5", lazy_gettext("Yes")), ("3", lazy_gettext("Neutral")), ("1", lazy_gettext("No"))])
@@ -248,5 +248,5 @@ def review_votes(package):
 
 	user_biases_info.sort(key=lambda x: -abs(x.balance))
 
-	return render_template("packages/review_votes.html", form=form, package=package, reviews=package.reviews,
+	return render_template("packages/review_votes.html", package=package, reviews=package.reviews,
 			user_biases=user_biases_info)

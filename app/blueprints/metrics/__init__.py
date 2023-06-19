@@ -21,6 +21,7 @@ from app.models import Package, db, User, UserRank, PackageState
 
 bp = Blueprint("metrics", __name__)
 
+
 def generate_metrics(full=False):
 	def write_single_stat(name, help, type, value):
 		fmt = "# HELP {name} {help}\n# TYPE {name} {type}\n{name} {value}\n\n"
@@ -30,7 +31,6 @@ def generate_metrics(full=False):
 	def gen_labels(labels):
 		pieces = [key + "=" + str(val) for key, val in labels.items()]
 		return ",".join(pieces)
-
 
 	def write_array_stat(name, help, type, data):
 		ret = "# HELP {name} {help}\n# TYPE {name} {type}\n" \
@@ -66,6 +66,7 @@ def generate_metrics(full=False):
 		ret += write_single_stat("contentdb_score", "Total package score", "gauge", score)
 
 	return ret
+
 
 @bp.route("/metrics")
 def metrics():

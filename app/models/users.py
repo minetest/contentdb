@@ -14,7 +14,6 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 import datetime
 import enum
 
@@ -351,7 +350,7 @@ class EmailSubscription(db.Model):
 
 	@property
 	def url(self):
-		from ..utils import abs_url_for
+		from app.utils import abs_url_for
 		return abs_url_for('users.unsubscribe', token=self.token)
 
 

@@ -30,3 +30,10 @@ and texture packs for Minetest**.
 You should read
 [the official Minetest Modding Book](https://rubenwardy.com/minetest_modding_book/)
 for a guide to making mods and games using Minetest.
+
+## How can I support / donate to ContentDB?
+
+You can donate to rubenwardy to cover ContentDB's costs and support future
+development.
+
+<a href="https://rubenwardy.com/donate/" class="btn btn-primary mr-1">Donate</a>

@@ -15,8 +15,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-import contextlib, git, gitdb, os, shutil, tempfile
+import contextlib
+import git
+import gitdb
+import os
+import shutil
+import tempfile
 from urllib.parse import urlsplit
+
 from git import GitCommandError
 
 from app.tasks import TaskError

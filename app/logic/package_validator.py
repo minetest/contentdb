@@ -1,3 +1,19 @@
+# ContentDB
+# Copyright (C) rubenwardy
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from collections import namedtuple
 from typing import List
 
@@ -15,11 +31,11 @@ def validate_package_for_approval(package: Package) -> List[ValidationError]:
 	normalised_name = package.getNormalisedName()
 	if package.type != PackageType.MOD and Package.query.filter(
 			and_(Package.state == PackageState.APPROVED,
-				 or_(Package.name == normalised_name,
-					 Package.name == normalised_name + "_game"))).count() > 0:
+				or_(Package.name == normalised_name,
+					Package.name == normalised_name + "_game"))).count() > 0:
 		retval.append(("danger", lazy_gettext("A package already exists with this name. Please see Policy and Guidance 3")))
 
-	if package.releases.filter(PackageRelease.task_id==None).count() == 0:
+	if package.releases.filter(PackageRelease.task_id == None).count() == 0:
 		retval.append(("danger", lazy_gettext("A release is required before this package can be approved.")))
 		# Don't bother validating any more until we have a release
 		return retval

@@ -22,8 +22,8 @@ from flask_login import login_user, current_user
 from passlib.handlers.bcrypt import bcrypt
 from flask import redirect, url_for, abort, flash
 
-from app.models import User, UserRank, UserNotificationPreferences, db
 from app.utils import is_safe_url
+from app.models import User, UserRank, UserNotificationPreferences, db
 
 
 def check_password_hash(stored, given):

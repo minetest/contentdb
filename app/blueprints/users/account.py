@@ -14,21 +14,22 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import datetime
 
-
-from flask import *
-from flask_babel import gettext, get_locale
+from flask import redirect, abort, render_template, flash, request, url_for
+from flask_babel import gettext, get_locale, lazy_gettext
 from flask_login import current_user, login_required, logout_user, login_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
-from wtforms import *
-from wtforms.validators import *
+from wtforms import StringField, SubmitField, BooleanField, PasswordField, validators
+from wtforms.validators import InputRequired, Length, Regexp, DataRequired, Optional, Email, EqualTo
 
-from app.models import *
 from app.tasks.emails import send_verify_email, send_anon_email, send_unsubscribe_verify, send_user_email
 from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog, \
 	nonEmptyOrNone, post_login, is_username_valid
 from . import bp
+from app.models import User, AuditSeverity, db, UserRank, PackageAlias, EmailSubscription, UserNotificationPreferences, \
+	UserEmailVerification
 
 
 class LoginForm(FlaskForm):
@@ -44,7 +45,6 @@ def handle_login(form):
 			flash(gettext("Incorrect email or password"), "danger")
 		else:
 			flash(err, "danger")
-
 
 	username = form.username.data.strip()
 	user = User.query.filter(or_(User.username == username, User.email == username)).first()
@@ -86,7 +86,6 @@ def login():
 
 	if request.method == "GET":
 		form.remember_me.data = True
-
 
 	return render_template("users/login.html", form=form)
 
@@ -187,6 +186,7 @@ class ForgotPasswordForm(FlaskForm):
 	email = StringField(lazy_gettext("Email"), [InputRequired(), Email()])
 	submit = SubmitField(lazy_gettext("Reset Password"))
 
+
 @bp.route("/user/forgot-password/", methods=["GET", "POST"])
 def forgot_password():
 	form = ForgotPasswordForm(request.form)
@@ -222,8 +222,9 @@ class SetPasswordForm(FlaskForm):
 	email = StringField(lazy_gettext("Email"), [Optional(), Email()])
 	password = PasswordField(lazy_gettext("New password"), [InputRequired(), Length(8, 100)])
 	password2 = PasswordField(lazy_gettext("Verify password"), [InputRequired(), Length(8, 100),
-			validators.EqualTo('password', message=lazy_gettext('Passwords must match'))])
+			EqualTo('password', message=lazy_gettext('Passwords must match'))])
 	submit = SubmitField(lazy_gettext("Save"))
+
 
 class ChangePasswordForm(FlaskForm):
 	old_password = PasswordField(lazy_gettext("Old password"), [InputRequired(), Length(8, 100)])
@@ -245,8 +246,8 @@ def handle_set_password(form):
 	current_user.password = make_flask_login_password(form.password.data)
 
 	if hasattr(form, "email"):
-		newEmail = nonEmptyOrNone(form.email.data)
-		if newEmail and newEmail != current_user.email:
+		new_email = nonEmptyOrNone(form.email.data)
+		if new_email and new_email != current_user.email:
 			if EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
 				flash(gettext(u"That email address has been unsubscribed/blacklisted, and cannot be used"), "danger")
 				return
@@ -262,7 +263,7 @@ def handle_set_password(form):
 				ver = UserEmailVerification()
 				ver.user = current_user
 				ver.token = token
-				ver.email = newEmail
+				ver.email = new_email
 				db.session.add(ver)
 				db.session.commit()
 

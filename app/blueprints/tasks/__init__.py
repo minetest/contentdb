@@ -14,14 +14,14 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-from flask import *
-from flask_login import login_required
+from flask import Blueprint, jsonify, url_for, request, redirect, render_template
+from flask_login import login_required, current_user
 
 from app import csrf
+from app.models import UserRank
 from app.tasks import celery
 from app.tasks.importtasks import getMeta
-from app.utils import *
+from app.utils import shouldReturnJson
 
 bp = Blueprint("tasks", __name__)
 
@@ -30,6 +30,7 @@ bp = Blueprint("tasks", __name__)
 @bp.route("/tasks/getmeta/new/", methods=["POST"])
 @login_required
 def start_getmeta():
+	from flask import request
 	author = request.args.get("author")
 	author = current_user.forums_username if author is None else author
 	aresult = getMeta.delay(request.args.get("url"), author)

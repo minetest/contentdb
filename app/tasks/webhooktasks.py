@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-import sys
+
 from typing import Optional
 
 import requests
@@ -21,6 +21,7 @@ import requests
 from app import app
 from app.models import User
 from app.tasks import celery
+
 
 @celery.task()
 def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, title: Optional[str] = None, description: Optional[str] = None, thumbnail: Optional[str] = None):

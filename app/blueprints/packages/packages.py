@@ -14,29 +14,37 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import datetime
+import typing
 from urllib.parse import quote as urlescape
 
 from celery import uuid
-from flask import render_template, make_response
-from flask_login import login_required
+from flask import render_template, make_response, request, redirect, flash, url_for, abort
+from flask_babel import gettext, lazy_gettext
+from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from jinja2.utils import markupsafe
-from sqlalchemy import func
+from sqlalchemy import func, or_, and_
 from sqlalchemy.orm import joinedload, subqueryload
-from wtforms import *
-from wtforms.validators import *
+from wtforms import SelectField, StringField, TextAreaField, IntegerField, SubmitField, BooleanField
+from wtforms.validators import InputRequired, Length, Regexp, DataRequired, Optional, URL, NumberRange, ValidationError
 from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 
 from app.logic.LogicError import LogicError
 from app.logic.packages import do_edit_package
-from app.models.packages import PackageProvides
 from app.querybuilder import QueryBuilder
 from app.rediscache import has_key, set_key
 from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
 from app.tasks.webhooktasks import post_discord_webhook
-from app.utils import *
+from app.logic.game_support import GameSupportResolver
+
 from . import bp, get_package_tabs
-from ...logic.game_support import GameSupportResolver
+from app.models import Package, Tag, db, User, Tags, PackageState, Permission, PackageType, MetaPackage, ForumTopic, \
+	Dependency, Thread, UserRank, PackageReview, PackageDevState, ContentWarning, License, AuditSeverity, \
+	PackageScreenshot, NotificationType, AuditLogEntry, PackageAlias, PackageProvides, PackageGameSupport, \
+	PackageDailyStats
+from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, addAuditLog, getPackageByInfo, \
+	addNotification, get_system_user, rank_required, get_games_from_csv, get_daterange_options
 
 
 @bp.route("/packages/")
@@ -174,14 +182,14 @@ def view(package):
 
 		topic_error = "<br />".join(errors)
 
-
 	threads = Thread.query.filter_by(package_id=package.id, review_id=None)
 	if not current_user.is_authenticated:
 		threads = threads.filter_by(private=False)
 	elif not current_user.rank.atLeast(UserRank.APPROVER) and not current_user == package.author:
 		threads = threads.filter(or_(Thread.private == False, Thread.author == current_user))
 
-	has_review = current_user.is_authenticated and PackageReview.query.filter_by(package=package, author=current_user).count() > 0
+	has_review = current_user.is_authenticated and \
+		PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
 	return render_template("packages/view.html",
 			package=package, releases=releases, packages_uses=packages_uses,
@@ -197,10 +205,11 @@ def shield(package, type):
 		url = "https://img.shields.io/static/v1?label=ContentDB&message={}&color={}" \
 			.format(urlescape(package.title), urlescape("#375a7f"))
 	elif type == "downloads":
-		api_url = abs_url_for("api.package", author=package.author.username, name=package.name)
+		api_url = abs_url_for("api.package_view", author=package.author.username, name=package.name)
 		url = "https://img.shields.io/badge/dynamic/json?color={}&label=ContentDB&query=downloads&suffix=+downloads&url={}" \
 			.format(urlescape("#375a7f"), urlescape(api_url))
 	else:
+		from flask import abort
 		abort(404)
 
 	return redirect(url)
@@ -213,7 +222,7 @@ def download(package):
 
 	if release is None:
 		if "application/zip" in request.accept_mimetypes and \
-				not "text/html" in request.accept_mimetypes:
+				"text/html" not in request.accept_mimetypes:
 			return "", 204
 		else:
 			flash(gettext("No download available."), "danger")
@@ -247,7 +256,7 @@ class PackageForm(FlaskForm):
 	repo             = StringField(lazy_gettext("VCS Repository URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	website          = StringField(lazy_gettext("Website URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	issueTracker     = StringField(lazy_gettext("Issue Tracker URL"), [Optional(), URL()], filters = [lambda x: x or None])
-	forums           = IntegerField(lazy_gettext("Forum Topic ID"), [Optional(), NumberRange(0,999999)])
+	forums           = IntegerField(lazy_gettext("Forum Topic ID"), [Optional(), NumberRange(0, 999999)])
 	video_url        = StringField(lazy_gettext("Video URL"), [Optional(), URL()], filters=[lambda x: x or None])
 	donate_url       = StringField(lazy_gettext("Donate URL"), [Optional(), URL()], filters=[lambda x: x or None])
 
@@ -721,7 +730,7 @@ def game_support(package):
 
 	all_game_support = package.supported_games.all()
 	all_game_support.sort(key=lambda x: -x.game.score)
-	supported_games_list: List[str] = [x.game.name for x in all_game_support if x.supports]
+	supported_games_list: typing.List[str] = [x.game.name for x in all_game_support if x.supports]
 	if package.supports_all_games:
 		supported_games_list.insert(0, "*")
 	supported_games = ", ".join(supported_games_list)
@@ -752,7 +761,7 @@ def statistics(package):
 @bp.route("/packages/<author>/<name>/stats.csv")
 @is_package_page
 def stats_csv(package):
-	stats: List[PackageDailyStats] = package.daily_stats.order_by(db.asc(PackageDailyStats.date)).all()
+	stats: typing.List[PackageDailyStats] = package.daily_stats.order_by(db.asc(PackageDailyStats.date)).all()
 
 	columns = ["platform_minetest", "platform_other", "reason_new",
 				"reason_dependency", "reason_update"]

@@ -13,7 +13,8 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-from flask import *
+
+from flask import Blueprint, request, render_template, abort, flash, redirect, url_for
 from flask_babel import gettext, lazy_gettext
 
 from app.markdown import get_user_mentions, render_markdown
@@ -22,11 +23,12 @@ from app.tasks.webhooktasks import post_discord_webhook
 bp = Blueprint("threads", __name__)
 
 from flask_login import current_user, login_required
-from app.models import *
+from app.models import Package, db, User, Permission, Thread, UserRank, AuditSeverity, \
+	NotificationType, ThreadReply
 from app.utils import addNotification, isYes, addAuditLog, get_system_user, rank_required, has_blocked_domains
 from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
+from wtforms import StringField, TextAreaField, SubmitField, BooleanField
+from wtforms.validators import InputRequired, Length
 from app.utils import get_int_or_abort
 
 
@@ -58,8 +60,8 @@ def list_all():
 
 @bp.route("/threads/<int:id>/subscribe/", methods=["POST"])
 @login_required
-def subscribe(id):
-	thread = Thread.query.get(id)
+def subscribe(id_):
+	thread = Thread.query.get(id_)
 	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
@@ -75,8 +77,8 @@ def subscribe(id):
 
 @bp.route("/threads/<int:id>/unsubscribe/", methods=["POST"])
 @login_required
-def unsubscribe(id):
-	thread = Thread.query.get(id)
+def unsubscribe(id_):
+	thread = Thread.query.get(id_)
 	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
@@ -92,8 +94,8 @@ def unsubscribe(id):
 
 @bp.route("/threads/<int:id>/set-lock/", methods=["POST"])
 @login_required
-def set_lock(id):
-	thread = Thread.query.get(id)
+def set_lock(id_):
+	thread = Thread.query.get(id_)
 	if thread is None or not thread.check_perm(current_user, Permission.LOCK_THREAD):
 		abort(404)
 
@@ -118,8 +120,8 @@ def set_lock(id):
 
 @bp.route("/threads/<int:id>/delete/", methods=["GET", "POST"])
 @login_required
-def delete_thread(id):
-	thread = Thread.query.get(id)
+def delete_thread(id_):
+	thread = Thread.query.get(id_)
 	if thread is None or not thread.check_perm(current_user, Permission.DELETE_THREAD):
 		abort(404)
 
@@ -141,8 +143,8 @@ def delete_thread(id):
 
 @bp.route("/threads/<int:id>/delete-reply/", methods=["GET", "POST"])
 @login_required
-def delete_reply(id):
-	thread = Thread.query.get(id)
+def delete_reply(id_):
+	thread = Thread.query.get(id_)
 	if thread is None:
 		abort(404)
 
@@ -180,8 +182,8 @@ class CommentForm(FlaskForm):
 
 @bp.route("/threads/<int:id>/edit/", methods=["GET", "POST"])
 @login_required
-def edit_reply(id):
-	thread = Thread.query.get(id)
+def edit_reply(id_):
+	thread = Thread.query.get(id_)
 	if thread is None:
 		abort(404)
 
@@ -217,8 +219,8 @@ def edit_reply(id):
 
 
 @bp.route("/threads/<int:id>/", methods=["GET", "POST"])
-def view(id):
-	thread: Thread = Thread.query.get(id)
+def view(id_):
+	thread: Thread = Thread.query.get(id_)
 	if thread is None or not thread.check_perm(current_user, Permission.SEE_THREAD):
 		abort(404)
 
@@ -376,7 +378,6 @@ def new():
 			db.session.commit()
 
 			return redirect(thread.get_view_url())
-
 
 	return render_template("threads/new.html", form=form, allow_private_change=allow_private_change, package=package)
 

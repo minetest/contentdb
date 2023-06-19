@@ -1,3 +1,19 @@
+# ContentDB
+# Copyright (C) rubenwardy
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import datetime
 from datetime import timedelta
 from typing import Optional
@@ -15,7 +31,7 @@ keys = ["platform_minetest", "platform_other", "reason_new",
 		"reason_dependency", "reason_update"]
 
 
-def _flatten_data(stats):
+def flatten_data(stats):
 	start_date = stats[0].date
 	end_date = stats[-1].date
 	result = {
@@ -52,7 +68,7 @@ def get_package_stats(package: Package, start_date: Optional[datetime.date], end
 	if len(stats) == 0:
 		return None
 
-	return _flatten_data(stats)
+	return flatten_data(stats)
 
 
 def get_package_stats_for_user(user: User, start_date: Optional[datetime.date], end_date: Optional[datetime.date]):
@@ -76,7 +92,7 @@ def get_package_stats_for_user(user: User, start_date: Optional[datetime.date], 
 	if len(stats) == 0:
 		return None
 
-	results = _flatten_data(stats)
+	results = flatten_data(stats)
 	results["package_downloads"] = get_package_overview_for_user(user, stats[0].date, stats[-1].date)
 
 	return results

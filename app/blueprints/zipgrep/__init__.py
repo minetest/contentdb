@@ -16,7 +16,8 @@
 
 
 from celery import uuid
-from flask import Blueprint, render_template, redirect, request, abort
+from flask import Blueprint, render_template, redirect, request, abort, url_for
+from flask_babel import lazy_gettext
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField
 from wtforms.validators import InputRequired, Length
@@ -26,7 +27,7 @@ from app.utils import rank_required
 
 bp = Blueprint("zipgrep", __name__)
 
-from app.models import *
+from app.models import UserRank, Package
 from app.tasks.zipgrep import search_in_releases
 
 
@@ -51,14 +52,14 @@ def zipgrep_search():
 
 
 @bp.route("/zipgrep/<id>/")
-def view_results(id):
-	result = celery.AsyncResult(id)
+def view_results(id_):
+	result = celery.AsyncResult(id_)
 	if result.status == "PENDING":
 		abort(404)
 
 	if result.status != "SUCCESS" or isinstance(result.result, Exception):
-		result_url = url_for("zipgrep.view_results", id=id)
-		return redirect(url_for("tasks.check", id=id, r=result_url))
+		result_url = url_for("zipgrep.view_results", id=id_)
+		return redirect(url_for("tasks.check", id=id_, r=result_url))
 
 	matches = result.result["matches"]
 	for match in matches:

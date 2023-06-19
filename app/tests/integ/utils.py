@@ -1,3 +1,19 @@
+# ContentDB
+# Copyright (C) rubenwardy
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import pytest, json
 from sqlalchemy import text
 
@@ -19,17 +35,22 @@ def recreate_db():
 	populate(db.session)
 	db.session.commit()
 
+
 def parse_json(b):
 	return json.loads(b.decode("utf8"))
+
 
 def is_type(t, v):
 	return v and isinstance(v, t)
 
+
 def is_optional(t, v):
 	return not v or isinstance(v, t)
 
+
 def is_str(v):
 	return is_type(str, v)
+
 
 def is_int(v):
 	return is_type(int, v)

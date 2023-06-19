@@ -1,8 +1,28 @@
-import os, re
+# ContentDB
+# Copyright (C) 2018-21 rubenwardy
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+
+import os
+import re
+
 from . import MinetestCheckError, ContentType
 from .config import parse_conf
 
 basenamePattern = re.compile("^([a-z0-9_]+)$")
+
 
 def get_base_dir(path):
 	if not os.path.isdir(path):
@@ -39,8 +59,8 @@ def get_csv_line(line):
 
 
 class PackageTreeNode:
-	def __init__(self, baseDir, relative, author=None, repo=None, name=None):
-		self.baseDir  = baseDir
+	def __init__(self, base_dir, relative, author=None, repo=None, name=None):
+		self.baseDir  = base_dir
 		self.relative = relative
 		self.author   = author
 		self.name	 = name
@@ -49,11 +69,11 @@ class PackageTreeNode:
 		self.children = []
 
 		# Detect type
-		self.type = detect_type(baseDir)
+		self.type = detect_type(base_dir)
 		self.read_meta()
 
 		if self.type == ContentType.GAME:
-			if not os.path.isdir(baseDir + "/mods"):
+			if not os.path.isdir(base_dir + "/mods"):
 				raise MinetestCheckError("Game at {} does not have a mods/ folder".format(self.relative))
 			self.add_children_from_mod_dir("mods")
 		elif self.type == ContentType.MOD:
@@ -69,13 +89,13 @@ class PackageTreeNode:
 			if lowercase != dir and lowercase in dirs:
 				raise MinetestCheckError(f"Incorrect case, {dir} should be {lowercase} at {self.relative}{dir}")
 
-	def getReadMePath(self):
+	def get_readme_path(self):
 		for filename in os.listdir(self.baseDir):
 			path = os.path.join(self.baseDir, filename)
 			if os.path.isfile(path) and filename.lower().startswith("readme."):
 				return path
 
-	def getMetaFileName(self):
+	def get_meta_file_name(self):
 		if self.type == ContentType.GAME:
 			return "game.conf"
 		elif self.type == ContentType.MOD:
@@ -91,13 +111,13 @@ class PackageTreeNode:
 		result = {}
 
 		# Read .conf file
-		meta_file_name = self.getMetaFileName()
+		meta_file_name = self.get_meta_file_name()
 		if meta_file_name is not None:
 			meta_file_rel = self.relative + meta_file_name
 			meta_file_path = self.baseDir + "/" + meta_file_name
 			try:
-				with open(meta_file_path or "", "r") as myfile:
-					conf = parse_conf(myfile.read())
+				with open(meta_file_path or "", "r") as f:
+					conf = parse_conf(f.read())
 					for key, value in conf.items():
 						result[key] = value
 			except SyntaxError as e:
@@ -108,12 +128,11 @@ class PackageTreeNode:
 			if "release" in result:
 				raise MinetestCheckError("{} should not contain 'release' key, as this is for use by ContentDB only.".format(meta_file_rel))
 
-
 		# description.txt
-		if not "description" in result:
+		if "description" not in result:
 			try:
-				with open(self.baseDir + "/description.txt", "r") as myfile:
-					result["description"] = myfile.read()
+				with open(self.baseDir + "/description.txt", "r") as f:
+					result["description"] = f.read()
 			except IOError:
 				pass
 
@@ -123,10 +142,10 @@ class PackageTreeNode:
 			result["optional_depends"] = get_csv_line(result.get("optional_depends"))
 
 		elif os.path.isfile(self.baseDir + "/depends.txt"):
-			pattern = re.compile("^([a-z0-9_]+)\??$")
+			pattern = re.compile(r"^([a-z0-9_]+)\??$")
 
-			with open(self.baseDir + "/depends.txt", "r") as myfile:
-				contents = myfile.read()
+			with open(self.baseDir + "/depends.txt", "r") as f:
+				contents = f.read()
 				soft = []
 				hard = []
 				for line in contents.split("\n"):
@@ -144,8 +163,7 @@ class PackageTreeNode:
 			result["depends"] = []
 			result["optional_depends"] = []
 
-
-		def checkDependencies(deps):
+		def check_dependencies(deps):
 			for dep in deps:
 				if not basenamePattern.match(dep):
 					if " " in dep:
@@ -157,8 +175,8 @@ class PackageTreeNode:
 									.format(dep, self.relative))
 
 		# Check dependencies
-		checkDependencies(result["depends"])
-		checkDependencies(result["optional_depends"])
+		check_dependencies(result["depends"])
+		check_dependencies(result["optional_depends"])
 
 		# Fix games using "name" as "title"
 		if self.type == ContentType.GAME and "name" in result:
@@ -193,7 +211,7 @@ class PackageTreeNode:
 			path = os.path.join(dir, entry)
 			if not entry.startswith('.') and os.path.isdir(path):
 				child = PackageTreeNode(path, relative + entry + "/", name=entry)
-				if not child.type.isModLike():
+				if not child.type.is_mod_like():
 					raise MinetestCheckError("Expecting mod or modpack, found {} at {} inside {}" \
 						.format(child.type.value, child.relative, self.type.value))
 
@@ -202,7 +220,7 @@ class PackageTreeNode:
 
 				self.children.append(child)
 
-	def getModNames(self):
+	def get_mod_names(self):
 		return self.fold("name", type_=ContentType.MOD)
 
 	# attr: Attribute name

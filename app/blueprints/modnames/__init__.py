@@ -14,8 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-from flask import *
+from flask import Blueprint, redirect, render_template, abort
 from sqlalchemy import func
 from app.models import MetaPackage, Package, db, Dependency, PackageState, ForumTopic
 

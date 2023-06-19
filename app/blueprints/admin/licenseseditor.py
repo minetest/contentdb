@@ -23,7 +23,7 @@ from wtforms.validators import InputRequired, Length, Optional
 
 from app.utils import rank_required, nonEmptyOrNone, addAuditLog
 from . import bp
-from ...models import UserRank, License, db, AuditSeverity
+from app.models import UserRank, License, db, AuditSeverity
 
 
 @bp.route("/licenses/")

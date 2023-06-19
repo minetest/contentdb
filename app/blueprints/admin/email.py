@@ -24,7 +24,7 @@ from app.markdown import render_markdown
 from app.tasks.emails import send_user_email, send_bulk_email as task_send_bulk
 from app.utils import rank_required, addAuditLog
 from . import bp
-from ...models import UserRank, User, AuditSeverity
+from app.models import UserRank, User, AuditSeverity
 
 
 class SendEmailForm(FlaskForm):
@@ -54,7 +54,7 @@ def send_single_email():
 
 		text = form.text.data
 		html = render_markdown(text)
-		task = send_user_email.delay(user.email, user.locale or "en",form.subject.data, text, html)
+		task = send_user_email.delay(user.email, user.locale or "en", form.subject.data, text, html)
 		return redirect(url_for("tasks.check", id=task.id, r=next_url))
 
 	return render_template("admin/send_email.html", form=form, user=user)
