@@ -30,7 +30,7 @@ from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
 	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread
 from app.querybuilder import QueryBuilder
-from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, isYes, get_request_date
+from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
@@ -66,19 +66,19 @@ def cached(max_age: int):
 @cached(300)
 def packages():
 	qb = QueryBuilder(request.args)
-	query = qb.buildPackageQuery()
+	query = qb.build_package_query()
 
 	if request.args.get("fmt") == "keys":
 		return jsonify([pkg.as_key_dict() for pkg in query.all()])
 
-	pkgs = qb.convertToDictionary(query.all())
+	pkgs = qb.convert_to_dictionary(query.all())
 	if "engine_version" in request.args or "protocol_version" in request.args:
 		pkgs = [pkg for pkg in pkgs if pkg.get("release")]
 
 	# Promote featured packages
 	if "sort" not in request.args and "order" not in request.args and "q" not in request.args:
 		featured_lut = set()
-		featured = qb.convertToDictionary(query.filter(Package.tags.any(name="featured")).all())
+		featured = qb.convert_to_dictionary(query.filter(Package.tags.any(name="featured")).all())
 		for pkg in featured:
 			featured_lut.add(f"{pkg['author']}/{pkg['name']}")
 			pkg["short_description"] = "Featured. " + pkg["short_description"]
@@ -101,7 +101,7 @@ def package_view(package):
 @cors_allowed
 def package_hypertext(package):
 	formspec_version = request.args["formspec_version"]
-	include_images = isYes(request.args.get("include_images", "true"))
+	include_images = is_yes(request.args.get("include_images", "true"))
 	html = render_markdown(package.desc)
 	return jsonify(html_to_minetest(html, formspec_version, include_images))
 
@@ -174,7 +174,7 @@ def package_dependencies(package):
 @cors_allowed
 def topics():
 	qb = QueryBuilder(request.args)
-	query = qb.buildTopicQuery(show_added=True)
+	query = qb.build_topic_query(show_added=True)
 	return jsonify([t.as_dict() for t in query.all()])
 
 
@@ -346,7 +346,7 @@ def create_screenshot(token: APIToken, package: Package):
 	if file is None:
 		error(400, "Missing 'file' in multipart body")
 
-	return api_create_screenshot(token, package, data["title"], file, isYes(data.get("is_cover_image")))
+	return api_create_screenshot(token, package, data["title"], file, is_yes(data.get("is_cover_image")))
 
 
 @bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/")
@@ -454,7 +454,7 @@ def list_all_reviews():
 		query = query.filter(PackageReview.author.has(User.username == request.args.get("author")))
 
 	if request.args.get("is_positive"):
-		if isYes(request.args.get("is_positive")):
+		if is_yes(request.args.get("is_positive")):
 			query = query.filter(PackageReview.rating > 3)
 		else:
 			query = query.filter(PackageReview.rating <= 3)
@@ -499,7 +499,7 @@ def all_package_stats():
 @cached(300)
 def package_scores():
 	qb = QueryBuilder(request.args)
-	query = qb.buildPackageQuery()
+	query = qb.build_package_query()
 
 	pkgs = [package.as_score_dict() for package in query.all()]
 	return jsonify(pkgs)
@@ -601,7 +601,7 @@ def versions():
 @cors_allowed
 def all_deps():
 	qb = QueryBuilder(request.args)
-	query = qb.buildPackageQuery()
+	query = qb.build_package_query()
 
 	def format_pkg(pkg: Package):
 		return {

@@ -76,7 +76,7 @@ def rank_required(rank):
 		def decorated_function(*args, **kwargs):
 			if not current_user.is_authenticated:
 				return redirect(url_for("users.login"))
-			if not current_user.rank.atLeast(rank):
+			if not current_user.rank.at_least(rank):
 				abort(403)
 
 			return f(*args, **kwargs)

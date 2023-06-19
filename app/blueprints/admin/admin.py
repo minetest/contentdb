@@ -19,7 +19,7 @@ from flask_login import current_user, login_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import InputRequired, Length
-from app.utils import rank_required, addAuditLog, addNotification, get_system_user
+from app.utils import rank_required, add_audit_log, add_notification, get_system_user
 from . import bp
 from .actions import actions
 from app.models import UserRank, Package, db, PackageState, User, AuditSeverity, NotificationType
@@ -75,11 +75,11 @@ class SendNotificationForm(FlaskForm):
 def send_bulk_notification():
 	form = SendNotificationForm(request.form)
 	if form.validate_on_submit():
-		addAuditLog(AuditSeverity.MODERATION, current_user,
+		add_audit_log(AuditSeverity.MODERATION, current_user,
 				"Sent bulk notification", url_for("admin.admin_page"), None, form.title.data)
 
 		users = User.query.filter(User.rank >= UserRank.NEW_MEMBER).all()
-		addNotification(users, get_system_user(), NotificationType.OTHER, form.title.data, form.url.data, None)
+		add_notification(users, get_system_user(), NotificationType.OTHER, form.title.data, form.url.data, None)
 		db.session.commit()
 
 		return redirect(url_for("admin.admin_page"))
@@ -105,8 +105,8 @@ def restore():
 		else:
 			package.state = target
 
-			addAuditLog(AuditSeverity.EDITOR, current_user, f"Restored package to state {target.value}",
-					package.get_url("packages.view"), package)
+			add_audit_log(AuditSeverity.EDITOR, current_user, f"Restored package to state {target.value}",
+						  package.get_url("packages.view"), package)
 
 			db.session.commit()
 			return redirect(package.get_url("packages.view"))

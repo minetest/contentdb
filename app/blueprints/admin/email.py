@@ -22,7 +22,7 @@ from wtforms.validators import InputRequired, Length
 
 from app.markdown import render_markdown
 from app.tasks.emails import send_user_email, send_bulk_email as task_send_bulk
-from app.utils import rank_required, addAuditLog
+from app.utils import rank_required, add_audit_log
 from . import bp
 from app.models import UserRank, User, AuditSeverity
 
@@ -49,7 +49,7 @@ def send_single_email():
 
 	form = SendEmailForm(request.form)
 	if form.validate_on_submit():
-		addAuditLog(AuditSeverity.MODERATION, current_user,
+		add_audit_log(AuditSeverity.MODERATION, current_user,
 				"Sent email to {}".format(user.display_name), url_for("users.profile", username=username))
 
 		text = form.text.data
@@ -65,7 +65,7 @@ def send_single_email():
 def send_bulk_email():
 	form = SendEmailForm(request.form)
 	if form.validate_on_submit():
-		addAuditLog(AuditSeverity.MODERATION, current_user,
+		add_audit_log(AuditSeverity.MODERATION, current_user,
 				"Sent bulk email", url_for("admin.admin_page"), None, form.text.data)
 
 		text = form.text.data

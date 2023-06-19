@@ -22,8 +22,8 @@ from sqlalchemy import or_, and_
 
 from app.models import User, Package, PackageState, PackageScreenshot, PackageUpdateConfig, ForumTopic, db, \
 	PackageRelease, Permission, NotificationType, AuditSeverity, UserRank, PackageType
-from app.tasks.importtasks import makeVCSRelease
-from app.utils import addNotification, addAuditLog
+from app.tasks.importtasks import make_vcs_release
+from app.utils import add_notification, add_audit_log
 from . import bp
 
 
@@ -43,7 +43,7 @@ def view_user(username=None):
 	if not user:
 		abort(404)
 
-	if current_user != user and not current_user.rank.atLeast(UserRank.APPROVER):
+	if current_user != user and not current_user.rank.at_least(UserRank.APPROVER):
 		abort(403)
 
 	unapproved_packages = user.packages \
@@ -97,7 +97,7 @@ def apply_all_updates(username):
 	if not user:
 		abort(404)
 
-	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
+	if current_user != user and not current_user.rank.at_least(UserRank.EDITOR):
 		abort(403)
 
 	outdated_packages = user.maintained_packages \
@@ -124,13 +124,13 @@ def apply_all_updates(username):
 		db.session.add(rel)
 		db.session.commit()
 
-		makeVCSRelease.apply_async((rel.id, ref),
-				task_id=rel.task_id)
+		make_vcs_release.apply_async((rel.id, ref),
+									 task_id=rel.task_id)
 
 		msg = "Created release {} (Applied all Git Update Detection)".format(rel.title)
-		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg,
-				rel.get_url("packages.create_edit"), package)
-		addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.get_url("packages.view"), package)
+		add_notification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg,
+						 rel.get_url("packages.create_edit"), package)
+		add_audit_log(AuditSeverity.NORMAL, current_user, msg, package.get_url("packages.view"), package)
 		db.session.commit()
 
 	return redirect(url_for("todo.view_user", username=username))
@@ -144,7 +144,7 @@ def all_game_support(username=None):
 		return redirect(url_for("todo.all_game_support", username=current_user.username))
 
 	user: User = User.query.filter_by(username=username).one_or_404()
-	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
+	if current_user != user and not current_user.rank.at_least(UserRank.EDITOR):
 		abort(403)
 
 	packages = user.maintained_packages.filter(
@@ -159,7 +159,7 @@ def all_game_support(username=None):
 @login_required
 def confirm_supports_all_games(username=None):
 	user: User = User.query.filter_by(username=username).one_or_404()
-	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
+	if current_user != user and not current_user.rank.at_least(UserRank.EDITOR):
 		abort(403)
 
 	packages = user.maintained_packages.filter(
@@ -173,8 +173,8 @@ def confirm_supports_all_games(username=None):
 		package.supports_all_games = True
 		db.session.merge(package)
 
-		addAuditLog(AuditSeverity.NORMAL, current_user, "Enabled 'Supports all games' (bulk)",
-				package.get_url("packages.game_support"), package)
+		add_audit_log(AuditSeverity.NORMAL, current_user, "Enabled 'Supports all games' (bulk)",
+					  package.get_url("packages.game_support"), package)
 
 	db.session.commit()
 

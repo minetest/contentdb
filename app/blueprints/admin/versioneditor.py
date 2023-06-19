@@ -21,7 +21,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, SubmitField
 from wtforms.validators import InputRequired, Length
 
-from app.utils import rank_required, addAuditLog
+from app.utils import rank_required, add_audit_log
 from . import bp
 from app.models import UserRank, MinetestRelease, db, AuditSeverity
 
@@ -56,13 +56,13 @@ def create_edit_version(name=None):
 			db.session.add(version)
 			flash("Created version " + form.name.data, "success")
 
-			addAuditLog(AuditSeverity.MODERATION, current_user, f"Created version {version.name}",
-					url_for("admin.license_list"))
+			add_audit_log(AuditSeverity.MODERATION, current_user, f"Created version {version.name}",
+						  url_for("admin.license_list"))
 		else:
 			flash("Updated version " + form.name.data, "success")
 
-			addAuditLog(AuditSeverity.MODERATION, current_user, f"Edited version {version.name}",
-					url_for("admin.version_list"))
+			add_audit_log(AuditSeverity.MODERATION, current_user, f"Edited version {version.name}",
+						  url_for("admin.version_list"))
 
 		form.populate_obj(version)
 		db.session.commit()

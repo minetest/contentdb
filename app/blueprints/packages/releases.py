@@ -27,7 +27,7 @@ from app.models import Package, db, User, PackageState, Permission, UserRank, Pa
 	PackageRelease, PackageUpdateTrigger, PackageUpdateConfig
 from app.rediscache import has_key, set_key, make_download_key
 from app.tasks.importtasks import check_update_config
-from app.utils import is_user_bot, is_package_page, nonEmptyOrNone
+from app.utils import is_user_bot, is_package_page, nonempty_or_none
 from . import bp, get_package_tabs
 
 
@@ -263,7 +263,7 @@ def set_update_config(package, form):
 		db.session.add(package.update_config)
 
 	form.populate_obj(package.update_config)
-	package.update_config.ref = nonEmptyOrNone(form.ref.data)
+	package.update_config.ref = nonempty_or_none(form.ref.data)
 	package.update_config.make_release = form.action.data == "make_release"
 
 	if package.update_config.trigger == PackageUpdateTrigger.COMMIT:
@@ -349,7 +349,7 @@ def bulk_update_config(username=None):
 	if not user:
 		abort(404)
 
-	if current_user != user and not current_user.rank.atLeast(UserRank.EDITOR):
+	if current_user != user and not current_user.rank.at_least(UserRank.EDITOR):
 		abort(403)
 
 	form = PackageUpdateConfigFrom()

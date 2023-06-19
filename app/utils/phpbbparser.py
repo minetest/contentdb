@@ -12,8 +12,9 @@ from urllib.parse import urlencode
 from bs4 import BeautifulSoup
 
 
-def urlEncodeNonAscii(b):
+def url_encode_non_ascii(b):
 	return re.sub('[\x80-\xFF]', lambda c: '%%%02x' % ord(c.group(0)), b)
+
 
 class Profile:
 	def __init__(self, username):
@@ -30,6 +31,7 @@ class Profile:
 
 	def __str__(self):
 		return self.username + "\n" + str(self.signature) + "\n" + str(self.properties)
+
 
 def __extract_properties(profile, soup):
 	el = soup.find(id="viewprofile")
@@ -66,6 +68,7 @@ def __extract_properties(profile, soup):
 		elif element and element.name is not None:
 			print("Unexpected other")
 
+
 def __extract_signature(soup):
 	res = soup.find_all("div", class_="signature")
 	if len(res) != 1:
@@ -74,7 +77,7 @@ def __extract_signature(soup):
 		return str(res[0])
 
 
-def getProfileURL(url, username):
+def get_profile_url(url, username):
 	url = urlparse.urlparse(url)
 
 	# Update path
@@ -89,8 +92,8 @@ def getProfileURL(url, username):
 	return urlparse.urlunparse(url)
 
 
-def getProfile(url, username):
-	url = getProfileURL(url, username)
+def get_profile(url, username):
+	url = get_profile_url(url, username)
 
 	try:
 		req = urllib.request.urlopen(url, timeout=15)
@@ -114,7 +117,8 @@ def getProfile(url, username):
 
 regex_id = re.compile(r"^.*t=([0-9]+).*$")
 
-def parseForumListPage(id, page, out, extra=None):
+
+def parse_forum_list_page(id, page, out, extra=None):
 	num_per_page = 30
 	start = page*num_per_page+1
 	print(" - Fetching page {} (topics {}-{})".format(page, start, start+num_per_page))
@@ -171,15 +175,11 @@ def parseForumListPage(id, page, out, extra=None):
 
 	return True
 
-def getTopicsFromForum(id, out, extra=None):
+
+def get_topics_from_forum(id, out, extra=None):
 	print("Fetching all topics from forum {}".format(id))
 	page = 0
-	while parseForumListPage(id, page, out, extra):
+	while parse_forum_list_page(id, page, out, extra):
 		page = page + 1
 
 	return out
-
-def dumpTitlesToFile(topics, path):
-	with open(path, "w") as out_file:
-		for topic in topics.values():
-			out_file.write(topic["title"] + "\n")

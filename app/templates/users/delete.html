@@ -36,7 +36,7 @@
 					name="deactivate" value="{{ _('Deactivate') }}"
 				{% endif %}
 				class="btn btn-danger" />
-			{% if not can_delete and current_user.rank.atLeast(current_user.rank.ADMIN) %}
+			{% if not can_delete and current_user.rank.at_least(current_user.rank.ADMIN) %}
 				<input type="submit" name="delete" value="{{ _('Delete Anyway') }}" class="btn btn-danger ml-3" />
 			{% endif %}
 		</div>

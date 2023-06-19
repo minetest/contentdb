@@ -75,11 +75,11 @@ celery = make_celery(app)
 
 CELERYBEAT_SCHEDULE = {
 	'topic_list_import': {
-		'task': 'app.tasks.forumtasks.importTopicList',
+		'task': 'app.tasks.forumtasks.import_topic_list',
 		'schedule': crontab(minute=1, hour=1), # 0101
 	},
 	'package_score_update': {
-		'task': 'app.tasks.pkgtasks.updatePackageScores',
+		'task': 'app.tasks.pkgtasks.update_package_scores',
 		'schedule': crontab(minute=10, hour=1), # 0110
 	},
 	'check_for_updates': {

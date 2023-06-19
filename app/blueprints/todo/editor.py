@@ -22,7 +22,7 @@ from sqlalchemy import or_
 from app.models import Package, PackageState, PackageScreenshot, PackageUpdateConfig, ForumTopic, db, \
 	PackageRelease, Permission, UserRank, License, MetaPackage, Dependency, AuditLogEntry, Tag, MinetestRelease
 from app.querybuilder import QueryBuilder
-from app.utils import get_int_or_abort, isYes
+from app.utils import get_int_or_abort, is_yes
 from . import bp
 
 
@@ -85,7 +85,7 @@ def view_editor():
 
 	return render_template("todo/editor.html", current_tab="editor",
 			packages=packages, wip_packages=wip_packages, releases=releases, screenshots=screenshots,
-			canApproveNew=can_approve_new, canApproveRel=can_approve_rel, canApproveScn=can_approve_scn,
+			can_approve_new=can_approve_new, can_approve_rel=can_approve_rel, can_approve_scn=can_approve_scn,
 			license_needed=license_needed, total_packages=total_packages, total_to_tag=total_to_tag,
 			unfulfilled_meta_packages=unfulfilled_meta_packages, audit_log=audit_log)
 
@@ -94,8 +94,8 @@ def view_editor():
 @login_required
 def topics():
 	qb = QueryBuilder(request.args)
-	qb.setSortIfNone("date")
-	query = qb.buildTopicQuery()
+	qb.set_sort_if_none("date")
+	query = qb.build_topic_query()
 
 	tmp_q = ForumTopic.query
 	if not qb.show_discarded:
@@ -105,7 +105,7 @@ def topics():
 
 	page = get_int_or_abort(request.args.get("page"), 1)
 	num = get_int_or_abort(request.args.get("n"), 100)
-	if num > 100 and not current_user.rank.atLeast(UserRank.APPROVER):
+	if num > 100 and not current_user.rank.at_least(UserRank.APPROVER):
 		num = 100
 
 	query = query.paginate(page=page, per_page=num)
@@ -126,10 +126,10 @@ def topics():
 @login_required
 def tags():
 	qb    = QueryBuilder(request.args)
-	qb.setSortIfNone("score", "desc")
-	query = qb.buildPackageQuery()
+	qb.set_sort_if_none("score", "desc")
+	query = qb.build_package_query()
 
-	only_no_tags = isYes(request.args.get("no_tags"))
+	only_no_tags = is_yes(request.args.get("no_tags"))
 	if only_no_tags:
 		query = query.filter(Package.tags == None)
 
@@ -153,7 +153,7 @@ def modnames():
 @bp.route("/todo/outdated/")
 @login_required
 def outdated():
-	is_mtm_only = isYes(request.args.get("mtm"))
+	is_mtm_only = is_yes(request.args.get("mtm"))
 
 	query = db.session.query(Package).select_from(PackageUpdateConfig) \
 			.filter(PackageUpdateConfig.outdated_at.isnot(None)) \
@@ -177,7 +177,7 @@ def outdated():
 @bp.route("/todo/screenshots/")
 @login_required
 def screenshots():
-	is_mtm_only = isYes(request.args.get("mtm"))
+	is_mtm_only = is_yes(request.args.get("mtm"))
 
 	query = db.session.query(Package) \
 			.filter(~Package.screenshots.any()) \
@@ -200,7 +200,7 @@ def screenshots():
 @bp.route("/todo/mtver_support/")
 @login_required
 def mtver_support():
-	is_mtm_only = isYes(request.args.get("mtm"))
+	is_mtm_only = is_yes(request.args.get("mtm"))
 
 	current_stable = MinetestRelease.query.filter(~MinetestRelease.name.like("%-dev")).order_by(db.desc(MinetestRelease.id)).first()
 

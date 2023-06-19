@@ -21,7 +21,7 @@ from flask_babel import lazy_gettext
 from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
 from app.models import User, Package, PackageScreenshot, Permission, NotificationType, db, AuditSeverity
-from app.utils import addNotification, addAuditLog
+from app.utils import add_notification, add_audit_log
 from app.utils.image import get_image_size
 
 
@@ -58,8 +58,8 @@ def do_create_screenshot(user: User, package: Package, title: str, file, is_cove
 	else:
 		msg = "Created screenshot {} ({})".format(ss.title, reason)
 
-	addNotification(package.maintainers, user, NotificationType.PACKAGE_EDIT, msg, package.get_url("packages.view"), package)
-	addAuditLog(AuditSeverity.NORMAL, user, msg, package.get_url("packages.view"), package)
+	add_notification(package.maintainers, user, NotificationType.PACKAGE_EDIT, msg, package.get_url("packages.view"), package)
+	add_audit_log(AuditSeverity.NORMAL, user, msg, package.get_url("packages.view"), package)
 
 	db.session.commit()
 

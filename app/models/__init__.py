@@ -116,7 +116,7 @@ class AuditLogEntry(db.Model):
 			raise Exception("Unknown permission given to AuditLogEntry.check_perm()")
 
 		if perm == Permission.VIEW_AUDIT_DESCRIPTION:
-			return user.rank.atLeast(UserRank.APPROVER if self.package is not None else UserRank.MODERATOR)
+			return user.rank.at_least(UserRank.APPROVER if self.package is not None else UserRank.MODERATOR)
 		else:
 			raise Exception("Permission {} is not related to audit log entries".format(perm.name))
 
@@ -181,7 +181,7 @@ class ForumTopic(db.Model):
 			raise Exception("Unknown permission given to ForumTopic.check_perm()")
 
 		if perm == Permission.TOPIC_DISCARD:
-			return self.author == user or user.rank.atLeast(UserRank.EDITOR)
+			return self.author == user or user.rank.at_least(UserRank.EDITOR)
 
 		else:
 			raise Exception("Permission {} is not related to topics".format(perm.name))

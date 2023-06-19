@@ -147,10 +147,10 @@
 										{{ _("Statistics") }}
 									</a>
 								</li>
-								{% if current_user.rank.atLeast(current_user.rank.EDITOR) or check_global_perm(current_user, "CREATE_TAG") %}
+								{% if current_user.rank.at_least(current_user.rank.EDITOR) or check_global_perm(current_user, "CREATE_TAG") %}
 									<li class="dropdown-divider"></li>
 								{% endif %}
-								{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+								{% if current_user.rank.at_least(current_user.rank.MODERATOR) %}
 									<li class="nav-item">
 										<a class="nav-link" href="{{ url_for('admin.audit') }}">
 											{{ _("Audit Log") }}
@@ -164,7 +164,7 @@
 										{% endif %}
 									{% endif %}
 								{% endif %}
-								{% if current_user.rank.atLeast(current_user.rank.EDITOR) %}
+								{% if current_user.rank.at_least(current_user.rank.EDITOR) %}
 									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.restore') }}">{{ _("Restore Package") }}</a></li>
 								{% endif %}
 								{% if check_global_perm(current_user, "EDIT_TAGS") %}

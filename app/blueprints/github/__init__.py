@@ -24,7 +24,7 @@ from flask_login import current_user
 from sqlalchemy import func, or_, and_
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission, AuditSeverity, PackageState
-from app.utils import abs_url_for, addAuditLog, login_user_set_active
+from app.utils import abs_url_for, add_audit_log, login_user_set_active
 from app.blueprints.api.support import error, api_create_vcs_release
 import hmac, requests
 
@@ -76,8 +76,8 @@ def callback(oauth_token):
 			flash(gettext("Authorization failed [err=gh-login-failed]"), "danger")
 			return redirect(url_for("users.login"))
 
-		addAuditLog(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",
-				url_for("users.profile", username=userByGithub.username))
+		add_audit_log(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",
+					  url_for("users.profile", username=userByGithub.username))
 		db.session.commit()
 		return ret
 

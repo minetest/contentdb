@@ -23,15 +23,15 @@ from urllib.parse import urljoin
 from app.models import User, db, PackageType, ForumTopic
 from app.tasks import celery
 from app.utils import is_username_valid
-from app.utils.phpbbparser import getProfile, getTopicsFromForum
+from app.utils.phpbbparser import get_profile, get_topics_from_forum
 from .usertasks import set_profile_picture_from_url
 
 
 @celery.task()
-def checkForumAccount(forums_username):
+def check_forum_account(forums_username):
 	print("### Checking " + forums_username, file=sys.stderr)
 	try:
-		profile = getProfile("https://forum.minetest.net", forums_username)
+		profile = get_profile("https://forum.minetest.net", forums_username)
 	except OSError as e:
 		print(e, file=sys.stderr)
 		return
@@ -42,7 +42,7 @@ def checkForumAccount(forums_username):
 	user = User.query.filter_by(forums_username=forums_username).first()
 
 	# Create user
-	needsSaving = False
+	needs_saving = False
 	if user is None:
 		user = User(forums_username)
 		user.forums_username = forums_username
@@ -53,14 +53,14 @@ def checkForumAccount(forums_username):
 	if github_username is not None and github_username.strip() != "":
 		print("Updated GitHub username for " + user.display_name + " to " + github_username)
 		user.github_username = github_username
-		needsSaving = True
+		needs_saving = True
 
 	pic = profile.avatar
 	if pic and pic.startswith("http"):
 		pic = None
 
 	# Save
-	if needsSaving:
+	if needs_saving:
 		db.session.commit()
 
 	if pic:
@@ -74,21 +74,21 @@ def checkForumAccount(forums_username):
 			print(f"####### Queueing", file=sys.stderr)
 			set_profile_picture_from_url.delay(user.username, pic)
 
-	return needsSaving
+	return needs_saving
 
 
 @celery.task()
-def checkAllForumAccounts():
+def check_all_forum_accounts():
 	query = User.query.filter(User.forums_username.isnot(None))
 	for user in query.all():
-		checkForumAccount(user.forums_username)
+		check_forum_account(user.forums_username)
 
 
 regex_tag    = re.compile(r"\[([a-z0-9_]+)\]")
 BANNED_NAMES = ["mod", "game", "old", "outdated", "wip", "api", "beta", "alpha", "git"]
 
 
-def getNameFromTaglist(taglist):
+def get_name_from_taglist(taglist):
 	for tag in reversed(regex_tag.findall(taglist)):
 		if len(tag) < 30 and not tag in BANNED_NAMES and \
 				not re.match(r"^[a-z]?[0-9]+$", tag):
@@ -100,15 +100,16 @@ def getNameFromTaglist(taglist):
 regex_title = re.compile(r"^((?:\[[^\]]+\] *)*)([^\[]+) *((?:\[[^\]]+\] *)*)[^\[]*$")
 
 
-def parseTitle(title):
+def parse_title(title):
 	m = regex_title.match(title)
 	if m is None:
 		print("Invalid title format: " + title)
-		return title, getNameFromTaglist(title)
+		return title, get_name_from_taglist(title)
 	else:
-		return m.group(2).strip(), getNameFromTaglist(m.group(3))
+		return m.group(2).strip(), get_name_from_taglist(m.group(3))
 
-def getLinksFromModSearch():
+
+def get_links_from_mod_search():
 	links = {}
 
 	try:
@@ -127,15 +128,16 @@ def getLinksFromModSearch():
 
 	return links
 
+
 @celery.task()
-def importTopicList():
-	links_by_id = getLinksFromModSearch()
+def import_topic_list():
+	links_by_id = get_links_from_mod_search()
 
 	info_by_id = {}
-	getTopicsFromForum(11, out=info_by_id, extra={ 'type': PackageType.MOD,  'wip': False })
-	getTopicsFromForum(9,  out=info_by_id, extra={ 'type': PackageType.MOD,  'wip': True  })
-	getTopicsFromForum(15, out=info_by_id, extra={ 'type': PackageType.GAME, 'wip': False })
-	getTopicsFromForum(50, out=info_by_id, extra={ 'type': PackageType.GAME, 'wip': True  })
+	get_topics_from_forum(11, out=info_by_id, extra={'type': PackageType.MOD, 'wip': False})
+	get_topics_from_forum(9, out=info_by_id, extra={'type': PackageType.MOD, 'wip': True})
+	get_topics_from_forum(15, out=info_by_id, extra={'type': PackageType.GAME, 'wip': False})
+	get_topics_from_forum(50, out=info_by_id, extra={'type': PackageType.GAME, 'wip': True})
 
 	# Caches
 	username_to_user = {}
@@ -182,7 +184,7 @@ def importTopicList():
 			db.session.add(topic)
 
 		# Parse title
-		title, name = parseTitle(info["title"])
+		title, name = parse_title(info["title"])
 
 		# Get link
 		link = links_by_id.get(id)

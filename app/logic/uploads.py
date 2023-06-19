@@ -21,7 +21,7 @@ from flask_babel import lazy_gettext
 
 from app import app
 from app.logic.LogicError import LogicError
-from app.utils import randomString
+from app.utils import random_string
 
 
 def get_extension(filename):
@@ -59,7 +59,7 @@ def upload_file(file, file_type, file_type_desc):
 
 	file.stream.seek(0)
 
-	filename = randomString(10) + "." + ext
+	filename = random_string(10) + "." + ext
 	filepath = os.path.join(app.config["UPLOAD_DIR"], filename)
 	file.save(filepath)
 

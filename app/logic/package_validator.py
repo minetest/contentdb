@@ -22,6 +22,7 @@ from sqlalchemy import and_, or_
 
 from app.models import Package, PackageType, PackageState, PackageRelease
 
+
 ValidationError = namedtuple("ValidationError", "status message")
 
 

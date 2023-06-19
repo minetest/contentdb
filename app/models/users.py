@@ -37,7 +37,7 @@ class UserRank(enum.Enum):
 	MODERATOR      = 8
 	ADMIN          = 9
 
-	def atLeast(self, min):
+	def at_least(self, min):
 		return self.value >= min.value
 
 	def get_title(self):
@@ -101,10 +101,10 @@ class Permission(enum.Enum):
 				self == Permission.APPROVE_RELEASE    or \
 				self == Permission.APPROVE_SCREENSHOT or \
 				self == Permission.SEE_THREAD:
-			return user.rank.atLeast(UserRank.APPROVER)
+			return user.rank.at_least(UserRank.APPROVER)
 
 		elif self == Permission.EDIT_TAGS or self == Permission.CREATE_TAG:
-			return user.rank.atLeast(UserRank.EDITOR)
+			return user.rank.at_least(UserRank.EDITOR)
 
 		else:
 			raise Exception("Non-global permission checked globally. Use Package.check_perm or User.check_perm instead.")
@@ -234,20 +234,20 @@ class User(db.Model, UserMixin):
 
 		# Members can edit their own packages, and editors can edit any packages
 		if perm == Permission.CHANGE_AUTHOR:
-			return user.rank.atLeast(UserRank.EDITOR)
+			return user.rank.at_least(UserRank.EDITOR)
 		elif perm == Permission.CHANGE_USERNAMES:
-			return user.rank.atLeast(UserRank.MODERATOR)
+			return user.rank.at_least(UserRank.MODERATOR)
 		elif perm == Permission.CHANGE_RANK:
-			return user.rank.atLeast(UserRank.MODERATOR) and not self.rank.atLeast(user.rank)
+			return user.rank.at_least(UserRank.MODERATOR) and not self.rank.at_least(user.rank)
 		elif perm == Permission.CHANGE_EMAIL or perm == Permission.CHANGE_PROFILE_URLS:
-			return user == self or (user.rank.atLeast(UserRank.MODERATOR) and not self.rank.atLeast(user.rank))
+			return user == self or (user.rank.at_least(UserRank.MODERATOR) and not self.rank.at_least(user.rank))
 		elif perm == Permission.CHANGE_DISPLAY_NAME:
-			return user.rank.atLeast(UserRank.NEW_MEMBER if user == self else UserRank.MODERATOR)
+			return user.rank.at_least(UserRank.NEW_MEMBER if user == self else UserRank.MODERATOR)
 		elif perm == Permission.CREATE_TOKEN:
 			if user == self:
-				return user.rank.atLeast(UserRank.NEW_MEMBER)
+				return user.rank.at_least(UserRank.NEW_MEMBER)
 			else:
-				return user.rank.atLeast(UserRank.MODERATOR) and user.rank.atLeast(self.rank)
+				return user.rank.at_least(UserRank.MODERATOR) and user.rank.at_least(self.rank)
 		else:
 			raise Exception("Permission {} is not related to users".format(perm.name))
 
@@ -255,11 +255,11 @@ class User(db.Model, UserMixin):
 		from app.models import ThreadReply
 
 		factor = 1
-		if self.rank.atLeast(UserRank.ADMIN):
+		if self.rank.at_least(UserRank.ADMIN):
 			return True
-		elif self.rank.atLeast(UserRank.TRUSTED_MEMBER):
+		elif self.rank.at_least(UserRank.TRUSTED_MEMBER):
 			factor = 3
-		elif self.rank.atLeast(UserRank.MEMBER):
+		elif self.rank.at_least(UserRank.MEMBER):
 			factor = 2
 
 		one_min_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=1)
@@ -278,11 +278,11 @@ class User(db.Model, UserMixin):
 		from app.models import Thread
 
 		factor = 1
-		if self.rank.atLeast(UserRank.ADMIN):
+		if self.rank.at_least(UserRank.ADMIN):
 			return True
-		elif self.rank.atLeast(UserRank.TRUSTED_MEMBER):
+		elif self.rank.at_least(UserRank.TRUSTED_MEMBER):
 			factor = 5
-		elif self.rank.atLeast(UserRank.MEMBER):
+		elif self.rank.at_least(UserRank.MEMBER):
 			factor = 2
 
 		hour_ago = datetime.datetime.utcnow() - datetime.timedelta(hours=1)
@@ -293,9 +293,9 @@ class User(db.Model, UserMixin):
 		from app.models import PackageReview
 
 		factor = 1
-		if self.rank.atLeast(UserRank.ADMIN):
+		if self.rank.at_least(UserRank.ADMIN):
 			return True
-		elif self.rank.atLeast(UserRank.TRUSTED_MEMBER):
+		elif self.rank.at_least(UserRank.TRUSTED_MEMBER):
 			factor *= 5
 
 		five_mins_ago = datetime.datetime.utcnow() - datetime.timedelta(minutes=5)
