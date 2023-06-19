@@ -334,7 +334,7 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
         * `author`: filter by review author username
         * `rating`: 1 for negative, 3 for neutral, 5 for positive
         * `is_positive`: true or false. Default: null
-        * `q`: filter by title (case insensitive, no fulltext search)
+        * `q`: filter by title (case-insensitive, no fulltext search)
 
 Example:
 

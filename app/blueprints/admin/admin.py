@@ -22,7 +22,7 @@ from wtforms.validators import InputRequired, Length
 from app.utils import rank_required, addAuditLog, addNotification, get_system_user
 from . import bp
 from .actions import actions
-from ...models import UserRank, Package, db, PackageState, User, AuditSeverity, NotificationType
+from app.models import UserRank, Package, db, PackageState, User, AuditSeverity, NotificationType
 
 
 @bp.route("/admin/", methods=["GET", "POST"])

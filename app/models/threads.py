@@ -68,7 +68,7 @@ class Thread(db.Model):
 
 	def get_view_url(self, absolute=False):
 		if absolute:
-			from ..utils import abs_url_for
+			from app.utils import abs_url_for
 			return abs_url_for("threads.view", id=self.id)
 		else:
 			return url_for("threads.view", id=self.id, _external=False)

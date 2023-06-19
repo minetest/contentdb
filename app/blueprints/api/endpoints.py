@@ -35,7 +35,7 @@ from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
 	api_order_screenshots, api_edit_package, api_set_cover_image
-from ...utils.minetest_hypertext import html_to_minetest
+from app.utils.minetest_hypertext import html_to_minetest
 
 
 def cors_allowed(f):
@@ -65,15 +65,15 @@ def cached(max_age: int):
 @cors_allowed
 @cached(300)
 def packages():
-	qb    = QueryBuilder(request.args)
+	qb = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 
 	if request.args.get("fmt") == "keys":
-		return jsonify([package.as_key_dict() for package in query.all()])
+		return jsonify([pkg.as_key_dict() for pkg in query.all()])
 
 	pkgs = qb.convertToDictionary(query.all())
 	if "engine_version" in request.args or "protocol_version" in request.args:
-		pkgs = [package for package in pkgs if package.get("release")]
+		pkgs = [pkg for pkg in pkgs if pkg.get("release")]
 
 	# Promote featured packages
 	if "sort" not in request.args and "order" not in request.args and "q" not in request.args:
@@ -92,7 +92,7 @@ def packages():
 @bp.route("/api/packages/<author>/<name>/")
 @is_package_page
 @cors_allowed
-def package(package):
+def package_view(package):
 	return jsonify(package.as_dict(current_app.config["BASE_URL"]))
 
 
@@ -119,12 +119,12 @@ def edit_package(token, package):
 
 
 def resolve_package_deps(out, package, only_hard, depth=1):
-	id = package.get_id()
-	if id in out:
+	id_ = package.get_id()
+	if id_ in out:
 		return
 
 	ret = []
-	out[id] = ret
+	out[id_] = ret
 
 	if package.type != PackageType.MOD:
 		return
@@ -173,8 +173,8 @@ def package_dependencies(package):
 @bp.route("/api/topics/")
 @cors_allowed
 def topics():
-	qb     = QueryBuilder(request.args)
-	query  = qb.buildTopicQuery(show_added=True)
+	qb = QueryBuilder(request.args)
+	query = qb.buildTopicQuery(show_added=True)
 	return jsonify([t.as_dict() for t in query.all()])
 
 
@@ -285,8 +285,8 @@ def create_release(token, package):
 @bp.route("/api/packages/<author>/<name>/releases/<int:id>/")
 @is_package_page
 @cors_allowed
-def release(package: Package, id: int):
-	release = PackageRelease.query.get(id)
+def release_view(package: Package, id_: int):
+	release = PackageRelease.query.get(id_)
 	if release is None or release.package != package:
 		error(404, "Release not found")
 
@@ -298,15 +298,15 @@ def release(package: Package, id: int):
 @is_package_page
 @is_api_authd
 @cors_allowed
-def delete_release(token: APIToken, package: Package, id: int):
-	release = PackageRelease.query.get(id)
+def delete_release(token: APIToken, package: Package, id_: int):
+	release = PackageRelease.query.get(id_)
 	if release is None or release.package != package:
 		error(404, "Release not found")
 
 	if not token:
 		error(401, "Authentication needed")
 
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	if not release.check_perm(token.owner, Permission.DELETE_RELEASE):
@@ -352,8 +352,8 @@ def create_screenshot(token: APIToken, package: Package):
 @bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/")
 @is_package_page
 @cors_allowed
-def screenshot(package, id):
-	ss = PackageScreenshot.query.get(id)
+def screenshot(package, id_):
+	ss = PackageScreenshot.query.get(id_)
 	if ss is None or ss.package != package:
 		error(404, "Screenshot not found")
 
@@ -365,8 +365,8 @@ def screenshot(package, id):
 @is_package_page
 @is_api_authd
 @cors_allowed
-def delete_screenshot(token: APIToken, package: Package, id: int):
-	ss = PackageScreenshot.query.get(id)
+def delete_screenshot(token: APIToken, package: Package, id_: int):
+	ss = PackageScreenshot.query.get(id_)
 	if ss is None or ss.package != package:
 		error(404, "Screenshot not found")
 
@@ -376,7 +376,7 @@ def delete_screenshot(token: APIToken, package: Package, id: int):
 	if not package.check_perm(token.owner, Permission.ADD_SCREENSHOTS):
 		error(403, "You do not have the permission to delete screenshots")
 
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	if package.cover_image == ss:
@@ -401,7 +401,7 @@ def order_screenshots(token: APIToken, package: Package):
 	if not package.check_perm(token.owner, Permission.ADD_SCREENSHOTS):
 		error(403, "You do not have the permission to change screenshots")
 
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	json = request.json
@@ -423,7 +423,7 @@ def set_cover_image(token: APIToken, package: Package):
 	if not package.check_perm(token.owner, Permission.ADD_SCREENSHOTS):
 		error(403, "You do not have the permission to change screenshots")
 
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	json = request.json
@@ -498,7 +498,7 @@ def all_package_stats():
 @cors_allowed
 @cached(300)
 def package_scores():
-	qb    = QueryBuilder(request.args)
+	qb = QueryBuilder(request.args)
 	query = qb.buildPackageQuery()
 
 	pkgs = [package.as_score_dict() for package in query.all()]
@@ -520,19 +520,19 @@ def content_warnings():
 @bp.route("/api/licenses/")
 @cors_allowed
 def licenses():
-	return jsonify([ { "name": license.name, "is_foss": license.is_foss } \
-		for license in License.query.order_by(db.asc(License.name)).all() ])
+	all_licenses = License.query.order_by(db.asc(License.name)).all()
+	return jsonify([{"name": license.name, "is_foss": license.is_foss} for license in all_licenses])
 
 
 @bp.route("/api/homepage/")
 @cors_allowed
 def homepage():
-	query   = Package.query.filter_by(state=PackageState.APPROVED)
-	count   = query.count()
+	query = Package.query.filter_by(state=PackageState.APPROVED)
+	count = query.count()
 
 	spotlight = query.filter(Package.tags.any(name="spotlight")).order_by(
 			func.random()).limit(6).all()
-	new     = query.order_by(db.desc(Package.approved_at)).limit(4).all()
+	new = query.order_by(db.desc(Package.approved_at)).limit(4).all()
 	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
 	pop_gam = query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(8).all()
 	pop_txp = query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score)).limit(8).all()
@@ -548,19 +548,19 @@ def homepage():
 	downloads_result = db.session.query(func.sum(Package.downloads)).one_or_none()
 	downloads = 0 if not downloads_result or not downloads_result[0] else downloads_result[0]
 
-	def mapPackages(packages: List[Package]):
+	def map_packages(packages: List[Package]):
 		return [pkg.as_short_dict(current_app.config["BASE_URL"]) for pkg in packages]
 
 	return jsonify({
 		"count": count,
 		"downloads": downloads,
-		"spotlight": mapPackages(spotlight),
-		"new": mapPackages(new),
-		"updated": mapPackages(updated),
-		"pop_mod": mapPackages(pop_mod),
-		"pop_txp": mapPackages(pop_txp),
-		"pop_game": mapPackages(pop_gam),
-		"high_reviewed": mapPackages(high_reviewed)
+		"spotlight": map_packages(spotlight),
+		"new": map_packages(new),
+		"updated": map_packages(updated),
+		"pop_mod": map_packages(pop_mod),
+		"pop_txp": map_packages(pop_txp),
+		"pop_game": map_packages(pop_gam),
+		"high_reviewed": map_packages(high_reviewed)
 	})
 
 

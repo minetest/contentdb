@@ -129,12 +129,13 @@ def _package_list(packages: List[str]):
 
 @action("Send WIP package notification")
 def remind_wip():
-	users = User.query.filter(User.packages.any(or_(Package.state == PackageState.WIP, Package.state == PackageState.CHANGES_NEEDED)))
+	users = User.query.filter(User.packages.any(or_(
+			Package.state == PackageState.WIP, Package.state == PackageState.CHANGES_NEEDED)))
 	system_user = get_system_user()
 	for user in users:
 		packages = db.session.query(Package.title).filter(
 				Package.author_id == user.id,
-				or_(Package.state == PackageState.WIP, Package.state==PackageState.CHANGES_NEEDED)) \
+				or_(Package.state == PackageState.WIP, Package.state == PackageState.CHANGES_NEEDED)) \
 			.all()
 
 		packages = [pkg[0] for pkg in packages]
@@ -200,17 +201,16 @@ def import_licenses():
 	licenses = r.json()["licenses"]
 
 	existing_licenses = {}
-	for license in License.query.all():
-		assert license.name not in renames.keys()
-		existing_licenses[license.name.lower()] = license
+	for license_data in License.query.all():
+		assert license_data.name not in renames.keys()
+		existing_licenses[license_data.name.lower()] = license_data
 
-	for license in licenses:
-		obj = existing_licenses.get(license["licenseId"].lower())
+	for license_data in licenses:
+		obj = existing_licenses.get(license_data["licenseId"].lower())
 		if obj:
-			obj.url = license["reference"]
-		elif license.get("isOsiApproved") and license.get("isFsfLibre") and \
-				not license["isDeprecatedLicenseId"]:
-			obj = License(license["licenseId"], True, license["reference"])
+			obj.url = license_data["reference"]
+		elif license_data.get("isOsiApproved") and license_data.get("isFsfLibre") and not license_data["isDeprecatedLicenseId"]:
+			obj = License(license_data["licenseId"], True, license_data["reference"])
 			db.session.add(obj)
 
 	db.session.commit()
@@ -228,12 +228,12 @@ def delete_inactive_users():
 @action("Send Video URL notification")
 def remind_video_url():
 	users = User.query.filter(User.maintained_packages.any(
-			and_(Package.video_url==None, Package.type==PackageType.GAME, Package.state==PackageState.APPROVED)))
+			and_(Package.video_url == None, Package.type == PackageType.GAME, Package.state == PackageState.APPROVED)))
 	system_user = get_system_user()
 	for user in users:
 		packages = db.session.query(Package.title).filter(
-				or_(Package.author==user, Package.maintainers.contains(user)),
-				Package.video_url==None,
+				or_(Package.author == user, Package.maintainers.contains(user)),
+				Package.video_url == None,
 				Package.type == PackageType.GAME,
 				Package.state == PackageState.APPROVED) \
 			.all()
@@ -341,7 +341,7 @@ def import_screenshots():
 	packages = Package.query \
 		.filter(Package.state != PackageState.DELETED) \
 		.outerjoin(PackageScreenshot, Package.id == PackageScreenshot.package_id) \
-		.filter(PackageScreenshot.id==None) \
+		.filter(PackageScreenshot.id == None) \
 		.all()
 	for package in packages:
 		importRepoScreenshot.delay(package.id)

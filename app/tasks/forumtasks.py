@@ -14,14 +14,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import json
+import re
+import sys
+import urllib.request
+from urllib.parse import urljoin
 
-import json, re, sys
-from app.models import *
+from app.models import User, db, PackageType, ForumTopic
 from app.tasks import celery
 from app.utils import is_username_valid
 from app.utils.phpbbparser import getProfile, getTopicsFromForum
-import urllib.request
-from urllib.parse import urljoin
 from .usertasks import set_profile_picture_from_url
 
 
@@ -84,6 +86,8 @@ def checkAllForumAccounts():
 
 regex_tag    = re.compile(r"\[([a-z0-9_]+)\]")
 BANNED_NAMES = ["mod", "game", "old", "outdated", "wip", "api", "beta", "alpha", "git"]
+
+
 def getNameFromTaglist(taglist):
 	for tag in reversed(regex_tag.findall(taglist)):
 		if len(tag) < 30 and not tag in BANNED_NAMES and \
@@ -92,7 +96,10 @@ def getNameFromTaglist(taglist):
 
 	return None
 
+
 regex_title = re.compile(r"^((?:\[[^\]]+\] *)*)([^\[]+) *((?:\[[^\]]+\] *)*)[^\[]*$")
+
+
 def parseTitle(title):
 	m = regex_title.match(title)
 	if m is None:

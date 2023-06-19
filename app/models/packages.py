@@ -27,7 +27,7 @@ from sqlalchemy.dialects.postgresql import insert
 
 from . import db
 from .users import Permission, UserRank, User
-from .. import app
+from app import app
 
 
 class PackageQuery(BaseQuery, SearchQueryMixin):

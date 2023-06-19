@@ -15,16 +15,18 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import datetime
+import os
+import redis
 
-from flask import *
-from flask_gravatar import Gravatar
-from flask_mail import Mail
-from flask_github import GitHub
-from flask_wtf.csrf import CSRFProtect
-from flask_flatpages import FlatPages
+from flask import redirect, url_for, render_template, flash, request, Flask, send_from_directory, make_response
 from flask_babel import Babel, gettext
+from flask_flatpages import FlatPages
+from flask_github import GitHub
+from flask_gravatar import Gravatar
 from flask_login import logout_user, current_user, LoginManager
-import os, redis
+from flask_mail import Mail
+from flask_wtf.csrf import CSRFProtect
+
 from app.markdown import init_markdown, MARKDOWN_EXTENSIONS, MARKDOWN_EXTENSION_CONFIG
 
 app = Flask(__name__, static_folder="public/static")

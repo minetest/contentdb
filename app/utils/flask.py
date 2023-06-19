@@ -14,15 +14,16 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import datetime
 import typing
 from urllib.parse import urljoin, urlparse, urlunparse
 
 import user_agents
-from flask import request, abort
-from flask_babel import LazyString
+from flask import request, abort, url_for
+from flask_babel import LazyString, lazy_gettext
 from werkzeug.datastructures import MultiDict
 
-from app.models import *
+from app import app
 
 
 def is_safe_url(target):
@@ -136,7 +137,7 @@ def get_request_date(key: str) -> typing.Optional[datetime.date]:
 		abort(400)
 
 
-def get_daterange_options() -> List[Tuple[LazyString, str]]:
+def get_daterange_options() -> typing.List[typing.Tuple[LazyString, str]]:
 	now = datetime.datetime.utcnow().date()
 	days7 = (datetime.datetime.utcnow() - datetime.timedelta(days=7)).date()
 	days30 = (datetime.datetime.utcnow() - datetime.timedelta(days=30)).date()

@@ -19,8 +19,8 @@ from flask import render_template, redirect, request, session, url_for, abort
 from flask_babel import lazy_gettext
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
-from wtforms import *
-from wtforms.validators import *
+from wtforms import StringField, SubmitField
+from wtforms.validators import InputRequired, Length
 from wtforms_sqlalchemy.fields import QuerySelectField
 
 from app.models import db, User, APIToken, Permission

@@ -47,7 +47,7 @@ class APIToken(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
 	package    = db.relationship("Package", foreign_keys=[package_id], back_populates="tokens")
 
-	def canOperateOnPackage(self, package):
+	def can_operate_on_package(self, package):
 		if self.package and self.package != package:
 			return False
 
@@ -146,7 +146,7 @@ class ForumTopic(db.Model):
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
-	def getRepoURL(self):
+	def get_repo_url(self):
 		if self.link is None:
 			return None
 

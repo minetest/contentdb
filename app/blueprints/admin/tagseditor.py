@@ -22,8 +22,8 @@ from wtforms import StringField, TextAreaField, BooleanField, SubmitField
 from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from . import bp
-from ...models import Permission, Tag, db, AuditSeverity
-from ...utils import addAuditLog
+from app.models import Permission, Tag, db, AuditSeverity
+from app.utils import addAuditLog
 
 
 @bp.route("/tags/")
@@ -45,7 +45,8 @@ def tag_list():
 class TagForm(FlaskForm):
 	title = StringField("Title", [InputRequired(), Length(3, 100)])
 	description = TextAreaField("Description", [Optional(), Length(0, 500)])
-	name = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0, "Lower case letters (a-z), digits (0-9), and underscores (_) only")])
+	name = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0,
+			"Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	is_protected = BooleanField("Is Protected")
 	submit = SubmitField("Save")
 
@@ -63,7 +64,7 @@ def create_edit_tag(name=None):
 	if not Permission.check_perm(current_user, Permission.EDIT_TAGS if tag else Permission.CREATE_TAG):
 		abort(403)
 
-	form = TagForm( obj=tag)
+	form = TagForm(obj=tag)
 	if form.validate_on_submit():
 		if tag is None:
 			tag = Tag(form.title.data)

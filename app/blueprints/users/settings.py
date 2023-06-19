@@ -1,12 +1,29 @@
-from flask import *
-from flask_babel import gettext, get_locale
+# ContentDB
+# Copyright (C) 2023 rubenwardy
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+from flask import redirect, abort, render_template, request, flash, url_for
+from flask_babel import gettext, get_locale, lazy_gettext
 from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
 from sqlalchemy import or_
-from wtforms import *
-from wtforms.validators import *
+from wtforms import StringField, SubmitField, BooleanField, SelectField
+from wtforms.validators import Length, Optional, Email, URL
 
-from app.models import *
+from app.models import User, AuditSeverity, db, UserRank, PackageAlias, EmailSubscription, UserNotificationPreferences, \
+	UserEmailVerification, Permission, NotificationType, UserBan
 from app.tasks.emails import send_verify_email
 from app.utils import nonEmptyOrNone, addAuditLog, randomString, rank_required, has_blocked_domains
 from . import bp
@@ -309,9 +326,9 @@ def modtools(username):
 			user.github_username = nonEmptyOrNone(form.github_username.data)
 
 		if user.check_perm(current_user, Permission.CHANGE_RANK):
-			newRank = form["rank"].data
-			if current_user.rank.atLeast(newRank):
-				if newRank != user.rank:
+			new_rank = form["rank"].data
+			if current_user.rank.atLeast(new_rank):
+				if new_rank != user.rank:
 					user.rank = form["rank"].data
 					msg = "Set rank of {} to {}".format(user.display_name, user.rank.get_title())
 					addAuditLog(AuditSeverity.MODERATION, current_user, msg,

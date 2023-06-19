@@ -13,27 +13,31 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-from json import JSONDecodeError
 
-import gitdb
+import datetime
 import json
 import os
 import shutil
+from json import JSONDecodeError
 from zipfile import ZipFile
 
+import gitdb
+from flask import url_for
 from git import GitCommandError
 from git_archive_all import GitArchiver
 from kombu import uuid
 
-from app.models import *
+from app.models import AuditSeverity, db, NotificationType, PackageRelease, MetaPackage, Dependency, PackageType, \
+	MinetestRelease, Package, PackageState, PackageScreenshot, PackageUpdateTrigger, PackageUpdateConfig
 from app.tasks import celery, TaskError
 from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog, get_games_from_csv
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
-from ..logic.LogicError import LogicError
-from ..logic.game_support import GameSupportResolver
-from ..logic.packages import do_edit_package, ALIASES
-from ..utils.image import get_image_size
+from app import app
+from app.logic.LogicError import LogicError
+from app.logic.game_support import GameSupportResolver
+from app.logic.packages import do_edit_package, ALIASES
+from app.utils.image import get_image_size
 
 
 @celery.task()
@@ -51,7 +55,7 @@ def getMeta(urlstr, author):
 
 		result["forums"] = result.get("forumId")
 
-		readme_path = tree.getReadMePath()
+		readme_path = tree.get_readme_path()
 		if readme_path:
 			with open(readme_path, "r") as f:
 				result["long_description"] = f.read()
@@ -96,11 +100,11 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 		def getMetaPackages(names):
 			return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
 
-		provides = tree.getModNames()
+		provides = tree.get_mod_names()
 
 		package = release.package
 		package.provides.clear()
-		package.provides.extend(getMetaPackages(tree.getModNames()))
+		package.provides.extend(getMetaPackages(tree.get_mod_names()))
 
 		# Delete all mod name dependencies
 		package.dependencies.filter(Dependency.meta_package != None).delete()

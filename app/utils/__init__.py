@@ -18,14 +18,12 @@ import re
 import secrets
 from typing import Dict
 
-import typing
-
 import deep_compare
+from flask import current_app
 
 from .flask import *
 from .models import *
 from .user import *
-from flask import current_app
 
 YESES = ["yes", "true", "1", "on"]
 

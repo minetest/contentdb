@@ -14,19 +14,19 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-from flask import *
-from flask_babel import gettext, lazy_gettext
+from flask import render_template, request, redirect, flash, url_for, abort
+from flask_babel import lazy_gettext, gettext
+from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
-from flask_login import login_required
-from wtforms import *
+from wtforms import StringField, SubmitField, BooleanField, FileField
+from wtforms.validators import InputRequired, Length, DataRequired, Optional
 from wtforms_sqlalchemy.fields import QuerySelectField
-from wtforms.validators import *
 
-from app.utils import *
-from . import bp, get_package_tabs
 from app.logic.LogicError import LogicError
 from app.logic.screenshots import do_create_screenshot, do_order_screenshots
+from . import bp, get_package_tabs
+from app.models import Permission, db, PackageScreenshot
+from app.utils import is_package_page
 
 
 class CreateScreenshotForm(FlaskForm):
@@ -100,23 +100,23 @@ def edit_screenshot(package, id):
 	if screenshot is None or screenshot.package != package:
 		abort(404)
 
-	canEdit	= package.check_perm(current_user, Permission.ADD_SCREENSHOTS)
-	canApprove = package.check_perm(current_user, Permission.APPROVE_SCREENSHOT)
-	if not (canEdit or canApprove):
+	can_edit = package.check_perm(current_user, Permission.ADD_SCREENSHOTS)
+	can_approve = package.check_perm(current_user, Permission.APPROVE_SCREENSHOT)
+	if not (can_edit or can_approve):
 		return redirect(package.get_url("packages.screenshots"))
 
 	# Initial form class from post data and default data
 	form = EditScreenshotForm(obj=screenshot)
 	if form.validate_on_submit():
-		wasApproved = screenshot.approved
+		was_approved = screenshot.approved
 
-		if canEdit:
+		if can_edit:
 			screenshot.title = form["title"].data or "Untitled"
 
-		if canApprove:
+		if can_approve:
 			screenshot.approved = form["approved"].data
 		else:
-			screenshot.approved = wasApproved
+			screenshot.approved = was_approved
 
 		db.session.commit()
 		return redirect(package.get_url("packages.screenshots"))

@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from flask_babel import gettext
 
 from . import bp
@@ -58,7 +59,7 @@ def claim_forums():
 		session["forum_token"] = token
 
 	if request.method == "POST":
-		ctype	= request.form.get("claim_type")
+		ctype = request.form.get("claim_type")
 		username = request.form.get("username")
 
 		if not is_username_valid(username):

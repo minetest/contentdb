@@ -15,14 +15,14 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 
-from flask import redirect, render_template, abort, url_for, request, flash
+from flask import redirect, render_template, abort, url_for, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
 from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from app.utils import rank_required
 from . import bp
-from ...models import UserRank, ContentWarning, db
+from app.models import UserRank, ContentWarning, db
 
 
 @bp.route("/admin/warnings/")

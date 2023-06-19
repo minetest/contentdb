@@ -14,19 +14,20 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
-from flask import *
-from flask_babel import gettext, lazy_gettext
-from flask_login import login_required
+from flask import render_template, request, redirect, flash, url_for, abort
+from flask_babel import lazy_gettext, gettext
+from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
-from wtforms import *
+from wtforms import StringField, SubmitField, BooleanField, RadioField, FileField
+from wtforms.validators import InputRequired, Length, Optional
 from wtforms_sqlalchemy.fields import QuerySelectField
-from wtforms.validators import *
 
 from app.logic.releases import do_create_vcs_release, LogicError, do_create_zip_release
+from app.models import Package, db, User, PackageState, Permission, UserRank, PackageDailyStats, MinetestRelease, \
+	PackageRelease, PackageUpdateTrigger, PackageUpdateConfig
 from app.rediscache import has_key, set_key, make_download_key
 from app.tasks.importtasks import check_update_config
-from app.utils import *
+from app.utils import is_user_bot, is_package_page, nonEmptyOrNone
 from . import bp, get_package_tabs
 
 

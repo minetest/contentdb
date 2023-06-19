@@ -23,13 +23,14 @@ from wtforms.validators import InputRequired, Length
 
 from app.utils import rank_required, addAuditLog
 from . import bp
-from ...models import UserRank, MinetestRelease, db, AuditSeverity
+from app.models import UserRank, MinetestRelease, db, AuditSeverity
 
 
 @bp.route("/versions/")
 @rank_required(UserRank.MODERATOR)
 def version_list():
-	return render_template("admin/versions/list.html", versions=MinetestRelease.query.order_by(db.asc(MinetestRelease.id)).all())
+	return render_template("admin/versions/list.html",
+			versions=MinetestRelease.query.order_by(db.asc(MinetestRelease.id)).all())
 
 
 class VersionForm(FlaskForm):

@@ -1,8 +1,25 @@
+# ContentDB
+# Copyright (C) 2018-23 rubenwardy
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 from flask import Blueprint, render_template, redirect
+
+from app.models import Package, PackageReview, Thread, User, PackageState, db, PackageType, PackageRelease, Tags, Tag
 
 bp = Blueprint("homepage", __name__)
 
-from app.models import *
 from sqlalchemy.orm import joinedload, subqueryload
 from sqlalchemy.sql.expression import func
 
@@ -29,12 +46,12 @@ def home():
 			joinedload(PackageReview.package).joinedload(Package.author).load_only(User.username, User.display_name),
 			joinedload(PackageReview.package).load_only(Package.title, Package.name).subqueryload(Package.main_screenshot))
 
-	query   = Package.query.filter_by(state=PackageState.APPROVED)
-	count   = query.count()
+	query = Package.query.filter_by(state=PackageState.APPROVED)
+	count = query.count()
 
 	spotlight_pkgs = query.filter(Package.tags.any(name="spotlight")).order_by(func.random()).limit(6).all()
 
-	new     = package_load(query.order_by(db.desc(Package.approved_at))).limit(4).all()
+	new = package_load(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = package_load(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
 	pop_gam = package_load(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(8).all()
 	pop_txp = package_load(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(8).all()
@@ -58,4 +75,5 @@ def home():
 		.group_by(Tag.id).order_by(db.asc(Tag.title)).all()
 
 	return render_template("index.html", count=count, downloads=downloads, tags=tags, spotlight_pkgs=spotlight_pkgs,
-			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, high_reviewed=high_reviewed, reviews=reviews)
+			new=new, updated=updated, pop_mod=pop_mod, pop_txp=pop_txp, pop_gam=pop_gam, high_reviewed=high_reviewed,
+			reviews=reviews)

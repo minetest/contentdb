@@ -26,6 +26,7 @@ from app.models import APIToken, Package, MinetestRelease, PackageScreenshot
 def error(code: int, msg: str):
 	abort(make_response(jsonify({ "success": False, "error": msg }), code))
 
+
 # Catches LogicErrors and aborts with JSON error
 def guard(f):
 	def ret(*args, **kwargs):
@@ -39,7 +40,7 @@ def guard(f):
 
 def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: str,
 		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason="API"):
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	reason += ", token=" + token.name
@@ -54,8 +55,8 @@ def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: s
 
 
 def api_create_zip_release(token: APIToken, package: Package, title: str, file,
-		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason="API", commit_hash:str=None):
-	if not token.canOperateOnPackage(package):
+		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason="API", commit_hash: str = None):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	reason += ", token=" + token.name
@@ -70,7 +71,7 @@ def api_create_zip_release(token: APIToken, package: Package, title: str, file,
 
 
 def api_create_screenshot(token: APIToken, package: Package, title: str, file, is_cover_image: bool, reason="API"):
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	reason += ", token=" + token.name
@@ -84,7 +85,7 @@ def api_create_screenshot(token: APIToken, package: Package, title: str, file, i
 
 
 def api_order_screenshots(token: APIToken, package: Package, order: [any]):
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	guard(do_order_screenshots)(token.owner, package, order)
@@ -95,7 +96,7 @@ def api_order_screenshots(token: APIToken, package: Package, order: [any]):
 
 
 def api_set_cover_image(token: APIToken, package: Package, cover_image):
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	guard(do_set_cover_image)(token.owner, package, cover_image)
@@ -106,7 +107,7 @@ def api_set_cover_image(token: APIToken, package: Package, cover_image):
 
 
 def api_edit_package(token: APIToken, package: Package, data: dict, reason: str = "API"):
-	if not token.canOperateOnPackage(package):
+	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	reason += ", token=" + token.name

@@ -8,7 +8,8 @@ import urllib.parse as urlparse
 import urllib.request
 from datetime import datetime
 from urllib.parse import urlencode
-from bs4 import *
+
+from bs4 import BeautifulSoup
 
 
 def urlEncodeNonAscii(b):
