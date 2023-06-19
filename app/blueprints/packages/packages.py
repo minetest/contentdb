@@ -671,6 +671,8 @@ def game_support(package):
 	force_game_detection = package.supported_games.filter(and_(
 		PackageGameSupport.confidence > 1, PackageGameSupport.supports == True)).count() == 0
 
+	can_support_all_games = package.type != PackageType.TXP
+
 	can_override = can_edit and current_user not in package.maintainers
 
 	form = GameSupportForm() if can_edit else None
@@ -713,7 +715,8 @@ def game_support(package):
 			else:
 				package.supported_games.filter_by(confidence=1).delete()
 
-		package.supports_all_games = form.supports_all_games.data
+		if can_support_all_games:
+			package.supports_all_games = form.supports_all_games.data
 
 		add_audit_log(AuditSeverity.NORMAL, current_user, "Edited game support", package.get_url("packages.game_support"), package)
 
@@ -744,7 +747,8 @@ def game_support(package):
 
 	return render_template("packages/game_support.html", package=package, form=form,
 			mod_conf_lines=mod_conf_lines, force_game_detection=force_game_detection,
-			tabs=get_package_tabs(current_user, package), current_tab="game_support")
+			can_support_all_games=can_support_all_games, tabs=get_package_tabs(current_user, package),
+			current_tab="game_support")
 
 
 @bp.route("/packages/<author>/<name>/stats/")

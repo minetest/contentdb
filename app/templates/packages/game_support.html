@@ -90,11 +90,17 @@
 				</p>
 			{% endif %}
 
-			{{ render_checkbox_field(form.supports_all_games) }}
-			<p class="text-muted">
-				{{ _("Unless otherwise stated, this package should work with all games.") }}
-				{{ _("You can check this and still specify games in supported_games that you've tested.") }}
-			</p>
+			{{ render_checkbox_field(form.supports_all_games, disabled=not can_support_all_games) }}
+			{% if can_support_all_games %}
+				<p class="text-muted">
+					{{ _("Unless otherwise stated, this package should work with all games.") }}
+					{{ _("You can check this and still specify games in supported_games that you've tested.") }}
+				</p>
+			{% elif package.type.name == "TXP" %}
+				<p class="text-muted">
+					{{ _("It's not possible for texture packs to support all games") }}
+				</p>
+			{% endif %}
 
 			{% if form.supported and form.unsupported %}
 				<h3>
