@@ -26,7 +26,7 @@ from urllib.parse import urlsplit
 from git import GitCommandError
 
 from app.tasks import TaskError
-from app.utils import randomString
+from app.utils import random_string
 
 
 def generate_git_url(urlstr):
@@ -40,7 +40,7 @@ def generate_git_url(urlstr):
 
 @contextlib.contextmanager
 def get_temp_dir():
-	temp = os.path.join(tempfile.gettempdir(), randomString(10))
+	temp = os.path.join(tempfile.gettempdir(), random_string(10))
 	yield temp
 	shutil.rmtree(temp)
 
@@ -50,21 +50,21 @@ def get_temp_dir():
 # Throws `TaskError` on failure.
 # Caller is responsible for deleting returned directory.
 @contextlib.contextmanager
-def clone_repo(urlstr, ref=None, recursive=False):
-	gitDir = os.path.join(tempfile.gettempdir(), randomString(10))
+def clone_repo(url_str, ref=None, recursive=False):
+	git_dir = os.path.join(tempfile.gettempdir(), random_string(10))
 
 	try:
-		gitUrl = generate_git_url(urlstr)
-		print("Cloning from " + gitUrl)
+		git_url = generate_git_url(url_str)
+		print("Cloning from " + git_url)
 
 		if ref is None:
-			repo = git.Repo.clone_from(gitUrl, gitDir,
+			repo = git.Repo.clone_from(git_url, git_dir,
 					progress=None, env=None, depth=1, recursive=recursive, kill_after_timeout=15)
 		else:
 			assert ref != ""
 
-			repo = git.Repo.init(gitDir)
-			origin = repo.create_remote("origin", url=gitUrl)
+			repo = git.Repo.init(git_dir)
+			origin = repo.create_remote("origin", url=git_url)
 			assert origin.exists()
 			origin.fetch()
 			repo.git.checkout(ref)
@@ -72,7 +72,7 @@ def clone_repo(urlstr, ref=None, recursive=False):
 			repo.git.submodule('update', '--init')
 
 		yield repo
-		shutil.rmtree(gitDir)
+		shutil.rmtree(git_dir)
 		return
 
 	except GitCommandError as e:
@@ -83,7 +83,7 @@ def clone_repo(urlstr, ref=None, recursive=False):
 		err = "Unable to find the reference " + (ref or "?") + "\n" + e.stderr
 
 	raise TaskError(err.replace("stderr: ", "") \
-			.replace("Cloning into '" + gitDir + "'...", "") \
+			.replace("Cloning into '" + git_dir + "'...", "") \
 			.strip())
 
 

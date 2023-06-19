@@ -25,7 +25,7 @@ from wtforms.validators import Length, Optional, Email, URL
 from app.models import User, AuditSeverity, db, UserRank, PackageAlias, EmailSubscription, UserNotificationPreferences, \
 	UserEmailVerification, Permission, NotificationType, UserBan
 from app.tasks.emails import send_verify_email
-from app.utils import nonEmptyOrNone, addAuditLog, randomString, rank_required, has_blocked_domains
+from app.utils import nonempty_or_none, add_audit_log, random_string, rank_required, has_blocked_domains
 from . import bp
 
 
@@ -53,7 +53,7 @@ def get_setting_tabs(user):
 		},
 	]
 
-	if current_user.rank.atLeast(UserRank.MODERATOR):
+	if current_user.rank.at_least(UserRank.MODERATOR):
 		ret.append({
 			"id": "modtools",
 			"title": gettext("Moderator Tools"),
@@ -64,7 +64,7 @@ def get_setting_tabs(user):
 
 
 class UserProfileForm(FlaskForm):
-	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[lambda x: nonEmptyOrNone(x.strip())])
+	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[lambda x: nonempty_or_none(x.strip())])
 	website_url = StringField(lazy_gettext("Website URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	donate_url = StringField(lazy_gettext("Donation URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	submit = SubmitField(lazy_gettext("Save"))
@@ -72,8 +72,8 @@ class UserProfileForm(FlaskForm):
 
 def handle_profile_edit(form: UserProfileForm, user: User, username: str):
 	severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
-	addAuditLog(severity, current_user, "Edited {}'s profile".format(user.display_name),
-			url_for("users.profile", username=username))
+	add_audit_log(severity, current_user, "Edited {}'s profile".format(user.display_name),
+				  url_for("users.profile", username=username))
 
 	display_name = form.display_name.data or user.username
 	if user.check_perm(current_user, Permission.CHANGE_DISPLAY_NAME) and \
@@ -95,9 +95,9 @@ def handle_profile_edit(form: UserProfileForm, user: User, username: str):
 		user.display_name = display_name
 
 		severity = AuditSeverity.USER if current_user == user else AuditSeverity.MODERATION
-		addAuditLog(severity, current_user, "Changed display name of {} to {}"
-			.format(user.username, user.display_name),
-				url_for("users.profile", username=username))
+		add_audit_log(severity, current_user, "Changed display name of {} to {}"
+					  .format(user.username, user.display_name),
+					  url_for("users.profile", username=username))
 
 	if user.check_perm(current_user, Permission.CHANGE_PROFILE_URLS):
 		if has_blocked_domains(form.website_url.data, current_user.username, f"{user.username}'s website_url") or \
@@ -167,12 +167,12 @@ def handle_email_notifications(user, prefs: UserNotificationPreferences, is_new,
 				flash(gettext("That email address has been unsubscribed/blacklisted, and cannot be used"), "danger")
 				return
 
-			token = randomString(32)
+			token = random_string(32)
 
 			severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
 
 			msg = "Changed email of {}".format(user.display_name)
-			addAuditLog(severity, current_user, msg, url_for("users.profile", username=user.username))
+			add_audit_log(severity, current_user, msg, url_for("users.profile", username=user.username))
 
 			ver = UserEmailVerification()
 			ver.user = user
@@ -245,19 +245,19 @@ def delete(username):
 	if not user:
 		abort(404)
 
-	if user.rank.atLeast(UserRank.MODERATOR):
+	if user.rank.at_least(UserRank.MODERATOR):
 		flash(gettext("Users with moderator rank or above cannot be deleted"), "danger")
 		return redirect(url_for("users.account", username=username))
 
 	if request.method == "GET":
 		return render_template("users/delete.html", user=user, can_delete=user.can_delete())
 
-	if "delete" in request.form and (user.can_delete() or current_user.rank.atLeast(UserRank.ADMIN)):
+	if "delete" in request.form and (user.can_delete() or current_user.rank.at_least(UserRank.ADMIN)):
 		msg = "Deleted user {}".format(user.username)
 		flash(msg, "success")
-		addAuditLog(AuditSeverity.MODERATION, current_user, msg, None)
+		add_audit_log(AuditSeverity.MODERATION, current_user, msg, None)
 
-		if current_user.rank.atLeast(UserRank.ADMIN):
+		if current_user.rank.at_least(UserRank.ADMIN):
 			for pkg in user.packages.all():
 				pkg.review_thread = None
 				db.session.delete(pkg)
@@ -273,7 +273,7 @@ def delete(username):
 
 		msg = "Deactivated user {}".format(user.username)
 		flash(msg, "success")
-		addAuditLog(AuditSeverity.MODERATION, current_user, msg, None)
+		add_audit_log(AuditSeverity.MODERATION, current_user, msg, None)
 	else:
 		assert False
 
@@ -308,8 +308,8 @@ def modtools(username):
 	form = ModToolsForm(obj=user)
 	if form.validate_on_submit():
 		severity = AuditSeverity.NORMAL if current_user == user else AuditSeverity.MODERATION
-		addAuditLog(severity, current_user, "Edited {}'s account".format(user.display_name),
-				url_for("users.profile", username=username))
+		add_audit_log(severity, current_user, "Edited {}'s account".format(user.display_name),
+					  url_for("users.profile", username=username))
 
 		# Copy form fields to user_profile fields
 		if user.check_perm(current_user, Permission.CHANGE_USERNAMES):
@@ -322,17 +322,17 @@ def modtools(username):
 				user.username = form.username.data
 
 			user.display_name = form.display_name.data
-			user.forums_username = nonEmptyOrNone(form.forums_username.data)
-			user.github_username = nonEmptyOrNone(form.github_username.data)
+			user.forums_username = nonempty_or_none(form.forums_username.data)
+			user.github_username = nonempty_or_none(form.github_username.data)
 
 		if user.check_perm(current_user, Permission.CHANGE_RANK):
 			new_rank = form["rank"].data
-			if current_user.rank.atLeast(new_rank):
+			if current_user.rank.at_least(new_rank):
 				if new_rank != user.rank:
 					user.rank = form["rank"].data
 					msg = "Set rank of {} to {}".format(user.display_name, user.rank.get_title())
-					addAuditLog(AuditSeverity.MODERATION, current_user, msg,
-								url_for("users.profile", username=username))
+					add_audit_log(AuditSeverity.MODERATION, current_user, msg,
+								  url_for("users.profile", username=username))
 			else:
 				flash(gettext("Can't promote a user to a rank higher than yourself!"), "danger")
 
@@ -356,9 +356,9 @@ def modtools_set_email(username):
 	user.email = request.form["email"]
 	user.is_active = False
 
-	token = randomString(32)
-	addAuditLog(AuditSeverity.MODERATION, current_user, f"Set email and sent a password reset on {user.username}",
-			url_for("users.profile", username=user.username), None)
+	token = random_string(32)
+	add_audit_log(AuditSeverity.MODERATION, current_user, f"Set email and sent a password reset on {user.username}",
+				  url_for("users.profile", username=user.username), None)
 
 	ver = UserEmailVerification()
 	ver.user = user
@@ -396,8 +396,8 @@ def modtools_ban(username):
 	else:
 		user.rank = UserRank.BANNED
 
-	addAuditLog(AuditSeverity.MODERATION, current_user, f"Banned {user.username}, expires {user.ban.expires_at or '-'}, message: {message}",
-			url_for("users.profile", username=user.username), None)
+	add_audit_log(AuditSeverity.MODERATION, current_user, f"Banned {user.username}, expires {user.ban.expires_at or '-'}, message: {message}",
+				  url_for("users.profile", username=user.username), None)
 	db.session.commit()
 
 	flash(f"Banned {user.username}", "success")
@@ -420,8 +420,8 @@ def modtools_unban(username):
 	if user.rank == UserRank.BANNED:
 		user.rank = UserRank.MEMBER
 
-	addAuditLog(AuditSeverity.MODERATION, current_user, f"Unbanned {user.username}",
-			url_for("users.profile", username=user.username), None)
+	add_audit_log(AuditSeverity.MODERATION, current_user, f"Unbanned {user.username}",
+				  url_for("users.profile", username=user.username), None)
 	db.session.commit()
 
 	flash(f"Unbanned {user.username}", "success")

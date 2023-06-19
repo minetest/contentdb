@@ -1,6 +1,6 @@
 {% macro render_review_vote(review, current_user, next_url) %}
 	{% set (positive, negative, is_positive) = review.get_totals(current_user) %}
-	<form class="-group" method="post" action="{{ review.getVoteUrl(next_url) }}">
+	<form class="-group" method="post" action="{{ review.get_vote_url(next_url) }}">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 		<div class="btn-group">
 			<button class="btn {% if is_positive == true %}btn-primary{% else %}btn-secondary{% endif %}" name="is_positive" value="yes">

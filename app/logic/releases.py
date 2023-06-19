@@ -23,8 +23,8 @@ from flask_babel import lazy_gettext
 from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
 from app.models import PackageRelease, db, Permission, User, Package, MinetestRelease
-from app.tasks.importtasks import makeVCSRelease, checkZipRelease
-from app.utils import AuditSeverity, addAuditLog, nonEmptyOrNone
+from app.tasks.importtasks import make_vcs_release, check_zip_release
+from app.utils import AuditSeverity, add_audit_log, nonempty_or_none
 
 
 def check_can_create_release(user: User, package: Package):
@@ -54,11 +54,11 @@ def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
 		msg = "Created release {}".format(rel.title)
 	else:
 		msg = "Created release {} ({})".format(rel.title, reason)
-	addAuditLog(AuditSeverity.NORMAL, user, msg, package.get_url("packages.view"), package)
+	add_audit_log(AuditSeverity.NORMAL, user, msg, package.get_url("packages.view"), package)
 
 	db.session.commit()
 
-	makeVCSRelease.apply_async((rel.id, nonEmptyOrNone(ref)), task_id=rel.task_id)
+	make_vcs_release.apply_async((rel.id, nonempty_or_none(ref)), task_id=rel.task_id)
 
 	return rel
 
@@ -89,10 +89,10 @@ def do_create_zip_release(user: User, package: Package, title: str, file,
 		msg = "Created release {}".format(rel.title)
 	else:
 		msg = "Created release {} ({})".format(rel.title, reason)
-	addAuditLog(AuditSeverity.NORMAL, user, msg, package.get_url("packages.view"), package)
+	add_audit_log(AuditSeverity.NORMAL, user, msg, package.get_url("packages.view"), package)
 
 	db.session.commit()
 
-	checkZipRelease.apply_async((rel.id, uploaded_path), task_id=rel.task_id)
+	check_zip_release.apply_async((rel.id, uploaded_path), task_id=rel.task_id)
 
 	return rel

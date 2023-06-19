@@ -19,9 +19,9 @@ from flask_babel import gettext
 from . import bp
 from flask import redirect, render_template, session, request, flash, url_for
 from app.models import db, User, UserRank
-from app.utils import randomString, login_user_set_active, is_username_valid
-from app.tasks.forumtasks import checkForumAccount
-from app.utils.phpbbparser import getProfile
+from app.utils import random_string, login_user_set_active, is_username_valid
+from app.tasks.forumtasks import check_forum_account
+from app.utils.phpbbparser import get_profile
 
 
 @bp.route("/user/claim/", methods=["GET", "POST"])
@@ -42,7 +42,7 @@ def claim_forums():
 			return redirect(url_for("users.claim_forums"))
 
 		user = User.query.filter_by(forums_username=username).first()
-		if user and user.rank.atLeast(UserRank.NEW_MEMBER):
+		if user and user.rank.at_least(UserRank.NEW_MEMBER):
 			flash(gettext("User has already been claimed"), "danger")
 			return redirect(url_for("users.claim_forums"))
 		elif method == "github":
@@ -55,7 +55,7 @@ def claim_forums():
 	if "forum_token" in session:
 		token = session["forum_token"]
 	else:
-		token = randomString(12)
+		token = random_string(12)
 		session["forum_token"] = token
 
 	if request.method == "POST":
@@ -65,17 +65,17 @@ def claim_forums():
 		if not is_username_valid(username):
 			flash(gettext("Invalid username, Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed. Consider contacting an admin"), "danger")
 		elif ctype == "github":
-			task = checkForumAccount.delay(username)
+			task = check_forum_account.delay(username)
 			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.claim_forums", username=username, method="github")))
 		elif ctype == "forum":
 			user = User.query.filter_by(forums_username=username).first()
-			if user is not None and user.rank.atLeast(UserRank.NEW_MEMBER):
+			if user is not None and user.rank.at_least(UserRank.NEW_MEMBER):
 				flash(gettext("That user has already been claimed!"), "danger")
 				return redirect(url_for("users.claim_forums"))
 
 			# Get signature
 			try:
-				profile = getProfile("https://forum.minetest.net", username)
+				profile = get_profile("https://forum.minetest.net", username)
 				sig = profile.signature if profile else None
 			except IOError as e:
 				if hasattr(e, 'message'):

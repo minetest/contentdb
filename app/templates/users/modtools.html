@@ -39,7 +39,7 @@
 	<p class="text-danger">{{ _("Doesn't have password") }}</p>
 {% endif %}
 
-{% if not user.rank.atLeast(current_user.rank) %}
+{% if not user.rank.at_least(current_user.rank) %}
 	<h3>{{ _("Ban") }}</h3>
 	{% if user.ban %}
 		<p>

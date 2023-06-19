@@ -28,8 +28,8 @@
 			{{ _("Report") }}
 		</a>
 
-		{% if current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.MODERATOR) %}
-			{% if not user.rank.atLeast(current_user.rank) %}
+		{% if current_user.is_authenticated and current_user.rank.at_least(current_user.rank.MODERATOR) %}
+			{% if not user.rank.at_least(current_user.rank) %}
 				<a class="btn btn-secondary float-right mr-3" href="{{ url_for('users.modtools', username=user.username) }}">
 					<i class="fas fa-user-shield mr-1"></i>
 					{{ _("Moderator Tools") }}
@@ -164,7 +164,7 @@
 				</div>
 			</div>
 		{% endfor %}
-		{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.ADMIN)) %}
+		{% if current_user == user or (current_user.is_authenticated and current_user.rank.at_least(current_user.rank.ADMIN)) %}
 			{% for medal in medals_locked %}
 				{% set value = medal.progress[0] %}
 				{% set target = medal.progress[1] %}
@@ -202,7 +202,7 @@
 		{{ _("Create package") }}
 	</a>
 {% endif %}
-{% if current_user == user or (current_user.is_authenticated and current_user.rank.atLeast(current_user.rank.EDITOR)) %}
+{% if current_user == user or (current_user.is_authenticated and current_user.rank.at_least(current_user.rank.EDITOR)) %}
 	<a class="float-right btn btn-sm btn-secondary mr-2"
 			href="{{ url_for('todo.tags', author=user.username) }}">
 		{{ _("View list of tags") }}

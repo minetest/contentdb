@@ -26,8 +26,8 @@ from wtforms.validators import InputRequired, Length
 from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package, UserRank, \
 	Permission, AuditSeverity, PackageState
 from app.tasks.webhooktasks import post_discord_webhook
-from app.utils import is_package_page, addNotification, get_int_or_abort, isYes, is_safe_url, rank_required, \
-	addAuditLog, has_blocked_domains
+from app.utils import is_package_page, add_notification, get_int_or_abort, is_yes, is_safe_url, rank_required, \
+	add_audit_log, has_blocked_domains
 from . import bp
 
 
@@ -123,8 +123,8 @@ def review(package):
 				notif_msg = "Updated review '{}'".format(form.title.data)
 				type = NotificationType.OTHER
 
-			addNotification(package.maintainers, current_user, type, notif_msg,
-					url_for("threads.view", id=thread.id), package)
+			add_notification(package.maintainers, current_user, type, notif_msg,
+							 url_for("threads.view", id=thread.id), package)
 
 			if was_new:
 				post_discord_webhook.delay(thread.author.username,
@@ -163,11 +163,11 @@ def delete_review(package, reviewer):
 	thread.review = None
 
 	msg = "Converted review by {} to thread".format(review.author.display_name)
-	addAuditLog(AuditSeverity.MODERATION if current_user.username != reviewer else AuditSeverity.NORMAL,
-			current_user, msg, thread.get_view_url(), thread.package)
+	add_audit_log(AuditSeverity.MODERATION if current_user.username != reviewer else AuditSeverity.NORMAL,
+				  current_user, msg, thread.get_view_url(), thread.package)
 
 	notif_msg = "Deleted review '{}', comments were kept as a thread".format(thread.title)
-	addNotification(package.maintainers, current_user, NotificationType.OTHER, notif_msg, url_for("threads.view", id=thread.id), package)
+	add_notification(package.maintainers, current_user, NotificationType.OTHER, notif_msg, url_for("threads.view", id=thread.id), package)
 
 	db.session.delete(review)
 
@@ -191,7 +191,7 @@ def handle_review_vote(package: Package, review_id: int):
 		flash(gettext("You can't vote on your own reviews!"), "danger")
 		return
 
-	is_positive = isYes(request.form["is_positive"])
+	is_positive = is_yes(request.form["is_positive"])
 
 	vote = PackageReviewVote.query.filter_by(review=review, user=current_user).first()
 	if vote is None:

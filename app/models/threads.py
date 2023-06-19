@@ -92,21 +92,21 @@ class Thread(db.Model):
 		if self.package:
 			isMaintainer = isMaintainer or user in self.package.maintainers
 
-		canSee = not self.private or isMaintainer or user.rank.atLeast(UserRank.APPROVER) or user in self.watchers
+		canSee = not self.private or isMaintainer or user.rank.at_least(UserRank.APPROVER) or user in self.watchers
 
 		if perm == Permission.SEE_THREAD:
 			return canSee
 
 		elif perm == Permission.COMMENT_THREAD:
-			return canSee and (not self.locked or user.rank.atLeast(UserRank.MODERATOR))
+			return canSee and (not self.locked or user.rank.at_least(UserRank.MODERATOR))
 
 		elif perm == Permission.LOCK_THREAD:
-			return user.rank.atLeast(UserRank.MODERATOR)
+			return user.rank.at_least(UserRank.MODERATOR)
 
 		elif perm == Permission.DELETE_THREAD:
 			from app.utils.models import get_system_user
 			return (self.author == get_system_user() and self.package and
-					user in self.package.maintainers) or user.rank.atLeast(UserRank.MODERATOR)
+					user in self.package.maintainers) or user.rank.at_least(UserRank.MODERATOR)
 
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))
@@ -157,10 +157,10 @@ class ThreadReply(db.Model):
 			raise Exception("Unknown permission given to ThreadReply.check_perm()")
 
 		if perm == Permission.EDIT_REPLY:
-			return user.rank.atLeast(UserRank.NEW_MEMBER if user == self.author else UserRank.MODERATOR) and not self.thread.locked
+			return user.rank.at_least(UserRank.NEW_MEMBER if user == self.author else UserRank.MODERATOR) and not self.thread.locked
 
 		elif perm == Permission.DELETE_REPLY:
-			return user.rank.atLeast(UserRank.MODERATOR) and self.thread.first_reply != self
+			return user.rank.at_least(UserRank.MODERATOR) and self.thread.first_reply != self
 
 		else:
 			raise Exception("Permission {} is not related to threads".format(perm.name))
@@ -227,7 +227,7 @@ class PackageReview(db.Model):
 				name=self.package.name,
 				reviewer=self.author.username)
 
-	def getVoteUrl(self, next_url=None):
+	def get_vote_url(self, next_url=None):
 		return url_for("packages.review_vote",
 				author=self.package.author.username,
 				name=self.package.name,
@@ -248,7 +248,7 @@ class PackageReview(db.Model):
 			raise Exception("Unknown permission given to PackageReview.check_perm()")
 
 		if perm == Permission.DELETE_REVIEW:
-			return user == self.author or user.rank.atLeast(UserRank.MODERATOR)
+			return user == self.author or user.rank.at_least(UserRank.MODERATOR)
 		else:
 			raise Exception("Permission {} is not related to reviews".format(perm.name))
 

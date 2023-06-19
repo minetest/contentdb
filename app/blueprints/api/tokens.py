@@ -24,7 +24,7 @@ from wtforms.validators import InputRequired, Length
 from wtforms_sqlalchemy.fields import QuerySelectField
 
 from app.models import db, User, APIToken, Permission
-from app.utils import randomString
+from app.utils import random_string
 from . import bp
 from ..users.settings import get_setting_tabs
 
@@ -87,7 +87,7 @@ def create_edit_token(username, id=None):
 			token = APIToken()
 			db.session.add(token)
 			token.owner = user
-			token.access_token = randomString(32)
+			token.access_token = random_string(32)
 
 		form.populate_obj(token)
 		db.session.commit()
@@ -117,7 +117,7 @@ def reset_token(username, id):
 	elif token.owner != user:
 		abort(403)
 
-	token.access_token = randomString(32)
+	token.access_token = random_string(32)
 
 	db.session.commit() # save
 

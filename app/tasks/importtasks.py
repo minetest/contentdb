@@ -30,7 +30,7 @@ from kombu import uuid
 from app.models import AuditSeverity, db, NotificationType, PackageRelease, MetaPackage, Dependency, PackageType, \
 	MinetestRelease, Package, PackageState, PackageScreenshot, PackageUpdateTrigger, PackageUpdateConfig
 from app.tasks import celery, TaskError
-from app.utils import randomString, post_bot_message, addSystemNotification, addSystemAuditLog, get_games_from_csv
+from app.utils import random_string, post_bot_message, add_system_notification, add_system_audit_log, get_games_from_csv
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from app import app
@@ -41,7 +41,7 @@ from app.utils.image import get_image_size
 
 
 @celery.task()
-def getMeta(urlstr, author):
+def get_meta(urlstr, author):
 	with clone_repo(urlstr, recursive=True) as repo:
 		try:
 			tree = build_tree(repo.working_tree_dir, author=author, repo=urlstr)
@@ -82,13 +82,13 @@ def getMeta(urlstr, author):
 
 
 @celery.task()
-def updateAllGameSupport():
+def update_all_game_support():
 	resolver = GameSupportResolver(db.session)
 	resolver.init_all()
 	db.session.commit()
 
 
-def postReleaseCheckUpdate(self, release: PackageRelease, path):
+def post_release_check_update(self, release: PackageRelease, path):
 	try:
 		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
 				author=release.package.author.username, name=release.package.name)
@@ -97,14 +97,14 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 			raise MinetestCheckError(f"Expected {tree.relative} to have technical name {release.package.name}, instead has name {tree.name}")
 
 		cache = {}
-		def getMetaPackages(names):
+		def get_meta_packages(names):
 			return [ MetaPackage.GetOrCreate(x, cache) for x in names ]
 
 		provides = tree.get_mod_names()
 
 		package = release.package
 		package.provides.clear()
-		package.provides.extend(getMetaPackages(tree.get_mod_names()))
+		package.provides.extend(get_meta_packages(tree.get_mod_names()))
 
 		# Delete all mod name dependencies
 		package.dependencies.filter(Dependency.meta_package != None).delete()
@@ -124,10 +124,10 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 			raise MinetestCheckError("Game has unresolved hard dependencies: " + deps)
 
 		# Add dependencies
-		for meta in getMetaPackages(depends):
+		for meta in get_meta_packages(depends):
 			db.session.add(Dependency(package, meta=meta, optional=False))
 
-		for meta in getMetaPackages(optional_depends):
+		for meta in get_meta_packages(optional_depends):
 			db.session.add(Dependency(package, meta=meta, optional=True))
 
 		# Update min/max
@@ -191,7 +191,7 @@ def postReleaseCheckUpdate(self, release: PackageRelease, path):
 
 
 @celery.task(bind=True)
-def checkZipRelease(self, id, path):
+def check_zip_release(self, id, path):
 	release = PackageRelease.query.get(id)
 	if release is None:
 		raise TaskError("No such release!")
@@ -202,7 +202,7 @@ def checkZipRelease(self, id, path):
 		with ZipFile(path, 'r') as zip_ref:
 			zip_ref.extractall(temp)
 
-		postReleaseCheckUpdate(self, release, temp)
+		post_release_check_update(self, release, temp)
 
 		release.task_id = None
 		release.approve(release.package.author)
@@ -210,7 +210,7 @@ def checkZipRelease(self, id, path):
 
 
 @celery.task(bind=True)
-def makeVCSRelease(self, id, branch):
+def make_vcs_release(self, id, branch):
 	release = PackageRelease.query.get(id)
 	if release is None:
 		raise TaskError("No such release!")
@@ -218,9 +218,9 @@ def makeVCSRelease(self, id, branch):
 		raise TaskError("No package attached to release")
 
 	with clone_repo(release.package.repo, ref=branch, recursive=True) as repo:
-		postReleaseCheckUpdate(self, release, repo.working_tree_dir)
+		post_release_check_update(self, release, repo.working_tree_dir)
 
-		filename = randomString(10) + ".zip"
+		filename = random_string(10) + ".zip"
 		destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
 
 		assert(not os.path.isfile(destPath))
@@ -238,7 +238,7 @@ def makeVCSRelease(self, id, branch):
 
 
 @celery.task()
-def importRepoScreenshot(id):
+def import_repo_screenshot(id):
 	package = Package.query.get(id)
 	if package is None or package.state == PackageState.DELETED:
 		raise Exception("Unexpected none package")
@@ -248,7 +248,7 @@ def importRepoScreenshot(id):
 			for ext in ["png", "jpg", "jpeg"]:
 				sourcePath = repo.working_tree_dir + "/screenshot." + ext
 				if os.path.isfile(sourcePath):
-					filename = randomString(10) + "." + ext
+					filename = random_string(10) + "." + ext
 					destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
 					shutil.copyfile(sourcePath, destPath)
 
@@ -313,11 +313,11 @@ def check_update_config_impl(package):
 		db.session.add(rel)
 
 		msg = "Created release {} (Git Update Detection)".format(rel.title)
-		addSystemAuditLog(AuditSeverity.NORMAL, msg, package.get_url("packages.view"), package)
+		add_system_audit_log(AuditSeverity.NORMAL, msg, package.get_url("packages.view"), package)
 
 		db.session.commit()
 
-		makeVCSRelease.apply_async((rel.id, commit), task_id=rel.task_id)
+		make_vcs_release.apply_async((rel.id, commit), task_id=rel.task_id)
 
 	elif config.outdated_at is None:
 		config.set_outdated()
@@ -338,8 +338,8 @@ def check_update_config_impl(package):
 				.format(tag, msg_last)
 
 		for user in package.maintainers:
-			addSystemNotification(user, NotificationType.BOT,
-					msg, url_for("todo.view_user", username=user.username, _external=False), package)
+			add_system_notification(user, NotificationType.BOT,
+									msg, url_for("todo.view_user", username=user.username, _external=False), package)
 
 	config.last_commit = commit
 	config.last_tag = tag

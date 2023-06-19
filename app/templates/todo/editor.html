@@ -6,7 +6,7 @@
 
 {% block content %}
 	<h2 class="mb-4">{{ _("Approval Queue") }}</h2>
-	{% if canApproveScn and screenshots %}
+	{% if can_approve_scn and screenshots %}
 		<div class="card my-4">
 			<h3 class="card-header">{{ _("Screenshots") }}
 				<form class="float-right"  method="post" action="{{ url_for('todo.view_editor') }}">
@@ -40,7 +40,7 @@
 	{% endif %}
 
 	<div class="row">
-		{% if canApproveNew and (packages or wip_packages) %}
+		{% if can_approve_new and (packages or wip_packages) %}
 		<div class="col-sm-6">
 			<div class="card">
 				<h3 class="card-header">{{ _("Packages") }}</h3>
@@ -69,7 +69,7 @@
 		</div>
 		{% endif %}
 
-		{% if canApproveRel and releases %}
+		{% if can_approve_rel and releases %}
 		<div class="col-sm-6">
 			<div class="card">
 				<h3 class="card-header">{{ _("Releases") }}</h3>
@@ -159,7 +159,7 @@
 
 	<h2 class="mt-5">{{ _("WIP") }}</h2>
 
-	{% if canApproveNew and (packages or wip_packages) %}
+	{% if can_approve_new and (packages or wip_packages) %}
 		<div class="card">
 			<h3 class="card-header">WIP Packages</h3>
 			<div class="list-group list-group-flush" style="max-height: 300px; overflow: hidden auto;">
@@ -188,7 +188,7 @@
 
 
 	<div class="mt-5"></div>
-	{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+	{% if current_user.rank.at_least(current_user.rank.MODERATOR) %}
 		<a class="btn btn-secondary float-right" href="{{ url_for('admin.audit') }}">
 			{{ _("View All") }}
 		</a>

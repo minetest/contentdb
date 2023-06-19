@@ -25,9 +25,9 @@ from sqlalchemy import or_, and_
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
 	NotificationType, PackageUpdateConfig, License, UserRank, PackageType
 from app.tasks.emails import send_pending_digests
-from app.tasks.forumtasks import importTopicList, checkAllForumAccounts
-from app.tasks.importtasks import importRepoScreenshot, checkZipRelease, check_for_updates, updateAllGameSupport
-from app.utils import addNotification, get_system_user
+from app.tasks.forumtasks import import_topic_list, check_all_forum_accounts
+from app.tasks.importtasks import import_repo_screenshot, check_zip_release, check_for_updates, update_all_game_support
+from app.utils import add_notification, get_system_user
 
 actions = {}
 
@@ -54,13 +54,13 @@ def del_stuck_releases():
 
 @action("Import forum topic list")
 def import_topic_list():
-	task = importTopicList.delay()
+	task = import_topic_list.delay()
 	return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
 
 
 @action("Check all forum accounts")
 def check_all_forum_accounts():
-	task = checkAllForumAccounts.delay()
+	task = check_all_forum_accounts.delay()
 	return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 
 
@@ -142,9 +142,9 @@ def remind_wip():
 		packages_list = _package_list(packages)
 		havent = "haven't" if len(packages) > 1 else "hasn't"
 
-		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
+		add_notification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 			f"Did you forget? {packages_list} {havent} been submitted for review yet",
-				url_for('todo.view_user', username=user.username))
+						 url_for('todo.view_user', username=user.username))
 	db.session.commit()
 
 
@@ -162,9 +162,9 @@ def remind_outdated():
 		packages = [pkg[0] for pkg in packages]
 		packages_list = _package_list(packages)
 
-		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
+		add_notification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 				f"The following packages may be outdated: {packages_list}",
-				url_for('todo.view_user', username=user.username))
+						 url_for('todo.view_user', username=user.username))
 
 	db.session.commit()
 
@@ -241,9 +241,9 @@ def remind_video_url():
 		packages = [pkg[0] for pkg in packages]
 		packages_list = _package_list(packages)
 
-		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
+		add_notification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 				f"You should add a video to {packages_list}",
-				url_for('users.profile', username=user.username))
+						 url_for('users.profile', username=user.username))
 
 	db.session.commit()
 
@@ -270,9 +270,9 @@ def remind_missing_game_support():
 		packages = [pkg[0] for pkg in packages]
 		packages_list = _package_list(packages)
 
-		addNotification(user, system_user, NotificationType.PACKAGE_APPROVAL,
+		add_notification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 						f"You need to confirm whether the following packages support all games: {packages_list}",
-						url_for('todo.all_game_support', username=user.username))
+						 url_for('todo.all_game_support', username=user.username))
 
 	db.session.commit()
 
@@ -280,7 +280,7 @@ def remind_missing_game_support():
 @action("Detect game support")
 def detect_game_support():
 	task_id = uuid()
-	updateAllGameSupport.apply_async((), task_id=task_id)
+	update_all_game_support.apply_async((), task_id=task_id)
 	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
 
 
@@ -308,7 +308,7 @@ def check_releases():
 
 	tasks = []
 	for release in releases:
-		tasks.append(checkZipRelease.s(release.id, release.file_path))
+		tasks.append(check_zip_release.s(release.id, release.file_path))
 
 	result = group(tasks).apply_async()
 
@@ -325,7 +325,7 @@ def reimport_packages():
 	for package in Package.query.filter(Package.state != PackageState.DELETED).all():
 		release = package.releases.first()
 		if release:
-			tasks.append(checkZipRelease.s(release.id, release.file_path))
+			tasks.append(check_zip_release.s(release.id, release.file_path))
 
 	result = group(tasks).apply_async()
 
@@ -344,6 +344,6 @@ def import_screenshots():
 		.filter(PackageScreenshot.id == None) \
 		.all()
 	for package in packages:
-		importRepoScreenshot.delay(package.id)
+		import_repo_screenshot.delay(package.id)
 
 	return redirect(url_for("admin.admin_page"))

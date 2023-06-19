@@ -25,7 +25,7 @@
 			<td class="btn-group">
 				{% if current_user == topic.author or topic.author.check_perm(current_user, "CHANGE_AUTHOR") %}
 					<a class="btn btn-primary"
-							href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
+							href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.get_repo_url(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
 						{{ _("Create") }}
 					</a>
 				{% endif %}
@@ -61,7 +61,7 @@
 			{% endif %}
 			{% if topic.author == current_user or topic.author.check_perm(current_user, "CHANGE_AUTHOR") %}
 				|
-				<a href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.getRepoURL(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
+				<a href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.get_repo_url(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
 					{{ _("Create") }}
 				</a>
 			{% endif %}

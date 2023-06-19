@@ -23,7 +23,7 @@ from sqlalchemy import or_, and_
 
 from app import app
 from app.models import User, db, UserRank, ThreadReply, Package
-from app.utils import randomString
+from app.utils import random_string
 from app.utils.models import create_session
 from app.tasks import celery, TaskError
 
@@ -76,7 +76,7 @@ def set_profile_picture_from_url(username: str, url: str):
 	else:
 		raise TaskError(f"Unacceptable content-type: {content_type}")
 
-	filename = randomString(10) + "." + ext
+	filename = random_string(10) + "." + ext
 	filepath = os.path.join(app.config["UPLOAD_DIR"], filename)
 	with open(filepath, "wb") as f:
 		size = 0

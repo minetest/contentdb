@@ -25,8 +25,8 @@ from wtforms import StringField, SubmitField, BooleanField, PasswordField, valid
 from wtforms.validators import InputRequired, Length, Regexp, DataRequired, Optional, Email, EqualTo
 
 from app.tasks.emails import send_verify_email, send_anon_email, send_unsubscribe_verify, send_user_email
-from app.utils import randomString, make_flask_login_password, is_safe_url, check_password_hash, addAuditLog, \
-	nonEmptyOrNone, post_login, is_username_valid
+from app.utils import random_string, make_flask_login_password, is_safe_url, check_password_hash, add_audit_log, \
+	nonempty_or_none, post_login, is_username_valid
 from . import bp
 from app.models import User, AuditSeverity, db, UserRank, PackageAlias, EmailSubscription, UserNotificationPreferences, \
 	UserEmailVerification
@@ -58,8 +58,8 @@ def handle_login(form):
 		flash(gettext("You need to confirm the registration email"), "danger")
 		return
 
-	addAuditLog(AuditSeverity.USER, user, "Logged in using password",
-			url_for("users.profile", username=user.username))
+	add_audit_log(AuditSeverity.USER, user, "Logged in using password",
+				  url_for("users.profile", username=user.username))
 	db.session.commit()
 
 	if not login_user(user, remember=form.remember_me.data):
@@ -97,7 +97,7 @@ def logout():
 
 
 class RegisterForm(FlaskForm):
-	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[nonEmptyOrNone])
+	display_name = StringField(lazy_gettext("Display Name"), [Optional(), Length(1, 20)], filters=[nonempty_or_none])
 	username = StringField(lazy_gettext("Username"), [InputRequired(),
 			Regexp("^[a-zA-Z0-9._-]+$", message=lazy_gettext(
 				"Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed"))])
@@ -154,10 +154,10 @@ def handle_register(form):
 		user.display_name = form.display_name.data
 	db.session.add(user)
 
-	addAuditLog(AuditSeverity.USER, user, "Registered with email, display name=" + user.display_name,
-			url_for("users.profile", username=user.username))
+	add_audit_log(AuditSeverity.USER, user, "Registered with email, display name=" + user.display_name,
+				  url_for("users.profile", username=user.username))
 
-	token = randomString(32)
+	token = random_string(32)
 
 	ver = UserEmailVerification()
 	ver.user = user
@@ -194,10 +194,10 @@ def forgot_password():
 		email = form.email.data
 		user = User.query.filter_by(email=email).first()
 		if user:
-			token = randomString(32)
+			token = random_string(32)
 
-			addAuditLog(AuditSeverity.USER, user, "(Anonymous) requested a password reset",
-					url_for("users.profile", username=user.username), None)
+			add_audit_log(AuditSeverity.USER, user, "(Anonymous) requested a password reset",
+						  url_for("users.profile", username=user.username), None)
 
 			ver = UserEmailVerification()
 			ver.user = user
@@ -241,12 +241,12 @@ def handle_set_password(form):
 		flash(gettext("Passwords do not match"), "danger")
 		return
 
-	addAuditLog(AuditSeverity.USER, current_user, "Changed their password", url_for("users.profile", username=current_user.username))
+	add_audit_log(AuditSeverity.USER, current_user, "Changed their password", url_for("users.profile", username=current_user.username))
 
 	current_user.password = make_flask_login_password(form.password.data)
 
 	if hasattr(form, "email"):
-		new_email = nonEmptyOrNone(form.email.data)
+		new_email = nonempty_or_none(form.email.data)
 		if new_email and new_email != current_user.email:
 			if EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
 				flash(gettext(u"That email address has been unsubscribed/blacklisted, and cannot be used"), "danger")
@@ -258,7 +258,7 @@ def handle_set_password(form):
 					gettext(u"We were unable to create the account as the email is already in use by %(display_name)s. Try a different email address.",
 							display_name=user_by_email.display_name))
 			else:
-				token = randomString(32)
+				token = random_string(32)
 
 				ver = UserEmailVerification()
 				ver.user = current_user
@@ -329,8 +329,8 @@ def verify_email():
 
 	user = ver.user
 
-	addAuditLog(AuditSeverity.USER, user, "Confirmed their email",
-			url_for("users.profile", username=user.username))
+	add_audit_log(AuditSeverity.USER, user, "Confirmed their email",
+				  url_for("users.profile", username=user.username))
 
 	was_activating = not user.is_active
 
@@ -383,7 +383,7 @@ def unsubscribe_verify():
 			sub = EmailSubscription(email)
 			db.session.add(sub)
 
-		sub.token = randomString(32)
+		sub.token = random_string(32)
 		db.session.commit()
 		send_unsubscribe_verify.delay(form.email.data, get_locale().language)
 

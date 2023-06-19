@@ -25,7 +25,7 @@ from wtforms.validators import InputRequired, Length
 from app.models import User, UserRank
 from app.tasks.emails import send_user_email
 from app.tasks.webhooktasks import post_discord_webhook
-from app.utils import isNo, abs_url_samesite
+from app.utils import is_no, abs_url_samesite
 
 bp = Blueprint("report", __name__)
 
@@ -37,7 +37,7 @@ class ReportForm(FlaskForm):
 
 @bp.route("/report/", methods=["GET", "POST"])
 def report():
-	is_anon = not current_user.is_authenticated or not isNo(request.args.get("anon"))
+	is_anon = not current_user.is_authenticated or not is_no(request.args.get("anon"))
 
 	url = request.args.get("url")
 	if url:

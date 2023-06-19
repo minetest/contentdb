@@ -23,7 +23,7 @@ from flask_mail import Message
 from app import mail
 from app.models import Notification, db, EmailSubscription, User
 from app.tasks import celery
-from app.utils import abs_url_for, abs_url, randomString
+from app.utils import abs_url_for, abs_url, random_string
 
 
 def get_email_subscription(email):
@@ -31,7 +31,7 @@ def get_email_subscription(email):
 	ret = EmailSubscription.query.filter_by(email=email).first()
 	if not ret:
 		ret = EmailSubscription(email)
-		ret.token = randomString(32)
+		ret.token = random_string(32)
 		db.session.add(ret)
 		db.session.commit()
 

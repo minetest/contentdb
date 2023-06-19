@@ -34,7 +34,7 @@ from app.logic.LogicError import LogicError
 from app.logic.packages import do_edit_package
 from app.querybuilder import QueryBuilder
 from app.rediscache import has_key, set_key
-from app.tasks.importtasks import importRepoScreenshot, checkZipRelease
+from app.tasks.importtasks import import_repo_screenshot, check_zip_release
 from app.tasks.webhooktasks import post_discord_webhook
 from app.logic.game_support import GameSupportResolver
 
@@ -43,14 +43,14 @@ from app.models import Package, Tag, db, User, Tags, PackageState, Permission, P
 	Dependency, Thread, UserRank, PackageReview, PackageDevState, ContentWarning, License, AuditSeverity, \
 	PackageScreenshot, NotificationType, AuditLogEntry, PackageAlias, PackageProvides, PackageGameSupport, \
 	PackageDailyStats
-from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, addAuditLog, getPackageByInfo, \
-	addNotification, get_system_user, rank_required, get_games_from_csv, get_daterange_options
+from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, add_audit_log, get_package_by_info, \
+	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options
 
 
 @bp.route("/packages/")
 def list_all():
 	qb    = QueryBuilder(request.args)
-	query = qb.buildPackageQuery()
+	query = qb.build_package_query()
 	title = qb.title
 
 	query = query.options(
@@ -78,7 +78,7 @@ def list_all():
 		if package:
 			return redirect(package.get_url("packages.view"))
 
-		topic = qb.buildTopicQuery().first()
+		topic = qb.build_topic_query().first()
 		if qb.search and topic:
 			return redirect("https://forum.minetest.net/viewtopic.php?t=" + str(topic.topic_id))
 
@@ -100,12 +100,12 @@ def list_all():
 	topics = None
 	if qb.search and not query.has_next:
 		qb.show_discarded = True
-		topics = qb.buildTopicQuery().all()
+		topics = qb.build_topic_query().all()
 
 	tags_query = db.session.query(func.count(Tags.c.tag_id), Tag) \
 		.select_from(Tag).join(Tags).join(Package).filter(Package.state==PackageState.APPROVED) \
 		.group_by(Tag.id).order_by(db.asc(Tag.title))
-	tags = qb.filterPackageQuery(tags_query).all()
+	tags = qb.filter_package_query(tags_query).all()
 
 	selected_tags = set(qb.tags)
 
@@ -115,7 +115,7 @@ def list_all():
 			authors=authors, packages_count=query.total, topics=topics, noindex=qb.noindex)
 
 
-def getReleases(package):
+def get_releases(package):
 	if package.check_perm(current_user, Permission.MAKE_RELEASE):
 		return package.releases.limit(5)
 	else:
@@ -158,7 +158,7 @@ def view(package):
 						Dependency.meta_package_id.in_([p.id for p in package.provides]))) \
 			.order_by(db.desc(Package.score)).limit(6).all()
 
-	releases = getReleases(package)
+	releases = get_releases(package)
 
 	review_thread = package.review_thread
 	if review_thread is not None and not review_thread.check_perm(current_user, Permission.SEE_THREAD):
@@ -185,7 +185,7 @@ def view(package):
 	threads = Thread.query.filter_by(package_id=package.id, review_id=None)
 	if not current_user.is_authenticated:
 		threads = threads.filter_by(private=False)
-	elif not current_user.rank.atLeast(UserRank.APPROVER) and not current_user == package.author:
+	elif not current_user.rank.at_least(UserRank.APPROVER) and not current_user == package.author:
 		threads = threads.filter(or_(Thread.private == False, Thread.author == current_user))
 
 	has_review = current_user.is_authenticated and \
@@ -310,10 +310,10 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 
 		if wasNew:
 			msg = f"Created package {author.username}/{form.name.data}"
-			addAuditLog(AuditSeverity.NORMAL, current_user, msg, package.get_url("packages.view"), package)
+			add_audit_log(AuditSeverity.NORMAL, current_user, msg, package.get_url("packages.view"), package)
 
 		if wasNew and package.repo is not None:
-			importRepoScreenshot.delay(package.id)
+			import_repo_screenshot.delay(package.id)
 
 		next_url = package.get_url("packages.view")
 		if wasNew and ("WTFPL" in package.license.name or "WTFPL" in package.media_license.name):
@@ -347,7 +347,7 @@ def create_edit(author=None, name=None):
 				return redirect(url_for("packages.create_edit"))
 
 	else:
-		package = getPackageByInfo(author, name)
+		package = get_package_by_info(author, name)
 		if package is None:
 			abort(404)
 		if not package.check_perm(current_user, Permission.EDIT_PACKAGE):
@@ -422,9 +422,9 @@ def move_to_state(package):
 				"Ready for Review: {}".format(package.get_url("packages.view", absolute=True)), True,
 				package.title, package.short_desc, package.get_thumb_url(2, True))
 
-	addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.get_url("packages.view"), package)
+	add_notification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.get_url("packages.view"), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
-	addAuditLog(severity, current_user, msg, package.get_url("packages.view"), package)
+	add_audit_log(severity, current_user, msg, package.get_url("packages.view"), package)
 
 	db.session.commit()
 
@@ -457,8 +457,8 @@ def remove(package):
 
 		url = url_for("users.profile", username=package.author.username)
 		msg = "Deleted {}, reason={}".format(package.title, reason)
-		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, url, package)
-		addAuditLog(AuditSeverity.EDITOR, current_user, msg, url, package)
+		add_notification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg, url, package)
+		add_audit_log(AuditSeverity.EDITOR, current_user, msg, url, package)
 		db.session.commit()
 
 		flash(gettext("Deleted package"), "success")
@@ -472,8 +472,8 @@ def remove(package):
 		package.state = PackageState.WIP
 
 		msg = "Unapproved {}, reason={}".format(package.title, reason)
-		addNotification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.get_url("packages.view"), package)
-		addAuditLog(AuditSeverity.EDITOR, current_user, msg, package.get_url("packages.view"), package)
+		add_notification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.get_url("packages.view"), package)
+		add_audit_log(AuditSeverity.EDITOR, current_user, msg, package.get_url("packages.view"), package)
 
 		db.session.commit()
 
@@ -512,12 +512,12 @@ def edit_maintainers(package):
 			if not user in package.maintainers:
 				if thread:
 					thread.watchers.append(user)
-				addNotification(user, current_user, NotificationType.MAINTAINER,
+				add_notification(user, current_user, NotificationType.MAINTAINER,
 						"Added you as a maintainer of {}".format(package.title), package.get_url("packages.view"), package)
 
 		for user in package.maintainers:
 			if user != package.author and not user in users:
-				addNotification(user, current_user, NotificationType.MAINTAINER,
+				add_notification(user, current_user, NotificationType.MAINTAINER,
 						"Removed you as a maintainer of {}".format(package.title), package.get_url("packages.view"), package)
 
 		package.maintainers.clear()
@@ -526,9 +526,9 @@ def edit_maintainers(package):
 			package.maintainers.append(package.author)
 
 		msg = "Edited {} maintainers".format(package.title)
-		addNotification(package.author, current_user, NotificationType.MAINTAINER, msg, package.get_url("packages.view"), package)
+		add_notification(package.author, current_user, NotificationType.MAINTAINER, msg, package.get_url("packages.view"), package)
 		severity = AuditSeverity.NORMAL if current_user == package.author else AuditSeverity.MODERATION
-		addAuditLog(severity, current_user, msg, package.get_url("packages.view"), package)
+		add_audit_log(severity, current_user, msg, package.get_url("packages.view"), package)
 
 		db.session.commit()
 
@@ -553,7 +553,7 @@ def remove_self_maintainers(package):
 	else:
 		package.maintainers.remove(current_user)
 
-		addNotification(package.author, current_user, NotificationType.MAINTAINER,
+		add_notification(package.author, current_user, NotificationType.MAINTAINER,
 				"Removed themself as a maintainer of {}".format(package.title), package.get_url("packages.view"), package)
 
 		db.session.commit()
@@ -715,7 +715,7 @@ def game_support(package):
 
 		package.supports_all_games = form.supports_all_games.data
 
-		addAuditLog(AuditSeverity.NORMAL, current_user, "Edited game support", package.get_url("packages.game_support"), package)
+		add_audit_log(AuditSeverity.NORMAL, current_user, "Edited game support", package.get_url("packages.game_support"), package)
 
 		db.session.commit()
 
@@ -723,7 +723,7 @@ def game_support(package):
 			release = package.releases.first()
 			if release:
 				task_id = uuid()
-				checkZipRelease.apply_async((release.id, release.file_path), task_id=task_id)
+				check_zip_release.apply_async((release.id, release.file_path), task_id=task_id)
 				next_url = url_for("tasks.check", id=task_id, r=next_url)
 
 		return redirect(next_url)

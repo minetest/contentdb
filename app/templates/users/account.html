@@ -68,7 +68,7 @@
 	</tr>
 </table>
 
-{% if current_user.rank.atLeast(current_user.rank.MODERATOR) %}
+{% if current_user.rank.at_least(current_user.rank.MODERATOR) %}
 	<a class="btn btn-secondary float-right" href="{{ url_for('admin.audit', username=user.username) }}">
 		{{ _("View All") }}
 	</a>
@@ -81,7 +81,7 @@
 
 <h3>{{ _("Account Deletion and Deactivation") }}</h3>
 
-{% if current_user.rank.atLeast(current_user.rank.ADMIN) %}
+{% if current_user.rank.at_least(current_user.rank.ADMIN) %}
 	<a class="btn btn-danger" href="{{ url_for('users.delete', username=user.username) }}">
 		{{ _("Delete or Deactivate") }}</a>
 {% else %}

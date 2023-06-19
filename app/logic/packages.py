@@ -24,7 +24,7 @@ from flask_babel import lazy_gettext, LazyString
 from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
 	License, UserRank, PackageDevState
-from app.utils import addAuditLog, has_blocked_domains, diff_dictionaries, describe_difference
+from app.utils import add_audit_log, has_blocked_domains, diff_dictionaries, describe_difference
 from app.utils.url import clean_youtube_url
 
 
@@ -173,7 +173,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			if not was_web and tag.is_protected:
 				continue
 
-			if tag.is_protected and tag not in old_tags and not user.rank.atLeast(UserRank.EDITOR):
+			if tag.is_protected and tag not in old_tags and not user.rank.at_least(UserRank.EDITOR):
 				raise LogicError(400, lazy_gettext("Unable to add protected tag %(title)s to package", title=tag.title))
 
 			package.tags.append(tag)
@@ -208,7 +208,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			msg += " [" + diff_desc + "]"
 
 		severity = AuditSeverity.NORMAL if user in package.maintainers else AuditSeverity.EDITOR
-		addAuditLog(severity, user, msg, package.get_url("packages.view"), package, json.dumps(diff, indent=4))
+		add_audit_log(severity, user, msg, package.get_url("packages.view"), package, json.dumps(diff, indent=4))
 
 	db.session.commit()
 

@@ -23,7 +23,7 @@ from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from . import bp
 from app.models import Permission, Tag, db, AuditSeverity
-from app.utils import addAuditLog
+from app.utils import add_audit_log
 
 
 @bp.route("/tags/")
@@ -72,13 +72,13 @@ def create_edit_tag(name=None):
 			tag.is_protected = form.is_protected.data
 			db.session.add(tag)
 
-			addAuditLog(AuditSeverity.EDITOR, current_user, f"Created tag {tag.name}",
-					url_for("admin.create_edit_tag", name=tag.name))
+			add_audit_log(AuditSeverity.EDITOR, current_user, f"Created tag {tag.name}",
+						  url_for("admin.create_edit_tag", name=tag.name))
 		else:
 			form.populate_obj(tag)
 
-			addAuditLog(AuditSeverity.EDITOR, current_user, f"Edited tag {tag.name}",
-					url_for("admin.create_edit_tag", name=tag.name))
+			add_audit_log(AuditSeverity.EDITOR, current_user, f"Edited tag {tag.name}",
+						  url_for("admin.create_edit_tag", name=tag.name))
 
 		db.session.commit()
 

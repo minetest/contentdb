@@ -19,7 +19,7 @@ from app.models import Package, db
 from app.tasks import celery
 
 @celery.task()
-def updatePackageScores():
+def update_package_scores():
 	Package.query.update({ "score_downloads": Package.score_downloads * 0.95 })
 	db.session.commit()
 

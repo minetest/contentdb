@@ -20,8 +20,8 @@ from flask_login import login_required, current_user
 from app import csrf
 from app.models import UserRank
 from app.tasks import celery
-from app.tasks.importtasks import getMeta
-from app.utils import shouldReturnJson
+from app.tasks.importtasks import get_meta
+from app.utils import should_return_json
 
 bp = Blueprint("tasks", __name__)
 
@@ -33,7 +33,7 @@ def start_getmeta():
 	from flask import request
 	author = request.args.get("author")
 	author = current_user.forums_username if author is None else author
-	aresult = getMeta.delay(request.args.get("url"), author)
+	aresult = get_meta.delay(request.args.get("url"), author)
 	return jsonify({
 		"poll_url": url_for("tasks.check", id=aresult.id),
 	})
@@ -52,7 +52,7 @@ def check(id):
 				'status': status,
 			}
 
-		if current_user.is_authenticated and current_user.rank.atLeast(UserRank.ADMIN):
+		if current_user.is_authenticated and current_user.rank.at_least(UserRank.ADMIN):
 			info["error"] = str(traceback)
 		elif str(result)[1:12] == "TaskError: ":
 			info["error"] = str(result)[12:-1]
@@ -65,7 +65,7 @@ def check(id):
 				'result': result,
 			}
 
-	if shouldReturnJson():
+	if should_return_json():
 		return jsonify(info)
 	else:
 		r = request.args.get("r")

@@ -271,7 +271,7 @@ class Dependency(db.Model):
 		else:
 			raise Exception("Either meta or package must be given, but not both!")
 
-	def getName(self):
+	def get_name(self):
 		if self.meta_package:
 			return self.meta_package.name
 		elif self.package:
@@ -484,7 +484,7 @@ class Package(db.Model):
 			query = query.filter_by(optional=not is_hard)
 
 		deps = query.all()
-		deps.sort(key=lambda x: x.getName())
+		deps.sort(key=lambda x: x.get_name())
 		return deps
 
 	def get_sorted_hard_dependencies(self):
@@ -654,25 +654,25 @@ class Package(db.Model):
 			raise Exception("Unknown permission given to Package.check_perm()")
 
 		is_owner = user == self.author
-		is_maintainer = is_owner or user.rank.atLeast(UserRank.EDITOR) or user in self.maintainers
-		is_approver = user.rank.atLeast(UserRank.APPROVER)
+		is_maintainer = is_owner or user.rank.at_least(UserRank.EDITOR) or user in self.maintainers
+		is_approver = user.rank.at_least(UserRank.APPROVER)
 
 		if perm == Permission.CREATE_THREAD:
-			return user.rank.atLeast(UserRank.NEW_MEMBER)
+			return user.rank.at_least(UserRank.NEW_MEMBER)
 
 		# Members can edit their own packages, and editors can edit any packages
 		elif perm == Permission.MAKE_RELEASE or perm == Permission.ADD_SCREENSHOTS:
 			return is_maintainer
 
 		elif perm == Permission.EDIT_PACKAGE:
-			return is_maintainer and user.rank.atLeast(UserRank.NEW_MEMBER)
+			return is_maintainer and user.rank.at_least(UserRank.NEW_MEMBER)
 
 		elif perm == Permission.APPROVE_RELEASE:
-			return (is_maintainer or is_approver) and user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
+			return (is_maintainer or is_approver) and user.rank.at_least(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
 		# Anyone can change the package name when not approved, but only editors when approved
 		elif perm == Permission.CHANGE_NAME:
-			return not self.approved or user.rank.atLeast(UserRank.EDITOR)
+			return not self.approved or user.rank.at_least(UserRank.EDITOR)
 
 		# Editors can change authors and approve new packages
 		elif perm == Permission.APPROVE_NEW or perm == Permission.CHANGE_AUTHOR:
@@ -680,16 +680,16 @@ class Package(db.Model):
 
 		elif perm == Permission.APPROVE_SCREENSHOT:
 			return (is_maintainer or is_approver) and \
-				user.rank.atLeast(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
+				user.rank.at_least(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
 		elif perm == Permission.EDIT_MAINTAINERS or perm == Permission.DELETE_PACKAGE:
-			return is_owner or user.rank.atLeast(UserRank.EDITOR)
+			return is_owner or user.rank.at_least(UserRank.EDITOR)
 
 		elif perm == Permission.UNAPPROVE_PACKAGE:
-			return is_owner or user.rank.atLeast(UserRank.APPROVER)
+			return is_owner or user.rank.at_least(UserRank.APPROVER)
 
 		elif perm == Permission.CHANGE_RELEASE_URL:
-			return user.rank.atLeast(UserRank.MODERATOR)
+			return user.rank.at_least(UserRank.MODERATOR)
 
 		else:
 			raise Exception("Permission {} is not related to packages".format(perm.name))
@@ -738,7 +738,7 @@ class Package(db.Model):
 
 		elif state == PackageState.WIP:
 			return self.check_perm(user, Permission.EDIT_PACKAGE) and \
-				(user in self.maintainers or user.rank.atLeast(UserRank.ADMIN))
+				(user in self.maintainers or user.rank.at_least(UserRank.ADMIN))
 
 		return True
 
@@ -1018,10 +1018,10 @@ class PackageRelease(db.Model):
 		is_maintainer = user == self.package.author or user in self.package.maintainers
 
 		if perm == Permission.DELETE_RELEASE:
-			if user.rank.atLeast(UserRank.ADMIN):
+			if user.rank.at_least(UserRank.ADMIN):
 				return True
 
-			if not (is_maintainer or user.rank.atLeast(UserRank.EDITOR)):
+			if not (is_maintainer or user.rank.at_least(UserRank.EDITOR)):
 				return False
 
 			if not self.package.approved or self.task_id is not None:
@@ -1033,8 +1033,8 @@ class PackageRelease(db.Model):
 
 			return count > 0
 		elif perm == Permission.APPROVE_RELEASE:
-			return user.rank.atLeast(UserRank.APPROVER) or \
-					(is_maintainer and user.rank.atLeast(
+			return user.rank.at_least(UserRank.APPROVER) or \
+					(is_maintainer and user.rank.at_least(
 						UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER))
 		else:
 			raise Exception("Permission {} is not related to releases".format(perm.name))

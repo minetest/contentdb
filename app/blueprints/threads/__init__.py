@@ -25,7 +25,7 @@ bp = Blueprint("threads", __name__)
 from flask_login import current_user, login_required
 from app.models import Package, db, User, Permission, Thread, UserRank, AuditSeverity, \
 	NotificationType, ThreadReply
-from app.utils import addNotification, isYes, addAuditLog, get_system_user, rank_required, has_blocked_domains
+from app.utils import add_notification, is_yes, add_audit_log, get_system_user, rank_required, has_blocked_domains
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length
@@ -99,7 +99,7 @@ def set_lock(id_):
 	if thread is None or not thread.check_perm(current_user, Permission.LOCK_THREAD):
 		abort(404)
 
-	thread.locked = isYes(request.args.get("lock"))
+	thread.locked = is_yes(request.args.get("lock"))
 	if thread.locked is None:
 		abort(400)
 
@@ -110,8 +110,8 @@ def set_lock(id_):
 		msg = "Unlocked thread '{}'".format(thread.title)
 		flash(gettext("Unlocked thread"), "success")
 
-	addNotification(thread.watchers, current_user, NotificationType.OTHER, msg, thread.get_view_url(), thread.package)
-	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.get_view_url(), thread.package)
+	add_notification(thread.watchers, current_user, NotificationType.OTHER, msg, thread.get_view_url(), thread.package)
+	add_audit_log(AuditSeverity.MODERATION, current_user, msg, thread.get_view_url(), thread.package)
 
 	db.session.commit()
 
@@ -134,7 +134,7 @@ def delete_thread(id_):
 
 	db.session.delete(thread)
 
-	addAuditLog(AuditSeverity.MODERATION, current_user, msg, None, thread.package, summary)
+	add_audit_log(AuditSeverity.MODERATION, current_user, msg, None, thread.package, summary)
 
 	db.session.commit()
 
@@ -167,7 +167,7 @@ def delete_reply(id_):
 		return render_template("threads/delete_reply.html", thread=thread, reply=reply)
 
 	msg = "Deleted reply by {}".format(reply.author.display_name)
-	addAuditLog(AuditSeverity.MODERATION, current_user, msg, thread.get_view_url(), thread.package, reply.comment)
+	add_audit_log(AuditSeverity.MODERATION, current_user, msg, thread.get_view_url(), thread.package, reply.comment)
 
 	db.session.delete(reply)
 	db.session.commit()
@@ -206,8 +206,8 @@ def edit_reply(id_):
 		else:
 			msg = "Edited reply by {}".format(reply.author.display_name)
 			severity = AuditSeverity.NORMAL if current_user == reply.author else AuditSeverity.MODERATION
-			addNotification(reply.author, current_user, NotificationType.OTHER, msg, thread.get_view_url(), thread.package)
-			addAuditLog(severity, current_user, msg, thread.get_view_url(), thread.package, reply.comment)
+			add_notification(reply.author, current_user, NotificationType.OTHER, msg, thread.get_view_url(), thread.package)
+			add_audit_log(severity, current_user, msg, thread.get_view_url(), thread.package, reply.comment)
 
 			reply.comment = comment
 
@@ -253,18 +253,18 @@ def view(id_):
 				continue
 
 			msg = "Mentioned by {} in '{}'".format(current_user.display_name, thread.title)
-			addNotification(mentioned, current_user, NotificationType.THREAD_REPLY,
-					msg, thread.get_view_url(), thread.package)
+			add_notification(mentioned, current_user, NotificationType.THREAD_REPLY,
+							 msg, thread.get_view_url(), thread.package)
 
 			thread.watchers.append(mentioned)
 
 		msg = "New comment on '{}'".format(thread.title)
-		addNotification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.get_view_url(), thread.package)
+		add_notification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.get_view_url(), thread.package)
 
 		if thread.author == get_system_user():
 			approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
-			addNotification(approvers, current_user, NotificationType.EDITOR_MISC, msg,
-					thread.get_view_url(), thread.package)
+			add_notification(approvers, current_user, NotificationType.EDITOR_MISC, msg,
+							 thread.get_view_url(), thread.package)
 			post_discord_webhook.delay(current_user.username,
 					"Replied to bot messages: {}".format(thread.get_view_url(absolute=True)), True)
 
@@ -294,7 +294,7 @@ def new():
 			abort(404)
 
 	def_is_private = request.args.get("private") or False
-	if package is None and not current_user.rank.atLeast(UserRank.APPROVER):
+	if package is None and not current_user.rank.at_least(UserRank.APPROVER):
 		abort(404)
 
 	allow_private_change = not package or package.approved
@@ -359,17 +359,17 @@ def new():
 					continue
 
 				msg = "Mentioned by {} in new thread '{}'".format(current_user.display_name, thread.title)
-				addNotification(mentioned, current_user, NotificationType.NEW_THREAD,
-								msg, thread.get_view_url(), thread.package)
+				add_notification(mentioned, current_user, NotificationType.NEW_THREAD,
+								 msg, thread.get_view_url(), thread.package)
 
 				thread.watchers.append(mentioned)
 
 			notif_msg = "New thread '{}'".format(thread.title)
 			if package is not None:
-				addNotification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.get_view_url(), package)
+				add_notification(package.maintainers, current_user, NotificationType.NEW_THREAD, notif_msg, thread.get_view_url(), package)
 
 			approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
-			addNotification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.get_view_url(), package)
+			add_notification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.get_view_url(), package)
 
 			if is_review_thread:
 				post_discord_webhook.delay(current_user.username,

@@ -23,7 +23,7 @@ from sqlalchemy_searchable import search
 
 from .models import db, PackageType, Package, ForumTopic, License, MinetestRelease, PackageRelease, User, Tag, \
 	ContentWarning, PackageState, PackageDevState
-from .utils import isYes, get_int_or_abort
+from .utils import is_yes, get_int_or_abort
 
 
 class QueryBuilder:
@@ -105,10 +105,10 @@ class QueryBuilder:
 		else:
 			self.version = None
 
-		self.show_discarded = isYes(args.get("show_discarded"))
+		self.show_discarded = is_yes(args.get("show_discarded"))
 		self.show_added = args.get("show_added")
 		if self.show_added is not None:
-			self.show_added = isYes(self.show_added)
+			self.show_added = is_yes(self.show_added)
 
 		if self.search is not None and self.search.strip() == "":
 			self.search = None
@@ -117,12 +117,12 @@ class QueryBuilder:
 		if self.game:
 			self.game = Package.get_by_key(self.game)
 
-	def setSortIfNone(self, name, dir="desc"):
+	def set_sort_if_none(self, name, dir="desc"):
 		if self.order_by is None:
 			self.order_by = name
 			self.order_dir = dir
 
-	def getReleases(self):
+	def get_releases(self):
 		releases_query = db.session.query(PackageRelease.package_id, func.max(PackageRelease.id)) \
 			.select_from(PackageRelease).filter(PackageRelease.approved) \
 			.group_by(PackageRelease.package_id)
@@ -136,18 +136,18 @@ class QueryBuilder:
 
 		return releases_query.all()
 
-	def convertToDictionary(self, packages):
+	def convert_to_dictionary(self, packages):
 		releases = {}
-		for [package_id, release_id] in self.getReleases():
+		for [package_id, release_id] in self.get_releases():
 			releases[package_id] = release_id
 
-		def toJson(package: Package):
+		def to_json(package: Package):
 			release_id = releases.get(package.id)
 			return package.as_short_dict(current_app.config["BASE_URL"], release_id=release_id, no_load=True)
 
-		return [toJson(pkg) for pkg in packages]
+		return [to_json(pkg) for pkg in packages]
 
-	def buildPackageQuery(self):
+	def build_package_query(self):
 		if self.order_by == "last_release":
 			query = db.session.query(Package).select_from(PackageRelease).join(Package) \
 				.filter_by(state=PackageState.APPROVED)
@@ -156,14 +156,14 @@ class QueryBuilder:
 
 		query = query.options(subqueryload(Package.main_screenshot), subqueryload(Package.aliases))
 
-		query = self.orderPackageQuery(self.filterPackageQuery(query))
+		query = self.order_package_query(self.filter_package_query(query))
 
 		if self.limit:
 			query = query.limit(self.limit)
 
 		return query
 
-	def filterPackageQuery(self, query):
+	def filter_package_query(self, query):
 		if len(self.types) > 0:
 			query = query.filter(Package.type.in_(self.types))
 
@@ -207,7 +207,7 @@ class QueryBuilder:
 
 		return query
 
-	def orderPackageQuery(self, query):
+	def order_package_query(self, query):
 		if self.search:
 			query = search(query, self.search, sort=self.order_by is None)
 
@@ -250,7 +250,7 @@ class QueryBuilder:
 
 		return query
 
-	def buildTopicQuery(self, show_added=False):
+	def build_topic_query(self, show_added=False):
 		query = ForumTopic.query
 
 		if not self.show_discarded:

@@ -33,27 +33,27 @@ def is_username_valid(username):
 			re.match(r"^[A-Za-z0-9._-]*$", username) and not re.match(r"^\.*$", username)
 
 
-def isYes(val):
+def is_yes(val):
 	return val and val.lower() in YESES
 
 
-def isNo(val):
-	return val and not isYes(val)
+def is_no(val):
+	return val and not is_yes(val)
 
 
-def nonEmptyOrNone(str):
+def nonempty_or_none(str):
 	if str is None or str == "":
 		return None
 
 	return str
 
 
-def shouldReturnJson():
+def should_return_json():
 	return "application/json" in request.accept_mimetypes and \
 			not "text/html" in request.accept_mimetypes
 
 
-def randomString(n):
+def random_string(n):
 	return secrets.token_hex(int(n / 2))
 
 
