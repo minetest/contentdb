@@ -65,7 +65,7 @@
 
 	<h2>Bulk support all games</h2>
 	<p>
-		{{ _("Click the button below to confirm that all games without listed supported_games (red text above) do support all games, except for any games listed in unsupported_games.") }}
+		{{ _("Click the button below to confirm that all packages without listed supported_games (red text above) do support all games, except for any games listed in unsupported_games.") }}
 	</p>
 	<form method="post" action="{{ url_for('todo.confirm_supports_all_games', username=user.username) }}">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />

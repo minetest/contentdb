@@ -29,7 +29,7 @@ You can still use unsupported_games to mark games as unsupported.
 You can also specify games that you've tested in supported_games.
 
     # Should work with all games but I've only tested using Minetest Game:
-    supported_games = *, minetest_games
+    supported_games = *, minetest_game
 
     # But doesn't work in capturetheflag
     unsupported_game = capturetheflag
