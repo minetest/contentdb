@@ -106,7 +106,7 @@ def create_release(package):
 	return render_template("packages/release_new.html", package=package, form=form)
 
 
-@bp.route("/packages/<author>/<name>/releases/<id>/download/")
+@bp.route("/packages/<author>/<name>/releases/<int:id>/download/")
 @is_package_page
 def download_release(package, id):
 	release = PackageRelease.query.get(id)
@@ -144,7 +144,7 @@ def download_release(package, id):
 	return redirect(release.url)
 
 
-@bp.route("/packages/<author>/<name>/releases/<id>/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/releases/<int:id>/", methods=["GET", "POST"])
 @login_required
 @is_package_page
 def edit_release(package, id):
@@ -227,7 +227,7 @@ def bulk_change_release(package):
 	return render_template("packages/release_bulk_change.html", package=package, form=form)
 
 
-@bp.route("/packages/<author>/<name>/releases/<id>/delete/", methods=["POST"])
+@bp.route("/packages/<author>/<name>/releases/<int:id>/delete/", methods=["POST"])
 @login_required
 @is_package_page
 def delete_release(package, id):

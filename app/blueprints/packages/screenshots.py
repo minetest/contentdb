@@ -92,7 +92,7 @@ def create_screenshot(package):
 	return render_template("packages/screenshot_new.html", package=package, form=form)
 
 
-@bp.route("/packages/<author>/<name>/screenshots/<id>/edit/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/screenshots/<int:id>/edit/", methods=["GET", "POST"])
 @login_required
 @is_package_page
 def edit_screenshot(package, id):
@@ -124,7 +124,7 @@ def edit_screenshot(package, id):
 	return render_template("packages/screenshot_edit.html", package=package, screenshot=screenshot, form=form)
 
 
-@bp.route("/packages/<author>/<name>/screenshots/<id>/delete/", methods=["POST"])
+@bp.route("/packages/<author>/<name>/screenshots/<int:id>/delete/", methods=["POST"])
 @login_required
 @is_package_page
 def delete_screenshot(package, id):
