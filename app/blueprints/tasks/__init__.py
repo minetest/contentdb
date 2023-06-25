@@ -39,7 +39,7 @@ def start_getmeta():
 	})
 
 
-@bp.route("/tasks/<int:id>/")
+@bp.route("/tasks/<id>/")
 def check(id):
 	result = celery.AsyncResult(id)
 	status = result.status
