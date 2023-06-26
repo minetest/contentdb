@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-06-20 00:38+0100\n"
-"PO-Revision-Date: 2023-06-19 23:38+0000\n"
+"PO-Revision-Date: 2023-06-22 07:32+0000\n"
 "Last-Translator: \"Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi\" <translation@mnh48.moe>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
+"ms/>\n"
 "Language: ms\n"
-"Language-Team: Malay "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 4.18.1\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -298,15 +299,16 @@ msgstr "Membolehkan pengesan sokongan berdasarkan pada kebergantungan (disyorkan
 
 #: app/blueprints/packages/packages.py:654
 msgid "Supported games"
-msgstr ""
+msgstr "Permainan yang disokong"
 
 #: app/blueprints/packages/packages.py:655
 msgid "Unsupported games"
-msgstr ""
+msgstr "Permainan yang tidak disokong"
 
 #: app/blueprints/packages/packages.py:656
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
+"Menyokong semua permainan (melainkan dinyatakan) / tak bersandar permainan"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
@@ -2287,6 +2289,8 @@ msgstr "Disokong?"
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
 msgstr ""
+"Menyokong semua permainan (melainkan dikecualikan oleh nilai "
+"unsupported_games)"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -2294,16 +2298,18 @@ msgstr "Dikesan dari kebergantungan"
 
 #: app/templates/packages/game_support.html:49
 msgid "Overridden on ContentDB"
-msgstr ""
+msgstr "Diatasi di ContentDB"
 
 #: app/templates/packages/game_support.html:68
 msgid "Unknown. Please either add supported games or check 'Supports all games'"
 msgstr ""
+"Tidak diketahui. Sila tambah permainan disokong ataupun tandakan 'Menyokong "
+"semua permainan'"
 
 #: app/templates/packages/game_support.html:75
 #, python-format
 msgid "Generated %(conf)s lines"
-msgstr ""
+msgstr "Barisan %(conf)s yang dijana"
 
 #: app/templates/packages/game_support.html:89
 msgid ""
@@ -2318,6 +2324,8 @@ msgid ""
 "When checked, this indicates that this package should support all games, "
 "unless excluded by unsupported_games."
 msgstr ""
+"Apabila ditanda, ia menunjukkan bahawa pakej ini patut menyokong semua "
+"permainan, melainkan dikecualikan oleh nilai unsupported_games."
 
 #: app/templates/packages/game_support.html:97
 msgid ""
@@ -2329,11 +2337,11 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games"
-msgstr ""
+msgstr "Tidak mungkin untuk pek tekstur menyokong semua permainan"
 
 #: app/templates/packages/game_support.html:107
 msgid "Overrides"
-msgstr ""
+msgstr "Pengatasan"
 
 #: app/templates/packages/game_support.html:110
 #, python-format
@@ -2341,6 +2349,8 @@ msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
 msgstr ""
+"Sebaiknya permainan yang disokong/tidak disokong ditambahkan ke %(conf)s, "
+"tetapi buat masa ini anda boleh menambahnya di sini."
 
 #: app/templates/packages/game_support.html:112
 #, python-format
@@ -2348,11 +2358,13 @@ msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
 msgstr ""
+"Menambahkannya ke %(conf)s membolehkan pengguna yang memasang di luar "
+"ContentDB untuk mendapat faedah juga."
 
 #: app/templates/packages/game_support.html:115
 #: app/templates/packages/game_support.html:116
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
-msgstr ""
+msgstr "Nama permainan dipisahkan dengan koma, cth: minetest_game, nodecore"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
@@ -3338,6 +3350,8 @@ msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
 msgstr ""
+"Jika pakej anda tak bersandar permainan, sahkannya menggunakan 'Menyokong "
+"semua permainan'"
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
@@ -4082,6 +4096,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to log into the account "
 "'%(display_name)s'"
 msgstr ""
+"Membuang langganan boleh menyebabkan anda tidak mampu log masuk ke akaun "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -4455,4 +4471,3 @@ msgstr ""
 #~ "Membuang langganan boleh menghalang anda "
 #~ "daripada log masuk ke akaun "
 #~ "'%(display_name)s'"
-
