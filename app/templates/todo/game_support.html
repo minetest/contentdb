@@ -63,12 +63,15 @@
 		{% endfor %}
 	</div>
 
-	<h2>{{ _("Bulk support all games") }}</h2>
-	<p>
-		{{ _("Click the button below to confirm that all packages without listed supported_games (red text above) do support all games, except for any games listed in unsupported_games.") }}
-	</p>
-	<form method="post" action="{{ url_for('todo.confirm_supports_all_games', username=user.username) }}">
-		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-		<input type="submit" value="{{ _('Confirm') }}" class="btn btn-primary">
-	</form>
+	{% if bulk_support_names %}
+		<h2>{{ _("Bulk support all games") }}</h2>
+		<p>
+			{{ _("Click the button below to confirm that the following packages do support all games, except for any games listed in unsupported_games:") }}
+			{{ bulk_support_names }}
+		</p>
+		<form method="post" action="{{ url_for('todo.confirm_supports_all_games', username=user.username) }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<input type="submit" value="{{ _('Confirm') }}" class="btn btn-primary">
+		</form>
+	{% endif %}
 {% endblock %}

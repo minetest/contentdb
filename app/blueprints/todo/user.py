@@ -152,7 +152,18 @@ def all_game_support(username=None):
 				Package.type.in_([PackageType.MOD, PackageType.TXP])) \
 			.order_by(db.asc(Package.title)).all()
 
-	return render_template("todo/game_support.html", user=user, packages=packages)
+	bulk_support_names = db.session.query(Package.title) \
+		.select_from(Package).filter(
+			Package.maintainers.contains(user),
+			Package.state != PackageState.DELETED,
+			Package.type.in_([PackageType.MOD, PackageType.TXP]),
+			~Package.supported_games.any(),
+			Package.supports_all_games == False) \
+		.order_by(db.asc(Package.title)).all()
+
+	bulk_support_names = ", ".join([x[0] for x in bulk_support_names])
+
+	return render_template("todo/game_support.html", user=user, packages=packages, bulk_support_names=bulk_support_names)
 
 
 @bp.route("/users/<username>/confirm_supports_all_games/", methods=["POST"])
