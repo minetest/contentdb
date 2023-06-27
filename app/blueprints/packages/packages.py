@@ -671,7 +671,9 @@ def game_support(package):
 	force_game_detection = package.supported_games.filter(and_(
 		PackageGameSupport.confidence > 1, PackageGameSupport.supports == True)).count() == 0
 
-	can_support_all_games = package.type != PackageType.TXP
+	can_support_all_games = package.type != PackageType.TXP and \
+		package.supported_games.filter(and_(
+			PackageGameSupport.confidence == 1, PackageGameSupport.supports == True)).count() == 0
 
 	can_override = can_edit
 

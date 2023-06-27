@@ -98,7 +98,11 @@
 				</p>
 			{% elif package.type.name == "TXP" %}
 				<p class="text-muted">
-					{{ _("It's not possible for texture packs to support all games") }}
+					{{ _("It's not possible for texture packs to support all games.") }}
+				</p>
+			{% elif package.type.name == "MOD" %}
+				<p class="text-muted">
+					{{ _("The package depends on a game-specific mod, and so cannot support all games.") }}
 				</p>
 			{% endif %}
 
