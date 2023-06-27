@@ -175,7 +175,7 @@ class QueryBuilder:
 			query = query.filter_by(author=author)
 
 		if self.game:
-			query = query.filter(Package.supported_games.any(game=self.game))
+			query = query.filter(Package.supported_games.any(game=self.game, supports=True))
 
 		for tag in self.tags:
 			query = query.filter(Package.tags.any(Tag.id == tag.id))

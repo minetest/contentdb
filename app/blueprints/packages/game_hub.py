@@ -33,7 +33,7 @@ def game_hub(package: Package):
 			joinedload(Package.license),
 			joinedload(Package.media_license))
 
-	query = Package.query.filter(Package.supported_games.any(game=package), Package.state==PackageState.APPROVED)
+	query = Package.query.filter(Package.supported_games.any(game=package, supports=True), Package.state==PackageState.APPROVED)
 	count = query.count()
 
 	new = join(query.order_by(db.desc(Package.approved_at))).limit(4).all()
@@ -43,7 +43,7 @@ def game_hub(package: Package):
 		.filter(Package.reviews.any()).limit(4).all()
 
 	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
-		.filter(Package.supported_games.any(game=package), Package.state==PackageState.APPROVED) \
+		.filter(Package.supported_games.any(game=package, supports=True), Package.state==PackageState.APPROVED) \
 		.order_by(db.desc(PackageRelease.releaseDate)) \
 		.limit(20).all()
 	updated = updated[:4]
