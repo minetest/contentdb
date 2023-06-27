@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-20 00:38+0100\n"
+"POT-Creation-Date: 2023-06-27 21:00+0100\n"
 "PO-Revision-Date: 2023-06-26 21:40+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
-"contentdb/de/>\n"
 "Language: de\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.18.1\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -309,7 +308,8 @@ msgstr "Nicht unterstützte Spiele"
 #: app/blueprints/packages/packages.py:656
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
-"Unterstützt alle Spiele (wenn nicht anders angegeben) / ist spielunabhängig"
+"Unterstützt alle Spiele (wenn nicht anders angegeben) / ist "
+"spielunabhängig"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
@@ -1283,8 +1283,8 @@ msgstr "Willkommen"
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
-"Willkommen im besten Ort, um Minetest-Mods, -Spiele und -Texturenpakete zu "
-"finden"
+"Willkommen im besten Ort, um Minetest-Mods, -Spiele und -Texturenpakete "
+"zu finden"
 
 #: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
@@ -2320,8 +2320,8 @@ msgstr "Unterstützt?"
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
 msgstr ""
-"Unterstützt alle Spiele (außer die, die von unsupported_games ausgeschlossen "
-"wurden)"
+"Unterstützt alle Spiele (außer die, die von unsupported_games "
+"ausgeschlossen wurden)"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -2364,8 +2364,8 @@ msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
 msgstr ""
-"Sie können dies ankreuzen und immer noch Spiele in supported_games angeben, "
-"die Sie getestet haben."
+"Sie können dies ankreuzen und immer noch Spiele in supported_games "
+"angeben, die Sie getestet haben."
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games"
@@ -2882,8 +2882,7 @@ msgstr "Clientvorschau"
 
 #: app/templates/packages/screenshots.html:90
 msgid "The first screenshot in the list above will be the package thumbnail."
-msgstr ""
-"Der erste Screenshot in der obigen Liste wird das Vorschaubild des Pakets."
+msgstr "Der erste Screenshot in der obigen Liste wird das Vorschaubild des Pakets."
 
 #: app/templates/packages/screenshots.html:127
 msgid "Videos"
@@ -3123,8 +3122,8 @@ msgstr "Stimmt das da oben?"
 #: app/templates/packages/view.html:490
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
-"Sie müssen dies entweder bestätigen, oder ContentDB über unterstützte Spiele "
-"informieren"
+"Sie müssen dies entweder bestätigen, oder ContentDB über unterstützte "
+"Spiele informieren"
 
 #: app/templates/packages/view.html:502
 msgid "Does not work with:"
@@ -3380,22 +3379,22 @@ msgstr "Spielunterstützung für %(username)s"
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
 msgstr ""
-"Sie sollten die Spiele, die von Ihren Mods und Texturenpaketen unterstützt "
-"werden, angeben."
+"Sie sollten die Spiele, die von Ihren Mods und Texturenpaketen "
+"unterstützt werden, angeben."
 
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
 msgstr ""
-"Die Angabe der Spielunterstützung macht es für Spieler leichter, Ihre Sachen "
-"zu finden."
+"Die Angabe der Spielunterstützung macht es für Spieler leichter, Ihre "
+"Sachen zu finden."
 
 #: app/templates/todo/game_support.html:13
 msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
 msgstr ""
-"Falls Ihr Paket spielunabhängig ist, bestätigen Sie dies mit „Unterstützt "
-"alle Spiele“"
+"Falls Ihr Paket spielunabhängig ist, bestätigen Sie dies mit „Unterstützt"
+" alle Spiele“"
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
@@ -3415,15 +3414,16 @@ msgstr ""
 msgid "Nothing to do :)"
 msgstr "Nichts zu tun :)"
 
+#: app/templates/todo/game_support.html:66
+msgid "Bulk support all games"
+msgstr ""
+
 #: app/templates/todo/game_support.html:68
 msgid ""
-"Click the button below to confirm that all games without listed "
+"Click the button below to confirm that all packages without listed "
 "supported_games (red text above) do support all games, except for any "
 "games listed in unsupported_games."
 msgstr ""
-"Klicken Sie den Knopf unten an, um zu bestätigen, dass alle Spiele außer den "
-"in supported_games aufgelisteten Spielen (roter Text oben) tatsächlich alle "
-"Spiele unterstützen, außer den in unsupported_games aufgelisteten Spielen."
 
 #: app/templates/todo/game_support.html:72
 msgid "Confirm"
@@ -3802,8 +3802,8 @@ msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Loggen Sie sich auf dem Forum ein und <a href=\"https://forum.minetest.net/"
-"ucp.php?i=173\">tun Sie es hier</a>."
+"Loggen Sie sich auf dem Forum ein und <a "
+"href=\"https://forum.minetest.net/ucp.php?i=173\">tun Sie es hier</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -3823,8 +3823,9 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
-"Gehen Sie zu <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
-"signature\">User Control Panel &gt; Profile &gt; Edit signature</a>"
+"Gehen Sie zu <a "
+"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">User"
+" Control Panel &gt; Profile &gt; Edit signature</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
@@ -4155,10 +4156,10 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
-"ContentDB wird nicht mehr in der Lage sein, „Passwort vergessen“- und andere "
-"wichtige System-E-Mails zu versenden.\n"
-"\t\t\t\t\tSie sollten stattdessen Ihre E-Mail-Benachrichtigungseinstellungen "
-"bearbeiten."
+"ContentDB wird nicht mehr in der Lage sein, „Passwort vergessen“- und "
+"andere wichtige System-E-Mails zu versenden.\n"
+"\t\t\t\t\tSie sollten stattdessen Ihre E-Mail-"
+"Benachrichtigungseinstellungen bearbeiten."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
@@ -4485,3 +4486,18 @@ msgstr ""
 #~ "Wenn Sie sich abmelden, können Sie "
 #~ "sich möglicherweise nicht mehr bei dem"
 #~ " Konto \"%(display_name)s\" anmelden"
+
+#~ msgid ""
+#~ "Click the button below to confirm "
+#~ "that all games without listed "
+#~ "supported_games (red text above) do "
+#~ "support all games, except for any "
+#~ "games listed in unsupported_games."
+#~ msgstr ""
+#~ "Klicken Sie den Knopf unten an, um"
+#~ " zu bestätigen, dass alle Spiele "
+#~ "außer den in supported_games aufgelisteten "
+#~ "Spielen (roter Text oben) tatsächlich "
+#~ "alle Spiele unterstützen, außer den in"
+#~ " unsupported_games aufgelisteten Spielen."
+
