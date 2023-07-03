@@ -162,9 +162,9 @@ def post_release_check_update(self, release: PackageRelease, path):
 
 					has_star = any(map(lambda x: x.strip() == "*", tree.meta["supported_games"].split(",")))
 					if has_star:
-						if package.type != PackageType.TXP and \
+						if package.type == PackageType.TXP or \
 							package.supported_games.filter(and_(
-								PackageGameSupport.confidence == 1, PackageGameSupport.supports == True)).count() == 0:
+								PackageGameSupport.confidence == 1, PackageGameSupport.supports == True)).count() > 0:
 							raise TaskError("The package depends on a game-specific mod, and so cannot support all games.")
 
 						package.supports_all_games = True
