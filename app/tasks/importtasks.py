@@ -26,9 +26,11 @@ from flask import url_for
 from git import GitCommandError
 from git_archive_all import GitArchiver
 from kombu import uuid
+from sqlalchemy import and_
 
 from app.models import AuditSeverity, db, NotificationType, PackageRelease, MetaPackage, Dependency, PackageType, \
-	MinetestRelease, Package, PackageState, PackageScreenshot, PackageUpdateTrigger, PackageUpdateConfig
+	MinetestRelease, Package, PackageState, PackageScreenshot, PackageUpdateTrigger, PackageUpdateConfig, \
+	PackageGameSupport
 from app.tasks import celery, TaskError
 from app.utils import random_string, post_bot_message, add_system_notification, add_system_audit_log, get_games_from_csv
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
@@ -160,6 +162,11 @@ def post_release_check_update(self, release: PackageRelease, path):
 
 					has_star = any(map(lambda x: x.strip() == "*", tree.meta["supported_games"].split(",")))
 					if has_star:
+						if package.type != PackageType.TXP and \
+							package.supported_games.filter(and_(
+								PackageGameSupport.confidence == 1, PackageGameSupport.supports == True)).count() == 0:
+							raise TaskError("The package depends on a game-specific mod, and so cannot support all games.")
+
 						package.supports_all_games = True
 				if "unsupported_games" in tree.meta:
 					for game in get_games_from_csv(db.session, tree.meta["unsupported_games"]):
