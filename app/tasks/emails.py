@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+import smtplib
 import typing
 from typing import Dict
 
@@ -201,11 +201,16 @@ def send_pending_notifications():
 
 		db.session.commit()
 
-		if len(to_send) > 1:
-			send_notification_digest(to_send, user.locale or "en")
-		elif len(to_send) > 0:
-			send_single_email(to_send[0], user.locale or "en")
-
+		try:
+			if len(to_send) > 1:
+				send_notification_digest(to_send, user.locale or "en")
+			elif len(to_send) > 0:
+				send_single_email(to_send[0], user.locale or "en")
+		except smtplib.SMTPDataError as e:
+			if "Message rejected under suspicion of SPAM" in str(e):
+				raise Exception(f"Failed to send email to {user.username} due to yandex spam filter") from e
+			else:
+				raise e
 
 @celery.task()
 def send_bulk_email(subject: str, text: str, html=None):
