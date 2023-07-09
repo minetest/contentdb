@@ -445,15 +445,18 @@ def list_reviews(package):
 @cors_allowed
 def list_all_reviews():
 	page = get_int_or_abort(request.args.get("page"), 1)
-	num = min(get_int_or_abort(request.args.get("n"), 100), 100)
+	num = min(get_int_or_abort(request.args.get("n"), 100), 200)
 
 	query = PackageReview.query
 	query = query.options(joinedload(PackageReview.author), joinedload(PackageReview.package))
 
-	if request.args.get("author"):
+	if "for_user" in request.args:
+		query = query.filter(PackageReview.package.has(Package.author.has(username=request.args["for_user"])))
+
+	if "author" in request.args:
 		query = query.filter(PackageReview.author.has(User.username == request.args.get("author")))
 
-	if request.args.get("is_positive"):
+	if "is_positive" in request.args:
 		if is_yes(request.args.get("is_positive")):
 			query = query.filter(PackageReview.rating > 3)
 		else:
@@ -462,6 +465,8 @@ def list_all_reviews():
 	q = request.args.get("q")
 	if q:
 		query = query.filter(PackageReview.thread.has(Thread.title.ilike(f"%{q}%")))
+
+	query = query.order_by(db.desc(PackageReview.created_at))
 
 	pagination: flask_sqlalchemy.Pagination = query.paginate(page=page, per_page=num)
 	return jsonify({

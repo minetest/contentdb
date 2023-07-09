@@ -328,10 +328,12 @@ curl -X POST https://content.minetest.net/api/packages/username/name/screenshots
         * [Paginated result](#paginated-results)
         * `items`: array of review dictionaries, like above
             * Each review also has a `package` dictionary with `type`, `author` and `name`
+        * Ordered by created at, newest to oldest.
     * Query arguments:
         * `page`: page number, integer from 1 to max
-        * `n`: number of results per page, max 100
+        * `n`: number of results per page, max 200
         * `author`: filter by review author username
+        * `for_user`: filter by package author
         * `rating`: 1 for negative, 3 for neutral, 5 for positive
         * `is_positive`: true or false. Default: null
         * `q`: filter by title (case-insensitive, no fulltext search)
