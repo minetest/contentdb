@@ -192,6 +192,8 @@ class PackageReview(db.Model):
 		return pos, neg, user_vote.is_positive if user_vote else None
 
 	def as_dict(self, include_package=False):
+		from app.utils import abs_url_for
+
 		pos, neg, _user = self.get_totals()
 		ret = {
 			"is_positive": self.rating > 3,
@@ -207,6 +209,10 @@ class PackageReview(db.Model):
 			},
 			"title": self.thread.title,
 			"comment": self.thread.first_reply.comment,
+			"thread": {
+				"id": self.thread.id,
+				"url": abs_url_for("threads.view", id=self.thread.id),
+			},
 		}
 		if include_package:
 			ret["package"] = self.package.as_key_dict()
