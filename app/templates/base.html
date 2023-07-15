@@ -9,8 +9,8 @@
 	<link rel="icon" href="/favicon-128.png" sizes="128x128">
 	<link rel="icon" href="/favicon-32.png" sizes="32x32">
 	<meta name="og:site_name" content="ContentDB">
-	{% if self.description and self.description != "" -%}
 	<meta name="og:title" content="{{ self.title() | normalize_whitespace }}">
+	{% if self.description and self.description != "" -%}
 	<meta name="description" content="{{ self.description() | normalize_whitespace }}">
 	<meta name="og:description" content="{{ self.description() | normalize_whitespace }}">
 	{%- endif %}
