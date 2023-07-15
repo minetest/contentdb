@@ -4,6 +4,10 @@
 	{{ user.username }}
 {% endblock %}
 
+{% block headextra %}
+	<meta name="og:image" content="{{ user.get_profile_pic_url() }}"/>
+{% endblock %}
+
 {% block content %}
 
 <article class="row mb-5">
