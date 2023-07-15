@@ -122,6 +122,11 @@ def get_releases(package):
 		return package.releases.filter_by(approved=True).limit(5)
 
 
+@bp.route("/packages/<author>/")
+def user_redirect(author):
+	return redirect(url_for("users.profile", username=author))
+
+
 @bp.route("/packages/<author>/<name>/")
 @is_package_page
 def view(package):
