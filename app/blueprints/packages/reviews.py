@@ -127,7 +127,7 @@ def review(package):
 							 url_for("threads.view", id=thread.id), package)
 
 			if was_new:
-				post_discord_webhook.delay(thread.author.username,
+				post_discord_webhook.delay(thread.author.display_name,
 						"Reviewed {}: {}".format(package.title, thread.get_view_url(absolute=True)), False)
 
 			db.session.commit()

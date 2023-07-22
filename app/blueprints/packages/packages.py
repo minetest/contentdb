@@ -412,7 +412,7 @@ def move_to_state(package):
 
 	if state == PackageState.APPROVED:
 		if not package.approved_at:
-			post_discord_webhook.delay(package.author.username,
+			post_discord_webhook.delay(package.author.display_name,
 					"New package {}".format(package.get_url("packages.view", absolute=True)), False,
 					package.title, package.short_desc, package.get_thumb_url(2, True))
 			package.approved_at = datetime.datetime.now()
@@ -423,7 +423,7 @@ def move_to_state(package):
 
 		msg = "Approved {}".format(package.title)
 	elif state == PackageState.READY_FOR_REVIEW:
-		post_discord_webhook.delay(package.author.username,
+		post_discord_webhook.delay(package.author.display_name,
 				"Ready for Review: {}".format(package.get_url("packages.view", absolute=True)), True,
 				package.title, package.short_desc, package.get_thumb_url(2, True))
 
