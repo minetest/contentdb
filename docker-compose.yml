@@ -2,6 +2,7 @@ version: '3'
 services:
   db:
     image: "postgres:14.1"
+    restart: always
     volumes:
       - "./data/db:/var/lib/postgresql/data"
     env_file:
@@ -9,12 +10,14 @@ services:
 
   redis:
     image: 'redis:6.2-alpine'
+    restart: always
     command: redis-server
     volumes:
       - './data/redis:/data'
 
   app:
     build: .
+    restart: always
     command: ./utils/entrypoint.sh
     env_file:
       - config.env
@@ -32,6 +35,7 @@ services:
 
   worker:
     build: .
+    restart: always
     command: celery -A app.tasks.celery worker --concurrency 1
     env_file:
       - config.env
@@ -45,6 +49,7 @@ services:
 
   beat:
     build: .
+    restart: always
     command: celery -A app.tasks.celery beat
     env_file:
       - config.env
@@ -55,6 +60,7 @@ services:
 
   exporter:
     image: ovalmoney/celery-exporter
+    restart: always
     env_file:
       - config.env
     ports:
