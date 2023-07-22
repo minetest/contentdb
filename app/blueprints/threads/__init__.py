@@ -265,7 +265,7 @@ def view(id):
 			approvers = User.query.filter(User.rank >= UserRank.APPROVER).all()
 			add_notification(approvers, current_user, NotificationType.EDITOR_MISC, msg,
 							 thread.get_view_url(), thread.package)
-			post_discord_webhook.delay(current_user.username,
+			post_discord_webhook.delay(current_user.display_name,
 					"Replied to bot messages: {}".format(thread.get_view_url(absolute=True)), True)
 
 		db.session.commit()
@@ -297,8 +297,10 @@ def new():
 	if package is None and not current_user.rank.at_least(UserRank.APPROVER):
 		abort(404)
 
-	allow_private_change = not package or package.approved
 	is_review_thread = package and not package.approved
+	allow_private_change = not is_review_thread
+	if is_review_thread:
+		def_is_private = True
 
 	# Check that user can make the thread
 	if package and not package.check_perm(current_user, Permission.CREATE_THREAD):
@@ -372,7 +374,7 @@ def new():
 			add_notification(approvers, current_user, NotificationType.EDITOR_MISC, notif_msg, thread.get_view_url(), package)
 
 			if is_review_thread:
-				post_discord_webhook.delay(current_user.username,
+				post_discord_webhook.delay(current_user.display_name,
 						"Opened approval thread: {}".format(thread.get_view_url(absolute=True)), True)
 
 			db.session.commit()
