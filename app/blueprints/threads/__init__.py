@@ -16,6 +16,7 @@
 
 from flask import Blueprint, request, render_template, abort, flash, redirect, url_for
 from flask_babel import gettext, lazy_gettext
+from sqlalchemy.orm import selectinload
 
 from app.markdown import get_user_mentions, render_markdown
 from app.tasks.webhooktasks import post_discord_webhook
@@ -25,7 +26,7 @@ bp = Blueprint("threads", __name__)
 from flask_login import current_user, login_required
 from app.models import Package, db, User, Permission, Thread, UserRank, AuditSeverity, \
 	NotificationType, ThreadReply
-from app.utils import add_notification, is_yes, add_audit_log, get_system_user, rank_required, has_blocked_domains
+from app.utils import add_notification, is_yes, add_audit_log, get_system_user, has_blocked_domains
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length
@@ -385,10 +386,17 @@ def new():
 
 
 @bp.route("/users/<username>/comments/")
-@rank_required(UserRank.EDITOR)
 def user_comments(username):
 	user = User.query.filter_by(username=username).first()
 	if user is None:
 		abort(404)
 
-	return render_template("threads/user_comments.html", user=user, replies=user.replies)
+	all_replies = ThreadReply.query.options(selectinload(ThreadReply.thread)).filter_by(author=user)
+
+	visible_replies = [
+		reply
+		for reply in all_replies
+		if reply.thread.check_perm(current_user, Permission.SEE_THREAD)
+	]
+
+	return render_template("threads/user_comments.html", user=user, replies=visible_replies)
