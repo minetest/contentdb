@@ -34,10 +34,6 @@ If in doubt at what this means, [contact us by raising a report](/report/).
 Mature content is permitted providing that it is labelled correctly.
 See [Content Flags](/help/content_flags/).
 
-The submission of malware is strictly prohibited. This includes software that
-does not do as it advertises, for example, if it posts telemetry without stating
-clearly that it does in the package meta.
-
 ### 2.2. State of Completion
 
 ContentDB should only currently contain playable content - content which is
@@ -191,6 +187,16 @@ Doing so may result in temporary or permanent suspension from ContentDB.
 6.  **Screenshots should be of reasonable dimensions.** We recommend using 1920x1080.
 
 
-## 8. Reporting Violations
+## 8. Security
+
+The submission of malware is strictly prohibited. This includes software that
+does not do as it advertises, for example, if it posts telemetry without stating
+clearly that it does in the package meta.
+
+Packages must not ask that users disable mod security (`secure.enable_security`).
+Instead, they should use the insecure environment API.
+
+
+## 9. Reporting Violations
 
 Please click "Report" on the package page.
