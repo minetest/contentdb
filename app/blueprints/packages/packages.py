@@ -592,7 +592,7 @@ class PackageAliasForm(FlaskForm):
 
 
 @bp.route("/packages/<author>/<name>/aliases/")
-@rank_required(UserRank.EDITOR)
+@rank_required(UserRank.ADMIN)
 @is_package_page
 def alias_list(package: Package):
 	return render_template("packages/alias_list.html", package=package)
@@ -600,7 +600,7 @@ def alias_list(package: Package):
 
 @bp.route("/packages/<author>/<name>/aliases/new/", methods=["GET", "POST"])
 @bp.route("/packages/<author>/<name>/aliases/<int:alias_id>/", methods=["GET", "POST"])
-@rank_required(UserRank.EDITOR)
+@rank_required(UserRank.ADMIN)
 @is_package_page
 def alias_create_edit(package: Package, alias_id: int = None):
 	alias = None

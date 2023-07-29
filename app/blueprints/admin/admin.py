@@ -18,11 +18,11 @@ from flask import redirect, render_template, url_for, request, flash
 from flask_login import current_user, login_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
-from wtforms.validators import InputRequired, Length
-from app.utils import rank_required, add_audit_log, add_notification, get_system_user
+from wtforms.validators import InputRequired, Length, Optional
+from app.utils import rank_required, add_audit_log, add_notification, get_system_user, nonempty_or_none
 from . import bp
 from .actions import actions
-from app.models import UserRank, Package, db, PackageState, User, AuditSeverity, NotificationType
+from app.models import UserRank, Package, db, PackageState, User, AuditSeverity, NotificationType, PackageAlias
 
 
 @bp.route("/admin/", methods=["GET", "POST"])
@@ -118,3 +118,54 @@ def restore():
 		.all()
 
 	return render_template("admin/restore.html", deleted_packages=deleted_packages)
+
+
+class TransferPackageForm(FlaskForm):
+	old_username = StringField("Old Username", [InputRequired()])
+	new_username = StringField("New Username", [InputRequired()])
+	package = StringField("Package", [Optional()])
+	submit = SubmitField("Transfer")
+
+
+def perform_transfer(form: TransferPackageForm):
+	query = Package.query.filter(Package.author.has(username=form.old_username.data))
+	if nonempty_or_none(form.package.data):
+		query = query.filter_by(name=form.package.data)
+
+	packages = query.all()
+	if len(packages) == 0:
+		flash("Unable to find package(s)", "danger")
+		return
+
+	new_user = User.query.filter_by(username=form.new_username.data).first()
+	if new_user is None:
+		flash("Unable to find new user", "danger")
+		return
+
+	for package in packages:
+		package.author = new_user
+		package.maintainers.append(new_user)
+		package.aliases.append(PackageAlias(form.old_username.data, package.name))
+
+		add_audit_log(AuditSeverity.MODERATION, current_user,
+				f"Transferred {form.old_username.data}/{package.name} to {form.new_username.data}",
+				package.get_url("packages.view"), package)
+
+	db.session.commit()
+
+	flash("Transferred " + ", ".join([x.name for x in packages]), "success")
+
+	return redirect(url_for("admin.transfer"))
+
+
+@bp.route("/admin/transfer/", methods=["GET", "POST"])
+@rank_required(UserRank.MODERATOR)
+def transfer():
+	form = TransferPackageForm(formdata=request.form)
+	if form.validate_on_submit():
+		ret = perform_transfer(form)
+		if ret is not None:
+			return ret
+
+	# Process GET or invalid POST
+	return render_template("admin/transfer.html", form=form)
