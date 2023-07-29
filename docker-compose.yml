@@ -2,7 +2,7 @@ version: '3'
 services:
   db:
     image: "postgres:14.1"
-    restart: always
+    restart: unless-stopped
     volumes:
       - "./data/db:/var/lib/postgresql/data"
     env_file:
@@ -10,19 +10,19 @@ services:
 
   redis:
     image: 'redis:6.2-alpine'
-    restart: always
+    restart: unless-stopped
     command: redis-server
     volumes:
       - './data/redis:/data'
 
   app:
     build: .
-    restart: always
+    restart: unless-stopped
     command: ./utils/entrypoint.sh
     env_file:
       - config.env
     ports:
-      - 5123:5123
+      - "5123:5123"
     volumes:
       - "./data/uploads:/var/cdb/uploads"
       - "./data/logs:/var/cdb/logs"
@@ -35,7 +35,7 @@ services:
 
   worker:
     build: .
-    restart: always
+    restart: unless-stopped
     command: celery -A app.tasks.celery worker --concurrency 1
     env_file:
       - config.env
@@ -49,7 +49,7 @@ services:
 
   beat:
     build: .
-    restart: always
+    restart: unless-stopped
     command: celery -A app.tasks.celery beat
     env_file:
       - config.env
@@ -60,10 +60,10 @@ services:
 
   exporter:
     image: ovalmoney/celery-exporter
-    restart: always
+    restart: unless-stopped
     env_file:
       - config.env
     ports:
-      - 5125:9540
+      - "5125:9540"
     depends_on:
       - redis
