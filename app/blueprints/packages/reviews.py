@@ -41,7 +41,7 @@ def list_reviews():
 
 
 class ReviewForm(FlaskForm):
-	title = StringField(lazy_gettext("Title"), [InputRequired(), Length(3,100)])
+	title = StringField(lazy_gettext("Title"), [InputRequired(), Length(3, 100)])
 	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
 	rating = RadioField(lazy_gettext("Rating"), [InputRequired()],
 			choices=[("5", lazy_gettext("Yes")), ("3", lazy_gettext("Neutral")), ("1", lazy_gettext("No"))])
