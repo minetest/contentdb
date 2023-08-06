@@ -23,6 +23,8 @@ from .config import parse_conf
 
 basenamePattern = re.compile("^([a-z0-9_]+)$")
 
+DISALLOWED_NAMES = {"core", "minetest", "group"}
+
 
 def get_base_dir(path):
 	if not os.path.isdir(path):
@@ -79,6 +81,10 @@ class PackageTreeNode:
 		elif self.type == ContentType.MOD:
 			if self.name and not basenamePattern.match(self.name):
 				raise MinetestCheckError(f"Invalid base name for mod {self.name} at {self.relative}, names must only contain a-z0-9_.")
+
+			if self.name and self.name in DISALLOWED_NAMES:
+				raise MinetestCheckError(f"Forbidden mod name '{self.name}' used at {self.relative}")
+
 			self.check_dir_casing(["textures", "media", "sounds", "models", "locale"])
 		elif self.type == ContentType.MODPACK:
 			self.add_children_from_mod_dir(None)
