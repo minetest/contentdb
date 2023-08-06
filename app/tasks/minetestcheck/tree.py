@@ -23,7 +23,10 @@ from .config import parse_conf
 
 basenamePattern = re.compile("^([a-z0-9_]+)$")
 
-DISALLOWED_NAMES = {"core", "minetest", "group"}
+DISALLOWED_NAMES = {
+	"core", "minetest", "group", "table", "string", "lua", "luajit", "assert", "debug",
+	"error", "next", "pairs", "print", "select", "type", "pack", "unpack", "builtin",
+}
 
 
 def get_base_dir(path):
