@@ -324,7 +324,9 @@ class User(db.Model, UserMixin):
 
 	def can_delete(self):
 		from app.models import ForumTopic
-		return self.packages.count() == 0 and ForumTopic.query.filter_by(author=self).count() == 0
+		return self.packages.count() == 0 and \
+			ForumTopic.query.filter_by(author=self).count() == 0 and \
+			self.rank != UserRank.BANNED
 
 
 class UserEmailVerification(db.Model):
