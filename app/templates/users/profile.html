@@ -199,19 +199,37 @@
 	</div>
 {% endif %}
 
-{% if current_user == user or user.check_perm(current_user, "CHANGE_AUTHOR") %}
-	<a class="float-right btn btn-sm btn-primary"
-			href="{{ url_for('packages.create_edit', author=user.username) }}">
-		<i class="fas fa-plus mr-1"></i>
-		{{ _("Create package") }}
-	</a>
-{% endif %}
-{% if current_user == user or (current_user.is_authenticated and current_user.rank.at_least(current_user.rank.EDITOR)) %}
-	<a class="float-right btn btn-sm btn-secondary mr-2"
-			href="{{ url_for('todo.tags', author=user.username) }}">
-		{{ _("View list of tags") }}
-	</a>
-{% endif %}
+<div class="float-right">
+    {% if packages %}
+        <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Sorting">
+            <span class="btn btn-sm btn-primary">
+                {{ _("Alphabetical") }}
+            </span>
+            <a href="{{ url_for('packages.list_all', author=user.username, sort='downloads', order='desc') }}"
+               class="btn btn-sm btn-secondary">
+                {{ _("Downloads") }}
+            </a>
+            <a href="{{ url_for('packages.list_all', author=user.username, sort='approved_at', order='desc') }}"
+               class="btn btn-sm btn-secondary">
+                {{ _("Newest") }}
+            </a>
+        </div>
+        {% if current_user == user or (current_user.is_authenticated and current_user.rank.at_least(current_user.rank.EDITOR)) %}
+            <a class="btn btn-sm btn-secondary mr-2"
+                    href="{{ url_for('todo.tags', author=user.username) }}">
+                {{ _("View list of tags") }}
+            </a>
+        {% endif %}
+    {% endif %}
+    {% if current_user == user or user.check_perm(current_user, "CHANGE_AUTHOR") %}
+        <a class="btn btn-sm btn-primary"
+                href="{{ url_for('packages.create_edit', author=user.username) }}">
+            <i class="fas fa-plus mr-1"></i>
+            {{ _("Create package") }}
+        </a>
+    {% endif %}
+</div>
+
 <h2 class="my-3">{{ _("Packages") }}</h2>
 
 {% from "macros/packagegridtile.html" import render_pkggrid %}
