@@ -269,7 +269,9 @@ def delete(username):
 		for thread in user.threads.all():
 			db.session.delete(thread)
 		user.email = None
-		user.rank = UserRank.NOT_JOINED
+
+		if user.rank != UserRank.BANNED:
+			user.rank = UserRank.NOT_JOINED
 
 		msg = "Deactivated user {}".format(user.username)
 		flash(msg, "success")
