@@ -471,3 +471,17 @@ Supported query parameters:
 * GET `/api/cdb_schema/` ([View](/api/cdb_schema/))
     * Get JSON Schema of `.cdb.json`, including licenses, tags and content warnings.
     * See [JSON Schema Reference](https://json-schema.org/).
+* POST `/api/hypertext/`
+    * Converts HTML or Markdown to [Minetest Markup Language](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#markup-language)
+      to be used in a `hypertext` formspec element.
+    * Post data: HTML or Markdown as plain text.
+    * Content-Type: `text/html` or `text/markdown`.
+    * Query arguments:
+        * `formspec_version`: Required, maximum supported formspec version. Ie: 6
+        * `include_images`: Optional, defaults to true.
+    * Returns JSON dictionary with following key:
+        * `head`: markup for suggested styling and custom tags, prepend to the body before displaying.
+        * `body`: markup for long description.
+        * `links`: dictionary of anchor name to link URL.
+        * `images`: dictionary of img name to image URL
+        * `image_tooltips`: dictionary of img name to tooltip text.

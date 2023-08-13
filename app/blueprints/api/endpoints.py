@@ -765,3 +765,17 @@ def json_schema():
 			},
 		},
 	})
+
+
+@bp.route("/api/hypertext/", methods=["POST"])
+@csrf.exempt
+@cors_allowed
+def hypertext():
+	formspec_version = request.args["formspec_version"]
+	include_images = is_yes(request.args.get("include_images", "true"))
+
+	html = request.data.decode("utf-8")
+	if request.content_type == "text/markdown":
+		html = render_markdown(html)
+
+	return jsonify(html_to_minetest(html, formspec_version, include_images))
