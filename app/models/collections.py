@@ -48,7 +48,8 @@ class Collection(db.Model):
 	private = db.Column(db.Boolean, nullable=False, default=False)
 
 	packages = db.relationship("Package", secondary=CollectionPackage.__table__, backref="collections")
-	items = db.relationship("CollectionPackage", back_populates="collection", order_by=db.asc("created_at"))
+	items = db.relationship("CollectionPackage", back_populates="collection", order_by=db.asc("created_at"),
+		cascade="all, delete, delete-orphan")
 
 	collection_name_valid = db.CheckConstraint("name ~* '^[a-z0-9_]+$' AND name != '_game'")
 	__table_args__ = (db.UniqueConstraint("author_id", "name", name="_collection_uc"),)

@@ -17,7 +17,7 @@
 import re
 import typing
 
-from flask import Blueprint, request, redirect, render_template, flash, abort
+from flask import Blueprint, request, redirect, render_template, flash, abort, url_for
 from flask_babel import lazy_gettext, gettext
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
@@ -173,6 +173,27 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 	form.populate_obj(collection)
 	db.session.commit()
 	return redirect(collection.get_url("collections.view"))
+
+
+@bp.route("/collections/<author>/<name>/delete/", methods=["GET", "POST"])
+@login_required
+def delete(author, name):
+	collection = Collection.query \
+		.filter(Collection.name == name, Collection.author.has(username=author)) \
+		.one_or_404()
+	if not collection.check_perm(current_user, Permission.EDIT_COLLECTION):
+		abort(403)
+
+	if request.method == "POST":
+		add_audit_log(AuditSeverity.NORMAL, current_user,
+				f"Deleted collection {collection.author.username}/{collection.name}",
+				collection.get_url("collections.view"), None)
+
+		db.session.delete(collection)
+		db.session.commit()
+		return redirect(url_for("collections.list_all", author=author))
+
+	return render_template("collections/delete.html", collection=collection)
 
 
 def toggle_package(collection: Collection, package: Package):
