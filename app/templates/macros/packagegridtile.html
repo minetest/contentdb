@@ -38,16 +38,11 @@
 {% endmacro %}
 
 {% macro render_pkggrid(packages, show_author=True) -%}
-	<ul class="d-flex p-0 flex-row flex-wrap justify-content-start align-content-start ">
+	<ul class="grid-4 gap-2 p-0">
 		{% for p in packages %}
 			{{ render_pkgtile(p, show_author) }}
 		{% else %}
-			<li class="packagetile flex-fill"><i>{{ _("No packages available") }}</i></li>
+			<li class="packagetile"><i>{{ _("No packages available") }}</i></li>
 		{% endfor %}
-		{% if packages %}
-			{% for i in range(4) %}
-				<li class="packagetile flex-fill"></li>
-			{% endfor %}
-		{% endif %}
 	</ul>
 {% endmacro %}
