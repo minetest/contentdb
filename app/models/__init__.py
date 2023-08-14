@@ -31,6 +31,7 @@ make_searchable(db.metadata)
 from .packages import *
 from .users import *
 from .threads import *
+from .collections import *
 
 
 class APIToken(db.Model):

@@ -42,7 +42,7 @@ from . import bp, get_package_tabs
 from app.models import Package, Tag, db, User, Tags, PackageState, Permission, PackageType, MetaPackage, ForumTopic, \
 	Dependency, Thread, UserRank, PackageReview, PackageDevState, ContentWarning, License, AuditSeverity, \
 	PackageScreenshot, NotificationType, AuditLogEntry, PackageAlias, PackageProvides, PackageGameSupport, \
-	PackageDailyStats
+	PackageDailyStats, Collection
 from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, add_audit_log, get_package_by_info, \
 	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options
 
@@ -196,11 +196,17 @@ def view(package):
 	has_review = current_user.is_authenticated and \
 		PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
+	is_favorited = current_user.is_authenticated and \
+		Collection.query.filter(
+			Collection.author == current_user,
+			Collection.packages.contains(package),
+			Collection.name == "favorites").count() > 0
+
 	return render_template("packages/view.html",
 			package=package, releases=releases, packages_uses=packages_uses,
 			conflicting_modnames=conflicting_modnames,
 			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
-			threads=threads.all(), has_review=has_review)
+			threads=threads.all(), has_review=has_review, is_favorited=is_favorited)
 
 
 @bp.route("/packages/<author>/<name>/shields/<type>/")

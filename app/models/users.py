@@ -90,6 +90,8 @@ class Permission(enum.Enum):
 	CHANGE_PROFILE_URLS = "CHANGE_PROFILE_URLS"
 	CHANGE_DISPLAY_NAME = "CHANGE_DISPLAY_NAME"
 	VIEW_AUDIT_DESCRIPTION = "VIEW_AUDIT_DESCRIPTION"
+	EDIT_COLLECTION = "EDIT_COLLECTION"
+	VIEW_COLLECTION = "VIEW_COLLECTION"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.check_perm for package-specific contexts
@@ -183,6 +185,7 @@ class User(db.Model, UserMixin):
 	threads       = db.relationship("Thread", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
 	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan", order_by=db.desc("created_at"))
 	forum_topics  = db.relationship("ForumTopic", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
+	collections = db.relationship("Collection", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan", order_by=db.asc("title"))
 
 	ban = db.relationship("UserBan", foreign_keys="UserBan.user_id", back_populates="user", uselist=False)
 

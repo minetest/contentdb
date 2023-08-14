@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ collection.title }}
+{% endblock %}
+
+{% block description -%}
+	{{ collection.short_description }}
+{%- endblock %}
+
+{% block author_link -%}
+	<a href="{{ url_for('users.profile', username=collection.author.username) }}">
+		{{ collection.author.display_name }}
+	</a>
+{%- endblock %}
+
+{% block content %}
+	<div class="float-right">
+		<a class="btn btn-secondary" href="{{ url_for('collections.list_all', author=collection.author.username) }}">
+			{{ _("%(author)s's collections", author=collection.author.display_name) }}
+		</a>
+		{% if current_user.is_authenticated %}
+			<form method="POST" action="{{ collection.get_url('collections.clone') }}" class="d-inline-block ml-2">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<button type="submit" class="btn btn-secondary">
+					{{ _("Make a copy") }}
+				</button>
+			</form>
+		{% endif %}
+		{% if collection.check_perm(current_user, "EDIT_COLLECTION") %}
+			<a class="btn btn-primary ml-2" href="{{ collection.get_url('collections.create_edit') }}">
+				{{ _("Edit") }}
+			</a>
+		{% endif %}
+	</div>
+	<h1>{{ self.title() }}</h1>
+	<p class="text-muted">
+		{% if collection.private %}
+			<span class="badge badge-secondary mr-1">
+				<i class="fas fa-lock mr-1" style="color:#ffac33;"></i>
+				{{  _("Private") }}
+			</span>
+		{% endif %}
+		{{ _("A collection by %(author)s", author=self.author_link()) }}
+	</p>
+	<p>
+		{{ collection.short_description }}
+	</p>
+
+	<section class="mt-5">
+		<h2 class="sr-only">{{ _("Packages") }}</h2>
+		{% if not collection.items %}
+			<p class="text-muted">
+				{{ _("To add a package, go to the package's page and click 'Add to collection'") }}
+			</p>
+		{% endif %}
+		<div class="grid-2 gap-3">
+			{% for item in collection.items %}
+				<div class="">
+					<article class="card">
+						<div class="embed-responsive embed-responsive-16by9">
+							<img class="card-img-top embed-responsive-item" src="{{ item.package.get_thumb_url(4) }}" alt="{{ item.package.title }} screenshot">
+						</div>
+						<div class="card-body">
+							<h5 class="mt-0">
+								<a href="{{ item.package.get_url('packages.view') }}">
+									{{ item.package.title }}
+								</a>
+							</h5>
+							<p class="card-text">
+								{% if item.description  %}
+									{{ item.description }}
+								{% else %}
+									{{ item.description or item.package.short_desc }}
+								{% endif %}
+							</p>
+						</div>
+					</article>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}

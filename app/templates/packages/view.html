@@ -348,6 +348,22 @@
 					{{ self.download_btn() }}
 				</div>
 
+				{% if current_user.is_authenticated %}
+					<div class="d-flex my-3">
+						<form method="POST" action="{{ package.get_url('collections.package_toggle_favorite') }}">
+							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+							<button type="submit" class="btn {% if is_favorited %}text-danger{% endif %} btn-secondary mr-2" aria-label="{{ _('Favorite') }}">
+								<i class="fas fa-heart"></i>
+							</button>
+						</form>
+						<div class="flex-grow">
+							<a href="{{ package.get_url('collections.package_add') }}" class="btn btn-block btn-secondary">
+								{{ _("Add to collection...") }}
+							</a>
+						</div>
+					</div>
+				{% endif %}
+
 				{% if package.check_perm(current_user, "MAKE_RELEASE") and package.update_config and package.update_config.outdated_at %}
 					{% set config = package.update_config %}
 					<div class="alert alert-warning">

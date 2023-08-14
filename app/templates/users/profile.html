@@ -9,7 +9,6 @@
 {% endblock %}
 
 {% block content %}
-
 <article class="row mb-5">
 	<div class="col-auto image mx-0">
 		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ user.get_profile_pic_url() }}" alt="{{ _('Profile picture') }}">
@@ -107,6 +106,15 @@
 					<span class="count">
 						<strong>{{ package_count }}</strong>
 						{{ _("packages") }}
+					</span>
+				</a>
+
+				{% set collection_count = user.collections.filter_by(private=False).count() %}
+				<a class="btn" href="{{ url_for('collections.list_all', author=user.username) }}">
+					<i class="fas fa-list"></i>
+					<span class="count">
+						<strong>{{ collection_count }}</strong>
+						{{ _("collections") }}
 					</span>
 				</a>
 

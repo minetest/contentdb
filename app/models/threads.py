@@ -80,13 +80,13 @@ class Thread(db.Model):
 		return url_for("threads.unsubscribe", id=self.id)
 
 	def check_perm(self, user, perm):
-		if not user.is_authenticated:
-			return perm == Permission.SEE_THREAD and not self.private
-
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
 			raise Exception("Unknown permission given to Thread.check_perm()")
+
+		if not user.is_authenticated:
+			return perm == Permission.SEE_THREAD and not self.private
 
 		isMaintainer = user == self.author or (self.package is not None and self.package.author == user)
 		if self.package:

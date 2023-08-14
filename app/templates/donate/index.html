@@ -59,7 +59,7 @@
 		{{ self.description() }}
 	</p>
 
-	<h2>{{ _("Based on your reviews") }}</h2>
+	<h2>{{ _("Based on your reviews / favorites") }}</h2>
 	{% if reviewed_packages %}
 		{{ render_packages(reviewed_packages) }}
 	{% elif current_user.is_authenticated %}

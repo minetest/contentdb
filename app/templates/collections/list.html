@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{% if user %}
+		{{ _("%(author)s's collections", author=user.display_name) }}
+	{% else %}
+		{{ _("Collections") }}
+	{% endif %}
+{% endblock %}
+
+{% block author_link -%}
+	<a href="{{ url_for('users.profile', username=user.username) }}">
+		{{- user.display_name -}}
+	</a>
+{%- endblock %}
+
+{% block content %}
+	{% if user %}
+		{% if current_user == user or (current_user.is_authenticated and current_user.rank.at_least(current_user.rank.EDITOR)) %}
+			<a class="btn btn-primary float-right" href="{{ url_for('collections.create_edit', author=user.username) }}">
+				{{ _("Create") }}
+			</a>
+		{% endif %}
+		<h1>{{ _("%(author)s's collections", author=self.author_link()) }}</h1>
+	{% else %}
+		<h1>{{ _("Collections") }}</h1>
+	{% endif %}
+
+	<div class="list-group">
+		{% for collection in collections -%}
+			<a class="list-group-item list-group-item-action" href="{{ collection.get_url('collections.view') }}">
+				{% if collection.private %}
+					<i class="fas fa-lock mr-1" style="color:#ffac33;"></i>
+				{% endif %}
+				{% if collection.name == 'favorites' %}
+					<i class="fas fa-heart mr-1 text-danger"></i>
+				{% endif %}
+				{% if user != collection.author %}
+					{{ _("%(title)s by %(author)s", title=collection.title, author=collection.author.display_name) }}
+				{% else %}
+					{{ collection.title }}
+				{% endif %}
+				<span class="text-muted ml-4">
+					{{ collection.short_description }}
+				</span>
+			</a>
+		{% else %}
+			<div class="list-group-item text-muted">
+				<i>{{ _("No collections") }}</i>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}
