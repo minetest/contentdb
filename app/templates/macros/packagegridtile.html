@@ -38,7 +38,7 @@
 {% endmacro %}
 
 {% macro render_pkggrid(packages, show_author=True) -%}
-	<ul class="grid-4 gap-2 p-0">
+	<ul class="grid-250px gap-2 p-0">
 		{% for p in packages %}
 			{{ render_pkgtile(p, show_author) }}
 		{% else %}
