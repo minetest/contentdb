@@ -22,7 +22,7 @@ from flask_babel import lazy_gettext, gettext
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, BooleanField, SubmitField, FieldList, HiddenField
-from wtforms.validators import InputRequired, Length, Optional
+from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from app.models import Collection, db, Package, Permission, CollectionPackage, User, UserRank, AuditSeverity
 from app.utils import is_package_page, nonempty_or_none, add_audit_log
@@ -70,6 +70,8 @@ def view(author, name):
 
 class CollectionForm(FlaskForm):
 	title = StringField(lazy_gettext("Title"), [InputRequired(), Length(3, 100)])
+	name = StringField("URL", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0,
+		"Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	short_description = StringField(lazy_gettext("Short Description"), [Optional(), Length(0, 200)])
 	private = BooleanField(lazy_gettext("Private"))
 	descriptions = FieldList(
@@ -113,6 +115,8 @@ def create_edit(author=None, name=None):
 			for item in collection.items:
 				form.descriptions.append_entry(item.description)
 				form.package_ids.append_entry(item.package.id)
+		else:
+			form.name = None
 
 	if form.validate_on_submit():
 		ret = handle_create_edit(collection, form, initial_package, author)
@@ -127,9 +131,9 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 		initial_package: typing.Optional[Package], author: User):
 
 	severity = AuditSeverity.NORMAL if author == current_user else AuditSeverity.EDITOR
-	name = collection.name if collection else regex_invalid_chars.sub("", form.title.data.lower().replace(" ", "_"))
+	name = form.name.data if collection else regex_invalid_chars.sub("", form.title.data.lower().replace(" ", "_"))
 
-	if collection is None:
+	if collection is None or name != collection.name:
 		if Collection.query \
 				.filter(Collection.name == name, Collection.author == author) \
 				.count() > 0:
@@ -142,6 +146,7 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 			flash(gettext("Unable to create collection as a package with that name already exists"), "danger")
 			return
 
+	if collection is None:
 		collection = Collection()
 		collection.name = name
 		collection.author = author

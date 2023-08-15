@@ -36,24 +36,29 @@
 	</div>
 {%- endmacro %}
 
-{% macro render_field_prefix_button(field, label=None, prefix="@", label_visible=true, right_url=None, right_label=None, fieldclass=None) -%}
+{% macro render_field_prefix_button(field, label=None, prefix="@", label_visible=true, right_url=None, right_label=None, fieldclass=None, has_view=False, hint=None) -%}
 	<div class="form-group {% if field.errors %}has-danger{% endif %} {{ kwargs.pop('class_', '') }}">
 		{% if field.type != 'HiddenField' and label_visible %}
 			{% if not label and label != "" %}{% set label=field.label.text %}{% endif %}
 			{% if label %}<label for="{{ field.id }}">{{ label|safe }}</label>{% endif %}
 		{% endif %}
 
-		<div class="input-group mb-3">
+		<div class="input-group mb-1">
 			<div class="input-group-prepend">
 				<span class="input-group-text" id="basic-addon1">{{ prefix }}</span>
 			</div>
 			{{ field(class_=fieldclass or 'form-control', **kwargs) }}
-			<a class="btn btn-secondary" id="{{ field.name }}-button">
-				{{ _("View") }}
-			</a>
+			{% if has_view %}
+				<a class="btn btn-secondary" id="{{ field.name }}-button">
+					{{ _("View") }}
+				</a>
+			{% endif %}
 		</div>
 
 		{{ render_errors(field) }}
+		{% if hint %}
+			<small class="form-text text-muted">{{ hint | safe }}</small>
+		{% endif %}
 	</div>
 {%- endmacro %}
 
