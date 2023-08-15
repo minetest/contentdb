@@ -30,6 +30,9 @@ from app.utils import is_package_page, nonempty_or_none, add_audit_log
 bp = Blueprint("collections", __name__)
 
 
+regex_invalid_chars = re.compile("[^a-z0-9_]")
+
+
 @bp.route("/collections/")
 @bp.route("/collections/<author>/")
 def list_all(author=None):
@@ -118,9 +121,6 @@ def create_edit(author=None, name=None):
 
 	return render_template("collections/create_edit.html",
 			collection=collection, form=form)
-
-
-regex_invalid_chars = re.compile("[^a-z_]")
 
 
 def handle_create_edit(collection: Collection, form: CollectionForm,

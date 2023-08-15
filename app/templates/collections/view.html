@@ -8,6 +8,13 @@
 	{{ collection.short_description }}
 {%- endblock %}
 
+{% block headextra %}
+	{% set thumb_url = collection.packages and collection.packages[0].get_thumb_url(3, True) %}
+	{% if thumb_url -%}
+		<meta name="og:image" content="{{ thumb_url }}">
+	{%- endif %}
+{% endblock %}
+
 {% block author_link -%}
 	<a href="{{ url_for('users.profile', username=collection.author.username) }}">
 		{{ collection.author.display_name }}
@@ -59,6 +66,11 @@
 		{% endif %}
 		<div class="grid-2 gap-3">
 			{% for item in collection.items %}
+				{% set package_link %}
+					<a href="{{ item.package.get_url('packages.view') }}">
+						{{ item.package.title }}
+					</a>
+				{% endset %}
 				<div class="">
 					<article class="card">
 						<div class="embed-responsive embed-responsive-16by9">
@@ -66,9 +78,7 @@
 						</div>
 						<div class="card-body">
 							<h5 class="mt-0">
-								<a href="{{ item.package.get_url('packages.view') }}">
-									{{ item.package.title }}
-								</a>
+								{{ _("%(title)s by %(author)s", title=package_link, author=item.package.author.display_name) }}
 							</h5>
 							<p class="card-text">
 								{% if item.description  %}

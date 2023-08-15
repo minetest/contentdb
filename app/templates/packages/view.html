@@ -349,7 +349,7 @@
 				</div>
 
 				{% if current_user.is_authenticated %}
-					<div class="d-flex my-3">
+					<div class="d-flex mt-3 mb-4">
 						<form method="POST" action="{{ package.get_url('collections.package_toggle_favorite') }}">
 							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 							<button type="submit" class="btn {% if is_favorited %}text-danger{% endif %} btn-secondary mr-2" aria-label="{{ _('Favorite') }}">
