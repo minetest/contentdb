@@ -130,7 +130,7 @@ def user_redirect(author):
 @bp.route("/packages/<author>/<name>/")
 @is_package_page
 def view(package):
-	if package.state != PackageState.APPROVED and not package.check_perm(current_user, Permission.EDIT_PACKAGE):
+	if not package.check_perm(current_user, Permission.VIEW_PACKAGE):
 		return render_template("packages/gone.html", package=package), 403
 
 	show_similar = not package.approved and (

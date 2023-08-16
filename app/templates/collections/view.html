@@ -59,24 +59,29 @@
 
 	<section class="mt-5">
 		<h2 class="sr-only">{{ _("Packages") }}</h2>
-		{% if not collection.items %}
+		{% if not items %}
 			<p class="text-muted">
 				{{ _("To add a package, go to the package's page and click 'Add to collection'") }}
 			</p>
 		{% endif %}
 		<div class="grid-2 gap-3">
-			{% for item in collection.items %}
+			{% for item in items %}
 				{% set package_link %}
 					<a href="{{ item.package.get_url('packages.view') }}">
 						{{ item.package.title }}
 					</a>
 				{% endset %}
-				<div class="">
+				<div>
 					<article class="card">
 						<div class="embed-responsive embed-responsive-16by9">
 							<img class="card-img-top embed-responsive-item" src="{{ item.package.get_thumb_url(4) }}" alt="{{ item.package.title }} screenshot">
 						</div>
 						<div class="card-body">
+							{% if item.package.state.name != "APPROVED" %}
+								<span class="badge badge-warning float-right">
+									{{ item.package.state.value }}
+								</span>
+							{% endif %}
 							<h5 class="mt-0">
 								{{ _("%(title)s by %(author)s", title=package_link, author=item.package.author.display_name) }}
 							</h5>

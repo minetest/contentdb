@@ -65,7 +65,11 @@ def view(author, name):
 	if not collection.check_perm(current_user, Permission.VIEW_COLLECTION):
 		abort(404)
 
-	return render_template("collections/view.html", collection=collection)
+	items = collection.items
+	if collection.check_perm(current_user, Permission.EDIT_COLLECTION):
+		items = [x for x in items if x.package.check_perm(current_user, Permission.VIEW_PACKAGE)]
+
+	return render_template("collections/view.html", collection=collection, items=items)
 
 
 class CollectionForm(FlaskForm):

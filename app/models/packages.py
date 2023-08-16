@@ -645,13 +645,16 @@ class Package(db.Model):
 		return None
 
 	def check_perm(self, user, perm):
-		if not user.is_authenticated:
-			return False
-
 		if type(perm) == str:
 			perm = Permission[perm]
 		elif type(perm) != Permission:
 			raise Exception("Unknown permission given to Package.check_perm()")
+
+		if perm == Permission.VIEW_PACKAGE:
+			return self.state == PackageState.APPROVED or self.check_perm(user, Permission.EDIT_PACKAGE)
+
+		if not user.is_authenticated:
+			return False
 
 		is_owner = user == self.author
 		is_maintainer = is_owner or user.rank.at_least(UserRank.EDITOR) or user in self.maintainers
