@@ -281,7 +281,7 @@ class PackageForm(FlaskForm):
 def handle_create_edit(package: typing.Optional[Package], form: PackageForm, author: User):
 	wasNew = False
 	if package is None:
-		package = Package.query.filter_by(name=form["name"].data, author_id=author.id).first()
+		package = Package.query.filter_by(name=form.name.data, author_id=author.id).first()
 		if package is not None:
 			if package.state == PackageState.DELETED:
 				flash(
@@ -292,6 +292,12 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 					f"<a class='btn btn-sm btn-danger float-right' href='{package.get_url('packages.view')}'>View</a>" +
 					gettext("Package already exists")), "danger")
 			return None
+
+		if Collection.query \
+				.filter(Collection.name == form.name.data, Collection.author == author) \
+				.count() > 0:
+			flash(gettext("A collection with a similar name already exists"), "danger")
+			return
 
 		package = Package()
 		db.session.add(package)
