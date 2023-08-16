@@ -152,8 +152,9 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 
 	if collection is None:
 		collection = Collection()
-		collection.name = name
 		collection.author = author
+		form.populate_obj(collection)
+		collection.name = name
 		db.session.add(collection)
 
 		if initial_package:
@@ -168,6 +169,9 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 				collection.get_url("collections.view"), None)
 
 	else:
+		form.populate_obj(collection)
+		collection.name = name
+
 		for i, package_id in enumerate(form.package_ids):
 			item = next((x for x in collection.items if str(x.package.id) == package_id.data), None)
 			if item is None:
@@ -179,7 +183,6 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 				f"Edited collection {collection.author.username}/{collection.name}",
 				collection.get_url("collections.view"), None)
 
-	form.populate_obj(collection)
 	db.session.commit()
 	return redirect(collection.get_url("collections.view"))
 
