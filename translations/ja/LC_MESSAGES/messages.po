@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-06-27 21:00+0100\n"
-"PO-Revision-Date: 2022-03-07 23:19+0000\n"
-"Last-Translator: Jun Nogata <nogajun@gmail.com>\n"
+"PO-Revision-Date: 2023-07-17 12:04+0000\n"
+"Last-Translator: 古銭マニア <kosennotaku128@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ja/>\n"
 "Language: ja\n"
-"Language-Team: Japanese "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ja/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
 msgid "Banned:"
-msgstr ""
+msgstr "BANされた:"
 
 #: app/__init__.py:124
 msgid "You have been banned."
@@ -33,12 +34,12 @@ msgstr "出入り禁止にされました。"
 #: app/templates/todo/editor.html:46 app/templates/users/list.html:22
 #: app/templates/users/profile.html:211
 msgid "Packages"
-msgstr ""
+msgstr "パッケージ"
 
 #: app/template_filters.py:86
 #, python-format
 msgid "%(delta)s ago"
-msgstr ""
+msgstr "%(delta)s秒前"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
@@ -117,7 +118,7 @@ msgstr "ログの監査"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
 #: app/templates/packages/view.html:234 app/templates/users/profile.html:130
 msgid "Statistics"
-msgstr ""
+msgstr "統計"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -131,7 +132,7 @@ msgstr "削除"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "対応しているゲーム"
 
 #: app/blueprints/packages/packages.py:172
 msgid "Error: Another package already uses this forum topic!"
@@ -221,21 +222,22 @@ msgstr "動画URL"
 
 #: app/blueprints/packages/packages.py:261
 msgid "Donate URL"
-msgstr ""
+msgstr "URLを寄付"
 
 #: app/blueprints/packages/packages.py:267
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_gameは許可された名前ではありません"
 
 #: app/blueprints/packages/packages.py:277
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
-msgstr ""
+msgstr "パッケージは既に存在しますが、削除されています。パッケージを復元するにはConte"
+"ntDBスタッフまでご連絡ください"
 
 #: app/blueprints/packages/packages.py:282
 msgid "Package already exists"
-msgstr ""
+msgstr "パッケージは既に存在しています"
 
 #: app/blueprints/packages/packages.py:342
 msgid "Unable to find that user"
@@ -271,7 +273,7 @@ msgstr "メンテナー（複数の場合、カンマで区切る）"
 
 #: app/blueprints/packages/packages.py:498
 msgid "You don't have permission to edit maintainers"
-msgstr ""
+msgstr "保守担当を編集する権限がありません。"
 
 #: app/blueprints/packages/packages.py:548
 msgid "You are not a maintainer"
@@ -287,19 +289,19 @@ msgstr "作成者名"
 
 #: app/blueprints/packages/packages.py:653
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "依存関係に基づくサポート検出を有効にする（推奨）"
 
 #: app/blueprints/packages/packages.py:654
 msgid "Supported games"
-msgstr ""
+msgstr "対応しているゲーム"
 
 #: app/blueprints/packages/packages.py:655
 msgid "Unsupported games"
-msgstr ""
+msgstr "対応していないゲーム"
 
 #: app/blueprints/packages/packages.py:656
 msgid "Supports all games (unless stated) / is game independent"
-msgstr ""
+msgstr "すべてのゲームをサポート（明記されている場合を除く）/ゲームに依存しない"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
@@ -312,13 +314,13 @@ msgstr "タイトル"
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
 msgid "Method"
-msgstr ""
+msgstr "方法"
 
 #: app/blueprints/packages/releases.py:54
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
-msgstr ""
+msgstr "ファイルをアップロード"
 
 #: app/blueprints/packages/releases.py:55
 msgid "Git reference (ie: commit hash, branch, or tag)"
@@ -348,7 +350,7 @@ msgstr "タスクID"
 #: app/blueprints/packages/releases.py:68
 #: app/blueprints/packages/screenshots.py:40
 msgid "Is Approved"
-msgstr ""
+msgstr "承認済み"
 
 #: app/blueprints/packages/releases.py:86
 msgid "Import from Git"
@@ -4076,4 +4078,3 @@ msgstr ""
 #~ "support all games, except for any "
 #~ "games listed in unsupported_games."
 #~ msgstr ""
-
