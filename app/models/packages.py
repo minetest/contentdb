@@ -21,6 +21,7 @@ import enum
 from flask import url_for
 from flask_babel import lazy_gettext
 from flask_sqlalchemy import BaseQuery
+from sqlalchemy import or_
 from sqlalchemy_searchable import SearchQueryMixin
 from sqlalchemy_utils.types import TSVectorType
 from sqlalchemy.dialects.postgresql import insert
@@ -473,7 +474,13 @@ class Package(db.Model):
 		if len(parts) != 2:
 			return None
 
-		return Package.query.filter(Package.name == parts[1], Package.author.has(username=parts[0])).first()
+		name = parts[1]
+		if name.endswith("_game"):
+			name = name[:-5]
+
+		return Package.query.filter(
+			or_(Package.name == name, Package.name == name + "_game"),
+			Package.author.has(username=parts[0])).first()
 
 	def get_id(self):
 		return "{}/{}".format(self.author.username, self.name)
