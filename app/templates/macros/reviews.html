@@ -154,19 +154,27 @@
 				{{ _("Do you recommend this %(type)s?", type=package.type.text | lower) }}
 			</p>
 
-			<div class="btn-group">
-				<button class="btn btn-primary" name="rating" value="5">
-					<i class="fas fa-thumbs-up mr-2"></i>
-					{{ _("Yes") }}
-				</button>
-				<button class="btn btn-primary" name="rating" value="3">
-					<i class="fas fa-minus mr-2"></i>
-					{{ _("Neutral") }}
-				</button>
-				<button class="btn btn-primary" name="rating" value="1">
-					<i class="fas fa-thumbs-down mr-2"></i>
-					{{ _("No") }}
-				</button>
+			<div class="btn-toolbar" role="toolbar">
+				<div class="btn-group mr-2">
+					<button class="btn btn-primary" name="rating" value="5">
+						<i class="fas fa-thumbs-up mr-1"></i>
+						{{ _("Yes") }}
+					</button>
+					<button class="btn btn-primary" name="rating" value="3">
+						<i class="fas fa-minus mr-1"></i>
+						{{ _("Neutral") }}
+					</button>
+					<button class="btn btn-primary" name="rating" value="1">
+						<i class="fas fa-thumbs-down mr-1"></i>
+						{{ _("No") }}
+					</button>
+				</div>
+				<div class="btn-group">
+					<a class="btn btn-secondary" href="{{ package.issueTracker or url_for('threads.new', pid=package.id) }}" rel="ugc">
+						<i class="fas fa-bug mr-1"></i>
+						Report an Issue
+					</a>
+				</div>
 			</div>
 		</form>
 	</div>
