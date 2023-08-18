@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-06-27 21:00+0100\n"
-"PO-Revision-Date: 2023-01-16 20:51+0000\n"
+"PO-Revision-Date: 2023-08-01 08:06+0000\n"
 "Last-Translator: Jakub Z <mrkubax10@onet.pl>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/pl/>\n"
 "Language: pl\n"
-"Language-Team: Polish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/pl/>\n"
-"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && "
-"(n%100<10 || n%100>=20) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -224,7 +225,7 @@ msgstr "URL filmiku"
 
 #: app/blueprints/packages/packages.py:261
 msgid "Donate URL"
-msgstr ""
+msgstr "Adres URL darowizny"
 
 #: app/blueprints/packages/packages.py:267
 msgid "_game is not an allowed name"
@@ -298,15 +299,16 @@ msgstr "Włącz wykrywanie wsparcia w oparciu na zależnościach (zalecane)"
 
 #: app/blueprints/packages/packages.py:654
 msgid "Supported games"
-msgstr ""
+msgstr "Wspierane gry"
 
 #: app/blueprints/packages/packages.py:655
 msgid "Unsupported games"
-msgstr ""
+msgstr "Niewspierane gry"
 
 #: app/blueprints/packages/packages.py:656
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
+"Wspiera wszystkie gry (chyba, że zaznaczono inaczej) / jest niezależna od gry"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
@@ -440,7 +442,7 @@ msgstr "Komentarz"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "Ocena"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:117
 #: app/templates/macros/reviews.html:160
@@ -450,7 +452,7 @@ msgstr "Tak"
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:121
 #: app/templates/macros/reviews.html:164
 msgid "Neutral"
-msgstr ""
+msgstr "Neutralne"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:125
 #: app/templates/macros/reviews.html:168
@@ -474,7 +476,7 @@ msgstr ""
 #: app/blueprints/threads/__init__.py:330 app/blueprints/users/settings.py:105
 #: app/logic/packages.py:131
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "Tworzenie odnośników do zablokowanych stron jest niedozwolone"
 
 #: app/blueprints/packages/reviews.py:183
 msgid "You can't vote on the reviews on your own package!"
@@ -559,7 +561,7 @@ msgstr "Poczekaj zanim otworzysz kolejny wątek"
 
 #: app/blueprints/todo/user.py:181
 msgid "Done"
-msgstr ""
+msgstr "Zakończono"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
@@ -1212,11 +1214,11 @@ msgstr "Pomóż tłumaczyć ContentDB"
 
 #: app/templates/base.html:254
 msgid "About"
-msgstr ""
+msgstr "O"
 
 #: app/templates/base.html:255
 msgid "Rules"
-msgstr ""
+msgstr "Regulamin"
 
 #: app/templates/base.html:256
 msgid "Policy and Guidance"
@@ -1232,7 +1234,7 @@ msgstr "Polityka prywatności"
 
 #: app/templates/base.html:260
 msgid "Report / DMCA"
-msgstr ""
+msgstr "Zgłoś / DMCA"
 
 #: app/templates/base.html:262
 msgid "User List"
@@ -1245,7 +1247,7 @@ msgstr "Wątki"
 
 #: app/templates/base.html:264
 msgid "Support Packages"
-msgstr ""
+msgstr "Paczki wspierające"
 
 #: app/templates/base.html:265
 msgid "Source Code"
@@ -1258,6 +1260,8 @@ msgstr "Witamy"
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
+"Witaj w najlepszym miejscu do znalezienia modyfikacji, gier i paczek tekstur "
+"dla Minetesta"
 
 #: app/templates/index.html:42 app/templates/macros/reviews.html:75
 #: app/templates/packages/game_hub.html:5
@@ -1463,26 +1467,28 @@ msgstr "Brak utworzonych tokenów"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
-msgstr ""
+msgstr "Wspieraj paczki"
 
 #: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
-msgstr ""
+msgstr "Niektórzy autorzy akceptują darowizny za swoją pracę."
 
 #: app/templates/donate/index.html:9
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
+"Darowizny są świetnym sposobem żeby wesprzeć twoich ulubionych modderów, "
+"artystów i deweloperów gier."
 
 #: app/templates/donate/index.html:37
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "autorstwa %(author)s"
 
 #: app/templates/donate/index.html:42
 msgid "View package"
-msgstr ""
+msgstr "Zobacz paczkę"
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:95
 msgid "Donate"
@@ -1490,26 +1496,30 @@ msgstr "Wyślij darowiznę"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews"
-msgstr ""
+msgstr "W oparciu o twoje recenzje"
 
 #: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
 msgstr ""
+"Żadna z zrecenzowanych paczek nie akceptuje darowizn. Rozważ recenzowanie "
+"twoich ulubionych paczek"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
 msgstr ""
+"Zaloguj się aby zobaczyć polecane w oparciu o paczki, które ostatnio "
+"zrecenzowałeś"
 
 #: app/templates/donate/index.html:78
 msgid "Top packages"
-msgstr ""
+msgstr "Najlepsze paczki"
 
 #: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d pacz(ka/ki/ek) poszukuj(e/ą) darowizn"
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1673,7 +1683,7 @@ msgstr "Wydanie jest jeszcze importowane lub nastąpił błąd."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr ""
+msgstr "Powinieneś dodać przynajmniej jeden zrzut ekranu."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1804,7 +1814,7 @@ msgstr "Paczki użytkownika %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr ""
+msgstr "Przedział daty..."
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
@@ -1816,11 +1826,11 @@ msgstr "Pobrania przez ostatnie 30 dni"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr ""
+msgstr "Pobrania od $1 do $2"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr ""
+msgstr "$1 na dzień"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -2205,7 +2215,7 @@ msgstr "Filmy YouTube będą wyświetlały się jako embed."
 
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
-msgstr ""
+msgstr "Jeżeli puste, adres URL darowizn autora będzie użyty."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2239,7 +2249,7 @@ msgstr "Portal społecznościowy"
 #: app/templates/packages/game_hub.html:9
 #, python-format
 msgid "Mods and texture packs for %(title)s"
-msgstr ""
+msgstr "Modyfikacje i paczki tekstur dla %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
@@ -2250,6 +2260,8 @@ msgid ""
 "Game support is configured using the package's .conf file. See the "
 "documentation for more info"
 msgstr ""
+"Wsparcie dla gier jest konfigurowane używając pliku .conf paczki. Zobacz "
+"dokumentację po więcej informacji"
 
 #: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:217
@@ -2262,7 +2274,7 @@ msgstr "Wspierane?"
 
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
-msgstr ""
+msgstr "Wspiera wszystkie gry (chyba, że wykluczona w unsupported_games)"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -2270,16 +2282,16 @@ msgstr "Wykryto z zależności"
 
 #: app/templates/packages/game_support.html:49
 msgid "Overridden on ContentDB"
-msgstr ""
+msgstr "Nadpisane na ContentDB"
 
 #: app/templates/packages/game_support.html:68
 msgid "Unknown. Please either add supported games or check 'Supports all games'"
-msgstr ""
+msgstr "Nieznane. Dodaj wspierane gry bądź zaznacz 'Wspiera wszystkie gry'"
 
 #: app/templates/packages/game_support.html:75
 #, python-format
 msgid "Generated %(conf)s lines"
-msgstr ""
+msgstr "Wygenerowano %(conf)s lini(ę/i/e)"
 
 #: app/templates/packages/game_support.html:89
 msgid ""
@@ -2294,20 +2306,24 @@ msgid ""
 "When checked, this indicates that this package should support all games, "
 "unless excluded by unsupported_games."
 msgstr ""
+"Kiedy zaznaczone, oznacza, że ta paczka powinna wspierać wszystkie gry chyba "
+"że wykluczono w unsupported_games."
 
 #: app/templates/packages/game_support.html:97
 msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
 msgstr ""
+"Możesz to zaznaczyć i mimo to sprecyzować gry w supported_games, które "
+"przetestowałeś."
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games"
-msgstr ""
+msgstr "Nie jest możliwe aby paczka tekstur wspierała wszystkie gry"
 
 #: app/templates/packages/game_support.html:107
 msgid "Overrides"
-msgstr ""
+msgstr "Nadpisuje"
 
 #: app/templates/packages/game_support.html:110
 #, python-format
@@ -2315,6 +2331,8 @@ msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
 msgstr ""
+"Najlepiej jest dodać wspierane/niewspierane gry do %(conf)s ale w "
+"międzyczasie możesz dodać je tutaj."
 
 #: app/templates/packages/game_support.html:112
 #, python-format
@@ -2322,11 +2340,13 @@ msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
 msgstr ""
+"Dzięki dodaniu do %(conf)s użytkownicy, którzy instalują z poza ContentDB "
+"również mogą zyskać."
 
 #: app/templates/packages/game_support.html:115
 #: app/templates/packages/game_support.html:116
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
-msgstr ""
+msgstr "Nazwy gier oddzielone przecinkiem, tj: minetest_game, nodecore"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
@@ -2703,7 +2723,7 @@ msgstr "Anuluj"
 
 #: app/templates/packages/remove.html:39
 msgid "Unapprove"
-msgstr ""
+msgstr "Cofnij zatwierdzenie"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2793,11 +2813,11 @@ msgstr "Zmiana kolejności wymaga JavaScript."
 
 #: app/templates/packages/screenshots.html:88
 msgid "Client Preview"
-msgstr ""
+msgstr "Podgląd klienta"
 
 #: app/templates/packages/screenshots.html:90
 msgid "The first screenshot in the list above will be the package thumbnail."
-msgstr ""
+msgstr "Pierwszy zrzut ekranu w liście powyżej będzie miniaturą paczki."
 
 #: app/templates/packages/screenshots.html:127
 msgid "Videos"
@@ -3020,23 +3040,23 @@ msgstr "Kompatybilne gry"
 
 #: app/templates/packages/view.html:464 app/templates/packages/view.html:484
 msgid "No specific game required"
-msgstr ""
+msgstr "Żadna konkretna gra nie jest wymagana"
 
 #: app/templates/packages/view.html:467
 msgid "Tested with:"
-msgstr ""
+msgstr "Przetestowano z:"
 
 #: app/templates/packages/view.html:489
 msgid "Is the above correct?"
-msgstr ""
+msgstr "Czy ustawienia powyżej są poprawne?"
 
 #: app/templates/packages/view.html:490
 msgid "You need to either confirm this or tell ContentDB about supported games"
-msgstr ""
+msgstr "Musisz to potwierdzić bądź powiadomić ContentDB o wspieranych grach"
 
 #: app/templates/packages/view.html:502
 msgid "Does not work with:"
-msgstr ""
+msgstr "Nie działa z:"
 
 #: app/templates/packages/view.html:519
 msgid "This is an experimental feature."
@@ -3048,7 +3068,7 @@ msgstr "Wspierane gry są ustalane przez algorytm i mogą nie być poprawne."
 
 #: app/templates/packages/view.html:530
 msgid "Please specify compatible games"
-msgstr ""
+msgstr "Sprecyzuj kompatybilne gry"
 
 #: app/templates/packages/view.html:536
 msgid "Information"
@@ -3281,31 +3301,37 @@ msgstr "Ostatnie akcje"
 #: app/templates/todo/game_support.html:4
 #, python-format
 msgid "Game Support for %(username)s"
-msgstr ""
+msgstr "Wsparcie gier dla %(username)s"
 
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
 msgstr ""
+"Powinieneś sprecyzować gry wspierane przez twoje modyfikacje i paczki "
+"tekstur."
 
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
-msgstr ""
+msgstr "Sprecyzowanie wspieranych gier ułatwia graczom znalezienie twoich prac."
 
 #: app/templates/todo/game_support.html:13
 msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
 msgstr ""
+"Jeżeli twoja paczka jest niezależna od gier potwierdź to używając 'Wspiera "
+"wszystkie gry'"
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
-msgstr ""
+msgstr "Wspiera wszystkie gry"
 
 #: app/templates/todo/game_support.html:51
 msgid ""
 "No supported games listed. Please either add supported games or check "
 "'Supports all games'"
 msgstr ""
+"Nie podano wspieranych gier. Dodaj wspierane gry lub zaznacz 'Wspiera "
+"wszystkie gry'"
 
 #: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
@@ -3315,7 +3341,7 @@ msgstr "Brak rzeczy do zrobienia :)"
 
 #: app/templates/todo/game_support.html:66
 msgid "Bulk support all games"
-msgstr ""
+msgstr "Dodaj wspierane gry hurtem"
 
 #: app/templates/todo/game_support.html:68
 msgid ""
@@ -3323,10 +3349,13 @@ msgid ""
 "supported_games (red text above) do support all games, except for any "
 "games listed in unsupported_games."
 msgstr ""
+"Kliknij przycisk poniżej aby potwierdzić, że wszystkie paczki bez "
+"supported_games (czerwony tekst poniżej) wspierają wszyskie gry poza grami w "
+"unsupported_games."
 
 #: app/templates/todo/game_support.html:72
 msgid "Confirm"
-msgstr ""
+msgstr "Potwierdź"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
@@ -3461,11 +3490,11 @@ msgstr ""
 
 #: app/templates/todo/user.html:72
 msgid "See game support for your packages"
-msgstr ""
+msgstr "Zobacz wsparcie gier dla twoich paczek"
 
 #: app/templates/todo/user.html:74
 msgid "Missing Game Support"
-msgstr ""
+msgstr "Brak wsparcia gier"
 
 #: app/templates/todo/user.html:120
 msgid "Small Screenshots"
@@ -4040,6 +4069,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to log into the account "
 "'%(display_name)s'"
 msgstr ""
+"Anulowanie subskrypcji może uniemożliwić ci zalogowanie się na konto "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -4071,27 +4102,27 @@ msgstr "'%(query)s' - Wyszukiwanie w wydaniach paczki"
 
 #: app/utils/flask.py:150
 msgid "All time"
-msgstr ""
+msgstr "Zawsze"
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
-msgstr ""
+msgstr "Ostatnie 7 dni"
 
 #: app/utils/flask.py:152
 msgid "Last 30 days"
-msgstr ""
+msgstr "Ostatnie 30 dni"
 
 #: app/utils/flask.py:153
 msgid "Last 90 days"
-msgstr ""
+msgstr "Ostatnie 90 dni"
 
 #: app/utils/flask.py:154
 msgid "Year to date"
-msgstr ""
+msgstr "Rok temu do teraz"
 
 #: app/utils/flask.py:155
 msgid "Last year"
-msgstr ""
+msgstr "Ostatni rok"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -4278,4 +4309,3 @@ msgstr "Rozważ włączenie powiadomień e-mail, możesz dostosować ilość wys
 #~ "support all games, except for any "
 #~ "games listed in unsupported_games."
 #~ msgstr ""
-
