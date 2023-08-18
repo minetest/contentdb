@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-06-27 21:00+0100\n"
-"PO-Revision-Date: 2023-06-27 19:59+0000\n"
+"PO-Revision-Date: 2023-07-09 14:49+0000\n"
 "Last-Translator: ROllerozxa <rollerozxa@voxelmanip.se>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/sv/>\n"
 "Language: sv\n"
-"Language-Team: Swedish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/sv/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -2312,14 +2313,16 @@ msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
 msgstr ""
+"Du kan kryssa i detta och fortfarande markera spel i supported_games som du "
+"har testat."
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games"
-msgstr ""
+msgstr "Det är inte möjligt för texturpaket att stöda alla spel"
 
 #: app/templates/packages/game_support.html:107
 msgid "Overrides"
-msgstr ""
+msgstr "Överskridningar"
 
 #: app/templates/packages/game_support.html:110
 #, python-format
@@ -2327,6 +2330,8 @@ msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
 msgstr ""
+"Det är bäst att lägga till spelstöd till %(conf)s, men just nu kan du lägga "
+"till dem här."
 
 #: app/templates/packages/game_support.html:112
 #, python-format
@@ -2334,11 +2339,13 @@ msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
 msgstr ""
+"Om detta läggs till i %(conf)s tillåter detta användare som installerar "
+"utanför ContentDB att ta del av detta också."
 
 #: app/templates/packages/game_support.html:115
 #: app/templates/packages/game_support.html:116
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
-msgstr ""
+msgstr "Kommaseparerade spelnamn, t.ex. minetest_game, nodecore"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
@@ -2805,11 +2812,11 @@ msgstr "Omordning kräver JavaScript."
 
 #: app/templates/packages/screenshots.html:88
 msgid "Client Preview"
-msgstr ""
+msgstr "Klientförhandsgranskning"
 
 #: app/templates/packages/screenshots.html:90
 msgid "The first screenshot in the list above will be the package thumbnail."
-msgstr ""
+msgstr "Den första skärmdumpen i listan kommer vara paketets tumnagel."
 
 #: app/templates/packages/screenshots.html:127
 msgid "Videos"
@@ -3029,23 +3036,24 @@ msgstr "Kompatibla Spel"
 
 #: app/templates/packages/view.html:464 app/templates/packages/view.html:484
 msgid "No specific game required"
-msgstr ""
+msgstr "Inget specifikt spel krävs"
 
 #: app/templates/packages/view.html:467
 msgid "Tested with:"
-msgstr ""
+msgstr "Testad med:"
 
 #: app/templates/packages/view.html:489
 msgid "Is the above correct?"
-msgstr ""
+msgstr "Är ovanstående korrekt?"
 
 #: app/templates/packages/view.html:490
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
+"Du behöver antingen bekräfta detta eller berätta för ContentDB om spelstöd"
 
 #: app/templates/packages/view.html:502
 msgid "Does not work with:"
-msgstr ""
+msgstr "Fungerar ej med:"
 
 #: app/templates/packages/view.html:519
 msgid "This is an experimental feature."
@@ -3288,31 +3296,33 @@ msgstr "Senaste åtgärder"
 #: app/templates/todo/game_support.html:4
 #, python-format
 msgid "Game Support for %(username)s"
-msgstr ""
+msgstr "Spelstöd för %(username)s"
 
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
-msgstr ""
+msgstr "Du borde markera spelen som dina moddar och texturpaket stöder."
 
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
-msgstr ""
+msgstr "Spelstöd gör det lättare för spelare att se ditt innehåll."
 
 #: app/templates/todo/game_support.html:13
 msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
-msgstr ""
+msgstr "Om ditt paket är speloberoende, bekräfta detta genom 'Stöder alla spel'"
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
-msgstr ""
+msgstr "Stöder alla spel"
 
 #: app/templates/todo/game_support.html:51
 msgid ""
 "No supported games listed. Please either add supported games or check "
 "'Supports all games'"
 msgstr ""
+"Inget spelstöd listat. Lägg antingen till spelstöd eller tryck på 'Stöder "
+"alla spel'"
 
 #: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
@@ -3322,7 +3332,7 @@ msgstr "Inget behöver göras :)"
 
 #: app/templates/todo/game_support.html:66
 msgid "Bulk support all games"
-msgstr ""
+msgstr "Bulk-stöd alla spel"
 
 #: app/templates/todo/game_support.html:68
 msgid ""
@@ -3330,10 +3340,13 @@ msgid ""
 "supported_games (red text above) do support all games, except for any "
 "games listed in unsupported_games."
 msgstr ""
+"Tryck på knappen nedan för att bekräfta att alla paket utan supported_games ("
+"röd text nedan) faktiskt stöder alla spel, förutom spel listade i "
+"unsupported_games."
 
 #: app/templates/todo/game_support.html:72
 msgid "Confirm"
-msgstr ""
+msgstr "Bekräfta"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
@@ -3468,11 +3481,11 @@ msgstr ""
 
 #: app/templates/todo/user.html:72
 msgid "See game support for your packages"
-msgstr ""
+msgstr "Se spelstöd för dina paket"
 
 #: app/templates/todo/user.html:74
 msgid "Missing Game Support"
-msgstr ""
+msgstr "Spelstöd saknas"
 
 #: app/templates/todo/user.html:120
 msgid "Small Screenshots"
@@ -4044,6 +4057,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to log into the account "
 "'%(display_name)s'"
 msgstr ""
+"Om du avprenumererar kan detta hindra dig från att logga in till kontot "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -4075,27 +4090,27 @@ msgstr "'%(query)s' - Sök paketutsläpp"
 
 #: app/utils/flask.py:150
 msgid "All time"
-msgstr ""
+msgstr "Hela tiden"
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
-msgstr ""
+msgstr "Senaste 7 dagar"
 
 #: app/utils/flask.py:152
 msgid "Last 30 days"
-msgstr ""
+msgstr "Senaste 30 dagar"
 
 #: app/utils/flask.py:153
 msgid "Last 90 days"
-msgstr ""
+msgstr "Senaste 90 dagar"
 
 #: app/utils/flask.py:154
 msgid "Year to date"
-msgstr ""
+msgstr "Detta år"
 
 #: app/utils/flask.py:155
 msgid "Last year"
-msgstr ""
+msgstr "Förra året"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -4290,4 +4305,3 @@ msgstr ""
 #~ "support all games, except for any "
 #~ "games listed in unsupported_games."
 #~ msgstr ""
-
