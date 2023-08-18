@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-06-27 21:00+0100\n"
-"PO-Revision-Date: 2023-06-06 06:47+0000\n"
-"Last-Translator: Translator <kvb@tuta.io>\n"
+"PO-Revision-Date: 2023-07-17 12:04+0000\n"
+"Last-Translator: John Donne <akheron@zaclys.net>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -303,15 +304,15 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:654
 msgid "Supported games"
-msgstr ""
+msgstr "Jeux compatibles"
 
 #: app/blueprints/packages/packages.py:655
 msgid "Unsupported games"
-msgstr ""
+msgstr "Jeux incompatibles"
 
 #: app/blueprints/packages/packages.py:656
 msgid "Supports all games (unless stated) / is game independent"
-msgstr ""
+msgstr "Compatible avec tous les jeux (sauf mention contraire) / indépendant"
 
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
@@ -566,7 +567,7 @@ msgstr "Veuillez attendre avant de commenter à nouveau"
 
 #: app/blueprints/todo/user.py:181
 msgid "Done"
-msgstr ""
+msgstr "Terminé"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
@@ -1839,7 +1840,7 @@ msgstr "Paquets de %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr ""
+msgstr "Période..."
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
@@ -1851,11 +1852,11 @@ msgstr "Téléchargement sur les 30 derniers jours"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr ""
+msgstr "Téléchargements de $1 à $2"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr ""
+msgstr "$1 par jour"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -2300,11 +2301,12 @@ msgstr "Source"
 
 #: app/templates/packages/game_support.html:26
 msgid "Supported?"
-msgstr "Supporté ?"
+msgstr "Compatible ?"
 
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
 msgstr ""
+"Compatible avec tous les jeux (à moins d'être exclu par unsupported_games)"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -2315,8 +2317,11 @@ msgid "Overridden on ContentDB"
 msgstr ""
 
 #: app/templates/packages/game_support.html:68
+#, fuzzy
 msgid "Unknown. Please either add supported games or check 'Supports all games'"
 msgstr ""
+"Inconnu. Veuillez ajouter des jeux compatibles ou cocher \"Compatible avec "
+"tous les jeux\""
 
 #: app/templates/packages/game_support.html:75
 #, python-format
@@ -2345,7 +2350,7 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games"
-msgstr ""
+msgstr "Les packs de texture ne peuvent être compatibles avec tous les jeux"
 
 #: app/templates/packages/game_support.html:107
 msgid "Overrides"
@@ -2357,18 +2362,23 @@ msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
 msgstr ""
+"Il est préférable d'ajouter les jeux compatibles/incompatibles dans %(conf)"
+"s, mais vous pouvez les ajouter ici en attendant."
 
 #: app/templates/packages/game_support.html:112
-#, python-format
+#, fuzzy, python-format
 msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
 msgstr ""
+"Les ajouter à %(conf)s permet aux utilisateurs qui installent en dehors de "
+"ContentDB d'en bénéficier aussi."
 
 #: app/templates/packages/game_support.html:115
 #: app/templates/packages/game_support.html:116
+#, fuzzy
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
-msgstr ""
+msgstr "Noms de jeu séparés par des virgules, ex : minetest_game, nodecore"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
@@ -2489,7 +2499,7 @@ msgstr "Approuvé"
 
 #: app/templates/packages/release_edit.html:46
 msgid "Supported Minetest versions"
-msgstr "Versions de Minetest supportées"
+msgstr "Versions de Minetest compatibles"
 
 #: app/templates/packages/release_edit.html:58
 #: app/templates/packages/release_new.html:80
@@ -2599,7 +2609,7 @@ msgstr ""
 
 #: app/templates/packages/release_new.html:61
 msgid "3. Supported Minetest versions"
-msgstr "3. Versions de Minetest supportées"
+msgstr "3. Versions de Minetest compatibles"
 
 #: app/templates/packages/release_new.html:75
 msgid ""
@@ -2954,7 +2964,7 @@ msgstr "Minetest %(max)s et en dessous"
 
 #: app/templates/packages/view.html:67
 msgid "How do I install this?"
-msgstr "Comment je peux l'installer ?"
+msgstr "Comment l'installer ?"
 
 #: app/templates/packages/view.html:73
 msgid "No downloads available"
@@ -3043,7 +3053,8 @@ msgstr "Avertissement"
 
 #: app/templates/packages/view.html:385
 msgid "Like this package? Help support its development by making a donation"
-msgstr "Tu apprécies ce paquet ? Supporte son développement en faisant un don"
+msgstr ""
+"Tu apprécies ce paquet ? Contribue à son développement en faisant un don"
 
 #: app/templates/packages/view.html:388
 msgid "Donate now"
@@ -3071,11 +3082,11 @@ msgstr "Jeux compatibles"
 
 #: app/templates/packages/view.html:464 app/templates/packages/view.html:484
 msgid "No specific game required"
-msgstr ""
+msgstr "Aucun jeu spécifique n'est requis"
 
 #: app/templates/packages/view.html:467
 msgid "Tested with:"
-msgstr ""
+msgstr "Testé avec :"
 
 #: app/templates/packages/view.html:489
 msgid "Is the above correct?"
@@ -3087,7 +3098,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:502
 msgid "Does not work with:"
-msgstr ""
+msgstr "Ne fonctionne pas avec :"
 
 #: app/templates/packages/view.html:519
 msgid "This is an experimental feature."
@@ -4133,23 +4144,24 @@ msgstr ""
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
-msgstr ""
+msgstr "Ces 7 derniers jours"
 
 #: app/utils/flask.py:152
 msgid "Last 30 days"
-msgstr ""
+msgstr "Ces 30 derniers jours"
 
 #: app/utils/flask.py:153
 msgid "Last 90 days"
-msgstr ""
+msgstr "Ces 90 derniers jours"
 
 #: app/utils/flask.py:154
 msgid "Year to date"
 msgstr ""
 
 #: app/utils/flask.py:155
+#, fuzzy
 msgid "Last year"
-msgstr ""
+msgstr "L'an dernier"
 
 #: app/utils/user.py:50
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -4485,4 +4497,3 @@ msgstr ""
 #~ "support all games, except for any "
 #~ "games listed in unsupported_games."
 #~ msgstr ""
-
