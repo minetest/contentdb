@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-06-27 21:00+0100\n"
+"POT-Creation-Date: 2023-08-19 00:51+0100\n"
 "PO-Revision-Date: 2023-05-27 15:51+0000\n"
 "Last-Translator: nyommer <jishnu.ifeoluwa@fullangle.org>\n"
 "Language: hu\n"
@@ -29,9 +29,10 @@ msgstr "Kitiltottak."
 
 #: app/querybuilder.py:38 app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
-#: app/templates/modnames/list.html:16 app/templates/packages/list.html:4
-#: app/templates/todo/editor.html:46 app/templates/users/list.html:22
-#: app/templates/users/profile.html:211
+#: app/templates/collections/create_edit.html:36
+#: app/templates/collections/view.html:61 app/templates/modnames/list.html:16
+#: app/templates/packages/list.html:4 app/templates/todo/editor.html:46
+#: app/templates/users/list.html:22 app/templates/users/profile.html:241
 msgid "Packages"
 msgstr "Csomagok"
 
@@ -50,10 +51,11 @@ msgstr "Név"
 msgid "Limit to package"
 msgstr "Csomagkorlát"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/packages/packages.py:263
-#: app/blueprints/packages/packages.py:490
-#: app/blueprints/packages/packages.py:586
-#: app/blueprints/packages/packages.py:657
+#: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:85
+#: app/blueprints/packages/packages.py:274
+#: app/blueprints/packages/packages.py:507
+#: app/blueprints/packages/packages.py:603
+#: app/blueprints/packages/packages.py:674
 #: app/blueprints/packages/releases.py:61
 #: app/blueprints/packages/releases.py:73 app/blueprints/packages/reviews.py:48
 #: app/blueprints/packages/screenshots.py:35
@@ -61,9 +63,53 @@ msgstr "Csomagkorlát"
 #: app/blueprints/packages/screenshots.py:46
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
 #: app/blueprints/users/settings.py:70 app/blueprints/users/settings.py:140
-#: app/blueprints/users/settings.py:295 app/templates/users/modtools.html:86
+#: app/blueprints/users/settings.py:297 app/templates/users/modtools.html:86
 msgid "Save"
 msgstr "Mentés"
+
+#: app/blueprints/collections/__init__.py:76
+#: app/blueprints/packages/releases.py:53
+#: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
+#: app/blueprints/threads/__init__.py:280 app/templates/macros/reviews.html:134
+#: app/templates/macros/topics.html:5
+#: app/templates/packages/release_edit.html:17
+msgid "Title"
+msgstr "Cím"
+
+#: app/blueprints/collections/__init__.py:79
+#: app/blueprints/collections/__init__.py:82
+msgid "Short Description"
+msgstr ""
+
+#: app/blueprints/collections/__init__.py:80
+#: app/blueprints/threads/__init__.py:282
+#: app/templates/collections/view.html:51
+msgid "Private"
+msgstr "Privát"
+
+#: app/blueprints/collections/__init__.py:147
+msgid "A collection with a similar title already exists"
+msgstr ""
+
+#: app/blueprints/collections/__init__.py:153
+msgid "Unable to create collection as a package with that name already exists"
+msgstr ""
+
+#: app/blueprints/collections/__init__.py:253
+msgid "Added package to collection"
+msgstr ""
+
+#: app/blueprints/collections/__init__.py:255
+msgid "Removed package from collection"
+msgstr ""
+
+#: app/blueprints/collections/__init__.py:280
+msgid "Added package to favorites collection"
+msgstr ""
+
+#: app/blueprints/collections/__init__.py:282
+msgid "Removed package from favorites collection"
+msgstr ""
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -92,7 +138,7 @@ msgstr "Részletek Szerkesztése"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:592 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:608 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Változások"
 
@@ -104,18 +150,18 @@ msgstr "Képernyőképek"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:563
+#: app/templates/packages/view.html:579
 msgid "Maintainers"
 msgstr "Karbantartók"
 
-#: app/blueprints/packages/__init__.py:52 app/templates/base.html:156
+#: app/blueprints/packages/__init__.py:52 app/templates/base.html:161
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
 msgstr "Ellenőrzési Napló"
 
-#: app/blueprints/packages/__init__.py:57 app/templates/base.html:147
+#: app/blueprints/packages/__init__.py:57 app/templates/base.html:152
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
-#: app/templates/packages/view.html:234 app/templates/users/profile.html:130
+#: app/templates/packages/view.html:234 app/templates/users/profile.html:142
 msgid "Statistics"
 msgstr "Starisztikák"
 
@@ -133,15 +179,15 @@ msgstr "Törlés"
 msgid "Supported Games"
 msgstr "Támogatott játékok"
 
-#: app/blueprints/packages/packages.py:172
+#: app/blueprints/packages/packages.py:177
 msgid "Error: Another package already uses this forum topic!"
 msgstr "Hiba: Egy másik csomag már használja ezt a fórum témát!"
 
-#: app/blueprints/packages/packages.py:178
+#: app/blueprints/packages/packages.py:183
 msgid "Error: Forum topic author doesn't match package author."
 msgstr "Hiba: A fórum téma szerzője nem egyezik a csomag szerzőjével."
 
-#: app/blueprints/packages/packages.py:181
+#: app/blueprints/packages/packages.py:186
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
@@ -149,88 +195,88 @@ msgstr ""
 "Figyelem: A fórum téma nem található. Ez akkor fordulhat elő, ha a téma "
 "csak most jött létre."
 
-#: app/blueprints/packages/packages.py:228
+#: app/blueprints/packages/packages.py:239
 msgid "No download available."
 msgstr "Nem érhető el letöltés."
 
-#: app/blueprints/packages/packages.py:242 app/templates/packages/view.html:540
+#: app/blueprints/packages/packages.py:253 app/templates/packages/view.html:556
 msgid "Type"
 msgstr "Gépelni"
 
-#: app/blueprints/packages/packages.py:243
+#: app/blueprints/packages/packages.py:254
 msgid "Title (Human-readable)"
 msgstr "Cím (Ember-által-olvasható)"
 
-#: app/blueprints/packages/packages.py:244
-#: app/blueprints/packages/packages.py:584
+#: app/blueprints/packages/packages.py:255
+#: app/blueprints/packages/packages.py:601
 msgid "Name (Technical)"
 msgstr "Név (Technikai)"
 
-#: app/blueprints/packages/packages.py:244
-#: app/blueprints/packages/packages.py:585
+#: app/blueprints/packages/packages.py:255
+#: app/blueprints/packages/packages.py:602
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Csak kisbetűk (a-z), számjegyek (0-9) és aláhúzásjelek (_)"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:256
 msgid "Short Description (Plaintext)"
 msgstr "Rövid leírás (egyszerű szöveg)"
 
-#: app/blueprints/packages/packages.py:247 app/templates/packages/view.html:555
+#: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:571
 msgid "Maintenance State"
 msgstr "Karbantartási Állapot"
 
-#: app/blueprints/packages/packages.py:249 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:260 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:40
 msgid "Tags"
 msgstr "Címkék"
 
-#: app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:261
 msgid "Content Warnings"
 msgstr "Tartalomra vonatkozó figyelmeztetések"
 
-#: app/blueprints/packages/packages.py:251 app/templates/packages/view.html:544
+#: app/blueprints/packages/packages.py:262 app/templates/packages/view.html:560
 msgid "License"
 msgstr "Licenc"
 
-#: app/blueprints/packages/packages.py:252
+#: app/blueprints/packages/packages.py:263
 msgid "Media License"
 msgstr "Média licenc"
 
-#: app/blueprints/packages/packages.py:254
+#: app/blueprints/packages/packages.py:265
 msgid "Long Description (Markdown)"
 msgstr "Hosszú Leírás (Markdown)"
 
-#: app/blueprints/packages/packages.py:256
+#: app/blueprints/packages/packages.py:267
 msgid "VCS Repository URL"
 msgstr "VCS tároló URL"
 
-#: app/blueprints/packages/packages.py:257 app/blueprints/users/settings.py:68
+#: app/blueprints/packages/packages.py:268 app/blueprints/users/settings.py:68
 msgid "Website URL"
 msgstr "Weboldal URL"
 
-#: app/blueprints/packages/packages.py:258
+#: app/blueprints/packages/packages.py:269
 msgid "Issue Tracker URL"
 msgstr "Követett URL Probléma"
 
-#: app/blueprints/packages/packages.py:259
+#: app/blueprints/packages/packages.py:270
 msgid "Forum Topic ID"
 msgstr "Fórum Téma ID"
 
-#: app/blueprints/packages/packages.py:260
+#: app/blueprints/packages/packages.py:271
 msgid "Video URL"
 msgstr "Videó URL"
 
-#: app/blueprints/packages/packages.py:261
+#: app/blueprints/packages/packages.py:272
 msgid "Donate URL"
 msgstr "Támogatási URL"
 
-#: app/blueprints/packages/packages.py:267
+#: app/blueprints/packages/packages.py:278
 #, fuzzy
 msgid "_game is not an allowed name"
 msgstr "A _game nem engedélyezett név"
 
-#: app/blueprints/packages/packages.py:277
+#: app/blueprints/packages/packages.py:288
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -238,85 +284,81 @@ msgstr ""
 "Ez a csomag már létezik, de eltávolították. Kérjük keresse fel a "
 "ContentDB szerkesztőségét a csomag visszahozatalához"
 
-#: app/blueprints/packages/packages.py:282
+#: app/blueprints/packages/packages.py:293
 msgid "Package already exists"
 msgstr "A csomag már létezik"
 
-#: app/blueprints/packages/packages.py:342
+#: app/blueprints/packages/packages.py:299
+msgid "A collection with a similar name already exists"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
 msgstr "A felhasználó nem található"
 
-#: app/blueprints/packages/packages.py:346
+#: app/blueprints/packages/packages.py:363
 #: app/blueprints/packages/screenshots.py:136
 #: app/blueprints/users/settings.py:124
 msgid "Permission denied"
 msgstr "Hozzáférés megtagadva"
 
-#: app/blueprints/packages/packages.py:402
-#: app/blueprints/packages/packages.py:453
-#: app/blueprints/packages/packages.py:469
+#: app/blueprints/packages/packages.py:419
+#: app/blueprints/packages/packages.py:470
+#: app/blueprints/packages/packages.py:486
 msgid "You don't have permission to do that"
 msgstr "Nincs erre engedélye"
 
-#: app/blueprints/packages/packages.py:432
+#: app/blueprints/packages/packages.py:449
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
 "Kérjük, hogy a jóváhagyási témában írja meg, milyen változtatásokra van "
 "szükség"
 
-#: app/blueprints/packages/packages.py:464
+#: app/blueprints/packages/packages.py:481
 msgid "Deleted package"
 msgstr "Törölt csomag"
 
-#: app/blueprints/packages/packages.py:480
+#: app/blueprints/packages/packages.py:497
 msgid "Unapproved package"
 msgstr "Nem jóváhagyott csomag"
 
-#: app/blueprints/packages/packages.py:489
+#: app/blueprints/packages/packages.py:506
 msgid "Maintainers (Comma-separated)"
 msgstr "Karbantartók (vesszővel-elválasztva)"
 
-#: app/blueprints/packages/packages.py:498
+#: app/blueprints/packages/packages.py:515
 msgid "You don't have permission to edit maintainers"
 msgstr "Nincs engedélye a karbantartók szerkesztéséhez"
 
-#: app/blueprints/packages/packages.py:548
+#: app/blueprints/packages/packages.py:565
 msgid "You are not a maintainer"
 msgstr "Nem vagy karbantartó"
 
-#: app/blueprints/packages/packages.py:551
+#: app/blueprints/packages/packages.py:568
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "A csomagtulajdonosok nem tudják eltávolítani magukat karbantartóként"
 
-#: app/blueprints/packages/packages.py:583
+#: app/blueprints/packages/packages.py:600
 msgid "Author Name"
 msgstr "Szerző Neve"
 
-#: app/blueprints/packages/packages.py:653
+#: app/blueprints/packages/packages.py:670
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr ""
 "Engedélyezze a támogatottság megjelenését a függőségein alapulva "
 "(ajánlott)"
 
-#: app/blueprints/packages/packages.py:654
+#: app/blueprints/packages/packages.py:671
 msgid "Supported games"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:655
+#: app/blueprints/packages/packages.py:672
 msgid "Unsupported games"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:656
+#: app/blueprints/packages/packages.py:673
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
-
-#: app/blueprints/packages/releases.py:53
-#: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
-#: app/blueprints/threads/__init__.py:279 app/templates/macros/reviews.html:134
-#: app/templates/macros/topics.html:5
-#: app/templates/packages/release_edit.html:17
-msgid "Title"
-msgstr "Cím"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -436,9 +478,9 @@ msgstr "Frissítési konfiguráció törölve"
 msgid "Now, please create an initial release"
 msgstr "Most kérjük, hozzon létre egy kezdeti verziót"
 
-#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:179
-#: app/blueprints/threads/__init__.py:180
-#: app/blueprints/threads/__init__.py:280
+#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:180
+#: app/blueprints/threads/__init__.py:181
+#: app/blueprints/threads/__init__.py:281
 msgid "Comment"
 msgstr "Megjegyzés"
 
@@ -447,18 +489,18 @@ msgid "Rating"
 msgstr "Értékelés"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:117
-#: app/templates/macros/reviews.html:160
+#: app/templates/macros/reviews.html:161
 msgid "Yes"
 msgstr "Igen"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:121
-#: app/templates/macros/reviews.html:164
+#: app/templates/macros/reviews.html:165
 #, fuzzy
 msgid "Neutral"
 msgstr "Neutrális"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:125
-#: app/templates/macros/reviews.html:168
+#: app/templates/macros/reviews.html:169
 msgid "No"
 msgstr "Nem"
 
@@ -474,9 +516,9 @@ msgstr ""
 "Az utóbbi időben túl sok csomagot tekintett át. Kérjük, várjon, mielőtt "
 "újra próbálkozna, és fontolja meg az értékelések részletesebbé tételét"
 
-#: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:205
-#: app/blueprints/threads/__init__.py:238
-#: app/blueprints/threads/__init__.py:330 app/blueprints/users/settings.py:105
+#: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:206
+#: app/blueprints/threads/__init__.py:239
+#: app/blueprints/threads/__init__.py:333 app/blueprints/users/settings.py:105
 #: app/logic/packages.py:131
 #, fuzzy
 msgid "Linking to blocked sites is not allowed"
@@ -505,65 +547,62 @@ msgid "Message"
 msgstr "Üzenet"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:50
-#: app/templates/packages/view.html:623 app/templates/report/index.html:4
-#: app/templates/report/index.html:10 app/templates/users/profile.html:28
+#: app/templates/packages/view.html:639 app/templates/report/index.html:4
+#: app/templates/report/index.html:10 app/templates/users/profile.html:31
 msgid "Report"
 msgstr "Jelentés"
 
-#: app/blueprints/threads/__init__.py:69
+#: app/blueprints/threads/__init__.py:70
 msgid "Already subscribed!"
 msgstr "Már feliratkozott!"
 
-#: app/blueprints/threads/__init__.py:71
+#: app/blueprints/threads/__init__.py:72
 msgid "Subscribed to thread"
 msgstr "Feliratkozott a témára"
 
-#: app/blueprints/threads/__init__.py:86
+#: app/blueprints/threads/__init__.py:87
 msgid "Unsubscribed!"
 msgstr "Leiratkozott!"
 
-#: app/blueprints/threads/__init__.py:90
+#: app/blueprints/threads/__init__.py:91
 msgid "Already not subscribed!"
 msgstr "Már nincsen feliratkozva!"
 
-#: app/blueprints/threads/__init__.py:108
+#: app/blueprints/threads/__init__.py:109
 msgid "Locked thread"
 msgstr "Lezárt téma"
 
-#: app/blueprints/threads/__init__.py:111
+#: app/blueprints/threads/__init__.py:112
 msgid "Unlocked thread"
 msgstr "Feloldott szál"
 
-#: app/blueprints/threads/__init__.py:160
+#: app/blueprints/threads/__init__.py:161
 msgid "Cannot delete thread opening post!"
 msgstr "A téma nyitó hozzászólását nem lehet törölni!"
 
-#: app/blueprints/threads/__init__.py:234
+#: app/blueprints/threads/__init__.py:235
 msgid "Please wait before commenting again"
 msgstr "Kérjük, várjon, mielőtt újra hozzászólna"
 
-#: app/blueprints/threads/__init__.py:281
-msgid "Private"
-msgstr "Privát"
-
-#: app/blueprints/threads/__init__.py:282
+#: app/blueprints/threads/__init__.py:283
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
 msgstr "Téma Megnyitása"
 
-#: app/blueprints/threads/__init__.py:305
+#: app/blueprints/threads/__init__.py:308
 msgid "Unable to create thread!"
 msgstr "Nem lehet létrehozni a témát!"
 
-#: app/blueprints/threads/__init__.py:311
+#: app/blueprints/threads/__init__.py:314
 msgid "An approval thread already exists! Consider replying there instead"
 msgstr "Már létezik jóváhagyási szál! Fontolja meg, hogy inkább ott válaszol"
 
-#: app/blueprints/threads/__init__.py:315
+#: app/blueprints/threads/__init__.py:318
 msgid "Please wait before opening another thread"
 msgstr "Kérjük, várjon, mielőtt újabb témát nyitna"
 
-#: app/blueprints/todo/user.py:181
+#: app/blueprints/todo/user.py:192
+#: app/templates/collections/package_add_to.html:46
 msgid "Done"
 msgstr ""
 
@@ -581,7 +620,7 @@ msgstr "Jelszó"
 msgid "Remember me"
 msgstr "Emlékezz rám"
 
-#: app/blueprints/users/account.py:39 app/templates/base.html:185
+#: app/blueprints/users/account.py:39 app/templates/base.html:190
 #: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "Bejelentkezés"
@@ -611,7 +650,7 @@ msgstr "A bejelentkezés sikertelen"
 msgid "Display Name"
 msgstr "Megjelenítendő Név"
 
-#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:289
+#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:291
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "Felhasználónév"
@@ -888,7 +927,7 @@ msgstr "&gt;50 ezer letöltés"
 msgid "Has received %(downloads)d downloads across all packages."
 msgstr "Fogadott %(downloads)d letöltések az összes csomagban."
 
-#: app/blueprints/users/settings.py:36 app/templates/users/profile.html:17
+#: app/blueprints/users/settings.py:36 app/templates/users/profile.html:20
 #: app/templates/users/profile_edit.html:8
 msgid "Edit Profile"
 msgstr "Profil Szerkesztése"
@@ -907,7 +946,7 @@ msgid "API Tokens"
 msgstr "API-Tokenek"
 
 #: app/blueprints/users/settings.py:59 app/templates/users/modtools.html:4
-#: app/templates/users/modtools.html:8 app/templates/users/profile.html:35
+#: app/templates/users/modtools.html:8 app/templates/users/profile.html:38
 msgid "Moderator Tools"
 msgstr "Moderátor Eszközök"
 
@@ -923,23 +962,23 @@ msgstr "Van már felhasználó ezzel a névvel"
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr "A moderátori vagy magasabb rangú felhasználók nem törölhetők"
 
-#: app/blueprints/users/settings.py:290
+#: app/blueprints/users/settings.py:292
 msgid "Display name"
 msgstr "Megjelenítendő név"
 
-#: app/blueprints/users/settings.py:291
+#: app/blueprints/users/settings.py:293
 msgid "Forums Username"
 msgstr "Fórum Felhasználónév"
 
-#: app/blueprints/users/settings.py:292
+#: app/blueprints/users/settings.py:294
 msgid "GitHub Username"
 msgstr "GitHub Felhasználónév"
 
-#: app/blueprints/users/settings.py:293 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:295 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "Rang"
 
-#: app/blueprints/users/settings.py:337
+#: app/blueprints/users/settings.py:339
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr "Nem léptethet fel egy felhasználót sajátjánál magasabb rangra!"
 
@@ -1053,42 +1092,44 @@ msgstr "Kérjük, töltse fel %(file_desc)s"
 msgid "Uploaded image isn't actually an image"
 msgstr "A feltöltött kép valójában nem kép"
 
-#: app/models/packages.py:66
+#: app/models/packages.py:67
 #, fuzzy
 msgid "Mod"
 msgstr "Modifikáció \"Mod\""
 
-#: app/models/packages.py:68
+#: app/models/packages.py:69
 msgid "Game"
 msgstr "Játék"
 
-#: app/models/packages.py:70
+#: app/models/packages.py:71
 msgid "Texture Pack"
 msgstr "Kinézet(textúra)csomag"
 
-#: app/models/packages.py:75 app/templates/base.html:39
+#: app/models/packages.py:76 app/templates/base.html:39
 #: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Modifikációk \"Modok\""
 
-#: app/models/packages.py:77 app/templates/base.html:42
+#: app/models/packages.py:78 app/templates/base.html:42
 #: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Játékok"
 
-#: app/models/packages.py:79 app/templates/base.html:45
+#: app/models/packages.py:80 app/templates/base.html:45
 msgid "Texture Packs"
 msgstr "Kinézet(textúra)csomag"
 
-#: app/models/packages.py:168
+#: app/models/packages.py:169
 msgid "Submit for Approval"
 msgstr "Jelölés a jóváhagyáshoz"
 
-#: app/models/packages.py:170
+#: app/models/packages.py:171
 msgid "Approve"
 msgstr "Jóváhagyás"
 
-#: app/models/packages.py:172 app/templates/api/create_edit_token.html:17
+#: app/models/packages.py:173 app/templates/api/create_edit_token.html:17
+#: app/templates/collections/delete.html:14
+#: app/templates/collections/view.html:39
 #: app/templates/packages/release_edit.html:75
 #: app/templates/packages/review_create_edit.html:55
 #: app/templates/threads/delete_reply.html:19
@@ -1118,7 +1159,7 @@ msgstr ""
 msgid "%(num)d new notifications"
 msgstr "Van%(num)dÚj értesítése"
 
-#: app/tasks/emails.py:162 app/templates/macros/forms.html:52
+#: app/tasks/emails.py:162 app/templates/macros/forms.html:53
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
@@ -1154,7 +1195,7 @@ msgstr ""
 msgid "Random"
 msgstr "Véletlenszerű"
 
-#: app/templates/base.html:51 app/templates/base.html:253
+#: app/templates/base.html:51 app/templates/base.html:258
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/update_config.html:8
 #: app/templates/todo/game_support.html:8 app/templates/todo/user.html:45
@@ -1192,77 +1233,86 @@ msgstr "Csomag hozzáadása"
 msgid "Profile"
 msgstr "Profil"
 
-#: app/templates/base.html:160
+#: app/templates/base.html:147
+msgid "My Collections"
+msgstr ""
+
+#: app/templates/base.html:165
 #, fuzzy
 msgid "Admin"
 msgstr "Admin"
 
-#: app/templates/base.html:163
+#: app/templates/base.html:168
 msgid "License Editor"
 msgstr "Licensz/engedély szerkesztő"
 
-#: app/templates/base.html:168
+#: app/templates/base.html:173
 msgid "Restore Package"
 msgstr "Csomag visszaállítása"
 
-#: app/templates/base.html:171
+#: app/templates/base.html:176
 msgid "Tag Editor"
 msgstr "Cimke szerkesztés"
 
-#: app/templates/base.html:173
+#: app/templates/base.html:178
 msgid "Create Tag"
 msgstr "Cimke létrehozása"
 
-#: app/templates/base.html:178 app/templates/packages/release_new.html:12
+#: app/templates/base.html:183 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "Beállítások"
 
-#: app/templates/base.html:181
+#: app/templates/base.html:186
 msgid "Sign out"
 msgstr "Kijelentkezés"
 
-#: app/templates/base.html:210
+#: app/templates/base.html:215
 msgid "Help translate ContentDB"
 msgstr "Segítsen a ContentDB fordításában"
 
-#: app/templates/base.html:254
+#: app/templates/base.html:259
 msgid "About"
 msgstr "ról/ről"
 
-#: app/templates/base.html:255
+#: app/templates/base.html:260
 msgid "Rules"
 msgstr "Szabályok"
 
-#: app/templates/base.html:256
+#: app/templates/base.html:261
 msgid "Policy and Guidance"
 msgstr "Iránynyelv és Útmutatás"
 
-#: app/templates/base.html:257
+#: app/templates/base.html:262
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:258 app/templates/users/register.html:37
+#: app/templates/base.html:263 app/templates/users/register.html:37
 msgid "Privacy Policy"
 msgstr "Adatvédelmi irányelvek"
 
-#: app/templates/base.html:260
+#: app/templates/base.html:265
 msgid "Report / DMCA"
 msgstr "Jelentés / DMCA"
 
-#: app/templates/base.html:262
+#: app/templates/base.html:267
 msgid "User List"
 msgstr "Felhasználó lista"
 
-#: app/templates/base.html:263 app/templates/packages/view.html:194
-#: app/templates/packages/view.html:612 app/templates/threads/list.html:4
+#: app/templates/base.html:268 app/templates/packages/view.html:194
+#: app/templates/packages/view.html:628 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr ""
 
-#: app/templates/base.html:264
+#: app/templates/base.html:269 app/templates/collections/list.html:7
+#: app/templates/collections/list.html:26
+msgid "Collections"
+msgstr ""
+
+#: app/templates/base.html:270
 msgid "Support Packages"
 msgstr ""
 
-#: app/templates/base.html:265
+#: app/templates/base.html:271
 msgid "Source Code"
 msgstr "Forráskód"
 
@@ -1274,8 +1324,10 @@ msgstr "Üdv"
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
 
-#: app/templates/index.html:42 app/templates/macros/reviews.html:75
-#: app/templates/packages/game_hub.html:5
+#: app/templates/collections/create_edit.html:50
+#: app/templates/collections/list.html:39
+#: app/templates/collections/view.html:86 app/templates/index.html:42
+#: app/templates/macros/reviews.html:75 app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
 #: app/templates/packages/similar.html:22
 #, python-format
@@ -1289,7 +1341,7 @@ msgstr ""
 
 #: app/templates/index.html:73 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:198 app/templates/packages/view.html:299
-#: app/templates/users/profile.html:226
+#: app/templates/users/profile.html:256
 msgid "Reviews"
 msgstr "Vélemények"
 
@@ -1465,8 +1517,8 @@ msgstr "Ajánlott:csak akkor enged zsetonokat, ha egy adott csomaggal interaktá
 msgid "API Tokens | %(username)s"
 msgstr "API zsetonok | %(username)s"
 
-#: app/templates/api/list_tokens.html:8 app/templates/macros/topics.html:29
-#: app/templates/macros/topics.html:65
+#: app/templates/api/list_tokens.html:8 app/templates/collections/list.html:21
+#: app/templates/macros/topics.html:29 app/templates/macros/topics.html:65
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
@@ -1479,6 +1531,86 @@ msgstr "API Dokumentáció"
 #: app/templates/api/list_tokens.html:19
 msgid "No tokens created"
 msgstr "Nem készült zseton"
+
+#: app/templates/collections/create_edit.html:5
+#: app/templates/collections/view.html:42 app/templates/macros/releases.html:62
+#: app/templates/packages/view.html:119 app/templates/packages/view.html:253
+msgid "Edit"
+msgstr "Szerkesztés"
+
+#: app/templates/collections/create_edit.html:7
+msgid "New Collection"
+msgstr ""
+
+#: app/templates/collections/create_edit.html:28
+msgid "Users won't be redirected when going to the old URL"
+msgstr ""
+
+#: app/templates/collections/create_edit.html:42
+msgid ""
+"To add or remove a package, go to the package's page and click 'Add to "
+"collection'"
+msgstr ""
+
+#: app/templates/collections/create_edit.html:56
+msgid "You can replace the description with your own"
+msgstr ""
+
+#: app/templates/collections/delete.html:4
+#, python-format
+msgid "Delete collection \"%(title)s\" by %(author)s"
+msgstr ""
+
+#: app/templates/collections/delete.html:12
+#: app/templates/threads/delete_reply.html:16
+#: app/templates/threads/delete_thread.html:16
+#: app/templates/users/delete.html:13
+msgid "Deleting is permanent"
+msgstr ""
+
+#: app/templates/collections/delete.html:13
+#: app/templates/packages/remove.html:34
+#: app/templates/threads/delete_reply.html:18
+#: app/templates/threads/delete_thread.html:18
+#: app/templates/users/delete.html:30
+msgid "Cancel"
+msgstr "Mégse"
+
+#: app/templates/collections/list.html:5 app/templates/collections/list.html:24
+#: app/templates/collections/view.html:27
+#, python-format
+msgid "%(author)s's collections"
+msgstr ""
+
+#: app/templates/collections/list.html:49
+msgid "No collections"
+msgstr ""
+
+#: app/templates/collections/package_add_to.html:4
+#, python-format
+msgid "Add %(package_title)s to a collection"
+msgstr ""
+
+#: app/templates/collections/package_add_to.html:9
+msgid "Create Collection"
+msgstr ""
+
+#: app/templates/collections/package_add_to.html:39
+msgid "You don't have any collections"
+msgstr ""
+
+#: app/templates/collections/view.html:33
+msgid "Make a copy"
+msgstr ""
+
+#: app/templates/collections/view.html:54
+#, python-format
+msgid "A collection by %(author)s"
+msgstr ""
+
+#: app/templates/collections/view.html:64
+msgid "To add a package, go to the package's page and click 'Add to collection'"
+msgstr ""
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1503,12 +1635,12 @@ msgstr ""
 msgid "View package"
 msgstr ""
 
-#: app/templates/donate/index.html:46 app/templates/users/profile.html:95
+#: app/templates/donate/index.html:46 app/templates/users/profile.html:98
 msgid "Donate"
 msgstr ""
 
 #: app/templates/donate/index.html:62
-msgid "Based on your reviews"
+msgid "Based on your reviews / favorites"
 msgstr ""
 
 #: app/templates/donate/index.html:67
@@ -1663,7 +1795,7 @@ msgstr "Törölt Felhasználó"
 msgid "No audit log entries."
 msgstr ""
 
-#: app/templates/macros/forms.html:107
+#: app/templates/macros/forms.html:112
 msgid "Start typing to see suggestions"
 msgstr ""
 
@@ -1752,11 +1884,6 @@ msgstr ""
 msgid "Edit / Approve"
 msgstr ""
 
-#: app/templates/macros/releases.html:62 app/templates/packages/view.html:119
-#: app/templates/packages/view.html:253
-msgid "Edit"
-msgstr "Szerkesztés"
-
 #: app/templates/macros/releases.html:93
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
@@ -1805,6 +1932,10 @@ msgstr ""
 
 #: app/templates/macros/reviews.html:139
 msgid "Post Review"
+msgstr ""
+
+#: app/templates/macros/reviews.html:175
+msgid "Report an Issue"
 msgstr ""
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
@@ -1943,7 +2074,7 @@ msgid "On %(trigger)s, do %(action)s"
 msgstr ""
 
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:125
-#: app/templates/packages/view.html:367
+#: app/templates/packages/view.html:383
 msgid "Release"
 msgstr ""
 
@@ -1953,7 +2084,7 @@ msgstr ""
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:371
+#: app/templates/packages/view.html:387
 msgid "Update settings"
 msgstr ""
 
@@ -2014,9 +2145,9 @@ msgstr ""
 
 #: app/templates/modnames/view.html:27
 #: app/templates/packages/game_support.html:42
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:408
-#: app/templates/packages/view.html:432 app/templates/packages/view.html:477
-#: app/templates/packages/view.html:509 app/templates/todo/editor.html:85
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:424
+#: app/templates/packages/view.html:448 app/templates/packages/view.html:493
+#: app/templates/packages/view.html:525 app/templates/todo/editor.html:85
 #: app/templates/todo/game_support.html:45
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -2183,11 +2314,11 @@ msgstr ""
 msgid "Tip: paste in a forum topic URL"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:120
+#: app/templates/packages/create_edit.html:121
 msgid "YouTube videos will be shown in an embed."
 msgstr ""
 
-#: app/templates/packages/create_edit.html:121
+#: app/templates/packages/create_edit.html:122
 msgid "If blank, the author's donation URL will be used instead."
 msgstr ""
 
@@ -2280,29 +2411,35 @@ msgid ""
 msgstr ""
 
 #: app/templates/packages/game_support.html:101
-msgid "It's not possible for texture packs to support all games"
+msgid "It's not possible for texture packs to support all games."
 msgstr ""
 
-#: app/templates/packages/game_support.html:107
+#: app/templates/packages/game_support.html:105
+msgid ""
+"The package depends on a game-specific mod, and so cannot support all "
+"games."
+msgstr ""
+
+#: app/templates/packages/game_support.html:111
 msgid "Overrides"
 msgstr ""
 
-#: app/templates/packages/game_support.html:110
+#: app/templates/packages/game_support.html:114
 #, python-format
 msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
 msgstr ""
 
-#: app/templates/packages/game_support.html:112
+#: app/templates/packages/game_support.html:116
 #, python-format
 msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
 msgstr ""
 
-#: app/templates/packages/game_support.html:115
-#: app/templates/packages/game_support.html:116
+#: app/templates/packages/game_support.html:119
+#: app/templates/packages/game_support.html:120
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
 msgstr ""
 
@@ -2631,13 +2768,6 @@ msgstr ""
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr ""
 
-#: app/templates/packages/remove.html:34
-#: app/templates/threads/delete_reply.html:18
-#: app/templates/threads/delete_thread.html:18
-#: app/templates/users/delete.html:30
-msgid "Cancel"
-msgstr "Mégse"
-
 #: app/templates/packages/remove.html:39
 msgid "Unapprove"
 msgstr ""
@@ -2856,15 +2986,15 @@ msgstr ""
 msgid "Work in Progress"
 msgstr ""
 
-#: app/templates/packages/view.html:188
+#: app/templates/packages/view.html:188 app/templates/users/profile.html:218
 msgid "Downloads"
 msgstr ""
 
-#: app/templates/packages/view.html:211 app/templates/users/profile.html:86
+#: app/templates/packages/view.html:211 app/templates/users/profile.html:89
 msgid "Website"
 msgstr ""
 
-#: app/templates/packages/view.html:223 app/templates/users/profile.html:68
+#: app/templates/packages/view.html:223 app/templates/users/profile.html:71
 msgid "Forums"
 msgstr ""
 
@@ -2896,116 +3026,124 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: app/templates/packages/view.html:341 app/templates/packages/view.html:395
+#: app/templates/packages/view.html:341 app/templates/packages/view.html:411
 msgid "View content for game"
 msgstr ""
 
 #: app/templates/packages/view.html:355
+msgid "Favorite"
+msgstr ""
+
+#: app/templates/packages/view.html:361
+msgid "Add to collection..."
+msgstr ""
+
+#: app/templates/packages/view.html:371
 msgid "Package may be outdated"
 msgstr ""
 
-#: app/templates/packages/view.html:362
+#: app/templates/packages/view.html:378
 msgid "Only visible to the author and Editors."
 msgstr ""
 
-#: app/templates/packages/view.html:379
+#: app/templates/packages/view.html:395
 msgid "Warning"
 msgstr ""
 
-#: app/templates/packages/view.html:385
+#: app/templates/packages/view.html:401
 msgid "Like this package? Help support its development by making a donation"
 msgstr ""
 
-#: app/templates/packages/view.html:388
+#: app/templates/packages/view.html:404
 msgid "Donate now"
 msgstr ""
 
-#: app/templates/packages/view.html:400
+#: app/templates/packages/view.html:416
 msgid "Dependencies"
 msgstr ""
 
-#: app/templates/packages/view.html:402
+#: app/templates/packages/view.html:418
 msgid "Required"
 msgstr ""
 
-#: app/templates/packages/view.html:420
+#: app/templates/packages/view.html:436
 msgid "No required dependencies"
 msgstr ""
 
-#: app/templates/packages/view.html:426
+#: app/templates/packages/view.html:442
 msgid "Optional"
 msgstr ""
 
-#: app/templates/packages/view.html:459
+#: app/templates/packages/view.html:475
 msgid "Compatible Games"
 msgstr ""
 
-#: app/templates/packages/view.html:464 app/templates/packages/view.html:484
+#: app/templates/packages/view.html:480 app/templates/packages/view.html:500
 msgid "No specific game required"
 msgstr ""
 
-#: app/templates/packages/view.html:467
+#: app/templates/packages/view.html:483
 msgid "Tested with:"
 msgstr ""
 
-#: app/templates/packages/view.html:489
+#: app/templates/packages/view.html:505
 msgid "Is the above correct?"
 msgstr ""
 
-#: app/templates/packages/view.html:490
+#: app/templates/packages/view.html:506
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
 
-#: app/templates/packages/view.html:502
+#: app/templates/packages/view.html:518
 msgid "Does not work with:"
 msgstr ""
 
-#: app/templates/packages/view.html:519
+#: app/templates/packages/view.html:535
 msgid "This is an experimental feature."
 msgstr ""
 
-#: app/templates/packages/view.html:520
+#: app/templates/packages/view.html:536
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr ""
 
-#: app/templates/packages/view.html:530
+#: app/templates/packages/view.html:546
 msgid "Please specify compatible games"
 msgstr ""
 
-#: app/templates/packages/view.html:536
+#: app/templates/packages/view.html:552
 msgid "Information"
 msgstr ""
 
-#: app/templates/packages/view.html:542
+#: app/templates/packages/view.html:558
 msgid "Technical Name"
 msgstr ""
 
-#: app/templates/packages/view.html:551
+#: app/templates/packages/view.html:567
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr ""
 
-#: app/templates/packages/view.html:559
+#: app/templates/packages/view.html:575
 msgid "Unknown"
 msgstr ""
 
-#: app/templates/packages/view.html:561
+#: app/templates/packages/view.html:577
 msgid "Added"
 msgstr ""
 
-#: app/templates/packages/view.html:575
+#: app/templates/packages/view.html:591
 msgid "Remove myself"
 msgstr ""
 
-#: app/templates/packages/view.html:580
+#: app/templates/packages/view.html:596
 msgid "Provides"
 msgstr ""
 
-#: app/templates/packages/view.html:602
+#: app/templates/packages/view.html:618
 msgid "More"
 msgstr ""
 
-#: app/templates/packages/view.html:631
+#: app/templates/packages/view.html:647
 msgid "See audit log"
 msgstr ""
 
@@ -3052,12 +3190,6 @@ msgstr ""
 #: app/templates/threads/delete_reply.html:4
 #, python-format
 msgid "Delete reply by %(username)s in %(title)s "
-msgstr ""
-
-#: app/templates/threads/delete_reply.html:16
-#: app/templates/threads/delete_thread.html:16
-#: app/templates/users/delete.html:13
-msgid "Deleting is permanent"
 msgstr ""
 
 #: app/templates/threads/delete_thread.html:4
@@ -3225,18 +3357,17 @@ msgstr ""
 msgid "Nothing to do :)"
 msgstr ""
 
-#: app/templates/todo/game_support.html:66
+#: app/templates/todo/game_support.html:67
 msgid "Bulk support all games"
 msgstr ""
 
-#: app/templates/todo/game_support.html:68
+#: app/templates/todo/game_support.html:69
 msgid ""
-"Click the button below to confirm that all packages without listed "
-"supported_games (red text above) do support all games, except for any "
-"games listed in unsupported_games."
+"Click the button below to confirm that the following packages do support "
+"all games, except for any games listed in unsupported_games:"
 msgstr ""
 
-#: app/templates/todo/game_support.html:72
+#: app/templates/todo/game_support.html:74
 msgid "Confirm"
 msgstr ""
 
@@ -3711,7 +3842,7 @@ msgstr ""
 msgid "Forgot my password"
 msgstr ""
 
-#: app/templates/users/login.html:30 app/templates/users/profile.html:77
+#: app/templates/users/login.html:30 app/templates/users/profile.html:80
 msgid "GitHub"
 msgstr ""
 
@@ -3748,56 +3879,68 @@ msgstr ""
 msgid "Email Address"
 msgstr ""
 
-#: app/templates/users/profile.html:11
+#: app/templates/users/profile.html:14
 msgid "Profile picture"
 msgstr ""
 
-#: app/templates/users/profile.html:22
+#: app/templates/users/profile.html:25
 msgid "To Do List"
 msgstr ""
 
-#: app/templates/users/profile.html:41
+#: app/templates/users/profile.html:44
 msgid "Send Email"
 msgstr ""
 
-#: app/templates/users/profile.html:105
+#: app/templates/users/profile.html:108
 msgid "packages"
 msgstr ""
 
-#: app/templates/users/profile.html:114
+#: app/templates/users/profile.html:117
+msgid "collections"
+msgstr ""
+
+#: app/templates/users/profile.html:126
 msgid "reviews"
 msgstr ""
 
-#: app/templates/users/profile.html:122
+#: app/templates/users/profile.html:134
 msgid "comments"
 msgstr ""
 
-#: app/templates/users/profile.html:143
+#: app/templates/users/profile.html:155
 msgid "Claim"
 msgstr ""
 
-#: app/templates/users/profile.html:145
+#: app/templates/users/profile.html:157
 msgid "Is this you? Claim your account now!"
 msgstr ""
 
-#: app/templates/users/profile.html:181 app/templates/users/profile.html:187
+#: app/templates/users/profile.html:193 app/templates/users/profile.html:199
 #, python-format
 msgid "%(value)d / %(target)d"
 msgstr ""
 
-#: app/templates/users/profile.html:202
-msgid "Create package"
+#: app/templates/users/profile.html:214
+msgid "Alphabetical"
 msgstr ""
 
-#: app/templates/users/profile.html:208
+#: app/templates/users/profile.html:222
+msgid "Newest"
+msgstr ""
+
+#: app/templates/users/profile.html:228
 msgid "View list of tags"
 msgstr ""
 
-#: app/templates/users/profile.html:218
+#: app/templates/users/profile.html:236
+msgid "Create package"
+msgstr ""
+
+#: app/templates/users/profile.html:248
 msgid "Maintained Packages"
 msgstr ""
 
-#: app/templates/users/profile.html:220
+#: app/templates/users/profile.html:250
 msgid "This user is also a maintainer of the following packages"
 msgstr ""
 
@@ -4242,6 +4385,20 @@ msgstr ""
 #~ msgid ""
 #~ "Click the button below to confirm "
 #~ "that all games without listed "
+#~ "supported_games (red text above) do "
+#~ "support all games, except for any "
+#~ "games listed in unsupported_games."
+#~ msgstr ""
+
+#~ msgid "Based on your reviews"
+#~ msgstr ""
+
+#~ msgid "It's not possible for texture packs to support all games"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Click the button below to confirm "
+#~ "that all packages without listed "
 #~ "supported_games (red text above) do "
 #~ "support all games, except for any "
 #~ "games listed in unsupported_games."
