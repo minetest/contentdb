@@ -26,7 +26,7 @@
 					{% endif -%}
 					{% if collection.author != current_user %}{{ collection.author.display_name }}: {% endif -%}
 					{% if collection.name == 'favorites' %}
-						<i class="fas fa-heart mr-1 text-danger"></i>
+						<i class="fas fa-star mr-1 text-info"></i>
 					{% endif %}
 					{% if collection.private %}
 						<i class="fas fa-lock mr-1" style="color:#ffac33;"></i>
