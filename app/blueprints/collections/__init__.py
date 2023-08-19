@@ -82,6 +82,7 @@ class CollectionForm(FlaskForm):
 		StringField(lazy_gettext("Short Description"), [Optional(), Length(0, 500)], filters=[nonempty_or_none]),
 		min_entries=0)
 	package_ids = FieldList(HiddenField(), min_entries=0)
+	package_removed = FieldList(HiddenField(), min_entries=0)
 	submit = SubmitField(lazy_gettext("Save"))
 
 
@@ -122,6 +123,7 @@ def create_edit(author=None, name=None):
 			for item in collection.items:
 				form.descriptions.append_entry(item.description)
 				form.package_ids.append_entry(item.package.id)
+				form.package_removed.append_entry("0")
 		else:
 			form.name = None
 
@@ -178,9 +180,11 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 		for i, package_id in enumerate(form.package_ids):
 			item = next((x for x in collection.items if str(x.package.id) == package_id.data), None)
 			if item is None:
-				abort(400)
+				continue
 
 			item.description = form.descriptions[i].data
+			if form.package_removed[i].data == "1":
+				db.session.delete(item)
 
 		add_audit_log(severity, current_user,
 				f"Edited collection {collection.author.username}/{collection.name}",

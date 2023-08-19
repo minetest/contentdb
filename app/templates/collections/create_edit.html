@@ -8,6 +8,10 @@
 	{% endif %}
 {% endblock %}
 
+{% block scriptextra %}
+	<script src="/static/collection_editor.js"></script>
+{% endblock %}
+
 {% block content %}
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field, render_field_prefix_button %}
 	<form method="POST" action="" enctype="multipart/form-data">
@@ -35,8 +39,13 @@
 			</p>
 			{% for item in collection.items %}
 				{% set package = item.package %}
-				<article class="card my-3">
+				<article class="card my-3"
+						data-delete-confirm="{{ _('Are you sure you want to remove %(title)s?', title=package.title) }}">
 					<div class="card-body">
+						<button class="btn btn-sm btn-danger remove-package float-right"
+								type="button" aria-label="{{ _('Remove') }}">
+							<i class="fas fa-trash"></i>
+						</button>
 						<h5>
 							<a href="{{ package.get_url('packages.view') }}" target="_blank">
 								{{ _("%(title)s by %(author)s", title=package.title, author=package.author.display_name) }}
@@ -47,6 +56,7 @@
 						</p>
 						{{ render_field(form.descriptions[loop.index - 1], hint=_("You can replace the description with your own")) }}
 						{{ form.package_ids[loop.index - 1]() }}
+						{{ form.package_removed[loop.index - 1]() }}
 					</div>
 				</article>
 			{% endfor %}
