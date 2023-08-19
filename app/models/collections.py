@@ -44,6 +44,7 @@ class Collection(db.Model):
 	name = db.Column(db.Unicode(100), nullable=False)
 	title = db.Column(db.Unicode(100), nullable=False)
 	short_description = db.Column(db.Unicode(200), nullable=False)
+	long_description = db.Column(db.UnicodeText, nullable=True)
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 	private = db.Column(db.Boolean, nullable=False, default=False)
 

@@ -21,7 +21,7 @@ from flask import Blueprint, request, redirect, render_template, flash, abort, u
 from flask_babel import lazy_gettext, gettext
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, SubmitField, FieldList, HiddenField
+from wtforms import StringField, BooleanField, SubmitField, FieldList, HiddenField, TextAreaField
 from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from app.models import Collection, db, Package, Permission, CollectionPackage, User, UserRank, AuditSeverity
@@ -77,6 +77,7 @@ class CollectionForm(FlaskForm):
 	name = StringField("URL", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0,
 		"Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	short_description = StringField(lazy_gettext("Short Description"), [Optional(), Length(0, 200)])
+	long_description = TextAreaField(lazy_gettext("Page Content"), [Optional()], filters=[nonempty_or_none])
 	private = BooleanField(lazy_gettext("Private"))
 	descriptions = FieldList(
 		StringField(lazy_gettext("Short Description"), [Optional(), Length(0, 500)], filters=[nonempty_or_none]),

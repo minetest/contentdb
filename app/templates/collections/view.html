@@ -56,6 +56,11 @@
 	<p>
 		{{ collection.short_description }}
 	</p>
+	{% if collection.long_description %}
+		<div class="markdown mb-5">
+			{{ collection.long_description | markdown }}
+		</div>
+	{% endif %}
 
 	<section class="mt-5">
 		<h2 class="sr-only">{{ _("Packages") }}</h2>

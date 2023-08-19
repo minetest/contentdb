@@ -31,6 +31,9 @@
 
 		{{ render_field(form.short_description) }}
 		{{ render_checkbox_field(form.private, class_="my-3") }}
+		{% if collection %}
+			{{ render_field(form.long_description, fieldclass="form-control markdown") }}
+		{% endif %}
 
 		{% if collection and collection.items %}
 			<h2>{{ _("Packages") }}</h2>
