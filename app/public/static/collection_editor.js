@@ -84,9 +84,12 @@ function addPackage(pkg) {
 		</article>
 	`;
 
-	const newElement = temp.children[0];
-	document.getElementById("package_list").appendChild(newElement);
-	newElement.scrollIntoView();
+	const card = temp.children[0];
+	document.getElementById("package_list").appendChild(card);
+	card.scrollIntoView();
+
+	const button = card.querySelector(".btn-danger");
+	button.addEventListener("click", () => removePackage(card));
 }
 
 
