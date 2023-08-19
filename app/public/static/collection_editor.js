@@ -99,11 +99,15 @@ function updateResults(packages) {
 	document.getElementById("add_package_empty").style.display = packages.length === 0 ? "block" : "none";
 
 	const alreadyAdded = getAddedPackages();
-	packages.filter(pkg => !alreadyAdded.includes(`${pkg.author}/${pkg.name}`)).slice(0, 5).forEach(pkg => {
+	packages.slice(0, 5).forEach(pkg => {
 		const result = document.createElement("a");
 		result.classList.add("list-group-item");
 		result.classList.add("list-group-item-action");
 		result.innerText = `${pkg.title} by ${pkg.author}`;
+		if (alreadyAdded.includes(`${pkg.author}/${pkg.name}`)) {
+			result.classList.add("active");
+			result.innerHTML = "<i class='fas fa-check mr-3 text-success'></i>" + result.innerHTML;
+		}
 		result.addEventListener("click", () => addPackage(pkg));
 		results.appendChild(result);
 	});
