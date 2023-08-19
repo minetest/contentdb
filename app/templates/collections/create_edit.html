@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block scriptextra %}
-	<script src="/static/collection_editor.js"></script>
+	<script src="/static/collection_editor.js?v=2"></script>
 {% endblock %}
 
 {% block content %}
@@ -34,36 +34,45 @@
 
 		{% if collection and collection.items %}
 			<h2>{{ _("Packages") }}</h2>
-			<p class="text-muted">
-				{{ _("To add or remove a package, go to the package's page and click 'Add to collection'") }}
-			</p>
-			{% for item in collection.items %}
-				{% set package = item.package %}
-				<article class="card my-3"
-						data-delete-confirm="{{ _('Are you sure you want to remove %(title)s?', title=package.title) }}">
-					<div class="card-body">
-						<button class="btn btn-sm btn-danger remove-package float-right"
-								type="button" aria-label="{{ _('Remove') }}">
-							<i class="fas fa-trash"></i>
-						</button>
-						<h5>
-							<a href="{{ package.get_url('packages.view') }}" target="_blank">
-								{{ _("%(title)s by %(author)s", title=package.title, author=package.author.display_name) }}
-							</a>
-						</h5>
-						<p class="text-muted">
-							{{ package.short_desc }}
-						</p>
-						{{ render_field(form.descriptions[loop.index - 1], hint=_("You can replace the description with your own")) }}
-						{{ form.package_ids[loop.index - 1]() }}
-						{{ form.package_removed[loop.index - 1]() }}
-					</div>
-				</article>
-			{% endfor %}
+			<div class="mb-5">
+				<label for="add_package" class="sr-only">Add package</label>
+				<input id="add_package" type="search" class="form-control d-none" placeholder="Add package">
+				<p id="add_package_empty" class="mt-2" style="display: none;">
+					<i>{{ _("No results") }}</i>
+				</p>
+				<div id="add_package_results" class="list-group"></div>
+			</div>
+			<div id="package_list">
+				{% for item in collection.items %}
+					{% set package = item.package %}
+					<article class="card my-3">
+						<div class="card-body">
+							<button class="btn btn-sm btn-danger remove-package float-right"
+									type="button" aria-label="{{ _('Remove') }}">
+								<i class="fas fa-trash"></i>
+							</button>
+							<h5>
+								<a href="{{ package.get_url('packages.view') }}" target="_blank">
+									{{ _("%(title)s by %(author)s", title=package.title, author=package.author.display_name) }}
+								</a>
+							</h5>
+							<p class="text-muted">
+								{{ package.short_desc }}
+							</p>
+							{{ render_field(form.descriptions[loop.index - 1], hint=_("You can replace the description with your own")) }}
+							{{ form.package_ids[loop.index - 1]() }}
+							{{ form.package_removed[loop.index - 1]() }}
+						</div>
+					</article>
+				{% endfor %}
+			</div>
 		{% endif %}
 
 		<div class="mt-5">
 			{{ render_submit_field(form.submit) }}
 		</div>
+		<span id="confirm_delete" class="d-none">
+			{{ _("Are you sure you want to remove {title}?") }}
+		</span>
 	</form>
 {% endblock %}

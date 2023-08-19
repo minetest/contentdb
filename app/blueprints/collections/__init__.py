@@ -122,7 +122,7 @@ def create_edit(author=None, name=None):
 		if collection:
 			for item in collection.items:
 				form.descriptions.append_entry(item.description)
-				form.package_ids.append_entry(item.package.id)
+				form.package_ids.append_entry(item.package.get_id())
 				form.package_removed.append_entry("0")
 		else:
 			form.name = None
@@ -177,14 +177,31 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 		form.populate_obj(collection)
 		collection.name = name
 
+		order = 1
 		for i, package_id in enumerate(form.package_ids):
-			item = next((x for x in collection.items if str(x.package.id) == package_id.data), None)
-			if item is None:
-				continue
+			link = next((x for x in collection.items if str(x.package.get_id()) == package_id.data), None)
+			to_delete = form.package_removed[i].data == "1"
+			if link is None:
+				if to_delete:
+					continue
 
-			item.description = form.descriptions[i].data
-			if form.package_removed[i].data == "1":
-				db.session.delete(item)
+				package = Package.get_by_key(package_id.data)
+				if package is None:
+					abort(400)
+
+				link = CollectionPackage()
+				link.package = package
+				link.collection = collection
+				link.description = form.descriptions[i].data
+				link.order = order
+				order += 1
+				db.session.add(link)
+			elif to_delete:
+				db.session.delete(link)
+			else:
+				link.description = form.descriptions[i].data
+				link.order = order
+				order += 1
 
 		add_audit_log(severity, current_user,
 				f"Edited collection {collection.author.username}/{collection.name}",
