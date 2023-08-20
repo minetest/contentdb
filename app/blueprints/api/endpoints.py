@@ -21,6 +21,7 @@ from typing import List
 import flask_sqlalchemy
 from flask import request, jsonify, current_app, Response
 from flask_login import current_user, login_required
+from sqlalchemy import and_
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
@@ -28,7 +29,7 @@ from app import csrf
 from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_all_package_stats
 from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
-	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread
+	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread, Collection
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
 from . import bp
@@ -78,7 +79,8 @@ def packages():
 	# Promote featured packages
 	if "sort" not in request.args and "order" not in request.args and "q" not in request.args:
 		featured_lut = set()
-		featured = qb.convert_to_dictionary(query.filter(Package.tags.any(name="featured")).all())
+		featured = qb.convert_to_dictionary(query.filter(
+			Package.collections.any(and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))).all())
 		for pkg in featured:
 			featured_lut.add(f"{pkg['author']}/{pkg['name']}")
 			pkg["short_description"] = "Featured. " + pkg["short_description"]
@@ -535,8 +537,9 @@ def homepage():
 	query = Package.query.filter_by(state=PackageState.APPROVED)
 	count = query.count()
 
-	spotlight = query.filter(Package.tags.any(name="spotlight")).order_by(
-			func.random()).limit(6).all()
+	spotlight = query.filter(
+			Package.collections.any(and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))) \
+		.order_by(func.random()).limit(6).all()
 	new = query.order_by(db.desc(Package.approved_at)).limit(4).all()
 	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
 	pop_gam = query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(8).all()
@@ -574,7 +577,8 @@ def homepage():
 def welcome_v1():
 	featured = Package.query \
 		.filter(Package.type == PackageType.GAME, Package.state == PackageState.APPROVED,
-				Package.tags.any(name="featured")) \
+				Package.collections.any(
+					and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))) \
 		.order_by(func.random()) \
 		.limit(5).all()
 

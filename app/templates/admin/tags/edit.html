@@ -21,10 +21,6 @@
 		{% if tag %}
 			{{ render_field(form.name) }}
 		{% endif %}
-		<div class="form-group my-5">
-			{{ render_checkbox_field(form.is_protected) }}
-			<small class="form-text text-muted">Whether non-Editors can add this tag to packages</small>
-		</div>
 		{{ render_submit_field(form.submit) }}
 		{% if tag %}
 			<a class="ml-5" target="_blank" href="{{ url_for('packages.list_all', tag=tag.name) }}">

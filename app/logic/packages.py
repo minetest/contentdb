@@ -170,18 +170,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 				if tag is None:
 					raise LogicError(400, "Unknown tag: " + tag_id)
 
-			if not was_web and tag.is_protected:
-				continue
-
-			if tag.is_protected and tag not in old_tags and not user.rank.at_least(UserRank.EDITOR):
-				raise LogicError(400, lazy_gettext("Unable to add protected tag %(title)s to package", title=tag.title))
-
 			package.tags.append(tag)
-
-		if not was_web:
-			for tag in old_tags:
-				if tag.is_protected:
-					package.tags.append(tag)
 
 	if "content_warnings" in data:
 		package.content_warnings.clear()

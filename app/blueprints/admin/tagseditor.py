@@ -47,7 +47,6 @@ class TagForm(FlaskForm):
 	description = TextAreaField("Description", [Optional(), Length(0, 500)])
 	name = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0,
 			"Lower case letters (a-z), digits (0-9), and underscores (_) only")])
-	is_protected = BooleanField("Is Protected")
 	submit = SubmitField("Save")
 
 
@@ -69,7 +68,6 @@ def create_edit_tag(name=None):
 		if tag is None:
 			tag = Tag(form.title.data)
 			tag.description = form.description.data
-			tag.is_protected = form.is_protected.data
 			db.session.add(tag)
 
 			add_audit_log(AuditSeverity.EDITOR, current_user, f"Created tag {tag.name}",

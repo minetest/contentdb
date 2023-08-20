@@ -64,11 +64,9 @@
 										</span>
 									{% endfor %}
 									{% for t in tags[:3] %}
-										{% if t.name != "featured" and t.name != "Spotlight" %}
-											<span class="badge badge-primary" title="{{ t.description or '' }}">
-												{{ t.title }}
-											</span>
-										{% endif %}
+										<span class="badge badge-primary" title="{{ t.description or '' }}">
+											{{ t.title }}
+										</span>
 									{% endfor %}
 									<span class="btn" title="{{ _('Reviews') }}">
 										<i class="fas fa-star-half-alt"></i>

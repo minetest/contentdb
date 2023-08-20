@@ -15,8 +15,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import Blueprint, render_template, redirect
+from sqlalchemy import and_
 
-from app.models import Package, PackageReview, Thread, User, PackageState, db, PackageType, PackageRelease, Tags, Tag
+from app.models import Package, PackageReview, Thread, User, PackageState, db, PackageType, PackageRelease, Tags, Tag, \
+	Collection
 
 bp = Blueprint("homepage", __name__)
 
@@ -49,7 +51,9 @@ def home():
 	query = Package.query.filter_by(state=PackageState.APPROVED)
 	count = query.count()
 
-	spotlight_pkgs = query.filter(Package.tags.any(name="spotlight")).order_by(func.random()).limit(6).all()
+	spotlight_pkgs = query.filter(
+			Package.collections.any(and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))) \
+		.order_by(func.random()).limit(6).all()
 
 	new = package_load(query.order_by(db.desc(Package.approved_at))).limit(4).all()
 	pop_mod = package_load(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()

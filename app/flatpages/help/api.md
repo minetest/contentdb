@@ -451,7 +451,6 @@ Supported query parameters:
     * `name`:  technical name.
     * `title`:  human-readable title.
     * `description`:  tag description or null.
-    * `is_protected`: boolean, whether the tag is protected (can only be set by Editors in the web interface).
     * `views`: number of views of this tag.
 
 ### Content Warnings

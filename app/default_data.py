@@ -44,18 +44,17 @@ def populate(session):
 
 	tags = {}
 	for tag in ["Inventory", "Mapgen", "Building",
-		"Mobs and NPCs", "Tools", "Player effects",
-		"Environment", "Transport", "Maintenance", "Plants and farming",
-		"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer",
-		"Featured", "Spotlight"]:
+			"Mobs and NPCs", "Tools", "Player effects",
+			"Environment", "Transport", "Maintenance", "Plants and farming",
+			"PvP", "PvE", "Survival", "Creative", "Puzzle", "Multiplayer", "Singleplayer"]:
 		row = Tag(tag)
 		tags[row.name] = row
 		session.add(row)
 
 	licenses = {}
 	for license in ["GPLv2.1", "GPLv3", "LGPLv2.1", "LGPLv3", "AGPLv2.1", "AGPLv3",
-					"Apache", "BSD 3-Clause", "BSD 2-Clause", "CC0", "CC-BY-SA",
-					"CC-BY", "MIT", "ZLib", "Other (Free)"]:
+			"Apache", "BSD 3-Clause", "BSD 2-Clause", "CC0", "CC-BY-SA",
+			"CC-BY", "MIT", "ZLib", "Other (Free)"]:
 		row = License(license)
 		licenses[row.name] = row
 		session.add(row)

@@ -865,7 +865,6 @@ class Tag(db.Model):
 	backgroundColor = db.Column(db.String(6), nullable=False)
 	textColor       = db.Column(db.String(6), nullable=False)
 	views           = db.Column(db.Integer, nullable=False, default=0)
-	is_protected    = db.Column(db.Boolean, nullable=False, default=False)
 
 	packages        = db.relationship("Package", back_populates="tags", secondary=Tags)
 
@@ -884,7 +883,6 @@ class Tag(db.Model):
 			"name": self.name,
 			"title": self.title,
 			"description": description,
-			"is_protected": self.is_protected,
 			"views": self.views,
 		}
 
