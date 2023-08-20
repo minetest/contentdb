@@ -69,6 +69,8 @@ def get_meta(urlstr, author):
 					result[key] = value
 		except LogicError as e:
 			raise TaskError(e.message)
+		except JSONDecodeError as e:
+			raise TaskError("Whilst reading .cdb.json: " + str(e))
 		except IOError:
 			pass
 
