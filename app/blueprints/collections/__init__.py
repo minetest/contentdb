@@ -303,7 +303,11 @@ def package_toggle_favorite(package):
 		db.session.add(collection)
 
 	if toggle_package(collection, package):
-		flash(gettext("Added package to favorites collection"), "success")
+		msg = gettext("Added package to favorites collection")
+		if not collection.private:
+			msg += " " + gettext("(Public, change from Profile > My Collections)")
+
+		flash(msg, "success")
 	else:
 		flash(gettext("Removed package from favorites collection"), "success")
 
