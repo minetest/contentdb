@@ -2,6 +2,18 @@
 // @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
 
 
+function updateOrder() {
+	const elements = [...document.querySelector(".sortable").children];
+	const ids = elements
+		.filter(x => !x.classList.contains("d-none"))
+		.map(x => x.dataset.id)
+		.filter(x => x);
+
+	console.log(ids);
+	document.querySelector("input[name='order']").value = ids.join(",");
+}
+
+
 function removePackage(card) {
 	const message = document.getElementById("confirm_delete").innerText.trim();
 	const title = card.querySelector("h5 a").innerText.trim();
@@ -12,6 +24,7 @@ function removePackage(card) {
 	card.querySelector("input[name^=package_removed]").value = "1";
 	card.classList.add("d-none");
 	onPackageQueryUpdate();
+	updateOrder();
 }
 
 
@@ -26,6 +39,7 @@ function restorePackage(id) {
 	card.querySelector("input[name^=package_removed]").value = "0";
 	card.scrollIntoView();
 	onPackageQueryUpdate();
+	updateOrder();
 	return true;
 }
 
@@ -59,7 +73,7 @@ function addPackage(pkg) {
 	const url = `/packages/${id}/`;
 	const temp = document.createElement("div");
 	temp.innerHTML = `
-		<article class="card my-3">
+		<article class="card my-3" data-id="${escapeHtml(id)}">
 			<div class="card-body">
 				<button class="btn btn-sm btn-danger remove-package float-right" type="button" aria-label="Remove">
 					<i class="fas fa-trash"></i>
@@ -90,6 +104,8 @@ function addPackage(pkg) {
 
 	const button = card.querySelector(".btn-danger");
 	button.addEventListener("click", () => removePackage(card));
+
+	updateOrder();
 }
 
 
@@ -169,4 +185,9 @@ window.onload = () => {
 	addPackageQuery.value = "";
 	addPackageQuery.classList.remove("d-none");
 	addPackageQuery.addEventListener("input", onPackageQueryUpdate);
+
+	updateOrder();
+	$(".sortable").sortable({
+		update: updateOrder,
+	});
 };

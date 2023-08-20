@@ -84,6 +84,7 @@ class CollectionForm(FlaskForm):
 		min_entries=0)
 	package_ids = FieldList(HiddenField(), min_entries=0)
 	package_removed = FieldList(HiddenField(), min_entries=0)
+	order = HiddenField()
 	submit = SubmitField(lazy_gettext("Save"))
 
 
@@ -178,7 +179,10 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 		form.populate_obj(collection)
 		collection.name = name
 
-		order = 1
+		item_lookup = {}
+		for link in collection.items:
+			item_lookup[link.package.get_id()] = link
+
 		for i, package_id in enumerate(form.package_ids):
 			link = next((x for x in collection.items if str(x.package.get_id()) == package_id.data), None)
 			to_delete = form.package_removed[i].data == "1"
@@ -194,15 +198,15 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 				link.package = package
 				link.collection = collection
 				link.description = form.descriptions[i].data
-				link.order = order
-				order += 1
+				item_lookup[link.package.get_id()] = link
 				db.session.add(link)
 			elif to_delete:
 				db.session.delete(link)
 			else:
 				link.description = form.descriptions[i].data
-				link.order = order
-				order += 1
+
+		for i, package_id in enumerate(form.order.data.split(",")):
+			item_lookup[package_id].order = i + 1
 
 		add_audit_log(severity, current_user,
 				f"Edited collection {collection.author.username}/{collection.name}",

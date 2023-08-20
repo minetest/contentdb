@@ -9,7 +9,8 @@
 {% endblock %}
 
 {% block scriptextra %}
-	<script src="/static/collection_editor.js?v=4"></script>
+	<script src="/static/libs/jquery-ui.min.js"></script>
+	<script src="/static/collection_editor.js?v=5"></script>
 {% endblock %}
 
 {% block content %}
@@ -45,30 +46,38 @@
 				</p>
 				<div id="add_package_results" class="list-group"></div>
 			</div>
-			<div id="package_list">
+			<div id="package_list" class="sortable">
 				{% for item in collection.items %}
 					{% set package = item.package %}
-					<article class="card my-3">
+					<article class="card my-3" data-id="{{ package.get_id() }}">
 						<div class="card-body">
-							<button class="btn btn-sm btn-danger remove-package float-right"
-									type="button" aria-label="{{ _('Remove') }}">
-								<i class="fas fa-trash"></i>
-							</button>
-							<h5>
-								<a href="{{ package.get_url('packages.view') }}" target="_blank">
-									{{ _("%(title)s by %(author)s", title=package.title, author=package.author.display_name) }}
-								</a>
-							</h5>
-							<p class="text-muted">
-								{{ package.short_desc }}
-							</p>
-							{{ render_field(form.descriptions[loop.index - 1], hint=_("You can replace the description with your own")) }}
-							{{ form.package_ids[loop.index - 1]() }}
-							{{ form.package_removed[loop.index - 1]() }}
+							<div class="row">
+								<div class="col-auto text-muted pr-2">
+									<i class="fas fa-bars"></i>
+								</div>
+								<div class="col">
+									<button class="btn btn-sm btn-danger remove-package float-right"
+											type="button" aria-label="{{ _('Remove') }}">
+										<i class="fas fa-trash"></i>
+									</button>
+									<h5>
+										<a href="{{ package.get_url('packages.view') }}" target="_blank">
+											{{ _("%(title)s by %(author)s", title=package.title, author=package.author.display_name) }}
+										</a>
+									</h5>
+									<p class="text-muted">
+										{{ package.short_desc }}
+									</p>
+									{{ render_field(form.descriptions[loop.index - 1], hint=_("You can replace the description with your own")) }}
+									{{ form.package_ids[loop.index - 1]() }}
+									{{ form.package_removed[loop.index - 1]() }}
+								</div>
+							</div>
 						</div>
 					</article>
 				{% endfor %}
 			</div>
+			{{ form.order() }}
 		{% endif %}
 
 		<div class="mt-5">
