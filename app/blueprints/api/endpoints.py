@@ -779,3 +779,43 @@ def hypertext():
 		html = render_markdown(html)
 
 	return jsonify(html_to_minetest(html, formspec_version, include_images))
+
+
+@bp.route("/api/collections/")
+@cors_allowed
+def collection_list():
+	if "author" in request.args:
+		user = User.query.filter_by(username=request.args["author"]).one_or_404()
+		query = user.collections
+	else:
+		query = Collection.query.order_by(db.asc(Collection.title))
+
+	if "package" in request.args:
+		id_ = request.args["package"]
+		package = Package.get_by_key(id_)
+		if package is None:
+			error(404, f"Package {id_} not found")
+
+		query = query.filter(Collection.packages.contains(package))
+
+	collections = [x.as_short_dict() for x in query.all() if not x.private]
+	return jsonify(collections)
+
+
+@bp.route("/api/collections/<author>/<name>/")
+@cors_allowed
+def collection_view(author, name):
+	collection = Collection.query \
+		.filter(Collection.name == name, Collection.author.has(username=author)) \
+		.one_or_404()
+
+	if not collection.check_perm(current_user, Permission.VIEW_COLLECTION):
+		error(404, "Collection not found")
+
+	items = collection.items
+	if collection.check_perm(current_user, Permission.EDIT_COLLECTION):
+		items = [x for x in items if x.package.check_perm(current_user, Permission.VIEW_PACKAGE)]
+
+	ret = collection.as_dict()
+	ret["items"] = [x.as_dict() for x in items]
+	return jsonify(ret)

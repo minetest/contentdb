@@ -16,7 +16,7 @@
 
 import datetime
 
-from flask import url_for
+from flask import url_for, current_app
 
 from . import db, Permission, User, UserRank
 
@@ -33,6 +33,14 @@ class CollectionPackage(db.Model):
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	collection_description_nonempty = db.CheckConstraint("description = NULL OR description != ''")
+
+	def as_dict(self):
+		return {
+			"package": self.package.as_short_dict(current_app.config["BASE_URL"]),
+			"order": self.order,
+			"description": self.description,
+			"created_at": self.created_at.isoformat(),
+		}
 
 
 class Collection(db.Model):
@@ -57,6 +65,28 @@ class Collection(db.Model):
 
 	def get_url(self, endpoint, **kwargs):
 		return url_for(endpoint, author=self.author.username, name=self.name, **kwargs)
+
+	def as_short_dict(self):
+		return {
+			"author": self.author.username,
+			"name": self.name,
+			"title": self.title,
+			"short_description": self.short_description,
+			"created_at": self.created_at.isoformat(),
+			"private": self.private,
+			"package_count": len(self.packages)
+		}
+
+	def as_dict(self):
+		return {
+			"author": self.author.username,
+			"name": self.name,
+			"title": self.title,
+			"short_description": self.short_description,
+			"long_description": self.long_description,
+			"created_at": self.created_at.isoformat(),
+			"private": self.private,
+		}
 
 	def check_perm(self, user: User, perm):
 		if type(perm) == str:

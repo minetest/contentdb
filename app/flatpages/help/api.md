@@ -413,6 +413,36 @@ Supported query parameters:
 * `show_discarded`:  Show topics marked as discarded.
 * `limit`:  Return at most `limit` topics.
 
+
+## Collections
+
+* GET `/api/collections/`
+    * Query args: 
+        * `author`: collection author username.
+        * `package`: collections that contain the package.
+    * Returns JSON array of collection entries:
+        * `author`: author username.
+        * `name`: collection name.
+        * `title`
+        * `short_description`
+        * `created_at`: creation time in iso format.
+        * `private`: whether collection is private, boolean.
+        * `package_count`: number of packages, integer. 
+* GET `/api/collections/<username>/<name>/`
+    * Returns JSON object for collection:
+        * `author`: author username.
+        * `name`: collection name.
+        * `title`
+        * `short_description`
+        * `long_description`
+        * `created_at`: creation time in iso format.
+        * `private`: whether collection is private, boolean.
+        * `items`: array of item objects:
+            * `package`: short info about the package.
+            * `description`: custom short description.
+            * `created_at`: when the package was added to the collection.
+            * `order`: integer.
+
 ## Types
 
 ### Tags
