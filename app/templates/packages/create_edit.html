@@ -66,8 +66,8 @@
 			<legend>{{ _("Package") }}</legend>
 
 			<div class="row">
-			{{ render_field(form.type, class_="pkg_meta col-sm-2") }}
-			{{ render_field(form.title, class_="pkg_meta col-sm-6") }}
+			{{ render_field(form.type, class_="pkg_meta col-sm-3") }}
+			{{ render_field(form.title, class_="pkg_meta col-sm-5") }}
 			{% if package and package.approved and not package.check_perm(current_user, "CHANGE_NAME") %}
 				{{ render_field(form.name, class_="pkg_meta col-sm-4",
 					readonly=True, hint=_("Please open a thread to request a name change")) }}
@@ -81,11 +81,7 @@
 			{{ render_multiselect_field(form.content_warnings, class_="pkg_meta") }}
 			<div class="pkg_meta row">
 				{{ render_field(form.license, class_="not_txp col-sm-6") }}
-				{{ render_field(form.media_license, class_="col-sm-6") }}
-			</div>
-			<div class="pkg_meta row">
-				<div class="not_txp col-sm-6"></div>
-				<div class="not_txp col-sm-6">{{ _("If there is no media, set the Media License to the same as the License.") }}</div>
+				{{ render_field(form.media_license, class_="col-sm-6", hint=_("If there is no media, set the Media License to the same as the License.")) }}
 			</div>
 			{{ render_field(form.desc, class_="pkg_meta", fieldclass="form-control markdown") }}
 		</fieldset>
@@ -100,7 +96,8 @@
 				<p>{{ _("Leave blank if you don't have a repo. Click skip if the import fails.") }}</p>
 			</div>
 
-			{{ render_field(form.repo, class_="pkg_repo") }}
+			{{ render_field(form.website, class_="pkg_meta") }}
+			{{ render_field(form.repo, class_="pkg_repo", hint=_("HTTP URL to a Git, Mercurial, or other repository")) }}
 
 			<div class="pkg_wiz_1">
 				<a id="pkg_wiz_1_next" class="btn btn-primary">{{ _("Next (Autoimport)") }}</a>
@@ -111,12 +108,11 @@
 					{{ _("Importing... (This may take a while)") }}
 			</div>
 
-			{{ render_field(form.website, class_="pkg_meta") }}
-			{{ render_field(form.issueTracker, class_="pkg_meta") }}
+			{{ render_field(form.issueTracker, class_="pkg_meta", hint=_("Where should users report issues?")) }}
 			{{ render_field_prefix_button(form.forums, class_="pkg_meta",
 				pattern="[0-9]+",
 				prefix="forum.minetest.net/viewtopic.php?t=",
-				placeholder=_("Tip: paste in a forum topic URL"),
+				placeholder=_("Paste a forum topic URL"),
 				has_view=True) }}
 			{{ render_field(form.video_url, class_="pkg_meta", hint=_("YouTube videos will be shown in an embed.")) }}
 			{{ render_field(form.donate_url, class_="pkg_meta", hint=_("If blank, the author's donation URL will be used instead.")) }}
