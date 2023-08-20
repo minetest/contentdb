@@ -25,6 +25,10 @@
 	<meta name="og:image" content="{{ thread.author.get_profile_pic_url() }}"/>
 {% endblock %}
 
+{% block scriptextra %}
+	<script src="/static/quick_review_voting.js"></script>
+{% endblock %}
+
 {% block content %}
 	{% if current_user.is_authenticated %}
 		{% if current_user in thread.watchers %}

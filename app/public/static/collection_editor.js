@@ -167,7 +167,7 @@ function onPackageQueryUpdate() {
 }
 
 
-window.onload = () => {
+window.addEventListener("load", () => {
 	document.querySelectorAll(".remove-package").forEach(button => {
 		const card = button.parentNode.parentNode;
 		const field = card.querySelector("input[name^=package_removed]");
@@ -189,4 +189,4 @@ window.onload = () => {
 	$(".sortable").sortable({
 		update: updateOrder,
 	});
-};
+});

@@ -8,6 +8,10 @@
 	<meta name="og:image" content="{{ user.get_profile_pic_url() }}"/>
 {% endblock %}
 
+{% block scriptextra %}
+	<script src="/static/quick_review_voting.js"></script>
+{% endblock %}
+
 {% block content %}
 <article class="row mb-5">
 	<div class="col-auto image mx-0">

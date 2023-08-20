@@ -4,6 +4,10 @@
 	{{ _("Reviews") }}
 {% endblock %}
 
+{% block scriptextra %}
+	<script src="/static/quick_review_voting.js"></script>
+{% endblock %}
+
 {% block content %}
 	{% from "macros/pagination.html" import render_pagination with context %}
 	{% from "macros/reviews.html" import render_reviews with context %}
