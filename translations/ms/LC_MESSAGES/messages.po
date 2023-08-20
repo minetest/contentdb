@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-08-19 00:51+0100\n"
-"PO-Revision-Date: 2023-06-29 05:52+0000\n"
+"PO-Revision-Date: 2023-08-20 21:57+0000\n"
 "Last-Translator: \"Yaya - Nurul Azeera Hidayah @ Muhammad Nur Hidayat "
 "Yasuyoshi\" <translation@mnh48.moe>\n"
+"Language-Team: Malay <https://hosted.weblate.org/projects/minetest/contentdb/"
+"ms/>\n"
 "Language: ms\n"
-"Language-Team: Malay "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ms/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.0-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -80,7 +81,7 @@ msgstr "Tajuk"
 #: app/blueprints/collections/__init__.py:79
 #: app/blueprints/collections/__init__.py:82
 msgid "Short Description"
-msgstr ""
+msgstr "Perihal Pendek"
 
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/threads/__init__.py:282
@@ -90,27 +91,28 @@ msgstr "Peribadi"
 
 #: app/blueprints/collections/__init__.py:147
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "Himpunan dengan tajuk serupa sudah wujud"
 
 #: app/blueprints/collections/__init__.py:153
 msgid "Unable to create collection as a package with that name already exists"
 msgstr ""
+"Tidak mampu mencipta himpunan kerana pakej dengan nama tersebut sudah wujud"
 
 #: app/blueprints/collections/__init__.py:253
 msgid "Added package to collection"
-msgstr ""
+msgstr "Pakej ditambah ke himpunan"
 
 #: app/blueprints/collections/__init__.py:255
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Pakej dibuang dari himpunan"
 
 #: app/blueprints/collections/__init__.py:280
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Pakej ditambah ke himpunan kegemaran"
 
 #: app/blueprints/collections/__init__.py:282
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Pakej dibuang dari himpunan kegemaran"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -290,7 +292,7 @@ msgstr "Pakej sudah wujud"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "Himpunan dengan nama yang serupa sudah wujud"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -1237,7 +1239,7 @@ msgstr "Profil"
 
 #: app/templates/base.html:147
 msgid "My Collections"
-msgstr ""
+msgstr "Himpunan Saya"
 
 #: app/templates/base.html:165
 msgid "Admin"
@@ -1307,7 +1309,7 @@ msgstr "Bebenang"
 #: app/templates/base.html:269 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "Himpunan"
 
 #: app/templates/base.html:270
 msgid "Support Packages"
@@ -1543,26 +1545,28 @@ msgstr "Edit"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "Himpunan Baharu"
 
 #: app/templates/collections/create_edit.html:28
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "Para pengguna tidak akan dilencongkan apabila mereka pergi ke URL lama"
 
 #: app/templates/collections/create_edit.html:42
 msgid ""
 "To add or remove a package, go to the package's page and click 'Add to "
 "collection'"
 msgstr ""
+"Untuk menambah atau membuang pakej, pergi ke halaman pakej dan klik 'Tambah "
+"ke himpunan'"
 
 #: app/templates/collections/create_edit.html:56
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "Anda boleh menggantikan perihal dengan tulisan anda sendiri"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Padam himpunan \"%(title)s\" oleh %(author)s"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
@@ -1583,37 +1587,38 @@ msgstr "Batal"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "Himpunan milik %(author)s"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "Tiada himpunan"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "Tambah %(package_title)s ke suatu himpunan"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "Cipta Himpunan"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "Anda tidak mempunyai sebarang himpunan"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "Buat salinan"
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr ""
+msgstr "Himpunan oleh %(author)s"
 
 #: app/templates/collections/view.html:64
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
+"Untuk menambah pakej, pergi ke halaman pakej dan klik 'Tambah ke himpunan'"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1646,7 +1651,7 @@ msgstr "Derma"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "Berdasarkan ulasan / kegemaran anda"
 
 #: app/templates/donate/index.html:67
 msgid ""
@@ -1952,7 +1957,7 @@ msgstr "Hantar Ulasan"
 
 #: app/templates/macros/reviews.html:175
 msgid "Report an Issue"
-msgstr ""
+msgstr "Laporkan Isu"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -2466,13 +2471,15 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
-msgstr ""
+msgstr "Mustahil bagi pek tekstur untuk menyokong kesemua permainan."
 
 #: app/templates/packages/game_support.html:105
 msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
 msgstr ""
+"Pakej bergantung kepada mods khusus-permainan, dan oleh itu tidak boleh "
+"menyokong kesemua permainan."
 
 #: app/templates/packages/game_support.html:111
 msgid "Overrides"
@@ -3154,11 +3161,11 @@ msgstr "Lihat kandungan untuk permainan"
 
 #: app/templates/packages/view.html:355
 msgid "Favorite"
-msgstr ""
+msgstr "Kegemaran"
 
 #: app/templates/packages/view.html:361
 msgid "Add to collection..."
-msgstr ""
+msgstr "Tambah ke himpunan..."
 
 #: app/templates/packages/view.html:371
 msgid "Package may be outdated"
@@ -3510,6 +3517,9 @@ msgid ""
 "Click the button below to confirm that the following packages do support "
 "all games, except for any games listed in unsupported_games:"
 msgstr ""
+"Klik butang di bawah untuk mengesahkan bahawa pakej berikut memang menyokong "
+"kesemua permainan, kecuali mana-mana permainan dinyatakan dalam nilai "
+"unsupported_games:"
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
@@ -4066,7 +4076,7 @@ msgstr "pakej"
 
 #: app/templates/users/profile.html:117
 msgid "collections"
-msgstr ""
+msgstr "himpunan"
 
 #: app/templates/users/profile.html:126
 msgid "reviews"
@@ -4091,11 +4101,11 @@ msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:214
 msgid "Alphabetical"
-msgstr ""
+msgstr "Urutan abjad"
 
 #: app/templates/users/profile.html:222
 msgid "Newest"
-msgstr ""
+msgstr "Terbaru"
 
 #: app/templates/users/profile.html:228
 msgid "View list of tags"
@@ -4646,4 +4656,3 @@ msgstr ""
 #~ " atas) memang menyokong semua permainan,"
 #~ " kecuali mana-mana permainan dinyatakan "
 #~ "dalam nilai unsupported_games."
-
