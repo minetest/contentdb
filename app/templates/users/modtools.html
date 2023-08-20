@@ -60,6 +60,14 @@
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<div class="form-group">
 				<label for="message">{{ _("Message") }}</label>
+				<span class="ml-1 text-danger">
+					<small>
+						<i class="fas fa-asterisk"></i>
+					</small>
+				</span>
+				<span class="ml-3 text-muted">
+					{{ _("Required") }}
+				</span>
 				<input id="message" class="form-control" type="text" name="message" required minlength="5">
 				<small class="form-text text-muted">
 					{{ _("Message to display to banned user") }}

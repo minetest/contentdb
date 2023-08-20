@@ -25,6 +25,14 @@ Remove {{ package.title }}
 
 		<div class="form-group">
 			<label for="reason">{{ _("Reason") }}</label>
+			<span class="ml-1 text-danger">
+				<small>
+					<i class="fas fa-asterisk"></i>
+				</small>
+			</span>
+			<span class="ml-3 text-muted">
+				{{ _("Required") }}
+			</span>
 			<input id="reason" class="form-control" type="text" name="reason" required minlength="5">
 			<small class="form-text text-muted">
 				{{ _("Reason for unapproval / deletion, this is shown in the audit log") }}

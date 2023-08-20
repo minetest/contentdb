@@ -9,7 +9,6 @@ function updateOrder() {
 		.map(x => x.dataset.id)
 		.filter(x => x);
 
-	console.log(ids);
 	document.querySelector("input[name='order']").value = ids.join(",");
 }
 

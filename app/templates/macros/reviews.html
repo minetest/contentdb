@@ -132,6 +132,14 @@
 
 			<div class="form-group">
 				<label for="title">{{ _("Title") }}</label>
+				<span class="ml-1 text-danger">
+					<small>
+						<i class="fas fa-asterisk"></i>
+					</small>
+				</span>
+				<span class="ml-3 text-muted">
+					{{ _("Required") }}
+				</span>
 				<input class="form-control" id="title" name="title" required="" type="text">
 			</div>
 
