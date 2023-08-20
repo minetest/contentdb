@@ -179,12 +179,12 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 		form.populate_obj(collection)
 		collection.name = name
 
-		item_lookup = {}
+		link_lookup = {}
 		for link in collection.items:
-			item_lookup[link.package.get_id()] = link
+			link_lookup[link.package.get_id()] = link
 
 		for i, package_id in enumerate(form.package_ids):
-			link = next((x for x in collection.items if str(x.package.get_id()) == package_id.data), None)
+			link = link_lookup.get(package_id.data)
 			to_delete = form.package_removed[i].data == "1"
 			if link is None:
 				if to_delete:
@@ -198,7 +198,7 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 				link.package = package
 				link.collection = collection
 				link.description = form.descriptions[i].data
-				item_lookup[link.package.get_id()] = link
+				link_lookup[link.package.get_id()] = link
 				db.session.add(link)
 			elif to_delete:
 				db.session.delete(link)
@@ -206,7 +206,7 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 				link.description = form.descriptions[i].data
 
 		for i, package_id in enumerate(form.order.data.split(",")):
-			item_lookup[package_id].order = i + 1
+			link_lookup[package_id].order = i + 1
 
 		add_audit_log(severity, current_user,
 				f"Edited collection {collection.author.username}/{collection.name}",

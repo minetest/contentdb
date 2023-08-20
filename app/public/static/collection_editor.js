@@ -74,25 +74,32 @@ function addPackage(pkg) {
 	temp.innerHTML = `
 		<article class="card my-3" data-id="${escapeHtml(id)}">
 			<div class="card-body">
-				<button class="btn btn-sm btn-danger remove-package float-right" type="button" aria-label="Remove">
-					<i class="fas fa-trash"></i>
-				</button>
-				<h5>
-					<a href="${escapeHtml(url)}" target="_blank">
-						${escapeHtml(pkg.title)} by ${escapeHtml(pkg.author)}
-					</a>
-				</h5>
-				<p class="text-muted">
-					${escapeHtml(pkg.short_description)}
-				</p>
-				<div class="form-group">
-					<label for="descriptions-${nextId}">Short Description</label>
-					<input class="form-control" id="descriptions-${nextId}" maxlength="500" minlength="0"
-						name="descriptions-${nextId}" type="text" value="">
-					<small class="form-text text-muted">You can replace the description with your own</small>
+				<div class="row">
+					<div class="col-auto text-muted pr-2">
+						<i class="fas fa-bars"></i>
+					</div>
+					<div class="col">
+						<button class="btn btn-sm btn-danger remove-package float-right" type="button" aria-label="Remove">
+							<i class="fas fa-trash"></i>
+						</button>
+						<h5>
+							<a href="${escapeHtml(url)}" target="_blank">
+								${escapeHtml(pkg.title)} by ${escapeHtml(pkg.author)}
+							</a>
+						</h5>
+						<p class="text-muted">
+							${escapeHtml(pkg.short_description)}
+						</p>
+						<div class="form-group">
+							<label for="descriptions-${nextId}">Short Description</label>
+							<input class="form-control" id="descriptions-${nextId}" maxlength="500" minlength="0"
+								name="descriptions-${nextId}" type="text" value="">
+							<small class="form-text text-muted">You can replace the description with your own</small>
+						</div>
+						<input id="package_ids-${nextId}" name="package_ids-${nextId}" type="hidden" value="${id}">
+						<input id="package_removed-${nextId}" name="package_removed-${nextId}" type="hidden" value="0">
+					</div>
 				</div>
-				<input id="package_ids-${nextId}" name="package_ids-${nextId}" type="hidden" value="${id}">
-				<input id="package_removed-${nextId}" name="package_removed-${nextId}" type="hidden" value="0">
 			</div>
 		</article>
 	`;
