@@ -5,7 +5,9 @@
 {% endblock %}
 
 {% block scriptextra %}
-	<script src="/static/quick_review_voting.js"></script>
+	{% if current_user.is_authenticated %}
+		<script src="/static/quick_review_voting.js"></script>
+	{% endif %}
 {% endblock %}
 
 {% block content %}
