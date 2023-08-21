@@ -538,7 +538,7 @@ def homepage():
 	count = query.count()
 
 	spotlight = query.filter(
-			Package.collections.any(and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))) \
+			Package.collections.any(and_(Collection.name == "spotlight", Collection.author.has(username="ContentDB")))) \
 		.order_by(func.random()).limit(6).all()
 	new = query.order_by(db.desc(Package.approved_at)).limit(4).all()
 	pop_mod = query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(8).all()
