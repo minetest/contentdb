@@ -27,7 +27,7 @@
 								style="max-height: 22px;"
 								src="{{ entry.causer.get_profile_pic_url() }}" />
 
-							<span class="pl-2">{{ entry.causer.username }}</span>
+							<span class="ps-2">{{ entry.causer.username }}</span>
 						{% else %}
 							<i>{{ _("Deleted User") }}</i>
 						{% endif %}
@@ -37,13 +37,13 @@
 						{{ entry.title}}
 
 						{% if entry.description %}
-							<i class="fas fa-paperclip ml-3"></i>
+							<i class="fas fa-paperclip ms-3"></i>
 						{% endif %}
 					</div>
 
 					{% if entry.package %}
 						<div class="col-sm-auto text-muted">
-							<span class="pr-2">
+							<span class="pe-2">
 								{{ entry.package.title }}
 							</span>
 

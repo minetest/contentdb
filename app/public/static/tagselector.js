@@ -50,7 +50,7 @@
 					text = text.substr(0, idx);
 				}
 
-				$('<span class="badge badge-pill badge-primary"/>')
+				$('<span class="badge roaded-pill bg-primary"/>')
 					.text(text + ' ')
 					.data("id", id)
 					.append('<a>x</a>')

@@ -289,7 +289,7 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 					"danger")
 			else:
 				flash(markupsafe.Markup(
-					f"<a class='btn btn-sm btn-danger float-right' href='{package.get_url('packages.view')}'>View</a>" +
+					f"<a class='btn btn-sm btn-danger float-end' href='{package.get_url('packages.view')}'>View</a>" +
 					gettext("Package already exists")), "danger")
 			return None
 

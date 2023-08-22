@@ -10,7 +10,7 @@
 					<small>{{ package.author.display_name }}</small>
 				{% endif %}
 				{% if not package.approved %}
-					<span class="badge ml-1 {% if package.state == package.state.CHANGES_NEEDED %}bg-danger{% else %}bg-warning{% endif %}">
+					<span class="badge ms-1 {% if package.state == package.state.CHANGES_NEEDED %}bg-danger{% else %}bg-warning{% endif %}">
 						{{ package.state.value }}
 					</span>
 				{% endif %}

@@ -18,9 +18,9 @@
 {% endblock %}
 
 {% block scriptextra %}
-	<script src="/static/video_embed.js"></script>
+	<script src="/static/video_embed.js?v=2"></script>
 	{% if current_user.is_authenticated %}
-		<script src="/static/quick_review_voting.js"></script>
+		<script src="/static/quick_review_voting.js?v=2"></script>
 	{% endif %}
 {% endblock %}
 
@@ -34,7 +34,7 @@
 
 {% block download_btn %}
 	{% if release %}
-		<a class="btn btn-block btn-download" rel="nofollow" download="{{ release.get_download_filename() }}"
+		<a class="btn d-block btn-download" rel="nofollow" download="{{ release.get_download_filename() }}"
 				href="{{ release.get_download_url() }}">
 			<div>
 				{{ _("Download") }}
@@ -66,7 +66,7 @@
 		<p class="text-center mt-1 mb-4">
 			<a href="{{ installing_url }}">
 				<small>
-					<i class="fas fa-question-circle mr-1"></i>
+					<i class="fas fa-question-circle me-1"></i>
 					{{ _("How do I install this?") }}
 				</small>
 			</a>
@@ -109,28 +109,28 @@
 	{% endif %}
 
 	{% set cover_image = package.get_cover_image_url() %}
-	<header class="jumbotron pb-3"
+	<header class="jumbotron"
 			style="background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.7)), url('{{ cover_image }}');
 				background-size: cover;
 				background-repeat: no-repeat;
 				background-position: center;">
 		<div class="container">
-			<div class="btn-group float-right mb-4">
+			<div class="btn-group float-end mb-4">
 				{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
 					<a class="btn btn-primary" href="{{ package.get_url('packages.create_edit') }}">
-						<i class="fas fa-pen mr-1"></i>
+						<i class="fas fa-pen me-1"></i>
 						{{ _("Edit") }}
 					</a>
 				{% endif %}
 				{% if package.check_perm(current_user, "MAKE_RELEASE") %}
 					<a class="btn btn-primary" href="{{ package.get_url('packages.create_release') }}">
-						<i class="fas fa-plus mr-1"></i>
+						<i class="fas fa-plus me-1"></i>
 						{{ _("Release") }}
 					</a>
 				{% endif %}
 				{% if package.check_perm(current_user, "DELETE_PACKAGE") or package.check_perm(current_user, "UNAPPROVE_PACKAGE") %}
 					<a class="btn btn-danger" href="{{ package.get_url('packages.remove') }}">
-						<i class="fas fa-trash mr-1"></i>
+						<i class="fas fa-trash me-1"></i>
 						{{ _("Remove") }}
 					</a>
 				{% endif %}
@@ -146,32 +146,32 @@
 
 			<p>
 				{% if package.dev_state.name == "LOOKING_FOR_MAINTAINER" or package.dev_state.name == "DEPRECATED" %}
-					<span class="badge badge-warning" title="{{ package.dev_state.get_desc() }}">
+					<span class="badge bg-warning" title="{{ package.dev_state.get_desc() }}">
 						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
 						{{ package.dev_state.value }}
 					</span>
 				{% endif %}
 				{% if package_warning %}
-					<a class="badge badge-danger" href="/help/non_free/">
+					<a class="badge bg-danger" href="/help/non_free/">
 						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
 						{{ package_warning }}
 					</a>
 				{% endif %}
 				{% for warning in package.content_warnings %}
-					<a class="badge badge-warning" rel="nofollow" href="/help/content_flags/"
+					<a class="badge bg-warning" rel="nofollow" href="/help/content_flags/"
 							title="{{ warning.description }}">
 						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
 						{{ warning.title }}
 					</a>
 				{% endfor %}
 				{% if package.dev_state.name == "WIP" %}
-					<span class="badge badge-info" title="{{ package.dev_state.get_desc() }}">
+					<span class="badge bg-info" title="{{ package.dev_state.get_desc() }}">
 						<i class="fas fa-tools" style="margin-right: 0.3em;"></i>
 						{{ _("Work in Progress") }}
 					</span>
 				{% endif %}
 				{% for t in package.tags %}
-					<a class="badge badge-primary" rel="nofollow"
+					<a class="badge bg-primary" rel="nofollow"
 							title="{{ t.description or '' }}"
 							href="{{ url_for('packages.list_all', tag=t.name) }}">
 						{{ t.title }}
@@ -251,8 +251,8 @@
 				{% set screenshots = package.screenshots.all() %}
 
 				{% if package.check_perm(current_user, "ADD_SCREENSHOTS") %}
-					<a href="{{ package.get_url('packages.screenshots') }}" class="btn btn-primary float-right">
-						<i class="fas fa-images mr-1"></i>
+					<a href="{{ package.get_url('packages.screenshots') }}" class="btn btn-primary float-end">
+						<i class="fas fa-images me-1"></i>
 						{{ _("Edit") }}
 					</a>
 				{% endif %}
@@ -355,12 +355,12 @@
 					<div class="d-flex mt-3 mb-4">
 						<form method="POST" action="{{ package.get_url('collections.package_toggle_favorite') }}">
 							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-							<button type="submit" class="btn {% if is_favorited %}text-info{% endif %} btn-secondary mr-2" aria-label="{{ _('Favorite') }}">
+							<button type="submit" class="btn {% if is_favorited %}text-info{% endif %} btn-secondary me-2" aria-label="{{ _('Favorite') }}">
 								<i class="fas fa-star"></i>
 							</button>
 						</form>
-						<div class="flex-grow">
-							<a href="{{ package.get_url('collections.package_add') }}" class="btn btn-block btn-secondary">
+						<div class="flex-grow-1">
+							<a href="{{ package.get_url('collections.package_add') }}" class="btn d-block btn-secondary">
 								{{ _("Add to collection...") }}
 							</a>
 						</div>
@@ -377,16 +377,16 @@
 							{{ config.get_message() }}
 						</p>
 						<p class="mt-0 my-1" style="font-size: 80%; opacity: 85%;">
-							<i class="fas fa-lock mr-1"></i>
+							<i class="fas fa-lock me-1"></i>
 							{{ _("Only visible to the author and Editors.") }}
 						</p>
 						<div class="btn-group btn-group-sm my-0">
 							<a class="btn btn-warning" href="{{ config.get_create_release_url() }}">
-								<i class="fas fa-plus mr-1"></i>
+								<i class="fas fa-plus me-1"></i>
 								{{ _("Release") }}
 							</a>
 							<a class="btn btn-warning" href="{{ package.get_url('packages.update_config') }}">
-								<i class="fas fa-cog mr-1"></i>
+								<i class="fas fa-cog me-1"></i>
 								{{ _("Update settings") }}
 							</a>
 						</div>
@@ -394,7 +394,7 @@
 				{% endif %}
 				{% if package_warning %}
 					<p class="alert alert-danger">
-						<a href="/help/non_free/" class="float-right">Info</a>
+						<a href="/help/non_free/" class="float-end">Info</a>
 						<b>{{ _("Warning") }}:</b> {{ package_warning }}
 					</p>
 				{% endif %}
@@ -402,15 +402,15 @@
 				{% if package.donate_url_actual %}
 					<div class="alert alert-secondary mb-4">
 						<p>{{ _("Like this package? Help support its development by making a donation", display_name=package.author.display_name) }}</p>
-						<a class="btn btn-block btn-primary" href="{{ package.donate_url_actual }}" rel="nofollow">
-							<i class="fas fa-heart mr-2"></i>
+						<a class="btn d-block btn-primary" href="{{ package.donate_url_actual }}" rel="nofollow">
+							<i class="fas fa-heart me-2"></i>
 							{{ _("Donate now") }}
 						</a>
 					</div>
 				{% endif %}
 
 				{% if package.type == package.type.GAME %}
-					<a href="{{ package.get_url('packages.game_hub') }}" class="btn btn-lg btn-block mb-4 btn-primary">
+					<a href="{{ package.get_url('packages.game_hub') }}" class="btn btn-lg d-block mb-4 btn-primary">
 						{{ _("View content for game") }}
 					</a>
 				{% endif %}
@@ -422,13 +422,13 @@
 						<dd>
 							{% for dep in package.get_sorted_hard_dependencies() %}
 								{%- if dep.package %}
-									<a class="badge badge-primary"
+									<a class="badge bg-primary"
 											href="{{ dep.package.get_url('packages.view') }}">
 										{{ _("%(title)s by %(display_name)s",
 												title=dep.package.title, display_name=dep.package.author.display_name) }}
 									</a>
 								{% elif dep.meta_package %}
-									<a class="badge badge-primary"
+									<a class="badge bg-primary"
 											href="{{ url_for('modnames.view', name=dep.meta_package.name) }}">
 										{{ dep.meta_package.name }}
 									</a>
@@ -446,12 +446,12 @@
 							<dd>
 								{% for dep in optional_deps %}
 									{%- if dep.package %}
-										<a class="badge badge-secondary"
+										<a class="badge bg-secondary"
 												href="{{ dep.package.get_url('packages.view') }}">
 											{{ _("%(title)s by %(display_name)s",
 													title=dep.package.title, display_name=dep.package.author.display_name) }}
 									{% elif dep.meta_package %}
-										<a class="badge badge-secondary"
+										<a class="badge bg-secondary"
 												href="{{ url_for('modnames.view', name=dep.meta_package.name) }}">
 											{{ dep.meta_package.name }}
 									{% else %}
@@ -471,7 +471,7 @@
 					{% if supported_games or unsupported_games or package.type == package.type.MOD %}
 						<h3>
 							{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
-								<a href="{{ package.get_url('packages.game_support') }}" class="btn btn-secondary btn-sm float-right">
+								<a href="{{ package.get_url('packages.game_support') }}" class="btn btn-secondary btn-sm float-end">
 									<i class="fas fa-pen"></i>
 								</a>
 							{% endif %}
@@ -491,7 +491,7 @@
 						{% if supported_games %}
 							<div style="max-height: 300px; overflow: hidden auto;" class="mb-3">
 								{% for support in supported_games %}
-									<a class="badge badge-secondary"
+									<a class="badge bg-secondary"
 											href="{{ support.game.get_url('packages.view') }}">
 										{{ _("%(title)s by %(display_name)s",
 												title=support.game.title, display_name=support.game.author.display_name) }}
@@ -522,9 +522,9 @@
 							</p>
 							<div style="max-height: 300px; overflow: hidden auto;">
 								{% for support in unsupported_games %}
-									<a class="badge badge-danger"
+									<a class="badge bg-danger"
 											href="{{ support.game.get_url('packages.view') }}">
-										<i class="fas fa-times mr-1"></i>
+										<i class="fas fa-times me-1"></i>
 										{{ _("%(title)s by %(display_name)s",
 												title=support.game.title, display_name=support.game.author.display_name) }}
 									</a>
@@ -542,7 +542,7 @@
 					{% elif package.check_perm(current_user, "EDIT_PACKAGE") %}
 						<p class="alert alert-warning">
 							{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
-								<a href="{{ package.get_url('packages.game_support') }}" class="btn btn-warning btn-sm float-right">
+								<a href="{{ package.get_url('packages.game_support') }}" class="btn btn-warning btn-sm float-end">
 									<i class="fas fa-pen"></i>
 								</a>
 							{% endif %}
@@ -582,7 +582,7 @@
 					<dt>{{ _("Maintainers") }}</dt>
 					<dd>
 						{% for user in package.maintainers %}
-							<a class="badge badge-secondary"
+							<a class="badge bg-secondary"
 								href="{{ url_for('users.profile', username=user.username) }}">
 								{{ user.display_name }}
 							</a>
@@ -598,7 +598,7 @@
 					{% if package.provides %}
 						<dt>{{ _("Provides") }}</dt>
 						<dd>{% for meta in package.provides %}
-							<a class="badge badge-secondary"
+							<a class="badge bg-secondary"
 							 href="{{ url_for('modnames.view', name=meta.name) }}">{{ meta.name }}</a>
 						{% endfor %}</dd>
 					{% endif %}
@@ -606,7 +606,7 @@
 
 				<h3>
 					{% if package.check_perm(current_user, "MAKE_RELEASE") %}
-						<a class="btn btn-primary btn-sm float-right" href="{{ package.get_url('packages.create_release') }}"><i class="fas fa-plus"></i></a>
+						<a class="btn btn-primary btn-sm float-end" href="{{ package.get_url('packages.create_release') }}"><i class="fas fa-plus"></i></a>
 					{% endif %}
 					{{ _("Releases") }}
 				</h3>
@@ -624,7 +624,7 @@
 
 				<h3>
 					{% if package.approved and package.check_perm(current_user, "CREATE_THREAD") %}
-						<div class="btn-group float-right">
+						<div class="btn-group float-end">
 							<a class="btn btn-primary btn-sm mx-1" href="{{ url_for('threads.new', pid=package.id) }}"><i class="fas fa-plus"></i></a>
 						</div>
 					{% endif %}
@@ -638,7 +638,7 @@
 				<p class="mt-3">
 					{% if package.approved and current_user != package.author %}
 						<a href="{{ url_for('report.report', url=url_current()) }}">
-							<i class="fas fa-flag mr-1"></i>
+							<i class="fas fa-flag me-1"></i>
 							{{ _("Report") }}
 						</a>
 					{% endif %}

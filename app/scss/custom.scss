@@ -123,8 +123,9 @@ pre {
 
 .jumbotron {
 	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
+	background: #111 no-repeat center;
+	padding: 3rem 0 1rem 0;
+	color: white;
 
 	.btn-outline-secondary {
 		color: rgba(255, 255, 255, 0.8);
@@ -180,11 +181,11 @@ pre {
 }
 
 #featuredCarousel {
-	.embed-responsive-item {
+	.ratio > * {
 		filter: brightness(0.85);
 		object-fit: cover;
 	}
-	.carousel-item, .embed-responsive-item {
+	.carousel-item, .ratio {
 		max-height: 50vh;
 	}
 	.carousel-inner {

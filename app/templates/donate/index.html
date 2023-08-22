@@ -27,7 +27,7 @@
 								style="max-height: 22px; max-width: 22px;"
 								src="{{ package.get_thumb_or_placeholder() }}" />
 
-							<span class="pl-2">
+							<span class="ps-2">
 								{{ package.title }}
 							</span>
 						</a>
@@ -38,11 +38,11 @@
 					</div>
 
 					<div class="col-sm-auto">
-						<a href="{{ package.get_url('packages.view') }}" class="btn btn-sm btn-secondary mr-1">
+						<a href="{{ package.get_url('packages.view') }}" class="btn btn-sm btn-secondary me-1">
 							{{ _("View package") }}
 						</a>
 						<a href="{{ package.donate_url_actual }}" class="btn btn-sm btn-primary" rel="nofollow">
-							<i class="fas fa-heart mr-1"></i>
+							<i class="fas fa-heart me-1"></i>
 							{{ _("Donate") }}
 						</a>
 					</div>

@@ -11,7 +11,7 @@
 		<form method="post" action="" class="card-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<div class="">
-				<select name="package" class="custom-select px-3" required>
+				<select name="package" class="form-select px-3" required>
 					<option disabled selected>-- please select --</option>
 					{% for p in deleted_packages %}
 						<option value="{{ p.id }}">
@@ -21,8 +21,8 @@
 				</select>
 				<div class="mt-3">
 					<input type="submit" name="submit" value="To Draft" class="col-sm-auto btn btn-warning" />
-					<input type="submit" name="submit" value="To Changes Needed" class="col-sm-auto btn btn-danger ml-2" />
-					<input type="submit" name="submit" value="To Ready for Review" class="col-sm-auto btn btn-success ml-2" />
+					<input type="submit" name="submit" value="To Changes Needed" class="col-sm-auto btn btn-danger ms-2" />
+					<input type="submit" name="submit" value="To Ready for Review" class="col-sm-auto btn btn-success ms-2" />
 				</div>
 			</div>
 		</form>

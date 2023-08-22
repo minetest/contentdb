@@ -5,8 +5,8 @@ Topics to be Added
 {% endblock %}
 
 {% block content %}
-	<div class="float-right">
-		<div class="btn-group btn-group-sm mr-2">
+	<div class="float-end">
+		<div class="btn-group btn-group-sm me-2">
 			<a class="btn btn-secondary {% if sort_by=='date' %}active{% endif %}"
 					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='date') }}">
 				{{ _("Sort by date") }}
@@ -69,7 +69,7 @@ Topics to be Added
 		<input type="hidden" name="n" value={{ n }} />
 		<input type="hidden" name="sort" value={{ sort_by or "date" }} />
 		<input name="q" type="text" placeholder="Search topics" value="{{ query or ''}}">
-		<input class="btn btn-secondary my-2 my-sm-0 mr-sm-2" type="submit" value="Search" />
+		<input class="btn btn-secondary my-2 my-sm-0 me-sm-2" type="submit" value="Search" />
 	</form>
 
 	{% from "macros/topics.html" import render_topics_table %}

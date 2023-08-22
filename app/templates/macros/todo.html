@@ -10,7 +10,7 @@
 						style="max-height: 22px; max-width: 22px;"
 						src="{{ package.get_thumb_or_placeholder() }}" />
 
-					<span class="pl-2">
+					<span class="ps-2">
 						{{ package.title }}
 					</span>
 				</a>
@@ -30,21 +30,21 @@
 				<div class="col-sm-auto">
 					{% if not show_config %}
 						{% if package.check_perm(current_user, "MAKE_RELEASE") %}
-							<a class="btn btn-sm btn-primary mr-2" href="{{ config.get_create_release_url() }}">
-								<i class="fas fa-plus mr-1"></i>
+							<a class="btn btn-sm btn-primary me-2" href="{{ config.get_create_release_url() }}">
+								<i class="fas fa-plus me-1"></i>
 								{{ _("Release") }}
 							</a>
 						{% endif %}
 					{% endif %}
 
-					<a class="btn btn-sm btn-secondary mr-2" href="{{ package.repo }}">
-						<i class="fas fa-code-branch mr-1"></i>
+					<a class="btn btn-sm btn-secondary me-2" href="{{ package.repo }}">
+						<i class="fas fa-code-branch me-1"></i>
 						{{ _("Repo") }}
 					</a>
 
 					{% if package.check_perm(current_user, "MAKE_RELEASE") %}
 						<a class="btn btn-sm btn-secondary" href="{{ package.get_url('packages.update_config') }}">
-							<i class="fas fa-cog mr-1"></i>
+							<i class="fas fa-cog me-1"></i>
 							{{ _("Update settings") }}
 						</a>
 					{% endif %}
@@ -68,7 +68,7 @@
 						style="max-height: 22px; max-width: 22px;"
 						src="{{ package.get_thumb_or_placeholder() }}" />
 
-					<span class="pl-2">
+					<span class="ps-2">
 						{{ package.title }}
 					</span>
 				</div>

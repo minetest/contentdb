@@ -12,7 +12,7 @@
 
 {% block content %}
 	{% if token %}
-		<form class="float-right" method="POST" action="{{ url_for('api.delete_token', username=token.owner.username, id=token.id) }}">
+		<form class="float-end" method="POST" action="{{ url_for('api.delete_token', username=token.owner.username, id=token.id) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
 			<input class="btn btn-danger" type="submit" value="{{ _('Delete') }}">
 		</form>

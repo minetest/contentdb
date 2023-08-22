@@ -32,6 +32,14 @@
 	}
 }
 
+.badge {
+	text-decoration: none;
+}
+
+a.badge:hover {
+	filter: brightness(0.9);
+}
+
 .bulletselector {
 	height: auto !important;
 	display: inline-block !important;
@@ -51,6 +59,7 @@
 	white-space: nowrap;
 	background: transparent;
 }
+
 .bulletselector .badge {
 	float: left;
 	padding: 0.4em 0.8em;
@@ -271,4 +280,8 @@ blockquote {
 	& > *:last-child {
 		margin-bottom: 0 !important;
 	}
+}
+
+.form-group {
+	margin-bottom: 1rem !important;
 }

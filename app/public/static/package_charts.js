@@ -78,12 +78,12 @@ function add_summary_card(title, icon, value, extra) {
 			<div class="card h-100">
 				<div class="card-body align-items-center text-center">
 					<div class="mt-0 mb-3">
-						<i class="fas fa-${icon} mr-1"></i>
+						<i class="fas fa-${icon} me-1"></i>
 						<span class="summary-title"></span>
 					</div>
 					<div class="my-0 h4">
 						<span class="summary-value"></span>
-						<small class="text-muted ml-2 summary-extra"></small>
+						<small class="text-muted ms-2 summary-extra"></small>
 					</div>
 				</div>
 			</div>

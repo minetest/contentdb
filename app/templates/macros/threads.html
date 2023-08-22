@@ -10,29 +10,29 @@
 		<div class="col pr-0">
 			<div class="card">
 				<div class="card-header">
-					<a class="author {{ r.author.rank.name }} mr-3"
+					<a class="author {{ r.author.rank.name }} me-3"
 							href="{{ url_for('users.profile', username=r.author.username) }}">
 						{{ r.author.display_name }}
 					</a>
 
 					{% if r.author.username != r.author.display_name %}
-						<span class="text-muted small mr-2">
+						<span class="text-muted small me-2">
 							({{ r.author.username }})
 						</span>
 					{% endif %}
 
 					{% if r.author in thread.package.maintainers %}
-						<span class="badge badge-dark">
+						<span class="badge bg-dark">
 							{{ _("Maintainer") }}
 						</span>
 					{% endif %}
 					{% if r.author.rank == r.author.rank.BOT %}
-						<span class="badge badge-dark">
+						<span class="badge bg-dark">
 							{{ r.author.rank.get_title() }}
 						</span>
 					{% endif %}
 
-					<a name="reply-{{ r.id }}" class="text-muted float-right"
+					<a name="reply-{{ r.id }}" class="text-muted float-end"
 							href="{{ r.get_url() }}">
 						{{ r.created_at | datetime }}
 					</a>
@@ -40,26 +40,26 @@
 
 				<div class="card-body markdown">
 					{% if r.check_perm(current_user, "DELETE_REPLY") %}
-						<a class="float-right btn btn-secondary btn-sm ml-2"
+						<a class="float-end btn btn-secondary btn-sm ms-2"
 								href="{{ url_for('threads.delete_reply', id=thread.id, reply=r.id) }}">
 							<i class="fas fa-trash"></i>
 						</a>
 					{% endif %}
 					{% if current_user != r.author %}
-						<a class="float-right btn-secondary btn-sm ml-2"
+						<a class="float-end btn-secondary btn-sm ms-2"
 								title="{{ _('Report') }}"
 								href="{{ url_for('report.report', url=r.get_url()) }}">
-							<i class="fas fa-flag mr-1"></i>
+							<i class="fas fa-flag me-1"></i>
 						</a>
 					{% endif %}
 
 					{% if current_user == thread.author and thread.review and thread.first_reply == r %}
-						<a class="float-right btn btn-primary btn-sm ml-2"
+						<a class="float-end btn btn-primary btn-sm ms-2"
 								href="{{ thread.review.package.get_url('packages.review') }}">
 							<i class="fas fa-pen"></i>
 						</a>
 					{% elif r.check_perm(current_user, "EDIT_REPLY") %}
-						<a class="float-right btn btn-primary btn-sm ml-2"
+						<a class="float-end btn btn-primary btn-sm ms-2"
 								href="{{ url_for('threads.edit_reply', id=thread.id, reply=r.id) }}">
 							<i class="fas fa-pen"></i>
 						</a>
@@ -94,7 +94,7 @@
 			{{ r.comment | markdown }}
 		</div>
 		<div class="col-auto">
-			<a name="reply-{{ r.id }}" class="text-muted float-right"
+			<a name="reply-{{ r.id }}" class="text-muted float-end"
 					href="{{ r.get_url() }}">
 				{{ r.created_at | datetime }}
 			</a>
@@ -116,7 +116,7 @@
 
 {% if thread.locked %}
 	<p class="my-0 py-4 text-center">
-		<i class="fas fa-lock mr-3"></i>
+		<i class="fas fa-lock me-3"></i>
 		{{ _("This thread has been locked by a moderator.") }}
 	</p>
 {% endif %}
@@ -125,8 +125,8 @@
 	<div class="row mt-1">
 		<div class="col-md-1 p-1"></div>
 		<div class="col">
-			<a class="btn btn-primary ml-3" href="{{ url_for('threads.view', id=thread.id) }}">
-				<i class="fas fa-reply mr-1"></i>
+			<a class="btn btn-primary ms-3" href="{{ url_for('threads.view', id=thread.id) }}">
+				<i class="fas fa-reply me-1"></i>
 				{{ _("Reply") }}
 			</a>
 		</div>
@@ -231,13 +231,13 @@
 					{% else %}
 						<i class="fas fa-minus" style="color:#999"></i>
 					{% endif %}
-					<strong class="ml-1">
+					<strong class="ms-1">
 						{{ t.title }}
 					</strong><br />
 					<span>
 						{{ t.author.display_name }}
 					</span>
-					<span class="text-muted ml-3">
+					<span class="text-muted ms-3">
 						{{ t.created_at | datetime }}
 					</span>
 				</div>
@@ -245,7 +245,7 @@
 				{% if replies > 0 %}
 					<span class="col-md-auto text-muted">
 						{{ replies }}
-						<i class="fas fa-comment ml-1"></i>
+						<i class="fas fa-comment ms-1"></i>
 					</span>
 				{% endif %}
 
@@ -261,14 +261,14 @@
 					{% endif %}
 				</div>
 
-				<div class="col-md-2 text-muted text-right">
+				<div class="col-md-2 text-muted text-end">
 					{% if t.package %}
 						<img
 							class="img-fluid"
 							style="max-height: 22px; max-width: 22px;"
 							src="{{ t.package.get_thumb_or_placeholder() }}" /><br />
 
-						<span class="pl-2">
+						<span class="ps-2">
 							{{ t.package.title }}
 						</span>
 					{% endif %}

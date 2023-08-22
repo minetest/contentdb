@@ -6,11 +6,11 @@
 
 {% block content %}
 	{% if current_user.notifications %}
-		<form method="post" action="{{ url_for('notifications.clear') }}" class="float-right">
+		<form method="post" action="{{ url_for('notifications.clear') }}" class="float-end">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input type="submit" class="btn btn-primary" value="Clear All" />
 		</form>
-		<a href="{{ url_for('users.email_notifications', username=current_user.username) }}" class="btn btn-secondary float-right mr-3">
+		<a href="{{ url_for('users.email_notifications', username=current_user.username) }}" class="btn btn-secondary float-end me-3">
 			{{ _("Edit email notification settings") }}
 		</a>
 	{% endif %}
@@ -38,7 +38,7 @@
 								style="max-height: 22px; max-width: 22px;"
 								src="{{ n.package.get_thumb_or_placeholder() }}" />
 
-							<span class="pl-2">
+							<span class="ps-2">
 								{{ n.package.title }}
 							</span>
 						</div>
@@ -48,8 +48,8 @@
 						{{ n.title}}
 					</div>
 
-					<div class="col-sm-auto text-muted text-right">
-						<span class="pr-2">{{ n.causer.display_name }}</span>
+					<div class="col-sm-auto text-muted text-end">
+						<span class="pe-2">{{ n.causer.display_name }}</span>
 						<img
 							class="img-fluid user-photo img-thumbnail img-thumbnail-1"
 							style="max-height: 22px;"
@@ -76,7 +76,7 @@
 									style="max-height: 22px; max-width: 22px;"
 									src="{{ n.package.get_thumb_or_placeholder() }}" />
 
-								<span class="pl-2">
+								<span class="ps-2">
 									{{ n.package.title }}
 								</span>
 							</div>
@@ -86,8 +86,8 @@
 							{{ n.title}}
 						</div>
 
-						<div class="col-sm-auto text-muted text-right">
-							<span class="pr-2">{{ n.causer.display_name }}</span>
+						<div class="col-sm-auto text-muted text-end">
+							<span class="pe-2">{{ n.causer.display_name }}</span>
 							<img
 								class="img-fluid user-photo img-thumbnail img-thumbnail-1"
 								style="max-height: 22px;"

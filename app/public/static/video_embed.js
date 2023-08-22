@@ -9,8 +9,8 @@ document.querySelectorAll(".video-embed").forEach(ele => {
 		if (url.host == "www.youtube.com") {
 			ele.addEventListener("click", () => {
 				ele.parentNode.classList.add("d-block");
-				ele.classList.add("embed-responsive");
-				ele.classList.add("embed-responsive-16by9");
+				ele.classList.add("ratio");
+				ele.classList.add("ratio-16x9");
 				ele.innerHTML = `
 					<iframe title="YouTube video player" frameborder="0"
 							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

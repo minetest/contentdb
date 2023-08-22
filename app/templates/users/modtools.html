@@ -58,14 +58,14 @@
 	{% else %}
 		<form method="POST" action="{{ url_for('users.modtools_ban', username=user.username) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-			<div class="form-group">
-				<label for="message">{{ _("Message") }}</label>
-				<span class="ml-1 text-danger">
+			<div class="form-group mb-3">
+				<label for="message" class="form-label">{{ _("Message") }}</label>
+				<span class="ms-1 text-danger">
 					<small>
 						<i class="fas fa-asterisk"></i>
 					</small>
 				</span>
-				<span class="ml-3 text-muted">
+				<span class="ms-3 text-muted">
 					{{ _("Required") }}
 				</span>
 				<input id="message" class="form-control" type="text" name="message" required minlength="5">
@@ -73,8 +73,8 @@
 					{{ _("Message to display to banned user") }}
 				</small>
 			</div>
-			<div class="form-group">
-				<label for="expires_at">{{ _("Expires At") }}</label>
+			<div class="form-group mb-3">
+				<label for="expires_at" class="form-label">{{ _("Expires At") }}</label>
 				<input id="expires_at" class="form-control" type="date" name="expires_at">
 				<small class="form-text text-muted">
 					{{ _("Expiry date. Leave blank for permanent ban") }}
@@ -87,8 +87,8 @@
 	<h3>{{ _("Change Email and Send Password Reset") }}</h3>
 	<form method="POST" action="{{ url_for('users.modtools_set_email', username=user.username) }}">
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-		<div class="form-group">
-			<label for="email">{{ _("Email Address") }}</label>
+		<div class="form-group mb-3">
+			<label for="email" class="form-label">{{ _("Email Address") }}</label>
 			<input type="email" class="form-control" name="email" id="email" value="{{ user.email or '' }}" />
 		</div>
 		<input type="submit" value="{{ _('Save') }}" class="btn btn-primary" />

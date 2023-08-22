@@ -26,6 +26,9 @@ from sqlalchemy.orm import joinedload, subqueryload
 from sqlalchemy.sql.expression import func
 
 
+PKGS_PER_ROW = 5
+
+
 @bp.route("/gamejam/")
 def gamejam():
 	return redirect("https://forum.minetest.net/viewtopic.php?t=28802")
@@ -55,18 +58,18 @@ def home():
 			Package.collections.any(and_(Collection.name == "spotlight", Collection.author.has(username="ContentDB")))) \
 		.order_by(func.random()).limit(6).all()
 
-	new = package_load(query.order_by(db.desc(Package.approved_at))).limit(4).all()
-	pop_mod = package_load(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(8).all()
-	pop_gam = package_load(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(8).all()
-	pop_txp = package_load(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(8).all()
+	new = package_load(query.order_by(db.desc(Package.approved_at))).limit(PKGS_PER_ROW).all()
+	pop_mod = package_load(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(2*PKGS_PER_ROW).all()
+	pop_gam = package_load(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(2*PKGS_PER_ROW).all()
+	pop_txp = package_load(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(2*PKGS_PER_ROW).all()
 	high_reviewed = package_load(query.order_by(db.desc(Package.score - Package.score_downloads))) \
-			.filter(Package.reviews.any()).limit(4).all()
+			.filter(Package.reviews.any()).limit(PKGS_PER_ROW).all()
 
 	updated = package_load(db.session.query(Package).select_from(PackageRelease).join(Package)
 			.filter_by(state=PackageState.APPROVED)
 			.order_by(db.desc(PackageRelease.releaseDate))
 			.limit(20)).all()
-	updated = updated[:4]
+	updated = updated[:PKGS_PER_ROW]
 
 	reviews = review_load(PackageReview.query.filter(PackageReview.rating > 3)
 			.order_by(db.desc(PackageReview.created_at))).limit(5).all()

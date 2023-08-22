@@ -15,7 +15,7 @@
 	<meta name="og:description" content="{{ self.description() | normalize_whitespace }}">
 	{%- endif %}
 
-	<link rel="stylesheet" type="text/css" href="/static/libs/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="/static/libs/bootstrap.min.css?v=2">
 	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=42">
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
 
@@ -29,12 +29,12 @@
 	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
 		<div class="container">
 			<a class="navbar-brand" href="/">{{ config.USER_APP_NAME }}</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+			<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
 				<span class="navbar-toggler-icon"></span>
 			</button>
 
 			<div class="collapse navbar-collapse" id="navbarColor01">
-				<ul class="navbar-nav mr-auto">
+				<ul class="navbar-nav me-auto">
 					<li class="nav-item">
 						<a class="nav-link" href="{{ url_for('packages.list_all', type='mod') }}">{{ _("Mods") }}</a>
 					</li>
@@ -51,24 +51,22 @@
 						<a class="nav-link" href="{{ url_for('flatpage', path='help') }}">{{ _("Help") }}</a>
 					</li>
 				</ul>
-				<form class="form-inline my-2 my-lg-0" method="GET" action="/packages/">
+				<form class="d-flex my-2 my-lg-0" method="GET" action="/packages/">
 					{% if type %}<input type="hidden" name="type" value="{{ type }}" />{% endif %}
-					<div class="input-group mx-0 my-0">
+					<div class="input-group m-0">
 						<input class="form-control" name="q" type="text"
 							placeholder="{% if query_hint %}{{ _('Search %(type)s', type=query_hint | lower) }}{% else %}{{ _('Search all packages') }}{% endif %}"
 							value="{{ query or ''}}">
-						<div class="input-group-append">
-							<button type="submit" class="btn btn-secondary" title="{{ _('Search') }}">
-								<i class="fas fa-search"></i>
-							</button>
-						</div>
+						<button type="submit" class="btn btn-secondary" title="{{ _('Search') }}">
+							<i class="fas fa-search"></i>
+						</button>
 					</div>
 					<!-- <input class="btn btn-secondary my-2 my-sm-0"
-						data-toggle="tooltip" data-placement="bottom"
+						data-bs-toggle="tooltip" data-bs-placement="bottom"
 						title="Go to the first found result for this query."
 						type="submit" name="lucky" value="First" /> -->
 				</form>
-				<ul class="navbar-nav ml-auto">
+				<ul class="navbar-nav ms-auto">
 					{% if current_user.is_authenticated %}
 						{% if todo_list_count is not none %}
 							<li class="nav-item">
@@ -77,7 +75,7 @@
 											title="{{ _('Work Queue') }}">
 									{% if todo_list_count > 0 %}
 										<i class="fas fa-inbox"></i>
-										<span class="badge badge-pill badge-notify">{{ todo_list_count }}</span>
+										<span class="badge roaded-pill badge-notify">{{ todo_list_count }}</span>
 									{% else %}
 										<i class="fas fa-inbox" ></i>
 									{% endif %}
@@ -101,11 +99,11 @@
 									<i class="fas fa-bell"></i>
 									{% set num_notifs = current_user.notifications | length %}
 									{% if num_notifs > 60 %}
-										<span class="badge badge-pill badge-notify badge-emoji">
+										<span class="badge roaded-pill badge-notify badge-emoji">
 											😢
 										</span>
 									{% else %}
-										<span class="badge badge-pill badge-notify">
+										<span class="badge roaded-pill badge-notify">
 											{{ num_notifs }}
 										</span>
 									{% endif %}
@@ -124,7 +122,7 @@
 
 						<li class="nav-item dropdown">
 							<a class="nav-link dropdown-toggle"
-									data-toggle="dropdown"
+									data-bs-toggle="dropdown"
 									role="button"
 									aria-expanded="false">
 								{{ current_user.display_name }}
@@ -192,7 +190,7 @@
 
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle"
-								data-toggle="dropdown"
+								data-bs-toggle="dropdown"
 								role="button"
 								aria-expanded="false">
 							<i class="fas fa-language"></i>
@@ -279,7 +277,7 @@
 	</footer>
 
 	<script src="/static/libs/jquery.min.js"></script>
-	<script src="/static/libs/bootstrap.min.js"></script>
+	<script src="/static/libs/bootstrap.min.js?v=2"></script>
 	<script src="/static/libs/easymde.min.js"></script>
 	<link rel="stylesheet" type="text/css" href="/static/libs/easymde.min.css">
 	<link href="/static/fa/css/all.css" rel="stylesheet">

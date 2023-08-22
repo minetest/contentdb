@@ -5,7 +5,7 @@ Licenses
 {% endblock %}
 
 {% block content %}
-	<a class="btn btn-primary float-right" href="{{ url_for('admin.create_edit_license') }}">{{ _("New License") }}</a>
+	<a class="btn btn-primary float-end" href="{{ url_for('admin.create_edit_license') }}">{{ _("New License") }}</a>
 
 	<h1>{{ _("Licenses") }}</h1>
 
@@ -13,7 +13,7 @@ Licenses
 		{% for l in licenses %}
 			<a class="list-group-item list-group-item-action"
 					href="{{ url_for('admin.create_edit_license', name=l.name) }}">
-				<span class="float-right badge {% if l.is_foss %}badge-primary{% else %}badge-warning{% endif %} badge-pill">
+				<span class="float-end badge {% if l.is_foss %}bg-primary{% else %}bg-warning{% endif %} roaded-pill">
 					{{ l.is_foss and "Free" or "Non-free"}}
 				</span>
 				{{ l.name }}

@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<a class="float-right btn btn-secondary" href="{{ url_for('flatpage', path='help/game_support') }}">
+	<a class="float-end btn btn-secondary" href="{{ url_for('flatpage', path='help/game_support') }}">
 		{{ _("Documentation") }}
 	</a>
 	<h2 class="mt-0">{{ self.title() }}</h2>
@@ -22,7 +22,7 @@
 				<span class="col-5">
 					{{ _("Source") }}
 				</span>
-				<span class="col-2 text-right">
+				<span class="col-2 text-end">
 					{{ _("Supported?") }}
 				</span>
 			</div>
@@ -53,11 +53,11 @@
 							{{ support.confidence }}
 						{% endif %}
 					</span>
-					<span class="col-2 text-right">
+					<span class="col-2 text-end">
 						{% if support.supports %}
-							<span class="badge badge-success">Yes</span>
+							<span class="badge bg-success">Yes</span>
 						{% else %}
-							<span class="badge badge-danger">No</span>
+							<span class="badge bg-danger">No</span>
 						{% endif %}
 					</span>
 				</div>

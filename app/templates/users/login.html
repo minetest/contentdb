@@ -20,17 +20,17 @@
 					{{ _("Forgot my password") }}
 				</a>
 			</div>
-			{{ render_submit_field(form.submit, tabindex=140, class_="btn btn-lg btn-primary btn-block") }}
+			{{ render_submit_field(form.submit, tabindex=140, class_="btn btn-lg btn-primary d-block") }}
 
 			<hr class="my-5" />
 
 			<p>
-				<a class="btn btn-secondary mr-3" href="{{ url_for('github.start') }}">
-					<i class="fab fa-github mr-1"></i>
+				<a class="btn btn-secondary me-3" href="{{ url_for('github.start') }}">
+					<i class="fab fa-github me-1"></i>
 					{{ _("GitHub") }}
 				</a>
 				<a class="btn btn-secondary" href="{{ url_for('users.claim') }}">
-					<i class="fas fa-user-plus mr-1"></i>
+					<i class="fas fa-user-plus me-1"></i>
 					{{ _("Register") }}
 				</a>
 			</p>

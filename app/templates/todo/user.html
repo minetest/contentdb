@@ -26,7 +26,7 @@
 							style="max-height: 22px; max-width: 22px;"
 							src="{{ package.get_thumb_or_placeholder() }}" />
 
-						<span class="pl-2">
+						<span class="ps-2">
 							{{ package.title }}
 						</span>
 					</div>
@@ -41,14 +41,14 @@
 		{% endfor %}
 	</div>
 
-	<a class="btn btn-secondary float-right" href="/help/update_config/">
+	<a class="btn btn-secondary float-end" href="/help/update_config/">
 		{{ _("Help") }}
 	</a>
-	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('packages.bulk_update_config', username=user.username) }}">
+	<a class="btn btn-secondary float-end me-2" href="{{ url_for('packages.bulk_update_config', username=user.username) }}">
 		{{ _("See all Update Settings") }}
 	</a>
 	{% if outdated_packages %}
-		<form class="float-right mr-2"  method="post" action="{{ url_for('todo.apply_all_updates', username=user.username) }}">
+		<form class="float-end me-2"  method="post" action="{{ url_for('todo.apply_all_updates', username=user.username) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<input class="btn btn-primary" type="submit" value="{{ _('Create All Releases') }}" />
 		</form>
@@ -65,10 +65,10 @@
 
 	<div class="mb-4"></div>
 
-	<a class="btn btn-secondary float-right" href="/help/game_support/">
+	<a class="btn btn-secondary float-end" href="/help/game_support/">
 		{{ _("Help") }}
 	</a>
-	<a class="btn btn-secondary float-right mr-2" href="{{ url_for('todo.all_game_support', username=user.username) }}">
+	<a class="btn btn-secondary float-end me-2" href="{{ url_for('todo.all_game_support', username=user.username) }}">
 		{{ _("See game support for your packages") }}
 	</a>
 	<h2>{{ _("Missing Game Support") }}</h2>
@@ -86,7 +86,7 @@
 						style="max-height: 22px; max-width: 22px;"
 						src="{{ package.get_thumb_or_placeholder() }}" />
 
-					<span class="pl-2">
+					<span class="ps-2">
 						{{ package.title }}
 					</span>
 			</a>
@@ -106,7 +106,7 @@
 					style="max-height: 22px; max-width: 22px;"
 					src="{{ package.get_thumb_or_placeholder() }}" />
 
-				<span class="pl-2">
+				<span class="ps-2">
 					{{ package.title }}
 				</span>
 			</a>
@@ -125,13 +125,13 @@
 			{{ _("The recommended resolution is 1920x1080, and screenshots must be at least %(width)dx%(height)d.",
 					width=920, height=517) }}
 
-			<span class="badge badge-danger ml-3">
+			<span class="badge bg-danger ms-3">
 				{{ _("Way too small") }}
 			</span>
-			<span class="badge badge-warning">
+			<span class="badge bg-warning">
 				{{ _("Too small") }}
 			</span>
-			<span class="badge badge-secondary">
+			<span class="badge bg-secondary">
 				{{ _("Not HD") }}
 			</span>
 		</p>
@@ -146,7 +146,7 @@
 							style="max-height: 22px; max-width: 22px;"
 							src="{{ package.get_thumb_or_placeholder() }}" />
 
-						<span class="pl-2">
+						<span class="ps-2">
 							{{ package.title }}
 						</span>
 					</div>
@@ -155,13 +155,13 @@
 						{% for ss in package.screenshots %}
 							{% if ss.is_low_res() %}
 								{% if ss.is_very_small() %}
-									{% set badge_color = "badge-danger" %}
+									{% set badge_color = "bg-danger" %}
 								{% elif ss.is_too_small() %}
-									{% set badge_color = "badge-warning" %}
+									{% set badge_color = "bg-warning" %}
 								{% else %}
-									{% set badge_color = "badge-secondary" %}
+									{% set badge_color = "bg-secondary" %}
 								{% endif %}
-								<span class="badge {{ badge_color }} ml-2" title="{{ ss.title }}">
+								<span class="badge {{ badge_color }} ms-2" title="{{ ss.title }}">
 									 {{ ss.width }} x {{ ss.height }}
 								</span>
 							{% endif %}
@@ -175,7 +175,7 @@
 	</div>
 
 
-	<a class="btn btn-secondary float-right" href="{{ url_for('todo.tags', author=user.username) }}">
+	<a class="btn btn-secondary float-end" href="{{ url_for('todo.tags', author=user.username) }}">
 		{{_ ("See All") }}</a>
 	<h2>{{ _("Packages Without Tags") }}</h2>
 	<p>
@@ -189,7 +189,7 @@
 					style="max-height: 22px; max-width: 22px;"
 					src="{{ package.get_thumb_or_placeholder() }}" />
 
-				<span class="pl-2">
+				<span class="ps-2">
 					{{ package.title }}
 				</span>
 			</a>

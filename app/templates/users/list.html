@@ -33,17 +33,17 @@
 				<div class="col-sm-2 {{ user.rank }}"
 						title="{{ _('Rank: %(rank)s.', rank=user.rank.get_title()) }}">
 					{% if user.rank == user.rank.ADMIN %}
-						<i class="fas fa-user-cog mr-2"></i>
+						<i class="fas fa-user-cog me-2"></i>
 					{% elif user.rank == user.rank.MODERATOR %}
-						<i class="fas fa-user-shield mr-2"></i>
+						<i class="fas fa-user-shield me-2"></i>
 					{% elif user.rank == user.rank.EDITOR %}
-						<i class="fas fa-user-edit mr-2"></i>
+						<i class="fas fa-user-edit me-2"></i>
 					{% elif user.rank == user.rank.APPROVER %}
-						<i class="fas fa-user-check mr-2"></i>
+						<i class="fas fa-user-check me-2"></i>
 					{% elif user.rank == user.rank.BOT %}
-						<i class="fas fa-robot mr-2"></i>
+						<i class="fas fa-robot me-2"></i>
 					{% else %}
-						<i class="fas fa-user mr-2"></i>
+						<i class="fas fa-user me-2"></i>
 					{% endif %}
 
 					{{ user.rank.get_title() }}
@@ -52,7 +52,7 @@
 				<span class="col-sm {{ user.rank }}">
 					{{ user.display_name }}
 					{% if user.username != user.display_name %}
-						<span class="text-muted small ml-2">
+						<span class="text-muted small ms-2">
 							({{ user.username }})
 						</span>
 					{% endif %}

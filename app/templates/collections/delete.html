@@ -10,7 +10,7 @@
 		<h3 class="card-header">{{ self.title() }}</h3>
 		<div class="card-body">
 			<p>{{ _("Deleting is permanent") }}</p>
-			<a class="btn btn-secondary mr-3" href="{{ collection.get_url('collections.create_edit') }}">{{ _("Cancel") }}</a>
+			<a class="btn btn-secondary me-3" href="{{ collection.get_url('collections.create_edit') }}">{{ _("Cancel") }}</a>
 			<input type="submit" value="{{ _('Delete') }}" class="btn btn-danger" />
 		</div>
 	</form>

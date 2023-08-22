@@ -58,7 +58,7 @@ $(function() {
 		}
 	})
 
-	const btn = $("#forums").parent().find("label").append("<a class='ml-3 btn btn-sm btn-primary'>Open</a>");
+	const btn = $("#forums").parent().find("label").append("<a class='ms-3 btn btn-sm btn-primary'>Open</a>");
 	btn.click(function() {
 		const id = $("#forums").val();
 		if (/^\d+$/.test(id)) {

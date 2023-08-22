@@ -8,16 +8,14 @@
 <div class="row">
 	<div class="col-md-6">
 		<form method="GET">
-			<label for="q" class="sr-only">{{ _('Search all packages') }}</label>
+			<label for="q" class="visually-hidden">{{ _('Search all packages') }}</label>
 			<div class="input-group">
-				<input class="form-control" id="q" name="q" type="text" placeholder="{{ _('Search all packages') }}">
-				<div class="input-group-append">
-					<input class="btn btn-primary" type="submit" value="{{ _('Search') }}">
-				</div>
+				<input class="form-control" id="q" name="q" type="text" placeholder="{{ _('Search all packages') }}">>
+				<input class="btn btn-primary" type="submit" value="{{ _('Search') }}">
 			</div>
 		</form>
 	</div>
-	<div class="col-md-6 text-right">
+	<div class="col-md-6 text-end">
 		{% if only_no_tags %}
 			<a class="btn btn-primary" href="{{ url_set_query(no_tags=0) }}">
 				{{ _("Missing tags only") }}
@@ -28,7 +26,7 @@
 			</a>
 		{% endif %}
 		{% if check_global_perm(current_user, "EDIT_TAGS") %}
-			<a class="btn btn-secondary ml-2" href="{{ url_for('admin.tag_list') }}">{{ _("Edit Tags") }}</a>
+			<a class="btn btn-secondary ms-2" href="{{ url_for('admin.tag_list') }}">{{ _("Edit Tags") }}</a>
 		{% endif %}
 	</div>
 </div>
@@ -57,12 +55,12 @@
 			</td>
 			<td class="tags">
 				{% for tag in package.tags %}
-					<a class="badge badge-primary mr-1"
+					<a class="badge bg-primary me-1"
 							href="{{ url_set_query(_add={ 'tag': tag.name }) }}">
 						{{ tag.title }}
 					</a>
 				{% endfor %}
-				<!-- <a class="badge badge-secondary add-btn px-2" href="#">
+				<!-- <a class="badge bg-secondary add-btn px-2" href="#">
 					<i class="fas fa-plus"></i>
 				</a> -->
 			</td>

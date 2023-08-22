@@ -10,13 +10,13 @@
 
 {% block scriptextra %}
 	<script src="/static/libs/jquery-ui.min.js"></script>
-	<script src="/static/collection_editor.js?v=7"></script>
+	<script src="/static/collection_editor.js?v=8"></script>
 {% endblock %}
 
 {% block content %}
 	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field, render_field_prefix_button %}
 	<form method="POST" action="" enctype="multipart/form-data">
-		{{ render_submit_field(form.submit, class_="btn btn-primary float-right") }}
+		{{ render_submit_field(form.submit, class_="btn btn-primary float-end") }}
 		<h1>{{ self.title() }}</h1>
 
 		{{ form.hidden_tag() }}
@@ -36,10 +36,10 @@
 			{{ render_field(form.long_description, fieldclass="form-control markdown") }}
 		{% endif %}
 
-		{% if collection and collection.items %}
+		{% if collection %}
 			<h2>{{ _("Packages") }}</h2>
 			<div class="mb-5">
-				<label for="add_package" class="sr-only">Add package</label>
+				<label for="add_package" class="visually-hidden">Add package</label>
 				<input id="add_package" type="search" class="form-control d-none" placeholder="Add package">
 				<p id="add_package_empty" class="mt-2" style="display: none;">
 					<i>{{ _("No results") }}</i>
@@ -52,11 +52,11 @@
 					<article class="card my-3" data-id="{{ package.get_id() }}">
 						<div class="card-body">
 							<div class="row">
-								<div class="col-auto text-muted pr-2">
+								<div class="col-auto text-muted pe-2">
 									<i class="fas fa-bars"></i>
 								</div>
 								<div class="col">
-									<button class="btn btn-sm btn-danger remove-package float-right"
+									<button class="btn btn-sm btn-danger remove-package float-end"
 											type="button" aria-label="{{ _('Remove') }}">
 										<i class="fas fa-trash"></i>
 									</button>
@@ -68,9 +68,9 @@
 									<p class="text-muted">
 										{{ package.short_desc }}
 									</p>
-									{{ render_field(form.descriptions[loop.index - 1], hint=_("You can replace the description with your own")) }}
 									{{ form.package_ids[loop.index - 1]() }}
 									{{ form.package_removed[loop.index - 1]() }}
+									{{ render_field(form.descriptions[loop.index - 1], hint=_("You can replace the description with your own"), no_class=True) }}
 								</div>
 							</div>
 						</div>

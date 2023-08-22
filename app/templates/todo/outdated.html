@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block content %}
-	<div class="btn-toolbar float-right">
-		<div class="btn-group btn-group-sm mr-2">
+	<div class="btn-toolbar float-end">
+		<div class="btn-group btn-group-sm me-2">
 			{% if is_mtm_only %}
 				<a class="btn btn-sm btn-primary active" href="{{ url_set_query(mtm=0) }}">
 					{{ _("Minetest-Mods org only") }}
