@@ -23,14 +23,14 @@ Remove {{ package.title }}
 
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
-		<div class="form-group">
-			<label for="reason">{{ _("Reason") }}</label>
-			<span class="ml-1 text-danger">
+		<div class="form-group mb-3">
+			<label for="reason" class="form-label">{{ _("Reason") }}</label>
+			<span class="ms-1 text-danger">
 				<small>
 					<i class="fas fa-asterisk"></i>
 				</small>
 			</span>
-			<span class="ml-3 text-muted">
+			<span class="ms-3 text-muted">
 				{{ _("Required") }}
 			</span>
 			<input id="reason" class="form-control" type="text" name="reason" required minlength="5">
@@ -39,9 +39,9 @@ Remove {{ package.title }}
 			</small>
 		</div>
 
-		<a class="btn btn-secondary float-right" href="{{ package.get_url('packages.view') }}">{{ _("Cancel") }}</a>
+		<a class="btn btn-secondary float-end" href="{{ package.get_url('packages.view') }}">{{ _("Cancel") }}</a>
 
-		<input type="submit" name="delete" value="{{ _('Remove') }}" class="btn btn-danger mr-2" />
+		<input type="submit" name="delete" value="{{ _('Remove') }}" class="btn btn-danger me-2" />
 
 		{% if package.approved %}
 			<input type="submit" name="unapprove" value="{{ _('Unapprove') }}" class="btn btn-warning" />

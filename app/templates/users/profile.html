@@ -21,41 +21,41 @@
 	</div>
 	<div class="col">
 		{% if user.can_see_edit_profile(current_user) %}
-			<a class="btn btn-primary float-right" href="{{ url_for('users.profile_edit', username=user.username) }}">
-				<i class="fas fa-pen mr-1"></i>
+			<a class="btn btn-primary float-end" href="{{ url_for('users.profile_edit', username=user.username) }}">
+				<i class="fas fa-pen me-1"></i>
 				{{ _("Edit Profile") }}
 			</a>
 
-			<a class="btn btn-secondary float-right mr-3" href="{{ url_for('todo.view_user', username=user.username) }}">
-				<i class="fas fa-tasks mr-1"></i>
+			<a class="btn btn-secondary float-end me-3" href="{{ url_for('todo.view_user', username=user.username) }}">
+				<i class="fas fa-tasks me-1"></i>
 				{{ _("To Do List") }}
 			</a>
 		{% endif %}
 
-		<a class="btn btn-secondary float-right mr-3" href="{{ url_for('report.report', url=url_current()) }}">
-			<i class="fas fa-flag mr-1"></i>
+		<a class="btn btn-secondary float-end me-3" href="{{ url_for('report.report', url=url_current()) }}">
+			<i class="fas fa-flag me-1"></i>
 			{{ _("Report") }}
 		</a>
 
 		{% if current_user.is_authenticated and current_user.rank.at_least(current_user.rank.MODERATOR) %}
 			{% if not user.rank.at_least(current_user.rank) %}
-				<a class="btn btn-secondary float-right mr-3" href="{{ url_for('users.modtools', username=user.username) }}">
-					<i class="fas fa-user-shield mr-1"></i>
+				<a class="btn btn-secondary float-end me-3" href="{{ url_for('users.modtools', username=user.username) }}">
+					<i class="fas fa-user-shield me-1"></i>
 					{{ _("Moderator Tools") }}
 				</a>
 			{% endif %}
 			{% if user.email %}
-				<a class="btn btn-secondary float-right mr-3" href="{{ url_for('admin.send_single_email', username=user.username) }}">
-					<i class="fas fa-envelope mr-1"></i>
+				<a class="btn btn-secondary float-end me-3" href="{{ url_for('admin.send_single_email', username=user.username) }}">
+					<i class="fas fa-envelope me-1"></i>
 					{{ _("Send Email") }}
 				</a>
 			{% endif %}
 		{% endif %}
 
-		<h1 class="ml-3 my-0 {{ user.rank.name }}">
+		<h1 class="ms-3 my-0 {{ user.rank.name }}">
 			{{ user.display_name }}
 			{% if user.username != user.display_name %}
-				<span class="text-muted small ml-2">
+				<span class="text-muted small ms-2">
 					({{ user.username }})
 				</span>
 			{% endif %}
@@ -157,7 +157,7 @@
 
 {% if not current_user.is_authenticated and user.rank == user.rank.NOT_JOINED and user.forums_username %}
 	<div class="alert alert-secondary mb-5">
-		<a class="float-right btn btn-default btn-sm"
+		<a class="float-end btn btn-default btn-sm"
 			href="{{ url_for('users.claim_forums', username=user.forums_username) }}">{{ _("Claim") }}</a>
 
 		{{ _("Is this you? Claim your account now!") }}
@@ -167,10 +167,10 @@
 		{% for medal in medals_unlocked %}
 			<div class="col-md-4">
 				<div class="card h-100">
-					<div class="card-body media align-items-center">
-						<i class="fas {{ medal.icon }} ml-2 mr-4 text-size"
+					<div class="card-body d-flex align-items-center">
+						<i class="flex-shrink-0 fas {{ medal.icon }} ms-2 me-4 text-size"
 						   style="font-size: 45px; color: {{ medal.color }};"></i>
-						<div class="media-body">
+						<div class="flex-grow-1 ms-3">
 							<h5 class="mt-0">
 								{{ medal.title }}
 							</h5>
@@ -201,7 +201,7 @@
 							</div>
 
 							{% if value < target * 0.2 %}
-								<div class="ml-3 d-flex align-items-center text-muted h-100">
+								<div class="ms-3 d-flex align-items-center text-muted h-100">
 									{{ _("%(value)d / %(target)d", value=medal.progress[0], target=medal.progress[1]) }}
 								</div>
 							{% endif %}
@@ -213,9 +213,9 @@
 	</div>
 {% endif %}
 
-<div class="float-right">
+<div class="float-end">
     {% if packages %}
-        <div class="btn-group btn-group-sm mr-2" role="group" aria-label="Sorting">
+        <div class="btn-group btn-group-sm me-2" role="group" aria-label="Sorting">
             <span class="btn btn-sm btn-primary">
                 {{ _("Alphabetical") }}
             </span>
@@ -229,7 +229,7 @@
             </a>
         </div>
         {% if current_user == user or (current_user.is_authenticated and current_user.rank.at_least(current_user.rank.EDITOR)) %}
-            <a class="btn btn-sm btn-secondary mr-2"
+            <a class="btn btn-sm btn-secondary me-2"
                     href="{{ url_for('todo.tags', author=user.username) }}">
                 {{ _("View list of tags") }}
             </a>
@@ -238,7 +238,7 @@
     {% if current_user == user or user.check_perm(current_user, "CHANGE_AUTHOR") %}
         <a class="btn btn-sm btn-primary"
                 href="{{ url_for('packages.create_edit', author=user.username) }}">
-            <i class="fas fa-plus mr-1"></i>
+            <i class="fas fa-plus me-1"></i>
             {{ _("Create package") }}
         </a>
     {% endif %}

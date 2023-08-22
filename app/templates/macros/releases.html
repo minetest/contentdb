@@ -2,7 +2,7 @@
 	{% for rel in releases %}
 		<a class="list-group-item list-group-item-action" href="{{ rel.get_edit_url() }}">
 			{{ rel.title }}
-			<span class="text-muted ml-1">
+			<span class="text-muted ms-1">
 				{% if rel.min_rel and rel.max_rel %}
 					[MT {{ rel.min_rel.name }}-{{ rel.max_rel.name }}]
 				{% elif rel.min_rel %}
@@ -29,7 +29,7 @@
 		{% if rel.approved or package.check_perm(current_user, "MAKE_RELEASE") or rel.check_perm(current_user, "APPROVE_RELEASE")  %}
 			<a class="list-group-item list-group-item-action" href="{{ rel.get_download_url() }}">
 				{{ rel.title }}
-				<span class="text-muted ml-1">
+				<span class="text-muted ms-1">
 					{% if rel.min_rel and rel.max_rel %}
 						[MT {{ rel.min_rel.name }}-{{ rel.max_rel.name }}]
 					{% elif rel.min_rel %}
@@ -55,7 +55,7 @@
 {% macro render_releases(releases, package, current_user) -%}
 	{% for rel in releases %}
 		<div class="list-group-item">
-			<a class="btn btn-sm btn-primary float-right" href="{{ rel.get_edit_url() }}">
+			<a class="btn btn-sm btn-primary float-end" href="{{ rel.get_edit_url() }}">
 			{% if not rel.task_id and not rel.approved and rel.check_perm(current_user, "APPROVE_RELEASE") %}
 				{{ _("Edit / Approve") }}
 			{% else %}
@@ -69,7 +69,7 @@
 				{{ rel.title }}
 			</a>
 
-			<span class="text-muted ml-1">
+			<span class="text-muted ms-1">
 				{% if rel.min_rel and rel.max_rel %}
 					[MT {{ rel.min_rel.name }}-{{ rel.max_rel.name }}]
 				{% elif rel.min_rel %}

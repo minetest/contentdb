@@ -10,9 +10,9 @@ as it was submitted as university coursework. To learn about the history and dev
 
 ContentDB is open source software, licensed under AGPLv3.0.
 
-<a href="https://github.com/minetest/contentdb/" class="btn btn-primary mr-1">Source code</a>
-<a href="https://github.com/minetest/contentdb/issues/" class="btn btn-secondary mr-1">Issue tracker</a>
-<a href="https://rubenwardy.com/contact/" class="btn btn-secondary mr-1">Contact admin</a>
+<a href="https://github.com/minetest/contentdb/" class="btn btn-primary me-1">Source code</a>
+<a href="https://github.com/minetest/contentdb/issues/" class="btn btn-secondary me-1">Issue tracker</a>
+<a href="https://rubenwardy.com/contact/" class="btn btn-secondary me-1">Contact admin</a>
 <a href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb" class="btn btn-secondary">Stats / monitoring</a>
 
 ## Why was ContentDB created?
@@ -36,4 +36,4 @@ for a guide to making mods and games using Minetest.
 You can donate to rubenwardy to cover ContentDB's costs and support future
 development.
 
-<a href="https://rubenwardy.com/donate/" class="btn btn-primary mr-1">Donate</a>
+<a href="https://rubenwardy.com/donate/" class="btn btn-primary me-1">Donate</a>

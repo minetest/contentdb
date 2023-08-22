@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<a class="btn btn-secondary float-right" href="/help/update_config/">{{ _("Help") }}</a>
+	<a class="btn btn-secondary float-end" href="/help/update_config/">{{ _("Help") }}</a>
 	<h1>{{ _("Configure Git Update Detection") }}</h1>
 
 	<p>
@@ -46,7 +46,7 @@
 
 		<p class="mt-5 pt-4">
 			{{ render_submit_field(form.submit) }}
-			{{ render_submit_field(form.disable, class_="btn btn-secondary ml-2") }}
+			{{ render_submit_field(form.disable, class_="btn btn-secondary ms-2") }}
 		</p>
 	</form>
 {% endblock %}

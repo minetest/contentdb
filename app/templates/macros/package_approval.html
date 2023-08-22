@@ -18,11 +18,11 @@
 	{% set message %}
 		{% if package.check_perm(current_user, "MAKE_RELEASE") %}
 			{% if package.update_config %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.get_url('packages.create_release') }}">
+				<a class="btn btn-sm btn-warning float-end" href="{{ package.get_url('packages.create_release') }}">
 					{{ _("Create release") }}
 				</a>
 			{% else %}
-				<a class="btn btn-sm btn-warning float-right" href="{{ package.get_url('packages.setup_releases') }}">
+				<a class="btn btn-sm btn-warning float-end" href="{{ package.get_url('packages.setup_releases') }}">
 					{{ _("Set up releases") }}
 				</a>
 			{% endif %}
@@ -95,7 +95,7 @@
 
 {% if conflicting_modnames %}
 	<div class="alert alert-warning">
-		<a class="float-right btn btn-sm btn-warning" href="{{ package.get_url('packages.similar') }}">
+		<a class="float-end btn btn-sm btn-warning" href="{{ package.get_url('packages.similar') }}">
 			More info
 		</a>
 		{% if conflicting_modnames | length > 4 %}
@@ -108,7 +108,7 @@
 
 {% if not package.review_thread and (package.author == current_user or package.check_perm(current_user, "APPROVE_NEW")) %}
 	<div class="alert alert-secondary">
-		<a class="float-right btn btn-sm btn-secondary" href="{{ url_for('threads.new', pid=package.id, title='Package approval comments') }}">
+		<a class="float-end btn btn-sm btn-secondary" href="{{ url_for('threads.new', pid=package.id, title='Package approval comments') }}">
 			{{ _("Open Thread") }}
 		</a>
 

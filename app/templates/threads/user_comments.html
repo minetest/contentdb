@@ -25,29 +25,29 @@
 			<div class="card">
 				<div class="card-header">
 
-					<a class="author {{ r.author.rank.name }} mr-3"
+					<a class="author {{ r.author.rank.name }} me-3"
 							href="{{ url_for('users.profile', username=r.author.username) }}">
 						{{ r.author.display_name }}
 					</a>
 
 					{% if r.author.username != r.author.display_name %}
-						<span class="text-muted small mr-2">
+						<span class="text-muted small me-2">
 							({{ r.author.username }})
 						</span>
 					{% endif %}
 
 					{% if r == r.thread.first_reply %}
-						<a class="badge badge-primary" href="{{ r.thread.get_view_url() }}">
+						<a class="badge bg-primary" href="{{ r.thread.get_view_url() }}">
 							{{ r.thread.title }}
 						</a>
 					{% else %}
-						<i class="fas fa-reply mr-2"></i>
-						<a class="badge badge-dark" href="{{ r.thread.get_view_url() }}">
+						<i class="fas fa-reply me-2"></i>
+						<a class="badge bg-dark" href="{{ r.thread.get_view_url() }}">
 							{{ _("Reply to <b>%(title)s</b>", title=r.thread.title) }}
 						</a>
 					{% endif %}
 
-					<a name="reply-{{ r.id }}" class="text-muted float-right"
+					<a name="reply-{{ r.id }}" class="text-muted float-end"
 							href="{{ url_for('threads.view', id=r.thread.id) }}#reply-{{ r.id }}">
 						{{ r.created_at | datetime }}
 					</a>

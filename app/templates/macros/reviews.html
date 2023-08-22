@@ -6,13 +6,13 @@
 			<button class="btn {% if is_positive == true %}btn-primary{% else %}btn-secondary{% endif %}" name="is_positive" value="yes">
 				{{ _("Helpful") }}
 				{% if positive > 0 %}
-					<span class="badge badge-light ml-1">{{ positive }}</span>
+					<span class="badge bg-light text-dark ms-1">{{ positive }}</span>
 				{% endif %}
 			</button>
 			<button class="btn {% if is_positive == false %}btn-primary{% else %}btn-secondary{% endif %}" name="is_positive" value="no">
 				{{ _("Unhelpful") }}
 				{% if negative > 0 %}
-					<span class="badge badge-light ml-1">{{ negative }}</span>
+					<span class="badge bg-light text-dark ms-1">{{ negative }}</span>
 				{% endif %}
 			</button>
 		</div>
@@ -30,7 +30,7 @@
 					<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ review.author.get_profile_pic_url() }}">
 				</a>
 			</div>
-			<div class="col-md-auto pl-1 pr-3 pt-2 text-center" style=" font-size: 200%;">
+			<div class="col-md-auto ps-1 pe-3 pt-2 text-center" style=" font-size: 200%;">
 				{% if review.rating > 3 %}
 					<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
 				{% elif review.rating < 3 %}
@@ -49,7 +49,7 @@
 								{{ review.author.display_name }}
 							</a>
 
-							<a name="reply-{{ reply.id }}" class="text-muted float-right"
+							<a name="reply-{{ reply.id }}" class="text-muted float-end"
 									href="{{ url_for('threads.view', id=review.thread.id) }}#reply-{{ reply.id }}">
 								{{ review.created_at | datetime }}
 							</a>
@@ -57,7 +57,7 @@
 
 						<div class="card-body markdown">
 							{% if current_user == review.author %}
-								<a class="btn btn-primary btn-sm ml-1 float-right"
+								<a class="btn btn-primary btn-sm ms-1 float-end"
 										href="{{ review.package.get_url('packages.review') }}">
 									<i class="fas fa-pen"></i>
 								</a>
@@ -71,16 +71,16 @@
 
 							<div class="btn-toolbar mt-2 mb-0">
 								{% if show_package_link %}
-									<a class="btn btn-primary mr-1" href="{{ review.package.get_url('packages.view') }}">
+									<a class="btn btn-primary me-1" href="{{ review.package.get_url('packages.view') }}">
 										{{ _("%(title)s by %(author)s",
 												title="<b>" | safe + review.package.title + "</b>" | safe,
 												author=review.package.author.display_name) }}
 									</a>
 								{% endif %}
 
-								<a class="btn {% if review.thread.replies.count() > 1 %} btn-primary {% else %} btn-secondary {% endif %} mr-1"
+								<a class="btn {% if review.thread.replies.count() > 1 %} btn-primary {% else %} btn-secondary {% endif %} me-1"
 										href="{{ url_for('threads.view', id=review.thread.id) }}">
-									<i class="fas fa-comments mr-2"></i>
+									<i class="fas fa-comments me-2"></i>
 									{{ _("%(num)d comments", num=review.thread.replies.count() - 1) }}
 								</a>
 
@@ -111,18 +111,21 @@
 				{{ _("Do you recommend this %(type)s?", type=package.type.text | lower) }}
 			</p>
 
-			<div class="btn-group btn-group-toggle" data-toggle="buttons">
-				<label class="btn btn-primary">
-					<i class="fas fa-thumbs-up mr-2"></i>
-					<input type="radio" name="rating" value="5" autocomplete="off"> {{ _("Yes") }}
+			<div class="btn-group" role="group">
+				<input type="radio" class="btn-check" name="rating" id="rating-5" value="5" autocomplete="off">
+				<label class="btn btn-primary" for="rating-5">
+					<i class="fas fa-thumbs-up me-2"></i>
+					{{ _("Yes") }}
 				</label>
-				<label class="btn btn-primary">
-					<i class="fas fa-minus mr-2"></i>
-					<input type="radio" name="rating" value="3" autocomplete="off"> {{ _("Neutral") }}
+				<input type="radio" class="btn-check" name="rating" id="rating-3" value="3" autocomplete="off">
+				<label class="btn btn-primary" for="rating-3">
+					<i class="fas fa-minus me-2"></i>
+					{{ _("Neutral") }}
 				</label>
-				<label class="btn btn-primary">
-					<i class="fas fa-thumbs-down mr-2"></i>
-					<input type="radio" name="rating" value="1" autocomplete="off"> {{ _("No") }}
+				<input type="radio" class="btn-check" name="rating" id="rating-1" value="1" autocomplete="off">
+				<label class="btn btn-primary" for="rating-1">
+					<i class="fas fa-thumbs-down me-2"></i>
+					{{ _("No") }}
 				</label>
 			</div>
 
@@ -130,14 +133,14 @@
 				{{ _("Why or why not? Try to be constructive") }}
 			</p>
 
-			<div class="form-group">
-				<label for="title">{{ _("Title") }}</label>
-				<span class="ml-1 text-danger">
+			<div class="form-group mb-3">
+				<label for="title" class="form-label">{{ _("Title") }}</label>
+				<span class="ms-1 text-danger">
 					<small>
 						<i class="fas fa-asterisk"></i>
 					</small>
 				</span>
-				<span class="ml-3 text-muted">
+				<span class="ms-3 text-muted">
 					{{ _("Required") }}
 				</span>
 				<input class="form-control" id="title" name="title" required="" type="text">
@@ -163,23 +166,23 @@
 			</p>
 
 			<div class="btn-toolbar" role="toolbar">
-				<div class="btn-group mr-2">
+				<div class="btn-group me-2">
 					<button class="btn btn-primary" name="rating" value="5">
-						<i class="fas fa-thumbs-up mr-1"></i>
+						<i class="fas fa-thumbs-up me-1"></i>
 						{{ _("Yes") }}
 					</button>
 					<button class="btn btn-primary" name="rating" value="3">
-						<i class="fas fa-minus mr-1"></i>
+						<i class="fas fa-minus me-1"></i>
 						{{ _("Neutral") }}
 					</button>
 					<button class="btn btn-primary" name="rating" value="1">
-						<i class="fas fa-thumbs-down mr-1"></i>
+						<i class="fas fa-thumbs-down me-1"></i>
 						{{ _("No") }}
 					</button>
 				</div>
 				<div class="btn-group">
 					<a class="btn btn-secondary" href="{{ package.issueTracker or url_for('threads.new', pid=package.id) }}" rel="ugc">
-						<i class="fas fa-bug mr-1"></i>
+						<i class="fas fa-bug me-1"></i>
 						{{ _("Report an Issue") }}
 					</a>
 				</div>

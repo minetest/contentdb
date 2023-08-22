@@ -9,7 +9,7 @@
 {% endblock %}
 
 {% block content %}
-	<a class="btn btn-primary float-right" href="{{ url_for('admin.create_edit_version') }}">New Version</a>
+	<a class="btn btn-primary float-end" href="{{ url_for('admin.create_edit_version') }}">New Version</a>
 	<a class="btn btn-secondary mb-4" href="{{ url_for('admin.version_list') }}">Back to list</a>
 
 	{% from "macros/forms.html" import render_field, render_submit_field %}

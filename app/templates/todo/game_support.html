@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<a class="btn btn-secondary float-right" href="/help/game_support/">{{ _("Help") }}</a>
+	<a class="btn btn-secondary float-end" href="/help/game_support/">{{ _("Help") }}</a>
 	<h1 class="mb-5">{{ self.title() }}</h1>
 	<p>
 		{{ _("You should specify the games supported by your mods and texture packs.") }}
@@ -24,13 +24,13 @@
 							style="max-height: 22px; max-width: 22px;"
 							src="{{ package.get_thumb_or_placeholder() }}" />
 
-						<span class="pl-2">
+						<span class="ps-2">
 							{{ package.title }}
 						</span>
 					</div>
 					<div class="col">
 						{% if package.supports_all_games %}
-							<span class="text-muted pr-2">
+							<span class="text-muted pe-2">
 								<i>
 									{{ _("Supports all games") }}
 								</i>
@@ -40,7 +40,7 @@
 						{% set supported_games = package.get_sorted_game_support_pair()[0] %}
 						{% if supported_games %}
 							{% for support in supported_games %}
-								<a class="badge badge-secondary"
+								<a class="badge bg-secondary"
 										href="{{ support.game.get_url('packages.view') }}">
 									{{ _("%(title)s by %(display_name)s",
 											title=support.game.title, display_name=support.game.author.display_name) }}

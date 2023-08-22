@@ -55,11 +55,11 @@
 			<tr>
 				<th colspan="2">
 					{% if review.rating > 3 %}
-						<i class="fas fa-thumbs-up text-success mr-2"></i>
+						<i class="fas fa-thumbs-up text-success me-2"></i>
 					{% elif review.rating < 3 %}
-						<i class="fas fa-thumbs-down text-danger mr-2"></i>
+						<i class="fas fa-thumbs-down text-danger me-2"></i>
 					{% else %}
-						<i class="fas fa-minus mr-2"></i>
+						<i class="fas fa-minus me-2"></i>
 					{% endif %}
 					<a href="{{ review.thread.get_view_url() }}">
 						{{ review.thread.title }}
@@ -70,7 +70,7 @@
 				<td>
 					{% for vote in review.votes %}
 						{% if vote.is_positive %}
-							<a href="{{ url_for('users.profile', username=vote.user.username) }}" class="badge badge-secondary">
+							<a href="{{ url_for('users.profile', username=vote.user.username) }}" class="badge bg-secondary">
 								{{ vote.user.username }}
 							</a>
 						{% endif %}
@@ -79,7 +79,7 @@
 				<td>
 					{% for vote in review.votes %}
 						{% if not vote.is_positive %}
-							<a href="{{ url_for('users.profile', username=vote.user.username) }}" class="badge badge-secondary">
+							<a href="{{ url_for('users.profile', username=vote.user.username) }}" class="badge bg-secondary">
 								{{ vote.user.username }}
 							</a>
 						{% endif %}

@@ -12,9 +12,9 @@
 {% endblock %}
 
 {% block content %}
-	<div class="float-right">
-		<a class="btn btn-secondary mr-2" href="{{ package.get_url('packages.stats_csv') }}">
-			<i class="fas fa-download mr-1"></i>
+	<div class="float-end">
+		<a class="btn btn-secondary me-2" href="{{ package.get_url('packages.stats_csv') }}">
+			<i class="fas fa-download me-1"></i>
 			{{ _("Download (.csv)") }}
 		</a>
 		{{ render_daterange_selector(options, start or end) }}

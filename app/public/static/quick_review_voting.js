@@ -19,8 +19,9 @@ function setVoteCount(button, count) {
 	if (!badge) {
 		badge = document.createElement("span")
 		badge.classList.add("badge");
-		badge.classList.add("badge-light");
-		badge.classList.add("badge-ml-1");
+		badge.classList.add("bg-light");
+		badge.classList.add("text-dark");
+		badge.classList.add("ms-1");
 		button.appendChild(badge);
 	}
 

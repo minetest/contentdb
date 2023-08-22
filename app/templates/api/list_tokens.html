@@ -5,8 +5,8 @@
 {% endblock %}
 
 {% block pane %}
-	<a class="btn btn-primary float-right" href="{{ url_for('api.create_edit_token', username=user.username) }}">{{ _("Create") }}</a>
-	<a class="btn btn-secondary mr-2 float-right" href="/help/api/">{{ _("API Documentation") }}</a>
+	<a class="btn btn-primary float-end" href="{{ url_for('api.create_edit_token', username=user.username) }}">{{ _("Create") }}</a>
+	<a class="btn btn-secondary me-2 float-end" href="/help/api/">{{ _("API Documentation") }}</a>
 	<h2 class="mt-0">{{ _("API Tokens") }}</h2>
 
 	<div class="list-group">

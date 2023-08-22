@@ -52,7 +52,7 @@
 {% if review %}
 <form method="POST" action="{{ review.get_delete_url() }}" class="alert alert-secondary my-5">
 	<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-	<input class="btn btn-sm btn-danger float-right" type="submit" value="{{ _('Delete') }}">
+	<input class="btn btn-sm btn-danger float-end" type="submit" value="{{ _('Delete') }}">
 	<b>{{ _("Delete review.") }}</b>
 	{{ _("This will convert the review into a thread, keeping the comments but removing its effect on the package's rating.") }}
 	<div style="clear:both;"></div>

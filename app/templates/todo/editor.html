@@ -9,7 +9,7 @@
 	{% if can_approve_scn and screenshots %}
 		<div class="card my-4">
 			<h3 class="card-header">{{ _("Screenshots") }}
-				<form class="float-right"  method="post" action="{{ url_for('todo.view_editor') }}">
+				<form class="float-end"  method="post" action="{{ url_for('todo.view_editor') }}">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 					<input type="hidden" name="action" value="screenshots_approve_all" />
 					<input class="btn btn-sm btn-primary" type="submit" value="{{ _('Approve All') }}" />
@@ -47,16 +47,16 @@
 				<div class="list-group list-group-flush">
 					{% for p in packages %}
 						<a href="{{ p.get_url('packages.view') }}" class="list-group-item list-group-item-action">
-							<span class="float-right" title="Created {{ p.created_at | datetime }}">
+							<span class="float-end" title="Created {{ p.created_at | datetime }}">
 								<small>
 									{{ p.created_at | timedelta }} ago
 								</small>
 							</span>
 
 							{% if "Other" in p.license.name or "Other" in p.media_license.name %}
-								<span class="mr-2 badge badge-info">License</span>
+								<span class="me-2 badge bg-info">License</span>
 							{% else %}
-								<span class="mr-2 badge badge-success">Ready</span>
+								<span class="me-2 badge bg-success">Ready</span>
 							{% endif %}
 
 							{{ p.title }} by {{ p.author.display_name }}
@@ -77,7 +77,7 @@
 					{% for r in releases %}
 						<li class="list-group-item">
 							{% if r.task_id %}
-								<span class="mr-2 badge badge-warning">{{ _("Importing") }}</span>
+								<span class="me-2 badge bg-warning">{{ _("Importing") }}</span>
 							{% endif %}
 							<a href="{{ r.get_edit_url() }}">{{ r.title }}</a>
 							on
@@ -108,13 +108,13 @@
 			<div class="list-group list-group-flush">
 				{% for p in license_needed %}
 					<a href="{{ p.get_url('packages.view') }}" class="list-group-item list-group-item-action">
-						<span class="float-right" title="Created {{ p.created_at | datetime }}">
+						<span class="float-end" title="Created {{ p.created_at | datetime }}">
 							<small>
 								{{ p.created_at | timedelta }} ago
 							</small>
 						</span>
 
-						<span class="mr-2 badge badge-{{ p.state.color }}">{{ p.state.value }}</span>
+						<span class="me-2 badge badge-{{ p.state.color }}">{{ p.state.value }}</span>
 
 						{{ p.title }} by {{ p.author.display_name }}
 					</a>
@@ -142,7 +142,7 @@
 
 	{% if unfulfilled_meta_packages %}
 		<h2 class="mt-5">
-			<span class="fas fa-exclamation-triangle pr-2" style="color: orange;"></span>
+			<span class="fas fa-exclamation-triangle pe-2" style="color: orange;"></span>
 			{{ unfulfilled_meta_packages }}
 			{{ _("Unfulfilled Dependencies") }}
 		</h2>
@@ -165,16 +165,16 @@
 			<div class="list-group list-group-flush" style="max-height: 300px; overflow: hidden auto;">
 				{% for p in wip_packages %}
 					<a href="{{ p.get_url('packages.view') }}" class="list-group-item list-group-item-action">
-						<span class="float-right" title="Created {{ p.created_at | datetime }}">
+						<span class="float-end" title="Created {{ p.created_at | datetime }}">
 							<small>
 								{{ p.created_at | timedelta }} ago
 							</small>
 						</span>
 
 						{% if p.state == p.state.WIP %}
-							<span class="mr-2 badge badge-warning">{{ _("WIP") }}</span>
+							<span class="me-2 badge bg-warning">{{ _("WIP") }}</span>
 						{% else %}
-							<span class="mr-2 badge badge-danger">{{ p.state.value }}</span>
+							<span class="me-2 badge bg-danger">{{ p.state.value }}</span>
 						{% endif %}
 
 						{{ p.title }} by {{ p.author.display_name }}
@@ -189,7 +189,7 @@
 
 	<div class="mt-5"></div>
 	{% if current_user.rank.at_least(current_user.rank.MODERATOR) %}
-		<a class="btn btn-secondary float-right" href="{{ url_for('admin.audit') }}">
+		<a class="btn btn-secondary float-end" href="{{ url_for('admin.audit') }}">
 			{{ _("View All") }}
 		</a>
 	{% endif %}

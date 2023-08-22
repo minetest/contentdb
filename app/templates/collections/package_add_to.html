@@ -5,7 +5,7 @@
 {% endblock %}
 
 {% block content %}
-	<a href="{{ url_for('collections.create_edit', package=package.get_id()) }}" class="btn btn-primary float-right">
+	<a href="{{ url_for('collections.create_edit', package=package.get_id()) }}" class="btn btn-primary float-end">
 		{{ _("Create Collection") }}
 	</a>
 	<h1>{{ self.title() }}</h1>
@@ -20,16 +20,16 @@
 				<button type="submit"
 						class="list-group-item list-group-item-action {% if active %}active{% endif %}">
 					{% if active %}
-						<i class="fas fa-check mr-3 text-success"></i>
+						<i class="fas fa-check me-3 text-success"></i>
 					{% else %}
-						<i class="fas fa-square mr-3 text-muted"></i>
+						<i class="fas fa-square me-3 text-muted"></i>
 					{% endif -%}
 					{% if collection.author != current_user %}{{ collection.author.display_name }}: {% endif -%}
 					{% if collection.name == 'favorites' %}
-						<i class="fas fa-star mr-1 text-info"></i>
+						<i class="fas fa-star me-1 text-info"></i>
 					{% endif %}
 					{% if collection.private %}
-						<i class="fas fa-lock mr-1" style="color:#ffac33;"></i>
+						<i class="fas fa-lock me-1" style="color:#ffac33;"></i>
 					{% endif %}
 					{{ collection.title }}
 				</button>
