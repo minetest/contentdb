@@ -10,7 +10,7 @@
 
 {% block scriptextra %}
 	<script src="/static/libs/jquery-ui.min.js"></script>
-	<script src="/static/collection_editor.js?v=7"></script>
+	<script src="/static/collection_editor.js?v=8"></script>
 {% endblock %}
 
 {% block content %}
@@ -36,7 +36,7 @@
 			{{ render_field(form.long_description, fieldclass="form-control markdown") }}
 		{% endif %}
 
-		{% if collection and collection.items %}
+		{% if collection %}
 			<h2>{{ _("Packages") }}</h2>
 			<div class="mb-5">
 				<label for="add_package" class="visually-hidden">Add package</label>
