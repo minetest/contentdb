@@ -26,7 +26,7 @@ from sqlalchemy.orm import joinedload, subqueryload
 from sqlalchemy.sql.expression import func
 
 
-PKGS_PER_ROW = 5
+PKGS_PER_ROW = 4
 
 
 @bp.route("/gamejam/")
