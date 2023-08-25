@@ -109,7 +109,8 @@
 					</span>
 					{% for viewer in thread.get_visible_to() %}
 						<a href="{{ url_for('users.profile', username=viewer.username) }}" title="{{ viewer.display_name }}">
-							<img style="max-height: 2em;" src="{{ viewer.get_profile_pic_url() }}" alt="{{ viewer.display_name }}" />
+							<img style="max-height: 2em;" src="{{ viewer.get_profile_pic_url() }}" loading="lazy"
+								alt="{{ viewer.display_name }}">
 						</a>
 					{% endfor %}
 					<a href="{{ url_for('users.list_all') }}" title="{{ _('Plus approvers and editors') }}">

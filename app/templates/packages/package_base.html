@@ -10,7 +10,8 @@
 						<span class="row m-0 p-0">
 							<span class="col-auto m-0 p-0">
 								<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
-										src="{{ package.get_thumb_or_placeholder(1) }}" alt="{{ _('Thumbnail') }}" style="max-height: 20px;">
+										src="{{ package.get_thumb_or_placeholder(1) }}"  loading="lazy"
+										alt="{{ _('Thumbnail') }}" style="max-height: 20px;">
 							</span>
 							<span class="col m-0 p-0 ps-2">
 								{{ package.title }}

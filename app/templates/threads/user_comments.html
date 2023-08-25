@@ -18,7 +18,8 @@
 	<li class="row my-2 mx-0">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('users.profile', username=r.author.username) }}">
-				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.get_profile_pic_url() }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+					src="{{ r.author.get_profile_pic_url() }}" loading="lazy">
 			</a>
 		</div>
 		<div class="col pr-0">

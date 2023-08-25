@@ -4,7 +4,8 @@
 	<li class="row my-2 mx-0">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('users.profile', username=r.author.username) }}">
-				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.get_profile_pic_url() }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+					src="{{ r.author.get_profile_pic_url() }}" loading="lazy">
 			</a>
 		</div>
 		<div class="col pr-0">
@@ -81,7 +82,8 @@
 	<li class="row my-2 mx-0 align-items-center">
 		<div class="col-md-1 p-1">
 			<a href="{{ url_for('users.profile', username=r.author.username) }}">
-				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ r.author.get_profile_pic_url() }}">
+				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+					src="{{ r.author.get_profile_pic_url() }}" loading="lazy">
 			</a>
 		</div>
 		<div class="col-auto">
@@ -137,7 +139,7 @@
 <div class="row mt-0 mb-4 comments mx-0">
 	<div class="col-md-1 p-1">
 		<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
-			 src="{{ current_user.get_profile_pic_url() }}">
+			 src="{{ current_user.get_profile_pic_url() }}" loading="lazy">
 	</div>
 	<div class="col pr-0">
 		<div class="card">

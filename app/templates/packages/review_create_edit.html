@@ -22,7 +22,8 @@
 	{{ form.hidden_tag() }}
 	<div class="row mt-0 mb-4 comments mx-0">
 		<div class="col-md-1 p-1">
-			<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ current_user.get_profile_pic_url() }}">
+			<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+				src="{{ current_user.get_profile_pic_url() }}" loading="lazy">
 		</div>
 		<div class="col">
 			<div class="card">

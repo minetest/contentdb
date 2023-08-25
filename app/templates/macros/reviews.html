@@ -27,7 +27,8 @@
 			<a id="{{ review_anchor }}"></a>
 			<div class="col-md-1 p-1">
 				<a href="{{ url_for('users.profile', username=review.author.username) }}">
-					<img class="img-fluid user-photo img-thumbnail img-thumbnail-1" src="{{ review.author.get_profile_pic_url() }}">
+					<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+						src="{{ review.author.get_profile_pic_url() }}" loading="lazy">
 				</a>
 			</div>
 			<div class="col-md-auto ps-1 pe-3 pt-2 text-center" style=" font-size: 200%;">
