@@ -17,7 +17,7 @@
 from flask import Blueprint, make_response
 from sqlalchemy.sql.expression import func
 
-from app.models import Package, db, User, UserRank, PackageState
+from app.models import Package, db, User, UserRank, PackageState, PackageReview, ThreadReply, Collection
 from app.rediscache import get_key
 
 bp = Blueprint("metrics", __name__)
@@ -49,12 +49,18 @@ def generate_metrics(full=False):
 
 	packages = Package.query.filter_by(state=PackageState.APPROVED).count()
 	users = User.query.filter(User.rank != UserRank.NOT_JOINED).count()
+	reviews = PackageReview.query.count()
+	comments = ThreadReply.query.count()
+	collections = Collection.query.count()
 
 	ret = ""
 	ret += write_single_stat("contentdb_packages", "Total packages", "gauge", packages)
 	ret += write_single_stat("contentdb_users", "Number of registered users", "gauge", users)
 	ret += write_single_stat("contentdb_downloads", "Total downloads", "gauge", downloads)
 	ret += write_single_stat("contentdb_emails", "Number of emails sent", "counter", int(get_key("emails_sent", "0")))
+	ret += write_single_stat("contentdb_reviews", "Number of reviews", "gauge", reviews)
+	ret += write_single_stat("contentdb_comments", "Number of comments", "gauge", comments)
+	ret += write_single_stat("contentdb_collections", "Number of collections", "gauge", collections)
 
 	if full:
 		scores = Package.query.join(User).with_entities(User.username, Package.name, Package.score) \
