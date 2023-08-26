@@ -3,62 +3,62 @@
 
 "use strict";
 
-function getJSON(url, method) {
-	return new Promise((resolve, reject) => {
-		fetch(new Request(url, {
+
+async function getJSON(url, method) {
+	const response = await fetch(new Request(url, {
 			method: method || "get",
 			credentials: "same-origin",
 			headers: {
 				"Accept": "application/json",
 			},
-		})).then((response) => {
-			response.text().then((txt) => {
-				resolve(JSON.parse(txt))
-			}).catch(reject)
-		}).catch(reject)
-	})
-}
+		}));
 
-function pollTask(poll_url, disableTimeout) {
-	return new Promise((resolve, reject) => {
-		let tries = 0;
-
-		function retry() {
-			tries++;
-			if (!disableTimeout && tries > 30) {
-				reject("timeout")
-			} else {
-				const interval = Math.min(tries*100, 1000)
-				console.log("Polling task in " + interval + "ms")
-				setTimeout(step, interval)
-			}
-		}
-		function step() {
-			getJSON(poll_url).then((res) => {
-				if (res.status === "SUCCESS") {
-					console.log("Got result")
-					resolve(res.result)
-				} else if (res.status === "FAILURE" || res.status === "REVOKED") {
-					reject(res.error || "Unknown server error")
-				} else {
-					retry()
-				}
-			}).catch(retry)
-		}
-		retry()
-	})
+	return await response.json();
 }
 
 
-function performTask(url) {
-	return new Promise((resolve, reject) => {
-		getJSON(url, "post").then((startResult) => {
-			console.log(startResult)
-			if (typeof startResult.poll_url == "string") {
-				pollTask(startResult.poll_url).then(resolve).catch(reject)
-			} else {
-				reject("Start task didn't return string!")
-			}
-		}).catch(reject)
-	})
+function sleep(interval) {
+	return new Promise(resolve => setTimeout(resolve, interval));
+}
+
+
+async function pollTask(poll_url, disableTimeout) {
+	let tries = 0;
+
+	while (true) {
+		tries++;
+		if (!disableTimeout && tries > 30) {
+			throw "timeout";
+		} else {
+			const interval = Math.min(tries * 100, 1000);
+			console.log("Polling task in " + interval + "ms");
+			await sleep(interval);
+		}
+
+		let res = undefined;
+		try {
+			res = await getJSON(poll_url);
+		} catch (e) {
+			console.error(e);
+		}
+
+		if (res && res.status === "SUCCESS") {
+			console.log("Got result")
+			return res.result;
+		} else if (res && (res.status === "FAILURE" || res.status === "REVOKED")) {
+			throw res.error ?? "Unknown server error";
+		}
+	}
+}
+
+
+async function performTask(url) {
+	const startResult = await getJSON(url, "post");
+	console.log(startResult);
+
+	if (typeof startResult.poll_url == "string") {
+		return await pollTask(startResult.poll_url);
+	} else {
+		throw "Start task didn't return string!";
+	}
 }
