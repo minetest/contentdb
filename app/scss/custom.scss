@@ -1,3 +1,12 @@
+:root {
+	--bs-link-color-rgb: 103, 206, 229;
+	--bs-link-hover-color-rgb: 81, 161, 179;
+}
+
+a {
+	text-decoration: none;
+}
+
 @import "components.scss";
 @import "packages.scss";
 @import "gallery.scss";
@@ -7,14 +16,6 @@
 footer {
 	text-align: center;
 	color: #999;
-
-	a {
-		color: #2e997e;
-	}
-
-	a:hover {
-		color: #00bc8c;
-	}
 
 	.list-inline {
 		max-width: 520px;
