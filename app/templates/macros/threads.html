@@ -47,7 +47,7 @@
 						</a>
 					{% endif %}
 					{% if current_user != r.author %}
-						<a class="float-end btn-secondary btn-sm ms-2"
+						<a class="float-end btn btn-secondary btn-sm ms-2"
 								title="{{ _('Report') }}"
 								href="{{ url_for('report.report', url=r.get_url()) }}">
 							<i class="fas fa-flag me-1"></i>
