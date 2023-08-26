@@ -178,7 +178,7 @@ def delete_reply(id):
 
 class CommentForm(FlaskForm):
 	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(2, 2000)])
-	submit = SubmitField(lazy_gettext("Comment"))
+	btn_submit = SubmitField(lazy_gettext("Comment"))
 
 
 @bp.route("/threads/<int:id>/edit/", methods=["GET", "POST"])
@@ -280,7 +280,7 @@ class ThreadForm(FlaskForm):
 	title	= StringField(lazy_gettext("Title"), [InputRequired(), Length(3,100)])
 	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
 	private = BooleanField(lazy_gettext("Private"))
-	submit  = SubmitField(lazy_gettext("Open Thread"))
+	btn_submit  = SubmitField(lazy_gettext("Open Thread"))
 
 
 @bp.route("/threads/new/", methods=["GET", "POST"])

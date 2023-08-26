@@ -11,7 +11,7 @@
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.comment, label="", class_="m-0", fieldclass="form-control markdown") }} <br />
-		{{ render_submit_field(form.submit) }}
+		{{ render_field(form.comment, label="", class_="m-0", fieldclass="form-control markdown", data_enter_submit="1") }} <br />
+		{{ render_submit_field(form.btn_submit) }}
 	</form>
 {% endblock %}

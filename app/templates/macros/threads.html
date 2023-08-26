@@ -166,14 +166,14 @@
 				{% from "macros/forms.html" import render_field, render_submit_field %}
 				<form method="post" action="{{ url_for('threads.view', id=thread.id) }}" class="card-body">
 					{{ form.hidden_tag() }}
-					{{ render_field(form.comment, fieldclass="form-control markdown", label="") }}
-					{{ render_submit_field(form.submit) }}
+					{{ render_field(form.comment, fieldclass="form-control markdown", label="", data_enter_submit="1") }}
+					{{ render_submit_field(form.btn_submit) }}
 				</form>
 			{% else %}
 				<form method="post" action="{{ url_for('threads.view', id=thread.id)}}" class="card-body">
 					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<textarea class="form-control markdown" required maxlength=2000 name="comment"></textarea><br />
-					<input class="btn btn-primary" type="submit" value="Comment" />
+					<textarea class="form-control markdown" required maxlength=2000 name="comment" data-enter-submit="1"></textarea><br />
+					<input class="btn btn-primary" name="btn_submit" type="submit" value="Comment" />
 				</form>
 			{% endif %}
 			{% if thread.private %}

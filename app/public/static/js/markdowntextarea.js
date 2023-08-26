@@ -55,4 +55,14 @@ document.querySelectorAll("textarea.markdown").forEach((element) => {
 			return preview.innerHTML;
 		}
 	});
+
+	// Ctrl+enter to submit
+	if (element.getAttribute("data-enter-submit")) {
+		element.easy_mde.codemirror.on("keyup", (mirror, e) => {
+			if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
+				element.form?.submit();
+				e.preventDefault();
+			}
+		});
+	}
 })

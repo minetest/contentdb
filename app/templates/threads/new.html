@@ -29,7 +29,7 @@
 					<a name="reply"></a>
 				</div>
 				<div class="card-body">
-					{{ render_field(form.comment, label="", class_="m-0", fieldclass="form-control markdown") }}
+					{{ render_field(form.comment, label="", class_="m-0", fieldclass="form-control markdown", data_enter_submit="1") }}
 				</div>
 			</div>
 		</div>
@@ -48,7 +48,7 @@
 		</p>
 	{% endif %}
 
-	{{ render_submit_field(form.submit) }}
+	{{ render_submit_field(form.btn_submit) }}
 </form>
 
 
