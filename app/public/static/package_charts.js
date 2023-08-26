@@ -3,7 +3,6 @@
 
 "use strict";
 
-
 const labelColor = "#bbb";
 const annotationColor = "#bbb";
 const annotationLabelBgColor = "#444";
@@ -304,4 +303,4 @@ function setup_chart(ctx, data, annotations) {
 }
 
 
-$(load_data);
+window.addEventListener("load", load_data);

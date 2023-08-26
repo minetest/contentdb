@@ -86,22 +86,9 @@
 			{{ render_submit_field(form.submit) }}
 		</p>
 	</form>
-
 {% endblock %}
 
 {% block scriptextra %}
 	<script src="/static/release_minmax.js?v=2"></script>
-	<script>
-		function check_opt() {
-			if ($("input[name=uploadOpt]:checked").val() == "vcs") {
-				$("#file_upload").parent().hide();
-				$("#vcsLabel").parent().show();
-			} else {
-				$("#file_upload").parent().show();
-				$("#vcsLabel").parent().hide();
-			}
-		}
-		$("input[name=uploadOpt]").change(check_opt);
-		check_opt();
-	</script>
+	<script src="/static/release_new.js"></script>
 {% endblock %}

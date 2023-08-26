@@ -1,7 +1,9 @@
 // @author rubenwardy
 // @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
 
-$("textarea.markdown").each(function() {
+"use strict";
+
+document.querySelectorAll("textarea.markdown").forEach((element) => {
 	async function render(plainText, preview) {
 		const response = await fetch(new Request("/api/markdown/", {
 			method: "POST",
@@ -16,18 +18,8 @@ $("textarea.markdown").each(function() {
 	}
 
 	let timeout_id = null;
-
-	function urlInserter(url) {
-		return (editor) => {
-			var cm = editor.codemirror;
-			var stat = getState(cm);
-			var options = editor.options;
-			_replaceSelection(cm, stat.table, `[](${url})`);
-		};
-	}
-
-	this.easy_mde = new EasyMDE({
-		element: this,
+	element.easy_mde = new EasyMDE({
+		element: element,
 		hideIcons: ["image"],
 		showIcons: ["code", "table"],
 		forceSync: true,
@@ -49,20 +41,6 @@ $("textarea.markdown").each(function() {
 			"fullscreen",
 			"|",
 			"guide",
-//			{
-//				name: "rules",
-//				className: "fa fa-book",
-//				title: "others buttons",
-//				children: [
-//					{
-//						name: "rules",
-//						action: urlInserter("/policy_and_guidance/#2-accepted-content"),
-//						className: "fa fa-star",
-//						title: "2. Accepted content",
-//						text: "2. Accepted content",
-//					},
-//				]
-//			},
 		],
 		previewRender: (plainText, preview) => {
 			if (timeout_id) {
@@ -70,7 +48,7 @@ $("textarea.markdown").each(function() {
 			}
 
 			timeout_id = setTimeout(() => {
-				render(plainText, preview);
+				render(plainText, preview).catch(console.error);
 				timeout_id = null;
 			}, 500);
 

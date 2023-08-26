@@ -1,20 +1,33 @@
 // @author rubenwardy
 // @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
 
-$(function() {
-	$("#type").change(function() {
-		$(".not_mod, .not_game, .not_txp").show()
-		$(".not_" + this.value.toLowerCase()).hide()
-	})
-	$(".not_mod, .not_game, .not_txp").show()
-	$(".not_" + $("#type").val().toLowerCase()).hide()
+"use strict";
 
-	$("#forums").on('paste', function(e) {
+function hide(sel) {
+	document.querySelectorAll(sel).forEach(x => x.classList.add("d-none"));
+}
+
+function show(sel) {
+	document.querySelectorAll(sel).forEach(x => x.classList.remove("d-none"));
+}
+
+
+window.addEventListener("load", () => {
+	const typeEle = document.getElementById("type");
+	typeEle.addEventListener("change", () => {
+		show(".not_mod, .not_game, .not_txp");
+		hide(".not_" + typeEle.value.toLowerCase());
+	})
+	show(".not_mod, .not_game, .not_txp");
+	hide(".not_" + typeEle.value.toLowerCase());
+
+	const forumsField = document.getElementById("forums");
+	forumsField.addEventListener("paste", function(e) {
 		try {
-			const pasteData = e.originalEvent.clipboardData.getData('text');
+			const pasteData = e.clipboardData.getData('text');
 			const url = new URL(pasteData);
-			if (url.hostname == "forum.minetest.net") {
-				$(this).val(url.searchParams.get("t"));
+			if (url.hostname === "forum.minetest.net") {
+				forumsField.value = url.searchParams.get("t");
 				e.preventDefault();
 			}
 		} catch (e) {
@@ -22,8 +35,9 @@ $(function() {
 		}
 	});
 
-	$("#forums-button").click(function(e) {
-		window.open("https://forum.minetest.net/viewtopic.php?t=" + $("#forums").val(), "_blank");
+	const openForums = document.getElementById("forums-button");
+	openForums.addEventListener("click", () => {
+		window.open("https://forum.minetest.net/viewtopic.php?t=" + forumsField.value, "_blank");
 	});
 
 	let hint = null;
@@ -32,9 +46,13 @@ $(function() {
 			hint.remove();
 		}
 
-		hint = ele.parent()
-				.append(`<div class="alert alert-warning my-3">${text}</div>`)
-				.find(".alert");
+		hint = document.createElement("div");
+		hint.classList.add("alert");
+		hint.classList.add("alert-warning");
+		hint.classList.add("my-1");
+		hint.innerHTML = text;
+
+		ele.parentNode.appendChild(hint);
 	}
 
 	let hint_mtmods = `Tip:
@@ -43,26 +61,24 @@ $(function() {
 
 	let hint_thegame = `Tip:
 		It's obvious that this adds something to Minetest,
-		there's no need to use phrases such as \"adds X to the game\".`
+		there's no need to use phrases such as \"adds X to the game\".`;
 
-	$("#short_desc").on("change paste keyup", function() {
-		const val = $(this).val().toLowerCase();
+	const shortDescField = document.getElementById("short_desc");
+
+	function handleShortDescChange() {
+		const val = shortDescField.value.toLowerCase();
 		if (val.indexOf("minetest") >= 0 || val.indexOf("mod") >= 0 ||
 				val.indexOf("modpack") >= 0 || val.indexOf("mod pack") >= 0) {
-			showHint($(this), hint_mtmods);
+			showHint(shortDescField, hint_mtmods);
 		} else if (val.indexOf("the game") >= 0) {
-			showHint($(this), hint_thegame);
+			showHint(shortDescField, hint_thegame);
 		} else if (hint) {
 			hint.remove();
 			hint = null;
 		}
-	})
+	}
 
-	const btn = $("#forums").parent().find("label").append("<a class='ms-3 btn btn-sm btn-primary'>Open</a>");
-	btn.click(function() {
-		const id = $("#forums").val();
-		if (/^\d+$/.test(id)) {
-			window.open("https://forum.minetest.net/viewtopic.php?t=" + id, "_blank");
-		}
-	});
+	shortDescField.addEventListener("change", handleShortDescChange);
+	shortDescField.addEventListener("paste", handleShortDescChange);
+	shortDescField.addEventListener("keyup", handleShortDescChange);
 })

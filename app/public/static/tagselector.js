@@ -3,6 +3,9 @@
  * License: MIT
  * https://petprojects.googlecode.com/svn/trunk/MIT-LICENSE.txt
  */
+
+"use strict";
+
 (function($) {
 	function make_bold(text) {
 		const idx = text.indexOf(":");

@@ -1,16 +1,18 @@
 // @author rubenwardy
 // @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
 
+"use strict";
+
 function getJSON(url, method) {
-	return new Promise(function(resolve, reject) {
+	return new Promise((resolve, reject) => {
 		fetch(new Request(url, {
 			method: method || "get",
 			credentials: "same-origin",
 			headers: {
 				"Accept": "application/json",
 			},
-		})).then(function(response) {
-			response.text().then(function(txt) {
+		})).then((response) => {
+			response.text().then((txt) => {
 				resolve(JSON.parse(txt))
 			}).catch(reject)
 		}).catch(reject)
@@ -18,7 +20,7 @@ function getJSON(url, method) {
 }
 
 function pollTask(poll_url, disableTimeout) {
-	return new Promise(function(resolve, reject) {
+	return new Promise((resolve, reject) => {
 		let tries = 0;
 
 		function retry() {
@@ -32,11 +34,11 @@ function pollTask(poll_url, disableTimeout) {
 			}
 		}
 		function step() {
-			getJSON(poll_url).then(function(res) {
-				if (res.status == "SUCCESS") {
+			getJSON(poll_url).then((res) => {
+				if (res.status === "SUCCESS") {
 					console.log("Got result")
 					resolve(res.result)
-				} else if (res.status == "FAILURE" || res.status == "REVOKED") {
+				} else if (res.status === "FAILURE" || res.status === "REVOKED") {
 					reject(res.error || "Unknown server error")
 				} else {
 					retry()
@@ -49,8 +51,8 @@ function pollTask(poll_url, disableTimeout) {
 
 
 function performTask(url) {
-	return new Promise(function(resolve, reject) {
-		getJSON(url, "post").then(function(startResult) {
+	return new Promise((resolve, reject) => {
+		getJSON(url, "post").then((startResult) => {
 			console.log(startResult)
 			if (typeof startResult.poll_url == "string") {
 				pollTask(startResult.poll_url).then(resolve).catch(reject)

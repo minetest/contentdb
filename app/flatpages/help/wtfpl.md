@@ -6,17 +6,17 @@ toc: False
 
 	Please reconsider the choice of WTFPL as a license.
 
-	<script src="/static/libs/jquery.min.js"></script>
 	<script>
 		// @author rubenwardy
 		// @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
 
 		var params = new URLSearchParams(location.search);
-		var r      = params.get("r");
-		if (r)
+		var r = params.get("r");
+		if (r) {
 			document.write("<a class='alert_right button' href='" + r + "'>Okay</a>");
-		else
-			$("#warning").hide();
+		} else {
+			document.getElementById("warning").style.display = "none";
+        }
 	</script>
 </div>
 

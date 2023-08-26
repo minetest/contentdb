@@ -131,20 +131,7 @@
 {% endblock %}
 
 {% block scriptextra %}
+	<script src="/static/libs/jquery.min.js?v=2"></script>
 	<script src="/static/libs/jquery-ui.min.js?v=2"></script>
-	<script>
-		function update() {
-			const elements = Array.from(document.getElementsByClassName("sortable")[0].children);
-			const ids = elements.map(x => x.dataset.id).filter(x => x);
-			$("input[name='order']").val(ids.join(","))
-		}
-
-		update();
-
-		$(function() {
-			$(".sortable").sortable({
-				update: update
-			});
-		});
-	</script>
+	<script src="/static/screenshots_editor.js"></script>
 {% endblock %}

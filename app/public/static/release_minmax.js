@@ -1,21 +1,25 @@
 // @author rubenwardy
 // @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
 
-const min = $("#min_rel");
-const max = $("#max_rel");
-const none = parseInt($("#min_rel option:first-child").attr("value"));
-const warning = $("#minmax_warning");
+"use strict";
 
-function ver_check() {
-	const minv = parseInt(min.val());
-	const maxv = parseInt(max.val());
+window.addEventListener("load", () => {
+	const min = document.getElementById("min_rel");
+	const max = document.getElementById("max_rel");
+	const none = parseInt(document.querySelector("#min_rel option:first-child").value);
+	const warning = document.getElementById("minmax_warning");
 
-	if (minv != none && maxv != none && minv > maxv) {
-		warning.show();
-	} else {
-		warning.hide();
+	function ver_check() {
+		const minv = parseInt(min.value);
+		const maxv = parseInt(max.value);
+		if (minv != none && maxv != none && minv > maxv) {
+			warning.style.display = "block";
+		} else {
+			warning.style.display = "none";
+		}
 	}
-}
 
-min.change(ver_check);
-max.change(ver_check);
+	min.addEventListener("change", ver_check);
+	max.addEventListener("change", ver_check);
+	ver_check();
+});

@@ -1,6 +1,8 @@
 // @author rubenwardy
 // @license magnet:?xt=urn:btih:1f739d935676111cfff4b4693e3816e664797050&dn=gpl-3.0.txt GPL-v3-or-Later
 
+"use strict";
+
 
 function updateOrder() {
 	const elements = [...document.querySelector(".sortable").children];
@@ -33,7 +35,9 @@ function restorePackage(id) {
 		return false;
 	}
 
-	const card = idElement.parentNode.parentNode;
+	const card = idElement.parentNode.parentNode.parentNode.parentNode;
+	console.assert(card.classList.contains("card"));
+
 	card.classList.remove("d-none");
 	card.querySelector("input[name^=package_removed]").value = "0";
 	card.scrollIntoView();
@@ -176,7 +180,9 @@ function onPackageQueryUpdate() {
 
 window.addEventListener("load", () => {
 	document.querySelectorAll(".remove-package").forEach(button => {
-		const card = button.parentNode.parentNode;
+		const card = button.parentNode.parentNode.parentNode.parentNode;
+		console.assert(card.classList.contains("card"));
+
 		const field = card.querySelector("input[name^=package_removed]");
 
 		// Reloading/validation errors will cause this to be 1 at load
@@ -191,6 +197,12 @@ window.addEventListener("load", () => {
 	addPackageQuery.value = "";
 	addPackageQuery.classList.remove("d-none");
 	addPackageQuery.addEventListener("input", onPackageQueryUpdate);
+	addPackageQuery.addEventListener('keydown',(e)=>{
+		if (e.key === "Enter") {
+			onPackageQueryUpdate();
+			e.preventDefault();
+		}
+	})
 
 	updateOrder();
 	$(".sortable").sortable({
