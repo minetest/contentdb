@@ -45,7 +45,7 @@ class ReviewForm(FlaskForm):
 	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
 	rating = RadioField(lazy_gettext("Rating"), [InputRequired()],
 			choices=[("5", lazy_gettext("Yes")), ("3", lazy_gettext("Neutral")), ("1", lazy_gettext("No"))])
-	submit  = SubmitField(lazy_gettext("Save"))
+	btn_submit = SubmitField(lazy_gettext("Save"))
 
 
 @bp.route("/packages/<author>/<name>/review/", methods=["GET", "POST"])

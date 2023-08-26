@@ -42,8 +42,8 @@
 					</p>
 
 					{{ render_field(form.title) }}
-					{{ render_field(form.comment, label="", class_="m-0", fieldclass="form-control markdown") }} <br />
-					{{ render_submit_field(form.submit) }}
+					{{ render_field(form.comment, label="", class_="m-0", fieldclass="form-control markdown", data_enter_submit="1") }} <br />
+					{{ render_submit_field(form.btn_submit) }}
 				</div>
 			</div>
 		</div>
