@@ -14,13 +14,13 @@
 
 			{{ render_field(form.username, tabindex=110, label_visible=False, placeholder=_("Username or email")) }}
 			{{ render_field(form.password, tabindex=120, label_visible=False, placeholder=_("Password")) }}
-			<div class="row mb-3">
-				{{ render_checkbox_field(form.remember_me, tabindex=130, class_="col-sm") }}
-				<a class="col-sm" href="{{ url_for('users.forgot_password') }}">
+			<div class="d-flex gap-2 mb-4">
+				{{ render_checkbox_field(form.remember_me, tabindex=130, class_="flex-grow-1") }}
+				<a class="flex-grow-1" href="{{ url_for('users.forgot_password') }}">
 					{{ _("Forgot my password") }}
 				</a>
 			</div>
-			{{ render_submit_field(form.submit, tabindex=140, class_="btn btn-lg btn-primary d-block") }}
+			{{ render_submit_field(form.submit, tabindex=140, class_="btn btn-lg btn-primary d-block w-100") }}
 
 			<hr class="my-5" />
 

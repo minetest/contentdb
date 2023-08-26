@@ -102,7 +102,7 @@ class RegisterForm(FlaskForm):
 			Regexp("^[a-zA-Z0-9._-]+$", message=lazy_gettext(
 				"Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed"))])
 	email    = StringField(lazy_gettext("Email"), [InputRequired(), Email()])
-	password = PasswordField(lazy_gettext("Password"), [InputRequired(), Length(6, 100)])
+	password = PasswordField(lazy_gettext("Password"), [InputRequired(), Length(12, 100)])
 	question  = StringField(lazy_gettext("What is the result of the above calculation?"), [InputRequired()])
 	agree    = BooleanField(lazy_gettext("I agree"), [DataRequired()])
 	submit   = SubmitField(lazy_gettext("Register"))
@@ -220,16 +220,16 @@ def forgot_password():
 
 class SetPasswordForm(FlaskForm):
 	email = StringField(lazy_gettext("Email"), [Optional(), Email()])
-	password = PasswordField(lazy_gettext("New password"), [InputRequired(), Length(8, 100)])
-	password2 = PasswordField(lazy_gettext("Verify password"), [InputRequired(), Length(8, 100),
+	password = PasswordField(lazy_gettext("New password"), [InputRequired(), Length(12, 100)])
+	password2 = PasswordField(lazy_gettext("Verify password"), [InputRequired(), Length(12, 100),
 			EqualTo('password', message=lazy_gettext('Passwords must match'))])
 	submit = SubmitField(lazy_gettext("Save"))
 
 
 class ChangePasswordForm(FlaskForm):
-	old_password = PasswordField(lazy_gettext("Old password"), [InputRequired(), Length(8, 100)])
-	password = PasswordField(lazy_gettext("New password"), [InputRequired(), Length(8, 100)])
-	password2 = PasswordField(lazy_gettext("Verify password"), [InputRequired(), Length(8, 100),
+	old_password = PasswordField(lazy_gettext("Old password"), [InputRequired(), Length(6, 100)])
+	password = PasswordField(lazy_gettext("New password"), [InputRequired(), Length(12, 100)])
+	password2 = PasswordField(lazy_gettext("Verify password"), [InputRequired(), Length(12, 100),
 			validators.EqualTo('password', message=lazy_gettext('Passwords must match'))])
 	submit = SubmitField(lazy_gettext("Save"))
 
