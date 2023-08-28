@@ -25,7 +25,8 @@ from wtforms import StringField, BooleanField, SubmitField, FieldList, HiddenFie
 from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from app.models import Collection, db, Package, Permission, CollectionPackage, User, UserRank, AuditSeverity
-from app.utils import is_package_page, nonempty_or_none, add_audit_log
+from app.utils import nonempty_or_none
+from app.utils.models import is_package_page, add_audit_log, create_session
 
 bp = Blueprint("collections", __name__)
 
@@ -41,7 +42,7 @@ def list_all(author=None):
 		query = user.collections
 	else:
 		user = None
-		query = Collection.query.order_by(db.asc(Collection.title))
+		query = Collection.query.filter(Collection.items.any()).order_by(db.asc(Collection.title))
 
 	if "package" in request.args:
 		package = Package.get_by_key(request.args["package"])
@@ -262,10 +263,31 @@ def toggle_package(collection: Collection, package: Package):
 		return True
 
 
+def get_or_create_favorites(session):
+	collection = Collection.query.filter(Collection.name == "favorites", Collection.author == current_user).first()
+	if collection is None:
+		is_new = True
+		collection = Collection()
+		collection.title = "Favorites"
+		collection.name = "favorites"
+		collection.short_description = "My favorites"
+		collection.author_id = current_user.id
+		session.add(collection)
+	else:
+		is_new = False
+
+	return collection, is_new
+
+
 @bp.route("/packages/<author>/<name>/add-to/", methods=["GET", "POST"])
 @is_package_page
 @login_required
 def package_add(package):
+	with create_session() as new_session:
+		collection, is_new = get_or_create_favorites(new_session)
+		if is_new:
+			new_session.commit()
+
 	if request.method == "POST":
 		collection_id = request.form["collection"]
 		collection = Collection.query.get(collection_id)
@@ -293,14 +315,7 @@ def package_add(package):
 @is_package_page
 @login_required
 def package_toggle_favorite(package):
-	collection = Collection.query.filter(Collection.name == "favorites", Collection.author == current_user).first()
-	if collection is None:
-		collection = Collection()
-		collection.title = "Favorites"
-		collection.name = "favorites"
-		collection.short_description = "My favorites"
-		collection.author = current_user
-		db.session.add(collection)
+	collection, _is_new = get_or_create_favorites(db.session)
 
 	if toggle_package(collection, package):
 		msg = gettext("Added package to favorites collection")
