@@ -53,18 +53,8 @@
 			{% endif %}
 		</a>
 
-		{% if package.type == package.type.MOD %}
-			{% set installing_url = "https://wiki.minetest.net/Installing_Mods" %}
-		{% elif package.type == package.type.GAME %}
-			{% set installing_url = "https://wiki.minetest.net/Games#Installing_games" %}
-		{% elif package.type == package.type.TXP %}
-			{% set installing_url = "https://wiki.minetest.net/Installing_Texture_Packs" %}
-		{% else %}
-			{{ 0 / 0 }}
-		{% endif %}
-
 		<p class="text-center mt-1 mb-4">
-			<a href="{{ installing_url }}">
+			<a href="{{ url_for('flatpage', path='help/installing') }}">
 				<small>
 					<i class="fas fa-question-circle me-1"></i>
 					{{ _("How do I install this?") }}

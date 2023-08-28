@@ -10,6 +10,7 @@ toc: False
 ## General Help
 
 * [Frequently Asked Questions](faq/)
+* [Installing content](installing/)
 * [Content Ratings and Flags](content_flags/)
 * [Non-free Licenses](non_free/)
 * [Why WTFPL is a terrible license](wtfpl/)

@@ -54,6 +54,10 @@ You should read
 [the official Minetest Modding Book](https://rubenwardy.com/minetest_modding_book/)
 for a guide to making mods and games using Minetest.
 
+### How do I install something from here?
+
+See [Installing content](/help/installing/).
+
 
 ## How do I get help?
 
