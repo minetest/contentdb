@@ -241,12 +241,14 @@ def delete(author, name):
 def toggle_package(collection: Collection, package: Package):
 	severity = AuditSeverity.NORMAL if collection.author == current_user else AuditSeverity.EDITOR
 
+	author = User.query.get(collection.author_id) if collection.author is None else collection.author
+
 	if package in collection.packages:
 		CollectionPackage.query \
 			.filter(CollectionPackage.collection == collection, CollectionPackage.package == package) \
 			.delete(synchronize_session=False)
 		add_audit_log(severity, current_user,
-				f"Removed {package.get_id()} from collection {collection.author.username}/{collection.name}",
+				f"Removed {package.get_id()} from collection {author.username}/{collection.name}",
 				collection.get_url("collections.view"), None)
 		db.session.commit()
 		return False
@@ -257,7 +259,7 @@ def toggle_package(collection: Collection, package: Package):
 		link.order = len(collection.items)
 		db.session.add(link)
 		add_audit_log(severity, current_user,
-				f"Added {package.get_id()} to collection {collection.author.username}/{collection.name}",
+				f"Added {package.get_id()} to collection {author.username}/{collection.name}",
 				collection.get_url("collections.view"), None)
 		db.session.commit()
 		return True
