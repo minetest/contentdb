@@ -16,7 +16,8 @@
 
 from flask import Blueprint, request, render_template, abort, flash, redirect, url_for
 from flask_babel import gettext, lazy_gettext
-from sqlalchemy.orm import selectinload
+from sqlalchemy import or_
+from sqlalchemy.orm import selectinload, joinedload
 
 from app.markdown import get_user_mentions, render_markdown
 from app.tasks.webhooktasks import post_discord_webhook
@@ -391,12 +392,18 @@ def user_comments(username):
 	if user is None:
 		abort(404)
 
-	all_replies = ThreadReply.query.options(selectinload(ThreadReply.thread)).filter_by(author=user)
+	page = get_int_or_abort(request.args.get("page"), 1)
+	num = min(40, get_int_or_abort(request.args.get("n"), 40))
 
-	visible_replies = [
-		reply
-		for reply in all_replies
-		if reply.thread.check_perm(current_user, Permission.SEE_THREAD)
-	]
+	# Filter replies the current user can see
+	query = ThreadReply.query.options(selectinload(ThreadReply.thread)).filter_by(author=user)
+	if current_user != user and not (current_user.is_authenticated and current_user.rank.at_least(UserRank.APPROVER)):
+		if user.username == "ContentDB":
+			# The ContentDB user simply has too many comments, don't bother checking more than thread privacy
+			query = query.filter(ThreadReply.thread.has(private=False))
+		else:
+			query = query.filter(or_(ThreadReply.thread.has(private=False), Thread.watchers.contains(current_user)))
 
-	return render_template("threads/user_comments.html", user=user, replies=visible_replies)
+	pagination = query.order_by(db.desc(ThreadReply.created_at)).paginate(page=page, per_page=num)
+
+	return render_template("threads/user_comments.html", user=user, pagination=pagination)

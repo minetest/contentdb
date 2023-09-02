@@ -12,55 +12,67 @@
 {% block content %}
 <h1>{{ _("Comments by %(user)s", user=self.link()) }}</h1>
 
+{% if pagination.total %}
+	{% from "macros/pagination.html" import render_pagination %}
+	{{ render_pagination(pagination, url_set_query) }}
 
-<ul class="comments mt-5 mb-0">
-{% for r in replies %}
-	<li class="row my-2 mx-0">
-		<div class="col-md-1 p-1">
-			<a href="{{ url_for('users.profile', username=r.author.username) }}">
-				<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
-					src="{{ r.author.get_profile_pic_url() }}" loading="lazy">
-			</a>
-		</div>
-		<div class="col pr-0">
-			<div class="card">
-				<div class="card-header">
+	<ul class="comments mt-5 mb-0">
+	{% for r in pagination.items %}
+		<li class="row my-2 mx-0">
+			<div class="col-md-1 p-1">
+				<a href="{{ url_for('users.profile', username=r.author.username) }}">
+					<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+						src="{{ r.author.get_profile_pic_url() }}" loading="lazy">
+				</a>
+			</div>
+			<div class="col pr-0">
+				<div class="card">
+					<div class="card-header">
 
-					<a class="author {{ r.author.rank.name }} me-3"
-							href="{{ url_for('users.profile', username=r.author.username) }}">
-						{{ r.author.display_name }}
-					</a>
-
-					{% if r.author.username != r.author.display_name %}
-						<span class="text-muted small me-2">
-							({{ r.author.username }})
-						</span>
-					{% endif %}
-
-					{% if r == r.thread.first_reply %}
-						<a class="badge bg-primary" href="{{ r.thread.get_view_url() }}">
-							{{ r.thread.title }}
+						<a class="author {{ r.author.rank.name }} me-3"
+								href="{{ url_for('users.profile', username=r.author.username) }}">
+							{{ r.author.display_name }}
 						</a>
-					{% else %}
-						<i class="fas fa-reply me-2"></i>
-						<a class="badge bg-dark" href="{{ r.thread.get_view_url() }}">
-							{{ _("Reply to <b>%(title)s</b>", title=r.thread.title) }}
+
+						{% if r.author.username != r.author.display_name %}
+							<span class="text-muted small me-2">
+								({{ r.author.username }})
+							</span>
+						{% endif %}
+
+						{% if r == r.thread.first_reply %}
+							<a class="badge bg-primary" href="{{ r.thread.get_view_url() }}">
+								{{ r.thread.title }}
+							</a>
+						{% else %}
+							<i class="fas fa-reply me-2"></i>
+							<a class="badge bg-dark" href="{{ r.thread.get_view_url() }}">
+								{{ _("Reply to <b>%(title)s</b>", title=r.thread.title) }}
+							</a>
+						{% endif %}
+
+						<a name="reply-{{ r.id }}" class="text-muted float-end"
+								href="{{ url_for('threads.view', id=r.thread.id) }}#reply-{{ r.id }}">
+							{{ r.created_at | datetime }}
 						</a>
-					{% endif %}
+					</div>
 
-					<a name="reply-{{ r.id }}" class="text-muted float-end"
-							href="{{ url_for('threads.view', id=r.thread.id) }}#reply-{{ r.id }}">
-						{{ r.created_at | datetime }}
-					</a>
-				</div>
-
-				<div class="card-body markdown">
-					{{ r.comment | markdown }}
+					<div class="card-body markdown">
+						{{ r.comment | markdown }}
+					</div>
 				</div>
 			</div>
-		</div>
-	</li>
-	{% endfor %}
-</ul>
+		</li>
+		{% endfor %}
+	</ul>
+
+	{{ render_pagination(pagination, url_set_query) }}
+{% else %}
+	<p>
+		<i>
+			{{ _("No results") }}
+		</i>
+	</p>
+{% endif %}
 
 {% endblock %}
