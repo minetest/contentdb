@@ -11,14 +11,8 @@
 {% set html = page.html %}
 {% if page.meta.get("toc", True) %}
 	<div class="container mt-4">
-		<main class="row">
-			<article class="col-md-9 content">
-				<h1 class="mb-4">{{ page['title'] }}</h1>
-
-				{{ html | safe }}
-			</article>
-
-			<nav class="col-md-3 toc">
+		<main class="d-flex gap-5 flex-column flex-md-row-reverse">
+			<nav class="flex-grow-0 flex-shrink-0 toc" style="flex-basis: 25%;">
 				{% set headings = get_headings(html) %}
 				<ul class="nav flex-column" role="menu">
 					{% for item in headings recursive %}
@@ -35,6 +29,12 @@
 					{% endfor %}
 				</ul>
 			</nav>
+			<article class="flex-grow-1 content">
+				<h1 class="mb-4">{{ page['title'] }}</h1>
+
+				{{ html | safe }}
+			</article>
+
 		</main>
 	</div>
 {% else %}

@@ -172,13 +172,10 @@ blockquote {
 }
 
 .toc {
-	.nav-link {
-		color: #ADADAD;
-		padding: 0.25rem 0.5rem;
+	flex-basis: 25%;
 
-		&:hover, &.active {
-			color: #DDD;
-		}
+	.nav-link {
+		padding: 0.25rem 0.5rem;
 	}
 
 	.nav .nav {
