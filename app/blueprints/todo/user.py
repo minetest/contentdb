@@ -129,7 +129,7 @@ def apply_all_updates(username):
 
 		msg = "Created release {} (Applied all Git Update Detection)".format(rel.title)
 		add_notification(package.maintainers, current_user, NotificationType.PACKAGE_EDIT, msg,
-						 rel.get_url("packages.create_edit"), package)
+				package.get_url("packages.create_edit"), package)
 		add_audit_log(AuditSeverity.NORMAL, current_user, msg, package.get_url("packages.view"), package)
 		db.session.commit()
 
