@@ -22,8 +22,10 @@ from flask_babel import gettext
 from flask_login import current_user, login_required
 from sqlalchemy import func, text
 
-from app.models import User, db, Package, PackageReview, PackageState, PackageType
+from app.models import User, db, Package, PackageReview, PackageState, PackageType, UserRank
 from app.utils import get_daterange_options
+from app.tasks.forumtasks import check_forum_account
+
 from . import bp
 
 
@@ -233,6 +235,25 @@ def profile(username):
 	return render_template("users/profile.html", user=user,
 			packages=packages, maintained_packages=maintained_packages,
 			medals_unlocked=unlocked, medals_locked=locked)
+
+
+@bp.route("/users/<username>/check-forums/", methods=["POST"])
+@login_required
+def user_check_forums(username):
+	user = User.query.filter_by(username=username).first()
+	if user is None:
+		abort(404)
+
+	if current_user != user and not current_user.rank.atLeast(UserRank.MODERATOR):
+		abort(403)
+
+	if user.forums_username is None:
+		abort(404)
+
+	task = check_forum_account.delay(user.forums_username, force_replace_pic=True)
+	next_url = url_for("users.profile", username=username)
+
+	return redirect(url_for("tasks.check", id=task.id, r=next_url))
 
 
 @bp.route("/user/stats/")

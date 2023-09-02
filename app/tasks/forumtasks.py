@@ -28,7 +28,7 @@ from .usertasks import set_profile_picture_from_url
 
 
 @celery.task()
-def check_forum_account(forums_username):
+def check_forum_account(forums_username, force_replace_pic=False):
 	print("### Checking " + forums_username, file=sys.stderr)
 	try:
 		profile = get_profile("https://forum.minetest.net", forums_username)
@@ -69,7 +69,7 @@ def check_forum_account(forums_username):
 		print(f"####### User pp {user.profile_pic}", file=sys.stderr)
 
 		pic_needs_replacing = user.profile_pic is None or user.profile_pic == "" or \
-				user.profile_pic.startswith("https://forum.minetest.net")
+				user.profile_pic.startswith("https://forum.minetest.net") or force_replace_pic
 		if pic_needs_replacing and pic.startswith("https://forum.minetest.net"):
 			print(f"####### Queueing", file=sys.stderr)
 			set_profile_picture_from_url.delay(user.username, pic)
