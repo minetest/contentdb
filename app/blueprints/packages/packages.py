@@ -685,6 +685,14 @@ def game_support(package):
 	if not (can_edit or package.check_perm(current_user, Permission.APPROVE_NEW)):
 		abort(403)
 
+	if package.releases.count() == 0:
+		flash(gettext("You need at least one release before you can edit game support"), "danger")
+		return redirect(package.get_url('packages.create_release' if package.update_config else 'packages.setup_releases'))
+
+	if package.type == PackageType.MOD and len(package.provides) == 0:
+		flash(gettext("Mod(pack) needs to contain at least one mod. Please create a new release"), "danger")
+		return redirect(package.get_url('packages.list_releases'))
+
 	force_game_detection = package.supported_games.filter(and_(
 		PackageGameSupport.confidence > 1, PackageGameSupport.supports == True)).count() == 0
 
@@ -697,7 +705,7 @@ def game_support(package):
 	form = GameSupportForm() if can_edit else None
 	if form and request.method == "GET":
 		form.enable_support_detection.data = package.enable_game_support_detection
-		form.supports_all_games.data = package.supports_all_games
+		form.supports_all_games.data = package.supports_all_games and can_support_all_games
 
 		if can_override:
 			manual_supported_games = package.supported_games.filter_by(confidence=11).all()
