@@ -207,7 +207,8 @@ def handle_create_edit(collection: Collection, form: CollectionForm,
 				link.description = form.descriptions[i].data
 
 		for i, package_id in enumerate(form.order.data.split(",")):
-			link_lookup[package_id].order = i + 1
+			if package_id != "":
+				link_lookup[package_id].order = i + 1
 
 		add_audit_log(severity, current_user,
 				f"Edited collection {collection.author.username}/{collection.name}",
