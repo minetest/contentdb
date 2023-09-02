@@ -398,7 +398,7 @@ def user_comments(username):
 	# Filter replies the current user can see
 	query = ThreadReply.query.options(selectinload(ThreadReply.thread)).filter_by(author=user)
 	if current_user != user and not (current_user.is_authenticated and current_user.rank.at_least(UserRank.APPROVER)):
-		if user.username == "ContentDB":
+		if user.username == "ContentDB" or not current_user.is_authenticated:
 			# The ContentDB user simply has too many comments, don't bother checking more than thread privacy
 			query = query.filter(ThreadReply.thread.has(private=False))
 		else:
