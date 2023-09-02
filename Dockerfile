@@ -1,4 +1,4 @@
-FROM python:3.10
+FROM python:3.10.11
 
 RUN groupadd -g 5123 cdb && \
     useradd -r -u 5123 -g cdb cdb
