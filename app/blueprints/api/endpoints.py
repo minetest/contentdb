@@ -77,7 +77,10 @@ def packages():
 		pkgs = [pkg for pkg in pkgs if pkg.get("release")]
 
 	# Promote featured packages
-	if "sort" not in request.args and "order" not in request.args and "q" not in request.args:
+	if "sort" not in request.args and \
+			"order" not in request.args and \
+			"q" not in request.args and \
+			"limit" not in request.args:
 		featured_lut = set()
 		featured = qb.convert_to_dictionary(query.filter(
 			Package.collections.any(and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))).all())
