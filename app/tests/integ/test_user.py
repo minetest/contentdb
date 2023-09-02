@@ -62,22 +62,27 @@ def register(client, username, display_name, password, email, question):
 
 def test_register(client):
 	username = "testuser123"
+	password = "VYjNnjdDPhCVUZx"
 	assert User.query.filter_by(username=username).first() is None
 
 	rv = register(client, username, "Test User", "password", "test@example.com", "13")
+	assert b"Field must be between 12 and 100 characters long." in rv.data
+
+	rv = register(client, username, "Test User", password, "test@example.com", "13")
 	assert b"Incorrect captcha answer" in rv.data
 
-	rv = register(client, "££££!!!", "Test User", "password", "test@example.com", "13")
+	rv = register(client, "££££!!!", "Test User", password, "test@example.com", "13")
 	assert b"invalid-feedback" in rv.data
 	assert b"Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed</p>" in rv.data
 
 
 def test_register_flow(client):
 	username = "testuser123"
+	password = "VYjNnjdDPhCVUZx"
 
 	assert User.query.filter_by(username=username).first() is None
 
-	rv = register(client, username, "Test User", "password", "test@example.com", "19")
+	rv = register(client, username, "Test User", password, "test@example.com", "19")
 	assert b"We've sent an email to the address you specified" in rv.data
 
 	user = User.query.filter_by(username=username).first()
@@ -88,7 +93,7 @@ def test_register_flow(client):
 	assert user.email_confirmed_at is None
 	assert user.email == "test@example.com"
 
-	rv = login(client, username, "password")
+	rv = login(client, username, password)
 	assert b"You need to confirm the registration email" in rv.data
 	assert not is_logged_in(rv)
 
@@ -99,6 +104,6 @@ def test_register_flow(client):
 	assert b"You may now log in" in rv.data
 
 	assert b"Sign out" not in rv.data
-	rv = login(client, username, "password")
+	rv = login(client, username, password)
 	assert b"Sign out" in rv.data
 	assert is_logged_in(rv)
