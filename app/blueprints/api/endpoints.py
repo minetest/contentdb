@@ -21,7 +21,7 @@ from typing import List
 import flask_sqlalchemy
 from flask import request, jsonify, current_app, Response
 from flask_login import current_user, login_required
-from sqlalchemy import and_
+from sqlalchemy import and_, or_
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
@@ -825,4 +825,47 @@ def collection_view(author, name):
 
 	ret = collection.as_dict()
 	ret["items"] = [x.as_dict() for x in items]
+	return jsonify(ret)
+
+
+@bp.route("/api/updates/")
+def updates():
+	protocol_version = get_int_or_abort(request.args.get("protocol_version"))
+	minetest_version = request.args.get("engine_version")
+	if protocol_version or minetest_version:
+		version = MinetestRelease.get(minetest_version, protocol_version)
+	else:
+		version = None
+
+	# Subquery to get the latest release for each package
+	latest_release_query = (db.session.query(
+		PackageRelease.package_id,
+		func.max(PackageRelease.id).label('max_release_id'))
+			.select_from(PackageRelease)
+			.filter(PackageRelease.approved == True))
+
+	if version:
+		latest_release_query = (latest_release_query
+			.filter(or_(PackageRelease.min_rel_id == None,
+				PackageRelease.min_rel_id <= version.id))
+			.filter(or_(PackageRelease.max_rel_id == None,
+				PackageRelease.max_rel_id >= version.id)))
+
+	latest_release_subquery = (
+		latest_release_query
+		.group_by(PackageRelease.package_id)
+		.subquery()
+	)
+
+	# Get package id and latest release
+	query = (db.session.query(User.username, Package.name, latest_release_subquery.c.max_release_id)
+		.select_from(Package)
+		.join(User, Package.author)
+		.join(latest_release_subquery, Package.id == latest_release_subquery.c.package_id)
+		.filter(Package.state == PackageState.APPROVED)).all()
+
+	ret = {}
+	for author_username, package_name, release_id in query:
+		ret[f"{author_username}/{package_name}"] = release_id
+
 	return jsonify(ret)

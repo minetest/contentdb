@@ -209,6 +209,11 @@ Supported query parameters:
             * `author`: author username
             * `name`: technical name
             * `type`: `mod`, `game`, or `txp`
+* GET `/api/updates/` (Look-up table)
+    * Returns a look-up table from package key (`author/name`) to latest release id
+    * Query arguments
+        * `protocol_version`:  Only show packages supported by this Minetest protocol version.
+        * `engine_version`:  Only show packages supported by this Minetest engine version, eg: `5.3.0`.
 * GET `/api/packages/<username>/<name>/releases/` (List)
     * Returns array of release dictionaries, see above, but without package info.
 * GET `/api/packages/<username>/<name>/releases/<id>/` (Read)
