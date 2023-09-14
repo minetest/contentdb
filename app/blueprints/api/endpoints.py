@@ -29,7 +29,8 @@ from app import csrf
 from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_all_package_stats
 from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
-	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread, Collection
+	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread, Collection, \
+	PackageAlias
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
 from . import bp
@@ -862,10 +863,24 @@ def updates():
 		.select_from(Package)
 		.join(User, Package.author)
 		.join(latest_release_subquery, Package.id == latest_release_subquery.c.package_id)
-		.filter(Package.state == PackageState.APPROVED)).all()
+		.filter(Package.state == PackageState.APPROVED)
+		.all())
 
 	ret = {}
 	for author_username, package_name, release_id in query:
 		ret[f"{author_username}/{package_name}"] = release_id
+
+	# Get aliases
+	aliases = (db.session.query(PackageAlias.author, PackageAlias.name, User.username, Package.name)
+		.select_from(PackageAlias)
+		.join(Package, PackageAlias.package)
+		.join(User, Package.author)
+		.filter(Package.state == PackageState.APPROVED)
+		.all())
+
+	for old_author, old_name, new_author, new_name in aliases:
+		new_release = ret.get(f"{new_author}/{new_name}")
+		if new_release is not None:
+			ret[f"{old_author}/{old_name}"] = new_release
 
 	return jsonify(ret)
