@@ -397,13 +397,11 @@ def user_comments(username):
 
 	# Filter replies the current user can see
 	query = ThreadReply.query.options(selectinload(ThreadReply.thread)).filter_by(author=user)
+	only_public = False
 	if current_user != user and not (current_user.is_authenticated and current_user.rank.at_least(UserRank.APPROVER)):
-		if user.username == "ContentDB" or not current_user.is_authenticated:
-			# The ContentDB user simply has too many comments, don't bother checking more than thread privacy
-			query = query.filter(ThreadReply.thread.has(private=False))
-		else:
-			query = query.filter(or_(ThreadReply.thread.has(private=False), Thread.watchers.contains(current_user)))
+		query = query.filter(ThreadReply.thread.has(private=False))
+		only_public = True
 
 	pagination = query.order_by(db.desc(ThreadReply.created_at)).paginate(page=page, per_page=num)
 
-	return render_template("threads/user_comments.html", user=user, pagination=pagination)
+	return render_template("threads/user_comments.html", user=user, pagination=pagination, only_public=only_public)

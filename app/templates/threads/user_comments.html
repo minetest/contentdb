@@ -67,6 +67,12 @@
 	</ul>
 
 	{{ render_pagination(pagination, url_set_query) }}
+
+	{% if only_public %}
+		<p class="mt-5 text-muted">
+			{{ _("Only showing replies to public threads") }}
+		</p>
+	{% endif %}
 {% else %}
 	<p>
 		<i>
