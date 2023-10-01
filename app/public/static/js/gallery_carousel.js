@@ -10,3 +10,4 @@ document.querySelectorAll(".gallery-image").forEach(el => {
 		e.preventDefault();
 	});
 });
+
