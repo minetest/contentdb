@@ -365,6 +365,8 @@ class Package(db.Model):
 	search_vector = db.Column(TSVectorType("name", "title", "short_desc", "desc",
 			weights={ "name": "A", "title": "B", "short_desc": "C" }))
 
+	__table_args__ = (db.UniqueConstraint("author_id", "name", name="_package_uc"),)
+
 	license_id   = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
 	license      = db.relationship("License", foreign_keys=[license_id])
 	media_license_id = db.Column(db.Integer, db.ForeignKey("license.id"), nullable=False, default=1)
