@@ -7,13 +7,14 @@
 {% block content %}
 	<h2>Transfer Package(s)</h2>
 
-	{% from "macros/forms.html" import render_field, render_submit_field %}
+	{% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
 	<form method="POST" action="">
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.old_username) }}
-        {{ render_field(form.new_username) }}
-        {{ render_field(form.package, hint="Leave blank to transfer all packages") }}
+		{{ render_field(form.new_username) }}
+		{{ render_field(form.package, hint="Leave blank to transfer all packages") }}
+		{{ render_checkbox_field(form.remove_maintainer, class_="mb-5") }}
 		{{ render_submit_field(form.submit) }}
 	</form>
 {% endblock %}

@@ -17,7 +17,7 @@
 from flask import redirect, render_template, url_for, request, flash
 from flask_login import current_user, login_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField
+from wtforms import StringField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, Optional
 from app.utils import rank_required, add_audit_log, add_notification, get_system_user, nonempty_or_none
 from . import bp
@@ -124,6 +124,7 @@ class TransferPackageForm(FlaskForm):
 	old_username = StringField("Old Username", [InputRequired()])
 	new_username = StringField("New Username", [InputRequired()])
 	package = StringField("Package", [Optional()])
+	remove_maintainer = BooleanField("Remove current owner from maintainers")
 	submit = SubmitField("Transfer")
 
 
@@ -150,6 +151,8 @@ def perform_transfer(form: TransferPackageForm):
 		return
 
 	for package in packages:
+		if form.remove_maintainer.data:
+			package.maintainers.remove(package.author)
 		package.author = new_user
 		package.maintainers.append(new_user)
 		package.aliases.append(PackageAlias(form.old_username.data, package.name))
