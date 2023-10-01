@@ -19,6 +19,8 @@ import inspect
 import os
 import sys
 
+
+
 if not "FLASK_CONFIG" in os.environ:
 	os.environ["FLASK_CONFIG"] = "../config.cfg"
 
@@ -37,14 +39,16 @@ from app.default_data import populate, populate_test_data
 if delete_db and os.path.isfile("db.sqlite"):
 	os.remove("db.sqlite")
 
-if create_db:
-	print("Creating database tables...")
-	db.create_all()
+from app import app
+with app.app_context():
+	if create_db:
+		print("Creating database tables...")
+		db.create_all()
 
-print("Filling database...")
+	print("Filling database...")
 
-populate(db.session)
-if test_data:
-	populate_test_data(db.session)
+	populate(db.session)
+	if test_data:
+		populate_test_data(db.session)
 
-db.session.commit()
+	db.session.commit()
