@@ -478,6 +478,10 @@ def remove(package):
 		add_audit_log(AuditSeverity.EDITOR, current_user, msg, url, package)
 		db.session.commit()
 
+		post_discord_webhook.delay(current_user.username,
+			f"Deleted package {package.author.username}/{package.name} with reason '{reason}'",
+			True, package.title, package.short_desc, package.get_thumb_url(2, True))
+
 		flash(gettext("Deleted package"), "success")
 
 		return redirect(url)
@@ -493,6 +497,10 @@ def remove(package):
 		add_audit_log(AuditSeverity.EDITOR, current_user, msg, package.get_url("packages.view"), package)
 
 		db.session.commit()
+
+		post_discord_webhook.delay(current_user.username,
+			"Unapproved package with reason {}\n\n{}".format(reason, package.get_url("packages.view", absolute=True)), True,
+			package.title, package.short_desc, package.get_thumb_url(2, True))
 
 		flash(gettext("Unapproved package"), "success")
 
