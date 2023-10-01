@@ -142,6 +142,13 @@ def perform_transfer(form: TransferPackageForm):
 		flash("Unable to find new user", "danger")
 		return
 
+	names = [x.name for x in packages]
+	already_existing = Package.query.filter(Package.author_id == new_user.id, Package.name.in_(names)).all()
+	if len(already_existing) > 0:
+		existing_names = [x.name for x in already_existing]
+		flash("Unable to transfer packages as names exist at destination: " + ", ".join(existing_names), "danger")
+		return
+
 	for package in packages:
 		package.author = new_user
 		package.maintainers.append(new_user)
