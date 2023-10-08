@@ -24,11 +24,11 @@ const annotationNov5 = {
 	borderColor: annotationColor,
 	borderWidth: 1,
 	click: function({chart, element}) {
-		document.location = "https://fosstodon.org/@rubenwardy/109303281233703275";
+		document.location = "https://blog.rubenwardy.com/2022/12/08/contentdb-youtuber-finds-minetest/";
 	},
 	label: {
 		backgroundColor: annotationLabelBgColor,
-		content: "YouTube Video",
+		content: "YouTube Video 🡕",
 		display: true,
 		position: "end",
 		color: "#00bc8c",
