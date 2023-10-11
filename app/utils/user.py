@@ -42,7 +42,7 @@ def post_login(user: User, next_url):
 		return redirect(next_url)
 
 	if not current_user.password:
-		return redirect(url_for("users.set_password", optional=True))
+		return redirect(url_for("users.set_password"))
 
 	notif_count = len(user.notifications)
 	if notif_count > 0:

@@ -308,7 +308,7 @@ def set_password():
 		if ret:
 			return ret
 
-	return render_template("users/change_set_password.html", form=form, optional=request.args.get("optional"))
+	return render_template("users/change_set_password.html", form=form)
 
 
 @bp.route("/user/verify/")
