@@ -69,7 +69,7 @@
 			{{ render_field(form.title, class_="pkg_meta col-sm-5") }}
 			{% if package and package.approved and not package.check_perm(current_user, "CHANGE_NAME") %}
 				{{ render_field(form.name, class_="pkg_meta col-sm-4",
-					readonly=True, hint=_("Please open a thread to request a name change")) }}
+					readonly=True, hint=_("You need to unpublish the package to change the name.")) }}
 			{% else %}
 				{{ render_field(form.name, class_="pkg_meta col-sm-4", pattern="[a-z0-9_]+", title=_("Lower case letters (a-z), digits (0-9), and underscores (_) only")) }}
 			{% endif %}

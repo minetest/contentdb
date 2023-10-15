@@ -682,9 +682,9 @@ class Package(db.Model):
 		elif perm == Permission.APPROVE_RELEASE:
 			return (is_maintainer or is_approver) and user.rank.at_least(UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER)
 
-		# Anyone can change the package name when not approved, but only editors when approved
+		# Anyone can change the package name when not approved
 		elif perm == Permission.CHANGE_NAME:
-			return not self.approved or user.rank.at_least(UserRank.EDITOR)
+			return not self.approved
 
 		# Editors can change authors and approve new packages
 		elif perm == Permission.APPROVE_NEW or perm == Permission.CHANGE_AUTHOR:
