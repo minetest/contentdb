@@ -250,9 +250,9 @@
 				{% endif %}
 
 				{% if screenshots or package.check_perm(current_user, "ADD_SCREENSHOTS") or package.video_url %}
-					{% if screenshots or package.check_perm(current_user, "ADD_SCREENSHOTS") %}
+					{% if screenshots %}
 						<div class="modal fade" id="galleryModal" tabindex="-1" role="dialog" aria-hidden="true">
-							<div class="modal-dialog modal-lg">
+							<div class="modal-dialog modal-xl">
 								<div class="modal-content">
 									<div class="modal-body">
 										<div id="galleryCarousel" class="carousel slide">
