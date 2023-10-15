@@ -64,7 +64,7 @@ def get_package_tabs(user: User, package: Package):
 		},
 		{
 			"id": "remove",
-			"title": gettext("Remove"),
+			"title": gettext("Remove / Unpublish"),
 			"url": package.get_url("packages.remove")
 		}
 	]

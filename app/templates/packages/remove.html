@@ -44,7 +44,7 @@ Remove {{ package.title }}
 		<input type="submit" name="delete" value="{{ _('Remove') }}" class="btn btn-danger me-2" />
 
 		{% if package.approved %}
-			<input type="submit" name="unapprove" value="{{ _('Unapprove') }}" class="btn btn-warning" />
+			<input type="submit" name="unapprove" value="{{ _('Unpublish') }}" class="btn btn-warning" />
 		{% endif %}
 	</form>
 {% endblock %}
