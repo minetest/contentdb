@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-08-27 13:14+0100\n"
-"PO-Revision-Date: 2023-05-27 15:51+0000\n"
+"PO-Revision-Date: 2023-09-26 14:02+0000\n"
 "Last-Translator: nyommer <jishnu.ifeoluwa@fullangle.org>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/hu/>\n"
 "Language: hu\n"
-"Language-Team: Hungarian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/hu/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.1-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -79,11 +80,11 @@ msgstr "Cím"
 #: app/blueprints/collections/__init__.py:79
 #: app/blueprints/collections/__init__.py:83
 msgid "Short Description"
-msgstr ""
+msgstr "Rövid leírás"
 
 #: app/blueprints/collections/__init__.py:80
 msgid "Page Content"
-msgstr ""
+msgstr "Oldal tartalma"
 
 #: app/blueprints/collections/__init__.py:81
 #: app/blueprints/threads/__init__.py:282
@@ -93,31 +94,31 @@ msgstr "Privát"
 
 #: app/blueprints/collections/__init__.py:151
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "Egy kollekció már létezik ezen a néven"
 
 #: app/blueprints/collections/__init__.py:157
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "Nem lehet kollekciót létrehozni, mivel már létezik ilyen nevű csomag"
 
 #: app/blueprints/collections/__init__.py:279
 msgid "Added package to collection"
-msgstr ""
+msgstr "csomag hozzáadva a kollekcióhoz"
 
 #: app/blueprints/collections/__init__.py:281
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Csomag eltávolítása a kollekciótól"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Csomag hozzáadva a kedvenc kollekcióhoz"
 
 #: app/blueprints/collections/__init__.py:308
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "(Nyilvános, módosítás a Profil &gt; Saját gyűjteményeim)"
 
 #: app/blueprints/collections/__init__.py:312
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Csomag törölve a kedvenc kollekcióból"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -281,7 +282,6 @@ msgid "Donate URL"
 msgstr "Támogatási URL"
 
 #: app/blueprints/packages/packages.py:278
-#, fuzzy
 msgid "_game is not an allowed name"
 msgstr "A _game nem engedélyezett név"
 
@@ -299,7 +299,7 @@ msgstr "A csomag már létezik"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "Egy kollekció ezen a néven már létezik"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -359,15 +359,15 @@ msgstr ""
 
 #: app/blueprints/packages/packages.py:671
 msgid "Supported games"
-msgstr ""
+msgstr "Támogatott játékok"
 
 #: app/blueprints/packages/packages.py:672
 msgid "Unsupported games"
-msgstr ""
+msgstr "Nem támogatott játékok"
 
 #: app/blueprints/packages/packages.py:673
 msgid "Supports all games (unless stated) / is game independent"
-msgstr ""
+msgstr "Támogatja az összes játékot (hacsak nincs feltüntetve) / játékfüggetlen"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -504,9 +504,8 @@ msgstr "Igen"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:124
 #: app/templates/macros/reviews.html:177
-#, fuzzy
 msgid "Neutral"
-msgstr "Neutrális"
+msgstr "Semleges"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:129
 #: app/templates/macros/reviews.html:181
@@ -529,7 +528,6 @@ msgstr ""
 #: app/blueprints/threads/__init__.py:239
 #: app/blueprints/threads/__init__.py:333 app/blueprints/users/settings.py:105
 #: app/logic/packages.py:131
-#, fuzzy
 msgid "Linking to blocked sites is not allowed"
 msgstr "Linkek amik blokkolt oldalakra vezetnek nem engedélyezett"
 
@@ -613,7 +611,7 @@ msgstr "Kérjük, várjon, mielőtt újabb témát nyitna"
 #: app/blueprints/todo/user.py:192
 #: app/templates/collections/package_add_to.html:46
 msgid "Done"
-msgstr ""
+msgstr "Kész"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
@@ -1032,9 +1030,8 @@ msgstr "Meg kell adnia legalább egy képernyőképet."
 
 #: app/logic/package_validator.py:54
 #: app/templates/macros/package_approval.html:49
-#, fuzzy
 msgid "Please wait for the license to be added to CDB."
-msgstr "Kérjük várjon, amíg a licensz/engedély megjelenik a ContentDB-n"
+msgstr "Kérjük várjon, amíg a licensz/engedély megjelenik a ContentDB-n."
 
 #: app/logic/packages.py:98
 msgid ""
@@ -1097,9 +1094,8 @@ msgid "Uploaded image isn't actually an image"
 msgstr "A feltöltött kép valójában nem kép"
 
 #: app/models/packages.py:67
-#, fuzzy
 msgid "Mod"
-msgstr "Modifikáció \"Mod\""
+msgstr "Kiegészítő(mod)"
 
 #: app/models/packages.py:69
 msgid "Game"
@@ -1239,10 +1235,9 @@ msgstr "Profil"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "Én kollekcióm"
 
 #: app/templates/base.html:163
-#, fuzzy
 msgid "Admin"
 msgstr "Admin"
 
@@ -1305,16 +1300,16 @@ msgstr "Felhasználó lista"
 #: app/templates/base.html:266 app/templates/packages/view.html:197
 #: app/templates/packages/view.html:631 app/templates/threads/list.html:4
 msgid "Threads"
-msgstr ""
+msgstr "Szálak"
 
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "Kollekciók"
 
 #: app/templates/base.html:268
 msgid "Support Packages"
-msgstr ""
+msgstr "Támogatott csomagok"
 
 #: app/templates/base.html:269
 msgid "Source Code"
@@ -1327,6 +1322,8 @@ msgstr "Üdv"
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
+"Üdv a legjobb helyen a minetest kiegészítők játékok és textúra csomagok "
+"megtalálásához"
 
 #: app/templates/collections/create_edit.html:66
 #: app/templates/collections/list.html:39
@@ -1341,7 +1338,7 @@ msgstr "%(title)skészitő:%(author)s"
 #: app/templates/index.html:53
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
-msgstr ""
+msgstr "%(title)s by %(author)s"
 
 #: app/templates/index.html:77 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:201 app/templates/packages/view.html:302
@@ -1358,7 +1355,6 @@ msgid "Next"
 msgstr "Következő"
 
 #: app/templates/index.html:106
-#, fuzzy
 msgid "Featured"
 msgstr "Kiemelt"
 
@@ -1386,9 +1382,8 @@ msgid "Top Games"
 msgstr "Legjobb játékok"
 
 #: app/templates/index.html:134 app/templates/packages/game_hub.html:46
-#, fuzzy
 msgid "Top Mods"
-msgstr "Legjobb modifikációk \"Modok\""
+msgstr "Legjobb kiegészítók (modok)"
 
 #: app/templates/index.html:141 app/templates/packages/game_hub.html:53
 msgid "Top Texture Packs"
@@ -1416,11 +1411,11 @@ msgstr ""
 #: app/templates/admin/audit_view.html:16
 #, python-format
 msgid "Caused by %(author)s."
-msgstr ""
+msgstr "%(author)s okozta."
 
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
-msgstr ""
+msgstr "Törölt játékos okozta."
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
@@ -1474,15 +1469,16 @@ msgstr "Új figyelmeztetés"
 #: app/templates/api/create_edit_token.html:5
 #, python-format
 msgid "Edit - %(name)s"
-msgstr ""
+msgstr "Szerkeztés - %(name)s"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
-msgstr ""
+msgstr "API token létrehozása"
 
 #: app/templates/api/create_edit_token.html:24
 msgid "API Tokens allow scripts to act on your behalf."
 msgstr ""
+"Az API-tokenek lehetővé teszik, hogy a szkriptek az Ön nevében cselekedjenek."
 
 #: app/templates/api/create_edit_token.html:25
 msgid ""
@@ -4434,4 +4430,3 @@ msgstr ""
 
 #~ msgid "Must be at least 8 characters long."
 #~ msgstr ""
-
