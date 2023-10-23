@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-08-27 13:14+0100\n"
-"PO-Revision-Date: 2023-07-17 12:04+0000\n"
-"Last-Translator: John Donne <akheron@zaclys.net>\n"
+"PO-Revision-Date: 2023-10-23 21:06+0000\n"
+"Last-Translator: Lemente <crafted.by.lemente@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.1.1-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -79,7 +80,7 @@ msgstr "Titre"
 #: app/blueprints/collections/__init__.py:79
 #: app/blueprints/collections/__init__.py:83
 msgid "Short Description"
-msgstr ""
+msgstr "Description courte"
 
 #: app/blueprints/collections/__init__.py:80
 msgid "Page Content"
@@ -93,23 +94,23 @@ msgstr "Privé"
 
 #: app/blueprints/collections/__init__.py:151
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "Une collection avec un titre similaire existe déjà"
 
 #: app/blueprints/collections/__init__.py:157
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "Impossible ce créer la collection car un paquet avec ce nom existe déjà"
 
 #: app/blueprints/collections/__init__.py:279
 msgid "Added package to collection"
-msgstr ""
+msgstr "Paquet ajouté à la collection"
 
 #: app/blueprints/collections/__init__.py:281
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Paquet retiré de la collection"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Paquet ajouté à la collection favoris"
 
 #: app/blueprints/collections/__init__.py:308
 msgid "(Public, change from Profile > My Collections)"
@@ -117,7 +118,7 @@ msgstr ""
 
 #: app/blueprints/collections/__init__.py:312
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Paquet retiré de la collection favoris"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -302,7 +303,7 @@ msgstr "Le paquet existe déjà"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "Une collection avec un nom similaire existe déjà"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -1246,7 +1247,7 @@ msgstr "Profil"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "Mes collections"
 
 #: app/templates/base.html:163
 msgid "Admin"
@@ -1316,9 +1317,10 @@ msgstr "Fils"
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "Collections"
 
 #: app/templates/base.html:268
+#, fuzzy
 msgid "Support Packages"
 msgstr "Paquets pris en charge"
 
@@ -1552,28 +1554,28 @@ msgstr "Modifier"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "Nouvelle Collection"
 
 #: app/templates/collections/create_edit.html:30
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "Les utilisateurs ne seront pas redirigés en utilisant l'ancienne URL"
 
 #: app/templates/collections/create_edit.html:46
 msgid "No results"
-msgstr ""
+msgstr "Pas de résultat"
 
 #: app/templates/collections/create_edit.html:74
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "Vous pouvez remplacer la description"
 
 #: app/templates/collections/create_edit.html:88
 msgid "Are you sure you want to remove {title}?"
-msgstr ""
+msgstr "Êtes-vous sûr de vouloir supprimer {title} ?"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Supprimer la collection \"%(title)s\" par %(author)s"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
@@ -1594,39 +1596,42 @@ msgstr "Annuler"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "Collections de %(author)s"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "Pas de collections"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "Ajouter %(package_title)s à la collection"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "Créer une collection"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "Vous n'avez aucune collection"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "Faire une copie"
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr ""
+msgstr "Une collection par %(author)s"
 
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
+"Pour ajouter un paquet, allez sur la page du paquet et cliquez sur \"Ajouter "
+"à une collection\""
 
 #: app/templates/donate/index.html:4
+#, fuzzy
 msgid "Support packages"
 msgstr "Paquets pris en charge"
 
@@ -1657,13 +1662,14 @@ msgstr "Faire un don"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "Basé sur vos évaluations / favoris"
 
 #: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
 msgstr ""
+"Aucun paquet évalué n'accepte de dons. Pensez à évaluer vos paquets favoris"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
@@ -1973,7 +1979,7 @@ msgstr "Créer l'évaluation"
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr ""
+msgstr "Signaler un problème"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -2384,7 +2390,7 @@ msgstr "Importation... (Cela peut prendre un certain temps)"
 
 #: app/templates/packages/create_edit.html:110
 msgid "Where should users report issues?"
-msgstr ""
+msgstr "Où les utilisateurs devraient-ils signaler les problèmes ?"
 
 #: app/templates/packages/create_edit.html:114
 msgid "Paste a forum topic URL"
@@ -2500,12 +2506,15 @@ msgstr ""
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
 msgstr ""
+"Les packs de textures ne peuvent pas être compatible avec tout les jeux."
 
 #: app/templates/packages/game_support.html:105
 msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
 msgstr ""
+"Le paquet dépend d'un mod spécifique à un jeu, et ne peut donc pas être "
+"compatible avec tout les jeux."
 
 #: app/templates/packages/game_support.html:111
 msgid "Overrides"
@@ -2531,7 +2540,6 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:119
 #: app/templates/packages/game_support.html:120
-#, fuzzy
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
 msgstr "Noms de jeu séparés par des virgules, ex : minetest_game, nodecore"
 
@@ -3193,7 +3201,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:364
 msgid "Add to collection..."
-msgstr ""
+msgstr "Ajouter à la collection ..."
 
 #: app/templates/packages/view.html:374
 msgid "Package may be outdated"
@@ -3246,6 +3254,7 @@ msgstr ""
 #: app/templates/packages/view.html:509
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
+"Vous devez soit confirmer ceci ou lister les jeux compatibles sur ContentDB"
 
 #: app/templates/packages/view.html:521
 msgid "Does not work with:"
@@ -3501,22 +3510,28 @@ msgstr ""
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
 msgstr ""
+"Lister les jeux compatibles permet aux joueurs de trouver votre contenu plus "
+"facilement."
 
 #: app/templates/todo/game_support.html:13
 msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
 msgstr ""
+"Si votre paquet ne dépend pas d'un jeu, confirmez-le en cochant \"Compatible "
+"avec tout les jeux\""
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
-msgstr ""
+msgstr "Compatible avec tout les jeux"
 
 #: app/templates/todo/game_support.html:51
 msgid ""
 "No supported games listed. Please either add supported games or check "
 "'Supports all games'"
 msgstr ""
+"Pas de jeu compatible listé. Merci d'ajouter des jeux compatibles, ou de "
+"cocher \"Compatible avec tout les jeux\""
 
 #: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
@@ -3536,7 +3551,7 @@ msgstr ""
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
-msgstr ""
+msgstr "Confirmer"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
@@ -3822,7 +3837,7 @@ msgstr "Votre adresse électronique ne sera jamais partagée avec un tiers."
 #: app/templates/users/change_set_password.html:36
 #: app/templates/users/register.html:27
 msgid "Must be at least 12 characters long."
-msgstr ""
+msgstr "Doit-être composé d'au moins 12 caractères."
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
@@ -4092,7 +4107,7 @@ msgstr "paquets"
 
 #: app/templates/users/profile.html:123
 msgid "collections"
-msgstr ""
+msgstr "collections"
 
 #: app/templates/users/profile.html:132
 msgid "reviews"
@@ -4117,11 +4132,11 @@ msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:220
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alphabétique"
 
 #: app/templates/users/profile.html:228
 msgid "Newest"
-msgstr ""
+msgstr "Plus récents"
 
 #: app/templates/users/profile.html:234
 msgid "View list of tags"
@@ -4682,4 +4697,3 @@ msgstr ""
 
 #~ msgid "Must be at least 8 characters long."
 #~ msgstr "Doit comporter au moins 8 caractères."
-
