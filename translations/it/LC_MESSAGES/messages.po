@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-08-27 13:14+0100\n"
-"PO-Revision-Date: 2023-08-24 23:55+0000\n"
+"PO-Revision-Date: 2023-09-11 12:54+0000\n"
 "Last-Translator: Giov4 <brancacciogiovanni1@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.0.1-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -79,11 +80,11 @@ msgstr "Titolo"
 #: app/blueprints/collections/__init__.py:79
 #: app/blueprints/collections/__init__.py:83
 msgid "Short Description"
-msgstr ""
+msgstr "Breve Descrizione"
 
 #: app/blueprints/collections/__init__.py:80
 msgid "Page Content"
-msgstr ""
+msgstr "Contenuto Pagina"
 
 #: app/blueprints/collections/__init__.py:81
 #: app/blueprints/threads/__init__.py:282
@@ -93,31 +94,32 @@ msgstr "Privato"
 
 #: app/blueprints/collections/__init__.py:151
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "Esiste già una raccolta con un titolo simile"
 
 #: app/blueprints/collections/__init__.py:157
 msgid "Unable to create collection as a package with that name already exists"
 msgstr ""
+"Impossibile creare la raccolta perché esiste già un pacchetto con quel nome"
 
 #: app/blueprints/collections/__init__.py:279
 msgid "Added package to collection"
-msgstr ""
+msgstr "Pacchetto aggiunto alla raccolta"
 
 #: app/blueprints/collections/__init__.py:281
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Pacchetto rimosso dalla raccolta"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Pacchetto aggiunto alla raccolta dei preferiti"
 
 #: app/blueprints/collections/__init__.py:308
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "(Pubblico, cambia da Profilo &gt; Le mie collezioni)"
 
 #: app/blueprints/collections/__init__.py:312
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Pacchetto rimosso dalla raccolta dei preferiti"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -300,7 +302,7 @@ msgstr "Il contenuto esiste già"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "Esiste già una raccolta con un nome simile"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -360,15 +362,17 @@ msgstr "Abilita il rilevamento del supporto in base alle dipendenze (consigliato
 
 #: app/blueprints/packages/packages.py:671
 msgid "Supported games"
-msgstr ""
+msgstr "Giochi supportati"
 
 #: app/blueprints/packages/packages.py:672
 msgid "Unsupported games"
-msgstr ""
+msgstr "Giochi non supportati"
 
 #: app/blueprints/packages/packages.py:673
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
+"Supporta tutti i giochi (se non diversamente specificato) / è indipendente "
+"dal gioco"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -615,7 +619,7 @@ msgstr "Aspetta prima di iniziare una nuova discussione, per favore"
 #: app/blueprints/todo/user.py:192
 #: app/templates/collections/package_add_to.html:46
 msgid "Done"
-msgstr ""
+msgstr "Fatto"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
@@ -1244,7 +1248,7 @@ msgstr "Profilo"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "Le Mie Raccolte"
 
 #: app/templates/base.html:163
 msgid "Admin"
@@ -1314,7 +1318,7 @@ msgstr "Discussioni"
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "Raccolte"
 
 #: app/templates/base.html:268
 msgid "Support Packages"
@@ -1548,28 +1552,28 @@ msgstr "Modifica"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "Nuova Raccolta"
 
 #: app/templates/collections/create_edit.html:30
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "Lɜ utenti non verranno reindirizzatɜ quando accederanno al vecchio URL"
 
 #: app/templates/collections/create_edit.html:46
 msgid "No results"
-msgstr ""
+msgstr "Nessun risultato"
 
 #: app/templates/collections/create_edit.html:74
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "È possibile sostituire la descrizione con una propria"
 
 #: app/templates/collections/create_edit.html:88
 msgid "Are you sure you want to remove {title}?"
-msgstr ""
+msgstr "Sei sicuro di voler rimuovere {title}?"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Elimina la raccolta \"%(title)s\" di %(author)s"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
@@ -1590,37 +1594,39 @@ msgstr "Annulla"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "Raccolta di %(author)s"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "Nessuna raccolta"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "Aggiungi %(package_title)s a una raccolta"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "Crea Raccolta"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "Non hai alcuna raccolta"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "Crea una copia"
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr ""
+msgstr "Una raccolta di %(author)s"
 
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
+"Per aggiungere un pacchetto, vai alla pagina del pacchetto e fai clic su "
+"\"Aggiungi alla raccolta\""
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1653,7 +1659,7 @@ msgstr "Dona"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "In base alle tue recensioni / preferiti"
 
 #: app/templates/donate/index.html:67
 msgid ""
@@ -1969,7 +1975,7 @@ msgstr "Pubblica una Recensione"
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr ""
+msgstr "Segnala un problema"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -1990,11 +1996,11 @@ msgstr "Scaricamenti, ultimi 30 giorni"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr ""
+msgstr "Scaricamenti da $1 a $2"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr ""
+msgstr "$1 al giorno"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -4470,4 +4476,3 @@ msgstr ""
 
 #~ msgid "Must be at least 8 characters long."
 #~ msgstr "Deve essere lunga almeno 8 caratteri."
-
