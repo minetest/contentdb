@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-08-27 13:14+0100\n"
-"PO-Revision-Date: 2023-06-22 07:32+0000\n"
-"Last-Translator: Robinson <simekm@yahoo.com>\n"
+"PO-Revision-Date: 2023-10-08 16:02+0000\n"
+"Last-Translator: Matyáš Pilz <matys.pilz@gmail.com>\n"
+"Language-Team: Czech <https://hosted.weblate.org/projects/minetest/contentdb/"
+"cs/>\n"
 "Language: cs\n"
-"Language-Team: Czech "
-"<https://hosted.weblate.org/projects/minetest/contentdb/cs/>\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Weblate 5.1-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -79,11 +80,11 @@ msgstr "Titulek"
 #: app/blueprints/collections/__init__.py:79
 #: app/blueprints/collections/__init__.py:83
 msgid "Short Description"
-msgstr ""
+msgstr "Stručný popis"
 
 #: app/blueprints/collections/__init__.py:80
 msgid "Page Content"
-msgstr ""
+msgstr "Strana nabídky"
 
 #: app/blueprints/collections/__init__.py:81
 #: app/blueprints/threads/__init__.py:282
@@ -93,23 +94,23 @@ msgstr "Soukromý"
 
 #: app/blueprints/collections/__init__.py:151
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "Již existuje kolekce se stejným názvem"
 
 #: app/blueprints/collections/__init__.py:157
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "Nelze kolekci uložit jako balíček, jehož jméno již existuje"
 
 #: app/blueprints/collections/__init__.py:279
 msgid "Added package to collection"
-msgstr ""
+msgstr "Balíček byl přidán do kolekce"
 
 #: app/blueprints/collections/__init__.py:281
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Balíček byl odebrán z kolekce"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Balíček byl přidán mezi oblíbené kolekce"
 
 #: app/blueprints/collections/__init__.py:308
 msgid "(Public, change from Profile > My Collections)"
@@ -117,7 +118,7 @@ msgstr ""
 
 #: app/blueprints/collections/__init__.py:312
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Balíček byl odebrán z oblíbených kolekcí"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -298,7 +299,7 @@ msgstr "Balíček již existuje"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "Již existuje kolekce se stejným názvem"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -929,7 +930,7 @@ msgstr "&gt;50k stažení"
 #: app/blueprints/users/profile.py:206
 #, python-format
 msgid "Has received %(downloads)d downloads across all packages."
-msgstr ""
+msgstr "Celkem bylo staženo %(downloads)d tvých balíčků."
 
 #: app/blueprints/users/settings.py:36 app/templates/users/profile.html:26
 #: app/templates/users/profile_edit.html:8
@@ -938,12 +939,12 @@ msgstr "Upravit profil"
 
 #: app/blueprints/users/settings.py:41 app/templates/users/account.html:12
 msgid "Account and Security"
-msgstr ""
+msgstr "Správa účtu a zabezpečení"
 
 #: app/blueprints/users/settings.py:46
 #: app/templates/users/settings_email.html:8
 msgid "Email and Notifications"
-msgstr ""
+msgstr "Emaily a upozornění"
 
 #: app/blueprints/users/settings.py:51 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
@@ -960,11 +961,11 @@ msgstr "URL pro darování"
 
 #: app/blueprints/users/settings.py:85 app/blueprints/users/settings.py:92
 msgid "A user already has that name"
-msgstr ""
+msgstr "Uvedené jméno již má jiný uživatel"
 
 #: app/blueprints/users/settings.py:249
 msgid "Users with moderator rank or above cannot be deleted"
-msgstr ""
+msgstr "Nelze odstranit uživatele s postavením moderátor nebo vyšší"
 
 #: app/blueprints/users/settings.py:292
 msgid "Display name"
@@ -984,7 +985,7 @@ msgstr "Postavení"
 
 #: app/blueprints/users/settings.py:339
 msgid "Can't promote a user to a rank higher than yourself!"
-msgstr ""
+msgstr "Nelze uživateli udělit vyšší postavení, než je tvé!"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "Text to find (regex)"
@@ -1001,12 +1002,12 @@ msgstr "Vyhledat"
 
 #: app/logic/package_validator.py:37
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
-msgstr ""
+msgstr "Již existuje balíček s uvedeným jménem."
 
 #: app/logic/package_validator.py:40
 #: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
-msgstr ""
+msgstr "Je třeba uvést verzi, aby bylo možné balíček schválit."
 
 #: app/logic/package_validator.py:46
 #: app/templates/macros/package_approval.html:45
@@ -1019,7 +1020,7 @@ msgstr ""
 #: app/logic/package_validator.py:51
 #: app/templates/macros/package_approval.html:41
 msgid "You need to add at least one screenshot."
-msgstr ""
+msgstr "Je třeba přiložit alespoń jeden snímek obrazovky."
 
 #: app/logic/package_validator.py:54
 #: app/templates/macros/package_approval.html:49
@@ -1031,24 +1032,28 @@ msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr ""
+"Jméno může obsahovat jedině malá písmena bez diakritiky (a-z), číslice (0-9) "
+"a podtržítko (_)"
 
 #: app/logic/packages.py:112
 msgid "You don't have permission to edit this package"
-msgstr ""
+msgstr "Nemáš oprávnění měnit tento balíček"
 
 #: app/logic/packages.py:116
 msgid "You don't have permission to change the package name"
-msgstr ""
+msgstr "Nemáš oprávnění měnit název tohoto balíčku"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr ""
+msgstr "Nemáš oprávnění vytvářet další verze"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
+"Vytvořil jsi příliš mnoho verzí tohoto balíčku v posledních 5 minutách, "
+"prosím, vyčkej chvíli, než to zkusíš znovu"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
@@ -1056,11 +1061,11 @@ msgstr ""
 
 #: app/logic/screenshots.py:32
 msgid "Too many requests, please wait before trying again"
-msgstr ""
+msgstr "Příliš mnoho pokusů, počkej chvíli, než to zkusíš znovu"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "obrázek ve formátu PNG nebo JPG"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1068,15 +1073,17 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
+"Snímek obrazovky je příliš malý, měl by být široký alespoň %(width)s a "
+"vysoký alespoň %(height)s pixelů"
 
 #: app/logic/uploads.py:55
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr ""
+msgstr "Prosím, přilož popis souboru %(file_desc)s"
 
 #: app/logic/uploads.py:58
 msgid "Uploaded image isn't actually an image"
-msgstr ""
+msgstr "Přiložený obrázek nemá vhodný formát obrázku"
 
 #: app/models/packages.py:67
 msgid "Mod"
@@ -1127,7 +1134,7 @@ msgstr "Vymazat"
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
-msgstr ""
+msgstr "Dostal jsi tento email, neboť jsi uživetelm registrovaným na ContentDB."
 
 #: app/tasks/emails.py:125 app/templates/emails/verify.html:30
 msgid ""
@@ -2049,7 +2056,7 @@ msgstr ""
 
 #: app/templates/macros/threads.html:181
 msgid "You can add someone to a private thread by writing @username."
-msgstr ""
+msgstr "Můžeš kohokoliv přizvat do soukromého vlákna pomocí @username."
 
 #: app/templates/macros/threads.html:199 app/templates/macros/threads.html:281
 msgid "No threads found"
@@ -2085,7 +2092,7 @@ msgstr "Aktualizovat nastavení"
 
 #: app/templates/macros/todo.html:55 app/templates/macros/todo.html:85
 msgid "No outdated packages."
-msgstr ""
+msgstr "Žádné zastaralé balíčky."
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:184
 msgid "Author"
@@ -2123,12 +2130,12 @@ msgstr "Názvy modů"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "Nenalezen mod uvedeného jména."
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Mod názvu \"%(name)s\""
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
@@ -2154,7 +2161,7 @@ msgstr "Požadované"
 
 #: app/templates/modnames/view.html:38
 msgid "Optionally Used By"
-msgstr ""
+msgstr "Použití doporučeno od"
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
@@ -4254,4 +4261,3 @@ msgstr ""
 
 #~ msgid "Must be at least 8 characters long."
 #~ msgstr ""
-
