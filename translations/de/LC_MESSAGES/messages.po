@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-08-27 13:14+0100\n"
-"PO-Revision-Date: 2023-08-18 06:46+0000\n"
+"PO-Revision-Date: 2023-10-07 08:11+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
+"contentdb/de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.1-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -79,11 +80,11 @@ msgstr "Titel"
 #: app/blueprints/collections/__init__.py:79
 #: app/blueprints/collections/__init__.py:83
 msgid "Short Description"
-msgstr ""
+msgstr "Kurze Beschreibung"
 
 #: app/blueprints/collections/__init__.py:80
 msgid "Page Content"
-msgstr ""
+msgstr "Seitenanzahl"
 
 #: app/blueprints/collections/__init__.py:81
 #: app/blueprints/threads/__init__.py:282
@@ -93,31 +94,33 @@ msgstr "Privat"
 
 #: app/blueprints/collections/__init__.py:151
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "Es existiert bereits eine Sammlung mit einem ähnlichen Titel"
 
 #: app/blueprints/collections/__init__.py:157
 msgid "Unable to create collection as a package with that name already exists"
 msgstr ""
+"Es war nicht möglich, eine Sammlung als ein Paket mit diesem Namen, der "
+"bereits existiert, zu erstellen"
 
 #: app/blueprints/collections/__init__.py:279
 msgid "Added package to collection"
-msgstr ""
+msgstr "Paket der Sammlung hinzugefügt"
 
 #: app/blueprints/collections/__init__.py:281
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Paket von Sammlung entfernt"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Paket zur Favoritensammlung hinzugefügt"
 
 #: app/blueprints/collections/__init__.py:308
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "(Öffentlich, ändern von Profil &gt; Meine Sammlungen)"
 
 #: app/blueprints/collections/__init__.py:312
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Paket von Favoritensammlung entfernt"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -298,7 +301,7 @@ msgstr "Paket existiert bereits"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "Es existiert bereits eine Sammlung mit einem ähnlichen Namen"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -1250,7 +1253,7 @@ msgstr "Profil"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "Meine Sammlung"
 
 #: app/templates/base.html:163
 msgid "Admin"
@@ -1320,7 +1323,7 @@ msgstr "Themen"
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "Sammlungen"
 
 #: app/templates/base.html:268
 msgid "Support Packages"
@@ -1554,28 +1557,28 @@ msgstr "Bearbeiten"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "Neue Sammlung"
 
 #: app/templates/collections/create_edit.html:30
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "Benutzer werden nicht weitergeleitet, wenn sie zur alten URL gehen"
 
 #: app/templates/collections/create_edit.html:46
 msgid "No results"
-msgstr ""
+msgstr "Keine Ergebnisse"
 
 #: app/templates/collections/create_edit.html:74
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "Sie können die Beschreibung mit Ihrer eigenen ersetzen"
 
 #: app/templates/collections/create_edit.html:88
 msgid "Are you sure you want to remove {title}?"
-msgstr ""
+msgstr "Sind Sie sich sicher, dass Sie {title} entfernen möchten?"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Sammlung „%(title)s“ von %(author)s entfernen"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
@@ -1596,37 +1599,39 @@ msgstr "Abbrechen"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "Sammlungen von %(author)s"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "Keine Sammlungen"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "%(package_title)s zu einer Sammlung hinzufügen"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "Sammlung erstellen"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "Sie haben keine Sammlungen"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "Eine Kopie machen"
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr ""
+msgstr "Eine Sammlung von %(author)s"
 
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
+"Um ein Paket hinzuzufügen, gehen Sie zur Seite des Pakets und klicken Sie "
+"auf „Zur Sammlung hinzufügen“"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1659,7 +1664,7 @@ msgstr "Spenden"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "Basiert auf Ihren Rezensionen/Favoriten"
 
 #: app/templates/donate/index.html:67
 msgid ""
@@ -1985,7 +1990,7 @@ msgstr "Rezension abgeben"
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr ""
+msgstr "Ein Problem melden"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -2382,7 +2387,7 @@ msgstr ""
 
 #: app/templates/packages/create_edit.html:99
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr ""
+msgstr "HTTP-URL zu einem Git-, Mercurial- oder anderem Repository"
 
 #: app/templates/packages/create_edit.html:102
 msgid "Next (Autoimport)"
@@ -2398,11 +2403,11 @@ msgstr "Importieren … (Dies kann eine Weile dauern)"
 
 #: app/templates/packages/create_edit.html:110
 msgid "Where should users report issues?"
-msgstr ""
+msgstr "Wo sollten Benutzer Probleme melden?"
 
 #: app/templates/packages/create_edit.html:114
 msgid "Paste a forum topic URL"
-msgstr ""
+msgstr "Eine Forenthema-URL einfügen"
 
 #: app/templates/packages/create_edit.html:116
 msgid "YouTube videos will be shown in an embed."
@@ -2520,13 +2525,15 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
-msgstr ""
+msgstr "Es ist nicht möglich, dass Texturenpakete alle Spiele unterstützen."
 
 #: app/templates/packages/game_support.html:105
 msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
 msgstr ""
+"Das Paket hängt von einer spielspezifischen Mod ab und kann daher nicht alle "
+"Spiele unterstützen."
 
 #: app/templates/packages/game_support.html:111
 msgid "Overrides"
@@ -3217,11 +3224,11 @@ msgstr "Inhalt für das Spiel anzeigen"
 
 #: app/templates/packages/view.html:358
 msgid "Favorite"
-msgstr ""
+msgstr "Favorit"
 
 #: app/templates/packages/view.html:364
 msgid "Add to collection..."
-msgstr ""
+msgstr "Zur Sammlung hinzufügen …"
 
 #: app/templates/packages/view.html:374
 msgid "Package may be outdated"
@@ -3571,6 +3578,9 @@ msgid ""
 "Click the button below to confirm that the following packages do support "
 "all games, except for any games listed in unsupported_games:"
 msgstr ""
+"Klicken Sie auf den Knopf unten, um zu bestätigen, dass die folgenden Pakete "
+"alle Pakete unterstützen, außer für Spiele, die in unsupported_games "
+"aufgelistet sind:"
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
@@ -3859,7 +3869,7 @@ msgstr "Ihre E-Mail-Adresse wird niemals an Dritte weitergegeben."
 #: app/templates/users/change_set_password.html:36
 #: app/templates/users/register.html:27
 msgid "Must be at least 12 characters long."
-msgstr ""
+msgstr "Muss mindestens 12 Zeichen lang sein."
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
@@ -4130,7 +4140,7 @@ msgstr "Pakete"
 
 #: app/templates/users/profile.html:123
 msgid "collections"
-msgstr ""
+msgstr "Sammlungen"
 
 #: app/templates/users/profile.html:132
 msgid "reviews"
@@ -4155,11 +4165,11 @@ msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:220
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alphabetisch"
 
 #: app/templates/users/profile.html:228
 msgid "Newest"
-msgstr ""
+msgstr "Neueste"
 
 #: app/templates/users/profile.html:234
 msgid "View list of tags"
@@ -4694,4 +4704,3 @@ msgstr ""
 
 #~ msgid "Must be at least 8 characters long."
 #~ msgstr "Muss mindestens 8 Zeichen lang sein."
-
