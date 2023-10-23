@@ -61,7 +61,7 @@
 	<form method="POST" action="" class="tableform">
 		{{ form.hidden_tag() }}
 
-		<fieldset>
+		<fieldset class="pkg_meta">
 			<legend>{{ _("Package") }}</legend>
 
 			<div class="row">
@@ -89,10 +89,13 @@
 			<legend class="pkg_meta">{{ _("Repository and Links") }}</legend>
 
 			<div class="pkg_wiz_1 d-none">
-				<p>{{ _("Enter the repo URL for the package.
-				If the repo uses git then the metadata will be automatically imported.") }}</p>
-
-				<p>{{ _("Leave blank if you don't have a repo. Click skip if the import fails.") }}</p>
+				<h3>{{ _("Do you have a Git repository?") }}</h3>
+				<p>
+					<strong>{{ _("Having a repository is optional") }}.</strong>
+				</p>
+				<p>
+					{{ _("If you do have a repository, enter the URL below. Otherwise, leave blank and click skip.") }}
+				</p>
 			</div>
 
 			{{ render_field(form.website, class_="pkg_meta") }}
@@ -100,7 +103,7 @@
 
 			<div class="pkg_wiz_1 d-none">
 				<a id="pkg_wiz_1_next" class="btn btn-primary">{{ _("Next (Autoimport)") }}</a>
-				<a id="pkg_wiz_1_skip" class="btn btn-default">{{ _("Skip Autoimport") }}</a>
+				<a id="pkg_wiz_1_skip" class="btn btn-default">{{ _("Skip") }}</a>
 			</div>
 
 			<div class="pkg_wiz_2 d-none">
