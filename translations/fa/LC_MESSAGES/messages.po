@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-08-27 13:14+0100\n"
-"PO-Revision-Date: 2022-07-26 14:20+0000\n"
+"PO-Revision-Date: 2023-10-03 01:59+0000\n"
 "Last-Translator: Farooq Karimi Zadeh <fkz@riseup.net>\n"
+"Language-Team: Persian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fa/>\n"
 "Language: fa\n"
-"Language-Team: Persian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fa/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.1-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -34,7 +35,7 @@ msgstr "دسترسی شما قطع شده است."
 #: app/templates/packages/list.html:4 app/templates/todo/editor.html:46
 #: app/templates/users/list.html:22 app/templates/users/profile.html:247
 msgid "Packages"
-msgstr ""
+msgstr "بسته‌ها"
 
 #: app/template_filters.py:86
 #, python-format
@@ -79,11 +80,11 @@ msgstr "عنوان"
 #: app/blueprints/collections/__init__.py:79
 #: app/blueprints/collections/__init__.py:83
 msgid "Short Description"
-msgstr ""
+msgstr "توضیح کوتاه"
 
 #: app/blueprints/collections/__init__.py:80
 msgid "Page Content"
-msgstr ""
+msgstr "محتوای صفحه"
 
 #: app/blueprints/collections/__init__.py:81
 #: app/blueprints/threads/__init__.py:282
@@ -93,31 +94,31 @@ msgstr "خصوصی"
 
 #: app/blueprints/collections/__init__.py:151
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "یک مجموعه با عنوانی مشابه از قبل وجود دارد"
 
 #: app/blueprints/collections/__init__.py:157
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "به دلیل وجود یک بسته با همین نام، نمی‌توان مجموعه را ایجاد کرد"
 
 #: app/blueprints/collections/__init__.py:279
 msgid "Added package to collection"
-msgstr ""
+msgstr "بسته به مجموعه اضافه شد"
 
 #: app/blueprints/collections/__init__.py:281
 msgid "Removed package from collection"
-msgstr ""
+msgstr "بسته از مجموعه حذف شد"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "بسته به مجموعه علاقه‌مندی‌ها اضافه شد"
 
 #: app/blueprints/collections/__init__.py:308
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "(عمومی، از نمایه » مجموعه‌های من تغییر دهید)"
 
 #: app/blueprints/collections/__init__.py:312
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "بسته از مجموعه علاقه‌مندی‌ها حذف شد"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -171,7 +172,7 @@ msgstr "گزارش ویرایش"
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
 #: app/templates/packages/view.html:237 app/templates/users/profile.html:148
 msgid "Statistics"
-msgstr ""
+msgstr "آمار"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
@@ -186,7 +187,7 @@ msgstr "حذف"
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "بازی‌های پشتیبانی‌شده"
 
 #: app/blueprints/packages/packages.py:177
 msgid "Error: Another package already uses this forum topic!"
@@ -278,17 +279,19 @@ msgstr "آدرس فیلم"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Donate URL"
-msgstr ""
+msgstr "آدرس اهدا"
 
 #: app/blueprints/packages/packages.py:278
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game یک نام مجاز نیست"
 
 #: app/blueprints/packages/packages.py:288
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
+"بسته از قبل وجود دارد اما حذف شده است. لطفا با کارکنان ContentDB جهت "
+"بازگردانی بسته تماس بگیرید"
 
 #: app/blueprints/packages/packages.py:293
 msgid "Package already exists"
@@ -296,7 +299,7 @@ msgstr "بسته از قبل وجود دارد"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "یک مجموعه با نامی مشابه وجود دارد"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -348,19 +351,21 @@ msgstr "نام نویسنده"
 
 #: app/blueprints/packages/packages.py:670
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "فعال‌سازی تشخیص پشتیبانی بر اساس پیش‌نیاز‌ها (پیشنهاد می‌شود)"
 
 #: app/blueprints/packages/packages.py:671
 msgid "Supported games"
-msgstr ""
+msgstr "بازی‌های تحت پشتیبانی"
 
 #: app/blueprints/packages/packages.py:672
 msgid "Unsupported games"
-msgstr ""
+msgstr "بازی‌های پشتیبانی نشده"
 
 #: app/blueprints/packages/packages.py:673
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
+"از تمامی بازی‌ها پشتیبانی می‌کند(مگر این‌که خلاف آن گفته شود) یا این‌که "
+"مستقل از بازی است"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -430,7 +435,7 @@ msgstr "بروز‌رسانی"
 #: app/blueprints/packages/releases.py:248
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
-msgstr ""
+msgstr "محرک"
 
 #: app/blueprints/packages/releases.py:249
 msgid "New Commit"
@@ -447,7 +452,7 @@ msgstr "نام برنچ"
 #: app/blueprints/packages/releases.py:253
 #: app/templates/packages/update_config.html:38
 msgid "Action"
-msgstr ""
+msgstr "عمل"
 
 #: app/blueprints/packages/releases.py:254
 msgid "Send notification and mark as outdated"
@@ -455,9 +460,8 @@ msgstr "ارسال اعلان و علامت‌زدن به عنوان تاریخ�
 
 #: app/blueprints/packages/releases.py:254
 #: app/templates/macros/package_approval.html:22
-#, fuzzy
 msgid "Create release"
-msgstr "انتشار ایجاد"
+msgstr "ایجاد یک انتشار"
 
 #: app/blueprints/packages/releases.py:256
 msgid "Save Settings"
@@ -487,7 +491,7 @@ msgstr "نظر"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "رده‌بندی"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:173
@@ -497,7 +501,7 @@ msgstr "بله"
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:124
 #: app/templates/macros/reviews.html:177
 msgid "Neutral"
-msgstr ""
+msgstr "بی‌طرف"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:129
 #: app/templates/macros/reviews.html:181
@@ -4209,4 +4213,3 @@ msgstr ""
 
 #~ msgid "Must be at least 8 characters long."
 #~ msgstr ""
-
