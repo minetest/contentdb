@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-08-27 13:14+0100\n"
+"POT-Creation-Date: 2023-10-23 22:15+0100\n"
 "PO-Revision-Date: 2023-10-23 21:06+0000\n"
 "Last-Translator: José Muñoz <dr.cabra@disroot.org>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/minetest/"
-"contentdb/sv/>\n"
 "Language: sv\n"
+"Language-Team: Swedish "
+"<https://hosted.weblate.org/projects/minetest/contentdb/sv/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.1.1-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -42,6 +41,34 @@ msgstr "Paket"
 msgid "%(delta)s ago"
 msgstr "%(delta)s sedan"
 
+#: app/blueprints/api/endpoints.py:928
+msgid "Spotlight"
+msgstr ""
+
+#: app/blueprints/api/endpoints.py:940 app/templates/index.html:127
+msgid "Top Games"
+msgstr "Topp spel"
+
+#: app/blueprints/api/endpoints.py:945 app/templates/index.html:134
+#: app/templates/packages/game_hub.html:46
+msgid "Top Mods"
+msgstr "Topp moddar"
+
+#: app/blueprints/api/endpoints.py:950 app/templates/index.html:141
+#: app/templates/packages/game_hub.html:53
+msgid "Top Texture Packs"
+msgstr "Topp texturpaket"
+
+#: app/blueprints/api/endpoints.py:955 app/templates/index.html:163
+#: app/templates/packages/game_hub.html:60
+msgid "Highest Reviewed"
+msgstr "Högst recenserad"
+
+#: app/blueprints/api/endpoints.py:960 app/templates/index.html:113
+#: app/templates/packages/game_hub.html:32
+msgid "Recently Added"
+msgstr "Senast tillagd"
+
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
 #: app/templates/modnames/list.html:12
@@ -52,11 +79,11 @@ msgstr "Namn"
 msgid "Limit to package"
 msgstr "Begränsa till paket"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:88
+#: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:89
 #: app/blueprints/packages/packages.py:274
-#: app/blueprints/packages/packages.py:507
-#: app/blueprints/packages/packages.py:603
-#: app/blueprints/packages/packages.py:674
+#: app/blueprints/packages/packages.py:515
+#: app/blueprints/packages/packages.py:611
+#: app/blueprints/packages/packages.py:682
 #: app/blueprints/packages/releases.py:61
 #: app/blueprints/packages/releases.py:73 app/blueprints/packages/reviews.py:48
 #: app/blueprints/packages/screenshots.py:35
@@ -68,55 +95,55 @@ msgstr "Begränsa till paket"
 msgid "Save"
 msgstr "Spara"
 
-#: app/blueprints/collections/__init__.py:76
+#: app/blueprints/collections/__init__.py:77
 #: app/blueprints/packages/releases.py:53
 #: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
-#: app/blueprints/threads/__init__.py:280 app/templates/macros/reviews.html:138
+#: app/blueprints/threads/__init__.py:281 app/templates/macros/reviews.html:138
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
 msgstr "Titel"
 
-#: app/blueprints/collections/__init__.py:79
-#: app/blueprints/collections/__init__.py:83
+#: app/blueprints/collections/__init__.py:80
+#: app/blueprints/collections/__init__.py:84
 msgid "Short Description"
 msgstr ""
 
-#: app/blueprints/collections/__init__.py:80
+#: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
 msgstr ""
 
-#: app/blueprints/collections/__init__.py:81
-#: app/blueprints/threads/__init__.py:282
+#: app/blueprints/collections/__init__.py:82
+#: app/blueprints/threads/__init__.py:283
 #: app/templates/collections/view.html:51
 msgid "Private"
 msgstr "Privat"
 
-#: app/blueprints/collections/__init__.py:151
+#: app/blueprints/collections/__init__.py:152
 msgid "A collection with a similar title already exists"
 msgstr ""
 
-#: app/blueprints/collections/__init__.py:157
+#: app/blueprints/collections/__init__.py:158
 msgid "Unable to create collection as a package with that name already exists"
 msgstr ""
 
-#: app/blueprints/collections/__init__.py:279
+#: app/blueprints/collections/__init__.py:304
 msgid "Added package to collection"
 msgstr ""
 
-#: app/blueprints/collections/__init__.py:281
+#: app/blueprints/collections/__init__.py:306
 msgid "Removed package from collection"
 msgstr ""
 
-#: app/blueprints/collections/__init__.py:306
+#: app/blueprints/collections/__init__.py:325
 msgid "Added package to favorites collection"
 msgstr ""
 
-#: app/blueprints/collections/__init__.py:308
+#: app/blueprints/collections/__init__.py:327
 msgid "(Public, change from Profile > My Collections)"
 msgstr ""
 
-#: app/blueprints/collections/__init__.py:312
+#: app/blueprints/collections/__init__.py:331
 msgid "Removed package from favorites collection"
 msgstr ""
 
@@ -147,7 +174,7 @@ msgstr "Redigera Detaljer"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:611 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:634 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Utsläpp"
 
@@ -159,7 +186,7 @@ msgstr "Skärmdumpar"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:582
+#: app/templates/packages/view.html:605
 msgid "Maintainers"
 msgstr "Underhållare"
 
@@ -170,7 +197,7 @@ msgstr "Auditeringslogg"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/base.html:150
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
-#: app/templates/packages/view.html:237 app/templates/users/profile.html:148
+#: app/templates/packages/view.html:229 app/templates/users/profile.html:148
 msgid "Statistics"
 msgstr "Statistik"
 
@@ -179,10 +206,8 @@ msgid "Share and Badges"
 msgstr "Dela och Emblem"
 
 #: app/blueprints/packages/__init__.py:67
-#: app/templates/collections/create_edit.html:61
-#: app/templates/packages/remove.html:44 app/templates/packages/view.html:134
-msgid "Remove"
-msgstr "Ta bort"
+msgid "Remove / Unpublish"
+msgstr ""
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -209,7 +234,7 @@ msgstr ""
 msgid "No download available."
 msgstr "Ingen nerladdning tillgänglig."
 
-#: app/blueprints/packages/packages.py:253 app/templates/packages/view.html:559
+#: app/blueprints/packages/packages.py:253 app/templates/packages/view.html:582
 msgid "Type"
 msgstr "Typ"
 
@@ -218,12 +243,12 @@ msgid "Title (Human-readable)"
 msgstr "Titel (Människoläsbar)"
 
 #: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:601
+#: app/blueprints/packages/packages.py:609
 msgid "Name (Technical)"
 msgstr "Namn (Tekniskt)"
 
 #: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:602
+#: app/blueprints/packages/packages.py:610
 #: app/templates/packages/create_edit.html:74
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Endast gemena bokstäver (a-z), siffror (0-9) och understreck (_)"
@@ -232,7 +257,7 @@ msgstr "Endast gemena bokstäver (a-z), siffror (0-9) och understreck (_)"
 msgid "Short Description (Plaintext)"
 msgstr "Kort beskrivning (vanlig text)"
 
-#: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:574
+#: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:597
 msgid "Maintenance State"
 msgstr "Underhållsstatus"
 
@@ -245,7 +270,7 @@ msgstr "Taggar"
 msgid "Content Warnings"
 msgstr "Innehållsvarningar"
 
-#: app/blueprints/packages/packages.py:262 app/templates/packages/view.html:563
+#: app/blueprints/packages/packages.py:262 app/templates/packages/view.html:586
 msgid "License"
 msgstr "Licens"
 
@@ -313,7 +338,7 @@ msgstr "Åtkomst nekad"
 
 #: app/blueprints/packages/packages.py:419
 #: app/blueprints/packages/packages.py:470
-#: app/blueprints/packages/packages.py:486
+#: app/blueprints/packages/packages.py:490
 msgid "You don't have permission to do that"
 msgstr "Du har inte tillåtelse att göra detta"
 
@@ -321,49 +346,57 @@ msgstr "Du har inte tillåtelse att göra detta"
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Var snäll och kommentera vilka ändringar som behövs i godkänningstråden"
 
-#: app/blueprints/packages/packages.py:481
+#: app/blueprints/packages/packages.py:485
 msgid "Deleted package"
 msgstr "Borttaget paket"
 
-#: app/blueprints/packages/packages.py:497
+#: app/blueprints/packages/packages.py:505
 msgid "Unapproved package"
 msgstr "Ej godkänt paket"
 
-#: app/blueprints/packages/packages.py:506
+#: app/blueprints/packages/packages.py:514
 msgid "Maintainers (Comma-separated)"
 msgstr "Underhållare (Komma-separerat)"
 
-#: app/blueprints/packages/packages.py:515
+#: app/blueprints/packages/packages.py:523
 msgid "You don't have permission to edit maintainers"
 msgstr "Du har inte behörighet att redigera underhållare"
 
-#: app/blueprints/packages/packages.py:565
+#: app/blueprints/packages/packages.py:573
 msgid "You are not a maintainer"
 msgstr "Du är inte en underhållare"
 
-#: app/blueprints/packages/packages.py:568
+#: app/blueprints/packages/packages.py:576
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Paketägare kan inte ta bort sig själva som underhållare"
 
-#: app/blueprints/packages/packages.py:600
+#: app/blueprints/packages/packages.py:608
 msgid "Author Name"
 msgstr "Ägarnamn"
 
-#: app/blueprints/packages/packages.py:670
+#: app/blueprints/packages/packages.py:678
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Aktivera stöddetektering baserad på beroenden (rekommenderat)"
 
-#: app/blueprints/packages/packages.py:671
+#: app/blueprints/packages/packages.py:679
 msgid "Supported games"
 msgstr "Spel som stöds"
 
-#: app/blueprints/packages/packages.py:672
+#: app/blueprints/packages/packages.py:680
 msgid "Unsupported games"
 msgstr "Spel som ej stöds"
 
-#: app/blueprints/packages/packages.py:673
+#: app/blueprints/packages/packages.py:681
 msgid "Supports all games (unless stated) / is game independent"
 msgstr "Stödjer alla spel (om inget annat anges) / är speloberoende"
+
+#: app/blueprints/packages/packages.py:697
+msgid "You need at least one release before you can edit game support"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:701
+msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
+msgstr ""
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -483,9 +516,9 @@ msgstr "Tog bort uppdateringskonfiguration"
 msgid "Now, please create an initial release"
 msgstr "Var snäll och skapa en första utsläpp nu"
 
-#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:180
-#: app/blueprints/threads/__init__.py:181
-#: app/blueprints/threads/__init__.py:281
+#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:181
+#: app/blueprints/threads/__init__.py:182
+#: app/blueprints/threads/__init__.py:282
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -520,9 +553,9 @@ msgstr ""
 "Du har recenserat för många paket nyligen. Var snäll vänta innan du "
 "försöker igen, och överväg att göra dina recensioner mer detaljerade"
 
-#: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:206
-#: app/blueprints/threads/__init__.py:239
-#: app/blueprints/threads/__init__.py:333 app/blueprints/users/settings.py:105
+#: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:207
+#: app/blueprints/threads/__init__.py:240
+#: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:105
 #: app/logic/packages.py:131
 msgid "Linking to blocked sites is not allowed"
 msgstr "Det är inte tillåtet att länka till blockerade webbplatser"
@@ -550,57 +583,57 @@ msgid "Message"
 msgstr "Meddelande"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:51
-#: app/templates/packages/view.html:642 app/templates/report/index.html:4
+#: app/templates/packages/view.html:665 app/templates/report/index.html:4
 #: app/templates/report/index.html:10 app/templates/users/profile.html:37
 msgid "Report"
 msgstr "Rapportera"
 
-#: app/blueprints/threads/__init__.py:70
+#: app/blueprints/threads/__init__.py:71
 msgid "Already subscribed!"
 msgstr "Prenumererar redan!"
 
-#: app/blueprints/threads/__init__.py:72
+#: app/blueprints/threads/__init__.py:73
 msgid "Subscribed to thread"
 msgstr "Prenumererar på tråd"
 
-#: app/blueprints/threads/__init__.py:87
+#: app/blueprints/threads/__init__.py:88
 msgid "Unsubscribed!"
 msgstr "Avprenumererad!"
 
-#: app/blueprints/threads/__init__.py:91
+#: app/blueprints/threads/__init__.py:92
 msgid "Already not subscribed!"
 msgstr "Redan avprenumererad!"
 
-#: app/blueprints/threads/__init__.py:109
+#: app/blueprints/threads/__init__.py:110
 msgid "Locked thread"
 msgstr "Låst tråd"
 
-#: app/blueprints/threads/__init__.py:112
+#: app/blueprints/threads/__init__.py:113
 msgid "Unlocked thread"
 msgstr "Upplåst tråd"
 
-#: app/blueprints/threads/__init__.py:161
+#: app/blueprints/threads/__init__.py:162
 msgid "Cannot delete thread opening post!"
 msgstr "Kan inte ta bort trådens första inlägg!"
 
-#: app/blueprints/threads/__init__.py:235
+#: app/blueprints/threads/__init__.py:236
 msgid "Please wait before commenting again"
 msgstr "Vänta innan du kommenterar igen"
 
-#: app/blueprints/threads/__init__.py:283
+#: app/blueprints/threads/__init__.py:284
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
 msgstr "Öppna tråd"
 
-#: app/blueprints/threads/__init__.py:308
+#: app/blueprints/threads/__init__.py:309
 msgid "Unable to create thread!"
 msgstr "Kunde inte skapa tråd!"
 
-#: app/blueprints/threads/__init__.py:314
+#: app/blueprints/threads/__init__.py:315
 msgid "An approval thread already exists! Consider replying there instead"
 msgstr "En godkänningstråd finns redan! Överväg att svara där istället"
 
-#: app/blueprints/threads/__init__.py:318
+#: app/blueprints/threads/__init__.py:319
 msgid "Please wait before opening another thread"
 msgstr "Vänta innan du öppnar en ny tråd"
 
@@ -844,90 +877,90 @@ msgstr "Kunde inte hitta nyckeln i din signatur!"
 msgid "Unknown claim type"
 msgstr "Okänd anspråkstyp"
 
-#: app/blueprints/users/profile.py:115
+#: app/blueprints/users/profile.py:117
 msgid "Top reviewer"
 msgstr "Högsta recensent"
 
-#: app/blueprints/users/profile.py:116
+#: app/blueprints/users/profile.py:118
 #, python-format
 msgid "%(display_name)s has written the most helpful reviews on ContentDB."
 msgstr ""
 "%(display_name)s har skrivit flest antal hjälpsamma recensioner på "
 "ContentDB."
 
-#: app/blueprints/users/profile.py:121
+#: app/blueprints/users/profile.py:123
 msgid "2nd most helpful reviewer"
 msgstr "Andra mest hjälpsamma recensent"
 
-#: app/blueprints/users/profile.py:123
+#: app/blueprints/users/profile.py:125
 msgid "3rd most helpful reviewer"
 msgstr "Tredje mest hjälpsamma recensent"
 
-#: app/blueprints/users/profile.py:124
+#: app/blueprints/users/profile.py:126
 #, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
 msgstr "Detta sätter %(display_name)s i topp %(perc)s%%"
 
-#: app/blueprints/users/profile.py:128
+#: app/blueprints/users/profile.py:130
 #, python-format
 msgid "Top %(perc)s%% reviewer"
 msgstr "Topp %(perc)s%% recensent"
 
-#: app/blueprints/users/profile.py:129
+#: app/blueprints/users/profile.py:131
 #, python-format
 msgid "Only %(place)d users have written more helpful reviews."
 msgstr "Endast %(place)d användare har skrivit fler hjälpsamma recensioner."
 
-#: app/blueprints/users/profile.py:134
+#: app/blueprints/users/profile.py:136
 msgid "Consider writing more helpful reviews to get a medal."
 msgstr "Överväga att skriva fler hjälpsamma recensioner för att få en medalj."
 
-#: app/blueprints/users/profile.py:136
+#: app/blueprints/users/profile.py:138
 #, python-format
 msgid "You are in place %(place)s."
 msgstr "Du är på plats %(place)s."
 
-#: app/blueprints/users/profile.py:164
+#: app/blueprints/users/profile.py:166
 #, python-format
 msgid "Top %(type)s"
 msgstr "Topp %(type)s"
 
-#: app/blueprints/users/profile.py:166
+#: app/blueprints/users/profile.py:168
 #, python-format
 msgid "Top %(group)d %(type)s"
 msgstr "Topp %(group)d %(type)s"
 
-#: app/blueprints/users/profile.py:175
+#: app/blueprints/users/profile.py:177
 #, python-format
 msgid "%(display_name)s has a %(type)s placed at #%(place)d."
 msgstr "%(display_name)s har en %(type)s placerad på %(place)d:a plats."
 
-#: app/blueprints/users/profile.py:190
+#: app/blueprints/users/profile.py:192
 #, python-format
 msgid "Your packages have %(downloads)d downloads in total."
 msgstr "Dina paket har %(downloads)d nerladdningar totalt."
 
-#: app/blueprints/users/profile.py:191
+#: app/blueprints/users/profile.py:193
 msgid "First medal is at 50k."
 msgstr "Första medalj vid 50k."
 
-#: app/blueprints/users/profile.py:196
+#: app/blueprints/users/profile.py:198
 msgid ">300k downloads"
 msgstr "&gt;300k nerladdningar"
 
-#: app/blueprints/users/profile.py:199
+#: app/blueprints/users/profile.py:201
 msgid ">100k downloads"
 msgstr "&gt;100k nerladdningar"
 
-#: app/blueprints/users/profile.py:202
+#: app/blueprints/users/profile.py:204
 msgid ">75k downloads"
 msgstr "&gt;75k nerladdningar"
 
-#: app/blueprints/users/profile.py:205
+#: app/blueprints/users/profile.py:207
 msgid ">50k downloads"
 msgstr "&gt;50k nerladdningar"
 
-#: app/blueprints/users/profile.py:206
+#: app/blueprints/users/profile.py:208
 #, python-format
 msgid "Has received %(downloads)d downloads across all packages."
 msgstr "Har fått %(downloads)d nerladdningar över alla paket."
@@ -1291,8 +1324,8 @@ msgstr "Anmäl / DMCA"
 msgid "User List"
 msgstr "Användarlista"
 
-#: app/templates/base.html:266 app/templates/packages/view.html:197
-#: app/templates/packages/view.html:631 app/templates/threads/list.html:4
+#: app/templates/base.html:266 app/templates/packages/view.html:189
+#: app/templates/packages/view.html:654 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Trådar"
 
@@ -1335,16 +1368,17 @@ msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> av %(author)s"
 
 #: app/templates/index.html:77 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:201 app/templates/packages/view.html:302
+#: app/templates/packages/view.html:193 app/templates/packages/view.html:325
 #: app/templates/users/profile.html:262
 msgid "Reviews"
 msgstr "Recensioner"
 
-#: app/templates/index.html:96
+#: app/templates/index.html:96 app/templates/packages/view.html:271
 msgid "Previous"
 msgstr "Föregående"
 
-#: app/templates/index.html:100 app/templates/users/claim_forums.html:87
+#: app/templates/index.html:100 app/templates/packages/view.html:275
+#: app/templates/users/claim_forums.html:87
 msgid "Next"
 msgstr "Nästa"
 
@@ -1363,33 +1397,13 @@ msgstr "Presenterad"
 msgid "See more"
 msgstr "Se mer"
 
-#: app/templates/index.html:113 app/templates/packages/game_hub.html:32
-msgid "Recently Added"
-msgstr "Senast tillagd"
-
 #: app/templates/index.html:120 app/templates/packages/game_hub.html:39
 msgid "Recently Updated"
 msgstr "Senast uppdaterad"
 
-#: app/templates/index.html:127
-msgid "Top Games"
-msgstr "Topp spel"
-
-#: app/templates/index.html:134 app/templates/packages/game_hub.html:46
-msgid "Top Mods"
-msgstr "Topp moddar"
-
-#: app/templates/index.html:141 app/templates/packages/game_hub.html:53
-msgid "Top Texture Packs"
-msgstr "Topp texturpaket"
-
 #: app/templates/index.html:145
 msgid "Search by Tags"
 msgstr "Sök från taggar"
-
-#: app/templates/index.html:163 app/templates/packages/game_hub.html:60
-msgid "Highest Reviewed"
-msgstr "Högst recenserad"
 
 #: app/templates/index.html:170
 msgid "Recent Positive Reviews"
@@ -1525,7 +1539,7 @@ msgstr "Ingen token skapades"
 
 #: app/templates/collections/create_edit.html:5
 #: app/templates/collections/view.html:42 app/templates/macros/releases.html:62
-#: app/templates/packages/view.html:122 app/templates/packages/view.html:256
+#: app/templates/packages/view.html:114 app/templates/packages/view.html:248
 msgid "Edit"
 msgstr "Redigera"
 
@@ -1538,8 +1552,14 @@ msgid "Users won't be redirected when going to the old URL"
 msgstr ""
 
 #: app/templates/collections/create_edit.html:46
+#: app/templates/threads/user_comments.html:79
 msgid "No results"
 msgstr ""
+
+#: app/templates/collections/create_edit.html:61
+#: app/templates/packages/remove.html:44 app/templates/packages/view.html:126
+msgid "Remove"
+msgstr "Ta bort"
 
 #: app/templates/collections/create_edit.html:74
 msgid "You can replace the description with your own"
@@ -1802,7 +1822,7 @@ msgid "No audit log entries."
 msgstr "Inga auditeringloggsposter."
 
 #: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:145
-#: app/templates/packages/remove.html:34 app/templates/packages/view.html:421
+#: app/templates/packages/remove.html:34 app/templates/packages/view.html:444
 #: app/templates/users/modtools.html:69
 msgid "Required"
 msgstr "Nödvändiga"
@@ -2093,8 +2113,8 @@ msgstr "Senaste svar"
 msgid "On %(trigger)s, do %(action)s"
 msgstr "På %(trigger)s, gör %(action)s"
 
-#: app/templates/macros/todo.html:35 app/templates/packages/view.html:128
-#: app/templates/packages/view.html:386
+#: app/templates/macros/todo.html:35 app/templates/packages/view.html:120
+#: app/templates/packages/view.html:409
 msgid "Release"
 msgstr "Utsläpp"
 
@@ -2104,7 +2124,7 @@ msgstr "Repo"
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:390
+#: app/templates/packages/view.html:413
 msgid "Update settings"
 msgstr "Uppdatera inställningar"
 
@@ -2112,7 +2132,7 @@ msgstr "Uppdatera inställningar"
 msgid "No outdated packages."
 msgstr "Inga föråldrade paket."
 
-#: app/templates/macros/topics.html:6 app/templates/packages/view.html:184
+#: app/templates/macros/topics.html:6 app/templates/packages/view.html:176
 msgid "Author"
 msgstr "Skapare"
 
@@ -2165,9 +2185,9 @@ msgstr "Forumtrådar"
 
 #: app/templates/modnames/view.html:27
 #: app/templates/packages/game_support.html:42
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:427
-#: app/templates/packages/view.html:451 app/templates/packages/view.html:496
-#: app/templates/packages/view.html:528 app/templates/todo/editor.html:85
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:450
+#: app/templates/packages/view.html:474 app/templates/packages/view.html:519
+#: app/templates/packages/view.html:551 app/templates/todo/editor.html:85
 #: app/templates/todo/game_support.html:45
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -2297,8 +2317,8 @@ msgid "Package"
 msgstr "Paket"
 
 #: app/templates/packages/create_edit.html:72
-msgid "Please open a thread to request a name change"
-msgstr "Var snäll och öppna en tråd för att begära ett namnbyte"
+msgid "You need to unpublish the package to change the name."
+msgstr ""
 
 #: app/templates/packages/create_edit.html:78
 msgid ""
@@ -2319,49 +2339,48 @@ msgid "Repository and Links"
 msgstr "Repository och länkar"
 
 #: app/templates/packages/create_edit.html:92
+msgid "Do you have a Git repository?"
+msgstr ""
+
+#: app/templates/packages/create_edit.html:94
+msgid "Having a repository is optional"
+msgstr ""
+
+#: app/templates/packages/create_edit.html:97
 msgid ""
-"Enter the repo URL for the package.\n"
-"\t\t\t\tIf the repo uses git then the metadata will be automatically "
-"imported."
-msgstr ""
-"Skriv in repo-URL:en för paketet.\n"
-"\t\t\t\tOm repon använder Git kommer metadatan att automatiskt importeras."
-
-#: app/templates/packages/create_edit.html:95
-msgid "Leave blank if you don't have a repo. Click skip if the import fails."
-msgstr ""
-"Lämna blankt om du inte har en repo. Tryck på hoppa över om importen "
-"misslyckas."
-
-#: app/templates/packages/create_edit.html:99
-msgid "HTTP URL to a Git, Mercurial, or other repository"
+"If you do have a repository, enter the URL below. Otherwise, leave blank "
+"and click skip."
 msgstr ""
 
 #: app/templates/packages/create_edit.html:102
+msgid "HTTP URL to a Git, Mercurial, or other repository"
+msgstr ""
+
+#: app/templates/packages/create_edit.html:105
 msgid "Next (Autoimport)"
 msgstr "Nästa (Autoimport)"
 
-#: app/templates/packages/create_edit.html:103
-msgid "Skip Autoimport"
-msgstr "Hoppa över autoimport"
+#: app/templates/packages/create_edit.html:106
+msgid "Skip"
+msgstr "Hoppa över"
 
-#: app/templates/packages/create_edit.html:107
+#: app/templates/packages/create_edit.html:110
 msgid "Importing... (This may take a while)"
 msgstr "Importerar... (Detta kan ta lite tid)"
 
-#: app/templates/packages/create_edit.html:110
+#: app/templates/packages/create_edit.html:113
 msgid "Where should users report issues?"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:114
+#: app/templates/packages/create_edit.html:117
 msgid "Paste a forum topic URL"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:116
+#: app/templates/packages/create_edit.html:119
 msgid "YouTube videos will be shown in an embed."
 msgstr "YouTube-videor kommer visas i en inbäddning."
 
-#: app/templates/packages/create_edit.html:117
+#: app/templates/packages/create_edit.html:120
 msgid "If blank, the author's donation URL will be used instead."
 msgstr "Om tom, kommer författarens donations-URL att användas istället."
 
@@ -2412,7 +2431,7 @@ msgstr ""
 " för mer information"
 
 #: app/templates/packages/game_support.html:23
-#: app/templates/packages/view.html:220
+#: app/templates/packages/view.html:212
 msgid "Source"
 msgstr "Källkod"
 
@@ -2869,8 +2888,8 @@ msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr "Anledning för avgodkännande / borttagande, detta visas i auditeringsloggen"
 
 #: app/templates/packages/remove.html:47
-msgid "Unapprove"
-msgstr "Avgodkänn"
+msgid "Unpublish"
+msgstr ""
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -2898,7 +2917,7 @@ msgstr ""
 "kommentarer men tar bort effekten på paketets betyg."
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:330
+#: app/templates/packages/view.html:353
 msgid "Review Votes"
 msgstr "Recensionröster"
 
@@ -3049,46 +3068,46 @@ msgstr ""
 "När ett paket har markerats som föråldrad kommer du inte få några fler "
 "notiser förrens den är markerad som aktuell."
 
-#: app/templates/packages/view.html:40
+#: app/templates/packages/view.html:41
 msgid "Download"
 msgstr "Ladda ner"
 
-#: app/templates/packages/view.html:46
+#: app/templates/packages/view.html:47
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
 msgstr "Minetest %(min)s-%(max)s"
 
-#: app/templates/packages/view.html:48
+#: app/templates/packages/view.html:49
 #, python-format
 msgid "For Minetest %(min)s and above"
 msgstr "För Minetest %(min)s och över"
 
-#: app/templates/packages/view.html:50
+#: app/templates/packages/view.html:51
 #, python-format
 msgid "Minetest %(max)s and below"
 msgstr "För Minetest %(max)s och under"
 
-#: app/templates/packages/view.html:70
+#: app/templates/packages/view.html:61
 msgid "How do I install this?"
 msgstr "Hur installerar jag detta?"
 
-#: app/templates/packages/view.html:76
+#: app/templates/packages/view.html:67
 msgid "No downloads available"
 msgstr "Inga nerladdningar tillgängliga"
 
-#: app/templates/packages/view.html:83
+#: app/templates/packages/view.html:74
 msgid "Non-free code and media"
 msgstr "Icke-fri kod och media"
 
-#: app/templates/packages/view.html:85
+#: app/templates/packages/view.html:76
 msgid "Non-free code"
 msgstr "Icke-fri kod"
 
-#: app/templates/packages/view.html:87
+#: app/templates/packages/view.html:78
 msgid "Non-free media"
 msgstr "Icke-fri media"
 
-#: app/templates/packages/view.html:100 app/templates/threads/view.html:102
+#: app/templates/packages/view.html:92 app/templates/threads/view.html:102
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
@@ -3096,166 +3115,166 @@ msgstr ""
 "Denna tråd är endast synlig för skaparen, paketunderhållare, användare av"
 " Godkännarrang eller högre, och @nämnda användare."
 
-#: app/templates/packages/view.html:170
+#: app/templates/packages/view.html:162
 msgid "Work in Progress"
 msgstr "Under arbete"
 
-#: app/templates/packages/view.html:191 app/templates/users/profile.html:224
+#: app/templates/packages/view.html:183 app/templates/users/profile.html:224
 msgid "Downloads"
 msgstr "Nerladdningar"
 
-#: app/templates/packages/view.html:214 app/templates/users/profile.html:95
+#: app/templates/packages/view.html:206 app/templates/users/profile.html:95
 msgid "Website"
 msgstr "Hemsida"
 
-#: app/templates/packages/view.html:226 app/templates/users/profile.html:77
+#: app/templates/packages/view.html:218 app/templates/users/profile.html:77
 msgid "Forums"
 msgstr "Forum"
 
-#: app/templates/packages/view.html:232
+#: app/templates/packages/view.html:224
 msgid "Issue Tracker"
 msgstr "Feltracker"
 
-#: app/templates/packages/view.html:280
+#: app/templates/packages/view.html:303
 msgid "Awaiting review"
 msgstr "Väntar på genomgång"
 
-#: app/templates/packages/view.html:310 app/templates/threads/view.html:75
+#: app/templates/packages/view.html:333 app/templates/threads/view.html:75
 msgid "Edit Review"
 msgstr "Redigera recension"
 
-#: app/templates/packages/view.html:315
+#: app/templates/packages/view.html:338
 msgid "You can't review your own package."
 msgstr "Du kan inte recensera ditt egna paket."
 
-#: app/templates/packages/view.html:325
+#: app/templates/packages/view.html:348
 msgid "Package needs to be approved before it can be reviewed."
 msgstr "Paketet måste godkännas innan det kan recenseras."
 
-#: app/templates/packages/view.html:336
+#: app/templates/packages/view.html:359
 msgid "Used By"
 msgstr "Används Av"
 
-#: app/templates/packages/view.html:342
+#: app/templates/packages/view.html:365
 msgid "Content"
 msgstr "Innehåll"
 
-#: app/templates/packages/view.html:344 app/templates/packages/view.html:414
+#: app/templates/packages/view.html:367 app/templates/packages/view.html:437
 msgid "View content for game"
 msgstr "Visa innehåll för spel"
 
-#: app/templates/packages/view.html:358
+#: app/templates/packages/view.html:381
 msgid "Favorite"
 msgstr ""
 
-#: app/templates/packages/view.html:364
+#: app/templates/packages/view.html:387
 msgid "Add to collection..."
 msgstr ""
 
-#: app/templates/packages/view.html:374
+#: app/templates/packages/view.html:397
 msgid "Package may be outdated"
 msgstr "Paket kan möjligtvis vara föråldrad"
 
-#: app/templates/packages/view.html:381
+#: app/templates/packages/view.html:404
 msgid "Only visible to the author and Editors."
 msgstr "Endast synlig för skaparen och Redigerare."
 
-#: app/templates/packages/view.html:398
+#: app/templates/packages/view.html:421
 msgid "Warning"
 msgstr "Varning"
 
-#: app/templates/packages/view.html:404
+#: app/templates/packages/view.html:427
 msgid "Like this package? Help support its development by making a donation"
 msgstr "Gillar du detta paket? Donera för att stödja utvecklingen"
 
-#: app/templates/packages/view.html:407
+#: app/templates/packages/view.html:430
 msgid "Donate now"
 msgstr "Donera nu"
 
-#: app/templates/packages/view.html:419
+#: app/templates/packages/view.html:442
 msgid "Dependencies"
 msgstr "Beroenden"
 
-#: app/templates/packages/view.html:439
+#: app/templates/packages/view.html:462
 msgid "No required dependencies"
 msgstr "Inga nödvändiga beroenden"
 
-#: app/templates/packages/view.html:445
+#: app/templates/packages/view.html:468
 msgid "Optional"
 msgstr "Valfri"
 
-#: app/templates/packages/view.html:478
+#: app/templates/packages/view.html:501
 msgid "Compatible Games"
 msgstr "Kompatibla Spel"
 
-#: app/templates/packages/view.html:483 app/templates/packages/view.html:503
+#: app/templates/packages/view.html:506 app/templates/packages/view.html:526
 msgid "No specific game required"
 msgstr "Inget specifikt spel krävs"
 
-#: app/templates/packages/view.html:486
+#: app/templates/packages/view.html:509
 msgid "Tested with:"
 msgstr "Testad med:"
 
-#: app/templates/packages/view.html:508
+#: app/templates/packages/view.html:531
 msgid "Is the above correct?"
 msgstr "Är ovanstående korrekt?"
 
-#: app/templates/packages/view.html:509
+#: app/templates/packages/view.html:532
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr "Du behöver antingen bekräfta detta eller berätta för ContentDB om spelstöd"
 
-#: app/templates/packages/view.html:521
+#: app/templates/packages/view.html:544
 msgid "Does not work with:"
 msgstr "Fungerar ej med:"
 
-#: app/templates/packages/view.html:538
+#: app/templates/packages/view.html:561
 msgid "This is an experimental feature."
 msgstr "Detta är en experimentell funktion."
 
-#: app/templates/packages/view.html:539
+#: app/templates/packages/view.html:562
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr ""
 "Kompatibla spel bestäms av en algoritm och kan möjligtvis inte vara "
 "korrekt."
 
-#: app/templates/packages/view.html:549
+#: app/templates/packages/view.html:572
 msgid "Please specify compatible games"
 msgstr "Var snäll välj kompatibla spel"
 
-#: app/templates/packages/view.html:555
+#: app/templates/packages/view.html:578
 msgid "Information"
 msgstr "Information"
 
-#: app/templates/packages/view.html:561
+#: app/templates/packages/view.html:584
 msgid "Technical Name"
 msgstr "Tekniskt namn"
 
-#: app/templates/packages/view.html:570
+#: app/templates/packages/view.html:593
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s för kod,<br>%(media_license)s för media."
 
-#: app/templates/packages/view.html:578
+#: app/templates/packages/view.html:601
 msgid "Unknown"
 msgstr "Okänd"
 
-#: app/templates/packages/view.html:580
+#: app/templates/packages/view.html:603
 msgid "Added"
 msgstr "Tillagd"
 
-#: app/templates/packages/view.html:594
+#: app/templates/packages/view.html:617
 msgid "Remove myself"
 msgstr "Ta bort mig själv"
 
-#: app/templates/packages/view.html:599
+#: app/templates/packages/view.html:622
 msgid "Provides"
 msgstr "Bidrar"
 
-#: app/templates/packages/view.html:621
+#: app/templates/packages/view.html:644
 msgid "More"
 msgstr "Mer"
 
-#: app/templates/packages/view.html:650
+#: app/templates/packages/view.html:673
 msgid "See audit log"
 msgstr "Visa auditeringslogg"
 
@@ -3342,10 +3361,14 @@ msgstr ""
 msgid "Comments by %(user)s"
 msgstr "Kommentarer av %(user)s"
 
-#: app/templates/threads/user_comments.html:47
+#: app/templates/threads/user_comments.html:50
 #, python-format
 msgid "Reply to <b>%(title)s</b>"
 msgstr "Svar till <b>%(title)s</b>"
+
+#: app/templates/threads/user_comments.html:73
+msgid "Only showing replies to public threads"
+msgstr ""
 
 #: app/templates/threads/view.html:44
 msgid "Subscribe"
@@ -3686,7 +3709,7 @@ msgid "Change Password"
 msgstr "Ändra lösenord"
 
 #: app/templates/users/account.html:22
-#: app/templates/users/change_set_password.html:20
+#: app/templates/users/change_set_password.html:8
 msgid "Set Password"
 msgstr "Sätt lösenord"
 
@@ -3743,15 +3766,7 @@ msgstr "Kontoborttagning och deaktivering är inte tillgängliga för användare
 msgid "Please contact the admin."
 msgstr "Var snäll och kontakta administratören."
 
-#: app/templates/users/change_set_password.html:11
-msgid "It is recommended that you set a password for your account."
-msgstr "Det rekommenderas att du sätter ett lösenord till ditt konto."
-
-#: app/templates/users/change_set_password.html:14
-msgid "Skip"
-msgstr "Hoppa över"
-
-#: app/templates/users/change_set_password.html:28
+#: app/templates/users/change_set_password.html:16
 #: app/templates/users/register.html:24
 msgid ""
 "Your email is needed to recover your account if you forget your password "
@@ -3760,13 +3775,13 @@ msgstr ""
 "Din mejladress behövs för att rädda ditt konto om du glömmer lösenordet "
 "och för att skicka (konfiguerbara) notiser. "
 
-#: app/templates/users/change_set_password.html:29
+#: app/templates/users/change_set_password.html:17
 #: app/templates/users/register.html:25
 #: app/templates/users/settings_email.html:20
 msgid "Your email will never be shared with a third-party."
 msgstr "Din mejladress kommer aldrig delas med tredje part."
 
-#: app/templates/users/change_set_password.html:36
+#: app/templates/users/change_set_password.html:24
 #: app/templates/users/register.html:27
 msgid "Must be at least 12 characters long."
 msgstr ""
@@ -4096,11 +4111,15 @@ msgstr "Redigera profil - %(username)s"
 msgid "Profile Picture"
 msgstr "Profilbild"
 
-#: app/templates/users/profile_edit.html:39
+#: app/templates/users/profile_edit.html:27
+msgid "Sync with Forums"
+msgstr ""
+
+#: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
 msgstr "Profilinformation"
 
-#: app/templates/users/profile_edit.html:46
+#: app/templates/users/profile_edit.html:53
 msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr ""
 "Låtsas man vara en annan användare leder detta till en permanent "
@@ -4494,3 +4513,32 @@ msgstr ""
 
 #~ msgid "Must be at least 8 characters long."
 #~ msgstr "Behöver vara minst 8 tecken långt."
+
+#~ msgid "Please open a thread to request a name change"
+#~ msgstr "Var snäll och öppna en tråd för att begära ett namnbyte"
+
+#~ msgid ""
+#~ "Enter the repo URL for the package.\n"
+#~ "\t\t\t\tIf the repo uses git then"
+#~ " the metadata will be automatically "
+#~ "imported."
+#~ msgstr ""
+#~ "Skriv in repo-URL:en för paketet.\n"
+#~ "\t\t\t\tOm repon använder Git kommer "
+#~ "metadatan att automatiskt importeras."
+
+#~ msgid "Leave blank if you don't have a repo. Click skip if the import fails."
+#~ msgstr ""
+#~ "Lämna blankt om du inte har en "
+#~ "repo. Tryck på hoppa över om "
+#~ "importen misslyckas."
+
+#~ msgid "Skip Autoimport"
+#~ msgstr "Hoppa över autoimport"
+
+#~ msgid "Unapprove"
+#~ msgstr "Avgodkänn"
+
+#~ msgid "It is recommended that you set a password for your account."
+#~ msgstr "Det rekommenderas att du sätter ett lösenord till ditt konto."
+
