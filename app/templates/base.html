@@ -15,6 +15,10 @@
 	<meta name="og:description" content="{{ self.description() | normalize_whitespace }}">
 	{%- endif %}
 
+	{% if canonical_url %}
+	<link rel="canonical" href="{{ canonical_url }}" />
+	{%- endif %}
+
 	<link rel="stylesheet" type="text/css" href="/static/libs/bootstrap.min.css?v=3">
 	<link rel="stylesheet" type="text/css" href="/static/custom.css?v=49">
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
