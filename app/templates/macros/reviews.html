@@ -23,7 +23,7 @@
 <ul class="comments mt-4 mb-0">
 	{% for review in reviews %}
 		{% set review_anchor = "review-" + (review.id | string) %}
-		<li class="row my-2 mx-0">
+		<li class="row my-2 mx-0" itemscope itemprop="review" itemtype="https://schema.org/Review">
 			<a id="{{ review_anchor }}"></a>
 			<div class="col-md-1 p-1">
 				<a href="{{ url_for('users.profile', username=review.author.username) }}">
@@ -31,7 +31,10 @@
 						src="{{ review.author.get_profile_pic_url() }}" loading="lazy">
 				</a>
 			</div>
-			<div class="col-md-auto ps-1 pe-3 pt-2 text-center" style=" font-size: 200%;">
+			<div class="col-md-auto ps-1 pe-3 pt-2 text-center" style=" font-size: 200%;" itemscope itemprop="reviewRating" itemtype="https://schema.org/Rating">
+				<meta itemprop="worstRating" content="1" />
+				<meta itemprop="bestRating" content="5" />
+				<meta itemProp="ratingValue" content="{{ review.rating }}" />
 				{% if review.rating > 3 %}
 					<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
 				{% elif review.rating < 3 %}
@@ -46,12 +49,12 @@
 					<div class="card">
 						<div class="card-header">
 							<a class="author {{ review.author.rank.name }}"
-									href="{{ url_for('users.profile', username=review.author.username) }}">
+									href="{{ url_for('users.profile', username=review.author.username) }}" itemprop="author">
 								{{ review.author.display_name }}
 							</a>
 
 							<a name="reply-{{ reply.id }}" class="text-muted float-end"
-									href="{{ url_for('threads.view', id=review.thread.id) }}#reply-{{ reply.id }}">
+									href="{{ url_for('threads.view', id=review.thread.id) }}#reply-{{ reply.id }}" itemprop="datePublished">
 								{{ review.created_at | datetime }}
 							</a>
 						</div>
@@ -65,10 +68,10 @@
 							{% endif %}
 
 							<p>
-								<strong>{{ review.thread.title }}</strong>
+								<strong itemprop="name">{{ review.thread.title }}</strong>
 							</p>
 
-							{{ reply.comment | markdown }}
+							<span itemprop="reviewBody">{{ reply.comment | markdown }}</span>
 
 							<div class="btn-toolbar mt-2 mb-0">
 								{% if show_package_link %}

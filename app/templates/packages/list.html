@@ -23,6 +23,21 @@
 	{% endif %}
 
 	<aside class="mb-5">
+		<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+			<li class="breadcrumb-item" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+				<a href="{{ request.url_root }}" title="Go to home page" itemprop="item">
+					<span itemprop="name">Home</span>
+					<meta itemprop="position" content="1" />
+				</a>
+			</li>
+			<li class="breadcrumb-item active" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+				<a href="{{ request.url_root }}packages/?type={{ type }}" title="Go to {{ query_hint }}" itemprop="item">
+					<span itemprop="name">{{ query_hint }}</span>
+					<meta itemprop="position" content="2" />
+				</a>
+			</li>
+		</ol>
+
 		<p class="text-muted">{{ _("Filter by tags") }}</p>
 
 		{% for pair in tags %}

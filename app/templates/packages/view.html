@@ -15,6 +15,19 @@
 	{% if package.get_thumb_url(3, True) -%}
 		<meta name="og:image" content="{{ package.get_thumb_url(3, True) }}"/>
 	{%- endif %}
+
+	<script type="application/ld+json">
+		{
+			"@context": "https://schema.org",
+			"@type": "SoftwareApplication",
+			"downloadUrl": "{{ request.url_root }}{{ release.get_download_url()[1:] }}",
+		{% if package.get_thumb_url(3, True) -%}
+				"screenshot": "{{ package.get_thumb_url(3, True) }}",
+		{%- endif %}
+			"name": "{{ package.title }}",
+			"about": "{{ package.short_desc }}"
+		}
+	</script>
 {% endblock %}
 
 {% block scriptextra %}
@@ -127,6 +140,27 @@
 					</a>
 				{% endif %}
 			</div>
+
+			<ol class="breadcrumb" itemscope itemtype="https://schema.org/BreadcrumbList">
+				<li class="breadcrumb-item" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+					<a href="{{ request.url_root }}" title="Go to home page" itemprop="item">
+						<span itemprop="name">Home</span>
+						<meta itemprop="position" content="1" />
+					</a>
+				</li>
+				<li class="breadcrumb-item" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+					<a href="{{ request.url_root }}packages/?type={{ package.type.name }}" title="Go to {{ package.type.value }}" itemprop="item">
+						<span itemprop="name">{{ package.type.value }}</span>
+						<meta itemprop="position" content="2" />
+					</a>
+				</li>
+				<li class="breadcrumb-item active" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
+					<a href="{{ request.url_root }}{{ request.path[1:] }}" title="Go to {{ package.title }}" itemprop="item">
+						<span itemprop="name">{{ package.title }}</span>
+						<meta itemprop="position" content="3" />
+					</a>
+				</li>
+			</ol>
 
 			<h1 class="display-3">
 				{{ package.title }}
