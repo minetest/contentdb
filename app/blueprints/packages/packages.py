@@ -54,6 +54,12 @@ def generate_canonical(page, content_type, tag=None):
         'type': content_type
     }
 
+    if 'sort' in request.args:
+        query_params['sort'] = request.args.get('sort')
+
+    if 'order' in request.args:
+        query_params['order'] = request.args.get('order')
+
     encoded_query = urlencode(query_params)
 
     if tag:
@@ -63,7 +69,7 @@ def generate_canonical(page, content_type, tag=None):
     return f"{base_url}?{encoded_query}"
 
 @bp.route("/packages/")
-def list_all(type_name = False):
+def list_all():
 	qb    = QueryBuilder(request.args)
 	query = qb.build_package_query()
 	title = qb.title
@@ -223,7 +229,7 @@ def view(package):
 			package=package, releases=releases, packages_uses=packages_uses,
 			conflicting_modnames=conflicting_modnames,
 			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
-			threads=threads.all(), has_review=has_review, is_favorited=is_favorited)
+			threads=threads.all(), has_review=has_review, is_favorited=is_favorited, canonical_url=request.base_url)
 
 
 @bp.route("/packages/<author>/<name>/shields/<type>/")

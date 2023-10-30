@@ -149,7 +149,7 @@
 					</a>
 				</li>
 				<li class="breadcrumb-item" itemscope itemprop="itemListElement" itemtype="https://schema.org/ListItem">
-					<a href="{{ request.url_root }}packages/?type={{ package.type.name }}" title="Go to {{ package.type.value }}" itemprop="item">
+					<a href="{{ request.url_root }}packages/?type={{ package.type.name | lower }}" title="Go to {{ package.type.value }}" itemprop="item">
 						<span itemprop="name">{{ package.type.value }}</span>
 						<meta itemprop="position" content="2" />
 					</a>

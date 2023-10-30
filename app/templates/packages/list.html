@@ -1,7 +1,15 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ query_hint or _("Packages") }}
+{% if query_hint %}
+	Browse {{ query_hint }}
+{% else %}
+	{{ _("Packages") }}
+{% endif %}
+{% endblock %}
+
+{% block description %}
+	Discover and download new {{ query_hint | lower }} for Minetest here. Enhance your Minetest experience with thousands of free games, mods, and texture packs!
 {% endblock %}
 
 {% block author_links %}

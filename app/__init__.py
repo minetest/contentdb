@@ -106,7 +106,7 @@ def send_upload(path):
 def flatpage(path):
 	page = pages.get_or_404(path)
 	template = page.meta.get("template", "flatpage.html")
-	return render_template(template, page=page)
+	return render_template(template, page=page, canonical_url=request.base_url)
 
 
 @app.before_request
