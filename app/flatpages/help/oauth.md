@@ -88,3 +88,17 @@ Possible errors:
 * Missing code
 * client_id and/or client_secret is incorrect
 * Incorrect code. It may have already been redeemed
+
+### Check access token
+
+Next, you should check the access token works by getting the user information:
+
+```bash
+curl https://content.minetest.net/api/whoami/ \
+    -H "Authorization: Bearer YOURTOKEN"
+```
+
+
+## Scopes
+
+OAuth2 applications can currently only access public user data, using the whoami API.
