@@ -244,7 +244,7 @@ def user_check_forums(username):
 	if user is None:
 		abort(404)
 
-	if current_user != user and not current_user.rank.atLeast(UserRank.MODERATOR):
+	if current_user != user and not current_user.rank.at_least(UserRank.MODERATOR):
 		abort(403)
 
 	if user.forums_username is None:

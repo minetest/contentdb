@@ -192,7 +192,7 @@ def create_edit_client(username, id_=None):
 			client.owner = user
 			client.id = random_string(24)
 			client.secret = random_string(32)
-			client.approved = current_user.rank.atLeast(UserRank.EDITOR)
+			client.approved = current_user.rank.at_least(UserRank.EDITOR)
 
 		form.populate_obj(client)
 
