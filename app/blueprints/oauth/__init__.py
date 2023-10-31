@@ -27,8 +27,8 @@ from wtforms.validators import InputRequired, Length
 
 from app import csrf
 from app.blueprints.users.settings import get_setting_tabs
-from app.models import db, OAuthClient, User, Permission, APIToken
-from app.utils import random_string
+from app.models import db, OAuthClient, User, Permission, APIToken, AuditSeverity
+from app.utils import random_string, add_audit_log
 
 bp = Blueprint("oauth", __name__)
 
@@ -63,6 +63,10 @@ def oauth_start():
 	if client.redirect_url != redirect_uri:
 		return "redirect_uri does not match client", 400
 
+	scope = request.args.get("scope", "public")
+	if scope != "public":
+		return "Unsupported scope, only public is supported", 400
+
 	state = request.args.get("state")
 
 	token = APIToken.query.filter(APIToken.client == client, APIToken.owner == current_user).first()
@@ -86,6 +90,11 @@ def oauth_start():
 			assert client is not None
 			token.auth_code = random_string(32)
 			db.session.add(token)
+
+			add_audit_log(AuditSeverity.USER, current_user,
+					f"Granted \"{scope}\" to OAuth2 application \"{client.title}\" by {client.owner.username} [{client_id}] ",
+					url_for("users.profile", username=current_user.username))
+
 			db.session.commit()
 
 			return redirect(build_redirect_url(client.redirect_url, token.auth_code, state))
@@ -180,6 +189,12 @@ def create_edit_client(username, id_=None):
 			client.secret = random_string(32)
 
 		form.populate_obj(client)
+
+		verb = "Created" if is_new else "Edited"
+		add_audit_log(AuditSeverity.NORMAL, current_user,
+				f"{verb} OAuth2 application {client.title} by {client.owner.username} [{client.id}]",
+				url_for("oauth.create_edit_client", username=client.owner.username, id_=client.id))
+
 		db.session.commit()
 
 		return redirect(url_for("oauth.create_edit_client", username=username, id_=client.id))
@@ -199,6 +214,10 @@ def delete_client(username, id_):
 		abort(404)
 	elif client.owner != user:
 		abort(403)
+
+	add_audit_log(AuditSeverity.NORMAL, current_user,
+			f"Deleted OAuth2 application {client.title} by {client.owner.username} [{client.id}]",
+			url_for("users.profile", username=current_user.username))
 
 	db.session.delete(client)
 	db.session.commit()

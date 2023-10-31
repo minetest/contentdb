@@ -193,6 +193,7 @@ class User(db.Model, UserMixin):
 	ban = db.relationship("UserBan", foreign_keys="UserBan.user_id", back_populates="user", uselist=False)
 
 	def get_dict(self):
+		from app.utils.flask import abs_url_for
 		return {
 			"username": self.username,
 			"display_name": self.display_name,
@@ -205,8 +206,8 @@ class User(db.Model, UserMixin):
 				"forums": self.forums_username,
 			},
 			"links": {
-				"api_packages": url_for("api.packages", author=self.username),
-				"profile": url_for("users.profile", username=self.username),
+				"api_packages": abs_url_for("api.packages", author=self.username),
+				"profile": abs_url_for("users.profile", username=self.username),
 			}
 		}
 
