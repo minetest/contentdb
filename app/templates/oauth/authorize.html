@@ -8,6 +8,14 @@
 	<a href="{{ url_for('users.profile', username=client.owner.username) }}">{{ client.owner.username }}</a>
 {% endblock %}
 
+{% block current_user_name %}
+	<strong>{{ current_user.display_name }}</strong>
+{% endblock %}
+
+{% block client_title %}
+	<strong>{{ client.title }}</strong>
+{% endblock %}
+
 {% block content %}
 	<form method="POST" action="" class="text-center">
 		<article class="card d-inline-block text-start" style="min-width: 33%;">
@@ -17,14 +25,14 @@
 					<div class="col-2">
 						<img
 							class="img-fluid user-photo img-thumbnail img-thumbnail-1"
-							src="{{ client.owner.get_profile_pic_url() }}" />
+							src="{{ current_user.get_profile_pic_url() }}" />
 					</div>
 					<div class="col">
 						<p class="my-0">
-							{{ _("%(title)s by %(display_name)s", title=client.title, display_name=self.author_link()) }}
+							{{ _("%(title)s by %(display_name)s", title=self.client_title(), display_name=self.author_link()) }}
 						</p>
 						<p class="text-muted my-0">
-							{{ _("wants to access your account") }}
+							{{ _("wants to access your %(name)s account", name=self.current_user_name()) }}
 						</p>
 					</div>
 				</div>
@@ -35,7 +43,7 @@
 						</div>
 						<div class="col">
 							<p class="my-0">
-								{{ _("Verified Application") }}
+								{{ _("Verified application") }}
 							</p>
 							<p class="text-muted my-0">
 								{{  _("ContentDB trusts this application") }}
@@ -57,7 +65,7 @@
 					</div>
 				</div>
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<div class="row">
+				<div class="row mt-5">
 					<div class="col">
 						<button type="submit" name="action" value="cancel" href="#" class="btn btn-secondary d-block w-100">
 							{{ _("Cancel") }}
