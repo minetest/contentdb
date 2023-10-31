@@ -21,11 +21,15 @@
 	<h1 class="mt-0">{{ self.title() }}</h1>
 
 	{% if client %}
+		<form class="card my-5" method="POST" action="{{ url_for("oauth.revoke_all", username=client.owner.username, id_=client.id) }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			<div class="card-body d-flex flex-row align-items-center">
+				<p class="col my-0">{{ _("Your application has %(count)d users", count=client.tokens.count()) }}</p>
+				<input type="submit" class="btn btn-danger col-auto" value="{{ _('Revoke all user tokens') }}">
+			</div>
+		</form>
 		<div class="card my-5">
 			<div class="card-body">
-				<p>
-					{{ _("Your client has %(count)d users", count=client.tokens.count()) }}
-				</p>
 				<div class="form-group mb-3">
 					<label class="form-label" for="client_id">client_id</label>
 					<input class="form-control" type="text" id="client_id" name="client_id" value="{{ client.id }}" readonly>

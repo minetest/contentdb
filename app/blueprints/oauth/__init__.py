@@ -18,8 +18,8 @@ import urllib.parse as urlparse
 from typing import Optional
 from urllib.parse import urlencode
 
-from flask import Blueprint, render_template, redirect, url_for, request, jsonify, abort, make_response
-from flask_babel import lazy_gettext
+from flask import Blueprint, render_template, redirect, url_for, request, jsonify, abort, make_response, flash
+from flask_babel import lazy_gettext, gettext
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, URLField
@@ -178,6 +178,8 @@ def create_edit_client(username, id_=None):
 	client = None
 	if id_ is not None:
 		client = OAuthClient.query.get_or_404(id_)
+		if client.owner != user:
+			abort(403)
 
 	form = OAuthClientForm(formdata=request.form, obj=client)
 	if form.validate_on_submit():
@@ -223,3 +225,28 @@ def delete_client(username, id_):
 	db.session.commit()
 
 	return redirect(url_for("oauth.list_clients", username=username))
+
+
+@bp.route("/users/<username>/apps/<id_>/revoke-all/", methods=["POST"])
+@login_required
+def revoke_all(username, id_):
+	user = User.query.filter_by(username=username).first_or_404()
+	if not user.check_perm(current_user, Permission.CREATE_OAUTH_CLIENT):
+		abort(403)
+
+	client = OAuthClient.query.get(id_)
+	if client is None:
+		abort(404)
+	elif client.owner != user:
+		abort(403)
+
+	add_audit_log(AuditSeverity.NORMAL, current_user,
+			f"Revoked all user tokens for OAuth2 application {client.title} by {client.owner.username} [{client.id}]",
+			url_for("oauth.create_edit_client", username=client.owner.username, id_=client.id))
+
+	client.tokens = []
+	db.session.commit()
+
+	flash(gettext("Revoked all user tokens"), "success")
+
+	return redirect(url_for("oauth.create_edit_client", username=client.owner.username, id_=client.id))
