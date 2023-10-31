@@ -250,14 +250,9 @@ class User(db.Model, UserMixin):
 			return user == self or (user.rank.at_least(UserRank.MODERATOR) and not self.rank.at_least(user.rank))
 		elif perm == Permission.CHANGE_DISPLAY_NAME:
 			return user.rank.at_least(UserRank.NEW_MEMBER if user == self else UserRank.MODERATOR)
-		elif perm == Permission.CREATE_TOKEN:
+		elif perm == Permission.CREATE_TOKEN or perm == Permission.CREATE_OAUTH_CLIENT:
 			if user == self:
 				return user.rank.at_least(UserRank.NEW_MEMBER)
-			else:
-				return user.rank.at_least(UserRank.MODERATOR) and user.rank.at_least(self.rank)
-		elif perm == Permission.CREATE_OAUTH_CLIENT:
-			if user == self:
-				return user.rank.at_least(UserRank.EDITOR)
 			else:
 				return user.rank.at_least(UserRank.MODERATOR) and user.rank.at_least(self.rank)
 		else:

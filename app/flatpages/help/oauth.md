@@ -1,18 +1,21 @@
 title: OAuth2 API
 
 <p class="alert alert-warning">
-    The OAuth2 applications API is currently experimental and invite only.
+    The OAuth2 applications API is currently experimental, and may break without notice.
 </p>
 
 ContentDB allows you to create an OAuth2 Application and obtain access tokens
 for users.
 
 
+## Scopes
+
+OAuth2 applications can currently only access public user data, using the whoami API.
+
+
 ## Create an OAuth2 Client
 
 Go to Settings > [OAuth2 Applications](/user/apps/) > Create
-
-Note: If you don't see this then you don't have access to OAuth2 yet.
 
 
 ## Obtaining access tokens
@@ -97,8 +100,3 @@ Next, you should check the access token works by getting the user information:
 curl https://content.minetest.net/api/whoami/ \
     -H "Authorization: Bearer YOURTOKEN"
 ```
-
-
-## Scopes
-
-OAuth2 applications can currently only access public user data, using the whoami API.
