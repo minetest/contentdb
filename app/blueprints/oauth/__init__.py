@@ -179,7 +179,7 @@ def create_edit_client(username, id_=None):
 	if id_ is not None:
 		client = OAuthClient.query.get_or_404(id_)
 		if client.owner != user:
-			abort(403)
+			abort(404)
 
 	form = OAuthClientForm(formdata=request.form, obj=client)
 	if form.validate_on_submit():
@@ -212,10 +212,8 @@ def delete_client(username, id_):
 		abort(403)
 
 	client = OAuthClient.query.get(id_)
-	if client is None:
+	if client is None or client.owner != user:
 		abort(404)
-	elif client.owner != user:
-		abort(403)
 
 	add_audit_log(AuditSeverity.NORMAL, current_user,
 			f"Deleted OAuth2 application {client.title} by {client.owner.username} [{client.id}]",
@@ -235,10 +233,8 @@ def revoke_all(username, id_):
 		abort(403)
 
 	client = OAuthClient.query.get(id_)
-	if client is None:
+	if client is None or client.owner != user:
 		abort(404)
-	elif client.owner != user:
-		abort(403)
 
 	add_audit_log(AuditSeverity.NORMAL, current_user,
 			f"Revoked all user tokens for OAuth2 application {client.title} by {client.owner.username} [{client.id}]",
