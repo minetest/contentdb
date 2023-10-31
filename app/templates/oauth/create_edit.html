@@ -31,12 +31,17 @@
 					<input class="form-control" type="text" id="client_id" name="client_id" value="{{ client.id }}" readonly>
 				</div>
 				<div class="form-group">
-					<label class="client_secret-label" for="client_id">client_secret</label>
+					<label class="form-label" for="client_secret">client_secret</label>
 					<input class="form-control" type="text" id="client_secret" name="client_secret" value="{{ client.secret }}" readonly>
+					<p class="form-text text-muted">
+						{{ _("Keep the secret safe") }}
+					</p>
 				</div>
-				<p class="text-muted mb-0">
-					{{ _("Keep the secret safe") }}
-				</p>
+				<div class="form-group">
+					<label class="form-label" for="authorize_url">{{ _("Example Authorize URL") }}</label>
+					<input class="form-control" type="text" id="authorize_url" name="authorize_url" readonly
+						value="{{ abs_url_for("oauth.oauth_start", response_type="code", client_id=client.id, redirect_uri=client.redirect_url) }}">
+				</div>
 			</div>
 		</div>
 	{% endif %}
