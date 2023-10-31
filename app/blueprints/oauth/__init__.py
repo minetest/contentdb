@@ -27,7 +27,7 @@ from wtforms.validators import InputRequired, Length
 
 from app import csrf
 from app.blueprints.users.settings import get_setting_tabs
-from app.models import db, OAuthClient, User, Permission, APIToken, AuditSeverity
+from app.models import db, OAuthClient, User, Permission, APIToken, AuditSeverity, UserRank
 from app.utils import random_string, add_audit_log
 
 bp = Blueprint("oauth", __name__)
@@ -62,6 +62,9 @@ def oauth_start():
 	client = OAuthClient.query.get_or_404(client_id)
 	if client.redirect_url != redirect_uri:
 		return "redirect_uri does not match client", 400
+
+	if not client.approved and client.owner != current_user:
+		abort(404)
 
 	scope = request.args.get("scope", "public")
 	if scope != "public":
@@ -189,6 +192,7 @@ def create_edit_client(username, id_=None):
 			client.owner = user
 			client.id = random_string(24)
 			client.secret = random_string(32)
+			client.approved = current_user.rank.atLeast(UserRank.EDITOR)
 
 		form.populate_obj(client)
 

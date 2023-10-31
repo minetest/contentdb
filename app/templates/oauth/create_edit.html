@@ -21,6 +21,15 @@
 	<h1 class="mt-0">{{ self.title() }}</h1>
 
 	{% if client %}
+		{% if not client.approved %}
+			<aside class="alert alert-info my-5">
+				<h3 class="mt-0">{{ _("Application isn't approved yet") }}</h3>
+				<p class="mb-0">
+					{{ _("To allow users other than yourself to log in, you'll need to contact ContentDB staff and ask them to approve your app.") }}
+				</p>
+			</aside>
+		{% endif %}
+
 		<form class="card my-5" method="POST" action="{{ url_for("oauth.revoke_all", username=client.owner.username, id_=client.id) }}">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<div class="card-body d-flex flex-row align-items-center">

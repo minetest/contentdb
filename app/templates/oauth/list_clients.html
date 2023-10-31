@@ -12,6 +12,9 @@
 	<div class="list-group">
 		{% for client in user.clients %}
 			<a class="list-group-item list-group-item-action" href="{{ url_for('oauth.create_edit_client', username=user.username, id_=client.id) }}">
+				{% if not client.approved %}
+					<span class="badge bg-warning float-end">{{ _("Unpublished") }}</span>
+				{% endif %}
 				{{ client.title }}
 			</a>
 		{% else %}

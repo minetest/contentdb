@@ -72,10 +72,8 @@ def create_edit_token(username, id=None):
 	access_token = None
 	if not is_new:
 		token = APIToken.query.get(id)
-		if token is None:
+		if token is None or token.owner != user:
 			abort(404)
-		elif token.owner != user:
-			abort(403)
 
 		access_token = session.pop("token_" + str(token.id), None)
 
