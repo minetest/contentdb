@@ -53,7 +53,7 @@ Do this by making a POST request to the `/oauth/token/` API:
 
 ```bash
 curl -X POST https://content.minetest.net/oauth/token/ \
-    -F grant_type=authorization_code
+    -F grant_type=authorization_code \
     -F client_id="CLIENT_ID" \
     -F client_secret="CLIENT_SECRET" \
     -F code="abcdef" 
