@@ -26,6 +26,7 @@ from jinja2.utils import markupsafe
 from markdown.extensions import Extension
 from markdown.inlinepatterns import SimpleTagInlineProcessor
 from markdown.inlinepatterns import Pattern
+from markdown.extensions.codehilite import CodeHiliteExtension
 from xml.etree import ElementTree
 
 # Based on
@@ -155,13 +156,10 @@ class MentionExtension(Extension):
 		md.inlinePatterns.register(MentionPattern(self.getConfigs(), md), "mention", 20)
 
 
-MARKDOWN_EXTENSIONS = ["fenced_code", "tables", "codehilite", "toc", DelInsExtension(), MentionExtension()]
+MARKDOWN_EXTENSIONS = ["fenced_code", "tables", CodeHiliteExtension(guess_lang=False), "toc", DelInsExtension(), MentionExtension()]
 MARKDOWN_EXTENSION_CONFIG = {
 	"fenced_code": {},
-	"tables": {},
-	"codehilite": {
-		"guess_lang": False,
-	}
+	"tables": {}
 }
 
 
