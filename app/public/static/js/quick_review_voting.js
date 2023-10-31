@@ -41,11 +41,24 @@ async function submitForm(form, is_helpful) {
 		body: data,
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded",
+			"Accept": "application/json",
 		},
 	});
 
 	if (!res.ok) {
-		console.error(await res.text());
+		const json = await res.json();
+		alert(json.error ?? "Unknown server error");
+	}
+}
+
+
+function setButtonSelected(ele, isSelected) {
+	if (isSelected) {
+		ele.classList.add("btn-primary");
+		ele.classList.remove("btn-secondary");
+	} else {
+		ele.classList.add("btn-secondary");
+		ele.classList.remove("btn-primary");
 	}
 }
 
@@ -61,15 +74,16 @@ window.addEventListener("load", () => {
 
 			if (not_selected.classList.contains("btn-primary")) {
 				setVoteCount(not_selected, Math.max(getVoteCount(not_selected) - 1, 0));
-			}
-			if (selected.classList.contains("btn-secondary")) {
-				setVoteCount(selected, getVoteCount(selected) + 1);
+				setButtonSelected(not_selected, false);
 			}
 
-			selected.classList.add("btn-primary");
-			selected.classList.remove("btn-secondary");
-			not_selected.classList.add("btn-secondary");
-			not_selected.classList.remove("btn-primary");
+			if (selected.classList.contains("btn-secondary")) {
+				setVoteCount(selected, getVoteCount(selected) + 1);
+				setButtonSelected(selected, true);
+			} else if (selected.classList.contains("btn-primary")) {
+				setVoteCount(selected, Math.max(getVoteCount(selected) - 1, 0));
+				setButtonSelected(selected, false);
+			}
 
 			submitForm(helpful_form, is_helpful).catch(console.error);
 		}

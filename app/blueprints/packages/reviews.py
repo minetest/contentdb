@@ -16,7 +16,8 @@
 
 from collections import namedtuple
 
-from flask import render_template, request, redirect, flash, url_for, abort
+import typing
+from flask import render_template, request, redirect, flash, url_for, abort, jsonify
 from flask_babel import gettext, lazy_gettext
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
@@ -27,7 +28,7 @@ from app.models import db, PackageReview, Thread, ThreadReply, NotificationType,
 	Permission, AuditSeverity, PackageState
 from app.tasks.webhooktasks import post_discord_webhook
 from app.utils import is_package_page, add_notification, get_int_or_abort, is_yes, is_safe_url, rank_required, \
-	add_audit_log, has_blocked_domains
+	add_audit_log, has_blocked_domains, should_return_json
 from . import bp
 
 
@@ -178,18 +179,16 @@ def delete_review(package, reviewer):
 	return redirect(thread.get_view_url())
 
 
-def handle_review_vote(package: Package, review_id: int):
+def handle_review_vote(package: Package, review_id: int) -> typing.Optional[str]:
 	if current_user in package.maintainers:
-		flash(gettext("You can't vote on the reviews on your own package!"), "danger")
-		return
+		return gettext("You can't vote on the reviews on your own package!")
 
 	review: PackageReview = PackageReview.query.get(review_id)
 	if review is None or review.package != package:
 		abort(404)
 
 	if review.author == current_user:
-		flash(gettext("You can't vote on your own reviews!"), "danger")
-		return
+		return gettext("You can't vote on your own reviews!")
 
 	is_positive = is_yes(request.form["is_positive"])
 
@@ -213,7 +212,15 @@ def handle_review_vote(package: Package, review_id: int):
 @login_required
 @is_package_page
 def review_vote(package, review_id):
-	handle_review_vote(package, review_id)
+	msg = handle_review_vote(package, review_id)
+	if should_return_json():
+		if msg:
+			return jsonify({"success": False, "error": msg}), 403
+		else:
+			return jsonify({"success": True})
+
+	if msg:
+		flash(msg, "danger")
 
 	next_url = request.args.get("r")
 	if next_url and is_safe_url(next_url):
