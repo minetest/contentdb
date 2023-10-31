@@ -131,7 +131,6 @@ def oauth_grant():
 
 	return jsonify({
 		"access_token": token.access_token,
-		"refresh_token": "abc",
 		"token_type": "Bearer",
 	})
 
