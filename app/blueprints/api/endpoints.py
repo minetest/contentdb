@@ -212,6 +212,20 @@ def whoami(token):
 		return jsonify({ "is_authenticated": True, "username": token.owner.username })
 
 
+@bp.route("/api/delete-token/", methods=["DELETE"])
+@csrf.exempt
+@is_api_authd
+@cors_allowed
+def api_delete_token(token):
+	if token is None:
+		error(404, "Token not found")
+
+	db.session.delete(token)
+	db.session.commit()
+
+	return jsonify({"success": True})
+
+
 @bp.route("/api/markdown/", methods=["POST"])
 @csrf.exempt
 def markdown():

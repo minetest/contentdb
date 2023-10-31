@@ -64,6 +64,13 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
     * `is_authenticated`:  True on successful API authentication
     * `username`:  Username of the user authenticated as, null otherwise.
     * 4xx status codes will be thrown on unsupported authentication type, invalid access token, or other errors.
+* DELETE `/api/delete-token/`: Deletes the currently used token.
+
+```bash
+# Logout 
+curl -X DELETE https://content.minetest.net/api/delete-token/ \
+    -H "Authorization: Bearer YOURTOKEN"
+```
 
 
 ## Packages
