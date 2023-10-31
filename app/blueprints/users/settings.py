@@ -53,6 +53,13 @@ def get_setting_tabs(user):
 		},
 	]
 
+	if user.check_perm(current_user, Permission.CREATE_OAUTH_CLIENT):
+		ret.append({
+			"id": "oauth_clients",
+			"title": gettext("OAuth2 Applications"),
+			"url": url_for("oauth.list_clients", username=user.username)
+		})
+
 	if current_user.rank.at_least(UserRank.MODERATOR):
 		ret.append({
 			"id": "modtools",

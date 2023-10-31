@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{% if client %}
+		{{ _("Edit - %(name)s", name=client.title) }}
+	{% else %}
+		{{ _("Create OAuth Client") }}
+	{% endif %}
+{% endblock %}
+
+{% from "macros/forms.html" import render_field, render_submit_field %}
+
+{% block content %}
+	{% if client %}
+		<form class="float-end" method="POST" action="{{ url_for('oauth.delete_client', username=client.owner.username, id_=client.id) }}">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+			<input class="btn btn-danger" type="submit" value="{{ _('Delete') }}">
+		</form>
+	{% endif %}
+
+	<h1 class="mt-0">{{ self.title() }}</h1>
+
+	{% if client %}
+		<div class="card my-5">
+			<div class="card-body">
+				<p>
+					{{ _("Your client has %(count)d users", count=client.tokens.count()) }}
+				</p>
+				<div class="form-group mb-3">
+					<label class="form-label" for="client_id">client_id</label>
+					<input class="form-control" type="text" id="client_id" name="client_id" value="{{ client.id }}" readonly>
+				</div>
+				<div class="form-group">
+					<label class="client_secret-label" for="client_id">client_secret</label>
+					<input class="form-control" type="text" id="client_secret" name="client_secret" value="{{ client.secret }}" readonly>
+				</div>
+				<p class="text-muted mb-0">
+					{{ _("Keep the secret safe") }}
+				</p>
+			</div>
+		</div>
+	{% endif %}
+
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.title) }}
+		{{ render_field(form.redirect_url) }}
+
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}

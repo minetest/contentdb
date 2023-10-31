@@ -20,27 +20,34 @@
 
 	<h1 class="mt-0">{{ self.title() }}</h1>
 
-	<div class="alert alert-warning">
-		{{ _("API Tokens allow scripts to act on your behalf.") }}
-		{{ _("Be careful with what/whom you share tokens with, as you are responsible for your account's actions.") }}
-	</div>
-
-	{% if token %}
-		<div class="card mb-3">
-			<div class="card-header">{{ _("Access Token") }}</div>
-			<div class="card-body">
-				<p>
-					{{ _("For security reasons, access tokens will only be shown once. Reset the token if it is lost.") }}
-				</p>
-				{% if access_token %}
-					<input class="form-control my-3" type="text" readonly value="{{ access_token }}" class="form-control">
-				{% endif %}
-				<form method="POST" action="{{ url_for('api.reset_token', username=token.owner.username, id=token.id) }}">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
-					<input class="btn btn-primary" type="submit" value="{{ _('Reset') }}">
-				</form>
-			</div>
+	{% if token.client %}
+		<p class="alert alert-info">
+			{{ _("This token was created by the application '%(title)s' by %(author)s.", title=token.client.title, author=token.client.owner.username) }}
+			{{ _("Click 'Delete' to revoke access.") }}
+		</p>
+	{% else %}
+		<div class="alert alert-warning">
+			{{ _("API Tokens allow scripts to act on your behalf.") }}
+			{{ _("Be careful with what/whom you share tokens with, as you are responsible for your account's actions.") }}
 		</div>
+
+		{% if token %}
+			<div class="card mb-3">
+				<div class="card-header">{{ _("Access Token") }}</div>
+				<div class="card-body">
+					<p>
+						{{ _("For security reasons, access tokens will only be shown once. Reset the token if it is lost.") }}
+					</p>
+					{% if access_token %}
+						<input class="form-control my-3" type="text" readonly value="{{ access_token }}" class="form-control">
+					{% endif %}
+					<form method="POST" action="{{ url_for('api.reset_token', username=token.owner.username, id=token.id) }}">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}"/>
+						<input class="btn btn-primary" type="submit" value="{{ _('Reset') }}">
+					</form>
+				</div>
+			</div>
+		{% endif %}
 	{% endif %}
 
 	<form method="POST" action="" enctype="multipart/form-data">

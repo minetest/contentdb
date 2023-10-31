@@ -12,6 +12,11 @@
 	<div class="list-group">
 		{% for token in user.tokens %}
 			<a class="list-group-item list-group-item-action" href="{{ url_for('api.create_edit_token', username=user.username, id=token.id) }}">
+				{% if token.client %}
+					<span class="badge bg-info float-end">
+						{{ _("Application") }}
+					</span>
+				{% endif %}
 				{{ token.name }}
 			</a>
 		{% else %}

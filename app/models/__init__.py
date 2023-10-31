@@ -48,7 +48,14 @@ class APIToken(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
 	package    = db.relationship("Package", foreign_keys=[package_id], back_populates="tokens")
 
+	client_id = db.Column(db.String(24), db.ForeignKey("oauth_client.id"), nullable=True)
+	client    = db.relationship("OAuthClient", foreign_keys=[client_id], back_populates="tokens")
+	auth_code = db.Column(db.String(34), unique=True, nullable=True)
+
 	def can_operate_on_package(self, package):
+		if self.client is not None:
+			return False
+
 		if self.package and self.package != package:
 			return False
 

@@ -93,6 +93,7 @@ class Permission(enum.Enum):
 	VIEW_AUDIT_DESCRIPTION = "VIEW_AUDIT_DESCRIPTION"
 	EDIT_COLLECTION = "EDIT_COLLECTION"
 	VIEW_COLLECTION = "VIEW_COLLECTION"
+	CREATE_OAUTH_CLIENT = "CREATE_OAUTH_CLIENT"
 
 	# Only return true if the permission is valid for *all* contexts
 	# See Package.check_perm for package-specific contexts
@@ -187,6 +188,7 @@ class User(db.Model, UserMixin):
 	replies       = db.relationship("ThreadReply", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan", order_by=db.desc("created_at"))
 	forum_topics  = db.relationship("ForumTopic", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan")
 	collections = db.relationship("Collection", back_populates="author", lazy="dynamic", cascade="all, delete, delete-orphan", order_by=db.asc("title"))
+	clients = db.relationship("OAuthClient", back_populates="owner", lazy="dynamic", cascade="all, delete, delete-orphan")
 
 	ban = db.relationship("UserBan", foreign_keys="UserBan.user_id", back_populates="user", uselist=False)
 
@@ -250,6 +252,11 @@ class User(db.Model, UserMixin):
 		elif perm == Permission.CREATE_TOKEN:
 			if user == self:
 				return user.rank.at_least(UserRank.NEW_MEMBER)
+			else:
+				return user.rank.at_least(UserRank.MODERATOR) and user.rank.at_least(self.rank)
+		elif perm == Permission.CREATE_OAUTH_CLIENT:
+			if user == self:
+				return user.rank.at_least(UserRank.EDITOR)
 			else:
 				return user.rank.at_least(UserRank.MODERATOR) and user.rank.at_least(self.rank)
 		else:
@@ -545,3 +552,19 @@ class UserBan(db.Model):
 	@property
 	def has_expired(self):
 		return self.expires_at and datetime.datetime.now() > self.expires_at
+
+
+class OAuthClient(db.Model):
+	__tablename__ = "oauth_client"
+
+	id = db.Column(db.String(24), primary_key=True)
+	title = db.Column(db.String(64), unique=True)
+	secret = db.Column(db.String(32))
+	redirect_url = db.Column(db.String(128))
+
+	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	owner = db.relationship("User", foreign_keys=[owner_id], back_populates="clients")
+
+	tokens = db.relationship("APIToken", back_populates="client", lazy="dynamic", cascade="all, delete, delete-orphan")
+
+	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)

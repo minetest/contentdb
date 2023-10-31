@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{{ _("Authorize %(title)s", title=client.title) }}
+{% endblock %}
+
+{% block author_link %}
+	<a href="{{ url_for('users.profile', username=client.owner.username) }}">{{ client.owner.username }}</a>
+{% endblock %}
+
+{% block content %}
+	<form method="POST" action="" class="text-center">
+		<article class="card d-inline-block text-start">
+			<div class="card-body">
+				<h1 class="card-title">{{ self.title() }}</h1>
+				<div class="row my-4 align-items-center">
+					<div class="col-2">
+						<img
+							class="img-fluid user-photo img-thumbnail img-thumbnail-1"
+							src="{{ client.owner.get_profile_pic_url() }}" />
+					</div>
+					<div class="col">
+						<p class="my-0">
+							{{ _("%(title)s by %(display_name)s", title=client.title, display_name=self.author_link()) }}
+						</p>
+						<p class="text-muted my-0">
+							{{ _("wants to access your account") }}
+						</p>
+					</div>
+				</div>
+				<div class="row my-4 align-items-center">
+					<div class="col-2 text-center">
+						<i class="fas fa-globe fa-xl"></i>
+					</div>
+					<div class="col">
+						<p class="my-0">
+							{{ _("Public data only") }}
+						</p>
+						<p class="text-muted my-0">
+							{{  _("Display name, username") }}
+						</p>
+					</div>
+				</div>
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<div class="row">
+					<div class="col">
+						<button type="submit" name="action" value="cancel" href="#" class="btn btn-secondary d-block w-100">
+							{{ _("Cancel") }}
+						</button>
+					</div>
+					<div class="col">
+						<button type="submit" name="action" value="authorize" href="#" class="btn btn-primary d-block w-100">
+							{{ _("Authorize") }}
+						</button>
+					</div>
+				</div>
+			</div>
+		</article>
+	</form>
+{% endblock %}

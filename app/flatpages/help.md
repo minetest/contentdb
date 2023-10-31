@@ -35,4 +35,5 @@ toc: False
 ## APIs
 
 * [API](api/)
+* [OAuth2 Applications](oauth/)
 * [Prometheus Metrics](metrics/)

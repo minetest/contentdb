@@ -1,0 +1,23 @@
+{% extends "users/settings_base.html" %}
+
+{% block title %}
+	{{ _("OAuth2 Applications | %(username)s", username=user.username) }}
+{% endblock %}
+
+{% block pane %}
+	<a class="btn btn-primary float-end" href="{{ url_for('oauth.create_edit_client', username=user.username) }}">{{ _("Create") }}</a>
+	<a class="btn btn-secondary me-2 float-end" href="/help/oauth/">{{ _("OAuth2 Documentation") }}</a>
+	<h2 class="mt-0">{{ _("OAuth2 Applications") }}</h2>
+
+	<div class="list-group">
+		{% for client in user.clients %}
+			<a class="list-group-item list-group-item-action" href="{{ url_for('oauth.create_edit_client', username=user.username, id_=client.id) }}">
+				{{ client.title }}
+			</a>
+		{% else %}
+			<span class="list-group-item">
+				<i>{{ _("No applications created") }}</i>
+			</span>
+		{% endfor %}
+	</div>
+{% endblock %}
