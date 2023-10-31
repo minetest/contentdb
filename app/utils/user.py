@@ -16,6 +16,7 @@
 
 
 from functools import wraps
+from typing import Optional
 
 from flask_babel import gettext
 from flask_login import login_user, current_user
@@ -57,7 +58,7 @@ def post_login(user: User, next_url):
 	return redirect(url_for("homepage.home"))
 
 
-def login_user_set_active(user: User, next_url: str = None, *args, **kwargs):
+def login_user_set_active(user: User, next_url: Optional[str] = None, *args, **kwargs):
 	if user.rank == UserRank.NOT_JOINED and user.email is None:
 		user.rank = UserRank.NEW_MEMBER
 		user.notification_preferences = UserNotificationPreferences(user)

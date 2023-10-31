@@ -71,11 +71,11 @@ def handle_login(form):
 
 @bp.route("/user/login/", methods=["GET", "POST"])
 def login():
-	if current_user.is_authenticated:
-		next = request.args.get("next")
-		if next and not is_safe_url(next):
-			abort(400)
+	next = request.args.get("next")
+	if next and not is_safe_url(next):
+		abort(400)
 
+	if current_user.is_authenticated:
 		return redirect(next or url_for("homepage.home"))
 
 	form = LoginForm(request.form)
@@ -87,7 +87,7 @@ def login():
 	if request.method == "GET":
 		form.remember_me.data = True
 
-	return render_template("users/login.html", form=form)
+	return render_template("users/login.html", form=form, next=next)
 
 
 @bp.route("/user/logout/", methods=["GET", "POST"])

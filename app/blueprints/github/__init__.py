@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import Blueprint
+from flask import Blueprint, abort
 from flask_babel import gettext
 
 bp = Blueprint("github", __name__)
@@ -24,13 +24,19 @@ from flask_login import current_user
 from sqlalchemy import func, or_, and_
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission, AuditSeverity, PackageState
-from app.utils import abs_url_for, add_audit_log, login_user_set_active
+from app.utils import abs_url_for, add_audit_log, login_user_set_active, is_safe_url
 from app.blueprints.api.support import error, api_create_vcs_release
 import hmac, requests
 
+
 @bp.route("/github/start/")
 def start():
-	return github.authorize("", redirect_uri=abs_url_for("github.callback"))
+	next = request.args.get("next")
+	if next and not is_safe_url(next):
+		abort(400)
+
+	return github.authorize("", redirect_uri=abs_url_for("github.callback", next=next))
+
 
 @bp.route("/github/view/")
 def view_permissions():
@@ -46,6 +52,14 @@ def callback(oauth_token):
 		flash(gettext("Authorization failed [err=gh-oauth-login-failed]"), "danger")
 		return redirect(url_for("users.login"))
 
+	next = request.args.get("next")
+	if next and not is_safe_url(next):
+		abort(400)
+
+	redirect_to = next
+	if redirect_to is None:
+		redirect_to = url_for("homepage.home")
+
 	# Get GitGub username
 	url = "https://api.github.com/user"
 	r = requests.get(url, headers={"Authorization": "token " + oauth_token})
@@ -60,10 +74,10 @@ def callback(oauth_token):
 			current_user.github_username = username
 			db.session.commit()
 			flash(gettext("Linked GitHub to account"), "success")
-			return redirect(url_for("homepage.home"))
+			return redirect(redirect_to)
 		else:
 			flash(gettext("GitHub account is already associated with another user"), "danger")
-			return redirect(url_for("homepage.home"))
+			return redirect(redirect_to)
 
 	# If not logged in, log in
 	else:
@@ -71,13 +85,13 @@ def callback(oauth_token):
 			flash(gettext("Unable to find an account for that GitHub user"), "danger")
 			return redirect(url_for("users.claim_forums"))
 
-		ret = login_user_set_active(userByGithub, remember=True)
+		ret = login_user_set_active(userByGithub, next, remember=True)
 		if ret is None:
 			flash(gettext("Authorization failed [err=gh-login-failed]"), "danger")
 			return redirect(url_for("users.login"))
 
 		add_audit_log(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",
-					  url_for("users.profile", username=userByGithub.username))
+				url_for("users.profile", username=userByGithub.username))
 		db.session.commit()
 		return ret
 
