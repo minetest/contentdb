@@ -8,11 +8,6 @@ ContentDB allows you to create an OAuth2 Application and obtain access tokens
 for users.
 
 
-## Scopes
-
-OAuth2 applications can currently only access public user data, using the whoami API.
-
-
 ## Create an OAuth2 Client
 
 Go to Settings > [OAuth2 Applications](/user/apps/) > Create
@@ -100,3 +95,12 @@ Next, you should check the access token works by getting the user information:
 curl https://content.minetest.net/api/whoami/ \
     -H "Authorization: Bearer YOURTOKEN"
 ```
+
+
+## Scopes
+
+* (no scope) - public data only
+* `user:email`: read user email
+* `package`: write access to packages
+* `package:release`: create and delete releases
+* `package:screenshot`: create, edit, delete screenshots

@@ -52,8 +52,38 @@ class APIToken(db.Model):
 	client    = db.relationship("OAuthClient", foreign_keys=[client_id], back_populates="tokens")
 	auth_code = db.Column(db.String(34), unique=True, nullable=True)
 
+	scope_user_email = db.Column(db.Boolean, nullable=False, default=False)
+	scope_package = db.Column(db.Boolean, nullable=False, default=False)
+	scope_package_release = db.Column(db.Boolean, nullable=False, default=False)
+	scope_package_screenshot = db.Column(db.Boolean, nullable=False, default=False)
+
+	def get_scopes(self) -> set[str]:
+		ret = set()
+		if self.scope_user_email:
+			ret.add("user:email")
+		if self.scope_package:
+			ret.add("package")
+		if self.scope_package_release:
+			ret.add("package:release")
+		if self.scope_package_screenshot:
+			ret.add("package:screenshot")
+		return ret
+
+	def set_scopes(self, v: set[str]):
+		def pop(key: str):
+			if key in v:
+				v.remove(key)
+				return True
+
+		self.scope_user_email = pop("user:email")
+		self.scope_package = pop("package")
+		self.scope_package_release = pop("package:release") or self.scope_package
+		self.scope_package_screenshot = pop("package:screenshot") or self.scope_package
+		return v
+
 	def can_operate_on_package(self, package):
-		if self.client is not None:
+		if (self.client is not None and
+				not (self.scope_package or self.scope_package_release or self.scope_package_screenshot)):
 			return False
 
 		if self.package and self.package != package:

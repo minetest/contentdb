@@ -66,14 +66,18 @@ def oauth_start():
 	if not client.approved and client.owner != current_user:
 		abort(404)
 
-	scope = request.args.get("scope", "public")
-	if scope != "public":
-		return "Unsupported scope, only public is supported", 400
+	valid_scopes = {"user:email", "package", "package:release", "package:screenshot"}
+	scope = request.args.get("scope", "")
+	scopes = [x.strip() for x in scope.split(",")]
+	scopes = set([x for x in scopes if x != ""])
+	unknown_scopes = scopes - valid_scopes
+	if unknown_scopes:
+		return f"Unknown scopes: {', '.join(unknown_scopes)}", 400
 
 	state = request.args.get("state")
 
 	token = APIToken.query.filter(APIToken.client == client, APIToken.owner == current_user).first()
-	if token:
+	if token and not (scopes - token.get_scopes()):
 		token.access_token = random_string(32)
 		token.auth_code = random_string(32)
 		db.session.commit()
@@ -85,14 +89,18 @@ def oauth_start():
 			return redirect(client.redirect_url)
 
 		elif action == "authorize":
-			token = APIToken()
+			if token is None:
+				token = APIToken()
+				token.name = f"Token for {client.title} by {client.owner.username}"
+				token.owner = current_user
+				token.client = client
+
 			token.access_token = random_string(32)
-			token.name = f"Token for {client.title} by {client.owner.username}"
-			token.owner = current_user
-			token.client = client
 			assert client is not None
 			token.auth_code = random_string(32)
 			db.session.add(token)
+
+			token.set_scopes(scopes)
 
 			add_audit_log(AuditSeverity.USER, current_user,
 					f"Granted \"{scope}\" to OAuth2 application \"{client.title}\" by {client.owner.username} [{client_id}] ",
@@ -102,7 +110,42 @@ def oauth_start():
 
 			return redirect(build_redirect_url(client.redirect_url, token.auth_code, state))
 
-	return render_template("oauth/authorize.html", client=client)
+	scopes_info = []
+	if not scopes:
+		scopes_info.append({
+			"icon": "globe-europe",
+			"title": "Public data only",
+			"description": "Read-only access to your public data",
+		})
+
+	if "user:email" in scopes:
+		scopes_info.append({
+			"icon": "user",
+			"title": gettext("Personal data"),
+			"description": gettext("Email address (read-only)"),
+		})
+
+	if ("package" in scopes or
+			"package:release" in scopes or
+			"package:screenshot" in scopes):
+		if "package" in scopes:
+			msg = gettext("Ability to edit packages and their releases, screenshots, and related data")
+		elif "package:release" in scopes and "package:screenshot" in scopes:
+			msg = gettext("Ability to create and edit releases and screenshots")
+		elif "package:release" in scopes:
+			msg = gettext("Ability to create and edit releases")
+		elif "package:screenshot" in scopes:
+			msg = gettext("Ability to create and edit screenshots")
+		else:
+			assert False, "This should never happen"
+
+		scopes_info.append({
+			"icon": "pen",
+			"title": gettext("Packages"),
+			"description": msg,
+		})
+
+	return render_template("oauth/authorize.html", client=client, scopes=scopes_info)
 
 
 def error(code: int, msg: str):
