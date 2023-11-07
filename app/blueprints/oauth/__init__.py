@@ -15,15 +15,15 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import urllib.parse as urlparse
-from typing import Optional
 from urllib.parse import urlencode
 
+import typing
 from flask import Blueprint, render_template, redirect, url_for, request, jsonify, abort, make_response, flash
 from flask_babel import lazy_gettext, gettext
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, URLField
-from wtforms.validators import InputRequired, Length
+from wtforms.validators import InputRequired, Length, Optional
 
 from app import csrf
 from app.blueprints.users.settings import get_setting_tabs
@@ -33,7 +33,7 @@ from app.utils import random_string, add_audit_log
 bp = Blueprint("oauth", __name__)
 
 
-def build_redirect_url(url: str, code: str, state: Optional[str]):
+def build_redirect_url(url: str, code: str, state: typing.Optional[str]):
 	params = {"code": code}
 	if state is not None:
 		params["state"] = state
@@ -165,6 +165,7 @@ def list_clients(username):
 
 class OAuthClientForm(FlaskForm):
 	title = StringField(lazy_gettext("Title"), [InputRequired(), Length(5, 30)])
+	description = StringField(lazy_gettext("Description"), [Optional()])
 	redirect_url = URLField(lazy_gettext("Redirect URL"), [InputRequired(), Length(5, 123)])
 	submit = SubmitField(lazy_gettext("Save"))
 

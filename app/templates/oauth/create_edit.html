@@ -63,6 +63,7 @@
 		{{ form.hidden_tag() }}
 
 		{{ render_field(form.title) }}
+		{{ render_field(form.description, hint=_("Shown to users when you request access to their account")) }}
 		{{ render_field(form.redirect_url) }}
 
 		{{ render_submit_field(form.submit) }}

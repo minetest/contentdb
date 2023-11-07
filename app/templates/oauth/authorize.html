@@ -80,6 +80,12 @@
 			</div>
 		</article>
 	</form>
+	{% if client.description %}
+		<div class="alert alert-secondary mt-5 w-50 mx-auto">
+			<h3 class="mt-0 mb-2">{{ _("About %(title)s", title=client.title) }}</h3>
+			<p class="mb-0">{{ client.description }}</p>
+		</div>
+	{% endif %}
 	{% if not client.approved %}
 		<aside class="alert alert-danger mt-5 w-50 mx-auto">
 			<h3 class="mt-0">{{ _("Application isn't approved yet") }}</h3>
