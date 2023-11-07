@@ -32,7 +32,20 @@
 		</div>
 
 		{{ render_field(form.short_description) }}
-		{{ render_checkbox_field(form.private, class_="my-3") }}
+
+		<div class="row my-5 gap-5">
+			<div class="col-md-auto">
+				{{ render_checkbox_field(form.private) }}
+			</div>
+			{% if form.pinned %}
+				<div class="col-md-auto">
+					{{ render_checkbox_field(form.pinned) }}
+					<p class="form-text mb-0">
+						{{ _("This requires the collection to be public") }}
+					</p>
+				</div>
+			{% endif %}
+		</div>
 		{% if collection %}
 			{{ render_field(form.long_description, fieldclass="form-control markdown") }}
 		{% endif %}

@@ -22,7 +22,7 @@ from flask_babel import gettext
 from flask_login import current_user, login_required
 from sqlalchemy import func, text
 
-from app.models import User, db, Package, PackageReview, PackageState, PackageType, UserRank
+from app.models import User, db, Package, PackageReview, PackageState, PackageType, UserRank, Collection
 from app.utils import get_daterange_options
 from app.tasks.forumtasks import check_forum_account
 
@@ -230,11 +230,14 @@ def profile(username):
 		.filter(Package.author != user) \
 		.order_by(db.asc(Package.title)).all()
 
+	pinned_collections = user.collections.filter(Collection.private == False,
+			Collection.pinned == True, Collection.packages.any()).all()
+
 	unlocked, locked = get_user_medals(user)
 	# Process GET or invalid POST
 	return render_template("users/profile.html", user=user,
 			packages=packages, maintained_packages=maintained_packages,
-			medals_unlocked=unlocked, medals_locked=locked)
+			medals_unlocked=unlocked, medals_locked=locked, pinned_collections=pinned_collections)
 
 
 @bp.route("/users/<username>/check-forums/", methods=["POST"])

@@ -80,6 +80,7 @@ class CollectionForm(FlaskForm):
 	short_description = StringField(lazy_gettext("Short Description"), [Optional(), Length(0, 200)])
 	long_description = TextAreaField(lazy_gettext("Page Content"), [Optional()], filters=[nonempty_or_none])
 	private = BooleanField(lazy_gettext("Private"))
+	pinned = BooleanField(lazy_gettext("Pinned to my profile"))
 	descriptions = FieldList(
 		StringField(lazy_gettext("Short Description"), [Optional(), Length(0, 500)], filters=[nonempty_or_none]),
 		min_entries=0)
@@ -122,6 +123,7 @@ def create_edit(author=None, name=None):
 	if request.method == "GET":
 		# HACK: fix bug in wtforms
 		form.private.data = collection.private if collection else False
+		form.pinned.data = collection.pinned if collection else False
 		if collection:
 			for item in collection.items:
 				form.descriptions.append_entry(item.description)
@@ -129,6 +131,7 @@ def create_edit(author=None, name=None):
 				form.package_removed.append_entry("0")
 		else:
 			form.name = None
+			form.pinned = None
 
 	if form.validate_on_submit():
 		ret = handle_create_edit(collection, form, initial_packages, author)
@@ -319,6 +322,7 @@ def package_add(package):
 @login_required
 def package_toggle_favorite(package):
 	collection, _is_new = get_or_create_favorites(db.session)
+	collection.author = current_user
 
 	if toggle_package(collection, package):
 		msg = gettext("Added package to favorites collection")

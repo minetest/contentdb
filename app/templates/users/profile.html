@@ -213,41 +213,55 @@
 	</div>
 {% endif %}
 
-<div class="float-end">
-    {% if packages %}
-        <div class="btn-group btn-group-sm me-2" role="group" aria-label="Sorting">
-            <span class="btn btn-sm btn-primary">
-                {{ _("Alphabetical") }}
-            </span>
-            <a href="{{ url_for('packages.list_all', author=user.username, sort='downloads', order='desc') }}"
-               class="btn btn-sm btn-secondary">
-                {{ _("Downloads") }}
-            </a>
-            <a href="{{ url_for('packages.list_all', author=user.username, sort='approved_at', order='desc') }}"
-               class="btn btn-sm btn-secondary">
-                {{ _("Newest") }}
-            </a>
-        </div>
-        {% if current_user == user or (current_user.is_authenticated and current_user.rank.at_least(current_user.rank.EDITOR)) %}
-            <a class="btn btn-sm btn-secondary me-2"
-                    href="{{ url_for('todo.tags', author=user.username) }}">
-                {{ _("View list of tags") }}
-            </a>
-        {% endif %}
-    {% endif %}
-    {% if current_user == user or user.check_perm(current_user, "CHANGE_AUTHOR") %}
-        <a class="btn btn-sm btn-primary"
-                href="{{ url_for('packages.create_edit', author=user.username) }}">
-            <i class="fas fa-plus me-1"></i>
-            {{ _("Create package") }}
-        </a>
-    {% endif %}
-</div>
-
-<h2 class="my-3">{{ _("Packages") }}</h2>
 
 {% from "macros/packagegridtile.html" import render_pkggrid %}
-{{ render_pkggrid(packages, show_author=False) }}
+
+{% for collection in pinned_collections %}
+	<section id="{{ collection.name }}" class="my-4">
+		<a class="float-end btn btn-primary btn-sm" href="{{ url_for('collections.view', author=collection.author.username, name=collection.name) }}">
+			View collection
+		</a>
+		<h2>{{ collection.title }}</h2>
+		{% set collection_packages = collection.packages | limit(4) %}
+		{{ render_pkggrid(collection_packages) }}
+	</section>
+{% endfor %}
+
+<section id="packages" class="my-4">
+	<div class="float-end">
+		{% if packages %}
+			<div class="btn-group btn-group-sm me-2" role="group" aria-label="Sorting">
+				<span class="btn btn-sm btn-primary">
+					{{ _("Alphabetical") }}
+				</span>
+				<a href="{{ url_for('packages.list_all', author=user.username, sort='downloads', order='desc') }}"
+				   class="btn btn-sm btn-secondary">
+					{{ _("Downloads") }}
+				</a>
+				<a href="{{ url_for('packages.list_all', author=user.username, sort='approved_at', order='desc') }}"
+				   class="btn btn-sm btn-secondary">
+					{{ _("Newest") }}
+				</a>
+			</div>
+			{% if current_user == user or (current_user.is_authenticated and current_user.rank.at_least(current_user.rank.EDITOR)) %}
+				<a class="btn btn-sm btn-secondary me-2"
+						href="{{ url_for('todo.tags', author=user.username) }}">
+					{{ _("View list of tags") }}
+				</a>
+			{% endif %}
+		{% endif %}
+		{% if current_user == user or user.check_perm(current_user, "CHANGE_AUTHOR") %}
+			<a class="btn btn-sm btn-primary"
+					href="{{ url_for('packages.create_edit', author=user.username) }}">
+				<i class="fas fa-plus me-1"></i>
+				{{ _("Create package") }}
+			</a>
+		{% endif %}
+	</div>
+
+	<h2 class="my-3">{{ _("Packages") }}</h2>
+	{{ render_pkggrid(packages, show_author=False) }}
+</section>
 
 
 {% if maintained_packages %}

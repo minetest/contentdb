@@ -101,3 +101,8 @@ def timedelta(value):
 @app.template_filter()
 def abs_url(url):
 	return utils.abs_url(url)
+
+
+@app.template_filter()
+def limit(arr, num):
+	return arr[:num]
