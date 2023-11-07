@@ -560,6 +560,7 @@ class OAuthClient(db.Model):
 	redirect_url = db.Column(db.String(128), nullable=False)
 	approved = db.Column(db.Boolean, nullable=False, default=False)
 	verified = db.Column(db.Boolean, nullable=False, default=False)
+	is_clientside = db.Column(db.Boolean, nullable=False, default=False)
 
 	owner_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	owner = db.relationship("User", foreign_keys=[owner_id], back_populates="clients")
@@ -567,3 +568,11 @@ class OAuthClient(db.Model):
 	tokens = db.relationship("APIToken", back_populates="client", lazy="dynamic", cascade="all, delete, delete-orphan")
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
+
+	def get_app_type(self):
+		return "client" if self.is_clientside else "server"
+
+	def set_app_type(self, value):
+		self.is_clientside = value == "client"
+
+	app_type = property(get_app_type, set_app_type)

@@ -22,7 +22,7 @@ from flask import Blueprint, render_template, redirect, url_for, request, jsonif
 from flask_babel import lazy_gettext, gettext
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, URLField
+from wtforms import StringField, SubmitField, URLField, SelectField
 from wtforms.validators import InputRequired, Length, Optional
 
 from app import csrf
@@ -167,6 +167,10 @@ class OAuthClientForm(FlaskForm):
 	title = StringField(lazy_gettext("Title"), [InputRequired(), Length(5, 30)])
 	description = StringField(lazy_gettext("Description"), [Optional()])
 	redirect_url = URLField(lazy_gettext("Redirect URL"), [InputRequired(), Length(5, 123)])
+	app_type = SelectField(lazy_gettext("App Type"), [InputRequired()], choices=[
+		("server", "Server-side (client_secret is kept safe)"),
+		("client", "Client-side (client_secret is visible to all users)"),
+	], coerce=lambda x: x)
 	submit = SubmitField(lazy_gettext("Save"))
 
 
@@ -186,6 +190,7 @@ def create_edit_client(username, id_=None):
 			abort(404)
 
 	form = OAuthClientForm(formdata=request.form, obj=client)
+
 	if form.validate_on_submit():
 		if is_new:
 			client = OAuthClient()

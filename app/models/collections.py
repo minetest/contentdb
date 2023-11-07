@@ -55,6 +55,7 @@ class Collection(db.Model):
 	long_description = db.Column(db.UnicodeText, nullable=True)
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 	private = db.Column(db.Boolean, nullable=False, default=False)
+	pinned = db.Column(db.Boolean, nullable=False, default=False)
 
 	packages = db.relationship("Package", secondary=CollectionPackage.__table__, backref="collections")
 	items = db.relationship("CollectionPackage", back_populates="collection", order_by=db.asc("order"),
