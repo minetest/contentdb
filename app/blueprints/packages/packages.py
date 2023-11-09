@@ -17,6 +17,7 @@
 import datetime
 import typing
 from urllib.parse import quote as urlescape
+from urllib.parse import urlencode
 
 from celery import uuid
 from flask import render_template, make_response, request, redirect, flash, url_for, abort
@@ -46,6 +47,26 @@ from app.models import Package, Tag, db, User, Tags, PackageState, Permission, P
 from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, add_audit_log, get_package_by_info, \
 	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options
 
+def generate_canonical(page, content_type, tag=None):
+    base_url = request.base_url
+    query_params = {
+        'page': page,
+        'type': content_type
+    }
+
+    if 'sort' in request.args:
+        query_params['sort'] = request.args.get('sort')
+
+    if 'order' in request.args:
+        query_params['order'] = request.args.get('order')
+
+    encoded_query = urlencode(query_params)
+
+    if tag:
+        for item in tag:
+            encoded_query = f"{encoded_query}&tag={item.name}"
+
+    return f"{base_url}?{encoded_query}"
 
 @bp.route("/packages/")
 def list_all():
@@ -109,10 +130,12 @@ def list_all():
 
 	selected_tags = set(qb.tags)
 
+	canonical_url = generate_canonical(page, type_name, selected_tags)
+
 	return render_template("packages/list.html",
 			query_hint=title, packages=query.items, pagination=query,
 			query=search, tags=tags, selected_tags=selected_tags, type=type_name,
-			authors=authors, packages_count=query.total, topics=topics, noindex=qb.noindex)
+			authors=authors, packages_count=query.total, topics=topics, noindex=qb.noindex, canonical_url=canonical_url)
 
 
 def get_releases(package):
@@ -206,7 +229,7 @@ def view(package):
 			package=package, releases=releases, packages_uses=packages_uses,
 			conflicting_modnames=conflicting_modnames,
 			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
-			threads=threads.all(), has_review=has_review, is_favorited=is_favorited)
+			threads=threads.all(), has_review=has_review, is_favorited=is_favorited, canonical_url=request.base_url)
 
 
 @bp.route("/packages/<author>/<name>/shields/<type>/")

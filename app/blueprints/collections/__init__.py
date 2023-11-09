@@ -54,7 +54,7 @@ def list_all(author=None):
 	collections = [x for x in query.all() if x.check_perm(current_user, Permission.VIEW_COLLECTION)]
 	return render_template("collections/list.html",
 		user=user, collections=collections,
-		noindex=len(collections) == 0)
+		noindex=len(collections) == 0, canonical_url=request.base_url)
 
 
 @bp.route("/collections/<author>/<name>/")
@@ -70,7 +70,7 @@ def view(author, name):
 	if collection.check_perm(current_user, Permission.EDIT_COLLECTION):
 		items = [x for x in items if x.package.check_perm(current_user, Permission.VIEW_PACKAGE)]
 
-	return render_template("collections/view.html", collection=collection, items=items)
+	return render_template("collections/view.html", collection=collection, items=items, canonical_url=request.base_url)
 
 
 class CollectionForm(FlaskForm):
