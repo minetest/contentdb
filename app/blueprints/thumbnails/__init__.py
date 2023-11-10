@@ -23,7 +23,7 @@ bp = Blueprint("thumbnails", __name__)
 
 
 ALLOWED_RESOLUTIONS = [(100, 67), (270, 180), (350, 233), (1100, 520)]
-ALLOWED_EXTENSIONS = {"png", "webp"}
+ALLOWED_EXTENSIONS = {"png", "webp", "jpg"}
 
 
 def mkdir(path):
