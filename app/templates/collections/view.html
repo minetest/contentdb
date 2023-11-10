@@ -9,7 +9,7 @@
 {%- endblock %}
 
 {% block headextra %}
-	{% set thumb_url = collection.packages and collection.packages[0].get_thumb_url(3, True) %}
+	{% set thumb_url = collection.packages and collection.packages[0].get_thumb_url(3, True, "png") %}
 	{% if thumb_url -%}
 		<meta name="og:image" content="{{ thumb_url }}">
 	{%- endif %}

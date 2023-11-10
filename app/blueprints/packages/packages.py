@@ -426,7 +426,7 @@ def move_to_state(package):
 		if not package.approved_at:
 			post_discord_webhook.delay(package.author.display_name,
 					"New package {}".format(package.get_url("packages.view", absolute=True)), False,
-					package.title, package.short_desc, package.get_thumb_url(2, True))
+					package.title, package.short_desc, package.get_thumb_url(2, True, "png"))
 			package.approved_at = datetime.datetime.now()
 
 		screenshots = PackageScreenshot.query.filter_by(package=package, approved=False).all()
@@ -437,7 +437,7 @@ def move_to_state(package):
 	elif state == PackageState.READY_FOR_REVIEW:
 		post_discord_webhook.delay(package.author.display_name,
 				"Ready for Review: {}".format(package.get_url("packages.view", absolute=True)), True,
-				package.title, package.short_desc, package.get_thumb_url(2, True))
+				package.title, package.short_desc, package.get_thumb_url(2, True, "png"))
 
 	add_notification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.get_url("packages.view"), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
@@ -480,7 +480,7 @@ def remove(package):
 
 		post_discord_webhook.delay(current_user.username,
 			f"Deleted package {package.author.username}/{package.name} with reason '{reason}'",
-			True, package.title, package.short_desc, package.get_thumb_url(2, True))
+			True, package.title, package.short_desc, package.get_thumb_url(2, True, "png"))
 
 		flash(gettext("Deleted package"), "success")
 
@@ -500,7 +500,7 @@ def remove(package):
 
 		post_discord_webhook.delay(current_user.username,
 			"Unapproved package with reason {}\n\n{}".format(reason, package.get_url("packages.view", absolute=True)), True,
-			package.title, package.short_desc, package.get_thumb_url(2, True))
+			package.title, package.short_desc, package.get_thumb_url(2, True, "png"))
 
 		flash(gettext("Unapproved package"), "success")
 

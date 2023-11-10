@@ -528,7 +528,7 @@ class Package(db.Model):
 		}
 
 	def as_short_dict(self, base_url, version=None, release_id=None, no_load=False):
-		tnurl = self.get_thumb_url(1)
+		tnurl = self.get_thumb_url(1, format="png")
 
 		if release_id is None and no_load == False:
 			release = self.get_download_release(version=version)
@@ -555,7 +555,7 @@ class Package(db.Model):
 		return ret
 
 	def as_dict(self, base_url, version=None):
-		tnurl = self.get_thumb_url(1)
+		tnurl = self.get_thumb_url(1, format="png")
 		release = self.get_download_release(version=version)
 		return {
 			"author": self.author.username,
@@ -603,21 +603,21 @@ class Package(db.Model):
 			]
 		}
 
-	def get_thumb_or_placeholder(self, level=2):
-		return self.get_thumb_url(level) or "/static/placeholder.png"
+	def get_thumb_or_placeholder(self, level=2, format="webp"):
+		return self.get_thumb_url(level, False, format) or "/static/placeholder.png"
 
-	def get_thumb_url(self, level=2, abs=False):
+	def get_thumb_url(self, level=2, abs=False, format="webp"):
 		screenshot = self.main_screenshot
-		url = screenshot.get_thumb_url(level) if screenshot is not None else None
+		url = screenshot.get_thumb_url(level, format) if screenshot is not None else None
 		if abs:
 			from app.utils import abs_url
 			return abs_url(url)
 		else:
 			return url
 
-	def get_cover_image_url(self):
+	def get_cover_image_url(self, format="webp"):
 		screenshot = self.cover_image or self.main_screenshot
-		return screenshot and screenshot.get_thumb_url(4)
+		return screenshot and screenshot.get_thumb_url(4, format)
 
 	def get_url(self, endpoint, absolute=False, **kwargs):
 		if absolute:
@@ -1101,8 +1101,12 @@ class PackageScreenshot(db.Model):
 				name=self.package.name,
 				id=self.id)
 
-	def get_thumb_url(self, level=2):
-		return self.url.replace("/uploads/", "/thumbnails/{:d}/".format(level))
+	def get_thumb_url(self, level=2, format="webp"):
+		url = self.url.replace("/uploads/", "/thumbnails/{:d}/".format(level))
+		if format is not None:
+			start = url[:url.rfind(".")]
+			url = f"{start}.{format}"
+		return url
 
 	def as_dict(self, base_url=""):
 		return {

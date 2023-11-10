@@ -12,8 +12,8 @@
 {% endblock %}
 
 {% block headextra %}
-	{% if package.get_thumb_url(3, True) -%}
-		<meta name="og:image" content="{{ package.get_thumb_url(3, True) }}"/>
+	{% if package.get_thumb_url(3, True, "png") -%}
+		<meta name="og:image" content="{{ package.get_thumb_url(3, True, "png") }}"/>
 	{%- endif %}
 {% endblock %}
 
@@ -261,7 +261,7 @@
 												{% if ss.approved or package.check_perm(current_user, "ADD_SCREENSHOTS") %}
 												<div class="carousel-item {% if loop.index == 1 %}active{% endif %}">
 													<a href="{{ ss.url }}" target="_blank">
-														<img class="img-size w-100" src="{{ ss.url }}" alt="{{ ss.title }}" title="{{ ss.title }}" />
+														<img class="img-size w-100" loading="lazy" src="{{ ss.url }}" alt="{{ ss.title }}" title="{{ ss.title }}" />
 													</a>
 												</div>
 												{% endif %}

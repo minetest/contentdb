@@ -14,15 +14,17 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
 from flask import abort, send_file, Blueprint, current_app
-
-bp = Blueprint("thumbnails", __name__)
-
 import os
 from PIL import Image
 
-ALLOWED_RESOLUTIONS=[(100,67), (270,180), (350,233), (1100,520)]
+
+bp = Blueprint("thumbnails", __name__)
+
+
+ALLOWED_RESOLUTIONS = [(100, 67), (270, 180), (350, 233), (1100, 520)]
+ALLOWED_EXTENSIONS = {"png", "webp"}
+
 
 def mkdir(path):
 	assert path != "" and path is not None
@@ -34,10 +36,7 @@ def mkdir(path):
 
 
 def resize_and_crop(img_path, modified_path, size):
-	try:
-		img = Image.open(img_path)
-	except FileNotFoundError:
-		abort(404)
+	img = Image.open(img_path)
 
 	# Get current and desired ratio for the images
 	img_ratio = img.size[0] / float(img.size[1])
@@ -64,21 +63,40 @@ def resize_and_crop(img_path, modified_path, size):
 	img.save(modified_path)
 
 
+def find_source_file(img):
+	upload_dir = current_app.config["UPLOAD_DIR"]
+	source_filepath = os.path.join(upload_dir, img)
+	if os.path.isfile(source_filepath):
+		return source_filepath
+
+	period = source_filepath.rfind(".")
+	start = source_filepath[:period]
+	ext = source_filepath[period + 1:]
+	if ext not in ALLOWED_EXTENSIONS:
+		abort(404)
+
+	for other_ext in ALLOWED_EXTENSIONS:
+		other_path = f"{start}.{other_ext}"
+		if ext != other_ext and os.path.isfile(other_path):
+			return other_path
+
+	abort(404)
+
+
 @bp.route("/thumbnails/<int:level>/<img>")
 def make_thumbnail(img, level):
 	if level > len(ALLOWED_RESOLUTIONS) or level <= 0:
 		abort(403)
 	w, h = ALLOWED_RESOLUTIONS[level - 1]
 
-	upload_dir = current_app.config["UPLOAD_DIR"]
 	thumbnail_dir = current_app.config["THUMBNAIL_DIR"]
 	mkdir(thumbnail_dir)
 
 	output_dir = os.path.join(thumbnail_dir, str(level))
 	mkdir(output_dir)
 
-	cache_filepath  = os.path.join(output_dir, img)
-	source_filepath = os.path.join(upload_dir, img)
+	cache_filepath = os.path.join(output_dir, img)
+	source_filepath = find_source_file(img)
 
 	resize_and_crop(source_filepath, cache_filepath, (w, h))
 	return send_file(cache_filepath)
