@@ -100,5 +100,9 @@ def make_thumbnail(img, level):
 	cache_filepath = os.path.join(output_dir, img)
 	source_filepath = find_source_file(img)
 
-	resize_and_crop(source_filepath, cache_filepath, (w, h))
-	return send_file(cache_filepath)
+	if not os.path.isfile(cache_filepath):
+		resize_and_crop(source_filepath, cache_filepath, (w, h))
+
+	res = send_file(cache_filepath)
+	res.cache_control.max_age = 7*24*60*60
+	return res
