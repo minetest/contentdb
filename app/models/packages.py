@@ -411,10 +411,10 @@ class Package(db.Model):
 	dependencies = db.relationship("Dependency", back_populates="depender", lazy="dynamic", foreign_keys=[Dependency.depender_id])
 
 	supported_games = db.relationship("PackageGameSupport", back_populates="package", lazy="dynamic",
-			foreign_keys=[PackageGameSupport.package_id])
+			foreign_keys=[PackageGameSupport.package_id], cascade="all, delete, delete-orphan")
 
 	game_supported_mods = db.relationship("PackageGameSupport", back_populates="game", lazy="dynamic",
-			foreign_keys=[PackageGameSupport.game_id])
+			foreign_keys=[PackageGameSupport.game_id], cascade="all, delete, delete-orphan")
 
 	tags = db.relationship("Tag", secondary=Tags, back_populates="packages")
 
