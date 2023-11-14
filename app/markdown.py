@@ -48,6 +48,8 @@ ALLOWED_TAGS = {
 	"img",
 	"table", "thead", "tbody", "tr", "th", "td",
 	"div", "span", "del", "s",
+	"details",
+	"summary",
 }
 
 ALLOWED_CSS = [
