@@ -31,9 +31,14 @@ You should read
 [the official Minetest Modding Book](https://rubenwardy.com/minetest_modding_book/)
 for a guide to making mods and games using Minetest.
 
-## How can I support / donate to ContentDB?
 
-You can donate to rubenwardy to cover ContentDB's costs and support future
-development.
+<h2 id="donate">How can I support / donate to ContentDB?</h2>
 
-<a href="https://rubenwardy.com/donate/" class="btn btn-primary me-1">Donate</a>
+You can donate to rubenwardy to cover ContentDB's costs and support future development.
+
+For more information about what the cost of ContentDB and what rubenwardy does, see "Why donate".
+
+<a href="https://rubenwardy.com/donate/" class="btn btn-primary me-1">Why donate</a>
+<a href="https://liberapay.com/rubenwardy" class="btn btn-secondary me-1">Liberapay</a>
+<a href="https://www.patreon.com/rubenwardy/" class="btn btn-secondary me-1">Patreon</a>
+<a href="https://paypal.me/rubenwardy" class="btn btn-secondary me-1">PayPal</a>
