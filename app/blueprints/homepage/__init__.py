@@ -65,11 +65,21 @@ def home():
 	high_reviewed = package_load(query.order_by(db.desc(Package.score - Package.score_downloads))) \
 			.filter(Package.reviews.any()).limit(PKGS_PER_ROW).all()
 
-	updated = package_load(db.session.query(Package).select_from(PackageRelease).join(Package)
-			.filter_by(state=PackageState.APPROVED)
-			.order_by(db.desc(PackageRelease.releaseDate))
-			.limit(20)).all()
-	updated = updated[:PKGS_PER_ROW]
+	recent_releases_query = (
+		db.session.query(
+			Package.id,
+			func.max(PackageRelease.releaseDate).label("max_created_at")
+		)
+		.join(PackageRelease, Package.releases)
+		.group_by(Package.id)
+		.order_by(db.desc("max_created_at"))
+		.limit(PKGS_PER_ROW)
+		.subquery())
+	updated = (
+		db.session.query(Package)
+		.join(recent_releases_query, and_(Package.id == recent_releases_query.c.id,
+				Package.releases.any(releaseDate=recent_releases_query.c.max_created_at)))
+		.all())
 
 	reviews = review_load(PackageReview.query.filter(PackageReview.rating > 3)
 			.order_by(db.desc(PackageReview.created_at))).limit(5).all()
