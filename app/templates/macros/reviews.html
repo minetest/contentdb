@@ -79,10 +79,10 @@
 									</a>
 								{% endif %}
 
-								<a class="btn {% if review.thread.replies.count() > 1 %} btn-primary {% else %} btn-secondary {% endif %} me-1"
+								<a class="btn {% if review.thread.replies_count > 1 %} btn-primary {% else %} btn-secondary {% endif %} me-1"
 										href="{{ url_for('threads.view', id=review.thread.id) }}">
 									<i class="fas fa-comments me-2"></i>
-									{{ _("%(num)d comments", num=review.thread.replies.count() - 1) }}
+									{{ _("%(num)d comments", num=review.thread.replies_count - 1) }}
 								</a>
 
 								{{ render_review_vote(review, current_user, url_set_anchor(review_anchor)) }}

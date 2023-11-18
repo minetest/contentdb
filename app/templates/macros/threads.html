@@ -216,7 +216,7 @@
 	</div>
 
 	{% for t in threads %}
-		{% set replies = t.replies.count() - 1 %}
+		{% set replies = t.replies_count - 1 %}
 
 		<a class="list-group-item list-group-item-action"
 				href="{{ url_for('threads.view', id=t.id) }}">

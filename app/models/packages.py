@@ -21,14 +21,14 @@ import enum
 from flask import url_for
 from flask_babel import lazy_gettext
 from flask_sqlalchemy import BaseQuery
-from sqlalchemy import or_
+from sqlalchemy import or_, func
+from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy_searchable import SearchQueryMixin
 from sqlalchemy_utils.types import TSVectorType
-from sqlalchemy.dialects.postgresql import insert
 
+from app import app
 from . import db
 from .users import Permission, UserRank, User
-from app import app
 
 
 class PackageQuery(BaseQuery, SearchQueryMixin):
@@ -438,8 +438,8 @@ class Package(db.Model):
 	threads = db.relationship("Thread", back_populates="package", order_by=db.desc("thread_created_at"),
 			foreign_keys="Thread.package_id", cascade="all, delete, delete-orphan", lazy="dynamic")
 
-	reviews = db.relationship("PackageReview", back_populates="package",
-			order_by=[db.desc("package_review_score"),db.desc("package_review_created_at")],
+	reviews = db.relationship("PackageReview", back_populates="package", lazy="dynamic",
+			order_by=[db.desc("package_review_score"), db.desc("package_review_created_at")],
 			cascade="all, delete, delete-orphan")
 
 	audit_log_entries = db.relationship("AuditLogEntry", foreign_keys="AuditLogEntry.package_id",
@@ -784,6 +784,27 @@ class Package(db.Model):
 			return "texture_pack.conf"
 		elif self.type == PackageType.GAME:
 			return "game.conf"
+
+	def get_review_summary(self):
+		from app.models import PackageReview
+		rows = (db.session.query(PackageReview.rating, func.count(PackageReview.id))
+			.select_from(PackageReview)
+			.where(PackageReview.package_id == self.id)
+			.group_by(PackageReview.rating)
+			.all())
+
+		negative = 0
+		neutral = 0
+		positive = 0
+		for rating, count in rows:
+			if rating > 3:
+				positive += count
+			elif rating == 3:
+				neutral += count
+			else:
+				negative += count
+
+		return [positive, neutral, negative]
 
 
 class MetaPackage(db.Model):

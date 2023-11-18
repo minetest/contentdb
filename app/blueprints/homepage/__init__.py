@@ -18,11 +18,11 @@ from flask import Blueprint, render_template, redirect
 from sqlalchemy import and_
 
 from app.models import Package, PackageReview, Thread, User, PackageState, db, PackageType, PackageRelease, Tags, Tag, \
-	Collection
+	Collection, License
 
 bp = Blueprint("homepage", __name__)
 
-from sqlalchemy.orm import joinedload, subqueryload
+from sqlalchemy.orm import joinedload, subqueryload, load_only, noload
 from sqlalchemy.sql.expression import func
 
 
@@ -38,32 +38,47 @@ def gamejam():
 def home():
 	def package_load(query):
 		return query.options(
-				joinedload(Package.author),
+				load_only(Package.name, Package.title, Package.short_desc, Package.state, raiseload=True),
 				subqueryload(Package.main_screenshot),
+				joinedload(Package.author).load_only(User.username, User.display_name, raiseload=True),
+				joinedload(Package.license).load_only(License.name, License.is_foss, raiseload=True),
+				joinedload(Package.media_license).load_only(License.name, License.is_foss, raiseload=True))
+
+	def package_spotlight_load(query):
+		return query.options(
+				load_only(Package.name, Package.title, Package.type, Package.short_desc, Package.state, Package.cover_image_id, raiseload=True),
+				subqueryload(Package.main_screenshot),
+				joinedload(Package.tags),
+				joinedload(Package.content_warnings),
+				joinedload(Package.author).load_only(User.username, User.display_name, raiseload=True),
 				subqueryload(Package.cover_image),
-				joinedload(Package.license),
-				joinedload(Package.media_license))
+				joinedload(Package.license).load_only(License.name, License.is_foss, raiseload=True),
+				joinedload(Package.media_license).load_only(License.name, License.is_foss, raiseload=True))
 
 	def review_load(query):
 		return query.options(
-			joinedload(PackageReview.author),
-			joinedload(PackageReview.thread).subqueryload(Thread.first_reply),
-			joinedload(PackageReview.package).joinedload(Package.author).load_only(User.username, User.display_name),
-			joinedload(PackageReview.package).load_only(Package.title, Package.name).subqueryload(Package.main_screenshot))
+			load_only(PackageReview.id, PackageReview.rating, PackageReview.created_at, raiseload=True),
+			joinedload(PackageReview.author).load_only(User.username, User.rank, User.email, User.display_name, User.profile_pic, User.is_active, raiseload=True),
+			joinedload(PackageReview.votes),
+			joinedload(PackageReview.thread).load_only(Thread.title, Thread.replies_count, raiseload=True).subqueryload(Thread.first_reply),
+			joinedload(PackageReview.package)
+				.load_only(Package.title, Package.name, raiseload=True)
+				.joinedload(Package.author).load_only(User.username, User.display_name, raiseload=True))
 
 	query = Package.query.filter_by(state=PackageState.APPROVED)
-	count = query.count()
+	count = db.session.query(Package.id).filter(Package.state == PackageState.APPROVED).count()
 
-	spotlight_pkgs = query.filter(
-			Package.collections.any(and_(Collection.name == "spotlight", Collection.author.has(username="ContentDB")))) \
-		.order_by(func.random()).limit(6).all()
+	spotlight_pkgs = package_spotlight_load(query.filter(
+			Package.collections.any(and_(Collection.name == "spotlight", Collection.author.has(username="ContentDB"))))
+		.order_by(func.random())).limit(6).all()
 
-	new = package_load(query.order_by(db.desc(Package.approved_at))).limit(PKGS_PER_ROW).all()
-	pop_mod = package_load(query.filter_by(type=PackageType.MOD).order_by(db.desc(Package.score))).limit(2*PKGS_PER_ROW).all()
-	pop_gam = package_load(query.filter_by(type=PackageType.GAME).order_by(db.desc(Package.score))).limit(2*PKGS_PER_ROW).all()
-	pop_txp = package_load(query.filter_by(type=PackageType.TXP).order_by(db.desc(Package.score))).limit(2*PKGS_PER_ROW).all()
-	high_reviewed = package_load(query.order_by(db.desc(Package.score - Package.score_downloads))) \
-			.filter(Package.reviews.any()).limit(PKGS_PER_ROW).all()
+	new = package_load(query).order_by(db.desc(Package.approved_at)).limit(PKGS_PER_ROW).all() # 0.06
+	pop_mod = package_load(query).filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(2*PKGS_PER_ROW).all()
+	pop_gam = package_load(query).filter_by(type=PackageType.GAME).order_by(db.desc(Package.score)).limit(2*PKGS_PER_ROW).all()
+	pop_txp = package_load(query).filter_by(type=PackageType.TXP).order_by(db.desc(Package.score)).limit(2*PKGS_PER_ROW).all()
+
+	high_reviewed = package_load(query.order_by(db.desc(Package.score - Package.score_downloads))
+			.filter(Package.reviews.any()).limit(PKGS_PER_ROW)).all()
 
 	recent_releases_query = (
 		db.session.query(

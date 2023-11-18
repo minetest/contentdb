@@ -18,6 +18,8 @@ import datetime
 from typing import Tuple, List
 
 from flask import url_for
+from sqlalchemy import select, func, text
+from sqlalchemy.orm import column_property
 
 from . import db
 from .users import Permission, UserRank, User
@@ -58,6 +60,11 @@ class Thread(db.Model):
 	first_reply = db.relationship("ThreadReply", uselist=False, foreign_keys="ThreadReply.thread_id",
 			lazy=True, order_by=db.asc("id"), viewonly=True,
 			primaryjoin="Thread.id==ThreadReply.thread_id")
+
+	replies_count = column_property(select(func.count(text("thread_reply.id")))
+			.select_from(text("thread_reply"))
+			.where(text("thread_reply.thread_id") == id)
+			.as_scalar())
 
 	def get_description(self):
 		comment = self.first_reply.comment.replace("\r\n", " ").replace("\n", " ").replace("  ", " ")
