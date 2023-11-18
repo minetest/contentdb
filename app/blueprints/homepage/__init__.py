@@ -73,13 +73,16 @@ def home():
 		.join(PackageRelease, Package.releases)
 		.group_by(Package.id)
 		.order_by(db.desc("max_created_at"))
-		.limit(PKGS_PER_ROW)
+		.limit(3*PKGS_PER_ROW)
 		.subquery())
+
 	updated = (
-		db.session.query(Package)
-		.join(recent_releases_query, and_(Package.id == recent_releases_query.c.id,
-				Package.releases.any(releaseDate=recent_releases_query.c.max_created_at)))
-		.all())
+		package_load(db.session.query(Package)
+			.select_from(recent_releases_query)
+			.join(Package, Package.id == recent_releases_query.c.id)
+			.filter(Package.state == PackageState.APPROVED)
+			.limit(PKGS_PER_ROW))
+			.all())
 
 	reviews = review_load(PackageReview.query.filter(PackageReview.rating > 3)
 			.order_by(db.desc(PackageReview.created_at))).limit(5).all()
