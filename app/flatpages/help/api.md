@@ -92,7 +92,7 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
         * `license`: A [license](#licenses) name.
         * `media_license`: A [license](#licenses) name.
         * `long_description`: Long markdown description.
-        * `repo`: Git repo URL.
+        * `repo`: Source repository (eg: Git)
         * `website`: Website URL.
         * `issue_tracker`: Issue tracker URL.
         * `forums`: forum topic ID.

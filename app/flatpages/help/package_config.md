@@ -70,7 +70,7 @@ It should be a JSON dictionary with one or more of the following optional keys:
 * `license`: A license name, see [/api/licenses/](/api/licenses/).
 * `media_license`: A license name.          
 * `long_description`: Long markdown description.
-* `repo`: Git repo URL.
+* `repo`: Source repository (eg: Git).
 * `website`: Website URL.
 * `issue_tracker`: Issue tracker URL.
 * `forums`: forum topic ID.
