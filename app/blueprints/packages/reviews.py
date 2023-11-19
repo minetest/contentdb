@@ -245,15 +245,17 @@ def review_votes(package):
 			else:
 				user_biases[vote.user.username][1] += 1
 
+	reviews = package.reviews.all()
+
 	BiasInfo = namedtuple("BiasInfo", "username balance with_ against no_vote perc_with")
 	user_biases_info = []
 	for username, bias in user_biases.items():
 		total_votes = bias[0] + bias[1]
 		balance = bias[0] - bias[1]
 		perc_with = round((100 * bias[0]) / total_votes)
-		user_biases_info.append(BiasInfo(username, balance, bias[0], bias[1], len(package.reviews) - total_votes, perc_with))
+		user_biases_info.append(BiasInfo(username, balance, bias[0], bias[1], len(reviews) - total_votes, perc_with))
 
 	user_biases_info.sort(key=lambda x: -abs(x.balance))
 
-	return render_template("packages/review_votes.html", package=package, reviews=package.reviews,
+	return render_template("packages/review_votes.html", package=package, reviews=reviews,
 			user_biases=user_biases_info)
