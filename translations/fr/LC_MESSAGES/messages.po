@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
-"PO-Revision-Date: 2023-10-23 21:06+0000\n"
+"PO-Revision-Date: 2023-10-27 12:13+0000\n"
 "Last-Translator: Lemente <crafted.by.lemente@gmail.com>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.2-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -111,7 +112,7 @@ msgstr "Description courte"
 
 #: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
-msgstr ""
+msgstr "Contenu de la page"
 
 #: app/blueprints/collections/__init__.py:82
 #: app/blueprints/threads/__init__.py:283
@@ -207,7 +208,7 @@ msgstr "Partage et badges"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "Supprimer / Rendre privé"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -401,10 +402,14 @@ msgstr "Compatible avec tous les jeux (sauf mention contraire) / indépendant"
 #: app/blueprints/packages/packages.py:697
 msgid "You need at least one release before you can edit game support"
 msgstr ""
+"Vous devez avoir au moins une version avant de pouvoir préciser les jeux "
+"compatibles"
 
 #: app/blueprints/packages/packages.py:701
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
+"Le mod(pack) doit contenir au moins un mod. Merci de créer une nouvelle "
+"version"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -500,7 +505,7 @@ msgstr "Envoyer une notification et marquer comme obsolète"
 #: app/blueprints/packages/releases.py:254
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
-msgstr "Publier une version"
+msgstr "Créer une version"
 
 #: app/blueprints/packages/releases.py:256
 msgid "Save Settings"
@@ -1581,8 +1586,9 @@ msgstr "Pas de résultat"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/packages/remove.html:44 app/templates/packages/view.html:126
+#, fuzzy
 msgid "Remove"
-msgstr "Retirer"
+msgstr "Retirer/Supprimer"
 
 #: app/templates/collections/create_edit.html:74
 msgid "You can replace the description with your own"
@@ -2357,7 +2363,7 @@ msgstr "Paquet"
 
 #: app/templates/packages/create_edit.html:72
 msgid "You need to unpublish the package to change the name."
-msgstr ""
+msgstr "Vous devez rendre ce paquet privé pour changer son nom."
 
 #: app/templates/packages/create_edit.html:78
 msgid ""
@@ -2379,7 +2385,7 @@ msgstr "Dépôt et liens"
 
 #: app/templates/packages/create_edit.html:92
 msgid "Do you have a Git repository?"
-msgstr ""
+msgstr "Avez-vous un dépôt Git ?"
 
 #: app/templates/packages/create_edit.html:94
 msgid "Having a repository is optional"
@@ -2413,7 +2419,7 @@ msgstr "Où les utilisateurs devraient-ils signaler les problèmes ?"
 
 #: app/templates/packages/create_edit.html:117
 msgid "Paste a forum topic URL"
-msgstr ""
+msgstr "Coller une URL de sujet de forum"
 
 #: app/templates/packages/create_edit.html:119
 msgid "YouTube videos will be shown in an embed."
@@ -2468,6 +2474,7 @@ msgid ""
 "Game support is configured using the package's .conf file. See the "
 "documentation for more info"
 msgstr ""
+"Le fichier .conf du paquet est utilisé pour déterminer les jeux compatibles"
 
 #: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:212
@@ -2487,8 +2494,9 @@ msgid "Detected from dependencies"
 msgstr "Détecté à partir des dépendances"
 
 #: app/templates/packages/game_support.html:49
+#, fuzzy
 msgid "Overridden on ContentDB"
-msgstr ""
+msgstr "Remplacé sur ContentDB"
 
 #: app/templates/packages/game_support.html:68
 #, fuzzy
@@ -2515,12 +2523,16 @@ msgid ""
 "When checked, this indicates that this package should support all games, "
 "unless excluded by unsupported_games."
 msgstr ""
+"Si coché, cela indique que ce paquet devrait supporter tout les jeux, sauf "
+"si exclu par unsupported_games."
 
 #: app/templates/packages/game_support.html:97
 msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
 msgstr ""
+"Vous pouvez cocher ceci et tout de même spécifier les jeux que vous avez "
+"testés dans supported_games."
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
@@ -2898,6 +2910,7 @@ msgid "Remove %(title)s"
 msgstr "Supprimer %(title)s"
 
 #: app/templates/packages/remove.html:11
+#, fuzzy
 msgid ""
 "In order to avoid data loss, you cannot permanently delete packages.\n"
 "\t\t\tYou can remove them from ContentDB, which will cause them to not be"
@@ -2906,11 +2919,10 @@ msgid ""
 "future.\n"
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
-"Pour éviter des pertes de données, vous ne pouvez pas supprimer des "
-"paquets de façon permanente.\n"
-"Vous pouvez cependant les masquer des autres utilisatrices et "
-"utilisateurs.\n"
-"Ils pourront être supprimés automatiquement par la suite.\n"
+"Pour éviter des pertes de données, vous ne pouvez pas supprimer des paquets "
+"de façon permanente.\n"
+"Vous pouvez les retirer de ContentDB, ce qui les masquera totalement.\n"
+"Ils pourraient être supprimés automatiquement dans le future.\n"
 "Un Admin peux restaurer un paquet masqué, si nécessaire."
 
 #: app/templates/packages/remove.html:19
@@ -2933,7 +2945,7 @@ msgstr ""
 
 #: app/templates/packages/remove.html:47
 msgid "Unpublish"
-msgstr ""
+msgstr "Rendre privé"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -3214,8 +3226,9 @@ msgid "View content for game"
 msgstr "Voir le contenu de ce jeu"
 
 #: app/templates/packages/view.html:381
+#, fuzzy
 msgid "Favorite"
-msgstr ""
+msgstr "Favoris"
 
 #: app/templates/packages/view.html:387
 msgid "Add to collection..."
@@ -3422,7 +3435,7 @@ msgstr "Répondre à <b>%(title)s</b>"
 
 #: app/templates/threads/user_comments.html:73
 msgid "Only showing replies to public threads"
-msgstr ""
+msgstr "Montrer seulement les réponses aux discussions publiques"
 
 #: app/templates/threads/view.html:44
 msgid "Subscribe"
@@ -3571,6 +3584,9 @@ msgid ""
 "Click the button below to confirm that the following packages do support "
 "all games, except for any games listed in unsupported_games:"
 msgstr ""
+"Cliquez sur le bouton ci-dessous pour confirmer que le paquet suivant est "
+"compatible avec tout les jeux, excepté les jeux listés dans "
+"unsupported_games :"
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
@@ -3710,11 +3726,12 @@ msgstr ""
 
 #: app/templates/todo/user.html:72
 msgid "See game support for your packages"
-msgstr ""
+msgstr "Voir les jeux compatibles pour votre paquet"
 
 #: app/templates/todo/user.html:74
+#, fuzzy
 msgid "Missing Game Support"
-msgstr ""
+msgstr "Jeux compatibles non renseignés"
 
 #: app/templates/todo/user.html:120
 msgid "Small Screenshots"
@@ -4179,8 +4196,9 @@ msgid "Profile Picture"
 msgstr "Image du profil"
 
 #: app/templates/users/profile_edit.html:27
+#, fuzzy
 msgid "Sync with Forums"
-msgstr ""
+msgstr "Synchroniser avec le Forum"
 
 #: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
@@ -4745,4 +4763,3 @@ msgstr ""
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr "Il est recommandé de définir un mot de passe pour votre compte."
-
