@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
-"PO-Revision-Date: 2023-10-07 08:11+0000\n"
+"PO-Revision-Date: 2023-11-03 17:32+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
+"contentdb/de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.2-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -43,7 +44,7 @@ msgstr "%(delta)s her"
 
 #: app/blueprints/api/endpoints.py:928
 msgid "Spotlight"
-msgstr ""
+msgstr "Rampenlicht"
 
 #: app/blueprints/api/endpoints.py:940 app/templates/index.html:127
 msgid "Top Games"
@@ -209,7 +210,7 @@ msgstr "Teilen und Abzeichen"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "Entfernen / Depublizieren"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -401,10 +402,14 @@ msgstr ""
 #: app/blueprints/packages/packages.py:697
 msgid "You need at least one release before you can edit game support"
 msgstr ""
+"Sie brauchen mindestens ein Release, bevor Sie die Spielunterstüzung "
+"bearbeiten können"
 
 #: app/blueprints/packages/packages.py:701
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
+"Mod(-paket) braucht mindestens eine Mod. Bitte erstellen Sie ein neues "
+"Release"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -2369,7 +2374,7 @@ msgstr "Paket"
 
 #: app/templates/packages/create_edit.html:72
 msgid "You need to unpublish the package to change the name."
-msgstr ""
+msgstr "Sie müssen das Paket depublizieren, um den Namen ändern zu können."
 
 #: app/templates/packages/create_edit.html:78
 msgid ""
@@ -2391,17 +2396,19 @@ msgstr "Repository und Links"
 
 #: app/templates/packages/create_edit.html:92
 msgid "Do you have a Git repository?"
-msgstr ""
+msgstr "Haben Sie ein Git-Repository?"
 
 #: app/templates/packages/create_edit.html:94
 msgid "Having a repository is optional"
-msgstr ""
+msgstr "Es ist optional, ein Repository zu haben"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
+"Falls Sie ein Repository haben, geben Sie die URL unten ein. Ansonsten "
+"lassen Sie es leer und klicken Sie auf Überspringen."
 
 #: app/templates/packages/create_edit.html:102
 msgid "HTTP URL to a Git, Mercurial, or other repository"
@@ -2960,7 +2967,7 @@ msgstr ""
 
 #: app/templates/packages/remove.html:47
 msgid "Unpublish"
-msgstr ""
+msgstr "Depublizieren"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -3451,7 +3458,7 @@ msgstr "Antworte auf <b>%(title)s</b>"
 
 #: app/templates/threads/user_comments.html:73
 msgid "Only showing replies to public threads"
-msgstr ""
+msgstr "Es werden nur Antworten auf öffentliche Themen angezeigt"
 
 #: app/templates/threads/view.html:44
 msgid "Subscribe"
@@ -4212,7 +4219,7 @@ msgstr "Profilbild"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
-msgstr ""
+msgstr "Mit Foren synchronisieren"
 
 #: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
@@ -4751,4 +4758,3 @@ msgstr ""
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr "Es wird empfohlen, ein Passwort für Ihr Konto festzulegen."
-
