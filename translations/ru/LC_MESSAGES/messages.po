@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
-"PO-Revision-Date: 2023-10-23 21:06+0000\n"
+"PO-Revision-Date: 2023-10-27 12:13+0000\n"
 "Last-Translator: Ярослав Рукавицын <skybuilderoffical@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Generator: Weblate 5.2-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -44,7 +45,7 @@ msgstr "%(delta)s назад"
 
 #: app/blueprints/api/endpoints.py:928
 msgid "Spotlight"
-msgstr ""
+msgstr "Прожектор"
 
 #: app/blueprints/api/endpoints.py:940 app/templates/index.html:127
 msgid "Top Games"
@@ -208,7 +209,7 @@ msgstr "Поделиться и Значки"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "Удалить / Отменить публикацию"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -396,10 +397,14 @@ msgstr "Поддерживает все игры (если не указано �
 #: app/blueprints/packages/packages.py:697
 msgid "You need at least one release before you can edit game support"
 msgstr ""
+"Вам нужен хотя бы один релиз, прежде чем вы сможете редактировать поддержку "
+"игры"
 
 #: app/blueprints/packages/packages.py:701
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
+"Мод(пакет) должен содержать хотя бы один мод. Пожалуйста, создайте новый "
+"релиз"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -2013,7 +2018,7 @@ msgstr "Загрузки от $1 до $2"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr "1$ в день"
+msgstr "в день"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -2338,7 +2343,7 @@ msgstr "Дополнение"
 
 #: app/templates/packages/create_edit.html:72
 msgid "You need to unpublish the package to change the name."
-msgstr ""
+msgstr "Вам нужно отменить публикацию пакета, чтобы изменить название."
 
 #: app/templates/packages/create_edit.html:78
 msgid ""
@@ -2358,17 +2363,19 @@ msgstr "Репозиторий и ссылки"
 
 #: app/templates/packages/create_edit.html:92
 msgid "Do you have a Git repository?"
-msgstr ""
+msgstr "Есть ли у вас репозиторий Git?"
 
 #: app/templates/packages/create_edit.html:94
 msgid "Having a repository is optional"
-msgstr ""
+msgstr "Наличие репозитория необязательно"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
+"Если у вас действительно есть репозиторий, введите URL-адрес ниже. В "
+"противном случае оставьте поле пустым и нажмите пропустить."
 
 #: app/templates/packages/create_edit.html:102
 msgid "HTTP URL to a Git, Mercurial, or other repository"
@@ -2916,7 +2923,7 @@ msgstr "Причина отказа проверки / удаления, она 
 
 #: app/templates/packages/remove.html:47
 msgid "Unpublish"
-msgstr ""
+msgstr "Отменить публикацию"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -3401,7 +3408,7 @@ msgstr "Ответить на <b>%(title)s</b>"
 
 #: app/templates/threads/user_comments.html:73
 msgid "Only showing replies to public threads"
-msgstr ""
+msgstr "Отображаются только ответы на общедоступные темы"
 
 #: app/templates/threads/view.html:44
 msgid "Subscribe"
@@ -4153,7 +4160,7 @@ msgstr "Изображение профиля"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
-msgstr ""
+msgstr "Синхронизация с форумами"
 
 #: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
@@ -4675,4 +4682,3 @@ msgstr ""
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr "Желательно установить пароль для учётной записи."
-
