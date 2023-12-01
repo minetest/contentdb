@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
-"PO-Revision-Date: 2023-09-11 12:54+0000\n"
+"PO-Revision-Date: 2023-11-16 21:06+0000\n"
 "Last-Translator: Giov4 <brancacciogiovanni1@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.2\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -126,20 +127,19 @@ msgstr "Esiste già una raccolta con un titolo simile"
 #: app/blueprints/collections/__init__.py:158
 msgid "Unable to create collection as a package with that name already exists"
 msgstr ""
-"Impossibile creare la raccolta perché esiste già un pacchetto con quel "
-"nome"
+"Impossibile creare la raccolta perché esiste già un contenuto con quel nome"
 
 #: app/blueprints/collections/__init__.py:304
 msgid "Added package to collection"
-msgstr "Pacchetto aggiunto alla raccolta"
+msgstr "Contenuto aggiunto alla raccolta"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Removed package from collection"
-msgstr "Pacchetto rimosso dalla raccolta"
+msgstr "Contenuto rimosso dalla raccolta"
 
 #: app/blueprints/collections/__init__.py:325
 msgid "Added package to favorites collection"
-msgstr "Pacchetto aggiunto alla raccolta dei preferiti"
+msgstr "Contenuto aggiunto alla raccolta dei preferiti"
 
 #: app/blueprints/collections/__init__.py:327
 msgid "(Public, change from Profile > My Collections)"
@@ -147,7 +147,7 @@ msgstr "(Pubblico, cambia da Profilo &gt; Le mie collezioni)"
 
 #: app/blueprints/collections/__init__.py:331
 msgid "Removed package from favorites collection"
-msgstr "Pacchetto rimosso dalla raccolta dei preferiti"
+msgstr "Contenuto rimosso dalla raccolta dei preferiti"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -209,7 +209,7 @@ msgstr "Condivisioni ed Emblemi"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "Rimuovi / Annulla pubblicazione"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -403,6 +403,7 @@ msgstr ""
 #: app/blueprints/packages/packages.py:697
 msgid "You need at least one release before you can edit game support"
 msgstr ""
+"È necessario almeno un rilascio prima di poter modificare i giochi supportati"
 
 #: app/blueprints/packages/packages.py:701
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
@@ -1615,7 +1616,7 @@ msgstr "Annulla"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr "Raccolta di %(author)s"
+msgstr "Raccolte di %(author)s"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
@@ -1646,8 +1647,8 @@ msgstr "Una raccolta di %(author)s"
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
-"Per aggiungere un pacchetto, vai alla pagina del pacchetto e fai clic su "
-"\"Aggiungi alla raccolta\""
+"Per aggiungere un contenuto, vai sulla sua pagina e fai clic su \"Aggiungi "
+"alla raccolta\""
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1687,6 +1688,8 @@ msgid ""
 "No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
 msgstr ""
+"Non ci sono contenuti recensiti che accettano donazioni. Considera di "
+"recensire i tuoi contenuti preferiti"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
@@ -2005,7 +2008,7 @@ msgstr "Contenuti di %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr ""
+msgstr "Intervallo di date..."
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
@@ -2353,6 +2356,8 @@ msgstr "Contenuto"
 #: app/templates/packages/create_edit.html:72
 msgid "You need to unpublish the package to change the name."
 msgstr ""
+"È necessario annullare la pubblicazione del contenuto per modificarne il "
+"nome."
 
 #: app/templates/packages/create_edit.html:78
 msgid ""
@@ -2374,21 +2379,23 @@ msgstr "Deposito e Collegamenti"
 
 #: app/templates/packages/create_edit.html:92
 msgid "Do you have a Git repository?"
-msgstr ""
+msgstr "Hai un deposito Git?"
 
 #: app/templates/packages/create_edit.html:94
 msgid "Having a repository is optional"
-msgstr ""
+msgstr "Avere un deposito è facoltativo"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
+"Se disponi di un deposito, inserisci l'URL di seguito. Altrimenti lascia "
+"vuoto il campo e clicca su Salta."
 
 #: app/templates/packages/create_edit.html:102
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr ""
+msgstr "URL HTTP di un deposito Git, Mercurial, o di altro tipo"
 
 #: app/templates/packages/create_edit.html:105
 msgid "Next (Autoimport)"
@@ -2404,11 +2411,11 @@ msgstr "Importando... (Potrebbe volerci un pò)"
 
 #: app/templates/packages/create_edit.html:113
 msgid "Where should users report issues?"
-msgstr ""
+msgstr "Dove dovrebbero segnalare i problemi gli utenti?"
 
 #: app/templates/packages/create_edit.html:117
 msgid "Paste a forum topic URL"
-msgstr ""
+msgstr "Incolla l'URL di una discussione sul forum"
 
 #: app/templates/packages/create_edit.html:119
 msgid "YouTube videos will be shown in an embed."
@@ -2826,7 +2833,7 @@ msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
-"ContentDB controllerà il tuo deposito Git giornalmente, ma puoi "
+"ContentDB controllerà il tuo deposito Git quotidianamente, ma puoi "
 "utilizzare degli agganci Web o l'API per aggiornamenti più frequenti."
 
 #: app/templates/packages/release_wizard.html:25
@@ -3069,7 +3076,7 @@ msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
 msgstr ""
-"ContentDB controllerà il tuo deposito Git giornalmente, se il tuo "
+"ContentDB controllerà il tuo deposito Git quotidianamente, se il tuo "
 "contenuto è stato approvato."
 
 #: app/templates/packages/update_config.html:17
@@ -3498,8 +3505,8 @@ msgstr "Dipendenze Non Soddisfatte"
 #: app/templates/todo/editor.html:151
 msgid "Mod names that have hard dependers, but no packages providing them."
 msgstr ""
-"Nomi di mod che hanno dipendenze obbligatorie, ma nessun pacchetto che le"
-" fornisca."
+"Nomi di moduli che hanno dipendenze obbligatorie, ma nessun pacchetto che le "
+"fornisca."
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -3738,7 +3745,7 @@ msgstr "Discussioni Non Inserite"
 msgid "List of your forum topics which do not have a matching package."
 msgstr ""
 "Elenco delle tue discussioni sul forum alle quali non corrisponde un "
-"pacchetto."
+"contenuto."
 
 #: app/templates/todo/user.html:206
 msgid "Topics with a strikethrough have been marked as discarded."
@@ -4104,7 +4111,7 @@ msgstr "contenuti"
 
 #: app/templates/users/profile.html:123
 msgid "collections"
-msgstr ""
+msgstr "raccolte"
 
 #: app/templates/users/profile.html:132
 msgid "reviews"
@@ -4523,4 +4530,3 @@ msgstr ""
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr "Ti consigliamo di impostare una password per il tuo profilo."
-
