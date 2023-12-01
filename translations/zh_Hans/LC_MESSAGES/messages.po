@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
-"PO-Revision-Date: 2023-01-06 08:51+0000\n"
+"PO-Revision-Date: 2023-11-28 08:02+0000\n"
 "Last-Translator: Gao Tiesuan <yepifoas@666email.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"minetest/contentdb/zh_Hans/>\n"
 "Language: zh_Hans\n"
-"Language-Team: Chinese (Simplified) "
-"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hans/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.3-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -43,7 +44,7 @@ msgstr "%(delta)s以前"
 
 #: app/blueprints/api/endpoints.py:928
 msgid "Spotlight"
-msgstr ""
+msgstr "特别聚焦"
 
 #: app/blueprints/api/endpoints.py:940 app/templates/index.html:127
 msgid "Top Games"
@@ -107,11 +108,11 @@ msgstr "标题"
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:84
 msgid "Short Description"
-msgstr ""
+msgstr "短描述"
 
 #: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
-msgstr ""
+msgstr "页面内容"
 
 #: app/blueprints/collections/__init__.py:82
 #: app/blueprints/threads/__init__.py:283
@@ -121,31 +122,31 @@ msgstr "私有"
 
 #: app/blueprints/collections/__init__.py:152
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "相似标题的收藏集已存在"
 
 #: app/blueprints/collections/__init__.py:158
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "已有重名软件包，无法创建作品集"
 
 #: app/blueprints/collections/__init__.py:304
 msgid "Added package to collection"
-msgstr ""
+msgstr "添加软件包到作品集"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Removed package from collection"
-msgstr ""
+msgstr "从作品集移除软件包"
 
 #: app/blueprints/collections/__init__.py:325
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "添加软件包到收藏夹"
 
 #: app/blueprints/collections/__init__.py:327
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "（公共，可通过个人资料 &gt; 我的作品集更改）"
 
 #: app/blueprints/collections/__init__.py:331
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "从收藏夹移除软件包"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -207,7 +208,7 @@ msgstr "分享和徽章"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "移除 / 撤搞"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -298,21 +299,21 @@ msgstr "论坛贴子ID"
 
 #: app/blueprints/packages/packages.py:271
 msgid "Video URL"
-msgstr "视频URL"
+msgstr "视频 URL"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Donate URL"
-msgstr ""
+msgstr "捐赠 URL"
 
 #: app/blueprints/packages/packages.py:278
 msgid "_game is not an allowed name"
-msgstr "_game 不是一个准许的名字"
+msgstr "_game 名称不可取"
 
 #: app/blueprints/packages/packages.py:288
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
-msgstr "该package已存在，但是已被移除。 请联系 ContentDB 的工作人员来回复该package"
+msgstr "该软件包已存在，但是已被移除。 请联系 ContentDB 的工作人员来恢复该软件包"
 
 #: app/blueprints/packages/packages.py:293
 msgid "Package already exists"
@@ -320,7 +321,7 @@ msgstr "软件包已存在"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "相似名称的作品集已存在"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -372,27 +373,27 @@ msgstr "作者名"
 
 #: app/blueprints/packages/packages.py:678
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr "启用基于依赖的支持检测（推荐）"
+msgstr "启用基于依赖项的支持检测（推荐）"
 
 #: app/blueprints/packages/packages.py:679
 msgid "Supported games"
-msgstr ""
+msgstr "支持的子游戏"
 
 #: app/blueprints/packages/packages.py:680
 msgid "Unsupported games"
-msgstr ""
+msgstr "不支持的子游戏"
 
 #: app/blueprints/packages/packages.py:681
 msgid "Supports all games (unless stated) / is game independent"
-msgstr ""
+msgstr "支持所有子游戏（如无特别说明）/ 子游戏无关"
 
 #: app/blueprints/packages/packages.py:697
 msgid "You need at least one release before you can edit game support"
-msgstr ""
+msgstr "需要至少一个发行版才能编辑子游戏支持"
 
 #: app/blueprints/packages/packages.py:701
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
-msgstr ""
+msgstr "Mod（包）需要至少包含一个Mod。请创建发行版"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -518,7 +519,7 @@ msgstr "评论"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "评测"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:173
@@ -528,7 +529,7 @@ msgstr "是"
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:124
 #: app/templates/macros/reviews.html:177
 msgid "Neutral"
-msgstr ""
+msgstr "中"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:129
 #: app/templates/macros/reviews.html:181
@@ -550,7 +551,7 @@ msgstr "您最近评测了太多软件包。请稍候再试，并试着编写更
 #: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:105
 #: app/logic/packages.py:131
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "不允许链接到封禁网站"
 
 #: app/blueprints/packages/reviews.py:183
 msgid "You can't vote on the reviews on your own package!"
@@ -632,7 +633,7 @@ msgstr "请稍后开启另外一个贴子"
 #: app/blueprints/todo/user.py:192
 #: app/templates/collections/package_add_to.html:46
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
@@ -874,9 +875,9 @@ msgid "3rd most helpful reviewer"
 msgstr "第三位最有帮助的评测者"
 
 #: app/blueprints/users/profile.py:126
-#, fuzzy, python-format
+#, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
-msgstr "这使%(display_name)s位于前%(perc)s%%"
+msgstr "这使%(display_name)s排名于前%(perc)s%%"
 
 #: app/blueprints/users/profile.py:130
 #, python-format
@@ -908,9 +909,9 @@ msgid "Top %(group)d %(type)s"
 msgstr "最高 %(group)d %(type)s"
 
 #: app/blueprints/users/profile.py:177
-#, fuzzy, python-format
+#, python-format
 msgid "%(display_name)s has a %(type)s placed at #%(place)d."
-msgstr "%(display_name)s 有一个 %(type)s 放置在 #%(place)d 处。"
+msgstr "%(display_name)s 有 %(type)s 位列第 %(place)d 名。"
 
 #: app/blueprints/users/profile.py:192
 #, python-format
@@ -1225,7 +1226,7 @@ msgstr "个人资料"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "我的作品集"
 
 #: app/templates/base.html:163
 msgid "Admin"
@@ -1261,11 +1262,11 @@ msgstr "帮助翻译ContentDB"
 
 #: app/templates/base.html:257
 msgid "About"
-msgstr ""
+msgstr "关于"
 
 #: app/templates/base.html:258
 msgid "Rules"
-msgstr ""
+msgstr "规则"
 
 #: app/templates/base.html:259
 msgid "Policy and Guidance"
@@ -1281,7 +1282,7 @@ msgstr "隐私政策"
 
 #: app/templates/base.html:263
 msgid "Report / DMCA"
-msgstr ""
+msgstr "举报 / DMCA"
 
 #: app/templates/base.html:265
 msgid "User List"
@@ -1295,11 +1296,11 @@ msgstr "贴子"
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "作品集"
 
 #: app/templates/base.html:268
 msgid "Support Packages"
-msgstr ""
+msgstr "支持的软件包"
 
 #: app/templates/base.html:269
 msgid "Source Code"
@@ -1311,7 +1312,7 @@ msgstr "欢迎"
 
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
-msgstr ""
+msgstr "欢迎来到寻找 Minetest Mod，子游戏，材质包的最佳圣地"
 
 #: app/templates/collections/create_edit.html:66
 #: app/templates/collections/list.html:39
@@ -1321,12 +1322,12 @@ msgstr ""
 #: app/templates/packages/similar.html:22
 #, python-format
 msgid "%(title)s by %(author)s"
-msgstr "%(title)s (作者:%(author)s)"
+msgstr "%(title)s (作者：%(author)s)"
 
 #: app/templates/index.html:53
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
-msgstr "<strong>%(title)s</strong> (作者:%(author)s)"
+msgstr "<strong>%(title)s</strong> (作者：%(author)s)"
 
 #: app/templates/index.html:77 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:193 app/templates/packages/view.html:325
@@ -1502,16 +1503,16 @@ msgstr "编辑"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "新建收藏夹"
 
 #: app/templates/collections/create_edit.html:30
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "用户访问旧URL时不会跳转"
 
 #: app/templates/collections/create_edit.html:46
 #: app/templates/threads/user_comments.html:79
 msgid "No results"
-msgstr ""
+msgstr "无结果"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/packages/remove.html:44 app/templates/packages/view.html:126
@@ -1520,16 +1521,16 @@ msgstr "移除"
 
 #: app/templates/collections/create_edit.html:74
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "您可以自行替换描述内容"
 
 #: app/templates/collections/create_edit.html:88
 msgid "Are you sure you want to remove {title}?"
-msgstr ""
+msgstr "确定要删除{title}吗？"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "删除%(author)s创建的作品集“%(title)s”"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
@@ -1550,60 +1551,60 @@ msgstr "取消"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "%(author)s的作品集"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "无作品集"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "添加%(package_title)s到作品集"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "创建作品集"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "您没有作品集"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "创建副本"
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr ""
+msgstr "%(author)s的作品集"
 
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
-msgstr ""
+msgstr "要添加软件包，前往软件包的页面并点击“加入作品集”"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
-msgstr ""
+msgstr "支持的软件包"
 
 #: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
-msgstr ""
+msgstr "有些内容创作者接受捐款。"
 
 #: app/templates/donate/index.html:9
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
-msgstr ""
+msgstr "捐款是支持你喜欢的Mod作者、美术师、子游戏开发者的绝佳途径。"
 
 #: app/templates/donate/index.html:37
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "作者：%(author)s"
 
 #: app/templates/donate/index.html:42
 msgid "View package"
-msgstr ""
+msgstr "查看软件包"
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:104
 msgid "Donate"
@@ -1611,26 +1612,26 @@ msgstr "捐赠"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "基于你的评测 / 收藏"
 
 #: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
-msgstr ""
+msgstr "没有评测过的软件包需要捐款。考虑评测一下你喜欢的软件包"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
-msgstr ""
+msgstr "登录查看基于您评测的软件包的推荐"
 
 #: app/templates/donate/index.html:78
 msgid "Top packages"
-msgstr ""
+msgstr "顶级软件包"
 
 #: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d 个软件包等待捐赠"
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1784,7 +1785,7 @@ msgstr "发行版仍在导入，或遇到错误。"
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr ""
+msgstr "需要添加至少一张截图。"
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
@@ -1903,7 +1904,7 @@ msgstr "发表评测"
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr ""
+msgstr "反馈问题"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -1912,7 +1913,7 @@ msgstr "%(display_name)s的软件包"
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr ""
+msgstr "日期范围..."
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
@@ -1924,11 +1925,11 @@ msgstr "过去 30 天下载量"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr ""
+msgstr "从$1到$2的下载量"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr ""
+msgstr "每天的$1"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -2240,7 +2241,7 @@ msgstr "软件包"
 
 #: app/templates/packages/create_edit.html:72
 msgid "You need to unpublish the package to change the name."
-msgstr ""
+msgstr "软件包改名前需要先撤搞。"
 
 #: app/templates/packages/create_edit.html:78
 msgid ""
@@ -2258,21 +2259,21 @@ msgstr "仓库和链接"
 
 #: app/templates/packages/create_edit.html:92
 msgid "Do you have a Git repository?"
-msgstr ""
+msgstr "你有Git仓库吗？"
 
 #: app/templates/packages/create_edit.html:94
 msgid "Having a repository is optional"
-msgstr ""
+msgstr "仓库不是必须的"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
-msgstr ""
+msgstr "如果有仓库，在下方输入URL，否则，留空跳过。"
 
 #: app/templates/packages/create_edit.html:102
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr ""
+msgstr "连接到Git, Mercurial或其他仓库的HTTP URL"
 
 #: app/templates/packages/create_edit.html:105
 msgid "Next (Autoimport)"
@@ -2288,11 +2289,11 @@ msgstr "导入中…（需要一段时间）"
 
 #: app/templates/packages/create_edit.html:113
 msgid "Where should users report issues?"
-msgstr ""
+msgstr "用户在哪里反馈问题？"
 
 #: app/templates/packages/create_edit.html:117
 msgid "Paste a forum topic URL"
-msgstr ""
+msgstr "粘贴论坛贴子URL"
 
 #: app/templates/packages/create_edit.html:119
 msgid "YouTube videos will be shown in an embed."
@@ -2300,7 +2301,7 @@ msgstr "YouTube视频将显示为嵌入元素。"
 
 #: app/templates/packages/create_edit.html:120
 msgid "If blank, the author's donation URL will be used instead."
-msgstr ""
+msgstr "如果空白，则使用作者的捐款 URL。"
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2330,7 +2331,7 @@ msgstr "社区中心"
 #: app/templates/packages/game_hub.html:9
 #, python-format
 msgid "Mods and texture packs for %(title)s"
-msgstr ""
+msgstr "用于%(title)s的Mod和材质包"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
@@ -2340,7 +2341,7 @@ msgstr "文档"
 msgid ""
 "Game support is configured using the package's .conf file. See the "
 "documentation for more info"
-msgstr ""
+msgstr "子游戏支持由软件包的.conf文件配置。更多信息见文档"
 
 #: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:212
@@ -2353,7 +2354,7 @@ msgstr "支持？"
 
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
-msgstr ""
+msgstr "支持所有子游戏（unsupported_games排除的子游戏除外）"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -2361,16 +2362,16 @@ msgstr "从依赖项中检测到"
 
 #: app/templates/packages/game_support.html:49
 msgid "Overridden on ContentDB"
-msgstr ""
+msgstr "由ContentDB覆盖"
 
 #: app/templates/packages/game_support.html:68
 msgid "Unknown. Please either add supported games or check 'Supports all games'"
-msgstr ""
+msgstr "未知。请添加支持的子游戏或勾选“支持所有子游戏”"
 
 #: app/templates/packages/game_support.html:75
 #, python-format
 msgid "Generated %(conf)s lines"
-msgstr ""
+msgstr "已生成%(conf)s行"
 
 #: app/templates/packages/game_support.html:89
 msgid ""
@@ -2382,7 +2383,7 @@ msgstr "你需要手动定义至少一个支持的子游戏，才可以关闭这
 msgid ""
 "When checked, this indicates that this package should support all games, "
 "unless excluded by unsupported_games."
-msgstr ""
+msgstr "若勾选，则该软件包支持除unsupported_games所排除项以外的所有子游戏。"
 
 #: app/templates/packages/game_support.html:97
 msgid ""
@@ -2392,24 +2393,24 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
-msgstr ""
+msgstr "材质包不能支持所有子游戏。"
 
 #: app/templates/packages/game_support.html:105
 msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
-msgstr ""
+msgstr "该软件包依赖于仅支持特定子游戏的Mod，所以不能支持所有子游戏。"
 
 #: app/templates/packages/game_support.html:111
 msgid "Overrides"
-msgstr ""
+msgstr "覆盖"
 
 #: app/templates/packages/game_support.html:114
 #, python-format
 msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
-msgstr ""
+msgstr "最好将支持/不支持的子游戏添加到%(conf)s，但是您可以暂且添加到这里。"
 
 #: app/templates/packages/game_support.html:116
 #, python-format
@@ -2421,7 +2422,7 @@ msgstr ""
 #: app/templates/packages/game_support.html:119
 #: app/templates/packages/game_support.html:120
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
-msgstr ""
+msgstr "用逗号分隔的子游戏名称，如：minetest_game, nodecore"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
@@ -2429,13 +2430,13 @@ msgstr "软件包已删除"
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
-msgstr ""
+msgstr "软件包已撤稿。"
 
 #: app/templates/packages/gone.html:22
 msgid ""
 "It may have been removed by choice of the author, or by ContentDB staff "
 "due to a problem."
-msgstr ""
+msgstr "有可能已被作者删除，或因问题被ContentDB工作人员删除。"
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
@@ -2764,7 +2765,7 @@ msgstr "不批准/删除的原因，这将显示在审计日志中"
 
 #: app/templates/packages/remove.html:47
 msgid "Unpublish"
-msgstr ""
+msgstr "撤搞"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -4374,4 +4375,3 @@ msgstr "请考虑启用电子邮件通知，您可以自定义发送的数量"
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr "建议您为您的帐户设置密码。"
-
