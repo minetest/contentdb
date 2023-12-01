@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
 "PO-Revision-Date: 2023-10-27 12:13+0000\n"
-"Last-Translator: Lemente <crafted.by.lemente@gmail.com>\n"
+"Last-Translator: 3raven <elise_declerck@laposte.net>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/minetest/"
 "contentdb/fr/>\n"
 "Language: fr\n"
@@ -142,7 +142,7 @@ msgstr "Paquet ajouté à la collection favoris"
 
 #: app/blueprints/collections/__init__.py:327
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "(Public, se change depuis Profil &gt; Mes Collections)"
 
 #: app/blueprints/collections/__init__.py:331
 msgid "Removed package from favorites collection"
@@ -2389,7 +2389,7 @@ msgstr "Avez-vous un dépôt Git ?"
 
 #: app/templates/packages/create_edit.html:94
 msgid "Having a repository is optional"
-msgstr ""
+msgstr "Avoir un dépôt n'est pas nécessaire"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
@@ -2399,7 +2399,7 @@ msgstr ""
 
 #: app/templates/packages/create_edit.html:102
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr ""
+msgstr "URL HTTP vers un dépôt Git, Mercurial, ou autre"
 
 #: app/templates/packages/create_edit.html:105
 msgid "Next (Autoimport)"
@@ -2506,9 +2506,9 @@ msgstr ""
 "avec tous les jeux\""
 
 #: app/templates/packages/game_support.html:75
-#, python-format
+#, fuzzy, python-format
 msgid "Generated %(conf)s lines"
-msgstr ""
+msgstr "%(conf)s lignes générées"
 
 #: app/templates/packages/game_support.html:89
 msgid ""
@@ -2547,8 +2547,9 @@ msgstr ""
 "compatible avec tout les jeux."
 
 #: app/templates/packages/game_support.html:111
+#, fuzzy
 msgid "Overrides"
-msgstr ""
+msgstr "Remplace"
 
 #: app/templates/packages/game_support.html:114
 #, python-format
@@ -3280,7 +3281,7 @@ msgstr "Testé avec :"
 
 #: app/templates/packages/view.html:531
 msgid "Is the above correct?"
-msgstr ""
+msgstr "Est ce que les informations ci-dessus sont correctes ?"
 
 #: app/templates/packages/view.html:532
 msgid "You need to either confirm this or tell ContentDB about supported games"
@@ -3535,7 +3536,7 @@ msgstr "Actions récentes"
 #: app/templates/todo/game_support.html:4
 #, python-format
 msgid "Game Support for %(username)s"
-msgstr ""
+msgstr "Support du jeu pour %(username)s"
 
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
@@ -3577,7 +3578,7 @@ msgstr "Rien à faire :)"
 
 #: app/templates/todo/game_support.html:67
 msgid "Bulk support all games"
-msgstr ""
+msgstr "Support de tout les jeux"
 
 #: app/templates/todo/game_support.html:69
 msgid ""
@@ -4317,6 +4318,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to log into the account "
 "'%(display_name)s'"
 msgstr ""
+"La désinscription peut vous empêcher de vous connecter au compte "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -4347,8 +4350,9 @@ msgid "'%(query)s' - Search Package Releases"
 msgstr "'%(query)s' - Recherche dans les versions des paquets"
 
 #: app/utils/flask.py:150
+#, fuzzy
 msgid "All time"
-msgstr ""
+msgstr "Tout le temps"
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
