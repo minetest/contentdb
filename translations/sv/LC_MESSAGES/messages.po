@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
-"PO-Revision-Date: 2023-10-23 21:06+0000\n"
-"Last-Translator: José Muñoz <dr.cabra@disroot.org>\n"
+"PO-Revision-Date: 2023-10-30 21:00+0000\n"
+"Last-Translator: ROllerozxa <rollerozxa@voxelmanip.se>\n"
+"Language-Team: Swedish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/sv/>\n"
 "Language: sv\n"
-"Language-Team: Swedish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/sv/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.2-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -43,7 +44,7 @@ msgstr "%(delta)s sedan"
 
 #: app/blueprints/api/endpoints.py:928
 msgid "Spotlight"
-msgstr ""
+msgstr "Presenterade"
 
 #: app/blueprints/api/endpoints.py:940 app/templates/index.html:127
 msgid "Top Games"
@@ -107,11 +108,11 @@ msgstr "Titel"
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:84
 msgid "Short Description"
-msgstr ""
+msgstr "Kort beskrivning"
 
 #: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
-msgstr ""
+msgstr "Sidinnehåll"
 
 #: app/blueprints/collections/__init__.py:82
 #: app/blueprints/threads/__init__.py:283
@@ -121,31 +122,31 @@ msgstr "Privat"
 
 #: app/blueprints/collections/__init__.py:152
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "En samling med liknande titel finns redan"
 
 #: app/blueprints/collections/__init__.py:158
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "Kunde inte skapa samling eftersom ett paket med det namnet redan finns"
 
 #: app/blueprints/collections/__init__.py:304
 msgid "Added package to collection"
-msgstr ""
+msgstr "Lade till paket till samling"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Tog bort paket från samling"
 
 #: app/blueprints/collections/__init__.py:325
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Lade till paket till favoritsamling"
 
 #: app/blueprints/collections/__init__.py:327
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "(Offentlig, ändra via Profil -&gt; Mina samlingar)"
 
 #: app/blueprints/collections/__init__.py:331
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Tog bort paket från favoritsamling"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -176,7 +177,7 @@ msgstr "Redigera Detaljer"
 #: app/templates/packages/releases_list.html:34
 #: app/templates/packages/view.html:634 app/templates/todo/editor.html:75
 msgid "Releases"
-msgstr "Utsläpp"
+msgstr "Utgivningar"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/screenshots.html:4
@@ -207,7 +208,7 @@ msgstr "Dela och Emblem"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "Ta bort / Avpublicera"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -324,7 +325,7 @@ msgstr "Paket finns redan"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "En samling med liknande namn finns redan"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -392,11 +393,12 @@ msgstr "Stödjer alla spel (om inget annat anges) / är speloberoende"
 
 #: app/blueprints/packages/packages.py:697
 msgid "You need at least one release before you can edit game support"
-msgstr ""
+msgstr "Du behöver åtminstonde en utgivning innan du kan redigera spelstöd"
 
 #: app/blueprints/packages/packages.py:701
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
+"Modd(paket) behöver innehålla minst en modd. Vänligen skapa en ny utgivning"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -492,7 +494,7 @@ msgstr "Skicka notis och markera som föråldrad"
 #: app/blueprints/packages/releases.py:254
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
-msgstr "Skapa utsläpp"
+msgstr "Skapa utgivning"
 
 #: app/blueprints/packages/releases.py:256
 msgid "Save Settings"
@@ -506,7 +508,7 @@ msgstr "Inaktivera automatisering"
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
 "Var snäll och lägg till en Git-repository för att ställa in automatiska "
-"utsläpp"
+"utgivningar"
 
 #: app/blueprints/packages/releases.py:312
 msgid "Deleted update configuration"
@@ -514,7 +516,7 @@ msgstr "Tog bort uppdateringskonfiguration"
 
 #: app/blueprints/packages/releases.py:320
 msgid "Now, please create an initial release"
-msgstr "Var snäll och skapa en första utsläpp nu"
+msgstr "Var snäll och skapa en första utgivning nu"
 
 #: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:181
 #: app/blueprints/threads/__init__.py:182
@@ -1042,7 +1044,7 @@ msgstr ""
 #: app/logic/package_validator.py:40
 #: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
-msgstr "Ett utsläpp krävs innan detta paket kan godkännas."
+msgstr "En utgivning krävs innan detta paket kan godkännas."
 
 #: app/logic/package_validator.py:46
 #: app/templates/macros/package_approval.html:45
@@ -1080,15 +1082,15 @@ msgstr "Du har inte behörighet att ändra paketnamnet"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr "Du har inte behörighet att göra utsläpp"
+msgstr "Du har inte behörighet att göra utgivningar"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
-"Du har skapat för många utsläpp för detta paket i de senaste 5 minuterna,"
-" vänta innan du försöker igen"
+"Du har skapat för många utgivningar för detta paket i de senaste 5 "
+"minuterna, vänta innan du försöker igen"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
@@ -1262,7 +1264,7 @@ msgstr "Profil"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "Mina samlingar"
 
 #: app/templates/base.html:163
 msgid "Admin"
@@ -1332,7 +1334,7 @@ msgstr "Trådar"
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "Samlingar"
 
 #: app/templates/base.html:268
 msgid "Support Packages"
@@ -1545,16 +1547,16 @@ msgstr "Redigera"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "Ny samling"
 
 #: app/templates/collections/create_edit.html:30
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "Användare kommer inte bli omdirigerade när de går till den gamla URL:en"
 
 #: app/templates/collections/create_edit.html:46
 #: app/templates/threads/user_comments.html:79
 msgid "No results"
-msgstr ""
+msgstr "Inga resultat"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/packages/remove.html:44 app/templates/packages/view.html:126
@@ -1563,16 +1565,16 @@ msgstr "Ta bort"
 
 #: app/templates/collections/create_edit.html:74
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "Du kan ersätta beskrivningen med din egna"
 
 #: app/templates/collections/create_edit.html:88
 msgid "Are you sure you want to remove {title}?"
-msgstr ""
+msgstr "Är du säker att du vill ta bort {title}?"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Ta bort samling \"%(title)s\" av %(author)s"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
@@ -1593,37 +1595,39 @@ msgstr "Avbryt"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "%(author)s's samlingar"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "Inga samlingar"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "Lägg till %(package_title)s till en samling"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "Skapa samling"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "Du har inga samlingar"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "Skapa kopia"
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr ""
+msgstr "En samling av %(author)s"
 
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
+"För att lägga till ett paket, gå till paketets sida och tryck på 'Lågg till "
+"samling'"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1656,7 +1660,7 @@ msgstr "Donera"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "Baserat på dina recensioner / favoriter"
 
 #: app/templates/donate/index.html:67
 msgid ""
@@ -1837,15 +1841,15 @@ msgstr "Status"
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
-msgstr "Sätt upp utsläpp"
+msgstr "Sätt upp utgivningar"
 
 #: app/templates/macros/package_approval.html:31
 msgid "You need to create a release before this package can be approved."
-msgstr "Du måste skapa ett utsläpp innan detta paket kan godkännas."
+msgstr "Du måste skapa en utgivning innan detta paket kan godkännas."
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
-msgstr "Utsläpp importeras fortfarande, eller har ett fel."
+msgstr "Utgivning importeras fortfarande, eller har ett fel."
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
@@ -1853,7 +1857,7 @@ msgstr "Du bör lägga till åtmindstonde en skärmdump."
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
-msgstr "Var snäll och vänta på utsläppet att bli godkänt."
+msgstr "Var snäll och vänta på att utgivningen ska bli godkänd."
 
 #: app/templates/macros/package_approval.html:64
 msgid "You can now approve this package if you're ready."
@@ -1929,7 +1933,7 @@ msgstr "Väntar på godkännande."
 
 #: app/templates/macros/releases.html:103
 msgid "No releases available."
-msgstr "Inga utsläpp tillgängliga."
+msgstr "Inga utgivningar tillgängliga."
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
@@ -1970,7 +1974,7 @@ msgstr "Skicka recension"
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr ""
+msgstr "Rapportera ett fel"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -2116,7 +2120,7 @@ msgstr "På %(trigger)s, gör %(action)s"
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:120
 #: app/templates/packages/view.html:409
 msgid "Release"
-msgstr "Utsläpp"
+msgstr "Utgivning"
 
 #: app/templates/macros/todo.html:42
 msgid "Repo"
@@ -2318,7 +2322,7 @@ msgstr "Paket"
 
 #: app/templates/packages/create_edit.html:72
 msgid "You need to unpublish the package to change the name."
-msgstr ""
+msgstr "Du behöver avpublicera paketet för att ändra namnet."
 
 #: app/templates/packages/create_edit.html:78
 msgid ""
@@ -2340,21 +2344,23 @@ msgstr "Repository och länkar"
 
 #: app/templates/packages/create_edit.html:92
 msgid "Do you have a Git repository?"
-msgstr ""
+msgstr "Har du en Git-repository?"
 
 #: app/templates/packages/create_edit.html:94
 msgid "Having a repository is optional"
-msgstr ""
+msgstr "Att ha en Git-repository är valfritt"
 
 #: app/templates/packages/create_edit.html:97
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
+"Om du har detta, skriv in URL:en nedan. Annars lämna tomt och tryck på hoppa "
+"över."
 
 #: app/templates/packages/create_edit.html:102
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr ""
+msgstr "HTTP-URL till en Git, Mercurial eller annan repository"
 
 #: app/templates/packages/create_edit.html:105
 msgid "Next (Autoimport)"
@@ -2370,11 +2376,11 @@ msgstr "Importerar... (Detta kan ta lite tid)"
 
 #: app/templates/packages/create_edit.html:113
 msgid "Where should users report issues?"
-msgstr ""
+msgstr "Var ska användare rapportera fel?"
 
 #: app/templates/packages/create_edit.html:117
 msgid "Paste a forum topic URL"
-msgstr ""
+msgstr "Klistra in en forumtråd-URL"
 
 #: app/templates/packages/create_edit.html:119
 msgid "YouTube videos will be shown in an embed."
@@ -2397,7 +2403,7 @@ msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
 msgstr ""
-"Beroende på rang kommer de kunna redigera paketet, skapa utsläpp och "
+"Beroende på rang kommer de kunna redigera paketet, skapa utgivningar och "
 "skärmdumpar, och skapa privata trådar."
 
 #: app/templates/packages/edit_maintainers.html:13
@@ -2488,13 +2494,15 @@ msgstr ""
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
-msgstr ""
+msgstr "Det är inte möjligt för ett texturpaket att stödja alla spel."
 
 #: app/templates/packages/game_support.html:105
 msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
 msgstr ""
+"Detta paket beror på en spelspecifik modd, och kan därför inte stöda alla "
+"spel."
 
 #: app/templates/packages/game_support.html:111
 msgid "Overrides"
@@ -2595,12 +2603,12 @@ msgstr "Tumnagel"
 
 #: app/templates/packages/release_bulk_change.html:4
 msgid "Bulk Change Releases"
-msgstr "Massändra utsläpp"
+msgstr "Massändra utgivningar"
 
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
-"Använd denna sida för att sätta minimum och maximum av alla utsläpp för "
+"Använd denna sida för att sätta minimum och maximum av alla utgivningar för "
 "ditt paket."
 
 #: app/templates/packages/release_bulk_change.html:29
@@ -2625,7 +2633,7 @@ msgstr "Lämna båda som Inget om du är osäker."
 
 #: app/templates/packages/release_edit.html:4
 msgid "Edit release"
-msgstr "Redigera utsläpp"
+msgstr "Redigera utgivning"
 
 #: app/templates/packages/release_edit.html:27
 msgid "Commit Hash"
@@ -2651,7 +2659,7 @@ msgid ""
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
 "Ställ in den minsta och högsta Minetestversionen som stöds.\n"
-"\t\t\tDetta utsläpp kommer gömmas för klienter utanför spannet. "
+"\t\t\tDenna utgivning kommer gömmas för klienter utanför spannet. "
 
 #: app/templates/packages/release_edit.html:63
 msgid ""
@@ -2663,7 +2671,7 @@ msgstr ""
 
 #: app/templates/packages/release_edit.html:70
 msgid "Delete Release"
-msgstr "Ta bort utsläpp"
+msgstr "Ta bort utgivning"
 
 #: app/templates/packages/release_edit.html:76
 msgid "This is permanent."
@@ -2675,22 +2683,22 @@ msgid ""
 "will no longer be listed."
 msgstr ""
 "Alla associerade uppladdningar kommer inte tas bort med en gång, men "
-"utsläppen kommer inte längre listas."
+"utgivningar kommer inte längre listas."
 
 #: app/templates/packages/release_edit.html:82
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr ""
-"Du kan inte ta bort det senaste utsläppet, var snäll och skapa en nyare "
+"Du kan inte ta bort det senaste utgivningar, var snäll och skapa en nyare "
 "först."
 
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
 msgid "Create a release"
-msgstr "Skapa ett utsläpp"
+msgstr "Skapa en utgivning"
 
 #: app/templates/packages/release_new.html:14
 msgid "You have automatic releases enabled."
-msgstr "Du har automatiska utsläpp aktiverade."
+msgstr "Du har automatiska utgivningar aktiverade."
 
 #: app/templates/packages/release_new.html:16
 msgid "You have Git update notifications enabled."
@@ -2709,7 +2717,7 @@ msgid ""
 "You can create releases automatically when you push commits or tags to "
 "your repository."
 msgstr ""
-"Du kan skapa utsläpp automatiskt när du trycker ut commits eller taggar "
+"Du kan skapa utgivningar automatiskt när du trycker ut commits eller taggar "
 "till din repository."
 
 #: app/templates/packages/release_new.html:28
@@ -2723,12 +2731,12 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
-"Med Git skulle du kunna skapa utsläpp automatiskt när du släpper ut kod "
+"Med Git skulle du kunna skapa utgivningar automatiskt när du släpper ut kod "
 "eller taggar."
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
-msgstr "1. Namnge utsläpp"
+msgstr "1. Namnge utgivningar"
 
 #: app/templates/packages/release_new.html:42
 msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
@@ -2745,8 +2753,8 @@ msgid ""
 "\t\t\ttips on customising releases."
 msgstr ""
 "Titta på <a href=\"/help/package_config/\">Paketkonfigurering- och "
-"utsläppsguiden</a> för\n"
-"\t\t\ttips om hur man kan anpassa utsläpp."
+"utgivningsguiden</a> för\n"
+"\t\t\ttips om hur man kan anpassa utgivningar."
 
 #: app/templates/packages/release_new.html:61
 msgid "3. Supported Minetest versions"
@@ -2764,7 +2772,7 @@ msgstr ""
 
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
-msgstr "Hur vill du skapa utsläpp?"
+msgstr "Hur vill du skapa utgivningar?"
 
 #: app/templates/packages/release_wizard.html:9
 #: app/templates/packages/release_wizard.html:75
@@ -2774,14 +2782,14 @@ msgstr "Senare"
 #: app/templates/packages/release_wizard.html:14
 #, python-format
 msgid "A release is a single downloadable version of your %(title)s."
-msgstr "Ett utsläpp är en enskild nerladdningsbar version av din %(title)s."
+msgstr "En utgivning är en enskild nerladdningsbar version av din %(title)s."
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
 "You need to create releases even if you use a rolling release development"
 " cycle, as Minetest needs them to check for updates."
 msgstr ""
-"Du behöver skapa ett ustläpp även om du använder ett rolling release-"
+"Du behöver skapa en utgivning även om du använder ett rolling release-"
 "utvecklingscykel, eftersom Minetest behöver dem för att kolla efter "
 "uppdateringar."
 
@@ -2791,8 +2799,8 @@ msgid ""
 "When you push a change to your Git repository, ContentDB can create a new"
 " release automatically or send you a reminder."
 msgstr ""
-"När du trycker ut en ändring till din Git-repository kan ContentDB "
-"antingen skapa ett nytt utsläpp eller påminna dig."
+"När du trycker ut en ändring till din Git-repository kan ContentDB antingen "
+"skapa en ny utgivning eller påminna dig."
 
 #: app/templates/packages/release_wizard.html:21
 msgid ""
@@ -2813,7 +2821,7 @@ msgstr "Automatiskt (Rekommenderas)"
 
 #: app/templates/packages/release_wizard.html:34
 msgid "Rolling Release"
-msgstr "Rullande utsläpp"
+msgstr "Rullande utgivningar"
 
 #: app/templates/packages/release_wizard.html:37
 msgid "On Git Tag"
@@ -2833,20 +2841,20 @@ msgstr "Ingen påminnelse"
 
 #: app/templates/packages/release_wizard.html:60
 msgid "Unfortunately, you will otherwise need to create a release manually."
-msgstr "Annars behöver du tyvärr skapa ett utsläpp manuellt."
+msgstr "Annars behöver du tyvärr skapa en utgivning manuellt."
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
-msgstr "Skapa utsläpp manuellt"
+msgstr "Skapa utgivningar manuellt"
 
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
-msgstr "Utsläpp - %(title)s"
+msgstr "Utgivningar - %(title)s"
 
 #: app/templates/packages/releases_list.html:18
 msgid "Set up automatic releases"
-msgstr "Ställ in automatiska utsläpp"
+msgstr "Ställ in automatiska utgivningar"
 
 #: app/templates/packages/releases_list.html:24
 msgid "Bulk update"
@@ -2889,7 +2897,7 @@ msgstr "Anledning för avgodkännande / borttagande, detta visas i auditeringslo
 
 #: app/templates/packages/remove.html:47
 msgid "Unpublish"
-msgstr ""
+msgstr "Avpublicera"
 
 #: app/templates/packages/review_create_edit.html:12
 #, python-format
@@ -3049,8 +3057,8 @@ msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
 msgstr ""
-"Git-uppdateringsavkänningen är tillräckligt smart att den inte skapar ett"
-" utsläpp om du redan skapat ett manuellt eller med API:et."
+"Git-uppdateringsavkänningen är tillräckligt smart att den inte skapar en "
+"utgivning om du redan skapat ett manuellt eller med API:et."
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
@@ -3165,11 +3173,11 @@ msgstr "Visa innehåll för spel"
 
 #: app/templates/packages/view.html:381
 msgid "Favorite"
-msgstr ""
+msgstr "Favorit"
 
 #: app/templates/packages/view.html:387
 msgid "Add to collection..."
-msgstr ""
+msgstr "Lägg till samling..."
 
 #: app/templates/packages/view.html:397
 msgid "Package may be outdated"
@@ -3368,7 +3376,7 @@ msgstr "Svar till <b>%(title)s</b>"
 
 #: app/templates/threads/user_comments.html:73
 msgid "Only showing replies to public threads"
-msgstr ""
+msgstr "Visar endast svar till offentliga trådar"
 
 #: app/templates/threads/view.html:44
 msgid "Subscribe"
@@ -3424,7 +3432,7 @@ msgstr "Importerar"
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need approval."
-msgstr "Inga utsläpp behöver godkännande."
+msgstr "Inga utgivningar behöver godkännande."
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
@@ -3509,6 +3517,8 @@ msgid ""
 "Click the button below to confirm that the following packages do support "
 "all games, except for any games listed in unsupported_games:"
 msgstr ""
+"Tryck på knappen nedan för att bekräfta att följande paket stöder alla spel, "
+"förutom spel listade i unsupported_games:"
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
@@ -3621,7 +3631,7 @@ msgstr "Se alla uppdateringsinställningar"
 
 #: app/templates/todo/user.html:53
 msgid "Create All Releases"
-msgstr "Skapa alla utsläpp"
+msgstr "Skapa alla utgivningar"
 
 #: app/templates/todo/user.html:56
 msgid "Potentially Outdated Packages"
@@ -3634,7 +3644,7 @@ msgid ""
 "'Update Settings'."
 msgstr ""
 "Istället för att markera paket som föråldrade kan du automatiskt skapa "
-"utsläpp när Ny Commit eller Ny Tagg pushas till Git genom att trycka på "
+"utgivningar när Ny Commit eller Ny Tagg pushas till Git genom att trycka på "
 "'Uppdatera Inställningar'."
 
 #: app/templates/todo/user.html:60
@@ -3642,8 +3652,8 @@ msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
-"För att ta bort ett paket från nedan vänligen skapa ett utsläpp eller "
-"ändra uppdateringsinställningarna."
+"För att ta bort ett paket från nedan vänligen skapa en utgivning eller ändra "
+"uppdateringsinställningarna."
 
 #: app/templates/todo/user.html:72
 msgid "See game support for your packages"
@@ -3784,7 +3794,7 @@ msgstr "Din mejladress kommer aldrig delas med tredje part."
 #: app/templates/users/change_set_password.html:24
 #: app/templates/users/register.html:27
 msgid "Must be at least 12 characters long."
-msgstr ""
+msgstr "Behöver vara minst 12 tecken långt."
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
@@ -4055,7 +4065,7 @@ msgstr "paket"
 
 #: app/templates/users/profile.html:123
 msgid "collections"
-msgstr ""
+msgstr "Samlingar"
 
 #: app/templates/users/profile.html:132
 msgid "reviews"
@@ -4080,11 +4090,11 @@ msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:220
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alfabetiskt"
 
 #: app/templates/users/profile.html:228
 msgid "Newest"
-msgstr ""
+msgstr "Nyaste"
 
 #: app/templates/users/profile.html:234
 msgid "View list of tags"
@@ -4113,7 +4123,7 @@ msgstr "Profilbild"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
-msgstr ""
+msgstr "Synkronisera med forumet"
 
 #: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
@@ -4255,12 +4265,12 @@ msgstr "Redigera notisinställningar"
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr "Sök i paketutsläpp"
+msgstr "Sök i paketutgivningar"
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr "'%(query)s' - Sök paketutsläpp"
+msgstr "'%(query)s' - Sök paketutgivningar"
 
 #: app/utils/flask.py:150
 msgid "All time"
@@ -4541,4 +4551,3 @@ msgstr ""
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr "Det rekommenderas att du sätter ett lösenord till ditt konto."
-
