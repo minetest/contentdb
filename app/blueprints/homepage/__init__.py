@@ -28,10 +28,31 @@ from sqlalchemy.sql.expression import func
 
 PKGS_PER_ROW = 4
 
+GAMEJAM_BANNER = "https://jam.minetest.net/img/banner.png"
+
+
+class GameJam:
+	cover_image = type("", (), dict(url=GAMEJAM_BANNER))()
+	tags = []
+
+	def get_cover_image_url(self):
+		return GAMEJAM_BANNER
+
+	def get_url(self, _name):
+		return "/gamejam/"
+
+	title = "Minetest Game Jam 2023: \"Unexpected\""
+	author = None
+
+	short_desc = "The game jam has begun! You have until December 21st to make a game with the theme \"Unexpected\"."
+	type = type("", (), dict(value="Competition"))()
+	content_warnings = []
+	reviews = []
+
 
 @bp.route("/gamejam/")
 def gamejam():
-	return redirect("https://forum.minetest.net/viewtopic.php?t=28802")
+	return redirect("https://jam.minetest.net/")
 
 
 @bp.route("/")
@@ -71,6 +92,7 @@ def home():
 	spotlight_pkgs = package_spotlight_load(query.filter(
 			Package.collections.any(and_(Collection.name == "spotlight", Collection.author.has(username="ContentDB"))))
 		.order_by(func.random())).limit(6).all()
+	spotlight_pkgs.insert(0, GameJam())
 
 	new = package_load(query).order_by(db.desc(Package.approved_at)).limit(PKGS_PER_ROW).all() # 0.06
 	pop_mod = package_load(query).filter_by(type=PackageType.MOD).order_by(db.desc(Package.score)).limit(2*PKGS_PER_ROW).all()
