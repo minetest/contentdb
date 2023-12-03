@@ -21,6 +21,20 @@ Remove {{ package.title }}
 			</p>
 		{% endif %}
 
+		{% if hard_deps %}
+			{% set hard_deps_links -%}
+				{%- for dep in hard_deps -%}
+					{%- if not loop.first and loop.length > 2 %}, {% endif -%}
+					{%- if loop.last and loop.length > 1 %} and {% endif -%}
+					<a href="{{ dep.get_url('packages.view') }}">{{ dep.title }}</a>
+				{%- endfor -%}
+			{%- endset %}
+			<p class="text-danger">
+				<i class="fas fa-exclamation-triangle me-2"></i>
+				{{ _("Removing this package will break the following mods: %(names)s", names=hard_deps_links) }}
+			</p>
+		{% endif %}
+
 		<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 
 		<div class="form-group mb-3">

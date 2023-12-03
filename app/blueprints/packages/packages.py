@@ -460,7 +460,15 @@ def move_to_state(package):
 @is_package_page
 def remove(package):
 	if request.method == "GET":
-		return render_template("packages/remove.html", package=package,
+		# Find packages that will having missing hard deps after this action
+		broken_meta = MetaPackage.query.filter(MetaPackage.packages.contains(package),
+				~MetaPackage.packages.any(and_(Package.id != package.id, Package.state == PackageState.APPROVED)))
+		hard_deps = Package.query.filter(
+			Package.state == PackageState.APPROVED,
+			Package.dependencies.any(
+				and_(Dependency.meta_package_id.in_([x.id for x in broken_meta]), Dependency.optional == False)))
+
+		return render_template("packages/remove.html", package=package, hard_deps=hard_deps,
 				tabs=get_package_tabs(current_user, package), current_tab="remove")
 
 	reason = request.form.get("reason") or "?"
