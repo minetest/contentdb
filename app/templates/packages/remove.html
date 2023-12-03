@@ -25,7 +25,7 @@ Remove {{ package.title }}
 			{% set hard_deps_links -%}
 				{%- for dep in hard_deps -%}
 					{%- if not loop.first and loop.length > 2 %}, {% endif -%}
-					{%- if loop.last and loop.length > 1 %} and {% endif -%}
+					{%- if loop.last and loop.length > 1 %} {{ _("and") }} {% endif -%}
 					<a href="{{ dep.get_url('packages.view') }}">{{ dep.title }}</a>
 				{%- endfor -%}
 			{%- endset %}
