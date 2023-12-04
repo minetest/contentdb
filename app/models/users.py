@@ -318,7 +318,8 @@ class User(db.Model, UserMixin):
 		if other is None:
 			return False
 
-		if not self.is_authenticated or not other.is_authenticated:
+		# Anonymous users
+		if not hasattr(self, "id") or not hasattr(other, "id"):
 			return False
 
 		assert self.id > 0
