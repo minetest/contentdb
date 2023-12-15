@@ -98,9 +98,8 @@ def make_thumbnail(img, level):
 	mkdir(output_dir)
 
 	cache_filepath = os.path.join(output_dir, img)
-	source_filepath = find_source_file(img)
-
 	if not os.path.isfile(cache_filepath):
+		source_filepath = find_source_file(img)
 		resize_and_crop(source_filepath, cache_filepath, (w, h))
 
 	res = send_file(cache_filepath)

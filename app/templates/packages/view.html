@@ -150,8 +150,7 @@
 					</a>
 				{% endif %}
 				{% for warning in package.content_warnings %}
-					<a class="badge bg-warning" rel="nofollow" href="/help/content_flags/"
-							title="{{ warning.description }}">
+					<a class="badge bg-warning" href="/help/content_flags/" title="{{ warning.description }}">
 						<i class="fas fa-exclamation-circle" style="margin-right: 0.3em;"></i>
 						{{ warning.title }}
 					</a>
@@ -425,7 +424,7 @@
 				{% if package.donate_url_actual %}
 					<div class="alert alert-secondary mb-4">
 						<p>{{ _("Like this package? Help support its development by making a donation", display_name=package.author.display_name) }}</p>
-						<a class="btn d-block btn-primary" href="{{ package.donate_url_actual }}" rel="nofollow">
+						<a class="btn d-block btn-primary" href="{{ package.donate_url_actual }}" rel="ugc">
 							<i class="fas fa-heart me-2"></i>
 							{{ _("Donate now") }}
 						</a>

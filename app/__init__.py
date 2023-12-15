@@ -135,8 +135,7 @@ from .utils import clear_notifications, is_safe_url, create_session
 
 @app.before_request
 def check_for_notifications():
-	if current_user.is_authenticated:
-		clear_notifications(request.path)
+	clear_notifications(request.path)
 
 
 @app.errorhandler(404)
