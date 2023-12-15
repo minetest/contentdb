@@ -230,12 +230,17 @@ def make_vcs_release(self, id, branch):
 		post_release_check_update(self, release, repo.working_tree_dir)
 
 		filename = random_string(10) + ".zip"
-		destPath = os.path.join(app.config["UPLOAD_DIR"], filename)
+		dest_path = os.path.join(app.config["UPLOAD_DIR"], filename)
 
-		assert(not os.path.isfile(destPath))
+		assert not os.path.isfile(dest_path)
 		archiver = GitArchiver(prefix=release.package.name, force_sub=True, main_repo_abspath=repo.working_tree_dir)
-		archiver.create(destPath)
-		assert(os.path.isfile(destPath))
+		archiver.create(dest_path)
+		assert os.path.isfile(dest_path)
+
+		file_stats = os.stat(dest_path)
+		if file_stats.st_size / (1024 * 1024) > 100:
+			os.remove(dest_path)
+			raise TaskError("The .zip file created from Git is too large - needs to be less than 100MB")
 
 		release.url         = "/uploads/" + filename
 		release.task_id     = None

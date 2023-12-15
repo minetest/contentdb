@@ -1,0 +1,3 @@
+container() {
+  contentdb-$1
+}
