@@ -42,7 +42,11 @@ Docker is the recommended way to develop and deploy ContentDB.
 	  	1. `-o` creates just the admin, and static data like tags, and licenses.
 	  	2. `-t` will do `-o` and also create test packages. (Recommended)
 
-9. View at <http://localhost:5123>.
+9. Make uploads writable:
+
+		sudo chown $(whoami):5123 -R data/uploads
+
+10. View at <http://localhost:5123>.
    The admin username is `rubenwardy` and the password is `tuckfrump`.
 
 In the future, starting CDB is as simple as:

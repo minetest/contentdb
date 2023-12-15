@@ -29,6 +29,9 @@ See [Developer Intro](docs/dev_intro.md) for an overview of the code organisatio
 
 # Create new migration
 ./utils/create_migration.sh
+
+# Delete database
+docker-compose down && sudo rm -rf data/db
 ```
 
 
