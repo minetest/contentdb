@@ -31,7 +31,7 @@ def do_create_screenshot(user: User, package: Package, title: str, file, is_cove
 	if count >= 20:
 		raise LogicError(429, lazy_gettext("Too many requests, please wait before trying again"))
 
-	uploaded_url, uploaded_path = upload_file(file, "image", lazy_gettext("a PNG or JPG image file"))
+	uploaded_url, uploaded_path = upload_file(file, "image", lazy_gettext("a PNG, JPEG, or WebP image file"))
 
 	counter = 1
 	for screenshot in package.screenshots.all():

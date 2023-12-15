@@ -28,7 +28,7 @@ def get_extension(filename):
 	return filename.rsplit(".", 1)[1].lower() if "." in filename else None
 
 
-ALLOWED_IMAGES = {"jpeg", "png"}
+ALLOWED_IMAGES = {"jpeg", "png", "webp"}
 
 
 def is_allowed_image(data):
@@ -43,7 +43,7 @@ def upload_file(file, file_type, file_type_desc):
 
 	is_image = False
 	if file_type == "image":
-		allowed_extensions = ["jpg", "jpeg", "png"]
+		allowed_extensions = ["jpg", "jpeg", "png", "webp"]
 		is_image = True
 	elif file_type == "zip":
 		allowed_extensions = ["zip"]
