@@ -142,6 +142,7 @@ def oauth_grant():
 	db.session.commit()
 
 	return jsonify({
+		"success": True,
 		"access_token": token.access_token,
 		"token_type": "Bearer",
 	})

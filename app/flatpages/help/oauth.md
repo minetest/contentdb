@@ -69,6 +69,7 @@ If successful, you'll receive:
 
 ```json
 {
+    "success": true,
     "access_token": "access_token",
     "token_type": "Bearer"
 }
