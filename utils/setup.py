@@ -20,11 +20,9 @@ import os
 import sys
 
 
-
 if not "FLASK_CONFIG" in os.environ:
 	os.environ["FLASK_CONFIG"] = "../config.cfg"
 
-delete_db = len(sys.argv) >= 2 and sys.argv[1].strip() == "-d"
 create_db = not (len(sys.argv) >= 2 and sys.argv[1].strip() == "-o")
 test_data = len(sys.argv) >= 2 and sys.argv[1].strip() == "-t" or not create_db
 
@@ -35,9 +33,6 @@ sys.path.insert(0,parentdir)
 
 from app.models import db
 from app.default_data import populate, populate_test_data
-
-if delete_db and os.path.isfile("db.sqlite"):
-	os.remove("db.sqlite")
 
 from app import app
 with app.app_context():
