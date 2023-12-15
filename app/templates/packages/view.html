@@ -39,6 +39,7 @@
 				href="{{ release.get_download_url() }}">
 			<div>
 				{{ _("Download") }}
+				<span class="text-muted">({{ release.file_size }})</span>
 			</div>
 
 			{% if release and (release.min_rel or release.max_rel) %}

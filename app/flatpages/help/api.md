@@ -212,6 +212,7 @@ Supported query parameters:
         * `downloads`: number of downloads
         * `min_minetest_version`: dict or null, minimum supported minetest version (inclusive).
         * `max_minetest_version`: dict or null, minimum supported minetest version (inclusive).
+        * `size`: size of zip file, in bytes.
         * `package`
             * `author`: author username
             * `name`: technical name
