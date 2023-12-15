@@ -5,6 +5,8 @@
 #    This is for production use. See reload.sh for debug mode hot/live reloading.
 #
 
+set -e
+
 docker-compose build app
 docker-compose build worker
 

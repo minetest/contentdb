@@ -3,6 +3,7 @@
 # Restores backup
 
 set -e
+. "${BASH_SOURCE%/*}/common.sh"
 
 if [ -z "$1" ]; then
 	echo "Usage: ./utils/restore_bk.sh path/to/backup.sql"
@@ -24,4 +25,4 @@ if [[ "$BKFILE" == *.gpg ]]; then
 fi
 
 echo "Importing backup from $BKFILE"
-cat $BKFILE | docker exec -i contentdb_db_1 psql contentdb contentdb
+cat $BKFILE | docker exec -i "$(container db)" psql contentdb contentdb

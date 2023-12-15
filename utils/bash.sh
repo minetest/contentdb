@@ -2,4 +2,7 @@
 
 # Open SSH to app instance
 
-docker exec -it contentdb_app_1 bash
+set -e
+. "${BASH_SOURCE%/*}/common.sh"
+
+docker exec -it "$(container app)" bash

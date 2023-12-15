@@ -2,4 +2,7 @@
 
 # Open SQL console for the database
 
-docker exec -it contentdb_db_1 psql contentdb contentdb
+set -e
+. "${BASH_SOURCE%/*}/common.sh"
+
+docker exec -it "$(container db)" psql contentdb contentdb

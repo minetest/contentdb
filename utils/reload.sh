@@ -2,4 +2,7 @@
 
 # Hot/live reload - only works in debug mode
 
-docker exec contentdb_app_1 sh -c "cp -r /source/* ."
+set -e
+. "${BASH_SOURCE%/*}/common.sh"
+
+docker exec "$(container app)" sh -c "cp -r /source/* ."
