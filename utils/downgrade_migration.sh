@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Create a database migration, and copy it back to the host.
 

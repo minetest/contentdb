@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Hot/live reload - only works in debug mode
 
