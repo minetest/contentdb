@@ -78,6 +78,9 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
 * GET `/api/packages/` (List)
     * See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/` (Read)
+    * Query arguments
+        * `formspec_version`: Optional. If present, `long_description` is returned a hypertext (see /hypertext/ below).
+        * `include_images`: Optional, defaults to true. Only used if `formspec_version` is provided.
 * PUT `/api/packages/<author>/<name>/` (Update)
     * Requires authentication.
     * JSON dictionary with any of these keys (all are optional, null to delete Nullables):

@@ -33,11 +33,11 @@ from app.models import Tag, PackageState, PackageType, Package, db, PackageRelea
 	PackageAlias
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
+from app.utils.minetest_hypertext import html_to_minetest
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
 	api_order_screenshots, api_edit_package, api_set_cover_image
-from app.utils.minetest_hypertext import html_to_minetest
 
 
 def cors_allowed(f):
@@ -99,7 +99,14 @@ def packages():
 @is_package_page
 @cors_allowed
 def package_view(package):
-	return jsonify(package.as_dict(current_app.config["BASE_URL"]))
+	data = package.as_dict(current_app.config["BASE_URL"])
+	if "formspec_version" in request.args:
+		formspec_version = request.args["formspec_version"]
+		include_images = is_yes(request.args.get("include_images", "true"))
+		html = render_markdown(package.desc)
+		data["long_description"] = html_to_minetest(html, formspec_version, include_images)
+
+	return jsonify(data)
 
 
 @bp.route("/api/packages/<author>/<name>/hypertext/")
