@@ -51,12 +51,12 @@ def oauth_start():
 	if response_type != "code":
 		return "Unsupported response_type, only code is supported", 400
 
-	client_id = request.args.get("client_id")
-	if client_id is None:
+	client_id = request.args.get("client_id", "")
+	if client_id == "":
 		return "Missing client_id", 400
 
-	redirect_uri = request.args.get("redirect_uri")
-	if redirect_uri is None:
+	redirect_uri = request.args.get("redirect_uri", "")
+	if redirect_uri == "":
 		return "Missing redirect_uri", 400
 
 	client = OAuthClient.query.get_or_404(client_id)
@@ -118,16 +118,16 @@ def oauth_grant():
 	if grant_type != "authorization_code":
 		error(400, "Unsupported grant_type, only authorization_code is supported")
 
-	client_id = form.get("client_id")
-	if client_id is None:
+	client_id = form.get("client_id", "")
+	if client_id == "":
 		error(400, "Missing client_id")
 
-	client_secret = form.get("client_secret")
-	if client_secret is None:
+	client_secret = form.get("client_secret", "")
+	if client_secret == "":
 		error(400, "Missing client_secret")
 
-	code = form.get("code")
-	if code is None:
+	code = form.get("code", "")
+	if code == "":
 		error(400, "Missing code")
 
 	client = OAuthClient.query.filter_by(id=client_id, secret=client_secret).first()
