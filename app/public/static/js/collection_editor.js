@@ -5,10 +5,10 @@
 
 
 function updateOrder() {
-	const elements = [...document.querySelector(".sortable").children];
+	const elements = [...document.querySelector("#package_list").children];
 	const ids = elements
 		.filter(x => !x.classList.contains("d-none"))
-		.map(x => x.dataset.id)
+		.map(x => x.dataset.id?.trim())
 		.filter(x => x);
 
 	document.querySelector("input[name='order']").value = ids.join(",");
