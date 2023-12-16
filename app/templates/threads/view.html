@@ -29,6 +29,8 @@
 	{% if current_user.is_authenticated %}
 		<script src="/static/js/quick_review_voting.js?v=2"></script>
 	{% endif %}
+	{% from "macros/forms.html" import easymde_scripts %}
+	{{ easymde_scripts() }}
 {% endblock %}
 
 {% block content %}

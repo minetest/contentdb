@@ -4,6 +4,11 @@
 	{{ _("Edit reply") }} - {{ thread.title }}
 {% endblock %}
 
+{% block scriptextra %}
+	{% from "macros/forms.html" import easymde_scripts %}
+	{{ easymde_scripts() }}
+{% endblock %}
+
 {% block content %}
 	<h1>{{ _("Edit reply") }}</h1>
 

@@ -4,6 +4,11 @@
 	{{ _("New Thread") }}
 {% endblock %}
 
+{% block scriptextra %}
+	{% from "macros/forms.html" import easymde_scripts %}
+	{{ easymde_scripts() }}
+{% endblock %}
+
 {% block content %}
 
 {% if package and current_user != package.author and package.issueTracker %}

@@ -12,10 +12,11 @@
 {% endblock %}
 
 {% from "macros/forms.html" import render_field, render_field_prefix_button, render_submit_field, form_scripts,
-		render_multiselect_field, package_lists %}
+		render_multiselect_field, package_lists, easymde_scripts %}
 
 {% block scriptextra %}
 	{{ form_scripts() }}
+	{{ easymde_scripts() }}
 	{% if enable_wizard %}
 		<script src="/static/js/polltask.js"></script>
 		<script src="/static/js/package_create.js"></script>

@@ -8,6 +8,11 @@
 	<a href="{{ package.get_url('packages.view') }}">{{ package.title }}</a>
 {% endblock %}
 
+{% block scriptextra %}
+	{% from "macros/forms.html" import easymde_scripts %}
+	{{ easymde_scripts() }}
+{% endblock %}
+
 {% block content %}
 <h1>{{ _("Post a review for %(title)s by %(author)s", title=self.link(), author=package.author.display_name) }}</h1>
 
