@@ -36,9 +36,6 @@ for a guide to making mods and games using Minetest.
 
 You can donate to rubenwardy to cover ContentDB's costs and support future development.
 
-For more information about what the cost of ContentDB and what rubenwardy does, see "Why donate".
+For more information about what the cost of ContentDB and what rubenwardy does, see his donation page:
 
-<a href="https://rubenwardy.com/donate/" class="btn btn-primary me-1">Why donate</a>
-<a href="https://liberapay.com/rubenwardy" class="btn btn-secondary me-1">Liberapay</a>
-<a href="https://www.patreon.com/rubenwardy/" class="btn btn-secondary me-1">Patreon</a>
-<a href="https://paypal.me/rubenwardy" class="btn btn-secondary me-1">PayPal</a>
+<a href="https://rubenwardy.com/donate/" class="btn btn-primary me-1">Donate</a>
