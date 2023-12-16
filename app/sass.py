@@ -59,6 +59,8 @@ def init_app(app, input_dir='scss', dest='static', force=False, cache_dir="publi
 			_convert(input_dir, scss_file, cache_file)
 			app.logger.debug('Compiled %s into %s' % (scss_file, cache_file))
 
-		return send_from_directory(cache_dir, filepath + ".css")
+		res = send_from_directory(cache_dir, filepath + ".css")
+		res.headers["Cache-Control"] = "max-age=604800"  # 1 week
+		return res
 
 	app.add_url_rule("/%s/<path:filepath>.css" % dest, 'sass', _sass)
