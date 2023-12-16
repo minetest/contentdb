@@ -103,5 +103,5 @@ def make_thumbnail(img, level):
 		resize_and_crop(source_filepath, cache_filepath, (w, h))
 
 	res = send_file(cache_filepath)
-	res.cache_control.max_age = 7*24*60*60
+	res.headers["Cache-Control"] = "max-age=604800" # 1 week
 	return res
