@@ -44,7 +44,7 @@ class GameJam:
 	title = "Minetest Game Jam 2023: \"Unexpected\""
 	author = None
 
-	short_desc = "The game jam has begun! You have until December 21st to make a game with the theme \"Unexpected\"."
+	short_desc = "The game jam has finished! It's now up to the community to play and rate the games."
 	type = type("", (), dict(value="Competition"))()
 	content_warnings = []
 	reviews = []
