@@ -106,3 +106,11 @@ def abs_url(url):
 @app.template_filter()
 def limit(arr, num):
 	return arr[:num]
+
+
+@app.template_filter()
+def last_it(it):
+	value = None
+	for x in it:
+		value = x
+	return value

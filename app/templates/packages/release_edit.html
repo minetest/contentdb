@@ -50,9 +50,18 @@
 			{{ render_field(form.max_rel, class_="col-sm-6") }}
 		</div>
 
-		<p id="minmax_warning" style="color:#f00; display: none;">
+		<p id="minmax_warning" class="text-danger d-none">
 			{{ _("Maximum must be greater than or equal to the minimum!") }}
 		</p>
+
+		<p id="latest_release" class="text-warning d-none">
+			{% set last = form.max_rel | last_it %}
+			<strong>
+				{{ _("Are you sure your package doesn't work on versions after %(version)s?", version=last.label) }}
+			</strong>
+			{{ _("Only set the maximum version if you know that it doesn't work on newer Minetest versions.") }}
+			{{ _("Don't set the maximum version just because you haven't tested it on newer versions.") }}
+		<p>
 
 		<p>
 			{{ _("Set the minimum and maximum Minetest versions supported.
@@ -85,5 +94,5 @@
 {% endblock %}
 
 {% block scriptextra %}
-	<script src="/static/js/release_minmax.js"></script>
+	<script src="/static/js/release_minmax.js?v=2"></script>
 {% endblock %}

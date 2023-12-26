@@ -7,15 +7,23 @@ window.addEventListener("load", () => {
 	const min = document.getElementById("min_rel");
 	const max = document.getElementById("max_rel");
 	const none = parseInt(document.querySelector("#min_rel option:first-child").value);
-	const warning = document.getElementById("minmax_warning");
+	const latestMax = parseInt(document.querySelector("#max_rel option:last-child").value);
+	const warningMinMax = document.getElementById("minmax_warning");
+	const warningMax = document.getElementById("latest_release");
 
 	function ver_check() {
 		const minv = parseInt(min.value);
 		const maxv = parseInt(max.value);
 		if (minv != none && maxv != none && minv > maxv) {
-			warning.style.display = "block";
+			warningMinMax.classList.remove("d-none");
 		} else {
-			warning.style.display = "none";
+			warningMinMax.classList.add("d-none");
+		}
+
+		if (maxv == latestMax) {
+			warningMax.classList.remove("d-none");
+		} else {
+			warningMax.classList.add("d-none");
 		}
 	}
 
