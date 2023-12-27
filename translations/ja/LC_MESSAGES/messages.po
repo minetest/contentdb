@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
-"PO-Revision-Date: 2023-07-17 12:04+0000\n"
-"Last-Translator: 古銭マニア <kosennotaku128@gmail.com>\n"
+"PO-Revision-Date: 2023-12-16 10:05+0000\n"
+"Last-Translator: Jun Nogata <nogajun@gmail.com>\n"
+"Language-Team: Japanese <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ja/>\n"
 "Language: ja\n"
-"Language-Team: Japanese "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ja/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.3\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -25,7 +26,7 @@ msgstr "BANされた:"
 
 #: app/__init__.py:124
 msgid "You have been banned."
-msgstr "出入り禁止にされました。"
+msgstr "BANされました。"
 
 #: app/querybuilder.py:38 app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
@@ -43,7 +44,7 @@ msgstr "%(delta)s秒前"
 
 #: app/blueprints/api/endpoints.py:928
 msgid "Spotlight"
-msgstr ""
+msgstr "注目作"
 
 #: app/blueprints/api/endpoints.py:940 app/templates/index.html:127
 msgid "Top Games"
@@ -62,7 +63,7 @@ msgstr "人気のテクスチャパック"
 #: app/blueprints/api/endpoints.py:955 app/templates/index.html:163
 #: app/templates/packages/game_hub.html:60
 msgid "Highest Reviewed"
-msgstr "高評価のパッケージ"
+msgstr "高評価のレビュー"
 
 #: app/blueprints/api/endpoints.py:960 app/templates/index.html:113
 #: app/templates/packages/game_hub.html:32
@@ -188,7 +189,7 @@ msgstr "スクリーンショット"
 #: app/templates/packages/edit_maintainers.html:8
 #: app/templates/packages/view.html:605
 msgid "Maintainers"
-msgstr "保守担当"
+msgstr "メンテナー"
 
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:159
 #: app/templates/packages/audit.html:4
@@ -207,7 +208,7 @@ msgstr "共有とバッジ"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "削除 / 非公開"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -257,7 +258,7 @@ msgstr "短い説明（プレーンテキスト）"
 
 #: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:597
 msgid "Maintenance State"
-msgstr "保守状態"
+msgstr "メンテナンス状態"
 
 #: app/blueprints/packages/packages.py:260 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
@@ -302,7 +303,7 @@ msgstr "動画URL"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Donate URL"
-msgstr "URLを寄付"
+msgstr "寄付受付URL"
 
 #: app/blueprints/packages/packages.py:278
 msgid "_game is not an allowed name"
@@ -356,7 +357,7 @@ msgstr "メンテナー（複数の場合、カンマで区切る）"
 
 #: app/blueprints/packages/packages.py:523
 msgid "You don't have permission to edit maintainers"
-msgstr "保守担当を編集する権限がありません。"
+msgstr "メンテナーを編集する権限がありません"
 
 #: app/blueprints/packages/packages.py:573
 msgid "You are not a maintainer"
@@ -413,13 +414,13 @@ msgstr ""
 #: app/blueprints/packages/releases.py:69
 #: app/blueprints/packages/releases.py:193
 msgid "Minimum Minetest Version"
-msgstr "Minetest最低バージョン"
+msgstr "最低Minetestバージョン"
 
 #: app/blueprints/packages/releases.py:59
 #: app/blueprints/packages/releases.py:71
 #: app/blueprints/packages/releases.py:196
 msgid "Maximum Minetest Version"
-msgstr "Minetest最高バージョン"
+msgstr "最高Minetestバージョン"
 
 #: app/blueprints/packages/releases.py:66
 #: app/templates/packages/release_edit.html:23
@@ -474,7 +475,7 @@ msgstr ""
 
 #: app/blueprints/packages/releases.py:252
 msgid "Branch name"
-msgstr ""
+msgstr "ブランチ名"
 
 #: app/blueprints/packages/releases.py:253
 #: app/templates/packages/update_config.html:38
@@ -518,7 +519,7 @@ msgstr "コメント"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "レーティング"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:173
@@ -528,7 +529,7 @@ msgstr "はい"
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:124
 #: app/templates/macros/reviews.html:177
 msgid "Neutral"
-msgstr ""
+msgstr "中立"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:129
 #: app/templates/macros/reviews.html:181
@@ -660,7 +661,7 @@ msgstr "メールアドレスまたはパスワードが違います"
 #: app/blueprints/users/account.py:52
 #, python-format
 msgid "User %(username)s does not exist"
-msgstr "ユーザー %(username)s が存在しません"
+msgstr "ユーザー %(username)s は存在しません"
 
 #: app/blueprints/users/account.py:55
 msgid "Incorrect password. Did you set one?"
@@ -687,7 +688,8 @@ msgstr "ユーザー名"
 msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
-msgstr ""
+msgstr "半角アルファベット(A-Za-z)、数字(0-9)、アンダースコア(_)、マイナス(-)、ピリオ"
+"ド(.)のみ利用できます"
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/account.py:186
 #: app/blueprints/users/account.py:222 app/blueprints/users/account.py:373
@@ -714,7 +716,7 @@ msgstr "CAPTCHAの答えが違います"
 
 #: app/blueprints/users/account.py:117
 msgid "Username is invalid"
-msgstr "ユーザー名が無効です"
+msgstr "無効なユーザー名です"
 
 #: app/blueprints/users/account.py:128
 msgid "An account already exists for that username but hasn't been claimed yet."
@@ -738,7 +740,8 @@ msgstr ""
 #: app/blueprints/users/account.py:148 app/blueprints/users/account.py:252
 #: app/blueprints/users/settings.py:167
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
-msgstr ""
+msgstr "そのメールアドレスは、購読停止/ブラックリストに登録されているので使用できませ"
+"ん"
 
 #: app/blueprints/users/account.py:187
 msgid "Reset Password"
@@ -758,23 +761,23 @@ msgstr "パスワードの確認"
 
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:233
 msgid "Passwords must match"
-msgstr ""
+msgstr "パスワードは同じ必要があります"
 
 #: app/blueprints/users/account.py:230
 msgid "Old password"
-msgstr ""
+msgstr "古いパスワード"
 
 #: app/blueprints/users/account.py:241
 msgid "Passwords do not match"
-msgstr ""
+msgstr "パスワードが一致しません"
 
 #: app/blueprints/users/account.py:272 app/blueprints/users/account.py:276
 msgid "Your password has been changed successfully."
-msgstr ""
+msgstr "パスワードの変更が完了しました。"
 
 #: app/blueprints/users/account.py:291
 msgid "Old password is incorrect"
-msgstr ""
+msgstr "古いパスワードと一致しません"
 
 #: app/blueprints/users/account.py:319
 msgid "Unknown verification token!"
@@ -782,11 +785,11 @@ msgstr ""
 
 #: app/blueprints/users/account.py:325
 msgid "Token has expired"
-msgstr ""
+msgstr "トークンの有効期限が切れました"
 
 #: app/blueprints/users/account.py:339
 msgid "Another user is already using that email"
-msgstr ""
+msgstr "ほかのユーザーがそのメールアドレスを使用しています"
 
 #: app/blueprints/users/account.py:342
 msgid "Confirmed email change"
@@ -794,7 +797,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:347
 msgid "Email address changed"
-msgstr ""
+msgstr "メールアドレスが変更されました"
 
 #: app/blueprints/users/account.py:348
 msgid ""
@@ -808,7 +811,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:374
 msgid "Send"
-msgstr ""
+msgstr "送る"
 
 #: app/blueprints/users/account.py:405
 msgid ""
@@ -963,11 +966,11 @@ msgstr "APIトークン"
 #: app/blueprints/users/settings.py:59 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
 msgid "Moderator Tools"
-msgstr ""
+msgstr "モデレーターツール"
 
 #: app/blueprints/users/settings.py:69
 msgid "Donation URL"
-msgstr "寄付URL"
+msgstr "寄付受付URL"
 
 #: app/blueprints/users/settings.py:85 app/blueprints/users/settings.py:92
 msgid "A user already has that name"
@@ -999,11 +1002,11 @@ msgstr ""
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "Text to find (regex)"
-msgstr ""
+msgstr "検索する文字列（正規表現）"
 
 #: app/blueprints/zipgrep/__init__.py:36
 msgid "File filter"
-msgstr ""
+msgstr "ファイルフィルター"
 
 #: app/blueprints/zipgrep/__init__.py:38 app/templates/base.html:60
 #: app/templates/todo/tags.html:14
@@ -1071,7 +1074,7 @@ msgstr ""
 
 #: app/logic/screenshots.py:34
 msgid "a PNG or JPG image file"
-msgstr ""
+msgstr "PNGまたはJPG画像ファイル"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1225,7 +1228,7 @@ msgstr "プロフィール"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "マイコレクション"
 
 #: app/templates/base.html:163
 msgid "Admin"
@@ -1257,19 +1260,19 @@ msgstr "サインアウト"
 
 #: app/templates/base.html:213
 msgid "Help translate ContentDB"
-msgstr "ContentDBの翻訳を手伝う"
+msgstr "ContentDBの翻訳に協力する"
 
 #: app/templates/base.html:257
 msgid "About"
-msgstr ""
+msgstr "ContentDBについて"
 
 #: app/templates/base.html:258
 msgid "Rules"
-msgstr ""
+msgstr "規範"
 
 #: app/templates/base.html:259
 msgid "Policy and Guidance"
-msgstr "ポリシーとガイダンス"
+msgstr "ポリシーとガイド"
 
 #: app/templates/base.html:260
 msgid "API"
@@ -1281,25 +1284,25 @@ msgstr "個人情報保護方針"
 
 #: app/templates/base.html:263
 msgid "Report / DMCA"
-msgstr ""
+msgstr "報告 / DMCA"
 
 #: app/templates/base.html:265
 msgid "User List"
-msgstr ""
+msgstr "ユーザー一覧"
 
 #: app/templates/base.html:266 app/templates/packages/view.html:189
 #: app/templates/packages/view.html:654 app/templates/threads/list.html:4
 msgid "Threads"
-msgstr "スレッド"
+msgstr "掲示板"
 
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "コレクション"
 
 #: app/templates/base.html:268
 msgid "Support Packages"
-msgstr ""
+msgstr "パッケージを支援"
 
 #: app/templates/base.html:269
 msgid "Source Code"
@@ -1307,7 +1310,7 @@ msgstr "ソースコード"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr ""
+msgstr "ようこそ"
 
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
@@ -1368,7 +1371,7 @@ msgstr "タグで検索"
 
 #: app/templates/index.html:170
 msgid "Recent Positive Reviews"
-msgstr "最近の高評価レビュー"
+msgstr "最近の評価したレビュー"
 
 #: app/templates/index.html:177
 #, python-format
@@ -1607,7 +1610,7 @@ msgstr ""
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:104
 msgid "Donate"
-msgstr ""
+msgstr "寄付"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
@@ -2151,7 +2154,7 @@ msgstr ""
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
-msgstr ""
+msgstr "エイリアス"
 
 #: app/templates/packages/alias_create_edit.html:13
 msgid "Back to Aliases"
@@ -2210,7 +2213,7 @@ msgstr "パッケージの作成"
 
 #: app/templates/packages/create_edit.html:42
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
-msgstr "パッケージを含めるためのポリシーとガイダンスは読まれましたか？"
+msgstr "パッケージ投稿ポリシーとガイドはご覧になりましたか？"
 
 #: app/templates/packages/create_edit.html:46
 msgid "Read more"
@@ -2278,7 +2281,7 @@ msgstr "次へ（自動インポート）"
 
 #: app/templates/packages/create_edit.html:106
 msgid "Skip"
-msgstr ""
+msgstr "スキップ"
 
 #: app/templates/packages/create_edit.html:110
 msgid "Importing... (This may take a while)"
@@ -3038,7 +3041,7 @@ msgstr ""
 
 #: app/templates/packages/view.html:442
 msgid "Dependencies"
-msgstr ""
+msgstr "依存関係"
 
 #: app/templates/packages/view.html:462
 msgid "No required dependencies"
@@ -3046,11 +3049,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:468
 msgid "Optional"
-msgstr ""
+msgstr "オプションMod"
 
 #: app/templates/packages/view.html:501
 msgid "Compatible Games"
-msgstr ""
+msgstr "互換ゲーム"
 
 #: app/templates/packages/view.html:506 app/templates/packages/view.html:526
 msgid "No specific game required"
@@ -3086,11 +3089,11 @@ msgstr ""
 
 #: app/templates/packages/view.html:578
 msgid "Information"
-msgstr ""
+msgstr "情報"
 
 #: app/templates/packages/view.html:584
 msgid "Technical Name"
-msgstr ""
+msgstr "技術名"
 
 #: app/templates/packages/view.html:593
 #, python-format
@@ -4000,7 +4003,7 @@ msgstr ""
 #: app/templates/users/stats.html:4
 #, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr ""
+msgstr "%(display_name)s'のパッケージ統計"
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
@@ -4054,19 +4057,19 @@ msgstr ""
 
 #: app/utils/flask.py:150
 msgid "All time"
-msgstr ""
+msgstr "全期間"
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
-msgstr ""
+msgstr "過去7日間"
 
 #: app/utils/flask.py:152
 msgid "Last 30 days"
-msgstr ""
+msgstr "過去30日間"
 
 #: app/utils/flask.py:153
 msgid "Last 90 days"
-msgstr ""
+msgstr "過去90日間"
 
 #: app/utils/flask.py:154
 msgid "Year to date"
@@ -4310,4 +4313,3 @@ msgstr ""
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr ""
-
