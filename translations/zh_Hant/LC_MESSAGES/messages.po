@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-10-23 22:15+0100\n"
-"PO-Revision-Date: 2022-10-03 02:25+0000\n"
-"Last-Translator: Yic95 <0Luke.Luke0@gmail.com>\n"
+"PO-Revision-Date: 2023-12-23 14:09+0000\n"
+"Last-Translator: reimu105 <peter112548@gmail.com>\n"
+"Language-Team: Chinese (Traditional) <https://hosted.weblate.org/projects/"
+"minetest/contentdb/zh_Hant/>\n"
 "Language: zh_Hant\n"
-"Language-Team: Chinese (Traditional) "
-"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hant/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:122
@@ -43,7 +44,7 @@ msgstr "%(delta)s 天前"
 
 #: app/blueprints/api/endpoints.py:928
 msgid "Spotlight"
-msgstr ""
+msgstr "特別對焦"
 
 #: app/blueprints/api/endpoints.py:940 app/templates/index.html:127
 msgid "Top Games"
@@ -107,45 +108,45 @@ msgstr "標題"
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:84
 msgid "Short Description"
-msgstr ""
+msgstr "簡短的介紹"
 
 #: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
-msgstr ""
+msgstr "頁面內容"
 
 #: app/blueprints/collections/__init__.py:82
 #: app/blueprints/threads/__init__.py:283
 #: app/templates/collections/view.html:51
 msgid "Private"
-msgstr ""
+msgstr "私人的"
 
 #: app/blueprints/collections/__init__.py:152
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "已存在具有類似標題的集合"
 
 #: app/blueprints/collections/__init__.py:158
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "無法建立集合，因為具有該名稱的套件已存在"
 
 #: app/blueprints/collections/__init__.py:304
 msgid "Added package to collection"
-msgstr ""
+msgstr "將包添加到集合中"
 
 #: app/blueprints/collections/__init__.py:306
 msgid "Removed package from collection"
-msgstr ""
+msgstr "從作品集移除軟體包"
 
 #: app/blueprints/collections/__init__.py:325
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "新增軟體包到收藏夾"
 
 #: app/blueprints/collections/__init__.py:327
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "（公開，從「個人資料」&gt;「我的收藏」更改）"
 
 #: app/blueprints/collections/__init__.py:331
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "從收藏夾移除軟體包"
 
 #: app/blueprints/github/__init__.py:46
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -193,26 +194,26 @@ msgstr "管理者"
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:159
 #: app/templates/packages/audit.html:4
 msgid "Audit Log"
-msgstr ""
+msgstr "審核日誌"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/base.html:150
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
 #: app/templates/packages/view.html:229 app/templates/users/profile.html:148
 msgid "Statistics"
-msgstr ""
+msgstr "統計數據"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
-msgstr ""
+msgstr "分享和徽章"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "刪除/取消"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr ""
+msgstr "支援的遊戲"
 
 #: app/blueprints/packages/packages.py:177
 msgid "Error: Another package already uses this forum topic!"
@@ -302,17 +303,17 @@ msgstr "影片 URL"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Donate URL"
-msgstr ""
+msgstr "捐贈網址"
 
 #: app/blueprints/packages/packages.py:278
 msgid "_game is not an allowed name"
-msgstr ""
+msgstr "_game 不是允許的名稱"
 
 #: app/blueprints/packages/packages.py:288
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
-msgstr ""
+msgstr "包已存在，但已刪除。 請聯絡ContentDB工作人員復原包"
 
 #: app/blueprints/packages/packages.py:293
 msgid "Package already exists"
@@ -320,7 +321,7 @@ msgstr "套件已存在"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "已存在具有相似名稱的集合"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -373,27 +374,27 @@ msgstr "作者名稱"
 
 #: app/blueprints/packages/packages.py:678
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr ""
+msgstr "啟用基於依賴項的支援檢測（建議）"
 
 #: app/blueprints/packages/packages.py:679
 msgid "Supported games"
-msgstr ""
+msgstr "支援的子遊戲"
 
 #: app/blueprints/packages/packages.py:680
 msgid "Unsupported games"
-msgstr ""
+msgstr "不支援的子遊戲"
 
 #: app/blueprints/packages/packages.py:681
 msgid "Supports all games (unless stated) / is game independent"
-msgstr ""
+msgstr "支援所有子遊戲（如無特別說明）/ 子遊戲無關"
 
 #: app/blueprints/packages/packages.py:697
 msgid "You need at least one release before you can edit game support"
-msgstr ""
+msgstr "需要至少一個發行版才能編輯子遊戲支持"
 
 #: app/blueprints/packages/packages.py:701
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
-msgstr ""
+msgstr "Mod(pack) 需要至少包含一個 mod。 請建立一個新版本"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -408,7 +409,7 @@ msgstr "檔案上載"
 
 #: app/blueprints/packages/releases.py:55
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr ""
+msgstr "Git 參考（即：提交哈希、分支或標籤）"
 
 #: app/blueprints/packages/releases.py:57
 #: app/blueprints/packages/releases.py:69
@@ -446,15 +447,15 @@ msgstr "上載.zip檔案"
 
 #: app/blueprints/packages/releases.py:192
 msgid "Set Min"
-msgstr ""
+msgstr "設定最小值"
 
 #: app/blueprints/packages/releases.py:195
 msgid "Set Max"
-msgstr ""
+msgstr "設定最大值"
 
 #: app/blueprints/packages/releases.py:198
 msgid "Only change values previously set as none"
-msgstr ""
+msgstr "僅更改先前設定為“空”的值"
 
 #: app/blueprints/packages/releases.py:199
 msgid "Update"
@@ -463,7 +464,7 @@ msgstr "更新"
 #: app/blueprints/packages/releases.py:248
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
-msgstr ""
+msgstr "觸發機"
 
 #: app/blueprints/packages/releases.py:249
 msgid "New Commit"
@@ -484,57 +485,57 @@ msgstr "動作"
 
 #: app/blueprints/packages/releases.py:254
 msgid "Send notification and mark as outdated"
-msgstr ""
+msgstr "發送通知並標記為過期包"
 
 #: app/blueprints/packages/releases.py:254
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
-msgstr ""
+msgstr "建立版本"
 
 #: app/blueprints/packages/releases.py:256
 msgid "Save Settings"
-msgstr ""
+msgstr "儲存設定"
 
 #: app/blueprints/packages/releases.py:257
 msgid "Disable Automation"
-msgstr ""
+msgstr "停用自動化"
 
 #: app/blueprints/packages/releases.py:296
 msgid "Please add a Git repository URL in order to set up automatic releases"
-msgstr ""
+msgstr "請新增 Git 儲存庫 URL 以設定自動發布"
 
 #: app/blueprints/packages/releases.py:312
 msgid "Deleted update configuration"
-msgstr ""
+msgstr "刪除了更新配置"
 
 #: app/blueprints/packages/releases.py:320
 msgid "Now, please create an initial release"
-msgstr ""
+msgstr "現在，請建立初始版本"
 
 #: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:181
 #: app/blueprints/threads/__init__.py:182
 #: app/blueprints/threads/__init__.py:282
 msgid "Comment"
-msgstr ""
+msgstr "評論"
 
 #: app/blueprints/packages/reviews.py:46
 msgid "Rating"
-msgstr ""
+msgstr "評分"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:173
 msgid "Yes"
-msgstr ""
+msgstr "是"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:124
 #: app/templates/macros/reviews.html:177
 msgid "Neutral"
-msgstr ""
+msgstr "中"
 
 #: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:129
 #: app/templates/macros/reviews.html:181
 msgid "No"
-msgstr ""
+msgstr "否"
 
 #: app/blueprints/packages/reviews.py:56
 msgid "You can't review your own package!"
@@ -544,14 +545,14 @@ msgstr "你不可以評論你自己的套件！"
 msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
-msgstr ""
+msgstr "您最近查看了太多軟體包。 請稍後再試，並考慮讓您的評論更詳細"
 
 #: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:207
 #: app/blueprints/threads/__init__.py:240
 #: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:105
 #: app/logic/packages.py:131
 msgid "Linking to blocked sites is not allowed"
-msgstr ""
+msgstr "不允許連結到被封鎖的網站"
 
 #: app/blueprints/packages/reviews.py:183
 #, fuzzy
@@ -565,141 +566,141 @@ msgstr "你不可以對你的評論投票！"
 #: app/blueprints/packages/screenshots.py:33
 #: app/blueprints/packages/screenshots.py:39
 msgid "Title/Caption"
-msgstr ""
+msgstr "標題/說明文字"
 
 #: app/blueprints/packages/screenshots.py:45
 #: app/templates/packages/screenshots.html:110
 msgid "Cover Image"
-msgstr ""
+msgstr "封面圖片"
 
 #: app/blueprints/report/__init__.py:34 app/templates/users/modtools.html:62
 msgid "Message"
-msgstr ""
+msgstr "訊息"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:51
 #: app/templates/packages/view.html:665 app/templates/report/index.html:4
 #: app/templates/report/index.html:10 app/templates/users/profile.html:37
 msgid "Report"
-msgstr ""
+msgstr "報告"
 
 #: app/blueprints/threads/__init__.py:71
 msgid "Already subscribed!"
-msgstr ""
+msgstr "已經訂閱！"
 
 #: app/blueprints/threads/__init__.py:73
 msgid "Subscribed to thread"
-msgstr ""
+msgstr "訂閱主題"
 
 #: app/blueprints/threads/__init__.py:88
 msgid "Unsubscribed!"
-msgstr ""
+msgstr "取消訂閱！"
 
 #: app/blueprints/threads/__init__.py:92
 msgid "Already not subscribed!"
-msgstr ""
+msgstr "還沒訂閱！"
 
 #: app/blueprints/threads/__init__.py:110
 msgid "Locked thread"
-msgstr ""
+msgstr "鎖定貼"
 
 #: app/blueprints/threads/__init__.py:113
 msgid "Unlocked thread"
-msgstr ""
+msgstr "解鎖線程"
 
 #: app/blueprints/threads/__init__.py:162
 msgid "Cannot delete thread opening post!"
-msgstr ""
+msgstr "無法刪除開頭帖文！"
 
 #: app/blueprints/threads/__init__.py:236
 msgid "Please wait before commenting again"
-msgstr ""
+msgstr "請稍等後再發表評論"
 
 #: app/blueprints/threads/__init__.py:284
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
-msgstr ""
+msgstr "打開貼子"
 
 #: app/blueprints/threads/__init__.py:309
 msgid "Unable to create thread!"
-msgstr ""
+msgstr "無法建立貼子！"
 
 #: app/blueprints/threads/__init__.py:315
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "批准線程已存在！ 考慮在那裡回复"
 
 #: app/blueprints/threads/__init__.py:319
 msgid "Please wait before opening another thread"
-msgstr ""
+msgstr "請稍候，然後再開啟另一個線程"
 
 #: app/blueprints/todo/user.py:192
 #: app/templates/collections/package_add_to.html:46
 msgid "Done"
-msgstr ""
+msgstr "完成"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr ""
+msgstr "使用者名稱或電子郵件"
 
 #: app/blueprints/users/account.py:37 app/blueprints/users/account.py:105
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
 #: app/templates/users/modtools.html:35
 msgid "Password"
-msgstr ""
+msgstr "密碼"
 
 #: app/blueprints/users/account.py:38 app/blueprints/zipgrep/__init__.py:37
 msgid "Remember me"
-msgstr ""
+msgstr "記住帳號"
 
 #: app/blueprints/users/account.py:39 app/templates/base.html:188
 #: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
-msgstr ""
+msgstr "登入"
 
 #: app/blueprints/users/account.py:45
 msgid "Incorrect email or password"
-msgstr ""
+msgstr "錯誤的郵件帳號或密碼"
 
 #: app/blueprints/users/account.py:52
 #, python-format
 msgid "User %(username)s does not exist"
-msgstr ""
+msgstr "使用者%(username)s不存在"
 
 #: app/blueprints/users/account.py:55
 msgid "Incorrect password. Did you set one?"
-msgstr ""
+msgstr "密碼錯誤。 你設定了嗎？"
 
 #: app/blueprints/users/account.py:58
 msgid "You need to confirm the registration email"
-msgstr ""
+msgstr "您需要確認註冊信箱"
 
 #: app/blueprints/users/account.py:66
 msgid "Login failed"
-msgstr ""
+msgstr "登入失敗"
 
 #: app/blueprints/users/account.py:100 app/blueprints/users/settings.py:67
 msgid "Display Name"
-msgstr ""
+msgstr "顯示名稱"
 
 #: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:291
 #: app/templates/users/list.html:18
 msgid "Username"
-msgstr ""
+msgstr "使用者名稱"
 
 #: app/blueprints/users/account.py:102
 msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
-msgstr ""
+msgstr "僅允許使用字母 (A-Za-z)、數字 (0-9)、底線 (_)、減號 (-) 和句點 (.)"
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/account.py:186
 #: app/blueprints/users/account.py:222 app/blueprints/users/account.py:373
 #: app/blueprints/users/settings.py:139
 msgid "Email"
-msgstr ""
+msgstr "電子郵件"
 
 #: app/blueprints/users/account.py:106
 msgid "What is the result of the above calculation?"
-msgstr ""
+msgstr "上述計算的結果是什麼？"
 
 #: app/blueprints/users/account.py:107
 msgid "I agree"
@@ -712,30 +713,31 @@ msgstr "註冊"
 
 #: app/blueprints/users/account.py:113
 msgid "Incorrect captcha answer"
-msgstr ""
+msgstr "驗證碼答案不正確"
 
 #: app/blueprints/users/account.py:117
 msgid "Username is invalid"
-msgstr ""
+msgstr "無效的使用者名稱"
 
 #: app/blueprints/users/account.py:128
 msgid "An account already exists for that username but hasn't been claimed yet."
-msgstr ""
+msgstr "該用戶名的帳戶已存在，但尚未被認領。"
 
 #: app/blueprints/users/account.py:131 app/blueprints/users/account.py:138
 msgid "That username/display name is already in use, please choose another."
-msgstr ""
+msgstr "該使用者名稱/顯示名稱已被使用，請選擇另一個。"
 
 #: app/blueprints/users/account.py:143 app/blueprints/users/account.py:257
 msgid "Email already in use"
-msgstr ""
+msgstr "電子郵件已被使用"
 
 #: app/blueprints/users/account.py:144 app/blueprints/users/account.py:258
 #, python-format
 msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
-msgstr ""
+msgstr "我們無法建立帳戶，因為該電子郵件已被 %(display_name)s 使用。 "
+"嘗試使用不同的電子郵件地址。"
 
 #: app/blueprints/users/account.py:148 app/blueprints/users/account.py:252
 #: app/blueprints/users/settings.py:167
@@ -925,19 +927,19 @@ msgstr ""
 
 #: app/blueprints/users/profile.py:198
 msgid ">300k downloads"
-msgstr ">30 萬下載"
+msgstr "&gt;30 萬次下載"
 
 #: app/blueprints/users/profile.py:201
 msgid ">100k downloads"
-msgstr ">10 萬下載"
+msgstr "&gt;10 萬次下載"
 
 #: app/blueprints/users/profile.py:204
 msgid ">75k downloads"
-msgstr ">7.5 萬下載"
+msgstr "&gt;7.5 萬次下載"
 
 #: app/blueprints/users/profile.py:207
 msgid ">50k downloads"
-msgstr ">5 萬下載"
+msgstr "&gt;5 萬次下載"
 
 #: app/blueprints/users/profile.py:208
 #, python-format
@@ -4395,4 +4397,3 @@ msgstr ""
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr ""
-
