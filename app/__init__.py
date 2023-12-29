@@ -118,7 +118,7 @@ def check_for_ban():
 			if current_user.rank == models.UserRank.BANNED:
 				current_user.rank = models.UserRank.MEMBER
 			models.db.session.commit()
-		elif current_user.ban or current_user.rank == models.UserRank.BANNED:
+		elif current_user.is_banned:
 			if current_user.ban:
 				flash(gettext("Banned:") + " " + current_user.ban.message, "danger")
 			else:

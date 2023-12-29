@@ -1066,7 +1066,7 @@ class PackageRelease(db.Model):
 		return True
 
 	def check_perm(self, user, perm):
-		if not user.is_authenticated:
+		if not user.is_authenticated or user.is_banned:
 			return False
 
 		if type(perm) == str:
@@ -1092,9 +1092,7 @@ class PackageRelease(db.Model):
 
 			return count > 0
 		elif perm == Permission.APPROVE_RELEASE:
-			return user.rank.at_least(UserRank.APPROVER) or \
-					(is_maintainer and user.rank.at_least(
-						UserRank.MEMBER if self.approved else UserRank.NEW_MEMBER))
+			return is_maintainer or user.rank.at_least(UserRank.APPROVER)
 		else:
 			raise Exception("Permission {} is not related to releases".format(perm.name))
 

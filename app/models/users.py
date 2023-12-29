@@ -192,6 +192,10 @@ class User(db.Model, UserMixin):
 
 	ban = db.relationship("UserBan", foreign_keys="UserBan.user_id", back_populates="user", uselist=False)
 
+	@property
+	def is_banned(self):
+		return (self.ban and not self.ban.has_expired) or self.rank == UserRank.BANNED
+
 	def get_dict(self):
 		from app.utils.flask import abs_url_for
 		return {
