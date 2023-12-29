@@ -114,3 +114,11 @@ def last_it(it):
 	for x in it:
 		value = x
 	return value
+
+
+@app.template_filter()
+def flatten(list):
+	ret = []
+	for x in list:
+		ret.extend(x)
+	return ret

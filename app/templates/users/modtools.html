@@ -7,6 +7,23 @@
 {% block pane %}
 <h2 class="mt-0">{{ _("Moderator Tools") }}</h2>
 
+
+<h3>
+	{{ _("Storage") }}
+</h3>
+
+{% set all_releases = user.packages | map(attribute="releases") | flatten %}
+{% set all_screenshots = user.packages | map(attribute="screenshots") | flatten %}
+{% set release_size = ((all_releases | sum(attribute="file_size_bytes")) / 1048576) | round %}
+{% set screenshot_size = ((all_screenshots | sum(attribute="file_size_bytes")) / 1048576) | round %}
+<p>
+	{{ _("Total storage usage is %(total_size)d MB (releases %(release_size)d MB, screenshots %(screenshot_size)d MB).",
+			release_size=release_size, screenshot_size=screenshot_size, total_size=release_size + screenshot_size) }}
+	<br>
+	{{ _("%(releases)d releases and %(screenshots)d screenshots.",
+			releases=all_releases | length, screenshots=all_screenshots | length) }}
+</p>
+
 <h3>
 	{{ _("Edit Account") }}
 </h3>
