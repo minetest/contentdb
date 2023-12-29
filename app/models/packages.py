@@ -1130,6 +1130,23 @@ class PackageScreenshot(db.Model):
 	def file_path(self):
 		return self.url.replace("/uploads/", app.config["UPLOAD_DIR"])
 
+	@property
+	def file_size_bytes(self):
+		path = self.file_path
+		if not os.path.isfile(path):
+			return 0
+
+		file_stats = os.stat(path)
+		return file_stats.st_size
+
+	@property
+	def file_size(self):
+		size = self.file_size_bytes / 1024
+		if size > 1024:
+			return f"{round(size / 1024, 1)} MB"
+		else:
+			return f"{round(size)} KB"
+
 	def get_edit_url(self):
 		return url_for("packages.edit_screenshot",
 				author=self.package.author.username,

@@ -41,4 +41,11 @@
 			{{ render_releases_download(package.releases, package, current_user) }}
 		{% endif %}
 	</div>
+
+	<p class="mt-5 text-muted">
+		{% set release_size = ((package.releases | sum(attribute="file_size_bytes")) / 1048576) | round %}
+		{% set screenshot_size = ((package.screenshots | sum(attribute="file_size_bytes")) / 1048576) | round %}
+		{{ _("Total storage usage is %(total_size)d MB (releases %(release_size)d MB, screenshots %(screenshot_size)d MB)",
+				release_size=release_size, screenshot_size=screenshot_size, total_size=release_size + screenshot_size) }}
+	</p>
 {% endblock %}
