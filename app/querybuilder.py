@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import abort, current_app
+from flask import abort, current_app, request
 from flask_babel import lazy_gettext
 from sqlalchemy import or_
 from sqlalchemy.orm import subqueryload
@@ -55,7 +55,7 @@ class QueryBuilder:
 		return (self.search is not None or len(self.tags) > 1 or len(self.types) > 1 or len(self.hide_flags) > 0 or
 			self.random or self.lucky or self.author or self.version or self.game)
 
-	def __init__(self, args):
+	def __init__(self, args, cookies=False):
 
 		# Get request types
 		types = args.getlist("type")
@@ -119,6 +119,9 @@ class QueryBuilder:
 		self.game = args.get("game")
 		if self.game:
 			self.game = Package.get_by_key(self.game)
+
+		if cookies and request.cookies.get("hide_nonfree") == "1":
+			self.hide_nonfree = True
 
 	def set_sort_if_none(self, name, dir="desc"):
 		if self.order_by is None:

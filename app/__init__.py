@@ -198,3 +198,16 @@ def set_locale():
 			models.db.session.commit()
 
 	return resp
+
+
+@app.route("/set-nonfree/", methods=["POST"])
+def set_nonfree():
+	resp = redirect(url_for("homepage.home"))
+	if request.cookies.get("hide_nonfree") == "1":
+		resp.set_cookie("hide_nonfree", "0", expires=0)
+	else:
+		expire_date = datetime.datetime.now()
+		expire_date = expire_date + datetime.timedelta(days=5*365)
+		resp.set_cookie("hide_nonfree", "1", expires=expire_date)
+
+	return resp

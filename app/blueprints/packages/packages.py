@@ -49,7 +49,7 @@ from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_fo
 
 @bp.route("/packages/")
 def list_all():
-	qb    = QueryBuilder(request.args)
+	qb    = QueryBuilder(request.args, cookies=True)
 	query = qb.build_package_query()
 	title = qb.title
 

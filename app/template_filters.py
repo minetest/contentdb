@@ -17,6 +17,7 @@
 from datetime import datetime as dt
 from urllib.parse import urlparse
 
+from flask import request
 from flask_babel import format_timedelta, gettext
 from flask_login import current_user
 from markupsafe import Markup
@@ -29,8 +30,8 @@ from .utils.minetest_hypertext import normalize_whitespace as do_normalize_white
 
 
 @app.context_processor
-def inject_debug():
-	return dict(debug=app.debug)
+def inject_misc():
+	return dict(debug=app.debug, hide_nonfree=request.cookies.get("hide_nonfree") == "1")
 
 
 @app.context_processor

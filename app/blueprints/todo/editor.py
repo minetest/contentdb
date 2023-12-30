@@ -93,7 +93,7 @@ def view_editor():
 @bp.route("/todo/topics/")
 @login_required
 def topics():
-	qb = QueryBuilder(request.args)
+	qb = QueryBuilder(request.args, cookies=True)
 	qb.set_sort_if_none("date")
 	query = qb.build_topic_query()
 
@@ -125,7 +125,7 @@ def topics():
 @bp.route("/todo/tags/")
 @login_required
 def tags():
-	qb    = QueryBuilder(request.args)
+	qb    = QueryBuilder(request.args, cookies=True)
 	qb.set_sort_if_none("score", "desc")
 	query = qb.build_package_query()
 

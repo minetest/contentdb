@@ -269,6 +269,15 @@
 			<li class="list-inline-item"><a href="https://github.com/minetest/contentdb">{{ _("Source Code") }}</a></li>
 		</ul>
 
+		<form method="POST" action="{{ url_for('set_nonfree') }}" class="my-3">
+			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+			{% if hide_nonfree %}
+				<input type="submit" class="btn btn-sm btn-secondary" value="{{ _('Show non-free packages') }}">
+			{% else %}
+				<input type="submit" class="btn btn-sm btn-secondary" value="{{ _('Hide non-free packages') }}">
+			{% endif %}
+		</form>
+
 		{% if debug %}
 			<p style="color: red">
 				DEBUG MODE ENABLED
