@@ -17,6 +17,7 @@
 
 import os
 import re
+from typing import Optional
 
 from . import MinetestCheckError, ContentType
 from .config import parse_conf
@@ -78,7 +79,7 @@ class PackageTreeNode:
 		self.read_meta()
 
 		if self.type == ContentType.GAME:
-			if not os.path.isdir(base_dir + "/mods"):
+			if not os.path.isdir(os.path.join(base_dir, "mods")):
 				raise MinetestCheckError("Game at {} does not have a mods/ folder".format(self.relative))
 			self.add_children_from_mod_dir("mods")
 		elif self.type == ContentType.MOD:
@@ -91,6 +92,15 @@ class PackageTreeNode:
 			self.check_dir_casing(["textures", "media", "sounds", "models", "locale"])
 		elif self.type == ContentType.MODPACK:
 			self.add_children_from_mod_dir(None)
+
+	def find_license_file(self) -> Optional[str]:
+		names = ["LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING"]
+		for name in names:
+			path = os.path.join(self.baseDir, name)
+			if os.path.isfile(path):
+				return path
+
+		return None
 
 	def check_dir_casing(self, dirs):
 		for dir in next(os.walk(self.baseDir))[1]:
