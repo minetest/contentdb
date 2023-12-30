@@ -128,7 +128,8 @@ def post_release_check_update(self, release: PackageRelease, path):
 			raise MinetestCheckError("Game has unresolved hard dependencies: " + deps)
 
 		if package.state != PackageState.APPROVED and tree.find_license_file() is None:
-			raise MinetestCheckError("Package needs to have a LICENSE.txt/.md or COPYING file.")
+			raise MinetestCheckError(
+				"You need to add a LICENSE.txt/.md or COPYING file to your package. See the 'Copyright Guide' for more info")
 
 		# Add dependencies
 		for meta in get_meta_packages(depends):
