@@ -71,3 +71,13 @@ each platforms shows. It doesn't hide anything on Desktop, but hides all mature
 content on Android. You may wish to remove all text from that setting completely, 
 leaving it blank. See [Content Warnings](/help/content_flags/#content-warnings)
 for information on mature content.
+
+## How can I hide non-free packages on the website?
+
+Clicking "Hide non-free packages" in the footer of ContentDB will hide non-free packages from search results.
+It will not hide non-free packages from user profiles.
+
+## See also
+
+* [List of non-free packages](/packages/?flag=nonfree)
+* [Copyright Guide](/help/copyright)
