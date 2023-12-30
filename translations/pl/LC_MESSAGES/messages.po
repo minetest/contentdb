@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-10-23 22:15+0100\n"
+"POT-Creation-Date: 2023-12-30 16:46+0000\n"
 "PO-Revision-Date: 2023-09-08 10:04+0000\n"
 "Last-Translator: Jakub Z <mrkubax10@onet.pl>\n"
 "Language: pl\n"
@@ -20,20 +20,20 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:122
+#: app/__init__.py:123
 msgid "Banned:"
 msgstr "Użytkownik zbanowany:"
 
-#: app/__init__.py:124
+#: app/__init__.py:125
 msgid "You have been banned."
 msgstr "Zostałeś zbanowany."
 
 #: app/querybuilder.py:38 app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
-#: app/templates/collections/create_edit.html:41
+#: app/templates/collections/create_edit.html:56
 #: app/templates/collections/view.html:66 app/templates/modnames/list.html:16
 #: app/templates/packages/list.html:4 app/templates/todo/editor.html:46
-#: app/templates/users/list.html:22 app/templates/users/profile.html:247
+#: app/templates/users/list.html:22 app/templates/users/profile.html:265
 msgid "Packages"
 msgstr "Paczki"
 
@@ -41,34 +41,6 @@ msgstr "Paczki"
 #, python-format
 msgid "%(delta)s ago"
 msgstr "%(delta)s temu"
-
-#: app/blueprints/api/endpoints.py:928
-msgid "Spotlight"
-msgstr ""
-
-#: app/blueprints/api/endpoints.py:940 app/templates/index.html:127
-msgid "Top Games"
-msgstr "Najlepsze gry"
-
-#: app/blueprints/api/endpoints.py:945 app/templates/index.html:134
-#: app/templates/packages/game_hub.html:46
-msgid "Top Mods"
-msgstr "Najlepsze modyfikacje"
-
-#: app/blueprints/api/endpoints.py:950 app/templates/index.html:141
-#: app/templates/packages/game_hub.html:53
-msgid "Top Texture Packs"
-msgstr "Najlepsze paczki tekstur"
-
-#: app/blueprints/api/endpoints.py:955 app/templates/index.html:163
-#: app/templates/packages/game_hub.html:60
-msgid "Highest Reviewed"
-msgstr "Najwyżej oceniane"
-
-#: app/blueprints/api/endpoints.py:960 app/templates/index.html:113
-#: app/templates/packages/game_hub.html:32
-msgid "Recently Added"
-msgstr "Niedawno dodane"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
@@ -80,25 +52,25 @@ msgstr "Nazwa"
 msgid "Limit to package"
 msgstr "Ogranicz do paczki"
 
-#: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:89
-#: app/blueprints/packages/packages.py:274
-#: app/blueprints/packages/packages.py:515
-#: app/blueprints/packages/packages.py:611
-#: app/blueprints/packages/packages.py:682
+#: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:274
+#: app/blueprints/packages/packages.py:523
+#: app/blueprints/packages/packages.py:619
+#: app/blueprints/packages/packages.py:690
 #: app/blueprints/packages/releases.py:61
-#: app/blueprints/packages/releases.py:73 app/blueprints/packages/reviews.py:48
+#: app/blueprints/packages/releases.py:73 app/blueprints/packages/reviews.py:49
 #: app/blueprints/packages/screenshots.py:35
 #: app/blueprints/packages/screenshots.py:41
 #: app/blueprints/packages/screenshots.py:46
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
-#: app/blueprints/users/settings.py:70 app/blueprints/users/settings.py:140
-#: app/blueprints/users/settings.py:297 app/templates/users/modtools.html:94
+#: app/blueprints/users/settings.py:77 app/blueprints/users/settings.py:147
+#: app/blueprints/users/settings.py:304 app/templates/users/modtools.html:111
 msgid "Save"
 msgstr "Zapisz"
 
 #: app/blueprints/collections/__init__.py:77
-#: app/blueprints/packages/releases.py:53
-#: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:44
+#: app/blueprints/oauth/__init__.py:168 app/blueprints/packages/releases.py:53
+#: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:45
 #: app/blueprints/threads/__init__.py:281 app/templates/macros/reviews.html:138
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
@@ -106,7 +78,7 @@ msgid "Title"
 msgstr "Tytuł"
 
 #: app/blueprints/collections/__init__.py:80
-#: app/blueprints/collections/__init__.py:84
+#: app/blueprints/collections/__init__.py:85
 msgid "Short Description"
 msgstr "Krótki opis"
 
@@ -120,56 +92,78 @@ msgstr "Zawartość strony"
 msgid "Private"
 msgstr "Prywatny"
 
-#: app/blueprints/collections/__init__.py:152
+#: app/blueprints/collections/__init__.py:83
+msgid "Pinned to my profile"
+msgstr ""
+
+#: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
 msgstr "Kolekcja z podobnym tytułem już istnieje"
 
-#: app/blueprints/collections/__init__.py:158
+#: app/blueprints/collections/__init__.py:161
 msgid "Unable to create collection as a package with that name already exists"
 msgstr "Nie można utworzyć kolekcji, ponieważ paczka o tej nazwie już istnieje"
 
-#: app/blueprints/collections/__init__.py:304
+#: app/blueprints/collections/__init__.py:307
 msgid "Added package to collection"
 msgstr "Dodano paczkę do kolekcji"
 
-#: app/blueprints/collections/__init__.py:306
+#: app/blueprints/collections/__init__.py:309
 msgid "Removed package from collection"
 msgstr "Usunięto paczkę z kolekcji"
 
-#: app/blueprints/collections/__init__.py:325
+#: app/blueprints/collections/__init__.py:328
 msgid "Added package to favorites collection"
 msgstr "Dodano paczkę do ulubionych"
 
-#: app/blueprints/collections/__init__.py:327
+#: app/blueprints/collections/__init__.py:330
 msgid "(Public, change from Profile > My Collections)"
 msgstr "(Publiczne, zmień w Profil &gt; Moje kolekcje)"
 
-#: app/blueprints/collections/__init__.py:331
+#: app/blueprints/collections/__init__.py:334
 msgid "Removed package from favorites collection"
 msgstr "Usunięto paczkę z ulubionych"
 
-#: app/blueprints/github/__init__.py:46
+#: app/blueprints/github/__init__.py:52
 msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "Autoryzacja nieudana [err=gh-oauth-login-failed]"
 
-#: app/blueprints/github/__init__.py:62
+#: app/blueprints/github/__init__.py:76
 msgid "Linked GitHub to account"
 msgstr "Przypisano GitHub do konta"
 
-#: app/blueprints/github/__init__.py:65
+#: app/blueprints/github/__init__.py:79
 msgid "GitHub account is already associated with another user"
 msgstr "To konto GitHub jest już przypisane do innego użytkownika"
 
-#: app/blueprints/github/__init__.py:71
+#: app/blueprints/github/__init__.py:85
 msgid "Unable to find an account for that GitHub user"
 msgstr "Nie można znaleźć konta dla tego użytkownika GitHub"
 
-#: app/blueprints/github/__init__.py:76
+#: app/blueprints/github/__init__.py:90
 msgid "Authorization failed [err=gh-login-failed]"
 msgstr "Autoryzacja nieudana [err=gh-login-failed]"
 
+#: app/blueprints/oauth/__init__.py:169 app/templates/admin/tags/list.html:30
+#: app/templates/admin/warnings/list.html:24
+#: app/templates/users/settings_email.html:44
+msgid "Description"
+msgstr "Opis"
+
+#: app/blueprints/oauth/__init__.py:170
+msgid "Redirect URL"
+msgstr ""
+
+#: app/blueprints/oauth/__init__.py:171
+msgid "App Type"
+msgstr ""
+
+#: app/blueprints/oauth/__init__.py:257
+msgid "Revoked all user tokens"
+msgstr ""
+
 #: app/blueprints/packages/__init__.py:32
-#: app/templates/packages/create_edit.html:28
+#: app/templates/packages/create_edit.html:29
 msgid "Edit Details"
 msgstr "Edytuj detale"
 
@@ -244,13 +238,13 @@ msgid "Title (Human-readable)"
 msgstr "Tytuł (Czytelny dla człowieka)"
 
 #: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:609
+#: app/blueprints/packages/packages.py:617
 msgid "Name (Technical)"
 msgstr "Nazwa (techniczna)"
 
 #: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:610
-#: app/templates/packages/create_edit.html:74
+#: app/blueprints/packages/packages.py:618
+#: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Tylko małe litery (a-z), cyfry (0-9) oraz podłogi (_)"
 
@@ -287,7 +281,7 @@ msgstr "Długi opis (Markdown)"
 msgid "VCS Repository URL"
 msgstr "URL repozytorium VCS"
 
-#: app/blueprints/packages/packages.py:268 app/blueprints/users/settings.py:68
+#: app/blueprints/packages/packages.py:268 app/blueprints/users/settings.py:75
 msgid "Website URL"
 msgstr "URL strony internetowej"
 
@@ -333,13 +327,13 @@ msgstr "Nie można znaleźć tego użytkownika"
 
 #: app/blueprints/packages/packages.py:363
 #: app/blueprints/packages/screenshots.py:136
-#: app/blueprints/users/settings.py:124
+#: app/blueprints/users/settings.py:131
 msgid "Permission denied"
 msgstr "Brak dostępu"
 
 #: app/blueprints/packages/packages.py:419
-#: app/blueprints/packages/packages.py:470
-#: app/blueprints/packages/packages.py:490
+#: app/blueprints/packages/packages.py:478
+#: app/blueprints/packages/packages.py:498
 msgid "You don't have permission to do that"
 msgstr "Nie masz uprawnień aby to zrobić"
 
@@ -349,57 +343,57 @@ msgstr ""
 "Proszę zostawić komentarz ze zmianami, które są wymagane w wątku "
 "zatwierdzenia"
 
-#: app/blueprints/packages/packages.py:485
+#: app/blueprints/packages/packages.py:493
 msgid "Deleted package"
 msgstr "Usunięto paczkę"
 
-#: app/blueprints/packages/packages.py:505
+#: app/blueprints/packages/packages.py:513
 msgid "Unapproved package"
 msgstr "Niezatwierdzona paczka"
 
-#: app/blueprints/packages/packages.py:514
+#: app/blueprints/packages/packages.py:522
 msgid "Maintainers (Comma-separated)"
 msgstr "Opiekunowie (po przecinku)"
 
-#: app/blueprints/packages/packages.py:523
+#: app/blueprints/packages/packages.py:531
 msgid "You don't have permission to edit maintainers"
 msgstr "Nie masz uprawnień aby edytować listę opiekunów"
 
-#: app/blueprints/packages/packages.py:573
+#: app/blueprints/packages/packages.py:581
 msgid "You are not a maintainer"
 msgstr "Nie jesteś opiekunem"
 
-#: app/blueprints/packages/packages.py:576
+#: app/blueprints/packages/packages.py:584
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Właściciele paczek nie mogą usunąć siebie jako opiekunów"
 
-#: app/blueprints/packages/packages.py:608
+#: app/blueprints/packages/packages.py:616
 msgid "Author Name"
 msgstr "Nazwa autora"
 
-#: app/blueprints/packages/packages.py:678
+#: app/blueprints/packages/packages.py:686
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Włącz wykrywanie wsparcia w oparciu na zależnościach (zalecane)"
 
-#: app/blueprints/packages/packages.py:679
+#: app/blueprints/packages/packages.py:687
 msgid "Supported games"
 msgstr "Wspierane gry"
 
-#: app/blueprints/packages/packages.py:680
+#: app/blueprints/packages/packages.py:688
 msgid "Unsupported games"
 msgstr "Niewspierane gry"
 
-#: app/blueprints/packages/packages.py:681
+#: app/blueprints/packages/packages.py:689
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
 "Wspiera wszystkie gry (chyba, że zaznaczono inaczej) / jest niezależna od"
 " gry"
 
-#: app/blueprints/packages/packages.py:697
+#: app/blueprints/packages/packages.py:705
 msgid "You need at least one release before you can edit game support"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:701
+#: app/blueprints/packages/packages.py:709
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
 
@@ -519,36 +513,36 @@ msgstr "Usunięto konfigurację aktualizacji"
 msgid "Now, please create an initial release"
 msgstr "Teraz, utwórz pierwsze wydanie"
 
-#: app/blueprints/packages/reviews.py:45 app/blueprints/threads/__init__.py:181
+#: app/blueprints/packages/reviews.py:46 app/blueprints/threads/__init__.py:181
 #: app/blueprints/threads/__init__.py:182
 #: app/blueprints/threads/__init__.py:282
 msgid "Comment"
 msgstr "Komentarz"
 
-#: app/blueprints/packages/reviews.py:46
+#: app/blueprints/packages/reviews.py:47
 msgid "Rating"
 msgstr "Ocena"
 
-#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:119
+#: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:173
 msgid "Yes"
 msgstr "Tak"
 
-#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:124
+#: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:124
 #: app/templates/macros/reviews.html:177
 msgid "Neutral"
 msgstr "Neutralne"
 
-#: app/blueprints/packages/reviews.py:47 app/templates/macros/reviews.html:129
+#: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:129
 #: app/templates/macros/reviews.html:181
 msgid "No"
 msgstr "Nie"
 
-#: app/blueprints/packages/reviews.py:56
+#: app/blueprints/packages/reviews.py:57
 msgid "You can't review your own package!"
 msgstr "Nie możesz napisać opinii dla swojej paczki!"
 
-#: app/blueprints/packages/reviews.py:66
+#: app/blueprints/packages/reviews.py:67
 msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
@@ -556,14 +550,14 @@ msgstr ""
 "W ostatnim czasie zrecenzowałeś zbyt dużo paczek. Poczekaj zanim "
 "spróbujesz ponownie oraz rozważ pisanie bardziej szczegółowych recenzji"
 
-#: app/blueprints/packages/reviews.py:79 app/blueprints/threads/__init__.py:207
+#: app/blueprints/packages/reviews.py:80 app/blueprints/threads/__init__.py:207
 #: app/blueprints/threads/__init__.py:240
-#: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:105
+#: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:112
 #: app/logic/packages.py:131
 msgid "Linking to blocked sites is not allowed"
 msgstr "Tworzenie odnośników do zablokowanych stron jest niedozwolone"
 
-#: app/blueprints/packages/reviews.py:183
+#: app/blueprints/packages/reviews.py:184
 msgid "You can't vote on the reviews on your own package!"
 msgstr "Nie możesz oceniać opinii swojej paczki!"
 
@@ -581,7 +575,7 @@ msgstr "Tytuł/Nagłówek"
 msgid "Cover Image"
 msgstr "Obrazek okładki"
 
-#: app/blueprints/report/__init__.py:34 app/templates/users/modtools.html:62
+#: app/blueprints/report/__init__.py:34 app/templates/users/modtools.html:79
 msgid "Message"
 msgstr "Wiadomość"
 
@@ -651,7 +645,7 @@ msgstr "Nazwa użytkownika lub email"
 
 #: app/blueprints/users/account.py:37 app/blueprints/users/account.py:105
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
-#: app/templates/users/modtools.html:35
+#: app/templates/users/modtools.html:52
 msgid "Password"
 msgstr "Hasło"
 
@@ -685,11 +679,11 @@ msgstr "Musisz potwierdzić email"
 msgid "Login failed"
 msgstr "Logowanie nieudane"
 
-#: app/blueprints/users/account.py:100 app/blueprints/users/settings.py:67
+#: app/blueprints/users/account.py:100 app/blueprints/users/settings.py:74
 msgid "Display Name"
 msgstr "Wyświetlana nazwa"
 
-#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:291
+#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:298
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "Nazwa użytkownika"
@@ -704,7 +698,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/account.py:186
 #: app/blueprints/users/account.py:222 app/blueprints/users/account.py:373
-#: app/blueprints/users/settings.py:139
+#: app/blueprints/users/settings.py:146
 msgid "Email"
 msgstr "Email"
 
@@ -753,7 +747,7 @@ msgstr ""
 "%(display_name)s. Spróbuj użyć innego adresu email."
 
 #: app/blueprints/users/account.py:148 app/blueprints/users/account.py:252
-#: app/blueprints/users/settings.py:167
+#: app/blueprints/users/settings.py:174
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr ""
 "Ten adres email został odsubskrybowany/znajduje się na czarnej liście i "
@@ -986,40 +980,44 @@ msgstr "Email i powiadomienia"
 msgid "API Tokens"
 msgstr "Tokeny API"
 
-#: app/blueprints/users/settings.py:59 app/templates/users/modtools.html:4
+#: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
+msgid "OAuth2 Applications"
+msgstr ""
+
+#: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
 msgid "Moderator Tools"
 msgstr "Narzędzia moderatora"
 
-#: app/blueprints/users/settings.py:69
+#: app/blueprints/users/settings.py:76
 msgid "Donation URL"
 msgstr "URL darowizn"
 
-#: app/blueprints/users/settings.py:85 app/blueprints/users/settings.py:92
+#: app/blueprints/users/settings.py:92 app/blueprints/users/settings.py:99
 msgid "A user already has that name"
 msgstr "Użytkownik już posiada tą nazwę"
 
-#: app/blueprints/users/settings.py:249
+#: app/blueprints/users/settings.py:256
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr "Użytkownicy z rangą moderatora lub wyższą nie mogą być usunięci"
 
-#: app/blueprints/users/settings.py:292
+#: app/blueprints/users/settings.py:299
 msgid "Display name"
 msgstr "Wyświetlana nazwa"
 
-#: app/blueprints/users/settings.py:293
+#: app/blueprints/users/settings.py:300
 msgid "Forums Username"
 msgstr "Nazwa użytkownika na forum"
 
-#: app/blueprints/users/settings.py:294
+#: app/blueprints/users/settings.py:301
 msgid "GitHub Username"
 msgstr "Nazwa użytkownika GitHub"
 
-#: app/blueprints/users/settings.py:295 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:302 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "Ranga"
 
-#: app/blueprints/users/settings.py:339
+#: app/blueprints/users/settings.py:346
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr "Nie możesz promować użytkownika na rangę wyższą niż twoja!"
 
@@ -1098,8 +1096,8 @@ msgid "Too many requests, please wait before trying again"
 msgstr "Zbyt dużo zapytań, poczekaj zanim spróbujesz ponownie"
 
 #: app/logic/screenshots.py:34
-msgid "a PNG or JPG image file"
-msgstr "plik obrazu PNG lub JPG"
+msgid "a PNG, JPEG, or WebP image file"
+msgstr ""
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1119,48 +1117,49 @@ msgstr "Wyślij %(file_desc)s"
 msgid "Uploaded image isn't actually an image"
 msgstr "Wysłany obraz nie jest obrazem"
 
-#: app/models/packages.py:67
+#: app/models/packages.py:68
 msgid "Mod"
 msgstr "Modyfikacja"
 
-#: app/models/packages.py:69
+#: app/models/packages.py:70
 msgid "Game"
 msgstr "Gra"
 
-#: app/models/packages.py:71
+#: app/models/packages.py:72
 msgid "Texture Pack"
 msgstr "Paczka tekstur"
 
-#: app/models/packages.py:76 app/templates/base.html:39
+#: app/models/packages.py:77 app/templates/base.html:39
 #: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Modyfikacje"
 
-#: app/models/packages.py:78 app/templates/base.html:42
+#: app/models/packages.py:79 app/templates/base.html:42
 #: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Gry"
 
-#: app/models/packages.py:80 app/templates/base.html:45
+#: app/models/packages.py:81 app/templates/base.html:45
 msgid "Texture Packs"
 msgstr "Paczki tekstur"
 
-#: app/models/packages.py:169
+#: app/models/packages.py:170
 msgid "Submit for Approval"
 msgstr "Wyślij do zatwierdzenia"
 
-#: app/models/packages.py:171
+#: app/models/packages.py:172
 msgid "Approve"
 msgstr "Zatwierdź"
 
-#: app/models/packages.py:173 app/templates/api/create_edit_token.html:17
+#: app/models/packages.py:174 app/templates/api/create_edit_token.html:17
 #: app/templates/collections/delete.html:14
 #: app/templates/collections/view.html:39
-#: app/templates/packages/release_edit.html:75
-#: app/templates/packages/review_create_edit.html:56
+#: app/templates/oauth/create_edit.html:17
+#: app/templates/packages/release_edit.html:84
+#: app/templates/packages/review_create_edit.html:61
 #: app/templates/threads/delete_reply.html:19
 #: app/templates/threads/delete_thread.html:19
-#: app/templates/threads/view.html:48 app/templates/users/delete.html:34
+#: app/templates/threads/view.html:50 app/templates/users/delete.html:34
 msgid "Delete"
 msgstr "Usuń"
 
@@ -1186,7 +1185,7 @@ msgid "%(num)d new notifications"
 msgstr "%(num)d nowych powiadomień"
 
 #: app/tasks/emails.py:162 app/templates/macros/forms.html:59
-#: app/templates/packages/create_edit.html:40
+#: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
 msgstr "Widok"
@@ -1200,7 +1199,7 @@ msgstr "Zarządzaj ustawieniami emaila"
 #: app/templates/emails/notification_digest.html:54
 #: app/templates/emails/verify.html:33
 #: app/templates/emails/verify_unsubscribe.html:13
-#: app/templates/threads/view.html:39 app/templates/users/unsubscribe.html:4
+#: app/templates/threads/view.html:41 app/templates/users/unsubscribe.html:4
 #: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
 msgstr "Anuluj subskrybcję"
@@ -1351,7 +1350,7 @@ msgstr ""
 "Witaj w najlepszym miejscu do znalezienia modyfikacji, gier i paczek "
 "tekstur dla Minetesta"
 
-#: app/templates/collections/create_edit.html:66
+#: app/templates/collections/create_edit.html:81
 #: app/templates/collections/list.html:39
 #: app/templates/collections/view.html:91 app/templates/index.html:48
 #: app/templates/macros/reviews.html:76 app/templates/packages/game_hub.html:5
@@ -1368,27 +1367,27 @@ msgstr "<strong>%(title)s</strong> autorstwa %(author)s"
 
 #: app/templates/index.html:77 app/templates/packages/reviews_list.html:4
 #: app/templates/packages/view.html:193 app/templates/packages/view.html:325
-#: app/templates/users/profile.html:262
+#: app/templates/users/profile.html:279
 msgid "Reviews"
 msgstr "Opinie"
 
-#: app/templates/index.html:96 app/templates/packages/view.html:271
+#: app/templates/index.html:93 app/templates/packages/view.html:271
 msgid "Previous"
 msgstr "Poprzedni"
 
-#: app/templates/index.html:100 app/templates/packages/view.html:275
+#: app/templates/index.html:97 app/templates/packages/view.html:275
 #: app/templates/users/claim_forums.html:87
 msgid "Next"
 msgstr "Następny"
 
-#: app/templates/index.html:106
+#: app/templates/index.html:103
 msgid "Featured"
 msgstr "Wyróżnione"
 
-#: app/templates/index.html:111 app/templates/index.html:118
-#: app/templates/index.html:125 app/templates/index.html:132
-#: app/templates/index.html:139 app/templates/index.html:161
-#: app/templates/index.html:168 app/templates/packages/game_hub.html:30
+#: app/templates/index.html:108 app/templates/index.html:115
+#: app/templates/index.html:122 app/templates/index.html:129
+#: app/templates/index.html:136 app/templates/index.html:158
+#: app/templates/index.html:165 app/templates/packages/game_hub.html:30
 #: app/templates/packages/game_hub.html:37
 #: app/templates/packages/game_hub.html:44
 #: app/templates/packages/game_hub.html:51
@@ -1396,19 +1395,39 @@ msgstr "Wyróżnione"
 msgid "See more"
 msgstr "Zobacz więcej"
 
-#: app/templates/index.html:120 app/templates/packages/game_hub.html:39
+#: app/templates/index.html:110 app/templates/packages/game_hub.html:32
+msgid "Recently Added"
+msgstr "Niedawno dodane"
+
+#: app/templates/index.html:117 app/templates/packages/game_hub.html:39
 msgid "Recently Updated"
 msgstr "Niedawno wysłane"
 
-#: app/templates/index.html:145
+#: app/templates/index.html:124
+msgid "Top Games"
+msgstr "Najlepsze gry"
+
+#: app/templates/index.html:131 app/templates/packages/game_hub.html:46
+msgid "Top Mods"
+msgstr "Najlepsze modyfikacje"
+
+#: app/templates/index.html:138 app/templates/packages/game_hub.html:53
+msgid "Top Texture Packs"
+msgstr "Najlepsze paczki tekstur"
+
+#: app/templates/index.html:142
 msgid "Search by Tags"
 msgstr "Wyszukaj po tagach"
 
-#: app/templates/index.html:170
+#: app/templates/index.html:160 app/templates/packages/game_hub.html:60
+msgid "Highest Reviewed"
+msgstr "Najwyżej oceniane"
+
+#: app/templates/index.html:167
 msgid "Recent Positive Reviews"
 msgstr "Ostatnie pozytywne opinie"
 
-#: app/templates/index.html:177
+#: app/templates/index.html:174
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
 msgstr "CDB posiada %(count)d paczek z całkowitą liczbą pobrań %(downloads)d."
@@ -1443,12 +1462,6 @@ msgstr "Nowa licencja"
 msgid "Licenses"
 msgstr "Licencje"
 
-#: app/templates/admin/tags/list.html:30
-#: app/templates/admin/warnings/list.html:24
-#: app/templates/users/settings_email.html:44
-msgid "Description"
-msgstr "Opis"
-
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
 msgstr "Wyświetlenia"
@@ -1472,6 +1485,7 @@ msgid "New Warning"
 msgstr "Nowa uwaga"
 
 #: app/templates/api/create_edit_token.html:5
+#: app/templates/oauth/create_edit.html:5
 #, python-format
 msgid "Edit - %(name)s"
 msgstr "Edytuj - %(name)s"
@@ -1480,11 +1494,20 @@ msgstr "Edytuj - %(name)s"
 msgid "Create API Token"
 msgstr "Utwórz token API"
 
-#: app/templates/api/create_edit_token.html:24
+#: app/templates/api/create_edit_token.html:25
+#, python-format
+msgid "This token was created by the application '%(title)s' by %(author)s."
+msgstr ""
+
+#: app/templates/api/create_edit_token.html:26
+msgid "Click 'Delete' to revoke access."
+msgstr ""
+
+#: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
 msgstr "Tokeny API pozwalają skryptom na działanie w twoim imieniu."
 
-#: app/templates/api/create_edit_token.html:25
+#: app/templates/api/create_edit_token.html:31
 msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
@@ -1492,11 +1515,11 @@ msgstr ""
 "Uważaj komu udostępniasz tokeny, ponieważ są odpowiedzialne za akcje "
 "wykonywane na twoim koncie."
 
-#: app/templates/api/create_edit_token.html:30
+#: app/templates/api/create_edit_token.html:36
 msgid "Access Token"
 msgstr "Token dostępu"
 
-#: app/templates/api/create_edit_token.html:33
+#: app/templates/api/create_edit_token.html:39
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
@@ -1504,15 +1527,15 @@ msgstr ""
 "Z powodów bezpieczeństwa tokeny dostępu są pokazywane tylko raz. Zresetuj"
 " token jeżeli go stracisz."
 
-#: app/templates/api/create_edit_token.html:40
+#: app/templates/api/create_edit_token.html:46
 msgid "Reset"
 msgstr "Resetuj"
 
-#: app/templates/api/create_edit_token.html:49
+#: app/templates/api/create_edit_token.html:56
 msgid "Human-readable name to tell tokens apart."
 msgstr "Nazwa czytelna dla człowieka umożliwiająca odróżnienie tokenów."
 
-#: app/templates/api/create_edit_token.html:50
+#: app/templates/api/create_edit_token.html:57
 msgid "Recommended: Only allows token to interact with a particular package."
 msgstr "Zalecane: Zezwól tokenowi na interakcję tylko z jedną paczką."
 
@@ -1523,6 +1546,7 @@ msgstr "Tokeny API | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/collections/list.html:21
 #: app/templates/macros/topics.html:29 app/templates/macros/topics.html:65
+#: app/templates/oauth/list_clients.html:8
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
@@ -1532,13 +1556,17 @@ msgstr "Utwórz"
 msgid "API Documentation"
 msgstr "Dokumentacja API"
 
-#: app/templates/api/list_tokens.html:19
+#: app/templates/api/list_tokens.html:17
+msgid "Application"
+msgstr ""
+
+#: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
 msgstr "Brak utworzonych tokenów"
 
 #: app/templates/collections/create_edit.html:5
-#: app/templates/collections/view.html:42 app/templates/macros/releases.html:62
-#: app/templates/packages/view.html:114 app/templates/packages/view.html:248
+#: app/templates/collections/view.html:42 app/templates/macros/releases.html:68
+#: app/templates/packages/view.html:115 app/templates/packages/view.html:248
 msgid "Edit"
 msgstr "Edytuj"
 
@@ -1546,25 +1574,29 @@ msgstr "Edytuj"
 msgid "New Collection"
 msgstr "Nowa kolekcja"
 
-#: app/templates/collections/create_edit.html:30
+#: app/templates/collections/create_edit.html:32
 msgid "Users won't be redirected when going to the old URL"
 msgstr "Użytkownicy używający starego adresu URL nie zostaną przekierowani"
 
 #: app/templates/collections/create_edit.html:46
+msgid "This requires the collection to be public"
+msgstr ""
+
+#: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
 msgid "No results"
 msgstr "Brak wyników"
 
-#: app/templates/collections/create_edit.html:61
-#: app/templates/packages/remove.html:44 app/templates/packages/view.html:126
+#: app/templates/collections/create_edit.html:76
+#: app/templates/packages/remove.html:58 app/templates/packages/view.html:127
 msgid "Remove"
 msgstr "Usuń"
 
-#: app/templates/collections/create_edit.html:74
+#: app/templates/collections/create_edit.html:89
 msgid "You can replace the description with your own"
 msgstr "Możesz zastąpić opis swoim własnym"
 
-#: app/templates/collections/create_edit.html:88
+#: app/templates/collections/create_edit.html:103
 msgid "Are you sure you want to remove {title}?"
 msgstr "Czy jesteś pewien, że chcesz usunąć {title}?"
 
@@ -1581,7 +1613,7 @@ msgid "Deleting is permanent"
 msgstr "Usunięcie jest trwałe"
 
 #: app/templates/collections/delete.html:13
-#: app/templates/packages/remove.html:42
+#: app/templates/oauth/authorize.html:71 app/templates/packages/remove.html:56
 #: app/templates/threads/delete_reply.html:18
 #: app/templates/threads/delete_thread.html:18
 #: app/templates/users/delete.html:30
@@ -1821,12 +1853,12 @@ msgid "No audit log entries."
 msgstr "Brak wpisów w logu audytów."
 
 #: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:145
-#: app/templates/packages/remove.html:34 app/templates/packages/view.html:444
-#: app/templates/users/modtools.html:69
+#: app/templates/packages/remove.html:48 app/templates/packages/view.html:444
+#: app/templates/users/modtools.html:86
 msgid "Required"
 msgstr "Wymagane"
 
-#: app/templates/macros/forms.html:116
+#: app/templates/macros/forms.html:122
 msgid "Start typing to see suggestions"
 msgstr "Zacznij pisać aby zobaczyć sugestie"
 
@@ -1907,26 +1939,26 @@ msgstr "<b>Uwaga:</b> Niewolne multimedia."
 msgid "No packages available"
 msgstr "Brak dostępnych paczek"
 
-#: app/templates/macros/releases.html:20 app/templates/macros/releases.html:47
-#: app/templates/macros/releases.html:89
+#: app/templates/macros/releases.html:23 app/templates/macros/releases.html:53
+#: app/templates/macros/releases.html:99
 #, python-format
 msgid "created %(date)s"
 msgstr "utworzono dnia %(date)s"
 
-#: app/templates/macros/releases.html:60
+#: app/templates/macros/releases.html:66
 msgid "Edit / Approve"
 msgstr "Edytuj / Zatwierdź"
 
-#: app/templates/macros/releases.html:93
+#: app/templates/macros/releases.html:103
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
 msgstr "Importowanie..."
 
-#: app/templates/macros/releases.html:96
+#: app/templates/macros/releases.html:106
 msgid "Waiting for approval."
 msgstr "Oczekiwanie na zatwierdzenie."
 
-#: app/templates/macros/releases.html:103
+#: app/templates/macros/releases.html:113
 msgid "No releases available."
 msgstr "Brak dostępnych wydań."
 
@@ -1953,13 +1985,13 @@ msgid "Review"
 msgstr "Oceń"
 
 #: app/templates/macros/reviews.html:112 app/templates/macros/reviews.html:166
-#: app/templates/packages/review_create_edit.html:36
+#: app/templates/packages/review_create_edit.html:41
 #, python-format
 msgid "Do you recommend this %(type)s?"
 msgstr "Czy polecasz ten typ %(type)s?"
 
 #: app/templates/macros/reviews.html:134
-#: app/templates/packages/review_create_edit.html:41
+#: app/templates/packages/review_create_edit.html:46
 msgid "Why or why not? Try to be constructive"
 msgstr "Dlaczego tak lub dlaczego nie? Spróbuj być konstruktywny"
 
@@ -2114,7 +2146,7 @@ msgstr "Ostatnia odpowiedź"
 msgid "On %(trigger)s, do %(action)s"
 msgstr "Gdy %(trigger)s zrób %(action)s"
 
-#: app/templates/macros/todo.html:35 app/templates/packages/view.html:120
+#: app/templates/macros/todo.html:35 app/templates/packages/view.html:121
 #: app/templates/packages/view.html:409
 msgid "Release"
 msgstr "Wydanie"
@@ -2184,7 +2216,7 @@ msgstr "Dostarczane przez"
 msgid "Forum Topics"
 msgstr "Tematy na forum"
 
-#: app/templates/modnames/view.html:27
+#: app/templates/modnames/view.html:27 app/templates/oauth/authorize.html:32
 #: app/templates/packages/game_support.html:42
 #: app/templates/packages/similar.html:38 app/templates/packages/view.html:450
 #: app/templates/packages/view.html:474 app/templates/packages/view.html:519
@@ -2222,6 +2254,101 @@ msgstr "Brak powiadomień"
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
 msgstr "Powiadomienia osoby edytującej/zatwierdzającej"
+
+#: app/templates/oauth/authorize.html:4
+#, python-format
+msgid "Authorize %(title)s"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:35
+#, python-format
+msgid "wants to access your %(name)s account"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:46
+msgid "Verified application"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:49
+msgid "ContentDB trusts this application"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:60
+msgid "Public data only"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:63
+msgid "Read-only access to your public data"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:76
+msgid "Authorize"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:85
+#, python-format
+msgid "About %(title)s"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:91
+#: app/templates/oauth/create_edit.html:26
+msgid "Application isn't approved yet"
+msgstr ""
+
+#: app/templates/oauth/authorize.html:93
+#: app/templates/oauth/create_edit.html:28
+msgid ""
+"To allow users other than yourself to log in, you'll need to contact "
+"ContentDB staff and ask them to approve your app."
+msgstr ""
+
+#: app/templates/oauth/create_edit.html:7
+msgid "Create OAuth Client"
+msgstr ""
+
+#: app/templates/oauth/create_edit.html:36
+#, python-format
+msgid "Your application has %(count)d users"
+msgstr ""
+
+#: app/templates/oauth/create_edit.html:37
+msgid "Revoke all user tokens"
+msgstr ""
+
+#: app/templates/oauth/create_edit.html:51
+msgid ""
+"You must keep the secret safe. If you are unable, set the app type to "
+"'client-side'."
+msgstr ""
+
+#: app/templates/oauth/create_edit.html:56
+msgid "Example Authorize URL"
+msgstr ""
+
+#: app/templates/oauth/create_edit.html:68
+msgid "Shown to users when you request access to their account"
+msgstr ""
+
+#: app/templates/oauth/create_edit.html:70
+msgid "Where will you store your client_secret?"
+msgstr ""
+
+#: app/templates/oauth/list_clients.html:4
+#, python-format
+msgid "OAuth2 Applications | %(username)s"
+msgstr ""
+
+#: app/templates/oauth/list_clients.html:9
+msgid "OAuth2 Documentation"
+msgstr ""
+
+#: app/templates/oauth/list_clients.html:16
+msgid "Unpublished"
+msgstr ""
+
+#: app/templates/oauth/list_clients.html:22
+msgid "No applications created"
+msgstr ""
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2282,19 +2409,19 @@ msgid "Edit - %(title)s"
 msgstr "Edytuj - %(title)s"
 
 #: app/templates/packages/create_edit.html:10
-#: app/templates/packages/create_edit.html:31
+#: app/templates/packages/create_edit.html:32
 msgid "Create Package"
 msgstr "Utwórz paczkę"
 
-#: app/templates/packages/create_edit.html:42
+#: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
 msgstr "Czy przeczytałeś Politykę i wytyczne dotyczące uwzględniania paczek?"
 
-#: app/templates/packages/create_edit.html:46
+#: app/templates/packages/create_edit.html:47
 msgid "Read more"
 msgstr "Czytaj więcej"
 
-#: app/templates/packages/create_edit.html:48
+#: app/templates/packages/create_edit.html:49
 #, python-format
 msgid ""
 "You can include a .cdb.json file in your %(type)s to update these details"
@@ -2303,7 +2430,7 @@ msgstr ""
 "Możesz załączyć plik .cdb.json w twojej %(type)s aby zaktualizować te "
 "detale automatycznie."
 
-#: app/templates/packages/create_edit.html:54
+#: app/templates/packages/create_edit.html:55
 msgid ""
 "JavaScript is needed to improve the user interface, and is needed for "
 "features\n"
@@ -2313,17 +2440,17 @@ msgstr ""
 "potrzebna do funkcjonalności\n"
 "takich jak pobieranie metadanych z repozytorium git oraz autouzupełnianie."
 
-#: app/templates/packages/create_edit.html:65
+#: app/templates/packages/create_edit.html:66
 #: app/templates/packages/game_support.html:20
-#: app/templates/threads/view.html:94 app/templates/todo/tags.html:36
+#: app/templates/threads/view.html:96 app/templates/todo/tags.html:36
 msgid "Package"
 msgstr "Paczka"
 
-#: app/templates/packages/create_edit.html:72
+#: app/templates/packages/create_edit.html:73
 msgid "You need to unpublish the package to change the name."
 msgstr ""
 
-#: app/templates/packages/create_edit.html:78
+#: app/templates/packages/create_edit.html:79
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
@@ -2331,59 +2458,59 @@ msgstr ""
 "Wybierz opcję 'W trakcie prac' jeżeli twoja paczka jest niestabilna i "
 "jeżeli nie powinna być polecana wszystkim graczom"
 
-#: app/templates/packages/create_edit.html:83
+#: app/templates/packages/create_edit.html:84
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr ""
 "Jeżeli paczka nie posiada multimediów ustaw Licencję multimediów na taką "
 "samą jak Licencję kodu źródłowego."
 
-#: app/templates/packages/create_edit.html:89
+#: app/templates/packages/create_edit.html:90
 msgid "Repository and Links"
 msgstr "Repozytorium i odnośniki"
 
-#: app/templates/packages/create_edit.html:92
+#: app/templates/packages/create_edit.html:93
 msgid "Do you have a Git repository?"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:94
+#: app/templates/packages/create_edit.html:95
 msgid "Having a repository is optional"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:97
+#: app/templates/packages/create_edit.html:98
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
 
-#: app/templates/packages/create_edit.html:102
+#: app/templates/packages/create_edit.html:103
 msgid "HTTP URL to a Git, Mercurial, or other repository"
 msgstr "Adres HTTP do repozytorium Git, Mercurial, bądź innego"
 
-#: app/templates/packages/create_edit.html:105
+#: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
 msgstr "Następny (Autoimportowanie)"
 
-#: app/templates/packages/create_edit.html:106
+#: app/templates/packages/create_edit.html:107
 msgid "Skip"
 msgstr "Pomiń"
 
-#: app/templates/packages/create_edit.html:110
+#: app/templates/packages/create_edit.html:111
 msgid "Importing... (This may take a while)"
 msgstr "Importowanie... (Może to trochę potrwać)"
 
-#: app/templates/packages/create_edit.html:113
+#: app/templates/packages/create_edit.html:114
 msgid "Where should users report issues?"
 msgstr "Gdzie użytkownicy powinni zgłaszać problemy?"
 
-#: app/templates/packages/create_edit.html:117
+#: app/templates/packages/create_edit.html:118
 msgid "Paste a forum topic URL"
 msgstr "Wklej adres URL tematu forum"
 
-#: app/templates/packages/create_edit.html:119
+#: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
 msgstr "Filmy YouTube będą wyświetlały się jako embed."
 
-#: app/templates/packages/create_edit.html:120
+#: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
 msgstr "Jeżeli puste, adres URL darowizn autora będzie użyty."
 
@@ -2610,7 +2737,7 @@ msgstr ""
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
-#: app/templates/packages/release_new.html:70
+#: app/templates/packages/release_new.html:69
 msgid "Maximum must be greater than or equal to the minimum!"
 msgstr "Maksymalna musi być większa lub równa minimalnej!"
 
@@ -2623,8 +2750,8 @@ msgstr ""
 "platformach poza zakresem."
 
 #: app/templates/packages/release_bulk_change.html:36
-#: app/templates/packages/release_edit.html:61
-#: app/templates/packages/release_new.html:83
+#: app/templates/packages/release_edit.html:70
+#: app/templates/packages/release_new.html:91
 msgid "Leave both as None if in doubt."
 msgstr "Pozostaw obydwie jako None w razie wątpliwości."
 
@@ -2649,8 +2776,28 @@ msgstr "Zatwierdzone"
 msgid "Supported Minetest versions"
 msgstr "Wspierane wersje Minetesta"
 
-#: app/templates/packages/release_edit.html:58
-#: app/templates/packages/release_new.html:80
+#: app/templates/packages/release_edit.html:60
+#: app/templates/packages/release_new.html:75
+#, python-format
+msgid "Are you sure your package doesn't work on versions after %(version)s?"
+msgstr ""
+
+#: app/templates/packages/release_edit.html:62
+#: app/templates/packages/release_new.html:77
+msgid ""
+"Only set the maximum version if you know that it doesn't work on newer "
+"Minetest versions."
+msgstr ""
+
+#: app/templates/packages/release_edit.html:63
+#: app/templates/packages/release_new.html:78
+msgid ""
+"Don't set the maximum version just because you haven't tested it on newer"
+" versions."
+msgstr ""
+
+#: app/templates/packages/release_edit.html:67
+#: app/templates/packages/release_new.html:88
 msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
@@ -2658,7 +2805,7 @@ msgstr ""
 "Ustaw minimalną i maksymalną wspieraną wersję Minetesta.\n"
 "To wydanie będzie ukryte dla klientów poza tym zakresem. "
 
-#: app/templates/packages/release_edit.html:63
+#: app/templates/packages/release_edit.html:72
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
@@ -2666,15 +2813,15 @@ msgstr ""
 "Możesz <a href=\"/help/package_config/\">ustawić to automatycznie</a> w "
 "pliku .conf twojej paczki."
 
-#: app/templates/packages/release_edit.html:70
+#: app/templates/packages/release_edit.html:79
 msgid "Delete Release"
 msgstr "Usuń wydanie"
 
-#: app/templates/packages/release_edit.html:76
+#: app/templates/packages/release_edit.html:85
 msgid "This is permanent."
 msgstr "To jest trwałe."
 
-#: app/templates/packages/release_edit.html:77
+#: app/templates/packages/release_edit.html:86
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
@@ -2682,7 +2829,7 @@ msgstr ""
 "Jakiekolwiek powiązane przesyłanie nie będzie usunięte od razu ale "
 "wydanie nie będzie się więcej pojawiać."
 
-#: app/templates/packages/release_edit.html:82
+#: app/templates/packages/release_edit.html:91
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr "Nie możesz usunąć najnowszego wydania; najpierw utwórz kolejne."
 
@@ -2755,7 +2902,7 @@ msgstr ""
 msgid "3. Supported Minetest versions"
 msgstr "3. Wspierane wersje Minetesta"
 
-#: app/templates/packages/release_new.html:75
+#: app/templates/packages/release_new.html:83
 msgid ""
 "The .conf of your package can <a href='/help/package_config/'>set this "
 "automatically</a>,\n"
@@ -2854,6 +3001,13 @@ msgstr "Ustaw automatyczne wydania"
 msgid "Bulk update"
 msgstr "Aktualizacja zbiorowa"
 
+#: app/templates/packages/releases_list.html:48
+#, python-format
+msgid ""
+"Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
+"screenshots %(screenshot_size)d MB)"
+msgstr ""
+
 #: app/templates/packages/remove.html:9
 #, python-format
 msgid "Remove %(title)s"
@@ -2882,36 +3036,45 @@ msgstr ""
 "Anulowanie zatwierdzenia paczki przywróci ją do stanu wersji roboczej\n"
 "i będzie mogła być ponownie wysłana do zatwierdzenia."
 
-#: app/templates/packages/remove.html:27
+#: app/templates/packages/remove.html:28
+msgid "and"
+msgstr ""
+
+#: app/templates/packages/remove.html:34
+#, python-format
+msgid "Removing this package will break the following mods: %(names)s"
+msgstr ""
+
+#: app/templates/packages/remove.html:41
 msgid "Reason"
 msgstr "Powód"
 
-#: app/templates/packages/remove.html:38
+#: app/templates/packages/remove.html:52
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
 msgstr ""
 "Powód anulowania zatwierdzenia / usunięcia, będzie się to wyświetlać w "
 "logu audytów"
 
-#: app/templates/packages/remove.html:47
+#: app/templates/packages/remove.html:61
 msgid "Unpublish"
 msgstr ""
 
-#: app/templates/packages/review_create_edit.html:12
+#: app/templates/packages/review_create_edit.html:17
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
 msgstr "Wyślij opinię dla %(title)s autorstwa %(author)s"
 
-#: app/templates/packages/review_create_edit.html:16
-#: app/templates/threads/new.html:11
+#: app/templates/packages/review_create_edit.html:21
+#: app/templates/threads/new.html:16
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr "Znalazłeś błąd? Powiadom autorów na <a href=\"%(url)s\">liście błędów</a>."
 
-#: app/templates/packages/review_create_edit.html:57
+#: app/templates/packages/review_create_edit.html:62
 msgid "Delete review."
 msgstr "Usuń opinię."
 
-#: app/templates/packages/review_create_edit.html:58
+#: app/templates/packages/review_create_edit.html:63
 msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
@@ -3077,42 +3240,42 @@ msgstr ""
 msgid "Download"
 msgstr "Pobierz"
 
-#: app/templates/packages/view.html:47
+#: app/templates/packages/view.html:48
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
 msgstr "Minetest %(min)s - %(max)s"
 
-#: app/templates/packages/view.html:49
+#: app/templates/packages/view.html:50
 #, python-format
 msgid "For Minetest %(min)s and above"
 msgstr "Dla Minetesta %(min)s i wyższych"
 
-#: app/templates/packages/view.html:51
+#: app/templates/packages/view.html:52
 #, python-format
 msgid "Minetest %(max)s and below"
 msgstr "Minetest %(max)s i niżej"
 
-#: app/templates/packages/view.html:61
+#: app/templates/packages/view.html:62
 msgid "How do I install this?"
 msgstr "Jak mogę to zainstalować?"
 
-#: app/templates/packages/view.html:67
+#: app/templates/packages/view.html:68
 msgid "No downloads available"
 msgstr "Brak opcji pobierania"
 
-#: app/templates/packages/view.html:74
+#: app/templates/packages/view.html:75
 msgid "Non-free code and media"
 msgstr "Niewolny kod i multimedia"
 
-#: app/templates/packages/view.html:76
+#: app/templates/packages/view.html:77
 msgid "Non-free code"
 msgstr "Niewolny kod"
 
-#: app/templates/packages/view.html:78
+#: app/templates/packages/view.html:79
 msgid "Non-free media"
 msgstr "Niewolne multimedia"
 
-#: app/templates/packages/view.html:92 app/templates/threads/view.html:102
+#: app/templates/packages/view.html:93 app/templates/threads/view.html:104
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
@@ -3125,7 +3288,7 @@ msgstr ""
 msgid "Work in Progress"
 msgstr "W trakcie prac"
 
-#: app/templates/packages/view.html:183 app/templates/users/profile.html:224
+#: app/templates/packages/view.html:183 app/templates/users/profile.html:242
 msgid "Downloads"
 msgstr "Pobrania"
 
@@ -3145,7 +3308,7 @@ msgstr "Lista błędów"
 msgid "Awaiting review"
 msgstr "Oczekuje recenzji"
 
-#: app/templates/packages/view.html:333 app/templates/threads/view.html:75
+#: app/templates/packages/view.html:333 app/templates/threads/view.html:77
 msgid "Edit Review"
 msgstr "Edytuj recenzję"
 
@@ -3337,7 +3500,7 @@ msgid "Delete \"%(title)s\" by %(author)s"
 msgstr "Usuń \"%(title)s\" autorstwa %(author)s"
 
 #: app/templates/threads/edit_reply.html:4
-#: app/templates/threads/edit_reply.html:8
+#: app/templates/threads/edit_reply.html:13
 msgid "Edit reply"
 msgstr "Edytuj odpowiedź"
 
@@ -3345,7 +3508,7 @@ msgstr "Edytuj odpowiedź"
 msgid "New Thread"
 msgstr "Nowy wątek"
 
-#: app/templates/threads/new.html:12
+#: app/templates/threads/new.html:17
 msgid ""
 "If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
 "you can let us know here."
@@ -3353,7 +3516,7 @@ msgstr ""
 "Jeżeli paczka nie powinna pojawiać się na CDB (tj: jeżeli nie działa), "
 "możesz nam o tym powiedzieć tutaj."
 
-#: app/templates/threads/new.html:47
+#: app/templates/threads/new.html:52
 msgid ""
 "Only you, the package author, and users of Approver rank and above can "
 "read private threads."
@@ -3376,31 +3539,31 @@ msgstr "Odpowiedź do <b>%(title)s</b>"
 msgid "Only showing replies to public threads"
 msgstr ""
 
-#: app/templates/threads/view.html:44
+#: app/templates/threads/view.html:46
 msgid "Subscribe"
 msgstr "Subskrybuj"
 
-#: app/templates/threads/view.html:53
+#: app/templates/threads/view.html:55
 msgid "Convert to Thread"
 msgstr "Konwertuj na wątek"
 
-#: app/templates/threads/view.html:60
+#: app/templates/threads/view.html:62
 msgid "Unlock"
 msgstr "Odblokuj"
 
-#: app/templates/threads/view.html:65
+#: app/templates/threads/view.html:67
 msgid "Lock"
 msgstr "Zablokuj"
 
-#: app/templates/threads/view.html:107
+#: app/templates/threads/view.html:109
 msgid "This thread is visible to the following users"
 msgstr "Ten wątek jest widoczny dla następujących użytkowników"
 
-#: app/templates/threads/view.html:108
+#: app/templates/threads/view.html:110
 msgid "Visible to:"
 msgstr "Widoczny dla:"
 
-#: app/templates/threads/view.html:116
+#: app/templates/threads/view.html:118
 msgid "Plus approvers and editors"
 msgstr "Dodatkowo osoby zatwierdzające i edytujące"
 
@@ -3729,11 +3892,11 @@ msgstr "Zmień hasło"
 msgid "Set Password"
 msgstr "Ustaw hasło"
 
-#: app/templates/users/account.html:27 app/templates/users/modtools.html:37
+#: app/templates/users/account.html:27 app/templates/users/modtools.html:54
 msgid "Has password"
 msgstr "Posiada hasło"
 
-#: app/templates/users/account.html:29 app/templates/users/modtools.html:39
+#: app/templates/users/account.html:29 app/templates/users/modtools.html:56
 msgid "Doesn't have password"
 msgstr "Nie posiada hasła"
 
@@ -4025,35 +4188,51 @@ msgstr "Zapomniałem hasła"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: app/templates/users/modtools.html:11
+#: app/templates/users/modtools.html:12
+msgid "Storage"
+msgstr ""
+
+#: app/templates/users/modtools.html:20
+#, python-format
+msgid ""
+"Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
+"screenshots %(screenshot_size)d MB)."
+msgstr ""
+
+#: app/templates/users/modtools.html:23
+#, python-format
+msgid "%(releases)d releases and %(screenshots)d screenshots."
+msgstr ""
+
+#: app/templates/users/modtools.html:28
 msgid "Edit Account"
 msgstr "Edytuj konto"
 
-#: app/templates/users/modtools.html:43 app/templates/users/modtools.html:83
+#: app/templates/users/modtools.html:60 app/templates/users/modtools.html:100
 msgid "Ban"
 msgstr "Zbanuj"
 
-#: app/templates/users/modtools.html:56
+#: app/templates/users/modtools.html:73
 msgid "Unban"
 msgstr "Odbanuj"
 
-#: app/templates/users/modtools.html:73
+#: app/templates/users/modtools.html:90
 msgid "Message to display to banned user"
 msgstr "Wiadomość dla zbanowanego użytkownika"
 
-#: app/templates/users/modtools.html:77
+#: app/templates/users/modtools.html:94
 msgid "Expires At"
 msgstr "Wygasa"
 
-#: app/templates/users/modtools.html:80
+#: app/templates/users/modtools.html:97
 msgid "Expiry date. Leave blank for permanent ban"
 msgstr "Data wygaśnięcia. Pozostaw pustą dla stałego bana"
 
-#: app/templates/users/modtools.html:87
+#: app/templates/users/modtools.html:104
 msgid "Change Email and Send Password Reset"
 msgstr "Zmień email i wyślij wiadomość resetującą hasło"
 
-#: app/templates/users/modtools.html:91
+#: app/templates/users/modtools.html:108
 #: app/templates/users/settings_email.html:14
 msgid "Email Address"
 msgstr "Adres email"
@@ -4099,27 +4278,27 @@ msgstr "Czy to ty? Zajmij swoje konto teraz!"
 msgid "%(value)d / %(target)d"
 msgstr "%(value)d / %(target)d"
 
-#: app/templates/users/profile.html:220
+#: app/templates/users/profile.html:238
 msgid "Alphabetical"
 msgstr "Alfabetycznie"
 
-#: app/templates/users/profile.html:228
+#: app/templates/users/profile.html:246
 msgid "Newest"
 msgstr "Najnowsze"
 
-#: app/templates/users/profile.html:234
+#: app/templates/users/profile.html:252
 msgid "View list of tags"
 msgstr "Zobacz listę tagów"
 
-#: app/templates/users/profile.html:242
+#: app/templates/users/profile.html:260
 msgid "Create package"
 msgstr "Utwórz paczkę"
 
-#: app/templates/users/profile.html:254
+#: app/templates/users/profile.html:271
 msgid "Maintained Packages"
 msgstr "Utrzymywane paczki"
 
-#: app/templates/users/profile.html:256
+#: app/templates/users/profile.html:273
 msgid "This user is also a maintainer of the following packages"
 msgstr "Ten użytkownik jest też opiekunem następujących paczek"
 
@@ -4303,11 +4482,11 @@ msgstr "Rok temu do teraz"
 msgid "Last year"
 msgstr "Ostatni rok"
 
-#: app/utils/user.py:50
+#: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
 msgstr "Masz dużo powiadomień, powinieneś je przeczytać lub wyczyścić"
 
-#: app/utils/user.py:54
+#: app/utils/user.py:55
 msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
@@ -4552,4 +4731,10 @@ msgstr "Rozważ włączenie powiadomień e-mail, możesz dostosować ilość wys
 
 #~ msgid "It is recommended that you set a password for your account."
 #~ msgstr "Zalecane jest ustawienie hasła dla twojego konta."
+
+#~ msgid "Spotlight"
+#~ msgstr ""
+
+#~ msgid "a PNG or JPG image file"
+#~ msgstr "plik obrazu PNG lub JPG"
 
