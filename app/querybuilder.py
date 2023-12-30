@@ -70,6 +70,9 @@ class QueryBuilder:
 		# Hide
 		self.hide_flags = set(args.getlist("hide"))
 
+		# Show flags
+		self.flags = set(args.getlist("flag"))
+
 		self.types  = types
 		self.tags   = tags
 
@@ -187,6 +190,27 @@ class QueryBuilder:
 				warning = ContentWarning.query.filter_by(name=flag).first()
 				if warning:
 					query = query.filter(~ Package.content_warnings.any(ContentWarning.id == warning.id))
+
+		flags = set(self.flags)
+		if "nonfree" in flags:
+			query = query.filter(or_(Package.license.has(is_foss=False), Package.media_license.has(is_foss=False)))
+			flags.discard("nonfree")
+		if "wip" in flags:
+			query = query.filter(Package.dev_state == PackageDevState.WIP)
+			flags.discard("wip")
+		if "deprecated" in flags:
+			query = query.filter(Package.dev_state == PackageDevState.DEPRECATED)
+			flags.discard("deprecated")
+
+		if "*" in flags:
+			query = query.filter(Package.content_warnings.any())
+			flags.discard("*")
+		else:
+			for flag in flags:
+				warning = ContentWarning.query.filter_by(name=flag).first()
+				flags.discard(flag)
+				if warning:
+					query = query.filter(Package.content_warnings.any(ContentWarning.id == warning.id))
 
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))
