@@ -174,6 +174,7 @@ def resolve_package_deps(out, package, only_hard, depth=1):
 @bp.route("/api/packages/<author>/<name>/dependencies/")
 @is_package_page
 @cors_allowed
+@cached(300)
 def package_dependencies(package):
 	only_hard = request.args.get("only_hard")
 
@@ -539,18 +540,21 @@ def package_scores():
 
 @bp.route("/api/tags/")
 @cors_allowed
+@cached(60*60)
 def tags():
 	return jsonify([tag.as_dict() for tag in Tag.query.all() ])
 
 
 @bp.route("/api/content_warnings/")
 @cors_allowed
+@cached(60*60)
 def content_warnings():
 	return jsonify([warning.as_dict() for warning in ContentWarning.query.all() ])
 
 
 @bp.route("/api/licenses/")
 @cors_allowed
+@cached(60*60)
 def licenses():
 	all_licenses = License.query.order_by(db.asc(License.name)).all()
 	return jsonify([{"name": license.name, "is_foss": license.is_foss} for license in all_licenses])
@@ -558,6 +562,7 @@ def licenses():
 
 @bp.route("/api/homepage/")
 @cors_allowed
+@cached(300)
 def homepage():
 	query = Package.query.filter_by(state=PackageState.APPROVED)
 	count = query.count()
@@ -675,6 +680,7 @@ def user_view(username: str):
 
 @bp.route("/api/users/<username>/stats/")
 @cors_allowed
+@cached(300)
 def user_stats(username: str):
 	user = User.query.filter_by(username=username).first()
 	if user is None:
@@ -687,6 +693,7 @@ def user_stats(username: str):
 
 @bp.route("/api/cdb_schema/")
 @cors_allowed
+@cached(60*60)
 def json_schema():
 	tags = Tag.query.all()
 	warnings = ContentWarning.query.all()
@@ -851,6 +858,8 @@ def collection_view(author, name):
 
 
 @bp.route("/api/updates/")
+@cors_allowed
+@cached(300)
 def updates():
 	protocol_version = get_int_or_abort(request.args.get("protocol_version"))
 	minetest_version = request.args.get("engine_version")
