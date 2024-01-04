@@ -191,7 +191,7 @@ def set_locale():
 	if locale:
 		expire_date = datetime.datetime.now()
 		expire_date = expire_date + datetime.timedelta(days=5*365)
-		resp.set_cookie("locale", locale, expires=expire_date)
+		resp.set_cookie("locale", locale, expires=expire_date, secure=True, samesite="Lax")
 
 		if current_user.is_authenticated:
 			current_user.locale = locale
@@ -204,10 +204,10 @@ def set_locale():
 def set_nonfree():
 	resp = redirect(url_for("homepage.home"))
 	if request.cookies.get("hide_nonfree") == "1":
-		resp.set_cookie("hide_nonfree", "0", expires=0)
+		resp.set_cookie("hide_nonfree", "0", expires=0, secure=True, samesite="Lax")
 	else:
 		expire_date = datetime.datetime.now()
 		expire_date = expire_date + datetime.timedelta(days=5*365)
-		resp.set_cookie("hide_nonfree", "1", expires=expire_date)
+		resp.set_cookie("hide_nonfree", "1", expires=expire_date, secure=True, samesite="Lax")
 
 	return resp
