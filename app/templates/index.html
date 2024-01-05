@@ -104,42 +104,63 @@
 		</a>
 	</div> -->
 
-	<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc') }}" class="btn btn-secondary float-end">
-		{{ _("See more") }}
-	</a>
-	<h2 class="my-3">{{ _("Recently Added") }}</h2>
+	<h2 class="mb-3">{{ _("Recently Added") }}</h2>
 	{{ render_pkggrid(new) }}
+	<p class="text-center">
+		<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc') }}" class="btn btn-secondary">
+			{{ _("See more") }}
+			<span class="sr-only">
+				{{ _("Recently Added") }}
+			</span>
+		</a>
+	</p>
 
-
-	<a href="{{ url_for('packages.list_all', sort='last_release', order='desc') }}" class="btn btn-secondary float-end">
-		{{ _("See more") }}
-	</a>
-	<h2 class="my-3">{{ _("Recently Updated") }}</h2>
+	<h2 class="mb-3">{{ _("Recently Updated") }}</h2>
 	{{ render_pkggrid(updated) }}
+	<p class="text-center">
+		<a href="{{ url_for('packages.list_all', sort='last_release', order='desc') }}" class="btn btn-secondary">
+			{{ _("See more") }}
+			<span class="sr-only">
+				{{ _("Recently Updated") }}
+			</span>
+		</a>
+	</p>
 
-
-	<a href="{{ url_for('packages.list_all', type='game', sort='score', order='desc') }}" class="btn btn-secondary float-end">
-		{{ _("See more") }}
-	</a>
-	<h2 class="my-3">{{ _("Top Games") }}</h2>
+	<h2 class="mb-3">{{ _("Top Games") }}</h2>
 	{{ render_pkggrid(pop_gam) }}
+	<p class="text-center">
+		<a href="{{ url_for('packages.list_all', type='game', sort='score', order='desc') }}" class="btn btn-secondary">
+			{{ _("See more") }}
+			<span class="sr-only">
+				{{ _("Top Games") }}
+			</span>
+		</a>
+	</p>
 
-
-	<a href="{{ url_for('packages.list_all', type='mod', sort='score', order='desc') }}" class="btn btn-secondary float-end">
-		{{ _("See more") }}
-	</a>
-	<h2 class="my-3">{{ _("Top Mods") }}</h2>
+	<h2 class="mb-3">{{ _("Top Mods") }}</h2>
 	{{ render_pkggrid(pop_mod) }}
+	<p class="text-center">
+		<a href="{{ url_for('packages.list_all', type='mod', sort='score', order='desc') }}" class="btn btn-secondary">
+			{{ _("See more") }}
+			<span class="sr-only">
+				{{ _("Top Mods") }}
+			</span>
+		</a>
+	</p>
 
-
-	<a href="{{ url_for('packages.list_all', type='txp', sort='score', order='desc') }}" class="btn btn-secondary float-end">
-		{{ _("See more") }}
-	</a>
-	<h2 class="my-3">{{ _("Top Texture Packs") }}</h2>
+	<h2 class="mb-3">{{ _("Top Texture Packs") }}</h2>
 	{{ render_pkggrid(pop_txp) }}
+	<p class="text-center">
+		<a href="{{ url_for('packages.list_all', type='txp', sort='score', order='desc') }}" class="btn btn-secondary">
+			{{ _("See more") }}
+			<span class="sr-only">
+				{{ _("Top Texture Packs") }}
+			</span>
+		</a>
+	</p>
 
 
-	<h2 class="my-3">{{ _("Search by Tags") }}</h2>
+	<h2 class="mb-3">{{ _("Search by Tags") }}</h2>
 	{% for pair in tags %}
 		{% set count = pair[0] %}
 		{% set tag = pair[1] %}
@@ -151,18 +172,23 @@
 			<span class="badge roaded-pill bg-light text-dark ms-1">{{ count }}</span>
 		</a>
 	{% endfor %}
-	<div class="clearfix mb-4"></div>
 
 
-	<a href="{{ url_for('packages.list_all', sort='reviews', order='desc') }}" class="btn btn-secondary float-end">
-		{{ _("See more") }}
-	</a>
-	<h2 class="my-3">{{ _("Highest Reviewed") }}</h2>
+	<h2 class="mb-3">{{ _("Highest Reviewed") }}</h2>
 	{{ render_pkggrid(high_reviewed) }}
+	<p class="text-center">
+		<a href="{{ url_for('packages.list_all', sort='reviews', order='desc') }}" class="btn btn-secondary">
+			{{ _("See more") }}
+			<span class="sr-only">
+				{{ _("Highest Reviewed") }}
+			</span>
+		</a>
+	</p>
 
+	<div class="clearfix"></div>
 
 	<a href="{{ url_for('packages.list_reviews') }}" class="btn btn-secondary float-end">
-		{{ _("See more") }}
+		{{ _("All reviews") }}
 	</a>
 	<h2 class="my-3">{{ _("Recent Positive Reviews") }}</h2>
 	{% from "macros/reviews.html" import render_reviews with context %}
