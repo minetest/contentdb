@@ -44,7 +44,7 @@ from app.models import Package, Tag, db, User, Tags, PackageState, Permission, P
 	PackageScreenshot, NotificationType, AuditLogEntry, PackageAlias, PackageProvides, PackageGameSupport, \
 	PackageDailyStats, Collection
 from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, add_audit_log, get_package_by_info, \
-	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options
+	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options, post_to_approval_thread
 
 
 @bp.route("/packages/")
@@ -443,6 +443,7 @@ def move_to_state(package):
 	add_notification(package.maintainers, current_user, NotificationType.PACKAGE_APPROVAL, msg, package.get_url("packages.view"), package)
 	severity = AuditSeverity.NORMAL if current_user in package.maintainers else AuditSeverity.EDITOR
 	add_audit_log(severity, current_user, msg, package.get_url("packages.view"), package)
+	post_to_approval_thread(package, current_user, msg, True)
 
 	db.session.commit()
 

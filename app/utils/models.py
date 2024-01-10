@@ -139,6 +139,28 @@ def post_bot_message(package: Package, title: str, message: str):
 	thread.replies.append(reply)
 
 
+def post_to_approval_thread(package: Package, user: User, message: str, is_status_update=True):
+	thread = package.review_thread
+	if thread is None:
+		return
+
+	reply = ThreadReply()
+	reply.thread = thread
+	reply.author = user
+	reply.is_status_update = is_status_update
+	reply.comment = message
+	db.session.add(reply)
+
+	if is_status_update:
+		msg = f"{message} - {thread.title}"
+	else:
+		msg = f"New comment on '{thread.title}'"
+
+	add_notification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.get_view_url(), package)
+
+	thread.replies.append(reply)
+
+
 def get_games_from_csv(session: sqlalchemy.orm.Session, csv: str) -> List[Package]:
 	return get_games_from_list(session, [name.strip() for name in csv.split(",")])
 
