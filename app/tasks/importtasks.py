@@ -167,7 +167,7 @@ def post_release_check_update(self, release: PackageRelease, path):
 					for game in get_games_from_list(db.session, tree.meta["supported_games"]):
 						game_is_supported[game.id] = True
 
-					has_star = any(map(lambda x: x.strip() == "*", tree.meta["supported_games"].split(",")))
+					has_star = any(map(lambda x: x.strip() == "*", tree.meta["supported_games"]))
 					if has_star:
 						if package.type == PackageType.TXP or \
 							package.supported_games.filter(and_(
