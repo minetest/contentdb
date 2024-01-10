@@ -23,6 +23,7 @@ from . import MinetestCheckError, ContentType
 from .config import parse_conf
 
 basenamePattern = re.compile("^([a-z0-9_]+)$")
+licensePattern = re.compile("^(licen[sc]e|copying)(.[^/\n]+)?$", re.IGNORECASE)
 
 DISALLOWED_NAMES = {
 	"core", "minetest", "group", "table", "string", "lua", "luajit", "assert", "debug",
@@ -64,6 +65,19 @@ def get_csv_line(line):
 	return [x.strip() for x in line.split(",") if x.strip() != ""]
 
 
+def check_name_list(key: str, value: list[str], relative: str, allow_star: bool = False):
+	for dep in value:
+		if not basenamePattern.match(dep):
+			if dep == "*" and allow_star:
+				continue
+			elif " " in dep:
+				raise MinetestCheckError(
+					f"Invalid {key} name '{dep}' at {relative}, did you forget a comma?")
+			else:
+				raise MinetestCheckError(
+					f"Invalid {key} name '{dep}' at {relative}, names must only contain a-z0-9_.")
+
+
 class PackageTreeNode:
 	def __init__(self, base_dir, relative, author=None, repo=None, name=None):
 		self.baseDir  = base_dir
@@ -94,10 +108,9 @@ class PackageTreeNode:
 			self.add_children_from_mod_dir(None)
 
 	def find_license_file(self) -> Optional[str]:
-		names = ["LICENSE", "LICENSE.md", "LICENSE.txt", "COPYING"]
-		for name in names:
+		for name in os.listdir(self.baseDir):
 			path = os.path.join(self.baseDir, name)
-			if os.path.isfile(path):
+			if os.path.isfile(path) and licensePattern.match(name):
 				return path
 
 		return None
@@ -182,20 +195,17 @@ class PackageTreeNode:
 			result["depends"] = []
 			result["optional_depends"] = []
 
-		def check_dependencies(deps):
-			for dep in deps:
-				if not basenamePattern.match(dep):
-					if " " in dep:
-						raise MinetestCheckError("Invalid dependency name '{}' for mod at {}, did you forget a comma?" \
-							.format(dep, self.relative))
-					else:
-						raise MinetestCheckError(
-								"Invalid dependency name '{}' for mod at {}, names must only contain a-z0-9_." \
-									.format(dep, self.relative))
+		# Read supported games
+		result["supported_games"] = get_csv_line(result.get("supported_games", ""))
+		result["unsupported_games"] = get_csv_line(result.get("unsupported_games", ""))
 
 		# Check dependencies
-		check_dependencies(result["depends"])
-		check_dependencies(result["optional_depends"])
+		check_name_list("depends", result["depends"], self.relative)
+		check_name_list("optional_depends", result["optional_depends"], self.relative)
+
+		# Check supported games
+		check_name_list("supported_games", result["supported_games"], self.relative, True)
+		check_name_list("unsupported_games", result["unsupported_games"], self.relative)
 
 		# Fix games using "name" as "title"
 		if self.type == ContentType.GAME and "name" in result:
@@ -203,7 +213,7 @@ class PackageTreeNode:
 			del result["name"]
 
 		# Calculate Title
-		if "name" in result and not "title" in result:
+		if "name" in result and "title" not in result:
 			result["title"] = result["name"].replace("_", " ").title()
 
 		# Calculate short description

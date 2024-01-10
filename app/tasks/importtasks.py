@@ -32,7 +32,8 @@ from app.models import AuditSeverity, db, NotificationType, PackageRelease, Meta
 	MinetestRelease, Package, PackageState, PackageScreenshot, PackageUpdateTrigger, PackageUpdateConfig, \
 	PackageGameSupport
 from app.tasks import celery, TaskError
-from app.utils import random_string, post_bot_message, add_system_notification, add_system_audit_log, get_games_from_csv
+from app.utils import random_string, post_bot_message, add_system_notification, add_system_audit_log, \
+	get_games_from_list
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
 from app import app
@@ -163,7 +164,7 @@ def post_release_check_update(self, release: PackageRelease, path):
 
 				game_is_supported = {}
 				if "supported_games" in tree.meta:
-					for game in get_games_from_csv(db.session, tree.meta["supported_games"]):
+					for game in get_games_from_list(db.session, tree.meta["supported_games"]):
 						game_is_supported[game.id] = True
 
 					has_star = any(map(lambda x: x.strip() == "*", tree.meta["supported_games"].split(",")))
@@ -175,7 +176,7 @@ def post_release_check_update(self, release: PackageRelease, path):
 
 						package.supports_all_games = True
 				if "unsupported_games" in tree.meta:
-					for game in get_games_from_csv(db.session, tree.meta["unsupported_games"]):
+					for game in get_games_from_list(db.session, tree.meta["unsupported_games"]):
 						game_is_supported[game.id] = False
 
 				resolver.set_supported(package, game_is_supported, 10)

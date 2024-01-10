@@ -140,10 +140,12 @@ def post_bot_message(package: Package, title: str, message: str):
 
 
 def get_games_from_csv(session: sqlalchemy.orm.Session, csv: str) -> List[Package]:
+	return get_games_from_list(session, [name.strip() for name in csv.split(",")])
+
+
+def get_games_from_list(session: sqlalchemy.orm.Session, supported_games_raw: list[str]) -> List[Package]:
 	retval = []
-	supported_games_raw = csv.split(",")
 	for game_name in supported_games_raw:
-		game_name = game_name.strip()
 		if game_name.endswith("_game"):
 			game_name = game_name[:-5]
 		games = session.query(Package).filter(and_(Package.state==PackageState.APPROVED, Package.type==PackageType.GAME,
