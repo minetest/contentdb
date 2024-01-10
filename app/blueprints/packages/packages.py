@@ -419,6 +419,7 @@ def move_to_state(package):
 		flash(gettext("You don't have permission to do that"), "danger")
 		return redirect(package.get_url("packages.view"))
 
+	old_state = package.state
 	package.state = state
 	msg = "Marked {} as {}".format(package.title, state.value)
 
@@ -451,6 +452,10 @@ def move_to_state(package):
 			return redirect(package.review_thread.get_view_url())
 		else:
 			return redirect(url_for('threads.new', pid=package.id, title='Package approval comments'))
+	elif (package.review_thread and
+			old_state == PackageState.CHANGES_NEEDED and package.state == PackageState.READY_FOR_REVIEW):
+		flash(gettext("Please comment in the approval thread so editors know what you have changed"), "warning")
+		return redirect(package.review_thread.get_view_url())
 
 	return redirect(package.get_url("packages.view"))
 
