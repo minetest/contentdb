@@ -1066,7 +1066,7 @@ class PackageRelease(db.Model):
 		return True
 
 	def check_perm(self, user, perm):
-		if not user.is_authenticated or user.is_banned:
+		if not hasattr(user, "rank") or user.is_banned:
 			return False
 
 		if type(perm) == str:
