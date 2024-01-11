@@ -128,6 +128,7 @@ def display_name_default(context):
 
 
 class User(db.Model, UserMixin):
+	__tablename__ = "user"
 	id           = db.Column(db.Integer, primary_key=True)
 
 	created_at = db.Column(db.DateTime, nullable=True, default=datetime.datetime.utcnow)
@@ -342,6 +343,7 @@ class User(db.Model, UserMixin):
 
 
 class UserEmailVerification(db.Model):
+	__tablename__ = "user_email_verification"
 	id      = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	email   = db.Column(db.String(100), nullable=False)
@@ -352,6 +354,7 @@ class UserEmailVerification(db.Model):
 
 
 class EmailSubscription(db.Model):
+	__tablename__ = "email_subscription"
 	id          = db.Column(db.Integer, primary_key=True)
 	email       = db.Column(db.String(100), nullable=False, unique=True)
 	blacklisted = db.Column(db.Boolean, nullable=False, default=False)
@@ -446,6 +449,7 @@ class NotificationType(enum.Enum):
 
 
 class Notification(db.Model):
+	__tablename__ = "notification"
 	id         = db.Column(db.Integer, primary_key=True)
 
 	user_id    = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
@@ -487,6 +491,7 @@ class Notification(db.Model):
 
 
 class UserNotificationPreferences(db.Model):
+	__tablename__ = "user_notification_preferences"
 	id = db.Column(db.Integer, primary_key=True)
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	user = db.relationship("User", back_populates="notification_preferences")
@@ -538,6 +543,7 @@ class UserNotificationPreferences(db.Model):
 
 
 class UserBan(db.Model):
+	__tablename__ = "user_ban"
 	user_id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
 	user = db.relationship("User", foreign_keys=[user_id], back_populates="ban")
 

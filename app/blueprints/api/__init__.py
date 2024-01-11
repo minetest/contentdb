@@ -14,8 +14,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import Blueprint
+from flask_openapi3 import APIBlueprint
 
-bp = Blueprint("api", __name__)
+bp = APIBlueprint("api", __name__)
 
 from . import tokens, endpoints

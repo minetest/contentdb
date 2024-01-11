@@ -29,7 +29,8 @@ Flask-Mail==0.9.1
 Flask-Migrate==4.0.4
 Flask-SQLAlchemy==3.0.3
 Flask-WTF==1.1.1
-flask-swagger==0.2.14
+flask-openapi3==3.0.1
+-e git+https://github.com/MatthewScholefield/pydantic-sqlalchemy.git@master#egg=pydantic-sqlalchemy
 git-archive-all==1.23.1
 gitdb==4.0.10
 GitHub-Flask==3.2.0
@@ -66,7 +67,7 @@ SQLAlchemy==2.0.9
 SQLAlchemy-Searchable==1.4.1
 SQLAlchemy-Utils==0.41.0
 tomli==2.0.1
-typing_extensions==4.5.0
+typing_extensions==4.6.1
 ua-parser==0.16.1
 urllib3==1.26.18
 user-agents==2.2.0

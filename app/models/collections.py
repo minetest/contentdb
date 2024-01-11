@@ -22,6 +22,7 @@ from . import db, Permission, User, UserRank
 
 
 class CollectionPackage(db.Model):
+	__tablename__ = "collection_package"
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), primary_key=True)
 	package = db.relationship("Package", foreign_keys=[package_id])
 
@@ -44,6 +45,7 @@ class CollectionPackage(db.Model):
 
 
 class Collection(db.Model):
+	__tablename__ = "collection"
 	id = db.Column(db.Integer, primary_key=True)
 
 	author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)

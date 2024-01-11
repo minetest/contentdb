@@ -20,10 +20,11 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy_searchable import make_searchable
 
 from app import app
+from sqlalchemy.ext.declarative import declarative_base
 
 # Initialise database
-
-db = SQLAlchemy(app)
+Base = declarative_base()
+db = SQLAlchemy(app, model_class=Base)
 migrate = Migrate(app, db)
 make_searchable(db.metadata)
 
@@ -35,6 +36,7 @@ from .collections import *
 
 
 class APIToken(db.Model):
+	__tablename__ = "api_token"
 	id           = db.Column(db.Integer, primary_key=True)
 	access_token = db.Column(db.String(34), unique=True, nullable=False)
 
@@ -84,6 +86,7 @@ class AuditSeverity(enum.Enum):
 
 
 class AuditLogEntry(db.Model):
+	__tablename__ = "audit_log_entry"
 	id         = db.Column(db.Integer, primary_key=True)
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
@@ -136,6 +139,7 @@ REPO_BLACKLIST = [".zip", "mediafire.com", "dropbox.com", "weebly.com",
 
 
 class ForumTopic(db.Model):
+	__tablename__ = "forum_topic"
 	topic_id  = db.Column(db.Integer, primary_key=True, autoincrement=False)
 
 	author_id = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
