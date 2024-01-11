@@ -63,19 +63,164 @@ def cached(max_age: int):
 
 	return decorator
 
+definitions = {
+    "Package": {
+        "type": "object",
+        "properties": {
+            "author": {
+                "type": "string",
+                "description": "The author of the package.",
+                "example": "JohnDoe"
+            },
+            "name": {
+                "type": "string",
+                "description": "The technical name of the package.",
+                "example": "super_mod"
+            },
+            "release": {
+                "type": "integer",
+                "description": "The ID of the latest release of the package.",
+                "example": 1024
+            },
+            "short_description": {
+                "type": "string",
+                "description": "A brief description of the package.",
+                "example": "This mod offers new exciting features."
+            },
+            "thumbnail": {
+                "type": "string",
+                "description": "The URL to the package's thumbnail image.",
+                "example": "https://example.com/thumbnail.png"
+            },
+            "title": {
+                "type": "string",
+                "description": "The human-readable title of the package.",
+                "example": "Super Mod"
+            },
+            "type": {
+                "type": "string",
+                "description": "The type of the package (e.g., mod, game).",
+                "example": "mod"
+            }
+        }
+    }
+}
+
+
+
 @bp.route("/api/spec/")
 @cors_allowed
 @csrf.exempt
 def spec():
-    swag = swagger(flask_app)
-    swag['info']['version'] = "1.0"
-    swag['info']['title'] = "Minetest ContentDB Spec"
-    return jsonify(swag)
+	"""
+    OpenAPI Specification
+    ---
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Successfully retrieved the Swagger/OpenAPI specification
+      500:
+        description: Internal server error
+	"""
+	swag = swagger(flask_app)
+	swag['info']['version'] = "1.0"
+	swag['info']['title'] = "Minetest ContentDB Spec"
+	swag['definitions'] = definitions
+	return jsonify(swag)
 
 @bp.route("/api/packages/")
 @cors_allowed
 @cached(300)
 def packages():
+	"""
+	List Packages
+	---
+	tags:
+	  - Packages
+	produces:
+	  - application/json
+	parameters:
+	  - in: query
+	    name: type
+	    type: string
+	    required: false
+	    description: Filter by package type (mod, game, txp).
+	  - in: query
+	    name: tag
+	    type: string
+	    required: false
+	    description: Filter by tag names.
+	  - in: query
+	    name: author
+	    type: string
+	    required: false
+	    description: Filter by author's username.
+	  - in: query
+	    name: protocol_version
+	    type: integer
+	    required: false
+	    description: Filter by protocol version.
+	  - in: query
+	    name: engine_version
+	    type: string
+	    required: false
+	    description: Filter by engine version.
+	  - in: query
+	    name: q
+	    type: string
+	    required: false
+	    description: Search query.
+	  - in: query
+	    name: sort
+	    type: string
+	    required: false
+	    description: Sort order (e.g., score, reviews, downloads, created_at, approved_at, last_release).
+	  - in: query
+	    name: order
+	    type: string
+	    required: false
+	    description: Sort direction (asc or desc).
+	  - in: query
+	    name: limit
+	    type: integer
+	    required: false
+	    description: Limit the number of results.
+	  - in: query
+	    name: fmt
+	    type: string
+	    required: false
+	    description: Format of the response (e.g., keys, short).
+	  - in: query
+	    name: flag
+	    type: string
+	    required: false
+	    description: Filter to show packages with content flags.
+	  - in: query
+	    name: game
+	    type: string
+	    required: false
+	    description: Filter by Game Support (experimental).
+	  - in: query
+	    name: random
+	    type: boolean
+	    required: false
+	    description: Enable random ordering and ignore sort.
+	  - in: query
+	    name: hide
+	    type: string
+	    required: false
+	    description: Hide content based on content flags.
+	responses:
+	  200:
+	    description: An array of package details.
+	    schema:
+	      type: array
+	      items:
+	        $ref: '#/definitions/Package'
+	  400:
+	    description: Invalid request parameters.
+	"""
 	qb = QueryBuilder(request.args)
 	query = qb.build_package_query()
 
