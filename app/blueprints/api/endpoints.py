@@ -26,6 +26,7 @@ from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
 
 from app import csrf
+from app import app as flask_app
 from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_all_package_stats
 from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
@@ -38,7 +39,7 @@ from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
 	api_order_screenshots, api_edit_package, api_set_cover_image
-
+from flask_swagger import swagger
 
 def cors_allowed(f):
 	@wraps(f)
@@ -62,6 +63,14 @@ def cached(max_age: int):
 
 	return decorator
 
+@bp.route("/api/spec/")
+@cors_allowed
+@csrf.exempt
+def spec():
+    swag = swagger(flask_app)
+    swag['info']['version'] = "1.0"
+    swag['info']['title'] = "Minetest ContentDB Spec"
+    return jsonify(swag)
 
 @bp.route("/api/packages/")
 @cors_allowed
