@@ -31,7 +31,7 @@ from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_
 from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
 	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread, Collection, \
-	PackageAlias
+	PackageAlias, CollectionPackage
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
 from app.utils.minetest_hypertext import html_to_minetest
@@ -39,6 +39,11 @@ from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
 	api_order_screenshots, api_edit_package, api_set_cover_image
+from pydantic_sqlalchemy import sqlalchemy_to_pydantic
+
+PydanticCollectionPackage = sqlalchemy_to_pydantic(CollectionPackage)
+PydanticCollection = sqlalchemy_to_pydantic(Collection)
+
 
 def cors_allowed(f):
 	@wraps(f)
@@ -62,7 +67,7 @@ def cached(max_age: int):
 
 	return decorator
 
-@bp.route("/api/packages/")
+@bp.get("/api/packages/",summary="Gets the list of packages, filtered by parameters")
 @cors_allowed
 @cached(300)
 def packages():
@@ -94,7 +99,7 @@ def packages():
 	return jsonify(pkgs)
 
 
-@bp.route("/api/packages/<author>/<name>/")
+@bp.get("/api/packages/<author>/<name>/")
 @is_package_page
 @cors_allowed
 def package_view(package):
@@ -108,7 +113,7 @@ def package_view(package):
 	return jsonify(data)
 
 
-@bp.route("/api/packages/<author>/<name>/hypertext/")
+@bp.get("/api/packages/<author>/<name>/hypertext/")
 @is_package_page
 @cors_allowed
 def package_hypertext(package):
@@ -118,7 +123,7 @@ def package_hypertext(package):
 	return jsonify(html_to_minetest(html, formspec_version, include_images))
 
 
-@bp.route("/api/packages/<author>/<name>/", methods=["PUT"])
+@bp.put("/api/packages/<author>/<name>/")
 @csrf.exempt
 @is_package_page
 @is_api_authd
@@ -170,7 +175,7 @@ def resolve_package_deps(out, package, only_hard, depth=1):
 		})
 
 
-@bp.route("/api/packages/<author>/<name>/dependencies/")
+@bp.get("/api/packages/<author>/<name>/dependencies/")
 @is_package_page
 @cors_allowed
 @cached(300)
@@ -183,7 +188,7 @@ def package_dependencies(package):
 	return jsonify(out)
 
 
-@bp.route("/api/topics/")
+@bp.get("/api/topics/")
 @cors_allowed
 def topics():
 	qb = QueryBuilder(request.args)
@@ -191,7 +196,7 @@ def topics():
 	return jsonify([t.as_dict() for t in query.all()])
 
 
-@bp.route("/api/topic_discard/", methods=["POST"])
+@bp.post("/api/topic_discard/")
 @login_required
 def topic_set_discard():
 	tid = request.args.get("tid")
@@ -209,7 +214,7 @@ def topic_set_discard():
 	return jsonify(topic.as_dict())
 
 
-@bp.route("/api/whoami/")
+@bp.get("/api/whoami/")
 @is_api_authd
 @cors_allowed
 def whoami(token):
@@ -219,7 +224,7 @@ def whoami(token):
 		return jsonify({ "is_authenticated": True, "username": token.owner.username })
 
 
-@bp.route("/api/delete-token/", methods=["DELETE"])
+@bp.delete("/api/delete-token/")
 @csrf.exempt
 @is_api_authd
 @cors_allowed
@@ -233,13 +238,13 @@ def api_delete_token(token):
 	return jsonify({"success": True})
 
 
-@bp.route("/api/markdown/", methods=["POST"])
+@bp.post("/api/markdown/")
 @csrf.exempt
 def markdown():
 	return render_markdown(request.data.decode("utf-8"))
 
 
-@bp.route("/api/releases/")
+@bp.get("/api/releases/")
 @cors_allowed
 def list_all_releases():
 	query = PackageRelease.query.filter_by(approved=True) \
@@ -262,14 +267,14 @@ def list_all_releases():
 	return jsonify([ rel.as_long_dict() for rel in query.limit(30).all() ])
 
 
-@bp.route("/api/packages/<author>/<name>/releases/")
+@bp.get("/api/packages/<author>/<name>/releases/")
 @is_package_page
 @cors_allowed
 def list_releases(package):
 	return jsonify([ rel.as_dict() for rel in package.releases.all() ])
 
 
-@bp.route("/api/packages/<author>/<name>/releases/new/", methods=["POST"])
+@bp.post("/api/packages/<author>/<name>/releases/new/")
 @csrf.exempt
 @is_package_page
 @is_api_authd
@@ -309,7 +314,7 @@ def create_release(token, package):
 		error(400, "Unknown release-creation method. Specify the method or provide a file.")
 
 
-@bp.route("/api/packages/<author>/<name>/releases/<int:id>/")
+@bp.get("/api/packages/<author>/<name>/releases/<int:id>/")
 @is_package_page
 @cors_allowed
 def release_view(package: Package, id: int):
@@ -320,7 +325,7 @@ def release_view(package: Package, id: int):
 	return jsonify(release.as_dict())
 
 
-@bp.route("/api/packages/<author>/<name>/releases/<int:id>/", methods=["DELETE"])
+@bp.delete("/api/packages/<author>/<name>/releases/<int:id>/")
 @csrf.exempt
 @is_package_page
 @is_api_authd
@@ -345,7 +350,7 @@ def delete_release(token: APIToken, package: Package, id: int):
 	return jsonify({"success": True})
 
 
-@bp.route("/api/packages/<author>/<name>/screenshots/")
+@bp.get("/api/packages/<author>/<name>/screenshots/")
 @is_package_page
 @cors_allowed
 def list_screenshots(package):
@@ -353,7 +358,7 @@ def list_screenshots(package):
 	return jsonify([ss.as_dict(current_app.config["BASE_URL"]) for ss in screenshots])
 
 
-@bp.route("/api/packages/<author>/<name>/screenshots/new/", methods=["POST"])
+@bp.post("/api/packages/<author>/<name>/screenshots/new/")
 @csrf.exempt
 @is_package_page
 @is_api_authd
@@ -376,7 +381,7 @@ def create_screenshot(token: APIToken, package: Package):
 	return api_create_screenshot(token, package, data["title"], file, is_yes(data.get("is_cover_image")))
 
 
-@bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/")
+@bp.get("/api/packages/<author>/<name>/screenshots/<int:id>/")
 @is_package_page
 @cors_allowed
 def screenshot(package, id):
@@ -387,7 +392,7 @@ def screenshot(package, id):
 	return jsonify(ss.as_dict(current_app.config["BASE_URL"]))
 
 
-@bp.route("/api/packages/<author>/<name>/screenshots/<int:id>/", methods=["DELETE"])
+@bp.delete("/api/packages/<author>/<name>/screenshots/<int:id>/")
 @csrf.exempt
 @is_package_page
 @is_api_authd
@@ -416,7 +421,7 @@ def delete_screenshot(token: APIToken, package: Package, id: int):
 	return jsonify({ "success": True })
 
 
-@bp.route("/api/packages/<author>/<name>/screenshots/order/", methods=["POST"])
+@bp.post("/api/packages/<author>/<name>/screenshots/order/")
 @csrf.exempt
 @is_package_page
 @is_api_authd
@@ -438,7 +443,7 @@ def order_screenshots(token: APIToken, package: Package):
 	return api_order_screenshots(token, package, request.json)
 
 
-@bp.route("/api/packages/<author>/<name>/screenshots/cover-image/", methods=["POST"])
+@bp.post("/api/packages/<author>/<name>/screenshots/cover-image/")
 @csrf.exempt
 @is_package_page
 @is_api_authd
@@ -460,7 +465,7 @@ def set_cover_image(token: APIToken, package: Package):
 	return api_set_cover_image(token, package, request.json["cover_image"])
 
 
-@bp.route("/api/packages/<author>/<name>/reviews/")
+@bp.get("/api/packages/<author>/<name>/reviews/")
 @is_package_page
 @cors_allowed
 def list_reviews(package):
@@ -468,7 +473,7 @@ def list_reviews(package):
 	return jsonify([review.as_dict() for review in reviews])
 
 
-@bp.route("/api/reviews/")
+@bp.get("/api/reviews/")
 @cors_allowed
 def list_all_reviews():
 	page = get_int_or_abort(request.args.get("page"), 1)
@@ -509,7 +514,7 @@ def list_all_reviews():
 	})
 
 
-@bp.route("/api/packages/<author>/<name>/stats/")
+@bp.get("/api/packages/<author>/<name>/stats/")
 @is_package_page
 @cors_allowed
 @cached(300)
@@ -519,14 +524,14 @@ def package_stats(package: Package):
 	return jsonify(get_package_stats(package, start, end))
 
 
-@bp.route("/api/package_stats/")
+@bp.get("/api/package_stats/")
 @cors_allowed
 @cached(900)
 def all_package_stats():
 	return jsonify(get_all_package_stats())
 
 
-@bp.route("/api/scores/")
+@bp.get("/api/scores/")
 @cors_allowed
 @cached(300)
 def package_scores():
@@ -537,21 +542,21 @@ def package_scores():
 	return jsonify(pkgs)
 
 
-@bp.route("/api/tags/")
+@bp.get("/api/tags/")
 @cors_allowed
 @cached(60*60)
 def tags():
 	return jsonify([tag.as_dict() for tag in Tag.query.all() ])
 
 
-@bp.route("/api/content_warnings/")
+@bp.get("/api/content_warnings/")
 @cors_allowed
 @cached(60*60)
 def content_warnings():
 	return jsonify([warning.as_dict() for warning in ContentWarning.query.all() ])
 
 
-@bp.route("/api/licenses/")
+@bp.get("/api/licenses/")
 @cors_allowed
 @cached(60*60)
 def licenses():
@@ -559,7 +564,7 @@ def licenses():
 	return jsonify([{"name": license.name, "is_foss": license.is_foss} for license in all_licenses])
 
 
-@bp.route("/api/homepage/")
+@bp.get("/api/homepage/")
 @cors_allowed
 @cached(300)
 def homepage():
@@ -601,7 +606,7 @@ def homepage():
 	})
 
 
-@bp.route("/api/welcome/v1/")
+@bp.get("/api/welcome/v1/")
 @cors_allowed
 def welcome_v1():
 	featured = Package.query \
@@ -619,7 +624,7 @@ def welcome_v1():
 	})
 
 
-@bp.route("/api/minetest_versions/")
+@bp.get("/api/minetest_versions/")
 @cors_allowed
 def versions():
 	protocol_version = request.args.get("protocol_version")
@@ -635,7 +640,7 @@ def versions():
 			for rel in MinetestRelease.query.all() if rel.get_actual() is not None])
 
 
-@bp.route("/api/dependencies/")
+@bp.get("/api/dependencies/")
 @cors_allowed
 def all_deps():
 	qb = QueryBuilder(request.args)
@@ -667,7 +672,7 @@ def all_deps():
 	})
 
 
-@bp.route("/api/users/<username>/")
+@bp.get("/api/users/<username>/")
 @cors_allowed
 def user_view(username: str):
 	user = User.query.filter_by(username=username).first()
@@ -677,7 +682,7 @@ def user_view(username: str):
 	return jsonify(user.get_dict())
 
 
-@bp.route("/api/users/<username>/stats/")
+@bp.get("/api/users/<username>/stats/")
 @cors_allowed
 @cached(300)
 def user_stats(username: str):
@@ -690,7 +695,7 @@ def user_stats(username: str):
 	return jsonify(get_package_stats_for_user(user, start, end))
 
 
-@bp.route("/api/cdb_schema/")
+@bp.get("/api/cdb_schema/")
 @cors_allowed
 @cached(60*60)
 def json_schema():
@@ -802,7 +807,7 @@ def json_schema():
 	})
 
 
-@bp.route("/api/hypertext/", methods=["POST"])
+@bp.post("/api/hypertext/")
 @csrf.exempt
 @cors_allowed
 def hypertext():
@@ -816,7 +821,7 @@ def hypertext():
 	return jsonify(html_to_minetest(html, formspec_version, include_images))
 
 
-@bp.route("/api/collections/")
+@bp.get("/api/collections/")
 @cors_allowed
 def collection_list():
 	if "author" in request.args:
@@ -837,7 +842,7 @@ def collection_list():
 	return jsonify(collections)
 
 
-@bp.route("/api/collections/<author>/<name>/")
+@bp.get("/api/collections/<author>/<name>/")
 @cors_allowed
 def collection_view(author, name):
 	collection = Collection.query \
@@ -856,7 +861,7 @@ def collection_view(author, name):
 	return jsonify(ret)
 
 
-@bp.route("/api/updates/")
+@bp.get("/api/updates/")
 @cors_allowed
 @cached(300)
 def updates():

@@ -15,7 +15,6 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask_openapi3 import APIBlueprint
-
 bp = APIBlueprint("api", __name__)
 
 from . import tokens, endpoints
