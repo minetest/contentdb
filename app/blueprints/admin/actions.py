@@ -23,7 +23,7 @@ from flask import redirect, url_for, flash, current_app
 from sqlalchemy import or_, and_
 
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
-	NotificationType, PackageUpdateConfig, License, UserRank, PackageType
+	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, Thread
 from app.tasks.emails import send_pending_digests
 from app.tasks.forumtasks import import_topic_list, check_all_forum_accounts
 from app.tasks.importtasks import import_repo_screenshot, check_zip_release, check_for_updates, update_all_game_support
@@ -345,5 +345,19 @@ def import_screenshots():
 		.all()
 	for package in packages:
 		import_repo_screenshot.delay(package.id)
+
+	return redirect(url_for("admin.admin_page"))
+
+
+@action("DANGER: Delete empty threads")
+def delete_empty_threads():
+	query = Thread.query.filter(~Thread.replies.any())
+	count = query.count()
+	for thread in query.all():
+		thread.watchers.clear()
+		db.session.delete(thread)
+	db.session.commit()
+
+	flash(f"Deleted {count} threads", "success")
 
 	return redirect(url_for("admin.admin_page"))
