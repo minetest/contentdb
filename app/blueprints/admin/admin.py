@@ -200,7 +200,7 @@ def storage():
 		latest_release = package.releases.first()
 		size_latest = latest_release.file_size_bytes if latest_release else 0
 		size_total = size_releases + size_screenshots
-		if size_total > min_size*10024*1024:
+		if size_total > min_size*1024*1024:
 			data.append([package, size_total, size_releases, size_screenshots, size_latest])
 
 	data.sort(key=lambda x: x[1], reverse=True)
