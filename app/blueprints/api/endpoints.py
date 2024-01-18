@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import math
+import os
 from functools import wraps
 from typing import List
 
@@ -343,6 +344,8 @@ def delete_release(token: APIToken, package: Package, id: int):
 	db.session.delete(release)
 	db.session.commit()
 
+	os.remove(release.file_path)
+
 	return jsonify({"success": True})
 
 
@@ -413,6 +416,8 @@ def delete_screenshot(token: APIToken, package: Package, id: int):
 
 	db.session.delete(ss)
 	db.session.commit()
+
+	os.remove(ss.file_path)
 
 	return jsonify({ "success": True })
 

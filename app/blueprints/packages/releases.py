@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import os
 
 from flask import render_template, request, redirect, flash, url_for, abort
 from flask_babel import lazy_gettext, gettext
@@ -240,6 +241,8 @@ def delete_release(package, id):
 
 	db.session.delete(release)
 	db.session.commit()
+
+	os.remove(release.file_path)
 
 	return redirect(package.get_url("packages.view"))
 
