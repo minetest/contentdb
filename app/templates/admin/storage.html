@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Storage
+{% endblock %}
+
+{% block content %}
+	<h1>Storage</h1>
+	<p class="text-muted">
+		Shows storage use by package. Supports <a href="/help/api/#package-queries">Package Queries</a>, but always
+		sorts by total storage usage.
+	</p>
+
+	<div class="list-group">
+		<div class="list-group-item">
+			<div class="row text-muted">
+				<div class="col">
+					{{ _("Package") }}
+				</div>
+				<div class="col-2 text-center">
+					Latest release / MB
+				</div>
+				<div class="col-2 text-center">
+					Releases / MB
+				</div>
+				<div class="col-2 text-center">
+					Screenshots / MB
+				</div>
+				<div class="col-2 text-center">
+					Total / MB
+				</div>
+			</div>
+		</div>
+		{% for row in data %}
+			{% set package = row[0] %}
+			<a class="list-group-item list-group-item-action" href="{{ package.get_url('packages.list_releases') }}">
+				<div class="row">
+					<div class="col">
+						{{ _("%(title)s by %(author)s", title=package.title, author=package.author.display_name) }}
+						{% if package.state.name != "APPROVED" %}
+							<span class="badge bg-warning">
+								{{ package.state.value }}
+							</span>
+						{% endif %}
+					</div>
+					<div class="col-2 text-center">
+						{{ (row[4] / 1048576) | round | int }}
+					</div>
+					<div class="col-2 text-center">
+						{{ (row[2] / 1048576) | round | int }}
+					</div>
+					<div class="col-2 text-center">
+						{{ (row[3] / 1048576) | round | int }}
+					</div>
+					<div class="col-2 text-center">
+						{{ (row[1] / 1048576) | round | int }}
+					</div>
+				</div>
+			</a>
+		{% else %}
+			<div class="list-group-item text-muted">
+				<i>{{ _("No results") }}</i>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

@@ -19,10 +19,12 @@ from flask_login import current_user, login_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length, Optional
-from app.utils import rank_required, add_audit_log, add_notification, get_system_user, nonempty_or_none
+from app.utils import rank_required, add_audit_log, add_notification, get_system_user, nonempty_or_none, \
+	get_int_or_abort
 from . import bp
 from .actions import actions
 from app.models import UserRank, Package, db, PackageState, User, AuditSeverity, NotificationType, PackageAlias
+from ...querybuilder import QueryBuilder
 
 
 @bp.route("/admin/", methods=["GET", "POST"])
@@ -179,3 +181,27 @@ def transfer():
 
 	# Process GET or invalid POST
 	return render_template("admin/transfer.html", form=form)
+
+
+@bp.route("/admin/storage/")
+@rank_required(UserRank.EDITOR)
+def storage():
+	qb = QueryBuilder(request.args, cookies=True)
+	qb.only_approved = False
+	packages = qb.build_package_query().all()
+
+	show_all = len(packages) < 100
+	min_size = get_int_or_abort(request.args.get("min_size"), 0 if show_all else 50)
+
+	data = []
+	for package in packages:
+		size_releases = sum([x.file_size_bytes for x in package.releases])
+		size_screenshots = sum([x.file_size_bytes for x in package.screenshots])
+		latest_release = package.releases.first()
+		size_latest = latest_release.file_size_bytes if latest_release else 0
+		size_total = size_releases + size_screenshots
+		if size_total > min_size*10024*1024:
+			data.append([package, size_total, size_releases, size_screenshots, size_latest])
+
+	data.sort(key=lambda x: x[1], reverse=True)
+	return render_template("admin/storage.html", data=data)

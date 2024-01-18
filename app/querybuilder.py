@@ -29,6 +29,7 @@ from .utils import is_yes, get_int_or_abort
 class QueryBuilder:
 	types  = None
 	search = None
+	only_approved = True
 
 	@property
 	def title(self):
@@ -155,10 +156,12 @@ class QueryBuilder:
 
 	def build_package_query(self):
 		if self.order_by == "last_release":
-			query = db.session.query(Package).select_from(PackageRelease).join(Package) \
-				.filter_by(state=PackageState.APPROVED)
+			query = db.session.query(Package).select_from(PackageRelease).join(Package)
 		else:
-			query = Package.query.filter_by(state=PackageState.APPROVED)
+			query = Package.query
+
+		if self.only_approved:
+			query = query.filter(Package.state == PackageState.APPROVED)
 
 		query = query.options(subqueryload(Package.main_screenshot), subqueryload(Package.aliases))
 
