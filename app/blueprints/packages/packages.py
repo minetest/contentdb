@@ -33,7 +33,7 @@ from wtforms_sqlalchemy.fields import QuerySelectField, QuerySelectMultipleField
 from app.logic.LogicError import LogicError
 from app.logic.packages import do_edit_package
 from app.querybuilder import QueryBuilder
-from app.rediscache import has_key, set_key
+from app.rediscache import has_key, set_temp_key
 from app.tasks.importtasks import import_repo_screenshot, check_zip_release
 from app.tasks.webhooktasks import post_discord_webhook
 from app.logic.game_support import GameSupportResolver
@@ -65,7 +65,7 @@ def list_all():
 			edited = True
 			key = "tag/{}/{}".format(ip, tag.name)
 			if not has_key(key):
-				set_key(key, "true")
+				set_temp_key(key, "true")
 				Tag.query.filter_by(id=tag.id).update({
 						"views": Tag.views + 1
 					})

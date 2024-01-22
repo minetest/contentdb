@@ -26,7 +26,7 @@ from wtforms_sqlalchemy.fields import QuerySelectField
 from app.logic.releases import do_create_vcs_release, LogicError, do_create_zip_release
 from app.models import Package, db, User, PackageState, Permission, UserRank, PackageDailyStats, MinetestRelease, \
 	PackageRelease, PackageUpdateTrigger, PackageUpdateConfig
-from app.rediscache import has_key, set_key, make_download_key
+from app.rediscache import has_key, set_temp_key, make_download_key
 from app.tasks.importtasks import check_update_config
 from app.utils import is_user_bot, is_package_page, nonempty_or_none
 from . import bp, get_package_tabs
@@ -122,7 +122,7 @@ def download_release(package, id):
 
 		key = make_download_key(ip, release.package)
 		if not has_key(key):
-			set_key(key, "true")
+			set_temp_key(key, "true")
 
 			bonus = 0
 			if reason == "new":

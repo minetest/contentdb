@@ -20,12 +20,15 @@ from . import redis_client
 # and also means that the rest of the code avoids knowing about `app`
 
 
+EXPIRY_TIME_S = 2*7*24*60*60  # 2 weeks
+
+
 def make_download_key(ip, package):
 	return "{}/{}/{}".format(ip, package.author.username, package.name)
 
 
-def set_key(key, v):
-	redis_client.set(key, v)
+def set_temp_key(key, v):
+	redis_client.set(key, v, ex=EXPIRY_TIME_S)
 
 
 def has_key(key):
