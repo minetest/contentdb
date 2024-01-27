@@ -121,10 +121,9 @@ def _package_list(packages: List[str]):
 	# Who needs translations?
 	if len(packages) >= 3:
 		packages[len(packages) - 1] = "and " + packages[len(packages) - 1]
-		packages_list = ", ".join(packages)
+		return ", ".join(packages)
 	else:
-		packages_list = " and ".join(packages)
-	return packages_list
+		return " and ".join(packages)
 
 
 @action("Send WIP package notification")
@@ -133,12 +132,12 @@ def remind_wip():
 			Package.state == PackageState.WIP, Package.state == PackageState.CHANGES_NEEDED)))
 	system_user = get_system_user()
 	for user in users:
-		packages = db.session.query(Package.title).filter(
+		packages = Package.query.filter(
 				Package.author_id == user.id,
 				or_(Package.state == PackageState.WIP, Package.state == PackageState.CHANGES_NEEDED)) \
 			.all()
 
-		packages = [pkg[0] for pkg in packages]
+		packages = [pkg.title for pkg in packages]
 		packages_list = _package_list(packages)
 		havent = "haven't" if len(packages) > 1 else "hasn't"
 
@@ -154,12 +153,12 @@ def remind_outdated():
 			Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))))
 	system_user = get_system_user()
 	for user in users:
-		packages = db.session.query(Package.title).filter(
+		packages = Package.query.filter(
 				Package.maintainers.contains(user),
 				Package.update_config.has(PackageUpdateConfig.outdated_at.isnot(None))) \
 			.all()
 
-		packages = [pkg[0] for pkg in packages]
+		packages = [pkg.title for pkg in packages]
 		packages_list = _package_list(packages)
 
 		add_notification(user, system_user, NotificationType.PACKAGE_APPROVAL,
@@ -231,15 +230,15 @@ def remind_video_url():
 			and_(Package.video_url == None, Package.type == PackageType.GAME, Package.state == PackageState.APPROVED)))
 	system_user = get_system_user()
 	for user in users:
-		packages = db.session.query(Package.title).filter(
+		packages = Package.query.filter(
 				or_(Package.author == user, Package.maintainers.contains(user)),
 				Package.video_url == None,
 				Package.type == PackageType.GAME,
 				Package.state == PackageState.APPROVED) \
 			.all()
 
-		packages = [pkg[0] for pkg in packages]
-		packages_list = _package_list(packages)
+		package_names = [pkg.title for pkg in packages]
+		packages_list = _package_list(package_names)
 
 		add_notification(user, system_user, NotificationType.PACKAGE_APPROVAL,
 				f"You should add a video to {packages_list}",
@@ -259,7 +258,7 @@ def remind_missing_game_support():
 
 	system_user = get_system_user()
 	for user in users:
-		packages = db.session.query(Package.title).filter(
+		packages = Package.query.filter(
 			Package.maintainers.contains(user),
 			Package.state != PackageState.DELETED,
 			Package.type.in_([PackageType.MOD, PackageType.TXP]),
@@ -267,7 +266,7 @@ def remind_missing_game_support():
 			Package.supports_all_games == False) \
 			.all()
 
-		packages = [pkg[0] for pkg in packages]
+		packages = [pkg.title for pkg in packages]
 		packages_list = _package_list(packages)
 
 		add_notification(user, system_user, NotificationType.PACKAGE_APPROVAL,
