@@ -43,7 +43,7 @@ def upload_file(file, file_type, file_type_desc):
 
 	is_image = False
 	if file_type == "image":
-		allowed_extensions = ["jpg", "jpeg", "png", "webp"]
+		allowed_extensions = ["jpg", "png", "webp"]
 		is_image = True
 	elif file_type == "zip":
 		allowed_extensions = ["zip"]
@@ -51,6 +51,9 @@ def upload_file(file, file_type, file_type_desc):
 		raise Exception("Invalid fileType")
 
 	ext = get_extension(file.filename)
+	if ext == "jpeg":
+		ext = "jpg"
+
 	if ext is None or ext not in allowed_extensions:
 		raise LogicError(400, lazy_gettext("Please upload %(file_desc)s", file_desc=file_type_desc))
 
