@@ -15,7 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask import abort, current_app, request
-from flask_babel import lazy_gettext
+from flask_babel import lazy_gettext, gettext
 from sqlalchemy import or_
 from sqlalchemy.orm import subqueryload
 from sqlalchemy.sql.expression import func
@@ -48,6 +48,9 @@ class QueryBuilder:
 
 		if self.search:
 			ret = f"{self.search} - {ret}"
+
+		if self.game:
+			ret = gettext("%(package_type)s for %(game_name)s", package_type=ret, game_name=self.game.title)
 
 		return ret
 
