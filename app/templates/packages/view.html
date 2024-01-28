@@ -515,7 +515,7 @@
 							<div style="max-height: 300px; overflow: hidden auto;" class="mb-3">
 								{% for support in supported_games %}
 									<a class="badge bg-secondary"
-											href="{{ support.game.get_url('packages.view') }}">
+											href="{{ support.game.get_url('packages.game_hub') }}">
 										{{ _("%(title)s by %(display_name)s",
 												title=support.game.title, display_name=support.game.author.display_name) }}
 									</a>
