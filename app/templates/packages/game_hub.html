@@ -26,6 +26,18 @@
 		</a>
 	</h1>
 
+	<form action="{{ url_for('packages.list_all') }}" method="GET" class="mb-5">
+		<input type="hidden" name="game" value="{{ package.get_id() }}">
+		<label for="game-search" class="sr-only">{{ _('Search for packages for %(title)s', title=package.title) }}</label>
+		<div class="input-group mb-3">
+			<input name="q" id="game-search" type="text" class="form-control"
+					placeholder="{{ _('Search for packages for %(title)s', title=package.title) }}">
+			<button class="btn btn-primary" type="submit" id="game-search-go" aria-label="{{ _('Search') }}">
+				<i class="fas fa-search"></i>
+			</button>
+		</div>
+	</form>
+
 	<a href="{{ url_for('packages.list_all', sort='approved_at', order='desc', game=package.get_id()) }}" class="btn btn-secondary float-end">
 		{{ _("See more") }}
 	</a>
