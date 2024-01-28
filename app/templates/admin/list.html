@@ -5,41 +5,107 @@
 {% endblock %}
 
 {% block content %}
+	<h1>{{ self.title() }}</h1>
+
 	<div class="row">
 		<div class="col-md-6">
+			<h3 class="mt-0">Users</h3>
 			<div class="list-group">
-				<a class="list-group-item list-group-item-action" href="{{ url_for('users.list_all') }}">User list</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.restore') }}">Restore package</a>
-                <a class="list-group-item list-group-item-action" href="{{ url_for('admin.transfer') }}">Transfer package(s)</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.tag_list') }}">Tag Editor</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.license_list') }}">License Editor</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.version_list') }}">Version Editor</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.warning_list') }}">Warning Editor</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.send_bulk_email') }}">Send bulk email</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.send_bulk_notification') }}">Send bulk notification</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.storage') }}">Storage usage</a>
-				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.switch_user') }}">Sign in as another user</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('users.list_all') }}">
+					<i class="fas fa-users me-2"></i>
+					User list
+				</a>
+				{% if current_user.rank.at_least(current_user.rank.MODERATOR) %}
+					<a class="list-group-item list-group-item-action" href="{{ url_for('admin.audit') }}">
+						<i class="fas fa-user-clock me-2"></i>
+						{{ _("Audit Log") }}
+					</a>
+				{% endif %}
+			</div>
+
+			<h3>Packages</h3>
+			<div class="list-group">
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.restore') }}">
+					<i class="fas fa-trash-restore me-2"></i>
+					Restore package
+				</a>
+                <a class="list-group-item list-group-item-action" href="{{ url_for('admin.transfer') }}">
+					<i class="fas fa-arrow-right me-2"></i>
+					Transfer package(s)
+				</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('admin.storage') }}">
+					<i class="fas fa-save me-2"></i>
+					Storage usage
+				</a>
+				<a class="list-group-item list-group-item-action" href="{{ url_for('zipgrep.zipgrep_search') }}">
+					<i class="fas fa-search me-2"></i>
+					Zip grep
+				</a>
+			</div>
+
+			<h3>Types</h3>
+			<div class="list-group">
+				{% if check_global_perm(current_user, "EDIT_TAGS") %}
+					<a class="list-group-item list-group-item-action" href="{{ url_for('admin.tag_list') }}">
+						<i class="fas fa-tags me-2"></i>
+						Tag Editor
+					</a>
+				{% endif %}
+
+				{% if current_user.rank.at_least(current_user.rank.MODERATOR) %}
+					<a class="list-group-item list-group-item-action" href="{{ url_for('admin.license_list') }}">
+						<i class="fas fa-balance-scale me-2"></i>
+						License Editor
+					</a>
+					<a class="list-group-item list-group-item-action" href="{{ url_for('admin.version_list') }}">
+						<i class="fas fa-code me-2"></i>
+						Version Editor
+					</a>
+				{% endif %}
+
+				{% if current_user.rank.at_least(current_user.rank.ADMIN) %}
+					<a class="list-group-item list-group-item-action" href="{{ url_for('admin.warning_list') }}">
+						<i class="fas fa-exclamation-triangle me-2"></i>
+						Warning Editor
+					</a>
+				{% endif %}
 			</div>
 		</div>
+		{% if current_user.rank.name == "ADMIN" %}
+			<div class="col-md-6">
+				<h3 class="mt-0">Admin</h3>
+				<div class="list-group">
+					<a class="list-group-item list-group-item-action" href="{{ url_for('admin.send_bulk_email') }}">
+						<i class="fas fa-envelope me-2"></i>
+						Send bulk email
+					</a>
+					<a class="list-group-item list-group-item-action" href="{{ url_for('admin.send_bulk_notification') }}">
+						<i class="fas fa-circle me-2"></i>
+						Send bulk notification
+					</a>
+					<a class="list-group-item list-group-item-action" href="{{ url_for('admin.switch_user') }}">
+						<i class="fas fa-user me-2"></i>
+						Sign in as another user
+					</a>
+				</div>
+				<div class="card my-4">
+					<h2 class="card-header">Do action</h2>
 
-		<div class="col-md-6">
-			<div class="card mb-4">
-				<h2 class="card-header">Do action</h2>
-
-				<form method="post" action="" class="card-body">
-					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-					<div class="row px-3">
-						<select name="action" class="form-select col">
-							{% for id, action in actions.items() %}
-								<option value="{{ id }}" {% if loop.first %}selected{% endif %}>
-									{{ action["title"] }}
-								</option>
-							{% endfor %}
-						</select>
-						<input type="submit" value="Perform" class="col-sm-auto btn btn-primary ms-2" />
-					</div>
-				</form>
+					<form method="post" action="" class="card-body">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+						<div class="row px-3">
+							<select name="action" class="form-select col">
+								{% for id, action in actions.items() %}
+									<option value="{{ id }}" {% if loop.first %}selected{% endif %}>
+										{{ action["title"] }}
+									</option>
+								{% endfor %}
+							</select>
+							<input type="submit" value="Perform" class="col-sm-auto btn btn-primary ms-2" />
+						</div>
+					</form>
+				</div>
 			</div>
-		</div>
+		{% endif %}
 	</div>
 {% endblock %}

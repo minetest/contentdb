@@ -159,21 +159,9 @@
 											{{ _("Audit Log") }}
 										</a>
 									</li>
-									{% if current_user.rank == current_user.rank.ADMIN %}
-										<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.admin_page') }}">{{ _("Admin") }}</a></li>
-									{% else %}
-										{% if current_user.rank == current_user.rank.MODERATOR %}
-											<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.license_list') }}">{{ _("License Editor") }}</a></li>
-										{% endif %}
-									{% endif %}
 								{% endif %}
 								{% if current_user.rank.at_least(current_user.rank.EDITOR) %}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.restore') }}">{{ _("Restore Package") }}</a></li>
-								{% endif %}
-								{% if check_global_perm(current_user, "EDIT_TAGS") %}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.tag_list') }}">{{ _("Tag Editor") }}</a></li>
-								{% elif check_global_perm(current_user, "CREATE_TAG") %}
-									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.create_edit_tag') }}">{{ _("Create Tag") }}</a></li>
+									<li class="nav-item"><a class="nav-link" href="{{ url_for('admin.admin_page') }}">{{ _("Admin") }}</a></li>
 								{% endif %}
 								<li class="dropdown-divider"></li>
 								<li class="nav-item">

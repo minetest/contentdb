@@ -28,9 +28,9 @@ from ...querybuilder import QueryBuilder
 
 
 @bp.route("/admin/", methods=["GET", "POST"])
-@rank_required(UserRank.ADMIN)
+@rank_required(UserRank.EDITOR)
 def admin_page():
-	if request.method == "POST":
+	if request.method == "POST" and current_user.rank.at_least(UserRank.ADMIN):
 		action = request.form["action"]
 		if action in actions:
 			ret = actions[action]["func"]()
@@ -40,8 +40,7 @@ def admin_page():
 		else:
 			flash("Unknown action: " + action, "danger")
 
-	deleted_packages = Package.query.filter(Package.state == PackageState.DELETED).all()
-	return render_template("admin/list.html", deleted_packages=deleted_packages, actions=actions)
+	return render_template("admin/list.html", actions=actions)
 
 
 class SwitchUserForm(FlaskForm):
