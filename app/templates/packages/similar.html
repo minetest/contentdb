@@ -9,12 +9,12 @@
 	<h2>{{ self.title() }}</h2>
 
 	{% if packages_modnames %}
-		<h3>{{ _("Packages sharing provided mods") }}</h3>
+		<h3 id="packages-sharing-provided-mods">{{ _("Packages sharing provided mods") }}</h3>
 		<p class="text-muted">
 			{{ _("This package contains modnames that are present in the following packages:") }}
 		</p>
 		{% for modname, packages in packages_modnames.items() %}
-			<h4>{{ modname.name }}</h4>
+			<h4 id="{{ modname.name }}">{{ modname.name }}</h4>
 			<ul>
 				{% for pkg in packages %}
 					<li>
@@ -29,7 +29,7 @@
 	{% endif %}
 
 	{% if similar_topics %}
-		<h3>{{ _("Similar Forum Topics") }}</h3>
+		<h3 id="similar-forum-topics">{{ _("Similar Forum Topics") }}</h3>
 		<ul>
 			{% for t in similar_topics %}
 				<li>

@@ -33,9 +33,10 @@ from app.models import AuditSeverity, db, NotificationType, PackageRelease, Meta
 	PackageGameSupport
 from app.tasks import celery, TaskError
 from app.utils import random_string, post_bot_message, add_system_notification, add_system_audit_log, \
-	get_games_from_list
+	get_games_from_list, add_audit_log
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
 from .minetestcheck import build_tree, MinetestCheckError, ContentType
+from .webhooktasks import post_discord_webhook
 from app import app
 from app.logic.LogicError import LogicError
 from app.logic.game_support import GameSupportResolver
@@ -108,7 +109,29 @@ def post_release_check_update(self, release: PackageRelease, path):
 		provides = tree.get_mod_names()
 
 		package = release.package
+		old_modnames = set([x.name for x in package.provides])
 		package.provides.clear()
+
+		# If new mods were added, add to audit log
+		if package.state == PackageState.APPROVED:
+			new_provides = []
+			for modname in provides:
+				if modname not in old_modnames:
+					new_provides.append(modname)
+
+			if len(new_provides) > 0:
+				msg = "Added mods: " + (", ".join(new_provides))
+				add_audit_log(AuditSeverity.NORMAL, package.author, msg + " (Post release hook)", release.get_edit_url(), package)
+
+				# Do any of these new mods exist elsewhere?
+				new_names = get_meta_packages(new_provides)
+				if any(map(lambda x: x.packages.filter(Package.state == PackageState.APPROVED).count() > 0, new_names)):
+					discord_msg = (msg + " " + package.get_url("packages.similar", absolute=True) +
+						"#" + new_provides[0] +
+						"\nSome of these mods exist elsewhere, possible RTaN issue")
+					post_discord_webhook.delay(package.author.display_name, discord_msg, True,
+						package.title, package.short_desc, package.get_thumb_url(2, True, "png"))
+
 		package.provides.extend(get_meta_packages(tree.get_mod_names()))
 
 		# Delete all mod name dependencies
