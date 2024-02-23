@@ -33,10 +33,12 @@ from .users import Permission, UserRank, User
 
 
 class PackageQuery(BaseQuery, SearchQueryMixin):
+	__tablename__ = "package_query"
 	pass
 
 
 class License(db.Model):
+	__tablename__ = "license"
 	id      = db.Column(db.Integer, primary_key=True)
 	name    = db.Column(db.String(50), nullable=False, unique=True)
 	is_foss = db.Column(db.Boolean,    nullable=False, default=True)
@@ -52,6 +54,7 @@ class License(db.Model):
 
 
 class PackageType(enum.Enum):
+	__tablename__ = "package_type"
 	MOD  = "Mod"
 	GAME = "Game"
 	TXP  = "Texture Pack"
@@ -241,6 +244,7 @@ maintainers = db.Table("maintainers",
 
 
 class Dependency(db.Model):
+	__tablename__ = "dependency"
 	id              = db.Column(db.Integer, primary_key=True)
 
 	depender_id     = db.Column(db.Integer, db.ForeignKey("package.id"),     nullable=True)
@@ -324,6 +328,7 @@ class Dependency(db.Model):
 
 
 class PackageGameSupport(db.Model):
+	__tablename__ = "package_game_support"
 	id = db.Column(db.Integer, primary_key=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=False)
@@ -345,6 +350,7 @@ class PackageGameSupport(db.Model):
 
 
 class Package(db.Model):
+	__tablename__ = "package"
 	query_class  = PackageQuery
 
 	id           = db.Column(db.Integer, primary_key=True)
@@ -809,6 +815,7 @@ class Package(db.Model):
 
 
 class MetaPackage(db.Model):
+	__tablename__ = "meta_package"
 	id = db.Column(db.Integer, primary_key=True)
 	name = db.Column(db.String(100), unique=True, nullable=False)
 	dependencies = db.relationship("Dependency", back_populates="meta_package", lazy="dynamic")
@@ -861,6 +868,7 @@ class MetaPackage(db.Model):
 
 
 class ContentWarning(db.Model):
+	__tablename__ = "content_warning"
 	id              = db.Column(db.Integer, primary_key=True)
 	name            = db.Column(db.String(100), unique=True, nullable=False)
 	title           = db.Column(db.String(100), nullable=False)
@@ -882,6 +890,7 @@ class ContentWarning(db.Model):
 
 
 class Tag(db.Model):
+	__tablename__ = "tag"
 	id              = db.Column(db.Integer, primary_key=True)
 	name            = db.Column(db.String(100), unique=True, nullable=False)
 	title           = db.Column(db.String(100), nullable=False)
@@ -912,6 +921,7 @@ class Tag(db.Model):
 
 
 class MinetestRelease(db.Model):
+	__tablename__ = "minetest_release"
 	id       = db.Column(db.Integer, primary_key=True)
 	name     = db.Column(db.String(100), unique=True, nullable=False)
 	protocol = db.Column(db.Integer, nullable=False, default=0)
@@ -954,6 +964,7 @@ class MinetestRelease(db.Model):
 
 
 class PackageRelease(db.Model):
+	__tablename__ = "package_release"
 	id           = db.Column(db.Integer, primary_key=True)
 
 	package_id   = db.Column(db.Integer, db.ForeignKey("package.id"))
@@ -1098,6 +1109,7 @@ class PackageRelease(db.Model):
 
 
 class PackageScreenshot(db.Model):
+	__tablename__ = "package_screenshot"
 	HARD_MIN_SIZE = (920, 517)
 	SOFT_MIN_SIZE = (1280, 720)
 
@@ -1179,6 +1191,7 @@ class PackageScreenshot(db.Model):
 
 
 class PackageUpdateTrigger(enum.Enum):
+	__tablename__ = "package_update_trigger"
 	COMMIT = "New Commit"
 	TAG = "New Tag"
 
@@ -1205,6 +1218,7 @@ class PackageUpdateTrigger(enum.Enum):
 
 
 class PackageUpdateConfig(db.Model):
+	__tablename__ = "package_update_config"
 	package_id  = db.Column(db.Integer, db.ForeignKey("package.id"), primary_key=True)
 	package     = db.relationship("Package", back_populates="update_config", foreign_keys=[package_id])
 
@@ -1249,6 +1263,7 @@ class PackageUpdateConfig(db.Model):
 
 
 class PackageAlias(db.Model):
+	__tablename__ = "package_alias"
 	id         = db.Column(db.Integer, primary_key=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=False)
@@ -1270,6 +1285,7 @@ class PackageAlias(db.Model):
 
 
 class PackageDailyStats(db.Model):
+	__tablename__ = "package_daily_stats"
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), primary_key=True)
 	package = db.relationship("Package", back_populates="daily_stats", foreign_keys=[package_id])
 	date = db.Column(db.Date, primary_key=True)

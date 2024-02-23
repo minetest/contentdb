@@ -18,7 +18,8 @@ import datetime
 import os
 import redis
 
-from flask import redirect, url_for, render_template, flash, request, Flask, send_from_directory, make_response
+from flask import redirect, url_for, render_template, flash, request, send_from_directory, make_response
+from flask_openapi3 import OpenAPI, Info
 from flask_babel import Babel, gettext
 from flask_flatpages import FlatPages
 from flask_github import GitHub
@@ -29,7 +30,9 @@ from flask_wtf.csrf import CSRFProtect
 
 from app.markdown import init_markdown, MARKDOWN_EXTENSIONS, MARKDOWN_EXTENSION_CONFIG
 
-app = Flask(__name__, static_folder="public/static")
+info = Info(title='Minetest ContentDB API', version='1.0.0')
+app = OpenAPI(__name__, static_folder="public/static", info=info)
+
 app.config["FLATPAGES_ROOT"] = "flatpages"
 app.config["FLATPAGES_EXTENSION"] = ".md"
 app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = MARKDOWN_EXTENSIONS

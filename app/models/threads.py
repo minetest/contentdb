@@ -32,6 +32,7 @@ watchers = db.Table("watchers",
 
 
 class Thread(db.Model):
+	__tablename__ = "thread"
 	id         = db.Column(db.Integer, primary_key=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
@@ -137,6 +138,7 @@ class Thread(db.Model):
 
 
 class ThreadReply(db.Model):
+	__tablename__ = "thread_reply"
 	id         = db.Column(db.Integer, primary_key=True)
 
 	thread_id  = db.Column(db.Integer, db.ForeignKey("thread.id"), nullable=False)
@@ -174,6 +176,7 @@ class ThreadReply(db.Model):
 
 
 class PackageReview(db.Model):
+	__tablename__ = "package_review"
 	id         = db.Column(db.Integer, primary_key=True)
 
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
@@ -267,6 +270,7 @@ class PackageReview(db.Model):
 
 
 class PackageReviewVote(db.Model):
+	__tablename__ = "package_review_vote"
 	review_id = db.Column(db.Integer, db.ForeignKey("package_review.id"), primary_key=True)
 	review = db.relationship("PackageReview", foreign_keys=[review_id], back_populates="votes")
 	user_id = db.Column(db.Integer, db.ForeignKey("user.id"), primary_key=True)
