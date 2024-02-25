@@ -494,7 +494,7 @@ class Package(db.Model):
 	def get_id(self):
 		return "{}/{}".format(self.author.username, self.name)
 
-	def get_translated(self, lang=None):
+	def get_translated(self, lang=None, load_desc=True):
 		if lang is None:
 			locale = get_locale()
 			if locale:
@@ -510,13 +510,13 @@ class Package(db.Model):
 			return {
 				"title": self.title,
 				"short_desc": self.short_desc,
-				"desc": self.desc,
+				"desc": self.desc if load_desc else None,
 			}
 
 		return {
 			"title": translation.title or self.title,
 			"short_desc": translation.short_desc or self.short_desc,
-			"desc": translation.desc or self.desc,
+			"desc": (translation.desc or self.desc) if load_desc else None,
 		}
 
 	def get_sorted_dependencies(self, is_hard=None):
