@@ -400,12 +400,17 @@ class Package(db.Model):
 	forums       = db.Column(db.Integer,     nullable=True)
 	video_url    = db.Column(db.String(200), nullable=True, default=None)
 	donate_url   = db.Column(db.String(200), nullable=True, default=None)
+	translation_url = db.Column(db.String(200), nullable=True)
 
 	@property
 	def donate_url_actual(self):
 		return self.donate_url or self.author.donate_url
 
 	enable_game_support_detection = db.Column(db.Boolean, nullable=False, default=True)
+
+	translations = db.relationship("PackageTranslation", back_populates="package",
+			lazy="dynamic", order_by=db.asc("package_translation_language_id"),
+			cascade="all, delete, delete-orphan")
 
 	provides = db.relationship("MetaPackage", secondary=PackageProvides, order_by=db.asc("name"), back_populates="packages")
 
@@ -806,6 +811,23 @@ class Package(db.Model):
 				negative += count
 
 		return [positive, neutral, negative]
+
+
+class Language(db.Model):
+	id = db.Column(db.String(10), primary_key=True)
+	title = db.Column(db.String(100), unique=True, nullable=False)
+
+
+class PackageTranslation(db.Model):
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), primary_key=True)
+	package = db.relationship("Package", back_populates="translations", foreign_keys=[package_id])
+
+	language_id = db.Column(db.String(10), db.ForeignKey("language.id"), primary_key=True)
+	language = db.relationship("Language", foreign_keys=[language_id])
+
+	title = db.Column(db.Unicode(100), nullable=True)
+	short_desc = db.Column(db.Unicode(200), nullable=True)
+	desc = db.Column(db.UnicodeText, nullable=True)
 
 
 class MetaPackage(db.Model):
