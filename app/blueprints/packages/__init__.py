@@ -33,6 +33,11 @@ def get_package_tabs(user: User, package: Package):
 			"url": package.get_url("packages.create_edit")
 		},
 		{
+			"id": "translation",
+			"title": gettext("Translation"),
+			"url": package.get_url("packages.translation")
+		},
+		{
 			"id": "releases",
 			"title": gettext("Releases"),
 			"url": package.get_url("packages.list_releases")
@@ -70,7 +75,7 @@ def get_package_tabs(user: User, package: Package):
 	]
 
 	if package.type == PackageType.MOD or package.type == PackageType.TXP:
-		retval.insert(1, {
+		retval.insert(2, {
 			"id": "game_support",
 			"title": gettext("Supported Games"),
 			"url": package.get_url("packages.game_support")

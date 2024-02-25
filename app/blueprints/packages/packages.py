@@ -461,6 +461,14 @@ def move_to_state(package):
 	return redirect(package.get_url("packages.view"))
 
 
+@bp.route("/packages/<author>/<name>/translation/")
+@login_required
+@is_package_page
+def translation(package):
+	return render_template("packages/translation.html", package=package,
+			tabs=get_package_tabs(current_user, package), current_tab="translation")
+
+
 @bp.route("/packages/<author>/<name>/remove/", methods=["GET", "POST"])
 @login_required
 @is_package_page

@@ -1,0 +1,81 @@
+{% extends "packages/package_base.html" %}
+
+{% block title %}
+{{ _("Translation") }}
+{% endblock %}
+
+{% block content %}
+	{% set translations = package.translations.all() %}
+	{% set num = translations | length + 1 %}
+
+	<a class="btn btn-secondary float-end" href="https://api.minetest.net/translations/#translating-content-meta">
+		{{ _("Help") }}
+	</a>
+
+	<h2 class="mt-0 mb-4">{{ self.title() }}</h2>
+	{% if num == 1 %}
+		<p>
+			{{ _("To provide translations for your %(type)s, you need to create .tr files and upload a new release.", type=package.type.text | lower) }}
+			{{ _("For information on how to do this, see the modding book chapter and lua_api.md") }}
+		</p>
+		<p>
+			<a class="btn btn-primary me-2" href="https://rubenwardy.com/minetest_modding_book/en/quality/translations.html">
+				{{ _("Translation - Minetest Modding Book") }}
+			</a>
+			<a class="btn btn-primary" href="https://api.minetest.net/translations/#translating-content-meta">
+				{{ _("Translating content meta - lua_api.md") }}
+			</a>
+		</p>
+	{% else %}
+		<p>
+			{{ _("%(title)s is available in %(num)d languages.", title=package.title, num=num) }}
+			{{ _("ContentDB reads translations from locale files (.tr) in your package.") }}
+		</p>
+
+		<div class="list-group">
+			<div class="list-group-item">
+				<div class="row text-muted">
+					<div class="col-sm-2">
+						{{ _("Language") }}
+					</div>
+					<div class="col-sm">
+						{{ _("Title") }}
+					</div>
+					<div class="col-sm">
+						{{ _("Short Description") }}
+					</div>
+				</div>
+			</div>
+
+			<div class="list-group-item">
+				<div class="row">
+					<div class="col-sm-2">
+						English
+					</div>
+					<div class="col-sm">
+						{{ package.title }}
+					</div>
+					<div class="col-sm">
+						{{ package.short_desc }}
+					</div>
+				</div>
+			</div>
+
+			{% for translation in translations %}
+				<div class="list-group-item">
+					<div class="row">
+						<div class="col-sm-2">
+							{{ translation.language.title }}
+						</div>
+						<div class="col-sm">
+							{{ translation.title or "" }}
+						</div>
+						<div class="col-sm">
+							{{ translation.short_desc or "" }}
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		{% endif %}
+	</div>
+{% endblock %}
