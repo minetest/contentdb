@@ -1,10 +1,11 @@
 {% macro render_pkgtile(package, show_author) -%}
+	{% set meta = package.get_translated(load_desc=False) %}
 	<li class="packagetile flex-fill"><a href="{{ package.get_url('packages.view') }}">
 		<img src="{{ package.get_thumb_or_placeholder() }}" loading="lazy">
 		<div class="packagegridscrub"></div>
 		<div class="packagegridinfo">
 			<h3>
-				{{ package.title }}
+				{{ meta.title }}
 
 				{% if show_author %}<br />
 					<small>{{ package.author.display_name }}</small>
@@ -17,7 +18,7 @@
 			</h3>
 
 			<p>
-				{{ package.short_desc }}
+				{{ meta.short_desc }}
 			</p>
 
 			{% if not package.license.is_foss and not package.media_license.is_foss and package.type != package.type.TXP  %}
