@@ -14,8 +14,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from typing import Optional
 from flask import abort, current_app, request
-from flask_babel import lazy_gettext, gettext
+from flask_babel import lazy_gettext, gettext, get_locale
 from sqlalchemy import or_
 from sqlalchemy.orm import subqueryload
 from sqlalchemy.sql.expression import func
@@ -60,8 +61,13 @@ class QueryBuilder:
 		return (self.search is not None or len(self.tags) > 1 or len(self.types) > 1 or len(self.hide_flags) > 0 or
 			self.random or self.lucky or self.author or self.version or self.game)
 
-	def __init__(self, args, cookies=False, lang="en"):
-		self.lang = lang
+	def __init__(self, args, cookies: bool = False, lang: Optional[str] = None):
+		if lang is None:
+			locale = get_locale()
+			if locale:
+				self.lang = locale.language
+		else:
+			self.lang = lang
 
 		# Get request types
 		types = args.getlist("type")
