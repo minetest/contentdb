@@ -17,10 +17,12 @@
 
 import os
 import re
+import glob
 from typing import Optional
 
 from . import MinetestCheckError, ContentType
 from .config import parse_conf
+from .translation import Translation, parse_tr
 
 basenamePattern = re.compile("^([a-z0-9_]+)$")
 licensePattern = re.compile("^(licen[sc]e|copying)(.[^/\n]+)?$", re.IGNORECASE)
@@ -31,7 +33,7 @@ DISALLOWED_NAMES = {
 }
 
 
-def get_base_dir(path):
+def get_base_dir(path) -> str:
 	if not os.path.isdir(path):
 		raise IOError("Expected dir")
 
@@ -42,7 +44,7 @@ def get_base_dir(path):
 		return path
 
 
-def detect_type(path):
+def detect_type(path) -> ContentType:
 	if os.path.isfile(path + "/game.conf"):
 		return ContentType.GAME
 	elif os.path.isfile(path + "/init.lua"):
@@ -58,7 +60,7 @@ def detect_type(path):
 		return ContentType.UNKNOWN
 
 
-def get_csv_line(line):
+def get_csv_line(line) -> list[str]:
 	if line is None:
 		return []
 
@@ -79,23 +81,33 @@ def check_name_list(key: str, value: list[str], relative: str, allow_star: bool 
 
 
 class PackageTreeNode:
-	def __init__(self, base_dir, relative, author=None, repo=None, name=None):
-		self.baseDir  = base_dir
+	baseDir: str
+	relative: str
+	author: Optional[str]
+	name: Optional[str]
+	repo: Optional[str]
+	meta: dict
+	children: list
+	type: ContentType
+
+	def __init__(self, base_dir: str, relative: str,
+			author: Optional[str] = None, repo: Optional[str] = None, name: Optional[str] = None):
+		self.baseDir = base_dir
 		self.relative = relative
-		self.author   = author
-		self.name	 = name
-		self.repo	 = repo
-		self.meta	 = None
+		self.author = author
+		self.name = name
+		self.repo = repo
+		self.meta = {}
 		self.children = []
 
 		# Detect type
 		self.type = detect_type(base_dir)
-		self.read_meta()
+		self._read_meta()
 
 		if self.type == ContentType.GAME:
 			if not os.path.isdir(os.path.join(base_dir, "mods")):
 				raise MinetestCheckError("Game at {} does not have a mods/ folder".format(self.relative))
-			self.add_children_from_mod_dir("mods")
+			self._add_children_from_mod_dir("mods")
 		elif self.type == ContentType.MOD:
 			if self.name and not basenamePattern.match(self.name):
 				raise MinetestCheckError(f"Invalid base name for mod {self.name} at {self.relative}, names must only contain a-z0-9_.")
@@ -103,9 +115,9 @@ class PackageTreeNode:
 			if self.name and self.name in DISALLOWED_NAMES:
 				raise MinetestCheckError(f"Forbidden mod name '{self.name}' used at {self.relative}")
 
-			self.check_dir_casing(["textures", "media", "sounds", "models", "locale"])
+			self._check_dir_casing(["textures", "media", "sounds", "models", "locale"])
 		elif self.type == ContentType.MODPACK:
-			self.add_children_from_mod_dir(None)
+			self._add_children_from_mod_dir(None)
 
 	def find_license_file(self) -> Optional[str]:
 		for name in os.listdir(self.baseDir):
@@ -115,7 +127,7 @@ class PackageTreeNode:
 
 		return None
 
-	def check_dir_casing(self, dirs):
+	def _check_dir_casing(self, dirs):
 		for dir in next(os.walk(self.baseDir))[1]:
 			lowercase = dir.lower()
 			if lowercase != dir and lowercase in dirs:
@@ -139,7 +151,7 @@ class PackageTreeNode:
 		else:
 			return None
 
-	def read_meta(self):
+	def _read_meta(self):
 		result = {}
 
 		# Read .conf file
@@ -229,7 +241,7 @@ class PackageTreeNode:
 
 		self.meta = result
 
-	def add_children_from_mod_dir(self, subdir):
+	def _add_children_from_mod_dir(self, subdir):
 		dir = self.baseDir
 		relative = self.relative
 		if subdir:
@@ -282,9 +294,16 @@ class PackageTreeNode:
 
 		return retval
 
-	def get(self, key):
-		return self.meta.get(key)
+	def get(self, key: str, default=None):
+		return self.meta.get(key, default)
 
 	def validate(self):
 		for child in self.children:
 			child.validate()
+
+	def get_translations(self, textdomain: str) -> list[Translation]:
+		ret = []
+
+		for name in glob.glob(f"{self.baseDir}/**/locale/{textdomain}.*.tr", recursive=True):
+			ret.append(parse_tr(name))
+		return ret
