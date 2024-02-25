@@ -101,6 +101,7 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
         * `forums`: forum topic ID.
         * `video_url`: URL to a video.
         * `donate_url`: URL to a donation page.
+        * `translation_url`: URL to send users interested in translating your package.
         * `game_support`: Array of game support information objects. Not currently documented, as subject to change.
 * GET `/api/packages/<author>/<name>/hypertext/`
     * Converts the long description to [Minetest Markup Language](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#markup-language)

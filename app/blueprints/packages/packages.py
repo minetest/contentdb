@@ -270,6 +270,7 @@ class PackageForm(FlaskForm):
 	forums           = IntegerField(lazy_gettext("Forum Topic ID"), [Optional(), NumberRange(0, 999999)])
 	video_url        = StringField(lazy_gettext("Video URL"), [Optional(), URL()], filters=[lambda x: x or None])
 	donate_url       = StringField(lazy_gettext("Donate URL"), [Optional(), URL()], filters=[lambda x: x or None])
+	translation_url  = StringField(lazy_gettext("Translation URL"), [Optional(), URL()], filters=[lambda x: x or None])
 
 	submit           = SubmitField(lazy_gettext("Save"))
 
@@ -323,6 +324,7 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 			"forums": form.forums.data,
 			"video_url": form.video_url.data,
 			"donate_url": form.donate_url.data,
+			"translation_url": form.translation_url.data,
 		})
 
 		if wasNew:

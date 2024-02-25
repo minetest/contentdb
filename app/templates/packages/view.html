@@ -224,6 +224,12 @@
 							<span class="count">{{ _("Issue Tracker") }}</span>
 						</a>
 					{% endif %}
+					{% if package.translation_url %}
+						<a class="btn" href="{{ package.translation_url }}">
+							<i class="fas fa-language"></i>
+							<span class="count">{{ _("Translate") }}</span>
+						</a>
+					{% endif %}
 					<a class="btn" href="{{ package.get_url('packages.statistics') }}">
 						<i class="fas fa-chart-line"></i>
 						<span class="count">{{ _("Statistics") }}</span>

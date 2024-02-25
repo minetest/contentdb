@@ -76,6 +76,7 @@ It should be a JSON dictionary with one or more of the following optional keys:
 * `forums`: forum topic ID.
 * `video_url`: URL to a video.
 * `donate_url`: URL to a donation page.
+* `translation_url`: URL to send users interested in translating your package.
 
 Use `null` or `[]` to unset fields where relevant.
 

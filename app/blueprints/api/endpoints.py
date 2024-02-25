@@ -804,6 +804,11 @@ def json_schema():
 				"type": ["string", "null"],
 				"format": "uri"
 			},
+			"translation_url": {
+				"description": "URL to send users interested in translating your package",
+				"type": ["string", "null"],
+				"format": "uri"
+			}
 		},
 	})
 
