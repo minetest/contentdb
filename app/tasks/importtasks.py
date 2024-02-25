@@ -27,15 +27,16 @@ from git import GitCommandError
 from git_archive_all import GitArchiver
 from kombu import uuid
 from sqlalchemy import and_
+from sqlalchemy.dialects.postgresql import insert
 
 from app.models import AuditSeverity, db, NotificationType, PackageRelease, MetaPackage, Dependency, PackageType, \
 	MinetestRelease, Package, PackageState, PackageScreenshot, PackageUpdateTrigger, PackageUpdateConfig, \
-	PackageGameSupport
+	PackageGameSupport, PackageTranslation, Language
 from app.tasks import celery, TaskError
 from app.utils import random_string, post_bot_message, add_system_notification, add_system_audit_log, \
 	get_games_from_list, add_audit_log
 from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
-from .minetestcheck import build_tree, MinetestCheckError, ContentType
+from .minetestcheck import build_tree, MinetestCheckError, ContentType, PackageTreeNode
 from .webhooktasks import post_discord_webhook
 from app import app
 from app.logic.LogicError import LogicError
@@ -96,7 +97,7 @@ def update_all_game_support():
 
 def post_release_check_update(self, release: PackageRelease, path):
 	try:
-		tree = build_tree(path, expected_type=ContentType[release.package.type.name],
+		tree: PackageTreeNode = build_tree(path, expected_type=ContentType[release.package.type.name],
 				author=release.package.author.username, name=release.package.name)
 
 		if tree.name is not None and release.package.name != tree.name and tree.type == ContentType.MOD:
@@ -161,6 +162,33 @@ def post_release_check_update(self, release: PackageRelease, path):
 
 		for meta in get_meta_packages(optional_depends):
 			db.session.add(Dependency(package, meta=meta, optional=True))
+
+		# Read translations
+		allowed_languages = set([x[0] for x in db.session.query(Language.id).all()])
+		allowed_languages.discard("en")
+		raw_translations = tree.get_translations(tree.get("textdomain", tree.name))
+		conn = db.session.connection()
+		for raw_translation in raw_translations:
+			if raw_translation.language not in allowed_languages:
+				continue
+
+			to_update = {
+				"title": raw_translation.entries.get(tree.get("title", package.title)),
+				"short_desc": raw_translation.entries.get(tree.get("description", package.short_desc)),
+			}
+			values = {
+				"package_id": package.id,
+				"language_id": raw_translation.language,
+				"title": to_update["title"],
+				"short_desc": to_update["short_desc"],
+			}
+
+			stmt = insert(PackageTranslation).values(**values)
+			stmt = stmt.on_conflict_do_update(
+				index_elements=[PackageTranslation.package_id, PackageTranslation.language_id],
+				set_=to_update
+			)
+			conn.execute(stmt)
 
 		# Update min/max
 		if tree.meta.get("min_minetest_version"):
