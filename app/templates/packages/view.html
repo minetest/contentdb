@@ -1,14 +1,15 @@
-{% set query=package.name %}
-{% set release = package.get_download_release() %}
-
 {% extends "base.html" %}
 
+{% set query=package.name %}
+{% set release = package.get_download_release() %}
+{% set meta = package.get_translated() %}
+
 {% block title %}
-	{{ package.title }}
+	{{ meta.title }}
 {% endblock %}
 
 {% block description -%}
-{{ package.short_desc }}
+	{{ meta.short_desc }}
 {% endblock %}
 
 {% block headextra %}
@@ -130,11 +131,11 @@
 			</div>
 
 			<h1 class="display-3">
-				{{ package.title }}
+				{{ meta.title }}
 			</h1>
 
 			<p class="lead">
-				{{ package.short_desc }}
+				{{ meta.short_desc }}
 			</p>
 
 			<p>
@@ -322,9 +323,9 @@
 					</ul>
 				{% endif %}
 
-				{% if package.desc %}
+				{% if meta.desc %}
 					<article class="markdown panel mb-5">
-						{{ package.desc | markdown }}
+						{{ meta.desc | markdown }}
 					</article>
 				{% endif %}
 
@@ -454,7 +455,7 @@
 									<a class="badge bg-primary"
 											href="{{ dep.package.get_url('packages.view') }}">
 										{{ _("%(title)s by %(display_name)s",
-												title=dep.package.title, display_name=dep.package.author.display_name) }}
+												title=dep.package.get_translated().title, display_name=dep.package.author.display_name) }}
 									</a>
 								{% elif dep.meta_package %}
 									<a class="badge bg-primary"
@@ -478,7 +479,7 @@
 										<a class="badge bg-secondary"
 												href="{{ dep.package.get_url('packages.view') }}">
 											{{ _("%(title)s by %(display_name)s",
-													title=dep.package.title, display_name=dep.package.author.display_name) }}
+													title=dep.package.get_translated().title, display_name=dep.package.author.display_name) }}
 									{% elif dep.meta_package %}
 										<a class="badge bg-secondary"
 												href="{{ url_for('modnames.view', name=dep.meta_package.name) }}">
