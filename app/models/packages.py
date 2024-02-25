@@ -19,8 +19,9 @@ import datetime
 import enum
 import os
 
+import typing
 from flask import url_for
-from flask_babel import lazy_gettext
+from flask_babel import lazy_gettext, get_locale
 from flask_sqlalchemy import BaseQuery
 from sqlalchemy import or_, func
 from sqlalchemy.dialects.postgresql import insert
@@ -492,6 +493,28 @@ class Package(db.Model):
 
 	def get_id(self):
 		return "{}/{}".format(self.author.username, self.name)
+
+	def get_translated(self, lang=None):
+		if lang is None:
+			locale = get_locale()
+			if locale:
+				lang = locale.language
+			else:
+				lang = "en"
+
+		translation: typing.Optional[PackageTranslation] = self.translations.filter_by(language_id=lang).first()
+		if translation is None:
+			return {
+				"title": self.title,
+				"short_desc": self.short_desc,
+				"desc": self.desc,
+			}
+
+		return {
+			"title": translation.title or self.title,
+			"short_desc": translation.short_desc or self.short_desc,
+			"desc": translation.desc or self.desc,
+		}
 
 	def get_sorted_dependencies(self, is_hard=None):
 		query = self.dependencies
