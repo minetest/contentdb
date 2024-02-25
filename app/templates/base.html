@@ -182,6 +182,7 @@
 								role="button"
 								aria-expanded="false">
 							<i class="fas fa-language"></i>
+							<span class="sr-only">{{ _("Languages") }}</span>
 						</a>
 							<ul class="dropdown-menu dropdown-menu-right" role="menu">
 								{% for locale, locale_name in config["LANGUAGES"].items() %}

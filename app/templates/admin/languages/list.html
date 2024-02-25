@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ _("Languages") }}
+{% endblock %}
+
+{% block content %}
+	<a class="btn btn-primary float-end" href="{{ url_for('admin.create_edit_language') }}">{{ _("New Tag") }}</a>
+
+	<h1>{{ _("Languages") }}</h1>
+
+	<div class="list-group">
+		<div class="list-group-item">
+			<div class="row text-muted">
+				<div class="col-sm-2">
+					{{ _("Id") }}
+				</div>
+
+				<div class="col-sm">
+					{{ _("Title") }}
+				</div>
+			</div>
+		</div>
+
+		{% for l in languages %}
+			<a class="list-group-item list-group-item-action"
+					href="{{ url_for('admin.create_edit_language', id_=l.id) }}">
+				<div class="row">
+					<div class="col-sm-2">
+						{{ l.id }}
+					</div>
+					<div class="col-sm">
+						{{ l.title }}
+					</div>
+				</div>
+			</a>
+		{% endfor %}
+	</div>
+{% endblock %}

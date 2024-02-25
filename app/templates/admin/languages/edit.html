@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block title %}
+	{% if language %}
+		Edit {{ language.title }}
+	{% else %}
+		New language
+	{% endif %}
+{% endblock %}
+
+{% block content %}
+	<a class="btn btn-primary float-end" href="{{ url_for('admin.create_edit_language') }}">New Language</a>
+	<a class="btn btn-secondary mb-4" href="{{ url_for('admin.language_list') }}">Back to list</a>
+
+	{% from "macros/forms.html" import render_field, render_submit_field, render_checkbox_field %}
+	<form method="POST" action="" enctype="multipart/form-data">
+		{{ form.hidden_tag() }}
+
+		{{ render_field(form.id) }}
+		{{ render_field(form.title) }}
+		{{ render_submit_field(form.submit) }}
+	</form>
+{% endblock %}
