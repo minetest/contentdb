@@ -21,6 +21,7 @@ from typing import List
 
 import flask_sqlalchemy
 from flask import request, jsonify, current_app, Response
+from flask_babel import gettext
 from flask_login import current_user, login_required
 from sqlalchemy import and_, or_
 from sqlalchemy.orm import joinedload
@@ -31,7 +32,7 @@ from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_
 from app.markdown import render_markdown
 from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
 	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread, Collection, \
-	PackageAlias
+	PackageAlias, Language
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
 from app.utils.minetest_hypertext import html_to_minetest
@@ -68,7 +69,10 @@ def cached(max_age: int):
 @cors_allowed
 @cached(300)
 def packages():
-	qb = QueryBuilder(request.args)
+	allowed_languages = set([x[0] for x in db.session.query(Language.id).all()])
+	lang = request.accept_languages.best_match(allowed_languages)
+
+	qb = QueryBuilder(request.args, lang=lang)
 	query = qb.build_package_query()
 
 	if request.args.get("fmt") == "keys":
@@ -88,7 +92,7 @@ def packages():
 			Package.collections.any(and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))).all())
 		for pkg in featured:
 			featured_lut.add(f"{pkg['author']}/{pkg['name']}")
-			pkg["short_description"] = "Featured. " + pkg["short_description"]
+			pkg["short_description"] = gettext("Featured") + ". " + pkg["short_description"]
 
 		not_featured = [pkg for pkg in pkgs if f"{pkg['author']}/{pkg['name']}" not in featured_lut]
 		pkgs = featured + not_featured
@@ -100,11 +104,14 @@ def packages():
 @is_package_page
 @cors_allowed
 def package_view(package):
-	data = package.as_dict(current_app.config["BASE_URL"])
+	allowed_languages = set([x[0] for x in db.session.query(Language.id).all()])
+	lang = request.accept_languages.best_match(allowed_languages)
+
+	data = package.as_dict(current_app.config["BASE_URL"], lang=lang)
 	if "formspec_version" in request.args:
 		formspec_version = request.args["formspec_version"]
 		include_images = is_yes(request.args.get("include_images", "true"))
-		html = render_markdown(package.desc)
+		html = render_markdown(data["long_description"])
 		data["long_description"] = html_to_minetest(html, formspec_version, include_images)
 
 	return jsonify(data)

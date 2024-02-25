@@ -27,7 +27,8 @@ from .utils import is_yes, get_int_or_abort
 
 
 class QueryBuilder:
-	types  = None
+	lang: str = "en"
+	types = None
 	search = None
 	only_approved = True
 
@@ -59,7 +60,8 @@ class QueryBuilder:
 		return (self.search is not None or len(self.tags) > 1 or len(self.types) > 1 or len(self.hide_flags) > 0 or
 			self.random or self.lucky or self.author or self.version or self.game)
 
-	def __init__(self, args, cookies=False):
+	def __init__(self, args, cookies=False, lang="en"):
+		self.lang = lang
 
 		# Get request types
 		types = args.getlist("type")
@@ -153,7 +155,7 @@ class QueryBuilder:
 
 		def to_json(package: Package):
 			release_id = releases.get(package.id)
-			return package.as_short_dict(current_app.config["BASE_URL"], release_id=release_id, no_load=True)
+			return package.as_short_dict(current_app.config["BASE_URL"], release_id=release_id, no_load=True, lang=self.lang)
 
 		return [to_json(pkg) for pkg in packages]
 

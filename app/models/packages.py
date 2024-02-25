@@ -21,7 +21,7 @@ import os
 
 import typing
 from flask import url_for
-from flask_babel import lazy_gettext, get_locale
+from flask_babel import lazy_gettext, get_locale, gettext
 from flask_sqlalchemy import BaseQuery
 from sqlalchemy import or_, func
 from sqlalchemy.dialects.postgresql import insert
@@ -502,7 +502,10 @@ class Package(db.Model):
 			else:
 				lang = "en"
 
-		translation: typing.Optional[PackageTranslation] = self.translations.filter_by(language_id=lang).first()
+		translation: typing.Optional[PackageTranslation] = None
+		if lang != "en":
+			translation = self.translations.filter_by(language_id=lang).first()
+
 		if translation is None:
 			return {
 				"title": self.title,
@@ -556,20 +559,21 @@ class Package(db.Model):
 			"type": self.type.to_name(),
 		}
 
-	def as_short_dict(self, base_url, version=None, release_id=None, no_load=False):
+	def as_short_dict(self, base_url, version=None, release_id=None, no_load=False, lang="en"):
 		tnurl = self.get_thumb_url(1, format="png")
 
 		if release_id is None and no_load == False:
 			release = self.get_download_release(version=version)
 			release_id = release and release.id
 
-		short_desc = self.short_desc
+		meta = self.get_translated(lang, load_desc=False)
+		short_desc = meta["short_desc"]
 		if self.dev_state == PackageDevState.WIP:
-			short_desc = "Work in Progress. " + self.short_desc
+			short_desc = gettext("Work in Progress") + ". " + self.short_desc
 
 		ret = {
 			"name": self.name,
-			"title": self.title,
+			"title": meta["title"],
 			"author": self.author.username,
 			"short_description": short_desc,
 			"type": self.type.to_name(),
@@ -583,9 +587,11 @@ class Package(db.Model):
 
 		return ret
 
-	def as_dict(self, base_url, version=None):
+	def as_dict(self, base_url, version=None, lang="en"):
 		tnurl = self.get_thumb_url(1, format="png")
 		release = self.get_download_release(version=version)
+		meta = self.get_translated(lang)
+
 		return {
 			"author": self.author.username,
 			"maintainers": [x.username for x in self.maintainers],
@@ -594,9 +600,9 @@ class Package(db.Model):
 			"dev_state": self.dev_state.name if self.dev_state else None,
 
 			"name": self.name,
-			"title": self.title,
-			"short_description": self.short_desc,
-			"long_description": self.desc,
+			"title": meta["title"],
+			"short_description": meta["short_desc"],
+			"long_description": meta["desc"],
 			"type": self.type.to_name(),
 			"created_at": self.created_at.isoformat(),
 
