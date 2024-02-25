@@ -586,6 +586,7 @@ class Package(db.Model):
 			"forums": self.forums,
 			"video_url": self.video_url,
 			"donate_url": self.donate_url_actual,
+			"translation_url": self.translation_url,
 
 			"tags": sorted([x.name for x in self.tags]),
 			"content_warnings": sorted([x.name for x in self.content_warnings]),
