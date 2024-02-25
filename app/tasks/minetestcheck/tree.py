@@ -305,5 +305,10 @@ class PackageTreeNode:
 		ret = []
 
 		for name in glob.glob(f"{self.baseDir}/**/locale/{textdomain}.*.tr", recursive=True):
-			ret.append(parse_tr(name))
+			try:
+				ret.append(parse_tr(name))
+			except SyntaxError as e:
+				relative_path = os.path.join(self.relative, os.path.relpath(name, self.baseDir))
+				raise MinetestCheckError(f"Syntax error whilst reading {relative_path}: {e}")
+
 		return ret

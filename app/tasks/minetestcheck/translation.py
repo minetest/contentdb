@@ -1,7 +1,18 @@
-# Adapted from: https://github.com/minetest/minetest/blob/master/util/mod_translation_updater.py
+# ContentDB
+# Copyright (C) 2024 rubenwardy
 #
-# Copyright (C) 2019 Joachim Stolberg, 2020 FaceDeer, 2020 Louis Royer, 2023 Wuzzy, 2024 rubenwardy
-# License: LGPLv2.1 or later
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import os
 import re
@@ -18,93 +29,81 @@ class Translation:
 		self.entries = entries
 
 
-# Handles a translation line in *.tr file.
-# Group 1 is the source string left of the equals sign.
-# Group 2 is the translated string, right of the equals sign.
-pattern_tr = re.compile(
-	r'(.*)'  # Source string
-	# the separating equals sign, if NOT preceded by @, unless
-	# that @ is preceded by another @
-	r'(?:(?<!(?<!@)@)=)'
-	r'(.*)'  # Translation string
-)
-
-# Strings longer than this will have extra space added between
-# them in the translation files to make it easier to distinguish their
-# beginnings and endings at a glance
-doublespace_threshold = 80
-
-# These symbols mark comment lines showing the source file name.
-# A comment may look like "##[ init.lua ]##".
-symbol_source_prefix = "##["
-symbol_source_suffix = "]##"
-comment_unused = "##### not used anymore #####"
-
 
 def parse_tr(filepath: str) -> Translation:
-	dOut = {}
-	in_header = True
-	header_comments = None
-	textdomain = None
-
+	entries = {}
 	filename = os.path.basename(filepath)
 	filename_parts = filename.split(".")
 
 	assert len(filename_parts) >= 3
 	assert filename_parts[-1] == "tr"
 	language = filename_parts[-2]
+	textdomain = ".".join(filename_parts[0:-2])
 
 	with open(filepath, "r", encoding='utf-8') as existing_file:
-		# save the full text to allow for comparison
-		# of the old version with the new output
-		existing_file.seek(0)
-		# a running record of the current comment block
-		# we're inside, to allow preceeding multi-line comments
-		# to be retained for a translation line
-		latest_comment_block = None
-		for line in existing_file.readlines():
-			line = line.rstrip('\n')
-			# "##### not used anymore #####" comment
-			if line == comment_unused:
-				# Always delete the 'not used anymore' comment.
-				# It will be re-added to the file if neccessary.
-				latest_comment_block = None
-				if header_comments is not None:
-					in_header = False
-				continue
+		lines = existing_file.readlines()
+		line_index = 0
+		while line_index < len(lines):
+			line = lines[line_index].rstrip('\n')
+
+			if line == "":
+				pass
+
 			# Comment lines
 			elif line.startswith("#"):
-				# Source file comments: ##[ file.lua ]##
-				if line.startswith(symbol_source_prefix) and line.endswith(symbol_source_suffix):
-					continue
-
-				# Store first occurance of textdomain
+				# Store first occurrence of textdomain
 				# discard all subsequent textdomain lines
 				if line.startswith("# textdomain:"):
-					if textdomain is None:
-						textdomain = line[13:].strip()
-					continue
-				elif in_header:
-					# Save header comments (normal comments at top of file)
-					if not header_comments:
-						header_comments = line
+					line_textdomain = line[13:].strip()
+					if line_textdomain != textdomain:
+						raise SyntaxError(
+							f"Line {line_index + 1}: The filename's textdomain ({textdomain}) should match the comment ({line_textdomain})")
+			else:
+				i = 0
+				had_equals = False
+				source = ""
+				current_part = ""
+				while i < len(line):
+					if line[i] == "@":
+						if i + 1 < len(line):
+							i += 1
+							code = line[i]
+							if code == "=":
+								current_part += "="
+							elif code == "@":
+								current_part += "@"
+							elif code == "n":
+								current_part += "\n"
+							elif code.isdigit():
+								current_part += "@" + code
+							else:
+								raise SyntaxError(f"Line {line_index + 1}: Unknown escape character: {code}")
+
+						else:
+							# @\n -> add new line
+							line_index += 1
+							if line_index >= len(lines):
+								raise SyntaxError(f"Line {line_index + 1}: Unexpected end of file")
+							line = lines[line_index]
+							current_part += "\n"
+							i = 0
+							continue
+					elif not had_equals and line[i] == "=":
+						had_equals = True
+						source = current_part
+						current_part = ""
+
 					else:
-						header_comments = header_comments + "\n" + line
-				else:
-					# Save normal comments
-					if line.startswith("# textdomain:") and textdomain is None:
-						textdomain = line
-					elif not latest_comment_block:
-						latest_comment_block = line
-					else:
-						latest_comment_block = latest_comment_block + "\n" + line
+						current_part += line[i]
 
-				continue
+					i += 1
 
-			match = pattern_tr.match(line)
-			if match:
-				latest_comment_block = None
-				in_header = False
-				dOut[match.group(1).strip()] = match.group(2).strip()
+				translation = current_part
+				if not had_equals:
+					raise SyntaxError(f"Line {line_index + 1}: Missing = in line")
 
-	return Translation(language, textdomain, dOut)
+				entries[source.strip()] = translation.strip()
+
+			line_index += 1
+
+	return Translation(language, textdomain, entries)
