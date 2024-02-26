@@ -59,3 +59,23 @@ def test_parses_tr_error_on_bad_escape():
 		parse_tr(filepath)
 
 	assert str(e.value) == "Line 1: Unknown escape character: x"
+
+
+def test_parses_tr_error_on_bad_args():
+	dirname = os.path.dirname(__file__)
+	filepath = os.path.join(dirname, "bad_args.fr.tr")
+
+	with pytest.raises(SyntaxError) as e:
+		parse_tr(filepath)
+
+	assert "Line 1: Arguments out of order in source, found @5 and expected @2." in str(e.value)
+
+
+def test_parses_tr_error_on_unknown_arg():
+	dirname = os.path.dirname(__file__)
+	filepath = os.path.join(dirname, "unknown_arg.fr.tr")
+
+	with pytest.raises(SyntaxError) as e:
+		parse_tr(filepath)
+
+	assert str(e.value) == "Line 1: Unknown argument @2 in translated string"
