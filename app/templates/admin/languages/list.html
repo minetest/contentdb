@@ -5,20 +5,26 @@
 {% endblock %}
 
 {% block content %}
-	<a class="btn btn-primary float-end" href="{{ url_for('admin.create_edit_language') }}">{{ _("New Tag") }}</a>
+	<a class="btn btn-primary float-end" href="{{ url_for('admin.create_edit_language') }}">New Language</a>
 
 	<h1>{{ _("Languages") }}</h1>
 
 	<div class="list-group">
 		<div class="list-group-item">
 			<div class="row text-muted">
-				<div class="col-2">
+				<div class="col-1">
 					{{ _("Id") }}
 				</div>
 
-				<div class="col">
+				<div class="col-2">
 					{{ _("Title") }}
 				</div>
+
+				<div class="col-1">
+					{{ _("Packages") }}
+				</div>
+
+				<div class="col"></div>
 
 				<div class="col-3 text-end">
 					{{ _("Has ContentDB translation?") }}
@@ -27,14 +33,30 @@
 		</div>
 
 		{% for l in languages %}
+			{% if l.id == "en" %}
+				{% set lang_package_count = total_package_count %}
+			{% else %}
+				{% set lang_package_count = l.packages.filter_by(state='APPROVED').count() %}
+			{% endif %}
 			<a class="list-group-item list-group-item-action"
 					href="{{ url_for('admin.create_edit_language', id_=l.id) }}">
-				<div class="row">
-					<div class="col-2">
+				<div class="row align-items-center justify-content-center">
+					<div class="col-1">
 						{{ l.id }}
 					</div>
-					<div class="col">
+					<div class="col-2">
 						{{ l.title }}
+					</div>
+					<div class="col-1">
+						{{ lang_package_count }}
+					</div>
+					<div class="col">
+						<div class="progress">
+							<div class="progress-bar" role="progressbar"
+								style="width: {{ 100 * lang_package_count / total_package_count }}%;"
+								aria-valuenow="{{ lang_package_count }}" aria-valuemin="0" aria-valuemax="{{ total_package_count }}">
+							</div>
+						</div>
 					</div>
 					<div class="col-3 text-end">
 						{% if l.has_contentdb_translation %}

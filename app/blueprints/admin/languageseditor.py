@@ -21,7 +21,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField
 from wtforms.validators import InputRequired, Length, Optional
 
-from app.models import db, AuditSeverity, UserRank, Language
+from app.models import db, AuditSeverity, UserRank, Language, Package, PackageState
 from app.utils import add_audit_log, rank_required
 from . import bp
 
@@ -29,7 +29,9 @@ from . import bp
 @bp.route("/admin/languages/")
 @rank_required(UserRank.ADMIN)
 def language_list():
-	return render_template("admin/languages/list.html", languages=Language.query.all())
+	total_package_count = Package.query.filter_by(state=PackageState.APPROVED).count()
+	return render_template("admin/languages/list.html",
+		languages=Language.query.all(), total_package_count=total_package_count)
 
 
 class LanguageForm(FlaskForm):
