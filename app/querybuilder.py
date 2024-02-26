@@ -52,7 +52,8 @@ class QueryBuilder:
 			ret = f"{self.search} - {ret}"
 
 		if self.game:
-			ret = gettext("%(package_type)s for %(game_name)s", package_type=ret, game_name=self.game.title)
+			meta = self.game.get_translated(load_desc=False)
+			ret = gettext("%(package_type)s for %(game_name)s", package_type=ret, game_name=meta["title"])
 
 		return ret
 
@@ -132,6 +133,8 @@ class QueryBuilder:
 		if self.game:
 			self.game = Package.get_by_key(self.game)
 
+		self.has_lang = args.get("lang")
+
 		if cookies and request.cookies.get("hide_nonfree") == "1":
 			self.hide_nonfree = True
 
@@ -196,6 +199,9 @@ class QueryBuilder:
 
 		if self.game:
 			query = query.filter(Package.supported_games.any(game=self.game, supports=True))
+
+		if self.has_lang:
+			query = query.filter(Package.translations.any(language_id=self.has_lang))
 
 		for tag in self.tags:
 			query = query.filter(Package.tags.any(Tag.id == tag.id))
