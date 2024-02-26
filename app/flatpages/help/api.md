@@ -189,6 +189,7 @@ Supported query parameters:
 * `tag`:  Filter by tags.
 * `flag`: Filter to show packages with [Content Flags](/help/content_flags/).
 * `game`: Filter by [Game Support](/help/game_support/), ex: `Wuzzy/mineclone2`. (experimental, doesn't show items that support every game currently).
+* `lang`: Filter by translation support, eg: `en`/`de`/`ja`/`zh_TW`.
 * `random`:  When present, enable random ordering and ignore `sort`.
 * `limit`:  Return at most `limit` packages.
 * `hide`:  Hide content based on [Content Flags](/help/content_flags/).
