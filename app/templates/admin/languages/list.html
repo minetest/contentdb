@@ -12,12 +12,16 @@
 	<div class="list-group">
 		<div class="list-group-item">
 			<div class="row text-muted">
-				<div class="col-sm-2">
+				<div class="col-2">
 					{{ _("Id") }}
 				</div>
 
-				<div class="col-sm">
+				<div class="col">
 					{{ _("Title") }}
+				</div>
+
+				<div class="col-3 text-end">
+					{{ _("Has ContentDB translation?") }}
 				</div>
 			</div>
 		</div>
@@ -26,11 +30,18 @@
 			<a class="list-group-item list-group-item-action"
 					href="{{ url_for('admin.create_edit_language', id_=l.id) }}">
 				<div class="row">
-					<div class="col-sm-2">
+					<div class="col-2">
 						{{ l.id }}
 					</div>
-					<div class="col-sm">
+					<div class="col">
 						{{ l.title }}
+					</div>
+					<div class="col-3 text-end">
+						{% if l.has_contentdb_translation %}
+							<i class="fas fa-check text-success"></i>
+						{% else %}
+							<i class="fas fa-times text-danger"></i>
+						{% endif %}
 					</div>
 				</div>
 			</a>

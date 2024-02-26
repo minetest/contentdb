@@ -847,6 +847,17 @@ class Language(db.Model):
 	id = db.Column(db.String(10), primary_key=True)
 	title = db.Column(db.String(100), unique=True, nullable=False)
 
+	@property
+	def has_contentdb_translation(self):
+		return self.id in app.config["LANGUAGES"].keys()
+
+	def as_dict(self):
+		return {
+			"id": self.id,
+			"title": self.title,
+			"has_contentdb_translation": self.has_contentdb_translation,
+		}
+
 
 class PackageTranslation(db.Model):
 	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), primary_key=True)

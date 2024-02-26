@@ -466,31 +466,43 @@ Supported query parameters:
 
 ### Tags
 
-* GET `/api/tags/` ([View](/api/tags/)):  List of:
-    * `name`:  technical name.
-    * `title`:  human-readable title.
-    * `description`:  tag description or null.
-    * `views`: number of views of this tag.
+* GET `/api/tags/` ([View](/api/tags/))
+    * List of objects with:
+        * `name`:  technical name.
+        * `title`:  human-readable title.
+        * `description`:  tag description or null.
+        * `views`: number of views of this tag.
 
 ### Content Warnings
 
-* GET `/api/content_warnings/` ([View](/api/content_warnings/)):  List of:
-    * `name`:  technical name
-    * `title`:  human-readable title
-    * `description`:  tag description or null
+* GET `/api/content_warnings/` ([View](/api/content_warnings/))
+    * List of objects with 
+        * `name`:  technical name
+        * `title`:  human-readable title
+        * `description`:  tag description or null
 
 ### Licenses
 
-* GET `/api/licenses/` ([View](/api/licenses/)):  List of:
-    * `name`
-    * `is_foss`: whether the license is foss
+* GET `/api/licenses/` ([View](/api/licenses/))
+    * List of objects with: 
+        * `name`
+        * `is_foss`: whether the license is foss
 
 ### Minetest Versions
 
 * GET `/api/minetest_versions/` ([View](/api/minetest_versions/))
-    * `name`: Version name.
-    * `is_dev`: boolean, is dev version.
-    * `protocol_version`: protocol version umber.
+    * List of objects with: 
+        * `name`: Version name.
+        * `is_dev`: boolean, is dev version.
+        * `protocol_version`: protocol version number.
+
+### Languages
+
+* GET `/api/languages/` ([View](/api/languages/))
+    * List of objects with: 
+        * `id`: language code.
+        * `title`: native language name.
+        * `has_contentdb_translation`: whether ContentDB has been translated into this language.
 
 
 ## Misc
