@@ -38,6 +38,7 @@ def parse_tr(filepath: str) -> Translation:
 	assert filename_parts[-1] == "tr"
 	language = filename_parts[-2]
 	textdomain = ".".join(filename_parts[0:-2])
+	had_textdomain_comment = False
 
 	with open(filepath, "r", encoding="utf-8") as existing_file:
 		lines = existing_file.readlines()
@@ -54,9 +55,14 @@ def parse_tr(filepath: str) -> Translation:
 				# discard all subsequent textdomain lines
 				if line.startswith("# textdomain:"):
 					line_textdomain = line[13:].strip()
+					had_textdomain_comment = True
 					if line_textdomain != textdomain:
 						raise SyntaxError(
 							f"Line {line_index + 1}: The filename's textdomain ({textdomain}) should match the comment ({line_textdomain})")
+
+			elif not had_textdomain_comment:
+				raise SyntaxError(f"Missing `# textdomain: {textdomain}` at the top of the file")
+
 			else:
 				i = 0
 				had_equals = False
@@ -84,7 +90,7 @@ def parse_tr(filepath: str) -> Translation:
 									if int(code) != next_variable:
 										raise SyntaxError(
 											f"Line {line_index + 1}: Arguments out of order in source, found @{code} and expected @{next_variable}." +
-											"Arguments in source must be in increasing order, without gaps or repetitions, starting from 1")
+											" Arguments in source must be in increasing order, without gaps or repetitions, starting from 1")
 
 									next_variable += 1
 							else:

@@ -20,15 +20,14 @@ def test_parses_tr():
 	assert out.entries["Maybe @\n@=@"] == "Peut être @\n@=@"
 
 
-def test_parses_tr_infers_textdomain():
+def test_parses_tr_error_on_missing_textdomain():
 	dirname = os.path.dirname(__file__)
 	filepath = os.path.join(dirname, "no_textdomain_comment.fr.tr")
-	out = parse_tr(filepath)
 
-	assert out.language == "fr"
-	assert out.textdomain == "no_textdomain_comment"
-	assert len(out.entries) == 1
-	assert out.entries["Hello, World!"] == "Bonjour, Monde!"
+	with pytest.raises(SyntaxError) as e:
+		parse_tr(filepath)
+
+	assert str(e.value) == "Missing `# textdomain: no_textdomain_comment` at the top of the file"
 
 
 def test_parses_tr_error_on_textdomain_mismatch():
@@ -58,7 +57,7 @@ def test_parses_tr_error_on_bad_escape():
 	with pytest.raises(SyntaxError) as e:
 		parse_tr(filepath)
 
-	assert str(e.value) == "Line 1: Unknown escape character: x"
+	assert str(e.value) == "Line 2: Unknown escape character: x"
 
 
 def test_parses_tr_error_on_bad_args():
@@ -68,7 +67,7 @@ def test_parses_tr_error_on_bad_args():
 	with pytest.raises(SyntaxError) as e:
 		parse_tr(filepath)
 
-	assert "Line 1: Arguments out of order in source, found @5 and expected @2." in str(e.value)
+	assert "Line 2: Arguments out of order in source, found @5 and expected @2." in str(e.value)
 
 
 def test_parses_tr_error_on_unknown_arg():
@@ -78,4 +77,4 @@ def test_parses_tr_error_on_unknown_arg():
 	with pytest.raises(SyntaxError) as e:
 		parse_tr(filepath)
 
-	assert str(e.value) == "Line 1: Unknown argument @2 in translated string"
+	assert str(e.value) == "Line 2: Unknown argument @2 in translated string"
