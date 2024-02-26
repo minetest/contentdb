@@ -216,35 +216,32 @@ def post_release_check_update(self, release: PackageRelease, path):
 
 		# Update game support
 		if package.type == PackageType.MOD or package.type == PackageType.TXP:
-			try:
-				resolver = GameSupportResolver(db.session)
+			resolver = GameSupportResolver(db.session)
 
-				game_is_supported = {}
-				if "supported_games" in tree.meta:
-					for game in get_games_from_list(db.session, tree.meta["supported_games"]):
-						game_is_supported[game.id] = True
+			game_is_supported = {}
+			if "supported_games" in tree.meta:
+				for game in get_games_from_list(db.session, tree.meta["supported_games"]):
+					game_is_supported[game.id] = True
 
-					has_star = any(map(lambda x: x.strip() == "*", tree.meta["supported_games"]))
-					if has_star:
-						if package.type == PackageType.TXP or \
-							package.supported_games.filter(and_(
-								PackageGameSupport.confidence == 1, PackageGameSupport.supports == True)).count() > 0:
-							raise TaskError("The package depends on a game-specific mod, and so cannot support all games.")
+				has_star = any(map(lambda x: x.strip() == "*", tree.meta["supported_games"]))
+				if has_star:
+					if package.type == PackageType.TXP or \
+						package.supported_games.filter(and_(
+							PackageGameSupport.confidence == 1, PackageGameSupport.supports == True)).count() > 0:
+						raise TaskError("The package depends on a game-specific mod, and so cannot support all games.")
 
-						package.supports_all_games = True
-				if "unsupported_games" in tree.meta:
-					for game in get_games_from_list(db.session, tree.meta["unsupported_games"]):
-						game_is_supported[game.id] = False
+					package.supports_all_games = True
+			if "unsupported_games" in tree.meta:
+				for game in get_games_from_list(db.session, tree.meta["unsupported_games"]):
+					game_is_supported[game.id] = False
 
-				resolver.set_supported(package, game_is_supported, 10)
-				if package.type == PackageType.MOD:
-					resolver.update(package)
-			except LogicError as e:
-				raise TaskError(e.message)
+			resolver.set_supported(package, game_is_supported, 10)
+			if package.type == PackageType.MOD:
+				resolver.update(package)
 
 		return tree
 
-	except MinetestCheckError as err:
+	except (MinetestCheckError, TaskError, LogicError) as err:
 		db.session.rollback()
 
 		task_url = url_for('tasks.check', id=self.request.id)
