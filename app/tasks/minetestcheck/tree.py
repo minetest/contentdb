@@ -301,6 +301,14 @@ class PackageTreeNode:
 		for child in self.children:
 			child.validate()
 
+	def get_supported_languages(self) -> set[str]:
+		ret = set()
+		for name in glob.glob(f"{self.baseDir}/**/locale/*.*.tr", recursive=True):
+			parts = os.path.basename(name).split(".")
+			ret.add(parts[-2])
+
+		return ret
+
 	def get_translations(self, textdomain: str) -> list[Translation]:
 		ret = []
 

@@ -166,8 +166,23 @@ def post_release_check_update(self, release: PackageRelease, path):
 		# Read translations
 		allowed_languages = set([x[0] for x in db.session.query(Language.id).all()])
 		allowed_languages.discard("en")
-		raw_translations = tree.get_translations(tree.get("textdomain", tree.name))
 		conn = db.session.connection()
+
+		for language in tree.get_supported_languages():
+			if language not in allowed_languages:
+				continue
+
+			values = {
+				"package_id": package.id,
+				"language_id": language,
+			}
+			stmt = insert(PackageTranslation).values(**values)
+			stmt = stmt.on_conflict_do_nothing(
+				index_elements=[PackageTranslation.package_id, PackageTranslation.language_id],
+			)
+			conn.execute(stmt)
+
+		raw_translations = tree.get_translations(tree.get("textdomain", tree.name))
 		for raw_translation in raw_translations:
 			if raw_translation.language not in allowed_languages:
 				continue
@@ -176,19 +191,10 @@ def post_release_check_update(self, release: PackageRelease, path):
 				"title": raw_translation.entries.get(tree.get("title", package.title)),
 				"short_desc": raw_translation.entries.get(tree.get("description", package.short_desc)),
 			}
-			values = {
-				"package_id": package.id,
-				"language_id": raw_translation.language,
-				"title": to_update["title"],
-				"short_desc": to_update["short_desc"],
-			}
 
-			stmt = insert(PackageTranslation).values(**values)
-			stmt = stmt.on_conflict_do_update(
-				index_elements=[PackageTranslation.package_id, PackageTranslation.language_id],
-				set_=to_update
-			)
-			conn.execute(stmt)
+			PackageTranslation.query \
+				.filter_by(package_id=package.id, language_id=raw_translation.language) \
+				.update(to_update)
 
 		# Update min/max
 		if tree.meta.get("min_minetest_version"):
