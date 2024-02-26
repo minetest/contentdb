@@ -648,6 +648,12 @@ def versions():
 			for rel in MinetestRelease.query.all() if rel.get_actual() is not None])
 
 
+@bp.route("/api/languages/")
+@cors_allowed
+def languages():
+	return jsonify([x.as_dict() for x in Language.query.all()])
+
+
 @bp.route("/api/dependencies/")
 @cors_allowed
 def all_deps():
