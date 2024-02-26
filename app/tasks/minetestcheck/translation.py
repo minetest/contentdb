@@ -29,7 +29,6 @@ class Translation:
 		self.entries = entries
 
 
-
 def parse_tr(filepath: str) -> Translation:
 	entries = {}
 	filename = os.path.basename(filepath)
@@ -40,13 +39,13 @@ def parse_tr(filepath: str) -> Translation:
 	language = filename_parts[-2]
 	textdomain = ".".join(filename_parts[0:-2])
 
-	with open(filepath, "r", encoding='utf-8') as existing_file:
+	with open(filepath, "r", encoding="utf-8") as existing_file:
 		lines = existing_file.readlines()
 		line_index = 0
 		while line_index < len(lines):
 			line = lines[line_index].rstrip('\n')
 
-			if line == "":
+			if line.strip() == "":
 				pass
 
 			# Comment lines
@@ -63,6 +62,7 @@ def parse_tr(filepath: str) -> Translation:
 				had_equals = False
 				source = ""
 				current_part = ""
+				next_variable = 1
 				while i < len(line):
 					if line[i] == "@":
 						if i + 1 < len(line):
@@ -76,6 +76,17 @@ def parse_tr(filepath: str) -> Translation:
 								current_part += "\n"
 							elif code.isdigit():
 								current_part += "@" + code
+								if had_equals:
+									if int(code) >= next_variable:
+										raise SyntaxError(
+											f"Line {line_index + 1}: Unknown argument @{code} in translated string")
+								else:
+									if int(code) != next_variable:
+										raise SyntaxError(
+											f"Line {line_index + 1}: Arguments out of order in source, found @{code} and expected @{next_variable}." +
+											"Arguments in source must be in increasing order, without gaps or repetitions, starting from 1")
+
+									next_variable += 1
 							else:
 								raise SyntaxError(f"Line {line_index + 1}: Unknown escape character: {code}")
 
