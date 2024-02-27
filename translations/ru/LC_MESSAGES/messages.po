@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-12-30 16:46+0000\n"
-"PO-Revision-Date: 2023-10-27 12:13+0000\n"
-"Last-Translator: Ярослав Рукавицын <skybuilderoffical@gmail.com>\n"
+"PO-Revision-Date: 2024-02-04 09:01+0000\n"
+"Last-Translator: Mikhail <EvPix@users.noreply.hosted.weblate.org>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -94,7 +95,7 @@ msgstr "Частный"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "Прикрепить к моему профилю"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
@@ -152,15 +153,15 @@ msgstr "Описание"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "Перенаправление URL"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "Тип приложения"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Отозвать все пользовательские токены"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -177,7 +178,7 @@ msgstr "Выпуски"
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr "Снимки"
+msgstr "Скриншоты"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
@@ -987,7 +988,7 @@ msgstr "API токены"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "Приложение OAuth2"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1110,7 +1111,7 @@ msgstr "Слишком много запросов, пожалуйста, под
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "файл изображения PNG, JPEG или WebP"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1510,11 +1511,11 @@ msgstr "Создать токен API"
 #: app/templates/api/create_edit_token.html:25
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
-msgstr ""
+msgstr "Этот токен был создан приложением '%(title)s' от %(author)s."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Нажмите \"Удалить\", чтобы отозвать доступ."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1573,7 +1574,7 @@ msgstr "Документация API"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Приложение"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1595,7 +1596,7 @@ msgstr "Пользователи не будут перенаправлены п
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Для этого необходимо, чтобы коллекция была публичной"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
@@ -2281,42 +2282,42 @@ msgstr "Уведомления Редактор/Проверяющий"
 #: app/templates/oauth/authorize.html:4
 #, python-format
 msgid "Authorize %(title)s"
-msgstr ""
+msgstr "Разрешить %(title)s"
 
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "хочет получить доступ к вашему профилю %(name)s"
 
 #: app/templates/oauth/authorize.html:46
 msgid "Verified application"
-msgstr ""
+msgstr "Проверенное приложение"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB доверяет этому приложению"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
-msgstr ""
+msgstr "Только публичные данные"
 
 #: app/templates/oauth/authorize.html:63
 msgid "Read-only access to your public data"
-msgstr ""
+msgstr "Доступ только для чтения к вашим публичным данным"
 
 #: app/templates/oauth/authorize.html:76
 msgid "Authorize"
-msgstr ""
+msgstr "Разрешить"
 
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "О %(title)s"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
 msgid "Application isn't approved yet"
-msgstr ""
+msgstr "Приложение еще не одобрено"
 
 #: app/templates/oauth/authorize.html:93
 #: app/templates/oauth/create_edit.html:28
@@ -2324,54 +2325,59 @@ msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
 msgstr ""
+"Чтобы разрешить вход в систему другим пользователям, кроме вас, вам нужно "
+"связаться с администрацией ContentDB и попросить их одобрить ваше приложение."
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
-msgstr ""
+msgstr "Создание клиента OAuth"
 
 #: app/templates/oauth/create_edit.html:36
 #, python-format
 msgid "Your application has %(count)d users"
-msgstr ""
+msgstr "У вашего приложения %(count)d пользователей"
 
 #: app/templates/oauth/create_edit.html:37
 msgid "Revoke all user tokens"
-msgstr ""
+msgstr "Отозвать все пользовательские токены"
 
 #: app/templates/oauth/create_edit.html:51
 msgid ""
 "You must keep the secret safe. If you are unable, set the app type to "
 "'client-side'."
 msgstr ""
+"Вы должны хранить секрет в безопасности. Если у вас не получается, "
+"установите тип приложения на \"client-side\"."
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
-msgstr ""
+msgstr "Пример URL-адреса авторизации"
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
 msgstr ""
+"Показывается пользователям, когда вы запрашиваете доступ к их учетной записи"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
-msgstr ""
+msgstr "Где вы будете хранить свой client_secret?"
 
 #: app/templates/oauth/list_clients.html:4
 #, python-format
 msgid "OAuth2 Applications | %(username)s"
-msgstr ""
+msgstr "Приложения OAuth2 | %(username)s"
 
 #: app/templates/oauth/list_clients.html:9
 msgid "OAuth2 Documentation"
-msgstr ""
+msgstr "Документация по OAuth2"
 
 #: app/templates/oauth/list_clients.html:16
 msgid "Unpublished"
-msgstr ""
+msgstr "Неопубликованное"
 
 #: app/templates/oauth/list_clients.html:22
 msgid "No applications created"
-msgstr ""
+msgstr "Приложения не созданы"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2806,7 +2812,7 @@ msgstr "Поддерживаемые версии Minetest"
 #: app/templates/packages/release_new.html:75
 #, python-format
 msgid "Are you sure your package doesn't work on versions after %(version)s?"
-msgstr ""
+msgstr "Вы уверены, что ваш пакет не работает на версиях после %(version)s?"
 
 #: app/templates/packages/release_edit.html:62
 #: app/templates/packages/release_new.html:77
@@ -2814,6 +2820,8 @@ msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Minetest versions."
 msgstr ""
+"Устанавливайте максимальную версию только в том случае, если вы знаете, что "
+"она не будет работать на более новых версиях Minetest."
 
 #: app/templates/packages/release_edit.html:63
 #: app/templates/packages/release_new.html:78
@@ -2821,6 +2829,8 @@ msgid ""
 "Don't set the maximum version just because you haven't tested it on newer"
 " versions."
 msgstr ""
+"Не устанавливайте максимальную версию только потому, что вы не тестировали "
+"ее на более новых версиях."
 
 #: app/templates/packages/release_edit.html:67
 #: app/templates/packages/release_new.html:88
@@ -3035,6 +3045,8 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)"
 msgstr ""
+"Общее использование памяти составляет %(total_size)d МБ (релизы "
+"%(release_size)d МБ, скриншоты %(screenshot_size)d МБ)"
 
 #: app/templates/packages/remove.html:9
 #, python-format
@@ -3068,12 +3080,12 @@ msgstr ""
 
 #: app/templates/packages/remove.html:28
 msgid "and"
-msgstr ""
+msgstr "и"
 
 #: app/templates/packages/remove.html:34
 #, python-format
 msgid "Removing this package will break the following mods: %(names)s"
-msgstr ""
+msgstr "Удаление этого пакета приведет к поломке следующих модов: %(names)s"
 
 #: app/templates/packages/remove.html:41
 msgid "Reason"
@@ -4215,7 +4227,7 @@ msgstr "GitHub"
 
 #: app/templates/users/modtools.html:12
 msgid "Storage"
-msgstr ""
+msgstr "Хранилище"
 
 #: app/templates/users/modtools.html:20
 #, python-format
@@ -4223,11 +4235,13 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)."
 msgstr ""
+"Общее использование памяти составляет %(total_size)d МБ (релизы "
+"%(release_size)d МБ, скриншоты %(screenshot_size)d МБ)."
 
 #: app/templates/users/modtools.html:23
 #, python-format
 msgid "%(releases)d releases and %(screenshots)d screenshots."
-msgstr ""
+msgstr "%(releases)d релизов и %(screenshots)d скриншотов."
 
 #: app/templates/users/modtools.html:28
 msgid "Edit Account"
@@ -4866,4 +4880,3 @@ msgstr ""
 
 #~ msgid "a PNG or JPG image file"
 #~ msgstr "PNG или JPG файл изображения"
-
