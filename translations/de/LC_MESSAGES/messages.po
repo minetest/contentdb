@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-12-30 16:46+0000\n"
-"PO-Revision-Date: 2023-11-03 17:32+0000\n"
+"PO-Revision-Date: 2024-02-20 00:16+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
+"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
+"contentdb/de/>\n"
 "Language: de\n"
-"Language-Team: German "
-"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -83,7 +84,7 @@ msgstr "Kurze Beschreibung"
 
 #: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
-msgstr "Seitenanzahl"
+msgstr "Seiteninhalt"
 
 #: app/blueprints/collections/__init__.py:82
 #: app/blueprints/threads/__init__.py:283
@@ -93,7 +94,7 @@ msgstr "Privat"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "An mein Profil gepinnt"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
@@ -107,11 +108,11 @@ msgstr ""
 
 #: app/blueprints/collections/__init__.py:307
 msgid "Added package to collection"
-msgstr "Paket der Sammlung hinzugefügt"
+msgstr "Paket wurde zur Sammlung hinzugefügt"
 
 #: app/blueprints/collections/__init__.py:309
 msgid "Removed package from collection"
-msgstr "Paket von Sammlung entfernt"
+msgstr "Paket aus Sammlung entfernt"
 
 #: app/blueprints/collections/__init__.py:328
 msgid "Added package to favorites collection"
@@ -123,7 +124,7 @@ msgstr "(Öffentlich, ändern von Profil &gt; Meine Sammlungen)"
 
 #: app/blueprints/collections/__init__.py:334
 msgid "Removed package from favorites collection"
-msgstr "Paket von Favoritensammlung entfernt"
+msgstr "Paket aus Favoritensammlung entfernt"
 
 #: app/blueprints/github/__init__.py:52
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -153,15 +154,15 @@ msgstr "Beschreibung"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "Weiterleitungs-URL"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "App-Typ"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Alle Benutzer-Tokens widerrufen"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -999,7 +1000,7 @@ msgstr "API-Tokens"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "OAuth2-Anwendungen"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1126,7 +1127,7 @@ msgstr "Zu viele Anfragen, bitte warten Sie, bevor Sie es erneut versuchen"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "eine PNG-, JPEG-, oder WebP-Bilddatei"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1527,10 +1528,11 @@ msgstr "API-Token erstellen"
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
 msgstr ""
+"Dieses Token wurde von der Anwendung „%(title)s“ von %(author)s erstellt."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Klicken Sie auf „Löschen“, um den Zugriff zu widerrufen."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1589,7 +1591,7 @@ msgstr "API-Dokumentation"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Anwendung"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1611,7 +1613,7 @@ msgstr "Benutzer werden nicht weitergeleitet, wenn sie zur alten URL gehen"
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Dies erfordert, dass die Sammlung öffentlich ist"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
@@ -2307,42 +2309,42 @@ msgstr "Bearbeiter/Genehmiger-Nachrichten"
 #: app/templates/oauth/authorize.html:4
 #, python-format
 msgid "Authorize %(title)s"
-msgstr ""
+msgstr "%(title)s autorisieren"
 
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "möchte auf Ihr „%(name)s“-Konto zugreifen"
 
 #: app/templates/oauth/authorize.html:46
 msgid "Verified application"
-msgstr ""
+msgstr "Verifizierte Anwendung"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB vertraut dieser Anwendung"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
-msgstr ""
+msgstr "Nur öffentliche Daten"
 
 #: app/templates/oauth/authorize.html:63
 msgid "Read-only access to your public data"
-msgstr ""
+msgstr "Nur-Lesen-Zugriff auf Ihre öffentlichen Daten"
 
 #: app/templates/oauth/authorize.html:76
 msgid "Authorize"
-msgstr ""
+msgstr "Autorisieren"
 
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "Über %(title)s"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
 msgid "Application isn't approved yet"
-msgstr ""
+msgstr "Anwendung ist noch nicht genehmigt"
 
 #: app/templates/oauth/authorize.html:93
 #: app/templates/oauth/create_edit.html:28
@@ -2350,54 +2352,59 @@ msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
 msgstr ""
+"Um Benutzern, die nicht Sie sind, zu erlauben, sich einzuloggen, müssen Sie "
+"die ContentDB-Mitarbeiter kontaktieren und sie darum beten, Ihre App zu "
+"genehmigen."
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
-msgstr ""
+msgstr "OAuth-Client erstellen"
 
 #: app/templates/oauth/create_edit.html:36
 #, python-format
 msgid "Your application has %(count)d users"
-msgstr ""
+msgstr "Ihre Anwendung hat %(count)d Benutzer"
 
 #: app/templates/oauth/create_edit.html:37
 msgid "Revoke all user tokens"
-msgstr ""
+msgstr "Alle User-Tokens widerrufen"
 
 #: app/templates/oauth/create_edit.html:51
 msgid ""
 "You must keep the secret safe. If you are unable, set the app type to "
 "'client-side'."
 msgstr ""
+"Sie müssen das Geheimnis sicher bewahren. Falls Sie das nicht können, setzen "
+"Sie den App-Typ auf „clientseitig“."
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
-msgstr ""
+msgstr "Beispiel-Autorisierungs-URL"
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
-msgstr ""
+msgstr "An Benutzer angezeigt, wenn Sie Zugriff auf ihren Account erbeten"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
-msgstr ""
+msgstr "Wo werden Sie Ihren client_secret aufbewahren?"
 
 #: app/templates/oauth/list_clients.html:4
 #, python-format
 msgid "OAuth2 Applications | %(username)s"
-msgstr ""
+msgstr "OAuth2-Anwendungen | %(username)s"
 
 #: app/templates/oauth/list_clients.html:9
 msgid "OAuth2 Documentation"
-msgstr ""
+msgstr "OAuth2-Dokumentation"
 
 #: app/templates/oauth/list_clients.html:16
 msgid "Unpublished"
-msgstr ""
+msgstr "Nicht publiziert"
 
 #: app/templates/oauth/list_clients.html:22
 msgid "No applications created"
-msgstr ""
+msgstr "Keine Anwendungen erstellt"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2843,6 +2850,8 @@ msgstr "Unterstützte Minetest-Versionen"
 #, python-format
 msgid "Are you sure your package doesn't work on versions after %(version)s?"
 msgstr ""
+"Sind Sie sich sicher, dass Ihre Anwendung in Versionen nach %(version)s "
+"nicht funktioniert?"
 
 #: app/templates/packages/release_edit.html:62
 #: app/templates/packages/release_new.html:77
@@ -2850,6 +2859,8 @@ msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Minetest versions."
 msgstr ""
+"Setzen Sie nur die maximale Version, wenn Sie wissen, dass es nicht in "
+"neueren Minetest-Versionen funktioniert."
 
 #: app/templates/packages/release_edit.html:63
 #: app/templates/packages/release_new.html:78
@@ -2857,6 +2868,8 @@ msgid ""
 "Don't set the maximum version just because you haven't tested it on newer"
 " versions."
 msgstr ""
+"Setzen Sie nicht die maximale Version, nur wenn Sie es nicht in neueren "
+"Versionen getestet haben."
 
 #: app/templates/packages/release_edit.html:67
 #: app/templates/packages/release_new.html:88
@@ -3076,6 +3089,8 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)"
 msgstr ""
+"Gesamtspeicherplatzbedarf beträgt %(total_size)d MB (Releases: "
+"%(release_size)d MB, Screenshots: %(screenshot_size)d MB)"
 
 #: app/templates/packages/remove.html:9
 #, python-format
@@ -3110,12 +3125,13 @@ msgstr ""
 
 #: app/templates/packages/remove.html:28
 msgid "and"
-msgstr ""
+msgstr "und"
 
 #: app/templates/packages/remove.html:34
 #, python-format
 msgid "Removing this package will break the following mods: %(names)s"
 msgstr ""
+"Das Entfernen dieses Pakets wird die folgenden Mods kaputt machen: %(names)s"
 
 #: app/templates/packages/remove.html:41
 msgid "Reason"
@@ -4274,7 +4290,7 @@ msgstr "GitHub"
 
 #: app/templates/users/modtools.html:12
 msgid "Storage"
-msgstr ""
+msgstr "Speicherplatz"
 
 #: app/templates/users/modtools.html:20
 #, python-format
@@ -4282,11 +4298,13 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)."
 msgstr ""
+"Gesamtspeicherplatzbedarf beträgt %(total_size)d MB (Releases: "
+"%(release_size)d MB, Screenshots: %(screenshot_size)d MB)."
 
 #: app/templates/users/modtools.html:23
 #, python-format
 msgid "%(releases)d releases and %(screenshots)d screenshots."
-msgstr ""
+msgstr "%(releases)d Releases und %(screenshots)d Screenshots."
 
 #: app/templates/users/modtools.html:28
 msgid "Edit Account"
@@ -4942,4 +4960,3 @@ msgstr ""
 
 #~ msgid "a PNG or JPG image file"
 #~ msgstr "eine PNG- oder JPG-Bilddatei"
-
