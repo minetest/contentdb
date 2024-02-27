@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-12-30 16:46+0000\n"
-"PO-Revision-Date: 2023-11-26 01:22+0000\n"
-"Last-Translator: nyommer <jishnu.ifeoluwa@fullangle.org>\n"
+"PO-Revision-Date: 2024-01-02 11:09+0000\n"
+"Last-Translator: Unacceptium <unacceptium@proton.me>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/hu/>\n"
 "Language: hu\n"
-"Language-Team: Hungarian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/hu/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -93,7 +94,7 @@ msgstr "Privát"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "Rögzítve a profilomhoz"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
@@ -151,15 +152,16 @@ msgstr "Leírás"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "URL átirányítás"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "App Típusa"
 
 #: app/blueprints/oauth/__init__.py:257
+#, fuzzy
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Elvette a felhasználó összes zsetonját"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -395,6 +397,8 @@ msgstr "A játéktámogatás szerkesztéséhez legalább egy kiadásra van szük
 #: app/blueprints/packages/packages.py:709
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
+"A Mod(csomag)nak tartalmaznia kell legalább egy modot. készítsen egy új "
+"kiadást"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -981,7 +985,7 @@ msgstr "API-Tokenek"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "OAuth2 Applikációk"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1104,7 +1108,7 @@ msgstr "Túl sok kérés. Kérjük, várjon, mielőtt újra próbálkozna"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "Egy PNG, JPEG vagy WebP képfájl"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1506,11 +1510,11 @@ msgstr "API token létrehozása"
 #: app/templates/api/create_edit_token.html:25
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
-msgstr ""
+msgstr "Ez a zseton a(z) %(title)s alkalmazásban %(author)s-tól megtalálható."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Kattintson a 'Törlés're a hozzáférés megtagadásához."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1523,6 +1527,8 @@ msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
+"Legyen óvatos, kivel osztja meg zsetonjait, mert Ön a felelős a fiókja "
+"tetteiért."
 
 #: app/templates/api/create_edit_token.html:36
 msgid "Access Token"
@@ -1543,12 +1549,12 @@ msgstr "Visszaállítás"
 
 #: app/templates/api/create_edit_token.html:56
 msgid "Human-readable name to tell tokens apart."
-msgstr ""
+msgstr "Ember által olvasható név, amely megkülönbözteti a tokeneket."
 
 #: app/templates/api/create_edit_token.html:57
-#, fuzzy
 msgid "Recommended: Only allows token to interact with a particular package."
-msgstr "Ajánlott:csak akkor enged zsetonokat, ha egy adott csomaggal interaktál"
+msgstr ""
+"Ajánlott: csak akkor enged zsetonokat, ha egy adott csomaggal interaktál."
 
 #: app/templates/api/list_tokens.html:4
 #, python-format
@@ -1569,7 +1575,7 @@ msgstr "API Dokumentáció"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Applikáció"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1583,20 +1589,20 @@ msgstr "Szerkesztés"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "Új Kollekció"
 
 #: app/templates/collections/create_edit.html:32
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "A felhasználók nem lesznek átirányítva, ha a régi linkre mennek"
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Ehhez a Kollekció nyilvános kell legyen"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
 msgid "No results"
-msgstr ""
+msgstr "Nincs találat"
 
 #: app/templates/collections/create_edit.html:76
 #: app/templates/packages/remove.html:58 app/templates/packages/view.html:127
@@ -1605,23 +1611,23 @@ msgstr "Törlés"
 
 #: app/templates/collections/create_edit.html:89
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "Kicseréoheti a leírást sajátjával"
 
 #: app/templates/collections/create_edit.html:103
 msgid "Are you sure you want to remove {title}?"
-msgstr ""
+msgstr "Biztos törölni szeretné {title}?"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Ezen kollekció törlése:\"%(title)s\" %(author)s-tól"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
 #: app/templates/threads/delete_thread.html:16
 #: app/templates/users/delete.html:13
 msgid "Deleting is permanent"
-msgstr ""
+msgstr "A törlés végleges"
 
 #: app/templates/collections/delete.html:13
 #: app/templates/oauth/authorize.html:71 app/templates/packages/remove.html:56
@@ -1635,28 +1641,28 @@ msgstr "Mégse"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "%(author)s Kollekciója"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "Nincs Kollekció"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "addja hozzá %(package_title)s-t egy Kollekcióhoz"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "Kollekció létrehozása"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "Nincs Kollekció"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "Másolat készítése"
 
 #: app/templates/collections/view.html:54
 #, python-format
@@ -1890,19 +1896,19 @@ msgstr ""
 
 #: app/templates/macros/package_approval.html:66
 msgid "Please wait for the package to be approved."
-msgstr ""
+msgstr "Kérjük várjon, amíg a csomagot engedélyezik."
 
 #: app/templates/macros/package_approval.html:70
 msgid "You can now submit this package for approval if you're ready."
-msgstr ""
+msgstr "Mostmár elküldheti engedélyezésre a csomagot, ha készen áll."
 
 #: app/templates/macros/package_approval.html:72
 msgid "This package can be submitted for approval when ready."
-msgstr ""
+msgstr "Ez a csomag elküldhető engedélyezésre, ha készen áll."
 
 #: app/templates/macros/package_approval.html:102
 msgid "Please make sure that this package has the right to the names it uses."
-msgstr ""
+msgstr "Kérjük ellenőrizze, hogy a csomagnak van joga ezt a nevet használni."
 
 #: app/templates/macros/package_approval.html:104
 #, python-format
@@ -4277,10 +4283,9 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
-"ContentDB nem tud több \"elfelejtett jelszó\" és hasonló email-eket "
+"ContentDB nem tud több \"elfelejtett jelszó\" és hasonló fontos email-eket "
 "küldeni.\n"
-"                                          Ajánlott az email beállítások "
-"módosítása."
+"\t\t\t\t\tAjánlott az email-értesítések beállítások módosítása."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
@@ -4661,4 +4666,3 @@ msgstr ""
 
 #~ msgid "a PNG or JPG image file"
 #~ msgstr "PNG vagy JPG képfájl"
-
