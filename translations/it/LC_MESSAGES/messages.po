@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-12-30 16:46+0000\n"
-"PO-Revision-Date: 2023-12-27 00:11+0000\n"
-"Last-Translator: Giov4 <brancacciogiovanni1@gmail.com>\n"
+"PO-Revision-Date: 2024-01-18 07:31+0000\n"
+"Last-Translator: Filippo Alfieri <firealphat0mb@gmail.com>\n"
+"Language-Team: Italian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/it/>\n"
 "Language: it\n"
-"Language-Team: Italian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/it/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -93,7 +94,7 @@ msgstr "Privato"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "Fissato nel mio profilo"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
@@ -135,7 +136,7 @@ msgstr "Profilo collegato a GitHub"
 
 #: app/blueprints/github/__init__.py:79
 msgid "GitHub account is already associated with another user"
-msgstr "L'account GitHub è già associato ad un altrə utente"
+msgstr "L'account GitHub è già associato ad un altro utente"
 
 #: app/blueprints/github/__init__.py:85
 msgid "Unable to find an account for that GitHub user"
@@ -157,11 +158,11 @@ msgstr ""
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "Aggiungi Tipo"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Revocati tutti i gettoni utente"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -178,7 +179,7 @@ msgstr "Rilasci"
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr "Catture Schermo"
+msgstr "Screenshot"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
@@ -403,6 +404,8 @@ msgstr ""
 #: app/blueprints/packages/packages.py:709
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
+"I Mod(pack) devono contenere almeno una mod. Per favore crea un nuovo "
+"rilascio"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -833,7 +836,7 @@ msgstr ""
 
 #: app/blueprints/users/account.py:366
 msgid "You may now log in"
-msgstr "Ora potete entrare"
+msgstr "Ora potete accedere"
 
 #: app/blueprints/users/account.py:374
 msgid "Send"
@@ -880,7 +883,7 @@ msgstr "Impossibile ottenere la firma del forum - l'utente esiste?"
 
 #: app/blueprints/users/claim.py:105
 msgid "Unable to login as user"
-msgstr "Impossibile entrare come utente"
+msgstr "Impossibile accedere come utente"
 
 #: app/blueprints/users/claim.py:111
 msgid "Could not find the key in your signature!"
@@ -996,7 +999,7 @@ msgstr "Gettoni API"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "Applicazioni OAuth2"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1074,7 +1077,7 @@ msgstr "Le seguenti dipendenze devono prima essere aggiunte a ContentDB: %(deps)
 #: app/logic/package_validator.py:51
 #: app/templates/macros/package_approval.html:41
 msgid "You need to add at least one screenshot."
-msgstr "Devi aggiungere almeno una cattura dello schermo."
+msgstr "Devi aggiungere almeno uno screenshot."
 
 #: app/logic/package_validator.py:54
 #: app/templates/macros/package_approval.html:49
@@ -1121,7 +1124,7 @@ msgstr "Troppe richieste, aspetta un po' prima di riprovare per favore"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "un file immagine PNG, JPG, o WebP"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1129,8 +1132,8 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
-"La cattura dello schermo è troppo piccola, dovrebbe avere una dimensione "
-"di almeno %(width)s a %(height)s pixel"
+"Lo screenshot è troppo piccolo, dovrebbe avere una dimensione di almeno "
+"%(width)s a %(height)s pixel"
 
 #: app/logic/uploads.py:55
 #, python-format
@@ -1521,10 +1524,11 @@ msgstr "Crea un Gettone API"
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
 msgstr ""
+"Questo gettone è stato creato dall'applicazione'%(title)s' di %(author)s."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Clicca 'Cancella' per revocare l'accesso."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1583,7 +1587,7 @@ msgstr "Documentazione dell'API"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Applicazione"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1605,7 +1609,7 @@ msgstr "Lɜ utenti non verranno reindirizzatɜ quando accederanno al vecchio URL
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Questo richiede che la raccolta sia pubblica"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
@@ -2293,42 +2297,42 @@ msgstr "Notifiche dallз Addettз alla Modifica/Approvatorз"
 #: app/templates/oauth/authorize.html:4
 #, python-format
 msgid "Authorize %(title)s"
-msgstr ""
+msgstr "Autorizza %(title)s"
 
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "vuole accedere al tuo account %(name)s"
 
 #: app/templates/oauth/authorize.html:46
 msgid "Verified application"
-msgstr ""
+msgstr "Applicazione verificata"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB si fida di questa applicazione"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
-msgstr ""
+msgstr "Solo dati pubblici"
 
 #: app/templates/oauth/authorize.html:63
 msgid "Read-only access to your public data"
-msgstr ""
+msgstr "Accesso in sola lettura ai tuoi dati pubblici"
 
 #: app/templates/oauth/authorize.html:76
 msgid "Authorize"
-msgstr ""
+msgstr "Autorizza"
 
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "Informazioni su %(title)s"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
 msgid "Application isn't approved yet"
-msgstr ""
+msgstr "L'applicazione non è ancora stata approvata"
 
 #: app/templates/oauth/authorize.html:93
 #: app/templates/oauth/create_edit.html:28
@@ -2336,19 +2340,21 @@ msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
 msgstr ""
+"Per permettere ad altri utenti oltre a te di accedere, devi contattare lo "
+"staff di ContentDB e chiedere loro di approvare la tua app."
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
-msgstr ""
+msgstr "Crea un Cliet OAuth"
 
 #: app/templates/oauth/create_edit.html:36
 #, python-format
 msgid "Your application has %(count)d users"
-msgstr ""
+msgstr "La tua applicazione ha %(count)d utenti"
 
 #: app/templates/oauth/create_edit.html:37
 msgid "Revoke all user tokens"
-msgstr ""
+msgstr "Revoca tutti i gettoni utente"
 
 #: app/templates/oauth/create_edit.html:51
 msgid ""
@@ -2358,11 +2364,11 @@ msgstr ""
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
-msgstr ""
+msgstr "Esempio di URL di autorizzazione"
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
-msgstr ""
+msgstr "Mostrato agli utenti quando richiedi l'accesso ai loro account"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
@@ -2371,19 +2377,19 @@ msgstr ""
 #: app/templates/oauth/list_clients.html:4
 #, python-format
 msgid "OAuth2 Applications | %(username)s"
-msgstr ""
+msgstr "Applicazioni OAuth2 | %(username)s"
 
 #: app/templates/oauth/list_clients.html:9
 msgid "OAuth2 Documentation"
-msgstr ""
+msgstr "Documentazione OAuth2"
 
 #: app/templates/oauth/list_clients.html:16
 msgid "Unpublished"
-msgstr ""
+msgstr "Non pubblico"
 
 #: app/templates/oauth/list_clients.html:22
 msgid "No applications created"
-msgstr ""
+msgstr "Nessuna applicazione creata"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2566,8 +2572,8 @@ msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
 msgstr ""
-"Sarà permesso loro di modificare il contenuto, creare rilasci e catture "
-"dello schermo, e leggere le discussioni private, rispetto al loro rango."
+"Sarà permesso loro di modificare il contenuto, creare rilasci e screenshot, "
+"e leggere le discussioni private, rispetto al loro rango."
 
 #: app/templates/packages/edit_maintainers.html:13
 msgid ""
@@ -2596,6 +2602,8 @@ msgid ""
 "Game support is configured using the package's .conf file. See the "
 "documentation for more info"
 msgstr ""
+"Il supporto ai giochi è impostato usando il file .conf del contenuto. Vedi "
+"la documentazione per maggiori informazioni"
 
 #: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:212
@@ -2608,7 +2616,7 @@ msgstr "Supportato?"
 
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
-msgstr ""
+msgstr "Supporta tutti i giochi (se non escluso da unsupported_games)"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -2616,16 +2624,18 @@ msgstr "Rilevato dalle dipendenze"
 
 #: app/templates/packages/game_support.html:49
 msgid "Overridden on ContentDB"
-msgstr ""
+msgstr "Sovrascritto su ContentDB"
 
 #: app/templates/packages/game_support.html:68
 msgid "Unknown. Please either add supported games or check 'Supports all games'"
 msgstr ""
+"Sconosciuto. Si prega di aggiungere i giochi supportati o selezionare "
+"'Supporta tutti i giochi'"
 
 #: app/templates/packages/game_support.html:75
 #, python-format
 msgid "Generated %(conf)s lines"
-msgstr ""
+msgstr "Linee %(conf)s generate"
 
 #: app/templates/packages/game_support.html:89
 msgid ""
@@ -2640,26 +2650,32 @@ msgid ""
 "When checked, this indicates that this package should support all games, "
 "unless excluded by unsupported_games."
 msgstr ""
+"Se selezionato, indica che questo contenuto dovrebbe supportare tutti i "
+"giochi, a meno che non venga escluso da unsupported_games."
 
 #: app/templates/packages/game_support.html:97
 msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
 msgstr ""
+"Lo puoi selezionare e specificare comunque i giochi che hai testato in "
+"supported_games."
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
-msgstr ""
+msgstr "I pacchetti texture non possono supportare tutti i giochi."
 
 #: app/templates/packages/game_support.html:105
 msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
 msgstr ""
+"Il contenuto dipende da una mod specifica di un gioco, e non può supportare "
+"tutti i giochi."
 
 #: app/templates/packages/game_support.html:111
 msgid "Overrides"
-msgstr ""
+msgstr "Sovrascrive"
 
 #: app/templates/packages/game_support.html:114
 #, python-format
@@ -2667,6 +2683,8 @@ msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
 msgstr ""
+"È opportuno aggiungere i giochi supportati/non supportati a %(conf)s, ma "
+"intanto li puoi aggiungere qui."
 
 #: app/templates/packages/game_support.html:116
 #, python-format
@@ -2674,11 +2692,13 @@ msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
 msgstr ""
+"L'aggiunta a %(conf)s permette di informare anche gli utenti che non "
+"installano tramite ContentDB."
 
 #: app/templates/packages/game_support.html:119
 #: app/templates/packages/game_support.html:120
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
-msgstr ""
+msgstr "Nomi separati da virgole, ad es.: minetest_game, nodecore"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
@@ -2808,6 +2828,8 @@ msgstr "Versioni di Minetest supportate"
 #, python-format
 msgid "Are you sure your package doesn't work on versions after %(version)s?"
 msgstr ""
+"Sei sicurə che i tuoi contenuti non funzionano su versioni successive a "
+"%(version)s?"
 
 #: app/templates/packages/release_edit.html:62
 #: app/templates/packages/release_new.html:77
@@ -2815,6 +2837,8 @@ msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Minetest versions."
 msgstr ""
+"Inserisci la versione massima solo se sai che non funziona su versioni di "
+"Minetest più recenti."
 
 #: app/templates/packages/release_edit.html:63
 #: app/templates/packages/release_new.html:78
@@ -2822,6 +2846,8 @@ msgid ""
 "Don't set the maximum version just because you haven't tested it on newer"
 " versions."
 msgstr ""
+"Non inserire una versione massima solo perché non lo hai testato su versioni "
+"di Minetest più recenti."
 
 #: app/templates/packages/release_edit.html:67
 #: app/templates/packages/release_new.html:88
@@ -3042,6 +3068,8 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)"
 msgstr ""
+"Lo spazio di archiviazione totale utilizzato è %(total_size)d MB (rilasci "
+"%(release_size)d MB, screenshot %(screenshot_size)d MB)"
 
 #: app/templates/packages/remove.html:9
 #, python-format
@@ -3075,12 +3103,12 @@ msgstr ""
 
 #: app/templates/packages/remove.html:28
 msgid "and"
-msgstr ""
+msgstr "e"
 
 #: app/templates/packages/remove.html:34
 #, python-format
 msgid "Removing this package will break the following mods: %(names)s"
-msgstr ""
+msgstr "Rimuovere questo contenuto romperà le seguenti mod: %(names)s"
 
 #: app/templates/packages/remove.html:41
 msgid "Reason"
@@ -3092,7 +3120,7 @@ msgstr "Motivo del rifiuto / eliminazione, sarà mostrato nel log di audit"
 
 #: app/templates/packages/remove.html:61
 msgid "Unpublish"
-msgstr ""
+msgstr "Rendi non pubblico"
 
 #: app/templates/packages/review_create_edit.html:17
 #, python-format
@@ -3132,12 +3160,12 @@ msgstr "Voti della recensione su %(title)s di %(author)s"
 #: app/templates/packages/screenshot_edit.html:4
 #: app/templates/packages/screenshot_edit.html:11
 msgid "Edit screenshot"
-msgstr "Modifica la cattura dello schermo"
+msgstr "Modifica lo screenshot"
 
 #: app/templates/packages/screenshot_new.html:4
 #: app/templates/packages/screenshot_new.html:8
 msgid "Add a screenshot"
-msgstr "Aggiungi una cattura dello schermo"
+msgstr "Aggiungi uno screenshot"
 
 #: app/templates/packages/screenshot_new.html:10
 #: app/templates/todo/user.html:125
@@ -3146,8 +3174,8 @@ msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
 msgstr ""
-"La risoluzione consigliata è di 1920x1080, e le catture dello schermo "
-"devono essere di almeno %(width)dx%(height)d."
+"La risoluzione consigliata è di 1920x1080, e gli screenshot devono essere di "
+"almeno %(width)dx%(height)d."
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
@@ -3172,7 +3200,7 @@ msgstr "In attesa di approvazione"
 #: app/templates/packages/screenshots.html:69
 #: app/templates/packages/screenshots.html:123
 msgid "No screenshots."
-msgstr "Nessuna cattura dello schermo."
+msgstr "Nessuno screenshot."
 
 #: app/templates/packages/screenshots.html:78
 msgid "Save Order"
@@ -3184,11 +3212,11 @@ msgstr "JavaScript è necessario per riordinare."
 
 #: app/templates/packages/screenshots.html:88
 msgid "Client Preview"
-msgstr ""
+msgstr "Anteprima Client"
 
 #: app/templates/packages/screenshots.html:90
 msgid "The first screenshot in the list above will be the package thumbnail."
-msgstr ""
+msgstr "Il primo screenshot nella lista sopra sarà la miniatura del contenuto."
 
 #: app/templates/packages/screenshots.html:127
 msgid "Videos"
@@ -3372,11 +3400,11 @@ msgstr "Mostra contenuti per il gioco"
 
 #: app/templates/packages/view.html:381
 msgid "Favorite"
-msgstr ""
+msgstr "Preferito"
 
 #: app/templates/packages/view.html:387
 msgid "Add to collection..."
-msgstr ""
+msgstr "Aggiungi alla raccolta..."
 
 #: app/templates/packages/view.html:397
 msgid "Package may be outdated"
@@ -3418,23 +3446,24 @@ msgstr "Giochi Compatibili"
 
 #: app/templates/packages/view.html:506 app/templates/packages/view.html:526
 msgid "No specific game required"
-msgstr ""
+msgstr "Nessun gioco specifico richiesto"
 
 #: app/templates/packages/view.html:509
 msgid "Tested with:"
-msgstr ""
+msgstr "Testato con:"
 
 #: app/templates/packages/view.html:531
 msgid "Is the above correct?"
-msgstr ""
+msgstr "Quanto sopra è corretto?"
 
 #: app/templates/packages/view.html:532
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
+"È necessario confermare o informare ContentDB di quali giochi sono supportati"
 
 #: app/templates/packages/view.html:544
 msgid "Does not work with:"
-msgstr ""
+msgstr "Non funziona con:"
 
 #: app/templates/packages/view.html:561
 msgid "This is an experimental feature."
@@ -3581,7 +3610,7 @@ msgstr "Rispondi a <b>%(title)s</b>"
 
 #: app/templates/threads/user_comments.html:73
 msgid "Only showing replies to public threads"
-msgstr ""
+msgstr "Mostrando solo le risposte a discussioni pubbliche"
 
 #: app/templates/threads/view.html:46
 msgid "Subscribe"
@@ -3625,7 +3654,7 @@ msgstr "Approva Tutti"
 
 #: app/templates/todo/editor.html:33
 msgid "No screenshots need approval."
-msgstr "Nessuna cattura dello schermo necessita di approvazione."
+msgstr "Nessuno screenshot necessita di approvazione."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
 msgid "No packages need approval."
@@ -3688,26 +3717,34 @@ msgstr ""
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
 msgstr ""
+"Dovresti specificare i giochi supportati dalle tue mod e pacchetti di "
+"texture."
 
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
 msgstr ""
+"Specificare i giochi supportati rende più facile trovare i tuoi contenuti ai "
+"giocatori."
 
 #: app/templates/todo/game_support.html:13
 msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
 msgstr ""
+"Se il tuo contenuto è indipendente da un gioco specifico, confermalo usando "
+"'Supporta tutti i giochi'"
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
-msgstr ""
+msgstr "Supporta tutti i giochi"
 
 #: app/templates/todo/game_support.html:51
 msgid ""
 "No supported games listed. Please either add supported games or check "
 "'Supports all games'"
 msgstr ""
+"Nessun gioco supportato in elenco. Si prega di aggiungere i giochi "
+"supportati o di selezionare 'Supporta tutti i giochi'"
 
 #: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
@@ -3717,17 +3754,20 @@ msgstr "Nulla da fare :)"
 
 #: app/templates/todo/game_support.html:67
 msgid "Bulk support all games"
-msgstr ""
+msgstr "Supporta tutti i giochi in blocco"
 
 #: app/templates/todo/game_support.html:69
 msgid ""
 "Click the button below to confirm that the following packages do support "
 "all games, except for any games listed in unsupported_games:"
 msgstr ""
+"Fai click sul tasto qui sotto per confermare che i seguenti contenuti "
+"supportano tutti i giochi, eccetto per i giochi elencati sotto "
+"unsupported_games:"
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
-msgstr ""
+msgstr "Conferma"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
@@ -3862,32 +3902,32 @@ msgstr ""
 
 #: app/templates/todo/user.html:72
 msgid "See game support for your packages"
-msgstr ""
+msgstr "Vedi i giochi supportati dai tuoi contenuti"
 
 #: app/templates/todo/user.html:74
 msgid "Missing Game Support"
-msgstr ""
+msgstr "Giochi supportati mancanti"
 
 #: app/templates/todo/user.html:120
 msgid "Small Screenshots"
-msgstr "Piccole Catture dello Schermo"
+msgstr "Piccole Screenshot"
 
 #: app/templates/todo/user.html:123
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
 msgstr ""
-"Questi contenuti presentano delle catture dello schermo troppo piccole, "
-"sarebbe necessario rimpiazzarle."
+"Questi contenuti presentano degli screenshot troppo piccoli, sarebbe "
+"necessario rimpiazzarli."
 
 #: app/templates/todo/user.html:124
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr ""
-"Le catture dello schermo in rosso e arancione rappresentano quelle sotto "
-"il limite minimo, mentre quelle in grigio sono al di sotto della "
-"risoluzione consigliata."
+"Gli screenshot in rosso e arancione rappresentano quelli sotto il limite "
+"minimo, mentre quelli in grigio sono al di sotto della risoluzione "
+"consigliata."
 
 #: app/templates/todo/user.html:179
 msgid "See All"
@@ -3952,7 +3992,7 @@ msgstr "Collegati"
 #: app/templates/users/account.html:43
 #, python-format
 msgid "Please PM %(rubenwardy)s on the forums to link your account."
-msgstr "MP %(rubenwardy)s sul forum per collegare il tuo profilo, per favore."
+msgstr "MP %(rubenwardy)s sul forum per collegare il tuo account, per favore."
 
 #: app/templates/users/account.html:57
 msgid "View ContentDB's GitHub Permissions"
@@ -4006,7 +4046,7 @@ msgstr "La tua email non verrà mai condivisa con terzi."
 #: app/templates/users/change_set_password.html:24
 #: app/templates/users/register.html:27
 msgid "Must be at least 12 characters long."
-msgstr ""
+msgstr "Deve essere lungo al massimo 12 caratteri."
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
@@ -4226,7 +4266,7 @@ msgstr "GitHub"
 
 #: app/templates/users/modtools.html:12
 msgid "Storage"
-msgstr ""
+msgstr "Spazio di archiviazione"
 
 #: app/templates/users/modtools.html:20
 #, python-format
@@ -4234,11 +4274,13 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)."
 msgstr ""
+"Lo spazio di archiviazione totale utilizzato è %(total_size)d MB (rilasci "
+"%(release_size)d MB, screenshot %(screenshot_size)d MB)."
 
 #: app/templates/users/modtools.html:23
 #, python-format
 msgid "%(releases)d releases and %(screenshots)d screenshots."
-msgstr ""
+msgstr "%(releases)d rilasci e %(screenshots)d screenshot."
 
 #: app/templates/users/modtools.html:28
 msgid "Edit Account"
@@ -4316,11 +4358,11 @@ msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:238
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alfabetico"
 
 #: app/templates/users/profile.html:246
 msgid "Newest"
-msgstr ""
+msgstr "Novità"
 
 #: app/templates/users/profile.html:252
 msgid "View list of tags"
@@ -4349,7 +4391,7 @@ msgstr "Immagine del Profilo"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
-msgstr ""
+msgstr "Sincronizza con i Forum"
 
 #: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
@@ -4465,6 +4507,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to log into the account "
 "'%(display_name)s'"
 msgstr ""
+"Annullare l'iscrizione può impedirti di accedere all'account "
+"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -4496,27 +4540,27 @@ msgstr "'%(query)s' - Cerca nei Rilasci dei Contenuti"
 
 #: app/utils/flask.py:150
 msgid "All time"
-msgstr ""
+msgstr "Sempre"
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
-msgstr ""
+msgstr "Ultimi 7 giorni"
 
 #: app/utils/flask.py:152
 msgid "Last 30 days"
-msgstr ""
+msgstr "Ultimi 30 giorni"
 
 #: app/utils/flask.py:153
 msgid "Last 90 days"
-msgstr ""
+msgstr "Ultimi 90 giorni"
 
 #: app/utils/flask.py:154
 msgid "Year to date"
-msgstr ""
+msgstr "Anno corrente"
 
 #: app/utils/flask.py:155
 msgid "Last year"
-msgstr ""
+msgstr "Anno scorso"
 
 #: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -4716,4 +4760,3 @@ msgstr ""
 
 #~ msgid "a PNG or JPG image file"
 #~ msgstr "un file di immagine PNG o JPG"
-
