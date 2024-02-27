@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-12-30 16:46+0000\n"
-"PO-Revision-Date: 2023-05-22 22:48+0000\n"
-"Last-Translator: Furkan Baytekin <furkanbaytekin@gmail.com>\n"
+"PO-Revision-Date: 2024-02-19 07:02+0000\n"
+"Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/tr/>\n"
 "Language: tr\n"
-"Language-Team: Turkish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/tr/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.4\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -79,11 +80,11 @@ msgstr "Başlık"
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:85
 msgid "Short Description"
-msgstr ""
+msgstr "Kısa Açıklama"
 
 #: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
-msgstr ""
+msgstr "Sayfa İçeriği"
 
 #: app/blueprints/collections/__init__.py:82
 #: app/blueprints/threads/__init__.py:283
@@ -93,35 +94,35 @@ msgstr "Özel"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "Profilime sabitlendi"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "Benzer başlığa sahip bir koleksiyon zaten var"
 
 #: app/blueprints/collections/__init__.py:161
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "Bu ada sahip bir paket zaten var olduğundan koleksiyon oluşturulamıyor"
 
 #: app/blueprints/collections/__init__.py:307
 msgid "Added package to collection"
-msgstr ""
+msgstr "Paket koleksiyona eklendi"
 
 #: app/blueprints/collections/__init__.py:309
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Paket koleksiyondan kaldırıldı"
 
 #: app/blueprints/collections/__init__.py:328
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Paket sık kullanılanlar koleksiyonuna eklendi"
 
 #: app/blueprints/collections/__init__.py:330
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "(Herkese açık, Profil &gt; Koleksiyonlarım bölümünden değiştirin)"
 
 #: app/blueprints/collections/__init__.py:334
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Paket sık kullanılanlar koleksiyonundan kaldırıldı"
 
 #: app/blueprints/github/__init__.py:52
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -151,15 +152,15 @@ msgstr "Açıklama"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "Yönlendirme URL'si"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "Uygulama Türü"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Tüm kullanıcı belirteçleri iptal edildi"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -201,7 +202,7 @@ msgstr "Paylaşım ve Rozetler"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "Kaldır / Yayından Kaldır"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -318,7 +319,7 @@ msgstr "Paket zaten mevcut"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "Benzer ada sahip bir koleksiyon zaten var"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -374,23 +375,23 @@ msgstr "Bağımlılıklara göre destek algılamayı etkinleştir (önerilen)"
 
 #: app/blueprints/packages/packages.py:687
 msgid "Supported games"
-msgstr ""
+msgstr "Desteklenen oyunlar"
 
 #: app/blueprints/packages/packages.py:688
 msgid "Unsupported games"
-msgstr ""
+msgstr "Desteklenmeyen oyunlar"
 
 #: app/blueprints/packages/packages.py:689
 msgid "Supports all games (unless stated) / is game independent"
-msgstr ""
+msgstr "Tüm oyunları destekler (belirtilmediği sürece) / oyundan bağımsızdır"
 
 #: app/blueprints/packages/packages.py:705
 msgid "You need at least one release before you can edit game support"
-msgstr ""
+msgstr "Oyun desteğini düzenleyebilmeniz için en az bir sürüm gerekir"
 
 #: app/blueprints/packages/packages.py:709
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
-msgstr ""
+msgstr "Mod(paket) en az bir mod içermelidir. Lütfen yeni bir sürüm oluşturun"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -632,7 +633,7 @@ msgstr "Lütfen başka bir konu açmadan önce bekleyin"
 #: app/blueprints/todo/user.py:192
 #: app/templates/collections/package_add_to.html:46
 msgid "Done"
-msgstr ""
+msgstr "Bitti"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
@@ -977,7 +978,7 @@ msgstr "API Jetonları"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "OAuth2 Uygulamaları"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1096,7 +1097,7 @@ msgstr "Çok sayıda istek, tekrar denemeden önce bekleyin"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "PNG, JPEG veya WebP resim dosyası"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1257,7 +1258,7 @@ msgstr "Profil"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "Koleksiyonlarım"
 
 #: app/templates/base.html:163
 msgid "Admin"
@@ -1327,7 +1328,7 @@ msgstr "Konular"
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "Koleksiyonlar"
 
 #: app/templates/base.html:268
 msgid "Support Packages"
@@ -1495,10 +1496,12 @@ msgstr "API Jetonu Oluştur"
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
 msgstr ""
+"Bu belirteç %(author)s yazarına ait '%(title)s' uygulaması tarafından "
+"oluşturuldu."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Erişimi iptal etmek için 'Sil' düğmesine tıklayın."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1559,7 +1562,7 @@ msgstr "API Dokümantasyonu"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Uygulama"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1573,20 +1576,20 @@ msgstr "Düzenle"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "Yeni Koleksiyon"
 
 #: app/templates/collections/create_edit.html:32
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "Kullanıcılar eski URL'ye giderken yönlendirmeyecek"
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Bu, koleksiyonun herkese açık olmasını gerektirir"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
 msgid "No results"
-msgstr ""
+msgstr "Sonuç yok"
 
 #: app/templates/collections/create_edit.html:76
 #: app/templates/packages/remove.html:58 app/templates/packages/view.html:127
@@ -1595,16 +1598,16 @@ msgstr "Kaldır"
 
 #: app/templates/collections/create_edit.html:89
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "Açıklamayı kendi açıklamanızla değiştirebilirsiniz"
 
 #: app/templates/collections/create_edit.html:103
 msgid "Are you sure you want to remove {title}?"
-msgstr ""
+msgstr "{title} kaldırmak istediğinizden emin misiniz?"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "%(author)s yazarına ait \"%(title)s\" koleksiyonunu sil"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
@@ -1625,37 +1628,39 @@ msgstr "İptal"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "%(author)s koleksiyonları"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "Koleksiyon yok"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "%(package_title)s paketini koleksiyona ekle"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "Koleksiyon Oluştur"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "Hiç koleksiyonunuz yok"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "Kopya oluştur"
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr ""
+msgstr "%(author)s yazarına ait koleksiyon"
 
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
+"Bir paket eklemek için paketin sayfasına gidin ve 'Koleksiyona ekle' "
+"seçeneğine tıklayın"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1688,13 +1693,15 @@ msgstr "Bağış Yapın"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "Değerlendirmelerinize / sık kullanılanlarınıza göre"
 
 #: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
 msgstr ""
+"Bağış kabul eden değerlendirilmiş paket yok. Sık kullandığınız paketlerinizi "
+"değerlendirmeyi düşünün"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
@@ -1996,7 +2003,7 @@ msgstr "İncelemeyi gönder"
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr ""
+msgstr "Sorun Bildir"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -2005,7 +2012,7 @@ msgstr "%(display_name)s'in paketleri"
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr ""
+msgstr "Tarih aralığı..."
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
@@ -2017,11 +2024,11 @@ msgstr "İndirmeler, son 30 gün"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr ""
+msgstr "$1 ile $2 aralığındaki indirmeler"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr ""
+msgstr "Günde $1"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -2251,42 +2258,42 @@ msgstr "Düzenleyici/Onaylayan Bildirimleri"
 #: app/templates/oauth/authorize.html:4
 #, python-format
 msgid "Authorize %(title)s"
-msgstr ""
+msgstr "%(title)s yetkilendir"
 
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "%(name)s hesabınıza erişmek istiyor"
 
 #: app/templates/oauth/authorize.html:46
 msgid "Verified application"
-msgstr ""
+msgstr "Doğrulanan uygulama"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB bu uygulamaya güveniyor"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
-msgstr ""
+msgstr "Yalnızca herkese açık veriler"
 
 #: app/templates/oauth/authorize.html:63
 msgid "Read-only access to your public data"
-msgstr ""
+msgstr "Herkese açık verilerinize salt okunur erişim"
 
 #: app/templates/oauth/authorize.html:76
 msgid "Authorize"
-msgstr ""
+msgstr "Yetkilendir"
 
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "%(title)s hakkında"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
 msgid "Application isn't approved yet"
-msgstr ""
+msgstr "Uygulama henüz onaylanmadı"
 
 #: app/templates/oauth/authorize.html:93
 #: app/templates/oauth/create_edit.html:28
@@ -2294,54 +2301,59 @@ msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
 msgstr ""
+"Sizin dışınızdaki kullanıcıların oturum açmasına izin vermek için ContentDB "
+"personeliyle iletişime geçmeniz ve uygulamanızı onaylamalarını istemeniz "
+"gerekir."
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
-msgstr ""
+msgstr "OAuth İstemcisi Oluştur"
 
 #: app/templates/oauth/create_edit.html:36
 #, python-format
 msgid "Your application has %(count)d users"
-msgstr ""
+msgstr "Uygulamanızın %(count)d kullanıcısı var"
 
 #: app/templates/oauth/create_edit.html:37
 msgid "Revoke all user tokens"
-msgstr ""
+msgstr "Tüm kullanıcı belirteçlerini iptal et"
 
 #: app/templates/oauth/create_edit.html:51
 msgid ""
 "You must keep the secret safe. If you are unable, set the app type to "
 "'client-side'."
 msgstr ""
+"Parolayı güvende tutmalısınız. Eğer yapamıyorsanız, uygulama türünü 'istemci "
+"tarafı' olarak ayarlayın."
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
-msgstr ""
+msgstr "Örnek Yetkilendirme URL'si"
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
-msgstr ""
+msgstr "Hesaplarına erişim istediğinizde kullanıcılara gösterilir"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
-msgstr ""
+msgstr "İstemci parolanızı nerede saklayacaksınız?"
 
 #: app/templates/oauth/list_clients.html:4
 #, python-format
 msgid "OAuth2 Applications | %(username)s"
-msgstr ""
+msgstr "OAuth2 Uygulamaları | %(username)s"
 
 #: app/templates/oauth/list_clients.html:9
 msgid "OAuth2 Documentation"
-msgstr ""
+msgstr "OAuth2 Belgeleri"
 
 #: app/templates/oauth/list_clients.html:16
 msgid "Unpublished"
-msgstr ""
+msgstr "Yayınlanmadı"
 
 #: app/templates/oauth/list_clients.html:22
 msgid "No applications created"
-msgstr ""
+msgstr "Uygulama oluşturulmadı"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2441,7 +2453,7 @@ msgstr "Paket"
 
 #: app/templates/packages/create_edit.html:73
 msgid "You need to unpublish the package to change the name."
-msgstr ""
+msgstr "Adı değiştirmek için paketi yayından kaldırmanız gerekir."
 
 #: app/templates/packages/create_edit.html:79
 msgid ""
@@ -2461,21 +2473,23 @@ msgstr "Depo ve Bağlantılar"
 
 #: app/templates/packages/create_edit.html:93
 msgid "Do you have a Git repository?"
-msgstr ""
+msgstr "Git deponuz var mı?"
 
 #: app/templates/packages/create_edit.html:95
 msgid "Having a repository is optional"
-msgstr ""
+msgstr "Depoya sahip olmak isteğe bağlıdır"
 
 #: app/templates/packages/create_edit.html:98
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
+"Eğer bir deponuz varsa, URL'yi aşağıya girin. Aksi takdirde boş bırakın ve "
+"atla seçeneğine tıklayın."
 
 #: app/templates/packages/create_edit.html:103
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr ""
+msgstr "Git, Mercurial veya başka bir deponun HTTP URL'si"
 
 #: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
@@ -2491,11 +2505,11 @@ msgstr "İçe aktarılıyor... (Bu biraz zaman alabilir)"
 
 #: app/templates/packages/create_edit.html:114
 msgid "Where should users report issues?"
-msgstr ""
+msgstr "Kullanıcılar sorunları nereye bildirmeli?"
 
 #: app/templates/packages/create_edit.html:118
 msgid "Paste a forum topic URL"
-msgstr ""
+msgstr "Bir forum konusu URL'si yapıştırın"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
@@ -2548,6 +2562,8 @@ msgid ""
 "Game support is configured using the package's .conf file. See the "
 "documentation for more info"
 msgstr ""
+"Oyun desteği, paketin .conf dosyası kullanılarak yapılandırılır. Daha fazla "
+"bilgi için belgelere bakın"
 
 #: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:212
@@ -2561,6 +2577,7 @@ msgstr "Destekleniyor mu?"
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
 msgstr ""
+"Tüm oyunları destekler (unsupported_games tarafından hariç tutulmadıkça)"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -2568,16 +2585,18 @@ msgstr "Bağımlılıklardan tespit edildi"
 
 #: app/templates/packages/game_support.html:49
 msgid "Overridden on ContentDB"
-msgstr ""
+msgstr "ContentDB üzerinde geçersiz kılındı"
 
 #: app/templates/packages/game_support.html:68
 msgid "Unknown. Please either add supported games or check 'Supports all games'"
 msgstr ""
+"Bilinmiyor. Lütfen desteklenen oyunları ekleyin veya 'Tüm oyunları "
+"destekler' seçeneğini işaretleyin"
 
 #: app/templates/packages/game_support.html:75
 #, python-format
 msgid "Generated %(conf)s lines"
-msgstr ""
+msgstr "Oluşturulan %(conf)s satırları"
 
 #: app/templates/packages/game_support.html:89
 msgid ""
@@ -2592,26 +2611,32 @@ msgid ""
 "When checked, this indicates that this package should support all games, "
 "unless excluded by unsupported_games."
 msgstr ""
+"İşaretlendiğinde, unsupported_games tarafından hariç tutulmadığı sürece bu "
+"paketin tüm oyunları desteklemesi gerektiğini belirtir."
 
 #: app/templates/packages/game_support.html:97
 msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
 msgstr ""
+"Bunu işaretleyebilir ve test ettiğiniz oyunları supported_games içinde "
+"belirtmeye devam edebilirsiniz."
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
-msgstr ""
+msgstr "Doku paketleri tüm oyunları destekleyemez."
 
 #: app/templates/packages/game_support.html:105
 msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
 msgstr ""
+"Paket, oyuna özel bir moda bağımlıdır ve bu nedenle tüm oyunları "
+"destekleyemez."
 
 #: app/templates/packages/game_support.html:111
 msgid "Overrides"
-msgstr ""
+msgstr "Geçersiz kılmalar"
 
 #: app/templates/packages/game_support.html:114
 #, python-format
@@ -2619,6 +2644,8 @@ msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
 msgstr ""
+"Desteklenen/desteklenmeyen oyunları %(conf)s içine eklemek en iyisidir, "
+"ancak bu arada onları buraya ekleyebilirsiniz."
 
 #: app/templates/packages/game_support.html:116
 #, python-format
@@ -2626,11 +2653,13 @@ msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
 msgstr ""
+"%(conf)s içine eklemek ContentDB dışında kurulum yapan kullanıcıların da "
+"faydalanmasını sağlar."
 
 #: app/templates/packages/game_support.html:119
 #: app/templates/packages/game_support.html:120
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
-msgstr ""
+msgstr "Virgülle ayrılan oyun adları, örn: minetest_game, nodecore"
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
@@ -2758,6 +2787,7 @@ msgstr "Desteklenen Minetest sürümleri"
 #, python-format
 msgid "Are you sure your package doesn't work on versions after %(version)s?"
 msgstr ""
+"Paketinizin %(version)s sonrası sürümlerde çalışmadığından emin misiniz?"
 
 #: app/templates/packages/release_edit.html:62
 #: app/templates/packages/release_new.html:77
@@ -2765,6 +2795,8 @@ msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Minetest versions."
 msgstr ""
+"Yalnızca daha yeni Minetest sürümlerinde çalışmadığını biliyorsanız en "
+"yüksek sürümü ayarlayın."
 
 #: app/templates/packages/release_edit.html:63
 #: app/templates/packages/release_new.html:78
@@ -2772,6 +2804,8 @@ msgid ""
 "Don't set the maximum version just because you haven't tested it on newer"
 " versions."
 msgstr ""
+"Yalnızca daha yeni sürümlerde test etmediğiniz için en yüksek sürümü "
+"ayarlamayın."
 
 #: app/templates/packages/release_edit.html:67
 #: app/templates/packages/release_new.html:88
@@ -2985,6 +3019,8 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)"
 msgstr ""
+"Toplam depolama kullanımı %(total_size)d MB (sürümler %(release_size)d MB, "
+"ekran görüntüleri %(screenshot_size)d MB)"
 
 #: app/templates/packages/remove.html:9
 #, python-format
@@ -3016,12 +3052,12 @@ msgstr ""
 
 #: app/templates/packages/remove.html:28
 msgid "and"
-msgstr ""
+msgstr "ve"
 
 #: app/templates/packages/remove.html:34
 #, python-format
 msgid "Removing this package will break the following mods: %(names)s"
-msgstr ""
+msgstr "Bu paketin kaldırılması şu modları bozacaktır: %(names)s"
 
 #: app/templates/packages/remove.html:41
 msgid "Reason"
@@ -3033,7 +3069,7 @@ msgstr "Onaylanmama / silinme nedeni, bu denetim günlüğünde gösterilir"
 
 #: app/templates/packages/remove.html:61
 msgid "Unpublish"
-msgstr ""
+msgstr "Yayından kaldır"
 
 #: app/templates/packages/review_create_edit.html:17
 #, python-format
@@ -3125,11 +3161,13 @@ msgstr "Yeniden sıralama JavaScript gerektirir."
 
 #: app/templates/packages/screenshots.html:88
 msgid "Client Preview"
-msgstr ""
+msgstr "İstemci Ön İzlemesi"
 
 #: app/templates/packages/screenshots.html:90
 msgid "The first screenshot in the list above will be the package thumbnail."
 msgstr ""
+"Yukarıdaki listede yer alan ilk ekran görüntüsü paketin küçük resmi "
+"olacaktır."
 
 #: app/templates/packages/screenshots.html:127
 msgid "Videos"
@@ -3311,11 +3349,11 @@ msgstr "Oyun içeriğini görüntüleme"
 
 #: app/templates/packages/view.html:381
 msgid "Favorite"
-msgstr ""
+msgstr "Sık kullanılan"
 
 #: app/templates/packages/view.html:387
 msgid "Add to collection..."
-msgstr ""
+msgstr "Koleksiyona ekle..."
 
 #: app/templates/packages/view.html:397
 msgid "Package may be outdated"
@@ -3357,23 +3395,25 @@ msgstr "Uyumlu Oyunlar"
 
 #: app/templates/packages/view.html:506 app/templates/packages/view.html:526
 msgid "No specific game required"
-msgstr ""
+msgstr "Belirli bir oyun gerekmiyor"
 
 #: app/templates/packages/view.html:509
 msgid "Tested with:"
-msgstr ""
+msgstr "Şununla test edildi:"
 
 #: app/templates/packages/view.html:531
 msgid "Is the above correct?"
-msgstr ""
+msgstr "Yukarıdaki doğru mu?"
 
 #: app/templates/packages/view.html:532
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
+"Bunu onaylamanız veya ContentDB'ye desteklenen oyunlar hakkında bilgi "
+"vermeniz gerekir"
 
 #: app/templates/packages/view.html:544
 msgid "Does not work with:"
-msgstr ""
+msgstr "Şununla çalışmıyor:"
 
 #: app/templates/packages/view.html:561
 msgid "This is an experimental feature."
@@ -3518,7 +3558,7 @@ msgstr "<b>%(title)s</b> için yanıt verin"
 
 #: app/templates/threads/user_comments.html:73
 msgid "Only showing replies to public threads"
-msgstr ""
+msgstr "Yalnızca herkese açık konulara verilen yanıtlar gösteriliyor"
 
 #: app/templates/threads/view.html:46
 msgid "Subscribe"
@@ -3620,31 +3660,38 @@ msgstr "Son Eylemler"
 #: app/templates/todo/game_support.html:4
 #, python-format
 msgid "Game Support for %(username)s"
-msgstr ""
+msgstr "%(username)s için oyun desteği"
 
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
 msgstr ""
+"Modlarınız ve doku paketleriniz tarafından desteklenen oyunları "
+"belirtmelisiniz."
 
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
 msgstr ""
+"Oyun desteğini belirtmek, oyuncuların içeriğinizi bulmasını kolaylaştırır."
 
 #: app/templates/todo/game_support.html:13
 msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
 msgstr ""
+"Paketiniz oyundan bağımsızsa, bunu 'Tüm oyunları destekler' seçeneğini "
+"kullanarak onaylayın"
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
-msgstr ""
+msgstr "Tüm oyunları destekler"
 
 #: app/templates/todo/game_support.html:51
 msgid ""
 "No supported games listed. Please either add supported games or check "
 "'Supports all games'"
 msgstr ""
+"Desteklenen oyunlar listelenmedi. Lütfen desteklenen oyunları ekleyin veya "
+"'Tüm oyunları destekler' seçeneğini işaretleyin"
 
 #: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
@@ -3654,17 +3701,19 @@ msgstr "Yapacak bir şey yok :)"
 
 #: app/templates/todo/game_support.html:67
 msgid "Bulk support all games"
-msgstr ""
+msgstr "Tüm oyunları toplu destekle"
 
 #: app/templates/todo/game_support.html:69
 msgid ""
 "Click the button below to confirm that the following packages do support "
 "all games, except for any games listed in unsupported_games:"
 msgstr ""
+"Bu paketlerin, unsupported_games içinde listelenen oyunlar hariç tüm "
+"oyunları desteklediğini onaylamak için aşağıdaki düğmeye tıklayın:"
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
-msgstr ""
+msgstr "Onayla"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
@@ -3799,11 +3848,11 @@ msgstr ""
 
 #: app/templates/todo/user.html:72
 msgid "See game support for your packages"
-msgstr ""
+msgstr "Paketleriniz için oyun desteğine bakın"
 
 #: app/templates/todo/user.html:74
 msgid "Missing Game Support"
-msgstr ""
+msgstr "Eksik Oyun Desteği"
 
 #: app/templates/todo/user.html:120
 msgid "Small Screenshots"
@@ -3940,7 +3989,7 @@ msgstr "E-postanız asla üçüncü bir tarafla paylaşılmayacaktır."
 #: app/templates/users/change_set_password.html:24
 #: app/templates/users/register.html:27
 msgid "Must be at least 12 characters long."
-msgstr ""
+msgstr "En az 12 karakter uzunluğunda olmalıdır."
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
@@ -4161,7 +4210,7 @@ msgstr "GitHub"
 
 #: app/templates/users/modtools.html:12
 msgid "Storage"
-msgstr ""
+msgstr "Depolama"
 
 #: app/templates/users/modtools.html:20
 #, python-format
@@ -4169,11 +4218,13 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)."
 msgstr ""
+"Toplam depolama kullanımı %(total_size)d MB (sürümler %(release_size)d MB, "
+"ekran görüntüleri %(screenshot_size)d MB)."
 
 #: app/templates/users/modtools.html:23
 #, python-format
 msgid "%(releases)d releases and %(screenshots)d screenshots."
-msgstr ""
+msgstr "%(releases)d sürüm ve %(screenshots)d ekran görüntüsü."
 
 #: app/templates/users/modtools.html:28
 msgid "Edit Account"
@@ -4226,7 +4277,7 @@ msgstr "paketler"
 
 #: app/templates/users/profile.html:123
 msgid "collections"
-msgstr ""
+msgstr "koleksiyonlar"
 
 #: app/templates/users/profile.html:132
 msgid "reviews"
@@ -4251,11 +4302,11 @@ msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:238
 msgid "Alphabetical"
-msgstr ""
+msgstr "Alfabetik"
 
 #: app/templates/users/profile.html:246
 msgid "Newest"
-msgstr ""
+msgstr "En yeni"
 
 #: app/templates/users/profile.html:252
 msgid "View list of tags"
@@ -4284,7 +4335,7 @@ msgstr "Profil Resmi"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
-msgstr ""
+msgstr "Forumlarla eşzamanla"
 
 #: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
@@ -4401,6 +4452,8 @@ msgid ""
 "Unsubscribing may prevent you from being able to log into the account "
 "'%(display_name)s'"
 msgstr ""
+"Abonelikten çıkmak '%(display_name)s' hesabında oturum açmanızı "
+"engelleyebilir"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -4433,27 +4486,27 @@ msgstr "'%(query)s' - Paket Sürümlerini Ara"
 
 #: app/utils/flask.py:150
 msgid "All time"
-msgstr ""
+msgstr "Her zaman"
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
-msgstr ""
+msgstr "Son 7 gün"
 
 #: app/utils/flask.py:152
 msgid "Last 30 days"
-msgstr ""
+msgstr "Son 30 gün"
 
 #: app/utils/flask.py:153
 msgid "Last 90 days"
-msgstr ""
+msgstr "Son 90 gün"
 
 #: app/utils/flask.py:154
 msgid "Year to date"
-msgstr ""
+msgstr "Bugüne kadarki yıl"
 
 #: app/utils/flask.py:155
 msgid "Last year"
-msgstr ""
+msgstr "Geçen yıl"
 
 #: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -4793,4 +4846,3 @@ msgstr ""
 
 #~ msgid "a PNG or JPG image file"
 #~ msgstr "PNG veya JPG resim dosyası"
-
