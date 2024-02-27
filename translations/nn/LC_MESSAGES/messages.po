@@ -1,7 +1,7 @@
-# Swedish translations for PROJECT.
-# Copyright (C) 2022 ORGANIZATION
+# Translations template for PROJECT.
+# Copyright (C) 2023 ORGANIZATION
 # This file is distributed under the same license as the PROJECT project.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2022.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2023.
 #
 msgid ""
 msgstr ""
@@ -10,9 +10,9 @@ msgstr ""
 "POT-Creation-Date: 2023-12-30 16:46+0000\n"
 "PO-Revision-Date: 2024-02-27 13:02+0000\n"
 "Last-Translator: jhh <johshh@users.noreply.hosted.weblate.org>\n"
-"Language-Team: Swedish <https://hosted.weblate.org/projects/minetest/"
-"contentdb/sv/>\n"
-"Language: sv\n"
+"Language-Team: Norwegian Nynorsk <https://hosted.weblate.org/projects/"
+"minetest/contentdb/nn/>\n"
+"Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,11 +22,11 @@ msgstr ""
 
 #: app/__init__.py:123
 msgid "Banned:"
-msgstr "Bannad:"
+msgstr "Utestengd:"
 
 #: app/__init__.py:125
 msgid "You have been banned."
-msgstr "Du har blivit bannad."
+msgstr "Du er blitt utestengd."
 
 #: app/querybuilder.py:38 app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
@@ -35,12 +35,12 @@ msgstr "Du har blivit bannad."
 #: app/templates/packages/list.html:4 app/templates/todo/editor.html:46
 #: app/templates/users/list.html:22 app/templates/users/profile.html:265
 msgid "Packages"
-msgstr "Paket"
+msgstr "Pakkar"
 
 #: app/template_filters.py:86
 #, python-format
 msgid "%(delta)s ago"
-msgstr "%(delta)s sedan"
+msgstr "%(delta)s sidan"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
@@ -49,8 +49,9 @@ msgid "Name"
 msgstr "Namn"
 
 #: app/blueprints/api/tokens.py:34
+#, fuzzy
 msgid "Limit to package"
-msgstr "Begränsa till paket"
+msgstr "Begrens til pakken"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
 #: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:274
@@ -66,7 +67,7 @@ msgstr "Begränsa till paket"
 #: app/blueprints/users/settings.py:77 app/blueprints/users/settings.py:147
 #: app/blueprints/users/settings.py:304 app/templates/users/modtools.html:111
 msgid "Save"
-msgstr "Spara"
+msgstr "Lagre"
 
 #: app/blueprints/collections/__init__.py:77
 #: app/blueprints/oauth/__init__.py:168 app/blueprints/packages/releases.py:53
@@ -75,16 +76,16 @@ msgstr "Spara"
 #: app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 msgid "Title"
-msgstr "Titel"
+msgstr "Tittel"
 
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:85
 msgid "Short Description"
-msgstr "Kort beskrivning"
+msgstr "Kort beskriving"
 
 #: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
-msgstr "Sidinnehåll"
+msgstr "Sideinnhald"
 
 #: app/blueprints/collections/__init__.py:82
 #: app/blueprints/threads/__init__.py:283
@@ -94,292 +95,296 @@ msgstr "Privat"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "Festa til profila mi"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
-msgstr "En samling med liknande titel finns redan"
+msgstr "Ein samling med ei liknande tittel finst allereie"
 
 #: app/blueprints/collections/__init__.py:161
 msgid "Unable to create collection as a package with that name already exists"
-msgstr "Kunde inte skapa samling eftersom ett paket med det namnet redan finns"
+msgstr ""
+"Kan ikkje opprette samlinga, sidan ein pakke med det namnet allereie "
+"eksisterar"
 
 #: app/blueprints/collections/__init__.py:307
 msgid "Added package to collection"
-msgstr "Lade till paket till samling"
+msgstr "La til pakka i samlinga"
 
 #: app/blueprints/collections/__init__.py:309
 msgid "Removed package from collection"
-msgstr "Tog bort paket från samling"
+msgstr "Fjerna pakka frå samlinga"
 
 #: app/blueprints/collections/__init__.py:328
 msgid "Added package to favorites collection"
-msgstr "Lade till paket till favoritsamling"
+msgstr "La til pakka i favorittsamlinga"
 
 #: app/blueprints/collections/__init__.py:330
 msgid "(Public, change from Profile > My Collections)"
-msgstr "(Offentlig, ändra via Profil -&gt; Mina samlingar)"
+msgstr ""
 
 #: app/blueprints/collections/__init__.py:334
 msgid "Removed package from favorites collection"
-msgstr "Tog bort paket från favoritsamling"
+msgstr "Fjerna pakken frå favorittsamlinga"
 
 #: app/blueprints/github/__init__.py:52
 msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr "Autentisering misslyckades [err=gh-oauth-login-failed]"
+msgstr "Autorisasjon mislukkast [feil=gh-oauth-login-failed]"
 
 #: app/blueprints/github/__init__.py:76
 msgid "Linked GitHub to account"
-msgstr "Länkat GitHub till konto"
+msgstr "Sett i samband GitHub og kontoa"
 
 #: app/blueprints/github/__init__.py:79
 msgid "GitHub account is already associated with another user"
-msgstr "Detta GitHub-konto är redan associerad med en annan användare"
+msgstr "GitHub-kontoa er allereie knytt til ein annan brukar"
 
 #: app/blueprints/github/__init__.py:85
 msgid "Unable to find an account for that GitHub user"
-msgstr "Kunde inte hitta ett konto för den GitHub-användaren"
+msgstr "Klarte ikkje å finne ein konto for den GitHub-brukaren"
 
 #: app/blueprints/github/__init__.py:90
 msgid "Authorization failed [err=gh-login-failed]"
-msgstr "Autentisering misslyckades [err=gh-login-failed]"
+msgstr "Godkjenning mislyktes [err=gh-login-failed]"
 
 #: app/blueprints/oauth/__init__.py:169 app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:44
 msgid "Description"
-msgstr "Beskrivning"
+msgstr "beskriving"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "Vidareadresserings-URL"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "App Type"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Tilbakekalla alle brukartoken"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
 msgid "Edit Details"
-msgstr "Redigera Detaljer"
+msgstr "Endre detaljane"
 
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/releases_list.html:34
 #: app/templates/packages/view.html:634 app/templates/todo/editor.html:75
 msgid "Releases"
-msgstr "Utgivningar"
+msgstr "Frigjevingar"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr "Skärmdumpar"
+msgstr "Skjermbilete"
 
 #: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/edit_maintainers.html:8
 #: app/templates/packages/view.html:605
 msgid "Maintainers"
-msgstr "Underhållare"
+msgstr "Vedlikehaldarar"
 
 #: app/blueprints/packages/__init__.py:52 app/templates/base.html:159
 #: app/templates/packages/audit.html:4
+#, fuzzy
 msgid "Audit Log"
-msgstr "Auditeringslogg"
+msgstr "Auditlogg"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/base.html:150
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
 #: app/templates/packages/view.html:229 app/templates/users/profile.html:148
 msgid "Statistics"
-msgstr "Statistik"
+msgstr "Statistikk"
 
 #: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
 msgid "Share and Badges"
-msgstr "Dela och Emblem"
+msgstr "Dela og Merke"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr "Ta bort / Avpublicera"
+msgstr "Fjern / Avpubliser"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
-msgstr "Stödda spel"
+msgstr "Støtta spel"
 
 #: app/blueprints/packages/packages.py:177
 msgid "Error: Another package already uses this forum topic!"
-msgstr "Fel: Ett annat paket använder redan den här forumtråden!"
+msgstr "Feil: Ei anna pakke nyttar allereie dette forumemnet!"
 
 #: app/blueprints/packages/packages.py:183
 msgid "Error: Forum topic author doesn't match package author."
-msgstr "Fel: Forumtrådsstartaren stämmer inte överrens med paketskaparen."
+msgstr ""
+"Feil: Forfattaren av forum-emnet samsvarar ikkje med forfattaren av pakken."
 
 #: app/blueprints/packages/packages.py:186
 msgid ""
 "Warning: Forum topic not found. This may happen if the topic has only "
 "just been created."
 msgstr ""
-"Varning: Forumtråd finns inte. Detta kan hända om tråden bara nyss har "
-"skapats."
+"Åtvaring: forum-emnet vart ikkje funne. Dette kan skje om emnet berre har "
+"blitt oppretta."
 
 #: app/blueprints/packages/packages.py:239
 msgid "No download available."
-msgstr "Ingen nerladdning tillgänglig."
+msgstr "Ingen nedlastingar tilgjengelege."
 
 #: app/blueprints/packages/packages.py:253 app/templates/packages/view.html:582
 msgid "Type"
-msgstr "Typ"
+msgstr "Type"
 
 #: app/blueprints/packages/packages.py:254
 msgid "Title (Human-readable)"
-msgstr "Titel (Människoläsbar)"
+msgstr "Tittel (menneskelesbar)"
 
 #: app/blueprints/packages/packages.py:255
 #: app/blueprints/packages/packages.py:617
 msgid "Name (Technical)"
-msgstr "Namn (Tekniskt)"
+msgstr "Namn (teknisk)"
 
 #: app/blueprints/packages/packages.py:255
 #: app/blueprints/packages/packages.py:618
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr "Endast gemena bokstäver (a-z), siffror (0-9) och understreck (_)"
+msgstr ""
 
 #: app/blueprints/packages/packages.py:256
 msgid "Short Description (Plaintext)"
-msgstr "Kort beskrivning (vanlig text)"
+msgstr "Kort beskriving (klar tekst)"
 
 #: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:597
 msgid "Maintenance State"
-msgstr "Underhållsstatus"
+msgstr "Vedlikehaldstilstand"
 
 #: app/blueprints/packages/packages.py:260 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
 msgid "Tags"
-msgstr "Taggar"
+msgstr "Emneknaggar"
 
 #: app/blueprints/packages/packages.py:261
 msgid "Content Warnings"
-msgstr "Innehållsvarningar"
+msgstr "Advarslar om innhald"
 
 #: app/blueprints/packages/packages.py:262 app/templates/packages/view.html:586
 msgid "License"
-msgstr "Licens"
+msgstr "Løyve"
 
 #: app/blueprints/packages/packages.py:263
 msgid "Media License"
-msgstr "Medialicens"
+msgstr "Media Løyve"
 
 #: app/blueprints/packages/packages.py:265
 msgid "Long Description (Markdown)"
-msgstr "Lång beskrivning (Markdown)"
+msgstr "Lang beskriving (Markdown)"
 
 #: app/blueprints/packages/packages.py:267
 msgid "VCS Repository URL"
-msgstr "URL för VCS-Repository"
+msgstr "VCS Repositorium URL"
 
 #: app/blueprints/packages/packages.py:268 app/blueprints/users/settings.py:75
 msgid "Website URL"
-msgstr "URL för hemsida"
+msgstr "Nettstad URL"
 
 #: app/blueprints/packages/packages.py:269
 msgid "Issue Tracker URL"
-msgstr "URL för felspårare"
+msgstr "Feilsporings URL"
 
 #: app/blueprints/packages/packages.py:270
 msgid "Forum Topic ID"
-msgstr "Forumtråd-ID"
+msgstr "Forumemne-ID"
 
 #: app/blueprints/packages/packages.py:271
 msgid "Video URL"
-msgstr "URL för video"
+msgstr "Video URL"
 
 #: app/blueprints/packages/packages.py:272
 msgid "Donate URL"
-msgstr "Donations-URL"
+msgstr "Donasjons-URL"
 
 #: app/blueprints/packages/packages.py:278
 msgid "_game is not an allowed name"
-msgstr "_game är inte ett tillåtet namn"
+msgstr "_game er ikkje eit tillate namn"
 
 #: app/blueprints/packages/packages.py:288
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr ""
-"Paketet existerar redan, men har blivit borttaget. Var snäll kontakta "
-"ContentDB-personal för att återställa paketet"
+"Pakken eksisterer allereie, men er fjerna. Vennlegst kontakt ContentDB-"
+"personalet for å gjenopprette pakken"
 
 #: app/blueprints/packages/packages.py:293
 msgid "Package already exists"
-msgstr "Paket finns redan"
+msgstr "Pakken finst allereie"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr "En samling med liknande namn finns redan"
+msgstr "Ein samling med eit liknande namn finst allereie"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
-msgstr "Kunde inte hitta den användaren"
+msgstr "Klarte ikkje å finne den brukaren"
 
 #: app/blueprints/packages/packages.py:363
 #: app/blueprints/packages/screenshots.py:136
 #: app/blueprints/users/settings.py:131
 msgid "Permission denied"
-msgstr "Åtkomst nekad"
+msgstr "Tillatelse nekta"
 
 #: app/blueprints/packages/packages.py:419
 #: app/blueprints/packages/packages.py:478
 #: app/blueprints/packages/packages.py:498
 msgid "You don't have permission to do that"
-msgstr "Du har inte tillåtelse att göra detta"
+msgstr "Du har ikkje løyve til å gjere det"
 
 #: app/blueprints/packages/packages.py:449
 msgid "Please comment what changes are needed in the approval thread"
-msgstr "Var snäll och kommentera vilka ändringar som behövs i godkänningstråden"
+msgstr "Vennligst kommenter kva endringar som trengs i godkjennings-tråden"
 
 #: app/blueprints/packages/packages.py:493
 msgid "Deleted package"
-msgstr "Borttaget paket"
+msgstr "Sletta pakke"
 
 #: app/blueprints/packages/packages.py:513
 msgid "Unapproved package"
-msgstr "Ej godkänt paket"
+msgstr "Ugodkjent pakke"
 
 #: app/blueprints/packages/packages.py:522
 msgid "Maintainers (Comma-separated)"
-msgstr "Underhållare (Komma-separerat)"
+msgstr "Vedlikehaldarar (koma-separerte)"
 
 #: app/blueprints/packages/packages.py:531
 msgid "You don't have permission to edit maintainers"
-msgstr "Du har inte behörighet att redigera underhållare"
+msgstr "Du har ikkje løyve til å redigere vedlikehaldarar"
 
 #: app/blueprints/packages/packages.py:581
 msgid "You are not a maintainer"
-msgstr "Du är inte en underhållare"
+msgstr "Du er ikkje ein vedlikehaldar"
 
 #: app/blueprints/packages/packages.py:584
 msgid "Package owners cannot remove themselves as maintainers"
-msgstr "Paketägare kan inte ta bort sig själva som underhållare"
+msgstr "Pakkeeigarar kan ikkje fjerne seg sjølve som vedlikehaldarar"
 
 #: app/blueprints/packages/packages.py:616
 msgid "Author Name"
-msgstr "Ägarnamn"
+msgstr "Forfattarnamn"
 
 #: app/blueprints/packages/packages.py:686
 msgid "Enable support detection based on dependencies (recommended)"
-msgstr "Aktivera stöddetektering baserad på beroenden (rekommenderat)"
+msgstr "Aktiver støttedeteksjon basert på avhengigheiter (anbefalt)"
 
 #: app/blueprints/packages/packages.py:687
 msgid "Supported games"
-msgstr "Spel som stöds"
+msgstr "Støtta spel"
 
 #: app/blueprints/packages/packages.py:688
 msgid "Unsupported games"
-msgstr "Spel som ej stöds"
+msgstr "Ustøtta spel"
 
 #: app/blueprints/packages/packages.py:689
 msgid "Supports all games (unless stated) / is game independent"
@@ -387,40 +392,38 @@ msgstr "Støttar alle spel (om ikkje noko anna er sagt) / er uavhengig av spelet
 
 #: app/blueprints/packages/packages.py:705
 msgid "You need at least one release before you can edit game support"
-msgstr "Du behöver åtminstonde en utgivning innan du kan redigera spelstöd"
+msgstr "Du treng minst éin utgjeving før du kan redigere støtte for spelet"
 
 #: app/blueprints/packages/packages.py:709
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
-"Modd(paket) behöver innehålla minst en modd. Vänligen skapa en ny "
-"utgivning"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
 msgid "Method"
-msgstr "Metod"
+msgstr "Metode"
 
 #: app/blueprints/packages/releases.py:54
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/screenshots.py:34
 msgid "File Upload"
-msgstr "Filuppladdning"
+msgstr "Filopplasting"
 
 #: app/blueprints/packages/releases.py:55
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr "Git-referens (t.ex. commithash, branch eller tag)"
+msgstr "Git referanse (f.eks.: bunt(«Commit »)-hash, gren, eller merkelapp)"
 
 #: app/blueprints/packages/releases.py:57
 #: app/blueprints/packages/releases.py:69
 #: app/blueprints/packages/releases.py:193
 msgid "Minimum Minetest Version"
-msgstr "Minsta Minetestversion"
+msgstr "Minimum Minetest-versjon"
 
 #: app/blueprints/packages/releases.py:59
 #: app/blueprints/packages/releases.py:71
 #: app/blueprints/packages/releases.py:196
 msgid "Maximum Minetest Version"
-msgstr "Högsta Minetestversion"
+msgstr "Maksimum Minetest-versjon"
 
 #: app/blueprints/packages/releases.py:66
 #: app/templates/packages/release_edit.html:23
@@ -429,89 +432,88 @@ msgstr "URL"
 
 #: app/blueprints/packages/releases.py:67
 msgid "Task ID"
-msgstr "Uppgifts-ID"
+msgstr "Oppgåve-ID"
 
 #: app/blueprints/packages/releases.py:68
 #: app/blueprints/packages/screenshots.py:40
 msgid "Is Approved"
-msgstr "Är godkänd"
+msgstr "Er godkjend"
 
 #: app/blueprints/packages/releases.py:86
 msgid "Import from Git"
-msgstr "Importera från Git"
+msgstr "Importer frå Git"
 
 #: app/blueprints/packages/releases.py:86
 msgid "Upload .zip file"
-msgstr "Ladda upp .zip-fil"
+msgstr "Last opp .zip-fil"
 
 #: app/blueprints/packages/releases.py:192
 msgid "Set Min"
-msgstr "Sätt Min"
+msgstr "Sett Minimum"
 
 #: app/blueprints/packages/releases.py:195
 msgid "Set Max"
-msgstr "Sätt Max"
+msgstr "Sett Maks"
 
 #: app/blueprints/packages/releases.py:198
 msgid "Only change values previously set as none"
-msgstr "Endast ändra värden tidigare satta som inget"
+msgstr ""
 
 #: app/blueprints/packages/releases.py:199
 msgid "Update"
-msgstr "Uppdatera"
+msgstr "Oppdater"
 
 #: app/blueprints/packages/releases.py:248
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
-msgstr "Trigga"
+msgstr ""
 
 #: app/blueprints/packages/releases.py:249
 msgid "New Commit"
-msgstr "Ny commit"
+msgstr "Ny bunt («Commit »)"
 
 #: app/blueprints/packages/releases.py:250 app/templates/admin/tags/list.html:8
 msgid "New Tag"
-msgstr "Ny tagg"
+msgstr "Ny merkelapp («Commit »)"
 
 #: app/blueprints/packages/releases.py:252
 msgid "Branch name"
-msgstr "Branchnamn"
+msgstr "Grein namn"
 
 #: app/blueprints/packages/releases.py:253
 #: app/templates/packages/update_config.html:38
 msgid "Action"
-msgstr "Åtgärd"
+msgstr "Handling"
 
 #: app/blueprints/packages/releases.py:254
 msgid "Send notification and mark as outdated"
-msgstr "Skicka notis och markera som föråldrad"
+msgstr "Send varsel og merk som utdatert"
 
 #: app/blueprints/packages/releases.py:254
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
-msgstr "Skapa utgivning"
+msgstr "Laga utgåve"
 
 #: app/blueprints/packages/releases.py:256
 msgid "Save Settings"
-msgstr "Spara inställningar"
+msgstr "Lagre innstillingar"
 
 #: app/blueprints/packages/releases.py:257
 msgid "Disable Automation"
-msgstr "Inaktivera automatisering"
+msgstr "Deaktiver Automatisering"
 
 #: app/blueprints/packages/releases.py:296
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
-"Var snäll och lägg till en Git-repository för att ställa in automatiska "
-"utgivningar"
+"Vennligst legg til ein Git kodelager-URL for å setje opp automatisk utgjeving"
 
 #: app/blueprints/packages/releases.py:312
 msgid "Deleted update configuration"
-msgstr "Tog bort uppdateringskonfiguration"
+msgstr "Sletta oppdateringskonfigurasjon"
 
 #: app/blueprints/packages/releases.py:320
 msgid "Now, please create an initial release"
-msgstr "Var snäll och skapa en första utgivning nu"
+msgstr "No, vennligst opprett ein innleiande utgjeving"
 
 #: app/blueprints/packages/reviews.py:46 app/blueprints/threads/__init__.py:181
 #: app/blueprints/threads/__init__.py:182
@@ -521,7 +523,7 @@ msgstr "Kommentar"
 
 #: app/blueprints/packages/reviews.py:47
 msgid "Rating"
-msgstr "Betyg"
+msgstr "Vurdering"
 
 #: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:173
@@ -531,53 +533,54 @@ msgstr "Ja"
 #: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:124
 #: app/templates/macros/reviews.html:177
 msgid "Neutral"
-msgstr "Neutral"
+msgstr "Nøytral"
 
 #: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:129
 #: app/templates/macros/reviews.html:181
 msgid "No"
-msgstr "Nej"
+msgstr "Nei"
 
 #: app/blueprints/packages/reviews.py:57
 msgid "You can't review your own package!"
-msgstr "Du kan inte recensera ditt egna paket!"
+msgstr "Du kan ikkje vurdere di eiga pakke!"
 
 #: app/blueprints/packages/reviews.py:67
 msgid ""
 "You've reviewed too many packages recently. Please wait before trying "
 "again, and consider making your reviews more detailed"
 msgstr ""
-"Du har recenserat för många paket nyligen. Var snäll vänta innan du "
-"försöker igen, och överväg att göra dina recensioner mer detaljerade"
+"Du har gjennomgått («reviewed ») for mange pakkar nyleg. Ver venleg å vent "
+"før du prøver igjen, og vurder å gjere gjennomgangane dine meir detaljerte"
 
 #: app/blueprints/packages/reviews.py:80 app/blueprints/threads/__init__.py:207
 #: app/blueprints/threads/__init__.py:240
 #: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:112
 #: app/logic/packages.py:131
 msgid "Linking to blocked sites is not allowed"
-msgstr "Det är inte tillåtet att länka till blockerade webbplatser"
+msgstr "Det er ikkje tillate å lenkje til blokkerte nettstader"
 
 #: app/blueprints/packages/reviews.py:184
+#, fuzzy
 msgid "You can't vote on the reviews on your own package!"
-msgstr "Du kan inte rösta på recensionerna på ditt egna paket!"
+msgstr "Du kan ikkje avgi stemme på vurderingar av di eiga pakke!"
 
 #: app/blueprints/packages/reviews.py:191
 msgid "You can't vote on your own reviews!"
-msgstr "Du kan inte rösta på dina egna recensioner!"
+msgstr "Du kan ikkje stemme på dine eigne vurderingar!"
 
 #: app/blueprints/packages/screenshots.py:33
 #: app/blueprints/packages/screenshots.py:39
 msgid "Title/Caption"
-msgstr "Titel/Undertitel"
+msgstr "Tittel/Beskriving"
 
 #: app/blueprints/packages/screenshots.py:45
 #: app/templates/packages/screenshots.html:110
 msgid "Cover Image"
-msgstr "Titelbild"
+msgstr "Omslagsbilete"
 
 #: app/blueprints/report/__init__.py:34 app/templates/users/modtools.html:79
 msgid "Message"
-msgstr "Meddelande"
+msgstr "Melding"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:51
 #: app/templates/packages/view.html:665 app/templates/report/index.html:4
@@ -587,19 +590,19 @@ msgstr "Rapportera"
 
 #: app/blueprints/threads/__init__.py:71
 msgid "Already subscribed!"
-msgstr "Prenumererar redan!"
+msgstr "Allereie abonnert!"
 
 #: app/blueprints/threads/__init__.py:73
 msgid "Subscribed to thread"
-msgstr "Prenumererar på tråd"
+msgstr "Abonnert på tråd"
 
 #: app/blueprints/threads/__init__.py:88
 msgid "Unsubscribed!"
-msgstr "Avprenumererad!"
+msgstr "Avabonnert!"
 
 #: app/blueprints/threads/__init__.py:92
 msgid "Already not subscribed!"
-msgstr "Redan avprenumererad!"
+msgstr "Allereie ikkje abonnert!"
 
 #: app/blueprints/threads/__init__.py:110
 msgid "Locked thread"
@@ -607,77 +610,77 @@ msgstr "Låst tråd"
 
 #: app/blueprints/threads/__init__.py:113
 msgid "Unlocked thread"
-msgstr "Upplåst tråd"
+msgstr "Opna tråd"
 
 #: app/blueprints/threads/__init__.py:162
 msgid "Cannot delete thread opening post!"
-msgstr "Kan inte ta bort trådens första inlägg!"
+msgstr "Kan ikkje slette opningsinnlegget i tråden!"
 
 #: app/blueprints/threads/__init__.py:236
 msgid "Please wait before commenting again"
-msgstr "Vänta innan du kommenterar igen"
+msgstr "Vennligst vent før du kommenterar igjen"
 
 #: app/blueprints/threads/__init__.py:284
 #: app/templates/macros/package_approval.html:112
 msgid "Open Thread"
-msgstr "Öppna tråd"
+msgstr "Opna tråd"
 
 #: app/blueprints/threads/__init__.py:309
 msgid "Unable to create thread!"
-msgstr "Kunde inte skapa tråd!"
+msgstr "Kan ikkje opprette tråd!"
 
 #: app/blueprints/threads/__init__.py:315
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr "En godkänningstråd finns redan! Överväg att svara där istället"
+msgstr "Det finst allereie ein godkjenningstråd! Vurder å svare der i staden"
 
 #: app/blueprints/threads/__init__.py:319
 msgid "Please wait before opening another thread"
-msgstr "Vänta innan du öppnar en ny tråd"
+msgstr "Vennligst vent før du opnar ein annan tråd"
 
 #: app/blueprints/todo/user.py:192
 #: app/templates/collections/package_add_to.html:46
 msgid "Done"
-msgstr "Färdig"
+msgstr "Ferdig"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
-msgstr "Användarnamn eller E-mail"
+msgstr "Brukarnamn eller e-post"
 
 #: app/blueprints/users/account.py:37 app/blueprints/users/account.py:105
 #: app/templates/users/account.html:14 app/templates/users/login.html:16
 #: app/templates/users/modtools.html:52
 msgid "Password"
-msgstr "Lösenord"
+msgstr "Lykelord"
 
 #: app/blueprints/users/account.py:38 app/blueprints/zipgrep/__init__.py:37
 msgid "Remember me"
-msgstr "Kom ihåg mig"
+msgstr "Hugs meg"
 
 #: app/blueprints/users/account.py:39 app/templates/base.html:188
 #: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
-msgstr "Logga in"
+msgstr "Logg inn"
 
 #: app/blueprints/users/account.py:45
 msgid "Incorrect email or password"
-msgstr "Felaktig E-mail eller lösenord"
+msgstr "Feil e-post eller lykelord"
 
 #: app/blueprints/users/account.py:52
 #, python-format
 msgid "User %(username)s does not exist"
-msgstr "Användare %(username)s finns inte"
+msgstr "Brukar %(username)s eksisterer ikkje"
 
 #: app/blueprints/users/account.py:55
 msgid "Incorrect password. Did you set one?"
-msgstr "Fel lösenord. Har du ett?"
+msgstr "Feil lykelord. Har du sett eitt?"
 
 #: app/blueprints/users/account.py:58
 msgid "You need to confirm the registration email"
-msgstr "Du måste verifiera din registrerings-E-mail"
+msgstr "Du må stadfeste registrerings e-posten"
 
 #: app/blueprints/users/account.py:66
 msgid "Login failed"
-msgstr "Inloggning misslyckades"
+msgstr "Innlogging mislukkast"
 
 #: app/blueprints/users/account.py:100 app/blueprints/users/settings.py:74
 msgid "Display Name"
@@ -686,54 +689,57 @@ msgstr "Visningsnamn"
 #: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:298
 #: app/templates/users/list.html:18
 msgid "Username"
-msgstr "Användarnamn"
+msgstr "Brukarnamn"
 
 #: app/blueprints/users/account.py:102
 msgid ""
 "Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses"
 " (-), and periods (.) allowed"
 msgstr ""
-"Endast alfabetiska bokstäver (A-Za-z), nummer (0-9), understreck (_), "
-"minus (-), och punkt (.) tillåtet"
+"Berre alfabetiske bokstavar (A-Åa-å), tal (0-9), understrek (_), minustegn "
+"(-) og punktum (.) er tillate"
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/account.py:186
 #: app/blueprints/users/account.py:222 app/blueprints/users/account.py:373
 #: app/blueprints/users/settings.py:146
 msgid "Email"
-msgstr "E-mail"
+msgstr "E-post"
 
 #: app/blueprints/users/account.py:106
 msgid "What is the result of the above calculation?"
-msgstr "Vad är resultatet av beräkningen ovan?"
+msgstr "Kva er resultatet av den ovanståande utrekninga?"
 
 #: app/blueprints/users/account.py:107
 msgid "I agree"
-msgstr "Jag godkänner"
+msgstr "Eg samtykkjer"
 
 #: app/blueprints/users/account.py:108 app/templates/users/login.html:34
 #: app/templates/users/register.html:4
 msgid "Register"
-msgstr "Registrera"
+msgstr "Registrer deg"
 
 #: app/blueprints/users/account.py:113
 msgid "Incorrect captcha answer"
-msgstr "Felaktigt CAPTCHA-svar"
+msgstr "Feil svar på CAPTCHA"
 
 #: app/blueprints/users/account.py:117
 msgid "Username is invalid"
-msgstr "Användarnamn är inkorrekt"
+msgstr "Brukarnamnet er ugyldig"
 
 #: app/blueprints/users/account.py:128
 msgid "An account already exists for that username but hasn't been claimed yet."
-msgstr "Ett konto med det användarnamnet existerar redan men gäller inte än."
+msgstr ""
+"Det finst allereie ein konto for det brukarnamnet, men den er ikkje gjort "
+"krav på enno."
 
 #: app/blueprints/users/account.py:131 app/blueprints/users/account.py:138
 msgid "That username/display name is already in use, please choose another."
-msgstr "Det här användarnamnet/visningsnamnet används redan, välj ett annat."
+msgstr ""
+"Det brukarnamnet/visningsnamnet er allereie i bruk, vennligst vel eit anna."
 
 #: app/blueprints/users/account.py:143 app/blueprints/users/account.py:257
 msgid "Email already in use"
-msgstr "E-mail används redan"
+msgstr "E-postadressa er allereie i bruk"
 
 #: app/blueprints/users/account.py:144 app/blueprints/users/account.py:258
 #, python-format
@@ -741,95 +747,94 @@ msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr ""
-"Vi misslyckades att skapa kontot eftersom E-mailen redan används av "
-"%(display_name)s. Försök med en annan mailaddress."
+"Vi klarte ikkje å opprette kontoen, sidan e-postadressa allereie er i bruk "
+"av %(display_name)s. Prøv ein annan e-postadresse."
 
 #: app/blueprints/users/account.py:148 app/blueprints/users/account.py:252
 #: app/blueprints/users/settings.py:174
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
-msgstr ""
-"Den mailaddressen har blivit avprenumererad/svartlistad och kan inte "
-"användas"
+msgstr "Denne e-postadressa er avmeldt/svartelista og kan ikkje nyttast"
 
 #: app/blueprints/users/account.py:187
 msgid "Reset Password"
-msgstr "Återställ lösenord"
+msgstr "Nullstill lykelord"
 
 #: app/blueprints/users/account.py:213
 msgid "Unable to find account"
-msgstr "Kan inte hitta konto"
+msgstr "Kan ikkje finne kontoen"
 
 #: app/blueprints/users/account.py:223 app/blueprints/users/account.py:231
 msgid "New password"
-msgstr "Nytt lösenord"
+msgstr "Nytt lykelord"
 
 #: app/blueprints/users/account.py:224 app/blueprints/users/account.py:232
 msgid "Verify password"
-msgstr "Verifiera lösenord"
+msgstr "Bekreft lykelord"
 
 #: app/blueprints/users/account.py:225 app/blueprints/users/account.py:233
 msgid "Passwords must match"
-msgstr "Lösenord måste stämma överrens"
+msgstr "Lykelord må samsvare"
 
 #: app/blueprints/users/account.py:230
 msgid "Old password"
-msgstr "Gammalt lösenord"
+msgstr "Gammalt lykelord"
 
 #: app/blueprints/users/account.py:241
 msgid "Passwords do not match"
-msgstr "Lösenorden stämmer inte"
+msgstr "Lykelord samsvarer ikkje"
 
 #: app/blueprints/users/account.py:272 app/blueprints/users/account.py:276
 msgid "Your password has been changed successfully."
-msgstr "Ditt lösenord har ändrats."
+msgstr "Ditt lykelord er endra suksessfullt."
 
 #: app/blueprints/users/account.py:291
 msgid "Old password is incorrect"
-msgstr "Felaktigt gammalt lösenord"
+msgstr "Gammalt lykelord er feilaktig"
 
 #: app/blueprints/users/account.py:319
 msgid "Unknown verification token!"
-msgstr "Okänd verifieringstoken!"
+msgstr "Ukjent verifiseringstoken!"
 
 #: app/blueprints/users/account.py:325
 msgid "Token has expired"
-msgstr "Token har gått ut"
+msgstr "Tokenet har utløpt"
 
 #: app/blueprints/users/account.py:339
 msgid "Another user is already using that email"
-msgstr "En annan användare använder redan den E-mailen"
+msgstr "Ein annan brukar har allereie registrert seg med den e-postadressa"
 
 #: app/blueprints/users/account.py:342
 msgid "Confirmed email change"
-msgstr "Bekräftad mejländring"
+msgstr "E-postendring bekreftet"
 
 #: app/blueprints/users/account.py:347
 msgid "Email address changed"
-msgstr "Mejladress har ändrats"
+msgstr "E-postadresse endra"
 
 #: app/blueprints/users/account.py:348
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr ""
-"Din mejladress har ändrats. Om du inte har bett om detta, var vänligen "
-"kontakta en administratör."
+"Din e-postadresse har blitt endra. Om du ikkje ba om dette, vennligst "
+"kontakt ein administrator."
 
 #: app/blueprints/users/account.py:366
 msgid "You may now log in"
-msgstr "Du kan logga in nu"
+msgstr "No kan du logge inn"
 
 #: app/blueprints/users/account.py:374
+#, fuzzy
 msgid "Send"
-msgstr "Skicka"
+msgstr "Send"
 
 #: app/blueprints/users/account.py:405
 msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
 msgstr ""
-"Den mejladdressen är nu svartlistad. Kontakta en administratör om du vill"
-" ångra detta."
+"Den e-postadressa er no svartelista. Vennligst kontakt ein administrator om "
+"du ønskjer å oppheve dette."
 
 #: app/blueprints/users/claim.py:41 app/blueprints/users/claim.py:66
 msgid ""
@@ -837,85 +842,88 @@ msgid ""
 "underscores (_), minuses (-), and periods (.) allowed. Consider "
 "contacting an admin"
 msgstr ""
-"Ogiltigt användarnamn, endast alfabetiska bokstäver (A-Za-z), nummer "
-"(0-9), understreck (_), minus (-), och punkt (.) tillåtet. Kontakta en "
-"administratör"
+"Ugyldig brukarnamn. Berre alfabetiske bokstavar (A-Za-z), tal (0-9), "
+"understrek (_), minustegn (-) og punktum (.) er tillate. Vurder å kontakte "
+"ein administrator"
 
 #: app/blueprints/users/claim.py:46
 msgid "User has already been claimed"
-msgstr "Någon har redan gjort anspråk på denna användare"
+msgstr "Brukar er allereie teken i bruk"
 
 #: app/blueprints/users/claim.py:50
 msgid "Unable to get GitHub username for user"
-msgstr "Kunde inte hitta GitHub-användarnamn för användare"
+msgstr "Kan ikkje hente GitHub-brukarnamn for brukaren"
 
 #: app/blueprints/users/claim.py:73
 msgid "That user has already been claimed!"
-msgstr "Någon har redan gjort anspråk på denna användare!"
+msgstr "Den brukaren er allereie registrert!"
 
 #: app/blueprints/users/claim.py:86
 #, python-format
 msgid "Error whilst attempting to access forums: %(message)s"
-msgstr "Fel när man försökte komma åt forumen: %(message)s"
+msgstr "Feil ved forsøk på å få tilgang til forum: %(message)s"
 
 #: app/blueprints/users/claim.py:90
 msgid "Unable to get forum signature - does the user exist?"
-msgstr "Kunde inte hitta forumsignatur - finns användaren?"
+msgstr "Kan ikkje hente forumsignatur – eksisterer brukaren?"
 
 #: app/blueprints/users/claim.py:105
 msgid "Unable to login as user"
-msgstr "Kunde inte logga in som användare"
+msgstr "Kan ikkje logge inn som brukar"
 
 #: app/blueprints/users/claim.py:111
 msgid "Could not find the key in your signature!"
-msgstr "Kunde inte hitta nyckeln i din signatur!"
+msgstr "Kunne ikkje finne nøkkelen i signaturen din!"
 
 #: app/blueprints/users/claim.py:114
 msgid "Unknown claim type"
-msgstr "Okänd anspråkstyp"
+msgstr "Ukjent påstandstype"
 
 #: app/blueprints/users/profile.py:117
 msgid "Top reviewer"
-msgstr "Högsta recensent"
+msgstr "Topp gjennomgåar («reviewer »)"
 
 #: app/blueprints/users/profile.py:118
 #, python-format
 msgid "%(display_name)s has written the most helpful reviews on ContentDB."
 msgstr ""
-"%(display_name)s har skrivit flest antal hjälpsamma recensioner på "
-"ContentDB."
+"%(display_name)s har skrevet dei mest hjelpsame gjennomgåingane («reviews ») "
+"på ContentDB."
 
 #: app/blueprints/users/profile.py:123
 msgid "2nd most helpful reviewer"
-msgstr "Andra mest hjälpsamma recensent"
+msgstr "Den nest mest hjelpsame gjennomgåaren («reviewer»)"
 
 #: app/blueprints/users/profile.py:125
 msgid "3rd most helpful reviewer"
-msgstr "Tredje mest hjälpsamma recensent"
+msgstr "Den tredje mest hjelpsame gjennomgåaren («reviewer »)"
 
 #: app/blueprints/users/profile.py:126
 #, python-format
 msgid "This puts %(display_name)s in the top %(perc)s%%"
-msgstr "Detta sätter %(display_name)s i topp %(perc)s%%"
+msgstr "Dette plasserer %(display_name)s blant dei øvste %(perc)s%%.\""
 
 #: app/blueprints/users/profile.py:130
 #, python-format
 msgid "Top %(perc)s%% reviewer"
-msgstr "Topp %(perc)s%% recensent"
+msgstr "Topp %(perc)s%% gjennomgåar («reviewer»)"
 
 #: app/blueprints/users/profile.py:131
 #, python-format
 msgid "Only %(place)d users have written more helpful reviews."
-msgstr "Endast %(place)d användare har skrivit fler hjälpsamma recensioner."
+msgstr ""
+"Bare %(place)d brukarar har skrivet meir hjelpsame gjennomgangar («reviews»)."
 
 #: app/blueprints/users/profile.py:136
 msgid "Consider writing more helpful reviews to get a medal."
-msgstr "Överväga att skriva fler hjälpsamma recensioner för att få en medalj."
+msgstr ""
+"Vurder å skrive meir hjelpsame gjennomgangar («reviews») for å få ein "
+"medalje."
 
 #: app/blueprints/users/profile.py:138
 #, python-format
 msgid "You are in place %(place)s."
-msgstr "Du är på plats %(place)s."
+msgstr "Du er på plass %(place)s."
 
 #: app/blueprints/users/profile.py:166
 #, python-format
@@ -930,120 +938,120 @@ msgstr "Topp %(group)d %(type)s"
 #: app/blueprints/users/profile.py:177
 #, python-format
 msgid "%(display_name)s has a %(type)s placed at #%(place)d."
-msgstr "%(display_name)s har en %(type)s placerad på %(place)d:a plats."
+msgstr ""
 
 #: app/blueprints/users/profile.py:192
 #, python-format
 msgid "Your packages have %(downloads)d downloads in total."
-msgstr "Dina paket har %(downloads)d nerladdningar totalt."
+msgstr ""
 
 #: app/blueprints/users/profile.py:193
 msgid "First medal is at 50k."
-msgstr "Första medalj vid 50k."
+msgstr "Fyrste medalje er ved 50k."
 
 #: app/blueprints/users/profile.py:198
 msgid ">300k downloads"
-msgstr "&gt;300k nerladdningar"
+msgstr "&gt;300k nedlastningar"
 
 #: app/blueprints/users/profile.py:201
 msgid ">100k downloads"
-msgstr "&gt;100k nerladdningar"
+msgstr "&gt;100k nedlastningar"
 
 #: app/blueprints/users/profile.py:204
 msgid ">75k downloads"
-msgstr "&gt;75k nerladdningar"
+msgstr "&gt;75k nedlastningar"
 
 #: app/blueprints/users/profile.py:207
 msgid ">50k downloads"
-msgstr "&gt;50k nerladdningar"
+msgstr "&gt;50k nedlastningar"
 
 #: app/blueprints/users/profile.py:208
 #, python-format
 msgid "Has received %(downloads)d downloads across all packages."
-msgstr "Har fått %(downloads)d nerladdningar över alla paket."
+msgstr ""
 
 #: app/blueprints/users/settings.py:36 app/templates/users/profile.html:26
 #: app/templates/users/profile_edit.html:8
 msgid "Edit Profile"
-msgstr "Redigera profil"
+msgstr "Rediger profil"
 
 #: app/blueprints/users/settings.py:41 app/templates/users/account.html:12
 msgid "Account and Security"
-msgstr "Konto och säkerhet"
+msgstr "Konto og Sikkerheit"
 
 #: app/blueprints/users/settings.py:46
 #: app/templates/users/settings_email.html:8
 msgid "Email and Notifications"
-msgstr "E-mail och notiser"
+msgstr "E-post og Varslar"
 
 #: app/blueprints/users/settings.py:51 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
-msgstr "API-tokens"
+msgstr "API-token"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "OAuth2 applikasjonar"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
 msgid "Moderator Tools"
-msgstr "Moderatorverktyg"
+msgstr "Moderatorverktøy"
 
 #: app/blueprints/users/settings.py:76
 msgid "Donation URL"
-msgstr "Donerings-URL"
+msgstr "Donasjons-URL"
 
 #: app/blueprints/users/settings.py:92 app/blueprints/users/settings.py:99
 msgid "A user already has that name"
-msgstr "En användare har redan det namnet"
+msgstr "Ein brukar har allereie det namnet"
 
 #: app/blueprints/users/settings.py:256
 msgid "Users with moderator rank or above cannot be deleted"
-msgstr "Användare med moderatorrank eller över kan inte tas bort"
+msgstr "Brukarar med moderator-rang eller høgare kan ikkje slettast"
 
 #: app/blueprints/users/settings.py:299
 msgid "Display name"
-msgstr "Visningsnamn"
+msgstr "Visingsnamn"
 
 #: app/blueprints/users/settings.py:300
 msgid "Forums Username"
-msgstr "Forumanvändarnamn"
+msgstr "Forumbrukar namn"
 
 #: app/blueprints/users/settings.py:301
 msgid "GitHub Username"
-msgstr "GitHub-användarnamn"
+msgstr "GitHub brukarnamn"
 
 #: app/blueprints/users/settings.py:302 app/templates/users/list.html:14
 msgid "Rank"
-msgstr "Rang"
+msgstr ""
 
 #: app/blueprints/users/settings.py:346
 msgid "Can't promote a user to a rank higher than yourself!"
-msgstr "Kan inte flytta upp en användare till en rang högre än dig själv!"
+msgstr "Du kan ikkje forfremje ein brukar til ein høgare rang enn deg sjølv!"
 
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "Text to find (regex)"
-msgstr "Text att hitta (regex)"
+msgstr "Tekst å finne (regex)"
 
 #: app/blueprints/zipgrep/__init__.py:36
 msgid "File filter"
-msgstr "Filfilter"
+msgstr ""
 
 #: app/blueprints/zipgrep/__init__.py:38 app/templates/base.html:60
 #: app/templates/todo/tags.html:14
 msgid "Search"
-msgstr "Sök"
+msgstr "Søk"
 
 #: app/logic/package_validator.py:37
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
-"Ett paket existerar redan med detta namn. Var vänligen se Policy and "
-"Guidance 3"
+"Det eksisterer allereie ein pakke med dette namnet. Sjå retningslinjene i "
+"Politikk og Veiledning 3 («Policy and Guidance 3 »)"
 
 #: app/logic/package_validator.py:40
 #: app/templates/macros/package_approval.html:36
 msgid "A release is required before this package can be approved."
-msgstr "En utgivning krävs innan detta paket kan godkännas."
+msgstr "Ein utgjeving er påkravd før denne pakken kan godkjennast."
 
 #: app/logic/package_validator.py:46
 #: app/templates/macros/package_approval.html:45
@@ -1051,57 +1059,57 @@ msgstr "En utgivning krävs innan detta paket kan godkännas."
 msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
 "%(deps)s"
-msgstr "Följande hårda beroenden behöver läggas till i ContentDB först: %(deps)s"
+msgstr ""
+"Dei følgjande harde avhengigheitene («hard dependencies ») må leggjast til i "
+"ContentDB først: %(deps)s\""
 
 #: app/logic/package_validator.py:51
 #: app/templates/macros/package_approval.html:41
 msgid "You need to add at least one screenshot."
-msgstr "Du behöver lägga till åtminstonde en skärmdump."
+msgstr "Du må leggje til minst eitt skjermbilete."
 
 #: app/logic/package_validator.py:54
 #: app/templates/macros/package_approval.html:49
 msgid "Please wait for the license to be added to CDB."
-msgstr "Var snäll och vänta på att denna licens läggs till på CDB."
+msgstr "Ver venleg og vent på at lisensen vert lagt til i CDB."
 
 #: app/logic/packages.py:98
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr ""
-"Namn kan bara innehålla gemena bokstäver (a-z), siffror (0-9) och "
-"understreck (_)"
 
 #: app/logic/packages.py:112
 msgid "You don't have permission to edit this package"
-msgstr "Du har inte behörighet att redigera detta paket"
+msgstr "Du har ikkje løyve til å redigere denne pakken"
 
 #: app/logic/packages.py:116
 msgid "You don't have permission to change the package name"
-msgstr "Du har inte behörighet att ändra paketnamnet"
+msgstr "Du har ikkje løyve til å endre pakkenamnet"
 
 #: app/logic/releases.py:32
 msgid "You don't have permission to make releases"
-msgstr "Du har inte behörighet att göra utgivningar"
+msgstr "Du har ikkje løyve til å lage utgjevingar"
 
 #: app/logic/releases.py:37
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
 msgstr ""
-"Du har skapat för många utgivningar för detta paket i de senaste 5 "
-"minuterna, vänta innan du försöker igen"
+"Du har laga for mange utgjevingar for denne pakken dei siste 5 minutta, ver "
+"venleg å vent før du prøver igjen"
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr "Ogiltig commit-hash; den måste vara en 40 bokstäver lång base16-sträng"
+msgstr ""
 
 #: app/logic/screenshots.py:32
 msgid "Too many requests, please wait before trying again"
-msgstr "För många förfrågningar, vänta innan du försöker igen"
+msgstr "For mange førespurnader, ver venleg å vent før du prøver igjen"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "Ei PNG-, JPEG- eller WebP biletfil"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1109,21 +1117,20 @@ msgid ""
 "Screenshot is too small, it should be at least %(width)s by %(height)s "
 "pixels"
 msgstr ""
-"Skärmdump är för liten, den måste vara åtminstonde %(width)sx%(height)s "
-"pixlar"
+"Skjermbiletet er for lite, det bør være minst %(width)s x %(height)s pikslar"
 
 #: app/logic/uploads.py:55
 #, python-format
 msgid "Please upload %(file_desc)s"
-msgstr "Var snäll och ladda upp %(file_desc)s"
+msgstr "Ver venleg å last opp %(file_desc)s"
 
 #: app/logic/uploads.py:58
 msgid "Uploaded image isn't actually an image"
-msgstr "Uppladdad bild är egentligen inte en bild"
+msgstr "Det opplasta biletet er ikkje eigentleg eit bilete"
 
 #: app/models/packages.py:68
 msgid "Mod"
-msgstr "Modd"
+msgstr "Modifikasjon"
 
 #: app/models/packages.py:70
 msgid "Game"
@@ -1131,12 +1138,13 @@ msgstr "Spel"
 
 #: app/models/packages.py:72
 msgid "Texture Pack"
-msgstr "Texturpaket"
+msgstr "Teksturpakke"
 
 #: app/models/packages.py:77 app/templates/base.html:39
 #: app/templates/modnames/view.html:14
+#, fuzzy
 msgid "Mods"
-msgstr "Moddar"
+msgstr "Mods"
 
 #: app/models/packages.py:79 app/templates/base.html:42
 #: app/templates/modnames/view.html:17
@@ -1145,15 +1153,15 @@ msgstr "Spel"
 
 #: app/models/packages.py:81 app/templates/base.html:45
 msgid "Texture Packs"
-msgstr "Texturpaket"
+msgstr "\"Teksturpakkar\""
 
 #: app/models/packages.py:170
 msgid "Submit for Approval"
-msgstr "Skicka in för godkännande"
+msgstr "Send inn for godkjenning"
 
 #: app/models/packages.py:172
 msgid "Approve"
-msgstr "Godkänn"
+msgstr "Godkjenn"
 
 #: app/models/packages.py:174 app/templates/api/create_edit_token.html:17
 #: app/templates/collections/delete.html:14
@@ -1165,38 +1173,36 @@ msgstr "Godkänn"
 #: app/templates/threads/delete_thread.html:19
 #: app/templates/threads/view.html:50 app/templates/users/delete.html:34
 msgid "Delete"
-msgstr "Ta bort"
+msgstr "Slett"
 
 #: app/tasks/emails.py:119
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
-msgstr ""
-"Du har fått detta mejl eftersom du är en registrerad användare av "
-"ContentDB."
+msgstr "Du får denne e-posten fordi du er ein registrert brukar av ContentDB."
 
 #: app/tasks/emails.py:125 app/templates/emails/verify.html:30
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr ""
-"Du har fått detta mejl eftersom någon (förhoppningsvis du) skrev in din "
-"mejladress som en användares mejl."
+"Du mottar denne e-posten fordi nokon (forhåpentlegvis du) har oppgitt e-"
+"postadressa di som ein brukar si e-post."
 
 #: app/tasks/emails.py:160
 #, python-format
 msgid "%(num)d new notifications"
-msgstr "%(num)d nya notiser"
+msgstr "%(num)d nye varsel"
 
 #: app/tasks/emails.py:162 app/templates/macros/forms.html:59
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
-msgstr "Visa"
+msgstr "Vis"
 
 #: app/tasks/emails.py:165
 msgid "Manage email settings"
-msgstr "Hantera mejlinställningar"
+msgstr "Håndter e-postinnstillingar"
 
 #: app/tasks/emails.py:167 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
@@ -1206,23 +1212,23 @@ msgstr "Hantera mejlinställningar"
 #: app/templates/threads/view.html:41 app/templates/users/unsubscribe.html:4
 #: app/templates/users/unsubscribe.html:61
 msgid "Unsubscribe"
-msgstr "Avprenumerera"
+msgstr "Avslutt abonnementet"
 
 #: app/templates/404.html:4
 msgid "Page not found"
-msgstr "Sida kunde inte hittas"
+msgstr "Sida vart ikkje funnen"
 
 #: app/templates/404.html:10
 msgid ""
 "That page could not be found. The link may be broken, the page may have "
 "been deleted, or you may not have access to it."
 msgstr ""
-"Den sidan kunde inte hittas. Länken kanske är trasig, sidan kan ha tagits"
-" bort, eller så har du inte åtkomst till denna sida."
+"Denne sida kunne ikkje bli funnen. Lenka kan vere øydelagt, sida kan ha "
+"blitt sletta, eller du kan mangla tilgang til den."
 
 #: app/templates/base.html:48
 msgid "Random"
-msgstr "Slumpmässig"
+msgstr "Tilfeldig"
 
 #: app/templates/base.html:51 app/templates/base.html:256
 #: app/templates/packages/bulk_update_conf.html:8
@@ -1230,33 +1236,33 @@ msgstr "Slumpmässig"
 #: app/templates/todo/game_support.html:8 app/templates/todo/user.html:45
 #: app/templates/todo/user.html:69
 msgid "Help"
-msgstr "Hjälp"
+msgstr "Hjelp"
 
 #: app/templates/base.html:58
 #, python-format
 msgid "Search %(type)s"
-msgstr "Sök %(type)s"
+msgstr "Søk %(type)s"
 
 #: app/templates/base.html:58 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
-msgstr "Sök alla paket"
+msgstr "Søk i alle pakkar"
 
 #: app/templates/base.html:75
 msgid "Work Queue"
-msgstr "Arbetskö"
+msgstr "Arbeidskø"
 
 #: app/templates/base.html:88 app/templates/base.html:140
 msgid "To do list"
-msgstr "Att-göra lista"
+msgstr "Gjeremålsliste"
 
 #: app/templates/base.html:97 app/templates/notifications/list.html:4
 msgid "Notifications"
-msgstr "Notiser"
+msgstr "Varslarar"
 
 #: app/templates/base.html:118
 msgid "Add Package"
-msgstr "Lägg till paket"
+msgstr "Legg til Pakke"
 
 #: app/templates/base.html:135
 msgid "Profile"
@@ -1264,39 +1270,39 @@ msgstr "Profil"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr "Mina samlingar"
+msgstr "Mine Samlingar"
 
 #: app/templates/base.html:163
 msgid "Admin"
-msgstr "Administration"
+msgstr "Administrator"
 
 #: app/templates/base.html:166
 msgid "License Editor"
-msgstr "Licensredigerare"
+msgstr ""
 
 #: app/templates/base.html:171
 msgid "Restore Package"
-msgstr "Återställ paket"
+msgstr ""
 
 #: app/templates/base.html:174
 msgid "Tag Editor"
-msgstr "Taggredigerare"
+msgstr ""
 
 #: app/templates/base.html:176
 msgid "Create Tag"
-msgstr "Skapa tagg"
+msgstr ""
 
 #: app/templates/base.html:181 app/templates/packages/release_new.html:12
 msgid "Settings"
-msgstr "Inställningar"
+msgstr "Innstillingar"
 
 #: app/templates/base.html:184
 msgid "Sign out"
-msgstr "Logga ut"
+msgstr "Logg ut"
 
 #: app/templates/base.html:213
 msgid "Help translate ContentDB"
-msgstr "Hjälp översätt ContentDB"
+msgstr "Hjelp å omsetje ContentDB"
 
 #: app/templates/base.html:257
 msgid "About"
@@ -1304,11 +1310,11 @@ msgstr "Om"
 
 #: app/templates/base.html:258
 msgid "Rules"
-msgstr "Regler"
+msgstr "Reglar"
 
 #: app/templates/base.html:259
 msgid "Policy and Guidance"
-msgstr "Policy och förhållning"
+msgstr "Reglar og rettleiing"
 
 #: app/templates/base.html:260
 msgid "API"
@@ -1316,15 +1322,15 @@ msgstr "API"
 
 #: app/templates/base.html:261 app/templates/users/register.html:37
 msgid "Privacy Policy"
-msgstr "Integritetspolicy"
+msgstr "Personvernreglar"
 
 #: app/templates/base.html:263
 msgid "Report / DMCA"
-msgstr "Anmäl / DMCA"
+msgstr "Rapportering / DMCA"
 
 #: app/templates/base.html:265
 msgid "User List"
-msgstr "Användarlista"
+msgstr "Brukarliste"
 
 #: app/templates/base.html:266 app/templates/packages/view.html:189
 #: app/templates/packages/view.html:654 app/templates/threads/list.html:4
@@ -1334,25 +1340,25 @@ msgstr "Trådar"
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr "Samlingar"
+msgstr ""
 
 #: app/templates/base.html:268
 msgid "Support Packages"
-msgstr "Stöd paket"
+msgstr "Støttepakkar"
 
 #: app/templates/base.html:269
 msgid "Source Code"
-msgstr "Källkod"
+msgstr "Kjeldekode"
 
 #: app/templates/index.html:4
 msgid "Welcome"
-msgstr "Välkommen"
+msgstr "Velkommen"
 
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
-"Välkommen till det bästa stället för att hitta Minetestmoddar, spel och "
-"texturpaket"
+"Velkommen til det beste stedet for å finne Minetest-mods, spel og "
+"teksturpakkar"
 
 #: app/templates/collections/create_edit.html:81
 #: app/templates/collections/list.html:39
@@ -1373,20 +1379,20 @@ msgstr "<strong>%(title)s</strong> av %(author)s"
 #: app/templates/packages/view.html:193 app/templates/packages/view.html:325
 #: app/templates/users/profile.html:279
 msgid "Reviews"
-msgstr "Recensioner"
+msgstr "Omtalar"
 
 #: app/templates/index.html:93 app/templates/packages/view.html:271
 msgid "Previous"
-msgstr "Föregående"
+msgstr "Forrige"
 
 #: app/templates/index.html:97 app/templates/packages/view.html:275
 #: app/templates/users/claim_forums.html:87
 msgid "Next"
-msgstr "Nästa"
+msgstr "Neste"
 
 #: app/templates/index.html:103
 msgid "Featured"
-msgstr "Presenterad"
+msgstr "Utvald"
 
 #: app/templates/index.html:108 app/templates/index.html:115
 #: app/templates/index.html:122 app/templates/index.html:129
@@ -1397,15 +1403,15 @@ msgstr "Presenterad"
 #: app/templates/packages/game_hub.html:51
 #: app/templates/packages/game_hub.html:58
 msgid "See more"
-msgstr "Se mer"
+msgstr "Sjå meir"
 
 #: app/templates/index.html:110 app/templates/packages/game_hub.html:32
 msgid "Recently Added"
-msgstr "Senast tillagd"
+msgstr "Nyleg lagt til"
 
 #: app/templates/index.html:117 app/templates/packages/game_hub.html:39
 msgid "Recently Updated"
-msgstr "Senast uppdaterad"
+msgstr "Nyleg oppdatert"
 
 #: app/templates/index.html:124
 msgid "Top Games"
@@ -1413,58 +1419,58 @@ msgstr "Topp spel"
 
 #: app/templates/index.html:131 app/templates/packages/game_hub.html:46
 msgid "Top Mods"
-msgstr "Topp moddar"
+msgstr "Topp mods"
 
 #: app/templates/index.html:138 app/templates/packages/game_hub.html:53
 msgid "Top Texture Packs"
-msgstr "Topp texturpaket"
+msgstr "Topp Teksturpakkar"
 
 #: app/templates/index.html:142
 msgid "Search by Tags"
-msgstr "Sök från taggar"
+msgstr "Søk etter emneknaggar"
 
 #: app/templates/index.html:160 app/templates/packages/game_hub.html:60
 msgid "Highest Reviewed"
-msgstr "Högst recenserad"
+msgstr "Høgst vurdert"
 
 #: app/templates/index.html:167
 msgid "Recent Positive Reviews"
-msgstr "Senaste positiva recensioner"
+msgstr ""
 
 #: app/templates/index.html:174
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
-msgstr "CDB har %(count)d paket, med %(downloads)d nerladdningar totalt."
+msgstr ""
 
 #: app/templates/admin/audit_view.html:16
 #, python-format
 msgid "Caused by %(author)s."
-msgstr "Orsakad av %(author)s."
+msgstr ""
 
 #: app/templates/admin/audit_view.html:20
 msgid "Caused by a deleted user."
-msgstr "Orsakad av borttagen användare."
+msgstr ""
 
 #: app/templates/admin/send_bulk_email.html:4
 msgid "Send bulk email"
-msgstr "Skicka bulkmejl"
+msgstr "Send masseutsending («bulk») av e-post"
 
 #: app/templates/admin/send_bulk_notification.html:4
 msgid "Send bulk notification"
-msgstr "Skicka bulknotis"
+msgstr "Send masseutsending («bulk») av varsel"
 
 #: app/templates/admin/send_email.html:4
 #, python-format
 msgid "Send email to %(username)s"
-msgstr "Skicka mejl till %(username)s"
+msgstr "Send e-post til %(username)s"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
-msgstr "Ny licens"
+msgstr "Ny lisens"
 
 #: app/templates/admin/licenses/list.html:10
 msgid "Licenses"
-msgstr "Licenser"
+msgstr "Lisensar"
 
 #: app/templates/admin/tags/list.html:34
 msgid "Views"
@@ -1473,80 +1479,81 @@ msgstr "Visningar"
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Minetest Versions"
-msgstr "Minetestversioner"
+msgstr "Minetest-versjonar"
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
-msgstr "Ny version"
+msgstr "Ny versjon"
 
 #: app/templates/admin/warnings/list.html:4
 #: app/templates/admin/warnings/list.html:10
 msgid "Warnings"
-msgstr "Varningar"
+msgstr "Advarsler"
 
 #: app/templates/admin/warnings/list.html:8
 msgid "New Warning"
-msgstr "Ny varning"
+msgstr "Ny advarsel"
 
 #: app/templates/api/create_edit_token.html:5
 #: app/templates/oauth/create_edit.html:5
 #, python-format
 msgid "Edit - %(name)s"
-msgstr "Redigera - %(name)s"
+msgstr "Rediger - %(name)s"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
-msgstr "Skapa API-token"
+msgstr "Lag API-token"
 
 #: app/templates/api/create_edit_token.html:25
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
 msgstr ""
+"Denne tokene vart oppretta av applikasjonenen '%(title)s' av %(author)s."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Klikk 'Slett' for å tilbakekalle tilgang."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
-msgstr "API-tokens låter skript agera i ditt ställe."
+msgstr "API-token tillater skript å handle på dine vegne."
 
 #: app/templates/api/create_edit_token.html:31
 msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
-"Var aktsam med vem eller vilka du delar tokens med, eftersom du är "
-"ansvarig för ditt kontos handlingar."
+"Ver forsiktig med kven du deler token med, då du er ansvarleg for "
+"handlingane til kontoen din."
 
 #: app/templates/api/create_edit_token.html:36
 msgid "Access Token"
-msgstr "Åtkomsttoken"
+msgstr "Tilgangstoken"
 
 #: app/templates/api/create_edit_token.html:39
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
 msgstr ""
-"På grund av säkerheten visas åtkomsttokens endast en gång. Återställ den "
-"om du har tappat bort den."
+"Av tryggleiksomsyn vil tilgangstoken berre visast éin gong. Tilbakestill "
+"tokenet om det vert mista."
 
 #: app/templates/api/create_edit_token.html:46
 msgid "Reset"
-msgstr "Återställ"
+msgstr "Tilbakestill"
 
 #: app/templates/api/create_edit_token.html:56
 msgid "Human-readable name to tell tokens apart."
-msgstr "Mänskligt läsbart namn för att urskilja olika tokens."
+msgstr "Lesbart namn for å skilje token frå kvarandre."
 
 #: app/templates/api/create_edit_token.html:57
 msgid "Recommended: Only allows token to interact with a particular package."
-msgstr "Rekommenderat: Tillåt en token att endast påverka ett specifikt paket."
+msgstr "Anbefalt: Berre tillater tokenet å samhandle med ein spesifikk pakke."
 
 #: app/templates/api/list_tokens.html:4
 #, python-format
 msgid "API Tokens | %(username)s"
-msgstr "API-tokens | %(username)s"
+msgstr "API-tokenene | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/collections/list.html:21
 #: app/templates/macros/topics.html:29 app/templates/macros/topics.html:65
@@ -1554,33 +1561,35 @@ msgstr "API-tokens | %(username)s"
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
-msgstr "Skapa"
+msgstr "Opprett"
 
 #: app/templates/api/list_tokens.html:9
 msgid "API Documentation"
-msgstr "API-dokumentation"
+msgstr "API-dokumentasjon"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Program"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
-msgstr "Ingen token skapades"
+msgstr ""
 
 #: app/templates/collections/create_edit.html:5
 #: app/templates/collections/view.html:42 app/templates/macros/releases.html:68
 #: app/templates/packages/view.html:115 app/templates/packages/view.html:248
 msgid "Edit"
-msgstr "Redigera"
+msgstr "Rediger"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr "Ny samling"
+msgstr "Ny Samling"
 
 #: app/templates/collections/create_edit.html:32
 msgid "Users won't be redirected when going to the old URL"
-msgstr "Användare kommer inte bli omdirigerade när de går till den gamla URL:en"
+msgstr ""
+"Brukarar vil ikkje bli omdirigert når dei går til den gamle nettadressa (URL-"
+"en)"
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
@@ -1589,32 +1598,32 @@ msgstr ""
 #: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
 msgid "No results"
-msgstr "Inga resultat"
+msgstr ""
 
 #: app/templates/collections/create_edit.html:76
 #: app/templates/packages/remove.html:58 app/templates/packages/view.html:127
 msgid "Remove"
-msgstr "Ta bort"
+msgstr "Fjerna"
 
 #: app/templates/collections/create_edit.html:89
 msgid "You can replace the description with your own"
-msgstr "Du kan ersätta beskrivningen med din egna"
+msgstr ""
 
 #: app/templates/collections/create_edit.html:103
 msgid "Are you sure you want to remove {title}?"
-msgstr "Är du säker att du vill ta bort {title}?"
+msgstr ""
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr "Ta bort samling \"%(title)s\" av %(author)s"
+msgstr ""
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
 #: app/templates/threads/delete_thread.html:16
 #: app/templates/users/delete.html:13
 msgid "Deleting is permanent"
-msgstr "Borttagning är permanent"
+msgstr ""
 
 #: app/templates/collections/delete.html:13
 #: app/templates/oauth/authorize.html:71 app/templates/packages/remove.html:56
@@ -1628,109 +1637,101 @@ msgstr "Avbryt"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr "%(author)s's samlingar"
+msgstr ""
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr "Inga samlingar"
+msgstr ""
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr "Lägg till %(package_title)s till en samling"
+msgstr ""
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr "Skapa samling"
+msgstr ""
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr "Du har inga samlingar"
+msgstr ""
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr "Skapa kopia"
+msgstr ""
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr "En samling av %(author)s"
+msgstr ""
 
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
-"För att lägga till ett paket, gå till paketets sida och tryck på 'Lågg "
-"till samling'"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
-msgstr "Stöd paket"
+msgstr ""
 
 #: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
-msgstr "Vissa innehållsskapare tar emot donationer för sitt arbete."
+msgstr ""
 
 #: app/templates/donate/index.html:9
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
-"Donationer är ett utmärkt sätt att stödja dina favoritmoddare, konstnärer"
-" och spelutvecklare."
 
 #: app/templates/donate/index.html:37
 #, python-format
 msgid "by %(author)s"
-msgstr "av %(author)s"
+msgstr ""
 
 #: app/templates/donate/index.html:42
 msgid "View package"
-msgstr "Visa paket"
+msgstr ""
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:104
 msgid "Donate"
-msgstr "Donera"
+msgstr "Gje ei gåve"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr "Baserat på dina recensioner / favoriter"
+msgstr ""
 
 #: app/templates/donate/index.html:67
 msgid ""
 "No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
 msgstr ""
-"Inga recenserade paket accepterar donationer. Prova att recensera dina "
-"favoritpaket"
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
 msgstr ""
-"Logga in för att se rekommendationer baserade på de paket som du har "
-"recenserat"
 
 #: app/templates/donate/index.html:78
 msgid "Top packages"
-msgstr "Toppaket"
+msgstr "Topp pakkar"
 
 #: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr "%(count)d paket söker donationer"
+msgstr ""
 
 #: app/templates/emails/notification.html:10
 #, python-format
 msgid "From %(username)s and on package %(package)s."
-msgstr "Från %(username)s på paket %(package)s."
+msgstr ""
 
 #: app/templates/emails/notification.html:13
 #, python-format
 msgid "From %(username)s."
-msgstr "Från %(username)s."
+msgstr ""
 
 #: app/templates/emails/notification.html:19
 msgid "View Notification"
-msgstr "Visa notis"
+msgstr ""
 
 #: app/templates/emails/notification.html:26
 #: app/templates/emails/notification_digest.html:46
@@ -1738,297 +1739,281 @@ msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB, and have email notifications enabled."
 msgstr ""
-"Du har fått detta mejl eftersom du är en registrerad användare av "
-"ContentDB, och har mejlnotiser aktiverade."
 
 #: app/templates/emails/notification.html:30
 #: app/templates/emails/notification_digest.html:50
 msgid "Manage your preferences"
-msgstr "Hantera dina preferenser"
+msgstr ""
 
 #: app/templates/emails/notification.html:37
 #, python-format
 msgid "This is a '%(type)s' notification."
-msgstr "Detta är en '%(type)s'-notis."
+msgstr ""
 
 #: app/templates/emails/notification_digest.html:14
 #: app/templates/emails/notification_digest.html:31
 #, python-format
 msgid "from %(username)s."
-msgstr "från %(username)s."
+msgstr ""
 
 #: app/templates/emails/notification_digest.html:24
 msgid "Other Notifications"
-msgstr "Andra notiser"
+msgstr ""
 
 #: app/templates/emails/notification_digest.html:39
 msgid "View Notifications"
-msgstr "Visa notiser"
+msgstr ""
 
 #: app/templates/emails/unable_to_find_account.html:2
 msgid ""
 "We were unable to perform the password reset as we could not find an "
 "account associated with this email."
 msgstr ""
-"Vi kunde inte hantera lösenordsåterställningen eftersom vi inte kunde "
-"hitta ett konto associerat med denna mejl."
 
 #: app/templates/emails/unable_to_find_account.html:5
 msgid ""
 "This may be because you used another email with your account, or because "
 "you never confirmed your email."
 msgstr ""
-"Detta kan vara eftersom du använde en annan mejladress med ditt konto, "
-"eller eftersom du aldrig verifierade din mejl."
 
 #: app/templates/emails/unable_to_find_account.html:8
 msgid "You can use GitHub to log in if it is associated with your account."
 msgstr ""
-"Du kan använda GitHub för att logga in om det är associerat med ditt "
-"konto."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact rubenwardy for help."
-msgstr "Annars kan du kontakta rubenwardy för hjälp."
+msgstr ""
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
 "If you weren't expecting to receive this email, then you can safely "
 "ignore it."
-msgstr "Om du inte förväntade detta mejl kan du ignorera detta."
+msgstr ""
 
 #: app/templates/emails/verify.html:4
 #: app/templates/emails/verify_unsubscribe.html:5
 msgid "Hello!"
-msgstr "Hej!"
+msgstr "Hei!"
 
 #: app/templates/emails/verify.html:7
 msgid ""
 "This email has been sent to you because someone (hopefully you) has "
 "entered your email address as a user's email."
 msgstr ""
-"Detta mejl har skickats till dig eftersom någon (förhoppningsvis du) har "
-"fyllt i din mejladress som en användares mejl."
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
-msgstr "Om det inte var du kan du bara ta bort detta mejl."
+msgstr ""
 
 #: app/templates/emails/verify.html:15
 msgid "If this was you, then please click this link to confirm the address:"
 msgstr ""
-"Om det var du, var snäll och tryck på denna länk för att bekräfta din "
-"adress:"
 
 #: app/templates/emails/verify.html:19
 msgid "Confirm Email Address"
-msgstr "Bekräfta Mejladress"
+msgstr "Bekreft e-postadressa"
 
 #: app/templates/emails/verify.html:23
 #: app/templates/emails/verify_unsubscribe.html:17
 msgid "Or paste this into your browser:"
-msgstr "Eller klistra in detta i din webbläsare:"
+msgstr "Eller lim dette inn i nettlesaren din:"
 
 #: app/templates/emails/verify_unsubscribe.html:9
 msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
-"Vi är ledsen att se dig gå. Du behöver endast göra en sak till innan din "
-"mejladress är svartlistad."
+"Vi beklagar at du går. Du treng berre å gjere éin ting til før e-postadressa "
+"di vert svartelista."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
 msgstr ""
-"Du får detta mejl eftersom någon (förhoppningsvis du) har fyllt i din "
-"mejladress i avprenumerationsformuläret."
 
 #: app/templates/macros/audit_log.html:13
 #, python-format
 msgid "Severity: %(sev)s."
-msgstr "Allvarlighetsgrad %(sev)s."
+msgstr ""
 
 #: app/templates/macros/audit_log.html:32
 msgid "Deleted User"
-msgstr "Borttagen Användare"
+msgstr "Sletta brukar"
 
 #: app/templates/macros/audit_log.html:64
 msgid "No audit log entries."
-msgstr "Inga auditeringloggsposter."
+msgstr ""
 
 #: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:145
 #: app/templates/packages/remove.html:48 app/templates/packages/view.html:444
 #: app/templates/users/modtools.html:86
 msgid "Required"
-msgstr "Nödvändiga"
+msgstr ""
 
 #: app/templates/macros/forms.html:122
 msgid "Start typing to see suggestions"
-msgstr "Börja skriv för att se förslag"
+msgstr ""
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
 msgid "State"
-msgstr "Status"
+msgstr ""
 
 #: app/templates/macros/package_approval.html:26
 msgid "Set up releases"
-msgstr "Sätt upp utgivningar"
+msgstr ""
 
 #: app/templates/macros/package_approval.html:31
 msgid "You need to create a release before this package can be approved."
-msgstr "Du måste skapa en utgivning innan detta paket kan godkännas."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:33
 msgid "Release is still importing, or has an error."
-msgstr "Utgivning importeras fortfarande, eller har ett fel."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:56
 msgid "You should add at least one screenshot."
-msgstr "Du bör lägga till åtmindstonde en skärmdump."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:62
 msgid "Please wait for the release to be approved."
-msgstr "Var snäll och vänta på att utgivningen ska bli godkänd."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:64
 msgid "You can now approve this package if you're ready."
-msgstr "Du kan nu godkänna detta paket om du är redo."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:66
 msgid "Please wait for the package to be approved."
-msgstr "Var snäll och vänta för detta paket att bli godkänt."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:70
 msgid "You can now submit this package for approval if you're ready."
-msgstr "Du kan skicka detta paket för godkännande om du är redo."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:72
 msgid "This package can be submitted for approval when ready."
-msgstr "Detta paket kan skickas för godkännande när redo."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:102
 msgid "Please make sure that this package has the right to the names it uses."
-msgstr "Var snäll och kontrollera att paketet har rätt till det namn den använder."
+msgstr ""
 
 #: app/templates/macros/package_approval.html:104
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr ""
-"Var snäll och kontrollera att paketet har rätt till att använda namnen "
-"%(names)s"
 
 #: app/templates/macros/package_approval.html:115
 msgid "Package approval thread"
-msgstr "Paketgodkännandetråd"
+msgstr ""
 
 #: app/templates/macros/package_approval.html:116
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
-msgstr "Du kan öppna en tråd om du har frågor för godkännaren eller paketskaparen."
+msgstr ""
 
 #: app/templates/macros/packagegridtile.html:25
 msgid "<b>Warning:</b> Non-free code and media."
-msgstr "<b>Varning:</b> Icke-fri kod och media."
+msgstr "<b>Åtvaring:</b> Ikkje-fri kode og media."
 
 #: app/templates/macros/packagegridtile.html:29
 msgid "<b>Warning:</b> Non-free code."
-msgstr "<b>Varning:</b> Icke-fri kod."
+msgstr "<b>Åtvaring:</b> Ikkje-fri kode."
 
 #: app/templates/macros/packagegridtile.html:33
 msgid "<b>Warning:</b> Non-free media."
-msgstr "<b>Varning:</b> Icke-fri media."
+msgstr "<b>Åtvaring:</b> Ikkje-fri media."
 
 #: app/templates/macros/packagegridtile.html:45
 msgid "No packages available"
-msgstr "Inga paket tillgängliga"
+msgstr ""
 
 #: app/templates/macros/releases.html:23 app/templates/macros/releases.html:53
 #: app/templates/macros/releases.html:99
 #, python-format
 msgid "created %(date)s"
-msgstr "skapad %(date)s"
+msgstr ""
 
 #: app/templates/macros/releases.html:66
 msgid "Edit / Approve"
-msgstr "Redigera / Godkänn"
+msgstr ""
 
 #: app/templates/macros/releases.html:103
 #: app/templates/packages/release_edit.html:31
 msgid "Importing..."
-msgstr "Importerar..."
+msgstr ""
 
 #: app/templates/macros/releases.html:106
 msgid "Waiting for approval."
-msgstr "Väntar på godkännande."
+msgstr ""
 
 #: app/templates/macros/releases.html:113
 msgid "No releases available."
-msgstr "Inga utgivningar tillgängliga."
+msgstr ""
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
-msgstr "Hjälpsam"
+msgstr "Hjelpsam"
 
 #: app/templates/macros/reviews.html:13
 msgid "Unhelpful"
-msgstr "Ohjälpsam"
+msgstr "Uhjelpsam"
 
 #: app/templates/macros/reviews.html:85
 #, python-format
 msgid "%(num)d comments"
-msgstr "%(num)d kommentarer"
+msgstr "%(num)d kommentarar"
 
 #: app/templates/macros/reviews.html:97
 msgid "No reviews, yet."
-msgstr "Inga recensioner, än."
+msgstr "Ingen omtalar enno."
 
 #: app/templates/macros/reviews.html:107 app/templates/macros/reviews.html:161
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
-msgstr "Recension"
+msgstr "Omtale"
 
 #: app/templates/macros/reviews.html:112 app/templates/macros/reviews.html:166
 #: app/templates/packages/review_create_edit.html:41
 #, python-format
 msgid "Do you recommend this %(type)s?"
-msgstr "Rekommenderar du denna %(type)s?"
+msgstr "Vil du anbefale dette %(type)s?"
 
 #: app/templates/macros/reviews.html:134
 #: app/templates/packages/review_create_edit.html:46
 msgid "Why or why not? Try to be constructive"
-msgstr "Varför eller varför inte? Försök vara konstruktiv"
+msgstr ""
 
 #: app/templates/macros/reviews.html:151
 msgid "Post Review"
-msgstr "Skicka recension"
+msgstr ""
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr "Rapportera ett fel"
+msgstr ""
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr "%(display_name)ss paket"
+msgstr ""
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr "Datumintervall..."
+msgstr ""
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
-msgstr "Nerladdningar, senaste 7 dagar"
+msgstr "Nedlastingar, siste 7 dagar"
 
 #: app/templates/macros/stats.html:53
 msgid "Downloads, past 30 days"
-msgstr "Nerladdningar, senaste 30 dagar"
+msgstr "Nedlastingar, siste 30 dagar"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr "Nerladdningar mellan $1 till $2"
+msgstr ""
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
@@ -2036,15 +2021,15 @@ msgstr "$1 per dag"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
-msgstr "JavaScript krävs för att se diagram och statistik"
+msgstr "JavaScript er nødvendig for å vise diagram og statistikk"
 
 #: app/templates/macros/stats.html:73
 msgid "Lifetime unique downloads"
-msgstr "Livstid unika nerladdningar"
+msgstr ""
 
 #: app/templates/macros/stats.html:83
 msgid "Loading..."
-msgstr "Laddar..."
+msgstr "Laster.."
 
 #: app/templates/macros/stats.html:86
 msgid "No data"
@@ -2052,7 +2037,7 @@ msgstr "Ingen data"
 
 #: app/templates/macros/stats.html:91
 msgid "Downloads by Package"
-msgstr "Nerladdningar efter paket"
+msgstr "Nedlastingar per pakke"
 
 #: app/templates/macros/stats.html:93 app/templates/macros/stats.html:100
 #: app/templates/macros/stats.html:112
@@ -2060,82 +2045,76 @@ msgid ""
 "This is a stacked area graph. For total downloads, look at the combined "
 "height."
 msgstr ""
-"Detta är ett staplat områdesdiagram. För totala nerladdningar se den "
-"kombinerade höjden."
 
 #: app/templates/macros/stats.html:98
 msgid "Downloads by Client"
-msgstr "Nerladdningar av klient"
+msgstr ""
 
 #: app/templates/macros/stats.html:104
 msgid "Downloads by Reason"
-msgstr "Nerladdningar av anledning"
+msgstr "Nedlastingar etter årsak"
 
 #: app/templates/macros/stats.html:106
 msgid "<b>New Install</b>: the user clicked [Install] inside of Minetest."
-msgstr "<b>Ny installering</b>: användaren tryckte [Install] innanför Minetest."
+msgstr ""
 
 #: app/templates/macros/stats.html:107
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
 msgstr ""
-"<b>Beroende</b>: var installerad automatiskt för att gottgöra ett "
-"beroende."
 
 #: app/templates/macros/stats.html:108
 msgid "<b>Update</b>: download was to update the package."
-msgstr "<b>Uppdatering</b>: nerladdning var för att uppdatera paketet."
+msgstr ""
 
 #: app/templates/macros/stats.html:109
 msgid ""
 "<b>Other / Unknown</b>: downloaded by a web browser or an outdated "
 "Minetest version (before 5.5)."
 msgstr ""
-"<b>Annan / Okänd</b>: nerladdad av en webbläsare eller en föråldrad "
-"Minetestversion (innan 5.5)."
 
 #: app/templates/macros/stats.html:121
 msgid "Need more stats?"
-msgstr "Behöver mer statistik?"
+msgstr "Treng du meir statistikk?"
 
 #: app/templates/macros/stats.html:123
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
-msgstr "Kolla ContentDB-Grafana:n för heltäckande statistik"
+msgstr ""
 
 #: app/templates/macros/stats.html:127
 msgid "ContentDB Grafana"
-msgstr "ContentDB-Grafana:n"
+msgstr ""
 
 #: app/templates/macros/threads.html:27
 msgid "Maintainer"
-msgstr "Underhållare"
+msgstr "Vedlikehaldar"
 
 #: app/templates/macros/threads.html:122
 msgid "This thread has been locked by a moderator."
-msgstr "Denna tråd har låsts av en moderator."
+msgstr ""
 
 #: app/templates/macros/threads.html:132
 msgid "Reply"
-msgstr "Svara"
+msgstr ""
 
 #: app/templates/macros/threads.html:153
 msgid "Please wait before commenting again."
-msgstr "Var snäll och vänta innan du kommenterar igen."
+msgstr "Vennligst vent før du kommenterar igjen."
 
 #: app/templates/macros/threads.html:159
 msgid "This thread has been locked."
-msgstr "Denna tråd har låsts."
+msgstr ""
 
 #: app/templates/macros/threads.html:161
 msgid "You don't have permission to post."
-msgstr "Du har inte behörighet att posta."
+msgstr ""
 
 #: app/templates/macros/threads.html:181
 msgid "You can add someone to a private thread by writing @username."
-msgstr "Du kan lägga till någon till en privat tråd genom att skriva @username."
+msgstr "Du kan leggja til nokon i ein privat tråd ved å skriva @brukarnamn."
 
 #: app/templates/macros/threads.html:199 app/templates/macros/threads.html:281
 msgid "No threads found"
-msgstr "Inga trådar finns"
+msgstr "Ingen trådar funne"
 
 #: app/templates/macros/threads.html:207
 msgid "Thread"
@@ -2143,82 +2122,82 @@ msgstr "Tråd"
 
 #: app/templates/macros/threads.html:211
 msgid "Last Reply"
-msgstr "Senaste svar"
+msgstr "Siste svar"
 
 #: app/templates/macros/todo.html:21
 #, python-format
 msgid "On %(trigger)s, do %(action)s"
-msgstr "På %(trigger)s, gör %(action)s"
+msgstr ""
 
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:121
 #: app/templates/packages/view.html:409
 msgid "Release"
-msgstr "Utgivning"
+msgstr ""
 
 #: app/templates/macros/todo.html:42
 msgid "Repo"
-msgstr "Repo"
+msgstr ""
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
 #: app/templates/packages/view.html:413
 msgid "Update settings"
-msgstr "Uppdatera inställningar"
+msgstr ""
 
 #: app/templates/macros/todo.html:55 app/templates/macros/todo.html:85
 msgid "No outdated packages."
-msgstr "Inga föråldrade paket."
+msgstr ""
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:176
 msgid "Author"
-msgstr "Skapare"
+msgstr ""
 
 #: app/templates/macros/topics.html:8
 msgid "Date"
-msgstr "Datum"
+msgstr "Dato"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
-msgstr "Åtgärder"
+msgstr ""
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
 #: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
 #: app/templates/todo/editor.html:160 app/templates/todo/editor.html:175
 msgid "WIP"
-msgstr "Under arbete"
+msgstr ""
 
 #: app/templates/macros/topics.html:35
 msgid "Show"
-msgstr "Visa"
+msgstr ""
 
 #: app/templates/macros/topics.html:37
 msgid "Discard"
-msgstr "Kasta"
+msgstr ""
 
 #: app/templates/macros/topics.html:57
 msgid "Old"
-msgstr "Gammal"
+msgstr ""
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr "Moddnamn"
+msgstr "Modnamn"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr "Inga moddnamn hittades."
+msgstr ""
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr "Moddnamn \"%(name)s\""
+msgstr "Mod namn \"%(name)s"
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
-msgstr "Försed av"
+msgstr "Levert av"
 
 #: app/templates/modnames/view.html:21 app/templates/todo/todo_base.html:41
 msgid "Forum Topics"
-msgstr "Forumtrådar"
+msgstr "Forumemne"
 
 #: app/templates/modnames/view.html:27 app/templates/oauth/authorize.html:32
 #: app/templates/packages/game_support.html:42
@@ -2232,32 +2211,32 @@ msgstr "%(title)s av %(display_name)s"
 
 #: app/templates/modnames/view.html:35
 msgid "Required By"
-msgstr "Krävd av"
+msgstr "Påkrevd av"
 
 #: app/templates/modnames/view.html:38
 msgid "Optionally Used By"
-msgstr "Valfritt användbar av"
+msgstr "Valfritt brukt av"
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
-msgstr "Redigera mejlnotisinställningar"
+msgstr "Rediger e-postvarslinginnstillingar"
 
 #: app/templates/notifications/list.html:22
 msgid "Newest first."
-msgstr "Nyast först."
+msgstr "Nyaste først."
 
 #: app/templates/notifications/list.html:27
 msgid "Your Notifications"
-msgstr "Dina notiser"
+msgstr "Dine meldingar"
 
 #: app/templates/notifications/list.html:61
 #: app/templates/notifications/list.html:99
 msgid "No notifications"
-msgstr "Inga notiser"
+msgstr ""
 
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
-msgstr "Redigerar/Godkännings-notiser"
+msgstr ""
 
 #: app/templates/oauth/authorize.html:4
 #, python-format
@@ -2275,7 +2254,7 @@ msgstr ""
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB stolar på denne applikasjonen"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
@@ -2292,7 +2271,7 @@ msgstr ""
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "Om %(title)s"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
@@ -2356,72 +2335,70 @@ msgstr ""
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
-msgstr "Alias"
+msgstr ""
 
 #: app/templates/packages/alias_create_edit.html:13
 msgid "Back to Aliases"
-msgstr "Tillbaka till alias"
+msgstr ""
 
 #: app/templates/packages/alias_list.html:4
 msgid "Aliases"
-msgstr "Alias"
+msgstr ""
 
 #: app/templates/packages/alias_list.html:15
 #, python-format
 msgid "Aliases for %(title)s by %(author)s"
-msgstr "Alias för %(title)s av %(author)s"
+msgstr ""
 
 #: app/templates/packages/alias_list.html:24
 msgid "No aliases"
-msgstr "Inga alias"
+msgstr ""
 
 #: app/templates/packages/bulk_update_conf.html:4
 #, python-format
 msgid "Git Update Detection for %(username)s"
-msgstr "Git-uppdateringsupptäckning för %(username)s"
+msgstr ""
 
 #: app/templates/packages/bulk_update_conf.html:10
 msgid "Packages with Update Settings"
-msgstr "Paket med uppdateringsinställningar"
+msgstr ""
 
 #: app/templates/packages/bulk_update_conf.html:16
 msgid "Bulk Set Update Settings"
-msgstr "Masssätt uppdateringinställningar"
+msgstr ""
 
 #: app/templates/packages/bulk_update_conf.html:18
 msgid "This will set the update settings for all packages with a Git repo."
 msgstr ""
-"Detta kommer sätta uppdateringsinställningar för alla paket med en Git-"
-"repo."
 
 #: app/templates/packages/bulk_update_conf.html:27
 #: app/templates/packages/release_new.html:50
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
-msgstr "Lämna blankt för att använda standard-branchen"
+msgstr ""
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
 msgid "Currently, the branch name field is only used by the New Commit trigger."
-msgstr "Just nu är branchnamn endast använd av Ny Commit-triggern."
+msgstr ""
 
 #: app/templates/packages/create_edit.html:5
 #, python-format
 msgid "Edit - %(title)s"
-msgstr "Redigera - %(title)s"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:10
 #: app/templates/packages/create_edit.html:32
 msgid "Create Package"
-msgstr "Skapa paket"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:43
 msgid "Have you read the Package Inclusion Policy and Guidance yet?"
-msgstr "Har du läst policyn och riktlinjer för publisering av paket?"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:47
 msgid "Read more"
-msgstr "Läs mer"
+msgstr "Les meir"
 
 #: app/templates/packages/create_edit.html:49
 #, python-format
@@ -2429,8 +2406,6 @@ msgid ""
 "You can include a .cdb.json file in your %(type)s to update these details"
 " automatically."
 msgstr ""
-"Du kan lägga till en .cdb.json-fil i din %(type)s för att uppdatera dessa"
-" detaljer automatiskt."
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -2438,203 +2413,178 @@ msgid ""
 "features\n"
 "\t\t\tsuch as finding metadata from git, and autocompletion."
 msgstr ""
-"JavaScript krävs för att förbättra gränsnittet och behövs för "
-"funktionalites\n"
-"\t\t\tsåsom att hitta metadata från git, och automatiska förslag."
 
 #: app/templates/packages/create_edit.html:66
 #: app/templates/packages/game_support.html:20
 #: app/templates/threads/view.html:96 app/templates/todo/tags.html:36
 msgid "Package"
-msgstr "Paket"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:73
 msgid "You need to unpublish the package to change the name."
-msgstr "Du behöver avpublicera paketet för att ändra namnet."
+msgstr ""
 
 #: app/templates/packages/create_edit.html:79
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
-"Var snäll och välj \"Under arbete\" om ditt paket är ostabilt och borde "
-"inte rekommenderas för alla spelare"
 
 #: app/templates/packages/create_edit.html:84
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr ""
-"Om det inte finns någon media ska du sätta medialicensen till samma som "
-"licensen."
 
 #: app/templates/packages/create_edit.html:90
 msgid "Repository and Links"
-msgstr "Repository och länkar"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:93
 msgid "Do you have a Git repository?"
-msgstr "Har du en Git-repository?"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:95
 msgid "Having a repository is optional"
-msgstr "Att ha en Git-repository är valfritt"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:98
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
-"Om du har detta, skriv in URL:en nedan. Annars lämna tomt och tryck på "
-"hoppa över."
 
 #: app/templates/packages/create_edit.html:103
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr "HTTP-URL till en Git, Mercurial eller annan repository"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
-msgstr "Nästa (Autoimport)"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:107
 msgid "Skip"
-msgstr "Hoppa över"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:111
 msgid "Importing... (This may take a while)"
-msgstr "Importerar... (Detta kan ta lite tid)"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:114
 msgid "Where should users report issues?"
-msgstr "Var ska användare rapportera fel?"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:118
 msgid "Paste a forum topic URL"
-msgstr "Klistra in en forumtråd-URL"
+msgstr ""
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
-msgstr "YouTube-videor kommer visas i en inbäddning."
+msgstr ""
 
 #: app/templates/packages/create_edit.html:121
 msgid "If blank, the author's donation URL will be used instead."
-msgstr "Om tom, kommer författarens donations-URL att användas istället."
+msgstr ""
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
-msgstr "Redigera underhållare"
+msgstr ""
 
 #: app/templates/packages/edit_maintainers.html:11
 msgid "Maintainers are given write access to the package."
-msgstr "Underhållare ges skrivåtkomst till paketet."
+msgstr ""
 
 #: app/templates/packages/edit_maintainers.html:12
 msgid ""
 "Depending on their rank, they will be able to edit the package, create "
 "releases and screenshots, and read private threads."
 msgstr ""
-"Beroende på rang kommer de kunna redigera paketet, skapa utgivningar och "
-"skärmdumpar, och skapa privata trådar."
 
 #: app/templates/packages/edit_maintainers.html:13
 msgid ""
 "Maintainers cannot add or remove other maintainers, but can remove "
 "themselves."
 msgstr ""
-"Underhållare kan inte lägga till eller ta bort andra underhållare, men "
-"kan ta bort sig själva."
 
 #: app/templates/packages/game_hub.html:4
 #: app/templates/packages/game_hub.html:23
 msgid "Community Hub"
-msgstr "Communityhubb"
+msgstr ""
 
 #: app/templates/packages/game_hub.html:9
 #, python-format
 msgid "Mods and texture packs for %(title)s"
-msgstr "Moddar och texturpaket för %(title)s"
+msgstr ""
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
-msgstr "Dokumentation"
+msgstr "Dokumentasjon"
 
 #: app/templates/packages/game_support.html:13
 msgid ""
 "Game support is configured using the package's .conf file. See the "
 "documentation for more info"
 msgstr ""
-"Spelstöd konfigureras med hjälp av paketets .conf-fil. Se dokumentationen"
-" för mer information"
 
 #: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:212
 msgid "Source"
-msgstr "Källkod"
+msgstr "Kjelde"
 
 #: app/templates/packages/game_support.html:26
 msgid "Supported?"
-msgstr "Stöds?"
+msgstr "Støtta?"
 
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
-msgstr "Stödjer alla spel (om inte exkluderad av unsupported_games)"
+msgstr ""
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
-msgstr "Hittad från beroenden"
+msgstr ""
 
 #: app/templates/packages/game_support.html:49
 msgid "Overridden on ContentDB"
-msgstr "Överskriden på ContentDB"
+msgstr ""
 
 #: app/templates/packages/game_support.html:68
 msgid "Unknown. Please either add supported games or check 'Supports all games'"
 msgstr ""
-"Okänt. Var snäll och antingen lägga till spel som stöds eller aktivera "
-"\"Stödjer alla spel\""
 
 #: app/templates/packages/game_support.html:75
 #, python-format
 msgid "Generated %(conf)s lines"
-msgstr "Genererade %(conf)s linjer"
+msgstr ""
 
 #: app/templates/packages/game_support.html:89
 msgid ""
 "You need to manually define at least one supported game before you can "
 "turn this off."
 msgstr ""
-"Du behöver manuellt definera minst ett kompatibelt spel innan du kan "
-"stänga av detta."
 
 #: app/templates/packages/game_support.html:96
 msgid ""
 "When checked, this indicates that this package should support all games, "
 "unless excluded by unsupported_games."
 msgstr ""
-"När ikryssad indikerar detta att paketet borde stödja alla spel, om inget"
-" är exkluderad av unsupported_games."
 
 #: app/templates/packages/game_support.html:97
 msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
 msgstr ""
-"Du kan kryssa i detta och fortfarande markera spel i supported_games som "
-"du har testat."
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
-msgstr "Det är inte möjligt för ett texturpaket att stödja alla spel."
+msgstr ""
 
 #: app/templates/packages/game_support.html:105
 msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
 msgstr ""
-"Detta paket beror på en spelspecifik modd, och kan därför inte stöda alla"
-" spel."
 
 #: app/templates/packages/game_support.html:111
 msgid "Overrides"
-msgstr "Överskridningar"
+msgstr ""
 
 #: app/templates/packages/game_support.html:114
 #, python-format
@@ -2642,8 +2592,6 @@ msgid ""
 "It's best to add supported/unsupported games to %(conf)s, but in the "
 "meantime you can add them here."
 msgstr ""
-"Det är bäst att lägga till spelstöd till %(conf)s, men just nu kan du "
-"lägga till dem här."
 
 #: app/templates/packages/game_support.html:116
 #, python-format
@@ -2651,134 +2599,124 @@ msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
 msgstr ""
-"Om detta läggs till i %(conf)s tillåter detta användare som installerar "
-"utanför ContentDB att ta del av detta också."
 
 #: app/templates/packages/game_support.html:119
 #: app/templates/packages/game_support.html:120
 msgid "Comma-separated game names, ex: minetest_game, nodecore"
-msgstr "Kommaseparerade spelnamn, t.ex. minetest_game, nodecore"
+msgstr ""
 
 #: app/templates/packages/gone.html:19
 msgid "Package Removed"
-msgstr "Paket borttaget"
+msgstr ""
 
 #: app/templates/packages/gone.html:21
 msgid "This package has been unpublished."
-msgstr "Detta paket har blivit borttaget."
+msgstr ""
 
 #: app/templates/packages/gone.html:22
 msgid ""
 "It may have been removed by choice of the author, or by ContentDB staff "
 "due to a problem."
 msgstr ""
-"Den kan ha tagits bort av skaparen eller av ContentDB:s personal på grund"
-" av ett problem."
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
-msgstr "Paket genomgår granskning"
+msgstr ""
 
 #: app/templates/packages/gone.html:27
 msgid "This package is currently undergoing review"
-msgstr "Detta paket håller för närvarande på att granskas"
+msgstr ""
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr "Paketet har ännu inte skickats in"
+msgstr ""
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
-msgstr "Detta paket har skapats men har ännu inte skickats in för godkännande."
+msgstr ""
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
 msgstr ""
-"Detta paket håller för närvarande på att granskas, och det krävs "
-"ändringar innan det kan läggas till."
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr "Kom tillbaka senare."
+msgstr ""
 
 #: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
-msgstr "Om du är skaparen kan du logga in för att se mer information."
+msgstr ""
 
 #: app/templates/packages/gone.html:48
 msgid "Login"
-msgstr "Logga in"
+msgstr "Innlogging"
 
 #: app/templates/packages/list.html:21
 #, python-format
 msgid "Did you mean to search for packages by %(authors)s?"
-msgstr "Menade du att söka efter paket av %(authors)s?"
+msgstr "Mente du å søkja etter pakkar av %(authors)s?"
 
 #: app/templates/packages/list.html:26
 msgid "Filter by tags"
-msgstr "Filtrera efter taggar"
+msgstr ""
 
 #: app/templates/packages/list.html:59
 msgid "More content from the forums"
-msgstr "Mer innehåll från forumen"
+msgstr ""
 
 #: app/templates/packages/package_base.html:14
 #: app/templates/packages/screenshots.html:93
 msgid "Thumbnail"
-msgstr "Tumnagel"
+msgstr ""
 
 #: app/templates/packages/release_bulk_change.html:4
 msgid "Bulk Change Releases"
-msgstr "Massändra utgivningar"
+msgstr ""
 
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
-"Använd denna sida för att sätta minimum och maximum av alla utgivningar "
-"för ditt paket."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:54
 #: app/templates/packages/release_new.html:69
 msgid "Maximum must be greater than or equal to the minimum!"
-msgstr "Maximum måste vara större eller lika med minimum!"
+msgstr ""
 
 #: app/templates/packages/release_bulk_change.html:33
 msgid ""
 "Note: Min and max versions will be used to hide the package on\n"
 "\t\t\tplatforms not within the range."
 msgstr ""
-"Notera: Minimum och maximum kommer användas för att gömma paket på\n"
-"\t\t\tplattformar som inte är i spannet."
 
 #: app/templates/packages/release_bulk_change.html:36
 #: app/templates/packages/release_edit.html:70
 #: app/templates/packages/release_new.html:91
 msgid "Leave both as None if in doubt."
-msgstr "Lämna båda som Inget om du är osäker."
+msgstr ""
 
 #: app/templates/packages/release_edit.html:4
 msgid "Edit release"
-msgstr "Redigera utgivning"
+msgstr ""
 
 #: app/templates/packages/release_edit.html:27
 msgid "Commit Hash"
-msgstr "Commit-hash"
+msgstr ""
 
 #: app/templates/packages/release_edit.html:32
 msgid "view task"
-msgstr "visa uppgift"
+msgstr ""
 
 #: app/templates/packages/release_edit.html:42
 #: app/templates/packages/screenshot_edit.html:20
 msgid "Approved"
-msgstr "Godkänd"
+msgstr ""
 
 #: app/templates/packages/release_edit.html:46
 msgid "Supported Minetest versions"
-msgstr "Minetestversioner som stöds"
+msgstr ""
 
 #: app/templates/packages/release_edit.html:60
 #: app/templates/packages/release_new.html:75
@@ -2806,72 +2744,62 @@ msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
-"Ställ in den minsta och högsta Minetestversionen som stöds.\n"
-"\t\t\tDenna utgivning kommer gömmas för klienter utanför spannet. "
 
 #: app/templates/packages/release_edit.html:72
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
-"Du kan <a href=\"/help/package_config/\">ställa in detta automatiskt</a> "
-"i din .conf i paketet."
 
 #: app/templates/packages/release_edit.html:79
 msgid "Delete Release"
-msgstr "Ta bort utgivning"
+msgstr ""
 
 #: app/templates/packages/release_edit.html:85
 msgid "This is permanent."
-msgstr "Detta är permanent."
+msgstr ""
 
 #: app/templates/packages/release_edit.html:86
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
 msgstr ""
-"Alla associerade uppladdningar kommer inte tas bort med en gång, men "
-"utgivningar kommer inte längre listas."
 
 #: app/templates/packages/release_edit.html:91
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr ""
-"Du kan inte ta bort det senaste utgivningar, var snäll och skapa en nyare"
-" först."
 
 #: app/templates/packages/release_new.html:4
 #: app/templates/packages/release_new.html:8
 msgid "Create a release"
-msgstr "Skapa en utgivning"
+msgstr ""
 
 #: app/templates/packages/release_new.html:14
 msgid "You have automatic releases enabled."
-msgstr "Du har automatiska utgivningar aktiverade."
+msgstr ""
 
 #: app/templates/packages/release_new.html:16
 msgid "You have Git update notifications enabled."
-msgstr "Du har Git-uppdateringsnotiser aktiverade."
+msgstr ""
 
 #: app/templates/packages/release_new.html:17
 msgid "You can enable automatic updates in the update settings."
-msgstr "Du kan aktivera automatiska uppdateringar i uppdateringsinställningarna."
+msgstr ""
 
 #: app/templates/packages/release_new.html:23
 msgid "Set up"
-msgstr "Ställ in"
+msgstr ""
 
 #: app/templates/packages/release_new.html:26
 msgid ""
 "You can create releases automatically when you push commits or tags to "
 "your repository."
 msgstr ""
-"Du kan skapa utgivningar automatiskt när du trycker ut commits eller "
-"taggar till din repository."
 
 #: app/templates/packages/release_new.html:28
 #: app/templates/packages/release_wizard.html:69
 msgid "Add Git repo"
-msgstr "Lägg till Git-repo"
+msgstr ""
 
 #: app/templates/packages/release_new.html:31
 #: app/templates/packages/release_wizard.html:59
@@ -2879,20 +2807,18 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
-"Med Git skulle du kunna skapa utgivningar automatiskt när du släpper ut "
-"kod eller taggar."
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
-msgstr "1. Namnge utgivningar"
+msgstr ""
 
 #: app/templates/packages/release_new.html:42
 msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
-msgstr "Mänskligt läsbar. T.ex. 1.0.0 eller 2018-05-28"
+msgstr ""
 
 #: app/templates/packages/release_new.html:44
 msgid "2. Set the content"
-msgstr "2. Ställ in innehållet"
+msgstr ""
 
 #: app/templates/packages/release_new.html:57
 msgid ""
@@ -2900,13 +2826,10 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
-"Titta på <a href=\"/help/package_config/\">Paketkonfigurering- och "
-"utgivningsguiden</a> för\n"
-"\t\t\ttips om hur man kan anpassa utgivningar."
 
 #: app/templates/packages/release_new.html:61
 msgid "3. Supported Minetest versions"
-msgstr "3. Minetestversioner som stöds"
+msgstr ""
 
 #: app/templates/packages/release_new.html:83
 msgid ""
@@ -2914,32 +2837,26 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
-".conf-filen för ditt paket kan <a href=\"/help/package_config/\">ställas "
-"in automatiskt</a>.\n"
-"\t\t\tvilket kommer överskrida ditt val."
 
 #: app/templates/packages/release_wizard.html:4
 msgid "How do you want to create releases?"
-msgstr "Hur vill du skapa utgivningar?"
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:9
 #: app/templates/packages/release_wizard.html:75
 msgid "Later"
-msgstr "Senare"
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:14
 #, python-format
 msgid "A release is a single downloadable version of your %(title)s."
-msgstr "En utgivning är en enskild nerladdningsbar version av din %(title)s."
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:15
 msgid ""
 "You need to create releases even if you use a rolling release development"
 " cycle, as Minetest needs them to check for updates."
 msgstr ""
-"Du behöver skapa en utgivning även om du använder ett rolling release-"
-"utvecklingscykel, eftersom Minetest behöver dem för att kolla efter "
-"uppdateringar."
 
 #: app/templates/packages/release_wizard.html:20
 #: app/templates/packages/update_config.html:12
@@ -2947,66 +2864,62 @@ msgid ""
 "When you push a change to your Git repository, ContentDB can create a new"
 " release automatically or send you a reminder."
 msgstr ""
-"När du trycker ut en ändring till din Git-repository kan ContentDB "
-"antingen skapa en ny utgivning eller påminna dig."
 
 #: app/templates/packages/release_wizard.html:21
 msgid ""
 "ContentDB will check your Git repository every day, but you can use "
 "webhooks or the API for faster updates."
 msgstr ""
-"ContentDB kommer kolla din Git-repository varje dag, men du kan använda "
-"webhooks eller API:t för snabbare uppdateringar."
 
 #: app/templates/packages/release_wizard.html:25
 #: app/templates/packages/release_wizard.html:64
 msgid "This can be changed later."
-msgstr "Detta kan ändras senare."
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:31
 msgid "Automatically (Recommended)"
-msgstr "Automatiskt (Rekommenderas)"
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:34
 msgid "Rolling Release"
-msgstr "Rullande utgivningar"
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:37
 msgid "On Git Tag"
-msgstr "På Git-tagg"
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:46
 msgid "Manually"
-msgstr "Manuellt"
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:49
 msgid "With reminders"
-msgstr "Med påminnelse"
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:52
 msgid "No reminders"
-msgstr "Ingen påminnelse"
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:60
 msgid "Unfortunately, you will otherwise need to create a release manually."
-msgstr "Annars behöver du tyvärr skapa en utgivning manuellt."
+msgstr ""
 
 #: app/templates/packages/release_wizard.html:72
 msgid "Create releases manually"
-msgstr "Skapa utgivningar manuellt"
+msgstr ""
 
 #: app/templates/packages/releases_list.html:4
 #, python-format
 msgid "Releases - %(title)s"
-msgstr "Utgivningar - %(title)s"
+msgstr ""
 
 #: app/templates/packages/releases_list.html:18
 msgid "Set up automatic releases"
-msgstr "Ställ in automatiska utgivningar"
+msgstr ""
 
 #: app/templates/packages/releases_list.html:24
 msgid "Bulk update"
-msgstr "Massupdatera"
+msgstr ""
 
 #: app/templates/packages/releases_list.html:48
 #, python-format
@@ -3018,7 +2931,7 @@ msgstr ""
 #: app/templates/packages/remove.html:9
 #, python-format
 msgid "Remove %(title)s"
-msgstr "Ta bort %(title)s"
+msgstr ""
 
 #: app/templates/packages/remove.html:11
 msgid ""
@@ -3029,18 +2942,12 @@ msgid ""
 "future.\n"
 "\t\t\tThe Admin can restore removed packages, if needed."
 msgstr ""
-"För att undvika dataförlust kan du inte permanent ta bort paket.\n"
-"\t\t\tDu kan ta bort de från ContentDB, vilket gör att de inte syns för\n"
-"\t\t\tandra användare och kan tas bort permanent senare.\n"
-"\t\t\tAdministratörer kan återställa borttagna paket, efter behov."
 
 #: app/templates/packages/remove.html:19
 msgid ""
 "Unapproving a package will put it back into Draft, where\n"
 "\t\t\t\tit can be submitted for approval again."
 msgstr ""
-"Avgodkännande av ett paket sätter det tillbaka till Draft, där\n"
-"\t\t\t\tden kan skickas för godkännande igen."
 
 #: app/templates/packages/remove.html:28
 msgid "and"
@@ -3053,60 +2960,56 @@ msgstr ""
 
 #: app/templates/packages/remove.html:41
 msgid "Reason"
-msgstr "Anledning"
+msgstr "Årsak"
 
 #: app/templates/packages/remove.html:52
 msgid "Reason for unapproval / deletion, this is shown in the audit log"
-msgstr "Anledning för avgodkännande / borttagande, detta visas i auditeringsloggen"
+msgstr ""
 
 #: app/templates/packages/remove.html:61
 msgid "Unpublish"
-msgstr "Avpublicera"
+msgstr ""
 
 #: app/templates/packages/review_create_edit.html:17
 #, python-format
 msgid "Post a review for %(title)s by %(author)s"
-msgstr "Lägg till en recension för %(title)s av %(author)s"
+msgstr ""
 
 #: app/templates/packages/review_create_edit.html:21
 #: app/templates/threads/new.html:16
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr ""
-"Har du hittat en bugg? Lägg upp det på <a "
-"href=\"%(url)s\">buggtrackern</a> istället."
 
 #: app/templates/packages/review_create_edit.html:62
 msgid "Delete review."
-msgstr "Ta bort recension."
+msgstr ""
 
 #: app/templates/packages/review_create_edit.html:63
 msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
 msgstr ""
-"Detta kommer göra om recensionen till en tråd, vilket behåller "
-"kommentarer men tar bort effekten på paketets betyg."
 
 #: app/templates/packages/review_votes.html:4
 #: app/templates/packages/view.html:353
 msgid "Review Votes"
-msgstr "Recensionröster"
+msgstr ""
 
 #: app/templates/packages/review_votes.html:13
 #, python-format
 msgid "Review votes on %(title)s by %(author)s"
-msgstr "Recensionröster på %(title)s av %(author)s"
+msgstr ""
 
 #: app/templates/packages/screenshot_edit.html:4
 #: app/templates/packages/screenshot_edit.html:11
 msgid "Edit screenshot"
-msgstr "Redigera skärmdump"
+msgstr "Rediger skjermbilete"
 
 #: app/templates/packages/screenshot_new.html:4
 #: app/templates/packages/screenshot_new.html:8
 msgid "Add a screenshot"
-msgstr "Lägg till skärmdump"
+msgstr "Legg til eit skjermbilete"
 
 #: app/templates/packages/screenshot_new.html:10
 #: app/templates/todo/user.html:125
@@ -3115,189 +3018,180 @@ msgid ""
 "The recommended resolution is 1920x1080, and screenshots must be at least"
 " %(width)dx%(height)d."
 msgstr ""
-"Den rekommenderade upplösningen är 1920x1080, och skärmdumpar måste vara "
-"åtminstonde %(width)dx%(height)d."
 
 #: app/templates/packages/screenshots.html:11
 msgid "Add Image"
-msgstr "Lägg till bild"
+msgstr ""
 
 #: app/templates/packages/screenshots.html:36 app/templates/todo/user.html:129
 msgid "Way too small"
-msgstr "Alldeles för liten"
+msgstr "Altfor lite"
 
 #: app/templates/packages/screenshots.html:40 app/templates/todo/user.html:132
 msgid "Too small"
-msgstr "För liten"
+msgstr "For lite"
 
 #: app/templates/packages/screenshots.html:44 app/templates/todo/user.html:135
 msgid "Not HD"
-msgstr "Inte HD"
+msgstr "Ikkje HD"
 
 #: app/templates/packages/screenshots.html:50
 msgid "Awaiting approval"
-msgstr "Väntar på godkännande"
+msgstr ""
 
 #: app/templates/packages/screenshots.html:69
 #: app/templates/packages/screenshots.html:123
 msgid "No screenshots."
-msgstr "Inga skärmdumpar."
+msgstr "Ingen skjermbilete."
 
 #: app/templates/packages/screenshots.html:78
 msgid "Save Order"
-msgstr "Spara ordning"
+msgstr ""
 
 #: app/templates/packages/screenshots.html:83
+#, fuzzy
 msgid "Reordering requires JavaScript."
-msgstr "Omordning kräver JavaScript."
+msgstr "Omrokering krever JavaScript."
 
 #: app/templates/packages/screenshots.html:88
 msgid "Client Preview"
-msgstr "Klientförhandsgranskning"
+msgstr ""
 
 #: app/templates/packages/screenshots.html:90
 msgid "The first screenshot in the list above will be the package thumbnail."
-msgstr "Den första skärmdumpen i listan kommer vara paketets tumnagel."
+msgstr ""
 
 #: app/templates/packages/screenshots.html:127
 msgid "Videos"
-msgstr "Videor"
+msgstr "Videoar"
 
 #: app/templates/packages/screenshots.html:129
 msgid "You can set a video on the Edit Details page"
-msgstr "Du kan ställa in en video på Redigera detaljer-sidan"
+msgstr ""
 
 #: app/templates/packages/share.html:10
 msgid "Links"
-msgstr "Länkar"
+msgstr ""
 
 #: app/templates/packages/share.html:13
 msgid "Review link"
-msgstr "Recensionlänk"
+msgstr ""
 
 #: app/templates/packages/share.html:18
 msgid "Badges"
-msgstr "Emblem"
+msgstr ""
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
-msgstr "Moddnamnunikhet"
+msgstr ""
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
-msgstr "Paket som delar försedda moddar"
+msgstr ""
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
-msgstr "Detta paket innehåller moddnamn som finns i följande paket:"
+msgstr ""
 
 #: app/templates/packages/similar.html:32
 msgid "Similar Forum Topics"
-msgstr "Liknande forumtrådar"
+msgstr ""
 
 #: app/templates/packages/stats.html:18
 msgid "Download (.csv)"
-msgstr "Ladda ner (.csv)"
+msgstr "Last ned (.csv)"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
-msgstr "Konfigurera Git-uppdateringar"
+msgstr "Konfigurer Git-oppdateringsdeteksjon"
 
 #: app/templates/packages/update_config.html:16
 msgid ""
 "ContentDB will poll your Git repository every day, if your package is "
 "approved."
 msgstr ""
-"ContentDB kommer kolla din Git-repository varje dag, om ditt paket "
-"godkänns."
 
 #: app/templates/packages/update_config.html:17
 msgid "You should consider using webhooks or the API for faster releases."
-msgstr "Överväg att använda webhooks eller API:et för snabbare uppdateringar."
+msgstr ""
 
 #: app/templates/packages/update_config.html:18
 msgid ""
 "Git Update Detection is clever enough to not create a release again if "
 "you've already created it manually or using webhooks/the API."
 msgstr ""
-"Git-uppdateringsavkänningen är tillräckligt smart att den inte skapar en "
-"utgivning om du redan skapat ett manuellt eller med API:et."
 
 #: app/templates/packages/update_config.html:28
 msgid "The trigger is the event that triggers the action."
-msgstr "Triggern är händelsen som triggar handlingen."
+msgstr ""
 
 #: app/templates/packages/update_config.html:41
 msgid "The action to perform when the trigger happens."
-msgstr "Vad som ska utföras när triggern händer."
+msgstr ""
 
 #: app/templates/packages/update_config.html:42
 msgid ""
 "Once a package is marked as outdated, you won't receive any more "
 "notifications until it is marked up to date."
 msgstr ""
-"När ett paket har markerats som föråldrad kommer du inte få några fler "
-"notiser förrens den är markerad som aktuell."
 
 #: app/templates/packages/view.html:41
 msgid "Download"
-msgstr "Ladda ner"
+msgstr "Nedlasting"
 
 #: app/templates/packages/view.html:48
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
-msgstr "Minetest %(min)s-%(max)s"
+msgstr "Minetest %(min)s - %(max)s"
 
 #: app/templates/packages/view.html:50
 #, python-format
 msgid "For Minetest %(min)s and above"
-msgstr "För Minetest %(min)s och över"
+msgstr ""
 
 #: app/templates/packages/view.html:52
 #, python-format
 msgid "Minetest %(max)s and below"
-msgstr "För Minetest %(max)s och under"
+msgstr ""
 
 #: app/templates/packages/view.html:62
 msgid "How do I install this?"
-msgstr "Hur installerar jag detta?"
+msgstr "Hvordan installerer eg dette?"
 
 #: app/templates/packages/view.html:68
 msgid "No downloads available"
-msgstr "Inga nerladdningar tillgängliga"
+msgstr "Ingen nedlastingar tilgjengelege"
 
 #: app/templates/packages/view.html:75
 msgid "Non-free code and media"
-msgstr "Icke-fri kod och media"
+msgstr "Ikkje-fri kode og medium"
 
 #: app/templates/packages/view.html:77
 msgid "Non-free code"
-msgstr "Icke-fri kod"
+msgstr "Ikkje-fri kode"
 
 #: app/templates/packages/view.html:79
 msgid "Non-free media"
-msgstr "Icke-fri media"
+msgstr "Ikkje-fri media"
 
 #: app/templates/packages/view.html:93 app/templates/threads/view.html:104
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
 msgstr ""
-"Denna tråd är endast synlig för skaparen, paketunderhållare, användare av"
-" Godkännarrang eller högre, och @nämnda användare."
 
 #: app/templates/packages/view.html:162
 msgid "Work in Progress"
-msgstr "Under arbete"
+msgstr ""
 
 #: app/templates/packages/view.html:183 app/templates/users/profile.html:242
 msgid "Downloads"
-msgstr "Nerladdningar"
+msgstr "Nedlastinger"
 
 #: app/templates/packages/view.html:206 app/templates/users/profile.html:95
 msgid "Website"
-msgstr "Hemsida"
+msgstr "Nettstad"
 
 #: app/templates/packages/view.html:218 app/templates/users/profile.html:77
 msgid "Forums"
@@ -3305,71 +3199,71 @@ msgstr "Forum"
 
 #: app/templates/packages/view.html:224
 msgid "Issue Tracker"
-msgstr "Feltracker"
+msgstr ""
 
 #: app/templates/packages/view.html:303
 msgid "Awaiting review"
-msgstr "Väntar på genomgång"
+msgstr ""
 
 #: app/templates/packages/view.html:333 app/templates/threads/view.html:77
 msgid "Edit Review"
-msgstr "Redigera recension"
+msgstr ""
 
 #: app/templates/packages/view.html:338
 msgid "You can't review your own package."
-msgstr "Du kan inte recensera ditt egna paket."
+msgstr ""
 
 #: app/templates/packages/view.html:348
 msgid "Package needs to be approved before it can be reviewed."
-msgstr "Paketet måste godkännas innan det kan recenseras."
+msgstr ""
 
 #: app/templates/packages/view.html:359
 msgid "Used By"
-msgstr "Används Av"
+msgstr "Brukt av"
 
 #: app/templates/packages/view.html:365
 msgid "Content"
-msgstr "Innehåll"
+msgstr "Innhald"
 
 #: app/templates/packages/view.html:367 app/templates/packages/view.html:437
 msgid "View content for game"
-msgstr "Visa innehåll för spel"
+msgstr "Vis innhald for spelet"
 
 #: app/templates/packages/view.html:381
 msgid "Favorite"
-msgstr "Favorit"
+msgstr "Favoritt"
 
 #: app/templates/packages/view.html:387
 msgid "Add to collection..."
-msgstr "Lägg till samling..."
+msgstr "Legg til i samling..."
 
 #: app/templates/packages/view.html:397
 msgid "Package may be outdated"
-msgstr "Paket kan möjligtvis vara föråldrad"
+msgstr ""
 
 #: app/templates/packages/view.html:404
 msgid "Only visible to the author and Editors."
-msgstr "Endast synlig för skaparen och Redigerare."
+msgstr ""
 
 #: app/templates/packages/view.html:421
 msgid "Warning"
-msgstr "Varning"
+msgstr "Åtvaring"
 
 #: app/templates/packages/view.html:427
 msgid "Like this package? Help support its development by making a donation"
-msgstr "Gillar du detta paket? Donera för att stödja utvecklingen"
+msgstr ""
 
 #: app/templates/packages/view.html:430
 msgid "Donate now"
-msgstr "Donera nu"
+msgstr ""
 
 #: app/templates/packages/view.html:442
 msgid "Dependencies"
-msgstr "Beroenden"
+msgstr ""
 
 #: app/templates/packages/view.html:462
 msgid "No required dependencies"
-msgstr "Inga nödvändiga beroenden"
+msgstr ""
 
 #: app/templates/packages/view.html:468
 msgid "Optional"
@@ -3377,135 +3271,131 @@ msgstr "Valfri"
 
 #: app/templates/packages/view.html:501
 msgid "Compatible Games"
-msgstr "Kompatibla Spel"
+msgstr "Kompatible spel"
 
 #: app/templates/packages/view.html:506 app/templates/packages/view.html:526
 msgid "No specific game required"
-msgstr "Inget specifikt spel krävs"
+msgstr ""
 
 #: app/templates/packages/view.html:509
 msgid "Tested with:"
-msgstr "Testad med:"
+msgstr ""
 
 #: app/templates/packages/view.html:531
 msgid "Is the above correct?"
-msgstr "Är ovanstående korrekt?"
+msgstr ""
 
 #: app/templates/packages/view.html:532
 msgid "You need to either confirm this or tell ContentDB about supported games"
-msgstr "Du behöver antingen bekräfta detta eller berätta för ContentDB om spelstöd"
+msgstr ""
 
 #: app/templates/packages/view.html:544
 msgid "Does not work with:"
-msgstr "Fungerar ej med:"
+msgstr ""
 
 #: app/templates/packages/view.html:561
 msgid "This is an experimental feature."
-msgstr "Detta är en experimentell funktion."
+msgstr ""
 
 #: app/templates/packages/view.html:562
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr ""
-"Kompatibla spel bestäms av en algoritm och kan möjligtvis inte vara "
-"korrekt."
 
 #: app/templates/packages/view.html:572
 msgid "Please specify compatible games"
-msgstr "Var snäll välj kompatibla spel"
+msgstr ""
 
 #: app/templates/packages/view.html:578
 msgid "Information"
-msgstr "Information"
+msgstr "Informasjon"
 
 #: app/templates/packages/view.html:584
 msgid "Technical Name"
-msgstr "Tekniskt namn"
+msgstr "Teknisk namn"
 
 #: app/templates/packages/view.html:593
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
-msgstr "%(code_license)s för kod,<br>%(media_license)s för media."
+msgstr "%(code_license)s for kode,<br>%(media_license)s for medium."
 
 #: app/templates/packages/view.html:601
 msgid "Unknown"
-msgstr "Okänd"
+msgstr "Ukjent"
 
 #: app/templates/packages/view.html:603
 msgid "Added"
-msgstr "Tillagd"
+msgstr "Lagt til"
 
 #: app/templates/packages/view.html:617
 msgid "Remove myself"
-msgstr "Ta bort mig själv"
+msgstr ""
 
 #: app/templates/packages/view.html:622
 msgid "Provides"
-msgstr "Bidrar"
+msgstr ""
 
 #: app/templates/packages/view.html:644
 msgid "More"
-msgstr "Mer"
+msgstr "Meir"
 
 #: app/templates/packages/view.html:673
 msgid "See audit log"
-msgstr "Visa auditeringslogg"
+msgstr ""
 
 #: app/templates/report/index.html:15
 msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
-msgstr "På grund av spam tillåter vi inte längre rapporter från anonyma användare."
+msgstr ""
 
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin in another way"
-msgstr "Vänligen logga in eller kontakta administratören på ett annat sätt"
+msgstr ""
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
-msgstr "Vad rapporterar du? Varför rapporterar du den?"
+msgstr ""
 
 #: app/templates/report/index.html:38
 msgid "Reports will be shared with ContentDB staff."
-msgstr "Rapporter kommer delas med ContentDB-personal."
+msgstr ""
 
 #: app/templates/report/index.html:40
 msgid "Only the admin will be able to see who made the report."
-msgstr "Endast administratören kan se vem gjorde rapporten."
+msgstr ""
 
 #: app/templates/report/index.html:44
 msgid ""
 "Found a bug? Please report on the package's issue tracker or in a thread "
 "instead."
 msgstr ""
-"Har du hittat en bugg? Var snäll och rapportera den på paketets "
-"buggtracker eller i en tråd istället."
 
 #: app/templates/tasks/view.html:5
 msgid "Task Failed"
-msgstr "Uppgift misslyckades"
+msgstr ""
 
 #: app/templates/tasks/view.html:7
 msgid "Working…"
-msgstr "Arbetar…"
+msgstr ""
 
 #: app/templates/tasks/view.html:26
 msgid "Reload the page to check for updates."
-msgstr "Ladda om sidan för att kontrollera efter uppdateringar."
+msgstr ""
 
 #: app/templates/threads/delete_reply.html:4
 #, python-format
 msgid "Delete reply by %(username)s in %(title)s "
-msgstr "Ta bort svar av %(username)s i %(title)s "
+msgstr ""
 
 #: app/templates/threads/delete_thread.html:4
 #, python-format
 msgid "Delete \"%(title)s\" by %(author)s"
-msgstr "Ta bort \"%(title)s\" av %(author)s"
+msgstr ""
 
 #: app/templates/threads/edit_reply.html:4
 #: app/templates/threads/edit_reply.html:13
 msgid "Edit reply"
-msgstr "Redigera svar"
+msgstr "Rediger svar"
 
 #: app/templates/threads/list.html:12 app/templates/threads/new.html:4
 msgid "New Thread"
@@ -3516,43 +3406,39 @@ msgid ""
 "If the package shouldn't be on CDB (eg: if it doesn't work at all), then "
 "you can let us know here."
 msgstr ""
-"Om paketet inte borde finnas på CDB (t.ex. om den över huvudtaget inte "
-"fungerar), kan du berätta det här."
 
 #: app/templates/threads/new.html:52
 msgid ""
 "Only you, the package author, and users of Approver rank and above can "
 "read private threads."
 msgstr ""
-"Endast du, paketskaparen, och användare av Godkännarrang och högre kan "
-"läsa privata trådar."
 
 #: app/templates/threads/user_comments.html:9
 #: app/templates/threads/user_comments.html:13
 #, python-format
 msgid "Comments by %(user)s"
-msgstr "Kommentarer av %(user)s"
+msgstr "Kommentarar frå %(user)s"
 
 #: app/templates/threads/user_comments.html:50
 #, python-format
 msgid "Reply to <b>%(title)s</b>"
-msgstr "Svar till <b>%(title)s</b>"
+msgstr "Svar til <b>%(title)s</b>"
 
 #: app/templates/threads/user_comments.html:73
 msgid "Only showing replies to public threads"
-msgstr "Visar endast svar till offentliga trådar"
+msgstr ""
 
 #: app/templates/threads/view.html:46
 msgid "Subscribe"
-msgstr "Prenumerera"
+msgstr "Abonner"
 
 #: app/templates/threads/view.html:55
 msgid "Convert to Thread"
-msgstr "Konvertera till tråd"
+msgstr ""
 
 #: app/templates/threads/view.html:62
 msgid "Unlock"
-msgstr "Lås upp"
+msgstr "Lås opp"
 
 #: app/templates/threads/view.html:67
 msgid "Lock"
@@ -3560,246 +3446,242 @@ msgstr "Lås"
 
 #: app/templates/threads/view.html:109
 msgid "This thread is visible to the following users"
-msgstr "Denna tråd är synlig till följande användare"
+msgstr ""
 
 #: app/templates/threads/view.html:110
 msgid "Visible to:"
-msgstr "Synlig till:"
+msgstr ""
 
 #: app/templates/threads/view.html:118
 msgid "Plus approvers and editors"
-msgstr "Plus godkännare och redigerare"
+msgstr ""
 
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
-msgstr "Redigerararbetskö"
+msgstr ""
 
 #: app/templates/todo/editor.html:8
 msgid "Approval Queue"
-msgstr "Godkännarkö"
+msgstr ""
 
 #: app/templates/todo/editor.html:15
 msgid "Approve All"
-msgstr "Godkänn alla"
+msgstr ""
 
 #: app/templates/todo/editor.html:33
 msgid "No screenshots need approval."
-msgstr "Inga skärmdumpar behöver godkännande."
+msgstr "Ingen skjermbilete treng godkjenning."
 
 #: app/templates/todo/editor.html:65 app/templates/todo/editor.html:183
 msgid "No packages need approval."
-msgstr "Inga paket behöver godkännande."
+msgstr ""
 
 #: app/templates/todo/editor.html:80
 msgid "Importing"
-msgstr "Importerar"
+msgstr ""
 
 #: app/templates/todo/editor.html:90
 msgid "No releases need approval."
-msgstr "Inga utgivningar behöver godkännande."
+msgstr ""
 
 #: app/templates/todo/editor.html:100
 msgid "All done!"
-msgstr "Färdig!"
+msgstr "Alt ferdig!"
 
 #: app/templates/todo/editor.html:105 app/templates/todo/editor.html:107
 msgid "License Needed"
-msgstr "Licens krävs"
+msgstr "Lisens påkrevd"
 
 #: app/templates/todo/editor.html:127
 msgid "Tag Packages"
-msgstr "Tagga paket"
+msgstr ""
 
 #: app/templates/todo/editor.html:130
 #, python-format
 msgid "%(total_to_tag)d / %(total_packages)d packages don't have any tags."
-msgstr "%(total_to_tag)d / %(total_packages)d paket har inga taggar."
+msgstr ""
 
 #: app/templates/todo/editor.html:140
 msgid "View Tags"
-msgstr "Visa taggar"
+msgstr ""
 
 #: app/templates/todo/editor.html:147
 msgid "Unfulfilled Dependencies"
-msgstr "Ouppfyllda beroenden"
+msgstr ""
 
 #: app/templates/todo/editor.html:151
 msgid "Mod names that have hard dependers, but no packages providing them."
-msgstr "Moddnamn som har hårda beroenden, men inga paket som tillhandahåller dem."
+msgstr ""
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
-msgstr "Visa alla"
+msgstr "Vis alle"
 
 #: app/templates/todo/editor.html:196
 msgid "Recent Actions"
-msgstr "Senaste åtgärder"
+msgstr ""
 
 #: app/templates/todo/game_support.html:4
 #, python-format
 msgid "Game Support for %(username)s"
-msgstr "Spelstöd för %(username)s"
+msgstr "Spelstøtte for %(username)s"
 
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
-msgstr "Du borde markera spelen som dina moddar och texturpaket stöder."
+msgstr ""
 
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
-msgstr "Spelstöd gör det lättare för spelare att se ditt innehåll."
+msgstr ""
 
 #: app/templates/todo/game_support.html:13
 msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
-msgstr "Om ditt paket är speloberoende, bekräfta detta genom 'Stöder alla spel'"
+msgstr ""
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
-msgstr "Stöder alla spel"
+msgstr "Støttar alle spel"
 
 #: app/templates/todo/game_support.html:51
 msgid ""
 "No supported games listed. Please either add supported games or check "
 "'Supports all games'"
 msgstr ""
-"Inget spelstöd listat. Lägg antingen till spelstöd eller tryck på 'Stöder"
-" alla spel'"
 
 #: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
 #: app/templates/todo/user.html:173 app/templates/todo/user.html:197
 msgid "Nothing to do :)"
-msgstr "Inget behöver göras :)"
+msgstr "Ingenting å gjera :)"
 
 #: app/templates/todo/game_support.html:67
 msgid "Bulk support all games"
-msgstr "Bulk-stöd alla spel"
+msgstr ""
 
 #: app/templates/todo/game_support.html:69
 msgid ""
 "Click the button below to confirm that the following packages do support "
 "all games, except for any games listed in unsupported_games:"
 msgstr ""
-"Tryck på knappen nedan för att bekräfta att följande paket stöder alla "
-"spel, förutom spel listade i unsupported_games:"
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
-msgstr "Bekräfta"
+msgstr "Bekreft"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
-msgstr "Paket som inte stöder %(rel)s"
+msgstr ""
 
 #: app/templates/todo/mtver_support.html:13
 #: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
 #: app/templates/todo/outdated.html:16 app/templates/todo/screenshots.html:12
 #: app/templates/todo/screenshots.html:16
 msgid "Minetest-Mods org only"
-msgstr "Endast Minetest-Mods org"
+msgstr ""
 
 #: app/templates/todo/mtver_support.html:25 app/templates/todo/outdated.html:24
 #: app/templates/todo/screenshots.html:24 app/templates/todo/topics.html:12
 msgid "Sort by date"
-msgstr "Sortera efter datum"
+msgstr "Sorter etter dato"
 
 #: app/templates/todo/mtver_support.html:29 app/templates/todo/outdated.html:28
 #: app/templates/todo/screenshots.html:28
 msgid "Sort by score"
-msgstr "Sortera efter poäng"
+msgstr "Sorter etter poengsum"
 
 #: app/templates/todo/outdated.html:4
 msgid "All Outdated packages"
-msgstr "Alla föråldrade paket"
+msgstr ""
 
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
 #: app/templates/todo/user.html:100
 msgid "Missing Screenshots"
-msgstr "Saknade skärmdumpar"
+msgstr "Manglar skjermbilete"
 
 #: app/templates/todo/screenshots.html:33
 #, python-format
 msgid "%(count)d packages"
-msgstr "%(count)d paket"
+msgstr ""
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
-msgstr "Pakettaggar"
+msgstr ""
 
 #: app/templates/todo/tags.html:21 app/templates/todo/tags.html:25
 msgid "Missing tags only"
-msgstr "Endast borttappade taggar"
+msgstr ""
 
 #: app/templates/todo/tags.html:29
 msgid "Edit Tags"
-msgstr "Redigera taggar"
+msgstr ""
 
 #: app/templates/todo/todo_base.html:11
 msgid "Your to do list"
-msgstr "Din att-göra lista"
+msgstr ""
 
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
-msgstr "Föråldrade paket"
+msgstr ""
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
-msgstr "Sortera efter namn"
+msgstr "Sorter etter namn"
 
 #: app/templates/todo/topics.html:20
 msgid "Sort by views"
-msgstr "Sortera efter visningar"
+msgstr "Sorter etter visningar"
 
 #: app/templates/todo/topics.html:29
 msgid "Paginated list"
-msgstr "Paginerad lista"
+msgstr ""
 
 #: app/templates/todo/topics.html:34
 msgid "Unlimited list"
-msgstr "Obegränsad lista"
+msgstr ""
 
 #: app/templates/todo/topics.html:41
 msgid "Show discarded topics"
-msgstr "Visa bortkastade trådar"
+msgstr ""
 
 #: app/templates/todo/topics.html:43
 msgid "Hide discarded topics"
-msgstr "Göm bortkastade trådar"
+msgstr ""
 
 #: app/templates/todo/topics.html:49
 msgid "Topics to be Added"
-msgstr "Ämnen att läggas till"
+msgstr ""
 
 #: app/templates/todo/user.html:4
 #, python-format
 msgid "%(username)s's to do list"
-msgstr "%(username)ss att-göra lista"
+msgstr ""
 
 #: app/templates/todo/user.html:9
 msgid "Misc To do"
-msgstr "Misc. att-göra"
+msgstr ""
 
 #: app/templates/todo/user.html:13
 msgid "Enable email notifications"
-msgstr "Aktivera mejlnotifikationer"
+msgstr "Aktiver e-postvarslingar"
 
 #: app/templates/todo/user.html:18
 msgid "Unapproved Packages Needing Action"
-msgstr "Ej godkända paket som behöver åtgärdas"
+msgstr ""
 
 #: app/templates/todo/user.html:48
 msgid "See all Update Settings"
-msgstr "Se alla uppdateringsinställningar"
+msgstr ""
 
 #: app/templates/todo/user.html:53
 msgid "Create All Releases"
-msgstr "Skapa alla utgivningar"
+msgstr ""
 
 #: app/templates/todo/user.html:56
 msgid "Potentially Outdated Packages"
-msgstr "Möjligtvis föråldrade paket"
+msgstr ""
 
 #: app/templates/todo/user.html:58
 msgid ""
@@ -3807,138 +3689,131 @@ msgid ""
 "releases when New Commits or New Tags are pushed to Git by clicking "
 "'Update Settings'."
 msgstr ""
-"Istället för att markera paket som föråldrade kan du automatiskt skapa "
-"utgivningar när Ny Commit eller Ny Tagg pushas till Git genom att trycka "
-"på 'Uppdatera Inställningar'."
 
 #: app/templates/todo/user.html:60
 msgid ""
 "To remove a package from below, create a release or change the update "
 "settings."
 msgstr ""
-"För att ta bort ett paket från nedan vänligen skapa en utgivning eller "
-"ändra uppdateringsinställningarna."
 
 #: app/templates/todo/user.html:72
 msgid "See game support for your packages"
-msgstr "Se spelstöd för dina paket"
+msgstr ""
 
 #: app/templates/todo/user.html:74
 msgid "Missing Game Support"
-msgstr "Spelstöd saknas"
+msgstr ""
 
 #: app/templates/todo/user.html:120
 msgid "Small Screenshots"
-msgstr "Små skärmdumpar"
+msgstr "Liten skjermbilete"
 
 #: app/templates/todo/user.html:123
 msgid ""
 "These packages have screenshots that are too small, and should be "
 "replaced."
-msgstr "Dessa paket har skärmdumpar som är för små, och som borde ersättas."
+msgstr ""
 
 #: app/templates/todo/user.html:124
 msgid ""
 "Red and orange are screenshots below the limit, and grey screenshots are "
 "below the recommended resolution."
 msgstr ""
-"Röd och orange är skärmdumpar över gränsen, och gråa skärmdumpar är under"
-" den rekommenderade upplösningen."
 
 #: app/templates/todo/user.html:179
 msgid "See All"
-msgstr "Se alla"
+msgstr "Sjå Alle"
 
 #: app/templates/todo/user.html:180
 msgid "Packages Without Tags"
-msgstr "Paket utan taggar"
+msgstr ""
 
 #: app/templates/todo/user.html:182
 msgid "Labelling your packages with tags helps users find them."
-msgstr "Att beskriva ditt paket med taggar hjälper användare hitta dem."
+msgstr ""
 
 #: app/templates/todo/user.html:202
 msgid "Unadded Topics"
-msgstr "Ej tillagda trådar"
+msgstr ""
 
 #: app/templates/todo/user.html:205
 msgid "List of your forum topics which do not have a matching package."
-msgstr "Lista med forumtrådar som inte har ett respektivt paket."
+msgstr ""
 
 #: app/templates/todo/user.html:206
 msgid "Topics with a strikethrough have been marked as discarded."
-msgstr "Genomstrukna trådar har markerats som bortkastade."
+msgstr ""
 
 #: app/templates/todo/user.html:214
 msgid "Congrats! You don't have any topics which aren't on CDB."
-msgstr "Gratulerar! Du har inte några trådar som inte finns på CDB."
+msgstr ""
 
 #: app/templates/users/account.html:4
 #, python-format
 msgid "Account and Security - %(username)s"
-msgstr "Konto och säkerhet - %(username)s"
+msgstr "Konto og Sikkerhet - %(username)s"
 
 #: app/templates/users/account.html:18
 msgid "Change Password"
-msgstr "Ändra lösenord"
+msgstr "Endre lykelord"
 
 #: app/templates/users/account.html:22
 #: app/templates/users/change_set_password.html:8
 msgid "Set Password"
-msgstr "Sätt lösenord"
+msgstr "Sett lykelord"
 
 #: app/templates/users/account.html:27 app/templates/users/modtools.html:54
 msgid "Has password"
-msgstr "Har lösenord"
+msgstr "Har lykelord"
 
 #: app/templates/users/account.html:29 app/templates/users/modtools.html:56
 msgid "Doesn't have password"
-msgstr "Har inte lösenord"
+msgstr "Har ikkje lykelord"
 
 #: app/templates/users/account.html:33
 msgid "Linked Accounts"
-msgstr "Länkade konton"
+msgstr "Lenka kontoar"
 
 #: app/templates/users/account.html:40 app/templates/users/account.html:52
 msgid "Connected"
-msgstr "Ansluten"
+msgstr "Tilknytta"
 
 #: app/templates/users/account.html:43
 #, python-format
 msgid "Please PM %(rubenwardy)s on the forums to link your account."
-msgstr "Var snäll och PM:a %(rubenwardy)s på forumen för att länka ditt konto."
+msgstr ""
 
 #: app/templates/users/account.html:57
 msgid "View ContentDB's GitHub Permissions"
-msgstr "Visa ContentDB:s GitHub-behörigheter"
+msgstr ""
 
 #: app/templates/users/account.html:62
 msgid "Link Github"
-msgstr "Länka GitHub"
+msgstr "Knytt til Github"
 
 #: app/templates/users/account.html:65
 msgid "None"
-msgstr "Inget"
+msgstr "Ingen"
 
 #: app/templates/users/account.html:77
 msgid "Recent Account Actions"
-msgstr "Nyliga kontoåtgärder"
+msgstr ""
 
 #: app/templates/users/account.html:82
 msgid "Account Deletion and Deactivation"
-msgstr "Kontoborttagning och deaktivering"
+msgstr ""
 
 #: app/templates/users/account.html:86
 msgid "Delete or Deactivate"
-msgstr "Ta bort eller deaktivera"
+msgstr ""
 
 #: app/templates/users/account.html:89
 msgid "Account Deletion and Deactivation isn't available to users yet."
-msgstr "Kontoborttagning och deaktivering är inte tillgängliga för användare än."
+msgstr ""
 
 #: app/templates/users/account.html:90
 msgid "Please contact the admin."
-msgstr "Var snäll och kontakta administratören."
+msgstr ""
 
 #: app/templates/users/change_set_password.html:16
 #: app/templates/users/register.html:24
@@ -3946,118 +3821,108 @@ msgid ""
 "Your email is needed to recover your account if you forget your password "
 "and to send (configurable) notifications. "
 msgstr ""
-"Din mejladress behövs för att rädda ditt konto om du glömmer lösenordet "
-"och för att skicka (konfiguerbara) notiser. "
 
 #: app/templates/users/change_set_password.html:17
 #: app/templates/users/register.html:25
 #: app/templates/users/settings_email.html:20
 msgid "Your email will never be shared with a third-party."
-msgstr "Din mejladress kommer aldrig delas med tredje part."
+msgstr "Din e-post vil aldri bli delt med ein tredjepart."
 
 #: app/templates/users/change_set_password.html:24
 #: app/templates/users/register.html:27
 msgid "Must be at least 12 characters long."
-msgstr "Behöver vara minst 12 tecken långt."
+msgstr "Må være minst 12 teikn langt."
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
-msgstr "Skapa konto"
+msgstr "Lag konto"
 
 #: app/templates/users/claim.html:10
 msgid "Do you have an account on the Minetest Forums?"
-msgstr "Har du ett konto på Minetest-forumet?"
+msgstr "Har du ein konto på Minetest-forumet?"
 
 #: app/templates/users/claim.html:13
 msgid ""
 "ContentDB will link your account to your forum account if you have one, "
 "but you don't need one."
 msgstr ""
-"ContentDB kommer länka ditt konto till ditt forumkonto om du har ett, men"
-" du behöver inte det."
 
 #: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
-msgstr "<b>Ja</b>, jag har ett forumkonto"
+msgstr "<b>Ja</b>, eg har ein forumkonto"
 
 #: app/templates/users/claim.html:21
 msgid "<b>No</b>, I don't have one"
-msgstr "<b>Nej</b>, jag har inte ett"
+msgstr "<b>Nei</b>, eg har ikkje ein"
 
 #: app/templates/users/claim.html:24
 msgid "Create forum account"
-msgstr "Skapa forumkonto"
+msgstr "Lag forumkonto"
 
 #: app/templates/users/claim_forums.html:10
 msgid "Confirm Your Account"
-msgstr "Bekräfta ditt konto"
+msgstr "Bekreft kontoen din"
 
 #: app/templates/users/claim_forums.html:13
 msgid ""
 "You'll need to use prove that you have access to your forum account using"
 " one of the options below."
 msgstr ""
-"Du behöver bevisa att du har åtkomst till ditt forumkonto genom ett av "
-"följande steg."
 
 #: app/templates/users/claim_forums.html:14
 msgid "This is so ContentDB can link your account to your forum account."
 msgstr ""
-"Detta är för att ContentDB ska kunna länka ditt konto till ditt "
-"forumkonto."
 
 #: app/templates/users/claim_forums.html:18
 msgid "Don't have a forums account?"
-msgstr "Har du inte ett forumkonto?"
+msgstr ""
 
 #: app/templates/users/claim_forums.html:19
 #, python-format
 msgid "You can still <a href='%(url)s'>sign up without one</a>."
-msgstr "Du kan fortfarande <a href=\"%(url)s\">registrera utan</a>."
+msgstr ""
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
-msgstr "Alternativ 1"
+msgstr ""
 
 #: app/templates/users/claim_forums.html:27
 msgid "Use GitHub field in forum profile"
-msgstr "Använd GitHub-fält i forumprofil"
+msgstr ""
 
 #: app/templates/users/claim_forums.html:35
 #: app/templates/users/claim_forums.html:64
 msgid "Enter your forum username here:"
-msgstr "Mata in ditt forumkonto här:"
+msgstr "Skriv inn forum-brukarnamnet ditt her:"
 
 #: app/templates/users/claim_forums.html:39
 #: app/templates/users/claim_forums.html:68
 msgid "Forum username"
-msgstr "Forumanvändarnamn"
+msgstr "Forum brukarnamn"
 
 #: app/templates/users/claim_forums.html:40
 #: app/templates/users/claim_forums.html:68
 #: app/templates/users/register.html:16
 msgid "Only a-zA-Z0-9._ allowed"
-msgstr "Endast a-zA-Z0-9._ tillåtet"
+msgstr "Bare a-zA-Z0-9._ tillate"
 
 #: app/templates/users/claim_forums.html:43
 msgid "You'll need to have the GitHub field in your forum profile filled out."
-msgstr "Du måste ha fyllt i GitHub-fältet i din forumprofil."
+msgstr ""
 
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Logga in till forumet och <a "
-"href=\"https://forum.minetest.net/ucp.php?i=173\">gör det här</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
-msgstr "Nästa: logga in med GitHub"
+msgstr ""
 
 #: app/templates/users/claim_forums.html:55
 msgid "Option 2"
-msgstr "Alternativ 2"
+msgstr ""
 
 #: app/templates/users/claim_forums.html:56
 msgid "Verification token"
@@ -4069,26 +3934,25 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
-"Gå till <a "
-"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">User"
-" Control Panel &gt; Profile &gt; Edit signature</a>"
+"Gå til <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
+"signature\">Brukarstyrtavle &gt; Profil &gt; Rediger signatur</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
-msgstr "Klistra in detta i din signatur:"
+msgstr "Lim inn dette i signaturen din:"
 
 #: app/templates/users/claim_forums.html:81
 msgid "Click next so we can check it."
-msgstr "Tryck på nästa så vi kan kontrollera det."
+msgstr "Klikk neste slik at vi kan sjekke det."
 
 #: app/templates/users/claim_forums.html:84
 msgid "Don't worry, you can remove it after this is done."
-msgstr "Oroa dig inte, du kan ta bort den efter detta är klart."
+msgstr ""
 
 #: app/templates/users/delete.html:4
 #, python-format
 msgid "Delete user %(username)s"
-msgstr "Ta bort användare %(username)s"
+msgstr "Fjern brukar %(username)s"
 
 #: app/templates/users/delete.html:17
 #, python-format
@@ -4096,16 +3960,12 @@ msgid ""
 "This will delete your account, removing %(threads)d threads and "
 "%(replies)d replies."
 msgstr ""
-"Detta kommer ta bort ditt konto, %(threads)d trådar och %(replies)d svar "
-"kommer tas bort."
 
 #: app/templates/users/delete.html:22
 msgid ""
 "As you have packages and/or forum threads, your account cannot be fully "
 "deleted."
 msgstr ""
-"Eftersom du har paket och/eller forumtrådar kan ditt konto inte tas bort "
-"helt och hållet."
 
 #: app/templates/users/delete.html:23
 #, python-format
@@ -4113,66 +3973,64 @@ msgid ""
 "Instead, your account will be deactivated and all personal information "
 "wiped - including %(threads)d threads and %(replies)d replies."
 msgstr ""
-"Istället kommer ditt konto deaktiveras och all personlig information "
-"rensad - inklusive %(threads)d trådar och %(replies)d svar."
 
 #: app/templates/users/delete.html:25
 msgid "See the privacy policy for more information."
-msgstr "Se integritetspolicyn för mer information."
+msgstr "Sjå personvernpolitikken for meir informasjon"
 
 #: app/templates/users/delete.html:36
 msgid "Deactivate"
-msgstr "Deaktivera"
+msgstr "Deaktiver"
 
 #: app/templates/users/delete.html:40
 msgid "Delete Anyway"
-msgstr "Ta bort i alla fall"
+msgstr "Slett uansett"
 
 #: app/templates/users/email_sent.html:4
 msgid "Check Your Email"
-msgstr "Kontrollera din mejl"
+msgstr "Sjekk e-posten din"
 
 #: app/templates/users/email_sent.html:11
 msgid "We've sent an email to the address you specified."
-msgstr "Vi har skickat ett mejl till adressen du angav."
+msgstr "Vi har sendt ein e-post til adressa du oppgav."
 
 #: app/templates/users/email_sent.html:12
 msgid "You'll need to click the link in the email to confirm it."
-msgstr "Du behöver trycka på länken i mejlet för att bekräfta den."
+msgstr "Du må klikke på lenka i e-posten for å stadfeste det."
 
 #: app/templates/users/email_sent.html:16
 msgid "The link will expire in 12 hours"
-msgstr "Länken blir ogiltig inom 12 timmar"
+msgstr "Lenka vil gå ut etter 12 timar"
 
 #: app/templates/users/email_sent.html:22
 msgid "My email never arrived"
-msgstr "Mitt mejl kom aldrig"
+msgstr "E-posten min kom aldri fram"
 
 #: app/templates/users/forgot_password.html:4
 msgid "Request Password Reset"
-msgstr "Be om lösenordsåterställning"
+msgstr ""
 
 #: app/templates/users/forums_no_such_user.html:14
 #, python-format
 msgid "Unfortunately, %(username)s doesn't have an account on ContentDB yet."
-msgstr "Tyvärr så har %(username)s inte ett konto på ContentDB än."
+msgstr ""
 
 #: app/templates/users/forums_no_such_user.html:19
 msgid "Claim Account"
-msgstr "Gör anspråk på konto"
+msgstr ""
 
 #: app/templates/users/list.html:4 app/templates/users/list.html:8
 msgid "Users"
-msgstr "Användare"
+msgstr "Brukarar"
 
 #: app/templates/users/list.html:34
 #, python-format
 msgid "Rank: %(rank)s."
-msgstr "Rang: %(rank)s."
+msgstr ""
 
 #: app/templates/users/login.html:20
 msgid "Forgot my password"
-msgstr "Glömt lösenord"
+msgstr "Glemt lykelord"
 
 #: app/templates/users/login.html:30 app/templates/users/profile.html:86
 msgid "GitHub"
@@ -4196,72 +4054,72 @@ msgstr ""
 
 #: app/templates/users/modtools.html:28
 msgid "Edit Account"
-msgstr "Redigera konto"
+msgstr "Rediger konto"
 
 #: app/templates/users/modtools.html:60 app/templates/users/modtools.html:100
 msgid "Ban"
-msgstr "Bann"
+msgstr "Bannlyst"
 
 #: app/templates/users/modtools.html:73
 msgid "Unban"
-msgstr "Avbanna"
+msgstr ""
 
 #: app/templates/users/modtools.html:90
 msgid "Message to display to banned user"
-msgstr "Meddelande som visas till den bannade användaren"
+msgstr ""
 
 #: app/templates/users/modtools.html:94
 msgid "Expires At"
-msgstr "Utlöper"
+msgstr ""
 
 #: app/templates/users/modtools.html:97
 msgid "Expiry date. Leave blank for permanent ban"
-msgstr "Datum för upphörande. Lämna blankt för permanent bannlysning"
+msgstr ""
 
 #: app/templates/users/modtools.html:104
 msgid "Change Email and Send Password Reset"
-msgstr "Ändra mejl och skicka lösenordsåterställning"
+msgstr ""
 
 #: app/templates/users/modtools.html:108
 #: app/templates/users/settings_email.html:14
 msgid "Email Address"
-msgstr "Mejladress"
+msgstr "E-postadresse"
 
 #: app/templates/users/profile.html:20
 msgid "Profile picture"
-msgstr "Profilbild"
+msgstr "Profilbilete"
 
 #: app/templates/users/profile.html:31
 msgid "To Do List"
-msgstr "Att-göra lista"
+msgstr ""
 
 #: app/templates/users/profile.html:50
 msgid "Send Email"
-msgstr "Skicka mejl"
+msgstr "Send e-post"
 
 #: app/templates/users/profile.html:114
 msgid "packages"
-msgstr "paket"
+msgstr ""
 
 #: app/templates/users/profile.html:123
 msgid "collections"
-msgstr "Samlingar"
+msgstr ""
 
 #: app/templates/users/profile.html:132
 msgid "reviews"
-msgstr "recensioner"
+msgstr "omtalar"
 
 #: app/templates/users/profile.html:140
 msgid "comments"
-msgstr "kommentarer"
+msgstr "Kommentara"
 
 #: app/templates/users/profile.html:161
 msgid "Claim"
-msgstr "Gör anspråk"
+msgstr ""
 
 #: app/templates/users/profile.html:163
 msgid "Is this you? Claim your account now!"
-msgstr "Är detta du? Gör anspråk på ditt konto nu!"
+msgstr "Er dette deg? Gjer krav på kontoen din no!"
 
 #: app/templates/users/profile.html:199 app/templates/users/profile.html:205
 #, python-format
@@ -4270,7 +4128,7 @@ msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:238
 msgid "Alphabetical"
-msgstr "Alfabetiskt"
+msgstr "Alfabetisk"
 
 #: app/templates/users/profile.html:246
 msgid "Newest"
@@ -4278,142 +4136,130 @@ msgstr "Nyaste"
 
 #: app/templates/users/profile.html:252
 msgid "View list of tags"
-msgstr "Visa lista med taggar"
+msgstr ""
 
 #: app/templates/users/profile.html:260
 msgid "Create package"
-msgstr "Skapa paket"
+msgstr ""
 
 #: app/templates/users/profile.html:271
 msgid "Maintained Packages"
-msgstr "Underhållda paket"
+msgstr ""
 
 #: app/templates/users/profile.html:273
 msgid "This user is also a maintainer of the following packages"
-msgstr "Denna användare är även underhållare för foljande paket"
+msgstr ""
 
 #: app/templates/users/profile_edit.html:4
 #, python-format
 msgid "Edit Profile - %(username)s"
-msgstr "Redigera profil - %(username)s"
+msgstr "Rediger profil - %(username)s"
 
 #: app/templates/users/profile_edit.html:10
 msgid "Profile Picture"
-msgstr "Profilbild"
+msgstr "Profilbilete"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
-msgstr "Synkronisera med forumet"
+msgstr ""
 
 #: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
-msgstr "Profilinformation"
+msgstr "Profilinformasjon"
 
 #: app/templates/users/profile_edit.html:53
 msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr ""
-"Låtsas man vara en annan användare leder detta till en permanent "
-"bannlysning"
 
 #: app/templates/users/register.html:17
 msgid ""
 "Only alphanumeric characters, periods, underscores, and minuses are "
 "allowed (a-zA-Z0-9._)"
 msgstr ""
-"Endast alfanumeriska tecken, punkter, understreck, och minustecken är "
-"tillåtna (a-zA-Z0-9._)"
 
 #: app/templates/users/register.html:20
 msgid ""
 "Human readable name, defaults to username if not specified. This can be "
 "changed later."
 msgstr ""
-"Mänskligt läsbart namn, blir användarnamnet om inte specificerat. Detta "
-"kan ändras senare."
 
 #: app/templates/users/register.html:21
 msgid "Same as username"
-msgstr "Samma som användarnamn"
+msgstr "Same som brukarnamnet"
 
 #: app/templates/users/register.html:32
 msgid "Please prove that you are human"
-msgstr "Var vänlig visa du är en människa"
+msgstr "Vennlegst bevis at du er eit menneske"
 
 #: app/templates/users/register.html:35
 msgid "I agree to the "
-msgstr "Jag accepterar "
+msgstr "Eg samtykkjer "
 
 #: app/templates/users/settings_email.html:4
 #, python-format
 msgid "Email and Notifications - %(username)s"
-msgstr "Mejl och Notiser - %(username)s"
+msgstr "E-post og varsel - %(username)s"
 
 #: app/templates/users/settings_email.html:19
 msgid ""
 "Your email is needed to recover your account if you forget your password,"
 " and to send (configurable) notifications."
 msgstr ""
-"Din mejl krävs för att rädda ditt konto om du glömmer lösenordet, och för"
-" att skicka (konfiguerbara) notiser."
 
 #: app/templates/users/settings_email.html:25
 msgid "There is at least one verification pending."
-msgstr "Det är åtminstonde en verifiering som pågår."
+msgstr ""
 
 #: app/templates/users/settings_email.html:29
 msgid "Notification Settings"
-msgstr "Notisinställningar"
+msgstr "Innstillingar for varsel"
 
 #: app/templates/users/settings_email.html:33
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr ""
-"Mejlnotiser är för nuvarande avstängda. Trycka på 'spara' för att sätta "
-"på."
+"E-postvarslingar er for øyeblikket slått av. Klikk 'lagre' for å aktivere "
+"det."
 
 #: app/templates/users/settings_email.html:38
 msgid ""
 "Configure whether certain types of notifications are sent immediately, or"
 " as part of a daily digest."
 msgstr ""
-"Konfiguera om notiser skickas med en gång, eller som del av en daglig "
-"sammandragning."
 
 #: app/templates/users/settings_email.html:43
 msgid "Event"
-msgstr "Event"
+msgstr ""
 
 #: app/templates/users/settings_email.html:45
 msgid "Immediately"
-msgstr "Omedelbart"
+msgstr ""
 
 #: app/templates/users/settings_email.html:46
 msgid "In digest"
-msgstr "Sammandraget"
+msgstr ""
 
 #: app/templates/users/stats.html:4
 #, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr "Statistik för %(display_name)ss paket"
+msgstr ""
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
 "This will blacklist an email address, preventing ContentDB from ever "
 "sending emails to it - including password resets."
 msgstr ""
-"Detta kommer svartlista en mejladress, vilket hindrar ContentDB från att "
-"någonsin skicka mejl till den - inklusive lösenordsåterställningar."
 
 #: app/templates/users/unsubscribe.html:20
 msgid "Please enter the email address you wish to blacklist."
-msgstr "Var snäll ange den mejladress du vill svartlista."
+msgstr ""
 
 #: app/templates/users/unsubscribe.html:21
 msgid "You will then need to confirm the email"
-msgstr "Du kommer sedan behöva bekräfta mejlen"
+msgstr "Du må deretter stadfeste e-posten"
 
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
-msgstr "Du kan nu avprenumerera."
+msgstr "No kan du melde deg av."
 
 #: app/templates/users/unsubscribe.html:40
 #, python-format
@@ -4421,8 +4267,6 @@ msgid ""
 "Unsubscribing may prevent you from being able to log into the account "
 "'%(display_name)s'"
 msgstr ""
-"Om du avprenumererar kan detta hindra dig från att logga in till kontot "
-"'%(display_name)s'"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -4430,310 +4274,58 @@ msgid ""
 "essential system emails.\n"
 "\t\t\t\t\tConsider editing your email notification preferences instead."
 msgstr ""
-"ContentDB kommer inte längra kunna skicka \"glömt lösenord\" och andra "
-"nödvändiga systemmejl.\n"
-"\t\t\t\t\tÖverväg att ändra dina mejlnotisinställningar istället."
 
 #: app/templates/users/unsubscribe.html:50
 msgid "You won't be able to use this email with ContentDB anymore."
-msgstr "Du kommer inte kunna använda denna mejl med ContentDB längre."
+msgstr "Du vil ikkje lenger kunne bruke denne e-posten med ContentDB."
 
 #: app/templates/users/unsubscribe.html:57
 msgid "Edit Notification Preferences"
-msgstr "Redigera notisinställningar"
+msgstr "Endre varselinnstillingar"
 
 #: app/templates/zipgrep/search.html:4
 #: app/templates/zipgrep/view_results.html:9
 msgid "Search in Package Releases"
-msgstr "Sök i paketutgivningar"
+msgstr ""
 
 #: app/templates/zipgrep/view_results.html:4
 #, python-format
 msgid "'%(query)s' - Search Package Releases"
-msgstr "'%(query)s' - Sök paketutgivningar"
+msgstr ""
 
 #: app/utils/flask.py:150
 msgid "All time"
-msgstr "Hela tiden"
+msgstr "Heile tida"
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
-msgstr "Senaste 7 dagar"
+msgstr "Siste 7 dagane"
 
 #: app/utils/flask.py:152
 msgid "Last 30 days"
-msgstr "Senaste 30 dagar"
+msgstr "Siste 30 dagane"
 
 #: app/utils/flask.py:153
 msgid "Last 90 days"
-msgstr "Senaste 90 dagar"
+msgstr "Siste 90 dagane"
 
 #: app/utils/flask.py:154
+#, fuzzy
 msgid "Year to date"
-msgstr "Detta år"
+msgstr "Frå starten av året til no"
 
 #: app/utils/flask.py:155
 msgid "Last year"
-msgstr "Förra året"
+msgstr "I fjor"
 
 #: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
-msgstr "Du har extremt många notiser, du borde läsa eller rensa dem"
+msgstr "Du har ekstremt mange meldingar, du bør enten lesa dei eller sletta dei"
 
 #: app/utils/user.py:55
 msgid ""
 "Please consider enabling email notifications, you can customise how much "
 "is sent"
 msgstr ""
-"Var snäll och överväg att sätta på mejlnotiser, du kan anpassa hur mycket"
-" som skickas"
-
-#~ msgid "Package already exists!"
-#~ msgstr "Paket finns redan!"
-
-#~ msgid "You don't have permission to do that."
-#~ msgstr "Du har inte tillåtelse att göra detta."
-
-#~ msgid "You do not have permission to edit maintainers"
-#~ msgstr "Du har inte tillåtelse att redigera underhållare"
-
-#~ msgid "You cannot comment on this thread"
-#~ msgstr "Du kan inte kommentera på den här tråden"
-
-#~ msgid "Comment needs to be between 3 and 2000 characters."
-#~ msgstr "Kommentar måste vara mellan 3 och 2000 tecken."
-
-#~ msgid "Unable to find that package!"
-#~ msgstr "Kunda inte hitta paket!"
-
-#~ msgid "An approval thread already exists!"
-#~ msgstr "En godkännandestråd finns redan!"
-
-#~ msgid ""
-#~ "Invalid username - must only contain "
-#~ "A-Za-z0-9._. Consider contacting an admin"
-#~ msgstr ""
-#~ "Ogiltigt användarnamn - måste endast "
-#~ "innehålla A-Za-z0-9.-. Överväg att kontakta"
-#~ " en administratör"
-
-#~ msgid "You do not have permission to edit this package"
-#~ msgstr "Du har inte behörighet att ändra detta paket"
-
-#~ msgid "You do not have permission to change the package name"
-#~ msgstr "Du har inte behörighet att ändra paketnamnet"
-
-#~ msgid "You do not have permission to make releases"
-#~ msgstr "Du har inte behörighet att göra utsläpp"
-
-#~ msgid ""
-#~ "This thread is only visible to the"
-#~ " package owner and users of Approver"
-#~ " rank or above."
-#~ msgstr ""
-#~ "Denna tråd syns endast för paketägaren"
-#~ " och användare av godkännarrang eller "
-#~ "högre."
-
-#~ msgid ""
-#~ "This thread is only visible to its"
-#~ " creator, the package owner, and "
-#~ "users of Approver rank or above."
-#~ msgstr ""
-#~ "Den här tråden är endast synlig "
-#~ "för skaparen, paketägaren, och användare "
-#~ "med godkännarrang eller över."
-
-#~ msgid "Meta Packages"
-#~ msgstr "Metapaket"
-
-#~ msgid "No meta packages found."
-#~ msgstr "Inga metapaket kunde hittas."
-
-#~ msgid "Meta Package \"%(name)s\""
-#~ msgstr "Metapaket \"%(name)s\""
-
-#~ msgid "Meta packages that have hard dependers, but no packages providing them."
-#~ msgstr ""
-#~ "Metapaket som har hårda beroenden på "
-#~ "den, men inga paket som bidrar "
-#~ "dem."
-
-#~ msgid "All Outdated Packages"
-#~ msgstr "Alla föråldrade paket"
-
-#~ msgid "ContentDB will link your account to your forum account."
-#~ msgstr "ContentDB kommer länka ditt konto till ditt forumkonto."
-
-#~ msgid ""
-#~ "You don't need a forum account, "
-#~ "however, it's recommended to make the"
-#~ " most out of the Minetest community."
-#~ msgstr ""
-#~ "Du behöver inte ett forumkonto, men "
-#~ "det rekommenderas för att få the "
-#~ "mesta ut från Minetest-community:t."
-
-#~ msgid "Password suggestion"
-#~ msgstr "Lösenordsförslag"
-
-#~ msgid "Why?"
-#~ msgstr "Varför?"
-
-#~ msgid "You should add at least one screenshot, but this isn't required."
-#~ msgstr ""
-#~ "Du bör lägga till åtminstonde en "
-#~ "skärmdump, men detta är inte "
-#~ "obligatoriskt."
-
-#~ msgid "Mods for %(title)s"
-#~ msgstr "Moddar för %(title)s"
-
-#~ msgid "Stats / Monitoring"
-#~ msgstr "Statistik / Övervakning"
-
-#~ msgid "Deletion is permanent."
-#~ msgstr "Radering är permanent."
-
-#~ msgid "Topmost screenshot will be used as the package thumbnail."
-#~ msgstr "Högsta skärmdump kommer användas som pakettumnageln."
-
-#~ msgid "Sync with Forums"
-#~ msgstr "Synkronisera med forum"
-
-#~ msgid ""
-#~ "No reviewed packages accepting donations. "
-#~ "Considering reviewing your favourite packages"
-#~ msgstr ""
-#~ "Inga recenserade paket accepterar donationer."
-#~ " Överväg att recensera dina favoritpaket"
-
-#~ msgid "%(downloads)s per day"
-#~ msgstr "%(downloads)s per dag"
-
-#~ msgid "None listed, assumed to support all games"
-#~ msgstr ""
-
-#~ msgid "Supported games (Comma-separated)"
-#~ msgstr "Kompatibla spel (Kommaseparerad)"
-
-#~ msgid "Unsupported games (Comma-separated)"
-#~ msgstr "Ej kompatibla spel (Kommaseparerad)"
-
-#~ msgid "Supports all games (unless stated)"
-#~ msgstr ""
-
-#~ msgid "Supports all games unless otherwise stated"
-#~ msgstr ""
-
-#~ msgid "Added by Editor"
-#~ msgstr "Tillagd av redigerare"
-
-#~ msgid "mod.conf"
-#~ msgstr "mod.conf"
-
-#~ msgid "No specific game is required"
-#~ msgstr "Inget specifikt spel behövs"
-
-#~ msgid "Generated mod.conf lines"
-#~ msgstr "Genererade mod.conf-linjer"
-
-#~ msgid "Unless otherwise stated, this package should work with all games."
-#~ msgstr ""
-
-#~ msgid "Editor Overrides"
-#~ msgstr "Redigeraröverskridelser"
-
-#~ msgid "Should support most games."
-#~ msgstr ""
-
-#~ msgid ""
-#~ "If your package supports all games "
-#~ "unless otherwise stated, confirm this "
-#~ "using 'Supports all games'"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "Unsubscribing may prevent you from being"
-#~ " able to sign into the account "
-#~ "'%(display_name)s'"
-#~ msgstr ""
-#~ "Om du avprenumererar kan du kanske "
-#~ "inte kunna logga in till kontot "
-#~ "'%(display_name)s'"
-
-#~ msgid ""
-#~ "Click the button below to confirm "
-#~ "that all games without listed "
-#~ "supported_games (red text above) do "
-#~ "support all games, except for any "
-#~ "games listed in unsupported_games."
-#~ msgstr ""
-
-#~ msgid "Based on your reviews"
-#~ msgstr "Baserat på dina recensioner"
-
-#~ msgid "It's not possible for texture packs to support all games"
-#~ msgstr "Det är inte möjligt för texturpaket att stöda alla spel"
-
-#~ msgid ""
-#~ "Click the button below to confirm "
-#~ "that all packages without listed "
-#~ "supported_games (red text above) do "
-#~ "support all games, except for any "
-#~ "games listed in unsupported_games."
-#~ msgstr ""
-#~ "Tryck på knappen nedan för att "
-#~ "bekräfta att alla paket utan "
-#~ "supported_games (röd text nedan) faktiskt "
-#~ "stöder alla spel, förutom spel listade"
-#~ " i unsupported_games."
-
-#~ msgid "Unable to add protected tag %(title)s to package"
-#~ msgstr "Kunde inte lägga till skyddad tagg %(title)s till paket"
-
-#~ msgid ""
-#~ "To add or remove a package, go "
-#~ "to the package's page and click "
-#~ "'Add to collection'"
-#~ msgstr ""
-
-#~ msgid "Tip: paste in a forum topic URL"
-#~ msgstr "Tips: klistra in en forumtråds-URL"
-
-#~ msgid "Must be at least 8 characters long."
-#~ msgstr "Behöver vara minst 8 tecken långt."
-
-#~ msgid "Please open a thread to request a name change"
-#~ msgstr "Var snäll och öppna en tråd för att begära ett namnbyte"
-
-#~ msgid ""
-#~ "Enter the repo URL for the package.\n"
-#~ "\t\t\t\tIf the repo uses git then"
-#~ " the metadata will be automatically "
-#~ "imported."
-#~ msgstr ""
-#~ "Skriv in repo-URL:en för paketet.\n"
-#~ "\t\t\t\tOm repon använder Git kommer "
-#~ "metadatan att automatiskt importeras."
-
-#~ msgid "Leave blank if you don't have a repo. Click skip if the import fails."
-#~ msgstr ""
-#~ "Lämna blankt om du inte har en "
-#~ "repo. Tryck på hoppa över om "
-#~ "importen misslyckas."
-
-#~ msgid "Skip Autoimport"
-#~ msgstr "Hoppa över autoimport"
-
-#~ msgid "Unapprove"
-#~ msgstr "Avgodkänn"
-
-#~ msgid "It is recommended that you set a password for your account."
-#~ msgstr "Det rekommenderas att du sätter ett lösenord till ditt konto."
-
-#~ msgid "Spotlight"
-#~ msgstr "Presenterade"
-
-#~ msgid "a PNG or JPG image file"
-#~ msgstr "en PNG- eller JPG-bildfil"
+"Vennligst vurder å aktivere e-postvarslingar. Du kan tilpasse kor mykje som "
+"blir sendt"
