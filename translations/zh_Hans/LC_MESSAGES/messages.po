@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-12-30 16:46+0000\n"
-"PO-Revision-Date: 2023-11-28 08:02+0000\n"
-"Last-Translator: Gao Tiesuan <yepifoas@666email.com>\n"
+"PO-Revision-Date: 2024-02-10 02:02+0000\n"
+"Last-Translator: Mumulhl <mumulhl.666@gmail.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"minetest/contentdb/zh_Hans/>\n"
 "Language: zh_Hans\n"
-"Language-Team: Chinese (Simplified) "
-"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hans/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -93,7 +94,7 @@ msgstr "私有"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "置顶在我的个人主页上"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
@@ -151,15 +152,15 @@ msgstr "描述"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "跳转 URL"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "应用类型"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "撤销所有用户令牌"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -878,9 +879,9 @@ msgid "Top %(perc)s%% reviewer"
 msgstr "最高 %(perc)s%% 评测者"
 
 #: app/blueprints/users/profile.py:131
-#, fuzzy, python-format
+#, python-format
 msgid "Only %(place)d users have written more helpful reviews."
-msgstr "只有%(place)d个用户写了更多有帮助的评测。"
+msgstr "只有%(place)d个用户写了更有帮助的评测。"
 
 #: app/blueprints/users/profile.py:136
 msgid "Consider writing more helpful reviews to get a medal."
@@ -956,7 +957,7 @@ msgstr "API令牌"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "OAuth2应用程序"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1069,7 +1070,7 @@ msgstr "要求太多，请稍候再试"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "一个PNG，JPEG或WebP图像文件"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1459,11 +1460,11 @@ msgstr "创建API令牌"
 #: app/templates/api/create_edit_token.html:25
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
-msgstr ""
+msgstr "此令牌由%(author)s的应用程序%(title)s创建。"
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "点击“删除”撤销访问权限。"
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1516,7 +1517,7 @@ msgstr "API文档"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "应用程序"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1538,7 +1539,7 @@ msgstr "用户访问旧URL时不会跳转"
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "这就要求作品集是公开的"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
@@ -2184,97 +2185,98 @@ msgstr "编辑/审核者通知"
 #: app/templates/oauth/authorize.html:4
 #, python-format
 msgid "Authorize %(title)s"
-msgstr ""
+msgstr "授权%(title)s"
 
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "想要访问你的账号%(name)s"
 
 #: app/templates/oauth/authorize.html:46
 msgid "Verified application"
-msgstr ""
+msgstr "已验证的应用程序"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB信任这个应用程序"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
-msgstr ""
+msgstr "只有公开数据"
 
 #: app/templates/oauth/authorize.html:63
 msgid "Read-only access to your public data"
-msgstr ""
+msgstr "以只读方式访问你的公开数据"
 
 #: app/templates/oauth/authorize.html:76
 msgid "Authorize"
-msgstr ""
+msgstr "授权"
 
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "关于%(title)s"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
 msgid "Application isn't approved yet"
-msgstr ""
+msgstr "申请尚未批准"
 
 #: app/templates/oauth/authorize.html:93
 #: app/templates/oauth/create_edit.html:28
 msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
-msgstr ""
+msgstr "要允许自己以外的用户登录，您需要联系 ContentDB "
+"工作人员让他们审核你的应用程序。"
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
-msgstr ""
+msgstr "创建OAuth客户端"
 
 #: app/templates/oauth/create_edit.html:36
 #, python-format
 msgid "Your application has %(count)d users"
-msgstr ""
+msgstr "你的应用程序有%(count)d个用户"
 
 #: app/templates/oauth/create_edit.html:37
 msgid "Revoke all user tokens"
-msgstr ""
+msgstr "撤销所有用户令牌"
 
 #: app/templates/oauth/create_edit.html:51
 msgid ""
 "You must keep the secret safe. If you are unable, set the app type to "
 "'client-side'."
-msgstr ""
+msgstr "你必须妥善保密。如果无法保密，请将应用程序类型设置为“客户端”。"
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
-msgstr ""
+msgstr "授权 URL 示例"
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
-msgstr ""
+msgstr "在你请求访问用户账号时显示给用户"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
-msgstr ""
+msgstr "你将在哪里存储client_secret？"
 
 #: app/templates/oauth/list_clients.html:4
 #, python-format
 msgid "OAuth2 Applications | %(username)s"
-msgstr ""
+msgstr "OAuth2应用程序 | %(username)s"
 
 #: app/templates/oauth/list_clients.html:9
 msgid "OAuth2 Documentation"
-msgstr ""
+msgstr "OAuth2文档"
 
 #: app/templates/oauth/list_clients.html:16
 msgid "Unpublished"
-msgstr ""
+msgstr "未发布"
 
 #: app/templates/oauth/list_clients.html:22
 msgid "No applications created"
-msgstr ""
+msgstr "没有应用程序被创建"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2515,7 +2517,7 @@ msgstr "若勾选，则该软件包支持除unsupported_games所排除项以外�
 msgid ""
 "You can check this and still specify games in supported_games that you've"
 " tested."
-msgstr ""
+msgstr "你可以勾选此项，并在supported_games中指定你已测试过的游戏。"
 
 #: app/templates/packages/game_support.html:101
 msgid "It's not possible for texture packs to support all games."
@@ -2543,7 +2545,7 @@ msgstr "最好将支持/不支持的子游戏添加到%(conf)s，但是您可以
 msgid ""
 "Adding to %(conf)s allows users who install outside ContentDB to benefit "
 "as well."
-msgstr ""
+msgstr "添加到%(conf)s，让在ContentDB之外安装的用户也能受益。"
 
 #: app/templates/packages/game_support.html:119
 #: app/templates/packages/game_support.html:120
@@ -2566,37 +2568,37 @@ msgstr "有可能已被作者删除，或因问题被ContentDB工作人员删除
 
 #: app/templates/packages/gone.html:25 app/templates/packages/gone.html:35
 msgid "Package Undergoing Review"
-msgstr ""
+msgstr "正在评测的软件包"
 
 #: app/templates/packages/gone.html:27
 msgid "This package is currently undergoing review"
-msgstr ""
+msgstr "该软件包目前正在评测中"
 
 #: app/templates/packages/gone.html:30
 msgid "Package Not Yet Submitted"
-msgstr ""
+msgstr "尚未提交的软件包"
 
 #: app/templates/packages/gone.html:32
 msgid "This package has been created but hasn't been submitted for approval yet."
-msgstr ""
+msgstr "该软件包已创建，但尚未提交审批。"
 
 #: app/templates/packages/gone.html:37
 msgid ""
 "This package is currently undergoing review, and changes are needed "
 "before it can be added."
-msgstr ""
+msgstr "该软件包目前正在评测中，需要修改后才能添加。"
 
 #: app/templates/packages/gone.html:41
 msgid "Please check back again later."
-msgstr ""
+msgstr "请稍后再查看。"
 
 #: app/templates/packages/gone.html:43
 msgid "Or, if you're the author, log in to see more information."
-msgstr ""
+msgstr "或者，如果你是作者，请登录查看更多信息。"
 
 #: app/templates/packages/gone.html:48
 msgid "Login"
-msgstr ""
+msgstr "登录"
 
 #: app/templates/packages/list.html:21
 #, python-format
@@ -2669,21 +2671,21 @@ msgstr "支持的Minetest版本"
 #: app/templates/packages/release_new.html:75
 #, python-format
 msgid "Are you sure your package doesn't work on versions after %(version)s?"
-msgstr ""
+msgstr "你确定你的软件包不能在%(version)s之后的版本上运行吗？"
 
 #: app/templates/packages/release_edit.html:62
 #: app/templates/packages/release_new.html:77
 msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Minetest versions."
-msgstr ""
+msgstr "只有当你知道它无法在较新的Minetest版本上运行时，才会设置最大版本。"
 
 #: app/templates/packages/release_edit.html:63
 #: app/templates/packages/release_new.html:78
 msgid ""
 "Don't set the maximum version just because you haven't tested it on newer"
 " versions."
-msgstr ""
+msgstr "不要因为没有在新版本上测试过就设置最大版本。"
 
 #: app/templates/packages/release_edit.html:67
 #: app/templates/packages/release_new.html:88
@@ -2880,6 +2882,8 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)"
 msgstr ""
+"存储总使用量为 %(total_size)d MB（版本发布 %(release_size)d MB，截图 "
+"%(screenshot_size)d MB）"
 
 #: app/templates/packages/remove.html:9
 #, python-format
@@ -2910,12 +2914,12 @@ msgstr ""
 
 #: app/templates/packages/remove.html:28
 msgid "and"
-msgstr ""
+msgstr "和"
 
 #: app/templates/packages/remove.html:34
 #, python-format
 msgid "Removing this package will break the following mods: %(names)s"
-msgstr ""
+msgstr "移除该软件包会破坏以下Mod： %(names)s"
 
 #: app/templates/packages/remove.html:41
 msgid "Reason"
@@ -3013,11 +3017,11 @@ msgstr "排列顺序需要JavaScript。"
 
 #: app/templates/packages/screenshots.html:88
 msgid "Client Preview"
-msgstr ""
+msgstr "客户端预览"
 
 #: app/templates/packages/screenshots.html:90
 msgid "The first screenshot in the list above will be the package thumbnail."
-msgstr ""
+msgstr "上面列表中的第一张截图将是软件包缩略图。"
 
 #: app/templates/packages/screenshots.html:127
 msgid "Videos"
@@ -3057,7 +3061,7 @@ msgstr "类似的论坛贴子"
 
 #: app/templates/packages/stats.html:18
 msgid "Download (.csv)"
-msgstr ""
+msgstr "下载（.csv）"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -3173,7 +3177,7 @@ msgstr "你不能自己评测自己的软件包。"
 
 #: app/templates/packages/view.html:348
 msgid "Package needs to be approved before it can be reviewed."
-msgstr ""
+msgstr "在评测之前，需要先批准该软件包。"
 
 #: app/templates/packages/view.html:359
 msgid "Used By"
@@ -3189,11 +3193,11 @@ msgstr "查看子游戏内容"
 
 #: app/templates/packages/view.html:381
 msgid "Favorite"
-msgstr ""
+msgstr "收藏"
 
 #: app/templates/packages/view.html:387
 msgid "Add to collection..."
-msgstr ""
+msgstr "添加到作品集..."
 
 #: app/templates/packages/view.html:397
 msgid "Package may be outdated"
@@ -3233,23 +3237,23 @@ msgstr "兼容子游戏"
 
 #: app/templates/packages/view.html:506 app/templates/packages/view.html:526
 msgid "No specific game required"
-msgstr ""
+msgstr "无需特定的子游戏"
 
 #: app/templates/packages/view.html:509
 msgid "Tested with:"
-msgstr ""
+msgstr "已测试："
 
 #: app/templates/packages/view.html:531
 msgid "Is the above correct?"
-msgstr ""
+msgstr "上述信息正确吗？"
 
 #: app/templates/packages/view.html:532
 msgid "You need to either confirm this or tell ContentDB about supported games"
-msgstr ""
+msgstr "你需要确认这一点或告知ContentDB支持的子游戏"
 
 #: app/templates/packages/view.html:544
 msgid "Does not work with:"
-msgstr ""
+msgstr "不适用于："
 
 #: app/templates/packages/view.html:561
 msgid "This is an experimental feature."
@@ -3261,7 +3265,7 @@ msgstr "支持的游戏是由算法计算，不保证正确性。"
 
 #: app/templates/packages/view.html:572
 msgid "Please specify compatible games"
-msgstr ""
+msgstr "请说明兼容的子游戏"
 
 #: app/templates/packages/view.html:578
 msgid "Information"
@@ -3304,11 +3308,11 @@ msgstr "见审计日志"
 msgid ""
 "Due to spam, we no longer accept reports from anonymous users on this "
 "form."
-msgstr ""
+msgstr "由于垃圾信息的原因，我们不再接受匿名用户通过此表单提交的报告。"
 
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin in another way"
-msgstr ""
+msgstr "请登录或以其他方式联系管理员"
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
@@ -3384,7 +3388,7 @@ msgstr "回复 <b>%(title)s</b>"
 
 #: app/templates/threads/user_comments.html:73
 msgid "Only showing replies to public threads"
-msgstr ""
+msgstr "只显示对公开贴子的回复"
 
 #: app/templates/threads/view.html:46
 msgid "Subscribe"
@@ -3468,8 +3472,9 @@ msgid "Unfulfilled Dependencies"
 msgstr "未满足的依赖项"
 
 #: app/templates/todo/editor.html:151
+#, fuzzy
 msgid "Mod names that have hard dependers, but no packages providing them."
-msgstr ""
+msgstr "有硬依赖项但没有提供该硬依赖项的软件包的Mod名称。"
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:73
 msgid "View All"
@@ -3482,31 +3487,31 @@ msgstr "最近的活动"
 #: app/templates/todo/game_support.html:4
 #, python-format
 msgid "Game Support for %(username)s"
-msgstr ""
+msgstr "子游戏支持 %(username)s"
 
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
-msgstr ""
+msgstr "你应该指定你的Mod和材质支持的子游戏。"
 
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
-msgstr ""
+msgstr "指定子游戏支持可让玩家更容易找到你的内容。"
 
 #: app/templates/todo/game_support.html:13
 msgid ""
 "If your package is game independent, confirm this using 'Supports all "
 "games'"
-msgstr ""
+msgstr "如果你的软件包与子游戏无关，请使用“支持所有子游戏”确认这一点"
 
 #: app/templates/todo/game_support.html:35
 msgid "Supports all games"
-msgstr ""
+msgstr "支持所有子游戏"
 
 #: app/templates/todo/game_support.html:51
 msgid ""
 "No supported games listed. Please either add supported games or check "
 "'Supports all games'"
-msgstr ""
+msgstr "未列出支持的子游戏。请添加支持的子游戏或勾选“支持所有子游戏”"
 
 #: app/templates/todo/game_support.html:62 app/templates/todo/user.html:40
 #: app/templates/todo/user.html:94 app/templates/todo/user.html:114
@@ -3516,22 +3521,23 @@ msgstr "没有需要办的事情 (*^o^*)"
 
 #: app/templates/todo/game_support.html:67
 msgid "Bulk support all games"
-msgstr ""
+msgstr "批量支持所有子游戏"
 
 #: app/templates/todo/game_support.html:69
 msgid ""
 "Click the button below to confirm that the following packages do support "
 "all games, except for any games listed in unsupported_games:"
-msgstr ""
+msgstr "单击下面的按钮确认以下软件包确实支持所有子游戏，在unsupported_games中的子游戏"
+"除外："
 
 #: app/templates/todo/game_support.html:74
 msgid "Confirm"
-msgstr ""
+msgstr "确认"
 
 #: app/templates/todo/mtver_support.html:4
 #, python-format
 msgid "Packages not supporting %(rel)s"
-msgstr ""
+msgstr "软件包不支持%(rel)s"
 
 #: app/templates/todo/mtver_support.html:13
 #: app/templates/todo/mtver_support.html:17 app/templates/todo/outdated.html:12
@@ -3557,12 +3563,12 @@ msgstr "所有过时的软件包"
 #: app/templates/todo/screenshots.html:4 app/templates/todo/todo_base.html:35
 #: app/templates/todo/user.html:100
 msgid "Missing Screenshots"
-msgstr ""
+msgstr "截图丢失"
 
 #: app/templates/todo/screenshots.html:33
 #, python-format
 msgid "%(count)d packages"
-msgstr ""
+msgstr "%(count)d个软件包"
 
 #: app/templates/todo/tags.html:4 app/templates/todo/todo_base.html:29
 msgid "Package Tags"
@@ -3578,11 +3584,11 @@ msgstr "编辑标签"
 
 #: app/templates/todo/todo_base.html:11
 msgid "Your to do list"
-msgstr ""
+msgstr "你的任务清单"
 
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
-msgstr ""
+msgstr "过时的软件包"
 
 #: app/templates/todo/topics.html:16
 msgid "Sort by name"
@@ -3656,11 +3662,11 @@ msgstr "要从下面删除软件包，请创建发行版或改变更新设置。
 
 #: app/templates/todo/user.html:72
 msgid "See game support for your packages"
-msgstr ""
+msgstr "查看子游戏对你的软件包的支持"
 
 #: app/templates/todo/user.html:74
 msgid "Missing Game Support"
-msgstr ""
+msgstr "缺少子游戏支持"
 
 #: app/templates/todo/user.html:120
 msgid "Small Screenshots"
@@ -3789,7 +3795,7 @@ msgstr "您的电子邮件绝不会与第三方共享。"
 #: app/templates/users/change_set_password.html:24
 #: app/templates/users/register.html:27
 msgid "Must be at least 12 characters long."
-msgstr ""
+msgstr "长度至少要有 12 个字符。"
 
 #: app/templates/users/claim.html:4
 msgid "Create Account"
@@ -3803,7 +3809,7 @@ msgstr "您在 Minetest 论坛上有帐户吗？"
 msgid ""
 "ContentDB will link your account to your forum account if you have one, "
 "but you don't need one."
-msgstr ""
+msgstr "如果您有论坛账户，ContentDB会将您的账户链接到论坛账户，但您不需要论坛账户。"
 
 #: app/templates/users/claim.html:18
 msgid "<b>Yes</b>, I have a forums account"
@@ -3996,7 +4002,7 @@ msgstr "GitHub"
 
 #: app/templates/users/modtools.html:12
 msgid "Storage"
-msgstr ""
+msgstr "存储空间"
 
 #: app/templates/users/modtools.html:20
 #, python-format
@@ -4004,11 +4010,13 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)."
 msgstr ""
+"总存储使用量为 %(total_size)d MB（版本发布 %(release_size)d MB，截图 "
+"%(screenshot_size)d MB）。"
 
 #: app/templates/users/modtools.html:23
 #, python-format
 msgid "%(releases)d releases and %(screenshots)d screenshots."
-msgstr ""
+msgstr "%(releases)d 个版本发布，%(screenshots)d 张截图。"
 
 #: app/templates/users/modtools.html:28
 msgid "Edit Account"
@@ -4061,7 +4069,7 @@ msgstr "软件包"
 
 #: app/templates/users/profile.html:123
 msgid "collections"
-msgstr ""
+msgstr "作品集"
 
 #: app/templates/users/profile.html:132
 msgid "reviews"
@@ -4086,11 +4094,11 @@ msgstr "%(value)d / %(target)d"
 
 #: app/templates/users/profile.html:238
 msgid "Alphabetical"
-msgstr ""
+msgstr "按字母排序"
 
 #: app/templates/users/profile.html:246
 msgid "Newest"
-msgstr ""
+msgstr "最新的"
 
 #: app/templates/users/profile.html:252
 msgid "View list of tags"
@@ -4119,7 +4127,7 @@ msgstr "个人资料图片"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Sync with Forums"
-msgstr ""
+msgstr "同步到论坛"
 
 #: app/templates/users/profile_edit.html:46
 msgid "Profile Information"
@@ -4197,7 +4205,7 @@ msgstr "摘要"
 #: app/templates/users/stats.html:4
 #, python-format
 msgid "Statistics for %(display_name)s's packages"
-msgstr ""
+msgstr "%(display_name)s 的软件包统计数据"
 
 #: app/templates/users/unsubscribe.html:11
 msgid ""
@@ -4222,7 +4230,7 @@ msgstr "您在可以取消关注了。"
 msgid ""
 "Unsubscribing may prevent you from being able to log into the account "
 "'%(display_name)s'"
-msgstr ""
+msgstr "取消订阅可能会导致您无法登录“%(display_name)s”账户"
 
 #: app/templates/users/unsubscribe.html:44
 msgid ""
@@ -4253,27 +4261,27 @@ msgstr "'%(query)s'- 搜索软件包发行版"
 
 #: app/utils/flask.py:150
 msgid "All time"
-msgstr ""
+msgstr "所有时间"
 
 #: app/utils/flask.py:151
 msgid "Last 7 days"
-msgstr ""
+msgstr "最近 7 天"
 
 #: app/utils/flask.py:152
 msgid "Last 30 days"
-msgstr ""
+msgstr "最近 30 天"
 
 #: app/utils/flask.py:153
 msgid "Last 90 days"
-msgstr ""
+msgstr "最近 90 天"
 
 #: app/utils/flask.py:154
 msgid "Year to date"
-msgstr ""
+msgstr "截至目前"
 
 #: app/utils/flask.py:155
 msgid "Last year"
-msgstr ""
+msgstr "去年"
 
 #: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -4559,4 +4567,3 @@ msgstr "请考虑启用电子邮件通知，您可以自定义发送的数量"
 
 #~ msgid "a PNG or JPG image file"
 #~ msgstr "一个 PNG 或 JPG 图像文件"
-
