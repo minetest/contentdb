@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2023-12-30 16:46+0000\n"
-"PO-Revision-Date: 2023-03-28 17:36+0000\n"
-"Last-Translator: Денис Савченко <denissavchenko0@gmail.com>\n"
+"PO-Revision-Date: 2024-02-10 02:02+0000\n"
+"Last-Translator: Leo <resistancelion@gmail.com>\n"
+"Language-Team: Ukrainian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/uk/>\n"
 "Language: uk\n"
-"Language-Team: Ukrainian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/uk/>\n"
-"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -80,11 +81,11 @@ msgstr "Заголовок"
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:85
 msgid "Short Description"
-msgstr ""
+msgstr "Короткий Опис"
 
 #: app/blueprints/collections/__init__.py:81
 msgid "Page Content"
-msgstr ""
+msgstr "Вміст Сторінки"
 
 #: app/blueprints/collections/__init__.py:82
 #: app/blueprints/threads/__init__.py:283
@@ -94,35 +95,35 @@ msgstr "Приватний"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "Закріплене у моєму профілі"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
-msgstr ""
+msgstr "Колекція з подібною назвою вже існує"
 
 #: app/blueprints/collections/__init__.py:161
 msgid "Unable to create collection as a package with that name already exists"
-msgstr ""
+msgstr "Неможливо створити колекцію, так як пакунок з такою назвою вже існує"
 
 #: app/blueprints/collections/__init__.py:307
 msgid "Added package to collection"
-msgstr ""
+msgstr "Додано пакунок до колекції"
 
 #: app/blueprints/collections/__init__.py:309
 msgid "Removed package from collection"
-msgstr ""
+msgstr "Вилучено пакунок з колекції"
 
 #: app/blueprints/collections/__init__.py:328
 msgid "Added package to favorites collection"
-msgstr ""
+msgstr "Додано пакунок до колекції улюбленого"
 
 #: app/blueprints/collections/__init__.py:330
 msgid "(Public, change from Profile > My Collections)"
-msgstr ""
+msgstr "(Публічна, змінюйте у Профіль &gt; Мої Колекції)"
 
 #: app/blueprints/collections/__init__.py:334
 msgid "Removed package from favorites collection"
-msgstr ""
+msgstr "Вилучено пакунок з колекції улюбленого"
 
 #: app/blueprints/github/__init__.py:52
 msgid "Authorization failed [err=gh-oauth-login-failed]"
@@ -152,15 +153,15 @@ msgstr "Опис"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "URL-перенапрямлення"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "Вид Застосунку"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Відкликано усі токени користувачів"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -202,7 +203,7 @@ msgstr "Обмін і значки"
 
 #: app/blueprints/packages/__init__.py:67
 msgid "Remove / Unpublish"
-msgstr ""
+msgstr "Вилучити / Зняти з публікації"
 
 #: app/blueprints/packages/__init__.py:75
 #: app/templates/packages/game_support.html:4
@@ -319,7 +320,7 @@ msgstr "Пакет уже існує"
 
 #: app/blueprints/packages/packages.py:299
 msgid "A collection with a similar name already exists"
-msgstr ""
+msgstr "Колекція з подібним іменем вже існує"
 
 #: app/blueprints/packages/packages.py:359
 msgid "Unable to find that user"
@@ -375,23 +376,27 @@ msgstr "Увімкнути виявлення підтримки на основ
 
 #: app/blueprints/packages/packages.py:687
 msgid "Supported games"
-msgstr ""
+msgstr "Підтримувані ігри"
 
 #: app/blueprints/packages/packages.py:688
 msgid "Unsupported games"
-msgstr ""
+msgstr "Непідтримувані ігри"
 
 #: app/blueprints/packages/packages.py:689
 msgid "Supports all games (unless stated) / is game independent"
-msgstr ""
+msgstr "Підтримує усі ігри (доки не вказано)/ ігро-незалежний"
 
 #: app/blueprints/packages/packages.py:705
 msgid "You need at least one release before you can edit game support"
 msgstr ""
+"Вам потрібна щонайменше одна публікація, перш ніж ви зможете редагувати "
+"підтримку ігор"
 
 #: app/blueprints/packages/packages.py:709
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
+"Пакунок модів має містити щонайменше один мод. Будь ласка створіть нову "
+"публікацію"
 
 #: app/blueprints/packages/releases.py:54
 #: app/templates/packages/release_new.html:46
@@ -519,7 +524,7 @@ msgstr "Коментар"
 
 #: app/blueprints/packages/reviews.py:47
 msgid "Rating"
-msgstr ""
+msgstr "Оцінка"
 
 #: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:119
 #: app/templates/macros/reviews.html:173
@@ -529,7 +534,7 @@ msgstr "Так"
 #: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:124
 #: app/templates/macros/reviews.html:177
 msgid "Neutral"
-msgstr ""
+msgstr "Нейтрально"
 
 #: app/blueprints/packages/reviews.py:48 app/templates/macros/reviews.html:129
 #: app/templates/macros/reviews.html:181
@@ -636,7 +641,7 @@ msgstr "Зачекайте, перш ніж відкривати іншу тем
 #: app/blueprints/todo/user.py:192
 #: app/templates/collections/package_add_to.html:46
 msgid "Done"
-msgstr ""
+msgstr "Завершено"
 
 #: app/blueprints/users/account.py:36 app/templates/users/login.html:15
 msgid "Username or email"
@@ -983,7 +988,7 @@ msgstr "Токени API"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "Застосунки OAuth2"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1098,7 +1103,7 @@ msgstr "Забагато запитів, зачекайте, перш ніж п�
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "PNG, JPEG, або WebP зображення"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1261,7 +1266,7 @@ msgstr "Профіль"
 
 #: app/templates/base.html:145
 msgid "My Collections"
-msgstr ""
+msgstr "Мої Колекції"
 
 #: app/templates/base.html:163
 msgid "Admin"
@@ -1297,11 +1302,11 @@ msgstr "Допоможіть перекласти ContentDB"
 
 #: app/templates/base.html:257
 msgid "About"
-msgstr ""
+msgstr "Про"
 
 #: app/templates/base.html:258
 msgid "Rules"
-msgstr ""
+msgstr "Правила"
 
 #: app/templates/base.html:259
 msgid "Policy and Guidance"
@@ -1331,7 +1336,7 @@ msgstr "Нитки"
 #: app/templates/base.html:267 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
-msgstr ""
+msgstr "Колекції"
 
 #: app/templates/base.html:268
 msgid "Support Packages"
@@ -1348,6 +1353,8 @@ msgstr "Ласкаво просимо"
 #: app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
+"Вітаємо у найкращому місті щоб знайти моди, ігри та пакунки текстур до "
+"Minetest"
 
 #: app/templates/collections/create_edit.html:81
 #: app/templates/collections/list.html:39
@@ -1496,11 +1503,11 @@ msgstr "Створити токен API"
 #: app/templates/api/create_edit_token.html:25
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
-msgstr ""
+msgstr "Цей токен був створений застосунком '%(title)s' від %(author)s."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Натисніть 'Видалити' щоб відкликати доступ."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1557,7 +1564,7 @@ msgstr "Документація API"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Застосунок"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1571,20 +1578,20 @@ msgstr "Редагувати"
 
 #: app/templates/collections/create_edit.html:7
 msgid "New Collection"
-msgstr ""
+msgstr "Нова Колекція"
 
 #: app/templates/collections/create_edit.html:32
 msgid "Users won't be redirected when going to the old URL"
-msgstr ""
+msgstr "Користувачі не будуть перенапрямлені при відкритті старого URL"
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Це вимагає публікації колекції"
 
 #: app/templates/collections/create_edit.html:61
 #: app/templates/threads/user_comments.html:79
 msgid "No results"
-msgstr ""
+msgstr "Немає результатів"
 
 #: app/templates/collections/create_edit.html:76
 #: app/templates/packages/remove.html:58 app/templates/packages/view.html:127
@@ -1593,16 +1600,16 @@ msgstr "Вилучити"
 
 #: app/templates/collections/create_edit.html:89
 msgid "You can replace the description with your own"
-msgstr ""
+msgstr "Ви можете замінити опис на свій власний"
 
 #: app/templates/collections/create_edit.html:103
 msgid "Are you sure you want to remove {title}?"
-msgstr ""
+msgstr "Ви впевнені, що бажаєте вилучити {title}?"
 
 #: app/templates/collections/delete.html:4
 #, python-format
 msgid "Delete collection \"%(title)s\" by %(author)s"
-msgstr ""
+msgstr "Видалити колекцію \"%(title)s\" від %(author)s"
 
 #: app/templates/collections/delete.html:12
 #: app/templates/threads/delete_reply.html:16
@@ -1623,37 +1630,39 @@ msgstr "Скасувати"
 #: app/templates/collections/view.html:27
 #, python-format
 msgid "%(author)s's collections"
-msgstr ""
+msgstr "Колекції %(author)s"
 
 #: app/templates/collections/list.html:49
 msgid "No collections"
-msgstr ""
+msgstr "Немає колекцій"
 
 #: app/templates/collections/package_add_to.html:4
 #, python-format
 msgid "Add %(package_title)s to a collection"
-msgstr ""
+msgstr "Додати %(package_title)s до колекції"
 
 #: app/templates/collections/package_add_to.html:9
 msgid "Create Collection"
-msgstr ""
+msgstr "Створити Колекцію"
 
 #: app/templates/collections/package_add_to.html:39
 msgid "You don't have any collections"
-msgstr ""
+msgstr "У вас немає жодних колекцій"
 
 #: app/templates/collections/view.html:33
 msgid "Make a copy"
-msgstr ""
+msgstr "Створити копію"
 
 #: app/templates/collections/view.html:54
 #, python-format
 msgid "A collection by %(author)s"
-msgstr ""
+msgstr "Колекція від %(author)s"
 
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
+"Щоб додати пакунок, перейдіть на сторінку пакунка і натисніть Add to 'Додати "
+"до колекції'"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1686,7 +1695,7 @@ msgstr "Пожертвуйте"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "Виходячи з ваших відгуків / улюблених"
 
 #: app/templates/donate/index.html:67
 msgid ""
@@ -2002,7 +2011,7 @@ msgstr "Залишити відгук"
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr ""
+msgstr "Повідомити про хибу"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -2011,7 +2020,7 @@ msgstr "Пакети %(display_name)s."
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr ""
+msgstr "Діапазон дат..."
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
@@ -2023,11 +2032,11 @@ msgstr "Завантаження за останні 7 днів"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr ""
+msgstr "Завантаження від $1 до $2"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr ""
+msgstr "$1 у день"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -2257,42 +2266,42 @@ msgstr "Редактор/Затвердження"
 #: app/templates/oauth/authorize.html:4
 #, python-format
 msgid "Authorize %(title)s"
-msgstr ""
+msgstr "Авторизувати %(title)s"
 
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "бажає отримати доступ до вашої обліківки %(name)s"
 
 #: app/templates/oauth/authorize.html:46
 msgid "Verified application"
-msgstr ""
+msgstr "Перевірений застосунок"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB довіряє цьому застосунку"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
-msgstr ""
+msgstr "Тільки публічні дані"
 
 #: app/templates/oauth/authorize.html:63
 msgid "Read-only access to your public data"
-msgstr ""
+msgstr "Доступ тільки до читання ваших публічних даних"
 
 #: app/templates/oauth/authorize.html:76
 msgid "Authorize"
-msgstr ""
+msgstr "Авторизувати"
 
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "Про %(title)s"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
 msgid "Application isn't approved yet"
-msgstr ""
+msgstr "Застосунок ще не затверджено"
 
 #: app/templates/oauth/authorize.html:93
 #: app/templates/oauth/create_edit.html:28
@@ -2300,54 +2309,58 @@ msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
 msgstr ""
+"Щоб дозволити користувачам, крім себе, авторизовуватись, ви маєте звернутись "
+"до персоналу ContentDB і попросити про затвердження вашого застосунку."
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
-msgstr ""
+msgstr "Створити клієнт OAuth"
 
 #: app/templates/oauth/create_edit.html:36
 #, python-format
 msgid "Your application has %(count)d users"
-msgstr ""
+msgstr "Ваш застосунок має %(count)d користувачів"
 
 #: app/templates/oauth/create_edit.html:37
 msgid "Revoke all user tokens"
-msgstr ""
+msgstr "Відкликати усі користувацькі токени"
 
 #: app/templates/oauth/create_edit.html:51
 msgid ""
 "You must keep the secret safe. If you are unable, set the app type to "
 "'client-side'."
 msgstr ""
+"Ви маєте тримати секретний ключ у безпеці. Якщо ви не здатні, змініть тип "
+"застосунку на 'клієнтський'."
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
-msgstr ""
+msgstr "Приклад Посилання Авторизації"
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
-msgstr ""
+msgstr "Відображається користувачам, коли Ви запитуєте доступу до їх обліківки"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
-msgstr ""
+msgstr "Де ви збережете ваш client_secret?"
 
 #: app/templates/oauth/list_clients.html:4
 #, python-format
 msgid "OAuth2 Applications | %(username)s"
-msgstr ""
+msgstr "Застосунки OAuth2 | %(username)s"
 
 #: app/templates/oauth/list_clients.html:9
 msgid "OAuth2 Documentation"
-msgstr ""
+msgstr "Документація OAuth2"
 
 #: app/templates/oauth/list_clients.html:16
 msgid "Unpublished"
-msgstr ""
+msgstr "Знято з публікації"
 
 #: app/templates/oauth/list_clients.html:22
 msgid "No applications created"
-msgstr ""
+msgstr "Не створено жодних застосунків"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2442,7 +2455,7 @@ msgstr "Пакунок"
 
 #: app/templates/packages/create_edit.html:73
 msgid "You need to unpublish the package to change the name."
-msgstr ""
+msgstr "Ви маєте зняти пакунок з публікації, щоб змінити його ім'я."
 
 #: app/templates/packages/create_edit.html:79
 msgid ""
@@ -2464,21 +2477,23 @@ msgstr "Репозиторій і посилання"
 
 #: app/templates/packages/create_edit.html:93
 msgid "Do you have a Git repository?"
-msgstr ""
+msgstr "Ви маєте репозиторій Git?"
 
 #: app/templates/packages/create_edit.html:95
 msgid "Having a repository is optional"
-msgstr ""
+msgstr "Наявність репозиторію опціональна"
 
 #: app/templates/packages/create_edit.html:98
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
+"Якщо ви маєте репозиторій, введіть посилання нижче. Інакше, залиште поле "
+"порожнім і натисніть пропустити."
 
 #: app/templates/packages/create_edit.html:103
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr ""
+msgstr "HTTP посилання на Git, Mercurial, чи інший репозиторій"
 
 #: app/templates/packages/create_edit.html:106
 msgid "Next (Autoimport)"
@@ -2494,11 +2509,11 @@ msgstr "Імпорт (Це може зайняти час)"
 
 #: app/templates/packages/create_edit.html:114
 msgid "Where should users report issues?"
-msgstr ""
+msgstr "Куди користувачі мають звітувати про хиби?"
 
 #: app/templates/packages/create_edit.html:118
 msgid "Paste a forum topic URL"
-msgstr ""
+msgstr "Вставте посилання на тему на форумі"
 
 #: app/templates/packages/create_edit.html:120
 msgid "YouTube videos will be shown in an embed."
@@ -2542,7 +2557,7 @@ msgstr "Центр спільноти"
 #: app/templates/packages/game_hub.html:9
 #, python-format
 msgid "Mods and texture packs for %(title)s"
-msgstr ""
+msgstr "Моди і пакунки текстур для %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
@@ -2553,6 +2568,8 @@ msgid ""
 "Game support is configured using the package's .conf file. See the "
 "documentation for more info"
 msgstr ""
+"Підтримка ігор описується .conf файлом гри. Дивіться документацію для "
+"детальнішої інформації"
 
 #: app/templates/packages/game_support.html:23
 #: app/templates/packages/view.html:212
@@ -2565,7 +2582,7 @@ msgstr "З підтримкою?"
 
 #: app/templates/packages/game_support.html:33
 msgid "Supports all games (unless excluded by unsupported_games)"
-msgstr ""
+msgstr "Підтримує усі ігри (доки не виключені розділом unsupported_games)"
 
 #: app/templates/packages/game_support.html:47
 msgid "Detected from dependencies"
@@ -4714,4 +4731,3 @@ msgstr ""
 
 #~ msgid "a PNG or JPG image file"
 #~ msgstr "файл зображення PNG або JPG"
-
