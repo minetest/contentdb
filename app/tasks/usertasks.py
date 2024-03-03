@@ -59,7 +59,7 @@ def set_profile_picture_from_url(username: str, url: str):
 	if user is None:
 		raise TaskError(f"Unable to find user {username}")
 
-	headers = {"Accept": "image/jpeg, image/png, image/gif"}
+	headers = {"Accept": "image/jpeg, image/png, image/webp"}
 	resp = requests.get(url, stream=True, headers=headers, timeout=15)
 	if resp.status_code != 200:
 		raise TaskError(f"Failed to download {url}: {resp.status_code}: {resp.reason}")
@@ -71,8 +71,8 @@ def set_profile_picture_from_url(username: str, url: str):
 		ext = "jpg"
 	elif content_type == "image/png":
 		ext = "png"
-	elif content_type == "image/gif":
-		ext = "gif"
+	elif content_type == "image/webp":
+		ext = "webp"
 	else:
 		raise TaskError(f"Unacceptable content-type: {content_type}")
 
