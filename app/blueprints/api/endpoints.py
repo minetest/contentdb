@@ -97,7 +97,9 @@ def packages():
 		not_featured = [pkg for pkg in pkgs if f"{pkg['author']}/{pkg['name']}" not in featured_lut]
 		pkgs = featured + not_featured
 
-	return jsonify(pkgs)
+	resp = jsonify(pkgs)
+	resp.vary = "Accept-Language"
+	return resp
 
 
 @bp.route("/api/packages/<author>/<name>/")
@@ -114,7 +116,9 @@ def package_view(package):
 		html = render_markdown(data["long_description"])
 		data["long_description"] = html_to_minetest(html, formspec_version, include_images)
 
-	return jsonify(data)
+	resp = jsonify(data)
+	resp.vary = "Accept-Language"
+	return resp
 
 
 @bp.route("/api/packages/<author>/<name>/hypertext/")
