@@ -28,6 +28,11 @@
 		</p>
 
 		<h3 id="template">{{ _("Translation template") }}</h3>
+		<p>
+			{{ _("To quickly add support for ContentDB package translation, create a file at %(location)s with the following content:",
+				location="<code>locale/template.txt</code>"|safe) }}
+		</p>
+
 		<pre><code># textdomain: {{ package.name }}
 
 {{ package.title | replace("@", "@@") | replace("=", "@=") }} =
