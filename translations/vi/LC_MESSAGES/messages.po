@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-03 01:18+0000\n"
+"POT-Creation-Date: 2024-03-03 02:54+0000\n"
 "PO-Revision-Date: 2022-08-25 11:19+0000\n"
 "Last-Translator: Văn Chí <chiv8331@gmail.com>\n"
 "Language: vi\n"
@@ -490,56 +490,56 @@ msgstr "Chỉ thay đổi các giá trị đã đặt trước đó là none"
 msgid "Update"
 msgstr "Cập nhật"
 
-#: app/blueprints/packages/releases.py:251
+#: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Kích hoạt"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:253
 msgid "New Commit"
 msgstr "Cam kết Mới"
 
-#: app/blueprints/packages/releases.py:253 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:254 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Thẻ Mới"
 
-#: app/blueprints/packages/releases.py:255
+#: app/blueprints/packages/releases.py:256
 #, fuzzy
 msgid "Branch name"
 msgstr "Tên chi nhánh"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:257
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Hành động"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 msgid "Send notification and mark as outdated"
 msgstr "Gửi thông báo và đánh dấu là đã lỗi thời"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "Tạo phát hành"
 
-#: app/blueprints/packages/releases.py:259
+#: app/blueprints/packages/releases.py:260
 msgid "Save Settings"
 msgstr "Lưu Cài Đặt"
 
-#: app/blueprints/packages/releases.py:260
+#: app/blueprints/packages/releases.py:261
 #, fuzzy
 msgid "Disable Automation"
 msgstr "Tắt tự động hóa"
 
-#: app/blueprints/packages/releases.py:299
+#: app/blueprints/packages/releases.py:300
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "Vui lòng thêm URL kho lưu trữ Git để thiết lập các bản phát hành tự động"
 
-#: app/blueprints/packages/releases.py:315
+#: app/blueprints/packages/releases.py:316
 msgid "Deleted update configuration"
 msgstr "Đã xóa cấu hình cập nhật"
 
-#: app/blueprints/packages/releases.py:323
+#: app/blueprints/packages/releases.py:324
 msgid "Now, please create an initial release"
 msgstr "Bây giờ, hãy tạo một bản phát hành ban đầu"
 
@@ -1325,7 +1325,7 @@ msgstr "Đăng xuất"
 msgid "Languages"
 msgstr ""
 
-#: app/templates/base.html:202
+#: app/templates/base.html:202 app/templates/translate/index.html:72
 msgid "Help translate ContentDB"
 msgstr "Giúp dịch ContentDB"
 
@@ -1373,14 +1373,18 @@ msgid "Support Packages"
 msgstr ""
 
 #: app/templates/base.html:258
+msgid "Translate Packages"
+msgstr ""
+
+#: app/templates/base.html:259
 msgid "Source Code"
 msgstr "Mã Nguồn"
 
-#: app/templates/base.html:264
+#: app/templates/base.html:265
 msgid "Show non-free packages"
 msgstr ""
 
-#: app/templates/base.html:266
+#: app/templates/base.html:267
 msgid "Hide non-free packages"
 msgstr ""
 
@@ -1398,7 +1402,7 @@ msgstr ""
 #: app/templates/collections/view.html:91 app/templates/index.html:48
 #: app/templates/macros/reviews.html:76 app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
-#: app/templates/packages/similar.html:22
+#: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
 #, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(title)s bởi %(author)s"
@@ -1746,7 +1750,7 @@ msgstr ""
 msgid "by %(author)s"
 msgstr ""
 
-#: app/templates/donate/index.html:42
+#: app/templates/donate/index.html:42 app/templates/translate/index.html:38
 msgid "View package"
 msgstr ""
 
@@ -2003,6 +2007,7 @@ msgid "<b>Warning:</b> Non-free media."
 msgstr "<b>Cảnh báo:</b> Phương tiện truyền thông không-tự do."
 
 #: app/templates/macros/packagegridtile.html:46
+#: app/templates/translate/index.html:56
 msgid "No packages available"
 msgstr "Không có gói sẵn"
 
@@ -2623,7 +2628,7 @@ msgid ""
 msgstr ""
 
 #: app/templates/packages/game_support.html:23
-#: app/templates/packages/view.html:213
+#: app/templates/packages/view.html:213 app/templates/translate/index.html:48
 msgid "Source"
 msgstr "Nguồn"
 
@@ -3390,7 +3395,7 @@ msgstr "Diễn đàn"
 msgid "Issue Tracker"
 msgstr "Theo Dõi Vấn Đề"
 
-#: app/templates/packages/view.html:231
+#: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
 msgstr ""
 
@@ -3958,6 +3963,34 @@ msgstr "Các chủ đề có gạch ngang đã được đánh dấu là đã b�
 #: app/templates/todo/user.html:214
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "Chúc mừng! Bạn không có bất kỳ chủ đề nào không có trên CDB."
+
+#: app/templates/translate/index.html:4
+msgid "Find packages to translate"
+msgstr ""
+
+#: app/templates/translate/index.html:8
+msgid ""
+"Help make Minetest more accessible by translating packages into other "
+"languages."
+msgstr ""
+
+#: app/templates/translate/index.html:69
+msgid "ContentDB"
+msgstr ""
+
+#: app/templates/translate/index.html:76
+msgid "Packages that support translation"
+msgstr ""
+
+#: app/templates/translate/index.html:81
+#, python-format
+msgid "Only show packages with %(lang)s translation"
+msgstr ""
+
+#: app/templates/translate/index.html:85
+#, python-format
+msgid "Hide packages with %(lang)s translation"
+msgstr ""
 
 #: app/templates/users/account.html:4
 #, python-format
@@ -4532,27 +4565,27 @@ msgstr "Tìm kiếm trong Gói phát Hành"
 msgid "'%(query)s' - Search Package Releases"
 msgstr "'%(query)s' - Tìm Kiếm Gói Phát Hành"
 
-#: app/utils/flask.py:150
+#: app/utils/flask.py:158
 msgid "All time"
 msgstr ""
 
-#: app/utils/flask.py:151
+#: app/utils/flask.py:159
 msgid "Last 7 days"
 msgstr ""
 
-#: app/utils/flask.py:152
+#: app/utils/flask.py:160
 msgid "Last 30 days"
 msgstr ""
 
-#: app/utils/flask.py:153
+#: app/utils/flask.py:161
 msgid "Last 90 days"
 msgstr ""
 
-#: app/utils/flask.py:154
+#: app/utils/flask.py:162
 msgid "Year to date"
 msgstr ""
 
-#: app/utils/flask.py:155
+#: app/utils/flask.py:163
 msgid "Last year"
 msgstr ""
 

@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-03 01:18+0000\n"
+"POT-Creation-Date: 2024-03-03 02:54+0000\n"
 "PO-Revision-Date: 2024-03-03 02:54+0000\n"
 "Last-Translator: Linerly <linerly@proton.me>\n"
-"Language-Team: Indonesian <https://hosted.weblate.org/projects/minetest/"
-"contentdb/id/>\n"
 "Language: id\n"
+"Language-Team: Indonesian "
+"<https://hosted.weblate.org/projects/minetest/contentdb/id/>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -368,8 +367,8 @@ msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
-"Silakan berkomentar dalam utas persetujuan supaya para penyunting tahu apa "
-"yang telah diubah"
+"Silakan berkomentar dalam utas persetujuan supaya para penyunting tahu "
+"apa yang telah diubah"
 
 #: app/blueprints/packages/packages.py:509
 msgid "Deleted package"
@@ -492,54 +491,54 @@ msgstr "Hanya ubah nilai yang sebelumnya diatur kosong"
 msgid "Update"
 msgstr "Perbarui"
 
-#: app/blueprints/packages/releases.py:251
+#: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Pemicu"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:253
 msgid "New Commit"
 msgstr "Commit Baru"
 
-#: app/blueprints/packages/releases.py:253 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:254 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Label Baru"
 
-#: app/blueprints/packages/releases.py:255
+#: app/blueprints/packages/releases.py:256
 msgid "Branch name"
 msgstr "Nama branch"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:257
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Tindakan"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 msgid "Send notification and mark as outdated"
 msgstr "Kirim pemberitahuan dan tandai sebagai usang"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "Buat rilis"
 
-#: app/blueprints/packages/releases.py:259
+#: app/blueprints/packages/releases.py:260
 msgid "Save Settings"
 msgstr "Simpan Pengaturan"
 
-#: app/blueprints/packages/releases.py:260
+#: app/blueprints/packages/releases.py:261
 msgid "Disable Automation"
 msgstr "Matikan Automasi"
 
-#: app/blueprints/packages/releases.py:299
+#: app/blueprints/packages/releases.py:300
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "Harap tambahkan URL repositori Git untuk menyiapkan rilis otomatis"
 
-#: app/blueprints/packages/releases.py:315
+#: app/blueprints/packages/releases.py:316
 msgid "Deleted update configuration"
 msgstr "Konfigurasi pembaruan yang dihapus"
 
-#: app/blueprints/packages/releases.py:323
+#: app/blueprints/packages/releases.py:324
 msgid "Now, please create an initial release"
 msgstr "Sekarang, harap buat rilis awalan"
 
@@ -1321,7 +1320,7 @@ msgstr "Keluar"
 msgid "Languages"
 msgstr "Bahasa"
 
-#: app/templates/base.html:202
+#: app/templates/base.html:202 app/templates/translate/index.html:72
 msgid "Help translate ContentDB"
 msgstr "Bantu menerjemahkan ContentDB"
 
@@ -1368,14 +1367,18 @@ msgid "Support Packages"
 msgstr "Dukung Paket"
 
 #: app/templates/base.html:258
+msgid "Translate Packages"
+msgstr ""
+
+#: app/templates/base.html:259
 msgid "Source Code"
 msgstr "Kode Sumber"
 
-#: app/templates/base.html:264
+#: app/templates/base.html:265
 msgid "Show non-free packages"
 msgstr "Tampilkan paket non-bebas"
 
-#: app/templates/base.html:266
+#: app/templates/base.html:267
 msgid "Hide non-free packages"
 msgstr "Sembunyikan paket non-bebas"
 
@@ -1395,7 +1398,7 @@ msgstr ""
 #: app/templates/collections/view.html:91 app/templates/index.html:48
 #: app/templates/macros/reviews.html:76 app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
-#: app/templates/packages/similar.html:22
+#: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
 #, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(title)s oleh %(author)s"
@@ -1740,7 +1743,7 @@ msgstr ""
 msgid "by %(author)s"
 msgstr "oleh %(author)s"
 
-#: app/templates/donate/index.html:42
+#: app/templates/donate/index.html:42 app/templates/translate/index.html:38
 msgid "View package"
 msgstr "Lihat paket"
 
@@ -1997,6 +2000,7 @@ msgid "<b>Warning:</b> Non-free media."
 msgstr "<b>Peringatan:</b> Media tidak bebas."
 
 #: app/templates/macros/packagegridtile.html:46
+#: app/templates/translate/index.html:56
 msgid "No packages available"
 msgstr "Tidak ada paket yang tersedia"
 
@@ -2628,7 +2632,7 @@ msgstr ""
 "dokumentasi untuk informasi lanjut"
 
 #: app/templates/packages/game_support.html:23
-#: app/templates/packages/view.html:213
+#: app/templates/packages/view.html:213 app/templates/translate/index.html:48
 msgid "Source"
 msgstr "Sumber"
 
@@ -3279,15 +3283,16 @@ msgid ""
 "To provide translations for your %(type)s, you need to create .tr files "
 "and upload a new release."
 msgstr ""
-"Untuk menyediakan terjemahan untuk %(type)s, Anda perlu membuat berkas .tr "
-"dan mengunggah sebuah rilis baru."
+"Untuk menyediakan terjemahan untuk %(type)s, Anda perlu membuat berkas "
+".tr dan mengunggah sebuah rilis baru."
 
 #: app/templates/packages/translation.html:19
 msgid ""
 "For information on how to do this, see the modding book chapter and "
 "lua_api.md"
 msgstr ""
-"Untuk informasi cara melakukan ini, lihat bab buku modifikasi dan lua_api.md"
+"Untuk informasi cara melakukan ini, lihat bab buku modifikasi dan "
+"lua_api.md"
 
 #: app/templates/packages/translation.html:23
 msgid "Translation - Minetest Modding Book"
@@ -3414,7 +3419,7 @@ msgstr "Forum"
 msgid "Issue Tracker"
 msgstr "Pelacak Masalah"
 
-#: app/templates/packages/view.html:231
+#: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
 msgstr "Terjemahkan"
 
@@ -3995,6 +4000,34 @@ msgstr "Topik dengan coret tengah ditandai sebagai diabaikan."
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "Selamat! Anda tidak memiliki topik yang tidak ada di CDB."
 
+#: app/templates/translate/index.html:4
+msgid "Find packages to translate"
+msgstr ""
+
+#: app/templates/translate/index.html:8
+msgid ""
+"Help make Minetest more accessible by translating packages into other "
+"languages."
+msgstr ""
+
+#: app/templates/translate/index.html:69
+msgid "ContentDB"
+msgstr ""
+
+#: app/templates/translate/index.html:76
+msgid "Packages that support translation"
+msgstr ""
+
+#: app/templates/translate/index.html:81
+#, python-format
+msgid "Only show packages with %(lang)s translation"
+msgstr ""
+
+#: app/templates/translate/index.html:85
+#, python-format
+msgid "Hide packages with %(lang)s translation"
+msgstr ""
+
 #: app/templates/users/account.html:4
 #, python-format
 msgid "Account and Security - %(username)s"
@@ -4570,27 +4603,27 @@ msgstr "Cari dalam Rilis Paket"
 msgid "'%(query)s' - Search Package Releases"
 msgstr "'%(query)s' - Pencarian Rilisan Paket"
 
-#: app/utils/flask.py:150
+#: app/utils/flask.py:158
 msgid "All time"
 msgstr "Sepanjang masa"
 
-#: app/utils/flask.py:151
+#: app/utils/flask.py:159
 msgid "Last 7 days"
 msgstr "7 hari terakhir"
 
-#: app/utils/flask.py:152
+#: app/utils/flask.py:160
 msgid "Last 30 days"
 msgstr "30 hari terakhir"
 
-#: app/utils/flask.py:153
+#: app/utils/flask.py:161
 msgid "Last 90 days"
 msgstr "90 hari terakhir"
 
-#: app/utils/flask.py:154
+#: app/utils/flask.py:162
 msgid "Year to date"
 msgstr "Tahun kalender ini"
 
-#: app/utils/flask.py:155
+#: app/utils/flask.py:163
 msgid "Last year"
 msgstr "Tahun sebelumnya"
 
@@ -4969,3 +5002,4 @@ msgstr ""
 
 #~ msgid "Create Tag"
 #~ msgstr "Buat Label"
+

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-03 01:18+0000\n"
+"POT-Creation-Date: 2024-03-03 02:54+0000\n"
 "PO-Revision-Date: 2024-02-19 07:02+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
 "Language: tr\n"
@@ -485,54 +485,54 @@ msgstr "Yalnızca daha önce hiçbiri olarak ayarlanan değerleri değiştirin"
 msgid "Update"
 msgstr "Güncelleme"
 
-#: app/blueprints/packages/releases.py:251
+#: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Tetiklen"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:253
 msgid "New Commit"
 msgstr "Yeni Commit"
 
-#: app/blueprints/packages/releases.py:253 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:254 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Yeni Etiket"
 
-#: app/blueprints/packages/releases.py:255
+#: app/blueprints/packages/releases.py:256
 msgid "Branch name"
 msgstr "Branch adı"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:257
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Hareket"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 msgid "Send notification and mark as outdated"
 msgstr "Bildirim gönder ve eski olarak işaretle"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "Sürüm oluştur"
 
-#: app/blueprints/packages/releases.py:259
+#: app/blueprints/packages/releases.py:260
 msgid "Save Settings"
 msgstr "Ayarları Kaydet"
 
-#: app/blueprints/packages/releases.py:260
+#: app/blueprints/packages/releases.py:261
 msgid "Disable Automation"
 msgstr "Otomasyonu Devre Dışı Bırak"
 
-#: app/blueprints/packages/releases.py:299
+#: app/blueprints/packages/releases.py:300
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "Otomatik sürümleri ayarlamak için lütfen bir Git deposu URL'si ekleyin"
 
-#: app/blueprints/packages/releases.py:315
+#: app/blueprints/packages/releases.py:316
 msgid "Deleted update configuration"
 msgstr "Silinen güncelleme yapılandırması"
 
-#: app/blueprints/packages/releases.py:323
+#: app/blueprints/packages/releases.py:324
 msgid "Now, please create an initial release"
 msgstr "Şimdi, lütfen bir ilk sürüm oluşturun"
 
@@ -1310,7 +1310,7 @@ msgstr "Oturumu kapat"
 msgid "Languages"
 msgstr ""
 
-#: app/templates/base.html:202
+#: app/templates/base.html:202 app/templates/translate/index.html:72
 msgid "Help translate ContentDB"
 msgstr "ContentDB'yi çevirmeye yardım edin"
 
@@ -1357,14 +1357,18 @@ msgid "Support Packages"
 msgstr "Destek Paketleri"
 
 #: app/templates/base.html:258
+msgid "Translate Packages"
+msgstr ""
+
+#: app/templates/base.html:259
 msgid "Source Code"
 msgstr "Kaynak Kodu"
 
-#: app/templates/base.html:264
+#: app/templates/base.html:265
 msgid "Show non-free packages"
 msgstr ""
 
-#: app/templates/base.html:266
+#: app/templates/base.html:267
 msgid "Hide non-free packages"
 msgstr ""
 
@@ -1384,7 +1388,7 @@ msgstr ""
 #: app/templates/collections/view.html:91 app/templates/index.html:48
 #: app/templates/macros/reviews.html:76 app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
-#: app/templates/packages/similar.html:22
+#: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
 #, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(author)s geliştiricisinden %(title)s"
@@ -1735,7 +1739,7 @@ msgstr ""
 msgid "by %(author)s"
 msgstr "%(author)s tarafından"
 
-#: app/templates/donate/index.html:42
+#: app/templates/donate/index.html:42 app/templates/translate/index.html:38
 msgid "View package"
 msgstr "Paketi görüntüle"
 
@@ -1990,6 +1994,7 @@ msgid "<b>Warning:</b> Non-free media."
 msgstr "<b>uyarı:</b> Özgür olmayan medya."
 
 #: app/templates/macros/packagegridtile.html:46
+#: app/templates/translate/index.html:56
 msgid "No packages available"
 msgstr "Hiçbiri paket yok"
 
@@ -2622,7 +2627,7 @@ msgstr ""
 "fazla bilgi için belgelere bakın"
 
 #: app/templates/packages/game_support.html:23
-#: app/templates/packages/view.html:213
+#: app/templates/packages/view.html:213 app/templates/translate/index.html:48
 msgid "Source"
 msgstr "Kaynak"
 
@@ -3403,7 +3408,7 @@ msgstr "Forumlar"
 msgid "Issue Tracker"
 msgstr "Sorun İzleyici"
 
-#: app/templates/packages/view.html:231
+#: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
 msgstr ""
 
@@ -3986,6 +3991,34 @@ msgstr "Üstü çizili konular atılmış olarak işaretlenmiştir."
 #: app/templates/todo/user.html:214
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "Tebrikler! CDB'de olmayan herhangi bir konunuz yok."
+
+#: app/templates/translate/index.html:4
+msgid "Find packages to translate"
+msgstr ""
+
+#: app/templates/translate/index.html:8
+msgid ""
+"Help make Minetest more accessible by translating packages into other "
+"languages."
+msgstr ""
+
+#: app/templates/translate/index.html:69
+msgid "ContentDB"
+msgstr ""
+
+#: app/templates/translate/index.html:76
+msgid "Packages that support translation"
+msgstr ""
+
+#: app/templates/translate/index.html:81
+#, python-format
+msgid "Only show packages with %(lang)s translation"
+msgstr ""
+
+#: app/templates/translate/index.html:85
+#, python-format
+msgid "Hide packages with %(lang)s translation"
+msgstr ""
 
 #: app/templates/users/account.html:4
 #, python-format
@@ -4571,27 +4604,27 @@ msgstr "Paket Sürümlerinde Ara"
 msgid "'%(query)s' - Search Package Releases"
 msgstr "'%(query)s' - Paket Sürümlerini Ara"
 
-#: app/utils/flask.py:150
+#: app/utils/flask.py:158
 msgid "All time"
 msgstr "Her zaman"
 
-#: app/utils/flask.py:151
+#: app/utils/flask.py:159
 msgid "Last 7 days"
 msgstr "Son 7 gün"
 
-#: app/utils/flask.py:152
+#: app/utils/flask.py:160
 msgid "Last 30 days"
 msgstr "Son 30 gün"
 
-#: app/utils/flask.py:153
+#: app/utils/flask.py:161
 msgid "Last 90 days"
 msgstr "Son 90 gün"
 
-#: app/utils/flask.py:154
+#: app/utils/flask.py:162
 msgid "Year to date"
 msgstr "Bugüne kadarki yıl"
 
-#: app/utils/flask.py:155
+#: app/utils/flask.py:163
 msgid "Last year"
 msgstr "Geçen yıl"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-03 01:18+0000\n"
+"POT-Creation-Date: 2024-03-03 02:54+0000\n"
 "PO-Revision-Date: 2024-02-27 13:02+0000\n"
 "Last-Translator: y5nw <y5nw@users.noreply.hosted.weblate.org>\n"
 "Language: zh_CN\n"
@@ -481,54 +481,54 @@ msgstr "仅修改之前为空的值"
 msgid "Update"
 msgstr "更新"
 
-#: app/blueprints/packages/releases.py:251
+#: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "钩子"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:253
 msgid "New Commit"
 msgstr "新提交"
 
-#: app/blueprints/packages/releases.py:253 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:254 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "新标签"
 
-#: app/blueprints/packages/releases.py:255
+#: app/blueprints/packages/releases.py:256
 msgid "Branch name"
 msgstr "分支名称"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:257
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "动作"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 msgid "Send notification and mark as outdated"
 msgstr "发送通知并标记为过期包"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "创建发行版"
 
-#: app/blueprints/packages/releases.py:259
+#: app/blueprints/packages/releases.py:260
 msgid "Save Settings"
 msgstr "保存设置"
 
-#: app/blueprints/packages/releases.py:260
+#: app/blueprints/packages/releases.py:261
 msgid "Disable Automation"
 msgstr "关闭自动化"
 
-#: app/blueprints/packages/releases.py:299
+#: app/blueprints/packages/releases.py:300
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "要自动发布，请添加Git仓库URL"
 
-#: app/blueprints/packages/releases.py:315
+#: app/blueprints/packages/releases.py:316
 msgid "Deleted update configuration"
 msgstr "已删除更新配置"
 
-#: app/blueprints/packages/releases.py:323
+#: app/blueprints/packages/releases.py:324
 msgid "Now, please create an initial release"
 msgstr "现在，请创建初始发行版"
 
@@ -1277,7 +1277,7 @@ msgstr "登出"
 msgid "Languages"
 msgstr ""
 
-#: app/templates/base.html:202
+#: app/templates/base.html:202 app/templates/translate/index.html:72
 msgid "Help translate ContentDB"
 msgstr "帮助翻译ContentDB"
 
@@ -1324,14 +1324,18 @@ msgid "Support Packages"
 msgstr "支持的软件包"
 
 #: app/templates/base.html:258
+msgid "Translate Packages"
+msgstr ""
+
+#: app/templates/base.html:259
 msgid "Source Code"
 msgstr "源代码"
 
-#: app/templates/base.html:264
+#: app/templates/base.html:265
 msgid "Show non-free packages"
 msgstr ""
 
-#: app/templates/base.html:266
+#: app/templates/base.html:267
 msgid "Hide non-free packages"
 msgstr ""
 
@@ -1349,7 +1353,7 @@ msgstr "欢迎来到寻找 Minetest Mod，子游戏，材质包的最佳圣地"
 #: app/templates/collections/view.html:91 app/templates/index.html:48
 #: app/templates/macros/reviews.html:76 app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
-#: app/templates/packages/similar.html:22
+#: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
 #, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(title)s (作者：%(author)s)"
@@ -1686,7 +1690,7 @@ msgstr "捐款是支持你喜欢的Mod作者、美术师、子游戏开发者的
 msgid "by %(author)s"
 msgstr "作者：%(author)s"
 
-#: app/templates/donate/index.html:42
+#: app/templates/donate/index.html:42 app/templates/translate/index.html:38
 msgid "View package"
 msgstr "查看软件包"
 
@@ -1923,6 +1927,7 @@ msgid "<b>Warning:</b> Non-free media."
 msgstr "<b>警告：</b> 非自由媒体内容。"
 
 #: app/templates/macros/packagegridtile.html:46
+#: app/templates/translate/index.html:56
 msgid "No packages available"
 msgstr "没有可用的软件包"
 
@@ -2527,7 +2532,7 @@ msgid ""
 msgstr "子游戏支持由软件包的.conf文件配置。更多信息见文档"
 
 #: app/templates/packages/game_support.html:23
-#: app/templates/packages/view.html:213
+#: app/templates/packages/view.html:213 app/templates/translate/index.html:48
 msgid "Source"
 msgstr "源代码"
 
@@ -3248,7 +3253,7 @@ msgstr "论坛"
 msgid "Issue Tracker"
 msgstr "问题跟踪器"
 
-#: app/templates/packages/view.html:231
+#: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
 msgstr ""
 
@@ -3800,6 +3805,34 @@ msgstr "标删除线的贴子已被丢弃。"
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "恭喜！您没有任何不在 CDB 上的贴子。"
 
+#: app/templates/translate/index.html:4
+msgid "Find packages to translate"
+msgstr ""
+
+#: app/templates/translate/index.html:8
+msgid ""
+"Help make Minetest more accessible by translating packages into other "
+"languages."
+msgstr ""
+
+#: app/templates/translate/index.html:69
+msgid "ContentDB"
+msgstr ""
+
+#: app/templates/translate/index.html:76
+msgid "Packages that support translation"
+msgstr ""
+
+#: app/templates/translate/index.html:81
+#, python-format
+msgid "Only show packages with %(lang)s translation"
+msgstr ""
+
+#: app/templates/translate/index.html:85
+#, python-format
+msgid "Hide packages with %(lang)s translation"
+msgstr ""
+
 #: app/templates/users/account.html:4
 #, python-format
 msgid "Account and Security - %(username)s"
@@ -4347,27 +4380,27 @@ msgstr "在软件包发行版中搜索"
 msgid "'%(query)s' - Search Package Releases"
 msgstr "'%(query)s'- 搜索软件包发行版"
 
-#: app/utils/flask.py:150
+#: app/utils/flask.py:158
 msgid "All time"
 msgstr "所有时间"
 
-#: app/utils/flask.py:151
+#: app/utils/flask.py:159
 msgid "Last 7 days"
 msgstr "最近 7 天"
 
-#: app/utils/flask.py:152
+#: app/utils/flask.py:160
 msgid "Last 30 days"
 msgstr "最近 30 天"
 
-#: app/utils/flask.py:153
+#: app/utils/flask.py:161
 msgid "Last 90 days"
 msgstr "最近 90 天"
 
-#: app/utils/flask.py:154
+#: app/utils/flask.py:162
 msgid "Year to date"
 msgstr "截至目前"
 
-#: app/utils/flask.py:155
+#: app/utils/flask.py:163
 msgid "Last year"
 msgstr "去年"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-03 01:18+0000\n"
+"POT-Creation-Date: 2024-03-03 02:54+0000\n"
 "PO-Revision-Date: 2024-02-20 00:16+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
 "Language: de\n"
@@ -497,56 +497,56 @@ msgstr "Nur Werte ändern, die zuvor als „none“ festgelegt wurden"
 msgid "Update"
 msgstr "Update"
 
-#: app/blueprints/packages/releases.py:251
+#: app/blueprints/packages/releases.py:252
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Trigger"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:253
 msgid "New Commit"
 msgstr "Neuer Commit"
 
-#: app/blueprints/packages/releases.py:253 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:254 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Neuer Tag"
 
-#: app/blueprints/packages/releases.py:255
+#: app/blueprints/packages/releases.py:256
 msgid "Branch name"
 msgstr "Branch-Name"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:257
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Aktion"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 msgid "Send notification and mark as outdated"
 msgstr "Benachrichtigung senden und als veraltet markieren"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:258
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "Release erstellen"
 
-#: app/blueprints/packages/releases.py:259
+#: app/blueprints/packages/releases.py:260
 msgid "Save Settings"
 msgstr "Einstellung speichern"
 
-#: app/blueprints/packages/releases.py:260
+#: app/blueprints/packages/releases.py:261
 msgid "Disable Automation"
 msgstr "Automatisierung deaktivieren"
 
-#: app/blueprints/packages/releases.py:299
+#: app/blueprints/packages/releases.py:300
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
 "Bitte fügen Sie eine Git-Repository-URL hinzu, um automatische Releases "
 "einzurichten"
 
-#: app/blueprints/packages/releases.py:315
+#: app/blueprints/packages/releases.py:316
 msgid "Deleted update configuration"
 msgstr "Gelöschte Update-Konfiguration"
 
-#: app/blueprints/packages/releases.py:323
+#: app/blueprints/packages/releases.py:324
 msgid "Now, please create an initial release"
 msgstr "Bitte erstellen Sie nun einen ersten Release"
 
@@ -1342,7 +1342,7 @@ msgstr "Abmelden"
 msgid "Languages"
 msgstr ""
 
-#: app/templates/base.html:202
+#: app/templates/base.html:202 app/templates/translate/index.html:72
 msgid "Help translate ContentDB"
 msgstr "Helfen Sie uns bei der Übersetzung von ContentDB"
 
@@ -1389,14 +1389,18 @@ msgid "Support Packages"
 msgstr "Pakete unterstützen"
 
 #: app/templates/base.html:258
+msgid "Translate Packages"
+msgstr ""
+
+#: app/templates/base.html:259
 msgid "Source Code"
 msgstr "Quellcode"
 
-#: app/templates/base.html:264
+#: app/templates/base.html:265
 msgid "Show non-free packages"
 msgstr ""
 
-#: app/templates/base.html:266
+#: app/templates/base.html:267
 msgid "Hide non-free packages"
 msgstr ""
 
@@ -1416,7 +1420,7 @@ msgstr ""
 #: app/templates/collections/view.html:91 app/templates/index.html:48
 #: app/templates/macros/reviews.html:76 app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
-#: app/templates/packages/similar.html:22
+#: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
 #, python-format
 msgid "%(title)s by %(author)s"
 msgstr "%(title)s von %(author)s"
@@ -1763,7 +1767,7 @@ msgstr ""
 msgid "by %(author)s"
 msgstr "von %(author)s"
 
-#: app/templates/donate/index.html:42
+#: app/templates/donate/index.html:42 app/templates/translate/index.html:38
 msgid "View package"
 msgstr "Paket betrachten"
 
@@ -2034,6 +2038,7 @@ msgid "<b>Warning:</b> Non-free media."
 msgstr "<b>Warnung:</b> Unfreie Medien."
 
 #: app/templates/macros/packagegridtile.html:46
+#: app/templates/translate/index.html:56
 msgid "No packages available"
 msgstr "Keine Pakete verfügbar"
 
@@ -2678,7 +2683,7 @@ msgstr ""
 "konfiguriert. Siehe Dokumentation für mehr Infos"
 
 #: app/templates/packages/game_support.html:23
-#: app/templates/packages/view.html:213
+#: app/templates/packages/view.html:213 app/templates/translate/index.html:48
 msgid "Source"
 msgstr "Quelle"
 
@@ -3483,7 +3488,7 @@ msgstr "Forum"
 msgid "Issue Tracker"
 msgstr "Issue-Tracker"
 
-#: app/templates/packages/view.html:231
+#: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
 msgstr ""
 
@@ -4069,6 +4074,34 @@ msgstr "Durchgestrichene Themen wurden als verworfen markiert."
 #: app/templates/todo/user.html:214
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "Herzlichen Glückwunsch! Sie haben keine Themen, die nicht auf CDB sind."
+
+#: app/templates/translate/index.html:4
+msgid "Find packages to translate"
+msgstr ""
+
+#: app/templates/translate/index.html:8
+msgid ""
+"Help make Minetest more accessible by translating packages into other "
+"languages."
+msgstr ""
+
+#: app/templates/translate/index.html:69
+msgid "ContentDB"
+msgstr ""
+
+#: app/templates/translate/index.html:76
+msgid "Packages that support translation"
+msgstr ""
+
+#: app/templates/translate/index.html:81
+#, python-format
+msgid "Only show packages with %(lang)s translation"
+msgstr ""
+
+#: app/templates/translate/index.html:85
+#, python-format
+msgid "Hide packages with %(lang)s translation"
+msgstr ""
 
 #: app/templates/users/account.html:4
 #, python-format
@@ -4659,27 +4692,27 @@ msgstr "In Paket-Releases suchen"
 msgid "'%(query)s' - Search Package Releases"
 msgstr "„%(query)s“ – Paket-Release-Suche"
 
-#: app/utils/flask.py:150
+#: app/utils/flask.py:158
 msgid "All time"
 msgstr "Alle Zeit"
 
-#: app/utils/flask.py:151
+#: app/utils/flask.py:159
 msgid "Last 7 days"
 msgstr "Letzte 7 Tage"
 
-#: app/utils/flask.py:152
+#: app/utils/flask.py:160
 msgid "Last 30 days"
 msgstr "Letzte 30 Tage"
 
-#: app/utils/flask.py:153
+#: app/utils/flask.py:161
 msgid "Last 90 days"
 msgstr "Letzte 90 Tage"
 
-#: app/utils/flask.py:154
+#: app/utils/flask.py:162
 msgid "Year to date"
 msgstr "Dieses Jahr"
 
-#: app/utils/flask.py:155
+#: app/utils/flask.py:163
 msgid "Last year"
 msgstr "Letztes Jahr"
 
