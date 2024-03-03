@@ -1,6 +1,6 @@
 title: Privacy Policy
 
-Last Updated: 2022-01-23
+Last Updated: 2024-01-22
 ([View updates](https://github.com/minetest/contentdb/commits/master/app/flatpages/privacy_policy.md))
 
 ## What Information is Collected
@@ -11,8 +11,9 @@ Last Updated: 2022-01-23
 	* Time
 	* IP address
 	* Page URL
-	* Response status code
+	* Platform and Operating System
 * Preferred language/locale. This defaults to the browser's locale, but can be changed by the user
+* Whether an IP address has downloaded a particular package in the last 14 days
 
 **With an account:**
 
@@ -32,7 +33,7 @@ Please avoid giving other personal information as we do not want it.
 
 ## How this information is used
 
-* Logged HTTP requests may be used for debugging ContentDB.
+* Logged HTTP requests may be used for debugging ContentDB and combating abuse.
 * Email addresses are used to:
     * Provide essential system messages, such as password resets and privacy policy updates.
     * Send notifications - the user may configure this to their needs, including opting out.
@@ -40,6 +41,14 @@ Please avoid giving other personal information as we do not want it.
 * Passwords are used to authenticate the user.
 * The audit log is used to record actions that may be harmful.
 * Preferred language/locale is used to translate emails and the ContentDB interface.
+* Requests (such as downloads) are used for aggregated statistics and for
+  calculating the popularity of packages. For example, download counts are shown
+  for each package and release and there are also download graphs available for
+  each package.
+* Whether an IP address has downloaded a package or release is cached to prevent
+  downloads from being counted multiple times per IP address, but this
+  information is deleted after 14 days.
+* IP addresses are used to monitor and combat abuse.
 * Other information is displayed as part of ContentDB's service.
 
 ## Who has access
@@ -61,40 +70,46 @@ Please avoid giving other personal information as we do not want it.
 * Preferred language can only be viewed by this with access to the database or a backup.
 * We may be required to share information with law enforcement.
 
+## Third-parties
+
+We do not share any personal information with third parties.
+
 ## Location
 
 The ContentDB production server is currently located in Germany.
 Backups are stored in the UK.
 Encrypted backups may be stored in other countries, such as the US or EU.
 
-By using this service, you give permission for the data to be moved as needed.
+By using this service, you give permission for the data to be moved within the
+United Kingdom and/or EU.
 
 ## Period of Retention
 
-The server uses log rotation, meaning that any logged HTTP requests will be
-forgotten within a few weeks.
+Logged HTTP requests are automatically deleted within 2 weeks.
 
-Usernames may be kept indefinitely, but other user information will be deleted if
-requested. See below.
+Usernames may be kept indefinitely, but other user information will be deleted
+if requested. See below.
+
+Whether an IP address has downloaded a package or release is deleted after 14 days.
 
 ## Removal Requests
 
-Please [raise a report](/report/?anon=0) if you
-wish to remove your personal information.
+Please [raise a report](/report/?anon=0) if you wish to remove your personal
+information.
 
-ContentDB keeps a record of each username and forum topic on the forums,
-for use in indexing mod/game topics. ContentDB also requires the use of a username
-to uniquely identify a package. Therefore, an author cannot be removed completely
+ContentDB keeps a record of each username and forum topic on the forums, for use
+in indexing mod/game topics. ContentDB also requires the use of a username to
+uniquely identify a package. Therefore, an author cannot be removed completely
 from ContentDB if they have any packages or mod/game topics on the forum.
 
 If we are unable to remove your account for one of the above reasons, your user
 account will instead be wiped and deactivated, ending up exactly like an author
-who has not yet joined ContentDB. All personal information will be removed from the profile,
-and any comments or threads will be deleted.
+who has not yet joined ContentDB. All personal information will be removed from
+the profile, and any comments or threads will be deleted.
 
 ## Future Changes to Privacy Policy
 
-We will alert any future changes to the privacy policy via email and
-via notices on the ContentDB website.
+We will alert any future changes to the privacy policy via notices on the
+ContentDB website.
 
 By continuing to use this service, you agree to the privacy policy.
