@@ -164,37 +164,7 @@ def post_release_check_update(self, release: PackageRelease, path):
 			db.session.add(Dependency(package, meta=meta, optional=True))
 
 		# Read translations
-		allowed_languages = set([x[0] for x in db.session.query(Language.id).all()])
-		allowed_languages.discard("en")
-		conn = db.session.connection()
-
-		for language in tree.get_supported_languages():
-			if language not in allowed_languages:
-				continue
-
-			values = {
-				"package_id": package.id,
-				"language_id": language,
-			}
-			stmt = insert(PackageTranslation).values(**values)
-			stmt = stmt.on_conflict_do_nothing(
-				index_elements=[PackageTranslation.package_id, PackageTranslation.language_id],
-			)
-			conn.execute(stmt)
-
-		raw_translations = tree.get_translations(tree.get("textdomain", tree.name))
-		for raw_translation in raw_translations:
-			if raw_translation.language not in allowed_languages:
-				continue
-
-			to_update = {
-				"title": raw_translation.entries.get(tree.get("title", package.title)),
-				"short_desc": raw_translation.entries.get(tree.get("description", package.short_desc)),
-			}
-
-			PackageTranslation.query \
-				.filter_by(package_id=package.id, language_id=raw_translation.language) \
-				.update(to_update)
+		update_translations(package, tree)
 
 		# Update min/max
 		if tree.meta.get("min_minetest_version"):
@@ -258,6 +228,39 @@ def post_release_check_update(self, release: PackageRelease, path):
 		raise TaskError(str(err))
 
 
+def update_translations(package: Package, tree: PackageTreeNode):
+	allowed_languages = set([x[0] for x in db.session.query(Language.id).all()])
+	allowed_languages.discard("en")
+	conn = db.session.connection()
+	for language in tree.get_supported_languages():
+		if language not in allowed_languages:
+			continue
+
+		values = {
+			"package_id": package.id,
+			"language_id": language,
+		}
+		stmt = insert(PackageTranslation).values(**values)
+		stmt = stmt.on_conflict_do_nothing(
+			index_elements=[PackageTranslation.package_id, PackageTranslation.language_id],
+		)
+		conn.execute(stmt)
+
+	raw_translations = tree.get_translations(tree.get("textdomain", tree.name))
+	for raw_translation in raw_translations:
+		if raw_translation.language not in allowed_languages:
+			continue
+
+		to_update = {
+			"title": raw_translation.entries.get(tree.get("title", package.title)),
+			"short_desc": raw_translation.entries.get(tree.get("description", package.short_desc)),
+		}
+
+		PackageTranslation.query \
+			.filter_by(package_id=package.id, language_id=raw_translation.language) \
+			.update(to_update)
+
+
 @celery.task(bind=True)
 def check_zip_release(self, id, path):
 	release = PackageRelease.query.get(id)
@@ -275,6 +278,37 @@ def check_zip_release(self, id, path):
 		release.task_id = None
 		release.approve(release.package.author)
 		db.session.commit()
+
+
+@celery.task(bind=True)
+def import_languages(self, id, path):
+	release = PackageRelease.query.get(id)
+	if release is None:
+		raise TaskError("No such release!")
+	elif release.package is None:
+		raise TaskError("No package attached to release")
+
+	with get_temp_dir() as temp:
+		with ZipFile(path, 'r') as zip_ref:
+			zip_ref.extractall(temp)
+
+		try:
+			tree: PackageTreeNode = build_tree(temp,
+					expected_type=ContentType[release.package.type.name],
+					author=release.package.author.username,
+					name=release.package.name,
+					strict=False)
+			update_translations(release.package, tree)
+			db.session.commit()
+		except (MinetestCheckError, TaskError, LogicError) as err:
+			db.session.rollback()
+
+			task_url = url_for('tasks.check', id=self.request.id)
+			msg = f"{err}\n\n[View Release]({release.get_edit_url()}) | [View Task]({task_url})"
+			post_bot_message(release.package, f"Release {release.title} validation failed", msg)
+			db.session.commit()
+
+			raise TaskError(str(err))
 
 
 @celery.task(bind=True)

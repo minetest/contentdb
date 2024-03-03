@@ -26,7 +26,8 @@ from app.models import PackageRelease, db, Package, PackageState, PackageScreens
 	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, Thread
 from app.tasks.emails import send_pending_digests
 from app.tasks.forumtasks import import_topic_list, check_all_forum_accounts
-from app.tasks.importtasks import import_repo_screenshot, check_zip_release, check_for_updates, update_all_game_support
+from app.tasks.importtasks import import_repo_screenshot, check_zip_release, check_for_updates, update_all_game_support, \
+	import_languages
 from app.utils import add_notification, get_system_user
 
 actions = {}
@@ -321,13 +322,29 @@ def check_releases():
 @action("DANGER: Check latest release of all packages (postReleaseCheckUpdate)")
 def reimport_packages():
 	tasks = []
-	for package in Package.query.filter(Package.state != PackageState.DELETED).all():
+	for package in Package.query.filter(Package.state == PackageState.APPROVED).all():
 		release = package.releases.first()
 		if release:
 			tasks.append(check_zip_release.s(release.id, release.file_path))
 
 	result = group(tasks).apply_async()
 
+	while not result.ready():
+		import time
+		time.sleep(0.1)
+
+	return redirect(url_for("todo.view_editor"))
+
+
+@action("DANGER: Import translations")
+def reimport_translations():
+	tasks = []
+	for package in Package.query.filter(Package.state == PackageState.APPROVED).all():
+		release = package.releases.first()
+		if release:
+			tasks.append(import_languages.s(release.id, release.file_path))
+
+	result = group(tasks).apply_async()
 	while not result.ready():
 		import time
 		time.sleep(0.1)

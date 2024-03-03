@@ -89,9 +89,12 @@ class PackageTreeNode:
 	meta: dict
 	children: list
 	type: ContentType
+	strict: bool
 
 	def __init__(self, base_dir: str, relative: str,
-			author: Optional[str] = None, repo: Optional[str] = None, name: Optional[str] = None):
+			author: Optional[str] = None,
+			repo: Optional[str] = None, name: Optional[str] = None,
+			strict: bool = True):
 		self.baseDir = base_dir
 		self.relative = relative
 		self.author = author
@@ -99,6 +102,7 @@ class PackageTreeNode:
 		self.repo = repo
 		self.meta = {}
 		self.children = []
+		self.strict = strict
 
 		# Detect type
 		self.type = detect_type(base_dir)
@@ -169,7 +173,7 @@ class PackageTreeNode:
 			except IOError:
 				pass
 
-			if "release" in result:
+			if self.strict and "release" in result:
 				raise MinetestCheckError("{} should not contain 'release' key, as this is for use by ContentDB only.".format(meta_file_rel))
 
 		# description.txt
@@ -251,7 +255,7 @@ class PackageTreeNode:
 		for entry in next(os.walk(dir))[1]:
 			path = os.path.join(dir, entry)
 			if not entry.startswith('.') and os.path.isdir(path):
-				child = PackageTreeNode(path, relative + entry + "/", name=entry)
+				child = PackageTreeNode(path, relative + entry + "/", name=entry, strict=self.strict)
 				if not child.type.is_mod_like():
 					raise MinetestCheckError("Expecting mod or modpack, found {} at {} inside {}" \
 						.format(child.type.value, child.relative, self.type.value))

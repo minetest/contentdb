@@ -56,10 +56,10 @@ class ContentType(Enum):
 from .tree import PackageTreeNode, get_base_dir
 
 
-def build_tree(path, expected_type=None, author=None, repo=None, name=None):
+def build_tree(path, expected_type=None, author=None, repo=None, name=None, strict: bool = True):
 	path = get_base_dir(path)
 
-	root = PackageTreeNode(path, "/", author=author, repo=repo, name=name)
+	root = PackageTreeNode(path, "/", author=author, repo=repo, name=name, strict=strict)
 	assert root
 
 	if expected_type:
