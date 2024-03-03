@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2023-12-30 16:46+0000\n"
+"POT-Creation-Date: 2024-03-03 01:18+0000\n"
 "PO-Revision-Date: 2024-02-10 02:02+0000\n"
 "Last-Translator: Leo <resistancelion@gmail.com>\n"
-"Language-Team: Ukrainian <https://hosted.weblate.org/projects/minetest/"
-"contentdb/uk/>\n"
 "Language: uk\n"
+"Language-Team: Ukrainian "
+"<https://hosted.weblate.org/projects/minetest/contentdb/uk/>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.4-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -29,7 +28,8 @@ msgstr "Заборонено:"
 msgid "You have been banned."
 msgstr "Вас забанено."
 
-#: app/querybuilder.py:38 app/templates/admin/tags/list.html:38
+#: app/querybuilder.py:41 app/templates/admin/languages/list.html:27
+#: app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
 #: app/templates/collections/create_edit.html:56
 #: app/templates/collections/view.html:66 app/templates/modnames/list.html:16
@@ -38,10 +38,19 @@ msgstr "Вас забанено."
 msgid "Packages"
 msgstr "Пакунки"
 
-#: app/template_filters.py:86
+#: app/querybuilder.py:56
+#, python-format
+msgid "%(package_type)s for %(game_name)s"
+msgstr ""
+
+#: app/template_filters.py:90
 #, python-format
 msgid "%(delta)s ago"
 msgstr "%(delta)s тому"
+
+#: app/blueprints/api/endpoints.py:95 app/templates/index.html:103
+msgid "Featured"
+msgstr "Рекомендовані"
 
 #: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
@@ -54,15 +63,15 @@ msgid "Limit to package"
 msgstr "Обмеження на пакунки"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:274
-#: app/blueprints/packages/packages.py:523
-#: app/blueprints/packages/packages.py:619
-#: app/blueprints/packages/packages.py:690
-#: app/blueprints/packages/releases.py:61
-#: app/blueprints/packages/releases.py:73 app/blueprints/packages/reviews.py:49
-#: app/blueprints/packages/screenshots.py:35
-#: app/blueprints/packages/screenshots.py:41
-#: app/blueprints/packages/screenshots.py:46
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:275
+#: app/blueprints/packages/packages.py:539
+#: app/blueprints/packages/packages.py:635
+#: app/blueprints/packages/packages.py:706
+#: app/blueprints/packages/releases.py:62
+#: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:49
+#: app/blueprints/packages/screenshots.py:36
+#: app/blueprints/packages/screenshots.py:42
+#: app/blueprints/packages/screenshots.py:47
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
 #: app/blueprints/users/settings.py:77 app/blueprints/users/settings.py:147
 #: app/blueprints/users/settings.py:304 app/templates/users/modtools.html:111
@@ -70,16 +79,19 @@ msgid "Save"
 msgstr "Зберегти"
 
 #: app/blueprints/collections/__init__.py:77
-#: app/blueprints/oauth/__init__.py:168 app/blueprints/packages/releases.py:53
-#: app/blueprints/packages/releases.py:65 app/blueprints/packages/reviews.py:45
-#: app/blueprints/threads/__init__.py:281 app/templates/macros/reviews.html:138
-#: app/templates/macros/topics.html:5
+#: app/blueprints/oauth/__init__.py:168 app/blueprints/packages/releases.py:54
+#: app/blueprints/packages/releases.py:66 app/blueprints/packages/reviews.py:45
+#: app/blueprints/threads/__init__.py:281
+#: app/templates/admin/languages/list.html:23
+#: app/templates/macros/reviews.html:138 app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
+#: app/templates/packages/translation.html:42
 msgid "Title"
 msgstr "Заголовок"
 
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:85
+#: app/templates/packages/translation.html:45
 msgid "Short Description"
 msgstr "Короткий Опис"
 
@@ -169,43 +181,48 @@ msgid "Edit Details"
 msgstr "Змінити деталі"
 
 #: app/blueprints/packages/__init__.py:37
+#: app/templates/packages/translation.html:4
+msgid "Translation"
+msgstr ""
+
+#: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:634 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:648 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Випуски"
 
-#: app/blueprints/packages/__init__.py:42
+#: app/blueprints/packages/__init__.py:47
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
 msgstr "Знімки екрана"
 
-#: app/blueprints/packages/__init__.py:47
+#: app/blueprints/packages/__init__.py:52
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:605
+#: app/templates/packages/view.html:619
 msgid "Maintainers"
 msgstr "Супровідники"
 
-#: app/blueprints/packages/__init__.py:52 app/templates/base.html:159
-#: app/templates/packages/audit.html:4
+#: app/blueprints/packages/__init__.py:57 app/templates/admin/list.html:21
+#: app/templates/base.html:159 app/templates/packages/audit.html:4
 msgid "Audit Log"
 msgstr "Журнал авдиту"
 
-#: app/blueprints/packages/__init__.py:57 app/templates/base.html:150
+#: app/blueprints/packages/__init__.py:62 app/templates/base.html:150
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
-#: app/templates/packages/view.html:229 app/templates/users/profile.html:148
+#: app/templates/packages/view.html:236 app/templates/users/profile.html:148
 msgid "Statistics"
 msgstr "Статистика"
 
-#: app/blueprints/packages/__init__.py:62 app/templates/packages/share.html:4
+#: app/blueprints/packages/__init__.py:67 app/templates/packages/share.html:4
 msgid "Share and Badges"
 msgstr "Обмін і значки"
 
-#: app/blueprints/packages/__init__.py:67
+#: app/blueprints/packages/__init__.py:72
 msgid "Remove / Unpublish"
 msgstr "Вилучити / Зняти з публікації"
 
-#: app/blueprints/packages/__init__.py:75
+#: app/blueprints/packages/__init__.py:80
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
 msgstr "Підтримувані ігри"
@@ -230,7 +247,7 @@ msgstr ""
 msgid "No download available."
 msgstr "Завантаження недоступне."
 
-#: app/blueprints/packages/packages.py:253 app/templates/packages/view.html:582
+#: app/blueprints/packages/packages.py:253 app/templates/packages/view.html:589
 msgid "Type"
 msgstr "Тип"
 
@@ -239,12 +256,12 @@ msgid "Title (Human-readable)"
 msgstr "Заголовок (зрозумілий людям)"
 
 #: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:617
+#: app/blueprints/packages/packages.py:633
 msgid "Name (Technical)"
 msgstr "Назва (технічна)"
 
 #: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:618
+#: app/blueprints/packages/packages.py:634
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Лише малі букви (a-z), цифри (0-9) і підкреслення (_)"
@@ -253,7 +270,7 @@ msgstr "Лише малі букви (a-z), цифри (0-9) і підкресл
 msgid "Short Description (Plaintext)"
 msgstr "Короткий опис (простий текст)"
 
-#: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:597
+#: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:611
 msgid "Maintenance State"
 msgstr "Стан підтримки"
 
@@ -266,7 +283,7 @@ msgstr "Мітки"
 msgid "Content Warnings"
 msgstr "Попередження вмісту"
 
-#: app/blueprints/packages/packages.py:262 app/templates/packages/view.html:586
+#: app/blueprints/packages/packages.py:262 app/templates/packages/view.html:600
 msgid "License"
 msgstr "Ліцензія"
 
@@ -302,11 +319,15 @@ msgstr "URL відеозапису"
 msgid "Donate URL"
 msgstr "Пожертвувати URL"
 
-#: app/blueprints/packages/packages.py:278
+#: app/blueprints/packages/packages.py:273
+msgid "Translation URL"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:279
 msgid "_game is not an allowed name"
 msgstr "_гра не є дозволеною назвою"
 
-#: app/blueprints/packages/packages.py:288
+#: app/blueprints/packages/packages.py:289
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -314,205 +335,211 @@ msgstr ""
 "Пакет уже існує, але видалено. Щоб відновити пакет, зверніться до "
 "персоналу ContentDB"
 
-#: app/blueprints/packages/packages.py:293
+#: app/blueprints/packages/packages.py:294
 msgid "Package already exists"
 msgstr "Пакет уже існує"
 
-#: app/blueprints/packages/packages.py:299
+#: app/blueprints/packages/packages.py:300
 msgid "A collection with a similar name already exists"
 msgstr "Колекція з подібним іменем вже існує"
 
-#: app/blueprints/packages/packages.py:359
+#: app/blueprints/packages/packages.py:361
 msgid "Unable to find that user"
 msgstr "Не вдалося знайти такого користувача"
 
-#: app/blueprints/packages/packages.py:363
-#: app/blueprints/packages/screenshots.py:136
+#: app/blueprints/packages/packages.py:365
+#: app/blueprints/packages/screenshots.py:137
 #: app/blueprints/users/settings.py:131
 msgid "Permission denied"
 msgstr "Доступ відхилено"
 
-#: app/blueprints/packages/packages.py:419
-#: app/blueprints/packages/packages.py:478
-#: app/blueprints/packages/packages.py:498
+#: app/blueprints/packages/packages.py:421
+#: app/blueprints/packages/packages.py:494
+#: app/blueprints/packages/packages.py:514
 msgid "You don't have permission to do that"
 msgstr "У Вас нема прав робити це"
 
-#: app/blueprints/packages/packages.py:449
+#: app/blueprints/packages/packages.py:453
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Будь ласка, прокоментуйте необхідні зміни в гілці затвердження"
 
-#: app/blueprints/packages/packages.py:493
+#: app/blueprints/packages/packages.py:460
+msgid ""
+"Please comment in the approval thread so editors know what you have "
+"changed"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:509
 msgid "Deleted package"
 msgstr "Видалити пакунок"
 
-#: app/blueprints/packages/packages.py:513
+#: app/blueprints/packages/packages.py:529
 msgid "Unapproved package"
 msgstr "Несхвалений пакунок"
 
-#: app/blueprints/packages/packages.py:522
+#: app/blueprints/packages/packages.py:538
 msgid "Maintainers (Comma-separated)"
 msgstr "Супровідники (розділені комою)"
 
-#: app/blueprints/packages/packages.py:531
+#: app/blueprints/packages/packages.py:547
 msgid "You don't have permission to edit maintainers"
 msgstr "Ви не маєте дозволу редагувати супроводжуючих"
 
-#: app/blueprints/packages/packages.py:581
+#: app/blueprints/packages/packages.py:597
 msgid "You are not a maintainer"
 msgstr "Ви не супровідник"
 
-#: app/blueprints/packages/packages.py:584
+#: app/blueprints/packages/packages.py:600
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Власник пакунка не може вилучити себе як супровідника"
 
-#: app/blueprints/packages/packages.py:616
+#: app/blueprints/packages/packages.py:632
 msgid "Author Name"
 msgstr "Імʼя автора"
 
-#: app/blueprints/packages/packages.py:686
+#: app/blueprints/packages/packages.py:702
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Увімкнути виявлення підтримки на основі залежностей (рекомендовано)"
 
-#: app/blueprints/packages/packages.py:687
+#: app/blueprints/packages/packages.py:703
 msgid "Supported games"
 msgstr "Підтримувані ігри"
 
-#: app/blueprints/packages/packages.py:688
+#: app/blueprints/packages/packages.py:704
 msgid "Unsupported games"
 msgstr "Непідтримувані ігри"
 
-#: app/blueprints/packages/packages.py:689
+#: app/blueprints/packages/packages.py:705
 msgid "Supports all games (unless stated) / is game independent"
 msgstr "Підтримує усі ігри (доки не вказано)/ ігро-незалежний"
 
-#: app/blueprints/packages/packages.py:705
+#: app/blueprints/packages/packages.py:721
 msgid "You need at least one release before you can edit game support"
 msgstr ""
 "Вам потрібна щонайменше одна публікація, перш ніж ви зможете редагувати "
 "підтримку ігор"
 
-#: app/blueprints/packages/packages.py:709
+#: app/blueprints/packages/packages.py:725
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
 "Пакунок модів має містити щонайменше один мод. Будь ласка створіть нову "
 "публікацію"
 
-#: app/blueprints/packages/releases.py:54
+#: app/blueprints/packages/releases.py:55
 #: app/templates/packages/release_new.html:46
 msgid "Method"
 msgstr "Спосіб"
 
-#: app/blueprints/packages/releases.py:54
-#: app/blueprints/packages/releases.py:56
-#: app/blueprints/packages/screenshots.py:34
+#: app/blueprints/packages/releases.py:55
+#: app/blueprints/packages/releases.py:57
+#: app/blueprints/packages/screenshots.py:35
 msgid "File Upload"
 msgstr "Відвантажити файли"
 
-#: app/blueprints/packages/releases.py:55
+#: app/blueprints/packages/releases.py:56
 msgid "Git reference (ie: commit hash, branch, or tag)"
 msgstr "Посилання на Git (тобто: хеш фіксації, гілка або тег)"
 
-#: app/blueprints/packages/releases.py:57
-#: app/blueprints/packages/releases.py:69
-#: app/blueprints/packages/releases.py:193
+#: app/blueprints/packages/releases.py:58
+#: app/blueprints/packages/releases.py:70
+#: app/blueprints/packages/releases.py:194
 msgid "Minimum Minetest Version"
 msgstr "Мінімальна версія Minetest"
 
-#: app/blueprints/packages/releases.py:59
-#: app/blueprints/packages/releases.py:71
-#: app/blueprints/packages/releases.py:196
+#: app/blueprints/packages/releases.py:60
+#: app/blueprints/packages/releases.py:72
+#: app/blueprints/packages/releases.py:197
 msgid "Maximum Minetest Version"
 msgstr "Максимальна версія Minetest"
 
-#: app/blueprints/packages/releases.py:66
+#: app/blueprints/packages/releases.py:67
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
 msgstr "URL-адреса"
 
-#: app/blueprints/packages/releases.py:67
+#: app/blueprints/packages/releases.py:68
 msgid "Task ID"
 msgstr "ІД завдання"
 
-#: app/blueprints/packages/releases.py:68
-#: app/blueprints/packages/screenshots.py:40
+#: app/blueprints/packages/releases.py:69
+#: app/blueprints/packages/screenshots.py:41
 msgid "Is Approved"
 msgstr "Затверджено"
 
-#: app/blueprints/packages/releases.py:86
+#: app/blueprints/packages/releases.py:87
 msgid "Import from Git"
 msgstr "Імпортувати з Git"
 
-#: app/blueprints/packages/releases.py:86
+#: app/blueprints/packages/releases.py:87
 msgid "Upload .zip file"
 msgstr "Відвантажити файл .zip"
 
-#: app/blueprints/packages/releases.py:192
+#: app/blueprints/packages/releases.py:193
 msgid "Set Min"
 msgstr "Вказати мінімум"
 
-#: app/blueprints/packages/releases.py:195
+#: app/blueprints/packages/releases.py:196
 msgid "Set Max"
 msgstr "Вказати максимум"
 
-#: app/blueprints/packages/releases.py:198
+#: app/blueprints/packages/releases.py:199
 msgid "Only change values previously set as none"
 msgstr ""
 "Змінюйте лише значення, для яких раніше було встановлено значення "
 "\"немає\"."
 
-#: app/blueprints/packages/releases.py:199
+#: app/blueprints/packages/releases.py:200
 msgid "Update"
 msgstr "Оновити"
 
-#: app/blueprints/packages/releases.py:248
+#: app/blueprints/packages/releases.py:251
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Тригер"
 
-#: app/blueprints/packages/releases.py:249
+#: app/blueprints/packages/releases.py:252
 msgid "New Commit"
 msgstr "Новий коміт"
 
-#: app/blueprints/packages/releases.py:250 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:253 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Нова мітка"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:255
 msgid "Branch name"
 msgstr "Назва гілки"
 
-#: app/blueprints/packages/releases.py:253
+#: app/blueprints/packages/releases.py:256
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Дія"
 
-#: app/blueprints/packages/releases.py:254
+#: app/blueprints/packages/releases.py:257
 msgid "Send notification and mark as outdated"
 msgstr "Надіслати сповіщення і позначити застарілим"
 
-#: app/blueprints/packages/releases.py:254
+#: app/blueprints/packages/releases.py:257
 #: app/templates/macros/package_approval.html:22
 msgid "Create release"
 msgstr "Створити випуск"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:259
 msgid "Save Settings"
 msgstr "Зберегти налаштування"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:260
 msgid "Disable Automation"
 msgstr "Вимкнути автоматизацію"
 
-#: app/blueprints/packages/releases.py:296
+#: app/blueprints/packages/releases.py:299
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "Додайте URL-адресу сховища Git, щоб налаштувати автоматичні випуски"
 
-#: app/blueprints/packages/releases.py:312
+#: app/blueprints/packages/releases.py:315
 msgid "Deleted update configuration"
 msgstr "Конфігурацію оновлення видалено"
 
-#: app/blueprints/packages/releases.py:320
+#: app/blueprints/packages/releases.py:323
 msgid "Now, please create an initial release"
 msgstr "Тепер, будь ласка, створіть початковий випуск"
 
@@ -557,7 +584,7 @@ msgstr ""
 #: app/blueprints/packages/reviews.py:80 app/blueprints/threads/__init__.py:207
 #: app/blueprints/threads/__init__.py:240
 #: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:112
-#: app/logic/packages.py:131
+#: app/logic/packages.py:132
 msgid "Linking to blocked sites is not allowed"
 msgstr "Посилання на заблоковані сайти заборонено"
 
@@ -569,12 +596,12 @@ msgstr "Ви не можете голосувати за відгуки на в�
 msgid "You can't vote on your own reviews!"
 msgstr "Ви не можете голосувати за власні відгуки!"
 
-#: app/blueprints/packages/screenshots.py:33
-#: app/blueprints/packages/screenshots.py:39
+#: app/blueprints/packages/screenshots.py:34
+#: app/blueprints/packages/screenshots.py:40
 msgid "Title/Caption"
 msgstr "Заголовок/підпис"
 
-#: app/blueprints/packages/screenshots.py:45
+#: app/blueprints/packages/screenshots.py:46
 #: app/templates/packages/screenshots.html:110
 msgid "Cover Image"
 msgstr "Зображення обкладинки"
@@ -584,7 +611,7 @@ msgid "Message"
 msgstr "Повідомлення"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:51
-#: app/templates/packages/view.html:665 app/templates/report/index.html:4
+#: app/templates/packages/view.html:679 app/templates/report/index.html:4
 #: app/templates/report/index.html:10 app/templates/users/profile.html:37
 msgid "Report"
 msgstr "Звіт"
@@ -657,7 +684,7 @@ msgstr "Пароль"
 msgid "Remember me"
 msgstr "Запамʼятати мене"
 
-#: app/blueprints/users/account.py:39 app/templates/base.html:188
+#: app/blueprints/users/account.py:39 app/templates/base.html:176
 #: app/templates/donate/index.html:74 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "Увійти"
@@ -1036,7 +1063,7 @@ msgid "File filter"
 msgstr "Файловий фільтр"
 
 #: app/blueprints/zipgrep/__init__.py:38 app/templates/base.html:60
-#: app/templates/todo/tags.html:14
+#: app/templates/packages/game_hub.html:35 app/templates/todo/tags.html:14
 msgid "Search"
 msgstr "Пошук"
 
@@ -1067,17 +1094,17 @@ msgstr "Потрібно додати принаймні один знімок �
 msgid "Please wait for the license to be added to CDB."
 msgstr "Зачекайте, поки ліцензію буде додано до CDB."
 
-#: app/logic/packages.py:98
+#: app/logic/packages.py:99
 msgid ""
 "Name can only contain lower case letters (a-z), digits (0-9), and "
 "underscores (_)"
 msgstr "Ім’я може містити лише малі літери (a–z), цифри (0–9) і підкреслення (_)"
 
-#: app/logic/packages.py:112
+#: app/logic/packages.py:113
 msgid "You don't have permission to edit this package"
 msgstr "У вас немає дозволу на редагування цього пакета"
 
-#: app/logic/packages.py:116
+#: app/logic/packages.py:117
 msgid "You don't have permission to change the package name"
 msgstr "Ви не маєте дозволу змінювати назву пакета"
 
@@ -1114,50 +1141,50 @@ msgstr ""
 "Знімок екрана замалий, він має мати принаймні %(width)s на %(height)s "
 "пікселів"
 
-#: app/logic/uploads.py:55
+#: app/logic/uploads.py:58
 #, python-format
 msgid "Please upload %(file_desc)s"
 msgstr "Будь ласка, завантажте %(file_desc)s"
 
-#: app/logic/uploads.py:58
+#: app/logic/uploads.py:61
 msgid "Uploaded image isn't actually an image"
 msgstr "Завантажене зображення насправді не є зображенням"
 
-#: app/models/packages.py:68
+#: app/models/packages.py:69
 msgid "Mod"
 msgstr "Мод"
 
-#: app/models/packages.py:70
+#: app/models/packages.py:71
 msgid "Game"
 msgstr "Гра"
 
-#: app/models/packages.py:72
+#: app/models/packages.py:73
 msgid "Texture Pack"
 msgstr "Пакунок текстур"
 
-#: app/models/packages.py:77 app/templates/base.html:39
+#: app/models/packages.py:78 app/templates/base.html:39
 #: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Моди"
 
-#: app/models/packages.py:79 app/templates/base.html:42
+#: app/models/packages.py:80 app/templates/base.html:42
 #: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Ігри"
 
-#: app/models/packages.py:81 app/templates/base.html:45
+#: app/models/packages.py:82 app/templates/base.html:45
 msgid "Texture Packs"
 msgstr "Пакунки текстур"
 
-#: app/models/packages.py:170
+#: app/models/packages.py:171
 msgid "Submit for Approval"
 msgstr "Надіслати на затвердження"
 
-#: app/models/packages.py:172
+#: app/models/packages.py:173
 msgid "Approve"
 msgstr "Затвердити"
 
-#: app/models/packages.py:174 app/templates/api/create_edit_token.html:17
+#: app/models/packages.py:175 app/templates/api/create_edit_token.html:17
 #: app/templates/collections/delete.html:14
 #: app/templates/collections/view.html:39
 #: app/templates/oauth/create_edit.html:17
@@ -1168,6 +1195,10 @@ msgstr "Затвердити"
 #: app/templates/threads/view.html:50 app/templates/users/delete.html:34
 msgid "Delete"
 msgstr "Видалити"
+
+#: app/models/packages.py:572 app/templates/packages/view.html:163
+msgid "Work in Progress"
+msgstr "Робота в процесі"
 
 #: app/tasks/emails.py:119
 msgid ""
@@ -1226,8 +1257,9 @@ msgstr ""
 msgid "Random"
 msgstr "Випадковий"
 
-#: app/templates/base.html:51 app/templates/base.html:256
+#: app/templates/base.html:51 app/templates/base.html:245
 #: app/templates/packages/bulk_update_conf.html:8
+#: app/templates/packages/translation.html:12
 #: app/templates/packages/update_config.html:8
 #: app/templates/todo/game_support.html:8 app/templates/todo/user.html:45
 #: app/templates/todo/user.html:69
@@ -1268,83 +1300,81 @@ msgstr "Профіль"
 msgid "My Collections"
 msgstr "Мої Колекції"
 
-#: app/templates/base.html:163
+#: app/templates/base.html:164
 msgid "Admin"
 msgstr "Адмін"
 
-#: app/templates/base.html:166
-msgid "License Editor"
-msgstr "Редактор ліцензії"
-
-#: app/templates/base.html:171
-msgid "Restore Package"
-msgstr "Відновити пакунок"
-
-#: app/templates/base.html:174
-msgid "Tag Editor"
-msgstr "Редактор міток"
-
-#: app/templates/base.html:176
-msgid "Create Tag"
-msgstr "Створити мітку"
-
-#: app/templates/base.html:181 app/templates/packages/release_new.html:12
+#: app/templates/base.html:169 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "Налаштування"
 
-#: app/templates/base.html:184
+#: app/templates/base.html:172
 msgid "Sign out"
 msgstr "Вийти з аккаунта"
 
-#: app/templates/base.html:213
+#: app/templates/admin/languages/list.html:4
+#: app/templates/admin/languages/list.html:10 app/templates/base.html:185
+#: app/templates/packages/view.html:593
+msgid "Languages"
+msgstr ""
+
+#: app/templates/base.html:202
 msgid "Help translate ContentDB"
 msgstr "Допоможіть перекласти ContentDB"
 
-#: app/templates/base.html:257
+#: app/templates/base.html:246
 msgid "About"
 msgstr "Про"
 
-#: app/templates/base.html:258
+#: app/templates/base.html:247
 msgid "Rules"
 msgstr "Правила"
 
-#: app/templates/base.html:259
+#: app/templates/base.html:248
 msgid "Policy and Guidance"
 msgstr "Політика та вказівки"
 
-#: app/templates/base.html:260
+#: app/templates/base.html:249
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:261 app/templates/users/register.html:37
+#: app/templates/base.html:250 app/templates/users/register.html:37
 msgid "Privacy Policy"
 msgstr "Політика приватності"
 
-#: app/templates/base.html:263
+#: app/templates/base.html:252
 msgid "Report / DMCA"
 msgstr ""
 
-#: app/templates/base.html:265
+#: app/templates/base.html:254
 msgid "User List"
 msgstr "Список користувачів"
 
-#: app/templates/base.html:266 app/templates/packages/view.html:189
-#: app/templates/packages/view.html:654 app/templates/threads/list.html:4
+#: app/templates/base.html:255 app/templates/packages/view.html:190
+#: app/templates/packages/view.html:668 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Нитки"
 
-#: app/templates/base.html:267 app/templates/collections/list.html:7
+#: app/templates/base.html:256 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
 msgstr "Колекції"
 
-#: app/templates/base.html:268
+#: app/templates/base.html:257
 msgid "Support Packages"
 msgstr "Пакети підтримки"
 
-#: app/templates/base.html:269
+#: app/templates/base.html:258
 msgid "Source Code"
 msgstr "Вихідний код"
+
+#: app/templates/base.html:264
+msgid "Show non-free packages"
+msgstr ""
+
+#: app/templates/base.html:266
+msgid "Hide non-free packages"
+msgstr ""
 
 #: app/templates/index.html:4
 msgid "Welcome"
@@ -1356,6 +1386,7 @@ msgstr ""
 "Вітаємо у найкращому місті щоб знайти моди, ігри та пакунки текстур до "
 "Minetest"
 
+#: app/templates/admin/storage.html:39
 #: app/templates/collections/create_edit.html:81
 #: app/templates/collections/list.html:39
 #: app/templates/collections/view.html:91 app/templates/index.html:48
@@ -1372,68 +1403,73 @@ msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> від %(author)s"
 
 #: app/templates/index.html:77 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:193 app/templates/packages/view.html:325
+#: app/templates/packages/view.html:194 app/templates/packages/view.html:332
 #: app/templates/users/profile.html:279
 msgid "Reviews"
 msgstr "Відгуки"
 
-#: app/templates/index.html:93 app/templates/packages/view.html:271
+#: app/templates/index.html:93 app/templates/packages/view.html:278
 msgid "Previous"
 msgstr "Попередній"
 
-#: app/templates/index.html:97 app/templates/packages/view.html:275
+#: app/templates/index.html:97 app/templates/packages/view.html:282
 #: app/templates/users/claim_forums.html:87
 msgid "Next"
 msgstr "Далі"
 
-#: app/templates/index.html:103
-msgid "Featured"
-msgstr "Рекомендовані"
-
-#: app/templates/index.html:108 app/templates/index.html:115
-#: app/templates/index.html:122 app/templates/index.html:129
-#: app/templates/index.html:136 app/templates/index.html:158
-#: app/templates/index.html:165 app/templates/packages/game_hub.html:30
-#: app/templates/packages/game_hub.html:37
+#: app/templates/index.html:107 app/templates/index.html:113
 #: app/templates/packages/game_hub.html:44
-#: app/templates/packages/game_hub.html:51
-#: app/templates/packages/game_hub.html:58
-msgid "See more"
-msgstr "Дізнатися більше"
-
-#: app/templates/index.html:110 app/templates/packages/game_hub.html:32
 msgid "Recently Added"
 msgstr "Нещодавно додані"
 
-#: app/templates/index.html:117 app/templates/packages/game_hub.html:39
+#: app/templates/index.html:111 app/templates/index.html:122
+#: app/templates/index.html:133 app/templates/index.html:144
+#: app/templates/index.html:155 app/templates/index.html:181
+#: app/templates/packages/game_hub.html:42
+#: app/templates/packages/game_hub.html:49
+#: app/templates/packages/game_hub.html:56
+#: app/templates/packages/game_hub.html:63
+#: app/templates/packages/game_hub.html:70
+msgid "See more"
+msgstr "Дізнатися більше"
+
+#: app/templates/index.html:118 app/templates/index.html:124
+#: app/templates/packages/game_hub.html:51
 msgid "Recently Updated"
 msgstr "Нещодавно оновлено"
 
-#: app/templates/index.html:124
+#: app/templates/index.html:129 app/templates/index.html:135
 msgid "Top Games"
 msgstr "Найкращі ігри"
 
-#: app/templates/index.html:131 app/templates/packages/game_hub.html:46
+#: app/templates/index.html:140 app/templates/index.html:146
+#: app/templates/packages/game_hub.html:58
 msgid "Top Mods"
 msgstr "Кращі моди"
 
-#: app/templates/index.html:138 app/templates/packages/game_hub.html:53
+#: app/templates/index.html:151 app/templates/index.html:157
+#: app/templates/packages/game_hub.html:65
 msgid "Top Texture Packs"
 msgstr "Найкращі пакети текстур"
 
-#: app/templates/index.html:142
+#: app/templates/index.html:163
 msgid "Search by Tags"
 msgstr "Пошук за тегами"
 
-#: app/templates/index.html:160 app/templates/packages/game_hub.html:60
+#: app/templates/index.html:177 app/templates/index.html:183
+#: app/templates/packages/game_hub.html:72
 msgid "Highest Reviewed"
 msgstr "Найвищий огляд"
 
-#: app/templates/index.html:167
+#: app/templates/index.html:191
+msgid "All reviews"
+msgstr ""
+
+#: app/templates/index.html:193
 msgid "Recent Positive Reviews"
 msgstr "Останні позитивні відгуки"
 
-#: app/templates/index.html:174
+#: app/templates/index.html:200
 #, python-format
 msgid "CDB has %(count)d packages, with a total of %(downloads)d downloads."
 msgstr "CDB має пакети %(count)d із загальною кількістю завантажень %(downloads)d."
@@ -1459,6 +1495,27 @@ msgstr "Надіслати масове сповіщення"
 #, python-format
 msgid "Send email to %(username)s"
 msgstr "Надіслати електронний лист на %(username)s"
+
+#: app/templates/admin/storage.html:18
+#: app/templates/packages/create_edit.html:66
+#: app/templates/packages/game_support.html:20
+#: app/templates/threads/view.html:96 app/templates/todo/tags.html:36
+msgid "Package"
+msgstr "Пакунок"
+
+#: app/templates/admin/storage.html:62
+#: app/templates/collections/create_edit.html:61
+#: app/templates/threads/user_comments.html:79
+msgid "No results"
+msgstr "Немає результатів"
+
+#: app/templates/admin/languages/list.html:19
+msgid "Id"
+msgstr ""
+
+#: app/templates/admin/languages/list.html:33
+msgid "Has ContentDB translation?"
+msgstr ""
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
@@ -1572,7 +1629,7 @@ msgstr "Нема створених токенів"
 
 #: app/templates/collections/create_edit.html:5
 #: app/templates/collections/view.html:42 app/templates/macros/releases.html:68
-#: app/templates/packages/view.html:115 app/templates/packages/view.html:248
+#: app/templates/packages/view.html:116 app/templates/packages/view.html:255
 msgid "Edit"
 msgstr "Редагувати"
 
@@ -1588,13 +1645,8 @@ msgstr "Користувачі не будуть перенапрямлені п
 msgid "This requires the collection to be public"
 msgstr "Це вимагає публікації колекції"
 
-#: app/templates/collections/create_edit.html:61
-#: app/templates/threads/user_comments.html:79
-msgid "No results"
-msgstr "Немає результатів"
-
 #: app/templates/collections/create_edit.html:76
-#: app/templates/packages/remove.html:58 app/templates/packages/view.html:127
+#: app/templates/packages/remove.html:58 app/templates/packages/view.html:128
 msgid "Remove"
 msgstr "Вилучити"
 
@@ -1661,8 +1713,8 @@ msgstr "Колекція від %(author)s"
 #: app/templates/collections/view.html:69
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr ""
-"Щоб додати пакунок, перейдіть на сторінку пакунка і натисніть Add to 'Додати "
-"до колекції'"
+"Щоб додати пакунок, перейдіть на сторінку пакунка і натисніть Add to "
+"'Додати до колекції'"
 
 #: app/templates/donate/index.html:4
 msgid "Support packages"
@@ -1861,7 +1913,7 @@ msgid "No audit log entries."
 msgstr "Немає записів журналу аудиту."
 
 #: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:145
-#: app/templates/packages/remove.html:48 app/templates/packages/view.html:444
+#: app/templates/packages/remove.html:48 app/templates/packages/view.html:451
 #: app/templates/users/modtools.html:86
 msgid "Required"
 msgstr "Потрібно"
@@ -1933,19 +1985,19 @@ msgstr ""
 "Ви можете відкрити ланцюжок, якщо у вас є запитання до затверджувача або "
 "автора пакета."
 
-#: app/templates/macros/packagegridtile.html:25
+#: app/templates/macros/packagegridtile.html:26
 msgid "<b>Warning:</b> Non-free code and media."
 msgstr "<b>Увага:</b> Не вільний код і мультимедія."
 
-#: app/templates/macros/packagegridtile.html:29
+#: app/templates/macros/packagegridtile.html:30
 msgid "<b>Warning:</b> Non-free code."
 msgstr "<b>Увага:</b> Не вільний код."
 
-#: app/templates/macros/packagegridtile.html:33
+#: app/templates/macros/packagegridtile.html:34
 msgid "<b>Warning:</b> Non-free media."
 msgstr "<b>Увага:</b> Не вільні мультимедія."
 
-#: app/templates/macros/packagegridtile.html:45
+#: app/templates/macros/packagegridtile.html:46
 msgid "No packages available"
 msgstr "Нема доступних пакунків"
 
@@ -2154,8 +2206,8 @@ msgstr "Остання відповідь"
 msgid "On %(trigger)s, do %(action)s"
 msgstr "На сайті %(trigger)s зробіть %(action)s"
 
-#: app/templates/macros/todo.html:35 app/templates/packages/view.html:121
-#: app/templates/packages/view.html:409
+#: app/templates/macros/todo.html:35 app/templates/packages/view.html:122
+#: app/templates/packages/view.html:416
 msgid "Release"
 msgstr "Випуск"
 
@@ -2165,7 +2217,7 @@ msgstr "Репозиторій"
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:413
+#: app/templates/packages/view.html:420
 msgid "Update settings"
 msgstr "Оновити налаштування"
 
@@ -2173,7 +2225,7 @@ msgstr "Оновити налаштування"
 msgid "No outdated packages."
 msgstr "Ніяких застарілих упаковок."
 
-#: app/templates/macros/topics.html:6 app/templates/packages/view.html:176
+#: app/templates/macros/topics.html:6 app/templates/packages/view.html:177
 msgid "Author"
 msgstr "Автор"
 
@@ -2226,9 +2278,9 @@ msgstr "Теми форуму"
 
 #: app/templates/modnames/view.html:27 app/templates/oauth/authorize.html:32
 #: app/templates/packages/game_support.html:42
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:450
-#: app/templates/packages/view.html:474 app/templates/packages/view.html:519
-#: app/templates/packages/view.html:551 app/templates/todo/editor.html:85
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:457
+#: app/templates/packages/view.html:481 app/templates/packages/view.html:526
+#: app/templates/packages/view.html:558 app/templates/todo/editor.html:85
 #: app/templates/todo/game_support.html:45
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -2309,8 +2361,9 @@ msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
 msgstr ""
-"Щоб дозволити користувачам, крім себе, авторизовуватись, ви маєте звернутись "
-"до персоналу ContentDB і попросити про затвердження вашого застосунку."
+"Щоб дозволити користувачам, крім себе, авторизовуватись, ви маєте "
+"звернутись до персоналу ContentDB і попросити про затвердження вашого "
+"застосунку."
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
@@ -2330,8 +2383,8 @@ msgid ""
 "You must keep the secret safe. If you are unable, set the app type to "
 "'client-side'."
 msgstr ""
-"Ви маєте тримати секретний ключ у безпеці. Якщо ви не здатні, змініть тип "
-"застосунку на 'клієнтський'."
+"Ви маєте тримати секретний ключ у безпеці. Якщо ви не здатні, змініть тип"
+" застосунку на 'клієнтський'."
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
@@ -2447,12 +2500,6 @@ msgstr ""
 "JavaScript потрібен для покращення інтерфейсу користувача та для функцій\n"
 "наприклад пошук метаданих з git і автозавершення."
 
-#: app/templates/packages/create_edit.html:66
-#: app/templates/packages/game_support.html:20
-#: app/templates/threads/view.html:96 app/templates/todo/tags.html:36
-msgid "Package"
-msgstr "Пакунок"
-
 #: app/templates/packages/create_edit.html:73
 msgid "You need to unpublish the package to change the name."
 msgstr "Ви маєте зняти пакунок з публікації, щоб змінити його ім'я."
@@ -2525,6 +2572,10 @@ msgstr ""
 "Якщо поле порожнє, замість нього буде використано URL-адресу "
 "пожертвування автора."
 
+#: app/templates/packages/create_edit.html:122
+msgid "How can users translate your package? ie: weblate URL or a help page"
+msgstr ""
+
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
 msgstr "Змінити супровідників"
@@ -2559,6 +2610,12 @@ msgstr "Центр спільноти"
 msgid "Mods and texture packs for %(title)s"
 msgstr "Моди і пакунки текстур для %(title)s"
 
+#: app/templates/packages/game_hub.html:31
+#: app/templates/packages/game_hub.html:34
+#, python-format
+msgid "Search for packages for %(title)s"
+msgstr ""
+
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
 msgstr "Документація"
@@ -2572,7 +2629,7 @@ msgstr ""
 "детальнішої інформації"
 
 #: app/templates/packages/game_support.html:23
-#: app/templates/packages/view.html:212
+#: app/templates/packages/view.html:213
 msgid "Source"
 msgstr "Сирці"
 
@@ -3086,7 +3143,7 @@ msgstr ""
 "вплив на рейтинг пакунка."
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:353
+#: app/templates/packages/view.html:360
 msgid "Review Votes"
 msgstr "Переглянути голоси"
 
@@ -3196,6 +3253,40 @@ msgstr "Схожі теми форуму"
 msgid "Download (.csv)"
 msgstr "Завантажити (.csv)"
 
+#: app/templates/packages/translation.html:18
+#, python-format
+msgid ""
+"To provide translations for your %(type)s, you need to create .tr files "
+"and upload a new release."
+msgstr ""
+
+#: app/templates/packages/translation.html:19
+msgid ""
+"For information on how to do this, see the modding book chapter and "
+"lua_api.md"
+msgstr ""
+
+#: app/templates/packages/translation.html:23
+msgid "Translation - Minetest Modding Book"
+msgstr ""
+
+#: app/templates/packages/translation.html:26
+msgid "Translating content meta - lua_api.md"
+msgstr ""
+
+#: app/templates/packages/translation.html:31
+#, python-format
+msgid "%(title)s is available in %(num)d languages."
+msgstr ""
+
+#: app/templates/packages/translation.html:32
+msgid "ContentDB reads translations from locale files (.tr) in your package."
+msgstr ""
+
+#: app/templates/packages/translation.html:39
+msgid "Language"
+msgstr ""
+
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
 msgid "Configure Git Update Detection"
@@ -3239,46 +3330,46 @@ msgstr ""
 "Після того, як пакунок позначено як застарілий, ви більше не "
 "отримуватимете сповіщень, доки він не буде позначений як актуальний."
 
-#: app/templates/packages/view.html:41
+#: app/templates/packages/view.html:42
 msgid "Download"
 msgstr "Завантаження"
 
-#: app/templates/packages/view.html:48
+#: app/templates/packages/view.html:49
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
 msgstr "Minetest %(min)s - %(max)s"
 
-#: app/templates/packages/view.html:50
+#: app/templates/packages/view.html:51
 #, python-format
 msgid "For Minetest %(min)s and above"
 msgstr "Для Minetest %(min)s і вище"
 
-#: app/templates/packages/view.html:52
+#: app/templates/packages/view.html:53
 #, python-format
 msgid "Minetest %(max)s and below"
 msgstr "Minetest %(max)s і нижче"
 
-#: app/templates/packages/view.html:62
+#: app/templates/packages/view.html:63
 msgid "How do I install this?"
 msgstr "Як встановити це?"
 
-#: app/templates/packages/view.html:68
+#: app/templates/packages/view.html:69
 msgid "No downloads available"
 msgstr "Завантаження недоступне."
 
-#: app/templates/packages/view.html:75
+#: app/templates/packages/view.html:76
 msgid "Non-free code and media"
 msgstr "Не вільний код і мультимедія"
 
-#: app/templates/packages/view.html:77
+#: app/templates/packages/view.html:78
 msgid "Non-free code"
 msgstr "Не вільний код"
 
-#: app/templates/packages/view.html:79
+#: app/templates/packages/view.html:80
 msgid "Non-free media"
 msgstr "Не вільні мультимедія"
 
-#: app/templates/packages/view.html:93 app/templates/threads/view.html:104
+#: app/templates/packages/view.html:94 app/templates/threads/view.html:104
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
@@ -3286,166 +3377,166 @@ msgstr ""
 "Цю тему бачать лише її автор, супровідники пакунків, користувачі рангу "
 "Approver або вище та @згадані користувачі."
 
-#: app/templates/packages/view.html:162
-msgid "Work in Progress"
-msgstr "Робота в процесі"
-
-#: app/templates/packages/view.html:183 app/templates/users/profile.html:242
+#: app/templates/packages/view.html:184 app/templates/users/profile.html:242
 msgid "Downloads"
 msgstr "Завантаження"
 
-#: app/templates/packages/view.html:206 app/templates/users/profile.html:95
+#: app/templates/packages/view.html:207 app/templates/users/profile.html:95
 msgid "Website"
 msgstr "Вебсайт"
 
-#: app/templates/packages/view.html:218 app/templates/users/profile.html:77
+#: app/templates/packages/view.html:219 app/templates/users/profile.html:77
 msgid "Forums"
 msgstr "Форуми"
 
-#: app/templates/packages/view.html:224
+#: app/templates/packages/view.html:225
 msgid "Issue Tracker"
 msgstr "Відстежувач помилок"
 
-#: app/templates/packages/view.html:303
+#: app/templates/packages/view.html:231
+msgid "Translate"
+msgstr ""
+
+#: app/templates/packages/view.html:310
 msgid "Awaiting review"
 msgstr "Очікує на розгляд"
 
-#: app/templates/packages/view.html:333 app/templates/threads/view.html:77
+#: app/templates/packages/view.html:340 app/templates/threads/view.html:77
 msgid "Edit Review"
 msgstr "Редагувати відгук"
 
-#: app/templates/packages/view.html:338
+#: app/templates/packages/view.html:345
 msgid "You can't review your own package."
 msgstr "Ви не можете перевірити власний пакунок!"
 
-#: app/templates/packages/view.html:348
+#: app/templates/packages/view.html:355
 msgid "Package needs to be approved before it can be reviewed."
 msgstr "Пакет має бути схвалений, перш ніж його можна буде переглянути."
 
-#: app/templates/packages/view.html:359
+#: app/templates/packages/view.html:366
 msgid "Used By"
 msgstr "Використано"
 
-#: app/templates/packages/view.html:365
+#: app/templates/packages/view.html:372
 msgid "Content"
 msgstr "Вміст"
 
-#: app/templates/packages/view.html:367 app/templates/packages/view.html:437
+#: app/templates/packages/view.html:374 app/templates/packages/view.html:444
 msgid "View content for game"
 msgstr "Переглянути вміст для гри"
 
-#: app/templates/packages/view.html:381
+#: app/templates/packages/view.html:388
 msgid "Favorite"
 msgstr ""
 
-#: app/templates/packages/view.html:387
+#: app/templates/packages/view.html:394
 msgid "Add to collection..."
 msgstr ""
 
-#: app/templates/packages/view.html:397
+#: app/templates/packages/view.html:404
 msgid "Package may be outdated"
 msgstr "Пакет може бути застарілим"
 
-#: app/templates/packages/view.html:404
+#: app/templates/packages/view.html:411
 msgid "Only visible to the author and Editors."
 msgstr "Видимі лише автору та редакторам."
 
-#: app/templates/packages/view.html:421
+#: app/templates/packages/view.html:428
 msgid "Warning"
 msgstr "Попередження"
 
-#: app/templates/packages/view.html:427
+#: app/templates/packages/view.html:434
 msgid "Like this package? Help support its development by making a donation"
 msgstr ""
 "Подобається цей пакет? Допоможіть підтримати його розвиток, зробивши "
 "пожертву"
 
-#: app/templates/packages/view.html:430
+#: app/templates/packages/view.html:437
 msgid "Donate now"
 msgstr "Пожертвувати зараз"
 
-#: app/templates/packages/view.html:442
+#: app/templates/packages/view.html:449
 msgid "Dependencies"
 msgstr "Залежить від:"
 
-#: app/templates/packages/view.html:462
+#: app/templates/packages/view.html:469
 msgid "No required dependencies"
 msgstr "Немає необхідних залежностей"
 
-#: app/templates/packages/view.html:468
+#: app/templates/packages/view.html:475
 msgid "Optional"
 msgstr "Необов'язково"
 
-#: app/templates/packages/view.html:501
+#: app/templates/packages/view.html:508
 msgid "Compatible Games"
 msgstr "Сумісні ігри"
 
-#: app/templates/packages/view.html:506 app/templates/packages/view.html:526
+#: app/templates/packages/view.html:513 app/templates/packages/view.html:533
 msgid "No specific game required"
 msgstr ""
 
-#: app/templates/packages/view.html:509
+#: app/templates/packages/view.html:516
 msgid "Tested with:"
 msgstr ""
 
-#: app/templates/packages/view.html:531
+#: app/templates/packages/view.html:538
 msgid "Is the above correct?"
 msgstr ""
 
-#: app/templates/packages/view.html:532
+#: app/templates/packages/view.html:539
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
 
-#: app/templates/packages/view.html:544
+#: app/templates/packages/view.html:551
 msgid "Does not work with:"
 msgstr ""
 
-#: app/templates/packages/view.html:561
+#: app/templates/packages/view.html:568
 msgid "This is an experimental feature."
 msgstr "Це експериментальна функція."
 
-#: app/templates/packages/view.html:562
+#: app/templates/packages/view.html:569
 msgid "Supported games are determined by an algorithm, and may not be correct."
 msgstr "Підтримувані ігри визначаються алгоритмом і можуть бути некоректними."
 
-#: app/templates/packages/view.html:572
+#: app/templates/packages/view.html:579
 msgid "Please specify compatible games"
 msgstr "Будь ласка, вкажіть сумісні ігри"
 
-#: app/templates/packages/view.html:578
+#: app/templates/packages/view.html:585
 msgid "Information"
 msgstr "Інформація"
 
-#: app/templates/packages/view.html:584
+#: app/templates/packages/view.html:591
 msgid "Technical Name"
 msgstr "Технічна назва"
 
-#: app/templates/packages/view.html:593
+#: app/templates/packages/view.html:607
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s для коду,<br>%(media_license)s для медіа."
 
-#: app/templates/packages/view.html:601
+#: app/templates/packages/view.html:615
 msgid "Unknown"
 msgstr "Невідомо"
 
-#: app/templates/packages/view.html:603
+#: app/templates/packages/view.html:617
 msgid "Added"
 msgstr "Додано"
 
-#: app/templates/packages/view.html:617
+#: app/templates/packages/view.html:631
 msgid "Remove myself"
 msgstr "Видалити себе"
 
-#: app/templates/packages/view.html:622
+#: app/templates/packages/view.html:636
 msgid "Provides"
 msgstr "Забезпечує"
 
-#: app/templates/packages/view.html:644
+#: app/templates/packages/view.html:658
 msgid "More"
 msgstr "Більше"
 
-#: app/templates/packages/view.html:673
+#: app/templates/packages/view.html:687
 msgid "See audit log"
 msgstr "Дивіться журнал аудиту"
 
@@ -4731,3 +4822,16 @@ msgstr ""
 
 #~ msgid "a PNG or JPG image file"
 #~ msgstr "файл зображення PNG або JPG"
+
+#~ msgid "License Editor"
+#~ msgstr "Редактор ліцензії"
+
+#~ msgid "Restore Package"
+#~ msgstr "Відновити пакунок"
+
+#~ msgid "Tag Editor"
+#~ msgstr "Редактор міток"
+
+#~ msgid "Create Tag"
+#~ msgstr "Створити мітку"
+
