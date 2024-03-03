@@ -18,7 +18,7 @@ from datetime import datetime as dt
 from urllib.parse import urlparse
 
 from flask import request, has_request_context
-from flask_babel import format_timedelta, gettext
+from flask_babel import format_timedelta, gettext, get_locale
 from flask_login import current_user
 from markupsafe import Markup
 
@@ -34,7 +34,7 @@ def inject_misc():
 	hide_nonfree = False
 	if has_request_context():
 		hide_nonfree = request.cookies.get("hide_nonfree") == "1"
-	return dict(debug=app.debug, hide_nonfree=hide_nonfree)
+	return dict(debug=app.debug, hide_nonfree=hide_nonfree, locale=get_locale())
 
 
 @app.context_processor

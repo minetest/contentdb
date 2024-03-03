@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block title -%}
+	{{ _("Find packages to translate") }}
+{%- endblock %}
+
+{% block description -%}
+	{{ _("Help make Minetest more accessible by translating packages into other languages.") }}
+{% endblock %}
+
+{% macro render_packages(packages) %}
+	<ul class="list-group">
+		{% for package in packages %}
+			<li class="list-group-item">
+				<div class="row">
+					<div class="col-sm-auto text-muted" style="min-width: 250px;">
+						<a href="{{ package.get_url('packages.view') }}">
+							<img
+								class="img-fluid"
+								style="max-height: 22px; max-width: 22px;"
+								src="{{ package.get_thumb_or_placeholder() }}" />
+
+							{% set title %}
+								<strong>{{ package.title }}</strong>
+							{% endset %}
+
+							<span class="ps-2">
+								{{ _("%(title)s by %(author)s", title=title, author=package.author.display_name) }}
+							</span>
+						</a>
+					</div>
+
+					<div class="col-sm">
+					</div>
+
+					<div class="col-sm-auto">
+						<a href="{{ package.get_url('packages.view') }}" class="btn btn-sm btn-secondary me-1">
+							{{ _("View package") }}
+						</a>
+						{% if package.translation_url %}
+							<a href="{{ package.translation_url }}" class="btn btn-sm btn-primary" rel="ugc">
+								<i class="fas fa-language me-1"></i>
+								{{ _("Translate") }}
+							</a>
+						{% elif package.repo %}
+							<a href="{{ package.repo }}" class="btn btn-sm btn-primary" rel="ugc">
+								<i class="fas fa-code me-1"></i>
+								{{ _("Source") }}
+							</a>
+						{% endif %}
+					</div>
+				</div>
+			</li>
+		{% else %}
+			<li class="list-group-item text-muted">
+				{{ _("No packages available") }}
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}
+
+
+{% block content %}
+	<h1>{{ self.title() }}</h1>
+	<p class="lead">
+		{{ self.description() }}
+	</p>
+
+	<h2 id="contentdb">{{ _("ContentDB") }}</h2>
+	<p>
+		<a href="https://hosted.weblate.org/projects/minetest/contentdb/" class="btn btn-primary">
+			{{ _("Help translate ContentDB") }}
+		</a>
+	</p>
+
+	<h2 id="packages-that-support-translation">{{ _("Packages that support translation") }}</h2>
+	{% if locale and locale.language != "en" %}
+		<p class="mb-4">
+			<a href="{{ url_set_query(_toggle={ 'has_lang': locale.language }) }}"
+					class="btn {% if locale.language in has_langs %}btn-primary{% else %}btn-secondary{% endif %} me-2">
+				{{ _("Only show packages with %(lang)s translation", lang=locale.get_language_name(locale)) }}
+			</a>
+			<a href="{{ url_set_query(_toggle={ 'not_lang': locale.language }) }}"
+					class="btn {% if locale.language in not_langs %}btn-primary{% else %}btn-secondary{% endif %}">
+				{{ _("Hide packages with %(lang)s translation", lang=locale.get_language_name(locale)) }}
+			</a>
+		</p>
+	{% endif %}
+	{{ render_packages(supports_translation) }}
+{% endblock %}

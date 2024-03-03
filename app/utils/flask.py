@@ -87,7 +87,15 @@ def url_set_query(**kwargs):
 	args = MultiDict(request.args)
 
 	for key, value in kwargs.items():
-		if key == "_add":
+		if key == "_toggle":
+			for key2, value_to_add in value.items():
+				values = set(args.getlist(key2))
+				if value_to_add in values:
+					values.discard(value_to_add)
+				else:
+					values.add(value_to_add)
+				args.setlist(key2, list(values))
+		elif key == "_add":
 			for key2, value_to_add in value.items():
 				values = set(args.getlist(key2))
 				values.add(value_to_add)
