@@ -242,7 +242,8 @@ def delete_release(package, id):
 	db.session.delete(release)
 	db.session.commit()
 
-	os.remove(release.file_path)
+	if release.file_path and os.path.isfile(release.file_path):
+		os.remove(release.file_path)
 
 	return redirect(package.get_url("packages.view"))
 

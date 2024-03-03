@@ -351,7 +351,8 @@ def delete_release(token: APIToken, package: Package, id: int):
 	db.session.delete(release)
 	db.session.commit()
 
-	os.remove(release.file_path)
+	if release.file_path and os.path.isfile(release.file_path):
+		os.remove(release.file_path)
 
 	return jsonify({"success": True})
 
