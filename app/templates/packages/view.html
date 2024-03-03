@@ -202,13 +202,13 @@
 						</span>
 					</a>
 					{% if package.website %}
-						<a class="btn" href="{{ package.website }}">
+						<a class="btn" href="{{ package.website }}" rel="ugc">
 							<i class="fas fa-globe-europe"></i>
 							<span class="count">{{ _("Website") }}</span>
 						</a>
 					{% endif %}
 					{% if package.repo %}
-						<a class="btn" href="{{ package.repo }}">
+						<a class="btn" href="{{ package.repo }}" rel="ugc">
 							<i class="fas fa-code"></i>
 							<span class="count">{{ _("Source") }}</span>
 						</a>
@@ -220,13 +220,13 @@
 						</a>
 					{% endif %}
 					{% if package.issueTracker %}
-						<a class="btn" href="{{ package.issueTracker }}">
+						<a class="btn" href="{{ package.issueTracker }}" rel="ugc">
 							<i class="fas fa-bug"></i>
 							<span class="count">{{ _("Issue Tracker") }}</span>
 						</a>
 					{% endif %}
 					{% if package.translation_url %}
-						<a class="btn" href="{{ package.translation_url }}">
+						<a class="btn" href="{{ package.translation_url }}" rel="ugc">
 							<i class="fas fa-language"></i>
 							<span class="count">{{ _("Translate") }}</span>
 						</a>
