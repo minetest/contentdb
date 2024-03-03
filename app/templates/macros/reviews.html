@@ -25,13 +25,13 @@
 		{% set review_anchor = "review-" + (review.id | string) %}
 		<li class="row my-2 mx-0">
 			<a id="{{ review_anchor }}"></a>
-			<div class="col-md-1 p-1">
+			<div class="col-auto p-1">
 				<a href="{{ url_for('users.profile', username=review.author.username) }}">
 					<img class="img-fluid user-photo img-thumbnail img-thumbnail-1"
 						src="{{ review.author.get_profile_pic_url() }}" loading="lazy">
 				</a>
 			</div>
-			<div class="col-md-auto ps-1 pe-3 pt-2 text-center" style=" font-size: 200%;">
+			<div class="col col-md-auto px-3 pt-1" style=" font-size: 200%;">
 				{% if review.rating > 3 %}
 					<i class="fas fa-thumbs-up" style="color:#6f6;"></i>
 				{% elif review.rating < 3 %}
@@ -42,7 +42,7 @@
 			</div>
 			{% if review.thread %}
 				{% set reply = review.thread.first_reply %}
-				<div class="col pr-0">
+				<div class="col-md pr-0">
 					<div class="card">
 						<div class="card-header">
 							<a class="author {{ review.author.rank.name }}"

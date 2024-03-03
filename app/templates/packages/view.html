@@ -175,7 +175,7 @@
 			<div class="info-row row" style="margin-top: 2rem;">
 				<div class="btn-group-horizontal col">
 					<a class="btn" href="{{ url_for('users.profile', username=package.author.username) }}" title="{{ _('Author') }}">
-						<img src="{{ package.author.get_profile_pic_url() }}" style="max-height: 1em; filter: none">
+						<img src="{{ package.author.get_profile_pic_url() }}" class="mini-user-photo">
 						<span class="count">
 							{{ package.author.display_name }}
 						</span>
