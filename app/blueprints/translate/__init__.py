@@ -16,6 +16,7 @@
 
 
 from flask import Blueprint, render_template, request
+from sqlalchemy import or_
 
 from app.models import Package, PackageState, db, PackageTranslation
 
@@ -26,7 +27,10 @@ bp = Blueprint("translate", __name__)
 def translate():
 	query = Package.query.filter(
 			Package.state == PackageState.APPROVED,
-			Package.translations.any(PackageTranslation.language_id != "en"))
+			or_(
+				Package.translation_url.is_not(None),
+				Package.translations.any(PackageTranslation.language_id != "en")
+			))
 
 	has_langs = request.args.getlist("has_lang")
 	for lang in has_langs:
