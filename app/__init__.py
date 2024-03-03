@@ -50,7 +50,7 @@ app.config["LANGUAGES"] = {
 	"tr": "Türkçe",
 	"uk": "Українська",
 	"vi": "tiếng Việt",
-	"zh_Hans": "汉语",
+	"zh_CN": "汉语",
 }
 
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
