@@ -26,6 +26,13 @@
 				{{ _("Translating content meta - lua_api.md") }}
 			</a>
 		</p>
+
+		<h3 id="template">{{ _("Translation template") }}</h3>
+		<pre><code># textdomain: {{ package.name }}
+
+{{ package.title | replace("@", "@@") | replace("=", "@=") }} =
+{{ package.short_desc | replace("@", "@@") | replace("=", "@=") }} =
+</code></pre>
 	{% else %}
 		<p>
 			{{ _("%(title)s is available in %(num)d languages.", title=package.title, num=num) }}
