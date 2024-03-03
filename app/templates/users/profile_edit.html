@@ -24,7 +24,7 @@
 		{% if user.forums_username %}
 			<form method="post" action="{{ url_for('users.user_check_forums', username=user.username) }}" class="" style="display:inline-block;">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<input type="submit" class="btn btn-primary" value="{{  _('Sync with Forums') }}" />
+				<input type="submit" class="btn btn-primary" value="{{  _('Import from forums') }}" />
 			</form>
 		{% endif %}
 		{% if user.profile_pic %}
@@ -42,6 +42,11 @@
 		{% endif %}
 	</div>
 </div>
+{% if user.forums_username %}
+	<p class="text-muted mt-3">
+		{{ _("Profile pictures should be square, at least 64x64px, and one of the following formats: jpeg, png, or webp.") }}
+	</p>
+{% endif %}
 
 <h3>{{ _("Profile Information") }}</h3>
 
