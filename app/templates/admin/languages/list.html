@@ -8,6 +8,9 @@
 	<a class="btn btn-primary float-end" href="{{ url_for('admin.create_edit_language') }}">New Language</a>
 
 	<h1>{{ _("Languages") }}</h1>
+	<p>
+		{{ at_least_one_count }} packages support at least one language other than English.
+	</p>
 
 	<div class="list-group">
 		<div class="list-group-item">
