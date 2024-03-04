@@ -21,7 +21,7 @@
 								src="{{ package.get_thumb_or_placeholder() }}" />
 
 							{% set title %}
-								<strong>{{ package.title }}</strong>
+								<strong>{{ package.get_translated(load_desc=False).title }}</strong>
 							{% endset %}
 
 							<span class="ps-2">
