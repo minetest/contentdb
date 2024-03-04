@@ -36,7 +36,7 @@ app = Flask(__name__, static_folder="public/static")
 def my_flatpage_renderer(text):
 	# Render with jinja first
 	prerendered_body = render_template_string(text)
-	return pygmented_markdown(prerendered_body)
+	return pygmented_markdown(prerendered_body, flatpages=pages)
 
 
 app.config["FLATPAGES_ROOT"] = "flatpages"
