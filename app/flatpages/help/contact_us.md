@@ -11,4 +11,4 @@ We take copyright violation and other offenses very seriously.
 
 ## Other
 
-<a href="https://rubenwardy.com/contact/" class="btn btn-primary">Contact the admin</a>
+<a href="{{ admin_contact_url }}" class="btn btn-primary">Contact the admin</a>

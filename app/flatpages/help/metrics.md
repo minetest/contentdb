@@ -9,11 +9,13 @@ and modern alerting approach".
 Prometheus Metrics can be accessed at [/metrics](/metrics), or you can view them
 on the Grafana instance below.
 
+{% if monitoring_url %}
 <p>
-    <a class="btn btn-primary" href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb">
+    <a class="btn btn-primary" href="{{ monitoring_url }}">
         View ContentDB on Grafana
     </a>
 </p>
+{% endif %}
 
 ## Metrics
 

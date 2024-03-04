@@ -12,8 +12,10 @@ ContentDB is open source software, licensed under AGPLv3.0.
 
 <a href="https://github.com/minetest/contentdb/" class="btn btn-primary me-1">Source code</a>
 <a href="https://github.com/minetest/contentdb/issues/" class="btn btn-secondary me-1">Issue tracker</a>
-<a href="https://rubenwardy.com/contact/" class="btn btn-secondary me-1">Contact admin</a>
-<a href="https://monitor.rubenwardy.com/d/3ELzFy3Wz/contentdb" class="btn btn-secondary">Stats / monitoring</a>
+<a href="{{ admin_contact_url }}" class="btn btn-secondary me-1">Contact admin</a>
+{% if monitoring_url -%}
+<a href="{{ monitoring_url }}" class="btn btn-secondary">Stats / monitoring</a>
+{%- endif %}
 
 ## Why was ContentDB created?
 

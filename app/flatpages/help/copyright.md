@@ -135,7 +135,8 @@ ContentDB editors will check packages to make sure the package page's license ma
 inside the package download, but do not investigate each piece of media or line of code.
 
 If a copyright violation is reported to us, we will unlist the package and contact the author/maintainers.
-Once the problem has been fixed, the package can be restored.
+Once the problem has been fixed, the package can be restored. Repeated copyright infringement may lead to
+permanent bans.
 
 
 ## Where can I get help?

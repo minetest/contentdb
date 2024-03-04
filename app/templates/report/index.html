@@ -13,11 +13,11 @@
 
 <p>
 	{{ _("Due to spam, we no longer accept reports from anonymous users on this form.") }}
-	{{ _("Please sign in or contact the admin in another way") }}
+	{{ _("Please sign in or contact the admin using the link below.") }}
 </p>
 <p>
 	<a href="{{ url_for('users.login') }}" class="btn btn-primary me-2">Login</a>
-	<a href="https://rubenwardy.com/contact/" class="btn btn-secondary">Contact the admin</a>
+	<a href="{{ admin_contact_url }}" class="btn btn-secondary">Contact the admin</a>
 </p>
 
 {% else %}

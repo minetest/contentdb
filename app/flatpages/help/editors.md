@@ -54,5 +54,4 @@ A simplified process for reviewing a package is as follows:
    usually incorrect.
 4. check source, etc links to make sure they work and are correct.
 5. verify that the package has license file that matches what is on the contentdb fields
-6. verify that all assets and code are licensed correctly
-7. if the above steps pass, approve the package, else request changes needed from the author
+6. if the above steps pass, approve the package, else request changes needed from the author

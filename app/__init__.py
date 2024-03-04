@@ -18,9 +18,10 @@ import datetime
 import os
 import redis
 
-from flask import redirect, url_for, render_template, flash, request, Flask, send_from_directory, make_response
+from flask import redirect, url_for, render_template, flash, request, Flask, send_from_directory, make_response, render_template_string
 from flask_babel import Babel, gettext
 from flask_flatpages import FlatPages
+from flask_flatpages.utils import pygmented_markdown
 from flask_github import GitHub
 from flask_gravatar import Gravatar
 from flask_login import logout_user, current_user, LoginManager
@@ -30,10 +31,20 @@ from flask_wtf.csrf import CSRFProtect
 from app.markdown import init_markdown, MARKDOWN_EXTENSIONS, MARKDOWN_EXTENSION_CONFIG
 
 app = Flask(__name__, static_folder="public/static")
+
+
+def my_flatpage_renderer(text):
+	# Render with jinja first
+	prerendered_body = render_template_string(text)
+	return pygmented_markdown(prerendered_body)
+
+
 app.config["FLATPAGES_ROOT"] = "flatpages"
 app.config["FLATPAGES_EXTENSION"] = ".md"
 app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = MARKDOWN_EXTENSIONS
 app.config["FLATPAGES_EXTENSION_CONFIG"] = MARKDOWN_EXTENSION_CONFIG
+app.config["FLATPAGES_HTML_RENDERER"] = my_flatpage_renderer
+
 app.config["BABEL_TRANSLATION_DIRECTORIES"] = "../translations"
 app.config["LANGUAGES"] = {
 	"en": "English",
@@ -54,6 +65,9 @@ app.config["LANGUAGES"] = {
 }
 
 app.config.from_pyfile(os.environ["FLASK_CONFIG"])
+
+if not app.config["ADMIN_CONTACT_URL"]:
+	raise Exception("Missing config property: ADMIN_CONTACT_URL")
 
 redis_client = redis.Redis.from_url(app.config["REDIS_URL"])
 
