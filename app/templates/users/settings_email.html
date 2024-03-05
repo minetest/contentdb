@@ -4,6 +4,10 @@
 	{{ _("Email and Notifications - %(username)s", username=user.username) }}
 {% endblock %}
 
+{% block scriptextra %}
+	<script src="/static/js/email_disable_all.js"></script>
+{% endblock %}
+
 {% block pane %}
 	<h2 class="mt-0">{{ _("Email and Notifications") }}</h2>
 
@@ -36,6 +40,7 @@
 
 		<p>
 			{{ _("Configure whether certain types of notifications are sent immediately, or as part of a daily digest.") }}
+			<button type="button" id="disable-all" class="btn btn-sm btn-secondary d-none ms-5">{{ _("Disable all") }}</button>
 		</p>
 
 		<table class="table">
@@ -60,7 +65,7 @@
 		</table>
 
 		<p class="mt-5">
-			{{ render_submit_field(form.submit, tabindex=280) }}
+			{{ render_submit_field(form.submit, tabindex=280, class_="btn btn-lg btn-primary") }}
 		</p>
 	</form>
 {% endblock %}
