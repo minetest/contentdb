@@ -78,6 +78,10 @@ class EditPackageReleaseForm(FlaskForm):
 @login_required
 @is_package_page
 def create_release(package):
+	if current_user.email is None:
+		flash(gettext("You must add an email address to your account and confirm it before you can manage packages"), "danger")
+		return redirect(url_for("users.email_notifications"))
+
 	if not package.check_perm(current_user, Permission.MAKE_RELEASE):
 		return redirect(package.get_url("packages.view"))
 
