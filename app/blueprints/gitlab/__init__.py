@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+import datetime
 
 from flask import Blueprint, request, jsonify
 
@@ -53,8 +54,7 @@ def webhook_impl():
 	event = json["event_name"]
 	if event == "push":
 		ref = json["after"]
-		title = ref[:5]
-
+		title = datetime.datetime.utcnow().strftime("%Y-%m-%d") + " " + ref[:5]
 		branch = json["ref"].replace("refs/heads/", "")
 		if branch not in ["master", "main"]:
 			return jsonify({"success": False,

@@ -14,6 +14,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import datetime
+
 from flask import Blueprint, abort
 from flask_babel import gettext
 
@@ -147,7 +149,7 @@ def webhook():
 	event = request.headers.get("X-GitHub-Event")
 	if event == "push":
 		ref = json["after"]
-		title = json["head_commit"]["message"].partition("\n")[0]
+		title = datetime.datetime.utcnow().strftime("%Y-%m-%d") + " " + ref[:5]
 		branch = json["ref"].replace("refs/heads/", "")
 		if branch not in [ "master", "main" ]:
 			return jsonify({ "success": False, "message": "Webhook ignored, as it's not on the master/main branch" })
