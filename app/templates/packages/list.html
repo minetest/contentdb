@@ -34,14 +34,14 @@
 						title="{{ tag.description or '' }}"
 						href="{{ url_set_query(page=1, _remove={ 'tag': tag.name }) }}">
 					{{ tag.title }}
-					<span class="badge roaded-pill bg-light text-dark ms-1">{{ count }}</span>
+					<span class="badge rounded-pill bg-light text-dark ms-1">{{ count }}</span>
 				</a>
 			{% else %}
 				<a class="btn btn-sm btn-secondary m-1" rel="nofollow"
 						title="{{ tag.description or '' }}"
 						href="{{ url_set_query(page=1, _add={ 'tag': tag.name }) }}">
 					{{ tag.title }}
-					<span class="badge roaded-pill bg-light text-dark ms-1">{{ count }}</span>
+					<span class="badge rounded-pill bg-light text-dark ms-1">{{ count }}</span>
 				</a>
 			{% endif %}
 		{% endfor %}

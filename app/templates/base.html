@@ -75,7 +75,7 @@
 											title="{{ _('Work Queue') }}">
 									{% if todo_list_count > 0 %}
 										<i class="fas fa-inbox"></i>
-										<span class="badge roaded-pill badge-notify">{{ todo_list_count }}</span>
+										<span class="badge rounded-pill badge-notify">{{ todo_list_count }}</span>
 									{% else %}
 										<i class="fas fa-inbox" ></i>
 									{% endif %}
@@ -99,11 +99,11 @@
 									<i class="fas fa-bell"></i>
 									{% set num_notifs = current_user.notifications | length %}
 									{% if num_notifs > 60 %}
-										<span class="badge roaded-pill badge-notify badge-emoji">
+										<span class="badge rounded-pill badge-notify badge-emoji">
 											😢
 										</span>
 									{% else %}
-										<span class="badge roaded-pill badge-notify">
+										<span class="badge rounded-pill badge-notify">
 											{{ num_notifs }}
 										</span>
 									{% endif %}

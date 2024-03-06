@@ -13,7 +13,7 @@ Licenses
 		{% for l in licenses %}
 			<a class="list-group-item list-group-item-action"
 					href="{{ url_for('admin.create_edit_license', name=l.name) }}">
-				<span class="float-end badge {% if l.is_foss %}bg-primary{% else %}bg-warning{% endif %} roaded-pill">
+				<span class="float-end badge {% if l.is_foss %}bg-primary{% else %}bg-warning{% endif %} rounded-pill">
 					{{ l.is_foss and "Free" or "Non-free"}}
 				</span>
 				{{ l.name }}

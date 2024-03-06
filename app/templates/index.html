@@ -169,7 +169,7 @@
 				title="{{ tag.description or '' }}"
 				href="{{ url_for('packages.list_all', tag=tag.name) }}">
 			{{ tag.title }}
-			<span class="badge roaded-pill bg-light text-dark ms-1">{{ count }}</span>
+			<span class="badge rounded-pill bg-light text-dark ms-1">{{ count }}</span>
 		</a>
 	{% endfor %}
 
