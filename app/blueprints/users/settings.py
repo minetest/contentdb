@@ -275,6 +275,9 @@ def delete(username):
 			db.session.delete(reply)
 		for thread in user.threads.all():
 			db.session.delete(thread)
+		for token in user.tokens.all():
+			db.session.delete(token)
+		user.profile_pic = None
 		user.email = None
 
 		if user.rank != UserRank.BANNED:
