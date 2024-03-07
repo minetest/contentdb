@@ -34,7 +34,7 @@ def generate_metrics():
 		return fmt.format(name=name, help=help, type=type, value=value)
 
 	def gen_labels(labels):
-		pieces = [key + "=" + str(val) for key, val in labels.items()]
+		pieces = [f"{key}=\"{val}\"" for key, val in labels.items()]
 		return ",".join(pieces)
 
 	def write_array_stat(name, help, type, data):
@@ -96,9 +96,9 @@ def generate_metrics():
 	ret += write_single_stat("contentdb_packages", "Total packages", "gauge", packages)
 	ret += write_single_stat("contentdb_users", "Number of registered users", "gauge", users)
 	ret += write_single_stat("contentdb_authors", "Number of users with packages", "gauge", authors)
-	ret += write_single_stat("contentdb_users_active_1d", "Number of daily active users", "gauge", active_users_day)
-	ret += write_single_stat("contentdb_users_active_1w", "Number of weekly active users", "gauge", active_users_week)
-	ret += write_single_stat("contentdb_users_active_1m", "Number of monthly active users", "gauge", active_users_month)
+	ret += write_single_stat("contentdb_users_active_1d", "Number of daily active registered users", "gauge", active_users_day)
+	ret += write_single_stat("contentdb_users_active_1w", "Number of weekly active registered users", "gauge", active_users_week)
+	ret += write_single_stat("contentdb_users_active_1m", "Number of monthly active registered users", "gauge", active_users_month)
 	ret += write_single_stat("contentdb_downloads", "Total downloads", "gauge", downloads)
 	ret += write_single_stat("contentdb_emails", "Number of emails sent", "counter", int(get_key("emails_sent", "0")))
 	ret += write_single_stat("contentdb_reviews", "Number of reviews", "gauge", reviews)
