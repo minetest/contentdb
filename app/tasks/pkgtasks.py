@@ -20,7 +20,7 @@ from app.tasks import celery
 
 @celery.task()
 def update_package_scores():
-	Package.query.update({ "score_downloads": Package.score_downloads * 0.95 })
+	Package.query.update({ "score_downloads": Package.score_downloads * 0.93 })
 	db.session.commit()
 
 	for package in Package.query.all():

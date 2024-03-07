@@ -19,7 +19,7 @@ score       = avg_downloads + reviews_sum;
 ## Pseudo rolling average of downloads
 
 Each package adds 1 to `avg_downloads` for each unique download,
-and then loses 5% (=1/20) of the value every day.
+and then loses 6.66% (=1/15) of the value every day.
 
 This is called a [Frecency](https://en.wikipedia.org/wiki/Frecency) heuristic,
 a measure which combines both frequency and recency.
