@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-03-03 02:54+0000\n"
-"PO-Revision-Date: 2024-02-16 11:02+0000\n"
+"PO-Revision-Date: 2024-03-07 17:01+0000\n"
 "Last-Translator: BlackImpostor <SkyBuilderOFFICAL@yandex.ru>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:123
@@ -41,7 +42,7 @@ msgstr "Дополнения"
 #: app/querybuilder.py:56
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
-msgstr ""
+msgstr "%(package_type)s для %(game_name)s"
 
 #: app/template_filters.py:90
 #, python-format
@@ -183,7 +184,7 @@ msgstr "Изменить подробности"
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/translation.html:4
 msgid "Translation"
-msgstr ""
+msgstr "Перевод"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
@@ -323,7 +324,7 @@ msgstr "Ссылка на донат"
 
 #: app/blueprints/packages/packages.py:273
 msgid "Translation URL"
-msgstr ""
+msgstr "Ссылка на Перевод"
 
 #: app/blueprints/packages/packages.py:279
 msgid "_game is not an allowed name"
@@ -370,6 +371,8 @@ msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
+"Пожалуйста, прокомментируйте в теме одобрения, чтобы редакторы знали, что вы "
+"изменили"
 
 #: app/blueprints/packages/packages.py:509
 msgid "Deleted package"
@@ -1324,7 +1327,7 @@ msgstr "Выйти"
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
 #: app/templates/packages/view.html:593
 msgid "Languages"
-msgstr ""
+msgstr "Языки"
 
 #: app/templates/base.html:202 app/templates/translate/index.html:72
 msgid "Help translate ContentDB"
@@ -1374,7 +1377,7 @@ msgstr "Поддерживающие дополнения"
 
 #: app/templates/base.html:258
 msgid "Translate Packages"
-msgstr ""
+msgstr "Переводы Пакетов"
 
 #: app/templates/base.html:259
 msgid "Source Code"
@@ -1382,11 +1385,11 @@ msgstr "Исходный код"
 
 #: app/templates/base.html:265
 msgid "Show non-free packages"
-msgstr ""
+msgstr "Показывать платные пакеты"
 
 #: app/templates/base.html:267
 msgid "Hide non-free packages"
-msgstr ""
+msgstr "Скрыть платные пакеты"
 
 #: app/templates/index.html:4
 msgid "Welcome"
@@ -1475,7 +1478,7 @@ msgstr "Самые просматриваемые"
 
 #: app/templates/index.html:191
 msgid "All reviews"
-msgstr ""
+msgstr "Все отзывы"
 
 #: app/templates/index.html:193
 msgid "Recent Positive Reviews"
@@ -1523,11 +1526,11 @@ msgstr "Нет результатов"
 
 #: app/templates/admin/languages/list.html:19
 msgid "Id"
-msgstr ""
+msgstr "Идентификатор"
 
 #: app/templates/admin/languages/list.html:33
 msgid "Has ContentDB translation?"
-msgstr ""
+msgstr "Есть ли в ContentDB перевод?"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
@@ -2599,6 +2602,8 @@ msgstr ""
 #: app/templates/packages/create_edit.html:122
 msgid "How can users translate your package? ie: weblate URL or a help page"
 msgstr ""
+"Как пользователи могут перевести ваш пакет? например: веб-адрес или страница "
+"справки"
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2638,7 +2643,7 @@ msgstr "Моды и пакеты текстур для %(title)s"
 #: app/templates/packages/game_hub.html:34
 #, python-format
 msgid "Search for packages for %(title)s"
-msgstr ""
+msgstr "Поиск пакеты с названием %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
@@ -3306,33 +3311,37 @@ msgid ""
 "To provide translations for your %(type)s, you need to create .tr files "
 "and upload a new release."
 msgstr ""
+"Чтобы предоставить переводы для ваших %(type)s, вам необходимо создать файлы "
+".tr и загрузить новую версию."
 
 #: app/templates/packages/translation.html:19
 msgid ""
 "For information on how to do this, see the modding book chapter and "
 "lua_api.md"
 msgstr ""
+"Информацию о том, как это сделать, смотрите в главе книги по моддингу и "
+"lua_api.md"
 
 #: app/templates/packages/translation.html:23
 msgid "Translation - Minetest Modding Book"
-msgstr ""
+msgstr "Перевод - Minetest Modding Book"
 
 #: app/templates/packages/translation.html:26
 msgid "Translating content meta - lua_api.md"
-msgstr ""
+msgstr "Перевод метаданных контента - lua_api.md"
 
 #: app/templates/packages/translation.html:31
 #, python-format
 msgid "%(title)s is available in %(num)d languages."
-msgstr ""
+msgstr "%(title)s доступен на %(num)d языках."
 
 #: app/templates/packages/translation.html:32
 msgid "ContentDB reads translations from locale files (.tr) in your package."
-msgstr ""
+msgstr "ContentDB считывает переводы из файлов локали (.tr) в вашем пакете."
 
 #: app/templates/packages/translation.html:39
 msgid "Language"
-msgstr ""
+msgstr "Язык"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -3440,7 +3449,7 @@ msgstr "Трекер проблем"
 
 #: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
-msgstr ""
+msgstr "Перевод"
 
 #: app/templates/packages/view.html:310
 msgid "Awaiting review"
@@ -4019,31 +4028,32 @@ msgstr "Поздравляем! У вас нет ни одной темы, ко�
 
 #: app/templates/translate/index.html:4
 msgid "Find packages to translate"
-msgstr ""
+msgstr "Найти пакеты чтобы перевести"
 
 #: app/templates/translate/index.html:8
 msgid ""
 "Help make Minetest more accessible by translating packages into other "
 "languages."
 msgstr ""
+"Помогите сделать Minetest более доступным, переведя пакеты на другие языки."
 
 #: app/templates/translate/index.html:69
 msgid "ContentDB"
-msgstr ""
+msgstr "ContentDB"
 
 #: app/templates/translate/index.html:76
 msgid "Packages that support translation"
-msgstr ""
+msgstr "Пакеты, поддерживающие перевод"
 
 #: app/templates/translate/index.html:81
 #, python-format
 msgid "Only show packages with %(lang)s translation"
-msgstr ""
+msgstr "Показывать только пакеты с языком %(lang)s"
 
 #: app/templates/translate/index.html:85
 #, python-format
 msgid "Hide packages with %(lang)s translation"
-msgstr ""
+msgstr "Скрыть пакеты с языком %(lang)s"
 
 #: app/templates/users/account.html:4
 #, python-format
@@ -5017,4 +5027,3 @@ msgstr ""
 
 #~ msgid "Create Tag"
 #~ msgstr "Создать метку"
-
