@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-03-03 02:54+0000\n"
-"PO-Revision-Date: 2024-03-03 17:21+0000\n"
-"Last-Translator: Linerly <linerly@proton.me>\n"
+"PO-Revision-Date: 2024-03-08 23:01+0000\n"
+"Last-Translator: JUST PLAYING <aryadhisuma@gmail.com>\n"
 "Language-Team: Indonesian <https://hosted.weblate.org/projects/minetest/"
 "contentdb/id/>\n"
 "Language: id\n"
@@ -41,7 +41,7 @@ msgstr "Paket"
 #: app/querybuilder.py:56
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
-msgstr "%(game_name)s untuk %(game_name)s"
+msgstr "%(package_type)s untuk %(game_name)s"
 
 #: app/template_filters.py:90
 #, python-format
@@ -229,11 +229,11 @@ msgstr "Permainan yang Didukung"
 
 #: app/blueprints/packages/packages.py:177
 msgid "Error: Another package already uses this forum topic!"
-msgstr "Galat: Paket lain telah menggunakan topik forum ini!"
+msgstr "Kesalahan: Paket lain telah menggunakan topik forum ini!"
 
 #: app/blueprints/packages/packages.py:183
 msgid "Error: Forum topic author doesn't match package author."
-msgstr "Galat: Pembuat topik forum tidak cocok dengan pembuat paket."
+msgstr "Kesalahan: Pembuat topik forum tidak cocok dengan pembuat paket."
 
 #: app/blueprints/packages/packages.py:186
 msgid ""
@@ -264,7 +264,7 @@ msgstr "Nama (Teknis)"
 #: app/blueprints/packages/packages.py:634
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr "Hanya huruf kecil (a-z), angka (0-9), dan garis bawah (_)"
+msgstr "Hanya huruf kecil (a-z), angka (0-9), dan garis bawah (_) saja"
 
 #: app/blueprints/packages/packages.py:256
 msgid "Short Description (Plaintext)"
@@ -414,7 +414,7 @@ msgstr "Permainan yang tidak didukung"
 #: app/blueprints/packages/packages.py:705
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
-"Mendukung semua permainan (kecuali dinyatakan)/tidak bergantung pada "
+"Mendukung semua permainan (kecuali dinyatakan) / tidak bergantung pada "
 "permainan"
 
 #: app/blueprints/packages/packages.py:721
@@ -440,7 +440,7 @@ msgstr "Unggah Berkas"
 
 #: app/blueprints/packages/releases.py:56
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr "Referensi Git (hash commit, branch, atau tag)"
+msgstr "Referensi Git (ie: komit hash, cabang, atau label)"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:70
@@ -499,7 +499,7 @@ msgstr "Pemicu"
 
 #: app/blueprints/packages/releases.py:253
 msgid "New Commit"
-msgstr "Commit Baru"
+msgstr "Komit Baru"
 
 #: app/blueprints/packages/releases.py:254 app/templates/admin/tags/list.html:8
 msgid "New Tag"
@@ -507,7 +507,7 @@ msgstr "Label Baru"
 
 #: app/blueprints/packages/releases.py:256
 msgid "Branch name"
-msgstr "Nama branch"
+msgstr "Nama Cabang"
 
 #: app/blueprints/packages/releases.py:257
 #: app/templates/packages/update_config.html:38
@@ -886,7 +886,7 @@ msgstr "Pengguna tersebut telah diklaim!"
 #: app/blueprints/users/claim.py:86
 #, python-format
 msgid "Error whilst attempting to access forums: %(message)s"
-msgstr "Galat ketika mencoba mengakses forum: %(message)s"
+msgstr "Terjadi kesalahan ketika mencoba mengakses forum: %(message)s"
 
 #: app/blueprints/users/claim.py:90
 msgid "Unable to get forum signature - does the user exist?"
@@ -973,19 +973,19 @@ msgstr "Medali pertama ada di 50 ribu."
 
 #: app/blueprints/users/profile.py:198
 msgid ">300k downloads"
-msgstr ">300 ribu unduhan"
+msgstr "&gt;300 ribu unduhan"
 
 #: app/blueprints/users/profile.py:201
 msgid ">100k downloads"
-msgstr ">100 ribu unduhan"
+msgstr "&gt;100 ribu unduhan"
 
 #: app/blueprints/users/profile.py:204
 msgid ">75k downloads"
-msgstr ">75 ribu unduhan"
+msgstr "&gt;75 ribu unduhan"
 
 #: app/blueprints/users/profile.py:207
 msgid ">50k downloads"
-msgstr ">50 ribu unduhan"
+msgstr "&gt;50 ribu unduhan"
 
 #: app/blueprints/users/profile.py:208
 #, python-format
@@ -1127,7 +1127,7 @@ msgstr ""
 
 #: app/logic/releases.py:74
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
-msgstr "Hash commit tidak sah. Ia harus berupa 40 karakter heksadesimal"
+msgstr "Komit hash tidak sah. Ia harus berupa 40 karakter heksadesimal"
 
 #: app/logic/screenshots.py:32
 msgid "Too many requests, please wait before trying again"
@@ -2462,12 +2462,12 @@ msgstr ""
 #: app/templates/packages/release_new.html:50
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
-msgstr "Kosongkan untuk menggunakan branch bawaan"
+msgstr "Kosongkan untuk menggunakan cabang bawaan"
 
 #: app/templates/packages/bulk_update_conf.html:29
 #: app/templates/packages/update_config.html:35
 msgid "Currently, the branch name field is only used by the New Commit trigger."
-msgstr "Saat ini, kolom nama branch hanya digunakan oleh pemicu New Commit."
+msgstr "Saat ini, kolom nama cabang hanya digunakan oleh pemicu komit baru."
 
 #: app/templates/packages/create_edit.html:5
 #, python-format
@@ -2833,7 +2833,7 @@ msgstr "Sunting rilis"
 
 #: app/templates/packages/release_edit.html:27
 msgid "Commit Hash"
-msgstr "Hash Commit"
+msgstr "Komit Hash"
 
 #: app/templates/packages/release_edit.html:32
 msgid "view task"
@@ -2888,8 +2888,8 @@ msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
 msgstr ""
-"Anda dapat <a href='/help/package_config/'>mengaturnya secara "
-"otomatis</a> dalam berkas .conf paket Anda."
+"Anda dapat <a href=\"/help/package_config/\">mengaturnya secara otomatis</a> "
+"dalam berkas .conf paket Anda."
 
 #: app/templates/packages/release_edit.html:79
 msgid "Delete Release"
@@ -2939,8 +2939,8 @@ msgid ""
 "You can create releases automatically when you push commits or tags to "
 "your repository."
 msgstr ""
-"Anda dapat membuat rilis secara otomatis ketika Anda menge-push commit "
-"atau tag ke repositori Anda."
+"Anda dapat membuat rilis secara otomatis ketika Anda mendorong komit atau "
+"label ke repositori Anda."
 
 #: app/templates/packages/release_new.html:28
 #: app/templates/packages/release_wizard.html:69
@@ -2953,8 +2953,8 @@ msgid ""
 "Using Git would allow you to create releases automatically when you push "
 "code or tags."
 msgstr ""
-"Dengan Git, Anda dapat membuat rilis secara otomatis ketika Anda push "
-"kode atau tag."
+"Dengan Git, Anda dapat membuat rilis secara otomatis ketika Anda mendorong "
+"kode atau label."
 
 #: app/templates/packages/release_new.html:40
 msgid "1. Name release"
@@ -2974,8 +2974,8 @@ msgid ""
 "and Releases Guide</a> for\n"
 "\t\t\ttips on customising releases."
 msgstr ""
-"Lihat <a href='/help/package_config/'>Konfigurasi Paket and Panduan "
-"Rilis</a> untuk tip dalam\n"
+"Lihat <a href=\"/help/package_config/\">Konfigurasi Paket dan Panduan Rilis</"
+"a> untuk tip dalam\n"
 "\t\t\tmenyesuaikan rilis."
 
 #: app/templates/packages/release_new.html:61
@@ -2988,8 +2988,8 @@ msgid ""
 "automatically</a>,\n"
 "\t\t\twhich will override your selection."
 msgstr ""
-"Berkas .conf dari paket Anda dapat <a "
-"href='/help/package_config/'>mengaturnya secara otomatis</a>\n"
+"Berkas .conf dari paket Anda dapat <a href=\"/help/package_config/\""
+">mengaturnya secara otomatis</a>,\n"
 "\t\t\tyang akan menimpa pilihan Anda."
 
 #: app/templates/packages/release_wizard.html:4
@@ -3934,7 +3934,7 @@ msgid ""
 "'Update Settings'."
 msgstr ""
 "Alih-alih menandai paket sebagai usang, Anda dapat membuat rilis secara "
-"otomatis ketika New Commit atau New Tag di-push ke Git dengan mengeklik "
+"otomatis ketika komit baru atau label baru didorong ke Git dengan mengeklik "
 "'Pengaturan Pembaruan'."
 
 #: app/templates/todo/user.html:60
@@ -4206,8 +4206,8 @@ msgid ""
 "Log into the forum and <a "
 "href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Masuk log ke forum dan <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>lakukan di sini</a>."
+"Masuk ke forum dan <a href=\"https://forum.minetest.net/ucp.php?i=173\""
+">lakukan di sini</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -4227,9 +4227,8 @@ msgid ""
 "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
 "Control Panel > Profile > Edit signature</a>"
 msgstr ""
-"Pergi ke <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
-"Control Panel > Profile > Edit signature</a>"
+"Pergi ke <a href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode="
+"signature\">Panel Kontrol Pengguna &gt; Profil &gt; Edit tanda tangan</a>"
 
 #: app/templates/users/claim_forums.html:75
 msgid "Paste this into your signature:"
