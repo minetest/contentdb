@@ -85,7 +85,7 @@
 		<section class="my-4 pb-3" style="">
 			<div class="container">
 				{% from "macros/package_approval.html" import render_banners %}
-				{{ render_banners(package, current_user, topic_error, topic_error_lvl, conflicting_modnames) }}
+				{{ render_banners(package, current_user, validation) }}
 
 				{% if review_thread and review_thread.check_perm(current_user, "SEE_THREAD") %}
 					<h2>{% if review_thread.private %}&#x1f512;{% endif %} {{ review_thread.title }}</h2>
@@ -532,7 +532,7 @@
 							<p>
 								{{ _("No specific game required") }}
 							</p>
-							{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
+							{% if package.state == package.state.APPROVED and package.check_perm(current_user, "EDIT_PACKAGE") %}
 								<div class="alert alert-warning">
 									<p>
 										{{ _("Is the above correct?") }}

@@ -1,4 +1,4 @@
-{% macro render_banners(package, current_user, topic_error, topic_error_lvl, conflicting_modnames) -%}
+{% macro render_banners(package, current_user, validation) -%}
 
 <div class="row mb-4">
 	<span class="col">
@@ -13,98 +13,42 @@
 	{% endfor %}
 </div>
 
-{% set level = "warning" %}
-{% if package.releases.filter_by(task_id=None).count() == 0 %}
-	{% set message %}
-		{% if package.check_perm(current_user, "MAKE_RELEASE") %}
-			{% if package.update_config %}
-				<a class="btn btn-sm btn-warning float-end" href="{{ package.get_url('packages.create_release') }}">
-					{{ _("Create release") }}
-				</a>
-			{% else %}
-				<a class="btn btn-sm btn-warning float-end" href="{{ package.get_url('packages.setup_releases') }}">
-					{{ _("Set up releases") }}
-				</a>
-			{% endif %}
-
-			{% if package.releases.count() == 0 %}
-				{{ _("You need to create a release before this package can be approved.") }}
-			{% else %}
-				{{ _("Release is still importing, or has an error.") }}
-			{% endif %}
-		{% else %}
-			{{ _("A release is required before this package can be approved.") }}
-		{% endif %}
-	{% endset %}
-
-{% elif (package.type == package.type.GAME or package.type == package.type.TXP) and package.screenshots.count() == 0 %}
-	{% set message = _("You need to add at least one screenshot.") %}
-
-{% elif package.get_missing_hard_dependencies_query().count() > 0 %}
-	{% set deps = package.get_missing_hard_dependencies() | join(", ") %}
-	{% set message = _("The following hard dependencies need to be added to ContentDB first: %(deps)s", deps=deps) %}
-
-{% elif topic_error_lvl == "danger" %}
-{% elif package.state == package.state.READY_FOR_REVIEW and ("Other" in package.license.name or "Other" in package.media_license.name) %}
-	{% set message = _("Please wait for the license to be added to CDB.") %}
-
-{% else %}
-	{% set level = "info" %}
-	{% set message %}
-		{% if package.screenshots.count() == 0 %}
-			<b>
-				{{ _("You should add at least one screenshot.") }}
-			</b><br />
-		{% endif %}
-
-		{% if package.state == package.state.READY_FOR_REVIEW %}
-			{% if not package.get_download_release() %}
-				{{ _("Please wait for the release to be approved.") }}
-			{% elif package.check_perm(current_user, "APPROVE_NEW") %}
-				{{ _("You can now approve this package if you're ready.") }}
-			{% else %}
-				{{ _("Please wait for the package to be approved.") }}
-			{% endif %}
-		{% else %}
-			{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
-				{{ _("You can now submit this package for approval if you're ready.") }}
-			{% else %}
-				{{ _("This package can be submitted for approval when ready.") }}
-			{% endif %}
-		{% endif %}
-	{% endset %}
-{% endif %}
-
-{% if message %}
-	<div class="alert alert-{{ level }}">
-		<span class="icon_message"></span>
-
-		{{ message | safe }}
-
-		<div style="clear: both;"></div>
+{% for note in validation %}
+	<div class="alert alert-{{ note.level }}">
+		<div class="row g-3">
+			<div class="col-md">
+				{{ note.message }}
+			</div>
+			<div class="col-md-auto">
+				{% for button in note.buttons %}
+					<a href="{{ button[0] }}" class="btn btn-sm btn-{{ note.level }} ms-2">
+						{{ button[1] }}
+					</a>
+				{% endfor %}
+			</div>
+		</div>
 	</div>
-{% endif %}
+{% endfor %}
 
-{% if topic_error %}
-	<div class="alert alert-{{ topic_error_lvl }}">
-		<span class="icon_message"></span>
-		{{ topic_error | safe }}
-		<div style="clear: both;"></div>
-	</div>
-{% endif %}
-
-{% if conflicting_modnames %}
-	<div class="alert alert-warning">
-		<a class="float-end btn btn-sm btn-warning" href="{{ package.get_url('packages.similar') }}">
-			More info
-		</a>
-		{% if conflicting_modnames | length > 4 %}
-			{{ _("Please make sure that this package has the right to the names it uses.") }}
+<p class="alert alert-secondary">
+	{% if package.state == package.state.READY_FOR_REVIEW %}
+		{% if not package.get_download_release() %}
+			{{ _("Please wait for the release to be approved.") }}
+		{% elif package.check_perm(current_user, "APPROVE_NEW") %}
+			{{ _("You can now approve this package if you're ready.") }}
 		{% else %}
-			{{ _("Please make sure that this package has the right to the names %(names)s", names=conflicting_modnames | join(", ")) }}.
+			{{ _("Please wait for the package to be approved.") }}
 		{% endif %}
-	</div>
-{% endif %}
+	{% elif package.state.READY_FOR_REVIEW in package.get_next_states(current_user) %}
+		{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
+			{{ _("You can now submit this package for approval if you're ready.") }}
+		{% else %}
+			{{ _("This package can be submitted for approval when ready.") }}
+		{% endif %}
+	{% else %}
+		{{ _("You need to fix the above errors before you can submit for review") }}
+	{% endif %}
+</p>
 
 {% if not package.review_thread and (package.author == current_user or package.check_perm(current_user, "APPROVE_NEW")) %}
 	<div class="alert alert-secondary">
