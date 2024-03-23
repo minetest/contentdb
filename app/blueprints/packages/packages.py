@@ -45,6 +45,7 @@ from app.models import Package, Tag, db, User, Tags, PackageState, Permission, P
 	PackageDailyStats, Collection
 from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, add_audit_log, get_package_by_info, \
 	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options, post_to_approval_thread
+from app.logic.package_approval import validate_package_for_approval, can_move_to_state
 
 
 @bp.route("/packages/")
@@ -133,26 +134,6 @@ def view(package):
 	if not package.check_perm(current_user, Permission.VIEW_PACKAGE):
 		return render_template("packages/gone.html", package=package), 403
 
-	show_similar = not package.approved and (
-			current_user in package.maintainers or
-				package.check_perm(current_user, Permission.APPROVE_NEW))
-
-	conflicting_modnames = None
-	if show_similar and package.type != PackageType.TXP:
-		conflicting_modnames = db.session.query(MetaPackage.name) \
-				.filter(MetaPackage.id.in_([ mp.id for mp in package.provides ])) \
-				.filter(MetaPackage.packages.any(and_(Package.id != package.id, Package.state == PackageState.APPROVED))) \
-				.all()
-
-		conflicting_modnames += db.session.query(ForumTopic.name) \
-				.filter(ForumTopic.name.in_([ mp.name for mp in package.provides ])) \
-				.filter(ForumTopic.topic_id != package.forums) \
-				.filter(~ db.exists().where(Package.forums==ForumTopic.topic_id)) \
-				.order_by(db.asc(ForumTopic.name), db.asc(ForumTopic.title)) \
-				.all()
-
-		conflicting_modnames = set([x[0] for x in conflicting_modnames])
-
 	packages_uses = None
 	if package.type == PackageType.MOD:
 		packages_uses = Package.query.filter(
@@ -169,24 +150,6 @@ def view(package):
 	if review_thread is not None and not review_thread.check_perm(current_user, Permission.SEE_THREAD):
 		review_thread = None
 
-	topic_error = None
-	topic_error_lvl = "warning"
-	if package.state != PackageState.APPROVED and package.forums is not None:
-		errors = []
-		if Package.query.filter(Package.forums==package.forums, Package.state!=PackageState.DELETED).count() > 1:
-			errors.append("<b>" + gettext("Error: Another package already uses this forum topic!") + "</b>")
-			topic_error_lvl = "danger"
-
-		topic = ForumTopic.query.get(package.forums)
-		if topic is not None:
-			if topic.author != package.author:
-				errors.append("<b>" + gettext("Error: Forum topic author doesn't match package author.") + "</b>")
-				topic_error_lvl = "danger"
-		elif package.type != PackageType.TXP:
-			errors.append(gettext("Warning: Forum topic not found. This may happen if the topic has only just been created."))
-
-		topic_error = "<br />".join(errors)
-
 	threads = Thread.query.filter_by(package_id=package.id, review_id=None)
 	if not current_user.is_authenticated:
 		threads = threads.filter_by(private=False)
@@ -196,6 +159,10 @@ def view(package):
 	has_review = current_user.is_authenticated and \
 		PackageReview.query.filter_by(package=package, author=current_user).count() > 0
 
+	validation = None
+	if package.state != PackageState.APPROVED:
+		validation = validate_package_for_approval(package)
+
 	is_favorited = current_user.is_authenticated and \
 		Collection.query.filter(
 			Collection.author == current_user,
@@ -204,9 +171,8 @@ def view(package):
 
 	return render_template("packages/view.html",
 			package=package, releases=releases, packages_uses=packages_uses,
-			conflicting_modnames=conflicting_modnames,
-			review_thread=review_thread, topic_error=topic_error, topic_error_lvl=topic_error_lvl,
-			threads=threads.all(), has_review=has_review, is_favorited=is_favorited)
+			review_thread=review_thread, threads=threads.all(), validation=validation,
+			has_review=has_review, is_favorited=is_favorited)
 
 
 @bp.route("/packages/<author>/<name>/shields/<type>/")
@@ -421,7 +387,7 @@ def move_to_state(package):
 	if state is None:
 		abort(400)
 
-	if not package.can_move_to_state(current_user, state):
+	if not can_move_to_state(package, current_user, state):
 		flash(gettext("You don't have permission to do that"), "danger")
 		return redirect(package.get_url("packages.view"))
 

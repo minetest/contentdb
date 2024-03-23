@@ -208,15 +208,6 @@ class PackageState(enum.Enum):
 		return item if type(item) == PackageState else PackageState[item.upper()]
 
 
-PACKAGE_STATE_FLOW = {
-	PackageState.WIP: {PackageState.READY_FOR_REVIEW},
-	PackageState.CHANGES_NEEDED: {PackageState.READY_FOR_REVIEW},
-	PackageState.READY_FOR_REVIEW: {PackageState.WIP, PackageState.CHANGES_NEEDED, PackageState.APPROVED},
-	PackageState.APPROVED: {PackageState.CHANGES_NEEDED},
-	PackageState.DELETED: {PackageState.READY_FOR_REVIEW},
-}
-
-
 PackageProvides = db.Table("provides",
 	db.Column("package_id",    db.Integer, db.ForeignKey("package.id"), primary_key=True),
 	db.Column("metapackage_id", db.Integer, db.ForeignKey("meta_package.id"), primary_key=True)
@@ -487,12 +478,18 @@ class Package(db.Model):
 		if name.endswith("_game"):
 			name = name[:-5]
 
-		return Package.query.filter(
-			or_(Package.name == name, Package.name == name + "_game"),
+		return Package.query.filter(or_(Package.name == name, Package.name == name + "_game"),
 			Package.author.has(username=parts[0])).first()
 
 	def get_id(self):
 		return "{}/{}".format(self.author.username, self.name)
+
+	@property
+	def normalised_name(self):
+		name = self.name
+		if name.endswith("_game"):
+			name = name[:-5]
+		return name
 
 	def get_translated(self, lang=None, load_desc=True):
 		if lang is None:
@@ -675,7 +672,7 @@ class Package(db.Model):
 		if type(state) == str:
 			state = PackageState[state]
 		elif type(state) != PackageState:
-			raise Exception("Unknown state given to Package.can_move_to_state()")
+			raise Exception("Unknown state given to Package.get_set_state_url()")
 
 		return url_for("packages.move_to_state",
 				author=self.author.username, name=self.name, state=state.name.lower())
@@ -751,50 +748,13 @@ class Package(db.Model):
 	def get_missing_hard_dependencies(self):
 		return [mp.name for mp in self.get_missing_hard_dependencies_query().all()]
 
-	def can_move_to_state(self, user, state):
-		if not user.is_authenticated:
-			return False
-
-		if type(state) == str:
-			state = PackageState[state]
-		elif type(state) != PackageState:
-			raise Exception("Unknown state given to Package.can_move_to_state()")
-
-		if state not in PACKAGE_STATE_FLOW[self.state]:
-			return False
-
-		if state == PackageState.READY_FOR_REVIEW or state == PackageState.APPROVED:
-			if state == PackageState.APPROVED and not self.check_perm(user, Permission.APPROVE_NEW):
-				return False
-
-			if not (self.check_perm(user, Permission.APPROVE_NEW) or self.check_perm(user, Permission.EDIT_PACKAGE)):
-				return False
-
-			if state == PackageState.APPROVED and ("Other" in self.license.name or "Other" in self.media_license.name):
-				return False
-
-			if self.get_missing_hard_dependencies_query().count() > 0:
-				return False
-
-			needs_screenshot = \
-				(self.type == self.type.GAME or self.type == self.type.TXP) and self.screenshots.count() == 0
-
-			return self.releases.filter(PackageRelease.task_id==None).count() > 0 and not needs_screenshot
-
-		elif state == PackageState.CHANGES_NEEDED:
-			return self.check_perm(user, Permission.APPROVE_NEW)
-
-		elif state == PackageState.WIP:
-			return self.check_perm(user, Permission.EDIT_PACKAGE) and \
-				(user in self.maintainers or user.rank.at_least(UserRank.ADMIN))
-
-		return True
-
 	def get_next_states(self, user):
+		from app.logic.package_approval import can_move_to_state
+
 		states = []
 
 		for state in PackageState:
-			if self.can_move_to_state(user, state):
+			if can_move_to_state(self, user, state):
 				states.append(state)
 
 		return states
