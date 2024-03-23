@@ -7,24 +7,23 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-03 02:54+0000\n"
+"POT-Creation-Date: 2024-03-23 16:19+0000\n"
 "PO-Revision-Date: 2024-03-04 18:53+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
-"contentdb/de/>\n"
 "Language: de\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:123
+#: app/__init__.py:137
 msgid "Banned:"
 msgstr "Verbannt:"
 
-#: app/__init__.py:125
+#: app/__init__.py:139
 msgid "You have been banned."
 msgstr "Sie wurden verbannt."
 
@@ -43,7 +42,7 @@ msgstr "Pakete"
 msgid "%(package_type)s for %(game_name)s"
 msgstr "%(package_type)s für %(game_name)s"
 
-#: app/template_filters.py:90
+#: app/template_filters.py:92
 #, python-format
 msgid "%(delta)s ago"
 msgstr "%(delta)s her"
@@ -63,10 +62,10 @@ msgid "Limit to package"
 msgstr "Auf Paket begrenzen"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:275
-#: app/blueprints/packages/packages.py:539
-#: app/blueprints/packages/packages.py:635
-#: app/blueprints/packages/packages.py:706
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:241
+#: app/blueprints/packages/packages.py:509
+#: app/blueprints/packages/packages.py:605
+#: app/blueprints/packages/packages.py:676
 #: app/blueprints/packages/releases.py:62
 #: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:49
 #: app/blueprints/packages/screenshots.py:36
@@ -74,7 +73,7 @@ msgstr "Auf Paket begrenzen"
 #: app/blueprints/packages/screenshots.py:47
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
 #: app/blueprints/users/settings.py:77 app/blueprints/users/settings.py:147
-#: app/blueprints/users/settings.py:304 app/templates/users/modtools.html:111
+#: app/blueprints/users/settings.py:315 app/templates/users/modtools.html:111
 msgid "Save"
 msgstr "Speichern"
 
@@ -85,13 +84,13 @@ msgstr "Speichern"
 #: app/templates/admin/languages/list.html:23
 #: app/templates/macros/reviews.html:138 app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
-#: app/templates/packages/translation.html:42
+#: app/templates/packages/translation.html:54
 msgid "Title"
 msgstr "Titel"
 
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:85
-#: app/templates/packages/translation.html:45
+#: app/templates/packages/translation.html:57
 msgid "Short Description"
 msgstr "Kurze Beschreibung"
 
@@ -139,29 +138,29 @@ msgstr "(Öffentlich, ändern von Profil &gt; Meine Sammlungen)"
 msgid "Removed package from favorites collection"
 msgstr "Paket aus Favoritensammlung entfernt"
 
-#: app/blueprints/github/__init__.py:52
+#: app/blueprints/github/__init__.py:54
 msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "Autorisierung fehlgeschlagen [err=gh-oauth-login-failed]"
 
-#: app/blueprints/github/__init__.py:76
+#: app/blueprints/github/__init__.py:78
 msgid "Linked GitHub to account"
 msgstr "GitHub wurde mit dem Konto verknüpft"
 
-#: app/blueprints/github/__init__.py:79
+#: app/blueprints/github/__init__.py:81
 msgid "GitHub account is already associated with another user"
 msgstr "Das GitHub-Konto ist bereits mit einem anderen Benutzer verknüpft"
 
-#: app/blueprints/github/__init__.py:85
+#: app/blueprints/github/__init__.py:87
 msgid "Unable to find an account for that GitHub user"
 msgstr "Nicht möglich, ein Konto für diesen GitHub-Benutzer zu finden"
 
-#: app/blueprints/github/__init__.py:90
+#: app/blueprints/github/__init__.py:92
 msgid "Authorization failed [err=gh-login-failed]"
 msgstr "Autorisierung fehlgeschlagen [err=gh-login-failed]"
 
 #: app/blueprints/oauth/__init__.py:169 app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
-#: app/templates/users/settings_email.html:44
+#: app/templates/users/settings_email.html:49
 msgid "Description"
 msgstr "Beschreibung"
 
@@ -224,112 +223,96 @@ msgstr "Teilen und Abzeichen"
 msgid "Remove / Unpublish"
 msgstr "Entfernen / Depublizieren"
 
-#: app/blueprints/packages/__init__.py:80
+#: app/blueprints/packages/__init__.py:80 app/logic/package_approval.py:123
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
 msgstr "Unterstützte Spiele"
 
-#: app/blueprints/packages/packages.py:177
-msgid "Error: Another package already uses this forum topic!"
-msgstr "Fehler: Ein anderes Paket benutzt bereits dieses Forumthema!"
-
-#: app/blueprints/packages/packages.py:183
-msgid "Error: Forum topic author doesn't match package author."
-msgstr "Fehler: Forumthemenautor ist nicht der gleiche wie der Paketautor."
-
-#: app/blueprints/packages/packages.py:186
-msgid ""
-"Warning: Forum topic not found. This may happen if the topic has only "
-"just been created."
-msgstr ""
-"Warnung: Forumthema nicht gefunden. Dies kann passieren, wenn das Thema "
-"gerade erst erstellt wurde."
-
-#: app/blueprints/packages/packages.py:239
+#: app/blueprints/packages/packages.py:205
 msgid "No download available."
 msgstr "Kein Download verfügbar."
 
-#: app/blueprints/packages/packages.py:253 app/templates/packages/view.html:589
+#: app/blueprints/packages/packages.py:219 app/templates/packages/view.html:589
 msgid "Type"
 msgstr "Typ"
 
-#: app/blueprints/packages/packages.py:254
+#: app/blueprints/packages/packages.py:220
 msgid "Title (Human-readable)"
 msgstr "Titel (Für Menschen lesbar)"
 
-#: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:633
+#: app/blueprints/packages/packages.py:221
+#: app/blueprints/packages/packages.py:603
 msgid "Name (Technical)"
 msgstr "Name (Technisch)"
 
-#: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:634
+#: app/blueprints/packages/packages.py:221
+#: app/blueprints/packages/packages.py:604
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Nur Kleinbuchstaben (a-z), Ziffern (0-9) und Unterstriche (_)"
 
-#: app/blueprints/packages/packages.py:256
+#: app/blueprints/packages/packages.py:222
 msgid "Short Description (Plaintext)"
 msgstr "Kurzbeschreibung (Fließtext)"
 
-#: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:611
+#: app/blueprints/packages/packages.py:224 app/templates/packages/view.html:611
 msgid "Maintenance State"
 msgstr "Entwicklungsstadium"
 
-#: app/blueprints/packages/packages.py:260 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:226 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
 msgid "Tags"
 msgstr "Tags"
 
-#: app/blueprints/packages/packages.py:261
+#: app/blueprints/packages/packages.py:227
 msgid "Content Warnings"
 msgstr "Inhaltswarnungen"
 
-#: app/blueprints/packages/packages.py:262 app/templates/packages/view.html:600
+#: app/blueprints/packages/packages.py:228 app/templates/packages/view.html:600
 msgid "License"
 msgstr "Lizenz"
 
-#: app/blueprints/packages/packages.py:263
+#: app/blueprints/packages/packages.py:229
 msgid "Media License"
 msgstr "Medienlizenz"
 
-#: app/blueprints/packages/packages.py:265
+#: app/blueprints/packages/packages.py:231
 msgid "Long Description (Markdown)"
 msgstr "Längere Beschreibung (Markdown)"
 
-#: app/blueprints/packages/packages.py:267
+#: app/blueprints/packages/packages.py:233
 msgid "VCS Repository URL"
 msgstr "URL des VCS-Repositorys"
 
-#: app/blueprints/packages/packages.py:268 app/blueprints/users/settings.py:75
+#: app/blueprints/packages/packages.py:234 app/blueprints/users/settings.py:75
 msgid "Website URL"
 msgstr "Webseiten-URL"
 
-#: app/blueprints/packages/packages.py:269
+#: app/blueprints/packages/packages.py:235
 msgid "Issue Tracker URL"
 msgstr "Issue-Tracker-URL"
 
-#: app/blueprints/packages/packages.py:270
+#: app/blueprints/packages/packages.py:236
 msgid "Forum Topic ID"
 msgstr "Forumthema-ID"
 
-#: app/blueprints/packages/packages.py:271
+#: app/blueprints/packages/packages.py:237
 msgid "Video URL"
 msgstr "Video-URL"
 
-#: app/blueprints/packages/packages.py:272
+#: app/blueprints/packages/packages.py:238
 msgid "Donate URL"
 msgstr "Spenden-URL"
 
-#: app/blueprints/packages/packages.py:273
+#: app/blueprints/packages/packages.py:239
 msgid "Translation URL"
 msgstr "Übersetzungs-URL"
 
-#: app/blueprints/packages/packages.py:279
+#: app/blueprints/packages/packages.py:245
 msgid "_game is not an allowed name"
 msgstr "_game ist kein erlaubter Name"
 
-#: app/blueprints/packages/packages.py:289
+#: app/blueprints/packages/packages.py:255
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -337,99 +320,106 @@ msgstr ""
 "Paket existiert bereits, wurde aber entfernt. Bitte die ContentDB-"
 "Mitarbeiter kontaktieren, um das Paket wiederherzustellen"
 
-#: app/blueprints/packages/packages.py:294
+#: app/blueprints/packages/packages.py:260
 msgid "Package already exists"
 msgstr "Paket existiert bereits"
 
-#: app/blueprints/packages/packages.py:300
+#: app/blueprints/packages/packages.py:266
 msgid "A collection with a similar name already exists"
 msgstr "Es existiert bereits eine Sammlung mit einem ähnlichen Namen"
 
-#: app/blueprints/packages/packages.py:361
+#: app/blueprints/packages/packages.py:319
+#: app/blueprints/packages/releases.py:82
+msgid ""
+"You must add an email address to your account and confirm it before you "
+"can manage packages"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:331
 msgid "Unable to find that user"
 msgstr "Dieser Benutzer kann nicht gefunden werden"
 
-#: app/blueprints/packages/packages.py:365
+#: app/blueprints/packages/packages.py:335
 #: app/blueprints/packages/screenshots.py:137
 #: app/blueprints/users/settings.py:131
 msgid "Permission denied"
 msgstr "Erlaubnis verweigert"
 
-#: app/blueprints/packages/packages.py:421
-#: app/blueprints/packages/packages.py:494
-#: app/blueprints/packages/packages.py:514
+#: app/blueprints/packages/packages.py:391
+#: app/blueprints/packages/packages.py:464
+#: app/blueprints/packages/packages.py:484
 msgid "You don't have permission to do that"
 msgstr "Sie haben nicht die Erlaubnis, das zu tun"
 
-#: app/blueprints/packages/packages.py:453
+#: app/blueprints/packages/packages.py:423
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
 "Bitte kommentieren Sie im Genehmigungsthema, welche Änderungen "
 "erforderlich sind"
 
-#: app/blueprints/packages/packages.py:460
+#: app/blueprints/packages/packages.py:430
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
-"Bitte kommentieren Sie im Genehmigungsthema, damit Bearbeiter wissen, was "
-"Sie geändert haben"
+"Bitte kommentieren Sie im Genehmigungsthema, damit Bearbeiter wissen, was"
+" Sie geändert haben"
 
-#: app/blueprints/packages/packages.py:509
+#: app/blueprints/packages/packages.py:479
 msgid "Deleted package"
 msgstr "Gelöschte Pakete"
 
-#: app/blueprints/packages/packages.py:529
+#: app/blueprints/packages/packages.py:499
 msgid "Unapproved package"
 msgstr "Ungenehmigte Pakete"
 
-#: app/blueprints/packages/packages.py:538
+#: app/blueprints/packages/packages.py:508
 msgid "Maintainers (Comma-separated)"
 msgstr "Betreuer (Komma-getrennt)"
 
-#: app/blueprints/packages/packages.py:547
+#: app/blueprints/packages/packages.py:517
 msgid "You don't have permission to edit maintainers"
 msgstr "Sie haben nicht die Erlaubnis, Betreuer zu bearbeiten"
 
-#: app/blueprints/packages/packages.py:597
+#: app/blueprints/packages/packages.py:567
 msgid "You are not a maintainer"
 msgstr "Sie sind kein Betreuer"
 
-#: app/blueprints/packages/packages.py:600
+#: app/blueprints/packages/packages.py:570
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Paketbesitzer können sich nicht selbst als Betreuer entfernen"
 
-#: app/blueprints/packages/packages.py:632
+#: app/blueprints/packages/packages.py:602
 msgid "Author Name"
 msgstr "Autorenname"
 
-#: app/blueprints/packages/packages.py:702
+#: app/blueprints/packages/packages.py:672
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr ""
 "Unterstützungserkennung basierend auf Abhängigkeiten aktivieren "
 "(empfohlen)"
 
-#: app/blueprints/packages/packages.py:703
+#: app/blueprints/packages/packages.py:673
 msgid "Supported games"
 msgstr "Unterstützte Spiele"
 
-#: app/blueprints/packages/packages.py:704
+#: app/blueprints/packages/packages.py:674
 msgid "Unsupported games"
 msgstr "Nicht unterstützte Spiele"
 
-#: app/blueprints/packages/packages.py:705
+#: app/blueprints/packages/packages.py:675
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
 "Unterstützt alle Spiele (wenn nicht anders angegeben) / ist "
 "spielunabhängig"
 
-#: app/blueprints/packages/packages.py:721
+#: app/blueprints/packages/packages.py:691
 msgid "You need at least one release before you can edit game support"
 msgstr ""
 "Sie brauchen mindestens ein Release, bevor Sie die Spielunterstüzung "
 "bearbeiten können"
 
-#: app/blueprints/packages/packages.py:725
+#: app/blueprints/packages/packages.py:695
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
 "Mod(-paket) braucht mindestens eine Mod. Bitte erstellen Sie ein neues "
@@ -452,13 +442,13 @@ msgstr "Git-Referenz (d.h.: Commit-Hash, Branch oder Tag)"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:70
-#: app/blueprints/packages/releases.py:194
+#: app/blueprints/packages/releases.py:198
 msgid "Minimum Minetest Version"
 msgstr "Minimale Minetest-Version"
 
 #: app/blueprints/packages/releases.py:60
 #: app/blueprints/packages/releases.py:72
-#: app/blueprints/packages/releases.py:197
+#: app/blueprints/packages/releases.py:201
 msgid "Maximum Minetest Version"
 msgstr "Maximale Minetest-Version"
 
@@ -476,80 +466,79 @@ msgstr "Aufgaben-ID"
 msgid "Is Approved"
 msgstr "Ist genehmigt"
 
-#: app/blueprints/packages/releases.py:87
+#: app/blueprints/packages/releases.py:91
 msgid "Import from Git"
 msgstr "Von Git importieren"
 
-#: app/blueprints/packages/releases.py:87
+#: app/blueprints/packages/releases.py:91
 msgid "Upload .zip file"
 msgstr ".zip-Datei hochladen"
 
-#: app/blueprints/packages/releases.py:193
+#: app/blueprints/packages/releases.py:197
 msgid "Set Min"
 msgstr "Minimum setzen"
 
-#: app/blueprints/packages/releases.py:196
+#: app/blueprints/packages/releases.py:200
 msgid "Set Max"
 msgstr "Maximum setzen"
 
-#: app/blueprints/packages/releases.py:199
+#: app/blueprints/packages/releases.py:203
 msgid "Only change values previously set as none"
 msgstr "Nur Werte ändern, die zuvor als „none“ festgelegt wurden"
 
-#: app/blueprints/packages/releases.py:200
+#: app/blueprints/packages/releases.py:204
 msgid "Update"
 msgstr "Update"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:256
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Trigger"
 
-#: app/blueprints/packages/releases.py:253
+#: app/blueprints/packages/releases.py:257
 msgid "New Commit"
 msgstr "Neuer Commit"
 
-#: app/blueprints/packages/releases.py:254 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:258 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Neuer Tag"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:260
 msgid "Branch name"
 msgstr "Branch-Name"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:261
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Aktion"
 
-#: app/blueprints/packages/releases.py:258
+#: app/blueprints/packages/releases.py:262
 msgid "Send notification and mark as outdated"
 msgstr "Benachrichtigung senden und als veraltet markieren"
 
-#: app/blueprints/packages/releases.py:258
-#: app/templates/macros/package_approval.html:22
+#: app/blueprints/packages/releases.py:262 app/logic/package_approval.py:104
 msgid "Create release"
 msgstr "Release erstellen"
 
-#: app/blueprints/packages/releases.py:260
+#: app/blueprints/packages/releases.py:264
 msgid "Save Settings"
 msgstr "Einstellung speichern"
 
-#: app/blueprints/packages/releases.py:261
+#: app/blueprints/packages/releases.py:265
 msgid "Disable Automation"
 msgstr "Automatisierung deaktivieren"
 
-#: app/blueprints/packages/releases.py:300
+#: app/blueprints/packages/releases.py:304
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
 "Bitte fügen Sie eine Git-Repository-URL hinzu, um automatische Releases "
 "einzurichten"
 
-#: app/blueprints/packages/releases.py:316
+#: app/blueprints/packages/releases.py:320
 msgid "Deleted update configuration"
 msgstr "Gelöschte Update-Konfiguration"
 
-#: app/blueprints/packages/releases.py:324
+#: app/blueprints/packages/releases.py:328
 msgid "Now, please create an initial release"
 msgstr "Bitte erstellen Sie nun einen ersten Release"
 
@@ -659,7 +648,7 @@ msgid "Please wait before commenting again"
 msgstr "Bitte warten Sie, bevor Sie erneut einen Kommentar abgeben"
 
 #: app/blueprints/threads/__init__.py:284
-#: app/templates/macros/package_approval.html:112
+#: app/templates/macros/package_approval.html:56
 msgid "Open Thread"
 msgstr "Thema eröffnen"
 
@@ -724,7 +713,7 @@ msgstr "Einloggen fehlgeschlagen"
 msgid "Display Name"
 msgstr "Anzeigename"
 
-#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:298
+#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:309
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "Benutzername"
@@ -1020,7 +1009,7 @@ msgid "Account and Security"
 msgstr "Konto und Sicherheit"
 
 #: app/blueprints/users/settings.py:46
-#: app/templates/users/settings_email.html:8
+#: app/templates/users/settings_email.html:12
 msgid "Email and Notifications"
 msgstr "E-Mail und Benachrichtigungen"
 
@@ -1045,29 +1034,29 @@ msgstr "Spenden-URL"
 msgid "A user already has that name"
 msgstr "Ein Benutzer hat bereits diesen Namen"
 
-#: app/blueprints/users/settings.py:256
+#: app/blueprints/users/settings.py:264
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr ""
 "Benutzer mit dem Rang eines Moderators oder höher können nicht gelöscht "
 "werden"
 
-#: app/blueprints/users/settings.py:299
+#: app/blueprints/users/settings.py:310
 msgid "Display name"
 msgstr "Anzeigename"
 
-#: app/blueprints/users/settings.py:300
+#: app/blueprints/users/settings.py:311
 msgid "Forums Username"
 msgstr "Foren-Benutzername"
 
-#: app/blueprints/users/settings.py:301
+#: app/blueprints/users/settings.py:312
 msgid "GitHub Username"
 msgstr "GitHub-Benutzername"
 
-#: app/blueprints/users/settings.py:302 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:313 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "Rang"
 
-#: app/blueprints/users/settings.py:346
+#: app/blueprints/users/settings.py:357
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr ""
 "Sie können einen Benutzer nicht auf einen höheren Rang befördern als sich"
@@ -1086,19 +1075,31 @@ msgstr "Dateifilter"
 msgid "Search"
 msgstr "Suchen"
 
-#: app/logic/package_validator.py:37
+#: app/logic/package_approval.py:95
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr ""
 "Ein Paket mit diesem Namen existiert bereits. Siehe Grundsätze und "
 "Leitlinien 3"
 
-#: app/logic/package_validator.py:40
-#: app/templates/macros/package_approval.html:36
-msgid "A release is required before this package can be approved."
-msgstr "Bevor dieses Paket genehmigt werden kann, ist ein Release erforderlich."
+#: app/logic/package_approval.py:99
+msgid "You need to create a release before this package can be approved."
+msgstr ""
+"Bevor dieses Paket genehmigt werden kann, müssen Sie einen Release "
+"erstellen."
 
-#: app/logic/package_validator.py:46
-#: app/templates/macros/package_approval.html:45
+#: app/logic/package_approval.py:101
+msgid "Release is still importing, or has an error."
+msgstr "Die Freigabe wird noch importiert, oder es liegt ein Fehler vor."
+
+#: app/logic/package_approval.py:105
+msgid "Set up releases"
+msgstr "Releases bearbeiten"
+
+#: app/logic/package_approval.py:112
+msgid "You need to add at least one screenshot."
+msgstr "Sie müssen mindestens ein Bildschirmfoto hinzufügen."
+
+#: app/logic/package_approval.py:117
 #, python-format
 msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
@@ -1107,15 +1108,53 @@ msgstr ""
 "Die folgenden benötigten Abhängigkeiten müssen zuerst zu ContentDB "
 "hinzugefügt werden: %(deps)s"
 
-#: app/logic/package_validator.py:51
-#: app/templates/macros/package_approval.html:41
-msgid "You need to add at least one screenshot."
-msgstr "Sie müssen mindestens ein Bildschirmfoto hinzufügen."
+#: app/logic/package_approval.py:121
+msgid ""
+"What games does your package support? Please specify on the supported "
+"games page"
+msgstr ""
 
-#: app/logic/package_validator.py:54
-#: app/templates/macros/package_approval.html:49
+#: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
 msgstr "Warten Sie bitte, bis diese Lizenz zu ContentDB hinzugefügt wurde."
+
+#: app/logic/package_approval.py:134
+msgid "Please make sure that this package has the right to the names it uses."
+msgstr ""
+"Bitte stellen Sie sicher, dass dieses Paket das Recht auf die verwendeten"
+" Namen hat."
+
+#: app/logic/package_approval.py:139
+#, python-format
+msgid "Please make sure that this package has the right to the names %(names)s"
+msgstr ""
+"Bitte stellen Sie sicher, dass dieses Paket Rechte für die Namen "
+"%(names)s hat"
+
+#: app/logic/package_approval.py:140 app/templates/index.html:111
+#: app/templates/index.html:122 app/templates/index.html:133
+#: app/templates/index.html:144 app/templates/index.html:155
+#: app/templates/index.html:181 app/templates/packages/game_hub.html:42
+#: app/templates/packages/game_hub.html:49
+#: app/templates/packages/game_hub.html:56
+#: app/templates/packages/game_hub.html:63
+#: app/templates/packages/game_hub.html:70
+msgid "See more"
+msgstr "Mehr sehen"
+
+#: app/logic/package_approval.py:145
+msgid "Error: Another package already uses this forum topic!"
+msgstr "Fehler: Ein anderes Paket benutzt bereits dieses Forumthema!"
+
+#: app/logic/package_approval.py:150
+msgid "Error: Forum topic author doesn't match package author."
+msgstr "Fehler: Forumthemenautor ist nicht der gleiche wie der Paketautor."
+
+#: app/logic/package_approval.py:152
+msgid ""
+"Warning: Forum topic not found. The topic may have been created since the"
+" last forum crawl."
+msgstr ""
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1223,7 +1262,7 @@ msgstr "Genehmigen"
 msgid "Delete"
 msgstr "Löschen"
 
-#: app/models/packages.py:572 app/templates/packages/view.html:163
+#: app/models/packages.py:569 app/templates/packages/view.html:163
 msgid "Work in Progress"
 msgstr "In Arbeit"
 
@@ -1345,7 +1384,7 @@ msgstr "Abmelden"
 msgid "Languages"
 msgstr "Sprachen"
 
-#: app/templates/base.html:202 app/templates/translate/index.html:72
+#: app/templates/base.html:202 app/templates/translate/index.html:76
 msgid "Help translate ContentDB"
 msgstr "Helfen Sie uns bei der Übersetzung von ContentDB"
 
@@ -1452,17 +1491,6 @@ msgstr "Nächstes"
 #: app/templates/packages/game_hub.html:44
 msgid "Recently Added"
 msgstr "Zuletzt hinzugefügt"
-
-#: app/templates/index.html:111 app/templates/index.html:122
-#: app/templates/index.html:133 app/templates/index.html:144
-#: app/templates/index.html:155 app/templates/index.html:181
-#: app/templates/packages/game_hub.html:42
-#: app/templates/packages/game_hub.html:49
-#: app/templates/packages/game_hub.html:56
-#: app/templates/packages/game_hub.html:63
-#: app/templates/packages/game_hub.html:70
-msgid "See more"
-msgstr "Mehr sehen"
 
 #: app/templates/index.html:118 app/templates/index.html:124
 #: app/templates/packages/game_hub.html:51
@@ -1875,8 +1903,8 @@ msgstr ""
 "ist."
 
 #: app/templates/emails/unable_to_find_account.html:9
-msgid "Otherwise, you may need to contact rubenwardy for help."
-msgstr "Andernfalls müssen Sie rubenwardy um Hilfe bitten."
+msgid "Otherwise, you may need to contact the admin for help."
+msgstr ""
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1961,66 +1989,39 @@ msgstr "Beginnen Sie mit der Eingabe, um Vorschläge zu sehen"
 msgid "State"
 msgstr "Zustand"
 
-#: app/templates/macros/package_approval.html:26
-msgid "Set up releases"
-msgstr "Releases bearbeiten"
-
-#: app/templates/macros/package_approval.html:31
-msgid "You need to create a release before this package can be approved."
-msgstr ""
-"Bevor dieses Paket genehmigt werden kann, müssen Sie einen Release "
-"erstellen."
-
-#: app/templates/macros/package_approval.html:33
-msgid "Release is still importing, or has an error."
-msgstr "Die Freigabe wird noch importiert, oder es liegt ein Fehler vor."
-
-#: app/templates/macros/package_approval.html:56
-msgid "You should add at least one screenshot."
-msgstr "Sie sollten mindestens einen Screenshot hinzufügen."
-
-#: app/templates/macros/package_approval.html:62
+#: app/templates/macros/package_approval.html:36
 msgid "Please wait for the release to be approved."
 msgstr "Bitte warten Sie, bis der Release genehmigt wurde."
 
-#: app/templates/macros/package_approval.html:64
+#: app/templates/macros/package_approval.html:38
 msgid "You can now approve this package if you're ready."
 msgstr "Sie können dieses Paket nun genehmigen, wenn Sie bereit sind."
 
-#: app/templates/macros/package_approval.html:66
+#: app/templates/macros/package_approval.html:40
 msgid "Please wait for the package to be approved."
 msgstr "Bitte warten Sie, bis das Paket genehmigt wurde."
 
-#: app/templates/macros/package_approval.html:70
+#: app/templates/macros/package_approval.html:44
 msgid "You can now submit this package for approval if you're ready."
 msgstr ""
 "Sie können nun dieses Paket für eine Genehmigung einreichen, wenn Sie "
 "bereit sind."
 
-#: app/templates/macros/package_approval.html:72
+#: app/templates/macros/package_approval.html:46
 msgid "This package can be submitted for approval when ready."
 msgstr ""
 "Dieses Paket kann für eine Genehmigung eingereicht werden, wenn es bereit"
 " ist."
 
-#: app/templates/macros/package_approval.html:102
-msgid "Please make sure that this package has the right to the names it uses."
+#: app/templates/macros/package_approval.html:49
+msgid "You need to fix the above errors before you can submit for review"
 msgstr ""
-"Bitte stellen Sie sicher, dass dieses Paket das Recht auf die verwendeten"
-" Namen hat."
 
-#: app/templates/macros/package_approval.html:104
-#, python-format
-msgid "Please make sure that this package has the right to the names %(names)s"
-msgstr ""
-"Bitte stellen Sie sicher, dass dieses Paket Rechte für die Namen "
-"%(names)s hat"
-
-#: app/templates/macros/package_approval.html:115
+#: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
 msgstr "Paketgenehmigungsthema"
 
-#: app/templates/macros/package_approval.html:116
+#: app/templates/macros/package_approval.html:60
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
@@ -2631,8 +2632,8 @@ msgstr "Falls leer, wird stattdessen die Spenden-URL des Autoren benutzt."
 #: app/templates/packages/create_edit.html:122
 msgid "How can users translate your package? ie: weblate URL or a help page"
 msgstr ""
-"Wie können Benutzer Ihr Paket übersetzen? Z.B. Weblate-URL oder eine HIlfe-"
-"Seite"
+"Wie können Benutzer Ihr Paket übersetzen? Z.B. Weblate-URL oder eine "
+"HIlfe-Seite"
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -3377,17 +3378,27 @@ msgstr "Übersetzung – Minetest Modding Book"
 msgid "Translating content meta - lua_api.md"
 msgstr "Content-Meta übersetzen – lua_api.md"
 
-#: app/templates/packages/translation.html:31
+#: app/templates/packages/translation.html:30
+msgid "Translation template"
+msgstr ""
+
+#: app/templates/packages/translation.html:32
+#, python-format
+msgid ""
+"To quickly add support for ContentDB package translation, create a file "
+"at %(location)s with the following content:"
+msgstr ""
+
+#: app/templates/packages/translation.html:43
 #, python-format
 msgid "%(title)s is available in %(num)d languages."
 msgstr "%(title)s ist in %(num)d Sprachen verfügbar."
 
-#: app/templates/packages/translation.html:32
+#: app/templates/packages/translation.html:44
 msgid "ContentDB reads translations from locale files (.tr) in your package."
-msgstr ""
-"ContentDB liest Übersetzungen aus Locale-Dateien (.tr) in Ihrem Paket aus."
+msgstr "ContentDB liest Übersetzungen aus Locale-Dateien (.tr) in Ihrem Paket aus."
 
-#: app/templates/packages/translation.html:39
+#: app/templates/packages/translation.html:51
 msgid "Language"
 msgstr "Sprache"
 
@@ -3658,8 +3669,8 @@ msgstr ""
 "Benutzern in dieser Form."
 
 #: app/templates/report/index.html:16
-msgid "Please sign in or contact the admin in another way"
-msgstr "Bitte einloggen, oder Admin auf eine andere Weise kontaktieren"
+msgid "Please sign in or contact the admin using the link below."
+msgstr ""
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
@@ -4094,23 +4105,27 @@ msgid ""
 "Help make Minetest more accessible by translating packages into other "
 "languages."
 msgstr ""
-"Helfen Sie dabei, Minetest noch allgemeinzugänglicher zu machen, indem Sie "
-"Pakete in andere Sprachen übersetzen."
+"Helfen Sie dabei, Minetest noch allgemeinzugänglicher zu machen, indem "
+"Sie Pakete in andere Sprachen übersetzen."
 
-#: app/templates/translate/index.html:69
+#: app/templates/translate/index.html:65
+msgid "How to translate a mod / game"
+msgstr ""
+
+#: app/templates/translate/index.html:73
 msgid "ContentDB"
 msgstr "ContentDB"
 
-#: app/templates/translate/index.html:76
+#: app/templates/translate/index.html:80
 msgid "Packages that support translation"
 msgstr "Pakete, die Übersetzung unterstützen"
 
-#: app/templates/translate/index.html:81
+#: app/templates/translate/index.html:85
 #, python-format
 msgid "Only show packages with %(lang)s translation"
 msgstr "Nur Pakete mit Übersetzung für %(lang)s anzeigen"
 
-#: app/templates/translate/index.html:85
+#: app/templates/translate/index.html:89
 #, python-format
 msgid "Hide packages with %(lang)s translation"
 msgstr "Pakete mit Übersetzung für %(lang)s verbergen"
@@ -4196,7 +4211,7 @@ msgstr ""
 
 #: app/templates/users/change_set_password.html:17
 #: app/templates/users/register.html:25
-#: app/templates/users/settings_email.html:20
+#: app/templates/users/settings_email.html:24
 msgid "Your email will never be shared with a third-party."
 msgstr "Ihre E-Mail-Adresse wird niemals an Dritte weitergegeben."
 
@@ -4470,7 +4485,7 @@ msgid "Change Email and Send Password Reset"
 msgstr "E-Mail ändern und Passwortrücksetzung senden"
 
 #: app/templates/users/modtools.html:108
-#: app/templates/users/settings_email.html:14
+#: app/templates/users/settings_email.html:18
 msgid "Email Address"
 msgstr "E-Mail-Adresse"
 
@@ -4549,14 +4564,20 @@ msgid "Profile Picture"
 msgstr "Profilbild"
 
 #: app/templates/users/profile_edit.html:27
-msgid "Sync with Forums"
-msgstr "Mit Foren synchronisieren"
+msgid "Import from forums"
+msgstr ""
 
-#: app/templates/users/profile_edit.html:46
+#: app/templates/users/profile_edit.html:47
+msgid ""
+"Profile pictures should be square, at least 64x64px, and one of the "
+"following formats: jpeg, png, or webp."
+msgstr ""
+
+#: app/templates/users/profile_edit.html:51
 msgid "Profile Information"
 msgstr "Profil-Informationen"
 
-#: app/templates/users/profile_edit.html:53
+#: app/templates/users/profile_edit.html:58
 msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr ""
 "Sich als ein anderer Benutzer auszugeben, ist ein Grund für eine "
@@ -4595,7 +4616,7 @@ msgstr "Ich akzeptiere die "
 msgid "Email and Notifications - %(username)s"
 msgstr "E-Mail und Benachrichtigungen – %(username)s"
 
-#: app/templates/users/settings_email.html:19
+#: app/templates/users/settings_email.html:23
 msgid ""
 "Your email is needed to recover your account if you forget your password,"
 " and to send (configurable) notifications."
@@ -4604,21 +4625,21 @@ msgstr ""
 "Passwort vergessen haben, und um (konfigurierbare) Benachrichtigungen zu "
 "senden."
 
-#: app/templates/users/settings_email.html:25
+#: app/templates/users/settings_email.html:29
 msgid "There is at least one verification pending."
 msgstr "Es steht noch mindestens eine Überprüfung aus."
 
-#: app/templates/users/settings_email.html:29
+#: app/templates/users/settings_email.html:33
 msgid "Notification Settings"
 msgstr "Einstellungen für Benachrichtigungen"
 
-#: app/templates/users/settings_email.html:33
+#: app/templates/users/settings_email.html:37
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr ""
 "E-Mail-Benachrichtigungen sind derzeit ausgeschaltet. Klicken Sie zum "
 "Aktivieren auf „Speichern“."
 
-#: app/templates/users/settings_email.html:38
+#: app/templates/users/settings_email.html:42
 msgid ""
 "Configure whether certain types of notifications are sent immediately, or"
 " as part of a daily digest."
@@ -4627,14 +4648,18 @@ msgstr ""
 " Teil einer täglichen Zusammenfassung gesendet werden sollen."
 
 #: app/templates/users/settings_email.html:43
+msgid "Disable all"
+msgstr ""
+
+#: app/templates/users/settings_email.html:48
 msgid "Event"
 msgstr "Ereignis"
 
-#: app/templates/users/settings_email.html:45
+#: app/templates/users/settings_email.html:50
 msgid "Immediately"
 msgstr "Sofort"
 
-#: app/templates/users/settings_email.html:46
+#: app/templates/users/settings_email.html:51
 msgid "In digest"
 msgstr "In Zusammenfassung"
 
@@ -5107,3 +5132,25 @@ msgstr ""
 
 #~ msgid "Create Tag"
 #~ msgstr "Tag erstellen"
+
+#~ msgid ""
+#~ "Warning: Forum topic not found. This "
+#~ "may happen if the topic has only"
+#~ " just been created."
+#~ msgstr ""
+#~ "Warnung: Forumthema nicht gefunden. Dies "
+#~ "kann passieren, wenn das Thema gerade"
+#~ " erst erstellt wurde."
+
+#~ msgid "A release is required before this package can be approved."
+#~ msgstr "Bevor dieses Paket genehmigt werden kann, ist ein Release erforderlich."
+
+#~ msgid "Otherwise, you may need to contact rubenwardy for help."
+#~ msgstr "Andernfalls müssen Sie rubenwardy um Hilfe bitten."
+
+#~ msgid "You should add at least one screenshot."
+#~ msgstr "Sie sollten mindestens einen Screenshot hinzufügen."
+
+#~ msgid "Please sign in or contact the admin in another way"
+#~ msgstr "Bitte einloggen, oder Admin auf eine andere Weise kontaktieren"
+

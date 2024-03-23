@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-03 02:54+0000\n"
+"POT-Creation-Date: 2024-03-23 16:19+0000\n"
 "PO-Revision-Date: 2024-02-10 02:02+0000\n"
 "Last-Translator: Leo <resistancelion@gmail.com>\n"
 "Language: uk\n"
@@ -20,11 +20,11 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/__init__.py:123
+#: app/__init__.py:137
 msgid "Banned:"
 msgstr "Заборонено:"
 
-#: app/__init__.py:125
+#: app/__init__.py:139
 msgid "You have been banned."
 msgstr "Вас забанено."
 
@@ -43,7 +43,7 @@ msgstr "Пакунки"
 msgid "%(package_type)s for %(game_name)s"
 msgstr ""
 
-#: app/template_filters.py:90
+#: app/template_filters.py:92
 #, python-format
 msgid "%(delta)s ago"
 msgstr "%(delta)s тому"
@@ -63,10 +63,10 @@ msgid "Limit to package"
 msgstr "Обмеження на пакунки"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:275
-#: app/blueprints/packages/packages.py:539
-#: app/blueprints/packages/packages.py:635
-#: app/blueprints/packages/packages.py:706
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:241
+#: app/blueprints/packages/packages.py:509
+#: app/blueprints/packages/packages.py:605
+#: app/blueprints/packages/packages.py:676
 #: app/blueprints/packages/releases.py:62
 #: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:49
 #: app/blueprints/packages/screenshots.py:36
@@ -74,7 +74,7 @@ msgstr "Обмеження на пакунки"
 #: app/blueprints/packages/screenshots.py:47
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
 #: app/blueprints/users/settings.py:77 app/blueprints/users/settings.py:147
-#: app/blueprints/users/settings.py:304 app/templates/users/modtools.html:111
+#: app/blueprints/users/settings.py:315 app/templates/users/modtools.html:111
 msgid "Save"
 msgstr "Зберегти"
 
@@ -85,13 +85,13 @@ msgstr "Зберегти"
 #: app/templates/admin/languages/list.html:23
 #: app/templates/macros/reviews.html:138 app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
-#: app/templates/packages/translation.html:42
+#: app/templates/packages/translation.html:54
 msgid "Title"
 msgstr "Заголовок"
 
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:85
-#: app/templates/packages/translation.html:45
+#: app/templates/packages/translation.html:57
 msgid "Short Description"
 msgstr "Короткий Опис"
 
@@ -137,29 +137,29 @@ msgstr "(Публічна, змінюйте у Профіль &gt; Мої Кол
 msgid "Removed package from favorites collection"
 msgstr "Вилучено пакунок з колекції улюбленого"
 
-#: app/blueprints/github/__init__.py:52
+#: app/blueprints/github/__init__.py:54
 msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "Не вдалося авторизуватися [err=gh-oauth-login-failed]"
 
-#: app/blueprints/github/__init__.py:76
+#: app/blueprints/github/__init__.py:78
 msgid "Linked GitHub to account"
 msgstr "Привʼязка GitHub до обліківки"
 
-#: app/blueprints/github/__init__.py:79
+#: app/blueprints/github/__init__.py:81
 msgid "GitHub account is already associated with another user"
 msgstr "Обліківка GitHub вже привʼязана до іншого користувача"
 
-#: app/blueprints/github/__init__.py:85
+#: app/blueprints/github/__init__.py:87
 msgid "Unable to find an account for that GitHub user"
 msgstr "Не вдалося знайти обліківку такого користувача GitHub"
 
-#: app/blueprints/github/__init__.py:90
+#: app/blueprints/github/__init__.py:92
 msgid "Authorization failed [err=gh-login-failed]"
 msgstr "Не вдалося авторизуватися [err=gh-login-failed]"
 
 #: app/blueprints/oauth/__init__.py:169 app/templates/admin/tags/list.html:30
 #: app/templates/admin/warnings/list.html:24
-#: app/templates/users/settings_email.html:44
+#: app/templates/users/settings_email.html:49
 msgid "Description"
 msgstr "Опис"
 
@@ -222,112 +222,96 @@ msgstr "Обмін і значки"
 msgid "Remove / Unpublish"
 msgstr "Вилучити / Зняти з публікації"
 
-#: app/blueprints/packages/__init__.py:80
+#: app/blueprints/packages/__init__.py:80 app/logic/package_approval.py:123
 #: app/templates/packages/game_support.html:4
 msgid "Supported Games"
 msgstr "Підтримувані ігри"
 
-#: app/blueprints/packages/packages.py:177
-msgid "Error: Another package already uses this forum topic!"
-msgstr "Помилка: Інший пакунок вже використовує цю тему форуму!"
-
-#: app/blueprints/packages/packages.py:183
-msgid "Error: Forum topic author doesn't match package author."
-msgstr "Помилка: Автор теми форуму не співпадає з автором пакунка."
-
-#: app/blueprints/packages/packages.py:186
-msgid ""
-"Warning: Forum topic not found. This may happen if the topic has only "
-"just been created."
-msgstr ""
-"Увага: Не знайдено теми форуму. Таке може трапитися, якщо тему щойно "
-"створено."
-
-#: app/blueprints/packages/packages.py:239
+#: app/blueprints/packages/packages.py:205
 msgid "No download available."
 msgstr "Завантаження недоступне."
 
-#: app/blueprints/packages/packages.py:253 app/templates/packages/view.html:589
+#: app/blueprints/packages/packages.py:219 app/templates/packages/view.html:589
 msgid "Type"
 msgstr "Тип"
 
-#: app/blueprints/packages/packages.py:254
+#: app/blueprints/packages/packages.py:220
 msgid "Title (Human-readable)"
 msgstr "Заголовок (зрозумілий людям)"
 
-#: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:633
+#: app/blueprints/packages/packages.py:221
+#: app/blueprints/packages/packages.py:603
 msgid "Name (Technical)"
 msgstr "Назва (технічна)"
 
-#: app/blueprints/packages/packages.py:255
-#: app/blueprints/packages/packages.py:634
+#: app/blueprints/packages/packages.py:221
+#: app/blueprints/packages/packages.py:604
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "Лише малі букви (a-z), цифри (0-9) і підкреслення (_)"
 
-#: app/blueprints/packages/packages.py:256
+#: app/blueprints/packages/packages.py:222
 msgid "Short Description (Plaintext)"
 msgstr "Короткий опис (простий текст)"
 
-#: app/blueprints/packages/packages.py:258 app/templates/packages/view.html:611
+#: app/blueprints/packages/packages.py:224 app/templates/packages/view.html:611
 msgid "Maintenance State"
 msgstr "Стан підтримки"
 
-#: app/blueprints/packages/packages.py:260 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:226 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
 msgid "Tags"
 msgstr "Мітки"
 
-#: app/blueprints/packages/packages.py:261
+#: app/blueprints/packages/packages.py:227
 msgid "Content Warnings"
 msgstr "Попередження вмісту"
 
-#: app/blueprints/packages/packages.py:262 app/templates/packages/view.html:600
+#: app/blueprints/packages/packages.py:228 app/templates/packages/view.html:600
 msgid "License"
 msgstr "Ліцензія"
 
-#: app/blueprints/packages/packages.py:263
+#: app/blueprints/packages/packages.py:229
 msgid "Media License"
 msgstr "Ліцензія медія"
 
-#: app/blueprints/packages/packages.py:265
+#: app/blueprints/packages/packages.py:231
 msgid "Long Description (Markdown)"
 msgstr "Довгий опис (Markdown)"
 
-#: app/blueprints/packages/packages.py:267
+#: app/blueprints/packages/packages.py:233
 msgid "VCS Repository URL"
 msgstr "URL репозиторію VCS"
 
-#: app/blueprints/packages/packages.py:268 app/blueprints/users/settings.py:75
+#: app/blueprints/packages/packages.py:234 app/blueprints/users/settings.py:75
 msgid "Website URL"
 msgstr "URL вебсайту"
 
-#: app/blueprints/packages/packages.py:269
+#: app/blueprints/packages/packages.py:235
 msgid "Issue Tracker URL"
 msgstr "URL відстежувача помилок"
 
-#: app/blueprints/packages/packages.py:270
+#: app/blueprints/packages/packages.py:236
 msgid "Forum Topic ID"
 msgstr "ІД теми форуму"
 
-#: app/blueprints/packages/packages.py:271
+#: app/blueprints/packages/packages.py:237
 msgid "Video URL"
 msgstr "URL відеозапису"
 
-#: app/blueprints/packages/packages.py:272
+#: app/blueprints/packages/packages.py:238
 msgid "Donate URL"
 msgstr "Пожертвувати URL"
 
-#: app/blueprints/packages/packages.py:273
+#: app/blueprints/packages/packages.py:239
 msgid "Translation URL"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:279
+#: app/blueprints/packages/packages.py:245
 msgid "_game is not an allowed name"
 msgstr "_гра не є дозволеною назвою"
 
-#: app/blueprints/packages/packages.py:289
+#: app/blueprints/packages/packages.py:255
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -335,91 +319,98 @@ msgstr ""
 "Пакет уже існує, але видалено. Щоб відновити пакет, зверніться до "
 "персоналу ContentDB"
 
-#: app/blueprints/packages/packages.py:294
+#: app/blueprints/packages/packages.py:260
 msgid "Package already exists"
 msgstr "Пакет уже існує"
 
-#: app/blueprints/packages/packages.py:300
+#: app/blueprints/packages/packages.py:266
 msgid "A collection with a similar name already exists"
 msgstr "Колекція з подібним іменем вже існує"
 
-#: app/blueprints/packages/packages.py:361
+#: app/blueprints/packages/packages.py:319
+#: app/blueprints/packages/releases.py:82
+msgid ""
+"You must add an email address to your account and confirm it before you "
+"can manage packages"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:331
 msgid "Unable to find that user"
 msgstr "Не вдалося знайти такого користувача"
 
-#: app/blueprints/packages/packages.py:365
+#: app/blueprints/packages/packages.py:335
 #: app/blueprints/packages/screenshots.py:137
 #: app/blueprints/users/settings.py:131
 msgid "Permission denied"
 msgstr "Доступ відхилено"
 
-#: app/blueprints/packages/packages.py:421
-#: app/blueprints/packages/packages.py:494
-#: app/blueprints/packages/packages.py:514
+#: app/blueprints/packages/packages.py:391
+#: app/blueprints/packages/packages.py:464
+#: app/blueprints/packages/packages.py:484
 msgid "You don't have permission to do that"
 msgstr "У Вас нема прав робити це"
 
-#: app/blueprints/packages/packages.py:453
+#: app/blueprints/packages/packages.py:423
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Будь ласка, прокоментуйте необхідні зміни в гілці затвердження"
 
-#: app/blueprints/packages/packages.py:460
+#: app/blueprints/packages/packages.py:430
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:509
+#: app/blueprints/packages/packages.py:479
 msgid "Deleted package"
 msgstr "Видалити пакунок"
 
-#: app/blueprints/packages/packages.py:529
+#: app/blueprints/packages/packages.py:499
 msgid "Unapproved package"
 msgstr "Несхвалений пакунок"
 
-#: app/blueprints/packages/packages.py:538
+#: app/blueprints/packages/packages.py:508
 msgid "Maintainers (Comma-separated)"
 msgstr "Супровідники (розділені комою)"
 
-#: app/blueprints/packages/packages.py:547
+#: app/blueprints/packages/packages.py:517
 msgid "You don't have permission to edit maintainers"
 msgstr "Ви не маєте дозволу редагувати супроводжуючих"
 
-#: app/blueprints/packages/packages.py:597
+#: app/blueprints/packages/packages.py:567
 msgid "You are not a maintainer"
 msgstr "Ви не супровідник"
 
-#: app/blueprints/packages/packages.py:600
+#: app/blueprints/packages/packages.py:570
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Власник пакунка не може вилучити себе як супровідника"
 
-#: app/blueprints/packages/packages.py:632
+#: app/blueprints/packages/packages.py:602
 msgid "Author Name"
 msgstr "Імʼя автора"
 
-#: app/blueprints/packages/packages.py:702
+#: app/blueprints/packages/packages.py:672
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Увімкнути виявлення підтримки на основі залежностей (рекомендовано)"
 
-#: app/blueprints/packages/packages.py:703
+#: app/blueprints/packages/packages.py:673
 msgid "Supported games"
 msgstr "Підтримувані ігри"
 
-#: app/blueprints/packages/packages.py:704
+#: app/blueprints/packages/packages.py:674
 msgid "Unsupported games"
 msgstr "Непідтримувані ігри"
 
-#: app/blueprints/packages/packages.py:705
+#: app/blueprints/packages/packages.py:675
 msgid "Supports all games (unless stated) / is game independent"
 msgstr "Підтримує усі ігри (доки не вказано)/ ігро-незалежний"
 
-#: app/blueprints/packages/packages.py:721
+#: app/blueprints/packages/packages.py:691
 msgid "You need at least one release before you can edit game support"
 msgstr ""
 "Вам потрібна щонайменше одна публікація, перш ніж ви зможете редагувати "
 "підтримку ігор"
 
-#: app/blueprints/packages/packages.py:725
+#: app/blueprints/packages/packages.py:695
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
 "Пакунок модів має містити щонайменше один мод. Будь ласка створіть нову "
@@ -442,13 +433,13 @@ msgstr "Посилання на Git (тобто: хеш фіксації, гіл
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:70
-#: app/blueprints/packages/releases.py:194
+#: app/blueprints/packages/releases.py:198
 msgid "Minimum Minetest Version"
 msgstr "Мінімальна версія Minetest"
 
 #: app/blueprints/packages/releases.py:60
 #: app/blueprints/packages/releases.py:72
-#: app/blueprints/packages/releases.py:197
+#: app/blueprints/packages/releases.py:201
 msgid "Maximum Minetest Version"
 msgstr "Максимальна версія Minetest"
 
@@ -466,80 +457,79 @@ msgstr "ІД завдання"
 msgid "Is Approved"
 msgstr "Затверджено"
 
-#: app/blueprints/packages/releases.py:87
+#: app/blueprints/packages/releases.py:91
 msgid "Import from Git"
 msgstr "Імпортувати з Git"
 
-#: app/blueprints/packages/releases.py:87
+#: app/blueprints/packages/releases.py:91
 msgid "Upload .zip file"
 msgstr "Відвантажити файл .zip"
 
-#: app/blueprints/packages/releases.py:193
+#: app/blueprints/packages/releases.py:197
 msgid "Set Min"
 msgstr "Вказати мінімум"
 
-#: app/blueprints/packages/releases.py:196
+#: app/blueprints/packages/releases.py:200
 msgid "Set Max"
 msgstr "Вказати максимум"
 
-#: app/blueprints/packages/releases.py:199
+#: app/blueprints/packages/releases.py:203
 msgid "Only change values previously set as none"
 msgstr ""
 "Змінюйте лише значення, для яких раніше було встановлено значення "
 "\"немає\"."
 
-#: app/blueprints/packages/releases.py:200
+#: app/blueprints/packages/releases.py:204
 msgid "Update"
 msgstr "Оновити"
 
-#: app/blueprints/packages/releases.py:252
+#: app/blueprints/packages/releases.py:256
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Тригер"
 
-#: app/blueprints/packages/releases.py:253
+#: app/blueprints/packages/releases.py:257
 msgid "New Commit"
 msgstr "Новий коміт"
 
-#: app/blueprints/packages/releases.py:254 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:258 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Нова мітка"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:260
 msgid "Branch name"
 msgstr "Назва гілки"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:261
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Дія"
 
-#: app/blueprints/packages/releases.py:258
+#: app/blueprints/packages/releases.py:262
 msgid "Send notification and mark as outdated"
 msgstr "Надіслати сповіщення і позначити застарілим"
 
-#: app/blueprints/packages/releases.py:258
-#: app/templates/macros/package_approval.html:22
+#: app/blueprints/packages/releases.py:262 app/logic/package_approval.py:104
 msgid "Create release"
 msgstr "Створити випуск"
 
-#: app/blueprints/packages/releases.py:260
+#: app/blueprints/packages/releases.py:264
 msgid "Save Settings"
 msgstr "Зберегти налаштування"
 
-#: app/blueprints/packages/releases.py:261
+#: app/blueprints/packages/releases.py:265
 msgid "Disable Automation"
 msgstr "Вимкнути автоматизацію"
 
-#: app/blueprints/packages/releases.py:300
+#: app/blueprints/packages/releases.py:304
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "Додайте URL-адресу сховища Git, щоб налаштувати автоматичні випуски"
 
-#: app/blueprints/packages/releases.py:316
+#: app/blueprints/packages/releases.py:320
 msgid "Deleted update configuration"
 msgstr "Конфігурацію оновлення видалено"
 
-#: app/blueprints/packages/releases.py:324
+#: app/blueprints/packages/releases.py:328
 msgid "Now, please create an initial release"
 msgstr "Тепер, будь ласка, створіть початковий випуск"
 
@@ -649,7 +639,7 @@ msgid "Please wait before commenting again"
 msgstr "Зачекайте, перш ніж коментувати знову"
 
 #: app/blueprints/threads/__init__.py:284
-#: app/templates/macros/package_approval.html:112
+#: app/templates/macros/package_approval.html:56
 msgid "Open Thread"
 msgstr "Відкрити гілку"
 
@@ -714,7 +704,7 @@ msgstr "Не вдалося ввійти"
 msgid "Display Name"
 msgstr "Відображуване ім'я"
 
-#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:298
+#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:309
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "Імʼя користувача"
@@ -1005,7 +995,7 @@ msgid "Account and Security"
 msgstr "Обліківка і безпека"
 
 #: app/blueprints/users/settings.py:46
-#: app/templates/users/settings_email.html:8
+#: app/templates/users/settings_email.html:12
 msgid "Email and Notifications"
 msgstr "Ел. пошта і сповіщення"
 
@@ -1030,27 +1020,27 @@ msgstr "URL-адреса пожертви"
 msgid "A user already has that name"
 msgstr "Користувач уже має таке імʼя"
 
-#: app/blueprints/users/settings.py:256
+#: app/blueprints/users/settings.py:264
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr "Користувачі з рангом модератора або вище не можуть бути видалені"
 
-#: app/blueprints/users/settings.py:299
+#: app/blueprints/users/settings.py:310
 msgid "Display name"
 msgstr "Відображуване ім'я"
 
-#: app/blueprints/users/settings.py:300
+#: app/blueprints/users/settings.py:311
 msgid "Forums Username"
 msgstr "Імʼя користувача на форумі"
 
-#: app/blueprints/users/settings.py:301
+#: app/blueprints/users/settings.py:312
 msgid "GitHub Username"
 msgstr "Імʼя користувача GitHub"
 
-#: app/blueprints/users/settings.py:302 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:313 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "ранг"
 
-#: app/blueprints/users/settings.py:346
+#: app/blueprints/users/settings.py:357
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr "Не можна підвищити користувача до рангу, вищого за вас!"
 
@@ -1067,32 +1057,78 @@ msgstr "Файловий фільтр"
 msgid "Search"
 msgstr "Пошук"
 
-#: app/logic/package_validator.py:37
+#: app/logic/package_approval.py:95
 msgid "A package already exists with this name. Please see Policy and Guidance 3"
 msgstr "Пакет із такою назвою вже існує. Перегляньте Політику та вказівки 3"
 
-#: app/logic/package_validator.py:40
-#: app/templates/macros/package_approval.html:36
-msgid "A release is required before this package can be approved."
-msgstr "Перш ніж цей пакет можна буде затвердити, потрібен випуск."
+#: app/logic/package_approval.py:99
+msgid "You need to create a release before this package can be approved."
+msgstr "Вам потрібно створити випуск, перш ніж цей пакет можна буде схвалити."
 
-#: app/logic/package_validator.py:46
-#: app/templates/macros/package_approval.html:45
+#: app/logic/package_approval.py:101
+msgid "Release is still importing, or has an error."
+msgstr "Випуск все ще імпортується або має помилку."
+
+#: app/logic/package_approval.py:105
+msgid "Set up releases"
+msgstr "Налаштувати випуски"
+
+#: app/logic/package_approval.py:112
+msgid "You need to add at least one screenshot."
+msgstr "Потрібно додати принаймні один знімок екрана."
+
+#: app/logic/package_approval.py:117
 #, python-format
 msgid ""
 "The following hard dependencies need to be added to ContentDB first: "
 "%(deps)s"
 msgstr "Спершу до ContentDB потрібно додати такі жорсткі залежності: %(deps)s"
 
-#: app/logic/package_validator.py:51
-#: app/templates/macros/package_approval.html:41
-msgid "You need to add at least one screenshot."
-msgstr "Потрібно додати принаймні один знімок екрана."
+#: app/logic/package_approval.py:121
+msgid ""
+"What games does your package support? Please specify on the supported "
+"games page"
+msgstr ""
 
-#: app/logic/package_validator.py:54
-#: app/templates/macros/package_approval.html:49
+#: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
 msgstr "Зачекайте, поки ліцензію буде додано до CDB."
+
+#: app/logic/package_approval.py:134
+msgid "Please make sure that this package has the right to the names it uses."
+msgstr ""
+"Будь ласка, переконайтеся, що цей пакет має права на імена, які він "
+"використовує."
+
+#: app/logic/package_approval.py:139
+#, python-format
+msgid "Please make sure that this package has the right to the names %(names)s"
+msgstr "Переконайтеся, що цей пакет має права на імена %(names)s"
+
+#: app/logic/package_approval.py:140 app/templates/index.html:111
+#: app/templates/index.html:122 app/templates/index.html:133
+#: app/templates/index.html:144 app/templates/index.html:155
+#: app/templates/index.html:181 app/templates/packages/game_hub.html:42
+#: app/templates/packages/game_hub.html:49
+#: app/templates/packages/game_hub.html:56
+#: app/templates/packages/game_hub.html:63
+#: app/templates/packages/game_hub.html:70
+msgid "See more"
+msgstr "Дізнатися більше"
+
+#: app/logic/package_approval.py:145
+msgid "Error: Another package already uses this forum topic!"
+msgstr "Помилка: Інший пакунок вже використовує цю тему форуму!"
+
+#: app/logic/package_approval.py:150
+msgid "Error: Forum topic author doesn't match package author."
+msgstr "Помилка: Автор теми форуму не співпадає з автором пакунка."
+
+#: app/logic/package_approval.py:152
+msgid ""
+"Warning: Forum topic not found. The topic may have been created since the"
+" last forum crawl."
+msgstr ""
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1196,7 +1232,7 @@ msgstr "Затвердити"
 msgid "Delete"
 msgstr "Видалити"
 
-#: app/models/packages.py:572 app/templates/packages/view.html:163
+#: app/models/packages.py:569 app/templates/packages/view.html:163
 msgid "Work in Progress"
 msgstr "Робота в процесі"
 
@@ -1318,7 +1354,7 @@ msgstr "Вийти з аккаунта"
 msgid "Languages"
 msgstr ""
 
-#: app/templates/base.html:202 app/templates/translate/index.html:72
+#: app/templates/base.html:202 app/templates/translate/index.html:76
 msgid "Help translate ContentDB"
 msgstr "Допоможіть перекласти ContentDB"
 
@@ -1425,17 +1461,6 @@ msgstr "Далі"
 #: app/templates/packages/game_hub.html:44
 msgid "Recently Added"
 msgstr "Нещодавно додані"
-
-#: app/templates/index.html:111 app/templates/index.html:122
-#: app/templates/index.html:133 app/templates/index.html:144
-#: app/templates/index.html:155 app/templates/index.html:181
-#: app/templates/packages/game_hub.html:42
-#: app/templates/packages/game_hub.html:49
-#: app/templates/packages/game_hub.html:56
-#: app/templates/packages/game_hub.html:63
-#: app/templates/packages/game_hub.html:70
-msgid "See more"
-msgstr "Дізнатися більше"
 
 #: app/templates/index.html:118 app/templates/index.html:124
 #: app/templates/packages/game_hub.html:51
@@ -1844,10 +1869,8 @@ msgstr ""
 "обліковим записом."
 
 #: app/templates/emails/unable_to_find_account.html:9
-msgid "Otherwise, you may need to contact rubenwardy for help."
+msgid "Otherwise, you may need to contact the admin for help."
 msgstr ""
-"В іншому випадку вам може знадобитися звернутися за допомогою до "
-"rubenwardy."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1930,58 +1953,35 @@ msgstr "Почніть вводити, щоб побачити пропозиц�
 msgid "State"
 msgstr "Держава"
 
-#: app/templates/macros/package_approval.html:26
-msgid "Set up releases"
-msgstr "Налаштувати випуски"
-
-#: app/templates/macros/package_approval.html:31
-msgid "You need to create a release before this package can be approved."
-msgstr "Вам потрібно створити випуск, перш ніж цей пакет можна буде схвалити."
-
-#: app/templates/macros/package_approval.html:33
-msgid "Release is still importing, or has an error."
-msgstr "Випуск все ще імпортується або має помилку."
-
-#: app/templates/macros/package_approval.html:56
-msgid "You should add at least one screenshot."
-msgstr "Ви повинні додати принаймні один знімок екрана."
-
-#: app/templates/macros/package_approval.html:62
+#: app/templates/macros/package_approval.html:36
 msgid "Please wait for the release to be approved."
 msgstr "Будь ласка, дочекайтеся схвалення випуску."
 
-#: app/templates/macros/package_approval.html:64
+#: app/templates/macros/package_approval.html:38
 msgid "You can now approve this package if you're ready."
 msgstr "Тепер ви можете схвалити цей пакет, якщо ви готові."
 
-#: app/templates/macros/package_approval.html:66
+#: app/templates/macros/package_approval.html:40
 msgid "Please wait for the package to be approved."
 msgstr "Будь ласка, дочекайтеся схвалення випуску."
 
-#: app/templates/macros/package_approval.html:70
+#: app/templates/macros/package_approval.html:44
 msgid "You can now submit this package for approval if you're ready."
 msgstr "Тепер ви можете подати цей пакет на затвердження, якщо ви готові."
 
-#: app/templates/macros/package_approval.html:72
+#: app/templates/macros/package_approval.html:46
 msgid "This package can be submitted for approval when ready."
 msgstr "Цей пакет можна надіслати на затвердження, коли він буде готовий."
 
-#: app/templates/macros/package_approval.html:102
-msgid "Please make sure that this package has the right to the names it uses."
+#: app/templates/macros/package_approval.html:49
+msgid "You need to fix the above errors before you can submit for review"
 msgstr ""
-"Будь ласка, переконайтеся, що цей пакет має права на імена, які він "
-"використовує."
 
-#: app/templates/macros/package_approval.html:104
-#, python-format
-msgid "Please make sure that this package has the right to the names %(names)s"
-msgstr "Переконайтеся, що цей пакет має права на імена %(names)s"
-
-#: app/templates/macros/package_approval.html:115
+#: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
 msgstr "Нитка затвердження пакета"
 
-#: app/templates/macros/package_approval.html:116
+#: app/templates/macros/package_approval.html:60
 msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
@@ -3279,16 +3279,27 @@ msgstr ""
 msgid "Translating content meta - lua_api.md"
 msgstr ""
 
-#: app/templates/packages/translation.html:31
+#: app/templates/packages/translation.html:30
+msgid "Translation template"
+msgstr ""
+
+#: app/templates/packages/translation.html:32
+#, python-format
+msgid ""
+"To quickly add support for ContentDB package translation, create a file "
+"at %(location)s with the following content:"
+msgstr ""
+
+#: app/templates/packages/translation.html:43
 #, python-format
 msgid "%(title)s is available in %(num)d languages."
 msgstr ""
 
-#: app/templates/packages/translation.html:32
+#: app/templates/packages/translation.html:44
 msgid "ContentDB reads translations from locale files (.tr) in your package."
 msgstr ""
 
-#: app/templates/packages/translation.html:39
+#: app/templates/packages/translation.html:51
 msgid "Language"
 msgstr ""
 
@@ -3554,8 +3565,8 @@ msgstr ""
 " через цю форму."
 
 #: app/templates/report/index.html:16
-msgid "Please sign in or contact the admin in another way"
-msgstr "Будь ласка, увійдіть або зв'яжіться з адміністратором іншим способом"
+msgid "Please sign in or contact the admin using the link below."
+msgstr ""
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
@@ -3978,20 +3989,24 @@ msgid ""
 "languages."
 msgstr ""
 
-#: app/templates/translate/index.html:69
+#: app/templates/translate/index.html:65
+msgid "How to translate a mod / game"
+msgstr ""
+
+#: app/templates/translate/index.html:73
 msgid "ContentDB"
 msgstr ""
 
-#: app/templates/translate/index.html:76
+#: app/templates/translate/index.html:80
 msgid "Packages that support translation"
 msgstr ""
 
-#: app/templates/translate/index.html:81
+#: app/templates/translate/index.html:85
 #, python-format
 msgid "Only show packages with %(lang)s translation"
 msgstr ""
 
-#: app/templates/translate/index.html:85
+#: app/templates/translate/index.html:89
 #, python-format
 msgid "Hide packages with %(lang)s translation"
 msgstr ""
@@ -4077,7 +4092,7 @@ msgstr ""
 
 #: app/templates/users/change_set_password.html:17
 #: app/templates/users/register.html:25
-#: app/templates/users/settings_email.html:20
+#: app/templates/users/settings_email.html:24
 msgid "Your email will never be shared with a third-party."
 msgstr "Ваша електронна пошта ніколи не буде передана третім особам."
 
@@ -4352,7 +4367,7 @@ msgid "Change Email and Send Password Reset"
 msgstr "Зміна адреси електронної пошти та скидання пароля"
 
 #: app/templates/users/modtools.html:108
-#: app/templates/users/settings_email.html:14
+#: app/templates/users/settings_email.html:18
 msgid "Email Address"
 msgstr "Ел. адреса"
 
@@ -4431,14 +4446,20 @@ msgid "Profile Picture"
 msgstr "Зображення профілю"
 
 #: app/templates/users/profile_edit.html:27
-msgid "Sync with Forums"
+msgid "Import from forums"
 msgstr ""
 
-#: app/templates/users/profile_edit.html:46
+#: app/templates/users/profile_edit.html:47
+msgid ""
+"Profile pictures should be square, at least 64x64px, and one of the "
+"following formats: jpeg, png, or webp."
+msgstr ""
+
+#: app/templates/users/profile_edit.html:51
 msgid "Profile Information"
 msgstr "Інформація про профіль"
 
-#: app/templates/users/profile_edit.html:53
+#: app/templates/users/profile_edit.html:58
 msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr "Видавання себе за іншого користувача є підставою для постійного бану"
 
@@ -4475,7 +4496,7 @@ msgstr "Я погоджуюся з умовами "
 msgid "Email and Notifications - %(username)s"
 msgstr "Електронна пошта та сповіщення - %(username)s"
 
-#: app/templates/users/settings_email.html:19
+#: app/templates/users/settings_email.html:23
 msgid ""
 "Your email is needed to recover your account if you forget your password,"
 " and to send (configurable) notifications."
@@ -4484,21 +4505,21 @@ msgstr ""
 " забудете пароль, а також для надсилання повідомлень (які можна "
 "налаштувати)."
 
-#: app/templates/users/settings_email.html:25
+#: app/templates/users/settings_email.html:29
 msgid "There is at least one verification pending."
 msgstr "Принаймні одна перевірка ще не завершена."
 
-#: app/templates/users/settings_email.html:29
+#: app/templates/users/settings_email.html:33
 msgid "Notification Settings"
 msgstr "Налаштування сповіщень"
 
-#: app/templates/users/settings_email.html:33
+#: app/templates/users/settings_email.html:37
 msgid "Email notifications are currently turned off. Click 'save' to enable."
 msgstr ""
 "Сповіщення на електронну пошту наразі вимкнено. Натисніть \"Зберегти\", "
 "щоб увімкнути."
 
-#: app/templates/users/settings_email.html:38
+#: app/templates/users/settings_email.html:42
 msgid ""
 "Configure whether certain types of notifications are sent immediately, or"
 " as part of a daily digest."
@@ -4507,14 +4528,18 @@ msgstr ""
 "щоденного дайджесту."
 
 #: app/templates/users/settings_email.html:43
+msgid "Disable all"
+msgstr ""
+
+#: app/templates/users/settings_email.html:48
 msgid "Event"
 msgstr "Подія"
 
-#: app/templates/users/settings_email.html:45
+#: app/templates/users/settings_email.html:50
 msgid "Immediately"
 msgstr "Негайно."
 
-#: app/templates/users/settings_email.html:46
+#: app/templates/users/settings_email.html:51
 msgid "In digest"
 msgstr "У дайджесті"
 
@@ -4722,7 +4747,7 @@ msgstr ""
 #~ msgstr "Верхній знімок екрана буде використано як мініатюру пакунка."
 
 #~ msgid "Sync with Forums"
-#~ msgstr "Синхронізація з форумами"
+#~ msgstr ""
 
 #~ msgid ""
 #~ "No reviewed packages accepting donations. "
@@ -4867,4 +4892,27 @@ msgstr ""
 
 #~ msgid "Create Tag"
 #~ msgstr "Створити мітку"
+
+#~ msgid ""
+#~ "Warning: Forum topic not found. This "
+#~ "may happen if the topic has only"
+#~ " just been created."
+#~ msgstr ""
+#~ "Увага: Не знайдено теми форуму. Таке "
+#~ "може трапитися, якщо тему щойно "
+#~ "створено."
+
+#~ msgid "A release is required before this package can be approved."
+#~ msgstr "Перш ніж цей пакет можна буде затвердити, потрібен випуск."
+
+#~ msgid "Otherwise, you may need to contact rubenwardy for help."
+#~ msgstr ""
+#~ "В іншому випадку вам може знадобитися"
+#~ " звернутися за допомогою до rubenwardy."
+
+#~ msgid "You should add at least one screenshot."
+#~ msgstr "Ви повинні додати принаймні один знімок екрана."
+
+#~ msgid "Please sign in or contact the admin in another way"
+#~ msgstr "Будь ласка, увійдіть або зв'яжіться з адміністратором іншим способом"
 
