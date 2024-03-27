@@ -73,23 +73,29 @@ def is_package_page(f):
 	return decorated_function
 
 
-def add_notification(target, causer: User, type: NotificationType, title: str, url: str, package: Package = None):
+def add_notification(target, causer: User, type: NotificationType, title: str, url: str,
+			package: Package = None, session: sqlalchemy.orm.Session = None):
+	if session is None:
+		session = db.session
+
 	try:
 		iter(target)
 		for x in target:
-			add_notification(x, causer, type, title, url, package)
+			add_notification(x, causer, type, title, url, package, session)
 		return
 	except TypeError:
 		pass
 
 	if target.rank.at_least(UserRank.NEW_MEMBER) and target != causer:
-		Notification.query.filter_by(user=target, causer=causer, type=type, title=title, url=url, package=package).delete()
+		session.query(Notification) \
+				.filter_by(user=target, causer=causer, type=type, title=title, url=url, package=package) \
+				.delete()
 		notif = Notification(target, causer, type, title, url, package)
-		db.session.add(notif)
+		session.add(notif)
 
 
 def add_audit_log(severity: AuditSeverity, causer: User, title: str, url: typing.Optional[str],
-				  package: Package = None, description: str = None):
+			package: Package = None, description: str = None):
 	entry = AuditLogEntry(causer, severity, title, url, package, description)
 	db.session.add(entry)
 
@@ -114,7 +120,10 @@ def add_system_audit_log(severity: AuditSeverity, title: str, url: str, package=
 	return add_audit_log(severity, get_system_user(), title, url, package, description)
 
 
-def post_bot_message(package: Package, title: str, message: str):
+def post_bot_message(package: Package, title: str, message: str, session=None):
+	if session is None:
+		session = db.session
+
 	system_user = get_system_user()
 
 	thread = package.threads.filter_by(author=system_user).first()
@@ -125,16 +134,16 @@ def post_bot_message(package: Package, title: str, message: str):
 		thread.author = system_user
 		thread.private = True
 		thread.watchers.extend(package.maintainers)
-		db.session.add(thread)
-		db.session.flush()
+		session.add(thread)
+		session.flush()
 
 	reply = ThreadReply()
-	reply.thread  = thread
-	reply.author  = system_user
+	reply.thread = thread
+	reply.author = system_user
 	reply.comment = "**{}**\n\n{}\n\nThis is an automated message, but you can reply if you need help".format(title, message)
-	db.session.add(reply)
+	session.add(reply)
 
-	add_notification(thread.watchers, system_user, NotificationType.BOT, title, thread.get_view_url(), thread.package)
+	add_notification(thread.watchers, system_user, NotificationType.BOT, title, thread.get_view_url(), thread.package, session)
 
 	thread.replies.append(reply)
 

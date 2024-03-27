@@ -34,9 +34,9 @@ from app.logic.LogicError import LogicError
 from app.logic.packages import do_edit_package
 from app.querybuilder import QueryBuilder
 from app.rediscache import has_key, set_temp_key
-from app.tasks.importtasks import import_repo_screenshot, check_zip_release
+from app.tasks.importtasks import import_repo_screenshot, check_zip_release, remove_package_game_support, \
+	update_package_game_support
 from app.tasks.webhooktasks import post_discord_webhook
-from app.logic.game_support import GameSupportResolver
 
 from . import bp, get_package_tabs
 from app.models import Package, Tag, db, User, Tags, PackageState, Permission, PackageType, MetaPackage, ForumTopic, \
@@ -46,6 +46,7 @@ from app.models import Package, Tag, db, User, Tags, PackageState, Permission, P
 from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, add_audit_log, get_package_by_info, \
 	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options, post_to_approval_thread
 from app.logic.package_approval import validate_package_for_approval, can_move_to_state
+from app.logic.game_support import game_support_set
 
 
 @bp.route("/packages/")
@@ -409,6 +410,7 @@ def move_to_state(package):
 			s.approved = True
 
 		msg = "Approved {}".format(package.title)
+		update_package_game_support.delay(package.id)
 	elif state == PackageState.READY_FOR_REVIEW:
 		post_discord_webhook.delay(package.author.display_name,
 				"Ready for Review: {}".format(package.get_url("packages.view", absolute=True)), True,
@@ -478,6 +480,8 @@ def remove(package):
 			f"Deleted package {package.author.username}/{package.name} with reason '{reason}'",
 			True, package.title, package.short_desc, package.get_thumb_url(2, True, "png"))
 
+		remove_package_game_support.delay(package.id)
+
 		flash(gettext("Deleted package"), "success")
 
 		return redirect(url)
@@ -497,6 +501,8 @@ def remove(package):
 		post_discord_webhook.delay(current_user.username,
 			"Unapproved package with reason {}\n\n{}".format(reason, package.get_url("packages.view", absolute=True)), True,
 			package.title, package.short_desc, package.get_thumb_url(2, True, "png"))
+
+		remove_package_game_support.delay(package.id)
 
 		flash(gettext("Unapproved package"), "success")
 
@@ -724,14 +730,12 @@ def game_support(package):
 
 		if can_override:
 			try:
-				resolver = GameSupportResolver(db.session)
-
 				game_is_supported = {}
 				for game in get_games_from_csv(db.session, form.supported.data or ""):
 					game_is_supported[game.id] = True
 				for game in get_games_from_csv(db.session, form.unsupported.data or ""):
 					game_is_supported[game.id] = False
-				resolver.set_supported(package, game_is_supported, 11)
+				game_support_set(db.session, package, game_is_supported, 11)
 				detect_update_needed = True
 			except LogicError as e:
 				flash(e.message, "danger")

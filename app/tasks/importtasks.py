@@ -40,8 +40,8 @@ from .minetestcheck import build_tree, MinetestCheckError, ContentType, PackageT
 from .webhooktasks import post_discord_webhook
 from app import app
 from app.logic.LogicError import LogicError
-from app.logic.game_support import GameSupportResolver
 from app.logic.packages import do_edit_package, ALIASES
+from app.logic.game_support import game_support_update, game_support_set, game_support_update_all, game_support_remove
 from app.utils.image import get_image_size
 
 
@@ -90,8 +90,21 @@ def get_meta(urlstr, author):
 
 @celery.task()
 def update_all_game_support():
-	resolver = GameSupportResolver(db.session)
-	resolver.init_all()
+	game_support_update_all(db.session)
+	db.session.commit()
+
+
+@celery.task()
+def update_package_game_support(package_id: int):
+	package = Package.query.get(package_id)
+	game_support_update(db.session, package)
+	db.session.commit()
+
+
+@celery.task()
+def remove_package_game_support(package_id: int):
+	package = Package.query.get(package_id)
+	game_support_remove(db.session, package)
 	db.session.commit()
 
 
@@ -186,8 +199,6 @@ def post_release_check_update(self, release: PackageRelease, path):
 
 		# Update game support
 		if package.type == PackageType.MOD or package.type == PackageType.TXP:
-			resolver = GameSupportResolver(db.session)
-
 			game_is_supported = {}
 			if "supported_games" in tree.meta:
 				for game in get_games_from_list(db.session, tree.meta["supported_games"]):
@@ -205,17 +216,21 @@ def post_release_check_update(self, release: PackageRelease, path):
 				for game in get_games_from_list(db.session, tree.meta["unsupported_games"]):
 					game_is_supported[game.id] = False
 
-			resolver.set_supported(package, game_is_supported, 10)
+			game_support_set(db.session, package, game_is_supported, 10)
 			if package.type == PackageType.MOD:
-				resolver.update(package)
+				errors = game_support_update(db.session, package)
+				if len(errors) != 0:
+					raise TaskError("Error validating game support:\n\n" + "\n".join([f"- {x}" for x in errors]))
 
 		return tree
 
 	except (MinetestCheckError, TaskError, LogicError) as err:
 		db.session.rollback()
 
+		error_message = err.value if hasattr(err, "value") else str(err)
+
 		task_url = url_for('tasks.check', id=self.request.id)
-		msg = f"{err}\n\n[View Release]({release.get_edit_url()}) | [View Task]({task_url})"
+		msg = f"{error_message}\n\n[View Release]({release.get_edit_url()}) | [View Task]({task_url})"
 		post_bot_message(release.package, f"Release {release.title} validation failed", msg)
 
 		if "Fails validation" not in release.title:
@@ -225,7 +240,7 @@ def post_release_check_update(self, release: PackageRelease, path):
 		release.approved = False
 		db.session.commit()
 
-		raise TaskError(str(err))
+		raise TaskError(error_message)
 
 
 def update_translations(package: Package, tree: PackageTreeNode):

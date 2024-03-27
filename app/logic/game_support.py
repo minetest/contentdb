@@ -1,5 +1,5 @@
 # ContentDB
-# Copyright (C) 2022 rubenwardy
+# Copyright (C) rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -14,31 +14,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+from typing import List, Dict, Optional
 
-import sys
-from typing import List, Dict
+import sqlalchemy
 
-import sqlalchemy.orm
-
-from app.logic.LogicError import LogicError
-from app.models import Package, MetaPackage, PackageType, PackageState, PackageGameSupport
-
-"""
-get_game_support(package):
-	if package is a game:
-		return [ package ]
-
-	for all hard dependencies:
-		support = support AND get_meta_package_support(dep)
-
-	return support
-
-get_meta_package_support(meta):
-	for package implementing mod name:
-		support = support OR get_game_support(package)
-
-	return support
-"""
+from app.models import PackageType, Package, PackageState, PackageGameSupport
+from app.utils import post_bot_message
 
 
 minetest_game_mods = {
@@ -55,123 +36,319 @@ mtg_mod_blacklist = {
 }
 
 
-class GameSupportResolver:
-	session: sqlalchemy.orm.Session
-	checked_packages = set()
-	checked_modnames = set()
-	resolved_packages: Dict[int, set[int]] = {}
-	resolved_modnames: Dict[int, set[int]] = {}
+class GSPackage:
+	author: str
+	name: str
+	type: PackageType
 
-	def __init__(self, session):
-		self.session = session
+	provides: set[str]
+	depends: set[str]
 
-	def resolve_for_meta_package(self, meta: MetaPackage, history: List[str]) -> set[int]:
-		print(f"Resolving for {meta.name}", file=sys.stderr)
+	user_supported_games: set[str]
+	user_unsupported_games: set[str]
+	detected_supported_games: set[str]
+	supports_all_games: bool
 
-		key = meta.name
-		if key in self.resolved_modnames:
-			return self.resolved_modnames.get(key)
+	detection_disabled: bool
 
-		if key in self.checked_modnames:
-			print(f"Error, cycle found: {','.join(history)}", file=sys.stderr)
-			return set()
+	is_confirmed: bool
+	errors: set[str]
 
-		self.checked_modnames.add(key)
+	def __init__(self, author: str, name: str, type: PackageType, provides: set[str]):
+		self.author = author
+		self.name = name
+		self.type = type
+		self.provides = provides
+		self.depends = set()
+		self.user_supported_games = set()
+		self.user_unsupported_games = set()
+		self.detected_supported_games = set()
+		self.supports_all_games = False
+		self.detection_disabled = False
+		self.is_confirmed = type == PackageType.GAME
+		self.errors = set()
 
-		retval = set()
+		# For dodgy games, discard MTG mods
+		if self.type == PackageType.GAME and self.name in mtg_mod_blacklist:
+			self.provides.difference_update(minetest_game_mods)
 
-		for package in meta.packages:
-			if package.state != PackageState.APPROVED:
-				continue
+	@property
+	def id_(self) -> str:
+		return f"{self.author}/{self.name}"
 
-			if meta.name in minetest_game_mods and package.name in mtg_mod_blacklist:
-				continue
+	@property
+	def supported_games(self) -> set[str]:
+		ret = set()
+		ret.update(self.user_supported_games)
+		if not self.detection_disabled:
+			ret.update(self.detected_supported_games)
+		ret.difference_update(self.user_unsupported_games)
+		return ret
 
-			ret = self.resolve(package, history)
-			if len(ret) == 0:
-				retval = set()
+	@property
+	def unsupported_games(self) -> set[str]:
+		return self.user_unsupported_games
+
+
+class GameSupport:
+	packages: Dict[str, GSPackage]
+	modified_packages: set[GSPackage]
+
+	def __init__(self):
+		self.packages = {}
+		self.modified_packages = set()
+
+	@property
+	def all_confirmed(self):
+		return all([x.is_confirmed for x in self.packages.values()])
+
+	@property
+	def has_errors(self):
+		return any([len(x.errors) > 0 for x in self.packages.values()])
+
+	@property
+	def error_count(self):
+		return sum([len(x.errors) for x in self.packages.values()])
+
+	@property
+	def all_errors(self) -> set[str]:
+		errors = set()
+		for package in self.packages.values():
+			for err in package.errors:
+				errors.add(package.id_ + ": " + err)
+		return errors
+
+	def add(self, package: GSPackage) -> GSPackage:
+		self.packages[package.id_] = package
+		return package
+
+	def get(self, id_: str) -> Optional[GSPackage]:
+		return self.packages[id_]
+
+	def get_all_that_provide(self, modname: str) -> List[GSPackage]:
+		return [package for package in self.packages.values() if modname in package.provides]
+
+	def get_all_that_depend_on(self, modname: str) -> List[GSPackage]:
+		return [package for package in self.packages.values() if modname in package.depends]
+
+	def _get_supported_games_for_modname(self, depend: str, visited: list[str]):
+		dep_supports_all = False
+		for_dep = set()
+
+		for provider in self.get_all_that_provide(depend):
+			found_in = self._get_supported_games(provider, visited)
+			if found_in is None:
+				# Unsupported, keep going
+				pass
+			elif len(found_in) == 0:
+				dep_supports_all = True
 				break
+			else:
+				for_dep.update(found_in)
 
-			retval.update(ret)
+		return dep_supports_all, for_dep
 
-		self.resolved_modnames[key] = retval
-		return retval
+	def _get_supported_games_for_deps(self, package: GSPackage, visited: list[str]) -> Optional[set[str]]:
+		ret = set()
 
-	def resolve(self, package: Package, history: List[str]) -> set[int]:
-		key: int = package.id
-		print(f"Resolving for {key}", file=sys.stderr)
+		for depend in package.depends:
+			dep_supports_all, for_dep = self._get_supported_games_for_modname(depend, visited)
 
-		history = history.copy()
-		history.append(package.get_id())
+			if dep_supports_all:
+				# Dep is game independent
+				pass
+			elif len(for_dep) == 0:
+				package.errors.add(f"Unable to fulfill dependency {depend}")
+				return None
+			elif len(ret) == 0:
+				ret = for_dep
+			else:
+				ret.intersection_update(for_dep)
+				if len(ret) == 0:
+					package.errors.add("Game support conflict, unable to install package on any games")
+					return None
+
+		return ret
+
+	def _get_supported_games(self, package: GSPackage, visited: list[str]) -> Optional[set[str]]:
+		if package.id_ in visited:
+			first_idx = visited.index(package.id_)
+			visited = visited[first_idx:]
+			err = f"Dependency cycle detected: {' -> '.join(visited)} -> {package.id_}"
+			for id_ in visited:
+				package2 = self.get(id_)
+				package2.errors.add(err)
+			return None
+
+		visited = visited.copy()
+		visited.append(package.id_)
 
 		if package.type == PackageType.GAME:
-			return {package.id}
+			return {package.name}
+		elif package.is_confirmed:
+			return package.supported_games
+		else:
+			ret = self._get_supported_games_for_deps(package, visited)
+			if ret is None:
+				assert len(package.errors) > 0
+				return None
 
-		if key in self.resolved_packages:
-			return self.resolved_packages.get(key)
+			ret = ret.copy()
+			ret.difference_update(package.user_unsupported_games)
+			package.detected_supported_games = ret
+			self.modified_packages.add(package)
 
-		if key in self.checked_packages:
-			print(f"Error, cycle found: {','.join(history)}", file=sys.stderr)
-			return set()
+			if len(ret) > 0:
+				for supported in package.user_supported_games:
+					if supported not in ret:
+						package.errors.add(f"`{supported}` is specified in supported_games but it is impossible to run {package.name} in that game. " +
+								f"Its dependencies can only be fulfilled in {', '.join([f'`{x}`' for x in ret])}. " +
+								"Check your hard dependencies.")
 
-		self.checked_packages.add(key)
+				if package.supports_all_games:
+					package.errors.add(
+							"This package cannot support all games as some dependencies require specific game(s): " +
+							", ".join([f'`{x}`' for x in ret]))
 
-		if package.type != PackageType.MOD:
-			raise LogicError(500, "Got non-mod")
+			package.is_confirmed = True
+			return package.supported_games
 
-		retval = set()
+	def on_update(self, package: GSPackage):
+		to_update = {package}
+		checked = set()
 
-		for dep in package.dependencies.filter_by(optional=False).all():
-			ret = self.resolve_for_meta_package(dep.meta_package, history)
-			if len(ret) == 0:
-				continue
-			elif len(retval) == 0:
-				retval.update(ret)
-			else:
-				retval.intersection_update(ret)
-				if len(retval) == 0:
-					raise LogicError(500, f"Detected game support contradiction, {key} may not be compatible with any games")
+		while len(to_update) > 0:
+			current_package = to_update.pop()
+			if current_package.id_ in self.packages and current_package.type != PackageType.GAME:
+				current_package.is_confirmed = False
+				current_package.detected_supported_games = []
+				self._get_supported_games(current_package, [])
 
-		self.resolved_packages[key] = retval
-		return retval
+			for modname in current_package.provides:
+				for depending_package in self.get_all_that_depend_on(modname):
+					if depending_package not in checked:
+						to_update.add(depending_package)
+						checked.add(depending_package)
 
-	def init_all(self) -> None:
-		for package in self.session.query(Package).filter(Package.type == PackageType.MOD, Package.state != PackageState.DELETED).all():
-			retval = self.resolve(package, [])
-			for game_id in retval:
-				game = self.session.query(Package).get(game_id)
-				support = PackageGameSupport(package, game, 1, True)
-				self.session.add(support)
+	def on_remove(self, package: GSPackage):
+		del self.packages[package.id_]
+		self.on_update(package)
 
-	"""
-	Update game supported package on a package, given the confidence.
-	
-	Higher confidences outweigh lower ones.
-	"""
-	def set_supported(self, package: Package, game_is_supported: Dict[int, bool], confidence: int):
-		previous_supported: Dict[int, PackageGameSupport] = {}
-		for support in package.supported_games.all():
-			previous_supported[support.game.id] = support
+	def on_first_run(self):
+		for package in self.packages.values():
+			if not package.is_confirmed:
+				self.on_update(package)
 
-		for game_id, supports in game_is_supported.items():
-			game = self.session.query(Package).get(game_id)
-			lookup = previous_supported.pop(game_id, None)
-			if lookup is None:
-				support = PackageGameSupport(package, game, confidence, supports)
-				self.session.add(support)
-			elif lookup.confidence <= confidence:
-				lookup.supports = supports
-				lookup.confidence = confidence
 
-		for game, support in previous_supported.items():
-			if support.confidence == confidence:
-				self.session.delete(support)
+def _convert_package(support: GameSupport, package: Package) -> GSPackage:
+	# Unapproved packages shouldn't be considered to fulfill anything
+	provides = set()
+	if package.state == PackageState.APPROVED:
+		provides = set([x.name for x in package.provides])
 
-	def update(self, package: Package) -> None:
-		game_is_supported = {}
-		if package.enable_game_support_detection:
-			retval = self.resolve(package, [])
-			for game_id in retval:
-				game_is_supported[game_id] = True
+	gs_package = GSPackage(package.author.username, package.name, package.type, provides)
+	gs_package.depends = set([x.meta_package.name for x in package.dependencies if not x.optional])
+	gs_package.detection_disabled = not package.enable_game_support_detection
+	gs_package.supports_all_games = package.supports_all_games
 
-		self.set_supported(package, game_is_supported, 1)
+	existing_game_support = (package.supported_games
+			.filter(PackageGameSupport.game.has(state=PackageState.APPROVED),
+					PackageGameSupport.confidence > 5)
+			.all())
+	gs_package.user_supported_games = [x.game.name for x in existing_game_support if x.supports]
+	gs_package.user_unsupported_games = [x.game.name for x in existing_game_support if not x.supports]
+	return support.add(gs_package)
+
+
+def _create_instance(session: sqlalchemy.orm.Session) -> GameSupport:
+	support = GameSupport()
+
+	packages: List[Package] = (session.query(Package)
+			.filter(Package.state == PackageState.APPROVED, Package.type.in_([PackageType.GAME, PackageType.MOD]))
+			.all())
+
+	for package in packages:
+		_convert_package(support, package)
+
+	return support
+
+
+def _persist(session: sqlalchemy.orm.Session, support: GameSupport):
+	for gs_package in support.packages.values():
+		if len(gs_package.errors) != 0:
+			msg = "\n".join([f"- {x}" for x in gs_package.errors])
+			package = session.query(Package).filter(
+					Package.author.has(username=gs_package.author),
+					Package.name == gs_package.name).one()
+			post_bot_message(package, "Error when checking game support", msg, session)
+
+	for gs_package in support.modified_packages:
+		if not gs_package.detection_disabled:
+			package = session.query(Package).filter(
+					Package.author.has(username=gs_package.author),
+					Package.name == gs_package.name).one()
+
+			# Clear existing
+			session.query(PackageGameSupport) \
+				.filter_by(package=package, confidence=1) \
+				.delete()
+
+			# Add new
+			supported_games = gs_package.supported_games \
+				.difference(gs_package.user_supported_games)
+			for game_name in supported_games:
+				game_id = session.query(Package.id) \
+					.filter(Package.type == PackageType.GAME, Package.name == game_name, Package.state == PackageState.APPROVED) \
+					.one()[0]
+
+				new_support = PackageGameSupport()
+				new_support.package = package
+				new_support.game_id = game_id
+				new_support.confidence = 1
+				new_support.supports = True
+				session.add(new_support)
+
+
+def game_support_update(session: sqlalchemy.orm.Session, package: Package) -> set[str]:
+	support = _create_instance(session)
+	gs_package = support.get(package.get_id())
+	if gs_package is None:
+		gs_package = _convert_package(support, package)
+	support.on_update(gs_package)
+	_persist(session, support)
+	return gs_package.errors
+
+
+def game_support_update_all(session: sqlalchemy.orm.Session):
+	support = _create_instance(session)
+	support.on_first_run()
+	_persist(session, support)
+
+
+def game_support_remove(session: sqlalchemy.orm.Session, package: Package):
+	support = _create_instance(session)
+	gs_package = support.get(package.get_id())
+	if gs_package is None:
+		gs_package = _convert_package(support, package)
+	support.on_remove(gs_package)
+	_persist(session, support)
+
+
+def game_support_set(session, package: Package, game_is_supported: Dict[int, bool], confidence: int):
+	previous_supported: Dict[int, PackageGameSupport] = {}
+	for support in package.supported_games.all():
+		previous_supported[support.game.id] = support
+
+	for game_id, supports in game_is_supported.items():
+		game = session.query(Package).get(game_id)
+		lookup = previous_supported.pop(game_id, None)
+		if lookup is None:
+			support = PackageGameSupport(package, game, confidence, supports)
+			session.add(support)
+		elif lookup.confidence <= confidence:
+			lookup.supports = supports
+			lookup.confidence = confidence
+
+	for game, support in previous_supported.items():
+		if support.confidence == confidence:
+			session.delete(support)

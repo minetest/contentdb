@@ -329,12 +329,6 @@ class PackageGameSupport(db.Model):
 
 	__table_args__ = (db.UniqueConstraint("game_id", "package_id", name="_package_game_support_uc"),)
 
-	def __init__(self, package, game, confidence, supports):
-		self.package = package
-		self.game = game
-		self.confidence = confidence
-		self.supports = supports
-
 
 class Package(db.Model):
 	query_class  = PackageQuery
@@ -531,14 +525,14 @@ class Package(db.Model):
 	def get_sorted_optional_dependencies(self):
 		return self.get_sorted_dependencies(False)
 
-	def get_sorted_game_support(self):
+	def get_sorted_game_support(self) -> list[PackageGameSupport]:
 		query = self.supported_games.filter(PackageGameSupport.game.has(state=PackageState.APPROVED))
 
 		supported = query.all()
 		supported.sort(key=lambda x: -(x.game.score + 100000*x.confidence))
 		return supported
 
-	def get_sorted_game_support_pair(self):
+	def get_sorted_game_support_pair(self) -> list[list[PackageGameSupport]]:
 		supported = self.get_sorted_game_support()
 		return [
 			[x for x in supported if x.supports],
