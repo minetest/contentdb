@@ -343,7 +343,11 @@ def game_support_set(session, package: Package, game_is_supported: Dict[int, boo
 		game = session.query(Package).get(game_id)
 		lookup = previous_supported.pop(game_id, None)
 		if lookup is None:
-			support = PackageGameSupport(package, game, confidence, supports)
+			support = PackageGameSupport()
+			support.package = package
+			support.game = game
+			support.confidence = confidence
+			support.supports = supports
 			session.add(support)
 		elif lookup.confidence <= confidence:
 			lookup.supports = supports
