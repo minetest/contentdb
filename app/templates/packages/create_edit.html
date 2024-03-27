@@ -86,7 +86,7 @@
 			{{ render_field(form.desc, class_="pkg_meta", fieldclass="form-control markdown") }}
 		</fieldset>
 
-		<fieldset class="mt-4">
+		<fieldset class="mt-4 mb-5">
 			<legend class="pkg_meta">{{ _("Repository and Links") }}</legend>
 
 			<div class="pkg_wiz_1 d-none">
@@ -122,6 +122,12 @@
 			{{ render_field(form.translation_url, class_="pkg_meta", hint=_("How can users translate your package? ie: weblate URL or a help page")) }}
 		</fieldset>
 
-		<div class="pkg_meta mt-5">{{ render_submit_field(form.submit) }}</div>
+		{% if not package %}
+			<p class="pkg_meta text-muted">
+				{{ _("You need to save a draft before you can add releases and screenshots. You'll be able to edit the package again before submitting for approval.") }}
+			</p>
+		{% endif %}
+
+		<div class="pkg_meta">{{ render_submit_field(form.submit) }}</div>
 	</form>
 {% endblock %}

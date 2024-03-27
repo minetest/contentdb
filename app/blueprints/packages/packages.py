@@ -322,6 +322,8 @@ def create_edit(author=None, name=None):
 	package = None
 	if author is None:
 		form = PackageForm(formdata=request.form)
+		form.submit.label.text = lazy_gettext("Save draft")
+
 		author = request.args.get("author")
 		if author is None or author == current_user.username:
 			author = current_user
@@ -340,7 +342,7 @@ def create_edit(author=None, name=None):
 		if package is None:
 			abort(404)
 		if not package.check_perm(current_user, Permission.EDIT_PACKAGE):
-			return redirect(package.get_url("packages.view"))
+			abort(403)
 
 		author = package.author
 
