@@ -676,10 +676,27 @@ def similar(package):
 			packages_modnames=packages_modnames, similar_topics=similar_topics)
 
 
+def csv_games_check(_form, field):
+	game_names = [name.strip() for name in field.data.split(",")]
+	if len(game_names) == 0 or (len(game_names) == 1 and game_names[0] == ""):
+		return
+
+	missing = set()
+	for game_name in game_names:
+		if game_name.endswith("_game"):
+			game_name = game_name[:-5]
+		if Package.query.filter(and_(Package.state==PackageState.APPROVED, Package.type==PackageType.GAME,
+				or_(Package.name==game_name, Package.name==game_name + "_game"))).count() == 0:
+			missing.add(game_name)
+
+	if len(missing) > 0:
+		raise ValidationError(f"Unable to find game {','.join(missing)}")
+
+
 class GameSupportForm(FlaskForm):
 	enable_support_detection = BooleanField(lazy_gettext("Enable support detection based on dependencies (recommended)"), [Optional()])
-	supported = StringField(lazy_gettext("Supported games"), [Optional()])
-	unsupported = StringField(lazy_gettext("Unsupported games"), [Optional()])
+	supported = StringField(lazy_gettext("Supported games"), [Optional(), csv_games_check])
+	unsupported = StringField(lazy_gettext("Unsupported games"), [Optional(), csv_games_check])
 	supports_all_games = BooleanField(lazy_gettext("Supports all games (unless stated) / is game independent"), [Optional()])
 	submit = SubmitField(lazy_gettext("Save"))
 
