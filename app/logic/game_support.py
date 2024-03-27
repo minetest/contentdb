@@ -123,7 +123,7 @@ class GameSupport:
 		return package
 
 	def get(self, id_: str) -> Optional[GSPackage]:
-		return self.packages[id_]
+		return self.packages.get(id_)
 
 	def get_all_that_provide(self, modname: str) -> List[GSPackage]:
 		return [package for package in self.packages.values() if modname in package.provides]
