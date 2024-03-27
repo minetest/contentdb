@@ -1,9 +1,5 @@
 title: Supported Games
 
-<p class="alert alert-warning">
-    This feature is experimental
-</p>
-
 ## Why?
 
 The supported/compatible games feature allows mods to specify the games that

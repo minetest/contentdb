@@ -561,14 +561,6 @@
 								{% endfor %}
 							</div>
 						{% endif %}
-
-						{% if package.type == package.type.MOD and (supported_games or unsupported_games) and
-								not package.has_game_support_confirmed() %}
-							<p class="text-muted small mt-2 mb-0">
-								{{ _("This is an experimental feature.") }}
-								{{ _("Supported games are determined by an algorithm, and may not be correct.") }}
-							</p>
-						{% endif %}
 					{% elif package.check_perm(current_user, "EDIT_PACKAGE") %}
 						<p class="alert alert-warning">
 							{% if package.check_perm(current_user, "EDIT_PACKAGE") %}
