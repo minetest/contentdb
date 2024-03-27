@@ -12,7 +12,7 @@
 	<h1>{{ self.title() }}</h1>
 
 	{% if "error" in info or info.status == "FAILURE" or info.status == "REVOKED" %}
-		<pre>{{ info.error }}</pre>
+		<pre style="white-space: pre-wrap; word-wrap: break-word;">{{ info.error }}</pre>
 	{% else %}
 		<script src="/static/js/polltask.js"></script>
 		<script>

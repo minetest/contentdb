@@ -55,7 +55,10 @@ def check(id):
 		if current_user.is_authenticated and current_user.rank.at_least(UserRank.ADMIN):
 			info["error"] = str(traceback)
 		elif str(result)[1:12] == "TaskError: ":
-			info["error"] = str(result)[12:-1]
+			if hasattr(result, "value"):
+				info["error"] = result.value
+			else:
+				info["error"] = str(result)
 		else:
 			info["error"] = "Unknown server error"
 	else:
