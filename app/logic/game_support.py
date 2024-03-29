@@ -255,7 +255,8 @@ def _convert_package(support: GameSupport, package: Package) -> GSPackage:
 			.filter(PackageGameSupport.game.has(state=PackageState.APPROVED),
 					PackageGameSupport.confidence > 5)
 			.all())
-	gs_package.user_supported_games = [x.game.name for x in existing_game_support if x.supports]
+	if not package.supports_all_games:
+		gs_package.user_supported_games = [x.game.name for x in existing_game_support if x.supports]
 	gs_package.user_unsupported_games = [x.game.name for x in existing_game_support if not x.supports]
 	return support.add(gs_package)
 
