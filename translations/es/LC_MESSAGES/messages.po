@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-03-23 16:19+0000\n"
-"PO-Revision-Date: 2023-12-24 20:08+0000\n"
-"Last-Translator: José Muñoz <dr.cabra@disroot.org>\n"
+"PO-Revision-Date: 2024-03-24 05:11+0000\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
+"Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/es/>\n"
 "Language: es\n"
-"Language-Team: Spanish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/es/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:137
@@ -40,7 +41,7 @@ msgstr "Paquetes"
 #: app/querybuilder.py:56
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
-msgstr ""
+msgstr "%(package_type)s para %(game_name)s"
 
 #: app/template_filters.py:92
 #, python-format
@@ -106,7 +107,7 @@ msgstr "Privado"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "Fijado a mi perfil"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
@@ -164,15 +165,15 @@ msgstr "Descripción"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "Redireccionar URL"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "Tipo de aplicación"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Revocados todos los tokens de usuario"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -182,7 +183,7 @@ msgstr "Editar Detalles"
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/translation.html:4
 msgid "Translation"
-msgstr ""
+msgstr "Traducción"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
@@ -304,7 +305,7 @@ msgstr "URL de donación"
 
 #: app/blueprints/packages/packages.py:239
 msgid "Translation URL"
-msgstr ""
+msgstr "URL de la traducción"
 
 #: app/blueprints/packages/packages.py:245
 msgid "_game is not an allowed name"
@@ -332,6 +333,8 @@ msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr ""
+"Debe agregar una dirección de correo electrónico a su cuenta y confirmarla "
+"antes de poder administrar los paquetes"
 
 #: app/blueprints/packages/packages.py:331
 msgid "Unable to find that user"
@@ -358,6 +361,8 @@ msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
+"Por favor, comente en el hilo de aprobación para que los editores sepan qué "
+"ha cambiado"
 
 #: app/blueprints/packages/packages.py:479
 msgid "Deleted package"
@@ -1008,7 +1013,7 @@ msgstr "Tokens de la API"
 
 #: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "Aplicaciones OAuth2"
 
 #: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1092,6 +1097,8 @@ msgid ""
 "What games does your package support? Please specify on the supported "
 "games page"
 msgstr ""
+"¿Qué juegos admite su paquete? Por favor, especifíquelo en la página de "
+"juegos compatibles"
 
 #: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
@@ -1134,6 +1141,8 @@ msgid ""
 "Warning: Forum topic not found. The topic may have been created since the"
 " last forum crawl."
 msgstr ""
+"Advertencia: No se encontró el tema del foro. Es posible que el tema se haya "
+"creado desde el último rastreo del foro."
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1175,7 +1184,7 @@ msgstr "Demasiadas peticiones, por favor espere antes de volver a intentarlo"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "un archivo de imagen PNG, JPEG o WebP"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1361,7 +1370,7 @@ msgstr "Cerrar sesión"
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
 #: app/templates/packages/view.html:593
 msgid "Languages"
-msgstr ""
+msgstr "Idiomas"
 
 #: app/templates/base.html:202 app/templates/translate/index.html:76
 msgid "Help translate ContentDB"
@@ -1411,7 +1420,7 @@ msgstr "Apoyar paquetes"
 
 #: app/templates/base.html:258
 msgid "Translate Packages"
-msgstr ""
+msgstr "Traducir paquetes"
 
 #: app/templates/base.html:259
 msgid "Source Code"
@@ -1419,11 +1428,11 @@ msgstr "Código fuente"
 
 #: app/templates/base.html:265
 msgid "Show non-free packages"
-msgstr ""
+msgstr "Mostrar paquetes no gratuitos"
 
 #: app/templates/base.html:267
 msgid "Hide non-free packages"
-msgstr ""
+msgstr "Ocultar paquetes no gratuitos"
 
 #: app/templates/index.html:4
 msgid "Welcome"
@@ -1501,7 +1510,7 @@ msgstr "Mejor puntuado"
 
 #: app/templates/index.html:191
 msgid "All reviews"
-msgstr ""
+msgstr "Todas las reseñas"
 
 #: app/templates/index.html:193
 msgid "Recent Positive Reviews"
@@ -1549,11 +1558,11 @@ msgstr "Sin resultados"
 
 #: app/templates/admin/languages/list.html:19
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: app/templates/admin/languages/list.html:33
 msgid "Has ContentDB translation?"
-msgstr ""
+msgstr "¿Tiene traducción ContentDB?"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
@@ -1598,11 +1607,11 @@ msgstr "Crear token de API"
 #: app/templates/api/create_edit_token.html:25
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
-msgstr ""
+msgstr "Este token fue creado por la aplicación '%(title)s' por %(author)s."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Haga clic en 'Eliminar' para revocar el acceso."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1661,7 +1670,7 @@ msgstr "Documentación de la API"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Aplicación"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1685,7 +1694,7 @@ msgstr ""
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Esto requiere que la colección sea pública"
 
 #: app/templates/collections/create_edit.html:76
 #: app/templates/packages/remove.html:58 app/templates/packages/view.html:128
@@ -1884,6 +1893,8 @@ msgstr "Puede usar GitHub para iniciar sesión si está asociado a su cuenta."
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact the admin for help."
 msgstr ""
+"De lo contrario, es posible que deba comunicarse con el administrador para "
+"obtener ayuda."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1993,6 +2004,8 @@ msgstr "Este paquete puede ser presentado para aprobación cuando esté listo."
 #: app/templates/macros/package_approval.html:49
 msgid "You need to fix the above errors before you can submit for review"
 msgstr ""
+"Debe corregir los errores anteriores antes de poder enviarlos para su "
+"revisión"
 
 #: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
@@ -2344,42 +2357,42 @@ msgstr "Notificaciones de Editor/Aprobador"
 #: app/templates/oauth/authorize.html:4
 #, python-format
 msgid "Authorize %(title)s"
-msgstr ""
+msgstr "Autorizar %(title)s"
 
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "quiere acceder a tu cuenta de %(name)s"
 
 #: app/templates/oauth/authorize.html:46
 msgid "Verified application"
-msgstr ""
+msgstr "Aplicación verificada"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB confía en esta aplicación"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
-msgstr ""
+msgstr "Solo datos públicos"
 
 #: app/templates/oauth/authorize.html:63
 msgid "Read-only access to your public data"
-msgstr ""
+msgstr "Acceso de solo lectura a sus datos públicos"
 
 #: app/templates/oauth/authorize.html:76
 msgid "Authorize"
-msgstr ""
+msgstr "Autorizar"
 
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "Acerca de %(title)s"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
 msgid "Application isn't approved yet"
-msgstr ""
+msgstr "La solicitud aún no está aprobada"
 
 #: app/templates/oauth/authorize.html:93
 #: app/templates/oauth/create_edit.html:28
@@ -2387,54 +2400,59 @@ msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
 msgstr ""
+"Para permitir que otros usuarios además de usted inicien sesión, deberá "
+"comunicarse con el personal de ContentDB y pedirles que aprueben su "
+"aplicación."
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
-msgstr ""
+msgstr "Crear cliente OAuth"
 
 #: app/templates/oauth/create_edit.html:36
 #, python-format
 msgid "Your application has %(count)d users"
-msgstr ""
+msgstr "Tu aplicación tiene %(count)d usuarios"
 
 #: app/templates/oauth/create_edit.html:37
 msgid "Revoke all user tokens"
-msgstr ""
+msgstr "Revocar todos los tokens del usuario"
 
 #: app/templates/oauth/create_edit.html:51
 msgid ""
 "You must keep the secret safe. If you are unable, set the app type to "
 "'client-side'."
 msgstr ""
+"Debes mantener el secreto a salvo. Si no puede, configure el tipo de "
+"aplicación en \"del lado del cliente\"."
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
-msgstr ""
+msgstr "Ejemplo de la URL de autorización"
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
-msgstr ""
+msgstr "Se muestra a los usuarios cuando solicita acceso a su cuenta"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
-msgstr ""
+msgstr "¿Dónde almacenará su client_secret?"
 
 #: app/templates/oauth/list_clients.html:4
 #, python-format
 msgid "OAuth2 Applications | %(username)s"
-msgstr ""
+msgstr "Aplicaciones OAuth2 | %(username)s"
 
 #: app/templates/oauth/list_clients.html:9
 msgid "OAuth2 Documentation"
-msgstr ""
+msgstr "Documentación de OAuth2"
 
 #: app/templates/oauth/list_clients.html:16
 msgid "Unpublished"
-msgstr ""
+msgstr "Inédito"
 
 #: app/templates/oauth/list_clients.html:22
 msgid "No applications created"
-msgstr ""
+msgstr "No se creó ninguna aplicación"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2599,6 +2617,8 @@ msgstr "Si está en blanco, se utilizará la URL de donación del autor en su lu
 #: app/templates/packages/create_edit.html:122
 msgid "How can users translate your package? ie: weblate URL or a help page"
 msgstr ""
+"¿Cómo pueden los usuarios traducir su paquete? es decir: URL de página web o "
+"una página de ayuda"
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2638,7 +2658,7 @@ msgstr "Mods y paquetes de textura para %(title)s"
 #: app/templates/packages/game_hub.html:34
 #, python-format
 msgid "Search for packages for %(title)s"
-msgstr ""
+msgstr "Buscar paquetes para %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
@@ -2878,6 +2898,8 @@ msgstr "Versiones compatibles de Minetest"
 #, python-format
 msgid "Are you sure your package doesn't work on versions after %(version)s?"
 msgstr ""
+"¿Está seguro de que su paquete no funciona en versiones posteriores a "
+"%(version)s?"
 
 #: app/templates/packages/release_edit.html:62
 #: app/templates/packages/release_new.html:77
@@ -2885,6 +2907,8 @@ msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Minetest versions."
 msgstr ""
+"Solo configure la versión máxima si sabe que no funciona en las versiones "
+"más nuevas de Minetest."
 
 #: app/templates/packages/release_edit.html:63
 #: app/templates/packages/release_new.html:78
@@ -2892,6 +2916,8 @@ msgid ""
 "Don't set the maximum version just because you haven't tested it on newer"
 " versions."
 msgstr ""
+"No establezcas la versión máxima solo porque no la has probado en versiones "
+"más nuevas."
 
 #: app/templates/packages/release_edit.html:67
 #: app/templates/packages/release_new.html:88
@@ -3107,6 +3133,8 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)"
 msgstr ""
+"El uso total de almacenamiento es %(total_size)d MB (versiones "
+"%(release_size)d MB, capturas de pantalla %(screenshot_size)d MB)"
 
 #: app/templates/packages/remove.html:9
 #, python-format
@@ -3140,12 +3168,13 @@ msgstr ""
 
 #: app/templates/packages/remove.html:28
 msgid "and"
-msgstr ""
+msgstr "y"
 
 #: app/templates/packages/remove.html:34
 #, python-format
 msgid "Removing this package will break the following mods: %(names)s"
 msgstr ""
+"Al eliminar este paquete se romperán las siguientes modificaciones: %(names)s"
 
 #: app/templates/packages/remove.html:41
 msgid "Reason"
@@ -3307,24 +3336,28 @@ msgid ""
 "To provide translations for your %(type)s, you need to create .tr files "
 "and upload a new release."
 msgstr ""
+"Para proporcionar traducciones para sus %(type)s, debe crear archivos .tr y "
+"cargar una nueva versión."
 
 #: app/templates/packages/translation.html:19
 msgid ""
 "For information on how to do this, see the modding book chapter and "
 "lua_api.md"
 msgstr ""
+"Para obtener información sobre cómo hacer esto, consulte el capítulo del "
+"libro sobre modificación y lua_api.md"
 
 #: app/templates/packages/translation.html:23
 msgid "Translation - Minetest Modding Book"
-msgstr ""
+msgstr "Traducción - Libro de modificación Minetest"
 
 #: app/templates/packages/translation.html:26
 msgid "Translating content meta - lua_api.md"
-msgstr ""
+msgstr "Traducción del contenido de los metadatos: lua_api.md"
 
 #: app/templates/packages/translation.html:30
 msgid "Translation template"
-msgstr ""
+msgstr "Plantilla de traducción"
 
 #: app/templates/packages/translation.html:32
 #, python-format
@@ -3332,19 +3365,21 @@ msgid ""
 "To quickly add support for ContentDB package translation, create a file "
 "at %(location)s with the following content:"
 msgstr ""
+"Para agregar rápidamente soporte para la traducción del paquete ContentDB, "
+"cree un archivo en %(location)s con el siguiente contenido:"
 
 #: app/templates/packages/translation.html:43
 #, python-format
 msgid "%(title)s is available in %(num)d languages."
-msgstr ""
+msgstr "%(title)s está disponible en %(num)d idiomas."
 
 #: app/templates/packages/translation.html:44
 msgid "ContentDB reads translations from locale files (.tr) in your package."
-msgstr ""
+msgstr "ContentDB lee traducciones de archivos locales (.tr) en su paquete."
 
 #: app/templates/packages/translation.html:51
 msgid "Language"
-msgstr ""
+msgstr "Idioma"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -3453,7 +3488,7 @@ msgstr "Seguimiento de las incidencias"
 
 #: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
-msgstr ""
+msgstr "Traducir"
 
 #: app/templates/packages/view.html:310
 msgid "Awaiting review"
@@ -3609,6 +3644,8 @@ msgstr ""
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin using the link below."
 msgstr ""
+"Por favor, inicie sesión o comuníquese con el administrador mediante el "
+"siguiente enlace."
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
@@ -4037,35 +4074,36 @@ msgstr "¡Felicidades! No tienes ningún tema que no esté en CDB."
 
 #: app/templates/translate/index.html:4
 msgid "Find packages to translate"
-msgstr ""
+msgstr "Encuentra paquetes para traducir"
 
 #: app/templates/translate/index.html:8
 msgid ""
 "Help make Minetest more accessible by translating packages into other "
 "languages."
 msgstr ""
+"Ayude a que Minetest sea más accesible traduciendo paquetes a otros idiomas."
 
 #: app/templates/translate/index.html:65
 msgid "How to translate a mod / game"
-msgstr ""
+msgstr "Cómo traducir un mod/juego"
 
 #: app/templates/translate/index.html:73
 msgid "ContentDB"
-msgstr ""
+msgstr "ContentDB"
 
 #: app/templates/translate/index.html:80
 msgid "Packages that support translation"
-msgstr ""
+msgstr "Paquetes que admiten traducción"
 
 #: app/templates/translate/index.html:85
 #, python-format
 msgid "Only show packages with %(lang)s translation"
-msgstr ""
+msgstr "Mostrar solo paquetes con traducción de %(lang)s"
 
 #: app/templates/translate/index.html:89
 #, python-format
 msgid "Hide packages with %(lang)s translation"
-msgstr ""
+msgstr "Ocultar paquetes con traducción de %(lang)s"
 
 #: app/templates/users/account.html:4
 #, python-format
@@ -4378,7 +4416,7 @@ msgstr "GitHub"
 
 #: app/templates/users/modtools.html:12
 msgid "Storage"
-msgstr ""
+msgstr "Almacenamiento"
 
 #: app/templates/users/modtools.html:20
 #, python-format
@@ -4386,11 +4424,13 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)."
 msgstr ""
+"El uso total de almacenamiento es %(total_size)d MB (versiones "
+"%(release_size)d MB, capturas de pantalla %(screenshot_size)d MB)."
 
 #: app/templates/users/modtools.html:23
 #, python-format
 msgid "%(releases)d releases and %(screenshots)d screenshots."
-msgstr ""
+msgstr "%(releases)d lanzamientos y %(screenshots)d capturas de pantalla."
 
 #: app/templates/users/modtools.html:28
 msgid "Edit Account"
@@ -4501,13 +4541,15 @@ msgstr "Foto de perfil"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Import from forums"
-msgstr ""
+msgstr "Importar desde foros"
 
 #: app/templates/users/profile_edit.html:47
 msgid ""
 "Profile pictures should be square, at least 64x64px, and one of the "
 "following formats: jpeg, png, or webp."
 msgstr ""
+"Las imágenes de perfil deben ser cuadradas, de al menos 64x64 píxeles y uno "
+"de los siguientes formatos: jpeg, png o webp."
 
 #: app/templates/users/profile_edit.html:51
 msgid "Profile Information"
@@ -4582,7 +4624,7 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:43
 msgid "Disable all"
-msgstr ""
+msgstr "Desactivar todo"
 
 #: app/templates/users/settings_email.html:48
 msgid "Event"
@@ -5110,4 +5152,3 @@ msgstr ""
 #~ "Por favor, inicia sesión o ponte "
 #~ "en contacto con el administrador de "
 #~ "otra manera"
-
