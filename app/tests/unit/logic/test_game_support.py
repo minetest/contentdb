@@ -313,6 +313,45 @@ def test_update_new_mod():
 	assert len(lib.detected_supported_games) == 0
 
 
+def test_update_remove_mod():
+	"""
+	Test that removing a mod from provides will update mods that depended on the modname
+	"""
+	support = GameSupport()
+	support.add(make_game("game1", ["default"]))
+	game2 = support.add(make_game("game2", ["core", "mod_b"]))
+	modB = support.add(make_mod("mod_b", ["mod_b"], ["default"]))
+	lib = support.add(make_mod("lib", ["lib"], []))
+	modA = support.add(make_mod("mod_a", ["mod_a"], ["mod_b", "lib"]))
+	support.on_first_run()
+
+	assert not support.has_errors
+
+	assert modA.is_confirmed
+	assert modA.detected_supported_games == {"game1", "game2"}
+
+	assert modB.is_confirmed
+	assert modB.detected_supported_games == {"game1"}
+
+	assert lib.is_confirmed
+	assert len(lib.detected_supported_games) == 0
+
+	old_provides = game2.provides.copy()
+	game2.provides.remove("mod_b")
+	support.on_update(game2, old_provides)
+
+	assert not support.has_errors
+
+	assert modA.is_confirmed
+	assert modA.detected_supported_games == {"game1"}
+
+	assert modB.is_confirmed
+	assert modB.detected_supported_games == {"game1"}
+
+	assert lib.is_confirmed
+	assert len(lib.detected_supported_games) == 0
+
+
 def test_update_cycle():
 	"""
 	Test that updating a package with a cycle depending on it doesn't break

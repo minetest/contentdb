@@ -97,7 +97,7 @@ def update_all_game_support():
 @celery.task()
 def update_package_game_support(package_id: int):
 	package = Package.query.get(package_id)
-	game_support_update(db.session, package)
+	game_support_update(db.session, package, None)
 	db.session.commit()
 
 
@@ -123,14 +123,14 @@ def post_release_check_update(self, release: PackageRelease, path):
 		provides = tree.get_mod_names()
 
 		package = release.package
-		old_modnames = set([x.name for x in package.provides])
+		old_provided_names = set([x.name for x in package.provides])
 		package.provides.clear()
 
 		# If new mods were added, add to audit log
 		if package.state == PackageState.APPROVED:
 			new_provides = []
 			for modname in provides:
-				if modname not in old_modnames:
+				if modname not in old_provided_names:
 					new_provides.append(modname)
 
 			if len(new_provides) > 0:
@@ -218,7 +218,7 @@ def post_release_check_update(self, release: PackageRelease, path):
 
 			game_support_set(db.session, package, game_is_supported, 10)
 			if package.type == PackageType.MOD:
-				errors = game_support_update(db.session, package)
+				errors = game_support_update(db.session, package, old_provided_names)
 				if len(errors) != 0:
 					raise TaskError("Error validating game support:\n\n" + "\n".join([f"- {x}" for x in errors]))
 

@@ -213,7 +213,7 @@ class GameSupport:
 			package.is_confirmed = True
 			return package.supported_games
 
-	def on_update(self, package: GSPackage):
+	def on_update(self, package: GSPackage, old_provides: Optional[set[str]] = None):
 		to_update = {package}
 		checked = set()
 
@@ -224,7 +224,11 @@ class GameSupport:
 				current_package.detected_supported_games = []
 				self._get_supported_games(current_package, [])
 
-			for modname in current_package.provides:
+			provides = current_package.provides
+			if current_package == package and old_provides is not None:
+				provides = provides.union(old_provides)
+
+			for modname in provides:
 				for depending_package in self.get_all_that_depend_on(modname):
 					if depending_package not in checked:
 						to_update.add(depending_package)
@@ -310,12 +314,12 @@ def _persist(session: sqlalchemy.orm.Session, support: GameSupport):
 				session.add(new_support)
 
 
-def game_support_update(session: sqlalchemy.orm.Session, package: Package) -> set[str]:
+def game_support_update(session: sqlalchemy.orm.Session, package: Package, old_provides: Optional[set[str]]) -> set[str]:
 	support = _create_instance(session)
 	gs_package = support.get(package.get_id())
 	if gs_package is None:
 		gs_package = _convert_package(support, package)
-	support.on_update(gs_package)
+	support.on_update(gs_package, old_provides)
 	_persist(session, support)
 	return gs_package.errors
 
