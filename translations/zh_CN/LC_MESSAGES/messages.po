@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-03-23 16:19+0000\n"
-"PO-Revision-Date: 2024-03-07 17:01+0000\n"
-"Last-Translator: y5nw <y5nw@users.noreply.hosted.weblate.org>\n"
+"PO-Revision-Date: 2024-03-24 05:11+0000\n"
+"Last-Translator: 复予 <clonewith@qq.com>\n"
+"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
+"minetest/contentdb/zh_Hans/>\n"
 "Language: zh_CN\n"
-"Language-Team: Chinese (Simplified) "
-"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hans/>\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:137
@@ -40,7 +41,7 @@ msgstr "软件包"
 #: app/querybuilder.py:56
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
-msgstr ""
+msgstr "用于 %(game_name)s 的 %(package_type)s"
 
 #: app/template_filters.py:92
 #, python-format
@@ -182,7 +183,7 @@ msgstr "编辑详细信息"
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/translation.html:4
 msgid "Translation"
-msgstr ""
+msgstr "翻译"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
@@ -304,7 +305,7 @@ msgstr "捐赠 URL"
 
 #: app/blueprints/packages/packages.py:239
 msgid "Translation URL"
-msgstr ""
+msgstr "翻译 URL"
 
 #: app/blueprints/packages/packages.py:245
 msgid "_game is not an allowed name"
@@ -329,7 +330,7 @@ msgstr "相似名称的作品集已存在"
 msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
-msgstr ""
+msgstr "在管理软件包前，您必须向账户添加电子邮箱并进行确认"
 
 #: app/blueprints/packages/packages.py:331
 msgid "Unable to find that user"
@@ -355,7 +356,7 @@ msgstr "请在审核贴评论中说明需要作出哪些修改"
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
-msgstr ""
+msgstr "请在同意帖中留言，让编辑人员知道您做出的更改"
 
 #: app/blueprints/packages/packages.py:479
 msgid "Deleted package"
@@ -1059,7 +1060,7 @@ msgstr "需要先将以下硬依赖项添加到 ContentDB：%(deps)s"
 msgid ""
 "What games does your package support? Please specify on the supported "
 "games page"
-msgstr ""
+msgstr "你的软件包支持什么游戏？请在受支持游戏的页面上指定"
 
 #: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
@@ -1097,7 +1098,7 @@ msgstr "错误：论坛贴子作者与软件包作者不匹配。"
 msgid ""
 "Warning: Forum topic not found. The topic may have been created since the"
 " last forum crawl."
-msgstr ""
+msgstr "警告：未找到论坛话题。此话题可能是在上次论坛抓取后创建的。"
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1311,7 +1312,7 @@ msgstr "登出"
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
 #: app/templates/packages/view.html:593
 msgid "Languages"
-msgstr ""
+msgstr "语言"
 
 #: app/templates/base.html:202 app/templates/translate/index.html:76
 msgid "Help translate ContentDB"
@@ -1361,7 +1362,7 @@ msgstr "支持的软件包"
 
 #: app/templates/base.html:258
 msgid "Translate Packages"
-msgstr ""
+msgstr "翻译软件包"
 
 #: app/templates/base.html:259
 msgid "Source Code"
@@ -1497,11 +1498,11 @@ msgstr "无结果"
 
 #: app/templates/admin/languages/list.html:19
 msgid "Id"
-msgstr ""
+msgstr "ID"
 
 #: app/templates/admin/languages/list.html:33
 msgid "Has ContentDB translation?"
-msgstr ""
+msgstr "有 ContentDB 翻译吗？"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
@@ -1809,7 +1810,7 @@ msgstr "如果与您的帐户绑定，您可以使用 GitHub 登录。"
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact the admin for help."
-msgstr ""
+msgstr "否则，您可能需要联系管理员求助。"
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1906,7 +1907,7 @@ msgstr "随时可以将此软件包交付审核。"
 
 #: app/templates/macros/package_approval.html:49
 msgid "You need to fix the above errors before you can submit for review"
-msgstr ""
+msgstr "在提交供审核前，您需要修复上述错误"
 
 #: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
@@ -2487,7 +2488,7 @@ msgstr "如果空白，则使用作者的捐款 URL。"
 
 #: app/templates/packages/create_edit.html:122
 msgid "How can users translate your package? ie: weblate URL or a help page"
-msgstr ""
+msgstr "用户可以如何翻译您的软件包？例如 Weblate URL 或帮助页面"
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -2523,7 +2524,7 @@ msgstr "用于%(title)s的Mod和材质包"
 #: app/templates/packages/game_hub.html:34
 #, python-format
 msgid "Search for packages for %(title)s"
-msgstr ""
+msgstr "搜索含 %(title)s 的软件包"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
@@ -3132,37 +3133,38 @@ msgstr "下载（.csv）"
 msgid ""
 "To provide translations for your %(type)s, you need to create .tr files "
 "and upload a new release."
-msgstr ""
+msgstr "要为你的 %(type)s 提供翻译，你需要创建 .tr 文件并上传新版本。"
 
 #: app/templates/packages/translation.html:19
 msgid ""
 "For information on how to do this, see the modding book chapter and "
 "lua_api.md"
-msgstr ""
+msgstr "对于实现方法相关信息，请阅读 Modding Book 章节与 lua_api.md"
 
 #: app/templates/packages/translation.html:23
 msgid "Translation - Minetest Modding Book"
-msgstr ""
+msgstr "翻译 - Minetest Modding Book"
 
 #: app/templates/packages/translation.html:26
 msgid "Translating content meta - lua_api.md"
-msgstr ""
+msgstr "翻译内容元数据 - lua_api.md"
 
 #: app/templates/packages/translation.html:30
 msgid "Translation template"
-msgstr ""
+msgstr "翻译模板"
 
 #: app/templates/packages/translation.html:32
 #, python-format
 msgid ""
 "To quickly add support for ContentDB package translation, create a file "
 "at %(location)s with the following content:"
-msgstr ""
+msgstr "要快速添加对 ContentDB 软件包翻译的支持，请在 %(location)s "
+"创建一个文件，内含以下内容："
 
 #: app/templates/packages/translation.html:43
 #, python-format
 msgid "%(title)s is available in %(num)d languages."
-msgstr ""
+msgstr "%(title)s 有 %(num)d 种语言可用。"
 
 #: app/templates/packages/translation.html:44
 msgid "ContentDB reads translations from locale files (.tr) in your package."
@@ -3170,7 +3172,7 @@ msgstr ""
 
 #: app/templates/packages/translation.html:51
 msgid "Language"
-msgstr ""
+msgstr "语言"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -3270,7 +3272,7 @@ msgstr "问题跟踪器"
 
 #: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
-msgstr ""
+msgstr "翻译"
 
 #: app/templates/packages/view.html:310
 msgid "Awaiting review"
@@ -3421,7 +3423,7 @@ msgstr "由于垃圾信息的原因，我们不再接受匿名用户通过此表
 
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin using the link below."
-msgstr ""
+msgstr "请登录，或使用下方链接联系管理员。"
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
@@ -3822,25 +3824,25 @@ msgstr "恭喜！您没有任何不在 CDB 上的贴子。"
 
 #: app/templates/translate/index.html:4
 msgid "Find packages to translate"
-msgstr ""
+msgstr "寻找待翻译的软件包"
 
 #: app/templates/translate/index.html:8
 msgid ""
 "Help make Minetest more accessible by translating packages into other "
 "languages."
-msgstr ""
+msgstr "通过将软件包翻译成其他语言，帮助让 Minetest 更容易访问。"
 
 #: app/templates/translate/index.html:65
 msgid "How to translate a mod / game"
-msgstr ""
+msgstr "如何翻译模组 / 游戏"
 
 #: app/templates/translate/index.html:73
 msgid "ContentDB"
-msgstr ""
+msgstr "ContentDB"
 
 #: app/templates/translate/index.html:80
 msgid "Packages that support translation"
-msgstr ""
+msgstr "支持翻译的软件包"
 
 #: app/templates/translate/index.html:85
 #, python-format
@@ -3982,9 +3984,9 @@ msgid "Don't have a forums account?"
 msgstr "没有论坛帐户？"
 
 #: app/templates/users/claim_forums.html:19
-#, fuzzy, python-format
+#, python-format
 msgid "You can still <a href='%(url)s'>sign up without one</a>."
-msgstr "你仍然可以<a href=\"‘%(url)s’\">在没有论坛账户的情况下注册</a>。"
+msgstr "你仍然可以<a href=\"%(url)s\">在没有论坛账户的情况下注册</a>。"
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
@@ -4267,7 +4269,7 @@ msgstr "个人资料图片"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Import from forums"
-msgstr ""
+msgstr "从论坛导入"
 
 #: app/templates/users/profile_edit.html:47
 msgid ""
@@ -4338,7 +4340,7 @@ msgstr "配置某个类型的通知是立即发送，还是并入每日摘要发
 
 #: app/templates/users/settings_email.html:43
 msgid "Disable all"
-msgstr ""
+msgstr "全部禁用"
 
 #: app/templates/users/settings_email.html:48
 msgid "Event"
@@ -4747,4 +4749,3 @@ msgstr "请考虑启用电子邮件通知，您可以自定义发送的数量"
 
 #~ msgid "Please sign in or contact the admin in another way"
 #~ msgstr "请登录或以其他方式联系管理员"
-
