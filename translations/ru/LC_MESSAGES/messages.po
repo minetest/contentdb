@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-03-23 16:19+0000\n"
-"PO-Revision-Date: 2024-03-07 17:01+0000\n"
-"Last-Translator: BlackImpostor <SkyBuilderOFFICAL@yandex.ru>\n"
+"PO-Revision-Date: 2024-03-24 05:11+0000\n"
+"Last-Translator: Ярослав Рукавицын <skybuilderoffical@gmail.com>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:137
@@ -195,7 +196,7 @@ msgstr "Выпуски"
 #: app/templates/packages/screenshots.html:4
 #: app/templates/packages/screenshots.html:14 app/templates/todo/editor.html:11
 msgid "Screenshots"
-msgstr "Снимки"
+msgstr "Снимки экрана"
 
 #: app/blueprints/packages/__init__.py:52
 #: app/templates/packages/edit_maintainers.html:8
@@ -335,6 +336,8 @@ msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr ""
+"Вы должны добавить адрес электронной почты в свою учетную запись и "
+"подтвердить его, прежде чем сможете управлять пакетами"
 
 #: app/blueprints/packages/packages.py:331
 msgid "Unable to find that user"
@@ -1095,6 +1098,8 @@ msgid ""
 "What games does your package support? Please specify on the supported "
 "games page"
 msgstr ""
+"Какие игры поддерживает ваш пакет? Пожалуйста, укажите на странице "
+"поддерживаемых игр"
 
 #: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
@@ -1135,6 +1140,8 @@ msgid ""
 "Warning: Forum topic not found. The topic may have been created since the"
 " last forum crawl."
 msgstr ""
+"Предупреждение: Тема форума не найдена. Возможно, тема была создана после "
+"последнего обхода форума."
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1590,7 +1597,7 @@ msgstr "Новое предупреждение"
 #: app/templates/oauth/create_edit.html:5
 #, python-format
 msgid "Edit - %(name)s"
-msgstr "Править - %(name)s"
+msgstr "Редактировать - %(name)s"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
@@ -1603,7 +1610,7 @@ msgstr "Этот токен был создан приложением '%(title)
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr "Нажмите \"Удалить\", чтобы отозвать доступ."
+msgstr "Нажмите 'Удалить', чтобы отозвать доступ."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1887,6 +1894,8 @@ msgstr ""
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact the admin for help."
 msgstr ""
+"В противном случае вам, возможно, придется обратиться за помощью к "
+"администратору."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1992,6 +2001,8 @@ msgstr "Это дополнение может быть отправлено н�
 #: app/templates/macros/package_approval.html:49
 msgid "You need to fix the above errors before you can submit for review"
 msgstr ""
+"Вам необходимо исправить вышеуказанные ошибки, прежде чем вы сможете "
+"отправить их на проверку"
 
 #: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
@@ -2109,7 +2120,7 @@ msgstr "Загрузки от $1 до $2"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr "в день"
+msgstr "$1 в сутки"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
@@ -2289,7 +2300,7 @@ msgstr "Названия модов не найдены."
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr "Название мода \"%(name)s\""
+msgstr "Название Мода \"%(name)s\""
 
 #: app/templates/modnames/view.html:12
 msgid "Provided By"
@@ -3331,7 +3342,7 @@ msgstr "Перевод метаданных контента - lua_api.md"
 
 #: app/templates/packages/translation.html:30
 msgid "Translation template"
-msgstr ""
+msgstr "Шаблон перевода"
 
 #: app/templates/packages/translation.html:32
 #, python-format
@@ -3339,6 +3350,8 @@ msgid ""
 "To quickly add support for ContentDB package translation, create a file "
 "at %(location)s with the following content:"
 msgstr ""
+"Чтобы быстро добавить поддержку перевода пакетов ContentDB, создайте файл в "
+"%(location)s со следующим содержимым:"
 
 #: app/templates/packages/translation.html:43
 #, python-format
@@ -3616,7 +3629,7 @@ msgstr ""
 
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin using the link below."
-msgstr ""
+msgstr "Пожалуйста, войдите или свяжитесь с администратором ссылкой ниже."
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
@@ -4050,7 +4063,7 @@ msgstr ""
 
 #: app/templates/translate/index.html:65
 msgid "How to translate a mod / game"
-msgstr ""
+msgstr "Как перевести мод / игру"
 
 #: app/templates/translate/index.html:73
 msgid "ContentDB"
@@ -4212,7 +4225,7 @@ msgstr "У вас нет аккаунта на форуме?"
 #: app/templates/users/claim_forums.html:19
 #, python-format
 msgid "You can still <a href='%(url)s'>sign up without one</a>."
-msgstr "Вы все еще можете <a href=\"%(url)s\">войти без него</a>."
+msgstr "Вы всё ещё можете <a href=\"%(url)s\">войти без него</a>."
 
 #: app/templates/users/claim_forums.html:26
 msgid "Option 1"
@@ -4502,13 +4515,15 @@ msgstr "Изображение профиля"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Import from forums"
-msgstr ""
+msgstr "Импортировать из форумов"
 
 #: app/templates/users/profile_edit.html:47
 msgid ""
 "Profile pictures should be square, at least 64x64px, and one of the "
 "following formats: jpeg, png, or webp."
 msgstr ""
+"Фотографии профиля должны быть квадратными, размером не менее 64x64 "
+"пикселей, и в одном из следующих форматов: jpeg, png или webp."
 
 #: app/templates/users/profile_edit.html:51
 msgid "Profile Information"
@@ -4544,7 +4559,7 @@ msgstr "Пожалуйста, подтвердите, что вы человек
 
 #: app/templates/users/register.html:35
 msgid "I agree to the "
-msgstr "Я согласен с "
+msgstr "Я соглашаюсь "
 
 #: app/templates/users/settings_email.html:4
 #, python-format
@@ -4583,7 +4598,7 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:43
 msgid "Disable all"
-msgstr ""
+msgstr "Выключить всё"
 
 #: app/templates/users/settings_email.html:48
 msgid "Event"
@@ -5076,4 +5091,3 @@ msgstr ""
 
 #~ msgid "Please sign in or contact the admin in another way"
 #~ msgstr "Пожалуйста, войдите или свяжитесь с администратором другим способом"
-
