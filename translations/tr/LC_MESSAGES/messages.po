@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-03-23 16:19+0000\n"
-"PO-Revision-Date: 2024-03-03 17:21+0000\n"
+"PO-Revision-Date: 2024-03-24 05:11+0000\n"
 "Last-Translator: Oğuz Ersen <oguz@ersen.moe>\n"
+"Language-Team: Turkish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/tr/>\n"
 "Language: tr\n"
-"Language-Team: Turkish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/tr/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:137
@@ -332,6 +333,8 @@ msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr ""
+"Paketleri yönetebilmeniz için hesabınıza bir e-posta adresi eklemeniz ve "
+"bunu doğrulamanız gerekir"
 
 #: app/blueprints/packages/packages.py:331
 msgid "Unable to find that user"
@@ -1081,6 +1084,8 @@ msgid ""
 "What games does your package support? Please specify on the supported "
 "games page"
 msgstr ""
+"Paketiniz hangi oyunları destekliyor? Lütfen desteklenen oyunlar sayfasında "
+"belirtin"
 
 #: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
@@ -1121,6 +1126,8 @@ msgid ""
 "Warning: Forum topic not found. The topic may have been created since the"
 " last forum crawl."
 msgstr ""
+"Uyarı: Forum konusu bulunamadı. Konu, son forum taramasından bu yana "
+"oluşturulmuş olabilir."
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1868,7 +1875,7 @@ msgstr "Hesabınızla ilişkiliyse oturum açmak için GitHub'ı kullanabilirsin
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact the admin for help."
-msgstr ""
+msgstr "Aksi takdirde, yardım için yöneticiyle iletişime geçmeniz gerekebilir."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1971,7 +1978,7 @@ msgstr "Bu paket hazır olduğunda onay için sunulabilir."
 
 #: app/templates/macros/package_approval.html:49
 msgid "You need to fix the above errors before you can submit for review"
-msgstr ""
+msgstr "İnceleme için göndermeden önce yukarıdaki hataları düzeltmeniz gerekir"
 
 #: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
@@ -3299,7 +3306,7 @@ msgstr "İçerik üst verilerini çevirme - lua_api.md"
 
 #: app/templates/packages/translation.html:30
 msgid "Translation template"
-msgstr ""
+msgstr "Çeviri şablonu"
 
 #: app/templates/packages/translation.html:32
 #, python-format
@@ -3307,6 +3314,8 @@ msgid ""
 "To quickly add support for ContentDB package translation, create a file "
 "at %(location)s with the following content:"
 msgstr ""
+"ContentDB paket çevirisi desteğini hızlı bir şekilde eklemek için, "
+"%(location)s konumunda aşağıdaki içeriğe sahip bir dosya oluşturun:"
 
 #: app/templates/packages/translation.html:43
 #, python-format
@@ -3589,6 +3598,8 @@ msgstr ""
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin using the link below."
 msgstr ""
+"Lütfen oturum açın veya aşağıdaki bağlantıyı kullanarak yönetici ile "
+"iletişime geçin."
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
@@ -4025,7 +4036,7 @@ msgstr ""
 
 #: app/templates/translate/index.html:65
 msgid "How to translate a mod / game"
-msgstr ""
+msgstr "Bir mod / oyun nasıl çevrilir"
 
 #: app/templates/translate/index.html:73
 msgid "ContentDB"
@@ -4480,13 +4491,15 @@ msgstr "Profil Resmi"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Import from forums"
-msgstr ""
+msgstr "Forumlardan içe aktar"
 
 #: app/templates/users/profile_edit.html:47
 msgid ""
 "Profile pictures should be square, at least 64x64px, and one of the "
 "following formats: jpeg, png, or webp."
 msgstr ""
+"Profil resimleri kare, en az 64x64px ve şu biçimlerden biri olmalıdır: jpeg, "
+"png veya webp."
 
 #: app/templates/users/profile_edit.html:51
 msgid "Profile Information"
@@ -4561,7 +4574,7 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:43
 msgid "Disable all"
-msgstr ""
+msgstr "Tümünü devre dışı bırak"
 
 #: app/templates/users/settings_email.html:48
 msgid "Event"
@@ -5035,4 +5048,3 @@ msgstr ""
 
 #~ msgid "Please sign in or contact the admin in another way"
 #~ msgstr "Lütfen oturum açın veya yöneticiyle başka bir şekilde iletişime geçin"
-
