@@ -23,7 +23,7 @@ bp = Blueprint("github", __name__)
 
 from flask import redirect, url_for, request, flash, jsonify, current_app
 from flask_login import current_user
-from sqlalchemy import func, or_, and_
+from sqlalchemy import or_, and_
 from app import github, csrf
 from app.models import db, User, APIToken, Package, Permission, AuditSeverity, PackageState
 from app.utils import abs_url_for, add_audit_log, login_user_set_active, is_safe_url
@@ -65,17 +65,22 @@ def callback(oauth_token):
 	# Get GitGub username
 	url = "https://api.github.com/user"
 	r = requests.get(url, headers={"Authorization": "token " + oauth_token})
-	username = r.json()["login"]
+	json = r.json()
+	user_id = json["id"]
+	username = json["login"]
 
-	# Get user by GitHub username
-	userByGithub = User.query.filter(func.lower(User.github_username) == func.lower(username)).first()
+	# Get user by GitHub user ID
+	userByGithub = User.query.filter(User.github_user_id == user_id).first()
 
 	# If logged in, connect
 	if current_user and current_user.is_authenticated:
 		if userByGithub is None:
 			current_user.github_username = username
+			current_user.github_user_id = user_id
 			db.session.commit()
 			flash(gettext("Linked GitHub to account"), "success")
+			return redirect(redirect_to)
+		elif userByGithub == current_user:
 			return redirect(redirect_to)
 		else:
 			flash(gettext("GitHub account is already associated with another user"), "danger")

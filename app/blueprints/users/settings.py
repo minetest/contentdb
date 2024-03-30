@@ -25,6 +25,7 @@ from wtforms.validators import Length, Optional, Email, URL
 from app.models import User, AuditSeverity, db, UserRank, PackageAlias, EmailSubscription, UserNotificationPreferences, \
 	UserEmailVerification, Permission, NotificationType, UserBan
 from app.tasks.emails import send_verify_email
+from app.tasks.usertasks import update_github_user_id
 from app.utils import nonempty_or_none, add_audit_log, random_string, rank_required, has_blocked_domains
 from . import bp
 
@@ -335,7 +336,12 @@ def modtools(username):
 
 			user.display_name = form.display_name.data
 			user.forums_username = nonempty_or_none(form.forums_username.data)
-			user.github_username = nonempty_or_none(form.github_username.data)
+			github_username = nonempty_or_none(form.github_username.data)
+			if github_username is None:
+				user.github_username = None
+				user.github_user_id = None
+			else:
+				update_github_user_id.delay(user.id, github_username)
 
 		if user.check_perm(current_user, Permission.CHANGE_RANK):
 			new_rank = form["rank"].data

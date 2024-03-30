@@ -24,7 +24,7 @@ from app.models import User, db, PackageType, ForumTopic
 from app.tasks import celery
 from app.utils import is_username_valid
 from app.utils.phpbbparser import get_profile, get_topics_from_forum
-from .usertasks import set_profile_picture_from_url
+from .usertasks import set_profile_picture_from_url, update_github_user_id_raw
 
 
 @celery.task()
@@ -53,6 +53,7 @@ def check_forum_account(forums_username, force_replace_pic=False):
 	if github_username is not None and github_username.strip() != "":
 		print("Updated GitHub username for " + user.display_name + " to " + github_username)
 		user.github_username = github_username
+		update_github_user_id_raw(user)
 		needs_saving = True
 
 	pic = profile.avatar

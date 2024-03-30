@@ -19,12 +19,13 @@ import datetime, requests
 import os
 import sys
 
+from flask import url_for
 from sqlalchemy import or_, and_
 
 from app import app
-from app.models import User, db, UserRank, ThreadReply, Package
+from app.models import User, db, UserRank, ThreadReply, Package, NotificationType
 from app.utils import random_string
-from app.utils.models import create_session
+from app.utils.models import create_session, add_notification, get_system_user
 from app.tasks import celery, TaskError
 
 
@@ -92,3 +93,60 @@ def set_profile_picture_from_url(username: str, url: str):
 	db.session.commit()
 
 	return filepath
+
+
+def update_github_user_id_raw(user: User, send_notif: bool = False):
+	github_api_token = app.config.get("GITHUB_API_TOKEN")
+	if github_api_token is None or github_api_token == "":
+		raise TaskError("Importing requires a GitHub API token")
+
+	url = f"https://api.github.com/users/{user.github_username}"
+	resp = requests.get(url, headers={"Authorization": "token " + github_api_token}, timeout=15)
+	if resp.status_code == 404:
+		print(" - not found", file=sys.stderr)
+		if send_notif:
+			system_user = get_system_user()
+			add_notification(user, system_user, NotificationType.BOT,
+					f"GitHub account {user.github_username} does not exist, so has been disconnected from your account",
+					url_for("users.profile", username=user.username), None)
+		user.github_username = None
+		return False
+	elif resp.status_code != 200:
+		print(" - " + resp.json()["message"], file=sys.stderr)
+		return False
+
+	json = resp.json()
+	user_id = json.get("id")
+	if type(user_id) is not int:
+		raise TaskError(f"{url} returned non-int id")
+
+	user.github_user_id = user_id
+	return True
+
+
+@celery.task()
+def update_github_user_id(user_id: int, github_username: str):
+	user = User.query.get(user_id)
+	if user is None:
+		raise TaskError("Unable to find that user")
+
+	user.github_username = github_username
+	if update_github_user_id_raw(user):
+		db.session.commit()
+	else:
+		raise TaskError(f"Unable to set the GitHub username to {github_username}")
+
+
+@celery.task()
+def import_github_user_ids():
+	users = User.query.filter(User.github_user_id.is_(None), User.github_username.is_not(None)).all()
+	total = len(users)
+	count = 0
+	for i, user in enumerate(users):
+		print(f"[{i + 1} / {total}] Getting GitHub user id for {user.github_username}", file=sys.stderr)
+		if update_github_user_id_raw(user, send_notif=True):
+			count += 1
+
+	db.session.commit()
+
+	print(f"Updated {count} users", file=sys.stderr)

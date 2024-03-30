@@ -144,6 +144,7 @@ class User(db.Model, UserMixin):
 
 	# Account linking
 	github_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
+	github_user_id = db.Column(db.Integer, nullable=True, unique=True)
 	forums_username = db.Column(db.String(50, collation="NOCASE"), nullable=True, unique=True)
 
 	# Access token for webhook setup
