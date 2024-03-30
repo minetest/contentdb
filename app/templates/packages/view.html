@@ -385,8 +385,12 @@
 					<div class="d-flex mt-3 mb-4">
 						<form method="POST" action="{{ package.get_url('collections.package_toggle_favorite') }}">
 							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-							<button type="submit" class="btn {% if is_favorited %}text-info{% endif %} btn-secondary me-2" aria-label="{{ _('Favorite') }}">
+							<button type="submit" class="btn {% if is_favorited %}text-info{% endif %} btn-secondary me-2"
+									aria-label="{{ _('Favorite') }}" title="{{ _('Favorite') }}">
 								<i class="fas fa-star"></i>
+								<span class="ms-1">
+									{{ favorites_count }}
+								</span>
 							</button>
 						</form>
 						<div class="flex-grow-1">
