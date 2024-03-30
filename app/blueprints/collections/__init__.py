@@ -67,7 +67,7 @@ def view(author, name):
 		abort(404)
 
 	items = collection.items
-	if collection.check_perm(current_user, Permission.EDIT_COLLECTION):
+	if not collection.check_perm(current_user, Permission.EDIT_COLLECTION):
 		items = [x for x in items if x.package.check_perm(current_user, Permission.VIEW_PACKAGE)]
 
 	return render_template("collections/view.html", collection=collection, items=items)
