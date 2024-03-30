@@ -95,7 +95,7 @@ class Collection(db.Model):
 		elif type(perm) != Permission:
 			raise Exception("Unknown permission given to Collection.check_perm()")
 
-		if not user.is_authenticated:
+		if user is None or not user.is_authenticated:
 			return perm == Permission.VIEW_COLLECTION and not self.private
 
 		can_view = not self.private or self.author == user or user.rank.at_least(UserRank.MODERATOR)

@@ -867,18 +867,21 @@ def collection_list():
 
 
 @bp.route("/api/collections/<author>/<name>/")
+@is_api_authd
 @cors_allowed
-def collection_view(author, name):
+def collection_view(token, author, name):
+	user = token.owner if token else None
+
 	collection = Collection.query \
 		.filter(Collection.name == name, Collection.author.has(username=author)) \
 		.one_or_404()
 
-	if not collection.check_perm(current_user, Permission.VIEW_COLLECTION):
+	if not collection.check_perm(user, Permission.VIEW_COLLECTION):
 		error(404, "Collection not found")
 
 	items = collection.items
-	if collection.check_perm(current_user, Permission.EDIT_COLLECTION):
-		items = [x for x in items if x.package.check_perm(current_user, Permission.VIEW_PACKAGE)]
+	if not collection.check_perm(user, Permission.EDIT_COLLECTION):
+		items = [x for x in items if x.package.check_perm(user, Permission.VIEW_PACKAGE)]
 
 	ret = collection.as_dict()
 	ret["items"] = [x.as_dict() for x in items]
