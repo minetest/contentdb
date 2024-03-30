@@ -381,8 +381,8 @@
 					{{ self.download_btn() }}
 				</div>
 
-				{% if current_user.is_authenticated %}
-					<div class="d-flex mt-3 mb-4">
+				<div class="mt-3 mb-3">
+					<div class="d-flex">
 						<form method="POST" action="{{ package.get_url('collections.package_toggle_favorite') }}">
 							<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 							<button type="submit" class="btn {% if is_favorited %}text-info{% endif %} btn-secondary me-2"
@@ -399,7 +399,16 @@
 							</a>
 						</div>
 					</div>
-				{% endif %}
+					{% if public_collection_count > 0 %}
+						<p class="text-center mt-1">
+							<a href="{{ url_for('collections.list_all', package=package.get_id()) }}">
+								<small>
+									{{ _("View %(count)d collections", count=public_collection_count) }}
+								</small>
+							</a>
+						</p>
+					{% endif %}
+				</div>
 
 				{% if package.check_perm(current_user, "MAKE_RELEASE") and package.update_config and package.update_config.outdated_at %}
 					{% set config = package.update_config %}

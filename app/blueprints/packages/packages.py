@@ -168,6 +168,10 @@ def view(package):
 			Collection.packages.contains(package),
 			Collection.name == "favorites").count()
 
+	public_collection_count = Collection.query.filter(
+		Collection.packages.contains(package),
+		Collection.private == False).count()
+
 	is_favorited = current_user.is_authenticated and \
 		Collection.query.filter(
 			Collection.author == current_user,
@@ -177,7 +181,8 @@ def view(package):
 	return render_template("packages/view.html",
 			package=package, releases=releases, packages_uses=packages_uses,
 			review_thread=review_thread, threads=threads.all(), validation=validation,
-			has_review=has_review, favorites_count=favorites_count, is_favorited=is_favorited)
+			has_review=has_review, favorites_count=favorites_count, is_favorited=is_favorited,
+			public_collection_count=public_collection_count)
 
 
 @bp.route("/packages/<author>/<name>/shields/<type>/")
