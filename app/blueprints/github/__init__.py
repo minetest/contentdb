@@ -68,9 +68,11 @@ def callback(oauth_token):
 	json = r.json()
 	user_id = json["id"]
 	username = json["login"]
+	if type(user_id) is not int:
+		abort(400)
 
 	# Get user by GitHub user ID
-	userByGithub = User.query.filter(User.github_user_id == user_id).first()
+	userByGithub = User.query.filter(User.github_user_id == user_id).one_or_none()
 
 	# If logged in, connect
 	if current_user and current_user.is_authenticated:
