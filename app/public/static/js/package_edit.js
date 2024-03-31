@@ -84,10 +84,11 @@ window.addEventListener("load", () => {
 		},
 		"desc_page_topic": (val) => {
 			const topicId = document.getElementById("forums").value;
-			return topicId && val.indexOf(`forum.minetest.net/viewtopic.php?t=${topicId}`) >= 0;
+			const r = new RegExp(`forum\\.minetest\\.net\\/viewtopic\\.php\\?[a-z0-9=&]*t=${topicId}`);
+			return topicId && r.test(val);
 		},
 		"desc_page_repo": (val) => {
-			const repoUrl = document.getElementById("repo").value;
+			const repoUrl = document.getElementById("repo").value.replace(".git", "");
 			return repoUrl && val.indexOf(repoUrl.toLowerCase()) >= 0;
 		},
 	});
