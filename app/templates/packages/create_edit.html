@@ -38,13 +38,13 @@
 
 	{% if not package %}
 		<div class="alert alert-info">
-			<a class="float-end btn btn-sm btn-default" href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("View") }}</a>
+			<a class="float-end btn btn-sm btn-default" href="{{ url_for('flatpage', path='policy_and_guidance') }}" target="_blank">{{ _("View") }}</a>
 
 			{{ _("Have you read the Package Inclusion Policy and Guidance yet?") }}
 		</div>
 	{% else %}
 		<div class="alert alert-secondary">
-			<a class="float-end btn btn-sm btn-default" href="/help/package_config/#cdbjson">{{ _("Read more") }}</a>
+			<a class="float-end btn btn-sm btn-default" href="/help/package_config/#cdbjson" target="_blank">{{ _("Read more") }}</a>
 
 			{{ _("You can include a .cdb.json file in your %(type)s to update these details automatically.", type=package.type.text.lower()) }}
 		</div>
@@ -85,7 +85,9 @@
 			</div>
 			{{ render_field(form.desc, class_="pkg_meta", fieldclass="form-control markdown") }}
 			<p class="pkg_meta form-text text-muted">
-				<a href="/help/appealing_page/">{{ _("What to write in the long description") }}</a>
+				<a href="/help/appealing_page/#long-description" target="_blank">
+					{{ _("What to write in the long description") }}
+				</a>
 			</p>
 		</fieldset>
 
