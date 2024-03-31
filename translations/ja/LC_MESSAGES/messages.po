@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-23 16:19+0000\n"
+"POT-Creation-Date: 2024-03-31 15:39+0100\n"
 "PO-Revision-Date: 2023-12-16 10:05+0000\n"
 "Last-Translator: Jun Nogata <nogajun@gmail.com>\n"
 "Language: ja\n"
@@ -62,18 +62,18 @@ msgid "Limit to package"
 msgstr "パッケージへの制限"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:241
-#: app/blueprints/packages/packages.py:509
-#: app/blueprints/packages/packages.py:605
-#: app/blueprints/packages/packages.py:676
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:251
+#: app/blueprints/packages/packages.py:526
+#: app/blueprints/packages/packages.py:622
+#: app/blueprints/packages/packages.py:710
 #: app/blueprints/packages/releases.py:62
 #: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:49
 #: app/blueprints/packages/screenshots.py:36
 #: app/blueprints/packages/screenshots.py:42
 #: app/blueprints/packages/screenshots.py:47
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
-#: app/blueprints/users/settings.py:77 app/blueprints/users/settings.py:147
-#: app/blueprints/users/settings.py:315 app/templates/users/modtools.html:111
+#: app/blueprints/users/settings.py:78 app/blueprints/users/settings.py:148
+#: app/blueprints/users/settings.py:308 app/templates/users/modtools.html:111
 msgid "Save"
 msgstr "保存"
 
@@ -140,19 +140,19 @@ msgstr ""
 msgid "Authorization failed [err=gh-oauth-login-failed]"
 msgstr "認証失敗 [err=gh-oauth-login-failed]"
 
-#: app/blueprints/github/__init__.py:78
+#: app/blueprints/github/__init__.py:83
 msgid "Linked GitHub to account"
 msgstr "Githubとアカウントをリンクする"
 
-#: app/blueprints/github/__init__.py:81
+#: app/blueprints/github/__init__.py:88
 msgid "GitHub account is already associated with another user"
 msgstr "GitHubアカウントが既に他のユーザーに紐付いています"
 
-#: app/blueprints/github/__init__.py:87
+#: app/blueprints/github/__init__.py:94
 msgid "Unable to find an account for that GitHub user"
 msgstr "GitHubユーザーが見つかりません"
 
-#: app/blueprints/github/__init__.py:92
+#: app/blueprints/github/__init__.py:99
 msgid "Authorization failed [err=gh-login-failed]"
 msgstr "認証失敗 [err=gh-login-failed]"
 
@@ -186,7 +186,7 @@ msgstr ""
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:648 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:653 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "リリース"
 
@@ -198,7 +198,7 @@ msgstr "スクリーンショット"
 
 #: app/blueprints/packages/__init__.py:52
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:619
+#: app/templates/packages/view.html:624
 msgid "Maintainers"
 msgstr "メンテナー"
 
@@ -226,186 +226,190 @@ msgstr "削除 / 非公開"
 msgid "Supported Games"
 msgstr "対応しているゲーム"
 
-#: app/blueprints/packages/packages.py:205
+#: app/blueprints/packages/packages.py:215
 msgid "No download available."
 msgstr "ダウンロードできるものはありません。"
 
-#: app/blueprints/packages/packages.py:219 app/templates/packages/view.html:589
+#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:594
 msgid "Type"
 msgstr "種類"
 
-#: app/blueprints/packages/packages.py:220
+#: app/blueprints/packages/packages.py:230
 msgid "Title (Human-readable)"
 msgstr "タイトル（人が読める形式）"
 
-#: app/blueprints/packages/packages.py:221
-#: app/blueprints/packages/packages.py:603
+#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:620
 msgid "Name (Technical)"
 msgstr "名前（技術的なもの）"
 
-#: app/blueprints/packages/packages.py:221
-#: app/blueprints/packages/packages.py:604
+#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:621
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "小文字 (a-z)、数字 (0-9)、アンダースコア (_) に限ります"
 
-#: app/blueprints/packages/packages.py:222
+#: app/blueprints/packages/packages.py:232
 msgid "Short Description (Plaintext)"
 msgstr "短い説明（プレーンテキスト）"
 
-#: app/blueprints/packages/packages.py:224 app/templates/packages/view.html:611
+#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:616
 msgid "Maintenance State"
 msgstr "メンテナンス状態"
 
-#: app/blueprints/packages/packages.py:226 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
 msgid "Tags"
 msgstr "タグ"
 
-#: app/blueprints/packages/packages.py:227
+#: app/blueprints/packages/packages.py:237
 msgid "Content Warnings"
 msgstr "内容の警告"
 
-#: app/blueprints/packages/packages.py:228 app/templates/packages/view.html:600
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:605
 msgid "License"
 msgstr "ライセンス"
 
-#: app/blueprints/packages/packages.py:229
+#: app/blueprints/packages/packages.py:239
 msgid "Media License"
 msgstr "メディアのライセンス"
 
-#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:241
 msgid "Long Description (Markdown)"
 msgstr "長い説明（Markdown形式）"
 
-#: app/blueprints/packages/packages.py:233
+#: app/blueprints/packages/packages.py:243
 msgid "VCS Repository URL"
 msgstr "VCSリポジトリURL"
 
-#: app/blueprints/packages/packages.py:234 app/blueprints/users/settings.py:75
+#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:76
 msgid "Website URL"
 msgstr "WebサイトURL"
 
-#: app/blueprints/packages/packages.py:235
+#: app/blueprints/packages/packages.py:245
 msgid "Issue Tracker URL"
 msgstr "イシュートラッカーURL"
 
-#: app/blueprints/packages/packages.py:236
+#: app/blueprints/packages/packages.py:246
 msgid "Forum Topic ID"
 msgstr "フォーラムトピックID"
 
-#: app/blueprints/packages/packages.py:237
+#: app/blueprints/packages/packages.py:247
 msgid "Video URL"
 msgstr "動画URL"
 
-#: app/blueprints/packages/packages.py:238
+#: app/blueprints/packages/packages.py:248
 msgid "Donate URL"
 msgstr "寄付受付URL"
 
-#: app/blueprints/packages/packages.py:239
+#: app/blueprints/packages/packages.py:249
 msgid "Translation URL"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:255
 msgid "_game is not an allowed name"
 msgstr "_gameは許可された名前ではありません"
 
-#: app/blueprints/packages/packages.py:255
+#: app/blueprints/packages/packages.py:265
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr "パッケージは既に存在しますが、削除されています。パッケージを復元するにはContentDBスタッフまでご連絡ください"
 
-#: app/blueprints/packages/packages.py:260
+#: app/blueprints/packages/packages.py:270
 msgid "Package already exists"
 msgstr "パッケージは既に存在しています"
 
-#: app/blueprints/packages/packages.py:266
+#: app/blueprints/packages/packages.py:276
 msgid "A collection with a similar name already exists"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:319
+#: app/blueprints/packages/packages.py:329
 #: app/blueprints/packages/releases.py:82
 msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:331
+#: app/blueprints/packages/packages.py:335
+msgid "Save draft"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:343
 msgid "Unable to find that user"
 msgstr "ユーザーが見つかりません"
 
-#: app/blueprints/packages/packages.py:335
+#: app/blueprints/packages/packages.py:347
 #: app/blueprints/packages/screenshots.py:137
-#: app/blueprints/users/settings.py:131
+#: app/blueprints/users/settings.py:132
 msgid "Permission denied"
 msgstr "権限がありません"
 
-#: app/blueprints/packages/packages.py:391
-#: app/blueprints/packages/packages.py:464
-#: app/blueprints/packages/packages.py:484
+#: app/blueprints/packages/packages.py:403
+#: app/blueprints/packages/packages.py:477
+#: app/blueprints/packages/packages.py:499
 msgid "You don't have permission to do that"
 msgstr "権限がありません"
 
-#: app/blueprints/packages/packages.py:423
+#: app/blueprints/packages/packages.py:436
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "どのような変更が必要か、承認スレッドでコメントしてください"
 
-#: app/blueprints/packages/packages.py:430
+#: app/blueprints/packages/packages.py:443
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:479
+#: app/blueprints/packages/packages.py:494
 msgid "Deleted package"
 msgstr "削除されたパッケージ"
 
-#: app/blueprints/packages/packages.py:499
+#: app/blueprints/packages/packages.py:516
 msgid "Unapproved package"
 msgstr "未承認のパッケージ"
 
-#: app/blueprints/packages/packages.py:508
+#: app/blueprints/packages/packages.py:525
 msgid "Maintainers (Comma-separated)"
 msgstr "メンテナー（複数の場合、カンマで区切る）"
 
-#: app/blueprints/packages/packages.py:517
+#: app/blueprints/packages/packages.py:534
 msgid "You don't have permission to edit maintainers"
 msgstr "メンテナーを編集する権限がありません"
 
-#: app/blueprints/packages/packages.py:567
+#: app/blueprints/packages/packages.py:584
 msgid "You are not a maintainer"
 msgstr "メンテナーではありません"
 
-#: app/blueprints/packages/packages.py:570
+#: app/blueprints/packages/packages.py:587
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "パッケージ所有者はメンテナーから自分は外せません"
 
-#: app/blueprints/packages/packages.py:602
+#: app/blueprints/packages/packages.py:619
 msgid "Author Name"
 msgstr "作成者名"
 
-#: app/blueprints/packages/packages.py:672
+#: app/blueprints/packages/packages.py:706
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "依存関係に基づくサポート検出を有効にする（推奨）"
 
-#: app/blueprints/packages/packages.py:673
+#: app/blueprints/packages/packages.py:707
 msgid "Supported games"
 msgstr "対応しているゲーム"
 
-#: app/blueprints/packages/packages.py:674
+#: app/blueprints/packages/packages.py:708
 msgid "Unsupported games"
 msgstr "対応していないゲーム"
 
-#: app/blueprints/packages/packages.py:675
+#: app/blueprints/packages/packages.py:709
 msgid "Supports all games (unless stated) / is game independent"
 msgstr "すべてのゲームをサポート（明記されている場合を除く）/ゲームに依存しない"
 
-#: app/blueprints/packages/packages.py:691
+#: app/blueprints/packages/packages.py:725
 msgid "You need at least one release before you can edit game support"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:695
+#: app/blueprints/packages/packages.py:729
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
 
@@ -561,7 +565,7 @@ msgstr ""
 
 #: app/blueprints/packages/reviews.py:80 app/blueprints/threads/__init__.py:207
 #: app/blueprints/threads/__init__.py:240
-#: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:112
+#: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:113
 #: app/logic/packages.py:132
 msgid "Linking to blocked sites is not allowed"
 msgstr ""
@@ -589,7 +593,7 @@ msgid "Message"
 msgstr ""
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:51
-#: app/templates/packages/view.html:679 app/templates/report/index.html:4
+#: app/templates/packages/view.html:684 app/templates/report/index.html:4
 #: app/templates/report/index.html:10 app/templates/users/profile.html:37
 msgid "Report"
 msgstr "報告"
@@ -688,11 +692,11 @@ msgstr "登録メールの確認が必要です"
 msgid "Login failed"
 msgstr "ログインに失敗しました"
 
-#: app/blueprints/users/account.py:100 app/blueprints/users/settings.py:74
+#: app/blueprints/users/account.py:100 app/blueprints/users/settings.py:75
 msgid "Display Name"
 msgstr "表示名"
 
-#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:309
+#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:302
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "ユーザー名"
@@ -705,7 +709,7 @@ msgstr "半角アルファベット(A-Za-z)、数字(0-9)、アンダースコ�
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/account.py:186
 #: app/blueprints/users/account.py:222 app/blueprints/users/account.py:373
-#: app/blueprints/users/settings.py:146
+#: app/blueprints/users/settings.py:147
 msgid "Email"
 msgstr "メール"
 
@@ -750,7 +754,7 @@ msgid ""
 msgstr ""
 
 #: app/blueprints/users/account.py:148 app/blueprints/users/account.py:252
-#: app/blueprints/users/settings.py:174
+#: app/blueprints/users/settings.py:175
 msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
 msgstr "そのメールアドレスは、購読停止/ブラックリストに登録されているので使用できません"
 
@@ -956,62 +960,62 @@ msgstr ""
 msgid "Has received %(downloads)d downloads across all packages."
 msgstr ""
 
-#: app/blueprints/users/settings.py:36 app/templates/users/profile.html:26
+#: app/blueprints/users/settings.py:37 app/templates/users/profile.html:26
 #: app/templates/users/profile_edit.html:8
 msgid "Edit Profile"
 msgstr "プロフィールを編集"
 
-#: app/blueprints/users/settings.py:41 app/templates/users/account.html:12
+#: app/blueprints/users/settings.py:42 app/templates/users/account.html:12
 msgid "Account and Security"
 msgstr "アカウントとセキュリティ"
 
-#: app/blueprints/users/settings.py:46
+#: app/blueprints/users/settings.py:47
 #: app/templates/users/settings_email.html:12
 msgid "Email and Notifications"
 msgstr "メールと通知"
 
-#: app/blueprints/users/settings.py:51 app/templates/api/list_tokens.html:10
+#: app/blueprints/users/settings.py:52 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
 msgstr "APIトークン"
 
-#: app/blueprints/users/settings.py:59 app/templates/oauth/list_clients.html:10
+#: app/blueprints/users/settings.py:60 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
 msgstr ""
 
-#: app/blueprints/users/settings.py:66 app/templates/users/modtools.html:4
+#: app/blueprints/users/settings.py:67 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
 msgid "Moderator Tools"
 msgstr "モデレーターツール"
 
-#: app/blueprints/users/settings.py:76
+#: app/blueprints/users/settings.py:77
 msgid "Donation URL"
 msgstr "寄付受付URL"
 
-#: app/blueprints/users/settings.py:92 app/blueprints/users/settings.py:99
+#: app/blueprints/users/settings.py:93 app/blueprints/users/settings.py:100
 msgid "A user already has that name"
 msgstr ""
 
-#: app/blueprints/users/settings.py:264
+#: app/blueprints/users/settings.py:257
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr ""
 
-#: app/blueprints/users/settings.py:310
+#: app/blueprints/users/settings.py:303
 msgid "Display name"
 msgstr "表示名"
 
-#: app/blueprints/users/settings.py:311
+#: app/blueprints/users/settings.py:304
 msgid "Forums Username"
 msgstr "フォーラム ユーザー名"
 
-#: app/blueprints/users/settings.py:312
+#: app/blueprints/users/settings.py:305
 msgid "GitHub Username"
 msgstr "GitHubユーザー名"
 
-#: app/blueprints/users/settings.py:313 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:306 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "順位"
 
-#: app/blueprints/users/settings.py:357
+#: app/blueprints/users/settings.py:355
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr ""
 
@@ -1197,7 +1201,7 @@ msgstr "承認"
 msgid "Delete"
 msgstr "削除"
 
-#: app/models/packages.py:569 app/templates/packages/view.html:163
+#: app/models/packages.py:563 app/templates/packages/view.html:163
 msgid "Work in Progress"
 msgstr ""
 
@@ -1309,7 +1313,7 @@ msgstr "サインアウト"
 
 #: app/templates/admin/languages/list.html:4
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
-#: app/templates/packages/view.html:593
+#: app/templates/packages/view.html:598
 msgid "Languages"
 msgstr ""
 
@@ -1346,7 +1350,7 @@ msgid "User List"
 msgstr "ユーザー一覧"
 
 #: app/templates/base.html:255 app/templates/packages/view.html:190
-#: app/templates/packages/view.html:668 app/templates/threads/list.html:4
+#: app/templates/packages/view.html:673 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "掲示板"
 
@@ -1871,7 +1875,7 @@ msgid "No audit log entries."
 msgstr ""
 
 #: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:145
-#: app/templates/packages/remove.html:48 app/templates/packages/view.html:451
+#: app/templates/packages/remove.html:48 app/templates/packages/view.html:464
 #: app/templates/users/modtools.html:86
 msgid "Required"
 msgstr ""
@@ -2135,7 +2139,7 @@ msgid "On %(trigger)s, do %(action)s"
 msgstr ""
 
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:122
-#: app/templates/packages/view.html:416
+#: app/templates/packages/view.html:429
 msgid "Release"
 msgstr ""
 
@@ -2145,7 +2149,7 @@ msgstr ""
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:420
+#: app/templates/packages/view.html:433
 msgid "Update settings"
 msgstr ""
 
@@ -2206,9 +2210,9 @@ msgstr ""
 
 #: app/templates/modnames/view.html:27 app/templates/oauth/authorize.html:32
 #: app/templates/packages/game_support.html:42
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:457
-#: app/templates/packages/view.html:481 app/templates/packages/view.html:526
-#: app/templates/packages/view.html:558 app/templates/todo/editor.html:85
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:470
+#: app/templates/packages/view.html:494 app/templates/packages/view.html:539
+#: app/templates/packages/view.html:571 app/templates/todo/editor.html:85
 #: app/templates/todo/game_support.html:45
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -2423,68 +2427,103 @@ msgstr ""
 msgid "You need to unpublish the package to change the name."
 msgstr ""
 
-#: app/templates/packages/create_edit.html:79
+#: app/templates/packages/create_edit.html:80
+msgid ""
+"Tip: Don't include <i>Minetest</i>, <i>mod</i>, or <i>modpack</i> "
+"anywhere in the short description. It is unnecessary and wastes "
+"characters."
+msgstr ""
+
+#: app/templates/packages/create_edit.html:83
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:84
+#: app/templates/packages/create_edit.html:88
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr ""
 
-#: app/templates/packages/create_edit.html:90
-msgid "Repository and Links"
-msgstr ""
-
-#: app/templates/packages/create_edit.html:93
-msgid "Do you have a Git repository?"
+#: app/templates/packages/create_edit.html:92
+msgid ""
+"There's no need to link to the package on ContentDB in the long "
+"description, the user is already here!"
 msgstr ""
 
 #: app/templates/packages/create_edit.html:95
-msgid "Having a repository is optional"
+msgid ""
+"There's no need to include the forum topic in the long description, it's "
+"already shown on the page."
 msgstr ""
 
 #: app/templates/packages/create_edit.html:98
+msgid ""
+"There's no need to include the repository URL in the long description, "
+"it's already shown on the page."
+msgstr ""
+
+#: app/templates/packages/create_edit.html:102
+msgid "What to write in the long description"
+msgstr ""
+
+#: app/templates/packages/create_edit.html:108
+msgid "Repository and Links"
+msgstr ""
+
+#: app/templates/packages/create_edit.html:111
+msgid "Do you have a Git repository?"
+msgstr ""
+
+#: app/templates/packages/create_edit.html:113
+msgid "Having a repository is optional"
+msgstr ""
+
+#: app/templates/packages/create_edit.html:116
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
 msgstr ""
 
-#: app/templates/packages/create_edit.html:103
+#: app/templates/packages/create_edit.html:121
 msgid "HTTP URL to a Git, Mercurial, or other repository"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:106
+#: app/templates/packages/create_edit.html:124
 msgid "Next (Autoimport)"
 msgstr "次へ（自動インポート）"
 
-#: app/templates/packages/create_edit.html:107
+#: app/templates/packages/create_edit.html:125
 msgid "Skip"
 msgstr "スキップ"
 
-#: app/templates/packages/create_edit.html:111
+#: app/templates/packages/create_edit.html:129
 msgid "Importing... (This may take a while)"
 msgstr "インポート中...（しばらく時間がかかる場合があります）"
 
-#: app/templates/packages/create_edit.html:114
+#: app/templates/packages/create_edit.html:132
 msgid "Where should users report issues?"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:118
+#: app/templates/packages/create_edit.html:136
 msgid "Paste a forum topic URL"
 msgstr ""
 
-#: app/templates/packages/create_edit.html:120
+#: app/templates/packages/create_edit.html:138
 msgid "YouTube videos will be shown in an embed."
 msgstr "YouTubeの動画は、埋め込まれて表示されます。"
 
-#: app/templates/packages/create_edit.html:121
+#: app/templates/packages/create_edit.html:139
 msgid "If blank, the author's donation URL will be used instead."
 msgstr ""
 
-#: app/templates/packages/create_edit.html:122
+#: app/templates/packages/create_edit.html:140
 msgid "How can users translate your package? ie: weblate URL or a help page"
+msgstr ""
+
+#: app/templates/packages/create_edit.html:145
+msgid ""
+"You need to save a draft before you can add releases and screenshots. "
+"You'll be able to edit the package again before submitting for approval."
 msgstr ""
 
 #: app/templates/packages/edit_maintainers.html:4
@@ -3278,120 +3317,117 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: app/templates/packages/view.html:374 app/templates/packages/view.html:444
+#: app/templates/packages/view.html:374 app/templates/packages/view.html:457
 msgid "View content for game"
 msgstr ""
 
-#: app/templates/packages/view.html:388
+#: app/templates/packages/view.html:389
 msgid "Favorite"
 msgstr ""
 
-#: app/templates/packages/view.html:394
+#: app/templates/packages/view.html:398
 msgid "Add to collection..."
 msgstr ""
 
-#: app/templates/packages/view.html:404
+#: app/templates/packages/view.html:406
+#, python-format
+msgid "View %(count)d collections"
+msgstr ""
+
+#: app/templates/packages/view.html:417
 msgid "Package may be outdated"
 msgstr ""
 
-#: app/templates/packages/view.html:411
+#: app/templates/packages/view.html:424
 msgid "Only visible to the author and Editors."
 msgstr ""
 
-#: app/templates/packages/view.html:428
+#: app/templates/packages/view.html:441
 msgid "Warning"
 msgstr ""
 
-#: app/templates/packages/view.html:434
+#: app/templates/packages/view.html:447
 msgid "Like this package? Help support its development by making a donation"
 msgstr ""
 
-#: app/templates/packages/view.html:437
+#: app/templates/packages/view.html:450
 msgid "Donate now"
 msgstr ""
 
-#: app/templates/packages/view.html:449
+#: app/templates/packages/view.html:462
 msgid "Dependencies"
 msgstr "依存関係"
 
-#: app/templates/packages/view.html:469
+#: app/templates/packages/view.html:482
 msgid "No required dependencies"
 msgstr ""
 
-#: app/templates/packages/view.html:475
+#: app/templates/packages/view.html:488
 msgid "Optional"
 msgstr "オプションMod"
 
-#: app/templates/packages/view.html:508
+#: app/templates/packages/view.html:521
 msgid "Compatible Games"
 msgstr "互換ゲーム"
 
-#: app/templates/packages/view.html:513 app/templates/packages/view.html:533
+#: app/templates/packages/view.html:526 app/templates/packages/view.html:546
 msgid "No specific game required"
 msgstr ""
 
-#: app/templates/packages/view.html:516
+#: app/templates/packages/view.html:529
 msgid "Tested with:"
 msgstr ""
 
-#: app/templates/packages/view.html:538
+#: app/templates/packages/view.html:551
 msgid "Is the above correct?"
 msgstr ""
 
-#: app/templates/packages/view.html:539
+#: app/templates/packages/view.html:552
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
 
-#: app/templates/packages/view.html:551
+#: app/templates/packages/view.html:564
 msgid "Does not work with:"
 msgstr ""
 
-#: app/templates/packages/view.html:568
-msgid "This is an experimental feature."
-msgstr ""
-
-#: app/templates/packages/view.html:569
-msgid "Supported games are determined by an algorithm, and may not be correct."
-msgstr ""
-
-#: app/templates/packages/view.html:579
+#: app/templates/packages/view.html:584
 msgid "Please specify compatible games"
 msgstr ""
 
-#: app/templates/packages/view.html:585
+#: app/templates/packages/view.html:590
 msgid "Information"
 msgstr "情報"
 
-#: app/templates/packages/view.html:591
+#: app/templates/packages/view.html:596
 msgid "Technical Name"
 msgstr "技術名"
 
-#: app/templates/packages/view.html:607
+#: app/templates/packages/view.html:612
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr ""
 
-#: app/templates/packages/view.html:615
+#: app/templates/packages/view.html:620
 msgid "Unknown"
 msgstr ""
 
-#: app/templates/packages/view.html:617
+#: app/templates/packages/view.html:622
 msgid "Added"
 msgstr ""
 
-#: app/templates/packages/view.html:631
+#: app/templates/packages/view.html:636
 msgid "Remove myself"
 msgstr ""
 
-#: app/templates/packages/view.html:636
+#: app/templates/packages/view.html:641
 msgid "Provides"
 msgstr ""
 
-#: app/templates/packages/view.html:658
+#: app/templates/packages/view.html:663
 msgid "More"
 msgstr ""
 
-#: app/templates/packages/view.html:687
+#: app/templates/packages/view.html:692
 msgid "See audit log"
 msgstr ""
 
@@ -4677,5 +4713,11 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgid "Please sign in or contact the admin in another way"
+#~ msgstr ""
+
+#~ msgid "This is an experimental feature."
+#~ msgstr ""
+
+#~ msgid "Supported games are determined by an algorithm, and may not be correct."
 #~ msgstr ""
 
