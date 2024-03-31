@@ -84,6 +84,9 @@
 				{{ render_field(form.media_license, class_="col-sm-6", hint=_("If there is no media, set the Media License to the same as the License.")) }}
 			</div>
 			{{ render_field(form.desc, class_="pkg_meta", fieldclass="form-control markdown") }}
+			<p class="pkg_meta form-text text-muted">
+				<a href="/help/appealing_page/">{{ _("What to write in the long description") }}</a>
+			</p>
 		</fieldset>
 
 		<fieldset class="mt-4 mb-5">

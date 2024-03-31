@@ -27,6 +27,8 @@ toc: False
 * [Creating Releases using Webhooks](release_webhooks/)
 * [Package Configuration and Releases Guide](package_config/)
 * [Supported Games](game_support/)
+* [Creating an appealing ContentDB page](appealing_page/)
+
 
 ## Help for Specific User Ranks
 

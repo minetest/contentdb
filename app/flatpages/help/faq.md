@@ -58,6 +58,10 @@ for a guide to making mods and games using Minetest.
 
 See [Installing content](/help/installing/).
 
+### How can my package get more downloads?
+
+See [Creating an appealing ContentDB page](/help/appealing_page/).
+
 
 ## How do I get help?
 
