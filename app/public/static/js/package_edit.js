@@ -40,45 +40,55 @@ window.addEventListener("load", () => {
 		window.open("https://forum.minetest.net/viewtopic.php?t=" + forumsField.value, "_blank");
 	});
 
-	let hint = null;
-	function showHint(ele, text) {
-		if (hint) {
-			hint.remove();
+	function setupHints(id, hints) {
+		function onChange(val) {
+			val = val.toLowerCase();
+			Object.entries(hints).forEach(([key, func]) => {
+				if (func(val)) {
+					document.getElementById(key).classList.remove("d-none");
+				} else {
+					document.getElementById(key).classList.add("d-none");
+				}
+			});
 		}
 
-		hint = document.createElement("div");
-		hint.classList.add("alert");
-		hint.classList.add("alert-warning");
-		hint.classList.add("my-1");
-		hint.innerHTML = text;
-
-		ele.parentNode.appendChild(hint);
-	}
-
-	let hint_mtmods = `Tip:
-		Don't include <i>Minetest</i>, <i>mod</i>, or <i>modpack</i> anywhere in the short description.
-		It is unnecessary and wastes characters.`;
-
-	let hint_thegame = `Tip:
-		It's obvious that this adds something to Minetest,
-		there's no need to use phrases such as \"adds X to the game\".`;
-
-	const shortDescField = document.getElementById("short_desc");
-
-	function handleShortDescChange() {
-		const val = shortDescField.value.toLowerCase();
-		if (val.indexOf("minetest") >= 0 || val.indexOf("mod") >= 0 ||
-				val.indexOf("modpack") >= 0 || val.indexOf("mod pack") >= 0) {
-			showHint(shortDescField, hint_mtmods);
-		} else if (val.indexOf("the game") >= 0) {
-			showHint(shortDescField, hint_thegame);
-		} else if (hint) {
-			hint.remove();
-			hint = null;
+		const field = document.getElementById(id);
+		if (field.easy_mde) {
+			field.easy_mde.codemirror.on("change", () => {
+				const value = field.easy_mde.value();
+				onChange(value);
+			});
+		} else {
+			field.addEventListener("change", () => onChange(field.value));
+			field.addEventListener("paste", () => onChange(field.value));
+			field.addEventListener("keyup", () => onChange(field.value));
+			field.addEventListener("input", () => onChange(field.value));
 		}
+		onChange(field.value);
 	}
 
-	shortDescField.addEventListener("change", handleShortDescChange);
-	shortDescField.addEventListener("paste", handleShortDescChange);
-	shortDescField.addEventListener("keyup", handleShortDescChange);
+	setupHints("short_desc", {
+		"short_desc_mods": (val) => val.indexOf("minetest") >= 0 || val.indexOf("mod") >= 0 ||
+				val.indexOf("modpack") >= 0 || val.indexOf("mod pack") >= 0,
+	});
+
+	setupHints("desc", {
+		"desc_page_link": (val) => {
+			let packageUrl = window.location.href.replace("/edit/", "");
+			if (packageUrl.indexOf("/packages/new/") >= 0) {
+				const author = document.querySelector("form[data-author]").getAttribute("data-author");
+				const name = document.getElementById("name").value;
+				packageUrl = `/packages/${author}/${name}/`;
+			}
+			return val.indexOf(packageUrl.toLowerCase()) >= 0;
+		},
+		"desc_page_topic": (val) => {
+			const topicId = document.getElementById("forums").value;
+			return topicId && val.indexOf(`forum.minetest.net/viewtopic.php?t=${topicId}`) >= 0;
+		},
+		"desc_page_repo": (val) => {
+			const repoUrl = document.getElementById("repo").value;
+			return repoUrl && val.indexOf(repoUrl.toLowerCase()) >= 0;
+		},
+	});
 })

@@ -21,7 +21,7 @@
 		<script src="/static/js/polltask.js"></script>
 		<script src="/static/js/package_create.js"></script>
 	{% endif %}
-	<script src="/static/js/package_edit.js"></script>
+	<script src="/static/js/package_edit.js?v=2"></script>
 {% endblock %}
 
 {% block content %}
@@ -59,7 +59,7 @@
 
 	{{ package_lists() }}
 
-	<form method="POST" action="" class="tableform">
+	<form method="POST" action="" class="tableform" data-author="{{ author.username }}">
 		{{ form.hidden_tag() }}
 
 		<fieldset class="pkg_meta">
@@ -76,6 +76,10 @@
 			{% endif %}
 			</div>
 			{{ render_field(form.short_desc, class_="pkg_meta") }}
+			<p class="form-text text-warning d-none" id="short_desc_mods">
+				{{ _("Tip: Don't include <i>Minetest</i>, <i>mod</i>, or <i>modpack</i> anywhere in the short description. It is unnecessary and wastes characters.") }}
+			</p>
+
 			{{ render_field(form.dev_state, class_="pkg_meta", hint=_("Please choose 'Work in Progress' if your package is unstable, and shouldn't be recommended to all players")) }}
 			{{ render_multiselect_field(form.tags, class_="pkg_meta") }}
 			{{ render_multiselect_field(form.content_warnings, class_="pkg_meta") }}
@@ -84,6 +88,15 @@
 				{{ render_field(form.media_license, class_="col-sm-6", hint=_("If there is no media, set the Media License to the same as the License.")) }}
 			</div>
 			{{ render_field(form.desc, class_="pkg_meta", fieldclass="form-control markdown") }}
+			<p class="form-text text-danger d-none" id="desc_page_link">
+				{{ _("There's no need to link to the package on ContentDB in the long description, the user is already here!") }}
+			</p>
+			<p class="form-text text-warning d-none" id="desc_page_topic">
+				{{ _("There's no need to include the forum topic in the long description, it's already shown on the page.") }}
+			</p>
+			<p class="form-text text-warning d-none" id="desc_page_repo">
+				{{ _("There's no need to include the repository URL in the long description, it's already shown on the page.") }}
+			</p>
 			<p class="pkg_meta form-text text-muted">
 				<a href="/help/appealing_page/#long-description" target="_blank">
 					{{ _("What to write in the long description") }}
