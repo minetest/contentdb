@@ -129,7 +129,7 @@ def package_view_client(package: Package):
 	allowed_languages = set([x[0] for x in db.session.query(Language.id).all()])
 	lang = request.accept_languages.best_match(allowed_languages)
 
-	data = package.as_dict(current_app.config["BASE_URL"], version, lang=lang)
+	data = package.as_dict(current_app.config["BASE_URL"], version, lang=lang, screenshots_dict=True)
 
 	formspec_version = get_int_or_abort(request.args["formspec_version"])
 	include_images = is_yes(request.args.get("include_images", "true"))

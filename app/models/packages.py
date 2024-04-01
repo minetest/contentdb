@@ -578,10 +578,15 @@ class Package(db.Model):
 
 		return ret
 
-	def as_dict(self, base_url, version=None, lang="en"):
+	def as_dict(self, base_url, version=None, lang="en", screenshots_dict=False):
 		tnurl = self.get_thumb_url(1, format="png")
 		release = self.get_download_release(version=version)
 		meta = self.get_translated(lang)
+
+		if screenshots_dict:
+			screenshots = [ss.as_short_dict(base_url) for ss in self.screenshots]
+		else:
+			screenshots = [base_url + ss.url for ss in self.screenshots]
 
 		return {
 			"author": self.author.username,
@@ -613,7 +618,7 @@ class Package(db.Model):
 
 			"provides": sorted([x.name for x in self.provides]),
 			"thumbnail": (base_url + tnurl) if tnurl is not None else None,
-			"screenshots": [base_url + ss.url for ss in self.screenshots],
+			"screenshots": screenshots,
 
 			"url": base_url + self.get_url("packages.download"),
 			"release": release and release.id,
@@ -1194,6 +1199,12 @@ class PackageScreenshot(db.Model):
 			"approved": self.approved,
 			"created_at": self.created_at.isoformat(),
 			"is_cover_image": self.package.cover_image == self,
+		}
+
+	def as_short_dict(self, base_url=""):
+		return {
+			"title": self.title,
+			"url": base_url + self.url,
 		}
 
 
