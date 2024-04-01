@@ -78,9 +78,6 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
 * GET `/api/packages/` (List)
     * See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/` (Read)
-    * Query arguments
-        * `formspec_version`: Optional. If present, `long_description` is returned a hypertext (see /hypertext/ below).
-        * `include_images`: Optional, defaults to true. Only used if `formspec_version` is provided.
 * PUT `/api/packages/<author>/<name>/` (Update)
     * Requires authentication.
     * JSON dictionary with any of these keys (all are optional, null to delete Nullables):
@@ -103,6 +100,15 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
         * `donate_url`: URL to a donation page.
         * `translation_url`: URL to send users interested in translating your package.
         * `game_support`: Array of game support information objects. Not currently documented, as subject to change.
+* GET `/api/packages/<username>/<name>/for-client/`
+    * Similar to the read endpoint, but optimised for the Minetest client 
+    * `long_description` is given as a hypertext object, see `/hypertext/` below.
+    * `info_hypertext` is the info sidebar as a hypertext object.
+    * Query arguments
+        * `formspec_version`: Required. See /hypertext/ below.
+        * `include_images`: Optional, defaults to true.
+        * `protocol_version`: Optional, used to get the correct release.
+        * `engine_version`: Optional, used to get the correct release. Ex: `5.3.0`.
 * GET `/api/packages/<author>/<name>/hypertext/`
     * Converts the long description to [Minetest Markup Language](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#markup-language)
       to be used in a `hypertext` formspec element.

@@ -671,7 +671,7 @@ class Package(db.Model):
 		return url_for("packages.move_to_state",
 				author=self.author.username, name=self.name, state=state.name.lower())
 
-	def get_download_release(self, version=None):
+	def get_download_release(self, version=None) -> typing.Optional["PackageRelease"]:
 		for rel in self.releases:
 			if rel.approved and (version is None or
 					((rel.min_rel is None or rel.min_rel_id <= version.id) and

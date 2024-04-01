@@ -35,7 +35,7 @@ from app.models import Tag, PackageState, PackageType, Package, db, PackageRelea
 	PackageAlias, Language
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
-from app.utils.minetest_hypertext import html_to_minetest
+from app.utils.minetest_hypertext import html_to_minetest, package_info_as_hypertext
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
@@ -110,11 +110,41 @@ def package_view(package):
 	lang = request.accept_languages.best_match(allowed_languages)
 
 	data = package.as_dict(current_app.config["BASE_URL"], lang=lang)
-	if "formspec_version" in request.args:
-		formspec_version = request.args["formspec_version"]
-		include_images = is_yes(request.args.get("include_images", "true"))
-		html = render_markdown(data["long_description"])
-		data["long_description"] = html_to_minetest(html, formspec_version, include_images)
+	resp = jsonify(data)
+	resp.vary = "Accept-Language"
+	return resp
+
+
+@bp.route("/api/packages/<author>/<name>/for-client/")
+@is_package_page
+@cors_allowed
+def package_view_client(package: Package):
+	protocol_version = request.args.get("protocol_version")
+	engine_version = request.args.get("engine_version")
+	if protocol_version or engine_version:
+		version = MinetestRelease.get(engine_version, get_int_or_abort(protocol_version))
+	else:
+		version = None
+
+	allowed_languages = set([x[0] for x in db.session.query(Language.id).all()])
+	lang = request.accept_languages.best_match(allowed_languages)
+
+	data = package.as_dict(current_app.config["BASE_URL"], version, lang=lang)
+
+	formspec_version = get_int_or_abort(request.args["formspec_version"])
+	include_images = is_yes(request.args.get("include_images", "true"))
+	html = render_markdown(data["long_description"])
+	data["long_description"] = html_to_minetest(html, formspec_version, include_images)
+
+	data["info_hypertext"] = package_info_as_hypertext(package, formspec_version)
+
+	data["download_size"] = package.get_download_release(version).file_size
+
+	data["reviews"] = {
+		"positive": package.reviews.filter(PackageReview.rating > 3).count(),
+		"neutral": package.reviews.filter(PackageReview.rating == 3).count(),
+		"negative": package.reviews.filter(PackageReview.rating < 3).count(),
+	}
 
 	resp = jsonify(data)
 	resp.vary = "Accept-Language"

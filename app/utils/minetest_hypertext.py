@@ -18,6 +18,10 @@ from html.parser import HTMLParser
 import re
 import sys
 
+from flask_babel import gettext
+
+from app.models import Package, PackageType
+
 
 def normalize_whitespace(x):
 	return re.sub(r"\s+", " ", x)
@@ -188,7 +192,7 @@ class MinetestHTMLParser(HTMLParser):
 			self.current_line += f"&{name};"
 
 
-def html_to_minetest(html, formspec_version=6, include_images=True):
+def html_to_minetest(html, formspec_version=7, include_images=True):
 	parser = MinetestHTMLParser(include_images)
 	parser.feed(html)
 	parser.finish_line()
@@ -199,4 +203,71 @@ def html_to_minetest(html, formspec_version=6, include_images=True):
 		"links": parser.links,
 		"images":  parser.images,
 		"image_tooltips": parser.image_tooltips,
+	}
+
+
+def package_info_as_hypertext(package: Package, formspec_version: int = 7):
+	body = ""
+
+	def add_value(label, value):
+		nonlocal body
+		body += f"{label}\n<b>{value}</b>\n\n"
+
+	def add_list(label, items):
+		nonlocal body
+
+		body += label + "\n<b>"
+		for i, item in enumerate(items):
+			if i != 0:
+				body += "</b>, <b>"
+			body += item
+
+		if len(items) == 0:
+			body += "-"
+
+		body += "</b>\n\n"
+
+	add_value(gettext("Type"), package.type.text)
+	add_list(gettext("Tags"), [tag.title for tag in package.tags])
+
+	if package.type != PackageType.GAME:
+		[supported, unsupported] = package.get_sorted_game_support_pair()
+		supports_all_games = package.supports_all_games or len(supported) == 0
+		if supports_all_games:
+			add_value(gettext("Supported Games"), gettext("No specific game required"))
+		else:
+			add_list(gettext("Supported Games"), [support.game.title for support in supported])
+
+		if unsupported and supports_all_games:
+			add_list(gettext("Unsupported Games"), [support.game.title for support in supported])
+
+	if package.type != PackageType.TXP:
+		add_list(gettext("Dependencies"), [x.meta_package.name for x in package.get_sorted_hard_dependencies()])
+		add_list(gettext("Optional dependencies"), [x.meta_package.name for x in package.get_sorted_optional_dependencies()])
+
+	languages = [trans.language.title for trans in package.translations]
+	languages.insert(0, "English")
+	add_list(gettext("Languages"), languages)
+
+	if package.license == package.media_license:
+		license = package.license.name
+	elif package.type == package.type.TXP:
+		license = package.media_license.name
+	else:
+		license = gettext("%(code_license)s for code,<br>%(media_license)s for media.",
+				code_license=package.license.name, media_license=package.media_license.name).replace("<br>", " ")
+
+	add_value(gettext("License"), license)
+	if package.dev_state:
+		add_value(gettext("Maintenance State"), package.dev_state.value)
+	add_value(gettext("Added"), package.created_at)
+	add_list(gettext("Maintainers"), [user.display_name for user in package.maintainers])
+	add_list(gettext("Provides"), [x.name for x in package.provides])
+
+	return {
+		"head": HEAD,
+		"body": body,
+		"links": {},
+		"images":  {},
+		"image_tooltips": {},
 	}
