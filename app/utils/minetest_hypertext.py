@@ -207,6 +207,7 @@ def html_to_minetest(html, formspec_version=7, include_images=True):
 
 
 def package_info_as_hypertext(package: Package, formspec_version: int = 7):
+	links = {}
 	body = ""
 
 	def add_value(label, value):
@@ -231,15 +232,20 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 	add_list(gettext("Tags"), [tag.title for tag in package.tags])
 
 	if package.type != PackageType.GAME:
+		def make_game_link(game):
+			key = f"link_{len(links)}"
+			links[key] = game.get_url("packages.view", absolute=True)
+			return f"<action name={key}>{game.title}</action>"
+
 		[supported, unsupported] = package.get_sorted_game_support_pair()
 		supports_all_games = package.supports_all_games or len(supported) == 0
 		if supports_all_games:
 			add_value(gettext("Supported Games"), gettext("No specific game required"))
 		else:
-			add_list(gettext("Supported Games"), [support.game.title for support in supported])
+			add_list(gettext("Supported Games"), [make_game_link(support.game) for support in supported])
 
 		if unsupported and supports_all_games:
-			add_list(gettext("Unsupported Games"), [support.game.title for support in supported])
+			add_list(gettext("Unsupported Games"), [make_game_link(support.game) for support in supported])
 
 	if package.type != PackageType.TXP:
 		add_list(gettext("Dependencies"), [x.meta_package.name for x in package.get_sorted_hard_dependencies()])
@@ -267,7 +273,7 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 	return {
 		"head": HEAD,
 		"body": body,
-		"links": {},
+		"links": links,
 		"images":  {},
 		"image_tooltips": {},
 	}
