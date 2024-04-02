@@ -29,6 +29,7 @@ from app.tasks.forumtasks import import_topic_list, check_all_forum_accounts
 from app.tasks.importtasks import import_repo_screenshot, check_zip_release, check_for_updates, update_all_game_support, \
 	import_languages
 from app.tasks.usertasks import import_github_user_ids
+from app.tasks.pkgtasks import notify_about_git_forum_links
 from app.utils import add_notification, get_system_user
 
 actions = {}
@@ -294,6 +295,13 @@ def do_send_pending_digests():
 def do_import_github_user_ids():
 	task_id = uuid()
 	import_github_user_ids.apply_async((), task_id=task_id)
+	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
+
+
+@action("Notify about links to git/forums instead of CDB")
+def do_notify_git_forums_links():
+	task_id = uuid()
+	notify_about_git_forum_links.apply_async((), task_id=task_id)
 	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
 
 
