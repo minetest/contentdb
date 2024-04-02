@@ -8,15 +8,15 @@ Topics to be Added
 	<div class="float-end">
 		<div class="btn-group btn-group-sm me-2">
 			<a class="btn btn-secondary {% if sort_by=='date' %}active{% endif %}"
-					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='date') }}">
+					href="{{ url_for('todo.topics', q=query, n=n, sort='date') }}">
 				{{ _("Sort by date") }}
 			</a>
 			<a class="btn btn-secondary {% if sort_by=='name' %}active{% endif %}"
-					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='name') }}">
+					href="{{ url_for('todo.topics', q=query, n=n, sort='name') }}">
 				{{ _("Sort by name") }}
 			</a>
 			<a class="btn btn-secondary {% if sort_by=='views' %}active{% endif %}"
-					href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=n, sort='views') }}">
+					href="{{ url_for('todo.topics', q=query, n=n, sort='views') }}">
 				{{ _("Sort by views") }}
 			</a>
 		</div>
@@ -25,24 +25,16 @@ Topics to be Added
 			{% if current_user.rank.at_least(current_user.rank.APPROVER) %}
 				{% if n >= 10000 %}
 					<a class="btn btn-secondary"
-							href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=100, sort=sort_by) }}">
+							href="{{ url_for('todo.topics', q=query, n=100, sort=sort_by) }}">
 						{{ _("Paginated list") }}
 					</a>
 				{% else %}
 					<a class="btn btn-secondary"
-							href="{{ url_for('todo.topics', q=query, show_discarded=show_discarded, n=10000, sort=sort_by) }}">
+							href="{{ url_for('todo.topics', q=query, n=10000, sort=sort_by) }}">
 						{{ _("Unlimited list") }}
 					</a>
 				{% endif %}
 			{% endif %}
-
-			<a class="btn btn-secondary" href="{{ url_for('todo.topics', q=query, show_discarded=not show_discarded, n=n, sort=sort_by) }}">
-				{% if not show_discarded %}
-					{{ _("Show discarded topics") }}
-				{% else %}
-					{{ _("Hide discarded topics") }}
-				{% endif %}
-			</a>
 		</div>
 	</div>
 
@@ -65,7 +57,6 @@ Topics to be Added
 	{% endif %}
 
 	<form method="GET" action="{{ url_for('todo.topics') }}" class="my-4">
-		<input type="hidden" name="show_discarded" value={{ show_discarded and "True" or "False" }} />
 		<input type="hidden" name="n" value={{ n }} />
 		<input type="hidden" name="sort" value={{ sort_by or "date" }} />
 		<input name="q" type="text" placeholder="Search topics" value="{{ query or ''}}">
@@ -73,7 +64,7 @@ Topics to be Added
 	</form>
 
 	{% from "macros/topics.html" import render_topics_table %}
-	{{ render_topics_table(topics, show_discard=True, current_user=current_user) }}
+	{{ render_topics_table(topics, current_user=current_user) }}
 
 	<ul class="pagination mt-4">
 		<li class="page-item {% if not prev_url %}disabled{% endif %}">
@@ -82,7 +73,7 @@ Topics to be Added
 		{% for i in range(1, page_max+1) %}
 			<li class="page-item {% if i == page %}active{% endif %}">
 				<a class="page-link"
-						href="{{ url_for('todo.topics', page=i, query=query, show_discarded=show_discarded, n=n, sort=sort_by) }}">
+						href="{{ url_for('todo.topics', page=i, query=query, n=n, sort=sort_by) }}">
 					{{ i }}
 				</a>
 			</li>

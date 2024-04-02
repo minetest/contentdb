@@ -435,7 +435,6 @@ Supported query parameters:
 * `type`:  Package types (`mod`, `game`, `txp`).
 * `sort`:  Sort by (`name`, `views`, `created_at`).
 * `show_added`:  Show topics that have an existing package.
-* `show_discarded`:  Show topics marked as discarded.
 * `limit`:  Return at most `limit` topics.
 
 

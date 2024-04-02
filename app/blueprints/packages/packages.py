@@ -101,7 +101,6 @@ def list_all():
 
 	topics = None
 	if qb.search and not query.has_next:
-		qb.show_discarded = True
 		topics = qb.build_topic_query().all()
 
 	tags_query = db.session.query(func.count(Tags.c.tag_id), Tag) \

@@ -98,8 +98,6 @@ def topics():
 	query = qb.build_topic_query()
 
 	tmp_q = ForumTopic.query
-	if not qb.show_discarded:
-		tmp_q = tmp_q.filter_by(discarded=False)
 	total = tmp_q.count()
 	topic_count = query.count()
 
@@ -109,15 +107,13 @@ def topics():
 		num = 100
 
 	query = query.paginate(page=page, per_page=num)
-	next_url = url_for("todo.topics", page=query.next_num, query=qb.search,
-		show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
+	next_url = url_for("todo.topics", page=query.next_num, query=qb.search, n=num, sort=qb.order_by) \
 		if query.has_next else None
-	prev_url = url_for("todo.topics", page=query.prev_num, query=qb.search,
-		show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
+	prev_url = url_for("todo.topics", page=query.prev_num, query=qb.search, n=num, sort=qb.order_by) \
 		if query.has_prev else None
 
 	return render_template("todo/topics.html", current_tab="topics", topics=query.items, total=total,
-		topic_count=topic_count, query=qb.search, show_discarded=qb.show_discarded,
+		topic_count=topic_count, query=qb.search,
 		next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages,
 		n=num, sort_by=qb.order_by)
 

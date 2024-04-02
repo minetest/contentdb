@@ -234,24 +234,6 @@ def topics():
 	return jsonify([t.as_dict() for t in query.all()])
 
 
-@bp.route("/api/topic_discard/", methods=["POST"])
-@login_required
-def topic_set_discard():
-	tid = request.args.get("tid")
-	discard = request.args.get("discard")
-	if tid is None or discard is None:
-		error(400, "Missing topic ID or discard bool")
-
-	topic = ForumTopic.query.get(tid)
-	if not topic.check_perm(current_user, Permission.TOPIC_DISCARD):
-		error(403, "Permission denied, need: TOPIC_DISCARD")
-
-	topic.discarded = discard == "true"
-	db.session.commit()
-
-	return jsonify(topic.as_dict())
-
-
 @bp.route("/api/whoami/")
 @is_api_authd
 @cors_allowed
