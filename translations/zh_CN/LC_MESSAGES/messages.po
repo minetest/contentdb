@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-31 15:39+0100\n"
+"POT-Creation-Date: 2024-04-03 18:34+0100\n"
 "PO-Revision-Date: 2024-03-25 06:01+0000\n"
 "Last-Translator: 复予 <clonewith@qq.com>\n"
 "Language: zh_CN\n"
@@ -62,10 +62,10 @@ msgid "Limit to package"
 msgstr "软件包限制"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:251
-#: app/blueprints/packages/packages.py:526
-#: app/blueprints/packages/packages.py:622
-#: app/blueprints/packages/packages.py:710
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:525
+#: app/blueprints/packages/packages.py:621
+#: app/blueprints/packages/packages.py:709
 #: app/blueprints/packages/releases.py:62
 #: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:49
 #: app/blueprints/packages/screenshots.py:36
@@ -73,7 +73,7 @@ msgstr "软件包限制"
 #: app/blueprints/packages/screenshots.py:47
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
 #: app/blueprints/users/settings.py:78 app/blueprints/users/settings.py:148
-#: app/blueprints/users/settings.py:308 app/templates/users/modtools.html:111
+#: app/blueprints/users/settings.py:316 app/templates/users/modtools.html:111
 msgid "Save"
 msgstr "保存"
 
@@ -198,7 +198,7 @@ msgstr "截图"
 
 #: app/blueprints/packages/__init__.py:52
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:624
+#: app/templates/packages/view.html:624 app/utils/minetest_hypertext.py:270
 msgid "Maintainers"
 msgstr "维护者"
 
@@ -223,193 +223,198 @@ msgstr "移除 / 撤搞"
 
 #: app/blueprints/packages/__init__.py:80 app/logic/package_approval.py:123
 #: app/templates/packages/game_support.html:4
+#: app/utils/minetest_hypertext.py:243 app/utils/minetest_hypertext.py:245
 msgid "Supported Games"
 msgstr "支持的游戏"
 
-#: app/blueprints/packages/packages.py:215
+#: app/blueprints/packages/packages.py:214
 msgid "No download available."
 msgstr "无可用下载。"
 
-#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:594
+#: app/blueprints/packages/packages.py:228 app/templates/packages/view.html:594
+#: app/utils/minetest_hypertext.py:231
 msgid "Type"
 msgstr "类型"
 
-#: app/blueprints/packages/packages.py:230
+#: app/blueprints/packages/packages.py:229
 msgid "Title (Human-readable)"
 msgstr "标题（人类可读）"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:620
+#: app/blueprints/packages/packages.py:230
+#: app/blueprints/packages/packages.py:619
 msgid "Name (Technical)"
 msgstr "名称（技术性）"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:621
+#: app/blueprints/packages/packages.py:230
+#: app/blueprints/packages/packages.py:620
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "只允许小写字母（a-z），数字（0-9），下划线（_）"
 
-#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:231
 msgid "Short Description (Plaintext)"
 msgstr "简短说明（纯文本）"
 
-#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:616
+#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:616
+#: app/utils/minetest_hypertext.py:268
 msgid "Maintenance State"
 msgstr "开发周期"
 
-#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:235 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
+#: app/utils/minetest_hypertext.py:232
 msgid "Tags"
 msgstr "标签"
 
-#: app/blueprints/packages/packages.py:237
+#: app/blueprints/packages/packages.py:236
 msgid "Content Warnings"
 msgstr "内容警告"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:605
+#: app/blueprints/packages/packages.py:237 app/templates/packages/view.html:605
+#: app/utils/minetest_hypertext.py:266
 msgid "License"
 msgstr "许可证"
 
-#: app/blueprints/packages/packages.py:239
+#: app/blueprints/packages/packages.py:238
 msgid "Media License"
 msgstr "媒体内容许可证"
 
-#: app/blueprints/packages/packages.py:241
+#: app/blueprints/packages/packages.py:240
 msgid "Long Description (Markdown)"
 msgstr "长说明（Markdown）"
 
-#: app/blueprints/packages/packages.py:243
+#: app/blueprints/packages/packages.py:242
 msgid "VCS Repository URL"
 msgstr "版本控制系统仓库URL"
 
-#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:76
+#: app/blueprints/packages/packages.py:243 app/blueprints/users/settings.py:76
 msgid "Website URL"
 msgstr "网站URL"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:244
 msgid "Issue Tracker URL"
 msgstr "问题追踪器URL"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:245
 msgid "Forum Topic ID"
 msgstr "论坛贴子ID"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:246
 msgid "Video URL"
 msgstr "视频 URL"
 
-#: app/blueprints/packages/packages.py:248
+#: app/blueprints/packages/packages.py:247
 msgid "Donate URL"
 msgstr "捐赠 URL"
 
-#: app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:248
 msgid "Translation URL"
 msgstr "翻译 URL"
 
-#: app/blueprints/packages/packages.py:255
+#: app/blueprints/packages/packages.py:254
 msgid "_game is not an allowed name"
 msgstr "_game 名称不可取"
 
-#: app/blueprints/packages/packages.py:265
+#: app/blueprints/packages/packages.py:264
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr "该软件包已存在，但是已被移除。 请联系 ContentDB 的工作人员来恢复该软件包"
 
-#: app/blueprints/packages/packages.py:270
+#: app/blueprints/packages/packages.py:269
 msgid "Package already exists"
 msgstr "软件包已存在"
 
-#: app/blueprints/packages/packages.py:276
+#: app/blueprints/packages/packages.py:275
 msgid "A collection with a similar name already exists"
 msgstr "相似名称的作品集已存在"
 
-#: app/blueprints/packages/packages.py:329
+#: app/blueprints/packages/packages.py:328
 #: app/blueprints/packages/releases.py:82
 msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr "在管理软件包前，您必须向账户添加电子邮箱并进行确认"
 
-#: app/blueprints/packages/packages.py:335
+#: app/blueprints/packages/packages.py:334
 msgid "Save draft"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:343
+#: app/blueprints/packages/packages.py:342
 msgid "Unable to find that user"
 msgstr "找不到该用户"
 
-#: app/blueprints/packages/packages.py:347
+#: app/blueprints/packages/packages.py:346
 #: app/blueprints/packages/screenshots.py:137
 #: app/blueprints/users/settings.py:132
 msgid "Permission denied"
 msgstr "拒绝访问"
 
-#: app/blueprints/packages/packages.py:403
-#: app/blueprints/packages/packages.py:477
-#: app/blueprints/packages/packages.py:499
+#: app/blueprints/packages/packages.py:402
+#: app/blueprints/packages/packages.py:476
+#: app/blueprints/packages/packages.py:498
 msgid "You don't have permission to do that"
 msgstr "你没有进行该操作的权限"
 
-#: app/blueprints/packages/packages.py:436
+#: app/blueprints/packages/packages.py:435
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "请在审核贴评论中说明需要作出哪些修改"
 
-#: app/blueprints/packages/packages.py:443
+#: app/blueprints/packages/packages.py:442
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr "请在同意帖中留言，让编辑人员知道您做出的更改"
 
-#: app/blueprints/packages/packages.py:494
+#: app/blueprints/packages/packages.py:493
 msgid "Deleted package"
 msgstr "已删除的软件包"
 
-#: app/blueprints/packages/packages.py:516
+#: app/blueprints/packages/packages.py:515
 msgid "Unapproved package"
 msgstr "未通过的软件包"
 
-#: app/blueprints/packages/packages.py:525
+#: app/blueprints/packages/packages.py:524
 msgid "Maintainers (Comma-separated)"
 msgstr "维护者（用逗号隔开）"
 
-#: app/blueprints/packages/packages.py:534
+#: app/blueprints/packages/packages.py:533
 msgid "You don't have permission to edit maintainers"
 msgstr "你没有权限编辑维护者"
 
-#: app/blueprints/packages/packages.py:584
+#: app/blueprints/packages/packages.py:583
 msgid "You are not a maintainer"
 msgstr "你不是维护者"
 
-#: app/blueprints/packages/packages.py:587
+#: app/blueprints/packages/packages.py:586
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "软件包所有人不能把自己移除出维护者列表"
 
-#: app/blueprints/packages/packages.py:619
+#: app/blueprints/packages/packages.py:618
 msgid "Author Name"
 msgstr "作者名"
 
-#: app/blueprints/packages/packages.py:706
+#: app/blueprints/packages/packages.py:705
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "启用基于依赖项的支持检测（推荐）"
 
-#: app/blueprints/packages/packages.py:707
+#: app/blueprints/packages/packages.py:706
 msgid "Supported games"
 msgstr "支持的子游戏"
 
-#: app/blueprints/packages/packages.py:708
+#: app/blueprints/packages/packages.py:707
 msgid "Unsupported games"
 msgstr "不支持的子游戏"
 
-#: app/blueprints/packages/packages.py:709
+#: app/blueprints/packages/packages.py:708
 msgid "Supports all games (unless stated) / is game independent"
 msgstr "支持所有子游戏（如无特别说明）/ 子游戏无关"
 
-#: app/blueprints/packages/packages.py:725
+#: app/blueprints/packages/packages.py:724
 msgid "You need at least one release before you can edit game support"
 msgstr "需要至少一个发行版才能编辑子游戏支持"
 
-#: app/blueprints/packages/packages.py:729
+#: app/blueprints/packages/packages.py:728
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr "Mod（包）需要至少包含一个Mod。请创建发行版"
 
@@ -696,7 +701,7 @@ msgstr "登录失败"
 msgid "Display Name"
 msgstr "显示名称"
 
-#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:302
+#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:310
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "用户名"
@@ -995,27 +1000,27 @@ msgstr "捐款网址"
 msgid "A user already has that name"
 msgstr "有用户已经占有该名称"
 
-#: app/blueprints/users/settings.py:257
+#: app/blueprints/users/settings.py:265
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr "不能删除版主或者以上的用户"
 
-#: app/blueprints/users/settings.py:303
+#: app/blueprints/users/settings.py:311
 msgid "Display name"
 msgstr "显示名称"
 
-#: app/blueprints/users/settings.py:304
+#: app/blueprints/users/settings.py:312
 msgid "Forums Username"
 msgstr "论坛用户名"
 
-#: app/blueprints/users/settings.py:305
+#: app/blueprints/users/settings.py:313
 msgid "GitHub Username"
 msgstr "GitHub用户名"
 
-#: app/blueprints/users/settings.py:306 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:314 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "等级"
 
-#: app/blueprints/users/settings.py:355
+#: app/blueprints/users/settings.py:363
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr "不能提升用户等级到比自己更高的等级！"
 
@@ -1313,7 +1318,7 @@ msgstr "登出"
 
 #: app/templates/admin/languages/list.html:4
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
-#: app/templates/packages/view.html:598
+#: app/templates/packages/view.html:598 app/utils/minetest_hypertext.py:256
 msgid "Languages"
 msgstr "语言"
 
@@ -1391,7 +1396,8 @@ msgstr "欢迎来到寻找 Minetest Mod，子游戏，材质包的最佳圣地"
 #: app/templates/collections/create_edit.html:81
 #: app/templates/collections/list.html:39
 #: app/templates/collections/view.html:91 app/templates/index.html:48
-#: app/templates/macros/reviews.html:76 app/templates/packages/game_hub.html:5
+#: app/templates/macros/reviews.html:76 app/templates/macros/topics.html:52
+#: app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
 #: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
 #, python-format
@@ -1594,8 +1600,7 @@ msgid "API Tokens | %(username)s"
 msgstr "API令牌 | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/collections/list.html:21
-#: app/templates/macros/topics.html:29 app/templates/macros/topics.html:65
-#: app/templates/oauth/list_clients.html:8
+#: app/templates/macros/topics.html:29 app/templates/oauth/list_clients.html:8
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
@@ -2169,23 +2174,11 @@ msgstr "日期"
 msgid "Actions"
 msgstr "操作"
 
-#: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
+#: app/templates/macros/topics.html:18 app/templates/macros/topics.html:54
 #: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
 #: app/templates/todo/editor.html:160 app/templates/todo/editor.html:175
 msgid "WIP"
 msgstr "未完工"
-
-#: app/templates/macros/topics.html:35
-msgid "Show"
-msgstr "显示"
-
-#: app/templates/macros/topics.html:37
-msgid "Discard"
-msgstr "丢弃"
-
-#: app/templates/macros/topics.html:57
-msgid "Old"
-msgstr "旧"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
@@ -2204,7 +2197,7 @@ msgstr "Mod名称“%(name)s”"
 msgid "Provided By"
 msgstr "提供者"
 
-#: app/templates/modnames/view.html:21 app/templates/todo/todo_base.html:41
+#: app/templates/modnames/view.html:21
 msgid "Forum Topics"
 msgstr "论坛贴子"
 
@@ -3372,7 +3365,7 @@ msgstr "喜欢这个软件包？捐款来支持发展"
 msgid "Donate now"
 msgstr "立即捐款"
 
-#: app/templates/packages/view.html:462
+#: app/templates/packages/view.html:462 app/utils/minetest_hypertext.py:251
 msgid "Dependencies"
 msgstr "依赖项"
 
@@ -3389,6 +3382,7 @@ msgid "Compatible Games"
 msgstr "兼容子游戏"
 
 #: app/templates/packages/view.html:526 app/templates/packages/view.html:546
+#: app/utils/minetest_hypertext.py:243
 msgid "No specific game required"
 msgstr "无需特定的子游戏"
 
@@ -3420,7 +3414,7 @@ msgstr "信息"
 msgid "Technical Name"
 msgstr "技术名称"
 
-#: app/templates/packages/view.html:612
+#: app/templates/packages/view.html:612 app/utils/minetest_hypertext.py:263
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "代码%(code_license)s，媒体%(media_license)s。"
@@ -3429,7 +3423,7 @@ msgstr "代码%(code_license)s，媒体%(media_license)s。"
 msgid "Unknown"
 msgstr "未知"
 
-#: app/templates/packages/view.html:622
+#: app/templates/packages/view.html:622 app/utils/minetest_hypertext.py:269
 msgid "Added"
 msgstr "添加时间"
 
@@ -3437,7 +3431,7 @@ msgstr "添加时间"
 msgid "Remove myself"
 msgstr "移除自己"
 
-#: app/templates/packages/view.html:641
+#: app/templates/packages/view.html:641 app/utils/minetest_hypertext.py:271
 msgid "Provides"
 msgstr "提供"
 
@@ -3691,7 +3685,7 @@ msgid "Minetest-Mods org only"
 msgstr "仅限Minetest-Mods org"
 
 #: app/templates/todo/mtver_support.html:25 app/templates/todo/outdated.html:24
-#: app/templates/todo/screenshots.html:24 app/templates/todo/topics.html:12
+#: app/templates/todo/screenshots.html:24
 msgid "Sort by date"
 msgstr "按日期排序"
 
@@ -3733,34 +3727,6 @@ msgstr "你的任务清单"
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
 msgstr "过时的软件包"
-
-#: app/templates/todo/topics.html:16
-msgid "Sort by name"
-msgstr "按名称排序"
-
-#: app/templates/todo/topics.html:20
-msgid "Sort by views"
-msgstr "按浏览量排序"
-
-#: app/templates/todo/topics.html:29
-msgid "Paginated list"
-msgstr "分页列表"
-
-#: app/templates/todo/topics.html:34
-msgid "Unlimited list"
-msgstr "无限列表"
-
-#: app/templates/todo/topics.html:41
-msgid "Show discarded topics"
-msgstr "显示丢弃的贴子"
-
-#: app/templates/todo/topics.html:43
-msgid "Hide discarded topics"
-msgstr "隐藏丢弃的贴子"
-
-#: app/templates/todo/topics.html:49
-msgid "Topics to be Added"
-msgstr "需要添加的贴子"
 
 #: app/templates/todo/user.html:4
 #, python-format
@@ -3848,11 +3814,7 @@ msgstr "未添加的贴子"
 msgid "List of your forum topics which do not have a matching package."
 msgstr "列出没有对应软件包的论坛贴子。"
 
-#: app/templates/todo/user.html:206
-msgid "Topics with a strikethrough have been marked as discarded."
-msgstr "标删除线的贴子已被丢弃。"
-
-#: app/templates/todo/user.html:214
+#: app/templates/todo/user.html:213
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "恭喜！您没有任何不在 CDB 上的贴子。"
 
@@ -4469,6 +4431,14 @@ msgstr "截至目前"
 msgid "Last year"
 msgstr "去年"
 
+#: app/utils/minetest_hypertext.py:248
+msgid "Unsupported Games"
+msgstr ""
+
+#: app/utils/minetest_hypertext.py:252
+msgid "Optional dependencies"
+msgstr ""
+
 #: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
 msgstr "您有很多通知，您应该阅读或清除这些通知"
@@ -4789,4 +4759,37 @@ msgstr "请考虑启用电子邮件通知，您可以自定义发送的数量"
 
 #~ msgid "Supported games are determined by an algorithm, and may not be correct."
 #~ msgstr "支持的游戏是由算法计算，不保证正确性。"
+
+#~ msgid "Show"
+#~ msgstr "显示"
+
+#~ msgid "Discard"
+#~ msgstr "丢弃"
+
+#~ msgid "Old"
+#~ msgstr "旧"
+
+#~ msgid "Sort by name"
+#~ msgstr "按名称排序"
+
+#~ msgid "Sort by views"
+#~ msgstr "按浏览量排序"
+
+#~ msgid "Paginated list"
+#~ msgstr "分页列表"
+
+#~ msgid "Unlimited list"
+#~ msgstr "无限列表"
+
+#~ msgid "Show discarded topics"
+#~ msgstr "显示丢弃的贴子"
+
+#~ msgid "Hide discarded topics"
+#~ msgstr "隐藏丢弃的贴子"
+
+#~ msgid "Topics to be Added"
+#~ msgstr "需要添加的贴子"
+
+#~ msgid "Topics with a strikethrough have been marked as discarded."
+#~ msgstr "标删除线的贴子已被丢弃。"
 

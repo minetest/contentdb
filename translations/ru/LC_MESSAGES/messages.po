@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-03-31 15:39+0100\n"
+"POT-Creation-Date: 2024-04-03 18:34+0100\n"
 "PO-Revision-Date: 2024-03-24 05:11+0000\n"
 "Last-Translator: Ярослав Рукавицын <skybuilderoffical@gmail.com>\n"
 "Language: ru\n"
@@ -63,10 +63,10 @@ msgid "Limit to package"
 msgstr "Ограничение на дополнение"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:251
-#: app/blueprints/packages/packages.py:526
-#: app/blueprints/packages/packages.py:622
-#: app/blueprints/packages/packages.py:710
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:525
+#: app/blueprints/packages/packages.py:621
+#: app/blueprints/packages/packages.py:709
 #: app/blueprints/packages/releases.py:62
 #: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:49
 #: app/blueprints/packages/screenshots.py:36
@@ -74,7 +74,7 @@ msgstr "Ограничение на дополнение"
 #: app/blueprints/packages/screenshots.py:47
 #: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
 #: app/blueprints/users/settings.py:78 app/blueprints/users/settings.py:148
-#: app/blueprints/users/settings.py:308 app/templates/users/modtools.html:111
+#: app/blueprints/users/settings.py:316 app/templates/users/modtools.html:111
 msgid "Save"
 msgstr "Сохранить"
 
@@ -199,7 +199,7 @@ msgstr "Снимки экрана"
 
 #: app/blueprints/packages/__init__.py:52
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:624
+#: app/templates/packages/view.html:624 app/utils/minetest_hypertext.py:270
 msgid "Maintainers"
 msgstr "Разработчики"
 
@@ -224,96 +224,101 @@ msgstr "Удалить / Отменить публикацию"
 
 #: app/blueprints/packages/__init__.py:80 app/logic/package_approval.py:123
 #: app/templates/packages/game_support.html:4
+#: app/utils/minetest_hypertext.py:243 app/utils/minetest_hypertext.py:245
 msgid "Supported Games"
 msgstr "Поддерживаемые игры"
 
-#: app/blueprints/packages/packages.py:215
+#: app/blueprints/packages/packages.py:214
 msgid "No download available."
 msgstr "Загрузка недоступна."
 
-#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:594
+#: app/blueprints/packages/packages.py:228 app/templates/packages/view.html:594
+#: app/utils/minetest_hypertext.py:231
 msgid "Type"
 msgstr "Тип"
 
-#: app/blueprints/packages/packages.py:230
+#: app/blueprints/packages/packages.py:229
 msgid "Title (Human-readable)"
 msgstr "Название (читаемое)"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:620
+#: app/blueprints/packages/packages.py:230
+#: app/blueprints/packages/packages.py:619
 msgid "Name (Technical)"
 msgstr "Имя (техническое)"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:621
+#: app/blueprints/packages/packages.py:230
+#: app/blueprints/packages/packages.py:620
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr ""
 "Только маленькие латинские буквы (a-z), цифры (0-9) и нижние "
 "подчёркивания (_)"
 
-#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:231
 msgid "Short Description (Plaintext)"
 msgstr "Краткое описание (обычный текст)"
 
-#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:616
+#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:616
+#: app/utils/minetest_hypertext.py:268
 msgid "Maintenance State"
 msgstr "Состояние разработки"
 
-#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:235 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
+#: app/utils/minetest_hypertext.py:232
 msgid "Tags"
 msgstr "Метки"
 
-#: app/blueprints/packages/packages.py:237
+#: app/blueprints/packages/packages.py:236
 msgid "Content Warnings"
 msgstr "Предупреждения о содержимом"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:605
+#: app/blueprints/packages/packages.py:237 app/templates/packages/view.html:605
+#: app/utils/minetest_hypertext.py:266
 msgid "License"
 msgstr "Лицензия"
 
-#: app/blueprints/packages/packages.py:239
+#: app/blueprints/packages/packages.py:238
 msgid "Media License"
 msgstr "Лицензия Медиа"
 
-#: app/blueprints/packages/packages.py:241
+#: app/blueprints/packages/packages.py:240
 msgid "Long Description (Markdown)"
 msgstr "Длинное описание (Markdown)"
 
-#: app/blueprints/packages/packages.py:243
+#: app/blueprints/packages/packages.py:242
 msgid "VCS Repository URL"
 msgstr "URL VCS сетевого хранилища"
 
-#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:76
+#: app/blueprints/packages/packages.py:243 app/blueprints/users/settings.py:76
 msgid "Website URL"
 msgstr "Адрес страницы"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:244
 msgid "Issue Tracker URL"
 msgstr "URL issue трекера"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:245
 msgid "Forum Topic ID"
 msgstr "Идентификатор темы на форуме"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:246
 msgid "Video URL"
 msgstr "Адрес видео"
 
-#: app/blueprints/packages/packages.py:248
+#: app/blueprints/packages/packages.py:247
 msgid "Donate URL"
 msgstr "Ссылка на донат"
 
-#: app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:248
 msgid "Translation URL"
 msgstr "Ссылка на Перевод"
 
-#: app/blueprints/packages/packages.py:255
+#: app/blueprints/packages/packages.py:254
 msgid "_game is not an allowed name"
 msgstr "_game не является допустимым именем"
 
-#: app/blueprints/packages/packages.py:265
+#: app/blueprints/packages/packages.py:264
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -321,15 +326,15 @@ msgstr ""
 "Дополнение уже существует, но удалено. Пожалуйста, свяжитесь с персоналом"
 " ContentDB, чтобы восстановить дополнение"
 
-#: app/blueprints/packages/packages.py:270
+#: app/blueprints/packages/packages.py:269
 msgid "Package already exists"
 msgstr "Дополнение уже существует"
 
-#: app/blueprints/packages/packages.py:276
+#: app/blueprints/packages/packages.py:275
 msgid "A collection with a similar name already exists"
 msgstr "Коллекция с таким же именем уже существует"
 
-#: app/blueprints/packages/packages.py:329
+#: app/blueprints/packages/packages.py:328
 #: app/blueprints/packages/releases.py:82
 msgid ""
 "You must add an email address to your account and confirm it before you "
@@ -338,31 +343,31 @@ msgstr ""
 "Вы должны добавить адрес электронной почты в свою учетную запись и "
 "подтвердить его, прежде чем сможете управлять пакетами"
 
-#: app/blueprints/packages/packages.py:335
+#: app/blueprints/packages/packages.py:334
 msgid "Save draft"
 msgstr ""
 
-#: app/blueprints/packages/packages.py:343
+#: app/blueprints/packages/packages.py:342
 msgid "Unable to find that user"
 msgstr "Не получилось найти данного пользователя"
 
-#: app/blueprints/packages/packages.py:347
+#: app/blueprints/packages/packages.py:346
 #: app/blueprints/packages/screenshots.py:137
 #: app/blueprints/users/settings.py:132
 msgid "Permission denied"
 msgstr "Доступ запрещён"
 
-#: app/blueprints/packages/packages.py:403
-#: app/blueprints/packages/packages.py:477
-#: app/blueprints/packages/packages.py:499
+#: app/blueprints/packages/packages.py:402
+#: app/blueprints/packages/packages.py:476
+#: app/blueprints/packages/packages.py:498
 msgid "You don't have permission to do that"
 msgstr "У вас нету разрешения это делать"
 
-#: app/blueprints/packages/packages.py:436
+#: app/blueprints/packages/packages.py:435
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Пожалуйста, напишите, какие изменения необходимы в теме проверки"
 
-#: app/blueprints/packages/packages.py:443
+#: app/blueprints/packages/packages.py:442
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
@@ -370,57 +375,57 @@ msgstr ""
 "Пожалуйста, прокомментируйте в теме одобрения, чтобы редакторы знали, что"
 " вы изменили"
 
-#: app/blueprints/packages/packages.py:494
+#: app/blueprints/packages/packages.py:493
 msgid "Deleted package"
 msgstr "Удалённое дополнение"
 
-#: app/blueprints/packages/packages.py:516
+#: app/blueprints/packages/packages.py:515
 msgid "Unapproved package"
 msgstr "Непроверенное дополнение"
 
-#: app/blueprints/packages/packages.py:525
+#: app/blueprints/packages/packages.py:524
 msgid "Maintainers (Comma-separated)"
 msgstr "Разработчики (через запятую)"
 
-#: app/blueprints/packages/packages.py:534
+#: app/blueprints/packages/packages.py:533
 msgid "You don't have permission to edit maintainers"
 msgstr "У вас нет разрешения для изменения сопровождающих"
 
-#: app/blueprints/packages/packages.py:584
+#: app/blueprints/packages/packages.py:583
 msgid "You are not a maintainer"
 msgstr "Вы не разработчик"
 
-#: app/blueprints/packages/packages.py:587
+#: app/blueprints/packages/packages.py:586
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Владельцы дополнения не могут удалить самих себя как разработчиков"
 
-#: app/blueprints/packages/packages.py:619
+#: app/blueprints/packages/packages.py:618
 msgid "Author Name"
 msgstr "Имя автора"
 
-#: app/blueprints/packages/packages.py:706
+#: app/blueprints/packages/packages.py:705
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Включить обнаружение поддержки на основе зависимостей (желательно)"
 
-#: app/blueprints/packages/packages.py:707
+#: app/blueprints/packages/packages.py:706
 msgid "Supported games"
 msgstr "Поддерживаемые игры"
 
-#: app/blueprints/packages/packages.py:708
+#: app/blueprints/packages/packages.py:707
 msgid "Unsupported games"
 msgstr "Неподдерживаемые игры"
 
-#: app/blueprints/packages/packages.py:709
+#: app/blueprints/packages/packages.py:708
 msgid "Supports all games (unless stated) / is game independent"
 msgstr "Поддерживает все игры (если не указано обратное) / не зависит от игр"
 
-#: app/blueprints/packages/packages.py:725
+#: app/blueprints/packages/packages.py:724
 msgid "You need at least one release before you can edit game support"
 msgstr ""
 "Вам нужен хотя бы один релиз, прежде чем вы сможете редактировать "
 "поддержку игры"
 
-#: app/blueprints/packages/packages.py:729
+#: app/blueprints/packages/packages.py:728
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
 "Мод(пакет) должен содержать хотя бы один мод. Пожалуйста, создайте новый "
@@ -714,7 +719,7 @@ msgstr "Ошибка входа"
 msgid "Display Name"
 msgstr "Отображать имя"
 
-#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:302
+#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:310
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "Имя пользователя"
@@ -1028,27 +1033,27 @@ msgstr "Страница пожертвований"
 msgid "A user already has that name"
 msgstr "Пользователь уже имеет это имя"
 
-#: app/blueprints/users/settings.py:257
+#: app/blueprints/users/settings.py:265
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr "Пользователи с рангом модератор или выше не могут быть удалены"
 
-#: app/blueprints/users/settings.py:303
+#: app/blueprints/users/settings.py:311
 msgid "Display name"
 msgstr "Отображаемое имя"
 
-#: app/blueprints/users/settings.py:304
+#: app/blueprints/users/settings.py:312
 msgid "Forums Username"
 msgstr "Имя пользователя на форуме"
 
-#: app/blueprints/users/settings.py:305
+#: app/blueprints/users/settings.py:313
 msgid "GitHub Username"
 msgstr "Имя пользователя на GitHub"
 
-#: app/blueprints/users/settings.py:306 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:314 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "Ранг"
 
-#: app/blueprints/users/settings.py:355
+#: app/blueprints/users/settings.py:363
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr "Нельзя повысить пользователя на звание выше своего!"
 
@@ -1370,7 +1375,7 @@ msgstr "Выйти"
 
 #: app/templates/admin/languages/list.html:4
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
-#: app/templates/packages/view.html:598
+#: app/templates/packages/view.html:598 app/utils/minetest_hypertext.py:256
 msgid "Languages"
 msgstr "Языки"
 
@@ -1450,7 +1455,8 @@ msgstr ""
 #: app/templates/collections/create_edit.html:81
 #: app/templates/collections/list.html:39
 #: app/templates/collections/view.html:91 app/templates/index.html:48
-#: app/templates/macros/reviews.html:76 app/templates/packages/game_hub.html:5
+#: app/templates/macros/reviews.html:76 app/templates/macros/topics.html:52
+#: app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
 #: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
 #, python-format
@@ -1659,8 +1665,7 @@ msgid "API Tokens | %(username)s"
 msgstr "Токены API | %(username)s"
 
 #: app/templates/api/list_tokens.html:8 app/templates/collections/list.html:21
-#: app/templates/macros/topics.html:29 app/templates/macros/topics.html:65
-#: app/templates/oauth/list_clients.html:8
+#: app/templates/macros/topics.html:29 app/templates/oauth/list_clients.html:8
 #: app/templates/packages/alias_list.html:13
 #: app/templates/packages/releases_list.html:29
 msgid "Create"
@@ -2274,23 +2279,11 @@ msgstr "Дата"
 msgid "Actions"
 msgstr "Действия"
 
-#: app/templates/macros/topics.html:18 app/templates/macros/topics.html:56
+#: app/templates/macros/topics.html:18 app/templates/macros/topics.html:54
 #: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
 #: app/templates/todo/editor.html:160 app/templates/todo/editor.html:175
 msgid "WIP"
 msgstr "WIP"
-
-#: app/templates/macros/topics.html:35
-msgid "Show"
-msgstr "Показать"
-
-#: app/templates/macros/topics.html:37
-msgid "Discard"
-msgstr "Отказаться"
-
-#: app/templates/macros/topics.html:57
-msgid "Old"
-msgstr "Старые"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
@@ -2309,7 +2302,7 @@ msgstr "Название Мода \"%(name)s\""
 msgid "Provided By"
 msgstr "Предоставлено"
 
-#: app/templates/modnames/view.html:21 app/templates/todo/todo_base.html:41
+#: app/templates/modnames/view.html:21
 msgid "Forum Topics"
 msgstr "Темы форума"
 
@@ -3575,7 +3568,7 @@ msgstr ""
 msgid "Donate now"
 msgstr "Пожертвовать сейчас"
 
-#: app/templates/packages/view.html:462
+#: app/templates/packages/view.html:462 app/utils/minetest_hypertext.py:251
 msgid "Dependencies"
 msgstr "Зависимости"
 
@@ -3592,6 +3585,7 @@ msgid "Compatible Games"
 msgstr "Совместимые игры"
 
 #: app/templates/packages/view.html:526 app/templates/packages/view.html:546
+#: app/utils/minetest_hypertext.py:243
 msgid "No specific game required"
 msgstr "Никакой конкретной игры не требуется"
 
@@ -3625,7 +3619,7 @@ msgstr "Информация"
 msgid "Technical Name"
 msgstr "Техническое название"
 
-#: app/templates/packages/view.html:612
+#: app/templates/packages/view.html:612 app/utils/minetest_hypertext.py:263
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s для кода,<br>%(media_license)s для медиа."
@@ -3634,7 +3628,7 @@ msgstr "%(code_license)s для кода,<br>%(media_license)s для медиа
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: app/templates/packages/view.html:622
+#: app/templates/packages/view.html:622 app/utils/minetest_hypertext.py:269
 msgid "Added"
 msgstr "Добавлено"
 
@@ -3642,7 +3636,7 @@ msgstr "Добавлено"
 msgid "Remove myself"
 msgstr "Удалить себя"
 
-#: app/templates/packages/view.html:641
+#: app/templates/packages/view.html:641 app/utils/minetest_hypertext.py:271
 msgid "Provides"
 msgstr "Предоставляет"
 
@@ -3912,7 +3906,7 @@ msgid "Minetest-Mods org only"
 msgstr "Только орг. «Minetest-Mods»"
 
 #: app/templates/todo/mtver_support.html:25 app/templates/todo/outdated.html:24
-#: app/templates/todo/screenshots.html:24 app/templates/todo/topics.html:12
+#: app/templates/todo/screenshots.html:24
 msgid "Sort by date"
 msgstr "Сортировать по дате"
 
@@ -3954,34 +3948,6 @@ msgstr "Ваш список дел"
 #: app/templates/todo/todo_base.html:23
 msgid "Outdated Packages"
 msgstr "Устаревшие дополнения"
-
-#: app/templates/todo/topics.html:16
-msgid "Sort by name"
-msgstr "Сортировать по имени"
-
-#: app/templates/todo/topics.html:20
-msgid "Sort by views"
-msgstr "Сортировать по просмотрам"
-
-#: app/templates/todo/topics.html:29
-msgid "Paginated list"
-msgstr "Список со страницами"
-
-#: app/templates/todo/topics.html:34
-msgid "Unlimited list"
-msgstr "Неограниченный список"
-
-#: app/templates/todo/topics.html:41
-msgid "Show discarded topics"
-msgstr "Показать отклоненные темы"
-
-#: app/templates/todo/topics.html:43
-msgid "Hide discarded topics"
-msgstr "Скрыть отклоненные темы"
-
-#: app/templates/todo/topics.html:49
-msgid "Topics to be Added"
-msgstr "Темы, которые будут добавлены"
 
 #: app/templates/todo/user.html:4
 #, python-format
@@ -4076,11 +4042,7 @@ msgstr "Не добавленные темы"
 msgid "List of your forum topics which do not have a matching package."
 msgstr "Список тем вашего форума, для которых нет соответствующего дополнения."
 
-#: app/templates/todo/user.html:206
-msgid "Topics with a strikethrough have been marked as discarded."
-msgstr "Темы, отмеченные зачеркнутым знаком, были помечены как отклоненные."
-
-#: app/templates/todo/user.html:214
+#: app/templates/todo/user.html:213
 msgid "Congrats! You don't have any topics which aren't on CDB."
 msgstr "Поздравляем! У вас нет ни одной темы, которой бы не было на CDB."
 
@@ -4734,6 +4696,14 @@ msgstr "С начало года до сегодня"
 msgid "Last year"
 msgstr "Последний год"
 
+#: app/utils/minetest_hypertext.py:248
+msgid "Unsupported Games"
+msgstr ""
+
+#: app/utils/minetest_hypertext.py:252
+msgid "Optional dependencies"
+msgstr ""
+
 #: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
 msgstr "У вас много уведомлений, вам следует либо прочитать, либо очистить их"
@@ -5132,4 +5102,37 @@ msgstr ""
 
 #~ msgid "Supported games are determined by an algorithm, and may not be correct."
 #~ msgstr "Поддерживаемые игры определяются алгоритмом и могут быть неверными."
+
+#~ msgid "Show"
+#~ msgstr "Показать"
+
+#~ msgid "Discard"
+#~ msgstr "Отказаться"
+
+#~ msgid "Old"
+#~ msgstr "Старые"
+
+#~ msgid "Sort by name"
+#~ msgstr "Сортировать по имени"
+
+#~ msgid "Sort by views"
+#~ msgstr "Сортировать по просмотрам"
+
+#~ msgid "Paginated list"
+#~ msgstr "Список со страницами"
+
+#~ msgid "Unlimited list"
+#~ msgstr "Неограниченный список"
+
+#~ msgid "Show discarded topics"
+#~ msgstr "Показать отклоненные темы"
+
+#~ msgid "Hide discarded topics"
+#~ msgstr "Скрыть отклоненные темы"
+
+#~ msgid "Topics to be Added"
+#~ msgstr "Темы, которые будут добавлены"
+
+#~ msgid "Topics with a strikethrough have been marked as discarded."
+#~ msgstr "Темы, отмеченные зачеркнутым знаком, были помечены как отклоненные."
 
