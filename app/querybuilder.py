@@ -121,7 +121,6 @@ class QueryBuilder:
 		else:
 			self.version = None
 
-		self.show_discarded = is_yes(args.get("show_discarded"))
 		self.show_added = args.get("show_added")
 		if self.show_added is not None:
 			self.show_added = is_yes(self.show_added)
@@ -299,9 +298,6 @@ class QueryBuilder:
 
 	def build_topic_query(self, show_added=False):
 		query = ForumTopic.query
-
-		if not self.show_discarded:
-			query = query.filter_by(discarded=False)
 
 		show_added = self.show_added == True or (self.show_added is None and show_added)
 		if not show_added:

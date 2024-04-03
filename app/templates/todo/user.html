@@ -203,12 +203,11 @@
 	{% if topics_to_add %}
 		<p>
 			{{ _("List of your forum topics which do not have a matching package.") }}
-			{{ _("Topics with a strikethrough have been marked as discarded.") }}
 		</p>
 
 		<div style="max-height: 20em; overflow-y: auto">
 			{% from "macros/topics.html" import render_topics_table %}
-			{{ render_topics_table(topics_to_add, show_author=False, show_discard=True, current_user=current_user) }}
+			{{ render_topics_table(topics_to_add, show_author=False, current_user=current_user) }}
 		</div>
 	{% else %}
 		<p class="card-body">{{ _("Congrats! You don't have any topics which aren't on CDB.") }}</p>
@@ -220,5 +219,4 @@
 	<script>
 		const csrf_token = "{{ csrf_token() }}";
 	</script>
-	<script src="/static/js/topic_discard.js"></script>
 {% endblock %}

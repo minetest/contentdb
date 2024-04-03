@@ -90,38 +90,6 @@ def view_editor():
 			unfulfilled_meta_packages=unfulfilled_meta_packages, audit_log=audit_log)
 
 
-@bp.route("/todo/topics/")
-@login_required
-def topics():
-	qb = QueryBuilder(request.args, cookies=True)
-	qb.set_sort_if_none("date")
-	query = qb.build_topic_query()
-
-	tmp_q = ForumTopic.query
-	if not qb.show_discarded:
-		tmp_q = tmp_q.filter_by(discarded=False)
-	total = tmp_q.count()
-	topic_count = query.count()
-
-	page = get_int_or_abort(request.args.get("page"), 1)
-	num = get_int_or_abort(request.args.get("n"), 100)
-	if num > 100 and not current_user.rank.at_least(UserRank.APPROVER):
-		num = 100
-
-	query = query.paginate(page=page, per_page=num)
-	next_url = url_for("todo.topics", page=query.next_num, query=qb.search,
-		show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
-		if query.has_next else None
-	prev_url = url_for("todo.topics", page=query.prev_num, query=qb.search,
-		show_discarded=qb.show_discarded, n=num, sort=qb.order_by) \
-		if query.has_prev else None
-
-	return render_template("todo/topics.html", current_tab="topics", topics=query.items, total=total,
-		topic_count=topic_count, query=qb.search, show_discarded=qb.show_discarded,
-		next_url=next_url, prev_url=prev_url, page=page, page_max=query.pages,
-		n=num, sort_by=qb.order_by)
-
-
 @bp.route("/todo/tags/")
 @login_required
 def tags():

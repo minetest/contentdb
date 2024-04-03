@@ -1,4 +1,4 @@
-{% macro render_topics_table(topics, show_author=True, show_discard=False, current_user=current_user, class_=None) -%}
+{% macro render_topics_table(topics, show_author=True, current_user=current_user, class_=None) -%}
 <table class="table {{ class_ }}">
 	<tr>
 		<th></th>
@@ -9,7 +9,7 @@
 		<th>{{ _("Actions") }}</th>
 	</tr>
 	{% for topic in topics %}
-		<tr class="{% if topic.wip %}wiptopic{% endif %} {% if topic.discarded %}discardtopic{% endif %}">
+		<tr class="{% if topic.wip %}wiptopic{% endif %}">
 			<td>
 				[{{ topic.type.text }}]
 			</td>
@@ -29,15 +29,6 @@
 						{{ _("Create") }}
 					</a>
 				{% endif %}
-				{% if show_discard and current_user.is_authenticated and topic.check_perm(current_user, "TOPIC_DISCARD") %}
-					<a class="btn btn-{% if topic.discarded %}success{% else %}danger{% endif %} topic-discard" data-tid={{ topic.topic_id }}>
-						{% if topic.discarded %}
-							{{ _("Show") }}
-						{% else %}
-							{{ _("Discard") }}
-						{% endif %}
-					</a>
-				{% endif %}
 				{% if topic.link %}
 					<a class="btn btn-info" href="{{ topic.link }}">{{ topic.link | domain | truncate(18) }}</a>
 				{% endif %}
@@ -48,24 +39,22 @@
 {% endmacro %}
 
 
-{% macro render_topics(topics, current_user, show_author=True) -%}
-<ul>
+{% macro render_topics(topics, current_user) -%}
+<div class="list-group">
 	{% for topic in topics %}
-		<li{% if topic.wip %} class="wiptopic"{% endif %}>
-			<a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a>
-			{% if topic.wip %}[{{ _("WIP") }}]{% endif %}
-			{% if topic.discarded %}[{{ _("Old") }}]{% endif %}
-			{% if topic.name %}[{{ topic.name }}]{% endif %}
-			{% if show_author %}
-				by <a href="{{ url_for('users.profile', username=topic.author.username) }}">{{ topic.author.display_name }}</a>
-			{% endif %}
-			{% if topic.author == current_user or topic.author.check_perm(current_user, "CHANGE_AUTHOR") %}
-				|
-				<a href="{{ url_for('packages.create_edit', author=topic.author.username, repo=topic.get_repo_url(), forums=topic.topic_id, title=topic.title, bname=topic.name) }}">
-					{{ _("Create") }}
-				</a>
-			{% endif %}
-		</li>
+		<a class="list-group-item list-group-item-action" href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">
+			<span class="float-end text-muted">
+				{{ topic.created_at | date }}
+			</span>
+			{% set title %}
+				<strong>{{ topic.title }}</strong>
+			{% endset %}
+			{{ _("%(title)s by %(author)s", title=title, author=topic.author.display_name) }}
+			<span class="text-muted">
+				{% if topic.wip %}[{{ _("WIP") }}]{% endif %}
+				{% if topic.name %}[{{ topic.name }}]{% endif %}
+			</span>
+		</a>
 	{% endfor %}
-</ul>
+</div>
 {% endmacro %}

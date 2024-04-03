@@ -142,6 +142,7 @@ class ForumTopic(db.Model):
 	author    = db.relationship("User", back_populates="forum_topics")
 
 	wip       = db.Column(db.Boolean, default=False, nullable=False)
+	# TODO: remove
 	discarded = db.Column(db.Boolean, default=False, nullable=False)
 
 	type      = db.Column(db.Enum(PackageType), nullable=False)
@@ -175,7 +176,6 @@ class ForumTopic(db.Model):
 			"posts":  self.posts,
 			"views":  self.views,
 			"is_wip": self.wip,
-			"discarded":  self.discarded,
 			"created_at": self.created_at.isoformat(),
 		}
 

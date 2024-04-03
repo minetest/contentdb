@@ -26,7 +26,6 @@ The [Editor Work Queue](/todo/) and related pages contain useful information for
 * The package, release, and screenshot approval queues.
 * Packages which are outdated or are missing tags.
 * A list of forum topics without packages.
-  Editors can create the packages or "discard" them if they don't think it's worth adding them.
 
 ## Editor Notifications
 
