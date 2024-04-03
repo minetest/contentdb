@@ -61,19 +61,24 @@ def notify_about_git_forum_links():
 				links.append((link_package, link))
 
 		if len(links) > 0:
-			msg = "There's a ContentDB dialog redesign coming to Minetest 5.9.0. " \
+			title = "You should link to ContentDB pages instead of repos/forum topics"
+			msg = "You should update your long description to link to ContentDB pages instead of repositories or " \
+					"forum topics, where possible.  \n" \
+					"You should also remove lists of dependencies, as CDB already shows that.\n\n" \
+					"There's a ContentDB dialog redesign coming to Minetest 5.9.0. " \
 					"Clicking a ContentDB link stays inside Minetest but an external repository / forums " \
-					"link will open a web browser.\n\nYou should also remove dependency lists, as CDB already shows that.\n"
+					"link will open a web browser. Therefore, linking to ContentDB pages when referring to a " \
+					"package will improve the user experience.\n\nHere are some URLs you might wish to replace:\n"
 
 			for x in links:
-				line = f"\n* {x[1]} -> {x[0].get_url('packages.view', absolute=True)}"
+				line = f"\n* {x[1].replace('%', '')} -> {x[0].get_url('packages.view', absolute=True)}"
 				line_added = msg + line
 				if len(line_added) > 2000 - 150:
-					post_bot_message(package, "You should link to ContentDB pages", msg)
+					post_bot_message(package, title, msg)
 					msg = f"(...continued)\n{line}"
 				else:
 					msg = line_added
 
-			post_bot_message(package, "You should link to ContentDB pages", msg)
+			post_bot_message(package, title, msg)
 
 	db.session.commit()
