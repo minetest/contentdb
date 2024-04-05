@@ -17,6 +17,7 @@
 from html.parser import HTMLParser
 import re
 import sys
+from urllib.parse import urljoin
 
 from flask_babel import gettext
 
@@ -33,8 +34,12 @@ assert normalize_whitespace(" one  three\nfour\n\n") == " one three four "
 # Styles and custom tags
 HEAD = normalize_whitespace("""
 	<tag name=code color=#7bf font=mono>
-	<tag name=action color=#77f hovercolor=#aaf>
+	<tag name=action color=#4CDAFA hovercolor=#97EAFC>
 """).strip()
+
+
+def escape_hypertext(text):
+	return text.replace("\\", "\\\\").replace("<", "\\<").replace(">", "\\>")
 
 
 def get_attributes(attrs):
@@ -49,12 +54,14 @@ def make_indent(w):
 
 
 class MinetestHTMLParser(HTMLParser):
-	def __init__(self, include_images):
+	def __init__(self, page_url: str, include_images: bool):
 		super().__init__()
+		self.page_url = page_url
 		self.include_images = include_images
 
 		self.completed_text = ""
 		self.current_line = ""
+		self.last_id = None
 		self.links = {}
 		self.images = {}
 		self.image_tooltips = {}
@@ -66,9 +73,18 @@ class MinetestHTMLParser(HTMLParser):
 		self.completed_text += self.current_line.rstrip() + "\n"
 		self.current_line = ""
 
+	def resolve_url(self, url: str) -> str:
+		if self.page_url == "":
+			return url
+		else:
+			return urljoin(self.page_url, url)
+
 	def handle_starttag(self, tag, attrs):
 		if self.is_preserving or self.remove_until:
 			return
+
+		attr_by_name = get_attributes(attrs)
+		self.last_id = get_attributes(attrs).get("id", self.last_id)
 
 		if tag == "p":
 			pass
@@ -78,7 +94,16 @@ class MinetestHTMLParser(HTMLParser):
 		elif tag == "table":
 			# Tables are currently unsupported and removed
 			self.remove_until = "table"
-			self.current_line += "<i>(table removed)</i>"
+
+			url = self.page_url
+			if self.last_id is not None:
+				url = url + "#" + self.last_id
+
+			name = f"link_{len(self.links)}"
+			self.links[name] = url
+			self.current_line += f"<action name={name}><u>"
+			self.current_line += escape_hypertext(gettext("(view table in browser)"))
+			self.current_line += "</u></action>"
 			self.finish_line()
 		elif tag == "br":
 			self.finish_line()
@@ -89,25 +114,29 @@ class MinetestHTMLParser(HTMLParser):
 			self.finish_line()
 			self.current_line += "<b>"
 		elif tag == "a":
-			for attr in attrs:
-				if attr[0] == "href":
-					name = f"link_{len(self.links)}"
-					self.links[name] = attr[1]
-					self.current_line += f"<action name={name}><u>"
-					break
+			if "href" in attr_by_name:
+				name = f"link_{len(self.links)}"
+				self.links[name] = self.resolve_url(attr_by_name["href"])
+				self.current_line += f"<action name={name}><u>"
 			else:
 				self.current_line += "<action><u>"
 		elif tag == "img":
-			attr_by_value = get_attributes(attrs)
-			if "src" in attr_by_value and self.include_images:
+			if "src" in attr_by_name:
 				name = f"image_{len(self.images)}"
-				self.images[name] = attr_by_value["src"]
-				width = attr_by_value.get("width", 128)
-				height = attr_by_value.get("height", 128)
-				self.current_line += f"<img name={name} width={width} height={height}>"
+				if self.include_images:
+					self.images[name] = self.resolve_url(attr_by_name["src"])
+					width = attr_by_name.get("width", 128)
+					height = attr_by_name.get("height", 128)
+					self.current_line += f"<img name={name} width={width} height={height}>"
 
-				if "alt" in attr_by_value:
-					self.image_tooltips[name] = attr_by_value["alt"]
+					if "alt" in attr_by_name:
+						self.image_tooltips[name] = attr_by_name["alt"]
+				else:
+					self.links[name] = self.resolve_url(attr_by_name["src"])
+					label = gettext("Image")
+					if "alt" in attr_by_name:
+						label = f"{label}: {attr_by_name['alt']}"
+					self.current_line += f"<action name={name}><u>{escape_hypertext(label)}</u></action>"
 		elif tag == "b" or tag == "strong":
 			self.current_line += "<b>"
 		elif tag == "i" or tag == "em":
@@ -175,7 +204,7 @@ class MinetestHTMLParser(HTMLParser):
 			if self.current_line.strip() == "":
 				data = data.lstrip()
 
-		self.current_line += data
+		self.current_line += escape_hypertext(data)
 
 	def handle_entityref(self, name):
 		to_value = {
@@ -192,8 +221,8 @@ class MinetestHTMLParser(HTMLParser):
 			self.current_line += f"&{name};"
 
 
-def html_to_minetest(html, formspec_version=7, include_images=True):
-	parser = MinetestHTMLParser(include_images)
+def html_to_minetest(html, page_url: str, formspec_version: int = 7, include_images: bool = True):
+	parser = MinetestHTMLParser(page_url, include_images)
 	parser.feed(html)
 	parser.finish_line()
 
@@ -212,19 +241,19 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 
 	def add_value(label, value):
 		nonlocal body
-		body += f"{label}\n<b>{value}</b>\n\n"
+		body += f"{label}: <b>{escape_hypertext(str(value))}</b>\n\n"
 
 	def add_list(label, items):
 		nonlocal body
 
-		body += label + "\n<b>"
+		body += label + ": "
 		for i, item in enumerate(items):
 			if i != 0:
-				body += "</b>, <b>"
-			body += item
+				body += ", "
+			body += f"<b>{escape_hypertext(str(item))}</b>"
 
 		if len(items) == 0:
-			body += "-"
+			body += "<i>" + escape_hypertext(gettext("none")) + "</i>"
 
 		body += "</b>\n\n"
 
@@ -235,7 +264,7 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 		def make_game_link(game):
 			key = f"link_{len(links)}"
 			links[key] = game.get_url("packages.view", absolute=True)
-			return f"<action name={key}>{game.title}</action>"
+			return f"<action name={key}><u>{game.title}</u></action>"
 
 		[supported, unsupported] = package.get_sorted_game_support_pair()
 		supports_all_games = package.supports_all_games or len(supported) == 0

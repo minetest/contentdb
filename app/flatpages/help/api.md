@@ -106,7 +106,7 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
     * `info_hypertext` is the info sidebar as a hypertext object.
     * Query arguments
         * `formspec_version`: Required. See /hypertext/ below.
-        * `include_images`: Optional, defaults to true.
+        * `include_images`: Optional, defaults to true. If true, images use `<img>`. If false, they're linked.
         * `protocol_version`: Optional, used to get the correct release.
         * `engine_version`: Optional, used to get the correct release. Ex: `5.3.0`.
 * GET `/api/packages/<author>/<name>/hypertext/`
@@ -114,7 +114,7 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
       to be used in a `hypertext` formspec element.
     * Query arguments:
         * `formspec_version`: Required, maximum supported formspec version.
-        * `include_images`: Optional, defaults to true.
+        * `include_images`: Optional, defaults to true. If true, images use `<img>`. If false, they're linked.
     * Returns JSON dictionary with following key:
         * `head`: markup for suggested styling and custom tags, prepend to the body before displaying.
         * `body`: markup for long description.
@@ -543,7 +543,7 @@ Supported query parameters:
     * Content-Type: `text/html` or `text/markdown`.
     * Query arguments:
         * `formspec_version`: Required, maximum supported formspec version. Ie: 6
-        * `include_images`: Optional, defaults to true.
+        * `include_images`: Optional, defaults to true. If true, images use `<img>`. If false, they're linked.
     * Returns JSON dictionary with following key:
         * `head`: markup for suggested styling and custom tags, prepend to the body before displaying.
         * `body`: markup for long description.

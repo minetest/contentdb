@@ -76,6 +76,7 @@ ALLOWED_ATTRIBUTES = {
 	"code": allow_class,
 	"div": allow_class,
 	"span": allow_class,
+	"table": ["id"],
 }
 
 ALLOWED_PROTOCOLS = {"http", "https", "mailto"}

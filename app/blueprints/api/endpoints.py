@@ -134,7 +134,8 @@ def package_view_client(package: Package):
 	formspec_version = get_int_or_abort(request.args["formspec_version"])
 	include_images = is_yes(request.args.get("include_images", "true"))
 	html = render_markdown(data["long_description"])
-	data["long_description"] = html_to_minetest(html, formspec_version, include_images)
+	page_url = package.get_url("packages.view", absolute=True)
+	data["long_description"] = html_to_minetest(html, page_url, formspec_version, include_images)
 
 	data["info_hypertext"] = package_info_as_hypertext(package, formspec_version)
 
@@ -155,10 +156,11 @@ def package_view_client(package: Package):
 @is_package_page
 @cors_allowed
 def package_hypertext(package):
-	formspec_version = request.args["formspec_version"]
+	formspec_version = get_int_or_abort(request.args["formspec_version"])
 	include_images = is_yes(request.args.get("include_images", "true"))
 	html = render_markdown(package.desc)
-	return jsonify(html_to_minetest(html, formspec_version, include_images))
+	page_url = package.get_url("packages.view", absolute=True)
+	return jsonify(html_to_minetest(html, page_url, formspec_version, include_images))
 
 
 @bp.route("/api/packages/<author>/<name>/", methods=["PUT"])
@@ -847,14 +849,14 @@ def json_schema():
 @csrf.exempt
 @cors_allowed
 def hypertext():
-	formspec_version = request.args["formspec_version"]
+	formspec_version = get_int_or_abort(request.args["formspec_version"])
 	include_images = is_yes(request.args.get("include_images", "true"))
 
 	html = request.data.decode("utf-8")
 	if request.content_type == "text/markdown":
 		html = render_markdown(html)
 
-	return jsonify(html_to_minetest(html, formspec_version, include_images))
+	return jsonify(html_to_minetest(html, "", formspec_version, include_images))
 
 
 @bp.route("/api/collections/")
