@@ -93,6 +93,7 @@ def packages():
 		for pkg in featured:
 			featured_lut.add(f"{pkg['author']}/{pkg['name']}")
 			pkg["short_description"] = gettext("Featured") + ". " + pkg["short_description"]
+			pkg["featured"] = True
 
 		not_featured = [pkg for pkg in pkgs if f"{pkg['author']}/{pkg['name']}" not in featured_lut]
 		pkgs = featured + not_featured
