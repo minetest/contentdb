@@ -85,7 +85,8 @@ def callback(oauth_token):
 		elif userByGithub == current_user:
 			return redirect(redirect_to)
 		else:
-			flash(gettext("GitHub account is already associated with another user"), "danger")
+			flash(gettext("GitHub account is already associated with another user: %(username)s",
+					username=userByGithub.username), "danger")
 			return redirect(redirect_to)
 
 	# If not logged in, log in
