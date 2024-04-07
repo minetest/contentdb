@@ -241,7 +241,7 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 
 	def add_value(label, value):
 		nonlocal body
-		body += f"{label}: <b>{escape_hypertext(str(value))}</b>\n\n"
+		body += f"{label}: <b>{str(value)}</b>\n\n"
 
 	def add_list(label, items):
 		nonlocal body
@@ -250,10 +250,10 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 		for i, item in enumerate(items):
 			if i != 0:
 				body += ", "
-			body += f"<b>{escape_hypertext(str(item))}</b>"
+			body += f"<b>{str(item)}</b>"
 
 		if len(items) == 0:
-			body += "<i>" + escape_hypertext(gettext("none")) + "</i>"
+			body += "<i>" + gettext("none") + "</i>"
 
 		body += "</b>\n\n"
 
@@ -264,7 +264,7 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 		def make_game_link(game):
 			key = f"link_{len(links)}"
 			links[key] = game.get_url("packages.view", absolute=True)
-			return f"<action name={key}><u>{game.title}</u></action>"
+			return f"<action name={key}><u>{escape_hypertext(game.title)}</u></action>"
 
 		[supported, unsupported] = package.get_sorted_game_support_pair()
 		supports_all_games = package.supports_all_games or len(supported) == 0
