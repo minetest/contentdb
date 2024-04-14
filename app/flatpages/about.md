@@ -41,3 +41,4 @@ You can donate to rubenwardy to cover ContentDB's costs and support future devel
 For more information about what the cost of ContentDB and what rubenwardy does, see his donation page:
 
 <a href="https://rubenwardy.com/donate/" class="btn btn-primary me-1">Donate</a>
+<a href="/donate/" class="btn btn-secondary">Support Creators</a>

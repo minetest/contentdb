@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 
 {% block title -%}
-	{{ _("Support packages") }}
+	{{ _("Support Creators") }}
 {%- endblock %}
 
 {% block description -%}
@@ -57,6 +57,17 @@
 	<h1>{{ self.title() }}</h1>
 	<p class="lead">
 		{{ self.description() }}
+	</p>
+
+	<h2 id="contentdb">{{ _("Support ContentDB") }}</h2>
+	<p>
+		{{ _("You can donate to rubenwardy to cover ContentDB's costs and support future development.") }}
+	</p>
+	<p>
+		{{ _("For more information about what the cost of ContentDB and what rubenwardy does, see his donation page:") }}
+	</p>
+	<p>
+		<a href="https://rubenwardy.com/donate/" class="btn btn-primary me-1">{{ _("Donate") }}</a>
 	</p>
 
 	<h2>{{ _("Based on your reviews / favorites") }}</h2>
