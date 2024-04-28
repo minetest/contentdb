@@ -107,23 +107,3 @@ celery.conf.beat_schedule = CELERYBEAT_SCHEDULE
 
 
 from . import importtasks, forumtasks, emails, pkgtasks, usertasks
-
-
-# noinspection PyUnusedLocal
-@signals.after_setup_logger.connect
-def on_after_setup_logger(**kwargs):
-	from app.maillogger import build_handler
-
-	class ExceptionFilter(Filter):
-		def filter(self, record):
-			if record.exc_info:
-				exc, _, _ = record.exc_info
-				if exc == TaskError:
-					return False
-
-			return True
-
-	logger = celery.log.get_default_logger()
-	handler = build_handler(app)
-	handler.addFilter(ExceptionFilter())
-	logger.addHandler(handler)

@@ -30,6 +30,28 @@ from flask_wtf.csrf import CSRFProtect
 
 from app.markdown import init_markdown, MARKDOWN_EXTENSIONS, MARKDOWN_EXTENSION_CONFIG
 
+import sentry_sdk
+from sentry_sdk.integrations.flask import FlaskIntegration
+
+
+if os.getenv("SENTRY_DSN"):
+	environment = os.getenv("SENTRY_ENVIRONMENT")
+	assert environment is not None
+	sentry_sdk.init(
+		dsn=os.getenv("SENTRY_DSN"),
+		environment=environment,
+
+		integrations=[FlaskIntegration()],
+		# Set traces_sample_rate to 1.0 to capture 100%
+		# of transactions for performance monitoring.
+		traces_sample_rate=1.0,
+		# Set profiles_sample_rate to 1.0 to profile 100%
+		# of sampled transactions.
+		# We recommend adjusting this value in production.
+		profiles_sample_rate=1.0,
+	)
+
+
 app = Flask(__name__, static_folder="public/static")
 
 
@@ -93,11 +115,6 @@ login_manager.login_view = "users.login"
 
 from .sass import init_app as sass
 sass(app)
-
-
-if not app.debug and app.config["MAIL_UTILS_ERROR_SEND_TO"]:
-	from .maillogger import build_handler
-	app.logger.addHandler(build_handler(app))
 
 
 from . import models, template_filters
