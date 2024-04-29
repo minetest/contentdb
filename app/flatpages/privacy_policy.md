@@ -74,6 +74,8 @@ Please avoid giving other personal information as we do not want it.
 
 We do not share any personal information with third parties.
 
+We use <a href="https://sentry.io/">Sentry.io</a> for error logging and performance monitoring.
+
 ## Location
 
 The ContentDB production server is currently located in Germany.

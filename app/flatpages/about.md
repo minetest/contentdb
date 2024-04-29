@@ -42,3 +42,8 @@ For more information about what the cost of ContentDB and what rubenwardy does, 
 
 <a href="https://rubenwardy.com/donate/" class="btn btn-primary me-1">Donate</a>
 <a href="/donate/" class="btn btn-secondary">Support Creators</a>
+
+## Sponsorships
+
+Minetest and ContentDB are sponsored by <a href="https://sentry.io/" rel="nofollow">sentry.io</a>.
+This provides us with improved error logging and performance insights.
