@@ -129,8 +129,7 @@ def profile_edit(username):
 		abort(404)
 
 	if not user.can_see_edit_profile(current_user):
-		flash(gettext("Permission denied"), "danger")
-		return redirect(url_for("users.profile", username=username))
+		abort(403)
 
 	form = UserProfileForm(obj=user)
 	if form.validate_on_submit():
@@ -243,7 +242,29 @@ def account(username):
 	if not user:
 		abort(404)
 
+	if not user.can_see_edit_profile(current_user):
+		abort(403)
+
 	return render_template("users/account.html", user=user, tabs=get_setting_tabs(user), current_tab="account")
+
+
+@bp.route("/users/<username>/settings/account/disconnect-github/", methods=["POST"])
+def disconnect_github(username: str):
+	user: User = User.query.filter_by(username=username).one_or_404()
+
+	if not user.can_see_edit_profile(current_user):
+		abort(403)
+
+	if user.password and user.email:
+		user.github_user_id = None
+		user.github_username = None
+		db.session.commit()
+
+		flash(gettext("Removed GitHub account"), "success")
+	else:
+		flash(gettext("You need to add an email address and password before you can remove your GitHub account"), "danger")
+
+	return redirect(url_for("users.account", username=username))
 
 
 @bp.route("/users/<username>/delete/", methods=["GET", "POST"])

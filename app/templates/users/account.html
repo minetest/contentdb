@@ -30,14 +30,14 @@
 	{% endif %}
 {% endif %}
 
-<h3>{{ _("Linked Accounts") }}</h3>
+<h3 class="mt-5">{{ _("Linked Accounts") }}</h3>
 <table class="table">
 	<tr>
 		<td>Forums</td>
 		<td>
 			{% if user.forums_username %}
-				<a class="btn btn-secondary" href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
-					{{ _("Connected") }} [{{ user.forums_username }}]
+				<a href="https://forum.minetest.net/memberlist.php?mode=viewprofile&un={{ user.forums_username }}">
+					{{ user.forums_username }}
 				</a>
 			{% else %}
 				{{ _("Please PM %(rubenwardy)s on the forums to link your account.", rubenwardy=self.ruben_link()) }}
@@ -48,14 +48,22 @@
 		<td>GitHub</td>
 		<td>
 			{% if user.github_username %}
-				<a class="btn btn-secondary" href="https://github.com/{{ user.github_username }}">
-					{{ _("Connected") }} [{{ user.github_username }}]
-				</a>
+				<p>
+					<a href="https://github.com/{{ user.github_username }}">
+						{{ user.github_username }}
+					</a>
+				</p>
 
 				{% if user == current_user %}
-					<a class="btn btn-secondary ms-2" href="{{ url_for('github.view_permissions') }}">
+					<a class="btn btn-secondary" href="{{ url_for('github.view_permissions') }}">
 						{{ _("View ContentDB's GitHub Permissions") }}
 					</a>
+				{% endif %}
+				{% if user.forums_username %}
+					<form method="post" action="{{ url_for('users.disconnect_github', username=user.username) }}" class="d-inline-block">
+						<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+						<input type="submit" class="btn btn-secondary" value="{{  _('Disconnect') }}" />
+					</form>
 				{% endif %}
 			{% elif user == current_user %}
 				<a class="btn btn-secondary" href="{{ url_for('github.start') }}">
@@ -68,18 +76,8 @@
 	</tr>
 </table>
 
-{% if current_user.rank.at_least(current_user.rank.MODERATOR) %}
-	<a class="btn btn-secondary float-end" href="{{ url_for('admin.audit', username=user.username) }}">
-		{{ _("View All") }}
-	</a>
-{% endif %}
 
-<h3>{{ _("Recent Account Actions") }}</h3>
-
-{% from "macros/audit_log.html" import render_audit_log %}
-{{ render_audit_log(user.audit_log_entries.limit(10).all(), current_user) }}
-
-<h3>{{ _("Account Deletion and Deactivation") }}</h3>
+<h3 class="mt-5">{{ _("Account Deletion and Deactivation") }}</h3>
 
 {% if current_user.rank.at_least(current_user.rank.ADMIN) %}
 	<a class="btn btn-danger" href="{{ url_for('users.delete', username=user.username) }}">
@@ -88,6 +86,19 @@
 	<p>
 		{{ _("Account Deletion and Deactivation isn't available to users yet.") }}
 		{{ _("Please contact the admin.") }}
+	</p>
+{% endif %}
+
+
+<h3 class="mt-5">{{ _("Recent Account Actions") }}</h3>
+
+{% from "macros/audit_log.html" import render_audit_log %}
+{{ render_audit_log(user.audit_log_entries.limit(10).all(), current_user) }}
+{% if current_user.rank.at_least(current_user.rank.MODERATOR) %}
+	<p class="mt-4">
+		<a class="btn btn-secondary" href="{{ url_for('admin.audit', username=user.username) }}">
+			{{ _("View All") }}
+		</a>
 	</p>
 {% endif %}
 
