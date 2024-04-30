@@ -1,4 +1,5 @@
 title: Privacy Policy
+---
 
 Last Updated: 2024-04-30
 ([View updates](https://github.com/minetest/contentdb/commits/master/app/flatpages/privacy_policy.md))
@@ -66,8 +67,8 @@ Please avoid giving other personal information as we do not want it.
   They are either public, or visible only to the package author and editors.
 * The complete audit log is visible to moderators.
   Users may see their own audit log actions on their account settings page.
-  Owners, maintainers, and editors may be able to see the actions on a package in the future.
-* Preferred language can only be viewed by this with access to the database or a backup.
+  Owners, maintainers, and editors can see the actions on a package.
+* Preferred language can only be viewed by those with access to the database or a backup.
 * We may be required to share information with law enforcement.
 
 ## Third-parties
