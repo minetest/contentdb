@@ -35,6 +35,14 @@ from sentry_sdk.integrations.flask import FlaskIntegration
 
 
 if os.getenv("SENTRY_DSN"):
+	def before_send(event, hint):
+		from app.tasks import TaskError
+		if "exc_info" in hint:
+			exc_type, exc_value, tb = hint["exc_info"]
+			if isinstance(exc_value, TaskError):
+				return None
+		return event
+
 	environment = os.getenv("SENTRY_ENVIRONMENT")
 	assert environment is not None
 	sentry_sdk.init(
@@ -49,6 +57,8 @@ if os.getenv("SENTRY_DSN"):
 		# of sampled transactions.
 		# We recommend adjusting this value in production.
 		profiles_sample_rate=1.0,
+
+		before_send=before_send,
 	)
 
 
