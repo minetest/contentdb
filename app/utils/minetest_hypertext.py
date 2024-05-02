@@ -56,10 +56,11 @@ def make_indent(w):
 
 
 class MinetestHTMLParser(HTMLParser):
-	def __init__(self, page_url: str, include_images: bool):
+	def __init__(self, page_url: str, include_images: bool, link_prefix: str):
 		super().__init__()
 		self.page_url = page_url
 		self.include_images = include_images
+		self.link_prefix = link_prefix
 
 		self.completed_text = ""
 		self.current_line = ""
@@ -101,7 +102,7 @@ class MinetestHTMLParser(HTMLParser):
 			if self.last_id is not None:
 				url = url + "#" + self.last_id
 
-			name = f"link_{len(self.links)}"
+			name = f"{self.link_prefix}{len(self.links)}"
 			self.links[name] = url
 			self.current_line += f"<action name={name}><u>"
 			self.current_line += escape_hypertext(gettext("(view table in browser)"))
@@ -117,7 +118,7 @@ class MinetestHTMLParser(HTMLParser):
 			self.current_line += "<b>"
 		elif tag == "a":
 			if "href" in attr_by_name:
-				name = f"link_{len(self.links)}"
+				name = f"{self.link_prefix}{len(self.links)}"
 				self.links[name] = self.resolve_url(attr_by_name["href"])
 				self.current_line += f"<action name={name}><u>"
 			else:
@@ -223,8 +224,8 @@ class MinetestHTMLParser(HTMLParser):
 			self.current_line += f"&{name};"
 
 
-def html_to_minetest(html, page_url: str, formspec_version: int = 7, include_images: bool = True):
-	parser = MinetestHTMLParser(page_url, include_images)
+def html_to_minetest(html, page_url: str, formspec_version: int = 7, include_images: bool = True, link_prefix: str = "link_"):
+	parser = MinetestHTMLParser(page_url, include_images, link_prefix)
 	parser.feed(html)
 	parser.finish_line()
 
@@ -324,7 +325,8 @@ def package_reviews_as_hypertext(package: Package, formspec_version: int = 7):
 	for review in package.reviews:
 		review: PackageReview
 		html = render_markdown(review.thread.first_reply.comment)
-		content = html_to_minetest(html, package.get_url("packages.view", absolute=True), formspec_version)["body"].strip()
+		content = html_to_minetest(html, package.get_url("packages.view", absolute=True),
+				formspec_version, False, f"review_{review.id}_")["body"].strip()
 		author = make_link(abs_url_for("users.profile", username=review.author.username), review.author.display_name)
 		rating = ["👎", "👎", "-", "👍", "👍"][review.rating - 1]
 		comments = make_link(abs_url_for("threads.view", id=review.thread.id), "Comments")
