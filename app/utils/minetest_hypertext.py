@@ -21,7 +21,9 @@ from urllib.parse import urljoin
 
 from flask_babel import gettext
 
-from app.models import Package, PackageType
+from app.markdown import render_markdown
+from app.models import Package, PackageType, PackageReview
+from app.utils import abs_url_for
 
 
 def normalize_whitespace(x):
@@ -298,6 +300,35 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 	add_value(gettext("Added"), package.created_at)
 	add_list(gettext("Maintainers"), [user.display_name for user in package.maintainers])
 	add_list(gettext("Provides"), [x.name for x in package.provides])
+
+	return {
+		"head": HEAD,
+		"body": body,
+		"links": links,
+		"images":  {},
+		"image_tooltips": {},
+	}
+
+
+def package_reviews_as_hypertext(package: Package, formspec_version: int = 7):
+	link_counter = 0
+	links = {}
+	body = ""
+
+	def make_link(url: str, label: str):
+		nonlocal link_counter
+		link_counter += 1
+		links[f"link_{link_counter}"] = url
+		return f"<action name=link_{link_counter}>{escape_hypertext(label)}</action>"
+
+	for review in package.reviews:
+		review: PackageReview
+		html = render_markdown(review.thread.first_reply.comment)
+		content = html_to_minetest(html, package.get_url("packages.view", absolute=True), formspec_version)["body"].strip()
+		author = make_link(abs_url_for("users.profile", username=review.author.username), review.author.display_name)
+		rating = ["👎", "👎", "-", "👍", "👍"][review.rating - 1]
+		comments = make_link(abs_url_for("threads.view", id=review.thread.id), "Comments")
+		body += f"{author} {review.rating}\n<big>{escape_hypertext(review.thread.title)}</big>\n{content}\n{comments}\n\n"
 
 	return {
 		"head": HEAD,

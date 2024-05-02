@@ -22,7 +22,6 @@ from typing import List
 import flask_sqlalchemy
 from flask import request, jsonify, current_app, Response
 from flask_babel import gettext
-from flask_login import current_user, login_required
 from sqlalchemy import and_, or_
 from sqlalchemy.orm import joinedload
 from sqlalchemy.sql.expression import func
@@ -35,7 +34,7 @@ from app.models import Tag, PackageState, PackageType, Package, db, PackageRelea
 	PackageAlias, Language
 from app.querybuilder import QueryBuilder
 from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
-from app.utils.minetest_hypertext import html_to_minetest, package_info_as_hypertext
+from app.utils.minetest_hypertext import html_to_minetest, package_info_as_hypertext, package_reviews_as_hypertext
 from . import bp
 from .auth import is_api_authd
 from .support import error, api_create_vcs_release, api_create_zip_release, api_create_screenshot, \
@@ -147,6 +146,18 @@ def package_view_client(package: Package):
 		"neutral": package.reviews.filter(PackageReview.rating == 3).count(),
 		"negative": package.reviews.filter(PackageReview.rating < 3).count(),
 	}
+
+	resp = jsonify(data)
+	resp.vary = "Accept-Language"
+	return resp
+
+
+@bp.route("/api/packages/<author>/<name>/for-client/reviews/")
+@is_package_page
+@cors_allowed
+def package_view_client_reviews(package: Package):
+	formspec_version = get_int_or_abort(request.args["formspec_version"])
+	data = package_reviews_as_hypertext(package, formspec_version)
 
 	resp = jsonify(data)
 	resp.vary = "Accept-Language"
