@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-04-03 18:34+0100\n"
-"PO-Revision-Date: 2024-03-28 21:09+0000\n"
-"Last-Translator: ssantos <ssantos@web.de>\n"
+"PO-Revision-Date: 2024-04-07 02:02+0000\n"
+"Last-Translator: Lunovox Heavenfinder <lunovox@disroot.org>\n"
+"Language-Team: Portuguese <https://hosted.weblate.org/projects/minetest/"
+"contentdb/pt/>\n"
 "Language: pt\n"
-"Language-Team: Portuguese "
-"<https://hosted.weblate.org/projects/minetest/contentdb/pt/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:137
@@ -40,7 +41,7 @@ msgstr "Pacotes"
 #: app/querybuilder.py:56
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
-msgstr ""
+msgstr "%(package_type)s para %(game_name)s"
 
 #: app/template_filters.py:92
 #, python-format
@@ -182,7 +183,7 @@ msgstr "Editar Detalhes"
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/translation.html:4
 msgid "Translation"
-msgstr ""
+msgstr "Tradução"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
@@ -309,7 +310,7 @@ msgstr "URL para Doação"
 
 #: app/blueprints/packages/packages.py:248
 msgid "Translation URL"
-msgstr ""
+msgstr "Tradução de URL"
 
 #: app/blueprints/packages/packages.py:254
 msgid "_game is not an allowed name"
@@ -337,10 +338,12 @@ msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr ""
+"Você deve adicionar um endereço de e-mail à sua conta e confirmá-lo antes de "
+"poder gerenciar pacotes"
 
 #: app/blueprints/packages/packages.py:334
 msgid "Save draft"
-msgstr ""
+msgstr "Rascunho salvo"
 
 #: app/blueprints/packages/packages.py:342
 msgid "Unable to find that user"
@@ -367,6 +370,7 @@ msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
+"Comente no tópico de aprovação para que os editores saibam o que você mudou"
 
 #: app/blueprints/packages/packages.py:493
 msgid "Deleted package"
@@ -437,7 +441,7 @@ msgstr "Upload de ficheiro"
 
 #: app/blueprints/packages/releases.py:56
 msgid "Git reference (ie: commit hash, branch, or tag)"
-msgstr ""
+msgstr "Referência Git (ou seja: commit_hash, branch ou tag)"
 
 #: app/blueprints/packages/releases.py:58
 #: app/blueprints/packages/releases.py:70
@@ -656,7 +660,7 @@ msgstr "Incapaz de criar tópico!"
 
 #: app/blueprints/threads/__init__.py:315
 msgid "An approval thread already exists! Consider replying there instead"
-msgstr ""
+msgstr "Já existe um tópico de aprovação. Considere responder!"
 
 #: app/blueprints/threads/__init__.py:319
 msgid "Please wait before opening another thread"
@@ -1008,7 +1012,7 @@ msgstr "Tokens de API"
 
 #: app/blueprints/users/settings.py:60 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "Aplicativos OAuth2"
 
 #: app/blueprints/users/settings.py:67 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1094,6 +1098,8 @@ msgid ""
 "What games does your package support? Please specify on the supported "
 "games page"
 msgstr ""
+"Quais jogos seu pacote suporta? Por favor especifique na página de jogos "
+"suportados!"
 
 #: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
@@ -1102,11 +1108,12 @@ msgstr "Por favor, aguarde pela licença para adicionar ao CDB."
 #: app/logic/package_approval.py:134
 msgid "Please make sure that this package has the right to the names it uses."
 msgstr ""
+"Por favor, certifique-se de que este pacote tenha direito aos nomes que usa."
 
 #: app/logic/package_approval.py:139
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
-msgstr ""
+msgstr "Por favor certifique-se que este pacote tem direito aos nomes %(names)s"
 
 #: app/logic/package_approval.py:140 app/templates/index.html:111
 #: app/templates/index.html:122 app/templates/index.html:133
@@ -1132,6 +1139,8 @@ msgid ""
 "Warning: Forum topic not found. The topic may have been created since the"
 " last forum crawl."
 msgstr ""
+"Aviso: tópico do fórum não encontrado. O tópico pode ter sido criado desde o "
+"último rastreamento do fórum."
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1171,7 +1180,7 @@ msgstr "Muitas requisições, por favor, espere antes de tentar novamente"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "um arquivo de imagem PNG, JPEG ou WebP"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1355,7 +1364,7 @@ msgstr "Desnotar"
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
 #: app/templates/packages/view.html:598 app/utils/minetest_hypertext.py:256
 msgid "Languages"
-msgstr ""
+msgstr "Idiomas"
 
 #: app/templates/base.html:202 app/templates/translate/index.html:76
 msgid "Help translate ContentDB"
@@ -1405,7 +1414,7 @@ msgstr "Pacotes suportados"
 
 #: app/templates/base.html:258
 msgid "Translate Packages"
-msgstr ""
+msgstr "Traduzir Pacotes"
 
 #: app/templates/base.html:259
 msgid "Source Code"
@@ -1413,11 +1422,11 @@ msgstr "Código-fonte"
 
 #: app/templates/base.html:265
 msgid "Show non-free packages"
-msgstr ""
+msgstr "Mostrar pacotes não-livres"
 
 #: app/templates/base.html:267
 msgid "Hide non-free packages"
-msgstr ""
+msgstr "Esconder pacotes não-livres"
 
 #: app/templates/index.html:4
 msgid "Welcome"
@@ -1496,7 +1505,7 @@ msgstr "Melhores avaliados"
 
 #: app/templates/index.html:191
 msgid "All reviews"
-msgstr ""
+msgstr "Todas as avaliações"
 
 #: app/templates/index.html:193
 msgid "Recent Positive Reviews"
@@ -1534,7 +1543,7 @@ msgstr "Enviar e-mail para %(username)s"
 #: app/templates/packages/game_support.html:20
 #: app/templates/threads/view.html:96 app/templates/todo/tags.html:36
 msgid "Package"
-msgstr ""
+msgstr "Pacote"
 
 #: app/templates/admin/storage.html:62
 #: app/templates/collections/create_edit.html:61
@@ -1544,11 +1553,11 @@ msgstr "Sem resultados"
 
 #: app/templates/admin/languages/list.html:19
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: app/templates/admin/languages/list.html:33
 msgid "Has ContentDB translation?"
-msgstr ""
+msgstr "Tem tradução do ContentDB?"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
@@ -1593,11 +1602,11 @@ msgstr "Criar token de API"
 #: app/templates/api/create_edit_token.html:25
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
-msgstr ""
+msgstr "Este token foi criado pelo aplicativo '%(title)s' por %(author)s."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Clique em 'Excluir' para revogar o acesso."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
@@ -1653,7 +1662,7 @@ msgstr "Documentação da API"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Aplicativo"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
@@ -1675,7 +1684,7 @@ msgstr "Os utilizadores não serão redirecionados ao aceder o URL antigo"
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Isso exige que a coleção seja pública"
 
 #: app/templates/collections/create_edit.html:76
 #: app/templates/packages/remove.html:58 app/templates/packages/view.html:128
@@ -1874,6 +1883,8 @@ msgstr ""
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact the admin for help."
 msgstr ""
+"Caso contrário, talvez seja necessário entrar em contato com o administrador "
+"para obter ajuda."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1916,6 +1927,8 @@ msgid ""
 "We're sorry to see you go. You just need to do one more thing before your"
 " email is blacklisted."
 msgstr ""
+"Lamentamos ver você partir. Você só precisa fazer mais uma coisa antes que "
+"seu e-mail seja colocado na lista negra."
 
 #: app/templates/emails/verify_unsubscribe.html:23
 msgid ""
@@ -1958,7 +1971,7 @@ msgstr "Por favor, aguarde o lançamento ser aprovado."
 
 #: app/templates/macros/package_approval.html:38
 msgid "You can now approve this package if you're ready."
-msgstr ""
+msgstr "Agora você pode aprovar este pacote se estiver pronto."
 
 #: app/templates/macros/package_approval.html:40
 msgid "Please wait for the package to be approved."
@@ -1966,15 +1979,15 @@ msgstr "Por favor, aguarde o pacote ser aprovado."
 
 #: app/templates/macros/package_approval.html:44
 msgid "You can now submit this package for approval if you're ready."
-msgstr ""
+msgstr "Agora você pode enviar este pacote para aprovação se estiver pronto."
 
 #: app/templates/macros/package_approval.html:46
 msgid "This package can be submitted for approval when ready."
-msgstr ""
+msgstr "Este pacote pode ser enviado para aprovação quando estiver pronto."
 
 #: app/templates/macros/package_approval.html:49
 msgid "You need to fix the above errors before you can submit for review"
-msgstr ""
+msgstr "Você precisa corrigir os erros acima antes de enviar para revisão"
 
 #: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
@@ -1985,6 +1998,8 @@ msgid ""
 "You can open a thread if you have a question for the approver or package "
 "author."
 msgstr ""
+"Você pode abrir um tópico se tiver uma pergunta para o aprovador ou autor do "
+"pacote."
 
 #: app/templates/macros/packagegridtile.html:26
 msgid "<b>Warning:</b> Non-free code and media."
@@ -2028,73 +2043,73 @@ msgstr "Nenhum lançamento disponível."
 
 #: app/templates/macros/reviews.html:7
 msgid "Helpful"
-msgstr ""
+msgstr "Útil"
 
 #: app/templates/macros/reviews.html:13
 msgid "Unhelpful"
-msgstr ""
+msgstr "Inútil"
 
 #: app/templates/macros/reviews.html:85
 #, python-format
 msgid "%(num)d comments"
-msgstr ""
+msgstr "%(num)d comentários"
 
 #: app/templates/macros/reviews.html:97
 msgid "No reviews, yet."
-msgstr ""
+msgstr "Ainda não há comentários."
 
 #: app/templates/macros/reviews.html:107 app/templates/macros/reviews.html:161
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
-msgstr ""
+msgstr "Análise"
 
 #: app/templates/macros/reviews.html:112 app/templates/macros/reviews.html:166
 #: app/templates/packages/review_create_edit.html:41
 #, python-format
 msgid "Do you recommend this %(type)s?"
-msgstr ""
+msgstr "Você recomenda este %(type)s?"
 
 #: app/templates/macros/reviews.html:134
 #: app/templates/packages/review_create_edit.html:46
 msgid "Why or why not? Try to be constructive"
-msgstr ""
+msgstr "Por que ou por que não?  Tente ser construtivo!"
 
 #: app/templates/macros/reviews.html:151
 msgid "Post Review"
-msgstr ""
+msgstr "Postar Revisão"
 
 #: app/templates/macros/reviews.html:187
 msgid "Report an Issue"
-msgstr ""
+msgstr "Informar um Problema"
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
 msgid "%(display_name)s's packages"
-msgstr ""
+msgstr "Pacotes de %(display_name)s"
 
 #: app/templates/macros/stats.html:36
 msgid "Date range..."
-msgstr ""
+msgstr "Período..."
 
 #: app/templates/macros/stats.html:50
 msgid "Downloads, past 7 days"
-msgstr ""
+msgstr "Downloads, últimos 7 dias"
 
 #: app/templates/macros/stats.html:53
 msgid "Downloads, past 30 days"
-msgstr ""
+msgstr "Downloads, últimos 30 dias"
 
 #: app/templates/macros/stats.html:56
 msgid "Downloads from $1 to $2"
-msgstr ""
+msgstr "Downloads de $1 até $2"
 
 #: app/templates/macros/stats.html:59
 msgid "$1 per day"
-msgstr ""
+msgstr "$1 por dia"
 
 #: app/templates/macros/stats.html:64
 msgid "JavaScript is required to display charts and statistics"
-msgstr ""
+msgstr "JavaScript é necessário para exibir gráficos e estatísticas"
 
 #: app/templates/macros/stats.html:73
 msgid "Lifetime unique downloads"
@@ -2157,7 +2172,7 @@ msgstr "Precisa de mais estatísticas?"
 
 #: app/templates/macros/stats.html:123
 msgid "Check out the ContentDB Grafana dashboard for CDB-wide stats"
-msgstr ""
+msgstr "Confira o painel ContentDB Grafana para estatísticas de todo o CDB."
 
 #: app/templates/macros/stats.html:127
 msgid "ContentDB Grafana"
@@ -4635,4 +4650,3 @@ msgstr ""
 
 #~ msgid "Topics with a strikethrough have been marked as discarded."
 #~ msgstr ""
-
