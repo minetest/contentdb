@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-04-03 18:34+0100\n"
-"PO-Revision-Date: 2024-02-01 18:01+0000\n"
+"PO-Revision-Date: 2024-04-28 08:07+0000\n"
 "Last-Translator: Unacceptium <unacceptium@proton.me>\n"
+"Language-Team: Hungarian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/hu/>\n"
 "Language: hu\n"
-"Language-Team: Hungarian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/hu/>\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.5.1\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:137
@@ -40,7 +41,7 @@ msgstr "Csomagok"
 #: app/querybuilder.py:56
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
-msgstr ""
+msgstr "%(package_type)s a %(game_name)s-hez"
 
 #: app/template_filters.py:92
 #, python-format
@@ -183,7 +184,7 @@ msgstr "Részletek Szerkesztése"
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/translation.html:4
 msgid "Translation"
-msgstr ""
+msgstr "Fordítás"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
@@ -310,7 +311,7 @@ msgstr "Támogatási URL"
 
 #: app/blueprints/packages/packages.py:248
 msgid "Translation URL"
-msgstr ""
+msgstr "Fordítási URL"
 
 #: app/blueprints/packages/packages.py:254
 msgid "_game is not an allowed name"
@@ -338,10 +339,12 @@ msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr ""
+"Ahhoz, hogy a csomagokat kezelni tudja, hozzá kell adjon egy Email címet a "
+"profiljához"
 
 #: app/blueprints/packages/packages.py:334
 msgid "Save draft"
-msgstr ""
+msgstr "Piszkozat mentése"
 
 #: app/blueprints/packages/packages.py:342
 msgid "Unable to find that user"
@@ -366,10 +369,13 @@ msgstr ""
 "szükség"
 
 #: app/blueprints/packages/packages.py:442
+#, fuzzy
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
+"Írjon véleményt az Engedélyezési Szál-ba, így a szerkesztők tudni fogják mit "
+"változtatott"
 
 #: app/blueprints/packages/packages.py:493
 msgid "Deleted package"
@@ -1071,15 +1077,15 @@ msgstr ""
 
 #: app/logic/package_approval.py:99
 msgid "You need to create a release before this package can be approved."
-msgstr ""
+msgstr "Készítenie kell egy kiadást mielőtt a csomagot elfogadhatják."
 
 #: app/logic/package_approval.py:101
 msgid "Release is still importing, or has an error."
-msgstr ""
+msgstr "A kiadás még mindíg feltöltés alatt, vagy megakadhatott."
 
 #: app/logic/package_approval.py:105
 msgid "Set up releases"
-msgstr ""
+msgstr "Kiadások beállítása"
 
 #: app/logic/package_approval.py:112
 msgid "You need to add at least one screenshot."
@@ -1099,6 +1105,8 @@ msgid ""
 "What games does your package support? Please specify on the supported "
 "games page"
 msgstr ""
+"Mely játékokat támogatja a csomag? Kérjük adja meg a Támogatott játékok "
+"oldalon előbb"
 
 #: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
@@ -1112,6 +1120,8 @@ msgstr "Kérjük ellenőrizze, hogy a csomagnak van joga ezt a nevet használni.
 #, python-format
 msgid "Please make sure that this package has the right to the names %(names)s"
 msgstr ""
+"Kérjük menjen biztosra, hogy a csomagnak joga van a %(names)s név "
+"használatára"
 
 #: app/logic/package_approval.py:140 app/templates/index.html:111
 #: app/templates/index.html:122 app/templates/index.html:133
@@ -1137,6 +1147,8 @@ msgid ""
 "Warning: Forum topic not found. The topic may have been created since the"
 " last forum crawl."
 msgstr ""
+"Vigyázat: Fórum témakör nem található. Lehet, hogy a témakör az utolsó fórum "
+"feltérképezése óta jött létre."
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1246,7 +1258,7 @@ msgstr "Törlés"
 
 #: app/models/packages.py:563 app/templates/packages/view.html:163
 msgid "Work in Progress"
-msgstr ""
+msgstr "Fejlszesztés alatt"
 
 #: app/tasks/emails.py:119
 msgid ""
@@ -1364,7 +1376,7 @@ msgstr "Kijelentkezés"
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
 #: app/templates/packages/view.html:598 app/utils/minetest_hypertext.py:256
 msgid "Languages"
-msgstr ""
+msgstr "Nyelvek"
 
 #: app/templates/base.html:202 app/templates/translate/index.html:76
 msgid "Help translate ContentDB"
@@ -1414,7 +1426,7 @@ msgstr "Támogatott csomagok"
 
 #: app/templates/base.html:258
 msgid "Translate Packages"
-msgstr ""
+msgstr "Csomagok lefordítása"
 
 #: app/templates/base.html:259
 msgid "Source Code"
@@ -1422,11 +1434,11 @@ msgstr "Forráskód"
 
 #: app/templates/base.html:265
 msgid "Show non-free packages"
-msgstr ""
+msgstr "Mutassa a Nem-szabad-felhasnálású csomagokat"
 
 #: app/templates/base.html:267
 msgid "Hide non-free packages"
-msgstr ""
+msgstr "Nem-szabad-felhasználású csomagok elrejtése"
 
 #: app/templates/index.html:4
 msgid "Welcome"
@@ -1505,7 +1517,7 @@ msgstr "Legvéleményezettebb"
 
 #: app/templates/index.html:191
 msgid "All reviews"
-msgstr ""
+msgstr "Minden vélemény"
 
 #: app/templates/index.html:193
 msgid "Recent Positive Reviews"
@@ -1545,7 +1557,7 @@ msgstr "Email küldése %(username)s számára"
 #: app/templates/packages/game_support.html:20
 #: app/templates/threads/view.html:96 app/templates/todo/tags.html:36
 msgid "Package"
-msgstr ""
+msgstr "Csomag"
 
 #: app/templates/admin/storage.html:62
 #: app/templates/collections/create_edit.html:61
@@ -1555,11 +1567,11 @@ msgstr "Nincs találat"
 
 #: app/templates/admin/languages/list.html:19
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: app/templates/admin/languages/list.html:33
 msgid "Has ContentDB translation?"
-msgstr ""
+msgstr "Van ContentDB lefordítás?"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
@@ -1771,27 +1783,30 @@ msgid "Some content creators are accepting donations for their work."
 msgstr "Valamely tartalomkészítők elfogadnak adományokat a munkájukért."
 
 #: app/templates/donate/index.html:9
+#, fuzzy
 msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
+"Az adományozás egy jó mód a kedvenc Fejlesztői, Modkészítői, és Festői "
+"támogatására."
 
 #: app/templates/donate/index.html:37
 #, python-format
 msgid "by %(author)s"
-msgstr ""
+msgstr "%(author)s-től"
 
 #: app/templates/donate/index.html:42 app/templates/translate/index.html:38
 msgid "View package"
-msgstr ""
+msgstr "Csomag megtekintése"
 
 #: app/templates/donate/index.html:46 app/templates/users/profile.html:104
 msgid "Donate"
-msgstr ""
+msgstr "Adományozás"
 
 #: app/templates/donate/index.html:62
 msgid "Based on your reviews / favorites"
-msgstr ""
+msgstr "A véleményei/kedvencei alapján"
 
 #: app/templates/donate/index.html:67
 msgid ""
@@ -1801,16 +1816,16 @@ msgstr ""
 
 #: app/templates/donate/index.html:71
 msgid "Sign in to see recommendations based on the packages you've reviewed"
-msgstr ""
+msgstr "Jelentkezzen be a véleményei alapján ajánlott csomagok megtekintésére"
 
 #: app/templates/donate/index.html:78
 msgid "Top packages"
-msgstr ""
+msgstr "Legjobb csomagok"
 
 #: app/templates/donate/index.html:82
 #, python-format
 msgid "%(count)d packages are looking for donations"
-msgstr ""
+msgstr "%(count)d csomag támogatást kér"
 
 #: app/templates/emails/notification.html:10
 #, python-format
@@ -1881,7 +1896,7 @@ msgstr "Bejelentkezhet a GitHub-ba, ha összeköttetésben áll a fiókjával."
 
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact the admin for help."
-msgstr ""
+msgstr "Másképp fell kell keresse az Admint segítségért."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -1899,6 +1914,8 @@ msgid ""
 "This email has been sent to you because someone (hopefully you) has "
 "entered your email address as a user's email."
 msgstr ""
+"Ezt az Emailt azért küldtük, mert (remélhetőleg Ön) ezt az Email címet adta "
+"meg sajátjaként."
 
 #: app/templates/emails/verify.html:11
 msgid "If it wasn't you, then just delete this email."
@@ -1931,6 +1948,8 @@ msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address in the unsubscribe form."
 msgstr ""
+"Ezt az Emailt azért küldtük, mert (remélhetőleg Ön) megadta ezt az Email "
+"címet a leiratkozási lapon."
 
 #: app/templates/macros/audit_log.html:13
 #, python-format
@@ -1949,23 +1968,23 @@ msgstr ""
 #: app/templates/packages/remove.html:48 app/templates/packages/view.html:464
 #: app/templates/users/modtools.html:86
 msgid "Required"
-msgstr ""
+msgstr "Szükséges"
 
 #: app/templates/macros/forms.html:122
 msgid "Start typing to see suggestions"
-msgstr ""
+msgstr "Kezdjen el írni javasjatok megjelenítéséhez"
 
 #: app/templates/macros/package_approval.html:5 app/templates/todo/user.html:35
 msgid "State"
-msgstr ""
+msgstr "Állapot"
 
 #: app/templates/macros/package_approval.html:36
 msgid "Please wait for the release to be approved."
-msgstr ""
+msgstr "Kérjük várjon, amíg a kiadást engedélyezik."
 
 #: app/templates/macros/package_approval.html:38
 msgid "You can now approve this package if you're ready."
-msgstr ""
+msgstr "Ha készen áll, már engedélyezheti ezt a csomagot."
 
 #: app/templates/macros/package_approval.html:40
 msgid "Please wait for the package to be approved."
@@ -1981,11 +2000,11 @@ msgstr "Ez a csomag elküldhető engedélyezésre, ha készen áll."
 
 #: app/templates/macros/package_approval.html:49
 msgid "You need to fix the above errors before you can submit for review"
-msgstr ""
+msgstr "Mielőtt megosztja véleményét, meg kell oldania a fentebbi hibákat"
 
 #: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
-msgstr ""
+msgstr "Csomagengedélyezési szál"
 
 #: app/templates/macros/package_approval.html:60
 msgid ""
@@ -2170,49 +2189,50 @@ msgstr ""
 
 #: app/templates/macros/threads.html:122
 msgid "This thread has been locked by a moderator."
-msgstr ""
+msgstr "Ez a szál zárolva lett egy moderátor által."
 
 #: app/templates/macros/threads.html:132
 msgid "Reply"
-msgstr ""
+msgstr "Válasz"
 
 #: app/templates/macros/threads.html:153
 msgid "Please wait before commenting again."
-msgstr ""
+msgstr "Kérjük várjon mielőtt új véleményt írna."
 
 #: app/templates/macros/threads.html:159
 msgid "This thread has been locked."
-msgstr ""
+msgstr "Ez a szál zárolva van."
 
 #: app/templates/macros/threads.html:161
 msgid "You don't have permission to post."
-msgstr ""
+msgstr "Nincs jogosultsága posztot készíteni."
 
 #: app/templates/macros/threads.html:181
 msgid "You can add someone to a private thread by writing @username."
-msgstr ""
+msgstr "Hozzáadhat valakit egy privát szálhoz @felhasználónév írásával."
 
 #: app/templates/macros/threads.html:199 app/templates/macros/threads.html:281
 msgid "No threads found"
-msgstr ""
+msgstr "Nem találhatóak szálak"
 
 #: app/templates/macros/threads.html:207
+#, fuzzy
 msgid "Thread"
-msgstr ""
+msgstr "Szál"
 
 #: app/templates/macros/threads.html:211
 msgid "Last Reply"
-msgstr ""
+msgstr "Legutóbbi válasz"
 
 #: app/templates/macros/todo.html:21
-#, python-format
+#, fuzzy, python-format
 msgid "On %(trigger)s, do %(action)s"
-msgstr ""
+msgstr "ezek által:%(trigger)s, tegye ezeket:%(action)s"
 
 #: app/templates/macros/todo.html:35 app/templates/packages/view.html:122
 #: app/templates/packages/view.html:429
 msgid "Release"
-msgstr ""
+msgstr "Kiadás"
 
 #: app/templates/macros/todo.html:42
 msgid "Repo"
@@ -2222,23 +2242,23 @@ msgstr ""
 #: app/templates/packages/releases_list.html:13
 #: app/templates/packages/view.html:433
 msgid "Update settings"
-msgstr ""
+msgstr "Frissítési beállítások"
 
 #: app/templates/macros/todo.html:55 app/templates/macros/todo.html:85
 msgid "No outdated packages."
-msgstr ""
+msgstr "Nincsenek elavult csomagok."
 
 #: app/templates/macros/topics.html:6 app/templates/packages/view.html:177
 msgid "Author"
-msgstr ""
+msgstr "Szerző"
 
 #: app/templates/macros/topics.html:8
 msgid "Date"
-msgstr ""
+msgstr "Dátum"
 
 #: app/templates/macros/topics.html:9
 msgid "Actions"
-msgstr ""
+msgstr "Műveletek"
 
 #: app/templates/macros/topics.html:18 app/templates/macros/topics.html:54
 #: app/templates/modnames/view.html:29 app/templates/packages/similar.html:40
@@ -2248,24 +2268,25 @@ msgstr ""
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr ""
+msgstr "Mod nevek"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr ""
+msgstr "Nem találhatóak mod nevek."
 
 #: app/templates/modnames/view.html:10
 #, python-format
 msgid "Mod Name \"%(name)s\""
-msgstr ""
+msgstr "Mod nevek %(name)s"
 
 #: app/templates/modnames/view.html:12
+#, fuzzy
 msgid "Provided By"
-msgstr ""
+msgstr "Ezáltal elérhető"
 
 #: app/templates/modnames/view.html:21
 msgid "Forum Topics"
-msgstr ""
+msgstr "Fórum Témák"
 
 #: app/templates/modnames/view.html:27 app/templates/oauth/authorize.html:32
 #: app/templates/packages/game_support.html:42
@@ -2275,36 +2296,36 @@ msgstr ""
 #: app/templates/todo/game_support.html:45
 #, python-format
 msgid "%(title)s by %(display_name)s"
-msgstr ""
+msgstr "%(title)s a %(display_name)s-től"
 
 #: app/templates/modnames/view.html:35
 msgid "Required By"
-msgstr ""
+msgstr "Szükséges Hozzá"
 
 #: app/templates/modnames/view.html:38
 msgid "Optionally Used By"
-msgstr ""
+msgstr "Opcionálisan Használja"
 
 #: app/templates/notifications/list.html:14
 msgid "Edit email notification settings"
-msgstr ""
+msgstr "Email értesítések módosítása"
 
 #: app/templates/notifications/list.html:22
 msgid "Newest first."
-msgstr ""
+msgstr "Legújabb legelöl."
 
 #: app/templates/notifications/list.html:27
 msgid "Your Notifications"
-msgstr ""
+msgstr "Az Értesítései"
 
 #: app/templates/notifications/list.html:61
 #: app/templates/notifications/list.html:99
 msgid "No notifications"
-msgstr ""
+msgstr "Nincsenek értesítések"
 
 #: app/templates/notifications/list.html:66
 msgid "Editor/Approver Notifications"
-msgstr ""
+msgstr "Szerkesztő/Engedélyező Értesítések"
 
 #: app/templates/oauth/authorize.html:4
 #, python-format
@@ -2314,11 +2335,12 @@ msgstr ""
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "Szeretne hozzáférni a %(name)s profiljához"
 
 #: app/templates/oauth/authorize.html:46
+#, fuzzy
 msgid "Verified application"
-msgstr ""
+msgstr "Ellenőrzött alkalmazás"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
@@ -4894,4 +4916,3 @@ msgstr ""
 
 #~ msgid "Topics with a strikethrough have been marked as discarded."
 #~ msgstr ""
-
