@@ -1,0 +1,116 @@
+{% extends "base.html" %}
+
+{% block title %}
+	Approval Stats
+{% endblock %}
+
+{% block content %}
+<h1>{{ self.title() }}</h1>
+
+<p class="float-end">
+	<a href="{{ url_for('admin.approval_stats', start='2020-07-01') }}">Since Aug 2020</a> |
+	<a href="{{ url_for('admin.approval_stats') }}">Last 365 days</a>
+</p>
+
+{% if start or end %}
+<p>
+	From {{ start.date() }} to {{ end.date() }}.
+</p>
+{% endif %}
+
+<div class="row mb-5">
+	<div class="col-md-4">
+		<div class="card h-100">
+			<div class="card-body align-items-center text-center">
+				<div class="mt-0 mb-3">
+					Total packages submitted
+				</div>
+				<div class="my-0 h4">
+					{{ stats.packages_info | length }}
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card h-100">
+			<div class="card-body align-items-center text-center">
+				<div class="mt-0 mb-3">
+					Average turnaround time
+				</div>
+				<div class="my-0 h4">
+					{{ (stats.avg_turnaround_time / (60*60*24)) | round(1) }} days
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="col-md-4">
+		<div class="card h-100">
+			<div class="card-body align-items-center text-center">
+				<div class="mt-0 mb-3">
+					Max turnaround time
+				</div>
+				<div class="my-0 h4">
+					{{ (stats.max_turnaround_time / (60*60*24)) | round(1) }} days
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<p class="text-muted">
+	Turnaround: how long after clicking "Ready for Review" does the package receive a response. A package can be marked
+	as ready for review multiple times.
+</p>
+
+<h2>Editor Approvals</h2>
+
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>Count</th>
+	</tr>
+	{% for name, count in stats.editor_approvals.items() | sort(attribute=1, reverse=True) %}
+		<tr>
+			<td>{{ name }}</td>
+			<td>{{ count }}</td>
+		</tr>
+	{% endfor %}
+</table>
+
+
+<h2>Packages</h2>
+
+<table class="table">
+	<tr>
+		<th>Name</th>
+		<th>First submitted</th>
+		<th>Approved at</th>
+		<th>Time waiting for review</th>
+		<th>Time to approve</th>
+	</tr>
+	{% for name, info in stats.packages_info.items() | sort(attribute="1", reverse=True) %}
+		{% set parts = name.split("/") %}
+		<tr>
+			<td><a href="{{ url_for('packages.audit', author=parts[0], name=parts[1]) }}">{{ name }}</a></td>
+			<td>{{ info.first_submitted.date() }}</td>
+			<td>{% if info.approved_at %}{{ info.approved_at.date() }}{% endif %}</td>
+			<td>{{ (info.wait_time / (60*60*24)) | round(1) }}</td>
+			<td>
+				{% set approval_time = info.total_approval_time %}
+				{% if approval_time >= 0 %}
+					{{ (approval_time / (60*60*24)) | round(1) }}
+				{% endif %}
+			</td>
+		</tr>
+	{% endfor %}
+</table>
+
+
+<h2>Export</h2>
+<p>
+	<a href="{{ url_for('admin.approval_stats_json') }}">approval_stats.json</a>
+</p>
+
+{% endblock %}
