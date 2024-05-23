@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-04-03 18:34+0100\n"
-"PO-Revision-Date: 2023-11-05 15:03+0000\n"
+"PO-Revision-Date: 2024-05-23 19:09+0000\n"
 "Last-Translator: John Donne <akheron@zaclys.net>\n"
+"Language-Team: French <https://hosted.weblate.org/projects/minetest/"
+"contentdb/fr/>\n"
 "Language: fr\n"
-"Language-Team: French "
-"<https://hosted.weblate.org/projects/minetest/contentdb/fr/>\n"
-"Plural-Forms: nplurals=2; plural=n > 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 5.6-dev\n"
 "Generated-By: Babel 2.12.1\n"
 
 #: app/__init__.py:137
@@ -40,7 +41,7 @@ msgstr "Paquets"
 #: app/querybuilder.py:56
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
-msgstr ""
+msgstr "%(package_type)s pour %(game_name)s"
 
 #: app/template_filters.py:92
 #, python-format
@@ -106,7 +107,7 @@ msgstr "Privé"
 
 #: app/blueprints/collections/__init__.py:83
 msgid "Pinned to my profile"
-msgstr ""
+msgstr "Épinglé à mon profil"
 
 #: app/blueprints/collections/__init__.py:155
 msgid "A collection with a similar title already exists"
@@ -164,15 +165,15 @@ msgstr "Description"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr ""
+msgstr "Rediriger l'URL"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
-msgstr ""
+msgstr "Type d'App"
 
 #: app/blueprints/oauth/__init__.py:257
 msgid "Revoked all user tokens"
-msgstr ""
+msgstr "Tous les jetons de l'utilisateur ont été révoqués"
 
 #: app/blueprints/packages/__init__.py:32
 #: app/templates/packages/create_edit.html:29
@@ -182,7 +183,7 @@ msgstr "Éditer les détails"
 #: app/blueprints/packages/__init__.py:37
 #: app/templates/packages/translation.html:4
 msgid "Translation"
-msgstr ""
+msgstr "Traduction"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
@@ -311,7 +312,7 @@ msgstr "URL de don"
 
 #: app/blueprints/packages/packages.py:248
 msgid "Translation URL"
-msgstr ""
+msgstr "URL de la traduction"
 
 #: app/blueprints/packages/packages.py:254
 msgid "_game is not an allowed name"
@@ -339,10 +340,12 @@ msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr ""
+"Vous devez ajouter une adresse électronique à votre compte et la certifier "
+"avant de pouvoir organiser des paquets"
 
 #: app/blueprints/packages/packages.py:334
 msgid "Save draft"
-msgstr ""
+msgstr "Conserver le brouillon"
 
 #: app/blueprints/packages/packages.py:342
 msgid "Unable to find that user"
@@ -369,6 +372,8 @@ msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr ""
+"Veuillez commenter dans le fil d'approbation afin que les éditeurs sachent "
+"ce que vous avez modifié"
 
 #: app/blueprints/packages/packages.py:493
 msgid "Deleted package"
@@ -831,7 +836,7 @@ msgstr "Jeton de vérification inconnu !"
 
 #: app/blueprints/users/account.py:325
 msgid "Token has expired"
-msgstr "Jeton de vérification expiré"
+msgstr "Le jeton de vérification a expiré"
 
 #: app/blueprints/users/account.py:339
 msgid "Another user is already using that email"
@@ -1016,11 +1021,11 @@ msgstr "Courriels et notifications"
 
 #: app/blueprints/users/settings.py:52 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
-msgstr "Tokens d'API"
+msgstr "Jetons d'API"
 
 #: app/blueprints/users/settings.py:60 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
-msgstr ""
+msgstr "Applications OAuth2"
 
 #: app/blueprints/users/settings.py:67 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
@@ -1112,6 +1117,8 @@ msgid ""
 "What games does your package support? Please specify on the supported "
 "games page"
 msgstr ""
+"Avec quels jeux votre paquet est-il compatible ? Veuillez le spécifier sur "
+"les pages respectives des jeux compatibles"
 
 #: app/logic/package_approval.py:126
 msgid "Please wait for the license to be added to CDB."
@@ -1154,6 +1161,8 @@ msgid ""
 "Warning: Forum topic not found. The topic may have been created since the"
 " last forum crawl."
 msgstr ""
+"Avertissement : sujet non trouvé dans le forum. Celui-ci pourrait avoir été "
+"créé après la dernière indexation du forum."
 
 #: app/logic/packages.py:99
 msgid ""
@@ -1193,7 +1202,7 @@ msgstr "Trop de requêtes, veuillez attendre avant de réessayer"
 
 #: app/logic/screenshots.py:34
 msgid "a PNG, JPEG, or WebP image file"
-msgstr ""
+msgstr "un fichier image PNG, JPEG, ou WebP"
 
 #: app/logic/screenshots.py:51
 #, python-format
@@ -1377,7 +1386,7 @@ msgstr "Se déconnecter"
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
 #: app/templates/packages/view.html:598 app/utils/minetest_hypertext.py:256
 msgid "Languages"
-msgstr ""
+msgstr "Langues"
 
 #: app/templates/base.html:202 app/templates/translate/index.html:76
 msgid "Help translate ContentDB"
@@ -1428,7 +1437,7 @@ msgstr "Paquets pris en charge"
 
 #: app/templates/base.html:258
 msgid "Translate Packages"
-msgstr ""
+msgstr "Traduire des paquets"
 
 #: app/templates/base.html:259
 msgid "Source Code"
@@ -1436,11 +1445,11 @@ msgstr "Code source"
 
 #: app/templates/base.html:265
 msgid "Show non-free packages"
-msgstr ""
+msgstr "Afficher les paquets non libres"
 
 #: app/templates/base.html:267
 msgid "Hide non-free packages"
-msgstr ""
+msgstr "Ne pas afficher les paquets non libres"
 
 #: app/templates/index.html:4
 msgid "Welcome"
@@ -1519,7 +1528,7 @@ msgstr "Les plus évalués"
 
 #: app/templates/index.html:191
 msgid "All reviews"
-msgstr ""
+msgstr "Tous les commentaires"
 
 #: app/templates/index.html:193
 msgid "Recent Positive Reviews"
@@ -1569,11 +1578,11 @@ msgstr "Pas de résultat"
 
 #: app/templates/admin/languages/list.html:19
 msgid "Id"
-msgstr ""
+msgstr "Id"
 
 #: app/templates/admin/languages/list.html:33
 msgid "Has ContentDB translation?"
-msgstr ""
+msgstr "ContentDB dispose-t-il de traductions ?"
 
 #: app/templates/admin/licenses/list.html:8
 msgid "New License"
@@ -1613,40 +1622,40 @@ msgstr "Modification - %(name)s"
 
 #: app/templates/api/create_edit_token.html:7
 msgid "Create API Token"
-msgstr "Créer un jeton API"
+msgstr "Créer un jeton d'API"
 
 #: app/templates/api/create_edit_token.html:25
 #, python-format
 msgid "This token was created by the application '%(title)s' by %(author)s."
-msgstr ""
+msgstr "Ce jeton a été créé par l'application %(title)s de %(author)s."
 
 #: app/templates/api/create_edit_token.html:26
 msgid "Click 'Delete' to revoke access."
-msgstr ""
+msgstr "Cliquez sur « Supprimer » pour révoquer l'accès."
 
 #: app/templates/api/create_edit_token.html:30
 msgid "API Tokens allow scripts to act on your behalf."
-msgstr "Les Tokens d'API permettent à des scripts d'agir en votre nom."
+msgstr "Les jetons d'API permettent à des scripts d'agir en votre nom."
 
 #: app/templates/api/create_edit_token.html:31
 msgid ""
 "Be careful with what/whom you share tokens with, as you are responsible "
 "for your account's actions."
 msgstr ""
-"Faites attention à qui et à quoi vous donnez vos Tokens, car vous êtes "
-"responsable des actions de votre compte."
+"Soyez prudent concernant ceux avec qui/ce avec quoi vous partagez vos "
+"jetons, car vous êtes responsable des actions de votre compte."
 
 #: app/templates/api/create_edit_token.html:36
 msgid "Access Token"
-msgstr "Token d'accès"
+msgstr "Jeton d'accès"
 
 #: app/templates/api/create_edit_token.html:39
 msgid ""
 "For security reasons, access tokens will only be shown once. Reset the "
 "token if it is lost."
 msgstr ""
-"Pour des raisons de sécurité, les tokens ne sont affichés qu'une seule "
-"fois. Réinitialisez le token s'il est perdu."
+"Pour des raisons de sécurité, les jetons ne sont affichés qu'une seule fois. "
+"Réinitialisez le jeton s'il est perdu."
 
 #: app/templates/api/create_edit_token.html:46
 msgid "Reset"
@@ -1654,13 +1663,12 @@ msgstr "Réinitialiser"
 
 #: app/templates/api/create_edit_token.html:56
 msgid "Human-readable name to tell tokens apart."
-msgstr "Nom lisible pour distinguer les jetons."
+msgstr "Nom lisible par un humain pour en distinguer les jetons."
 
 #: app/templates/api/create_edit_token.html:57
 msgid "Recommended: Only allows token to interact with a particular package."
 msgstr ""
-"Recommandé : Permet uniquement au token d'interagir avec un paquet "
-"particulier."
+"Recommandé : Permet au jeton de n'interagir qu'avec un paquet particulier."
 
 #: app/templates/api/list_tokens.html:4
 #, python-format
@@ -1680,11 +1688,11 @@ msgstr "Documentation de l'API"
 
 #: app/templates/api/list_tokens.html:17
 msgid "Application"
-msgstr ""
+msgstr "Application"
 
 #: app/templates/api/list_tokens.html:24
 msgid "No tokens created"
-msgstr "Aucun token créé"
+msgstr "Aucun jeton créé"
 
 #: app/templates/collections/create_edit.html:5
 #: app/templates/collections/view.html:42 app/templates/macros/releases.html:68
@@ -1702,7 +1710,7 @@ msgstr "Les utilisateurs ne seront pas redirigés en utilisant l'ancienne URL"
 
 #: app/templates/collections/create_edit.html:46
 msgid "This requires the collection to be public"
-msgstr ""
+msgstr "Cela nécessite que la collection soit publique"
 
 #: app/templates/collections/create_edit.html:76
 #: app/templates/packages/remove.html:58 app/templates/packages/view.html:128
@@ -1905,6 +1913,8 @@ msgstr ""
 #: app/templates/emails/unable_to_find_account.html:9
 msgid "Otherwise, you may need to contact the admin for help."
 msgstr ""
+"Autrement, vous pourriez avoir besoin de contacter l'administrateur pour de "
+"l'aide."
 
 #: app/templates/emails/unable_to_find_account.html:12
 msgid ""
@@ -2012,6 +2022,8 @@ msgstr "Ce paquet peut être soumis pour approbation dès qu'il est prêt."
 #: app/templates/macros/package_approval.html:49
 msgid "You need to fix the above errors before you can submit for review"
 msgstr ""
+"Vous devez corriger les erreurs ci-dessus avant de pouvoir prétendre à une "
+"vérification"
 
 #: app/templates/macros/package_approval.html:59
 msgid "Package approval thread"
@@ -2353,42 +2365,42 @@ msgstr "Notifications des éditeurs et approbateurs"
 #: app/templates/oauth/authorize.html:4
 #, python-format
 msgid "Authorize %(title)s"
-msgstr ""
+msgstr "Autoriser %(title)s"
 
 #: app/templates/oauth/authorize.html:35
 #, python-format
 msgid "wants to access your %(name)s account"
-msgstr ""
+msgstr "veut accéder à votre compte %(name)s"
 
 #: app/templates/oauth/authorize.html:46
 msgid "Verified application"
-msgstr ""
+msgstr "Application vérifiée"
 
 #: app/templates/oauth/authorize.html:49
 msgid "ContentDB trusts this application"
-msgstr ""
+msgstr "ContentDB fait confiance à cette application"
 
 #: app/templates/oauth/authorize.html:60
 msgid "Public data only"
-msgstr ""
+msgstr "Données publiques seulement"
 
 #: app/templates/oauth/authorize.html:63
 msgid "Read-only access to your public data"
-msgstr ""
+msgstr "Accès en lecture-seule à vos données publiques"
 
 #: app/templates/oauth/authorize.html:76
 msgid "Authorize"
-msgstr ""
+msgstr "Autoriser"
 
 #: app/templates/oauth/authorize.html:85
 #, python-format
 msgid "About %(title)s"
-msgstr ""
+msgstr "À propos de %(title)s"
 
 #: app/templates/oauth/authorize.html:91
 #: app/templates/oauth/create_edit.html:26
 msgid "Application isn't approved yet"
-msgstr ""
+msgstr "L'application n'a pas encore été approuvée"
 
 #: app/templates/oauth/authorize.html:93
 #: app/templates/oauth/create_edit.html:28
@@ -2396,25 +2408,30 @@ msgid ""
 "To allow users other than yourself to log in, you'll need to contact "
 "ContentDB staff and ask them to approve your app."
 msgstr ""
+"Afin de permettre à des utilisateurs autres que vous de se connecter, vous "
+"aurez besoin de contacter l'équipe de ContentDB et de leur demander "
+"d'approuver votre application."
 
 #: app/templates/oauth/create_edit.html:7
 msgid "Create OAuth Client"
-msgstr ""
+msgstr "Créer un client OAuth"
 
 #: app/templates/oauth/create_edit.html:36
 #, python-format
 msgid "Your application has %(count)d users"
-msgstr ""
+msgstr "Votre application a %(count)d utilisateurs"
 
 #: app/templates/oauth/create_edit.html:37
 msgid "Revoke all user tokens"
-msgstr ""
+msgstr "Révoquer les jetons de tous les utilisateurs"
 
 #: app/templates/oauth/create_edit.html:51
 msgid ""
 "You must keep the secret safe. If you are unable, set the app type to "
 "'client-side'."
 msgstr ""
+"Vous devez conserver le secret en sûreté. Si vous n'en êtes pas capable, "
+"définissez le type d'app en « client-side »."
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
@@ -2422,28 +2439,28 @@ msgstr ""
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
-msgstr ""
+msgstr "Affiché aux utilisateurs lorsque vous demandez l'accès à leur compte"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
-msgstr ""
+msgstr "Où allez-vous stocker votre client_secret ?"
 
 #: app/templates/oauth/list_clients.html:4
 #, python-format
 msgid "OAuth2 Applications | %(username)s"
-msgstr ""
+msgstr "Applications OAuth2 | %(username)s"
 
 #: app/templates/oauth/list_clients.html:9
 msgid "OAuth2 Documentation"
-msgstr ""
+msgstr "Documentation d'OAuth2"
 
 #: app/templates/oauth/list_clients.html:16
 msgid "Unpublished"
-msgstr ""
+msgstr "Non publié"
 
 #: app/templates/oauth/list_clients.html:22
 msgid "No applications created"
-msgstr ""
+msgstr "Aucune application créée"
 
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
@@ -2546,6 +2563,9 @@ msgid ""
 "anywhere in the short description. It is unnecessary and wastes "
 "characters."
 msgstr ""
+"Conseil : N'incluez nulle part <i>Minetest</i>, <i>mod</i>, ou <i>modpack</"
+"i> dans la description courte. Ce n'est pas nécessaire et cela gâche des "
+"caractères."
 
 #: app/templates/packages/create_edit.html:83
 msgid ""
@@ -2566,22 +2586,28 @@ msgid ""
 "There's no need to link to the package on ContentDB in the long "
 "description, the user is already here!"
 msgstr ""
+"Il n'est pas nécessaire de mettre un lien vers le paquet sur ContentDB dans "
+"la description longue, l'utilisateur étant déjà là !"
 
 #: app/templates/packages/create_edit.html:95
 msgid ""
 "There's no need to include the forum topic in the long description, it's "
 "already shown on the page."
 msgstr ""
+"Il n'est pas nécessaire d'inclure le lien vers le forum dans la description "
+"longue, celui-ci est déjà affiché sur la page."
 
 #: app/templates/packages/create_edit.html:98
 msgid ""
 "There's no need to include the repository URL in the long description, "
 "it's already shown on the page."
 msgstr ""
+"Il n'est pas nécessaire d'inclure l'URL du dépôt dans la description longue, "
+"celui-ci est déjà affiché sur la page."
 
 #: app/templates/packages/create_edit.html:102
 msgid "What to write in the long description"
-msgstr ""
+msgstr "Qu'écrire dans la description longue"
 
 #: app/templates/packages/create_edit.html:108
 msgid "Repository and Links"
@@ -2640,12 +2666,17 @@ msgstr ""
 #: app/templates/packages/create_edit.html:140
 msgid "How can users translate your package? ie: weblate URL or a help page"
 msgstr ""
+"Comment les utilisateurs peuvent-ils traduire votre paquet ? ie : URL de "
+"Weblate ou page d'aide"
 
 #: app/templates/packages/create_edit.html:145
 msgid ""
 "You need to save a draft before you can add releases and screenshots. "
 "You'll be able to edit the package again before submitting for approval."
 msgstr ""
+"Vous devez sauvegarder un brouillon avant de pouvoir ajouter des "
+"publications et des captures d'écran. Vous pourrez modifier le paquet à "
+"nouveau avant de demander une validation."
 
 #: app/templates/packages/edit_maintainers.html:4
 msgid "Edit Maintainers"
@@ -5186,4 +5217,3 @@ msgstr ""
 
 #~ msgid "Topics with a strikethrough have been marked as discarded."
 #~ msgstr "Les sujets barrés ont été marqués comme rejetés."
-
