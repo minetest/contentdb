@@ -13,13 +13,16 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import smtplib
 import typing
 from typing import Dict
 
-from flask import render_template, escape
+from flask import render_template
 from flask_babel import force_locale, gettext, lazy_gettext, LazyString
 from flask_mail import Message
+from markupsafe import escape
+
 from app import mail
 from app.models import Notification, db, EmailSubscription, User
 from app.rediscache import increment_key

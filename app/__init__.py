@@ -23,7 +23,6 @@ from flask_babel import Babel, gettext
 from flask_flatpages import FlatPages
 from flask_flatpages.utils import pygmented_markdown
 from flask_github import GitHub
-from flask_gravatar import Gravatar
 from flask_login import logout_user, current_user, LoginManager
 from flask_mail import Mail
 from flask_wtf.csrf import CSRFProtect
@@ -108,14 +107,6 @@ csrf = CSRFProtect(app)
 mail = Mail(app)
 pages = FlatPages(app)
 babel = Babel()
-gravatar = Gravatar(app,
-		size=64,
-		rating="g",
-		default="retro",
-		force_default=False,
-		force_lower=False,
-		use_ssl=True,
-		base_url=None)
 init_markdown(app)
 
 login_manager = LoginManager()

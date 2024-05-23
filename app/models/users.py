@@ -21,7 +21,6 @@ from flask import url_for
 from flask_login import UserMixin
 from sqlalchemy import desc, text
 
-from app import gravatar
 from . import db
 
 
@@ -233,7 +232,8 @@ class User(db.Model, UserMixin):
 		elif self.rank == UserRank.BOT:
 			return "/static/bot_avatar.png"
 		else:
-			return gravatar(self.email or f"{self.username}@content.minetest.net")
+			from app.utils.gravatar import get_gravatar
+			return get_gravatar(self.email or f"{self.username}@content.minetest.net")
 
 	def check_perm(self, user, perm):
 		if not user.is_authenticated:
