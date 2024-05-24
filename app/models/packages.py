@@ -22,7 +22,7 @@ import os
 import typing
 from flask import url_for
 from flask_babel import lazy_gettext, get_locale, gettext
-from flask_sqlalchemy import BaseQuery
+from flask_sqlalchemy.query import Query
 from sqlalchemy import or_, func
 from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy_searchable import SearchQueryMixin
@@ -33,7 +33,7 @@ from . import db
 from .users import Permission, UserRank, User
 
 
-class PackageQuery(BaseQuery, SearchQueryMixin):
+class PackageQuery(Query, SearchQueryMixin):
 	pass
 
 
