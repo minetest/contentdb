@@ -23,7 +23,7 @@ from flask_babel import lazy_gettext, LazyString
 
 from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
-	License, UserRank, PackageDevState
+	License, PackageDevState
 from app.utils import add_audit_log, has_blocked_domains, diff_dictionaries, describe_difference
 from app.utils.url import clean_youtube_url
 
@@ -103,8 +103,7 @@ def validate(data: dict):
 		if value is not None:
 			check(value.startswith("http://") or value.startswith("https://"),
 					key + " must start with http:// or https://")
-
-			check(validators.url(value, public=True), key + " must be a valid URL")
+			check(validators.url(value), key + " must be a valid URL")
 
 
 def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, data: dict,
