@@ -22,18 +22,22 @@
 	</div>
 	<div class="col">
 		{% if user.forums_username %}
-			<form method="post" action="{{ url_for('users.user_check_forums', username=user.username) }}" class="" style="display:inline-block;">
+			<form method="post" action="{{ url_for('users.user_check_forums', username=user.username) }}" class="me-2" style="display:inline-block;">
 				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 				<input type="submit" class="btn btn-primary" value="{{  _('Import from forums') }}" />
 			</form>
 		{% endif %}
 		{% if user.profile_pic %}
+			<form method="post" action="{{ url_for('users.user_remove_profile_pic', username=user.username) }}" class="me-2" style="display:inline-block;">
+				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+				<input type="submit" class="btn btn-secondary" value="{{  _('Remove profile picture') }}" />
+			</form>
 		{% elif user.email %}
 			<a class="btn btn-primary" href="https://en.gravatar.com/">
 				Gravatar
 			</a>
 		{% else %}
-			<a class="btn btn-primary disabled"
+			<a class="btn btn-secondary disabled"
 					data-toggle="tooltip" data-placement="bottom"
 					title="Please add an email address to use Gravatar"
 					style="pointer-events: all;">

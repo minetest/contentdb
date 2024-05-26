@@ -259,6 +259,18 @@ def user_check_forums(username):
 	return redirect(url_for("tasks.check", id=task.id, r=next_url))
 
 
+@bp.route("/users/<username>/remove-profile-pic/", methods=["POST"])
+@login_required
+def user_remove_profile_pic(username):
+	user = User.query.filter_by(username=username).one_or_404()
+	if current_user != user and not current_user.rank.at_least(UserRank.MODERATOR):
+		abort(403)
+
+	user.profile_pic = None
+	db.session.commit()
+	return redirect(url_for("users.profile_edit", username=username))
+
+
 @bp.route("/user/stats/")
 @login_required
 def statistics_redirect():
