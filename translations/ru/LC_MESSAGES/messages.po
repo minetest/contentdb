@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-04-03 18:34+0100\n"
-"PO-Revision-Date: 2024-05-19 07:01+0000\n"
+"PO-Revision-Date: 2024-05-29 11:26+0000\n"
 "Last-Translator: BlackImpostor <SkyBuilderOFFICAL@yandex.ru>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
 "contentdb/ru/>\n"
@@ -116,7 +116,9 @@ msgstr "Коллекция с похожим названием уже суще�
 
 #: app/blueprints/collections/__init__.py:161
 msgid "Unable to create collection as a package with that name already exists"
-msgstr "Не удается создать коллекцию, поскольку мод с таким именем уже существует"
+msgstr ""
+"Не удается создать коллекцию, поскольку пакет с таким названием уже "
+"существует"
 
 #: app/blueprints/collections/__init__.py:307
 msgid "Added package to collection"
@@ -166,7 +168,7 @@ msgstr "Описание"
 
 #: app/blueprints/oauth/__init__.py:170
 msgid "Redirect URL"
-msgstr "Перенаправление URL"
+msgstr "URL-адрес Перенаправления"
 
 #: app/blueprints/oauth/__init__.py:171
 msgid "App Type"
@@ -289,15 +291,15 @@ msgstr "Длинное описание (Markdown)"
 
 #: app/blueprints/packages/packages.py:242
 msgid "VCS Repository URL"
-msgstr "URL VCS сетевого хранилища"
+msgstr "URL-адрес сетевого хранилища VCS"
 
 #: app/blueprints/packages/packages.py:243 app/blueprints/users/settings.py:76
 msgid "Website URL"
-msgstr "Адрес страницы"
+msgstr "URL-адрес Вебсайта"
 
 #: app/blueprints/packages/packages.py:244
 msgid "Issue Tracker URL"
-msgstr "URL issue трекера"
+msgstr "URL-адрес Трекера Проблем"
 
 #: app/blueprints/packages/packages.py:245
 msgid "Forum Topic ID"
@@ -305,15 +307,15 @@ msgstr "Идентификатор темы на форуме"
 
 #: app/blueprints/packages/packages.py:246
 msgid "Video URL"
-msgstr "Адрес видео"
+msgstr "URL-адрес Видео"
 
 #: app/blueprints/packages/packages.py:247
 msgid "Donate URL"
-msgstr "Ссылка на донат"
+msgstr "URL-адрес на Пожертвование"
 
 #: app/blueprints/packages/packages.py:248
 msgid "Translation URL"
-msgstr "Ссылка на Перевод"
+msgstr "URL-адрес на Перевод"
 
 #: app/blueprints/packages/packages.py:254
 msgid "_game is not an allowed name"
@@ -462,7 +464,7 @@ msgstr "Максимальная версия Minetest"
 #: app/blueprints/packages/releases.py:67
 #: app/templates/packages/release_edit.html:23
 msgid "URL"
-msgstr "Ссылка"
+msgstr "URL-адрес"
 
 #: app/blueprints/packages/releases.py:68
 msgid "Task ID"
@@ -538,8 +540,8 @@ msgstr "Отключить Автоматизацию"
 #: app/blueprints/packages/releases.py:304
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
-"Пожалуйста, добавьте адрес Git репозитория чтобы настроить автоматические"
-" релизы"
+"Пожалуйста, добавьте URL-адрес Git репозитория чтобы настроить "
+"автоматические релизы"
 
 #: app/blueprints/packages/releases.py:320
 msgid "Deleted update configuration"
@@ -1028,7 +1030,7 @@ msgstr "Инструменты модератора"
 
 #: app/blueprints/users/settings.py:77
 msgid "Donation URL"
-msgstr "Страница пожертвований"
+msgstr "URL-адрес Пожертвований"
 
 #: app/blueprints/users/settings.py:93 app/blueprints/users/settings.py:100
 msgid "A user already has that name"
@@ -2419,7 +2421,7 @@ msgstr ""
 
 #: app/templates/oauth/create_edit.html:56
 msgid "Example Authorize URL"
-msgstr "Пример URL-адреса авторизации"
+msgstr "Пример URL-адреса Авторизации"
 
 #: app/templates/oauth/create_edit.html:68
 msgid "Shown to users when you request access to their account"
@@ -2612,7 +2614,7 @@ msgstr ""
 
 #: app/templates/packages/create_edit.html:121
 msgid "HTTP URL to a Git, Mercurial, or other repository"
-msgstr "URL-адрес HTTP в Git, Mercurial, или другой репозиторий"
+msgstr "HTTP URL-адрес Git, Mercurial, или другого репозитория"
 
 #: app/templates/packages/create_edit.html:124
 msgid "Next (Autoimport)"
@@ -2647,7 +2649,7 @@ msgstr ""
 #: app/templates/packages/create_edit.html:140
 msgid "How can users translate your package? ie: weblate URL or a help page"
 msgstr ""
-"Как пользователи могут перевести ваш пакет? например: веб-адрес или "
+"Как пользователи могут перевести ваш пакет? К примеру: URL-адрес или "
 "страница справки"
 
 #: app/templates/packages/create_edit.html:145
@@ -4640,7 +4642,7 @@ msgstr "Введите адрес электронной почты, котор�
 
 #: app/templates/users/unsubscribe.html:21
 msgid "You will then need to confirm the email"
-msgstr "Затем вам нужно будет подтвердить электронную почту"
+msgstr "Затем, вам нужно будет подтвердить электронную почту"
 
 #: app/templates/users/unsubscribe.html:33
 msgid "You may now unsubscribe."
