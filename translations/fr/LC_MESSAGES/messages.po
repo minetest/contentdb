@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-04-03 18:34+0100\n"
-"PO-Revision-Date: 2024-05-23 19:09+0000\n"
+"PO-Revision-Date: 2024-05-25 14:09+0000\n"
 "Last-Translator: John Donne <akheron@zaclys.net>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/minetest/"
 "contentdb/fr/>\n"
@@ -2716,7 +2716,7 @@ msgstr "Mods et packs de textures pour %(title)s"
 #: app/templates/packages/game_hub.html:34
 #, python-format
 msgid "Search for packages for %(title)s"
-msgstr ""
+msgstr "Rechercher des paquets pour %(title)s"
 
 #: app/templates/packages/game_support.html:9
 msgid "Documentation"
@@ -2954,6 +2954,8 @@ msgstr "Versions de Minetest compatibles"
 #, python-format
 msgid "Are you sure your package doesn't work on versions after %(version)s?"
 msgstr ""
+"Êtes-vous certain(e) que votre paquet ne fonctionne pas avec les versions "
+"postérieures à la version %(version)s ?"
 
 #: app/templates/packages/release_edit.html:62
 #: app/templates/packages/release_new.html:77
@@ -2961,6 +2963,8 @@ msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Minetest versions."
 msgstr ""
+"Ne définissez la version maximale que si vous savez que cela ne fonctionne "
+"pas avec les versions les plus récentes de Minetest."
 
 #: app/templates/packages/release_edit.html:63
 #: app/templates/packages/release_new.html:78
@@ -2968,6 +2972,8 @@ msgid ""
 "Don't set the maximum version just because you haven't tested it on newer"
 " versions."
 msgstr ""
+"Ne définissez pas la version maximale seulement parce que vous ne l'avez pas "
+"testé avec les versions les plus récentes."
 
 #: app/templates/packages/release_edit.html:67
 #: app/templates/packages/release_new.html:88
@@ -3217,7 +3223,7 @@ msgstr ""
 
 #: app/templates/packages/remove.html:28
 msgid "and"
-msgstr ""
+msgstr "et"
 
 #: app/templates/packages/remove.html:34
 #, python-format
@@ -3382,6 +3388,8 @@ msgid ""
 "To provide translations for your %(type)s, you need to create .tr files "
 "and upload a new release."
 msgstr ""
+"Afin de proposer des traductions pour votre %(type)s, vous avez besoin de "
+"créer des fichiers .tr et télécharger une nouvelle version."
 
 #: app/templates/packages/translation.html:19
 msgid ""
@@ -3399,7 +3407,7 @@ msgstr ""
 
 #: app/templates/packages/translation.html:30
 msgid "Translation template"
-msgstr ""
+msgstr "Modèle de traduction"
 
 #: app/templates/packages/translation.html:32
 #, python-format
@@ -3407,19 +3415,23 @@ msgid ""
 "To quickly add support for ContentDB package translation, create a file "
 "at %(location)s with the following content:"
 msgstr ""
+"Afin d'ajouter rapidement la compatibilité avec la traduction de paquet "
+"ContentDB, créez un fichier à %(location)s avec le contenu suivant :"
 
 #: app/templates/packages/translation.html:43
 #, python-format
 msgid "%(title)s is available in %(num)d languages."
-msgstr ""
+msgstr "%(title)s est disponible en %(num)d langues."
 
 #: app/templates/packages/translation.html:44
 msgid "ContentDB reads translations from locale files (.tr) in your package."
 msgstr ""
+"ContentDB lit les traductions depuis les fichiers de localisation (.tr) "
+"présents dans votre paquet."
 
 #: app/templates/packages/translation.html:51
 msgid "Language"
-msgstr ""
+msgstr "Langue"
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -3531,7 +3543,7 @@ msgstr "Suivi des problèmes"
 
 #: app/templates/packages/view.html:231 app/templates/translate/index.html:43
 msgid "Translate"
-msgstr ""
+msgstr "Traduire"
 
 #: app/templates/packages/view.html:310
 msgid "Awaiting review"
@@ -3573,7 +3585,7 @@ msgstr "Ajouter à la collection ..."
 #: app/templates/packages/view.html:406
 #, python-format
 msgid "View %(count)d collections"
-msgstr ""
+msgstr "Afficher %(count)d collections"
 
 #: app/templates/packages/view.html:417
 msgid "Package may be outdated"
@@ -3686,6 +3698,8 @@ msgstr ""
 #: app/templates/report/index.html:16
 msgid "Please sign in or contact the admin using the link below."
 msgstr ""
+"Veuillez vous connecter ou contacter l'administrateur au moyen du lien ci-"
+"dessous."
 
 #: app/templates/report/index.html:34
 msgid "What are you reporting? Why are you reporting it?"
@@ -4083,35 +4097,37 @@ msgstr "Félicitation ! Aucun de vos sujets de forum ne manque sur CDB."
 
 #: app/templates/translate/index.html:4
 msgid "Find packages to translate"
-msgstr ""
+msgstr "Rechercher des paquets à traduire"
 
 #: app/templates/translate/index.html:8
 msgid ""
 "Help make Minetest more accessible by translating packages into other "
 "languages."
 msgstr ""
+"Participez à rendre Minetest plus accessible en traduisant des paquets dans "
+"d'autres langues."
 
 #: app/templates/translate/index.html:65
 msgid "How to translate a mod / game"
-msgstr ""
+msgstr "Comment traduire un mod / un jeu"
 
 #: app/templates/translate/index.html:73
 msgid "ContentDB"
-msgstr ""
+msgstr "ContentDB"
 
 #: app/templates/translate/index.html:80
 msgid "Packages that support translation"
-msgstr ""
+msgstr "Paquets compatibles avec la traduction"
 
 #: app/templates/translate/index.html:85
 #, python-format
 msgid "Only show packages with %(lang)s translation"
-msgstr ""
+msgstr "N'afficher que les paquets disposant d'une traduction en %(lang)s"
 
 #: app/templates/translate/index.html:89
 #, python-format
 msgid "Hide packages with %(lang)s translation"
-msgstr ""
+msgstr "Ne pas afficher les paquets traduits en %(lang)s"
 
 #: app/templates/users/account.html:4
 #, python-format
@@ -4422,7 +4438,7 @@ msgstr "GitHub"
 
 #: app/templates/users/modtools.html:12
 msgid "Storage"
-msgstr ""
+msgstr "Stockage"
 
 #: app/templates/users/modtools.html:20
 #, python-format
@@ -4430,11 +4446,13 @@ msgid ""
 "Total storage usage is %(total_size)d MB (releases %(release_size)d MB, "
 "screenshots %(screenshot_size)d MB)."
 msgstr ""
+"L'espace de stockage total utilisé est de %(total_size)d MB (publications "
+"%(release_size)d MB, captures d'écran %(screenshot_size)d MB)."
 
 #: app/templates/users/modtools.html:23
 #, python-format
 msgid "%(releases)d releases and %(screenshots)d screenshots."
-msgstr ""
+msgstr "%(releases)d publications et %(screenshots)d captures d'écran."
 
 #: app/templates/users/modtools.html:28
 msgid "Edit Account"
@@ -4545,13 +4563,15 @@ msgstr "Image du profil"
 
 #: app/templates/users/profile_edit.html:27
 msgid "Import from forums"
-msgstr ""
+msgstr "Importer depuis les forums"
 
 #: app/templates/users/profile_edit.html:47
 msgid ""
 "Profile pictures should be square, at least 64x64px, and one of the "
 "following formats: jpeg, png, or webp."
 msgstr ""
+"Les photos de profil doivent être carrées, mesurer au moins 64x64px et être "
+"enregistrées dans l'un des formats suivants : jpeg, png ou webp."
 
 #: app/templates/users/profile_edit.html:51
 msgid "Profile Information"
@@ -4629,7 +4649,7 @@ msgstr ""
 
 #: app/templates/users/settings_email.html:43
 msgid "Disable all"
-msgstr ""
+msgstr "Tout désactiver"
 
 #: app/templates/users/settings_email.html:48
 msgid "Event"
@@ -4733,11 +4753,11 @@ msgstr "L'an dernier"
 
 #: app/utils/minetest_hypertext.py:248
 msgid "Unsupported Games"
-msgstr ""
+msgstr "Jeux non compatibles"
 
 #: app/utils/minetest_hypertext.py:252
 msgid "Optional dependencies"
-msgstr ""
+msgstr "Dépendances optionnelles"
 
 #: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
