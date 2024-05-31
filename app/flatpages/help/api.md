@@ -522,6 +522,10 @@ Supported query parameters:
         * `score`: total package score.
         * `score_reviews`: score from reviews.
         * `score_downloads`: score from downloads.
+        * `reviews`: a dictionary of
+          * `positive`: int, number of positive reviews.
+          * `neutral`: int, number of neutral reviews.
+          * `negative`: int, number of negative reviews.
 * GET `/api/homepage/` ([View](/api/homepage/)) - get contents of homepage.
     * `count`:  number of packages
     * `downloads`:  get number of downloads

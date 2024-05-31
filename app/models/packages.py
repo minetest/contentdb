@@ -759,13 +759,19 @@ class Package(db.Model):
 		return states
 
 	def as_score_dict(self):
+		reviews = self.get_review_summary()
 		return {
 			"author": self.author.username,
 			"name": self.name,
 			"score": self.score,
 			"score_downloads": self.score_downloads,
 			"score_reviews": self.score - self.score_downloads,
-			"downloads": self.downloads
+			"downloads": self.downloads,
+			"reviews": {
+				"positive": reviews[0],
+				"neutral": reviews[1],
+				"negative": reviews[2],
+			},
 		}
 
 	def recalculate_score(self):

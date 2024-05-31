@@ -572,7 +572,7 @@ def all_package_stats():
 
 @bp.route("/api/scores/")
 @cors_allowed
-@cached(300)
+@cached(900)
 def package_scores():
 	qb = QueryBuilder(request.args)
 	query = qb.build_package_query()
