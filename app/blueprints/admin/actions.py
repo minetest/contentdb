@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+import datetime
 import os
 from typing import List
 
@@ -23,7 +23,7 @@ from flask import redirect, url_for, flash, current_app
 from sqlalchemy import or_, and_
 
 from app.models import PackageRelease, db, Package, PackageState, PackageScreenshot, MetaPackage, User, \
-	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, Thread
+	NotificationType, PackageUpdateConfig, License, UserRank, PackageType, Thread, AuditLogEntry
 from app.tasks.emails import send_pending_digests
 from app.tasks.forumtasks import import_topic_list, check_all_forum_accounts
 from app.tasks.importtasks import import_repo_screenshot, check_zip_release, check_for_updates, update_all_game_support, \
@@ -305,17 +305,33 @@ def do_notify_git_forums_links():
 	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
 
 
-@action("DANGER: Delete removed packages")
-def del_removed_packages():
-	query = Package.query.filter_by(state=PackageState.DELETED)
+def handle_delete_packages(query):
 	count = query.count()
 	for pkg in query.all():
 		pkg.review_thread = None
 		db.session.delete(pkg)
 	db.session.commit()
 
+	clean_uploads()
+
 	flash("Deleted {} soft deleted packages packages".format(count), "success")
 	return redirect(url_for("admin.admin_page"))
+
+
+@action("DANGER: Delete less popular removed packages")
+def del_less_popular_removed_packages():
+	one_year_ago = datetime.datetime.now() - datetime.timedelta(days=365)
+	query = Package.query.filter(
+		Package.state == PackageState.DELETED,
+		Package.downloads < 1000,
+		~Package.audit_log_entries.any(AuditLogEntry.created_at > one_year_ago))
+	return handle_delete_packages(query)
+
+
+@action("DANGER: Delete all removed packages")
+def del_removed_packages():
+	query = Package.query.filter_by(state=PackageState.DELETED)
+	return handle_delete_packages(query)
 
 
 @action("DANGER: Check all releases (postReleaseCheckUpdate)")

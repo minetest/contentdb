@@ -423,7 +423,7 @@ class Package(db.Model):
 			primaryjoin="and_(Package.id==PackageScreenshot.package_id, PackageScreenshot.approved)")
 
 	cover_image_id = db.Column(db.Integer, db.ForeignKey("package_screenshot.id"), nullable=True, default=None)
-	cover_image = db.relationship("PackageScreenshot", uselist=False, foreign_keys=[cover_image_id])
+	cover_image = db.relationship("PackageScreenshot", uselist=False, foreign_keys=[cover_image_id], post_update=True)
 
 	maintainers = db.relationship("User", secondary=maintainers)
 
