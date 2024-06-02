@@ -97,11 +97,10 @@ def set_profile_picture_from_url(username: str, url: str):
 
 def update_github_user_id_raw(user: User, send_notif: bool = False):
 	github_api_token = app.config.get("GITHUB_API_TOKEN")
-	if github_api_token is None or github_api_token == "":
-		raise TaskError("Importing requires a GitHub API token")
 
 	url = f"https://api.github.com/users/{user.github_username}"
-	resp = requests.get(url, headers={"Authorization": "token " + github_api_token}, timeout=15)
+	headers = {"Authorization": "token " + github_api_token} if github_api_token else None
+	resp = requests.get(url, headers=headers, timeout=15)
 	if resp.status_code == 404:
 		print(" - not found", file=sys.stderr)
 		if send_notif:
