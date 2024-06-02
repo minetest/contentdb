@@ -123,6 +123,16 @@
 		</aside>
 	{% endif %}
 
+	{% if thread.review and current_user == thread.package.author %}
+		{% set flag %}
+			<i class="fas fa-flag mx-2"></i>
+		{% endset %}
+		<aside class="alert alert-secondary">
+			<strong>{{ _("Is this review outdated?") }}</strong>
+			{{ _("For example, does it complain about issues you've already fixed?") }}
+			{{ _("You can report outdated reviews by clicking %(flag)s on the review.", flag=flag)  }}
+		</aside>
+	{% endif %}
 	{% from "macros/threads.html" import render_thread %}
 	{{ render_thread(thread, current_user, form) }}
 {% endblock %}
