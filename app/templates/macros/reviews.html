@@ -184,7 +184,11 @@
 				<div class="btn-group">
 					<a class="btn btn-secondary" href="{{ package.issueTracker or url_for('threads.new', pid=package.id) }}" rel="ugc">
 						<i class="fas fa-bug me-1"></i>
-						{{ _("Report an Issue") }}
+						{{ _("Report an issue") }}
+					</a>
+					<a class="btn btn-secondary" href="{{ url_for('threads.new', pid=package.id) }}">
+						<i class="fas fa-question me-1"></i>
+						{{ _("Ask a question") }}
 					</a>
 				</div>
 			</div>
