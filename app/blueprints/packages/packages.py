@@ -464,12 +464,14 @@ def remove(package):
 		hard_deps = Package.query.filter(
 			Package.state == PackageState.APPROVED,
 			Package.dependencies.any(
-				and_(Dependency.meta_package_id.in_([x.id for x in broken_meta]), Dependency.optional == False)))
+				and_(Dependency.meta_package_id.in_([x.id for x in broken_meta]), Dependency.optional == False))).all()
 
 		return render_template("packages/remove.html", package=package, hard_deps=hard_deps,
 				tabs=get_package_tabs(current_user, package), current_tab="remove")
 
 	reason = request.form.get("reason") or "?"
+	if len(reason) > 500:
+		abort(400)
 
 	if "delete" in request.form:
 		if not package.check_perm(current_user, Permission.DELETE_PACKAGE):

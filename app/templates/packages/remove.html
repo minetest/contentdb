@@ -10,8 +10,8 @@ Remove {{ package.title }}
 		<p>
 			{{ _("In order to avoid data loss, you cannot permanently delete packages.
 			You can remove them from ContentDB, which will cause them to not be
-			visible to any users and they may be permanently deleted in the future.
-			The Admin can restore removed packages, if needed.") }}
+			visible to any users. Removed packages may be permanently deleted at a
+			later point. ContentDB staff can restore removed packages, if needed.") }}
 		</p>
 
 		{% if package.approved %}
@@ -47,7 +47,7 @@ Remove {{ package.title }}
 			<span class="ms-3 text-muted">
 				{{ _("Required") }}
 			</span>
-			<input id="reason" class="form-control" type="text" name="reason" required minlength="5">
+			<input id="reason" class="form-control" type="text" name="reason" required minlength="5" maxlength="500">
 			<small class="form-text text-muted">
 				{{ _("Reason for unapproval / deletion, this is shown in the audit log") }}
 			</small>
