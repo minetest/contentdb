@@ -16,7 +16,7 @@
 
 import datetime
 
-from flask import redirect, abort, render_template, flash, request, url_for
+from flask import redirect, abort, render_template, flash, request, url_for, Response
 from flask_babel import gettext, get_locale, lazy_gettext
 from flask_login import current_user, login_required, logout_user, login_user
 from flask_wtf import FlaskForm
@@ -26,10 +26,10 @@ from wtforms.validators import InputRequired, Length, Regexp, DataRequired, Opti
 
 from app.tasks.emails import send_verify_email, send_anon_email, send_unsubscribe_verify, send_user_email
 from app.utils import random_string, make_flask_login_password, is_safe_url, check_password_hash, add_audit_log, \
-	nonempty_or_none, post_login, is_username_valid
+	nonempty_or_none, post_login
 from . import bp
-from app.models import User, AuditSeverity, db, UserRank, PackageAlias, EmailSubscription, UserNotificationPreferences, \
-	UserEmailVerification
+from app.models import User, AuditSeverity, db, EmailSubscription, UserEmailVerification
+from app.logic.users import create_user
 
 
 class LoginForm(FlaskForm):
@@ -113,46 +113,13 @@ def handle_register(form):
 		flash(gettext("Incorrect captcha answer"), "danger")
 		return
 
-	if not is_username_valid(form.username.data):
-		flash(gettext("Username is invalid"))
+	user = create_user(form.username.data, form.display_name.data, form.email.data)
+	if isinstance(user, Response):
+		return user
+	elif user is None:
 		return
 
-	user_by_name = User.query.filter(or_(
-			User.username == form.username.data,
-			User.username == form.display_name.data,
-			User.display_name == form.display_name.data,
-			User.forums_username == form.username.data,
-			User.github_username == form.username.data)).first()
-	if user_by_name:
-		if user_by_name.rank == UserRank.NOT_JOINED and user_by_name.forums_username:
-			flash(gettext("An account already exists for that username but hasn't been claimed yet."), "danger")
-			return redirect(url_for("users.claim_forums", username=user_by_name.forums_username))
-		else:
-			flash(gettext("That username/display name is already in use, please choose another."), "danger")
-			return
-
-	alias_by_name = PackageAlias.query.filter(or_(
-			PackageAlias.author==form.username.data,
-			PackageAlias.author==form.display_name.data)).first()
-	if alias_by_name:
-		flash(gettext("That username/display name is already in use, please choose another."), "danger")
-		return
-
-	user_by_email = User.query.filter_by(email=form.email.data).first()
-	if user_by_email:
-		send_anon_email.delay(form.email.data, get_locale().language, gettext("Email already in use"),
-			gettext("We were unable to create the account as the email is already in use by %(display_name)s. Try a different email address.",
-					display_name=user_by_email.display_name))
-		return redirect(url_for("users.email_sent"))
-	elif EmailSubscription.query.filter_by(email=form.email.data, blacklisted=True).count() > 0:
-		flash(gettext("That email address has been unsubscribed/blacklisted, and cannot be used"), "danger")
-		return
-
-	user = User(form.username.data, False, form.email.data, make_flask_login_password(form.password.data))
-	user.notification_preferences = UserNotificationPreferences(user)
-	if form.display_name.data:
-		user.display_name = form.display_name.data
-	db.session.add(user)
+	user.password = make_flask_login_password(form.password.data)
 
 	add_audit_log(AuditSeverity.USER, user, "Registered with email, display name=" + user.display_name,
 				  url_for("users.profile", username=user.username))

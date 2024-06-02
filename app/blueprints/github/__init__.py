@@ -16,11 +16,9 @@
 
 import datetime
 
-from flask import Blueprint, abort
+from flask import Blueprint, abort, Response
 from flask_babel import gettext
-
-bp = Blueprint("github", __name__)
-
+from app.logic.users import create_user
 from flask import redirect, url_for, request, flash, jsonify, current_app
 from flask_login import current_user
 from sqlalchemy import or_, and_
@@ -29,6 +27,8 @@ from app.models import db, User, APIToken, Package, Permission, AuditSeverity, P
 from app.utils import abs_url_for, add_audit_log, login_user_set_active, is_safe_url
 from app.blueprints.api.support import error, api_create_vcs_release
 import hmac, requests
+
+bp = Blueprint("github", __name__)
 
 
 @bp.route("/github/start/")
@@ -103,16 +103,11 @@ def callback(oauth_token):
 
 	# Sign up
 	else:
-		existing_user = (User.query
-				.filter(or_(User.username == github_username, User.forums_username == github_username))
-				.first())
-		if existing_user:
-			flash(gettext("Unable to create an account as the username is already taken. "
-					"If you meant to log in, you need to connect GitHub to your account first"), "danger")
+		user = create_user(github_username, github_username, None, "GitHub")
+		if isinstance(user, Response):
+			return user
+		elif user is None:
 			return redirect(url_for("users.login"))
-
-		user = User(github_username, True)
-		db.session.add(user)
 
 		add_audit_log(AuditSeverity.USER, user, "Registered with GitHub, display name=" + user.display_name,
 				url_for("users.profile", username=user.username))
