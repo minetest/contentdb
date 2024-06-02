@@ -54,19 +54,6 @@ def del_stuck_releases():
 	db.session.commit()
 	return redirect(url_for("admin.admin_page"))
 
-
-@action("Import forum topic list")
-def import_topic_list():
-	task = import_topic_list.delay()
-	return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
-
-
-@action("Check all forum accounts")
-def check_all_forum_accounts():
-	task = check_all_forum_accounts.delay()
-	return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
-
-
 @action("Delete unused uploads")
 def clean_uploads():
 	upload_dir = current_app.config['UPLOAD_DIR']
@@ -110,6 +97,29 @@ def del_mod_names():
 
 	flash("Deleted " + str(count) + " unused mod names", "success")
 	return redirect(url_for("admin.admin_page"))
+
+
+@action("Recalc package scores")
+def recalc_scores():
+	for package in Package.query.all():
+		package.recalculate_score()
+
+	db.session.commit()
+
+	flash("Recalculated package scores", "success")
+	return redirect(url_for("admin.admin_page"))
+
+
+@action("Import forum topic list")
+def import_topic_list():
+	task = import_topic_list.delay()
+	return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
+
+
+@action("Check all forum accounts")
+def check_all_forum_accounts():
+	task = check_all_forum_accounts.delay()
+	return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 
 
 @action("Run update configs")
