@@ -30,11 +30,11 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, 
 		return
 
 	json = {
-		"content": content,
+		"content": content[0:2000],
 	}
 
 	if username:
-		json["username"] = username
+		json["username"] = username[0:80]
 		user = User.query.filter_by(username=username).first()
 		if user:
 			json["avatar_url"] = user.get_profile_pic_url().replace("/./", "/")
@@ -43,8 +43,8 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, 
 
 	if title:
 		embed = {
-			"title": title,
-			"description": description,
+			"title": title[0:256],
+			"description": description[0:4000],
 		}
 
 		if thumbnail:
