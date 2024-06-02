@@ -29,7 +29,7 @@ from app.tasks.forumtasks import import_topic_list, check_all_forum_accounts
 from app.tasks.importtasks import import_repo_screenshot, check_zip_release, check_for_updates, update_all_game_support, \
 	import_languages
 from app.tasks.usertasks import import_github_user_ids
-from app.tasks.pkgtasks import notify_about_git_forum_links
+from app.tasks.pkgtasks import notify_about_git_forum_links, clear_removed_packages
 from app.utils import add_notification, get_system_user
 
 actions = {}
