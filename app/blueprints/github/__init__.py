@@ -67,42 +67,63 @@ def callback(oauth_token):
 	r = requests.get(url, headers={"Authorization": "token " + oauth_token})
 	json = r.json()
 	user_id = json["id"]
-	username = json["login"]
+	github_username = json["login"]
 	if type(user_id) is not int:
 		abort(400)
 
 	# Get user by GitHub user ID
-	userByGithub = User.query.filter(User.github_user_id == user_id).one_or_none()
+	user_by_github = User.query.filter(User.github_user_id == user_id).one_or_none()
 
 	# If logged in, connect
 	if current_user and current_user.is_authenticated:
-		if userByGithub is None:
-			current_user.github_username = username
+		if user_by_github is None:
+			current_user.github_username = github_username
 			current_user.github_user_id = user_id
 			db.session.commit()
 			flash(gettext("Linked GitHub to account"), "success")
 			return redirect(redirect_to)
-		elif userByGithub == current_user:
+		elif user_by_github == current_user:
 			return redirect(redirect_to)
 		else:
 			flash(gettext("GitHub account is already associated with another user: %(username)s",
-					username=userByGithub.username), "danger")
+					username=user_by_github.username), "danger")
 			return redirect(redirect_to)
 
-	# If not logged in, log in
-	else:
-		if userByGithub is None:
-			flash(gettext("Unable to find an account for that GitHub user"), "danger")
-			return redirect(url_for("users.claim_forums"))
-
-		ret = login_user_set_active(userByGithub, next, remember=True)
+	# Log in to existing account
+	elif user_by_github:
+		ret = login_user_set_active(user_by_github, next, remember=True)
 		if ret is None:
 			flash(gettext("Authorization failed [err=gh-login-failed]"), "danger")
 			return redirect(url_for("users.login"))
 
-		add_audit_log(AuditSeverity.USER, userByGithub, "Logged in using GitHub OAuth",
-				url_for("users.profile", username=userByGithub.username))
+		add_audit_log(AuditSeverity.USER, user_by_github, "Logged in using GitHub OAuth",
+				url_for("users.profile", username=user_by_github.username))
 		db.session.commit()
+		return ret
+
+	# Sign up
+	else:
+		existing_user = (User.query
+				.filter(or_(User.username == github_username, User.forums_username == github_username))
+				.one_or_none())
+		if existing_user:
+			flash(gettext("Unable to create an account as the username is already taken. "
+					"If you meant to log in, you need to connect GitHub to your account first"), "danger")
+			return redirect(url_for("users.login"))
+
+		user = User(github_username, True)
+		db.session.add(user)
+
+		add_audit_log(AuditSeverity.USER, user, "Registered with GitHub, display name=" + user.display_name,
+				url_for("users.profile", username=user.username))
+
+		db.session.commit()
+
+		ret = login_user_set_active(user, next, remember=True)
+		if ret is None:
+			flash(gettext("Authorization failed [err=gh-login-failed]"), "danger")
+			return redirect(url_for("users.login"))
+
 		return ret
 
 
