@@ -105,7 +105,7 @@ def callback(oauth_token):
 	else:
 		existing_user = (User.query
 				.filter(or_(User.username == github_username, User.forums_username == github_username))
-				.one_or_none())
+				.first())
 		if existing_user:
 			flash(gettext("Unable to create an account as the username is already taken. "
 					"If you meant to log in, you need to connect GitHub to your account first"), "danger")
