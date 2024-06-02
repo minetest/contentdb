@@ -14,11 +14,12 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
+import datetime
 import re
 
 from sqlalchemy import or_, and_
 
-from app.models import Package, db, PackageState
+from app.models import Package, db, PackageState, AuditLogEntry
 from app.tasks import celery
 from app.utils import post_bot_message
 
@@ -82,3 +83,23 @@ def notify_about_git_forum_links():
 			post_bot_message(package, title, msg)
 
 	db.session.commit()
+
+
+@celery.task()
+def clear_removed_packages(all_packages: bool):
+	if all_packages:
+		query = Package.query.filter_by(state=PackageState.DELETED)
+	else:
+		one_year_ago = datetime.datetime.now() - datetime.timedelta(days=365)
+		query = Package.query.filter(
+			Package.state == PackageState.DELETED,
+			Package.downloads < 1000,
+			~Package.audit_log_entries.any(AuditLogEntry.created_at > one_year_ago))
+
+	count = query.count()
+	for pkg in query.all():
+		pkg.review_thread = None
+		db.session.delete(pkg)
+	db.session.commit()
+
+	return f"Deleted {count} soft deleted packages packages"

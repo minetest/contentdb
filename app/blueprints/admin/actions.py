@@ -305,33 +305,18 @@ def do_notify_git_forums_links():
 	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
 
 
-def handle_delete_packages(query):
-	count = query.count()
-	for pkg in query.all():
-		pkg.review_thread = None
-		db.session.delete(pkg)
-	db.session.commit()
-
-	clean_uploads()
-
-	flash("Deleted {} soft deleted packages packages".format(count), "success")
-	return redirect(url_for("admin.admin_page"))
-
-
 @action("DANGER: Delete less popular removed packages")
 def del_less_popular_removed_packages():
-	one_year_ago = datetime.datetime.now() - datetime.timedelta(days=365)
-	query = Package.query.filter(
-		Package.state == PackageState.DELETED,
-		Package.downloads < 1000,
-		~Package.audit_log_entries.any(AuditLogEntry.created_at > one_year_ago))
-	return handle_delete_packages(query)
+	task_id = uuid()
+	clear_removed_packages.apply_async((False, ), task_id=task_id)
+	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
 
 
 @action("DANGER: Delete all removed packages")
 def del_removed_packages():
-	query = Package.query.filter_by(state=PackageState.DELETED)
-	return handle_delete_packages(query)
+	task_id = uuid()
+	clear_removed_packages.apply_async((True, ), task_id=task_id)
+	return redirect(url_for("tasks.check", id=task_id, r=url_for("admin.admin_page")))
 
 
 @action("DANGER: Check all releases (postReleaseCheckUpdate)")
