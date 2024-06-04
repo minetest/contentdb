@@ -37,6 +37,10 @@ def audit():
 			abort(404)
 		query = query.filter_by(causer=user)
 
+	if "q" in request.args:
+		q = request.args["q"]
+		query = query.filter(AuditLogEntry.title.ilike(f"%{q}%"))
+
 	pagination = query.paginate(page=page, per_page=num)
 	return render_template("admin/audit.html", log=pagination.items, pagination=pagination)
 
