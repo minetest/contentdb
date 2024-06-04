@@ -18,6 +18,7 @@ from flask import redirect, abort, render_template, request, flash, url_for
 from flask_babel import gettext, get_locale, lazy_gettext
 from flask_login import current_user, login_required, logout_user
 from flask_wtf import FlaskForm
+from kombu import uuid
 from sqlalchemy import or_
 from wtforms import StringField, SubmitField, BooleanField, SelectField
 from wtforms.validators import Length, Optional, Email, URL
@@ -345,6 +346,8 @@ def modtools(username):
 		add_audit_log(severity, current_user, "Edited {}'s account".format(user.display_name),
 					  url_for("users.profile", username=username))
 
+		redirect_target = url_for("users.modtools", username=username)
+
 		# Copy form fields to user_profile fields
 		if user.check_perm(current_user, Permission.CHANGE_USERNAMES):
 			if user.username != form.username.data:
@@ -362,7 +365,9 @@ def modtools(username):
 				user.github_username = None
 				user.github_user_id = None
 			else:
-				update_github_user_id.delay(user.id, github_username)
+				task_id = uuid()
+				update_github_user_id.apply_async((user.id, github_username), task_id=task_id)
+				redirect_target = url_for("tasks.check", id=task_id, r=redirect_target)
 
 		if user.check_perm(current_user, Permission.CHANGE_RANK):
 			new_rank = form["rank"].data
@@ -377,7 +382,7 @@ def modtools(username):
 
 		db.session.commit()
 
-		return redirect(url_for("users.modtools", username=username))
+		return redirect(redirect_target)
 
 	return render_template("users/modtools.html", user=user, form=form, tabs=get_setting_tabs(user), current_tab="modtools")
 
