@@ -109,6 +109,9 @@ def callback(oauth_token):
 		elif user is None:
 			return redirect(url_for("users.login"))
 
+		user.github_username = github_username
+		user.github_user_id = user_id
+
 		add_audit_log(AuditSeverity.USER, user, "Registered with GitHub, display name=" + user.display_name,
 				url_for("users.profile", username=user.username))
 
