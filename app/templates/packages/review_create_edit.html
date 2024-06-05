@@ -16,11 +16,16 @@
 {% block content %}
 <h1>{{ _("Post a review for %(title)s by %(author)s", title=self.link(), author=package.author.display_name) }}</h1>
 
+<p class="alert alert-primary">
+	{{ _("Please make sure you read ContentDB's <a href='/rules/'>rules</a>") }}
+</p>
+
 {% if package.issueTracker %}
 	<p class="alert alert-secondary">
 		{{ _("Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead.", url=package.issueTracker) }}<br />
 	</p>
 {% endif %}
+
 
 {% from "macros/forms.html" import render_field, render_submit_field, render_toggle_field %}
 <form method="POST" action="" enctype="multipart/form-data">
