@@ -961,7 +961,7 @@ class MinetestRelease(db.Model):
 		}
 
 	@classmethod
-	def get(cls, version, protocol_num):
+	def get(cls, version: typing.Optional[str], protocol_num: typing.Optional[str]) -> typing.Optional["MinetestRelease"]:
 		if version:
 			parts = version.strip().split(".")
 			if len(parts) >= 2:

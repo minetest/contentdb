@@ -14,8 +14,8 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from typing import Optional
-from flask import abort, current_app, request
+from typing import Optional, List
+from flask import abort, current_app, request, make_response
 from flask_babel import lazy_gettext, gettext, get_locale
 from sqlalchemy import or_
 from sqlalchemy.orm import subqueryload
@@ -28,10 +28,27 @@ from .utils import is_yes, get_int_or_abort
 
 
 class QueryBuilder:
+	limit: Optional[int]
 	lang: str = "en"
-	types = None
-	search = None
-	only_approved = True
+	types: List[PackageType]
+	search: Optional[str] = None
+	only_approved: bool = True
+	licenses: List[License]
+	tags: List[Tag]
+	game: Optional[Package]
+	author: Optional[str]
+	random: bool
+	lucky: bool
+	order_dir: str
+	order_by: Optional[str]
+	flags: set[str]
+	hide_flags: set[str]
+	hide_deprecated: bool
+	hide_wip: bool
+	hide_nonfree: bool
+	show_added: bool
+	version: Optional[MinetestRelease]
+	has_lang: Optional[str]
 
 	@property
 	def title(self):
@@ -62,7 +79,7 @@ class QueryBuilder:
 		return (self.search is not None or len(self.tags) > 1 or len(self.types) > 1 or len(self.hide_flags) > 0 or
 			self.random or self.lucky or self.author or self.version or self.game)
 
-	def __init__(self, args, cookies: bool = False, lang: Optional[str] = None):
+	def __init__(self, args, cookies: bool = False, lang: Optional[str] = None, emit_http_errors: bool = True):
 		if lang is None:
 			locale = get_locale()
 			if locale:
@@ -85,6 +102,11 @@ class QueryBuilder:
 
 		# Show flags
 		self.flags = set(args.getlist("flag"))
+
+		# License
+		self.licenses = [License.query.filter(func.lower(License.name) == name).first() for name in args.getlist("license")]
+		if emit_http_errors and any(map(lambda x: x is None, self.licenses)):
+			abort(make_response("Unknown license"), 400)
 
 		self.types  = types
 		self.tags   = tags
@@ -233,6 +255,11 @@ class QueryBuilder:
 				flags.discard(flag)
 				if warning:
 					query = query.filter(Package.content_warnings.any(ContentWarning.id == warning.id))
+
+		licenses = [Package.license_id == license.id for license in self.licenses if license is not None]
+		licenses.extend([Package.media_license_id == license.id for license in self.licenses if license is not None])
+		if len(licenses) > 0:
+			query = query.filter(or_(*licenses))
 
 		if self.hide_nonfree:
 			query = query.filter(Package.license.has(License.is_foss == True))

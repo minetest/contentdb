@@ -115,7 +115,7 @@ def url_set_query(**kwargs):
 	return url_for(request.endpoint, **dargs)
 
 
-def get_int_or_abort(v, default=None):
+def get_int_or_abort(v, default=None) -> typing.Optional[int]:
 	if v is None:
 		return default
 

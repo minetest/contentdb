@@ -39,7 +39,7 @@ def is_api_authd(f):
 			if token is None:
 				error(403, "Unknown API token")
 		else:
-			abort(403, "Unsupported authentication method")
+			error(403, "Unsupported authentication method")
 
 		return f(token=token, *args, **kwargs)
 

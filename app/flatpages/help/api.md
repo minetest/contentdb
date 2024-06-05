@@ -187,22 +187,29 @@ Example:
 
     /api/packages/?type=mod&type=game&q=mobs+fun&hide=nonfree&hide=gore
 
-Supported query parameters:
+Filter query parameters:
 
-* `type`:  Package types (`mod`, `game`, `txp`).
+* `type`: Filter by package type (`mod`, `game`, `txp`). Multiple types are OR-ed together.
 * `q`:  Query string.
 * `author`:  Filter by author.
-* `tag`:  Filter by tags.
+* `tag`:  Filter by tags. Multiple tags are AND-ed together.
 * `flag`: Filter to show packages with [Content Flags](/help/content_flags/).
+* `hide`:  Hide content based on [Content Flags](/help/content_flags/).
+* `license`: Filter by [license name](#licenses). Multiple licenses are OR-ed together, ie: `&license=MIT&license=LGPL-2.1-only`
 * `game`: Filter by [Game Support](/help/game_support/), ex: `Wuzzy/mineclone2`. (experimental, doesn't show items that support every game currently).
 * `lang`: Filter by translation support, eg: `en`/`de`/`ja`/`zh_TW`.
-* `random`:  When present, enable random ordering and ignore `sort`.
-* `limit`:  Return at most `limit` packages.
-* `hide`:  Hide content based on [Content Flags](/help/content_flags/).
-* `sort`:  Sort by (`name`, `title`, `score`, `reviews`, `downloads`, `created_at`, `approved_at`, `last_release`).
-* `order`:  Sort ascending (`asc`) or descending (`desc`).
 * `protocol_version`:  Only show packages supported by this Minetest protocol version.
 * `engine_version`:  Only show packages supported by this Minetest engine version, eg: `5.3.0`.
+
+Sorting query parameters:
+
+* `sort`:  Sort by (`name`, `title`, `score`, `reviews`, `downloads`, `created_at`, `approved_at`, `last_release`).
+* `order`:  Sort ascending (`asc`) or descending (`desc`).
+* `random`:  When present, enable random ordering and ignore `sort`.
+
+Format query parameters:
+
+* `limit`:  Return at most `limit` packages.
 * `fmt`:  How the response is formatted.
     * `keys`:  author/name only.
     * `short`:  stuff needed for the Minetest client.
