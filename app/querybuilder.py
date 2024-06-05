@@ -77,7 +77,7 @@ class QueryBuilder:
 	@property
 	def noindex(self):
 		return (self.search is not None or len(self.tags) > 1 or len(self.types) > 1 or len(self.hide_flags) > 0 or
-			self.random or self.lucky or self.author or self.version or self.game)
+			self.random or self.lucky or self.author or self.version or self.game or len(self.licenses) > 0)
 
 	def __init__(self, args, cookies: bool = False, lang: Optional[str] = None, emit_http_errors: bool = True):
 		if lang is None:
@@ -106,7 +106,9 @@ class QueryBuilder:
 		# License
 		self.licenses = [License.query.filter(func.lower(License.name) == name.lower()).first() for name in args.getlist("license")]
 		if emit_http_errors and any(map(lambda x: x is None, self.licenses)):
-			abort(make_response("Unknown license"), 400)
+			all_licenses = db.session.query(License.name).order_by(db.asc(License.name)).all()
+			all_licenses = [x[0] for x in all_licenses]
+			abort(make_response("Unknown license. Expected license name from: " + ", ".join(all_licenses)), 400)
 
 		self.types  = types
 		self.tags   = tags
