@@ -104,7 +104,7 @@ class QueryBuilder:
 		self.flags = set(args.getlist("flag"))
 
 		# License
-		self.licenses = [License.query.filter(func.lower(License.name) == name).first() for name in args.getlist("license")]
+		self.licenses = [License.query.filter(func.lower(License.name) == name.lower()).first() for name in args.getlist("license")]
 		if emit_http_errors and any(map(lambda x: x is None, self.licenses)):
 			abort(make_response("Unknown license"), 400)
 
