@@ -195,6 +195,8 @@ clearly that it does in the package meta.
 Packages must not ask that users disable mod security (`secure.enable_security`).
 Instead, they should use the insecure environment API.
 
+Packages must not contain obfuscated code.
+
 
 ## 9. Reporting Violations
 
