@@ -392,18 +392,6 @@ class Package(db.Model):
 	def donate_url_actual(self):
 		return self.donate_url or self.author.donate_url
 
-	@property
-	def video_thumbnail_url(self):
-		from app.utils.url import get_youtube_id
-
-		if self.video_url is None:
-			return None
-
-		id_ = get_youtube_id(self.video_url)
-		if id_:
-			return url_for("thumbnails.youtube", id_=id_)
-
-		return None
 
 	enable_game_support_detection = db.Column(db.Boolean, nullable=False, default=True)
 
@@ -623,6 +611,7 @@ class Package(db.Model):
 			"issue_tracker": self.issueTracker,
 			"forums": self.forums,
 			"video_url": self.video_url,
+			"video_thumbnail_url": self.get_video_thumbnail_url(True),
 			"donate_url": self.donate_url_actual,
 			"translation_url": self.translation_url,
 
@@ -679,6 +668,22 @@ class Package(db.Model):
 	def make_shield(self, type):
 		return "[![ContentDB]({})]({})" \
 			.format(self.get_shield_url(type), self.get_url("packages.view", True))
+
+	def get_video_thumbnail_url(self, absolute: bool = False):
+		from app.utils.url import get_youtube_id
+
+		if self.video_url is None:
+			return None
+
+		id_ = get_youtube_id(self.video_url)
+		if id_ is None:
+			return None
+
+		if absolute:
+			from app.utils import abs_url_for
+			return abs_url_for("thumbnails.youtube", id_=id_)
+		else:
+			return url_for("thumbnails.youtube", id_=id_)
 
 	def get_set_state_url(self, state):
 		if type(state) == str:
