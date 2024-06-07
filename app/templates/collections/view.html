@@ -79,7 +79,7 @@
 				<div>
 					<article class="card">
 						<div class="ratio ratio-16x9">
-							<img loading="lazy" class="card-img-top" src="{{ item.package.get_thumb_or_placeholder(4) }}" alt="{{ item.package.title }} screenshot">
+							<img loading="lazy" class="card-img-top object-fit-cover" src="{{ item.package.get_thumb_or_placeholder(4) }}" alt="{{ item.package.title }} screenshot">
 						</div>
 						<div class="card-body">
 							{% if item.package.state.name != "APPROVED" %}
