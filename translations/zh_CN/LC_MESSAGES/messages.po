@@ -7,28 +7,556 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-04-03 18:34+0100\n"
+"POT-Creation-Date: 2024-06-07 05:29+0100\n"
 "PO-Revision-Date: 2024-04-15 03:01+0000\n"
 "Last-Translator: 孙鑫然 <sun_20120302@qq.com>\n"
-"Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
-"minetest/contentdb/zh_Hans/>\n"
 "Language: zh_CN\n"
+"Language-Team: Chinese (Simplified) "
+"<https://hosted.weblate.org/projects/minetest/contentdb/zh_Hans/>\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.5-dev\n"
-"Generated-By: Babel 2.12.1\n"
+"Generated-By: Babel 2.15.0\n"
 
-#: app/__init__.py:137
+#: app/__init__.py:155
 msgid "Banned:"
 msgstr "已封号："
 
-#: app/__init__.py:139
+#: app/__init__.py:157
 msgid "You have been banned."
 msgstr "您被封号了。"
 
-#: app/querybuilder.py:41 app/templates/admin/languages/list.html:27
+#: app/_translations.py:5
+msgid "Chat / Commands"
+msgstr ""
+
+#: app/_translations.py:6
+msgid "Complex installation"
+msgstr ""
+
+#: app/_translations.py:7
+msgid "Either has educational value, or is a tool to help teachers "
+msgstr ""
+
+#: app/_translations.py:8
+msgid "Singleplayer-focused"
+msgstr ""
+
+#: app/_translations.py:9
+msgid "For 16px texture packs"
+msgstr ""
+
+#: app/_translations.py:10
+msgid "For 64px texture packs"
+msgstr ""
+
+#: app/_translations.py:11
+msgid "Tools to manage the world"
+msgstr ""
+
+#: app/_translations.py:12
+msgid "Big changes to crafting gameplay"
+msgstr ""
+
+#: app/_translations.py:13
+msgid "Blood, etc"
+msgstr ""
+
+#: app/_translations.py:14
+msgid "Adds a mini-game to be played within Minetest"
+msgstr ""
+
+#: app/_translations.py:15
+msgid "Tools / Weapons / Armor"
+msgstr ""
+
+#: app/_translations.py:16
+msgid "For content generally themed around a certain season or holiday"
+msgstr ""
+
+#: app/_translations.py:17
+msgid "Player Effects / Power Ups"
+msgstr ""
+
+#: app/_translations.py:18
+msgid "World Maintenance and Tools"
+msgstr ""
+
+#: app/_translations.py:19
+msgid "Puzzle"
+msgstr ""
+
+#: app/_translations.py:20
+msgid "Tools for game and mod developers"
+msgstr ""
+
+#: app/_translations.py:21
+msgid "Education"
+msgstr ""
+
+#: app/_translations.py:22
+msgid "Gore"
+msgstr ""
+
+#: app/_translations.py:23
+msgid "Transport"
+msgstr ""
+
+#: app/_translations.py:24
+msgid "Survival"
+msgstr ""
+
+#: app/_translations.py:25
+msgid "New mapgen or changes mapgen"
+msgstr ""
+
+#: app/_translations.py:26
+msgid "Less than 16px"
+msgstr ""
+
+#: app/_translations.py:27 app/templates/users/modtools.html:12
+msgid "Storage"
+msgstr "存储空间"
+
+#: app/_translations.py:28
+msgid "Changes the inventory GUI"
+msgstr ""
+
+#: app/_translations.py:29
+msgid "Jam / Combat 2020"
+msgstr ""
+
+#: app/_translations.py:30
+msgid "Bad Language"
+msgstr ""
+
+#: app/_translations.py:31
+msgid "64px"
+msgstr ""
+
+#: app/_translations.py:32
+msgid "Focuses on or adds new sounds or musical things"
+msgstr ""
+
+#: app/_translations.py:33
+msgid "Adds game mechanics or tools that change how players build."
+msgstr ""
+
+#: app/_translations.py:34
+msgid "Violence"
+msgstr ""
+
+#: app/_translations.py:35
+msgid "Strategy / RTS"
+msgstr ""
+
+#: app/_translations.py:36
+msgid ""
+"Requires futher installation steps, such as installing luarocks or "
+"editing the trusted mod setting"
+msgstr ""
+
+#: app/_translations.py:37
+msgid "Jam / Game 2021"
+msgstr ""
+
+#: app/_translations.py:38
+msgid "Content that can be played alone"
+msgstr ""
+
+#: app/_translations.py:39
+msgid "Can/should only be used in multiplayer"
+msgstr ""
+
+#: app/_translations.py:40
+msgid "Adds mobs, animals, and NPCs"
+msgstr ""
+
+#: app/_translations.py:41
+msgid ""
+"For mods created for the Discord \"Weekly Challenges\" modding event in "
+"2021"
+msgstr ""
+
+#: app/_translations.py:42
+msgid "Mini-game"
+msgstr ""
+
+#: app/_translations.py:43
+msgid ""
+"For content that changes player effects, including physics, for example: "
+"speed, jump height or gravity."
+msgstr ""
+
+#: app/_translations.py:44
+msgid "Contains swearing"
+msgstr ""
+
+#: app/_translations.py:45
+msgid ""
+"Improves the world, adding weather, ambient sounds, or other environment "
+"mechanics"
+msgstr ""
+
+#: app/_translations.py:46
+msgid "For mods created for the Discord \"Combat\" modding event in 2020"
+msgstr ""
+
+#: app/_translations.py:47
+msgid "Inventory"
+msgstr ""
+
+#: app/_translations.py:48
+msgid "Entries to the 2023 Minetest Game Jam "
+msgstr ""
+
+#: app/_translations.py:49
+msgid "Sims"
+msgstr ""
+
+#: app/_translations.py:50
+msgid "Focuses on building, such as adding new materials or nodes"
+msgstr ""
+
+#: app/_translations.py:51
+msgid "Environment / Weather"
+msgstr ""
+
+#: app/_translations.py:52
+msgid "Custom mapgen"
+msgstr ""
+
+#: app/_translations.py:53
+msgid "Minetest Game improved"
+msgstr ""
+
+#: app/_translations.py:54
+msgid "HUD"
+msgstr ""
+
+#: app/_translations.py:55
+msgid "Machines / Electronics"
+msgstr ""
+
+#: app/_translations.py:56
+msgid "Developer Tools"
+msgstr ""
+
+#: app/_translations.py:57
+msgid "Jam / Game 2023"
+msgstr ""
+
+#: app/_translations.py:58
+msgid "Helps with server maintenance and moderation"
+msgstr ""
+
+#: app/_translations.py:59
+msgid "Plants and Farming"
+msgstr ""
+
+#: app/_translations.py:60
+msgid "Adventure / RPG"
+msgstr ""
+
+#: app/_translations.py:61
+msgid ""
+"For games and such that are of their own kind, distinct and original in "
+"nature to others of the same category."
+msgstr ""
+
+#: app/_translations.py:62
+msgid "Jam / Weekly Challenges 2021"
+msgstr ""
+
+#: app/_translations.py:63
+msgid "For 32px texture packs"
+msgstr ""
+
+#: app/_translations.py:64
+msgid "Adds or changes tools, weapons, and armor"
+msgstr ""
+
+#: app/_translations.py:65
+msgid "GUI"
+msgstr ""
+
+#: app/_translations.py:66
+msgid "Seasonal"
+msgstr ""
+
+#: app/_translations.py:67
+msgid "Commerce / Economy"
+msgstr ""
+
+#: app/_translations.py:68
+msgid ""
+"Written specifically or exclusively for use in creative mode. Adds "
+"content only available through a creative inventory, or provides tools "
+"that facilitate ingame creation and doesn't add difficulty or scarcity"
+msgstr ""
+
+#: app/_translations.py:69
+msgid "Forks of MTG"
+msgstr ""
+
+#: app/_translations.py:70
+msgid "Non-cartoon violence. May be towards fantasy or  human-like characters"
+msgstr ""
+
+#: app/_translations.py:71
+msgid "Joke"
+msgstr ""
+
+#: app/_translations.py:72
+msgid "Fear / Horror"
+msgstr ""
+
+#: app/_translations.py:73
+msgid "128px+"
+msgstr ""
+
+#: app/_translations.py:74
+msgid "Creative"
+msgstr ""
+
+#: app/_translations.py:75
+msgid "Entries to the 2022 Minetest Game Jam "
+msgstr ""
+
+#: app/_translations.py:76
+msgid "Alcohol / Tobacco"
+msgstr ""
+
+#: app/_translations.py:77
+msgid "Adds or improves item storage mechanics"
+msgstr ""
+
+#: app/_translations.py:78
+msgid "Designed to be played competitively against other players"
+msgstr ""
+
+#: app/_translations.py:79
+msgid "Crafting"
+msgstr ""
+
+#: app/_translations.py:80
+msgid "<16px"
+msgstr ""
+
+#: app/_translations.py:81
+msgid "One-of-a-kind / Original"
+msgstr ""
+
+#: app/_translations.py:82
+msgid "Building"
+msgstr ""
+
+#: app/_translations.py:83
+msgid "Adds machines useful in automation, tubes, or power."
+msgstr ""
+
+#: app/_translations.py:84
+msgid "Focus on puzzle solving instead of combat"
+msgstr ""
+
+#: app/_translations.py:85
+msgid "Building Mechanics and Tools"
+msgstr ""
+
+#: app/_translations.py:86
+msgid "Adds nodes with no other purpose than for use in building"
+msgstr ""
+
+#: app/_translations.py:87
+msgid "Sounds / Music"
+msgstr ""
+
+#: app/_translations.py:88
+msgid "Food / Drinks"
+msgstr ""
+
+#: app/_translations.py:89
+msgid "Decorative"
+msgstr ""
+
+#: app/_translations.py:90
+msgid "Gambling"
+msgstr ""
+
+#: app/_translations.py:91
+msgid "Server Moderation and Tools"
+msgstr ""
+
+#: app/_translations.py:92
+msgid ""
+"For humorous content, meant as a novelty or joke, not to be taken "
+"seriously, and that is not meant to be used seriously or long-term."
+msgstr ""
+
+#: app/_translations.py:93
+msgid "API / Library"
+msgstr ""
+
+#: app/_translations.py:94
+msgid "Certified"
+msgstr ""
+
+#: app/_translations.py:95
+msgid "Contains alcohol and/or tobacco"
+msgstr ""
+
+#: app/_translations.py:96
+msgid "Adds new plants or other farmable resources."
+msgstr ""
+
+#: app/_translations.py:97
+msgid "Multiplayer-focused"
+msgstr ""
+
+#: app/_translations.py:98
+msgid "Primarily adds an API for other mods to use"
+msgstr ""
+
+#: app/_translations.py:99
+msgid ""
+"Focus on player chat/communication or who's primary function is "
+"interacting with the console."
+msgstr ""
+
+#: app/_translations.py:100
+msgid ""
+"Games and mods with a heavy strategy component, whether real-time or "
+"turn-based"
+msgstr ""
+
+#: app/_translations.py:101
+msgid ""
+"Written specifically for survival gameplay with a focus on game-balance, "
+"difficulty level, or resources available through crafting, mining, ..."
+msgstr ""
+
+#: app/_translations.py:102
+msgid "Entries to the 2021 Minetest Game Jam"
+msgstr ""
+
+#: app/_translations.py:103
+msgid ""
+"Contains a completely custom mapgen implemented in Lua, usually requires "
+"worlds to be set to the 'singlenode' mapgen."
+msgstr ""
+
+#: app/_translations.py:104
+msgid " Jam / Game 2022"
+msgstr ""
+
+#: app/_translations.py:105
+msgid "Sports"
+msgstr ""
+
+#: app/_translations.py:106
+msgid ""
+"Adds or changes transportation methods. Includes teleportation, vehicles,"
+" ridable mobs, transport infrastructure and thematic content"
+msgstr ""
+
+#: app/_translations.py:107
+msgid "Player vs Environment (PvE)"
+msgstr ""
+
+#: app/_translations.py:108
+msgid "For mods that grant the player extra information in the HUD"
+msgstr ""
+
+#: app/_translations.py:109
+msgid ""
+"Mods and games that aim to simulate real life activity. Similar to "
+"SimCity/TheSims/OpenTTD/etc"
+msgstr ""
+
+#: app/_translations.py:110
+msgid "Shocking and scary content. May scare young children"
+msgstr ""
+
+#: app/_translations.py:111
+msgid "Player customization / Skins"
+msgstr ""
+
+#: app/_translations.py:112
+msgid ""
+"Allows the player to customize their character by changing the texture or"
+" adding accessories."
+msgstr ""
+
+#: app/_translations.py:113
+msgid ""
+"Certified by the Featured Packages program. This tag may be renamed in "
+"the future"
+msgstr ""
+
+#: app/_translations.py:114
+msgid "Mobs / Animals / NPCs"
+msgstr ""
+
+#: app/_translations.py:115
+msgid "For 128px or higher texture packs"
+msgstr ""
+
+#: app/_translations.py:116
+msgid "16px"
+msgstr ""
+
+#: app/_translations.py:117
+msgid "Games of chance, gambling games, etc"
+msgstr ""
+
+#: app/_translations.py:118
+msgid "Mapgen / Biomes / Decoration"
+msgstr ""
+
+#: app/_translations.py:119
+msgid "Drugs"
+msgstr ""
+
+#: app/_translations.py:120
+msgid "Related to economies, money, and trading"
+msgstr ""
+
+#: app/_translations.py:121
+msgid ""
+"For content designed for one or more players that focus on combat against"
+" the world, mobs, or NPCs."
+msgstr ""
+
+#: app/_translations.py:122
+msgid "For content whose main utility / feature is in GUI/formspec form"
+msgstr ""
+
+#: app/_translations.py:123
+msgid "32px"
+msgstr ""
+
+#: app/_translations.py:124
+msgid "Player vs Player (PvP)"
+msgstr ""
+
+#: app/_translations.py:125
+msgid "Magic / Enchanting"
+msgstr ""
+
+#: app/_translations.py:126
+msgid "Contains illegal drugs, such as marijuana"
+msgstr ""
+
+#: app/_translations.py:127
+msgid "First person shooters (FPS) and more"
+msgstr ""
+
+#: app/_translations.py:128
+msgid "Shooter"
+msgstr ""
+
+#: app/querybuilder.py:58 app/templates/admin/languages/list.html:27
 #: app/templates/admin/tags/list.html:38
 #: app/templates/admin/warnings/list.html:28
 #: app/templates/collections/create_edit.html:56
@@ -38,7 +566,7 @@ msgstr "您被封号了。"
 msgid "Packages"
 msgstr "软件包"
 
-#: app/querybuilder.py:56
+#: app/querybuilder.py:73
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
 msgstr "用于 %(game_name)s 的 %(package_type)s"
@@ -48,7 +576,7 @@ msgstr "用于 %(game_name)s 的 %(package_type)s"
 msgid "%(delta)s ago"
 msgstr "%(delta)s以前"
 
-#: app/blueprints/api/endpoints.py:95 app/templates/index.html:103
+#: app/blueprints/api/endpoints.py:94 app/templates/index.html:103
 msgid "Featured"
 msgstr "精选"
 
@@ -63,18 +591,18 @@ msgid "Limit to package"
 msgstr "软件包限制"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:250
-#: app/blueprints/packages/packages.py:525
-#: app/blueprints/packages/packages.py:621
-#: app/blueprints/packages/packages.py:709
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:251
+#: app/blueprints/packages/packages.py:528
+#: app/blueprints/packages/packages.py:624
+#: app/blueprints/packages/packages.py:712
 #: app/blueprints/packages/releases.py:62
 #: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:49
 #: app/blueprints/packages/screenshots.py:36
 #: app/blueprints/packages/screenshots.py:42
 #: app/blueprints/packages/screenshots.py:47
-#: app/blueprints/users/account.py:226 app/blueprints/users/account.py:234
-#: app/blueprints/users/settings.py:78 app/blueprints/users/settings.py:148
-#: app/blueprints/users/settings.py:316 app/templates/users/modtools.html:111
+#: app/blueprints/users/account.py:193 app/blueprints/users/account.py:201
+#: app/blueprints/users/settings.py:79 app/blueprints/users/settings.py:148
+#: app/blueprints/users/settings.py:330 app/templates/users/modtools.html:111
 msgid "Save"
 msgstr "保存"
 
@@ -146,14 +674,11 @@ msgid "Linked GitHub to account"
 msgstr "已绑定GitHub账号"
 
 #: app/blueprints/github/__init__.py:88
-msgid "GitHub account is already associated with another user"
-msgstr "GitHub账号已与其他用户绑定"
+#, python-format
+msgid "GitHub account is already associated with another user: %(username)s"
+msgstr ""
 
-#: app/blueprints/github/__init__.py:94
-msgid "Unable to find an account for that GitHub user"
-msgstr "无法找到该GitHub用户的账号"
-
-#: app/blueprints/github/__init__.py:99
+#: app/blueprints/github/__init__.py:96 app/blueprints/github/__init__.py:122
 msgid "Authorization failed [err=gh-login-failed]"
 msgstr "验证失败 [err=gh-login-failed]"
 
@@ -199,7 +724,7 @@ msgstr "截图"
 
 #: app/blueprints/packages/__init__.py:52
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:624 app/utils/minetest_hypertext.py:270
+#: app/templates/packages/view.html:624 app/utils/minetest_hypertext.py:302
 msgid "Maintainers"
 msgstr "维护者"
 
@@ -224,7 +749,7 @@ msgstr "移除 / 撤搞"
 
 #: app/blueprints/packages/__init__.py:80 app/logic/package_approval.py:123
 #: app/templates/packages/game_support.html:4
-#: app/utils/minetest_hypertext.py:243 app/utils/minetest_hypertext.py:245
+#: app/utils/minetest_hypertext.py:275 app/utils/minetest_hypertext.py:277
 msgid "Supported Games"
 msgstr "支持的游戏"
 
@@ -232,190 +757,189 @@ msgstr "支持的游戏"
 msgid "No download available."
 msgstr "无可用下载。"
 
-#: app/blueprints/packages/packages.py:228 app/templates/packages/view.html:594
-#: app/utils/minetest_hypertext.py:231
+#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:594
+#: app/utils/minetest_hypertext.py:263
 msgid "Type"
 msgstr "类型"
 
-#: app/blueprints/packages/packages.py:229
+#: app/blueprints/packages/packages.py:230
 msgid "Title (Human-readable)"
 msgstr "标题（人类可读）"
 
-#: app/blueprints/packages/packages.py:230
-#: app/blueprints/packages/packages.py:619
+#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:622
 msgid "Name (Technical)"
 msgstr "名称（技术性）"
 
-#: app/blueprints/packages/packages.py:230
-#: app/blueprints/packages/packages.py:620
+#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:623
 #: app/templates/packages/create_edit.html:75
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr "只允许小写字母（a-z），数字（0-9），下划线（_）"
 
-#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:232
 msgid "Short Description (Plaintext)"
 msgstr "简短说明（纯文本）"
 
-#: app/blueprints/packages/packages.py:233 app/templates/packages/view.html:616
-#: app/utils/minetest_hypertext.py:268
+#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:616
+#: app/utils/minetest_hypertext.py:300
 msgid "Maintenance State"
 msgstr "开发周期"
 
-#: app/blueprints/packages/packages.py:235 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
-#: app/utils/minetest_hypertext.py:232
+#: app/utils/minetest_hypertext.py:264
 msgid "Tags"
 msgstr "标签"
 
-#: app/blueprints/packages/packages.py:236
+#: app/blueprints/packages/packages.py:237
 msgid "Content Warnings"
 msgstr "内容警告"
 
-#: app/blueprints/packages/packages.py:237 app/templates/packages/view.html:605
-#: app/utils/minetest_hypertext.py:266
+#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:605
+#: app/utils/minetest_hypertext.py:298
 msgid "License"
 msgstr "许可证"
 
-#: app/blueprints/packages/packages.py:238
+#: app/blueprints/packages/packages.py:239
 msgid "Media License"
 msgstr "媒体内容许可证"
 
-#: app/blueprints/packages/packages.py:240
+#: app/blueprints/packages/packages.py:241
 msgid "Long Description (Markdown)"
 msgstr "长说明（Markdown）"
 
-#: app/blueprints/packages/packages.py:242
+#: app/blueprints/packages/packages.py:243
 msgid "VCS Repository URL"
 msgstr "版本控制系统仓库URL"
 
-#: app/blueprints/packages/packages.py:243 app/blueprints/users/settings.py:76
+#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:77
 msgid "Website URL"
 msgstr "网站URL"
 
-#: app/blueprints/packages/packages.py:244
+#: app/blueprints/packages/packages.py:245
 msgid "Issue Tracker URL"
 msgstr "问题追踪器URL"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:246
 msgid "Forum Topic ID"
 msgstr "论坛贴子ID"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:247
 msgid "Video URL"
 msgstr "视频 URL"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:248
 msgid "Donate URL"
 msgstr "捐赠 URL"
 
-#: app/blueprints/packages/packages.py:248
+#: app/blueprints/packages/packages.py:249
 msgid "Translation URL"
 msgstr "翻译 URL"
 
-#: app/blueprints/packages/packages.py:254
+#: app/blueprints/packages/packages.py:255
 msgid "_game is not an allowed name"
 msgstr "_game 名称不可取"
 
-#: app/blueprints/packages/packages.py:264
+#: app/blueprints/packages/packages.py:265
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
 msgstr "该软件包已存在，但是已被移除。 请联系 ContentDB 的工作人员来恢复该软件包"
 
-#: app/blueprints/packages/packages.py:269
+#: app/blueprints/packages/packages.py:270
 msgid "Package already exists"
 msgstr "软件包已存在"
 
-#: app/blueprints/packages/packages.py:275
+#: app/blueprints/packages/packages.py:276
 msgid "A collection with a similar name already exists"
 msgstr "相似名称的作品集已存在"
 
-#: app/blueprints/packages/packages.py:328
+#: app/blueprints/packages/packages.py:329
 #: app/blueprints/packages/releases.py:82
 msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
 msgstr "在管理软件包前，您必须向账户添加电子邮箱并进行确认"
 
-#: app/blueprints/packages/packages.py:334
+#: app/blueprints/packages/packages.py:335
 msgid "Save draft"
 msgstr "保存为草稿"
 
-#: app/blueprints/packages/packages.py:342
+#: app/blueprints/packages/packages.py:343
 msgid "Unable to find that user"
 msgstr "找不到该用户"
 
-#: app/blueprints/packages/packages.py:346
+#: app/blueprints/packages/packages.py:347
 #: app/blueprints/packages/screenshots.py:137
-#: app/blueprints/users/settings.py:132
 msgid "Permission denied"
 msgstr "拒绝访问"
 
-#: app/blueprints/packages/packages.py:402
-#: app/blueprints/packages/packages.py:476
-#: app/blueprints/packages/packages.py:498
+#: app/blueprints/packages/packages.py:403
+#: app/blueprints/packages/packages.py:479
+#: app/blueprints/packages/packages.py:501
 msgid "You don't have permission to do that"
 msgstr "你没有进行该操作的权限"
 
-#: app/blueprints/packages/packages.py:435
+#: app/blueprints/packages/packages.py:436
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "请在审核贴评论中说明需要作出哪些修改"
 
-#: app/blueprints/packages/packages.py:442
+#: app/blueprints/packages/packages.py:443
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
 msgstr "请在同意帖中留言，让编辑人员知道您做出的更改"
 
-#: app/blueprints/packages/packages.py:493
+#: app/blueprints/packages/packages.py:496
 msgid "Deleted package"
 msgstr "已删除的软件包"
 
-#: app/blueprints/packages/packages.py:515
+#: app/blueprints/packages/packages.py:518
 msgid "Unapproved package"
 msgstr "未通过的软件包"
 
-#: app/blueprints/packages/packages.py:524
+#: app/blueprints/packages/packages.py:527
 msgid "Maintainers (Comma-separated)"
 msgstr "维护者（用逗号隔开）"
 
-#: app/blueprints/packages/packages.py:533
+#: app/blueprints/packages/packages.py:536
 msgid "You don't have permission to edit maintainers"
 msgstr "你没有权限编辑维护者"
 
-#: app/blueprints/packages/packages.py:583
+#: app/blueprints/packages/packages.py:586
 msgid "You are not a maintainer"
 msgstr "你不是维护者"
 
-#: app/blueprints/packages/packages.py:586
+#: app/blueprints/packages/packages.py:589
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "软件包所有人不能把自己移除出维护者列表"
 
-#: app/blueprints/packages/packages.py:618
+#: app/blueprints/packages/packages.py:621
 msgid "Author Name"
 msgstr "作者名"
 
-#: app/blueprints/packages/packages.py:705
+#: app/blueprints/packages/packages.py:708
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "启用基于依赖项的支持检测（推荐）"
 
-#: app/blueprints/packages/packages.py:706
+#: app/blueprints/packages/packages.py:709
 msgid "Supported games"
 msgstr "支持的子游戏"
 
-#: app/blueprints/packages/packages.py:707
+#: app/blueprints/packages/packages.py:710
 msgid "Unsupported games"
 msgstr "不支持的子游戏"
 
-#: app/blueprints/packages/packages.py:708
+#: app/blueprints/packages/packages.py:711
 msgid "Supports all games (unless stated) / is game independent"
 msgstr "支持所有子游戏（如无特别说明）/ 子游戏无关"
 
-#: app/blueprints/packages/packages.py:724
+#: app/blueprints/packages/packages.py:727
 msgid "You need at least one release before you can edit game support"
 msgstr "需要至少一个发行版才能编辑子游戏支持"
 
-#: app/blueprints/packages/packages.py:728
+#: app/blueprints/packages/packages.py:731
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr "Mod（包）需要至少包含一个Mod。请创建发行版"
 
@@ -571,8 +1095,8 @@ msgstr "您最近评测了太多软件包。请稍候再试，并试着编写更
 
 #: app/blueprints/packages/reviews.py:80 app/blueprints/threads/__init__.py:207
 #: app/blueprints/threads/__init__.py:240
-#: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:113
-#: app/logic/packages.py:132
+#: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:114
+#: app/logic/packages.py:131
 msgid "Linking to blocked sites is not allowed"
 msgstr "不允许链接到封禁网站"
 
@@ -673,7 +1197,7 @@ msgid "Remember me"
 msgstr "记住我"
 
 #: app/blueprints/users/account.py:39 app/templates/base.html:176
-#: app/templates/donate/index.html:74 app/templates/users/login.html:4
+#: app/templates/donate/index.html:85 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "登录"
 
@@ -698,11 +1222,11 @@ msgstr "你需要确认注册电子邮件"
 msgid "Login failed"
 msgstr "登录失败"
 
-#: app/blueprints/users/account.py:100 app/blueprints/users/settings.py:75
+#: app/blueprints/users/account.py:100 app/blueprints/users/settings.py:76
 msgid "Display Name"
 msgstr "显示名称"
 
-#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:310
+#: app/blueprints/users/account.py:101 app/blueprints/users/settings.py:324
 #: app/templates/users/list.html:18
 msgid "Username"
 msgstr "用户名"
@@ -713,8 +1237,8 @@ msgid ""
 " (-), and periods (.) allowed"
 msgstr "只允许字母（A-Za-z）、数字（0-9）、下划线（_）、减号（-）和句号（.)"
 
-#: app/blueprints/users/account.py:104 app/blueprints/users/account.py:186
-#: app/blueprints/users/account.py:222 app/blueprints/users/account.py:373
+#: app/blueprints/users/account.py:104 app/blueprints/users/account.py:153
+#: app/blueprints/users/account.py:189 app/blueprints/users/account.py:340
 #: app/blueprints/users/settings.py:147
 msgid "Email"
 msgstr "电子邮件"
@@ -736,105 +1260,93 @@ msgstr "注册"
 msgid "Incorrect captcha answer"
 msgstr "验证码错误"
 
-#: app/blueprints/users/account.py:117
-msgid "Username is invalid"
-msgstr "用户名无效"
+#: app/blueprints/users/account.py:154
+msgid "Reset Password"
+msgstr "重置密码"
 
-#: app/blueprints/users/account.py:128
-msgid "An account already exists for that username but hasn't been claimed yet."
-msgstr "该用户名已存在账户，但尚未被认领。"
+#: app/blueprints/users/account.py:180
+msgid "Unable to find account"
+msgstr "无法找到账户"
 
-#: app/blueprints/users/account.py:131 app/blueprints/users/account.py:138
-msgid "That username/display name is already in use, please choose another."
-msgstr "该用户名/显示名称已被使用，请选择另一个名称。"
+#: app/blueprints/users/account.py:190 app/blueprints/users/account.py:198
+msgid "New password"
+msgstr "新密码"
 
-#: app/blueprints/users/account.py:143 app/blueprints/users/account.py:257
+#: app/blueprints/users/account.py:191 app/blueprints/users/account.py:199
+msgid "Verify password"
+msgstr "确认密码"
+
+#: app/blueprints/users/account.py:192 app/blueprints/users/account.py:200
+msgid "Passwords must match"
+msgstr "密码必须匹配"
+
+#: app/blueprints/users/account.py:197
+msgid "Old password"
+msgstr "旧密码"
+
+#: app/blueprints/users/account.py:208
+msgid "Passwords do not match"
+msgstr "密码不匹配"
+
+#: app/blueprints/users/account.py:219 app/blueprints/users/settings.py:175
+#: app/logic/users.py:51
+msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
+msgstr "该电子邮件地址已被取消关注/列入黑名单，不能再使用"
+
+#: app/blueprints/users/account.py:224 app/logic/users.py:46
 msgid "Email already in use"
 msgstr "电子邮件已使用"
 
-#: app/blueprints/users/account.py:144 app/blueprints/users/account.py:258
+#: app/blueprints/users/account.py:225 app/logic/users.py:47
 #, python-format
 msgid ""
 "We were unable to create the account as the email is already in use by "
 "%(display_name)s. Try a different email address."
 msgstr "我们无法创建该账户，因为该电子邮件已经被 %(display_name)s 使用。请使用另一个电子邮件地址。"
 
-#: app/blueprints/users/account.py:148 app/blueprints/users/account.py:252
-#: app/blueprints/users/settings.py:175
-msgid "That email address has been unsubscribed/blacklisted, and cannot be used"
-msgstr "该电子邮件地址已被取消关注/列入黑名单，不能再使用"
-
-#: app/blueprints/users/account.py:187
-msgid "Reset Password"
-msgstr "重置密码"
-
-#: app/blueprints/users/account.py:213
-msgid "Unable to find account"
-msgstr "无法找到账户"
-
-#: app/blueprints/users/account.py:223 app/blueprints/users/account.py:231
-msgid "New password"
-msgstr "新密码"
-
-#: app/blueprints/users/account.py:224 app/blueprints/users/account.py:232
-msgid "Verify password"
-msgstr "确认密码"
-
-#: app/blueprints/users/account.py:225 app/blueprints/users/account.py:233
-msgid "Passwords must match"
-msgstr "密码必须匹配"
-
-#: app/blueprints/users/account.py:230
-msgid "Old password"
-msgstr "旧密码"
-
-#: app/blueprints/users/account.py:241
-msgid "Passwords do not match"
-msgstr "密码不匹配"
-
-#: app/blueprints/users/account.py:272 app/blueprints/users/account.py:276
+#: app/blueprints/users/account.py:239 app/blueprints/users/account.py:243
 msgid "Your password has been changed successfully."
 msgstr "您的密码已成功更改。"
 
-#: app/blueprints/users/account.py:291
+#: app/blueprints/users/account.py:258
 msgid "Old password is incorrect"
 msgstr "旧密码不正确"
 
-#: app/blueprints/users/account.py:319
+#: app/blueprints/users/account.py:286
 msgid "Unknown verification token!"
 msgstr "未知验证令牌！"
 
-#: app/blueprints/users/account.py:325
+#: app/blueprints/users/account.py:292
 msgid "Token has expired"
 msgstr "令牌已过期"
 
-#: app/blueprints/users/account.py:339
+#: app/blueprints/users/account.py:306
 msgid "Another user is already using that email"
 msgstr "另一个用户已经在使用该电子邮件"
 
-#: app/blueprints/users/account.py:342
+#: app/blueprints/users/account.py:309
 msgid "Confirmed email change"
 msgstr "已确认的电子邮件变更"
 
-#: app/blueprints/users/account.py:347
+#: app/blueprints/users/account.py:314
 msgid "Email address changed"
 msgstr "电子邮箱已变更"
 
-#: app/blueprints/users/account.py:348
+#: app/blueprints/users/account.py:315
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
 msgstr "您的电子邮件地址已更改。如果您没有请求更改电子邮件地址，请与管理员联系。"
 
-#: app/blueprints/users/account.py:366
+#: app/blueprints/users/account.py:333
 msgid "You may now log in"
 msgstr "您现在可以登录了"
 
-#: app/blueprints/users/account.py:374
+#: app/blueprints/users/account.py:341
 msgid "Send"
 msgstr "发送"
 
-#: app/blueprints/users/account.py:405
+#: app/blueprints/users/account.py:372
 msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
@@ -966,62 +1478,72 @@ msgstr "&gt;5万下载量"
 msgid "Has received %(downloads)d downloads across all packages."
 msgstr "所有软件包共%(downloads)d次下载。"
 
-#: app/blueprints/users/settings.py:37 app/templates/users/profile.html:26
+#: app/blueprints/users/settings.py:38 app/templates/users/profile.html:26
 #: app/templates/users/profile_edit.html:8
 msgid "Edit Profile"
 msgstr "编辑个人资料"
 
-#: app/blueprints/users/settings.py:42 app/templates/users/account.html:12
+#: app/blueprints/users/settings.py:43 app/templates/users/account.html:12
 msgid "Account and Security"
 msgstr "账户和安全"
 
-#: app/blueprints/users/settings.py:47
+#: app/blueprints/users/settings.py:48
 #: app/templates/users/settings_email.html:12
 msgid "Email and Notifications"
 msgstr "电子邮件和通知"
 
-#: app/blueprints/users/settings.py:52 app/templates/api/list_tokens.html:10
+#: app/blueprints/users/settings.py:53 app/templates/api/list_tokens.html:10
 msgid "API Tokens"
 msgstr "API令牌"
 
-#: app/blueprints/users/settings.py:60 app/templates/oauth/list_clients.html:10
+#: app/blueprints/users/settings.py:61 app/templates/oauth/list_clients.html:10
 msgid "OAuth2 Applications"
 msgstr "OAuth2应用程序"
 
-#: app/blueprints/users/settings.py:67 app/templates/users/modtools.html:4
+#: app/blueprints/users/settings.py:68 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
 msgid "Moderator Tools"
 msgstr "版主工具"
 
-#: app/blueprints/users/settings.py:77
+#: app/blueprints/users/settings.py:78
 msgid "Donation URL"
 msgstr "捐款网址"
 
-#: app/blueprints/users/settings.py:93 app/blueprints/users/settings.py:100
+#: app/blueprints/users/settings.py:94 app/blueprints/users/settings.py:101
 msgid "A user already has that name"
 msgstr "有用户已经占有该名称"
 
-#: app/blueprints/users/settings.py:265
+#: app/blueprints/users/settings.py:264
+msgid "Removed GitHub account"
+msgstr ""
+
+#: app/blueprints/users/settings.py:266
+msgid ""
+"You need to add an email address and password before you can remove your "
+"GitHub account"
+msgstr ""
+
+#: app/blueprints/users/settings.py:279
 msgid "Users with moderator rank or above cannot be deleted"
 msgstr "不能删除版主或者以上的用户"
 
-#: app/blueprints/users/settings.py:311
+#: app/blueprints/users/settings.py:325
 msgid "Display name"
 msgstr "显示名称"
 
-#: app/blueprints/users/settings.py:312
+#: app/blueprints/users/settings.py:326
 msgid "Forums Username"
 msgstr "论坛用户名"
 
-#: app/blueprints/users/settings.py:313
+#: app/blueprints/users/settings.py:327
 msgid "GitHub Username"
 msgstr "GitHub用户名"
 
-#: app/blueprints/users/settings.py:314 app/templates/users/list.html:14
+#: app/blueprints/users/settings.py:328 app/templates/users/list.html:14
 msgid "Rank"
 msgstr "等级"
 
-#: app/blueprints/users/settings.py:363
+#: app/blueprints/users/settings.py:381
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr "不能提升用户等级到比自己更高的等级！"
 
@@ -1115,11 +1637,11 @@ msgid ""
 "underscores (_)"
 msgstr "名称只能包含小写字母（a-z）、数字（0-9）和下划线（_）"
 
-#: app/logic/packages.py:113
+#: app/logic/packages.py:112
 msgid "You don't have permission to edit this package"
 msgstr "你没有权限编辑这个软件包"
 
-#: app/logic/packages.py:117
+#: app/logic/packages.py:116
 msgid "You don't have permission to change the package name"
 msgstr "你没有权限重命名软件包"
 
@@ -1161,6 +1683,29 @@ msgstr "请上传%(file_desc)s"
 msgid "Uploaded image isn't actually an image"
 msgstr "上传的图片不是图片"
 
+#: app/logic/users.py:15
+msgid "Username is invalid"
+msgstr "用户名无效"
+
+#: app/logic/users.py:26
+msgid "An account already exists for that username but hasn't been claimed yet."
+msgstr "该用户名已存在账户，但尚未被认领。"
+
+#: app/logic/users.py:29
+#, python-format
+msgid ""
+"Unable to create an account as the username is already taken. If you "
+"meant to log in, you need to connect %(provider)s to your account first"
+msgstr ""
+
+#: app/logic/users.py:33
+msgid "That username/display name is already in use, please choose another."
+msgstr "该用户名/显示名称已被使用，请选择另一个名称。"
+
+#: app/logic/users.py:40
+msgid "Unable to create an account as the username was used in the past."
+msgstr ""
+
 #: app/models/packages.py:69
 msgid "Mod"
 msgstr "Mod"
@@ -1200,7 +1745,7 @@ msgstr "批准"
 #: app/templates/collections/view.html:39
 #: app/templates/oauth/create_edit.html:17
 #: app/templates/packages/release_edit.html:84
-#: app/templates/packages/review_create_edit.html:61
+#: app/templates/packages/review_create_edit.html:66
 #: app/templates/threads/delete_reply.html:19
 #: app/templates/threads/delete_thread.html:19
 #: app/templates/threads/view.html:50 app/templates/users/delete.html:34
@@ -1211,34 +1756,34 @@ msgstr "删除"
 msgid "Work in Progress"
 msgstr "未完工"
 
-#: app/tasks/emails.py:119
+#: app/tasks/emails.py:122
 msgid ""
 "You are receiving this email because you are a registered user of "
 "ContentDB."
 msgstr "您收到这封邮件是因为您是ContentDB的一名用户。"
 
-#: app/tasks/emails.py:125 app/templates/emails/verify.html:30
+#: app/tasks/emails.py:128 app/templates/emails/verify.html:30
 msgid ""
 "You are receiving this email because someone (hopefully you) entered your"
 " email address as a user's email."
 msgstr "您收到这封电子邮件是因为有人（希望是您）输入了您的电子邮件地址。"
 
-#: app/tasks/emails.py:160
+#: app/tasks/emails.py:163
 #, python-format
 msgid "%(num)d new notifications"
 msgstr "%(num)d个新通知"
 
-#: app/tasks/emails.py:162 app/templates/macros/forms.html:59
+#: app/tasks/emails.py:165 app/templates/macros/forms.html:59
 #: app/templates/packages/create_edit.html:41
 #: app/templates/todo/editor.html:155
 msgid "View"
 msgstr "查看"
 
-#: app/tasks/emails.py:165
+#: app/tasks/emails.py:168
 msgid "Manage email settings"
 msgstr "管理电子邮件设置"
 
-#: app/tasks/emails.py:167 app/templates/emails/base.html:63
+#: app/tasks/emails.py:170 app/templates/emails/base.html:63
 #: app/templates/emails/notification.html:34
 #: app/templates/emails/notification_digest.html:54
 #: app/templates/emails/verify.html:33
@@ -1319,7 +1864,7 @@ msgstr "登出"
 
 #: app/templates/admin/languages/list.html:4
 #: app/templates/admin/languages/list.html:10 app/templates/base.html:185
-#: app/templates/packages/view.html:598 app/utils/minetest_hypertext.py:256
+#: app/templates/packages/view.html:598 app/utils/minetest_hypertext.py:288
 msgid "Languages"
 msgstr "语言"
 
@@ -1332,58 +1877,72 @@ msgid "About"
 msgstr "关于"
 
 #: app/templates/base.html:247
+msgid "Contact Us"
+msgstr ""
+
+#: app/templates/base.html:248
 msgid "Rules"
 msgstr "规则"
 
-#: app/templates/base.html:248
+#: app/templates/base.html:249
 msgid "Policy and Guidance"
 msgstr "政策和指导"
 
-#: app/templates/base.html:249
+#: app/templates/base.html:250 app/templates/donate/index.html:46
+#: app/templates/donate/index.html:70 app/templates/users/profile.html:104
+msgid "Donate"
+msgstr "捐赠"
+
+#: app/templates/base.html:251
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:250 app/templates/users/register.html:37
+#: app/templates/base.html:252 app/templates/users/register.html:37
 msgid "Privacy Policy"
 msgstr "隐私政策"
 
-#: app/templates/base.html:252
+#: app/templates/base.html:254
 msgid "Report / DMCA"
 msgstr "举报 / DMCA"
 
-#: app/templates/base.html:254
+#: app/templates/base.html:256
 msgid "User List"
 msgstr "用户列表"
 
-#: app/templates/base.html:255 app/templates/packages/view.html:190
+#: app/templates/base.html:257 app/templates/packages/view.html:190
 #: app/templates/packages/view.html:673 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "贴子"
 
-#: app/templates/base.html:256 app/templates/collections/list.html:7
+#: app/templates/base.html:258 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
 msgstr "作品集"
 
-#: app/templates/base.html:257
-msgid "Support Packages"
-msgstr "支持的软件包"
+#: app/templates/base.html:259 app/templates/donate/index.html:4
+msgid "Support Creators"
+msgstr ""
 
-#: app/templates/base.html:258
+#: app/templates/base.html:260
 msgid "Translate Packages"
 msgstr "翻译软件包"
 
-#: app/templates/base.html:259
+#: app/templates/base.html:261
 msgid "Source Code"
 msgstr "源代码"
 
-#: app/templates/base.html:265
+#: app/templates/base.html:267
 msgid "Show non-free packages"
 msgstr "显示非自由软件包"
 
-#: app/templates/base.html:267
+#: app/templates/base.html:269
 msgid "Hide non-free packages"
 msgstr "隐藏非自由软件包"
+
+#: app/templates/base.html:273
+#, python-format
+msgid "Our privacy policy has been updated (%(date)s)"
+msgstr ""
 
 #: app/templates/index.html:4
 msgid "Welcome"
@@ -1706,10 +2265,6 @@ msgstr "%(author)s的作品集"
 msgid "To add a package, go to the package's page and click 'Add to collection'"
 msgstr "要添加软件包，前往软件包的页面并点击“加入作品集”"
 
-#: app/templates/donate/index.html:4
-msgid "Support packages"
-msgstr "支持的软件包"
-
 #: app/templates/donate/index.html:8
 msgid "Some content creators are accepting donations for their work."
 msgstr "有些内容创作者接受捐款。"
@@ -1729,29 +2284,41 @@ msgstr "作者：%(author)s"
 msgid "View package"
 msgstr "查看软件包"
 
-#: app/templates/donate/index.html:46 app/templates/users/profile.html:104
-msgid "Donate"
-msgstr "捐赠"
-
 #: app/templates/donate/index.html:62
+msgid "Support ContentDB"
+msgstr ""
+
+#: app/templates/donate/index.html:64
+msgid ""
+"You can donate to rubenwardy to cover ContentDB's costs and support "
+"future development."
+msgstr ""
+
+#: app/templates/donate/index.html:67
+msgid ""
+"For more information about what the cost of ContentDB and what rubenwardy"
+" does, see his donation page:"
+msgstr ""
+
+#: app/templates/donate/index.html:73
 msgid "Based on your reviews / favorites"
 msgstr "基于你的评测 / 收藏"
 
-#: app/templates/donate/index.html:67
+#: app/templates/donate/index.html:78
 msgid ""
 "No reviewed packages accepting donations. Consider reviewing your "
 "favourite packages"
 msgstr "没有评测过的软件包需要捐款。考虑评测一下你喜欢的软件包"
 
-#: app/templates/donate/index.html:71
+#: app/templates/donate/index.html:82
 msgid "Sign in to see recommendations based on the packages you've reviewed"
 msgstr "登录查看基于您评测的软件包的推荐"
 
-#: app/templates/donate/index.html:78
+#: app/templates/donate/index.html:89
 msgid "Top packages"
 msgstr "顶级软件包"
 
-#: app/templates/donate/index.html:82
+#: app/templates/donate/index.html:93
 #, python-format
 msgid "%(count)d packages are looking for donations"
 msgstr "%(count)d 个软件包等待捐赠"
@@ -1991,13 +2558,13 @@ msgid "Review"
 msgstr "评测"
 
 #: app/templates/macros/reviews.html:112 app/templates/macros/reviews.html:166
-#: app/templates/packages/review_create_edit.html:41
+#: app/templates/packages/review_create_edit.html:46
 #, python-format
 msgid "Do you recommend this %(type)s?"
 msgstr "你推荐这个%(type)s 吗？"
 
 #: app/templates/macros/reviews.html:134
-#: app/templates/packages/review_create_edit.html:46
+#: app/templates/packages/review_create_edit.html:51
 msgid "Why or why not? Try to be constructive"
 msgstr "为什么？请发表有建设性的评价"
 
@@ -2006,8 +2573,12 @@ msgid "Post Review"
 msgstr "发表评测"
 
 #: app/templates/macros/reviews.html:187
-msgid "Report an Issue"
-msgstr "反馈问题"
+msgid "Report an issue"
+msgstr ""
+
+#: app/templates/macros/reviews.html:191
+msgid "Ask a question"
+msgstr ""
 
 #: app/templates/macros/stats.html:15 app/templates/macros/stats.html:20
 #, python-format
@@ -2994,14 +3565,11 @@ msgid ""
 "In order to avoid data loss, you cannot permanently delete packages.\n"
 "\t\t\tYou can remove them from ContentDB, which will cause them to not be"
 "\n"
-"\t\t\tvisible to any users and they may be permanently deleted in the "
-"future.\n"
-"\t\t\tThe Admin can restore removed packages, if needed."
+"\t\t\tvisible to any users. Removed packages may be permanently deleted "
+"at a\n"
+"\t\t\tlater point. ContentDB staff can restore removed packages, if "
+"needed."
 msgstr ""
-"为了避免数据丢失，你不能永久地删除软件包。\n"
-"你可以把它们从 ContentDB 中删除，这将导致它们\n"
-"对所有用户都不可见，并且可能在将来被永久删除。\n"
-"如果需要，管理员可以恢复被删除的包。"
 
 #: app/templates/packages/remove.html:19
 msgid ""
@@ -3037,17 +3605,21 @@ msgstr "撤搞"
 msgid "Post a review for %(title)s by %(author)s"
 msgstr "发表对%(title)s（作者:%(author)s）的评测"
 
-#: app/templates/packages/review_create_edit.html:21
+#: app/templates/packages/review_create_edit.html:20
+msgid "Please make sure you read ContentDB's <a href='/rules/'>rules</a>"
+msgstr ""
+
+#: app/templates/packages/review_create_edit.html:25
 #: app/templates/threads/new.html:16
 #, python-format
 msgid "Found a bug? Post on the <a href='%(url)s'>issue tracker</a> instead."
 msgstr "发现错误？在 <a href='%(url)s'> 问题跟踪器 </a> 上发布。"
 
-#: app/templates/packages/review_create_edit.html:62
+#: app/templates/packages/review_create_edit.html:67
 msgid "Delete review."
 msgstr "删除评测。"
 
-#: app/templates/packages/review_create_edit.html:63
+#: app/templates/packages/review_create_edit.html:68
 msgid ""
 "This will convert the review into a thread, keeping the comments but "
 "removing its effect on the package's rating."
@@ -3368,7 +3940,7 @@ msgstr "喜欢这个软件包？捐款来支持发展"
 msgid "Donate now"
 msgstr "立即捐款"
 
-#: app/templates/packages/view.html:462 app/utils/minetest_hypertext.py:251
+#: app/templates/packages/view.html:462 app/utils/minetest_hypertext.py:283
 msgid "Dependencies"
 msgstr "依赖项"
 
@@ -3385,7 +3957,7 @@ msgid "Compatible Games"
 msgstr "兼容子游戏"
 
 #: app/templates/packages/view.html:526 app/templates/packages/view.html:546
-#: app/utils/minetest_hypertext.py:243
+#: app/utils/minetest_hypertext.py:275
 msgid "No specific game required"
 msgstr "无需特定的子游戏"
 
@@ -3417,7 +3989,7 @@ msgstr "信息"
 msgid "Technical Name"
 msgstr "技术名称"
 
-#: app/templates/packages/view.html:612 app/utils/minetest_hypertext.py:263
+#: app/templates/packages/view.html:612 app/utils/minetest_hypertext.py:295
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "代码%(code_license)s，媒体%(media_license)s。"
@@ -3426,7 +3998,7 @@ msgstr "代码%(code_license)s，媒体%(media_license)s。"
 msgid "Unknown"
 msgstr "未知"
 
-#: app/templates/packages/view.html:622 app/utils/minetest_hypertext.py:269
+#: app/templates/packages/view.html:622 app/utils/minetest_hypertext.py:301
 msgid "Added"
 msgstr "添加时间"
 
@@ -3434,7 +4006,7 @@ msgstr "添加时间"
 msgid "Remove myself"
 msgstr "移除自己"
 
-#: app/templates/packages/view.html:641 app/utils/minetest_hypertext.py:271
+#: app/templates/packages/view.html:641 app/utils/minetest_hypertext.py:303
 msgid "Provides"
 msgstr "提供"
 
@@ -3560,6 +4132,19 @@ msgstr "对以下用户可见："
 msgid "Plus approvers and editors"
 msgstr "加上审核者和编辑"
 
+#: app/templates/threads/view.html:131
+msgid "Is this review outdated?"
+msgstr ""
+
+#: app/templates/threads/view.html:132
+msgid "For example, does it complain about issues you've already fixed?"
+msgstr ""
+
+#: app/templates/threads/view.html:133
+#, python-format
+msgid "You can report outdated reviews by clicking %(flag)s on the review."
+msgstr ""
+
 #: app/templates/todo/editor.html:4 app/templates/todo/todo_base.html:17
 msgid "Editor Work Queue"
 msgstr "编辑人员工作队列"
@@ -3617,7 +4202,7 @@ msgstr "未满足的依赖项"
 msgid "Mod names that have hard dependers, but no packages providing them."
 msgstr "有硬依赖项但没有提供该硬依赖项的软件包的Mod名称。"
 
-#: app/templates/todo/editor.html:193 app/templates/users/account.html:73
+#: app/templates/todo/editor.html:193 app/templates/users/account.html:100
 msgid "View All"
 msgstr "查看全部"
 
@@ -3878,46 +4463,46 @@ msgstr "没有密码"
 msgid "Linked Accounts"
 msgstr "关联账户"
 
-#: app/templates/users/account.html:40 app/templates/users/account.html:52
-msgid "Connected"
-msgstr "已连接"
-
 #: app/templates/users/account.html:43
 #, python-format
 msgid "Please PM %(rubenwardy)s on the forums to link your account."
 msgstr "请在论坛上私信%(rubenwardy)s链接你的账户。"
 
-#: app/templates/users/account.html:57
+#: app/templates/users/account.html:59
 msgid "View ContentDB's GitHub Permissions"
 msgstr "查看ContentDB的GitHub权限"
 
-#: app/templates/users/account.html:62
+#: app/templates/users/account.html:65
+msgid "Disconnect"
+msgstr ""
+
+#: app/templates/users/account.html:70
 msgid "Link Github"
 msgstr "链接 Github"
 
-#: app/templates/users/account.html:65
+#: app/templates/users/account.html:73
 msgid "None"
 msgstr "无"
 
-#: app/templates/users/account.html:77
-msgid "Recent Account Actions"
-msgstr "最近的帐户操作"
-
-#: app/templates/users/account.html:82
+#: app/templates/users/account.html:80
 msgid "Account Deletion and Deactivation"
 msgstr "帐户删除和停用"
 
-#: app/templates/users/account.html:86
+#: app/templates/users/account.html:84
 msgid "Delete or Deactivate"
 msgstr "删除或停用"
 
-#: app/templates/users/account.html:89
+#: app/templates/users/account.html:87
 msgid "Account Deletion and Deactivation isn't available to users yet."
 msgstr "用户还不能使用帐户删除和停用。"
 
-#: app/templates/users/account.html:90
+#: app/templates/users/account.html:88
 msgid "Please contact the admin."
 msgstr "请联系管理员。"
+
+#: app/templates/users/account.html:93
+msgid "Recent Account Actions"
+msgstr "最近的帐户操作"
 
 #: app/templates/users/change_set_password.html:16
 #: app/templates/users/register.html:24
@@ -4140,10 +4725,6 @@ msgstr "忘了密码"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: app/templates/users/modtools.html:12
-msgid "Storage"
-msgstr "存储空间"
-
 #: app/templates/users/modtools.html:20
 #, python-format
 msgid ""
@@ -4269,17 +4850,21 @@ msgstr "个人资料图片"
 msgid "Import from forums"
 msgstr "从论坛导入"
 
-#: app/templates/users/profile_edit.html:47
+#: app/templates/users/profile_edit.html:33
+msgid "Remove profile picture"
+msgstr ""
+
+#: app/templates/users/profile_edit.html:51
 msgid ""
 "Profile pictures should be square, at least 64x64px, and one of the "
 "following formats: jpeg, png, or webp."
 msgstr "个人资料图片应是方形，大小至少为 64x64 像素，使用如下格式之一：jpeg、png 或 webp。"
 
-#: app/templates/users/profile_edit.html:51
+#: app/templates/users/profile_edit.html:55
 msgid "Profile Information"
 msgstr "个人信息"
 
-#: app/templates/users/profile_edit.html:58
+#: app/templates/users/profile_edit.html:62
 msgid "Pretending to be another user is grounds for a permanent ban"
 msgstr "假冒其他用户者永久封号"
 
@@ -4433,11 +5018,23 @@ msgstr "截至目前"
 msgid "Last year"
 msgstr "去年"
 
-#: app/utils/minetest_hypertext.py:248
+#: app/utils/minetest_hypertext.py:108
+msgid "(view table in browser)"
+msgstr ""
+
+#: app/utils/minetest_hypertext.py:139
+msgid "Image"
+msgstr ""
+
+#: app/utils/minetest_hypertext.py:259
+msgid "none"
+msgstr ""
+
+#: app/utils/minetest_hypertext.py:280
 msgid "Unsupported Games"
 msgstr "不支持的游戏"
 
-#: app/utils/minetest_hypertext.py:252
+#: app/utils/minetest_hypertext.py:284
 msgid "Optional dependencies"
 msgstr "可选择的依赖关系"
 
@@ -4794,3 +5391,37 @@ msgstr "请考虑启用电子邮件通知，您可以自定义发送的数量"
 
 #~ msgid "Topics with a strikethrough have been marked as discarded."
 #~ msgstr "标删除线的贴子已被丢弃。"
+
+#~ msgid "GitHub account is already associated with another user"
+#~ msgstr "GitHub账号已与其他用户绑定"
+
+#~ msgid "Unable to find an account for that GitHub user"
+#~ msgstr "无法找到该GitHub用户的账号"
+
+#~ msgid "Support Packages"
+#~ msgstr "支持的软件包"
+
+#~ msgid "Support packages"
+#~ msgstr "支持的软件包"
+
+#~ msgid "Report an Issue"
+#~ msgstr "反馈问题"
+
+#~ msgid ""
+#~ "In order to avoid data loss, you cannot permanently delete packages.\n"
+#~ "\t\t\tYou can remove them from "
+#~ "ContentDB, which will cause them to "
+#~ "not be\n"
+#~ "\t\t\tvisible to any users and "
+#~ "they may be permanently deleted in "
+#~ "the future.\n"
+#~ "\t\t\tThe Admin can restore removed packages, if needed."
+#~ msgstr ""
+#~ "为了避免数据丢失，你不能永久地删除软件包。\n"
+#~ "你可以把它们从 ContentDB 中删除，这将导致它们\n"
+#~ "对所有用户都不可见，并且可能在将来被永久删除。\n"
+#~ "如果需要，管理员可以恢复被删除的包。"
+
+#~ msgid "Connected"
+#~ msgstr "已连接"
+
