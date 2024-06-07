@@ -112,6 +112,10 @@ class PackageDevState(enum.Enum):
 	def __str__(self):
 		return self.name
 
+	@property
+	def title(self):
+		return self.value
+
 	def get_desc(self):
 		if self == PackageDevState.WIP:
 			return "Under active development, and may break worlds/things without warning"

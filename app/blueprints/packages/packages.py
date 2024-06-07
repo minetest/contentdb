@@ -458,6 +458,11 @@ def translation(package):
 @login_required
 @is_package_page
 def remove(package):
+	if not package.check_perm(current_user, Permission.EDIT_PACKAGE):
+		abort(403)
+
+	states = [PackageDevState.AS_IS, PackageDevState.DEPRECATED, PackageDevState.LOOKING_FOR_MAINTAINER]
+
 	if request.method == "GET":
 		# Find packages that will having missing hard deps after this action
 		broken_meta = MetaPackage.query.filter(MetaPackage.packages.contains(package),
@@ -467,8 +472,18 @@ def remove(package):
 			Package.dependencies.any(
 				and_(Dependency.meta_package_id.in_([x.id for x in broken_meta]), Dependency.optional == False))).all()
 
-		return render_template("packages/remove.html", package=package, hard_deps=hard_deps,
+		return render_template("packages/remove.html",
+				package=package, hard_deps=hard_deps, states=states,
 				tabs=get_package_tabs(current_user, package), current_tab="remove")
+
+	for state in states:
+		if state.name in request.form:
+			flash(gettext("Set state to %(state)s", state=state.title), "success")
+			package.dev_state = state
+			msg = "Set dev state of {} to {}".format(package.title, state.title)
+			add_audit_log(AuditSeverity.NORMAL, current_user, msg, package.get_url("packages.view"), package)
+			db.session.commit()
+			return redirect(package.get_url("packages.view"))
 
 	reason = request.form.get("reason") or "?"
 	if len(reason) > 500:
