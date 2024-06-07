@@ -57,7 +57,7 @@
 				{% for tag in package.tags %}
 					<a class="badge bg-primary me-1"
 							href="{{ url_set_query(_add={ 'tag': tag.name }) }}">
-						{{ tag.title }}
+						{{ tag.get_translated().title }}
 					</a>
 				{% endfor %}
 				<!-- <a class="badge bg-secondary add-btn px-2" href="#">

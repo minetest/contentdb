@@ -163,11 +163,11 @@
 						{{ _("Work in Progress") }}
 					</span>
 				{% endif %}
-				{% for t in package.tags %}
+				{% for tag in package.tags %}
 					<a class="badge bg-primary" rel="nofollow"
-							title="{{ t.description or '' }}"
-							href="{{ url_for('packages.list_all', tag=t.name) }}">
-						{{ t.title }}
+							title="{{ tag.get_translated().description or '' }}"
+							href="{{ url_for('packages.list_all', tag=tag.name) }}">
+						{{ tag.get_translated().title }}
 					</a>
 				{% endfor %}
 			</p>

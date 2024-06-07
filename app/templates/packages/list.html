@@ -31,16 +31,16 @@
 
 			{% if tag in selected_tags %}
 				<a class="btn btn-sm btn-primary m-1" rel="nofollow"
-						title="{{ tag.description or '' }}"
+						title="{{ tag.get_translated().description or '' }}"
 						href="{{ url_set_query(page=1, _remove={ 'tag': tag.name }) }}">
-					{{ tag.title }}
+					{{ tag.get_translated().title }}
 					<span class="badge rounded-pill bg-light text-dark ms-1">{{ count }}</span>
 				</a>
 			{% else %}
 				<a class="btn btn-sm btn-secondary m-1" rel="nofollow"
-						title="{{ tag.description or '' }}"
+						title="{{ tag.get_translated().description or '' }}"
 						href="{{ url_set_query(page=1, _add={ 'tag': tag.name }) }}">
-					{{ tag.title }}
+					{{ tag.get_translated().title }}
 					<span class="badge rounded-pill bg-light text-dark ms-1">{{ count }}</span>
 				</a>
 			{% endif %}

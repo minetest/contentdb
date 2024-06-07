@@ -261,7 +261,7 @@ def package_info_as_hypertext(package: Package, formspec_version: int = 7):
 		body += "</b>\n\n"
 
 	add_value(gettext("Type"), package.type.text)
-	add_list(gettext("Tags"), [tag.title for tag in package.tags])
+	add_list(gettext("Tags"), [tag.get_translated()["title"] for tag in package.tags])
 
 	if package.type != PackageType.GAME:
 		def make_game_link(game):

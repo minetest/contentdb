@@ -2,7 +2,7 @@
 
 {% block title %}
 	{% if tag %}
-		Edit {{ tag.title }}
+		Edit {{ tag.get_translated().title }}
 	{% else %}
 		New tag
 	{% endif %}

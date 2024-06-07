@@ -906,6 +906,13 @@ class ContentWarning(db.Model):
 		regex = re.compile("[^a-z_]")
 		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
 
+	def get_translated(self):
+		# Translations are automated on dynamic data using `extract_translations.py`
+		return {
+			"title": gettext(self.title),
+			"description": gettext(self.description),
+		}
+
 	def as_dict(self):
 		description = self.description if self.description != "" else None
 		return { "name": self.name, "title": self.title, "description": description }
@@ -930,6 +937,13 @@ class Tag(db.Model):
 		import re
 		regex = re.compile("[^a-z_]")
 		self.name = regex.sub("", self.title.lower().replace(" ", "_"))
+
+	def get_translated(self):
+		# Translations are automated on dynamic data using `extract_translations.py`
+		return {
+			"title": gettext(self.title),
+			"description": gettext(self.description),
+		}
 
 	def as_dict(self):
 		description = self.description if self.description != "" else None

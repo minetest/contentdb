@@ -60,9 +60,9 @@ class QueryBuilder:
 		if len(self.tags) == 0:
 			ret = package_type
 		elif len(self.tags) == 1:
-			ret = self.tags[0].title + " " + package_type
+			ret = self.tags[0].get_translated()["title"] + " " + package_type
 		else:
-			tags = ", ".join([tag.title for tag in self.tags])
+			tags = ", ".join([tag.get_translated()["title"] for tag in self.tags])
 			ret = f"{tags} - {package_type}"
 
 		if self.search:

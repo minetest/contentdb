@@ -217,11 +217,12 @@ def download(package):
 		return redirect(release.get_download_url())
 
 
-def makeLabel(obj):
-	if obj.description:
-		return "{}: {}".format(obj.title, obj.description)
+def make_label(obj: Tag | ContentWarning):
+	translated = obj.get_translated()
+	if translated["description"]:
+		return "{}: {}".format(translated["title"], translated["description"])
 	else:
-		return obj.title
+		return translated["title"]
 
 
 class PackageForm(FlaskForm):
@@ -232,8 +233,8 @@ class PackageForm(FlaskForm):
 
 	dev_state        = SelectField(lazy_gettext("Maintenance State"), [InputRequired()], choices=PackageDevState.choices(with_none=True), coerce=PackageDevState.coerce)
 
-	tags             = QuerySelectMultipleField(lazy_gettext('Tags'), query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=makeLabel)
-	content_warnings = QuerySelectMultipleField(lazy_gettext('Content Warnings'), query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=makeLabel)
+	tags             = QuerySelectMultipleField(lazy_gettext('Tags'), query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)), get_pk=lambda a: a.id, get_label=make_label)
+	content_warnings = QuerySelectMultipleField(lazy_gettext('Content Warnings'), query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=make_label)
 	license          = QuerySelectField(lazy_gettext("License"), [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	media_license    = QuerySelectField(lazy_gettext("Media License"), [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 
