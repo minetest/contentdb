@@ -14,7 +14,9 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-from flask import abort, send_file, Blueprint, current_app
+import re
+import requests
+from flask import abort, send_file, Blueprint, current_app, request
 import os
 from PIL import Image
 
@@ -104,4 +106,27 @@ def make_thumbnail(img, level):
 
 	res = send_file(cache_filepath)
 	res.headers["Cache-Control"] = "max-age=604800" # 1 week
+	return res
+
+
+@bp.route("/thumbnails/youtube/<id_>.jpg")
+def youtube(id_: str):
+	if not re.match(r"^[A-Za-z0-9\-_]+$", id_):
+		abort(400)
+
+	cache_dir = os.path.join(current_app.config["THUMBNAIL_DIR"], "youtube")
+	os.makedirs(cache_dir, exist_ok=True)
+	cache_filepath = os.path.join(cache_dir, id_ + ".jpg")
+
+	url = f"https://img.youtube.com/vi/{id_}/default.jpg"
+
+	response = requests.get(url, stream=True)
+	if response.status_code != 200:
+		abort(response.status_code)
+
+	with open(cache_filepath, "wb") as file:
+		file.write(response.content)
+
+	res = send_file(cache_filepath)
+	res.headers["Cache-Control"] = "max-age=604800"  # 1 week
 	return res

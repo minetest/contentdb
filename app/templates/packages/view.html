@@ -292,6 +292,10 @@
 						{% if package.video_url %}
 							<li>
 								<a href="{{ package.video_url }}" class="video-embed">
+									{% set thumbnail_url = package.video_thumbnail_url %}
+									{% if thumbnail_url %}
+										<img src="{{ thumbnail_url }}" alt="{{ _('Thumbnail for video') }}" />
+									{% endif %}
 									<i class="fas fa-play"></i>
 									<div class="label">
 										<i class="fas fa-external-link-square-alt"></i>

@@ -392,6 +392,19 @@ class Package(db.Model):
 	def donate_url_actual(self):
 		return self.donate_url or self.author.donate_url
 
+	@property
+	def video_thumbnail_url(self):
+		from app.utils.url import get_youtube_id
+
+		if self.video_url is None:
+			return None
+
+		id_ = get_youtube_id(self.video_url)
+		if id_:
+			return url_for("thumbnails.youtube", id_=id_)
+
+		return None
+
 	enable_game_support_detection = db.Column(db.Boolean, nullable=False, default=True)
 
 	translations = db.relationship("PackageTranslation", back_populates="package",

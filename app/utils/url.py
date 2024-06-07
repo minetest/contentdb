@@ -31,16 +31,22 @@ def url_get_query(parsed_url: urlparse.ParseResult) -> Dict[str, List[str]]:
 	return urlparse.parse_qs(parsed_url.query)
 
 
-def clean_youtube_url(url: str) -> Optional[str]:
+def get_youtube_id(url: str) -> Optional[str]:
 	parsed = urlparse.urlparse(url)
-	print(parsed)
 	if (parsed.netloc == "www.youtube.com" or parsed.netloc == "youtube.com") and parsed.path == "/watch":
-		print(url_get_query(parsed))
 		video_id = url_get_query(parsed).get("v", [None])[0]
 		if video_id:
-			return url_set_query("https://www.youtube.com/watch", {"v": video_id})
+			return video_id
 
 	elif parsed.netloc == "youtu.be":
-		return url_set_query("https://www.youtube.com/watch", {"v": parsed.path[1:]})
+		return parsed.path[1:]
+
+	return None
+
+
+def clean_youtube_url(url: str) -> Optional[str]:
+	id_ = get_youtube_id(url)
+	if id_:
+		return url_set_query("https://www.youtube.com/watch", {"v": id_})
 
 	return None
