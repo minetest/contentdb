@@ -52,6 +52,7 @@
 					</p>
 
 					{{ render_field(form.title) }}
+					{{ render_field(form.language, hint=_("What language are you writing your review in?")) }}
 					{{ render_field(form.comment, label="", class_="m-0", fieldclass="form-control markdown", data_enter_submit="1") }} <br />
 					{{ render_submit_field(form.btn_submit) }}
 				</div>

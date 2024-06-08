@@ -18,14 +18,15 @@ from collections import namedtuple
 
 import typing
 from flask import render_template, request, redirect, flash, url_for, abort, jsonify
-from flask_babel import gettext, lazy_gettext
+from flask_babel import gettext, lazy_gettext, get_locale
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, RadioField
-from wtforms.validators import InputRequired, Length
+from wtforms.validators import InputRequired, Length, DataRequired
+from wtforms_sqlalchemy.fields import QuerySelectField
 
 from app.models import db, PackageReview, Thread, ThreadReply, NotificationType, PackageReviewVote, Package, UserRank, \
-	Permission, AuditSeverity, PackageState
+	Permission, AuditSeverity, PackageState, Language
 from app.tasks.webhooktasks import post_discord_webhook
 from app.utils import is_package_page, add_notification, get_int_or_abort, is_yes, is_safe_url, rank_required, \
 	add_audit_log, has_blocked_domains, should_return_json
@@ -41,8 +42,21 @@ def list_reviews():
 	return render_template("packages/reviews_list.html", pagination=pagination, reviews=pagination.items)
 
 
+def get_default_language():
+	locale = get_locale()
+	if locale:
+		return Language.query.filter_by(id=locale.language).first()
+
+	return None
+
 class ReviewForm(FlaskForm):
 	title = StringField(lazy_gettext("Title"), [InputRequired(), Length(3, 100)])
+	language = QuerySelectField(lazy_gettext("Language"), [DataRequired()],
+			allow_blank=True,
+			query_factory=lambda: Language.query.order_by(db.asc(Language.title)),
+			get_pk=lambda a: a.id,
+			get_label=lambda a: a.title,
+			default=get_default_language)
 	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
 	rating = RadioField(lazy_gettext("Rating"), [InputRequired()],
 			choices=[("5", lazy_gettext("Yes")), ("3", lazy_gettext("Neutral")), ("1", lazy_gettext("No"))])
@@ -88,6 +102,7 @@ def review(package):
 				db.session.add(review)
 
 			review.rating = int(form.rating.data)
+			review.language = form.language.data
 
 			thread = review.thread
 			if not thread:

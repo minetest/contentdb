@@ -176,13 +176,16 @@ class ThreadReply(db.Model):
 class PackageReview(db.Model):
 	id         = db.Column(db.Integer, primary_key=True)
 
-	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=True)
+	package_id = db.Column(db.Integer, db.ForeignKey("package.id"), nullable=False)
 	package    = db.relationship("Package", foreign_keys=[package_id], back_populates="reviews")
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
 	author_id  = db.Column(db.Integer, db.ForeignKey("user.id"), nullable=False)
 	author     = db.relationship("User", foreign_keys=[author_id], back_populates="reviews")
+
+	language_id = db.Column(db.String, db.ForeignKey("language.id"), nullable=True, default=None)
+	language    = db.relationship("Language", foreign_keys=[language_id])
 
 	rating     = db.Column(db.Integer, nullable=False)
 
