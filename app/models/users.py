@@ -39,8 +39,28 @@ class UserRank(enum.Enum):
 	def at_least(self, min):
 		return self.value >= min.value
 
-	def get_title(self):
-		return self.name.replace("_", " ").title()
+	@property
+	def title(self):
+		if self == UserRank.BANNED:
+			return lazy_gettext("Banned")
+		elif self == UserRank.NOT_JOINED:
+			return lazy_gettext("Not Joined")
+		elif self == UserRank.NEW_MEMBER:
+			return lazy_gettext("New Member")
+		elif self == UserRank.MEMBER:
+			return lazy_gettext("Member")
+		elif self == UserRank.TRUSTED_MEMBER:
+			return lazy_gettext("Trusted Member")
+		elif self == UserRank.APPROVER:
+			return lazy_gettext("Approver")
+		elif self == UserRank.EDITOR:
+			return lazy_gettext("Editor")
+		elif self == UserRank.BOT:
+			return lazy_gettext("Bot")
+		elif self == UserRank.MODERATOR:
+			return lazy_gettext("Moderator")
+		elif self == UserRank.ADMIN:
+			return lazy_gettext("Admin")
 
 	def to_name(self):
 		return self.name.lower()
@@ -50,7 +70,7 @@ class UserRank(enum.Enum):
 
 	@classmethod
 	def choices(cls):
-		return [(choice, choice.get_title()) for choice in cls]
+		return [(choice, choice.title) for choice in cls]
 
 	@classmethod
 	def coerce(cls, item):

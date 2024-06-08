@@ -10,7 +10,7 @@
 
 				<div class="row {% if entry.severity == entry.severity.NORMAL %}text-muted{% endif %}">
 					<div class="col-sm-auto text-center" style="width: 50px;"
-							title="{{ _('Severity: %(sev)s.', sev=entry.severity.get_title()) }}">
+							title="{{ _('Severity: %(sev)s.', sev=entry.severity.title) }}">
 						{% if entry.severity == entry.severity.MODERATION %}
 							<i class="fas fa-exclamation-triangle" style="color: yellow;"></i>
 						{% elif entry.severity == entry.severity.EDITOR %}

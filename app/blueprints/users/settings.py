@@ -374,7 +374,7 @@ def modtools(username):
 			if current_user.rank.at_least(new_rank):
 				if new_rank != user.rank:
 					user.rank = form["rank"].data
-					msg = "Set rank of {} to {}".format(user.display_name, user.rank.get_title())
+					msg = "Set rank of {} to {}".format(user.display_name, user.rank.title)
 					add_audit_log(AuditSeverity.MODERATION, current_user, msg,
 								  url_for("users.profile", username=username))
 			else:

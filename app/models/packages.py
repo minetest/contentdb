@@ -1358,14 +1358,15 @@ class PackageUpdateConfig(db.Model):
 		else:
 			return lazy_gettext("New tag %(tag_name)s found on the Git repo.", tag_name=self.last_tag)
 
-	def get_title(self):
+	@property
+	def title(self):
 		return self.last_tag or self.outdated_at.strftime("%Y-%m-%d")
 
 	def get_ref(self):
 		return self.last_tag or self.last_commit
 
 	def get_create_release_url(self):
-		return self.package.get_url("packages.create_release", title=self.get_title(), ref=self.get_ref())
+		return self.package.get_url("packages.create_release", title=self.title, ref=self.get_ref())
 
 
 class PackageAlias(db.Model):

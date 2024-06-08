@@ -71,12 +71,13 @@ class AuditSeverity(enum.Enum):
 	def __str__(self):
 		return self.name
 
-	def get_title(self):
+	@property
+	def title(self):
 		return self.name.replace("_", " ").title()
 
 	@classmethod
 	def choices(cls):
-		return [(choice, choice.get_title()) for choice in cls]
+		return [(choice, choice.title) for choice in cls]
 
 	@classmethod
 	def coerce(cls, item):

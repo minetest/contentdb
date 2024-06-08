@@ -113,7 +113,7 @@ def apply_all_updates(username):
 				PackageRelease.commit_hash == package.update_config.last_commit)).count() > 0:
 			continue
 
-		title = package.update_config.get_title()
+		title = package.update_config.title
 		ref = package.update_config.get_ref()
 
 		rel = PackageRelease()
