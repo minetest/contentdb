@@ -7,7 +7,7 @@ import requests
 
 
 base_url = "https://content.minetest.net"
-translations = set()
+translations = []
 
 
 def add_translations_from_api_array(path: str, fields: List[str]):
@@ -18,7 +18,7 @@ def add_translations_from_api_array(path: str, fields: List[str]):
 	for i, row in enumerate(json):
 		for field in fields:
 			if row.get(field) is not None:
-				translations.add(row[field])
+				translations.append(row[field])
 
 
 add_translations_from_api_array("/api/tags/", ["title", "description"])
