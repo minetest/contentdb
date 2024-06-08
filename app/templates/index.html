@@ -69,9 +69,10 @@
 											{{ warning.title }}
 										</span>
 									{% endfor %}
-									{% for t in tags[:3] %}
-										<span class="badge bg-primary" title="{{ t.description or '' }}">
-											{{ t.title }}
+									{% for tag in tags[:3] %}
+										{% set trans = tag.get_translated() %}
+										<span class="badge bg-primary" title="{{ trans.description or '' }}">
+											{{ trans.title }}
 										</span>
 									{% endfor %}
 									<span class="btn" title="{{ _('Reviews') }}">
