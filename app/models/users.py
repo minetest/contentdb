@@ -17,7 +17,7 @@
 import datetime
 import enum
 
-from flask import url_for
+from flask_babel import lazy_gettext
 from flask_login import UserMixin
 from sqlalchemy import desc, text
 
@@ -400,36 +400,93 @@ class NotificationType(enum.Enum):
 	# Any other
 	OTHER          = 0
 
-
-	def get_title(self):
-		return self.name.replace("_", " ").title()
+	@property
+	def title(self):
+		if self == NotificationType.PACKAGE_EDIT:
+			# NOTE: PACKAGE_EDIT notification type
+			return lazy_gettext("Package Edit")
+		elif self == NotificationType.PACKAGE_APPROVAL:
+			# NOTE: PACKAGE_APPROVAL notification type
+			return lazy_gettext("Package Approval")
+		elif self == NotificationType.NEW_THREAD:
+			# NOTE: NEW_THREAD notification type
+			return lazy_gettext("New Thread")
+		elif self == NotificationType.NEW_REVIEW:
+			# NOTE: NEW_REVIEW notification type
+			return lazy_gettext("New Review")
+		elif self == NotificationType.THREAD_REPLY:
+			# NOTE: THREAD_REPLY notification type
+			return lazy_gettext("Thread Reply")
+		elif self == NotificationType.BOT:
+			# NOTE: BOT notification type
+			return lazy_gettext("Bot")
+		elif self == NotificationType.MAINTAINER:
+			# NOTE: MAINTAINER notification type
+			return lazy_gettext("Maintainer")
+		elif self == NotificationType.EDITOR_ALERT:
+			# NOTE: EDITOR_ALERT notification type
+			return lazy_gettext("Editor Alert")
+		elif self == NotificationType.EDITOR_MISC:
+			# NOTE: EDITOR_MISC notification type
+			return lazy_gettext("Editor Misc")
+		elif self == NotificationType.OTHER:
+			# NOTE: OTHER notification type
+			return lazy_gettext("Other")
+		else:
+			raise "Unknown notification type"
 
 	def to_name(self):
 		return self.name.lower()
 
-	def get_description(self):
+	@property
+	def this_is(self):
 		if self == NotificationType.PACKAGE_EDIT:
-			return "When another user edits your packages, releases, etc."
+			return lazy_gettext("This is a Package Edit notification.")
 		elif self == NotificationType.PACKAGE_APPROVAL:
-			return "Notifications from editors related to the package approval process."
+			return lazy_gettext("This is a Package Approval notification.")
 		elif self == NotificationType.NEW_THREAD:
-			return "When a thread is created on your package."
+			return lazy_gettext("This is a New Thread notification.")
 		elif self == NotificationType.NEW_REVIEW:
-			return "When a user posts a review on your package."
+			return lazy_gettext("This is a New Review notification.")
 		elif self == NotificationType.THREAD_REPLY:
-			return "When someone replies to a thread you're watching."
+			return lazy_gettext("This is a Thread Reply notification.")
 		elif self == NotificationType.BOT:
-			return "From a bot - for example, update notifications."
+			return lazy_gettext("This is a Bot notification.")
 		elif self == NotificationType.MAINTAINER:
-			return "When your package's maintainers change."
+			return lazy_gettext("This is a Maintainer change notification.")
 		elif self == NotificationType.EDITOR_ALERT:
-			return "For editors: Important alerts."
+			return lazy_gettext("This is an Editor Alert notification.")
 		elif self == NotificationType.EDITOR_MISC:
-			return "For editors: Minor notifications, including new threads."
+			return lazy_gettext("This is an Editor Misc notification.")
 		elif self == NotificationType.OTHER:
-			return "Minor notifications not important enough for a dedicated category."
+			return lazy_gettext("This is an Other notification.")
 		else:
-			return ""
+			raise "Unknown notification type"
+
+	@property
+	def description(self):
+		if self == NotificationType.PACKAGE_EDIT:
+			return lazy_gettext("When another user edits your packages, releases, etc.")
+		elif self == NotificationType.PACKAGE_APPROVAL:
+			return lazy_gettext("Notifications from editors related to the package approval process.")
+		elif self == NotificationType.NEW_THREAD:
+			return lazy_gettext("When a thread is created on your package.")
+		elif self == NotificationType.NEW_REVIEW:
+			return lazy_gettext("When a user posts a review on your package.")
+		elif self == NotificationType.THREAD_REPLY:
+			return lazy_gettext("When someone replies to a thread you're watching.")
+		elif self == NotificationType.BOT:
+			return lazy_gettext("From a bot - for example, update notifications.")
+		elif self == NotificationType.MAINTAINER:
+			return lazy_gettext("When your package's maintainers change.")
+		elif self == NotificationType.EDITOR_ALERT:
+			return lazy_gettext("For editors: Important alerts.")
+		elif self == NotificationType.EDITOR_MISC:
+			return lazy_gettext("For editors: Minor notifications, including new threads.")
+		elif self == NotificationType.OTHER:
+			return lazy_gettext("Minor notifications not important enough for a dedicated category.")
+		else:
+			raise "Unknown notification type"
 
 	def __str__(self):
 		return self.name
@@ -439,7 +496,7 @@ class NotificationType(enum.Enum):
 
 	@classmethod
 	def choices(cls):
-		return [(choice, choice.get_title()) for choice in cls]
+		return [(choice, choice.title) for choice in cls]
 
 	@classmethod
 	def coerce(cls, item):

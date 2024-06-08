@@ -162,10 +162,7 @@ def get_user_medals(user: User) -> Tuple[List[Medal], List[Medal]]:
 	if user_package_ranks:
 		top_rank = user_package_ranks[2]
 		top_type = PackageType.coerce(user_package_ranks[0])
-		if top_rank == 1:
-			title = gettext(u"Top %(type)s", type=top_type.text.lower())
-		else:
-			title = gettext(u"Top %(group)d %(type)s", group=top_rank, type=top_type.text.lower())
+		title = top_type.get_top_ordinal(top_rank)
 		if top_type == PackageType.MOD:
 			icon = "fa-box"
 		elif top_type == PackageType.GAME:
@@ -173,8 +170,7 @@ def get_user_medals(user: User) -> Tuple[List[Medal], List[Medal]]:
 		else:
 			icon = "fa-paint-brush"
 
-		description = gettext(u"%(display_name)s has a %(type)s placed at #%(place)d.",
-				display_name=user.display_name, type=top_type.text.lower(), place=top_rank)
+		description = top_type.get_top_ordinal_description(user.display_name, top_rank)
 		unlocked.append(
 				Medal.make_unlocked(place_to_color(top_rank), icon, title, description))
 

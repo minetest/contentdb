@@ -81,6 +81,33 @@ class PackageType(enum.Enum):
 		elif self == PackageType.TXP:
 			return lazy_gettext("Texture Packs")
 
+	def get_top_ordinal(self, place: int):
+		if place == 1:
+			if self == PackageType.MOD:
+				return lazy_gettext("Top mod")
+			elif self == PackageType.GAME:
+				return lazy_gettext("Top game")
+			elif self == PackageType.TXP:
+				return lazy_gettext("Top texture pack")
+		else:
+			if self == PackageType.MOD:
+				return lazy_gettext("Top %(place)d mod", place=place)
+			elif self == PackageType.GAME:
+				return lazy_gettext("Top %(place)d game", place=place)
+			elif self == PackageType.TXP:
+				return lazy_gettext("Top %(place)d texture pack", place=place)
+
+	def get_top_ordinal_description(self, display_name: str, place: int):
+		if self == PackageType.MOD:
+			return lazy_gettext(u"%(display_name)s has a mod placed at #%(place)d.",
+					display_name=display_name,  place=place)
+		elif self == PackageType.GAME:
+			return lazy_gettext(u"%(display_name)s has a game placed at #%(place)d.",
+					display_name=display_name,  place=place)
+		elif self == PackageType.TXP:
+			return lazy_gettext(u"%(display_name)s has a texture pack placed at #%(place)d.",
+					display_name=display_name,  place=place)
+
 	@classmethod
 	def get(cls, name):
 		try:

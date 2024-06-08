@@ -55,7 +55,7 @@
 					{% if type %}<input type="hidden" name="type" value="{{ type }}" />{% endif %}
 					<div class="input-group m-0">
 						<input class="form-control" name="q" type="text"
-							placeholder="{% if query_hint %}{{ _('Search %(type)s', type=query_hint | lower) }}{% else %}{{ _('Search all packages') }}{% endif %}"
+							placeholder="{% if query_hint %}{{ _('Search %(type)s', type=query_hint) }}{% else %}{{ _('Search all packages') }}{% endif %}"
 							value="{{ query or ''}}">
 						<button type="submit" class="btn btn-secondary" title="{{ _('Search') }}">
 							<i class="fas fa-search"></i>

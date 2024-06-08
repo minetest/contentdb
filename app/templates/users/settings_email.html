@@ -52,8 +52,8 @@
 			</tr>
 			{% for type in types %}
 				<tr>
-					<td>{{ type.get_title() }}</td>
-					<td>{{ type.get_description() }}</td>
+					<td>{{ type.title }}</td>
+					<td>{{ type.description }}</td>
 					<td style="text-align: center;">
 						{{ render_checkbox_field(form["pref_" + type.to_name()]) }}
 					</td>
