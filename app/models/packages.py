@@ -126,7 +126,7 @@ class PackageType(enum.Enum):
 
 class PackageDevState(enum.Enum):
 	WIP = "Work in Progress"
-	BETA  = "Beta"
+	BETA = "Beta"
 	ACTIVELY_DEVELOPED = "Actively Developed"
 	MAINTENANCE_ONLY = "Maintenance Only"
 	AS_IS = "As-Is"
@@ -141,19 +141,39 @@ class PackageDevState(enum.Enum):
 
 	@property
 	def title(self):
-		return self.value
+		if self == PackageDevState.WIP:
+			# NOTE: Package maintenance state
+			return lazy_gettext("Looking for Maintainer")
+		elif self == PackageDevState.BETA:
+			# NOTE: Package maintenance state
+			return lazy_gettext("Beta")
+		elif self == PackageDevState.ACTIVELY_DEVELOPED:
+			# NOTE: Package maintenance state
+			return lazy_gettext("Actively Developed")
+		elif self == PackageDevState.MAINTENANCE_ONLY:
+			# NOTE: Package maintenance state
+			return lazy_gettext("Maintenance Only")
+		elif self == PackageDevState.AS_IS:
+			# NOTE: Package maintenance state
+			return lazy_gettext("As-is")
+		elif self == PackageDevState.DEPRECATED:
+			# NOTE: Package maintenance state
+			return lazy_gettext("Deprecated")
+		elif self == PackageDevState.LOOKING_FOR_MAINTAINER:
+			# NOTE: Package maintenance state
+			return lazy_gettext("Looking for Maintainer")
 
 	def get_desc(self):
 		if self == PackageDevState.WIP:
-			return "Under active development, and may break worlds/things without warning"
+			return lazy_gettext("Under active development, and may break worlds/things without warning")
 		elif self == PackageDevState.BETA:
-			return "Fully playable, but with some breakages/changes expected"
+			return lazy_gettext("Fully playable, but with some breakages/changes expected")
 		elif self == PackageDevState.MAINTENANCE_ONLY:
-			return "Finished, with bug fixes being made as needed"
+			return lazy_gettext("Finished, with bug fixes being made as needed")
 		elif self == PackageDevState.AS_IS:
-			return "Finished, the maintainer doesn't intend to continue working on it or provide support"
+			return lazy_gettext("Finished, the maintainer doesn't intend to continue working on it or provide support")
 		elif self == PackageDevState.DEPRECATED:
-			return "The maintainer doesn't recommend this package. See the description for more info"
+			return lazy_gettext("The maintainer doesn't recommend this package. See the description for more info")
 		else:
 			return None
 
@@ -1326,16 +1346,17 @@ class PackageUpdateConfig(db.Model):
 
 	def get_message(self):
 		if self.trigger == PackageUpdateTrigger.COMMIT:
-			msg = "New commit {} found on the Git repo.".format(self.last_commit[0:5])
+			msg = lazy_gettext("New commit %(hash)s found on the Git repo.", hash=self.last_commit[0:5])
 
 			last_release = self.package.releases.first()
 			if last_release and last_release.commit_hash:
-				msg += " The last release was commit {}".format(last_release.commit_hash[0:5])
+				msg += " " + lazy_gettext("The last release was commit %(hash)s",
+						hash=last_release.commit_hash[0:5])
 
 			return msg
 
 		else:
-			return "New tag {} found on the Git repo.".format(self.last_tag)
+			return lazy_gettext("New tag %(tag_name)s found on the Git repo.", tag_name=self.last_tag)
 
 	def get_title(self):
 		return self.last_tag or self.outdated_at.strftime("%Y-%m-%d")
