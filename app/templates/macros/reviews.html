@@ -63,6 +63,11 @@
 									<i class="fas fa-pen"></i>
 								</a>
 							{% endif %}
+							{% if review.language %}
+								<span class="float-end mx-2 text-muted">
+									{{ review.language.title }}
+								</span>
+							{% endif %}
 
 							<p>
 								<strong>{{ review.thread.title }}</strong>
