@@ -114,7 +114,7 @@
 		<form method="post" action="{{ package.get_url('packages.review') }}" class="card-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<p>
-				{{ _("Do you recommend this %(type)s?", type=package.type.text | lower) }}
+				{{ package.type.do_you_recommend }}
 			</p>
 
 			<div class="btn-group" role="group">
@@ -168,7 +168,7 @@
 		<form method="post" action="{{ package.get_url('packages.review') }}" class="card-body">
 			<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
 			<p>
-				{{ _("Do you recommend this %(type)s?", type=package.type.text | lower) }}
+				{{ package.type.do_you_recommend }}
 			</p>
 
 			<div class="btn-toolbar" role="toolbar">

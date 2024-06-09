@@ -108,6 +108,15 @@ class PackageType(enum.Enum):
 			return lazy_gettext(u"%(display_name)s has a texture pack placed at #%(place)d.",
 					display_name=display_name,  place=place)
 
+	@property
+	def do_you_recommend(self):
+		if self == PackageType.MOD:
+			return lazy_gettext(u"Do you recommend this mod?")
+		elif self == PackageType.GAME:
+			return lazy_gettext(u"Do you recommend this game?")
+		elif self == PackageType.TXP:
+			return lazy_gettext(u"Do you recommend this texture pack?")
+
 	@classmethod
 	def get(cls, name):
 		try:
