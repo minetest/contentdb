@@ -31,7 +31,7 @@
 		<a class="list-group-item list-group-item-action" href="{{ url_for('users.profile', username=user.username) }}">
 			<div class="row">
 				<div class="col-sm-2 {{ user.rank }}"
-						title="{{ _('Rank: %(rank)s.', rank=user.rank.get_title()) }}">
+						title="{{ _('Rank: %(rank)s.', rank=user.rank.title) }}">
 					{% if user.rank == user.rank.ADMIN %}
 						<i class="fas fa-user-cog me-2"></i>
 					{% elif user.rank == user.rank.MODERATOR %}
