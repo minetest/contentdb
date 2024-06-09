@@ -258,7 +258,6 @@ class QueryBuilder:
 		else:
 			for flag in flags:
 				warning = ContentWarning.query.filter_by(name=flag).first()
-				flags.discard(flag)
 				if warning:
 					query = query.filter(Package.content_warnings.any(ContentWarning.id == warning.id))
 
