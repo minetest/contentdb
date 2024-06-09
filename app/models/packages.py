@@ -1011,7 +1011,7 @@ class Tag(db.Model):
 		# Translations are automated on dynamic data using `extract_translations.py`
 		return {
 			"title": gettext(self.title),
-			"description": gettext(self.description),
+			"description": gettext(self.description) if self.description else "",
 		}
 
 	def as_dict(self):
