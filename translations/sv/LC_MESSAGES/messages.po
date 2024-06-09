@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-09 11:39+0100\n"
+"POT-Creation-Date: 2024-06-09 13:27+0100\n"
 "PO-Revision-Date: 2024-06-09 10:38+0000\n"
 "Last-Translator: ROllerozxa <rollerozxa@voxelmanip.se>\n"
 "Language: sv\n"
@@ -36,32 +36,32 @@ msgid "Entries to the 2023 Minetest Game Jam "
 msgstr "Inlägg till 2023 års Minetest Game Jam "
 
 #: app/_translations.py:7
+msgid "Server Moderation and Tools"
+msgstr "Servermoderering och verktyg"
+
+#: app/_translations.py:8
+msgid "Helps with server maintenance and moderation"
+msgstr "Hjälper med serverunderhållning och moderering"
+
+#: app/_translations.py:9
+msgid "Player vs Player (PvP)"
+msgstr "Spelare vs spelare (PvP)"
+
+#: app/_translations.py:10
+msgid "Designed to be played competitively against other players"
+msgstr "Designad för att spelas konkurrenskraftigt mot andra spelare"
+
+#: app/_translations.py:11
 msgid "Player Effects / Power Ups"
 msgstr "Spelareffekter / Power-ups"
 
-#: app/_translations.py:8
+#: app/_translations.py:12
 msgid ""
 "For content that changes player effects, including physics, for example: "
 "speed, jump height or gravity."
 msgstr ""
 "För innehåll som ändrar speleffekter, inkluderande fysik, för exempel: "
 "hastighet, hopphöjd eller gravitation."
-
-#: app/_translations.py:9
-msgid "Server Moderation and Tools"
-msgstr "Servermoderering och verktyg"
-
-#: app/_translations.py:10
-msgid "Helps with server maintenance and moderation"
-msgstr "Hjälper med serverunderhållning och moderering"
-
-#: app/_translations.py:11
-msgid "Player vs Player (PvP)"
-msgstr "Spelare vs spelare (PvP)"
-
-#: app/_translations.py:12
-msgid "Designed to be played competitively against other players"
-msgstr "Designad för att spelas konkurrenskraftigt mot andra spelare"
 
 #: app/_translations.py:13
 msgid "Joke"
@@ -77,12 +77,12 @@ msgstr ""
 "långsiktigt."
 
 #: app/_translations.py:15
-msgid "Inventory"
-msgstr "Lagring"
+msgid "Shooter"
+msgstr "Skjutare"
 
 #: app/_translations.py:16
-msgid "Changes the inventory GUI"
-msgstr "Ändrar lagrings-GUI:n"
+msgid "First person shooters (FPS) and more"
+msgstr "First person shooters (FPS) och mer"
 
 #: app/_translations.py:17
 msgid "Mapgen / Biomes / Decoration"
@@ -93,28 +93,28 @@ msgid "New mapgen or changes mapgen"
 msgstr "Ny mapgen eller ändrar mapgen"
 
 #: app/_translations.py:19
-msgid "Shooter"
-msgstr "Skjutare"
-
-#: app/_translations.py:20
-msgid "First person shooters (FPS) and more"
-msgstr "First person shooters (FPS) och mer"
-
-#: app/_translations.py:21
-msgid "Developer Tools"
-msgstr "Utvecklarverktyg"
-
-#: app/_translations.py:22
-msgid "Tools for game and mod developers"
-msgstr "Verktyg för spel- och moddutvecklare"
-
-#: app/_translations.py:23
 msgid "Singleplayer-focused"
 msgstr "Enspelarsfokuserat"
 
-#: app/_translations.py:24
+#: app/_translations.py:20
 msgid "Content that can be played alone"
 msgstr "Innehåll som kan spelas ensamt"
+
+#: app/_translations.py:21
+msgid "World Maintenance and Tools"
+msgstr "Världunderhållning och verktyg"
+
+#: app/_translations.py:22
+msgid "Tools to manage the world"
+msgstr "Verktyg för att hantera världen"
+
+#: app/_translations.py:23
+msgid "Developer Tools"
+msgstr "Utvecklarverktyg"
+
+#: app/_translations.py:24
+msgid "Tools for game and mod developers"
+msgstr "Verktyg för spel- och moddutvecklare"
 
 #: app/_translations.py:25
 msgid "Adventure / RPG"
@@ -137,12 +137,12 @@ msgid "Focuses on or adds new sounds or musical things"
 msgstr "Fokuserar på eller lägger till nya ljud eller musikaliska saker"
 
 #: app/_translations.py:30
-msgid "World Maintenance and Tools"
-msgstr "Världunderhållning och verktyg"
+msgid "Inventory"
+msgstr "Lagring"
 
 #: app/_translations.py:31
-msgid "Tools to manage the world"
-msgstr "Verktyg för att hantera världen"
+msgid "Changes the inventory GUI"
+msgstr "Ändrar lagrings-GUI:n"
 
 #: app/_translations.py:32
 msgid "Chat / Commands"
@@ -157,26 +157,18 @@ msgstr ""
 "konsollen."
 
 #: app/_translations.py:34
-msgid "Tools / Weapons / Armor"
-msgstr "Verktyg / Vapen / Rustning"
+msgid "Plants and Farming"
+msgstr "Växter och odling"
 
 #: app/_translations.py:35
-msgid "Adds or changes tools, weapons, and armor"
-msgstr "Lägger till eller ändrar verktyg, vapen och rustningar"
+msgid "Adds new plants or other farmable resources."
+msgstr "Lägger till nya växter eller andra jordbruksresurser."
 
 #: app/_translations.py:36
-msgid "Multiplayer-focused"
-msgstr "Flerspelarfokuserat"
-
-#: app/_translations.py:37
-msgid "Can/should only be used in multiplayer"
-msgstr "Kan/borde bara användas i flerspelarläge"
-
-#: app/_translations.py:38
 msgid "Complex installation"
 msgstr "Komplex installation"
 
-#: app/_translations.py:39
+#: app/_translations.py:37
 msgid ""
 "Requires futher installation steps, such as installing luarocks or "
 "editing the trusted mod setting"
@@ -184,11 +176,27 @@ msgstr ""
 "Kräver ytterligare installationssteg såsom installation from Luarocks "
 "eller redigering av trusted mods"
 
+#: app/_translations.py:38
+msgid "Multiplayer-focused"
+msgstr "Flerspelarfokuserat"
+
+#: app/_translations.py:39
+msgid "Can/should only be used in multiplayer"
+msgstr "Kan/borde bara användas i flerspelarläge"
+
 #: app/_translations.py:40
+msgid "Tools / Weapons / Armor"
+msgstr "Verktyg / Vapen / Rustning"
+
+#: app/_translations.py:41
+msgid "Adds or changes tools, weapons, and armor"
+msgstr "Lägger till eller ändrar verktyg, vapen och rustningar"
+
+#: app/_translations.py:42
 msgid "Sims"
 msgstr "Simulationer"
 
-#: app/_translations.py:41
+#: app/_translations.py:43
 msgid ""
 "Mods and games that aim to simulate real life activity. Similar to "
 "SimCity/TheSims/OpenTTD/etc"
@@ -196,73 +204,73 @@ msgstr ""
 "Moddar och spel som syftar till att simulera verkliga aktiviteter. "
 "Liknande SimCity/TheSims/OpenTTD/etc"
 
-#: app/_translations.py:42
-msgid "Plants and Farming"
-msgstr "Växter och odling"
-
-#: app/_translations.py:43
-msgid "Adds new plants or other farmable resources."
-msgstr "Lägger till nya växter eller andra jordbruksresurser."
-
 #: app/_translations.py:44
-msgid "Puzzle"
-msgstr "Pussel"
-
-#: app/_translations.py:45
-msgid "Focus on puzzle solving instead of combat"
-msgstr "Fokus på att lösa pussel istället för strid"
-
-#: app/_translations.py:46
 msgid "<16px"
 msgstr "&lt;16px"
 
-#: app/_translations.py:47
+#: app/_translations.py:45
 msgid "Less than 16px"
 msgstr "Mindre än 16px"
 
-#: app/_translations.py:48
-msgid "Building Mechanics and Tools"
-msgstr "Byggmekaniker och verktyg"
-
-#: app/_translations.py:49
-msgid "Adds game mechanics or tools that change how players build."
-msgstr "Lägger till spelmekaniker eller verktyg som ändrar hur spelare bygger."
-
-#: app/_translations.py:50
-msgid "Decorative"
-msgstr "Dekorativt"
-
-#: app/_translations.py:51
-msgid "Adds nodes with no other purpose than for use in building"
-msgstr "Lägger till noder för inget annat syfte än för att bygga"
-
-#: app/_translations.py:52
+#: app/_translations.py:46
 msgid "Environment / Weather"
 msgstr "Miljö / Väder"
 
-#: app/_translations.py:53
+#: app/_translations.py:47
 msgid ""
 "Improves the world, adding weather, ambient sounds, or other environment "
 "mechanics"
 msgstr "Förbättrar världen, lägger till väder, ljud eller andra miljömekaniker"
 
-#: app/_translations.py:54
+#: app/_translations.py:48
+msgid "Mobs / Animals / NPCs"
+msgstr "Mobs / Djur / NPCs"
+
+#: app/_translations.py:49
+msgid "Adds mobs, animals, and NPCs"
+msgstr "Lägger till mobs, djur och NPC:er"
+
+#: app/_translations.py:50
+msgid "Puzzle"
+msgstr "Pussel"
+
+#: app/_translations.py:51
+msgid "Focus on puzzle solving instead of combat"
+msgstr "Fokus på att lösa pussel istället för strid"
+
+#: app/_translations.py:52
 msgid "Building"
 msgstr "Byggning"
 
-#: app/_translations.py:55
+#: app/_translations.py:53
 msgid "Focuses on building, such as adding new materials or nodes"
 msgstr "Fokuserar på byggning, som att lägga till nya material eller noder"
 
+#: app/_translations.py:54
+msgid "Building Mechanics and Tools"
+msgstr "Byggmekaniker och verktyg"
+
+#: app/_translations.py:55
+msgid "Adds game mechanics or tools that change how players build."
+msgstr "Lägger till spelmekaniker eller verktyg som ändrar hur spelare bygger."
+
 #: app/_translations.py:56
+msgid "Decorative"
+msgstr "Dekorativt"
+
+#: app/_translations.py:57
+msgid "Adds nodes with no other purpose than for use in building"
+msgstr "Lägger till noder för inget annat syfte än för att bygga"
+
+#: app/_translations.py:58
 msgid "Magic / Enchanting"
 msgstr "Magi / Förtrollning"
 
-#: app/_translations.py:57
+#: app/_translations.py:59
 msgid "One-of-a-kind / Original"
 msgstr "Originellt"
 
-#: app/_translations.py:58
+#: app/_translations.py:60
 msgid ""
 "For games and such that are of their own kind, distinct and original in "
 "nature to others of the same category."
@@ -270,27 +278,77 @@ msgstr ""
 "För spel och sådant som är unikt, distinkt och originellt jämfört med "
 "andra i sin kategori."
 
-#: app/_translations.py:59
-msgid "Mobs / Animals / NPCs"
-msgstr "Mobs / Djur / NPCs"
-
-#: app/_translations.py:60
-msgid "Adds mobs, animals, and NPCs"
-msgstr "Lägger till mobs, djur och NPC:er"
-
 #: app/_translations.py:61
+msgid "16px"
+msgstr "16px"
+
+#: app/_translations.py:62
+msgid "For 16px texture packs"
+msgstr "För 16px-texturpaket"
+
+#: app/_translations.py:63
+msgid "Custom mapgen"
+msgstr "Anpassad mapgen"
+
+#: app/_translations.py:64
+msgid ""
+"Contains a completely custom mapgen implemented in Lua, usually requires "
+"worlds to be set to the 'singlenode' mapgen."
+msgstr ""
+"Innehåller en helt anpassad mapgen implementerad i Lua, kräver vanligtvis"
+" att världar ställs in på ”singlenode”-mapgen."
+
+#: app/_translations.py:65
+msgid "HUD"
+msgstr "HUD"
+
+#: app/_translations.py:66
+msgid "For mods that grant the player extra information in the HUD"
+msgstr "För moddar som ger spelaren extra information i HUD"
+
+#: app/_translations.py:67
 msgid "API / Library"
 msgstr "API:er / Bibliotek"
 
-#: app/_translations.py:62
+#: app/_translations.py:68
 msgid "Primarily adds an API for other mods to use"
 msgstr "Lägger primärt till API:er för andra moddar att använda"
 
-#: app/_translations.py:63
+#: app/_translations.py:69
+msgid "Mini-game"
+msgstr "Minispel"
+
+#: app/_translations.py:70
+msgid "Adds a mini-game to be played within Minetest"
+msgstr "Lägger till ett minispel för att spelas inuti Minetest"
+
+#: app/_translations.py:71
+msgid "Education"
+msgstr "Utbildning"
+
+#: app/_translations.py:72
+msgid "Either has educational value, or is a tool to help teachers "
+msgstr ""
+"Antingen har pedagogiskt värde, eller är ett verktyg för att hjälpa "
+"lärare "
+
+#: app/_translations.py:73
+msgid "Sports"
+msgstr "Sport"
+
+#: app/_translations.py:74 app/templates/users/modtools.html:12
+msgid "Storage"
+msgstr "Lagring"
+
+#: app/_translations.py:75
+msgid "Adds or improves item storage mechanics"
+msgstr "Lägger till eller förbättrar lagringsmekaniker"
+
+#: app/_translations.py:76
 msgid "Survival"
 msgstr "Överlevnad"
 
-#: app/_translations.py:64
+#: app/_translations.py:77
 msgid ""
 "Written specifically for survival gameplay with a focus on game-balance, "
 "difficulty level, or resources available through crafting, mining, ..."
@@ -299,41 +357,11 @@ msgstr ""
 "svårighetsgrad eller resurser tillgängliga genom skapning, gruvbrytning, "
 "..."
 
-#: app/_translations.py:65
-msgid "Education"
-msgstr "Utbildning"
-
-#: app/_translations.py:66
-msgid "Either has educational value, or is a tool to help teachers "
-msgstr ""
-"Antingen har pedagogiskt värde, eller är ett verktyg för att hjälpa "
-"lärare "
-
-#: app/_translations.py:67
-msgid "16px"
-msgstr "16px"
-
-#: app/_translations.py:68
-msgid "For 16px texture packs"
-msgstr "För 16px-texturpaket"
-
-#: app/_translations.py:69
-msgid "Custom mapgen"
-msgstr "Anpassad mapgen"
-
-#: app/_translations.py:70
-msgid ""
-"Contains a completely custom mapgen implemented in Lua, usually requires "
-"worlds to be set to the 'singlenode' mapgen."
-msgstr ""
-"Innehåller en helt anpassad mapgen implementerad i Lua, kräver vanligtvis"
-" att världar ställs in på ”singlenode”-mapgen."
-
-#: app/_translations.py:71
+#: app/_translations.py:78
 msgid "Player vs Environment (PvE)"
 msgstr "Spelare vs mljö (PvE)"
 
-#: app/_translations.py:72
+#: app/_translations.py:79
 msgid ""
 "For content designed for one or more players that focus on combat against"
 " the world, mobs, or NPCs."
@@ -341,63 +369,55 @@ msgstr ""
 "För innehåll som är utformat för en eller flera spelare som fokuserar på "
 "kamp mot världen, mobbar eller NPCer."
 
-#: app/_translations.py:73
-msgid "Mini-game"
-msgstr "Minispel"
-
-#: app/_translations.py:74
-msgid "Adds a mini-game to be played within Minetest"
-msgstr "Lägger till ett minispel för att spelas inuti Minetest"
-
-#: app/_translations.py:75
-msgid "HUD"
-msgstr "HUD"
-
-#: app/_translations.py:76
-msgid "For mods that grant the player extra information in the HUD"
-msgstr "För moddar som ger spelaren extra information i HUD"
-
-#: app/_translations.py:77
-msgid "Sports"
-msgstr "Sport"
-
-#: app/_translations.py:78 app/templates/users/modtools.html:12
-msgid "Storage"
-msgstr "Lagring"
-
-#: app/_translations.py:79
-msgid "Adds or improves item storage mechanics"
-msgstr "Lägger till eller förbättrar lagringsmekaniker"
-
 #: app/_translations.py:80
+msgid "GUI"
+msgstr "GUI"
+
+#: app/_translations.py:81
+msgid "For content whose main utility / feature is in GUI/formspec form"
+msgstr "För innehåll vars huvudsakliga verktyg/funktion är i GUI/formspec-form"
+
+#: app/_translations.py:82
+msgid "64px"
+msgstr "64px"
+
+#: app/_translations.py:83
+msgid "For 64px texture packs"
+msgstr "För 64px-texturepaket"
+
+#: app/_translations.py:84
 msgid "Commerce / Economy"
 msgstr "Handel / Ekonomi"
 
-#: app/_translations.py:81
+#: app/_translations.py:85
 msgid "Related to economies, money, and trading"
 msgstr "Relaterad till ekonomier, pengar och handel"
 
-#: app/_translations.py:82
+#: app/_translations.py:86
 msgid "Minetest Game improved"
 msgstr "Minetest Game-förbättrat"
 
-#: app/_translations.py:83
+#: app/_translations.py:87
 msgid "Forks of MTG"
 msgstr "Gafflar av MTG"
 
-#: app/_translations.py:84
-msgid "Machines / Electronics"
-msgstr "Maskiner / Elektronik"
+#: app/_translations.py:88
+msgid "Jam / Weekly Challenges 2021"
+msgstr "Jam / Weekly Challenges 2021"
 
-#: app/_translations.py:85
-msgid "Adds machines useful in automation, tubes, or power."
-msgstr "Lägger till maskiner som är användbara i automation, rör eller kraft."
+#: app/_translations.py:89
+msgid ""
+"For mods created for the Discord \"Weekly Challenges\" modding event in "
+"2021"
+msgstr ""
+"För moddar skapade för Discordens \"Weekly Challenges\"-moddingevent i "
+"2021"
 
-#: app/_translations.py:86
+#: app/_translations.py:90
 msgid "Transport"
 msgstr "Transport"
 
-#: app/_translations.py:87
+#: app/_translations.py:91
 msgid ""
 "Adds or changes transportation methods. Includes teleportation, vehicles,"
 " ridable mobs, transport infrastructure and thematic content"
@@ -405,37 +425,17 @@ msgstr ""
 "Lägger till eller ändrar transportmetoder. Inkluderar teleportation, "
 "fordon, ridbara mobs, transportinfrastruktur och tematiskt innehåll"
 
-#: app/_translations.py:88
-msgid "GUI"
-msgstr "GUI"
-
-#: app/_translations.py:89
-msgid "For content whose main utility / feature is in GUI/formspec form"
-msgstr "För innehåll vars huvudsakliga verktyg/funktion är i GUI/formspec-form"
-
-#: app/_translations.py:90
-msgid "64px"
-msgstr "64px"
-
-#: app/_translations.py:91
-msgid "For 64px texture packs"
-msgstr "För 64px-texturepaket"
-
 #: app/_translations.py:92
 msgid "Food / Drinks"
 msgstr "Mat / Dryck"
 
 #: app/_translations.py:93
-msgid "Jam / Weekly Challenges 2021"
-msgstr "Jam / Weekly Challenges 2021"
+msgid "Machines / Electronics"
+msgstr "Maskiner / Elektronik"
 
 #: app/_translations.py:94
-msgid ""
-"For mods created for the Discord \"Weekly Challenges\" modding event in "
-"2021"
-msgstr ""
-"För moddar skapade för Discordens \"Weekly Challenges\"-moddingevent i "
-"2021"
+msgid "Adds machines useful in automation, tubes, or power."
+msgstr "Lägger till maskiner som är användbara i automation, rör eller kraft."
 
 #: app/_translations.py:95
 msgid "Creative"
@@ -476,18 +476,26 @@ msgid "For mods created for the Discord \"Combat\" modding event in 2020"
 msgstr "För moddar som skapats för Discord:ens \"Combat\"-moddingevent 2020"
 
 #: app/_translations.py:103
+msgid "Jam / Game 2021"
+msgstr "Jam / Game 2021"
+
+#: app/_translations.py:104
+msgid "Entries to the 2021 Minetest Game Jam"
+msgstr "Inlägg till 2021 års Minetest Game Jam"
+
+#: app/_translations.py:105
 msgid "128px+"
 msgstr "128px+"
 
-#: app/_translations.py:104
+#: app/_translations.py:106
 msgid "For 128px or higher texture packs"
 msgstr "För 128px eller högre texturpaket"
 
-#: app/_translations.py:105
+#: app/_translations.py:107
 msgid "Player customization / Skins"
 msgstr "Spelaranpassning / Skins"
 
-#: app/_translations.py:106
+#: app/_translations.py:108
 msgid ""
 "Allows the player to customize their character by changing the texture or"
 " adding accessories."
@@ -495,25 +503,17 @@ msgstr ""
 "Tillåter spelaren att anpassa sin karaktär genom att ändra texturen eller"
 " lägga till tillbehör."
 
-#: app/_translations.py:107
+#: app/_translations.py:109
 msgid "Strategy / RTS"
 msgstr "Strategi / RTS"
 
-#: app/_translations.py:108
+#: app/_translations.py:110
 msgid ""
 "Games and mods with a heavy strategy component, whether real-time or "
 "turn-based"
 msgstr ""
 "Spelar och moddar med en tung strategikomponent, antingen realtid eller "
 "turordningsbaserad"
-
-#: app/_translations.py:109
-msgid "Jam / Game 2021"
-msgstr "Jam / Game 2021"
-
-#: app/_translations.py:110
-msgid "Entries to the 2021 Minetest Game Jam"
-msgstr "Inlägg till 2021 års Minetest Game Jam"
 
 #: app/_translations.py:111
 msgid " Jam / Game 2022"
@@ -634,7 +634,7 @@ msgstr "Spara"
 #: app/blueprints/packages/releases.py:66 app/blueprints/packages/reviews.py:53
 #: app/blueprints/threads/__init__.py:281
 #: app/templates/admin/languages/list.html:23
-#: app/templates/macros/reviews.html:138 app/templates/macros/topics.html:5
+#: app/templates/macros/reviews.html:143 app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:17
 #: app/templates/packages/translation.html:54
 msgid "Title"
@@ -1111,18 +1111,18 @@ msgstr "Kommentar"
 msgid "Rating"
 msgstr "Betyg"
 
-#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:119
-#: app/templates/macros/reviews.html:173
+#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:124
+#: app/templates/macros/reviews.html:178
 msgid "Yes"
 msgstr "Ja"
 
-#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:124
-#: app/templates/macros/reviews.html:177
+#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:129
+#: app/templates/macros/reviews.html:182
 msgid "Neutral"
 msgstr "Neutral"
 
-#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:129
-#: app/templates/macros/reviews.html:181
+#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:134
+#: app/templates/macros/reviews.html:186
 msgid "No"
 msgstr "Nej"
 
@@ -1838,63 +1838,75 @@ msgstr ""
 msgid "%(display_name)s has a texture pack placed at #%(place)d."
 msgstr ""
 
-#: app/models/packages.py:146 app/models/packages.py:164
+#: app/models/packages.py:114
+msgid "Do you recommend this mod?"
+msgstr ""
+
+#: app/models/packages.py:116
+msgid "Do you recommend this game?"
+msgstr ""
+
+#: app/models/packages.py:118
+msgid "Do you recommend this texture pack?"
+msgstr ""
+
+#: app/models/packages.py:155 app/models/packages.py:173
 msgid "Looking for Maintainer"
 msgstr ""
 
-#: app/models/packages.py:149
+#: app/models/packages.py:158
 msgid "Beta"
 msgstr ""
 
-#: app/models/packages.py:152
+#: app/models/packages.py:161
 msgid "Actively Developed"
 msgstr ""
 
-#: app/models/packages.py:155
+#: app/models/packages.py:164
 msgid "Maintenance Only"
 msgstr ""
 
-#: app/models/packages.py:158
+#: app/models/packages.py:167
 msgid "As-is"
 msgstr ""
 
-#: app/models/packages.py:161
+#: app/models/packages.py:170
 msgid "Deprecated"
 msgstr ""
 
-#: app/models/packages.py:168
+#: app/models/packages.py:177
 msgid "Under active development, and may break worlds/things without warning"
 msgstr ""
 
-#: app/models/packages.py:170
+#: app/models/packages.py:179
 msgid "Fully playable, but with some breakages/changes expected"
 msgstr ""
 
-#: app/models/packages.py:172
+#: app/models/packages.py:181
 msgid "Finished, with bug fixes being made as needed"
 msgstr ""
 
-#: app/models/packages.py:174
+#: app/models/packages.py:183
 msgid ""
 "Finished, the maintainer doesn't intend to continue working on it or "
 "provide support"
 msgstr ""
 
-#: app/models/packages.py:176
+#: app/models/packages.py:185
 msgid ""
 "The maintainer doesn't recommend this package. See the description for "
 "more info"
 msgstr ""
 
-#: app/models/packages.py:222
+#: app/models/packages.py:231
 msgid "Submit for Approval"
 msgstr "Skicka in för godkännande"
 
-#: app/models/packages.py:224
+#: app/models/packages.py:233
 msgid "Approve"
 msgstr "Godkänn"
 
-#: app/models/packages.py:226 app/templates/api/create_edit_token.html:17
+#: app/models/packages.py:235 app/templates/api/create_edit_token.html:17
 #: app/templates/collections/delete.html:14
 #: app/templates/collections/view.html:39
 #: app/templates/oauth/create_edit.html:17
@@ -1906,21 +1918,21 @@ msgstr "Godkänn"
 msgid "Delete"
 msgstr "Ta bort"
 
-#: app/models/packages.py:615 app/templates/packages/view.html:163
+#: app/models/packages.py:624 app/templates/packages/view.html:163
 msgid "Work in Progress"
 msgstr "Under arbete"
 
-#: app/models/packages.py:1349
+#: app/models/packages.py:1358
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr ""
 
-#: app/models/packages.py:1353
+#: app/models/packages.py:1362
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr ""
 
-#: app/models/packages.py:1359
+#: app/models/packages.py:1368
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr ""
@@ -2286,7 +2298,7 @@ msgstr ""
 #: app/templates/collections/create_edit.html:81
 #: app/templates/collections/list.html:39
 #: app/templates/collections/view.html:91 app/templates/index.html:48
-#: app/templates/macros/reviews.html:76 app/templates/macros/topics.html:52
+#: app/templates/macros/reviews.html:81 app/templates/macros/topics.html:52
 #: app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
 #: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
@@ -2805,7 +2817,7 @@ msgstr "Borttagen Användare"
 msgid "No audit log entries."
 msgstr "Inga auditeringloggsposter."
 
-#: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:145
+#: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:150
 #: app/templates/packages/remove.html:73 app/templates/packages/view.html:468
 #: app/templates/users/modtools.html:86
 msgid "Required"
@@ -2901,40 +2913,34 @@ msgstr "Hjälpsam"
 msgid "Unhelpful"
 msgstr "Ohjälpsam"
 
-#: app/templates/macros/reviews.html:85
+#: app/templates/macros/reviews.html:90
 #, python-format
 msgid "%(num)d comments"
 msgstr "%(num)d kommentarer"
 
-#: app/templates/macros/reviews.html:97
+#: app/templates/macros/reviews.html:102
 msgid "No reviews, yet."
 msgstr "Inga recensioner, än."
 
-#: app/templates/macros/reviews.html:107 app/templates/macros/reviews.html:161
+#: app/templates/macros/reviews.html:112 app/templates/macros/reviews.html:166
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
 msgstr "Recension"
 
-#: app/templates/macros/reviews.html:112 app/templates/macros/reviews.html:166
-#: app/templates/packages/review_create_edit.html:46
-#, python-format
-msgid "Do you recommend this %(type)s?"
-msgstr "Rekommenderar du denna %(type)s?"
-
-#: app/templates/macros/reviews.html:134
+#: app/templates/macros/reviews.html:139
 #: app/templates/packages/review_create_edit.html:51
 msgid "Why or why not? Try to be constructive"
 msgstr "Varför eller varför inte? Försök vara konstruktiv"
 
-#: app/templates/macros/reviews.html:151
+#: app/templates/macros/reviews.html:156
 msgid "Post Review"
 msgstr "Skicka recension"
 
-#: app/templates/macros/reviews.html:187
+#: app/templates/macros/reviews.html:192
 msgid "Report an issue"
 msgstr "Rapportera ett problem"
 
-#: app/templates/macros/reviews.html:191
+#: app/templates/macros/reviews.html:196
 msgid "Ask a question"
 msgstr "Ställ en fråga"
 
@@ -4194,13 +4200,10 @@ msgid "Download (.csv)"
 msgstr "Ladda ner (.csv)"
 
 #: app/templates/packages/translation.html:18
-#, python-format
 msgid ""
-"To provide translations for your %(type)s, you need to create .tr files "
+"To provide translations for your package, you need to create .tr files "
 "and upload a new release."
 msgstr ""
-"För att ge översättningar till din/ditt %(type)s måste du skapa .tr-filer"
-" och ladda upp en ny utgivning."
 
 #: app/templates/packages/translation.html:19
 msgid ""
@@ -5968,4 +5971,16 @@ msgstr ""
 #~ "Certifierad av Featured Packages-programmet."
 #~ " Denna tagg kan döpas om i "
 #~ "framtiden"
+
+#~ msgid "Do you recommend this %(type)s?"
+#~ msgstr "Rekommenderar du denna %(type)s?"
+
+#~ msgid ""
+#~ "To provide translations for your "
+#~ "%(type)s, you need to create .tr "
+#~ "files and upload a new release."
+#~ msgstr ""
+#~ "För att ge översättningar till din/ditt"
+#~ " %(type)s måste du skapa .tr-filer"
+#~ " och ladda upp en ny utgivning."
 
