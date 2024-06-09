@@ -9,7 +9,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-06-08 11:15+0100\n"
 "PO-Revision-Date: 2024-06-09 10:38+0000\n"
-"Last-Translator: SergioFLS <sergioflsgd@hotmail.com>\n"
+"Last-Translator: gallegonovato <fran-carro@hotmail.es>\n"
 "Language-Team: Spanish <https://hosted.weblate.org/projects/minetest/"
 "contentdb/es/>\n"
 "Language: es\n"
@@ -948,7 +948,7 @@ msgstr ""
 #: app/blueprints/packages/packages.py:481
 #, python-format
 msgid "Set state to %(state)s"
-msgstr ""
+msgstr "Establecer estado en %(state)s"
 
 #: app/blueprints/packages/packages.py:511
 msgid "Deleted package"
@@ -1835,93 +1835,97 @@ msgstr "Paquetes de texturas"
 
 #: app/models/packages.py:87
 msgid "Top mod"
-msgstr ""
+msgstr "Mod superior"
 
 #: app/models/packages.py:89
 msgid "Top game"
-msgstr ""
+msgstr "El mejor juego"
 
 #: app/models/packages.py:91
 msgid "Top texture pack"
-msgstr ""
+msgstr "El mejor paquete de texturas"
 
 #: app/models/packages.py:94
 #, python-format
 msgid "Top %(place)d mod"
-msgstr ""
+msgstr "Mod entre los %(place)d mejores"
 
 #: app/models/packages.py:96
 #, python-format
 msgid "Top %(place)d game"
-msgstr ""
+msgstr "Juego entre los %(place)d mejores"
 
 #: app/models/packages.py:98
 #, python-format
 msgid "Top %(place)d texture pack"
-msgstr ""
+msgstr "Pack de texturas entre los %(place)d mejores"
 
 #: app/models/packages.py:102
 #, python-format
 msgid "%(display_name)s has a mod placed at #%(place)d."
-msgstr ""
+msgstr "%(display_name)s tiene un mod colocado en #%(place)d."
 
 #: app/models/packages.py:105
 #, python-format
 msgid "%(display_name)s has a game placed at #%(place)d."
-msgstr ""
+msgstr "%(display_name)s tiene un juego colocado en #%(place)d."
 
 #: app/models/packages.py:108
 #, python-format
 msgid "%(display_name)s has a texture pack placed at #%(place)d."
-msgstr ""
+msgstr "%(display_name)s tiene un pack de texturas colocado en #%(place)d."
 
 #: app/models/packages.py:146 app/models/packages.py:164
 msgid "Looking for Maintainer"
-msgstr ""
+msgstr "Se busca mantenedor"
 
 #: app/models/packages.py:149
 msgid "Beta"
-msgstr ""
+msgstr "Beta"
 
 #: app/models/packages.py:152
 msgid "Actively Developed"
-msgstr ""
+msgstr "Desarrollado activamente"
 
 #: app/models/packages.py:155
 msgid "Maintenance Only"
-msgstr ""
+msgstr "Solo mantenimiento"
 
 #: app/models/packages.py:158
 msgid "As-is"
-msgstr ""
+msgstr "Como es"
 
 #: app/models/packages.py:161
 msgid "Deprecated"
-msgstr ""
+msgstr "Obsoleto"
 
 #: app/models/packages.py:168
 msgid "Under active development, and may break worlds/things without warning"
-msgstr ""
+msgstr "En desarrollo activo, y puede romper mundos/cosas sin previo aviso"
 
 #: app/models/packages.py:170
 msgid "Fully playable, but with some breakages/changes expected"
-msgstr ""
+msgstr "Totalmente jugable, pero con algunas roturas/cambios previstos"
 
 #: app/models/packages.py:172
 msgid "Finished, with bug fixes being made as needed"
-msgstr ""
+msgstr "Finalizado, con correcciones de errores según sea necesario"
 
 #: app/models/packages.py:174
 msgid ""
 "Finished, the maintainer doesn't intend to continue working on it or "
 "provide support"
 msgstr ""
+"Terminado, el mantenedor no tiene la intención de seguir trabajando en él o "
+"proporcionar apoyo"
 
 #: app/models/packages.py:176
 msgid ""
 "The maintainer doesn't recommend this package. See the description for "
 "more info"
 msgstr ""
+"El mantenedor no recomienda este paquete. Consulte la descripción para "
+"obtener más información"
 
 #: app/models/packages.py:222
 msgid "Submit for Approval"
@@ -1950,25 +1954,25 @@ msgstr "En progreso"
 #: app/models/packages.py:1349
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
-msgstr ""
+msgstr "Nuevo compromiso %(hash)s encontrado en el repositorio de Git."
 
 #: app/models/packages.py:1353
 #, python-format
 msgid "The last release was commit %(hash)s"
-msgstr ""
+msgstr "La última versión fue confirmada %(hash)s"
 
 #: app/models/packages.py:1359
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
-msgstr ""
+msgstr "Nueva etiqueta %(tag_name)s encontrados en el repositorio de Git."
 
 #: app/models/users.py:407
 msgid "Package Edit"
-msgstr ""
+msgstr "Editar paquete"
 
 #: app/models/users.py:410
 msgid "Package Approval"
-msgstr ""
+msgstr "Aprobación del paquete"
 
 #: app/models/users.py:413 app/templates/threads/list.html:12
 #: app/templates/threads/new.html:4
@@ -1977,15 +1981,15 @@ msgstr "Nuevo hilo"
 
 #: app/models/users.py:416
 msgid "New Review"
-msgstr ""
+msgstr "Nueva reseña"
 
 #: app/models/users.py:419
 msgid "Thread Reply"
-msgstr ""
+msgstr "Respuesta del hilo"
 
 #: app/models/users.py:422
 msgid "Bot"
-msgstr ""
+msgstr "Bot"
 
 #: app/models/users.py:425 app/templates/macros/threads.html:27
 msgid "Maintainer"
@@ -1993,47 +1997,47 @@ msgstr "Mantenedor"
 
 #: app/models/users.py:428
 msgid "Editor Alert"
-msgstr ""
+msgstr "Editor de la alerta"
 
 #: app/models/users.py:431
 msgid "Editor Misc"
-msgstr ""
+msgstr "Editor varios"
 
 #: app/models/users.py:434
 msgid "Other"
-msgstr ""
+msgstr "Otro"
 
 #: app/models/users.py:444
 msgid "This is a Package Edit notification."
-msgstr ""
+msgstr "Esta es una notificación de edición de paquete."
 
 #: app/models/users.py:446
 msgid "This is a Package Approval notification."
-msgstr ""
+msgstr "Esta es una notificación de aprobación de paquete."
 
 #: app/models/users.py:448
 msgid "This is a New Thread notification."
-msgstr ""
+msgstr "Esta es una notificación de nuevo hilo."
 
 #: app/models/users.py:450
 msgid "This is a New Review notification."
-msgstr ""
+msgstr "Esta es una notificación de nueva revisión."
 
 #: app/models/users.py:452
 msgid "This is a Thread Reply notification."
-msgstr ""
+msgstr "Esta es una notificación de respuesta a un hilo."
 
 #: app/models/users.py:454
 msgid "This is a Bot notification."
-msgstr ""
+msgstr "Esta es una notificación del Bot."
 
 #: app/models/users.py:456
 msgid "This is a Maintainer change notification."
-msgstr ""
+msgstr "Esta es una notificación de cambio de mantenedor."
 
 #: app/models/users.py:458
 msgid "This is an Editor Alert notification."
-msgstr ""
+msgstr "Se trata de una notificación de alerta al editor."
 
 #: app/models/users.py:460
 msgid "This is an Editor Misc notification."
@@ -2041,47 +2045,51 @@ msgstr ""
 
 #: app/models/users.py:462
 msgid "This is an Other notification."
-msgstr ""
+msgstr "Se trata de otra notificación."
 
 #: app/models/users.py:469
 msgid "When another user edits your packages, releases, etc."
-msgstr ""
+msgstr "Cuando otro usuario edita tus paquetes, versiones, etc."
 
 #: app/models/users.py:471
 msgid "Notifications from editors related to the package approval process."
 msgstr ""
+"Notificaciones de los editores relacionadas con el proceso de aprobación de "
+"paquetes."
 
 #: app/models/users.py:473
 msgid "When a thread is created on your package."
-msgstr ""
+msgstr "Cuando se crea un hilo en tu paquete."
 
 #: app/models/users.py:475
 msgid "When a user posts a review on your package."
-msgstr ""
+msgstr "Cuando un usuario publica una reseña sobre tu paquete."
 
 #: app/models/users.py:477
 msgid "When someone replies to a thread you're watching."
-msgstr ""
+msgstr "Cuando alguien responde a un hilo que estás viendo."
 
 #: app/models/users.py:479
 msgid "From a bot - for example, update notifications."
-msgstr ""
+msgstr "Desde un bot - por ejemplo, notificaciones de actualización."
 
 #: app/models/users.py:481
 msgid "When your package's maintainers change."
-msgstr ""
+msgstr "Cuando cambian los mantenedores de tu paquete."
 
 #: app/models/users.py:483
 msgid "For editors: Important alerts."
-msgstr ""
+msgstr "Para los editores: Alertas importantes."
 
 #: app/models/users.py:485
 msgid "For editors: Minor notifications, including new threads."
-msgstr ""
+msgstr "Para los editores: Notificaciones menores, incluyendo nuevos hilos."
 
 #: app/models/users.py:487
 msgid "Minor notifications not important enough for a dedicated category."
 msgstr ""
+"Notificaciones menores no lo suficientemente importantes para una categoría "
+"dedicada."
 
 #: app/tasks/emails.py:122
 msgid ""
@@ -3369,6 +3377,8 @@ msgid ""
 "You can include a .cdb.json file in your package to update these details "
 "automatically."
 msgstr ""
+"Puedes incluir un archivo .cdb.json en tu paquete para actualizar estos "
+"datos automáticamente."
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
@@ -4026,13 +4036,15 @@ msgstr "Eliminar %(title)s"
 
 #: app/templates/packages/remove.html:11
 msgid "Change maintenance state"
-msgstr ""
+msgstr "Cambio del estado de mantenimiento"
 
 #: app/templates/packages/remove.html:13
 msgid ""
 "As an alternative to removing your package, you may wish to change the "
 "maintenance state."
 msgstr ""
+"Como alternativa a la eliminación del paquete, puedes cambiar el estado del "
+"mantenimiento."
 
 #: app/templates/packages/remove.html:36
 msgid ""
@@ -4107,7 +4119,7 @@ msgstr ""
 
 #: app/templates/packages/review_create_edit.html:55
 msgid "What language are you writing your review in?"
-msgstr ""
+msgstr "¿En qué idioma escribes tu reseña?"
 
 #: app/templates/packages/review_create_edit.html:68
 msgid "Delete review."
@@ -4394,7 +4406,7 @@ msgstr "Traducir"
 
 #: app/templates/packages/view.html:297
 msgid "Thumbnail for video"
-msgstr ""
+msgstr "Miniatura para vídeo"
 
 #: app/templates/packages/view.html:314
 msgid "Awaiting review"
