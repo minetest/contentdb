@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ _("Advanced Search") }}
+{% endblock %}
+
+{% block content %}
+	<h1>{{ self.title() }}</h1>
+
+	{% from "macros/forms.html" import render_field, render_checkbox_field, render_submit_field %}
+	<form method="get" action="{{ url_for('packages.list_all') }}">
+		{{ render_field(form.q) }}
+		{{ render_field(form.type, hint=_("Use shift to select multiple. Leave selection empty to match any type.")) }}
+		{{ render_field(form.license, hint=_("Use shift to select multiple.")) }}
+		{{ render_field(form.lang) }}
+
+		<h2>{{ _("Tags and Content Warnings") }}</h2>
+
+		{{ render_field(form.tag, hint=_("Use shift to select multiple.")) }}
+		{{ render_field(form.flag, hint=_("Use shift to select multiple.")) }}
+		{{ render_field(form.hide, hint=_("Use shift to select multiple.")) }}
+
+		<h2>{{ _("Compatibility") }}</h2>
+
+		{{ render_field(form.engine_version) }}
+		{{ render_field(form.game, placeholder=_("author/name"), pattern="\w+/\w+", hint=_("author/name")) }}
+
+		<h2>{{ _("Sorting") }}</h2>
+
+		{{ render_field(form.sort) }}
+		{{ render_field(form.order) }}
+		{{ render_checkbox_field(form.random) }}
+
+		<button type="submit" class="btn btn-primary mt-5">{{ _("Search") }}</button>
+	</form>
+{% endblock %}

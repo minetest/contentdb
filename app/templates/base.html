@@ -253,6 +253,7 @@
 			{% if request.endpoint != "flatpage" and request.endpoint != "report.report" %}
 				<li class="list-inline-item"><a href="{{ url_for('report.report', url=url_current()) }}">{{ _("Report / DMCA") }}</a></li>
 			{% endif %}
+			<li class="list-inline-item"><a href="{{ url_for('packages.advanced_search') }}">{{ _("Advanced Search") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('users.list_all') }}">{{ _("User List") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('threads.list_all') }}">{{ _("Threads") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('collections.list_all') }}">{{ _("Collections") }}</a></li>

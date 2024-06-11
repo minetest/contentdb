@@ -126,7 +126,7 @@ class PackageType(enum.Enum):
 
 	@classmethod
 	def choices(cls):
-		return [(choice, choice.text) for choice in cls]
+		return [(choice.name.lower(), choice.text) for choice in cls]
 
 	@classmethod
 	def coerce(cls, item):
@@ -853,7 +853,7 @@ class Package(db.Model):
 		}
 
 	def recalculate_score(self):
-		review_scores = [ 100 * r.as_weight() for r in self.reviews ]
+		review_scores = [ 150 * r.as_weight() for r in self.reviews ]
 		self.score = self.score_downloads + sum(review_scores)
 
 	def get_conf_file_name(self):
@@ -1041,6 +1041,10 @@ class MinetestRelease(db.Model):
 	def __init__(self, name=None, protocol=0):
 		self.name = name
 		self.protocol = protocol
+
+	@property
+	def value(self):
+		return self.name
 
 	def get_actual(self):
 		return None if self.name == "None" else self

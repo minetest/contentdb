@@ -138,6 +138,8 @@ class QueryBuilder:
 		self.lucky  = "lucky" in args
 		self.limit  = 1 if self.lucky else get_int_or_abort(args.get("limit"), None)
 		self.order_by  = args.get("sort")
+		if self.order_by == "":
+			self.order_by = None
 		self.order_dir = args.get("order") or "desc"
 
 		if "android_default" in self.hide_flags:
@@ -161,6 +163,9 @@ class QueryBuilder:
 
 		protocol_version = get_int_or_abort(args.get("protocol_version"))
 		minetest_version = args.get("engine_version")
+		if minetest_version == "__None":
+			minetest_version = None
+
 		if protocol_version or minetest_version:
 			self.version = MinetestRelease.get(minetest_version, protocol_version)
 		else:
@@ -176,8 +181,14 @@ class QueryBuilder:
 		self.game = args.get("game")
 		if self.game:
 			self.game = Package.get_by_key(self.game)
+			if self.game is None:
+				abort(make_response("Unable to find that game"), 400)
+		else:
+			self.game = None
 
 		self.has_lang = args.get("lang")
+		if self.has_lang == "__None":
+			self.has_lang = None
 
 		if cookies and request.cookies.get("hide_nonfree") == "1":
 			self.hide_nonfree = True
@@ -244,7 +255,7 @@ class QueryBuilder:
 		if self.game:
 			query = query.filter(Package.supported_games.any(game=self.game, supports=True))
 
-		if self.has_lang:
+		if self.has_lang and self.has_lang != "en":
 			query = query.filter(Package.translations.any(language_id=self.has_lang))
 
 		for tag in self.tags:

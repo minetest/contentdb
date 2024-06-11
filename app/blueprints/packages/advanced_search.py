@@ -1,0 +1,92 @@
+# ContentDB
+# Copyright (C) 2024 rubenwardy
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
+#
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
+from flask import render_template
+from flask_babel import lazy_gettext, gettext
+from flask_wtf import FlaskForm
+from wtforms.fields.choices import SelectField, SelectMultipleField
+from wtforms.fields.simple import StringField, BooleanField
+from wtforms.validators import Optional
+from wtforms_sqlalchemy.fields import QuerySelectMultipleField, QuerySelectField
+
+from . import bp
+from ...models import PackageType, Tag, db, ContentWarning, License, Language, MinetestRelease
+
+
+def make_label(obj: Tag | ContentWarning):
+	translated = obj.get_translated()
+	if translated["description"]:
+		return "{}: {}".format(translated["title"], translated["description"])
+	else:
+		return translated["title"]
+
+
+def get_hide_choices():
+	ret = [
+		("android_default", gettext("Android Default")),
+		("desktop_default", gettext("Desktop Default")),
+		("nonfree", gettext("Non-free")),
+		("wip", gettext("Work in Progress")),
+		("deprecated", gettext("Deprecated")),
+		("*", gettext("All content warnings")),
+	]
+	content_warnings = ContentWarning.query.order_by(db.asc(ContentWarning.name)).all()
+	tags = Tag.query.order_by(db.asc(Tag.name)).all()
+	ret += [(x.name, make_label(x)) for x in content_warnings + tags]
+	return ret
+
+
+class AdvancedSearchForm(FlaskForm):
+	q = StringField(lazy_gettext("Query"), [Optional()])
+	type = SelectMultipleField(lazy_gettext("Type"), [Optional()], choices=PackageType.choices(),
+			coerce=PackageType.coerce)
+	author = StringField(lazy_gettext("Author"), [Optional()])
+	tag = QuerySelectMultipleField(lazy_gettext('Tags'),
+			query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)),
+			get_pk=lambda a: a.id, get_label=make_label)
+	flag = QuerySelectMultipleField(lazy_gettext('Content Warnings'), query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=make_label)
+	license = QuerySelectMultipleField(lazy_gettext("License"), [Optional()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+	game = StringField(lazy_gettext("Supports Game"), [Optional()])
+	lang = QuerySelectField(lazy_gettext("Language"), allow_blank=True,
+			query_factory=lambda: Language.query.order_by(db.asc(Language.title)),
+			get_pk=lambda a: a.id, get_label=lambda a: a.title)
+	hide = SelectMultipleField(lazy_gettext("Hide Tags and Content Warnings"), [Optional()])
+	engine_version = QuerySelectField(lazy_gettext("Minetest Version"), allow_blank=True,
+			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)),
+			get_pk=lambda a: a.value, get_label=lambda a: a.name)
+	sort = SelectField(lazy_gettext("Sort by"), [Optional()], choices=[
+		("", ""),
+		("name", lazy_gettext("Name")),
+		("title", lazy_gettext("Title")),
+		("score", lazy_gettext("Package score")),
+		("reviews", lazy_gettext("Reviews")),
+		("downloads", lazy_gettext("Downloads")),
+		("created_at", lazy_gettext("Created At")),
+		("approved_at", lazy_gettext("Approved At")),
+		("last_release", lazy_gettext("Last Release")),
+	])
+	order = SelectField(lazy_gettext("Order"), [Optional()], choices=[
+		("desc", lazy_gettext("Descending")),
+		("asc", lazy_gettext("Ascending")),
+	])
+	random = BooleanField(lazy_gettext("Random order"))
+
+
+@bp.route("/packages/advanced-search/")
+def advanced_search():
+	form = AdvancedSearchForm()
+	form.hide.choices = get_hide_choices()
+	return render_template("packages/advanced_search.html", form=form)

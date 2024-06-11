@@ -84,4 +84,4 @@ def get_package_tabs(user: User, package: Package):
 	return retval
 
 
-from . import packages, screenshots, releases, reviews, game_hub
+from . import packages, advanced_search, screenshots, releases, reviews, game_hub
