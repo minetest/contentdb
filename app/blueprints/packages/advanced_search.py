@@ -23,7 +23,7 @@ from wtforms.validators import Optional
 from wtforms_sqlalchemy.fields import QuerySelectMultipleField, QuerySelectField
 
 from . import bp
-from ...models import PackageType, Tag, db, ContentWarning, License, Language, MinetestRelease
+from ...models import PackageType, Tag, db, ContentWarning, License, Language, MinetestRelease, Package, PackageState
 
 
 def make_label(obj: Tag | ContentWarning):
@@ -64,7 +64,11 @@ class AdvancedSearchForm(FlaskForm):
 			query_factory=lambda: License.query.order_by(db.asc(License.name)),
 			allow_blank=True, blank_value="",
 			get_pk=lambda a: a.name, get_label=lambda a: a.name)
-	game = StringField(lazy_gettext("Supports Game"), [Optional()])
+	game = QuerySelectField(lazy_gettext("Supports Game"), [Optional()],
+			query_factory=lambda: Package.query.filter(Package.type == PackageType.GAME, Package.state == PackageState.APPROVED).order_by(db.asc(Package.name)),
+			allow_blank=True, blank_value="",
+			get_pk=lambda a: f"{a.author.username}/{a.name}",
+			get_label=lambda a: lazy_gettext("%(title)s by %(author)s", title=a.title, author=a.author.display_name))
 	lang = QuerySelectField(lazy_gettext("Language"),
 			query_factory=lambda: Language.query.order_by(db.asc(Language.title)),
 			allow_blank=True, blank_value="",
