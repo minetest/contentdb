@@ -82,8 +82,9 @@ class QueryBuilder:
 
 	@property
 	def noindex(self):
-		return (self.search is not None or len(self.tags) > 1 or len(self.types) > 1 or len(self.hide_flags) > 0 or
-			self.random or self.lucky or self.author or self.version or self.game or len(self.licenses) > 0)
+		return (self.search is not None or len(self.tags) > 1 or len(self.flags) > 1 or len(self.types) > 1 or
+			len(self.licenses) > 0 or len(self.hide_flags) > 0 or len(self.hide_tags) > 0 or self.random or
+			self.lucky or self.author or self.version or self.game or self.limit is not None)
 
 	def __init__(self, args, cookies: bool = False, lang: Optional[str] = None, emit_http_errors: bool = True):
 		self.emit_http_errors = emit_http_errors
