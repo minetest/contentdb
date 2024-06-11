@@ -51,21 +51,28 @@ def get_hide_choices():
 
 class AdvancedSearchForm(FlaskForm):
 	q = StringField(lazy_gettext("Query"), [Optional()])
-	type = SelectMultipleField(lazy_gettext("Type"), [Optional()], choices=PackageType.choices(),
-			coerce=PackageType.coerce)
+	type = SelectMultipleField(lazy_gettext("Type"), [Optional()],
+			choices=PackageType.choices(), coerce=PackageType.coerce)
 	author = StringField(lazy_gettext("Author"), [Optional()])
 	tag = QuerySelectMultipleField(lazy_gettext('Tags'),
 			query_factory=lambda: Tag.query.order_by(db.asc(Tag.name)),
-			get_pk=lambda a: a.id, get_label=make_label)
-	flag = QuerySelectMultipleField(lazy_gettext('Content Warnings'), query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)), get_pk=lambda a: a.id, get_label=make_label)
-	license = QuerySelectMultipleField(lazy_gettext("License"), [Optional()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
+			get_pk=lambda a: a.name, get_label=make_label)
+	flag = QuerySelectMultipleField(lazy_gettext('Content Warnings'),
+			query_factory=lambda: ContentWarning.query.order_by(db.asc(ContentWarning.name)),
+			get_pk=lambda a: a.name, get_label=make_label)
+	license = QuerySelectMultipleField(lazy_gettext("License"), [Optional()],
+			query_factory=lambda: License.query.order_by(db.asc(License.name)),
+			allow_blank=True, blank_value="",
+			get_pk=lambda a: a.name, get_label=lambda a: a.name)
 	game = StringField(lazy_gettext("Supports Game"), [Optional()])
-	lang = QuerySelectField(lazy_gettext("Language"), allow_blank=True,
+	lang = QuerySelectField(lazy_gettext("Language"),
 			query_factory=lambda: Language.query.order_by(db.asc(Language.title)),
+			allow_blank=True, blank_value="",
 			get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	hide = SelectMultipleField(lazy_gettext("Hide Tags and Content Warnings"), [Optional()])
-	engine_version = QuerySelectField(lazy_gettext("Minetest Version"), allow_blank=True,
+	engine_version = QuerySelectField(lazy_gettext("Minetest Version"),
 			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)),
+			allow_blank=True, blank_value="",
 			get_pk=lambda a: a.value, get_label=lambda a: a.name)
 	sort = SelectField(lazy_gettext("Sort by"), [Optional()], choices=[
 		("", ""),

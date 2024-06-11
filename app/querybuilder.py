@@ -163,7 +163,7 @@ class QueryBuilder:
 
 		protocol_version = get_int_or_abort(args.get("protocol_version"))
 		minetest_version = args.get("engine_version")
-		if minetest_version == "__None":
+		if minetest_version == "":
 			minetest_version = None
 
 		if protocol_version or minetest_version:
@@ -187,7 +187,7 @@ class QueryBuilder:
 			self.game = None
 
 		self.has_lang = args.get("lang")
-		if self.has_lang == "__None":
+		if self.has_lang == "":
 			self.has_lang = None
 
 		if cookies and request.cookies.get("hide_nonfree") == "1":
