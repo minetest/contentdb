@@ -28,6 +28,7 @@ from .utils import is_yes, get_int_or_abort
 
 
 class QueryBuilder:
+	emit_http_errors: bool
 	limit: Optional[int]
 	lang: str = "en"
 	types: List[PackageType]
@@ -35,6 +36,7 @@ class QueryBuilder:
 	only_approved: bool = True
 	licenses: List[License]
 	tags: List[Tag]
+	hide_tags: List[Tag]
 	game: Optional[Package]
 	author: Optional[str]
 	random: bool
@@ -84,6 +86,8 @@ class QueryBuilder:
 			self.random or self.lucky or self.author or self.version or self.game or len(self.licenses) > 0)
 
 	def __init__(self, args, cookies: bool = False, lang: Optional[str] = None, emit_http_errors: bool = True):
+		self.emit_http_errors = emit_http_errors
+
 		if lang is None:
 			locale = get_locale()
 			if locale:
@@ -94,15 +98,28 @@ class QueryBuilder:
 		# Get request types
 		types = args.getlist("type")
 		types = [PackageType.get(tname) for tname in types]
-		types = [type for type in types if type is not None]
+		if not emit_http_errors:
+			types = [type for type in types if type is not None]
+		elif any([type is None for type in types]):
+			abort(make_response("Unknown type"), 400)
 
 		# Get tags types
 		tags = args.getlist("tag")
 		tags = [Tag.query.filter_by(name=tname).first() for tname in tags]
-		tags = [tag for tag in tags if tag is not None]
+		if not emit_http_errors:
+			tags = [tag for tag in tags if tag is not None]
+		elif any([tag is None for tag in tags]):
+			abort(make_response("Unknown tag"), 400)
 
 		# Hide
 		self.hide_flags = set(args.getlist("hide"))
+
+		self.hide_tags = []
+		for flag in set(self.hide_flags):
+			tag = Tag.query.filter_by(name=flag).first()
+			if tag is not None:
+				self.hide_tags.append(tag)
+				self.hide_flags.remove(flag)
 
 		# Show flags
 		self.flags = set(args.getlist("flag"))
@@ -231,7 +248,10 @@ class QueryBuilder:
 			query = query.filter(Package.translations.any(language_id=self.has_lang))
 
 		for tag in self.tags:
-			query = query.filter(Package.tags.any(Tag.id == tag.id))
+			query = query.filter(Package.tags.contains(tag))
+
+		for tag in self.hide_tags:
+			query = query.filter(~Package.tags.contains(tag))
 
 		if "*" in self.hide_flags:
 			query = query.filter(~ Package.content_warnings.any())
@@ -240,6 +260,8 @@ class QueryBuilder:
 				warning = ContentWarning.query.filter_by(name=flag).first()
 				if warning:
 					query = query.filter(~ Package.content_warnings.any(ContentWarning.id == warning.id))
+				elif self.emit_http_errors:
+					abort(make_response("Unknown tag or content warning " + flag), 400)
 
 		flags = set(self.flags)
 		if "nonfree" in flags:
