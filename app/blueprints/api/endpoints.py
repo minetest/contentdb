@@ -325,15 +325,19 @@ def create_release(token, package):
 	else:
 		data = request.form
 
-	if "title" not in data:
-		error(400, "Title is required in the POST data")
+	if not ("title" in data or "name" in data):
+		error(400, "name is required in the POST data")
+
+	name = data.get("name")
+	title = data.get("title") or name
+	name = name or title
 
 	if data.get("method") == "git":
 		for option in ["method", "ref"]:
 			if option not in data:
 				error(400, option + " is required in the POST data")
 
-		return api_create_vcs_release(token, package, data["title"], data["title"], data.get("release_notes"), data["ref"])
+		return api_create_vcs_release(token, package, name, title, data.get("release_notes"), data["ref"])
 
 	elif request.files:
 		file = request.files.get("file")
@@ -342,7 +346,7 @@ def create_release(token, package):
 
 		commit_hash = data.get("commit")
 
-		return api_create_zip_release(token, package, data["title"], data["title"], data.get("release_notes"), file, None, None, "API", commit_hash)
+		return api_create_zip_release(token, package,  name, title, data.get("release_notes"), file, None, None, "API", commit_hash)
 
 	else:
 		error(400, "Unknown release-creation method. Specify the method or provide a file.")

@@ -25,7 +25,7 @@ from app.logic.LogicError import LogicError
 from app.logic.uploads import upload_file
 from app.models import PackageRelease, db, Permission, User, Package, MinetestRelease
 from app.tasks.importtasks import make_vcs_release, check_zip_release
-from app.utils import AuditSeverity, add_audit_log, nonempty_or_none
+from app.utils import AuditSeverity, add_audit_log, nonempty_or_none, normalize_line_endings
 
 
 def check_can_create_release(user: User, package: Package):
@@ -46,7 +46,7 @@ def do_create_vcs_release(user: User, package: Package, name: str, title: Option
 	rel.package = package
 	rel.name    = name
 	rel.title   = title or name
-	rel.release_notes = release_notes
+	rel.release_notes = normalize_line_endings(release_notes)
 	rel.url     = ""
 	rel.task_id = uuid()
 	rel.min_rel = min_v
@@ -82,7 +82,7 @@ def do_create_zip_release(user: User, package: Package, name: str, title: Option
 	rel.package = package
 	rel.name    = name
 	rel.title   = title or name
-	rel.release_notes = release_notes
+	rel.release_notes = normalize_line_endings(release_notes)
 	rel.url     = uploaded_url
 	rel.task_id = uuid()
 	rel.commit_hash = commit_hash
