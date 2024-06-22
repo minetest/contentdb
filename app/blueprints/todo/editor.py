@@ -44,7 +44,7 @@ def view_editor():
 
 	releases = None
 	if can_approve_rel:
-		releases = PackageRelease.query.filter_by(approved=False).all()
+		releases = PackageRelease.query.filter_by(approved=False, task_id=None).all()
 
 	screenshots = None
 	if can_approve_scn:
