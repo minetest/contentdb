@@ -281,3 +281,9 @@ pre {
 .gap-3 {
 	gap: 1rem;
 }
+
+/* Fix EasyMDE and Bootstrap conflict */
+.editor-toolbar .table {
+	width: auto;
+	vertical-align: unset;
+}
