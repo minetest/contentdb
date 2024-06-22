@@ -17,7 +17,7 @@
 from typing import Optional, List
 from flask import abort, current_app, request, make_response
 from flask_babel import lazy_gettext, gettext, get_locale
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 from sqlalchemy.orm import subqueryload
 from sqlalchemy.sql.expression import func
 from sqlalchemy_searchable import search
@@ -310,12 +310,9 @@ class QueryBuilder:
 			query = query.filter(or_(Package.dev_state==None, Package.dev_state != PackageDevState.DEPRECATED))
 
 		if self.version:
-			query = query.join(Package.releases) \
-				.filter(PackageRelease.approved == True) \
-				.filter(or_(PackageRelease.min_rel_id==None,
-					PackageRelease.min_rel_id <= self.version.id)) \
-				.filter(or_(PackageRelease.max_rel_id==None,
-					PackageRelease.max_rel_id >= self.version.id))
+			query = query.filter(Package.releases.any(and_(or_(PackageRelease.min_rel_id==None,
+					PackageRelease.min_rel_id <= self.version.id), or_(PackageRelease.max_rel_id==None,
+					PackageRelease.max_rel_id >= self.version.id))))
 
 		return query
 
