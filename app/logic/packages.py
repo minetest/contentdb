@@ -24,7 +24,7 @@ from flask_babel import lazy_gettext, LazyString
 from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
 	License, PackageDevState
-from app.utils import add_audit_log, has_blocked_domains, diff_dictionaries, describe_difference
+from app.utils import add_audit_log, has_blocked_domains, diff_dictionaries, describe_difference, normalize_line_endings
 from app.utils.url import clean_youtube_url
 
 
@@ -141,6 +141,9 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 
 	if "media_license" in data:
 		data["media_license"] = get_license(data["media_license"])
+
+	if "desc" in data:
+		data["desc"] = normalize_line_endings(data["desc"])
 
 	if "video_url" in data and data["video_url"] is not None:
 		data["video_url"] = clean_youtube_url(data["video_url"]) or data["video_url"]
