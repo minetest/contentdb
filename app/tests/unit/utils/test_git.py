@@ -20,7 +20,7 @@ from app.utils.git import get_latest_tag, get_latest_commit, clone_repo
 
 
 test_repo = "https://gitlab.com/rubenwardy/testmod"
-master_head = "87b11d91d84aea1f867ed1732afeb27cefd01078"
+master_head = "23d12265ff6de84548b2e3e90dc7351a54f63f00"
 test_branch_head = "51b54f00c3b3d712417a1cc4bfaa6cbdc7aac3fc"
 v4_commit = "c07d27c3a466d2102d1ba5473d172c74e6b3e0d7"
 random_commit = "84a2e53ff046eacbdbb80f3a00c58510885fefca"
