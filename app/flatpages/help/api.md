@@ -268,7 +268,13 @@ Examples:
 # Create release from Git
 curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
-    -d '{ "method": "git", "name": "1.2.3", "title": "My Release", "ref": "master", "release_notes": "some\nrelease\nnotes\n" }'
+    -d '{
+        "method": "git",
+        "name": "1.2.3",
+        "title": "My Release",
+        "ref": "master",
+        "release_notes": "some\nrelease\nnotes\n"
+    }'
 
 # Create release from zip upload
 curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
