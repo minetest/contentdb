@@ -50,7 +50,7 @@ def claim_forums():
 				flash(gettext("Unable to get GitHub username for user"), "danger")
 				return redirect(url_for("users.claim_forums", username=username))
 			else:
-				return redirect(url_for("github.start"))
+				return redirect(url_for("vcs.github_start"))
 
 	if "forum_token" in session:
 		token = session["forum_token"]

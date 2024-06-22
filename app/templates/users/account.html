@@ -55,7 +55,7 @@
 				</p>
 
 				{% if user == current_user %}
-					<a class="btn btn-secondary" href="{{ url_for('github.view_permissions') }}">
+					<a class="btn btn-secondary" href="{{ url_for('vcs.github_view_permissions') }}">
 						{{ _("View ContentDB's GitHub Permissions") }}
 					</a>
 				{% endif %}
@@ -66,7 +66,7 @@
 					</form>
 				{% endif %}
 			{% elif user == current_user %}
-				<a class="btn btn-secondary" href="{{ url_for('github.start') }}">
+				<a class="btn btn-secondary" href="{{ url_for('vcs.github_start') }}">
 					{{ _("Link Github") }}
 				</a>
 			{% else %}

@@ -1,5 +1,5 @@
 # ContentDB
-# Copyright (C) 2018-21 rubenwardy
+# Copyright (C) 2018-24 rubenwardy
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU Affero General Public License as published by
@@ -15,33 +15,35 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import datetime
+import hmac
 
-from flask import Blueprint, abort, Response
-from flask_babel import gettext
-from app.logic.users import create_user
+import requests
+from flask import abort, Response
 from flask import redirect, url_for, request, flash, jsonify, current_app
+from flask_babel import gettext
 from flask_login import current_user
-from sqlalchemy import or_, and_
-from app import github, csrf
-from app.models import db, User, APIToken, Package, Permission, AuditSeverity, PackageState
-from app.utils import abs_url_for, add_audit_log, login_user_set_active, is_safe_url
-from app.blueprints.api.support import error, api_create_vcs_release
-import hmac, requests
 
-bp = Blueprint("github", __name__)
+from app import github, csrf
+from app.blueprints.api.support import error, api_create_vcs_release
+from app.logic.users import create_user
+from app.models import db, User, APIToken, AuditSeverity
+from app.utils import abs_url_for, add_audit_log, login_user_set_active, is_safe_url
+
+from . import bp
+from .common import get_packages_for_vcs_and_token
 
 
 @bp.route("/github/start/")
-def start():
+def github_start():
 	next = request.args.get("next")
 	if next and not is_safe_url(next):
 		abort(400)
 
-	return github.authorize("", redirect_uri=abs_url_for("github.callback", next=next))
+	return github.authorize("", redirect_uri=abs_url_for("vcs.github_callback", next=next))
 
 
 @bp.route("/github/view/")
-def view_permissions():
+def github_view_permissions():
 	url = "https://github.com/settings/connections/applications/" + \
 			current_app.config["GITHUB_CLIENT_ID"]
 	return redirect(url)
@@ -49,7 +51,7 @@ def view_permissions():
 
 @bp.route("/github/callback/")
 @github.authorized_handler
-def callback(oauth_token):
+def github_callback(oauth_token):
 	if oauth_token is None:
 		flash(gettext("Authorization failed [err=gh-oauth-login-failed]"), "danger")
 		return redirect(url_for("users.login"))
@@ -125,85 +127,71 @@ def callback(oauth_token):
 		return ret
 
 
+def _find_api_token(header_signature: str) -> APIToken:
+	sha_name, signature = header_signature.split('=')
+	if sha_name != 'sha1':
+		error(403, "Expected SHA1 payload signature")
+
+	for token in APIToken.query.all():
+		mac = hmac.new(token.access_token.encode("utf-8"), msg=request.data, digestmod='sha1')
+
+		if hmac.compare_digest(str(mac.hexdigest()), signature):
+			return token
+
+	error(401, "Invalid authentication, couldn't validate API token")
+
+
 @bp.route("/github/webhook/", methods=["POST"])
 @csrf.exempt
-def webhook():
+def github_webhook():
 	json = request.json
-
-	# Get package
-	github_url = "github.com/" + json["repository"]["full_name"]
-	package = Package.query.filter(
-		Package.repo.ilike("%{}%".format(github_url)), Package.state != PackageState.DELETED).first()
-	if package is None:
-		return error(400, "Could not find package, did you set the VCS repo in CDB correctly? Expected {}".format(github_url))
-
-	# Get all tokens for package
-	tokens_query = APIToken.query.filter(or_(APIToken.package==package,
-			and_(APIToken.package==None, APIToken.owner==package.author)))
-
-	possible_tokens = tokens_query.all()
-	actual_token = None
-
-	#
-	# Check signature
-	#
 
 	header_signature = request.headers.get('X-Hub-Signature')
 	if header_signature is None:
 		return error(403, "Expected payload signature")
 
-	sha_name, signature = header_signature.split('=')
-	if sha_name != 'sha1':
-		return error(403, "Expected SHA1 payload signature")
+	token = _find_api_token(header_signature)
+	packages = get_packages_for_vcs_and_token(token, "github.com/" + json["repository"]["full_name"])
 
-	for token in possible_tokens:
-		mac = hmac.new(token.access_token.encode("utf-8"), msg=request.data, digestmod='sha1')
+	for package in packages:
+		#
+		# Check event
+		#
+		event = request.headers.get("X-GitHub-Event")
+		if event == "push":
+			ref = json["after"]
+			title = datetime.datetime.utcnow().strftime("%Y-%m-%d") + " " + ref[:5]
+			branch = json["ref"].replace("refs/heads/", "")
+			if branch not in [ "master", "main" ]:
+				continue
 
-		if hmac.compare_digest(str(mac.hexdigest()), signature):
-			actual_token = token
-			break
-
-	if actual_token is None:
-		return error(403, "Invalid authentication, couldn't validate API token")
-
-	if not package.check_perm(actual_token.owner, Permission.APPROVE_RELEASE):
-		return error(403, "You do not have the permission to approve releases")
-
-	#
-	# Check event
-	#
-
-	event = request.headers.get("X-GitHub-Event")
-	if event == "push":
-		ref = json["after"]
-		title = datetime.datetime.utcnow().strftime("%Y-%m-%d") + " " + ref[:5]
-		branch = json["ref"].replace("refs/heads/", "")
-		if branch not in [ "master", "main" ]:
-			return jsonify({ "success": False, "message": "Webhook ignored, as it's not on the master/main branch" })
-
-	elif event == "create":
-		ref_type = json.get("ref_type")
-		if ref_type != "tag":
-			return jsonify({
+		elif event == "create":
+			ref_type = json.get("ref_type")
+			if ref_type != "tag":
+				return jsonify({
 					"success": False,
 					"message": "Webhook ignored, as it's a non-tag create event. ref_type='{}'.".format(ref_type)
-			})
+				})
 
-		ref = json["ref"]
-		title = ref
+			ref = json["ref"]
+			title = ref
 
-	elif event == "ping":
-		return jsonify({ "success": True, "message": "Ping successful" })
+		elif event == "ping":
+			return jsonify({"success": True, "message": "Ping successful"})
 
-	else:
-		return error(400, "Unsupported event: '{}'. Only 'push', 'create:tag', and 'ping' are supported."
-				.format(event or "null"))
+		else:
+			return error(400, "Unsupported event: '{}'. Only 'push', 'create:tag', and 'ping' are supported."
+					.format(event or "null"))
 
-	#
-	# Perform release
-	#
+		#
+		# Perform release
+		#
+		if package.releases.filter_by(commit_hash=ref).count() > 0:
+			return
 
-	if package.releases.filter_by(commit_hash=ref).count() > 0:
-		return
+		return api_create_vcs_release(token, package, title, ref, reason="Webhook")
 
-	return api_create_vcs_release(actual_token, package, title, ref, reason="Webhook")
+	return jsonify({
+		"success": False,
+		"message": "No release made. Either the release already exists or the event was filtered based on the branch"
+	})
