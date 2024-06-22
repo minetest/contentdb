@@ -28,9 +28,13 @@ from .user import *
 YESES = ["yes", "true", "1", "on"]
 
 
-def is_username_valid(username):
+def is_username_valid(username: str) -> bool:
 	return username is not None and len(username) >= 2 and \
 			re.match(r"^[A-Za-z0-9._-]*$", username) and not re.match(r"^\.*$", username)
+
+
+def make_valid_username(username: str) -> str:
+	return re.sub(r"[^A-Za-z0-9._-]+", "_", username)
 
 
 def is_yes(val):

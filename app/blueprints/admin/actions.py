@@ -111,9 +111,9 @@ def recalc_scores():
 
 
 @action("Import forum topic list")
-def import_topic_list():
+def do_import_topic_list():
 	task = import_topic_list.delay()
-	return redirect(url_for("tasks.check", id=task.id, r=url_for("todo.topics")))
+	return redirect(url_for("tasks.check", id=task.id, r=url_for("admin.admin_page")))
 
 
 @action("Check all forum accounts")

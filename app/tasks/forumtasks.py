@@ -18,13 +18,39 @@ import json
 import re
 import sys
 import urllib.request
+from typing import Optional
 from urllib.parse import urljoin
+
+from sqlalchemy import or_
 
 from app.models import User, db, PackageType, ForumTopic
 from app.tasks import celery
-from app.utils import is_username_valid
+from app.utils import make_valid_username
 from app.utils.phpbbparser import get_profile, get_topics_from_forum
 from .usertasks import set_profile_picture_from_url, update_github_user_id_raw
+
+
+def _get_or_create_user(forums_username: str, cache: Optional[dict] = None) -> Optional[User]:
+	if cache:
+		user = cache.get(forums_username)
+		if user:
+			return user
+
+	user = User.query.filter_by(forums_username=forums_username).first()
+	if user is None:
+		cdb_username = make_valid_username(forums_username)
+		user = User.query.filter(or_(User.username == cdb_username, User.forums_username == cdb_username)).first()
+		if user:
+			return None
+
+		user = User(cdb_username)
+		user.forums_username = forums_username
+		user.display_name = forums_username
+		db.session.add(user)
+
+	if cache:
+		cache[forums_username] = user
+	return user
 
 
 @celery.task()
@@ -39,19 +65,16 @@ def check_forum_account(forums_username, force_replace_pic=False):
 	if profile is None:
 		return
 
-	user = User.query.filter_by(forums_username=forums_username).first()
-
-	# Create user
-	needs_saving = False
+	user = _get_or_create_user(forums_username)
 	if user is None:
-		user = User(forums_username)
-		user.forums_username = forums_username
-		db.session.add(user)
+		return
+
+	needs_saving = False
 
 	# Get GitHub username
 	github_username = profile.get("github")
 	if github_username is not None and github_username.strip() != "":
-		print("Updated GitHub username for " + user.display_name + " to " + github_username)
+		print("Updated GitHub username for " + user.display_name + " to " + github_username, file=sys.stderr)
 		user.github_username = github_username
 		update_github_user_id_raw(user)
 		needs_saving = True
@@ -104,7 +127,7 @@ regex_title = re.compile(r"^((?:\[[^\]]+\] *)*)([^\[]+) *((?:\[[^\]]+\] *)*)[^\[
 def parse_title(title):
 	m = regex_title.match(title)
 	if m is None:
-		print("Invalid title format: " + title)
+		print("Invalid title format: " + title, file=sys.stderr)
 		return title, get_name_from_taglist(title)
 	else:
 		return m.group(2).strip(), get_name_from_taglist(m.group(3))
@@ -124,7 +147,7 @@ def get_links_from_mod_search():
 				pass
 
 	except urllib.error.URLError:
-		print("Unable to open krocks mod search!")
+		print("Unable to open krocks mod search!", file=sys.stderr)
 		return links
 
 	return links
@@ -135,37 +158,23 @@ def import_topic_list():
 	links_by_id = get_links_from_mod_search()
 
 	info_by_id = {}
-	get_topics_from_forum(11, out=info_by_id, extra={'type': PackageType.MOD, 'wip': False})
-	get_topics_from_forum(9, out=info_by_id, extra={'type': PackageType.MOD, 'wip': True})
 	get_topics_from_forum(15, out=info_by_id, extra={'type': PackageType.GAME, 'wip': False})
 	get_topics_from_forum(50, out=info_by_id, extra={'type': PackageType.GAME, 'wip': True})
+	get_topics_from_forum(11, out=info_by_id, extra={'type': PackageType.MOD, 'wip': False})
+	get_topics_from_forum(9, out=info_by_id, extra={'type': PackageType.MOD, 'wip': True})
+	get_topics_from_forum(4, out=info_by_id, extra={'type': PackageType.TXP, 'wip': False})
 
 	# Caches
 	username_to_user = {}
 	topics_by_id     = {}
 	for topic in ForumTopic.query.all():
-		topics_by_id[topic.topic_id] = topic
+		if topic.topic_id in info_by_id:
+			topics_by_id[topic.topic_id] = topic
+		else:
+			db.session.delete(topic)
+			print(f"Deleting topic {topic.topic_id} title {topic.title}", file=sys.stderr)
 
-	def get_or_create_user(username):
-		user = username_to_user.get(username)
-		if user:
-			return user
-
-		if not is_username_valid(username):
-			return None
-
-		user = User.query.filter_by(forums_username=username).first()
-		if user is None:
-			user = User.query.filter_by(username=username).first()
-			if user:
-				return None
-
-			user = User(username)
-			user.forums_username = username
-			db.session.add(user)
-
-		username_to_user[username] = user
-		return user
+	username_conflicts = set()
 
 	# Create or update
 	for info in info_by_id.values():
@@ -173,9 +182,9 @@ def import_topic_list():
 
 		# Get author
 		username = info["author"]
-		user = get_or_create_user(username)
+		user = _get_or_create_user(username, username_to_user)
 		if user is None:
-			print("Error! Unable to create user {}".format(username), file=sys.stderr)
+			username_conflicts.add(username)
 			continue
 
 		# Get / add row
@@ -203,3 +212,6 @@ def import_topic_list():
 		topic.created_at = info["date"]
 
 	db.session.commit()
+
+	if len(username_conflicts) > 0:
+		print("The following forum usernames could not be created: " + (", ".join(username_conflicts)))

@@ -3,6 +3,7 @@
 # Source: https://github.com/rubenwardy/python_phpbb_parser
 
 import re
+import sys
 import urllib
 import urllib.parse as urlparse
 import urllib.request
@@ -121,7 +122,7 @@ regex_id = re.compile(r"^.*t=([0-9]+).*$")
 def parse_forum_list_page(id, page, out, extra=None):
 	num_per_page = 30
 	start = page*num_per_page+1
-	print(" - Fetching page {} (topics {}-{})".format(page, start, start+num_per_page))
+	print(" - Fetching page {} (topics {}-{})".format(page, start, start+num_per_page), file=sys.stderr)
 
 	url = "https://forum.minetest.net/viewforum.php?f=" + str(id) + "&start=" + str(start)
 	r = urllib.request.urlopen(url).read().decode("utf-8")
@@ -154,7 +155,7 @@ def parse_forum_list_page(id, page, out, extra=None):
 		views  = topic.find(class_="views").find(text=True)
 
 		if id in out:
-			print("   - got {} again, title: {}".format(id, title))
+			print("   - got {} again, title: {}".format(id, title), file=sys.stderr)
 			assert title == out[id]['title']
 			return False
 
@@ -177,7 +178,7 @@ def parse_forum_list_page(id, page, out, extra=None):
 
 
 def get_topics_from_forum(id, out, extra=None):
-	print("Fetching all topics from forum {}".format(id))
+	print("Fetching all topics from forum {}".format(id), file=sys.stderr)
 	page = 0
 	while parse_forum_list_page(id, page, out, extra):
 		page = page + 1
