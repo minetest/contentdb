@@ -105,6 +105,7 @@ def populate_test_data(session):
 
 	rel = PackageRelease()
 	rel.package = mod
+	rel.name = "v1.0.0"
 	rel.title = "v1.0.0"
 	rel.url = "https://github.com/ezhh/handholds/archive/master.zip"
 	rel.approved = True
@@ -142,6 +143,7 @@ awards.register_achievement("award_mesefind",{
 	rel = PackageRelease()
 	rel.package = mod1
 	rel.min_rel = v51
+	rel.name = "v1.0.0"
 	rel.title = "v1.0.0"
 	rel.url = "https://github.com/rubenwardy/awards/archive/master.zip"
 	rel.approved = True
@@ -254,6 +256,7 @@ No warranty is provided, express or implied, for any part of the project.
 
 	rel = PackageRelease()
 	rel.package = mod
+	rel.name = "v1.0.0"
 	rel.title = "v1.0.0"
 	rel.max_rel = v4
 	rel.url = "https://github.com/ezhh/handholds/archive/master.zip"
@@ -367,6 +370,7 @@ Uses the CTF PvP Engine.
 
 	rel = PackageRelease()
 	rel.package = game1
+	rel.name = "v1.0.0"
 	rel.title = "v1.0.0"
 	rel.url = "https://github.com/rubenwardy/capturetheflag/archive/master.zip"
 	rel.approved = True
@@ -388,6 +392,7 @@ Uses the CTF PvP Engine.
 
 	rel = PackageRelease()
 	rel.package = mod
+	rel.name = "v1.0.0"
 	rel.title = "v1.0.0"
 	rel.url = "http://mamadou3.free.fr/Minetest/PixelBOX.zip"
 	rel.approved = True
