@@ -15,11 +15,12 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from flask_babel import gettext
+from flask_login import current_user
 
 from . import bp
 from flask import redirect, render_template, session, request, flash, url_for
 from app.models import db, User, UserRank
-from app.utils import random_string, login_user_set_active, is_username_valid
+from app.utils import random_string, login_user_set_active
 from app.tasks.forumtasks import check_forum_account
 from app.utils.phpbbparser import get_profile
 
@@ -31,15 +32,14 @@ def claim():
 
 @bp.route("/user/claim-forums/", methods=["GET", "POST"])
 def claim_forums():
+	if current_user.is_authenticated:
+		return redirect(url_for("homepage.home"))
+
 	username = request.args.get("username")
 	if username is None:
 		username = ""
 	else:
 		method = request.args.get("method")
-
-		if not is_username_valid(username):
-			flash(gettext("Invalid username, Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed. Consider contacting an admin"), "danger")
-			return redirect(url_for("users.claim_forums"))
 
 		user = User.query.filter_by(forums_username=username).first()
 		if user and user.rank.at_least(UserRank.NEW_MEMBER):
@@ -47,7 +47,7 @@ def claim_forums():
 			return redirect(url_for("users.claim_forums"))
 		elif method == "github":
 			if user is None or user.github_username is None:
-				flash(gettext("Unable to get GitHub username for user"), "danger")
+				flash(gettext("Unable to get GitHub username for user. Make sure the forum account exists."), "danger")
 				return redirect(url_for("users.claim_forums", username=username))
 			else:
 				return redirect(url_for("vcs.github_start"))
@@ -62,9 +62,11 @@ def claim_forums():
 		ctype = request.form.get("claim_type")
 		username = request.form.get("username")
 
-		if not is_username_valid(username):
-			flash(gettext("Invalid username, Only alphabetic letters (A-Za-z), numbers (0-9), underscores (_), minuses (-), and periods (.) allowed. Consider contacting an admin"), "danger")
-		elif ctype == "github":
+		if User.query.filter(User.username == username, User.forums_username.is_(None)).first():
+			flash(gettext("A ContentDB user with that name already exists. Please contact an admin to link to your forum account"), "danger")
+			return redirect(url_for("users.claim_forums"))
+
+		if ctype == "github":
 			task = check_forum_account.delay(username)
 			return redirect(url_for("tasks.check", id=task.id, r=url_for("users.claim_forums", username=username, method="github")))
 		elif ctype == "forum":
