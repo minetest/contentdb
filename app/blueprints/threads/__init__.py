@@ -16,8 +16,7 @@
 
 from flask import Blueprint, request, render_template, abort, flash, redirect, url_for
 from flask_babel import gettext, lazy_gettext
-from sqlalchemy import or_
-from sqlalchemy.orm import selectinload, joinedload
+from sqlalchemy.orm import selectinload
 
 from app.markdown import get_user_mentions, render_markdown
 from app.tasks.webhooktasks import post_discord_webhook
@@ -27,7 +26,8 @@ bp = Blueprint("threads", __name__)
 from flask_login import current_user, login_required
 from app.models import Package, db, User, Permission, Thread, UserRank, AuditSeverity, \
 	NotificationType, ThreadReply
-from app.utils import add_notification, is_yes, add_audit_log, get_system_user, has_blocked_domains
+from app.utils import add_notification, is_yes, add_audit_log, get_system_user, has_blocked_domains, \
+	normalize_line_endings
 from flask_wtf import FlaskForm
 from wtforms import StringField, TextAreaField, SubmitField, BooleanField
 from wtforms.validators import InputRequired, Length
@@ -178,7 +178,7 @@ def delete_reply(id):
 
 
 class CommentForm(FlaskForm):
-	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(2, 2000)])
+	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(2, 2000)], filters=[normalize_line_endings])
 	btn_submit = SubmitField(lazy_gettext("Comment"))
 
 
@@ -279,7 +279,7 @@ def view(id):
 
 class ThreadForm(FlaskForm):
 	title	= StringField(lazy_gettext("Title"), [InputRequired(), Length(3,100)])
-	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
+	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)], filters=[normalize_line_endings])
 	private = BooleanField(lazy_gettext("Private"))
 	btn_submit  = SubmitField(lazy_gettext("Open Thread"))
 

@@ -25,13 +25,13 @@ from wtforms.validators import InputRequired, Length
 from app.models import User, UserRank
 from app.tasks.emails import send_user_email
 from app.tasks.webhooktasks import post_discord_webhook
-from app.utils import is_no, abs_url_samesite
+from app.utils import is_no, abs_url_samesite, normalize_line_endings
 
 bp = Blueprint("report", __name__)
 
 
 class ReportForm(FlaskForm):
-	message = TextAreaField(lazy_gettext("Message"), [InputRequired(), Length(10, 10000)])
+	message = TextAreaField(lazy_gettext("Message"), [InputRequired(), Length(10, 10000)], filters=[normalize_line_endings])
 	submit = SubmitField(lazy_gettext("Report"))
 
 

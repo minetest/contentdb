@@ -44,7 +44,8 @@ from app.models import Package, Tag, db, User, Tags, PackageState, Permission, P
 	PackageScreenshot, NotificationType, AuditLogEntry, PackageAlias, PackageProvides, PackageGameSupport, \
 	PackageDailyStats, Collection
 from app.utils import is_user_bot, get_int_or_abort, is_package_page, abs_url_for, add_audit_log, get_package_by_info, \
-	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options, post_to_approval_thread
+	add_notification, get_system_user, rank_required, get_games_from_csv, get_daterange_options, \
+	post_to_approval_thread, normalize_line_endings
 from app.logic.package_approval import validate_package_for_approval, can_move_to_state
 from app.logic.game_support import game_support_set
 
@@ -238,7 +239,7 @@ class PackageForm(FlaskForm):
 	license          = QuerySelectField(lazy_gettext("License"), [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	media_license    = QuerySelectField(lazy_gettext("Media License"), [DataRequired()], allow_blank=True, query_factory=lambda: License.query.order_by(db.asc(License.name)), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 
-	desc             = TextAreaField(lazy_gettext("Long Description (Markdown)"), [Optional(), Length(0,10000)])
+	desc             = TextAreaField(lazy_gettext("Long Description (Markdown)"), [Optional(), Length(0,10000)], filters=[normalize_line_endings])
 
 	repo             = StringField(lazy_gettext("VCS Repository URL"), [Optional(), URL()], filters = [lambda x: x or None])
 	website          = StringField(lazy_gettext("Website URL"), [Optional(), URL()], filters = [lambda x: x or None])

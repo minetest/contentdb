@@ -52,6 +52,13 @@ def nonempty_or_none(str):
 	return str
 
 
+def normalize_line_endings(value: Optional[str]) -> Optional[str]:
+	if value is None:
+		return None
+
+	return value.replace("\r\n", "\n").strip() + "\n"
+
+
 def should_return_json():
 	return "application/json" in request.accept_mimetypes and \
 			not "text/html" in request.accept_mimetypes

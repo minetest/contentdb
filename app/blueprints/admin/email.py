@@ -22,14 +22,14 @@ from wtforms.validators import InputRequired, Length
 
 from app.markdown import render_markdown
 from app.tasks.emails import send_user_email, send_bulk_email as task_send_bulk
-from app.utils import rank_required, add_audit_log
+from app.utils import rank_required, add_audit_log, normalize_line_endings
 from . import bp
 from app.models import UserRank, User, AuditSeverity
 
 
 class SendEmailForm(FlaskForm):
 	subject = StringField("Subject", [InputRequired(), Length(1, 300)])
-	text    = TextAreaField("Message", [InputRequired()])
+	text    = TextAreaField("Message", [InputRequired()], filters=[normalize_line_endings])
 	submit  = SubmitField("Send")
 
 

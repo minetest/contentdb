@@ -25,7 +25,7 @@ from wtforms import StringField, BooleanField, SubmitField, FieldList, HiddenFie
 from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from app.models import Collection, db, Package, Permission, CollectionPackage, User, UserRank, AuditSeverity
-from app.utils import nonempty_or_none
+from app.utils import nonempty_or_none, normalize_line_endings
 from app.utils.models import is_package_page, add_audit_log, create_session
 
 bp = Blueprint("collections", __name__)
@@ -78,7 +78,7 @@ class CollectionForm(FlaskForm):
 	name = StringField("URL", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0,
 		"Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	short_description = StringField(lazy_gettext("Short Description"), [Optional(), Length(0, 200)])
-	long_description = TextAreaField(lazy_gettext("Page Content"), [Optional()], filters=[nonempty_or_none])
+	long_description = TextAreaField(lazy_gettext("Page Content"), [Optional()], filters=[nonempty_or_none, normalize_line_endings])
 	private = BooleanField(lazy_gettext("Private"))
 	pinned = BooleanField(lazy_gettext("Pinned to my profile"))
 	descriptions = FieldList(

@@ -23,7 +23,7 @@ from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from . import bp
 from app.models import Permission, Tag, db, AuditSeverity
-from app.utils import add_audit_log
+from app.utils import add_audit_log, normalize_line_endings
 
 
 @bp.route("/tags/")
@@ -44,7 +44,7 @@ def tag_list():
 
 class TagForm(FlaskForm):
 	title = StringField("Title", [InputRequired(), Length(3, 100)])
-	description = TextAreaField("Description", [Optional(), Length(0, 500)])
+	description = TextAreaField("Description", [Optional(), Length(0, 500)], filters=[normalize_line_endings])
 	name = StringField("Name", [Optional(), Length(1, 20), Regexp("^[a-z0-9_]", 0,
 			"Lower case letters (a-z), digits (0-9), and underscores (_) only")])
 	submit = SubmitField("Save")

@@ -29,7 +29,7 @@ from app.models import db, PackageReview, Thread, ThreadReply, NotificationType,
 	Permission, AuditSeverity, PackageState, Language
 from app.tasks.webhooktasks import post_discord_webhook
 from app.utils import is_package_page, add_notification, get_int_or_abort, is_yes, is_safe_url, rank_required, \
-	add_audit_log, has_blocked_domains, should_return_json
+	add_audit_log, has_blocked_domains, should_return_json, normalize_line_endings
 from . import bp
 
 
@@ -57,7 +57,7 @@ class ReviewForm(FlaskForm):
 			get_pk=lambda a: a.id,
 			get_label=lambda a: a.title,
 			default=get_default_language)
-	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)])
+	comment = TextAreaField(lazy_gettext("Comment"), [InputRequired(), Length(10, 2000)], filters=[normalize_line_endings])
 	rating = RadioField(lazy_gettext("Rating"), [InputRequired()],
 			choices=[("5", lazy_gettext("Yes")), ("3", lazy_gettext("Neutral")), ("1", lazy_gettext("No"))])
 	btn_submit = SubmitField(lazy_gettext("Save"))

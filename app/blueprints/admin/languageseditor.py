@@ -22,7 +22,7 @@ from wtforms import StringField, TextAreaField, SubmitField
 from wtforms.validators import InputRequired, Length, Optional
 
 from app.models import db, AuditSeverity, UserRank, Language, Package, PackageState, PackageTranslation
-from app.utils import add_audit_log, rank_required
+from app.utils import add_audit_log, rank_required, normalize_line_endings
 from . import bp
 
 
@@ -38,7 +38,7 @@ def language_list():
 
 class LanguageForm(FlaskForm):
 	id = StringField("Id", [InputRequired(), Length(2, 10)])
-	title = TextAreaField("Title", [Optional(), Length(2, 100)])
+	title = TextAreaField("Title", [Optional(), Length(2, 100)], filters=[normalize_line_endings])
 	submit = SubmitField("Save")
 
 
