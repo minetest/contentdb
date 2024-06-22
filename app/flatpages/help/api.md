@@ -213,6 +213,7 @@ Format query parameters:
 * `fmt`:  How the response is formatted.
     * `keys`:  author/name only.
     * `short`:  stuff needed for the Minetest client.
+    * `vcs`: `short` but with `repo`.
 
 
 ### Releases

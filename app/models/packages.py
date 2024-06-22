@@ -611,7 +611,7 @@ class Package(db.Model):
 			"type": self.type.to_name(),
 		}
 
-	def as_short_dict(self, base_url, version=None, release_id=None, no_load=False, lang="en"):
+	def as_short_dict(self, base_url, version=None, release_id=None, no_load=False, lang="en", include_vcs=False):
 		tnurl = self.get_thumb_url(1, format="png")
 
 		if release_id is None and no_load == False:
@@ -636,6 +636,9 @@ class Package(db.Model):
 
 		if not ret["aliases"]:
 			del ret["aliases"]
+
+		if include_vcs:
+			ret["repo"] = self.repo
 
 		return ret
 

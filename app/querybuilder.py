@@ -213,14 +213,15 @@ class QueryBuilder:
 
 		return releases_query.all()
 
-	def convert_to_dictionary(self, packages):
+	def convert_to_dictionary(self, packages, include_vcs: bool):
 		releases = {}
 		for [package_id, release_id] in self.get_releases():
 			releases[package_id] = release_id
 
 		def to_json(package: Package):
 			release_id = releases.get(package.id)
-			return package.as_short_dict(current_app.config["BASE_URL"], release_id=release_id, no_load=True, lang=self.lang)
+			return package.as_short_dict(current_app.config["BASE_URL"], release_id=release_id, no_load=True,
+					lang=self.lang, include_vcs=include_vcs)
 
 		return [to_json(pkg) for pkg in packages]
 

@@ -74,10 +74,12 @@ def packages():
 	qb = QueryBuilder(request.args, lang=lang)
 	query = qb.build_package_query()
 
-	if request.args.get("fmt") == "keys":
+	fmt = request.args.get("fmt")
+	if fmt == "keys":
 		return jsonify([pkg.as_key_dict() for pkg in query.all()])
 
-	pkgs = qb.convert_to_dictionary(query.all())
+	include_vcs = fmt == "vcs"
+	pkgs = qb.convert_to_dictionary(query.all(), include_vcs)
 	if "engine_version" in request.args or "protocol_version" in request.args:
 		pkgs = [pkg for pkg in pkgs if pkg.get("release")]
 
@@ -88,7 +90,8 @@ def packages():
 			"limit" not in request.args:
 		featured_lut = set()
 		featured = qb.convert_to_dictionary(query.filter(
-			Package.collections.any(and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))).all())
+			Package.collections.any(and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))).all(),
+			include_vcs)
 		for pkg in featured:
 			featured_lut.add(f"{pkg['author']}/{pkg['name']}")
 			pkg["short_description"] = gettext("Featured") + ". " + pkg["short_description"]
