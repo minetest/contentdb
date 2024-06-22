@@ -283,7 +283,7 @@ def markdown():
 def list_all_releases():
 	query = PackageRelease.query.filter_by(approved=True) \
 			.filter(PackageRelease.package.has(state=PackageState.APPROVED)) \
-			.order_by(db.desc(PackageRelease.releaseDate))
+			.order_by(db.desc(PackageRelease.created_at))
 
 	if "author" in request.args:
 		author = User.query.filter_by(username=request.args["author"]).first()
@@ -333,7 +333,7 @@ def create_release(token, package):
 			if option not in data:
 				error(400, option + " is required in the POST data")
 
-		return api_create_vcs_release(token, package, data["title"], data["ref"])
+		return api_create_vcs_release(token, package, data["title"], data["title"], data.get("release_notes"), data["ref"])
 
 	elif request.files:
 		file = request.files.get("file")
@@ -342,7 +342,7 @@ def create_release(token, package):
 
 		commit_hash = data.get("commit")
 
-		return api_create_zip_release(token, package, data["title"], file, None, None, "API", commit_hash)
+		return api_create_zip_release(token, package, data["title"], data["title"], data.get("release_notes"), file, None, None, "API", commit_hash)
 
 	else:
 		error(400, "Unknown release-creation method. Specify the method or provide a file.")
@@ -622,7 +622,7 @@ def homepage():
 
 	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
 			.filter_by(state=PackageState.APPROVED) \
-			.order_by(db.desc(PackageRelease.releaseDate)) \
+			.order_by(db.desc(PackageRelease.created_at)) \
 			.limit(20).all()
 	updated = updated[:4]
 

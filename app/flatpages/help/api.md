@@ -224,7 +224,9 @@ Format query parameters:
         * `maintainer`: Filter by maintainer
     * Returns array of release dictionaries with keys:
         * `id`: release ID
+        * `name`: short release name
         * `title`: human-readable title
+        * `release_notes`: string or null, what's new in this release
         * `release_date`: Date released
         * `url`: download URL
         * `commit`: commit hash or null
@@ -248,6 +250,7 @@ Format query parameters:
     * Requires authentication.
     * Body can be JSON or multipart form data. Zip uploads must be multipart form data.
     * `title`: human-readable name of the release.
+    * `release_notes`: string or null, what's new in this release.
     * For Git release creation:
         * `method`: must be `git`.
         * `ref`: (Optional) git reference, eg: `master`.

@@ -16,6 +16,7 @@
 
 import datetime
 import re
+from typing import Optional
 
 from celery import uuid
 from flask_babel import lazy_gettext
@@ -32,18 +33,20 @@ def check_can_create_release(user: User, package: Package):
 		raise LogicError(403, lazy_gettext("You don't have permission to make releases"))
 
 	five_minutes_ago = datetime.datetime.now() - datetime.timedelta(minutes=5)
-	count = package.releases.filter(PackageRelease.releaseDate > five_minutes_ago).count()
+	count = package.releases.filter(PackageRelease.created_at > five_minutes_ago).count()
 	if count >= 5:
 		raise LogicError(429, lazy_gettext("You've created too many releases for this package in the last 5 minutes, please wait before trying again"))
 
 
-def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
+def do_create_vcs_release(user: User, package: Package, name: str, title: Optional[str], release_notes: Optional[str], ref: str,
 		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason: str = None):
 	check_can_create_release(user, package)
 
 	rel = PackageRelease()
 	rel.package = package
-	rel.title   = title
+	rel.name    = name
+	rel.title   = title or name
+	rel.release_notes = release_notes
 	rel.url     = ""
 	rel.task_id = uuid()
 	rel.min_rel = min_v
@@ -63,7 +66,7 @@ def do_create_vcs_release(user: User, package: Package, title: str, ref: str,
 	return rel
 
 
-def do_create_zip_release(user: User, package: Package, title: str, file,
+def do_create_zip_release(user: User, package: Package, name: str, title: Optional[str], release_notes: Optional[str], file,
 		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason: str = None,
 		commit_hash: str = None):
 	check_can_create_release(user, package)
@@ -77,7 +80,9 @@ def do_create_zip_release(user: User, package: Package, title: str, file,
 
 	rel = PackageRelease()
 	rel.package = package
-	rel.title   = title
+	rel.name    = name
+	rel.title   = title or name
+	rel.release_notes = release_notes
 	rel.url     = uploaded_url
 	rel.task_id = uuid()
 	rel.commit_hash = commit_hash

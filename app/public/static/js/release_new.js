@@ -5,15 +5,15 @@
 
 window.addEventListener("load", () => {
 	function check_opt() {
-		if (document.querySelector("input[name='uploadOpt']:checked").value === "vcs") {
+		if (document.querySelector("input[name='upload_mode']:checked").value === "vcs") {
 			document.getElementById("file_upload").parentElement.classList.add("d-none");
-			document.getElementById("vcsLabel").parentElement.classList.remove("d-none");
+			document.getElementById("vcs_label").parentElement.classList.remove("d-none");
 		} else {
 			document.getElementById("file_upload").parentElement.classList.remove("d-none");
-			document.getElementById("vcsLabel").parentElement.classList.add("d-none");
+			document.getElementById("vcs_label").parentElement.classList.add("d-none");
 		}
 	}
 
-	document.querySelectorAll("input[name='uploadOpt']").forEach(x => x.addEventListener("change", check_opt));
+	document.querySelectorAll("input[name='upload_mode']").forEach(x => x.addEventListener("change", check_opt));
 	check_opt();
 });

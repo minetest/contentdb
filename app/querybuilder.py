@@ -343,7 +343,7 @@ class QueryBuilder:
 		elif self.order_by == "approved_at" or self.order_by == "date":
 			to_order = Package.approved_at
 		elif self.order_by == "last_release":
-			to_order = PackageRelease.releaseDate
+			to_order = PackageRelease.created_at
 		else:
 			abort(400)
 

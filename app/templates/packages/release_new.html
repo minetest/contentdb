@@ -39,15 +39,16 @@
 
 		<h3>{{ _("1. Name release") }}</h3>
 
-		{{ render_field(form.title, placeholder=_("Human readable. Eg: 1.0.0 or 2018-05-28")) }}
+		{{ render_field(form.name, hint=_("Release short name. Eg: 1.0.0 or 2018-05-28")) }}
+		{{ render_field(form.title, hint=_("Human-readable name. Eg: 1.0.0 - The Trains Update")) }}
+		{{ render_field(form.release_notes) }}
 
 		<h3 class="mt-5">{{ _("2. Set the content") }}</h3>
 
-		<p class="mb-0">{{ _("Method") }}</p>
-		{{ render_radio_field(form.uploadOpt) }}
+		{{ render_radio_field(form.upload_mode) }}
 
 		{% if package.repo %}
-			{{ render_field(form.vcsLabel, placeholder=_("Leave blank to use default branch"), class_="mt-3",
+			{{ render_field(form.vcs_label, placeholder=_("Leave blank to use default branch"), class_="mt-3",
 					pattern="[A-Za-z0-9/._-]+") }}
 		{% endif %}
 
@@ -99,5 +100,5 @@
 
 {% block scriptextra %}
 	<script src="/static/js/release_minmax.js?v=2"></script>
-	<script src="/static/js/release_new.js"></script>
+	<script src="/static/js/release_new.js?v=2"></script>
 {% endblock %}

@@ -20,6 +20,7 @@ from flask_babel import lazy_gettext, gettext
 from flask_login import login_required, current_user
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField, BooleanField, RadioField, FileField
+from wtforms.fields.simple import TextAreaField
 from wtforms.validators import InputRequired, Length, Optional
 from wtforms_sqlalchemy.fields import QuerySelectField
 
@@ -28,7 +29,7 @@ from app.models import Package, db, User, PackageState, Permission, UserRank, Pa
 	PackageRelease, PackageUpdateTrigger, PackageUpdateConfig
 from app.rediscache import has_key, set_temp_key, make_download_key
 from app.tasks.importtasks import check_update_config
-from app.utils import is_user_bot, is_package_page, nonempty_or_none
+from app.utils import is_user_bot, is_package_page, nonempty_or_none, normalize_line_endings
 from . import bp, get_package_tabs
 
 
@@ -51,19 +52,25 @@ def get_mt_releases(is_max):
 
 
 class CreatePackageReleaseForm(FlaskForm):
-	title       = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)])
-	uploadOpt   = RadioField(lazy_gettext("Method"), choices=[("upload", lazy_gettext("File Upload"))], default="upload")
-	vcsLabel    = StringField(lazy_gettext("Git reference (ie: commit hash, branch, or tag)"), default=None)
+	name        = StringField(lazy_gettext("Name"), [InputRequired(), Length(1, 30)])
+	title       = StringField(lazy_gettext("Title"), [Optional(), Length(1, 100)], filters=[nonempty_or_none])
+	release_notes = TextAreaField(lazy_gettext("Release Notes"), [Optional(), Length(1, 100)],
+			filters=[nonempty_or_none, normalize_line_endings])
+	upload_mode = RadioField(lazy_gettext("Method"), choices=[("upload", lazy_gettext("File Upload"))], default="upload")
+	vcs_label   = StringField(lazy_gettext("Git reference (ie: commit hash, branch, or tag)"), default=None)
 	file_upload = FileField(lazy_gettext("File Upload"))
 	min_rel     = QuerySelectField(lazy_gettext("Minimum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	max_rel    = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
+	max_rel     = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	submit     = SubmitField(lazy_gettext("Save"))
+	submit      = SubmitField(lazy_gettext("Save"))
 
 
 class EditPackageReleaseForm(FlaskForm):
-	title    = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)])
+	name     = StringField(lazy_gettext("Name"), [InputRequired(), Length(1, 30)])
+	title    = StringField(lazy_gettext("Title"), [Optional(), Length(1, 30)], filters=[nonempty_or_none])
+	release_notes = TextAreaField(lazy_gettext("Release Notes"), [Optional(), Length(1, 100)],
+			filters=[nonempty_or_none, normalize_line_endings])
 	url      = StringField(lazy_gettext("URL"), [Optional()])
 	task_id  = StringField(lazy_gettext("Task ID"), filters = [lambda x: x or None])
 	approved = BooleanField(lazy_gettext("Is Approved"))
@@ -88,21 +95,21 @@ def create_release(package):
 	# Initial form class from post data and default data
 	form = CreatePackageReleaseForm()
 	if package.repo is not None:
-		form["uploadOpt"].choices = [("vcs", gettext("Import from Git")), ("upload", gettext("Upload .zip file"))]
+		form.upload_mode.choices = [("vcs", gettext("Import from Git")), ("upload", gettext("Upload .zip file"))]
 		if request.method == "GET":
-			form["uploadOpt"].data = "vcs"
-			form.vcsLabel.data = request.args.get("ref")
+			form.upload_mode.data = "vcs"
+			form.vcs_label.data = request.args.get("ref")
 
 	if request.method == "GET":
 		form.title.data = request.args.get("title")
 
 	if form.validate_on_submit():
 		try:
-			if form["uploadOpt"].data == "vcs":
-				rel = do_create_vcs_release(current_user, package, form.title.data,
-						form.vcsLabel.data, form.min_rel.data.get_actual(), form.max_rel.data.get_actual())
+			if form.upload_mode.data == "vcs":
+				rel = do_create_vcs_release(current_user, package, form.name.data, form.title.data, form.release_notes.data,
+						form.vcs_label.data, form.min_rel.data.get_actual(), form.max_rel.data.get_actual())
 			else:
-				rel = do_create_zip_release(current_user, package, form.title.data,
+				rel = do_create_zip_release(current_user, package, form.name.data, form.title.data, form.release_notes.data,
 						form.file_upload.data, form.min_rel.data.get_actual(), form.max_rel.data.get_actual())
 			return redirect(url_for("tasks.check", id=rel.task_id, r=rel.get_edit_url()))
 		except LogicError as e:

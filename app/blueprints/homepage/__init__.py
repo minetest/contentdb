@@ -105,7 +105,7 @@ def home():
 	recent_releases_query = (
 		db.session.query(
 			Package.id,
-			func.max(PackageRelease.releaseDate).label("max_created_at")
+			func.max(PackageRelease.created_at).label("max_created_at")
 		)
 		.join(PackageRelease, Package.releases)
 		.group_by(Package.id)

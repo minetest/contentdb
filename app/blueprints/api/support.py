@@ -14,7 +14,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
-
+from typing import Optional
 from flask import jsonify, abort, make_response, url_for, current_app
 
 from app.logic.packages import do_edit_package
@@ -38,14 +38,14 @@ def guard(f):
 	return ret
 
 
-def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: str,
+def api_create_vcs_release(token: APIToken, package: Package, name: str, title: Optional[str], release_notes: Optional[str], ref: str,
 		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason="API"):
 	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	reason += ", token=" + token.name
 
-	rel = guard(do_create_vcs_release)(token.owner, package, title, ref, min_v, max_v, reason)
+	rel = guard(do_create_vcs_release)(token.owner, package, name, title, release_notes, ref, min_v, max_v, reason)
 
 	return jsonify({
 		"success": True,
@@ -54,14 +54,14 @@ def api_create_vcs_release(token: APIToken, package: Package, title: str, ref: s
 	})
 
 
-def api_create_zip_release(token: APIToken, package: Package, title: str, file,
+def api_create_zip_release(token: APIToken, package: Package, name: str, title: Optional[str], release_notes: Optional[str], file,
 		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason="API", commit_hash: str = None):
 	if not token.can_operate_on_package(package):
 		error(403, "API token does not have access to the package")
 
 	reason += ", token=" + token.name
 
-	rel = guard(do_create_zip_release)(token.owner, package, title, file, min_v, max_v, reason, commit_hash)
+	rel = guard(do_create_zip_release)(token.owner, package, name, title, release_notes, file, min_v, max_v, reason, commit_hash)
 
 	return jsonify({
 		"success": True,

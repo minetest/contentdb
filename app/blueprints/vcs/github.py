@@ -192,7 +192,7 @@ def github_webhook():
 		if package.releases.filter_by(commit_hash=ref).count() > 0:
 			return
 
-		return api_create_vcs_release(token, package, title, ref, reason="Webhook")
+		return api_create_vcs_release(token, package, title, title, None, ref, reason="Webhook")
 
 	return jsonify({
 		"success": False,

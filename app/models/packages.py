@@ -474,7 +474,7 @@ class Package(db.Model):
 	content_warnings = db.relationship("ContentWarning", secondary=ContentWarnings, back_populates="packages")
 
 	releases = db.relationship("PackageRelease", back_populates="package",
-			lazy="dynamic", order_by=db.desc("package_release_releaseDate"), cascade="all, delete, delete-orphan")
+			lazy="dynamic", order_by=db.desc("package_release_created_at"), cascade="all, delete, delete-orphan")
 
 	screenshots = db.relationship("PackageScreenshot", back_populates="package", foreign_keys="PackageScreenshot.package_id",
 			lazy="dynamic", order_by=db.asc("package_screenshot_order"), cascade="all, delete, delete-orphan")
@@ -1085,13 +1085,15 @@ class PackageRelease(db.Model):
 	package_id   = db.Column(db.Integer, db.ForeignKey("package.id"))
 	package      = db.relationship("Package", back_populates="releases", foreign_keys=[package_id])
 
+	name         = db.Column(db.String(30), nullable=False)
 	title        = db.Column(db.String(100), nullable=False)
-	releaseDate  = db.Column(db.DateTime,    nullable=False)
+	created_at  = db.Column(db.DateTime,    nullable=False)
 	url          = db.Column(db.String(200), nullable=False, default="")
 	approved     = db.Column(db.Boolean, nullable=False, default=False)
 	task_id      = db.Column(db.String(37), nullable=True)
 	commit_hash  = db.Column(db.String(41), nullable=True, default=None)
 	downloads    = db.Column(db.Integer, nullable=False, default=0)
+	release_notes = db.Column(db.UnicodeText, nullable=True, default=None)
 
 	min_rel_id = db.Column(db.Integer, db.ForeignKey("minetest_release.id"), nullable=True, server_default=None)
 	min_rel    = db.relationship("MinetestRelease", foreign_keys=[min_rel_id])
@@ -1126,9 +1128,11 @@ class PackageRelease(db.Model):
 	def as_dict(self):
 		return {
 			"id": self.id,
+			"name": self.name,
 			"title": self.title,
+			"release_notes": self.release_notes,
 			"url": self.url if self.url != "" else None,
-			"release_date": self.releaseDate.isoformat(),
+			"release_date": self.created_at.isoformat(),
 			"commit": self.commit_hash,
 			"downloads": self.downloads,
 			"min_minetest_version": self.min_rel and self.min_rel.as_dict(),
@@ -1141,7 +1145,7 @@ class PackageRelease(db.Model):
 			"id": self.id,
 			"title": self.title,
 			"url": self.url if self.url != "" else None,
-			"release_date": self.releaseDate.isoformat(),
+			"release_date": self.created_at.isoformat(),
 			"commit": self.commit_hash,
 			"downloads": self.downloads,
 			"min_minetest_version": self.min_rel and self.min_rel.as_dict(),
@@ -1169,7 +1173,7 @@ class PackageRelease(db.Model):
 				id=self.id)
 
 	def __init__(self):
-		self.releaseDate = datetime.datetime.now()
+		self.created_at = datetime.datetime.now()
 
 	def get_download_filename(self):
 		return f"{self.package.name}_{self.id}.zip"

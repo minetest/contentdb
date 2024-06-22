@@ -44,7 +44,7 @@ def game_hub(package: Package):
 
 	updated = db.session.query(Package).select_from(PackageRelease).join(Package) \
 		.filter(Package.supported_games.any(game=package, supports=True), Package.state==PackageState.APPROVED) \
-		.order_by(db.desc(PackageRelease.releaseDate)) \
+		.order_by(db.desc(PackageRelease.created_at)) \
 		.limit(20).all()
 	updated = updated[:4]
 
