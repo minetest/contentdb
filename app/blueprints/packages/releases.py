@@ -68,7 +68,7 @@ class CreatePackageReleaseForm(FlaskForm):
 
 class EditPackageReleaseForm(FlaskForm):
 	name     = StringField(lazy_gettext("Name"), [InputRequired(), Length(1, 30)])
-	title    = StringField(lazy_gettext("Title"), [Optional(), Length(1, 30)], filters=[nonempty_or_none])
+	title    = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)], filters=[nonempty_or_none])
 	release_notes = TextAreaField(lazy_gettext("Release Notes"), [Optional(), Length(1, 100)],
 			filters=[nonempty_or_none, normalize_line_endings])
 	url      = StringField(lazy_gettext("URL"), [Optional()])
@@ -178,13 +178,15 @@ def edit_release(package, id):
 
 	if form.validate_on_submit():
 		if canEdit:
-			release.title = form["title"].data
-			release.min_rel = form["min_rel"].data.get_actual()
-			release.max_rel = form["max_rel"].data.get_actual()
+			release.name = form.name.data
+			release.title = form.title.data
+			release.release_notes = form.release_notes.data
+			release.min_rel = form.min_rel.data.get_actual()
+			release.max_rel = form.max_rel.data.get_actual()
 
 		if package.check_perm(current_user, Permission.CHANGE_RELEASE_URL):
-			release.url = form["url"].data
-			release.task_id = form["task_id"].data
+			release.url = form.url.data
+			release.task_id = form.task_id.data
 			if release.task_id is not None:
 				release.task_id = None
 
@@ -227,10 +229,10 @@ def bulk_change_release(package):
 		only_change_none = form.only_change_none.data
 
 		for release in package.releases.all():
-			if form["set_min"].data and (not only_change_none or release.min_rel is None):
-				release.min_rel = form["min_rel"].data.get_actual()
-			if form["set_max"].data and (not only_change_none or release.max_rel is None):
-				release.max_rel = form["max_rel"].data.get_actual()
+			if form.set_min.data and (not only_change_none or release.min_rel is None):
+				release.min_rel = form.min_rel.data.get_actual()
+			if form.set_max.data and (not only_change_none or release.max_rel is None):
+				release.max_rel = form.max_rel.data.get_actual()
 
 		db.session.commit()
 

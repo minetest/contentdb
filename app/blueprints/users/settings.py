@@ -370,10 +370,10 @@ def modtools(username):
 				redirect_target = url_for("tasks.check", id=task_id, r=redirect_target)
 
 		if user.check_perm(current_user, Permission.CHANGE_RANK):
-			new_rank = form["rank"].data
+			new_rank = form.rank.data
 			if current_user.rank.at_least(new_rank):
 				if new_rank != user.rank:
-					user.rank = form["rank"].data
+					user.rank = form.rank.data
 					msg = "Set rank of {} to {}".format(user.display_name, user.rank.title)
 					add_audit_log(AuditSeverity.MODERATION, current_user, msg,
 								  url_for("users.profile", username=username))

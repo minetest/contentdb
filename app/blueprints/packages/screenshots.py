@@ -112,10 +112,10 @@ def edit_screenshot(package, id):
 		was_approved = screenshot.approved
 
 		if can_edit:
-			screenshot.title = form["title"].data or "Untitled"
+			screenshot.title = form.title.data or "Untitled"
 
 		if can_approve:
-			screenshot.approved = form["approved"].data
+			screenshot.approved = form.approved.data
 		else:
 			screenshot.approved = was_approved
 
