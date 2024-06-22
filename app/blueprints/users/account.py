@@ -286,9 +286,7 @@ def verify_email():
 		flash(gettext("Unknown verification token!"), "danger")
 		return redirect(url_for("homepage.home"))
 
-	delta = (datetime.datetime.now() - ver.created_at)
-	delta: datetime.timedelta
-	if delta.total_seconds() > 12*60*60:
+	if ver.is_expired:
 		flash(gettext("Token has expired"), "danger")
 		db.session.delete(ver)
 		db.session.commit()

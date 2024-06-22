@@ -371,6 +371,12 @@ class UserEmailVerification(db.Model):
 	is_password_reset = db.Column(db.Boolean, nullable=False, default=False)
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
+	@property
+	def is_expired(self):
+		delta = (datetime.datetime.now() - self.created_at)
+		delta: datetime.timedelta
+		return delta.total_seconds() > 12 * 60 * 60
+
 
 class EmailSubscription(db.Model):
 	id          = db.Column(db.Integer, primary_key=True)

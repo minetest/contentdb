@@ -112,4 +112,17 @@
 	</form>
 {% endif %}
 
+
+<h3>{{ _("Pending email verifications") }}</h3>
+<ul>
+{% for ver in user.email_verifications %}
+	{% if not ver.is_expired %}
+	<li>
+		{{ ver.email }}, {{ ver.created_at | datetime }}:
+		<a href="{{ url_for('users.verify_email', token=ver.token) }}">verify</a>
+	</li>
+	{% endif %}
+{% endfor %}
+</ul>
+
 {% endblock %}
