@@ -48,11 +48,16 @@ def webhook_impl():
 			ref = json["after"]
 			title = datetime.datetime.utcnow().strftime("%Y-%m-%d") + " " + ref[:5]
 			branch = json["ref"].replace("refs/heads/", "")
-			if branch not in ["master", "main"]:
+			if package.update_config and package.update_config.ref:
+				if branch != package.update_config.ref:
+					continue
+			elif branch not in ["master", "main"]:
 				continue
+
 		elif event == "tag_push":
 			ref = json["ref"]
 			title = ref.replace("refs/tags/", "")
+
 		else:
 			return error(400, "Unsupported event: '{}'. Only 'push', 'create:tag', and 'ping' are supported."
 					.format(event or "null"))

@@ -16,14 +16,21 @@ See [Git Update Detection](/help/update_config/).
 The process is as follows:
 
 1. The user creates an API Token and a webhook to use it.
-2. The user pushes a commit to the git host (Gitlab or Github).
+2. The user pushes a commit to the git host (GitLab or GitHub).
 3. The git host posts a webhook notification to ContentDB, using the API token assigned to it.
 4. ContentDB checks the API token and issues a new release.
+    * If multiple packages match, then only the first will have a release created.
+ 
+### Branch filtering
 
-<p class="alert alert-warning">
-    "New commit" or "push" based webhooks will currently only work on branches named `master` or
-    `main`.
-</p>
+By default, "New commit" or "push" based webhooks will only work on "master"/"main" branches.
+You can configure the branch used by changing "Branch name" in [Git update detection](update_config).
+
+For example, to support production and beta packages you can have multiple packages with the same VCS repo URL
+but different [Git update detection](update_config) branch names.
+
+Tag-based webhooks are accepted on any branch.
+
 
 ## Setting up
 
@@ -36,10 +43,10 @@ The process is as follows:
 5. Set the content type to JSON.
 6. Set the secret to the access token that you copied.
 7. Set the events
-  * If you want a rolling release, choose "just the push event".
-  * Or if you want a stable release cycle based on tags,
-    choose "Let me select" > Branch or tag creation.
+    * If you want a rolling release, choose "just the push event".
+    * Or if you want a stable release cycle based on tags, choose "Let me select" > Branch or tag creation.
 8. Create.
+9. If desired, change [Git update detection](update_config) > Branch name to configure the [branch filtering](#branch-filtering).
 
 ### GitLab
 
@@ -53,6 +60,7 @@ The process is as follows:
     * Or if you want a stable release cycle based on tags,
       choose "Tag push events".
 8. Add webhook.
+9. If desired, change [Git update detection](update_config) > Branch name to configure the [branch filtering](#branch-filtering).
 
 ## Configuring Release Creation
 
