@@ -48,12 +48,17 @@
 		{% endif %}
 		{% if thread.check_perm(current_user, "DELETE_THREAD") %}
 			<a href="{{ url_for('threads.delete_thread', id=thread.id) }}" class="float-end me-2 btn btn-danger">{{ _('Delete') }}</a>
-		{% endif %}
-		{% if thread.review and thread.review.check_perm(current_user, "DELETE_REVIEW") and current_user.username != thread.review.author.username %}
-			<form method="post" action="{{ thread.review.get_delete_url() }}" class="float-end me-2">
-				<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
-				<input type="submit" class="btn btn-danger" value="{{ _('Convert to Thread') }}" />
-			</form>
+
+			{#
+				The standard way to convert to thread is from the Edit review page
+				We only want to show the Convert to Thread button if they can also delete the thread
+			#}
+			{% if thread.review and thread.review.check_perm(current_user, "DELETE_REVIEW") %}
+				<form method="post" action="{{ thread.review.get_delete_url() }}" class="float-end me-2">
+					<input type="hidden" name="csrf_token" value="{{ csrf_token() }}" />
+					<input type="submit" class="btn btn-danger" value="{{ _('Convert to Thread') }}" />
+				</form>
+			{% endif %}
 		{% endif %}
 		{% if thread.check_perm(current_user, "LOCK_THREAD") %}
 			{% if thread.locked %}
