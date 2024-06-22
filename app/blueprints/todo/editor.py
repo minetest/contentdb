@@ -17,12 +17,12 @@
 
 from flask import redirect, url_for, abort, render_template, request
 from flask_login import current_user, login_required
-from sqlalchemy import or_
+from sqlalchemy import or_, and_
 
 from app.models import Package, PackageState, PackageScreenshot, PackageUpdateConfig, ForumTopic, db, \
 	PackageRelease, Permission, UserRank, License, MetaPackage, Dependency, AuditLogEntry, Tag, MinetestRelease
 from app.querybuilder import QueryBuilder
-from app.utils import get_int_or_abort, is_yes
+from app.utils import get_int_or_abort, is_yes, rank_required
 from . import bp
 
 
@@ -188,3 +188,28 @@ def mtver_support():
 
 	return render_template("todo/mtver_support.html", current_tab="screenshots",
 			packages=query.all(), sort_by=sort_by, is_mtm_only=is_mtm_only, current_stable=current_stable)
+
+
+@bp.route("/todo/topics/mismatch/")
+@rank_required(UserRank.EDITOR)
+def topics_mismatch():
+	missing_topics = Package.query.filter(Package.forums.is_not(None)) .filter(~ForumTopic.query.filter(ForumTopic.topic_id == Package.forums).exists()).all()
+
+	packages_bad_author = (
+		db.session.query(Package, ForumTopic)
+		.select_from(Package)
+		.join(ForumTopic, Package.forums == ForumTopic.topic_id)
+		.filter(Package.author_id != ForumTopic.author_id)
+		.all())
+
+	packages_bad_title = (
+		db.session.query(Package, ForumTopic)
+		.select_from(Package)
+		.join(ForumTopic, Package.forums == ForumTopic.topic_id)
+		.filter(and_(ForumTopic.name != Package.name, ~ForumTopic.title.ilike("%" + Package.title + "%"), ~ForumTopic.title.ilike("%" + Package.name + "%")))
+		.all())
+
+	return render_template("todo/topics_mismatch.html",
+			missing_topics=missing_topics,
+			packages_bad_author=packages_bad_author,
+			packages_bad_title=packages_bad_title)

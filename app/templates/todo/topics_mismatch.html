@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+
+{% block title %}
+Mismatched Topics
+{% endblock %}
+
+{% macro render_topics(pairs) %}
+	<ul class="list-group">
+		{% for pair in pairs %}
+			{% set package = pair[0] %}
+			{% set topic = pair[1] %}
+			<li class="list-group-item">
+				<div class="row">
+					<a class="col-sm-3 text-muted" style="min-width: 200px;" href="{{ package.get_url('packages.view') }}">
+						<img
+							class="img-fluid"
+							style="max-height: 22px; max-width: 22px;"
+							src="{{ package.get_thumb_or_placeholder() }}" />
+						<span class="ps-2">
+							{{ package.title }} by {{ package.author.display_name }}
+						</span>
+					</a>
+					<a class="col-sm-3" href="{{ topic.url }}">
+						{{ topic.title }} by {{ topic.author.display_name }}
+					</a>
+					<div class="col-sm"></div>
+					<div class="col-sm-auto">
+						<a class="btn btn-secondary me-2" href="{{ package.get_url('packages.create_edit') }}">Edit</a>
+						<a class="btn btn-secondary">Unlink</a>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+{% endmacro %}
+
+{% block content %}
+	<h1>{{ self.title() }}</h1>
+
+	<h2>Missing topics</h2>
+	<ul class="list-group">
+		{% for package in missing_topics %}
+			<li class="list-group-item">
+				<div class="row">
+					<a class="col-sm-3 text-muted" style="min-width: 200px;" href="{{ package.get_url('packages.view') }}">
+						<img
+							class="img-fluid"
+							style="max-height: 22px; max-width: 22px;"
+							src="{{ package.get_thumb_or_placeholder() }}" />
+						<span class="ps-2">
+							{{ package.title }} by {{ package.author.display_name }}
+						</span>
+					</a>
+					<div class="col-sm"></div>
+					<div class="col-sm-auto">
+						<a class="btn btn-secondary me-2" href="{{ package.get_url('packages.create_edit') }}">Edit</a>
+						<a class="btn btn-secondary me-2" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">Forums</a>
+					</div>
+				</div>
+			</li>
+		{% endfor %}
+	</ul>
+
+	<h2>Mismatched authors</h2>
+	{{ render_topics(packages_bad_author) }}
+
+	<h2>Mismatched titles</h2>
+	{{ render_topics(packages_bad_title) }}
+{% endblock %}

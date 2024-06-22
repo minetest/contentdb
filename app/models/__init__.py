@@ -156,6 +156,10 @@ class ForumTopic(db.Model):
 
 	created_at = db.Column(db.DateTime, nullable=False, default=datetime.datetime.utcnow)
 
+	@property
+	def url(self):
+		return "https://forum.minetest.net/viewtopic.php?t=" + str(self.topic_id)
+
 	def get_repo_url(self):
 		if self.link is None:
 			return None

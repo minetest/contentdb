@@ -82,7 +82,7 @@ def list_all():
 
 		topic = qb.build_topic_query().first()
 		if qb.search and topic:
-			return redirect("https://forum.minetest.net/viewtopic.php?t=" + str(topic.topic_id))
+			return redirect(topic.url)
 
 	page  = get_int_or_abort(request.args.get("page"), 1)
 	num   = min(40, get_int_or_abort(request.args.get("n"), 100))
