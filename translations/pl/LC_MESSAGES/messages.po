@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-09 13:46+0100\n"
+"POT-Creation-Date: 2024-06-22 16:06+0100\n"
 "PO-Revision-Date: 2024-06-09 10:38+0000\n"
 "Last-Translator: W T <wiktor_t-i@proton.me>\n"
 "Language: pl\n"
@@ -20,65 +20,51 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.15.0\n"
 
-#: app/__init__.py:155
+#: app/__init__.py:156
 msgid "Banned:"
 msgstr "Użytkownik zbanowany:"
 
-#: app/__init__.py:157
+#: app/__init__.py:158
 msgid "You have been banned."
 msgstr "Zostałeś zbanowany."
 
-#. NOTE: tags: title for jam_game_2023
-#: app/_translations.py:6
-#, fuzzy
-msgctxt "tags"
-msgid "Jam / Game 2023"
-msgstr "Dżem / Gra 2023"
-
-#. NOTE: tags: description for jam_game_2023
-#: app/_translations.py:8
-#, fuzzy
-msgctxt "tags"
-msgid "Entries to the 2023 Minetest Game Jam "
-msgstr "Projekty biorące udział w Minetestowym Dżemie Gier w roku 2023 "
-
 #. NOTE: tags: title for server_tools
-#: app/_translations.py:10
+#: app/_translations.py:6
 #, fuzzy
 msgctxt "tags"
 msgid "Server Moderation and Tools"
 msgstr "Moderacja i Narzędzia do Serwerów"
 
 #. NOTE: tags: description for server_tools
-#: app/_translations.py:12
+#: app/_translations.py:8
 #, fuzzy
 msgctxt "tags"
 msgid "Helps with server maintenance and moderation"
 msgstr "Pomaga z konserwacją i moderacja serwerów"
 
 #. NOTE: tags: title for pvp
-#: app/_translations.py:14
+#: app/_translations.py:10
 #, fuzzy
 msgctxt "tags"
 msgid "Player vs Player (PvP)"
 msgstr "Gracz vs Gracz (PvP)"
 
 #. NOTE: tags: description for pvp
-#: app/_translations.py:16
+#: app/_translations.py:12
 #, fuzzy
 msgctxt "tags"
 msgid "Designed to be played competitively against other players"
 msgstr "Zaprojektowany do rozgrywki z walką pomiędzy graczami"
 
 #. NOTE: tags: title for player_effects
-#: app/_translations.py:18
+#: app/_translations.py:14
 #, fuzzy
 msgctxt "tags"
 msgid "Player Effects / Power Ups"
 msgstr "Efekty Graczy / Wzmocnienia"
 
 #. NOTE: tags: description for player_effects
-#: app/_translations.py:20
+#: app/_translations.py:16
 #, fuzzy
 msgctxt "tags"
 msgid ""
@@ -88,29 +74,85 @@ msgstr ""
 "Dla zawartości, która zmienia efekty graczy, włączając w to fizykę, np. "
 "szybkość, wysokość skoku czy grawitację."
 
-#. NOTE: tags: title for world_tools
+#. NOTE: tags: title for jam_game_2023
+#: app/_translations.py:18
+#, fuzzy
+msgctxt "tags"
+msgid "Jam / Game 2023"
+msgstr "Dżem / Gra 2023"
+
+#. NOTE: tags: description for jam_game_2023
+#: app/_translations.py:20
+#, fuzzy
+msgctxt "tags"
+msgid "Entries to the 2023 Minetest Game Jam "
+msgstr "Projekty biorące udział w Minetestowym Dżemie Gier w roku 2023 "
+
+#. NOTE: tags: title for mapgen
 #: app/_translations.py:22
+#, fuzzy
+msgctxt "tags"
+msgid "Mapgen / Biomes / Decoration"
+msgstr "Generator Mapy / Biomy / Ozdoby"
+
+#. NOTE: tags: description for mapgen
+#: app/_translations.py:24
+#, fuzzy
+msgctxt "tags"
+msgid "New mapgen or changes mapgen"
+msgstr "Nowy generator mapy lub zmiany w nim"
+
+#. NOTE: tags: title for world_tools
+#: app/_translations.py:26
 #, fuzzy
 msgctxt "tags"
 msgid "World Maintenance and Tools"
 msgstr "Konserwacja i Narzędzia do Światów"
 
 #. NOTE: tags: description for world_tools
-#: app/_translations.py:24
+#: app/_translations.py:28
 #, fuzzy
 msgctxt "tags"
 msgid "Tools to manage the world"
 msgstr "Narzędzia do zarządzania światem"
 
+#. NOTE: tags: title for inventory
+#: app/_translations.py:30
+#, fuzzy
+msgctxt "tags"
+msgid "Inventory"
+msgstr "Inwentarz"
+
+#. NOTE: tags: description for inventory
+#: app/_translations.py:32
+#, fuzzy
+msgctxt "tags"
+msgid "Changes the inventory GUI"
+msgstr "Zmienia interfejs inwentarza"
+
+#. NOTE: tags: title for developer_tools
+#: app/_translations.py:34
+#, fuzzy
+msgctxt "tags"
+msgid "Developer Tools"
+msgstr "Narzędzia Programistów"
+
+#. NOTE: tags: description for developer_tools
+#: app/_translations.py:36
+#, fuzzy
+msgctxt "tags"
+msgid "Tools for game and mod developers"
+msgstr "Narzędzia do wsparcia tworzenia gier i modów"
+
 #. NOTE: tags: title for april_fools
-#: app/_translations.py:26
+#: app/_translations.py:38
 #, fuzzy
 msgctxt "tags"
 msgid "Joke"
 msgstr "Żart"
 
 #. NOTE: tags: description for april_fools
-#: app/_translations.py:28
+#: app/_translations.py:40
 #, fuzzy
 msgctxt "tags"
 msgid ""
@@ -121,128 +163,82 @@ msgstr ""
 "która nie powinna być brana na poważnie i nie jest przeznaczona do "
 "poważnego lub długoterminowego użytkowania."
 
-#. NOTE: tags: title for shooter
-#: app/_translations.py:30
-#, fuzzy
-msgctxt "tags"
-msgid "Shooter"
-msgstr "Strzelanka"
-
-#. NOTE: tags: description for shooter
-#: app/_translations.py:32
-#, fuzzy
-msgctxt "tags"
-msgid "First person shooters (FPS) and more"
-msgstr "Strzelanki pierwszoosobowe (FPS) i więcej"
-
-#. NOTE: tags: title for adventure__rpg
-#: app/_translations.py:34
-#, fuzzy
-msgctxt "tags"
-msgid "Adventure / RPG"
-msgstr "Przygodowe / RPG"
-
-#. NOTE: tags: title for mapgen
-#: app/_translations.py:36
-#, fuzzy
-msgctxt "tags"
-msgid "Mapgen / Biomes / Decoration"
-msgstr "Generator Mapy / Biomy / Ozdoby"
-
-#. NOTE: tags: description for mapgen
-#: app/_translations.py:38
-#, fuzzy
-msgctxt "tags"
-msgid "New mapgen or changes mapgen"
-msgstr "Nowy generator mapy lub zmiany w nim"
-
 #. NOTE: tags: title for singleplayer
-#: app/_translations.py:40
+#: app/_translations.py:42
 #, fuzzy
 msgctxt "tags"
 msgid "Singleplayer-focused"
 msgstr "Skupione na trybie Jednoosobowym"
 
 #. NOTE: tags: description for singleplayer
-#: app/_translations.py:42
+#: app/_translations.py:44
 #, fuzzy
 msgctxt "tags"
 msgid "Content that can be played alone"
 msgstr "Zawartość, w którą można grać samodzielnie"
 
-#. NOTE: tags: title for developer_tools
-#: app/_translations.py:44
-#, fuzzy
-msgctxt "tags"
-msgid "Developer Tools"
-msgstr "Narzędzia Programistów"
-
-#. NOTE: tags: description for developer_tools
-#: app/_translations.py:46
-#, fuzzy
-msgctxt "tags"
-msgid "Tools for game and mod developers"
-msgstr "Narzędzia do wsparcia tworzenia gier i modów"
-
 #. NOTE: tags: title for crafting
-#: app/_translations.py:48
+#: app/_translations.py:46
 #, fuzzy
 msgctxt "tags"
 msgid "Crafting"
 msgstr "Rzemiosło"
 
 #. NOTE: tags: description for crafting
-#: app/_translations.py:50
+#: app/_translations.py:48
 #, fuzzy
 msgctxt "tags"
 msgid "Big changes to crafting gameplay"
 msgstr "Duże zmiany w systemie rzemiosła (crafting)"
 
-#. NOTE: tags: title for sound_music
+#. NOTE: tags: title for adventure__rpg
+#: app/_translations.py:50
+#, fuzzy
+msgctxt "tags"
+msgid "Adventure / RPG"
+msgstr "Przygodowe / RPG"
+
+#. NOTE: tags: title for shooter
 #: app/_translations.py:52
+#, fuzzy
+msgctxt "tags"
+msgid "Shooter"
+msgstr "Strzelanka"
+
+#. NOTE: tags: description for shooter
+#: app/_translations.py:54
+#, fuzzy
+msgctxt "tags"
+msgid "First person shooters (FPS) and more"
+msgstr "Strzelanki pierwszoosobowe (FPS) i więcej"
+
+#. NOTE: tags: title for sound_music
+#: app/_translations.py:56
 #, fuzzy
 msgctxt "tags"
 msgid "Sounds / Music"
 msgstr "Dźwięki / Muzyka"
 
 #. NOTE: tags: description for sound_music
-#: app/_translations.py:54
+#: app/_translations.py:58
 #, fuzzy
 msgctxt "tags"
 msgid "Focuses on or adds new sounds or musical things"
 msgstr "Skupią się na lub dodaje nowe dźwięki lub muzykę"
 
-#. NOTE: tags: title for inventory
-#: app/_translations.py:56
-#, fuzzy
-msgctxt "tags"
-msgid "Inventory"
-msgstr "Inwentarz"
-
-#. NOTE: tags: description for inventory
-#: app/_translations.py:58
-#, fuzzy
-msgctxt "tags"
-msgid "Changes the inventory GUI"
-msgstr "Zmienia interfejs inwentarza"
-
-#. NOTE: tags: title for chat
+#. NOTE: tags: title for tools
 #: app/_translations.py:60
 #, fuzzy
 msgctxt "tags"
-msgid "Chat / Commands"
-msgstr "Czat / Polecenia"
+msgid "Tools / Weapons / Armor"
+msgstr "Narzędzia / Broń / Zbroja"
 
-#. NOTE: tags: description for chat
+#. NOTE: tags: description for tools
 #: app/_translations.py:62
 #, fuzzy
 msgctxt "tags"
-msgid ""
-"Focus on player chat/communication or who's primary function is "
-"interacting with the console."
-msgstr ""
-"Skupią się na czacie, komunikacji między graczami lub interakcji z "
-"konsolą poleceń."
+msgid "Adds or changes tools, weapons, and armor"
+msgstr "Dodaje lub zmienia narzędzia, broń lub zbroje"
 
 #. NOTE: tags: title for plants_and_farming
 #: app/_translations.py:64
@@ -258,69 +254,62 @@ msgctxt "tags"
 msgid "Adds new plants or other farmable resources."
 msgstr "Dodaje nowe rośliny lub inne uprawialne zasoby."
 
-#. NOTE: tags: title for complex_installation
-#: app/_translations.py:68
-#, fuzzy
-msgctxt "tags"
-msgid "Complex installation"
-msgstr "Złożona instalacja"
-
-#. NOTE: tags: description for complex_installation
-#: app/_translations.py:70
-#, fuzzy
-msgctxt "tags"
-msgid ""
-"Requires futher installation steps, such as installing luarocks or "
-"editing the trusted mod setting"
-msgstr ""
-"Wymaga dalszych kroków instalacji, takich jak instalacja luarocks lub "
-"zmienianie ustawień zaufanych modów"
-
-#. NOTE: tags: title for multiplayer
-#: app/_translations.py:72
-#, fuzzy
-msgctxt "tags"
-msgid "Multiplayer-focused"
-msgstr "Skupione na trybie Wieloosobowym"
-
-#. NOTE: tags: description for multiplayer
-#: app/_translations.py:74
-#, fuzzy
-msgctxt "tags"
-msgid "Can/should only be used in multiplayer"
-msgstr "Może/powinien być używany tylko w trybie wieloosobowym"
-
-#. NOTE: tags: title for tools
-#: app/_translations.py:76
-#, fuzzy
-msgctxt "tags"
-msgid "Tools / Weapons / Armor"
-msgstr "Narzędzia / Broń / Zbroja"
-
-#. NOTE: tags: description for tools
-#: app/_translations.py:78
-#, fuzzy
-msgctxt "tags"
-msgid "Adds or changes tools, weapons, and armor"
-msgstr "Dodaje lub zmienia narzędzia, broń lub zbroje"
-
 #. NOTE: tags: title for simulation
-#: app/_translations.py:80
+#: app/_translations.py:68
 #, fuzzy
 msgctxt "tags"
 msgid "Sims"
 msgstr "Symulacje"
 
 #. NOTE: tags: description for simulation
-#: app/_translations.py:82
-#, fuzzy
+#: app/_translations.py:70
 msgctxt "tags"
 msgid ""
 "Mods and games that aim to simulate real life activity. Similar to "
-"SimCity/TheSims/OpenTTD/etc"
+"SimCity/The Sims/OpenTTD/etc."
 msgstr ""
-"Mody i gry, których celem jest symulacja prawdziwych czynności. Podobne "
-"do SimCity/TheSims/OpenTTD/itd"
+
+#. NOTE: tags: title for chat
+#: app/_translations.py:72
+#, fuzzy
+msgctxt "tags"
+msgid "Chat / Commands"
+msgstr "Czat / Polecenia"
+
+#. NOTE: tags: description for chat
+#: app/_translations.py:74
+msgctxt "tags"
+msgid "Focus on player chat/communication or console interaction."
+msgstr ""
+
+#. NOTE: tags: title for multiplayer
+#: app/_translations.py:76
+#, fuzzy
+msgctxt "tags"
+msgid "Multiplayer-focused"
+msgstr "Skupione na trybie Wieloosobowym"
+
+#. NOTE: tags: description for multiplayer
+#: app/_translations.py:78
+#, fuzzy
+msgctxt "tags"
+msgid "Can/should only be used in multiplayer"
+msgstr "Może/powinien być używany tylko w trybie wieloosobowym"
+
+#. NOTE: tags: title for complex_installation
+#: app/_translations.py:80
+#, fuzzy
+msgctxt "tags"
+msgid "Complex installation"
+msgstr "Złożona instalacja"
+
+#. NOTE: tags: description for complex_installation
+#: app/_translations.py:82
+msgctxt "tags"
+msgid ""
+"Requires futher installation steps, such as installing LuaRocks or "
+"editing the trusted mod setting"
+msgstr ""
 
 #. NOTE: tags: title for magic
 #: app/_translations.py:84
@@ -329,29 +318,15 @@ msgctxt "tags"
 msgid "Magic / Enchanting"
 msgstr "Magia / Zaklinanie"
 
-#. NOTE: tags: title for less_than_px
-#: app/_translations.py:86
-#, fuzzy
-msgctxt "tags"
-msgid "<16px"
-msgstr "&lt;16 pikseli"
-
-#. NOTE: tags: description for less_than_px
-#: app/_translations.py:88
-#, fuzzy
-msgctxt "tags"
-msgid "Less than 16px"
-msgstr "Mniej niż 16 pikseli"
-
 #. NOTE: tags: title for building_mechanics
-#: app/_translations.py:90
+#: app/_translations.py:86
 #, fuzzy
 msgctxt "tags"
 msgid "Building Mechanics and Tools"
 msgstr "Mechaniki i Narzędzia do Budowania"
 
 #. NOTE: tags: description for building_mechanics
-#: app/_translations.py:92
+#: app/_translations.py:88
 #, fuzzy
 msgctxt "tags"
 msgid "Adds game mechanics or tools that change how players build."
@@ -359,37 +334,51 @@ msgstr ""
 "Dodaje mechaniki lub narzędzia do gry, które zmieniają to, jak gracze "
 "budują."
 
-#. NOTE: tags: title for environment
-#: app/_translations.py:94
+#. NOTE: tags: title for oneofakind__original
+#: app/_translations.py:90
 #, fuzzy
 msgctxt "tags"
-msgid "Environment / Weather"
-msgstr "Środowisko / Pogoda"
+msgid "One-of-a-kind / Original"
+msgstr "Jedyny w swoim rodzaju / Oryginalny"
 
-#. NOTE: tags: description for environment
-#: app/_translations.py:96
+#. NOTE: tags: description for oneofakind__original
+#: app/_translations.py:92
 #, fuzzy
 msgctxt "tags"
 msgid ""
-"Improves the world, adding weather, ambient sounds, or other environment "
-"mechanics"
+"For games and such that are of their own kind, distinct and original in "
+"nature to others of the same category."
 msgstr ""
-"Ulepsza świat, dodając pogodę, dźwięki otoczenia lub inne mechaniki "
-"środowiskowe"
+"Dla gier i podobnych, które są w swoim własnym rodzaju, odróżnione i "
+"oryginalne w naturze w porównaniu do innych w tej samej kategorii."
 
-#. NOTE: tags: title for mobs
+#. NOTE: tags: title for building
+#: app/_translations.py:94
+#, fuzzy
+msgctxt "tags"
+msgid "Building"
+msgstr "Budowanie"
+
+#. NOTE: tags: description for building
+#: app/_translations.py:96
+#, fuzzy
+msgctxt "tags"
+msgid "Focuses on building, such as adding new materials or nodes"
+msgstr "Skupią się na budowaniu, np. dodając nowe materiały i bloki"
+
+#. NOTE: tags: title for decorative
 #: app/_translations.py:98
 #, fuzzy
 msgctxt "tags"
-msgid "Mobs / Animals / NPCs"
-msgstr "Moby / Zwierzęta / NPC"
+msgid "Decorative"
+msgstr "Dekoracyjne"
 
-#. NOTE: tags: description for mobs
+#. NOTE: tags: description for decorative
 #: app/_translations.py:100
 #, fuzzy
 msgctxt "tags"
-msgid "Adds mobs, animals, and NPCs"
-msgstr "Dodaje moby, zwierzęta i NPC"
+msgid "Adds nodes with no other purpose than for use in building"
+msgstr "Dodaje bloki, które nie mają zastosowania poza budowaniem"
 
 #. NOTE: tags: title for puzzle
 #: app/_translations.py:102
@@ -405,61 +394,78 @@ msgctxt "tags"
 msgid "Focus on puzzle solving instead of combat"
 msgstr "Skupia się na rozwiązywaniu łamigłówek zamiast walki"
 
-#. NOTE: tags: title for building
+#. NOTE: tags: title for environment
 #: app/_translations.py:106
 #, fuzzy
 msgctxt "tags"
-msgid "Building"
-msgstr "Budowanie"
+msgid "Environment / Weather"
+msgstr "Środowisko / Pogoda"
 
-#. NOTE: tags: description for building
+#. NOTE: tags: description for environment
 #: app/_translations.py:108
 #, fuzzy
 msgctxt "tags"
-msgid "Focuses on building, such as adding new materials or nodes"
-msgstr "Skupią się na budowaniu, np. dodając nowe materiały i bloki"
+msgid ""
+"Improves the world, adding weather, ambient sounds, or other environment "
+"mechanics"
+msgstr ""
+"Ulepsza świat, dodając pogodę, dźwięki otoczenia lub inne mechaniki "
+"środowiskowe"
 
-#. NOTE: tags: title for decorative
+#. NOTE: tags: title for less_than_px
 #: app/_translations.py:110
 #, fuzzy
 msgctxt "tags"
-msgid "Decorative"
-msgstr "Dekoracyjne"
+msgid "<16px"
+msgstr "&lt;16 pikseli"
 
-#. NOTE: tags: description for decorative
+#. NOTE: tags: description for less_than_px
 #: app/_translations.py:112
 #, fuzzy
 msgctxt "tags"
-msgid "Adds nodes with no other purpose than for use in building"
-msgstr "Dodaje bloki, które nie mają zastosowania poza budowaniem"
+msgid "Less than 16px"
+msgstr "Mniej niż 16 pikseli"
 
-#. NOTE: tags: title for oneofakind__original
+#. NOTE: tags: title for mobs
 #: app/_translations.py:114
 #, fuzzy
 msgctxt "tags"
-msgid "One-of-a-kind / Original"
-msgstr "Jedyny w swoim rodzaju / Oryginalny"
+msgid "Mobs / Animals / NPCs"
+msgstr "Moby / Zwierzęta / NPC"
 
-#. NOTE: tags: description for oneofakind__original
+#. NOTE: tags: description for mobs
 #: app/_translations.py:116
+msgctxt "tags"
+msgid "Adds mobs, animals, and non-player characters"
+msgstr ""
+
+#. NOTE: tags: title for custom_mapgen
+#: app/_translations.py:118
+#, fuzzy
+msgctxt "tags"
+msgid "Custom mapgen"
+msgstr "Własny generator mapy"
+
+#. NOTE: tags: description for custom_mapgen
+#: app/_translations.py:120
 #, fuzzy
 msgctxt "tags"
 msgid ""
-"For games and such that are of their own kind, distinct and original in "
-"nature to others of the same category."
+"Contains a completely custom mapgen implemented in Lua, usually requires "
+"worlds to be set to the 'singlenode' mapgen."
 msgstr ""
-"Dla gier i podobnych, które są w swoim własnym rodzaju, odróżnione i "
-"oryginalne w naturze w porównaniu do innych w tej samej kategorii."
+"Zawiera całkowicie dostosowany generator mapy napisany w Lua, zazwyczaj "
+"wymaga, by świat używał generatora 'singlenode'."
 
 #. NOTE: tags: title for survival
-#: app/_translations.py:118
+#: app/_translations.py:122
 #, fuzzy
 msgctxt "tags"
 msgid "Survival"
 msgstr "Przetrwanie"
 
 #. NOTE: tags: description for survival
-#: app/_translations.py:120
+#: app/_translations.py:124
 #, fuzzy
 msgctxt "tags"
 msgid ""
@@ -470,79 +476,63 @@ msgstr ""
 "balansie gry, poziomie trudności lub zasobach dostępnych poprzez "
 "rzemiosło, kopanie, ..."
 
-#. NOTE: tags: title for hud
-#: app/_translations.py:122
+#. NOTE: tags: title for education
+#: app/_translations.py:126
 #, fuzzy
 msgctxt "tags"
-msgid "HUD"
-msgstr "HUD"
+msgid "Education"
+msgstr "Edukacja"
 
-#. NOTE: tags: description for hud
-#: app/_translations.py:124
+#. NOTE: tags: description for education
+#: app/_translations.py:128
 #, fuzzy
 msgctxt "tags"
-msgid "For mods that grant the player extra information in the HUD"
-msgstr "Dla modów, które dają dla gracza dodatkowe informacje w HUD"
+msgid "Either has educational value, or is a tool to help teachers "
+msgstr ""
+"Albo ma wartość edukacyjną, albo jest narzędziem pomocnicznym dla "
+"nauczycieli "
 
 #. NOTE: tags: title for storage
-#: app/_translations.py:126
+#: app/_translations.py:130
 #, fuzzy
 msgctxt "tags"
 msgid "Storage"
 msgstr "Magazyn"
 
 #. NOTE: tags: description for storage
-#: app/_translations.py:128
+#: app/_translations.py:132
 #, fuzzy
 msgctxt "tags"
 msgid "Adds or improves item storage mechanics"
 msgstr "Dodaje lub poprawia mechaniki przechowywania przedmiotów"
 
-#. NOTE: tags: title for 16px
-#: app/_translations.py:130
-#, fuzzy
-msgctxt "tags"
-msgid "16px"
-msgstr "16 pikseli"
-
-#. NOTE: tags: description for 16px
-#: app/_translations.py:132
-#, fuzzy
-msgctxt "tags"
-msgid "For 16px texture packs"
-msgstr "Dla paczek tekstur w rozdzielczości 16 pikseli"
-
-#. NOTE: tags: title for custom_mapgen
-#: app/_translations.py:134
-#, fuzzy
-msgctxt "tags"
-msgid "Custom mapgen"
-msgstr "Własny generator mapy"
-
-#. NOTE: tags: description for custom_mapgen
-#: app/_translations.py:136
-#, fuzzy
-msgctxt "tags"
-msgid ""
-"Contains a completely custom mapgen implemented in Lua, usually requires "
-"worlds to be set to the 'singlenode' mapgen."
-msgstr ""
-"Zawiera całkowicie dostosowany generator mapy napisany w Lua, zazwyczaj "
-"wymaga, by świat używał generatora 'singlenode'."
-
 #. NOTE: tags: title for library
-#: app/_translations.py:138
+#: app/_translations.py:134
 #, fuzzy
 msgctxt "tags"
 msgid "API / Library"
 msgstr "API / Biblioteka"
 
 #. NOTE: tags: description for library
-#: app/_translations.py:140
+#: app/_translations.py:136
 #, fuzzy
 msgctxt "tags"
 msgid "Primarily adds an API for other mods to use"
 msgstr "Przede wszystkim dodaje API do użytku przez inne mody"
+
+#. NOTE: tags: title for hud
+#: app/_translations.py:138
+#, fuzzy
+msgctxt "tags"
+msgid "HUD"
+msgstr "HUD"
+
+#. NOTE: tags: description for hud
+#: app/_translations.py:140
+#, fuzzy
+msgctxt "tags"
+msgid "For mods that grant the player extra information in the HUD"
+msgstr "Dla modów, które dają dla gracza dodatkowe informacje w HUD"
 
 #. NOTE: tags: title for mini-game
 #: app/_translations.py:142
@@ -558,38 +548,15 @@ msgctxt "tags"
 msgid "Adds a mini-game to be played within Minetest"
 msgstr "Dodaje minigrę do rozgrywki wewnątrz Minetestu"
 
-#. NOTE: tags: title for education
-#: app/_translations.py:146
-#, fuzzy
-msgctxt "tags"
-msgid "Education"
-msgstr "Edukacja"
-
-#. NOTE: tags: description for education
-#: app/_translations.py:148
-#, fuzzy
-msgctxt "tags"
-msgid "Either has educational value, or is a tool to help teachers "
-msgstr ""
-"Albo ma wartość edukacyjną, albo jest narzędziem pomocnicznym dla "
-"nauczycieli "
-
-#. NOTE: tags: title for sports
-#: app/_translations.py:150
-#, fuzzy
-msgctxt "tags"
-msgid "Sports"
-msgstr "Sporty"
-
 #. NOTE: tags: title for pve
-#: app/_translations.py:152
+#: app/_translations.py:146
 #, fuzzy
 msgctxt "tags"
 msgid "Player vs Environment (PvE)"
 msgstr "Gracz vs Środowisko (PvE)"
 
 #. NOTE: tags: description for pve
-#: app/_translations.py:154
+#: app/_translations.py:148
 #, fuzzy
 msgctxt "tags"
 msgid ""
@@ -599,15 +566,119 @@ msgstr ""
 "Dla zawartości zaprojektowanej dla jednego lub większej ilości graczy, "
 "która koncentruje się na walce że światem, mobami, lub NPC."
 
-#. NOTE: tags: title for jam_combat_mod
+#. NOTE: tags: title for sports
+#: app/_translations.py:150
+#, fuzzy
+msgctxt "tags"
+msgid "Sports"
+msgstr "Sporty"
+
+#. NOTE: tags: title for 16px
+#: app/_translations.py:152
+#, fuzzy
+msgctxt "tags"
+msgid "16px"
+msgstr "16 pikseli"
+
+#. NOTE: tags: description for 16px
+#: app/_translations.py:154
+#, fuzzy
+msgctxt "tags"
+msgid "For 16px texture packs"
+msgstr "Dla paczek tekstur w rozdzielczości 16 pikseli"
+
+#. NOTE: tags: title for 64px
 #: app/_translations.py:156
+#, fuzzy
+msgctxt "tags"
+msgid "64px"
+msgstr "64 pikseli"
+
+#. NOTE: tags: description for 64px
+#: app/_translations.py:158
+#, fuzzy
+msgctxt "tags"
+msgid "For 64px texture packs"
+msgstr "Dla paczek tekstur w rozdzielczości 64 pikseli"
+
+#. NOTE: tags: title for transport
+#: app/_translations.py:160
+#, fuzzy
+msgctxt "tags"
+msgid "Transport"
+msgstr "Transport"
+
+#. NOTE: tags: description for transport
+#: app/_translations.py:162
+#, fuzzy
+msgctxt "tags"
+msgid ""
+"Adds or changes transportation methods. Includes teleportation, vehicles,"
+" ridable mobs, transport infrastructure and thematic content"
+msgstr ""
+"Dodaje lub zmienia metody przemieszczania się. Zawiera to teleportację, "
+"pojazdy, moby, na których można jeździć, infrastrukturę transportową i "
+"zawartość tematyczną"
+
+#. NOTE: tags: title for seasonal
+#: app/_translations.py:164
+#, fuzzy
+msgctxt "tags"
+msgid "Seasonal"
+msgstr "Sezonowy"
+
+#. NOTE: tags: description for seasonal
+#: app/_translations.py:166
+#, fuzzy
+msgctxt "tags"
+msgid "For content generally themed around a certain season or holiday"
+msgstr "Dla zawartości ogólnie w temacie jakiegoś konkretnego sezonu lub święta"
+
+#. NOTE: tags: title for food
+#: app/_translations.py:168
+#, fuzzy
+msgctxt "tags"
+msgid "Food / Drinks"
+msgstr "Jedzenie / Napoje"
+
+#. NOTE: tags: title for commerce
+#: app/_translations.py:170
+#, fuzzy
+msgctxt "tags"
+msgid "Commerce / Economy"
+msgstr "Handel / Ekonomia"
+
+#. NOTE: tags: description for commerce
+#: app/_translations.py:172
+#, fuzzy
+msgctxt "tags"
+msgid "Related to economies, money, and trading"
+msgstr "Związane z gospodarką, pieniędzmi i handlem"
+
+#. NOTE: tags: title for gui
+#: app/_translations.py:174
+#, fuzzy
+msgctxt "tags"
+msgid "GUI"
+msgstr "Interfejs Użytkownika"
+
+#. NOTE: tags: description for gui
+#: app/_translations.py:176
+msgctxt "tags"
+msgid ""
+"For content whose main utility or features are provided within a GUI, on-"
+"screen menu, or similar"
+msgstr ""
+
+#. NOTE: tags: title for jam_combat_mod
+#: app/_translations.py:178
 #, fuzzy
 msgctxt "tags"
 msgid "Jam / Combat 2020"
 msgstr "Dżem / Walka 2020"
 
 #. NOTE: tags: description for jam_combat_mod
-#: app/_translations.py:158
+#: app/_translations.py:180
 #, fuzzy
 msgctxt "tags"
 msgid "For mods created for the Discord \"Combat\" modding event in 2020"
@@ -615,15 +686,46 @@ msgstr ""
 "Dla modów stworzonych na wydarzenie \"Walka\" (\"Combat\") na Discordzie "
 "w roku 2020"
 
+#. NOTE: tags: title for mtg
+#: app/_translations.py:182
+#, fuzzy
+msgctxt "tags"
+msgid "Minetest Game improved"
+msgstr "Minetest Game ulepszona"
+
+#. NOTE: tags: description for mtg
+#: app/_translations.py:184
+msgctxt "tags"
+msgid "Forks of Minetest Game"
+msgstr ""
+
+#. NOTE: tags: title for jam_weekly_2021
+#: app/_translations.py:186
+#, fuzzy
+msgctxt "tags"
+msgid "Jam / Weekly Challenges 2021"
+msgstr "Dżem / Tygodniowe Wyzwania 2021"
+
+#. NOTE: tags: description for jam_weekly_2021
+#: app/_translations.py:188
+#, fuzzy
+msgctxt "tags"
+msgid ""
+"For mods created for the Discord \"Weekly Challenges\" modding event in "
+"2021"
+msgstr ""
+"Dla modów stworzonych na wydarzenie \"Tygodniowe Wyzwania\" (\"Weekly "
+"Challenges\") na Discordzie w roku 2021"
+
 #. NOTE: tags: title for creative
-#: app/_translations.py:160
+#: app/_translations.py:190
 #, fuzzy
 msgctxt "tags"
 msgid "Creative"
 msgstr "Kreatywny"
 
 #. NOTE: tags: description for creative
-#: app/_translations.py:162
+#: app/_translations.py:192
 #, fuzzy
 msgctxt "tags"
 msgid ""
@@ -636,135 +738,19 @@ msgstr ""
 "narzędzia, które wspierają tworzenie w grze i nie dodaje trudności lub "
 "ograniczeń"
 
-#. NOTE: tags: title for gui
-#: app/_translations.py:164
-#, fuzzy
-msgctxt "tags"
-msgid "GUI"
-msgstr "Interfejs Użytkownika"
-
-#. NOTE: tags: description for gui
-#: app/_translations.py:166
-#, fuzzy
-msgctxt "tags"
-msgid "For content whose main utility / feature is in GUI/formspec form"
-msgstr ""
-"Dla zawartości, której główna funkcjonalność jest w formularzu "
-"GUI/formspec"
-
-#. NOTE: tags: title for 64px
-#: app/_translations.py:168
-#, fuzzy
-msgctxt "tags"
-msgid "64px"
-msgstr "64 pikseli"
-
-#. NOTE: tags: description for 64px
-#: app/_translations.py:170
-#, fuzzy
-msgctxt "tags"
-msgid "For 64px texture packs"
-msgstr "Dla paczek tekstur w rozdzielczości 64 pikseli"
-
-#. NOTE: tags: title for commerce
-#: app/_translations.py:172
-#, fuzzy
-msgctxt "tags"
-msgid "Commerce / Economy"
-msgstr "Handel / Ekonomia"
-
-#. NOTE: tags: description for commerce
-#: app/_translations.py:174
-#, fuzzy
-msgctxt "tags"
-msgid "Related to economies, money, and trading"
-msgstr "Związane z gospodarką, pieniędzmi i handlem"
-
-#. NOTE: tags: title for mtg
-#: app/_translations.py:176
-#, fuzzy
-msgctxt "tags"
-msgid "Minetest Game improved"
-msgstr "Minetest Game ulepszona"
-
-#. NOTE: tags: description for mtg
-#: app/_translations.py:178
-#, fuzzy
-msgctxt "tags"
-msgid "Forks of MTG"
-msgstr "Forki MTG"
-
-#. NOTE: tags: title for jam_weekly_2021
-#: app/_translations.py:180
-#, fuzzy
-msgctxt "tags"
-msgid "Jam / Weekly Challenges 2021"
-msgstr "Dżem / Tygodniowe Wyzwania 2021"
-
-#. NOTE: tags: description for jam_weekly_2021
-#: app/_translations.py:182
-#, fuzzy
-msgctxt "tags"
-msgid ""
-"For mods created for the Discord \"Weekly Challenges\" modding event in "
-"2021"
-msgstr ""
-"Dla modów stworzonych na wydarzenie \"Tygodniowe Wyzwania\" (\"Weekly "
-"Challenges\") na Discordzie w roku 2021"
-
-#. NOTE: tags: title for transport
-#: app/_translations.py:184
-#, fuzzy
-msgctxt "tags"
-msgid "Transport"
-msgstr "Transport"
-
-#. NOTE: tags: description for transport
-#: app/_translations.py:186
-#, fuzzy
-msgctxt "tags"
-msgid ""
-"Adds or changes transportation methods. Includes teleportation, vehicles,"
-" ridable mobs, transport infrastructure and thematic content"
-msgstr ""
-"Dodaje lub zmienia metody przemieszczania się. Zawiera to teleportację, "
-"pojazdy, moby, na których można jeździć, infrastrukturę transportową i "
-"zawartość tematyczną"
-
-#. NOTE: tags: title for food
-#: app/_translations.py:188
-#, fuzzy
-msgctxt "tags"
-msgid "Food / Drinks"
-msgstr "Jedzenie / Napoje"
-
 #. NOTE: tags: title for technology
-#: app/_translations.py:190
+#: app/_translations.py:194
 #, fuzzy
 msgctxt "tags"
 msgid "Machines / Electronics"
 msgstr "Maszyny / Elektronika"
 
 #. NOTE: tags: description for technology
-#: app/_translations.py:192
+#: app/_translations.py:196
 #, fuzzy
 msgctxt "tags"
 msgid "Adds machines useful in automation, tubes, or power."
 msgstr "Dodaje maszyny użyteczne przy automatyzacji, rury lub zasilanie."
-
-#. NOTE: tags: title for seasonal
-#: app/_translations.py:194
-#, fuzzy
-msgctxt "tags"
-msgid "Seasonal"
-msgstr "Sezonowy"
-
-#. NOTE: tags: description for seasonal
-#: app/_translations.py:196
-#, fuzzy
-msgctxt "tags"
-msgid "For content generally themed around a certain season or holiday"
-msgstr "Dla zawartości ogólnie w temacie jakiegoś konkretnego sezonu lub święta"
 
 #. NOTE: tags: title for 32px
 #: app/_translations.py:198
@@ -780,43 +766,33 @@ msgctxt "tags"
 msgid "For 32px texture packs"
 msgstr "Dla paczek tekstur w rozdzielczości 32 pikseli"
 
-#. NOTE: tags: title for jam_game_2021
+#. NOTE: tags: title for strategy_rts
 #: app/_translations.py:202
 #, fuzzy
 msgctxt "tags"
-msgid "Jam / Game 2021"
-msgstr "Dżem / Gra 2021"
+msgid "Strategy / RTS"
+msgstr "Strategia / RTS"
 
-#. NOTE: tags: description for jam_game_2021
+#. NOTE: tags: description for strategy_rts
 #: app/_translations.py:204
 #, fuzzy
 msgctxt "tags"
-msgid "Entries to the 2021 Minetest Game Jam"
-msgstr "Projekty biorące udział w Minetestowym Dżemie Gier w roku 2021"
-
-#. NOTE: tags: title for 128px
-#: app/_translations.py:206
-#, fuzzy
-msgctxt "tags"
-msgid "128px+"
-msgstr "128 pikseli i więcej"
-
-#. NOTE: tags: description for 128px
-#: app/_translations.py:208
-#, fuzzy
-msgctxt "tags"
-msgid "For 128px or higher texture packs"
-msgstr "Dla paczek tekstur w rozdzielczości 128 pikseli i wyższej"
+msgid ""
+"Games and mods with a heavy strategy component, whether real-time or "
+"turn-based"
+msgstr ""
+"Gry i mody z dużym składnikiem strategicznym, czy to w czasie "
+"rzeczywistym, czy w turach"
 
 #. NOTE: tags: title for skins
-#: app/_translations.py:210
+#: app/_translations.py:206
 #, fuzzy
 msgctxt "tags"
 msgid "Player customization / Skins"
 msgstr "Dostosowanie gracza / Skórki"
 
 #. NOTE: tags: description for skins
-#: app/_translations.py:212
+#: app/_translations.py:208
 #, fuzzy
 msgctxt "tags"
 msgid ""
@@ -826,23 +802,33 @@ msgstr ""
 "Pozwala graczowi dostosować swoją postać, zmieniając teksturę lub dodając"
 " akcesoria."
 
-#. NOTE: tags: title for strategy_rts
+#. NOTE: tags: title for jam_game_2021
+#: app/_translations.py:210
+#, fuzzy
+msgctxt "tags"
+msgid "Jam / Game 2021"
+msgstr "Dżem / Gra 2021"
+
+#. NOTE: tags: description for jam_game_2021
+#: app/_translations.py:212
+#, fuzzy
+msgctxt "tags"
+msgid "Entries to the 2021 Minetest Game Jam"
+msgstr "Projekty biorące udział w Minetestowym Dżemie Gier w roku 2021"
+
+#. NOTE: tags: title for 128px
 #: app/_translations.py:214
 #, fuzzy
 msgctxt "tags"
-msgid "Strategy / RTS"
-msgstr "Strategia / RTS"
+msgid "128px+"
+msgstr "128 pikseli i więcej"
 
-#. NOTE: tags: description for strategy_rts
+#. NOTE: tags: description for 128px
 #: app/_translations.py:216
 #, fuzzy
 msgctxt "tags"
-msgid ""
-"Games and mods with a heavy strategy component, whether real-time or "
-"turn-based"
-msgstr ""
-"Gry i mody z dużym składnikiem strategicznym, czy to w czasie "
-"rzeczywistym, czy w turach"
+msgid "For 128px or higher texture packs"
+msgstr "Dla paczek tekstur w rozdzielczości 128 pikseli i wyższej"
 
 #. NOTE: tags: title for jam_game_2022
 #: app/_translations.py:218
@@ -958,8 +944,8 @@ msgctxt "content_warnings"
 msgid "Contains recreational drugs other than alcohol or tobacco"
 msgstr "Zawiera alkohol i/lub tytoń"
 
-#: app/querybuilder.py:58 app/templates/admin/languages/list.html:27
-#: app/templates/admin/tags/list.html:38
+#: app/querybuilder.py:60 app/templates/admin/languages/list.html:27
+#: app/templates/admin/tags/list.html:34
 #: app/templates/admin/warnings/list.html:28
 #: app/templates/collections/create_edit.html:56
 #: app/templates/collections/view.html:66 app/templates/modnames/list.html:16
@@ -968,7 +954,7 @@ msgstr "Zawiera alkohol i/lub tytoń"
 msgid "Packages"
 msgstr "Paczki"
 
-#: app/querybuilder.py:73
+#: app/querybuilder.py:75
 #, python-format
 msgid "%(package_type)s for %(game_name)s"
 msgstr "%(package_type)s dla %(game_name)s"
@@ -982,9 +968,13 @@ msgstr "%(delta)s temu"
 msgid "Featured"
 msgstr "Wyróżnione"
 
-#: app/blueprints/api/tokens.py:33 app/templates/admin/tags/list.html:26
+#: app/blueprints/api/tokens.py:33
+#: app/blueprints/packages/advanced_search.py:83
+#: app/blueprints/packages/releases.py:55
+#: app/blueprints/packages/releases.py:70 app/templates/admin/tags/list.html:22
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
 #: app/templates/modnames/list.html:12
+#: app/templates/packages/release_edit.html:20
 msgid "Name"
 msgstr "Nazwa"
 
@@ -993,12 +983,12 @@ msgid "Limit to package"
 msgstr "Ogranicz do paczki"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:251
-#: app/blueprints/packages/packages.py:543
-#: app/blueprints/packages/packages.py:639
-#: app/blueprints/packages/packages.py:727
-#: app/blueprints/packages/releases.py:62
-#: app/blueprints/packages/releases.py:74 app/blueprints/packages/reviews.py:63
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:252
+#: app/blueprints/packages/packages.py:544
+#: app/blueprints/packages/packages.py:640
+#: app/blueprints/packages/packages.py:728
+#: app/blueprints/packages/releases.py:66
+#: app/blueprints/packages/releases.py:81 app/blueprints/packages/reviews.py:63
 #: app/blueprints/packages/screenshots.py:36
 #: app/blueprints/packages/screenshots.py:42
 #: app/blueprints/packages/screenshots.py:47
@@ -1009,12 +999,14 @@ msgid "Save"
 msgstr "Zapisz"
 
 #: app/blueprints/collections/__init__.py:77
-#: app/blueprints/oauth/__init__.py:168 app/blueprints/packages/releases.py:54
-#: app/blueprints/packages/releases.py:66 app/blueprints/packages/reviews.py:53
+#: app/blueprints/oauth/__init__.py:168
+#: app/blueprints/packages/advanced_search.py:84
+#: app/blueprints/packages/releases.py:56
+#: app/blueprints/packages/releases.py:71 app/blueprints/packages/reviews.py:53
 #: app/blueprints/threads/__init__.py:281
 #: app/templates/admin/languages/list.html:23
 #: app/templates/macros/reviews.html:143 app/templates/macros/topics.html:5
-#: app/templates/packages/release_edit.html:17
+#: app/templates/packages/release_edit.html:21
 #: app/templates/packages/translation.html:54
 msgid "Title"
 msgstr "Tytuł"
@@ -1067,24 +1059,7 @@ msgstr "(Publiczne, zmień w Profil &gt; Moje kolekcje)"
 msgid "Removed package from favorites collection"
 msgstr "Usunięto paczkę z ulubionych"
 
-#: app/blueprints/github/__init__.py:54
-msgid "Authorization failed [err=gh-oauth-login-failed]"
-msgstr "Autoryzacja nieudana [err=gh-oauth-login-failed]"
-
-#: app/blueprints/github/__init__.py:83
-msgid "Linked GitHub to account"
-msgstr "Przypisano GitHub do konta"
-
-#: app/blueprints/github/__init__.py:88
-#, python-format
-msgid "GitHub account is already associated with another user: %(username)s"
-msgstr "Konto na GitHub jest już powiązane z innym użytkownikiem: %(username)s"
-
-#: app/blueprints/github/__init__.py:96 app/blueprints/github/__init__.py:122
-msgid "Authorization failed [err=gh-login-failed]"
-msgstr "Autoryzacja nieudana [err=gh-login-failed]"
-
-#: app/blueprints/oauth/__init__.py:169 app/templates/admin/tags/list.html:30
+#: app/blueprints/oauth/__init__.py:169 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:49
 msgid "Description"
@@ -1155,95 +1130,213 @@ msgstr "Usuń / Wycofaj Publikację"
 msgid "Supported Games"
 msgstr "Wspierane gry"
 
-#: app/blueprints/packages/packages.py:214
-msgid "No download available."
-msgstr "Pobieranie niedostępne."
+#: app/blueprints/packages/advanced_search.py:39
+msgid "Android Default"
+msgstr ""
 
-#: app/blueprints/packages/packages.py:229 app/templates/packages/view.html:598
+#: app/blueprints/packages/advanced_search.py:40
+msgid "Desktop Default"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:41
+msgid "Non-free"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:42 app/models/packages.py:624
+#: app/templates/packages/view.html:163
+msgid "Work in Progress"
+msgstr "W trakcie prac"
+
+#. NOTE: Package maintenance state
+#: app/blueprints/packages/advanced_search.py:43 app/models/packages.py:170
+msgid "Deprecated"
+msgstr "Przestarzały"
+
+#: app/blueprints/packages/advanced_search.py:44
+msgid "All content warnings"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:53
+msgid "Query"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:54
+#: app/blueprints/packages/packages.py:230 app/templates/packages/view.html:598
 #: app/utils/minetest_hypertext.py:263
 msgid "Type"
 msgstr "Typ"
 
-#: app/blueprints/packages/packages.py:230
-msgid "Title (Human-readable)"
-msgstr "Tytuł (Czytelny dla człowieka)"
+#: app/blueprints/packages/advanced_search.py:56
+#: app/templates/macros/topics.html:6 app/templates/packages/view.html:177
+msgid "Author"
+msgstr "Autor"
 
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:637
-msgid "Name (Technical)"
-msgstr "Nazwa (techniczna)"
-
-#: app/blueprints/packages/packages.py:231
-#: app/blueprints/packages/packages.py:638
-#: app/templates/packages/create_edit.html:75
-msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
-msgstr "Tylko małe litery (a-z), cyfry (0-9) oraz podłogi (_)"
-
-#: app/blueprints/packages/packages.py:232
-msgid "Short Description (Plaintext)"
-msgstr "Krótki opis (zwykły tekst)"
-
-#: app/blueprints/packages/packages.py:234 app/templates/packages/view.html:620
-#: app/utils/minetest_hypertext.py:300
-msgid "Maintenance State"
-msgstr "Stan konserwacji"
-
-#: app/blueprints/packages/packages.py:236 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/advanced_search.py:57
+#: app/blueprints/packages/packages.py:237 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
 #: app/utils/minetest_hypertext.py:264
 msgid "Tags"
 msgstr "Tagi"
 
-#: app/blueprints/packages/packages.py:237
+#: app/blueprints/packages/advanced_search.py:60
+#: app/blueprints/packages/packages.py:238
 msgid "Content Warnings"
 msgstr "Uwagi zawartości"
 
-#: app/blueprints/packages/packages.py:238 app/templates/packages/view.html:609
+#: app/blueprints/packages/advanced_search.py:63
+#: app/blueprints/packages/packages.py:239 app/templates/packages/view.html:609
 #: app/utils/minetest_hypertext.py:298
 msgid "License"
 msgstr "Licencja"
 
-#: app/blueprints/packages/packages.py:239
+#: app/blueprints/packages/advanced_search.py:67
+msgid "Supports Game"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:71
+#: app/templates/admin/storage.html:39
+#: app/templates/collections/create_edit.html:81
+#: app/templates/collections/list.html:39
+#: app/templates/collections/view.html:91 app/templates/index.html:48
+#: app/templates/macros/reviews.html:81 app/templates/macros/topics.html:52
+#: app/templates/packages/game_hub.html:5
+#: app/templates/packages/game_hub.html:25
+#: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
+#, python-format
+msgid "%(title)s by %(author)s"
+msgstr "%(title)s autorstwa %(author)s"
+
+#: app/blueprints/packages/advanced_search.py:72
+#: app/blueprints/packages/reviews.py:54
+#: app/templates/packages/translation.html:51
+msgid "Language"
+msgstr "Język"
+
+#: app/blueprints/packages/advanced_search.py:76
+msgid "Hide Tags and Content Warnings"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:77
+msgid "Minetest Version"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:81
+msgid "Sort by"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:85
+msgid "Package score"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:86 app/templates/index.html:78
+#: app/templates/packages/reviews_list.html:4
+#: app/templates/packages/view.html:194 app/templates/packages/view.html:336
+#: app/templates/users/profile.html:279
+msgid "Reviews"
+msgstr "Opinie"
+
+#: app/blueprints/packages/advanced_search.py:87
+#: app/templates/packages/view.html:184 app/templates/users/profile.html:242
+msgid "Downloads"
+msgstr "Pobrania"
+
+#: app/blueprints/packages/advanced_search.py:88
+msgid "Created At"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:89
+msgid "Approved At"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:90
+msgid "Last Release"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:92
+msgid "Order"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:93
+msgid "Descending"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:94
+msgid "Ascending"
+msgstr ""
+
+#: app/blueprints/packages/advanced_search.py:96
+msgid "Random order"
+msgstr ""
+
+#: app/blueprints/packages/packages.py:215
+msgid "No download available."
+msgstr "Pobieranie niedostępne."
+
+#: app/blueprints/packages/packages.py:231
+msgid "Title (Human-readable)"
+msgstr "Tytuł (Czytelny dla człowieka)"
+
+#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:638
+msgid "Name (Technical)"
+msgstr "Nazwa (techniczna)"
+
+#: app/blueprints/packages/packages.py:232
+#: app/blueprints/packages/packages.py:639
+#: app/templates/packages/create_edit.html:75
+msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
+msgstr "Tylko małe litery (a-z), cyfry (0-9) oraz podłogi (_)"
+
+#: app/blueprints/packages/packages.py:233
+msgid "Short Description (Plaintext)"
+msgstr "Krótki opis (zwykły tekst)"
+
+#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:620
+#: app/utils/minetest_hypertext.py:300
+msgid "Maintenance State"
+msgstr "Stan konserwacji"
+
+#: app/blueprints/packages/packages.py:240
 msgid "Media License"
 msgstr "Licencja multimediów"
 
-#: app/blueprints/packages/packages.py:241
+#: app/blueprints/packages/packages.py:242
 msgid "Long Description (Markdown)"
 msgstr "Długi opis (Markdown)"
 
-#: app/blueprints/packages/packages.py:243
+#: app/blueprints/packages/packages.py:244
 msgid "VCS Repository URL"
 msgstr "URL repozytorium VCS"
 
-#: app/blueprints/packages/packages.py:244 app/blueprints/users/settings.py:77
+#: app/blueprints/packages/packages.py:245 app/blueprints/users/settings.py:77
 msgid "Website URL"
 msgstr "URL strony internetowej"
 
-#: app/blueprints/packages/packages.py:245
+#: app/blueprints/packages/packages.py:246
 msgid "Issue Tracker URL"
 msgstr "URL listy problemów"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:247
 msgid "Forum Topic ID"
 msgstr "ID tematu na forum"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:248
 msgid "Video URL"
 msgstr "URL filmiku"
 
-#: app/blueprints/packages/packages.py:248
+#: app/blueprints/packages/packages.py:249
 msgid "Donate URL"
 msgstr "Adres URL darowizny"
 
-#: app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:250
 msgid "Translation URL"
 msgstr "URL tłumaczenia"
 
-#: app/blueprints/packages/packages.py:255
+#: app/blueprints/packages/packages.py:256
 msgid "_game is not an allowed name"
 msgstr "fraza _game nie jest dozwolona w nazwie"
 
-#: app/blueprints/packages/packages.py:265
+#: app/blueprints/packages/packages.py:266
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -1251,16 +1344,16 @@ msgstr ""
 "Paczka już istnieje ale jest usunięta. Skontaktuj się z personelem "
 "ContentDB aby ją przywrócić"
 
-#: app/blueprints/packages/packages.py:270
+#: app/blueprints/packages/packages.py:271
 msgid "Package already exists"
 msgstr "Paczka już istnieje"
 
-#: app/blueprints/packages/packages.py:276
+#: app/blueprints/packages/packages.py:277
 msgid "A collection with a similar name already exists"
 msgstr "Kolekcja o podobnej nazwie już istnieje"
 
-#: app/blueprints/packages/packages.py:329
-#: app/blueprints/packages/releases.py:82
+#: app/blueprints/packages/packages.py:330
+#: app/blueprints/packages/releases.py:89
 msgid ""
 "You must add an email address to your account and confirm it before you "
 "can manage packages"
@@ -1268,32 +1361,32 @@ msgstr ""
 "Musisz dodać adres e-mail do swojego konta i go potwierdzić zanim "
 "będziesz mógł zarządzać pakietami"
 
-#: app/blueprints/packages/packages.py:335
+#: app/blueprints/packages/packages.py:336
 msgid "Save draft"
 msgstr "Zapisz szkic"
 
-#: app/blueprints/packages/packages.py:343
+#: app/blueprints/packages/packages.py:344
 msgid "Unable to find that user"
 msgstr "Nie można znaleźć tego użytkownika"
 
-#: app/blueprints/packages/packages.py:347
+#: app/blueprints/packages/packages.py:348
 #: app/blueprints/packages/screenshots.py:137
 msgid "Permission denied"
 msgstr "Brak dostępu"
 
-#: app/blueprints/packages/packages.py:403
-#: app/blueprints/packages/packages.py:494
-#: app/blueprints/packages/packages.py:516
+#: app/blueprints/packages/packages.py:404
+#: app/blueprints/packages/packages.py:495
+#: app/blueprints/packages/packages.py:517
 msgid "You don't have permission to do that"
 msgstr "Nie masz uprawnień aby to zrobić"
 
-#: app/blueprints/packages/packages.py:436
+#: app/blueprints/packages/packages.py:437
 msgid "Please comment what changes are needed in the approval thread"
 msgstr ""
 "Proszę zostawić komentarz ze zmianami, które są wymagane w wątku "
 "zatwierdzenia"
 
-#: app/blueprints/packages/packages.py:443
+#: app/blueprints/packages/packages.py:444
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
@@ -1301,186 +1394,185 @@ msgstr ""
 "Proszę skomentuj w wątku zatwierdzenia, żeby redaktorzy wiedzieli, co "
 "zmieniasz"
 
-#: app/blueprints/packages/packages.py:481
+#: app/blueprints/packages/packages.py:482
 #, python-format
 msgid "Set state to %(state)s"
 msgstr "Ustaw stan na %(state)s"
 
-#: app/blueprints/packages/packages.py:511
+#: app/blueprints/packages/packages.py:512
 msgid "Deleted package"
 msgstr "Usunięto paczkę"
 
-#: app/blueprints/packages/packages.py:533
+#: app/blueprints/packages/packages.py:534
 msgid "Unapproved package"
 msgstr "Niezatwierdzona paczka"
 
-#: app/blueprints/packages/packages.py:542
+#: app/blueprints/packages/packages.py:543
 msgid "Maintainers (Comma-separated)"
 msgstr "Opiekunowie (po przecinku)"
 
-#: app/blueprints/packages/packages.py:551
+#: app/blueprints/packages/packages.py:552
 msgid "You don't have permission to edit maintainers"
 msgstr "Nie masz uprawnień aby edytować listę opiekunów"
 
-#: app/blueprints/packages/packages.py:601
+#: app/blueprints/packages/packages.py:602
 msgid "You are not a maintainer"
 msgstr "Nie jesteś opiekunem"
 
-#: app/blueprints/packages/packages.py:604
+#: app/blueprints/packages/packages.py:605
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Właściciele paczek nie mogą usunąć siebie jako opiekunów"
 
-#: app/blueprints/packages/packages.py:636
+#: app/blueprints/packages/packages.py:637
 msgid "Author Name"
 msgstr "Nazwa autora"
 
-#: app/blueprints/packages/packages.py:723
+#: app/blueprints/packages/packages.py:724
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Włącz wykrywanie wsparcia w oparciu na zależnościach (zalecane)"
 
-#: app/blueprints/packages/packages.py:724
+#: app/blueprints/packages/packages.py:725
 msgid "Supported games"
 msgstr "Wspierane gry"
 
-#: app/blueprints/packages/packages.py:725
+#: app/blueprints/packages/packages.py:726
 msgid "Unsupported games"
 msgstr "Niewspierane gry"
 
-#: app/blueprints/packages/packages.py:726
+#: app/blueprints/packages/packages.py:727
 msgid "Supports all games (unless stated) / is game independent"
 msgstr ""
 "Wspiera wszystkie gry (chyba, że zaznaczono inaczej) / jest niezależna od"
 " gry"
 
-#: app/blueprints/packages/packages.py:742
+#: app/blueprints/packages/packages.py:743
 msgid "You need at least one release before you can edit game support"
 msgstr "Potrzebujesz przynajmniej jednego wydania, żeby móc edytować wsparcie gry"
 
-#: app/blueprints/packages/packages.py:746
+#: app/blueprints/packages/packages.py:747
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
 "Mod (lub ich paczka) musi zawierać przynajmniej jeden mod. Proszę "
 "stworzyć nowe wydanie"
 
-#: app/blueprints/packages/releases.py:55
-#: app/templates/packages/release_new.html:46
+#: app/blueprints/packages/releases.py:57
+#: app/blueprints/packages/releases.py:72
+msgid "Release Notes"
+msgstr ""
+
+#: app/blueprints/packages/releases.py:59
 msgid "Method"
 msgstr "Metoda"
 
-#: app/blueprints/packages/releases.py:55
-#: app/blueprints/packages/releases.py:57
+#: app/blueprints/packages/releases.py:59
+#: app/blueprints/packages/releases.py:61
 #: app/blueprints/packages/screenshots.py:35
 msgid "File Upload"
 msgstr "Wysyłanie pliku"
 
-#: app/blueprints/packages/releases.py:56
+#: app/blueprints/packages/releases.py:60
 msgid "Git reference (ie: commit hash, branch, or tag)"
 msgstr "Odniesienie do repozytorium Git (tj: hash commitu, gałąź lub tag)"
 
-#: app/blueprints/packages/releases.py:58
-#: app/blueprints/packages/releases.py:70
-#: app/blueprints/packages/releases.py:198
+#: app/blueprints/packages/releases.py:62
+#: app/blueprints/packages/releases.py:77
+#: app/blueprints/packages/releases.py:207
 msgid "Minimum Minetest Version"
 msgstr "Minimalna wersja Minetesta"
 
-#: app/blueprints/packages/releases.py:60
-#: app/blueprints/packages/releases.py:72
-#: app/blueprints/packages/releases.py:201
+#: app/blueprints/packages/releases.py:64
+#: app/blueprints/packages/releases.py:79
+#: app/blueprints/packages/releases.py:210
 msgid "Maximum Minetest Version"
 msgstr "Maksymalna wersja Minetesta"
 
-#: app/blueprints/packages/releases.py:67
-#: app/templates/packages/release_edit.html:23
+#: app/blueprints/packages/releases.py:74
+#: app/templates/packages/release_edit.html:31
 msgid "URL"
 msgstr "URL"
 
-#: app/blueprints/packages/releases.py:68
+#: app/blueprints/packages/releases.py:75
 msgid "Task ID"
 msgstr "ID zadania"
 
-#: app/blueprints/packages/releases.py:69
+#: app/blueprints/packages/releases.py:76
 #: app/blueprints/packages/screenshots.py:41
 msgid "Is Approved"
 msgstr "Jest zatwierdzone"
 
-#: app/blueprints/packages/releases.py:91
+#: app/blueprints/packages/releases.py:98
 msgid "Import from Git"
 msgstr "Zaimportuj z repozytorium Git"
 
-#: app/blueprints/packages/releases.py:91
+#: app/blueprints/packages/releases.py:98
 msgid "Upload .zip file"
 msgstr "Wyślij plik .zip"
 
-#: app/blueprints/packages/releases.py:197
+#: app/blueprints/packages/releases.py:206
 msgid "Set Min"
 msgstr "Ustaw minimalne"
 
-#: app/blueprints/packages/releases.py:200
+#: app/blueprints/packages/releases.py:209
 msgid "Set Max"
 msgstr "Ustaw maksymalne"
 
-#: app/blueprints/packages/releases.py:203
+#: app/blueprints/packages/releases.py:212
 msgid "Only change values previously set as none"
 msgstr "Zmień tylko wartości, które zostały wcześniej ustawione jako none"
 
-#: app/blueprints/packages/releases.py:204
+#: app/blueprints/packages/releases.py:213
 msgid "Update"
 msgstr "Aktualizuj"
 
-#: app/blueprints/packages/releases.py:256
+#: app/blueprints/packages/releases.py:265
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Wyzwalacz"
 
-#: app/blueprints/packages/releases.py:257
+#: app/blueprints/packages/releases.py:266
 msgid "New Commit"
 msgstr "Nowy commit"
 
-#: app/blueprints/packages/releases.py:258 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:267 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Nowy tag"
 
-#: app/blueprints/packages/releases.py:260
+#: app/blueprints/packages/releases.py:269
 msgid "Branch name"
 msgstr "Nazwa gałęzi"
 
-#: app/blueprints/packages/releases.py:261
+#: app/blueprints/packages/releases.py:270
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Akcja"
 
-#: app/blueprints/packages/releases.py:262
+#: app/blueprints/packages/releases.py:271
 msgid "Send notification and mark as outdated"
 msgstr "Wyślij powiadomienie i oznacz jako przestarzałe"
 
-#: app/blueprints/packages/releases.py:262 app/logic/package_approval.py:104
+#: app/blueprints/packages/releases.py:271 app/logic/package_approval.py:104
 msgid "Create release"
 msgstr "Utwórz wydanie"
 
-#: app/blueprints/packages/releases.py:264
+#: app/blueprints/packages/releases.py:273
 msgid "Save Settings"
 msgstr "Zapisz ustawienia"
 
-#: app/blueprints/packages/releases.py:265
+#: app/blueprints/packages/releases.py:274
 msgid "Disable Automation"
 msgstr "Wyłącz automatyzację"
 
-#: app/blueprints/packages/releases.py:304
+#: app/blueprints/packages/releases.py:313
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr "Dodaj URL repozytoria Git aby ustawić automatyczne wydania"
 
-#: app/blueprints/packages/releases.py:320
+#: app/blueprints/packages/releases.py:329
 msgid "Deleted update configuration"
 msgstr "Usunięto konfigurację aktualizacji"
 
-#: app/blueprints/packages/releases.py:328
+#: app/blueprints/packages/releases.py:337
 msgid "Now, please create an initial release"
 msgstr "Teraz, utwórz pierwsze wydanie"
-
-#: app/blueprints/packages/reviews.py:54
-#: app/templates/packages/translation.html:51
-msgid "Language"
-msgstr "Język"
 
 #: app/blueprints/packages/reviews.py:60 app/blueprints/threads/__init__.py:181
 #: app/blueprints/threads/__init__.py:182
@@ -1666,7 +1758,7 @@ msgstr ""
 "oraz kropki (.) są dozwolone"
 
 #: app/blueprints/users/account.py:104 app/blueprints/users/account.py:153
-#: app/blueprints/users/account.py:189 app/blueprints/users/account.py:340
+#: app/blueprints/users/account.py:189 app/blueprints/users/account.py:338
 #: app/blueprints/users/settings.py:147
 msgid "Email"
 msgstr "Email"
@@ -1748,23 +1840,23 @@ msgstr "Stare hasło jest niepoprawne"
 msgid "Unknown verification token!"
 msgstr "Nieznany token weryfikacji!"
 
-#: app/blueprints/users/account.py:292
+#: app/blueprints/users/account.py:290
 msgid "Token has expired"
 msgstr "Token wygasł"
 
-#: app/blueprints/users/account.py:306
+#: app/blueprints/users/account.py:304
 msgid "Another user is already using that email"
 msgstr "Inny użytkownik już używa tego adresu email"
 
-#: app/blueprints/users/account.py:309
+#: app/blueprints/users/account.py:307
 msgid "Confirmed email change"
 msgstr "Potwierdzono zmianę adresu email"
 
-#: app/blueprints/users/account.py:314
+#: app/blueprints/users/account.py:312
 msgid "Email address changed"
 msgstr "Adres email został zmieniony"
 
-#: app/blueprints/users/account.py:315
+#: app/blueprints/users/account.py:313
 msgid ""
 "Your email address has changed. If you didn't request this, please "
 "contact an administrator."
@@ -1772,15 +1864,15 @@ msgstr ""
 "Twój adres email został zmieniony. Jeżeli nie ty to zrobiłeś, skontaktuj "
 "się z administratorem."
 
-#: app/blueprints/users/account.py:333
+#: app/blueprints/users/account.py:331
 msgid "You may now log in"
 msgstr "Możesz teraz się zalogować"
 
-#: app/blueprints/users/account.py:341
+#: app/blueprints/users/account.py:339
 msgid "Send"
 msgstr "Wyślij"
 
-#: app/blueprints/users/account.py:372
+#: app/blueprints/users/account.py:370
 msgid ""
 "That email is now blacklisted. Please contact an admin if you wish to "
 "undo this."
@@ -1788,46 +1880,44 @@ msgstr ""
 "Ten email znajduje się na czarnej liście. Skontaktuj się z adminem jeżeli"
 " chcesz aby to cofnąć."
 
-#: app/blueprints/users/claim.py:41 app/blueprints/users/claim.py:66
-msgid ""
-"Invalid username, Only alphabetic letters (A-Za-z), numbers (0-9), "
-"underscores (_), minuses (-), and periods (.) allowed. Consider "
-"contacting an admin"
-msgstr ""
-"Nieprawidłowa nazwa użytkownika, tylko litery alfabetu (A-Za-z), liczby "
-"(0-9), podłogi (_), minusy (-) oraz kropki (.) są dozwolone. Rozważ "
-"skontaktowanie się z adminem"
-
 #: app/blueprints/users/claim.py:46
 msgid "User has already been claimed"
 msgstr "Użytkownik jest już zajęty"
 
 #: app/blueprints/users/claim.py:50
-msgid "Unable to get GitHub username for user"
-msgstr "Nie można uzyskać nazwy GitHub użytkownika"
+msgid ""
+"Unable to get GitHub username for user. Make sure the forum account "
+"exists."
+msgstr ""
 
-#: app/blueprints/users/claim.py:73
+#: app/blueprints/users/claim.py:66
+msgid ""
+"A ContentDB user with that name already exists. Please contact an admin "
+"to link to your forum account"
+msgstr ""
+
+#: app/blueprints/users/claim.py:75
 msgid "That user has already been claimed!"
 msgstr "Ten użytkownik jest już zajęty!"
 
-#: app/blueprints/users/claim.py:86
+#: app/blueprints/users/claim.py:88
 #, python-format
 msgid "Error whilst attempting to access forums: %(message)s"
 msgstr "Błąd podczas próby uzyskania forum: %(message)s"
 
-#: app/blueprints/users/claim.py:90
+#: app/blueprints/users/claim.py:92
 msgid "Unable to get forum signature - does the user exist?"
 msgstr "Nie można uzyskać sygnatury forum - czy użytkownik istnieje?"
 
-#: app/blueprints/users/claim.py:105
+#: app/blueprints/users/claim.py:107
 msgid "Unable to login as user"
 msgstr "Nie można zalogować się jako użytkownik"
 
-#: app/blueprints/users/claim.py:111
+#: app/blueprints/users/claim.py:113
 msgid "Could not find the key in your signature!"
 msgstr "Nie odnaleziono klucza w twojej sygnaturze!"
 
-#: app/blueprints/users/claim.py:114
+#: app/blueprints/users/claim.py:116
 msgid "Unknown claim type"
 msgstr "Nieznany typ zajęcia"
 
@@ -1973,6 +2063,23 @@ msgstr "Ranga"
 msgid "Can't promote a user to a rank higher than yourself!"
 msgstr "Nie możesz promować użytkownika na rangę wyższą niż twoja!"
 
+#: app/blueprints/vcs/github.py:56
+msgid "Authorization failed [err=gh-oauth-login-failed]"
+msgstr "Autoryzacja nieudana [err=gh-oauth-login-failed]"
+
+#: app/blueprints/vcs/github.py:85
+msgid "Linked GitHub to account"
+msgstr "Przypisano GitHub do konta"
+
+#: app/blueprints/vcs/github.py:90
+#, python-format
+msgid "GitHub account is already associated with another user: %(username)s"
+msgstr "Konto na GitHub jest już powiązane z innym użytkownikiem: %(username)s"
+
+#: app/blueprints/vcs/github.py:98 app/blueprints/vcs/github.py:124
+msgid "Authorization failed [err=gh-login-failed]"
+msgstr "Autoryzacja nieudana [err=gh-login-failed]"
+
 #: app/blueprints/zipgrep/__init__.py:35
 msgid "Text to find (regex)"
 msgstr "Tekst do wyszukania (wyrażenie regularne)"
@@ -1982,6 +2089,7 @@ msgid "File filter"
 msgstr "Filtr plików"
 
 #: app/blueprints/zipgrep/__init__.py:38 app/templates/base.html:60
+#: app/templates/packages/advanced_search.html:34
 #: app/templates/packages/game_hub.html:35 app/templates/todo/tags.html:14
 msgid "Search"
 msgstr "Wyszukaj"
@@ -2073,11 +2181,11 @@ msgstr "Nie masz uprawnień aby edytować tą paczkę"
 msgid "You don't have permission to change the package name"
 msgstr "Nie masz uprawnień aby zmienić nazwę paczki"
 
-#: app/logic/releases.py:32
+#: app/logic/releases.py:33
 msgid "You don't have permission to make releases"
 msgstr "Nie masz uprawnień aby tworzyć wydania"
 
-#: app/logic/releases.py:37
+#: app/logic/releases.py:38
 msgid ""
 "You've created too many releases for this package in the last 5 minutes, "
 "please wait before trying again"
@@ -2085,7 +2193,7 @@ msgstr ""
 "Utworzyłeś zbyt dużo wydań tej paczki w ciągu ostatnich 5 minut, poczekaj"
 " zanim spróbujesz ponownie"
 
-#: app/logic/releases.py:74
+#: app/logic/releases.py:77
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr "Niepoprawny hash commitu; musi być 40-znakowym napisem base16"
 
@@ -2250,11 +2358,6 @@ msgstr "Tylko konserwacja"
 msgid "As-is"
 msgstr "Tak jak jest"
 
-#. NOTE: Package maintenance state
-#: app/models/packages.py:170
-msgid "Deprecated"
-msgstr "Przestarzały"
-
 #: app/models/packages.py:177
 msgid "Under active development, and may break worlds/things without warning"
 msgstr "Aktywnie rozwijany i może zepsuć świat czy coś beż ostrzeżenia"
@@ -2293,7 +2396,7 @@ msgstr "Zatwierdź"
 #: app/templates/collections/delete.html:14
 #: app/templates/collections/view.html:39
 #: app/templates/oauth/create_edit.html:17
-#: app/templates/packages/release_edit.html:84
+#: app/templates/packages/release_edit.html:92
 #: app/templates/packages/review_create_edit.html:67
 #: app/templates/threads/delete_reply.html:19
 #: app/templates/threads/delete_thread.html:19
@@ -2301,21 +2404,17 @@ msgstr "Zatwierdź"
 msgid "Delete"
 msgstr "Usuń"
 
-#: app/models/packages.py:624 app/templates/packages/view.html:163
-msgid "Work in Progress"
-msgstr "W trakcie prac"
-
-#: app/models/packages.py:1358
+#: app/models/packages.py:1366
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr "Nowy commit %(hash)s znaleziony na repozytorium Gita."
 
-#: app/models/packages.py:1362
+#: app/models/packages.py:1370
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr "Ostatnie wydanie było z commita %(hash)s"
 
-#: app/models/packages.py:1368
+#: app/models/packages.py:1376
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr "Nowy tag %(tag_name)s znaleziony na repozytorium Gita."
@@ -2349,7 +2448,7 @@ msgid "Editor"
 msgstr ""
 
 #. NOTE: BOT notification type
-#: app/models/users.py:59 app/models/users.py:442
+#: app/models/users.py:59 app/models/users.py:448
 msgid "Bot"
 msgstr "Bot"
 
@@ -2362,128 +2461,128 @@ msgid "Admin"
 msgstr "Administrator"
 
 #. NOTE: PACKAGE_EDIT notification type
-#: app/models/users.py:427
+#: app/models/users.py:433
 msgid "Package Edit"
 msgstr "Edycja Pakietu"
 
 #. NOTE: PACKAGE_APPROVAL notification type
-#: app/models/users.py:430
+#: app/models/users.py:436
 msgid "Package Approval"
 msgstr "Zatwierdzenie Pakietu"
 
 #. NOTE: NEW_THREAD notification type
-#: app/models/users.py:433 app/templates/threads/list.html:12
+#: app/models/users.py:439 app/templates/threads/list.html:12
 #: app/templates/threads/new.html:4
 msgid "New Thread"
 msgstr "Nowy wątek"
 
 #. NOTE: NEW_REVIEW notification type
-#: app/models/users.py:436
+#: app/models/users.py:442
 msgid "New Review"
 msgstr "Nowa Opinia"
 
 #. NOTE: THREAD_REPLY notification type
-#: app/models/users.py:439
+#: app/models/users.py:445
 msgid "Thread Reply"
 msgstr "Odpowiedź w wątku"
 
 #. NOTE: MAINTAINER notification type
-#: app/models/users.py:445 app/templates/macros/threads.html:27
+#: app/models/users.py:451 app/templates/macros/threads.html:27
 msgid "Maintainer"
 msgstr "Opiekun"
 
 #. NOTE: EDITOR_ALERT notification type
-#: app/models/users.py:448
+#: app/models/users.py:454
 msgid "Editor Alert"
 msgstr "Ostrzeżenie Redaktora"
 
 #. NOTE: EDITOR_MISC notification type
-#: app/models/users.py:451
+#: app/models/users.py:457
 msgid "Editor Misc"
 msgstr "Różne Redaktora"
 
 #. NOTE: OTHER notification type
-#: app/models/users.py:454
+#: app/models/users.py:460
 msgid "Other"
 msgstr "Inne"
 
-#: app/models/users.py:464
+#: app/models/users.py:470
 msgid "This is a Package Edit notification."
 msgstr "To jest powiadomienie o Edycji Pakietu."
 
-#: app/models/users.py:466
+#: app/models/users.py:472
 msgid "This is a Package Approval notification."
 msgstr "To jest powiadomienie o Zatwierdzeniu Pakietu."
 
-#: app/models/users.py:468
+#: app/models/users.py:474
 msgid "This is a New Thread notification."
 msgstr "To jest powiadomienie o Nowym Wątku."
 
-#: app/models/users.py:470
+#: app/models/users.py:476
 msgid "This is a New Review notification."
 msgstr "To jest powiadomienie o Nowej Opinii."
 
-#: app/models/users.py:472
+#: app/models/users.py:478
 msgid "This is a Thread Reply notification."
 msgstr "To jest powiadomienie o Odpowiedzi w Wątku."
 
-#: app/models/users.py:474
+#: app/models/users.py:480
 msgid "This is a Bot notification."
 msgstr "To jest powiadomienie Bota."
 
-#: app/models/users.py:476
+#: app/models/users.py:482
 msgid "This is a Maintainer change notification."
 msgstr "To jest powiadomienie o zmianie Opiekuna."
 
-#: app/models/users.py:478
+#: app/models/users.py:484
 msgid "This is an Editor Alert notification."
 msgstr "To jest powiadomienie o Ostrzeżeniu Redaktora."
 
-#: app/models/users.py:480
+#: app/models/users.py:486
 msgid "This is an Editor Misc notification."
 msgstr "To jest powiadomienie o Różnych Redaktora."
 
-#: app/models/users.py:482
+#: app/models/users.py:488
 msgid "This is an Other notification."
 msgstr "To jest Inne powiadomienie."
 
-#: app/models/users.py:489
+#: app/models/users.py:495
 msgid "When another user edits your packages, releases, etc."
 msgstr "Kiedy inny użytkownik zmienia twoje pakiety, wydania, itd."
 
-#: app/models/users.py:491
+#: app/models/users.py:497
 msgid "Notifications from editors related to the package approval process."
 msgstr "Powiadomienia od redaktorów związane z procesem zatwierdzania pakietu."
 
-#: app/models/users.py:493
+#: app/models/users.py:499
 msgid "When a thread is created on your package."
 msgstr "Kiedy wątek zostaję utworzony pod twoim pakietem."
 
-#: app/models/users.py:495
+#: app/models/users.py:501
 msgid "When a user posts a review on your package."
 msgstr "Kiedy użytkownik wyśle opinię o twoim pakiecie."
 
-#: app/models/users.py:497
+#: app/models/users.py:503
 msgid "When someone replies to a thread you're watching."
 msgstr "Kiedy ktoś odpowie w wątku, który obserwujesz."
 
-#: app/models/users.py:499
+#: app/models/users.py:505
 msgid "From a bot - for example, update notifications."
 msgstr "Od bota - np. powiadomienie o aktualizacji."
 
-#: app/models/users.py:501
+#: app/models/users.py:507
 msgid "When your package's maintainers change."
 msgstr "Kiedy opiekunowie twojego pakietu zmieniają się."
 
-#: app/models/users.py:503
+#: app/models/users.py:509
 msgid "For editors: Important alerts."
 msgstr "Dla redaktorów: Ważne ostrzeżenia."
 
-#: app/models/users.py:505
+#: app/models/users.py:511
 msgid "For editors: Minor notifications, including new threads."
 msgstr "Dla redaktorów: Pomniejsze powiadomienia, włączając w to nowe wątki."
 
-#: app/models/users.py:507
+#: app/models/users.py:513
 msgid "Minor notifications not important enough for a dedicated category."
 msgstr "Pomniejsze powiadomienia, za mało istotne, żeby dostały własną kategorię."
 
@@ -2638,41 +2737,45 @@ msgstr "Polityka prywatności"
 msgid "Report / DMCA"
 msgstr "Zgłoś / DMCA"
 
-#: app/templates/base.html:256
+#: app/templates/base.html:256 app/templates/packages/advanced_search.html:4
+msgid "Advanced Search"
+msgstr ""
+
+#: app/templates/base.html:257
 msgid "User List"
 msgstr "Lista użytkowników"
 
-#: app/templates/base.html:257 app/templates/packages/view.html:190
+#: app/templates/base.html:258 app/templates/packages/view.html:190
 #: app/templates/packages/view.html:677 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Wątki"
 
-#: app/templates/base.html:258 app/templates/collections/list.html:7
+#: app/templates/base.html:259 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
 msgstr "Kolekcje"
 
-#: app/templates/base.html:259 app/templates/donate/index.html:4
+#: app/templates/base.html:260 app/templates/donate/index.html:4
 msgid "Support Creators"
 msgstr "Wesprzyj Twórców"
 
-#: app/templates/base.html:260
+#: app/templates/base.html:261
 msgid "Translate Packages"
 msgstr "Przetłumacz pakiety"
 
-#: app/templates/base.html:261
+#: app/templates/base.html:262
 msgid "Source Code"
 msgstr "Kod źródłowy"
 
-#: app/templates/base.html:267
+#: app/templates/base.html:268
 msgid "Show non-free packages"
 msgstr "Pokaż nie-wolne pakiety"
 
-#: app/templates/base.html:269
+#: app/templates/base.html:270
 msgid "Hide non-free packages"
 msgstr "Ukryj nie-wolne pakiety"
 
-#: app/templates/base.html:273
+#: app/templates/base.html:274
 #, python-format
 msgid "Our privacy policy has been updated (%(date)s)"
 msgstr "Nasza polityka prywatności została zaktualizowana (%(date)s)"
@@ -2687,28 +2790,10 @@ msgstr ""
 "Witaj w najlepszym miejscu do znalezienia modyfikacji, gier i paczek "
 "tekstur dla Minetesta"
 
-#: app/templates/admin/storage.html:39
-#: app/templates/collections/create_edit.html:81
-#: app/templates/collections/list.html:39
-#: app/templates/collections/view.html:91 app/templates/index.html:48
-#: app/templates/macros/reviews.html:81 app/templates/macros/topics.html:52
-#: app/templates/packages/game_hub.html:5
-#: app/templates/packages/game_hub.html:25
-#: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
-#, python-format
-msgid "%(title)s by %(author)s"
-msgstr "%(title)s autorstwa %(author)s"
-
 #: app/templates/index.html:53
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> autorstwa %(author)s"
-
-#: app/templates/index.html:78 app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:194 app/templates/packages/view.html:336
-#: app/templates/users/profile.html:279
-msgid "Reviews"
-msgstr "Opinie"
 
 #: app/templates/index.html:94 app/templates/packages/view.html:278
 msgid "Previous"
@@ -2790,7 +2875,7 @@ msgstr "Wyślij email do %(username)s"
 #: app/templates/admin/storage.html:18
 #: app/templates/packages/create_edit.html:66
 #: app/templates/packages/game_support.html:20
-#: app/templates/threads/view.html:96 app/templates/todo/tags.html:36
+#: app/templates/threads/view.html:101 app/templates/todo/tags.html:36
 msgid "Package"
 msgstr "Paczka"
 
@@ -2816,7 +2901,7 @@ msgstr "Nowa licencja"
 msgid "Licenses"
 msgstr "Licencje"
 
-#: app/templates/admin/tags/list.html:34
+#: app/templates/admin/tags/list.html:30
 msgid "Views"
 msgstr "Wyświetlenia"
 
@@ -3287,7 +3372,7 @@ msgid "Edit / Approve"
 msgstr "Edytuj / Zatwierdź"
 
 #: app/templates/macros/releases.html:103
-#: app/templates/packages/release_edit.html:31
+#: app/templates/packages/release_edit.html:39
 msgid "Importing..."
 msgstr "Importowanie..."
 
@@ -3496,10 +3581,6 @@ msgstr "Zaktualizuj ustawienia"
 msgid "No outdated packages."
 msgstr "Brak przestarzałych paczek."
 
-#: app/templates/macros/topics.html:6 app/templates/packages/view.html:177
-msgid "Author"
-msgstr "Autor"
-
 #: app/templates/macros/topics.html:8
 msgid "Date"
 msgstr "Data"
@@ -3674,6 +3755,29 @@ msgstr "Nieopublikowany"
 msgid "No applications created"
 msgstr "Żadne aplikacje nie stworzone"
 
+#: app/templates/packages/advanced_search.html:13
+msgid "Use shift to select multiple. Leave selection empty to match any type."
+msgstr ""
+
+#: app/templates/packages/advanced_search.html:14
+#: app/templates/packages/advanced_search.html:19
+#: app/templates/packages/advanced_search.html:20
+#: app/templates/packages/advanced_search.html:21
+msgid "Use shift to select multiple."
+msgstr ""
+
+#: app/templates/packages/advanced_search.html:17
+msgid "Tags and Content Warnings"
+msgstr ""
+
+#: app/templates/packages/advanced_search.html:23
+msgid "Compatibility"
+msgstr ""
+
+#: app/templates/packages/advanced_search.html:28
+msgid "Sorting"
+msgstr ""
+
 #: app/templates/packages/alias_create_edit.html:4
 msgid "Alias"
 msgstr "Alias"
@@ -3715,7 +3819,7 @@ msgstr ""
 "Git."
 
 #: app/templates/packages/bulk_update_conf.html:27
-#: app/templates/packages/release_new.html:50
+#: app/templates/packages/release_new.html:51
 #: app/templates/packages/update_config.html:33
 msgid "Leave blank to use default branch"
 msgstr "Pozostaw puste aby użyć domyślnej gałęzi"
@@ -4114,8 +4218,8 @@ msgstr ""
 "Minetesta wszystkich wydań twojej paczki."
 
 #: app/templates/packages/release_bulk_change.html:29
-#: app/templates/packages/release_edit.html:54
-#: app/templates/packages/release_new.html:69
+#: app/templates/packages/release_edit.html:62
+#: app/templates/packages/release_new.html:70
 msgid "Maximum must be greater than or equal to the minimum!"
 msgstr "Maksymalna musi być większa lub równa minimalnej!"
 
@@ -4128,8 +4232,8 @@ msgstr ""
 "platformach poza zakresem."
 
 #: app/templates/packages/release_bulk_change.html:36
-#: app/templates/packages/release_edit.html:70
-#: app/templates/packages/release_new.html:91
+#: app/templates/packages/release_edit.html:78
+#: app/templates/packages/release_new.html:92
 msgid "Leave both as None if in doubt."
 msgstr "Pozostaw obydwie jako None w razie wątpliwości."
 
@@ -4137,31 +4241,41 @@ msgstr "Pozostaw obydwie jako None w razie wątpliwości."
 msgid "Edit release"
 msgstr "Edytuj wydanie"
 
-#: app/templates/packages/release_edit.html:27
+#: app/templates/packages/release_edit.html:15
+#: app/templates/packages/release_new.html:42
+msgid "Release short name. Eg: 1.0.0 or 2018-05-28"
+msgstr ""
+
+#: app/templates/packages/release_edit.html:16
+#: app/templates/packages/release_new.html:43
+msgid "Human-readable name. Eg: 1.0.0 - The Trains Update"
+msgstr ""
+
+#: app/templates/packages/release_edit.html:35
 msgid "Commit Hash"
 msgstr "Hash commitu"
 
-#: app/templates/packages/release_edit.html:32
+#: app/templates/packages/release_edit.html:40
 msgid "view task"
 msgstr "zobacz zadanie"
 
-#: app/templates/packages/release_edit.html:42
+#: app/templates/packages/release_edit.html:50
 #: app/templates/packages/screenshot_edit.html:20
 msgid "Approved"
 msgstr "Zatwierdzone"
 
-#: app/templates/packages/release_edit.html:46
+#: app/templates/packages/release_edit.html:54
 msgid "Supported Minetest versions"
 msgstr "Wspierane wersje Minetesta"
 
-#: app/templates/packages/release_edit.html:60
-#: app/templates/packages/release_new.html:75
+#: app/templates/packages/release_edit.html:68
+#: app/templates/packages/release_new.html:76
 #, python-format
 msgid "Are you sure your package doesn't work on versions after %(version)s?"
 msgstr "Czy jesteś pewien, że twój pakiet nie działa na wersjach po %(version)s?"
 
-#: app/templates/packages/release_edit.html:62
-#: app/templates/packages/release_new.html:77
+#: app/templates/packages/release_edit.html:70
+#: app/templates/packages/release_new.html:78
 msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Minetest versions."
@@ -4169,8 +4283,8 @@ msgstr ""
 "Ustaw maksymalną wersję tylko jeśli wiesz, że to nie działa na nowszych "
 "wersjach Minetestu."
 
-#: app/templates/packages/release_edit.html:63
-#: app/templates/packages/release_new.html:78
+#: app/templates/packages/release_edit.html:71
+#: app/templates/packages/release_new.html:79
 msgid ""
 "Don't set the maximum version just because you haven't tested it on newer"
 " versions."
@@ -4178,8 +4292,8 @@ msgstr ""
 "Nie ustawiaj maksymalnej wersji tylko dlatego, że nie przetestowałeś na "
 "nowszych wersjach."
 
-#: app/templates/packages/release_edit.html:67
-#: app/templates/packages/release_new.html:88
+#: app/templates/packages/release_edit.html:75
+#: app/templates/packages/release_new.html:89
 msgid ""
 "Set the minimum and maximum Minetest versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
@@ -4187,7 +4301,7 @@ msgstr ""
 "Ustaw minimalną i maksymalną wspieraną wersję Minetesta.\n"
 "To wydanie będzie ukryte dla klientów poza tym zakresem. "
 
-#: app/templates/packages/release_edit.html:72
+#: app/templates/packages/release_edit.html:80
 msgid ""
 "You can <a href='/help/package_config/'>set this automatically</a> in the"
 " .conf of your package."
@@ -4195,15 +4309,15 @@ msgstr ""
 "Możesz <a href=\"/help/package_config/\">ustawić to automatycznie</a> w "
 "pliku .conf twojej paczki."
 
-#: app/templates/packages/release_edit.html:79
+#: app/templates/packages/release_edit.html:87
 msgid "Delete Release"
 msgstr "Usuń wydanie"
 
-#: app/templates/packages/release_edit.html:85
+#: app/templates/packages/release_edit.html:93
 msgid "This is permanent."
 msgstr "To jest trwałe."
 
-#: app/templates/packages/release_edit.html:86
+#: app/templates/packages/release_edit.html:94
 msgid ""
 "Any associated uploads will not be deleted immediately, but the release "
 "will no longer be listed."
@@ -4211,7 +4325,7 @@ msgstr ""
 "Jakiekolwiek powiązane przesyłanie nie będzie usunięte od razu ale "
 "wydanie nie będzie się więcej pojawiać."
 
-#: app/templates/packages/release_edit.html:91
+#: app/templates/packages/release_edit.html:99
 msgid "You cannot delete the latest release; please create a newer one first."
 msgstr "Nie możesz usunąć najnowszego wydania; najpierw utwórz kolejne."
 
@@ -4262,15 +4376,15 @@ msgstr ""
 msgid "1. Name release"
 msgstr "1. Nazwij wydanie"
 
-#: app/templates/packages/release_new.html:42
-msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
-msgstr "Czytelne dla człowieka. Tj: 1.0.0 or 2018-05-28"
+#: app/templates/packages/release_new.html:43
+msgid "Same as name"
+msgstr ""
 
-#: app/templates/packages/release_new.html:44
+#: app/templates/packages/release_new.html:46
 msgid "2. Set the content"
 msgstr "2. Ustaw zawartość"
 
-#: app/templates/packages/release_new.html:57
+#: app/templates/packages/release_new.html:58
 msgid ""
 "Take a look at the <a href='/help/package_config/'>Package Configuration "
 "and Releases Guide</a> for\n"
@@ -4280,11 +4394,11 @@ msgstr ""
 "konfiguracji i wydań paczek</a> po\n"
 "wskazówki dotyczące dostosowywania wersji."
 
-#: app/templates/packages/release_new.html:61
+#: app/templates/packages/release_new.html:62
 msgid "3. Supported Minetest versions"
 msgstr "3. Wspierane wersje Minetesta"
 
-#: app/templates/packages/release_new.html:83
+#: app/templates/packages/release_new.html:84
 msgid ""
 "The .conf of your package can <a href='/help/package_config/'>set this "
 "automatically</a>,\n"
@@ -4728,7 +4842,7 @@ msgstr "Niewolny kod"
 msgid "Non-free media"
 msgstr "Niewolne multimedia"
 
-#: app/templates/packages/view.html:94 app/templates/threads/view.html:104
+#: app/templates/packages/view.html:94 app/templates/threads/view.html:109
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
@@ -4736,10 +4850,6 @@ msgstr ""
 "Ten wątek jest tylko widoczny dla jego autora, opiekunów paczki, "
 "użytkowników z rangą Zatwierdzacz lub wyższą oraz @oznaczonych "
 "użytkowników."
-
-#: app/templates/packages/view.html:184 app/templates/users/profile.html:242
-msgid "Downloads"
-msgstr "Pobrania"
 
 #: app/templates/packages/view.html:207 app/templates/users/profile.html:95
 msgid "Website"
@@ -4765,7 +4875,7 @@ msgstr "Miniatura do filmu"
 msgid "Awaiting review"
 msgstr "Oczekuje recenzji"
 
-#: app/templates/packages/view.html:344 app/templates/threads/view.html:77
+#: app/templates/packages/view.html:344 app/templates/threads/view.html:82
 msgid "Edit Review"
 msgstr "Edytuj recenzję"
 
@@ -4994,39 +5104,39 @@ msgstr "Tylko odpowiedzi w publicznych wątkach są pokazywane"
 msgid "Subscribe"
 msgstr "Subskrybuj"
 
-#: app/templates/threads/view.html:55
+#: app/templates/threads/view.html:59
 msgid "Convert to Thread"
 msgstr "Konwertuj na wątek"
 
-#: app/templates/threads/view.html:62
+#: app/templates/threads/view.html:67
 msgid "Unlock"
 msgstr "Odblokuj"
 
-#: app/templates/threads/view.html:67
+#: app/templates/threads/view.html:72
 msgid "Lock"
 msgstr "Zablokuj"
 
-#: app/templates/threads/view.html:109
+#: app/templates/threads/view.html:114
 msgid "This thread is visible to the following users"
 msgstr "Ten wątek jest widoczny dla następujących użytkowników"
 
-#: app/templates/threads/view.html:110
+#: app/templates/threads/view.html:115
 msgid "Visible to:"
 msgstr "Widoczny dla:"
 
-#: app/templates/threads/view.html:118
+#: app/templates/threads/view.html:123
 msgid "Plus approvers and editors"
 msgstr "Dodatkowo osoby zatwierdzające i edytujące"
 
-#: app/templates/threads/view.html:131
+#: app/templates/threads/view.html:136
 msgid "Is this review outdated?"
 msgstr "Czy ta opinia jest przestarzała?"
 
-#: app/templates/threads/view.html:132
+#: app/templates/threads/view.html:137
 msgid "For example, does it complain about issues you've already fixed?"
 msgstr "Np., czy narzeka na problemy, które już rozwiązałeś?"
 
-#: app/templates/threads/view.html:133
+#: app/templates/threads/view.html:138
 #, python-format
 msgid "You can report outdated reviews by clicking %(flag)s on the review."
 msgstr "Możesz zgłosić przestarzałe opinie klikając na %(flag)s przy opinii."
@@ -5705,6 +5815,10 @@ msgstr "Zmień email i wyślij wiadomość resetującą hasło"
 #: app/templates/users/settings_email.html:18
 msgid "Email Address"
 msgstr "Adres email"
+
+#: app/templates/users/modtools.html:116
+msgid "Pending email verifications"
+msgstr ""
 
 #: app/templates/users/profile.html:20
 msgid "Profile picture"
@@ -6400,4 +6514,66 @@ msgstr "Rozważ włączenie powiadomień e-mail, możesz dostosować ilość wys
 
 #~ msgid "Contains illegal drugs, such as marijuana"
 #~ msgstr "Zawiera nielegalne narkotyki, takie jak marihuana"
+
+#~ msgctxt "tags"
+#~ msgid ""
+#~ "Focus on player chat/communication or "
+#~ "who's primary function is interacting "
+#~ "with the console."
+#~ msgstr ""
+#~ "Skupią się na czacie, komunikacji między"
+#~ " graczami lub interakcji z konsolą "
+#~ "poleceń."
+
+#~ msgctxt "tags"
+#~ msgid ""
+#~ "Requires futher installation steps, such "
+#~ "as installing luarocks or editing the"
+#~ " trusted mod setting"
+#~ msgstr ""
+#~ "Wymaga dalszych kroków instalacji, takich "
+#~ "jak instalacja luarocks lub zmienianie "
+#~ "ustawień zaufanych modów"
+
+#~ msgctxt "tags"
+#~ msgid ""
+#~ "Mods and games that aim to "
+#~ "simulate real life activity. Similar to"
+#~ " SimCity/TheSims/OpenTTD/etc"
+#~ msgstr ""
+#~ "Mody i gry, których celem jest "
+#~ "symulacja prawdziwych czynności. Podobne do"
+#~ " SimCity/TheSims/OpenTTD/itd"
+
+#~ msgctxt "tags"
+#~ msgid "Adds mobs, animals, and NPCs"
+#~ msgstr "Dodaje moby, zwierzęta i NPC"
+
+#~ msgctxt "tags"
+#~ msgid "For content whose main utility / feature is in GUI/formspec form"
+#~ msgstr ""
+#~ "Dla zawartości, której główna funkcjonalność"
+#~ " jest w formularzu GUI/formspec"
+
+#~ msgctxt "tags"
+#~ msgid "Forks of MTG"
+#~ msgstr "Forki MTG"
+
+#~ msgid ""
+#~ "Invalid username, Only alphabetic letters "
+#~ "(A-Za-z), numbers (0-9), underscores (_), "
+#~ "minuses (-), and periods (.) allowed."
+#~ " Consider contacting an admin"
+#~ msgstr ""
+#~ "Nieprawidłowa nazwa użytkownika, tylko litery"
+#~ " alfabetu (A-Za-z), liczby (0-9), podłogi"
+#~ " (_), minusy (-) oraz kropki (.) "
+#~ "są dozwolone. Rozważ skontaktowanie się "
+#~ "z adminem"
+
+#~ msgid "Unable to get GitHub username for user"
+#~ msgstr "Nie można uzyskać nazwy GitHub użytkownika"
+
+#~ msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
+#~ msgstr "Czytelne dla człowieka. Tj: 1.0.0 or 2018-05-28"
 
