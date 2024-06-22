@@ -59,10 +59,7 @@ def list_tokens(username):
 @bp.route("/users/<username>/tokens/<int:id>/edit/", methods=["GET", "POST"])
 @login_required
 def create_edit_token(username, id=None):
-	user = User.query.filter_by(username=username).first()
-	if user is None:
-		abort(404)
-
+	user = User.query.filter_by(username=username).one_or_404()
 	if not user.check_perm(current_user, Permission.CREATE_TOKEN):
 		abort(403)
 

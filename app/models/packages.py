@@ -502,7 +502,7 @@ class Package(db.Model):
 			back_populates="package", cascade="all, delete, delete-orphan")
 
 	tokens = db.relationship("APIToken", foreign_keys="APIToken.package_id", back_populates="package",
-			cascade="all, delete, delete-orphan")
+			cascade="all, delete")
 
 	update_config = db.relationship("PackageUpdateConfig", uselist=False, back_populates="package",
 			cascade="all, delete, delete-orphan")
