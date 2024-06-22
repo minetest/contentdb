@@ -75,6 +75,7 @@ app.config["FLATPAGES_EXTENSION"] = ".md"
 app.config["FLATPAGES_MARKDOWN_EXTENSIONS"] = MARKDOWN_EXTENSIONS
 app.config["FLATPAGES_EXTENSION_CONFIG"] = MARKDOWN_EXTENSION_CONFIG
 app.config["FLATPAGES_HTML_RENDERER"] = my_flatpage_renderer
+app.config["WTF_CSRF_TIME_LIMIT"] = None
 
 app.config["BABEL_TRANSLATION_DIRECTORIES"] = "../translations"
 app.config["LANGUAGES"] = {
