@@ -14,15 +14,15 @@
 		{% if package.check_perm(current_user, "MAKE_RELEASE") %}
 			{{ render_field(form.name, hint=_("Release short name. Eg: 1.0.0 or 2018-05-28")) }}
 			{{ render_field(form.title, hint=_("Human-readable name. Eg: 1.0.0 - The Trains Update")) }}
-			{{ render_field(form.release_notes) }}
+			{{ render_field(form.release_notes, fieldclass="form-control markdown") }}
 		{% else %}
 			<p>
 				{{ _("Name") }}: {{ release.name }}<br>
 				{{ _("Title") }}: {{ release.title }}
 			</p>
-			<p>
-				{{ release.release_notes }}
-			</p>
+			<div class="markdown">
+				{{ release.release_notes | markdown }}
+			</div>
 		{% endif %}
 
 		{% if package.check_perm(current_user, "CHANGE_RELEASE_URL") %}
@@ -101,6 +101,8 @@
 	{% endif %}
 {% endblock %}
 
+{% from "macros/forms.html" import easymde_scripts %}
 {% block scriptextra %}
+	{{ easymde_scripts() }}
 	<script src="/static/js/release_minmax.js?v=2"></script>
 {% endblock %}

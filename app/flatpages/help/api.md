@@ -226,7 +226,7 @@ Format query parameters:
         * `id`: release ID
         * `name`: short release name
         * `title`: human-readable title
-        * `release_notes`: string or null, what's new in this release
+        * `release_notes`: string or null, what's new in this release. Markdown.
         * `release_date`: Date released
         * `url`: download URL
         * `commit`: commit hash or null
