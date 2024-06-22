@@ -27,6 +27,7 @@ def make_package(name: str, versions: List[Tuple[Optional[str], Optional[str]]])
 	for (minv, maxv) in versions:
 		rel = PackageRelease()
 		rel.package = mod
+		rel.name = "test"
 		rel.title = "test"
 		rel.url = "https://github.com/ezhh/handholds/archive/master.zip"
 
