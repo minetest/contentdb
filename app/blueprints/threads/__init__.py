@@ -258,7 +258,8 @@ def view(id):
 			add_notification(mentioned, current_user, NotificationType.THREAD_REPLY,
 							 msg, thread.get_view_url(), thread.package)
 
-			thread.watchers.append(mentioned)
+			if mentioned not in thread.watchers:
+				thread.watchers.append(mentioned)
 
 		msg = "New comment on '{}'".format(thread.title)
 		add_notification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.get_view_url(), thread.package)
