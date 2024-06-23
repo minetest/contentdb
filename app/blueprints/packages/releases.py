@@ -54,7 +54,7 @@ def get_mt_releases(is_max):
 class CreatePackageReleaseForm(FlaskForm):
 	name        = StringField(lazy_gettext("Name"), [InputRequired(), Length(1, 30)])
 	title       = StringField(lazy_gettext("Title"), [Optional(), Length(1, 100)], filters=[nonempty_or_none])
-	release_notes = TextAreaField(lazy_gettext("Release Notes"), [Optional(), Length(1, 100)],
+	release_notes = TextAreaField(lazy_gettext("Release Notes"), [Optional(), Length(1, 5000)],
 			filters=[nonempty_or_none, normalize_line_endings])
 	upload_mode = RadioField(lazy_gettext("Method"), choices=[("upload", lazy_gettext("File Upload"))], default="upload")
 	vcs_label   = StringField(lazy_gettext("Git reference (ie: commit hash, branch, or tag)"), default=None)
@@ -69,7 +69,7 @@ class CreatePackageReleaseForm(FlaskForm):
 class EditPackageReleaseForm(FlaskForm):
 	name     = StringField(lazy_gettext("Name"), [InputRequired(), Length(1, 30)])
 	title    = StringField(lazy_gettext("Title"), [InputRequired(), Length(1, 30)], filters=[nonempty_or_none])
-	release_notes = TextAreaField(lazy_gettext("Release Notes"), [Optional(), Length(1, 100)],
+	release_notes = TextAreaField(lazy_gettext("Release Notes"), [Optional(), Length(1, 5000)],
 			filters=[nonempty_or_none, normalize_line_endings])
 	url      = StringField(lazy_gettext("URL"), [Optional()])
 	task_id  = StringField(lazy_gettext("Task ID"), filters = [lambda x: x or None])
