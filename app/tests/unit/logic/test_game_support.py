@@ -285,13 +285,17 @@ def test_update_new_mod():
 	support.add(make_game("game1", ["default"]))
 	support.add(make_game("game2", ["core", "mod_b"]))
 	lib = support.add(make_mod("lib", ["lib"], []))
-	modA = support.add(make_mod("mod_a", ["mod_a"], ["mod_b", "lib"]))
+	modC = support.add(make_mod("mod_c", ["mod_c"], ["mod_b"]))
+	modA = support.add(make_mod("mod_a", ["mod_a"], ["mod_b", "mod_c", "lib"]))
 	support.on_update(modA)
 
 	assert not support.has_errors
 
 	assert modA.is_confirmed
 	assert modA.detected_supported_games == {"game2"}
+
+	assert modC.is_confirmed
+	assert modC.detected_supported_games == {"game2"}
 
 	assert lib.is_confirmed
 	assert len(lib.detected_supported_games) == 0
@@ -306,6 +310,9 @@ def test_update_new_mod():
 
 	assert modB.is_confirmed
 	assert modB.detected_supported_games == {"game1"}
+
+	assert modC.is_confirmed
+	assert modC.detected_supported_games == {"game1", "game2"}
 
 	assert lib.is_confirmed
 	assert len(lib.detected_supported_games) == 0

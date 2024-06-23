@@ -228,8 +228,6 @@ class GameSupport:
 		while len(to_update) > 0:
 			current_package = to_update.pop()
 			if current_package.id_ in self.packages and current_package.type != PackageType.GAME:
-				current_package.is_confirmed = False
-				current_package.detected_supported_games = []
 				self._get_supported_games(current_package, [])
 
 			provides = current_package.provides
@@ -239,6 +237,10 @@ class GameSupport:
 			for modname in provides:
 				for depending_package in self.get_all_that_depend_on(modname):
 					if depending_package not in checked:
+						if depending_package.id_ in self.packages and depending_package.type != PackageType.GAME:
+							depending_package.is_confirmed = False
+							depending_package.detected_supported_games = []
+
 						to_update.add(depending_package)
 						checked.add(depending_package)
 
