@@ -429,7 +429,8 @@ def check_update_config_impl(package):
 	if config.make_release:
 		rel = PackageRelease()
 		rel.package = package
-		rel.title = tag if tag else datetime.datetime.utcnow().strftime("%Y-%m-%d")
+		rel.name = tag if tag else datetime.datetime.utcnow().strftime("%Y-%m-%d")
+		rel.title = rel.name
 		rel.url = ""
 		rel.task_id = uuid()
 		db.session.add(rel)

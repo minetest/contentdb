@@ -118,6 +118,7 @@ def apply_all_updates(username):
 
 		rel = PackageRelease()
 		rel.package = package
+		rel.name = title
 		rel.title = title
 		rel.url = ""
 		rel.task_id = uuid()
