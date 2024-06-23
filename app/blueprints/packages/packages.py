@@ -400,6 +400,9 @@ def move_to_state(package):
 	if state is None:
 		abort(400)
 
+	if package.state == state:
+		return redirect(package.get_url("packages.view"))
+
 	if not can_move_to_state(package, current_user, state):
 		flash(gettext("You don't have permission to do that"), "danger")
 		return redirect(package.get_url("packages.view"))
