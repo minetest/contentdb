@@ -20,7 +20,11 @@ def upgrade():
         batch_op.add_column(sa.Column("name", sa.String(length=30), nullable=False, server_default=""))
         batch_op.add_column(sa.Column("release_notes", sa.UnicodeText(), nullable=True))
         batch_op.alter_column("releaseDate", nullable=False, new_column_name="created_at")
-        batch_op.execute("UPDATE pacakge_release SET name = title;")
+        batch_op.execute("""
+            UPDATE package_release SET name = title WHERE length(title) <= 30;
+            UPDATE package_release SET name = TO_CHAR(created_at, 'YYYY-MM-DD') WHERE name = '';
+        """)
+
 
 
 def downgrade():
