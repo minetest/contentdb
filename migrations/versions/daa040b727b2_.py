@@ -17,9 +17,10 @@ depends_on = None
 
 def upgrade():
     with op.batch_alter_table("package_release", schema=None) as batch_op:
-        batch_op.add_column(sa.Column("name", sa.String(length=30), nullable=False, server_default="title"))
+        batch_op.add_column(sa.Column("name", sa.String(length=30), nullable=False, server_default=""))
         batch_op.add_column(sa.Column("release_notes", sa.UnicodeText(), nullable=True))
         batch_op.alter_column("releaseDate", nullable=False, new_column_name="created_at")
+        batch_op.execute("UPDATE pacakge_release SET name = title;")
 
 
 def downgrade():
