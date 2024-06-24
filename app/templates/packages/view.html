@@ -385,6 +385,17 @@
 					{{ self.download_btn() }}
 				</div>
 
+				{%  if release.release_notes %}
+					<div class="card my-3">
+						<h3 id="release_notes" class="card-header">
+							{{ _("Release notes for %(title)s", title=release.title) }}
+						</h3>
+						<div class="card-body markdown">
+							{{ release.release_notes | markdown }}
+						</div>
+					</div>
+				{% endif %}
+
 				<div class="mt-3 mb-3">
 					<div class="d-flex">
 						<form method="POST" action="{{ package.get_url('collections.package_toggle_favorite') }}">
