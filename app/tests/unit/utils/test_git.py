@@ -16,8 +16,7 @@
 
 import os
 
-from app.utils.git import get_latest_tag, get_latest_commit, clone_repo
-
+from app.utils.git import get_latest_tag, get_latest_commit, clone_repo, get_commit_list
 
 test_repo = "https://gitlab.com/rubenwardy/testmod"
 master_head = "23d12265ff6de84548b2e3e90dc7351a54f63f00"
@@ -35,6 +34,19 @@ def test_get_latest_tag():
 def test_get_latest_commit():
 	assert get_latest_commit(test_repo) == master_head
 	assert get_latest_commit(test_repo, "test-branch") == test_branch_head
+
+
+def test_get_commit_list():
+	result = get_commit_list(test_repo, "4fd0d06df2cc502b0cbc3ee932217b540f0d92ad", "23d12265ff6de84548b2e3e90dc7351a54f63f00")
+	assert result == [
+		"Update .cdb.json",
+		"Update mod.conf",
+		"Update mod.conf",
+		"Update mod.conf",
+		"Update mod.conf",
+		"Update mod.conf",
+		"Update mod.conf",
+	]
 
 
 def test_git_clone_head():

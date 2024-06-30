@@ -35,7 +35,7 @@ from app.models import AuditSeverity, db, NotificationType, PackageRelease, Meta
 from app.tasks import celery, TaskError
 from app.utils import random_string, post_bot_message, add_system_notification, add_system_audit_log, \
 	get_games_from_list, add_audit_log
-from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir
+from app.utils.git import clone_repo, get_latest_tag, get_latest_commit, get_temp_dir, get_release_notes
 from .minetestcheck import build_tree, MinetestCheckError, ContentType, PackageTreeNode
 from .webhooktasks import post_discord_webhook
 from app import app
@@ -197,6 +197,12 @@ def post_release_check_update(self, release: PackageRelease, path):
 		except IOError:
 			pass
 
+		# Build release notes from git log
+		if release.commit_hash and release.release_notes is None:
+			previous_release = package.releases.filter(PackageRelease.id != release.id).first()
+			if previous_release and previous_release.commit_hash:
+				release.release_notes = get_release_notes(package.repo, previous_release.commit_hash, release.commit_hash)
+
 		# Update game support
 		if package.type == PackageType.MOD or package.type == PackageType.TXP:
 			game_is_supported = {}
@@ -335,6 +341,7 @@ def make_vcs_release(self, id, branch):
 		raise TaskError("No package attached to release")
 
 	with clone_repo(release.package.repo, ref=branch, recursive=True) as repo:
+		release.commit_hash = repo.head.object.hexsha
 		post_release_check_update(self, release, repo.working_tree_dir)
 
 		filename = random_string(10) + ".zip"
@@ -352,7 +359,6 @@ def make_vcs_release(self, id, branch):
 
 		release.url         = "/uploads/" + filename
 		release.task_id     = None
-		release.commit_hash = repo.head.object.hexsha
 		release.approve(release.package.author)
 		db.session.commit()
 

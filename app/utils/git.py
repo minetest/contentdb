@@ -16,6 +16,8 @@
 
 
 import contextlib
+from typing import List, Optional
+
 import git
 import gitdb
 import os
@@ -26,7 +28,7 @@ from urllib.parse import urlsplit
 from git import GitCommandError
 
 from app.tasks import TaskError
-from app.utils import random_string
+from app.utils import random_string, normalize_line_endings
 
 
 def generate_git_url(urlstr):
@@ -122,3 +124,23 @@ def get_latest_tag(git_url):
 		tag = hash_ref_list[1].replace("refs/tags/", "")
 		commit_hash = repo.git.rev_parse(tag + "^{}")
 		return tag, commit_hash
+
+
+def get_commit_list(git_url: str, start: str, end: str) -> List[str]:
+	with (get_temp_dir() as git_dir):
+		repo = git.Repo.init(git_dir)
+		origin = repo.create_remote("origin", url=git_url)
+		origin.fetch()
+
+		commits = repo.iter_commits(f"{start}..{end}")
+		ret = [commit.summary for commit in commits]
+		ret.reverse()
+		return ret
+
+
+def get_release_notes(git_url: str, start: str, end: str) -> Optional[str]:
+	commits = get_commit_list(git_url, start, end)
+	if len(commits) == 0:
+		return None
+
+	return normalize_line_endings("\n".join(map(lambda x: f"- {x}", commits)) + f"\n<!-- auto from {start} to {end} -->")
