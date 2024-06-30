@@ -16,7 +16,7 @@
 
 
 import contextlib
-from typing import List, Optional
+from typing import List, Optional, Tuple
 
 import git
 import gitdb
@@ -107,7 +107,8 @@ def get_latest_commit(git_url, ref_name=None):
 	return remote_refs.get(ref_name)
 
 
-def get_latest_tag(git_url):
+# @returns (tag_name, commit_hash, tag_message)
+def get_latest_tag(git_url) -> Tuple[Optional[str], Optional[str], Optional[str]]:
 	with get_temp_dir() as git_dir:
 		repo = git.Repo.init(git_dir)
 		origin = repo.create_remote("origin", url=git_url)
@@ -116,14 +117,26 @@ def get_latest_tag(git_url):
 		refs = repo.git.for_each_ref(sort="creatordate", format="%(objectname)\t%(refname)").split("\n")
 		refs = [ref for ref in refs if "refs/tags/" in ref]
 		if len(refs) == 0:
-			return None, None
+			return None, None, None
 
 		last_ref = refs[-1]
 		hash_ref_list = last_ref.split('\t')
 
 		tag = hash_ref_list[1].replace("refs/tags/", "")
+		# "^{}" means dereference the tag until an actual commit is found
 		commit_hash = repo.git.rev_parse(tag + "^{}")
-		return tag, commit_hash
+
+		# Get summary message of annotated tag from GitPython
+		annotated_tag = repo.tag(tag).tag
+		if annotated_tag:
+			message = annotated_tag.message
+			message = normalize_line_endings(message)
+			if message == "":
+				message = None
+		else:
+			message = None
+
+		return tag, commit_hash, message
 
 
 def get_commit_list(git_url: str, start: str, end: str) -> List[str]:

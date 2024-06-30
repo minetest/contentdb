@@ -409,8 +409,9 @@ def check_update_config_impl(package):
 	if config.trigger == PackageUpdateTrigger.COMMIT:
 		tag = None
 		commit = get_latest_commit(package.repo, package.update_config.ref)
+		release_notes = None
 	elif config.trigger == PackageUpdateTrigger.TAG:
-		tag, commit = get_latest_tag(package.repo)
+		tag, commit, release_notes = get_latest_tag(package.repo)
 	else:
 		raise TaskError("Unknown update trigger")
 
@@ -437,6 +438,7 @@ def check_update_config_impl(package):
 		rel.package = package
 		rel.name = tag if tag else datetime.datetime.utcnow().strftime("%Y-%m-%d")
 		rel.title = rel.name
+		rel.release_notes = release_notes
 		rel.url = ""
 		rel.task_id = uuid()
 		db.session.add(rel)
@@ -468,7 +470,7 @@ def check_update_config_impl(package):
 
 		for user in package.maintainers:
 			add_system_notification(user, NotificationType.BOT,
-									msg, url_for("todo.view_user", username=user.username, _external=False), package)
+					msg, url_for("todo.view_user", username=user.username, _external=False), package)
 
 	config.last_commit = commit
 	config.last_tag = tag

@@ -22,13 +22,21 @@ test_repo = "https://gitlab.com/rubenwardy/testmod"
 master_head = "23d12265ff6de84548b2e3e90dc7351a54f63f00"
 test_branch_head = "51b54f00c3b3d712417a1cc4bfaa6cbdc7aac3fc"
 v4_commit = "c07d27c3a466d2102d1ba5473d172c74e6b3e0d7"
+latest_tag_name = "v5"
+latest_tag_commit = "23d12265ff6de84548b2e3e90dc7351a54f63f00"
+latest_tag_message = """
+* One thing
+* Second
+* Third
+""".strip()
 random_commit = "84a2e53ff046eacbdbb80f3a00c58510885fefca"
 
 
 def test_get_latest_tag():
-	tag, commit = get_latest_tag(test_repo)
-	assert tag == "v4"
-	assert commit == v4_commit
+	tag, commit, message = get_latest_tag(test_repo)
+	assert tag == latest_tag_name
+	assert commit == latest_tag_commit
+	assert message == latest_tag_message
 
 
 def test_get_latest_commit():
@@ -68,6 +76,8 @@ def test_git_clone_branch():
 def test_git_clone_tag():
 	with clone_repo(test_repo, "v4", recursive=True) as repo:
 		assert repo.head.commit.hexsha == v4_commit
+
+		# v4 isn't on the master branch, let's check there's no master branch files
 		assert os.path.isfile(os.path.join(repo.working_tree_dir, "init.lua"))
 		assert not os.path.isfile(os.path.join(repo.working_tree_dir, "chatcmdbuilder", "init.lua"))
 		assert not os.path.isfile(os.path.join(repo.working_tree_dir, "test-branch.txt"))
