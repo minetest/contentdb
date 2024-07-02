@@ -102,6 +102,7 @@ def _get_all_feed(feed_url: str):
 	releases = _get_releases_feed(PackageRelease.query, "")["items"]
 	packages = _get_new_packages_feed("")["items"]
 	items = releases + packages
+	items.sort(reverse=True, key=lambda x: x["date_published"])
 
 	return _make_feed(gettext("ContentDB all"), feed_url, items)
 
