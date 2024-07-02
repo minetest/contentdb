@@ -12,4 +12,5 @@ Follow new releases for a package:
 
 ```
 https://content.minetest.net/packages/AUTHOR/NAME/releases_feed.atom
+https://content.minetest.net/packages/AUTHOR/NAME/releases_feed.json
 ```

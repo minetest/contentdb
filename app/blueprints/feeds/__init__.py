@@ -80,7 +80,7 @@ def _get_releases_feed(query, feed_url: str):
 	items = [{
 			"id": release.package.get_url("packages.view_release", id=release.id, absolute=True),
 			"language": "en",
-			"title": f"Update: {release.title} - {release.package.title}",
+			"title": f"\"{release.package.title}\" updated: {release.title}",
 			"content_html": render_markdown(release.release_notes) \
 				if release.release_notes else _render_link(release.package.get_url("packages.view_release", id=release.id, absolute=True)),
 			"author": {
