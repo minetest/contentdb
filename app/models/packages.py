@@ -1098,6 +1098,15 @@ class PackageRelease(db.Model):
 	downloads    = db.Column(db.Integer, nullable=False, default=0)
 	release_notes = db.Column(db.UnicodeText, nullable=True, default=None)
 
+	@property
+	def summary(self) -> typing.Optional[str]:
+		if self.release_notes is None:
+			return None
+		if self.release_notes.startswith("-") or self.release_notes.startswith("*"):
+			return None
+
+		return self.release_notes.split("\n")[0]
+
 	min_rel_id = db.Column(db.Integer, db.ForeignKey("minetest_release.id"), nullable=True, server_default=None)
 	min_rel    = db.relationship("MinetestRelease", foreign_keys=[min_rel_id])
 

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom" xmlns:media="http://search.yahoo.com/mrss/">
+	<title>{{ feed["title"] }}</title>
+	<subtitle>{{ feed["description"] }}</subtitle>
+	<link href="{{ feed["feed_url"] }}" rel="self" />
+	<link href="{{ feed["home_page_url"] }}" />
+	<updated>{{ feed["items"][0]["date_published"] }}</updated>
+	<id>{{ feed["feed_url"] }}</id>
+	{% if feed["authors"] %}
+		<author>
+			<name>{{ feed["authors"][0]["name"] }}</name>
+		</author>
+	{% endif %}
+	{%- for post in feed["items"] %}
+	<entry>
+		<title>{{ post["title"] | escape }}</title>
+		<link href="{{ post["url"] }}" rel="alternate" type="text/html" title="{{ post["title"] | escape }}" />
+		<published>{{ post["date_published"] }}</published>
+		<updated>{{ post["date_published"] }}</updated>
+		<id>{{ post["url"] }}</id>
+		<summary type="text">
+			{{ post["summary"] | escape }}
+		</summary>
+		<content xml:lang="{{ post["language"] }}" type="html"  xml:base="{{ post["url"] }}">
+			{{ post["content_html"] | escape }}
+		</content>
+		<author>
+			<name>{{ post["author"] }}</name>
+		</author>
+		{% for tag in post["tags"] %}
+			<category term="{{ tag | escape }}" />
+		{% endfor %}
+		{% if post["image"] %}
+			<media:thumbnail url="{{ post["image"] }}" />
+			<media:content medium="image" url="{{ post["image"] }}" />
+		{% endif %}
+	</entry>
+	{%- endfor %}
+</feed>

@@ -16,6 +16,13 @@
 	{% if package.get_thumb_url(3, True, "png") -%}
 		<meta name="og:image" content="{{ package.get_thumb_url(3, True, "png") }}"/>
 	{%- endif %}
+
+	<link rel="alternate" type="application/json"
+		href="{{ package.get_url('feeds.releases_package_json', absolute=True) }}"
+		title="{{ _('%(title)s releases', title=package.title) }}">
+	<link rel="alternate" type="application/atom+xml"
+		href="{{ package.get_url('feeds.releases_package_atom', absolute=True) }}"
+		title="{{ _('%(title)s releases', title=package.title) }}">
 {% endblock %}
 
 {% block scriptextra %}

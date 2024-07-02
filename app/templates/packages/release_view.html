@@ -1,0 +1,45 @@
+{% extends "packages/package_base.html" %}
+
+{% block title %}
+	{{ package.title }}
+{% endblock %}
+
+{% block content %}
+	{% if package.check_perm(current_user, "MAKE_RELEASE") %}
+		<a href="{{ package.get_url('packages.edit_release', id=release.id) }}" class="btn btn-primary float-end">
+			{{ _("Edit") }}
+		</a>
+	{% endif %}
+
+	<h1>{{ self.title() }}</h1>
+	<p>
+		<a href="{{ package.get_url('packages.view') }}">
+			{{ _("%(title)s by %(author)s", title=package.title, author=package.author.display_name) }}
+		</a>
+	</p>
+
+	<p>
+		{{ _("Name") }}: {{ release.name }}<br>
+		{{ _("Title") }}: {{ release.title }}
+	</p>
+	{% if release.release_notes %}
+		<div class="markdown panel my-5">
+			{{ release.release_notes | markdown }}
+		</div>
+	{% endif %}
+	<p>
+		{{ _("URL") }}: <a href="{{ release.url }}">{{ release.url }}</a><br />
+	</p>
+	{% if release.commit_hash %}
+		<p>
+			{{ _("Commit Hash") }}: {{ release.commit_hash }}<br />
+		</p>
+	{% endif %}
+
+	{% if release.task_id %}
+		<p>
+			{{ _("Importing...") }}
+			<a href="{{ url_for('tasks.check', id=release.task_id, r=release.get_edit_url()) }}">{{ _("view task") }}</a><br />
+		</p>
+	{% endif %}
+{% endblock %}

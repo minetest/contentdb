@@ -156,11 +156,21 @@ def download_release(package, id):
 	return redirect(release.url)
 
 
-@bp.route("/packages/<author>/<name>/releases/<int:id>/", methods=["GET", "POST"])
+@bp.route("/packages/<author>/<name>/releases/<int:id>/")
+@is_package_page
+def view_release(package, id):
+	release: PackageRelease = PackageRelease.query.get(id)
+	if release is None or release.package != package:
+		abort(404)
+
+	return render_template("packages/release_view.html", package=package, release=release)
+
+
+@bp.route("/packages/<author>/<name>/releases/<int:id>/edit/", methods=["GET", "POST"])
 @login_required
 @is_package_page
 def edit_release(package, id):
-	release : PackageRelease = PackageRelease.query.get(id)
+	release: PackageRelease = PackageRelease.query.get(id)
 	if release is None or release.package != package:
 		abort(404)
 

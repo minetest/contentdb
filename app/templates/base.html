@@ -20,8 +20,22 @@
 	<link rel="search" type="application/opensearchdescription+xml" href="/static/opensearch.xml" title="ContentDB" />
 
 	{% if noindex -%}
-	<meta name="robots" content="noindex">
+		<meta name="robots" content="noindex">
 	{%- endif %}
+
+	<link rel="alternate" type="application/json"
+			href="{{ abs_url_for('feeds.all_json') }}" title="{{ _('ContentDB all') }}">
+	<link rel="alternate" type="application/json"
+		href="{{ abs_url_for('feeds.packages_all_json') }}" title="{{ _('ContentDB new packages') }}">
+	<link rel="alternate" type="application/json"
+		href="{{ abs_url_for('feeds.releases_all_json') }}" title="{{ _('ContentDB package updates') }}">
+
+	<link rel="alternate" type="application/atom+xml"
+			href="{{ abs_url_for('feeds.all_atom') }}" title="{{ _('ContentDB all') }}">
+	<link rel="alternate" type="application/atom+xml"
+		href="{{ abs_url_for('feeds.packages_all_atom') }}" title="{{ _('ContentDB new packages') }}">
+	<link rel="alternate" type="application/atom+xml"
+		href="{{ abs_url_for('feeds.releases_all_atom') }}" title="{{ _('ContentDB package updates') }}">
 
 	{% block headextra %}{% endblock %}
 </head>
