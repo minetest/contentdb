@@ -263,6 +263,7 @@
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='policy_and_guidance') }}">{{ _("Policy and Guidance") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('donate.donate') }}#contentdb">{{ _("Donate") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help/api') }}">{{ _("API") }}</a></li>
+			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='help/feeds') }}">{{ _("RSS / Feeds") }}</a></li>
 			<li class="list-inline-item"><a href="{{ url_for('flatpage', path='privacy_policy') }}">{{ _("Privacy Policy") }}</a></li>
 			{% if request.endpoint != "flatpage" and request.endpoint != "report.report" %}
 				<li class="list-inline-item"><a href="{{ url_for('report.report', url=url_current()) }}">{{ _("Report / DMCA") }}</a></li>
