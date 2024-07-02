@@ -1099,11 +1099,11 @@ class PackageRelease(db.Model):
 	release_notes = db.Column(db.UnicodeText, nullable=True, default=None)
 
 	@property
-	def summary(self) -> typing.Optional[str]:
-		if self.release_notes is None:
-			return None
-		if self.release_notes.startswith("-") or self.release_notes.startswith("*"):
-			return None
+	def summary(self) -> str:
+		if self.release_notes is None or \
+				self.release_notes.startswith("-") or \
+				self.release_notes.startswith("*"):
+			return self.title
 
 		return self.release_notes.split("\n")[0]
 

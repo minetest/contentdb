@@ -17,6 +17,7 @@
 import datetime
 import enum
 
+from flask import current_app
 from flask_babel import lazy_gettext
 from flask_login import UserMixin
 from sqlalchemy import desc, text
@@ -246,11 +247,17 @@ class User(db.Model, UserMixin):
 	def can_access_todo_list(self):
 		return Permission.APPROVE_NEW.check(self) or Permission.APPROVE_RELEASE.check(self)
 
-	def get_profile_pic_url(self):
+	def get_profile_pic_url(self, absolute: bool = False):
 		if self.profile_pic:
-			return self.profile_pic
+			if absolute:
+				return current_app.config["BASE_URL"] + self.profile_pic
+			else:
+				return self.profile_pic
 		elif self.rank == UserRank.BOT:
-			return "/static/bot_avatar.png"
+			if absolute:
+				return current_app.config["BASE_URL"] + "/static/bot_avatar.png"
+			else:
+				return "/static/bot_avatar.png"
 		else:
 			from app.utils.gravatar import get_gravatar
 			return get_gravatar(self.email or f"{self.username}@content.minetest.net")

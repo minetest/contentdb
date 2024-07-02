@@ -25,7 +25,8 @@
 			{{ post["content_html"] | escape }}
 		</content>
 		<author>
-			<name>{{ post["author"] }}</name>
+			<name>{{ post["author"]["name"] }}</name>
+			<uri>{{ post["author"]["url"] }}</uri>
 		</author>
 		{% for tag in post["tags"] %}
 			<category term="{{ tag | escape }}" />
