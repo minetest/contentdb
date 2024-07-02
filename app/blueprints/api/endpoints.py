@@ -29,11 +29,11 @@ from sqlalchemy.sql.expression import func
 from app import csrf
 from app.logic.graphs import get_package_stats, get_package_stats_for_user, get_all_package_stats
 from app.markdown import render_markdown
-from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, ForumTopic, \
+from app.models import Tag, PackageState, PackageType, Package, db, PackageRelease, Permission, \
 	MinetestRelease, APIToken, PackageScreenshot, License, ContentWarning, User, PackageReview, Thread, Collection, \
 	PackageAlias, Language
 from app.querybuilder import QueryBuilder
-from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date
+from app.utils import is_package_page, get_int_or_abort, url_set_query, abs_url, is_yes, get_request_date, cached
 from app.utils.minetest_hypertext import html_to_minetest, package_info_as_hypertext, package_reviews_as_hypertext
 from . import bp
 from .auth import is_api_authd
@@ -50,18 +50,6 @@ def cors_allowed(f):
 		res.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
 		return res
 	return inner
-
-
-def cached(max_age: int):
-	def decorator(f):
-		@wraps(f)
-		def inner(*args, **kwargs):
-			res: Response = f(*args, **kwargs)
-			res.cache_control.max_age = max_age
-			return res
-		return inner
-
-	return decorator
 
 
 @bp.route("/api/packages/")

@@ -20,7 +20,7 @@ from flask_babel import gettext
 
 from app.markdown import render_markdown
 from app.models import Package, PackageState, db, PackageRelease
-from app.utils import is_package_page, abs_url_for
+from app.utils import is_package_page, abs_url_for, cached
 
 bp = Blueprint("feeds", __name__)
 
@@ -113,36 +113,42 @@ def _atomify(feed):
 
 
 @bp.route("/feeds/all.json")
+@cached(1800)
 def all_json():
 	feed = _get_all_feed(abs_url_for("feeds.all_json"))
 	return jsonify(feed)
 
 
 @bp.route("/feeds/all.atom")
+@cached(1800)
 def all_atom():
 	feed = _get_all_feed(abs_url_for("feeds.all_atom"))
 	return _atomify(feed)
 
 
 @bp.route("/feeds/packages.json")
+@cached(1800)
 def packages_all_json():
 	feed = _get_new_packages_feed(abs_url_for("feeds.packages_all_json"))
 	return jsonify(feed)
 
 
 @bp.route("/feeds/packages.atom")
+@cached(1800)
 def packages_all_atom():
 	feed = _get_new_packages_feed(abs_url_for("feeds.packages_all_atom"))
 	return _atomify(feed)
 
 
 @bp.route("/feeds/releases.json")
+@cached(1800)
 def releases_all_json():
 	feed = _get_releases_feed(PackageRelease.query, abs_url_for("feeds.releases_all_json"))
 	return jsonify(feed)
 
 
 @bp.route("/feeds/releases.atom")
+@cached(1800)
 def releases_all_atom():
 	feed = _get_releases_feed(PackageRelease.query, abs_url_for("feeds.releases_all_atom"))
 	return _atomify(feed)
@@ -150,6 +156,7 @@ def releases_all_atom():
 
 @bp.route("/packages/<author>/<name>/releases_feed.json")
 @is_package_page
+@cached(1800)
 def releases_package_json(package: Package):
 	feed = _get_releases_feed(package.releases, package.get_url("feeds.releases_package_json", absolute=True))
 	return jsonify(feed)
@@ -157,6 +164,7 @@ def releases_package_json(package: Package):
 
 @bp.route("/packages/<author>/<name>/releases_feed.atom")
 @is_package_page
+@cached(1800)
 def releases_package_atom(package: Package):
 	feed = _get_releases_feed(package.releases, package.get_url("feeds.releases_package_atom", absolute=True))
 	return _atomify(feed)

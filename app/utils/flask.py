@@ -16,10 +16,11 @@
 
 import datetime
 import typing
+from functools import wraps
 from urllib.parse import urljoin, urlparse, urlunparse
 
 import user_agents
-from flask import request, abort, url_for
+from flask import request, abort, url_for, Response
 from flask_babel import LazyString, lazy_gettext
 from werkzeug.datastructures import MultiDict
 
@@ -162,3 +163,15 @@ def get_daterange_options() -> typing.List[typing.Tuple[LazyString, str]]:
 		(lazy_gettext("Year to date"), url_set_query(start=year_start, end=now.isoformat())),
 		(lazy_gettext("Last year"), url_set_query(start=last_year_start, end=last_year_end)),
 	]
+
+
+def cached(max_age: int):
+	def decorator(f):
+		@wraps(f)
+		def inner(*args, **kwargs):
+			res: Response = f(*args, **kwargs)
+			res.cache_control.max_age = max_age
+			return res
+		return inner
+
+	return decorator
