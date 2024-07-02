@@ -27,7 +27,7 @@ bp = Blueprint("feeds", __name__)
 
 def _make_feed(title: str, feed_url: str, items: list):
 	return {
-		"version": "https://jsonfeeds.org/version/1",
+		"version": "https://jsonfeed.org/version/1",
 		"title": title,
 		"description": gettext("Welcome to the best place to find Minetest mods, games, and texture packs"),
 		"home_page_url": "https://content.minetest.net/",
@@ -79,7 +79,7 @@ def _get_releases_feed(query, feed_url: str):
 	items = [{
 			"id": release.package.get_url("packages.view_release", id=release.id, absolute=True),
 			"language": "en",
-			"title": f"{release.title} - {release.package.title}",
+			"title": f"Update: {release.title} - {release.package.title}",
 			"content_html": render_markdown(release.release_notes) \
 				if release.release_notes else _render_link(release.package.get_url("packages.view_release", id=release.id, absolute=True)),
 			"author": {
