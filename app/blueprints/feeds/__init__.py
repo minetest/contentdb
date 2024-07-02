@@ -38,6 +38,10 @@ def _make_feed(title: str, feed_url: str, items: list):
 	}
 
 
+def _render_link(url: str):
+	return f"<p><a href='{url}'>Read more</a></p>"
+
+
 def _get_new_packages_feed(feed_url: str) -> dict:
 	packages = (Package.query
 		.filter(Package.state == PackageState.APPROVED)
@@ -49,7 +53,8 @@ def _get_new_packages_feed(feed_url: str) -> dict:
 			"id": package.get_url("packages.view", absolute=True),
 			"language": "en",
 			"title": f"New: {package.title}",
-			"content_html": render_markdown(package.desc) if package.desc else None,
+			"content_html": render_markdown(package.desc) \
+				if package.desc else _render_link(package.get_url("packages.view", absolute=True)),
 			"author": {
 				"name": package.author.display_name,
 				"avatar": package.author.get_profile_pic_url(absolute=True),
@@ -75,7 +80,8 @@ def _get_releases_feed(query, feed_url: str):
 			"id": release.package.get_url("packages.view_release", id=release.id, absolute=True),
 			"language": "en",
 			"title": f"{release.title} - {release.package.title}",
-			"content_html": render_markdown(release.release_notes) if release.release_notes else None,
+			"content_html": render_markdown(release.release_notes) \
+				if release.release_notes else _render_link(release.package.get_url("packages.view_release", id=release.id, absolute=True)),
 			"author": {
 				"name": release.package.author.display_name,
 				"avatar": release.package.author.get_profile_pic_url(absolute=True),
