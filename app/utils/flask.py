@@ -175,3 +175,14 @@ def cached(max_age: int):
 		return inner
 
 	return decorator
+
+
+def cors_allowed(f):
+	@wraps(f)
+	def inner(*args, **kwargs):
+		res: Response = f(*args, **kwargs)
+		res.headers["Access-Control-Allow-Origin"] = "*"
+		res.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
+		res.headers["Access-Control-Allow-Headers"] = "Content-Type, Authorization"
+		return res
+	return inner
