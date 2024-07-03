@@ -23,7 +23,7 @@ from flask_babel import lazy_gettext, LazyString
 
 from app.logic.LogicError import LogicError
 from app.models import User, Package, PackageType, MetaPackage, Tag, ContentWarning, db, Permission, AuditSeverity, \
-	License, PackageDevState
+	License, PackageDevState, PackageState
 from app.utils import add_audit_log, has_blocked_domains, diff_dictionaries, describe_difference, normalize_line_endings
 from app.utils.url import clean_youtube_url
 
@@ -131,7 +131,13 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 			raise LogicError(403, lazy_gettext("Linking to blocked sites is not allowed"))
 
 	if "type" in data:
-		data["type"] = PackageType.coerce(data["type"])
+		new_type = PackageType.coerce(data["type"])
+		if new_type == package.type:
+			pass
+		elif package.state != PackageState.APPROVED:
+			package.type = new_type
+		else:
+			raise LogicError(403, lazy_gettext("You cannot change package type once approved"))
 
 	if "dev_state" in data:
 		data["dev_state"] = PackageDevState.coerce(data["dev_state"])

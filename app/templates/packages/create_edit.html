@@ -66,7 +66,12 @@
 			<legend>{{ _("Package") }}</legend>
 
 			<div class="row">
-			{{ render_field(form.type, class_="pkg_meta col-sm-3") }}
+			{% if package and package.approved %}
+				{{ render_field(form.type, class_="pkg_meta col-sm-3", disabled=True) }}
+				<input type="hidden" name="type" value="{{ form.type.data.to_name() }}">
+			{% else %}
+				{{ render_field(form.type, class_="pkg_meta col-sm-3") }}
+			{% endif %}
 			{{ render_field(form.title, class_="pkg_meta col-sm-5") }}
 			{% if package and package.approved and not package.check_perm(current_user, "CHANGE_NAME") %}
 				{{ render_field(form.name, class_="pkg_meta col-sm-4",
