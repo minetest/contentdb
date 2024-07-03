@@ -156,7 +156,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 		if "dQw4w9WgXcQ" in data["video_url"]:
 			raise LogicError(403, "Never gonna give you up / Never gonna let you down / Never gonna run around and desert you")
 
-	for key in ["name", "title", "short_desc", "desc", "type", "dev_state", "license", "media_license",
+	for key in ["name", "title", "short_desc", "desc", "dev_state", "license", "media_license",
 			"repo", "website", "issueTracker", "forums", "video_url", "donate_url", "translation_url"]:
 		if key in data:
 			setattr(package, key, data[key])
