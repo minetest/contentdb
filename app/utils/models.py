@@ -88,7 +88,7 @@ def add_notification(target, causer: User, type: NotificationType, title: str, u
 
 	if target.rank.at_least(UserRank.NEW_MEMBER) and target != causer:
 		session.query(Notification) \
-				.filter_by(user_id=target.id, causer_id=causer.id, type=type, title=title, url=url, package=package) \
+				.filter_by(user=target, causer=causer, type=type, title=title, url=url, package=package) \
 				.delete()
 		notif = Notification(target, causer, type, title, url, package)
 		session.add(notif)
@@ -175,7 +175,7 @@ def post_to_approval_thread(package: Package, user: User, message: str, is_statu
 	else:
 		msg = f"New comment on '{thread.title}'"
 
-	add_notification(thread.watchers, current_user, NotificationType.THREAD_REPLY, msg, thread.get_view_url(), package)
+	add_notification(thread.watchers, user, NotificationType.THREAD_REPLY, msg, thread.get_view_url(), package)
 
 	thread.replies.append(reply)
 
