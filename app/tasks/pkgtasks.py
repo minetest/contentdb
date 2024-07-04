@@ -108,19 +108,18 @@ def clear_removed_packages(all_packages: bool):
 	return f"Deleted {count} soft deleted packages packages"
 
 
-def _url_exists(url: str) -> bool:
+def _url_exists(url: str) -> str:
 	try:
-		with requests.get(url, stream=True) as response:
-			try:
-				response.raise_for_status()
-				return True
-			except requests.exceptions.HTTPError:
-				return False
+		with requests.get(url, stream=True, timeout=10) as response:
+			response.raise_for_status()
+			return ""
+	except requests.exceptions.HTTPError as e:
+		return str(e.response.status_code)
 	except requests.exceptions.ConnectionError:
-		return False
+		return "ConnectionError"
 
 
-def check_for_dead_links(package: Package) -> set[str]:
+def check_for_dead_links(package: Package) -> dict[str, str]:
 	links: list[Optional[str]] = [
 		package.repo,
 		package.website,
@@ -134,14 +133,15 @@ def check_for_dead_links(package: Package) -> set[str]:
 	if package.desc:
 		links.extend(get_links(render_markdown(package.desc), package.get_url("packages.view", absolute=True)))
 
-	bad_urls = set()
+	bad_urls = {}
 
 	for link in links:
 		if link is None:
 			continue
 
-		if not _url_exists(link):
-			bad_urls.add(link)
+		res = _url_exists(link)
+		if res != "":
+			bad_urls[link] = res
 
 	return bad_urls
 
@@ -155,7 +155,8 @@ def check_package_on_submit(package_id: int):
 	bad_urls = check_for_dead_links(package)
 	if len(bad_urls) > 0:
 		marked = f"Marked {package.title} as Changed Needed"
-		msg = "The following broken links were found on your package:\n\n" + "\n".join([f"- {x}" for x in bad_urls])
+		msg = ("The following broken links were found on your package:\n\n" +
+				"\n".join([f"- {link} [{res}]" for link, res in bad_urls.items()]))
 
 		system_user = get_system_user()
 		post_to_approval_thread(package, system_user, marked, is_status_update=True, create_thread=True)
