@@ -153,7 +153,9 @@ def get_commit_list(git_url: str, start: str, end: str) -> List[str]:
 
 def get_release_notes(git_url: str, start: str, end: str) -> Optional[str]:
 	commits = get_commit_list(git_url, start, end)
+	commits = [x for x in commits if not x.startswith("Merge ")]
 	if len(commits) == 0:
 		return None
 
-	return normalize_line_endings("\n".join(map(lambda x: f"- {x}", commits)) + f"\n<!-- auto from {start} to {end} -->")
+	text = "\n".join(map(lambda x: f"- {x}", commits)) + f"\n<!-- auto from {start[0:5]} to {end[0:5]} -->"
+	return normalize_line_endings(text)
