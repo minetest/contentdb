@@ -408,5 +408,5 @@ def delete_empty_threads():
 
 @action("DANGER: Check for broken links in all packages")
 def check_for_broken_links():
-	for package in Package.query.filter_by(state=PackageState.APPROVED).order_by(db.desc(Package.score)).limit(100).all():
+	for package in Package.query.filter_by(state=PackageState.APPROVED).all():
 		check_package_for_broken_links.delay(package.id)
