@@ -16,6 +16,7 @@
 
 import datetime
 import re
+import sys
 from typing import Optional
 
 import requests
@@ -114,12 +115,13 @@ def _url_exists(url: str) -> str:
 			response.raise_for_status()
 			return ""
 	except requests.exceptions.HTTPError as e:
+		print(f"   - [{e.response.status_code}] {url}", file=sys.stderr)
 		return str(e.response.status_code)
 	except requests.exceptions.ConnectionError:
 		return "ConnectionError"
 
 
-def check_for_dead_links(package: Package) -> dict[str, str]:
+def _check_for_dead_links(package: Package) -> dict[str, str]:
 	links: list[Optional[str]] = [
 		package.repo,
 		package.website,
@@ -132,6 +134,8 @@ def check_for_dead_links(package: Package) -> dict[str, str]:
 
 	if package.desc:
 		links.extend(get_links(render_markdown(package.desc), package.get_url("packages.view", absolute=True)))
+
+	print(f"Checking {package.title} ({len(links)} links) for broken links", file=sys.stderr)
 
 	bad_urls = {}
 
@@ -146,20 +150,42 @@ def check_for_dead_links(package: Package) -> dict[str, str]:
 	return bad_urls
 
 
+def _check_package(package: Package) -> Optional[str]:
+	bad_urls = _check_for_dead_links(package)
+	if len(bad_urls) > 0:
+		return ("The following broken links were found on your package:\n\n" +
+				"\n".join([f"- {link} [{res}]" for link, res in bad_urls.items()]))
+
+	return None
+
+
 @celery.task()
 def check_package_on_submit(package_id: int):
 	package = Package.query.get(package_id)
 	if package is None:
 		raise TaskError("No such package")
 
-	bad_urls = check_for_dead_links(package)
-	if len(bad_urls) > 0:
+	if package.state != PackageState.READY_FOR_REVIEW:
+		return
+
+	msg = _check_package(package)
+	if msg != "":
 		marked = f"Marked {package.title} as Changed Needed"
-		msg = ("The following broken links were found on your package:\n\n" +
-				"\n".join([f"- {link} [{res}]" for link, res in bad_urls.items()]))
 
 		system_user = get_system_user()
 		post_to_approval_thread(package, system_user, marked, is_status_update=True, create_thread=True)
 		post_to_approval_thread(package, system_user, msg, is_status_update=False, create_thread=True)
 		package.state = PackageState.CHANGES_NEEDED
+		db.session.commit()
+
+
+@celery.task(rate_limit="5/m")
+def check_package_for_broken_links(package_id: int):
+	package = Package.query.get(package_id)
+	if package is None:
+		raise TaskError("No such package")
+
+	msg = _check_package(package)
+	if msg:
+		post_bot_message(package, "Broken links", msg)
 		db.session.commit()
