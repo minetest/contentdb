@@ -17,6 +17,8 @@
 import datetime
 import re
 import sys
+from time import sleep
+from urllib.parse import urlparse
 from typing import Optional
 
 import requests
@@ -76,13 +78,7 @@ def notify_about_git_forum_links():
 					"package will improve the user experience.\n\nHere are some URLs you might wish to replace:\n"
 
 			for x in links:
-				line = f"\n* {x[1].replace('%', '')} -> {x[0].get_url('packages.view', absolute=True)}"
-				line_added = msg + line
-				if len(line_added) > 2000 - 150:
-					post_bot_message(package, title, msg)
-					msg = f"(...continued)\n{line}"
-				else:
-					msg = line_added
+				msg += f"\n* {x[1].replace('%', '')} -> {x[0].get_url('packages.view', absolute=True)}"
 
 			post_bot_message(package, title, msg)
 
@@ -111,11 +107,14 @@ def clear_removed_packages(all_packages: bool):
 
 def _url_exists(url: str) -> str:
 	try:
-		with requests.get(url, stream=True, timeout=10) as response:
+		headers = {
+			"User-Agent": "Mozilla/5.0 (compatible; ContentDB link checker; +https://content.minetest.net/)",
+		}
+		with requests.get(url, stream=True, headers=headers, timeout=10) as response:
 			response.raise_for_status()
 			return ""
 	except requests.exceptions.HTTPError as e:
-		print(f"   - [{e.response.status_code}] {url}", file=sys.stderr)
+		print(f"   - [{e.response.status_code}] <{url}>", file=sys.stderr)
 		return str(e.response.status_code)
 	except requests.exceptions.ConnectionError:
 		return "ConnectionError"
@@ -143,9 +142,15 @@ def _check_for_dead_links(package: Package) -> dict[str, str]:
 		if link is None:
 			continue
 
+		url = urlparse(link)
+		if url.scheme != "http" and url.scheme != "https":
+			continue
+
 		res = _url_exists(link)
 		if res != "":
 			bad_urls[link] = res
+
+		sleep(0.5)
 
 	return bad_urls
 

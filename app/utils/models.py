@@ -120,6 +120,29 @@ def add_system_audit_log(severity: AuditSeverity, title: str, url: str, package=
 	return add_audit_log(severity, get_system_user(), title, url, package, description)
 
 
+def add_replies(thread: Thread, user: User, message: str, continuation: str = "(continued)\n\n", is_status_update=False):
+	is_first = True
+	while message != "":
+		if len(message) > 1900:
+			idx = message[:1900].rfind("\n")
+			this_reply = message[:idx] + "\n\n…"
+			message = message[idx:]
+		else:
+			this_reply = message
+			message = ""
+
+		reply = ThreadReply()
+		reply.thread = thread
+		reply.author = user
+		reply.is_status_update = is_status_update
+		if is_first:
+			reply.comment = this_reply
+		else:
+			reply.comment = f"{continuation}{this_reply}"
+		thread.replies.append(reply)
+		is_first = False
+
+
 def post_bot_message(package: Package, title: str, message: str, session=None):
 	if session is None:
 		session = db.session
@@ -137,15 +160,11 @@ def post_bot_message(package: Package, title: str, message: str, session=None):
 		session.add(thread)
 		session.flush()
 
-	reply = ThreadReply()
-	reply.thread = thread
-	reply.author = system_user
-	reply.comment = "**{}**\n\n{}\n\nThis is an automated message, but you can reply if you need help".format(title, message)
-	session.add(reply)
+	add_replies(thread, system_user,
+			f"**{title}**\n\n{message}\n\nThis is an automated message, but you can reply if you need help",
+			continuation=f"(continued)\n\n**{title}**\n\n")
 
 	add_notification(thread.watchers, system_user, NotificationType.BOT, title, thread.get_view_url(), thread.package, session)
-
-	thread.replies.append(reply)
 
 
 def post_to_approval_thread(package: Package, user: User, message: str, is_status_update=True, create_thread=False):
@@ -163,12 +182,7 @@ def post_to_approval_thread(package: Package, user: User, message: str, is_statu
 		else:
 			return
 
-	reply = ThreadReply()
-	reply.thread = thread
-	reply.author = user
-	reply.is_status_update = is_status_update
-	reply.comment = message
-	db.session.add(reply)
+	add_replies(thread, user, message, is_status_update=is_status_update)
 
 	if is_status_update:
 		msg = f"{message} - {thread.title}"
@@ -176,8 +190,6 @@ def post_to_approval_thread(package: Package, user: User, message: str, is_statu
 		msg = f"New comment on '{thread.title}'"
 
 	add_notification(thread.watchers, user, NotificationType.THREAD_REPLY, msg, thread.get_view_url(), package)
-
-	thread.replies.append(reply)
 
 
 def get_games_from_csv(session: sqlalchemy.orm.Session, csv: str) -> List[Package]:
