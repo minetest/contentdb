@@ -452,6 +452,12 @@ class Package(db.Model):
 	def donate_url_actual(self):
 		return self.donate_url or self.author.donate_url
 
+	@property
+	def forums_url(self) -> typing.Optional[str]:
+		if self.forums is None:
+			return None
+
+		return "https://forum.minetest.net/viewtopic.php?t=" + str(self.forums)
 
 	enable_game_support_detection = db.Column(db.Boolean, nullable=False, default=True)
 

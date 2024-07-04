@@ -148,10 +148,20 @@ def post_bot_message(package: Package, title: str, message: str, session=None):
 	thread.replies.append(reply)
 
 
-def post_to_approval_thread(package: Package, user: User, message: str, is_status_update=True):
+def post_to_approval_thread(package: Package, user: User, message: str, is_status_update=True, create_thread=False):
 	thread = package.review_thread
 	if thread is None:
-		return
+		if create_thread:
+			thread = Thread()
+			thread.author = user
+			thread.title = "Package approval comments"
+			thread.private = True
+			thread.package = package
+			db.session.add(thread)
+			db.session.flush()
+			package.review_thread = thread
+		else:
+			return
 
 	reply = ThreadReply()
 	reply.thread = thread

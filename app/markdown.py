@@ -15,6 +15,7 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 from functools import partial
+from urllib.parse import urljoin
 
 import bleach
 from bleach import Cleaner
@@ -205,3 +206,9 @@ def get_user_mentions(html: str) -> set:
 	soup = BeautifulSoup(html, "html.parser")
 	links = soup.select("a[data-username]")
 	return set([x.get("data-username") for x in links])
+
+
+def get_links(html: str, url: str) -> set:
+	soup = BeautifulSoup(html, "html.parser")
+	links = soup.select("a[href]")
+	return set([urljoin(url, x.get("href")) for x in links])

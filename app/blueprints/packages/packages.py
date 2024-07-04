@@ -36,6 +36,7 @@ from app.querybuilder import QueryBuilder
 from app.rediscache import has_key, set_temp_key
 from app.tasks.importtasks import import_repo_screenshot, check_zip_release, remove_package_game_support, \
 	update_package_game_support
+from app.tasks.pkgtasks import check_package_on_submit
 from app.tasks.webhooktasks import post_discord_webhook
 
 from . import bp, get_package_tabs
@@ -435,6 +436,8 @@ def move_to_state(package):
 	post_to_approval_thread(package, current_user, msg, True)
 
 	db.session.commit()
+
+	check_package_on_submit.delay(package.id)
 
 	if package.state == PackageState.CHANGES_NEEDED:
 		flash(gettext("Please comment what changes are needed in the approval thread"), "warning")

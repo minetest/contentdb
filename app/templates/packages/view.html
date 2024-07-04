@@ -221,7 +221,7 @@
 						</a>
 					{% endif %}
 					{% if package.forums %}
-						<a class="btn" href="https://forum.minetest.net/viewtopic.php?t={{ package.forums }}">
+						<a class="btn" href="{{ package.forums_url }}">
 							<i class="fas fa-comments"></i>
 							<span class="count">{{ _("Forums") }}</span>
 						</a>
