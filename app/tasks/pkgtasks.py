@@ -169,7 +169,7 @@ def check_package_on_submit(package_id: int):
 		return
 
 	msg = _check_package(package)
-	if msg != "":
+	if msg:
 		marked = f"Marked {package.title} as Changed Needed"
 
 		system_user = get_system_user()
