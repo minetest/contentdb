@@ -89,6 +89,9 @@ class GSPackage:
 	def unsupported_games(self) -> set[str]:
 		return self.user_unsupported_games
 
+	def add_error(self, error: str):
+		return self.errors.add(error)
+
 
 class GameSupport:
 	packages: Dict[str, GSPackage]
@@ -157,14 +160,14 @@ class GameSupport:
 				# Dep is game independent
 				pass
 			elif len(for_dep) == 0:
-				package.errors.add(f"Unable to fulfill dependency {depend}")
+				package.add_error(f"Unable to fulfill dependency {depend}")
 				return None
 			elif len(ret) == 0:
 				ret = for_dep
 			else:
 				ret.intersection_update(for_dep)
 				if len(ret) == 0:
-					package.errors.add("Game support conflict, unable to install package on any games")
+					package.add_error("Game support conflict, unable to install package on any games")
 					return None
 
 		return ret
@@ -176,41 +179,41 @@ class GameSupport:
 			err = f"Dependency cycle detected: {' -> '.join(visited)} -> {package.id_}"
 			for id_ in visited:
 				package2 = self.get(id_)
-				package2.errors.add(err)
+				package2.add_error(err)
 			return None
-
-		visited = visited.copy()
-		visited.append(package.id_)
 
 		if package.type == PackageType.GAME:
 			return {package.name}
 		elif package.is_confirmed:
 			return package.supported_games
-		else:
-			ret = self._get_supported_games_for_deps(package, visited)
-			if ret is None:
-				assert len(package.errors) > 0
-				return None
 
-			ret = ret.copy()
-			ret.difference_update(package.user_unsupported_games)
-			package.detected_supported_games = ret
-			self.modified_packages.add(package)
+		visited = visited.copy()
+		visited.append(package.id_)
 
-			if len(ret) > 0:
-				for supported in package.user_supported_games:
-					if supported not in ret:
-						package.errors.add(f"`{supported}` is specified in supported_games but it is impossible to run {package.name} in that game. " +
-								f"Its dependencies can only be fulfilled in {', '.join([f'`{x}`' for x in ret])}. " +
-								"Check your hard dependencies.")
+		ret = self._get_supported_games_for_deps(package, visited)
+		if ret is None:
+			assert len(package.errors) > 0
+			return None
 
-				if package.supports_all_games:
-					package.errors.add(
-							"This package cannot support all games as some dependencies require specific game(s): " +
-							", ".join([f'`{x}`' for x in ret]))
+		ret = ret.copy()
+		ret.difference_update(package.user_unsupported_games)
+		package.detected_supported_games = ret
+		self.modified_packages.add(package)
 
-			package.is_confirmed = True
-			return package.supported_games
+		if len(ret) > 0:
+			for supported in package.user_supported_games:
+				if supported not in ret:
+					package.add_error(f"`{supported}` is specified in supported_games but it is impossible to run {package.name} in that game. " +
+							f"Its dependencies can only be fulfilled in {', '.join([f'`{x}`' for x in ret])}. " +
+							"Check your hard dependencies.")
+
+			if package.supports_all_games:
+				package.add_error(
+						"This package cannot support all games as some dependencies require specific game(s): " +
+						", ".join([f'`{x}`' for x in ret]))
+
+		package.is_confirmed = True
+		return package.supported_games
 
 	def on_update(self, package: GSPackage, old_provides: Optional[set[str]] = None):
 		to_update = {package}
