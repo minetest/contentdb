@@ -93,12 +93,10 @@ class GSPackage:
 class GameSupport:
 	packages: Dict[str, GSPackage]
 	modified_packages: set[GSPackage]
-	dependency_cache: Dict[str, Tuple[Optional[bool], Optional[set[str]]]]
 
 	def __init__(self):
 		self.packages = {}
 		self.modified_packages = set()
-		self.dependency_cache = {}
 
 	@property
 	def all_confirmed(self):
@@ -136,11 +134,6 @@ class GameSupport:
 	def _get_supported_games_for_modname(self, depend: str, visited: list[str]):
 		dep_supports_all = False
 		for_dep = set()
-
-		if depend in self.dependency_cache:
-			dep_supports_all, for_dep = self.dependency_cache[depend]
-			return dep_supports_all, for_dep
-
 		for provider in self.get_all_that_provide(depend):
 			found_in = self._get_supported_games(provider, visited)
 			if found_in is None:
@@ -152,7 +145,6 @@ class GameSupport:
 			else:
 				for_dep.update(found_in)
 
-		self.dependency_cache[depend] = (dep_supports_all, for_dep)
 		return dep_supports_all, for_dep
 
 	def _get_supported_games_for_deps(self, package: GSPackage, visited: list[str]) -> Optional[set[str]]:
@@ -221,7 +213,6 @@ class GameSupport:
 			return package.supported_games
 
 	def on_update(self, package: GSPackage, old_provides: Optional[set[str]] = None):
-		self.dependency_cache = {}
 		to_update = {package}
 		checked = set()
 
@@ -245,12 +236,10 @@ class GameSupport:
 						checked.add(depending_package)
 
 	def on_remove(self, package: GSPackage):
-		self.dependency_cache = {}
 		del self.packages[package.id_]
 		self.on_update(package)
 
 	def on_first_run(self):
-		self.dependency_cache = {}
 		for package in self.packages.values():
 			if not package.is_confirmed:
 				self.on_update(package)
