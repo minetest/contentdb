@@ -34,7 +34,7 @@
 					{% endif %}
 
 					<a name="reply-{{ r.id }}" class="text-muted float-end"
-							href="{{ r.get_url() }}">
+							href="{{ r.get_url() }}" title="{{ r.created_at | full_datetime }}">
 						{{ r.created_at | datetime }}
 					</a>
 				</div>
@@ -97,7 +97,7 @@
 		</div>
 		<div class="col-auto">
 			<a name="reply-{{ r.id }}" class="text-muted float-end"
-					href="{{ r.get_url() }}">
+					href="{{ r.get_url() }}" title="{{ r.created_at | full_datetime }}">
 				{{ r.created_at | datetime }}
 			</a>
 		</div>
@@ -239,7 +239,7 @@
 					<span>
 						{{ t.author.display_name }}
 					</span>
-					<span class="text-muted ms-3">
+					<span class="text-muted ms-3" title="{{ r.created_at | full_datetime }}">
 						{{ t.created_at | datetime }}
 					</span>
 				</div>
@@ -257,7 +257,7 @@
 						<span>
 							{{ latest.author.display_name }}
 						</span><br />
-						<span class="text-muted">
+						<span class="text-muted" title="{{ latest.created_at | full_datetime }}">
 							{{ latest.created_at | datetime }}
 						</span>
 					{% endif %}

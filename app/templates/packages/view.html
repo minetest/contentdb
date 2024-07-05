@@ -642,7 +642,7 @@
 						<dd><i>{{ _("Unknown") }}</i></dd>
 					{% endif %}
 					<dt>{{ _("Added") }}</dt>
-					<dd>{{ package.created_at | datetime }}</dd>
+					<dd title="{{ package.created_at | full_datetime }}">{{ package.created_at | datetime }}</dd>
 					<dt>{{ _("Maintainers") }}</dt>
 					<dd>
 						{% for user in package.maintainers %}

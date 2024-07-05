@@ -51,7 +51,8 @@
 							</a>
 
 							<a name="reply-{{ reply.id }}" class="text-muted float-end"
-									href="{{ url_for('threads.view', id=review.thread.id) }}#reply-{{ reply.id }}">
+									href="{{ url_for('threads.view', id=review.thread.id) }}#reply-{{ reply.id }}"
+									title="{{ review.created_at | full_datetime }}">
 								{{ review.created_at | datetime }}
 							</a>
 						</div>

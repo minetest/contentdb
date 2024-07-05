@@ -52,7 +52,8 @@
 						{% endif %}
 
 						<a name="reply-{{ r.id }}" class="text-muted float-end"
-								href="{{ url_for('threads.view', id=r.thread.id) }}#reply-{{ r.id }}">
+								href="{{ url_for('threads.view', id=r.thread.id) }}#reply-{{ r.id }}"
+								title="{{ r.created_at | full_datetime }}">
 							{{ r.created_at | datetime }}
 						</a>
 					</div>

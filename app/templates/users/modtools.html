@@ -118,7 +118,7 @@
 {% for ver in user.email_verifications %}
 	{% if not ver.is_expired %}
 	<li>
-		{{ ver.email }}, {{ ver.created_at | datetime }}:
+		{{ ver.email }}, {{ ver.created_at | full_datetime }}:
 		<a href="{{ url_for('users.verify_email', token=ver.token) }}">verify</a>
 	</li>
 	{% endif %}

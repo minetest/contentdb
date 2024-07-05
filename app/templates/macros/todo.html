@@ -21,7 +21,7 @@
 						{{ _("On %(trigger)s, do %(action)s", trigger=config.trigger.value, action=action) }}
 					{% else %}
 						{{ config.get_message() }}<br />
-						<span class="text-muted">
+						<span class="text-muted" title="{{ config.outdated_at | full_datetime }}">
 							{{ config.outdated_at | datetime }}
 						</span>
 					{% endif %}
