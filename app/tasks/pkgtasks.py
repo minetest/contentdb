@@ -27,9 +27,9 @@ import urllib3
 from sqlalchemy import or_, and_
 
 from app.markdown import get_links, render_markdown
-from app.models import Package, db, PackageState, AuditLogEntry
+from app.models import Package, db, PackageState, AuditLogEntry, AuditSeverity
 from app.tasks import celery, TaskError
-from app.utils import post_bot_message, post_to_approval_thread, get_system_user
+from app.utils import post_bot_message, post_to_approval_thread, get_system_user, add_audit_log
 
 
 @celery.task()
@@ -186,6 +186,7 @@ def check_package_on_submit(package_id: int):
 		post_to_approval_thread(package, system_user, marked, is_status_update=True, create_thread=True)
 		post_to_approval_thread(package, system_user, msg, is_status_update=False, create_thread=True)
 		package.state = PackageState.CHANGES_NEEDED
+		add_audit_log(AuditSeverity.EDITOR, system_user, marked, package.get_url("packages.view"), package)
 		db.session.commit()
 
 
