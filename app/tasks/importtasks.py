@@ -342,16 +342,15 @@ def check_zip_release(self, id, path):
 def check_all_zip_files():
 	result = []
 
-	with get_temp_dir() as temp:
-		releases = PackageRelease.query.all()
-		for release in releases:
-			with ZipFile(release.file_path, 'r') as zf:
-				if not _check_zip_file(temp, zf):
-					print(f"Unsafe zip file for {release.package.get_id} at {release.file_path}", file=sys.stderr)
-					result.append({
-						"package": release.package.get_id(),
-						"file": release.file_path,
-					})
+	releases = PackageRelease.query.all()
+	for release in releases:
+		with ZipFile(release.file_path, 'r') as zf:
+			if not _check_zip_file("/tmp/example", zf):
+				print(f"Unsafe zip file for {release.package.get_id()} at {release.file_path}", file=sys.stderr)
+				result.append({
+					"package": release.package.get_id(),
+					"file": release.file_path,
+				})
 
 	return json.dumps(result)
 
