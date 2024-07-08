@@ -217,6 +217,14 @@ def test_cycle_fails_safely():
 	"""
 	A dependency cycle shouldn't completely break the graph if a mod is
 	available elsewhere
+
+	a -> d
+	game has d
+
+	cycle:
+	d -> b
+	b -> c
+	c -> b
 	"""
 	support = GameSupport()
 	support.add(make_game("game1", ["default", "mod_d"]))
@@ -238,6 +246,68 @@ def test_cycle_fails_safely():
 		"author/mod_c: Unable to fulfill dependency mod_b",
 		"author/mod_c: Dependency cycle detected: author/mod_b -> author/mod_c -> author/mod_b",
 		"author/mod_b: Dependency cycle detected: author/mod_b -> author/mod_c -> author/mod_b"
+	}
+
+
+def test_cycle_not_fulfill_with_conflict():
+	"""
+	Test that cycles aren't fulfilled by installing a mod multiple times, which would conflict
+
+	a -> b -> a
+	game1 has a
+
+	b should be {game1}
+	a should be unfulfilled
+	"""
+	support = GameSupport()
+	support.add(make_game("game1", ["default", "mod_a"]))
+	modB = support.add(make_mod("mod_b", ["mod_b"], ["mod_a"]))
+	modA = support.add(make_mod("mod_a", ["mod_a"], ["mod_b"]))
+	support.on_first_run()
+
+	assert modB.is_confirmed
+	assert modB.detected_supported_games == {"game1"}
+
+	# Can't install mod_a and game1 at the same time
+	assert not modA.is_confirmed
+	assert modA.detected_supported_games == {}
+
+	assert support.all_errors == {
+		"author/mod_a: Dependency cycle detected: author/mod_b -> author/mod_a -> author/mod_b",
+		"author/mod_b: Dependency cycle detected: author/mod_b -> author/mod_a -> author/mod_b",
+	}
+
+
+def test_cycle_not_fulfill_with_conflict2():
+	"""
+	Test that cycles aren't fulfilled by installing a mod multiple times, which would conflict
+
+	a -> b -> a
+	game1 has a
+
+	b should be {game1}
+	a should be unfulfilled
+	"""
+	support = GameSupport()
+	support.add(make_game("game1", ["default"]))
+	modB = support.add(make_mod("mod_b", ["mod_b"], ["mod_a"]))
+	modA2 = support.add(make_mod("mod_a", ["mod_a"], ["default"]))
+	modA = support.add(make_mod("mod_a", ["mod_a"], ["mod_b"]))
+	support.on_first_run()
+
+	assert modB.is_confirmed
+	assert modB.detected_supported_games == {"game1"}
+
+	assert modA2.is_confirmed
+	assert modA2.detected_supported_games == {"game1"}
+
+	# Can't install modA and modA2 at the same time
+	assert not modA.is_confirmed
+	assert modA.detected_supported_games == {}
+
+	assert support.all_errors == {
+		"author/mod_a: Dependency cycle detected: author/mod_b -> author/mod_a -> author/mod_b",
+		"author/mod_b: Dependency cycle detected: author/mod_b -> author/mod_a -> author/mod_b",
 	}
 
 
