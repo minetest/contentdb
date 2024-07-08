@@ -282,6 +282,30 @@ def update_translations(package: Package, tree: PackageTreeNode):
 			.update(to_update)
 
 
+def safe_extract_zip(temp_dir: str, archive_path: str) -> bool:
+	with ZipFile(archive_path, 'r') as zf:
+		# No more than 256MB
+		total_size = sum(e.file_size for e in zf.infolist())
+		if total_size > 256 * 1024 * 1024:
+			return False
+
+		# Check paths
+		for member in zf.infolist():
+			# We've had cases of newlines in filenames
+			if "\n" in member.filename:
+				return False
+
+			file_path = os.path.realpath(os.path.join(temp_dir, member.filename))
+			if not file_path.startswith(os.path.realpath(temp_dir)):
+				return False
+
+		# Extract all
+		for member in zf.infolist():
+			zf.extract(member, temp_dir)
+
+	return True
+
+
 @celery.task(bind=True)
 def check_zip_release(self, id, path):
 	release = PackageRelease.query.get(id)
@@ -291,8 +315,10 @@ def check_zip_release(self, id, path):
 		raise TaskError("No package attached to release")
 
 	with get_temp_dir() as temp:
-		with ZipFile(path, 'r') as zip_ref:
-			zip_ref.extractall(temp)
+		if not safe_extract_zip(temp, path):
+			release.approved = False
+			db.session.commit()
+			raise Exception(f"Unsafe zip file at {path}")
 
 		post_release_check_update(self, release, temp)
 
@@ -310,8 +336,8 @@ def import_languages(self, id, path):
 		raise TaskError("No package attached to release")
 
 	with get_temp_dir() as temp:
-		with ZipFile(path, 'r') as zip_ref:
-			zip_ref.extractall(temp)
+		if not safe_extract_zip(temp, path):
+			raise Exception(f"Unsafe zip file at {path}")
 
 		try:
 			tree: PackageTreeNode = build_tree(temp,
