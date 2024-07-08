@@ -196,7 +196,7 @@ Filter query parameters:
 * `flag`: Filter to show packages with [Content Flags](/help/content_flags/).
 * `hide`:  Hide content based on tags or [Content Flags](/help/content_flags/).
 * `license`: Filter by [license name](#licenses). Multiple licenses are OR-ed together, ie: `&license=MIT&license=LGPL-2.1-only`
-* `game`: Filter by [Game Support](/help/game_support/), ex: `Wuzzy/mineclone2`. (experimental, doesn't show items that support every game currently).
+* `game`: Filter by [Game Support](/help/game_support/), ex: `Warr1024/nodecore`. (experimental, doesn't show items that support every game currently).
 * `lang`: Filter by translation support, eg: `en`/`de`/`ja`/`zh_TW`.
 * `protocol_version`:  Only show packages supported by this Minetest protocol version.
 * `engine_version`:  Only show packages supported by this Minetest engine version, eg: `5.3.0`.

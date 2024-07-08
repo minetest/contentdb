@@ -20,12 +20,12 @@ Example response:
 ```json
 [
     {
-        "author": "Wuzzy",
-        "name": "mineclone2",
-        "release": 4209,
+        "author": "Warr1023",
+        "name": "nodecore",
+        "release": 1234,
         "short_description": "A short description",
-        "thumbnail": "https://content.minetest.net/thumbnails/1/tgbH5CwlAZ.jpg",
-        "title": "MineClone 2",
+        "thumbnail": "https://content.minetest.net/thumbnails/1/abcdef.jpg",
+        "title": "NodeCore",
         "type": "game"
     }
 ]

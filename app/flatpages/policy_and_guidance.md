@@ -37,18 +37,16 @@ See [Content Flags](/help/content_flags/).
 ### 2.2. State of Completion
 
 ContentDB should only currently contain playable content - content which is
-sufficiently complete to be useful to end-users. It's fine to add stuff which
-is still a Work in Progress (WIP) as long as it adds sufficient value;
-MineClone 2 is a good example of a WIP package which may break between releases
-but still has value. Note that this doesn't mean that you should add a thing
-you started working on yesterday, it's worth adding all the basic stuff to
-make your package useful.
+sufficiently complete to be useful to end-users. It's fine to add stuff which is
+still a Work in Progress (WIP) as long as it adds sufficient value; Note that
+this doesn't mean that you should add a thing you started working on yesterday,
+it's worth adding all the basic stuff to make your package useful.
 
-You should make sure to mark Work in Progress stuff as such in the "maintenance status" column,
-as this will help advise players.
+You should make sure to mark Work in Progress stuff as such in the "maintenance
+status" column, as this will help advise players.
 
-Adding non-player facing mods, such as libraries and server tools, is perfectly fine
-and encouraged. ContentDB isn't just for player-facing things, and adding
+Adding non-player facing mods, such as libraries and server tools, is perfectly
+fine and encouraged. ContentDB isn't just for player-facing things, and adding
 libraries allows them to be installed when a mod depends on it.
 
 
@@ -98,8 +96,8 @@ of the content on servers or singleplayer is also not permitted.**
 However, closed sourced licenses are allowed if they allow the above.
 
 If the license you use is not on the list then please select "Other", and we'll
-get around to adding it. We tend to reject custom/untested licenses, and 
-reserve the right to decide whether a license should be included. 
+get around to adding it. We tend to reject custom/untested licenses, and
+reserve the right to decide whether a license should be included.
 
 Please note that the definitions of "free" and "non-free" is the same as that
 of the [Free Software Foundation](https://www.gnu.org/philosophy/free-sw.en.html).
