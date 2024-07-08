@@ -18,6 +18,7 @@ import datetime
 import json
 import os
 import shutil
+import sys
 from json import JSONDecodeError
 from zipfile import ZipFile
 
@@ -282,22 +283,32 @@ def update_translations(package: Package, tree: PackageTreeNode):
 			.update(to_update)
 
 
-def safe_extract_zip(temp_dir: str, archive_path: str) -> bool:
-	with ZipFile(archive_path, 'r') as zf:
-		# No more than 256MB
-		total_size = sum(e.file_size for e in zf.infolist())
-		if total_size > 256 * 1024 * 1024:
+def _check_zip_file(temp_dir: str, zf: ZipFile) -> bool:
+	# No more than 300MB
+	total_size = sum(e.file_size for e in zf.infolist())
+	if total_size > 300 * 1024 * 1024:
+		print(f"zip file is too large: {total_size} bytes", file=sys.stderr)
+		return False
+
+	# Check paths
+	for member in zf.infolist():
+		# We've had cases of newlines in filenames
+		if "\n" in member.filename:
+			print("zip file member contains invalid characters", file=sys.stderr)
 			return False
 
-		# Check paths
-		for member in zf.infolist():
-			# We've had cases of newlines in filenames
-			if "\n" in member.filename:
-				return False
+		file_path = os.path.realpath(os.path.join(temp_dir, member.filename))
+		if not file_path.startswith(os.path.realpath(temp_dir)):
+			print(f"zip file contains path out-of-bounds: {file_path}", file=sys.stderr)
+			return False
 
-			file_path = os.path.realpath(os.path.join(temp_dir, member.filename))
-			if not file_path.startswith(os.path.realpath(temp_dir)):
-				return False
+	return True
+
+
+def _safe_extract_zip(temp_dir: str, archive_path: str) -> bool:
+	with ZipFile(archive_path, 'r') as zf:
+		if not _check_zip_file(temp_dir, zf):
+			return False
 
 		# Extract all
 		for member in zf.infolist():
@@ -315,7 +326,7 @@ def check_zip_release(self, id, path):
 		raise TaskError("No package attached to release")
 
 	with get_temp_dir() as temp:
-		if not safe_extract_zip(temp, path):
+		if not _safe_extract_zip(temp, path):
 			release.approved = False
 			db.session.commit()
 			raise Exception(f"Unsafe zip file at {path}")
@@ -327,6 +338,24 @@ def check_zip_release(self, id, path):
 		db.session.commit()
 
 
+@celery.task()
+def check_all_zip_files():
+	result = []
+
+	with get_temp_dir() as temp:
+		releases = PackageRelease.query.all()
+		for release in releases:
+			with ZipFile(release.file_path, 'r') as zf:
+				if not _check_zip_file(temp, zf):
+					print(f"Unsafe zip file for {release.package.get_id} at {release.file_path}", file=sys.stderr)
+					result.append({
+						"package": release.package.get_id(),
+						"file": release.file_path,
+					})
+
+	return json.dumps(result)
+
+
 @celery.task(bind=True)
 def import_languages(self, id, path):
 	release = PackageRelease.query.get(id)
@@ -336,7 +365,7 @@ def import_languages(self, id, path):
 		raise TaskError("No package attached to release")
 
 	with get_temp_dir() as temp:
-		if not safe_extract_zip(temp, path):
+		if not _safe_extract_zip(temp, path):
 			raise Exception(f"Unsafe zip file at {path}")
 
 		try:
