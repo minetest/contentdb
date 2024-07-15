@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-06-22 16:06+0100\n"
-"PO-Revision-Date: 2024-06-30 06:09+0000\n"
-"Last-Translator: liu lizhi <kz-xy@163.com>\n"
+"PO-Revision-Date: 2024-07-12 15:09+0000\n"
+"Last-Translator: y5nw <y5nw@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified) <https://hosted.weblate.org/projects/"
 "minetest/contentdb/zh_Hans/>\n"
 "Language: zh_CN\n"
@@ -107,20 +107,20 @@ msgstr ""
 #: app/_translations.py:30
 msgctxt "tags"
 msgid "Inventory"
-msgstr ""
+msgstr "物品栏"
 
 #. NOTE: tags: description for inventory
 #: app/_translations.py:32
+#, fuzzy
 msgctxt "tags"
 msgid "Changes the inventory GUI"
-msgstr ""
+msgstr "修改物品栏界面"
 
 #. NOTE: tags: title for developer_tools
 #: app/_translations.py:34
-#, fuzzy
 msgctxt "tags"
 msgid "Developer Tools"
-msgstr "版主工具"
+msgstr "开发者工具"
 
 #. NOTE: tags: description for developer_tools
 #: app/_translations.py:36
@@ -390,11 +390,13 @@ msgstr "存储空间"
 
 #. NOTE: tags: description for custom_mapgen
 #: app/_translations.py:120
+#, fuzzy
 msgctxt "tags"
 msgid ""
 "Contains a completely custom mapgen implemented in Lua, usually requires "
 "worlds to be set to the 'singlenode' mapgen."
-msgstr ""
+msgstr "原创、使用 Lua 实现的地图生成器，一般要求创建世界时使用“"
+"singlenode\"地图生成器。"
 
 #. NOTE: tags: title for survival
 #: app/_translations.py:122
@@ -438,15 +440,17 @@ msgstr ""
 
 #. NOTE: tags: title for library
 #: app/_translations.py:134
+#, fuzzy
 msgctxt "tags"
 msgid "API / Library"
-msgstr ""
+msgstr "API / 库"
 
 #. NOTE: tags: description for library
 #: app/_translations.py:136
+#, fuzzy
 msgctxt "tags"
 msgid "Primarily adds an API for other mods to use"
-msgstr ""
+msgstr "为其他 Mod 提供 API"
 
 #. NOTE: tags: title for hud
 #: app/_translations.py:138
@@ -465,7 +469,7 @@ msgstr ""
 #, fuzzy
 msgctxt "tags"
 msgid "Mini-game"
-msgstr "名称"
+msgstr "小游戏"
 
 #. NOTE: tags: description for mini-game
 #: app/_translations.py:144
@@ -1060,8 +1064,9 @@ msgid "License"
 msgstr "许可证"
 
 #: app/blueprints/packages/advanced_search.py:67
+#, fuzzy
 msgid "Supports Game"
-msgstr ""
+msgstr "支持的子游戏"
 
 #: app/blueprints/packages/advanced_search.py:71
 #: app/templates/admin/storage.html:39
@@ -1088,11 +1093,12 @@ msgstr ""
 
 #: app/blueprints/packages/advanced_search.py:77
 msgid "Minetest Version"
-msgstr ""
+msgstr "Minetest 版本"
 
 #: app/blueprints/packages/advanced_search.py:81
+#, fuzzy
 msgid "Sort by"
-msgstr ""
+msgstr "排序方式"
 
 #: app/blueprints/packages/advanced_search.py:85
 msgid "Package score"
@@ -1111,8 +1117,9 @@ msgid "Downloads"
 msgstr "下载"
 
 #: app/blueprints/packages/advanced_search.py:88
+#, fuzzy
 msgid "Created At"
-msgstr ""
+msgstr "创建时间"
 
 #: app/blueprints/packages/advanced_search.py:89
 msgid "Approved At"
@@ -1123,8 +1130,9 @@ msgid "Last Release"
 msgstr ""
 
 #: app/blueprints/packages/advanced_search.py:92
+#, fuzzy
 msgid "Order"
-msgstr ""
+msgstr "顺序"
 
 #: app/blueprints/packages/advanced_search.py:93
 msgid "Descending"
@@ -1135,8 +1143,9 @@ msgid "Ascending"
 msgstr ""
 
 #: app/blueprints/packages/advanced_search.py:96
+#, fuzzy
 msgid "Random order"
-msgstr ""
+msgstr "随机排序"
 
 #: app/blueprints/packages/packages.py:215
 msgid "No download available."
@@ -1731,10 +1740,11 @@ msgid "User has already been claimed"
 msgstr "用户已被认领"
 
 #: app/blueprints/users/claim.py:50
+#, fuzzy
 msgid ""
 "Unable to get GitHub username for user. Make sure the forum account "
 "exists."
-msgstr ""
+msgstr "无法获取用户的 GitHub 用户名。请确认这个论坛账户存在。"
 
 #: app/blueprints/users/claim.py:66
 msgid ""
@@ -2533,7 +2543,7 @@ msgstr "关于"
 
 #: app/templates/base.html:247
 msgid "Contact Us"
-msgstr ""
+msgstr "联系我们"
 
 #: app/templates/base.html:248
 msgid "Rules"
@@ -2928,7 +2938,7 @@ msgstr "查看软件包"
 
 #: app/templates/donate/index.html:62
 msgid "Support ContentDB"
-msgstr ""
+msgstr "支持 ContentDB"
 
 #: app/templates/donate/index.html:64
 msgid ""
@@ -3539,7 +3549,7 @@ msgstr ""
 #: app/templates/packages/advanced_search.html:20
 #: app/templates/packages/advanced_search.html:21
 msgid "Use shift to select multiple."
-msgstr ""
+msgstr "您可以通过按 Shift 键来选择多个项目。"
 
 #: app/templates/packages/advanced_search.html:17
 msgid "Tags and Content Warnings"
@@ -3621,10 +3631,11 @@ msgid "Read more"
 msgstr "阅读更多"
 
 #: app/templates/packages/create_edit.html:49
+#, fuzzy
 msgid ""
 "You can include a .cdb.json file in your package to update these details "
 "automatically."
-msgstr ""
+msgstr "您可以通过添加名为 .cdb.json 的文件来自动更新这些信息。"
 
 #: app/templates/packages/create_edit.html:55
 msgid ""
