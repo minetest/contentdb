@@ -458,6 +458,7 @@ def move_to_state(package):
 @is_package_page
 def translation(package):
 	return render_template("packages/translation.html", package=package,
+			has_content_translations=any([x.title or x.short_desc for x in package.translations.all()]),
 			tabs=get_package_tabs(current_user, package), current_tab="translation")
 
 

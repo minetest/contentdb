@@ -26,18 +26,6 @@
 				{{ _("Translating content meta - lua_api.md") }}
 			</a>
 		</p>
-
-		<h3 id="template">{{ _("Translation template") }}</h3>
-		<p>
-			{{ _("To quickly add support for ContentDB package translation, create a file at %(location)s with the following content:",
-				location="<code>locale/template.txt</code>"|safe) }}
-		</p>
-
-		<pre><code># textdomain: {{ package.name }}
-
-{{ package.title | replace("@", "@@") | replace("=", "@=") }} =
-{{ package.short_desc | replace("@", "@@") | replace("=", "@=") }} =
-</code></pre>
 	{% else %}
 		<p>
 			{{ _("%(title)s is available in %(num)d languages.", title=package.title, num=num) }}
@@ -88,6 +76,20 @@
 					</div>
 				</div>
 			{% endfor %}
+		{% endif %}
+
+		{% if not has_content_translations %}
+			<h3 id="template">{{ _("Translation template") }}</h3>
+			<p>
+				{{ _("To quickly add support for ContentDB package translation, create a file at %(location)s with the following content:",
+					location="<code>locale/template.txt</code>"|safe) }}
+			</p>
+
+			<pre><code># textdomain: {{ package.name }}
+
+{{ package.title | replace("@", "@@") | replace("=", "@=") }} =
+{{ package.short_desc | replace("@", "@@") | replace("=", "@=") }} =
+</code></pre>
 		{% endif %}
 	</div>
 {% endblock %}
