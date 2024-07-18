@@ -79,10 +79,17 @@
 		{% endif %}
 
 		{% if not has_content_translations %}
+			{% set translation_template_path %}
+				{% if package.type == package.type.GAME %}
+					<code>mods/mymod/locale/template.txt</code>
+				{% else %}
+					<code>locale/template.txt</code>
+				{% endif %}
+			{% endset %}
 			<h3 id="template">{{ _("Translation template") }}</h3>
 			<p>
 				{{ _("To quickly add support for ContentDB package translation, create a file at %(location)s with the following content:",
-					location="<code>locale/template.txt</code>"|safe) }}
+					location=translation_template_path) }}
 			</p>
 
 			<pre><code># textdomain: {{ package.name }}
@@ -90,6 +97,14 @@
 {{ package.title | replace("@", "@@") | replace("=", "@=") }} =
 {{ package.short_desc | replace("@", "@@") | replace("=", "@=") }} =
 </code></pre>
+
+			{% if package.type == package.type.GAME %}
+				<p>{{ _("With games, you also need to name the textdomain in game.conf:") }}</p>
+
+				<pre><code>textdomain = mymod</code></pre>
+
+				<p>{{ _("Replace mymod with the name of mod / textdomain you chose.") }}</p>
+			{% endif %}
 		{% endif %}
 	</div>
 {% endblock %}
