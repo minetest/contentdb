@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-06-22 16:06+0100\n"
+"POT-Creation-Date: 2024-07-23 22:12+0100\n"
 "PO-Revision-Date: 2024-07-15 13:09+0000\n"
 "Last-Translator: ssdaniel24 <bo7oaonteg2m@mail.ru>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
-"contentdb/ru/>\n"
 "Language: ru\n"
+"Language-Team: Russian "
+"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app/__init__.py:156
@@ -29,38 +28,26 @@ msgstr "Заблокирован:"
 msgid "You have been banned."
 msgstr "Вы были заблокированы."
 
-#. NOTE: tags: title for server_tools
+#. NOTE: tags: title for jam_game_2023
 #: app/_translations.py:6
 msgctxt "tags"
-msgid "Server Moderation and Tools"
-msgstr "Инструменты и Модерация Сервера"
+msgid "Jam / Game 2023"
+msgstr "Джэм / Игра 2023"
 
-#. NOTE: tags: description for server_tools
+#. NOTE: tags: description for jam_game_2023
 #: app/_translations.py:8
 msgctxt "tags"
-msgid "Helps with server maintenance and moderation"
-msgstr "Помогает с обслуживанием и модерированием сервера"
-
-#. NOTE: tags: title for pvp
-#: app/_translations.py:10
-msgctxt "tags"
-msgid "Player vs Player (PvP)"
-msgstr "Игрок Против Игрока (PvP)"
-
-#. NOTE: tags: description for pvp
-#: app/_translations.py:12
-msgctxt "tags"
-msgid "Designed to be played competitively against other players"
-msgstr "Предназначен для соревновательной игры с другими игроками"
+msgid "Entries to the 2023 Minetest Game Jam "
+msgstr "Заявки на Minetest Игровой Джэм 2023 "
 
 #. NOTE: tags: title for player_effects
-#: app/_translations.py:14
+#: app/_translations.py:10
 msgctxt "tags"
 msgid "Player Effects / Power Ups"
 msgstr "Эффекты / Бонусы Игрока"
 
 #. NOTE: tags: description for player_effects
-#: app/_translations.py:16
+#: app/_translations.py:12
 msgctxt "tags"
 msgid ""
 "For content that changes player effects, including physics, for example: "
@@ -69,74 +56,50 @@ msgstr ""
 "Для контента, который изменяет игровые эффекты, включая физику, например:"
 " скорость, высоту прыжка или гравитацию."
 
-#. NOTE: tags: title for jam_game_2023
+#. NOTE: tags: title for server_tools
+#: app/_translations.py:14
+msgctxt "tags"
+msgid "Server Moderation and Tools"
+msgstr "Инструменты и Модерация Сервера"
+
+#. NOTE: tags: description for server_tools
+#: app/_translations.py:16
+msgctxt "tags"
+msgid "Helps with server maintenance and moderation"
+msgstr "Помогает с обслуживанием и модерированием сервера"
+
+#. NOTE: tags: title for pvp
 #: app/_translations.py:18
 msgctxt "tags"
-msgid "Jam / Game 2023"
-msgstr "Джэм / Игра 2023"
+msgid "Player vs Player (PvP)"
+msgstr "Игрок Против Игрока (PvP)"
 
-#. NOTE: tags: description for jam_game_2023
+#. NOTE: tags: description for pvp
 #: app/_translations.py:20
 msgctxt "tags"
-msgid "Entries to the 2023 Minetest Game Jam "
-msgstr "Заявки на Minetest Игровой Джэм 2023 "
-
-#. NOTE: tags: title for mapgen
-#: app/_translations.py:22
-msgctxt "tags"
-msgid "Mapgen / Biomes / Decoration"
-msgstr "Мапген / Биомы / Декорация"
-
-#. NOTE: tags: description for mapgen
-#: app/_translations.py:24
-msgctxt "tags"
-msgid "New mapgen or changes mapgen"
-msgstr "Новая генерация или изменение мира"
+msgid "Designed to be played competitively against other players"
+msgstr "Предназначен для соревновательной игры с другими игроками"
 
 #. NOTE: tags: title for world_tools
-#: app/_translations.py:26
+#: app/_translations.py:22
 msgctxt "tags"
 msgid "World Maintenance and Tools"
 msgstr "Инструменты и Обслуживание Мира"
 
 #. NOTE: tags: description for world_tools
-#: app/_translations.py:28
+#: app/_translations.py:24
 msgctxt "tags"
 msgid "Tools to manage the world"
 msgstr "Инструменты для управления миром"
 
-#. NOTE: tags: title for inventory
-#: app/_translations.py:30
-msgctxt "tags"
-msgid "Inventory"
-msgstr "Инвентарь"
-
-#. NOTE: tags: description for inventory
-#: app/_translations.py:32
-msgctxt "tags"
-msgid "Changes the inventory GUI"
-msgstr "Изменяет графический интерфейс инвентаря"
-
-#. NOTE: tags: title for developer_tools
-#: app/_translations.py:34
-msgctxt "tags"
-msgid "Developer Tools"
-msgstr "Инструменты Разработчика"
-
-#. NOTE: tags: description for developer_tools
-#: app/_translations.py:36
-msgctxt "tags"
-msgid "Tools for game and mod developers"
-msgstr "Инструменты для разработчиков игр и модов"
-
 #. NOTE: tags: title for april_fools
-#: app/_translations.py:38
+#: app/_translations.py:26
 msgctxt "tags"
 msgid "Joke"
 msgstr "Шутка"
 
 #. NOTE: tags: description for april_fools
-#: app/_translations.py:40
+#: app/_translations.py:28
 msgctxt "tags"
 msgid ""
 "For humorous content, meant as a novelty or joke, not to be taken "
@@ -146,223 +109,196 @@ msgstr ""
 "не следует воспринимать всерьез и который не предназначен для серьезного "
 "или долгосрочного использования."
 
-#. NOTE: tags: title for singleplayer
-#: app/_translations.py:42
+#. NOTE: tags: title for developer_tools
+#: app/_translations.py:30
 msgctxt "tags"
-msgid "Singleplayer-focused"
-msgstr "Ориентированно на Одиночную Игру"
+msgid "Developer Tools"
+msgstr "Инструменты Разработчика"
 
-#. NOTE: tags: description for singleplayer
-#: app/_translations.py:44
+#. NOTE: tags: description for developer_tools
+#: app/_translations.py:32
 msgctxt "tags"
-msgid "Content that can be played alone"
-msgstr "Контент который может быть воспроизведён один"
+msgid "Tools for game and mod developers"
+msgstr "Инструменты для разработчиков игр и модов"
+
+#. NOTE: tags: title for inventory
+#: app/_translations.py:34
+msgctxt "tags"
+msgid "Inventory"
+msgstr "Инвентарь"
+
+#. NOTE: tags: description for inventory
+#: app/_translations.py:36
+msgctxt "tags"
+msgid "Changes the inventory GUI"
+msgstr "Изменяет графический интерфейс инвентаря"
 
 #. NOTE: tags: title for crafting
-#: app/_translations.py:46
+#: app/_translations.py:38
 msgctxt "tags"
 msgid "Crafting"
 msgstr "Крафтинг"
 
 #. NOTE: tags: description for crafting
-#: app/_translations.py:48
+#: app/_translations.py:40
 msgctxt "tags"
 msgid "Big changes to crafting gameplay"
 msgstr "Большие изменения с геймплеем создания"
 
 #. NOTE: tags: title for adventure__rpg
-#: app/_translations.py:50
+#: app/_translations.py:42
 msgctxt "tags"
 msgid "Adventure / RPG"
 msgstr "Приключения / RPG"
 
 #. NOTE: tags: title for shooter
-#: app/_translations.py:52
+#: app/_translations.py:44
 msgctxt "tags"
 msgid "Shooter"
 msgstr "Шутер"
 
 #. NOTE: tags: description for shooter
-#: app/_translations.py:54
+#: app/_translations.py:46
 msgctxt "tags"
 msgid "First person shooters (FPS) and more"
 msgstr "Шутеры от первого лица (FPS) и многое другое"
 
 #. NOTE: tags: title for sound_music
-#: app/_translations.py:56
+#: app/_translations.py:48
 msgctxt "tags"
 msgid "Sounds / Music"
 msgstr "Звуки / Музыка"
 
 #. NOTE: tags: description for sound_music
-#: app/_translations.py:58
+#: app/_translations.py:50
 msgctxt "tags"
 msgid "Focuses on or adds new sounds or musical things"
 msgstr "Фокусированно на или добавление новых звуков или музыкальных штук"
 
-#. NOTE: tags: title for tools
-#: app/_translations.py:60
+#. NOTE: tags: title for mapgen
+#: app/_translations.py:52
 msgctxt "tags"
-msgid "Tools / Weapons / Armor"
-msgstr "Инструменты / Оружие / Броня"
+msgid "Mapgen / Biomes / Decoration"
+msgstr "Мапген / Биомы / Декорация"
 
-#. NOTE: tags: description for tools
-#: app/_translations.py:62
+#. NOTE: tags: description for mapgen
+#: app/_translations.py:54
 msgctxt "tags"
-msgid "Adds or changes tools, weapons, and armor"
-msgstr "Добавляет или изменяет инструменты, оружие, и броня"
+msgid "New mapgen or changes mapgen"
+msgstr "Новая генерация или изменение мира"
 
-#. NOTE: tags: title for plants_and_farming
-#: app/_translations.py:64
+#. NOTE: tags: title for singleplayer
+#: app/_translations.py:56
 msgctxt "tags"
-msgid "Plants and Farming"
-msgstr "Растения и Фермерство"
+msgid "Singleplayer-focused"
+msgstr "Ориентированно на Одиночную Игру"
 
-#. NOTE: tags: description for plants_and_farming
-#: app/_translations.py:66
+#. NOTE: tags: description for singleplayer
+#: app/_translations.py:58
 msgctxt "tags"
-msgid "Adds new plants or other farmable resources."
-msgstr "Добавляет новые растения или другие сельскохозяйственные ресурсы."
-
-#. NOTE: tags: title for simulation
-#: app/_translations.py:68
-msgctxt "tags"
-msgid "Sims"
-msgstr "Симс"
-
-#. NOTE: tags: description for simulation
-#: app/_translations.py:70
-msgctxt "tags"
-msgid ""
-"Mods and games that aim to simulate real life activity. Similar to "
-"SimCity/The Sims/OpenTTD/etc."
-msgstr ""
-"Моды и игры, имитирующие реальную жизнь. Аналогично SimCity/The Sims/OpenTTD/"
-"и т.д."
-
-#. NOTE: tags: title for chat
-#: app/_translations.py:72
-msgctxt "tags"
-msgid "Chat / Commands"
-msgstr "Чат / Команды"
-
-#. NOTE: tags: description for chat
-#: app/_translations.py:74
-msgctxt "tags"
-msgid "Focus on player chat/communication or console interaction."
-msgstr ""
-"Фокусированно на чате игрока/коммуникации или взаимодействие с консолью."
-
-#. NOTE: tags: title for multiplayer
-#: app/_translations.py:76
-msgctxt "tags"
-msgid "Multiplayer-focused"
-msgstr "Фокус на Мультиплеер"
-
-#. NOTE: tags: description for multiplayer
-#: app/_translations.py:78
-msgctxt "tags"
-msgid "Can/should only be used in multiplayer"
-msgstr "Может/должно быть использован в мультиплеере"
+msgid "Content that can be played alone"
+msgstr "Контент который может быть воспроизведён один"
 
 #. NOTE: tags: title for complex_installation
-#: app/_translations.py:80
+#: app/_translations.py:60
 msgctxt "tags"
 msgid "Complex installation"
 msgstr "Комплексованная установка"
 
 #. NOTE: tags: description for complex_installation
-#: app/_translations.py:82
+#: app/_translations.py:62
 msgctxt "tags"
 msgid ""
 "Requires futher installation steps, such as installing LuaRocks or "
 "editing the trusted mod setting"
 msgstr ""
-"Требуются углублённые шаги по установке, такие как установка LuaRocks или "
-"редактирование настроек доверенного мода"
+"Требуются углублённые шаги по установке, такие как установка LuaRocks или"
+" редактирование настроек доверенного мода"
 
-#. NOTE: tags: title for magic
-#: app/_translations.py:84
+#. NOTE: tags: title for simulation
+#: app/_translations.py:64
 msgctxt "tags"
-msgid "Magic / Enchanting"
-msgstr "Магия / Зачарование"
+msgid "Sims"
+msgstr "Симс"
 
-#. NOTE: tags: title for building_mechanics
-#: app/_translations.py:86
-msgctxt "tags"
-msgid "Building Mechanics and Tools"
-msgstr "Механики и Инструменты Строительства"
-
-#. NOTE: tags: description for building_mechanics
-#: app/_translations.py:88
-msgctxt "tags"
-msgid "Adds game mechanics or tools that change how players build."
-msgstr "Добавляет игровые механики или инструменты изменяющие, как строят игроки."
-
-#. NOTE: tags: title for oneofakind__original
-#: app/_translations.py:90
-msgctxt "tags"
-msgid "One-of-a-kind / Original"
-msgstr "Единственный-в-своем-роде / Оригинальный"
-
-#. NOTE: tags: description for oneofakind__original
-#: app/_translations.py:92
+#. NOTE: tags: description for simulation
+#: app/_translations.py:66
 msgctxt "tags"
 msgid ""
-"For games and such that are of their own kind, distinct and original in "
-"nature to others of the same category."
+"Mods and games that aim to simulate real life activity. Similar to "
+"SimCity/The Sims/OpenTTD/etc."
 msgstr ""
-"Для игр и тому подобного, которые в своем роде отличаются и оригинальны "
-"по своей природе от других игр той же категории."
+"Моды и игры, имитирующие реальную жизнь. Аналогично SimCity/The "
+"Sims/OpenTTD/и т.д."
 
-#. NOTE: tags: title for building
-#: app/_translations.py:94
+#. NOTE: tags: title for plants_and_farming
+#: app/_translations.py:68
 msgctxt "tags"
-msgid "Building"
-msgstr "Строительство"
+msgid "Plants and Farming"
+msgstr "Растения и Фермерство"
 
-#. NOTE: tags: description for building
-#: app/_translations.py:96
+#. NOTE: tags: description for plants_and_farming
+#: app/_translations.py:70
 msgctxt "tags"
-msgid "Focuses on building, such as adding new materials or nodes"
-msgstr ""
-"Фокусирование на строительстве, например, добавление новых материалов или"
-" нодов"
+msgid "Adds new plants or other farmable resources."
+msgstr "Добавляет новые растения или другие сельскохозяйственные ресурсы."
 
-#. NOTE: tags: title for decorative
-#: app/_translations.py:98
+#. NOTE: tags: title for multiplayer
+#: app/_translations.py:72
 msgctxt "tags"
-msgid "Decorative"
-msgstr "Декорация"
+msgid "Multiplayer-focused"
+msgstr "Фокус на Мультиплеер"
 
-#. NOTE: tags: description for decorative
-#: app/_translations.py:100
+#. NOTE: tags: description for multiplayer
+#: app/_translations.py:74
 msgctxt "tags"
-msgid "Adds nodes with no other purpose than for use in building"
-msgstr ""
-"Добавляет ноды, не имеющие никакой другой цели, кроме как для "
-"использования в строительстве"
+msgid "Can/should only be used in multiplayer"
+msgstr "Может/должно быть использован в мультиплеере"
+
+#. NOTE: tags: title for tools
+#: app/_translations.py:76
+msgctxt "tags"
+msgid "Tools / Weapons / Armor"
+msgstr "Инструменты / Оружие / Броня"
+
+#. NOTE: tags: description for tools
+#: app/_translations.py:78
+msgctxt "tags"
+msgid "Adds or changes tools, weapons, and armor"
+msgstr "Добавляет или изменяет инструменты, оружие, и броня"
+
+#. NOTE: tags: title for chat
+#: app/_translations.py:80
+msgctxt "tags"
+msgid "Chat / Commands"
+msgstr "Чат / Команды"
+
+#. NOTE: tags: description for chat
+#: app/_translations.py:82
+msgctxt "tags"
+msgid "Focus on player chat/communication or console interaction."
+msgstr "Фокусированно на чате игрока/коммуникации или взаимодействие с консолью."
 
 #. NOTE: tags: title for puzzle
-#: app/_translations.py:102
+#: app/_translations.py:84
 msgctxt "tags"
 msgid "Puzzle"
 msgstr "Пазл"
 
 #. NOTE: tags: description for puzzle
-#: app/_translations.py:104
+#: app/_translations.py:86
 msgctxt "tags"
 msgid "Focus on puzzle solving instead of combat"
 msgstr "Фокусированно на решение пазлов вместо боя"
 
 #. NOTE: tags: title for environment
-#: app/_translations.py:106
+#: app/_translations.py:88
 msgctxt "tags"
 msgid "Environment / Weather"
 msgstr "Среда / Погода"
 
 #. NOTE: tags: description for environment
-#: app/_translations.py:108
+#: app/_translations.py:90
 msgctxt "tags"
 msgid ""
 "Improves the world, adding weather, ambient sounds, or other environment "
@@ -372,28 +308,90 @@ msgstr ""
 "механики окружающей среды"
 
 #. NOTE: tags: title for less_than_px
-#: app/_translations.py:110
+#: app/_translations.py:92
 msgctxt "tags"
 msgid "<16px"
 msgstr "&lt;16пикс"
 
 #. NOTE: tags: description for less_than_px
-#: app/_translations.py:112
+#: app/_translations.py:94
 msgctxt "tags"
 msgid "Less than 16px"
 msgstr "Меньше чем 16 пикселей"
 
 #. NOTE: tags: title for mobs
-#: app/_translations.py:114
+#: app/_translations.py:96
 msgctxt "tags"
 msgid "Mobs / Animals / NPCs"
 msgstr "Мобы / Животные / НИПы"
 
 #. NOTE: tags: description for mobs
-#: app/_translations.py:116
+#: app/_translations.py:98
 msgctxt "tags"
 msgid "Adds mobs, animals, and non-player characters"
 msgstr "Добавляет сущностей, животных, и неигровых персонажей"
+
+#. NOTE: tags: title for building
+#: app/_translations.py:100
+msgctxt "tags"
+msgid "Building"
+msgstr "Строительство"
+
+#. NOTE: tags: description for building
+#: app/_translations.py:102
+msgctxt "tags"
+msgid "Focuses on building, such as adding new materials or nodes"
+msgstr ""
+"Фокусирование на строительстве, например, добавление новых материалов или"
+" нодов"
+
+#. NOTE: tags: title for decorative
+#: app/_translations.py:104
+msgctxt "tags"
+msgid "Decorative"
+msgstr "Декорация"
+
+#. NOTE: tags: description for decorative
+#: app/_translations.py:106
+msgctxt "tags"
+msgid "Adds nodes with no other purpose than for use in building"
+msgstr ""
+"Добавляет ноды, не имеющие никакой другой цели, кроме как для "
+"использования в строительстве"
+
+#. NOTE: tags: title for magic
+#: app/_translations.py:108
+msgctxt "tags"
+msgid "Magic / Enchanting"
+msgstr "Магия / Зачарование"
+
+#. NOTE: tags: title for building_mechanics
+#: app/_translations.py:110
+msgctxt "tags"
+msgid "Building Mechanics and Tools"
+msgstr "Механики и Инструменты Строительства"
+
+#. NOTE: tags: description for building_mechanics
+#: app/_translations.py:112
+msgctxt "tags"
+msgid "Adds game mechanics or tools that change how players build."
+msgstr "Добавляет игровые механики или инструменты изменяющие, как строят игроки."
+
+#. NOTE: tags: title for oneofakind__original
+#: app/_translations.py:114
+msgctxt "tags"
+msgid "One-of-a-kind / Original"
+msgstr "Единственный-в-своем-роде / Оригинальный"
+
+#. NOTE: tags: description for oneofakind__original
+#: app/_translations.py:116
+msgctxt "tags"
+msgid ""
+"For games and such that are of their own kind, distinct and original in "
+"nature to others of the same category."
+msgstr ""
+"Для игр и тому подобного, которые в своем роде отличаются и оригинальны "
+"по своей природе от других игр той же категории."
 
 #. NOTE: tags: title for custom_mapgen
 #: app/_translations.py:118
@@ -411,22 +409,17 @@ msgstr ""
 "Содержит полностью настраиваемый мапген, реализованный на Lua, обычно "
 "требует, чтобы для миров был установлен мапген 'одним нодом'."
 
-#. NOTE: tags: title for survival
+#. NOTE: tags: title for 16px
 #: app/_translations.py:122
 msgctxt "tags"
-msgid "Survival"
-msgstr "Выживание"
+msgid "16px"
+msgstr "16пикс"
 
-#. NOTE: tags: description for survival
+#. NOTE: tags: description for 16px
 #: app/_translations.py:124
 msgctxt "tags"
-msgid ""
-"Written specifically for survival gameplay with a focus on game-balance, "
-"difficulty level, or resources available through crafting, mining, ..."
-msgstr ""
-"Написана специально для игры на выживание с акцентом на игровой баланс, "
-"уровень сложности или ресурсы, доступные при крафте, добыче полезных "
-"ископаемых, ..."
+msgid "For 16px texture packs"
+msgstr "Для пакетов текстур с 16пикс"
 
 #. NOTE: tags: title for education
 #: app/_translations.py:126
@@ -442,64 +435,45 @@ msgstr ""
 "Либо имеет образовательную ценность, либо является инструментом в помощь "
 "учителям "
 
-#. NOTE: tags: title for storage
+#. NOTE: tags: title for survival
 #: app/_translations.py:130
 msgctxt "tags"
-msgid "Storage"
-msgstr "Хранение"
+msgid "Survival"
+msgstr "Выживание"
 
-#. NOTE: tags: description for storage
+#. NOTE: tags: description for survival
 #: app/_translations.py:132
 msgctxt "tags"
-msgid "Adds or improves item storage mechanics"
-msgstr "Добавляет или улучшает механику хранения предметов"
-
-#. NOTE: tags: title for library
-#: app/_translations.py:134
-msgctxt "tags"
-msgid "API / Library"
-msgstr "API / Библиотека"
-
-#. NOTE: tags: description for library
-#: app/_translations.py:136
-msgctxt "tags"
-msgid "Primarily adds an API for other mods to use"
-msgstr "В первую очередь добавляет API для использования другими модами"
+msgid ""
+"Written specifically for survival gameplay with a focus on game-balance, "
+"difficulty level, or resources available through crafting, mining, ..."
+msgstr ""
+"Написана специально для игры на выживание с акцентом на игровой баланс, "
+"уровень сложности или ресурсы, доступные при крафте, добыче полезных "
+"ископаемых, ..."
 
 #. NOTE: tags: title for hud
-#: app/_translations.py:138
+#: app/_translations.py:134
 msgctxt "tags"
 msgid "HUD"
 msgstr "Игровой Интерфейс"
 
 #. NOTE: tags: description for hud
-#: app/_translations.py:140
+#: app/_translations.py:136
 msgctxt "tags"
 msgid "For mods that grant the player extra information in the HUD"
 msgstr ""
 "Для модов, которые предоставляют игроку дополнительную информацию в "
 "Игровом Интерфейсе"
 
-#. NOTE: tags: title for mini-game
-#: app/_translations.py:142
-msgctxt "tags"
-msgid "Mini-game"
-msgstr "Мини-игра"
-
-#. NOTE: tags: description for mini-game
-#: app/_translations.py:144
-msgctxt "tags"
-msgid "Adds a mini-game to be played within Minetest"
-msgstr "Добавляет мини-игру которая сыграна в рамках Minetest"
-
 #. NOTE: tags: title for pve
-#: app/_translations.py:146
+#: app/_translations.py:138
 msgctxt "tags"
 msgid "Player vs Environment (PvE)"
 msgstr "Игрок против Окружающей среды (PvE)"
 
 #. NOTE: tags: description for pve
-#: app/_translations.py:148
+#: app/_translations.py:140
 msgctxt "tags"
 msgid ""
 "For content designed for one or more players that focus on combat against"
@@ -508,147 +482,98 @@ msgstr ""
 "Для контента, предназначенного для одного или нескольких игроков, которые"
 " сосредоточены на борьбе с миром, мобами или неигровыми персонажами."
 
+#. NOTE: tags: title for storage
+#: app/_translations.py:142
+msgctxt "tags"
+msgid "Storage"
+msgstr "Хранение"
+
+#. NOTE: tags: description for storage
+#: app/_translations.py:144
+msgctxt "tags"
+msgid "Adds or improves item storage mechanics"
+msgstr "Добавляет или улучшает механику хранения предметов"
+
 #. NOTE: tags: title for sports
-#: app/_translations.py:150
+#: app/_translations.py:146
 msgctxt "tags"
 msgid "Sports"
 msgstr "Спорт"
 
-#. NOTE: tags: title for 16px
+#. NOTE: tags: title for library
+#: app/_translations.py:148
+msgctxt "tags"
+msgid "API / Library"
+msgstr "API / Библиотека"
+
+#. NOTE: tags: description for library
+#: app/_translations.py:150
+msgctxt "tags"
+msgid "Primarily adds an API for other mods to use"
+msgstr "В первую очередь добавляет API для использования другими модами"
+
+#. NOTE: tags: title for mini-game
 #: app/_translations.py:152
 msgctxt "tags"
-msgid "16px"
-msgstr "16пикс"
+msgid "Mini-game"
+msgstr "Мини-игра"
 
-#. NOTE: tags: description for 16px
+#. NOTE: tags: description for mini-game
 #: app/_translations.py:154
 msgctxt "tags"
-msgid "For 16px texture packs"
-msgstr "Для пакетов текстур с 16пикс"
-
-#. NOTE: tags: title for 64px
-#: app/_translations.py:156
-msgctxt "tags"
-msgid "64px"
-msgstr "64пикс"
-
-#. NOTE: tags: description for 64px
-#: app/_translations.py:158
-msgctxt "tags"
-msgid "For 64px texture packs"
-msgstr "Для пакетов текстур 64пикс"
-
-#. NOTE: tags: title for transport
-#: app/_translations.py:160
-msgctxt "tags"
-msgid "Transport"
-msgstr "Транспорт"
-
-#. NOTE: tags: description for transport
-#: app/_translations.py:162
-msgctxt "tags"
-msgid ""
-"Adds or changes transportation methods. Includes teleportation, vehicles,"
-" ridable mobs, transport infrastructure and thematic content"
-msgstr ""
-"Добавляет или изменяет способы передвижения. Включает телепортацию, "
-"транспортные средства, мобов, на которых можно ездить, транспортную "
-"инфраструктуру и тематический контент"
-
-#. NOTE: tags: title for seasonal
-#: app/_translations.py:164
-msgctxt "tags"
-msgid "Seasonal"
-msgstr "Сезонное"
-
-#. NOTE: tags: description for seasonal
-#: app/_translations.py:166
-msgctxt "tags"
-msgid "For content generally themed around a certain season or holiday"
-msgstr "Для контента, как правило, посвященного определенному сезону или празднику"
-
-#. NOTE: tags: title for food
-#: app/_translations.py:168
-msgctxt "tags"
-msgid "Food / Drinks"
-msgstr "Еда / Напитки"
+msgid "Adds a mini-game to be played within Minetest"
+msgstr "Добавляет мини-игру которая сыграна в рамках Minetest"
 
 #. NOTE: tags: title for commerce
-#: app/_translations.py:170
+#: app/_translations.py:156
 msgctxt "tags"
 msgid "Commerce / Economy"
 msgstr "Торговля / Экономика"
 
 #. NOTE: tags: description for commerce
-#: app/_translations.py:172
+#: app/_translations.py:158
 msgctxt "tags"
 msgid "Related to economies, money, and trading"
 msgstr "Связанное с экономикой, деньгами, и торговлей"
 
-#. NOTE: tags: title for gui
-#: app/_translations.py:174
+#. NOTE: tags: title for technology
+#: app/_translations.py:160
 msgctxt "tags"
-msgid "GUI"
-msgstr "GUI"
+msgid "Machines / Electronics"
+msgstr "Машины / Электроника"
 
-#. NOTE: tags: description for gui
-#: app/_translations.py:176
+#. NOTE: tags: description for technology
+#: app/_translations.py:162
 msgctxt "tags"
-msgid ""
-"For content whose main utility or features are provided within a GUI, on-"
-"screen menu, or similar"
-msgstr ""
-"Для контента, основная полезность или функции которого предоставляются в "
-"графическом интерфейсе, экранном меню, или аналогичном"
+msgid "Adds machines useful in automation, tubes, or power."
+msgstr "Добавляет машины полезные в автоматизации, трубы, или энергия."
 
-#. NOTE: tags: title for jam_combat_mod
-#: app/_translations.py:178
+#. NOTE: tags: title for food
+#: app/_translations.py:164
 msgctxt "tags"
-msgid "Jam / Combat 2020"
-msgstr "Джэм / Боёвка 2020"
+msgid "Food / Drinks"
+msgstr "Еда / Напитки"
 
-#. NOTE: tags: description for jam_combat_mod
-#: app/_translations.py:180
+#. NOTE: tags: title for seasonal
+#: app/_translations.py:166
 msgctxt "tags"
-msgid "For mods created for the Discord \"Combat\" modding event in 2020"
-msgstr "Для модов созданные для Дискорд моддинг эвента \"Боёвка\" в 2020"
+msgid "Seasonal"
+msgstr "Сезонное"
 
-#. NOTE: tags: title for mtg
-#: app/_translations.py:182
+#. NOTE: tags: description for seasonal
+#: app/_translations.py:168
 msgctxt "tags"
-msgid "Minetest Game improved"
-msgstr "Импровизация Minetest Game"
-
-#. NOTE: tags: description for mtg
-#: app/_translations.py:184
-msgctxt "tags"
-msgid "Forks of Minetest Game"
-msgstr "Разветление Minetest Game"
-
-#. NOTE: tags: title for jam_weekly_2021
-#: app/_translations.py:186
-msgctxt "tags"
-msgid "Jam / Weekly Challenges 2021"
-msgstr "Джэм / Еженедельные Вызовы 2021"
-
-#. NOTE: tags: description for jam_weekly_2021
-#: app/_translations.py:188
-msgctxt "tags"
-msgid ""
-"For mods created for the Discord \"Weekly Challenges\" modding event in "
-"2021"
-msgstr ""
-"Для модов созданные для Дискорд моддинг события \"Еженедельные Вызовы\" в"
-" 2021"
+msgid "For content generally themed around a certain season or holiday"
+msgstr "Для контента, как правило, посвященного определенному сезону или празднику"
 
 #. NOTE: tags: title for creative
-#: app/_translations.py:190
+#: app/_translations.py:170
 msgctxt "tags"
 msgid "Creative"
 msgstr "Креатив"
 
 #. NOTE: tags: description for creative
-#: app/_translations.py:192
+#: app/_translations.py:172
 msgctxt "tags"
 msgid ""
 "Written specifically or exclusively for use in creative mode. Adds "
@@ -660,54 +585,111 @@ msgstr ""
 "предоставляет инструменты, которые облегчают создание игры и не создают "
 "трудностей или дефицита"
 
-#. NOTE: tags: title for technology
-#: app/_translations.py:194
+#. NOTE: tags: title for 64px
+#: app/_translations.py:174
 msgctxt "tags"
-msgid "Machines / Electronics"
-msgstr "Машины / Электроника"
+msgid "64px"
+msgstr "64пикс"
 
-#. NOTE: tags: description for technology
-#: app/_translations.py:196
+#. NOTE: tags: description for 64px
+#: app/_translations.py:176
 msgctxt "tags"
-msgid "Adds machines useful in automation, tubes, or power."
-msgstr "Добавляет машины полезные в автоматизации, трубы, или энергия."
+msgid "For 64px texture packs"
+msgstr "Для пакетов текстур 64пикс"
 
 #. NOTE: tags: title for 32px
-#: app/_translations.py:198
+#: app/_translations.py:178
 msgctxt "tags"
 msgid "32px"
 msgstr "32пикс"
 
 #. NOTE: tags: description for 32px
-#: app/_translations.py:200
+#: app/_translations.py:180
 msgctxt "tags"
 msgid "For 32px texture packs"
 msgstr "Для пакетов текстур 32пикс"
 
-#. NOTE: tags: title for strategy_rts
-#: app/_translations.py:202
+#. NOTE: tags: title for gui
+#: app/_translations.py:182
 msgctxt "tags"
-msgid "Strategy / RTS"
-msgstr "Стратегия / RTS"
+msgid "GUI"
+msgstr "GUI"
 
-#. NOTE: tags: description for strategy_rts
-#: app/_translations.py:204
+#. NOTE: tags: description for gui
+#: app/_translations.py:184
 msgctxt "tags"
 msgid ""
-"Games and mods with a heavy strategy component, whether real-time or "
-"turn-based"
+"For content whose main utility or features are provided within a GUI, on-"
+"screen menu, or similar"
 msgstr ""
-"Игры и моды с сильным стратегическим компонентом, будь-то "
-"\"в-реальном-времени\" или \"пошаговые\""
+"Для контента, основная полезность или функции которого предоставляются в "
+"графическом интерфейсе, экранном меню, или аналогичном"
+
+#. NOTE: tags: title for jam_combat_mod
+#: app/_translations.py:186
+msgctxt "tags"
+msgid "Jam / Combat 2020"
+msgstr "Джэм / Боёвка 2020"
+
+#. NOTE: tags: description for jam_combat_mod
+#: app/_translations.py:188
+msgctxt "tags"
+msgid "For mods created for the Discord \"Combat\" modding event in 2020"
+msgstr "Для модов созданные для Дискорд моддинг эвента \"Боёвка\" в 2020"
+
+#. NOTE: tags: title for transport
+#: app/_translations.py:190
+msgctxt "tags"
+msgid "Transport"
+msgstr "Транспорт"
+
+#. NOTE: tags: description for transport
+#: app/_translations.py:192
+msgctxt "tags"
+msgid ""
+"Adds or changes transportation methods. Includes teleportation, vehicles,"
+" ridable mobs, transport infrastructure and thematic content"
+msgstr ""
+"Добавляет или изменяет способы передвижения. Включает телепортацию, "
+"транспортные средства, мобов, на которых можно ездить, транспортную "
+"инфраструктуру и тематический контент"
+
+#. NOTE: tags: title for jam_weekly_2021
+#: app/_translations.py:194
+msgctxt "tags"
+msgid "Jam / Weekly Challenges 2021"
+msgstr "Джэм / Еженедельные Вызовы 2021"
+
+#. NOTE: tags: description for jam_weekly_2021
+#: app/_translations.py:196
+msgctxt "tags"
+msgid ""
+"For mods created for the Discord \"Weekly Challenges\" modding event in "
+"2021"
+msgstr ""
+"Для модов созданные для Дискорд моддинг события \"Еженедельные Вызовы\" в"
+" 2021"
+
+#. NOTE: tags: title for mtg
+#: app/_translations.py:198
+msgctxt "tags"
+msgid "Minetest Game improved"
+msgstr "Импровизация Minetest Game"
+
+#. NOTE: tags: description for mtg
+#: app/_translations.py:200
+msgctxt "tags"
+msgid "Forks of Minetest Game"
+msgstr "Разветление Minetest Game"
 
 #. NOTE: tags: title for skins
-#: app/_translations.py:206
+#: app/_translations.py:202
 msgctxt "tags"
 msgid "Player customization / Skins"
 msgstr "Кастомизация игрока / Скины"
 
 #. NOTE: tags: description for skins
-#: app/_translations.py:208
+#: app/_translations.py:204
 msgctxt "tags"
 msgid ""
 "Allows the player to customize their character by changing the texture or"
@@ -717,28 +699,44 @@ msgstr ""
 " аксессуары."
 
 #. NOTE: tags: title for jam_game_2021
-#: app/_translations.py:210
+#: app/_translations.py:206
 msgctxt "tags"
 msgid "Jam / Game 2021"
 msgstr "Джэм / Игра 2021"
 
 #. NOTE: tags: description for jam_game_2021
-#: app/_translations.py:212
+#: app/_translations.py:208
 msgctxt "tags"
 msgid "Entries to the 2021 Minetest Game Jam"
 msgstr "Заявки на участие в Minetest Game Jam 2021"
 
 #. NOTE: tags: title for 128px
-#: app/_translations.py:214
+#: app/_translations.py:210
 msgctxt "tags"
 msgid "128px+"
 msgstr "128пикс+"
 
 #. NOTE: tags: description for 128px
-#: app/_translations.py:216
+#: app/_translations.py:212
 msgctxt "tags"
 msgid "For 128px or higher texture packs"
 msgstr "Для пакетов текстур с 128пикс и выше"
+
+#. NOTE: tags: title for strategy_rts
+#: app/_translations.py:214
+msgctxt "tags"
+msgid "Strategy / RTS"
+msgstr "Стратегия / RTS"
+
+#. NOTE: tags: description for strategy_rts
+#: app/_translations.py:216
+msgctxt "tags"
+msgid ""
+"Games and mods with a heavy strategy component, whether real-time or "
+"turn-based"
+msgstr ""
+"Игры и моды с сильным стратегическим компонентом, будь-то "
+"\"в-реальном-времени\" или \"пошаговые\""
 
 #. NOTE: tags: title for jam_game_2022
 #: app/_translations.py:218
@@ -858,7 +856,7 @@ msgstr "%(package_type)s для %(game_name)s"
 msgid "%(delta)s ago"
 msgstr "%(delta)s назад"
 
-#: app/blueprints/api/endpoints.py:94 app/templates/index.html:104
+#: app/blueprints/api/endpoints.py:74 app/templates/index.html:104
 msgid "Featured"
 msgstr "Рекомендуемые"
 
@@ -869,6 +867,7 @@ msgstr "Рекомендуемые"
 #: app/templates/admin/warnings/list.html:20 app/templates/macros/topics.html:7
 #: app/templates/modnames/list.html:12
 #: app/templates/packages/release_edit.html:20
+#: app/templates/packages/release_view.html:22
 msgid "Name"
 msgstr "Имя"
 
@@ -877,10 +876,10 @@ msgid "Limit to package"
 msgstr "Ограничение на дополнение"
 
 #: app/blueprints/api/tokens.py:36 app/blueprints/collections/__init__.py:90
-#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:252
-#: app/blueprints/packages/packages.py:544
-#: app/blueprints/packages/packages.py:640
-#: app/blueprints/packages/packages.py:728
+#: app/blueprints/oauth/__init__.py:175 app/blueprints/packages/packages.py:253
+#: app/blueprints/packages/packages.py:551
+#: app/blueprints/packages/packages.py:647
+#: app/blueprints/packages/packages.py:735
 #: app/blueprints/packages/releases.py:66
 #: app/blueprints/packages/releases.py:81 app/blueprints/packages/reviews.py:63
 #: app/blueprints/packages/screenshots.py:36
@@ -897,17 +896,18 @@ msgstr "Сохранить"
 #: app/blueprints/packages/advanced_search.py:84
 #: app/blueprints/packages/releases.py:56
 #: app/blueprints/packages/releases.py:71 app/blueprints/packages/reviews.py:53
-#: app/blueprints/threads/__init__.py:281
+#: app/blueprints/threads/__init__.py:282
 #: app/templates/admin/languages/list.html:23
-#: app/templates/macros/reviews.html:143 app/templates/macros/topics.html:5
+#: app/templates/macros/reviews.html:144 app/templates/macros/topics.html:5
 #: app/templates/packages/release_edit.html:21
-#: app/templates/packages/translation.html:54
+#: app/templates/packages/release_view.html:23
+#: app/templates/packages/translation.html:42
 msgid "Title"
 msgstr "Название"
 
 #: app/blueprints/collections/__init__.py:80
 #: app/blueprints/collections/__init__.py:85
-#: app/templates/packages/translation.html:57
+#: app/templates/packages/translation.html:45
 msgid "Short Description"
 msgstr "Короткое Описание"
 
@@ -916,7 +916,7 @@ msgid "Page Content"
 msgstr "Контент Страницы"
 
 #: app/blueprints/collections/__init__.py:82
-#: app/blueprints/threads/__init__.py:283
+#: app/blueprints/threads/__init__.py:284
 #: app/templates/collections/view.html:51
 msgid "Private"
 msgstr "Частный"
@@ -955,6 +955,27 @@ msgstr "(Публичный, изменить в профиле &gt; Мои ко
 msgid "Removed package from favorites collection"
 msgstr "Дополнение удалено из любимой коллекций"
 
+#: app/blueprints/feeds/__init__.py:32 app/templates/index.html:8
+msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
+msgstr ""
+"Добро пожаловать в лучшее место чтобы найти Minetest моды, игры и пакеты "
+"тексур"
+
+#: app/blueprints/feeds/__init__.py:70 app/templates/base.html:29
+#: app/templates/base.html:36
+msgid "ContentDB new packages"
+msgstr ""
+
+#: app/blueprints/feeds/__init__.py:98 app/templates/base.html:31
+#: app/templates/base.html:38
+msgid "ContentDB package updates"
+msgstr ""
+
+#: app/blueprints/feeds/__init__.py:107 app/templates/base.html:27
+#: app/templates/base.html:34
+msgid "ContentDB all"
+msgstr ""
+
 #: app/blueprints/oauth/__init__.py:169 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:24
 #: app/templates/users/settings_email.html:49
@@ -985,7 +1006,7 @@ msgstr "Перевод"
 
 #: app/blueprints/packages/__init__.py:42
 #: app/templates/packages/releases_list.html:34
-#: app/templates/packages/view.html:657 app/templates/todo/editor.html:75
+#: app/templates/packages/view.html:675 app/templates/todo/editor.html:75
 msgid "Releases"
 msgstr "Релизы"
 
@@ -997,18 +1018,18 @@ msgstr "Снимки экрана"
 
 #: app/blueprints/packages/__init__.py:52
 #: app/templates/packages/edit_maintainers.html:8
-#: app/templates/packages/view.html:628 app/utils/minetest_hypertext.py:302
+#: app/templates/packages/view.html:646 app/utils/minetest_hypertext.py:302
 msgid "Maintainers"
 msgstr "Разработчики"
 
 #: app/blueprints/packages/__init__.py:57 app/templates/admin/list.html:21
-#: app/templates/base.html:159 app/templates/packages/audit.html:4
+#: app/templates/base.html:173 app/templates/packages/audit.html:4
 msgid "Audit Log"
 msgstr "Журнал Проверок"
 
-#: app/blueprints/packages/__init__.py:62 app/templates/base.html:150
+#: app/blueprints/packages/__init__.py:62 app/templates/base.html:164
 #: app/templates/packages/stats.html:4 app/templates/packages/stats.html:23
-#: app/templates/packages/view.html:236 app/templates/users/profile.html:148
+#: app/templates/packages/view.html:243 app/templates/users/profile.html:148
 msgid "Statistics"
 msgstr "Статистика"
 
@@ -1038,8 +1059,8 @@ msgstr "По умолчанию Рабочего Стола"
 msgid "Non-free"
 msgstr "Платный"
 
-#: app/blueprints/packages/advanced_search.py:42 app/models/packages.py:624
-#: app/templates/packages/view.html:163
+#: app/blueprints/packages/advanced_search.py:42 app/models/packages.py:630
+#: app/templates/packages/view.html:170
 msgid "Work in Progress"
 msgstr "Незавершённая работа"
 
@@ -1057,30 +1078,30 @@ msgid "Query"
 msgstr "Опрос"
 
 #: app/blueprints/packages/advanced_search.py:54
-#: app/blueprints/packages/packages.py:230 app/templates/packages/view.html:598
+#: app/blueprints/packages/packages.py:231 app/templates/packages/view.html:616
 #: app/utils/minetest_hypertext.py:263
 msgid "Type"
 msgstr "Тип"
 
 #: app/blueprints/packages/advanced_search.py:56
-#: app/templates/macros/topics.html:6 app/templates/packages/view.html:177
+#: app/templates/macros/topics.html:6 app/templates/packages/view.html:184
 msgid "Author"
 msgstr "Автор"
 
 #: app/blueprints/packages/advanced_search.py:57
-#: app/blueprints/packages/packages.py:237 app/templates/admin/tags/list.html:4
+#: app/blueprints/packages/packages.py:238 app/templates/admin/tags/list.html:4
 #: app/templates/admin/tags/list.html:10 app/templates/todo/tags.html:38
 #: app/utils/minetest_hypertext.py:264
 msgid "Tags"
 msgstr "Метки"
 
 #: app/blueprints/packages/advanced_search.py:60
-#: app/blueprints/packages/packages.py:238
+#: app/blueprints/packages/packages.py:239
 msgid "Content Warnings"
 msgstr "Предупреждения о Контенте"
 
 #: app/blueprints/packages/advanced_search.py:63
-#: app/blueprints/packages/packages.py:239 app/templates/packages/view.html:609
+#: app/blueprints/packages/packages.py:240 app/templates/packages/view.html:627
 #: app/utils/minetest_hypertext.py:298
 msgid "License"
 msgstr "Лицензия"
@@ -1094,9 +1115,10 @@ msgstr "Поддерживает Игру"
 #: app/templates/collections/create_edit.html:81
 #: app/templates/collections/list.html:39
 #: app/templates/collections/view.html:91 app/templates/index.html:48
-#: app/templates/macros/reviews.html:81 app/templates/macros/topics.html:52
+#: app/templates/macros/reviews.html:82 app/templates/macros/topics.html:52
 #: app/templates/packages/game_hub.html:5
 #: app/templates/packages/game_hub.html:25
+#: app/templates/packages/release_view.html:17
 #: app/templates/packages/similar.html:22 app/templates/translate/index.html:28
 #, python-format
 msgid "%(title)s by %(author)s"
@@ -1104,7 +1126,7 @@ msgstr "%(title)s от %(author)s"
 
 #: app/blueprints/packages/advanced_search.py:72
 #: app/blueprints/packages/reviews.py:54
-#: app/templates/packages/translation.html:51
+#: app/templates/packages/translation.html:39
 msgid "Language"
 msgstr "Язык"
 
@@ -1126,13 +1148,13 @@ msgstr "Оценке дополнения"
 
 #: app/blueprints/packages/advanced_search.py:86 app/templates/index.html:78
 #: app/templates/packages/reviews_list.html:4
-#: app/templates/packages/view.html:194 app/templates/packages/view.html:336
+#: app/templates/packages/view.html:201 app/templates/packages/view.html:343
 #: app/templates/users/profile.html:279
 msgid "Reviews"
 msgstr "Обзоры"
 
 #: app/blueprints/packages/advanced_search.py:87
-#: app/templates/packages/view.html:184 app/templates/users/profile.html:242
+#: app/templates/packages/view.html:191 app/templates/users/profile.html:242
 msgid "Downloads"
 msgstr "Загрузки"
 
@@ -1164,77 +1186,77 @@ msgstr "Возрастанию"
 msgid "Random order"
 msgstr "Случайном порядке"
 
-#: app/blueprints/packages/packages.py:215
+#: app/blueprints/packages/packages.py:216
 msgid "No download available."
 msgstr "Загрузка недоступна."
 
-#: app/blueprints/packages/packages.py:231
+#: app/blueprints/packages/packages.py:232
 msgid "Title (Human-readable)"
 msgstr "Название (Читаемое)"
 
-#: app/blueprints/packages/packages.py:232
-#: app/blueprints/packages/packages.py:638
+#: app/blueprints/packages/packages.py:233
+#: app/blueprints/packages/packages.py:645
 msgid "Name (Technical)"
 msgstr "Имя (Техническое)"
 
-#: app/blueprints/packages/packages.py:232
-#: app/blueprints/packages/packages.py:639
-#: app/templates/packages/create_edit.html:75
+#: app/blueprints/packages/packages.py:233
+#: app/blueprints/packages/packages.py:646
+#: app/templates/packages/create_edit.html:80
 msgid "Lower case letters (a-z), digits (0-9), and underscores (_) only"
 msgstr ""
 "Только маленькие латинские буквы (a-z), цифры (0-9) и нижние "
 "подчёркивания (_)"
 
-#: app/blueprints/packages/packages.py:233
+#: app/blueprints/packages/packages.py:234
 msgid "Short Description (Plaintext)"
 msgstr "Краткое описание (обычный текст)"
 
-#: app/blueprints/packages/packages.py:235 app/templates/packages/view.html:620
+#: app/blueprints/packages/packages.py:236 app/templates/packages/view.html:638
 #: app/utils/minetest_hypertext.py:300
 msgid "Maintenance State"
 msgstr "Состояние разработки"
 
-#: app/blueprints/packages/packages.py:240
+#: app/blueprints/packages/packages.py:241
 msgid "Media License"
 msgstr "Лицензия Медиа"
 
-#: app/blueprints/packages/packages.py:242
+#: app/blueprints/packages/packages.py:243
 msgid "Long Description (Markdown)"
 msgstr "Длинное описание (Markdown)"
 
-#: app/blueprints/packages/packages.py:244
+#: app/blueprints/packages/packages.py:245
 msgid "VCS Repository URL"
 msgstr "URL-адрес сетевого хранилища VCS"
 
-#: app/blueprints/packages/packages.py:245 app/blueprints/users/settings.py:77
+#: app/blueprints/packages/packages.py:246 app/blueprints/users/settings.py:77
 msgid "Website URL"
 msgstr "URL-адрес Вебсайта"
 
-#: app/blueprints/packages/packages.py:246
+#: app/blueprints/packages/packages.py:247
 msgid "Issue Tracker URL"
 msgstr "URL-адрес Трекера Проблем"
 
-#: app/blueprints/packages/packages.py:247
+#: app/blueprints/packages/packages.py:248
 msgid "Forum Topic ID"
 msgstr "Идентификатор темы на форуме"
 
-#: app/blueprints/packages/packages.py:248
+#: app/blueprints/packages/packages.py:249
 msgid "Video URL"
 msgstr "URL-адрес Видео"
 
-#: app/blueprints/packages/packages.py:249
+#: app/blueprints/packages/packages.py:250
 msgid "Donate URL"
 msgstr "URL-адрес на Пожертвование"
 
-#: app/blueprints/packages/packages.py:250
+#: app/blueprints/packages/packages.py:251
 msgid "Translation URL"
 msgstr "URL-адрес на Перевод"
 
-#: app/blueprints/packages/packages.py:256
+#: app/blueprints/packages/packages.py:257
 msgid "_game is not an allowed name"
 msgstr "_game не является допустимым именем"
 
-#: app/blueprints/packages/packages.py:266
+#: app/blueprints/packages/packages.py:267
 msgid ""
 "Package already exists, but is removed. Please contact ContentDB staff to"
 " restore the package"
@@ -1242,15 +1264,15 @@ msgstr ""
 "Дополнение уже существует, но удалено. Пожалуйста, свяжитесь с персоналом"
 " ContentDB, чтобы восстановить дополнение"
 
-#: app/blueprints/packages/packages.py:271
+#: app/blueprints/packages/packages.py:272
 msgid "Package already exists"
 msgstr "Дополнение уже существует"
 
-#: app/blueprints/packages/packages.py:277
+#: app/blueprints/packages/packages.py:278
 msgid "A collection with a similar name already exists"
 msgstr "Коллекция с таким же именем уже существует"
 
-#: app/blueprints/packages/packages.py:330
+#: app/blueprints/packages/packages.py:331
 #: app/blueprints/packages/releases.py:89
 msgid ""
 "You must add an email address to your account and confirm it before you "
@@ -1259,30 +1281,30 @@ msgstr ""
 "Вы должны добавить адрес электронной почты в свою учетную запись и "
 "подтвердить его, прежде чем сможете управлять пакетами"
 
-#: app/blueprints/packages/packages.py:336
+#: app/blueprints/packages/packages.py:337
 msgid "Save draft"
 msgstr "Сохранить черновик"
 
-#: app/blueprints/packages/packages.py:344
+#: app/blueprints/packages/packages.py:345
 msgid "Unable to find that user"
 msgstr "Не получилось найти данного пользователя"
 
-#: app/blueprints/packages/packages.py:348
+#: app/blueprints/packages/packages.py:349
 #: app/blueprints/packages/screenshots.py:137
 msgid "Permission denied"
 msgstr "Доступ запрещён"
 
-#: app/blueprints/packages/packages.py:404
-#: app/blueprints/packages/packages.py:495
-#: app/blueprints/packages/packages.py:517
+#: app/blueprints/packages/packages.py:408
+#: app/blueprints/packages/packages.py:502
+#: app/blueprints/packages/packages.py:524
 msgid "You don't have permission to do that"
 msgstr "У вас нету разрешения это делать"
 
-#: app/blueprints/packages/packages.py:437
+#: app/blueprints/packages/packages.py:443
 msgid "Please comment what changes are needed in the approval thread"
 msgstr "Пожалуйста, напишите, какие изменения необходимы в теме проверки"
 
-#: app/blueprints/packages/packages.py:444
+#: app/blueprints/packages/packages.py:450
 msgid ""
 "Please comment in the approval thread so editors know what you have "
 "changed"
@@ -1290,62 +1312,62 @@ msgstr ""
 "Пожалуйста, прокомментируйте в теме одобрения, чтобы редакторы знали, что"
 " вы изменили"
 
-#: app/blueprints/packages/packages.py:482
+#: app/blueprints/packages/packages.py:489
 #, python-format
 msgid "Set state to %(state)s"
 msgstr "Установить состояние в %(state)s"
 
-#: app/blueprints/packages/packages.py:512
+#: app/blueprints/packages/packages.py:519
 msgid "Deleted package"
 msgstr "Дополнение удалено"
 
-#: app/blueprints/packages/packages.py:534
+#: app/blueprints/packages/packages.py:541
 msgid "Unapproved package"
 msgstr "Дополнение теперь неодобренное"
 
-#: app/blueprints/packages/packages.py:543
+#: app/blueprints/packages/packages.py:550
 msgid "Maintainers (Comma-separated)"
 msgstr "Разработчики (через запятую)"
 
-#: app/blueprints/packages/packages.py:552
+#: app/blueprints/packages/packages.py:559
 msgid "You don't have permission to edit maintainers"
 msgstr "У вас нет разрешения для изменения сопровождающих"
 
-#: app/blueprints/packages/packages.py:602
+#: app/blueprints/packages/packages.py:609
 msgid "You are not a maintainer"
 msgstr "Вы не разработчик"
 
-#: app/blueprints/packages/packages.py:605
+#: app/blueprints/packages/packages.py:612
 msgid "Package owners cannot remove themselves as maintainers"
 msgstr "Владельцы дополнения не могут удалить самих себя как разработчиков"
 
-#: app/blueprints/packages/packages.py:637
+#: app/blueprints/packages/packages.py:644
 msgid "Author Name"
 msgstr "Имя Автора"
 
-#: app/blueprints/packages/packages.py:724
+#: app/blueprints/packages/packages.py:731
 msgid "Enable support detection based on dependencies (recommended)"
 msgstr "Включить обнаружение поддержки на основе зависимостей (желательно)"
 
-#: app/blueprints/packages/packages.py:725
+#: app/blueprints/packages/packages.py:732
 msgid "Supported games"
 msgstr "Поддерживаемые игры"
 
-#: app/blueprints/packages/packages.py:726
+#: app/blueprints/packages/packages.py:733
 msgid "Unsupported games"
 msgstr "Неподдерживаемые игры"
 
-#: app/blueprints/packages/packages.py:727
+#: app/blueprints/packages/packages.py:734
 msgid "Supports all games (unless stated) / is game independent"
 msgstr "Поддерживает все игры (если не указано обратное) / не зависит от игр"
 
-#: app/blueprints/packages/packages.py:743
+#: app/blueprints/packages/packages.py:750
 msgid "You need at least one release before you can edit game support"
 msgstr ""
 "Вам нужен хотя бы один релиз, прежде чем вы сможете редактировать "
 "поддержку игры"
 
-#: app/blueprints/packages/packages.py:747
+#: app/blueprints/packages/packages.py:754
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
 "Мод(пакет) должен содержать хотя бы один мод. Пожалуйста, создайте новый "
@@ -1372,18 +1394,19 @@ msgstr "Git метка (хэш коммита, ветвь или метка)"
 
 #: app/blueprints/packages/releases.py:62
 #: app/blueprints/packages/releases.py:77
-#: app/blueprints/packages/releases.py:207
+#: app/blueprints/packages/releases.py:217
 msgid "Minimum Minetest Version"
 msgstr "Минимальная версия Minetest"
 
 #: app/blueprints/packages/releases.py:64
 #: app/blueprints/packages/releases.py:79
-#: app/blueprints/packages/releases.py:210
+#: app/blueprints/packages/releases.py:220
 msgid "Maximum Minetest Version"
 msgstr "Максимальная версия Minetest"
 
 #: app/blueprints/packages/releases.py:74
 #: app/templates/packages/release_edit.html:31
+#: app/templates/packages/release_view.html:31
 msgid "URL"
 msgstr "URL-адрес"
 
@@ -1404,77 +1427,77 @@ msgstr "Импортировать из Git"
 msgid "Upload .zip file"
 msgstr "Загрузить .zip файл"
 
-#: app/blueprints/packages/releases.py:206
+#: app/blueprints/packages/releases.py:216
 msgid "Set Min"
 msgstr "Поставить минимум"
 
-#: app/blueprints/packages/releases.py:209
+#: app/blueprints/packages/releases.py:219
 msgid "Set Max"
 msgstr "Поставить предел"
 
-#: app/blueprints/packages/releases.py:212
+#: app/blueprints/packages/releases.py:222
 msgid "Only change values previously set as none"
 msgstr "Изменять только значения, ранее установленные как отсутствующие"
 
-#: app/blueprints/packages/releases.py:213
+#: app/blueprints/packages/releases.py:223
 msgid "Update"
 msgstr "Обновить"
 
-#: app/blueprints/packages/releases.py:265
+#: app/blueprints/packages/releases.py:275
 #: app/templates/packages/update_config.html:25
 msgid "Trigger"
 msgstr "Триггер"
 
-#: app/blueprints/packages/releases.py:266
+#: app/blueprints/packages/releases.py:276
 msgid "New Commit"
 msgstr "Новая контрольная точка"
 
-#: app/blueprints/packages/releases.py:267 app/templates/admin/tags/list.html:8
+#: app/blueprints/packages/releases.py:277 app/templates/admin/tags/list.html:8
 msgid "New Tag"
 msgstr "Новая Метка"
 
-#: app/blueprints/packages/releases.py:269
+#: app/blueprints/packages/releases.py:279
 msgid "Branch name"
 msgstr "Название ветви"
 
-#: app/blueprints/packages/releases.py:270
+#: app/blueprints/packages/releases.py:280
 #: app/templates/packages/update_config.html:38
 msgid "Action"
 msgstr "Действие"
 
-#: app/blueprints/packages/releases.py:271
+#: app/blueprints/packages/releases.py:281
 msgid "Send notification and mark as outdated"
 msgstr "Отправить уведомление и пометить как устаревший"
 
-#: app/blueprints/packages/releases.py:271 app/logic/package_approval.py:104
+#: app/blueprints/packages/releases.py:281 app/logic/package_approval.py:104
 msgid "Create release"
 msgstr "Создать релиз"
 
-#: app/blueprints/packages/releases.py:273
+#: app/blueprints/packages/releases.py:283
 msgid "Save Settings"
 msgstr "Сохранить Настройки"
 
-#: app/blueprints/packages/releases.py:274
+#: app/blueprints/packages/releases.py:284
 msgid "Disable Automation"
 msgstr "Отключить Автоматизацию"
 
-#: app/blueprints/packages/releases.py:313
+#: app/blueprints/packages/releases.py:323
 msgid "Please add a Git repository URL in order to set up automatic releases"
 msgstr ""
 "Пожалуйста, добавьте URL-адрес Git репозитория чтобы настроить "
 "автоматические релизы"
 
-#: app/blueprints/packages/releases.py:329
+#: app/blueprints/packages/releases.py:339
 msgid "Deleted update configuration"
 msgstr "Удалить обновлённую конфигурацию"
 
-#: app/blueprints/packages/releases.py:337
+#: app/blueprints/packages/releases.py:347
 msgid "Now, please create an initial release"
 msgstr "Теперь, создайте первый релиз"
 
 #: app/blueprints/packages/reviews.py:60 app/blueprints/threads/__init__.py:181
 #: app/blueprints/threads/__init__.py:182
-#: app/blueprints/threads/__init__.py:282
+#: app/blueprints/threads/__init__.py:283
 msgid "Comment"
 msgstr "Прокомментировать"
 
@@ -1482,18 +1505,18 @@ msgstr "Прокомментировать"
 msgid "Rating"
 msgstr "Рейтинг"
 
-#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:124
-#: app/templates/macros/reviews.html:178
+#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:125
+#: app/templates/macros/reviews.html:179
 msgid "Yes"
 msgstr "Да"
 
-#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:129
-#: app/templates/macros/reviews.html:182
+#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:130
+#: app/templates/macros/reviews.html:183
 msgid "Neutral"
 msgstr "Нейтрально"
 
-#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:134
-#: app/templates/macros/reviews.html:186
+#: app/blueprints/packages/reviews.py:62 app/templates/macros/reviews.html:135
+#: app/templates/macros/reviews.html:187
 msgid "No"
 msgstr "Нет"
 
@@ -1512,7 +1535,7 @@ msgstr ""
 
 #: app/blueprints/packages/reviews.py:94 app/blueprints/threads/__init__.py:207
 #: app/blueprints/threads/__init__.py:240
-#: app/blueprints/threads/__init__.py:334 app/blueprints/users/settings.py:114
+#: app/blueprints/threads/__init__.py:335 app/blueprints/users/settings.py:114
 #: app/logic/packages.py:131
 msgid "Linking to blocked sites is not allowed"
 msgstr "Ссылки на заблокированные сайты запрещены"
@@ -1540,8 +1563,9 @@ msgid "Message"
 msgstr "Сообщение"
 
 #: app/blueprints/report/__init__.py:35 app/templates/macros/threads.html:51
-#: app/templates/packages/view.html:688 app/templates/report/index.html:4
-#: app/templates/report/index.html:10 app/templates/users/profile.html:37
+#: app/templates/packages/view.html:706 app/templates/report/index.html:4
+#: app/templates/report/index.html:10 app/templates/users/account.html:91
+#: app/templates/users/profile.html:37
 msgid "Report"
 msgstr "Сообщить"
 
@@ -1577,24 +1601,24 @@ msgstr "Не удается удалить сообщение, открываю�
 msgid "Please wait before commenting again"
 msgstr "Пожалуйста, подождите прежде чем снова комментировать"
 
-#: app/blueprints/threads/__init__.py:284
+#: app/blueprints/threads/__init__.py:285
 #: app/templates/macros/package_approval.html:56
 msgid "Open Thread"
 msgstr "Открыть Ветвь Обсуждения"
 
-#: app/blueprints/threads/__init__.py:309
+#: app/blueprints/threads/__init__.py:310
 msgid "Unable to create thread!"
 msgstr "Не получилось создать ветвь обсуждения!"
 
-#: app/blueprints/threads/__init__.py:315
+#: app/blueprints/threads/__init__.py:316
 msgid "An approval thread already exists! Consider replying there instead"
 msgstr "Тема проверки уже существует! Лучше напишите ответ в ней"
 
-#: app/blueprints/threads/__init__.py:319
+#: app/blueprints/threads/__init__.py:320
 msgid "Please wait before opening another thread"
 msgstr "Пожалуйста, подождите прежде чем открывать ещё одну ветвь обсуждения"
 
-#: app/blueprints/todo/user.py:192
+#: app/blueprints/todo/user.py:193
 #: app/templates/collections/package_add_to.html:46
 msgid "Done"
 msgstr "Готово"
@@ -1613,7 +1637,7 @@ msgstr "Пароль"
 msgid "Remember me"
 msgstr "Запомнить меня"
 
-#: app/blueprints/users/account.py:39 app/templates/base.html:176
+#: app/blueprints/users/account.py:39 app/templates/base.html:190
 #: app/templates/donate/index.html:85 app/templates/users/login.html:4
 msgid "Sign in"
 msgstr "Войти"
@@ -1796,8 +1820,8 @@ msgid ""
 "A ContentDB user with that name already exists. Please contact an admin "
 "to link to your forum account"
 msgstr ""
-"Пользователь ContentDB с таким именем уже существует. Пожалуйста, свяжитесь "
-"с администратором, чтобы получить ссылку на свой аккаунт форума"
+"Пользователь ContentDB с таким именем уже существует. Пожалуйста, "
+"свяжитесь с администратором, чтобы получить ссылку на свой аккаунт форума"
 
 #: app/blueprints/users/claim.py:75
 msgid "That user has already been claimed!"
@@ -1991,7 +2015,7 @@ msgstr "Текст для поиска (регулярное выражение)
 msgid "File filter"
 msgstr "Фильтр файлов"
 
-#: app/blueprints/zipgrep/__init__.py:38 app/templates/base.html:60
+#: app/blueprints/zipgrep/__init__.py:38 app/templates/base.html:74
 #: app/templates/packages/advanced_search.html:34
 #: app/templates/packages/game_hub.html:35 app/templates/todo/tags.html:14
 msgid "Search"
@@ -2094,6 +2118,10 @@ msgstr "У вас нет разрешения на правку этого до�
 msgid "You don't have permission to change the package name"
 msgstr "У вас нет разрешения на изменение имени дополнения"
 
+#: app/logic/packages.py:140
+msgid "You cannot change package type once approved"
+msgstr ""
+
 #: app/logic/releases.py:33
 msgid "You don't have permission to make releases"
 msgstr "У вас нет разрешения на создание релизов"
@@ -2180,17 +2208,17 @@ msgstr "Игра"
 msgid "Texture Pack"
 msgstr "Набор Текстур"
 
-#: app/models/packages.py:78 app/templates/base.html:39
+#: app/models/packages.py:78 app/templates/base.html:53
 #: app/templates/modnames/view.html:14
 msgid "Mods"
 msgstr "Моды"
 
-#: app/models/packages.py:80 app/templates/base.html:42
+#: app/models/packages.py:80 app/templates/base.html:56
 #: app/templates/modnames/view.html:17
 msgid "Games"
 msgstr "Игры"
 
-#: app/models/packages.py:82 app/templates/base.html:45
+#: app/models/packages.py:82 app/templates/base.html:59
 msgid "Texture Packs"
 msgstr "Наборы текстур"
 
@@ -2323,185 +2351,185 @@ msgstr "Утвердить"
 msgid "Delete"
 msgstr "Удалить"
 
-#: app/models/packages.py:1366
+#: app/models/packages.py:1384
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr "Новая фиксация %(hash)s найден в Git репозитории."
 
-#: app/models/packages.py:1370
+#: app/models/packages.py:1388
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr "Последним выпуском была фиксация %(hash)s"
 
-#: app/models/packages.py:1376
+#: app/models/packages.py:1394
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr "Новый тег %(tag_name)s найден в Git репозитории."
 
-#: app/models/users.py:45
+#: app/models/users.py:46
 msgid "Banned"
 msgstr "Заблокирован"
 
-#: app/models/users.py:47
+#: app/models/users.py:48
 msgid "Not Joined"
 msgstr "Не Присоединился"
 
-#: app/models/users.py:49
+#: app/models/users.py:50
 msgid "New Member"
 msgstr "Новый Участник"
 
-#: app/models/users.py:51
+#: app/models/users.py:52
 msgid "Member"
 msgstr "Участник"
 
-#: app/models/users.py:53
+#: app/models/users.py:54
 msgid "Trusted Member"
 msgstr "Доверенный Участник"
 
-#: app/models/users.py:55
+#: app/models/users.py:56
 msgid "Approver"
 msgstr "Проверяющий"
 
-#: app/models/users.py:57
+#: app/models/users.py:58
 msgid "Editor"
 msgstr "Редактор"
 
 #. NOTE: BOT notification type
-#: app/models/users.py:59 app/models/users.py:448
+#: app/models/users.py:60 app/models/users.py:455
 msgid "Bot"
 msgstr "Бот"
 
-#: app/models/users.py:61
+#: app/models/users.py:62
 msgid "Moderator"
 msgstr "Модератор"
 
-#: app/models/users.py:63 app/templates/base.html:164
+#: app/models/users.py:64 app/templates/base.html:178
 msgid "Admin"
 msgstr "Администратор"
 
 #. NOTE: PACKAGE_EDIT notification type
-#: app/models/users.py:433
+#: app/models/users.py:440
 msgid "Package Edit"
 msgstr "Редактирующий Пакеты"
 
 #. NOTE: PACKAGE_APPROVAL notification type
-#: app/models/users.py:436
+#: app/models/users.py:443
 msgid "Package Approval"
 msgstr "Одобряющий Пакеты"
 
 #. NOTE: NEW_THREAD notification type
-#: app/models/users.py:439 app/templates/threads/list.html:12
+#: app/models/users.py:446 app/templates/threads/list.html:12
 #: app/templates/threads/new.html:4
 msgid "New Thread"
 msgstr "Новая тема"
 
 #. NOTE: NEW_REVIEW notification type
-#: app/models/users.py:442
+#: app/models/users.py:449
 msgid "New Review"
 msgstr "Новый Обзор"
 
 #. NOTE: THREAD_REPLY notification type
-#: app/models/users.py:445
+#: app/models/users.py:452
 msgid "Thread Reply"
 msgstr "Ответить Ветке"
 
 #. NOTE: MAINTAINER notification type
-#: app/models/users.py:451 app/templates/macros/threads.html:27
+#: app/models/users.py:458 app/templates/macros/threads.html:27
 msgid "Maintainer"
 msgstr "Разработчик"
 
 #. NOTE: EDITOR_ALERT notification type
-#: app/models/users.py:454
+#: app/models/users.py:461
 msgid "Editor Alert"
 msgstr "Предупреждение Редактора"
 
 #. NOTE: EDITOR_MISC notification type
-#: app/models/users.py:457
+#: app/models/users.py:464
 msgid "Editor Misc"
 msgstr "Разное Редактора"
 
 #. NOTE: OTHER notification type
-#: app/models/users.py:460
+#: app/models/users.py:467
 msgid "Other"
 msgstr "Другое"
 
-#: app/models/users.py:470
+#: app/models/users.py:477
 msgid "This is a Package Edit notification."
 msgstr "Это уведомление от Редактирующего Пакеты."
 
-#: app/models/users.py:472
+#: app/models/users.py:479
 msgid "This is a Package Approval notification."
 msgstr "Это уведомление от Одобряющего Пакеты."
 
-#: app/models/users.py:474
+#: app/models/users.py:481
 msgid "This is a New Thread notification."
 msgstr "Это уведомление о Новой Ветке."
 
-#: app/models/users.py:476
+#: app/models/users.py:483
 msgid "This is a New Review notification."
 msgstr "Это уведомление о новом обзоре."
 
-#: app/models/users.py:478
+#: app/models/users.py:485
 msgid "This is a Thread Reply notification."
 msgstr "Это уведомление об Ответе в Ветке."
 
-#: app/models/users.py:480
+#: app/models/users.py:487
 msgid "This is a Bot notification."
 msgstr "Это уведомление Бота."
 
-#: app/models/users.py:482
+#: app/models/users.py:489
 msgid "This is a Maintainer change notification."
 msgstr "Это уведомление об Изменении Сопровождающего."
 
-#: app/models/users.py:484
+#: app/models/users.py:491
 msgid "This is an Editor Alert notification."
 msgstr "Это уведомление об Предупреждении Редактора."
 
-#: app/models/users.py:486
+#: app/models/users.py:493
 msgid "This is an Editor Misc notification."
 msgstr "Это уведомление об Редактора Разном."
 
-#: app/models/users.py:488
+#: app/models/users.py:495
 msgid "This is an Other notification."
 msgstr "Это уведомление Другого."
 
-#: app/models/users.py:495
+#: app/models/users.py:502
 msgid "When another user edits your packages, releases, etc."
 msgstr "Когда другой пользователь редактирует ваши пакеты, релизы, и так далее."
 
-#: app/models/users.py:497
+#: app/models/users.py:504
 msgid "Notifications from editors related to the package approval process."
 msgstr "Уведомления от редакторов, связанные с процессом одобрения пакета."
 
-#: app/models/users.py:499
+#: app/models/users.py:506
 msgid "When a thread is created on your package."
 msgstr "Когда в вашем пакете создается ветка."
 
-#: app/models/users.py:501
+#: app/models/users.py:508
 msgid "When a user posts a review on your package."
 msgstr "Когда пользователь оставляет обзор об вашем пакете."
 
-#: app/models/users.py:503
+#: app/models/users.py:510
 msgid "When someone replies to a thread you're watching."
 msgstr "Когда кто-то отвечает на ветку, которой вы следите."
 
-#: app/models/users.py:505
+#: app/models/users.py:512
 msgid "From a bot - for example, update notifications."
 msgstr "От бота - например, уведомления об обновлениях."
 
-#: app/models/users.py:507
+#: app/models/users.py:514
 msgid "When your package's maintainers change."
 msgstr "Когда сменятся сопровождающие вашего пакета."
 
-#: app/models/users.py:509
+#: app/models/users.py:516
 msgid "For editors: Important alerts."
 msgstr "Для редакторов: Важные предупреждения."
 
-#: app/models/users.py:511
+#: app/models/users.py:518
 msgid "For editors: Minor notifications, including new threads."
 msgstr "Для редакторов: Незначительные уведомления, включая новые ветки."
 
-#: app/models/users.py:513
+#: app/models/users.py:520
 msgid "Minor notifications not important enough for a dedicated category."
 msgstr "Незначительные уведомления, недостаточно важные для выделенной категории."
 
@@ -2558,11 +2586,11 @@ msgstr ""
 "Эта страница не найдена. Ссылка может быть сломана, страница удалена, или"
 " у вас нет к ней доступа."
 
-#: app/templates/base.html:48
+#: app/templates/base.html:62
 msgid "Random"
 msgstr "Случайная страница"
 
-#: app/templates/base.html:51 app/templates/base.html:245
+#: app/templates/base.html:65 app/templates/base.html:259
 #: app/templates/packages/bulk_update_conf.html:8
 #: app/templates/packages/translation.html:12
 #: app/templates/packages/update_config.html:8
@@ -2571,130 +2599,134 @@ msgstr "Случайная страница"
 msgid "Help"
 msgstr "Помощь"
 
-#: app/templates/base.html:58
+#: app/templates/base.html:72
 #, python-format
 msgid "Search %(type)s"
 msgstr "Искать %(type)s"
 
-#: app/templates/base.html:58 app/templates/todo/tags.html:11
+#: app/templates/base.html:72 app/templates/todo/tags.html:11
 #: app/templates/todo/tags.html:13
 msgid "Search all packages"
 msgstr "Искать все дополнения"
 
-#: app/templates/base.html:75
+#: app/templates/base.html:89
 msgid "Work Queue"
 msgstr "Рабочая очередь"
 
-#: app/templates/base.html:88 app/templates/base.html:140
+#: app/templates/base.html:102 app/templates/base.html:154
 msgid "To do list"
 msgstr "Список задач"
 
-#: app/templates/base.html:97 app/templates/notifications/list.html:4
+#: app/templates/base.html:111 app/templates/notifications/list.html:4
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: app/templates/base.html:118
+#: app/templates/base.html:132
 msgid "Add Package"
 msgstr "Добавить дополнение"
 
-#: app/templates/base.html:135
+#: app/templates/base.html:149
 msgid "Profile"
 msgstr "Профиль"
 
-#: app/templates/base.html:145
+#: app/templates/base.html:159
 msgid "My Collections"
 msgstr "Мои коллекции"
 
-#: app/templates/base.html:169 app/templates/packages/release_new.html:12
+#: app/templates/base.html:183 app/templates/packages/release_new.html:12
 msgid "Settings"
 msgstr "Настройки"
 
-#: app/templates/base.html:172
+#: app/templates/base.html:186
 msgid "Sign out"
 msgstr "Выйти"
 
 #: app/templates/admin/languages/list.html:4
-#: app/templates/admin/languages/list.html:10 app/templates/base.html:185
-#: app/templates/packages/view.html:602 app/utils/minetest_hypertext.py:288
+#: app/templates/admin/languages/list.html:10 app/templates/base.html:199
+#: app/templates/packages/view.html:620 app/utils/minetest_hypertext.py:288
 msgid "Languages"
 msgstr "Языки"
 
-#: app/templates/base.html:202 app/templates/translate/index.html:76
+#: app/templates/base.html:216 app/templates/translate/index.html:76
 msgid "Help translate ContentDB"
 msgstr "Помогите перевести ContentDB"
 
-#: app/templates/base.html:246
+#: app/templates/base.html:260
 msgid "About"
 msgstr "Об этом"
 
-#: app/templates/base.html:247
+#: app/templates/base.html:261
 msgid "Contact Us"
 msgstr "Связаться с Нами"
 
-#: app/templates/base.html:248
+#: app/templates/base.html:262
 msgid "Rules"
 msgstr "Правила"
 
-#: app/templates/base.html:249
+#: app/templates/base.html:263
 msgid "Policy and Guidance"
 msgstr "Политика и руководство"
 
-#: app/templates/base.html:250 app/templates/donate/index.html:46
+#: app/templates/base.html:264 app/templates/donate/index.html:46
 #: app/templates/donate/index.html:70 app/templates/users/profile.html:104
 msgid "Donate"
 msgstr "Пожертвовать"
 
-#: app/templates/base.html:251
+#: app/templates/base.html:265
 msgid "API"
 msgstr "API"
 
-#: app/templates/base.html:252 app/templates/users/register.html:37
+#: app/templates/base.html:266
+msgid "RSS / Feeds"
+msgstr ""
+
+#: app/templates/base.html:267 app/templates/users/register.html:37
 msgid "Privacy Policy"
 msgstr "Политика конфиденциальности"
 
-#: app/templates/base.html:254
+#: app/templates/base.html:269
 msgid "Report / DMCA"
 msgstr "Сообщение / DMCA"
 
-#: app/templates/base.html:256 app/templates/packages/advanced_search.html:4
+#: app/templates/base.html:271 app/templates/packages/advanced_search.html:4
 msgid "Advanced Search"
 msgstr "Расширенный Поиск"
 
-#: app/templates/base.html:257
+#: app/templates/base.html:272
 msgid "User List"
 msgstr "Список пользователей"
 
-#: app/templates/base.html:258 app/templates/packages/view.html:190
-#: app/templates/packages/view.html:677 app/templates/threads/list.html:4
+#: app/templates/base.html:273 app/templates/packages/view.html:197
+#: app/templates/packages/view.html:695 app/templates/threads/list.html:4
 msgid "Threads"
 msgstr "Темы"
 
-#: app/templates/base.html:259 app/templates/collections/list.html:7
+#: app/templates/base.html:274 app/templates/collections/list.html:7
 #: app/templates/collections/list.html:26
 msgid "Collections"
 msgstr "Коллекции"
 
-#: app/templates/base.html:260 app/templates/donate/index.html:4
+#: app/templates/base.html:275 app/templates/donate/index.html:4
 msgid "Support Creators"
 msgstr "Поддержать Создателей"
 
-#: app/templates/base.html:261
+#: app/templates/base.html:276
 msgid "Translate Packages"
 msgstr "Переводы Пакетов"
 
-#: app/templates/base.html:262
+#: app/templates/base.html:277
 msgid "Source Code"
 msgstr "Исходный код"
 
-#: app/templates/base.html:268
+#: app/templates/base.html:283
 msgid "Show non-free packages"
 msgstr "Показывать платные пакеты"
 
-#: app/templates/base.html:270
+#: app/templates/base.html:285
 msgid "Hide non-free packages"
 msgstr "Скрыть платные пакеты"
 
-#: app/templates/base.html:274
+#: app/templates/base.html:289
 #, python-format
 msgid "Our privacy policy has been updated (%(date)s)"
 msgstr "Наша политика конфиденциальности была обновлена (%(date)s)"
@@ -2703,22 +2735,16 @@ msgstr "Наша политика конфиденциальности была 
 msgid "Welcome"
 msgstr "Добро пожаловать"
 
-#: app/templates/index.html:8
-msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
-msgstr ""
-"Добро пожаловать в лучшее место чтобы найти Minetest моды, игры и пакеты "
-"тексур"
-
 #: app/templates/index.html:53
 #, python-format
 msgid "<strong>%(title)s</strong> by %(author)s"
 msgstr "<strong>%(title)s</strong> от %(author)s"
 
-#: app/templates/index.html:94 app/templates/packages/view.html:278
+#: app/templates/index.html:94 app/templates/packages/view.html:285
 msgid "Previous"
 msgstr "Предыдущий"
 
-#: app/templates/index.html:98 app/templates/packages/view.html:282
+#: app/templates/index.html:98 app/templates/packages/view.html:289
 #: app/templates/users/claim_forums.html:87
 msgid "Next"
 msgstr "Следующий"
@@ -2800,7 +2826,7 @@ msgstr "Дополнение"
 
 #: app/templates/admin/storage.html:62
 #: app/templates/collections/create_edit.html:61
-#: app/templates/threads/user_comments.html:79
+#: app/templates/threads/user_comments.html:80
 msgid "No results"
 msgstr "Нет результатов"
 
@@ -2925,7 +2951,8 @@ msgstr "Токены не созданы"
 
 #: app/templates/collections/create_edit.html:5
 #: app/templates/collections/view.html:42 app/templates/macros/releases.html:68
-#: app/templates/packages/view.html:116 app/templates/packages/view.html:255
+#: app/templates/packages/release_view.html:10
+#: app/templates/packages/view.html:123 app/templates/packages/view.html:262
 msgid "Edit"
 msgstr "Редактировать"
 
@@ -2943,7 +2970,7 @@ msgstr "Для этого необходимо, чтобы коллекция б
 
 #: app/templates/collections/create_edit.html:76
 #: app/templates/packages/remove.html:34 app/templates/packages/remove.html:83
-#: app/templates/packages/view.html:128
+#: app/templates/packages/view.html:135
 msgid "Remove"
 msgstr "Удалить"
 
@@ -3220,8 +3247,8 @@ msgstr "Удаленный пользователь"
 msgid "No audit log entries."
 msgstr "Нет записей журнала аудита."
 
-#: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:150
-#: app/templates/packages/remove.html:73 app/templates/packages/view.html:468
+#: app/templates/macros/forms.html:21 app/templates/macros/reviews.html:151
+#: app/templates/packages/remove.html:73 app/templates/packages/view.html:486
 #: app/templates/users/modtools.html:86
 msgid "Required"
 msgstr "Требуется"
@@ -3301,6 +3328,7 @@ msgstr "Редактировать / Проверить"
 
 #: app/templates/macros/releases.html:103
 #: app/templates/packages/release_edit.html:39
+#: app/templates/packages/release_view.html:41
 msgid "Importing..."
 msgstr "Импорт…"
 
@@ -3320,34 +3348,34 @@ msgstr "Полезно"
 msgid "Unhelpful"
 msgstr "Бесполезно"
 
-#: app/templates/macros/reviews.html:90
+#: app/templates/macros/reviews.html:91
 #, python-format
 msgid "%(num)d comments"
 msgstr "%(num)d комментариев"
 
-#: app/templates/macros/reviews.html:102
+#: app/templates/macros/reviews.html:103
 msgid "No reviews, yet."
 msgstr "Обзоров пока нет."
 
-#: app/templates/macros/reviews.html:112 app/templates/macros/reviews.html:166
+#: app/templates/macros/reviews.html:113 app/templates/macros/reviews.html:167
 #: app/templates/packages/review_create_edit.html:4
 msgid "Review"
 msgstr "Обзор"
 
-#: app/templates/macros/reviews.html:139
+#: app/templates/macros/reviews.html:140
 #: app/templates/packages/review_create_edit.html:51
 msgid "Why or why not? Try to be constructive"
 msgstr "Почему или почему нет? Постарайтесь быть конструктивными"
 
-#: app/templates/macros/reviews.html:156
+#: app/templates/macros/reviews.html:157
 msgid "Post Review"
 msgstr "Опубликовать обзор"
 
-#: app/templates/macros/reviews.html:192
+#: app/templates/macros/reviews.html:193
 msgid "Report an issue"
 msgstr "Сообщить о проблеме"
 
-#: app/templates/macros/reviews.html:196
+#: app/templates/macros/reviews.html:197
 msgid "Ask a question"
 msgstr "Спросить вопрос"
 
@@ -3490,8 +3518,8 @@ msgstr "Последний ответ"
 msgid "On %(trigger)s, do %(action)s"
 msgstr "При %(trigger)s, выполнить %(action)s"
 
-#: app/templates/macros/todo.html:35 app/templates/packages/view.html:122
-#: app/templates/packages/view.html:433
+#: app/templates/macros/todo.html:35 app/templates/packages/view.html:129
+#: app/templates/packages/view.html:451
 msgid "Release"
 msgstr "Релиз"
 
@@ -3501,7 +3529,7 @@ msgstr "Репозиторий"
 
 #: app/templates/macros/todo.html:48
 #: app/templates/packages/releases_list.html:13
-#: app/templates/packages/view.html:437
+#: app/templates/packages/view.html:455
 msgid "Update settings"
 msgstr "Обновить настройки"
 
@@ -3546,9 +3574,9 @@ msgstr "Темы форума"
 
 #: app/templates/modnames/view.html:27 app/templates/oauth/authorize.html:32
 #: app/templates/packages/game_support.html:42
-#: app/templates/packages/similar.html:38 app/templates/packages/view.html:474
-#: app/templates/packages/view.html:498 app/templates/packages/view.html:543
-#: app/templates/packages/view.html:575 app/templates/todo/editor.html:85
+#: app/templates/packages/similar.html:38 app/templates/packages/view.html:492
+#: app/templates/packages/view.html:516 app/templates/packages/view.html:561
+#: app/templates/packages/view.html:593 app/templates/todo/editor.html:85
 #: app/templates/todo/game_support.html:45
 #, python-format
 msgid "%(title)s by %(display_name)s"
@@ -3797,11 +3825,11 @@ msgstr ""
 "необходим для таких функций\n"
 "\t\t\tкак поиск метаданных из git и автозаполнение."
 
-#: app/templates/packages/create_edit.html:73
+#: app/templates/packages/create_edit.html:78
 msgid "You need to unpublish the package to change the name."
 msgstr "Вам нужно отменить публикацию пакета, чтобы изменить название."
 
-#: app/templates/packages/create_edit.html:80
+#: app/templates/packages/create_edit.html:85
 msgid ""
 "Tip: Don't include <i>Minetest</i>, <i>mod</i>, or <i>modpack</i> "
 "anywhere in the short description. It is unnecessary and wastes "
@@ -3811,7 +3839,7 @@ msgstr ""
 "краткое описание. В этом нет необходимости — это просто впустую тратит "
 "символы."
 
-#: app/templates/packages/create_edit.html:83
+#: app/templates/packages/create_edit.html:88
 msgid ""
 "Please choose 'Work in Progress' if your package is unstable, and "
 "shouldn't be recommended to all players"
@@ -3819,11 +3847,11 @@ msgstr ""
 "Пожалуйста, выберите «незавершённая работа», если ваше дополнение "
 "нестабильно и не может быть советуемым для всех игроков"
 
-#: app/templates/packages/create_edit.html:88
+#: app/templates/packages/create_edit.html:93
 msgid "If there is no media, set the Media License to the same as the License."
 msgstr "Если медиа нет, установите лицензию медиа на то же самое, что и лицензию."
 
-#: app/templates/packages/create_edit.html:92
+#: app/templates/packages/create_edit.html:97
 msgid ""
 "There's no need to link to the package on ContentDB in the long "
 "description, the user is already here!"
@@ -3831,7 +3859,7 @@ msgstr ""
 "Нет необходимости в длинном описании ссылаться на пакет на ContentDB, "
 "пользователь уже здесь!"
 
-#: app/templates/packages/create_edit.html:95
+#: app/templates/packages/create_edit.html:100
 msgid ""
 "There's no need to include the forum topic in the long description, it's "
 "already shown on the page."
@@ -3839,7 +3867,7 @@ msgstr ""
 "Нет необходимости включать тему форума в длинное описание, она уже "
 "указана на странице."
 
-#: app/templates/packages/create_edit.html:98
+#: app/templates/packages/create_edit.html:103
 msgid ""
 "There's no need to include the repository URL in the long description, "
 "it's already shown on the page."
@@ -3847,23 +3875,23 @@ msgstr ""
 "Нет необходимости включать URL-адрес репозитория в длинное описание, он "
 "уже показан на странице."
 
-#: app/templates/packages/create_edit.html:102
+#: app/templates/packages/create_edit.html:107
 msgid "What to write in the long description"
 msgstr "Что напечатать в длинном описании"
 
-#: app/templates/packages/create_edit.html:108
+#: app/templates/packages/create_edit.html:113
 msgid "Repository and Links"
 msgstr "Репозиторий и ссылки"
 
-#: app/templates/packages/create_edit.html:111
+#: app/templates/packages/create_edit.html:116
 msgid "Do you have a Git repository?"
 msgstr "Есть ли у вас репозиторий Git?"
 
-#: app/templates/packages/create_edit.html:113
+#: app/templates/packages/create_edit.html:118
 msgid "Having a repository is optional"
 msgstr "Наличие репозитория необязательно"
 
-#: app/templates/packages/create_edit.html:116
+#: app/templates/packages/create_edit.html:121
 msgid ""
 "If you do have a repository, enter the URL below. Otherwise, leave blank "
 "and click skip."
@@ -3871,47 +3899,47 @@ msgstr ""
 "Если у вас действительно есть репозиторий, введите URL-адрес ниже. В "
 "противном случае оставьте поле пустым и нажмите пропустить."
 
-#: app/templates/packages/create_edit.html:121
+#: app/templates/packages/create_edit.html:126
 msgid "HTTP URL to a Git, Mercurial, or other repository"
 msgstr "HTTP URL-адрес Git, Mercurial, или другого репозитория"
 
-#: app/templates/packages/create_edit.html:124
+#: app/templates/packages/create_edit.html:129
 msgid "Next (Autoimport)"
 msgstr "Далее (Автоимпорт)"
 
-#: app/templates/packages/create_edit.html:125
+#: app/templates/packages/create_edit.html:130
 msgid "Skip"
 msgstr "Пропустить"
 
-#: app/templates/packages/create_edit.html:129
+#: app/templates/packages/create_edit.html:134
 msgid "Importing... (This may take a while)"
 msgstr "Импорт… (это может занять некоторое время)"
 
-#: app/templates/packages/create_edit.html:132
+#: app/templates/packages/create_edit.html:137
 msgid "Where should users report issues?"
 msgstr "Куда пользователи должны сообщать о проблемах?"
 
-#: app/templates/packages/create_edit.html:136
+#: app/templates/packages/create_edit.html:141
 msgid "Paste a forum topic URL"
 msgstr "Вставьте URL-адрес темы на форуме"
 
-#: app/templates/packages/create_edit.html:138
+#: app/templates/packages/create_edit.html:143
 msgid "YouTube videos will be shown in an embed."
 msgstr "Видео YouTube будут отображаться встроенными."
 
-#: app/templates/packages/create_edit.html:139
+#: app/templates/packages/create_edit.html:144
 msgid "If blank, the author's donation URL will be used instead."
 msgstr ""
 "Если поле пусто, вместо него будет использоваться URL-адрес пожертвования"
 " автора."
 
-#: app/templates/packages/create_edit.html:140
+#: app/templates/packages/create_edit.html:145
 msgid "How can users translate your package? ie: weblate URL or a help page"
 msgstr ""
 "Как пользователи могут перевести ваш пакет? К примеру: URL-адрес или "
 "страница справки"
 
-#: app/templates/packages/create_edit.html:145
+#: app/templates/packages/create_edit.html:150
 msgid ""
 "You need to save a draft before you can add releases and screenshots. "
 "You'll be able to edit the package again before submitting for approval."
@@ -3973,7 +4001,7 @@ msgstr ""
 " информацию см. в документации"
 
 #: app/templates/packages/game_support.html:23
-#: app/templates/packages/view.html:213 app/templates/translate/index.html:48
+#: app/templates/packages/view.html:220 app/templates/translate/index.html:48
 msgid "Source"
 msgstr "Источник"
 
@@ -4185,10 +4213,12 @@ msgid "Human-readable name. Eg: 1.0.0 - The Trains Update"
 msgstr "Удобочитаемое название. Например: 1.0.0 - Обновление Поездов"
 
 #: app/templates/packages/release_edit.html:35
+#: app/templates/packages/release_view.html:35
 msgid "Commit Hash"
 msgstr "Хэш коммита"
 
 #: app/templates/packages/release_edit.html:40
+#: app/templates/packages/release_view.html:42
 msgid "view task"
 msgstr "посмотреть задачу"
 
@@ -4540,7 +4570,7 @@ msgstr ""
 "на рейтинг дополнения."
 
 #: app/templates/packages/review_votes.html:4
-#: app/templates/packages/view.html:364
+#: app/templates/packages/view.html:371
 msgid "Review Votes"
 msgstr "Обзор Голосов"
 
@@ -4676,11 +4706,20 @@ msgstr "Перевод - Minetest Modding Book"
 msgid "Translating content meta - lua_api.md"
 msgstr "Перевод метаданных контента - lua_api.md"
 
-#: app/templates/packages/translation.html:30
+#: app/templates/packages/translation.html:31
+#, python-format
+msgid "%(title)s is available in %(num)d languages."
+msgstr "%(title)s доступен на %(num)d языках."
+
+#: app/templates/packages/translation.html:32
+msgid "ContentDB reads translations from locale files (.tr) in your package."
+msgstr "ContentDB считывает переводы из файлов локали (.tr) в вашем пакете."
+
+#: app/templates/packages/translation.html:89
 msgid "Translation template"
 msgstr "Шаблон перевода"
 
-#: app/templates/packages/translation.html:32
+#: app/templates/packages/translation.html:91
 #, python-format
 msgid ""
 "To quickly add support for ContentDB package translation, create a file "
@@ -4689,14 +4728,13 @@ msgstr ""
 "Чтобы быстро добавить поддержку перевода пакетов ContentDB, создайте файл"
 " в %(location)s со следующим содержимым:"
 
-#: app/templates/packages/translation.html:43
-#, python-format
-msgid "%(title)s is available in %(num)d languages."
-msgstr "%(title)s доступен на %(num)d языках."
+#: app/templates/packages/translation.html:102
+msgid "With games, you also need to name the textdomain in game.conf:"
+msgstr ""
 
-#: app/templates/packages/translation.html:44
-msgid "ContentDB reads translations from locale files (.tr) in your package."
-msgstr "ContentDB считывает переводы из файлов локали (.tr) в вашем пакете."
+#: app/templates/packages/translation.html:106
+msgid "Replace mymod with the name of mod / textdomain you chose."
+msgstr ""
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -4739,46 +4777,51 @@ msgstr ""
 "Как только дополнение будет помечено как устаревшое, вы больше не будете "
 "получать никаких уведомлений, пока оно не будет помечено как обновленное."
 
-#: app/templates/packages/view.html:42
+#: app/templates/packages/view.html:22 app/templates/packages/view.html:25
+#, python-format
+msgid "%(title)s releases"
+msgstr ""
+
+#: app/templates/packages/view.html:49
 msgid "Download"
 msgstr "Скачать"
 
-#: app/templates/packages/view.html:49
+#: app/templates/packages/view.html:56
 #, python-format
 msgid "Minetest %(min)s - %(max)s"
 msgstr "Minetest %(min)s - %(max)s"
 
-#: app/templates/packages/view.html:51
+#: app/templates/packages/view.html:58
 #, python-format
 msgid "For Minetest %(min)s and above"
 msgstr "Для Minetest %(min)s и выше"
 
-#: app/templates/packages/view.html:53
+#: app/templates/packages/view.html:60
 #, python-format
 msgid "Minetest %(max)s and below"
 msgstr "Minetest %(max)s и ниже"
 
-#: app/templates/packages/view.html:63
+#: app/templates/packages/view.html:70
 msgid "How do I install this?"
 msgstr "Как это установить?"
 
-#: app/templates/packages/view.html:69
+#: app/templates/packages/view.html:76
 msgid "No downloads available"
 msgstr "Нет доступных загрузок"
 
-#: app/templates/packages/view.html:76
+#: app/templates/packages/view.html:83
 msgid "Non-free code and media"
 msgstr "Несвободный код и медиа"
 
-#: app/templates/packages/view.html:78
+#: app/templates/packages/view.html:85
 msgid "Non-free code"
 msgstr "Несвободный код"
 
-#: app/templates/packages/view.html:80
+#: app/templates/packages/view.html:87
 msgid "Non-free media"
 msgstr "Несвободное медиа"
 
-#: app/templates/packages/view.html:94 app/templates/threads/view.html:109
+#: app/templates/packages/view.html:101 app/templates/threads/view.html:109
 msgid ""
 "This thread is only visible to its creator, package maintainers, users of"
 " Approver rank or above, and @mentioned users."
@@ -4786,166 +4829,171 @@ msgstr ""
 "Эта тема видна только её создателю, команде поддержки, пользователям с "
 "рангом проверяющий или выше и @упомянутым пользователям."
 
-#: app/templates/packages/view.html:207 app/templates/users/profile.html:95
+#: app/templates/packages/view.html:214 app/templates/users/profile.html:95
 msgid "Website"
 msgstr "Сайт"
 
-#: app/templates/packages/view.html:219 app/templates/users/profile.html:77
+#: app/templates/packages/view.html:226 app/templates/users/profile.html:77
 msgid "Forums"
 msgstr "Форум"
 
-#: app/templates/packages/view.html:225
+#: app/templates/packages/view.html:232
 msgid "Issue Tracker"
 msgstr "Трекер проблем"
 
-#: app/templates/packages/view.html:231 app/templates/translate/index.html:43
+#: app/templates/packages/view.html:238 app/templates/translate/index.html:43
 msgid "Translate"
 msgstr "Перевод"
 
-#: app/templates/packages/view.html:297
+#: app/templates/packages/view.html:304
 msgid "Thumbnail for video"
 msgstr "Обложка для видео"
 
-#: app/templates/packages/view.html:314
+#: app/templates/packages/view.html:321
 msgid "Awaiting review"
 msgstr "Ожидает рассмотрения"
 
-#: app/templates/packages/view.html:344 app/templates/threads/view.html:82
+#: app/templates/packages/view.html:351 app/templates/threads/view.html:82
 msgid "Edit Review"
 msgstr "Редактировать обзор"
 
-#: app/templates/packages/view.html:349
+#: app/templates/packages/view.html:356
 msgid "You can't review your own package."
 msgstr "Вы не можете обозревать свое собственное дополнение."
 
-#: app/templates/packages/view.html:359
+#: app/templates/packages/view.html:366
 msgid "Package needs to be approved before it can be reviewed."
 msgstr "Дополнение должно быть одобрено, прежде чем его можно будет рассмотреть."
 
-#: app/templates/packages/view.html:370
+#: app/templates/packages/view.html:377
 msgid "Used By"
 msgstr "Используется"
 
-#: app/templates/packages/view.html:376
+#: app/templates/packages/view.html:383
 msgid "Content"
 msgstr "Контент"
 
-#: app/templates/packages/view.html:378 app/templates/packages/view.html:461
+#: app/templates/packages/view.html:385 app/templates/packages/view.html:479
 msgid "View content for game"
 msgstr "Посмотреть контент игры"
 
-#: app/templates/packages/view.html:393
+#: app/templates/packages/view.html:398
+#, python-format
+msgid "Release notes for %(title)s"
+msgstr ""
+
+#: app/templates/packages/view.html:411
 msgid "Favorite"
 msgstr "Любимый"
 
-#: app/templates/packages/view.html:402
+#: app/templates/packages/view.html:420
 msgid "Add to collection..."
 msgstr "Добавить в коллекцию..."
 
-#: app/templates/packages/view.html:410
+#: app/templates/packages/view.html:428
 #, python-format
 msgid "View %(count)d collections"
 msgstr "Просмотреть %(count)d коллекции"
 
-#: app/templates/packages/view.html:421
+#: app/templates/packages/view.html:439
 msgid "Package may be outdated"
 msgstr "Дополнение может быть устаревшим"
 
-#: app/templates/packages/view.html:428
+#: app/templates/packages/view.html:446
 msgid "Only visible to the author and Editors."
 msgstr "Видно только автору и редакторам."
 
-#: app/templates/packages/view.html:445
+#: app/templates/packages/view.html:463
 msgid "Warning"
 msgstr "Предупреждение"
 
-#: app/templates/packages/view.html:451
+#: app/templates/packages/view.html:469
 msgid "Like this package? Help support its development by making a donation"
 msgstr ""
 "Нравится это дополнение? Помогите поддержать его развитие, сделав "
 "пожертвование"
 
-#: app/templates/packages/view.html:454
+#: app/templates/packages/view.html:472
 msgid "Donate now"
 msgstr "Пожертвовать сейчас"
 
-#: app/templates/packages/view.html:466 app/utils/minetest_hypertext.py:283
+#: app/templates/packages/view.html:484 app/utils/minetest_hypertext.py:283
 msgid "Dependencies"
 msgstr "Зависимости"
 
-#: app/templates/packages/view.html:486
+#: app/templates/packages/view.html:504
 msgid "No required dependencies"
 msgstr "Нет требуемых зависимостей"
 
-#: app/templates/packages/view.html:492
+#: app/templates/packages/view.html:510
 msgid "Optional"
 msgstr "Необязательно"
 
-#: app/templates/packages/view.html:525
+#: app/templates/packages/view.html:543
 msgid "Compatible Games"
 msgstr "Совместимые игры"
 
-#: app/templates/packages/view.html:530 app/templates/packages/view.html:550
+#: app/templates/packages/view.html:548 app/templates/packages/view.html:568
 #: app/utils/minetest_hypertext.py:275
 msgid "No specific game required"
 msgstr "Никакой конкретной игры не требуется"
 
-#: app/templates/packages/view.html:533
+#: app/templates/packages/view.html:551
 msgid "Tested with:"
 msgstr "Протестировано с:"
 
-#: app/templates/packages/view.html:555
+#: app/templates/packages/view.html:573
 msgid "Is the above correct?"
 msgstr "Верно ли вышесказанное?"
 
-#: app/templates/packages/view.html:556
+#: app/templates/packages/view.html:574
 msgid "You need to either confirm this or tell ContentDB about supported games"
 msgstr ""
 "Вам нужно либо подтвердить это, либо сообщить ContentDB о поддерживаемых "
 "играх"
 
-#: app/templates/packages/view.html:568
+#: app/templates/packages/view.html:586
 msgid "Does not work with:"
 msgstr "не работает с:"
 
-#: app/templates/packages/view.html:588
+#: app/templates/packages/view.html:606
 msgid "Please specify compatible games"
 msgstr "Пожалуйста, укажите совместимые игры"
 
-#: app/templates/packages/view.html:594
+#: app/templates/packages/view.html:612
 msgid "Information"
 msgstr "Информация"
 
-#: app/templates/packages/view.html:600
+#: app/templates/packages/view.html:618
 msgid "Technical Name"
 msgstr "Техническое название"
 
-#: app/templates/packages/view.html:616 app/utils/minetest_hypertext.py:295
+#: app/templates/packages/view.html:634 app/utils/minetest_hypertext.py:295
 #, python-format
 msgid "%(code_license)s for code,<br>%(media_license)s for media."
 msgstr "%(code_license)s для кода,<br>%(media_license)s для медиа."
 
-#: app/templates/packages/view.html:624
+#: app/templates/packages/view.html:642
 msgid "Unknown"
 msgstr "Неизвестно"
 
-#: app/templates/packages/view.html:626 app/utils/minetest_hypertext.py:301
+#: app/templates/packages/view.html:644 app/utils/minetest_hypertext.py:301
 msgid "Added"
 msgstr "Добавлено"
 
-#: app/templates/packages/view.html:640
+#: app/templates/packages/view.html:658
 msgid "Remove myself"
 msgstr "Удалить себя"
 
-#: app/templates/packages/view.html:645 app/utils/minetest_hypertext.py:303
+#: app/templates/packages/view.html:663 app/utils/minetest_hypertext.py:303
 msgid "Provides"
 msgstr "Предоставляет"
 
-#: app/templates/packages/view.html:667
+#: app/templates/packages/view.html:685
 msgid "More"
 msgstr "Больше"
 
-#: app/templates/packages/view.html:696
+#: app/templates/packages/view.html:714
 msgid "See audit log"
 msgstr "См. журнал аудита"
 
@@ -5035,7 +5083,7 @@ msgstr "Комментарии %(user)s"
 msgid "Reply to <b>%(title)s</b>"
 msgstr "Ответить на <b>%(title)s</b>"
 
-#: app/templates/threads/user_comments.html:73
+#: app/templates/threads/user_comments.html:74
 msgid "Only showing replies to public threads"
 msgstr "Отображаются только ответы на общедоступные темы"
 
@@ -5139,7 +5187,7 @@ msgstr ""
 "Названия модов, у которых есть жёсткие зависимости, но нет дополнений, "
 "предоставляющих их."
 
-#: app/templates/todo/editor.html:193 app/templates/users/account.html:100
+#: app/templates/todo/editor.html:193 app/templates/users/account.html:102
 msgid "View All"
 msgstr "Смотреть все"
 
@@ -5452,10 +5500,10 @@ msgid "Account Deletion and Deactivation isn't available to users yet."
 msgstr "Удаление и деактивация аккаунта пока недоступны пользователям."
 
 #: app/templates/users/account.html:88
-msgid "Please contact the admin."
-msgstr "Пожалуйста, свяжитесь с администратором."
+msgid "Please raise a report to request account deletion."
+msgstr ""
 
-#: app/templates/users/account.html:93
+#: app/templates/users/account.html:95
 msgid "Recent Account Actions"
 msgstr "Последние действия аккаунта"
 
@@ -5990,27 +6038,27 @@ msgstr "Искать в Релизах Дополнения"
 msgid "'%(query)s' - Search Package Releases"
 msgstr "'%(query)s' - Искать Релизы Дополнения"
 
-#: app/utils/flask.py:158
+#: app/utils/flask.py:159
 msgid "All time"
 msgstr "Всё время"
 
-#: app/utils/flask.py:159
+#: app/utils/flask.py:160
 msgid "Last 7 days"
 msgstr "Последние 7 дней"
 
-#: app/utils/flask.py:160
+#: app/utils/flask.py:161
 msgid "Last 30 days"
 msgstr "Последние 30 дней"
 
-#: app/utils/flask.py:161
+#: app/utils/flask.py:162
 msgid "Last 90 days"
 msgstr "Последние 90 дней"
 
-#: app/utils/flask.py:162
+#: app/utils/flask.py:163
 msgid "Year to date"
 msgstr "С начало года до сегодня"
 
-#: app/utils/flask.py:163
+#: app/utils/flask.py:164
 msgid "Last year"
 msgstr "Последний год"
 
@@ -6638,11 +6686,15 @@ msgstr ""
 #~ msgid "Chat / Commands"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid ""
 #~ "Focus on player chat/communication or "
 #~ "who's primary function is interacting "
 #~ "with the console."
 #~ msgstr ""
+#~ "Фокусирование на чате/общении с игроками "
+#~ "или на том, чья основная функция -"
+#~ " взаимодействие с консолью."
 
 #~ msgid "Plants and Farming"
 #~ msgstr ""
@@ -6653,11 +6705,15 @@ msgstr ""
 #~ msgid "Complex installation"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid ""
 #~ "Requires futher installation steps, such "
 #~ "as installing luarocks or editing the"
 #~ " trusted mod setting"
 #~ msgstr ""
+#~ "Требует дополнительные шаги по установке, "
+#~ "такие как установка luarocks или "
+#~ "редактирование настроек доверенного мода"
 
 #~ msgid "Multiplayer-focused"
 #~ msgstr ""
@@ -6674,11 +6730,14 @@ msgstr ""
 #~ msgid "Sims"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid ""
 #~ "Mods and games that aim to "
 #~ "simulate real life activity. Similar to"
 #~ " SimCity/TheSims/OpenTTD/etc"
 #~ msgstr ""
+#~ "Моды и игры, имитирующие реальную жизнь."
+#~ " Похожее на SimCity/TheSims/OpenTTD/так далее"
 
 #~ msgid "<16px"
 #~ msgstr ""
@@ -6698,8 +6757,9 @@ msgstr ""
 #~ msgid "Mobs / Animals / NPCs"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Adds mobs, animals, and NPCs"
-#~ msgstr ""
+#~ msgstr "Добавляет мобов, животных, и НеИгровыхПерсонажей"
 
 #~ msgid "Puzzle"
 #~ msgstr ""
@@ -6806,8 +6866,12 @@ msgstr ""
 #~ msgid "GUI"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "For content whose main utility / feature is in GUI/formspec form"
 #~ msgstr ""
+#~ "Для контента, основная полезность / "
+#~ "функция которого находится в форме "
+#~ "GUI/formspec"
 
 #~ msgid "64px"
 #~ msgstr ""
@@ -6824,8 +6888,9 @@ msgstr ""
 #~ msgid "Minetest Game improved"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Forks of MTG"
-#~ msgstr ""
+#~ msgstr "Разветление MTG"
 
 #~ msgid "Jam / Weekly Challenges 2021"
 #~ msgstr ""
@@ -6969,50 +7034,6 @@ msgstr ""
 #~ " does, see his donation page:"
 #~ msgstr ""
 
-#~ msgctxt "tags"
-#~ msgid ""
-#~ "Focus on player chat/communication or "
-#~ "who's primary function is interacting "
-#~ "with the console."
-#~ msgstr ""
-#~ "Фокусирование на чате/общении с игроками "
-#~ "или на том, чья основная функция -"
-#~ " взаимодействие с консолью."
-
-#~ msgctxt "tags"
-#~ msgid ""
-#~ "Requires futher installation steps, such "
-#~ "as installing luarocks or editing the"
-#~ " trusted mod setting"
-#~ msgstr ""
-#~ "Требует дополнительные шаги по установке, "
-#~ "такие как установка luarocks или "
-#~ "редактирование настроек доверенного мода"
-
-#~ msgctxt "tags"
-#~ msgid ""
-#~ "Mods and games that aim to "
-#~ "simulate real life activity. Similar to"
-#~ " SimCity/TheSims/OpenTTD/etc"
-#~ msgstr ""
-#~ "Моды и игры, имитирующие реальную жизнь."
-#~ " Похожее на SimCity/TheSims/OpenTTD/так далее"
-
-#~ msgctxt "tags"
-#~ msgid "Adds mobs, animals, and NPCs"
-#~ msgstr "Добавляет мобов, животных, и НеИгровыхПерсонажей"
-
-#~ msgctxt "tags"
-#~ msgid "For content whose main utility / feature is in GUI/formspec form"
-#~ msgstr ""
-#~ "Для контента, основная полезность / "
-#~ "функция которого находится в форме "
-#~ "GUI/formspec"
-
-#~ msgctxt "tags"
-#~ msgid "Forks of MTG"
-#~ msgstr "Разветление MTG"
-
 #~ msgid ""
 #~ "Invalid username, Only alphabetic letters "
 #~ "(A-Za-z), numbers (0-9), underscores (_), "
@@ -7030,3 +7051,7 @@ msgstr ""
 
 #~ msgid "Human readable. Eg: 1.0.0 or 2018-05-28"
 #~ msgstr "Читаемое. Например: 1.0.0 или 2018-05-28"
+
+#~ msgid "Please contact the admin."
+#~ msgstr "Пожалуйста, свяжитесь с администратором."
+
