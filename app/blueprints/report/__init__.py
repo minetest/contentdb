@@ -47,7 +47,7 @@ def report():
 		url = abs_url_samesite(url)
 
 	form = ReportForm(formdata=request.form) if current_user.is_authenticated else None
-	if request.method == "GET":
+	if form and request.method == "GET":
 		form.message.data = request.args.get("message", "")
 
 	if form and form.validate_on_submit():
