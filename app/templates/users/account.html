@@ -85,10 +85,12 @@
 {% else %}
 	<p>
 		{{ _("Account Deletion and Deactivation isn't available to users yet.") }}
-		{{ _("Please contact the admin.") }}
+		{{ _("Please raise a report to request account deletion.") }}
+	</p>
+	<p>
+		<a class="btn btn-secondary" href="{{ url_for('report.report', url=url_current(), message="Delete my account") }}">{{ _("Report") }}</a>
 	</p>
 {% endif %}
-
 
 <h3 class="mt-5">{{ _("Recent Account Actions") }}</h3>
 
