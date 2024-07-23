@@ -180,7 +180,7 @@ def check_package_on_submit(package_id: int):
 
 	msg = _check_package(package)
 	if msg:
-		marked = f"Marked {package.title} as Changed Needed"
+		marked = f"Marked {package.title} as {PackageState.CHANGES_NEEDED.value}"
 
 		system_user = get_system_user()
 		post_to_approval_thread(package, system_user, marked, is_status_update=True, create_thread=True)
