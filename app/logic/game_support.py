@@ -13,7 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
-
+import sys
 from typing import List, Dict, Optional, Tuple
 
 import sqlalchemy
@@ -90,6 +90,7 @@ class GSPackage:
 		return self.user_unsupported_games
 
 	def add_error(self, error: str):
+		print(f"ERROR {self.name}: {error}")
 		return self.errors.add(error)
 
 
@@ -135,10 +136,12 @@ class GameSupport:
 		return [package for package in self.packages.values() if modname in package.depends]
 
 	def _get_supported_games_for_modname(self, depend: str, visited: list[str]):
+		print(f"_get_supported_games_for_modname {depend} visited {', '.join(visited)}", file=sys.stderr)
 		dep_supports_all = False
 		for_dep = set()
 		for provider in self.get_all_that_provide(depend):
 			found_in = self._get_supported_games(provider, visited)
+			print(f" - provider for {depend}: {provider.name}: {found_in}", file=sys.stderr)
 			if found_in is None:
 				# Unsupported, keep going
 				pass
@@ -151,6 +154,7 @@ class GameSupport:
 		return dep_supports_all, for_dep
 
 	def _get_supported_games_for_deps(self, package: GSPackage, visited: list[str]) -> Optional[set[str]]:
+		print(f"_get_supported_games_for_deps package {package.name} visited {', '.join(visited)}", file=sys.stderr)
 		ret = set()
 
 		for depend in package.depends:
@@ -173,6 +177,7 @@ class GameSupport:
 		return ret
 
 	def _get_supported_games(self, package: GSPackage, visited: list[str]) -> Optional[set[str]]:
+		print(f"_get_supported_games package {package.name} visited {', '.join(visited)}", file=sys.stderr)
 		if package.id_ in visited:
 			first_idx = visited.index(package.id_)
 			visited = visited[first_idx:]
@@ -183,8 +188,10 @@ class GameSupport:
 			return None
 
 		if package.type == PackageType.GAME:
+			print(f"_get_supported_games package {package.name} is game", file=sys.stderr)
 			return {package.name}
 		elif package.is_confirmed:
+			print(f"_get_supported_games package {package.name} is confirmed", file=sys.stderr)
 			return package.supported_games
 
 		visited = visited.copy()
@@ -221,6 +228,7 @@ class GameSupport:
 
 		while len(to_update) > 0:
 			current_package = to_update.pop()
+			print(f"on_update package {current_package.name}", file=sys.stderr)
 			if current_package.id_ in self.packages and current_package.type != PackageType.GAME:
 				self._get_supported_games(current_package, [])
 
