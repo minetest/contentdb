@@ -25,7 +25,11 @@ bp = Blueprint("thumbnails", __name__)
 
 
 ALLOWED_RESOLUTIONS = [(100, 67), (270, 180), (350, 233), (1100, 520)]
-ALLOWED_EXTENSIONS = {"png", "webp", "jpg"}
+ALLOWED_MIMETYPES = {
+	"png": "image/png",
+	"webp": "image/webp",
+	"jpg": "image/jpeg",
+}
 
 
 def mkdir(path):
@@ -76,15 +80,24 @@ def find_source_file(img):
 	period = source_filepath.rfind(".")
 	start = source_filepath[:period]
 	ext = source_filepath[period + 1:]
-	if ext not in ALLOWED_EXTENSIONS:
+	if ext not in ALLOWED_MIMETYPES:
 		abort(404)
 
-	for other_ext in ALLOWED_EXTENSIONS:
+	for other_ext in ALLOWED_MIMETYPES.keys():
 		other_path = f"{start}.{other_ext}"
 		if ext != other_ext and os.path.isfile(other_path):
 			return other_path
 
 	abort(404)
+
+
+def get_mimetype(cache_filepath: str) -> str:
+	period = cache_filepath.rfind(".")
+	ext = cache_filepath[period + 1:]
+	mimetype = ALLOWED_MIMETYPES.get(ext)
+	if mimetype is None:
+		abort(404)
+	return mimetype
 
 
 @bp.route("/thumbnails/<int:level>/<img>")
@@ -104,7 +117,7 @@ def make_thumbnail(img, level):
 		source_filepath = find_source_file(img)
 		resize_and_crop(source_filepath, cache_filepath, (w, h))
 
-	res = send_file(cache_filepath)
+	res = send_file(cache_filepath, mimetype=get_mimetype(cache_filepath))
 	res.headers["Cache-Control"] = "max-age=604800" # 1 week
 	return res
 
