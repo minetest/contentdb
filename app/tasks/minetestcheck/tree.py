@@ -235,9 +235,12 @@ class PackageTreeNode:
 		# Calculate short description
 		if "description" in result:
 			desc = result["description"]
-			idx = desc.find(".") + 1
-			cutIdx = min(len(desc), 200 if idx < 5 else idx)
-			result["short_description"] = desc[:cutIdx]
+			if len(desc) > 200:
+				idx = desc.find(".") + 1
+				idx = min(len(desc), 200 if idx < 5 else idx)
+				result["short_description"] = desc[:idx]
+			else:
+				result["short_description"] = desc
 
 		if "name" in result:
 			self.name = result["name"]
