@@ -24,6 +24,7 @@ from typing import Optional
 
 import requests
 import urllib3
+from app import app
 from sqlalchemy import or_, and_
 
 from app.markdown import get_links, render_markdown
@@ -125,6 +126,8 @@ def _url_exists(url: str) -> str:
 
 
 def _check_for_dead_links(package: Package) -> dict[str, str]:
+	ignored_urls = set(app.config.get("LINK_CHECKER_IGNORED_URLS", ""))
+
 	links: set[Optional[str]] = {
 		package.repo,
 		package.website,
@@ -148,6 +151,9 @@ def _check_for_dead_links(package: Package) -> dict[str, str]:
 
 		url = urlparse(link)
 		if url.scheme != "http" and url.scheme != "https":
+			continue
+
+		if url.hostname in ignored_urls:
 			continue
 
 		res = _url_exists(link)
