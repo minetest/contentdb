@@ -8,25 +8,26 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-07-23 22:12+0100\n"
-"PO-Revision-Date: 2024-07-15 13:09+0000\n"
-"Last-Translator: ssdaniel24 <bo7oaonteg2m@mail.ru>\n"
+"PO-Revision-Date: 2024-07-30 15:09+0000\n"
+"Last-Translator: BlackImpostor <SkyBuilderOFFICAL@yandex.ru>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.7-dev\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app/__init__.py:156
 msgid "Banned:"
-msgstr "Заблокирован:"
+msgstr "Забанен:"
 
 #: app/__init__.py:158
 msgid "You have been banned."
-msgstr "Вы были заблокированы."
+msgstr "Вы были забанены."
 
 #. NOTE: tags: title for jam_game_2023
 #: app/_translations.py:6
@@ -463,7 +464,7 @@ msgstr "Игровой Интерфейс"
 msgctxt "tags"
 msgid "For mods that grant the player extra information in the HUD"
 msgstr ""
-"Для модов, которые предоставляют игроку дополнительную информацию в "
+"Для дополнений, которые предоставляют игроку дополнительную информацию в "
 "Игровом Интерфейсе"
 
 #. NOTE: tags: title for pve
@@ -510,7 +511,7 @@ msgstr "API / Библиотека"
 #: app/_translations.py:150
 msgctxt "tags"
 msgid "Primarily adds an API for other mods to use"
-msgstr "В первую очередь добавляет API для использования другими модами"
+msgstr "В первую очередь добавляет API для использования другими дополнениями"
 
 #. NOTE: tags: title for mini-game
 #: app/_translations.py:152
@@ -635,7 +636,8 @@ msgstr "Джэм / Боёвка 2020"
 #: app/_translations.py:188
 msgctxt "tags"
 msgid "For mods created for the Discord \"Combat\" modding event in 2020"
-msgstr "Для модов созданные для Дискорд моддинг эвента \"Боёвка\" в 2020"
+msgstr ""
+"Для дополнений созданные для Дискорд моддинг события \"Боёвка\" в 2020 году"
 
 #. NOTE: tags: title for transport
 #: app/_translations.py:190
@@ -667,8 +669,8 @@ msgid ""
 "For mods created for the Discord \"Weekly Challenges\" modding event in "
 "2021"
 msgstr ""
-"Для модов созданные для Дискорд моддинг события \"Еженедельные Вызовы\" в"
-" 2021"
+"Для дополнений созданные для Дискорд моддинг события \"Еженедельные Вызовы\" "
+"в 2021 году"
 
 #. NOTE: tags: title for mtg
 #: app/_translations.py:198
@@ -735,14 +737,14 @@ msgid ""
 "Games and mods with a heavy strategy component, whether real-time or "
 "turn-based"
 msgstr ""
-"Игры и моды с сильным стратегическим компонентом, будь-то "
-"\"в-реальном-времени\" или \"пошаговые\""
+"Игры и дополнения с сильным стратегическим компонентом, будь-то \"в-реальном-"
+"времени\" или \"пошаговые\""
 
 #. NOTE: tags: title for jam_game_2022
 #: app/_translations.py:218
 msgctxt "tags"
 msgid " Jam / Game 2022"
-msgstr " Джэм / Игра 2022"
+msgstr " игра Джэм / Игра 2022"
 
 #. NOTE: tags: description for jam_game_2022
 #: app/_translations.py:220
@@ -958,23 +960,23 @@ msgstr "Дополнение удалено из любимой коллекци
 #: app/blueprints/feeds/__init__.py:32 app/templates/index.html:8
 msgid "Welcome to the best place to find Minetest mods, games, and texture packs"
 msgstr ""
-"Добро пожаловать в лучшее место чтобы найти Minetest моды, игры и пакеты "
-"тексур"
+"Добро пожаловать в лучшее место чтобы найти Minetest дополнения, игры и "
+"пакеты тексур"
 
 #: app/blueprints/feeds/__init__.py:70 app/templates/base.html:29
 #: app/templates/base.html:36
 msgid "ContentDB new packages"
-msgstr ""
+msgstr "Новые пакеты ContentDB"
 
 #: app/blueprints/feeds/__init__.py:98 app/templates/base.html:31
 #: app/templates/base.html:38
 msgid "ContentDB package updates"
-msgstr ""
+msgstr "Обновления дополнений ContentDB"
 
 #: app/blueprints/feeds/__init__.py:107 app/templates/base.html:27
 #: app/templates/base.html:34
 msgid "ContentDB all"
-msgstr ""
+msgstr "Всё ContentDB"
 
 #: app/blueprints/oauth/__init__.py:169 app/templates/admin/tags/list.html:26
 #: app/templates/admin/warnings/list.html:24
@@ -1370,8 +1372,8 @@ msgstr ""
 #: app/blueprints/packages/packages.py:754
 msgid "Mod(pack) needs to contain at least one mod. Please create a new release"
 msgstr ""
-"Мод(пакет) должен содержать хотя бы один мод. Пожалуйста, создайте новый "
-"релиз"
+"Мод(пак) должен содержать хотя бы одно дополнение. Пожалуйста, создайте "
+"новый релиз"
 
 #: app/blueprints/packages/releases.py:57
 #: app/blueprints/packages/releases.py:72
@@ -1542,7 +1544,7 @@ msgstr "Ссылки на заблокированные сайты запрещ
 
 #: app/blueprints/packages/reviews.py:199
 msgid "You can't vote on the reviews on your own package!"
-msgstr "Вы не можете голосовать за обзоры вашего дополнения!"
+msgstr "Вы не можете голосовать за обзоры вашего же дополнения!"
 
 #: app/blueprints/packages/reviews.py:206
 msgid "You can't vote on your own reviews!"
@@ -1944,7 +1946,7 @@ msgstr "Приложение OAuth2"
 #: app/blueprints/users/settings.py:68 app/templates/users/modtools.html:4
 #: app/templates/users/modtools.html:8 app/templates/users/profile.html:44
 msgid "Moderator Tools"
-msgstr "Инструменты модератора"
+msgstr "Инструменты Модератора"
 
 #: app/blueprints/users/settings.py:78
 msgid "Donation URL"
@@ -2120,7 +2122,7 @@ msgstr "У вас нет разрешения на изменение имени
 
 #: app/logic/packages.py:140
 msgid "You cannot change package type once approved"
-msgstr ""
+msgstr "Вы не можете изменить тип дополнения после его одобрения"
 
 #: app/logic/releases.py:33
 msgid "You don't have permission to make releases"
@@ -2678,7 +2680,7 @@ msgstr "API"
 
 #: app/templates/base.html:266
 msgid "RSS / Feeds"
-msgstr ""
+msgstr "RSS / Каналы"
 
 #: app/templates/base.html:267 app/templates/users/register.html:37
 msgid "Privacy Policy"
@@ -2766,7 +2768,7 @@ msgstr "Лучшие игры"
 #: app/templates/index.html:141 app/templates/index.html:147
 #: app/templates/packages/game_hub.html:58
 msgid "Top Mods"
-msgstr "Лучшие моды"
+msgstr "Лучшие Дополнения"
 
 #: app/templates/index.html:152 app/templates/index.html:158
 #: app/templates/packages/game_hub.html:65
@@ -2922,7 +2924,7 @@ msgstr "Читаемое имя для различения токенов."
 #: app/templates/api/create_edit_token.html:57
 msgid "Recommended: Only allows token to interact with a particular package."
 msgstr ""
-"Советуется: Позволяет токену взаимодействовать только с определенным "
+"Рекомендуется: Позволяет токену взаимодействовать только с определенным "
 "дополнением."
 
 #: app/templates/api/list_tokens.html:4
@@ -3049,7 +3051,7 @@ msgid ""
 "Donations are a great way to support your favorite modders, artists, and "
 "game developers."
 msgstr ""
-"Пожертвования — отличный способ поддержать ваших любимых моддеров, "
+"Пожертвования — отличный способ поддержать ваших любимых мододелов, "
 "художников и разработчиков игр."
 
 #: app/templates/donate/index.html:37
@@ -3553,11 +3555,11 @@ msgstr "WIP"
 
 #: app/templates/modnames/list.html:4 app/templates/modnames/view.html:4
 msgid "Mod Names"
-msgstr "Названия модов"
+msgstr "Названия Дополнений"
 
 #: app/templates/modnames/list.html:37
 msgid "No mod names found."
-msgstr "Названия модов не найдены."
+msgstr "Нет найденых дополнений по именам."
 
 #: app/templates/modnames/view.html:10
 #, python-format
@@ -4065,7 +4067,7 @@ msgid ""
 "The package depends on a game-specific mod, and so cannot support all "
 "games."
 msgstr ""
-"Дополнение зависит от мода, специфичного для игры, и поэтому не может "
+"Дополнение зависит от мода, указанного игрой, и поэтому не может "
 "поддерживать все игры."
 
 #: app/templates/packages/game_support.html:111
@@ -4520,7 +4522,8 @@ msgstr "и"
 #: app/templates/packages/remove.html:59
 #, python-format
 msgid "Removing this package will break the following mods: %(names)s"
-msgstr "Удаление этого пакета приведет к поломке следующих модов: %(names)s"
+msgstr ""
+"Удаление этого пакета приведет к поломке следующих дополнений: %(names)s"
 
 #: app/templates/packages/remove.html:66
 msgid "Reason"
@@ -4662,11 +4665,11 @@ msgstr "Значки"
 
 #: app/templates/packages/similar.html:4
 msgid "Modname Uniqueness"
-msgstr "Уникальность имени мода"
+msgstr "Уникальность Именами Дополнений"
 
 #: app/templates/packages/similar.html:12
 msgid "Packages sharing provided mods"
-msgstr "Общие моды предоставляемые дополнениями"
+msgstr "Общие модификации предоставляемые дополнениями"
 
 #: app/templates/packages/similar.html:14
 msgid "This package contains modnames that are present in the following packages:"
@@ -4731,10 +4734,12 @@ msgstr ""
 #: app/templates/packages/translation.html:102
 msgid "With games, you also need to name the textdomain in game.conf:"
 msgstr ""
+"В случае игр вам также необходимо указать имя текстового домена в файле game."
+"conf:"
 
 #: app/templates/packages/translation.html:106
 msgid "Replace mymod with the name of mod / textdomain you chose."
-msgstr ""
+msgstr "Замените mymod на название выбранного вами дополнения / textdomain."
 
 #: app/templates/packages/update_config.html:4
 #: app/templates/packages/update_config.html:9
@@ -4780,7 +4785,7 @@ msgstr ""
 #: app/templates/packages/view.html:22 app/templates/packages/view.html:25
 #, python-format
 msgid "%(title)s releases"
-msgstr ""
+msgstr "Релизы %(title)s"
 
 #: app/templates/packages/view.html:49
 msgid "Download"
@@ -4880,7 +4885,7 @@ msgstr "Посмотреть контент игры"
 #: app/templates/packages/view.html:398
 #, python-format
 msgid "Release notes for %(title)s"
-msgstr ""
+msgstr "Примечания к релизу %(title)s"
 
 #: app/templates/packages/view.html:411
 msgid "Favorite"
@@ -5184,7 +5189,7 @@ msgstr "Невыполненные зависимости"
 #: app/templates/todo/editor.html:151
 msgid "Mod names that have hard dependers, but no packages providing them."
 msgstr ""
-"Названия модов, у которых есть жёсткие зависимости, но нет дополнений, "
+"Названия дополнений, у которых есть жёсткие зависимости, но нет дополнений, "
 "предоставляющих их."
 
 #: app/templates/todo/editor.html:193 app/templates/users/account.html:102
@@ -5202,7 +5207,9 @@ msgstr "Поддержка игр для %(username)s"
 
 #: app/templates/todo/game_support.html:11 app/templates/todo/user.html:77
 msgid "You should specify the games supported by your mods and texture packs."
-msgstr "Вы должны указать игры, поддерживаемые вашими модами и пакетами текстур."
+msgstr ""
+"Вы должны указать игры, поддерживаемые вашими дополнениями и пакетами "
+"текстур."
 
 #: app/templates/todo/game_support.html:12 app/templates/todo/user.html:78
 msgid "Specifying game support makes it easier for players to find your content."
@@ -5418,7 +5425,7 @@ msgstr ""
 
 #: app/templates/translate/index.html:65
 msgid "How to translate a mod / game"
-msgstr "Как перевести мод / игру"
+msgstr "Как перевести дополнение / игру"
 
 #: app/templates/translate/index.html:73
 msgid "ContentDB"
@@ -5501,7 +5508,7 @@ msgstr "Удаление и деактивация аккаунта пока н�
 
 #: app/templates/users/account.html:88
 msgid "Please raise a report to request account deletion."
-msgstr ""
+msgstr "Пожалуйста, отправьте запрос на удаление аккаунта."
 
 #: app/templates/users/account.html:95
 msgid "Recent Account Actions"
@@ -7054,4 +7061,3 @@ msgstr ""
 
 #~ msgid "Please contact the admin."
 #~ msgstr "Пожалуйста, свяжитесь с администратором."
-
