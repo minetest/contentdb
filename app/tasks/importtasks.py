@@ -20,7 +20,7 @@ import os
 import shutil
 import sys
 from json import JSONDecodeError
-from zipfile import ZipFile
+from zipfile import ZipFile, BadZipFile
 
 import gitdb
 from flask import url_for
@@ -306,13 +306,16 @@ def _check_zip_file(temp_dir: str, zf: ZipFile) -> bool:
 
 
 def _safe_extract_zip(temp_dir: str, archive_path: str) -> bool:
-	with ZipFile(archive_path, 'r') as zf:
-		if not _check_zip_file(temp_dir, zf):
-			return False
+	try:
+		with ZipFile(archive_path, 'r') as zf:
+			if not _check_zip_file(temp_dir, zf):
+				return False
 
-		# Extract all
-		for member in zf.infolist():
-			zf.extract(member, temp_dir)
+			# Extract all
+			for member in zf.infolist():
+				zf.extract(member, temp_dir)
+	except BadZipFile as e:
+		raise TaskError(str(e))
 
 	return True
 
