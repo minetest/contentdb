@@ -252,7 +252,7 @@
 
 	<footer class="my-5 pt-5">
 		<p class="pt-3 mb-1">
-			ContentDB &copy; 2018-23 to <a href="{{ url_for('flatpage', path='about') }}">rubenwardy</a>
+			ContentDB &copy; 2018-24 to <a href="{{ url_for('flatpage', path='about') }}">rubenwardy</a>
 		</p>
 
 		<ul class="list-inline my-1">
@@ -285,9 +285,11 @@
 				<input type="submit" class="btn btn-sm btn-secondary" value="{{ _('Hide non-free packages') }}">
 			{% endif %}
 		</form>
-		<p class="text-warning">
-			{{ _("Our privacy policy has been updated (%(date)s)", date="2024-04-30") }}
-		</p>
+		{% if false %}
+			<p class="text-warning">
+				{{ _("Our privacy policy has been updated (%(date)s)", date="2024-04-30") }}
+			</p>
+		{% endif %}
 
 		{% if debug %}
 			<p style="color: red">
