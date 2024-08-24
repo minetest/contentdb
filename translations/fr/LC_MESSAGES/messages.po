@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-07-23 22:12+0100\n"
-"PO-Revision-Date: 2024-08-06 22:09+0000\n"
-"Last-Translator: Athozus <athozus@gmail.com>\n"
+"PO-Revision-Date: 2024-08-24 00:58+0000\n"
+"Last-Translator: John Donne <akheron@zaclys.net>\n"
 "Language-Team: French <https://hosted.weblate.org/projects/minetest/"
 "contentdb/fr/>\n"
 "Language: fr\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 5.7-dev\n"
+"X-Generator: Weblate 5.7.1-dev\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app/__init__.py:156
@@ -1391,7 +1391,7 @@ msgstr ""
 #: app/blueprints/packages/releases.py:57
 #: app/blueprints/packages/releases.py:72
 msgid "Release Notes"
-msgstr ""
+msgstr "Notes de version"
 
 #: app/blueprints/packages/releases.py:59
 msgid "Method"
@@ -1832,6 +1832,8 @@ msgid ""
 "A ContentDB user with that name already exists. Please contact an admin "
 "to link to your forum account"
 msgstr ""
+"Un utilisateur de ContentDB portant ce nom existe déjà. Veuillez contacter "
+"un administrateur pour relier votre compte du forum"
 
 #: app/blueprints/users/claim.py:75
 msgid "That user has already been claimed!"
@@ -1968,13 +1970,15 @@ msgstr "Un utilisateur a déjà ce nom"
 
 #: app/blueprints/users/settings.py:264
 msgid "Removed GitHub account"
-msgstr ""
+msgstr "Compte GitHub dissocié"
 
 #: app/blueprints/users/settings.py:266
 msgid ""
 "You need to add an email address and password before you can remove your "
 "GitHub account"
 msgstr ""
+"Vous devver ajouter une adresse électronique et un mot de passe avant de "
+"pouvoir dissocier votre compte GitHub"
 
 #: app/blueprints/users/settings.py:279
 msgid "Users with moderator rank or above cannot be deleted"
@@ -2015,7 +2019,7 @@ msgstr "Compte GitHub lié"
 #: app/blueprints/vcs/github.py:90
 #, python-format
 msgid "GitHub account is already associated with another user: %(username)s"
-msgstr ""
+msgstr "Ce compte GitHub est déjà associé à un autre utilisateur : %(username)s"
 
 #: app/blueprints/vcs/github.py:98 app/blueprints/vcs/github.py:124
 msgid "Authorization failed [err=gh-login-failed]"
@@ -2248,7 +2252,7 @@ msgstr ""
 #: app/models/packages.py:94
 #, python-format
 msgid "Top %(place)d mod"
-msgstr ""
+msgstr "Top %(place)d mod"
 
 #: app/models/packages.py:96
 #, python-format
@@ -2263,78 +2267,84 @@ msgstr ""
 #: app/models/packages.py:102
 #, python-format
 msgid "%(display_name)s has a mod placed at #%(place)d."
-msgstr ""
+msgstr "%(display_name)s propose un mod disponible à #%(place)d."
 
 #: app/models/packages.py:105
 #, python-format
 msgid "%(display_name)s has a game placed at #%(place)d."
-msgstr ""
+msgstr "%(display_name)s propose un jeu disponible à #%(place)d."
 
 #: app/models/packages.py:108
 #, python-format
 msgid "%(display_name)s has a texture pack placed at #%(place)d."
-msgstr ""
+msgstr "%(display_name)s propose un paquet de textures disponible à #%(place)d."
 
 #: app/models/packages.py:114
 msgid "Do you recommend this mod?"
-msgstr ""
+msgstr "Recommendez-vous ce mod ?"
 
 #: app/models/packages.py:116
 msgid "Do you recommend this game?"
-msgstr ""
+msgstr "Recommendez-vous ce jeu ?"
 
 #: app/models/packages.py:118
 msgid "Do you recommend this texture pack?"
-msgstr ""
+msgstr "Recommendez-vous ce paquet de textures ?"
 
 #. NOTE: Package maintenance state
 #: app/models/packages.py:155 app/models/packages.py:173
 msgid "Looking for Maintainer"
-msgstr ""
+msgstr "En recherche d'un Mainteneur"
 
 #. NOTE: Package maintenance state
 #: app/models/packages.py:158
 msgid "Beta"
-msgstr ""
+msgstr "Bêta"
 
 #. NOTE: Package maintenance state
 #: app/models/packages.py:161
 msgid "Actively Developed"
-msgstr ""
+msgstr "Activement développé"
 
 #. NOTE: Package maintenance state
 #: app/models/packages.py:164
 msgid "Maintenance Only"
-msgstr ""
+msgstr "Maintenance seulement"
 
 #. NOTE: Package maintenance state
 #: app/models/packages.py:167
 msgid "As-is"
-msgstr ""
+msgstr "Tel que"
 
 #: app/models/packages.py:177
 msgid "Under active development, and may break worlds/things without warning"
 msgstr ""
+"En cours de développement actif, et pouvant casser des mondes/choses sans "
+"avertissement"
 
 #: app/models/packages.py:179
 msgid "Fully playable, but with some breakages/changes expected"
-msgstr ""
+msgstr "Entièrement jouable, mais attendez-vous à des problèmes/changements"
 
 #: app/models/packages.py:181
 msgid "Finished, with bug fixes being made as needed"
-msgstr ""
+msgstr "Terminé, avec des correctifs réalisés si besoin"
 
 #: app/models/packages.py:183
 msgid ""
 "Finished, the maintainer doesn't intend to continue working on it or "
 "provide support"
 msgstr ""
+"Terminé, le mainteneur n'a pas l'intention de continuer à travailler dessus "
+"ou de proposer une aide"
 
 #: app/models/packages.py:185
 msgid ""
 "The maintainer doesn't recommend this package. See the description for "
 "more info"
 msgstr ""
+"Le mainteneur ne recommande pas ce paquet. Consultez la description pour "
+"plus d'informations"
 
 #: app/models/packages.py:231
 msgid "Submit for Approval"
