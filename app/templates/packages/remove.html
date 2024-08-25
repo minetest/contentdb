@@ -7,6 +7,7 @@
 {% block content %}
 	<h2 class="mt-0">{{ self.title() }}</h2>
 
+	{% if package.approved %}
 	<form method="POST" action="">
 		<h3>{{ _("Change maintenance state") }}</h3>
 		<p>
@@ -29,6 +30,7 @@
 			{% endfor %}
 		</p>
 	</form>
+	{% endif %}
 
 	<form method="POST" action="" class="mt-5">
 		<h3>{{ _("Remove") }}</h3>
@@ -43,6 +45,11 @@
 			<p>
 				{{ _("Unapproving a package will put it back into Draft, where
 				it can be submitted for approval again.") }}
+			</p>
+		{% else %}
+			<p>
+				<strong>{{ _("You don't need to delete a package just to change something.") }}</strong>
+				{{ _("Click 'Edit' at the top right of the package page.") }}
 			</p>
 		{% endif %}
 
