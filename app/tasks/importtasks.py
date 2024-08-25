@@ -268,11 +268,8 @@ def update_translations(package: Package, tree: PackageTreeNode):
 		)
 		conn.execute(stmt)
 
-	raw_translations = tree.get_translations(tree.get("textdomain", tree.name))
+	raw_translations = tree.get_translations(tree.get("textdomain", tree.name), allowed_languages=allowed_languages)
 	for raw_translation in raw_translations:
-		if raw_translation.language not in allowed_languages:
-			continue
-
 		to_update = {
 			"title": raw_translation.entries.get(tree.get("title", package.title)),
 			"short_desc": raw_translation.entries.get(tree.get("description", package.short_desc)),

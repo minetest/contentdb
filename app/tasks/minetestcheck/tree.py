@@ -316,10 +316,15 @@ class PackageTreeNode:
 
 		return ret
 
-	def get_translations(self, textdomain: str) -> list[Translation]:
+	def get_translations(self, textdomain: str, allowed_languages: set[str]) -> list[Translation]:
 		ret = []
 
 		for name in glob.glob(f"{self.baseDir}/**/locale/{textdomain}.*.tr", recursive=True):
+			parts = os.path.basename(name).split(".")
+			lang = parts[-2]
+			if lang not in allowed_languages:
+				continue
+
 			try:
 				ret.append(parse_tr(name))
 			except SyntaxError as e:
