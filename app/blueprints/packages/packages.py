@@ -266,6 +266,7 @@ def handle_create_edit(package: typing.Optional[Package], form: PackageForm, aut
 				flash(
 					gettext("Package already exists, but is removed. Please contact ContentDB staff to restore the package"),
 					"danger")
+				return redirect(url_for("report.report", url=package.get_url("packages.view")))
 			else:
 				flash(markupsafe.Markup(
 					f"<a class='btn btn-sm btn-danger float-end' href='{package.get_url('packages.view')}'>View</a>" +
