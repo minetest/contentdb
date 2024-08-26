@@ -556,8 +556,6 @@ Supported query parameters:
     * `pop_txp`:  popular textures
     * `pop_game`:  popular games
     * `high_reviewed`:  highest reviewed
-* GET `/api/welcome/v1/` ([View](/api/welcome/v1/)) - in-menu welcome dialog. Experimental (may change without warning)
-    * `featured`: featured games
 * GET `/api/cdb_schema/` ([View](/api/cdb_schema/))
     * Get JSON Schema of `.cdb.json`, including licenses, tags and content warnings.
     * See [JSON Schema Reference](https://json-schema.org/).

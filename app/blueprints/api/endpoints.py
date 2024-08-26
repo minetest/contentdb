@@ -629,24 +629,6 @@ def homepage():
 	})
 
 
-@bp.route("/api/welcome/v1/")
-@cors_allowed
-def welcome_v1():
-	featured = Package.query \
-		.filter(Package.type == PackageType.GAME, Package.state == PackageState.APPROVED,
-				Package.collections.any(
-					and_(Collection.name == "featured", Collection.author.has(username="ContentDB")))) \
-		.order_by(func.random()) \
-		.limit(5).all()
-
-	def map_packages(packages: List[Package]):
-		return [pkg.as_short_dict(current_app.config["BASE_URL"]) for pkg in packages]
-
-	return jsonify({
-		"featured": map_packages(featured),
-	})
-
-
 @bp.route("/api/minetest_versions/")
 @cors_allowed
 def versions():
