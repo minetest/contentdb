@@ -80,7 +80,7 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
 * GET `/api/packages/<username>/<name>/` (Read)
 * PUT `/api/packages/<author>/<name>/` (Update)
     * Requires authentication.
-    * JSON dictionary with any of these keys (all are optional, null to delete Nullables):
+    * JSON object with any of these keys (all are optional, null to delete Nullables):
         * `type`: One of `GAME`, `MOD`, `TXP`.
         * `title`: Human-readable title.
         * `name`: Technical name (needs permission if already approved).
@@ -99,7 +99,11 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
         * `video_url`: URL to a video.
         * `donate_url`: URL to a donation page.
         * `translation_url`: URL to send users interested in translating your package.
-        * `game_support`: Array of game support information objects. Not currently documented, as subject to change.
+        * `game_support`: Array of game support information objects. Not currently documented, 
+    * Returns a JSON object with:
+        * `success`
+        * `package`: updated package
+        * `was_modified`: bool, whether anything changed
 * GET `/api/packages/<username>/<name>/for-client/`
     * Similar to the read endpoint, but optimised for the Minetest client 
     * `long_description` is given as a hypertext object, see `/hypertext/` below.

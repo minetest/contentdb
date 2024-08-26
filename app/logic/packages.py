@@ -107,7 +107,7 @@ def validate(data: dict):
 
 
 def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, data: dict,
-		reason: str = None):
+		reason: str = None) -> bool:
 	if not package.check_perm(user, Permission.EDIT_PACKAGE):
 		raise LogicError(403, lazy_gettext("You don't have permission to edit this package"))
 
@@ -192,9 +192,11 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 					raise LogicError(400, "Unknown warning: " + warning_id)
 				package.content_warnings.append(warning)
 
+	was_modified = was_new
 	if not was_new:
 		after_dict = package.as_dict("/")
 		diff = diff_dictionaries(before_dict, after_dict)
+		was_modified = len(diff) > 0
 
 		if reason is None:
 			msg = "Edited {}".format(package.title)
@@ -208,6 +210,7 @@ def do_edit_package(user: User, package: Package, was_new: bool, was_web: bool, 
 		severity = AuditSeverity.NORMAL if user in package.maintainers else AuditSeverity.EDITOR
 		add_audit_log(severity, user, msg, package.get_url("packages.view"), package, json.dumps(diff, indent=4))
 
-	db.session.commit()
+	if was_modified:
+		db.session.commit()
 
-	return package
+	return was_modified

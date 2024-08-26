@@ -112,9 +112,9 @@ def api_edit_package(token: APIToken, package: Package, data: dict, reason: str 
 
 	reason += ", token=" + token.name
 
-	package = guard(do_edit_package)(token.owner, package, False, False, data, reason)
-
+	was_modified = guard(do_edit_package)(token.owner, package, False, False, data, reason)
 	return jsonify({
 		"success": True,
-		"package": package.as_dict(current_app.config["BASE_URL"])
+		"package": package.as_dict(current_app.config["BASE_URL"]),
+		"was_modified": was_modified,
 	})
