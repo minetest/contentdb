@@ -56,7 +56,7 @@ def normalize_line_endings(value: Optional[str]) -> Optional[str]:
 	if value is None:
 		return None
 
-	return value.replace("\r\n", "\n").strip()
+	return value.replace("\r\n", "\n")
 
 
 def should_return_json():
