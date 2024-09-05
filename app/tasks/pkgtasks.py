@@ -117,6 +117,9 @@ def _url_exists(url: str) -> str:
 			response.raise_for_status()
 			return ""
 	except requests.exceptions.HTTPError as e:
+		if e.response.status_code == 403:
+			return ""
+
 		print(f"   - [{e.response.status_code}] <{url}>", file=sys.stderr)
 		return str(e.response.status_code)
 	except requests.exceptions.ConnectionError:
