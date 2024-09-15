@@ -17,7 +17,7 @@
 import re
 import typing
 
-from flask import Blueprint, request, redirect, render_template, flash, abort, url_for
+from flask import Blueprint, request, redirect, render_template, flash, abort, url_for, jsonify
 from flask_babel import lazy_gettext, gettext
 from flask_login import current_user, login_required
 from flask_wtf import FlaskForm
@@ -25,7 +25,7 @@ from wtforms import StringField, BooleanField, SubmitField, FieldList, HiddenFie
 from wtforms.validators import InputRequired, Length, Optional, Regexp
 
 from app.models import Collection, db, Package, Permission, CollectionPackage, User, UserRank, AuditSeverity
-from app.utils import nonempty_or_none, normalize_line_endings
+from app.utils import nonempty_or_none, normalize_line_endings, should_return_json
 from app.utils.models import is_package_page, add_audit_log, create_session
 
 bp = Blueprint("collections", __name__)
@@ -70,7 +70,10 @@ def view(author, name):
 	if not collection.check_perm(current_user, Permission.EDIT_COLLECTION):
 		items = [x for x in items if x.package.check_perm(current_user, Permission.VIEW_PACKAGE)]
 
-	return render_template("collections/view.html", collection=collection, items=items)
+	if should_return_json():
+		return jsonify([ item.package.as_key_dict() for item in items ])
+	else:
+		return render_template("collections/view.html", collection=collection, items=items)
 
 
 class CollectionForm(FlaskForm):
