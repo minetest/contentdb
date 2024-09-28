@@ -6,7 +6,7 @@ RUN addgroup --gid 5123 cdb && \
 WORKDIR /home/cdb
 
 RUN \
-	apk add --no-cache postgresql-libs git bash && \
+	apk add --no-cache postgresql-libs git bash unzip && \
 	apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev g++
 
 RUN mkdir /var/cdb
