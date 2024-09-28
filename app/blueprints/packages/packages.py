@@ -572,7 +572,7 @@ def edit_maintainers(package):
 
 		for user in users:
 			if not user in package.maintainers:
-				if thread:
+				if thread and user not in thread.watchers:
 					thread.watchers.append(user)
 				add_notification(user, current_user, NotificationType.MAINTAINER,
 						"Added you as a maintainer of {}".format(package.title), package.get_url("packages.view"), package)
