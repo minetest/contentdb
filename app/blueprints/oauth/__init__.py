@@ -194,12 +194,17 @@ def create_edit_client(username, id_=None):
 
 	if form.validate_on_submit():
 		if is_new:
+			if OAuthClient.query.filter(OAuthClient.title.ilike(form.title.data.strip())).count() > 0:
+				flash(gettext("An OAuth client with that title already exists. Please choose a new title."), "danger")
+				return render_template("oauth/create_edit.html", user=user, form=form, client=client)
+
 			client = OAuthClient()
 			db.session.add(client)
 			client.owner = user
 			client.id = random_string(24)
 			client.secret = random_string(32)
 			client.approved = current_user.rank.at_least(UserRank.EDITOR)
+
 
 		form.populate_obj(client)
 

@@ -64,8 +64,8 @@
 	<form method="POST" action="" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
-		{{ render_field(form.title) }}
-		{{ render_field(form.description, hint=_("Shown to users when you request access to their account")) }}
+		{{ render_field(form.title, hint=_("Titles must be globally unique. For example, what's the name of your application?")) }}
+		{{ render_field(form.description, hint=_("Shown to users when you request access to their account. For example, what does your application do?")) }}
 		{{ render_field(form.redirect_url) }}
 		{{ render_field(form.app_type, hint=_("Where will you store your client_secret?")) }}
 
