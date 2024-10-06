@@ -25,9 +25,12 @@ from app.tasks import celery
 
 @celery.task()
 def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, title: Optional[str] = None, description: Optional[str] = None, thumbnail: Optional[str] = None):
-	discord_url = app.config.get("DISCORD_WEBHOOK_QUEUE" if is_queue else "DISCORD_WEBHOOK_FEED")
-	if discord_url is None:
+	discord_urls = app.config.get("DISCORD_WEBHOOK_QUEUE" if is_queue else "DISCORD_WEBHOOK_FEED")
+	if discord_urls is None:
 		return
+
+	if isinstance(discord_urls, str):
+		discord_urls = [discord_urls]
 
 	json = {
 		"content": content[0:2000],
@@ -52,7 +55,8 @@ def post_discord_webhook(username: Optional[str], content: str, is_queue: bool, 
 
 		json["embeds"] = [embed]
 
-	res = requests.post(discord_url, json=json, headers={"Accept": "application/json"})
-	if not res.ok:
-		raise Exception(f"Failed to submit Discord webhook {res.json}")
-	res.raise_for_status()
+	for url in discord_urls:
+		res = requests.post(url, json=json, headers={"Accept": "application/json"})
+		if not res.ok:
+			raise Exception(f"Failed to submit Discord webhook {res.json}")
+		res.raise_for_status()
