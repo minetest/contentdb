@@ -569,14 +569,14 @@ def package_scores():
 @cors_allowed
 @cached(60*60)
 def tags():
-	return jsonify([tag.as_dict() for tag in Tag.query.all() ])
+	return jsonify([tag.as_dict() for tag in Tag.query.order_by(db.asc(Tag.name)).all()])
 
 
 @bp.route("/api/content_warnings/")
 @cors_allowed
 @cached(60*60)
 def content_warnings():
-	return jsonify([warning.as_dict() for warning in ContentWarning.query.all() ])
+	return jsonify([warning.as_dict() for warning in ContentWarning.query.order_by(db.asc(ContentWarning.name)).all() ])
 
 
 @bp.route("/api/licenses/")
