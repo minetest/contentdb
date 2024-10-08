@@ -329,7 +329,7 @@ def package_reviews_as_hypertext(package: Package, formspec_version: int = 7):
 		content = html_to_minetest(html, package.get_url("packages.view", absolute=True),
 				formspec_version, False, f"review_{review.id}_")["body"].strip()
 		author = make_link(abs_url_for("users.profile", username=review.author.username), review.author.display_name)
-		rating = ["<thumbsup>", "<thumbsup>", "<neutral>", "<thumbsup>", "<thumbsup>"][review.rating - 1]
+		rating = ["<thumbsdown>", "<thumbsdown>", "<neutral>", "<thumbsup>", "<thumbsup>"][review.rating - 1]
 		comments = make_link(abs_url_for("threads.view", id=review.thread.id), "Comments")
 		body += f"{author} {rating}\n<big>{escape_hypertext(review.thread.title)}</big>\n{content}\n{comments}\n\n"
 
