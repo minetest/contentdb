@@ -322,7 +322,8 @@ def package_reviews_as_hypertext(package: Package, formspec_version: int = 7):
 		links[f"link_{link_counter}"] = url
 		return f"<action name=link_{link_counter}>{escape_hypertext(label)}</action>"
 
-	for review in package.reviews:
+	reviews = package.reviews.all()
+	for review in reviews:
 		review: PackageReview
 		html = render_markdown(review.thread.first_reply.comment)
 		content = html_to_minetest(html, package.get_url("packages.view", absolute=True),
@@ -331,6 +332,9 @@ def package_reviews_as_hypertext(package: Package, formspec_version: int = 7):
 		rating = ["<thumbsup>", "<thumbsup>", "<neutral>", "<thumbsup>", "<thumbsup>"][review.rating - 1]
 		comments = make_link(abs_url_for("threads.view", id=review.thread.id), "Comments")
 		body += f"{author} {rating}\n<big>{escape_hypertext(review.thread.title)}</big>\n{content}\n{comments}\n\n"
+
+	if len(reviews) == 0:
+		body += escape_hypertext(gettext("No reviews available."))
 
 	return {
 		"head": HEAD,
