@@ -13,7 +13,7 @@ and they will be subject to limited promotion.
 **ContentDB does not allow certain non-free licenses, and will limit the promotion
 of packages with non-free licenses.**
 
-Minetest is free and open source software, and is only as big as it is now
+Luanti is free and open source software, and is only as big as it is now
 because of this. It's pretty amazing you can take nearly any published mod and modify it
 to how you like - add some features, maybe fix some bugs - and then share those
 modifications without the worry of legal issues. The project, itself, relies on open
@@ -24,9 +24,9 @@ If you have played nearly any game with a large modding scene, you will find
 that most mods are legally ambiguous. A lot of them don't even provide the
 source code to allow you to bug fix or extend as you need.
 
-Limiting the promotion of problematic licenses helps Minetest avoid ending up in
+Limiting the promotion of problematic licenses helps Luanti avoid ending up in
 such a state. Licenses that prohibit redistribution or modification are
-completely banned from ContentDB and the Minetest forums. Other non-free licenses
+completely banned from ContentDB and the Luanti forums. Other non-free licenses
 will be subject to limited promotion - they won't be shown by default in
 the client.
 
@@ -37,7 +37,7 @@ you spread it.
 ## What's so bad about licenses that forbid commercial use?
 
 Please read [reasons not to use a Creative Commons -NC license](https://freedomdefined.org/Licenses/NC).
-Here's a quick summary related to Minetest content:
+Here's a quick summary related to Luanti content:
 
 1. They make your work incompatible with a growing body of free content, even if
    you do want to allow derivative works or combinations.
@@ -68,7 +68,7 @@ Users can opt in to showing non-free software, if they wish:
 
 The [`platform_default` flag](/help/content_flags/) is used to control what content
 each platforms shows. It doesn't hide anything on Desktop, but hides all mature
-content on Android. You may wish to remove all text from that setting completely, 
+content on Android. You may wish to remove all text from that setting completely,
 leaving it blank. See [Content Warnings](/help/content_flags/#content-warnings)
 for information on mature content.
 

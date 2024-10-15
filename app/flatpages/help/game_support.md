@@ -17,7 +17,7 @@ You can use `unsupported_games` to specify games that your package doesn't work
 with, which is useful for overriding ContentDB's automatic detection.
 
 Both of these are comma-separated lists of game technical ids. Any `_game`
-suffixes are ignored, just like in Minetest.
+suffixes are ignored, just like in Luanti.
 
     supported_games = minetest_game, repixture
     unsupported_games = lordofthetest, nodecore, whynot

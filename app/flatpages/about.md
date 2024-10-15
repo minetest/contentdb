@@ -25,13 +25,13 @@ poor user experience, especially for first-time users.
 ContentDB isn't just about supporting the in-game content downloader; it's common for technical users to find
 and review packages using the ContentDB website, but install using Git rather than the in-game installer.
 **ContentDB's purpose is to be a well-formatted source of information about mods, games,
-and texture packs for Minetest**.
+and texture packs for Luanti**.
 
-## How do I learn how to make mods and games for Minetest?
+## How do I learn how to make mods and games for Luanti?
 
 You should read
-[the official Minetest Modding Book](https://rubenwardy.com/minetest_modding_book/)
-for a guide to making mods and games using Minetest.
+[the official Luanti Modding Book](https://rubenwardy.com/minetest_modding_book/)
+for a guide to making mods and games using Luanti.
 
 
 <h2 id="donate">How can I support / donate to ContentDB?</h2>
@@ -45,5 +45,5 @@ For more information about the cost of ContentDB and what rubenwardy does, see h
 
 ## Sponsorships
 
-Minetest and ContentDB are sponsored by <a href="https://sentry.io/" rel="nofollow">sentry.io</a>.
+Luanti and ContentDB are sponsored by <a href="https://sentry.io/" rel="nofollow">sentry.io</a>.
 This provides us with improved error logging and performance insights.

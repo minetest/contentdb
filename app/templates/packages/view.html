@@ -53,11 +53,11 @@
 			{% if release and (release.min_rel or release.max_rel) %}
 				<small class="count display-block">
 					{% if release.min_rel and release.max_rel %}
-						{{ _("Minetest %(min)s - %(max)s", min=release.min_rel.name, max=release.max_rel.name) }}
+						{{ _("Luanti %(min)s - %(max)s", min=release.min_rel.name, max=release.max_rel.name) }}
 					{% elif release.min_rel %}
-						{{ _("For Minetest %(min)s and above", min=release.min_rel.name) }}
+						{{ _("For Luanti %(min)s and above", min=release.min_rel.name) }}
 					{% elif release.max_rel %}
-						{{ _("Minetest %(max)s and below", max=release.max_rel.name) }}
+						{{ _("Luanti %(max)s and below", max=release.max_rel.name) }}
 					{% endif %}
 				</small>
 			{% endif %}

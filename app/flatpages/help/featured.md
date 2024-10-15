@@ -7,10 +7,10 @@ title: Featured Packages
 ## What are Featured Packages?
 
 Featured Packages are shown at the top of the ContentDB homepage. In the future,
-featured packages may be shown inside the Minetest client.
+featured packages may be shown inside the Luanti client.
 
 The purpose is to promote content that demonstrates a high quality of what is
-possible in Minetest. The selection should be varied, and should vary over time.
+possible in Luanti. The selection should be varied, and should vary over time.
 The featured content should be content that we are comfortable recommending to
 a first time player.
 
@@ -47,7 +47,7 @@ other packages to be featured, or for another reason.
 
 * MUST: Be 100% free and open source (as marked as Free on ContentDB).
 * MUST: Work out-of-the-box (no weird setup or settings required).
-* MUST: Be compatible with the latest stable Minetest release.
+* MUST: Be compatible with the latest stable Luanti release.
 * SHOULD: Use public source control (such as Git).
 * SHOULD: Have at least 3 reviews, and be largely positive.
 
@@ -94,7 +94,7 @@ is available.
 ### Usability
 
 * MUST: Unsupported mapgens are disabled in game.conf.
-* SHOULD: Passes the Beginner Test: A newbie to the game (but not Minetest) wouldn't get completely
+* SHOULD: Passes the Beginner Test: A newbie to the game (but not Luanti) wouldn't get completely
   stuck within the first 5 minutes of playing.
 * SHOULD: Have good documentation. This may include one or more of:
     * A craftguide, or other in-game learning system

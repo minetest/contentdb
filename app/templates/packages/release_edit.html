@@ -51,7 +51,7 @@
 			{% endif %}
 		{% endif %}
 
-		<h3 class="mt-5">{{ _("Supported Minetest versions") }}</h3>
+		<h3 class="mt-5">{{ _("Supported Luanti versions") }}</h3>
 
 		<div class="row">
 			{{ render_field(form.min_rel, class_="col-sm-6") }}
@@ -67,12 +67,12 @@
 			<strong>
 				{{ _("Are you sure your package doesn't work on versions after %(version)s?", version=last.label) }}
 			</strong>
-			{{ _("Only set the maximum version if you know that it doesn't work on newer Minetest versions.") }}
+			{{ _("Only set the maximum version if you know that it doesn't work on newer Luanti versions.") }}
 			{{ _("Don't set the maximum version just because you haven't tested it on newer versions.") }}
 		<p>
 
 		<p>
-			{{ _("Set the minimum and maximum Minetest versions supported.
+			{{ _("Set the minimum and maximum Luanti versions supported.
 			This release will be hidden to clients outside of that range. ") }}
 			<br />
 			{{ _("Leave both as None if in doubt.") }}

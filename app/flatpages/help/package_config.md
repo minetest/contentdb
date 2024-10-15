@@ -42,8 +42,8 @@ ContentDB understands the following information:
 * `description` - A short description to show in the client.
 * `depends` - Comma-separated hard dependencies.
 * `optional_depends` - Comma-separated soft dependencies.
-* `min_minetest_version` - The minimum Minetest version this runs on, see [Min and Max Minetest Versions](#min_max_versions).
-* `max_minetest_version` - The maximum Minetest version this runs on, see [Min and Max Minetest Versions](#min_max_versions).
+* `min_minetest_version` - The minimum Luanti version this runs on, see [Min and Max Luanti Versions](#min_max_versions).
+* `max_minetest_version` - The maximum Luanti version this runs on, see [Min and Max Luanti Versions](#min_max_versions).
 
 and for mods only:
 
@@ -68,7 +68,7 @@ It should be a JSON dictionary with one or more of the following optional keys:
 * `tags`: List of tag names, see [/api/tags/](/api/tags/).
 * `content_warnings`: List of content warning names, see [/api/content_warnings/](/api/content_warnings/).
 * `license`: A license name, see [/api/licenses/](/api/licenses/).
-* `media_license`: A license name.          
+* `media_license`: A license name.
 * `long_description`: Long markdown description.
 * `repo`: Source repository (eg: Git).
 * `website`: Website URL.
@@ -106,11 +106,11 @@ See [Git Update Detection](/help/update_config/).
 You can also use [GitLab/GitHub webhooks](/help/release_webhooks/) or the [API](/help/api/)
 to create releases.
 
-### Min and Max Minetest Versions
+### Min and Max Luanti Versions
 
 <a name="min_max_versions" />
 
-When creating a release, the `.conf` file will be read to determine what Minetest
+When creating a release, the `.conf` file will be read to determine what Luanti
 versions the release supports. If the `.conf` doesn't specify, then it is assumed
 that it supports all versions.
 

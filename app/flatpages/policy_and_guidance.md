@@ -107,7 +107,7 @@ of the [Free Software Foundation](https://www.gnu.org/philosophy/free-sw.en.html
 It is highly recommended that you use a Free and Open Source software (FOSS)
 license. FOSS licenses result in a sharing community and will increase the
 number of potential users your package has. Using a closed source license will
-result in your package not being shown in Minetest by default. See the help page
+result in your package not being shown in Luanti by default. See the help page
 on [non-free licenses](/help/non_free/) for more information.
 
 It is recommended that you use a proper license for code with a warranty

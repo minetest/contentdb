@@ -74,7 +74,7 @@ class AdvancedSearchForm(FlaskForm):
 			allow_blank=True, blank_value="",
 			get_pk=lambda a: a.id, get_label=lambda a: a.title)
 	hide = SelectMultipleField(lazy_gettext("Hide Tags and Content Warnings"), [Optional()])
-	engine_version = QuerySelectField(lazy_gettext("Minetest Version"),
+	engine_version = QuerySelectField(lazy_gettext("Luanti Version"),
 			query_factory=lambda: MinetestRelease.query.order_by(db.asc(MinetestRelease.id)),
 			allow_blank=True, blank_value="",
 			get_pk=lambda a: a.value, get_label=lambda a: a.name)
