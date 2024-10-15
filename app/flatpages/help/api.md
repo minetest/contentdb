@@ -3,7 +3,7 @@ title: API
 
 ## Resources
 
-* [How the Minetest client uses the API](https://github.com/minetest/contentdb/blob/master/docs/minetest_client.md)
+* [How the Luanti client uses the API](https://github.com/minetest/contentdb/blob/master/docs/minetest_client.md)
 
 
 ## Responses and Error Handling
@@ -67,7 +67,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 * DELETE `/api/delete-token/`: Deletes the currently used token.
 
 ```bash
-# Logout 
+# Logout
 curl -X DELETE https://content.minetest.net/api/delete-token/ \
     -H "Authorization: Bearer YOURTOKEN"
 ```
@@ -99,13 +99,13 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
         * `video_url`: URL to a video.
         * `donate_url`: URL to a donation page.
         * `translation_url`: URL to send users interested in translating your package.
-        * `game_support`: Array of game support information objects. Not currently documented, 
+        * `game_support`: Array of game support information objects. Not currently documented,
     * Returns a JSON object with:
         * `success`
         * `package`: updated package
         * `was_modified`: bool, whether anything changed
 * GET `/api/packages/<username>/<name>/for-client/`
-    * Similar to the read endpoint, but optimised for the Minetest client 
+    * Similar to the read endpoint, but optimised for the Luanti client
     * `long_description` is given as a hypertext object, see `/hypertext/` below.
     * `info_hypertext` is the info sidebar as a hypertext object.
     * Query arguments
@@ -114,7 +114,7 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
         * `protocol_version`: Optional, used to get the correct release.
         * `engine_version`: Optional, used to get the correct release. Ex: `5.3.0`.
 * GET `/api/packages/<author>/<name>/hypertext/`
-    * Converts the long description to [Minetest Markup Language](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#markup-language)
+    * Converts the long description to [Luanti Markup Language](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#markup-language)
       to be used in a `hypertext` formspec element.
     * Query arguments:
         * `formspec_version`: Required, maximum supported formspec version.
@@ -202,8 +202,8 @@ Filter query parameters:
 * `license`: Filter by [license name](#licenses). Multiple licenses are OR-ed together, ie: `&license=MIT&license=LGPL-2.1-only`
 * `game`: Filter by [Game Support](/help/game_support/), ex: `Warr1024/nodecore`. (experimental, doesn't show items that support every game currently).
 * `lang`: Filter by translation support, eg: `en`/`de`/`ja`/`zh_TW`.
-* `protocol_version`:  Only show packages supported by this Minetest protocol version.
-* `engine_version`:  Only show packages supported by this Minetest engine version, eg: `5.3.0`.
+* `protocol_version`:  Only show packages supported by this Luanti protocol version.
+* `engine_version`:  Only show packages supported by this Luanti engine version, eg: `5.3.0`.
 
 Sorting query parameters:
 
@@ -216,7 +216,7 @@ Format query parameters:
 * `limit`:  Return at most `limit` packages.
 * `fmt`:  How the response is formatted.
     * `keys`:  author/name only.
-    * `short`:  stuff needed for the Minetest client.
+    * `short`:  stuff needed for the Luanti client.
     * `vcs`: `short` but with `repo`.
 
 
@@ -236,8 +236,8 @@ Format query parameters:
         * `url`: download URL
         * `commit`: commit hash or null
         * `downloads`: number of downloads
-        * `min_minetest_version`: dict or null, minimum supported minetest version (inclusive).
-        * `max_minetest_version`: dict or null, minimum supported minetest version (inclusive).
+        * `min_minetest_version`: dict or null, minimum supported Luanti version (inclusive).
+        * `max_minetest_version`: dict or null, minimum supported Luanti version (inclusive).
         * `size`: size of zip file, in bytes.
         * `package`
             * `author`: author username
@@ -246,8 +246,8 @@ Format query parameters:
 * GET `/api/updates/` (Look-up table)
     * Returns a look-up table from package key (`author/name`) to latest release id
     * Query arguments
-        * `protocol_version`:  Only show packages supported by this Minetest protocol version.
-        * `engine_version`:  Only show packages supported by this Minetest engine version, eg: `5.3.0`.
+        * `protocol_version`:  Only show packages supported by this Luanti protocol version.
+        * `engine_version`:  Only show packages supported by this Luanti engine version, eg: `5.3.0`.
 * GET `/api/packages/<username>/<name>/releases/` (List)
     * Returns array of release dictionaries, see above, but without package info.
 * GET `/api/packages/<username>/<name>/releases/<id>/` (Read)
@@ -262,7 +262,7 @@ Format query parameters:
     * For zip upload release creation:
         * `file`: multipart file to upload, like `<input type="file" name="file">`.
         * `commit`: (Optional) Source Git commit hash, for informational purposes.
-    * You can set min and max Minetest Versions [using the content's .conf file](/help/package_config/).
+    * You can set min and max Luanti Versions [using the content's .conf file](/help/package_config/).
 * DELETE `/api/packages/<username>/<name>/releases/<id>/` (Delete)
     * Requires authentication.
     * Deletes release.
@@ -462,7 +462,7 @@ Supported query parameters:
 ## Collections
 
 * GET `/api/collections/`
-    * Query args: 
+    * Query args:
         * `author`: collection author username.
         * `package`: collections that contain the package.
     * Returns JSON array of collection entries:
@@ -472,7 +472,7 @@ Supported query parameters:
         * `short_description`
         * `created_at`: creation time in iso format.
         * `private`: whether collection is private, boolean.
-        * `package_count`: number of packages, integer. 
+        * `package_count`: number of packages, integer.
 * GET `/api/collections/<username>/<name>/`
     * Returns JSON object for collection:
         * `author`: author username.
@@ -502,7 +502,7 @@ Supported query parameters:
 ### Content Warnings
 
 * GET `/api/content_warnings/` ([View](/api/content_warnings/))
-    * List of objects with 
+    * List of objects with
         * `name`:  technical name
         * `title`:  human-readable title
         * `description`:  tag description or null
@@ -510,14 +510,14 @@ Supported query parameters:
 ### Licenses
 
 * GET `/api/licenses/` ([View](/api/licenses/))
-    * List of objects with: 
+    * List of objects with:
         * `name`
         * `is_foss`: whether the license is foss
 
-### Minetest Versions
+### Luanti Versions
 
 * GET `/api/minetest_versions/` ([View](/api/minetest_versions/))
-    * List of objects with: 
+    * List of objects with:
         * `name`: Version name.
         * `is_dev`: boolean, is dev version.
         * `protocol_version`: protocol version number.
@@ -525,7 +525,7 @@ Supported query parameters:
 ### Languages
 
 * GET `/api/languages/` ([View](/api/languages/))
-    * List of objects with: 
+    * List of objects with:
         * `id`: language code.
         * `title`: native language name.
         * `has_contentdb_translation`: whether ContentDB has been translated into this language.
@@ -560,7 +560,7 @@ Supported query parameters:
     * Get JSON Schema of `.cdb.json`, including licenses, tags and content warnings.
     * See [JSON Schema Reference](https://json-schema.org/).
 * POST `/api/hypertext/`
-    * Converts HTML or Markdown to [Minetest Markup Language](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#markup-language)
+    * Converts HTML or Markdown to [Luanti Markup Language](https://github.com/minetest/minetest/blob/master/doc/lua_api.md#markup-language)
       to be used in a `hypertext` formspec element.
     * Post data: HTML or Markdown as plain text.
     * Content-Type: `text/html` or `text/markdown`.

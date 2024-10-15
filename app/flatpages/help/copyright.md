@@ -75,7 +75,7 @@ Your Name, CC BY-SA 4.0:
 * [Kenney game assets](https://www.kenney.nl/assets) - everything
 * [Free Sound](https://freesound.org/) - sounds
 * [PolyHaven](https://polyhaven.com/) - 3d models and textures.
-* Other Minetest mods/games
+* Other Luanti mods/games
 
     Don't assume the author has correctly licensed their work.
     Make sure they have clearly indicated the source in a list [like above](#list-the-sources-of-your-media).

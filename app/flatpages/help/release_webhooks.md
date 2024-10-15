@@ -20,7 +20,7 @@ The process is as follows:
 3. The git host posts a webhook notification to ContentDB, using the API token assigned to it.
 4. ContentDB checks the API token and issues a new release.
     * If multiple packages match, then only the first will have a release created.
- 
+
 ### Branch filtering
 
 By default, "New commit" or "push" based webhooks will only work on "master"/"main" branches.
@@ -67,5 +67,5 @@ Tag-based webhooks are accepted on any branch.
 See the [Package Configuration and Releases Guide](/help/package_config/) for
 documentation on configuring the release creation.
 
-From the Git repository, you can set the min/max Minetest versions, which files are included,
+From the Git repository, you can set the min/max Luanti versions, which files are included,
 and update the package meta.

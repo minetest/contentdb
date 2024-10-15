@@ -59,9 +59,9 @@ class CreatePackageReleaseForm(FlaskForm):
 	upload_mode = RadioField(lazy_gettext("Method"), choices=[("upload", lazy_gettext("File Upload"))], default="upload")
 	vcs_label   = StringField(lazy_gettext("Git reference (ie: commit hash, branch, or tag)"), default=None)
 	file_upload = FileField(lazy_gettext("File Upload"))
-	min_rel     = QuerySelectField(lazy_gettext("Minimum Minetest Version"), [InputRequired()],
+	min_rel     = QuerySelectField(lazy_gettext("Minimum Luanti Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	max_rel     = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
+	max_rel     = QuerySelectField(lazy_gettext("Maximum Luanti Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit      = SubmitField(lazy_gettext("Save"))
 
@@ -74,9 +74,9 @@ class EditPackageReleaseForm(FlaskForm):
 	url      = StringField(lazy_gettext("URL"), [Optional()])
 	task_id  = StringField(lazy_gettext("Task ID"), filters = [lambda x: x or None])
 	approved = BooleanField(lazy_gettext("Is Approved"))
-	min_rel  = QuerySelectField(lazy_gettext("Minimum Minetest Version"), [InputRequired()],
+	min_rel  = QuerySelectField(lazy_gettext("Minimum Luanti Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
-	max_rel  = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
+	max_rel  = QuerySelectField(lazy_gettext("Maximum Luanti Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	submit   = SubmitField(lazy_gettext("Save"))
 
@@ -214,10 +214,10 @@ def edit_release(package, id):
 
 class BulkReleaseForm(FlaskForm):
 	set_min = BooleanField(lazy_gettext("Set Min"))
-	min_rel  = QuerySelectField(lazy_gettext("Minimum Minetest Version"), [InputRequired()],
+	min_rel  = QuerySelectField(lazy_gettext("Minimum Luanti Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(False), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	set_max = BooleanField(lazy_gettext("Set Max"))
-	max_rel  = QuerySelectField(lazy_gettext("Maximum Minetest Version"), [InputRequired()],
+	max_rel  = QuerySelectField(lazy_gettext("Maximum Luanti Version"), [InputRequired()],
 			query_factory=lambda: get_mt_releases(True), get_pk=lambda a: a.id, get_label=lambda a: a.name)
 	only_change_none = BooleanField(lazy_gettext("Only change values previously set as none"))
 	submit   = SubmitField(lazy_gettext("Update"))

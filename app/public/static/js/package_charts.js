@@ -171,7 +171,7 @@ async function load_data() {
 		const data = {
 			datasets: [
 				{ label: "Web / other", data: getData(json.platform_other) },
-				{ label: "Minetest", data: getData(json.platform_minetest) },
+				{ label: "Luanti", data: getData(json.platform_minetest) },
 			],
 		};
 		setup_chart(ctx, data, annotations);

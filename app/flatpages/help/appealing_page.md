@@ -8,8 +8,8 @@ Expand on the title with the short description. You have a limited number
 of characters, use them wisely!
 
 ```ini
-# Bad, we know this is a mod for Minetest. Doesn't give much information other than "food"
-description = The food mod for Minetest
+# Bad, we know this is a mod for Luanti. Doesn't give much information other than "food"
+description = The food mod for Luanti
 # Much better, says what is actually in this mod!
 description = Adds soup, cakes, bakes and juices
 ```
@@ -20,7 +20,7 @@ A good thumbnail goes a long way to making a package more appealing. It's one of
 a user sees before clicking on your package. Make sure it's possible to tell what a
 thumbnail is when it's small.
 
-For a preview of what your package will look like inside Minetest, see
+For a preview of what your package will look like inside Luanti, see
 Edit Package > Screenshots.
 
 ## Screenshots
@@ -55,18 +55,18 @@ The following are redundant and should probably not be included:
 * API reference (unless your mod is a library only)
 * Development instructions for your package (this should be in the repo's README)
 * Screenshots that are already uploaded (unless you want to embed a recipe image in a specific place)
-    * Note: you should avoid images in the long description as they won't be visible inside Minetest,
+    * Note: you should avoid images in the long description as they won't be visible inside Luanti,
       when support for showing the long description is added.
 
 ## Localize / Translate your package
 
-According to Google Play, 64% of Minetest Android users don't have English as their main language.
+According to Google Play, 64% of Luanti Android users don't have English as their main language.
 Adding translation support to your package increases accessibility. Using content translation, you
 can also translate your ContentDB page. See Edit Package > Translation for more information.
 
 <p>
     <a class="btn btn-primary me-2" href="https://rubenwardy.com/minetest_modding_book/en/quality/translations.html">
-        {{ _("Translation - Minetest Modding Book") }}
+        {{ _("Translation - Luanti Modding Book") }}
     </a>
     <a class="btn btn-primary" href="https://api.minetest.net/translations/#translating-content-meta">
         {{ _("Translating content meta - lua_api.md") }}

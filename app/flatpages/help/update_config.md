@@ -39,5 +39,5 @@ Clicking "Save" on "Update Settings" will mark a package as up-to-date.
 See the [Package Configuration and Releases Guide](/help/package_config/) for
 documentation on configuring the release creation.
 
-From the Git repository, you can set the min/max Minetest versions, which files are included,
+From the Git repository, you can set the min/max Luanti versions, which files are included,
 and update the package meta.

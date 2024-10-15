@@ -29,7 +29,7 @@ def _make_feed(title: str, feed_url: str, items: list):
 	return {
 		"version": "https://jsonfeed.org/version/1",
 		"title": title,
-		"description": gettext("Welcome to the best place to find Minetest mods, games, and texture packs"),
+		"description": gettext("Welcome to the best place to find Luanti mods, games, and texture packs"),
 		"home_page_url": "https://content.minetest.net/",
 		"feed_url": feed_url,
 		"icon": "https://content.minetest.net/favicon-128.png",

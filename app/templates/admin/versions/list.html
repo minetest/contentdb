@@ -1,13 +1,13 @@
 {% extends "base.html" %}
 
 {% block title %}
-{{ _("Minetest Versions") }}
+{{ _("Luanti Versions") }}
 {% endblock %}
 
 {% block content %}
 	<a class="btn btn-primary float-end" href="{{ url_for('admin.create_edit_version') }}">{{ _("New Version") }}</a>
 
-	<h1>{{ _("Minetest Versions") }}</h1>
+	<h1>{{ _("Luanti Versions") }}</h1>
 
 	<div class="list-group">
 		{% for v in versions %}
