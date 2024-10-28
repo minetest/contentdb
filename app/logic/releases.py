@@ -28,7 +28,7 @@ from app.tasks.importtasks import make_vcs_release, check_zip_release
 from app.utils import AuditSeverity, add_audit_log, nonempty_or_none, normalize_line_endings
 
 
-def check_can_create_release(user: User, package: Package):
+def check_can_create_release(user: User, package: Package, name: str):
 	if not package.check_perm(user, Permission.MAKE_RELEASE):
 		raise LogicError(403, lazy_gettext("You don't have permission to make releases"))
 
@@ -37,10 +37,13 @@ def check_can_create_release(user: User, package: Package):
 	if count >= 5:
 		raise LogicError(429, lazy_gettext("You've created too many releases for this package in the last 5 minutes, please wait before trying again"))
 
+	if PackageRelease.query.filter_by(package_id=package.id, name=name).count() > 0:
+		raise LogicError(403, lazy_gettext("A release with this name already exists"))
+
 
 def do_create_vcs_release(user: User, package: Package, name: str, title: Optional[str], release_notes: Optional[str], ref: str,
 		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason: str = None):
-	check_can_create_release(user, package)
+	check_can_create_release(user, package, name)
 
 	rel = PackageRelease()
 	rel.package = package
@@ -69,7 +72,7 @@ def do_create_vcs_release(user: User, package: Package, name: str, title: Option
 def do_create_zip_release(user: User, package: Package, name: str, title: Optional[str], release_notes: Optional[str], file,
 		min_v: MinetestRelease = None, max_v: MinetestRelease = None, reason: str = None,
 		commit_hash: str = None):
-	check_can_create_release(user, package)
+	check_can_create_release(user, package, name)
 
 	if commit_hash:
 		commit_hash = commit_hash.lower()
