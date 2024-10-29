@@ -6,14 +6,14 @@ or for implementing ContentDB compatible servers.
 
 ## Package List API call
 
-The client makes a single [API](https://content.minetest.net/help/api/) request to `/api/packages/`.
+The client makes a single [API](https://content.luanti.org/help/api/) request to `/api/packages/`.
 
 The query arguments will include a list of supported types, the current
-[engine version](https://content.minetest.net/api/minetest_versions/),
-and any hidden [Content Flags](https://content.minetest.net/help/content_flags/).
+[engine version](https://content.luanti.org/api/minetest_versions/),
+and any hidden [Content Flags](https://content.luanti.org/help/content_flags/).
 
 Example URL:
-<https://content.minetest.net/api/packages/?type=mod&type=game&type=txp&protocol_version=39&engine_version=5.3.0&hide=nonfree&hide=desktop_default>
+<https://content.luanti.org/api/packages/?type=mod&type=game&type=txp&protocol_version=39&engine_version=5.3.0&hide=nonfree&hide=desktop_default>
 
 Example response:
 
@@ -24,7 +24,7 @@ Example response:
         "name": "nodecore",
         "release": 1234,
         "short_description": "A short description",
-        "thumbnail": "https://content.minetest.net/thumbnails/1/abcdef.jpg",
+        "thumbnail": "https://content.luanti.org/thumbnails/1/abcdef.jpg",
         "title": "NodeCore",
         "type": "game"
     }
@@ -50,7 +50,7 @@ The client can simply download the URL mentioned in `thumbnail`.
 The client downloads packages by constructing a URL for the release and downloading it:
 
 ```
-https://content.minetest.net/packages/<author>/<name>/releases/<release>/download/
+https://content.luanti.org/packages/<author>/<name>/releases/<release>/download/
 ```
 
 This supports redirects.
@@ -104,5 +104,5 @@ response for Mobs Monster.
 The client will open the package in a browser by constructing the following URL
 
 ```
-https://content.minetest.net/packages/<author>/<name>/
+https://content.luanti.org/packages/<author>/<name>/
 ```

@@ -48,7 +48,7 @@ It's common to do this in README.md or LICENSE.md like so:
 * conquer_arrow_*.png from [Simple Shooter](https://github.com/stujones11/shooter) by Stuart Jones, CC0 1.0.
 * conquer_arrow.b3d from [Simple Shooter](https://github.com/stujones11/shooter) by Stuart Jones, CC-BY-SA 3.0.
 * conquer_arrow_head.png from MTG, CC-BY-SA 3.0.
-* health_*.png from [Gauges](https://content.minetest.net/packages/Calinou/gauges/) by Calinou, CC0.
+* health_*.png from [Gauges](https://content.luanti.org/packages/Calinou/gauges/) by Calinou, CC0.
 ```
 
 if you have a lot of media, then you can split it up by author like so:

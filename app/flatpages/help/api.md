@@ -54,7 +54,7 @@ The response will be a dictionary with the following keys:
 Not all endpoints require authentication, but it is done using Bearer tokens:
 
 ```bash
-curl https://content.minetest.net/api/whoami/ \
+curl https://content.luanti.org/api/whoami/ \
     -H "Authorization: Bearer YOURTOKEN"
 ```
 
@@ -68,7 +68,7 @@ Tokens can be attained by visiting [Settings > API Tokens](/user/tokens/).
 
 ```bash
 # Logout
-curl -X DELETE https://content.minetest.net/api/delete-token/ \
+curl -X DELETE https://content.luanti.org/api/delete-token/ \
     -H "Authorization: Bearer YOURTOKEN"
 ```
 
@@ -167,20 +167,20 @@ curl -X DELETE https://content.minetest.net/api/delete-token/ \
 You can download a package by building one of the two URLs:
 
 ```
-https://content.minetest.net/packages/${author}/${name}/download/`
-https://content.minetest.net/packages/${author}/${name}/releases/${release}/download/`
+https://content.luanti.org/packages/${author}/${name}/download/`
+https://content.luanti.org/packages/${author}/${name}/releases/${release}/download/`
 ```
 
 Examples:
 
 ```bash
 # Edit package
-curl -X PUT https://content.minetest.net/api/packages/username/name/ \
+curl -X PUT https://content.luanti.org/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d '{ "title": "Foo bar", "tags": ["pvp", "survival"], "license": "MIT" }'
 
 # Remove website URL
-curl -X PUT https://content.minetest.net/api/packages/username/name/ \
+curl -X PUT https://content.luanti.org/api/packages/username/name/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d '{ "website": null }'
 ```
@@ -271,7 +271,7 @@ Examples:
 
 ```bash
 # Create release from Git
-curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
+curl -X POST https://content.luanti.org/api/packages/username/name/releases/new/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d '{
         "method": "git",
@@ -282,17 +282,17 @@ curl -X POST https://content.minetest.net/api/packages/username/name/releases/ne
     }'
 
 # Create release from zip upload
-curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
+curl -X POST https://content.luanti.org/api/packages/username/name/releases/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/file.zip
 
 # Create release from zip upload with commit hash
-curl -X POST https://content.minetest.net/api/packages/username/name/releases/new/ \
+curl -X POST https://content.luanti.org/api/packages/username/name/releases/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F commit="8ef74deec170a8ce789f6055a59d43876d16a7ea" -F file=@path/to/file.zip
 
 # Delete release
-curl -X DELETE https://content.minetest.net/api/packages/username/name/releases/3/ \
+curl -X DELETE https://content.luanti.org/api/packages/username/name/releases/3/ \
     -H "Authorization: Bearer YOURTOKEN"
 ```
 
@@ -333,26 +333,26 @@ Examples:
 
 ```bash
 # Create screenshot
-curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/new/ \
+curl -X POST https://content.luanti.org/api/packages/username/name/screenshots/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/screnshot.png
 
 # Create screenshot and set it as the cover image
-curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/new/ \
+curl -X POST https://content.luanti.org/api/packages/username/name/screenshots/new/ \
     -H "Authorization: Bearer YOURTOKEN" \
     -F title="My Release" -F file=@path/to/screnshot.png -F is_cover_image="true"
 
 # Delete screenshot
-curl -X DELETE https://content.minetest.net/api/packages/username/name/screenshots/3/ \
+curl -X DELETE https://content.luanti.org/api/packages/username/name/screenshots/3/ \
     -H "Authorization: Bearer YOURTOKEN"
 
 # Reorder screenshots
-curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/order/ \
+curl -X POST https://content.luanti.org/api/packages/username/name/screenshots/order/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d "[13, 2, 5, 7]"
 
 # Set cover image
-curl -X POST https://content.minetest.net/api/packages/username/name/screenshots/cover-image/ \
+curl -X POST https://content.luanti.org/api/packages/username/name/screenshots/cover-image/ \
     -H "Authorization: Bearer YOURTOKEN" -H "Content-Type: application/json" \
     -d "{ 'cover_image': 123 }"
 ```

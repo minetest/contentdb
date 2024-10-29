@@ -30,9 +30,9 @@ def _make_feed(title: str, feed_url: str, items: list):
 		"version": "https://jsonfeed.org/version/1",
 		"title": title,
 		"description": gettext("Welcome to the best place to find Luanti mods, games, and texture packs"),
-		"home_page_url": "https://content.minetest.net/",
+		"home_page_url": "https://content.luanti.org/",
 		"feed_url": feed_url,
-		"icon": "https://content.minetest.net/favicon-128.png",
+		"icon": "https://content.luanti.org/favicon-128.png",
 		"expired": False,
 		"items": items,
 	}

@@ -2,7 +2,7 @@
 
 ## Supported Versions
 
-We only support the latest production version, deployed to <https://content.minetest.net>.
+We only support the latest production version, deployed to <https://content.luanti.org>.
 This is usually the latest `master` commit.
 
 ## Reporting a Vulnerability

@@ -260,7 +260,7 @@ class User(db.Model, UserMixin):
 				return "/static/bot_avatar.png"
 		else:
 			from app.utils.gravatar import get_gravatar
-			return get_gravatar(self.email or f"{self.username}@content.minetest.net")
+			return get_gravatar(self.email or f"{self.username}@content.luanti.org")
 
 	def check_perm(self, user, perm):
 		if not user.is_authenticated:

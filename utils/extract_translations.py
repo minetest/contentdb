@@ -6,7 +6,7 @@ from typing import List
 import requests
 
 
-base_url = "https://content.minetest.net"
+base_url = "https://content.luanti.org"
 translations = []
 
 

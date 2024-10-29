@@ -27,7 +27,7 @@ ContentDB supports the Authorization Code OAuth2 method.
 Get the user to open the following URL in a web browser:
 
 ```
-https://content.minetest.net/oauth/authorize/
+https://content.luanti.org/oauth/authorize/
     ?response_type=code
     &client_id={CLIENT_ID}
     &redirect_uri={REDIRECT_URL}
@@ -52,7 +52,7 @@ Next, you'll need to exchange the auth for an access token.
 Do this by making a POST request to the `/oauth/token/` API:
 
 ```bash
-curl -X POST https://content.minetest.net/oauth/token/ \
+curl -X POST https://content.luanti.org/oauth/token/ \
     -F grant_type=authorization_code \
     -F client_id="CLIENT_ID" \
     -F client_secret="CLIENT_SECRET" \
@@ -98,6 +98,6 @@ Possible errors:
 Next, you should check the access token works by getting the user information:
 
 ```bash
-curl https://content.minetest.net/api/whoami/ \
+curl https://content.luanti.org/api/whoami/ \
     -H "Authorization: Bearer YOURTOKEN"
 ```

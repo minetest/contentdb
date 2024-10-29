@@ -36,7 +36,7 @@ The target audience of your package page is end users.
 The long description should explain what your package is about,
 why the user should choose it, and how to use it if they download it.
 
-[NodeCore](https://content.minetest.net/packages/Warr1024/nodecore/) is a good
+[NodeCore](https://content.luanti.org/packages/Warr1024/nodecore/) is a good
 example of what to do. For inspiration, you might want to look at how games on
 Steam write their descriptions.
 

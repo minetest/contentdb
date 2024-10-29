@@ -111,7 +111,7 @@ def clear_removed_packages(all_packages: bool):
 def _url_exists(url: str) -> str:
 	try:
 		headers = {
-			"User-Agent": "Mozilla/5.0 (compatible; ContentDB link checker; +https://content.minetest.net/)",
+			"User-Agent": "Mozilla/5.0 (compatible; ContentDB link checker; +https://content.luanti.org/)",
 		}
 		with requests.get(url, stream=True, headers=headers, timeout=10) as response:
 			response.raise_for_status()

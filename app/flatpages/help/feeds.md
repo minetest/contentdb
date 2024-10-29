@@ -11,6 +11,6 @@ You can follow updates from ContentDB in your RSS feed reader. If in doubt, copy
 Follow new releases for a package:
 
 ```
-https://content.minetest.net/packages/AUTHOR/NAME/releases_feed.atom
-https://content.minetest.net/packages/AUTHOR/NAME/releases_feed.json
+https://content.luanti.org/packages/AUTHOR/NAME/releases_feed.atom
+https://content.luanti.org/packages/AUTHOR/NAME/releases_feed.json
 ```
