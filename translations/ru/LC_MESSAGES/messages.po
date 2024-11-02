@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-10-15 21:46+0100\n"
-"PO-Revision-Date: 2024-08-30 13:24+0000\n"
+"PO-Revision-Date: 2024-10-19 17:16+0000\n"
 "Last-Translator: BlackImpostor <SkyBuilderOFFICAL@yandex.ru>\n"
+"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
+"contentdb/ru/>\n"
 "Language: ru\n"
-"Language-Team: Russian "
-"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8-rc\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app/__init__.py:156
@@ -340,7 +341,7 @@ msgstr "Джэм / Игра 2021"
 #: app/_translations.py:96
 msgctxt "tags"
 msgid "Entries to the 2021 Minetest Game Jam"
-msgstr ""
+msgstr "Вход на джэм 2021 Minetest Game"
 
 #. NOTE: tags: title for jam_game_2022
 #: app/_translations.py:98
@@ -352,7 +353,7 @@ msgstr " игра Джэм / Игра 2022"
 #: app/_translations.py:100
 msgctxt "tags"
 msgid "Entries to the 2022 Minetest Game Jam "
-msgstr ""
+msgstr "Вход на джэм 2022 Minetest Game "
 
 #. NOTE: tags: title for jam_game_2023
 #: app/_translations.py:102
@@ -364,7 +365,7 @@ msgstr "Джэм / Игра 2023"
 #: app/_translations.py:104
 msgctxt "tags"
 msgid "Entries to the 2023 Minetest Game Jam "
-msgstr ""
+msgstr "Вход в джэм 2023 Minetest Game "
 
 #. NOTE: tags: title for jam_weekly_2021
 #: app/_translations.py:106
@@ -452,13 +453,13 @@ msgstr "Добавляет сущностей, животных, и неигро
 #: app/_translations.py:132
 msgctxt "tags"
 msgid "Minetest Game improved"
-msgstr ""
+msgstr "Импровизация Minetest Game"
 
 #. NOTE: tags: description for mtg
 #: app/_translations.py:134
 msgctxt "tags"
 msgid "Forks of Minetest Game"
-msgstr ""
+msgstr "Дубликаты Minetest Game"
 
 #. NOTE: tags: title for multiplayer
 #: app/_translations.py:136
@@ -960,8 +961,8 @@ msgstr "Дополнение удалено из любимой коллекци
 #: app/blueprints/feeds/__init__.py:32 app/templates/index.html:8
 msgid "Welcome to the best place to find Luanti mods, games, and texture packs"
 msgstr ""
-"Добро пожаловать в лучшее место чтобы найти Luanti дополнения, игры и "
-"пакеты тексур"
+"Добро пожаловать в лучшее место чтобы найти дополнения Luanti, игры и пакеты "
+"текстур"
 
 #: app/blueprints/feeds/__init__.py:70 app/templates/base.html:29
 #: app/templates/base.html:36
@@ -995,6 +996,8 @@ msgstr "Тип Приложения"
 #: app/blueprints/oauth/__init__.py:198
 msgid "An OAuth client with that title already exists. Please choose a new title."
 msgstr ""
+"OAuth приложение с таким именем уже существует. Пожалуйста, выберите новое "
+"название."
 
 #: app/blueprints/oauth/__init__.py:262
 msgid "Revoked all user tokens"
@@ -3697,12 +3700,16 @@ msgid ""
 "Titles must be globally unique. For example, what's the name of your "
 "application?"
 msgstr ""
+"Названия должны быть уникальными глобально. К примеру, какого имя вашего "
+"приложения?"
 
 #: app/templates/oauth/create_edit.html:68
 msgid ""
 "Shown to users when you request access to their account. For example, "
 "what does your application do?"
 msgstr ""
+"Показывается пользователям когда вы запрашиваете доступ к их аккаунту. К "
+"примеру, что делает ваше приложение?"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
@@ -3847,6 +3854,8 @@ msgid ""
 "anywhere in the short description. It is unnecessary and wastes "
 "characters."
 msgstr ""
+"Совет: Не вставляйте <i>Minetest</i>, <i>mod</i>, или <i>modpack</i> где "
+"угодно в коротком описании. Оно бесполезное и тратит символы."
 
 #: app/templates/packages/create_edit.html:88
 msgid ""
@@ -4806,7 +4815,7 @@ msgstr "Скачать"
 #: app/templates/packages/view.html:56
 #, python-format
 msgid "Luanti %(min)s - %(max)s"
-msgstr "Luanti %(min)s - %(max)s"
+msgstr "Luanti %(min)s – %(max)s"
 
 #: app/templates/packages/view.html:58
 #, python-format
@@ -5280,7 +5289,7 @@ msgstr "Дополнения, не поддерживающие %(rel)s"
 #: app/templates/todo/outdated.html:16 app/templates/todo/screenshots.html:12
 #: app/templates/todo/screenshots.html:16
 msgid "Minetest-Mods org only"
-msgstr ""
+msgstr "Только Minetest-Mods организация"
 
 #: app/templates/todo/mtver_support.html:25 app/templates/todo/outdated.html:24
 #: app/templates/todo/screenshots.html:24
@@ -6111,7 +6120,7 @@ msgstr "Дополнительные зависимости"
 
 #: app/utils/minetest_hypertext.py:340
 msgid "No reviews available."
-msgstr ""
+msgstr "Нету доступных обзоров."
 
 #: app/utils/user.py:51
 msgid "You have a lot of notifications, you should either read or clear them"
@@ -7124,4 +7133,3 @@ msgstr ""
 
 #~ msgid "Luanti-Mods org only"
 #~ msgstr "Только орг. «Luanti-Mods»"
-
