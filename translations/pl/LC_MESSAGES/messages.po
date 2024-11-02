@@ -8,16 +8,17 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2024-10-15 21:46+0100\n"
-"PO-Revision-Date: 2024-06-09 10:38+0000\n"
-"Last-Translator: W T <wiktor_t-i@proton.me>\n"
+"PO-Revision-Date: 2024-10-31 18:32+0000\n"
+"Last-Translator: Jakub Z <mrkubax10@onet.pl>\n"
+"Language-Team: Polish <https://hosted.weblate.org/projects/minetest/"
+"contentdb/pl/>\n"
 "Language: pl\n"
-"Language-Team: Polish "
-"<https://hosted.weblate.org/projects/minetest/contentdb/pl/>\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && "
-"(n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app/__init__.py:156
@@ -478,10 +479,9 @@ msgstr "Minigra"
 
 #. NOTE: tags: description for mini-game
 #: app/_translations.py:126
-#, fuzzy
 msgctxt "tags"
 msgid "Adds a mini-game to be played within Luanti"
-msgstr "Dodaje minigrę do rozgrywki wewnątrz Luantiu"
+msgstr "Dodaje minigrę do rozgrywki wewnątrz Luanti"
 
 #. NOTE: tags: title for mobs
 #: app/_translations.py:128
@@ -1060,8 +1060,8 @@ msgstr "Usunięto paczkę z ulubionych"
 #: app/blueprints/feeds/__init__.py:32 app/templates/index.html:8
 msgid "Welcome to the best place to find Luanti mods, games, and texture packs"
 msgstr ""
-"Witaj w najlepszym miejscu do znalezienia modyfikacji, gier i paczek "
-"tekstur dla Luantia"
+"Witaj w najlepszym miejscu do znalezienia modyfikacji, gier i paczek tekstur "
+"dla Luanti"
 
 #: app/blueprints/feeds/__init__.py:70 app/templates/base.html:29
 #: app/templates/base.html:36
@@ -1242,7 +1242,7 @@ msgstr ""
 
 #: app/blueprints/packages/advanced_search.py:77
 msgid "Luanti Version"
-msgstr ""
+msgstr "Wersja Luanti"
 
 #: app/blueprints/packages/advanced_search.py:81
 msgid "Sort by"
@@ -1502,13 +1502,13 @@ msgstr "Odniesienie do repozytorium Git (tj: hash commitu, gałąź lub tag)"
 #: app/blueprints/packages/releases.py:77
 #: app/blueprints/packages/releases.py:217
 msgid "Minimum Luanti Version"
-msgstr "Minimalna wersja Luantia"
+msgstr "Minimalna wersja Luanti"
 
 #: app/blueprints/packages/releases.py:64
 #: app/blueprints/packages/releases.py:79
 #: app/blueprints/packages/releases.py:220
 msgid "Maximum Luanti Version"
-msgstr "Maksymalna wersja Luantia"
+msgstr "Maksymalna wersja Luanti"
 
 #: app/blueprints/packages/releases.py:74
 #: app/templates/packages/release_edit.html:31
@@ -2936,7 +2936,7 @@ msgstr "Wyświetlenia"
 #: app/templates/admin/versions/list.html:4
 #: app/templates/admin/versions/list.html:10
 msgid "Luanti Versions"
-msgstr "Wersje Luantia"
+msgstr "Wersje Luanti"
 
 #: app/templates/admin/versions/list.html:8
 msgid "New Version"
@@ -3517,7 +3517,8 @@ msgstr "Pobrania według powodu"
 
 #: app/templates/macros/stats.html:106
 msgid "<b>New Install</b>: the user clicked [Install] inside of Luanti."
-msgstr "<b>Nowa instalacja</b>: użytkownik kliknął [Zainstaluj] wewnątrz Luantia."
+msgstr ""
+"<b>Nowa instalacja</b>: użytkownik kliknął [Zainstaluj] wewnątrz Luanti."
 
 #: app/templates/macros/stats.html:107
 msgid "<b>Dependency</b>: was installed automatically to fulfill a dependency."
@@ -3535,7 +3536,7 @@ msgid ""
 " version (before 5.5)."
 msgstr ""
 "<b>Inne / Nieznane</b>: pobrane używając przeglądarki lub starej wersji "
-"Luantia (przed 5.5)."
+"Luanti (przed 5.5)."
 
 #: app/templates/macros/stats.html:121
 msgid "Need more stats?"
@@ -4247,8 +4248,8 @@ msgstr "Zmiany zbiorcze wydań"
 #: app/templates/packages/release_bulk_change.html:11
 msgid "Use this page to set the min and max of all releases for your package."
 msgstr ""
-"Użyj tej strony aby ustawić minimalną i maksymalną wspieraną wersję "
-"Luantia wszystkich wydań twojej paczki."
+"Użyj tej strony aby ustawić minimalną i maksymalną wspieraną wersję Luanti "
+"wszystkich wydań twojej paczki."
 
 #: app/templates/packages/release_bulk_change.html:29
 #: app/templates/packages/release_edit.html:62
@@ -4301,7 +4302,7 @@ msgstr "Zatwierdzone"
 
 #: app/templates/packages/release_edit.html:54
 msgid "Supported Luanti versions"
-msgstr "Wspierane wersje Luantia"
+msgstr "Wspierane wersje Luanti"
 
 #: app/templates/packages/release_edit.html:68
 #: app/templates/packages/release_new.html:76
@@ -4315,8 +4316,8 @@ msgid ""
 "Only set the maximum version if you know that it doesn't work on newer "
 "Luanti versions."
 msgstr ""
-"Ustaw maksymalną wersję tylko jeśli wiesz, że to nie działa na nowszych "
-"wersjach Luantiu."
+"Ustaw maksymalną wersję tylko jeśli jesteś pewien, że nie będzie działać na "
+"nowszych wersjach Luanti."
 
 #: app/templates/packages/release_edit.html:71
 #: app/templates/packages/release_new.html:79
@@ -4333,7 +4334,7 @@ msgid ""
 "Set the minimum and maximum Luanti versions supported.\n"
 "\t\t\tThis release will be hidden to clients outside of that range. "
 msgstr ""
-"Ustaw minimalną i maksymalną wspieraną wersję Luantia.\n"
+"Ustaw minimalną i maksymalną wspieraną wersję Luanti.\n"
 "To wydanie będzie ukryte dla klientów poza tym zakresem. "
 
 #: app/templates/packages/release_edit.html:80
@@ -4431,7 +4432,7 @@ msgstr ""
 
 #: app/templates/packages/release_new.html:62
 msgid "3. Supported Luanti versions"
-msgstr "3. Wspierane wersje Luantia"
+msgstr "3. Wspierane wersje Luanti"
 
 #: app/templates/packages/release_new.html:84
 msgid ""
@@ -4777,7 +4778,7 @@ msgstr ""
 
 #: app/templates/packages/translation.html:23
 msgid "Translation - Luanti Modding Book"
-msgstr "Tłumaczenie - Książka Modowania Luantiu"
+msgstr "Tłumaczenie - Książka Modowania Luanti"
 
 #: app/templates/packages/translation.html:26
 msgid "Translating content meta - lua_api.md"
@@ -4871,7 +4872,7 @@ msgstr "Luanti %(min)s - %(max)s"
 #: app/templates/packages/view.html:58
 #, python-format
 msgid "For Luanti %(min)s and above"
-msgstr "Dla Luantia %(min)s i wyższych"
+msgstr "Dla Luanti %(min)s i wyższych"
 
 #: app/templates/packages/view.html:60
 #, python-format
@@ -6687,4 +6688,3 @@ msgstr "Rozważ włączenie powiadomień e-mail, możesz dostosować ilość wys
 
 #~ msgid "Luanti-Mods org only"
 #~ msgstr "Modyfikacje z organizacji Luanti-Mods"
-
