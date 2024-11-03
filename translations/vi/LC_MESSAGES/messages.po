@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 21:46+0100\n"
+"POT-Creation-Date: 2024-11-03 14:22+0000\n"
 "PO-Revision-Date: 2022-08-25 11:19+0000\n"
 "Last-Translator: Văn Chí <chiv8331@gmail.com>\n"
 "Language: vi\n"
@@ -2094,7 +2094,11 @@ msgstr ""
 "Bạn đã tạo quá nhiều bản phát hành cho gói này trong 5 phút qua, vui lòng"
 " đợi trước khi thử lại"
 
-#: app/logic/releases.py:77
+#: app/logic/releases.py:41
+msgid "A release with this name already exists"
+msgstr ""
+
+#: app/logic/releases.py:80
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr "Băm cam kết không hợp lệ; nó phải là một chuỗi base16 dài 40 ký tự"
 
@@ -2299,17 +2303,17 @@ msgstr "Chấp thuận"
 msgid "Delete"
 msgstr "Xóa"
 
-#: app/models/packages.py:1384
+#: app/models/packages.py:1385
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr ""
 
-#: app/models/packages.py:1388
+#: app/models/packages.py:1389
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr ""
 
-#: app/models/packages.py:1394
+#: app/models/packages.py:1395
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr ""
@@ -5394,7 +5398,7 @@ msgstr "Email của bạn sẽ không bao giờ được chia sẻ với một b
 #: app/templates/users/settings_email.html:27
 msgid ""
 "Note: protonmail is unsupported by ContentDB. <a "
-"href='https://forum.minetest.net/viewtopic.php?t=30709'>More info</a>."
+"href='https://forum.luanti.org/viewtopic.php?t=30709'>More info</a>."
 msgstr ""
 
 #: app/templates/users/change_set_password.html:27
@@ -5486,10 +5490,10 @@ msgstr "Bạn sẽ cần phải điền vào trường GitHub trong hồ sơ di�
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+"href='https://forum.luanti.org/ucp.php?i=173'>do that here</a>."
 msgstr ""
 "Đăng nhập vào diễn đàn và <a "
-"href=\"https://forum.minetest.net/ucp.php?i=173\">làm điều đó ở đây</a>."
+"href=\"https://forum.luanti.org/ucp.php?i=173\">làm điều đó ở đây</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -5507,11 +5511,11 @@ msgstr "Mã thông báo xác minh"
 #, fuzzy
 msgid ""
 "Go to <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User "
 "Control Panel &gt; Profile &gt; Edit signature</a>"
 msgstr ""
 "Đi tới <a "
-"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">Bảng"
+"href=\"https://forum.luanti.org/ucp.php?i=profile&amp;mode=signature\">Bảng"
 " điều khiển người dùng &gt; Hồ sơ&gt; Chỉnh sửa chữ ký</a>"
 
 #: app/templates/users/claim_forums.html:75
@@ -6308,6 +6312,7 @@ msgstr "Xin hãy cho phép email thông báo, bạn có thể tùy chỉnh bao n
 #~ msgid "Jam / Game 2023"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2023 Luanti Game Jam "
 #~ msgstr ""
 
@@ -6584,8 +6589,9 @@ msgstr "Xin hãy cho phép email thông báo, bạn có thể tùy chỉnh bao n
 #~ msgid "Related to economies, money, and trading"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Luanti Game improved"
-#~ msgstr ""
+#~ msgstr "Được Chấp thuận"
 
 #~ msgctxt "tags"
 #~ msgid "Forks of MTG"
@@ -6652,6 +6658,7 @@ msgstr "Xin hãy cho phép email thông báo, bạn có thể tùy chỉnh bao n
 #~ msgid "Jam / Game 2021"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2021 Luanti Game Jam"
 #~ msgstr ""
 
@@ -6682,6 +6689,7 @@ msgstr "Xin hãy cho phép email thông báo, bạn có thể tùy chỉnh bao n
 #~ msgid " Jam / Game 2022"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2022 Luanti Game Jam "
 #~ msgstr ""
 
@@ -6756,23 +6764,7 @@ msgstr "Xin hãy cho phép email thông báo, bạn có thể tùy chỉnh bao n
 #~ msgstr "Vui lòng liên hệ với quản trị viên."
 
 #~ msgctxt "tags"
-#~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Luanti Game improved"
-#~ msgstr "Được Chấp thuận"
-
-#~ msgctxt "tags"
 #~ msgid "Forks of Luanti Game"
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2021 Luanti Game Jam"
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2022 Luanti Game Jam "
 #~ msgstr ""
 
 #~ msgid "Shown to users when you request access to their account"

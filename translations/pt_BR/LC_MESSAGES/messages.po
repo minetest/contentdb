@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 21:46+0100\n"
+"POT-Creation-Date: 2024-11-03 14:22+0000\n"
 "PO-Revision-Date: 2023-12-27 00:11+0000\n"
 "Last-Translator: Alexsandro Vítor <alexsandro.vitor97@gmail.com>\n"
 "Language: pt_BR\n"
@@ -2101,7 +2101,11 @@ msgstr ""
 "Você criou muitos lançamentos para esse pacote nos últimos 5 minutos, por"
 " favor, aguarde antes de tentar novamente"
 
-#: app/logic/releases.py:77
+#: app/logic/releases.py:41
+msgid "A release with this name already exists"
+msgstr ""
+
+#: app/logic/releases.py:80
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr "Hash de commit inválido; precisa ser um string base16 com 40 caractéres"
 
@@ -2305,17 +2309,17 @@ msgstr "Aprovar"
 msgid "Delete"
 msgstr "Deletar"
 
-#: app/models/packages.py:1384
+#: app/models/packages.py:1385
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr ""
 
-#: app/models/packages.py:1388
+#: app/models/packages.py:1389
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr ""
 
-#: app/models/packages.py:1394
+#: app/models/packages.py:1395
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr ""
@@ -5366,7 +5370,7 @@ msgstr ""
 #: app/templates/users/settings_email.html:27
 msgid ""
 "Note: protonmail is unsupported by ContentDB. <a "
-"href='https://forum.minetest.net/viewtopic.php?t=30709'>More info</a>."
+"href='https://forum.luanti.org/viewtopic.php?t=30709'>More info</a>."
 msgstr ""
 
 #: app/templates/users/change_set_password.html:27
@@ -5454,7 +5458,7 @@ msgstr ""
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+"href='https://forum.luanti.org/ucp.php?i=173'>do that here</a>."
 msgstr ""
 
 #: app/templates/users/claim_forums.html:47
@@ -5472,7 +5476,7 @@ msgstr ""
 #: app/templates/users/claim_forums.html:71
 msgid ""
 "Go to <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User "
 "Control Panel &gt; Profile &gt; Edit signature</a>"
 msgstr ""
 
@@ -6251,6 +6255,7 @@ msgstr ""
 #~ msgid "Jam / Game 2023"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2023 Luanti Game Jam "
 #~ msgstr ""
 
@@ -6527,8 +6532,9 @@ msgstr ""
 #~ msgid "Related to economies, money, and trading"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Luanti Game improved"
-#~ msgstr ""
+#~ msgstr "Está aprovado"
 
 #~ msgctxt "tags"
 #~ msgid "Forks of MTG"
@@ -6595,6 +6601,7 @@ msgstr ""
 #~ msgid "Jam / Game 2021"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2021 Luanti Game Jam"
 #~ msgstr ""
 
@@ -6625,6 +6632,7 @@ msgstr ""
 #~ msgid " Jam / Game 2022"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2022 Luanti Game Jam "
 #~ msgstr ""
 
@@ -6678,7 +6686,7 @@ msgstr ""
 
 #~ msgid ""
 #~ "Go to <a "
-#~ "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User"
+#~ "href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User"
 #~ " Control Panel > Profile > Edit "
 #~ "signature</a>"
 #~ msgstr ""
@@ -6705,23 +6713,7 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgctxt "tags"
-#~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Luanti Game improved"
-#~ msgstr "Está aprovado"
-
-#~ msgctxt "tags"
 #~ msgid "Forks of Luanti Game"
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2021 Luanti Game Jam"
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2022 Luanti Game Jam "
 #~ msgstr ""
 
 #~ msgid "Shown to users when you request access to their account"

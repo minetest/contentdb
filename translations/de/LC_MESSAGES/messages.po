@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 21:46+0100\n"
+"POT-Creation-Date: 2024-11-03 14:22+0000\n"
 "PO-Revision-Date: 2024-10-17 00:17+0000\n"
 "Last-Translator: Wuzzy <Wuzzy@disroot.org>\n"
-"Language-Team: German <https://hosted.weblate.org/projects/minetest/"
-"contentdb/de/>\n"
 "Language: de\n"
+"Language-Team: German "
+"<https://hosted.weblate.org/projects/minetest/contentdb/de/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8-rc\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app/__init__.py:156
@@ -996,8 +995,8 @@ msgstr "App-Typ"
 #: app/blueprints/oauth/__init__.py:198
 msgid "An OAuth client with that title already exists. Please choose a new title."
 msgstr ""
-"Ein OAuth-Client mit diesem Titel existiert bereits. Bitte einen neuen Titel "
-"wählen."
+"Ein OAuth-Client mit diesem Titel existiert bereits. Bitte einen neuen "
+"Titel wählen."
 
 #: app/blueprints/oauth/__init__.py:262
 msgid "Revoked all user tokens"
@@ -2163,7 +2162,11 @@ msgstr ""
 "Sie haben in den letzten 5 Minuten zu viele Releases für dieses Paket "
 "erstellt. Bitte warten Sie, bevor Sie es erneut versuchen"
 
-#: app/logic/releases.py:77
+#: app/logic/releases.py:41
+msgid "A release with this name already exists"
+msgstr ""
+
+#: app/logic/releases.py:80
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
 "Ungültiger Commit-Hash; es muss eine 40 Zeichen lange Hexadezimal-"
@@ -2384,17 +2387,17 @@ msgstr "Genehmigen"
 msgid "Delete"
 msgstr "Löschen"
 
-#: app/models/packages.py:1384
+#: app/models/packages.py:1385
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr "Neuer Commit %(hash)s im Git-Repo gefunden."
 
-#: app/models/packages.py:1388
+#: app/models/packages.py:1389
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr "Der letzte Release war Commit %(hash)s"
 
-#: app/models/packages.py:1394
+#: app/models/packages.py:1395
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr "Neuer Tag %(tag_name)s gefunden im Git-Repo."
@@ -3744,8 +3747,8 @@ msgid ""
 "Shown to users when you request access to their account. For example, "
 "what does your application do?"
 msgstr ""
-"Wird an Benutzer angezeigt, wenn Sie Zugriff auf deren Konto verlangen. Zum "
-"Beispiel, was tut Ihre Applikation?"
+"Wird an Benutzer angezeigt, wenn Sie Zugriff auf deren Konto verlangen. "
+"Zum Beispiel, was tut Ihre Applikation?"
 
 #: app/templates/oauth/create_edit.html:70
 msgid "Where will you store your client_secret?"
@@ -3896,8 +3899,8 @@ msgid ""
 "characters."
 msgstr ""
 "Tipp: Schreiben Sie nicht „<i>Minetest</i>“, „<i>Mod</i>“ oder "
-"„<i>Modpack</i>“ in der kurzen Beschreibung. Das ist unnötig und vergeudet "
-"Zeichen."
+"„<i>Modpack</i>“ in der kurzen Beschreibung. Das ist unnötig und "
+"vergeudet Zeichen."
 
 #: app/templates/packages/create_edit.html:88
 msgid ""
@@ -5630,10 +5633,10 @@ msgstr "Ihre E-Mail-Adresse wird niemals an Dritte weitergegeben."
 #: app/templates/users/settings_email.html:27
 msgid ""
 "Note: protonmail is unsupported by ContentDB. <a "
-"href='https://forum.minetest.net/viewtopic.php?t=30709'>More info</a>."
+"href='https://forum.luanti.org/viewtopic.php?t=30709'>More info</a>."
 msgstr ""
 "Hinweis: protonmail wird von ContentDB nicht unterstützt. <a "
-"href=\"https://forum.minetest.net/viewtopic.php?t=30709\">Weitere Infos "
+"href=\"https://forum.luanti.org/viewtopic.php?t=30709\">Weitere Infos "
 "(auf Englisch)</a>."
 
 #: app/templates/users/change_set_password.html:27
@@ -5727,10 +5730,10 @@ msgstr "Sie müssen das GitHub-Feld in Ihrem Forumsprofil ausgefüllt haben."
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+"href='https://forum.luanti.org/ucp.php?i=173'>do that here</a>."
 msgstr ""
 "Loggen Sie sich auf dem Forum ein und <a "
-"href=\"https://forum.minetest.net/ucp.php?i=173\">tun Sie es hier</a>."
+"href=\"https://forum.luanti.org/ucp.php?i=173\">tun Sie es hier</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -5747,11 +5750,11 @@ msgstr "Verifizierungstoken"
 #: app/templates/users/claim_forums.html:71
 msgid ""
 "Go to <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User "
 "Control Panel &gt; Profile &gt; Edit signature</a>"
 msgstr ""
 "Gehen Sie zu <a "
-"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">User"
+"href=\"https://forum.luanti.org/ucp.php?i=profile&amp;mode=signature\">User"
 " Control Panel &gt; Profile &gt; Edit signature</a>"
 
 #: app/templates/users/claim_forums.html:75
@@ -6843,3 +6846,4 @@ msgstr ""
 
 #~ msgid "Luanti-Mods org only"
 #~ msgstr "Nur Luanti-Mods-Org"
+

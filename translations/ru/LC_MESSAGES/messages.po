@@ -7,18 +7,17 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 21:46+0100\n"
+"POT-Creation-Date: 2024-11-03 14:22+0000\n"
 "PO-Revision-Date: 2024-10-19 17:16+0000\n"
 "Last-Translator: BlackImpostor <SkyBuilderOFFICAL@yandex.ru>\n"
-"Language-Team: Russian <https://hosted.weblate.org/projects/minetest/"
-"contentdb/ru/>\n"
 "Language: ru\n"
+"Language-Team: Russian "
+"<https://hosted.weblate.org/projects/minetest/contentdb/ru/>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
-"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
-"X-Generator: Weblate 5.8-rc\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app/__init__.py:156
@@ -961,8 +960,8 @@ msgstr "Дополнение удалено из любимой коллекци
 #: app/blueprints/feeds/__init__.py:32 app/templates/index.html:8
 msgid "Welcome to the best place to find Luanti mods, games, and texture packs"
 msgstr ""
-"Добро пожаловать в лучшее место чтобы найти дополнения Luanti, игры и пакеты "
-"текстур"
+"Добро пожаловать в лучшее место чтобы найти дополнения Luanti, игры и "
+"пакеты текстур"
 
 #: app/blueprints/feeds/__init__.py:70 app/templates/base.html:29
 #: app/templates/base.html:36
@@ -996,8 +995,8 @@ msgstr "Тип Приложения"
 #: app/blueprints/oauth/__init__.py:198
 msgid "An OAuth client with that title already exists. Please choose a new title."
 msgstr ""
-"OAuth приложение с таким именем уже существует. Пожалуйста, выберите новое "
-"название."
+"OAuth приложение с таким именем уже существует. Пожалуйста, выберите "
+"новое название."
 
 #: app/blueprints/oauth/__init__.py:262
 msgid "Revoked all user tokens"
@@ -2143,7 +2142,11 @@ msgstr ""
 "Вы создали слишком много релизов для этого дополнения за последние 5 "
 "минут, пожалуйста, подождите перед повторной попыткой"
 
-#: app/logic/releases.py:77
+#: app/logic/releases.py:41
+msgid "A release with this name already exists"
+msgstr ""
+
+#: app/logic/releases.py:80
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
 "Неверный хэш ветви обсуждения; он должен быть «base16» строкой и длиной "
@@ -2360,17 +2363,17 @@ msgstr "Утвердить"
 msgid "Delete"
 msgstr "Удалить"
 
-#: app/models/packages.py:1384
+#: app/models/packages.py:1385
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr "Новая фиксация %(hash)s найден в Git репозитории."
 
-#: app/models/packages.py:1388
+#: app/models/packages.py:1389
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr "Последним выпуском была фиксация %(hash)s"
 
-#: app/models/packages.py:1394
+#: app/models/packages.py:1395
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr "Новый тег %(tag_name)s найден в Git репозитории."
@@ -5553,10 +5556,10 @@ msgstr "Ваша электронная почта никогда не буде�
 #: app/templates/users/settings_email.html:27
 msgid ""
 "Note: protonmail is unsupported by ContentDB. <a "
-"href='https://forum.minetest.net/viewtopic.php?t=30709'>More info</a>."
+"href='https://forum.luanti.org/viewtopic.php?t=30709'>More info</a>."
 msgstr ""
 "Примечание: protonmail не поддерживается ContentDB. <a "
-"href=\"https://forum.minetest.net/viewtopic.php?t=30709\">Подробнее</a>."
+"href=\"https://forum.luanti.org/viewtopic.php?t=30709\">Подробнее</a>."
 
 #: app/templates/users/change_set_password.html:27
 #: app/templates/users/register.html:30
@@ -5649,9 +5652,9 @@ msgstr "Вам необходимо заполнить поле GitHub в про
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+"href='https://forum.luanti.org/ucp.php?i=173'>do that here</a>."
 msgstr ""
-"Войдите на форум и <a href=\"https://forum.minetest.net/ucp.php?i=173\"> "
+"Войдите на форум и <a href=\"https://forum.luanti.org/ucp.php?i=173\"> "
 "сделайте это здесь</a>."
 
 #: app/templates/users/claim_forums.html:47
@@ -5669,11 +5672,11 @@ msgstr "Проверочный токен"
 #: app/templates/users/claim_forums.html:71
 msgid ""
 "Go to <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User "
 "Control Panel &gt; Profile &gt; Edit signature</a>"
 msgstr ""
 "Перейдите на <a "
-"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">Панель"
+"href=\"https://forum.luanti.org/ucp.php?i=profile&amp;mode=signature\">Панель"
 " управления пользователя &gt; Профиль &gt; Редактировать подпись</a>"
 
 #: app/templates/users/claim_forums.html:75
@@ -6638,8 +6641,9 @@ msgstr ""
 #~ msgid "Jam / Game 2023"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr ""
+#~ msgstr "Заявки на Luanti Игровой Джэм 2023 "
 
 #~ msgid "Server Moderation and Tools"
 #~ msgstr ""
@@ -6925,8 +6929,9 @@ msgstr ""
 #~ msgid "Related to economies, money, and trading"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Luanti Game improved"
-#~ msgstr ""
+#~ msgstr "Импровизация Luanti Game"
 
 #~ msgctxt "tags"
 #~ msgid "Forks of MTG"
@@ -6993,8 +6998,9 @@ msgstr ""
 #~ msgid "Jam / Game 2021"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2021 Luanti Game Jam"
-#~ msgstr ""
+#~ msgstr "Заявки на участие в Luanti Game Jam 2021"
 
 #~ msgid "128px+"
 #~ msgstr ""
@@ -7023,8 +7029,9 @@ msgstr ""
 #~ msgid " Jam / Game 2022"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2022 Luanti Game Jam "
-#~ msgstr ""
+#~ msgstr "Заявки на участие в Luanti Game Jam 2022 "
 
 #~ msgid "Gore"
 #~ msgstr ""
@@ -7096,24 +7103,8 @@ msgstr ""
 #~ msgstr "Пожалуйста, свяжитесь с администратором."
 
 #~ msgctxt "tags"
-#~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr "Заявки на Luanti Игровой Джэм 2023 "
-
-#~ msgctxt "tags"
-#~ msgid "Luanti Game improved"
-#~ msgstr "Импровизация Luanti Game"
-
-#~ msgctxt "tags"
 #~ msgid "Forks of Luanti Game"
 #~ msgstr "Разветление Luanti Game"
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2021 Luanti Game Jam"
-#~ msgstr "Заявки на участие в Luanti Game Jam 2021"
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2022 Luanti Game Jam "
-#~ msgstr "Заявки на участие в Luanti Game Jam 2022 "
 
 #~ msgid "Shown to users when you request access to their account"
 #~ msgstr ""
@@ -7133,3 +7124,4 @@ msgstr ""
 
 #~ msgid "Luanti-Mods org only"
 #~ msgstr "Только орг. «Luanti-Mods»"
+

@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 21:46+0100\n"
+"POT-Creation-Date: 2024-11-03 14:22+0000\n"
 "PO-Revision-Date: 2024-10-27 10:00+0000\n"
 "Last-Translator: Unacceptium <unacceptium@proton.me>\n"
-"Language-Team: Hungarian <https://hosted.weblate.org/projects/minetest/"
-"contentdb/hu/>\n"
 "Language: hu\n"
+"Language-Team: Hungarian "
+"<https://hosted.weblate.org/projects/minetest/contentdb/hu/>\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.8.2-dev\n"
 "Generated-By: Babel 2.15.0\n"
 
 #: app/__init__.py:156
@@ -169,7 +168,8 @@ msgid ""
 "Requires futher installation steps, such as installing LuaRocks or "
 "editing the trusted mod setting"
 msgstr ""
-"Szükséges hozzá a LuaRocks, vagy a megbízható modok listájának szerkesztése"
+"Szükséges hozzá a LuaRocks, vagy a megbízható modok listájának "
+"szerkesztése"
 
 #. NOTE: tags: title for crafting
 #: app/_translations.py:48
@@ -201,8 +201,8 @@ msgid ""
 "that facilitate ingame creation and doesn't add difficulty or scarcity"
 msgstr ""
 "Kreatív módra tervezve. Olyan tartalmat ad hozzá, ami csak a kreatív "
-"eszköztárban érhető el, vagy olyan eszközöket ad, ami megváltoztatja a játék "
-"nehézségét."
+"eszköztárban érhető el, vagy olyan eszközöket ad, ami megváltoztatja a "
+"játék nehézségét."
 
 #. NOTE: tags: title for custom_mapgen
 #: app/_translations.py:56
@@ -219,8 +219,8 @@ msgid ""
 "Contains a completely custom mapgen implemented in Lua, usually requires "
 "worlds to be set to the 'singlenode' mapgen."
 msgstr ""
-"Egy teljesen egyedi térképgenerálót tartalmaz, amit Lua-ban hoztak létre, "
-"ami miatt legtöbbször át kell állítani a térképgenerálást singlenode-ra."
+"Egy teljesen egyedi térképgenerálót tartalmaz, amit Lua-ban hoztak létre,"
+" ami miatt legtöbbször át kell állítani a térképgenerálást singlenode-ra."
 
 #. NOTE: tags: title for decorative
 #: app/_translations.py:60
@@ -2120,7 +2120,11 @@ msgstr ""
 "Túl sok kiadást hozott létre ehhez a csomaghoz az elmúlt 5 percben. "
 "Kérjük, várjon, mielőtt újra próbálkozna"
 
-#: app/logic/releases.py:77
+#: app/logic/releases.py:41
+msgid "A release with this name already exists"
+msgstr ""
+
+#: app/logic/releases.py:80
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr ""
 "Érvénytelen véglegesítési hash; 40 karakterből kell állnia 16 bázis "
@@ -2326,17 +2330,17 @@ msgstr "Jóváhagyás"
 msgid "Delete"
 msgstr "Törlés"
 
-#: app/models/packages.py:1384
+#: app/models/packages.py:1385
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr ""
 
-#: app/models/packages.py:1388
+#: app/models/packages.py:1389
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr ""
 
-#: app/models/packages.py:1394
+#: app/models/packages.py:1395
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr ""
@@ -5334,7 +5338,7 @@ msgstr ""
 #: app/templates/users/settings_email.html:27
 msgid ""
 "Note: protonmail is unsupported by ContentDB. <a "
-"href='https://forum.minetest.net/viewtopic.php?t=30709'>More info</a>."
+"href='https://forum.luanti.org/viewtopic.php?t=30709'>More info</a>."
 msgstr ""
 
 #: app/templates/users/change_set_password.html:27
@@ -5422,7 +5426,7 @@ msgstr ""
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+"href='https://forum.luanti.org/ucp.php?i=173'>do that here</a>."
 msgstr ""
 
 #: app/templates/users/claim_forums.html:47
@@ -5440,7 +5444,7 @@ msgstr ""
 #: app/templates/users/claim_forums.html:71
 msgid ""
 "Go to <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User "
 "Control Panel &gt; Profile &gt; Edit signature</a>"
 msgstr ""
 
@@ -6346,8 +6350,9 @@ msgstr ""
 #~ msgid "Jam / Game 2023"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr ""
+#~ msgstr "Nevezések a 2023-mas Luanti Game Jam-re "
 
 #~ msgid "Server Moderation and Tools"
 #~ msgstr ""
@@ -6622,8 +6627,9 @@ msgstr ""
 #~ msgid "Related to economies, money, and trading"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Luanti Game improved"
-#~ msgstr ""
+#~ msgstr "Jóváhagyva"
 
 #~ msgctxt "tags"
 #~ msgid "Forks of MTG"
@@ -6690,6 +6696,7 @@ msgstr ""
 #~ msgid "Jam / Game 2021"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2021 Luanti Game Jam"
 #~ msgstr ""
 
@@ -6720,6 +6727,7 @@ msgstr ""
 #~ msgid " Jam / Game 2022"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2022 Luanti Game Jam "
 #~ msgstr ""
 
@@ -6773,7 +6781,7 @@ msgstr ""
 
 #~ msgid ""
 #~ "Go to <a "
-#~ "href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User"
+#~ "href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User"
 #~ " Control Panel > Profile > Edit "
 #~ "signature</a>"
 #~ msgstr ""
@@ -6800,23 +6808,7 @@ msgstr ""
 #~ msgstr ""
 
 #~ msgctxt "tags"
-#~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr "Nevezések a 2023-mas Luanti Game Jam-re "
-
-#~ msgctxt "tags"
-#~ msgid "Luanti Game improved"
-#~ msgstr "Jóváhagyva"
-
-#~ msgctxt "tags"
 #~ msgid "Forks of Luanti Game"
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2021 Luanti Game Jam"
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2022 Luanti Game Jam "
 #~ msgstr ""
 
 #~ msgid "Shown to users when you request access to their account"
@@ -6831,3 +6823,4 @@ msgstr ""
 
 #~ msgid "Luanti-Mods org only"
 #~ msgstr ""
+

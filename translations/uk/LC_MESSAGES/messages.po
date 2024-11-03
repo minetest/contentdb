@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 21:46+0100\n"
+"POT-Creation-Date: 2024-11-03 14:22+0000\n"
 "PO-Revision-Date: 2024-02-10 02:02+0000\n"
 "Last-Translator: Leo <resistancelion@gmail.com>\n"
 "Language: uk\n"
@@ -2091,7 +2091,11 @@ msgstr ""
 "Ви створили забагато випусків для цього пакета за останні 5 хвилин. "
 "Зачекайте, перш ніж повторювати спробу"
 
-#: app/logic/releases.py:77
+#: app/logic/releases.py:41
+msgid "A release with this name already exists"
+msgstr ""
+
+#: app/logic/releases.py:80
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr "Недійсний хеш фіксації; це має бути рядок base16 довжиною 40 символів"
 
@@ -2297,17 +2301,17 @@ msgstr "Затвердити"
 msgid "Delete"
 msgstr "Видалити"
 
-#: app/models/packages.py:1384
+#: app/models/packages.py:1385
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr ""
 
-#: app/models/packages.py:1388
+#: app/models/packages.py:1389
 #, python-format
 msgid "The last release was commit %(hash)s"
 msgstr ""
 
-#: app/models/packages.py:1394
+#: app/models/packages.py:1395
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr ""
@@ -5406,7 +5410,7 @@ msgstr "Ваша електронна пошта ніколи не буде пе
 #: app/templates/users/settings_email.html:27
 msgid ""
 "Note: protonmail is unsupported by ContentDB. <a "
-"href='https://forum.minetest.net/viewtopic.php?t=30709'>More info</a>."
+"href='https://forum.luanti.org/viewtopic.php?t=30709'>More info</a>."
 msgstr ""
 
 #: app/templates/users/change_set_password.html:27
@@ -5500,10 +5504,10 @@ msgstr "Вам потрібно буде заповнити поле GitHub у �
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+"href='https://forum.luanti.org/ucp.php?i=173'>do that here</a>."
 msgstr ""
 "Увійдіть на форум і <a "
-"href=\"https://forum.minetest.net/ucp.php?i=173\">зробіть це тут</a>."
+"href=\"https://forum.luanti.org/ucp.php?i=173\">зробіть це тут</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -5521,11 +5525,11 @@ msgstr "Токен верифікації"
 #, fuzzy
 msgid ""
 "Go to <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User "
 "Control Panel &gt; Profile &gt; Edit signature</a>"
 msgstr ""
 "Перейдіть до <a "
-"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">Панель"
+"href=\"https://forum.luanti.org/ucp.php?i=profile&amp;mode=signature\">Панель"
 " керування користувача &gt; Профіль &gt; Змінити підпис</a>"
 
 #: app/templates/users/claim_forums.html:75
@@ -6380,6 +6384,7 @@ msgstr ""
 #~ msgid "Jam / Game 2023"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2023 Luanti Game Jam "
 #~ msgstr ""
 
@@ -6656,8 +6661,9 @@ msgstr ""
 #~ msgid "Related to economies, money, and trading"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Luanti Game improved"
-#~ msgstr ""
+#~ msgstr "Затверджено"
 
 #~ msgctxt "tags"
 #~ msgid "Forks of MTG"
@@ -6724,6 +6730,7 @@ msgstr ""
 #~ msgid "Jam / Game 2021"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2021 Luanti Game Jam"
 #~ msgstr ""
 
@@ -6754,6 +6761,7 @@ msgstr ""
 #~ msgid " Jam / Game 2022"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2022 Luanti Game Jam "
 #~ msgstr ""
 
@@ -6826,23 +6834,7 @@ msgstr ""
 #~ msgstr "Будь ласка, зв'яжіться з адміністратором."
 
 #~ msgctxt "tags"
-#~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Luanti Game improved"
-#~ msgstr "Затверджено"
-
-#~ msgctxt "tags"
 #~ msgid "Forks of Luanti Game"
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2021 Luanti Game Jam"
-#~ msgstr ""
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2022 Luanti Game Jam "
 #~ msgstr ""
 
 #~ msgid "Shown to users when you request access to their account"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-15 21:46+0100\n"
+"POT-Creation-Date: 2024-11-03 14:22+0000\n"
 "PO-Revision-Date: 2024-09-25 20:22+0000\n"
 "Last-Translator: 3raven <elise_declerck@laposte.net>\n"
 "Language: fr\n"
@@ -2153,7 +2153,11 @@ msgstr ""
 "Vous avez créé trop de versions pour ce paquet dans les 5 dernières "
 "minutes, veuillez attendre avant de réessayer"
 
-#: app/logic/releases.py:77
+#: app/logic/releases.py:41
+msgid "A release with this name already exists"
+msgstr ""
+
+#: app/logic/releases.py:80
 msgid "Invalid commit hash; it must be a 40 character long base16 string"
 msgstr "hachage du commit invalide ; doit faire au moins 40 caractères en base16"
 
@@ -2370,17 +2374,17 @@ msgstr "Approuver"
 msgid "Delete"
 msgstr "Supprimer"
 
-#: app/models/packages.py:1384
+#: app/models/packages.py:1385
 #, python-format
 msgid "New commit %(hash)s found on the Git repo."
 msgstr "Nouveaux commits %(hash)s trouvés dans le dépôt Git"
 
-#: app/models/packages.py:1388
+#: app/models/packages.py:1389
 #, fuzzy, python-format
 msgid "The last release was commit %(hash)s"
 msgstr "La dernière sortie était le commit%(hash)s"
 
-#: app/models/packages.py:1394
+#: app/models/packages.py:1395
 #, python-format
 msgid "New tag %(tag_name)s found on the Git repo."
 msgstr "Nouveau tag %(tag_name)s trouvé dans le dépôt Git."
@@ -5591,10 +5595,10 @@ msgstr "Votre adresse électronique ne sera jamais partagée avec un tiers."
 #: app/templates/users/settings_email.html:27
 msgid ""
 "Note: protonmail is unsupported by ContentDB. <a "
-"href='https://forum.minetest.net/viewtopic.php?t=30709'>More info</a>."
+"href='https://forum.luanti.org/viewtopic.php?t=30709'>More info</a>."
 msgstr ""
 "Note : protonmail n'est pas supporté par ContentDB. <a href=\"https "
-"://forum.minetest.net/viewtopic.php ?t=30709\">Plus d'infos</a>."
+"://forum.luanti.org/viewtopic.php ?t=30709\">Plus d'infos</a>."
 
 #: app/templates/users/change_set_password.html:27
 #: app/templates/users/register.html:30
@@ -5685,10 +5689,10 @@ msgstr "Vous devrez avoir complété le champ GitHub dans votre profil sur le fo
 #: app/templates/users/claim_forums.html:44
 msgid ""
 "Log into the forum and <a "
-"href='https://forum.minetest.net/ucp.php?i=173'>do that here</a>."
+"href='https://forum.luanti.org/ucp.php?i=173'>do that here</a>."
 msgstr ""
 "Se connecter au forum et <a "
-"href=\"https://forum.minetest.net/ucp.php?i=173\">faites ça ici</a>."
+"href=\"https://forum.luanti.org/ucp.php?i=173\">faites ça ici</a>."
 
 #: app/templates/users/claim_forums.html:47
 msgid "Next: log in with GitHub"
@@ -5705,11 +5709,11 @@ msgstr "Jeton de vérification"
 #: app/templates/users/claim_forums.html:71
 msgid ""
 "Go to <a "
-"href='https://forum.minetest.net/ucp.php?i=profile&mode=signature'>User "
+"href='https://forum.luanti.org/ucp.php?i=profile&mode=signature'>User "
 "Control Panel &gt; Profile &gt; Edit signature</a>"
 msgstr ""
 "Aller à <a "
-"href=\"https://forum.minetest.net/ucp.php?i=profile&amp;mode=signature\">Panneau"
+"href=\"https://forum.luanti.org/ucp.php?i=profile&amp;mode=signature\">Panneau"
 " de contrôle utilisateur &gt; Profile &gt; Modifier la signature</a>"
 
 #: app/templates/users/claim_forums.html:75
@@ -6179,7 +6183,7 @@ msgstr ""
 "Pensez à activer les notifications par e-mail, vous pouvez personnaliser "
 "ce qui est envoyé"
 
-#~ msgid "forum.minetest.net/viewtopic.php?t="
+#~ msgid "forum.luanti.org/viewtopic.php?t="
 #~ msgstr ""
 
 #~ msgid "Confirm Your Account"
@@ -6722,8 +6726,9 @@ msgstr ""
 #~ " créer des fichiers .tr et "
 #~ "télécharger une nouvelle version."
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr ""
+#~ msgstr "Entrées du Game Jam de Luanti 2023 "
 
 #~ msgid "Designed to be played competitively against other players"
 #~ msgstr ""
@@ -6986,8 +6991,9 @@ msgstr ""
 #~ msgid "Related to economies, money, and trading"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Luanti Game improved"
-#~ msgstr ""
+#~ msgstr "Amélioration de Luanti Game"
 
 #~ msgctxt "tags"
 #~ msgid "Forks of MTG"
@@ -7054,8 +7060,9 @@ msgstr ""
 #~ msgid "Jam / Game 2021"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2021 Luanti Game Jam"
-#~ msgstr ""
+#~ msgstr "Entrées du Game Jam de Luanti 2021"
 
 #~ msgid "128px+"
 #~ msgstr ""
@@ -7084,8 +7091,9 @@ msgstr ""
 #~ msgid " Jam / Game 2022"
 #~ msgstr ""
 
+#~ msgctxt "tags"
 #~ msgid "Entries to the 2022 Luanti Game Jam "
-#~ msgstr ""
+#~ msgstr "Entrées pour le Game Jam de Luanti 2022. "
 
 #~ msgid "Gore"
 #~ msgstr ""
@@ -7157,24 +7165,8 @@ msgstr ""
 #~ msgstr "Veuillez contacter l'admin."
 
 #~ msgctxt "tags"
-#~ msgid "Entries to the 2023 Luanti Game Jam "
-#~ msgstr "Entrées du Game Jam de Luanti 2023 "
-
-#~ msgctxt "tags"
-#~ msgid "Luanti Game improved"
-#~ msgstr "Amélioration de Luanti Game"
-
-#~ msgctxt "tags"
 #~ msgid "Forks of Luanti Game"
 #~ msgstr "Dérivés de Luanti Game"
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2021 Luanti Game Jam"
-#~ msgstr "Entrées du Game Jam de Luanti 2021"
-
-#~ msgctxt "tags"
-#~ msgid "Entries to the 2022 Luanti Game Jam "
-#~ msgstr "Entrées pour le Game Jam de Luanti 2022. "
 
 #~ msgid "Shown to users when you request access to their account"
 #~ msgstr "Affiché aux utilisateurs lorsque vous demandez l'accès à leur compte"
