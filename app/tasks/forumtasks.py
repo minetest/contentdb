@@ -57,7 +57,7 @@ def _get_or_create_user(forums_username: str, cache: Optional[dict] = None) -> O
 def check_forum_account(forums_username, force_replace_pic=False):
 	print("### Checking " + forums_username, file=sys.stderr)
 	try:
-		profile = get_profile("https://forum.minetest.net", forums_username)
+		profile = get_profile("https://forum.luanti.org", forums_username)
 	except OSError as e:
 		print(e, file=sys.stderr)
 		return
@@ -88,13 +88,13 @@ def check_forum_account(forums_username, force_replace_pic=False):
 		db.session.commit()
 
 	if pic:
-		pic = urljoin("https://forum.minetest.net/", pic)
+		pic = urljoin("https://forum.luanti.org/", pic)
 		print(f"####### Picture: {pic}", file=sys.stderr)
 		print(f"####### User pp {user.profile_pic}", file=sys.stderr)
 
 		pic_needs_replacing = user.profile_pic is None or user.profile_pic == "" or \
-				user.profile_pic.startswith("https://forum.minetest.net") or force_replace_pic
-		if pic_needs_replacing and pic.startswith("https://forum.minetest.net"):
+				user.profile_pic.startswith("https://forum.luanti.org") or force_replace_pic
+		if pic_needs_replacing and pic.startswith("https://forum.luanti.org"):
 			print(f"####### Queueing", file=sys.stderr)
 			set_profile_picture_from_url.delay(user.username, pic)
 

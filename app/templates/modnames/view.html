@@ -23,7 +23,7 @@
 			{% for t in similar_topics %}
 				<li>
 					[{{ t.type.text }}]
-					<a href="https://forum.minetest.net/viewtopic.php?t={{ t.topic_id }}">
+					<a href="https://forum.luanti.org/viewtopic.php?t={{ t.topic_id }}">
 						{{ _("%(title)s by %(display_name)s", title=t.title, display_name=t.author.display_name) }}
 					</a>
 					{% if t.wip %}[{{ _("WIP") }}]{% endif %}

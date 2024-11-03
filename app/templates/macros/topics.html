@@ -14,7 +14,7 @@
 				[{{ topic.type.text }}]
 			</td>
 			<td>
-				<a href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a>
+				<a href="https://forum.luanti.org/viewtopic.php?t={{ topic.topic_id}}">{{ topic.title }}</a>
 				{% if topic.wip %}[{{ _("WIP") }}]{% endif %}
 			</td>
 			{% if show_author %}
@@ -42,7 +42,7 @@
 {% macro render_topics(topics, current_user) -%}
 <div class="list-group">
 	{% for topic in topics %}
-		<a class="list-group-item list-group-item-action" href="https://forum.minetest.net/viewtopic.php?t={{ topic.topic_id}}">
+		<a class="list-group-item list-group-item-action" href="https://forum.luanti.org/viewtopic.php?t={{ topic.topic_id}}">
 			<span class="float-end text-muted">
 				{{ topic.created_at | date }}
 			</span>

@@ -77,7 +77,7 @@ def claim_forums():
 
 			# Get signature
 			try:
-				profile = get_profile("https://forum.minetest.net", username)
+				profile = get_profile("https://forum.luanti.org", username)
 				sig = profile.signature if profile else None
 			except IOError as e:
 				if hasattr(e, 'message'):

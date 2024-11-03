@@ -45,7 +45,7 @@ def update_package_scores():
 
 
 def desc_contains(desc: str, search_str: str):
-	if search_str.startswith("https://forum.minetest.net/viewtopic.php?%t="):
+	if search_str.startswith("https://forum.luanti.org/viewtopic.php?%t="):
 		reg = re.compile(search_str.replace(".", "\\.").replace("/", "\\/").replace("?", "\\?").replace("%", ".*"))
 		return reg.search(desc)
 	else:
@@ -58,7 +58,7 @@ def notify_about_git_forum_links():
 		.filter(Package.repo.is_not(None), Package.state == PackageState.APPROVED).all()]
 	for pair in db.session.query(Package, Package.forums) \
 			.filter(Package.forums.is_not(None), Package.state == PackageState.APPROVED).all():
-		package_links.append((pair[0], f"https://forum.minetest.net/viewtopic.php?%t={pair[1]}"))
+		package_links.append((pair[0], f"https://forum.luanti.org/viewtopic.php?%t={pair[1]}"))
 
 	clauses = [and_(Package.id != pair[0].id, Package.desc.ilike(f"%{pair[1]}%")) for pair in package_links]
 	packages = Package.query.filter(Package.desc != "", Package.desc.is_not(None), Package.state == PackageState.APPROVED, or_(*clauses)).all()

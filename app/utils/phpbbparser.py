@@ -124,7 +124,7 @@ def parse_forum_list_page(id, page, out, extra=None):
 	start = page*num_per_page+1
 	print(" - Fetching page {} (topics {}-{})".format(page, start, start+num_per_page), file=sys.stderr)
 
-	url = "https://forum.minetest.net/viewforum.php?f=" + str(id) + "&start=" + str(start)
+	url = "https://forum.luanti.org/viewforum.php?f=" + str(id) + "&start=" + str(start)
 	r = urllib.request.urlopen(url).read().decode("utf-8")
 	soup = BeautifulSoup(r, "html.parser")
 

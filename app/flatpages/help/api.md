@@ -78,6 +78,9 @@ curl -X DELETE https://content.luanti.org/api/delete-token/ \
 * GET `/api/packages/` (List)
     * See [Package Queries](#package-queries)
 * GET `/api/packages/<username>/<name>/` (Read)
+    * Redirects a JSON object with the keys documented by the PUT endpoint, below.
+    * Plus:
+        * `forum_url`: String or null. 
 * PUT `/api/packages/<author>/<name>/` (Update)
     * Requires authentication.
     * JSON object with any of these keys (all are optional, null to delete Nullables):

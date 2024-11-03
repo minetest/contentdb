@@ -26,7 +26,7 @@ window.addEventListener("load", () => {
 		try {
 			const pasteData = e.clipboardData.getData('text');
 			const url = new URL(pasteData);
-			if (url.hostname === "forum.minetest.net") {
+			if (url.hostname === "forum.luanti.org") {
 				forumsField.value = url.searchParams.get("t");
 				e.preventDefault();
 			}
@@ -37,7 +37,7 @@ window.addEventListener("load", () => {
 
 	const openForums = document.getElementById("forums-button");
 	openForums.addEventListener("click", () => {
-		window.open("https://forum.minetest.net/viewtopic.php?t=" + forumsField.value, "_blank");
+		window.open("https://forum.luanti.org/viewtopic.php?t=" + forumsField.value, "_blank");
 	});
 
 	function setupHints(id, hints) {

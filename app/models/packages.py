@@ -457,7 +457,7 @@ class Package(db.Model):
 		if self.forums is None:
 			return None
 
-		return "https://forum.minetest.net/viewtopic.php?t=" + str(self.forums)
+		return "https://forum.luanti.org/viewtopic.php?t=" + str(self.forums)
 
 	enable_game_support_detection = db.Column(db.Boolean, nullable=False, default=True)
 
@@ -679,6 +679,7 @@ class Package(db.Model):
 			"website": self.website,
 			"issue_tracker": self.issueTracker,
 			"forums": self.forums,
+			"forum_url": self.forums_url,
 			"video_url": self.video_url,
 			"video_thumbnail_url": self.get_video_thumbnail_url(True),
 			"donate_url": self.donate_url_actual,

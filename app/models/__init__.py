@@ -158,7 +158,7 @@ class ForumTopic(db.Model):
 
 	@property
 	def url(self):
-		return "https://forum.minetest.net/viewtopic.php?t=" + str(self.topic_id)
+		return "https://forum.luanti.org/viewtopic.php?t=" + str(self.topic_id)
 
 	def get_repo_url(self):
 		if self.link is None:
