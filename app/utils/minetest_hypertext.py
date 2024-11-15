@@ -322,6 +322,9 @@ def package_reviews_as_hypertext(package: Package, formspec_version: int = 7):
 		links[f"link_{link_counter}"] = url
 		return f"<action name=link_{link_counter}>{escape_hypertext(label)}</action>"
 
+	body += make_link(package.get_url("packages.review", absolute=True), gettext("Leave a review"))
+	body += "\n\n"
+
 	reviews = package.reviews.all()
 	for review in reviews:
 		review: PackageReview
@@ -333,8 +336,11 @@ def package_reviews_as_hypertext(package: Package, formspec_version: int = 7):
 
 		author = make_link(abs_url_for("users.profile", username=review.author.username), review.author.display_name)
 		rating = ["<thumbsdown>", "<thumbsdown>", "<neutral>", "<thumbsup>", "<thumbsup>"][review.rating - 1]
-		comments = make_link(abs_url_for("threads.view", id=review.thread.id), "Comments")
-		body += f"{author} {rating}\n<big>{escape_hypertext(review.thread.title)}</big>\n{comment_body}\n{comments}\n\n"
+		num_comments = review.thread.replies.count()
+		comments = make_link(abs_url_for("threads.view", id=review.thread.id), f"Comments [{num_comments}]")
+		positive, negative, _ = review.get_totals()
+		helpful = f"{positive} helpful, {negative} unhelpful"
+		body += f"{author} {rating}\n<big>{escape_hypertext(review.thread.title)}</big>\n{comment_body}\n{comments} - {helpful}\n\n"
 
 	if len(reviews) == 0:
 		body += escape_hypertext(gettext("No reviews available."))
