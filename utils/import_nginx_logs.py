@@ -131,7 +131,7 @@ for log_file in log_files:
 				db.session.add(row)
 				row_lookup[key] = row
 
-			if ua.startswith("Minetest/"):
+			if ua.startswith("Minetest/") or ua.startswith("Luanti/"):
 				row.platform_minetest += 1
 			else:
 				row.platform_other += 1
