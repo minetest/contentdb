@@ -13,6 +13,7 @@
 #
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
+
 import os
 
 from flask import render_template, request, redirect, flash, url_for, abort
@@ -31,6 +32,7 @@ from app.rediscache import has_key, set_temp_key, make_download_key
 from app.tasks.importtasks import check_update_config
 from app.utils import is_user_bot, is_package_page, nonempty_or_none, normalize_line_endings
 from . import bp, get_package_tabs
+from app.utils.version import is_minetest_v510
 
 
 @bp.route("/packages/<author>/<name>/releases/", methods=["GET", "POST"])
@@ -127,9 +129,10 @@ def download_release(package, id):
 
 	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
 	if ip is not None and not is_user_bot():
-		is_minetest = (request.headers.get("User-Agent") or "").startswith("Minetest")
+		is_minetest = (request.headers.get("User-Agent") or "").startswith("Minetest/")
+		is_v510 = is_minetest and is_minetest_v510(request.headers.get("User-Agent"))
 		reason = request.args.get("reason")
-		PackageDailyStats.update(package, is_minetest, reason)
+		PackageDailyStats.notify_download(package, is_minetest, is_v510, reason)
 
 		key = make_download_key(ip, release.package)
 		if not has_key(key):

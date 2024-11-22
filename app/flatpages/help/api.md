@@ -160,6 +160,7 @@ curl -X DELETE https://content.luanti.org/api/delete-token/ \
         * `reason_new`: list of integers per day.
         * `reason_dependency`: list of integers per day.
         * `reason_update`: list of integers per day.
+        * `views_minetest`: list of integers per day.
 * GET `/api/package_stats/`
     * Returns last 30 days of daily stats for _all_ packages.
     * An object with the following keys:
@@ -440,6 +441,7 @@ Example:
         * `reason_new`: list of integers per day.
         * `reason_dependency`: list of integers per day.
         * `reason_update`: list of integers per day.
+        * `views_minetest`: list of integers per day.
 
 
 ## Topics
