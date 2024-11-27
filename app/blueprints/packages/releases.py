@@ -127,7 +127,8 @@ def download_release(package, id):
 
 	ip = request.headers.get("X-Forwarded-For") or request.remote_addr
 	if ip is not None and not is_user_bot():
-		is_minetest = (request.headers.get("User-Agent") or "").startswith("Minetest")
+		user_agent = request.headers.get("User-Agent") or ""
+		is_minetest = user_agent.startswith("Luanti") or user_agent.startswith("Minetest")
 		reason = request.args.get("reason")
 		PackageDailyStats.update(package, is_minetest, reason)
 
